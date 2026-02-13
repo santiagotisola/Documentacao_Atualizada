@@ -14,10 +14,10 @@ const config: Config = {
   },
 
   url: 'https://axion-tecnologia.github.io',
-  baseUrl: '/Axion.Docs/',
+  baseUrl: '/AxHub.Docs/',
 
   organizationName: 'Axion-Tecnologia',
-  projectName: 'Axion.Docs',
+  projectName: 'AxHub.Docs',
 
   onBrokenLinks: 'throw',
 
