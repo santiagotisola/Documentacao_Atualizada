@@ -1,0 +1,28 @@
+{
+  "id": "administracao/usuarios",
+  "title": "Usuários",
+  "description": "Gestão de usuários do sistema AxTon",
+  "source": "@site/docs/administracao/usuarios.md",
+  "sourceDirName": "administracao",
+  "slug": "/administracao/usuarios",
+  "permalink": "/AxTon.Docs/administracao/usuarios",
+  "draft": false,
+  "unlisted": false,
+  "tags": [],
+  "version": "current",
+  "sidebarPosition": 1,
+  "frontMatter": {
+    "sidebar_position": 1,
+    "title": "Usuários",
+    "description": "Gestão de usuários do sistema AxTon"
+  },
+  "sidebar": "manualSidebar",
+  "previous": {
+    "title": "Sequencial de Infração",
+    "permalink": "/AxTon.Docs/cadastros/sequencial-infracao"
+  },
+  "next": {
+    "title": "Perfis de Acesso",
+    "permalink": "/AxTon.Docs/administracao/perfis-acesso"
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "id": "intro",
+  "title": "Visão Geral",
+  "description": "Bem-vindo ao manual do usuário do AxTon, o sistema de gestão de pesagem veicular da Axion Tecnologia.",
+  "source": "@site/docs/intro.md",
+  "sourceDirName": ".",
+  "slug": "/",
+  "permalink": "/AxTon.Docs/",
+  "draft": false,
+  "unlisted": false,
+  "tags": [],
+  "version": "current",
+  "sidebarPosition": 1,
+  "frontMatter": {
+    "sidebar_position": 1,
+    "slug": "/",
+    "title": "Visão Geral"
+  },
+  "sidebar": "manualSidebar",
+  "next": {
+    "title": "Login",
+    "permalink": "/AxTon.Docs/primeiros-passos/login"
+  }
+}

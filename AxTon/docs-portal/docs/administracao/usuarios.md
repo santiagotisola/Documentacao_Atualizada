@@ -1,0 +1,77 @@
+---
+sidebar_position: 1
+title: Usuários
+description: Gestão de usuários do sistema AxTon
+---
+
+# Usuários
+
+O módulo de usuários permite gerenciar as contas de acesso ao AxTon, definindo credenciais, perfis e dados cadastrais de cada operador do sistema.
+
+## Como acessar
+
+**Menu lateral** → Administração → **Usuários**
+
+## Listagem
+
+![Tela de Usuários — Lista](../img/usuarios.png)
+
+### Colunas
+
+| Coluna | Descrição |
+|--------|-----------|
+| **Nome** | Nome completo do usuário |
+| **Nome de Usuário** | Identificador utilizado no login |
+| **E-mail** | Endereço de e-mail do usuário |
+| **Perfil de Acesso** | Perfil atribuído ao usuário |
+| **Ativo** | Indica se a conta está habilitada para acesso |
+
+### Ações disponíveis na listagem
+
+| Ação | Descrição |
+|------|-----------|
+| **+ Novo** | Cadastrar um novo usuário |
+| **Pesquisa** | Buscar usuários por qualquer campo da listagem |
+| **Editar** | Alterar os dados de um usuário existente (ícone lápis) |
+| **Excluir** | Remover um usuário do sistema (ícone X) |
+
+## Cadastro
+
+![Tela de Usuários — Cadastro](../img/usuario-cadastro.png)
+
+### Campos
+
+| Campo | Obrigatório | Descrição |
+|-------|:-----------:|-----------|
+| **Nome** | Sim | Nome completo do usuário |
+| **Nome de Usuário** | Sim | Identificador de login, sem espaços ou caracteres especiais |
+| **E-mail** | Sim | Endereço de e-mail para comunicações e recuperação de senha |
+| **Senha** | Sim | Senha de acesso ao sistema |
+| **Confirmar Senha** | Sim | Repetição da senha para confirmação |
+| **Perfil de Acesso** | Sim | Perfil que define as permissões do usuário no sistema |
+| **Ativo** | Sim | Define se a conta estará habilitada para login |
+
+### Passo a passo — Cadastrar usuário
+
+1. Na listagem, clique em **+ Novo**
+2. Preencha o **Nome** completo do usuário
+3. Informe o **Nome de Usuário** para login
+4. Informe o **E-mail** do usuário
+5. Defina e confirme a **Senha**
+6. Selecione o **Perfil de Acesso** correspondente
+7. Confirme que o campo **Ativo** está marcado
+8. Clique em **Salvar**
+
+## Configuração de acesso
+
+Após o cadastro, é possível configurar detalhes adicionais de acesso ao usuário, como restrições de horário, locais permitidos e outras parametrizações vinculadas ao perfil.
+
+![Tela de Configuração de Acesso](../img/configurar-usuario-acesso.png)
+
+:::warning Segurança de senha
+As senhas devem ser informadas diretamente ao usuário de forma segura. O sistema não exibe a senha após o cadastro. Em caso de esquecimento, utilize a função de **recuperação de senha** disponível na tela de login.
+:::
+
+:::tip Desativação de usuários
+Para revogar o acesso de um usuário sem excluir seu histórico de operações, desmarque o campo **Ativo** no cadastro. O usuário não conseguirá realizar login, mas seus registros serão preservados.
+:::

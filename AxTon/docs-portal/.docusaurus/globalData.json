@@ -1,0 +1,78 @@
+{
+  "docusaurus-plugin-content-docs": {
+    "default": {
+      "path": "/AxTon.Docs/",
+      "versions": [
+        {
+          "name": "current",
+          "label": "Next",
+          "isLast": true,
+          "path": "/AxTon.Docs/",
+          "mainDocId": "intro",
+          "docs": [
+            {
+              "id": "administracao/perfis-acesso",
+              "path": "/AxTon.Docs/administracao/perfis-acesso",
+              "sidebar": "manualSidebar"
+            },
+            {
+              "id": "administracao/permissoes",
+              "path": "/AxTon.Docs/administracao/permissoes",
+              "sidebar": "manualSidebar"
+            },
+            {
+              "id": "administracao/usuarios",
+              "path": "/AxTon.Docs/administracao/usuarios",
+              "sidebar": "manualSidebar"
+            },
+            {
+              "id": "cadastros/classificacao-veiculos",
+              "path": "/AxTon.Docs/cadastros/classificacao-veiculos",
+              "sidebar": "manualSidebar"
+            },
+            {
+              "id": "cadastros/locais",
+              "path": "/AxTon.Docs/cadastros/locais",
+              "sidebar": "manualSidebar"
+            },
+            {
+              "id": "cadastros/sequencial-infracao",
+              "path": "/AxTon.Docs/cadastros/sequencial-infracao",
+              "sidebar": "manualSidebar"
+            },
+            {
+              "id": "intro",
+              "path": "/AxTon.Docs/",
+              "sidebar": "manualSidebar"
+            },
+            {
+              "id": "primeiros-passos/dashboard",
+              "path": "/AxTon.Docs/primeiros-passos/dashboard",
+              "sidebar": "manualSidebar"
+            },
+            {
+              "id": "primeiros-passos/login",
+              "path": "/AxTon.Docs/primeiros-passos/login",
+              "sidebar": "manualSidebar"
+            },
+            {
+              "id": "primeiros-passos/navegacao",
+              "path": "/AxTon.Docs/primeiros-passos/navegacao",
+              "sidebar": "manualSidebar"
+            }
+          ],
+          "draftIds": [],
+          "sidebars": {
+            "manualSidebar": {
+              "link": {
+                "path": "/AxTon.Docs/",
+                "label": "intro"
+              }
+            }
+          }
+        }
+      ],
+      "breadcrumbs": true
+    }
+  }
+}

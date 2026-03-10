@@ -1,0 +1,28 @@
+{
+  "id": "primeiros-passos/login",
+  "title": "Login",
+  "description": "Como acessar o sistema AxTon",
+  "source": "@site/docs/primeiros-passos/login.md",
+  "sourceDirName": "primeiros-passos",
+  "slug": "/primeiros-passos/login",
+  "permalink": "/AxTon.Docs/primeiros-passos/login",
+  "draft": false,
+  "unlisted": false,
+  "tags": [],
+  "version": "current",
+  "sidebarPosition": 1,
+  "frontMatter": {
+    "sidebar_position": 1,
+    "title": "Login",
+    "description": "Como acessar o sistema AxTon"
+  },
+  "sidebar": "manualSidebar",
+  "previous": {
+    "title": "Visão Geral",
+    "permalink": "/AxTon.Docs/"
+  },
+  "next": {
+    "title": "Painel Principal",
+    "permalink": "/AxTon.Docs/primeiros-passos/dashboard"
+  }
+}

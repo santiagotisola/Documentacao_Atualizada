@@ -1,0 +1,98 @@
+{
+  "/AxTon.Docs/__docusaurus/debug-eb1": {
+    "__comp": "__comp---theme-debug-config-23-a-2ff",
+    "__context": {
+      "plugin": "plugin---ax-ton-docs-docusaurus-debugb-38-288"
+    }
+  },
+  "/AxTon.Docs/__docusaurus/debug/config-a25": {
+    "__comp": "__comp---theme-debug-config-23-a-2ff",
+    "__context": {
+      "plugin": "plugin---ax-ton-docs-docusaurus-debugb-38-288"
+    }
+  },
+  "/AxTon.Docs/__docusaurus/debug/content-dd8": {
+    "__comp": "__comp---theme-debug-contentba-8-ce7",
+    "__context": {
+      "plugin": "plugin---ax-ton-docs-docusaurus-debugb-38-288"
+    },
+    "__props": "__props---ax-ton-docs-docusaurus-debug-contente-80-4ea"
+  },
+  "/AxTon.Docs/__docusaurus/debug/globalData-b0a": {
+    "__comp": "__comp---theme-debug-global-dataede-0fa",
+    "__context": {
+      "plugin": "plugin---ax-ton-docs-docusaurus-debugb-38-288"
+    }
+  },
+  "/AxTon.Docs/__docusaurus/debug/metadata-da4": {
+    "__comp": "__comp---theme-debug-site-metadata-68-e-3d4",
+    "__context": {
+      "plugin": "plugin---ax-ton-docs-docusaurus-debugb-38-288"
+    }
+  },
+  "/AxTon.Docs/__docusaurus/debug/registry-2ac": {
+    "__comp": "__comp---theme-debug-registry-679-501",
+    "__context": {
+      "plugin": "plugin---ax-ton-docs-docusaurus-debugb-38-288"
+    }
+  },
+  "/AxTon.Docs/__docusaurus/debug/routes-a29": {
+    "__comp": "__comp---theme-debug-routes-946-699",
+    "__context": {
+      "plugin": "plugin---ax-ton-docs-docusaurus-debugb-38-288"
+    }
+  },
+  "/AxTon.Docs/-bf1": {
+    "__comp": "__comp---theme-docs-root-5-e-9-0b6",
+    "__context": {
+      "plugin": "plugin---ax-ton-docs-aba-605"
+    }
+  },
+  "/AxTon.Docs/-459": {
+    "__comp": "__comp---theme-doc-version-roota-7-b-5de",
+    "__props": "__props---ax-ton-docs-d-2-e-dbc"
+  },
+  "/AxTon.Docs/-488": {
+    "__comp": "__comp---theme-doc-roota-94-67a"
+  },
+  "/AxTon.Docs/administracao/perfis-acesso-b23": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---ax-ton-docs-administracao-perfis-acessoda-3-b25"
+  },
+  "/AxTon.Docs/administracao/permissoes-3c0": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---ax-ton-docs-administracao-permissoes-2-c-5-be1"
+  },
+  "/AxTon.Docs/administracao/usuarios-1cf": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---ax-ton-docs-administracao-usuarios-48-a-2ca"
+  },
+  "/AxTon.Docs/cadastros/classificacao-veiculos-f01": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---ax-ton-docs-cadastros-classificacao-veiculos-303-352"
+  },
+  "/AxTon.Docs/cadastros/locais-7ad": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---ax-ton-docs-cadastros-locais-4-ae-d65"
+  },
+  "/AxTon.Docs/cadastros/sequencial-infracao-022": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---ax-ton-docs-cadastros-sequencial-infracao-38-e-839"
+  },
+  "/AxTon.Docs/primeiros-passos/dashboard-697": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---ax-ton-docs-primeiros-passos-dashboard-4-da-8c6"
+  },
+  "/AxTon.Docs/primeiros-passos/login-1f2": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---ax-ton-docs-primeiros-passos-logincfe-734"
+  },
+  "/AxTon.Docs/primeiros-passos/navegacao-7b0": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---ax-ton-docs-primeiros-passos-navegacaoef-7-273"
+  },
+  "/AxTon.Docs/-e2c": {
+    "__comp": "__comp---theme-doc-item-178-a40",
+    "content": "content---ax-ton-docs-0-e-3-8bf"
+  }
+}

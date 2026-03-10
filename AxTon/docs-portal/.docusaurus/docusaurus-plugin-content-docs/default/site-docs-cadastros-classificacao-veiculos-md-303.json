@@ -1,0 +1,28 @@
+{
+  "id": "cadastros/classificacao-veiculos",
+  "title": "Classificação de Veículos",
+  "description": "Cadastro e gestão das classificações de veículos",
+  "source": "@site/docs/cadastros/classificacao-veiculos.md",
+  "sourceDirName": "cadastros",
+  "slug": "/cadastros/classificacao-veiculos",
+  "permalink": "/AxTon.Docs/cadastros/classificacao-veiculos",
+  "draft": false,
+  "unlisted": false,
+  "tags": [],
+  "version": "current",
+  "sidebarPosition": 2,
+  "frontMatter": {
+    "sidebar_position": 2,
+    "title": "Classificação de Veículos",
+    "description": "Cadastro e gestão das classificações de veículos"
+  },
+  "sidebar": "manualSidebar",
+  "previous": {
+    "title": "Locais",
+    "permalink": "/AxTon.Docs/cadastros/locais"
+  },
+  "next": {
+    "title": "Sequencial de Infração",
+    "permalink": "/AxTon.Docs/cadastros/sequencial-infracao"
+  }
+}
