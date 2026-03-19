@@ -1,0 +1,26 @@
+---
+sidebar_position: 7
+title: Modelos de Veículos
+description: Cadastro de modelos de veículos por marca
+---
+
+# Modelos de Veículos
+
+Permite cadastrar e gerenciar os modelos de veículos vinculados às marcas.
+
+![Lista de Modelos](../img/Veículos%20-%20marcas-modelos%20de%20veiculos.png)
+
+## Como acessar
+
+**Menu lateral** → Veículos → **Modelos de Veículos**
+
+## Cadastro
+
+![Cadastro de Modelo](../img/Veículos%20-%20marcas-modelos%20de%20veiculos%20-%20cadastro.png)
+
+| Campo | Descrição |
+|-------|-----------|
+| **Marca** | Marca vinculada |
+| **Código** | Código do modelo |
+| **Descrição** | Nome do modelo (ex: Gol, Uno, Corolla) |
+| **Ativo** | Status do registro |

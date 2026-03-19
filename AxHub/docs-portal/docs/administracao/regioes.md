@@ -1,0 +1,24 @@
+---
+sidebar_position: 10
+title: Regiões
+description: Cadastro de regiões geográficas
+---
+
+# Regiões
+
+Permite cadastrar e gerenciar as regiões geográficas utilizadas no agrupamento de operações.
+
+## Como acessar
+
+**Menu lateral** → Administração → **Regiões**
+
+| Campo | Descrição |
+|-------|-----------|
+| **Nome** | Nome da região |
+| **UF** | Estado vinculado |
+| **Descrição** | Detalhamento |
+| **Ativo** | Status do registro |
+
+:::note Sem screenshot
+Esta tela ainda não possui screenshot cadastrada. Será adicionada em breve.
+:::

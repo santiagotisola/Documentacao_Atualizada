@@ -1,5 +1,5 @@
 ---
-sidebar_position: 2
+sidebar_position: 3
 title: Configurações do Sistema
 description: Configurações gerais do AxHub
 ---
@@ -25,6 +25,8 @@ As configurações do sistema são organizadas em abas temáticas:
 
 ### Aba Triagem
 
+![Configurações - Tempo de Análise de Imagem](../img/triagem-tempo-analise.png)
+
 Controla parâmetros relacionados ao processamento de infrações:
 
 - **Prazo para Triagem**: Define em dias o prazo legal para realizar triagem (padrão: 20 dias)
@@ -34,7 +36,7 @@ Controla parâmetros relacionados ao processamento de infrações:
 - **Meta diária**: Quantidade esperada de processamento por usuário
 
 :::info Documentação Detalhada
-Para instruções completas sobre configuração de tempo de triagem com passo a passo ilustrado, veja a seção [Configurações de Tempo de Triagem](../triagem-auditoria/visao-geral.md#configurações-de-tempo-de-triagem) na documentação de Triagem e Auditoria.
+Para instruções completas sobre configuração de tempo de triagem com passo a passo ilustrado, veja a seção [Triagem de Infrações](../infracoes/triagem.md#filtros-disponíveis) na documentação de Triagem.
 :::
 
 ### Outras Abas
@@ -44,6 +46,13 @@ Para instruções completas sobre configuração de tempo de triagem com passo a
 - **Equipamentos**: Parâmetros técnicos dos dispositivos
 - **Sistema**: Configurações globais e gerais
 
-:::note Em construção
-Esta documentação será detalhada com capturas de tela e passo a passo em breve.
-:::
+## Armazenamento
+
+Todas as configurações do sistema são persistidas em `TBConfiguracoes` como pares chave-valor:
+
+| Campo | Tipo | Descrição |
+|-------|------|-----------|
+| **Tipo Configuração** | varchar(100) | Chave identificadora (ex: `PrazoTriagem`, `TempoAnaliseImagem`, `MetaDiaria`) |
+| **Valor Configuração** | texto | Valor serializado em texto (número, JSON, string) |
+
+Essa arquitetura de chave-valor permite adicionar novas configurações sem alteração de schema.

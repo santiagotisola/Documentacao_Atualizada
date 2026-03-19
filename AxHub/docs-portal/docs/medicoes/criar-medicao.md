@@ -1,36 +1,32 @@
 ---
-sidebar_position: 1
-title: Medições
-description: Medições contratuais e índices de performance dos equipamentos
+sidebar_position: 6
+title: Criar Medição
+description: Criação de nova medição contratual
 ---
 
-# Medições
+# Criar Medição
 
-O módulo de medições calcula os indicadores de performance e tempo de operação dos equipamentos para fins de faturamento contratual.
+Permite gerar uma nova medição contratual com base nos dados de operação do período.
+
+![Relatório de Medição](../img/Medição%20-%20nova%20medição%20-%20relatorio%20de%20medição%20de%20equipamento.png)
 
 ## Como acessar
 
-**Menu lateral** → Medições
+**Menu lateral** → Medição → **Nova Medição**
 
-## Funcionalidades
+## Filtros
 
-- Criar períodos de medição por grupo de equipamentos
-- Calcular índice de performance por faixa
-- Contabilizar horas operadas, paralisadas e justificadas
-- Calcular penalidades por índice de imagens inválidas
-- Calcular penalidades por índice de OCR
-- Gerar valores por faixa com BDI contratual
-- Vincular nota de empenho (purchase order)
+![Filtros de Medição](../img/Medição%20-%20nova%20medição%20-%20relatorio%20de%20medição%20de%20equipamento%20-%20filtros.png)
 
-## Indicadores calculados
+| Campo | Descrição |
+|-------|-----------|
+| **Contrato** | Contrato a ser medido |
+| **Período** | Mês/ano de referência |
+| **Equipamentos** | Seleção dos equipamentos incluídos |
 
-| Indicador | Descrição |
-|-----------|-----------|
-| **Índice de Performance** | Percentual de infrações válidas sobre o total processado |
-| **Horas Operadas** | Total de horas em que o equipamento esteve ativo |
-| **Horas Paralisadas** | Total de horas de inatividade |
-| **Índice OCR** | Taxa de acerto da leitura automática de placas |
+## Fluxo
 
-:::note Em construção
-Esta documentação será detalhada com capturas de tela e passo a passo em breve.
-:::
+1. Selecione o contrato e período
+2. O sistema calcula automaticamente os índices
+3. Revise os valores e interrupções
+4. Finalize a medição para aprovação

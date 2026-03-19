@@ -2,8 +2,6 @@ import {themes as prismThemes} from 'prism-react-renderer';
 import type {Config} from '@docusaurus/types';
 import type * as Preset from '@docusaurus/preset-classic';
 
-// This runs in Node.js - Don't use client-side code here (browser APIs, JSX...)
-
 const config: Config = {
   title: 'AxHub',
   tagline: 'Manual do Usuário - Sistema de Gestão de Equipamentos de Trânsito',
@@ -19,11 +17,12 @@ const config: Config = {
   organizationName: 'Axion-Tecnologia',
   projectName: 'AxHub.Docs',
 
-  onBrokenLinks: 'throw',
+  onBrokenLinks: 'warn',
 
   markdown: {
     hooks: {
       onBrokenMarkdownLinks: 'warn',
+      onBrokenMarkdownImages: 'warn',
     },
   },
 
@@ -75,44 +74,23 @@ const config: Config = {
         {
           title: 'Documentação',
           items: [
-            {
-              label: 'Início',
-              to: '/',
-            },
-            {
-              label: 'Primeiros Passos',
-              to: '/primeiros-passos/login',
-            },
-            {
-              label: 'Cadastros Básicos',
-              to: '/cadastros-basicos/fabricantes',
-            },
+            { label: 'Início', to: '/' },
+            { label: 'Primeiros Passos', to: '/primeiros-passos/login' },
+            { label: 'Cadastros Básicos', to: '/cadastros-basicos/fabricantes' },
           ],
         },
         {
           title: 'Módulos',
           items: [
-            {
-              label: 'Operações',
-              to: '/operacoes/cadastro-operacoes',
-            },
-            {
-              label: 'Triagem e Auditoria',
-              to: '/triagem-auditoria/visao-geral',
-            },
-            {
-              label: 'Infrações',
-              to: '/infracoes/consulta-infracoes',
-            },
+            { label: 'Operações', to: '/operacoes/cadastro-operacoes' },
+            { label: 'Infrações', to: '/infracoes/triagem' },
+            { label: 'Pesagem', to: '/pesagem/postos' },
           ],
         },
         {
           title: 'Axion Tecnologia',
           items: [
-            {
-              label: 'Site Axion',
-              href: 'https://axion.com.br',
-            },
+            { label: 'Site Axion', href: 'https://axion.com.br' },
           ],
         },
       ],

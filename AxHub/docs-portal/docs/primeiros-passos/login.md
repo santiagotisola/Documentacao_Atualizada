@@ -6,36 +6,36 @@ description: Como acessar o sistema AxHub
 
 # Login
 
-A tela de login é o ponto de entrada do AxHub. Aqui você informa suas credenciais para acessar o sistema.
+A tela de login é o ponto de entrada para o sistema AxHub. O acesso é feito através de credenciais fornecidas pelo administrador do sistema.
 
-![Tela de Login](../img/Login.png)
+![Tela de Login](../img/tela-login.png)
 
 ## Como acessar
 
-Abra o navegador e acesse o endereço do AxHub fornecido pela sua organização.
+1. Abra o navegador e acesse a URL do sistema fornecida pela sua organização
+2. Informe seu **usuário** e **senha**
+3. Clique em **Entrar**
 
-## Campos
+## Campos do formulário
 
-| Campo | Obrigatório | Descrição |
-|-------|:-----------:|-----------|
-| **Nome do Usuário** | Sim | Seu nome de usuário cadastrado no sistema |
-| **Senha** | Sim | Sua senha de acesso |
-| **Permanecer conectado** | Não | Marque para manter sua sessão ativa por mais tempo |
+| Campo | Descrição |
+|-------|-----------|
+| **Usuário** | Login fornecido pelo administrador |
+| **Senha** | Senha de acesso (diferencia maiúsculas e minúsculas) |
+| **Lembrar-me** | Mantém a sessão ativa no navegador |
 
-## Passo a passo
+## Primeiro acesso
 
-1. Informe seu **Nome do Usuário**
-2. Informe sua **Senha**
-3. Opcionalmente, marque **Permanecer conectado** para manter a sessão ativa
-4. Clique no botão **ENTRAR**
+- No primeiro acesso, utilize as credenciais enviadas pelo administrador
+- O sistema pode solicitar a troca de senha obrigatória
+- Recomenda-se utilizar uma senha forte com letras, números e caracteres especiais
 
-## Esqueceu a senha?
+## Recuperação de senha
 
-Caso tenha esquecido sua senha, clique no link **Esqueceu a Senha?** localizado ao lado direito do checkbox. O sistema enviará instruções de recuperação para o e-mail cadastrado no seu perfil.
-
-:::warning Atenção
-Após várias tentativas incorretas de login, sua conta poderá ser temporariamente bloqueada por segurança. Entre em contato com o administrador do sistema caso isso ocorra.
-:::
+Caso esqueça sua senha:
+1. Clique em **Esqueci minha senha** na tela de login
+2. Informe o e-mail cadastrado
+3. Verifique sua caixa de entrada e siga as instruções do e-mail recebido
 
 :::info Restrições de acesso
 O administrador pode configurar restrições de acesso por IP e horário. Caso não consiga acessar o sistema mesmo com credenciais corretas, verifique com o administrador se há restrições configuradas para seu usuário.
