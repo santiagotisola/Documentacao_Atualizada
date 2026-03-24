@@ -57,7 +57,7 @@ const config: Config = {
       title: 'AxHub',
       logo: {
         alt: 'AxHub Logo',
-        src: 'img/logo.svg',
+        src: 'img/axion-logo.png',
       },
       items: [
         {
