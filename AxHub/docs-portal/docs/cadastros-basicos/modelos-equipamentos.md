@@ -56,3 +56,13 @@ A portaria INMETRO é obrigatória para a validade legal das infrações geradas
 :::tip Dica
 Um mesmo fabricante pode possuir múltiplos modelos de equipamento. Cada modelo deve ser cadastrado individualmente com sua respectiva portaria INMETRO.
 :::
+
+---
+
+## Navegacao Relacionada
+
+| Tipo | Pagina | Descricao |
+|------|--------|-----------|
+| Relacionado | [Equipamentos](./equipamentos) | Equipamentos deste modelo |
+| Relacionado | [Fabricantes](./fabricantes) | Fabricante |
+| Relacionado | [Tipos](./tipos-equipamentos) | Tipo |

@@ -30,3 +30,17 @@ Acesso aos dashboards e relatórios analíticos integrados via Power BI.
 | Índice do OCR | ![](../img/Relatórios%20BI%20-.relatorio%20indice%20do%20ocr.png) |
 | Fluxo por Porte | ![](../img/Relatórios%20BI%20-.relatorio%20relatorio%20médio%20diário%20de%20fluxo%20por%20porte.png) |
 | Triagem por Usuário | ![](../img/Relatórios%20BI%20-.relatorio%20triagem%20por%20Usua.png) |
+
+## Termos Tecnicos
+
+| Termo | Definicao |
+|-------|-----------|
+| [Triagem](../glossario/triagem) | Ver definicao no glossario |
+
+---
+
+## Navegacao Relacionada
+
+| Tipo | Pagina | Descricao |
+|------|--------|-----------|
+| Relacionado | [Relatorios Power BI (Admin)](../administracao/relatorios-power-bi) | Configuracao |

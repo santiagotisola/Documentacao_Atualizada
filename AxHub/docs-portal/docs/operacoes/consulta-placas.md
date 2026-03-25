@@ -27,3 +27,12 @@ Permite consultar o histórico de passagens de veículos por número de placa.
 | **Faixa** | Faixa de tráfego |
 | **Velocidade** | Velocidade registrada (quando aplicável) |
 | **Imagem** | Foto da passagem |
+
+---
+
+## Navegacao Relacionada
+
+| Tipo | Pagina | Descricao |
+|------|--------|-----------|
+| Relacionado | [Consulta de Infracoes](../infracoes/consulta-infracoes) | Infracoes do veiculo |
+| Relacionado | [Monitoramento Online](./monitoramento-online) | Passagens em tempo real |

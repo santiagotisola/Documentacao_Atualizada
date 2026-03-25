@@ -29,3 +29,14 @@ Permite cadastrar e gerenciar os usuários que terão acesso ao sistema AxHub.
 :::info Segurança
 Recomenda-se revisar periodicamente os usuários cadastrados e desativar contas que não estejam mais em uso.
 :::
+
+---
+
+## Navegacao Relacionada
+
+| Tipo | Pagina | Descricao |
+|------|--------|-----------|
+| Relacionado | [Perfis de Acesso](./perfis-acesso) | Perfil do usuario |
+| Relacionado | [Permissoes](./permissoes) | Permissoes atribuidas |
+| Relacionado | [Logs de Acesso](./logs-acesso) | Historico do usuario |
+| Relacionado | [Acessos por IP](./acessos-por-ip) | Restricoes de IP |

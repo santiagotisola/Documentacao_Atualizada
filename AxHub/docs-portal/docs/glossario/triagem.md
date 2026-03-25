@@ -1,0 +1,27 @@
+﻿---
+title: "Triagem"
+sidebar_position: 8
+description: "Definicao tecnica do processo de Triagem"
+---
+
+# Triagem
+
+## Definicao
+
+Processo de analise preliminar das infracoes capturadas automaticamente, onde o operador valida a qualidade da evidencia, confirma os dados do veiculo e define o enquadramento aplicavel.
+
+## Base Legal
+
+Resolucao CONTRAN 619/2016, Art. 8: toda infracao registrada por equipamento eletronico deve ser submetida a verificacao antes da lavratura do auto. O operador deve confirmar: legibilidade da placa, compatibilidade do veiculo e adequacao do enquadramento.
+
+## Uso no Sistema AxHub
+
+Acessivel em **Infracoes - Triagem**. E a etapa central do fluxo operacional. O operador analisa a imagem, valida os dados (placa, velocidade, faixa), define o enquadramento e encaminha para auditoria ou descarta com motivo justificado.
+
+## Paginas Relacionadas
+
+- [Triagem de Infracoes](../infracoes/triagem)
+- [Excecoes](../infracoes/excecoes)
+- [Auditoria](../infracoes/auditoria)
+- [Motivos de Descarte](../administracao/motivos-descartes)
+- [Enquadramento](./enquadramento)

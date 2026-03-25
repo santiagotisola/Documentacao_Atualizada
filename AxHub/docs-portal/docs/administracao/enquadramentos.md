@@ -24,3 +24,20 @@ Exibe a tabela completa de enquadramentos de infrações de trânsito conforme o
 :::note Sem screenshot
 Esta tela ainda não possui screenshot cadastrada. Será adicionada em breve.
 :::
+
+## Termos Tecnicos
+
+| Termo | Definicao |
+|-------|-----------|
+| [Enquadramento](../glossario/enquadramento) | Ver definicao no glossario |
+
+---
+
+## Navegacao Relacionada
+
+| Tipo | Pagina | Descricao |
+|------|--------|-----------|
+| Relacionado | [Config. Enquadramentos](./configuracoes-enquadramento) | Configuracao |
+| Relacionado | [Formas de Autuacao](./formas-autuacao) | Forma de lavrar |
+| Glossario | [Enquadramento](../glossario/enquadramento) | Definicao CTB |
+| Glossario | [Autuacao](../glossario/autuacao) | Ato de autuacao |

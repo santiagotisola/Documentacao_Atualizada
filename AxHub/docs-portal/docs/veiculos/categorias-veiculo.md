@@ -23,3 +23,11 @@ Permite cadastrar e gerenciar as categorias de veículos.
 | **Código** | Código identificador |
 | **Descrição** | Nome da categoria |
 | **Ativo** | Status do registro |
+
+---
+
+## Navegacao Relacionada
+
+| Tipo | Pagina | Descricao |
+|------|--------|-----------|
+| Relacionado | [Classificacoes](./classificacoes-veiculos) | Classificacoes vinculadas |

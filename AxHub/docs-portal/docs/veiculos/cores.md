@@ -23,3 +23,11 @@ Permite cadastrar e gerenciar as cores dos veículos.
 | **Código** | Código identificador |
 | **Descrição** | Nome da cor (ex: Branco, Preto, Prata) |
 | **Ativo** | Status do registro |
+
+---
+
+## Navegacao Relacionada
+
+| Tipo | Pagina | Descricao |
+|------|--------|-----------|
+| Relacionado | [Consulta de Infracoes](../infracoes/consulta-infracoes) | Filtro por cor |

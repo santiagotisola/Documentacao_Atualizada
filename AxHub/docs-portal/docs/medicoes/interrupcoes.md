@@ -31,3 +31,12 @@ Permite registrar interrupções no funcionamento dos equipamentos que impactam 
 ![Processar Interrupções](../img/Medição%20-%20interrupções%20-%20processar%20interrupções.png)
 
 Processa as interrupções registradas para abatimento na medição contratual.
+
+---
+
+## Navegacao Relacionada
+
+| Tipo | Pagina | Descricao |
+|------|--------|-----------|
+| Relacionado | [Contratos](./contratos) | Contrato afetado |
+| Relacionado | [Criar Medicao](./criar-medicao) | Impacto na medicao |

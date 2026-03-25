@@ -20,3 +20,12 @@ Permite reclassificar veículos que foram pesados com classificação incorreta.
 | **Classificação Atual** | Tipo de veículo registrado |
 | **Nova Classificação** | Classificação correta |
 | **Motivo** | Justificativa da reclassificação |
+
+---
+
+## Navegacao Relacionada
+
+| Tipo | Pagina | Descricao |
+|------|--------|-----------|
+| Relacionado | [Ticket Fechado](./ticket-fechado) | Ticket a reclassificar |
+| Relacionado | [Motivos](./motivos) | Motivos disponiveis |

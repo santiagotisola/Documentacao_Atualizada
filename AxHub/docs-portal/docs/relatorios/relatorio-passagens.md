@@ -20,3 +20,12 @@ Permite gerar relatórios das passagens de veículos registradas pelos equipamen
 | **Equipamento** | Filtrar por equipamento |
 | **Faixa** | Faixa de tráfego |
 | **Placa** | Filtrar por placa específica |
+
+---
+
+## Navegacao Relacionada
+
+| Tipo | Pagina | Descricao |
+|------|--------|-----------|
+| Relacionado | [Consulta de Placas](../operacoes/consulta-placas) | Buscar placa |
+| Relacionado | [Monitoramento Online](../operacoes/monitoramento-online) | Tempo real |

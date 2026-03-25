@@ -22,3 +22,12 @@ Permite cadastrar e gerenciar as regiões geográficas utilizadas no agrupamento
 :::note Sem screenshot
 Esta tela ainda não possui screenshot cadastrada. Será adicionada em breve.
 :::
+
+---
+
+## Navegacao Relacionada
+
+| Tipo | Pagina | Descricao |
+|------|--------|-----------|
+| Relacionado | [Operacoes](../operacoes/cadastro-operacoes) | Regiao da operacao |
+| Relacionado | [Equipamentos](../cadastros-basicos/equipamentos) | Equipamentos na regiao |

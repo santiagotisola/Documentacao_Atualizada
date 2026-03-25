@@ -23,3 +23,12 @@ Permite cadastrar e gerenciar os tipos de veículos utilizados no sistema.
 | **Código** | Código identificador do tipo |
 | **Descrição** | Nome do tipo de veículo (ex: Automóvel, Caminhão, Motocicleta) |
 | **Ativo** | Status do registro |
+
+---
+
+## Navegacao Relacionada
+
+| Tipo | Pagina | Descricao |
+|------|--------|-----------|
+| Relacionado | [Classificacoes](./classificacoes-veiculos) | Classificacoes |
+| Relacionado | [Especies](./especie-veiculo) | Especies |

@@ -22,3 +22,12 @@ Permite configurar e monitorar os sequenciais dos lotes de exportação de infra
 :::note Sem screenshot
 Esta tela ainda não possui screenshot cadastrada. Será adicionada em breve.
 :::
+
+---
+
+## Navegacao Relacionada
+
+| Tipo | Pagina | Descricao |
+|------|--------|-----------|
+| Relacionado | [Exportacao](../infracoes/exportacao) | Controle de lote |
+| Glossario | [Lote de Exportacao](../glossario/lote-exportacao) | Definicao |

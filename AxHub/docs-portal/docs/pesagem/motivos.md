@@ -23,3 +23,12 @@ Permite cadastrar os motivos utilizados nos processos de pesagem e liberação d
 | **Descrição** | Nome do motivo |
 | **Tipo** | Liberação, retenção, reclassificação |
 | **Ativo** | Se o motivo está disponível para uso |
+
+---
+
+## Navegacao Relacionada
+
+| Tipo | Pagina | Descricao |
+|------|--------|-----------|
+| Relacionado | [Reclassificar](./reclassificar) | Usar motivo na reclassificacao |
+| Relacionado | [Postos](./postos) | Postos de pesagem |

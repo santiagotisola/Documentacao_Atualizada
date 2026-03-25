@@ -28,3 +28,12 @@ Permite consultar o histórico de registros de cronotacógrafo processados pelo 
 | **Equipamento** | Equipamento que registrou |
 | **Velocidade** | Velocidade registrada |
 | **Status** | Resultado do processamento |
+
+---
+
+## Navegacao Relacionada
+
+| Tipo | Pagina | Descricao |
+|------|--------|-----------|
+| Anterior | [Triagem](./triagem) | Processo de triagem |
+| Glossario | [Cronotacografo](../glossario/cronotacografo) | Definicao tecnica |

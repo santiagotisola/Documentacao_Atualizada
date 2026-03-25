@@ -26,3 +26,15 @@ Permite cadastrar e gerenciar os contratos de medição vinculados às operaçõ
 | **Vigência Fim** | Data de término do contrato |
 | **Equipamentos** | Equipamentos vinculados ao contrato |
 | **Status** | Ativo, Encerrado, Suspenso |
+
+---
+
+## Navegacao Relacionada
+
+| Tipo | Pagina | Descricao |
+|------|--------|-----------|
+| Relacionado | [Indices de Performance](./indices-performance) | Indicadores do contrato |
+| Relacionado | [Recursos](./recursos) | Recursos alocados |
+| Relacionado | [Criar Medicao](./criar-medicao) | Gerar medicao |
+| Relacionado | [Interrupcoes](./interrupcoes) | Registrar interrupcoes |
+| Glossario | [Medicao de Desempenho](../glossario/medicao-desempenho) | Definicao tecnica |

@@ -20,3 +20,12 @@ Exibe a produtividade de processamento de imagens por analista/usuário.
 | **Processadas** | Quantidade de imagens processadas |
 | **Descartadas** | Quantidade de imagens descartadas |
 | **Período** | Faixa de datas analisada |
+
+---
+
+## Navegacao Relacionada
+
+| Tipo | Pagina | Descricao |
+|------|--------|-----------|
+| Relacionado | [Usuarios](../controle-acesso/usuarios) | Cadastro de usuarios |
+| Relacionado | [Triagem](../infracoes/triagem) | Processo de triagem |

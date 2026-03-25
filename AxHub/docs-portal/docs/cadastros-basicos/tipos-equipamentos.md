@@ -69,3 +69,18 @@ Para adicionar uma nova forma de atuação, clique em **Nova Forma de Atuação*
 :::info Formas de Atuação
 A configuração das formas de atuação é essencial para que o sistema saiba quais enquadramentos legais (artigos do CTB) podem ser aplicados por cada tipo de equipamento. Sem esta configuração, o equipamento não gerará infrações automaticamente.
 :::
+
+## Termos Tecnicos
+
+| Termo | Definicao |
+|-------|-----------|
+| [Enquadramento](../glossario/enquadramento) | Ver definicao no glossario |
+
+---
+
+## Navegacao Relacionada
+
+| Tipo | Pagina | Descricao |
+|------|--------|-----------|
+| Relacionado | [Equipamentos](./equipamentos) | Equipamentos deste tipo |
+| Relacionado | [Modelos](./modelos-equipamentos) | Modelos deste tipo |

@@ -21,3 +21,12 @@ Exibe as medições contratuais que já foram calculadas e finalizadas.
 | **Disponibilidade** | Percentual de disponibilidade calculado |
 | **Performance** | Índice de performance atingido |
 | **Status** | Aprovada, pendente, contestada |
+
+---
+
+## Navegacao Relacionada
+
+| Tipo | Pagina | Descricao |
+|------|--------|-----------|
+| Relacionado | [Criar Medicao](./criar-medicao) | Nova medicao |
+| Relacionado | [Contratos](./contratos) | Contrato medido |

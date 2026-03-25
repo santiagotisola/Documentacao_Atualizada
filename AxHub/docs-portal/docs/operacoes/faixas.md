@@ -24,3 +24,12 @@ Permite configurar as faixas de monitoramento de cada operação.
 | **Número da Faixa** | Identificador da faixa |
 | **Sentido** | Sentido de tráfego monitorado |
 | **Tipo** | Faixa de rolamento, acostamento, etc. |
+
+---
+
+## Navegacao Relacionada
+
+| Tipo | Pagina | Descricao |
+|------|--------|-----------|
+| Relacionado | [Cadastro de Operacoes](./cadastro-operacoes) | Operacao que contem as faixas |
+| Relacionado | [Equipamentos](../cadastros-basicos/equipamentos) | Equipamentos nas faixas |

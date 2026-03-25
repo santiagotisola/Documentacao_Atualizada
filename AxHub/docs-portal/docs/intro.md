@@ -40,3 +40,12 @@ Use o **menu lateral** para navegar entre os módulos. Cada seção contém:
 :::tip Dica
 Em cada tela do AxHub, você encontrará um link de ajuda que o direcionará diretamente para a documentação daquela funcionalidade.
 :::
+
+## Termos Tecnicos
+
+| Termo | Definicao |
+|-------|-----------|
+| [Cronotacografo](./glossario/cronotacografo) | Ver definicao no glossario |
+| [Infracao de Transito](./glossario/infracao) | Ver definicao no glossario |
+| [Medicao de Desempenho](./glossario/medicao-desempenho) | Ver definicao no glossario |
+| [Triagem](./glossario/triagem) | Ver definicao no glossario |

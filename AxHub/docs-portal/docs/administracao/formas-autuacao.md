@@ -21,3 +21,13 @@ Permite cadastrar as formas de autuação utilizadas no processo de fiscalizaç�
 :::note Sem screenshot
 Esta tela ainda não possui screenshot cadastrada. Será adicionada em breve.
 :::
+
+---
+
+## Navegacao Relacionada
+
+| Tipo | Pagina | Descricao |
+|------|--------|-----------|
+| Relacionado | [Enquadramentos](./enquadramentos) | Enquadramentos vinculados |
+| Relacionado | [Exportacao](../infracoes/exportacao) | Exportacao com forma |
+| Glossario | [Autuacao](../glossario/autuacao) | Definicao CTB |

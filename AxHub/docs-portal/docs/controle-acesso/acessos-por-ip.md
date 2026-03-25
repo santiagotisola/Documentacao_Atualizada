@@ -24,3 +24,12 @@ Permite configurar restrições de acesso ao sistema com base no endereço IP do
 :::warning Atenção
 Configurações incorretas de IP podem bloquear o acesso de usuários legítimos. Teste antes de aplicar em produção.
 :::
+
+---
+
+## Navegacao Relacionada
+
+| Tipo | Pagina | Descricao |
+|------|--------|-----------|
+| Relacionado | [Usuarios](./usuarios) | Usuarios restritos |
+| Relacionado | [Logs de Acesso](./logs-acesso) | Verificar acessos |

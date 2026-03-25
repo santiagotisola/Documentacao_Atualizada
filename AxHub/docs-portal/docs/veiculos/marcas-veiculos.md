@@ -23,3 +23,11 @@ Permite cadastrar e gerenciar as marcas dos veículos.
 | **Código** | Código identificador |
 | **Descrição** | Nome da marca (ex: Volkswagen, Fiat, Toyota) |
 | **Ativo** | Status do registro |
+
+---
+
+## Navegacao Relacionada
+
+| Tipo | Pagina | Descricao |
+|------|--------|-----------|
+| Relacionado | [Modelos de Veiculos](./modelos-veiculos) | Modelos da marca |

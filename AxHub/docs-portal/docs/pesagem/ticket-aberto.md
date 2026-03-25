@@ -21,3 +21,13 @@ Exibe os tickets de pesagem que ainda não foram finalizados.
 | **Data/Hora** | Momento da pesagem |
 | **Peso Bruto** | Peso total registrado |
 | **Status** | Aguardando, em análise, etc. |
+
+---
+
+## Navegacao Relacionada
+
+| Tipo | Pagina | Descricao |
+|------|--------|-----------|
+| Anterior | [Postos](./postos) | Postos de pesagem |
+| Proximo | [Ticket Fechado](./ticket-fechado) | Tickets finalizados |
+| Acao | [Liberar Pesagem](./liberar-pesagem) | Liberar ticket |

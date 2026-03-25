@@ -24,3 +24,12 @@ Permite cadastrar e gerenciar os arcos de fiscalização vinculados às operaç�
 | **Localização** | Endereço ou referência |
 | **Equipamentos** | Equipamentos vinculados ao arco |
 | **Status** | Ativo ou Inativo |
+
+---
+
+## Navegacao Relacionada
+
+| Tipo | Pagina | Descricao |
+|------|--------|-----------|
+| Relacionado | [Equipamentos](../cadastros-basicos/equipamentos) | Equipamentos no arco |
+| Relacionado | [Operacoes](../operacoes/cadastro-operacoes) | Operacao vinculada |

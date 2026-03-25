@@ -23,3 +23,12 @@ Permite configurar e monitorar os sequenciais numéricos utilizados na numeraç�
 :::note Sem screenshot
 Esta tela ainda não possui screenshot cadastrada. Será adicionada em breve.
 :::
+
+---
+
+## Navegacao Relacionada
+
+| Tipo | Pagina | Descricao |
+|------|--------|-----------|
+| Relacionado | [Triagem](../infracoes/triagem) | Sequencial atribuido |
+| Relacionado | [Consulta de Infracoes](../infracoes/consulta-infracoes) | Buscar por sequencial |

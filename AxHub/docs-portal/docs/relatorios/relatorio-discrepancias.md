@@ -19,3 +19,12 @@ Exibe discrepâncias identificadas durante o processamento de infrações.
 | **Período** | Faixa de datas |
 | **Equipamento** | Filtrar por equipamento |
 | **Tipo de Discrepância** | Velocidade, placa, imagem |
+
+---
+
+## Navegacao Relacionada
+
+| Tipo | Pagina | Descricao |
+|------|--------|-----------|
+| Relacionado | [Auditoria](../infracoes/auditoria) | Revisao de infracoes |
+| Relacionado | [Triagem](../infracoes/triagem) | Origem das discrepancias |

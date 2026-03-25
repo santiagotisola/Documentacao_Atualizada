@@ -26,3 +26,13 @@ Permite cadastrar e gerenciar os postos de pesagem veicular.
 | **Localização** | Endereço ou referência do posto |
 | **Tipo de Balança** | Estática, dinâmica, etc. |
 | **Status** | Ativo ou Inativo |
+
+---
+
+## Navegacao Relacionada
+
+| Tipo | Pagina | Descricao |
+|------|--------|-----------|
+| Fluxo | [Ticket Aberto](./ticket-aberto) | Tickets em andamento |
+| Fluxo | [Ticket Fechado](./ticket-fechado) | Tickets finalizados |
+| Configuracao | [Motivos](./motivos) | Motivos de reclassificacao |

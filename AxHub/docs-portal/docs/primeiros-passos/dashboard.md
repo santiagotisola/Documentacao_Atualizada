@@ -108,3 +108,21 @@ Log em tempo real dos últimos eventos reportados pelos equipamentos:
 :::warning Atenção
 Eventos do tipo **Pânico** (indicados em vermelho) requerem atenção imediata, pois podem indicar violação ou mau funcionamento do equipamento.
 :::
+
+## Termos Tecnicos
+
+| Termo | Definicao |
+|-------|-----------|
+| [Afericao](../glossario/afericao) | Ver definicao no glossario |
+| [Triagem](../glossario/triagem) | Ver definicao no glossario |
+
+---
+
+## Navegacao Relacionada
+
+| Tipo | Pagina | Descricao |
+|------|--------|-----------|
+| Navegacao | [Login](./login) | Como acessar o sistema |
+| Navegacao | [Navegacao](./navegacao) | Estrutura do sistema |
+| Fluxo | [Triagem](../infracoes/triagem) | Iniciar triagem de infracoes |
+| Glossario | [Afericao](../glossario/afericao) | Alertas de vencimento |

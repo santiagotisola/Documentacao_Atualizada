@@ -45,3 +45,20 @@ A tela de Exceções permite configurar regras que isentam determinados veículo
 :::warning
 Exceções ativas descartam infrações automaticamente durante a importação. Revise periodicamente as regras cadastradas para evitar cobertura indevida de infrações.
 :::
+
+## Termos Tecnicos
+
+| Termo | Definicao |
+|-------|-----------|
+| [Enquadramento](../glossario/enquadramento) | Ver definicao no glossario |
+| [Triagem](../glossario/triagem) | Ver definicao no glossario |
+
+---
+
+## Navegacao Relacionada
+
+| Tipo | Pagina | Descricao |
+|------|--------|-----------|
+| Etapa anterior | [Triagem](./triagem) | Processo de validacao inicial |
+| Proxima etapa | [Auditoria](./auditoria) | Revisao pos-excecao |
+| Glossario | [Enquadramento](../glossario/enquadramento) | Classificacao legal |

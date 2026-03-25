@@ -19,3 +19,12 @@ Exibe um mapa visual com o fluxo de passagens de veículos por equipamento.
 | **Período** | Faixa de datas |
 | **Região** | Filtrar por região |
 | **Equipamento** | Filtrar por equipamento |
+
+---
+
+## Navegacao Relacionada
+
+| Tipo | Pagina | Descricao |
+|------|--------|-----------|
+| Relacionado | [Fluxo Diario de Veiculos](./fluxo-diario-veiculos) | Dados tabulares |
+| Relacionado | [Monitoramento Online](../operacoes/monitoramento-online) | Tempo real |

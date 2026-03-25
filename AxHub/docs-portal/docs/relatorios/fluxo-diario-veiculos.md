@@ -19,3 +19,12 @@ Exibe o volume diário de veículos registrados por cada equipamento.
 | **Período** | Faixa de datas |
 | **Equipamento** | Filtrar por equipamento |
 | **Faixa** | Faixa de tráfego |
+
+---
+
+## Navegacao Relacionada
+
+| Tipo | Pagina | Descricao |
+|------|--------|-----------|
+| Relacionado | [Monitoramento Online](../operacoes/monitoramento-online) | Tempo real |
+| Relacionado | [Mapa Fluxo Passagens](./mapa-fluxo-passagens) | Visualizacao em mapa |

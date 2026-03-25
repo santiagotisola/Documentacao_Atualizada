@@ -47,3 +47,23 @@ A tela de Exportação permite enviar as infrações validadas pelo fluxo de tri
 :::info
 Os layouts de arquivo são configurados em **Administração → Layouts Arquivos**, com os campos e delimitadores exigidos por cada órgão autuador.
 :::
+
+## Termos Tecnicos
+
+| Termo | Definicao |
+|-------|-----------|
+| [Enquadramento](../glossario/enquadramento) | Ver definicao no glossario |
+| [Lote de Exportacao](../glossario/lote-exportacao) | Ver definicao no glossario |
+| [Triagem](../glossario/triagem) | Ver definicao no glossario |
+
+---
+
+## Navegacao Relacionada
+
+| Tipo | Pagina | Descricao |
+|------|--------|-----------|
+| Etapa anterior | [Auditoria](./auditoria) | Revisao final antes da exportacao |
+| Configuracao | [Layouts de Arquivos](../administracao/layouts-arquivos) | Formatos |
+| Configuracao | [Sequenciais de Lote](../administracao/sequenciais-lote-exportacao) | Numeracao |
+| Glossario | [Lote de Exportacao](../glossario/lote-exportacao) | Definicao tecnica |
+| Glossario | [Autuacao](../glossario/autuacao) | Ato de autuacao |

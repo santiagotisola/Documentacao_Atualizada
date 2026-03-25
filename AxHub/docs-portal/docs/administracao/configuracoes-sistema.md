@@ -56,3 +56,20 @@ Todas as configurações do sistema são persistidas em `TBConfiguracoes` como p
 | **Valor Configuração** | texto | Valor serializado em texto (número, JSON, string) |
 
 Essa arquitetura de chave-valor permite adicionar novas configurações sem alteração de schema.
+
+## Termos Tecnicos
+
+| Termo | Definicao |
+|-------|-----------|
+| [Enquadramento](../glossario/enquadramento) | Ver definicao no glossario |
+| [Infracao de Transito](../glossario/infracao) | Ver definicao no glossario |
+| [Triagem](../glossario/triagem) | Ver definicao no glossario |
+
+---
+
+## Navegacao Relacionada
+
+| Tipo | Pagina | Descricao |
+|------|--------|-----------|
+| Relacionado | [Webhooks](./webhooks) | Integracoes configuradas |
+| Relacionado | [Relatorios Power BI](./relatorios-power-bi) | Dashboards de gestao |

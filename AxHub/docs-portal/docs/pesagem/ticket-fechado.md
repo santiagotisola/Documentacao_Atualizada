@@ -22,3 +22,12 @@ Exibe os tickets de pesagem que já foram finalizados.
 | **Peso Bruto** | Peso total registrado |
 | **Resultado** | Aprovado, excesso, liberado |
 | **Motivo** | Motivo da liberação (quando aplicável) |
+
+---
+
+## Navegacao Relacionada
+
+| Tipo | Pagina | Descricao |
+|------|--------|-----------|
+| Anterior | [Ticket Aberto](./ticket-aberto) | Tickets em andamento |
+| Acao | [Reclassificar](./reclassificar) | Reclassificar veiculo |

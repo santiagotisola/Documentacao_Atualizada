@@ -24,3 +24,12 @@ Permite gerenciar os recursos utilizados nas medições contratuais.
 | **Tipo** | Equipamento, pessoal, veicular |
 | **Contrato** | Contrato vinculado |
 | **Status** | Ativo ou Inativo |
+
+---
+
+## Navegacao Relacionada
+
+| Tipo | Pagina | Descricao |
+|------|--------|-----------|
+| Relacionado | [Contratos](./contratos) | Contrato vinculado |
+| Relacionado | [Equipamentos](../cadastros-basicos/equipamentos) | Equipamentos como recurso |

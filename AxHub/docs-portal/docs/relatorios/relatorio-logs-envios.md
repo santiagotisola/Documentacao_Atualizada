@@ -21,3 +21,12 @@ Exibe o log de passagens enviadas para sistemas de integração externos.
 | **Registros** | Quantidade de registros enviados |
 | **Status** | Sucesso, Erro, Pendente |
 | **Mensagem** | Retorno do sistema externo |
+
+---
+
+## Navegacao Relacionada
+
+| Tipo | Pagina | Descricao |
+|------|--------|-----------|
+| Relacionado | [Exportacao](../infracoes/exportacao) | Lotes enviados |
+| Relacionado | [Webhooks](../administracao/webhooks) | Integracoes |

@@ -25,3 +25,20 @@ Permite cadastrar e gerenciar as operações de fiscalização vinculadas aos eq
 | **Tipo de Infração** | Enquadramento da fiscalização |
 | **Velocidade Regulamentada** | Limite de velocidade da via |
 | **Status** | Ativa ou Inativa |
+
+## Termos Tecnicos
+
+| Termo | Definicao |
+|-------|-----------|
+| [Enquadramento](../glossario/enquadramento) | Ver definicao no glossario |
+
+---
+
+## Navegacao Relacionada
+
+| Tipo | Pagina | Descricao |
+|------|--------|-----------|
+| Relacionado | [Faixas](./faixas) | Faixas vinculadas a operacao |
+| Relacionado | [Afericoes](./afericoes) | Afericoes dos equipamentos |
+| Relacionado | [Monitoramento Online](./monitoramento-online) | Acompanhamento em tempo real |
+| Relacionado | [Eventos de Equipamentos](./eventos-equipamentos) | Historico de eventos |

@@ -24,3 +24,11 @@ Permite cadastrar e gerenciar os modelos de veículos vinculados às marcas.
 | **Código** | Código do modelo |
 | **Descrição** | Nome do modelo (ex: Gol, Uno, Corolla) |
 | **Ativo** | Status do registro |
+
+---
+
+## Navegacao Relacionada
+
+| Tipo | Pagina | Descricao |
+|------|--------|-----------|
+| Relacionado | [Marcas de Veiculos](./marcas-veiculos) | Marca do modelo |

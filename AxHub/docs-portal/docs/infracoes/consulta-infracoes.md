@@ -61,3 +61,23 @@ Após aplicar os filtros e clicar em **Pesquisar**, a grade de resultados exibe 
 | **Auditor** | Responsável pela auditoria |
 
 Clique em qualquer linha para abrir os detalhes completos da infração, incluindo as imagens capturadas.
+
+## Termos Tecnicos
+
+| Termo | Definicao |
+|-------|-----------|
+| [Enquadramento](../glossario/enquadramento) | Ver definicao no glossario |
+| [Infracao de Transito](../glossario/infracao) | Ver definicao no glossario |
+| [Triagem](../glossario/triagem) | Ver definicao no glossario |
+
+---
+
+## Navegacao Relacionada
+
+| Tipo | Pagina | Descricao |
+|------|--------|-----------|
+| Fluxo | [Triagem](./triagem) | Etapa inicial do fluxo |
+| Fluxo | [Auditoria](./auditoria) | Etapa de revisao |
+| Fluxo | [Exportacao](./exportacao) | Etapa de envio |
+| Fluxo | [Infracoes Descartadas](./infracoes-descartadas) | Registros descartados |
+| Glossario | [Infracao](../glossario/infracao) | Definicao tecnica |

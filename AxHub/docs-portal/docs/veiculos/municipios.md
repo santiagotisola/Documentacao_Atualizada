@@ -24,3 +24,11 @@ Permite cadastrar e gerenciar os municípios utilizados no sistema.
 | **Nome** | Nome do município |
 | **UF** | Estado |
 | **Ativo** | Status do registro |
+
+---
+
+## Navegacao Relacionada
+
+| Tipo | Pagina | Descricao |
+|------|--------|-----------|
+| Relacionado | [Regioes](../administracao/regioes) | Regioes administrativas |

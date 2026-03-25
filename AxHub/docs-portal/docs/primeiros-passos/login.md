@@ -40,3 +40,13 @@ Caso esqueça sua senha:
 :::info Restrições de acesso
 O administrador pode configurar restrições de acesso por IP e horário. Caso não consiga acessar o sistema mesmo com credenciais corretas, verifique com o administrador se há restrições configuradas para seu usuário.
 :::
+
+---
+
+## Navegacao Relacionada
+
+| Tipo | Pagina | Descricao |
+|------|--------|-----------|
+| Proximo | [Dashboard](./dashboard) | Tela inicial apos login |
+| Seguranca | [Usuarios](../controle-acesso/usuarios) | Gestao de usuarios |
+| Seguranca | [Perfis de Acesso](../controle-acesso/perfis-acesso) | Configurar permissoes |

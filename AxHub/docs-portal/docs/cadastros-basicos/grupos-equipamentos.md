@@ -65,3 +65,11 @@ Os equipamentos são vinculados ao grupo através do **cadastro do equipamento**
 :::tip Cores no mapa
 Escolha cores distintas para cada grupo, facilitando a identificação visual dos equipamentos no mapa do Dashboard. As mesmas cores são exibidas na legenda do mapa.
 :::
+
+---
+
+## Navegacao Relacionada
+
+| Tipo | Pagina | Descricao |
+|------|--------|-----------|
+| Relacionado | [Equipamentos](./equipamentos) | Equipamentos do grupo |

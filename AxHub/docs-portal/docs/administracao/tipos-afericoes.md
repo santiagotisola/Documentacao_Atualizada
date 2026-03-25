@@ -22,3 +22,12 @@ Permite cadastrar os tipos de aferições metrológicas realizadas nos equipamen
 :::note Sem screenshot
 Esta tela ainda não possui screenshot cadastrada. Será adicionada em breve.
 :::
+
+---
+
+## Navegacao Relacionada
+
+| Tipo | Pagina | Descricao |
+|------|--------|-----------|
+| Relacionado | [Afericoes (Operacoes)](../operacoes/afericoes) | Uso operacional |
+| Glossario | [Afericao](../glossario/afericao) | Definicao tecnica |

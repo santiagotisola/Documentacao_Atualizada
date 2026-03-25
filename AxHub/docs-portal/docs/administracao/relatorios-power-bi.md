@@ -27,3 +27,18 @@ Permite configurar e acessar relatórios do Power BI integrados ao AxHub.
 | **Índice do OCR** | Performance do reconhecimento de placas |
 | **Fluxo por Porte** | Médio diário de fluxo por porte de veículo |
 | **Triagem por Usuário** | Produtividade na triagem por analista |
+
+## Termos Tecnicos
+
+| Termo | Definicao |
+|-------|-----------|
+| [Triagem](../glossario/triagem) | Ver definicao no glossario |
+
+---
+
+## Navegacao Relacionada
+
+| Tipo | Pagina | Descricao |
+|------|--------|-----------|
+| Relacionado | [Power BI (Relatorios)](../relatorios/power-bi) | Visualizar relatorios |
+| Relacionado | [Configuracoes do Sistema](./configuracoes-sistema) | Config geral |

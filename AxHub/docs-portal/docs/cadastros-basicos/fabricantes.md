@@ -75,3 +75,12 @@ Ao clicar em **Gerar Novo Token**, o token anterior será invalidado. Certifique
 :::info Token de API
 O token é utilizado pelo fabricante para autenticar as chamadas de API ao AxHub. Sem um token válido, o fabricante não conseguirá enviar passagens e imagens ao sistema.
 :::
+
+---
+
+## Navegacao Relacionada
+
+| Tipo | Pagina | Descricao |
+|------|--------|-----------|
+| Relacionado | [Equipamentos](./equipamentos) | Equipamentos do fabricante |
+| Relacionado | [Modelos](./modelos-equipamentos) | Modelos do fabricante |

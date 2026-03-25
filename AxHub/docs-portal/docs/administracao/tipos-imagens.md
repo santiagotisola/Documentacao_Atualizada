@@ -22,3 +22,12 @@ Permite cadastrar os tipos de imagens capturadas pelos equipamentos de fiscaliza
 :::note Sem screenshot
 Esta tela ainda não possui screenshot cadastrada. Será adicionada em breve.
 :::
+
+---
+
+## Navegacao Relacionada
+
+| Tipo | Pagina | Descricao |
+|------|--------|-----------|
+| Relacionado | [Triagem](../infracoes/triagem) | Tipos de imagem na triagem |
+| Relacionado | [Equipamentos](../cadastros-basicos/equipamentos) | Imagens por equipamento |

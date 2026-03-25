@@ -19,3 +19,12 @@ Permite liberar tickets para que veículos realizem nova pesagem.
 | **Número do Ticket** | Ticket a ser liberado |
 | **Motivo** | Justificativa para liberação |
 | **Observação** | Detalhes adicionais |
+
+---
+
+## Navegacao Relacionada
+
+| Tipo | Pagina | Descricao |
+|------|--------|-----------|
+| Relacionado | [Ticket Aberto](./ticket-aberto) | Ticket a liberar |
+| Relacionado | [Postos](./postos) | Posto de pesagem |

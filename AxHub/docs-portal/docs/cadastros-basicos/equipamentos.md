@@ -79,3 +79,15 @@ Antes de cadastrar um equipamento, certifique-se de que o **Fabricante**, **Mode
 4. Grupos de Equipamentos
 5. Equipamentos
 :::
+
+---
+
+## Navegacao Relacionada
+
+| Tipo | Pagina | Descricao |
+|------|--------|-----------|
+| Relacionado | [Fabricantes](./fabricantes) | Fabricante do equipamento |
+| Relacionado | [Tipos de Equipamentos](./tipos-equipamentos) | Classificacao |
+| Relacionado | [Modelos de Equipamentos](./modelos-equipamentos) | Modelo |
+| Relacionado | [Grupos de Equipamentos](./grupos-equipamentos) | Agrupamento |
+| Glossario | [Afericao](../glossario/afericao) | Certificado de afericao |

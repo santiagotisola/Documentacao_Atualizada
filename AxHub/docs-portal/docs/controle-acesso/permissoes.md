@@ -21,3 +21,12 @@ Permite configurar permissões detalhadas para cada perfil de acesso.
 | **Criar** | Permissão para inserir novos registros |
 | **Editar** | Permissão para alterar registros existentes |
 | **Excluir** | Permissão para remover registros |
+
+---
+
+## Navegacao Relacionada
+
+| Tipo | Pagina | Descricao |
+|------|--------|-----------|
+| Relacionado | [Perfis de Acesso](./perfis-acesso) | Perfis que usam estas permissoes |
+| Relacionado | [Usuarios](./usuarios) | Usuarios afetados |

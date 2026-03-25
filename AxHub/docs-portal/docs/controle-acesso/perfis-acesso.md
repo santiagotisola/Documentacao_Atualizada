@@ -23,3 +23,12 @@ Permite criar e gerenciar perfis que agrupam permissões de acesso ao sistema.
 | **Nome do Perfil** | Identificação do perfil (ex: Administrador, Analista, Auditor) |
 | **Descrição** | Detalhamento das responsabilidades do perfil |
 | **Permissões** | Lista de módulos e funcionalidades acessíveis |
+
+---
+
+## Navegacao Relacionada
+
+| Tipo | Pagina | Descricao |
+|------|--------|-----------|
+| Relacionado | [Usuarios](./usuarios) | Usuarios com este perfil |
+| Relacionado | [Permissoes](./permissoes) | Permissoes do perfil |

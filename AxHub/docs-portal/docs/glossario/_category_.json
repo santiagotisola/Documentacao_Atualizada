@@ -1,0 +1,9 @@
+﻿{
+  "label": "Glossário Técnico",
+  "position": 13,
+  "collapsed": false,
+  "link": {
+    "type": "generated-index",
+    "description": "Termos técnicos utilizados no sistema AxHub com base no Código de Trânsito Brasileiro (CTB)."
+  }
+}

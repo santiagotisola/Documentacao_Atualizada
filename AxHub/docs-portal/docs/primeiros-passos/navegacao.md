@@ -32,3 +32,19 @@ O menu lateral é organizado nos seguintes grupos:
 - **Barra superior** — acesso rápido ao dashboard e notificações
 - **Breadcrumb** — navegação hierárquica entre páginas
 - **Pesquisa** — busca rápida por funcionalidade
+
+## Termos Tecnicos
+
+| Termo | Definicao |
+|-------|-----------|
+| [Enquadramento](../glossario/enquadramento) | Ver definicao no glossario |
+| [Triagem](../glossario/triagem) | Ver definicao no glossario |
+
+---
+
+## Navegacao Relacionada
+
+| Tipo | Pagina | Descricao |
+|------|--------|-----------|
+| Navegacao | [Login](./login) | Acesso ao sistema |
+| Navegacao | [Dashboard](./dashboard) | Tela principal |

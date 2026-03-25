@@ -24,3 +24,12 @@ Permite cadastrar e gerenciar as classificações dos veículos.
 | **Descrição** | Nome da classificação |
 | **Tipo de Veículo** | Tipo vinculado |
 | **Ativo** | Status do registro |
+
+---
+
+## Navegacao Relacionada
+
+| Tipo | Pagina | Descricao |
+|------|--------|-----------|
+| Relacionado | [Categorias](./categorias-veiculo) | Categorias vinculadas |
+| Relacionado | [Tipos de Veiculos](./tipos-veiculos) | Tipos |

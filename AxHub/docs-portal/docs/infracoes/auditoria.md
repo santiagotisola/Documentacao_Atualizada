@@ -46,3 +46,21 @@ A tela de Auditoria permite que auditores revisem as infrações que foram valid
 :::warning Impacto nas métricas
 As decisões de auditoria alimentam os relatórios de qualidade e produtividade. Rejeições freqüentes do mesmo analista devem ser investigadas.
 :::
+
+## Termos Tecnicos
+
+| Termo | Definicao |
+|-------|-----------|
+| [Triagem](../glossario/triagem) | Ver definicao no glossario |
+
+---
+
+## Navegacao Relacionada
+
+| Tipo | Pagina | Descricao |
+|------|--------|-----------|
+| Etapa anterior | [Triagem](./triagem) | Validacao inicial das infracoes |
+| Proxima etapa | [Exportacao](./exportacao) | Gerar lote para envio ao orgao |
+| Consulta | [Consulta de Infracoes](./consulta-infracoes) | Buscar infracoes |
+| Glossario | [Autuacao](../glossario/autuacao) | Ato administrativo de registro |
+| Glossario | [Infracao](../glossario/infracao) | Definicao tecnica |

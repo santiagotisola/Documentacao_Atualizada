@@ -19,3 +19,12 @@ Exibe o histórico de eventos registrados nos equipamentos de fiscalização.
 | **Período** | Faixa de datas |
 | **Equipamento** | Filtrar por equipamento |
 | **Tipo de Evento** | Falha, manutenção, vandalismo |
+
+---
+
+## Navegacao Relacionada
+
+| Tipo | Pagina | Descricao |
+|------|--------|-----------|
+| Relacionado | [Eventos (Operacoes)](../operacoes/eventos-equipamentos) | Dados operacionais |
+| Relacionado | [Equipamentos](../cadastros-basicos/equipamentos) | Equipamentos |

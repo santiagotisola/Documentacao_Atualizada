@@ -25,3 +25,13 @@ Permite consultar e registrar eventos e ocorrências relacionados aos equipament
 | **Data/Hora** | Momento da ocorrência |
 | **Descrição** | Detalhamento do evento |
 | **Responsável** | Técnico ou analista que registrou |
+
+---
+
+## Navegacao Relacionada
+
+| Tipo | Pagina | Descricao |
+|------|--------|-----------|
+| Relacionado | [Monitoramento Online](./monitoramento-online) | Acompanhamento tempo real |
+| Relacionado | [Equipamentos](../cadastros-basicos/equipamentos) | Cadastro de equipamentos |
+| Relatorio | [Rel. Eventos Equipamentos](../relatorios/eventos-equipamentos) | Relatorio detalhado |

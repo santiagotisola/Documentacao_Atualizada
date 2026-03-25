@@ -26,3 +26,19 @@ Permite configurar os enquadramentos de infrações utilizados pelo sistema.
 | **Gravidade** | Leve, Média, Grave, Gravíssima |
 | **Pontos** | Pontuação na CNH |
 | **Valor da Multa** | Valor em reais |
+
+## Termos Tecnicos
+
+| Termo | Definicao |
+|-------|-----------|
+| [Enquadramento](../glossario/enquadramento) | Ver definicao no glossario |
+
+---
+
+## Navegacao Relacionada
+
+| Tipo | Pagina | Descricao |
+|------|--------|-----------|
+| Relacionado | [Enquadramentos](./enquadramentos) | Lista de enquadramentos |
+| Relacionado | [Triagem](../infracoes/triagem) | Uso na triagem |
+| Glossario | [Enquadramento](../glossario/enquadramento) | Definicao CTB |

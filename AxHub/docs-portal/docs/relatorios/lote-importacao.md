@@ -21,3 +21,11 @@ Exibe os lotes de dados importados para o sistema.
 | **Registros** | Quantidade de registros importados |
 | **Status** | Sucesso, Erro, Parcial |
 | **Origem** | Equipamento ou sistema de origem |
+
+---
+
+## Navegacao Relacionada
+
+| Tipo | Pagina | Descricao |
+|------|--------|-----------|
+| Relacionado | [Equipamentos](../cadastros-basicos/equipamentos) | Origem dos dados |

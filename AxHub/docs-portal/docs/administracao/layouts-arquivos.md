@@ -23,3 +23,12 @@ Permite configurar os layouts de arquivos utilizados para importação e exporta
 :::note Sem screenshot
 Esta tela ainda não possui screenshot cadastrada. Será adicionada em breve.
 :::
+
+---
+
+## Navegacao Relacionada
+
+| Tipo | Pagina | Descricao |
+|------|--------|-----------|
+| Relacionado | [Exportacao](../infracoes/exportacao) | Exportacao usa o layout |
+| Glossario | [Lote de Exportacao](../glossario/lote-exportacao) | Definicao |

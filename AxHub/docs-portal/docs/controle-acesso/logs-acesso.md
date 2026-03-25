@@ -21,3 +21,12 @@ Exibe o histórico de acessos ao sistema com detalhes de data, hora, usuário e 
 | **IP** | Endereço IP de origem |
 | **Ação** | Tipo de operação (login, logout, alteração, etc.) |
 | **Módulo** | Seção do sistema acessada |
+
+---
+
+## Navegacao Relacionada
+
+| Tipo | Pagina | Descricao |
+|------|--------|-----------|
+| Relacionado | [Usuarios](./usuarios) | Usuario que gerou o log |
+| Relacionado | [Acessos por IP](./acessos-por-ip) | IP do acesso |

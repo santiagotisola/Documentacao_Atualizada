@@ -33,3 +33,20 @@ A tela de Infrações Descartadas permite consultar e revisar todas as infraçõ
 :::info
 Infrações descartadas por exceção automática também aparecem aqui, identificadas pelo motivo configurado na regra de exceção.
 :::
+
+## Termos Tecnicos
+
+| Termo | Definicao |
+|-------|-----------|
+| [Infracao de Transito](../glossario/infracao) | Ver definicao no glossario |
+| [Triagem](../glossario/triagem) | Ver definicao no glossario |
+
+---
+
+## Navegacao Relacionada
+
+| Tipo | Pagina | Descricao |
+|------|--------|-----------|
+| Origem | [Triagem](./triagem) | Infracoes descartadas durante a triagem |
+| Configuracao | [Motivos de Descarte](../administracao/motivos-descartes) | Lista de motivos |
+| Glossario | [Infracao](../glossario/infracao) | Definicao de infracao |

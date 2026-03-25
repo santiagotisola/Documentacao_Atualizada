@@ -19,3 +19,11 @@ Identifica falhas sequenciais nos equipamentos que podem indicar problemas opera
 | **Período** | Faixa de datas |
 | **Equipamento** | Filtrar por equipamento |
 | **Quantidade mínima** | Número mínimo de falhas consecutivas |
+
+---
+
+## Navegacao Relacionada
+
+| Tipo | Pagina | Descricao |
+|------|--------|-----------|
+| Relacionado | [Sequenciais de Infracoes](../administracao/sequenciais-infracoes) | Configuracao |

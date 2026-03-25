@@ -30,3 +30,13 @@ Permite gerar uma nova medição contratual com base nos dados de operação do 
 2. O sistema calcula automaticamente os índices
 3. Revise os valores e interrupções
 4. Finalize a medição para aprovação
+
+---
+
+## Navegacao Relacionada
+
+| Tipo | Pagina | Descricao |
+|------|--------|-----------|
+| Relacionado | [Contratos](./contratos) | Contrato vinculado |
+| Relacionado | [Medicoes Finalizadas](./medicoes-finalizadas) | Historico |
+| Glossario | [Medicao de Desempenho](../glossario/medicao-desempenho) | Definicao tecnica |

@@ -22,3 +22,12 @@ Permite configurar as tarjas aplicadas nas imagens de infrações para proteçã
 :::note Sem screenshot
 Esta tela ainda não possui screenshot cadastrada. Será adicionada em breve.
 :::
+
+---
+
+## Navegacao Relacionada
+
+| Tipo | Pagina | Descricao |
+|------|--------|-----------|
+| Relacionado | [Triagem](../infracoes/triagem) | Tarja aplicada na imagem |
+| Relacionado | [Exportacao](../infracoes/exportacao) | Imagem exportada com tarja |

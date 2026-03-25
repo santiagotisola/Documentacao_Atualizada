@@ -25,3 +25,12 @@ Permite configurar webhooks para notificar sistemas externos sobre eventos do Ax
 :::info Integrações
 Webhooks permitem integrar o AxHub com sistemas de terceiros como ERPs, DETRAN e órgãos de trânsito.
 :::
+
+---
+
+## Navegacao Relacionada
+
+| Tipo | Pagina | Descricao |
+|------|--------|-----------|
+| Relacionado | [Configuracoes do Sistema](./configuracoes-sistema) | Config geral |
+| Relacionado | [Exportacao](../infracoes/exportacao) | Webhook de exportacao |

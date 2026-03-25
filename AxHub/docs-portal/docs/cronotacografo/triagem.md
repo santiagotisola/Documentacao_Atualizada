@@ -50,3 +50,19 @@ A triagem do cronotacógrafo usa o mesmo Id da passagem (`TBPassagensCronotacogr
 | `TBDadosCronotacografos` | `PassagemCronotacografo_id` | Dados do certificado verificado |
 | `TBMotivosDescartes` | `MotivoDescarte_id` | Motivo de descarte da triagem |
 | `TBInfracoes` | `Infracao_id` | Infração gerada quando o cronotacógrafo está irregular |
+
+## Termos Tecnicos
+
+| Termo | Definicao |
+|-------|-----------|
+| [Cronotacografo](../glossario/cronotacografo) | Ver definicao no glossario |
+| [Triagem](../glossario/triagem) | Ver definicao no glossario |
+
+---
+
+## Navegacao Relacionada
+
+| Tipo | Pagina | Descricao |
+|------|--------|-----------|
+| Proximo | [Consulta](./consulta) | Consultar registros processados |
+| Glossario | [Cronotacografo](../glossario/cronotacografo) | Definicao tecnica e base legal |

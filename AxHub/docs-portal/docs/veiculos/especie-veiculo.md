@@ -23,3 +23,11 @@ Permite cadastrar e gerenciar as espécies de veículos.
 | **Código** | Código identificador |
 | **Descrição** | Nome da espécie (ex: Passageiro, Carga, Misto) |
 | **Ativo** | Status do registro |
+
+---
+
+## Navegacao Relacionada
+
+| Tipo | Pagina | Descricao |
+|------|--------|-----------|
+| Relacionado | [Tipos de Veiculos](./tipos-veiculos) | Tipos vinculados |

@@ -24,3 +24,12 @@ Permite configurar os índices de performance exigidos pelos contratos.
 | **Indicador** | Nome do indicador (ex: Disponibilidade, Uptime) |
 | **Meta (%)** | Percentual mínimo exigido |
 | **Fórmula** | Regra de cálculo do índice |
+
+---
+
+## Navegacao Relacionada
+
+| Tipo | Pagina | Descricao |
+|------|--------|-----------|
+| Relacionado | [Contratos](./contratos) | Contrato que define os indices |
+| Relacionado | [Criar Medicao](./criar-medicao) | Usar indices na medicao |

@@ -83,3 +83,26 @@ Permite revisar, validar ou descartar infrações pendentes antes da exportaçã
 | `TBTriagens` | Registro da triagem realizada |
 | `TBMotivosDescarte` | Motivos disponíveis para descarte |
 | `TBUsuarios` | Operador que realizou a triagem |
+
+## Termos Tecnicos
+
+| Termo | Definicao |
+|-------|-----------|
+| [Infracao de Transito](../glossario/infracao) | Ver definicao no glossario |
+| [Lote de Exportacao](../glossario/lote-exportacao) | Ver definicao no glossario |
+| [Triagem](../glossario/triagem) | Ver definicao no glossario |
+
+---
+
+## Navegacao Relacionada
+
+| Tipo | Pagina | Descricao |
+|------|--------|-----------|
+| Proxima etapa | [Excecoes](./excecoes) | Infracoes fora dos criterios padrao |
+| Proxima etapa | [Auditoria](./auditoria) | Revisao das infracoes aprovadas |
+| Configuracao | [Motivos de Descarte](../administracao/motivos-descartes) | Motivos disponiveis |
+| Configuracao | [Config. Enquadramentos](../administracao/configuracoes-enquadramento) | Tipos de enquadramento |
+| Configuracao | [Enquadramentos](../administracao/enquadramentos) | Lista de enquadramentos |
+| Glossario | [Enquadramento](../glossario/enquadramento) | Definicao tecnica CTB |
+| Glossario | [Infracao](../glossario/infracao) | O que constitui uma infracao |
+| Glossario | [Triagem](../glossario/triagem) | Definicao do processo |

@@ -29,3 +29,13 @@ Permite registrar e consultar as aferições metrológicas dos equipamentos de f
 :::warning Vencimento
 O dashboard exibe alertas automáticos quando a aferição está próxima do vencimento.
 :::
+
+---
+
+## Navegacao Relacionada
+
+| Tipo | Pagina | Descricao |
+|------|--------|-----------|
+| Configuracao | [Tipos de Afericoes](../administracao/tipos-afericoes) | Tipos disponiveis |
+| Equipamento | [Equipamentos](../cadastros-basicos/equipamentos) | Lista de equipamentos |
+| Glossario | [Afericao](../glossario/afericao) | Definicao tecnica e base legal |

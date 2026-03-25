@@ -21,3 +21,18 @@ Permite cadastrar os motivos que justificam o descarte de infrações durante a 
 :::note Sem screenshot
 Esta tela ainda não possui screenshot cadastrada. Será adicionada em breve.
 :::
+
+## Termos Tecnicos
+
+| Termo | Definicao |
+|-------|-----------|
+| [Triagem](../glossario/triagem) | Ver definicao no glossario |
+
+---
+
+## Navegacao Relacionada
+
+| Tipo | Pagina | Descricao |
+|------|--------|-----------|
+| Relacionado | [Triagem](../infracoes/triagem) | Uso na triagem |
+| Relacionado | [Infracoes Descartadas](../infracoes/infracoes-descartadas) | Resultado |

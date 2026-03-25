@@ -24,3 +24,13 @@ Permite acompanhar em tempo real o status e funcionamento dos equipamentos de fi
 | **Status** | Online, Offline, Manutenção |
 | **Última Comunicação** | Data/hora do último sinal recebido |
 | **Passagens (dia)** | Quantidade de veículos registrados no dia |
+
+---
+
+## Navegacao Relacionada
+
+| Tipo | Pagina | Descricao |
+|------|--------|-----------|
+| Relacionado | [Eventos de Equipamentos](./eventos-equipamentos) | Historico de eventos |
+| Relacionado | [Dashboard](../primeiros-passos/dashboard) | Visao geral do sistema |
+| Relacionado | [Consulta de Placas](./consulta-placas) | Buscar veiculos |
