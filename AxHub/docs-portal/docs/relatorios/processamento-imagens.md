@@ -1,32 +1,21 @@
----
-sidebar_position: 10
+﻿---
+sidebar_position: 8
 title: Processamento de Imagens
-description: Relatório de processamento de imagens
+description: Relatorio de processamento de imagens
 ---
 
-# Processamento de Imagens
+# Relatorio de Processamento de Imagens
 
-Exibe estatísticas do processamento de imagens capturadas pelos equipamentos.
+Relatorio que apresenta o volume de imagens processadas no sistema.
 
 ## Como acessar
 
-**Menu lateral** → Relatórios → **Processamento de Imagens**
+Menu lateral - Relatorios - Processamento de Imagens
 
-| Filtro | Descrição |
-|--------|-----------|
-| **Período** | Faixa de datas |
-| **Equipamento** | Filtrar por equipamento |
-| **Status** | Processada, Pendente, Erro |
+![Processamento de Imagens por Usuario](../img/Relatorio%20-%20Relatorio%20de%20procesamento%20de%20imagens%20por%20usuário.png)
 
-:::note Sem screenshot
-Esta tela ainda não possui screenshot cadastrada. Será adicionada em breve.
-:::
-
----
-
-## Navegacao Relacionada
+## Navegacao relacionada
 
 | Tipo | Pagina | Descricao |
 |------|--------|-----------|
-| Relacionado | [Tipos de Imagens](../administracao/tipos-imagens) | Tipos configurados |
-| Relacionado | [Equipamentos](../cadastros-basicos/equipamentos) | Equipamentos |
+| Relacionado | [Processamento por Usuario](./processamento-por-usuario) | Detalhamento por usuario |
