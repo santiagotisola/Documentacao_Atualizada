@@ -1,44 +1,40 @@
----
+﻿---
 sidebar_position: 1
-title: Cadastro de Operações
-description: Cadastro e gestão de operações de fiscalização
+title: Cadastro de Operacoes
+description: Cadastro e gestao de operacoes de fiscalizacao
 ---
 
-# Cadastro de Operações
+# Cadastro de Operacoes
 
-Permite cadastrar e gerenciar as operações de fiscalização vinculadas aos equipamentos.
-
-![Lista de Operações](../img/Operações%20-%20operações.png)
+Uma operacao e o registro formal de uma acao de fiscalizacao de transito.
 
 ## Como acessar
 
-**Menu lateral** → Operações → **Operações**
+Menu lateral - Operacoes - Cadastro de Operacoes
 
-## Cadastro de operação
+## Listagem
 
-![Cadastro de Operação](../img/Operações%20-%20operações%20-%20cadastro.png)
+![Lista de Operacoes](../img/Operações%20-%20operações.png)
 
-| Campo | Descrição |
-|-------|-----------|
-| **Nome** | Identificação da operação |
-| **Equipamento** | Equipamento vinculado |
-| **Tipo de Infração** | Enquadramento da fiscalização |
-| **Velocidade Regulamentada** | Limite de velocidade da via |
-| **Status** | Ativa ou Inativa |
+## Cadastro de Operacao
 
-## Termos Tecnicos
+![Cadastro de Operacao](../img/Operações%20-%20operações%20-%20cadastro.png)
 
-| Termo | Definicao |
-|-------|-----------|
-| [Enquadramento](../glossario/enquadramento) | Ver definicao no glossario |
+## Campos
 
----
+| Campo | Obrigatorio | Descricao |
+|-------|-------------|-----------|
+| Equipamento | Sim | Equipamento vinculado a operacao |
+| Arco | Sim | Arco onde a operacao ocorre |
+| Data Inicio | Sim | Data e hora de inicio da operacao |
+| Data Fim | Sim | Data e hora de termino da operacao |
+| Enquadramentos | Sim | Enquadramentos legais habilitados |
+| Velocidade Regulamentada | Condicional | Velocidade limite da via |
+| Observacao | Nao | Informacoes adicionais |
 
-## Navegacao Relacionada
+## Navegacao relacionada
 
 | Tipo | Pagina | Descricao |
 |------|--------|-----------|
-| Relacionado | [Faixas](./faixas) | Faixas vinculadas a operacao |
-| Relacionado | [Afericoes](./afericoes) | Afericoes dos equipamentos |
-| Relacionado | [Monitoramento Online](./monitoramento-online) | Acompanhamento em tempo real |
-| Relacionado | [Eventos de Equipamentos](./eventos-equipamentos) | Historico de eventos |
+| Relacionado | [Arcos](../administracao/arcos) | Pontos de fiscalizacao |
+| Relacionado | [Afericoes](./afericoes) | Controle de afericoes |

@@ -1,0 +1,315 @@
+﻿application_xp.png
+application_xp_terminal.png
+axion-logo.png
+axion-logo.png
+Balança - Liberar Tickets para Pesagem.png
+Balança - Liberar Tickets para Pesagem-6e561846b88ec4c74187cc141d00a54e.png
+Balança - Motivos - cadastro.png
+Balança - Motivos - cadastro-9995f041eab7e3ae2b162350108f8bf8.png
+Balança - Motivos.png
+Balança - Motivos-49f02ff7bf255b2eb7a427207fc77ad0.png
+Balança - Postos - Cadastro1.png
+Balança - Postos - Cadastro1-1d6863817623607acecb1797ca615df3.png
+Balança - Postos - Cadastro2.png
+Balança - Postos.png
+Balança - Postos-b173654835ba27dd06eb53f7cbe9fa5b.png
+Balança - Reclassificar.png
+Balança - Reclassificar-f60d526de0ba92d0bc9d12706db4f625.png
+Balança - Tickets Abertos.png
+Balança - Tickets Abertos-f06b5c4c3efd5ba3cc6efb4af651c44d.png
+Balança - Tickets Fechados.png
+Balança - Tickets Fechados-9a0497cb86d903d379dabb4379e7703f.png
+box.png
+bullets-1.png
+cd.png
+Configurações - Arco - cadastro.png
+Configurações - Arco - cadastro-40d53072ef763362d995b27afbdc0631.png
+Configurações - Arco.png
+Configurações - Arco-53cb6c61a415ae388545c1760d91e57c.png
+Configurações - configurações de enquadramento- cadastro .png
+Configurações - configurações de enquadramento- cadastro -1901b328b0fde1db5bf0f305568878eb.png
+Configurações - configurações de enquadramento.png
+Configurações - configurações de enquadramento-442df30e613410e7a8bd400daa6921dc.png
+Configurações - Webhooks.png
+Configurações - Webhooks-1e86f8c06c97c095ed223771b17b47c8.png
+Controle de acessos - acessos por ip.png
+Controle de acessos - acessos por ip-3b1733cee71fefd3c2bb9d3850ab4b6b.png
+Controle de acessos - logs de acesso.png
+Controle de acessos - logs de acesso-d5d127c4477f1076c13cc340d8a32174.png
+Controle de acessos - Perfil de acesso.- cadastro.png
+Controle de acessos - Perfil de acesso.- cadastro-efb4c312669f5a2a494759be9e20b6b6.png
+Controle de acessos - Perfil de acesso.png
+Controle de acessos - Perfil de acesso-221cea5511d8bd5d8914cffa35fab93b.png
+Controle de acessos - permissao de acesso.png
+Controle de acessos - permissao de acesso-bdb3630f3e245b596cd30c74d7eca00b.png
+Controle de acessos - usuario - cadastro.png
+Controle de acessos - usuario - cadastro-f168c5477f361bcc136c065fe194bd9e.png
+Controle de acessos - usuario.png
+Controle de acessos - usuario-ae3d3e11d726c3a063929b7a6d0a34f9.png
+controller.png
+Cronotacógrafo - Triagem - historico.png
+Cronotacógrafo - Triagem - historico-a9ffbd6878335be6dfd4a3d48039c9e2.png
+cronotacografo-triagem-historico.png
+cronotacografo-triagem-historico-a9ffbd6878335be6dfd4a3d48039c9e2.png
+Dasboard.png
+dashboard-alertas-afericao.png
+dashboard-icones-atalho.png
+dashboard-mapa-equipamento.png
+dashboard-painel-sinotico.png
+dashboard-painel-sinotico-tela-cheia.png
+dashboard-status-equipamento.png
+dashboard-status-equipamento-tela-cheia.png
+dashboard-triagem-mensal.png
+dashboard-ultimos-eventos.png
+demo.png
+display.png
+drive.png
+Equipamentos - Cadastro.png
+Equipamentos - Cadastro-d7260cdac033a06103987cf6c8612bc7.png
+Equipamentos - Lista.png
+Equipamentos - Lista-7a309c9ae2aa135c94554c78082eac86.png
+Equipamentos.png
+Fabricantes - Cadastro.png
+Fabricantes - Cadastro-b3034bb09391b7366594ca5d54b1e69f.png
+Fabricantes - Lista.png
+Fabricantes - Lista-5405dd8f76358645d17b6fcdcfd647d4.png
+film.png
+folder.png
+font.png
+Grupos de Equipamentos - Cadastro.png
+Grupos de Equipamentos - Cadastro-e66662d2e2edac659b88b0d4f3091f4c.png
+Grupos de Equipamentos - Lista.png
+Grupos de Equipamentos - Lista-6a78925968269090c28a7c87d116e050.png
+image.png
+Login.png
+map.png
+mapa online.png
+Medição - contrato - cadastro.png
+Medição - contrato - cadastro-5d7db5b33e7e6e55b6f1005c857fdf71.png
+Medição - contrato.png
+Medição - contrato-6aa4c2e222d2861e0fa081e7167596b7.png
+Medição - indice de performance - cadastro.png
+Medição - indice de performance - cadastro-c359e088bbfb7612a2be2d6fe12d0d56.png
+Medição - indice de performance.png
+Medição - indice de performance-a4b392968ab95891b413ec5a932875a6.png
+Medição - interrupções - processar interrupções.png
+Medição - interrupções - processar interrupções-1ffbb748ec01b0d98f4b4e1cc75fd6c4.png
+Medição - interrupções.- cadastro.png
+Medição - interrupções.- cadastro-2e827b5fee488f09c04016b986d154d7.png
+Medição - interrupções.png
+Medição - interrupções-fe23c97facc35ee81af8626f36242d4e.png
+Medição - nova medição - relatorio de medição de equipamento - filtros.png
+Medição - nova medição - relatorio de medição de equipamento - filtros-8f18869e843fad24f371277d3d271eb5.png
+Medição - nova medição - relatorio de medição de equipamento.png
+Medição - nova medição - relatorio de medição de equipamento-b0ada6f8848d79974f4817ad86ec7d83.png
+Medição - Recursos -.cadastro.png
+Medição - Recursos -.cadastro-e668366e8aae20e46b37962831ac4c65.png
+Medição - Recursos .png
+Medição - Recursos -959067a7e3de153e1d1b0259f99fbc06.png
+Medição -Medição  finalizada.png
+Medição -Medição  finalizada-85a4793071c5e7c05cb71ef8c468b972.png
+Modelos de Equipamentos - Cadastro.png
+Modelos de Equipamentos - Cadastro-db506818a41a40d43f853c2f64863b8a.png
+Modelos de Equipamentos - Lista.png
+Modelos de Equipamentos - Lista-c48dd358a2478d7bc9b7cc755254ad3c.png
+Operações - aferição - cadastro.png
+Operações - aferição.png
+Operações - consulta de placas.png
+Operações - consulta de placas-3f2ead4869fd4fa01e1cdc5414407352.png
+Operações - eventos de equipamentos - Cadastros.png
+Operações - eventos de equipamentos - Cadastros-09bdfcf06034dca39eb9cd8846fd243b.png
+Operações - eventos de equipamentos.png
+Operações - eventos de equipamentos-c263263530f87ff39badcb811224f10e.png
+Operações - Faixas - cadatro.png
+Operações - Faixas - cadatro-640bccd442faab6bea56f1d53527f1e7.png
+Operações - Faixas.png
+Operações - Faixas-f6c6ef168f0800595c8e4ab9893cbbd4.png
+Operações - Monitoramento online - cadastro.png
+Operações - Monitoramento online - cadastro-2431dfb715e07d0110df9e44e19b0f31.png
+Operações - Monitoramento online.png
+Operações - Monitoramento online-bbea3238eb090e3ab134990a77699d2d.png
+Operações - operações - cadastro.png
+Operações - operações.png
+page.png
+page_add.png
+page_attach.png
+page_code.png
+page_copy.png
+page_delete.png
+page_edit.png
+page_error.png
+page_excel.png
+page_find.png
+page_gear.png
+page_go.png
+page_green.png
+page_key.png
+page_lightning.png
+page_link.png
+page_paintbrush.png
+page_paste.png
+page_red.png
+page_refresh.png
+page_save.png
+page_white.png
+page_white_acrobat.png
+page_white_actionscript.png
+page_white_add.png
+page_white_c.png
+page_white_camera.png
+page_white_cd.png
+page_white_code.png
+page_white_code_red.png
+page_white_coldfusion.png
+page_white_compressed.png
+page_white_copy.png
+page_white_cplusplus.png
+page_white_csharp.png
+page_white_cup.png
+page_white_database.png
+page_white_delete.png
+page_white_dvd.png
+page_white_edit.png
+page_white_error.png
+page_white_excel.png
+page_white_find.png
+page_white_flash.png
+page_white_freehand.png
+page_white_gear.png
+page_white_get.png
+page_white_go.png
+page_white_h.png
+page_white_horizontal.png
+page_white_key.png
+page_white_lightning.png
+page_white_link.png
+page_white_magnify.png
+page_white_medal.png
+page_white_office.png
+page_white_paint.png
+page_white_paintbrush.png
+page_white_paste.png
+page_white_php.png
+page_white_picture.png
+page_white_powerpoint.png
+page_white_put.png
+page_white_ruby.png
+page_white_stack.png
+page_white_star.png
+page_white_swoosh.png
+page_white_text.png
+page_white_text_width.png
+page_white_tux.png
+page_white_vector.png
+page_white_visualstudio.png
+page_white_width.png
+page_white_word.png
+page_white_world.png
+page_white_wrench.png
+page_white_zip.png
+page_word.png
+page_world.png
+Relatorio - Relatorio de discrepancias.png
+Relatorio - Relatorio de discrepancias-622aab196860dc5f5bbeb8d019a5e085.png
+Relatorio - Relatorio de infrações.png
+Relatorio - Relatorio de infrações-30c0e4501d5204b4219abc777ad0106c.png
+Relatorio - Relatorio de log de passagens enviadas a integração.png
+Relatorio - Relatorio de log de passagens enviadas a integração-54fd8de278a9014e8cad351989466caa.png
+Relatorio - Relatorio de passagens.png
+Relatorio - Relatorio de passagens-7fe8f001ed02c640c8b03deca078c58d.png
+Relatorio - Relatorio de procesamento de imagens por usuário.png
+Relatorio - Relatorio de procesamento de imagens por usuário-1a7b76d704d86c6d072827c7c208d689.png
+relatorio-mapa-teste.png
+relatorio-mapa-teste-4903e27ee2be5939866942c19d6d481c.png
+Relatorios - lotes importação.png
+Relatorios - lotes importação-18e457e2ec886691a6899b412d0adb61.png
+Relatorios - mapa de fluxo de passagens.png
+Relatorios - mapa de fluxo de passagens-ecc2d420f51f1689ebddd2032a2f5477.png
+Relatorios - relatorio de eventos dos equipamentos.png
+Relatorios - relatorio de eventos dos equipamentos-6b0418cb9325519f1b397056dc50ebac.png
+Relatorios - relatorio de falhas sequenciais.png
+Relatorios - relatorio de falhas sequenciais-a2c9fcdc7ff93c92b676524bbbadd02b.png
+Relatorios - relatorio de fluxo diario de veiculos.png
+Relatorios - relatorio de fluxo diario de veiculos-4e48a29578b898cc7d96366da4569a57.png
+Relatórios BI -.menu.png
+Relatórios BI -.menu-1d4d376564fe8f64cac588b6e3fff7a7.png
+Relatórios BI -.relatorio comparativo de placas corrigidas e validadas no processamento.png
+Relatórios BI -.relatorio comparativo de placas corrigidas e validadas no processamento-881e2baf631b7f66d1c25876eb9a4bf9.png
+Relatórios BI -.relatorio dados descartes radares cev.png
+Relatórios BI -.relatorio dados descartes radares cev-1f75a997c2ce507ee51ccfd72958b94c.png
+Relatórios BI -.relatorio de boletim de medição.png
+Relatórios BI -.relatorio de boletim de medição-4401b8adf5920758a19733ded6a886a0.png
+Relatórios BI -.relatorio de disponibilidade.png
+Relatórios BI -.relatorio de disponibilidade-402d1d9d38564958622f70c5a07fb66d.png
+Relatórios BI -.relatorio de infração - dia X hora.png
+Relatórios BI -.relatorio de infração - dia X hora-8baedacf7ca2d11ada67d50360cd6cc1.png
+Relatórios BI -.relatorio de infração.png
+Relatórios BI -.relatorio de infração-fb0470eb6c623b714de6948785664263.png
+Relatórios BI -.relatorio de processamento por motivos.png
+Relatórios BI -.relatorio de processamento por motivos-ef6b99218f5a50417e5fb85b98b7b195.png
+Relatórios BI -.relatorio de processamento.png
+Relatórios BI -.relatorio de processamento-82bf6cb9f1beac75d1962afeb64cd058.png
+Relatórios BI -.relatorio indice do ocr - dia X hora.png
+Relatórios BI -.relatorio indice do ocr - dia X hora-a7386c2b141a97ec7301dc67c8fd3a6d.png
+Relatórios BI -.relatorio indice do ocr.png
+Relatórios BI -.relatorio indice do ocr-3c0fd58ea9f61c58a6c69ed355d18c55.png
+Relatórios BI -.relatorio relatorio médio diário de fluxo por porte.png
+Relatórios BI -.relatorio relatorio médio diário de fluxo por porte-83221fff090901e129ca27122d9f0014.png
+Relatórios BI -.relatorio triagem por Usua.png
+Relatórios BI -.relatorio triagem por Usua-64db1adbe6c59f9c5f6e572ddfcfb596.png
+tela-login.png
+Tipos de Equipamentos - Cadastro.png
+Tipos de Equipamentos - Cadastro-6766132432ff063102b773e8a90d30e6.png
+Tipos de Equipamentos - Lista.png
+Tipos de Equipamentos - Lista-7245d0f7bf155b10c1cfc8f7d97efccc.png
+triagem-auditoria.png
+triagem-auditoria-4d5b270becfc0a5c8743d2d5965f4574.png
+triagem-consultar-infracoes.png
+triagem-consultar-infracoes-1a7c4381e986bded81ed7a6b20cf3b38.png
+triagem-consultar-resultado.png
+triagem-consultar-resultado-0cb8fba94bda7ec9ed9fbd8014a3e1df.png
+triagem-excecoes.png
+triagem-excecoes-6b967499819585996be013882df7ea08.png
+triagem-exportacao.png
+triagem-exportacao-c6865a0c2390d77c55ddeefb01534745.png
+triagem-filtro-auditoria.png
+triagem-filtro-auditoria-116c68ccd410eb21fb58fae13360e160.png
+triagem-infracoes-descartadas.png
+triagem-infracoes-descartadas-34470893dcbd8e29a77476d84e85b238.png
+triagem-menu-principal.png
+triagem-menu-principal-8892706ffbd209a3dfb7d1b6fa0bc56d.png
+triagem-tempo-analise.png
+triagem-tempo-analise-b7d13cbea071972da9adb1f41a2c4620.png
+usage.png
+Veículos - categoia de veículos - cadastro.png
+Veículos - categoia de veículos - cadastro-09445dbeca4a45537ed65308ed93cc0d.png
+Veículos - categoia de veículos.png
+Veículos - categoia de veículos-a9acd461b2112b76ffadd77ec51e54b8.png
+Veículos - Classificações dos Veiculos - cadastros.png
+Veículos - Classificações dos Veiculos - cadastros-0f381f3478bc0a8533ff079ce1b0c059.png
+Veículos - Classificações dos Veiculos.png
+Veículos - Classificações dos Veiculos-4d34a9e97b1dfb014d12603f33085af3.png
+Veículos - cores - cadastro.png
+Veículos - cores - cadastro-a617154f2ac317fb0c1b0d4de04d0860.png
+Veículos - cores.png
+Veículos - cores-d48af5b55a475405004dc561d6e71a43.png
+Veículos - Espécies de veículos - cadastro.png
+Veículos - Espécies de veículos - cadastro-c7d52e17e2c62fd9b204a26260b514cd.png
+Veículos - Espécies de veículos.png
+Veículos - Espécies de veículos-dbb9445174da94773fae2fcadc6f0437.png
+Veículos - marcas de veículos - cadastro.png
+Veículos - marcas de veículos - cadastro-61bc47cde7a174f45462576d25679290.png
+Veículos - marcas de veículos.png
+Veículos - marcas de veículos-1b59dbafc6f52e73d25cfb2b5eb3aa52.png
+Veículos - marcas-modelos de veiculos - cadastro.png
+Veículos - marcas-modelos de veiculos - cadastro-9e2eb1901795686cb98c1f2dc055f41e.png
+Veículos - marcas-modelos de veiculos.png
+Veículos - marcas-modelos de veiculos-2fc063bcfd3a24f72060f6527d9ef73b.png
+Veículos - Municípios - cadastro.png
+Veículos - Municípios - cadastro-6ae1f766c7d8faa31f124e591738471d.png
+Veículos - Municípios.png
+Veículos - Municípios-44cb71512c81b8c8cb7aa05b776ac4a1.png
+Veículos - tipos de veículos - cadastro.png
+Veículos - tipos de veículos - cadastro-9d17cde1c0ed73690e6018028ca78028.png
+Veículos - tipos de veículos.png
+Veículos - tipos de veículos-fa8d78d6271fac4cc568ad0b10bfb40c.png
