@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Guia de Operação de Blitz - AxHub</title>
+<style>
+  @page { size: A4; margin: 15mm 18mm; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Segoe UI', Arial, sans-serif; color: #2c3e50; line-height: 1.55; font-size: 13px; }
+
+  .cover { page-break-after: always; display: flex; flex-direction: column; justify-content: center; align-items: center; min-height: 95vh; text-align: center; }
+  .cover-logo { font-size: 48px; font-weight: 800; color: #00b4d8; letter-spacing: -2px; margin-bottom: 8px; }
+  .cover-logo span { color: #0077b6; }
+  .cover h1 { font-size: 28px; color: #1a1a2e; margin: 20px 0 8px; }
+  .cover h2 { font-size: 16px; color: #7f8c8d; font-weight: 400; }
+  .cover .version { margin-top: 40px; font-size: 12px; color: #aaa; }
+
+  h1 { font-size: 22px; color: #0077b6; border-bottom: 3px solid #00b4d8; padding-bottom: 6px; margin: 28px 0 14px; }
+  h2 { font-size: 17px; color: #1a1a2e; margin: 20px 0 10px; }
+  h3 { font-size: 14px; color: #0077b6; margin: 14px 0 6px; }
+  p { margin: 6px 0; }
+
+  .section { page-break-inside: avoid; margin-bottom: 18px; }
+
+  .alert { border-left: 4px solid #e74c3c; background: #fdf0f0; padding: 10px 14px; border-radius: 0 8px 8px 0; margin: 10px 0; }
+  .alert.warning { border-color: #f39c12; background: #fef9e7; }
+  .alert.success { border-color: #27ae60; background: #eafaf1; }
+  .alert.info { border-color: #3498db; background: #eaf2f8; }
+  .alert strong { display: block; margin-bottom: 3px; }
+
+  .steps { counter-reset: step; list-style: none; padding: 0; margin: 10px 0; }
+  .steps li { counter-increment: step; padding: 8px 8px 8px 42px; position: relative; margin-bottom: 6px; background: #f8f9fa; border-radius: 8px; border: 1px solid #e9ecef; }
+  .steps li::before { content: counter(step); position: absolute; left: 8px; top: 7px; width: 26px; height: 26px; background: #0077b6; color: #fff; border-radius: 50%; text-align: center; line-height: 26px; font-weight: 700; font-size: 13px; }
+
+  table { width: 100%; border-collapse: collapse; margin: 10px 0; font-size: 12px; }
+  th { background: #0077b6; color: #fff; padding: 8px 10px; text-align: left; font-weight: 600; }
+  td { padding: 7px 10px; border-bottom: 1px solid #e9ecef; }
+  tr:nth-child(even) td { background: #f8f9fa; }
+
+  .path-box { background: #e8f4f8; border: 1px solid #b2d8e8; border-radius: 8px; padding: 10px 14px; margin: 8px 0; font-size: 14px; font-weight: 600; color: #0077b6; }
+  .path-box span { color: #95a5a6; }
+
+  .two-col { display: flex; gap: 14px; margin: 10px 0; }
+  .two-col .col { flex: 1; background: #f8f9fa; border-radius: 8px; padding: 12px; border: 1px solid #e9ecef; }
+  .two-col .col h3 { margin-top: 0; }
+
+  .badge { display: inline-block; padding: 2px 8px; border-radius: 10px; font-size: 11px; font-weight: 700; }
+  .badge.red { background: #e74c3c; color: #fff; }
+  .badge.green { background: #27ae60; color: #fff; }
+  .badge.orange { background: #f39c12; color: #fff; }
+  .badge.blue { background: #3498db; color: #fff; }
+
+  .footer { text-align: center; font-size: 10px; color: #bbb; margin-top: 30px; padding-top: 10px; border-top: 1px solid #eee; }
+
+  .page-break { page-break-before: always; }
+
+  .icon { font-size: 18px; vertical-align: middle; margin-right: 4px; }
+</style>
+</head>
+<body>
+
+<!-- ===== CAPA ===== -->
+<div class="cover">
+  <div class="cover-logo">Ax<span>Hub</span></div>
+  <h1>Guia de Operação de Equipamentos de Blitz</h1>
+  <h2>Configuração de Faixas, Sincronismo e Verificação de Passagens</h2>
+  <p style="margin-top:16px;color:#95a5a6;">Para operadores de campo, gestores de contrato e equipe de suporte</p>
+  <div class="version">Versão 1.0 — Março 2026 · Axion Tecnologia</div>
+</div>
+
+<!-- ===== ÍNDICE ===== -->
+<h1>📋 Índice</h1>
+<ol style="padding-left:20px;line-height:2;">
+  <li><a href="#equipamentos" style="color:#0077b6;text-decoration:none;">Seus Equipamentos</a></li>
+  <li><a href="#faixas" style="color:#0077b6;text-decoration:none;">O que são Faixas e por que são importantes</a></li>
+  <li><a href="#erro-faixa" style="color:#0077b6;text-decoration:none;">O Problema: Faixa Errada no Tablet</a></li>
+  <li><a href="#como-corrigir" style="color:#0077b6;text-decoration:none;">Como Corrigir a Faixa</a></li>
+  <li><a href="#sincronismo" style="color:#0077b6;text-decoration:none;">Sincronismo: Como as Passagens Chegam ao Sistema</a></li>
+  <li><a href="#checklist" style="color:#0077b6;text-decoration:none;">Checklist — Antes, Durante e Após a Blitz</a></li>
+  <li><a href="#relatorios" style="color:#0077b6;text-decoration:none;">Como Verificar se o Equipamento Operou</a></li>
+  <li><a href="#responsabilidades" style="color:#0077b6;text-decoration:none;">Quem Faz o Quê</a></li>
+  <li><a href="#problemas-comuns" style="color:#0077b6;text-decoration:none;">Problemas Comuns e Soluções</a></li>
+</ol>
+
+<!-- ===== 1. EQUIPAMENTOS ===== -->
+<h1 id="equipamentos" class="page-break">1. Seus Equipamentos</h1>
+
+<table>
+  <tr>
+    <th>Equipamento</th>
+    <th>Tipo</th>
+    <th>AnyDesk ID</th>
+    <th>IP Zero Tier</th>
+    <th>Observação</th>
+  </tr>
+  <tr>
+    <td><strong>BA601C</strong></td>
+    <td><span class="badge blue">MiniPC</span></td>
+    <td>1914407146</td>
+    <td>172.27.4.1</td>
+    <td>Fixo — opera conectado à rede</td>
+  </tr>
+  <tr>
+    <td><strong>BA602C</strong></td>
+    <td><span class="badge blue">MiniPC</span></td>
+    <td>1868522311</td>
+    <td>172.27.4.2</td>
+    <td>Fixo — opera conectado à rede</td>
+  </tr>
+  <tr>
+    <td><strong>BA603C</strong></td>
+    <td><span class="badge orange">Tablet</span></td>
+    <td>1280283785</td>
+    <td>—</td>
+    <td>Móvel — opera offline em blitz</td>
+  </tr>
+  <tr>
+    <td><strong>BA604C</strong></td>
+    <td><span class="badge orange">Tablet</span></td>
+    <td>1062093213</td>
+    <td>—</td>
+    <td>Móvel — opera offline em blitz</td>
+  </tr>
+</table>
+
+<div class="two-col">
+  <div class="col">
+    <h3>🖥️ MiniPC (BA601C / BA602C)</h3>
+    <p>Ficam em local fixo com internet. Enviam passagens automaticamente enquanto online. Se perdem conexão, acumulam e enviam quando reconectam.</p>
+  </div>
+  <div class="col">
+    <h3>📱 Tablet (BA603C / BA604C)</h3>
+    <p>Vão a campo para operações de blitz. Trabalham <strong>offline</strong> durante a operação. <strong>Sincronizam quando voltam à base</strong> e se conectam à internet.</p>
+  </div>
+</div>
+
+<!-- ===== 2. FAIXAS ===== -->
+<h1 id="faixas">2. O que são Faixas e por que são Importantes</h1>
+
+<p>No AxHub, cada equipamento tem <strong>faixas cadastradas</strong>. Uma faixa representa um <strong>endereço/sentido</strong> onde o equipamento opera.</p>
+
+<div class="alert info">
+  <strong>💡 Exemplo prático — Equipamento BA604C:</strong>
+  Este equipamento tem 3 faixas cadastradas no AxHub:
+</div>
+
+<table>
+  <tr>
+    <th>Código</th>
+    <th>Faixa</th>
+    <th>Sentido</th>
+    <th>Endereço</th>
+  </tr>
+  <tr>
+    <td>BA604C-1</td>
+    <td><strong>1</strong></td>
+    <td>SIMÕES FILHO / SALVADOR</td>
+    <td>BA-526 km 105/N</td>
+  </tr>
+  <tr>
+    <td>BA604C-2</td>
+    <td><strong>2</strong></td>
+    <td>FEIRA DE SANTANA / SALVADOR</td>
+    <td>ROD. ENG. VASCO FILHO BR-324 KM 606/n</td>
+  </tr>
+  <tr>
+    <td>BA604C-3</td>
+    <td><strong>3</strong></td>
+    <td>SALVADOR / FEIRA DE SANTANA</td>
+    <td>BR-324, km 616</td>
+  </tr>
+</table>
+
+<div class="alert warning">
+  <strong>⚠️ REGRA FUNDAMENTAL</strong>
+  O número da faixa configurado no tablet <strong>DEVE SER EXATAMENTE IGUAL</strong> ao número da faixa cadastrada no AxHub. Se o endereço onde você vai operar é "SIMÕES FILHO / SALVADOR", a faixa no tablet deve ser <strong>1</strong>.
+</div>
+
+<!-- ===== 3. O PROBLEMA ===== -->
+<h1 id="erro-faixa" class="page-break">3. O Problema: Faixa Errada no Tablet</h1>
+
+<div class="section">
+  <h2>O que aconteceu?</h2>
+  <p>O operador de campo configurou a faixa no tablet como <strong style="color:#e74c3c;font-size:18px;">12</strong>, pensando que "12" significava "faixa 1 e faixa 2".</p>
+
+  <div class="alert">
+    <strong>❌ ERRADO — O sistema entende literalmente</strong>
+    O AxHub interpretou como "faixa 12" — que <strong>não existe</strong> no cadastro da operação. Resultado: <strong>3.766 passagens capturadas no dia ficaram presas no tablet</strong> e não subiram para o sistema.
+  </div>
+
+  <div class="alert success">
+    <strong>✅ CORRETO — Usar o número exato</strong>
+    Se vai operar no endereço "SIMÕES FILHO / SALVADOR", configurar como <strong>1</strong>.<br>
+    Se vai operar no endereço "FEIRA DE SANTANA / SALVADOR", configurar como <strong>2</strong>.<br>
+    Se vai operar no endereço "SALVADOR / FEIRA DE SANTANA", configurar como <strong>3</strong>.
+  </div>
+</div>
+
+<div class="section">
+  <h2>O que acontece com as passagens capturadas com faixa errada?</h2>
+  <div class="alert warning">
+    <strong>⚠️ ATENÇÃO — Passagens com faixa errada NÃO sobem sozinhas</strong>
+    Ao corrigir a faixa no tablet, somente as <strong>novas passagens</strong> serão enviadas ao sistema. As passagens capturadas com a faixa errada (ex: "faixa 12") ficam presas e precisariam ser corrigidas <strong>uma a uma manualmente</strong> — o que pode ser inviável para grandes volumes. O gestor deve decidir se corrige ou descarta essas passagens.
+  </div>
+</div>
+
+<!-- ===== 4. COMO CORRIGIR ===== -->
+<h1 id="como-corrigir">4. Como Corrigir a Faixa no Tablet</h1>
+
+<ol class="steps">
+  <li><strong>Verifique as faixas no AxHub</strong><br>
+    <div class="path-box"><span>Menu lateral →</span> Operações <span>→ selecione a operação →</span> seção Faixas</div>
+    Anote os números e endereços de cada faixa.
+  </li>
+  <li><strong>No tablet, acesse as configurações</strong><br>
+    Abra o sistema Axion no tablet → toque em <strong>Configurações</strong>.
+  </li>
+  <li><strong>Acesse "Configuração do equipamento"</strong><br>
+    Você verá os campos: <strong>Equipamento</strong> (ex: BA604C) e <strong>Nº da Faixa</strong>.
+  </li>
+  <li><strong>Altere o Nº da Faixa</strong><br>
+    Digite o <strong>número correto</strong> conforme o endereço onde vai operar:<br>
+    <div style="margin-top:6px;">
+      <span class="badge green">1</span> = SIMÕES FILHO / SALVADOR &nbsp;&nbsp;
+      <span class="badge green">2</span> = FEIRA DE SANTANA / SALVADOR &nbsp;&nbsp;
+      <span class="badge green">3</span> = SALVADOR / FEIRA DE SANTANA
+    </div>
+  </li>
+  <li><strong>Clique em "Salvar"</strong><br>
+    A partir deste momento, as novas passagens serão enviadas com a faixa correta.
+  </li>
+</ol>
+
+<!-- ===== 5. SINCRONISMO ===== -->
+<h1 id="sincronismo" class="page-break">5. Sincronismo: Como as Passagens Chegam ao Sistema</h1>
+
+<div class="two-col">
+  <div class="col">
+    <h3>🖥️ MiniPC (BA601C / BA602C)</h3>
+    <ul style="padding-left:16px;margin-top:6px;">
+      <li>Ficam conectados à internet na base</li>
+      <li>Enviam passagens <strong>automaticamente</strong></li>
+      <li>Se a internet cair, acumulam e enviam quando reconectam</li>
+      <li>O <strong>serviço de envio pode travar</strong> se o equipamento for desligado sem procedimento correto</li>
+      <li>Se travar: equipe de suporte acessa via AnyDesk e reinicia o serviço</li>
+    </ul>
+  </div>
+  <div class="col">
+    <h3>📱 Tablet (BA603C / BA604C)</h3>
+    <ul style="padding-left:16px;margin-top:6px;">
+      <li>Operam <strong>offline</strong> durante a blitz</li>
+      <li>As passagens ficam armazenadas no tablet</li>
+      <li><strong>Ao voltar à base</strong> e conectar na internet, sincronizam automaticamente</li>
+      <li>Se ficaram muitos dias sem sincronizar, o envio pode levar <strong>horas</strong></li>
+      <li>Deixar ligado e conectado até finalizar</li>
+    </ul>
+  </div>
+</div>
+
+<div class="alert info">
+  <strong>💡 Exemplo Real — BA602C</strong><br>
+  Este equipamento ficou offline do dia 10 ao dia 27 de março. Ao reconectar, enviou mais de 2.600 passagens por dia. O envio levou várias horas para concluir. Dias pendentes: 10, 11, 12, 13, 14, 24, 25, 26 e 27.
+</div>
+
+<div class="alert warning">
+  <strong>⚠️ Não desligue o equipamento enquanto estiver sincronizando!</strong><br>
+  Se desligar durante o envio, o serviço pode travar e precisará de intervenção do suporte via AnyDesk.
+</div>
+
+<!-- ===== 6. CHECKLIST ===== -->
+<h1 id="checklist">6. Checklist — Antes, Durante e Após a Blitz</h1>
+
+<div class="section">
+  <h2>✅ ANTES de ir a campo</h2>
+  <ol class="steps">
+    <li><strong>Pergunte ao gestor</strong> qual a faixa correta para o endereço da blitz</li>
+    <li><strong>Confira no tablet</strong> se o "Nº da Faixa" está correto (Configurações → Configuração do equipamento)</li>
+    <li>Se o endereço da blitz <strong>não tem faixa cadastrada</strong>, avise o gestor para criar antes de sair</li>
+    <li>Verifique se o tablet está <strong>carregado</strong> e funcionando</li>
+  </ol>
+</div>
+
+<div class="section">
+  <h2>🔄 DURANTE a operação</h2>
+  <ol class="steps">
+    <li>O tablet captura e armazena as passagens localmente (offline) — isso é normal</li>
+    <li>Se <strong>mudar de endereço</strong>, altere a faixa no tablet antes de continuar capturando</li>
+    <li>Não se preocupe se o sistema mostrar "offline" — os dados estão sendo guardados</li>
+  </ol>
+</div>
+
+<div class="section">
+  <h2>📤 AO RETORNAR à base</h2>
+  <ol class="steps">
+    <li>Conecte o tablet à internet (WiFi da base)</li>
+    <li>Aguarde a sincronização — pode levar alguns minutos em dias com alto volume</li>
+    <li>Verifique no AxHub se as passagens apareceram (Relatório de Mapa de Fluxo)</li>
+    <li>Se não aparecerem: verifique a faixa no tablet e a conexão com a internet</li>
+    <li><strong>Não desligue o tablet</strong> antes da sincronização completar</li>
+  </ol>
+</div>
+
+<!-- ===== 7. RELATÓRIOS ===== -->
+<h1 id="relatorios" class="page-break">7. Como Verificar se o Equipamento Operou</h1>
+
+<div class="section">
+  <h2>📊 Relatório de Mapa de Fluxo de Passagens</h2>
+  <div class="path-box"><span>Menu lateral →</span> Relatórios <span>→</span> Mapa de Fluxo de Passagens</div>
+  <p>Mostra uma <strong>tabela hora-a-hora</strong> de todas as passagens do mês:</p>
+  <ul style="padding-left:20px;margin:6px 0;">
+    <li><span style="background:#e74c3c;color:#fff;padding:1px 6px;border-radius:3px;">Vermelho</span> = Sem passagens naquela hora (equipamento parado)</li>
+    <li><span style="background:#f1c40f;padding:1px 6px;border-radius:3px;">Amarelo</span> = Poucas passagens</li>
+    <li><span style="background:#27ae60;color:#fff;padding:1px 6px;border-radius:3px;">Verde</span> = Volume normal de passagens</li>
+  </ul>
+  <p>Selecione o mês, o equipamento e clique em <strong>"Emitir Relatório"</strong>.</p>
+</div>
+
+<div class="section">
+  <h2>📈 Relatório de Fluxo Diário de Veículos</h2>
+  <div class="path-box"><span>Menu lateral →</span> Relatórios <span>→</span> Fluxo Diário de Veículos</div>
+  <p>Mostra <strong>dia a dia</strong> o total de fluxo e infrações por faixa. Dias com valor <strong>zero</strong> indicam que o equipamento não operou ou não sincronizou.</p>
+</div>
+
+<div class="alert info">
+  <strong>💡 Use esses relatórios para responder:</strong>
+  <ul style="padding-left:20px;margin-top:4px;">
+    <li>"Qual foi o último dia que o equipamento operou?"</li>
+    <li>"Quantos dias ficou parado?"</li>
+    <li>"As imagens estão chegando ao sistema?"</li>
+  </ul>
+</div>
+
+<!-- ===== 8. RESPONSABILIDADES ===== -->
+<h1 id="responsabilidades">8. Quem Faz o Quê</h1>
+
+<table>
+  <tr>
+    <th>Ação</th>
+    <th>Responsável</th>
+    <th>Observação</th>
+  </tr>
+  <tr>
+    <td>Cadastrar / alterar faixas no AxHub</td>
+    <td><span class="badge blue">Gestor do Contrato</span></td>
+    <td>Somente o gestor pode criar, editar ou remover faixas</td>
+  </tr>
+  <tr>
+    <td>Informar qual faixa usar em cada endereço</td>
+    <td><span class="badge blue">Gestor do Contrato</span></td>
+    <td>Antes de enviar a equipe a campo</td>
+  </tr>
+  <tr>
+    <td>Configurar a faixa no tablet antes da blitz</td>
+    <td><span class="badge orange">Operador de Campo</span></td>
+    <td>Seguir a faixa informada pelo gestor</td>
+  </tr>
+  <tr>
+    <td>Sincronizar o tablet ao retornar à base</td>
+    <td><span class="badge orange">Operador de Campo</span></td>
+    <td>Conectar à internet e aguardar</td>
+  </tr>
+  <tr>
+    <td>Verificar relatórios e passagens no sistema</td>
+    <td><span class="badge blue">Gestor</span> / <span class="badge green">Suporte</span></td>
+    <td>Mapa de Fluxo, Fluxo Diário</td>
+  </tr>
+  <tr>
+    <td>Acessar equipamento via AnyDesk / reiniciar serviço</td>
+    <td><span class="badge green">Suporte Axion</span></td>
+    <td>Quando serviço de envio travar</td>
+  </tr>
+  <tr>
+    <td>Criar nova faixa para novo endereço de operação</td>
+    <td><span class="badge blue">Gestor do Contrato</span></td>
+    <td>O suporte Axion NÃO altera faixas</td>
+  </tr>
+</table>
+
+<!-- ===== 9. PROBLEMAS COMUNS ===== -->
+<h1 id="problemas-comuns" class="page-break">9. Problemas Comuns e Soluções</h1>
+
+<table>
+  <tr>
+    <th style="width:35%;">Problema</th>
+    <th style="width:35%;">Causa Provável</th>
+    <th>Solução</th>
+  </tr>
+  <tr>
+    <td>"As imagens não estão chegando no sistema"</td>
+    <td>Faixa errada no tablet ou equipamento offline sem sincronismo</td>
+    <td>Verificar faixa no tablet e se há internet para sincronizar</td>
+  </tr>
+  <tr>
+    <td>Passagens aparecem com "Faixa 12" (inexistente)</td>
+    <td>Operador digitou "12" pensando ser "faixa 1 e 2"</td>
+    <td>Corrigir para o número correto (1, 2 ou 3). Passagens antigas não sobem.</td>
+  </tr>
+  <tr>
+    <td>Equipamento MiniPC offline há vários dias</td>
+    <td>Internet caiu ou serviço de envio travou</td>
+    <td>Acessar via AnyDesk, verificar internet e reiniciar serviço</td>
+  </tr>
+  <tr>
+    <td>Tablet sincronizou mas passagens não aparecem</td>
+    <td>Faixa do tablet diferente da faixa no AxHub</td>
+    <td>Comparar Nº da Faixa no tablet com faixas cadastradas na operação</td>
+  </tr>
+  <tr>
+    <td>Sincronismo está muito lento</td>
+    <td>Muitos dias acumulados sem enviar</td>
+    <td>Normal — deixar ligado e conectado. Ex: BA602C levou horas para 9 dias pendentes</td>
+  </tr>
+  <tr>
+    <td>Não consigo acessar o equipamento via AnyDesk</td>
+    <td>Equipamento sem internet ou desligado</td>
+    <td>Pedir ao operador em campo que verifique energia e rede</td>
+  </tr>
+  <tr>
+    <td>Relatório mostra dias em vermelho (sem passagens)</td>
+    <td>Equipamento não operou, estava offline ou faixa errada</td>
+    <td>Verificar se o equipamento esteve em campo e se sincronizou ao voltar</td>
+  </tr>
+  <tr>
+    <td>Endereço de operação não tem faixa no AxHub</td>
+    <td>Faixa não foi cadastrada para esse local</td>
+    <td>Gestor do contrato deve cadastrar nova faixa antes de operar</td>
+  </tr>
+</table>
+
+<div class="alert success" style="margin-top:20px;">
+  <strong>📞 Precisa de ajuda?</strong><br>
+  Entre em contato com o suporte Axion. Para problemas de acesso ao equipamento, tenha em mãos o <strong>ID do AnyDesk</strong> do equipamento e informe se está <strong>ligado e conectado à internet</strong>.
+</div>
+
+<div class="footer">
+  <p>Axion Tecnologia · axiontecnologia.com.br · Guia de Operação de Blitz v1.0 — Março 2026</p>
+  <p>Documento gerado para orientação de operadores e gestores de contrato IBAMETRO.</p>
+</div>
+
+</body>
+</html>

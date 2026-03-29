@@ -18,7 +18,11 @@
   },
   "sidebar": "manualSidebar",
   "previous": {
-    "title": "Perfis de Acesso",
+    "title": "📦 Sequenciais de Exportação",
+    "permalink": "/AxTon.Docs/infracoes/exportacao"
+  },
+  "next": {
+    "title": "🛡️ Perfis de acesso",
     "permalink": "/AxTon.Docs/administracao/perfis-acesso"
   }
 }

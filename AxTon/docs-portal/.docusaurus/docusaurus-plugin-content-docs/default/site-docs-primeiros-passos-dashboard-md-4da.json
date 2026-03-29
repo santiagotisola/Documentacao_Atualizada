@@ -1,7 +1,7 @@
 {
   "id": "primeiros-passos/dashboard",
-  "title": "Painel Principal",
-  "description": "Painel principal do AxTon com visão geral do sistema",
+  "title": "Painel Principal (Dashboard)",
+  "description": "Painel principal do AxTon com indicadores operacionais, alertas e notas fiscais",
   "source": "@site/docs/primeiros-passos/dashboard.md",
   "sourceDirName": "primeiros-passos",
   "slug": "/primeiros-passos/dashboard",
@@ -13,16 +13,16 @@
   "sidebarPosition": 2,
   "frontMatter": {
     "sidebar_position": 2,
-    "title": "Painel Principal",
-    "description": "Painel principal do AxTon com visão geral do sistema"
+    "title": "Painel Principal (Dashboard)",
+    "description": "Painel principal do AxTon com indicadores operacionais, alertas e notas fiscais"
   },
   "sidebar": "manualSidebar",
   "previous": {
-    "title": "Login",
-    "permalink": "/AxTon.Docs/primeiros-passos/login"
-  },
-  "next": {
     "title": "Navegação",
     "permalink": "/AxTon.Docs/primeiros-passos/navegacao"
+  },
+  "next": {
+    "title": "⚖️ Iniciar Pesagem",
+    "permalink": "/AxTon.Docs/pesagem/postos"
   }
 }

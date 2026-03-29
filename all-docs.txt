@@ -1,0 +1,3777 @@
+﻿=== intro.md ===
+---
+sidebar_position: 1
+slug: /
+title: VisÃ£o Geral
+---
+
+# AxHub â€” Manual do UsuÃ¡rio
+
+Bem-vindo ao manual do usuÃ¡rio do **AxHub**, o sistema de gestÃ£o de equipamentos de trÃ¢nsito da Axion Tecnologia.
+
+## O que Ã© o AxHub?
+
+O AxHub Ã© uma plataforma completa para **gestÃ£o de equipamentos de fiscalizaÃ§Ã£o de trÃ¢nsito**, integrando radares metrolÃ³gicos e nÃ£o metrolÃ³gicos, cÃ¢meras OCR e balanÃ§as de pesagem.
+
+## Estrutura do Sistema
+
+| # | MÃ³dulo | DescriÃ§Ã£o |
+|---|--------|-----------|
+| 1 | [Primeiros Passos](./primeiros-passos/login) | Login, navegaÃ§Ã£o e dashboard |
+| 2 | [InfraÃ§Ãµes](./infracoes/triagem) | Triagem, auditoria, consulta e exportaÃ§Ã£o |
+| 3 | [CronotacÃ³grafo](./cronotacografo/consulta) | Consulta e processamento de cronotacÃ³grafos |
+| 4 | [BalanÃ§a](./pesagem/postos) | Pesagem e controle de excesso de peso |
+| 5 | [OperaÃ§Ãµes](./operacoes/cadastro-operacoes) | ConfiguraÃ§Ã£o e gestÃ£o de operaÃ§Ãµes |
+| 6 | [VeÃ­culos](./veiculos/tipos-veiculos) | Cadastro e consulta de veÃ­culos |
+| 7 | [Equipamentos](./cadastros-basicos/equipamentos) | GestÃ£o de equipamentos de fiscalizaÃ§Ã£o |
+| 8 | [MediÃ§Ã£o](./medicoes/contratos) | MediÃ§Ãµes contratuais e Ã­ndices de performance |
+| 9 | [RelatÃ³rios](./relatorios/relatorio-infracoes) | Dashboards e relatÃ³rios operacionais |
+| 10 | [Controle de Acesso](./controle-acesso/usuarios) | GestÃ£o de usuÃ¡rios e permissÃµes |
+| 11 | [AdministraÃ§Ã£o](./administracao/configuracoes-sistema) | ConfiguraÃ§Ãµes gerais do sistema |
+
+## Como usar este manual
+
+Use o **menu lateral** para navegar entre os mÃ³dulos. Cada seÃ§Ã£o contÃ©m:
+
+- **Como acessar** â€” caminho no menu do sistema
+- **Campos exibidos** â€” detalhamento de cada campo da tela
+- **Filtros disponÃ­veis** â€” opÃ§Ãµes de pesquisa e filtragem
+- **IntegraÃ§Ãµes** â€” tabelas e sistemas relacionados
+
+:::tip Dica
+Em cada tela do AxHub, vocÃª encontrarÃ¡ um link de ajuda que o direcionarÃ¡ diretamente para a documentaÃ§Ã£o daquela funcionalidade.
+:::
+
+## Termos Tecnicos
+
+| Termo | Definicao |
+|-------|-----------|
+| [Cronotacografo](./glossario/cronotacografo) | Ver definicao no glossario |
+| [Infracao de Transito](./glossario/infracao) | Ver definicao no glossario |
+| [Medicao de Desempenho](./glossario/medicao-desempenho) | Ver definicao no glossario |
+| [Triagem](./glossario/triagem) | Ver definicao no glossario |
+
+
+=== arcos.md ===
+---
+sidebar_position: 2
+title: Arcos
+description: Cadastro de arcos de fiscalizaÃ§Ã£o
+---
+
+# Arcos
+
+Permite cadastrar e gerenciar os arcos de fiscalizaÃ§Ã£o vinculados Ã s operaÃ§Ãµes.
+
+![Lista de Arcos](../img/ConfiguraÃ§Ãµes%20-%20Arco.png)
+
+## Como acessar
+
+**Menu lateral** â†’ AdministraÃ§Ã£o â†’ **Arcos**
+
+## Cadastro de arco
+
+![Cadastro de Arco](../img/ConfiguraÃ§Ãµes%20-%20Arco%20-%20cadastro.png)
+
+| Campo | DescriÃ§Ã£o |
+|-------|-----------|
+| **Nome** | IdentificaÃ§Ã£o do arco |
+| **LocalizaÃ§Ã£o** | EndereÃ§o ou referÃªncia |
+| **Equipamentos** | Equipamentos vinculados ao arco |
+| **Status** | Ativo ou Inativo |
+
+---
+
+## Navegacao Relacionada
+
+| Tipo | Pagina | Descricao |
+|------|--------|-----------|
+| Relacionado | [Equipamentos](../cadastros-basicos/equipamentos) | Equipamentos no arco |
+| Relacionado | [Operacoes](../operacoes/cadastro-operacoes) | Operacao vinculada |
+
+
+=== configuracoes-enquadramento.md ===
+---
+sidebar_position: 3
+title: ConfiguraÃ§Ãµes de Enquadramento
+description: ConfiguraÃ§Ã£o de enquadramentos de infraÃ§Ãµes
+---
+
+# ConfiguraÃ§Ãµes de Enquadramento
+
+Permite configurar os enquadramentos de infraÃ§Ãµes utilizados pelo sistema.
+
+![Lista de Enquadramentos](../img/ConfiguraÃ§Ãµes%20-%20configuraÃ§Ãµes%20de%20enquadramento.png)
+
+## Como acessar
+
+**Menu lateral** â†’ AdministraÃ§Ã£o â†’ **ConfiguraÃ§Ãµes de Enquadramento**
+
+## Cadastro
+
+![Cadastro de Enquadramento](../img/ConfiguraÃ§Ãµes%20-%20configuraÃ§Ãµes%20de%20enquadramento-%20cadastro%20.png)
+
+| Campo | DescriÃ§Ã£o |
+|-------|-----------|
+| **CÃ³digo** | CÃ³digo do enquadramento |
+| **DescriÃ§Ã£o** | DescriÃ§Ã£o da infraÃ§Ã£o |
+| **Artigo CTB** | Artigo do CÃ³digo de TrÃ¢nsito Brasileiro |
+| **Gravidade** | Leve, MÃ©dia, Grave, GravÃ­ssima |
+| **Pontos** | PontuaÃ§Ã£o na CNH |
+| **Valor da Multa** | Valor em reais |
+
+## Termos Tecnicos
+
+| Termo | Definicao |
+|-------|-----------|
+| [Enquadramento](../glossario/enquadramento) | Ver definicao no glossario |
+
+---
+
+## Navegacao Relacionada
+
+| Tipo | Pagina | Descricao |
+|------|--------|-----------|
+| Relacionado | [Enquadramentos](./enquadramentos) | Lista de enquadramentos |
+| Relacionado | [Triagem](../infracoes/triagem) | Uso na triagem |
+| Glossario | [Enquadramento](../glossario/enquadramento) | Definicao CTB |
+
+
+=== configuracoes-sistema.md ===
+---
+sidebar_position: 3
+title: ConfiguraÃ§Ãµes do Sistema
+description: ConfiguraÃ§Ãµes gerais do AxHub
+---
+
+# ConfiguraÃ§Ãµes do Sistema
+
+As configuraÃ§Ãµes gerais do AxHub permitem ajustar parÃ¢metros globais do sistema como tarjas de imagem, Ã­ndices de performance e layouts de arquivo.
+
+## Como acessar
+
+**Menu lateral** â†’ ConfiguraÃ§Ãµes
+
+## Funcionalidades
+
+- Configurar tarjas (overlays) de informaÃ§Ãµes nas imagens de infraÃ§Ã£o
+- Definir Ã­ndices de performance e suas penalidades
+- Gerenciar layouts de arquivo para importaÃ§Ã£o e exportaÃ§Ã£o
+- Configurar parÃ¢metros gerais do sistema
+
+## ConfiguraÃ§Ãµes por Aba
+
+As configuraÃ§Ãµes do sistema sÃ£o organizadas em abas temÃ¡ticas:
+
+### Aba Triagem
+
+![ConfiguraÃ§Ãµes - Tempo de AnÃ¡lise de Imagem](../img/triagem-tempo-analise.png)
+
+Controla parÃ¢metros relacionados ao processamento de infraÃ§Ãµes:
+
+- **Prazo para Triagem**: Define em dias o prazo legal para realizar triagem (padrÃ£o: 20 dias)
+- **Tempo de AnÃ¡lise de Imagem**: Tempo em minutos para anÃ¡lise individual de cada imagem (padrÃ£o: 5 minutos)
+- **Motivo de Descarte**: OpÃ§Ãµes de invalidaÃ§Ã£o de infraÃ§Ãµes
+- **ExigÃªncias de Dados**: Modelo/marca, cÃ³digo do agente, cÃ³digo externo
+- **Meta diÃ¡ria**: Quantidade esperada de processamento por usuÃ¡rio
+
+:::info DocumentaÃ§Ã£o Detalhada
+Para instruÃ§Ãµes completas sobre configuraÃ§Ã£o de tempo de triagem com passo a passo ilustrado, veja a seÃ§Ã£o [Triagem de InfraÃ§Ãµes](../infracoes/triagem.md#filtros-disponÃ­veis) na documentaÃ§Ã£o de Triagem.
+:::
+
+### Outras Abas
+
+- **OrgÃ£o**: ConfiguraÃ§Ãµes especÃ­ficas do Ã³rgÃ£o autuador
+- **Enquadramentos**: GestÃ£o de cÃ³digos de infraÃ§Ã£o
+- **Equipamentos**: ParÃ¢metros tÃ©cnicos dos dispositivos
+- **Sistema**: ConfiguraÃ§Ãµes globais e gerais
+
+## Armazenamento
+
+Todas as configuraÃ§Ãµes do sistema sÃ£o persistidas em `TBConfiguracoes` como pares chave-valor:
+
+| Campo | Tipo | DescriÃ§Ã£o |
+|-------|------|-----------|
+| **Tipo ConfiguraÃ§Ã£o** | varchar(100) | Chave identificadora (ex: `PrazoTriagem`, `TempoAnaliseImagem`, `MetaDiaria`) |
+| **Valor ConfiguraÃ§Ã£o** | texto | Valor serializado em texto (nÃºmero, JSON, string) |
+
+Essa arquitetura de chave-valor permite adicionar novas configuraÃ§Ãµes sem alteraÃ§Ã£o de schema.
+
+## Termos Tecnicos
+
+| Termo | Definicao |
+|-------|-----------|
+| [Enquadramento](../glossario/enquadramento) | Ver definicao no glossario |
+| [Infracao de Transito](../glossario/infracao) | Ver definicao no glossario |
+| [Triagem](../glossario/triagem) | Ver definicao no glossario |
+
+---
+
+## Navegacao Relacionada
+
+| Tipo | Pagina | Descricao |
+|------|--------|-----------|
+| Relacionado | [Webhooks](./webhooks) | Integracoes configuradas |
+| Relacionado | [Relatorios Power BI](./relatorios-power-bi) | Dashboards de gestao |
+
+
+=== enquadramentos.md ===
+---
+sidebar_position: 6
+title: Enquadramentos
+description: Tabela de enquadramentos de infraÃ§Ãµes de trÃ¢nsito
+---
+
+# Enquadramentos
+
+Exibe a tabela completa de enquadramentos de infraÃ§Ãµes de trÃ¢nsito conforme o CTB.
+
+## Como acessar
+
+**Menu lateral** â†’ AdministraÃ§Ã£o â†’ **Enquadramentos**
+
+| Coluna | DescriÃ§Ã£o |
+|--------|-----------|
+| **CÃ³digo** | CÃ³digo do enquadramento |
+| **DescriÃ§Ã£o** | Tipo da infraÃ§Ã£o |
+| **Artigo** | Artigo do CTB |
+| **Gravidade** | Leve, MÃ©dia, Grave, GravÃ­ssima |
+| **Pontos** | PontuaÃ§Ã£o atribuÃ­da |
+| **Valor (R$)** | Valor da multa |
+
+:::note Sem screenshot
+Esta tela ainda nÃ£o possui screenshot cadastrada. SerÃ¡ adicionada em breve.
+:::
+
+## Termos Tecnicos
+
+| Termo | Definicao |
+|-------|-----------|
+| [Enquadramento](../glossario/enquadramento) | Ver definicao no glossario |
+
+---
+
+## Navegacao Relacionada
+
+| Tipo | Pagina | Descricao |
+|------|--------|-----------|
+| Relacionado | [Config. Enquadramentos](./configuracoes-enquadramento) | Configuracao |
+| Relacionado | [Formas de Autuacao](./formas-autuacao) | Forma de lavrar |
+| Glossario | [Enquadramento](../glossario/enquadramento) | Definicao CTB |
+| Glossario | [Autuacao](../glossario/autuacao) | Ato de autuacao |
+
+
+=== formas-autuacao.md ===
+---
+sidebar_position: 7
+title: Formas de AutuaÃ§Ã£o
+description: Cadastro de formas de autuaÃ§Ã£o
+---
+
+# Formas de AutuaÃ§Ã£o
+
+Permite cadastrar as formas de autuaÃ§Ã£o utilizadas no processo de fiscalizaÃ§Ã£o.
+
+## Como acessar
+
+**Menu lateral** â†’ AdministraÃ§Ã£o â†’ **Formas de AutuaÃ§Ã£o**
+
+| Campo | DescriÃ§Ã£o |
+|-------|-----------|
+| **CÃ³digo** | CÃ³digo identificador |
+| **DescriÃ§Ã£o** | DescriÃ§Ã£o da forma de autuaÃ§Ã£o |
+| **Ativo** | Status do registro |
+
+:::note Sem screenshot
+Esta tela ainda nÃ£o possui screenshot cadastrada. SerÃ¡ adicionada em breve.
+:::
+
+---
+
+## Navegacao Relacionada
+
+| Tipo | Pagina | Descricao |
+|------|--------|-----------|
+| Relacionado | [Enquadramentos](./enquadramentos) | Enquadramentos vinculados |
+| Relacionado | [Exportacao](../infracoes/exportacao) | Exportacao com forma |
+| Glossario | [Autuacao](../glossario/autuacao) | Definicao CTB |
+
+
+=== layouts-arquivos.md ===
+---
+sidebar_position: 8
+title: Layouts de Arquivos
+description: ConfiguraÃ§Ã£o de layouts para importaÃ§Ã£o e exportaÃ§Ã£o
+---
+
+# Layouts de Arquivos
+
+Permite configurar os layouts de arquivos utilizados para importaÃ§Ã£o e exportaÃ§Ã£o de dados.
+
+## Como acessar
+
+**Menu lateral** â†’ AdministraÃ§Ã£o â†’ **Layouts de Arquivos**
+
+| Campo | DescriÃ§Ã£o |
+|-------|-----------|
+| **Nome** | IdentificaÃ§Ã£o do layout |
+| **Tipo** | ImportaÃ§Ã£o ou ExportaÃ§Ã£o |
+| **Formato** | CSV, TXT, XML |
+| **Delimitador** | Caractere separador de campos |
+| **Encoding** | CodificaÃ§Ã£o do arquivo (UTF-8, ISO-8859-1) |
+
+:::note Sem screenshot
+Esta tela ainda nÃ£o possui screenshot cadastrada. SerÃ¡ adicionada em breve.
+:::
+
+---
+
+## Navegacao Relacionada
+
+| Tipo | Pagina | Descricao |
+|------|--------|-----------|
+| Relacionado | [Exportacao](../infracoes/exportacao) | Exportacao usa o layout |
+| Glossario | [Lote de Exportacao](../glossario/lote-exportacao) | Definicao |
+
+
+=== motivos-descartes.md ===
+---
+sidebar_position: 9
+title: Motivos de Descarte
+description: Cadastro de motivos para descarte de infraÃ§Ãµes
+---
+
+# Motivos de Descarte
+
+Permite cadastrar os motivos que justificam o descarte de infraÃ§Ãµes durante a triagem.
+
+## Como acessar
+
+**Menu lateral** â†’ AdministraÃ§Ã£o â†’ **Motivos de Descarte**
+
+| Campo | DescriÃ§Ã£o |
+|-------|-----------|
+| **CÃ³digo** | CÃ³digo identificador |
+| **DescriÃ§Ã£o** | DescriÃ§Ã£o do motivo (ex: Imagem ilegÃ­vel, Placa nÃ£o identificada) |
+| **Ativo** | Status do registro |
+
+:::note Sem screenshot
+Esta tela ainda nÃ£o possui screenshot cadastrada. SerÃ¡ adicionada em breve.
+:::
+
+## Termos Tecnicos
+
+| Termo | Definicao |
+|-------|-----------|
+| [Triagem](../glossario/triagem) | Ver definicao no glossario |
+
+---
+
+## Navegacao Relacionada
+
+| Tipo | Pagina | Descricao |
+|------|--------|-----------|
+| Relacionado | [Triagem](../infracoes/triagem) | Uso na triagem |
+| Relacionado | [Infracoes Descartadas](../infracoes/infracoes-descartadas) | Resultado |
+
+
+=== regioes.md ===
+---
+sidebar_position: 10
+title: RegiÃµes
+description: Cadastro de regiÃµes geogrÃ¡ficas
+---
+
+# RegiÃµes
+
+Permite cadastrar e gerenciar as regiÃµes geogrÃ¡ficas utilizadas no agrupamento de operaÃ§Ãµes.
+
+## Como acessar
+
+**Menu lateral** â†’ AdministraÃ§Ã£o â†’ **RegiÃµes**
+
+| Campo | DescriÃ§Ã£o |
+|-------|-----------|
+| **Nome** | Nome da regiÃ£o |
+| **UF** | Estado vinculado |
+| **DescriÃ§Ã£o** | Detalhamento |
+| **Ativo** | Status do registro |
+
+:::note Sem screenshot
+Esta tela ainda nÃ£o possui screenshot cadastrada. SerÃ¡ adicionada em breve.
+:::
+
+---
+
+## Navegacao Relacionada
+
+| Tipo | Pagina | Descricao |
+|------|--------|-----------|
+| Relacionado | [Operacoes](../operacoes/cadastro-operacoes) | Regiao da operacao |
+| Relacionado | [Equipamentos](../cadastros-basicos/equipamentos) | Equipamentos na regiao |
+
+
+=== relatorios-power-bi.md ===
+---
+sidebar_position: 5
+title: RelatÃ³rios Power BI
+description: ConfiguraÃ§Ã£o de relatÃ³rios Power BI integrados
+---
+
+# RelatÃ³rios Power BI
+
+Permite configurar e acessar relatÃ³rios do Power BI integrados ao AxHub.
+
+![Menu Power BI](../img/RelatÃ³rios%20BI%20-.menu.png)
+
+## Como acessar
+
+**Menu lateral** â†’ AdministraÃ§Ã£o â†’ **RelatÃ³rios Power BI**
+
+## RelatÃ³rios disponÃ­veis
+
+| RelatÃ³rio | DescriÃ§Ã£o |
+|-----------|-----------|
+| **Comparativo de Placas** | Placas corrigidas e validadas no processamento |
+| **Dados Descartes** | AnÃ¡lise de descartes de radares CEV |
+| **Boletim de MediÃ§Ã£o** | Resumo de mediÃ§Ã£o contratual |
+| **Disponibilidade** | Ãndice de disponibilidade dos equipamentos |
+| **InfraÃ§Ã£o - Dia x Hora** | DistribuiÃ§Ã£o de infraÃ§Ãµes por dia e hora |
+| **Processamento** | AnÃ¡lise do processamento de imagens |
+| **Ãndice do OCR** | Performance do reconhecimento de placas |
+| **Fluxo por Porte** | MÃ©dio diÃ¡rio de fluxo por porte de veÃ­culo |
+| **Triagem por UsuÃ¡rio** | Produtividade na triagem por analista |
+
+## Termos Tecnicos
+
+| Termo | Definicao |
+|-------|-----------|
+| [Triagem](../glossario/triagem) | Ver definicao no glossario |
+
+---
+
+## Navegacao Relacionada
+
+| Tipo | Pagina | Descricao |
+|------|--------|-----------|
+| Relacionado | [Power BI (Relatorios)](../relatorios/power-bi) | Visualizar relatorios |
+| Relacionado | [Configuracoes do Sistema](./configuracoes-sistema) | Config geral |
+
+
+=== sequenciais-infracoes.md ===
+---
+sidebar_position: 11
+title: Sequenciais de InfraÃ§Ãµes
+description: Controle de sequenciais numÃ©ricos de infraÃ§Ãµes
+---
+
+# Sequenciais de InfraÃ§Ãµes
+
+Permite configurar e monitorar os sequenciais numÃ©ricos utilizados na numeraÃ§Ã£o de autos de infraÃ§Ã£o.
+
+## Como acessar
+
+**Menu lateral** â†’ AdministraÃ§Ã£o â†’ **Sequenciais de InfraÃ§Ãµes**
+
+| Campo | DescriÃ§Ã£o |
+|-------|-----------|
+| **Ã“rgÃ£o** | Ã“rgÃ£o autuador |
+| **Sequencial Atual** | Ãšltimo nÃºmero utilizado |
+| **Faixa InÃ­cio** | NÃºmero inicial da faixa |
+| **Faixa Fim** | NÃºmero final da faixa |
+| **Status** | Ativo, Esgotado |
+
+:::note Sem screenshot
+Esta tela ainda nÃ£o possui screenshot cadastrada. SerÃ¡ adicionada em breve.
+:::
+
+---
+
+## Navegacao Relacionada
+
+| Tipo | Pagina | Descricao |
+|------|--------|-----------|
+| Relacionado | [Triagem](../infracoes/triagem) | Sequencial atribuido |
+| Relacionado | [Consulta de Infracoes](../infracoes/consulta-infracoes) | Buscar por sequencial |
+
+
+=== sequenciais-lote-exportacao.md ===
+---
+sidebar_position: 12
+title: Sequenciais de Lote de ExportaÃ§Ã£o
+description: Controle de sequenciais de lotes exportados
+---
+
+# Sequenciais de Lote de ExportaÃ§Ã£o
+
+Permite configurar e monitorar os sequenciais dos lotes de exportaÃ§Ã£o de infraÃ§Ãµes.
+
+## Como acessar
+
+**Menu lateral** â†’ AdministraÃ§Ã£o â†’ **Sequenciais de Lote de ExportaÃ§Ã£o**
+
+| Campo | DescriÃ§Ã£o |
+|-------|-----------|
+| **Ã“rgÃ£o** | Ã“rgÃ£o destinatÃ¡rio |
+| **Sequencial Atual** | Ãšltimo lote exportado |
+| **Formato** | Layout do arquivo de exportaÃ§Ã£o |
+| **Status** | Ativo, Esgotado |
+
+:::note Sem screenshot
+Esta tela ainda nÃ£o possui screenshot cadastrada. SerÃ¡ adicionada em breve.
+:::
+
+---
+
+## Navegacao Relacionada
+
+| Tipo | Pagina | Descricao |
+|------|--------|-----------|
+| Relacionado | [Exportacao](../infracoes/exportacao) | Controle de lote |
+| Glossario | [Lote de Exportacao](../glossario/lote-exportacao) | Definicao |
+
+
+=== tarjas.md ===
+---
+sidebar_position: 13
+title: Tarjas
+description: ConfiguraÃ§Ã£o de tarjas para imagens de infraÃ§Ãµes
+---
+
+# Tarjas
+
+Permite configurar as tarjas aplicadas nas imagens de infraÃ§Ãµes para proteÃ§Ã£o de dados.
+
+## Como acessar
+
+**Menu lateral** â†’ AdministraÃ§Ã£o â†’ **Tarjas**
+
+| Campo | DescriÃ§Ã£o |
+|-------|-----------|
+| **Nome** | IdentificaÃ§Ã£o da tarja |
+| **Tipo** | Tarja de placa, rosto, etc. |
+| **PosiÃ§Ã£o** | Coordenadas de aplicaÃ§Ã£o |
+| **Ativo** | Status do registro |
+
+:::note Sem screenshot
+Esta tela ainda nÃ£o possui screenshot cadastrada. SerÃ¡ adicionada em breve.
+:::
+
+---
+
+## Navegacao Relacionada
+
+| Tipo | Pagina | Descricao |
+|------|--------|-----------|
+| Relacionado | [Triagem](../infracoes/triagem) | Tarja aplicada na imagem |
+| Relacionado | [Exportacao](../infracoes/exportacao) | Imagem exportada com tarja |
+
+
+=== tipos-afericoes.md ===
+---
+sidebar_position: 14
+title: Tipos de AferiÃ§Ãµes
+description: Cadastro de tipos de aferiÃ§Ãµes metrolÃ³gicas
+---
+
+# Tipos de AferiÃ§Ãµes
+
+Permite cadastrar os tipos de aferiÃ§Ãµes metrolÃ³gicas realizadas nos equipamentos.
+
+## Como acessar
+
+**Menu lateral** â†’ AdministraÃ§Ã£o â†’ **Tipos de AferiÃ§Ãµes**
+
+| Campo | DescriÃ§Ã£o |
+|-------|-----------|
+| **CÃ³digo** | CÃ³digo identificador |
+| **DescriÃ§Ã£o** | Tipo da aferiÃ§Ã£o (ex: Inicial, PeriÃ³dica, Eventual) |
+| **Validade (meses)** | Prazo de validade padrÃ£o |
+| **Ativo** | Status do registro |
+
+:::note Sem screenshot
+Esta tela ainda nÃ£o possui screenshot cadastrada. SerÃ¡ adicionada em breve.
+:::
+
+---
+
+## Navegacao Relacionada
+
+| Tipo | Pagina | Descricao |
+|------|--------|-----------|
+| Relacionado | [Afericoes (Operacoes)](../operacoes/afericoes) | Uso operacional |
+| Glossario | [Afericao](../glossario/afericao) | Definicao tecnica |
+
+
+=== tipos-imagens.md ===
+---
+sidebar_position: 15
+title: Tipos de Imagens
+description: Cadastro de tipos de imagens capturadas
+---
+
+# Tipos de Imagens
+
+Permite cadastrar os tipos de imagens capturadas pelos equipamentos de fiscalizaÃ§Ã£o.
+
+## Como acessar
+
+**Menu lateral** â†’ AdministraÃ§Ã£o â†’ **Tipos de Imagens**
+
+| Campo | DescriÃ§Ã£o |
+|-------|-----------|
+| **CÃ³digo** | CÃ³digo identificador |
+| **DescriÃ§Ã£o** | Tipo da imagem (ex: PanorÃ¢mica, Zoom Placa, Contexto) |
+| **ObrigatÃ³ria** | Se a imagem Ã© exigida para validaÃ§Ã£o |
+| **Ativo** | Status do registro |
+
+:::note Sem screenshot
+Esta tela ainda nÃ£o possui screenshot cadastrada. SerÃ¡ adicionada em breve.
+:::
+
+---
+
+## Navegacao Relacionada
+
+| Tipo | Pagina | Descricao |
+|------|--------|-----------|
+| Relacionado | [Triagem](../infracoes/triagem) | Tipos de imagem na triagem |
+| Relacionado | [Equipamentos](../cadastros-basicos/equipamentos) | Imagens por equipamento |
+
+
+=== webhooks.md ===
+---
+sidebar_position: 4
+title: Webhooks
+description: ConfiguraÃ§Ã£o de webhooks para integraÃ§Ãµes externas
+---
+
+# Webhooks
+
+Permite configurar webhooks para notificar sistemas externos sobre eventos do AxHub.
+
+![Webhooks](../img/ConfiguraÃ§Ãµes%20-%20Webhooks.png)
+
+## Como acessar
+
+**Menu lateral** â†’ AdministraÃ§Ã£o â†’ **Webhooks**
+
+| Campo | DescriÃ§Ã£o |
+|-------|-----------|
+| **URL** | EndereÃ§o do endpoint externo |
+| **Evento** | Tipo de evento que dispara o webhook |
+| **MÃ©todo** | POST, PUT |
+| **Headers** | CabeÃ§alhos customizados (autenticaÃ§Ã£o, etc.) |
+| **Ativo** | Status do webhook |
+
+:::info IntegraÃ§Ãµes
+Webhooks permitem integrar o AxHub com sistemas de terceiros como ERPs, DETRAN e Ã³rgÃ£os de trÃ¢nsito.
+:::
+
+---
+
+## Navegacao Relacionada
+
+| Tipo | Pagina | Descricao |
+|------|--------|-----------|
+| Relacionado | [Configuracoes do Sistema](./configuracoes-sistema) | Config geral |
+| Relacionado | [Exportacao](../infracoes/exportacao) | Webhook de exportacao |
+
+
+=== pesagem.md ===
+---
+sidebar_position: 1
+title: Pesagem
+description: Registro e consulta de pesagens de veiculos
+---
+
+# Pesagem
+
+Modulo de registro das pesagens de veiculos realizadas nos postos de pesagem integrados ao AxHub.
+
+## Como acessar
+
+Menu lateral - Balanca - Pesagem
+
+## Tickets Abertos
+
+![Tickets Abertos](../img/Balança%20-%20Tickets%20Abertos.png)
+
+## Tickets Fechados
+
+![Tickets Fechados](../img/Balança%20-%20Tickets%20Fechados.png)
+
+## Liberar Tickets para Pesagem
+
+![Liberar Tickets](../img/Balança%20-%20Liberar%20Tickets%20para%20Pesagem.png)
+
+## Listagem
+
+| Coluna | Descricao |
+|--------|-----------|
+| Data/Hora | Momento da pesagem |
+| Placa | Placa do veiculo pesado |
+| PBT | Peso Bruto Total registrado |
+| PBT Limite | Limite legal de peso para o tipo de veiculo |
+| Excesso | Peso acima do limite se houver |
+| Status | Regular ou Excesso ou Descartado |
+
+## Navegacao relacionada
+
+| Tipo | Pagina | Descricao |
+|------|--------|-----------|
+| Relacionado | [Triagem de Balanca](./triagem-balanca) | Triagem de infracoes de pesagem |
+
+
+=== triagem-balanca.md ===
+---
+sidebar_position: 2
+title: Triagem de Balanca
+description: Triagem de infracoes de excesso de peso
+---
+
+# Triagem de Balanca
+
+Tela de analise das infracoes de excesso de peso geradas pelo sistema de pesagem.
+
+## Como acessar
+
+Menu lateral - Balanca - Triagem
+
+## Reclassificar
+
+![Reclassificar](../img/Balança%20-%20Reclassificar.png)
+
+## Postos de Pesagem
+
+![Postos](../img/Balança%20-%20Postos.png)
+
+![Cadastro de Posto](../img/Balança%20-%20Postos%20-%20Cadastro1.png)
+
+![Cadastro de Posto 2](../img/Balança%20-%20Postos%20-%20Cadastro2.png)
+
+## Motivos
+
+![Motivos](../img/Balança%20-%20Motivos.png)
+
+![Cadastro de Motivo](../img/Balança%20-%20Motivos%20-%20cadastro.png)
+
+## Navegacao relacionada
+
+| Tipo | Pagina | Descricao |
+|------|--------|-----------|
+| Anterior | [Pesagem](./pesagem) | Dados de pesagem |
+
+
+=== equipamentos.md ===
+---
+sidebar_position: 5
+title: Equipamentos
+description: Cadastro e gestÃ£o dos equipamentos de trÃ¢nsito
+---
+
+# Equipamentos
+
+O cadastro de equipamentos Ã© o registro central de todos os dispositivos de fiscalizaÃ§Ã£o de trÃ¢nsito gerenciados pelo AxHub. Aqui sÃ£o registrados radares, cÃ¢meras OCR, lombadas eletrÃ´nicas e demais equipamentos.
+
+## Como acessar
+
+**Menu lateral** â†’ Equipamentos â†’ **Equipamentos**
+
+## Listagem
+
+![Tela de Equipamentos - Lista](../img/Equipamentos%20-%20Lista.png)
+
+### Colunas
+
+| Coluna | DescriÃ§Ã£o |
+|--------|-----------|
+| **NÂº SÃ©rie** | NÃºmero de sÃ©rie do equipamento |
+| **CÃ³digo** | CÃ³digo Ãºnico de identificaÃ§Ã£o do equipamento no sistema |
+| **Fabricante** | Fabricante do equipamento |
+| **Modelo** | Modelo do equipamento |
+| **Tipo** | Tipo do equipamento (OCR, Radar Fixo, Radar Misto, etc.) |
+| **Modo OperaÃ§Ã£o** | Modo de operaÃ§Ã£o: Fixo ou MÃ³vel |
+| **Desabilitado Limite Horas ImportaÃ§Ã£o** | Indica se o limite de horas de importaÃ§Ã£o estÃ¡ desabilitado (âœ“) |
+| **Grupo de Equipamentos** | Grupo ao qual o equipamento pertence |
+
+### Funcionalidades da listagem
+
+| AÃ§Ã£o | DescriÃ§Ã£o |
+|------|-----------|
+| **+ Novo** | Cadastrar um novo equipamento |
+| **Excel** | Exportar a lista para Excel |
+| **Pesquisa** | Buscar equipamentos por qualquer campo |
+| **Editar** | Editar o equipamento (Ã­cone lÃ¡pis) |
+| **Excluir** | Remover o equipamento (Ã­cone X) |
+
+## Cadastro
+
+![Tela de Equipamentos - Cadastro](../img/Equipamentos%20-%20Cadastro.png)
+
+### Campos
+
+| Campo | ObrigatÃ³rio | DescriÃ§Ã£o |
+|-------|:-----------:|-----------|
+| **NÂº SÃ©rie** | Sim | NÃºmero de sÃ©rie do equipamento fornecido pelo fabricante |
+| **CÃ³digo** | Sim | CÃ³digo Ãºnico de identificaÃ§Ã£o no sistema (ex: AX1, CONT001) |
+| **NÃºmero Certificado Inmetro** | Sim | NÃºmero do certificado de aferiÃ§Ã£o INMETRO vigente |
+| **EmissÃ£o Certificado Inmetro** | NÃ£o | Data de emissÃ£o do certificado INMETRO |
+| **Vencimento Certificado Inmetro** | NÃ£o | Data de vencimento do certificado INMETRO |
+| **Modelo** | Sim | Modelo do equipamento (seleÃ§Ã£o dos modelos cadastrados) |
+| **Tipo** | Sim | Tipo do equipamento (seleÃ§Ã£o dos tipos cadastrados) |
+| **Grupo** | Sim | Grupo de equipamentos ao qual pertence (seleÃ§Ã£o dos grupos cadastrados) |
+| **Tipo da OperaÃ§Ã£o** | NÃ£o | Modo de operaÃ§Ã£o: **Fixo** (instalaÃ§Ã£o permanente) ou **MÃ³vel** (operaÃ§Ãµes temporÃ¡rias) |
+| **Desabilitar Limite de Horas ImportaÃ§Ã£o** | NÃ£o | Se marcado, desabilita o controle de horas limite para importaÃ§Ã£o de dados deste equipamento |
+
+### Passo a passo â€” Cadastrar equipamento
+
+1. Na listagem, clique em **+ Novo**
+2. Preencha o **NÂº SÃ©rie** e o **CÃ³digo** do equipamento
+3. Informe o **NÃºmero Certificado Inmetro** e as datas de emissÃ£o/vencimento
+4. Selecione o **Modelo**, **Tipo** e **Grupo** nos campos dropdown
+5. Escolha o **Tipo da OperaÃ§Ã£o** (Fixo ou MÃ³vel)
+6. Clique em **Salvar**
+
+:::warning Certificado INMETRO
+O certificado INMETRO Ã© obrigatÃ³rio para que o equipamento tenha validade legal na geraÃ§Ã£o de infraÃ§Ãµes. Mantenha as datas de emissÃ£o e vencimento atualizadas para controle de prazos de aferiÃ§Ã£o.
+:::
+
+:::tip Hierarquia de cadastros
+Antes de cadastrar um equipamento, certifique-se de que o **Fabricante**, **Modelo**, **Tipo** e **Grupo** jÃ¡ estÃ£o cadastrados no sistema. A ordem recomendada de cadastro Ã©:
+1. Fabricantes
+2. Tipos de Equipamentos
+3. Modelos de Equipamentos
+4. Grupos de Equipamentos
+5. Equipamentos
+:::
+
+---
+
+## Navegacao Relacionada
+
+| Tipo | Pagina | Descricao |
+|------|--------|-----------|
+| Relacionado | [Fabricantes](./fabricantes) | Fabricante do equipamento |
+| Relacionado | [Tipos de Equipamentos](./tipos-equipamentos) | Classificacao |
+| Relacionado | [Modelos de Equipamentos](./modelos-equipamentos) | Modelo |
+| Relacionado | [Grupos de Equipamentos](./grupos-equipamentos) | Agrupamento |
+| Glossario | [Afericao](../glossario/afericao) | Certificado de afericao |
+
+
+=== fabricantes.md ===
+---
+sidebar_position: 1
+title: Fabricantes
+description: Cadastro de fabricantes de equipamentos de trÃ¢nsito
+---
+
+# Fabricantes
+
+O cadastro de fabricantes permite registrar as empresas que fabricam os equipamentos de trÃ¢nsito integrados ao AxHub. Cada fabricante possui credenciais de API para envio de dados ao sistema.
+
+## Como acessar
+
+**Menu lateral** â†’ Equipamentos â†’ **Fabricantes**
+
+## Listagem
+
+![Tela de Fabricantes - Lista](../img/Fabricantes%20-%20Lista.png)
+
+A tela de listagem exibe todos os fabricantes cadastrados no sistema.
+
+### Funcionalidades da listagem
+
+| AÃ§Ã£o | DescriÃ§Ã£o |
+|------|-----------|
+| **+ Novo** | Abre o formulÃ¡rio para cadastrar um novo fabricante |
+| **Excel** | Exporta a lista de fabricantes para planilha Excel |
+| **Pesquisa** | Filtra fabricantes pelo nome |
+| **Editar** (Ã­cone lÃ¡pis) | Abre o cadastro do fabricante para ediÃ§Ã£o |
+| **Excluir** (Ã­cone X) | Remove o fabricante do sistema |
+
+### Colunas
+
+| Coluna | DescriÃ§Ã£o |
+|--------|-----------|
+| **Nome** | Nome do fabricante (ordenÃ¡vel) |
+| **AÃ§Ãµes** | BotÃµes de editar e excluir |
+
+## Cadastro
+
+![Tela de Fabricantes - Cadastro](../img/Fabricantes%20-%20Cadastro.png)
+
+### Campos
+
+| Campo | ObrigatÃ³rio | DescriÃ§Ã£o |
+|-------|:-----------:|-----------|
+| **Nome** | Sim | Nome do fabricante |
+| **Slug** | Sim | Identificador Ãºnico em formato URL (ex: "axion"). Usado internamente para identificar o fabricante nas integraÃ§Ãµes |
+| **Agrupador Sequencial** | NÃ£o | CÃ³digo para agrupar sequenciais de infraÃ§Ãµes por fabricante |
+| **CÃ³digo do Fabricante** | NÃ£o | CÃ³digo externo do fabricante |
+| **Token** | â€” | Token de autenticaÃ§Ã£o gerado automaticamente. Usado pelo fabricante para enviar dados via API |
+| **Certificado** | NÃ£o | Certificado digital do fabricante para comunicaÃ§Ã£o segura |
+| **Imagem Criptografada** | NÃ£o | Indica se as imagens enviadas pelo fabricante sÃ£o criptografadas |
+
+### AÃ§Ãµes do formulÃ¡rio
+
+| BotÃ£o | DescriÃ§Ã£o |
+|-------|-----------|
+| **Voltar** (seta para esquerda) | Retorna Ã  listagem sem salvar |
+| **Salvar** | Grava o fabricante no sistema |
+| **Gerar Novo Token** | Gera um novo token de autenticaÃ§Ã£o para o fabricante |
+
+### Passo a passo â€” Cadastrar fabricante
+
+1. Na listagem, clique em **+ Novo**
+2. Preencha o **Nome** do fabricante
+3. Preencha o **Slug** (identificador Ãºnico, sem espaÃ§os ou caracteres especiais)
+4. Preencha os demais campos conforme necessÃ¡rio
+5. Clique em **Salvar**
+6. ApÃ³s salvar, clique em **Gerar Novo Token** para criar o token de API
+
+:::warning AtenÃ§Ã£o
+Ao clicar em **Gerar Novo Token**, o token anterior serÃ¡ invalidado. Certifique-se de comunicar o novo token ao fabricante, pois o envio de dados via API passarÃ¡ a exigir o novo token.
+:::
+
+:::info Token de API
+O token Ã© utilizado pelo fabricante para autenticar as chamadas de API ao AxHub. Sem um token vÃ¡lido, o fabricante nÃ£o conseguirÃ¡ enviar passagens e imagens ao sistema.
+:::
+
+---
+
+## Navegacao Relacionada
+
+| Tipo | Pagina | Descricao |
+|------|--------|-----------|
+| Relacionado | [Equipamentos](./equipamentos) | Equipamentos do fabricante |
+| Relacionado | [Modelos](./modelos-equipamentos) | Modelos do fabricante |
+
+
+=== grupos-equipamentos.md ===
+---
+sidebar_position: 4
+title: Grupos de Equipamentos
+description: Agrupamento lÃ³gico de equipamentos para organizaÃ§Ã£o e monitoramento
+---
+
+# Grupos de Equipamentos
+
+Os grupos de equipamentos permitem organizar logicamente os equipamentos por projeto, cliente, regiÃ£o ou qualquer critÃ©rio desejado. Cada grupo possui uma cor que o identifica no mapa do Dashboard.
+
+## Como acessar
+
+**Menu lateral** â†’ Equipamentos â†’ **Grupos de Equipamentos**
+
+## Listagem
+
+![Tela de Grupos de Equipamentos - Lista](../img/Grupos%20de%20Equipamentos%20-%20Lista.png)
+
+### Colunas
+
+| Coluna | DescriÃ§Ã£o |
+|--------|-----------|
+| **Nome** | Nome do grupo (ordenÃ¡vel) |
+| **Desabilitar Monitoramento** | Se ativado (âœ“), os equipamentos do grupo nÃ£o sÃ£o monitorados em tempo real |
+| **Desabilitado Limite Horas ImportaÃ§Ã£o** | Se ativado (âœ“), desabilita o controle de limite de horas para importaÃ§Ã£o de dados |
+| **Cor** | Cor do grupo exibida no mapa do Dashboard |
+| **AÃ§Ãµes** | BotÃµes de editar e excluir |
+
+## Cadastro
+
+![Tela de Grupos de Equipamentos - Cadastro](../img/Grupos%20de%20Equipamentos%20-%20Cadastro.png)
+
+### Campos
+
+| Campo | ObrigatÃ³rio | DescriÃ§Ã£o |
+|-------|:-----------:|-----------|
+| **Nome do Grupo de Equipamentos** | Sim | Nome identificador do grupo |
+| **Cor** | NÃ£o | Cor usada para representar o grupo no mapa do Dashboard. Selecione atravÃ©s do seletor de cores |
+| **Desabilitar Monitoramento** | NÃ£o | Se marcado, desabilita o monitoramento em tempo real dos equipamentos deste grupo |
+| **Desabilitar Limite de Horas ImportaÃ§Ã£o** | NÃ£o | Se marcado, desabilita o controle de horas limite para importaÃ§Ã£o de dados deste grupo |
+
+### Equipamentos do grupo
+
+A seÃ§Ã£o inferior exibe uma **tabela somente leitura** com todos os equipamentos que pertencem a este grupo:
+
+| Coluna | DescriÃ§Ã£o |
+|--------|-----------|
+| **CÃ³digo** | CÃ³digo do equipamento |
+| **Modelo do Equipamento** | Modelo do equipamento |
+| **Modo de OperaÃ§Ã£o** | Fixo ou MÃ³vel |
+| **Desabilitado Limite Horas ImportaÃ§Ã£o** | ConfiguraÃ§Ã£o individual do equipamento |
+
+### Passo a passo â€” Cadastrar grupo
+
+1. Na listagem, clique em **+ Novo**
+2. Informe o **Nome do Grupo de Equipamentos**
+3. Selecione uma **Cor** para identificaÃ§Ã£o visual no mapa
+4. Configure as opÃ§Ãµes de **monitoramento** e **limite de horas** conforme necessÃ¡rio
+5. Clique em **Salvar**
+
+:::info Vinculando equipamentos
+Os equipamentos sÃ£o vinculados ao grupo atravÃ©s do **cadastro do equipamento** (campo "Grupo"). A tabela de equipamentos nesta tela Ã© apenas para consulta.
+:::
+
+:::tip Cores no mapa
+Escolha cores distintas para cada grupo, facilitando a identificaÃ§Ã£o visual dos equipamentos no mapa do Dashboard. As mesmas cores sÃ£o exibidas na legenda do mapa.
+:::
+
+---
+
+## Navegacao Relacionada
+
+| Tipo | Pagina | Descricao |
+|------|--------|-----------|
+| Relacionado | [Equipamentos](./equipamentos) | Equipamentos do grupo |
+
+
+=== modelos-equipamentos.md ===
+---
+sidebar_position: 3
+title: Modelos de Equipamentos
+description: Cadastro dos modelos de equipamentos e portarias INMETRO
+---
+
+# Modelos de Equipamentos
+
+O cadastro de modelos de equipamentos registra os modelos especÃ­ficos de hardware com suas respectivas portarias INMETRO de homologaÃ§Ã£o.
+
+## Como acessar
+
+**Menu lateral** â†’ Equipamentos â†’ **Modelos de Equipamentos**
+
+## Listagem
+
+![Tela de Modelos de Equipamentos - Lista](../img/Modelos%20de%20Equipamentos%20-%20Lista.png)
+
+### Colunas
+
+| Coluna | DescriÃ§Ã£o |
+|--------|-----------|
+| **Marca** | Marca comercial do equipamento (ex: VELSIS, FOCALLE, PERKONS) |
+| **Modelo** | Modelo especÃ­fico (ex: F-DIP, VSIS-OCR, SmartPlu PRO) |
+| **NÃºmero Portaria** | NÃºmero da portaria INMETRO de homologaÃ§Ã£o |
+| **Portaria** | ReferÃªncia completa da portaria (ex: PORTARIA INMETRO/DIMEL NÂº 245/2022) |
+| **Fabricante** | Fabricante vinculado a este modelo |
+| **AÃ§Ãµes** | BotÃµes de editar e excluir |
+
+## Cadastro
+
+![Tela de Modelos de Equipamentos - Cadastro](../img/Modelos%20de%20Equipamentos%20-%20Cadastro.png)
+
+### Campos
+
+| Campo | ObrigatÃ³rio | DescriÃ§Ã£o |
+|-------|:-----------:|-----------|
+| **Marca** | Sim | Marca comercial do equipamento |
+| **Modelo** | Sim | Nome/cÃ³digo do modelo |
+| **NÃºmero da Portaria** | Sim | NÃºmero da portaria INMETRO que homologa este modelo |
+| **Portaria** | Sim | ReferÃªncia completa da portaria (ex: "PORTARIA INMETRO/DIMEL NÂº 245/2022") |
+| **Fabricante** | Sim | Fabricante do modelo (seleÃ§Ã£o a partir dos fabricantes cadastrados) |
+
+### Passo a passo â€” Cadastrar modelo
+
+1. Na listagem, clique em **+ Novo**
+2. Informe a **Marca** e o **Modelo** do equipamento
+3. Preencha o **NÃºmero da Portaria** e a **Portaria** completa do INMETRO
+4. Selecione o **Fabricante** no campo dropdown
+5. Clique em **Salvar**
+
+:::warning Importante
+A portaria INMETRO Ã© obrigatÃ³ria para a validade legal das infraÃ§Ãµes geradas pelo equipamento. Certifique-se de informar corretamente o nÃºmero e a referÃªncia completa da portaria de homologaÃ§Ã£o.
+:::
+
+:::tip Dica
+Um mesmo fabricante pode possuir mÃºltiplos modelos de equipamento. Cada modelo deve ser cadastrado individualmente com sua respectiva portaria INMETRO.
+:::
+
+---
+
+## Navegacao Relacionada
+
+| Tipo | Pagina | Descricao |
+|------|--------|-----------|
+| Relacionado | [Equipamentos](./equipamentos) | Equipamentos deste modelo |
+| Relacionado | [Fabricantes](./fabricantes) | Fabricante |
+| Relacionado | [Tipos](./tipos-equipamentos) | Tipo |
+
+
+=== tipos-equipamentos.md ===
+---
+sidebar_position: 2
+title: Tipos de Equipamentos
+description: Cadastro dos tipos de equipamentos de trÃ¢nsito
+---
+
+# Tipos de Equipamentos
+
+Os tipos de equipamentos classificam as categorias de dispositivos de fiscalizaÃ§Ã£o de trÃ¢nsito que o AxHub suporta. Para cada tipo, Ã© possÃ­vel configurar as formas de atuaÃ§Ã£o (quais infraÃ§Ãµes o tipo de equipamento pode detectar).
+
+## Como acessar
+
+**Menu lateral** â†’ Equipamentos â†’ **Tipos de Equipamentos**
+
+## Listagem
+
+![Tela de Tipos de Equipamentos - Lista](../img/Tipos%20de%20Equipamentos%20-%20Lista.png)
+
+### Tipos padrÃ£o do sistema
+
+| Tipo | DescriÃ§Ã£o |
+|------|-----------|
+| **LOMBADA ELETRÃ”NICA** | Dispositivo de fiscalizaÃ§Ã£o de velocidade integrado ao pavimento |
+| **OCR** | CÃ¢mera de reconhecimento Ã³ptico de caracteres (leitura de placas) |
+| **RADAR FIXO** | Radar de velocidade instalado em posiÃ§Ã£o fixa |
+| **RADAR MISTO** | Radar combinado que detecta mÃºltiplos tipos de infraÃ§Ã£o (velocidade, avanÃ§o de sinal, etc.) |
+| **RADAR PORTÃTIL** | Radar de velocidade mÃ³vel/portÃ¡til para operaÃ§Ãµes temporÃ¡rias |
+
+### Colunas
+
+| Coluna | DescriÃ§Ã£o |
+|--------|-----------|
+| **Nome** | Nome do tipo de equipamento (ordenÃ¡vel) |
+| **Desabilitar Monitoramento** | Indica se o monitoramento em tempo real estÃ¡ desabilitado para este tipo |
+| **AÃ§Ãµes** | BotÃµes de editar e excluir |
+
+## Cadastro
+
+![Tela de Tipos de Equipamentos - Cadastro](../img/Tipos%20de%20Equipamentos%20-%20Cadastro.png)
+
+### Campos
+
+| Campo | ObrigatÃ³rio | DescriÃ§Ã£o |
+|-------|:-----------:|-----------|
+| **Nome** | Sim | Nome do tipo de equipamento |
+| **Desabilitar Monitoramento** | NÃ£o | Se marcado, equipamentos deste tipo nÃ£o aparecerÃ£o no monitoramento em tempo real |
+| **Selecione Ã­cone** | NÃ£o | Ãcone visual para representar este tipo no mapa e nas listagens. Arraste um arquivo de imagem ou clique para selecionar |
+
+### Forma de AtuaÃ§Ã£o
+
+A seÃ§Ã£o **Forma de AtuaÃ§Ã£o** define quais tipos de infraÃ§Ã£o o equipamento pode detectar e como ele atua:
+
+| Coluna | DescriÃ§Ã£o |
+|--------|-----------|
+| **Tipo InfraÃ§Ã£o** | Tipo de infraÃ§Ã£o que o equipamento detecta (ex: velocidade, avanÃ§o de sinal) |
+| **Forma AtuaÃ§Ã£o** | Modo de fiscalizaÃ§Ã£o (ex: fixo, mÃ³vel, portÃ¡til) |
+| **AÃ§Ãµes** | BotÃµes para editar ou remover a forma de atuaÃ§Ã£o |
+
+Para adicionar uma nova forma de atuaÃ§Ã£o, clique em **Nova Forma de AtuaÃ§Ã£o**.
+
+### Passo a passo â€” Cadastrar tipo de equipamento
+
+1. Na listagem, clique em **+ Novo**
+2. Informe o **Nome** do tipo
+3. Opcionalmente, envie um **Ã­cone** para representaÃ§Ã£o visual
+4. Clique em **Nova Forma de AtuaÃ§Ã£o** para vincular os tipos de infraÃ§Ã£o que este equipamento detecta
+5. Clique em **Salvar**
+
+:::info Formas de AtuaÃ§Ã£o
+A configuraÃ§Ã£o das formas de atuaÃ§Ã£o Ã© essencial para que o sistema saiba quais enquadramentos legais (artigos do CTB) podem ser aplicados por cada tipo de equipamento. Sem esta configuraÃ§Ã£o, o equipamento nÃ£o gerarÃ¡ infraÃ§Ãµes automaticamente.
+:::
+
+## Termos Tecnicos
+
+| Termo | Definicao |
+|-------|-----------|
+| [Enquadramento](../glossario/enquadramento) | Ver definicao no glossario |
+
+---
+
+## Navegacao Relacionada
+
+| Tipo | Pagina | Descricao |
+|------|--------|-----------|
+| Relacionado | [Equipamentos](./equipamentos) | Equipamentos deste tipo |
+| Relacionado | [Modelos](./modelos-equipamentos) | Modelos deste tipo |
+
+
+=== acessos-por-ip.md ===
+---
+sidebar_position: 4
+title: Acessos por IP
+description: RestriÃ§Ã£o de acesso por endereÃ§o IP
+---
+
+# Acessos por IP
+
+Permite configurar restriÃ§Ãµes de acesso ao sistema com base no endereÃ§o IP do usuÃ¡rio.
+
+![Acessos por IP](../img/Controle%20de%20acessos%20-%20acessos%20por%20ip.png)
+
+## Como acessar
+
+**Menu lateral** â†’ Controle de Acesso â†’ **Acessos por IP**
+
+| Campo | DescriÃ§Ã£o |
+|-------|-----------|
+| **EndereÃ§o IP** | IP permitido ou bloqueado |
+| **Tipo** | Permitir ou Bloquear |
+| **UsuÃ¡rio** | UsuÃ¡rio vinculado Ã  regra (opcional) |
+| **ObservaÃ§Ã£o** | Justificativa da restriÃ§Ã£o |
+
+:::warning AtenÃ§Ã£o
+ConfiguraÃ§Ãµes incorretas de IP podem bloquear o acesso de usuÃ¡rios legÃ­timos. Teste antes de aplicar em produÃ§Ã£o.
+:::
+
+---
+
+## Navegacao Relacionada
+
+| Tipo | Pagina | Descricao |
+|------|--------|-----------|
+| Relacionado | [Usuarios](./usuarios) | Usuarios restritos |
+| Relacionado | [Logs de Acesso](./logs-acesso) | Verificar acessos |
+
+
+=== logs-acesso.md ===
+---
+sidebar_position: 5
+title: Logs de Acesso
+description: Registro de acessos e aÃ§Ãµes dos usuÃ¡rios
+---
+
+# Logs de Acesso
+
+Exibe o histÃ³rico de acessos ao sistema com detalhes de data, hora, usuÃ¡rio e aÃ§Ãµes realizadas.
+
+![Logs de Acesso](../img/Controle%20de%20acessos%20-%20logs%20de%20acesso.png)
+
+## Como acessar
+
+**Menu lateral** â†’ Controle de Acesso â†’ **Logs de Acesso**
+
+| Coluna | DescriÃ§Ã£o |
+|--------|-----------|
+| **Data/Hora** | Momento do acesso |
+| **UsuÃ¡rio** | Quem realizou o acesso |
+| **IP** | EndereÃ§o IP de origem |
+| **AÃ§Ã£o** | Tipo de operaÃ§Ã£o (login, logout, alteraÃ§Ã£o, etc.) |
+| **MÃ³dulo** | SeÃ§Ã£o do sistema acessada |
+
+---
+
+## Navegacao Relacionada
+
+| Tipo | Pagina | Descricao |
+|------|--------|-----------|
+| Relacionado | [Usuarios](./usuarios) | Usuario que gerou o log |
+| Relacionado | [Acessos por IP](./acessos-por-ip) | IP do acesso |
+
+
+=== perfis-acesso.md ===
+---
+sidebar_position: 2
+title: Perfis de Acesso
+description: ConfiguraÃ§Ã£o de perfis de acesso ao sistema
+---
+
+# Perfis de Acesso
+
+Permite criar e gerenciar perfis que agrupam permissÃµes de acesso ao sistema.
+
+![Lista de Perfis](../img/Controle%20de%20acessos%20-%20Perfil%20de%20acesso.png)
+
+## Como acessar
+
+**Menu lateral** â†’ Controle de Acesso â†’ **Perfis de Acesso**
+
+## Cadastro de perfil
+
+![Cadastro de Perfil](../img/Controle%20de%20acessos%20-%20Perfil%20de%20acesso.-%20cadastro.png)
+
+| Campo | DescriÃ§Ã£o |
+|-------|-----------|
+| **Nome do Perfil** | IdentificaÃ§Ã£o do perfil (ex: Administrador, Analista, Auditor) |
+| **DescriÃ§Ã£o** | Detalhamento das responsabilidades do perfil |
+| **PermissÃµes** | Lista de mÃ³dulos e funcionalidades acessÃ­veis |
+
+---
+
+## Navegacao Relacionada
+
+| Tipo | Pagina | Descricao |
+|------|--------|-----------|
+| Relacionado | [Usuarios](./usuarios) | Usuarios com este perfil |
+| Relacionado | [Permissoes](./permissoes) | Permissoes do perfil |
+
+
+=== permissoes.md ===
+---
+sidebar_position: 3
+title: PermissÃµes de Acesso
+description: ConfiguraÃ§Ã£o granular de permissÃµes por perfil
+---
+
+# PermissÃµes de Acesso
+
+Permite configurar permissÃµes detalhadas para cada perfil de acesso.
+
+![PermissÃµes de Acesso](../img/Controle%20de%20acessos%20-%20permissao%20de%20acesso.png)
+
+## Como acessar
+
+**Menu lateral** â†’ Controle de Acesso â†’ **PermissÃµes de Acesso**
+
+| Coluna | DescriÃ§Ã£o |
+|--------|-----------|
+| **MÃ³dulo** | SeÃ§Ã£o do sistema (InfraÃ§Ãµes, OperaÃ§Ãµes, etc.) |
+| **Visualizar** | PermissÃ£o para consultar dados |
+| **Criar** | PermissÃ£o para inserir novos registros |
+| **Editar** | PermissÃ£o para alterar registros existentes |
+| **Excluir** | PermissÃ£o para remover registros |
+
+---
+
+## Navegacao Relacionada
+
+| Tipo | Pagina | Descricao |
+|------|--------|-----------|
+| Relacionado | [Perfis de Acesso](./perfis-acesso) | Perfis que usam estas permissoes |
+| Relacionado | [Usuarios](./usuarios) | Usuarios afetados |
+
+
+=== usuarios.md ===
+---
+sidebar_position: 1
+title: UsuÃ¡rios
+description: Cadastro e gestÃ£o de usuÃ¡rios do sistema
+---
+
+# UsuÃ¡rios
+
+Permite cadastrar e gerenciar os usuÃ¡rios que terÃ£o acesso ao sistema AxHub.
+
+![Lista de UsuÃ¡rios](../img/Controle%20de%20acessos%20-%20usuario.png)
+
+## Como acessar
+
+**Menu lateral** â†’ Controle de Acesso â†’ **UsuÃ¡rios**
+
+## Cadastro de usuÃ¡rio
+
+![Cadastro de UsuÃ¡rio](../img/Controle%20de%20acessos%20-%20usuario%20-%20cadastro.png)
+
+| Campo | DescriÃ§Ã£o |
+|-------|-----------|
+| **Nome** | Nome completo do usuÃ¡rio |
+| **Login** | Nome de acesso ao sistema |
+| **E-mail** | E-mail para recuperaÃ§Ã£o de senha e notificaÃ§Ãµes |
+| **Perfil de Acesso** | Perfil de permissÃµes atribuÃ­do ao usuÃ¡rio |
+| **Ativo** | Define se o usuÃ¡rio pode acessar o sistema |
+
+:::info SeguranÃ§a
+Recomenda-se revisar periodicamente os usuÃ¡rios cadastrados e desativar contas que nÃ£o estejam mais em uso.
+:::
+
+---
+
+## Navegacao Relacionada
+
+| Tipo | Pagina | Descricao |
+|------|--------|-----------|
+| Relacionado | [Perfis de Acesso](./perfis-acesso) | Perfil do usuario |
+| Relacionado | [Permissoes](./permissoes) | Permissoes atribuidas |
+| Relacionado | [Logs de Acesso](./logs-acesso) | Historico do usuario |
+| Relacionado | [Acessos por IP](./acessos-por-ip) | Restricoes de IP |
+
+
+=== consulta.md ===
+---
+sidebar_position: 2
+title: Consulta
+description: Consulta de registros de cronotacÃ³grafo
+---
+
+# Consulta de CronotacÃ³grafo
+
+Permite consultar o histÃ³rico de registros de cronotacÃ³grafo processados pelo sistema.
+
+![HistÃ³rico CronotacÃ³grafo](../img/CronotacÃ³grafo%20-%20Triagem%20-%20historico.png)
+
+## Como acessar
+
+**Menu lateral** â†’ CronotacÃ³grafo â†’ **Consulta**
+
+| Filtro | DescriÃ§Ã£o |
+|--------|-----------|
+| **PerÃ­odo** | Faixa de datas |
+| **Placa** | Filtrar por placa do veÃ­culo |
+| **Equipamento** | Filtrar por equipamento |
+| **Status** | Processado, Pendente, Descartado |
+
+| Coluna do Resultado | DescriÃ§Ã£o |
+|---------------------|-----------|
+| **Data/Hora** | Momento do registro |
+| **Placa** | Placa do veÃ­culo |
+| **Equipamento** | Equipamento que registrou |
+| **Velocidade** | Velocidade registrada |
+| **Status** | Resultado do processamento |
+
+---
+
+## Navegacao Relacionada
+
+| Tipo | Pagina | Descricao |
+|------|--------|-----------|
+| Anterior | [Triagem](./triagem) | Processo de triagem |
+| Glossario | [Cronotacografo](../glossario/cronotacografo) | Definicao tecnica |
+
+
+=== triagem.md ===
+---
+sidebar_position: 1
+title: Triagem
+description: Triagem de infraÃ§Ãµes de cronotacÃ³grafo
+---
+
+# Triagem â€” CronotacÃ³grafo
+
+A tela de Triagem do CronotacÃ³grafo permite que os analistas revisem as infraÃ§Ãµes de excesso de jornada e outras violaÃ§Ãµes detectadas nos registros de cronotacÃ³grafo dos veÃ­culos pesados.
+
+![HistÃ³rico de Triagem do CronotacÃ³grafo](../img/cronotacografo-triagem-historico.png)
+
+## Como acessar
+
+**Menu lateral** â†’ CronotacÃ³grafo â†’ **Triagem**
+
+## Fluxo de triagem do cronotacÃ³grafo
+
+A triagem do cronotacÃ³grafo Ã© paralela Ã  triagem de infraÃ§Ãµes convencionais, porÃ©m com uma etapa adicional: a **consulta ao sistema de registros de cronotacÃ³grafo** antes de confirmar a infraÃ§Ã£o.
+
+## Dados da triagem â€” `TBTriagensCronotacografos`
+
+A triagem do cronotacÃ³grafo usa o mesmo Id da passagem (`TBPassagensCronotacografos.Id`):
+
+| Campo | Tipo | DescriÃ§Ã£o |
+|-------|------|-----------|
+| **Id** | = PassagemCronotacografo_id | Identity shared com a passagem |
+| **Motivo Descarte** | FK | Motivo de descarte aplicado na triagem |
+| **UsuÃ¡rio** | FK | UsuÃ¡rio responsÃ¡vel pela triagem |
+| **UsuÃ¡rio Triagem** | FK | Analista que fez a triagem manual |
+| **UsuÃ¡rio Auditoria** | FK | Auditor que validou a triagem |
+| **Status Consulta CronotacÃ³grafo** | varchar(15) | Estado da consulta ao banco externo: `Pendente`, `Consultado`, `Erro`, `NaoAplicavel` |
+
+## Dados verificados na consult â€” `TBDadosCronotacografos`
+
+| Campo | Tipo | DescriÃ§Ã£o |
+|-------|------|-----------|
+| **Data Documento** | date | Data do documento de registro |
+| **Data Vencimento** | date | Vencimento do certificado do cronotacÃ³grafo |
+| **Tipo Certificado** | varchar(50) | Tipo do dispositivo/certificado |
+| **NÃºmero Certificado** | varchar(50) | NÃºmero do certificado |
+| **DescriÃ§Ã£o Certificado** | varchar(100) | DescriÃ§Ã£o do certificado |
+| **Status CronotacÃ³grafo** | varchar(50) | Resultado da verificaÃ§Ã£o: `Regular`, `Irregular`, `Vencido`, `NaoEncontrado` |
+
+## IntegraÃ§Ãµes
+
+| Tabela | Relacionamento | DescriÃ§Ã£o |
+|--------|---------------|-----------|
+| `TBPassagensCronotacografos` | 1:1 | Passagem que originou a triagem |
+| `TBDadosCronotacografos` | `PassagemCronotacografo_id` | Dados do certificado verificado |
+| `TBMotivosDescartes` | `MotivoDescarte_id` | Motivo de descarte da triagem |
+| `TBInfracoes` | `Infracao_id` | InfraÃ§Ã£o gerada quando o cronotacÃ³grafo estÃ¡ irregular |
+
+## Termos Tecnicos
+
+| Termo | Definicao |
+|-------|-----------|
+| [Cronotacografo](../glossario/cronotacografo) | Ver definicao no glossario |
+| [Triagem](../glossario/triagem) | Ver definicao no glossario |
+
+---
+
+## Navegacao Relacionada
+
+| Tipo | Pagina | Descricao |
+|------|--------|-----------|
+| Proximo | [Consulta](./consulta) | Consultar registros processados |
+| Glossario | [Cronotacografo](../glossario/cronotacografo) | Definicao tecnica e base legal |
+
+
+=== afericao.md ===
+---
+title: "Afericao"
+sidebar_position: 3
+description: "Definicao tecnica de Afericao com base no CTB e INMETRO"
+---
+
+# Afericao
+
+## Definicao
+
+Procedimento tecnico de verificacao metrologica que atesta a conformidade de um instrumento de medicao (radar, balanca, etc.) com os padroes estabelecidos pelo INMETRO.
+
+## Base Legal
+
+Resolucao CONTRAN 798/2021 e Portaria INMETRO 544/2014. Todo equipamento metrologico deve possuir certificado de afericao valido para que as infracoes registradas tenham validade juridica. O prazo de validade varia conforme o tipo de equipamento (geralmente 12 meses).
+
+## Uso no Sistema AxHub
+
+No modulo **Operacoes - Afericoes**, o sistema controla os certificados de afericao de cada equipamento. O **Dashboard** exibe alertas automaticos quando uma afericao esta proxima do vencimento. Infracoes capturadas por equipamentos com afericao vencida sao automaticamente invalidadas.
+
+## Paginas Relacionadas
+
+- [Afericoes (Operacoes)](../operacoes/afericoes)
+- [Tipos de Afericoes](../administracao/tipos-afericoes)
+- [Dashboard](../primeiros-passos/dashboard)
+- [Equipamentos](../cadastros-basicos/equipamentos)
+
+
+=== autuacao.md ===
+---
+title: "Autuacao"
+sidebar_position: 4
+description: "Definicao tecnica de Autuacao com base no CTB"
+---
+
+# Autuacao
+
+## Definicao
+
+Ato administrativo pelo qual o agente de transito ou equipamento eletronico registra formalmente a ocorrencia de uma infracao. A autuacao gera o Auto de Infracao de Transito (AIT).
+
+## Base Legal
+
+Art. 280 do CTB: Ocorrendo infracao prevista na legislacao de transito, lavrar-se-a auto de infracao. A Resolucao CONTRAN 619/2016 regulamenta o uso de equipamentos eletronicos para autuacao automatica.
+
+## Uso no Sistema AxHub
+
+No AxHub, a autuacao ocorre ao final do fluxo de triagem, quando o operador confirma a validade da infracao. O sistema gera o registro no formato exigido pelo orgao autuador. As **Formas de Autuacao** sao configuradas em Administracao.
+
+## Paginas Relacionadas
+
+- [Formas de Autuacao](../administracao/formas-autuacao)
+- [Triagem de Infracoes](../infracoes/triagem)
+- [Exportacao](../infracoes/exportacao)
+- [Infracao](./infracao)
+
+
+=== cronotacografo.md ===
+---
+title: "Cronotacografo"
+sidebar_position: 5
+description: "Definicao tecnica de Cronotacografo com base no CTB"
+---
+
+# Cronotacografo
+
+## Definicao
+
+Instrumento de controle de tempo de direcao, parada e velocidade, obrigatorio em veiculos de transporte e conducao escolar, alem de veiculos de carga com PBT superior a 4.536 kg.
+
+## Base Legal
+
+Art. 105, II do CTB e Resolucao CONTRAN 92/1999. A obrigatoriedade e regulamentada pela Resolucao CONTRAN 87/1998. O INMETRO define os requisitos tecnicos atraves da Portaria 201/2004.
+
+## Uso no Sistema AxHub
+
+O modulo **Cronotacografo** do AxHub permite a triagem e consulta de registros capturados pelos equipamentos de fiscalizacao.
+
+## Paginas Relacionadas
+
+- [Triagem de Cronotacografo](../cronotacografo/triagem)
+- [Consulta de Cronotacografo](../cronotacografo/consulta)
+
+
+=== enquadramento.md ===
+---
+title: "Enquadramento"
+sidebar_position: 1
+description: "Definicao tecnica de Enquadramento com base no CTB"
+---
+
+# Enquadramento
+
+## Definicao
+
+Classificacao legal atribuida a uma infracao de transito. O enquadramento determina o artigo, inciso e penalidade aplicaveis conforme a legislacao vigente.
+
+## Base Legal
+
+Art. 161 e Anexo I do Codigo de Transito Brasileiro (Lei 9.503/1997). Cada infracao possui um codigo de enquadramento definido pelo CONTRAN atraves da Resolucao 619/2016.
+
+## Uso no Sistema AxHub
+
+Na **Triagem**, o operador valida ou altera o enquadramento sugerido automaticamente pelo sistema. Na **Configuracao de Enquadramentos**, o administrador define quais enquadramentos estao ativos para cada tipo de equipamento.
+
+## Paginas Relacionadas
+
+- [Triagem de Infracoes](../infracoes/triagem)
+- [Configuracao de Enquadramentos](../administracao/configuracoes-enquadramento)
+- [Formas de Autuacao](../administracao/formas-autuacao)
+- [Enquadramentos](../administracao/enquadramentos)
+
+
+=== infracao.md ===
+---
+title: "Infracao de Transito"
+sidebar_position: 2
+description: "Definicao tecnica de Infracao com base no CTB"
+---
+
+# Infracao de Transito
+
+## Definicao
+
+Ato de inobservancia a qualquer preceito da legislacao de transito, as normas emanadas do Codigo de Transito Brasileiro, do CONTRAN e dos orgaos executivos de transito.
+
+## Base Legal
+
+Art. 161 do CTB (Lei 9.503/1997): Constitui infracao de transito a inobservancia de qualquer preceito deste Codigo, da legislacao complementar ou das resolucoes do CONTRAN. As infracoes sao classificadas em: leve, media, grave e gravissima (Art. 258 CTB).
+
+## Uso no Sistema AxHub
+
+O sistema AxHub captura automaticamente evidencias de infracoes atraves de equipamentos metrologicos (radares, cameras OCR, balancas). Cada registro passa pelo fluxo: **Captura - Triagem - Auditoria - Exportacao**.
+
+## Paginas Relacionadas
+
+- [Triagem de Infracoes](../infracoes/triagem)
+- [Consulta de Infracoes](../infracoes/consulta-infracoes)
+- [Infracoes Descartadas](../infracoes/infracoes-descartadas)
+- [Enquadramento](./enquadramento)
+
+
+=== lote-exportacao.md ===
+---
+title: "Lote de Exportacao"
+sidebar_position: 6
+description: "Definicao tecnica de Lote de Exportacao"
+---
+
+# Lote de Exportacao
+
+## Definicao
+
+Conjunto agrupado de infracoes processadas e validadas, formatado para envio ao orgao autuador (DETRAN, DER, Prefeitura) atraves de integracao sistemica.
+
+## Base Legal
+
+Resolucao CONTRAN 619/2016, que define o formato e conteudo obrigatorio dos registros de infracao para integracao entre sistemas.
+
+## Uso no Sistema AxHub
+
+No modulo **Infracoes - Exportacao**, o sistema agrupa as infracoes auditadas em lotes conforme o layout definido em **Administracao - Layouts de Arquivos**. Os sequenciais sao controlados em **Sequenciais de Lote de Exportacao**.
+
+## Paginas Relacionadas
+
+- [Exportacao](../infracoes/exportacao)
+- [Layouts de Arquivos](../administracao/layouts-arquivos)
+- [Sequenciais de Lote](../administracao/sequenciais-lote-exportacao)
+
+
+=== medicao-desempenho.md ===
+---
+title: "Medicao de Desempenho"
+sidebar_position: 7
+description: "Definicao tecnica de Medicao de Desempenho"
+---
+
+# Medicao de Desempenho
+
+## Definicao
+
+Processo de mensuracao da performance operacional dos equipamentos de fiscalizacao, baseado em indicadores como disponibilidade, tempo de resposta e volume de registros validos.
+
+## Base Legal
+
+Definida em contratos de concessao e PPPs com base na Lei 11.079/2004. Os indices de performance sao estabelecidos contratualmente entre o orgao publico e a empresa operadora.
+
+## Uso no Sistema AxHub
+
+O modulo **Medicao** controla contratos, indices de performance, recursos alocados e interrupcoes operacionais. Permite gerar medicoes que comprovam o cumprimento dos SLAs contratuais.
+
+## Paginas Relacionadas
+
+- [Contratos](../medicoes/contratos)
+- [Indices de Performance](../medicoes/indices-performance)
+- [Interrupcoes](../medicoes/interrupcoes)
+- [Criar Medicao](../medicoes/criar-medicao)
+
+
+=== triagem.md ===
+---
+title: "Triagem"
+sidebar_position: 8
+description: "Definicao tecnica do processo de Triagem"
+---
+
+# Triagem
+
+## Definicao
+
+Processo de analise preliminar das infracoes capturadas automaticamente, onde o operador valida a qualidade da evidencia, confirma os dados do veiculo e define o enquadramento aplicavel.
+
+## Base Legal
+
+Resolucao CONTRAN 619/2016, Art. 8: toda infracao registrada por equipamento eletronico deve ser submetida a verificacao antes da lavratura do auto. O operador deve confirmar: legibilidade da placa, compatibilidade do veiculo e adequacao do enquadramento.
+
+## Uso no Sistema AxHub
+
+Acessivel em **Infracoes - Triagem**. E a etapa central do fluxo operacional. O operador analisa a imagem, valida os dados (placa, velocidade, faixa), define o enquadramento e encaminha para auditoria ou descarta com motivo justificado.
+
+## Paginas Relacionadas
+
+- [Triagem de Infracoes](../infracoes/triagem)
+- [Excecoes](../infracoes/excecoes)
+- [Auditoria](../infracoes/auditoria)
+- [Motivos de Descarte](../administracao/motivos-descartes)
+- [Enquadramento](./enquadramento)
+
+
+=== auditoria.md ===
+---
+sidebar_position: 2
+title: Auditoria
+description: Auditoria de infraÃ§Ãµes validadas e descartadas na triagem
+---
+
+# Auditoria
+
+A tela de Auditoria permite que auditores revisem as infraÃ§Ãµes que foram validadas ou descartadas na etapa de triagem, garantindo a qualidade do processo antes da exportaÃ§Ã£o para os Ã³rgÃ£os autuadores.
+
+![Tela de Auditoria](../img/triagem-auditoria.png)
+
+## Como acessar
+
+**Menu lateral** â†’ InfraÃ§Ãµes â†’ **Auditoria**
+
+## Tipos de auditoria
+
+| Tipo | DescriÃ§Ã£o |
+|------|-----------|
+| **Auditoria de VÃ¡lidas** | Revisar infraÃ§Ãµes aprovadas pelo analista na triagem |
+| **Auditoria de Descartadas** | Revisar infraÃ§Ãµes descartadas pelo analista na triagem |
+
+## Filtros avanÃ§ados
+
+![Filtro de Auditoria](../img/triagem-filtro-auditoria.png)
+
+| Filtro | DescriÃ§Ã£o |
+|--------|-----------|
+| **Faixa de data** | PerÃ­odo a ser auditado |
+| **Equipamento** | Auditar equipamento especÃ­fico |
+| **Tipo de infraÃ§Ã£o** | Velocidade, sinal, faixa exclusiva, etc. |
+| **Analista responsÃ¡vel** | Auditar trabalho de analista especÃ­fico |
+| **Amostragem (%)** | Percentual de infraÃ§Ãµes a auditar (ex: 10%, 25%, 100%) |
+
+## Fluxo de trabalho
+
+1. O sistema apresenta a infraÃ§Ã£o com todas as imagens e dados da triagem
+2. O auditor analisa e decide:
+   - âœ… **Confirma** â€” infraÃ§Ã£o correta, segue para exportaÃ§Ã£o
+   - âŒ **Rejeita** â€” devolve para triagem com observaÃ§Ã£o
+   - ðŸ“ **Adiciona observaÃ§Ãµes** â€” registra comentÃ¡rios sem alterar o status
+3. O contador de tempo controla a produtividade (configurado em **ConfiguraÃ§Ãµes do Sistema â†’ aba Triagem**)
+4. O status Ã© atualizado automaticamente apÃ³s cada decisÃ£o
+
+:::warning Impacto nas mÃ©tricas
+As decisÃµes de auditoria alimentam os relatÃ³rios de qualidade e produtividade. RejeiÃ§Ãµes freqÃ¼entes do mesmo analista devem ser investigadas.
+:::
+
+## Termos Tecnicos
+
+| Termo | Definicao |
+|-------|-----------|
+| [Triagem](../glossario/triagem) | Ver definicao no glossario |
+
+---
+
+## Navegacao Relacionada
+
+| Tipo | Pagina | Descricao |
+|------|--------|-----------|
+| Etapa anterior | [Triagem](./triagem) | Validacao inicial das infracoes |
+| Proxima etapa | [Exportacao](./exportacao) | Gerar lote para envio ao orgao |
+| Consulta | [Consulta de Infracoes](./consulta-infracoes) | Buscar infracoes |
+| Glossario | [Autuacao](../glossario/autuacao) | Ato administrativo de registro |
+| Glossario | [Infracao](../glossario/infracao) | Definicao tecnica |
+
+
+=== consulta-infracoes.md ===
+---
+sidebar_position: 5
+title: Consulta de InfraÃ§Ãµes
+description: Consultar infraÃ§Ãµes processadas no sistema
+---
+
+# Consulta de InfraÃ§Ãµes
+
+A tela de consulta de infraÃ§Ãµes permite pesquisar e visualizar todas as infraÃ§Ãµes registradas no sistema, com filtros por perÃ­odo, equipamento, status e outros critÃ©rios.
+
+![Tela de Consulta de InfraÃ§Ãµes](../img/triagem-consultar-infracoes.png)
+
+## Como acessar
+
+**Menu lateral** â†’ InfraÃ§Ãµes â†’ **Consulta**
+
+## Funcionalidades
+
+- Consultar infraÃ§Ãµes por perÃ­odo, equipamento, faixa e status
+- Visualizar detalhes da infraÃ§Ã£o (imagens, dados do veÃ­culo, enquadramento)
+- Acompanhar status do processamento
+- Exportar resultados para Excel
+
+## Filtros disponÃ­veis
+
+| Filtro | DescriÃ§Ã£o |
+|--------|-----------|
+| **PerÃ­odo** | Data inicial e final de detecÃ§Ã£o da infraÃ§Ã£o |
+| **Equipamento** | Filtrar por ponto de fiscalizaÃ§Ã£o |
+| **Placa** | Busca por placa exata ou parcial |
+| **Status** | Aguardando Triagem, VÃ¡lida, Descartada, Exportada, etc. |
+| **OperaÃ§Ã£o** | Velocidade, sinal, faixa exclusiva, etc. |
+| **UsuÃ¡rio** | Analista ou auditor responsÃ¡vel |
+
+## Status das infraÃ§Ãµes
+
+| Status | DescriÃ§Ã£o |
+|--------|-----------|
+| **Aguardando Triagem** | InfraÃ§Ã£o aguardando anÃ¡lise do triador |
+| **Em Triagem** | InfraÃ§Ã£o sendo analisada |
+| **VÃ¡lida** | InfraÃ§Ã£o aprovada na triagem |
+| **Descartada** | InfraÃ§Ã£o descartada na triagem |
+| **Auditoria** | InfraÃ§Ã£o em processo de auditoria |
+| **Exportada** | InfraÃ§Ã£o enviada ao Ã³rgÃ£o autuador |
+
+## Resultado da consulta
+
+![Resultado da Consulta de InfraÃ§Ãµes](../img/triagem-consultar-resultado.png)
+
+ApÃ³s aplicar os filtros e clicar em **Pesquisar**, a grade de resultados exibe cada infraÃ§Ã£o com:
+
+| Coluna | DescriÃ§Ã£o |
+|--------|-----------|
+| **Data/Hora** | Momento em que a infraÃ§Ã£o foi detectada |
+| **Equipamento** | CÃ³digo do equipamento que registrou a infraÃ§Ã£o |
+| **Placa** | Placa do veÃ­culo infrator (lida por OCR) |
+| **Velocidade Medida / Permitida** | Velocidade no momento vs. limite da via |
+| **Enquadramento** | Artigo do CTB que ampara a infraÃ§Ã£o |
+| **Status** | SituaÃ§Ã£o atual no fluxo de processamento |
+| **Analista** | ResponsÃ¡vel pela triagem |
+| **Auditor** | ResponsÃ¡vel pela auditoria |
+
+Clique em qualquer linha para abrir os detalhes completos da infraÃ§Ã£o, incluindo as imagens capturadas.
+
+## Termos Tecnicos
+
+| Termo | Definicao |
+|-------|-----------|
+| [Enquadramento](../glossario/enquadramento) | Ver definicao no glossario |
+| [Infracao de Transito](../glossario/infracao) | Ver definicao no glossario |
+| [Triagem](../glossario/triagem) | Ver definicao no glossario |
+
+---
+
+## Navegacao Relacionada
+
+| Tipo | Pagina | Descricao |
+|------|--------|-----------|
+| Fluxo | [Triagem](./triagem) | Etapa inicial do fluxo |
+| Fluxo | [Auditoria](./auditoria) | Etapa de revisao |
+| Fluxo | [Exportacao](./exportacao) | Etapa de envio |
+| Fluxo | [Infracoes Descartadas](./infracoes-descartadas) | Registros descartados |
+| Glossario | [Infracao](../glossario/infracao) | Definicao tecnica |
+
+
+=== excecoes.md ===
+---
+sidebar_position: 3
+title: ExceÃ§Ãµes
+description: Gerenciamento de regras de exceÃ§Ã£o para infraÃ§Ãµes
+---
+
+# ExceÃ§Ãµes
+
+A tela de ExceÃ§Ãµes permite configurar regras que isentam determinados veÃ­culos ou situaÃ§Ãµes do auto de infraÃ§Ã£o. ExceÃ§Ãµes sÃ£o aplicadas automaticamente durante o processamento.
+
+![Tela de ExceÃ§Ãµes](../img/triagem-excecoes.png)
+
+## Como acessar
+
+**Menu lateral** â†’ InfraÃ§Ãµes â†’ **ExceÃ§Ãµes**
+
+## Tipos de filtro
+
+| Filtro | DescriÃ§Ã£o |
+|--------|-----------|
+| **Placas** | Inverte infraÃ§Ãµes para placas especÃ­ficas (ex: veÃ­culos oficiais) |
+| **HorÃ¡rios** | ExceÃ§Ã£o por dia da semana e faixa de horÃ¡rio |
+| **Faixas** | ExceÃ§Ã£o para faixas de trÃ¢nsito especÃ­ficas |
+| **ClassificaÃ§Ãµes** | ExceÃ§Ã£o por classificaÃ§Ã£o do veÃ­culo |
+| **Enquadramentos** | ExceÃ§Ã£o por tipo de infraÃ§Ã£o/enquadramento legal |
+| **Datas** | ExceÃ§Ã£o para perÃ­odos especÃ­ficos (ferÃ­ados, eventos) |
+
+## Tipos de exceÃ§Ã£o
+
+| Tipo | DescriÃ§Ã£o |
+|------|-----------|
+| **Permanentes** | VeÃ­culos de emergÃªncia (ambulÃ¢ncia, polÃ­cia, bombeiros) |
+| **TemporÃ¡rias** | Autoridades em visita, eventos especiais com prazo definido |
+| **Por equipamento** | ExceÃ§Ã£o vÃ¡lida apenas em determinado ponto de fiscalizaÃ§Ã£o |
+| **Por tipo de infraÃ§Ã£o** | Ex: isento de velocidade mas nÃ£o de sinal |
+
+## Funcionalidades
+
+- Criar regras com mÃºltiplos filtros combinados
+- Definir motivo de descarte automÃ¡tico para cada regra
+- Configurar perÃ­odo de vigÃªncia da exceÃ§Ã£o
+- Ativar/desativar exceÃ§Ãµes sem excluÃ­-las
+- Consultar histÃ³rico de aplicaÃ§Ãµes da exceÃ§Ã£o
+
+:::warning
+ExceÃ§Ãµes ativas descartam infraÃ§Ãµes automaticamente durante a importaÃ§Ã£o. Revise periodicamente as regras cadastradas para evitar cobertura indevida de infraÃ§Ãµes.
+:::
+
+## Termos Tecnicos
+
+| Termo | Definicao |
+|-------|-----------|
+| [Enquadramento](../glossario/enquadramento) | Ver definicao no glossario |
+| [Triagem](../glossario/triagem) | Ver definicao no glossario |
+
+---
+
+## Navegacao Relacionada
+
+| Tipo | Pagina | Descricao |
+|------|--------|-----------|
+| Etapa anterior | [Triagem](./triagem) | Processo de validacao inicial |
+| Proxima etapa | [Auditoria](./auditoria) | Revisao pos-excecao |
+| Glossario | [Enquadramento](../glossario/enquadramento) | Classificacao legal |
+
+
+=== exportacao.md ===
+---
+sidebar_position: 4
+title: ExportaÃ§Ã£o
+description: ExportaÃ§Ã£o de infraÃ§Ãµes validadas para Ã³rgÃ£os autuadores
+---
+
+# ExportaÃ§Ã£o
+
+A tela de ExportaÃ§Ã£o permite enviar as infraÃ§Ãµes validadas pelo fluxo de triagem e auditoria para os Ã³rgÃ£os autuadores (DETRAN, DER, PRF, etc.), gerando os arquivos nos layouts exigidos por cada Ã³rgÃ£o.
+
+![Tela de ExportaÃ§Ã£o de InfraÃ§Ãµes](../img/triagem-exportacao.png)
+
+## Como acessar
+
+**Menu lateral** â†’ InfraÃ§Ãµes â†’ **ExportaÃ§Ã£o**
+
+## Como usar
+
+1. Acesse **InfraÃ§Ãµes â†’ ExportaÃ§Ã£o**
+2. Configure o lote:
+   - **Ã“rgÃ£o destino**: DETRAN, Prefeitura, DER, PRF, etc.
+   - **PerÃ­odo**: InfraÃ§Ãµes a exportar por data
+   - **Status**: Apenas infraÃ§Ãµes auditadas e vÃ¡lidas
+   - **Layout**: Formato do arquivo (configurado em AdministraÃ§Ã£o â†’ Layouts Arquivos)
+3. Clique em **Gerar lote** â€” o sistema valida os dados, gera o arquivo e cria o hash de assinatura digital
+4. Clique em **Enviar lote** via SFTP/API ou faÃ§a o download para envio manual
+
+## Formatos suportados
+
+| Formato | DescriÃ§Ã£o |
+|---------|-----------|
+| **RENAINF** | PadrÃ£o nacional para infraÃ§Ãµes de trÃ¢nsito |
+| **XML** | Layout customizÃ¡vel por Ã³rgÃ£o |
+| **TXT** | Arquivo texto com delimitadores definidos |
+| **CSV** | Para importaÃ§Ã£o em sistemas legados |
+
+## ValidaÃ§Ãµes realizadas antes da exportaÃ§Ã£o
+
+- âœ… Placa vÃ¡lida e legÃ­vel
+- âœ… Imagens em qualidade adequada
+- âœ… Dados de local e equipamento completos
+- âœ… Enquadramento legal correto
+- âœ… Assinaturas digitais de triagem e auditoria presentes
+- âœ… InfraÃ§Ã£o nÃ£o duplicada no lote
+- âœ… PerÃ­odo de presÃ§Ã£o dentro do prazo legal
+
+:::info
+Os layouts de arquivo sÃ£o configurados em **AdministraÃ§Ã£o â†’ Layouts Arquivos**, com os campos e delimitadores exigidos por cada Ã³rgÃ£o autuador.
+:::
+
+## Termos Tecnicos
+
+| Termo | Definicao |
+|-------|-----------|
+| [Enquadramento](../glossario/enquadramento) | Ver definicao no glossario |
+| [Lote de Exportacao](../glossario/lote-exportacao) | Ver definicao no glossario |
+| [Triagem](../glossario/triagem) | Ver definicao no glossario |
+
+---
+
+## Navegacao Relacionada
+
+| Tipo | Pagina | Descricao |
+|------|--------|-----------|
+| Etapa anterior | [Auditoria](./auditoria) | Revisao final antes da exportacao |
+| Configuracao | [Layouts de Arquivos](../administracao/layouts-arquivos) | Formatos |
+| Configuracao | [Sequenciais de Lote](../administracao/sequenciais-lote-exportacao) | Numeracao |
+| Glossario | [Lote de Exportacao](../glossario/lote-exportacao) | Definicao tecnica |
+| Glossario | [Autuacao](../glossario/autuacao) | Ato de autuacao |
+
+
+=== infracoes-descartadas.md ===
+---
+sidebar_position: 6
+title: InfraÃ§Ãµes Descartadas
+description: Consulta e revisÃ£o de infraÃ§Ãµes descartadas no processamento
+---
+
+# InfraÃ§Ãµes Descartadas
+
+A tela de InfraÃ§Ãµes Descartadas permite consultar e revisar todas as infraÃ§Ãµes que foram descartadas ao longo do fluxo de processamento â€” seja na triagem automÃ¡tica, triagem manual ou auditoria.
+
+![Tela de InfraÃ§Ãµes Descartadas](../img/triagem-infracoes-descartadas.png)
+
+## Como acessar
+
+**Menu lateral** â†’ InfraÃ§Ãµes â†’ **InfraÃ§Ãµes Descartadas**
+
+## Filtros disponÃ­veis
+
+| Filtro | DescriÃ§Ã£o |
+|--------|-----------|
+| **Motivo** | Filtrar pelo motivo do descarte |
+| **Analista** | ResponsÃ¡vel pelo descarte |
+| **PerÃ­odo** | Data do descarte |
+| **Equipamento** | Ponto de fiscalizaÃ§Ã£o |
+
+## Funcionalidades
+
+- Consultar infraÃ§Ãµes descartadas por analista, equipamento e perÃ­odo
+- Visualizar motivo do descarte e observaÃ§Ãµes
+- Encaminhar infraÃ§Ã£o para revisit de auditoria
+- Exportar relatÃ³rio de descartadas para Excel
+
+:::info
+InfraÃ§Ãµes descartadas por exceÃ§Ã£o automÃ¡tica tambÃ©m aparecem aqui, identificadas pelo motivo configurado na regra de exceÃ§Ã£o.
+:::
+
+## Termos Tecnicos
+
+| Termo | Definicao |
+|-------|-----------|
+| [Infracao de Transito](../glossario/infracao) | Ver definicao no glossario |
+| [Triagem](../glossario/triagem) | Ver definicao no glossario |
+
+---
+
+## Navegacao Relacionada
+
+| Tipo | Pagina | Descricao |
+|------|--------|-----------|
+| Origem | [Triagem](./triagem) | Infracoes descartadas durante a triagem |
+| Configuracao | [Motivos de Descarte](../administracao/motivos-descartes) | Lista de motivos |
+| Glossario | [Infracao](../glossario/infracao) | Definicao de infracao |
+
+
+=== triagem.md ===
+---
+sidebar_position: 2
+title: Triagem
+description: RevisÃ£o e validaÃ§Ã£o de infraÃ§Ãµes
+---
+
+# Triagem â€” InfraÃ§Ãµes
+
+Permite revisar, validar ou descartar infraÃ§Ãµes pendentes antes da exportaÃ§Ã£o para os Ã³rgÃ£os autuadores.
+
+## Como acessar
+
+**Menu lateral** â†’ InfraÃ§Ãµes â†’ **Triagem**
+
+![Menu principal da Triagem](../img/triagem-menu-principal.png)
+
+## Tela principal
+
+![Consultar InfraÃ§Ãµes](../img/triagem-consultar-infracoes.png)
+
+## Campos exibidos
+
+| Campo | DescriÃ§Ã£o |
+|-------|-----------|
+| **NÃºmero Auto** | Identificador Ãºnico da infraÃ§Ã£o |
+| **Placa VeÃ­culo** | Placa do veÃ­culo infrator |
+| **Data/Hora** | Momento da infraÃ§Ã£o |
+| **Imagem** | Foto capturada pelo equipamento |
+| **Velocidade Medida** | Velocidade capturada |
+| **Velocidade Considerada** | Velocidade apÃ³s tolerÃ¢ncia |
+| **Velocidade Regulamentada** | Velocidade permitida no local |
+| **Tipo InfraÃ§Ã£o** | Tipo de infraÃ§Ã£o registrada |
+| **Status Triagem** | `Pendente` Â· `Validada` Â· `Descartada` |
+| **Motivo Descarte** | Motivo informado ao descartar |
+| **Operador** | UsuÃ¡rio que realizou a triagem |
+
+## Filtros disponÃ­veis
+
+![Filtros de Triagem](../img/triagem-filtro-auditoria.png)
+
+| Filtro | DescriÃ§Ã£o |
+|--------|-----------|
+| **PerÃ­odo** | Data/Hora da infraÃ§Ã£o |
+| **Status Triagem** | Estado atual da triagem |
+| **Tipo InfraÃ§Ã£o** | Tipo de infraÃ§Ã£o |
+| **OperaÃ§Ã£o** | OperaÃ§Ã£o vinculada |
+
+## Resultado da consulta
+
+![Resultado da Consulta](../img/triagem-consultar-resultado.png)
+
+## AÃ§Ãµes disponÃ­veis
+
+| AÃ§Ã£o | DescriÃ§Ã£o |
+|------|-----------|
+| **Validar** | Confirma a infraÃ§Ã£o para exportaÃ§Ã£o |
+| **Descartar** | Rejeita com motivo obrigatÃ³rio |
+| **Reabrir** | Reabre infraÃ§Ã£o descartada para nova anÃ¡lise |
+
+## InfraÃ§Ãµes descartadas
+
+![Consultar InfraÃ§Ãµes Descartadas](../img/triagem-infracoes-descartadas.png)
+
+## Auditoria
+
+![Auditoria](../img/triagem-auditoria.png)
+
+![Filtro Auditoria](../img/triagem-filtro-auditoria.png)
+
+## ExceÃ§Ãµes
+
+![ExceÃ§Ãµes](../img/triagem-excecoes.png)
+
+## ExportaÃ§Ã£o
+
+![ExportaÃ§Ã£o](../img/triagem-exportacao.png)
+
+## IntegraÃ§Ãµes
+
+| Tabela | DescriÃ§Ã£o |
+|--------|-----------|
+| `TBInfracoes` | Registro principal da infraÃ§Ã£o |
+| `TBTriagens` | Registro da triagem realizada |
+| `TBMotivosDescarte` | Motivos disponÃ­veis para descarte |
+| `TBUsuarios` | Operador que realizou a triagem |
+
+## Termos Tecnicos
+
+| Termo | Definicao |
+|-------|-----------|
+| [Infracao de Transito](../glossario/infracao) | Ver definicao no glossario |
+| [Lote de Exportacao](../glossario/lote-exportacao) | Ver definicao no glossario |
+| [Triagem](../glossario/triagem) | Ver definicao no glossario |
+
+---
+
+## Navegacao Relacionada
+
+| Tipo | Pagina | Descricao |
+|------|--------|-----------|
+| Proxima etapa | [Excecoes](./excecoes) | Infracoes fora dos criterios padrao |
+| Proxima etapa | [Auditoria](./auditoria) | Revisao das infracoes aprovadas |
+| Configuracao | [Motivos de Descarte](../administracao/motivos-descartes) | Motivos disponiveis |
+| Configuracao | [Config. Enquadramentos](../administracao/configuracoes-enquadramento) | Tipos de enquadramento |
+| Configuracao | [Enquadramentos](../administracao/enquadramentos) | Lista de enquadramentos |
+| Glossario | [Enquadramento](../glossario/enquadramento) | Definicao tecnica CTB |
+| Glossario | [Infracao](../glossario/infracao) | O que constitui uma infracao |
+| Glossario | [Triagem](../glossario/triagem) | Definicao do processo |
+
+
+=== contratos.md ===
+---
+sidebar_position: 1
+title: Contratos
+description: Cadastro e gestÃ£o de contratos de mediÃ§Ã£o
+---
+
+# Contratos
+
+Permite cadastrar e gerenciar os contratos de mediÃ§Ã£o vinculados Ã s operaÃ§Ãµes.
+
+![Lista de Contratos](../img/MediÃ§Ã£o%20-%20contrato.png)
+
+## Como acessar
+
+**Menu lateral** â†’ MediÃ§Ã£o â†’ **Contratos**
+
+## Cadastro de contrato
+
+![Cadastro de Contrato](../img/MediÃ§Ã£o%20-%20contrato%20-%20cadastro.png)
+
+| Campo | DescriÃ§Ã£o |
+|-------|-----------|
+| **NÃºmero do Contrato** | Identificador do contrato |
+| **Ã“rgÃ£o** | Ã“rgÃ£o contratante |
+| **VigÃªncia InÃ­cio** | Data de inÃ­cio do contrato |
+| **VigÃªncia Fim** | Data de tÃ©rmino do contrato |
+| **Equipamentos** | Equipamentos vinculados ao contrato |
+| **Status** | Ativo, Encerrado, Suspenso |
+
+---
+
+## Navegacao Relacionada
+
+| Tipo | Pagina | Descricao |
+|------|--------|-----------|
+| Relacionado | [Indices de Performance](./indices-performance) | Indicadores do contrato |
+| Relacionado | [Recursos](./recursos) | Recursos alocados |
+| Relacionado | [Criar Medicao](./criar-medicao) | Gerar medicao |
+| Relacionado | [Interrupcoes](./interrupcoes) | Registrar interrupcoes |
+| Glossario | [Medicao de Desempenho](../glossario/medicao-desempenho) | Definicao tecnica |
+
+
+=== criar-medicao.md ===
+---
+sidebar_position: 6
+title: Criar MediÃ§Ã£o
+description: CriaÃ§Ã£o de nova mediÃ§Ã£o contratual
+---
+
+# Criar MediÃ§Ã£o
+
+Permite gerar uma nova mediÃ§Ã£o contratual com base nos dados de operaÃ§Ã£o do perÃ­odo.
+
+![RelatÃ³rio de MediÃ§Ã£o](../img/MediÃ§Ã£o%20-%20nova%20mediÃ§Ã£o%20-%20relatorio%20de%20mediÃ§Ã£o%20de%20equipamento.png)
+
+## Como acessar
+
+**Menu lateral** â†’ MediÃ§Ã£o â†’ **Nova MediÃ§Ã£o**
+
+## Filtros
+
+![Filtros de MediÃ§Ã£o](../img/MediÃ§Ã£o%20-%20nova%20mediÃ§Ã£o%20-%20relatorio%20de%20mediÃ§Ã£o%20de%20equipamento%20-%20filtros.png)
+
+| Campo | DescriÃ§Ã£o |
+|-------|-----------|
+| **Contrato** | Contrato a ser medido |
+| **PerÃ­odo** | MÃªs/ano de referÃªncia |
+| **Equipamentos** | SeleÃ§Ã£o dos equipamentos incluÃ­dos |
+
+## Fluxo
+
+1. Selecione o contrato e perÃ­odo
+2. O sistema calcula automaticamente os Ã­ndices
+3. Revise os valores e interrupÃ§Ãµes
+4. Finalize a mediÃ§Ã£o para aprovaÃ§Ã£o
+
+---
+
+## Navegacao Relacionada
+
+| Tipo | Pagina | Descricao |
+|------|--------|-----------|
+| Relacionado | [Contratos](./contratos) | Contrato vinculado |
+| Relacionado | [Medicoes Finalizadas](./medicoes-finalizadas) | Historico |
+| Glossario | [Medicao de Desempenho](../glossario/medicao-desempenho) | Definicao tecnica |
+
+
+=== indices-performance.md ===
+---
+sidebar_position: 2
+title: Ãndices de Performance
+description: ConfiguraÃ§Ã£o de Ã­ndices de performance contratual
+---
+
+# Ãndices de Performance
+
+Permite configurar os Ã­ndices de performance exigidos pelos contratos.
+
+![Lista de Ãndices](../img/MediÃ§Ã£o%20-%20indice%20de%20performance.png)
+
+## Como acessar
+
+**Menu lateral** â†’ MediÃ§Ã£o â†’ **Ãndices de Performance**
+
+## Cadastro
+
+![Cadastro de Ãndice](../img/MediÃ§Ã£o%20-%20indice%20de%20performance%20-%20cadastro.png)
+
+| Campo | DescriÃ§Ã£o |
+|-------|-----------|
+| **Contrato** | Contrato vinculado |
+| **Indicador** | Nome do indicador (ex: Disponibilidade, Uptime) |
+| **Meta (%)** | Percentual mÃ­nimo exigido |
+| **FÃ³rmula** | Regra de cÃ¡lculo do Ã­ndice |
+
+---
+
+## Navegacao Relacionada
+
+| Tipo | Pagina | Descricao |
+|------|--------|-----------|
+| Relacionado | [Contratos](./contratos) | Contrato que define os indices |
+| Relacionado | [Criar Medicao](./criar-medicao) | Usar indices na medicao |
+
+
+=== interrupcoes.md ===
+---
+sidebar_position: 4
+title: InterrupÃ§Ãµes
+description: Registro e processamento de interrupÃ§Ãµes contratuais
+---
+
+# InterrupÃ§Ãµes
+
+Permite registrar interrupÃ§Ãµes no funcionamento dos equipamentos que impactam a mediÃ§Ã£o contratual.
+
+![Lista de InterrupÃ§Ãµes](../img/MediÃ§Ã£o%20-%20interrupÃ§Ãµes.png)
+
+## Como acessar
+
+**Menu lateral** â†’ MediÃ§Ã£o â†’ **InterrupÃ§Ãµes**
+
+## Cadastro de interrupÃ§Ã£o
+
+![Cadastro de InterrupÃ§Ã£o](../img/MediÃ§Ã£o%20-%20interrupÃ§Ãµes.-%20cadastro.png)
+
+| Campo | DescriÃ§Ã£o |
+|-------|-----------|
+| **Equipamento** | Equipamento afetado |
+| **Data/Hora InÃ­cio** | InÃ­cio da interrupÃ§Ã£o |
+| **Data/Hora Fim** | Fim da interrupÃ§Ã£o |
+| **Motivo** | Causa da interrupÃ§Ã£o |
+| **Justificativa** | Detalhamento |
+
+## Processar interrupÃ§Ãµes
+
+![Processar InterrupÃ§Ãµes](../img/MediÃ§Ã£o%20-%20interrupÃ§Ãµes%20-%20processar%20interrupÃ§Ãµes.png)
+
+Processa as interrupÃ§Ãµes registradas para abatimento na mediÃ§Ã£o contratual.
+
+---
+
+## Navegacao Relacionada
+
+| Tipo | Pagina | Descricao |
+|------|--------|-----------|
+| Relacionado | [Contratos](./contratos) | Contrato afetado |
+| Relacionado | [Criar Medicao](./criar-medicao) | Impacto na medicao |
+
+
+=== medicoes-finalizadas.md ===
+---
+sidebar_position: 5
+title: MediÃ§Ãµes Finalizadas
+description: Consulta de mediÃ§Ãµes contratuais jÃ¡ finalizadas
+---
+
+# MediÃ§Ãµes Finalizadas
+
+Exibe as mediÃ§Ãµes contratuais que jÃ¡ foram calculadas e finalizadas.
+
+![MediÃ§Ãµes Finalizadas](../img/MediÃ§Ã£o%20-MediÃ§Ã£o%20%20finalizada.png)
+
+## Como acessar
+
+**Menu lateral** â†’ MediÃ§Ã£o â†’ **MediÃ§Ãµes Finalizadas**
+
+| Coluna | DescriÃ§Ã£o |
+|--------|-----------|
+| **Contrato** | Contrato medido |
+| **PerÃ­odo** | MÃªs/ano de referÃªncia |
+| **Disponibilidade** | Percentual de disponibilidade calculado |
+| **Performance** | Ãndice de performance atingido |
+| **Status** | Aprovada, pendente, contestada |
+
+---
+
+## Navegacao Relacionada
+
+| Tipo | Pagina | Descricao |
+|------|--------|-----------|
+| Relacionado | [Criar Medicao](./criar-medicao) | Nova medicao |
+| Relacionado | [Contratos](./contratos) | Contrato medido |
+
+
+=== recursos.md ===
+---
+sidebar_position: 3
+title: Recursos
+description: GestÃ£o de recursos vinculados a mediÃ§Ãµes
+---
+
+# Recursos
+
+Permite gerenciar os recursos utilizados nas mediÃ§Ãµes contratuais.
+
+![Lista de Recursos](../img/MediÃ§Ã£o%20-%20Recursos%20.png)
+
+## Como acessar
+
+**Menu lateral** â†’ MediÃ§Ã£o â†’ **Recursos**
+
+## Cadastro
+
+![Cadastro de Recurso](../img/MediÃ§Ã£o%20-%20Recursos%20-.cadastro.png)
+
+| Campo | DescriÃ§Ã£o |
+|-------|-----------|
+| **DescriÃ§Ã£o** | Nome do recurso |
+| **Tipo** | Equipamento, pessoal, veicular |
+| **Contrato** | Contrato vinculado |
+| **Status** | Ativo ou Inativo |
+
+---
+
+## Navegacao Relacionada
+
+| Tipo | Pagina | Descricao |
+|------|--------|-----------|
+| Relacionado | [Contratos](./contratos) | Contrato vinculado |
+| Relacionado | [Equipamentos](../cadastros-basicos/equipamentos) | Equipamentos como recurso |
+
+
+=== afericoes.md ===
+---
+sidebar_position: 2
+title: Afericoes
+description: Controle de afericoes e certificados INMETRO
+---
+
+# Afericoes
+
+Controle das afericoes realizadas nos equipamentos de fiscalizacao.
+
+## Como acessar
+
+Menu lateral - Operacoes - Afericoes
+
+## Listagem
+
+![Lista de Afericoes](../img/Operações%20-%20aferição.png)
+
+## Cadastro de Afericao
+
+![Cadastro de Afericao](../img/Operações%20-%20aferição%20-%20cadastro.png)
+
+## Campos
+
+| Campo | Descricao |
+|-------|-----------|
+| Equipamento | Codigo e serie do equipamento |
+| N Certificado | Numero do certificado INMETRO |
+| Data Emissao | Data de emissao do certificado |
+| Data Vencimento | Data de vencimento do certificado |
+| Status | Valido ou Vencendo ou Vencido |
+
+## Navegacao relacionada
+
+| Tipo | Pagina | Descricao |
+|------|--------|-----------|
+| Relacionado | [Equipamentos](../cadastros-basicos/equipamentos) | Equipamento aferido |
+| Relacionado | [Cadastro de Operacoes](./cadastro-operacoes) | Operacoes vinculadas |
+
+
+=== cadastro-operacoes.md ===
+---
+sidebar_position: 1
+title: Cadastro de Operacoes
+description: Cadastro e gestao de operacoes de fiscalizacao
+---
+
+# Cadastro de Operacoes
+
+Uma operacao e o registro formal de uma acao de fiscalizacao de transito.
+
+## Como acessar
+
+Menu lateral - Operacoes - Cadastro de Operacoes
+
+## Listagem
+
+![Lista de Operacoes](../img/Operações%20-%20operações.png)
+
+## Cadastro de Operacao
+
+![Cadastro de Operacao](../img/Operações%20-%20operações%20-%20cadastro.png)
+
+## Campos
+
+| Campo | Obrigatorio | Descricao |
+|-------|-------------|-----------|
+| Equipamento | Sim | Equipamento vinculado a operacao |
+| Arco | Sim | Arco onde a operacao ocorre |
+| Data Inicio | Sim | Data e hora de inicio da operacao |
+| Data Fim | Sim | Data e hora de termino da operacao |
+| Enquadramentos | Sim | Enquadramentos legais habilitados |
+| Velocidade Regulamentada | Condicional | Velocidade limite da via |
+| Observacao | Nao | Informacoes adicionais |
+
+## Navegacao relacionada
+
+| Tipo | Pagina | Descricao |
+|------|--------|-----------|
+| Relacionado | [Arcos](../administracao/arcos) | Pontos de fiscalizacao |
+| Relacionado | [Afericoes](./afericoes) | Controle de afericoes |
+
+
+=== consulta-placas.md ===
+---
+sidebar_position: 6
+title: Consulta de Placas
+description: Consulta de passagens de veÃ­culos por placa
+---
+
+# Consulta de Placas
+
+Permite consultar o histÃ³rico de passagens de veÃ­culos por nÃºmero de placa.
+
+![Consulta de Placas](../img/OperaÃ§Ãµes%20-%20consulta%20de%20placas.png)
+
+## Como acessar
+
+**Menu lateral** â†’ OperaÃ§Ãµes â†’ **Consulta de Placas**
+
+| Filtro | DescriÃ§Ã£o |
+|--------|-----------|
+| **Placa** | NÃºmero da placa do veÃ­culo |
+| **PerÃ­odo** | Faixa de data para a consulta |
+| **Equipamento** | Filtrar por equipamento especÃ­fico |
+
+| Coluna do Resultado | DescriÃ§Ã£o |
+|---------------------|-----------|
+| **Data/Hora** | Momento da passagem |
+| **Equipamento** | Onde o veÃ­culo foi registrado |
+| **Faixa** | Faixa de trÃ¡fego |
+| **Velocidade** | Velocidade registrada (quando aplicÃ¡vel) |
+| **Imagem** | Foto da passagem |
+
+---
+
+## Navegacao Relacionada
+
+| Tipo | Pagina | Descricao |
+|------|--------|-----------|
+| Relacionado | [Consulta de Infracoes](../infracoes/consulta-infracoes) | Infracoes do veiculo |
+| Relacionado | [Monitoramento Online](./monitoramento-online) | Passagens em tempo real |
+
+
+=== eventos-equipamentos.md ===
+---
+sidebar_position: 5
+title: Eventos de Equipamentos
+description: Registro de eventos e ocorrÃªncias dos equipamentos
+---
+
+# Eventos de Equipamentos
+
+Permite consultar e registrar eventos e ocorrÃªncias relacionados aos equipamentos.
+
+![Lista de Eventos](../img/OperaÃ§Ãµes%20-%20eventos%20de%20equipamentos.png)
+
+## Como acessar
+
+**Menu lateral** â†’ OperaÃ§Ãµes â†’ **Eventos de Equipamentos**
+
+## Cadastro de evento
+
+![Cadastro de Evento](../img/OperaÃ§Ãµes%20-%20eventos%20de%20equipamentos%20-%20Cadastros.png)
+
+| Campo | DescriÃ§Ã£o |
+|-------|-----------|
+| **Equipamento** | Equipamento relacionado ao evento |
+| **Tipo de Evento** | Falha, manutenÃ§Ã£o, vandalismo, etc. |
+| **Data/Hora** | Momento da ocorrÃªncia |
+| **DescriÃ§Ã£o** | Detalhamento do evento |
+| **ResponsÃ¡vel** | TÃ©cnico ou analista que registrou |
+
+---
+
+## Navegacao Relacionada
+
+| Tipo | Pagina | Descricao |
+|------|--------|-----------|
+| Relacionado | [Monitoramento Online](./monitoramento-online) | Acompanhamento tempo real |
+| Relacionado | [Equipamentos](../cadastros-basicos/equipamentos) | Cadastro de equipamentos |
+| Relatorio | [Rel. Eventos Equipamentos](../relatorios/eventos-equipamentos) | Relatorio detalhado |
+
+
+=== faixas.md ===
+---
+sidebar_position: 2
+title: Faixas
+description: ConfiguraÃ§Ã£o de faixas de fiscalizaÃ§Ã£o por operaÃ§Ã£o
+---
+
+# Faixas
+
+Permite configurar as faixas de monitoramento de cada operaÃ§Ã£o.
+
+![Lista de Faixas](../img/OperaÃ§Ãµes%20-%20Faixas.png)
+
+## Como acessar
+
+**Menu lateral** â†’ OperaÃ§Ãµes â†’ **Faixas**
+
+## Cadastro de faixa
+
+![Cadastro de Faixa](../img/OperaÃ§Ãµes%20-%20Faixas%20-%20cadatro.png)
+
+| Campo | DescriÃ§Ã£o |
+|-------|-----------|
+| **OperaÃ§Ã£o** | OperaÃ§Ã£o vinculada |
+| **NÃºmero da Faixa** | Identificador da faixa |
+| **Sentido** | Sentido de trÃ¡fego monitorado |
+| **Tipo** | Faixa de rolamento, acostamento, etc. |
+
+---
+
+## Navegacao Relacionada
+
+| Tipo | Pagina | Descricao |
+|------|--------|-----------|
+| Relacionado | [Cadastro de Operacoes](./cadastro-operacoes) | Operacao que contem as faixas |
+| Relacionado | [Equipamentos](../cadastros-basicos/equipamentos) | Equipamentos nas faixas |
+
+
+=== monitoramento-online.md ===
+---
+sidebar_position: 4
+title: Monitoramento Online
+description: Monitoramento em tempo real dos equipamentos
+---
+
+# Monitoramento Online
+
+Permite acompanhar em tempo real o status e funcionamento dos equipamentos de fiscalizaÃ§Ã£o.
+
+![Monitoramento Online](../img/OperaÃ§Ãµes%20-%20Monitoramento%20online.png)
+
+## Como acessar
+
+**Menu lateral** â†’ OperaÃ§Ãµes â†’ **Monitoramento Online**
+
+## Cadastro de monitoramento
+
+![Cadastro de Monitoramento](../img/OperaÃ§Ãµes%20-%20Monitoramento%20online%20-%20cadastro.png)
+
+| Coluna | DescriÃ§Ã£o |
+|--------|-----------|
+| **Equipamento** | Nome e cÃ³digo do equipamento |
+| **Status** | Online, Offline, ManutenÃ§Ã£o |
+| **Ãšltima ComunicaÃ§Ã£o** | Data/hora do Ãºltimo sinal recebido |
+| **Passagens (dia)** | Quantidade de veÃ­culos registrados no dia |
+
+---
+
+## Navegacao Relacionada
+
+| Tipo | Pagina | Descricao |
+|------|--------|-----------|
+| Relacionado | [Eventos de Equipamentos](./eventos-equipamentos) | Historico de eventos |
+| Relacionado | [Dashboard](../primeiros-passos/dashboard) | Visao geral do sistema |
+| Relacionado | [Consulta de Placas](./consulta-placas) | Buscar veiculos |
+
+
+=== liberar-pesagem.md ===
+---
+sidebar_position: 5
+title: Liberar Tickets para Pesagem
+description: LiberaÃ§Ã£o de tickets para nova pesagem
+---
+
+# Liberar Tickets para Pesagem
+
+Permite liberar tickets para que veÃ­culos realizem nova pesagem.
+
+![Liberar Tickets](../img/BalanÃ§a%20-%20Liberar%20Tickets%20para%20Pesagem.png)
+
+## Como acessar
+
+**Menu lateral** â†’ BalanÃ§a â†’ **Liberar Tickets para Pesagem**
+
+| Campo | DescriÃ§Ã£o |
+|-------|-----------|
+| **NÃºmero do Ticket** | Ticket a ser liberado |
+| **Motivo** | Justificativa para liberaÃ§Ã£o |
+| **ObservaÃ§Ã£o** | Detalhes adicionais |
+
+---
+
+## Navegacao Relacionada
+
+| Tipo | Pagina | Descricao |
+|------|--------|-----------|
+| Relacionado | [Ticket Aberto](./ticket-aberto) | Ticket a liberar |
+| Relacionado | [Postos](./postos) | Posto de pesagem |
+
+
+=== motivos.md ===
+---
+sidebar_position: 2
+title: Motivos
+description: Cadastro de motivos para pesagem e liberaÃ§Ã£o
+---
+
+# Motivos
+
+Permite cadastrar os motivos utilizados nos processos de pesagem e liberaÃ§Ã£o de veÃ­culos.
+
+![Lista de Motivos](../img/BalanÃ§a%20-%20Motivos.png)
+
+## Como acessar
+
+**Menu lateral** â†’ BalanÃ§a â†’ **Motivos**
+
+## Cadastro de motivo
+
+![Cadastro de Motivo](../img/BalanÃ§a%20-%20Motivos%20-%20cadastro.png)
+
+| Campo | DescriÃ§Ã£o |
+|-------|-----------|
+| **DescriÃ§Ã£o** | Nome do motivo |
+| **Tipo** | LiberaÃ§Ã£o, retenÃ§Ã£o, reclassificaÃ§Ã£o |
+| **Ativo** | Se o motivo estÃ¡ disponÃ­vel para uso |
+
+---
+
+## Navegacao Relacionada
+
+| Tipo | Pagina | Descricao |
+|------|--------|-----------|
+| Relacionado | [Reclassificar](./reclassificar) | Usar motivo na reclassificacao |
+| Relacionado | [Postos](./postos) | Postos de pesagem |
+
+
+=== postos.md ===
+---
+sidebar_position: 1
+title: Postos de Pesagem
+description: Cadastro e gestÃ£o dos postos de pesagem veicular
+---
+
+# Postos de Pesagem
+
+Permite cadastrar e gerenciar os postos de pesagem veicular.
+
+![Lista de Postos](../img/BalanÃ§a%20-%20Postos.png)
+
+## Como acessar
+
+**Menu lateral** â†’ BalanÃ§a â†’ **Postos**
+
+## Cadastro de posto
+
+![Cadastro de Posto - Dados](../img/BalanÃ§a%20-%20Postos%20-%20Cadastro1.png)
+
+![Cadastro de Posto - ConfiguraÃ§Ãµes](../img/BalanÃ§a%20-%20Postos%20-%20Cadastro2.png)
+
+| Campo | DescriÃ§Ã£o |
+|-------|-----------|
+| **Nome** | IdentificaÃ§Ã£o do posto |
+| **LocalizaÃ§Ã£o** | EndereÃ§o ou referÃªncia do posto |
+| **Tipo de BalanÃ§a** | EstÃ¡tica, dinÃ¢mica, etc. |
+| **Status** | Ativo ou Inativo |
+
+---
+
+## Navegacao Relacionada
+
+| Tipo | Pagina | Descricao |
+|------|--------|-----------|
+| Fluxo | [Ticket Aberto](./ticket-aberto) | Tickets em andamento |
+| Fluxo | [Ticket Fechado](./ticket-fechado) | Tickets finalizados |
+| Configuracao | [Motivos](./motivos) | Motivos de reclassificacao |
+
+
+=== reclassificar.md ===
+---
+sidebar_position: 6
+title: Reclassificar
+description: ReclassificaÃ§Ã£o de veÃ­culos pesados
+---
+
+# Reclassificar
+
+Permite reclassificar veÃ­culos que foram pesados com classificaÃ§Ã£o incorreta.
+
+![Reclassificar](../img/BalanÃ§a%20-%20Reclassificar.png)
+
+## Como acessar
+
+**Menu lateral** â†’ BalanÃ§a â†’ **Reclassificar**
+
+| Campo | DescriÃ§Ã£o |
+|-------|-----------|
+| **Ticket** | Ticket da pesagem original |
+| **ClassificaÃ§Ã£o Atual** | Tipo de veÃ­culo registrado |
+| **Nova ClassificaÃ§Ã£o** | ClassificaÃ§Ã£o correta |
+| **Motivo** | Justificativa da reclassificaÃ§Ã£o |
+
+---
+
+## Navegacao Relacionada
+
+| Tipo | Pagina | Descricao |
+|------|--------|-----------|
+| Relacionado | [Ticket Fechado](./ticket-fechado) | Ticket a reclassificar |
+| Relacionado | [Motivos](./motivos) | Motivos disponiveis |
+
+
+=== ticket-aberto.md ===
+---
+sidebar_position: 3
+title: Tickets Abertos
+description: Consulta de tickets de pesagem em aberto
+---
+
+# Tickets Abertos
+
+Exibe os tickets de pesagem que ainda nÃ£o foram finalizados.
+
+![Tickets Abertos](../img/BalanÃ§a%20-%20Tickets%20Abertos.png)
+
+## Como acessar
+
+**Menu lateral** â†’ BalanÃ§a â†’ **Tickets Abertos**
+
+| Coluna | DescriÃ§Ã£o |
+|--------|-----------|
+| **NÃºmero** | Identificador do ticket |
+| **Placa** | Placa do veÃ­culo |
+| **Data/Hora** | Momento da pesagem |
+| **Peso Bruto** | Peso total registrado |
+| **Status** | Aguardando, em anÃ¡lise, etc. |
+
+---
+
+## Navegacao Relacionada
+
+| Tipo | Pagina | Descricao |
+|------|--------|-----------|
+| Anterior | [Postos](./postos) | Postos de pesagem |
+| Proximo | [Ticket Fechado](./ticket-fechado) | Tickets finalizados |
+| Acao | [Liberar Pesagem](./liberar-pesagem) | Liberar ticket |
+
+
+=== ticket-fechado.md ===
+---
+sidebar_position: 4
+title: Tickets Fechados
+description: Consulta de tickets de pesagem finalizados
+---
+
+# Tickets Fechados
+
+Exibe os tickets de pesagem que jÃ¡ foram finalizados.
+
+![Tickets Fechados](../img/BalanÃ§a%20-%20Tickets%20Fechados.png)
+
+## Como acessar
+
+**Menu lateral** â†’ BalanÃ§a â†’ **Tickets Fechados**
+
+| Coluna | DescriÃ§Ã£o |
+|--------|-----------|
+| **NÃºmero** | Identificador do ticket |
+| **Placa** | Placa do veÃ­culo |
+| **Data/Hora** | Momento da pesagem |
+| **Peso Bruto** | Peso total registrado |
+| **Resultado** | Aprovado, excesso, liberado |
+| **Motivo** | Motivo da liberaÃ§Ã£o (quando aplicÃ¡vel) |
+
+---
+
+## Navegacao Relacionada
+
+| Tipo | Pagina | Descricao |
+|------|--------|-----------|
+| Anterior | [Ticket Aberto](./ticket-aberto) | Tickets em andamento |
+| Acao | [Reclassificar](./reclassificar) | Reclassificar veiculo |
+
+
+=== dashboard.md ===
+---
+sidebar_position: 2
+title: Dashboard
+description: Painel principal do sistema AxHub
+---
+
+# Dashboard
+
+O Dashboard e a tela inicial do AxHub apos o login. Apresenta indicadores, mapa de equipamentos e alertas.
+
+## Como acessar
+
+O Dashboard e exibido automaticamente apos o Login. Clique no logo do AxHub para retornar.
+
+## Visao Geral
+
+![Dashboard](../img/Dasboard.png)
+
+## Icones de Atalho
+
+![Icones de Atalho](../img/dashboard-icones-atalho.png)
+
+## Painel Sinotico
+
+![Painel Sinotico](../img/dashboard-painel-sinotico.png)
+
+![Painel Sinotico Tela Cheia](../img/dashboard-painel-sinotico-tela-cheia.png)
+
+## Status dos Equipamentos
+
+![Status dos Equipamentos](../img/dashboard-status-equipamento.png)
+
+![Status dos Equipamentos Tela Cheia](../img/dashboard-status-equipamento-tela-cheia.png)
+
+## Mapa de Equipamentos
+
+![Mapa de Equipamentos](../img/dashboard-mapa-equipamento.png)
+
+## Alertas de Afericao
+
+![Alertas de Afericao](../img/dashboard-alertas-afericao.png)
+
+## Triagem Mensal
+
+![Triagem Mensal](../img/dashboard-triagem-mensal.png)
+
+## Ultimos Eventos
+
+![Ultimos Eventos](../img/dashboard-ultimos-eventos.png)
+
+## Indicadores
+
+| Indicador | Descricao |
+|-----------|-----------|
+| Passagens hoje | Total de passagens capturadas no dia |
+| Infracoes pendentes | Infracoes aguardando triagem |
+| Equipamentos offline | Equipamentos sem comunicacao |
+| Certificados vencendo | Certificados INMETRO proximo do vencimento |
+
+## Navegacao relacionada
+
+| Tipo | Pagina | Descricao |
+|------|--------|-----------|
+| Anterior | [Login](./login) | Autenticacao do sistema |
+| Proximo | [Navegacao](./navegacao) | Como navegar pelo sistema |
+
+
+=== login.md ===
+---
+sidebar_position: 1
+title: Login
+description: Como acessar o sistema AxHub
+---
+
+# Login
+
+Tela de autenticacao do AxHub. Todos os usuarios precisam se autenticar com login e senha.
+
+## Tela de Login
+
+![Tela de Login](../img/Login.png)
+
+## Acessando o sistema
+
+1. Abra o navegador e acesse o endereco do AxHub
+2. Informe seu Login
+3. Informe sua Senha
+4. Clique em Entrar
+
+## Recuperacao de senha
+
+1. Na tela de login clique em Esqueci minha senha
+2. Informe o e-mail cadastrado
+3. Acesse sua caixa de entrada e clique no link de redefinicao
+4. Defina uma nova senha e confirme
+
+## Navegacao relacionada
+
+| Tipo | Pagina | Descricao |
+|------|--------|-----------|
+| Proximo | [Dashboard](./dashboard) | Tela principal apos login |
+
+
+=== navegacao.md ===
+---
+sidebar_position: 3
+title: Navegacao
+description: Como navegar pelo sistema AxHub
+---
+
+# Navegacao
+
+Guia de orientacao sobre a estrutura de menus e a navegacao geral do sistema AxHub.
+
+## Mapa Online
+
+![Mapa Online](../img/mapa%20online.png)
+
+## Estrutura do menu lateral
+
+| Modulo | Descricao |
+|--------|-----------|
+| Dashboard | Painel principal com indicadores e mapa |
+| Infracoes | Triagem auditoria e consulta de infracoes |
+| Operacoes | Cadastro de operacoes e afericoes |
+| Equipamentos | Cadastro de equipamentos fabricantes modelos tipos e grupos |
+| Veiculos | Cadastro de tipos especies marcas modelos cores e municipios |
+| Balanca | Pesagem de veiculos e triagem de balanca |
+| Cronotacografo | Triagem e consulta de registros de cronotacografo |
+| Relatorios | Relatorios operacionais e gerenciais |
+| Administracao | Configuracoes arcos regioes faixas e enquadramentos |
+| Controle de Acesso | Usuarios perfis permissoes e logs |
+
+## Navegacao relacionada
+
+| Tipo | Pagina | Descricao |
+|------|--------|-----------|
+| Anterior | [Dashboard](./dashboard) | Tela principal |
+| Relacionado | [Login](./login) | Acesso ao sistema |
+
+
+=== eventos-equipamentos.md ===
+---
+sidebar_position: 4
+title: RelatÃ³rio de Eventos dos Equipamentos
+description: RelatÃ³rio de eventos e ocorrÃªncias dos equipamentos
+---
+
+# RelatÃ³rio de Eventos dos Equipamentos
+
+Exibe o histÃ³rico de eventos registrados nos equipamentos de fiscalizaÃ§Ã£o.
+
+![RelatÃ³rio de Eventos](../img/Relatorios%20-%20relatorio%20de%20eventos%20dos%20equipamentos.png)
+
+## Como acessar
+
+**Menu lateral** â†’ RelatÃ³rios â†’ **Eventos dos Equipamentos**
+
+| Filtro | DescriÃ§Ã£o |
+|--------|-----------|
+| **PerÃ­odo** | Faixa de datas |
+| **Equipamento** | Filtrar por equipamento |
+| **Tipo de Evento** | Falha, manutenÃ§Ã£o, vandalismo |
+
+---
+
+## Navegacao Relacionada
+
+| Tipo | Pagina | Descricao |
+|------|--------|-----------|
+| Relacionado | [Eventos (Operacoes)](../operacoes/eventos-equipamentos) | Dados operacionais |
+| Relacionado | [Equipamentos](../cadastros-basicos/equipamentos) | Equipamentos |
+
+
+=== falhas-sequenciais.md ===
+---
+sidebar_position: 5
+title: RelatÃ³rio de Falhas Sequenciais
+description: RelatÃ³rio de falhas sequenciais nos equipamentos
+---
+
+# RelatÃ³rio de Falhas Sequenciais
+
+Identifica falhas sequenciais nos equipamentos que podem indicar problemas operacionais.
+
+![RelatÃ³rio de Falhas](../img/Relatorios%20-%20relatorio%20de%20falhas%20sequenciais.png)
+
+## Como acessar
+
+**Menu lateral** â†’ RelatÃ³rios â†’ **Falhas Sequenciais**
+
+| Filtro | DescriÃ§Ã£o |
+|--------|-----------|
+| **PerÃ­odo** | Faixa de datas |
+| **Equipamento** | Filtrar por equipamento |
+| **Quantidade mÃ­nima** | NÃºmero mÃ­nimo de falhas consecutivas |
+
+---
+
+## Navegacao Relacionada
+
+| Tipo | Pagina | Descricao |
+|------|--------|-----------|
+| Relacionado | [Sequenciais de Infracoes](../administracao/sequenciais-infracoes) | Configuracao |
+
+
+=== fluxo-diario-veiculos.md ===
+---
+sidebar_position: 6
+title: Fluxo DiÃ¡rio de VeÃ­culos
+description: RelatÃ³rio de fluxo diÃ¡rio de veÃ­culos por equipamento
+---
+
+# Fluxo DiÃ¡rio de VeÃ­culos
+
+Exibe o volume diÃ¡rio de veÃ­culos registrados por cada equipamento.
+
+![Fluxo DiÃ¡rio](../img/Relatorios%20-%20relatorio%20de%20fluxo%20diario%20de%20veiculos.png)
+
+## Como acessar
+
+**Menu lateral** â†’ RelatÃ³rios â†’ **Fluxo DiÃ¡rio de VeÃ­culos**
+
+| Filtro | DescriÃ§Ã£o |
+|--------|-----------|
+| **PerÃ­odo** | Faixa de datas |
+| **Equipamento** | Filtrar por equipamento |
+| **Faixa** | Faixa de trÃ¡fego |
+
+---
+
+## Navegacao Relacionada
+
+| Tipo | Pagina | Descricao |
+|------|--------|-----------|
+| Relacionado | [Monitoramento Online](../operacoes/monitoramento-online) | Tempo real |
+| Relacionado | [Mapa Fluxo Passagens](./mapa-fluxo-passagens) | Visualizacao em mapa |
+
+
+=== lote-importacao.md ===
+---
+sidebar_position: 7
+title: Lotes de ImportaÃ§Ã£o
+description: Consulta de lotes de importaÃ§Ã£o de dados
+---
+
+# Lotes de ImportaÃ§Ã£o
+
+Exibe os lotes de dados importados para o sistema.
+
+![Lotes de ImportaÃ§Ã£o](../img/Relatorios%20-%20lotes%20importaÃ§Ã£o.png)
+
+## Como acessar
+
+**Menu lateral** â†’ RelatÃ³rios â†’ **Lotes de ImportaÃ§Ã£o**
+
+| Coluna | DescriÃ§Ã£o |
+|--------|-----------|
+| **NÃºmero do Lote** | Identificador do lote |
+| **Data** | Data da importaÃ§Ã£o |
+| **Registros** | Quantidade de registros importados |
+| **Status** | Sucesso, Erro, Parcial |
+| **Origem** | Equipamento ou sistema de origem |
+
+---
+
+## Navegacao Relacionada
+
+| Tipo | Pagina | Descricao |
+|------|--------|-----------|
+| Relacionado | [Equipamentos](../cadastros-basicos/equipamentos) | Origem dos dados |
+
+
+=== mapa-fluxo-passagens.md ===
+---
+sidebar_position: 8
+title: Mapa de Fluxo de Passagens
+description: Mapa visual do fluxo de passagens por equipamento
+---
+
+# Mapa de Fluxo de Passagens
+
+Exibe um mapa visual com o fluxo de passagens de veÃ­culos por equipamento.
+
+![Mapa de Fluxo](../img/Relatorios%20-%20mapa%20de%20fluxo%20de%20passagens.png)
+
+## Como acessar
+
+**Menu lateral** â†’ RelatÃ³rios â†’ **Mapa de Fluxo de Passagens**
+
+| Filtro | DescriÃ§Ã£o |
+|--------|-----------|
+| **PerÃ­odo** | Faixa de datas |
+| **RegiÃ£o** | Filtrar por regiÃ£o |
+| **Equipamento** | Filtrar por equipamento |
+
+---
+
+## Navegacao Relacionada
+
+| Tipo | Pagina | Descricao |
+|------|--------|-----------|
+| Relacionado | [Fluxo Diario de Veiculos](./fluxo-diario-veiculos) | Dados tabulares |
+| Relacionado | [Monitoramento Online](../operacoes/monitoramento-online) | Tempo real |
+
+
+=== mapa-teste.md ===
+---
+sidebar_position: 6
+title: Mapa de Teste
+description: RelatÃ³rio de testes de captura dos equipamentos
+---
+
+# Mapa de Teste
+
+RelatÃ³rio que exibe os resultados dos testes realizados nos equipamentos para validaÃ§Ã£o de captura, leitura de placa e conformidade da imagem, apresentados em formato de mapa de acertos.
+
+![RelatÃ³rio de Mapa de Teste de Equipamentos](../img/relatorio-mapa-teste.png)
+
+## Como acessar
+
+**Menu lateral** â†’ RelatÃ³rios â†’ **Mapa de Teste**
+
+## Dados do relatÃ³rio
+
+O mapa de teste exibe os resultados dos registros com `Homologacao = 1` em `TBInfracoes` e `TBOperacoes`, permitindo validar a qualidade de captura antes da homologaÃ§Ã£o oficial.
+
+### Fonte de dados: `TBPassagens` + `TBInfracoes`
+
+| Campo usado | Origem | DescriÃ§Ã£o |
+|------------|--------|-----------|
+| **Placa VeÃ­culo** | `TBPassagens.PlacaVeiculo` | Placa lida no teste |
+| **Erro OCR** | `TBInfracoes.ErroOcr` | Indica se houve falha na leitura |
+| **Velocidade Medida** | `TBPassagens.VelocidadeMedida` | Velocidade no momento |
+| **Data Hora Passagem** | `TBPassagens.DataHoraPassagem` | Momento da passagem de teste |
+| **Homologacao** | `TBInfracoes.Homologacao` | Flag que identifica registros de teste |
+
+## OperaÃ§Ã£o em modo HomologaÃ§Ã£o
+
+Quando `TBOperacoes.Homologacao = 1`, todas as infraÃ§Ãµes geradas sÃ£o marcadas como `Homologacao = 1` em `TBInfracoes`. Essas infraÃ§Ãµes **nÃ£o sÃ£o exportadas** para o Ã³rgÃ£o autuador e ficam disponÃ­veis apenas no mapa de teste.
+
+## IntegraÃ§Ãµes
+
+| Tabela | Campo | DescriÃ§Ã£o |
+|--------|-------|-----------|
+| `TBOperacoes` | `Homologacao` | OperaÃ§Ã£o em modo de teste |
+| `TBInfracoes` | `Homologacao` | InfraÃ§Ãµes de teste isoladas das reais |
+| `TBFaixas` | `Latitude`, `Longitude` | PosiÃ§Ã£o geogrÃ¡fica no mapa |
+
+
+=== power-bi.md ===
+---
+sidebar_position: 9
+title: RelatÃ³rios Power BI
+description: Dashboards e relatÃ³rios analÃ­ticos via Power BI
+---
+
+# RelatÃ³rios Power BI
+
+Acesso aos dashboards e relatÃ³rios analÃ­ticos integrados via Power BI.
+
+![Menu Power BI](../img/RelatÃ³rios%20BI%20-.menu.png)
+
+## Como acessar
+
+**Menu lateral** â†’ RelatÃ³rios â†’ **Power BI**
+
+## RelatÃ³rios disponÃ­veis
+
+| RelatÃ³rio | Imagem |
+|-----------|--------|
+| Comparativo de Placas | ![](../img/RelatÃ³rios%20BI%20-.relatorio%20comparativo%20de%20placas%20corrigidas%20e%20validadas%20no%20processamento.png) |
+| Dados Descartes Radares | ![](../img/RelatÃ³rios%20BI%20-.relatorio%20dados%20descartes%20radares%20cev.png) |
+| Boletim de MediÃ§Ã£o | ![](../img/RelatÃ³rios%20BI%20-.relatorio%20de%20boletim%20de%20mediÃ§Ã£o.png) |
+| Disponibilidade | ![](../img/RelatÃ³rios%20BI%20-.relatorio%20de%20disponibilidade.png) |
+| InfraÃ§Ã£o - Dia x Hora | ![](../img/RelatÃ³rios%20BI%20-.relatorio%20de%20infraÃ§Ã£o%20-%20dia%20X%20hora.png) |
+| InfraÃ§Ã£o | ![](../img/RelatÃ³rios%20BI%20-.relatorio%20de%20infraÃ§Ã£o.png) |
+| Processamento por Motivos | ![](../img/RelatÃ³rios%20BI%20-.relatorio%20de%20processamento%20por%20motivos.png) |
+| Processamento | ![](../img/RelatÃ³rios%20BI%20-.relatorio%20de%20processamento.png) |
+| Ãndice do OCR - Dia x Hora | ![](../img/RelatÃ³rios%20BI%20-.relatorio%20indice%20do%20ocr%20-%20dia%20X%20hora.png) |
+| Ãndice do OCR | ![](../img/RelatÃ³rios%20BI%20-.relatorio%20indice%20do%20ocr.png) |
+| Fluxo por Porte | ![](../img/RelatÃ³rios%20BI%20-.relatorio%20relatorio%20mÃ©dio%20diÃ¡rio%20de%20fluxo%20por%20porte.png) |
+| Triagem por UsuÃ¡rio | ![](../img/RelatÃ³rios%20BI%20-.relatorio%20triagem%20por%20Usua.png) |
+
+## Termos Tecnicos
+
+| Termo | Definicao |
+|-------|-----------|
+| [Triagem](../glossario/triagem) | Ver definicao no glossario |
+
+---
+
+## Navegacao Relacionada
+
+| Tipo | Pagina | Descricao |
+|------|--------|-----------|
+| Relacionado | [Relatorios Power BI (Admin)](../administracao/relatorios-power-bi) | Configuracao |
+
+
+=== processamento-imagens.md ===
+---
+sidebar_position: 8
+title: Processamento de Imagens
+description: Relatorio de processamento de imagens
+---
+
+# Relatorio de Processamento de Imagens
+
+Relatorio que apresenta o volume de imagens processadas no sistema.
+
+## Como acessar
+
+Menu lateral - Relatorios - Processamento de Imagens
+
+![Processamento de Imagens por Usuario](../img/Relatorio%20-%20Relatorio%20de%20procesamento%20de%20imagens%20por%20usuário.png)
+
+## Navegacao relacionada
+
+| Tipo | Pagina | Descricao |
+|------|--------|-----------|
+| Relacionado | [Processamento por Usuario](./processamento-por-usuario) | Detalhamento por usuario |
+
+
+=== processamento-por-usuario.md ===
+---
+sidebar_position: 11
+title: Processamento por UsuÃ¡rio
+description: RelatÃ³rio de processamento de imagens por usuÃ¡rio
+---
+
+# Processamento por UsuÃ¡rio
+
+Exibe a produtividade de processamento de imagens por analista/usuÃ¡rio.
+
+![Processamento por UsuÃ¡rio](../img/Relatorio%20-%20Relatorio%20de%20procesamento%20de%20imagens%20por%20usuÃ¡rio.png)
+
+## Como acessar
+
+**Menu lateral** â†’ RelatÃ³rios â†’ **Processamento por UsuÃ¡rio**
+
+| Coluna | DescriÃ§Ã£o |
+|--------|-----------|
+| **UsuÃ¡rio** | Analista responsÃ¡vel |
+| **Processadas** | Quantidade de imagens processadas |
+| **Descartadas** | Quantidade de imagens descartadas |
+| **PerÃ­odo** | Faixa de datas analisada |
+
+---
+
+## Navegacao Relacionada
+
+| Tipo | Pagina | Descricao |
+|------|--------|-----------|
+| Relacionado | [Usuarios](../controle-acesso/usuarios) | Cadastro de usuarios |
+| Relacionado | [Triagem](../infracoes/triagem) | Processo de triagem |
+
+
+=== relatorio-discrepancias.md ===
+---
+sidebar_position: 3
+title: RelatÃ³rio de DiscrepÃ¢ncias
+description: RelatÃ³rio de discrepÃ¢ncias identificadas no processamento
+---
+
+# RelatÃ³rio de DiscrepÃ¢ncias
+
+Exibe discrepÃ¢ncias identificadas durante o processamento de infraÃ§Ãµes.
+
+![RelatÃ³rio de DiscrepÃ¢ncias](../img/Relatorio%20-%20Relatorio%20de%20discrepancias.png)
+
+## Como acessar
+
+**Menu lateral** â†’ RelatÃ³rios â†’ **RelatÃ³rio de DiscrepÃ¢ncias**
+
+| Filtro | DescriÃ§Ã£o |
+|--------|-----------|
+| **PerÃ­odo** | Faixa de datas |
+| **Equipamento** | Filtrar por equipamento |
+| **Tipo de DiscrepÃ¢ncia** | Velocidade, placa, imagem |
+
+---
+
+## Navegacao Relacionada
+
+| Tipo | Pagina | Descricao |
+|------|--------|-----------|
+| Relacionado | [Auditoria](../infracoes/auditoria) | Revisao de infracoes |
+| Relacionado | [Triagem](../infracoes/triagem) | Origem das discrepancias |
+
+
+=== relatorio-infracoes.md ===
+---
+sidebar_position: 1
+title: RelatÃ³rio de InfraÃ§Ãµes
+description: RelatÃ³rio detalhado de infraÃ§Ãµes processadas
+---
+
+# RelatÃ³rio de InfraÃ§Ãµes
+
+Permite gerar relatÃ³rios detalhados das infraÃ§Ãµes processadas pelo sistema.
+
+![RelatÃ³rio de InfraÃ§Ãµes](../img/Relatorio%20-%20Relatorio%20de%20infraÃ§Ãµes.png)
+
+## Como acessar
+
+**Menu lateral** â†’ RelatÃ³rios â†’ **RelatÃ³rio de InfraÃ§Ãµes**
+
+| Filtro | DescriÃ§Ã£o |
+|--------|-----------|
+| **PerÃ­odo** | Faixa de datas |
+| **Equipamento** | Filtrar por equipamento |
+| **Enquadramento** | Tipo de infraÃ§Ã£o |
+| **Status** | Processada, descartada, exportada |
+
+## Termos Tecnicos
+
+| Termo | Definicao |
+|-------|-----------|
+| [Enquadramento](../glossario/enquadramento) | Ver definicao no glossario |
+
+---
+
+## Navegacao Relacionada
+
+| Tipo | Pagina | Descricao |
+|------|--------|-----------|
+| Relacionado | [Consulta de Infracoes](../infracoes/consulta-infracoes) | Consulta detalhada |
+| Relacionado | [Exportacao](../infracoes/exportacao) | Lotes exportados |
+
+
+=== relatorio-logs-envios.md ===
+---
+sidebar_position: 12
+title: Logs de Envios a IntegraÃ§Ã£o
+description: RelatÃ³rio de logs de passagens enviadas para integraÃ§Ã£o
+---
+
+# Logs de Envios a IntegraÃ§Ã£o
+
+Exibe o log de passagens enviadas para sistemas de integraÃ§Ã£o externos.
+
+![Logs de Envios](../img/Relatorio%20-%20Relatorio%20de%20log%20de%20passagens%20enviadas%20a%20integraÃ§Ã£o.png)
+
+## Como acessar
+
+**Menu lateral** â†’ RelatÃ³rios â†’ **Logs de Envios a IntegraÃ§Ã£o**
+
+| Coluna | DescriÃ§Ã£o |
+|--------|-----------|
+| **Data/Hora** | Momento do envio |
+| **Destino** | Sistema de destino |
+| **Registros** | Quantidade de registros enviados |
+| **Status** | Sucesso, Erro, Pendente |
+| **Mensagem** | Retorno do sistema externo |
+
+---
+
+## Navegacao Relacionada
+
+| Tipo | Pagina | Descricao |
+|------|--------|-----------|
+| Relacionado | [Exportacao](../infracoes/exportacao) | Lotes enviados |
+| Relacionado | [Webhooks](../administracao/webhooks) | Integracoes |
+
+
+=== relatorio-passagens.md ===
+---
+sidebar_position: 2
+title: RelatÃ³rio de Passagens
+description: RelatÃ³rio de passagens de veÃ­culos registradas
+---
+
+# RelatÃ³rio de Passagens
+
+Permite gerar relatÃ³rios das passagens de veÃ­culos registradas pelos equipamentos.
+
+![RelatÃ³rio de Passagens](../img/Relatorio%20-%20Relatorio%20de%20passagens.png)
+
+## Como acessar
+
+**Menu lateral** â†’ RelatÃ³rios â†’ **RelatÃ³rio de Passagens**
+
+| Filtro | DescriÃ§Ã£o |
+|--------|-----------|
+| **PerÃ­odo** | Faixa de datas |
+| **Equipamento** | Filtrar por equipamento |
+| **Faixa** | Faixa de trÃ¡fego |
+| **Placa** | Filtrar por placa especÃ­fica |
+
+---
+
+## Navegacao Relacionada
+
+| Tipo | Pagina | Descricao |
+|------|--------|-----------|
+| Relacionado | [Consulta de Placas](../operacoes/consulta-placas) | Buscar placa |
+| Relacionado | [Monitoramento Online](../operacoes/monitoramento-online) | Tempo real |
+
+
+=== categorias-veiculo.md ===
+---
+sidebar_position: 3
+title: Categorias de VeÃ­culos
+description: Cadastro de categorias de veÃ­culos
+---
+
+# Categorias de VeÃ­culos
+
+Permite cadastrar e gerenciar as categorias de veÃ­culos.
+
+![Lista de Categorias](../img/VeÃ­culos%20-%20categoia%20de%20veÃ­culos.png)
+
+## Como acessar
+
+**Menu lateral** â†’ VeÃ­culos â†’ **Categorias de VeÃ­culos**
+
+## Cadastro
+
+![Cadastro de Categoria](../img/VeÃ­culos%20-%20categoia%20de%20veÃ­culos%20-%20cadastro.png)
+
+| Campo | DescriÃ§Ã£o |
+|-------|-----------|
+| **CÃ³digo** | CÃ³digo identificador |
+| **DescriÃ§Ã£o** | Nome da categoria |
+| **Ativo** | Status do registro |
+
+---
+
+## Navegacao Relacionada
+
+| Tipo | Pagina | Descricao |
+|------|--------|-----------|
+| Relacionado | [Classificacoes](./classificacoes-veiculos) | Classificacoes vinculadas |
+
+
+=== classificacoes-veiculos.md ===
+---
+sidebar_position: 4
+title: ClassificaÃ§Ãµes de VeÃ­culos
+description: Cadastro de classificaÃ§Ãµes de veÃ­culos
+---
+
+# ClassificaÃ§Ãµes de VeÃ­culos
+
+Permite cadastrar e gerenciar as classificaÃ§Ãµes dos veÃ­culos.
+
+![Lista de ClassificaÃ§Ãµes](../img/VeÃ­culos%20-%20ClassificaÃ§Ãµes%20dos%20Veiculos.png)
+
+## Como acessar
+
+**Menu lateral** â†’ VeÃ­culos â†’ **ClassificaÃ§Ãµes de VeÃ­culos**
+
+## Cadastro
+
+![Cadastro de ClassificaÃ§Ã£o](../img/VeÃ­culos%20-%20ClassificaÃ§Ãµes%20dos%20Veiculos%20-%20cadastros.png)
+
+| Campo | DescriÃ§Ã£o |
+|-------|-----------|
+| **CÃ³digo** | CÃ³digo identificador |
+| **DescriÃ§Ã£o** | Nome da classificaÃ§Ã£o |
+| **Tipo de VeÃ­culo** | Tipo vinculado |
+| **Ativo** | Status do registro |
+
+---
+
+## Navegacao Relacionada
+
+| Tipo | Pagina | Descricao |
+|------|--------|-----------|
+| Relacionado | [Categorias](./categorias-veiculo) | Categorias vinculadas |
+| Relacionado | [Tipos de Veiculos](./tipos-veiculos) | Tipos |
+
+
+=== cores.md ===
+---
+sidebar_position: 5
+title: Cores
+description: Cadastro de cores de veÃ­culos
+---
+
+# Cores
+
+Permite cadastrar e gerenciar as cores dos veÃ­culos.
+
+![Lista de Cores](../img/VeÃ­culos%20-%20cores.png)
+
+## Como acessar
+
+**Menu lateral** â†’ VeÃ­culos â†’ **Cores**
+
+## Cadastro
+
+![Cadastro de Cor](../img/VeÃ­culos%20-%20cores%20-%20cadastro.png)
+
+| Campo | DescriÃ§Ã£o |
+|-------|-----------|
+| **CÃ³digo** | CÃ³digo identificador |
+| **DescriÃ§Ã£o** | Nome da cor (ex: Branco, Preto, Prata) |
+| **Ativo** | Status do registro |
+
+---
+
+## Navegacao Relacionada
+
+| Tipo | Pagina | Descricao |
+|------|--------|-----------|
+| Relacionado | [Consulta de Infracoes](../infracoes/consulta-infracoes) | Filtro por cor |
+
+
+=== especie-veiculo.md ===
+---
+sidebar_position: 2
+title: EspÃ©cies de VeÃ­culos
+description: Cadastro de espÃ©cies de veÃ­culos
+---
+
+# EspÃ©cies de VeÃ­culos
+
+Permite cadastrar e gerenciar as espÃ©cies de veÃ­culos.
+
+![Lista de EspÃ©cies](../img/VeÃ­culos%20-%20EspÃ©cies%20de%20veÃ­culos.png)
+
+## Como acessar
+
+**Menu lateral** â†’ VeÃ­culos â†’ **EspÃ©cies de VeÃ­culos**
+
+## Cadastro
+
+![Cadastro de EspÃ©cie](../img/VeÃ­culos%20-%20EspÃ©cies%20de%20veÃ­culos%20-%20cadastro.png)
+
+| Campo | DescriÃ§Ã£o |
+|-------|-----------|
+| **CÃ³digo** | CÃ³digo identificador |
+| **DescriÃ§Ã£o** | Nome da espÃ©cie (ex: Passageiro, Carga, Misto) |
+| **Ativo** | Status do registro |
+
+---
+
+## Navegacao Relacionada
+
+| Tipo | Pagina | Descricao |
+|------|--------|-----------|
+| Relacionado | [Tipos de Veiculos](./tipos-veiculos) | Tipos vinculados |
+
+
+=== marcas-veiculos.md ===
+---
+sidebar_position: 6
+title: Marcas de VeÃ­culos
+description: Cadastro de marcas de veÃ­culos
+---
+
+# Marcas de VeÃ­culos
+
+Permite cadastrar e gerenciar as marcas dos veÃ­culos.
+
+![Lista de Marcas](../img/VeÃ­culos%20-%20marcas%20de%20veÃ­culos.png)
+
+## Como acessar
+
+**Menu lateral** â†’ VeÃ­culos â†’ **Marcas de VeÃ­culos**
+
+## Cadastro
+
+![Cadastro de Marca](../img/VeÃ­culos%20-%20marcas%20de%20veÃ­culos%20-%20cadastro.png)
+
+| Campo | DescriÃ§Ã£o |
+|-------|-----------|
+| **CÃ³digo** | CÃ³digo identificador |
+| **DescriÃ§Ã£o** | Nome da marca (ex: Volkswagen, Fiat, Toyota) |
+| **Ativo** | Status do registro |
+
+---
+
+## Navegacao Relacionada
+
+| Tipo | Pagina | Descricao |
+|------|--------|-----------|
+| Relacionado | [Modelos de Veiculos](./modelos-veiculos) | Modelos da marca |
+
+
+=== modelos-veiculos.md ===
+---
+sidebar_position: 7
+title: Modelos de VeÃ­culos
+description: Cadastro de modelos de veÃ­culos por marca
+---
+
+# Modelos de VeÃ­culos
+
+Permite cadastrar e gerenciar os modelos de veÃ­culos vinculados Ã s marcas.
+
+![Lista de Modelos](../img/VeÃ­culos%20-%20marcas-modelos%20de%20veiculos.png)
+
+## Como acessar
+
+**Menu lateral** â†’ VeÃ­culos â†’ **Modelos de VeÃ­culos**
+
+## Cadastro
+
+![Cadastro de Modelo](../img/VeÃ­culos%20-%20marcas-modelos%20de%20veiculos%20-%20cadastro.png)
+
+| Campo | DescriÃ§Ã£o |
+|-------|-----------|
+| **Marca** | Marca vinculada |
+| **CÃ³digo** | CÃ³digo do modelo |
+| **DescriÃ§Ã£o** | Nome do modelo (ex: Gol, Uno, Corolla) |
+| **Ativo** | Status do registro |
+
+---
+
+## Navegacao Relacionada
+
+| Tipo | Pagina | Descricao |
+|------|--------|-----------|
+| Relacionado | [Marcas de Veiculos](./marcas-veiculos) | Marca do modelo |
+
+
+=== municipios.md ===
+---
+sidebar_position: 8
+title: MunicÃ­pios
+description: Cadastro de municÃ­pios
+---
+
+# MunicÃ­pios
+
+Permite cadastrar e gerenciar os municÃ­pios utilizados no sistema.
+
+![Lista de MunicÃ­pios](../img/VeÃ­culos%20-%20MunicÃ­pios.png)
+
+## Como acessar
+
+**Menu lateral** â†’ VeÃ­culos â†’ **MunicÃ­pios**
+
+## Cadastro
+
+![Cadastro de MunicÃ­pio](../img/VeÃ­culos%20-%20MunicÃ­pios%20-%20cadastro.png)
+
+| Campo | DescriÃ§Ã£o |
+|-------|-----------|
+| **CÃ³digo IBGE** | CÃ³digo oficial do municÃ­pio |
+| **Nome** | Nome do municÃ­pio |
+| **UF** | Estado |
+| **Ativo** | Status do registro |
+
+---
+
+## Navegacao Relacionada
+
+| Tipo | Pagina | Descricao |
+|------|--------|-----------|
+| Relacionado | [Regioes](../administracao/regioes) | Regioes administrativas |
+
+
+=== tipos-veiculos.md ===
+---
+sidebar_position: 1
+title: Tipos de VeÃ­culos
+description: Cadastro de tipos de veÃ­culos
+---
+
+# Tipos de VeÃ­culos
+
+Permite cadastrar e gerenciar os tipos de veÃ­culos utilizados no sistema.
+
+![Lista de Tipos](../img/VeÃ­culos%20-%20tipos%20de%20veÃ­culos.png)
+
+## Como acessar
+
+**Menu lateral** â†’ VeÃ­culos â†’ **Tipos de VeÃ­culos**
+
+## Cadastro
+
+![Cadastro de Tipo](../img/VeÃ­culos%20-%20tipos%20de%20veÃ­culos%20-%20cadastro.png)
+
+| Campo | DescriÃ§Ã£o |
+|-------|-----------|
+| **CÃ³digo** | CÃ³digo identificador do tipo |
+| **DescriÃ§Ã£o** | Nome do tipo de veÃ­culo (ex: AutomÃ³vel, CaminhÃ£o, Motocicleta) |
+| **Ativo** | Status do registro |
+
+---
+
+## Navegacao Relacionada
+
+| Tipo | Pagina | Descricao |
+|------|--------|-----------|
+| Relacionado | [Classificacoes](./classificacoes-veiculos) | Classificacoes |
+| Relacionado | [Especies](./especie-veiculo) | Especies |
+
+

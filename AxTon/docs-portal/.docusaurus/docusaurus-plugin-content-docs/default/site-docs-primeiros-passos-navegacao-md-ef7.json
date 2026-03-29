@@ -18,11 +18,11 @@
   },
   "sidebar": "manualSidebar",
   "previous": {
-    "title": "Painel Principal",
-    "permalink": "/AxTon.Docs/primeiros-passos/dashboard"
+    "title": "Login",
+    "permalink": "/AxTon.Docs/primeiros-passos/login"
   },
   "next": {
-    "title": "Locais",
-    "permalink": "/AxTon.Docs/cadastros/locais"
+    "title": "📊 Dashboards",
+    "permalink": "/AxTon.Docs/primeiros-passos/dashboard"
   }
 }

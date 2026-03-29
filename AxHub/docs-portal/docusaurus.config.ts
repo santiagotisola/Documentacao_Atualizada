@@ -31,6 +31,10 @@ const config: Config = {
     locales: ['pt-BR'],
   },
 
+  scripts: [
+    '/AxHub.Docs/widget/axhub-suporte.js',
+  ],
+
   presets: [
     [
       'classic',
@@ -90,7 +94,7 @@ const config: Config = {
         {
           title: 'Axion Tecnologia',
           items: [
-            { label: 'Site Axion', href: 'https://axion.com.br' },
+            { label: 'Site Axion', href: 'https://axiontecnologia.com.br/' },
           ],
         },
       ],

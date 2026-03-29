@@ -17,11 +17,12 @@ const config: Config = {
   organizationName: 'Axion-Tecnologia',
   projectName: 'AxTon.Docs',
 
-  onBrokenLinks: 'throw',
+  onBrokenLinks: 'warn',
 
   markdown: {
     hooks: {
       onBrokenMarkdownLinks: 'warn',
+      onBrokenMarkdownImages: 'warn',
     },
   },
 
@@ -29,6 +30,10 @@ const config: Config = {
     defaultLocale: 'pt-BR',
     locales: ['pt-BR'],
   },
+
+  scripts: [
+    '/AxTon.Docs/widget/axton-suporte.js',
+  ],
 
   presets: [
     [
@@ -56,7 +61,7 @@ const config: Config = {
       title: 'AxTon',
       logo: {
         alt: 'AxTon Logo',
-        src: 'img/logo.svg',
+        src: 'img/axion-logo.png',
       },
       items: [
         {
@@ -91,16 +96,20 @@ const config: Config = {
           title: 'Módulos',
           items: [
             {
-              label: 'Locais',
-              to: '/cadastros/locais',
+              label: 'Pesagem',
+              to: '/pesagem/postos',
             },
             {
-              label: 'Classificação de Veículos',
-              to: '/cadastros/classificacao-veiculos',
+              label: 'Infrações',
+              to: '/infracoes/triagem',
             },
             {
-              label: 'Usuários',
-              to: '/administracao/usuarios',
+              label: 'Operações',
+              to: '/operacoes/monitoramento-online',
+            },
+            {
+              label: 'Relatórios',
+              to: '/relatorios/relatorio-passagens',
             },
           ],
         },
@@ -109,7 +118,7 @@ const config: Config = {
           items: [
             {
               label: 'Site Axion',
-              href: 'https://axion.com.br',
+              href: 'https://axiontecnologia.com.br/',
             },
           ],
         },

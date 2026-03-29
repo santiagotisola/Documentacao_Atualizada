@@ -18,11 +18,11 @@
   },
   "sidebar": "manualSidebar",
   "previous": {
-    "title": "Usuários",
-    "permalink": "/AxTon.Docs/administracao/usuarios"
+    "title": "🔐 Permissões de acesso",
+    "permalink": "/AxTon.Docs/administracao/permissoes"
   },
   "next": {
-    "title": "Permissões de Acesso",
-    "permalink": "/AxTon.Docs/administracao/permissoes"
+    "title": "Pesagem",
+    "permalink": "/AxTon.Docs/glossario/pesagem"
   }
 }

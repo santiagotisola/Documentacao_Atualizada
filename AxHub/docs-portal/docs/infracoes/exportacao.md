@@ -58,6 +58,10 @@ Os layouts de arquivo são configurados em **Administração → Layouts Arquivo
 
 ---
 
+:::info Dica
+Em caso de erros na exportação de lotes, utilize o assistente **AxionIA** (botão no canto inferior direito) para obter orientações detalhadas de correção.
+:::
+
 ## Navegacao Relacionada
 
 | Tipo | Pagina | Descricao |

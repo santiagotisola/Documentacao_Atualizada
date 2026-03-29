@@ -18,11 +18,11 @@
   },
   "sidebar": "manualSidebar",
   "previous": {
-    "title": "Classificação de Veículos",
-    "permalink": "/AxTon.Docs/cadastros/classificacao-veiculos"
+    "title": "📊 Relatório de Pesagem",
+    "permalink": "/AxTon.Docs/relatorios/relatorio-passagens"
   },
   "next": {
-    "title": "Usuários",
-    "permalink": "/AxTon.Docs/administracao/usuarios"
+    "title": "📦 Sequenciais de Exportação",
+    "permalink": "/AxTon.Docs/infracoes/exportacao"
   }
 }
