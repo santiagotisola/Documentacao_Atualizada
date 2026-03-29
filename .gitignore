@@ -6,3 +6,7 @@ build/
 **/build/
 .docusaurus/
 **/.docusaurus/
+
+# Logs e dados sensíveis
+**/logs/
+.env
