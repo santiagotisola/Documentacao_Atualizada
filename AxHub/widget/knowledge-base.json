@@ -1,5 +1,5 @@
 {
-  "version": "2.0.0",
+  "version": "3.0.0",
   "updated": "2026-03-29",
   "system": "AxHub",
   "entries": [
@@ -2523,6 +2523,517 @@
       "related": [
         "arcos",
         "cadastro-operacoes"
+      ]
+    },
+    {
+      "id": "motivos-descarte-catalogo",
+      "module": "Infrações",
+      "title": "Catálogo de Motivos de Descarte",
+      "keywords": [
+        "motivo descarte",
+        "catálogo descarte",
+        "por que descartou",
+        "razão descarte",
+        "tipos descarte",
+        "lista motivos",
+        "descarte automático",
+        "descarte manual"
+      ],
+      "path": "Menu lateral → Administração → Motivos de Descarte",
+      "content": "O catálogo de motivos de descarte define todas as razões possíveis para descartar uma infração na triagem. Motivos podem ser de tipo 'Descarte' ou 'Não-Descarte' e são usados tanto em descartes manuais (triagem) quanto automáticos (exceções).",
+      "steps": [
+        "Acesse Administração → Motivos de Descarte",
+        "Consulte a lista de motivos cadastrados (código + descrição)",
+        "Para criar novo motivo: clique 'Novo' → preencha Código, Descrição e Tipo",
+        "Motivos podem ser habilitados/desabilitados sem excluir",
+        "Vincule motivos aos tipos de infração em 'Tipo Infração por Motivo'"
+      ],
+      "docUrl": "administracao/motivos-descarte",
+      "related": [
+        "triagem-infracoes",
+        "infracoes-descartadas",
+        "excecoes"
+      ],
+      "dbTables": [
+        "TBMotivosDescartes",
+        "TBMotivoDescarteTipoInfracoes"
+      ]
+    },
+    {
+      "id": "historico-triagem",
+      "module": "Infrações",
+      "title": "Histórico de Triagem de Infrações",
+      "keywords": [
+        "histórico triagem",
+        "quem triou",
+        "quem descartou",
+        "reabertura infração",
+        "audit trail",
+        "rastrear triagem",
+        "log triagem",
+        "alteração placa triagem"
+      ],
+      "path": "Menu lateral → Infrações → Consulta → Detalhes da Infração → Histórico",
+      "content": "Cada infração mantém um histórico completo de todas as ações de triagem: quem validou, quem descartou, reaberturas, alterações de placa e mudanças de status. Útil para auditorias e rastrear responsabilidades.",
+      "steps": [
+        "Acesse Infrações → Consulta e localize a infração",
+        "Clique na infração para abrir detalhes",
+        "Verifique a seção de Histórico de Triagem",
+        "Cada registro mostra: Usuário, Data/Hora, Status Anterior → Novo Status",
+        "Reaberturas e alterações de placa também aparecem no histórico"
+      ],
+      "docUrl": "infracoes/consulta",
+      "related": [
+        "triagem-infracoes",
+        "reabrir-infracao",
+        "auditoria"
+      ],
+      "dbTables": [
+        "TBHistoricoTriagens",
+        "TBTriagens"
+      ]
+    },
+    {
+      "id": "analise-triagem-produtividade",
+      "module": "Infrações",
+      "title": "Produtividade e Métricas de Triagem",
+      "keywords": [
+        "produtividade triagem",
+        "métricas triagem",
+        "descarte mais comum",
+        "top motivos descarte",
+        "análise triagem",
+        "descarte automático percentual",
+        "tempo triagem"
+      ],
+      "path": "Menu lateral → Relatórios → Processamento por Usuário / Infrações → Consulta",
+      "content": "As métricas de triagem mostram a produtividade dos analistas, os motivos de descarte mais comuns e a proporção entre descartes manuais e automáticos. Os dados vêm de TBTriagens (DescarteAutomatico, InicioTriagem) e TBMotivosDescartes.",
+      "steps": [
+        "Para produtividade por analista: Relatórios → Processamento por Usuário",
+        "Para motivos mais comuns: Infrações → Infrações Descartadas → filtrar período",
+        "Para ver descartes automáticos: verificar campo DescarteAutomatico na consulta",
+        "Para tempo de análise: verificar Configurações → aba Triagem"
+      ],
+      "docUrl": "infracoes/triagem",
+      "related": [
+        "triagem-passo-a-passo",
+        "motivos-descarte-catalogo",
+        "infracoes-descartadas"
+      ],
+      "dbTables": [
+        "TBTriagens",
+        "TBMotivosDescartes",
+        "TBHistoricoTriagens"
+      ]
+    },
+    {
+      "id": "erro-lote-exportacao",
+      "module": "Infrações",
+      "title": "Erros em Lote de Exportação",
+      "keywords": [
+        "erro lote",
+        "lote com erro",
+        "exportação falhou",
+        "status exportação",
+        "reprocessar lote",
+        "lote pendente",
+        "mensagem erro exportação",
+        "lote não enviou"
+      ],
+      "path": "Menu lateral → Infrações → Exportação",
+      "content": "Quando um lote de exportação falha, o sistema registra a mensagem de erro e o status. Causas comuns: dados incompletos (UF/município), imagens obrigatórias ausentes, enquadramento inválido ou falha de comunicação com o órgão. Verifique o campo Mensagem no lote.",
+      "steps": [
+        "Acesse Infrações → Exportação",
+        "Filtre por StatusExportação = 'Erro' ou 'Pendente'",
+        "Clique no lote para ver a Mensagem de erro detalhada",
+        "Corrija os dados apontados (geralmente falta de campo obrigatório)",
+        "Reprocesse o lote clicando em 'Gerar novamente'"
+      ],
+      "docUrl": "infracoes/exportacao",
+      "related": [
+        "exportar-infracoes",
+        "erro-exportacao-uf-municipio",
+        "erro-exportacao-imagens-obrigatorias",
+        "erro-exportacao-lote-geral"
+      ],
+      "dbTables": [
+        "TBLoteExportacoes",
+        "TBInfracoes"
+      ]
+    },
+    {
+      "id": "erro-importacao-lote",
+      "module": "Infrações",
+      "title": "Erros na Importação de Passagens",
+      "keywords": [
+        "erro importação",
+        "importação falhou",
+        "lote importação erro",
+        "passagem não importou",
+        "arquivo entrada erro",
+        "código erro importação",
+        "fabricante erro envio"
+      ],
+      "path": "Menu lateral → Relatórios → Lote de Importação",
+      "content": "Erros de importação ocorrem quando o arquivo enviado pelo fabricante contém dados inválidos. O sistema registra cada erro com código e descrição. Verifique em Relatórios → Lote de Importação. Causas comuns: formato de arquivo errado, equipamento não cadastrado, faixa inexistente.",
+      "steps": [
+        "Acesse Relatórios → Lote de Importação",
+        "Filtre por StatusImportação = 'Erro'",
+        "Verifique CodigoErro e Descrição do erro",
+        "Corrija o arquivo ou cadastro do equipamento correspondente",
+        "O fabricante pode reenviar o arquivo corrigido via API"
+      ],
+      "docUrl": "relatorios/lote-importacao",
+      "related": [
+        "token-fabricante",
+        "cadastrar-equipamento",
+        "infracao-nao-aparece"
+      ],
+      "dbTables": [
+        "TBLoteImportacoes",
+        "TBLoteImportacaoErros"
+      ]
+    },
+    {
+      "id": "ticket-pesagem-ciclo",
+      "module": "Balança",
+      "title": "Ciclo Completo do Ticket de Pesagem",
+      "keywords": [
+        "ticket pesagem completo",
+        "ciclo pesagem",
+        "ticket aberto fechado",
+        "pesagem sequencial",
+        "aferição balança",
+        "eixo pesagem",
+        "ticket preso aberto",
+        "descarte ticket"
+      ],
+      "path": "Menu lateral → Balança → Tickets Abertos / Tickets Fechados",
+      "content": "O ticket de pesagem segue: Abertura (passagem detectada) → Pesagem (veículo na balança) → Classificação (eixos/peso) → Fechamento. Tickets que não fecham ficam 'presos' e devem ser liberados manualmente. Cada ticket tem sequencial, aferição, eixos e motivo de abertura/fechamento.",
+      "steps": [
+        "Consulte tickets abertos em Balança → Tickets Abertos",
+        "Verifique se o veículo já foi pesado (DataHoraFechamento preenchida?)",
+        "Para tickets presos: Balança → Liberar Pesagem",
+        "Para descarte: informe o motivo de descarte do ticket",
+        "Tickets fechados ficam em Balança → Tickets Fechados para consulta"
+      ],
+      "docUrl": "balanca/tickets-abertos",
+      "related": [
+        "ticket-pesagem",
+        "reclassificar-veiculo",
+        "postos-pesagem"
+      ],
+      "dbTables": [
+        "TBTicketPesagens",
+        "TBEixoPesagens",
+        "TBGrupoEixoPesagens",
+        "TBDadosPesagens"
+      ]
+    },
+    {
+      "id": "operacao-status-heartbeat",
+      "module": "Operações",
+      "title": "Status de Operação e Último Heartbeat",
+      "keywords": [
+        "operação ativa",
+        "operação parada",
+        "último heartbeat operação",
+        "sem passagens",
+        "sem infrações",
+        "operação sem dados",
+        "data última passagem",
+        "data última infração"
+      ],
+      "path": "Menu lateral → Operações → Cadastro de Operações",
+      "content": "Cada operação registra a DataHoraUltimaPassagem e DataHoraUltimaInfracao. Se UltimoHeartbeat estiver muito antigo (>24h), o equipamento pode estar offline. Verificar em Monitoramento Online se há comunicação.",
+      "steps": [
+        "Acesse Operações → Cadastro de Operações",
+        "Verifique a coluna 'Último Heartbeat' da operação",
+        "Se estiver há mais de 24h sem heartbeat, o equipamento pode estar offline",
+        "Confira a DataHoraUltimaPassagem — se zerada, não há passagens chegando",
+        "Verifique em Monitoramento Online o status em tempo real"
+      ],
+      "docUrl": "operacoes/cadastro-operacoes",
+      "related": [
+        "equipamento-offline",
+        "monitoramento-online",
+        "cadastro-operacoes"
+      ],
+      "dbTables": [
+        "TBOperacoes",
+        "TBHeartbeatEquipamentos"
+      ]
+    },
+    {
+      "id": "interrupcoes-operacao",
+      "module": "Operações",
+      "title": "Interrupções de Operação",
+      "keywords": [
+        "interrupção",
+        "operação parada",
+        "horas paradas",
+        "equipamento parou",
+        "justificativa parada",
+        "interrupção automática",
+        "horas sem operação"
+      ],
+      "path": "Menu lateral → Medição → Interrupções",
+      "content": "Interrupções registram períodos em que o equipamento ficou parado durante uma operação. Podem ser automáticas (detectadas pelo sistema quando heartbeat para) ou manuais (registradas pelo operador). Impactam diretamente a medição contratual.",
+      "steps": [
+        "Acesse Medição → Interrupções",
+        "Filtre por Operação, Equipamento e Período",
+        "Verifique se a interrupção foi Automática ou manual",
+        "Para registrar manualmente: clique 'Novo' → preencha Equipamento, Data/Hora Início/Fim, Motivo",
+        "Clique 'Processar Interrupções' para que sejam descontadas na medição"
+      ],
+      "docUrl": "medicoes/interrupcoes",
+      "related": [
+        "interrupcao-medicao",
+        "gerar-medicao",
+        "equipamento-offline"
+      ],
+      "dbTables": [
+        "TBOperacoesInterrupcoes",
+        "TBOperacoes",
+        "TBEquipamentos"
+      ]
+    },
+    {
+      "id": "discrepancias-passagens",
+      "module": "Relatórios",
+      "title": "Relatório de Discrepâncias",
+      "keywords": [
+        "discrepância",
+        "anomalia",
+        "passagem vs infração",
+        "percentual discrepância",
+        "media passagem inconsistente",
+        "volume anormal",
+        "relatório discrepância"
+      ],
+      "path": "Menu lateral → Relatórios → Relatório de Discrepâncias",
+      "content": "O relatório de discrepâncias compara volumes de passagens e infrações por faixa/hora, identificando anomalias. Se o percentual de discrepância for muito alto, pode indicar problema no equipamento, erro de configuração ou falha na importação.",
+      "steps": [
+        "Acesse Relatórios → Relatório de Discrepâncias",
+        "Filtre por Período, Equipamento ou Faixa",
+        "Analise os percentuais: PercentualDiscrepanciaPassagem e PercentualDiscrepanciaInfracao",
+        "Valores muito altos (>50%) indicam possível problema no equipamento",
+        "Compare com Monitoramento Online para confirmar se o equipamento está operando normalmente"
+      ],
+      "docUrl": "relatorios/discrepancias",
+      "related": [
+        "monitoramento-online",
+        "equipamento-offline",
+        "relatorio-passagens"
+      ],
+      "dbTables": [
+        "TBDiscrepancias",
+        "TBPassagens",
+        "TBInfracoes"
+      ]
+    },
+    {
+      "id": "volume-quantitativos",
+      "module": "Relatórios",
+      "title": "Quantitativos de Passagens e Infrações",
+      "keywords": [
+        "quantitativo",
+        "volume passagens",
+        "volume infrações",
+        "contagem hora",
+        "fluxo hora",
+        "média passagens",
+        "índice OCR",
+        "placas não lidas",
+        "sequencial passagens"
+      ],
+      "path": "Menu lateral → Relatórios → Fluxo Diário de Veículos / Relatório de Passagens",
+      "content": "Os quantitativos registram por hora: total de passagens, infrações, testes, média de passagens/infrações, sequenciais e índice OCR (placas lidas vs não lidas). Uma queda brusca no volume pode indicar equipamento offline ou falha na importação.",
+      "steps": [
+        "Acesse Relatórios → Fluxo Diário de Veículos para ver volume por hora",
+        "Relatórios → Relatório de Passagens para detalhes por faixa",
+        "Compare volumes entre dias — queda brusca indica problema",
+        "Verifique índice OCR (PlacasLidas / Total) — abaixo de 80% pode indicar problema na câmera",
+        "Use Dashboard para visão rápida dos indicadores do dia"
+      ],
+      "docUrl": "relatorios/passagens",
+      "related": [
+        "relatorio-passagens",
+        "monitoramento-online",
+        "discrepancias-passagens"
+      ],
+      "dbTables": [
+        "TBQuantitativos",
+        "TBPassagens"
+      ]
+    },
+    {
+      "id": "logs-acesso-sistema",
+      "module": "Controle de Acesso",
+      "title": "Logs de Acesso ao Sistema",
+      "keywords": [
+        "log acesso",
+        "quem acessou",
+        "auditoria acesso",
+        "IP acesso",
+        "URL acessada",
+        "rastrear usuário",
+        "sessão usuário"
+      ],
+      "path": "Menu lateral → Controle de Acesso → Logs de Acesso",
+      "content": "Os logs registram todas as ações dos usuários no sistema: Data/Hora, Usuário, IP público e local, URL acessada, método HTTP e body da requisição. Útil para auditoria de segurança e investigar ações suspeitas.",
+      "steps": [
+        "Acesse Controle de Acesso → Logs de Acesso",
+        "Filtre por Usuário, Período ou IP",
+        "Verifique a coluna URL para identificar qual tela foi acessada",
+        "O IP público ajuda a identificar de onde o acesso foi feito",
+        "UserAgent mostra qual navegador/dispositivo foi utilizado"
+      ],
+      "docUrl": "controle-acesso/logs",
+      "related": [
+        "logs-acesso",
+        "restricao-ip",
+        "perfis-acesso"
+      ],
+      "dbTables": [
+        "TBLogsAcessos",
+        "TBUsuarios",
+        "TBUserSessions"
+      ]
+    },
+    {
+      "id": "placas-repetidas-anomalia",
+      "module": "Operações",
+      "title": "Placas Repetidas e Anomalias OCR",
+      "keywords": [
+        "placa repetida",
+        "placa duplicada",
+        "OCR errado",
+        "mesma placa muitas vezes",
+        "anomalia placa",
+        "leitura incorreta",
+        "placa clonada"
+      ],
+      "path": "Menu lateral → Operações → Consulta de Placas",
+      "content": "O sistema detecta placas que aparecem com frequência anormal (muitas passagens em curto período). Pode indicar erro de OCR (câmera lendo placa errada repetidamente) ou veículo com placa clonada. Consulte em Operações → Consulta de Placas filtrando por período e verifique as imagens.",
+      "steps": [
+        "Acesse Operações → Consulta de Placas",
+        "Filtre por placa suspeita e período curto",
+        "Verifique as imagens de cada passagem — se não correspondem ao veículo, é erro de OCR",
+        "Se imagens mostram veículos diferentes com mesma placa, pode ser clonagem",
+        "Para erro de OCR: o analista corrige na triagem ao editar a placa"
+      ],
+      "docUrl": "operacoes/consulta-placas",
+      "related": [
+        "consulta-placas",
+        "triagem-infracoes",
+        "placa-nao-reconhecida"
+      ],
+      "dbTables": [
+        "TBPlacasRepetidas",
+        "TBPassagens"
+      ]
+    },
+    {
+      "id": "medicao-faixas-performance",
+      "module": "Medição",
+      "title": "Performance por Faixa na Medição",
+      "keywords": [
+        "performance faixa",
+        "índice operação",
+        "horas operação faixa",
+        "valor faixa medição",
+        "multa imagem inválida",
+        "IP faixa",
+        "contagem veículos faixa",
+        "BDI medição"
+      ],
+      "path": "Menu lateral → Medição → Medições Finalizadas → Detalhes",
+      "content": "A medição detalha por faixa: total de infrações (válidas/inválidas), horas previstas vs operadas, horas paralisadas, índice de performance (IP), índice OCR, contagem de veículos e valores financeiros (BDI, descontos). Permite auditar a performance contratual de cada equipamento.",
+      "steps": [
+        "Acesse Medição → Medições Finalizadas",
+        "Selecione a medição para ver detalhes por faixa",
+        "Analise o IP (Índice de Performance) — meta contratual geralmente >95%",
+        "Verifique HorasParalisadas e se foram justificadas",
+        "Compare ValorPrevistoPorFaixa vs ValorTotalPorFaixa para identificar descontos"
+      ],
+      "docUrl": "medicoes/medicoes",
+      "related": [
+        "gerar-medicao",
+        "interrupcoes-operacao",
+        "contratos-medicao",
+        "indices-performance"
+      ],
+      "dbTables": [
+        "TBMedicaoFaixas",
+        "TBMedicoes",
+        "TBMedicaoEquipamentos"
+      ]
+    },
+    {
+      "id": "posto-funcionamento",
+      "module": "Balança",
+      "title": "Funcionamento dos Postos de Pesagem",
+      "keywords": [
+        "posto aberto",
+        "posto fechado",
+        "abertura posto",
+        "fechamento posto",
+        "motivo fechamento posto",
+        "horário funcionamento posto",
+        "posto pesagem status"
+      ],
+      "path": "Menu lateral → Balança → Postos",
+      "content": "Os postos de pesagem têm controle de abertura e fechamento. Cada abertura registra o usuário responsável e cada fechamento exige motivo. Um posto sem fechamento registrado pode indicar problema operacional.",
+      "steps": [
+        "Acesse Balança → Postos para ver todos os postos cadastrados",
+        "Verifique o status: se DataHoraFechamento está vazia, o posto está aberto",
+        "Para ver histórico de funcionamento: consulte aberturas/fechamentos por período",
+        "Postos fechados sem motivo devem ser investigados com o operador de campo",
+        "Novos postos são vinculados a equipamentos e operações na criação"
+      ],
+      "docUrl": "balanca/postos",
+      "related": [
+        "postos-pesagem",
+        "ticket-pesagem-ciclo",
+        "liberar-tickets-pesagem"
+      ],
+      "dbTables": [
+        "TBPostoFuncionamentos",
+        "TBPostos",
+        "TBPostoOperacoes"
+      ]
+    },
+    {
+      "id": "falhas-sequenciais",
+      "module": "Relatórios",
+      "title": "Falhas Sequenciais de Infrações",
+      "keywords": [
+        "falha sequencial",
+        "sequencial faltando",
+        "numeração infração quebrada",
+        "sequencial pulou",
+        "gap sequencial",
+        "relatório falhas sequenciais"
+      ],
+      "path": "Menu lateral → Relatórios → Falhas Sequenciais",
+      "content": "O relatório de falhas sequenciais detecta gaps na numeração dos autos de infração. Cada infração recebe um sequencial único, e falhas indicam registros perdidos ou importação incompleta. Importante para auditoria e controle legal.",
+      "steps": [
+        "Acesse Relatórios → Falhas Sequenciais",
+        "Filtre por Período, Faixa ou Operação",
+        "O sistema mostra: DataFalha, Descrição da falha, Total de falhas por faixa",
+        "Investigue falhas cruzando com Lotes de Importação do mesmo período",
+        "Falhas recorrentes na mesma faixa podem indicar problema no equipamento"
+      ],
+      "docUrl": "relatorios/falhas-sequenciais",
+      "related": [
+        "sequenciais-infracoes",
+        "erro-importacao-lote",
+        "relatorio-infracoes"
+      ],
+      "dbTables": [
+        "TBSequencialInfracoesFalhas",
+        "TBSequencialInfracoes"
       ]
     }
   ],

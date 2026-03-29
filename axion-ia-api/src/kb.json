@@ -1,0 +1,107 @@
+{
+  "erro_404_imagem": {
+    "keywords": ["404", "salvar imagem", "erro salvar"],
+    "assunto": "Erro ao salvar imagem",
+    "causa": "Falha no serviço de upload",
+    "acao": "Atualização aplicada no serviço",
+    "status": "Normalizado"
+  },
+  "equipamento_offline": {
+    "keywords": ["offline", "sem comunicação", "sem internet", "equipamento não comunica"],
+    "assunto": "Equipamento sem comunicação",
+    "causa": "Falta de conexão com a rede",
+    "acao": "Verificar conectividade local e status do equipamento",
+    "status": "Aguardando normalização"
+  },
+  "login_acesso": {
+    "keywords": ["login", "não consigo acessar", "senha", "acesso negado", "não entra", "usuario bloqueado"],
+    "assunto": "Problema de acesso/login",
+    "causa": "Credenciais incorretas ou usuário sem permissão",
+    "acao": "Verificar credenciais, validar perfil de acesso e permissões do usuário",
+    "status": "Em análise"
+  },
+  "exportacao_infracao": {
+    "keywords": ["exportação", "exportar", "renainf", "lote exportação", "erro exportação"],
+    "assunto": "Erro na exportação de infrações",
+    "causa": "Falha na geração do lote de exportação ou comunicação com RENAINF",
+    "acao": "Verificar dados obrigatórios do lote e reprocessar exportação",
+    "status": "Em análise"
+  },
+  "ticket_pesagem": {
+    "keywords": ["ticket", "pesagem", "ticket não finaliza", "emitir ticket", "ticket aberto"],
+    "assunto": "Problema com ticket de pesagem",
+    "causa": "Ticket preso em estado aberto ou erro na emissão",
+    "acao": "Verificar se a pesagem foi concluída e finalizar ticket manualmente se necessário",
+    "status": "Em análise"
+  },
+  "placa_nao_reconhecida": {
+    "keywords": ["placa", "ocr", "não reconheceu", "placa errada", "leitura placa"],
+    "assunto": "Placa não reconhecida pelo OCR",
+    "causa": "Falha na leitura automática da placa pelo sistema de câmeras",
+    "acao": "Verificar qualidade da imagem e corrigir placa manualmente na triagem",
+    "status": "Em análise"
+  },
+  "balanca_erro": {
+    "keywords": ["balança", "peso", "pesagem errada", "valor peso", "balança não funciona"],
+    "assunto": "Erro na balança de pesagem",
+    "causa": "Falha na comunicação com a balança ou descalibração",
+    "acao": "Verificar conexão com a balança e solicitar aferição INMETRO se necessário",
+    "status": "Aguardando verificação"
+  },
+  "relatorio": {
+    "keywords": ["relatório", "relatorio", "gerar relatório", "relatório não abre", "exportar relatório"],
+    "assunto": "Problema com relatórios",
+    "causa": "Erro na geração ou filtros incorretos",
+    "acao": "Verificar filtros aplicados (período, posto, operação) e tentar gerar novamente",
+    "status": "Em análise"
+  },
+  "configuracao_sistema": {
+    "keywords": ["configuração", "configurar", "dados do órgão", "sistema configuração"],
+    "assunto": "Configuração do sistema",
+    "causa": "Necessidade de ajuste nos parâmetros do sistema",
+    "acao": "Acessar Menu → Sistema → Configurações e ajustar parâmetros necessários",
+    "status": "Em análise"
+  },
+  "camera_ip": {
+    "keywords": ["câmera", "camera ip", "camera sem", "sem imagem", "imagem câmera"],
+    "assunto": "Problema com câmera IP",
+    "causa": "Câmera sem comunicação ou configuração incorreta de IP/porta",
+    "acao": "Verificar conectividade da câmera, validar IP/porta nas configurações",
+    "status": "Aguardando verificação"
+  },
+  "permissao": {
+    "keywords": ["permissão", "sem permissão", "não tem acesso", "perfil acesso", "bloqueado"],
+    "assunto": "Falta de permissão de acesso",
+    "causa": "Perfil do usuário sem a permissão necessária para a funcionalidade",
+    "acao": "Verificar perfil de acesso do usuário em Administração → Permissões",
+    "status": "Em análise"
+  },
+  "triagem_infracao": {
+    "keywords": ["triagem", "triar", "triagem infração", "validar infração"],
+    "assunto": "Problema na triagem de infrações",
+    "causa": "Erro na validação ou classificação da infração durante triagem",
+    "acao": "Verificar dados da infração, imagens e enquadramento na tela de triagem",
+    "status": "Em análise"
+  },
+  "mdfe_nfe": {
+    "keywords": ["mdf-e", "mdfe", "nf-e", "nfe", "nota fiscal", "manifesto"],
+    "assunto": "Problema com MDF-e / NF-e",
+    "causa": "Erro na validação ou consulta de documentos fiscais eletrônicos",
+    "acao": "Verificar dados do documento e status de comunicação com SEFAZ",
+    "status": "Em análise"
+  },
+  "alerta_veiculo": {
+    "keywords": ["alerta", "veículo alerta", "notificação", "alerta operação"],
+    "assunto": "Alerta de veículo / operação",
+    "causa": "Veículo detectado em situação de alerta cadastrado",
+    "acao": "Verificar alertas configurados e procedimento operacional aplicável",
+    "status": "Informativo"
+  },
+  "monitoramento": {
+    "keywords": ["monitoramento", "monitoramento online", "status equipamento", "dashboard"],
+    "assunto": "Monitoramento online de equipamentos",
+    "causa": "Necessidade de verificar status operacional dos equipamentos",
+    "acao": "Acessar Operações → Monitoramento Online para visualizar status em tempo real",
+    "status": "Informativo"
+  }
+}
