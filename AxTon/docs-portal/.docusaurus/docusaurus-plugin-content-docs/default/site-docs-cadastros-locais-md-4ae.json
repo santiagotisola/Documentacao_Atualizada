@@ -18,11 +18,11 @@
   },
   "sidebar": "manualSidebar",
   "previous": {
-    "title": "Navegação",
-    "permalink": "/AxTon.Docs/primeiros-passos/navegacao"
+    "title": "⚙️ Sistema",
+    "permalink": "/AxTon.Docs/sistema/configuracoes"
   },
   "next": {
-    "title": "Classificação de Veículos",
+    "title": "🏷️ Classificações",
     "permalink": "/AxTon.Docs/cadastros/classificacao-veiculos"
   }
 }

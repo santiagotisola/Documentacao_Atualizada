@@ -1,0 +1,38 @@
+---
+sidebar_position: 2
+title: Restrição por IP
+description: Configurar restrição de acesso por endereço IP
+---
+
+# Restrição por IP
+
+![Configurar Usuário Acesso](../img/configurar-usuario-acesso.png)
+
+Permite configurar quais endereços IP podem acessar o sistema, adicionando uma camada extra de segurança.
+
+## Como acessar
+
+**Menu lateral** → Controle de Acesso → **Acessos por IP**
+
+## Configuração
+
+### Campos
+
+| Campo | Obrigatório | Descrição |
+|-------|:-----------:|-----------|
+| **Endereço IP** | Sim | IP autorizado (ex: 192.168.1.100) |
+| **Descrição** | Não | Identificação do local/rede |
+| **Ativo** | Sim | Status da restrição |
+
+### Passo a passo
+
+1. Acesse Controle de Acesso → Acessos por IP
+2. Clique em **+ Novo**
+3. Informe o Endereço IP
+4. Adicione uma Descrição (ex: "Escritório Central")
+5. Marque como Ativo
+6. Clique em **Salvar**
+
+:::warning Atenção
+Se ativar a restrição por IP com uma lista vazia, ninguém conseguirá acessar o sistema. Sempre adicione pelo menos um IP antes de ativar.
+:::

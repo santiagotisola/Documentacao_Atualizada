@@ -18,11 +18,11 @@
   },
   "sidebar": "manualSidebar",
   "previous": {
-    "title": "Sequencial de Infração",
-    "permalink": "/AxTon.Docs/cadastros/sequencial-infracao"
+    "title": "🏷️ Classificações",
+    "permalink": "/AxTon.Docs/cadastros/classificacao-veiculos"
   },
   "next": {
-    "title": "Perfis de Acesso",
-    "permalink": "/AxTon.Docs/administracao/perfis-acesso"
+    "title": "📊 Relatório de Pesagem",
+    "permalink": "/AxTon.Docs/relatorios/relatorio-passagens"
   }
 }

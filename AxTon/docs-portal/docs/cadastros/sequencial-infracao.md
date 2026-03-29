@@ -62,3 +62,15 @@ O módulo de sequencial de infração define a numeração utilizada nos registr
 :::warning Alteração do número atual
 A alteração do **Número Atual** de um sequencial em uso deve ser realizada com cautela. Modificações incorretas podem gerar duplicidade ou lacunas na numeração dos autos de infração, comprometendo a rastreabilidade dos registros.
 :::
+
+---
+
+## Processos de Infração
+
+| Processo | Descrição |
+|---|---|
+| [**Triagem de Infrações**](../infracoes/triagem) | Análise e validação de infrações de excesso de peso |
+| [**Auditoria de Infrações**](../infracoes/auditoria) | Revisão de infrações processadas antes da exportação |
+| [**Consulta de Infrações**](../infracoes/consulta-infracoes) | Pesquisar e consultar infrações registradas |
+| [**Exceções**](../infracoes/excecoes) | Regras para dispensar veículos da autuação |
+| [**Infrações Descartadas**](../infracoes/infracoes-descartadas) | Consultar e reabrir infrações descartadas |

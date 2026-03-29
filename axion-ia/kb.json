@@ -1,0 +1,16 @@
+{
+  "erro_404_imagem": {
+    "keywords": ["404", "imagem", "salvar"],
+    "assunto": "Erro ao salvar imagem",
+    "causa": "Falha no serviço de upload de imagens",
+    "acao": "Atualização do serviço realizada",
+    "status": "Normalizado"
+  },
+  "sem_comunicacao": {
+    "keywords": ["offline", "sem comunicação", "sem internet"],
+    "assunto": "Equipamento sem comunicação",
+    "causa": "Falta de conectividade",
+    "acao": "Necessário verificar rede local",
+    "status": "Aguardando normalização"
+  }
+}

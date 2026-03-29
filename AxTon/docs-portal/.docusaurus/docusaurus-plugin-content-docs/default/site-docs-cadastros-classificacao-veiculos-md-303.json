@@ -18,11 +18,11 @@
   },
   "sidebar": "manualSidebar",
   "previous": {
-    "title": "Locais",
+    "title": "📍 Locais",
     "permalink": "/AxTon.Docs/cadastros/locais"
   },
   "next": {
-    "title": "Sequencial de Infração",
-    "permalink": "/AxTon.Docs/cadastros/sequencial-infracao"
+    "title": "👤 Usuários",
+    "permalink": "/AxTon.Docs/administracao/usuarios"
   }
 }

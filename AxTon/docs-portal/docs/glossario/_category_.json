@@ -1,0 +1,10 @@
+{
+  "label": "Glossário Técnico",
+  "position": 12,
+  "collapsible": true,
+  "collapsed": false,
+  "link": {
+    "type": "generated-index",
+    "description": "Termos técnicos utilizados no sistema AxTon de pesagem veicular."
+  }
+}

@@ -44,6 +44,25 @@ A tela exibe a matriz de permissões organizada por **perfil de acesso** e **fun
 As alterações nas permissões de um perfil têm efeito imediato para todos os usuários vinculados a esse perfil. Usuários com sessão ativa poderão perceber a alteração no próximo acesso a uma funcionalidade afetada.
 :::
 
-:::info EM CONSTRUÇÃO
-Esta documentação será detalhada com a descrição completa de cada funcionalidade disponível para configuração de permissões.
+## Funcionalidades por módulo
+
+A tabela abaixo lista as funcionalidades disponíveis para configuração de permissões, agrupadas por módulo:
+
+| Módulo | Funcionalidades |
+|--------|----------------|
+| **Pesagem** | Postos, Tickets em Aberto, Tickets Fechados, Reclassificar, Liberar, Motivos |
+| **Operações** | Cadastro de Operações, Monitoramento Online, Eventos, Consulta de Placas, Alertas |
+| **Infrações** | Triagem, Auditoria, Consulta, Exportação, Exceções, Descartadas |
+| **Relatórios** | Passagens, Infrações, Fluxo Diário, Discrepâncias, NFe, Power BI |
+| **Cadastros Básicos** | Equipamentos, Fabricantes, Tipos, Modelos, Grupos |
+| **Veículos** | Tipos, Marcas, Modelos, Cores, Classificações, Municípios |
+| **Medições** | Contratos, Índices de Performance, Interrupções, Gerar Medição |
+| **Controle de Acesso** | Logs de Acesso, Restrição por IP, Permissões Detalhadas |
+| **Administração** | Usuários, Perfis de Acesso, Permissões |
+
+:::tip Boas práticas
+- **Operadores de triagem**: Visualizar e Criar em Infrações, Visualizar em Pesagem e Relatórios
+- **Supervisores**: Todas as permissões em Infrações + Relatórios + Operações
+- **Administradores**: Acesso total a todos os módulos
+- **Consulta**: Apenas Visualizar em Relatórios (perfil somente leitura)
 :::

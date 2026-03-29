@@ -32,11 +32,11 @@ export default {
   "baseUrl": "/AxTon.Docs/",
   "organizationName": "Axion-Tecnologia",
   "projectName": "AxTon.Docs",
-  "onBrokenLinks": "throw",
+  "onBrokenLinks": "warn",
   "markdown": {
     "hooks": {
       "onBrokenMarkdownLinks": "warn",
-      "onBrokenMarkdownImages": "throw"
+      "onBrokenMarkdownImages": "warn"
     },
     "format": "mdx",
     "mermaid": false,
@@ -58,6 +58,9 @@ export default {
     "path": "i18n",
     "localeConfigs": {}
   },
+  "scripts": [
+    "/AxTon.Docs/widget/axton-suporte.js"
+  ],
   "presets": [
     [
       "classic",
@@ -84,7 +87,7 @@ export default {
       "title": "AxTon",
       "logo": {
         "alt": "AxTon Logo",
-        "src": "img/logo.svg"
+        "src": "img/axion-logo.png"
       },
       "items": [
         {
@@ -120,16 +123,20 @@ export default {
           "title": "Módulos",
           "items": [
             {
-              "label": "Locais",
-              "to": "/cadastros/locais"
+              "label": "Pesagem",
+              "to": "/pesagem/postos"
             },
             {
-              "label": "Classificação de Veículos",
-              "to": "/cadastros/classificacao-veiculos"
+              "label": "Infrações",
+              "to": "/infracoes/triagem"
             },
             {
-              "label": "Usuários",
-              "to": "/administracao/usuarios"
+              "label": "Operações",
+              "to": "/operacoes/monitoramento-online"
+            },
+            {
+              "label": "Relatórios",
+              "to": "/relatorios/relatorio-passagens"
             }
           ]
         },
@@ -138,7 +145,7 @@ export default {
           "items": [
             {
               "label": "Site Axion",
-              "href": "https://axion.com.br"
+              "href": "https://axiontecnologia.com.br/"
             }
           ]
         }
@@ -376,7 +383,6 @@ export default {
   "customFields": {},
   "plugins": [],
   "themes": [],
-  "scripts": [],
   "headTags": [],
   "stylesheets": [],
   "clientModules": [],

@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Guia - Criar Usuário e Permissões no AxHub</title>
+<style>
+  @page { margin: 2cm; size: A4; }
+  body { font-family: 'Segoe UI', Arial, sans-serif; color: #2c3e50; line-height: 1.6; margin: 0; padding: 40px; }
+  h1 { color: #2c3e50; border-bottom: 3px solid #3498db; padding-bottom: 10px; font-size: 22px; }
+  h2 { color: #3498db; margin-top: 28px; font-size: 17px; }
+  h3 { color: #2c3e50; font-size: 15px; margin-top: 20px; }
+  table { border-collapse: collapse; width: 100%; margin: 12px 0; font-size: 13px; }
+  th { background-color: #ebf5fb; color: #2c3e50; font-weight: 600; border-bottom: 2px solid #3498db; text-align: left; padding: 8px 12px; }
+  td { padding: 8px 12px; border-bottom: 1px solid #e0e0e0; }
+  tr:nth-child(even) { background-color: #fafbfc; }
+  .header { text-align: center; margin-bottom: 30px; }
+  .header img { height: 40px; }
+  .header p { color: #7f8c8d; font-size: 13px; margin: 4px 0; }
+  .step { background: #f8f9fa; border-left: 4px solid #3498db; padding: 12px 16px; margin: 16px 0; border-radius: 0 4px 4px 0; }
+  .step-number { background: #3498db; color: white; border-radius: 50%; width: 28px; height: 28px; display: inline-flex; align-items: center; justify-content: center; font-weight: 700; font-size: 14px; margin-right: 8px; }
+  .tip { background: #eaf7ed; border-left: 4px solid #27ae60; padding: 10px 14px; margin: 12px 0; border-radius: 0 4px 4px 0; font-size: 13px; }
+  .tip strong { color: #27ae60; }
+  .warning { background: #fef9e7; border-left: 4px solid #f39c12; padding: 10px 14px; margin: 12px 0; border-radius: 0 4px 4px 0; font-size: 13px; }
+  .warning strong { color: #f39c12; }
+  .summary { background: #2c3e50; color: white; padding: 16px 20px; border-radius: 6px; margin-top: 24px; font-size: 13px; text-align: center; }
+  .summary code { background: rgba(255,255,255,0.15); padding: 2px 8px; border-radius: 3px; font-family: 'Consolas', monospace; }
+  ol { padding-left: 24px; }
+  li { margin: 4px 0; }
+  .footer { margin-top: 40px; padding-top: 16px; border-top: 1px solid #e0e0e0; text-align: center; color: #95a5a6; font-size: 11px; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1 style="border-bottom: none; font-size: 26px; margin-bottom: 4px;">AxHub — Guia de Criação de Usuário e Permissões</h1>
+  <p>Axion Tecnologia &bull; Sistema de Gestão de Equipamentos de Trânsito</p>
+</div>
+
+<p>Este guia descreve o passo a passo para criar um novo usuário no sistema AxHub e configurar suas permissões de acesso.</p>
+
+<h2><span class="step-number">1</span> Criar um Perfil de Acesso</h2>
+
+<p>Antes de criar o usuário, verifique se já existe um perfil adequado. Caso contrário, crie um novo:</p>
+
+<div class="step">
+<ol>
+  <li>No menu lateral, acesse <strong>Controle de Acesso → Perfis de Acesso</strong></li>
+  <li>Clique em <strong>Novo</strong></li>
+  <li>Preencha os campos conforme a tabela abaixo</li>
+  <li>Clique em <strong>Salvar</strong></li>
+</ol>
+</div>
+
+<table>
+  <tr><th>Campo</th><th>O que informar</th></tr>
+  <tr><td><strong>Nome do Perfil</strong></td><td>Identificação do perfil (ex: Operador, Analista, Auditor, Administrador)</td></tr>
+  <tr><td><strong>Descrição</strong></td><td>Breve descrição das responsabilidades deste perfil</td></tr>
+</table>
+
+<h2><span class="step-number">2</span> Configurar Permissões do Perfil</h2>
+
+<div class="step">
+<ol>
+  <li>No menu lateral, acesse <strong>Controle de Acesso → Permissões de Acesso</strong></li>
+  <li>Selecione o <strong>perfil</strong> que deseja configurar</li>
+  <li>Para cada módulo do sistema, marque as permissões desejadas</li>
+  <li>Clique em <strong>Salvar</strong></li>
+</ol>
+</div>
+
+<table>
+  <tr><th>Permissão</th><th>O que permite</th></tr>
+  <tr><td><strong>Visualizar</strong></td><td>Consultar dados e relatórios do módulo</td></tr>
+  <tr><td><strong>Criar</strong></td><td>Inserir novos registros</td></tr>
+  <tr><td><strong>Editar</strong></td><td>Alterar registros existentes</td></tr>
+  <tr><td><strong>Excluir</strong></td><td>Remover registros</td></tr>
+</table>
+
+<div class="tip">
+  <strong>Dica:</strong> Para um usuário que apenas consulta dados, marque somente "Visualizar". Para operadores de triagem, marque "Visualizar" + "Criar" + "Editar" nos módulos de Infrações e Operações.
+</div>
+
+<h2><span class="step-number">3</span> Criar o Usuário</h2>
+
+<div class="step">
+<ol>
+  <li>No menu lateral, acesse <strong>Controle de Acesso → Usuários</strong></li>
+  <li>Clique em <strong>Novo</strong></li>
+  <li>Preencha os campos conforme a tabela abaixo</li>
+  <li>Defina uma <strong>senha temporária</strong></li>
+  <li>Clique em <strong>Salvar</strong></li>
+</ol>
+</div>
+
+<table>
+  <tr><th>Campo</th><th>O que informar</th></tr>
+  <tr><td><strong>Nome</strong></td><td>Nome completo do usuário</td></tr>
+  <tr><td><strong>Login</strong></td><td>Nome que será usado para entrar no sistema</td></tr>
+  <tr><td><strong>E-mail</strong></td><td>E-mail válido (usado para recuperação de senha)</td></tr>
+  <tr><td><strong>Perfil de Acesso</strong></td><td>Selecione o perfil criado no Passo 1</td></tr>
+  <tr><td><strong>Ativo</strong></td><td>Marque como <strong>Sim</strong></td></tr>
+</table>
+
+<h2><span class="step-number">4</span> Primeiro Acesso do Usuário</h2>
+
+<p>Repasse ao novo usuário as seguintes informações:</p>
+
+<table>
+  <tr><th>Informação</th><th>Detalhe</th></tr>
+  <tr><td><strong>Endereço do sistema</strong></td><td>URL de acesso ao AxHub</td></tr>
+  <tr><td><strong>Login</strong></td><td>Conforme definido no cadastro</td></tr>
+  <tr><td><strong>Senha temporária</strong></td><td>Definida no momento da criação</td></tr>
+</table>
+
+<div class="warning">
+  <strong>Importante:</strong> Recomende ao usuário alterar a senha no primeiro acesso por questões de segurança.
+</div>
+
+<div class="summary">
+  <strong>Resumo do fluxo:</strong><br><br>
+  <code>Perfis de Acesso</code> → criar perfil →
+  <code>Permissões</code> → configurar →
+  <code>Usuários</code> → criar usuário → atribuir perfil
+</div>
+
+<div class="footer">
+  <p>Axion Tecnologia &copy; 2026 — Todos os direitos reservados</p>
+  <p>Documento gerado automaticamente a partir da documentação do AxHub</p>
+</div>
+
+</body>
+</html>

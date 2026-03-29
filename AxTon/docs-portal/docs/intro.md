@@ -6,6 +6,8 @@ title: Visão Geral
 
 # AxTon — Manual do Usuário
 
+![Menu Principal do AxTon](./img/Menu%20principal%20-%20Axton.png)
+
 Bem-vindo ao manual do usuário do **AxTon**, o sistema de gestão de pesagem veicular da Axion Tecnologia.
 
 ## O que é o AxTon?
