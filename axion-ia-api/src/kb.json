@@ -103,5 +103,40 @@
     "causa": "Necessidade de verificar status operacional dos equipamentos",
     "acao": "Acessar Operações → Monitoramento Online para visualizar status em tempo real",
     "status": "Informativo"
+  },
+  "guia_completo_infracoes": {
+    "keywords": ["processo infração", "fluxo infração", "como funciona infração", "passo a passo infração", "etapas infração", "captura", "triagem", "auditoria", "exportação", "ciclo infração", "guia infração", "manual infração", "como triar", "como auditar", "como exportar", "fluxo completo", "validar infração", "descartar infração"],
+    "assunto": "Guia Completo — Processo de Infração",
+    "causa": "Dúvida sobre o fluxo completo de infrações no AxHub",
+    "acao": "O processo segue 5 etapas: (1) CAPTURA — equipamento registra imagem/placa/velocidade. (2) IMPORTAÇÃO — dados entram no AxHub em lotes; exceções descartam automaticamente. (3) TRIAGEM — analista revisa: verifica placa legível, veículo correto, velocidade coerente, enquadramento correto, qualidade da imagem. Decide: Validar (segue p/ auditoria), Descartar (motivo obrigatório) ou Reabrir. (4) AUDITORIA — auditor confere trabalho do analista: Confirmar (segue p/ exportação), Rejeitar (volta p/ triagem) ou Observar. (5) EXPORTAÇÃO — sistema gera arquivo (RENAINF/XML/TXT/CSV), valida 7 critérios automaticamente e envia ao órgão (DETRAN/DER/PRF) via SFTP, API ou download. Consulte o guia completo na documentação: Infrações → Guia Completo.",
+    "status": "Informativo"
+  },
+  "axcross_monitoramento": {
+    "keywords": ["monitoramento cruzamento", "monitorar cruzamento", "passagem cruzamento", "axcross monitoramento", "monitoramento online axcross"],
+    "assunto": "Monitoramento de Cruzamentos (AxCross)",
+    "causa": "Dúvida sobre funcionamento do monitoramento no AxCross",
+    "acao": "O AxCross permite monitorar cruzamentos em tempo real. Acesse: Operações → Monitoramento Online. O sistema exibe passagens detectadas por local, equipamento e faixa. Verifique o status dos equipamentos em Dashboard → Heartbeat.",
+    "status": "Informativo"
+  },
+  "axcross_passagem": {
+    "keywords": ["passagem axcross", "consultar passagem", "relatório passagem cruzamento", "placa cruzamento", "veículo cruzamento"],
+    "assunto": "Consulta de Passagens (AxCross)",
+    "causa": "Dúvida sobre consulta de passagens no sistema de cruzamentos",
+    "acao": "Para consultar passagens: Relatórios → Relatório de Passagens. Filtre por data, local, faixa ou placa. O relatório exibe placa, velocidade, data/hora, local e faixa detectada. Para exportar, use o botão Exportar no topo da listagem.",
+    "status": "Informativo"
+  },
+  "axcross_equipamento": {
+    "keywords": ["equipamento axcross", "câmera cruzamento", "sensor cruzamento", "cadastrar equipamento axcross", "ip câmera axcross"],
+    "assunto": "Equipamentos AxCross",
+    "causa": "Dúvida sobre cadastro ou configuração de equipamentos no AxCross",
+    "acao": "Para gerenciar equipamentos: Cadastros → Equipamentos. Cadastre nome, tipo, fabricante, modelo, número de série e IP. Associe o equipamento a um local e faixa. Verifique conectividade em Dashboard → Heartbeat.",
+    "status": "Informativo"
+  },
+  "axcross_local_faixa": {
+    "keywords": ["local axcross", "faixa axcross", "cadastrar local cruzamento", "cadastrar faixa", "sentido faixa", "local e faixa", "cadastrar local", "faixa cruzamento"],
+    "assunto": "Locais e Faixas (AxCross)",
+    "causa": "Dúvida sobre cadastro de locais e faixas de monitoramento",
+    "acao": "Locais: Cadastros → Locais — cadastre nome, endereço, cidade, UF e coordenadas. Faixas: Cadastros → Faixas — associe ao local, defina sentido e equipamento. Cada faixa representa uma pista monitorada no cruzamento.",
+    "status": "Informativo"
   }
 }

@@ -1,0 +1,99 @@
+/**
+ * AxCross - Axion Tecnologia
+ * Tema Cruzamentos — Paleta laranja/amber
+ */
+
+:root {
+  --ifm-color-primary: #e67e22;
+  --ifm-color-primary-dark: #d35400;
+  --ifm-color-primary-darker: #ba4a00;
+  --ifm-color-primary-darkest: #873600;
+  --ifm-color-primary-light: #f0a04b;
+  --ifm-color-primary-lighter: #f5c07a;
+  --ifm-color-primary-lightest: #fae5cd;
+
+  --ifm-code-font-size: 95%;
+  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
+
+  --ifm-navbar-background-color: #3c2415;
+  --ifm-navbar-link-color: #ecf0f1;
+  --ifm-navbar-link-hover-color: #f0a04b;
+
+  --ifm-menu-color: #3c2415;
+  --ifm-menu-color-active: #e67e22;
+  --ifm-menu-color-background-active: #fdf2e9;
+
+  --ifm-link-color: #d35400;
+  --ifm-link-hover-color: #873600;
+
+  --ifm-footer-background-color: #3c2415;
+  --ifm-footer-color: #ecf0f1;
+  --ifm-footer-link-color: #f5c07a;
+  --ifm-footer-link-hover-color: #fae5cd;
+
+  --ifm-font-family-base: 'Segoe UI', system-ui, -apple-system, sans-serif;
+}
+
+[data-theme='dark'] {
+  --ifm-color-primary: #f0a04b;
+  --ifm-color-primary-dark: #e67e22;
+  --ifm-color-primary-darker: #d35400;
+  --ifm-color-primary-darkest: #ba4a00;
+  --ifm-color-primary-light: #f5c07a;
+  --ifm-color-primary-lighter: #fae5cd;
+  --ifm-color-primary-lightest: #fef5ec;
+  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
+
+  --ifm-navbar-background-color: #1e120a;
+  --ifm-footer-background-color: #1e120a;
+}
+
+.navbar {
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.15);
+}
+
+.navbar__title {
+  color: #ecf0f1;
+  font-weight: 700;
+  font-size: 1.25rem;
+}
+
+.navbar__link {
+  color: #bdc3c7 !important;
+  font-weight: 500;
+}
+
+.navbar__link:hover,
+.navbar__link--active {
+  color: #f0a04b !important;
+}
+
+.menu__link--active:not(.menu__link--sublist) {
+  border-left: 3px solid #e67e22;
+  padding-left: calc(var(--ifm-menu-link-padding-horizontal) - 3px);
+  background-color: #fdf2e9;
+}
+
+[data-theme='dark'] .menu__link--active:not(.menu__link--sublist) {
+  background-color: rgba(230, 126, 34, 0.15);
+}
+
+table th {
+  background-color: #fdf2e9;
+  color: #3c2415;
+  font-weight: 600;
+  border-bottom: 2px solid #e67e22;
+}
+
+[data-theme='dark'] table th {
+  background-color: rgba(230, 126, 34, 0.15);
+  color: #ecf0f1;
+}
+
+table tr:nth-child(even) {
+  background-color: #fafbfc;
+}
+
+[data-theme='dark'] table tr:nth-child(even) {
+  background-color: rgba(255, 255, 255, 0.03);
+}

@@ -1,4 +1,4 @@
-import { buscarTickets, buscarTicket, buscarComentarios, responderTicket, buscarCategorias } from "./jitbit.js";
+import { buscarTickets, buscarTicket, buscarComentarios, responderTicket, buscarCategorias, criarTicketUsuario } from "./jitbit.js";
 import { gerarResposta } from "./engine.js";
 import { salvarHistorico } from "./logger.js";
 
@@ -41,12 +41,14 @@ export async function classificarTicket(req, res) {
       return res.status(400).json({ erro: "Ticket sem conteúdo para classificar" });
     }
 
-    const resposta = await gerarResposta(textoTicket);
+    const resultado = await gerarResposta(textoTicket);
 
     return res.json({
       ticketId: req.params.id,
       assuntoOriginal: ticket.Subject,
-      sugestaoResposta: resposta,
+      sugestaoResposta: resultado.resposta,
+      origem: resultado.origem,
+      score: resultado.score,
       autoEnviado: false
     });
   } catch (error) {
@@ -66,22 +68,24 @@ export async function responderTicketIA(req, res) {
       return res.status(400).json({ erro: "Ticket sem conteúdo" });
     }
 
-    const resposta = await gerarResposta(textoTicket);
+    const resultado = await gerarResposta(textoTicket);
 
     // Postar resposta no Jitbit
-    await responderTicket(req.params.id, resposta);
+    await responderTicket(req.params.id, resultado.resposta);
 
     // Log da interação helpdesk
     salvarHistorico({
       mensagem: `[HELPDESK #${req.params.id}] ${textoTicket}`,
       origem: "helpdesk",
-      resposta
+      resposta: resultado.resposta
     });
 
     return res.json({
       ticketId: req.params.id,
       assuntoOriginal: ticket.Subject,
-      respostaEnviada: resposta,
+      respostaEnviada: resultado.resposta,
+      origem: resultado.origem,
+      score: resultado.score,
       autoEnviado: true
     });
   } catch (error) {
@@ -92,8 +96,24 @@ export async function responderTicketIA(req, res) {
 /**
  * POST /api/helpdesk/processar — Processa todos os tickets não respondidos
  */
+/**
+ * Thresholds de confiança para decisão automática
+ * score >= 0.85 → AUTO_RESPONDER (envia direto ao Jitbit)
+ * score >= 0.65 → SUGERIR (retorna sugestão, não envia)
+ * score < 0.65  → ESCALAR (marca para análise humana)
+ */
+const SCORE_AUTO = 0.85;
+const SCORE_SUGERIR = 0.65;
+
+function decidirAcao(score) {
+  if (score >= SCORE_AUTO) return "AUTO_RESPONDER";
+  if (score >= SCORE_SUGERIR) return "SUGERIR";
+  return "ESCALAR";
+}
+
 export async function processarPendentes(req, res) {
   try {
+    const autoEnviar = req.query.auto === "true";
     const tickets = await buscarTickets({ mode: 0, count: 50 });
     const resultados = [];
 
@@ -101,18 +121,43 @@ export async function processarPendentes(req, res) {
       const textoTicket = `${ticket.Subject || ""} ${ticket.Body || ""}`.trim();
       if (!textoTicket) continue;
 
-      const resposta = await gerarResposta(textoTicket);
+      const resultado = await gerarResposta(textoTicket);
+      const decisao = decidirAcao(resultado.score);
+      let enviado = false;
+
+      // Auto-enviar apenas se score alto E parâmetro auto=true
+      if (autoEnviar && decisao === "AUTO_RESPONDER") {
+        try {
+          await responderTicket(ticket.TicketID, resultado.resposta);
+          enviado = true;
+          salvarHistorico({
+            mensagem: `[HELPDESK-AUTO #${ticket.TicketID}] ${textoTicket}`,
+            origem: "helpdesk-auto",
+            resposta: resultado.resposta
+          });
+        } catch (_) { /* falha silenciosa — não bloqueia batch */ }
+      }
 
       resultados.push({
         ticketId: ticket.TicketID,
         assunto: ticket.Subject,
-        sugestao: resposta,
-        autoEnviado: false
+        sugestao: resultado.resposta,
+        origem: resultado.origem,
+        score: resultado.score,
+        decisao,
+        autoEnviado: enviado
       });
     }
 
+    const stats = {
+      total: resultados.length,
+      autoRespondidos: resultados.filter(r => r.autoEnviado).length,
+      sugeridos: resultados.filter(r => r.decisao === "SUGERIR").length,
+      escalados: resultados.filter(r => r.decisao === "ESCALAR").length
+    };
+
     return res.json({
-      totalProcessados: resultados.length,
+      ...stats,
       resultados
     });
   } catch (error) {
@@ -129,5 +174,32 @@ export async function listarCategorias(req, res) {
     return res.json({ total: categorias.length, categorias });
   } catch (error) {
     return res.status(500).json({ erro: "Erro ao buscar categorias", detalhe: error.message });
+  }
+}
+
+/**
+ * POST /api/helpdesk/criar — Cria chamado no Jitbit com credenciais do usuário
+ */
+export async function criarChamado(req, res) {
+  try {
+    const { email, senha, assunto, descricao } = req.body;
+    if (!email || !senha || !assunto || !descricao) {
+      return res.status(400).json({ erro: "Campos obrigatórios: email, senha, assunto, descricao" });
+    }
+
+    const resultado = await criarTicketUsuario(email, senha, assunto, descricao);
+
+    salvarHistorico({
+      mensagem: `[HELPDESK-NOVO] ${assunto} — ${email}`,
+      origem: "helpdesk-widget",
+      resposta: `Chamado #${resultado.ticketId} criado`
+    });
+
+    return res.json(resultado);
+  } catch (error) {
+    if (error.message === "AUTH_FAILED") {
+      return res.status(401).json({ erro: "Login ou senha inválidos. Verifique suas credenciais do Help Desk." });
+    }
+    return res.status(500).json({ erro: "Erro ao criar chamado", detalhe: error.message });
   }
 }

@@ -89,3 +89,35 @@ export async function responderTicket(ticketId, corpo) {
 export async function buscarCategorias() {
   return jitbitRequest("/Categories");
 }
+
+/**
+ * Criar ticket no Jitbit usando credenciais do próprio usuário
+ */
+export async function criarTicketUsuario(email, senha, assunto, descricao, categoryId) {
+  const credentials = Buffer.from(`${email}:${senha}`).toString("base64");
+  const params = new URLSearchParams();
+  params.append("categoryId", categoryId || 0);
+  params.append("subject", assunto);
+  params.append("body", descricao);
+  params.append("priorityId", "1");
+
+  const url = `${JITBIT_BASE}/api/Ticket`;
+  const response = await fetch(url, {
+    method: "POST",
+    headers: {
+      "Authorization": `Basic ${credentials}`,
+      "Content-Type": "application/x-www-form-urlencoded"
+    },
+    body: params.toString()
+  });
+
+  if (!response.ok) {
+    if (response.status === 401 || response.status === 403) {
+      throw new Error("AUTH_FAILED");
+    }
+    throw new Error(`Jitbit ${response.status}: ${response.statusText}`);
+  }
+
+  const ticketId = await response.text();
+  return { sucesso: true, ticketId: ticketId.trim() };
+}
