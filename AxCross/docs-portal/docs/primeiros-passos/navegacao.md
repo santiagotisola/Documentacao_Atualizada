@@ -10,6 +10,8 @@ O AxCross possui uma interface organizada em menu lateral fixo, que permite o ac
 
 ## Estrutura da interface
 
+![Navegação no AxCross - Menu lateral](../img/Monitoramento Online - menu.png)
+
 | Elemento | Descrição |
 |----------|-----------|
 | **Menu lateral** | Painel à esquerda com a lista de módulos e categorias do sistema |

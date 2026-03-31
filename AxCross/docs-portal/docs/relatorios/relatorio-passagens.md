@@ -12,6 +12,10 @@ Permite consultar e exportar as passagens registradas nos cruzamentos monitorado
 
 No **menu lateral**, clique em **Relatório de Passagens**.
 
+![Relatórios](../img/Relatórios.png)
+
+![Relatório de Passagens](../img/Relatório de Passagens.png)
+
 ## Filtros
 
 | Filtro | Obrigatório | Descrição |
@@ -40,6 +44,14 @@ No **menu lateral**, clique em **Relatório de Passagens**.
 3. Opcionalmente, selecione filtros adicionais (Local, Equipamento, Faixa)
 4. Clique em **Consultar**
 5. Para exportar, clique em **Exportar** (PDF ou CSV)
+
+![Relatórios Gerados](../img/Relatórios Gerados.png)
+
+## Rastreamento de Veículos por Placa
+
+![Rastreamento de Veículos por Placa](../img/Rastreamento de Veículos por Placa.png)
+
+Alternativamente, utilize a busca por placa para visualizar o histórico completo de passagens de um veículo específico em todos os cruzamentos monitorados.
 
 :::tip Dica
 Use o filtro por faixa para análise detalhada do fluxo em uma via específica.

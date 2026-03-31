@@ -12,6 +12,8 @@ Permite criar e gerenciar operações de fiscalização, definindo local, perío
 
 No **menu lateral**, clique em **Operações**.
 
+![Mapeamento de Rotas / Operações](../img/Mapeamento de Rotas.png)
+
 ## Campos
 
 | Campo | Obrigatório | Descrição |

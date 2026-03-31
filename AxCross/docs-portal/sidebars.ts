@@ -33,6 +33,20 @@ const sidebars: SidebarsConfig = {
       label: '📡 Monitoramento Online',
     },
 
+    // ── Veículos Monitorados ──
+    {
+      type: 'doc',
+      id: 'operacoes/veiculos-monitorados',
+      label: '🚗 Veículos Monitorados',
+    },
+
+    // ── Alertas ──
+    {
+      type: 'doc',
+      id: 'operacoes/alertas',
+      label: '🚨 Alertas',
+    },
+
     // ── Operações ──
     {
       type: 'doc',
@@ -55,6 +69,7 @@ const sidebars: SidebarsConfig = {
       items: [
         'cadastros/locais',
         'cadastros/equipamentos',
+        'cadastros/grupos-equipamentos',
         'cadastros/faixas',
       ],
     },
