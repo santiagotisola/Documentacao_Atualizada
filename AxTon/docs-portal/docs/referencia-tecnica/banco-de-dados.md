@@ -136,3 +136,201 @@ SequentialExport      (faixa independente)
 | GET | `/api/axton/infracoes` | Últimas 20 infrações |
 | GET | `/api/axton/heartbeat` | Status dos equipamentos |
 | GET | `/api/axton/tabelas` | Todas as tabelas com contagem |
+
+---
+
+## Exemplos práticos
+
+### Testar conexão
+
+```bash
+curl http://localhost:3100/api/axton/status
+```
+
+```json
+{ "conectado": true, "banco": "AxTon", "latencia": "10ms" }
+```
+
+---
+
+### Resumo geral
+
+```bash
+curl http://localhost:3100/api/axton/resumo
+```
+
+```json
+{
+  "equipamentos": 3,
+  "operacoes": 520,
+  "pesagens": 148000,
+  "infracoes": 12400,
+  "usuarios": 8
+}
+```
+
+---
+
+### Últimas pesagens
+
+```bash
+curl http://localhost:3100/api/axton/pesagens
+```
+
+```json
+{
+  "total": 20,
+  "pesagens": [
+    {
+      "IdPesagem": 148000,
+      "DataHoraPesagem": "2026-03-31T21:55:00",
+      "Placa": "ABC1D23",
+      "PBT": 14500,
+      "Status": "Finish",
+      "Equipamento": "Balança Posto Norte"
+    }
+  ]
+}
+```
+
+---
+
+### Últimas infrações
+
+```bash
+curl http://localhost:3100/api/axton/infracoes
+```
+
+```json
+{
+  "total": 20,
+  "infracoes": [
+    {
+      "IdInfracao": 12400,
+      "DataHoraInfracao": "2026-03-31T21:50:00",
+      "Placa": "XYZ9A10",
+      "TipoInfracao": "ExcessPBT",
+      "PBTRegulamentado": 23000,
+      "PBTMedido": 28450,
+      "Status": "Pendente",
+      "Equipamento": "Balança Posto Norte"
+    }
+  ]
+}
+```
+
+---
+
+### Heartbeat de equipamentos
+
+```bash
+curl http://localhost:3100/api/axton/heartbeat
+```
+
+```json
+{
+  "total": 3,
+  "heartbeats": [
+    { "Equipamento": "Balança Posto Norte", "NumeroSerie": "HN-001", "UltimoHeartbeat": "2026-03-31T22:07:00", "Status": "Online" },
+    { "Equipamento": "Balança Posto Sul",   "NumeroSerie": "HN-002", "UltimoHeartbeat": "2026-03-31T22:07:30", "Status": "Online" }
+  ]
+}
+```
+
+---
+
+### Query SQL — pesagens com excesso de PBT hoje
+
+```sql
+SELECT
+  p.Placa,
+  p.DataHoraPesagem,
+  i.PBTRegulamentado,
+  i.PBTMedido,
+  i.PBTMedido - i.PBTRegulamentado AS ExcessoKg,
+  i.TipoInfracao
+FROM TBInfracoes i
+JOIN TBPesagens p ON i.IdPesagem = p.IdPesagem
+WHERE CAST(p.DataHoraPesagem AS DATE) = CAST(GETDATE() AS DATE)
+  AND i.TipoInfracao IN ('ExcessPBT', 'ExcessAxlePBT')
+ORDER BY i.PBTMedido DESC;
+```
+
+---
+
+### Query SQL — infrações ainda não exportadas
+
+```sql
+SELECT
+  i.IdInfracao,
+  i.Placa,
+  i.DataHoraInfracao,
+  i.TipoInfracao,
+  i.Status
+FROM TBInfracoes i
+WHERE i.StatusExport = 0
+  AND i.Status = 'Auditada'
+ORDER BY i.DataHoraInfracao ASC;
+```
+
+---
+
+### Configurar câmera via MongoDB (exemplo de documento)
+
+```json
+// Collection: Configuration
+{
+  "DeviceCode": "POSTO-NORTE-01",
+  "CameraIp": "192.168.10.50",
+  "CameraPort": 554,
+  "CameraType": "Hikvision",
+  "UserCamera": "admin",
+  "PasswordCamera": "senha123",
+  "TolerancePercentage": 5.0,
+  "TolerancePercentageAxle": 5.0,
+  "UrlAxHub": "https://axhub.empresa.com.br/api",
+  "ApiKey": "chave-api-aqui",
+  "ExportType": "AxHubExportInfraction",
+  "EntityCode": "PRF-001",
+  "StructPBT": "60503",
+  "StructAxle": "60503"
+}
+```
+
+---
+
+### Integração no axion-ia-panel (React)
+
+```jsx
+import { useEffect, useState } from 'react';
+import api from '../services/api';
+
+export default function InfracoesAxTon() {
+  const [infracoes, setInfracoes] = useState([]);
+
+  useEffect(() => {
+    api.get('/axton/infracoes').then(r => setInfracoes(r.data.infracoes));
+  }, []);
+
+  return (
+    <table>
+      <thead>
+        <tr><th>Placa</th><th>Tipo</th><th>PBT Reg.</th><th>PBT Medido</th><th>Excesso</th></tr>
+      </thead>
+      <tbody>
+        {infracoes.map(i => (
+          <tr key={i.IdInfracao}>
+            <td>{i.Placa}</td>
+            <td>{i.TipoInfracao}</td>
+            <td>{i.PBTRegulamentado?.toLocaleString()} kg</td>
+            <td>{i.PBTMedido?.toLocaleString()} kg</td>
+            <td style={{ color: 'red', fontWeight: 'bold' }}>
+              +{(i.PBTMedido - i.PBTRegulamentado)?.toLocaleString()} kg
+            </td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  );
+}
+```

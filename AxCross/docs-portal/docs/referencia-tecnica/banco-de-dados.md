@@ -174,3 +174,169 @@ TBOperacoes           TBPassagens
 | GET | `/api/axcross/operacoes` | Últimas 50 operações |
 | GET | `/api/axcross/heartbeat` | Status das câmeras |
 | GET | `/api/axcross/tabelas` | Todas as tabelas com contagem |
+
+---
+
+## Exemplos práticos
+
+### Testar conexão
+
+```bash
+curl http://localhost:3100/api/axcross/status
+```
+
+```json
+{ "conectado": true, "banco": "AxCross", "latencia": "8ms" }
+```
+
+---
+
+### Resumo geral dos dados
+
+```bash
+curl http://localhost:3100/api/axcross/resumo
+```
+
+```json
+{
+  "equipamentos": 12,
+  "operacoes": 340,
+  "passagens": 185000,
+  "locais": 8,
+  "usuarios": 5
+}
+```
+
+---
+
+### Listar locais de cruzamento
+
+```bash
+curl http://localhost:3100/api/axcross/locais
+```
+
+```json
+{
+  "total": 8,
+  "locais": [
+    {
+      "Id": 1,
+      "Nome": "Cruzamento Av. Brasil x Rua XV",
+      "Cidade": "Curitiba",
+      "UF": "PR",
+      "Ativo": true,
+      "TotalEquipamentos": 3
+    }
+  ]
+}
+```
+
+---
+
+### Últimas passagens com placa e local
+
+```bash
+curl http://localhost:3100/api/axcross/passagens
+```
+
+```json
+{
+  "total": 185000,
+  "porLocal": [
+    { "Nome": "Cruzamento Av. Brasil x Rua XV", "total": 42000 },
+    { "Nome": "Viaduto Central Sul",            "total": 31500 }
+  ],
+  "ultimas": [
+    {
+      "Id": 185000,
+      "Placa": "ABC1D23",
+      "DataPassagem": "2026-03-31T22:05:00",
+      "Velocidade": 48.5,
+      "Local": "Cruzamento Av. Brasil x Rua XV",
+      "Faixa": "Faixa 1"
+    }
+  ]
+}
+```
+
+---
+
+### Heartbeat — câmeras online/offline
+
+```bash
+curl http://localhost:3100/api/axcross/heartbeat
+```
+
+```json
+{
+  "total": 12,
+  "heartbeat": [
+    { "Equipamento": "Câmera Norte - F1", "IP": "192.168.1.101", "Status": "Online",  "UltimoSinal": "2026-03-31T22:08:00" },
+    { "Equipamento": "Câmera Sul - F2",   "IP": "192.168.1.102", "Status": "Offline", "UltimoSinal": "2026-03-31T19:30:00" }
+  ]
+}
+```
+
+---
+
+### Query SQL — passagens por hora hoje
+
+```sql
+SELECT
+  DATEPART(HOUR, DataPassagem) AS Hora,
+  COUNT(*)                     AS Total
+FROM TBPassagens
+WHERE CAST(DataPassagem AS DATE) = CAST(GETDATE() AS DATE)
+GROUP BY DATEPART(HOUR, DataPassagem)
+ORDER BY Hora;
+```
+
+---
+
+### Query SQL — câmeras offline há mais de 1 hora
+
+```sql
+SELECT
+  e.Nome AS Equipamento,
+  e.IP,
+  h.Status,
+  h.UltimoSinal,
+  DATEDIFF(MINUTE, h.UltimoSinal, GETDATE()) AS MinutosSemSinal
+FROM TBHeartbeatEquipamentos h
+JOIN TBEquipamentos e ON h.EquipamentoId = e.Id
+WHERE h.UltimoSinal < DATEADD(HOUR, -1, GETDATE())
+   OR h.Status = 'Offline'
+ORDER BY h.UltimoSinal ASC;
+```
+
+---
+
+### Integração no axion-ia-panel (React)
+
+```jsx
+import { useEffect, useState } from 'react';
+import api from '../services/api';
+
+export default function HeartbeatAxCross() {
+  const [dados, setDados] = useState([]);
+
+  useEffect(() => {
+    api.get('/axcross/heartbeat').then(r => setDados(r.data.heartbeat));
+  }, []);
+
+  return (
+    <table>
+      <thead><tr><th>Equipamento</th><th>Status</th><th>Último Sinal</th></tr></thead>
+      <tbody>
+        {dados.map(h => (
+          <tr key={h.Equipamento} style={{ color: h.Status === 'Offline' ? 'red' : 'green' }}>
+            <td>{h.Equipamento}</td>
+            <td>{h.Status}</td>
+            <td>{new Date(h.UltimoSinal).toLocaleString('pt-BR')}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  );
+}
+```
