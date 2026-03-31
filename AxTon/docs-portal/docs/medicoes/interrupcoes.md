@@ -36,7 +36,7 @@ Registro das interrupções que afetam a disponibilidade dos equipamentos ou ope
 
 ### Passo a passo
 
-1. Acesse Medições → Interrupções
+1. Acesse **Medições** → **Interrupções**
 2. Clique em **+ Novo**
 3. Selecione o Equipamento
 4. Informe o Tipo de interrupção

@@ -1,0 +1,807 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AxTon - Mapeamento do Banco de Dados</title>
+<style>
+  :root {
+    --blue: #3b82f6; --blue-light: #eff6ff; --blue-border: #bfdbfe;
+    --green: #22c55e; --green-light: #f0fdf4; --green-border: #bbf7d0;
+    --amber: #d97706; --amber-light: #fef3c7; --amber-border: #fde68a;
+    --red: #ef4444; --red-light: #fef2f2; --red-border: #fecaca;
+    --purple: #a855f7; --purple-light: #faf5ff; --purple-border: #e9d5ff;
+    --cyan: #0ea5e9; --cyan-light: #f0f9ff; --cyan-border: #bae6fd;
+    --slate-50: #f8fafc; --slate-100: #f1f5f9; --slate-200: #e2e8f0;
+    --slate-300: #cbd5e1; --slate-400: #94a3b8; --slate-500: #64748b;
+    --slate-600: #475569; --slate-700: #334155; --slate-800: #1e293b;
+    --slate-900: #0f172a;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; background: var(--slate-50); color: var(--slate-800); line-height: 1.6; }
+
+  /* Print */
+  @media print {
+    body { background: #fff; font-size: 11pt; }
+    .no-print { display: none !important; }
+    .page-break { page-break-before: always; }
+    section { page-break-inside: avoid; }
+    .cover { min-height: 100vh; }
+    table { font-size: 9pt; }
+  }
+
+  /* Cover */
+  .cover {
+    background: linear-gradient(135deg, var(--slate-900), #1e3a5f, var(--slate-800));
+    color: #fff; display: flex; align-items: center; justify-content: center;
+    min-height: 80vh; text-align: center; padding: 60px 20px;
+  }
+  .cover h1 { font-size: 4rem; font-weight: 900; letter-spacing: -2px; }
+  .cover .divider { width: 80px; height: 4px; background: var(--blue); margin: 16px auto; border-radius: 2px; }
+  .cover h2 { font-size: 1.5rem; font-weight: 300; margin-bottom: 8px; }
+  .cover p { color: var(--slate-400); font-size: 0.9rem; }
+  .cover-stats { display: flex; gap: 20px; justify-content: center; margin-top: 40px; }
+  .cover-stat { background: rgba(255,255,255,0.1); border-radius: 12px; padding: 20px 28px; }
+  .cover-stat .num { font-size: 2rem; font-weight: 800; }
+  .cover-stat .label { font-size: 0.75rem; color: var(--slate-400); }
+  .cover-stat:nth-child(1) .num { color: #93c5fd; }
+  .cover-stat:nth-child(2) .num { color: #86efac; }
+  .cover-stat:nth-child(3) .num { color: #c4b5fd; }
+  .cover-footer { margin-top: 50px; font-size: 0.75rem; color: var(--slate-500); }
+
+  /* Layout */
+  .container { max-width: 1000px; margin: 0 auto; padding: 40px 24px; }
+  .container-wide { max-width: 1100px; margin: 0 auto; padding: 40px 24px; }
+
+  /* TOC */
+  .toc { list-style: none; }
+  .toc li { display: flex; align-items: baseline; padding: 8px 0; border-bottom: 1px dotted var(--slate-200); }
+  .toc .num { font-family: 'Courier New', monospace; color: var(--blue); font-weight: 700; width: 50px; flex-shrink: 0; }
+  .toc a { color: var(--slate-800); text-decoration: none; font-weight: 600; }
+  .toc a:hover { color: var(--blue); }
+  .toc .sub { padding-left: 40px; }
+  .toc .sub .num { color: var(--slate-400); }
+  .toc .sub a { font-weight: 400; color: var(--slate-600); }
+
+  /* Headings */
+  h2.section-title { font-size: 2rem; font-weight: 800; color: var(--slate-800); margin-bottom: 24px; padding-bottom: 12px; border-bottom: 3px solid var(--blue); }
+  h3.collection-title { font-size: 1.4rem; font-weight: 700; color: var(--slate-800); display: flex; align-items: center; gap: 12px; margin-bottom: 8px; }
+  .collection-num { background: var(--blue); color: #fff; border-radius: 50%; width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; font-size: 0.85rem; font-weight: 700; flex-shrink: 0; }
+  h4 { font-size: 0.9rem; font-weight: 700; color: var(--slate-700); margin: 16px 0 8px; }
+  h4.embedded { color: var(--purple); }
+
+  /* Cards */
+  .info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 32px; }
+  .info-card { background: #fff; border: 1px solid var(--slate-200); border-radius: 10px; padding: 16px; }
+  .info-card .label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 1px; color: var(--slate-500); }
+  .info-card .value { font-size: 1.15rem; font-weight: 700; color: var(--slate-800); margin-top: 4px; }
+
+  .module-card { display: flex; align-items: center; gap: 12px; background: #fff; border: 1px solid var(--slate-200); border-radius: 10px; padding: 14px 16px; margin-bottom: 8px; }
+  .module-badge { display: inline-block; padding: 3px 10px; border-radius: 6px; font-size: 0.75rem; font-weight: 700; white-space: nowrap; }
+  .module-cols { font-family: 'Courier New', monospace; font-size: 0.85rem; color: var(--slate-600); }
+
+  /* Tables */
+  table { width: 100%; border-collapse: collapse; margin: 12px 0; font-size: 0.85rem; }
+  th { background: var(--slate-100); text-align: left; padding: 8px 12px; border: 1px solid var(--slate-200); font-weight: 700; color: var(--slate-700); font-size: 0.8rem; }
+  td { padding: 6px 12px; border: 1px solid var(--slate-200); }
+  tr:nth-child(even) td { background: var(--slate-50); }
+  td:first-child { font-family: 'Courier New', monospace; color: var(--blue); font-weight: 600; }
+  td:nth-child(2) { font-family: 'Courier New', monospace; color: var(--purple); font-size: 0.78rem; }
+
+  /* Collection blocks */
+  .collection-block { margin-bottom: 48px; padding-bottom: 32px; border-bottom: 1px solid var(--slate-200); }
+  .collection-meta { font-size: 0.78rem; color: var(--slate-500); margin-bottom: 12px; }
+  .collection-meta code { background: var(--slate-100); padding: 1px 6px; border-radius: 4px; font-size: 0.75rem; }
+  .collection-desc { color: var(--slate-600); margin-bottom: 16px; }
+
+  .embedded-block { margin: 16px 0; padding-left: 16px; border-left: 4px solid var(--purple-border); }
+
+  .relation-item { display: flex; align-items: center; gap: 8px; font-size: 0.85rem; color: var(--slate-600); padding: 3px 0; }
+  .relation-arrow { color: var(--green); font-weight: 700; }
+
+  .note-box { background: var(--amber-light); border: 1px solid var(--amber-border); border-radius: 8px; padding: 10px 14px; font-size: 0.85rem; color: #92400e; margin-top: 12px; }
+  .note-box strong { color: #78350f; }
+
+  /* Enum */
+  .enum-card { background: #fff; border: 1px solid var(--slate-200); border-radius: 10px; padding: 20px; margin-bottom: 20px; }
+  .enum-card h3 { font-size: 1.1rem; font-weight: 700; color: var(--purple); margin-bottom: 12px; }
+
+  /* Diagram */
+  .diagram-container { background: #fff; border: 1px solid var(--slate-200); border-radius: 14px; padding: 24px; overflow-x: auto; }
+  .diagram-legend { display: flex; gap: 24px; margin-top: 16px; font-size: 0.82rem; color: var(--slate-600); align-items: center; flex-wrap: wrap; }
+  .legend-line { width: 28px; height: 2px; flex-shrink: 0; }
+
+  /* Summary table override */
+  .summary-table td:first-child { color: var(--slate-800); font-weight: 700; }
+  .summary-table td:nth-child(2) { font-family: inherit; color: var(--slate-600); }
+  .summary-table td:nth-child(3) { font-family: 'Courier New', monospace; color: var(--purple); font-size: 0.78rem; }
+</style>
+</head>
+<body>
+
+<!-- ===== CAPA ===== -->
+<div class="cover">
+  <div>
+    <h1>AxTon</h1>
+    <div class="divider"></div>
+    <h2>Mapeamento do Banco de Dados</h2>
+    <p>Documento de referência técnica para análise, consulta e estudos</p>
+    <div class="cover-stats">
+      <div class="cover-stat"><div class="num">11</div><div class="label">Collections</div></div>
+      <div class="cover-stat"><div class="num">5</div><div class="label">Enums</div></div>
+      <div class="cover-stat"><div class="num">6</div><div class="label">Objetos Embeddados</div></div>
+    </div>
+    <div class="cover-footer">MongoDB &middot; .NET 8.0/10.0 &middot; Codout.Framework.Mongo &middot; Março 2026</div>
+  </div>
+</div>
+
+<!-- ===== SUMÁRIO ===== -->
+<div class="container page-break" id="sumario">
+  <h2 class="section-title">Sumário</h2>
+  <ul class="toc">
+    <li><span class="num">1</span><a href="#visao-geral">Visão Geral do Sistema</a></li>
+    <li><span class="num">2</span><a href="#diagrama">Diagrama de Relacionamentos (ER)</a></li>
+    <li><span class="num">3</span><a href="#collections">Detalhamento das Collections</a></li>
+    <li class="sub"><span class="num">3.1</span><a href="#col-user">User</a></li>
+    <li class="sub"><span class="num">3.2</span><a href="#col-accessprofile">AccessProfile</a></li>
+    <li class="sub"><span class="num">3.3</span><a href="#col-accesspermission">AccessPermission</a></li>
+    <li class="sub"><span class="num">3.4</span><a href="#col-classification">Classification</a></li>
+    <li class="sub"><span class="num">3.5</span><a href="#col-configuration">Configuration</a></li>
+    <li class="sub"><span class="num">3.6</span><a href="#col-weighing">Weighing</a></li>
+    <li class="sub"><span class="num">3.7</span><a href="#col-operation">Operation</a></li>
+    <li class="sub"><span class="num">3.8</span><a href="#col-local">Local</a></li>
+    <li class="sub"><span class="num">3.9</span><a href="#col-exportbatch">ExportBatch</a></li>
+    <li class="sub"><span class="num">3.10</span><a href="#col-seqinfraction">SequentialInfraction</a></li>
+    <li class="sub"><span class="num">3.11</span><a href="#col-seqexport">SequentialExport</a></li>
+    <li><span class="num">4</span><a href="#enums">Enumerações</a></li>
+    <li><span class="num">5</span><a href="#resumo">Tabela Resumo</a></li>
+  </ul>
+</div>
+
+<!-- ===== 1. VISÃO GERAL ===== -->
+<div class="container page-break" id="visao-geral">
+  <h2 class="section-title">1. Visão Geral</h2>
+  <p style="color:var(--slate-600);margin-bottom:24px;">
+    O sistema <strong>AxTon</strong> é uma plataforma de pesagem de veículos e controle de infrações de trânsito por excesso de peso.
+    Utiliza balanças Haenni para medição por eixo e integra-se com sistemas externos (XTraffic e AxHub) para exportação de dados de infrações.
+  </p>
+  <div class="info-grid">
+    <div class="info-card"><div class="label">Banco de Dados</div><div class="value">MongoDB</div></div>
+    <div class="info-card"><div class="label">ORM</div><div class="value">Codout.Framework.Mongo</div></div>
+    <div class="info-card"><div class="label">Framework</div><div class="value">.NET 8.0 / 10.0</div></div>
+    <div class="info-card"><div class="label">Nome do Banco</div><div class="value">AxTon</div></div>
+  </div>
+
+  <h3 style="font-size:1.2rem;font-weight:700;margin-bottom:12px;">Módulos Funcionais</h3>
+  <div class="module-card">
+    <span class="module-badge" style="background:var(--blue-light);color:var(--blue);">Autenticação &amp; Autorização</span>
+    <span class="module-cols">User, AccessProfile, AccessPermission</span>
+  </div>
+  <div class="module-card">
+    <span class="module-badge" style="background:var(--green-light);color:var(--green);">Classificação de Veículos</span>
+    <span class="module-cols">Classification</span>
+  </div>
+  <div class="module-card">
+    <span class="module-badge" style="background:var(--purple-light);color:var(--purple);">Configuração do Sistema</span>
+    <span class="module-cols">Configuration, HaenniScales, DeviceScales</span>
+  </div>
+  <div class="module-card">
+    <span class="module-badge" style="background:var(--amber-light);color:var(--amber);">Operações de Pesagem</span>
+    <span class="module-cols">Operation, Weighing, Local</span>
+  </div>
+  <div class="module-card">
+    <span class="module-badge" style="background:var(--red-light);color:var(--red);">Exportação de Infrações</span>
+    <span class="module-cols">ExportBatch, SequentialInfraction, SequentialExport</span>
+  </div>
+</div>
+
+<!-- ===== 2. DIAGRAMA ===== -->
+<div class="container-wide page-break" id="diagrama">
+  <h2 class="section-title">2. Diagrama de Relacionamentos</h2>
+  <div class="diagram-container">
+    <svg viewBox="0 0 960 620" xmlns="http://www.w3.org/2000/svg" style="width:100%;min-width:650px;">
+      <defs>
+        <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" fill="#64748b"/></marker>
+        <marker id="arrowBlue" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" fill="#3b82f6"/></marker>
+        <marker id="arrowGreen" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" fill="#22c55e"/></marker>
+        <marker id="arrowAmber" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" fill="#d97706"/></marker>
+        <marker id="arrowRed" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" fill="#ef4444"/></marker>
+        <marker id="arrowPurple" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" fill="#a855f7"/></marker>
+      </defs>
+
+      <!-- Background groups -->
+      <rect x="10" y="10" width="400" height="250" rx="12" fill="#eff6ff" stroke="#bfdbfe" stroke-width="1.5"/>
+      <text x="25" y="35" font-size="13" font-weight="bold" fill="#3b82f6">Autenticação &amp; Autorização</text>
+
+      <rect x="10" y="280" width="400" height="150" rx="12" fill="#f0fdf4" stroke="#bbf7d0" stroke-width="1.5"/>
+      <text x="25" y="305" font-size="13" font-weight="bold" fill="#22c55e">Operações</text>
+
+      <rect x="430" y="10" width="520" height="250" rx="12" fill="#fef3c7" stroke="#fde68a" stroke-width="1.5"/>
+      <text x="445" y="35" font-size="13" font-weight="bold" fill="#d97706">Pesagem &amp; Medições</text>
+
+      <rect x="430" y="280" width="520" height="150" rx="12" fill="#fef2f2" stroke="#fecaca" stroke-width="1.5"/>
+      <text x="445" y="305" font-size="13" font-weight="bold" fill="#ef4444">Exportação de Infrações</text>
+
+      <rect x="10" y="455" width="400" height="150" rx="12" fill="#faf5ff" stroke="#e9d5ff" stroke-width="1.5"/>
+      <text x="25" y="480" font-size="13" font-weight="bold" fill="#a855f7">Configuração</text>
+
+      <rect x="430" y="455" width="520" height="150" rx="12" fill="#f0f9ff" stroke="#bae6fd" stroke-width="1.5"/>
+      <text x="445" y="480" font-size="13" font-weight="bold" fill="#0ea5e9">Classificação</text>
+
+      <!-- Entity: User -->
+      <rect x="40" y="55" width="140" height="55" rx="8" fill="#fff" stroke="#3b82f6" stroke-width="2"/>
+      <text x="110" y="87" text-anchor="middle" font-size="13" font-weight="bold" fill="#3b82f6">User</text>
+
+      <!-- Entity: AccessProfile -->
+      <rect x="240" y="55" width="150" height="55" rx="8" fill="#fff" stroke="#3b82f6" stroke-width="2"/>
+      <text x="315" y="87" text-anchor="middle" font-size="13" font-weight="bold" fill="#3b82f6">AccessProfile</text>
+
+      <!-- Entity: AccessPermission -->
+      <rect x="240" y="145" width="150" height="55" rx="8" fill="#fff" stroke="#3b82f6" stroke-width="2"/>
+      <text x="315" y="177" text-anchor="middle" font-size="12" font-weight="bold" fill="#3b82f6">AccessPermission</text>
+
+      <!-- Arrow User → AccessProfile -->
+      <line x1="180" y1="82" x2="238" y2="82" stroke="#3b82f6" stroke-width="2" marker-end="url(#arrowBlue)"/>
+      <text x="205" y="75" font-size="9" fill="#3b82f6" text-anchor="middle">N:1</text>
+
+      <!-- Arrow AccessProfile → AccessPermission -->
+      <line x1="315" y1="110" x2="315" y2="143" stroke="#3b82f6" stroke-width="2" marker-end="url(#arrowBlue)"/>
+      <text x="332" y="130" font-size="9" fill="#3b82f6">1:N embed</text>
+
+      <!-- AccessPermission self-ref -->
+      <path d="M390 160 C420 150 420 195 390 185" fill="none" stroke="#3b82f6" stroke-width="1.5" stroke-dasharray="4 2" marker-end="url(#arrowBlue)"/>
+      <text x="425" y="175" font-size="9" fill="#3b82f6">pai/filho</text>
+
+      <!-- Entity: Operation -->
+      <rect x="40" y="320" width="150" height="55" rx="8" fill="#fff" stroke="#22c55e" stroke-width="2"/>
+      <text x="115" y="352" text-anchor="middle" font-size="13" font-weight="bold" fill="#22c55e">Operation</text>
+
+      <!-- Entity: Local -->
+      <rect x="240" y="320" width="140" height="55" rx="8" fill="#fff" stroke="#22c55e" stroke-width="2"/>
+      <text x="310" y="352" text-anchor="middle" font-size="13" font-weight="bold" fill="#22c55e">Local</text>
+
+      <!-- Arrow Operation → Local -->
+      <line x1="190" y1="347" x2="238" y2="347" stroke="#22c55e" stroke-width="2" marker-end="url(#arrowGreen)"/>
+      <text x="215" y="340" font-size="9" fill="#22c55e">embed</text>
+
+      <!-- Entity: Weighing -->
+      <rect x="470" y="55" width="140" height="55" rx="8" fill="#fff" stroke="#d97706" stroke-width="2"/>
+      <text x="540" y="87" text-anchor="middle" font-size="13" font-weight="bold" fill="#d97706">Weighing</text>
+
+      <!-- Entity: WeighingAxleGroup -->
+      <rect x="660" y="55" width="170" height="55" rx="8" fill="#fff" stroke="#d97706" stroke-width="2"/>
+      <text x="745" y="82" text-anchor="middle" font-size="11" font-weight="bold" fill="#d97706">WeighingAxle</text>
+      <text x="745" y="96" text-anchor="middle" font-size="11" font-weight="bold" fill="#d97706">Group</text>
+
+      <!-- Entity: WeighingAxle -->
+      <rect x="660" y="145" width="170" height="55" rx="8" fill="#fff" stroke="#d97706" stroke-width="2"/>
+      <text x="745" y="177" text-anchor="middle" font-size="12" font-weight="bold" fill="#d97706">WeighingAxle</text>
+
+      <!-- Entity: Infraction -->
+      <rect x="470" y="145" width="140" height="55" rx="8" fill="#fff" stroke="#d97706" stroke-width="2"/>
+      <text x="540" y="177" text-anchor="middle" font-size="12" font-weight="bold" fill="#d97706">Infraction</text>
+
+      <!-- Weighing → WeighingAxleGroup -->
+      <line x1="610" y1="82" x2="658" y2="82" stroke="#d97706" stroke-width="2" marker-end="url(#arrowAmber)"/>
+      <text x="632" y="75" font-size="9" fill="#d97706">1:N</text>
+
+      <!-- WeighingAxleGroup → WeighingAxle -->
+      <line x1="745" y1="110" x2="745" y2="143" stroke="#d97706" stroke-width="2" marker-end="url(#arrowAmber)"/>
+      <text x="762" y="130" font-size="9" fill="#d97706">1:N</text>
+
+      <!-- Weighing → Infraction -->
+      <line x1="540" y1="110" x2="540" y2="143" stroke="#d97706" stroke-width="2" marker-end="url(#arrowAmber)"/>
+      <text x="555" y="130" font-size="9" fill="#d97706">embed</text>
+
+      <!-- Weighing → Operation (OperationId) -->
+      <path d="M470 90 L420 90 L420 250 L115 250 L115 318" fill="none" stroke="#22c55e" stroke-width="2" stroke-dasharray="6 3" marker-end="url(#arrowGreen)"/>
+      <text x="268" y="244" font-size="9" fill="#22c55e">OperationId (FK)</text>
+
+      <!-- Entity: ExportBatch -->
+      <rect x="470" y="320" width="150" height="55" rx="8" fill="#fff" stroke="#ef4444" stroke-width="2"/>
+      <text x="545" y="352" text-anchor="middle" font-size="12" font-weight="bold" fill="#ef4444">ExportBatch</text>
+
+      <!-- Entity: SequentialInfraction -->
+      <rect x="660" y="320" width="170" height="55" rx="8" fill="#fff" stroke="#ef4444" stroke-width="2"/>
+      <text x="745" y="347" text-anchor="middle" font-size="11" font-weight="bold" fill="#ef4444">Seq. Infraction</text>
+
+      <!-- Entity: SequentialExport -->
+      <rect x="660" y="390" width="170" height="35" rx="8" fill="#fff" stroke="#ef4444" stroke-width="2"/>
+      <text x="745" y="412" text-anchor="middle" font-size="11" font-weight="bold" fill="#ef4444">Seq. Export</text>
+
+      <!-- Weighing → ExportBatch -->
+      <path d="M540 110 L540 225 L545 225 L545 318" fill="none" stroke="#ef4444" stroke-width="2" stroke-dasharray="6 3" marker-end="url(#arrowRed)"/>
+      <text x="555" y="270" font-size="9" fill="#ef4444">ExportBatchId (FK)</text>
+
+      <!-- Entity: Configuration -->
+      <rect x="40" y="505" width="150" height="55" rx="8" fill="#fff" stroke="#a855f7" stroke-width="2"/>
+      <text x="115" y="537" text-anchor="middle" font-size="12" font-weight="bold" fill="#a855f7">Configuration</text>
+
+      <!-- Entity: HaenniScales -->
+      <rect x="240" y="505" width="150" height="55" rx="8" fill="#fff" stroke="#a855f7" stroke-width="2"/>
+      <text x="315" y="537" text-anchor="middle" font-size="12" font-weight="bold" fill="#a855f7">HaenniScales</text>
+
+      <!-- Config → HaenniScales -->
+      <line x1="190" y1="532" x2="238" y2="532" stroke="#a855f7" stroke-width="2" marker-end="url(#arrowPurple)"/>
+      <text x="215" y="525" font-size="9" fill="#a855f7">embed</text>
+
+      <!-- Entity: Classification -->
+      <rect x="470" y="505" width="150" height="55" rx="8" fill="#fff" stroke="#0ea5e9" stroke-width="2"/>
+      <text x="545" y="537" text-anchor="middle" font-size="12" font-weight="bold" fill="#0ea5e9">Classification</text>
+    </svg>
+  </div>
+  <div class="diagram-legend">
+    <span style="display:flex;align-items:center;gap:6px;"><span class="legend-line" style="background:var(--slate-500);"></span> Linha sólida = referência embeddada</span>
+    <span style="display:flex;align-items:center;gap:6px;"><span class="legend-line" style="border-top:2px dashed var(--slate-500);background:transparent;"></span> Linha tracejada = FK por ID</span>
+    <span style="display:flex;align-items:center;gap:6px;"><span style="background:var(--slate-100);padding:2px 8px;border-radius:4px;font-size:0.75rem;font-weight:600;">embed</span> Objeto embeddado</span>
+  </div>
+</div>
+
+<!-- ===== 3. COLLECTIONS ===== -->
+<div class="container page-break" id="collections">
+  <h2 class="section-title">3. Detalhamento das Collections</h2>
+
+  <!-- 3.1 User -->
+  <div class="collection-block" id="col-user">
+    <h3 class="collection-title"><span class="collection-num">1</span> User</h3>
+    <p class="collection-desc">Autenticação e gerenciamento de usuários do sistema.</p>
+    <div class="collection-meta">
+      <strong>Arquivo:</strong> <code>Axion.AxTon.Core/Domain/User.cs</code><br>
+      <strong>Repository:</strong> <code>Axion.AxTon.Dal/Repository/UserRepository.cs</code>
+    </div>
+    <h4>Campos</h4>
+    <table>
+      <thead><tr><th>Campo</th><th>Tipo</th><th>Obrigatório</th><th>Default</th><th>Descrição</th></tr></thead>
+      <tbody>
+        <tr><td>_id</td><td>ObjectId</td><td>Sim</td><td>Auto</td><td>Identificador único</td></tr>
+        <tr><td>AgentCode</td><td>string</td><td>Não</td><td>null</td><td>Código do agente</td></tr>
+        <tr><td>Name</td><td>string</td><td>Sim</td><td>—</td><td>Nome completo</td></tr>
+        <tr><td>Email</td><td>string</td><td>Não</td><td>null</td><td>E-mail</td></tr>
+        <tr><td>Phone</td><td>string</td><td>Não</td><td>null</td><td>Telefone</td></tr>
+        <tr><td>Username</td><td>string</td><td>Sim</td><td>—</td><td>Login do usuário</td></tr>
+        <tr><td>Password</td><td>string</td><td>Sim</td><td>—</td><td>Senha (hash MD5)</td></tr>
+        <tr><td>AccessProfileId</td><td>string</td><td>Não</td><td>null</td><td>Referência ao AccessProfile</td></tr>
+      </tbody>
+    </table>
+    <h4>Relacionamentos</h4>
+    <div class="relation-item"><span class="relation-arrow">→</span> AccessProfileId → AccessProfile._id (muitos-para-um)</div>
+  </div>
+
+  <!-- 3.2 AccessProfile -->
+  <div class="collection-block" id="col-accessprofile">
+    <h3 class="collection-title"><span class="collection-num">2</span> AccessProfile</h3>
+    <p class="collection-desc">Perfis de acesso que agrupam permissões atribuídas a usuários.</p>
+    <div class="collection-meta">
+      <strong>Arquivo:</strong> <code>Axion.AxTon.Core/Domain/AccessProfile.cs</code><br>
+      <strong>Repository:</strong> <code>Axion.AxTon.Dal/Repository/AccessProfileRepository.cs</code>
+    </div>
+    <h4>Campos</h4>
+    <table>
+      <thead><tr><th>Campo</th><th>Tipo</th><th>Obrigatório</th><th>Default</th><th>Descrição</th></tr></thead>
+      <tbody>
+        <tr><td>_id</td><td>ObjectId</td><td>Sim</td><td>Auto</td><td>Identificador único</td></tr>
+        <tr><td>Name</td><td>string</td><td>Sim</td><td>—</td><td>Nome do perfil</td></tr>
+        <tr><td>AccessPermissions</td><td>List&lt;AccessPermission&gt;</td><td>Não</td><td>[]</td><td>Lista de permissões atribuídas</td></tr>
+      </tbody>
+    </table>
+    <h4>Relacionamentos</h4>
+    <div class="relation-item"><span class="relation-arrow">→</span> AccessPermissions → Lista de AccessPermission (um-para-muitos, embeddado)</div>
+  </div>
+
+  <!-- 3.3 AccessPermission -->
+  <div class="collection-block" id="col-accesspermission">
+    <h3 class="collection-title"><span class="collection-num">3</span> AccessPermission</h3>
+    <p class="collection-desc">Permissões granulares com estrutura hierárquica (pai/filho).</p>
+    <div class="collection-meta">
+      <strong>Arquivo:</strong> <code>Axion.AxTon.Core/Domain/AccessPermission.cs</code><br>
+      <strong>Repository:</strong> <code>Axion.AxTon.Dal/Repository/AccessPermissionRepository.cs</code>
+    </div>
+    <h4>Campos</h4>
+    <table>
+      <thead><tr><th>Campo</th><th>Tipo</th><th>Obrigatório</th><th>Default</th><th>Descrição</th></tr></thead>
+      <tbody>
+        <tr><td>_id</td><td>ObjectId</td><td>Sim</td><td>Auto</td><td>Identificador único</td></tr>
+        <tr><td>Name</td><td>string</td><td>Sim</td><td>—</td><td>Nome da permissão</td></tr>
+        <tr><td>Action</td><td>string</td><td>Sim</td><td>—</td><td>Código da ação</td></tr>
+        <tr><td>Parent</td><td>AccessPermission</td><td>Não</td><td>null</td><td>Permissão pai (hierárquica)</td></tr>
+        <tr><td>Childs</td><td>List&lt;AccessPermission&gt;</td><td>Não</td><td>[]</td><td>Permissões filhas</td></tr>
+      </tbody>
+    </table>
+    <div class="note-box"><strong>Nota:</strong> Estrutura hierárquica auto-referencial pai/filho.</div>
+  </div>
+
+  <!-- 3.4 Classification -->
+  <div class="collection-block page-break" id="col-classification">
+    <h3 class="collection-title"><span class="collection-num">4</span> Classification</h3>
+    <p class="collection-desc">Classificação de veículos conforme normas de trânsito.</p>
+    <div class="collection-meta">
+      <strong>Arquivo:</strong> <code>Axion.AxTon.Core/Domain/Classification.cs</code><br>
+      <strong>Repository:</strong> <code>Axion.AxTon.Dal/Repository/ClassificationRepository.cs</code>
+    </div>
+    <h4>Campos</h4>
+    <table>
+      <thead><tr><th>Campo</th><th>Tipo</th><th>Obrigatório</th><th>Default</th><th>Descrição</th></tr></thead>
+      <tbody>
+        <tr><td>_id</td><td>ObjectId</td><td>Sim</td><td>Auto</td><td>Identificador único</td></tr>
+        <tr><td>Characterization</td><td>List&lt;string&gt;</td><td>Não</td><td>—</td><td>Lista de descrições de caracterização</td></tr>
+        <tr><td>Class</td><td>string</td><td>Sim</td><td>—</td><td>Classe do veículo</td></tr>
+        <tr><td>Code</td><td>string</td><td>Sim</td><td>—</td><td>Código da classificação</td></tr>
+        <tr><td>Name</td><td>string</td><td>Sim</td><td>—</td><td>Nome da classificação</td></tr>
+        <tr><td>Comments</td><td>string</td><td>Não</td><td>null</td><td>Comentários adicionais</td></tr>
+        <tr><td>Axles</td><td>string</td><td>Sim</td><td>—</td><td>Configuração de eixos (ex: "E1E2E3")</td></tr>
+        <tr><td>Pbt</td><td>string</td><td>Sim</td><td>—</td><td>Peso Bruto Total regulamentado</td></tr>
+        <tr><td>Type</td><td>string</td><td>Sim</td><td>—</td><td>Tipo do veículo</td></tr>
+      </tbody>
+    </table>
+    <div class="note-box"><strong>Nota:</strong> Método GetAxleGroups() faz parse do campo Characterization e retorna lista de AxleGroup.</div>
+  </div>
+
+  <!-- 3.5 Configuration -->
+  <div class="collection-block page-break" id="col-configuration">
+    <h3 class="collection-title"><span class="collection-num">5</span> Configuration</h3>
+    <p class="collection-desc">Configurações gerais do sistema, tolerâncias, câmeras e integração com balanças.</p>
+    <div class="collection-meta">
+      <strong>Arquivo:</strong> <code>Axion.AxTon.Core/Domain/Configuration.cs</code><br>
+      <strong>Repository:</strong> <code>Axion.AxTon.Dal/Repository/ConfigurationRepository.cs</code>
+    </div>
+    <h4>Campos</h4>
+    <table>
+      <thead><tr><th>Campo</th><th>Tipo</th><th>Obrigatório</th><th>Default</th><th>Descrição</th></tr></thead>
+      <tbody>
+        <tr><td>_id</td><td>ObjectId</td><td>Sim</td><td>Auto</td><td>Identificador único</td></tr>
+        <tr><td>DeviceCode</td><td>string</td><td>Não</td><td>null</td><td>Código do equipamento</td></tr>
+        <tr><td>TolerancePercentage</td><td>double?</td><td>Não</td><td>null</td><td>Tolerância percentual para PBT</td></tr>
+        <tr><td>TolerancePercentageAxle</td><td>double?</td><td>Não</td><td>null</td><td>Tolerância percentual para eixo</td></tr>
+        <tr><td>TolerancePercentageTranshipment</td><td>double?</td><td>Não</td><td>null</td><td>Tolerância percentual para transbordo</td></tr>
+        <tr><td>EntityCode</td><td>string</td><td>Não</td><td>null</td><td>Código da entidade</td></tr>
+        <tr><td>EntityName</td><td>string</td><td>Não</td><td>null</td><td>Nome da entidade</td></tr>
+        <tr><td>EntityTitle</td><td>string</td><td>Não</td><td>null</td><td>Título da entidade</td></tr>
+        <tr><td>EntityLogo</td><td>string</td><td>Não</td><td>null</td><td>URL do logo da entidade</td></tr>
+        <tr><td>UrlAxHub</td><td>string</td><td>Não</td><td>null</td><td>URL da API AxHub</td></tr>
+        <tr><td>ApiKey</td><td>string</td><td>Não</td><td>null</td><td>Chave de API do AxHub</td></tr>
+        <tr><td>HaenniScales</td><td>HaenniScales</td><td>Não</td><td>null</td><td>Configuração das balanças Haenni</td></tr>
+        <tr><td>StructPBT</td><td>string</td><td>Não</td><td>null</td><td>Código de estrutura para infração PBT</td></tr>
+        <tr><td>StructAxle</td><td>string</td><td>Não</td><td>null</td><td>Código de estrutura para infração de eixo</td></tr>
+        <tr><td>StructAxlePBT</td><td>string</td><td>Não</td><td>null</td><td>Código de estrutura para infração eixo+PBT</td></tr>
+        <tr><td>InfractionLimitAxlePBT</td><td>double</td><td>Não</td><td>0</td><td>Limite para infração eixo+PBT</td></tr>
+        <tr><td>InfractionMinAllInfraction</td><td>double</td><td>Não</td><td>0</td><td>Limite mínimo geral de infração</td></tr>
+        <tr><td>IsImageRequired</td><td>bool</td><td>Não</td><td>false</td><td>Se captura de imagem é obrigatória</td></tr>
+        <tr><td>ExportType</td><td>ExportType</td><td>Não</td><td>—</td><td>Tipo de exportação</td></tr>
+        <tr><td>CameraIp</td><td>string</td><td>Sim</td><td>—</td><td>IP da câmera</td></tr>
+        <tr><td>CameraPort</td><td>int</td><td>Não</td><td>554</td><td>Porta da câmera</td></tr>
+        <tr><td>CameraType</td><td>CameraType</td><td>Não</td><td>Generic</td><td>Tipo da câmera</td></tr>
+        <tr><td>CameraCustomRtspUrl</td><td>string</td><td>Não</td><td>null</td><td>URL RTSP customizada</td></tr>
+        <tr><td>WidthCamera</td><td>int</td><td>Não</td><td>1080</td><td>Largura da imagem</td></tr>
+        <tr><td>HeightCamera</td><td>int</td><td>Não</td><td>1920</td><td>Altura da imagem</td></tr>
+        <tr><td>UserCamera</td><td>string</td><td>Sim</td><td>—</td><td>Usuário da câmera</td></tr>
+        <tr><td>PasswordCamera</td><td>string</td><td>Sim</td><td>—</td><td>Senha da câmera</td></tr>
+      </tbody>
+    </table>
+
+    <div class="embedded-block">
+      <h4 class="embedded">Objeto Embeddado: HaenniScales</h4>
+      <table>
+        <thead><tr><th>Campo</th><th>Tipo</th><th>Default</th><th>Descrição</th></tr></thead>
+        <tbody>
+          <tr><td>BaseUrl</td><td>string</td><td>"http://localhost:8888"</td><td>URL base das balanças Haenni</td></tr>
+          <tr><td>Devices</td><td>List&lt;DeviceScales&gt;</td><td>—</td><td>Lista de balanças configuradas</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="embedded-block">
+      <h4 class="embedded">Objeto Embeddado: DeviceScales</h4>
+      <table>
+        <thead><tr><th>Campo</th><th>Tipo</th><th>Descrição</th></tr></thead>
+        <tbody>
+          <tr><td>Hnuid</td><td>string</td><td>Identificador único Haenni</td></tr>
+          <tr><td>ClassName</td><td>string</td><td>Nome da classe do dispositivo</td></tr>
+          <tr><td>ModelName</td><td>string</td><td>Nome do modelo</td></tr>
+          <tr><td>Serial</td><td>int?</td><td>Número serial</td></tr>
+          <tr><td>Load</td><td>int?</td><td>Valor de carga atual</td></tr>
+          <tr><td>Error</td><td>int?</td><td>Código de erro</td></tr>
+          <tr><td>SerialNumber</td><td>string?</td><td>Número serial (texto)</td></tr>
+          <tr><td>InmetroNumber</td><td>string?</td><td>Número de certificação INMETRO</td></tr>
+          <tr><td>SealNumber</td><td>string?</td><td>Número do lacre</td></tr>
+          <tr><td>VerifiedDate</td><td>DateTime?</td><td>Data de verificação</td></tr>
+          <tr><td>ValidateDate</td><td>DateTime?</td><td>Data de validade</td></tr>
+          <tr><td>AferitionDate</td><td>DateTime?</td><td>Data de aferição</td></tr>
+          <tr><td>AferitionValideDate</td><td>DateTime?</td><td>Data de validade da aferição</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- 3.6 Weighing -->
+  <div class="collection-block page-break" id="col-weighing">
+    <h3 class="collection-title"><span class="collection-num">6</span> Weighing</h3>
+    <p class="collection-desc">Registro central de pesagens de veículos, incluindo medições por eixo e dados de infração.</p>
+    <div class="collection-meta">
+      <strong>Arquivo:</strong> <code>Axion.AxTon.Core/Domain/Weighing.cs</code><br>
+      <strong>Repository:</strong> <code>Axion.AxTon.Dal/Repository/WeighingRepository.cs</code>
+    </div>
+    <h4>Campos</h4>
+    <table>
+      <thead><tr><th>Campo</th><th>Tipo</th><th>Obrigatório</th><th>Default</th><th>Descrição</th></tr></thead>
+      <tbody>
+        <tr><td>_id</td><td>ObjectId</td><td>Sim</td><td>Auto</td><td>Identificador único</td></tr>
+        <tr><td>WeighingDate</td><td>DateTime</td><td>Sim</td><td>—</td><td>Data/hora da pesagem</td></tr>
+        <tr><td>LicensePlate</td><td>string</td><td>Sim</td><td>—</td><td>Placa do veículo</td></tr>
+        <tr><td>Axles</td><td>string</td><td>Sim</td><td>—</td><td>Configuração de eixos</td></tr>
+        <tr><td>Pbt</td><td>string</td><td>Sim</td><td>—</td><td>PBT regulamentado (texto)</td></tr>
+        <tr><td>Classification</td><td>string</td><td>Sim</td><td>—</td><td>Classificação do veículo</td></tr>
+        <tr><td>WeighingStatus</td><td>WeighingStatus</td><td>Sim</td><td>—</td><td>Status da pesagem</td></tr>
+        <tr><td>ExportType</td><td>ExportType</td><td>Sim</td><td>—</td><td>Tipo de exportação</td></tr>
+        <tr><td>OperationId</td><td>string</td><td>Sim</td><td>—</td><td>Referência à Operation</td></tr>
+        <tr><td>ExportId</td><td>string</td><td>Não</td><td>null</td><td>Referência à Export</td></tr>
+        <tr><td>Device1</td><td>string</td><td>Não</td><td>null</td><td>Balança primária</td></tr>
+        <tr><td>Device2</td><td>string</td><td>Não</td><td>null</td><td>Balança secundária</td></tr>
+        <tr><td>WeighingAxleGroups</td><td>List&lt;WeighingAxleGroup&gt;</td><td>Não</td><td>[]</td><td>Grupos de eixo medidos</td></tr>
+        <tr><td>RegulatedPBT</td><td>double</td><td>Sim</td><td>—</td><td>PBT regulamentado (numérico)</td></tr>
+        <tr><td>Infraction</td><td>Infraction</td><td>Não</td><td>null</td><td>Dados da infração</td></tr>
+        <tr><td>ExportBatchId</td><td>ObjectId?</td><td>Não</td><td>null</td><td>Referência ao ExportBatch</td></tr>
+        <tr><td>StatusExport</td><td>bool</td><td>Não</td><td>false</td><td>Flag de exportação</td></tr>
+        <tr><td>UserRegistration</td><td>string</td><td>Não</td><td>null</td><td>Usuário que registrou</td></tr>
+        <tr><td>Observation</td><td>string</td><td>Não</td><td>null</td><td>Observações</td></tr>
+        <tr><td>ImageName</td><td>string</td><td>Não</td><td>null</td><td>Nome do arquivo de imagem</td></tr>
+        <tr><td>WeighingNumber</td><td>long?</td><td>Não</td><td>null</td><td>Número sequencial da pesagem</td></tr>
+      </tbody>
+    </table>
+
+    <h4>Relacionamentos</h4>
+    <div class="relation-item"><span class="relation-arrow">→</span> OperationId → Operation._id (muitos-para-um)</div>
+    <div class="relation-item"><span class="relation-arrow">→</span> ExportBatchId → ExportBatch._id (muitos-para-um)</div>
+
+    <div class="note-box"><strong>Nota:</strong> Campo computado PBT (double): soma de todos os PBTs dos grupos de eixo. Não é armazenado no banco (BsonIgnore).</div>
+
+    <div class="embedded-block">
+      <h4 class="embedded">Objeto Embeddado: Infraction</h4>
+      <table>
+        <thead><tr><th>Campo</th><th>Tipo</th><th>Descrição</th></tr></thead>
+        <tbody>
+          <tr><td>Ait</td><td>string</td><td>Número do Auto de Infração</td></tr>
+          <tr><td>SequentialInfraction</td><td>int</td><td>Número sequencial</td></tr>
+          <tr><td>InfractionType</td><td>InfractionType</td><td>Tipo de infração</td></tr>
+          <tr><td>InfractionCode</td><td>string</td><td>Código da infração</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="embedded-block">
+      <h4 class="embedded">Objeto Embeddado: WeighingAxleGroup</h4>
+      <table>
+        <thead><tr><th>Campo</th><th>Tipo</th><th>Descrição</th></tr></thead>
+        <tbody>
+          <tr><td>Code</td><td>string</td><td>Código do grupo de eixo (ex: "E1E2")</td></tr>
+          <tr><td>Sequence</td><td>int</td><td>Número de sequência</td></tr>
+          <tr><td>RegulatedPBT</td><td>double</td><td>Peso regulamentado para este grupo</td></tr>
+          <tr><td>WeighingAxles</td><td>List&lt;WeighingAxle&gt;</td><td>Medições dos eixos</td></tr>
+          <tr><td>PBT</td><td>double (Computado)</td><td>Soma dos pesos dos eixos</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="embedded-block">
+      <h4 class="embedded">Objeto Embeddado: WeighingAxle</h4>
+      <table>
+        <thead><tr><th>Campo</th><th>Tipo</th><th>Descrição</th></tr></thead>
+        <tbody>
+          <tr><td>Sequence</td><td>int</td><td>Sequência do eixo</td></tr>
+          <tr><td>Weight</td><td>int</td><td>Peso medido</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- 3.7 Operation -->
+  <div class="collection-block" id="col-operation">
+    <h3 class="collection-title"><span class="collection-num">7</span> Operation</h3>
+    <p class="collection-desc">Sessões operacionais de pesagem com local e usuário responsável.</p>
+    <div class="collection-meta">
+      <strong>Arquivo:</strong> <code>Axion.AxTon.Core/Domain/Operation.cs</code><br>
+      <strong>Repository:</strong> <code>Axion.AxTon.Dal/Repository/OperationRepository.cs</code>
+    </div>
+    <h4>Campos</h4>
+    <table>
+      <thead><tr><th>Campo</th><th>Tipo</th><th>Obrigatório</th><th>Default</th><th>Descrição</th></tr></thead>
+      <tbody>
+        <tr><td>_id</td><td>ObjectId</td><td>Sim</td><td>Auto</td><td>Identificador único</td></tr>
+        <tr><td>StartDate</td><td>DateTime</td><td>Sim</td><td>—</td><td>Data/hora de início da operação</td></tr>
+        <tr><td>FinishDate</td><td>DateTime?</td><td>Não</td><td>null</td><td>Data/hora de fim da operação</td></tr>
+        <tr><td>Local</td><td>Local</td><td>Não</td><td>null</td><td>Local da operação (embeddado)</td></tr>
+        <tr><td>User</td><td>User</td><td>Não</td><td>null</td><td>Usuário responsável (embeddado)</td></tr>
+      </tbody>
+    </table>
+    <div class="note-box"><strong>Nota:</strong> StartDate e FinishDate armazenados com DateTimeKind.Local. Local e User são objetos embeddados (não referenciados).</div>
+  </div>
+
+  <!-- 3.8 Local -->
+  <div class="collection-block" id="col-local">
+    <h3 class="collection-title"><span class="collection-num">8</span> Local</h3>
+    <p class="collection-desc">Locais de operação com endereço completo e coordenadas geográficas.</p>
+    <div class="collection-meta">
+      <strong>Arquivo:</strong> <code>Axion.AxTon.Core/Domain/Local.cs</code><br>
+      <strong>Repository:</strong> <code>Axion.AxTon.Dal/Repository/LocalRepository.cs</code>
+    </div>
+    <h4>Campos</h4>
+    <table>
+      <thead><tr><th>Campo</th><th>Tipo</th><th>Obrigatório</th><th>Default</th><th>Descrição</th></tr></thead>
+      <tbody>
+        <tr><td>_id</td><td>ObjectId</td><td>Sim</td><td>Auto</td><td>Identificador único</td></tr>
+        <tr><td>Code</td><td>string</td><td>Não</td><td>null</td><td>Código do local</td></tr>
+        <tr><td>Address</td><td>string</td><td>Não</td><td>null</td><td>Endereço</td></tr>
+        <tr><td>AddressNumber</td><td>string</td><td>Não</td><td>null</td><td>Número</td></tr>
+        <tr><td>PostalCode</td><td>string</td><td>Não</td><td>null</td><td>CEP</td></tr>
+        <tr><td>District</td><td>string</td><td>Não</td><td>null</td><td>Bairro</td></tr>
+        <tr><td>State</td><td>string</td><td>Não</td><td>null</td><td>Estado</td></tr>
+        <tr><td>CityCode</td><td>string</td><td>Não</td><td>null</td><td>Código IBGE da cidade</td></tr>
+        <tr><td>City</td><td>string</td><td>Não</td><td>null</td><td>Nome da cidade</td></tr>
+        <tr><td>Complement</td><td>string</td><td>Não</td><td>null</td><td>Complemento</td></tr>
+        <tr><td>Latitude</td><td>double?</td><td>Não</td><td>null</td><td>Latitude</td></tr>
+        <tr><td>Longitude</td><td>double?</td><td>Não</td><td>null</td><td>Longitude</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- 3.9 ExportBatch -->
+  <div class="collection-block page-break" id="col-exportbatch">
+    <h3 class="collection-title"><span class="collection-num">9</span> ExportBatch</h3>
+    <p class="collection-desc">Lotes de exportação de infrações para sistemas externos.</p>
+    <div class="collection-meta">
+      <strong>Arquivo:</strong> <code>Axion.AxTon.Core/Domain/ExportBatch.cs</code><br>
+      <strong>Repository:</strong> <code>Axion.AxTon.Dal/Repository/ExportBatchRepository.cs</code>
+    </div>
+    <h4>Campos</h4>
+    <table>
+      <thead><tr><th>Campo</th><th>Tipo</th><th>Obrigatório</th><th>Default</th><th>Descrição</th></tr></thead>
+      <tbody>
+        <tr><td>_id</td><td>ObjectId</td><td>Sim</td><td>Auto</td><td>Identificador único</td></tr>
+        <tr><td>DateHourGeneration</td><td>DateTime</td><td>Sim</td><td>—</td><td>Data/hora de geração do lote</td></tr>
+        <tr><td>UrlFile</td><td>string</td><td>Sim</td><td>—</td><td>URL do arquivo de exportação</td></tr>
+        <tr><td>ExportStatus</td><td>ExportStatus</td><td>Sim</td><td>—</td><td>Status da exportação</td></tr>
+        <tr><td>Message</td><td>string</td><td>Não</td><td>null</td><td>Mensagem de status/erro</td></tr>
+        <tr><td>InitialDateInfractions</td><td>DateTime</td><td>Sim</td><td>—</td><td>Data inicial das infrações</td></tr>
+        <tr><td>FinalDateInfractions</td><td>DateTime</td><td>Sim</td><td>—</td><td>Data final das infrações</td></tr>
+        <tr><td>Prefix</td><td>string</td><td>Não</td><td>null</td><td>Prefixo para numeração</td></tr>
+        <tr><td>InitialSequential</td><td>long?</td><td>Não</td><td>null</td><td>Primeiro sequencial do lote</td></tr>
+        <tr><td>FinalSequential</td><td>long</td><td>Sim</td><td>—</td><td>Último sequencial do lote</td></tr>
+        <tr><td>Sequential</td><td>int</td><td>Sim</td><td>—</td><td>Número sequencial do lote</td></tr>
+        <tr><td>InfractionType</td><td>InfractionType</td><td>Sim</td><td>—</td><td>Tipo de infração do lote</td></tr>
+        <tr><td>ExportType</td><td>ExportType</td><td>Sim</td><td>—</td><td>Tipo de destino da exportação</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- 3.10 SequentialInfraction -->
+  <div class="collection-block" id="col-seqinfraction">
+    <h3 class="collection-title"><span class="collection-num">10</span> SequentialInfraction</h3>
+    <p class="collection-desc">Controle de numeração sequencial de infrações.</p>
+    <div class="collection-meta">
+      <strong>Arquivo:</strong> <code>Axion.AxTon.Core/Domain/SequentialInfraction.cs</code><br>
+      <strong>Repository:</strong> <code>Axion.AxTon.Dal/Repository/SequentialInfractionRepository.cs</code>
+    </div>
+    <h4>Campos</h4>
+    <table>
+      <thead><tr><th>Campo</th><th>Tipo</th><th>Obrigatório</th><th>Default</th><th>Descrição</th></tr></thead>
+      <tbody>
+        <tr><td>_id</td><td>ObjectId</td><td>Sim</td><td>Auto</td><td>Identificador único</td></tr>
+        <tr><td>InfractionType</td><td>InfractionType?</td><td>Não</td><td>null</td><td>Tipo de infração</td></tr>
+        <tr><td>Sequential</td><td>long</td><td>Sim</td><td>—</td><td>Contador sequencial</td></tr>
+        <tr><td>Prefix</td><td>string</td><td>Não</td><td>null</td><td>Prefixo do código de infração</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- 3.11 SequentialExport -->
+  <div class="collection-block" id="col-seqexport">
+    <h3 class="collection-title"><span class="collection-num">11</span> SequentialExport</h3>
+    <p class="collection-desc">Controle de faixa de numeração para exportações.</p>
+    <div class="collection-meta">
+      <strong>Arquivo:</strong> <code>Axion.AxTon.Core/Domain/SequentialExport.cs</code><br>
+      <strong>Repository:</strong> <code>Axion.AxTon.Dal/Repository/SequentialExportRepository.cs</code>
+    </div>
+    <h4>Campos</h4>
+    <table>
+      <thead><tr><th>Campo</th><th>Tipo</th><th>Obrigatório</th><th>Default</th><th>Descrição</th></tr></thead>
+      <tbody>
+        <tr><td>_id</td><td>ObjectId</td><td>Sim</td><td>Auto</td><td>Identificador único</td></tr>
+        <tr><td>InitialSequential</td><td>long</td><td>Sim</td><td>—</td><td>Sequencial inicial</td></tr>
+        <tr><td>FinalSequential</td><td>long</td><td>Sim</td><td>—</td><td>Sequencial final</td></tr>
+        <tr><td>InfractionType</td><td>InfractionType?</td><td>Não</td><td>null</td><td>Tipo de infração associado</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- ===== 4. ENUMERAÇÕES ===== -->
+<div class="container page-break" id="enums">
+  <h2 class="section-title">4. Enumerações</h2>
+
+  <div class="enum-card">
+    <h3>WeighingStatus</h3>
+    <table><thead><tr><th>Valor</th><th>Descrição</th></tr></thead>
+      <tbody>
+        <tr><td>Started</td><td>Pesagem iniciada</td></tr>
+        <tr><td>Finish</td><td>Pesagem finalizada</td></tr>
+        <tr><td>Canceled</td><td>Pesagem cancelada</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="enum-card">
+    <h3>ExportType</h3>
+    <table><thead><tr><th>Valor</th><th>Descrição</th></tr></thead>
+      <tbody>
+        <tr><td>XTrafficExportInfraction</td><td>Exportação para sistema XTraffic</td></tr>
+        <tr><td>AxHubExportInfraction</td><td>Exportação para sistema AxHub</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="enum-card">
+    <h3>InfractionType</h3>
+    <table><thead><tr><th>Valor</th><th>Descrição</th></tr></thead>
+      <tbody>
+        <tr><td>ExcessPBT</td><td>Excesso de Peso Bruto Total</td></tr>
+        <tr><td>ExcessAxle</td><td>Excesso de peso por eixo</td></tr>
+        <tr><td>ExcessAxlePBT</td><td>Excesso combinado (eixo + PBT)</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="enum-card">
+    <h3>ExportStatus</h3>
+    <table><thead><tr><th>Valor</th><th>Descrição</th></tr></thead>
+      <tbody>
+        <tr><td>Processing</td><td>Lote em processamento</td></tr>
+        <tr><td>Ok</td><td>Exportação concluída com sucesso</td></tr>
+        <tr><td>Error</td><td>Exportação com erro</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="enum-card">
+    <h3>CameraType</h3>
+    <table><thead><tr><th>Valor</th><th>Descrição</th></tr></thead>
+      <tbody>
+        <tr><td>Generic</td><td>Genérica (compatível Dahua)</td></tr>
+        <tr><td>Hikvision</td><td>Câmera Hikvision</td></tr>
+        <tr><td>Intelbras</td><td>Câmera Intelbras</td></tr>
+        <tr><td>Uniview</td><td>Câmera Uniview (UNV)</td></tr>
+        <tr><td>Axis</td><td>Câmera Axis</td></tr>
+        <tr><td>Custom</td><td>URL RTSP customizada</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- ===== 5. RESUMO ===== -->
+<div class="container page-break" id="resumo">
+  <h2 class="section-title">5. Tabela Resumo</h2>
+  <table class="summary-table">
+    <thead>
+      <tr><th>Collection</th><th>Finalidade</th><th>Campos Chave</th><th>Relacionamentos</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>User</td><td>Autenticação e gerenciamento de usuários</td><td>Username, Password, Name</td><td>AccessProfileId → AccessProfile</td></tr>
+      <tr><td>AccessProfile</td><td>Perfis de acesso</td><td>Name, AccessPermissions</td><td>Contém lista de AccessPermission</td></tr>
+      <tr><td>AccessPermission</td><td>Permissões granulares</td><td>Name, Action</td><td>Parent (auto-referencial)</td></tr>
+      <tr><td>Classification</td><td>Classificação de veículos</td><td>Code, Name, Axles, Pbt</td><td>—</td></tr>
+      <tr><td>Configuration</td><td>Configurações do sistema</td><td>DeviceCode, Tolerâncias, Camera</td><td>—</td></tr>
+      <tr><td>Weighing</td><td>Registro de pesagens</td><td>LicensePlate, WeighingDate, Infraction</td><td>OperationId, ExportBatchId</td></tr>
+      <tr><td>Operation</td><td>Sessões operacionais</td><td>StartDate, FinishDate</td><td>User (embed), Local (embed)</td></tr>
+      <tr><td>Local</td><td>Locais de operação</td><td>Address, City, Coordenadas</td><td>—</td></tr>
+      <tr><td>ExportBatch</td><td>Lotes de exportação de infrações</td><td>DateHourGeneration, ExportStatus</td><td>—</td></tr>
+      <tr><td>Seq. Infraction</td><td>Contador de numeração de infrações</td><td>Sequential, Prefix</td><td>—</td></tr>
+      <tr><td>Seq. Export</td><td>Faixa de numeração de exportação</td><td>InitialSequential, FinalSequential</td><td>—</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- Footer -->
+<div style="text-align:center;padding:40px 20px;color:var(--slate-400);font-size:0.8rem;border-top:1px solid var(--slate-200);margin-top:40px;">
+  AxTon — Mapeamento do Banco de Dados &middot; Documento gerado em Março 2026 &middot; Versão 1.0
+</div>
+
+</body>
+</html>

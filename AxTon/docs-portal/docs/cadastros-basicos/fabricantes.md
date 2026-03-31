@@ -26,7 +26,7 @@ Cadastro dos fabricantes de equipamentos. Estes registros são fundamentais para
 
 ### Passo a passo — Cadastrar
 
-1. Acesse Cadastros Básicos → Fabricantes
+1. Acesse **Cadastros Básicos** → **Fabricantes**
 2. Clique em **+ Novo**
 3. Preencha os campos obrigatórios
 4. Clique em **Salvar**

@@ -12,7 +12,7 @@ A aba **Câmera IP** nas Configurações do Sistema permite configurar a câmera
 
 ## Como acessar
 
-**Menu lateral** → Sistema → **Configurações do Sistema** → aba **Câmera IP**
+**Menu lateral** → **Sistema** → aba **Câmera IP**
 
 ## Campos da configuração
 
@@ -34,7 +34,7 @@ A aba **Câmera IP** nas Configurações do Sistema permite configurar a câmera
 ## Passo a passo — Configurar câmera IP
 
 1. **Verifique o acesso à câmera** — Abra o Google Chrome e digite o IP da câmera na barra de endereço (ex.: `http://192.168.11.21`). Confirme que a imagem ao vivo (Live View) é exibida corretamente.
-2. **Acesse as Configurações do Sistema** — No AxTon, vá em **Sistema → Configurações do Sistema** e clique na aba **Câmera IP**.
+2. **Acesse as Configurações do Sistema** — No AxTon, clique em **Sistema** no menu lateral e depois na aba **Câmera IP**.
 3. **Preencha o IP** — Informe o endereço IP da câmera (ex.: `192.168.11.21`).
 4. **Preencha a resolução** — Defina **Altura** (ex.: `1080`) e **Largura** (ex.: `1280`).
 5. **Informe as credenciais** — Preencha **Usuário de login** (ex.: `admin`) e **Senha de login**.

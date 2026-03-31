@@ -12,7 +12,7 @@ Tickets em aberto são registros de pesagem que ainda não foram finalizados. Po
 
 ## Como acessar
 
-**Menu lateral** → Pesagem → **Tickets em Aberto**
+**Menu lateral** → **Tickets de Pesagens**
 
 ![Emitir Ticket de Pesagem](../img/Tickets%20de%20pesagens%20-%20emitir%20ticket.png)
 
@@ -39,7 +39,7 @@ Tickets em aberto são registros de pesagem que ainda não foram finalizados. Po
 
 ### Passo a passo — Finalizar Ticket
 
-1. Acesse Pesagem → Tickets em Aberto
+1. No menu lateral, clique em **Tickets de Pesagens**
 2. Localize o ticket desejado
 3. Clique em **Visualizar**
 4. Verifique os dados do veículo e pesos

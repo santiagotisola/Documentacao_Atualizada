@@ -3,16 +3,51 @@ import ComponentCreator from '@docusaurus/ComponentCreator';
 
 export default [
   {
+    path: '/AxTon.Docs/__docusaurus/debug',
+    component: ComponentCreator('/AxTon.Docs/__docusaurus/debug', 'eb1'),
+    exact: true
+  },
+  {
+    path: '/AxTon.Docs/__docusaurus/debug/config',
+    component: ComponentCreator('/AxTon.Docs/__docusaurus/debug/config', 'a25'),
+    exact: true
+  },
+  {
+    path: '/AxTon.Docs/__docusaurus/debug/content',
+    component: ComponentCreator('/AxTon.Docs/__docusaurus/debug/content', 'dd8'),
+    exact: true
+  },
+  {
+    path: '/AxTon.Docs/__docusaurus/debug/globalData',
+    component: ComponentCreator('/AxTon.Docs/__docusaurus/debug/globalData', 'b0a'),
+    exact: true
+  },
+  {
+    path: '/AxTon.Docs/__docusaurus/debug/metadata',
+    component: ComponentCreator('/AxTon.Docs/__docusaurus/debug/metadata', 'da4'),
+    exact: true
+  },
+  {
+    path: '/AxTon.Docs/__docusaurus/debug/registry',
+    component: ComponentCreator('/AxTon.Docs/__docusaurus/debug/registry', '2ac'),
+    exact: true
+  },
+  {
+    path: '/AxTon.Docs/__docusaurus/debug/routes',
+    component: ComponentCreator('/AxTon.Docs/__docusaurus/debug/routes', 'a29'),
+    exact: true
+  },
+  {
     path: '/AxTon.Docs/',
-    component: ComponentCreator('/AxTon.Docs/', '1b1'),
+    component: ComponentCreator('/AxTon.Docs/', 'cd3'),
     routes: [
       {
         path: '/AxTon.Docs/',
-        component: ComponentCreator('/AxTon.Docs/', '055'),
+        component: ComponentCreator('/AxTon.Docs/', '36f'),
         routes: [
           {
             path: '/AxTon.Docs/',
-            component: ComponentCreator('/AxTon.Docs/', '770'),
+            component: ComponentCreator('/AxTon.Docs/', '96f'),
             routes: [
               {
                 path: '/AxTon.Docs/administracao/perfis-acesso',
@@ -127,35 +162,10 @@ export default [
                 sidebar: "manualSidebar"
               },
               {
-                path: '/AxTon.Docs/infracoes/auditoria',
-                component: ComponentCreator('/AxTon.Docs/infracoes/auditoria', '361'),
-                exact: true
-              },
-              {
-                path: '/AxTon.Docs/infracoes/consulta-infracoes',
-                component: ComponentCreator('/AxTon.Docs/infracoes/consulta-infracoes', '4f5'),
-                exact: true
-              },
-              {
-                path: '/AxTon.Docs/infracoes/excecoes',
-                component: ComponentCreator('/AxTon.Docs/infracoes/excecoes', 'f15'),
-                exact: true
-              },
-              {
                 path: '/AxTon.Docs/infracoes/exportacao',
                 component: ComponentCreator('/AxTon.Docs/infracoes/exportacao', 'bfe'),
                 exact: true,
                 sidebar: "manualSidebar"
-              },
-              {
-                path: '/AxTon.Docs/infracoes/infracoes-descartadas',
-                component: ComponentCreator('/AxTon.Docs/infracoes/infracoes-descartadas', '0ec'),
-                exact: true
-              },
-              {
-                path: '/AxTon.Docs/infracoes/triagem',
-                component: ComponentCreator('/AxTon.Docs/infracoes/triagem', '9fc'),
-                exact: true
               },
               {
                 path: '/AxTon.Docs/medicoes/contratos',

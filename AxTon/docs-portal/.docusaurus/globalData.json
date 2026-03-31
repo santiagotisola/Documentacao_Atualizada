@@ -103,29 +103,9 @@
               "sidebar": "manualSidebar"
             },
             {
-              "id": "infracoes/auditoria",
-              "path": "/AxTon.Docs/infracoes/auditoria"
-            },
-            {
-              "id": "infracoes/consulta-infracoes",
-              "path": "/AxTon.Docs/infracoes/consulta-infracoes"
-            },
-            {
-              "id": "infracoes/excecoes",
-              "path": "/AxTon.Docs/infracoes/excecoes"
-            },
-            {
               "id": "infracoes/exportacao",
               "path": "/AxTon.Docs/infracoes/exportacao",
               "sidebar": "manualSidebar"
-            },
-            {
-              "id": "infracoes/infracoes-descartadas",
-              "path": "/AxTon.Docs/infracoes/infracoes-descartadas"
-            },
-            {
-              "id": "infracoes/triagem",
-              "path": "/AxTon.Docs/infracoes/triagem"
             },
             {
               "id": "intro",

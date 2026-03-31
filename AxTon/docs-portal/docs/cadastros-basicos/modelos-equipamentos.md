@@ -26,7 +26,7 @@ Modelos por fabricante. Estes registros são fundamentais para o funcionamento d
 
 ### Passo a passo — Cadastrar
 
-1. Acesse Cadastros Básicos → Modelos de Equipamentos
+1. Acesse **Cadastros Básicos** → **Modelos de Equipamentos**
 2. Clique em **+ Novo**
 3. Preencha os campos obrigatórios
 4. Clique em **Salvar**

@@ -55,3 +55,75 @@ export async function listarTabelas(req, res) {
     return res.status(500).json({ erro: err.message });
   }
 }
+
+// GET /api/axton/pesagens — últimas pesagens registradas
+export async function ultimasPesagens(req, res) {
+  try {
+    const pool = await conectar();
+    const result = await pool.request().query(`
+      SELECT TOP 20
+        p.IdPesagem,
+        p.DataHoraPesagem,
+        p.Placa,
+        p.PBT,
+        p.Status,
+        e.Descricao AS Equipamento,
+        o.DataHoraInicio AS InicioOperacao
+      FROM TBPesagens p
+      LEFT JOIN TBEquipamentos e ON p.IdEquipamento = e.IdEquipamento
+      LEFT JOIN TBOperacoes o    ON p.IdOperacao    = o.IdOperacao
+      ORDER BY p.DataHoraPesagem DESC
+    `);
+
+    return res.json({ total: result.recordset.length, pesagens: result.recordset });
+  } catch (err) {
+    return res.status(500).json({ erro: err.message });
+  }
+}
+
+// GET /api/axton/infracoes — últimas infrações (pesagem + eixo)
+export async function ultimasInfracoes(req, res) {
+  try {
+    const pool = await conectar();
+    const result = await pool.request().query(`
+      SELECT TOP 20
+        i.IdInfracao,
+        i.DataHoraInfracao,
+        i.Placa,
+        i.TipoInfracao,
+        i.PBTRegulamentado,
+        i.PBTMedido,
+        i.Status,
+        e.Descricao AS Equipamento
+      FROM TBInfracoes i
+      LEFT JOIN TBEquipamentos e ON i.IdEquipamento = e.IdEquipamento
+      ORDER BY i.DataHoraInfracao DESC
+    `);
+
+    return res.json({ total: result.recordset.length, infracoes: result.recordset });
+  } catch (err) {
+    return res.status(500).json({ erro: err.message });
+  }
+}
+
+// GET /api/axton/heartbeat — status de comunicação dos equipamentos
+export async function heartbeatEquipamentos(req, res) {
+  try {
+    const pool = await conectar();
+    const result = await pool.request().query(`
+      SELECT TOP 50
+        h.IdEquipamento,
+        e.Descricao  AS Equipamento,
+        e.NumeroSerie,
+        h.DataHora   AS UltimoHeartbeat,
+        h.Status
+      FROM TBHeartbeatEquipamentos h
+      JOIN TBEquipamentos e ON h.IdEquipamento = e.IdEquipamento
+      ORDER BY h.DataHora DESC
+    `);
+
+    return res.json({ total: result.recordset.length, heartbeats: result.recordset });
+  } catch (err) {
+    return res.status(500).json({ erro: err.message });
+  }
+}

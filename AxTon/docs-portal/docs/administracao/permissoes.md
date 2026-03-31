@@ -10,7 +10,7 @@ O módulo de permissões de acesso permite definir, para cada perfil cadastrado,
 
 ## Como acessar
 
-**Menu lateral** → Administração → **Permissões de Acesso**
+**Menu lateral** → Administração → **Permissões de acesso**
 
 ## Listagem
 
@@ -35,7 +35,7 @@ A tela exibe a matriz de permissões organizada por **perfil de acesso** e **fun
 
 ### Passo a passo — Configurar permissões de um perfil
 
-1. Acesse **Administração** → **Permissões de Acesso**
+1. No menu lateral, abra **Administração** e clique em **Permissões de acesso**
 2. Selecione o **Perfil de Acesso** a ser configurado
 3. Para cada funcionalidade listada, marque ou desmarque os tipos de permissão desejados
 4. Clique em **Salvar** para aplicar as configurações

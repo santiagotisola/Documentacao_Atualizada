@@ -12,7 +12,7 @@ Apresenta o volume total de passagens de veículos registradas nos postos de pes
 
 ## Como acessar
 
-**Menu lateral** → Relatórios → **Relatório de Passagens**
+**Menu lateral** → **Relatório de Pesagem**
 
 ## Dados do Relatório
 

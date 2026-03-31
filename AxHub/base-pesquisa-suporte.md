@@ -56,6 +56,32 @@
 
 ## 2. INFRAÇÕES
 
+### ⭐ GUIA COMPLETO — Processo de Infração (Passo a Passo)
+- **Caminho:** Menu lateral → Infrações (todas as telas)
+- **Documentação:** infracoes/guia-completo-infracoes
+- **Resumo:** Explicação completa do fluxo de infração ponta a ponta, da captura ao envio ao órgão
+- **Palavras-chave:** processo infração, fluxo infração, como funciona, passo a passo, etapas, ciclo completo, guia, manual, captura triagem auditoria exportação
+- **Fluxo completo em 5 etapas:**
+  1. **CAPTURA** — O equipamento (radar, câmera, lombada) registra automaticamente: imagem, placa (OCR), data/hora, velocidade, local (faixa)
+  2. **IMPORTAÇÃO** — Dados entram no AxHub em lotes automáticos. Exceções configuradas descartam infrações automaticamente nesta fase (ex: placas emergência, horários especiais)
+  3. **TRIAGEM (Analista)** — Menu → Infrações → Triagem. O analista verifica cada infração:
+     - Placa legível? Veículo correto? Velocidade coerente? Enquadramento correto? Imagem boa qualidade?
+     - Decisão: ✅ Validar (segue p/ auditoria) | ❌ Descartar (motivo obrigatório) | 🔄 Reabrir (descartada por engano)
+  4. **AUDITORIA (Auditor)** — Menu → Infrações → Auditoria. Segundo profissional confere o trabalho do analista:
+     - Filtros: Data, Equipamento, Tipo, Analista, Amostragem %
+     - Decisão: ✅ Confirmar (segue p/ exportação) | ❌ Rejeitar (volta p/ triagem com observação)
+  5. **EXPORTAÇÃO** — Menu → Infrações → Exportação. Sistema gera arquivo com assinatura digital:
+     - Configurar: Órgão destino (DETRAN/DER/PRF), Período, Layout (RENAINF/XML/TXT/CSV)
+     - 7 validações automáticas: placa, imagens, dados, enquadramento, assinaturas, duplicatas, prazo legal
+     - Enviar via: SFTP (automático), API (integração) ou Download (manual)
+- **Status possíveis:** 🟡 Aguardando Triagem → 🔵 Em Triagem → 🟢 Válida → 🟣 Auditada → ✅ Exportada (ou 🔴 Descartada)
+- **Tabelas BD:** TBInfracoes, TBHistoricoTriagens, TBMotivosDescartes, TBLoteExportacoes, TBExcecoes, TBEnquadramentos
+- **Perguntas frequentes:**
+  - "Como sei em qual etapa está uma infração?" → Consulta de Infrações → coluna Status
+  - "Infração descartada pode ser recuperada?" → Sim, use Reabrir na Triagem
+  - "O que são exceções?" → Regras automáticas de descarte (placas emergência, horários, etc.)
+  - "Onde vejo erros de exportação?" → Infrações → Exportação → aba Erros
+
 ### Triagem
 - **Caminho:** Menu lateral → Infrações → **Triagem**
 - **O que faz:** Revisar, validar ou descartar infrações pendentes antes da exportação

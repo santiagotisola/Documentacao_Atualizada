@@ -3035,6 +3035,62 @@
         "TBSequencialInfracoesFalhas",
         "TBSequencialInfracoes"
       ]
+    },
+    {
+      "id": "guia-completo-infracoes",
+      "module": "Infrações",
+      "title": "Guia Completo — Processo de Infração",
+      "keywords": [
+        "processo infração",
+        "fluxo infração",
+        "como funciona infração",
+        "passo a passo infração",
+        "etapas infração",
+        "captura triagem auditoria exportação",
+        "ciclo infração",
+        "guia infração",
+        "manual infração",
+        "infração completo",
+        "como triar",
+        "como auditar",
+        "como exportar",
+        "fluxo completo"
+      ],
+      "path": "Menu lateral → Infrações",
+      "content": "O processo de infração no AxHub segue 5 etapas obrigatórias: (1) CAPTURA — o equipamento registra imagem, placa, velocidade e data/hora. (2) IMPORTAÇÃO — dados entram no AxHub automaticamente em lotes; exceções configuradas descartam infrações automaticamente nesta fase. (3) TRIAGEM — o analista humano revisa cada infração verificando: placa legível, veículo correto, velocidade coerente, enquadramento correto e qualidade da imagem. Decide: Validar (segue para auditoria), Descartar (com motivo obrigatório) ou Reabrir (recuperar descartada por engano). (4) AUDITORIA — um segundo profissional (auditor) confere o trabalho do analista. Pode Confirmar (segue para exportação), Rejeitar (volta para triagem com observação) ou adicionar observações. Usa filtros avançados e amostragem percentual. (5) EXPORTAÇÃO — o sistema gera o arquivo nos formatos RENAINF/XML/TXT/CSV com 7 validações automáticas (placa, imagens, dados, enquadramento, assinaturas, duplicatas, prazo legal) e envia ao órgão autuador (DETRAN, DER, PRF, Prefeitura) via SFTP, API ou download manual. Status possíveis: Aguardando Triagem → Em Triagem → Válida → Auditada → Exportada (ou Descartada em qualquer fase).",
+      "steps": [
+        "CAPTURA: O equipamento de fiscalização detecta e registra a infração automaticamente (imagem + placa + velocidade + data/hora + local)",
+        "IMPORTAÇÃO: Os dados são enviados ao AxHub em lotes de importação. Exceções automáticas (placas especiais, horários, faixas) descartam infrações nesta fase",
+        "TRIAGEM: Acesse Menu → Infrações → Triagem. Use filtros (Período, Status, Tipo, Operação) para encontrar infrações pendentes",
+        "TRIAGEM - ANÁLISE: Para cada infração, verifique: placa legível?, veículo correto?, velocidade coerente?, enquadramento correto?, imagem boa qualidade?",
+        "TRIAGEM - DECISÃO: Validar (tudo OK, segue para auditoria) ou Descartar (algo errado, informar motivo obrigatório). Pode Reabrir descartada por engano",
+        "AUDITORIA: Acesse Menu → Infrações → Auditoria. Configure filtros (data, equipamento, tipo, analista, amostragem %)",
+        "AUDITORIA - DECISÃO: Confirmar (correto, segue para exportação), Rejeitar (errado, volta para triagem com observação) ou Adicionar observações",
+        "EXPORTAÇÃO: Acesse Menu → Infrações → Exportação. Configure: Órgão destino, Período, Layout (RENAINF/XML/TXT/CSV)",
+        "EXPORTAÇÃO - GERAR LOTE: Clique em Gerar Lote. O sistema valida automaticamente 7 critérios e gera arquivo com assinatura digital",
+        "EXPORTAÇÃO - ENVIAR: Envie via SFTP (automático), API (integração) ou Download (manual)",
+        "CONSULTA: A qualquer momento, consulte todas as infrações em Menu → Infrações → Consulta de Infrações"
+      ],
+      "docUrl": "infracoes/guia-completo-infracoes",
+      "related": [
+        "triagem-infracoes",
+        "auditoria",
+        "exportar-infracoes",
+        "excecoes",
+        "consulta-infracoes",
+        "infracoes-descartadas",
+        "infracao-nao-aparece",
+        "reabrir-infracao"
+      ],
+      "dbTables": [
+        "TBInfracoes",
+        "TBHistoricoTriagens",
+        "TBMotivosDescartes",
+        "TBLoteExportacoes",
+        "TBExcecoes",
+        "TBEnquadramentos",
+        "TBInfracoesEnquadramentos"
+      ]
     }
   ],
   "glossary": [

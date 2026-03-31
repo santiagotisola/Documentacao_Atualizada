@@ -20,13 +20,27 @@ O AxTon possui uma interface organizada em menu lateral fixo, que permite o aces
 
 ## Módulos disponíveis
 
-A navegação lateral é organizada pelas seguintes categorias:
+O menu lateral do AxTon é organizado com itens diretos e duas categorias expansíveis:
 
-| Categoria | Descrição |
-|-----------|-----------|
-| **Cadastros** | Configurações base do sistema: locais, classificações e sequenciais |
-| **Administração** | Gestão de usuários, perfis de acesso e permissões |
+### Itens diretos
+
+| Item do menu | Descrição |
+|---|---|
+| **Iniciar Pesagem** | Postos e início do processo de pesagem |
+| **Operações** | Cadastro e gestão de operações de fiscalização |
+| **Tickets de Pesagens** | Tickets em aberto e fechados |
+| **Exportação** | Exportação de infrações para o órgão autuador |
+| **Sistema** | Configurações gerais, câmera IP e dados do órgão |
+| **Relatório de Pesagem** | Relatório de passagens e pesagens realizadas |
+| **Sequenciais de Infração** | Faixas de numeração sequencial |
+
+### Categorias expansíveis
+
+| Categoria | Itens |
+|---|---|
+| **Cadastros** | Locais, Classificações, Sequenciais de Infração |
+| **Administração** | Usuários, Permissões de acesso, Perfis de acesso |
 
 :::tip Dica de navegação
-Clique no nome de uma categoria no menu lateral para expandir ou recolher os itens pertencentes a ela.
+Clique em uma categoria (Cadastros ou Administração) para expandir ou recolher os itens.
 :::

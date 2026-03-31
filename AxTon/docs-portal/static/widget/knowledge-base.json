@@ -1,4 +1,4 @@
-{
+﻿{
   "version": "2.0.0",
   "system": "AxTon",
   "description": "Base de conhecimento interligada do AxTon — pesagem veicular",
@@ -16,8 +16,8 @@
       "module": "Pesagem",
       "keywords": ["posto", "pesagem", "local", "cadastrar posto", "ponto", "balança"],
       "content": "Postos de Pesagem representam os locais físicos onde ocorrem as pesagens de veículos. Cada posto é vinculado a uma localidade e pode ter múltiplos equipamentos.",
-      "steps": ["Acesse Pesagem → Postos de Pesagem", "Clique em + Novo", "Preencha Nome e Localidade", "Marque como Ativo", "Clique em Salvar"],
-      "path": "Menu → Pesagem → Postos de Pesagem",
+      "steps": ["No menu lateral, clique em Iniciar Pesagem", "Clique em + Novo", "Preencha Nome e Localidade", "Marque como Ativo", "Clique em Salvar"],
+      "path": "Menu lateral → Iniciar Pesagem",
       "docUrl": "pesagem/postos",
       "related": ["ticket-aberto", "cadastro-equipamentos", "cadastro-operacoes"],
       "dbTables": ["Postos", "PostosEquipamentos"]
@@ -28,8 +28,8 @@
       "module": "Pesagem",
       "keywords": ["ticket", "aberto", "pendente", "pesagem", "finalizar", "peso"],
       "content": "Tickets em aberto são registros de pesagem pendentes de finalização. Podem estar aguardando complementação de dados, segunda pesagem ou liberação.",
-      "steps": ["Acesse Pesagem → Tickets em Aberto", "Localize o ticket desejado", "Clique em Visualizar", "Verifique dados do veículo e pesos", "Clique em Finalizar", "Confirme a operação"],
-      "path": "Menu → Pesagem → Tickets em Aberto",
+      "steps": ["No menu lateral, clique em Tickets de Pesagens", "Localize o ticket desejado", "Clique em Visualizar", "Verifique dados do veículo e pesos", "Clique em Finalizar", "Confirme a operação"],
+      "path": "Menu lateral → Tickets de Pesagens",
       "docUrl": "pesagem/ticket-aberto",
       "related": ["ticket-fechado", "postos-pesagem", "liberar-pesagem"],
       "dbTables": ["Tickets", "TicketsPesagem"]
@@ -40,8 +40,8 @@
       "module": "Pesagem",
       "keywords": ["ticket", "fechado", "finalizado", "consulta", "histórico", "peso líquido"],
       "content": "Tickets fechados são registros de pesagem finalizados. Permitem consulta histórica com filtros por período, placa, posto e presença de excesso de peso.",
-      "steps": ["Acesse Pesagem → Tickets Fechados", "Defina filtros de período", "Filtre por placa ou posto (opcional)", "Clique em Pesquisar", "Clique sobre o ticket para detalhes"],
-      "path": "Menu → Pesagem → Tickets Fechados",
+      "steps": ["No menu lateral, clique em Tickets de Pesagens e filtre por Fechados", "Defina filtros de período", "Filtre por placa ou posto (opcional)", "Clique em Pesquisar", "Clique sobre o ticket para detalhes"],
+      "path": "Menu lateral → Tickets de Pesagens → Fechados",
       "docUrl": "pesagem/ticket-fechado",
       "related": ["ticket-aberto", "relatorio-passagens", "relatorio-infracoes"],
       "dbTables": ["Tickets", "TicketsPesagem"]
@@ -52,8 +52,8 @@
       "module": "Pesagem",
       "keywords": ["reclassificar", "classificação", "eixo", "PBT", "tipo veículo", "reboque"],
       "content": "Permite alterar a classificação de um veículo durante a pesagem quando a classificação automática não corresponde ao veículo real. A reclassificação altera o PBT permitido.",
-      "steps": ["Acesse Pesagem → Reclassificar", "Informe o número do Ticket", "Verifique a classificação atual", "Selecione a Nova Classificação", "Informe o Motivo", "Clique em Salvar"],
-      "path": "Menu → Pesagem → Reclassificar",
+      "steps": ["Na tela de Tickets de Pesagens, selecione o ticket", "Informe o número do Ticket", "Verifique a classificação atual", "Selecione a Nova Classificação", "Informe o Motivo", "Clique em Salvar"],
+      "path": "Menu lateral → Tickets de Pesagens → Reclassificar",
       "docUrl": "pesagem/reclassificar",
       "related": ["classificacoes-veiculos", "ticket-aberto", "motivos-pesagem"],
       "dbTables": ["TicketsReclassificacao", "ClassificacoesVeiculos"]
@@ -64,8 +64,8 @@
       "module": "Pesagem",
       "keywords": ["liberar", "liberação", "autorizar", "retido", "pesagem"],
       "content": "Permite liberar manualmente veículos retidos no processo de pesagem, seja por questões operacionais ou após regularização. Toda liberação gera registro de auditoria.",
-      "steps": ["Acesse Pesagem → Liberar Pesagem", "Localize o ticket pendente", "Informe o Motivo da Liberação", "Registre o Responsável", "Clique em Liberar"],
-      "path": "Menu → Pesagem → Liberar Pesagem",
+      "steps": ["Na tela de Tickets de Pesagens, localize o ticket pendente", "Localize o ticket pendente", "Informe o Motivo da Liberação", "Registre o Responsável", "Clique em Liberar"],
+      "path": "Menu lateral → Tickets de Pesagens → Liberar",
       "docUrl": "pesagem/liberar-pesagem",
       "related": ["ticket-aberto", "motivos-pesagem", "logs-acesso"],
       "dbTables": ["TicketsLiberacao"]
@@ -76,10 +76,10 @@
       "module": "Pesagem",
       "keywords": ["motivo", "liberação", "reclassificação", "descarte", "cadastro motivo"],
       "content": "Cadastro dos motivos padronizados utilizados nas operações de pesagem: liberação, reclassificação e descarte.",
-      "steps": ["Acesse Pesagem → Motivos", "Clique em + Novo", "Informe a Descrição", "Selecione o Tipo", "Marque como Ativo", "Clique em Salvar"],
-      "path": "Menu → Pesagem → Motivos",
+      "steps": ["Na tela de Iniciar Pesagem, acesse Motivos", "Clique em + Novo", "Informe a Descrição", "Selecione o Tipo", "Marque como Ativo", "Clique em Salvar"],
+      "path": "Menu lateral → Iniciar Pesagem → Motivos",
       "docUrl": "pesagem/motivos",
-      "related": ["liberar-pesagem", "reclassificar-veiculo", "infracoes-descartadas"],
+      "related": ["liberar-pesagem", "reclassificar-veiculo"],
       "dbTables": ["MotivosPesagem"]
     },
     {
@@ -88,8 +88,8 @@
       "module": "Operações",
       "keywords": ["operação", "cadastrar", "fiscalização", "vigência", "campo"],
       "content": "Operações representam atividades de fiscalização de pesagem em campo. Cada operação é vinculada a um posto e possui período de vigência definido.",
-      "steps": ["Acesse Operações → Cadastro de Operações", "Clique em + Novo", "Informe o Nome da operação", "Selecione o Posto", "Defina as datas de vigência", "Clique em Salvar"],
-      "path": "Menu → Operações → Cadastro de Operações",
+      "steps": ["No menu lateral, clique em Operações", "Clique em + Novo", "Informe o Nome da operação", "Selecione o Posto", "Defina as datas de vigência", "Clique em Salvar"],
+      "path": "Menu lateral → Operações",
       "docUrl": "operacoes/cadastro-operacoes",
       "related": ["postos-pesagem", "monitoramento-online", "eventos-equipamentos"],
       "dbTables": ["Operacoes", "OperacoesPostos"]
@@ -100,8 +100,8 @@
       "module": "Operações",
       "keywords": ["monitoramento", "online", "tempo real", "status", "comunicação", "equipamento"],
       "content": "Painel de acompanhamento em tempo real do status dos equipamentos de pesagem. Exibe indicadores de Online (verde), Offline (vermelho) e Alerta (amarelo).",
-      "steps": ["Acesse Operações → Monitoramento Online", "Visualize o status dos equipamentos", "Equipamentos vermelhos indicam falha de comunicação", "Verifique a última comunicação de cada equipamento"],
-      "path": "Menu → Operações → Monitoramento Online",
+      "steps": ["No menu lateral, clique em Operações e acesse Monitoramento Online", "Visualize o status dos equipamentos", "Equipamentos vermelhos indicam falha de comunicação", "Verifique a última comunicação de cada equipamento"],
+      "path": "Menu lateral → Operações → Monitoramento Online",
       "docUrl": "operacoes/monitoramento-online",
       "related": ["eventos-equipamentos", "cadastro-equipamentos", "interrupcoes"],
       "dbTables": ["EquipamentosStatus", "EquipamentosComunicacao"]
@@ -112,8 +112,8 @@
       "module": "Operações",
       "keywords": ["evento", "equipamento", "falha", "manutenção", "calibração", "alerta"],
       "content": "Registro automático de eventos operacionais: inicialização, falhas de comunicação, manutenções e calibrações dos equipamentos de pesagem.",
-      "steps": ["Acesse Operações → Eventos de Equipamentos", "Defina o período e filtros", "Filtre por equipamento ou tipo de evento", "Analise os eventos listados"],
-      "path": "Menu → Operações → Eventos de Equipamentos",
+      "steps": ["No menu lateral, clique em Operações e acesse Eventos de Equipamentos", "Defina o período e filtros", "Filtre por equipamento ou tipo de evento", "Analise os eventos listados"],
+      "path": "Menu lateral → Operações → Eventos de Equipamentos",
       "docUrl": "operacoes/eventos-equipamentos",
       "related": ["monitoramento-online", "cadastro-equipamentos", "interrupcoes"],
       "dbTables": ["EventosEquipamentos"]
@@ -124,8 +124,8 @@
       "module": "Operações",
       "keywords": ["consulta", "placa", "veículo", "passagem", "histórico"],
       "content": "Permite pesquisar o histórico de passagens de um veículo específico nos postos de pesagem, com filtros por placa, período e posto.",
-      "steps": ["Acesse Operações → Consulta de Placas", "Informe a Placa (total ou parcial)", "Defina o Período desejado", "Clique em Pesquisar", "Clique sobre um registro para detalhes"],
-      "path": "Menu → Operações → Consulta de Placas",
+      "steps": ["No menu lateral, clique em Operações e acesse Consulta de Placas", "Informe a Placa (total ou parcial)", "Defina o Período desejado", "Clique em Pesquisar", "Clique sobre um registro para detalhes"],
+      "path": "Menu lateral → Operações → Consulta de Placas",
       "docUrl": "operacoes/consulta-placas",
       "related": ["ticket-fechado", "alertas", "relatorio-passagens"],
       "dbTables": ["Passagens", "Tickets"]
@@ -136,95 +136,35 @@
       "module": "Operações",
       "keywords": ["alerta", "MDF-e", "excesso", "placa irregular", "reincidência", "notificação"],
       "content": "Gerenciamento dos alertas detectados pelo sistema: veículos sem MDF-e, excesso de peso, placas irregulares e reincidências. Alertas recentes aparecem no Dashboard.",
-      "steps": ["Acesse Operações → Alertas", "Filtre por tipo de alerta", "Visualize os detalhes", "Trate os alertas pendentes"],
-      "path": "Menu → Operações → Alertas",
+      "steps": ["No menu lateral, clique em Operações e acesse Alertas", "Filtre por tipo de alerta", "Visualize os detalhes", "Trate os alertas pendentes"],
+      "path": "Menu lateral → Operações → Alertas",
       "docUrl": "operacoes/alertas",
-      "related": ["dashboard", "consulta-placas", "triagem-infracoes"],
+      "related": ["dashboard", "consulta-placas", "exportacao-infracoes"],
       "dbTables": ["Alertas", "AlertasTipos"]
     },
     {
-      "id": "triagem-infracoes",
-      "title": "Triagem de Infrações",
-      "module": "Infrações",
-      "keywords": ["triagem", "infração", "excesso", "processar", "descartar", "avaliar depois", "imagem"],
-      "content": "Processo de análise humana das infrações detectadas automaticamente. O operador valida imagens, confirma dados e decide: Processar (segue para auditoria), Descartar (com motivo) ou Avaliar Depois.",
-      "steps": ["Acesse Infrações → Triagem", "O sistema exibe a próxima infração pendente", "Analise as imagens (placa legível?)", "Confirme/corrija dados do veículo", "Verifique peso e excesso calculado", "Válida: clique em Processar", "Inválida: selecione Motivo e Descartar"],
-      "path": "Menu → Infrações → Triagem",
-      "docUrl": "infracoes/triagem",
-      "related": ["auditoria-infracoes", "infracoes-descartadas", "excecoes-infracoes"],
-      "dbTables": ["Infracoes", "InfracoesTriagem", "InfracoesImagens"]
-    },
-    {
-      "id": "auditoria-infracoes",
-      "title": "Auditoria de Infrações",
-      "module": "Infrações",
-      "keywords": ["auditoria", "revisão", "aprovar", "reprovar", "segunda verificação"],
-      "content": "Etapa de revisão das infrações processadas na triagem. Um segundo operador valida os dados antes do envio ao órgão autuador. Pode aprovar ou reprovar com justificativa.",
-      "steps": ["Acesse Infrações → Auditoria", "Selecione a infração pendente", "Revise imagens e dados", "Aprovada: clique em Aprovar", "Reprovada: clique em Reprovar com justificativa"],
-      "path": "Menu → Infrações → Auditoria",
-      "docUrl": "infracoes/auditoria",
-      "related": ["triagem-infracoes", "exportacao-infracoes", "consulta-infracoes"],
-      "dbTables": ["Infracoes", "InfracoesAuditoria"]
-    },
-    {
-      "id": "consulta-infracoes",
-      "title": "Consulta de Infrações",
-      "module": "Infrações",
-      "keywords": ["consulta", "infração", "pesquisar", "status", "histórico"],
-      "content": "Permite pesquisar e consultar todas as infrações registradas no sistema, independente do status (pendente, processada, descartada, exportada).",
-      "steps": ["Acesse Infrações → Consulta", "Defina filtros (período, placa, status, posto)", "Clique em Pesquisar", "Clique sobre uma infração para detalhes"],
-      "path": "Menu → Infrações → Consulta",
-      "docUrl": "infracoes/consulta-infracoes",
-      "related": ["triagem-infracoes", "relatorio-infracoes", "infracoes-descartadas"],
-      "dbTables": ["Infracoes"]
-    },
-    {
       "id": "exportacao-infracoes",
-      "title": "Exportação de Infrações",
-      "module": "Infrações",
+      "title": "Exportação",
+      "module": "Exportação",
       "keywords": ["exportação", "lote", "enviar", "órgão", "autuador", "transmitir"],
-      "content": "Envia infrações aprovadas na auditoria para o órgão autuador em lotes. Cada lote contém dados, imagens e assinatura digital. Status: Pendente → Enviado → Aceito ou Erro.",
-      "steps": ["Acesse Infrações → Exportação", "Clique em Gerar Novo Lote", "Defina período e filtros", "Revise a quantidade", "Clique em Gerar", "Após gerado, clique em Enviar", "Acompanhe até status Aceito"],
-      "path": "Menu → Infrações → Exportação",
+      "content": "A funcionalidade de Exportação envia infrações aprovadas na auditoria para o órgão autuador em lotes. Cada lote contém dados, imagens e assinatura digital. Os lotes passam pelos status: Pendente → Enviado → Aceito ou Erro.",
+      "steps": ["No menu lateral, clique em Exportação", "Clique em Gerar Novo Lote", "Defina o período e filtros desejados", "Revise a quantidade de infrações", "Clique em Gerar", "Após gerado, clique em Enviar", "Acompanhe o lote até o status Aceito"],
+      "path": "Menu lateral → Exportação",
       "docUrl": "infracoes/exportacao",
-      "related": ["auditoria-infracoes", "falhas-sequenciais", "relatorio-infracoes"],
+      "related": ["falhas-sequenciais", "relatorio-infracoes"],
       "dbTables": ["Lotes", "LotesInfracoes", "LotesEnvios"]
     },
     {
       "id": "erro-exportacao-lote",
       "title": "Erro na Exportação de Lote",
-      "module": "Infrações",
+      "module": "Exportação",
       "keywords": ["erro", "exportação", "lote", "municipio divergente", "imagem ausente", "dados incompletos"],
       "content": "Erros comuns na exportação de lotes: código do município divergente (verificar cadastro), imagens ausentes (verificar processamento) e dados incompletos (retornar para triagem).",
-      "steps": ["Acesse Infrações → Exportação", "Localize o lote com status Erro", "Clique em Detalhes para ver os erros", "Corrija cada item conforme a mensagem", "Regere o lote corrigido", "Reenvie ao órgão"],
-      "path": "Menu → Infrações → Exportação → Detalhes do Lote",
+      "steps": ["No menu lateral, clique em Exportação", "Localize o lote com status Erro", "Clique em Detalhes para ver os erros", "Corrija cada item conforme a mensagem", "Regere o lote corrigido", "Reenvie ao órgão"],
+      "path": "Menu lateral → Exportação → Detalhes do Lote",
       "docUrl": "infracoes/exportacao",
-      "related": ["exportacao-infracoes", "triagem-infracoes", "municipios"],
+      "related": ["exportacao-infracoes", "municipios"],
       "dbTables": ["LotesErros"]
-    },
-    {
-      "id": "excecoes-infracoes",
-      "title": "Exceções de Infrações",
-      "module": "Infrações",
-      "keywords": ["exceção", "dispensar", "isenção", "tolerância", "placa", "classificação"],
-      "content": "Regras para dispensar automaticamente veículos ou situações da autuação. Tipos: por placa, por classificação, por horário ou por período específico.",
-      "steps": ["Acesse Infrações → Exceções", "Clique em + Nova Exceção", "Selecione o Tipo", "Informe o Valor (placa, classificação etc.)", "Descreva o Motivo", "Defina a Validade", "Clique em Salvar"],
-      "path": "Menu → Infrações → Exceções",
-      "docUrl": "infracoes/excecoes",
-      "related": ["triagem-infracoes", "classificacoes-veiculos", "infracoes-descartadas"],
-      "dbTables": ["InfracoesExcecoes"]
-    },
-    {
-      "id": "infracoes-descartadas",
-      "title": "Infrações Descartadas",
-      "module": "Infrações",
-      "keywords": ["descartada", "reabrir", "motivo descarte", "triagem"],
-      "content": "Consulta de infrações descartadas durante a triagem. Permite reabrir infrações para reanálise caso tenham sido descartadas indevidamente.",
-      "steps": ["Acesse Infrações → Descartadas", "Localize a infração", "Clique em Visualizar para conferir", "Se necessário, clique em Reabrir", "A infração retorna para a fila de Triagem"],
-      "path": "Menu → Infrações → Descartadas",
-      "docUrl": "infracoes/infracoes-descartadas",
-      "related": ["triagem-infracoes", "motivos-pesagem", "consulta-infracoes"],
-      "dbTables": ["InfracoesDescartadas"]
     },
     {
       "id": "relatorio-passagens",
@@ -232,8 +172,8 @@
       "module": "Relatórios",
       "keywords": ["relatório", "passagens", "volume", "período", "posto", "classificação"],
       "content": "Apresenta o volume total de passagens de veículos registradas nos postos de pesagem, com filtros por período, posto e classificação.",
-      "steps": ["Acesse Relatórios → Passagens", "Defina o período", "Filtre por posto (opcional)", "Clique em Gerar", "Exporte para Excel ou PDF"],
-      "path": "Menu → Relatórios → Passagens",
+      "steps": ["No menu lateral, clique em Relatório de Pesagem", "Defina o período", "Filtre por posto (opcional)", "Clique em Gerar", "Exporte para Excel ou PDF"],
+      "path": "Menu lateral → Relatório de Pesagem",
       "docUrl": "relatorios/relatorio-passagens",
       "related": ["fluxo-diario", "consulta-placas", "relatorio-infracoes"],
       "dbTables": ["Passagens"]
@@ -245,9 +185,9 @@
       "keywords": ["relatório", "infrações", "status", "período", "excesso"],
       "content": "Exibe infrações de excesso de peso registradas, agrupadas por período, posto e status de processamento.",
       "steps": ["Acesse Relatórios → Infrações", "Defina período e filtros", "Clique em Gerar", "Analise os dados", "Exporte se necessário"],
-      "path": "Menu → Relatórios → Infrações",
+      "path": "Relatórios → Infrações",
       "docUrl": "relatorios/relatorio-infracoes",
-      "related": ["relatorio-passagens", "consulta-infracoes", "processamento-usuario"],
+      "related": ["relatorio-passagens", "processamento-usuario"],
       "dbTables": ["Infracoes", "InfracoesRelatorio"]
     },
     {
@@ -257,7 +197,7 @@
       "keywords": ["fluxo", "diário", "horário", "tráfego", "pico", "dimensionamento"],
       "content": "Gráfico e tabela com o fluxo horário de veículos nos postos de pesagem, útil para dimensionamento de equipes e identificação de horários de pico.",
       "steps": ["Acesse Relatórios → Fluxo Diário", "Selecione o posto e período", "Clique em Gerar", "Analise o gráfico de distribuição horária"],
-      "path": "Menu → Relatórios → Fluxo Diário",
+      "path": "Relatórios → Fluxo Diário",
       "docUrl": "relatorios/fluxo-diario-veiculos",
       "related": ["relatorio-passagens", "monitoramento-online", "dashboard"],
       "dbTables": ["Passagens"]
@@ -269,7 +209,7 @@
       "keywords": ["discrepância", "divergência", "peso esperado", "diferença"],
       "content": "Identifica discrepâncias entre os dados registrados e valores esperados, incluindo diferenças de peso e classificação.",
       "steps": ["Acesse Relatórios → Discrepâncias", "Defina período", "Analise as divergências", "Exporte para análise detalhada"],
-      "path": "Menu → Relatórios → Discrepâncias",
+      "path": "Relatórios → Discrepâncias",
       "docUrl": "relatorios/relatorio-discrepancias",
       "related": ["reclassificar-veiculo", "ticket-fechado"],
       "dbTables": ["Tickets", "TicketsDiscrepancias"]
@@ -281,7 +221,7 @@
       "keywords": ["NFe", "nota fiscal", "chave", "origem", "destino", "carga"],
       "content": "Lista as notas fiscais eletrônicas (NFe) vinculadas às passagens, com dados de origem, destino e chave de acesso.",
       "steps": ["Acesse Relatórios → Notas Fiscais", "Defina período e filtros", "Clique em Gerar", "Consulte as chaves NFe"],
-      "path": "Menu → Relatórios → Notas Fiscais",
+      "path": "Relatórios → Notas Fiscais",
       "docUrl": "relatorios/relatorio-nfe",
       "related": ["alertas", "consulta-placas"],
       "dbTables": ["NotasFiscais", "NFe"]
@@ -293,9 +233,9 @@
       "keywords": ["imagem", "processamento", "OCR", "reconhecimento", "placa", "taxa"],
       "content": "Volume de imagens capturadas e processadas pelo sistema, incluindo taxas de reconhecimento de placas e falhas de OCR.",
       "steps": ["Acesse Relatórios → Processamento de Imagens", "Defina período", "Analise taxa de reconhecimento", "Investigue equipamentos com taxa baixa"],
-      "path": "Menu → Relatórios → Processamento de Imagens",
+      "path": "Relatórios → Processamento de Imagens",
       "docUrl": "relatorios/processamento-imagens",
-      "related": ["monitoramento-online", "eventos-equipamentos", "triagem-infracoes"],
+      "related": ["monitoramento-online", "eventos-equipamentos"],
       "dbTables": ["ImagensProcessamento"]
     },
     {
@@ -305,9 +245,9 @@
       "keywords": ["produtividade", "usuário", "operador", "triagem", "tempo médio", "auditoria"],
       "content": "Exibe a produtividade de cada operador: infrações triadas, aprovadas, descartadas e tempo médio por análise.",
       "steps": ["Acesse Relatórios → Processamento por Usuário", "Defina período", "Analise a produtividade por operador"],
-      "path": "Menu → Relatórios → Processamento por Usuário",
+      "path": "Relatórios → Processamento por Usuário",
       "docUrl": "relatorios/processamento-por-usuario",
-      "related": ["triagem-infracoes", "auditoria-infracoes", "relatorio-infracoes"],
+      "related": ["relatorio-infracoes"],
       "dbTables": ["InfracoesTriagem", "InfracoesAuditoria"]
     },
     {
@@ -317,7 +257,7 @@
       "keywords": ["Power BI", "dashboard", "analítico", "BI", "gráfico"],
       "content": "O AxTon permite integração com Microsoft Power BI para geração de dashboards analíticos avançados, acessados diretamente dentro do sistema.",
       "steps": ["Acesse Relatórios → Power BI", "Selecione o dashboard desejado", "Interaja com os filtros visuais"],
-      "path": "Menu → Relatórios → Power BI",
+      "path": "Relatórios → Power BI",
       "docUrl": "relatorios/power-bi",
       "related": ["relatorio-passagens", "relatorio-infracoes", "fluxo-diario"],
       "dbTables": []
@@ -329,7 +269,7 @@
       "keywords": ["mapa", "fluxo", "geográfico", "rota", "localidade"],
       "content": "Mapa interativo exibindo o volume de passagens por localidade geográfica, permitindo identificar rotas com maior tráfego de veículos.",
       "steps": ["Acesse Relatórios → Mapa de Fluxo", "Defina o período", "Analise os pontos no mapa", "Clique em um ponto para detalhes"],
-      "path": "Menu → Relatórios → Mapa de Fluxo",
+      "path": "Relatórios → Mapa de Fluxo",
       "docUrl": "relatorios/mapa-fluxo-passagens",
       "related": ["relatorio-passagens", "fluxo-diario", "postos-pesagem"],
       "dbTables": ["Passagens", "Postos"]
@@ -341,7 +281,7 @@
       "keywords": ["falha", "sequencial", "numeração", "lacuna", "duplicação"],
       "content": "Identifica lacunas ou duplicações na numeração sequencial de infrações, garantindo a integridade dos registros enviados ao órgão.",
       "steps": ["Acesse Relatórios → Falhas de Sequenciais", "Defina período", "Analise sequenciais ausentes", "Corrija divergências"],
-      "path": "Menu → Relatórios → Falhas de Sequenciais",
+      "path": "Relatórios → Falhas de Sequenciais",
       "docUrl": "relatorios/falhas-sequenciais",
       "related": ["exportacao-infracoes", "sequencial-infracao"],
       "dbTables": ["InfracoesSequencial"]
@@ -353,7 +293,7 @@
       "keywords": ["equipamento", "balança", "sensor", "cadastrar", "ativo"],
       "content": "Cadastro dos equipamentos de pesagem utilizados nos postos. Para cadastrar, é necessário ter previamente cadastrado Fabricante, Tipo e Modelo.",
       "steps": ["Acesse Cadastros Básicos → Equipamentos", "Clique em + Novo", "Selecione Fabricante, Tipo e Modelo", "Informe o número de série", "Vincule ao Posto", "Clique em Salvar"],
-      "path": "Menu → Cadastros Básicos → Equipamentos",
+      "path": "Cadastros Básicos → Equipamentos",
       "docUrl": "cadastros-basicos/equipamentos",
       "related": ["fabricantes", "tipos-equipamentos", "modelos-equipamentos", "postos-pesagem"],
       "dbTables": ["Equipamentos"]
@@ -365,7 +305,7 @@
       "keywords": ["fabricante", "marca", "equipamento"],
       "content": "Cadastro dos fabricantes de equipamentos de pesagem. Utilizado como referência no cadastro de equipamentos e modelos.",
       "steps": ["Acesse Cadastros Básicos → Fabricantes", "Clique em + Novo", "Preencha o Nome", "Clique em Salvar"],
-      "path": "Menu → Cadastros Básicos → Fabricantes",
+      "path": "Cadastros Básicos → Fabricantes",
       "docUrl": "cadastros-basicos/fabricantes",
       "related": ["cadastro-equipamentos", "modelos-equipamentos"],
       "dbTables": ["Fabricantes"]
@@ -377,7 +317,7 @@
       "keywords": ["tipo", "equipamento", "categoria", "classe"],
       "content": "Categorias de equipamentos de pesagem (balança fixa, portátil, dinâmica etc.).",
       "steps": ["Acesse Cadastros Básicos → Tipos de Equipamentos", "Clique em + Novo", "Preencha o Nome", "Clique em Salvar"],
-      "path": "Menu → Cadastros Básicos → Tipos de Equipamentos",
+      "path": "Cadastros Básicos → Tipos de Equipamentos",
       "docUrl": "cadastros-basicos/tipos-equipamentos",
       "related": ["cadastro-equipamentos", "fabricantes"],
       "dbTables": ["TiposEquipamentos"]
@@ -389,7 +329,7 @@
       "keywords": ["modelo", "equipamento", "fabricante"],
       "content": "Modelos específicos de equipamentos por fabricante. Dependem de Fabricante e Tipo previamente cadastrados.",
       "steps": ["Acesse Cadastros Básicos → Modelos de Equipamentos", "Clique em + Novo", "Selecione o Fabricante e Tipo", "Informe o Nome do modelo", "Clique em Salvar"],
-      "path": "Menu → Cadastros Básicos → Modelos de Equipamentos",
+      "path": "Cadastros Básicos → Modelos de Equipamentos",
       "docUrl": "cadastros-basicos/modelos-equipamentos",
       "related": ["cadastro-equipamentos", "fabricantes", "tipos-equipamentos"],
       "dbTables": ["ModelosEquipamentos"]
@@ -401,7 +341,7 @@
       "keywords": ["grupo", "equipamento", "agrupamento", "lógico"],
       "content": "Agrupamento lógico de equipamentos para facilitar gerenciamento e relatórios por conjunto.",
       "steps": ["Acesse Cadastros Básicos → Grupos de Equipamentos", "Clique em + Novo", "Informe o Nome do grupo", "Vincule os equipamentos", "Clique em Salvar"],
-      "path": "Menu → Cadastros Básicos → Grupos de Equipamentos",
+      "path": "Cadastros Básicos → Grupos de Equipamentos",
       "docUrl": "cadastros-basicos/grupos-equipamentos",
       "related": ["cadastro-equipamentos", "monitoramento-online"],
       "dbTables": ["GruposEquipamentos"]
@@ -413,7 +353,7 @@
       "keywords": ["tipo", "veículo", "caminhão", "carreta", "ônibus"],
       "content": "Cadastro dos tipos de veículos fiscalizados pelo sistema de pesagem (caminhão, carreta, bitrem, rodotrem etc.).",
       "steps": ["Acesse Veículos → Tipos de Veículos", "Clique em + Novo", "Preencha Código e Descrição", "Clique em Salvar"],
-      "path": "Menu → Veículos → Tipos de Veículos",
+      "path": "Veículos → Tipos de Veículos",
       "docUrl": "veiculos/tipos-veiculos",
       "related": ["classificacoes-veiculos", "marcas-veiculos"],
       "dbTables": ["TiposVeiculos"]
@@ -425,7 +365,7 @@
       "keywords": ["marca", "fabricante", "veículo"],
       "content": "Cadastro de marcas/fabricantes de veículos (Mercedes-Benz, Volvo, Scania, DAF etc.).",
       "steps": ["Acesse Veículos → Marcas de Veículos", "Clique em + Novo", "Preencha o Nome", "Clique em Salvar"],
-      "path": "Menu → Veículos → Marcas de Veículos",
+      "path": "Veículos → Marcas de Veículos",
       "docUrl": "veiculos/marcas-veiculos",
       "related": ["modelos-veiculos", "tipos-veiculos"],
       "dbTables": ["MarcasVeiculos"]
@@ -437,7 +377,7 @@
       "keywords": ["modelo", "veículo", "marca"],
       "content": "Cadastro de modelos de veículos, vinculados à marca correspondente.",
       "steps": ["Acesse Veículos → Modelos de Veículos", "Clique em + Novo", "Selecione a Marca", "Informe o Modelo", "Clique em Salvar"],
-      "path": "Menu → Veículos → Modelos de Veículos",
+      "path": "Veículos → Modelos de Veículos",
       "docUrl": "veiculos/modelos-veiculos",
       "related": ["marcas-veiculos", "tipos-veiculos"],
       "dbTables": ["ModelosVeiculos"]
@@ -449,7 +389,7 @@
       "keywords": ["cor", "veículo"],
       "content": "Cadastro de cores padronizadas para identificação de veículos.",
       "steps": ["Acesse Veículos → Cores", "Clique em + Novo", "Preencha o Nome da cor", "Clique em Salvar"],
-      "path": "Menu → Veículos → Cores",
+      "path": "Veículos → Cores",
       "docUrl": "veiculos/cores",
       "related": ["tipos-veiculos"],
       "dbTables": ["CoresVeiculos"]
@@ -460,8 +400,8 @@
       "module": "Veículos",
       "keywords": ["classificação", "eixo", "PBT", "peso bruto total", "CMT"],
       "content": "Classificações de veículos por número de eixos e PBT (Peso Bruto Total) permitido. Determina o limite de peso para fiscalização.",
-      "steps": ["Acesse Veículos → Classificações", "Clique em + Novo", "Informe nº de eixos e PBT", "Defina a descrição", "Clique em Salvar"],
-      "path": "Menu → Veículos → Classificações",
+      "steps": ["No menu lateral, clique em Classificações", "Clique em + Novo", "Informe nº de eixos e PBT", "Defina a descrição", "Clique em Salvar"],
+      "path": "Menu lateral → Classificações",
       "docUrl": "veiculos/classificacoes-veiculos",
       "related": ["reclassificar-veiculo", "tipos-veiculos", "glossario-pbt"],
       "dbTables": ["ClassificacoesVeiculos"]
@@ -473,7 +413,7 @@
       "keywords": ["município", "IBGE", "código", "cidade", "UF"],
       "content": "Cadastro de municípios com código IBGE, utilizado na exportação de infrações e relatórios.",
       "steps": ["Acesse Veículos → Municípios", "Clique em + Novo", "Informe o Código IBGE e Nome", "Selecione a UF", "Clique em Salvar"],
-      "path": "Menu → Veículos → Municípios",
+      "path": "Veículos → Municípios",
       "docUrl": "veiculos/municipios",
       "related": ["exportacao-infracoes", "postos-pesagem"],
       "dbTables": ["Municipios"]
@@ -485,7 +425,7 @@
       "keywords": ["contrato", "medição", "prestação", "serviço", "vigência"],
       "content": "Registro dos contratos de prestação de serviço de pesagem, vinculando postos, períodos e metas de performance.",
       "steps": ["Acesse Medições → Contratos", "Clique em + Novo", "Informe Número do contrato", "Selecione o Contratante", "Defina a Vigência", "Vincule os Postos", "Clique em Salvar"],
-      "path": "Menu → Medições → Contratos",
+      "path": "Medições → Contratos",
       "docUrl": "medicoes/contratos",
       "related": ["indices-performance", "interrupcoes", "gerar-medicao"],
       "dbTables": ["Contratos", "ContratosPostos"]
@@ -497,7 +437,7 @@
       "keywords": ["índice", "performance", "disponibilidade", "produtividade", "qualidade", "meta"],
       "content": "Indicadores de desempenho contratual: disponibilidade de equipamentos (≥95%), tempo de triagem (≤20min), produtividade e qualidade (≥98% aceitação).",
       "steps": ["Acesse Medições → Índices de Performance", "Selecione o contrato", "Analise os indicadores", "Compare com as metas"],
-      "path": "Menu → Medições → Índices de Performance",
+      "path": "Medições → Índices de Performance",
       "docUrl": "medicoes/indices-performance",
       "related": ["contratos", "interrupcoes", "processamento-usuario"],
       "dbTables": ["IndicesPerformance"]
@@ -509,7 +449,7 @@
       "keywords": ["interrupção", "parada", "manutenção", "energia", "falha", "disponibilidade"],
       "content": "Registro de interrupções que afetam a disponibilidade: manutenção preventiva/corretiva, queda de energia, falha de comunicação e força maior.",
       "steps": ["Acesse Medições → Interrupções", "Clique em + Novo", "Selecione o Equipamento", "Informe o Tipo de interrupção", "Defina o período (Início e Fim)", "Descreva a Justificativa", "Clique em Salvar"],
-      "path": "Menu → Medições → Interrupções",
+      "path": "Medições → Interrupções",
       "docUrl": "medicoes/interrupcoes",
       "related": ["monitoramento-online", "eventos-equipamentos", "indices-performance"],
       "dbTables": ["Interrupcoes"]
@@ -521,7 +461,7 @@
       "keywords": ["gerar", "medição", "mensal", "relatório", "contrato"],
       "content": "Gera o relatório de medição mensal vinculado a um contrato, consolidando indicadores de performance e disponibilidade para faturamento.",
       "steps": ["Acesse Medições → Gerar Medição", "Selecione o Contrato", "Informe o Período de referência", "Clique em Gerar", "Revise o relatório", "Exporte em PDF ou Excel"],
-      "path": "Menu → Medições → Gerar Medição",
+      "path": "Medições → Gerar Medição",
       "docUrl": "medicoes/criar-medicao",
       "related": ["contratos", "indices-performance", "interrupcoes"],
       "dbTables": ["Medicoes", "MedicoesDetalhes"]
@@ -533,7 +473,7 @@
       "keywords": ["log", "acesso", "autenticação", "login", "falha", "tentativa"],
       "content": "Registra todas as autenticações no sistema: acessos bem-sucedidos e tentativas falhas, com data, hora, IP e navegador.",
       "steps": ["Acesse Controle de Acesso → Logs de Acesso", "Defina o período", "Filtre por usuário ou resultado", "Analise os registros"],
-      "path": "Menu → Controle de Acesso → Logs de Acesso",
+      "path": "Controle de Acesso → Logs de Acesso",
       "docUrl": "controle-acesso/logs-acesso",
       "related": ["restricao-ip", "usuarios", "permissoes"],
       "dbTables": ["LogsAcesso"]
@@ -545,7 +485,7 @@
       "keywords": ["IP", "restrição", "segurança", "endereço", "whitelist"],
       "content": "Permite configurar quais endereços IP podem acessar o sistema, adicionando camada extra de segurança. Se ativado com lista vazia, ninguém acessa.",
       "steps": ["Acesse Controle de Acesso → Acessos por IP", "Clique em + Novo", "Informe o Endereço IP", "Adicione uma Descrição", "Marque como Ativo", "Clique em Salvar"],
-      "path": "Menu → Controle de Acesso → Acessos por IP",
+      "path": "Controle de Acesso → Acessos por IP",
       "docUrl": "controle-acesso/acessos-por-ip",
       "related": ["logs-acesso", "usuarios"],
       "dbTables": ["RestricaoIP"]
@@ -556,8 +496,8 @@
       "module": "Controle de Acesso",
       "keywords": ["permissão", "perfil", "visualizar", "criar", "editar", "excluir", "módulo"],
       "content": "Matriz de permissões por perfil: Visualizar, Criar, Editar e Excluir para cada módulo. Alterações têm efeito imediato para todos os usuários do perfil.",
-      "steps": ["Acesse Controle de Acesso → Permissões de Acesso", "Selecione o Perfil de Acesso", "Para cada módulo, marque as permissões", "Clique em Salvar"],
-      "path": "Menu → Controle de Acesso → Permissões de Acesso",
+      "steps": ["No menu lateral, abra Administração e clique em Permissões de acesso", "Selecione o Perfil de Acesso", "Para cada módulo, marque as permissões", "Clique em Salvar"],
+      "path": "Menu lateral → Administração → Permissões de acesso",
       "docUrl": "administracao/permissoes",
       "related": ["perfis-acesso", "usuarios", "logs-acesso"],
       "dbTables": ["Permissoes", "PermissoesModulos"]
@@ -568,8 +508,8 @@
       "module": "Administração",
       "keywords": ["usuário", "cadastrar", "login", "senha", "email", "ativo"],
       "content": "Cadastro de usuários do sistema. Cada usuário recebe login/senha e é vinculado a um perfil de acesso que define suas permissões.",
-      "steps": ["Acesse Administração → Usuários", "Clique em + Novo", "Preencha Nome, Email e Login", "Defina a Senha inicial", "Selecione o Perfil de Acesso", "Marque como Ativo", "Clique em Salvar"],
-      "path": "Menu → Administração → Usuários",
+      "steps": ["No menu lateral, abra Administração e clique em Usuários", "Clique em + Novo", "Preencha Nome, Email e Login", "Defina a Senha inicial", "Selecione o Perfil de Acesso", "Marque como Ativo", "Clique em Salvar"],
+      "path": "Menu lateral → Administração → Usuários",
       "docUrl": "administracao/usuarios",
       "related": ["perfis-acesso", "permissoes", "logs-acesso"],
       "dbTables": ["Usuarios"]
@@ -580,8 +520,8 @@
       "module": "Administração",
       "keywords": ["perfil", "acesso", "operador", "supervisor", "administrador"],
       "content": "Cadastro dos perfis de acesso (Administrador, Supervisor, Operador etc.). Cada perfil agrupa um conjunto de permissões que são herdadas pelos usuários vinculados.",
-      "steps": ["Acesse Administração → Perfis de Acesso", "Clique em + Novo", "Informe o Nome do perfil", "Defina as permissões", "Clique em Salvar"],
-      "path": "Menu → Administração → Perfis de Acesso",
+      "steps": ["No menu lateral, abra Administração e clique em Perfis de acesso", "Clique em + Novo", "Informe o Nome do perfil", "Defina as permissões", "Clique em Salvar"],
+      "path": "Menu lateral → Administração → Perfis de acesso",
       "docUrl": "administracao/perfis-acesso",
       "related": ["usuarios", "permissoes"],
       "dbTables": ["PerfisAcesso"]
@@ -593,7 +533,7 @@
       "keywords": ["dashboard", "painel", "visão geral", "alertas", "fluxo", "gráfico"],
       "content": "Tela inicial do AxTon com 5 painéis: Alertas por Tipo, Fluxo de Passagens, Origem das Cargas, Alertas Recentes e Últimas Notas Fiscais. Dados ficam disponíveis após processamento das passagens.",
       "steps": ["Faça login no AxTon", "O dashboard é exibido automaticamente", "Analise os painéis de alertas e fluxo", "Clique nos itens para detalhes"],
-      "path": "Menu → Primeiros Passos → Dashboard",
+      "path": "Menu lateral → Dashboards",
       "docUrl": "primeiros-passos/dashboard",
       "related": ["alertas", "fluxo-diario", "relatorio-nfe"],
       "dbTables": []
@@ -605,7 +545,7 @@
       "keywords": ["login", "acessar", "senha", "entrar", "primeiro acesso"],
       "content": "Para acessar o AxTon, utilize o endereço fornecido pelo administrador. Informe login e senha. No primeiro acesso, recomenda-se alterar a senha padrão.",
       "steps": ["Acesse o endereço do AxTon no navegador", "Informe seu Login", "Informe sua Senha", "Clique em Entrar", "Altere a senha no primeiro acesso"],
-      "path": "Menu → Primeiros Passos → Login",
+      "path": "Tela de Login",
       "docUrl": "primeiros-passos/login",
       "related": ["dashboard", "usuarios", "navegacao"],
       "dbTables": []
@@ -617,7 +557,7 @@
       "keywords": ["navegação", "menu", "sidebar", "tela", "interface"],
       "content": "O AxTon utiliza menu lateral (sidebar) para navegação. Os módulos são organizados por categorias: Pesagem, Operações, Infrações, Relatórios, etc.",
       "steps": ["Use o menu lateral para navegar", "Clique na categoria para expandir", "Selecione a funcionalidade desejada"],
-      "path": "Menu → Primeiros Passos → Navegação",
+      "path": "Menu lateral (navegação geral)",
       "docUrl": "primeiros-passos/navegacao",
       "related": ["dashboard", "login"],
       "dbTables": []
@@ -628,8 +568,8 @@
       "module": "Cadastros",
       "keywords": ["local", "localidade", "endereço", "cadastrar"],
       "content": "Cadastro de locais (rodovias, trechos, pontos de fiscalização) onde os postos de pesagem são instalados.",
-      "steps": ["Acesse Cadastros → Locais", "Clique em + Novo", "Preencha os dados do local", "Clique em Salvar"],
-      "path": "Menu → Cadastros → Locais",
+      "steps": ["No menu lateral, abra Cadastros e clique em Locais", "Clique em + Novo", "Preencha os dados do local", "Clique em Salvar"],
+      "path": "Menu lateral → Cadastros → Locais",
       "docUrl": "cadastros/locais",
       "related": ["postos-pesagem", "municipios"],
       "dbTables": ["Locais"]
@@ -641,7 +581,7 @@
       "keywords": ["classificação", "veículo", "cadastro", "eixo"],
       "content": "Cadastro de classificações de veículos por quantidade de eixos e peso permitido, utilizado no módulo de Pesagem.",
       "steps": ["Acesse Cadastros → Classificação de Veículos", "Clique em + Novo", "Informe os dados", "Clique em Salvar"],
-      "path": "Menu → Cadastros → Classificação de Veículos",
+      "path": "Menu lateral → Cadastros → Classificações",
       "docUrl": "cadastros/classificacao-veiculos",
       "related": ["classificacoes-veiculos", "reclassificar-veiculo"],
       "dbTables": ["ClassificacoesVeiculos"]
@@ -652,8 +592,8 @@
       "module": "Cadastros",
       "keywords": ["sequencial", "numeração", "infração", "faixa"],
       "content": "Configuração da faixa de numeração sequencial utilizada nas infrações de trânsito. Cada operação pode ter sua própria faixa sequencial.",
-      "steps": ["Acesse Cadastros → Sequencial de Infração", "Clique em + Novo", "Defina o número inicial e final", "Vincule à operação", "Clique em Salvar"],
-      "path": "Menu → Cadastros → Sequencial de Infração",
+      "steps": ["No menu lateral, abra Cadastros e clique em Sequenciais de Infração", "Clique em + Novo", "Defina o número inicial e final", "Vincule à operação", "Clique em Salvar"],
+      "path": "Menu lateral → Cadastros → Sequenciais de Infração",
       "docUrl": "cadastros/sequencial-infracao",
       "related": ["falhas-sequenciais", "exportacao-infracoes", "cadastro-operacoes"],
       "dbTables": ["SequenciaisInfracao"]
@@ -715,7 +655,7 @@
       "steps": [],
       "path": "Informação de referência",
       "docUrl": "glossario/infracao",
-      "related": ["triagem-infracoes", "auditoria-infracoes", "exportacao-infracoes"],
+      "related": ["exportacao-infracoes"],
       "dbTables": []
     },
     {
@@ -727,7 +667,7 @@
       "steps": [],
       "path": "Informação de referência",
       "docUrl": "glossario/triagem",
-      "related": ["triagem-infracoes", "glossario-infracao"],
+      "related": ["glossario-infracao"],
       "dbTables": []
     },
     {
@@ -736,8 +676,8 @@
       "module": "Sistema",
       "keywords": ["configurações", "sistema", "gerais", "dados órgão", "haenni", "infração", "câmera", "camera ip", "salvar"],
       "content": "A tela de Configurações do Sistema centraliza os parâmetros fundamentais do AxTon. É dividida em abas: Gerais, Dados do Órgão, HAENNI, Infração e Câmera IP. Após alterar qualquer configuração, clique em + Salvar para persistir.",
-      "steps": ["Acesse Sistema → Configurações do Sistema", "Selecione a aba desejada (Gerais, Dados do Órgão, HAENNI, Infração ou Câmera IP)", "Preencha os campos", "Clique em + Salvar"],
-      "path": "Menu → Sistema → Configurações do Sistema",
+      "steps": ["No menu lateral, clique em Sistema", "Selecione a aba desejada (Gerais, Dados do Órgão, HAENNI, Infração ou Câmera IP)", "Preencha os campos", "Clique em + Salvar"],
+      "path": "Menu lateral → Sistema",
       "docUrl": "sistema/configuracoes",
       "related": ["camera-ip-config", "camera-ip-erro-track", "postos-pesagem"],
       "dbTables": ["ConfiguracoesSistema"]
@@ -749,19 +689,19 @@
       "keywords": ["câmera", "camera", "ip", "configurar câmera", "instalar câmera", "testar câmera", "uniview", "unv", "intelbras", "vip 1230", "resolução", "stream", "vídeo", "rtsp"],
       "content": "A aba Câmera IP permite configurar a câmera usada para captura de imagens dos veículos. Informe o IP da câmera, resolução (Altura e Largura), usuário e senha de login. Modelos testados: Uniview IPC2122LB-ADF28KM-G e Intelbras VIP-1230-B. Antes de configurar no AxTon, confirme que a câmera está acessível pelo navegador (Chrome) digitando o IP na barra de endereço.",
       "steps": ["Verifique acesso à câmera pelo navegador (ex.: http://192.168.11.21)", "Acesse Sistema → Configurações do Sistema → aba Câmera IP", "Preencha o IP da câmera", "Defina Altura (ex.: 1080) e Largura (ex.: 1280)", "Informe Usuário de login e Senha de login", "Clique em Testar câmera para validar", "Clique em + Salvar"],
-      "path": "Menu → Sistema → Configurações do Sistema → Câmera IP",
+      "path": "Menu lateral → Sistema → aba Câmera IP",
       "docUrl": "sistema/camera-ip",
       "related": ["configuracoes-sistema", "camera-ip-erro-track", "postos-pesagem"],
       "dbTables": ["ConfiguracoesSistema", "CameraIP"]
     },
     {
       "id": "camera-ip-erro-track",
-      "title": "Erro Câmera: Any suitable track is not found",
+      "title": "Configurar Câmeras",
       "module": "Sistema",
       "keywords": ["erro", "falha", "conectar", "câmera", "camera", "any suitable track", "track not found", "não conecta", "stream", "h265", "h264", "codec", "rtsp", "onvif", "porta 554", "testar câmera falha", "vídeo não aparece"],
-      "content": "Erro 'Falha ao conectar na câmera — Any suitable track is not found' ocorre quando o AxTon não consegue localizar um stream de vídeo compatível, mesmo que a câmera funcione pelo navegador. Causas principais: codec H.265 incompatível (trocar para H.264), porta RTSP diferente de 554, protocolo ONVIF desativado, ou firewall bloqueando comunicação.",
-      "steps": ["Acesse a interface web da câmera pelo navegador", "Vá em configurações de Vídeo/Encode e altere o codec para H.264 (não H.265)", "Verifique que a porta RTSP é 554 (padrão)", "Habilite o protocolo ONVIF se disponível", "Volte ao AxTon → aba Câmera IP e clique em Testar câmera", "Se persistir, configure o Substream com resolução menor (640x480) e H.264", "Teste RTSP no VLC: rtsp://admin:SENHA@IP:554/stream1"],
-      "path": "Menu → Sistema → Configurações do Sistema → Câmera IP → Testar câmera",
+      "content": "Ao tentar conectar uma câmera, o sistema pode exibir a mensagem 'Any suitable track is not found'. Isso significa que o AxTon não conseguiu localizar um stream de vídeo compatível, mesmo que a câmera funcione normalmente pelo navegador. As causas mais comuns são: codec H.265 ativo (o AxTon requer H.264), porta RTSP diferente de 554, protocolo ONVIF desativado na câmera ou firewall bloqueando a comunicação.",
+      "steps": ["Acesse a interface web da câmera pelo navegador (digite o IP da câmera na barra de endereço)", "Vá em Configurações de Vídeo/Encode e altere o codec para H.264 (não H.265)", "Confirme que a porta RTSP está configurada como 554 (padrão)", "Habilite o protocolo ONVIF nas configurações de rede da câmera", "Volte ao AxTon → aba Câmera IP e clique em Testar câmera", "Se o problema persistir, configure o Substream com resolução menor (640×480) e codec H.264", "Para validar o stream, teste no VLC: Mídia → Abrir Transmissão de Rede → rtsp://admin:SENHA@IP:554/stream1"],
+      "path": "Menu lateral → Sistema → aba Câmera IP → Testar câmera",
       "docUrl": "sistema/camera-ip",
       "related": ["camera-ip-config", "configuracoes-sistema"],
       "dbTables": ["ConfiguracoesSistema", "CameraIP"]

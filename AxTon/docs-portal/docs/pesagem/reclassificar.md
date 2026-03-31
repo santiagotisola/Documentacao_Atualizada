@@ -12,7 +12,7 @@ Permite alterar a classificação de um veículo durante o processo de pesagem q
 
 ## Como acessar
 
-**Menu lateral** → Pesagem → **Reclassificar**
+**Menu lateral** → **Tickets de Pesagens** → **Reclassificar**
 
 ## Quando reclassificar
 
@@ -31,7 +31,7 @@ Permite alterar a classificação de um veículo durante o processo de pesagem q
 
 ### Passo a passo
 
-1. Acesse Pesagem → Reclassificar
+1. Na tela de **Tickets de Pesagens**, selecione o ticket e clique em **Reclassificar**
 2. Informe o número do Ticket
 3. Verifique a classificação atual
 4. Selecione a Nova Classificação

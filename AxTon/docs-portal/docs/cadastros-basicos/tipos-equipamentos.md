@@ -26,7 +26,7 @@ Categorias de equipamentos de pesagem. Estes registros são fundamentais para o 
 
 ### Passo a passo — Cadastrar
 
-1. Acesse Cadastros Básicos → Tipos de Equipamentos
+1. Acesse **Cadastros Básicos** → **Tipos de Equipamentos**
 2. Clique em **+ Novo**
 3. Preencha os campos obrigatórios
 4. Clique em **Salvar**

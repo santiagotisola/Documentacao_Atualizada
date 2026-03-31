@@ -28,7 +28,7 @@ A tela exibe todos os registros cadastrados, com opção de pesquisa e filtro.
 
 ### Passo a passo — Cadastrar
 
-1. Acesse Veículos → Municípios
+1. Acesse **Veículos** → **Municípios**
 2. Clique em **+ Novo**
 3. Preencha o Código e a Descrição
 4. Marque como Ativo

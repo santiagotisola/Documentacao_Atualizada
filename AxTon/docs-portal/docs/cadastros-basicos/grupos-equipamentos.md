@@ -26,7 +26,7 @@ Agrupamento lógico de equipamentos. Estes registros são fundamentais para o fu
 
 ### Passo a passo — Cadastrar
 
-1. Acesse Cadastros Básicos → Grupos de Equipamentos
+1. Acesse **Cadastros Básicos** → **Grupos de Equipamentos**
 2. Clique em **+ Novo**
 3. Preencha os campos obrigatórios
 4. Clique em **Salvar**
