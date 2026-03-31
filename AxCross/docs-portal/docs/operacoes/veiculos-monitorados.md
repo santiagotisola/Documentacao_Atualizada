@@ -8,11 +8,11 @@ description: Cadastro e gestão de veículos monitorados no AxCross
 
 O módulo **Veículos Monitorados** permite registrar placas e veículos de interesse para monitoramento especial. Quando um veículo cadastrado é detectado em qualquer cruzamento, o sistema gera um alerta automático para a equipe operacional.
 
+![](<../img/Menu veiculos monitorados.png>)
+
 ## Como acessar
 
 No **menu lateral**, clique em **Veículos Monitorados**.
-
-![Menu - Veículos Monitorados](../img/Menu veiculos monitorados.png)
 
 O módulo é composto pelos seguintes submódulos:
 
@@ -20,7 +20,7 @@ O módulo é composto pelos seguintes submódulos:
 |-----------|-----------|
 | [**Veículos Monitorados**](#lista-de-veiculos) | Cadastro e consulta das placas monitoradas |
 | [**Tipos de Ocorrências**](#tipos-de-ocorrencias) | Categorias de ocorrência para alertas |
-| [**Alertas**](#alertas-gerados) | Alertas gerados automaticamente pelo sistema |
+| [**Alertas**](#alertas-gerados) | Alertas gerados automaticamente e gestão de ocorrências |
 | [**Classificações dos Veículos**](#classificacoes-dos-veiculos) | Tipos e categorias de veículos |
 | [**Importação de Monitorados**](#importacao-em-lote) | Importar lista de placas via CSV |
 
@@ -99,11 +99,15 @@ Para acessar: **Veículos Monitorados → Tipos de Ocorrências**.
 
 ---
 
-## Alertas Gerados {#alertas-gerados}
+## Alertas {#alertas-gerados}
 
-Lista todos os alertas gerados automaticamente pelo sistema ao detectar um veículo monitorado.
+Os alertas registram eventos detectados pelo sistema que requerem atenção, como detecção de veículos monitorados, equipamentos offline ou ocorrências de trânsito.
 
 Para acessar: **Veículos Monitorados → Alertas**.
+
+![Lista de Alertas](../img/Alertas.png)
+
+### Colunas da lista
 
 | Coluna | Descrição |
 |--------|-----------|
@@ -114,8 +118,50 @@ Para acessar: **Veículos Monitorados → Alertas**.
 | **Classificação** | Categoria do veículo monitorado |
 | **Status** | Pendente, Assumido ou Resolvido |
 
+### Tipos de alerta
+
+| Tipo | Descrição |
+|------|-----------|
+| **Veículo Monitorado** | Placa cadastrada como monitorada foi detectada |
+| **Equipamento Offline** | Equipamento sem comunicação além do tempo limite |
+| **Falha de Imagem** | Equipamento detectou passagem mas sem imagem |
+| **Ocorrência de Trânsito** | Evento registrado manualmente pela operação |
+
+### Tipo de Ocorrência
+
+Configure os tipos de ocorrência disponíveis para categorizar os alertas manualmente.
+
+![Tipo de Ocorrência](../img/Tipo de Ocorrência.png)
+
+### Ações disponíveis
+
+![Alerta - Ação](../img/Alerta - Ação.png)
+
+| Ação | Descrição |
+|------|-----------|
+| **Visualizar** | Abrir detalhes do alerta |
+| **Assumir** | Registrar responsável pela tratativa |
+| **Resolver** | Marcar o alerta como resolvido |
+| **Descartar** | Ignorar o alerta (com justificativa) |
+
+### Criar novo alerta manualmente
+
+![Novo Alerta](../img/Alerta - novo.png)
+
+1. Na tela de Alertas, clique em **Novo Alerta**
+2. Selecione o **Tipo de Ocorrência**
+3. Informe o **Local** e **Equipamento** relacionado
+4. Descreva a **Ocorrência**
+5. Clique em **Salvar**
+
+### Relatório de Ocorrências
+
+Para exportar e consultar ocorrências registradas:
+
+![Relatório de Ocorrências](../img/Relatório de Ocorrências.png)
+
 :::tip Dica
-Utilize o filtro por data e classificação para localizar alertas específicos rapidamente.
+Acesse o relatório de ocorrências para consolidar as tratativas realizadas e gerar evidências de fiscalização.
 :::
 
 ---

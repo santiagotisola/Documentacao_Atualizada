@@ -40,13 +40,6 @@ const sidebars: SidebarsConfig = {
       label: '🚗 Veículos Monitorados',
     },
 
-    // ── Alertas ──
-    {
-      type: 'doc',
-      id: 'operacoes/alertas',
-      label: '🚨 Alertas',
-    },
-
     // ── Operações ──
     {
       type: 'doc',
