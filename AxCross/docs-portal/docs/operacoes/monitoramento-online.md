@@ -12,6 +12,10 @@ O monitoramento online permite acompanhar em tempo real o funcionamento dos equi
 
 No **menu lateral**, clique em **Monitoramento Online**.
 
+![Monitoramento Online - Menu](../img/Monitoramento Online - menu.png)
+
+![Monitoramento Online - Filtros](../img/Monitoramento Online.- fitros.png)
+
 ## Funcionalidades
 
 | Funcionalidade | Descrição |

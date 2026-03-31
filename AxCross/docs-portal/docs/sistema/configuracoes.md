@@ -12,6 +12,8 @@ Tela de configurações gerais do AxCross, onde são definidos parâmetros opera
 
 No **menu lateral**, clique em **Sistema**.
 
+![Configurações do Sistema](../img/Configurações.png)
+
 ## Seções
 
 ### Dados Gerais

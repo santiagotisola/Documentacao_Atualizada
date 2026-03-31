@@ -12,6 +12,8 @@ Cadastro e gestão dos usuários que terão acesso ao sistema AxCross.
 
 No **menu lateral**, expanda **Administração** e clique em **Usuários**.
 
+![Tela de Usuários](../img/Usuários.png)
+
 ## Campos
 
 | Campo | Obrigatório | Descrição |

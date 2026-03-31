@@ -8,6 +8,8 @@ description: Painel principal do AxCross com indicadores operacionais
 
 O Painel Principal é a tela inicial do AxCross após a autenticação. Apresenta uma visão completa do estado operacional do sistema, com gráficos e indicadores em tempo real.
 
+![Dashboard Principal do AxCross](../img/Dashboard.png)
+
 ## Como acessar
 
 - Ao realizar o login, o sistema redireciona automaticamente para o Dashboard
@@ -18,6 +20,8 @@ O Painel Principal é a tela inicial do AxCross após a autenticação. Apresent
 ## Painéis do Dashboard
 
 ### 1. Status dos Equipamentos
+
+![Mapa de Equipamentos](../img/Mapa de Equipamentos.png)
 
 | Item | Descrição |
 |------|-----------|
@@ -43,6 +47,8 @@ O Painel Principal é a tela inicial do AxCross após a autenticação. Apresent
 | **Utilidade** | Identificar os cruzamentos com maior fluxo |
 
 ### 4. Alertas Recentes
+
+![Dashboard - Ocorrências Recentes](../img/Dashboard - ocorrencias recentes.png)
 
 | Item | Descrição |
 |------|-----------|
