@@ -57,6 +57,34 @@ O Painel Principal é a tela inicial do AxCross após a autenticação. Apresent
 | **Dados** | Lista dos últimos alertas detectados |
 | **Utilidade** | Ação imediata sobre ocorrências em andamento |
 
+### 5. Estatísticas de Fluxo e Ocorrências por Tipo
+
+![](<../img/Dashboard - ocorrência do tipo.png>)
+
+A parte inferior do Dashboard exibe métricas de fluxo e dois gráficos analíticos:
+
+**Indicadores de fluxo (barra superior):**
+
+| Indicador | Descrição |
+|---|---|
+| **Hora Pico** | Intervalo de hora com maior volume de passagens registradas |
+| **Média/Hora** | Média de passagens por hora no período analisado |
+| **Última Hora** | Total de passagens registradas na última hora |
+| **Maior Fluxo** | Horário e quantidade do pico máximo de passagens |
+| **Menor Fluxo** | Horário e quantidade do volume mínimo de passagens |
+
+**Ocorrências por Tipo:**
+
+Gráfico de barras que exibe a distribuição dos alertas gerados nas **últimas 72 horas**, agrupados por categoria (ex: Placa Monitorada). Permite identificar quais tipos de ocorrência são mais frequentes.
+
+**Passagens por Classificação:**
+
+Gráfico de linha que exibe a distribuição das passagens por **categoria de veículo** nas últimas 24 horas. As categorias incluem: Automóvel, Caminhonete, Caminhão, Ônibus, Motocicleta, Sem Classificação e Sem Classe.
+
+:::info Mapa integrado
+Ao lado dos gráficos de fluxo, o Dashboard exibe o **mapa georreferenciado** (Google Maps) com a localização dos equipamentos monitorados.
+:::
+
 ---
 
 ## Dicas de uso
