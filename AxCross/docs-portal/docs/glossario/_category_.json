@@ -1,0 +1,10 @@
+{
+  "label": "Glossário Técnico",
+  "position": 10,
+  "collapsible": true,
+  "collapsed": true,
+  "link": {
+    "type": "generated-index",
+    "description": "Termos técnicos utilizados no sistema AxCross de monitoramento de cruzamentos."
+  }
+}

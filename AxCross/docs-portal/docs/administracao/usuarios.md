@@ -1,0 +1,37 @@
+---
+sidebar_position: 1
+title: Usuários
+description: Cadastro e gestão de usuários no AxCross
+---
+
+# Usuários
+
+Cadastro e gestão dos usuários que terão acesso ao sistema AxCross.
+
+## Como acessar
+
+No **menu lateral**, expanda **Administração** e clique em **Usuários**.
+
+## Campos
+
+| Campo | Obrigatório | Descrição |
+|-------|:-----------:|-----------|
+| **Nome** | Sim | Nome completo do usuário |
+| **Login** | Sim | Nome de usuário para acesso ao sistema |
+| **E-mail** | Sim | E-mail para recuperação de senha e notificações |
+| **Senha** | Sim | Senha de acesso (mínimo 6 caracteres) |
+| **Perfil de Acesso** | Sim | Perfil que define as permissões do usuário |
+| **Status** | Sim | Ativo ou Inativo |
+
+## Passo a passo — Criar novo usuário
+
+1. Acesse **Administração → Usuários** no menu lateral
+2. Clique em **Novo Usuário**
+3. Preencha **Nome**, **Login** e **E-mail**
+4. Defina a **Senha** de acesso
+5. Selecione o **Perfil de Acesso**
+6. Clique em **Salvar**
+
+:::warning Atenção
+Ao inativar um usuário, ele perde imediatamente o acesso ao sistema. A operação pode ser revertida reativando o cadastro.
+:::
