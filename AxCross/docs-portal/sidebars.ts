@@ -35,16 +35,13 @@ const sidebars: SidebarsConfig = {
 
     // ── Veículos Monitorados ──
     {
-      type: 'doc',
-      id: 'operacoes/veiculos-monitorados',
+      type: 'category',
       label: '🚗 Veículos Monitorados',
-    },
-
-    // ── Alertas ──
-    {
-      type: 'doc',
-      id: 'operacoes/alertas',
-      label: '🚨 Alertas',
+      collapsed: false,
+      items: [
+        'operacoes/veiculos-monitorados',
+        'operacoes/alertas',
+      ],
     },
 
     // ── Operações ──
