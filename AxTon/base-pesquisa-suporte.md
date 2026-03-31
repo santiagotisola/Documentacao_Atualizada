@@ -5,41 +5,57 @@
 
 ---
 
-## Módulos do Sistema
+## Menu lateral do AxTon
 
-### Pesagem
+### Itens diretos (acesso pelo menu lateral)
+| Funcionalidade | Menu lateral | Doc |
+|---|---|---|
+| Iniciar Pesagem | Menu lateral → **Iniciar Pesagem** | [postos](pesagem/postos) |
+| Operações | Menu lateral → **Operações** | [cadastro](operacoes/cadastro-operacoes) |
+| Tickets de Pesagens | Menu lateral → **Tickets de Pesagens** | [ticket-aberto](pesagem/ticket-aberto) |
+| Exportação | Menu lateral → **Exportação** | [exportação](infracoes/exportacao) |
+| Sistema | Menu lateral → **Sistema** | [configurações](sistema/configuracoes) |
+| Relatório de Pesagem | Menu lateral → **Relatório de Pesagem** | [passagens](relatorios/relatorio-passagens) |
+| Sequenciais de Infração | Menu lateral → **Sequenciais de Infração** | [sequenciais](cadastros/sequencial-infracao) |
+
+### Cadastros (categoria expansível)
 | Funcionalidade | Caminho | Doc |
 |---|---|---|
-| Postos de Pesagem | Pesagem → Postos | [postos](pesagem/postos) |
-| Tickets em Aberto | Pesagem → Tickets em Aberto | [ticket-aberto](pesagem/ticket-aberto) |
-| Tickets Fechados | Pesagem → Tickets Fechados | [ticket-fechado](pesagem/ticket-fechado) |
-| Reclassificação | Pesagem → Reclassificar | [reclassificar](pesagem/reclassificar) |
-| Liberar Pesagem | Pesagem → Liberar | [liberar](pesagem/liberar-pesagem) |
-| Motivos | Pesagem → Motivos | [motivos](pesagem/motivos) |
+| Locais | Cadastros → Locais | [locais](cadastros/locais) |
+| Classificações | Cadastros → Classificações | [classificações](cadastros/classificacao-veiculos) |
+| Sequencial de Infração | Cadastros → Sequencial de Infração | [sequencial](cadastros/sequencial-infracao) |
 
-### Operações
+### Administração (categoria expansível)
 | Funcionalidade | Caminho | Doc |
 |---|---|---|
-| Cadastro de Operações | Operações → Cadastro | [cadastro](operacoes/cadastro-operacoes) |
+| Usuários | Administração → Usuários | [usuários](administracao/usuarios) |
+| Perfis de acesso | Administração → Perfis de acesso | [perfis](administracao/perfis-acesso) |
+| Permissões de acesso | Administração → Permissões de acesso | [permissões](administracao/permissoes) |
+
+---
+
+## Telas internas (acessadas a partir dos itens do menu)
+
+### Pesagem (dentro de Iniciar Pesagem / Tickets de Pesagens)
+| Funcionalidade | Acesso | Doc |
+|---|---|---|
+| Tickets em Aberto | Tickets de Pesagens | [ticket-aberto](pesagem/ticket-aberto) |
+| Tickets Fechados | Tickets de Pesagens → Fechados | [ticket-fechado](pesagem/ticket-fechado) |
+| Reclassificação | Tickets de Pesagens → Reclassificar | [reclassificar](pesagem/reclassificar) |
+| Liberar Pesagem | Tickets de Pesagens → Liberar | [liberar](pesagem/liberar-pesagem) |
+| Motivos | Iniciar Pesagem → Motivos | [motivos](pesagem/motivos) |
+
+### Operações (dentro de Operações)
+| Funcionalidade | Acesso | Doc |
+|---|---|---|
 | Monitoramento Online | Operações → Monitoramento | [monitoramento](operacoes/monitoramento-online) |
 | Eventos de Equipamentos | Operações → Eventos | [eventos](operacoes/eventos-equipamentos) |
 | Consulta de Placas | Operações → Consulta | [placas](operacoes/consulta-placas) |
 | Alertas | Operações → Alertas | [alertas](operacoes/alertas) |
 
-### Infrações
-| Funcionalidade | Caminho | Doc |
-|---|---|---|
-| Triagem | Infrações → Triagem | [triagem](infracoes/triagem) |
-| Auditoria | Infrações → Auditoria | [auditoria](infracoes/auditoria) |
-| Consulta | Infrações → Consulta | [consulta](infracoes/consulta-infracoes) |
-| Exportação | Infrações → Exportação | [exportação](infracoes/exportacao) |
-| Exceções | Infrações → Exceções | [exceções](infracoes/excecoes) |
-| Descartadas | Infrações → Descartadas | [descartadas](infracoes/infracoes-descartadas) |
-
 ### Relatórios
-| Funcionalidade | Caminho | Doc |
+| Funcionalidade | Acesso | Doc |
 |---|---|---|
-| Passagens | Relatórios → Passagens | [passagens](relatorios/relatorio-passagens) |
 | Infrações | Relatórios → Infrações | [infrações](relatorios/relatorio-infracoes) |
 | Fluxo Diário | Relatórios → Fluxo Diário | [fluxo](relatorios/fluxo-diario-veiculos) |
 | Discrepâncias | Relatórios → Discrepâncias | [discrepâncias](relatorios/relatorio-discrepancias) |
@@ -51,17 +67,17 @@
 | Falhas Sequenciais | Relatórios → Falhas | [falhas](relatorios/falhas-sequenciais) |
 
 ### Veículos
-| Funcionalidade | Caminho | Doc |
+| Funcionalidade | Acesso | Doc |
 |---|---|---|
 | Tipos | Veículos → Tipos | [tipos](veiculos/tipos-veiculos) |
 | Marcas | Veículos → Marcas | [marcas](veiculos/marcas-veiculos) |
 | Modelos | Veículos → Modelos | [modelos](veiculos/modelos-veiculos) |
 | Cores | Veículos → Cores | [cores](veiculos/cores) |
-| Classificações | Veículos → Classificações | [classificações](veiculos/classificacoes-veiculos) |
+| Classificações | **Menu lateral → Classificações** | [classificações](veiculos/classificacoes-veiculos) |
 | Municípios | Veículos → Municípios | [municípios](veiculos/municipios) |
 
 ### Cadastros Básicos
-| Funcionalidade | Caminho | Doc |
+| Funcionalidade | Acesso | Doc |
 |---|---|---|
 | Equipamentos | Cadastros Básicos → Equipamentos | [equipamentos](cadastros-basicos/equipamentos) |
 | Fabricantes | Cadastros Básicos → Fabricantes | [fabricantes](cadastros-basicos/fabricantes) |
@@ -70,7 +86,7 @@
 | Grupos | Cadastros Básicos → Grupos | [grupos](cadastros-basicos/grupos-equipamentos) |
 
 ### Medições
-| Funcionalidade | Caminho | Doc |
+| Funcionalidade | Acesso | Doc |
 |---|---|---|
 | Contratos | Medições → Contratos | [contratos](medicoes/contratos) |
 | Índices de Performance | Medições → Índices | [índices](medicoes/indices-performance) |
@@ -78,18 +94,10 @@
 | Gerar Medição | Medições → Gerar | [gerar](medicoes/criar-medicao) |
 
 ### Controle de Acesso
-| Funcionalidade | Caminho | Doc |
+| Funcionalidade | Acesso | Doc |
 |---|---|---|
 | Logs de Acesso | Controle de Acesso → Logs | [logs](controle-acesso/logs-acesso) |
 | Restrição por IP | Controle de Acesso → IP | [ip](controle-acesso/acessos-por-ip) |
-| Permissões | Controle de Acesso → Permissões | [permissões](controle-acesso/configurar-permissoes) |
-
-### Administração
-| Funcionalidade | Caminho | Doc |
-|---|---|---|
-| Usuários | Administração → Usuários | [usuários](administracao/usuarios) |
-| Perfis de Acesso | Administração → Perfis | [perfis](administracao/perfis-acesso) |
-| Permissões | Administração → Permissões | [permissões](administracao/permissoes) |
 
 ---
 
@@ -112,7 +120,7 @@
 
 ### Placa não reconhecida
 - Verificar taxa de reconhecimento em Relatórios → Processamento de Imagens
-- Pode ser necessário reclassificar manualmente (Pesagem → Reclassificar)
+- Pode ser necessário reclassificar manualmente (Tickets de Pesagens → Reclassificar)
 - Verificar se o equipamento/câmera está calibrado
 
 ### Alerta de veículo sem MDF-e

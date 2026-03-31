@@ -127,8 +127,8 @@ export default {
               "to": "/pesagem/postos"
             },
             {
-              "label": "Infrações",
-              "to": "/infracoes/triagem"
+              "label": "Exportação",
+              "to": "/infracoes/exportacao"
             },
             {
               "label": "Operações",

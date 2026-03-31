@@ -28,7 +28,7 @@ Registro dos contratos de prestação de serviço de pesagem, vinculando postos,
 
 ### Passo a passo — Cadastrar Contrato
 
-1. Acesse Medições → Contratos
+1. Acesse **Medições** → **Contratos**
 2. Clique em **+ Novo**
 3. Informe o Número do contrato
 4. Selecione o Contratante

@@ -138,5 +138,75 @@
     "causa": "Dúvida sobre cadastro de locais e faixas de monitoramento",
     "acao": "Locais: Cadastros → Locais — cadastre nome, endereço, cidade, UF e coordenadas. Faixas: Cadastros → Faixas — associe ao local, defina sentido e equipamento. Cada faixa representa uma pista monitorada no cruzamento.",
     "status": "Informativo"
+  },
+  "axhub_triagem_pendente": {
+    "keywords": ["triagem pendente", "infração pendente", "fila triagem", "triagem acumulada", "analista triagem"],
+    "assunto": "Infrações com triagem pendente",
+    "causa": "Acúmulo de infrações aguardando análise do triador (campo Status = 'Pendente' em TBTriagens)",
+    "acao": "Acesse AxHub → Triagem e filtre por status Pendente. Priorize por data de captura. Verifique se há travamento de registro (lock) no banco — tabela TBTriagens campo Status.",
+    "status": "Em análise"
+  },
+  "axhub_sequencial_infracao": {
+    "keywords": ["sequencial", "numeração infracao", "ait numeração", "número ait", "sequencial esgotado", "numero infracao zerar"],
+    "assunto": "Problema com numeração sequencial de infrações (AIT)",
+    "causa": "Sequencial esgotado ou configuração incorreta na tabela TBSequencialInfracoes",
+    "acao": "Verifique a tabela TBSequencialInfracoes: campos Sequential e Prefix. Se o sequencial atingiu o limite máximo da faixa, configure uma nova faixa. Consulte o administrador do sistema antes de alterar.",
+    "status": "Crítico — acionar suporte"
+  },
+  "axhub_lote_exportacao_erro": {
+    "keywords": ["lote exportação erro", "exportação falhou", "arquivo exportação", "TBLoteExportacoes", "lote travado", "exportação não gera"],
+    "assunto": "Lote de exportação com erro",
+    "causa": "Falha na geração do arquivo de exportação — pode ser dados inválidos, sequencial incorreto ou falha de comunicação",
+    "acao": "Consulte TBLoteExportacoes e verifique o campo Status do lote. Se status = 'Erro', confira a mensagem de erro associada. Verifique também TBSequencialInfracoes e TBSequencialLoteExportacoes para garantir consistência dos sequenciais.",
+    "status": "Em análise"
+  },
+  "axhub_usuario_bloqueado": {
+    "keywords": ["usuário bloqueado", "usuario bloqueado", "acesso bloqueado", "TBUsuarios bloqueado", "desbloquear usuário", "session expirada", "token expirado"],
+    "assunto": "Usuário bloqueado ou sessão expirada",
+    "causa": "Tentativas excessivas de login ou expiração de sessão (tabela TBUserSessions / TBAcessosBloqueadosPeriodo)",
+    "acao": "Acesse Administração → Usuários, localize o usuário e desbloqueie. Se persistir, verifique TBAcessosBloqueadosPeriodo e TBLogsAcessos para identificar origem do bloqueio. Confirme que o IP não está na lista TBAcessoPorIps.",
+    "status": "Em análise"
+  },
+  "axhub_contrato": {
+    "keywords": ["contrato", "contrato expirado", "contrato venceu", "ajuste contratual", "TBContratos"],
+    "assunto": "Problema relacionado a contrato",
+    "causa": "Contrato expirado ou ajuste contratual pendente",
+    "acao": "Verifique TBContratos: campos DataInicio, DataFim e Status. Contratos vencidos bloqueiam funcionalidades de exportação. Contate o setor comercial para renovação ou ajuste via TBAjustesContratuais.",
+    "status": "Em análise"
+  },
+  "axton_balanca_pbt": {
+    "keywords": ["pbt excedido", "excesso peso bruto", "peso bruto total", "balança pbt", "infracao pbt", "axton pbt"],
+    "assunto": "Excesso de PBT (Peso Bruto Total) — AxTon",
+    "causa": "Veículo pesado acima do limite regulamentado (campo PBTRegulamentado vs PBTMedido em TBInfracoes)",
+    "acao": "Confirme a pesagem em TBPesagens e valide os grupos de eixo. Verifique a classificação do veículo em TBClassificacoes. Se a configuração de tolerância estiver incorreta, ajuste TolerancePercentage em Configuration (MongoDB AxTon).",
+    "status": "En análise"
+  },
+  "axton_exportacao_renainf": {
+    "keywords": ["renainf", "exportação renainf", "exportar axton", "lote axton", "ExportBatch axton"],
+    "assunto": "Exportação para RENAINF — AxTon",
+    "causa": "Falha na geração ou envio do lote de exportação ao RENAINF",
+    "acao": "Verifique a collection ExportBatch (MongoDB): campo ExportStatus. Se status = 'Error', leia o campo Message para identificar a causa. Confirme que SequentialInfraction tem sequencial válido e que as configurações de exportação (Configuration.ExportType) estão corretas.",
+    "status": "Em análise"
+  },
+  "axton_camera_rtsp": {
+    "keywords": ["câmera axton", "rtsp", "sem imagem axton", "configurar câmera axton", "ip câmera axton", "stream câmera"],
+    "assunto": "Câmera sem imagem — AxTon",
+    "causa": "URL RTSP incorreta ou câmera sem comunicação com o dispositivo AxTon",
+    "acao": "Verifique em Configuration (MongoDB AxTon): CameraIp, CameraPort, CameraType e CameraCustomRtspUrl. Teste a URL RTSP diretamente (ex: VLC). Confirme usuário/senha da câmera nos campos UserCamera e PasswordCamera.",
+    "status": "Aguardando verificação"
+  },
+  "axcross_operacao_encerrar": {
+    "keywords": ["encerrar operação axcross", "operação aberta axcross", "operação não fecha", "operação ativa", "TBOperacoes axcross"],
+    "assunto": "Operação de monitoramento não encerra — AxCross",
+    "causa": "Operação ficou com DataFim nulo (campo Status = 'Ativa' em TBOperacoes sem DataFim preenchida)",
+    "acao": "Verifique TBOperacoes: identifique operações com DataFim = NULL e Status = 'Ativa'. Encerre manualmente pelo sistema ou solicite ao administrador atualização direta do campo DataFim e Status para 'Encerrada'.",
+    "status": "Em análise"
+  },
+  "axcross_placa_monitorada": {
+    "keywords": ["placa monitorada axcross", "alerta placa axcross", "veículo monitorado axcross", "classificação veiculo axcross"],
+    "assunto": "Veículo monitorado detectado — AxCross",
+    "causa": "Veículo com classificação de monitoramento (ex: Roubado, Suspeito) foi detectado no cruzamento",
+    "acao": "Acesse Veículos Monitorados → Alertas para visualizar o registro. Confirme a placa e o local da detecção. Siga o procedimento operacional definido para a classificação do veículo (Assumir → Resolver). Registre o Tipo de Ocorrência adequado.",
+    "status": "Crítico — ação imediata"
   }
 }

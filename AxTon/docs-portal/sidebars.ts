@@ -134,6 +134,16 @@ const sidebars: SidebarsConfig = {
         'glossario/triagem',
       ],
     },
+
+    // ── Referência Técnica ──
+    {
+      type: 'category',
+      label: '🗄️ Referência Técnica',
+      collapsed: true,
+      items: [
+        'referencia-tecnica/banco-de-dados',
+      ],
+    },
   ],
 };
 

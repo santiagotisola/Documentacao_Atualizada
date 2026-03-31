@@ -86,6 +86,16 @@ const sidebars: SidebarsConfig = {
       ],
     },
 
+    // ── Referência Técnica ──
+    {
+      type: 'category',
+      label: '🗄️ Referência Técnica',
+      collapsed: true,
+      items: [
+        'referencia-tecnica/banco-de-dados',
+      ],
+    },
+
     // ── Glossário ──
     {
       type: 'category',

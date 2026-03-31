@@ -10,7 +10,7 @@ O módulo de perfis de acesso define os conjuntos de permissões que serão atri
 
 ## Como acessar
 
-**Menu lateral** → Administração → **Perfis de Acesso**
+**Menu lateral** → Administração → **Perfis de acesso**
 
 ## Listagem
 

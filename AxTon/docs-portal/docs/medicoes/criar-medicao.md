@@ -24,7 +24,7 @@ Gera o relatório de medição mensal vinculado a um contrato, consolidando indi
 
 ### Passo a passo
 
-1. Acesse Medições → Gerar Medição
+1. Acesse **Medições** → **Gerar Medição**
 2. Selecione o Contrato
 3. Informe o Período de referência
 4. Clique em **Gerar**

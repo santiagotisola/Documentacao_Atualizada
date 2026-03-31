@@ -37,7 +37,7 @@ Permite pesquisar o histórico de passagens de um veículo específico nos posto
 
 ### Passo a passo
 
-1. Acesse Operações → Consulta de Placas
+1. Na tela de **Operações**, acesse **Consulta de Placas**
 2. Informe a Placa (total ou parcial)
 3. Defina o Período desejado
 4. Clique em **Pesquisar**

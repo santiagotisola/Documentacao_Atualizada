@@ -12,7 +12,7 @@ Operações representam as atividades de fiscalização de pesagem realizadas em
 
 ## Como acessar
 
-**Menu lateral** → Operações → **Cadastro de Operações**
+**Menu lateral** → **Operações**
 
 ![Nova Operação](../img/operacoes%20-%20nova.png)
 
@@ -41,7 +41,7 @@ Operações representam as atividades de fiscalização de pesagem realizadas em
 
 ### Passo a passo
 
-1. Acesse Operações → Cadastro de Operações
+1. No menu lateral, clique em **Operações**
 2. Clique em **+ Novo**
 3. Informe o Nome da operação
 4. Selecione o Posto de pesagem

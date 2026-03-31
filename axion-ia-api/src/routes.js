@@ -1,9 +1,9 @@
 import express from "express";
 import { processarMensagem, consultarHistorico, consultarPendentes, consultarEstatisticas, treinarIA, consultarLogsMongo, consultarAnalise, listarEntradasKB } from "./controller.js";
 import { listarTickets, detalheTicket, classificarTicket, responderTicketIA, processarPendentes as processarHelpdeskPendentes, listarCategorias, criarChamado } from "./helpdesk-controller.js";
-import { statusConexao, resumoGeral, listarEquipamentos, listarOperacoes, statsInfracoes, heartbeatEquipamentos, listarTabelas } from "./axhub-controller.js";
-import { statusConexao as axtonStatus, resumoGeral as axtonResumo, listarTabelas as axtonTabelas } from "./axton-controller.js";
-import { statusConexao as axcrossStatus, resumoGeral as axcrossResumo, listarEquipamentos as axcrossEquipamentos, statsPassagens as axcrossPassagens, heartbeatEquipamentos as axcrossHeartbeat, listarTabelas as axcrossTabelas } from "./axcross-controller.js";
+import { statusConexao, resumoGeral, listarEquipamentos, listarOperacoes, statsInfracoes, heartbeatEquipamentos, listarTabelas, listarMonitoramentos, ultimasPassagens, statsTriagens } from "./axhub-controller.js";
+import { statusConexao as axtonStatus, resumoGeral as axtonResumo, listarTabelas as axtonTabelas, ultimasPesagens as axtonPesagens, ultimasInfracoes as axtonInfracoes, heartbeatEquipamentos as axtonHeartbeat } from "./axton-controller.js";
+import { statusConexao as axcrossStatus, resumoGeral as axcrossResumo, listarEquipamentos as axcrossEquipamentos, statsPassagens as axcrossPassagens, heartbeatEquipamentos as axcrossHeartbeat, listarTabelas as axcrossTabelas, listarLocais as axcrossLocais, listarOperacoes as axcrossOperacoes } from "./axcross-controller.js";
 import { obterConfig, salvarConfig, testarMongo } from "./config-controller.js";
 
 const router = express.Router();
@@ -38,17 +38,25 @@ router.get("/axhub/equipamentos", listarEquipamentos);
 router.get("/axhub/operacoes", listarOperacoes);
 router.get("/axhub/infracoes", statsInfracoes);
 router.get("/axhub/heartbeat", heartbeatEquipamentos);
+router.get("/axhub/monitoramentos", listarMonitoramentos);
+router.get("/axhub/passagens", ultimasPassagens);
+router.get("/axhub/triagens", statsTriagens);
 router.get("/axhub/tabelas", listarTabelas);
 
 // AxTon — SQL Server
 router.get("/axton/status", axtonStatus);
 router.get("/axton/resumo", axtonResumo);
+router.get("/axton/pesagens", axtonPesagens);
+router.get("/axton/infracoes", axtonInfracoes);
+router.get("/axton/heartbeat", axtonHeartbeat);
 router.get("/axton/tabelas", axtonTabelas);
 
 // AxCross — SQL Server
 router.get("/axcross/status", axcrossStatus);
 router.get("/axcross/resumo", axcrossResumo);
 router.get("/axcross/equipamentos", axcrossEquipamentos);
+router.get("/axcross/locais", axcrossLocais);
+router.get("/axcross/operacoes", axcrossOperacoes);
 router.get("/axcross/passagens", axcrossPassagens);
 router.get("/axcross/heartbeat", axcrossHeartbeat);
 router.get("/axcross/tabelas", axcrossTabelas);

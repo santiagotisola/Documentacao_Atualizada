@@ -12,7 +12,7 @@ A exportação envia as infrações aprovadas na auditoria para o órgão autuad
 
 ## Como acessar
 
-**Menu lateral** → Infrações → **Exportação**
+**Menu lateral** → **Exportação**
 
 ![Dados Exportados](../img/Exportacao%20de%20infracoes.-%20dados%20exportados.png)
 
@@ -40,7 +40,7 @@ A exportação envia as infrações aprovadas na auditoria para o órgão autuad
 
 ### Passo a passo — Exportar Lote
 
-1. Acesse Infrações → Exportação
+1. No menu lateral, clique em **Exportação**
 2. Clique em **Gerar Novo Lote**
 3. Defina o período e filtros
 4. Revise a quantidade de infrações

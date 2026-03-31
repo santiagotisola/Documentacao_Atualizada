@@ -10,7 +10,7 @@ O módulo de classificação de veículos define as categorias de veículos reco
 
 ## Como acessar
 
-**Menu lateral** → Cadastros → **Classificação de Veículos**
+**Menu lateral** → Cadastros → **Classificações**
 
 ## Listagem
 

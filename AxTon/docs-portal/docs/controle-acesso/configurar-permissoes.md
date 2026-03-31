@@ -29,7 +29,7 @@ Cada perfil de acesso pode ter permissões específicas para cada módulo do sis
 
 ### Passo a passo
 
-1. Acesse Controle de Acesso → Permissões de Acesso
+1. No menu lateral, abra **Administração** e clique em **Permissões de acesso**
 2. Selecione o **Perfil de Acesso**
 3. Para cada módulo, marque as permissões desejadas
 4. Clique em **Salvar**

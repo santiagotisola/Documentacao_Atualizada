@@ -92,6 +92,18 @@
       '#axionia-ft { padding: 6px 16px 10px; text-align: center; background: #fff; flex-shrink: 0; }',
       '#axionia-ft a { font-size: 11px; color: #95a5a6; text-decoration: none; }',
       '#axionia-ft a:hover { color: #3498db; }',
+      '.ax-hd-form { background: #fff; border: 1px solid #d6eaf8; border-radius: 12px; padding: 14px; margin-top: 6px; animation: axFade 0.3s ease; }',
+      '.ax-hd-form label { display: block; font-size: 11px; font-weight: 700; color: #2c3e50; margin-bottom: 3px; margin-top: 10px; }',
+      '.ax-hd-form label:first-child { margin-top: 0; }',
+      '.ax-hd-form input, .ax-hd-form textarea { width: 100%; padding: 8px 10px; border: 1px solid #d5dbdb; border-radius: 8px; font-size: 12.5px; font-family: inherit; outline: none; transition: border-color 0.2s; box-sizing: border-box; background: #f8f9fb; }',
+      '.ax-hd-form input:focus, .ax-hd-form textarea:focus { border-color: #3498db; background: #fff; }',
+      '.ax-hd-form textarea { resize: vertical; min-height: 60px; }',
+      '.ax-hd-submit { width: 100%; margin-top: 12px; padding: 9px; border: none; border-radius: 8px; background: linear-gradient(135deg, #27ae60, #229954); color: #fff; font-size: 13px; font-weight: 700; cursor: pointer; transition: opacity 0.2s; }',
+      '.ax-hd-submit:hover { opacity: 0.9; }',
+      '.ax-hd-submit:disabled { opacity: 0.5; cursor: not-allowed; }',
+      '.ax-hd-error { color: #e74c3c; font-size: 11px; margin-top: 6px; }',
+      '.ax-hd-success { background: #eafaf1; border: 1px solid #a9dfbf; border-radius: 10px; padding: 12px; margin-top: 6px; animation: axFade 0.3s ease; }',
+      '.ax-hd-success strong { color: #27ae60; }',
       '@keyframes axFade { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }',
       '@keyframes axDot { 0%,60%,100% { transform: translateY(0); opacity: 0.35; } 30% { transform: translateY(-4px); opacity: 1; } }',
       '@media (max-width: 480px) { #axionia-panel { width: calc(100vw - 16px); right: 8px; bottom: 80px; height: 80vh; } }'
@@ -117,7 +129,7 @@
           '<input id="axionia-q" type="text" placeholder="Pergunte algo..." autocomplete="off" />' +
           '<button id="axionia-go"><svg viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg></button>' +
         '</div>' +
-        '<div id="axionia-ft"><a href="https://desk.axiontecnologia.com.br/helpdesk/" target="_blank" rel="noopener">\u2709 Abrir chamado no Help Desk</a></div>' +
+        '<div id="axionia-ft"><a href="#" id="axionia-hd-link">\u2709 Abrir chamado no Help Desk</a></div>' +
       '</div>';
     document.body.appendChild(el);
 
@@ -126,7 +138,9 @@
     var chat  = el.querySelector('#axionia-chat');
     var qbox  = el.querySelector('#axionia-q');
     var goBtn = el.querySelector('#axionia-go');
+    var hdLink = el.querySelector('#axionia-hd-link');
     var greeted = false;
+    var apiUrl = '';
 
     fab.addEventListener('click', function () {
       panel.classList.toggle('open');
@@ -139,6 +153,11 @@
     el.querySelector('#axionia-x').addEventListener('click', function () {
       panel.classList.remove('open');
     });
+    hdLink.addEventListener('click', function (e) {
+      e.preventDefault();
+      if (!panel.classList.contains('open')) panel.classList.add('open');
+      showHelpdeskForm();
+    });
 
     // --- Detectar URLs ---
     var scriptBase = '';
@@ -147,10 +166,12 @@
       for (var i = ss.length - 1; i >= 0; i--) {
         if (ss[i].src && ss[i].src.indexOf('axhub-suporte') !== -1) {
           scriptBase = ss[i].src.replace(/\/[^\/]*$/, '/');
+          apiUrl = ss[i].getAttribute('data-api') || '';
           break;
         }
       }
     } catch (e) {}
+    if (!apiUrl && window.AXIONIA_API_URL) apiUrl = window.AXIONIA_API_URL;
 
     var pageBase = '/';
     try {
@@ -171,7 +192,7 @@
 
     function tryUrl(urls, i) {
       if (i >= urls.length) {
-        bot('Desculpe, n\u00e3o consegui carregar minha base de conhecimento. <a href="https://desk.axiontecnologia.com.br/helpdesk/" target="_blank">Abra um chamado</a>.');
+        bot('Desculpe, n\u00e3o consegui carregar minha base de conhecimento. Clique em <strong>Abrir chamado</strong> no rodap\u00e9 para contatar o suporte.');
         return;
       }
       var xhr = new XMLHttpRequest();
@@ -248,6 +269,109 @@
           'Criar usu\u00e1rio'
         ]);
       });
+    }
+
+    // --- Helpdesk inline ---
+    var lastUserQueries = [];
+
+    function isHelpdeskIntent(query) {
+      var n = normalize(query);
+      return /\b(chamado|ticket|helpdesk|help desk|abrir chamado|criar chamado|suporte tecnico|quero suporte|preciso de suporte|atendimento)\b/.test(n);
+    }
+
+    function showHelpdeskForm(prefill) {
+      var assuntoPrefill = prefill || (lastUserQueries.length > 0 ? lastUserQueries[lastUserQueries.length - 1] : '');
+      bot('\ud83c\udfab Vou te ajudar a abrir um chamado no <strong>Help Desk</strong>! Preencha seus dados abaixo:');
+      wait(400, function () {
+        var formHtml = '<div class="ax-hd-form" id="ax-hd-form">' +
+          '<label>Login <small>(e-mail do Help Desk)</small></label>' +
+          '<input type="text" id="ax-hd-email" placeholder="seu.email@empresa.com" autocomplete="email" />' +
+          '<label>Senha</label>' +
+          '<input type="password" id="ax-hd-pass" placeholder="\u2022\u2022\u2022\u2022\u2022\u2022\u2022\u2022" autocomplete="current-password" />' +
+          '<label>Assunto</label>' +
+          '<input type="text" id="ax-hd-subject" placeholder="Descreva brevemente o problema" value="' + esc(assuntoPrefill) + '" />' +
+          '<label>Descri\u00e7\u00e3o</label>' +
+          '<textarea id="ax-hd-body" placeholder="Detalhe o problema ou d\u00favida..."></textarea>' +
+          '<div id="ax-hd-msg"></div>' +
+          '<button class="ax-hd-submit" id="ax-hd-btn">\u2709 Enviar Chamado</button>' +
+        '</div>';
+        var fDiv = document.createElement('div');
+        fDiv.className = 'ax-m b';
+        fDiv.innerHTML = '<div class="ax-b">' + formHtml + '</div>';
+        chat.appendChild(fDiv);
+        scroll();
+
+        var btnSubmit = fDiv.querySelector('#ax-hd-btn');
+        btnSubmit.addEventListener('click', function () { submitHelpdesk(fDiv); });
+
+        var fields = fDiv.querySelectorAll('input, textarea');
+        fields.forEach(function (f) {
+          f.addEventListener('keydown', function (e) {
+            if (e.key === 'Enter' && f.tagName !== 'TEXTAREA') { submitHelpdesk(fDiv); }
+          });
+        });
+
+        var emailField = fDiv.querySelector('#ax-hd-email');
+        if (emailField) emailField.focus();
+      });
+    }
+
+    function submitHelpdesk(formContainer) {
+      var emailEl = formContainer.querySelector('#ax-hd-email');
+      var passEl = formContainer.querySelector('#ax-hd-pass');
+      var subjectEl = formContainer.querySelector('#ax-hd-subject');
+      var bodyEl = formContainer.querySelector('#ax-hd-body');
+      var msgEl = formContainer.querySelector('#ax-hd-msg');
+      var btnEl = formContainer.querySelector('#ax-hd-btn');
+
+      var email = emailEl ? emailEl.value.trim() : '';
+      var pass = passEl ? passEl.value : '';
+      var subject = subjectEl ? subjectEl.value.trim() : '';
+      var body = bodyEl ? bodyEl.value.trim() : '';
+
+      if (!email || !pass) { msgEl.innerHTML = '<div class="ax-hd-error">Preencha login e senha.</div>'; return; }
+      if (!subject) { msgEl.innerHTML = '<div class="ax-hd-error">Preencha o assunto.</div>'; return; }
+      if (!body) { msgEl.innerHTML = '<div class="ax-hd-error">Descreva o problema.</div>'; return; }
+
+      if (!apiUrl) {
+        msgEl.innerHTML = '<div class="ax-hd-error">API n\u00e3o configurada. Adicione data-api no script ou defina window.AXIONIA_API_URL.</div>';
+        return;
+      }
+
+      btnEl.disabled = true;
+      btnEl.textContent = 'Enviando...';
+      msgEl.innerHTML = '';
+
+      var xhr = new XMLHttpRequest();
+      xhr.open('POST', apiUrl + '/helpdesk/criar', true);
+      xhr.setRequestHeader('Content-Type', 'application/json');
+      xhr.onload = function () {
+        if (xhr.status === 200) {
+          try {
+            var resp = JSON.parse(xhr.responseText);
+            formContainer.querySelector('.ax-hd-form').style.display = 'none';
+            bot('<div class="ax-hd-success">\u2705 <strong>Chamado criado com sucesso!</strong><br>N\u00famero: <strong>#' + esc(resp.ticketId) + '</strong><br>Acompanhe pelo Help Desk.</div>');
+          } catch (e) {
+            msgEl.innerHTML = '<div class="ax-hd-error">Resposta inesperada do servidor.</div>';
+            btnEl.disabled = false; btnEl.textContent = '\u2709 Enviar Chamado';
+          }
+        } else if (xhr.status === 401) {
+          msgEl.innerHTML = '<div class="ax-hd-error">\u274c Login ou senha inv\u00e1lidos. Verifique suas credenciais do Help Desk.</div>';
+          btnEl.disabled = false; btnEl.textContent = '\u2709 Enviar Chamado';
+        } else {
+          var errMsg = 'Erro ao criar chamado.';
+          try { errMsg = JSON.parse(xhr.responseText).erro || errMsg; } catch (e) {}
+          msgEl.innerHTML = '<div class="ax-hd-error">' + esc(errMsg) + '</div>';
+          btnEl.disabled = false; btnEl.textContent = '\u2709 Enviar Chamado';
+        }
+        passEl.value = '';
+      };
+      xhr.onerror = function () {
+        msgEl.innerHTML = '<div class="ax-hd-error">Erro de conex\u00e3o com o servidor. Verifique se a API est\u00e1 online.</div>';
+        btnEl.disabled = false; btnEl.textContent = '\u2709 Enviar Chamado';
+        passEl.value = '';
+      };
+      xhr.send(JSON.stringify({ email: email, senha: pass, assunto: subject, descricao: body }));
     }
 
     // --- Motor Inteligente v5.0 ---
@@ -817,6 +941,8 @@
     function ask(query) {
       user(query);
       qbox.value = '';
+      lastUserQueries.push(query);
+      if (lastUserQueries.length > 5) lastUserQueries.shift();
 
       if (!kbData) {
         bot('Aguarde, estou carregando minha base de conhecimento...');
@@ -852,6 +978,12 @@
             'Fico feliz em ajudar! Qualquer d\u00favida, \u00e9 s\u00f3 chamar.'
           ];
           bot(thanks[rand(thanks.length)]);
+          return;
+        }
+
+        // CAMADA 0.5: Helpdesk — abrir chamado inline
+        if (isHelpdeskIntent(query)) {
+          showHelpdeskForm();
           return;
         }
 
@@ -1011,7 +1143,7 @@
                 chat.appendChild(rDiv);
                 scroll();
               } else {
-                bot('Precisa de mais alguma coisa? Pode perguntar ou <a href="https://desk.axiontecnologia.com.br/helpdesk/" target="_blank">abrir um chamado</a>.');
+                bot('Precisa de mais alguma coisa? Pode perguntar ou digite <strong>"abrir chamado"</strong> para contatar o suporte.');
               }
             });
           });

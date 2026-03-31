@@ -12,7 +12,7 @@ Cadastro dos motivos padronizados utilizados nas operações de pesagem, como mo
 
 ## Como acessar
 
-**Menu lateral** → Pesagem → **Motivos**
+**Menu lateral** → **Iniciar Pesagem** → **Motivos**
 
 ## Listagem
 
@@ -27,7 +27,7 @@ Cadastro dos motivos padronizados utilizados nas operações de pesagem, como mo
 
 ### Passo a passo — Cadastrar Motivo
 
-1. Acesse Pesagem → Motivos
+1. Na tela de **Iniciar Pesagem**, acesse **Motivos**
 2. Clique em **+ Novo**
 3. Informe a Descrição do motivo
 4. Selecione o Tipo

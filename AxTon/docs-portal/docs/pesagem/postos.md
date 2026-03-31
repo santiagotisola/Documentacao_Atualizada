@@ -12,7 +12,7 @@ Os Postos de Pesagem representam os locais físicos onde os veículos são pesad
 
 ## Como acessar
 
-**Menu lateral** → Pesagem → **Postos de Pesagem**
+**Menu lateral** → **Iniciar Pesagem**
 
 ![Informar a placa para iniciar pesagem](../img/iniciar%20pesagem%20-%20informar%20a%20placa%20para%20iniciar%20o%20processo%20de%20pesagem.png)
 
@@ -48,7 +48,7 @@ A tela exibe todos os postos cadastrados no sistema.
 
 ### Passo a passo — Cadastrar Posto
 
-1. Acesse Pesagem → Postos de Pesagem
+1. No menu lateral, clique em **Iniciar Pesagem**
 2. Clique em **+ Novo**
 3. Preencha o Nome do posto
 4. Selecione a Localidade

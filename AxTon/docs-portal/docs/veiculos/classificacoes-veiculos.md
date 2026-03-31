@@ -28,7 +28,7 @@ A tela exibe todos os registros cadastrados, com opção de pesquisa e filtro.
 
 ### Passo a passo — Cadastrar
 
-1. Acesse Veículos → Classificações de Veículos
+1. No menu lateral, clique em **Classificações**
 2. Clique em **+ Novo**
 3. Preencha o Código e a Descrição
 4. Marque como Ativo

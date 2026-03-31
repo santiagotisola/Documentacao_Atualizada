@@ -12,7 +12,7 @@ Tickets fechados são registros de pesagem já finalizados. Permitem consulta hi
 
 ## Como acessar
 
-**Menu lateral** → Pesagem → **Tickets Fechados**
+**Menu lateral** → **Tickets de Pesagens** → Fechados
 
 ## Listagem
 
@@ -37,7 +37,7 @@ Tickets fechados são registros de pesagem já finalizados. Permitem consulta hi
 
 ### Passo a passo — Consultar Ticket
 
-1. Acesse Pesagem → Tickets Fechados
+1. No menu lateral, clique em **Tickets de Pesagens** e filtre por Fechados
 2. Defina os filtros de período
 3. Opcionalmente, filtre por placa ou posto
 4. Clique em **Pesquisar**

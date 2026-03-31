@@ -65,12 +65,10 @@ A alteração do **Número Atual** de um sequencial em uso deve ser realizada co
 
 ---
 
-## Processos de Infração
+## Fluxo de Exportação
+
+O sequencial de infração é utilizado na exportação de infrações para o órgão autuador. Após o registro da infração, a exportação utiliza o próximo número sequencial disponível.
 
 | Processo | Descrição |
 |---|---|
-| [**Triagem de Infrações**](../infracoes/triagem) | Análise e validação de infrações de excesso de peso |
-| [**Auditoria de Infrações**](../infracoes/auditoria) | Revisão de infrações processadas antes da exportação |
-| [**Consulta de Infrações**](../infracoes/consulta-infracoes) | Pesquisar e consultar infrações registradas |
-| [**Exceções**](../infracoes/excecoes) | Regras para dispensar veículos da autuação |
-| [**Infrações Descartadas**](../infracoes/infracoes-descartadas) | Consultar e reabrir infrações descartadas |
+| [**Exportação**](../infracoes/exportacao) | Envio de infrações aprovadas em lotes para o órgão autuador |

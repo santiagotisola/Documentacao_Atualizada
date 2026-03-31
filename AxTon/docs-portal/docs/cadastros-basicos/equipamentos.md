@@ -26,7 +26,7 @@ Cadastro dos equipamentos de pesagem. Estes registros são fundamentais para o f
 
 ### Passo a passo — Cadastrar
 
-1. Acesse Cadastros Básicos → Equipamentos
+1. Acesse **Cadastros Básicos** → **Equipamentos**
 2. Clique em **+ Novo**
 3. Preencha os campos obrigatórios
 4. Clique em **Salvar**

@@ -26,7 +26,7 @@ Permite configurar quais endereços IP podem acessar o sistema, adicionando uma 
 
 ### Passo a passo
 
-1. Acesse Controle de Acesso → Acessos por IP
+1. Acesse **Controle de Acesso** → **Acessos por IP**
 2. Clique em **+ Novo**
 3. Informe o Endereço IP
 4. Adicione uma Descrição (ex: "Escritório Central")

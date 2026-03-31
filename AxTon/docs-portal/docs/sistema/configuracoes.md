@@ -12,7 +12,7 @@ A tela de **Configurações do Sistema** centraliza os parâmetros fundamentais 
 
 ## Como acessar
 
-**Menu lateral** → Sistema → **Configurações do Sistema**
+**Menu lateral** → **Sistema**
 
 ![Configuração - Dados do Órgão](../img/Sistema%20-%20dados%20do%20orgao.png)
 

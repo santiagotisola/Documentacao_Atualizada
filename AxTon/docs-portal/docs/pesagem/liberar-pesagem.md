@@ -12,7 +12,7 @@ Permite liberar manualmente veículos que estão retidos no processo de pesagem,
 
 ## Como acessar
 
-**Menu lateral** → Pesagem → **Liberar Pesagem**
+**Menu lateral** → **Tickets de Pesagens** → **Liberar**
 
 ## Quando liberar
 
@@ -31,7 +31,7 @@ Permite liberar manualmente veículos que estão retidos no processo de pesagem,
 
 ### Passo a passo
 
-1. Acesse Pesagem → Liberar Pesagem
+1. Na tela de **Tickets de Pesagens**, localize o ticket e clique em **Liberar**
 2. Localize o ticket pendente
 3. Informe o Motivo da Liberação
 4. Registre o Responsável pela autorização
