@@ -21,21 +21,21 @@
     "status": "Em análise"
   },
   "exportacao_infracao": {
-    "keywords": ["exportação", "exportar", "renainf", "lote exportação", "erro exportação"],
+    "keywords": ["erro exportação", "exportação falhou", "exportação não gera", "lote exportação erro", "falha exportação", "exportação com erro"],
     "assunto": "Erro na exportação de infrações",
     "causa": "Falha na geração do lote de exportação ou comunicação com RENAINF",
     "acao": "Verificar dados obrigatórios do lote e reprocessar exportação",
     "status": "Em análise"
   },
   "ticket_pesagem": {
-    "keywords": ["ticket", "pesagem", "ticket não finaliza", "emitir ticket", "ticket aberto"],
+    "keywords": ["ticket pesagem", "ticket não finaliza", "emitir ticket de pesagem", "ticket aberto pesagem", "pesagem não finaliza"],
     "assunto": "Problema com ticket de pesagem",
     "causa": "Ticket preso em estado aberto ou erro na emissão",
     "acao": "Verificar se a pesagem foi concluída e finalizar ticket manualmente se necessário",
     "status": "Em análise"
   },
   "placa_nao_reconhecida": {
-    "keywords": ["placa", "ocr", "não reconheceu", "placa errada", "leitura placa"],
+    "keywords": ["placa não reconhecida", "ocr falhou", "placa errada", "leitura placa incorreta", "ocr não leu", "placa ilegível"],
     "assunto": "Placa não reconhecida pelo OCR",
     "causa": "Falha na leitura automática da placa pelo sistema de câmeras",
     "acao": "Verificar qualidade da imagem e corrigir placa manualmente na triagem",
@@ -49,21 +49,21 @@
     "status": "Aguardando verificação"
   },
   "relatorio": {
-    "keywords": ["relatório", "relatorio", "gerar relatório", "relatório não abre", "exportar relatório"],
+    "keywords": ["relatório não abre", "relatório não carrega", "erro relatório", "relatório em branco", "relatório vazio", "não gera relatório", "erro ao gerar relatório"],
     "assunto": "Problema com relatórios",
     "causa": "Erro na geração ou filtros incorretos",
     "acao": "Verificar filtros aplicados (período, posto, operação) e tentar gerar novamente",
     "status": "Em análise"
   },
   "configuracao_sistema": {
-    "keywords": ["configuração", "configurar", "dados do órgão", "sistema configuração"],
+    "keywords": ["dados do órgão", "configuração do sistema", "configurar sistema", "parâmetros do sistema", "ajuste configuração"],
     "assunto": "Configuração do sistema",
     "causa": "Necessidade de ajuste nos parâmetros do sistema",
     "acao": "Acessar Menu → Sistema → Configurações e ajustar parâmetros necessários",
     "status": "Em análise"
   },
   "camera_ip": {
-    "keywords": ["câmera", "camera ip", "camera sem", "sem imagem", "imagem câmera"],
+    "keywords": ["camera ip", "câmera sem imagem", "camera sem imagem", "câmera offline", "imagem câmera falhou", "stream câmera"],
     "assunto": "Problema com câmera IP",
     "causa": "Câmera sem comunicação ou configuração incorreta de IP/porta",
     "acao": "Verificar conectividade da câmera, validar IP/porta nas configurações",
@@ -91,7 +91,7 @@
     "status": "Em análise"
   },
   "alerta_veiculo": {
-    "keywords": ["alerta", "veículo alerta", "notificação", "alerta operação"],
+    "keywords": ["veículo alerta", "alerta operação", "alerta ativo", "alerta placa", "alerta veículo"],
     "assunto": "Alerta de veículo / operação",
     "causa": "Veículo detectado em situação de alerta cadastrado",
     "acao": "Verificar alertas configurados e procedimento operacional aplicável",
@@ -105,7 +105,7 @@
     "status": "Informativo"
   },
   "guia_completo_infracoes": {
-    "keywords": ["processo infração", "fluxo infração", "como funciona infração", "passo a passo infração", "etapas infração", "captura", "triagem", "auditoria", "exportação", "ciclo infração", "guia infração", "manual infração", "como triar", "como auditar", "como exportar", "fluxo completo", "validar infração", "descartar infração"],
+    "keywords": ["processo infração", "fluxo infração", "como funciona infração", "passo a passo infração", "etapas infração", "ciclo infração", "guia infração", "manual infração", "como triar infração", "como auditar infração", "como exportar infração", "fluxo completo infração", "validar infração", "descartar infração"],
     "assunto": "Guia Completo — Processo de Infração",
     "causa": "Dúvida sobre o fluxo completo de infrações no AxHub",
     "acao": "O processo segue 5 etapas: (1) CAPTURA — equipamento registra imagem/placa/velocidade. (2) IMPORTAÇÃO — dados entram no AxHub em lotes; exceções descartam automaticamente. (3) TRIAGEM — analista revisa: verifica placa legível, veículo correto, velocidade coerente, enquadramento correto, qualidade da imagem. Decide: Validar (segue p/ auditoria), Descartar (motivo obrigatório) ou Reabrir. (4) AUDITORIA — auditor confere trabalho do analista: Confirmar (segue p/ exportação), Rejeitar (volta p/ triagem) ou Observar. (5) EXPORTAÇÃO — sistema gera arquivo (RENAINF/XML/TXT/CSV), valida 7 critérios automaticamente e envia ao órgão (DETRAN/DER/PRF) via SFTP, API ou download. Consulte o guia completo na documentação: Infrações → Guia Completo.",

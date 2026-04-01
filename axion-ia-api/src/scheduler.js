@@ -58,12 +58,15 @@ async function executarCiclo() {
 
   let tickets = [];
   try {
-    tickets = await buscarTickets({ mode: 0, count: 50 }); // mode 0 = não respondidos
+    tickets = await buscarTickets({ mode: "unanswered", count: 50 });
   } catch (err) {
     estado.erros++;
     registrarLog({ tipo: "erro", msg: `Falha ao buscar tickets: ${err.message}` });
     return;
   }
+
+  // Padrões de tickets que NÃO devem ser auto-respondidos
+  const PADROES_EXCLUIDOS = /implementa[çc]|melhoria|vers[aã]o \d|feature|solicita[çc]|desenvolvimento|api inmetro|api ipem|renova[çc]|licitação|contrato novo|proposta/i;
 
   const novos = tickets.filter(t => !estado.tickets_vistos.has(t.IssueID));
 
@@ -76,9 +79,24 @@ async function executarCiclo() {
 
   for (const ticket of novos) {
     estado.tickets_vistos.add(ticket.IssueID);
+
+    // Filtros de segurança: não auto-responder estes casos
+    if (ticket.AssignedToUserID !== null) {
+      registrarLog({ tipo: "info", ticketId: ticket.IssueID, msg: `Ignorado: já atribuído a técnico` });
+      continue;
+    }
+    if (ticket.Priority >= 2) {
+      registrarLog({ tipo: "info", ticketId: ticket.IssueID, msg: `Ignorado: prioridade Alta/Crítica (#${ticket.Priority})` });
+      continue;
+    }
+    if (PADROES_EXCLUIDOS.test(ticket.Subject || "")) {
+      registrarLog({ tipo: "info", ticketId: ticket.IssueID, msg: `Ignorado: padrão de desenvolvimento/melhoria detectado` });
+      continue;
+    }
+
     estado.tickets_processados++;
 
-    const texto = `${ticket.Subject || ""} ${ticket.Body || ""}`.trim();
+    const texto = (ticket.Subject || "").trim();
     if (!texto) continue;
 
     let resultado;
