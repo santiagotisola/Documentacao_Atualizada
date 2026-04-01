@@ -32,7 +32,10 @@ const config: Config = {
   },
 
   scripts: [
-    '/AxTon.Docs/widget/axton-suporte.js',
+    {
+      src: '/AxTon.Docs/widget/axton-suporte.js',
+      defer: true,
+    },
   ],
 
   presets: [
