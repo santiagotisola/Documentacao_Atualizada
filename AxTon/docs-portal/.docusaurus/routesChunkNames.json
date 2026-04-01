@@ -1,290 +1,251 @@
 {
-  "/AxTon.Docs/__docusaurus/debug-eb1": {
-    "__comp": "__comp---theme-debug-config-23-a-2ff",
+  "/AxTon.Docs/-57c": {
+    "__comp": "5e95c892",
     "__context": {
-      "plugin": "plugin---ax-ton-docs-docusaurus-debugb-38-288"
+      "plugin": "aba21aa0"
     }
   },
-  "/AxTon.Docs/__docusaurus/debug/config-a25": {
-    "__comp": "__comp---theme-debug-config-23-a-2ff",
-    "__context": {
-      "plugin": "plugin---ax-ton-docs-docusaurus-debugb-38-288"
-    }
+  "/AxTon.Docs/-2ba": {
+    "__comp": "a7bd4aaa",
+    "__props": "d2e89c1d"
   },
-  "/AxTon.Docs/__docusaurus/debug/content-dd8": {
-    "__comp": "__comp---theme-debug-contentba-8-ce7",
-    "__context": {
-      "plugin": "plugin---ax-ton-docs-docusaurus-debugb-38-288"
-    },
-    "__props": "__props---ax-ton-docs-docusaurus-debug-contente-80-4ea"
-  },
-  "/AxTon.Docs/__docusaurus/debug/globalData-b0a": {
-    "__comp": "__comp---theme-debug-global-dataede-0fa",
-    "__context": {
-      "plugin": "plugin---ax-ton-docs-docusaurus-debugb-38-288"
-    }
-  },
-  "/AxTon.Docs/__docusaurus/debug/metadata-da4": {
-    "__comp": "__comp---theme-debug-site-metadata-68-e-3d4",
-    "__context": {
-      "plugin": "plugin---ax-ton-docs-docusaurus-debugb-38-288"
-    }
-  },
-  "/AxTon.Docs/__docusaurus/debug/registry-2ac": {
-    "__comp": "__comp---theme-debug-registry-679-501",
-    "__context": {
-      "plugin": "plugin---ax-ton-docs-docusaurus-debugb-38-288"
-    }
-  },
-  "/AxTon.Docs/__docusaurus/debug/routes-a29": {
-    "__comp": "__comp---theme-debug-routes-946-699",
-    "__context": {
-      "plugin": "plugin---ax-ton-docs-docusaurus-debugb-38-288"
-    }
-  },
-  "/AxTon.Docs/-cd3": {
-    "__comp": "__comp---theme-docs-root-5-e-9-0b6",
-    "__context": {
-      "plugin": "plugin---ax-ton-docs-aba-605"
-    }
-  },
-  "/AxTon.Docs/-36f": {
-    "__comp": "__comp---theme-doc-version-roota-7-b-5de",
-    "__props": "__props---ax-ton-docs-d-2-e-dbc"
-  },
-  "/AxTon.Docs/-96f": {
-    "__comp": "__comp---theme-doc-roota-94-67a"
+  "/AxTon.Docs/-1b3": {
+    "__comp": "a94703ab"
   },
   "/AxTon.Docs/administracao/perfis-acesso-b23": {
-    "__comp": "__comp---theme-doc-item-178-a40",
-    "content": "content---ax-ton-docs-administracao-perfis-acessoda-3-b25"
+    "__comp": "17896441",
+    "content": "da39af1d"
   },
   "/AxTon.Docs/administracao/permissoes-3c0": {
-    "__comp": "__comp---theme-doc-item-178-a40",
-    "content": "content---ax-ton-docs-administracao-permissoes-2-c-5-be1"
+    "__comp": "17896441",
+    "content": "2c5dcdfc"
   },
   "/AxTon.Docs/administracao/usuarios-1cf": {
-    "__comp": "__comp---theme-doc-item-178-a40",
-    "content": "content---ax-ton-docs-administracao-usuarios-48-a-2ca"
+    "__comp": "17896441",
+    "content": "48a58630"
   },
   "/AxTon.Docs/cadastros-basicos/equipamentos-c6b": {
-    "__comp": "__comp---theme-doc-item-178-a40",
-    "content": "content---ax-ton-docs-cadastros-basicos-equipamentos-70-f-270"
+    "__comp": "17896441",
+    "content": "70f0d96e"
   },
   "/AxTon.Docs/cadastros-basicos/fabricantes-515": {
-    "__comp": "__comp---theme-doc-item-178-a40",
-    "content": "content---ax-ton-docs-cadastros-basicos-fabricantesb-3-b-8da"
+    "__comp": "17896441",
+    "content": "b3b7c356"
   },
   "/AxTon.Docs/cadastros-basicos/grupos-equipamentos-66e": {
-    "__comp": "__comp---theme-doc-item-178-a40",
-    "content": "content---ax-ton-docs-cadastros-basicos-grupos-equipamentos-0-ee-29f"
+    "__comp": "17896441",
+    "content": "0ee82245"
   },
   "/AxTon.Docs/cadastros-basicos/modelos-equipamentos-c9c": {
-    "__comp": "__comp---theme-doc-item-178-a40",
-    "content": "content---ax-ton-docs-cadastros-basicos-modelos-equipamentos-5-e-2-ebc"
+    "__comp": "17896441",
+    "content": "5e2abfed"
   },
   "/AxTon.Docs/cadastros-basicos/tipos-equipamentos-175": {
-    "__comp": "__comp---theme-doc-item-178-a40",
-    "content": "content---ax-ton-docs-cadastros-basicos-tipos-equipamentosc-4-f-3ca"
+    "__comp": "17896441",
+    "content": "c4fd95be"
   },
   "/AxTon.Docs/cadastros/classificacao-veiculos-f01": {
-    "__comp": "__comp---theme-doc-item-178-a40",
-    "content": "content---ax-ton-docs-cadastros-classificacao-veiculos-303-352"
+    "__comp": "17896441",
+    "content": "303723a4"
   },
   "/AxTon.Docs/cadastros/locais-7ad": {
-    "__comp": "__comp---theme-doc-item-178-a40",
-    "content": "content---ax-ton-docs-cadastros-locais-4-ae-d65"
+    "__comp": "17896441",
+    "content": "4aeae46d"
   },
   "/AxTon.Docs/cadastros/sequencial-infracao-022": {
-    "__comp": "__comp---theme-doc-item-178-a40",
-    "content": "content---ax-ton-docs-cadastros-sequencial-infracao-38-e-839"
+    "__comp": "17896441",
+    "content": "38e47568"
   },
   "/AxTon.Docs/controle-acesso/acessos-por-ip-053": {
-    "__comp": "__comp---theme-doc-item-178-a40",
-    "content": "content---ax-ton-docs-controle-acesso-acessos-por-ip-9-bb-b00"
+    "__comp": "17896441",
+    "content": "9bbbe386"
   },
   "/AxTon.Docs/controle-acesso/configurar-permissoes-82c": {
-    "__comp": "__comp---theme-doc-item-178-a40",
-    "content": "content---ax-ton-docs-controle-acesso-configurar-permissoese-1-c-8fe"
+    "__comp": "17896441",
+    "content": "e1c79d1d"
   },
   "/AxTon.Docs/controle-acesso/logs-acesso-126": {
-    "__comp": "__comp---theme-doc-item-178-a40",
-    "content": "content---ax-ton-docs-controle-acesso-logs-acesso-86-e-41e"
+    "__comp": "17896441",
+    "content": "86e7950c"
   },
   "/AxTon.Docs/glossario/infracao-3d8": {
-    "__comp": "__comp---theme-doc-item-178-a40",
-    "content": "content---ax-ton-docs-glossario-infracaof-17-ec3"
+    "__comp": "17896441",
+    "content": "f17844b8"
   },
   "/AxTon.Docs/glossario/mdfe-d2e": {
-    "__comp": "__comp---theme-doc-item-178-a40",
-    "content": "content---ax-ton-docs-glossario-mdfe-9-df-610"
+    "__comp": "17896441",
+    "content": "9df37588"
   },
   "/AxTon.Docs/glossario/nfe-88d": {
-    "__comp": "__comp---theme-doc-item-178-a40",
-    "content": "content---ax-ton-docs-glossario-nfeb-12-f7e"
+    "__comp": "17896441",
+    "content": "b1270dab"
   },
   "/AxTon.Docs/glossario/pbt-875": {
-    "__comp": "__comp---theme-doc-item-178-a40",
-    "content": "content---ax-ton-docs-glossario-pbt-29-c-de7"
+    "__comp": "17896441",
+    "content": "29cdb5f4"
   },
   "/AxTon.Docs/glossario/pesagem-6cc": {
-    "__comp": "__comp---theme-doc-item-178-a40",
-    "content": "content---ax-ton-docs-glossario-pesagem-8-c-8-56e"
+    "__comp": "17896441",
+    "content": "8c898e76"
   },
   "/AxTon.Docs/glossario/triagem-d38": {
-    "__comp": "__comp---theme-doc-item-178-a40",
-    "content": "content---ax-ton-docs-glossario-triagem-734-975"
+    "__comp": "17896441",
+    "content": "7342d917"
   },
   "/AxTon.Docs/infracoes/exportacao-bfe": {
-    "__comp": "__comp---theme-doc-item-178-a40",
-    "content": "content---ax-ton-docs-infracoes-exportacao-2-e-7-e5d"
+    "__comp": "17896441",
+    "content": "2e7aae97"
   },
   "/AxTon.Docs/medicoes/contratos-43e": {
-    "__comp": "__comp---theme-doc-item-178-a40",
-    "content": "content---ax-ton-docs-medicoes-contratos-935-4b2"
+    "__comp": "17896441",
+    "content": "93543a2e"
   },
   "/AxTon.Docs/medicoes/criar-medicao-2e8": {
-    "__comp": "__comp---theme-doc-item-178-a40",
-    "content": "content---ax-ton-docs-medicoes-criar-medicao-257-c5b"
+    "__comp": "17896441",
+    "content": "2571e442"
   },
   "/AxTon.Docs/medicoes/indices-performance-087": {
-    "__comp": "__comp---theme-doc-item-178-a40",
-    "content": "content---ax-ton-docs-medicoes-indices-performanced-3-b-1bc"
+    "__comp": "17896441",
+    "content": "d3b1889f"
   },
   "/AxTon.Docs/medicoes/interrupcoes-157": {
-    "__comp": "__comp---theme-doc-item-178-a40",
-    "content": "content---ax-ton-docs-medicoes-interrupcoes-254-829"
+    "__comp": "17896441",
+    "content": "254cb7e6"
   },
   "/AxTon.Docs/operacoes/alertas-c49": {
-    "__comp": "__comp---theme-doc-item-178-a40",
-    "content": "content---ax-ton-docs-operacoes-alertase-90-7e7"
+    "__comp": "17896441",
+    "content": "e90f85a9"
   },
   "/AxTon.Docs/operacoes/cadastro-operacoes-d01": {
-    "__comp": "__comp---theme-doc-item-178-a40",
-    "content": "content---ax-ton-docs-operacoes-cadastro-operacoesc-92-544"
+    "__comp": "17896441",
+    "content": "c920a03e"
   },
   "/AxTon.Docs/operacoes/consulta-placas-a35": {
-    "__comp": "__comp---theme-doc-item-178-a40",
-    "content": "content---ax-ton-docs-operacoes-consulta-placasf-8-b-a27"
+    "__comp": "17896441",
+    "content": "f8b4062e"
   },
   "/AxTon.Docs/operacoes/eventos-equipamentos-d9f": {
-    "__comp": "__comp---theme-doc-item-178-a40",
-    "content": "content---ax-ton-docs-operacoes-eventos-equipamentos-1-d-6-b95"
+    "__comp": "17896441",
+    "content": "1d627100"
   },
   "/AxTon.Docs/operacoes/monitoramento-online-726": {
-    "__comp": "__comp---theme-doc-item-178-a40",
-    "content": "content---ax-ton-docs-operacoes-monitoramento-online-5-d-4-0fc"
+    "__comp": "17896441",
+    "content": "5d45e9fe"
   },
   "/AxTon.Docs/pesagem/liberar-pesagem-947": {
-    "__comp": "__comp---theme-doc-item-178-a40",
-    "content": "content---ax-ton-docs-pesagem-liberar-pesagem-1-ea-fcd"
+    "__comp": "17896441",
+    "content": "1ea1cb1d"
   },
   "/AxTon.Docs/pesagem/motivos-3bf": {
-    "__comp": "__comp---theme-doc-item-178-a40",
-    "content": "content---ax-ton-docs-pesagem-motivosa-1-d-bbc"
+    "__comp": "17896441",
+    "content": "a1d6bcbe"
   },
   "/AxTon.Docs/pesagem/postos-c9b": {
-    "__comp": "__comp---theme-doc-item-178-a40",
-    "content": "content---ax-ton-docs-pesagem-postosca-0-889"
+    "__comp": "17896441",
+    "content": "ca0ed353"
   },
   "/AxTon.Docs/pesagem/reclassificar-5b4": {
-    "__comp": "__comp---theme-doc-item-178-a40",
-    "content": "content---ax-ton-docs-pesagem-reclassificar-489-d4b"
+    "__comp": "17896441",
+    "content": "48985189"
   },
   "/AxTon.Docs/pesagem/ticket-aberto-d79": {
-    "__comp": "__comp---theme-doc-item-178-a40",
-    "content": "content---ax-ton-docs-pesagem-ticket-aberto-9-da-675"
+    "__comp": "17896441",
+    "content": "9da16a4d"
   },
   "/AxTon.Docs/pesagem/ticket-fechado-64b": {
-    "__comp": "__comp---theme-doc-item-178-a40",
-    "content": "content---ax-ton-docs-pesagem-ticket-fechado-998-fe3"
+    "__comp": "17896441",
+    "content": "99893a14"
   },
   "/AxTon.Docs/primeiros-passos/dashboard-697": {
-    "__comp": "__comp---theme-doc-item-178-a40",
-    "content": "content---ax-ton-docs-primeiros-passos-dashboard-4-da-8c6"
+    "__comp": "17896441",
+    "content": "4da46b3d"
   },
   "/AxTon.Docs/primeiros-passos/login-1f2": {
-    "__comp": "__comp---theme-doc-item-178-a40",
-    "content": "content---ax-ton-docs-primeiros-passos-logincfe-734"
+    "__comp": "17896441",
+    "content": "cfe7a252"
   },
   "/AxTon.Docs/primeiros-passos/navegacao-7b0": {
-    "__comp": "__comp---theme-doc-item-178-a40",
-    "content": "content---ax-ton-docs-primeiros-passos-navegacaoef-7-273"
+    "__comp": "17896441",
+    "content": "ef72aaeb"
+  },
+  "/AxTon.Docs/referencia-tecnica/banco-de-dados-733": {
+    "__comp": "17896441",
+    "content": "3d553a7b"
   },
   "/AxTon.Docs/relatorios/falhas-sequenciais-8f0": {
-    "__comp": "__comp---theme-doc-item-178-a40",
-    "content": "content---ax-ton-docs-relatorios-falhas-sequenciais-575-7b8"
+    "__comp": "17896441",
+    "content": "5752e780"
   },
   "/AxTon.Docs/relatorios/fluxo-diario-veiculos-4d6": {
-    "__comp": "__comp---theme-doc-item-178-a40",
-    "content": "content---ax-ton-docs-relatorios-fluxo-diario-veiculos-70-c-4d3"
+    "__comp": "17896441",
+    "content": "70cc1e6b"
   },
   "/AxTon.Docs/relatorios/mapa-fluxo-passagens-973": {
-    "__comp": "__comp---theme-doc-item-178-a40",
-    "content": "content---ax-ton-docs-relatorios-mapa-fluxo-passagenscc-1-480"
+    "__comp": "17896441",
+    "content": "cc1bd28f"
   },
   "/AxTon.Docs/relatorios/power-bi-51e": {
-    "__comp": "__comp---theme-doc-item-178-a40",
-    "content": "content---ax-ton-docs-relatorios-power-bi-039-8ab"
+    "__comp": "17896441",
+    "content": "039b7c99"
   },
   "/AxTon.Docs/relatorios/processamento-imagens-c28": {
-    "__comp": "__comp---theme-doc-item-178-a40",
-    "content": "content---ax-ton-docs-relatorios-processamento-imagens-2-aa-8cc"
+    "__comp": "17896441",
+    "content": "2aa78d83"
   },
   "/AxTon.Docs/relatorios/processamento-por-usuario-f62": {
-    "__comp": "__comp---theme-doc-item-178-a40",
-    "content": "content---ax-ton-docs-relatorios-processamento-por-usuario-536-12a"
+    "__comp": "17896441",
+    "content": "53638fa6"
   },
   "/AxTon.Docs/relatorios/relatorio-discrepancias-94d": {
-    "__comp": "__comp---theme-doc-item-178-a40",
-    "content": "content---ax-ton-docs-relatorios-relatorio-discrepancias-8-f-3-f2e"
+    "__comp": "17896441",
+    "content": "8f39e463"
   },
   "/AxTon.Docs/relatorios/relatorio-infracoes-0b2": {
-    "__comp": "__comp---theme-doc-item-178-a40",
-    "content": "content---ax-ton-docs-relatorios-relatorio-infracoesd-90-e97"
+    "__comp": "17896441",
+    "content": "d90a8472"
   },
   "/AxTon.Docs/relatorios/relatorio-nfe-6db": {
-    "__comp": "__comp---theme-doc-item-178-a40",
-    "content": "content---ax-ton-docs-relatorios-relatorio-nfec-32-00b"
+    "__comp": "17896441",
+    "content": "c326d5a8"
   },
   "/AxTon.Docs/relatorios/relatorio-passagens-5fe": {
-    "__comp": "__comp---theme-doc-item-178-a40",
-    "content": "content---ax-ton-docs-relatorios-relatorio-passagens-522-2bb"
+    "__comp": "17896441",
+    "content": "522bf347"
   },
   "/AxTon.Docs/sistema/camera-ip-35a": {
-    "__comp": "__comp---theme-doc-item-178-a40",
-    "content": "content---ax-ton-docs-sistema-camera-ip-6-e-2-43d"
+    "__comp": "17896441",
+    "content": "6e2000cf"
   },
   "/AxTon.Docs/sistema/configuracoes-635": {
-    "__comp": "__comp---theme-doc-item-178-a40",
-    "content": "content---ax-ton-docs-sistema-configuracoes-656-94d"
+    "__comp": "17896441",
+    "content": "656178e3"
   },
   "/AxTon.Docs/veiculos/classificacoes-veiculos-28d": {
-    "__comp": "__comp---theme-doc-item-178-a40",
-    "content": "content---ax-ton-docs-veiculos-classificacoes-veiculoscfc-57b"
+    "__comp": "17896441",
+    "content": "cfc4e723"
   },
   "/AxTon.Docs/veiculos/cores-c25": {
-    "__comp": "__comp---theme-doc-item-178-a40",
-    "content": "content---ax-ton-docs-veiculos-coresd-36-6fa"
+    "__comp": "17896441",
+    "content": "d36e39aa"
   },
   "/AxTon.Docs/veiculos/marcas-veiculos-c14": {
-    "__comp": "__comp---theme-doc-item-178-a40",
-    "content": "content---ax-ton-docs-veiculos-marcas-veiculos-012-dfd"
+    "__comp": "17896441",
+    "content": "0120f76e"
   },
   "/AxTon.Docs/veiculos/modelos-veiculos-3d9": {
-    "__comp": "__comp---theme-doc-item-178-a40",
-    "content": "content---ax-ton-docs-veiculos-modelos-veiculos-63-e-8ad"
+    "__comp": "17896441",
+    "content": "63ea75ab"
   },
   "/AxTon.Docs/veiculos/municipios-2ca": {
-    "__comp": "__comp---theme-doc-item-178-a40",
-    "content": "content---ax-ton-docs-veiculos-municipios-3-fc-cf4"
+    "__comp": "17896441",
+    "content": "3fc4d950"
   },
   "/AxTon.Docs/veiculos/tipos-veiculos-c29": {
-    "__comp": "__comp---theme-doc-item-178-a40",
-    "content": "content---ax-ton-docs-veiculos-tipos-veiculos-0-c-1-6a7"
+    "__comp": "17896441",
+    "content": "0c1aca50"
   },
   "/AxTon.Docs/-e2c": {
-    "__comp": "__comp---theme-doc-item-178-a40",
-    "content": "content---ax-ton-docs-0-e-3-8bf"
+    "__comp": "17896441",
+    "content": "0e384e19"
   }
 }

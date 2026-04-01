@@ -191,6 +191,11 @@
               "sidebar": "manualSidebar"
             },
             {
+              "id": "referencia-tecnica/banco-de-dados",
+              "path": "/AxTon.Docs/referencia-tecnica/banco-de-dados",
+              "sidebar": "manualSidebar"
+            },
+            {
               "id": "relatorios/falhas-sequenciais",
               "path": "/AxTon.Docs/relatorios/falhas-sequenciais"
             },

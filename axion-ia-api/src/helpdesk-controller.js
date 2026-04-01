@@ -1,6 +1,7 @@
 import { buscarTickets, buscarTicket, buscarComentarios, responderTicket, buscarCategorias, criarTicketUsuario } from "./jitbit.js";
 import { gerarResposta } from "./engine.js";
 import { salvarHistorico } from "./logger.js";
+import * as scheduler from "./scheduler.js";
 
 /**
  * GET /api/helpdesk/tickets — Lista tickets não respondidos
@@ -202,4 +203,45 @@ export async function criarChamado(req, res) {
     }
     return res.status(500).json({ erro: "Erro ao criar chamado", detalhe: error.message });
   }
+}
+
+/**
+ * GET /api/helpdesk/polling — Status do polling automático
+ */
+export function statusPolling(req, res) {
+  return res.json(scheduler.obterStatus());
+}
+
+/**
+ * POST /api/helpdesk/polling/iniciar — Ativa o polling
+ * Body: { intervalo: 2 } (minutos, opcional)
+ */
+export function iniciarPolling(req, res) {
+  const intervalo = req.body?.intervalo || process.env.POLLING_INTERVAL || 2;
+  const status = scheduler.iniciar(intervalo);
+  return res.json({ mensagem: "Polling iniciado", ...status });
+}
+
+/**
+ * POST /api/helpdesk/polling/pausar — Pausa o polling
+ */
+export function pausarPolling(req, res) {
+  const status = scheduler.pausar();
+  return res.json({ mensagem: "Polling pausado", ...status });
+}
+
+/**
+ * POST /api/helpdesk/polling/retomar — Retoma o polling pausado
+ */
+export function retomarPolling(req, res) {
+  const status = scheduler.retomar();
+  return res.json({ mensagem: "Polling retomado", ...status });
+}
+
+/**
+ * POST /api/helpdesk/polling/limpar — Limpa cache de tickets vistos
+ */
+export function limparPolling(req, res) {
+  const resultado = scheduler.limparTicketsVistos();
+  return res.json({ mensagem: "Cache limpo", ...resultado });
 }

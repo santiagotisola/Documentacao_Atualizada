@@ -1,6 +1,6 @@
 import express from "express";
 import { processarMensagem, consultarHistorico, consultarPendentes, consultarEstatisticas, treinarIA, consultarLogsMongo, consultarAnalise, listarEntradasKB } from "./controller.js";
-import { listarTickets, detalheTicket, classificarTicket, responderTicketIA, processarPendentes as processarHelpdeskPendentes, listarCategorias, criarChamado } from "./helpdesk-controller.js";
+import { listarTickets, detalheTicket, classificarTicket, responderTicketIA, processarPendentes as processarHelpdeskPendentes, listarCategorias, criarChamado, statusPolling, iniciarPolling, pausarPolling, retomarPolling, limparPolling } from "./helpdesk-controller.js";
 import { statusConexao, resumoGeral, listarEquipamentos, listarOperacoes, statsInfracoes, heartbeatEquipamentos, listarTabelas, listarMonitoramentos, ultimasPassagens, statsTriagens } from "./axhub-controller.js";
 import { statusConexao as axtonStatus, resumoGeral as axtonResumo, listarTabelas as axtonTabelas, ultimasPesagens as axtonPesagens, ultimasInfracoes as axtonInfracoes, heartbeatEquipamentos as axtonHeartbeat } from "./axton-controller.js";
 import { statusConexao as axcrossStatus, resumoGeral as axcrossResumo, listarEquipamentos as axcrossEquipamentos, statsPassagens as axcrossPassagens, heartbeatEquipamentos as axcrossHeartbeat, listarTabelas as axcrossTabelas, listarLocais as axcrossLocais, listarOperacoes as axcrossOperacoes } from "./axcross-controller.js";
@@ -30,6 +30,13 @@ router.post("/helpdesk/responder/:id", responderTicketIA);
 router.post("/helpdesk/processar", processarHelpdeskPendentes);
 router.get("/helpdesk/categorias", listarCategorias);
 router.post("/helpdesk/criar", criarChamado);
+
+// Polling automático
+router.get("/helpdesk/polling", statusPolling);
+router.post("/helpdesk/polling/iniciar", iniciarPolling);
+router.post("/helpdesk/polling/pausar", pausarPolling);
+router.post("/helpdesk/polling/retomar", retomarPolling);
+router.post("/helpdesk/polling/limpar", limparPolling);
 
 // AxHub — SQL Server
 router.get("/axhub/status", statusConexao);
