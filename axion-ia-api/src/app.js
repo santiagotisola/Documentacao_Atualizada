@@ -5,6 +5,7 @@ import routes from "./routes.js";
 import { conectar as conectarAxHub } from "./services/axhub-db.js";
 import { conectar as conectarAxTon } from "./services/axton-db.js";
 import { conectar as conectarAxCross } from "./services/axcross-db.js";
+import { iniciar as iniciarPolling } from "./scheduler.js";
 
 dotenv.config();
 
@@ -90,6 +91,14 @@ async function iniciar() {
 
   app.listen(PORT, () => {
     console.log(`🚀 AxionIA API rodando na porta ${PORT}`);
+
+    // Iniciar polling automático do Jitbit (se credenciais configuradas)
+    if (process.env.JITBIT_URL && process.env.JITBIT_USER && process.env.JITBIT_PASS) {
+      const intervalo = process.env.POLLING_INTERVAL || 2;
+      iniciarPolling(intervalo);
+    } else {
+      console.log("ℹ️  Polling Jitbit inativo — configure JITBIT_URL, JITBIT_USER e JITBIT_PASS no .env");
+    }
   });
 }
 

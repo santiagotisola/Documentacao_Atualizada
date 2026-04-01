@@ -3,51 +3,16 @@ import ComponentCreator from '@docusaurus/ComponentCreator';
 
 export default [
   {
-    path: '/AxTon.Docs/__docusaurus/debug',
-    component: ComponentCreator('/AxTon.Docs/__docusaurus/debug', 'eb1'),
-    exact: true
-  },
-  {
-    path: '/AxTon.Docs/__docusaurus/debug/config',
-    component: ComponentCreator('/AxTon.Docs/__docusaurus/debug/config', 'a25'),
-    exact: true
-  },
-  {
-    path: '/AxTon.Docs/__docusaurus/debug/content',
-    component: ComponentCreator('/AxTon.Docs/__docusaurus/debug/content', 'dd8'),
-    exact: true
-  },
-  {
-    path: '/AxTon.Docs/__docusaurus/debug/globalData',
-    component: ComponentCreator('/AxTon.Docs/__docusaurus/debug/globalData', 'b0a'),
-    exact: true
-  },
-  {
-    path: '/AxTon.Docs/__docusaurus/debug/metadata',
-    component: ComponentCreator('/AxTon.Docs/__docusaurus/debug/metadata', 'da4'),
-    exact: true
-  },
-  {
-    path: '/AxTon.Docs/__docusaurus/debug/registry',
-    component: ComponentCreator('/AxTon.Docs/__docusaurus/debug/registry', '2ac'),
-    exact: true
-  },
-  {
-    path: '/AxTon.Docs/__docusaurus/debug/routes',
-    component: ComponentCreator('/AxTon.Docs/__docusaurus/debug/routes', 'a29'),
-    exact: true
-  },
-  {
     path: '/AxTon.Docs/',
-    component: ComponentCreator('/AxTon.Docs/', 'cd3'),
+    component: ComponentCreator('/AxTon.Docs/', '57c'),
     routes: [
       {
         path: '/AxTon.Docs/',
-        component: ComponentCreator('/AxTon.Docs/', '36f'),
+        component: ComponentCreator('/AxTon.Docs/', '2ba'),
         routes: [
           {
             path: '/AxTon.Docs/',
-            component: ComponentCreator('/AxTon.Docs/', '96f'),
+            component: ComponentCreator('/AxTon.Docs/', '1b3'),
             routes: [
               {
                 path: '/AxTon.Docs/administracao/perfis-acesso',
@@ -260,6 +225,12 @@ export default [
               {
                 path: '/AxTon.Docs/primeiros-passos/navegacao',
                 component: ComponentCreator('/AxTon.Docs/primeiros-passos/navegacao', '7b0'),
+                exact: true,
+                sidebar: "manualSidebar"
+              },
+              {
+                path: '/AxTon.Docs/referencia-tecnica/banco-de-dados',
+                component: ComponentCreator('/AxTon.Docs/referencia-tecnica/banco-de-dados', '733'),
                 exact: true,
                 sidebar: "manualSidebar"
               },

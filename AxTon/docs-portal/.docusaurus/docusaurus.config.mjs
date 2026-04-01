@@ -59,7 +59,10 @@ export default {
     "localeConfigs": {}
   },
   "scripts": [
-    "/AxTon.Docs/widget/axton-suporte.js"
+    {
+      "src": "/AxTon.Docs/widget/axton-suporte.js",
+      "defer": true
+    }
   ],
   "presets": [
     [

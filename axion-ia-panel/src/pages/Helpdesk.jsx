@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { api } from "../services/api";
 
 export default function Helpdesk() {
@@ -7,11 +7,17 @@ export default function Helpdesk() {
   const [ticketSel, setTicketSel]   = useState(null);
   const [detalhes, setDetalhes]     = useState(null);
   const [carregandoDet, setCarregandoDet] = useState(false);
-  const [modo, setModo]             = useState(0); // 0 = abertos, 1 = não respondidos, 3 = todos
-  const [acao, setAcao]             = useState(null); // { tipo, ticketId, resultado, enviando }
+  const [modo, setModo]             = useState(0);
+  const [acao, setAcao]             = useState(null);
   const [novoTicket, setNovoTicket] = useState({ subject: "", body: "", categoryId: "" });
   const [categorias, setCategorias] = useState([]);
-  const [view, setView]             = useState("lista"); // lista | detalhe | criar
+  const [view, setView]             = useState("lista"); // lista | detalhe | criar | polling
+
+  // Polling
+  const [polling, setPolling]       = useState(null);
+  const [intervalo, setIntervalo]   = useState(2);
+  const [pollingAcao, setPollingAcao] = useState(null); // "iniciando" | "pausando" | null
+  const pollingTimer = useRef(null);
 
   const MODOS = [
     { value: 0,  label: "Abertos" },
@@ -23,7 +29,44 @@ export default function Helpdesk() {
     api.get("/helpdesk/categorias")
       .then(r => setCategorias(r.data.categorias || []))
       .catch(() => {});
+    carregarStatusPolling();
   }, []);
+
+  // Atualiza status do polling a cada 10s enquanto a aba estiver aberta
+  useEffect(() => {
+    if (view === "polling") {
+      pollingTimer.current = setInterval(carregarStatusPolling, 10000);
+    } else {
+      clearInterval(pollingTimer.current);
+    }
+    return () => clearInterval(pollingTimer.current);
+  }, [view]);
+
+  function carregarStatusPolling() {
+    api.get("/helpdesk/polling")
+      .then(r => { setPolling(r.data); setIntervalo(r.data.intervalo_minutos || 2); })
+      .catch(() => {});
+  }
+
+  async function controlarPolling(acao) {
+    setPollingAcao(acao);
+    try {
+      if (acao === "iniciar") {
+        const r = await api.post("/helpdesk/polling/iniciar", { intervalo });
+        setPolling(r.data);
+      } else if (acao === "pausar") {
+        const r = await api.post("/helpdesk/polling/pausar");
+        setPolling(r.data);
+      } else if (acao === "retomar") {
+        const r = await api.post("/helpdesk/polling/retomar");
+        setPolling(r.data);
+      } else if (acao === "limpar") {
+        await api.post("/helpdesk/polling/limpar");
+        carregarStatusPolling();
+      }
+    } catch { /* silencioso */ }
+    setPollingAcao(null);
+  }
 
   useEffect(() => {
     carregarTickets();
@@ -95,7 +138,7 @@ export default function Helpdesk() {
 
       {/* Barra superior */}
       <div className="filters-row" style={{ marginBottom: "1.25rem" }}>
-        {view !== "criar" ? (
+        {view !== "criar" && view !== "polling" ? (
           <>
             {MODOS.map(m => (
               <button
@@ -121,6 +164,18 @@ export default function Helpdesk() {
             >
               ↻ Atualizar
             </button>
+            <button
+              className="btn"
+              style={{
+                border: `1px solid ${polling?.ativo ? "var(--success)" : "var(--border)"}`,
+                color: polling?.ativo ? "var(--success)" : "var(--text-muted)",
+                background: "var(--surface)",
+              }}
+              onClick={() => { setView("polling"); carregarStatusPolling(); }}
+              title="Polling automático"
+            >
+              {polling?.ativo ? "⏱ Polling ON" : "⏱ Polling OFF"}
+            </button>
           </>
         ) : (
           <button
@@ -132,6 +187,158 @@ export default function Helpdesk() {
           </button>
         )}
       </div>
+
+      {/* Vista: Polling */}
+      {view === "polling" && (
+        <div style={{ maxWidth: 720 }}>
+          <h3 style={{ marginBottom: "1.25rem", fontSize: "1.1rem" }}>⏱ Polling Automático</h3>
+
+          {/* Status */}
+          <div className="card" style={{ marginBottom: "1.25rem" }}>
+            <div style={{ display: "flex", gap: "1.5rem", flexWrap: "wrap", alignItems: "center", marginBottom: "1rem" }}>
+              <div>
+                <div style={{ fontSize: "0.75rem", color: "var(--text-muted)", marginBottom: 3 }}>STATUS</div>
+                <span style={{
+                  padding: "4px 12px", borderRadius: 12, fontSize: "0.85rem", fontWeight: 700,
+                  background: polling?.ativo ? "rgba(34,197,94,0.12)" : "rgba(107,114,128,0.12)",
+                  color: polling?.ativo ? "var(--success)" : "var(--text-muted)"
+                }}>
+                  {polling?.ativo ? "● ATIVO" : "○ PAUSADO"}
+                </span>
+              </div>
+              <div>
+                <div style={{ fontSize: "0.75rem", color: "var(--text-muted)", marginBottom: 3 }}>INTERVALO</div>
+                <span style={{ fontWeight: 600 }}>{polling?.intervalo_minutos || "—"} min</span>
+              </div>
+              <div>
+                <div style={{ fontSize: "0.75rem", color: "var(--text-muted)", marginBottom: 3 }}>ÚLTIMA EXECUÇÃO</div>
+                <span style={{ fontSize: "0.8rem" }}>{polling?.ultima_execucao ? new Date(polling.ultima_execucao).toLocaleTimeString("pt-BR") : "—"}</span>
+              </div>
+              <div>
+                <div style={{ fontSize: "0.75rem", color: "var(--text-muted)", marginBottom: 3 }}>PRÓXIMA</div>
+                <span style={{ fontSize: "0.8rem" }}>{polling?.proxima_execucao ? new Date(polling.proxima_execucao).toLocaleTimeString("pt-BR") : "—"}</span>
+              </div>
+            </div>
+
+            {/* Stats */}
+            {polling?.stats && (
+              <div style={{ display: "flex", gap: "1rem", flexWrap: "wrap", paddingTop: "0.75rem", borderTop: "1px solid var(--border)" }}>
+                {[
+                  { label: "Ciclos", val: polling.stats.execucoes, color: "var(--accent)" },
+                  { label: "Processados", val: polling.stats.tickets_processados, color: "var(--accent)" },
+                  { label: "Auto-resp.", val: polling.stats.auto_respondidos, color: "var(--success)" },
+                  { label: "Sugeridos", val: polling.stats.sugeridos, color: "#f59e0b" },
+                  { label: "Escalados", val: polling.stats.escalados, color: "#8b5cf6" },
+                  { label: "Erros", val: polling.stats.erros, color: "var(--danger)" },
+                ].map(s => (
+                  <div key={s.label} style={{ minWidth: 70 }}>
+                    <div style={{ fontSize: "1.3rem", fontWeight: 700, color: s.color }}>{s.val}</div>
+                    <div style={{ fontSize: "0.7rem", color: "var(--text-muted)" }}>{s.label}</div>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+
+          {/* Controles */}
+          <div className="card" style={{ marginBottom: "1.25rem" }}>
+            <h4 style={{ fontSize: "0.9rem", marginBottom: "0.75rem" }}>Controles</h4>
+            <div style={{ display: "flex", gap: "0.75rem", alignItems: "center", flexWrap: "wrap" }}>
+              <div style={{ display: "flex", alignItems: "center", gap: "0.4rem" }}>
+                <label style={{ fontSize: "0.8rem", color: "var(--text-muted)" }}>Intervalo (min):</label>
+                <input
+                  type="number" min="1" max="60" value={intervalo}
+                  onChange={e => setIntervalo(parseInt(e.target.value) || 2)}
+                  style={{ width: 60, padding: "4px 8px", background: "var(--surface)", border: "1px solid var(--border)", borderRadius: 6, color: "var(--text)", fontSize: "0.85rem" }}
+                />
+              </div>
+              {!polling?.ativo ? (
+                <button
+                  className="btn btn-primary"
+                  onClick={() => controlarPolling("iniciar")}
+                  disabled={!!pollingAcao}
+                  style={{ fontSize: "0.85rem" }}
+                >
+                  {pollingAcao === "iniciar" ? "Iniciando..." : "▶ Iniciar Polling"}
+                </button>
+              ) : (
+                <button
+                  className="btn"
+                  onClick={() => controlarPolling("pausar")}
+                  disabled={!!pollingAcao}
+                  style={{ fontSize: "0.85rem", background: "var(--surface)", color: "var(--text-muted)", border: "1px solid var(--border)" }}
+                >
+                  {pollingAcao === "pausar" ? "Pausando..." : "⏸ Pausar"}
+                </button>
+              )}
+              <button
+                className="btn"
+                onClick={() => controlarPolling("limpar")}
+                disabled={!!pollingAcao}
+                style={{ fontSize: "0.85rem", background: "var(--surface)", color: "var(--text-muted)", border: "1px solid var(--border)" }}
+                title="Limpa os IDs de tickets já processados para reprocessar do zero"
+              >
+                🗑 Limpar Cache
+              </button>
+              <button
+                className="btn"
+                onClick={carregarStatusPolling}
+                style={{ fontSize: "0.85rem", background: "var(--surface)", color: "var(--text-muted)", border: "1px solid var(--border)",  marginLeft: "auto" }}
+              >
+                ↻ Atualizar
+              </button>
+            </div>
+            <p style={{ fontSize: "0.75rem", color: "var(--text-muted)", marginTop: "0.75rem", marginBottom: 0 }}>
+              Score ≥ 85% → resposta automática · Score ≥ 65% → sugestão para humano · Score &lt; 65% → escalado
+            </p>
+          </div>
+
+          {/* Log */}
+          <div className="card">
+            <h4 style={{ fontSize: "0.9rem", marginBottom: "0.75rem" }}>Últimas Execuções</h4>
+            {!polling?.ultimo_log?.length ? (
+              <p style={{ fontSize: "0.85rem", color: "var(--text-muted)" }}>Nenhuma execução registrada ainda.</p>
+            ) : (
+              <div style={{ display: "flex", flexDirection: "column", gap: "0.4rem" }}>
+                {polling.ultimo_log.map((l, i) => (
+                  <div key={i} style={{
+                    padding: "0.5rem 0.75rem", borderRadius: 8, fontSize: "0.78rem",
+                    background: l.tipo === "auto" ? "rgba(34,197,94,0.07)"
+                      : l.tipo === "erro" ? "rgba(239,68,68,0.07)"
+                      : l.tipo === "escalar" ? "rgba(139,92,246,0.07)"
+                      : l.tipo === "sugerir" ? "rgba(245,158,11,0.07)"
+                      : "rgba(255,255,255,0.03)",
+                    border: "1px solid var(--border)"
+                  }}>
+                    <div style={{ display: "flex", gap: "0.75rem", alignItems: "center" }}>
+                      <span style={{ color: "var(--text-muted)", whiteSpace: "nowrap" }}>
+                        {new Date(l.ts).toLocaleTimeString("pt-BR")}
+                      </span>
+                      <span style={{
+                        fontWeight: 700, fontSize: "0.7rem", textTransform: "uppercase",
+                        color: l.tipo === "auto" ? "var(--success)"
+                          : l.tipo === "erro" ? "var(--danger)"
+                          : l.tipo === "escalar" ? "#8b5cf6"
+                          : l.tipo === "sugerir" ? "#f59e0b"
+                          : "var(--accent)"
+                      }}>
+                        {l.tipo}
+                      </span>
+                      {l.ticketId && <span style={{ color: "var(--accent)" }}>#{l.ticketId}</span>}
+                      <span style={{ color: "var(--text-muted)" }}>{l.assunto || l.msg}</span>
+                    </div>
+                    {l.sugestao && (
+                      <div style={{ marginTop: 4, color: "var(--text)", paddingLeft: "calc(60px + 0.75rem)" }}>
+                        {l.sugestao}…
+                      </div>
+                    )}
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+        </div>
+      )}
 
       {/* Vista: Criar ticket */}
       {view === "criar" && (
