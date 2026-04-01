@@ -5,8 +5,12 @@ dotenv.config();
 const JITBIT_BASE = process.env.JITBIT_URL || "https://desk.axiontecnologia.com.br";
 const JITBIT_USER = process.env.JITBIT_USER;
 const JITBIT_PASS = process.env.JITBIT_PASS;
+const JITBIT_TOKEN = process.env.JITBIT_TOKEN;
 
 function getAuthHeader() {
+  if (JITBIT_TOKEN) {
+    return { "Authorization": `Bearer ${JITBIT_TOKEN}` };
+  }
   const credentials = Buffer.from(`${JITBIT_USER}:${JITBIT_PASS}`).toString("base64");
   return { "Authorization": `Basic ${credentials}` };
 }
@@ -28,7 +32,8 @@ async function jitbitRequest(endpoint, method = "GET", body = null) {
   const response = await fetch(url, options);
 
   if (!response.ok) {
-    throw new Error(`Jitbit API ${response.status}: ${response.statusText}`);
+    const body = await response.text().catch(() => "");
+    throw new Error(`Jitbit API ${response.status}: ${body || response.statusText}`);
   }
 
   return response.json();
@@ -36,9 +41,9 @@ async function jitbitRequest(endpoint, method = "GET", body = null) {
 
 /**
  * Buscar tickets (com filtros opcionais)
- * mode: 0=unanswered, 1=all, 2=answered, 3=closed
+ * mode: "unanswered" | "all" | "unclosed" | "handledbyme"
  */
-export async function buscarTickets({ mode = 0, count = 20, sectionId = null } = {}) {
+export async function buscarTickets({ mode = "unanswered", count = 20, sectionId = null } = {}) {
   let endpoint = `/Tickets?mode=${mode}&count=${count}`;
   if (sectionId) endpoint += `&sectionId=${sectionId}`;
   return jitbitRequest(endpoint);
