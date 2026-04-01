@@ -239,38 +239,31 @@ curl http://localhost:3100/api/axton/heartbeat
 
 ---
 
-### Query SQL — pesagens com excesso de PBT hoje
+### Query MongoDB — pesagens com excesso de PBT hoje
 
-```sql
-SELECT
-  p.Placa,
-  p.DataHoraPesagem,
-  i.PBTRegulamentado,
-  i.PBTMedido,
-  i.PBTMedido - i.PBTRegulamentado AS ExcessoKg,
-  i.TipoInfracao
-FROM TBInfracoes i
-JOIN TBPesagens p ON i.IdPesagem = p.IdPesagem
-WHERE CAST(p.DataHoraPesagem AS DATE) = CAST(GETDATE() AS DATE)
-  AND i.TipoInfracao IN ('ExcessPBT', 'ExcessAxlePBT')
-ORDER BY i.PBTMedido DESC;
+```javascript
+// MongoDB Driver (Node.js)
+const hoje = new Date();
+hoje.setHours(0, 0, 0, 0);
+const amanha = new Date(hoje);
+amanha.setDate(amanha.getDate() + 1);
+
+db.collection('Weighing').find({
+  WeighingDate: { $gte: hoje, $lt: amanha },
+  'Infraction.InfractionType': { $in: ['ExcessPBT', 'ExcessAxlePBT'] }
+}).sort({ 'Infraction.InfractionType': 1 }).toArray();
 ```
 
 ---
 
-### Query SQL — infrações ainda não exportadas
+### Query MongoDB — infrações ainda não exportadas
 
-```sql
-SELECT
-  i.IdInfracao,
-  i.Placa,
-  i.DataHoraInfracao,
-  i.TipoInfracao,
-  i.Status
-FROM TBInfracoes i
-WHERE i.StatusExport = 0
-  AND i.Status = 'Auditada'
-ORDER BY i.DataHoraInfracao ASC;
+```javascript
+// MongoDB Driver (Node.js)
+db.collection('Weighing').find({
+  StatusExport: false,
+  Infraction: { $ne: null }
+}).sort({ WeighingDate: 1 }).toArray();
 ```
 
 ---
