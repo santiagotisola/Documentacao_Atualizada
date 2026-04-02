@@ -31,6 +31,7 @@ export default function Helpdesk() {
     { value: 0, label: "Abertos" },
     { value: 1, label: "Nao respondidos" },
     { value: 3, label: "Todos" },
+    { value: 2, label: "Encerrados" },
   ];
 
   useEffect(() => {
