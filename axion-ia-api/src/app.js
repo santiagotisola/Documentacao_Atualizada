@@ -93,11 +93,15 @@ async function iniciar() {
     console.log(`🚀 AxionIA API rodando na porta ${PORT}`);
 
     // Iniciar polling automático do Jitbit (se credenciais configuradas)
-    if (process.env.JITBIT_URL && process.env.JITBIT_USER && process.env.JITBIT_PASS) {
+    const temToken = !!process.env.JITBIT_TOKEN;
+    const temBasic = process.env.JITBIT_URL && process.env.JITBIT_USER && process.env.JITBIT_PASS;
+    if (temToken || temBasic) {
       const intervalo = process.env.POLLING_INTERVAL || 2;
+      const authTipo = temToken ? "Bearer Token" : "Basic Auth";
       iniciarPolling(intervalo);
+      console.log(`🔑 Jitbit auth: ${authTipo}`);
     } else {
-      console.log("ℹ️  Polling Jitbit inativo — configure JITBIT_URL, JITBIT_USER e JITBIT_PASS no .env");
+      console.log("ℹ️  Polling Jitbit inativo — configure JITBIT_TOKEN (ou JITBIT_USER+PASS) no .env");
     }
   });
 }

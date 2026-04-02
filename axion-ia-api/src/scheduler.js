@@ -21,6 +21,14 @@ import { salvarHistorico } from "./logger.js";
 const SCORE_AUTO    = 0.85;
 const SCORE_SUGERIR = 0.65;
 
+// Modo revisão: quando true, NENHUMA resposta é enviada automaticamente
+// Todas ficam na fila aguardando aprovação do atendente
+let modo_revisao = process.env.MODO_REVISAO !== "false"; // default: revisão ativa (desativa com MODO_REVISAO=false)
+
+// Fila de revisão humana
+let fila_seq = 1;
+const fila_revisao = []; // { id, ticketId, assunto, texto, resposta, score, origem, criado_em, status }
+
 // Estado do scheduler (em memória)
 const estado = {
   ativo: false,
@@ -33,8 +41,8 @@ const estado = {
   sugeridos: 0,
   escalados: 0,
   erros: 0,
-  ultimo_log: [],          // últimos 20 registros
-  tickets_vistos: new Set(), // IDs já processados nesta sessão
+  ultimo_log: [],
+  tickets_vistos: new Set(),
 };
 
 let taskCron = null;
@@ -110,7 +118,33 @@ async function executarCiclo() {
 
     const decisao = decidirAcao(resultado.score);
 
-    if (decisao === "AUTO_RESPONDER") {
+    // Se modo revisão ativo: TUDO vai para a fila (nada enviado automático)
+    if (modo_revisao) {
+      const item = {
+        id: fila_seq++,
+        ticketId: ticket.IssueID,
+        assunto: ticket.Subject,
+        texto,
+        resposta: resultado.resposta,
+        score: resultado.score,
+        origem: resultado.origem || "kb",
+        decisao_ia: decisao,
+        criado_em: new Date().toISOString(),
+        status: "pendente",
+      };
+      fila_revisao.push(item);
+      if (decisao === "AUTO_RESPONDER") estado.auto_respondidos++;
+      else if (decisao === "SUGERIR") estado.sugeridos++;
+      else estado.escalados++;
+      registrarLog({
+        tipo: "fila",
+        ticketId: ticket.IssueID,
+        assunto: ticket.Subject,
+        score: resultado.score,
+        msg: `Na fila de revisão (decisão IA: ${decisao}) — aguarda atendente`,
+      });
+    } else if (decisao === "AUTO_RESPONDER") {
+      // Modo automático: envia direto
       try {
         await responderTicket(ticket.IssueID, resultado.resposta);
         estado.auto_respondidos++;
@@ -133,7 +167,6 @@ async function executarCiclo() {
     } else {
       if (decisao === "SUGERIR") estado.sugeridos++;
       else estado.escalados++;
-
       salvarHistorico({
         mensagem: `[POLLING-${decisao} #${ticket.IssueID}] ${texto.substring(0, 100)}`,
         origem: `polling-${decisao.toLowerCase()}`,
@@ -224,4 +257,57 @@ export function limparTicketsVistos() {
   const total = estado.tickets_vistos.size;
   estado.tickets_vistos.clear();
   return { limpos: total };
+}
+
+// ── Fila de revisão ──────────────────────────────────────────────
+
+export function obterFila() {
+  return {
+    modo_revisao,
+    total: fila_revisao.filter(i => i.status === "pendente").length,
+    itens: fila_revisao.slice().reverse(), // mais recentes primeiro
+  };
+}
+
+export function setModoRevisao(ativo) {
+  modo_revisao = !!ativo;
+  return { modo_revisao };
+}
+
+export async function aprovarItem(id, respostaEditada = null) {
+  const item = fila_revisao.find(i => i.id === id && i.status === "pendente");
+  if (!item) throw new Error("Item não encontrado ou já processado");
+  const textoFinal = respostaEditada || item.resposta;
+  await responderTicket(item.ticketId, textoFinal);
+  item.status = "aprovado";
+  item.aprovado_em = new Date().toISOString();
+  item.resposta_enviada = textoFinal;
+  salvarHistorico({
+    mensagem: `[REVISAO-APROVADO #${item.ticketId}] ${item.assunto}`,
+    origem: "revisao-humana",
+    resposta: textoFinal
+  });
+  registrarLog({
+    tipo: "auto",
+    ticketId: item.ticketId,
+    assunto: item.assunto,
+    score: item.score,
+    msg: respostaEditada ? "Aprovado com edição pelo atendente" : "Aprovado pelo atendente",
+  });
+  return item;
+}
+
+export function rejeitarItem(id, motivo = "") {
+  const item = fila_revisao.find(i => i.id === id && i.status === "pendente");
+  if (!item) throw new Error("Item não encontrado ou já processado");
+  item.status = "rejeitado";
+  item.rejeitado_em = new Date().toISOString();
+  item.motivo_rejeicao = motivo;
+  registrarLog({
+    tipo: "info",
+    ticketId: item.ticketId,
+    assunto: item.assunto,
+    msg: `Rejeitado pelo atendente${motivo ? ": " + motivo : ""}`
+  });
+  return item;
 }
