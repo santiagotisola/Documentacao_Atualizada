@@ -574,3 +574,24 @@ R: Reduzir o período nos filtros. Períodos muito grandes aumentam o tempo de p
 
 **P: Não consigo acessar um relatório.**
 R: Verificar se o perfil do usuário tem permissão "Visualizar" no módulo Relatórios (Controle de Acesso → Permissões).
+
+---
+
+## 14. CHAMADOS RESOLVIDOS — BASE DE APRENDIZADO
+
+> Exemplos reais de chamados atendidos, para referência em situações similares.
+
+### Acesso / Cadastro de Usuário
+
+**Chamado:** Cadastro de Usuário | Problema de acesso/login
+**Situação:** Usuário não conseguia acessar o sistema. Sem cadastro identificado.
+**Análise:** Usuário sem cadastro, não identificado comportamento relacionado ao cenário informado.
+**Causa:** Credenciais incorretas ou usuário sem permissão, ou sem cadastro.
+**Ação realizada:**
+1. Acessar Controle de Acesso → Usuários → + Novo
+2. Preencher Nome, Login (padrão: nome.sobrenome), E-mail
+3. Selecionar Perfil de Acesso conforme função
+4. Marcar Ativo = Sim
+5. Definir senha temporária e comunicar ao usuário
+**Resultado:** Cadastro realizado com sucesso. Usuário com acesso liberado.
+**Palavras-chave:** sem cadastro, criar usuário, liberar acesso, novo usuário, não consegue entrar, usuário não existe

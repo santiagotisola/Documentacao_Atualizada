@@ -122,7 +122,14 @@
         "usuário",
         "cadastrar",
         "registro",
-        "conta"
+        "conta",
+        "liberar acesso",
+        "dar acesso",
+        "sem cadastro",
+        "não tem cadastro",
+        "novo funcionário",
+        "criar conta",
+        "acesso novo usuário"
       ],
       "path": "Controle de Acesso → Usuários",
       "content": "Para criar um novo usuário, primeiro crie um Perfil de Acesso, depois configure as Permissões e então cadastre o usuário vinculando ao perfil.",

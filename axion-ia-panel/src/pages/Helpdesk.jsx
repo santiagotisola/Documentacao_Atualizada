@@ -158,7 +158,7 @@ export default function Helpdesk() {
       <div className="filters-row" style={{ marginBottom: "1.25rem", gap: "0.5rem", flexWrap: "wrap" }}>
         {view === "criar" ? (
           <button className="btn" style={{ background: "var(--surface)", color: "var(--text-muted)", border: "1px solid var(--border)" }} onClick={() => setView("lista")}>
-            <- Voltar
+            ← Voltar
           </button>
         ) : (
           <>
@@ -189,7 +189,7 @@ export default function Helpdesk() {
 
             {(view === "polling" || view === "fila" || view === "detalhe") && (
               <button className="btn" style={{ background: "var(--surface)", color: "var(--text-muted)", border: "1px solid var(--border)", marginLeft: "auto" }} onClick={() => setView("lista")}>
-                <- Voltar
+                ← Voltar
               </button>
             )}
 
