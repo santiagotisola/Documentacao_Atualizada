@@ -245,3 +245,49 @@ export function limparPolling(req, res) {
   const resultado = scheduler.limparTicketsVistos();
   return res.json({ mensagem: "Cache limpo", ...resultado });
 }
+
+// ── Fila de revisão ────────────────────────────────────────────────────────
+
+/**
+ * GET /api/helpdesk/fila — Retorna itens da fila de revisão humana
+ */
+export function obterFila(req, res) {
+  return res.json(scheduler.obterFila());
+}
+
+/**
+ * POST /api/helpdesk/fila/modo — Liga/desliga modo revisão
+ */
+export function setModoRevisao(req, res) {
+  const { ativo } = req.body;
+  return res.json(scheduler.setModoRevisao(ativo !== false));
+}
+
+/**
+ * POST /api/helpdesk/fila/:id/aprovar — Aprova e envia resposta (com opcional edição)
+ */
+export async function aprovarFila(req, res) {
+  try {
+    const id = parseInt(req.params.id);
+    const { resposta_editada } = req.body;
+    const item = await scheduler.aprovarItem(id, resposta_editada || null);
+    return res.json({ mensagem: "Resposta enviada ao Jitbit", item });
+  } catch (err) {
+    return res.status(400).json({ erro: err.message });
+  }
+}
+
+/**
+ * POST /api/helpdesk/fila/:id/rejeitar — Rejeita item da fila
+ */
+export function rejeitarFila(req, res) {
+  try {
+    const id = parseInt(req.params.id);
+    const { motivo } = req.body;
+    const item = scheduler.rejeitarItem(id, motivo || "");
+    return res.json({ mensagem: "Item rejeitado", item });
+  } catch (err) {
+    return res.status(400).json({ erro: err.message });
+  }
+}
+

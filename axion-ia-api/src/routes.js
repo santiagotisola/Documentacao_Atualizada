@@ -1,10 +1,11 @@
 import express from "express";
 import { processarMensagem, consultarHistorico, consultarPendentes, consultarEstatisticas, treinarIA, consultarLogsMongo, consultarAnalise, listarEntradasKB } from "./controller.js";
-import { listarTickets, detalheTicket, classificarTicket, responderTicketIA, processarPendentes as processarHelpdeskPendentes, listarCategorias, criarChamado, statusPolling, iniciarPolling, pausarPolling, retomarPolling, limparPolling } from "./helpdesk-controller.js";
+import { listarTickets, detalheTicket, classificarTicket, responderTicketIA, processarPendentes as processarHelpdeskPendentes, listarCategorias, criarChamado, statusPolling, iniciarPolling, pausarPolling, retomarPolling, limparPolling, obterFila, setModoRevisao, aprovarFila, rejeitarFila } from "./helpdesk-controller.js";
 import { statusConexao, resumoGeral, listarEquipamentos, listarOperacoes, statsInfracoes, heartbeatEquipamentos, listarTabelas, listarMonitoramentos, ultimasPassagens, statsTriagens } from "./axhub-controller.js";
 import { statusConexao as axtonStatus, resumoGeral as axtonResumo, listarTabelas as axtonTabelas, ultimasPesagens as axtonPesagens, ultimasInfracoes as axtonInfracoes, heartbeatEquipamentos as axtonHeartbeat } from "./axton-controller.js";
 import { statusConexao as axcrossStatus, resumoGeral as axcrossResumo, listarEquipamentos as axcrossEquipamentos, statsPassagens as axcrossPassagens, heartbeatEquipamentos as axcrossHeartbeat, listarTabelas as axcrossTabelas, listarLocais as axcrossLocais, listarOperacoes as axcrossOperacoes } from "./axcross-controller.js";
 import { obterConfig, salvarConfig, testarMongo } from "./config-controller.js";
+import { gerarDoc, salvarDoc, listarImagens, listarSecoes } from "./doc-controller.js";
 
 const router = express.Router();
 
@@ -38,6 +39,12 @@ router.post("/helpdesk/polling/pausar", pausarPolling);
 router.post("/helpdesk/polling/retomar", retomarPolling);
 router.post("/helpdesk/polling/limpar", limparPolling);
 
+// Fila de revisão humana
+router.get("/helpdesk/fila", obterFila);
+router.post("/helpdesk/fila/modo", setModoRevisao);
+router.post("/helpdesk/fila/:id/aprovar", aprovarFila);
+router.post("/helpdesk/fila/:id/rejeitar", rejeitarFila);
+
 // AxHub — SQL Server
 router.get("/axhub/status", statusConexao);
 router.get("/axhub/resumo", resumoGeral);
@@ -67,6 +74,12 @@ router.get("/axcross/operacoes", axcrossOperacoes);
 router.get("/axcross/passagens", axcrossPassagens);
 router.get("/axcross/heartbeat", axcrossHeartbeat);
 router.get("/axcross/tabelas", axcrossTabelas);
+
+// Geração de Documentação (AxionIA Docs)
+router.post("/doc/gerar", gerarDoc);
+router.post("/doc/salvar", salvarDoc);
+router.get("/doc/imagens/:produto", listarImagens);
+router.get("/doc/secoes/:produto", listarSecoes);
 
 // Configuração
 router.get("/config", obterConfig);

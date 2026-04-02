@@ -6,6 +6,7 @@ import KnowledgeBase from "./pages/KnowledgeBase.jsx";
 import Chat from "./pages/Chat.jsx";
 import Configuracoes from "./pages/Configuracoes.jsx";
 import Helpdesk from "./pages/Helpdesk.jsx";
+import GerarDoc from "./pages/GerarDoc.jsx";
 import "./App.css";
 
 function App() {
@@ -21,6 +22,7 @@ function App() {
             <li><NavLink to="/">Dashboard</NavLink></li>
             <li><NavLink to="/chat">Chat</NavLink></li>
             <li><NavLink to="/helpdesk">Helpdesk</NavLink></li>
+            <li><NavLink to="/gerar-doc">📄 Gerar Doc</NavLink></li>
             <li><NavLink to="/treinamento">Treinamento</NavLink></li>
             <li><NavLink to="/logs">Logs</NavLink></li>
             <li><NavLink to="/kb">Knowledge Base</NavLink></li>
@@ -34,6 +36,7 @@ function App() {
             <Route path="/" element={<Dashboard />} />
             <Route path="/chat" element={<Chat />} />
             <Route path="/helpdesk" element={<Helpdesk />} />
+            <Route path="/gerar-doc" element={<GerarDoc />} />
             <Route path="/treinamento" element={<Treinamento />} />
             <Route path="/logs" element={<Logs />} />
             <Route path="/kb" element={<KnowledgeBase />} />
