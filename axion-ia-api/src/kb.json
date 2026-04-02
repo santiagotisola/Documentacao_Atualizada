@@ -14,11 +14,25 @@
     "status": "Aguardando normalização"
   },
   "login_acesso": {
-    "keywords": ["login", "não consigo acessar", "senha", "acesso negado", "não entra", "usuario bloqueado"],
+    "keywords": ["login", "não consigo acessar", "senha", "acesso negado", "não entra", "usuario bloqueado", "sem cadastro", "usuário não encontrado", "não identificado"],
     "assunto": "Problema de acesso/login",
-    "causa": "Credenciais incorretas ou usuário sem permissão",
-    "acao": "Verificar credenciais, validar perfil de acesso e permissões do usuário",
+    "causa": "Credenciais incorretas, usuário sem permissão ou sem cadastro no sistema",
+    "acao": "Verificar credenciais, validar perfil de acesso e permissões do usuário. Se o usuário não estiver cadastrado, realizar cadastro em Controle de Acesso → Usuários → + Novo",
     "status": "Em análise"
+  },
+  "cadastro_usuario": {
+    "keywords": ["criar usuário", "cadastrar usuário", "novo usuário", "liberar acesso", "sem cadastro", "não tem conta", "criar conta", "registrar usuário", "usuário novo", "acesso novo funcionário", "dar acesso"],
+    "assunto": "Cadastro de novo usuário / liberação de acesso",
+    "causa": "Usuário sem cadastro no sistema — não identificado comportamento relacionado ao cenário informado",
+    "acao": "1. Controle de Acesso → Usuários → + Novo\n2. Preencher: Nome, Login (ex: nome.sobrenome), E-mail\n3. Selecionar Perfil de Acesso conforme função\n4. Marcar Ativo = Sim\n5. Definir senha temporária\n6. Salvar e comunicar ao usuário as credenciais",
+    "status": "Resolvido",
+    "exemplo_resolvido": {
+      "assunto": "Cadastro de Usuário | Em Goiânia",
+      "analise": "Usuário sem cadastro, não identificado comportamento relacionado ao cenário informado",
+      "causa": "Credenciais incorretas ou usuário sem permissão, ou sem cadastro",
+      "acao_realizada": "Cadastro realizado com sucesso",
+      "credenciais_exemplo": "Login: nome.sobrenome | Senha temporária definida pelo analista"
+    }
   },
   "exportacao_infracao": {
     "keywords": ["erro exportação", "exportação falhou", "exportação não gera", "lote exportação erro", "falha exportação", "exportação com erro"],
