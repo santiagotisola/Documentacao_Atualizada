@@ -3,7 +3,7 @@
  * Controladores para geração e salvamento de documentação via AxionIA.
  */
 
-import { gerarDocumento, salvarDocumentoNoPortal, listarImagensProduto, SECOES } from "./doc-generator.js";
+import { gerarDocumento, gerarDocumentoOffline, salvarDocumentoNoPortal, listarImagensProduto, SECOES } from "./doc-generator.js";
 
 // POST /api/doc/gerar
 export async function gerarDoc(req, res) {
@@ -47,9 +47,35 @@ export async function gerarDoc(req, res) {
   } catch (err) {
     console.error("[doc-generator] Erro ao gerar documento:", err.message);
 
-    if (err.message?.includes("API key")) {
-      return res.status(503).json({
-        erro: "OpenAI API key não configurada. Configure OPENAI_API_KEY no .env",
+    // Fallback offline: quota esgotada (429), sem chave, ou qualquer falha OpenAI
+    const ehFalhaOpenAI =
+      err.message?.includes("API key") ||
+      err.message?.includes("429") ||
+      err.message?.includes("quota") ||
+      err.message?.includes("401") ||
+      err.message?.includes("ECONNREFUSED");
+
+    if (ehFalhaOpenAI) {
+      console.log("[doc-generator] Usando modo offline (template local)");
+      const { produto, tema, secao, tipo, detalhes, sidebar_position } = req.body;
+      const resultado = gerarDocumentoOffline({
+        produto: produto.toLowerCase(),
+        tema,
+        secao,
+        tipo: tipo || "Guia Analítico",
+        detalhes,
+        sidebar_position: sidebar_position || 1,
+      });
+
+      return res.json({
+        sucesso: true,
+        offline: true,
+        aviso: "IA indisponível (quota/chave OpenAI). Documento gerado com template local — revise as seções marcadas com ✏️.",
+        conteudo: resultado.conteudo,
+        nomeArquivo: resultado.nomeArquivo,
+        caminho: resultado.caminho,
+        produto: resultado.produto,
+        secao: resultado.secao,
       });
     }
 

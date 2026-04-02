@@ -439,6 +439,133 @@ Use as imagens disponíveis que forem relevantes ao tema e ao passo a passo.
 }
 
 // ============================================================
+// GERADOR OFFLINE — sem OpenAI, baseado em template local
+// ============================================================
+export function gerarDocumentoOffline({ produto, tema, secao, tipo, detalhes, sidebar_position = 1 }) {
+  const produtoNome = { axhub: "AxHub", axton: "AxTon", axcross: "AxCross" }[produto] || produto;
+  const tipoLabel = tipo || "Guia Analítico";
+  const todasImagens = CATALOGO_IMAGENS[produto] || [];
+
+  // Seleciona imagens relevantes pelo tema (palavras-chave simples)
+  const palavras = tema.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").split(/\s+/);
+  const imagensRel = todasImagens.filter(img => {
+    const imgLower = img.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+    return palavras.some(p => p.length > 3 && imgLower.includes(p));
+  }).slice(0, 6);
+
+  // Usa login sempre como primeira imagem se disponível e não foi selecionada
+  const imgLogin = todasImagens.find(i => i.toLowerCase().includes("login"));
+  if (imgLogin && !imagensRel.includes(imgLogin)) imagensRel.unshift(imgLogin);
+
+  const passos = imagensRel.map((img, i) => {
+    const descImg = img.replace(/\.(png|jpg)$/i, "").replace(/[-_]/g, " ");
+    return `### Passo ${i + 1} — ${descImg || "Acessar tela"}
+
+> ✏️ _Descreva aqui o que o usuário deve fazer neste passo._
+
+![${descImg}](../img/${img})\n`;
+  }).join("\n");
+
+  const nomeArquivo = tema
+    .toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "")
+    .replace(/[^a-z0-9\s-]/g, "").replace(/\s+/g, "-").replace(/-+/g, "-").trim() + ".md";
+
+  const conteudo = `---
+sidebar_position: ${sidebar_position}
+title: "${tema}"
+description: ${tipoLabel} — ${tema} no ${produtoNome}
+---
+
+# ${tema} — ${tipoLabel}
+
+:::caution Gerado em modo offline
+Este documento foi criado com o **template local** (sem IA generativa).
+Revise e complete as seções marcadas com ✏️ antes de publicar.
+:::
+
+:::info Para quem é este documento?
+> ✏️ _Descreva o público-alvo: analistas, operadores, administradores..._
+:::
+
+---
+
+## O que é ${tema}?
+
+> ✏️ _Explique em 2-3 frases o que este processo/funcionalidade faz e por que é importante._
+
+Benefícios deste processo:
+- ✅ ✏️ _Benefício 1_
+- ✅ ✏️ _Benefício 2_
+- 🔒 ✏️ _Requisito ou restrição importante_
+
+:::warning Atenção
+> ✏️ _Adicione um alerta sobre responsabilidades ou impactos desta operação._
+:::
+
+---
+
+## Como Acessar
+
+${passos || `### Passo 1 — Fazer login no sistema\n\nAcesse o ${produtoNome} pelo navegador e faça login.\n\n${imgLogin ? `![Tela de login](../img/${imgLogin})\n` : ""}\n### Passo 2 — Navegar até a funcionalidade\n\nNo menu lateral, clique em **✏️ [Módulo]** e depois em **✏️ [Submódulo]**.\n`}
+
+---
+
+## Checklist de Verificação
+
+Antes de confirmar qualquer operação, verifique:
+
+- [ ] ✏️ _Item de verificação 1_
+- [ ] ✏️ _Item de verificação 2_
+- [ ] ✏️ _Item de verificação 3_
+- [ ] ✏️ _Item de verificação 4_
+
+---
+
+## Critérios e Regras
+
+| Situação | Ação | Motivo |
+|---|---|---|
+| ✏️ _Caso 1_ | ✅ ✏️ _Ação_ | ✏️ _Motivo_ |
+| ✏️ _Caso 2_ | ❌ ✏️ _Ação_ | ✏️ _Motivo_ |
+| ✏️ _Caso 3_ | ⚠️ ✏️ _Ação_ | ✏️ _Motivo_ |
+
+---
+
+## Casos Especiais
+
+:::tip Dica
+> ✏️ _Descreva uma situação especial comum e como lidar._
+:::
+
+:::danger Situação Crítica
+> ✏️ _Descreva um caso crítico que exige atenção redobrada ou escalação._
+:::
+
+---
+
+## Fluxo do Processo
+
+\`\`\`
+[Início]
+    ↓
+[✏️ Etapa 1]
+    ↓
+[✏️ Etapa 2]
+  ↙       ↘
+[✅ OK]  [❌ Erro]
+    ↓          ↓
+[✏️ Resultado OK]  [✏️ Ação de Erro]
+\`\`\`
+
+---
+${detalhes ? `\n## Contexto Adicional\n\n${detalhes}\n\n---\n` : ""}
+> **Próximos passos:** ✏️ _Adicione links para páginas relacionadas._
+`;
+
+  return { conteudo, nomeArquivo, caminho: `${secao}/${nomeArquivo}`, produto, secao, offline: true };
+}
+
+// ============================================================
 // SALVAR DOCUMENTO NO PORTAL
 // ============================================================
 export async function salvarDocumentoNoPortal({ conteudo, produto, secao, nomeArquivo }) {

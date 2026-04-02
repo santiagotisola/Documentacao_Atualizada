@@ -81,7 +81,7 @@ export default function GerarDoc() {
       }
 
       setResultado(data);
-      setAbaSelecionada("editor");
+      setAbaSelecionada(data.offline ? "editor" : "editor");
     } catch (e) {
       setErro("Falha de comunicação com a API. Verifique se o axion-ia-api está rodando.");
     } finally {
@@ -256,7 +256,9 @@ export default function GerarDoc() {
               {/* Header do resultado */}
               <div className="resultado-header">
                 <div className="resultado-info">
-                  <span className="badge badge-green">✅ Gerado</span>
+                  <span className={`badge ${resultado.offline ? "badge-yellow" : "badge-green"}`}>
+                    {resultado.offline ? "⚠️ Template offline" : "✅ Gerado com IA"}
+                  </span>
                   <span className="resultado-filename">📄 {resultado.nomeArquivo}</span>
                   <span className="text-muted">
                     {resultado.produto} / {resultado.secao}
@@ -279,6 +281,12 @@ export default function GerarDoc() {
               {mensagemSalvo && (
                 <div className="alert alert-success">
                   ✅ {mensagemSalvo}
+                </div>
+              )}
+
+              {resultado.offline && resultado.aviso && (
+                <div className="alert alert-warning">
+                  ✏️ <strong>Modo offline:</strong> {resultado.aviso}
                 </div>
               )}
 
@@ -454,10 +462,16 @@ export default function GerarDoc() {
           font-size: 0.75rem;
           font-weight: 600;
         }
-        .badge-green {
-          background: rgba(34, 197, 94, 0.15);
-          color: #4ade80;
-          border: 1px solid rgba(34, 197, 94, 0.3);
+        .alert-warning {
+          background: rgba(245, 158, 11, 0.12);
+          border: 1px solid rgba(245, 158, 11, 0.35);
+          color: #fbbf24;
+          margin-bottom: 0.75rem;
+        }
+        .badge-yellow {
+          background: rgba(245, 158, 11, 0.15);
+          color: #fbbf24;
+          border: 1px solid rgba(245, 158, 11, 0.35);
         }
         .tab-bar {
           display: flex;
