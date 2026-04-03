@@ -8,6 +8,8 @@ import Configuracoes from "./pages/Configuracoes.jsx";
 import Helpdesk from "./pages/Helpdesk.jsx";
 import GerarDoc from "./pages/GerarDoc.jsx";
 import FontesPesquisa from "./pages/FontesPesquisa.jsx";
+import Roadmap from "./pages/Roadmap.jsx";
+import Specs from "./pages/Specs.jsx";
 import "./App.css";
 
 function App() {
@@ -25,6 +27,8 @@ function App() {
             <li><NavLink to="/helpdesk">Helpdesk</NavLink></li>
             <li><NavLink to="/gerar-doc">📄 Gerar Doc</NavLink></li>
             <li><NavLink to="/fontes">🔎 Fontes de Pesquisa</NavLink></li>
+            <li><NavLink to="/roadmap">🗺️ Roadmap</NavLink></li>
+            <li><NavLink to="/specs">📐 Specs</NavLink></li>
             <li><NavLink to="/treinamento">Treinamento</NavLink></li>
             <li><NavLink to="/logs">Logs</NavLink></li>
             <li><NavLink to="/kb">Knowledge Base</NavLink></li>
@@ -40,6 +44,8 @@ function App() {
             <Route path="/helpdesk" element={<Helpdesk />} />
             <Route path="/gerar-doc" element={<GerarDoc />} />
             <Route path="/fontes" element={<FontesPesquisa />} />
+            <Route path="/roadmap" element={<Roadmap />} />
+            <Route path="/specs" element={<Specs />} />
             <Route path="/treinamento" element={<Treinamento />} />
             <Route path="/logs" element={<Logs />} />
             <Route path="/kb" element={<KnowledgeBase />} />
