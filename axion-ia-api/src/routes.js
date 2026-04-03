@@ -11,7 +11,7 @@ import { buscarPNCP, importarSelecionados, coletarProduto, obterConfig as coleto
 import { gerarRoadmapHandler, listarRoadmapsHandler, obterRoadmapHandler, atualizarItemHandler } from "./roadmap-controller.js";
 import { gerarSpecHandler, listarSpecsHandler, obterSpecHandler, atualizarStatusSpecHandler } from "./spec-controller.js";
 import { relatorioPassagens, relatorioImagens, listarEquipamentosRelatorio } from "./relatorio-controller.js";
-import { uploadMiddleware, uploadContexto } from "./upload-controller.js";
+import { uploadMiddlewareComErro, uploadContexto } from "./upload-controller.js";
 
 const router = express.Router();
 
@@ -86,7 +86,7 @@ router.post("/doc/gerar", gerarDoc);
 router.post("/doc/salvar", salvarDoc);
 router.get("/doc/imagens/:produto", listarImagens);
 router.get("/doc/secoes/:produto", listarSecoes);
-router.post("/doc/upload-contexto", uploadMiddleware, uploadContexto);
+router.post("/doc/upload-contexto", uploadMiddlewareComErro, uploadContexto);
 
 // Relatórios Fluxo Diário (AxHub)
 router.get("/relatorio/passagens", relatorioPassagens);

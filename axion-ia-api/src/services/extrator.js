@@ -64,7 +64,14 @@ export async function extrairTexto(buffer, mimetype, originalname) {
     return limpar(buffer.toString("utf8"));
   }
 
-  throw new Error(`Tipo de arquivo não suportado: ${mimetype} (${ext}). Use PDF, DOCX, XLSX, CSV ou TXT.`);
+  // ─── Imagens ─────────────────────────────────────────────────
+  const extsImagem = ["png", "jpg", "jpeg", "gif", "webp", "bmp", "svg"];
+  if (mimetype.startsWith("image/") || extsImagem.includes(ext)) {
+    const tamanhoKB = Math.round(buffer.length / 1024);
+    return `[Imagem anexada: ${originalname} (${tamanhoKB} KB) — arquivo visual; utilize o campo "Contexto adicional" para descrever o conteúdo desta imagem para a IA.]`;
+  }
+
+  throw new Error(`Tipo de arquivo não suportado: ${mimetype} (${ext}). Use PDF, DOCX, XLSX, CSV, TXT ou imagens (PNG, JPG, etc).`);
 }
 
 function limpar(texto) {
