@@ -6,6 +6,7 @@ import { conectar as conectarAxHub } from "./services/axhub-db.js";
 import { conectar as conectarAxTon } from "./services/axton-db.js";
 import { conectar as conectarAxCross } from "./services/axcross-db.js";
 import { iniciar as iniciarPolling } from "./scheduler.js";
+import { iniciarColetaPNCP } from "./scheduler.js";
 
 dotenv.config();
 
@@ -103,6 +104,9 @@ async function iniciar() {
     } else {
       console.log("ℹ️  Polling Jitbit inativo — configure JITBIT_TOKEN (ou JITBIT_USER+PASS) no .env");
     }
+
+    // Coleta automática PNCP (ativada com PNCP_COLETA_ATIVA=true no .env)
+    iniciarColetaPNCP();
   });
 }
 

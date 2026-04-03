@@ -7,6 +7,7 @@ import { statusConexao as axcrossStatus, resumoGeral as axcrossResumo, listarEqu
 import { obterConfig, salvarConfig, testarMongo } from "./config-controller.js";
 import { gerarDoc, salvarDoc, listarImagens, listarSecoes } from "./doc-controller.js";
 import { adicionarFonte, listarFontes, obterFonte, removerFonte, analisarFonteById, mapaCobertura, sugestoesPorProduto } from "./fontes-controller.js";
+import { buscarPNCP, importarSelecionados, coletarProduto, obterConfig as coletorConfig, salvarConfig as coletorSalvar, statusColetor } from "./coletor-controller.js";
 
 const router = express.Router();
 
@@ -86,6 +87,14 @@ router.get("/doc/secoes/:produto", listarSecoes);
 router.get("/config", obterConfig);
 router.post("/config", salvarConfig);
 router.post("/config/testar-mongo", testarMongo);
+
+// ─── Coletor de Fontes Externas (PNCP + portais gov) ───
+router.get("/coletor/pncp", buscarPNCP);
+router.post("/coletor/pncp/importar", importarSelecionados);
+router.post("/coletor/pncp/coletar", coletarProduto);
+router.get("/coletor/config", coletorConfig);
+router.post("/coletor/config", coletorSalvar);
+router.get("/coletor/status", statusColetor);
 
 // ─── Fontes de Pesquisa (análise de usabilidade — ISOLADO da KB/IA) ───
 router.post("/fontes", adicionarFonte);

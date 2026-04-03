@@ -17,6 +17,10 @@ import cron from "node-cron";
 import { buscarTickets, responderTicket } from "./jitbit.js";
 import { gerarResposta } from "./engine.js";
 import { salvarHistorico } from "./logger.js";
+import { coletarPorProduto } from "./services/pncp.service.js";
+import { pncpParaMd, tituloPncp } from "./services/parser.js";
+import { Fonte } from "./models/fonte.model.js";
+import { estadoColeta } from "./coletor-controller.js";
 
 const SCORE_AUTO    = 0.85;
 const SCORE_SUGERIR = 0.65;
@@ -311,3 +315,62 @@ export function rejeitarItem(id, motivo = "") {
   });
   return item;
 }
+
+// ─────────────────────────────────────────────────────────────────
+// JOB: Coleta automática PNCP — a cada 6 horas
+// Cron: "0 */6 * * *" = 00h, 06h, 12h, 18h
+// ISOLAMENTO: salva em collection "fonte" — nunca na KB
+// ─────────────────────────────────────────────────────────────────
+
+const INTERVALO_COLETA = process.env.PNCP_CRON || "0 */6 * * *";
+let taskColetaPNCP = null;
+
+async function executarColetaPNCP() {
+  if (!process.env.PNCP_COLETA_ATIVA || process.env.PNCP_COLETA_ATIVA === "false") return;
+
+  console.log("🔎 [PNCP] Iniciando coleta automática...");
+  estadoColeta.ativa = true;
+
+  let totalNovos = 0;
+  for (const produto of ["axhub", "axton", "axcross"]) {
+    try {
+      const items = await coletarPorProduto(produto, []);
+      for (const item of items) {
+        const titulo = tituloPncp(item);
+        const existe = await Fonte.findOne({ titulo: { $regex: item.numero.substring(0, 10), $options: "i" } });
+        if (!existe) {
+          await Fonte.create({
+            produto,
+            titulo,
+            tipo: "requisito",
+            conteudo: pncpParaMd(item),
+            arquivo: `PNCP-${item.numero}`,
+            status: "pendente",
+          });
+          totalNovos++;
+        }
+      }
+    } catch (err) {
+      estadoColeta.erros.push({ ts: new Date().toISOString(), produto, erro: err.message });
+      console.warn(`[PNCP][${produto}] Erro na coleta: ${err.message}`);
+    }
+  }
+
+  estadoColeta.ativa = false;
+  estadoColeta.ultimaColeta = new Date().toISOString();
+  estadoColeta.totalNovos += totalNovos;
+  console.log(`✅ [PNCP] Coleta finalizada — ${totalNovos} novas fontes`);
+}
+
+export function iniciarColetaPNCP() {
+  if (taskColetaPNCP) taskColetaPNCP.stop();
+
+  taskColetaPNCP = cron.schedule(INTERVALO_COLETA, executarColetaPNCP, {
+    scheduled: true,
+    timezone: "America/Sao_Paulo",
+  });
+
+  estadoColeta.agendada = true;
+  console.log(`🕐 [PNCP] Coleta automática agendada (${INTERVALO_COLETA})`);
+}
+
