@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 
 const API = "http://localhost:3100/api";
 
@@ -35,6 +35,12 @@ export default function GerarDoc() {
   const [mensagemSalvo, setMensagemSalvo] = useState(null);
   const [abaSelecionada, setAbaSelecionada] = useState("editor"); // "editor" | "preview"
 
+  // Upload de arquivo de contexto
+  const [arquivoContexto, setArquivoContexto] = useState(null); // { nome, texto, palavras }
+  const [uploadando, setUploadando] = useState(false);
+  const [dragOver, setDragOver] = useState(false);
+  const inputFileRef = useRef(null);
+
   // Carrega as seções quando muda o produto
   useEffect(() => {
     setForm((f) => ({ ...f, secao: "" }));
@@ -50,6 +56,29 @@ export default function GerarDoc() {
     setErro(null);
     setMensagemSalvo(null);
   }
+
+  async function handleArquivo(file) {
+    if (!file) return;
+    setUploadando(true);
+    setErro(null);
+    try {
+      const fd = new FormData();
+      fd.append("arquivo", file);
+      const r = await fetch(`${API}/doc/upload-contexto`, { method: "POST", body: fd });
+      const d = await r.json();
+      if (!r.ok) { setErro(d.erro || "Erro no upload."); return; }
+      setArquivoContexto({ nome: d.nomeArquivo, texto: d.texto, palavras: d.palavrasExtraidas });
+    } catch { setErro("Falha no upload do arquivo."); }
+    setUploadando(false);
+  }
+
+  function handleDrop(e) {
+    e.preventDefault(); setDragOver(false);
+    const file = e.dataTransfer.files[0];
+    if (file) handleArquivo(file);
+  }
+
+  function removerArquivo() { setArquivoContexto(null); }
 
   async function handleGerar() {
     if (!form.tema.trim()) {
@@ -67,10 +96,20 @@ export default function GerarDoc() {
     setMensagemSalvo(null);
 
     try {
+      // Concatena texto extraído do arquivo ao campo detalhes
+      const payload = { ...form };
+      if (arquivoContexto?.texto) {
+        payload.detalhes = [
+          form.detalhes || "",
+          `\n\n--- Conteúdo extraído do arquivo "${arquivoContexto.nome}" ---\n`,
+          arquivoContexto.texto,
+        ].join("").trim();
+      }
+
       const res = await fetch(`${API}/doc/gerar`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(form),
+        body: JSON.stringify(payload),
       });
 
       const data = await res.json();
@@ -203,13 +242,44 @@ export default function GerarDoc() {
             />
           </div>
 
+          {/* Upload de arquivo de contexto */}
+          <div className="form-group">
+            <label>Arquivo de referência (opcional)</label>
+            <div
+              onDragOver={e => { e.preventDefault(); setDragOver(true); }}
+              onDragLeave={() => setDragOver(false)}
+              onDrop={handleDrop}
+              onClick={() => inputFileRef.current?.click()}
+              style={{
+                border: `2px dashed ${dragOver ? "var(--accent,#4f8ef7)" : "var(--border,#333)"}`,
+                borderRadius: 8, padding: "14px 12px", textAlign: "center", cursor: "pointer",
+                background: dragOver ? "rgba(79,142,247,0.07)" : "transparent",
+                transition: "all 0.2s",
+              }}>
+              {uploadando
+                ? <span style={{ fontSize: 12, color: "#94a3b8" }}>⏳ Extraindo texto...</span>
+                : arquivoContexto
+                  ? (
+                    <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", textAlign: "left" }}>
+                      <span style={{ fontSize: 12 }}>📎 <strong>{arquivoContexto.nome}</strong> — {arquivoContexto.palavras.toLocaleString("pt-BR")} palavras</span>
+                      <button onClick={e => { e.stopPropagation(); removerArquivo(); }}
+                        style={{ background: "none", border: "none", color: "#f87171", cursor: "pointer", fontSize: 16, lineHeight: 1 }}>✕</button>
+                    </div>
+                  )
+                  : <span style={{ fontSize: 12, color: "#64748b" }}>📂 Arraste ou clique para anexar PDF, DOCX, XLSX, TXT<br/><small>A IA usará o conteúdo como contexto</small></span>
+              }
+              <input ref={inputFileRef} type="file" accept=".pdf,.docx,.doc,.xlsx,.xls,.csv,.txt,.md"
+                style={{ display: "none" }} onChange={e => handleArquivo(e.target.files[0])} />
+            </div>
+          </div>
+
           <div className="form-group">
             <label>Contexto adicional (opcional)</label>
             <textarea
               name="detalhes"
               value={form.detalhes}
               onChange={handleChange}
-              rows={5}
+              rows={4}
               placeholder="Descreva detalhes específicos: quem usa, casos especiais, campos importantes da tela, fluxo do processo..."
             />
           </div>

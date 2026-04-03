@@ -10,6 +10,7 @@ import GerarDoc from "./pages/GerarDoc.jsx";
 import FontesPesquisa from "./pages/FontesPesquisa.jsx";
 import Roadmap from "./pages/Roadmap.jsx";
 import Specs from "./pages/Specs.jsx";
+import RelatorioFluxo from "./pages/RelatorioFluxo.jsx";
 import "./App.css";
 
 function App() {
@@ -29,6 +30,7 @@ function App() {
             <li><NavLink to="/fontes">🔎 Fontes de Pesquisa</NavLink></li>
             <li><NavLink to="/roadmap">🗺️ Roadmap</NavLink></li>
             <li><NavLink to="/specs">📐 Specs</NavLink></li>
+            <li><NavLink to="/relatorio-fluxo">📊 Relatório Fluxo</NavLink></li>
             <li><NavLink to="/treinamento">Treinamento</NavLink></li>
             <li><NavLink to="/logs">Logs</NavLink></li>
             <li><NavLink to="/kb">Knowledge Base</NavLink></li>
@@ -46,6 +48,7 @@ function App() {
             <Route path="/fontes" element={<FontesPesquisa />} />
             <Route path="/roadmap" element={<Roadmap />} />
             <Route path="/specs" element={<Specs />} />
+            <Route path="/relatorio-fluxo" element={<RelatorioFluxo />} />
             <Route path="/treinamento" element={<Treinamento />} />
             <Route path="/logs" element={<Logs />} />
             <Route path="/kb" element={<KnowledgeBase />} />
