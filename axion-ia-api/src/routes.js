@@ -6,6 +6,7 @@ import { statusConexao as axtonStatus, resumoGeral as axtonResumo, listarTabelas
 import { statusConexao as axcrossStatus, resumoGeral as axcrossResumo, listarEquipamentos as axcrossEquipamentos, statsPassagens as axcrossPassagens, heartbeatEquipamentos as axcrossHeartbeat, listarTabelas as axcrossTabelas, listarLocais as axcrossLocais, listarOperacoes as axcrossOperacoes } from "./axcross-controller.js";
 import { obterConfig, salvarConfig, testarMongo } from "./config-controller.js";
 import { gerarDoc, salvarDoc, listarImagens, listarSecoes } from "./doc-controller.js";
+import { adicionarFonte, listarFontes, obterFonte, removerFonte, analisarFonteById, mapaCobertura, sugestoesPorProduto } from "./fontes-controller.js";
 
 const router = express.Router();
 
@@ -85,5 +86,14 @@ router.get("/doc/secoes/:produto", listarSecoes);
 router.get("/config", obterConfig);
 router.post("/config", salvarConfig);
 router.post("/config/testar-mongo", testarMongo);
+
+// ─── Fontes de Pesquisa (análise de usabilidade — ISOLADO da KB/IA) ───
+router.post("/fontes", adicionarFonte);
+router.get("/fontes", listarFontes);
+router.get("/fontes/mapa/:produto", mapaCobertura);
+router.get("/fontes/sugestoes/:produto", sugestoesPorProduto);
+router.get("/fontes/:id", obterFonte);
+router.post("/fontes/:id/analisar", analisarFonteById);
+router.delete("/fontes/:id", removerFonte);
 
 export default router;

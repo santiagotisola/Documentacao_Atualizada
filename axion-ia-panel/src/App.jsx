@@ -7,6 +7,7 @@ import Chat from "./pages/Chat.jsx";
 import Configuracoes from "./pages/Configuracoes.jsx";
 import Helpdesk from "./pages/Helpdesk.jsx";
 import GerarDoc from "./pages/GerarDoc.jsx";
+import FontesPesquisa from "./pages/FontesPesquisa.jsx";
 import "./App.css";
 
 function App() {
@@ -23,6 +24,7 @@ function App() {
             <li><NavLink to="/chat">Chat</NavLink></li>
             <li><NavLink to="/helpdesk">Helpdesk</NavLink></li>
             <li><NavLink to="/gerar-doc">📄 Gerar Doc</NavLink></li>
+            <li><NavLink to="/fontes">🔎 Fontes de Pesquisa</NavLink></li>
             <li><NavLink to="/treinamento">Treinamento</NavLink></li>
             <li><NavLink to="/logs">Logs</NavLink></li>
             <li><NavLink to="/kb">Knowledge Base</NavLink></li>
@@ -37,6 +39,7 @@ function App() {
             <Route path="/chat" element={<Chat />} />
             <Route path="/helpdesk" element={<Helpdesk />} />
             <Route path="/gerar-doc" element={<GerarDoc />} />
+            <Route path="/fontes" element={<FontesPesquisa />} />
             <Route path="/treinamento" element={<Treinamento />} />
             <Route path="/logs" element={<Logs />} />
             <Route path="/kb" element={<KnowledgeBase />} />
