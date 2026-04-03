@@ -22,9 +22,17 @@ const upload = multer({
       "application/vnd.ms-excel",
       "text/csv",
       "text/plain",
+      "image/png",
+      "image/jpeg",
+      "image/jpg",
+      "image/gif",
+      "image/webp",
+      "image/bmp",
+      "image/svg+xml",
     ];
     const ext = file.originalname.split(".").pop().toLowerCase();
-    const extsPermitidas = ["pdf", "docx", "doc", "xlsx", "xls", "csv", "txt", "md"];
+    const extsPermitidas = ["pdf", "docx", "doc", "xlsx", "xls", "csv", "txt", "md",
+                            "png", "jpg", "jpeg", "gif", "webp", "bmp", "svg"];
 
     if (permitidos.includes(file.mimetype) || extsPermitidas.includes(ext)) {
       cb(null, true);
@@ -34,8 +42,21 @@ const upload = multer({
   },
 });
 
-// Middleware multer exportado para ser usado na rota
-export const uploadMiddleware = upload.single("arquivo");
+// Middleware multer interno
+const uploadMiddleware = upload.single("arquivo");
+
+/**
+ * Wrapper que captura erros do multer (rejeição de tipo/tamanho)
+ * e os retorna como JSON em vez de deixar o Express servir HTML.
+ */
+export function uploadMiddlewareComErro(req, res, next) {
+  uploadMiddleware(req, res, (err) => {
+    if (err) {
+      return res.status(422).json({ erro: err.message });
+    }
+    next();
+  });
+}
 
 // POST /api/doc/upload-contexto
 export async function uploadContexto(req, res) {
