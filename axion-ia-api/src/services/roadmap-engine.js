@@ -12,7 +12,7 @@
  * ISOLAMENTO: não lê nem escreve em kb.json / engine.js.
  */
 
-import Fonte from "../models/fonte.model.js";
+import { Fonte } from "../models/fonte.model.js";
 import Roadmap from "../models/roadmap.model.js";
 import { consolidarSugestoes } from "./comparador.js";
 import { normalizarTexto, removerAcentos } from "./normalizador.js";
