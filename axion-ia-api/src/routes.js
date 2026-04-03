@@ -10,6 +10,8 @@ import { adicionarFonte, listarFontes, obterFonte, removerFonte, analisarFonteBy
 import { buscarPNCP, importarSelecionados, coletarProduto, obterConfig as coletorConfig, salvarConfig as coletorSalvar, statusColetor } from "./coletor-controller.js";
 import { gerarRoadmapHandler, listarRoadmapsHandler, obterRoadmapHandler, atualizarItemHandler } from "./roadmap-controller.js";
 import { gerarSpecHandler, listarSpecsHandler, obterSpecHandler, atualizarStatusSpecHandler } from "./spec-controller.js";
+import { relatorioPassagens, relatorioImagens, listarEquipamentosRelatorio } from "./relatorio-controller.js";
+import { uploadMiddleware, uploadContexto } from "./upload-controller.js";
 
 const router = express.Router();
 
@@ -84,6 +86,12 @@ router.post("/doc/gerar", gerarDoc);
 router.post("/doc/salvar", salvarDoc);
 router.get("/doc/imagens/:produto", listarImagens);
 router.get("/doc/secoes/:produto", listarSecoes);
+router.post("/doc/upload-contexto", uploadMiddleware, uploadContexto);
+
+// Relatórios Fluxo Diário (AxHub)
+router.get("/relatorio/passagens", relatorioPassagens);
+router.get("/relatorio/imagens", relatorioImagens);
+router.get("/relatorio/equipamentos", listarEquipamentosRelatorio);
 
 // Configuração
 router.get("/config", obterConfig);
