@@ -17,10 +17,11 @@ const TIPOS = [
 
 // ─── ABAS PRINCIPAIS ──────────────────────────────────────────────
 const ABAS = [
-  { id: "fontes",    label: "Fontes Cadastradas" },
-  { id: "adicionar", label: "+ Adicionar Fonte"  },
-  { id: "analise",   label: "Análise de Cobertura" },
-  { id: "sugestoes", label: "Sugestões de Melhoria" },
+  { id: "fontes",    label: "📋 Fontes Cadastradas" },
+  { id: "pncp",     label: "🔎 Coletar do PNCP"    },
+  { id: "adicionar", label: "+ Adicionar Fonte"     },
+  { id: "analise",   label: "📊 Análise de Cobertura" },
+  { id: "sugestoes", label: "💡 Sugestões de Melhoria" },
 ];
 
 export default function FontesPesquisa() {
@@ -68,9 +69,299 @@ export default function FontesPesquisa() {
       </div>
 
       {aba === "fontes"    && <TabFontes produto={produto} onAnalisar={() => setAba("analise")} />}
+      {aba === "pncp"     && <TabPNCP produto={produto} onImportado={() => setAba("fontes")} />}
       {aba === "adicionar" && <TabAdicionar produto={produto} onSucesso={() => setAba("fontes")} />}
       {aba === "analise"   && <TabAnalise produto={produto} />}
       {aba === "sugestoes" && <TabSugestoes produto={produto} />}
+    </div>
+  );
+}
+
+// ═══════════════════════════════════════════════════════
+// ABA: Coletar do PNCP
+// ═══════════════════════════════════════════════════════
+function TabPNCP({ produto, onImportado }) {
+  const [busca, setBusca] = useState("");
+  const [resultado, setResultado] = useState(null);
+  const [carregando, setCarregando] = useState(false);
+  const [coletando, setColetando] = useState(false);
+  const [status, setStatus] = useState(null);
+  const [selecionados, setSelecionados] = useState([]);
+  const [importando, setImportando] = useState(false);
+  const [msg, setMsg] = useState(null);
+  const [palavrasConfig, setPalavrasConfig] = useState([]);
+  const [novaPalavra, setNovaPalavra] = useState("");
+  const [mostrarConfig, setMostrarConfig] = useState(false);
+
+  // Carrega status do coletor e config ao montar
+  useEffect(() => {
+    Promise.all([
+      api.get("/coletor/status"),
+      api.get("/coletor/config"),
+    ]).then(([rs, rc]) => {
+      setStatus(rs.data);
+      setPalavrasConfig(rc.data.adicionais?.[produto] || []);
+    }).catch(() => {});
+  }, [produto]);
+
+  async function handleBuscar() {
+    if (!busca.trim()) return;
+    setCarregando(true);
+    setMsg(null);
+    setSelecionados([]);
+    try {
+      const r = await api.get(`/coletor/pncp?produto=${produto}&q=${encodeURIComponent(busca)}&tamanhoPagina=15`);
+      setResultado(r.data);
+    } catch {
+      setMsg({ tipo: "error", texto: "Erro ao buscar no PNCP. Tente novamente." });
+    } finally {
+      setCarregando(false);
+    }
+  }
+
+  async function handleColetar() {
+    if (!confirm(`Coletar TODOS os editais relacionados ao ${produto.toUpperCase()} do PNCP? Isso pode levar alguns segundos.`)) return;
+    setColetando(true);
+    setMsg(null);
+    try {
+      const r = await api.post("/coletor/pncp/coletar", { produto });
+      setMsg({
+        tipo: "success",
+        texto: `Coleta concluída: ${r.data.totalEncontrados} encontrados, ${r.data.novasFontes} novas fontes adicionadas.`,
+      });
+    } catch (err) {
+      setMsg({ tipo: "error", texto: err.response?.data?.erro || "Erro na coleta" });
+    } finally {
+      setColetando(false);
+      // Atualiza status
+      api.get("/coletor/status").then(r => setStatus(r.data)).catch(() => {});
+    }
+  }
+
+  async function handleImportar() {
+    if (!selecionados.length) return;
+    setImportando(true);
+    try {
+      const itens = resultado.items.filter(i => selecionados.includes(i.numero));
+      const r = await api.post("/coletor/pncp/importar", { itens, produto });
+      setMsg({
+        tipo: "success",
+        texto: `${r.data.salvos} fonte(s) importadas.${r.data.duplicados ? ` (${r.data.duplicados} duplicadas ignoradas)` : ""}`,
+      });
+      setSelecionados([]);
+      setTimeout(onImportado, 1500);
+    } catch (err) {
+      setMsg({ tipo: "error", texto: err.response?.data?.erro || "Erro ao importar" });
+    } finally {
+      setImportando(false);
+    }
+  }
+
+  function toggleSelecionado(numero) {
+    setSelecionados(s => s.includes(numero) ? s.filter(x => x !== numero) : [...s, numero]);
+  }
+
+  async function salvarPalavras() {
+    try {
+      await api.post("/coletor/config", { produto, palavras: palavrasConfig });
+      setMsg({ tipo: "success", texto: "Palavras-chave salvas!" });
+    } catch { setMsg({ tipo: "error", texto: "Erro ao salvar" }); }
+  }
+
+  return (
+    <div>
+      {/* Status da coleta automática */}
+      {status && (
+        <div className="card" style={{ marginBottom: "1rem", padding: "0.75rem 1rem" }}>
+          <div style={{ display: "flex", gap: "1.5rem", alignItems: "center", flexWrap: "wrap", fontSize: "0.82rem" }}>
+            <span>
+              <strong>Coleta automática:</strong>{" "}
+              <span style={{ color: status.agendada ? "var(--success)" : "var(--text-muted)" }}>
+                {status.agendada ? "Agendada (a cada 6h)" : "Desabilitada"}
+              </span>
+              {!status.agendada && (
+                <span style={{ marginLeft: 6, color: "var(--text-muted)", fontSize: "0.75rem" }}>
+                  — ative com <code>PNCP_COLETA_ATIVA=true</code> no .env
+                </span>
+              )}
+            </span>
+            {status.ultimaColeta && (
+              <span>
+                <strong>Última:</strong>{" "}
+                {new Date(status.ultimaColeta).toLocaleString("pt-BR")}
+              </span>
+            )}
+            <span><strong>Total novas:</strong> {status.totalNovos || 0}</span>
+          </div>
+        </div>
+      )}
+
+      {msg && (
+        <div className={`alert alert-${msg.tipo}`} style={{ marginBottom: "1rem" }}>
+          {msg.texto}
+        </div>
+      )}
+
+      {/* Busca manual */}
+      <div className="card" style={{ marginBottom: "1rem" }}>
+        <div style={{ marginBottom: "0.75rem", fontWeight: 600, fontSize: "0.9rem" }}>
+          Busca Manual no PNCP — <span style={{ color: "var(--accent)" }}>{produto.toUpperCase()}</span>
+        </div>
+        <div style={{ display: "flex", gap: "0.5rem", marginBottom: "0.5rem" }}>
+          <input
+            className="input"
+            style={{ flex: 1 }}
+            placeholder="Ex: radar velocidade, pesagem veicular, sistema monitoramento..."
+            value={busca}
+            onChange={e => setBusca(e.target.value)}
+            onKeyDown={e => e.key === "Enter" && handleBuscar()}
+          />
+          <button className="btn btn-primary" onClick={handleBuscar} disabled={carregando || !busca.trim()}>
+            {carregando ? "Buscando..." : "🔍 Buscar"}
+          </button>
+        </div>
+        <div style={{ display: "flex", gap: "0.5rem" }}>
+          <button
+            className="btn"
+            onClick={handleColetar}
+            disabled={coletando}
+            title="Busca com todas as palavras-chave configuradas para este produto"
+          >
+            {coletando ? "Coletando..." : "🤖 Coleta Automática Completa"}
+          </button>
+          <button
+            className="btn"
+            onClick={() => setMostrarConfig(v => !v)}
+            style={{ fontSize: "0.8rem" }}
+          >
+            ⚙️ Palavras-chave
+          </button>
+        </div>
+      </div>
+
+      {/* Configurar palavras-chave adicionais */}
+      {mostrarConfig && (
+        <div className="card" style={{ marginBottom: "1rem" }}>
+          <div style={{ fontWeight: 600, marginBottom: "0.5rem", fontSize: "0.85rem" }}>
+            Palavras-chave adicionais — {produto.toUpperCase()}
+          </div>
+          <div style={{ display: "flex", gap: "0.5rem", marginBottom: "0.5rem" }}>
+            <input
+              className="input"
+              style={{ flex: 1 }}
+              placeholder="Adicionar palavra-chave..."
+              value={novaPalavra}
+              onChange={e => setNovaPalavra(e.target.value)}
+              onKeyDown={e => {
+                if (e.key === "Enter" && novaPalavra.trim()) {
+                  setPalavrasConfig(p => [...p, novaPalavra.trim()]);
+                  setNovaPalavra("");
+                }
+              }}
+            />
+            <button
+              className="btn"
+              onClick={() => { if (novaPalavra.trim()) { setPalavrasConfig(p => [...p, novaPalavra.trim()]); setNovaPalavra(""); } }}
+            >
+              + Adicionar
+            </button>
+          </div>
+          <div style={{ display: "flex", flexWrap: "wrap", gap: "0.35rem", marginBottom: "0.75rem" }}>
+            {palavrasConfig.map((p, i) => (
+              <span key={i} style={{
+                background: "var(--accent)", color: "#fff",
+                padding: "0.2rem 0.6rem", borderRadius: 12, fontSize: "0.78rem",
+                display: "flex", alignItems: "center", gap: 4,
+              }}>
+                {p}
+                <button
+                  onClick={() => setPalavrasConfig(ps => ps.filter((_, j) => j !== i))}
+                  style={{ background: "none", border: "none", color: "#fff", cursor: "pointer", padding: 0, fontSize: "0.9rem" }}
+                >×</button>
+              </span>
+            ))}
+            {palavrasConfig.length === 0 && (
+              <span style={{ color: "var(--text-muted)", fontSize: "0.8rem" }}>Nenhuma palavra adicional configurada.</span>
+            )}
+          </div>
+          <button className="btn btn-primary" onClick={salvarPalavras}>Salvar</button>
+        </div>
+      )}
+
+      {/* Resultados da busca */}
+      {resultado && (
+        <div>
+          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "0.75rem" }}>
+            <span style={{ fontSize: "0.85rem", color: "var(--text-muted)" }}>
+              {resultado.total} resultado(s) encontrado(s)
+            </span>
+            {selecionados.length > 0 && (
+              <button
+                className="btn btn-primary"
+                onClick={handleImportar}
+                disabled={importando}
+              >
+                {importando ? "Importando..." : `📥 Importar ${selecionados.length} selecionado(s)`}
+              </button>
+            )}
+          </div>
+
+          {resultado.items.length === 0 ? (
+            <div className="card" style={{ textAlign: "center", padding: "1.5rem", color: "var(--text-muted)" }}>
+              Nenhum resultado encontrado para "<strong>{busca}</strong>" no PNCP.
+            </div>
+          ) : (
+            <table className="data-table">
+              <thead>
+                <tr>
+                  <th style={{ width: 36 }}></th>
+                  <th>Título / Órgão</th>
+                  <th>UF</th>
+                  <th>Modalidade</th>
+                  <th>Publicação</th>
+                  <th>Valor Est.</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                {resultado.items.map(item => (
+                  <tr key={item.numero} style={selecionados.includes(item.numero) ? { background: "var(--surface2)" } : {}}>
+                    <td>
+                      <input
+                        type="checkbox"
+                        checked={selecionados.includes(item.numero)}
+                        onChange={() => toggleSelecionado(item.numero)}
+                        style={{ cursor: "pointer" }}
+                      />
+                    </td>
+                    <td style={{ maxWidth: 320 }}>
+                      <div style={{ fontWeight: 600, fontSize: "0.85rem", marginBottom: 2 }}>
+                        {item.titulo?.substring(0, 80)}{item.titulo?.length > 80 ? "..." : ""}
+                      </div>
+                      <div style={{ fontSize: "0.75rem", color: "var(--text-muted)" }}>{item.orgao}</div>
+                    </td>
+                    <td style={{ textAlign: "center" }}>{item.uf || "—"}</td>
+                    <td style={{ fontSize: "0.78rem" }}>{item.modalidade}</td>
+                    <td style={{ fontSize: "0.78rem", whiteSpace: "nowrap" }}>
+                      {item.dataPublicacao ? new Date(item.dataPublicacao).toLocaleDateString("pt-BR") : "—"}
+                    </td>
+                    <td style={{ fontSize: "0.78rem" }}>
+                      {item.valor ? `R$ ${Number(item.valor).toLocaleString("pt-BR", { minimumFractionDigits: 0 })}` : "—"}
+                    </td>
+                    <td>
+                      {item.link && (
+                        <a href={item.link} target="_blank" rel="noopener noreferrer" style={{ fontSize: "0.75rem", color: "var(--accent)" }}>
+                          🔗 Ver
+                        </a>
+                      )}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          )}
+        </div>
+      )}
     </div>
   );
 }
