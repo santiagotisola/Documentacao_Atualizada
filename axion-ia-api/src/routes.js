@@ -8,6 +8,8 @@ import { obterConfig, salvarConfig, testarMongo } from "./config-controller.js";
 import { gerarDoc, salvarDoc, listarImagens, listarSecoes } from "./doc-controller.js";
 import { adicionarFonte, listarFontes, obterFonte, removerFonte, analisarFonteById, mapaCobertura, sugestoesPorProduto } from "./fontes-controller.js";
 import { buscarPNCP, importarSelecionados, coletarProduto, obterConfig as coletorConfig, salvarConfig as coletorSalvar, statusColetor } from "./coletor-controller.js";
+import { gerarRoadmapHandler, listarRoadmapsHandler, obterRoadmapHandler, atualizarItemHandler } from "./roadmap-controller.js";
+import { gerarSpecHandler, listarSpecsHandler, obterSpecHandler, atualizarStatusSpecHandler } from "./spec-controller.js";
 
 const router = express.Router();
 
@@ -104,5 +106,17 @@ router.get("/fontes/sugestoes/:produto", sugestoesPorProduto);
 router.get("/fontes/:id", obterFonte);
 router.post("/fontes/:id/analisar", analisarFonteById);
 router.delete("/fontes/:id", removerFonte);
+
+// ─── Roadmap (geração de backlog a partir de lacunas — ISOLADO da KB/IA) ───
+router.post("/roadmap/gerar", gerarRoadmapHandler);
+router.get("/roadmap", listarRoadmapsHandler);
+router.get("/roadmap/:id", obterRoadmapHandler);
+router.patch("/roadmap/:id/item/:itemId", atualizarItemHandler);
+
+// ─── Specs / PRD (especificação técnica de funcionalidades) ───
+router.post("/spec/gerar", gerarSpecHandler);
+router.get("/spec", listarSpecsHandler);
+router.get("/spec/:id", obterSpecHandler);
+router.patch("/spec/:id/status", atualizarStatusSpecHandler);
 
 export default router;
