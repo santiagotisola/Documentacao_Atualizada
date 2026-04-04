@@ -7,7 +7,7 @@ import { statusConexao as axcrossStatus, resumoGeral as axcrossResumo, listarEqu
 import { obterConfig, salvarConfig, testarMongo } from "./config-controller.js";
 import { gerarDoc, salvarDoc, listarImagens, listarSecoes } from "./doc-controller.js";
 import { adicionarFonte, listarFontes, obterFonte, removerFonte, analisarFonteById, mapaCobertura, sugestoesPorProduto } from "./fontes-controller.js";
-import { buscarPNCP, importarSelecionados, coletarProduto, obterConfig as coletorConfig, salvarConfig as coletorSalvar, statusColetor } from "./coletor-controller.js";
+import { buscarPNCP, importarSelecionados, coletarProduto, obterConfig as coletorConfig, salvarConfig as coletorSalvar, statusColetor, listarOperacoes as coletorOperacoes } from "./coletor-controller.js";
 import { gerarRoadmapHandler, listarRoadmapsHandler, obterRoadmapHandler, atualizarItemHandler } from "./roadmap-controller.js";
 import { gerarSpecHandler, listarSpecsHandler, obterSpecHandler, atualizarStatusSpecHandler } from "./spec-controller.js";
 import { relatorioPassagens, relatorioImagens, listarEquipamentosRelatorio } from "./relatorio-controller.js";
@@ -99,6 +99,7 @@ router.post("/config", salvarConfig);
 router.post("/config/testar-mongo", testarMongo);
 
 // ─── Coletor de Fontes Externas (PNCP + portais gov) ───
+router.get("/coletor/operacoes", coletorOperacoes);
 router.get("/coletor/pncp", buscarPNCP);
 router.post("/coletor/pncp/importar", importarSelecionados);
 router.post("/coletor/pncp/coletar", coletarProduto);

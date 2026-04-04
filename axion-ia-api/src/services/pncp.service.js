@@ -13,20 +13,57 @@ const BASE_URL = "https://pncp.gov.br/api/consulta/v1";
 // Timeout conservador para não travar o scheduler
 const TIMEOUT_MS = 15000;
 
+// Operações estruturadas do AxHub — exibidas como cards de busca no painel
+export const OPERACOES_AXHUB = [
+  {
+    id: "fiscalizacao",
+    nome: "Fiscalização Eletrônica",
+    icone: "🚦",
+    descricao: "Radares, lombadas eletrônicas, multas automatizadas",
+    palavras: ["fiscalização eletrônica", "radar velocidade", "lombada eletrônica", "autuação automatizada", "fiscalização viária"],
+  },
+  {
+    id: "pesagem",
+    nome: "Pesagem Veicular",
+    icone: "⚖️",
+    descricao: "Balanças rodoviárias, controle de peso bruto",
+    palavras: ["pesagem veicular", "balança rodoviária", "controle peso bruto", "pesagem dinâmica", "posto de pesagem"],
+  },
+  {
+    id: "monitoramento",
+    nome: "Monitoramento Viário",
+    icone: "📡",
+    descricao: "Câmeras CCTV, sensores de tráfego, painéis variáveis",
+    palavras: ["sistema de monitoramento viário", "câmera tráfego", "CFTV rodovia", "painel mensagem variável", "detector veicular", "sensor laço indutivo"],
+  },
+  {
+    id: "leitura_placa",
+    nome: "Leitura de Placa (OCR/LPR)",
+    icone: "🏷️",
+    descricao: "Leitores OCR, reconhecimento de placas veiculares",
+    palavras: ["leitor de placa", "reconhecimento placa veicular", "OCR veicular", "LPR", "câmera leitura placa"],
+  },
+  {
+    id: "cronotacografo",
+    nome: "Cronotacógrafo / Jornada",
+    icone: "⏱️",
+    descricao: "Tacógrafo digital, controle de jornada de motoristas",
+    palavras: ["cronotacógrafo", "tacógrafo digital", "jornada motorista", "controle tacógrafo", "verificação cronotacógrafo"],
+  },
+  {
+    id: "central",
+    nome: "Central de Controle de Tráfego",
+    icone: "🖥️",
+    descricao: "CTT, sistemas integrados, sala de controle",
+    palavras: ["controller de tráfego", "sistema integrado trânsito", "central tráfego", "sala de controle viário", "gerenciamento trânsito"],
+  },
+];
+
 // Palavras-chave de busca padrão por produto
 // Alinhadas com o domínio de cada sistema
 export const PALAVRAS_CHAVE_PRODUTO = {
   axhub: [
-    "fiscalização eletrônica",
-    "radar velocidade",
-    "sistema de monitoramento viário",
-    "equipamento de trânsito",
-    "pesagem veicular",
-    "controller de tráfego",
-    "leitor de placa",
-    "cronotacógrafo",
-    "sistema integrado trânsito",
-    "detector veicular",
+    ...new Set(OPERACOES_AXHUB.flatMap(op => op.palavras)),
   ],
   axton: [
     "posto de pesagem",
