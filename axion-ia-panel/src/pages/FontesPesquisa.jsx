@@ -81,37 +81,57 @@ export default function FontesPesquisa() {
 // ABA: Coletar do PNCP
 // ═══════════════════════════════════════════════════════
 function TabPNCP({ produto, onImportado }) {
+  const [operacoes, setOperacoes] = useState([]);
+  const [operacaoAtiva, setOperacaoAtiva] = useState(null); // id da operação selecionada
   const [busca, setBusca] = useState("");
+  const [modoLivre, setModoLivre] = useState(false);
   const [resultado, setResultado] = useState(null);
+  const [termoBuscado, setTermoBuscado] = useState("");
   const [carregando, setCarregando] = useState(false);
   const [coletando, setColetando] = useState(false);
   const [status, setStatus] = useState(null);
   const [selecionados, setSelecionados] = useState([]);
   const [importando, setImportando] = useState(false);
   const [msg, setMsg] = useState(null);
-  const [palavrasConfig, setPalavrasConfig] = useState([]);
-  const [novaPalavra, setNovaPalavra] = useState("");
-  const [mostrarConfig, setMostrarConfig] = useState(false);
 
-  // Carrega status do coletor e config ao montar
   useEffect(() => {
     Promise.all([
       api.get("/coletor/status"),
-      api.get("/coletor/config"),
-    ]).then(([rs, rc]) => {
+      api.get(`/coletor/operacoes?produto=${produto}`),
+    ]).then(([rs, ro]) => {
       setStatus(rs.data);
-      setPalavrasConfig(rc.data.adicionais?.[produto] || []);
+      setOperacoes(ro.data.operacoes || []);
     }).catch(() => {});
   }, [produto]);
 
-  async function handleBuscar() {
+  async function buscarPorOperacao(op) {
+    setOperacaoAtiva(op.id);
+    setModoLivre(false);
+    setBusca(op.palavras[0]);
+    setMsg(null);
+    setSelecionados([]);
+    setCarregando(true);
+    try {
+      const r = await api.get(`/coletor/pncp?produto=${produto}&q=${encodeURIComponent(op.palavras[0])}&tamanhoPagina=20`);
+      setResultado(r.data);
+      setTermoBuscado(op.palavras[0]);
+    } catch {
+      setMsg({ tipo: "error", texto: "Erro ao buscar no PNCP. Tente novamente." });
+    } finally {
+      setCarregando(false);
+    }
+  }
+
+  async function handleBuscarLivre() {
     if (!busca.trim()) return;
+    setOperacaoAtiva(null);
     setCarregando(true);
     setMsg(null);
     setSelecionados([]);
     try {
-      const r = await api.get(`/coletor/pncp?produto=${produto}&q=${encodeURIComponent(busca)}&tamanhoPagina=15`);
+      const r = await api.get(`/coletor/pncp?produto=${produto}&q=${encodeURIComponent(busca)}&tamanhoPagina=20`);
       setResultado(r.data);
+      setTermoBuscado(busca);
     } catch {
       setMsg({ tipo: "error", texto: "Erro ao buscar no PNCP. Tente novamente." });
     } finally {
@@ -120,7 +140,7 @@ function TabPNCP({ produto, onImportado }) {
   }
 
   async function handleColetar() {
-    if (!confirm(`Coletar TODOS os editais relacionados ao ${produto.toUpperCase()} do PNCP? Isso pode levar alguns segundos.`)) return;
+    if (!confirm(`Coletar TODOS os editais relacionados ao ${produto.toUpperCase()} do PNCP?\nIsso pode levar alguns segundos.`)) return;
     setColetando(true);
     setMsg(null);
     try {
@@ -133,7 +153,6 @@ function TabPNCP({ produto, onImportado }) {
       setMsg({ tipo: "error", texto: err.response?.data?.erro || "Erro na coleta" });
     } finally {
       setColetando(false);
-      // Atualiza status
       api.get("/coletor/status").then(r => setStatus(r.data)).catch(() => {});
     }
   }
@@ -161,12 +180,7 @@ function TabPNCP({ produto, onImportado }) {
     setSelecionados(s => s.includes(numero) ? s.filter(x => x !== numero) : [...s, numero]);
   }
 
-  async function salvarPalavras() {
-    try {
-      await api.post("/coletor/config", { produto, palavras: palavrasConfig });
-      setMsg({ tipo: "success", texto: "Palavras-chave salvas!" });
-    } catch { setMsg({ tipo: "error", texto: "Erro ao salvar" }); }
-  }
+  const operacaoSelecionada = operacoes.find(o => o.id === operacaoAtiva);
 
   return (
     <div>
@@ -186,12 +200,18 @@ function TabPNCP({ produto, onImportado }) {
               )}
             </span>
             {status.ultimaColeta && (
-              <span>
-                <strong>Última:</strong>{" "}
-                {new Date(status.ultimaColeta).toLocaleString("pt-BR")}
-              </span>
+              <span><strong>Última:</strong> {new Date(status.ultimaColeta).toLocaleString("pt-BR")}</span>
             )}
             <span><strong>Total novas:</strong> {status.totalNovos || 0}</span>
+            <button
+              className="btn"
+              onClick={handleColetar}
+              disabled={coletando}
+              style={{ marginLeft: "auto", fontSize: "0.78rem" }}
+              title="Coleta com todas as palavras-chave das operações do sistema"
+            >
+              {coletando ? "⏳ Coletando..." : "🤖 Coleta Completa"}
+            </button>
           </div>
         </div>
       )}
@@ -202,105 +222,100 @@ function TabPNCP({ produto, onImportado }) {
         </div>
       )}
 
-      {/* Busca manual */}
-      <div className="card" style={{ marginBottom: "1rem" }}>
-        <div style={{ marginBottom: "0.75rem", fontWeight: 600, fontSize: "0.9rem" }}>
-          Busca Manual no PNCP — <span style={{ color: "var(--accent)" }}>{produto.toUpperCase()}</span>
-        </div>
-        <div style={{ display: "flex", gap: "0.5rem", marginBottom: "0.5rem" }}>
-          <input
-            className="input"
-            style={{ flex: 1 }}
-            placeholder="Ex: radar velocidade, pesagem veicular, sistema monitoramento..."
-            value={busca}
-            onChange={e => setBusca(e.target.value)}
-            onKeyDown={e => e.key === "Enter" && handleBuscar()}
-          />
-          <button className="btn btn-primary" onClick={handleBuscar} disabled={carregando || !busca.trim()}>
-            {carregando ? "Buscando..." : "🔍 Buscar"}
-          </button>
-        </div>
-        <div style={{ display: "flex", gap: "0.5rem" }}>
-          <button
-            className="btn"
-            onClick={handleColetar}
-            disabled={coletando}
-            title="Busca com todas as palavras-chave configuradas para este produto"
-          >
-            {coletando ? "Coletando..." : "🤖 Coleta Automática Completa"}
-          </button>
-          <button
-            className="btn"
-            onClick={() => setMostrarConfig(v => !v)}
-            style={{ fontSize: "0.8rem" }}
-          >
-            ⚙️ Palavras-chave
-          </button>
-        </div>
-      </div>
-
-      {/* Configurar palavras-chave adicionais */}
-      {mostrarConfig && (
+      {/* Seção 1: Operações do sistema */}
+      {produto === "axhub" && operacoes.length > 0 && (
         <div className="card" style={{ marginBottom: "1rem" }}>
-          <div style={{ fontWeight: 600, marginBottom: "0.5rem", fontSize: "0.85rem" }}>
-            Palavras-chave adicionais — {produto.toUpperCase()}
+          <div style={{ fontWeight: 600, fontSize: "0.9rem", marginBottom: "0.75rem" }}>
+            🏢 Buscar por Operação do {produto.toUpperCase()}
+            <span style={{ fontWeight: 400, fontSize: "0.78rem", color: "var(--text-muted)", marginLeft: 8 }}>
+              — clique para buscar editais relacionados a cada operação que o sistema gerencia
+            </span>
           </div>
-          <div style={{ display: "flex", gap: "0.5rem", marginBottom: "0.5rem" }}>
-            <input
-              className="input"
-              style={{ flex: 1 }}
-              placeholder="Adicionar palavra-chave..."
-              value={novaPalavra}
-              onChange={e => setNovaPalavra(e.target.value)}
-              onKeyDown={e => {
-                if (e.key === "Enter" && novaPalavra.trim()) {
-                  setPalavrasConfig(p => [...p, novaPalavra.trim()]);
-                  setNovaPalavra("");
-                }
-              }}
-            />
-            <button
-              className="btn"
-              onClick={() => { if (novaPalavra.trim()) { setPalavrasConfig(p => [...p, novaPalavra.trim()]); setNovaPalavra(""); } }}
-            >
-              + Adicionar
-            </button>
-          </div>
-          <div style={{ display: "flex", flexWrap: "wrap", gap: "0.35rem", marginBottom: "0.75rem" }}>
-            {palavrasConfig.map((p, i) => (
-              <span key={i} style={{
-                background: "var(--accent)", color: "#fff",
-                padding: "0.2rem 0.6rem", borderRadius: 12, fontSize: "0.78rem",
-                display: "flex", alignItems: "center", gap: 4,
-              }}>
-                {p}
-                <button
-                  onClick={() => setPalavrasConfig(ps => ps.filter((_, j) => j !== i))}
-                  style={{ background: "none", border: "none", color: "#fff", cursor: "pointer", padding: 0, fontSize: "0.9rem" }}
-                >×</button>
-              </span>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(200px, 1fr))", gap: "0.5rem" }}>
+            {operacoes.map(op => (
+              <button
+                key={op.id}
+                onClick={() => buscarPorOperacao(op)}
+                disabled={carregando}
+                style={{
+                  background: operacaoAtiva === op.id ? "var(--accent)" : "var(--surface2)",
+                  color: operacaoAtiva === op.id ? "#fff" : "var(--text)",
+                  border: operacaoAtiva === op.id ? "2px solid var(--accent)" : "2px solid transparent",
+                  borderRadius: 8,
+                  padding: "0.6rem 0.75rem",
+                  textAlign: "left",
+                  cursor: carregando ? "not-allowed" : "pointer",
+                  fontSize: "0.82rem",
+                  transition: "all 0.15s",
+                }}
+              >
+                <div style={{ fontSize: "1.1rem", marginBottom: 2 }}>{op.icone} <strong>{op.nome}</strong></div>
+                <div style={{ fontSize: "0.72rem", opacity: 0.75 }}>{op.descricao}</div>
+              </button>
             ))}
-            {palavrasConfig.length === 0 && (
-              <span style={{ color: "var(--text-muted)", fontSize: "0.8rem" }}>Nenhuma palavra adicional configurada.</span>
-            )}
           </div>
-          <button className="btn btn-primary" onClick={salvarPalavras}>Salvar</button>
+          {operacaoSelecionada && (
+            <div style={{ marginTop: "0.75rem", fontSize: "0.78rem", color: "var(--text-muted)" }}>
+              Buscando: <strong>{operacaoSelecionada.palavras.join(" · ")}</strong>
+            </div>
+          )}
         </div>
       )}
 
-      {/* Resultados da busca */}
-      {resultado && (
+      {/* Seção 2: Busca livre */}
+      <div className="card" style={{ marginBottom: "1rem" }}>
+        <div style={{ fontWeight: 600, fontSize: "0.9rem", marginBottom: "0.5rem" }}>
+          🔍 Busca Livre por Palavra-chave
+          <span style={{ fontWeight: 400, fontSize: "0.78rem", color: "var(--text-muted)", marginLeft: 8 }}>
+            — pesquise qualquer termo independente das operações do sistema
+          </span>
+        </div>
+        <div style={{ display: "flex", gap: "0.5rem" }}>
+          <input
+            className="input"
+            style={{ flex: 1 }}
+            placeholder="Ex: sistema semafórico, gestão frota, telemetria veicular..."
+            value={modoLivre ? busca : ""}
+            onChange={e => { setBusca(e.target.value); setModoLivre(true); setOperacaoAtiva(null); }}
+            onFocus={() => setModoLivre(true)}
+            onKeyDown={e => e.key === "Enter" && handleBuscarLivre()}
+          />
+          <button
+            className="btn btn-primary"
+            onClick={handleBuscarLivre}
+            disabled={carregando || !(modoLivre ? busca.trim() : false)}
+          >
+            {carregando && modoLivre ? "Buscando..." : "Buscar"}
+          </button>
+        </div>
+        <div style={{ fontSize: "0.75rem", color: "var(--text-muted)", marginTop: "0.4rem" }}>
+          💡 Use isso para descobrir oportunidades de mercado e avaliar se o sistema pode ser adaptado para novas demandas.
+        </div>
+      </div>
+
+      {/* Seção 3: Resultados */}
+      {carregando && (
+        <div className="card" style={{ textAlign: "center", padding: "2rem", color: "var(--text-muted)" }}>
+          ⏳ Consultando o PNCP...
+        </div>
+      )}
+
+      {!carregando && resultado && (
         <div>
-          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "0.75rem" }}>
+          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "0.75rem", flexWrap: "wrap", gap: "0.5rem" }}>
             <span style={{ fontSize: "0.85rem", color: "var(--text-muted)" }}>
-              {resultado.total} resultado(s) encontrado(s)
+              {resultado.total} resultado(s) para <strong>"{termoBuscado}"</strong>
+              {operacaoSelecionada && (
+                <span style={{
+                  marginLeft: 8, background: "var(--accent)", color: "#fff",
+                  padding: "0.1rem 0.5rem", borderRadius: 10, fontSize: "0.72rem",
+                }}>
+                  {operacaoSelecionada.icone} {operacaoSelecionada.nome}
+                </span>
+              )}
             </span>
             {selecionados.length > 0 && (
-              <button
-                className="btn btn-primary"
-                onClick={handleImportar}
-                disabled={importando}
-              >
+              <button className="btn btn-primary" onClick={handleImportar} disabled={importando}>
                 {importando ? "Importando..." : `📥 Importar ${selecionados.length} selecionado(s)`}
               </button>
             )}
@@ -308,7 +323,17 @@ function TabPNCP({ produto, onImportado }) {
 
           {resultado.items.length === 0 ? (
             <div className="card" style={{ textAlign: "center", padding: "1.5rem", color: "var(--text-muted)" }}>
-              Nenhum resultado encontrado para "<strong>{busca}</strong>" no PNCP.
+              Nenhum edital encontrado para <strong>"{termoBuscado}"</strong> no PNCP.
+              {operacaoSelecionada && (
+                <div style={{ marginTop: "0.5rem", fontSize: "0.8rem" }}>
+                  Tente buscar por: {operacaoSelecionada.palavras.slice(1, 4).map(p => (
+                    <button key={p} className="btn" style={{ margin: "0.2rem", fontSize: "0.75rem", padding: "0.2rem 0.5rem" }}
+                      onClick={() => { setBusca(p); setModoLivre(false); buscarPorOperacao({ ...operacaoSelecionada, palavras: [p, ...operacaoSelecionada.palavras] }); }}>
+                      {p}
+                    </button>
+                  ))}
+                </div>
+              )}
             </div>
           ) : (
             <table className="data-table">
@@ -316,6 +341,7 @@ function TabPNCP({ produto, onImportado }) {
                 <tr>
                   <th style={{ width: 36 }}></th>
                   <th>Título / Órgão</th>
+                  <th>Operação</th>
                   <th>UF</th>
                   <th>Modalidade</th>
                   <th>Publicação</th>
@@ -334,11 +360,23 @@ function TabPNCP({ produto, onImportado }) {
                         style={{ cursor: "pointer" }}
                       />
                     </td>
-                    <td style={{ maxWidth: 320 }}>
+                    <td style={{ maxWidth: 280 }}>
                       <div style={{ fontWeight: 600, fontSize: "0.85rem", marginBottom: 2 }}>
-                        {item.titulo?.substring(0, 80)}{item.titulo?.length > 80 ? "..." : ""}
+                        {item.titulo?.substring(0, 75)}{item.titulo?.length > 75 ? "..." : ""}
                       </div>
                       <div style={{ fontSize: "0.75rem", color: "var(--text-muted)" }}>{item.orgao}</div>
+                    </td>
+                    <td style={{ textAlign: "center", whiteSpace: "nowrap" }}>
+                      {item.operacao ? (
+                        <span title={item.operacao.nome} style={{
+                          background: "var(--accent)", color: "#fff",
+                          padding: "0.15rem 0.45rem", borderRadius: 8, fontSize: "0.72rem",
+                        }}>
+                          {item.operacao.icone} {item.operacao.nome}
+                        </span>
+                      ) : (
+                        <span style={{ color: "var(--text-muted)", fontSize: "0.75rem" }}>—</span>
+                      )}
                     </td>
                     <td style={{ textAlign: "center" }}>{item.uf || "—"}</td>
                     <td style={{ fontSize: "0.78rem" }}>{item.modalidade}</td>
@@ -362,9 +400,6 @@ function TabPNCP({ produto, onImportado }) {
           )}
         </div>
       )}
-    </div>
-  );
-}
 
 // ═══════════════════════════════════════════════════════
 // ABA: Fontes Cadastradas

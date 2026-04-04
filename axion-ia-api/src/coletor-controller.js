@@ -14,7 +14,7 @@
  *   GET  /api/coletor/status          → status da última coleta automática
  */
 
-import { buscarContratacoes, coletarPorProduto, PALAVRAS_CHAVE_PRODUTO } from "./services/pncp.service.js";
+import { buscarContratacoes, coletarPorProduto, PALAVRAS_CHAVE_PRODUTO, OPERACOES_AXHUB } from "./services/pncp.service.js";
 import { pncpParaMd, tituloPncp } from "./services/parser.js";
 import { Fonte } from "./models/fonte.model.js";
 import { obterDicionario } from "./services/normalizador.js";
@@ -56,24 +56,52 @@ export async function buscarPNCP(req, res) {
       tamanhoPagina: Number(tamanhoPagina),
     });
 
+    // Detecta qual operação AxHub se relaciona com cada resultado
+    const operacoes = produto === "axhub" ? OPERACOES_AXHUB : [];
+    const qtermoBusca = q.toLowerCase();
+
     return res.json({
       total: items.length,
       pagina: Number(pagina),
       produto,
-      items: items.map(i => ({
-        numero: i.numero,
-        titulo: i.titulo,
-        orgao: i.orgao,
-        uf: i.uf,
-        modalidade: i.modalidade,
-        valor: i.valor,
-        dataPublicacao: i.dataPublicacao,
-        link: i.link,
-      })),
+      items: items.map(i => {
+        const texto = `${i.titulo || ""} ${i.resumo || ""}`.toLowerCase();
+        const operacaoRelacionada = operacoes.find(op =>
+          op.palavras.some(p => texto.includes(p.toLowerCase())) ||
+          op.palavras.some(p => qtermoBusca.includes(p.toLowerCase()))
+        ) || null;
+
+        return {
+          numero: i.numero,
+          titulo: i.titulo,
+          orgao: i.orgao,
+          uf: i.uf,
+          modalidade: i.modalidade,
+          valor: i.valor,
+          dataPublicacao: i.dataPublicacao,
+          link: i.link,
+          operacao: operacaoRelacionada
+            ? { id: operacaoRelacionada.id, nome: operacaoRelacionada.nome, icone: operacaoRelacionada.icone }
+            : null,
+        };
+      }),
     });
   } catch (err) {
     return res.status(500).json({ erro: err.message });
   }
+}
+
+// ─────────────────────────────────────────────────────────────────
+// GET /api/coletor/operacoes?produto=axhub
+// Retorna as operações disponíveis com suas palavras-chave
+// ─────────────────────────────────────────────────────────────────
+export async function listarOperacoes(req, res) {
+  const { produto = "axhub" } = req.query;
+  if (!PRODUTOS_VALIDOS.includes(produto)) {
+    return res.status(400).json({ erro: "Produto inválido" });
+  }
+  const operacoes = produto === "axhub" ? OPERACOES_AXHUB : [];
+  return res.json({ operacoes });
 }
 
 // ─────────────────────────────────────────────────────────────────
