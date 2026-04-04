@@ -400,6 +400,9 @@ function TabPNCP({ produto, onImportado }) {
           )}
         </div>
       )}
+    </div>
+  );
+}
 
 // ═══════════════════════════════════════════════════════
 // ABA: Fontes Cadastradas
