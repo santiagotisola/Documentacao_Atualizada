@@ -16,7 +16,7 @@ app.use(express.json());
 // CORS para painel React (dev)
 app.use((req, res, next) => {
   const origin = req.headers.origin;
-  const allowed = (process.env.CORS_ORIGIN || "http://localhost:3001,http://localhost:3003").split(",");
+  const allowed = (process.env.CORS_ORIGIN || "http://localhost:3001,http://localhost:3002,http://localhost:3003").split(",");
   if (allowed.includes(origin)) {
     res.header("Access-Control-Allow-Origin", origin);
   }

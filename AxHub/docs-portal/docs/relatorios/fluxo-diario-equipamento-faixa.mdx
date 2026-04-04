@@ -1,0 +1,183 @@
+---
+sidebar_position: 3
+title: "Relatório de Fluxo Diário por Equipamento/Faixa"
+description: Como consultar o relatório de passagens e imagens por dia, equipamento e faixa no AxHub
+slug: /relatorios/relatorio-por-dia-e-equipamentofaixa-de-fluxoimagens-
+---
+
+import RelatorioFluxoTabela from '@site/src/components/RelatorioFluxoTabela';
+
+# Relatório de Fluxo Diário por Equipamento/Faixa
+
+:::info Para quem é este documento?
+Analistas de operações e supervisores responsáveis pela conferência diária de passagens e imagens registradas pelos equipamentos de fiscalização.
+:::
+
+---
+
+## O que é este relatório?
+
+O **Relatório de Fluxo Diário por Equipamento/Faixa** exibe, em formato de matriz, a quantidade de **passagens** ou **imagens** capturadas por cada equipamento e faixa ao longo dos dias de um determinado mês.
+
+Cada linha representa um par **Equipamento + Faixa** (ex.: `F-DIP-D0496 FX1`) e cada coluna representa um **dia do mês**. O cruzamento mostra o total registrado naquele dia para aquela faixa.
+
+Benefícios:
+- ✅ Visualização consolidada de todo o fluxo mensal em uma única tela
+- ✅ Identificação imediata de dias com volume atípico (alto ou zero) através do mapa de calor
+- ✅ Comparação rápida entre equipamentos e faixas no mesmo período
+- 🔒 Necessário acesso ao módulo de Relatórios do AxHub
+
+:::warning Atenção
+Dias exibidos com **`-`** (traço) indicam que não houve registros para aquele equipamento/faixa naquele dia. Verifique se o equipamento estava operacional antes de concluir que não houve fluxo.
+:::
+
+---
+
+## Como Acessar
+
+### Passo 1 — Login
+
+Acesse o AxHub com seu usuário e senha. Certifique-se de que seu perfil tem permissão ao módulo **Relatórios**.
+
+![Login](../img/Login.png)
+
+### Passo 2 — Menu Relatórios
+
+No menu lateral, clique em **Relatórios** para expandir as opções disponíveis.
+
+![Relatórios no menu](../img/Relatorio%20-%20Relatorio%20de%20infrações.png)
+
+### Passo 3 — Selecionar o Relatório de Passagens ou Imagens
+
+Escolha conforme a necessidade:
+- **Relatório de Passagens** — para conferência do volume de veículos por faixa/dia
+- **Relatório de Processamento de Imagens** — para conferência das imagens capturadas por faixa/dia
+
+![Relatório de Passagens](../img/Relatorio%20-%20Relatorio%20de%20passagens.png)
+
+### Passo 4 — Filtrar por Equipamento e Período
+
+Na tela do relatório, preencha os filtros:
+
+| Filtro | Descrição |
+|---|---|
+| **Equipamento** | Selecione um equipamento específico ou **TODOS** para consolidar todos |
+| **Mês/Ano** | Informe o mês e ano de referência (ex.: `08/2025`) |
+| **Tipo** | Passagens ou Imagens |
+
+Após preencher, clique em **Gerar** ou **Pesquisar**.
+
+### Passo 5 — Interpretar a Matriz de Resultados
+
+O sistema exibirá uma tabela no seguinte formato:
+
+```
+Equipamento: TODOS          Mês/Ano: 08/2025
+
+Equip./Dia  |  1   |  2   |  3   |  4   | ... | 31  | Total
+------------|------|------|------|------|-----|-----|------
+F-DIP-D0496 FX1 | 9243 | 7814 | 5309 | 8660 | ... |  -  | ...
+F-DIP-D0496 FX2 | 9941 | 8400 | 5867 | 9325 | ... |  -  | ...
+F-DIP-D0497 FX1 | 10364| 8407 | 6137 |10818 | ... |  -  | ...
+...
+```
+
+**Legenda do mapa de calor:**
+
+| Cor | Significado |
+|---|---|
+| 🟦 **Azul/Teal** | Volume baixo em relação ao pico da linha (< 20%) |
+| 🟩 **Verde** | Volume moderado-baixo (20% – 40%) |
+| 🟨 **Amarelo** | Volume moderado-alto (40% – 65%) |
+| 🟧 **Laranja** | Volume alto (65% – 85%) |
+| 🟥 **Vermelho** | Volume máximo / pico da linha (> 85%) |
+| **`-`** | Sem registros naquele dia |
+
+A intensidade da cor é relativa ao **maior valor de cada linha**, permitindo identificar rapidamente os dias de pico de cada equipamento/faixa individualmente.
+
+### Passo 6 — Exportar o Relatório
+
+Para análise externa, utilize o botão **Exportar CSV** (disponível no topo da tabela). O arquivo gerado pode ser aberto no Excel com separador ponto-e-vírgula (`;`).
+
+---
+
+## Visualização Interativa — Matriz de Fluxo
+
+Use os filtros abaixo para selecionar equipamento, mês/ano e intervalo de dias. A intensidade da cor é relativa ao maior valor de cada linha.
+
+<RelatorioFluxoTabela tipo="passagens" />
+
+---
+
+## Checklist de Verificação
+
+Antes de utilizar os dados do relatório, verifique:
+
+- [ ] O período selecionado (mês/ano) está correto
+- [ ] O filtro de equipamento corresponde ao escopo da análise (um específico ou TODOS)
+- [ ] Dias com traço (`-`) foram verificados quanto ao status operacional dos equipamentos
+- [ ] O tipo selecionado (Passagens ou Imagens) é o correto para a conferência em questão
+- [ ] Equipamentos com volume zero em todos os dias do mês foram escalados para verificação técnica
+
+---
+
+## Critérios e Regras
+
+| Situação | Ação | Motivo |
+|---|---|---|
+| Dia com valor `0` ou `-` em equipamento ativo | ⚠️ Verificar operacionalidade do equipamento | Pode indicar falha de comunicação ou equipamento offline |
+| Volume de um dia muito abaixo da média da linha | ⚠️ Confirmar se houve manutenção ou interdição de via | Afeta a integridade da conferência |
+| Volume acima do esperado (célula vermelha) | ✅ Registrar e validar com a equipe de campo | Pode indicar evento especial ou fluxo intenso |
+| Faixa com dados ausentes por vários dias seguidos | ❌ Abrir chamado técnico para verificação | Possível falha de sensor ou perda de comunicação |
+
+---
+
+## Casos Especiais
+
+:::tip Dica — Comparar Passagens × Imagens
+Gere os dois relatórios (Passagens e Imagens) para o mesmo período e equipamento. A diferença entre os totais indica registros sem imagem capturada — útil para auditoria de qualidade do sistema de câmeras.
+:::
+
+:::danger Situação Crítica — Equipamento sem dados por mais de 24h
+Se um equipamento ativo não apresentar nenhum registro por um dia inteiro, notifique imediatamente a equipe técnica. Isso pode indicar falha de alimentação, perda de rede ou problema no software embarcado.
+:::
+
+---
+
+## Fluxo do Processo
+
+```
+[Acessar AxHub]
+       ↓
+[Menu Relatórios → Passagens ou Imagens]
+       ↓
+[Preencher filtros: Equipamento / Mês / Ano]
+       ↓
+[Gerar relatório]
+       ↓
+[Analisar matriz de calor]
+   ↙           ↘
+[Dados OK]   [Anomalia detectada]
+    ↓                ↓
+[Exportar CSV]  [Verificar equipamento / abrir chamado]
+    ↓
+[Arquivar / Encaminhar para gestão]
+```
+
+---
+
+## Informações Técnicas
+
+- **Atualização dos dados:** os totais são calculados em tempo real a partir das passagens registradas no banco de dados do AxHub.
+- **Colunas exibidas:** apenas os dias com pelo menos um registro em qualquer equipamento são coloridos; demais dias exibem `-`.
+- **Linha "Total":** disponível na última coluna, soma todos os dias do período para cada equipamento/faixa.
+- **Exportação:** formato CSV com separador `;`, codificação UTF-8 com BOM (compatível com Excel).
+
+---
+
+## Ver Também
+
+- [Relatório de Passagens](./relatorio-passagens.md)
+- [Relatório de Processamento de Imagens por Usuário](./processamento-por-usuario.md)
+- [Relatório de Discrepâncias](./relatorio-discrepancias.md)
+- [Eventos dos Equipamentos](./eventos-equipamentos.md)
