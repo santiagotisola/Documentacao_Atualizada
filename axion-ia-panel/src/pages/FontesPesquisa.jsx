@@ -1,4 +1,5 @@
 import { useState, useEffect, useCallback } from "react";
+import { useNavigate } from "react-router-dom";
 import { api } from "../services/api";
 
 const PRODUTOS = [
@@ -400,6 +401,9 @@ function TabPNCP({ produto, onImportado }) {
           )}
         </div>
       )}
+    </div>
+  );
+}
 
 // ═══════════════════════════════════════════════════════
 // ABA: Fontes Cadastradas
@@ -409,6 +413,7 @@ function TabFontes({ produto, onAnalisar }) {
   const [carregando, setCarregando] = useState(true);
   const [analisando, setAnalisando] = useState(null);
   const [msg, setMsg] = useState(null);
+  const navigate = useNavigate();
 
   const carregar = useCallback(() => {
     setCarregando(true);
@@ -438,12 +443,30 @@ function TabFontes({ produto, onAnalisar }) {
     }
   }
 
+  async function handleConformidade(fonte) {
+    try {
+      // Busca conteúdo completo (a listagem omite o campo conteudo)
+      const r = await api.get(`/fontes/${fonte._id}`);
+      const completo = r.data;
+      sessionStorage.setItem("conformidade_preload", JSON.stringify({
+        titulo: completo.titulo,
+        conteudo: completo.conteudo,
+        produto,
+      }));
+      navigate("/conformidade");
+    } catch {
+      setMsg({ tipo: "error", texto: "Erro ao carregar conteúdo da fonte para conformidade." });
+    }
+  }
+
   async function handleRemover(id) {
     if (!confirm("Remover esta fonte?")) return;
     try {
       await api.delete(`/fontes/${id}`);
       carregar();
-    } catch { /* silencioso */ }
+    } catch (err) {
+      setMsg({ tipo: "error", texto: err.response?.data?.erro || "Erro ao remover fonte." });
+    }
   }
 
   if (carregando) return <p style={{ color: "var(--text-muted)" }}>Carregando...</p>;
@@ -518,7 +541,7 @@ function TabFontes({ produto, onAnalisar }) {
                   {f.analise ? `${f.analise.totalTopicos}` : "—"}
                 </td>
                 <td>
-                  <div style={{ display: "flex", gap: "0.4rem" }}>
+                  <div style={{ display: "flex", gap: "0.4rem", flexWrap: "wrap" }}>
                     <button
                       className="btn btn-sm"
                       onClick={() => handleAnalisar(f._id)}
@@ -527,6 +550,16 @@ function TabFontes({ produto, onAnalisar }) {
                     >
                       {analisando === f._id ? "..." : "🔍 Analisar"}
                     </button>
+                    {f.status === "analisado" && (
+                      <button
+                        className="btn btn-sm"
+                        onClick={() => handleConformidade(f)}
+                        title="Verificar conformidade deste documento com a documentação do produto"
+                        style={{ background: "var(--accent)", color: "#fff", border: "none" }}
+                      >
+                        📜 Conformidade
+                      </button>
+                    )}
                     <button
                       className="btn btn-sm btn-danger"
                       onClick={() => handleRemover(f._id)}
@@ -557,10 +590,49 @@ function TabAdicionar({ produto, onSucesso }) {
   });
   const [salvando, setSalvando] = useState(false);
   const [msg, setMsg] = useState(null);
+  const [extraindo, setExtraindo] = useState(false);
+  const [infoExtracao, setInfoExtracao] = useState(null); // { nome, palavras, caracteres }
+  const [dragOver, setDragOver] = useState(false);
 
   function handleChange(e) {
     setForm(f => ({ ...f, [e.target.name]: e.target.value }));
     setMsg(null);
+  }
+
+  async function processarArquivo(file) {
+    if (!file) return;
+    setExtraindo(true);
+    setInfoExtracao(null);
+    setMsg(null);
+
+    const data = new FormData();
+    data.append("arquivo", file);
+
+    try {
+      const r = await api.post("/doc/upload-contexto", data);
+      const { texto, nomeArquivo, palavrasExtraidas, caracteres } = r.data;
+      setForm(f => ({
+        ...f,
+        conteudo: texto,
+        arquivo: nomeArquivo,
+        titulo: f.titulo || nomeArquivo.replace(/\.[^.]+$/, ""),
+      }));
+      setInfoExtracao({ nome: nomeArquivo, palavras: palavrasExtraidas, caracteres });
+    } catch (err) {
+      setMsg({ tipo: "error", texto: err.response?.data?.erro || "Erro ao extrair conteúdo do arquivo." });
+    } finally {
+      setExtraindo(false);
+    }
+  }
+
+  function handleFileInput(e) {
+    processarArquivo(e.target.files[0]);
+  }
+
+  function handleDrop(e) {
+    e.preventDefault();
+    setDragOver(false);
+    processarArquivo(e.dataTransfer.files[0]);
   }
 
   async function handleSubmit(e) {
@@ -575,6 +647,7 @@ function TabAdicionar({ produto, onSucesso }) {
       await api.post("/fontes", { ...form, produto });
       setMsg({ tipo: "success", texto: "Fonte adicionada com sucesso!" });
       setForm({ titulo: "", tipo: "manual", conteudo: "", arquivo: "" });
+      setInfoExtracao(null);
       setTimeout(onSucesso, 1200);
     } catch (err) {
       setMsg({ tipo: "error", texto: err.response?.data?.erro || "Erro ao salvar" });
@@ -596,6 +669,52 @@ function TabAdicionar({ produto, onSucesso }) {
       )}
 
       <form onSubmit={handleSubmit}>
+
+        {/* ── Upload de arquivo ── */}
+        <div className="form-group">
+          <label className="label">Importar Arquivo ou Imagem</label>
+          <div
+            onDragOver={e => { e.preventDefault(); setDragOver(true); }}
+            onDragLeave={() => setDragOver(false)}
+            onDrop={handleDrop}
+            style={{
+              border: `2px dashed ${dragOver ? "var(--accent)" : "var(--border)"}`,
+              borderRadius: 10,
+              padding: "1.25rem 1rem",
+              textAlign: "center",
+              background: dragOver ? "var(--surface2)" : "var(--surface)",
+              cursor: "pointer",
+              transition: "all 0.15s",
+              position: "relative",
+            }}
+            onClick={() => document.getElementById("fonte-file-input").click()}
+          >
+            <input
+              id="fonte-file-input"
+              type="file"
+              style={{ display: "none" }}
+              accept=".pdf,.docx,.doc,.xlsx,.xls,.csv,.txt,.md,.png,.jpg,.jpeg,.gif,.webp,.bmp,.svg"
+              onChange={handleFileInput}
+            />
+            {extraindo ? (
+              <span style={{ color: "var(--text-muted)", fontSize: "0.88rem" }}>⏳ Extraindo conteúdo...</span>
+            ) : infoExtracao ? (
+              <span style={{ color: "var(--success)", fontSize: "0.88rem" }}>
+                ✅ <strong>{infoExtracao.nome}</strong> — {infoExtracao.palavras.toLocaleString("pt-BR")} palavras extraídas
+              </span>
+            ) : (
+              <span style={{ color: "var(--text-muted)", fontSize: "0.88rem" }}>
+                📎 Arraste um arquivo aqui ou <span style={{ color: "var(--accent)", textDecoration: "underline" }}>clique para selecionar</span>
+                <br />
+                <small style={{ fontSize: "0.75rem" }}>PDF, DOCX, XLSX, TXT, MD, PNG, JPG e outros — máx. 10 MB</small>
+              </span>
+            )}
+          </div>
+          <p style={{ color: "var(--text-muted)", fontSize: "0.75rem", marginTop: "0.35rem" }}>
+            O texto será extraído automaticamente e preencherá o campo abaixo.
+          </p>
+        </div>
+
         <div className="form-group">
           <label className="label">Título da Fonte *</label>
           <input
@@ -615,7 +734,7 @@ function TabAdicionar({ produto, onSucesso }) {
         </div>
 
         <div className="form-group">
-          <label className="label">Nome do Arquivo Original (opcional)</label>
+          <label className="label">Nome do Arquivo Original</label>
           <input
             className="input"
             name="arquivo"
@@ -628,8 +747,7 @@ function TabAdicionar({ produto, onSucesso }) {
         <div className="form-group">
           <label className="label">Conteúdo do Documento *</label>
           <p style={{ color: "var(--text-muted)", fontSize: "0.8rem", marginBottom: "0.5rem" }}>
-            Cole o conteúdo extraído do documento (texto, markdown, HTML limpo). O sistema irá
-            extrair tópicos e compará-los com a documentação existente nos portais.
+            Cole ou edite o conteúdo. O sistema irá extrair tópicos e compará-los com a documentação existente nos portais.
           </p>
           <textarea
             className="input"
@@ -646,13 +764,13 @@ function TabAdicionar({ produto, onSucesso }) {
         </div>
 
         <div style={{ display: "flex", gap: "0.75rem", marginTop: "0.5rem" }}>
-          <button className="btn btn-primary" type="submit" disabled={salvando}>
+          <button className="btn btn-primary" type="submit" disabled={salvando || extraindo}>
             {salvando ? "Salvando..." : "Salvar Fonte"}
           </button>
           <button
             className="btn"
             type="button"
-            onClick={() => setForm({ titulo: "", tipo: "manual", conteudo: "", arquivo: "" })}
+            onClick={() => { setForm({ titulo: "", tipo: "manual", conteudo: "", arquivo: "" }); setInfoExtracao(null); }}
           >
             Limpar
           </button>
@@ -742,105 +860,183 @@ function TabAnalise({ produto }) {
 }
 
 function PainelAnalise({ analise, titulo }) {
-  const [filtro, setFiltro] = useState("todos"); // todos | cobertos | lacunas
+  const [filtro, setFiltro] = useState("lacunas");
+  const [expandido, setExpandido] = useState(null);
 
-  const itens = (analise.cobertura || []).filter(c => {
-    if (filtro === "cobertos") return c.coberto;
-    if (filtro === "lacunas")  return !c.coberto;
-    return true;
-  });
+  const lacunas  = (analise.cobertura || []).filter(c => !c.coberto);
+  const cobertos = (analise.cobertura || []).filter(c =>  c.coberto);
+  const itens    = filtro === "cobertos" ? cobertos : filtro === "lacunas" ? lacunas : (analise.cobertura || []);
 
-  const corCobertura = analise.percentualCobertura >= 70 ? "var(--success)" :
-                       analise.percentualCobertura >= 40 ? "var(--warning)" : "var(--error)";
+  const corCobertura = analise.percentualCobertura >= 70 ? "var(--success)"
+    : analise.percentualCobertura >= 40 ? "var(--warning)" : "var(--error)";
+
+  function getVeredicto() {
+    const p = analise.percentualCobertura;
+    if (p >= 80) return { cor: "var(--success)", texto: "✅ A documentação cobre bem os requisitos deste documento." };
+    if (p >= 50) return { cor: "var(--warning)", texto: "⚠️ Cobertura parcial — parte dos requisitos não está documentada. Ações necessárias antes de concorrer." };
+    return { cor: "var(--error)", texto: "❌ Cobertura baixa — a maioria dos requisitos não está coberta. Ações urgentes para participar de licitações." };
+  }
+  const veredicto = getVeredicto();
+
+  function estimarEsforco(topico) {
+    const t = (topico || "").toLowerCase();
+    if (/integra|api|banco|importa|exporta|automatiz/.test(t))             return { label: "Alto",  cor: "#e74c3c" };
+    if (/cláusula|contrat|legal|jurídic|garantia|prazo|vigência|dotação/.test(t)) return { label: "Médio", cor: "#f39c12" };
+    return { label: "Baixo", cor: "#27ae60" };
+  }
+
+  function getAcao(item) {
+    return (analise.sugestoes || []).find(sg =>
+      sg.titulo && item.topico &&
+      sg.titulo.toLowerCase().includes(item.topico.toLowerCase().substring(0, 20))
+    );
+  }
 
   return (
     <div>
-      {/* Cards resumo */}
-      <div className="cards-grid" style={{ marginBottom: "1.5rem" }}>
-        <div className="card stat-card">
-          <div className="stat-value" style={{ color: corCobertura }}>
-            {analise.percentualCobertura}%
-          </div>
-          <div className="stat-label">Cobertura Geral</div>
-        </div>
-        <div className="card stat-card">
-          <div className="stat-value">{analise.totalTopicos}</div>
-          <div className="stat-label">Tópicos Identificados</div>
-        </div>
-        <div className="card stat-card">
-          <div className="stat-value" style={{ color: "var(--success)" }}>{analise.totalCobertos}</div>
-          <div className="stat-label">Cobertos</div>
-        </div>
-        <div className="card stat-card">
-          <div className="stat-value" style={{ color: "var(--error)" }}>{analise.lacunas?.length || 0}</div>
-          <div className="stat-label">Lacunas</div>
+      {/* Interpretação geral */}
+      <div style={{
+        background: "var(--surface2)", borderLeft: `4px solid ${veredicto.cor}`,
+        borderRadius: 8, padding: "0.9rem 1.1rem", marginBottom: "1.25rem",
+        border: `1px solid ${veredicto.cor}30`,
+      }}>
+        <div style={{ fontWeight: 700, color: veredicto.cor, marginBottom: 4 }}>{veredicto.texto}</div>
+        <div style={{ fontSize: "0.8rem", color: "var(--text-muted)", lineHeight: 1.5 }}>
+          Documento: <strong>{titulo}</strong> — {analise.totalTopicos} requisitos identificados.{" "}
+          <strong style={{ color: "var(--success)" }}>{analise.totalCobertos} cobertos</strong> e{" "}
+          <strong style={{ color: "var(--error)" }}>{lacunas.length} sem cobertura</strong> na documentação do sistema.
         </div>
       </div>
 
-      {/* Barra de progresso */}
-      <div style={{ marginBottom: "1.5rem" }}>
-        <div style={{ height: 8, background: "var(--surface2)", borderRadius: 4, overflow: "hidden" }}>
-          <div style={{
-            height: "100%",
-            width: `${analise.percentualCobertura}%`,
-            background: corCobertura,
-            borderRadius: 4,
-            transition: "width 0.5s ease",
-          }} />
+      {/* Cards */}
+      <div className="cards-grid" style={{ marginBottom: "1.25rem" }}>
+        {[
+          { label: "Cobertura Geral",      val: `${analise.percentualCobertura}%`, cor: corCobertura },
+          { label: "✅ Cobertos",           val: analise.totalCobertos,             cor: "var(--success)" },
+          { label: "❌ Sem Documentação",   val: lacunas.length,                   cor: "var(--error)" },
+          { label: "Total de Requisitos",   val: analise.totalTopicos,             cor: undefined },
+        ].map(c => (
+          <div key={c.label} className="card stat-card">
+            <div className="stat-value" style={c.cor ? { color: c.cor } : {}}>{c.val}</div>
+            <div className="stat-label">{c.label}</div>
+          </div>
+        ))}
+      </div>
+
+      {/* Barra */}
+      <div style={{ marginBottom: "1.25rem" }}>
+        <div style={{ display: "flex", justifyContent: "space-between", fontSize: "0.72rem", marginBottom: 4 }}>
+          <span style={{ color: "var(--error)" }}>❌ {lacunas.length} sem cobertura</span>
+          <span style={{ color: "var(--success)" }}>✅ {analise.totalCobertos} cobertos</span>
         </div>
-        <div style={{ display: "flex", justifyContent: "space-between", fontSize: "0.75rem", color: "var(--text-muted)", marginTop: 4 }}>
-          <span>0%</span>
-          <span style={{ fontWeight: 600 }}>{titulo}</span>
-          <span>100%</span>
+        <div style={{ height: 10, background: "var(--surface2)", borderRadius: 6, overflow: "hidden" }}>
+          <div style={{ height: "100%", width: `${analise.percentualCobertura}%`, background: corCobertura, borderRadius: 6, transition: "width 0.5s ease" }} />
         </div>
       </div>
 
       {/* Filtros */}
-      <div style={{ display: "flex", gap: "0.5rem", marginBottom: "1rem" }}>
+      <div style={{ display: "flex", gap: "0.5rem", marginBottom: "1rem", alignItems: "center", flexWrap: "wrap" }}>
         {[
-          { id: "todos",    label: "Todos" },
-          { id: "cobertos", label: "✅ Cobertos" },
-          { id: "lacunas",  label: "❌ Lacunas" },
+          { id: "lacunas",  label: `❌ Faltam (${lacunas.length})` },
+          { id: "cobertos", label: `✅ Cobertos (${cobertos.length})` },
+          { id: "todos",    label: `Todos (${(analise.cobertura || []).length})` },
         ].map(f => (
-          <button
-            key={f.id}
-            className={`tab-btn ${filtro === f.id ? "active" : ""}`}
-            onClick={() => setFiltro(f.id)}
-            style={{ fontSize: "0.8rem", padding: "0.3rem 0.75rem" }}
-          >
+          <button key={f.id} className={`tab-btn ${filtro === f.id ? "active" : ""}`}
+            onClick={() => setFiltro(f.id)} style={{ fontSize: "0.8rem" }}>
             {f.label}
           </button>
         ))}
+        {filtro === "lacunas" && lacunas.length > 0 && (
+          <span style={{ fontSize: "0.72rem", color: "var(--text-muted)", marginLeft: "auto" }}>
+            💡 Clique em um item para ver o que precisa ser feito
+          </span>
+        )}
       </div>
 
-      {/* Tabela de cobertura */}
-      <table className="data-table">
-        <thead>
-          <tr>
-            <th style={{ width: 36 }}></th>
-            <th>Tópico Identificado</th>
-            <th>Documentos que cobrem</th>
-          </tr>
-        </thead>
-        <tbody>
-          {itens.map((c, i) => (
-            <tr key={i}>
-              <td style={{ textAlign: "center", fontSize: "1rem" }}>
-                {c.coberto ? "✅" : "❌"}
-              </td>
-              <td>{c.topico}</td>
-              <td style={{ fontSize: "0.75rem", color: "var(--text-muted)" }}>
-                {c.docs?.length > 0
-                  ? c.docs.map(d => <span key={d} style={{ marginRight: 6 }}>{d}</span>)
-                  : <em>Sem cobertura</em>}
-              </td>
-            </tr>
-          ))}
-          {itens.length === 0 && (
-            <tr><td colSpan={3} style={{ textAlign: "center", color: "var(--text-muted)" }}>Nenhum item neste filtro.</td></tr>
-          )}
-        </tbody>
-      </table>
+      {/* Lista */}
+      <div style={{ display: "flex", flexDirection: "column", gap: "0.5rem" }}>
+        {itens.map((c, i) => {
+          const acao    = getAcao(c);
+          const esforco = estimarEsforco(c.topico);
+          const aberto  = expandido === i;
+
+          if (c.coberto) {
+            return (
+              <div key={i} style={{
+                padding: "0.6rem 1rem", borderRadius: 6, background: "var(--surface)",
+                border: "1px solid var(--border)", borderLeft: "3px solid var(--success)",
+                display: "flex", gap: "0.75rem", alignItems: "center",
+              }}>
+                <span style={{ color: "var(--success)", fontSize: "1.1rem" }}>✅</span>
+                <div style={{ flex: 1 }}>
+                  <span style={{ fontSize: "0.88rem", fontWeight: 500 }}>{c.topico}</span>
+                  {c.docs?.length > 0 && (
+                    <div style={{ fontSize: "0.72rem", color: "var(--text-muted)", marginTop: 2 }}>
+                      📄 {c.docs.join(" · ")}
+                    </div>
+                  )}
+                </div>
+              </div>
+            );
+          }
+
+          return (
+            <div key={i} style={{ borderRadius: 8, border: "1px solid var(--border)", borderLeft: "3px solid var(--error)", background: "var(--surface)", overflow: "hidden" }}>
+              <div style={{ padding: "0.75rem 1rem", cursor: "pointer", display: "flex", alignItems: "center", gap: "0.75rem" }}
+                onClick={() => setExpandido(aberto ? null : i)}>
+                <span style={{ color: "var(--error)", fontSize: "1rem", flexShrink: 0 }}>❌</span>
+                <div style={{ flex: 1, minWidth: 0 }}>
+                  <div style={{ fontWeight: 600, fontSize: "0.88rem" }}>{c.topico}</div>
+                  <div style={{ fontSize: "0.72rem", color: "var(--text-muted)", marginTop: 1 }}>
+                    Sem cobertura — clique para ver o que precisa ser feito
+                  </div>
+                </div>
+                <div style={{ display: "flex", gap: 6, alignItems: "center", flexShrink: 0 }}>
+                  <span style={{ fontSize: "0.68rem", padding: "2px 7px", borderRadius: 10, background: esforco.cor + "22", color: esforco.cor, fontWeight: 700 }}>
+                    Esforço {esforco.label}
+                  </span>
+                  <span style={{ color: "var(--text-muted)", fontSize: "0.8rem" }}>{aberto ? "▲" : "▼"}</span>
+                </div>
+              </div>
+
+              {aberto && (
+                <div style={{ padding: "0 1rem 1rem", borderTop: "1px solid var(--border)" }}>
+                  <div style={{ marginTop: "0.75rem", display: "grid", gridTemplateColumns: "1fr 1fr", gap: "0.6rem" }}>
+                    <div style={{ background: "var(--surface2)", borderRadius: 6, padding: "0.75rem" }}>
+                      <div style={{ fontSize: "0.7rem", fontWeight: 700, color: "var(--text-muted)", marginBottom: 4 }}>🔍 O QUE O DOCUMENTO EXIGE</div>
+                      <div style={{ fontSize: "0.82rem" }}>{c.topico}</div>
+                    </div>
+                    <div style={{ background: "var(--surface2)", borderRadius: 6, padding: "0.75rem" }}>
+                      <div style={{ fontSize: "0.7rem", fontWeight: 700, color: "var(--text-muted)", marginBottom: 4 }}>📁 ONDE CRIAR</div>
+                      <code style={{ fontSize: "0.78rem" }}>
+                        docs/{acao?.secao || c.secao || "primeiros-passos"}/
+                      </code>
+                    </div>
+                    <div style={{ background: "var(--surface2)", borderRadius: 6, padding: "0.75rem", gridColumn: "1 / -1" }}>
+                      <div style={{ fontSize: "0.7rem", fontWeight: 700, color: "var(--text-muted)", marginBottom: 4 }}>✏️ O QUE PRECISA SER FEITO</div>
+                      <div style={{ fontSize: "0.82rem", lineHeight: 1.55 }}>
+                        {acao?.motivo ||
+                          `Criar documentação descrevendo como o sistema atende o requisito "${c.topico}". ` +
+                          `Inclua: descrição funcional, fluxo de uso, campos e regras de negócio relacionados.`}
+                      </div>
+                    </div>
+                    <div style={{ background: "#fff8e1", border: "1px solid #ffe082", borderRadius: 6, padding: "0.75rem", gridColumn: "1 / -1" }}>
+                      <div style={{ fontSize: "0.7rem", fontWeight: 700, color: "#856404", marginBottom: 4 }}>🏆 IMPACTO NA LICITAÇÃO</div>
+                      <div style={{ fontSize: "0.82rem", color: "#6b4c00", lineHeight: 1.55 }}>
+                        Sem esta documentação o sistema pode ser desclassificado por não comprovar atendimento ao requisito.
+                        Após documentar, este item passará de ❌ para ✅ na análise de conformidade.
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              )}
+            </div>
+          );
+        })}
+        {itens.length === 0 && (
+          <div style={{ textAlign: "center", padding: "2rem", color: "var(--text-muted)" }}>Nenhum item neste filtro.</div>
+        )}
+      </div>
     </div>
   );
 }
@@ -893,6 +1089,7 @@ function TabSugestoes({ produto }) {
   const [dados, setDados] = useState(null);
   const [carregando, setCarregando] = useState(true);
   const [filtroSecao, setFiltroSecao] = useState("todas");
+  const [expandido, setExpandido] = useState(null);
 
   useEffect(() => {
     setCarregando(true);
@@ -917,65 +1114,85 @@ function TabSugestoes({ produto }) {
     ? dados.sugestoes
     : dados.sugestoes.filter(s => s.secao === filtroSecao);
 
-  const corGeral = dados.percentualGeral >= 70 ? "var(--success)" :
-                   dados.percentualGeral >= 40 ? "var(--warning)" : "var(--error)";
+  const corGeral = dados.percentualGeral >= 70 ? "var(--success)"
+    : dados.percentualGeral >= 40 ? "var(--warning)" : "var(--error)";
+
+  function getImpacto(titulo) {
+    const t = (titulo || "").toLowerCase();
+    if (/objeto|escopo|especific|requisi|função|funcional|fiscal/.test(t)) return { label: "Alto",  cor: "#e74c3c" };
+    if (/prazo|valor|garantia|contrat|legal|dotação/.test(t))              return { label: "Médio", cor: "#f39c12" };
+    return { label: "Baixo", cor: "#27ae60" };
+  }
+
+  function getEsforco(secao) {
+    if (/glossario|referencia/.test(secao)) return "1–2h";
+    if (/primeiros|intro/.test(secao))      return "2–4h";
+    return "4–8h";
+  }
 
   return (
     <div>
-      {/* Resumo */}
+      {/* Header interpretativo */}
+      <div style={{
+        background: "var(--surface2)", borderRadius: 10, padding: "1rem 1.25rem",
+        marginBottom: "1.5rem", borderLeft: `4px solid ${corGeral}`,
+        border: `1px solid ${corGeral}30`,
+      }}>
+        <div style={{ fontWeight: 700, fontSize: "1rem", marginBottom: 6, color: corGeral }}>
+          {dados.percentualGeral >= 70
+            ? "✅ Sistema bem posicionado para licitações"
+            : dados.percentualGeral >= 40
+              ? "⚠️ Melhorias necessárias para participar de licitações"
+              : "❌ Lacunas significativas — ações urgentes necessárias"}
+        </div>
+        <div style={{ fontSize: "0.82rem", color: "var(--text-muted)", lineHeight: 1.6 }}>
+          O {produto.toUpperCase()} cobre atualmente <strong>{dados.percentualGeral}%</strong> dos requisitos identificados
+          nas {dados.totalFontes} fonte(s) analisada(s). Existem{" "}
+          <strong>{dados.totalLacunas} lacunas</strong> que, se corrigidas, fortalecem a elegibilidade do sistema
+          em processos licitatórios e de aquisição pública.
+        </div>
+      </div>
+
+      {/* Métricas */}
       <div className="cards-grid" style={{ marginBottom: "1.5rem" }}>
-        <div className="card stat-card">
-          <div className="stat-value" style={{ color: corGeral }}>{dados.percentualGeral}%</div>
-          <div className="stat-label">Cobertura Consolidada</div>
-        </div>
-        <div className="card stat-card">
-          <div className="stat-value">{dados.totalFontes}</div>
-          <div className="stat-label">Fontes Analisadas</div>
-        </div>
-        <div className="card stat-card">
-          <div className="stat-value">{dados.totalTopicos}</div>
-          <div className="stat-label">Tópicos no Total</div>
-        </div>
-        <div className="card stat-card">
-          <div className="stat-value" style={{ color: "var(--error)" }}>{dados.totalLacunas}</div>
-          <div className="stat-label">Lacunas Detectadas</div>
-        </div>
+        {[
+          { label: "Cobertura Atual",     val: `${dados.percentualGeral}%`, cor: corGeral },
+          { label: "Fontes Analisadas",   val: dados.totalFontes,           cor: undefined },
+          { label: "Tópicos Totais",      val: dados.totalTopicos,          cor: undefined },
+          { label: "Ações Necessárias",   val: dados.totalLacunas,          cor: "var(--error)" },
+        ].map(c => (
+          <div key={c.label} className="card stat-card">
+            <div className="stat-value" style={c.cor ? { color: c.cor } : {}}>{c.val}</div>
+            <div className="stat-label">{c.label}</div>
+          </div>
+        ))}
       </div>
 
-      <div style={{ marginBottom: "1rem" }}>
+      <div style={{ marginBottom: "1.5rem" }}>
+        <div style={{ display: "flex", justifyContent: "space-between", fontSize: "0.72rem", marginBottom: 4 }}>
+          <span>Cobertura atual</span>
+          <strong>{dados.percentualGeral}%</strong>
+        </div>
         <div style={{ height: 10, background: "var(--surface2)", borderRadius: 6, overflow: "hidden" }}>
-          <div style={{
-            height: "100%",
-            width: `${dados.percentualGeral}%`,
-            background: corGeral,
-            borderRadius: 6,
-            transition: "width 0.5s",
-          }} />
+          <div style={{ height: "100%", width: `${dados.percentualGeral}%`, background: corGeral, borderRadius: 6, transition: "width 0.5s" }} />
         </div>
-        <p style={{ fontSize: "0.75rem", color: "var(--text-muted)", marginTop: 4 }}>
-          {dados.totalCobertos} de {dados.totalTopicos} tópicos cobertos pela documentação atual
-        </p>
+        <div style={{ fontSize: "0.72rem", color: "var(--text-muted)", marginTop: 4 }}>
+          {dados.totalCobertos} de {dados.totalTopicos} tópicos cobertos — execute as {dados.totalLacunas} ações abaixo para melhorar
+        </div>
       </div>
 
-      {/* Filtro por seção */}
+      {/* Filtro por módulo */}
       {secoes.length > 0 && (
         <div style={{ marginBottom: "1.25rem" }}>
-          <label className="label">Filtrar por Seção</label>
+          <div style={{ fontSize: "0.82rem", fontWeight: 600, marginBottom: 6 }}>Filtrar por módulo do sistema:</div>
           <div style={{ display: "flex", gap: "0.5rem", flexWrap: "wrap" }}>
-            <button
-              className={`tab-btn ${filtroSecao === "todas" ? "active" : ""}`}
-              style={{ fontSize: "0.78rem" }}
-              onClick={() => setFiltroSecao("todas")}
-            >
+            <button className={`tab-btn ${filtroSecao === "todas" ? "active" : ""}`}
+              style={{ fontSize: "0.78rem" }} onClick={() => setFiltroSecao("todas")}>
               Todas ({dados.sugestoes?.length || 0})
             </button>
             {secoes.map(s => (
-              <button
-                key={s}
-                className={`tab-btn ${filtroSecao === s ? "active" : ""}`}
-                style={{ fontSize: "0.78rem" }}
-                onClick={() => setFiltroSecao(s)}
-              >
+              <button key={s} className={`tab-btn ${filtroSecao === s ? "active" : ""}`}
+                style={{ fontSize: "0.78rem" }} onClick={() => setFiltroSecao(s)}>
                 {s} ({(dados.sugestoes || []).filter(sg => sg.secao === s).length})
               </button>
             ))}
@@ -983,37 +1200,111 @@ function TabSugestoes({ produto }) {
         </div>
       )}
 
-      {/* Lista de sugestões */}
-      {sugestoesFiltradas?.length === 0 ? (
-        <p style={{ color: "var(--text-muted)" }}>Nenhuma sugestão para esta seção.</p>
+      {/* Título do plano */}
+      <div style={{ marginBottom: "0.75rem" }}>
+        <h4 style={{ margin: "0 0 4px", fontSize: "0.9rem" }}>
+          📋 Plano de Ação — {sugestoesFiltradas?.length || 0} passo(s)
+        </h4>
+        <p style={{ fontSize: "0.75rem", color: "var(--text-muted)", margin: 0 }}>
+          Cada item abaixo corresponde a uma lacuna na documentação. Clique para ver o que precisa ser criado/modificado,
+          onde, e qual o impacto na participação em licitações.
+        </p>
+      </div>
+
+      {/* Lista de ações passo a passo */}
+      {!sugestoesFiltradas?.length ? (
+        <p style={{ color: "var(--text-muted)" }}>Nenhuma ação para esta seção.</p>
       ) : (
-        <div>
-          {sugestoesFiltradas.map((s, i) => (
-            <div key={i} className="card" style={{
-              marginBottom: "0.6rem",
-              borderLeft: "3px solid var(--accent)",
-              padding: "0.8rem 1rem",
-            }}>
-              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", gap: "1rem" }}>
-                <div>
-                  <div style={{ fontWeight: 600, marginBottom: "0.25rem" }}>
-                    💡 {s.titulo}
+        <div style={{ display: "flex", flexDirection: "column", gap: "0.6rem" }}>
+          {sugestoesFiltradas.map((s, i) => {
+            const impacto = getImpacto(s.titulo);
+            const esforco = getEsforco(s.secao);
+            const aberto  = expandido === i;
+
+            return (
+              <div key={i} style={{ borderRadius: 8, border: "1px solid var(--border)", borderLeft: `3px solid ${impacto.cor}`, background: "var(--surface)", overflow: "hidden" }}>
+                {/* Cabeçalho */}
+                <div style={{ padding: "0.9rem 1rem", cursor: "pointer", display: "flex", alignItems: "flex-start", gap: "0.75rem" }}
+                  onClick={() => setExpandido(aberto ? null : i)}>
+                  <div style={{
+                    minWidth: 28, height: 28, borderRadius: "50%", background: "var(--accent)", color: "#fff",
+                    display: "flex", alignItems: "center", justifyContent: "center", fontSize: "0.8rem", fontWeight: 700, flexShrink: 0,
+                  }}>
+                    {i + 1}
                   </div>
-                  <div style={{ fontSize: "0.78rem", color: "var(--text-muted)" }}>
-                    {s.motivo}
+                  <div style={{ flex: 1, minWidth: 0 }}>
+                    <div style={{ fontWeight: 700, fontSize: "0.9rem", marginBottom: 3 }}>{s.titulo}</div>
+                    <div style={{ fontSize: "0.75rem", color: "var(--text-muted)" }}>
+                      Módulo: <strong>{s.secao}</strong> · Ação: <strong>{s.acao}</strong>
+                    </div>
                   </div>
+                  <div style={{ display: "flex", flexDirection: "column", gap: 4, alignItems: "flex-end", flexShrink: 0 }}>
+                    <span style={{ fontSize: "0.68rem", padding: "2px 8px", borderRadius: 10, fontWeight: 700, background: impacto.cor + "22", color: impacto.cor }}>
+                      Impacto {impacto.label}
+                    </span>
+                    <span style={{ fontSize: "0.68rem", color: "var(--text-muted)" }}>⏱ {esforco}</span>
+                  </div>
+                  <span style={{ color: "var(--text-muted)", fontSize: "0.8rem", marginLeft: 4, flexShrink: 0 }}>{aberto ? "▲" : "▼"}</span>
                 </div>
-                <div style={{ display: "flex", flexDirection: "column", gap: "0.25rem", alignItems: "flex-end", minWidth: 140 }}>
-                  <span className="badge" style={{ background: "var(--accent)", color: "#fff", fontSize: "0.72rem" }}>
-                    {s.acao?.toUpperCase()}
-                  </span>
-                  <span style={{ fontSize: "0.72rem", color: "var(--text-muted)", textAlign: "right" }}>
-                    {s.produto?.toUpperCase()} / {s.secao}
-                  </span>
-                </div>
+
+                {/* Detalhe */}
+                {aberto && (
+                  <div style={{ borderTop: "1px solid var(--border)", padding: "0.9rem 1rem" }}>
+                    <div style={{ display: "flex", flexDirection: "column", gap: "0.6rem" }}>
+
+                      <div style={{ background: "var(--surface2)", borderRadius: 6, padding: "0.75rem" }}>
+                        <div style={{ fontSize: "0.7rem", fontWeight: 700, color: "var(--text-muted)", marginBottom: 5, textTransform: "uppercase" }}>🔍 Por que esta ação é necessária</div>
+                        <div style={{ fontSize: "0.83rem", lineHeight: 1.55 }}>
+                          {s.motivo || `O requisito "${s.titulo}" foi identificado na fonte de pesquisa mas não possui documentação correspondente no portal do ${produto.toUpperCase()}.`}
+                        </div>
+                      </div>
+
+                      <div style={{ background: "var(--surface2)", borderRadius: 6, padding: "0.75rem" }}>
+                        <div style={{ fontSize: "0.7rem", fontWeight: 700, color: "var(--text-muted)", marginBottom: 5, textTransform: "uppercase" }}>✏️ O que deve ser criado / modificado</div>
+                        <div style={{ fontSize: "0.83rem", lineHeight: 1.55 }}>
+                          <strong>Ação:</strong> {s.acao === "criar" ? "Criar novo documento" : "Revisar/expandir documento existente"} no módulo <strong>{s.secao}</strong>.<br />
+                          <strong>Estrutura mínima do documento:</strong>
+                          <ul style={{ margin: "6px 0 0 16px", padding: 0, lineHeight: 1.8, fontSize: "0.8rem" }}>
+                            <li>Descrição da funcionalidade e seu objetivo</li>
+                            <li>Como acessar no sistema (menu → tela)</li>
+                            <li>Campos, opções e regras de negócio</li>
+                            <li>Passo a passo de operação</li>
+                            <li>Integração com outros módulos</li>
+                          </ul>
+                        </div>
+                      </div>
+
+                      <div style={{ background: "var(--surface2)", borderRadius: 6, padding: "0.75rem" }}>
+                        <div style={{ fontSize: "0.7rem", fontWeight: 700, color: "var(--text-muted)", marginBottom: 5, textTransform: "uppercase" }}>📁 Localização no projeto</div>
+                        <code style={{ fontSize: "0.8rem", background: "var(--surface)", padding: "3px 8px", borderRadius: 4 }}>
+                          {produto}/docs-portal/docs/{s.secao}/
+                        </code>
+                      </div>
+
+                      <div style={{ background: "#fff8e1", border: "1px solid #ffe082", borderRadius: 6, padding: "0.75rem" }}>
+                        <div style={{ fontSize: "0.7rem", fontWeight: 700, color: "#856404", marginBottom: 5, textTransform: "uppercase" }}>🏆 Ganho para participação em licitações</div>
+                        <div style={{ fontSize: "0.83rem", color: "#6b4c00", lineHeight: 1.55 }}>
+                          Ao documentar este requisito, o sistema passa a <strong>comprovar formalmente</strong> que atende "{s.titulo}".
+                          Isso aumenta a pontuação técnica na análise de conformidade e reduz o risco de desclassificação.
+                          <strong> Impacto estimado: {impacto.label}</strong> na elegibilidade do sistema para este tipo de licitação.
+                        </div>
+                      </div>
+
+                    </div>
+                  </div>
+                )}
               </div>
-            </div>
-          ))}
+            );
+          })}
+        </div>
+      )}
+
+      {/* Rodapé */}
+      {sugestoesFiltradas?.length > 0 && (
+        <div style={{ marginTop: "1.5rem", background: "var(--surface2)", borderRadius: 8, padding: "0.9rem 1.1rem", fontSize: "0.8rem", color: "var(--text-muted)" }}>
+          <strong>Resumo:</strong> {sugestoesFiltradas.length} ação(ões) para {filtroSecao === "todas" ? "todos os módulos" : `o módulo "${filtroSecao}"`}.
+          Após concluir todas, a cobertura do sistema em relação às fontes analisadas será substancialmente maior,
+          fortalecendo a proposta técnica em processos de aquisição pública.
         </div>
       )}
     </div>

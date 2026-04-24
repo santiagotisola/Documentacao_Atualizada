@@ -1,16 +1,24 @@
-import { buscarTickets, buscarTicket, buscarComentarios, responderTicket, buscarCategorias, criarTicketUsuario } from "./jitbit.js";
+import { buscarTickets, buscarTicket, buscarComentarios, responderTicket, buscarCategorias, criarTicketUsuario, listarTecnicos, buscarTicketsFiltrados } from "./jitbit.js";
 import { gerarResposta } from "./engine.js";
 import { salvarHistorico } from "./logger.js";
 import * as scheduler from "./scheduler.js";
 
 /**
- * GET /api/helpdesk/tickets — Lista tickets não respondidos
+ * GET /api/helpdesk/tickets — Lista tickets com filtros
  */
 export async function listarTickets(req, res) {
   try {
-    const mode = parseInt(req.query.mode) || 0;
-    const count = parseInt(req.query.count) || 20;
-    const tickets = await buscarTickets({ mode, count });
+    const mode       = parseInt(req.query.mode) || 0;
+    const count      = parseInt(req.query.count) || 50;
+    const sectionId  = req.query.sectionId  || null;
+    const techId     = req.query.techId     || null;
+    const userId     = req.query.userId     || null;
+    const dateFrom   = req.query.dateFrom   || null;
+    const dateTo     = req.query.dateTo     || null;
+    const statusId   = req.query.statusId   !== undefined ? req.query.statusId : null;
+    const priorityId = req.query.priorityId !== undefined ? req.query.priorityId : null;
+
+    const tickets = await buscarTickets({ mode, count, sectionId, techId, userId, dateFrom, dateTo, statusId, priorityId });
     return res.json({ total: tickets.length, tickets });
   } catch (error) {
     return res.status(500).json({ erro: "Erro ao buscar tickets", detalhe: error.message });
@@ -288,6 +296,104 @@ export function rejeitarFila(req, res) {
     return res.json({ mensagem: "Item rejeitado", item });
   } catch (err) {
     return res.status(400).json({ erro: err.message });
+  }
+}
+
+// ── Planilha de Horas ─────────────────────────────────────────────────────
+
+/**
+ * GET /api/helpdesk/tecnicos — Lista técnicos disponíveis no Jitbit
+ */
+export async function listarTecnicosHelpdesk(req, res) {
+  try {
+    const tecnicos = await listarTecnicos();
+    return res.json({ tecnicos: Array.isArray(tecnicos) ? tecnicos : [] });
+  } catch (err) {
+    return res.status(500).json({ erro: "Erro ao listar técnicos", detalhe: err.message });
+  }
+}
+
+/**
+ * GET /api/helpdesk/planilha-horas
+ * Query: tecnicoId, tecnicoNome, dataInicio (YYYY-MM-DD), dataFim (YYYY-MM-DD)
+ *
+ * Retorna atividades do técnico no período, formatadas para planilha.
+ * Cada linha = 1 ticket encerrado onde o técnico foi responsável ou comentou.
+ */
+export async function gerarPlanilhaHoras(req, res) {
+  const { tecnicoId, tecnicoNome, dataInicio, dataFim } = req.query;
+
+  if (!dataInicio || !dataFim) {
+    return res.status(400).json({ erro: "Parâmetros obrigatórios: dataInicio, dataFim (YYYY-MM-DD)" });
+  }
+
+  try {
+    // Busca tickets no período, opcionalmente filtrado por técnico
+    const tickets = await buscarTicketsFiltrados({
+      tecnicoId: tecnicoId || null,
+      dataInicio,
+      dataFim,
+      count: 500,
+    });
+
+    const dtInicio = new Date(dataInicio);
+    const dtFim    = new Date(dataFim + "T23:59:59Z");
+
+    // Filtra por data e, se não veio tecnicoId, filtra por nome parcial
+    const filtrados = tickets.filter(t => {
+      const dataRef = t.ResolvedDate || t.LastUpdated || t.IssueDate;
+      const dt = new Date(dataRef);
+      if (dt < dtInicio || dt > dtFim) return false;
+
+      if (!tecnicoId && tecnicoNome) {
+        const nomeCompleto = `${t.TechFirstName || ""} ${t.TechLastName || ""}`.toLowerCase();
+        const email = (t.Technician || "").toLowerCase();
+        const busca = tecnicoNome.toLowerCase();
+        return nomeCompleto.includes(busca) || email.includes(busca);
+      }
+      return true;
+    });
+
+    // Monta linhas da planilha
+    const linhas = filtrados.map(t => {
+      const dataAtiv = t.ResolvedDate || t.LastUpdated || t.IssueDate;
+      const data = new Date(dataAtiv);
+      const dataFormatada = data.toLocaleDateString("pt-BR");
+      const horasGastas = t.TimeSpentInSeconds > 0
+        ? (t.TimeSpentInSeconds / 3600).toFixed(2).replace(".", ",")
+        : "";
+
+      const tecNome = [t.TechFirstName, t.TechLastName].filter(Boolean).join(" ") || t.Technician || "";
+      const descricao = `Atendimento Help Desk - Chamado #${t.IssueID} - ${t.Subject}`;
+      const cliente   = t.CompanyName || "";
+      const categoria = t.Category || "";
+
+      return {
+        data: dataFormatada,
+        dataISO: dataAtiv,
+        chamado: t.IssueID,
+        assunto: t.Subject,
+        descricao,
+        tecnico: tecNome,
+        cliente,
+        categoria,
+        status: t.Status,
+        horasGastas,
+        url: `https://desk.axiontecnologia.com.br/helpdesk/Ticket/${t.IssueID}`,
+      };
+    });
+
+    // Ordena por data crescente
+    linhas.sort((a, b) => new Date(a.dataISO) - new Date(b.dataISO));
+
+    return res.json({
+      total: linhas.length,
+      periodo: { dataInicio, dataFim },
+      tecnico: tecnicoNome || tecnicoId || "Todos",
+      linhas,
+    });
+  } catch (err) {
+    return res.status(500).json({ erro: "Erro ao gerar planilha de horas", detalhe: err.message });
   }
 }
 

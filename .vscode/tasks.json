@@ -1,0 +1,12 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "axion-ia-api",
+			"type": "shell",
+			"command": "cd axion-ia-api && node src/app.js",
+			"isBackground": true,
+			"problemMatcher": []
+		}
+	]
+}

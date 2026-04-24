@@ -1,6 +1,6 @@
 import express from "express";
 import { processarMensagem, consultarHistorico, consultarPendentes, consultarEstatisticas, treinarIA, consultarLogsMongo, consultarAnalise, listarEntradasKB } from "./controller.js";
-import { listarTickets, detalheTicket, classificarTicket, responderTicketIA, processarPendentes as processarHelpdeskPendentes, listarCategorias, criarChamado, statusPolling, iniciarPolling, pausarPolling, retomarPolling, limparPolling, obterFila, setModoRevisao, aprovarFila, rejeitarFila } from "./helpdesk-controller.js";
+import { listarTickets, detalheTicket, classificarTicket, responderTicketIA, processarPendentes as processarHelpdeskPendentes, listarCategorias, criarChamado, statusPolling, iniciarPolling, pausarPolling, retomarPolling, limparPolling, obterFila, setModoRevisao, aprovarFila, rejeitarFila, listarTecnicosHelpdesk, gerarPlanilhaHoras } from "./helpdesk-controller.js";
 import { statusConexao, resumoGeral, listarEquipamentos, listarOperacoes, statsInfracoes, heartbeatEquipamentos, listarTabelas, listarMonitoramentos, ultimasPassagens, statsTriagens } from "./axhub-controller.js";
 import { statusConexao as axtonStatus, resumoGeral as axtonResumo, listarTabelas as axtonTabelas, ultimasPesagens as axtonPesagens, ultimasInfracoes as axtonInfracoes, heartbeatEquipamentos as axtonHeartbeat } from "./axton-controller.js";
 import { statusConexao as axcrossStatus, resumoGeral as axcrossResumo, listarEquipamentos as axcrossEquipamentos, statsPassagens as axcrossPassagens, heartbeatEquipamentos as axcrossHeartbeat, listarTabelas as axcrossTabelas, listarLocais as axcrossLocais, listarOperacoes as axcrossOperacoes } from "./axcross-controller.js";
@@ -12,6 +12,8 @@ import { gerarRoadmapHandler, listarRoadmapsHandler, obterRoadmapHandler, atuali
 import { gerarSpecHandler, listarSpecsHandler, obterSpecHandler, atualizarStatusSpecHandler } from "./spec-controller.js";
 import { relatorioPassagens, relatorioImagens, listarEquipamentosRelatorio } from "./relatorio-controller.js";
 import { uploadMiddlewareComErro, uploadContexto } from "./upload-controller.js";
+import { gerarConformidadeHandler, listarConformidadeHandler, obterConformidadeHandler, removerConformidadeHandler } from "./conformidade-controller.js";
+import { iniciarConexao, statusConexao as waStatus, listarSessoes, detalhesSessao, encerrarSessao, enviarManual } from "./whatsapp-controller.js";
 
 const router = express.Router();
 
@@ -50,6 +52,10 @@ router.get("/helpdesk/fila", obterFila);
 router.post("/helpdesk/fila/modo", setModoRevisao);
 router.post("/helpdesk/fila/:id/aprovar", aprovarFila);
 router.post("/helpdesk/fila/:id/rejeitar", rejeitarFila);
+
+// Planilha de Horas
+router.get("/helpdesk/tecnicos", listarTecnicosHelpdesk);
+router.get("/helpdesk/planilha-horas", gerarPlanilhaHoras);
 
 // AxHub — SQL Server
 router.get("/axhub/status", statusConexao);
@@ -127,5 +133,19 @@ router.post("/spec/gerar", gerarSpecHandler);
 router.get("/spec", listarSpecsHandler);
 router.get("/spec/:id", obterSpecHandler);
 router.patch("/spec/:id/status", atualizarStatusSpecHandler);
+
+// ─── Conformidade com Editais / Licitações ───────────────────────
+router.post("/conformidade/gerar", gerarConformidadeHandler);
+router.get("/conformidade", listarConformidadeHandler);
+router.get("/conformidade/:id", obterConformidadeHandler);
+router.delete("/conformidade/:id", removerConformidadeHandler);
+
+// WhatsApp
+router.post("/whatsapp/iniciar", iniciarConexao);
+router.get("/whatsapp/status", waStatus);
+router.get("/whatsapp/sessoes", listarSessoes);
+router.get("/whatsapp/sessao/:telefone", detalhesSessao);
+router.delete("/whatsapp/sessao/:telefone", encerrarSessao);
+router.post("/whatsapp/send", enviarManual);
 
 export default router;

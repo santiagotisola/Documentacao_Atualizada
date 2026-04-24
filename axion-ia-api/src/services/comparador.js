@@ -4,9 +4,9 @@
  *
  * Fluxo:
  *  1. Varre todos os .md do portal do produto e constrói um mapa de cobertura.
- *  2. Extrai tópicos do texto-fonte (headings, negrito, linhas de menu).
+ *  2. Extrai tópicos funcionais do texto-fonte via IA (GPT) ou heurística (headings).
  *  3. Cruza os dois conjuntos e detecta lacunas.
- *  4. Gera sugestões de documentos a criar/revisar.
+ *  4. Gera sugestões de documentos a criar/revisar com descrição do cenário.
  *
  * ISOLAMENTO: este serviço NUNCA alimenta kb.json, KB (MongoDB) ou engine.js.
  * É usado exclusivamente para análise de usabilidade e planejamento de docs.
@@ -15,8 +15,14 @@
 import fs from "fs/promises";
 import path from "path";
 import { fileURLToPath } from "url";
+import OpenAI from "openai";
+import dotenv from "dotenv";
+
+dotenv.config();
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
+
+const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 
 // Caminhos dos portais de documentação (relativo a axion-ia-api/src/services/)
 const PORTAIS = {
@@ -183,44 +189,105 @@ async function construirMapaCobertura(produto) {
 // ─────────────────────────────────────────────────────────────────
 
 /**
- * Extrai tópicos de um texto-fonte (manual, especificação, etc.).
- * Procura headings markdown, linhas que parecem seções de menu, e texto em negrito.
+ * Detecta se o texto tem estrutura de headings Markdown.
  */
-function extrairTopicosDoTexto(texto) {
+function temEstruturaMd(texto) {
+  const headings = (texto.match(/^#{1,4}\s+.+/gm) || []).length;
+  return headings >= 3;
+}
+
+/**
+ * Extração heurística (para textos com estrutura Markdown).
+ */
+function extrairTopicosHeuristico(texto) {
   const topicos = new Set();
 
-  // Headings markdown
   for (const m of texto.matchAll(/^#{1,4}\s+(.+)/gm)) {
     const t = m[1].replace(/[*`]/g, "").trim();
     if (t.length > 2 && t.length < 120) topicos.add(t);
   }
-
-  // Negritos
   for (const m of texto.matchAll(/\*\*([^*]{3,80})\*\*/g)) {
     topicos.add(m[1].trim());
   }
-
-  // Linhas que começam com número (lista numerada = funcionalidades)
   for (const m of texto.matchAll(/^\d+[\.\)]\s+(.{5,80})/gm)) {
     topicos.add(m[1].trim());
   }
-
-  // Linhas com ":" que parecem rótulos de menu/campo
   for (const m of texto.matchAll(/^[-•]\s+(.{3,80})/gm)) {
     topicos.add(m[1].trim());
   }
 
-  // Linhas em MAIÚSCULAS (seções de sistemas legados)
-  for (const linha of texto.split("\n")) {
-    const trimada = linha.trim();
-    if (trimada.length > 3 && trimada.length < 80 && trimada === trimada.toUpperCase() && /[A-Z]/.test(trimada)) {
-      topicos.add(trimada);
-    }
-  }
-
-  // Remove linhas muito curtas ou que são só pontuação
   return [...topicos].filter(t => t.length > 3 && /\w/.test(t));
 }
+
+/**
+ * Extração inteligente via IA (para textos sem estrutura: contratos, editais, etc.).
+ * Identifica funcionalidades e requisitos do sistema, ignorando dados pessoais/jurídicos.
+ */
+async function extrairTopicosIA(texto, produto) {
+  const nomeProduto = { axhub: "AxHub (fiscalização de trânsito)", axton: "AxTon (pesagem veicular)", axcross: "AxCross (monitoramento de cruzamentos)" }[produto] || produto;
+
+  // Limita o texto para não exceder tokens
+  const textoTruncado = texto.length > 8000 ? texto.substring(0, 8000) + "\n...(truncado)" : texto;
+
+  const prompt = `Você é um analista de sistemas especializado em documentação técnica.
+
+Analise o documento abaixo e extraia APENAS os tópicos que representam:
+- Funcionalidades do sistema ${nomeProduto}
+- Módulos ou telas do sistema mencionados
+- Processos operacionais que o sistema deve suportar
+- Requisitos técnicos ou funcionais
+- Integrações ou relatórios mencionados
+
+NÃO extraia:
+- Nomes de pessoas, empresas, CPF, CNPJ, RG, endereços
+- Datas, valores monetários, números de processo
+- Cláusulas jurídicas genéricas (rescisão, foro, vigência)
+- Signatários ou testemunhas
+
+Retorne um JSON com o seguinte formato:
+{
+  "topicos": [
+    {
+      "titulo": "Nome curto e claro da funcionalidade (máx 80 chars)",
+      "descricao": "Uma frase descrevendo o que o sistema deve fazer neste contexto"
+    }
+  ]
+}
+
+Retorne entre 5 e 30 tópicos. Se o documento não descrever funcionalidades de software, retorne {"topicos": []}.
+
+DOCUMENTO:
+${textoTruncado}`;
+
+  try {
+    const response = await openai.chat.completions.create({
+      model: "gpt-4o-mini",
+      temperature: 0.1,
+      response_format: { type: "json_object" },
+      messages: [{ role: "user", content: prompt }],
+    });
+
+    const resultado = JSON.parse(response.choices[0].message.content);
+    return (resultado.topicos || []).map(t => ({
+      titulo: t.titulo?.trim() || "",
+      descricao: t.descricao?.trim() || "",
+    })).filter(t => t.titulo.length > 3);
+  } catch (err) {
+    console.error("[comparador] Erro extração IA:", err.message);
+    return extrairTopicosHeuristico(texto).map(t => ({ titulo: t, descricao: "" }));
+  }
+}
+
+/**
+ * Extrai tópicos do texto-fonte — usa IA para documentos sem estrutura Markdown.
+ */
+async function extrairTopicosDoTexto(texto, produto) {
+  if (temEstruturaMd(texto)) {
+    return extrairTopicosHeuristico(texto).map(t => ({ titulo: t, descricao: "" }));
+  }
+  return extrairTopicosIA(texto, produto);
+}
+
 
 // ─────────────────────────────────────────────────────────────────
 // 3. CRUZAR FONTE × DOCUMENTAÇÃO
@@ -327,7 +394,13 @@ function sugerirSecao(topico, produto) {
  */
 export async function analisarFonte(produto, conteudo) {
   const mapa = await construirMapaCobertura(produto);
-  const topicosEncontrados = extrairTopicosDoTexto(conteudo);
+  const topicosExtraidos = await extrairTopicosDoTexto(conteudo, produto);
+
+  // Compatibilidade: normaliza para array de strings (topicosEncontrados)
+  const topicosEncontrados = topicosExtraidos.map(t => typeof t === "string" ? t : t.titulo);
+  const descricaoMap = Object.fromEntries(
+    topicosExtraidos.map(t => typeof t === "string" ? [t, ""] : [t.titulo, t.descricao])
+  );
 
   const cobertura = [];
   const lacunas = [];
@@ -338,14 +411,20 @@ export async function analisarFonte(produto, conteudo) {
     if (!resultado.coberto) lacunas.push(topico);
   }
 
-  // Gera sugestões para cada lacuna
-  const sugestoes = lacunas.map(lacuna => ({
-    acao:    "criar",
-    produto,
-    secao:   sugerirSecao(lacuna, produto),
-    titulo:  formatarTituloSugestao(lacuna),
-    motivo:  `Tópico "${lacuna}" identificado na fonte mas sem documentação correspondente.`,
-  }));
+  // Gera sugestões para cada lacuna com descrição do cenário
+  const sugestoes = lacunas.map(lacuna => {
+    const descricao = descricaoMap[lacuna] || "";
+    const motivo = descricao
+      ? `${descricao}`
+      : `Funcionalidade "${lacuna}" identificada na fonte mas sem documentação correspondente no portal.`;
+    return {
+      acao:    "criar",
+      produto,
+      secao:   sugerirSecao(lacuna, produto),
+      titulo:  formatarTituloSugestao(lacuna),
+      motivo,
+    };
+  });
 
   // Agrupa sugestões por seção para eliminar duplicatas
   const sugestoesDeduplicadas = deduplicarSugestoes(sugestoes);

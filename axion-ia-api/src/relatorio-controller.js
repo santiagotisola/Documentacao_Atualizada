@@ -8,6 +8,10 @@
 
 import { conectar } from "./services/axhub-db.js";
 
+function sqlConfigurado() {
+  return !!(process.env.AXHUB_DB_USER && process.env.AXHUB_DB_HOST);
+}
+
 // ─── Helper: monta matriz esparsa → array para o painel ──────────
 function montarMatriz(registros, totalDias) {
   const linhas = {};
@@ -30,6 +34,10 @@ export async function relatorioPassagens(req, res) {
 
   if (!mes || !ano) {
     return res.status(400).json({ erro: "Parâmetros obrigatórios: mes, ano" });
+  }
+
+  if (!sqlConfigurado()) {
+    return res.status(503).json({ erro: "Banco de dados AxHub não configurado. Defina AXHUB_DB_HOST e AXHUB_DB_USER no .env" });
   }
 
   const mesInt = parseInt(mes);
@@ -95,6 +103,10 @@ export async function relatorioImagens(req, res) {
     return res.status(400).json({ erro: "Parâmetros obrigatórios: mes, ano" });
   }
 
+  if (!sqlConfigurado()) {
+    return res.status(503).json({ erro: "Banco de dados AxHub não configurado. Defina AXHUB_DB_HOST e AXHUB_DB_USER no .env" });
+  }
+
   const mesInt = parseInt(mes);
   const anoInt = parseInt(ano);
   const totalDias = new Date(anoInt, mesInt, 0).getDate();
@@ -152,6 +164,9 @@ export async function relatorioImagens(req, res) {
 
 // GET /api/relatorio/equipamentos — lista equipamentos para o filtro
 export async function listarEquipamentosRelatorio(req, res) {
+  if (!sqlConfigurado()) {
+    return res.json({ equipamentos: [] });
+  }
   try {
     const pool = await conectar();
     const result = await pool.request().query(`
@@ -159,6 +174,6 @@ export async function listarEquipamentosRelatorio(req, res) {
     `);
     return res.json({ equipamentos: result.recordset.map(r => r.Codigo) });
   } catch (err) {
-    return res.status(500).json({ erro: err.message });
+    return res.json({ equipamentos: [] });
   }
 }

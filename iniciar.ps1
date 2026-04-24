@@ -3,6 +3,7 @@ $ROOT = Split-Path -Parent $MyInvocation.MyCommand.Path
 
 Write-Host "=== AXION DOCS - Iniciando servicos ===" -ForegroundColor Cyan
 
+# Encerra processos nas portas antes de iniciar
 $portas = 3001, 3010, 3011, 3012, 3100
 foreach ($p in $portas) {
     $conn = Get-NetTCPConnection -LocalPort $p -State Listen -ErrorAction SilentlyContinue
@@ -11,25 +12,47 @@ foreach ($p in $portas) {
 Start-Sleep -Seconds 2
 Write-Host "[OK] Portas limpas" -ForegroundColor Green
 
+# Função auxiliar: inicia processo em nova janela PowerShell visível
+function Iniciar-Servico {
+    param([string]$Titulo, [string]$Diretorio, [string]$Comando)
+    Start-Process "powershell.exe" -ArgumentList "-NoExit", "-Command", "Set-Location '$Diretorio'; `$host.UI.RawUI.WindowTitle = '$Titulo'; $Comando" -WorkingDirectory $Diretorio
+}
+
 $d1 = Join-Path $ROOT "axion-ia-api"
-Start-Process "cmd.exe" -ArgumentList "/c title axion-ia-api :3100 & cd /d `"$d1`" & node src/app.js"
-Write-Host "[..] axion-ia-api :3100" -ForegroundColor Yellow
-Start-Sleep -Seconds 4
+Iniciar-Servico -Titulo "axion-ia-api :3100" -Diretorio $d1 -Comando "node src/app.js"
+Write-Host "[..] axion-ia-api :3100 — aguardando resposta..." -ForegroundColor Yellow
+
+# Aguarda a API responder de verdade (até 30 tentativas de 1s = 30s)
+$apiOk = $false
+for ($i = 1; $i -le 30; $i++) {
+    Start-Sleep -Seconds 1
+    try {
+        $r = Invoke-WebRequest -Uri "http://localhost:3100/" -UseBasicParsing -TimeoutSec 2 -ErrorAction Stop
+        if ($r.StatusCode -eq 200) { $apiOk = $true; break }
+    } catch { }
+    Write-Host "   $i/30..." -ForegroundColor DarkGray -NoNewline
+}
+Write-Host ""
+if ($apiOk) {
+    Write-Host "[OK] axion-ia-api :3100 respondendo" -ForegroundColor Green
+} else {
+    Write-Host "[!!] axion-ia-api nao respondeu em 30s — continuando mesmo assim" -ForegroundColor Red
+}
 
 $d2 = Join-Path $ROOT "axion-ia-panel"
-Start-Process "cmd.exe" -ArgumentList "/c title axion-ia-panel :3001 & cd /d `"$d2`" & npm run dev"
+Iniciar-Servico -Titulo "axion-ia-panel :3001" -Diretorio $d2 -Comando "npm run dev"
 Write-Host "[..] axion-ia-panel :3001" -ForegroundColor Yellow
 
 $d3 = Join-Path $ROOT "AxHub\docs-portal"
-Start-Process "cmd.exe" -ArgumentList "/c title AxHub.Docs :3010 & cd /d `"$d3`" & npm run serve -- --port 3010 --host 0.0.0.0"
+Iniciar-Servico -Titulo "AxHub.Docs :3010" -Diretorio $d3 -Comando "npm run serve -- --port 3010"
 Write-Host "[..] AxHub.Docs :3010" -ForegroundColor Yellow
 
 $d4 = Join-Path $ROOT "AxTon\docs-portal"
-Start-Process "cmd.exe" -ArgumentList "/c title AxTon.Docs :3011 & cd /d `"$d4`" & npm run serve -- --port 3011 --host 0.0.0.0"
+Iniciar-Servico -Titulo "AxTon.Docs :3011" -Diretorio $d4 -Comando "npm run serve -- --port 3011"
 Write-Host "[..] AxTon.Docs :3011" -ForegroundColor Yellow
 
 $d5 = Join-Path $ROOT "AxCross\docs-portal"
-Start-Process "cmd.exe" -ArgumentList "/c title AxCross.Docs :3012 & cd /d `"$d5`" & npm run serve -- --port 3012 --host 0.0.0.0"
+Iniciar-Servico -Titulo "AxCross.Docs :3012" -Diretorio $d5 -Comando "npm run serve -- --port 3012"
 Write-Host "[..] AxCross.Docs :3012" -ForegroundColor Yellow
 
 Write-Host "Aguardando 20s..." -ForegroundColor Cyan

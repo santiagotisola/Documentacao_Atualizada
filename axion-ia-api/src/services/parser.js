@@ -80,7 +80,7 @@ export function textoParaMd(texto) {
 }
 
 /**
- * Extrai tópicos principais de um Markdown para uso no comparador.
+ * Extrai tópicos principais de um texto (Markdown OU texto puro de edital/contrato).
  * @param {string} md
  * @returns {string[]}
  */
@@ -88,24 +88,62 @@ export function extrairTopicosParaComparacao(md) {
   const topicos = new Set();
   const texto = normalizarTexto(md);
 
-  // Headings como tópicos diretos
+  // ── 1. Markdown: headings ##
   for (const m of md.matchAll(/^#{1,3}\s+(.+)/gm)) {
     const t = m[1].replace(/[*`]/g, "").trim();
     if (t.length > 3 && t.length < 120) topicos.add(t);
   }
 
-  // Negritos
+  // ── 2. Markdown: negrito **texto**
   for (const m of md.matchAll(/\*\*([^*]{4,80})\*\*/g)) {
     topicos.add(m[1].trim());
   }
 
-  // Linhas de lista
+  // ── 3. Markdown: listas - item
   for (const m of md.matchAll(/^[-•]\s+(.{4,80})/gm)) {
     topicos.add(m[1].replace(/[*`]/g, "").trim());
   }
 
-  // Parágrafos que contêm palavras-chave do domínio
-  const DOMINIOS = /pesagem|infracao|infração|radar|equipamento|balança|semáforo|placa|monitoramento|fiscalização|cronotacógrafo|aferição|relatório|licitação|contrato|edital/i;
+  // ── 4. Contratos/Editais: CLÁUSULA X - TÍTULO (tudo maiúsculo)
+  for (const m of md.matchAll(/^(CL[AÁ]USULA\s+[IVXLCDM\d]+[\s\-–—]+.{3,80})/gmi)) {
+    topicos.add(m[1].trim());
+  }
+
+  // ── 5. Artigos numerados: Art. 1º / ARTIGO 1
+  for (const m of md.matchAll(/^(ART(?:IGO|\.)\s*\d+[ºª°]?\s*[-–—]?\s*.{3,80})/gmi)) {
+    topicos.add(m[1].trim());
+  }
+
+  // ── 6. Itens numerados: 1.2.3 Texto
+  for (const m of md.matchAll(/^(\d+(?:\.\d+)*[\s\.\)]+)(.{10,100})/gm)) {
+    const t = (m[2] || "").replace(/[*`]/g, "").trim();
+    if (t.length > 5) topicos.add(t);
+  }
+
+  // ── 7. Letras de alínea: a) texto / a. texto
+  for (const m of md.matchAll(/^[a-z]\)\s+(.{10,120})/gm)) {
+    topicos.add(m[1].replace(/[*`]/g, "").trim());
+  }
+
+  // ── 8. Linhas em CAIXA ALTA (títulos de seção em contratos/editais)
+  for (const linha of md.split("\n")) {
+    const l = linha.trim();
+    if (l.length > 5 && l.length < 120 && l === l.toUpperCase() && /[A-ZÁÉÍÓÚÂÊÎÔÛÃÕÇ]{4,}/.test(l)) {
+      topicos.add(l);
+    }
+  }
+
+  // ── 9. Linhas com verbos de requisito (deve, deverá, deverão, precisa, necessário)
+  const REQUISITO = /\b(dever[áa]|dever[ãa]o|deve\s+(?:possuir|ter|conter|incluir|contemplar|realizar|suportar|permitir|garantir)|precisa\s+(?:ter|possuir)|é\s+(?:obrigatório|necessário|requerido))/i;
+  for (const linha of md.split("\n")) {
+    const l = linha.trim();
+    if (l.length > 15 && l.length < 200 && REQUISITO.test(l)) {
+      topicos.add(l.replace(/[*`#]/g, "").trim().slice(0, 150));
+    }
+  }
+
+  // ── 10. Palavras-chave de domínio (fallback para documentos mistos)
+  const DOMINIOS = /pesagem|infracao|infração|radar|equipamento|balança|semáforo|placa|monitoramento|fiscalização|cronotacógrafo|aferição|relatório|licitação|contrato|edital|objeto|escopo|especificação|funcionalidade/i;
   for (const linha of md.split("\n")) {
     const l = linha.trim();
     if (l.length > 10 && l.length < 150 && DOMINIOS.test(l)) {

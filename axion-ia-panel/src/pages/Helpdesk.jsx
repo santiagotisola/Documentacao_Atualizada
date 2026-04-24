@@ -1,6 +1,33 @@
 ﻿import { useEffect, useState, useRef } from "react";
 import { api } from "../services/api";
 
+const FILTROS_INICIAL = {
+  sectionId: "",
+  techId: "",
+  dateFrom: "",
+  dateTo: "",
+  statusId: "",
+  priorityId: "",
+  somenteMeus: false,
+};
+
+const STATUS_OPCOES = [
+  { value: "", label: "Todos" },
+  { value: "1", label: "Novo" },
+  { value: "2", label: "Em atendimento" },
+  { value: "3", label: "Aguardando resposta" },
+  { value: "4", label: "Resolvido" },
+  { value: "5", label: "Fechado" },
+];
+
+const PRIORIDADE_OPCOES = [
+  { value: "", label: "Todas" },
+  { value: "0", label: "Baixa" },
+  { value: "1", label: "Normal" },
+  { value: "2", label: "Alta" },
+  { value: "3", label: "Crítica" },
+];
+
 export default function Helpdesk() {
   const [tickets, setTickets]       = useState([]);
   const [loading, setLoading]       = useState(true);
@@ -11,7 +38,13 @@ export default function Helpdesk() {
   const [acao, setAcao]             = useState(null);
   const [novoTicket, setNovoTicket] = useState({ subject: "", body: "", categoryId: "" });
   const [categorias, setCategorias] = useState([]);
+  const [tecnicos, setTecnicos]     = useState([]);
   const [view, setView]             = useState("lista");
+
+  // Filtros
+  const [filtros, setFiltros]       = useState(FILTROS_INICIAL);
+  const [filtroAberto, setFiltroAberto] = useState(false);
+  const [filtrosAtivos, setFiltrosAtivos] = useState({});
 
   // Polling
   const [polling, setPolling]       = useState(null);
@@ -36,6 +69,7 @@ export default function Helpdesk() {
 
   useEffect(() => {
     api.get("/helpdesk/categorias").then(r => setCategorias(r.data.categorias || [])).catch(() => {});
+    api.get("/helpdesk/tecnicos").then(r => setTecnicos(r.data.tecnicos || [])).catch(() => {});
     carregarStatusPolling();
     carregarFila();
   }, []);
@@ -64,13 +98,42 @@ export default function Helpdesk() {
     api.get("/helpdesk/fila").then(r => setFila(r.data)).catch(() => {});
   }
 
-  function carregarTickets() {
-    setLoading(true); setTicketSel(null); setDetalhes(null);
-    api.get(`/helpdesk/tickets?mode=${modo}&count=50`)
+  const [erroTickets, setErroTickets] = useState(null);
+
+  function carregarTickets(filtrosAplicar) {
+    setLoading(true); setTicketSel(null); setDetalhes(null); setErroTickets(null);
+    const f = filtrosAplicar || filtrosAtivos;
+    const params = new URLSearchParams({ mode: modo, count: 50 });
+    if (f.sectionId)  params.set("sectionId", f.sectionId);
+    if (f.techId)     params.set("techId", f.techId);
+    if (f.dateFrom)   params.set("dateFrom", f.dateFrom);
+    if (f.dateTo)     params.set("dateTo", f.dateTo);
+    if (f.statusId)   params.set("statusId", f.statusId);
+    if (f.priorityId) params.set("priorityId", f.priorityId);
+    api.get(`/helpdesk/tickets?${params.toString()}`)
       .then(r => setTickets(r.data.tickets || []))
-      .catch(() => setTickets([]))
+      .catch(err => {
+        setTickets([]);
+        const detalhe = err.response?.data?.detalhe || err.message || "Erro de conexão";
+        setErroTickets(detalhe);
+      })
       .finally(() => setLoading(false));
   }
+
+  function aplicarFiltros() {
+    setFiltrosAtivos({ ...filtros });
+    setFiltroAberto(false);
+    carregarTickets(filtros);
+  }
+
+  function resetarFiltros() {
+    setFiltros(FILTROS_INICIAL);
+    setFiltrosAtivos({});
+    setFiltroAberto(false);
+    carregarTickets({});
+  }
+
+  const temFiltrosAtivos = Object.entries(filtrosAtivos).some(([k, v]) => v && v !== "");
 
   function abrirDetalhe(ticket) {
     setTicketSel(ticket); setDetalhes(null); setAcao(null); setView("detalhe"); setCarregandoDet(true);
@@ -184,7 +247,14 @@ export default function Helpdesk() {
             {view !== "polling" && view !== "fila" && (
               <>
                 <button className="btn" style={{ background: "var(--surface)", color: "var(--text-muted)", border: "1px solid var(--border)", marginLeft: "auto" }} onClick={() => setView("criar")}>+ Novo Chamado</button>
-                <button className="btn" style={{ background: "var(--surface)", color: "var(--text-muted)", border: "1px solid var(--border)" }} onClick={carregarTickets}>Atualizar</button>
+                <button className="btn" style={{ background: "var(--surface)", color: "var(--text-muted)", border: "1px solid var(--border)" }} onClick={() => carregarTickets()}>Atualizar</button>
+                <button className="btn" onClick={() => setFiltroAberto(p => !p)}
+                  style={{ position: "relative", background: filtroAberto ? "rgba(99,102,241,0.12)" : "var(--surface)", color: filtroAberto ? "var(--accent)" : "var(--text-muted)", border: `1px solid ${filtroAberto || temFiltrosAtivos ? "var(--accent)" : "var(--border)"}` }}>
+                  Filtrar
+                  {temFiltrosAtivos && (
+                    <span style={{ position: "absolute", top: -5, right: -5, width: 10, height: 10, borderRadius: "50%", background: "var(--accent)" }} />
+                  )}
+                </button>
               </>
             )}
 
@@ -201,6 +271,73 @@ export default function Helpdesk() {
           </>
         )}
       </div>
+
+      {/* ===== PAINEL DE FILTROS ===== */}
+      {filtroAberto && view === "lista" && (
+        <div className="card" style={{ marginBottom: "1.25rem", borderTop: "2px solid var(--accent)", padding: "1.25rem" }}>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(200px, 1fr))", gap: "1rem", marginBottom: "1rem" }}>
+
+            <div className="form-group" style={{ margin: 0 }}>
+              <label style={{ fontSize: "0.75rem", color: "var(--text-muted)", marginBottom: 4, display: "block" }}>Data de</label>
+              <input type="date" value={filtros.dateFrom}
+                onChange={e => setFiltros(p => ({ ...p, dateFrom: e.target.value }))}
+                style={{ width: "100%", padding: "7px 10px", borderRadius: 7, background: "var(--bg)", border: "1px solid var(--border)", color: "var(--text)", fontSize: "0.85rem" }} />
+            </div>
+
+            <div className="form-group" style={{ margin: 0 }}>
+              <label style={{ fontSize: "0.75rem", color: "var(--text-muted)", marginBottom: 4, display: "block" }}>Data até</label>
+              <input type="date" value={filtros.dateTo}
+                onChange={e => setFiltros(p => ({ ...p, dateTo: e.target.value }))}
+                style={{ width: "100%", padding: "7px 10px", borderRadius: 7, background: "var(--bg)", border: "1px solid var(--border)", color: "var(--text)", fontSize: "0.85rem" }} />
+            </div>
+
+            <div className="form-group" style={{ margin: 0 }}>
+              <label style={{ fontSize: "0.75rem", color: "var(--text-muted)", marginBottom: 4, display: "block" }}>Status</label>
+              <select value={filtros.statusId} onChange={e => setFiltros(p => ({ ...p, statusId: e.target.value }))}
+                style={{ width: "100%", padding: "7px 10px", borderRadius: 7, background: "var(--bg)", border: "1px solid var(--border)", color: "var(--text)", fontSize: "0.85rem" }}>
+                {STATUS_OPCOES.map(o => <option key={o.value} value={o.value}>{o.label}</option>)}
+              </select>
+            </div>
+
+            <div className="form-group" style={{ margin: 0 }}>
+              <label style={{ fontSize: "0.75rem", color: "var(--text-muted)", marginBottom: 4, display: "block" }}>Prioridade</label>
+              <select value={filtros.priorityId} onChange={e => setFiltros(p => ({ ...p, priorityId: e.target.value }))}
+                style={{ width: "100%", padding: "7px 10px", borderRadius: 7, background: "var(--bg)", border: "1px solid var(--border)", color: "var(--text)", fontSize: "0.85rem" }}>
+                {PRIORIDADE_OPCOES.map(o => <option key={o.value} value={o.value}>{o.label}</option>)}
+              </select>
+            </div>
+
+            <div className="form-group" style={{ margin: 0 }}>
+              <label style={{ fontSize: "0.75rem", color: "var(--text-muted)", marginBottom: 4, display: "block" }}>Departamento</label>
+              <select value={filtros.sectionId} onChange={e => setFiltros(p => ({ ...p, sectionId: e.target.value }))}
+                style={{ width: "100%", padding: "7px 10px", borderRadius: 7, background: "var(--bg)", border: "1px solid var(--border)", color: "var(--text)", fontSize: "0.85rem" }}>
+                <option value="">Todos</option>
+                {categorias.map(c => <option key={c.CategoryID} value={c.CategoryID}>{c.Name}</option>)}
+              </select>
+            </div>
+
+            <div className="form-group" style={{ margin: 0 }}>
+              <label style={{ fontSize: "0.75rem", color: "var(--text-muted)", marginBottom: 4, display: "block" }}>Técnico</label>
+              <select value={filtros.techId} onChange={e => setFiltros(p => ({ ...p, techId: e.target.value }))}
+                style={{ width: "100%", padding: "7px 10px", borderRadius: 7, background: "var(--bg)", border: "1px solid var(--border)", color: "var(--text)", fontSize: "0.85rem" }}>
+                <option value="">Todos</option>
+                {tecnicos.map(t => <option key={t.UserID} value={t.UserID}>{t.FirstName} {t.LastName}</option>)}
+              </select>
+            </div>
+
+          </div>
+
+          <div style={{ display: "flex", gap: "0.75rem", alignItems: "center", paddingTop: "0.75rem", borderTop: "1px solid var(--border)" }}>
+            <button className="btn btn-primary" style={{ fontSize: "0.85rem" }} onClick={aplicarFiltros}>Aplicar</button>
+            <button className="btn" style={{ fontSize: "0.85rem", background: "var(--surface)", color: "var(--text-muted)", border: "1px solid var(--border)" }} onClick={resetarFiltros}>Reset</button>
+            {temFiltrosAtivos && (
+              <span style={{ fontSize: "0.75rem", color: "var(--accent)", marginLeft: "auto" }}>
+                Filtros ativos
+              </span>
+            )}
+          </div>
+        </div>
+      )}
 
       {/* ===== FILA DE REVISAO ===== */}
       {view === "fila" && (
@@ -490,6 +627,11 @@ export default function Helpdesk() {
         <>
           {loading ? (
             <p className="text-muted">Carregando tickets...</p>
+          ) : erroTickets ? (
+            <div className="alert alert-error" style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: "1rem" }}>
+              <span>⚠️ Erro ao buscar tickets: <strong>{erroTickets}</strong></span>
+              <button className="btn" style={{ whiteSpace: "nowrap", flexShrink: 0 }} onClick={carregarTickets}>🔄 Tentar novamente</button>
+            </div>
           ) : tickets.length === 0 ? (
             <div className="alert alert-error">Nenhum ticket encontrado. Verifique a configuracao do Jitbit em Configuracoes.</div>
           ) : (
@@ -500,6 +642,8 @@ export default function Helpdesk() {
                   <th>Assunto</th>
                   <th>Solicitante</th>
                   <th>Categoria</th>
+                  <th>Prioridade</th>
+                  <th>Técnico</th>
                   <th>Data</th>
                   <th>Acoes</th>
                 </tr>
@@ -508,11 +652,21 @@ export default function Helpdesk() {
                 {tickets.map(t => (
                   <tr key={t.IssueID} style={{ cursor: "pointer" }}>
                     <td style={{ fontWeight: 600, color: "var(--accent)" }}>#{t.IssueID}</td>
-                    <td style={{ maxWidth: 280, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }} onClick={() => abrirDetalhe(t)} title={t.Subject}>
+                    <td style={{ maxWidth: 260, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }} onClick={() => abrirDetalhe(t)} title={t.Subject}>
                       {t.Subject}
                     </td>
                     <td style={{ fontSize: "0.85rem" }}>{t.UserName || "-"}</td>
                     <td><span className="badge badge-kb" style={{ whiteSpace: "nowrap" }}>{t.Category || "-"}</span></td>
+                    <td style={{ fontSize: "0.8rem", whiteSpace: "nowrap" }}>
+                      {t.PriorityName ? (
+                        <span style={{ padding: "2px 8px", borderRadius: 5, fontSize: "0.75rem", fontWeight: 600,
+                          background: t.PriorityName === "Crítica" ? "rgba(239,68,68,0.12)" : t.PriorityName === "Alta" ? "rgba(245,158,11,0.12)" : "rgba(99,102,241,0.1)",
+                          color: t.PriorityName === "Crítica" ? "#ef4444" : t.PriorityName === "Alta" ? "#f59e0b" : "var(--accent)" }}>
+                          {t.PriorityName}
+                        </span>
+                      ) : "-"}
+                    </td>
+                    <td style={{ fontSize: "0.8rem" }}>{t.TechFirstName ? `${t.TechFirstName} ${t.TechLastName || ""}`.trim() : "-"}</td>
                     <td style={{ fontSize: "0.8rem", whiteSpace: "nowrap" }}>{t.Date ? new Date(t.Date).toLocaleDateString("pt-BR") : "-"}</td>
                     <td>
                       <div style={{ display: "flex", gap: "0.35rem" }}>

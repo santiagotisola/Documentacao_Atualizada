@@ -2,6 +2,9 @@ import { useState, useEffect, useRef } from "react";
 
 const API = "http://localhost:3100/api";
 
+const ANO_ATUAL = new Date().getFullYear();
+const ANOS = Array.from({ length: ANO_ATUAL - 2023 }, (_, i) => 2024 + i);
+
 const MESES = [
   "Janeiro","Fevereiro","Março","Abril","Maio","Junho",
   "Julho","Agosto","Setembro","Outubro","Novembro","Dezembro"
@@ -46,7 +49,10 @@ export default function RelatorioFluxo() {
       const url = `${API}/relatorio/${tipo}?mes=${mes}&ano=${ano}&equipamento=${encodeURIComponent(equipamento)}`;
       const r = await fetch(url);
       const d = await r.json();
-      if (!r.ok) { setErro(d.erro || "Erro ao buscar dados."); return; }
+      if (!r.ok) {
+        setErro(d.erro || "Erro ao buscar dados.");
+        return;
+      }
       setDados(d);
     } catch { setErro("Erro de comunicação com a API. Verifique se o AxHub está conectado."); }
     setCarregando(false);
@@ -110,7 +116,7 @@ export default function RelatorioFluxo() {
           <div style={{ fontSize: 11, color: "#94a3b8", marginBottom: 4 }}>ANO</div>
           <select value={ano} onChange={e => setAno(Number(e.target.value))}
             style={{ padding: "6px 10px", borderRadius: 6, border: "1px solid #334155", background: "#1e293b", color: "#e2e8f0", fontSize: 13 }}>
-            {[2024, 2025, 2026].map(a => <option key={a} value={a}>{a}</option>)}
+            {ANOS.map(a => <option key={a} value={a}>{a}</option>)}
           </select>
         </div>
 
@@ -226,6 +232,34 @@ export default function RelatorioFluxo() {
                   </tr>
                 );
               })}
+              <tr style={{ fontWeight: 700 }}>
+                <td style={{
+                  position: "sticky", left: 0, zIndex: 1,
+                  background: "#0f172a", color: "#60a5fa",
+                  padding: "4px 10px", border: "1px solid #1e293b",
+                  fontSize: 11, whiteSpace: "nowrap",
+                }}>TOTAL / DIA</td>
+                {dias.map(d => {
+                  const totalDia = dados.linhas.reduce((s, l) => s + (l.dias[d] || 0), 0);
+                  return (
+                    <td key={d} style={{
+                      background: "#0f172a", color: "#60a5fa",
+                      padding: "4px 2px", border: "1px solid #1e293b",
+                      textAlign: "center", fontSize: 11,
+                    }}>
+                      {totalDia > 0 ? totalDia.toLocaleString("pt-BR") : "—"}
+                    </td>
+                  );
+                })}
+                <td style={{
+                  position: "sticky", right: 0,
+                  background: "#1e3a5f", color: "#93c5fd",
+                  padding: "4px 8px", border: "1px solid #1e293b",
+                  textAlign: "center", fontSize: 11,
+                }}>
+                  {dados.linhas.reduce((s, l) => s + l.total, 0).toLocaleString("pt-BR")}
+                </td>
+              </tr>
             </tbody>
           </table>
         </div>

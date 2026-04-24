@@ -102,26 +102,30 @@ export function salvarConfig(req, res) {
     return res.status(400).json({ erro: "Body inválido" });
   }
 
-  // Ler env atual e mesclar somente chaves permitidas
-  const envAtual = lerEnv();
+  try {
+    // Ler env atual e mesclar somente chaves permitidas
+    const envAtual = lerEnv();
 
-  for (const [chave, valor] of Object.entries(novasConfig)) {
-    if (!CHAVES_PERMITIDAS.includes(chave)) continue;
-    // Ignorar valores mascarados (não sobrescrever senha com máscaras)
-    if (CHAVES_SENSIVEIS.includes(chave) && /^.{0,3}•+$/.test(valor)) continue;
-    envAtual[chave] = valor;
-  }
-
-  salvarEnv(envAtual);
-
-  // Atualizar process.env em memória com valores não-sensíveis
-  for (const chave of CHAVES_PERMITIDAS) {
-    if (envAtual[chave] !== undefined) {
-      process.env[chave] = envAtual[chave];
+    for (const [chave, valor] of Object.entries(novasConfig)) {
+      if (!CHAVES_PERMITIDAS.includes(chave)) continue;
+      // Ignorar valores mascarados (não sobrescrever senha com máscaras)
+      if (CHAVES_SENSIVEIS.includes(chave) && /^.{0,3}•+$/.test(valor)) continue;
+      envAtual[chave] = valor;
     }
-  }
 
-  res.json({ ok: true, mensagem: "Configuração salva. Reinicie a API para aplicar mudanças de conexão." });
+    salvarEnv(envAtual);
+
+    // Atualizar process.env em memória com valores não-sensíveis
+    for (const chave of CHAVES_PERMITIDAS) {
+      if (envAtual[chave] !== undefined) {
+        process.env[chave] = envAtual[chave];
+      }
+    }
+
+    res.json({ ok: true, mensagem: "Configuração salva. Reinicie a API para aplicar mudanças de conexão." });
+  } catch (err) {
+    res.status(500).json({ erro: `Erro ao gravar configuração: ${err.message}` });
+  }
 }
 
 // POST /api/config/testar-mongo — testa conexão MongoDB

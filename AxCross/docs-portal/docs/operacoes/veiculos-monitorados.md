@@ -4,11 +4,9 @@ title: Veículos Monitorados
 description: Cadastro e gestão de veículos monitorados no AxCross
 ---
 
-# Veículos Monitorados
-
 O módulo **Veículos Monitorados** permite registrar placas e veículos de interesse para monitoramento especial. Quando um veículo cadastrado é detectado em qualquer cruzamento, o sistema gera um alerta automático para a equipe operacional.
 
-![](<../img/Menu veiculos monitorados.png>)
+![Menu Veículos Monitorados](<../img/Menu veiculos monitorados.png>)
 
 ## Como acessar
 
@@ -17,7 +15,7 @@ No **menu lateral**, clique em **Veículos Monitorados**.
 O módulo é composto pelos seguintes submódulos:
 
 | Submódulo | Descrição |
-|-----------|-----------|
+| --------- | --------- |
 | [**Veículos Monitorados**](#lista-de-veiculos) | Cadastro e consulta das placas monitoradas |
 | [**Tipos de Ocorrências**](#tipos-de-ocorrencias) | Categorias de ocorrência para alertas |
 | [**Alertas**](#alertas-gerados) | Alertas gerados automaticamente e gestão de ocorrências |
@@ -37,7 +35,7 @@ Exibe todos os veículos cadastrados para monitoramento, com filtros por placa, 
 ### Campos
 
 | Campo | Obrigatório | Descrição |
-|-------|:-----------:|-----------|
+| ----- | :---------: | --------- |
 | **Placa** | Sim | Placa do veículo no formato Mercosul ou antigo |
 | **Classificação** | Sim | Categoria do veículo (ex.: Roubado, VIP, Suspeito) |
 | **Motivo** | Não | Razão do monitoramento |
@@ -85,17 +83,25 @@ Define as categorias utilizadas para classificar as ocorrências registradas nos
 Para acessar: **Veículos Monitorados → Tipos de Ocorrências**.
 
 | Campo | Descrição |
-|-------|-----------|
+| ------- | ----------- |
+| **Código** | Identificador único da ocorrência |
 | **Nome** | Nome do tipo de ocorrência |
-| **Descrição** | Descrição detalhada da ocorrência |
-| **Status** | Ativo ou Inativo |
+| **Cor** | Cor de identificação visual nos alertas |
+| **Emitir Alerta Sonoro** | Dispara sinal sonoro ao gerar alerta |
+| **Prazo de Expiração (dias)** | Dias para expirar automaticamente os veículos vinculados. Vazio = sem expiração. |
 
 **Passo a passo — Cadastrar tipo de ocorrência:**
 
-1. Clique em **Novo Tipo de Ocorrência**
-2. Informe o **Nome**
-3. Opcionalmente, preencha a **Descrição**
-4. Clique em **Salvar**
+1. Clique em **+ NOVO**
+2. Informe o **Código** e o **Nome**
+3. Selecione a **Cor** de identificação
+4. Opcionalmente, configure **Emitir Alerta Sonoro**
+5. Para ativar vigência automática, informe o **Prazo de Expiração (dias)**
+6. Clique em **Salvar**
+
+:::info Vigência dos Alertas
+O campo **Prazo de Expiração (dias)** ativa o controle de vigência para todos os veículos deste tipo. Ao salvar, o sistema recalcula automaticamente a data de expiração de todos os veículos vinculados. Consulte [Vigência dos Alertas](vigencia-alertas.md) para detalhes completos.
+:::
 
 ---
 
@@ -110,7 +116,7 @@ Para acessar: **Veículos Monitorados → Alertas**.
 ### Colunas da lista
 
 | Coluna | Descrição |
-|--------|-----------|
+| -------- | ----------- |
 | **Data/Hora** | Momento da detecção |
 | **Placa** | Placa do veículo detectado |
 | **Local** | Cruzamento onde foi detectado |
@@ -121,7 +127,7 @@ Para acessar: **Veículos Monitorados → Alertas**.
 ### Tipos de alerta
 
 | Tipo | Descrição |
-|------|-----------|
+| ------ | ----------- |
 | **Veículo Monitorado** | Placa cadastrada como monitorada foi detectada |
 | **Equipamento Offline** | Equipamento sem comunicação além do tempo limite |
 | **Falha de Imagem** | Equipamento detectou passagem mas sem imagem |
@@ -138,7 +144,7 @@ Configure os tipos de ocorrência disponíveis para categorizar os alertas manua
 ![Alerta - Ação](../img/Alerta - Ação.png)
 
 | Ação | Descrição |
-|------|-----------|
+| ------ | ----------- |
 | **Visualizar** | Abrir detalhes do alerta |
 | **Assumir** | Registrar responsável pela tratativa |
 | **Resolver** | Marcar o alerta como resolvido |
