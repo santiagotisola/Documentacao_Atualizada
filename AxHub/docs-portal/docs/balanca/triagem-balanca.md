@@ -1,20 +1,34 @@
 ﻿---
 sidebar_position: 2
 title: Triagem de Balanca
-description: Triagem de infracoes de excesso de peso
+description: Gestao e triagem de infracoes de excesso de peso
 ---
 
 # Triagem de Balanca
 
-Tela de analise das infracoes de excesso de peso geradas pelo sistema de pesagem.
+Módulo de gerenciamento das infrações de excesso de peso geradas pelo sistema de pesagem. O fluxo de trabalho envolve liberar pesagens para triagem, reclassificar tickets e gerenciar os postos e motivos de encerramento.
+
+:::info
+O menu **Balança** agrupa as seguintes telas: **Liberar Pesagem**, **Ticket Aberto**, **Ticket Fechado**, **Reclassificar**, **Posto Pesagem** e **Motivos**. Não há uma tela única de "Triagem de Balança" — cada etapa é acessada pelo sub-item correspondente.
+:::
 
 ## Como acessar
 
-Menu lateral - Balanca - Triagem
+**Menu lateral** → Balança → *(selecione o sub-item desejado)*
+
+## Fluxo de Triagem de Pesagem
+
+1. Acesse **Balança → Liberar Pesagem** para liberar tickets pendentes para análise
+2. Em **Balança → Ticket Aberto** visualize os tickets em andamento
+3. Realize a análise e classifique cada ticket
+4. Tickets encerrados aparecem em **Balança → Ticket Fechado**
+5. Para corrigir a classificação de um ticket, use **Balança → Reclassificar**
 
 ## Reclassificar
 
 ![Reclassificar](../img/Balança%20-%20Reclassificar.png)
+
+Permite alterar a classificação de um ticket de pesagem já processado. Acessado em **Menu lateral → Balança → Reclassificar**.
 
 ## Postos de Pesagem
 
@@ -24,14 +38,24 @@ Menu lateral - Balanca - Triagem
 
 ![Cadastro de Posto 2](../img/Balança%20-%20Postos%20-%20Cadastro2.png)
 
+Cadastro e gestão dos postos de pesagem. Acessado em **Menu lateral → Balança → Posto Pesagem**.
+
 ## Motivos
 
 ![Motivos](../img/Balança%20-%20Motivos.png)
 
 ![Cadastro de Motivo](../img/Balança%20-%20Motivos%20-%20cadastro.png)
 
+Cadastro de motivos utilizados no encerramento dos tickets de pesagem. Acessado em **Menu lateral → Balança → Motivos**.
+
 ## Navegacao relacionada
 
 | Tipo | Pagina | Descricao |
 |------|--------|-----------|
-| Anterior | [Pesagem](./pesagem) | Dados de pesagem |
+| Anterior | [Pesagem — Visão Geral](./pesagem) | Visão geral do módulo de pesagem |
+| Relacionado | [Liberar Pesagem](../pesagem/liberar-pesagem) | Liberar tickets para triagem |
+| Relacionado | [Ticket Aberto](../pesagem/ticket-aberto) | Tickets em andamento |
+| Relacionado | [Ticket Fechado](../pesagem/ticket-fechado) | Tickets encerrados |
+| Relacionado | [Reclassificar](../pesagem/reclassificar) | Alterar classificacao de ticket |
+| Relacionado | [Posto Pesagem](../pesagem/postos) | Cadastro de postos |
+| Relacionado | [Motivos](../pesagem/motivos) | Motivos de encerramento |

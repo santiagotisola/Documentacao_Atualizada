@@ -1,4 +1,193 @@
 {
+  "sobre_axhub": {
+    "keywords": ["o que e axhub", "o que é axhub", "o que e o axhub", "para que serve axhub", "o que faz axhub", "me fale sobre axhub", "explique axhub"],
+    "assunto": "O que é o AxHub",
+    "causa": "Dúvida sobre o sistema AxHub",
+    "acao": "O AxHub é o sistema de gestão de equipamentos de fiscalização de trânsito da Axion Tecnologia. Integra radares metrológicos e não metrológicos, câmeras OCR e balanças de pesagem. Principais módulos: Infrações (triagem, auditoria, exportação), Operações, Equipamentos, Controle de Acesso e Relatórios.",
+    "status": "Informativo"
+  },
+  "sobre_axton": {
+    "keywords": ["o que e axton", "o que é axton", "o que e o axton", "para que serve axton", "o que faz axton", "me fale sobre axton", "explique axton"],
+    "assunto": "O que é o AxTon",
+    "causa": "Dúvida sobre o sistema AxTon",
+    "acao": "O AxTon é o sistema de pesagem veicular da Axion Tecnologia. Controla balanças fixas e dinâmicas para fiscalização de peso em rodovias, gerando auto de infração (RENAINF), emitindo MDF-e e exportando dados para órgãos como DER e DNIT.",
+    "status": "Informativo"
+  },
+  "sobre_axcross": {
+    "keywords": ["o que e axcross", "o que é axcross", "o que e o axcross", "para que serve axcross", "o que faz axcross", "me fale sobre axcross", "explique axcross"],
+    "assunto": "O que é o AxCross",
+    "causa": "Dúvida sobre o sistema AxCross",
+    "acao": "O AxCross é o sistema de monitoramento de veículos por cruzamento de placas da Axion Tecnologia. Realiza cruzamento em tempo real das placas capturadas por câmeras com listas de monitoramento (alertas), gerando notificações para operadores de segurança.",
+    "status": "Informativo"
+  },
+  "sobre_axblitz": {
+    "keywords": ["o que e axblitz", "o que é axblitz", "para que serve axblitz", "o que faz axblitz", "explique axblitz"],
+    "assunto": "O que é o AxBlitz",
+    "causa": "Dúvida sobre o sistema AxBlitz",
+    "acao": "O AxBlitz é o módulo de operações de blitz da Axion Tecnologia. Permite registrar abordagens em campo, consultar veículos e condutores em tempo real e gerar relatórios das operações de fiscalização.",
+    "status": "Informativo"
+  },
+  "sobre_axion": {
+    "keywords": ["o que e axion", "o que é axion", "o que faz axion", "quem e axion", "empresa axion"],
+    "assunto": "O que é a Axion Tecnologia",
+    "causa": "Dúvida sobre a empresa",
+    "acao": "A Axion Tecnologia é uma empresa especializada em sistemas de fiscalização de trânsito e segurança pública. Desenvolve soluções como AxHub (gestão de equipamentos), AxTon (pesagem veicular), AxCross (monitoramento por cruzamento de placas) e AxBlitz (operações de blitz).",
+    "status": "Informativo"
+  },
+  "axhub_triagem": {
+    "keywords": ["triagem", "triar infração", "validar infração", "descartar infração", "como triar", "infração pendente", "analise infração", "infração aguardando triagem"],
+    "assunto": "Triagem de infrações — AxHub",
+    "causa": "Dúvida sobre o processo de triagem no AxHub",
+    "acao": "Acesse Menu lateral → Infrações → Triagem. A triagem permite revisar, validar ou descartar infrações antes da exportação. Ações disponíveis: Validar (confirma a infração), Descartar (rejeita com motivo obrigatório) e Reabrir (reabre infração descartada). Filtre por Período, Status (Pendente/Validada/Descartada), Tipo de Infração e Operação.",
+    "status": "Informativo"
+  },
+  "axhub_auditoria": {
+    "keywords": ["auditoria", "auditar infração", "como auditar", "auditoria de validas", "auditoria de descartadas", "revisar triagem", "qualidade triagem"],
+    "assunto": "Auditoria de infrações — AxHub",
+    "causa": "Dúvida sobre o processo de auditoria no AxHub",
+    "acao": "Acesse Menu lateral → Infrações → Auditoria. A auditoria permite que auditores revisem as infrações validadas ou descartadas na triagem. Tipos: Auditoria de Válidas (revisar aprovadas) e Auditoria de Descartadas (revisar rejeitadas). O auditor pode Confirmar, Rejeitar (devolve para triagem) ou Adicionar observações. Use filtros por faixa de data, equipamento, tipo de infração, analista e percentual de amostragem.",
+    "status": "Informativo"
+  },
+  "axhub_exportacao": {
+    "keywords": ["exportacao", "exportar infração", "lote exportação", "gerar lote", "enviar lote", "renainf", "exportar para orgao", "exportar detran", "exportar der", "exportar prf", "lote com erro"],
+    "assunto": "Exportação de infrações — AxHub",
+    "causa": "Dúvida sobre exportação de infrações para órgãos autuadores",
+    "acao": "Acesse Menu lateral → Infrações → Exportação. Passos: 1) Gerar Novo Lote (configurar órgão destino, período, layout), 2) Clicar em Gerar — o sistema valida dados e gera o arquivo com assinatura digital, 3) Clicar em Enviar. Status possíveis: Pendente, Enviado, Aceito, Erro. Formatos: RENAINF, XML, TXT, CSV. Pré-requisitos: infrações triadas e auditadas, layouts configurados em Administração → Layouts Arquivos.",
+    "status": "Informativo"
+  },
+  "axhub_sequencial": {
+    "keywords": ["sequencial", "sequencial infracao", "numero auto", "numeracao infracao", "reiniciar sequencial", "sequencial zerado", "numero duplicado infracao"],
+    "assunto": "Sequencial de infrações — AxHub",
+    "causa": "Dúvida sobre numeração/sequencial de infrações no AxHub",
+    "acao": "O sequencial de infrações é o número auto único atribuído a cada infração. Acesse Menu lateral → Administração → Sequenciais para configurar. Cada lote de exportação possui seu próprio sequencial. Em caso de duplicidade ou reset, verifique as configurações do sequencial por equipamento e operação.",
+    "status": "Informativo"
+  },
+  "axhub_usuario": {
+    "keywords": ["usuario axhub", "criar usuario axhub", "cadastrar usuario axhub", "liberar acesso axhub", "novo usuario axhub", "usuario bloqueado axhub", "redefinir senha axhub", "perfil acesso axhub"],
+    "assunto": "Cadastro de usuários — AxHub",
+    "causa": "Dúvida sobre criação ou gestão de usuários no AxHub",
+    "acao": "Acesse Menu lateral → Controle de Acesso → Usuários → + Novo. Campos: Nome, Login (ex: nome.sobrenome), E-mail, Perfil de Acesso, Ativo (Sim/Não). O Perfil de Acesso define as permissões do usuário. Revise periodicamente usuários inativos e desative contas que não estejam em uso. Para desbloquear, verifique se o campo Ativo está marcado.",
+    "status": "Informativo"
+  },
+  "axhub_equipamento": {
+    "keywords": ["equipamento axhub", "radar offline", "camera offline", "equipamento sem comunicacao axhub", "heartbeat axhub", "equipamento nao captura", "equipamento parado axhub"],
+    "assunto": "Equipamentos e monitoramento — AxHub",
+    "causa": "Problema com equipamento no AxHub",
+    "acao": "Acesse Menu lateral → Equipamentos para ver status em tempo real. Verifique: 1) Conectividade de rede do equipamento, 2) Status do heartbeat (último sinal recebido), 3) Eventos de equipamentos para logs de erro. Se offline, acione equipe de campo para verificar alimentação, rede e configuração do equipamento.",
+    "status": "Informativo"
+  },
+  "axhub_relatorio": {
+    "keywords": ["relatorio axhub", "relatorio infracoes", "relatorio passagens", "power bi axhub", "relatorio discrepancias", "exportar relatorio axhub", "estatisticas axhub"],
+    "assunto": "Relatórios — AxHub",
+    "causa": "Dúvida sobre relatórios no AxHub",
+    "acao": "Acesse Menu lateral → Relatórios. Disponível: Relatório de Infrações (por período, equipamento, tipo), Relatório de Passagens (fluxo diário), Relatório de Discrepâncias, Processamento por Usuário, Logs de Envios e integração com Power BI. Para relatórios avançados use Power BI em Relatórios → Power BI.",
+    "status": "Informativo"
+  },
+  "axton_pesagem": {
+    "keywords": ["pesagem", "ticket pesagem", "iniciar pesagem", "como pesar", "balanca axton", "pbt", "peso bruto", "excesso peso", "veiculo pesagem", "fila pesagem"],
+    "assunto": "Processo de pesagem — AxTon",
+    "causa": "Dúvida sobre o processo de pesagem no AxTon",
+    "acao": "Acesse Menu lateral → Tickets de Pesagens. O processo: veículo entra na balança → sistema captura peso automaticamente → operador verifica classificação e dados → confirma ou reclassifica → gera auto de infração se houver excesso. O PBT (Peso Bruto Total) é calculado com base na classificação do veículo.",
+    "status": "Informativo"
+  },
+  "axton_liberar_pesagem": {
+    "keywords": ["liberar pesagem", "liberar veiculo pesagem", "veiculo retido", "liberar ticket", "como liberar pesagem", "liberacao pesagem", "desbloquear pesagem"],
+    "assunto": "Liberar pesagem — AxTon",
+    "causa": "Dúvida sobre liberação de veículo no processo de pesagem",
+    "acao": "Acesse Menu lateral → Tickets de Pesagens → selecione o ticket → clique em Liberar. Preencha: Motivo da Liberação (obrigatório) e Responsável (quem autorizou). Casos de liberação: veículo aguardando após pesagem, liberação por autoridade competente, correção de registro incorreto. A liberação não cancela a infração — apenas libera o veículo fisicamente.",
+    "status": "Informativo"
+  },
+  "axton_reclassificar": {
+    "keywords": ["reclassificar veiculo", "reclassificacao", "classificacao errada axton", "mudar classificacao veiculo", "classificacao automatica errada", "reboque nao detectado", "eixos errados"],
+    "assunto": "Reclassificação de veículos — AxTon",
+    "causa": "Classificação automática incorreta na pesagem",
+    "acao": "Acesse Menu lateral → Tickets de Pesagens → selecione o ticket → clique em Reclassificar. Preencha: Nova Classificação e Motivo. Reclassifique quando: o veículo foi classificado incorretamente, mudança de configuração de eixos ou reboque não detectado. Atenção: a reclassificação altera o PBT permitido e pode impactar o cálculo de excesso de peso.",
+    "status": "Informativo"
+  },
+  "axton_exportacao": {
+    "keywords": ["exportar infracoes axton", "exportacao axton", "renainf axton", "exportar para der", "lote infracoes axton", "exportar pesagem", "enviar infracoes orgao"],
+    "assunto": "Exportação de infrações — AxTon",
+    "causa": "Dúvida sobre exportação de infrações no AxTon",
+    "acao": "Acesse Menu lateral → Exportação. O processo: 1) Gerar Novo Lote (período e filtros), 2) Revisar quantidade de infrações, 3) Clicar em Gerar, 4) Após gerado, clicar em Enviar. Status: Pendente → Enviado → Aceito/Erro. Cada lote contém dados, imagens e assinatura digital. Verifique se as infrações foram auditadas antes de exportar.",
+    "status": "Informativo"
+  },
+  "axton_mdfe_nfe": {
+    "keywords": ["mdfe", "nfe", "mdf-e axton", "nota fiscal pesagem", "manifesto pesagem", "emitir mdfe", "emitir nfe axton"],
+    "assunto": "MDF-e e NF-e — AxTon",
+    "causa": "Dúvida sobre emissão de MDF-e ou NF-e no AxTon",
+    "acao": "O AxTon integra com emissão de MDF-e (Manifesto Eletrônico de Documentos Fiscais) e NF-e (Nota Fiscal Eletrônica). Acesse Menu lateral → MDF-e ou NF-e para consultar os documentos vinculados às pesagens. A emissão é automática quando configurada. Em caso de erro na emissão, verifique as configurações fiscais em Administração.",
+    "status": "Informativo"
+  },
+  "axton_pbt": {
+    "keywords": ["pbt", "peso bruto total", "limite peso", "excesso carga", "peso permitido", "tabela pbt", "configurar pbt"],
+    "assunto": "PBT — Peso Bruto Total (AxTon)",
+    "causa": "Dúvida sobre PBT ou limite de peso no AxTon",
+    "acao": "O PBT (Peso Bruto Total) é o peso máximo permitido para cada tipo de veículo conforme legislação. Acesse Menu lateral → Administração → PBT para visualizar e configurar os limites por classificação de veículo. O excesso de peso é calculado automaticamente comparando o peso medido com o PBT da classificação do veículo.",
+    "status": "Informativo"
+  },
+  "axton_usuario": {
+    "keywords": ["usuario axton", "criar usuario axton", "acesso axton", "perfil axton", "permissao axton", "novo operador axton"],
+    "assunto": "Usuários e acesso — AxTon",
+    "causa": "Dúvida sobre usuários no AxTon",
+    "acao": "Acesse Menu lateral → Controle de Acesso → Usuários → + Novo. Preencha: Nome, Login, E-mail, Perfil de Acesso. O perfil define quais módulos e ações o usuário pode realizar. Para permissões específicas acesse Controle de Acesso → Perfis de Acesso e configure as permissões por módulo.",
+    "status": "Informativo"
+  },
+  "axcross_veiculo_monitorado": {
+    "keywords": ["veiculo monitorado", "cadastrar veiculo monitorado", "placa monitorada", "monitorar placa", "adicionar monitoramento", "lista monitorados", "importar placas monitoradas"],
+    "assunto": "Veículos monitorados — AxCross",
+    "causa": "Dúvida sobre cadastro de veículos monitorados no AxCross",
+    "acao": "Acesse Menu lateral → Veículos Monitorados → Novo Veículo Monitorado. Campos: Placa (Mercosul ou antigo), Classificação (ex: Roubado, VIP, Suspeito), Motivo, Observações, Status (Ativo/Inativo). Para importação em lote use Veículos Monitorados → Importação de Monitorados via CSV. Quando o veículo for detectado em um cruzamento, um alerta é gerado automaticamente.",
+    "status": "Informativo"
+  },
+  "axcross_alerta": {
+    "keywords": ["alerta axcross", "alerta veiculo", "como tratar alerta", "assumir alerta", "resolver alerta", "alerta detectado", "veiculo detectado axcross", "notificacao axcross"],
+    "assunto": "Alertas — AxCross",
+    "causa": "Dúvida sobre alertas no AxCross",
+    "acao": "Acesse Menu lateral → Alertas. Tipos de alerta: Veículo Monitorado (placa monitorada detectada), Equipamento Offline, Falha de Imagem, Ocorrência de Trânsito. Ações: Visualizar (abrir detalhes), Assumir (registrar responsável), Resolver (marcar como resolvido), Descartar (com justificativa). Para criar alerta manual clique em Novo Alerta, selecione Tipo de Ocorrência, Local e descreva a ocorrência.",
+    "status": "Informativo"
+  },
+  "axcross_vigencia": {
+    "keywords": ["vigencia alerta", "expirar monitoramento", "prazo monitoramento", "vencimento alerta", "alerta expirado", "vigencia veiculo monitorado", "desativar automaticamente monitoramento"],
+    "assunto": "Vigência dos alertas — AxCross",
+    "causa": "Dúvida sobre expiração/vigência de veículos monitorados",
+    "acao": "A vigência define prazo de expiração para veículos monitorados. Configure o prazo em Veículos Monitorados → Tipos de Ocorrências → campo Prazo de Expiração (dias). Status possíveis: Ativo (verde), Expira em breve (amarelo), Expirado (vermelho), Desativado (amarelo). O alerta só é gerado se o veículo estiver Habilitado E dentro da vigência. Deixe o campo vazio para vigência ilimitada.",
+    "status": "Informativo"
+  },
+  "axcross_passagem": {
+    "keywords": ["passagem axcross", "consultar passagem", "historico passagens", "passagem detectada", "relatorio passagens axcross", "rastrear veiculo axcross"],
+    "assunto": "Passagens — AxCross",
+    "causa": "Dúvida sobre consulta de passagens no AxCross",
+    "acao": "Acesse Menu lateral → Passagens para consultar o histórico de veículos detectados pelos equipamentos. Filtre por placa, data, local, equipamento ou classificação. O relatório de passagens pode ser exportado em Relatórios → Relatório de Passagens.",
+    "status": "Informativo"
+  },
+  "axcross_usuario": {
+    "keywords": ["usuario axcross", "criar usuario axcross", "acesso axcross", "perfil axcross", "operador axcross", "novo usuario axcross"],
+    "assunto": "Usuários — AxCross",
+    "causa": "Dúvida sobre usuários no AxCross",
+    "acao": "Acesse Menu lateral → Controle de Acesso → Usuários → + Novo. Preencha Nome, Login, E-mail e Perfil de Acesso. O perfil define quais módulos e alertas o operador pode visualizar e gerenciar. Acesse Controle de Acesso → Perfis de Acesso para configurar permissões detalhadas.",
+    "status": "Informativo"
+  },
+  "geral_login": {
+    "keywords": ["nao consigo logar", "esqueci senha", "como entrar no sistema", "senha incorreta", "usuario ou senha invalidos", "acesso negado", "redefinir senha", "recuperar senha"],
+    "assunto": "Problemas de login / acesso ao sistema",
+    "causa": "Credenciais incorretas, usuário inativo ou sem cadastro",
+    "acao": "Verifique: 1) Login e senha corretos (respeite maiúsculas/minúsculas), 2) Se o usuário está cadastrado e Ativo no sistema (Controle de Acesso → Usuários), 3) Se o perfil de acesso tem permissão para acessar o módulo. Para redefinir senha, entre em contato com o administrador do sistema. Se o usuário não existir, realize o cadastro em Controle de Acesso → Usuários → + Novo.",
+    "status": "Informativo"
+  },
+  "geral_camera_offline": {
+    "keywords": ["camera offline", "camera sem imagem", "camera sem sinal", "camera nao captura", "sem imagem camera", "camera rtsp", "camera ip offline", "equipamento camera parado"],
+    "assunto": "Câmera offline ou sem imagem",
+    "causa": "Câmera sem comunicação com o sistema",
+    "acao": "Verifique: 1) Conectividade de rede — ping para o IP da câmera, 2) Se o serviço de captura de imagens está rodando no servidor, 3) Configurações RTSP/IP da câmera em Administração → Equipamentos, 4) Alimentação elétrica e cabeamento físico da câmera. Se a câmera responde ao ping mas não envia imagens, reinicie o serviço de captura ou verifique as credenciais RTSP.",
+    "status": "Informativo"
+  },
+  "geral_relatorio_vazio": {
+    "keywords": ["relatorio vazio", "sem dados relatorio", "relatorio sem resultado", "nao aparece nada no relatorio", "relatorio nao gera", "filtro relatorio errado"],
+    "assunto": "Relatório sem dados / vazio",
+    "causa": "Filtros incorretos ou sem dados no período selecionado",
+    "acao": "Verifique: 1) O período selecionado — confirme que há dados nesse intervalo, 2) Os filtros aplicados — equipamento, operação, status, 3) Se as infrações/pesagens foram processadas corretamente. Tente expandir o período do filtro. Se o problema persistir mesmo com dados visíveis na tela principal, abra um chamado com print dos filtros utilizados.",
+    "status": "Informativo"
+  },
   "erro_404_imagem": {
     "keywords": ["404", "salvar imagem", "erro salvar"],
     "assunto": "Erro ao salvar imagem",

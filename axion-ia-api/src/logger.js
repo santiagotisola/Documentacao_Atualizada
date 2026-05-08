@@ -13,30 +13,50 @@ if (!fs.existsSync(LOGS_DIR)) {
   fs.mkdirSync(LOGS_DIR, { recursive: true });
 }
 
+// ─── Fila de escrita serializada (previne race condition em concorrência) ─────
+// Sem essa fila, writes simultâneos sobrescrevem o arquivo com dados incompletos.
+const filaEscrita = new Map(); // arquivo → Promise atual
+
+async function escreverComFila(arquivo, fn) {
+  const anterior = filaEscrita.get(arquivo) || Promise.resolve();
+  const proxima = anterior.then(fn).catch(() => {});
+  filaEscrita.set(arquivo, proxima);
+  return proxima;
+}
+
 function carregarJSON(arquivo) {
   if (!fs.existsSync(arquivo)) return [];
-  const data = fs.readFileSync(arquivo, 'utf8');
-  return JSON.parse(data);
+  try {
+    const data = fs.readFileSync(arquivo, 'utf8');
+    return JSON.parse(data);
+  } catch {
+    return [];
+  }
 }
 
 function salvarJSON(arquivo, dados) {
   fs.writeFileSync(arquivo, JSON.stringify(dados, null, 2), 'utf8');
 }
 
+// Rotação: mantém no máximo MAX_ENTRIES por arquivo de log
+const MAX_ENTRIES = 5000;
+
 /**
  * Salva toda interação no histórico (log completo)
  */
 export function salvarHistorico({ mensagem, origem, resposta }) {
-  const historico = carregarJSON(HISTORICO_FILE);
-
-  historico.push({
-    timestamp: new Date().toISOString(),
-    mensagem,
-    origem,  // "kb" ou "openai"
-    resposta
+  escreverComFila(HISTORICO_FILE, () => {
+    const historico = carregarJSON(HISTORICO_FILE);
+    historico.push({
+      timestamp: new Date().toISOString(),
+      mensagem,
+      origem,
+      resposta
+    });
+    // Rotação — descarta entradas mais antigas
+    const dados = historico.length > MAX_ENTRIES ? historico.slice(-MAX_ENTRIES) : historico;
+    salvarJSON(HISTORICO_FILE, dados);
   });
-
-  salvarJSON(HISTORICO_FILE, historico);
 }
 
 /**
@@ -44,19 +64,21 @@ export function salvarHistorico({ mensagem, origem, resposta }) {
  * Para revisão e treinamento futuro
  */
 export function salvarNaoRespondida(mensagem) {
-  const lista = carregarJSON(NAO_RESPONDIDAS_FILE);
+  escreverComFila(NAO_RESPONDIDAS_FILE, () => {
+    const lista = carregarJSON(NAO_RESPONDIDAS_FILE);
 
-  // Evita duplicatas
-  const jaExiste = lista.some(item => item.mensagem.toLowerCase() === mensagem.toLowerCase());
-  if (jaExiste) return;
+    // Evita duplicatas
+    const jaExiste = lista.some(item => item.mensagem.toLowerCase() === mensagem.toLowerCase());
+    if (jaExiste) return;
 
-  lista.push({
-    timestamp: new Date().toISOString(),
-    mensagem,
-    status: "pendente"  // pendente | revisado | adicionado_ao_kb
+    lista.push({
+      timestamp: new Date().toISOString(),
+      mensagem,
+      status: "pendente"
+    });
+
+    salvarJSON(NAO_RESPONDIDAS_FILE, lista);
   });
-
-  salvarJSON(NAO_RESPONDIDAS_FILE, lista);
 }
 
 /**

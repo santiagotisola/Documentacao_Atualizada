@@ -1,4 +1,4 @@
----
+﻿---
 sidebar_position: 4
 title: Webhooks
 description: Configuração de webhooks para integrações externas
@@ -12,7 +12,7 @@ Permite configurar webhooks para notificar sistemas externos sobre eventos do Ax
 
 ## Como acessar
 
-**Menu lateral** → Administração → **Webhooks**
+**Menu lateral** → Configurações → **Webhooks**
 
 | Campo | Descrição |
 |-------|-----------|

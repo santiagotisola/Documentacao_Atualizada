@@ -6,24 +6,21 @@ description: Restrição de acesso por endereço IP
 
 # Acessos por IP
 
-Permite configurar restrições de acesso ao sistema com base no endereço IP do usuário.
+:::caution Recurso Não Disponível
+Esta funcionalidade **não está disponível** na versão atual do AxHub. A página `/acessoip` não existe no sistema e tentativas de acessá-la resultam em erro 404.
 
-![Acessos por IP](../img/Controle%20de%20acessos%20-%20acessos%20por%20ip.png)
+Se sua instalação requer controle de acesso por IP, entre em contato com a **Axion Tecnologia** para verificar disponibilidade na sua versão.
+:::
+
+## Descrição
+
+Quando disponível, este módulo permite configurar restrições de acesso ao sistema com base no endereço IP do usuário, definindo regras de permissão ou bloqueio por IP.
 
 ## Como acessar
 
 **Menu lateral** → Controle de Acesso → **Acessos por IP**
 
-| Campo | Descrição |
-|-------|-----------|
-| **Endereço IP** | IP permitido ou bloqueado |
-| **Tipo** | Permitir ou Bloquear |
-| **Usuário** | Usuário vinculado à regra (opcional) |
-| **Observação** | Justificativa da restrição |
-
-:::warning Atenção
-Configurações incorretas de IP podem bloquear o acesso de usuários legítimos. Teste antes de aplicar em produção.
-:::
+*(Disponível apenas em instalações com este módulo habilitado)*
 
 ---
 
@@ -31,5 +28,6 @@ Configurações incorretas de IP podem bloquear o acesso de usuários legítimos
 
 | Tipo | Pagina | Descricao |
 |------|--------|-----------|
-| Relacionado | [Usuarios](./usuarios) | Usuarios restritos |
-| Relacionado | [Logs de Acesso](./logs-acesso) | Verificar acessos |
+| Relacionado | [Usuarios](./usuarios) | Gerenciamento de usuarios do sistema |
+| Relacionado | [Logs de Acesso](./logs-acesso) | Verificar registros de acesso |
+| Relacionado | [Perfis de Acesso](./perfis-acesso) | Controle de permissoes por perfil |

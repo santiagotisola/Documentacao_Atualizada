@@ -1,4 +1,4 @@
----
+﻿---
 sidebar_position: 3
 title: Configurações de Enquadramento
 description: Configuração de enquadramentos de infrações
@@ -12,7 +12,7 @@ Permite configurar os enquadramentos de infrações utilizados pelo sistema.
 
 ## Como acessar
 
-**Menu lateral** → Administração → **Configurações de Enquadramento**
+**Menu lateral** → Configurações → **Configurações de Enquadramento**
 
 ## Cadastro
 

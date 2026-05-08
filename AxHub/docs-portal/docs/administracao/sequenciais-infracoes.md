@@ -1,4 +1,4 @@
----
+﻿---
 sidebar_position: 11
 title: Sequenciais de Infrações
 description: Controle de sequenciais numéricos de infrações
@@ -10,7 +10,7 @@ Permite configurar e monitorar os sequenciais numéricos utilizados na numeraç�
 
 ## Como acessar
 
-**Menu lateral** → Administração → **Sequenciais de Infrações**
+**Menu lateral** → Configurações → **Sequenciais de Infrações**
 
 | Campo | Descrição |
 |-------|-----------|

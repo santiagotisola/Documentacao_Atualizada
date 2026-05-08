@@ -1,4 +1,4 @@
----
+﻿---
 sidebar_position: 14
 title: Tipos de Aferições
 description: Cadastro de tipos de aferições metrológicas
@@ -10,7 +10,7 @@ Permite cadastrar os tipos de aferições metrológicas realizadas nos equipamen
 
 ## Como acessar
 
-**Menu lateral** → Administração → **Tipos de Aferições**
+**Menu lateral** → Configurações → **Tipos de Aferições**
 
 | Campo | Descrição |
 |-------|-----------|

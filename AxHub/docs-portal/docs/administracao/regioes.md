@@ -1,4 +1,4 @@
----
+﻿---
 sidebar_position: 10
 title: Regiões
 description: Cadastro de regiões geográficas
@@ -10,7 +10,7 @@ Permite cadastrar e gerenciar as regiões geográficas utilizadas no agrupamento
 
 ## Como acessar
 
-**Menu lateral** → Administração → **Regiões**
+**Menu lateral** → Configurações → **Regiões**
 
 | Campo | Descrição |
 |-------|-----------|

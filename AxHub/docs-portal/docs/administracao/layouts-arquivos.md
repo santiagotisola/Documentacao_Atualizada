@@ -1,4 +1,4 @@
----
+﻿---
 sidebar_position: 8
 title: Layouts de Arquivos
 description: Configuração de layouts para importação e exportação
@@ -10,7 +10,7 @@ Permite configurar os layouts de arquivos utilizados para importação e exporta
 
 ## Como acessar
 
-**Menu lateral** → Administração → **Layouts de Arquivos**
+**Menu lateral** → Configurações → **Layouts de Arquivos**
 
 | Campo | Descrição |
 |-------|-----------|

@@ -1,4 +1,4 @@
----
+﻿---
 sidebar_position: 15
 title: Tipos de Imagens
 description: Cadastro de tipos de imagens capturadas
@@ -10,7 +10,7 @@ Permite cadastrar os tipos de imagens capturadas pelos equipamentos de fiscaliza
 
 ## Como acessar
 
-**Menu lateral** → Administração → **Tipos de Imagens**
+**Menu lateral** → Configurações → **Tipos de Imagens**
 
 | Campo | Descrição |
 |-------|-----------|

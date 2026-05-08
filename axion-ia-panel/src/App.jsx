@@ -14,6 +14,8 @@ import RelatorioFluxo from "./pages/RelatorioFluxo.jsx";
 import Conformidade from "./pages/Conformidade.jsx";
 import PlanilhaHoras from "./pages/PlanilhaHoras.jsx";
 import WhatsApp from "./pages/WhatsApp.jsx";
+import AnaliseImagens from "./pages/AnaliseImagens.jsx";
+import SlaCompliance from "./pages/SlaCompliance.jsx";
 import "./App.css";
 
 function App() {
@@ -30,6 +32,7 @@ function App() {
             <li><NavLink to="/chat">Chat</NavLink></li>
             <li><NavLink to="/helpdesk">Helpdesk</NavLink></li>
             <li><NavLink to="/whatsapp">💬 WhatsApp</NavLink></li>
+            <li><NavLink to="/analise-imagens">🔍 Análise Imagens</NavLink></li>
             <li><NavLink to="/gerar-doc">📄 Gerar Doc</NavLink></li>
             <li><NavLink to="/fontes">🔎 Fontes de Pesquisa</NavLink></li>
             <li><NavLink to="/roadmap">🗺️ Roadmap</NavLink></li>
@@ -37,6 +40,7 @@ function App() {
             <li><NavLink to="/conformidade">📜 Conformidade</NavLink></li>
             <li><NavLink to="/relatorio-fluxo">📊 Relatório Fluxo</NavLink></li>
             <li><NavLink to="/planilha-horas">⏱️ Planilha de Horas</NavLink></li>
+            <li><NavLink to="/sla-compliance">🎯 SLA Compliance</NavLink></li>
             <li><NavLink to="/treinamento">Treinamento</NavLink></li>
             <li><NavLink to="/logs">Logs</NavLink></li>
             <li><NavLink to="/kb">Knowledge Base</NavLink></li>
@@ -57,7 +61,9 @@ function App() {
             <Route path="/conformidade" element={<Conformidade />} />
             <Route path="/relatorio-fluxo" element={<RelatorioFluxo />} />
             <Route path="/planilha-horas" element={<PlanilhaHoras />} />
+            <Route path="/sla-compliance" element={<SlaCompliance />} />
             <Route path="/whatsapp" element={<WhatsApp />} />
+            <Route path="/analise-imagens" element={<AnaliseImagens />} />
             <Route path="/treinamento" element={<Treinamento />} />
             <Route path="/logs" element={<Logs />} />
             <Route path="/kb" element={<KnowledgeBase />} />

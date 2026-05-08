@@ -9,6 +9,7 @@ const WhatsAppSessaoSchema = new mongoose.Schema({
       "inicio",
       "menu",
       "aguardando_assunto",
+      "aguardando_sistema",
       "aguardando_descricao",
       "aguardando_categoria",
       "aguardando_foto",
@@ -17,12 +18,16 @@ const WhatsAppSessaoSchema = new mongoose.Schema({
       "consultando_numero",
       "respondendo_numero",
       "respondendo_mensagem",
+      "aguardando_modulo_duvida",
+      "aguardando_duvida",
+      "respondendo_duvida",
       "encerrado"
     ],
     default: "inicio"
   },
   dadosParciais: {
     assunto:      { type: String, default: null },
+    sistema:      { type: String, default: null },
     descricao:    { type: String, default: null },
     categoriaId:  { type: Number, default: null },
     categoriaNome:{ type: String, default: null },

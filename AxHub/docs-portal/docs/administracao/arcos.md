@@ -1,4 +1,4 @@
----
+﻿---
 sidebar_position: 2
 title: Arcos
 description: Cadastro de arcos de fiscalização
@@ -12,7 +12,7 @@ Permite cadastrar e gerenciar os arcos de fiscalização vinculados às operaç�
 
 ## Como acessar
 
-**Menu lateral** → Administração → **Arcos**
+**Menu lateral** → Configurações → **Arcos**
 
 ## Cadastro de arco
 

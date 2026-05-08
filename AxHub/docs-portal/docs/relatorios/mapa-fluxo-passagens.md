@@ -6,7 +6,7 @@ description: Mapa visual do fluxo de passagens por equipamento
 
 # Mapa de Fluxo de Passagens
 
-Exibe um mapa visual com o fluxo de passagens de veículos por equipamento.
+Visualização geográfica do fluxo de passagens de veículos por equipamento. Os equipamentos são exibidos no mapa com indicadores de volume de tráfego, permitindo análise espacial da distribuição de passagens e infrações.
 
 ![Mapa de Fluxo](../img/Relatorios%20-%20mapa%20de%20fluxo%20de%20passagens.png)
 
@@ -14,17 +14,34 @@ Exibe um mapa visual com o fluxo de passagens de veículos por equipamento.
 
 **Menu lateral** → Relatórios → **Mapa de Fluxo de Passagens**
 
+## Filtros disponíveis
+
 | Filtro | Descrição |
 |--------|-----------|
 | **Período** | Faixa de datas |
-| **Região** | Filtrar por região |
-| **Equipamento** | Filtrar por equipamento |
+| **Região** | Filtrar por região geográfica |
+| **Equipamento** | Exibir equipamento específico |
+| **Tipo de Dado** | Passagens, Infrações ou Aproveitamento OCR |
+
+## Funcionalidades do Mapa
+
+| Recurso | Descrição |
+|---------|-----------|
+| **Marcadores coloridos** | Cor indica volume de tráfego (verde = baixo, vermelho = alto) |
+| **Clique no equipamento** | Exibe resumo: passagens, infrações e aproveitamento |
+| **Zoom e navegação** | Mapa interativo com controle de zoom e arrasto |
+| **Clusters** | Equipamentos próximos são agrupados em escala reduzida |
+
+:::tip Dica
+O mapa usa a posição geográfica configurada no cadastro de cada equipamento. Verifique a [configuração de equipamentos](../cadastros-basicos/equipamentos) caso algum aparelho não esteja visível.
+:::
 
 ---
 
-## Navegacao Relacionada
+## Navegação Relacionada
 
-| Tipo | Pagina | Descricao |
+| Tipo | Página | Descrição |
 |------|--------|-----------|
-| Relacionado | [Fluxo Diario de Veiculos](./fluxo-diario-veiculos) | Dados tabulares |
-| Relacionado | [Monitoramento Online](../operacoes/monitoramento-online) | Tempo real |
+| Relacionado | [Fluxo Diário de Veículos](./fluxo-diario-veiculos) | Dados tabulares detalhados |
+| Relacionado | [Monitoramento Online](../operacoes/monitoramento-online) | Status em tempo real |
+| Relacionado | [Equipamentos](../cadastros-basicos/equipamentos) | Cadastro de equipamentos |

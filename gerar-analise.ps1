@@ -36,7 +36,10 @@ $dbFiles = @(
   "AxHub\Database\AxHub.sql",
   "AxHub\Database\relatorio-fluxo-implementacao.json",
   "AxTon\Database\DATABASE_MAPPING_AXTON.md",
-  "AxCross\Database\AxCross.sql"
+  "AxCross\Database\AxCross.sql",
+  "gerar-knowledge-base.mjs",
+  "MANUAL-AXIONIA.md",
+  "BASE-PROJETO-DOCS.md"
 )
 
 # ─── Arquivos de configuracao raiz dos portais ────────────────────────────────

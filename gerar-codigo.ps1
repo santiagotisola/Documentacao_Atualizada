@@ -22,7 +22,8 @@ $roots = @(
   "axion-ia-panel\package.json","axion-ia-panel\index.html","axion-ia-panel\vite.config.js",
   "AxHub\docs-portal\docusaurus.config.ts","AxHub\docs-portal\package.json","AxHub\docs-portal\sidebars.ts","AxHub\docs-portal\tsconfig.json","AxHub\base-pesquisa-suporte.md",
   "AxTon\docs-portal\docusaurus.config.ts","AxTon\docs-portal\package.json","AxTon\docs-portal\sidebars.ts","AxTon\docs-portal\tsconfig.json","AxTon\base-pesquisa-suporte.md",
-  "AxCross\docs-portal\docusaurus.config.ts","AxCross\docs-portal\package.json","AxCross\docs-portal\sidebars.ts","AxCross\docs-portal\tsconfig.json","AxCross\base-pesquisa-suporte.md"
+  "AxCross\docs-portal\docusaurus.config.ts","AxCross\docs-portal\package.json","AxCross\docs-portal\sidebars.ts","AxCross\docs-portal\tsconfig.json","AxCross\base-pesquisa-suporte.md",
+  "gerar-knowledge-base.mjs","MANUAL-AXIONIA.md","BASE-PROJETO-DOCS.md"
 )
 
 foreach ($r in $roots) {

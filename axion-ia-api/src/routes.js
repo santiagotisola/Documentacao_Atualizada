@@ -1,6 +1,6 @@
 import express from "express";
 import { processarMensagem, consultarHistorico, consultarPendentes, consultarEstatisticas, treinarIA, consultarLogsMongo, consultarAnalise, listarEntradasKB } from "./controller.js";
-import { listarTickets, detalheTicket, classificarTicket, responderTicketIA, processarPendentes as processarHelpdeskPendentes, listarCategorias, criarChamado, statusPolling, iniciarPolling, pausarPolling, retomarPolling, limparPolling, obterFila, setModoRevisao, aprovarFila, rejeitarFila, listarTecnicosHelpdesk, gerarPlanilhaHoras } from "./helpdesk-controller.js";
+import { listarTickets, detalheTicket, classificarTicket, responderTicketIA, processarPendentes as processarHelpdeskPendentes, listarCategorias, criarChamado, statusPolling, iniciarPolling, pausarPolling, retomarPolling, limparPolling, obterFila, setModoRevisao, aprovarFila, rejeitarFila, listarTecnicosHelpdesk, gerarPlanilhaHoras, relatarSlaCompliance } from "./helpdesk-controller.js";
 import { statusConexao, resumoGeral, listarEquipamentos, listarOperacoes, statsInfracoes, heartbeatEquipamentos, listarTabelas, listarMonitoramentos, ultimasPassagens, statsTriagens } from "./axhub-controller.js";
 import { statusConexao as axtonStatus, resumoGeral as axtonResumo, listarTabelas as axtonTabelas, ultimasPesagens as axtonPesagens, ultimasInfracoes as axtonInfracoes, heartbeatEquipamentos as axtonHeartbeat } from "./axton-controller.js";
 import { statusConexao as axcrossStatus, resumoGeral as axcrossResumo, listarEquipamentos as axcrossEquipamentos, statsPassagens as axcrossPassagens, heartbeatEquipamentos as axcrossHeartbeat, listarTabelas as axcrossTabelas, listarLocais as axcrossLocais, listarOperacoes as axcrossOperacoes } from "./axcross-controller.js";
@@ -14,6 +14,14 @@ import { relatorioPassagens, relatorioImagens, listarEquipamentosRelatorio } fro
 import { uploadMiddlewareComErro, uploadContexto } from "./upload-controller.js";
 import { gerarConformidadeHandler, listarConformidadeHandler, obterConformidadeHandler, removerConformidadeHandler } from "./conformidade-controller.js";
 import { iniciarConexao, statusConexao as waStatus, listarSessoes, detalhesSessao, encerrarSessao, enviarManual } from "./whatsapp-controller.js";
+import { reindexarDocs, reindexarJitbit, statsKB, limparModuloKB } from "./admin-controller.js";
+import { uploadImagemMiddleware, analisarSemSalvar, salvarEAnalisar, listarTodas, listarPorSistema, listarPasta, compararPasta, compararPastaLocal, servirImagemExterna, removerImagem, classificarOcupacao, classificarRoda, classificarCorCamisa, classificarMochila, classificarCalca, gerarCaracteristicas, lerPlacas } from "./analise-imagem-controller.js";
+import { uploadJobMiddleware, criarJobHandler, listarJobs, obterJob, removerJob } from "./job-controller.js";
+import { validarFluxoAlerta } from "./validate-controller.js";
+import { runAgent, runAgentMode, getAgentState, getSchedulerStatus, startScheduler, stopScheduler } from "./agent-controller.js";
+import { validarDispositivo, validarLote, analisarIncidente, heartbeatGeral } from "./varco-controller.js";
+import { analisarTexto, analisarArquivo, uploadLeituraMiddleware } from "./leitura-controller.js";
+import { healthCheck } from "./health-controller.js";
 
 const router = express.Router();
 
@@ -147,5 +155,64 @@ router.get("/whatsapp/sessoes", listarSessoes);
 router.get("/whatsapp/sessao/:telefone", detalhesSessao);
 router.delete("/whatsapp/sessao/:telefone", encerrarSessao);
 router.post("/whatsapp/send", enviarManual);
+
+// ─── Análise de Imagens Operacionais ─────────────────────────────────────────
+// Pasta: uploads/analise/{sistema}/  (≠ docs/img/ que são screenshots dos manuais)
+// Sistemas aceitos: axhub | axton | axcross | axionia
+router.post("/analise-imagem/analisar", uploadImagemMiddleware, analisarSemSalvar);
+router.post("/analise-imagem/salvar-e-analisar", uploadImagemMiddleware, salvarEAnalisar);
+router.post("/analise-imagem/comparar-pasta", uploadImagemMiddleware, compararPasta);
+router.post("/analise-imagem/comparar-pasta-local", uploadImagemMiddleware, compararPastaLocal);
+router.get("/analise-imagem/imagem-externa", servirImagemExterna);
+router.post("/analise-imagem/gerar-caracteristicas", uploadImagemMiddleware, gerarCaracteristicas);
+router.post("/analise-imagem/classificar-ocupacao", classificarOcupacao);
+router.post("/analise-imagem/classificar-roda",     classificarRoda);
+router.post("/analise-imagem/classificar-cor-camisa", classificarCorCamisa);
+router.post("/analise-imagem/classificar-mochila",  classificarMochila);
+router.post("/analise-imagem/classificar-calca",    classificarCalca);
+router.post("/analise-imagem/ler-placa",            lerPlacas);
+router.get("/analise-imagem/listar", listarTodas);
+router.get("/analise-imagem/listar/:sistema", listarPorSistema);
+router.get("/analise-imagem/listar-pasta", listarPasta);
+router.delete("/analise-imagem/:sistema/:nome", removerImagem);
+
+// ─── Jobs — Processamento em lote ────────────────────────────────────────────
+router.post("/jobs/comparar-pasta", uploadJobMiddleware, criarJobHandler);
+router.get("/jobs",     listarJobs);
+router.get("/jobs/:id", obterJob);
+router.delete("/jobs/:id", removerJob);
+
+// ─── Admin — Re-indexação da KB ──────────────────────────────────────────────
+router.get("/admin/kb/stats", statsKB);
+router.post("/admin/reindexar-docs", reindexarDocs);
+router.post("/admin/reindexar-jitbit", reindexarJitbit);
+router.delete("/admin/kb/:modulo", limparModuloKB);
+
+// ─── AxionIA Core — Validação de Fluxo de Alertas ────────────────────────────
+router.post("/validate-alert-flow", validarFluxoAlerta);
+
+// ─── AxionAgent — Orquestrador Central ───────────────────────────────────────
+router.post("/agent/run",               runAgent);
+router.post("/agent/run/:mode",         runAgentMode);
+router.get("/agent/state",              getAgentState);
+router.get("/agent/scheduler",          getSchedulerStatus);
+router.post("/agent/scheduler/start",   startScheduler);
+router.post("/agent/scheduler/stop",    stopScheduler);
+
+// ─── VARCO — Validador de integração câmeras → AxHub ─────────────────────────
+router.post("/varco/validar-dispositivo", validarDispositivo);
+router.post("/varco/validar-lote",        validarLote);
+router.post("/varco/analisar-incidente",  analisarIncidente);
+router.get("/varco/heartbeat",            heartbeatGeral);
+
+// ─── Leitura Estratégica — Agente 80/20 ──────────────────────────────────────
+router.post("/leitura/analisar",          analisarTexto);
+router.post("/leitura/upload",            uploadLeituraMiddleware, analisarArquivo);
+
+// ─── SLA Compliance — Relatório Jitbit ───────────────────────────────────
+router.get("/helpdesk/sla-compliance", relatarSlaCompliance);
+
+// ─── Health Check — monitoramento externo ────────────────────────────────────
+router.get("/health", healthCheck);
 
 export default router;

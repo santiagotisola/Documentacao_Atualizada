@@ -20,16 +20,26 @@ const config = {
 let pool = null;
 
 export async function conectar() {
-  if (pool) return pool;
+  // Reconnect se o pool foi fechado ou perdeu conexão
+  if (pool && pool.connected) return pool;
+  if (pool) {
+    try { await pool.close(); } catch (_) {}
+    pool = null;
+  }
 
   pool = await sql.connect(config);
+  // Limpar referência em caso de erro fatal no pool
+  pool.on("error", (err) => {
+    console.error(`❌ [axhub-db] Erro no pool: ${err.message}`);
+    pool = null;
+  });
   console.log(`🗄️  SQL Server conectado: ${config.server}/${config.database}`);
   return pool;
 }
 
 export async function desconectar() {
   if (pool) {
-    await pool.close();
+    try { await pool.close(); } catch (_) {}
     pool = null;
   }
 }

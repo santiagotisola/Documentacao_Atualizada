@@ -16,8 +16,14 @@ function getAuthHeader() {
 
 async function jitbitRequest(endpoint, method = "GET", body = null) {
   const url = `${getBase()}/api${endpoint}`;
+
+  // Timeout de 15s — evita travar workers se o Jitbit estiver lento/fora
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), 15_000);
+
   const options = {
     method,
+    signal: controller.signal,
     headers: {
       ...getAuthHeader(),
       "Content-Type": "application/json"
@@ -28,14 +34,23 @@ async function jitbitRequest(endpoint, method = "GET", body = null) {
     options.body = JSON.stringify(body);
   }
 
-  const response = await fetch(url, options);
+  try {
+    const response = await fetch(url, options);
 
-  if (!response.ok) {
-    const body = await response.text().catch(() => "");
-    throw new Error(`Jitbit API ${response.status}: ${body || response.statusText}`);
+    if (!response.ok) {
+      const txt = await response.text().catch(() => "");
+      throw new Error(`Jitbit API ${response.status}: ${txt || response.statusText}`);
+    }
+
+    return response.json();
+  } catch (err) {
+    if (err.name === "AbortError") {
+      throw new Error(`Jitbit API timeout (>15s) no endpoint ${endpoint}`);
+    }
+    throw err;
+  } finally {
+    clearTimeout(timer);
   }
-
-  return response.json();
 }
 
 /**

@@ -44,6 +44,16 @@ O Dashboard e exibido automaticamente apos o Login. Clique no logo do AxHub para
 
 ![Triagem Mensal](../img/dashboard-triagem-mensal.png)
 
+## OCR Ultimas 48 Horas
+
+Exibe o aproveitamento de leitura de placas pelo OCR nas últimas 48 horas.
+
+| Indicador | Descrição |
+|-----------|-----------|
+| **Aproveitamento OCR (%)** | Percentual de placas lidas corretamente pelo OCR |
+| **Passagens** | Total de passagens de veículos registradas no período |
+| **Leituras** | Total de leituras de placa realizadas com sucesso |
+
 ## Ultimos Eventos
 
 ![Ultimos Eventos](../img/dashboard-ultimos-eventos.png)

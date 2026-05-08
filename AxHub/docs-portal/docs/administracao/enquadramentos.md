@@ -1,4 +1,4 @@
----
+﻿---
 sidebar_position: 6
 title: Enquadramentos
 description: Tabela de enquadramentos de infrações de trânsito
@@ -10,7 +10,7 @@ Exibe a tabela completa de enquadramentos de infrações de trânsito conforme o
 
 ## Como acessar
 
-**Menu lateral** → Administração → **Enquadramentos**
+**Menu lateral** → Configurações → **Enquadramentos**
 
 | Coluna | Descrição |
 |--------|-----------|

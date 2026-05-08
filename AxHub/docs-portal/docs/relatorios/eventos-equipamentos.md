@@ -6,7 +6,7 @@ description: Relatório de eventos e ocorrências dos equipamentos
 
 # Relatório de Eventos dos Equipamentos
 
-Exibe o histórico de eventos registrados nos equipamentos de fiscalização.
+Exibe o histórico de eventos registrados nos equipamentos de fiscalização. Permite identificar falhas, manutenções e ocorrências operacionais para acompanhamento do SLA contratual.
 
 ![Relatório de Eventos](../img/Relatorios%20-%20relatorio%20de%20eventos%20dos%20equipamentos.png)
 
@@ -14,17 +14,42 @@ Exibe o histórico de eventos registrados nos equipamentos de fiscalização.
 
 **Menu lateral** → Relatórios → **Eventos dos Equipamentos**
 
+## Filtros disponíveis
+
 | Filtro | Descrição |
 |--------|-----------|
 | **Período** | Faixa de datas |
 | **Equipamento** | Filtrar por equipamento |
-| **Tipo de Evento** | Falha, manutenção, vandalismo |
+| **Tipo de Evento** | Falha, manutenção, vandalismo, reinicialização |
+| **Região** | Filtrar por região geográfica |
+
+## Campos exibidos
+
+| Coluna | Descrição |
+|--------|-----------|
+| **Data/Hora** | Momento do evento |
+| **Equipamento** | Nome e código do equipamento |
+| **Tipo de Evento** | Categoria do evento registrado |
+| **Descrição** | Detalhamento do evento |
+| **Duração** | Tempo de duração do evento (para falhas) |
+| **Responsável** | Técnico ou sistema que registrou o evento |
+| **Impacto na Medição** | Indica se o evento afeta o SLA contratual |
+
+## Exportação
+
+Exportável em **Excel** para inclusão em relatórios de performance e planos de manutenção.
+
+:::tip Dica
+Use em conjunto com o [Relatório de Falhas Sequenciais](./falhas-sequenciais) para identificar equipamentos com problemas recorrentes.
+:::
 
 ---
 
-## Navegacao Relacionada
+## Navegação Relacionada
 
-| Tipo | Pagina | Descricao |
+| Tipo | Página | Descrição |
 |------|--------|-----------|
-| Relacionado | [Eventos (Operacoes)](../operacoes/eventos-equipamentos) | Dados operacionais |
-| Relacionado | [Equipamentos](../cadastros-basicos/equipamentos) | Equipamentos |
+| Relacionado | [Eventos (Operações)](../operacoes/eventos-equipamentos) | Dados operacionais em tempo real |
+| Relacionado | [Equipamentos](../cadastros-basicos/equipamentos) | Cadastro do equipamento |
+| Relacionado | [Falhas Sequenciais](./falhas-sequenciais) | Relatório de falhas recorrentes |
+| Relacionado | [Interrupções](../medicoes/interrupcoes) | Interrupções que afetam medição |

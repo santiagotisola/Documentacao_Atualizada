@@ -1,4 +1,4 @@
----
+﻿---
 sidebar_position: 7
 title: Formas de Autuação
 description: Cadastro de formas de autuação
@@ -10,7 +10,7 @@ Permite cadastrar as formas de autuação utilizadas no processo de fiscalizaç�
 
 ## Como acessar
 
-**Menu lateral** → Administração → **Formas de Autuação**
+**Menu lateral** → Configurações → **Formas de Autuação**
 
 | Campo | Descrição |
 |-------|-----------|

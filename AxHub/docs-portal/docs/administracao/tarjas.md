@@ -1,4 +1,4 @@
----
+﻿---
 sidebar_position: 13
 title: Tarjas
 description: Configuração de tarjas para imagens de infrações
@@ -10,7 +10,7 @@ Permite configurar as tarjas aplicadas nas imagens de infrações para proteçã
 
 ## Como acessar
 
-**Menu lateral** → Administração → **Tarjas**
+**Menu lateral** → Configurações → **Tarjas**
 
 | Campo | Descrição |
 |-------|-----------|

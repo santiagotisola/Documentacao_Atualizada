@@ -6,7 +6,7 @@ description: Relatório detalhado de infrações processadas
 
 # Relatório de Infrações
 
-Permite gerar relatórios detalhados das infrações processadas pelo sistema.
+Permite gerar relatórios detalhados das infrações processadas pelo sistema, com filtros por período, equipamento, tipo de infração e status. Utilizado para acompanhamento operacional, prestação de contas e auditoria interna.
 
 ![Relatório de Infrações](../img/Relatorio%20-%20Relatorio%20de%20infrações.png)
 
@@ -14,24 +14,50 @@ Permite gerar relatórios detalhados das infrações processadas pelo sistema.
 
 **Menu lateral** → Relatórios → **Relatório de Infrações**
 
+## Filtros disponíveis
+
 | Filtro | Descrição |
 |--------|-----------|
 | **Período** | Faixa de datas |
 | **Equipamento** | Filtrar por equipamento |
 | **Enquadramento** | Tipo de infração |
 | **Status** | Processada, descartada, exportada |
+| **Operação** | Filtrar por operação vinculada |
+| **Operador** | Filtrar por usuário que realizou a triagem |
 
-## Termos Tecnicos
+## Campos exibidos
 
-| Termo | Definicao |
+| Coluna | Descrição |
+|--------|-----------|
+| **Número Auto** | Identificador único da infração |
+| **Data/Hora** | Momento da infração |
+| **Placa** | Placa do veículo infrator |
+| **Equipamento** | Equipamento que registrou |
+| **Velocidade Medida** | Velocidade capturada |
+| **Velocidade Considerada** | Velocidade após aplicação de tolerância |
+| **Enquadramento** | Código e descrição do enquadramento aplicado |
+| **Status** | Situação atual da infração |
+| **Operador** | Analista responsável pela triagem |
+| **Lote de Exportação** | Lote ao qual foi exportada (quando aplicável) |
+
+## Exportação
+
+Exportável em **Excel** e **PDF**. O formato PDF inclui imagens quando selecionado o campo correspondente.
+
+## Termos Técnicos
+
+| Termo | Definição |
 |-------|-----------|
-| [Enquadramento](../glossario/enquadramento) | Ver definicao no glossario |
+| [Enquadramento](../glossario/enquadramento) | Ver definição no glossário |
+| [Triagem](../glossario/triagem) | Ver definição no glossário |
+| [Autuação](../glossario/autuacao) | Ver definição no glossário |
 
 ---
 
-## Navegacao Relacionada
+## Navegação Relacionada
 
-| Tipo | Pagina | Descricao |
+| Tipo | Página | Descrição |
 |------|--------|-----------|
-| Relacionado | [Consulta de Infracoes](../infracoes/consulta-infracoes) | Consulta detalhada |
-| Relacionado | [Exportacao](../infracoes/exportacao) | Lotes exportados |
+| Relacionado | [Consulta de Infrações](../infracoes/consulta-infracoes) | Consulta detalhada |
+| Relacionado | [Exportação](../infracoes/exportacao) | Lotes exportados |
+| Relacionado | [Auditoria](../infracoes/auditoria) | Revisão de infrações |

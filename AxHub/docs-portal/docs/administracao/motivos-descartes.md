@@ -1,4 +1,4 @@
----
+﻿---
 sidebar_position: 9
 title: Motivos de Descarte
 description: Cadastro de motivos para descarte de infrações
@@ -10,7 +10,7 @@ Permite cadastrar os motivos que justificam o descarte de infrações durante a 
 
 ## Como acessar
 
-**Menu lateral** → Administração → **Motivos de Descarte**
+**Menu lateral** → Configurações → **Motivos de Descarte**
 
 | Campo | Descrição |
 |-------|-----------|

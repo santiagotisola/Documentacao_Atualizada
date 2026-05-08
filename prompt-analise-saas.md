@@ -1,6 +1,6 @@
 ﻿# PROMPT DE ANALISE COMPLETA â€” SAAS AXION TECNOLOGIA
-> Gerado automaticamente em: 09/04/2026 15:04
-> Total de arquivos incluidos: 303
+> Gerado automaticamente em: 27/04/2026 10:25
+> Total de arquivos incluidos: 1226
 
 ---
 
@@ -96,7 +96,7 @@ seguro e escalavel.
 
 ## CODIGO-FONTE COMPLETO
 
-A seguir esta o codigo-fonte de todos os 303 arquivos do sistema,
+A seguir esta o codigo-fonte de todos os 1226 arquivos do sistema,
 organizados por projeto. Use este material como base para toda a analise acima.
 
 
@@ -120,7 +120,7 @@ O **AxCross** é o sistema de **monitoramento de cruzamentos** da Axion Tecnolog
 ### Itens diretos
 
 | Item do menu | Tela / Função |
-|---|---|
+| --- | --- |
 | **Monitoramento Online** | Acompanhamento em tempo real de equipamentos e passagens |
 | **Operações** | Cadastro e gestão de operações de fiscalização |
 | **Sistema** | Configurações gerais, dados do órgão, integrações |
@@ -129,7 +129,7 @@ O **AxCross** é o sistema de **monitoramento de cruzamentos** da Axion Tecnolog
 ### Categorias expansíveis
 
 | Categoria | Itens |
-|---|---|
+| --- | --- |
 | **Cadastros** | Locais, Equipamentos, Faixas |
 | **Administração** | Usuários, Permissões de acesso, Perfis de acesso |
 
@@ -137,12 +137,65 @@ O **AxCross** é o sistema de **monitoramento de cruzamentos** da Axion Tecnolog
 
 ## Módulos e Funcionalidades
 
-### Monitoramento Online
-- Mapa de equipamentos com status em tempo real (online/offline)
-- Últimas passagens registradas com placa, data/hora e local
-- Alertas de equipamentos offline ou com falhas
+### Veículos Monitorados
+
+#### Lista de Veículos
+
+- Placas cadastradas para monitoramento especial
+- Quando detectado em qualquer cruzamento, gera alerta automático
+- Campos: placa, tipo de ocorrência, habilitado, data de expiração, observações
+- Acesse: Menu lateral → Veículos Monitorados
+
+#### Tipos de Ocorrências
+
+- Categorias para classificar os alertas de veículos monitorados
+- Campos: código, nome, cor, emitir alerta sonoro, **prazo de expiração (dias)**
+- O campo **Prazo de Expiração (dias)** define vigência automática para todos os veículos vinculados
+- Ao alterar o prazo, todos os veículos do tipo são atualizados automaticamente (atualização em bloco)
+- Acesse: Veículos Monitorados → Tipos de Ocorrências
+
+#### Vigência dos Alertas (novo recurso)
+
+- Controle de **data de início e fim** dos alertas por veículo monitorado
+- Configura-se o prazo em dias no **Tipo de Ocorrência**
+- O veículo recebe automaticamente uma **Data de Expiração** = hoje + prazo
+- Após a expiração, o veículo deixa de gerar alertas automaticamente
+- O campo **Habilitado** é controle manual — não é alterado automaticamente pela vigência
+- Para gerar alerta: veículo deve estar **habilitado** E **dentro da vigência**
+
+**Status de vigência:**
+
+- 🟢 **Ativo** — habilitado e dentro do prazo
+- 🟡 **Expira em Xh/Xd** — habilitado e expirando em breve
+- 🔴 **Expirado** — habilitado, mas prazo vencido (não gera alertas)
+- 🟡 **Desativado** — desabilitado manualmente
+
+**Sino de vigência (toolbar):**
+
+- Ícone de sino 🔔 na barra superior exibe veículos expirando nas próximas 24h ou já expirados
+- Lista paginada com 10 itens por página + botão "Ver mais"
+- Atualiza automaticamente a cada 5 minutos
+- Clicar no item abre o formulário de edição do veículo
+
+**Atualização em bloco:**
+
+- Alterar o prazo do tipo de ocorrência → recalcula a data de expiração de todos os veículos vinculados
+- Remover o prazo → expira = sem data (nunca expira) para todos os veículos
+- A operação é instantânea via UPDATE em lote no banco
+
+#### Alertas
+
+- Registram eventos detectados (veículos monitorados, equipamentos offline, ocorrências)
+- Acesse: Veículos Monitorados → Alertas
+
+#### Importação em Lote
+
+- Importar múltiplas placas via arquivo .txt
+- Se o tipo de ocorrência tiver prazo, a data de expiração é calculada automaticamente para cada veículo importado
+- Acesse: Veículos Monitorados → Importação de Monitorados
 
 ### Operações
+
 - Criar operação: definir local, período e parâmetros
 - Pausar, encerrar ou excluir operações
 - Operações com registros não podem ser excluídas
@@ -150,27 +203,32 @@ O **AxCross** é o sistema de **monitoramento de cruzamentos** da Axion Tecnolog
 ### Cadastros
 
 #### Locais
+
 - Nome, endereço, município, UF
 - Latitude/longitude opcionais para mapa
 - Acesse: Menu lateral → Cadastros → Locais
 
 #### Equipamentos
+
 - Câmeras, detectores, sensores, radares
 - Nome, tipo, modelo, fabricante, número de série, IP
 - Vinculado a um local
 - Acesse: Menu lateral → Cadastros → Equipamentos
 
 #### Faixas
+
 - Via monitorada em um cruzamento
 - Número da faixa, sentido, equipamento vinculado
 - Velocidade máxima opcional
 - Acesse: Menu lateral → Cadastros → Faixas
 
 ### Relatórios
+
 - Relatório de Passagens: filtro por período, local, equipamento, faixa
 - Exportação em PDF ou CSV
 
 ### Sistema
+
 - Dados do órgão (nome, CNPJ, endereço)
 - Parâmetros operacionais (intervalo de atualização, timeout, retenção)
 - Integrações (API externa, webhook)
@@ -179,14 +237,17 @@ O **AxCross** é o sistema de **monitoramento de cruzamentos** da Axion Tecnolog
 ### Administração
 
 #### Usuários
+
 - Nome, login, e-mail, senha, perfil de acesso
 - Acesse: Menu lateral → Administração → Usuários
 
 #### Permissões de Acesso
+
 - Visualizar, criar, editar, excluir por módulo
 - Acesse: Menu lateral → Administração → Permissões de acesso
 
 #### Perfis de Acesso
+
 - Administrador, Operador, Consulta (padrão)
 - Acesse: Menu lateral → Administração → Perfis de acesso
 
@@ -195,13 +256,23 @@ O **AxCross** é o sistema de **monitoramento de cruzamentos** da Axion Tecnolog
 ## Problemas Comuns
 
 ### Equipamento offline
+
 1. Verificar se está energizado
 2. Confirmar cabo de rede conectado
 3. Testar ping para o IP
 4. Reiniciar equipamento
 5. Acionar equipe de manutenção se persistir
 
+### Veículo monitorado não gera alerta
+
+1. Verificar se o veículo está **Habilitado** na lista de Veículos Monitorados
+2. Verificar a **Vigência**: se a coluna "Vigência" mostrar "Expirado" ou "Desativado", o alerta não será gerado
+3. Se expirado: editar o veículo e atualizar a Data de Expiração, ou zerar o prazo do Tipo de Ocorrência
+4. Confirmar se o Tipo de Ocorrência está ativo
+5. Verificar se a placa está cadastrada no formato correto (Mercosul ou padrão antigo)
+
 ### Erro ao fazer login
+
 1. Verificar nome de usuário correto
 2. Conferir Caps Lock
 3. Usar "Esqueceu a Senha?" para recuperar
@@ -968,11 +1039,9 @@ title: Veículos Monitorados
 description: Cadastro e gestão de veículos monitorados no AxCross
 ---
 
-# Veículos Monitorados
-
 O módulo **Veículos Monitorados** permite registrar placas e veículos de interesse para monitoramento especial. Quando um veículo cadastrado é detectado em qualquer cruzamento, o sistema gera um alerta automático para a equipe operacional.
 
-![](<../img/Menu veiculos monitorados.png>)
+![Menu Veículos Monitorados](<../img/Menu veiculos monitorados.png>)
 
 ## Como acessar
 
@@ -981,7 +1050,7 @@ No **menu lateral**, clique em **Veículos Monitorados**.
 O módulo é composto pelos seguintes submódulos:
 
 | Submódulo | Descrição |
-|-----------|-----------|
+| --------- | --------- |
 | [**Veículos Monitorados**](#lista-de-veiculos) | Cadastro e consulta das placas monitoradas |
 | [**Tipos de Ocorrências**](#tipos-de-ocorrencias) | Categorias de ocorrência para alertas |
 | [**Alertas**](#alertas-gerados) | Alertas gerados automaticamente e gestão de ocorrências |
@@ -1001,7 +1070,7 @@ Exibe todos os veículos cadastrados para monitoramento, com filtros por placa, 
 ### Campos
 
 | Campo | Obrigatório | Descrição |
-|-------|:-----------:|-----------|
+| ----- | :---------: | --------- |
 | **Placa** | Sim | Placa do veículo no formato Mercosul ou antigo |
 | **Classificação** | Sim | Categoria do veículo (ex.: Roubado, VIP, Suspeito) |
 | **Motivo** | Não | Razão do monitoramento |
@@ -1049,17 +1118,25 @@ Define as categorias utilizadas para classificar as ocorrências registradas nos
 Para acessar: **Veículos Monitorados → Tipos de Ocorrências**.
 
 | Campo | Descrição |
-|-------|-----------|
+| ------- | ----------- |
+| **Código** | Identificador único da ocorrência |
 | **Nome** | Nome do tipo de ocorrência |
-| **Descrição** | Descrição detalhada da ocorrência |
-| **Status** | Ativo ou Inativo |
+| **Cor** | Cor de identificação visual nos alertas |
+| **Emitir Alerta Sonoro** | Dispara sinal sonoro ao gerar alerta |
+| **Prazo de Expiração (dias)** | Dias para expirar automaticamente os veículos vinculados. Vazio = sem expiração. |
 
 **Passo a passo — Cadastrar tipo de ocorrência:**
 
-1. Clique em **Novo Tipo de Ocorrência**
-2. Informe o **Nome**
-3. Opcionalmente, preencha a **Descrição**
-4. Clique em **Salvar**
+1. Clique em **+ NOVO**
+2. Informe o **Código** e o **Nome**
+3. Selecione a **Cor** de identificação
+4. Opcionalmente, configure **Emitir Alerta Sonoro**
+5. Para ativar vigência automática, informe o **Prazo de Expiração (dias)**
+6. Clique em **Salvar**
+
+:::info Vigência dos Alertas
+O campo **Prazo de Expiração (dias)** ativa o controle de vigência para todos os veículos deste tipo. Ao salvar, o sistema recalcula automaticamente a data de expiração de todos os veículos vinculados. Consulte [Vigência dos Alertas](vigencia-alertas.md) para detalhes completos.
+:::
 
 ---
 
@@ -1074,7 +1151,7 @@ Para acessar: **Veículos Monitorados → Alertas**.
 ### Colunas da lista
 
 | Coluna | Descrição |
-|--------|-----------|
+| -------- | ----------- |
 | **Data/Hora** | Momento da detecção |
 | **Placa** | Placa do veículo detectado |
 | **Local** | Cruzamento onde foi detectado |
@@ -1085,7 +1162,7 @@ Para acessar: **Veículos Monitorados → Alertas**.
 ### Tipos de alerta
 
 | Tipo | Descrição |
-|------|-----------|
+| ------ | ----------- |
 | **Veículo Monitorado** | Placa cadastrada como monitorada foi detectada |
 | **Equipamento Offline** | Equipamento sem comunicação além do tempo limite |
 | **Falha de Imagem** | Equipamento detectou passagem mas sem imagem |
@@ -1102,7 +1179,7 @@ Configure os tipos de ocorrência disponíveis para categorizar os alertas manua
 ![Alerta - Ação](../img/Alerta - Ação.png)
 
 | Ação | Descrição |
-|------|-----------|
+| ------ | ----------- |
 | **Visualizar** | Abrir detalhes do alerta |
 | **Assumir** | Registrar responsável pela tratativa |
 | **Resolver** | Marcar o alerta como resolvido |
@@ -1176,6 +1253,211 @@ Para acessar: **Veículos Monitorados → Importação de Monitorados**.
 :::info Formato do arquivo
 O arquivo CSV deve conter uma placa por linha, no formato Mercosul (ABC1D23) ou padrão antigo (ABC-1234). A classificação padrão será atribuída automaticamente podendo ser editada após a importação.
 :::
+```
+
+### `AxCross\docs-portal\docs\operacoes\vigencia-alertas.md`
+
+```md
+---
+sidebar_position: 2
+title: Vigência dos Alertas
+description: Configure prazos de expiração para veículos monitorados e controle automaticamente a validade dos alertas no AxCross
+---
+
+A **Vigência dos Alertas** permite definir um **prazo de expiração** para os veículos monitorados. Ao configurar um prazo no Tipo de Ocorrência, o sistema calcula automaticamente a data limite para cada veículo cadastrado. Após esse período, o veículo deixa de gerar alertas — sem necessidade de desativação manual.
+
+:::info Novo Recurso
+Disponível a partir da versão com as melhorias **AxCross — Vigência dos Alertas**. Inclui campo **Prazo de Expiração (dias)** no Tipo de Ocorrência e controle de vigência na lista de Veículos Monitorados.
+:::
+
+---
+
+## Conceitos Fundamentais
+
+| Conceito | Descrição |
+| ---------- | ----------- |
+| **Habilitado** | Controle **manual** do usuário. Não é alterado automaticamente por nenhum processo. |
+| **Vigência** | Controle de **expiração** baseado no prazo do Tipo de Ocorrência. Independente do campo Habilitado. |
+| **Alerta** | Gerado somente se o veículo estiver **habilitado** E **dentro da vigência**. |
+
+### Status da Vigência
+
+| Status | Condição | Cor |
+| -------- | ---------- | ----- |
+| **Ativo** | Habilitado e dentro do prazo (ou sem expiração) | 🟢 Verde |
+| **Expira em Xhoras / Xdias** | Habilitado e expirando em breve | 🟡 Amarelo |
+| **Expirado** | Habilitado, mas prazo já venceu | 🔴 Vermelho |
+| **Desativado** | `Habilitado = Não` (independente da data) | 🟡 Amarelo |
+
+---
+
+## Passo 1 — Configurar o Tipo de Ocorrência
+
+O prazo de vigência é definido diretamente no **Tipo de Ocorrência**. Todos os veículos vinculados a esse tipo herdam automaticamente o prazo.
+
+Para acessar: **Veículos Monitorados → Tipos de Ocorrências**.
+
+![Tipo de Ocorrência](../img/Tipo de Ocorrência.png)
+
+### Campos do Tipo de Ocorrência
+
+| Campo | Obrigatório | Descrição |
+| ------- | :-----------: | ----------- |
+| **Código** | Sim | Identificador único do tipo |
+| **Nome** | Sim | Nome descritivo da ocorrência |
+| **Cor** | Sim | Cor de identificação visual nos alertas |
+| **Emitir Alerta Sonoro** | Não | Dispara sinal sonoro ao gerar alerta |
+| **Prazo de Expiração (dias)** | Não | Número de dias para expirar os veículos deste tipo. Deixe vazio para vigência ilimitada. |
+
+### Como configurar o prazo
+
+1. No menu lateral, acesse **Veículos Monitorados → Tipos de Ocorrências**
+2. Clique no ícone de edição ✏️ do tipo desejado (ou clique em **+ NOVO** para criar)
+3. No campo **Prazo de Expiração (dias)**, informe a quantidade de dias (ex.: `30`)
+4. Clique em **Salvar**
+
+:::tip Exemplos de prazo
+
+- **30 dias** — veículo expira 30 dias após o cadastro
+- **90 dias** — vigência trimestral
+- **365 dias** — vigência anual
+- **Vazio** — sem prazo, nunca expira automaticamente
+:::
+
+---
+
+## Passo 2 — Cadastrar Veículo com Vigência
+
+Ao cadastrar um veículo monitorado vinculado a um tipo com prazo, a **Data de Expiração** é calculada automaticamente.
+
+![Novo Veículo Monitorado](../img/Novo Veículo Monitorado.png)
+
+### Campos relacionados à vigência
+
+| Campo | Descrição |
+| ------- | ----------- |
+| **Tipo de Ocorrência** | Define o prazo herdado automaticamente |
+| **Habilitado** | Ativa ou desativa manualmente o monitoramento |
+| **Data de Expiração** | Calculada automaticamente pelo prazo do tipo. Pode ser informada manualmente para um prazo diferente. |
+
+---
+
+## Visualizando a Vigência na Lista
+
+A lista de Veículos Monitorados exibe colunas dedicadas ao controle de vigência:
+
+| Coluna | Descrição |
+| -------- | ----------- |
+| **Habilitado** | Ícone ✔ (ativo) ou ✘ (inativo) — controle manual |
+| **Vigência** | Badge colorido com o status atual |
+| **Expira em** | Data e hora de expiração no formato `dd/MM/yyyy HH:mm` ou `-` se sem prazo |
+
+---
+
+## Atualização em Bloco — Alterar Prazo do Tipo
+
+Quando o **Prazo de Expiração** de um Tipo de Ocorrência é alterado, o sistema atualiza automaticamente **todos os veículos vinculados** àquele tipo — sem necessidade de editar cada veículo individualmente.
+
+:::warning Atenção
+A atualização em bloco é **imediata e afeta todos os veículos** do tipo. Durante o salvamento, uma mensagem de carregamento confirma que o processo está em andamento.
+:::
+
+### Cenários de atualização em bloco
+
+| Alteração no tipo | Resultado nos veículos |
+| ------------------- | ---------------------- |
+| Prazo removido (ex.: 20 dias → vazio) | `Data de Expiração = sem prazo` para todos |
+| Prazo alterado (ex.: 20 → 30 dias) | `Data de Expiração = hoje + 30 dias` para todos. O valor **20 dias** é o prazo anterior cadastrado no Tipo de Ocorrência; o valor **30 dias** é o novo prazo informado. O sistema sempre valida pela data de expiração registrada no veículo monitorado. |
+| Prazo adicionado (ex.: vazio → 20 dias) | `Data de Expiração = hoje + 20 dias` para todos |
+| Prazo não alterado | Nenhuma modificação nos veículos |
+
+### Como realizar a atualização em bloco
+
+1. Acesse **Veículos Monitorados → Tipos de Ocorrências**
+2. Edite o tipo desejado
+3. Altere o campo **Prazo de Expiração (dias)**
+4. Clique em **Salvar**
+5. Aguarde a mensagem *"Atualizando vigência dos veículos monitorados vinculados..."*
+
+Após a conclusão, todos os veículos do tipo terão a data de expiração recalculada.
+
+---
+
+## Sino de Vigência — Monitoramento de Expirações
+
+A **toolbar do AxCross** exibe um ícone de sino 🔔 com badge de contagem mostrando veículos que expiram nas próximas **24 horas** ou já **expirados**.
+
+### Como funciona
+
+- O sino exibe uma bolinha de notificação quando há veículos próximos de expirar ou já expirados
+- Clique no sino para abrir o painel de vigência
+- A lista é paginada em **10 itens por página** com botão **"Ver mais"**
+- O painel atualiza automaticamente a **cada 5 minutos**
+
+### Itens exibidos no sino
+
+| Item | Badge | Descrição |
+| ------ | ------- | ----------- |
+| Veículo expirando em breve | `Xh` (horas restantes) | Expira nas próximas 24 horas |
+| Veículo expirado | `Expirado` (vermelho) | Prazo já vencido, mas ainda habilitado |
+
+### Rodapé do painel
+
+O rodapé exibe um resumo: **"X expirando · Y expirado(s)"**
+
+### Ação ao clicar em um item
+
+Clicar em qualquer veículo no painel abre diretamente o formulário de edição, permitindo renovar a Data de Expiração ou desativar o veículo.
+
+---
+
+## Geração de Alertas — Regras de Vigência
+
+O sistema verifica **duas condições obrigatórias** antes de gerar qualquer alerta para um veículo monitorado:
+
+```text
+Gera alerta se:
+  ✅ Habilitado = Sim
+  ✅ Data de Expiração = sem prazo  OU  Data de Expiração > agora
+```
+
+| Situação do veículo | Gera alerta? |
+| --------------------- | :------------: |
+| Habilitado + dentro da vigência | ✅ Sim |
+| Habilitado + expirado | ❌ Não |
+| Desabilitado + dentro da vigência | ❌ Não |
+| Desabilitado + expirado | ❌ Não |
+| Habilitado + sem prazo (null) | ✅ Sim |
+
+:::info Controle independente
+O campo **Habilitado** nunca é alterado automaticamente pela vigência. São controles independentes — o sistema apenas ignora veículos expirados na geração de alertas, sem desativá-los.
+:::
+
+---
+
+## Importação em Lote com Vigência
+
+Ao importar veículos via arquivo `.txt`, a data de expiração é calculada automaticamente se o tipo de ocorrência tiver prazo configurado.
+
+- Veículos importados recebem `Expira = hoje + prazo do tipo`
+- O campo `Habilitado` é marcado como `Sim` por padrão
+- Após a importação, é possível editar individualmente cada veículo para ajustar a data
+
+---
+
+## Perguntas Frequentes
+
+**O veículo expirado é desativado automaticamente?**
+Não. O campo **Habilitado** é exclusivamente de controle manual. O veículo expirado continua como "Habilitado = Sim" no banco, mas **não gera alertas**. Para desativá-lo definitivamente, edite o veículo manualmente.
+
+**Posso definir uma data de expiração diferente do padrão do tipo?**
+Sim. Ao cadastrar ou editar um veículo, informe manualmente o campo **Data de Expiração**. O valor informado prevalece sobre o prazo automático do tipo de ocorrência.
+
+**O que acontece se eu remover o prazo do tipo de ocorrência?**
+Todos os veículos vinculados terão a data de expiração removida (`sem prazo`). Eles nunca expirarão automaticamente e deixam de aparecer no sino de vigência.
+
+**O sino mostra veículos desabilitados?**
+Não. O sino de vigência exibe apenas veículos **habilitados** que estejam expirando nas próximas 24 horas ou já expirados.
 ```
 
 ### `AxCross\docs-portal\docs\primeiros-passos\_category_.json`
@@ -2269,9 +2551,13 @@ const sidebars: SidebarsConfig = {
 
     // ── Veículos Monitorados ──
     {
-      type: 'doc',
-      id: 'operacoes/veiculos-monitorados',
+      type: 'category',
       label: '🚗 Veículos Monitorados',
+      collapsed: false,
+      items: [
+        'operacoes/veiculos-monitorados',
+        'operacoes/vigencia-alertas',
+      ],
     },
 
     // ── Operações ──
@@ -3710,291 +3996,627 @@ table tr:nth-child(even) {
 
 ```json
 {
+  "version": "2.0.0",
+  "updated": "2026-04-27",
   "system": "AxCross",
-  "version": "1.0",
-  "description": "Base de conhecimento do assistente AxionIA para o sistema AxCross",
+  "description": "Base de conhecimento do assistente AxionIA para o sistema AxCross — monitoramento por cruzamento de placas",
+  "totalEntries": 22,
   "entries": [
     {
-      "id": "login",
-      "title": "Login no Sistema",
-      "module": "Primeiros Passos",
-      "keywords": ["login", "entrar", "acessar", "senha", "credencial", "autenticacao"],
-      "content": "A tela de login é o ponto de entrada do AxCross. Informe nome de usuário e senha para acessar o sistema.",
-      "steps": [
-        "Abra o navegador e acesse o endereço do AxCross",
-        "Informe o Nome do Usuário",
-        "Informe a Senha",
-        "Clique em ENTRAR"
+      "id": "administracao-perfis-acesso",
+      "title": "Perfis de Acesso",
+      "module": "Administração",
+      "keywords": [
+        "perfis de acesso",
+        "perfis",
+        "acesso",
+        "gestão",
+        "axcross",
+        "acessar",
+        "campos",
+        "configuracao",
+        "administracao",
+        "sistema",
+        "admin"
       ],
-      "path": "Tela de login do AxCross",
-      "docUrl": "primeiros-passos/login",
-      "related": ["recuperar-senha", "usuarios"],
-      "dbTables": []
-    },
-    {
-      "id": "recuperar-senha",
-      "title": "Recuperar Senha",
-      "module": "Primeiros Passos",
-      "keywords": ["esqueci senha", "recuperar senha", "redefinir senha", "senha esquecida"],
-      "content": "Se esqueceu a senha, clique em 'Esqueceu a Senha?' na tela de login. O sistema envia instruções de recuperação para o e-mail cadastrado.",
+      "content": "Gestão de perfis de acesso no AxCross",
       "steps": [
-        "Na tela de login, clique em 'Esqueceu a Senha?'",
-        "Informe o e-mail cadastrado",
-        "Acesse seu e-mail e siga as instruções",
-        "Defina a nova senha"
+        "Acesse **Administração → Perfis de acesso** no menu lateral",
+        "Clique em **Novo Perfil**",
+        "Informe o **Nome do Perfil** e opcionalmente uma **Descrição**",
+        "Clique em **Salvar**",
+        "Após salvar, configure as **Permissões de Acesso** do perfil"
       ],
-      "path": "Tela de login → Esqueceu a Senha?",
-      "docUrl": "primeiros-passos/login",
-      "related": ["login", "usuarios"],
-      "dbTables": []
-    },
-    {
-      "id": "dashboard",
-      "title": "Painel Principal (Dashboard)",
-      "module": "Primeiros Passos",
-      "keywords": ["dashboard", "painel", "tela inicial", "indicadores", "graficos", "visao geral"],
-      "content": "O Dashboard é a tela inicial após o login. Exibe indicadores de status dos equipamentos, fluxo de passagens, passagens por local e alertas recentes.",
-      "steps": [
-        "Faça login no sistema",
-        "O Dashboard é exibido automaticamente",
-        "Para retornar ao Dashboard: clique no logo AxCross no topo esquerdo"
-      ],
-      "path": "Tela inicial após login",
-      "docUrl": "primeiros-passos/dashboard",
-      "related": ["monitoramento-online", "login"],
-      "dbTables": []
-    },
-    {
-      "id": "navegacao",
-      "title": "Navegação no Sistema",
-      "module": "Primeiros Passos",
-      "keywords": ["menu", "navegacao", "interface", "menu lateral", "modulos"],
-      "content": "O AxCross possui menu lateral fixo com itens diretos (Monitoramento Online, Operações, Sistema, Relatório de Passagens) e categorias expansíveis (Cadastros, Administração).",
-      "steps": [
-        "O menu lateral está sempre visível à esquerda",
-        "Clique em um item direto para acessar a tela",
-        "Clique em uma categoria para expandir/recolher os itens",
-        "Cadastros: Locais, Equipamentos, Faixas",
-        "Administração: Usuários, Permissões, Perfis de acesso"
-      ],
-      "path": "Menu lateral do AxCross",
-      "docUrl": "primeiros-passos/navegacao",
-      "related": ["dashboard"],
-      "dbTables": []
-    },
-    {
-      "id": "monitoramento-online",
-      "title": "Monitoramento Online",
-      "module": "Operações",
-      "keywords": ["monitoramento", "online", "tempo real", "mapa", "status", "equipamento", "passagem"],
-      "content": "O monitoramento online permite acompanhar em tempo real o funcionamento dos equipamentos e o registro de passagens nos cruzamentos monitorados.",
-      "steps": [
-        "No menu lateral, clique em Monitoramento Online",
-        "Visualize o mapa de equipamentos com status em tempo real",
-        "Consulte as últimas passagens registradas",
-        "Verifique alertas de equipamentos offline ou com falhas"
-      ],
-      "path": "Menu lateral → Monitoramento Online",
-      "docUrl": "operacoes/monitoramento-online",
-      "related": ["cadastro-operacoes", "equipamentos", "locais"],
-      "dbTables": []
-    },
-    {
-      "id": "cadastro-operacoes",
-      "title": "Cadastro de Operações",
-      "module": "Operações",
-      "keywords": ["operacao", "operacoes", "cadastro operacao", "nova operacao", "fiscalizacao"],
-      "content": "Permite criar e gerenciar operações de fiscalização, definindo local, período, equipamentos e parâmetros de monitoramento.",
-      "steps": [
-        "No menu lateral, clique em Operações",
-        "Clique em Nova Operação",
-        "Preencha Nome, Local, Data Início e Data Fim",
-        "Clique em Salvar"
-      ],
-      "path": "Menu lateral → Operações",
-      "docUrl": "operacoes/cadastro-operacoes",
-      "related": ["monitoramento-online", "locais"],
-      "dbTables": []
-    },
-    {
-      "id": "configuracoes",
-      "title": "Configurações do Sistema",
-      "module": "Sistema",
-      "keywords": ["configuracao", "sistema", "parametros", "orgao", "webhook", "integracao"],
-      "content": "Tela de configurações gerais do AxCross onde são definidos dados do órgão, parâmetros operacionais e integrações.",
-      "steps": [
-        "No menu lateral, clique em Sistema",
-        "Configure os dados gerais do órgão",
-        "Ajuste os parâmetros operacionais",
-        "Configure integrações se necessário",
-        "Clique em Salvar"
-      ],
-      "path": "Menu lateral → Sistema",
-      "docUrl": "sistema/configuracoes",
+      "path": "menu lateral, expanda Administração e clique em Perfis de acesso.",
+      "docUrl": "administracao/perfis-acesso",
       "related": [],
       "dbTables": []
     },
     {
-      "id": "locais",
-      "title": "Cadastro de Locais",
-      "module": "Cadastros",
-      "keywords": ["local", "locais", "cruzamento", "endereco", "ponto", "cadastrar local"],
-      "content": "Cadastro dos cruzamentos e pontos monitorados pelo sistema AxCross. Cada local pode ter coordenadas geográficas para exibição no mapa.",
-      "steps": [
-        "No menu lateral, expanda Cadastros e clique em Locais",
-        "Clique em Novo Local",
-        "Preencha Nome, Endereço, Município e UF",
-        "Opcionalmente informe Latitude e Longitude",
-        "Clique em Salvar"
-      ],
-      "path": "Menu lateral → Cadastros → Locais",
-      "docUrl": "cadastros/locais",
-      "related": ["equipamentos", "faixas"],
-      "dbTables": []
-    },
-    {
-      "id": "equipamentos",
-      "title": "Cadastro de Equipamentos",
-      "module": "Cadastros",
-      "keywords": ["equipamento", "camera", "detector", "sensor", "radar", "cadastrar equipamento", "ip"],
-      "content": "Cadastro e gestão dos equipamentos de fiscalização instalados nos cruzamentos. Inclui câmeras, detectores, sensores e radares.",
-      "steps": [
-        "No menu lateral, expanda Cadastros e clique em Equipamentos",
-        "Clique em Novo Equipamento",
-        "Preencha Nome, Tipo, Modelo, Fabricante e Número de Série",
-        "Selecione o Local de instalação",
-        "Opcionalmente informe o IP do equipamento",
-        "Clique em Salvar"
-      ],
-      "path": "Menu lateral → Cadastros → Equipamentos",
-      "docUrl": "cadastros/equipamentos",
-      "related": ["locais", "faixas", "monitoramento-online"],
-      "dbTables": []
-    },
-    {
-      "id": "faixas",
-      "title": "Cadastro de Faixas",
-      "module": "Cadastros",
-      "keywords": ["faixa", "via", "pista", "sentido", "cadastrar faixa", "velocidade"],
-      "content": "Configuração das faixas de monitoramento em cada cruzamento. Cada faixa representa uma via monitorada por equipamentos de fiscalização.",
-      "steps": [
-        "No menu lateral, expanda Cadastros e clique em Faixas",
-        "Clique em Nova Faixa",
-        "Selecione o Local (cruzamento)",
-        "Informe Número da Faixa e Sentido",
-        "Vincule o Equipamento responsável",
-        "Opcionalmente defina a Velocidade Máxima",
-        "Clique em Salvar"
-      ],
-      "path": "Menu lateral → Cadastros → Faixas",
-      "docUrl": "cadastros/faixas",
-      "related": ["locais", "equipamentos"],
-      "dbTables": []
-    },
-    {
-      "id": "relatorio-passagens",
-      "title": "Relatório de Passagens",
-      "module": "Relatórios",
-      "keywords": ["relatorio", "passagens", "consulta", "exportar", "pdf", "csv", "fluxo"],
-      "content": "Permite consultar e exportar as passagens registradas nos cruzamentos monitorados, com filtros por período, local, equipamento e faixa.",
-      "steps": [
-        "No menu lateral, clique em Relatório de Passagens",
-        "Defina o período (Data Início e Data Fim)",
-        "Opcionalmente selecione Local, Equipamento ou Faixa",
-        "Clique em Consultar",
-        "Para exportar, clique em Exportar (PDF ou CSV)"
-      ],
-      "path": "Menu lateral → Relatório de Passagens",
-      "docUrl": "relatorios/relatorio-passagens",
-      "related": ["monitoramento-online"],
-      "dbTables": []
-    },
-    {
-      "id": "usuarios",
-      "title": "Cadastro de Usuários",
-      "module": "Administração",
-      "keywords": ["usuario", "criar usuario", "novo usuario", "cadastrar usuario", "acesso"],
-      "content": "Cadastro e gestão dos usuários que têm acesso ao sistema AxCross. Cada usuário é vinculado a um perfil de acesso.",
-      "steps": [
-        "No menu lateral, expanda Administração e clique em Usuários",
-        "Clique em Novo Usuário",
-        "Preencha Nome, Login, E-mail e Senha",
-        "Selecione o Perfil de Acesso",
-        "Clique em Salvar"
-      ],
-      "path": "Menu lateral → Administração → Usuários",
-      "docUrl": "administracao/usuarios",
-      "related": ["permissoes", "perfis-acesso"],
-      "dbTables": []
-    },
-    {
-      "id": "permissoes",
+      "id": "administracao-permissoes",
       "title": "Permissões de Acesso",
       "module": "Administração",
-      "keywords": ["permissao", "permissoes", "acesso", "restringir", "liberar"],
-      "content": "Define quais funcionalidades cada perfil pode visualizar, criar, editar ou excluir no sistema.",
+      "keywords": [
+        "permissões de acesso",
+        "permissões",
+        "acesso",
+        "configura",
+        "axcross",
+        "acessar",
+        "estrutura",
+        "configuracao",
+        "administracao",
+        "sistema",
+        "admin"
+      ],
+      "content": "Configuração de permissões de acesso no AxCross",
       "steps": [
-        "No menu lateral, expanda Administração e clique em Permissões de acesso",
-        "Selecione o Perfil de Acesso a ser configurado",
+        "Acesse **Administração → Permissões de acesso** no menu lateral",
+        "Selecione o **Perfil de Acesso** a ser configurado",
         "Para cada módulo, marque as permissões desejadas",
-        "Clique em Salvar"
+        "Clique em **Salvar**"
       ],
-      "path": "Menu lateral → Administração → Permissões de acesso",
+      "path": "menu lateral, expanda Administração e clique em Permissões de acesso.",
       "docUrl": "administracao/permissoes",
-      "related": ["perfis-acesso", "usuarios"],
+      "related": [],
       "dbTables": []
     },
     {
-      "id": "perfis-acesso",
-      "title": "Perfis de Acesso",
+      "id": "administracao-usuarios",
+      "title": "Usuários",
       "module": "Administração",
-      "keywords": ["perfil", "perfis", "grupo", "papel", "role"],
-      "content": "Cadastro dos perfis de acesso que agrupam conjuntos de permissões. Perfis padrão: Administrador, Operador e Consulta.",
-      "steps": [
-        "No menu lateral, expanda Administração e clique em Perfis de acesso",
-        "Clique em Novo Perfil",
-        "Informe o Nome e Descrição do perfil",
-        "Clique em Salvar",
-        "Após salvar, configure as Permissões de Acesso do perfil"
+      "keywords": [
+        "usuários",
+        "usuarios",
+        "cadastro",
+        "gestão",
+        "axcross",
+        "acessar",
+        "campos",
+        "configuracao",
+        "administracao",
+        "sistema",
+        "admin"
       ],
-      "path": "Menu lateral → Administração → Perfis de acesso",
-      "docUrl": "administracao/perfis-acesso",
-      "related": ["permissoes", "usuarios"],
+      "content": "Cadastro e gestão de usuários no AxCross",
+      "steps": [
+        "Acesse **Administração → Usuários** no menu lateral",
+        "Clique em **Novo Usuário**",
+        "Preencha **Nome**, **Login** e **E-mail**",
+        "Defina a **Senha** de acesso",
+        "Selecione o **Perfil de Acesso**",
+        "Clique em **Salvar**"
+      ],
+      "path": "menu lateral, expanda Administração e clique em Usuários.",
+      "docUrl": "administracao/usuarios",
+      "related": [],
       "dbTables": []
     },
     {
-      "id": "erro-equipamento-offline",
-      "title": "Equipamento Offline",
-      "module": "Suporte",
-      "keywords": ["offline", "equipamento offline", "sem comunicacao", "falha", "conexao", "nao conecta"],
-      "content": "Quando um equipamento aparece como offline no monitoramento, pode indicar falha de comunicação, queda de energia ou problema físico no equipamento.",
-      "steps": [
-        "Verifique se o equipamento está energizado",
-        "Confirme que o cabo de rede está conectado",
-        "Teste o ping para o IP do equipamento",
-        "Se persistir, reinicie o equipamento",
-        "Caso continue offline, acione a equipe de manutenção"
+      "id": "cadastros-equipamentos",
+      "title": "Equipamentos",
+      "module": "Cadastros",
+      "keywords": [
+        "equipamentos",
+        "cadastro",
+        "axcross",
+        "acessar",
+        "campos",
+        "passo",
+        "registrar",
+        "criar",
+        "novo"
       ],
-      "path": "Monitoramento Online → Status do equipamento",
+      "content": "Cadastro de equipamentos no AxCross",
+      "steps": [
+        "Acesse **Cadastros → Equipamentos** no menu lateral",
+        "Clique em **Novo Equipamento**",
+        "Preencha **Nome**, **Tipo**, **Modelo** e **Fabricante**",
+        "Informe o **Número de Série**",
+        "Selecione o **Local** (cruzamento) de instalação",
+        "Opcionalmente, informe o **IP** do equipamento",
+        "Clique em **Salvar**",
+        "Acesse **Cadastros → Equipamentos** no menu lateral",
+        "Clique em **Importar**",
+        "Selecione o arquivo CSV com os dados dos equipamentos"
+      ],
+      "path": "menu lateral, expanda Cadastros e clique em Equipamentos.",
+      "docUrl": "cadastros/equipamentos",
+      "related": [],
+      "dbTables": []
+    },
+    {
+      "id": "cadastros-faixas",
+      "title": "Faixas",
+      "module": "Cadastros",
+      "keywords": [
+        "faixas",
+        "cadastro",
+        "monitoradas",
+        "axcross",
+        "acessar",
+        "campos",
+        "registrar",
+        "criar",
+        "novo"
+      ],
+      "content": "Cadastro de faixas monitoradas no AxCross",
+      "steps": [
+        "Acesse **Cadastros → Faixas** no menu lateral",
+        "Clique em **Nova Faixa**",
+        "Selecione o **Local** (cruzamento)",
+        "Informe o **Número da Faixa** e **Sentido**",
+        "Vincule o **Equipamento** responsável pelo monitoramento",
+        "Opcionalmente, defina a **Velocidade Máxima**",
+        "Clique em **Salvar**"
+      ],
+      "path": "menu lateral, expanda Cadastros e clique em Faixas.",
+      "docUrl": "cadastros/faixas",
+      "related": [],
+      "dbTables": []
+    },
+    {
+      "id": "cadastros-grupos-equipamentos",
+      "title": "Grupos de Equipamentos",
+      "module": "Cadastros",
+      "keywords": [
+        "grupos de equipamentos",
+        "grupos",
+        "equipamentos",
+        "cadastro",
+        "axcross",
+        "acessar",
+        "campos",
+        "registrar",
+        "criar",
+        "novo"
+      ],
+      "content": "Cadastro de grupos de equipamentos no AxCross",
+      "steps": [
+        "Acesse **Cadastros → Grupos de Equipamentos** no menu lateral",
+        "Clique em **Novo Grupo**",
+        "Informe o **Nome** do grupo",
+        "Opcionalmente, adicione uma **Descrição**",
+        "Selecione os **Equipamentos** a vincular ao grupo",
+        "Clique em **Salvar**"
+      ],
+      "path": "menu lateral, expanda Cadastros e clique em Grupos de Equipamentos.",
+      "docUrl": "cadastros/grupos-equipamentos",
+      "related": [],
+      "dbTables": []
+    },
+    {
+      "id": "cadastros-locais",
+      "title": "Locais",
+      "module": "Cadastros",
+      "keywords": [
+        "locais",
+        "cadastro",
+        "cruzamentos",
+        "monitorados",
+        "axcross",
+        "acessar",
+        "registrar",
+        "criar",
+        "novo"
+      ],
+      "content": "Cadastro de locais (cruzamentos) monitorados no AxCross",
+      "steps": [
+        "Acesse **Cadastros → Locais** no menu lateral",
+        "Clique em **Novo Local**",
+        "Preencha o **Nome** e **Endereço**",
+        "Informe **Município** e **UF**",
+        "Opcionalmente, informe **Latitude** e **Longitude** para geolocalização",
+        "Clique em **Salvar**"
+      ],
+      "path": "menu lateral, expanda Cadastros e clique em Locais.",
+      "docUrl": "cadastros/locais",
+      "related": [],
+      "dbTables": []
+    },
+    {
+      "id": "glossario-equipamento",
+      "title": "Equipamento",
+      "module": "Glossário",
+      "keywords": [
+        "equipamento",
+        "dispositivo",
+        "instalado",
+        "cruzamento",
+        "detec",
+        "registro",
+        "glossario",
+        "termo",
+        "definicao",
+        "conceito"
+      ],
+      "content": "Dispositivo instalado em um cruzamento para detecção e registro de veículos. Pode ser câmera OCR/LPR, detector de laço indutivo, sensor de presença ou radar de velocidade.",
+      "steps": [],
+      "path": "Menu lateral → Glossário → Equipamento",
+      "docUrl": "glossario/equipamento",
+      "related": [],
+      "dbTables": []
+    },
+    {
+      "id": "glossario-operacao",
+      "title": "Operação",
+      "module": "Glossário",
+      "keywords": [
+        "operação",
+        "operacao",
+        "opera",
+        "atividade",
+        "fiscaliza",
+        "planejada",
+        "executada",
+        "cruzamentos",
+        "glossario",
+        "termo",
+        "definicao",
+        "conceito"
+      ],
+      "content": "Atividade de fiscalização planejada e executada em um ou mais cruzamentos durante um período definido. Agrupa os registros de passagem e permite controle operacional da equipe em campo.",
+      "steps": [],
+      "path": "Menu lateral → Glossário → Operação",
+      "docUrl": "glossario/operacao",
+      "related": [],
+      "dbTables": []
+    },
+    {
+      "id": "glossario-passagem",
+      "title": "Passagem",
+      "module": "Glossário",
+      "keywords": [
+        "passagem",
+        "registro",
+        "detec",
+        "veículo",
+        "equipamento",
+        "monitoramento",
+        "glossario",
+        "termo",
+        "definicao",
+        "conceito"
+      ],
+      "content": "Registro da detecção de um veículo por um equipamento de monitoramento em um cruzamento. Cada passagem contém dados como placa, data/hora, local, faixa e imagem capturada.",
+      "steps": [],
+      "path": "Menu lateral → Glossário → Passagem",
+      "docUrl": "glossario/passagem",
+      "related": [],
+      "dbTables": []
+    },
+    {
+      "id": "operacoes-alertas",
+      "title": "Alertas",
+      "module": "Operações",
+      "keywords": [
+        "alertas",
+        "gestão",
+        "ocorrências",
+        "axcross",
+        "acessar",
+        "tipos",
+        "operacao",
+        "equipamento",
+        "faixa",
+        "radar"
+      ],
+      "content": "Gestão de alertas e ocorrências no AxCross",
+      "steps": [
+        "Na tela de Alertas, clique em **Novo Alerta**",
+        "Selecione o **Tipo de Ocorrência**",
+        "Informe o **Local** e **Equipamento** relacionado",
+        "Descreva a **Ocorrência**",
+        "Clique em **Salvar**"
+      ],
+      "path": "menu lateral, clique em Alertas (disponível também no painel Dashboard).",
+      "docUrl": "operacoes/alertas",
+      "related": [],
+      "dbTables": []
+    },
+    {
+      "id": "operacoes-cadastro-operacoes",
+      "title": "Cadastro de Operações",
+      "module": "Operações",
+      "keywords": [
+        "cadastro de operações",
+        "cadastro de operacoes",
+        "cadastro",
+        "opera",
+        "gestão",
+        "fiscaliza",
+        "axcross",
+        "acessar",
+        "operacao",
+        "equipamento",
+        "faixa",
+        "radar"
+      ],
+      "content": "Cadastro e gestão de operações de fiscalização no AxCross",
+      "steps": [
+        "Acesse **Operações** no menu lateral",
+        "Clique em **Nova Operação**",
+        "Preencha o **Nome** da operação",
+        "Selecione o **Local** (cruzamento)",
+        "Defina **Data Início** e **Data Fim**",
+        "Clique em **Salvar**"
+      ],
+      "path": "menu lateral, clique em Operações.",
+      "docUrl": "operacoes/cadastro-operacoes",
+      "related": [],
+      "dbTables": []
+    },
+    {
+      "id": "operacoes-monitoramento-online",
+      "title": "Monitoramento Online",
+      "module": "Operações",
+      "keywords": [
+        "monitoramento online",
+        "monitoramento",
+        "online",
+        "acompanhamento",
+        "tempo",
+        "real",
+        "equipamentos",
+        "operacao",
+        "equipamento",
+        "faixa",
+        "radar"
+      ],
+      "content": "Acompanhamento em tempo real dos equipamentos e passagens no AxCross",
+      "steps": [],
+      "path": "| Opção | Descrição |",
       "docUrl": "operacoes/monitoramento-online",
-      "related": ["equipamentos", "monitoramento-online"],
+      "related": [],
       "dbTables": []
     },
     {
-      "id": "erro-login",
-      "title": "Erro ao Fazer Login",
-      "module": "Suporte",
-      "keywords": ["erro login", "nao consigo entrar", "senha invalida", "usuario bloqueado", "acesso negado"],
-      "content": "Erros de login podem ocorrer por senha incorreta, usuário inativo ou conta bloqueada após múltiplas tentativas.",
-      "steps": [
-        "Verifique se o nome de usuário está correto",
-        "Confira se a tecla Caps Lock está ativada",
-        "Tente recuperar a senha via 'Esqueceu a Senha?'",
-        "Se a conta estiver bloqueada, contate o administrador do sistema"
+      "id": "operacoes-veiculos-monitorados",
+      "title": "Veículos Monitorados",
+      "module": "Operações",
+      "keywords": [
+        "veículos monitorados",
+        "veiculos monitorados",
+        "veículos",
+        "monitorados",
+        "cadastro",
+        "gestão",
+        "axcross",
+        "acessar",
+        "operacao",
+        "equipamento",
+        "faixa",
+        "radar"
       ],
-      "path": "Tela de login",
+      "content": "Cadastro e gestão de veículos monitorados no AxCross",
+      "steps": [
+        "Na lista de veículos monitorados, clique em **Novo Veículo Monitorado**",
+        "Informe a **Placa** do veículo",
+        "Selecione a **Classificação**",
+        "Opcionalmente, preencha **Motivo** e **Observações**",
+        "Clique em **Salvar**",
+        "Localize o veículo na lista e clique no ícone de edição ✏️",
+        "Altere os campos desejados",
+        "Clique em **Salvar**",
+        "Clique em **+ NOVO**",
+        "Informe o **Código** e o **Nome**"
+      ],
+      "path": "menu lateral, clique em Veículos Monitorados.",
+      "docUrl": "operacoes/veiculos-monitorados",
+      "related": [],
+      "dbTables": []
+    },
+    {
+      "id": "operacoes-vigencia-alertas",
+      "title": "Vigência dos Alertas",
+      "module": "Operações",
+      "keywords": [
+        "vigência dos alertas",
+        "vigencia dos alertas",
+        "vigência",
+        "alertas",
+        "configure",
+        "prazos",
+        "expira",
+        "veículos",
+        "operacao",
+        "equipamento",
+        "faixa",
+        "radar"
+      ],
+      "content": "Configure prazos de expiração para veículos monitorados e controle automaticamente a validade dos alertas no AxCross",
+      "steps": [
+        "No menu lateral, acesse **Veículos Monitorados → Tipos de Ocorrências**",
+        "Clique no ícone de edição ✏️ do tipo desejado (ou clique em **+ NOVO** para criar)",
+        "No campo **Prazo de Expiração (dias)**, informe a quantidade de dias (ex.: `30`)",
+        "Clique em **Salvar**",
+        "Acesse **Veículos Monitorados → Tipos de Ocorrências**",
+        "Edite o tipo desejado",
+        "Altere o campo **Prazo de Expiração (dias)**",
+        "Clique em **Salvar**",
+        "Aguarde a mensagem *\"Atualizando vigência dos veículos monitorados vinculados...\"*"
+      ],
+      "path": "Tipos de Ocorrências",
+      "docUrl": "operacoes/vigencia-alertas",
+      "related": [],
+      "dbTables": []
+    },
+    {
+      "id": "primeiros-passos-dashboard",
+      "title": "Painel Principal (Dashboard)",
+      "module": "Primeiros Passos",
+      "keywords": [
+        "painel principal (dashboard)",
+        "painel",
+        "principal",
+        "dashboard",
+        "axcross",
+        "indicadores",
+        "operacionais",
+        "login",
+        "acesso",
+        "senha",
+        "entrar"
+      ],
+      "content": "Painel principal do AxCross com indicadores operacionais",
+      "steps": [],
+      "path": "Menu lateral → Primeiros Passos → Painel Principal (Dashboard)",
+      "docUrl": "primeiros-passos/dashboard",
+      "related": [],
+      "dbTables": []
+    },
+    {
+      "id": "primeiros-passos-login",
+      "title": "Login",
+      "module": "Primeiros Passos",
+      "keywords": [
+        "login",
+        "acessar",
+        "sistema",
+        "axcross",
+        "campos",
+        "passo",
+        "acesso",
+        "senha",
+        "entrar"
+      ],
+      "content": "Como acessar o sistema AxCross",
+      "steps": [
+        "Informe o **Nome do Usuário** no campo correspondente",
+        "Informe a **Senha** de acesso",
+        "Clique no botão **ENTRAR**"
+      ],
+      "path": "Menu lateral → Primeiros Passos → Login",
       "docUrl": "primeiros-passos/login",
-      "related": ["login", "recuperar-senha", "usuarios"],
+      "related": [],
+      "dbTables": []
+    },
+    {
+      "id": "primeiros-passos-navegacao",
+      "title": "Navegação",
+      "module": "Primeiros Passos",
+      "keywords": [
+        "navegação",
+        "navegacao",
+        "navega",
+        "navegar",
+        "sistema",
+        "axcross",
+        "estrutura",
+        "interface",
+        "login",
+        "acesso",
+        "senha",
+        "entrar"
+      ],
+      "content": "Como navegar pelo sistema AxCross",
+      "steps": [],
+      "path": "menu.png)",
+      "docUrl": "primeiros-passos/navegacao",
+      "related": [],
+      "dbTables": []
+    },
+    {
+      "id": "referencia-tecnica-banco-de-dados",
+      "title": "Banco de Dados",
+      "module": "Referência Técnica",
+      "keywords": [
+        "banco de dados",
+        "banco",
+        "dados",
+        "referência",
+        "técnica",
+        "tabelas",
+        "server",
+        "api",
+        "integracao",
+        "tecnico",
+        "referencia"
+      ],
+      "content": "Referência técnica das tabelas do banco SQL Server do AxCross",
+      "steps": [],
+      "path": "Menu lateral → Referência Técnica → Banco de Dados",
+      "docUrl": "referencia-tecnica/banco-de-dados",
+      "related": [],
+      "dbTables": []
+    },
+    {
+      "id": "referencia-tecnica-classificacao-veiculos-integracao",
+      "title": "Classificação de Veículos — Integração",
+      "module": "Referência Técnica",
+      "keywords": [
+        "classificação de veículos — integração",
+        "classificacao de veiculos — integracao",
+        "classifica",
+        "veículos",
+        "integra",
+        "referência",
+        "técnica",
+        "importa",
+        "api",
+        "integracao",
+        "tecnico",
+        "referencia"
+      ],
+      "content": "Referência técnica para integração e importação de dados de classificação de veículos no AxCross e AxHub",
+      "steps": [],
+      "path": "Menu lateral → Referência Técnica → Classificação de Veículos — Integração",
+      "docUrl": "referencia-tecnica/classificacao-veiculos-integracao",
+      "related": [],
+      "dbTables": []
+    },
+    {
+      "id": "relatorios-relatorio-passagens",
+      "title": "Relatório de Passagens",
+      "module": "Relatórios",
+      "keywords": [
+        "relatório de passagens",
+        "relatorio de passagens",
+        "relatório",
+        "passagens",
+        "consulta",
+        "gera",
+        "relatórios",
+        "axcross",
+        "relatorio",
+        "exportar",
+        "dados"
+      ],
+      "content": "Consulta e geração de relatórios de passagens no AxCross",
+      "steps": [
+        "Acesse **Relatório de Passagens** no menu lateral",
+        "Defina o **período** (Data Início e Data Fim)",
+        "Opcionalmente, selecione filtros adicionais (Local, Equipamento, Faixa)",
+        "Clique em **Consultar**",
+        "Para exportar, clique em **Exportar** (PDF ou CSV)"
+      ],
+      "path": "menu lateral, clique em Relatório de Passagens.",
+      "docUrl": "relatorios/relatorio-passagens",
+      "related": [],
+      "dbTables": []
+    },
+    {
+      "id": "sistema-configuracoes",
+      "title": "Configurações do Sistema",
+      "module": "Sistema",
+      "keywords": [
+        "configurações do sistema",
+        "configuracoes do sistema",
+        "configura",
+        "sistema",
+        "gerais",
+        "axcross",
+        "acessar",
+        "dados",
+        "configuracao",
+        "parametro",
+        "opcao"
+      ],
+      "content": "Configurações gerais do AxCross",
+      "steps": [],
+      "path": "menu lateral, clique em Sistema.",
+      "docUrl": "sistema/configuracoes",
+      "related": [],
       "dbTables": []
     }
   ]
@@ -16557,3150 +17179,2492 @@ Após adicionar o script, abra o sistema e verifique:
 
 ```json
 {
-  "version": "3.0.0",
-  "updated": "2026-03-29",
+  "version": "4.0.0",
+  "updated": "2026-04-27",
   "system": "AxHub",
+  "description": "Base de conhecimento do assistente AxionIA para o sistema AxHub — gestão de equipamentos de fiscalização",
+  "totalEntries": 91,
   "entries": [
     {
-      "id": "login-acesso",
-      "module": "Acesso",
-      "title": "Login no Sistema",
+      "id": "administracao-arcos",
+      "title": "Arcos",
+      "module": "Administração",
       "keywords": [
-        "login",
-        "senha",
-        "acesso",
-        "entrar",
-        "autenticação",
-        "primeiro acesso"
-      ],
-      "path": "Menu lateral → Tela de Login",
-      "content": "Para acessar o AxHub, abra o navegador e acesse o endereço do sistema. Informe seu Login e Senha, depois clique em Entrar.",
-      "steps": [
-        "Abra o navegador e acesse o endereço do AxHub",
-        "Informe seu Login",
-        "Informe sua Senha",
-        "Clique em Entrar"
-      ],
-      "docUrl": "primeiros-passos/login",
-      "related": [
-        "recuperar-senha",
-        "acesso-bloqueado",
-        "dashboard"
-      ],
-      "dbTables": [
-        "TBHorariosAcessos"
-      ]
-    },
-    {
-      "id": "recuperar-senha",
-      "module": "Acesso",
-      "title": "Recuperação de Senha",
-      "keywords": [
-        "esqueci",
-        "senha",
-        "recuperar",
-        "redefinir",
-        "email",
-        "não consigo entrar"
-      ],
-      "path": "Tela de Login → Esqueci minha senha",
-      "content": "Na tela de login, clique em 'Esqueci minha senha', informe o e-mail cadastrado e siga o link de redefinição enviado por e-mail.",
-      "steps": [
-        "Na tela de login, clique em 'Esqueci minha senha'",
-        "Informe o e-mail cadastrado no sistema",
-        "Acesse sua caixa de entrada",
-        "Clique no link de redefinição",
-        "Defina uma nova senha e confirme"
-      ],
-      "docUrl": "primeiros-passos/login",
-      "related": [
-        "login-acesso",
-        "acesso-bloqueado"
-      ]
-    },
-    {
-      "id": "acesso-bloqueado",
-      "module": "Acesso",
-      "title": "Acesso Bloqueado",
-      "keywords": [
-        "bloqueado",
-        "não consigo acessar",
-        "acesso negado",
-        "sem permissão",
-        "IP bloqueado"
-      ],
-      "path": "Controle de Acesso → Usuários / Acessos por IP",
-      "content": "Se não consegue acessar, verifique: (1) se o usuário está marcado como Ativo, (2) se tem perfil de acesso atribuído, (3) se há restrições de IP configuradas. Contate o administrador do sistema.",
-      "steps": [
-        "Verificar se o usuário está Ativo (Controle de Acesso → Usuários)",
-        "Verificar se tem Perfil de Acesso atribuído",
-        "Verificar restrições de IP (Controle de Acesso → Acessos por IP)",
-        "Se persistir, contatar o administrador do sistema"
-      ],
-      "docUrl": "controle-acesso/usuarios",
-      "related": [
-        "login-acesso",
-        "restricao-ip",
-        "perfis-acesso"
-      ],
-      "dbTables": [
-        "TBAcessosBloqueadosPeriodo",
-        "TBAcessoPorIps"
-      ]
-    },
-    {
-      "id": "dashboard",
-      "module": "Acesso",
-      "title": "Dashboard - Painel Principal",
-      "keywords": [
-        "dashboard",
-        "painel",
-        "indicadores",
-        "mapa",
-        "alertas",
-        "tela inicial"
-      ],
-      "path": "Exibido automaticamente após login",
-      "content": "O Dashboard é a tela inicial após o login. Exibe indicadores (passagens hoje, infrações pendentes, equipamentos offline, certificados vencendo), mapa de equipamentos, alertas de aferição e triagem mensal.",
-      "steps": [],
-      "docUrl": "primeiros-passos/dashboard",
-      "related": [
-        "login-acesso",
-        "navegacao-sistema",
-        "monitoramento-online"
-      ]
-    },
-    {
-      "id": "criar-usuario",
-      "module": "Controle de Acesso",
-      "title": "Criar Novo Usuário",
-      "keywords": [
-        "criar",
-        "novo",
-        "usuário",
-        "cadastrar",
-        "registro",
-        "conta",
-        "liberar acesso",
-        "dar acesso",
-        "sem cadastro",
-        "não tem cadastro",
-        "novo funcionário",
-        "criar conta",
-        "acesso novo usuário"
-      ],
-      "path": "Controle de Acesso → Usuários",
-      "content": "Para criar um novo usuário, primeiro crie um Perfil de Acesso, depois configure as Permissões e então cadastre o usuário vinculando ao perfil.",
-      "steps": [
-        "Acesse Controle de Acesso → Perfis de Acesso → + Novo",
-        "Informe Nome do Perfil e Descrição → Salvar",
-        "Acesse Controle de Acesso → Permissões de Acesso",
-        "Selecione o perfil e marque as permissões (Visualizar, Criar, Editar, Excluir) por módulo",
-        "Acesse Controle de Acesso → Usuários → + Novo",
-        "Preencha Nome, Login, E-mail, selecione o Perfil de Acesso",
-        "Marque como Ativo e defina uma senha temporária",
-        "Clique em Salvar"
-      ],
-      "docUrl": "controle-acesso/usuarios",
-      "related": [
-        "perfis-acesso",
-        "permissoes",
-        "logs-acesso"
-      ]
-    },
-    {
-      "id": "permissoes",
-      "module": "Controle de Acesso",
-      "title": "Configurar Permissões",
-      "keywords": [
-        "permissão",
-        "perfil",
-        "acesso",
-        "visualizar",
-        "criar",
-        "editar",
-        "excluir",
-        "restringir"
-      ],
-      "path": "Controle de Acesso → Permissões de Acesso",
-      "content": "As permissões são configuradas por perfil e por módulo. Para cada módulo, pode marcar: Visualizar, Criar, Editar e Excluir. Para consulta apenas, marque só Visualizar.",
-      "steps": [
-        "Acesse Controle de Acesso → Permissões de Acesso",
-        "Selecione o perfil que deseja configurar",
-        "Para cada módulo, marque as permissões desejadas",
-        "Clique em Salvar"
-      ],
-      "docUrl": "controle-acesso/permissoes",
-      "related": [
-        "perfis-acesso",
-        "criar-usuario"
-      ]
-    },
-    {
-      "id": "triagem-infracoes",
-      "module": "Infrações",
-      "title": "Triagem de Infrações",
-      "keywords": [
-        "triagem",
-        "infração",
-        "validar",
-        "descartar",
-        "pendente",
-        "analisar",
-        "processar"
-      ],
-      "path": "Menu lateral → Infrações → Triagem",
-      "content": "A triagem permite revisar, validar ou descartar infrações pendentes. Use os filtros de Período, Status, Tipo de Infração e Operação para localizar registros. Ações: Validar (confirma para exportação), Descartar (rejeita com motivo obrigatório), Reabrir (reabre descartada).",
-      "steps": [
-        "Acesse Infrações → Triagem",
-        "Use os filtros para localizar infrações",
-        "Analise a infração (imagens, dados do veículo)",
-        "Clique em Validar para confirmar ou Descartar com motivo"
-      ],
-      "docUrl": "infracoes/triagem",
-      "related": [
-        "triagem-passo-a-passo",
-        "infracao-nao-aparece",
-        "motivos-descarte",
-        "auditoria"
-      ],
-      "dbTables": [
-        "TBInfracoes",
-        "TBImagens"
-      ]
-    },
-    {
-      "id": "infracao-nao-aparece",
-      "module": "Infrações",
-      "title": "Infração Não Aparece na Triagem",
-      "keywords": [
-        "não aparece",
-        "infração sumiu",
-        "triagem vazia",
-        "sem infração",
-        "não encontro"
-      ],
-      "path": "Infrações → Triagem",
-      "content": "Se uma infração não aparece na triagem, verifique: (1) os filtros de período e status estão corretos, (2) a operação está ativa, (3) o equipamento está cadastrado e com aferição INMETRO válida.",
-      "steps": [
-        "Verificar filtros de período (data início/fim)",
-        "Verificar filtro de status (deve estar em 'Aguardando Triagem')",
-        "Verificar se a operação vinculada está ativa",
-        "Verificar se o equipamento tem aferição INMETRO válida"
-      ],
-      "docUrl": "infracoes/triagem",
-      "related": [
-        "triagem-infracoes",
-        "cadastro-operacoes",
-        "equipamento-offline"
-      ],
-      "dbTables": [
-        "TBInfracoes"
-      ]
-    },
-    {
-      "id": "reabrir-infracao",
-      "module": "Infrações",
-      "title": "Reabrir Infração Descartada por Engano",
-      "keywords": [
-        "reabrir",
-        "descartei",
-        "engano",
-        "erro",
-        "desfazer descarte",
-        "recuperar infração"
-      ],
-      "path": "Infrações → Triagem",
-      "content": "Para reabrir uma infração descartada por engano, vá em Infrações → Triagem, filtre por Status=Descartada, selecione a infração e clique em Reabrir.",
-      "steps": [
-        "Acesse Infrações → Triagem",
-        "No filtro de Status, selecione 'Descartada'",
-        "Localize a infração desejada",
-        "Clique em Reabrir"
-      ],
-      "docUrl": "infracoes/infracoes-descartadas",
-      "related": [
-        "infracoes-descartadas",
-        "motivos-descarte",
-        "triagem-infracoes"
-      ],
-      "dbTables": [
-        "TBInfracoes"
-      ]
-    },
-    {
-      "id": "auditoria",
-      "module": "Infrações",
-      "title": "Auditoria de Infrações",
-      "keywords": [
-        "auditoria",
-        "auditar",
-        "revisar",
-        "qualidade",
-        "confirmar",
-        "rejeitar"
-      ],
-      "path": "Menu lateral → Infrações → Auditoria",
-      "content": "A auditoria permite revisar infrações validadas ou descartadas na triagem. Filtros: data, equipamento, tipo de infração, analista, amostragem (%). Ações: Confirmar (segue para exportação), Rejeitar (devolve para triagem), Adicionar observações.",
-      "steps": [
-        "Acesse Infrações → Auditoria",
-        "Configure filtros (período, analista, amostragem %)",
-        "Analise cada infração apresentada",
-        "Confirme, Rejeite ou adicione observações"
-      ],
-      "docUrl": "infracoes/auditoria",
-      "related": [
-        "triagem-infracoes",
-        "consulta-infracoes",
-        "exportar-infracoes"
-      ],
-      "dbTables": [
-        "TBInfracoes"
-      ]
-    },
-    {
-      "id": "consulta-infracoes",
-      "module": "Infrações",
-      "title": "Consultar Infrações",
-      "keywords": [
-        "consultar",
-        "buscar",
-        "pesquisar",
-        "infração",
-        "status",
-        "histórico"
-      ],
-      "path": "Menu lateral → Infrações → Consulta",
-      "content": "Pesquise infrações por período, equipamento, placa, status, operação ou usuário. Status possíveis: Aguardando Triagem → Em Triagem → Válida → Auditoria → Exportada (ou Descartada). Resultados podem ser exportados para Excel.",
-      "steps": [
-        "Acesse Infrações → Consulta",
-        "Preencha os filtros desejados",
-        "Clique em Pesquisar",
-        "Clique em uma linha para ver detalhes completos"
-      ],
-      "docUrl": "infracoes/consulta-infracoes",
-      "related": [
-        "auditoria",
-        "triagem-infracoes",
-        "relatorio-infracoes"
-      ],
-      "dbTables": [
-        "TBInfracoes"
-      ]
-    },
-    {
-      "id": "exportar-infracoes",
-      "module": "Infrações",
-      "title": "Exportar Infrações para Órgão Autuador",
-      "keywords": [
-        "exportar",
-        "lote",
-        "DETRAN",
-        "DER",
-        "RENAINF",
-        "enviar",
-        "órgão",
-        "arquivo"
-      ],
-      "path": "Menu lateral → Infrações → Exportação",
-      "content": "Envie infrações validadas para órgãos autuadores (DETRAN, DER, PRF). Formatos: RENAINF, XML, TXT, CSV. O sistema valida automaticamente: placa, imagens, dados completos, enquadramento, assinaturas, sem duplicatas.",
-      "steps": [
-        "Acesse Infrações → Exportação",
-        "Selecione o Órgão destino",
-        "Configure o Período e Layout do arquivo",
-        "Clique em Gerar Lote (sistema valida tudo automaticamente)",
-        "Clique em Enviar Lote (SFTP/API) ou faça download para envio manual"
-      ],
-      "docUrl": "infracoes/exportacao",
-      "related": [
-        "exportacao-lotes",
-        "erro-exportacao-lote-geral",
-        "config-layout"
-      ],
-      "dbTables": [
-        "TBInfracoes"
-      ]
-    },
-    {
-      "id": "excecoes",
-      "module": "Infrações",
-      "title": "Exceções de Infrações",
-      "keywords": [
-        "exceção",
-        "isentar",
-        "veículo oficial",
-        "ambulância",
-        "polícia",
-        "regra"
-      ],
-      "path": "Menu lateral → Infrações → Exceções",
-      "content": "Configure regras que isentam veículos ou situações. Filtros: Placas, Horários, Faixas, Classificações, Enquadramentos, Datas. Tipos: Permanentes (emergência), Temporárias (prazo definido), Por equipamento, Por tipo de infração. ATENÇÃO: Exceções ativas descartam infrações automaticamente.",
-      "steps": [
-        "Acesse Infrações → Exceções",
-        "Clique em Nova Exceção",
-        "Configure os filtros (placas, horários, etc.)",
-        "Defina o tipo (permanente/temporária) e período",
-        "Salvar"
-      ],
-      "docUrl": "infracoes/excecoes",
-      "related": [
-        "triagem-infracoes",
-        "cadastro-faixas",
-        "config-enquadramento"
-      ],
-      "dbTables": [
-        "TBExcecoes",
-        "TBExcecaoDatas",
-        "TBExcecoesPlacas",
-        "TBExcecoesHorarios",
-        "TBExcecoesFaixas",
-        "TBExcecoesEnquadramentos",
-        "TBExcecoesClassificacoesVeiculos"
-      ]
-    },
-    {
-      "id": "infracoes-descartadas",
-      "module": "Infrações",
-      "title": "Consultar Infrações Descartadas",
-      "keywords": [
-        "descartada",
-        "motivo descarte",
-        "por que descartou",
-        "excluída"
-      ],
-      "path": "Menu lateral → Infrações → Infrações Descartadas",
-      "content": "Consulte infrações descartadas na triagem manual ou automática (exceções). Filtros: Motivo, Analista, Período, Equipamento. Pode exportar relatório para Excel.",
-      "steps": [],
-      "docUrl": "infracoes/infracoes-descartadas",
-      "related": [
-        "reabrir-infracao",
-        "motivos-descarte",
-        "triagem-infracoes"
-      ],
-      "dbTables": [
-        "TBInfracoes"
-      ]
-    },
-    {
-      "id": "cadastro-operacoes",
-      "module": "Operações",
-      "title": "Cadastrar Operação de Fiscalização",
-      "keywords": [
-        "operação",
-        "fiscalização",
-        "cadastrar operação",
+        "arcos",
+        "cadastro",
+        "fiscaliza",
+        "acessar",
         "arco",
-        "enquadramento",
-        "velocidade"
+        "navegacao",
+        "configuracao",
+        "administracao",
+        "sistema",
+        "admin"
       ],
-      "path": "Menu lateral → Operações → Cadastro de Operações",
-      "content": "Uma operação é o registro formal de uma ação de fiscalização. Campos obrigatórios: Equipamento, Arco, Data Início/Fim, Enquadramentos, Velocidade Regulamentada (condicional).",
-      "steps": [
-        "Acesse Operações → Cadastro de Operações",
-        "Clique em + Novo",
-        "Selecione o Equipamento e Arco",
-        "Informe Data Início e Fim",
-        "Vincule os Enquadramentos legais",
-        "Informe a Velocidade Regulamentada (se aplicável)",
-        "Clique em Salvar"
-      ],
-      "docUrl": "operacoes/cadastro-operacoes",
-      "related": [
-        "cadastro-faixas",
-        "afericoes",
-        "checklist-operacao-blitz"
-      ],
-      "dbTables": [
-        "TBDocumentosOperacoes"
-      ]
-    },
-    {
-      "id": "afericoes",
-      "module": "Operações",
-      "title": "Controle de Aferições INMETRO",
-      "keywords": [
-        "aferição",
-        "INMETRO",
-        "certificado",
-        "vencimento",
-        "calibração",
-        "metrologia"
-      ],
-      "path": "Menu lateral → Operações → Aferições",
-      "content": "Controle das aferições/certificados INMETRO dos equipamentos. Campos: Equipamento, Nº Certificado, Data Emissão, Data Vencimento, Status (Válido/Vencendo/Vencido). IMPORTANTE: Equipamento com aferição vencida não gera infrações válidas.",
-      "steps": [
-        "Acesse Operações → Aferições",
-        "Localize o equipamento",
-        "Verifique o status do certificado",
-        "Para atualizar: edite e informe novo número/data"
-      ],
-      "docUrl": "operacoes/afericoes",
-      "related": [
-        "certificado-vencendo",
-        "cadastro-operacoes",
-        "cadastrar-equipamento"
-      ],
-      "dbTables": [
-        "TBAfericoes",
-        "TBFaixasAfericoes",
-        "TBDocumentosAfericoes"
-      ]
-    },
-    {
-      "id": "monitoramento-online",
-      "module": "Operações",
-      "title": "Monitoramento Online de Equipamentos",
-      "keywords": [
-        "monitoramento",
-        "online",
-        "offline",
-        "status",
-        "tempo real",
-        "comunicação"
-      ],
-      "path": "Menu lateral → Operações → Monitoramento Online",
-      "content": "Acompanhe em tempo real o status dos equipamentos. Colunas: Equipamento, Status (Online/Offline/Manutenção), Última Comunicação, Passagens do dia.",
+      "content": "Cadastro de arcos de fiscalização",
       "steps": [],
-      "docUrl": "operacoes/monitoramento-online",
-      "related": [
-        "equipamento-offline",
-        "sincronismo-equipamento-blitz",
-        "eventos-equipamentos"
-      ],
-      "dbTables": [
-        "TBHeartbeatEquipamentos",
-        "TBEquipamentos"
-      ]
-    },
-    {
-      "id": "equipamento-offline",
-      "module": "Operações",
-      "title": "Equipamento Offline",
-      "keywords": [
-        "offline",
-        "sem comunicação",
-        "equipamento parou",
-        "não está funcionando",
-        "falha",
-        "não sobe imagem",
-        "não sincroniza",
-        "anydesk",
-        "minipc",
-        "tablet",
-        "blitz",
-        "parado",
-        "travou"
-      ],
-      "path": "Menu lateral → Operações → Monitoramento Online",
-      "content": "Quando um equipamento aparece offline no Monitoramento Online, significa que ele não está se comunicando com o servidor. Existem dois cenários principais: (1) Equipamentos fixos (MiniPC) — podem estar com problema de rede, queda de energia ou o serviço de envio travou. É necessário acessar via AnyDesk para reiniciar o serviço. Se o equipamento ficou capturando passagens enquanto estava offline, ao reconectar ele começará a enviar tudo automaticamente, podendo levar algum tempo dependendo do volume acumulado. (2) Equipamentos móveis (Tablets de blitz) — trabalham offline durante a operação e sincronizam quando retornam à base com internet. Se o tablet não envia há vários dias, verificar: se está ligado, se tem internet, se a faixa está configurada corretamente e se o serviço de sincronismo está funcionando. Em ambos os casos, o acesso via AnyDesk é essencial para diagnóstico remoto.",
-      "steps": [
-        "Acesse Operações → Monitoramento Online e verifique a última comunicação do equipamento",
-        "Se o equipamento é um MiniPC fixo: tente acessar via AnyDesk usando o ID/Alias cadastrado",
-        "Ao acessar, verifique se o serviço de envio de passagens está rodando — se travou, reinicie-o",
-        "Se não conseguir acessar via AnyDesk, solicite ao operador em campo que verifique rede e energia",
-        "Para tablets de blitz: verificar se o tablet tem internet e se está sincronizando as passagens",
-        "Verificar no sistema quantas passagens pendentes existem — o envio pode demorar se há muitos dias acumulados",
-        "Consulte o Relatório de Mapa de Fluxo de Passagens para verificar quais dias tiveram registro",
-        "Registre o evento em Operações → Eventos de Equipamentos para manter histórico"
-      ],
-      "docUrl": "operacoes/monitoramento-online",
-      "related": [
-        "monitoramento-online",
-        "sincronismo-equipamento-blitz",
-        "acesso-remoto-anydesk"
-      ],
-      "dbTables": [
-        "TBHeartbeatEquipamentos",
-        "TBEquipamentos"
-      ]
-    },
-    {
-      "id": "consulta-placas",
-      "module": "Operações",
-      "title": "Consultar Passagens por Placa",
-      "keywords": [
-        "placa",
-        "passagem",
-        "veículo",
-        "consultar placa",
-        "histórico veículo"
-      ],
-      "path": "Menu lateral → Operações → Consulta de Placas",
-      "content": "Consulte o histórico de passagens de veículos por placa. Filtros: Placa, Período, Equipamento. Resultado: Data/Hora, Equipamento, Faixa, Velocidade, Imagem.",
-      "steps": [
-        "Acesse Operações → Consulta de Placas",
-        "Informe a placa do veículo",
-        "Configure o período de busca",
-        "Clique em Pesquisar"
-      ],
-      "docUrl": "operacoes/consulta-placas",
-      "related": [
-        "relatorio-passagens",
-        "triagem-infracoes"
-      ],
-      "dbTables": [
-        "TBImagemPassagens"
-      ]
-    },
-    {
-      "id": "cadastrar-equipamento",
-      "module": "Equipamentos",
-      "title": "Cadastrar Equipamento",
-      "keywords": [
-        "equipamento",
-        "cadastrar",
-        "radar",
-        "câmera",
-        "OCR",
-        "lombada",
-        "novo equipamento"
-      ],
-      "path": "Menu lateral → Equipamentos → Equipamentos",
-      "content": "Antes de cadastrar, siga a hierarquia: Fabricantes → Tipos → Modelos → Grupos → Equipamentos. Campos obrigatórios: Nº Série, Código, Certificado INMETRO, Modelo, Tipo, Grupo.",
-      "steps": [
-        "Verifique se Fabricante, Tipo, Modelo e Grupo já estão cadastrados",
-        "Se não, cadastre na ordem: Fabricantes → Tipos → Modelos → Grupos",
-        "Acesse Equipamentos → Equipamentos → + Novo",
-        "Preencha Nº Série e Código",
-        "Informe o Número do Certificado INMETRO e datas",
-        "Selecione Modelo, Tipo e Grupo",
-        "Escolha o Tipo de Operação (Fixo ou Móvel)",
-        "Clique em Salvar"
-      ],
-      "docUrl": "cadastros-basicos/equipamentos",
-      "related": [
-        "tipos-equipamentos",
-        "grupos-equipamentos",
-        "token-fabricante"
-      ],
-      "dbTables": [
-        "TBEquipamentos"
-      ]
-    },
-    {
-      "id": "certificado-vencendo",
-      "module": "Equipamentos",
-      "title": "Certificado INMETRO Vencendo",
-      "keywords": [
-        "certificado vencendo",
-        "INMETRO vencido",
-        "aferição vencida",
-        "alerta certificado"
-      ],
-      "path": "Dashboard (alertas) / Equipamentos → Editar",
-      "content": "O Dashboard mostra alertas de certificados próximos do vencimento. Para atualizar: acesse Equipamentos → editar o equipamento → campo 'Vencimento Certificado INMETRO'. Equipamento com aferição vencida NÃO gera infrações válidas.",
-      "steps": [
-        "Verifique os alertas no Dashboard",
-        "Acesse Equipamentos → Equipamentos",
-        "Localize e edite o equipamento",
-        "Atualize o Número e Data do Certificado INMETRO",
-        "Salvar"
-      ],
-      "docUrl": "operacoes/afericoes",
-      "related": [
-        "afericoes",
-        "cadastrar-equipamento"
-      ],
-      "dbTables": [
-        "TBAfericoes",
-        "TBEquipamentos"
-      ]
-    },
-    {
-      "id": "token-fabricante",
-      "module": "Equipamentos",
-      "title": "Token de API do Fabricante",
-      "keywords": [
-        "token",
-        "API",
-        "fabricante",
-        "integração",
-        "envio dados",
-        "autenticação"
-      ],
-      "path": "Menu lateral → Equipamentos → Fabricantes",
-      "content": "O token de API é usado pelo fabricante para enviar dados ao AxHub. Ao clicar em 'Gerar Novo Token', o anterior é INVALIDADO. Comunique o novo token ao fabricante. Sem token válido, o fabricante não consegue enviar passagens/imagens.",
-      "steps": [
-        "Acesse Equipamentos → Fabricantes",
-        "Edite o fabricante desejado",
-        "Clique em 'Gerar Novo Token'",
-        "Copie e envie o novo token ao fabricante",
-        "ATENÇÃO: o token anterior para de funcionar imediatamente"
-      ],
-      "docUrl": "cadastros-basicos/fabricantes",
-      "related": [
-        "cadastrar-equipamento",
-        "tipos-equipamentos"
-      ],
-      "dbTables": [
-        "TBFabricantes"
-      ]
-    },
-    {
-      "id": "ticket-pesagem",
-      "module": "Balança",
-      "title": "Ticket de Pesagem Preso/Aberto",
-      "keywords": [
-        "ticket",
-        "pesagem",
-        "aberto",
-        "preso",
-        "liberar",
-        "balança",
-        "peso"
-      ],
-      "path": "Menu lateral → Balança → Tickets Abertos",
-      "content": "Se um ticket de pesagem está preso, acesse Balança → Tickets Abertos, verifique o status e use 'Liberar Pesagem' se necessário.",
-      "steps": [
-        "Acesse Balança → Tickets Abertos",
-        "Localize o ticket pelo número ou placa",
-        "Verifique o status",
-        "Se necessário, use Balança → Liberar Pesagem"
-      ],
-      "docUrl": "pesagem/ticket-fechado",
-      "related": [
-        "tickets-abertos-pesagem",
-        "liberar-tickets-pesagem",
-        "postos-pesagem"
-      ],
-      "dbTables": [
-        "TBDadosPesagens",
-        "TBImagemPesagens"
-      ]
-    },
-    {
-      "id": "reclassificar-veiculo",
-      "module": "Balança",
-      "title": "Reclassificar Veículo na Pesagem",
-      "keywords": [
-        "reclassificar",
-        "classificação",
-        "porte",
-        "categoria veículo",
-        "pesagem"
-      ],
-      "path": "Menu lateral → Balança → Reclassificar",
-      "content": "Para alterar a classificação de um veículo em ticket de pesagem, acesse Balança → Reclassificar, selecione o ticket e altere a classificação.",
-      "steps": [
-        "Acesse Balança → Reclassificar",
-        "Localize o ticket",
-        "Altere a classificação do veículo",
-        "Salvar"
-      ],
-      "docUrl": "pesagem/reclassificar",
-      "related": [
-        "ticket-pesagem",
-        "tipos-veiculos",
-        "classificacoes-veiculos"
-      ],
-      "dbTables": [
-        "TBDadosPesagens",
-        "TBClassificacoesVeiculos"
-      ]
-    },
-    {
-      "id": "cronotacografo",
-      "module": "Cronotacógrafo",
-      "title": "Triagem de Cronotacógrafo",
-      "keywords": [
-        "cronotacógrafo",
-        "jornada",
-        "motorista",
-        "veículo pesado",
-        "excesso jornada"
-      ],
-      "path": "Menu lateral → Cronotacógrafo → Triagem",
-      "content": "Revise infrações de excesso de jornada detectadas em cronotacógrafos de veículos pesados. Inclui consulta ao sistema externo de registros. Status do cronotacógrafo: Regular, Irregular, Vencido, Não Encontrado.",
-      "steps": [
-        "Acesse Cronotacógrafo → Triagem",
-        "Analise a infração apresentada",
-        "Verifique o status da consulta ao cronotacógrafo",
-        "Valide ou descarte conforme resultado"
-      ],
-      "docUrl": "cronotacografo/triagem",
-      "related": [
-        "consulta-cronotacografo"
-      ],
-      "dbTables": [
-        "TBDadosCronotacografos",
-        "TBHistoricoTriagensCronotacografos"
-      ]
-    },
-    {
-      "id": "gerar-medicao",
-      "module": "Medição",
-      "title": "Gerar Nova Medição Contratual",
-      "keywords": [
-        "medição",
-        "contrato",
-        "gerar",
-        "índice",
-        "performance",
-        "boletim"
-      ],
-      "path": "Menu lateral → Medição → Nova Medição",
-      "content": "Selecione contrato e período, o sistema calcula os índices automaticamente. Revise valores e interrupções antes de finalizar.",
-      "steps": [
-        "Acesse Medição → Nova Medição",
-        "Selecione o Contrato",
-        "Defina o Período (mês/ano de referência)",
-        "Sistema calcula índices automaticamente",
-        "Revise valores e interrupções registradas",
-        "Finalize a medição para aprovação"
-      ],
-      "docUrl": "medicoes/criar-medicao",
-      "related": [
-        "contratos-medicao",
-        "interrupcao-medicao",
-        "indices-performance"
-      ],
-      "dbTables": [
-        "TBContratos",
-        "TBContratosFaixas"
-      ]
-    },
-    {
-      "id": "interrupcao-medicao",
-      "module": "Medição",
-      "title": "Registrar Interrupção na Medição",
-      "keywords": [
-        "interrupção",
-        "parada",
-        "medição",
-        "desconto",
-        "abatimento"
-      ],
-      "path": "Menu lateral → Medição → Interrupções",
-      "content": "Registre interrupções que impactam a medição contratual. Campos: Equipamento, Data/Hora Início/Fim, Motivo, Justificativa. Após registro, clique em 'Processar Interrupções' para abatimento automático.",
-      "steps": [
-        "Acesse Medição → Interrupções",
-        "Clique em + Nova",
-        "Selecione o Equipamento afetado",
-        "Informe Data/Hora de Início e Fim",
-        "Preencha Motivo e Justificativa",
-        "Salvar",
-        "Clicar em 'Processar Interrupções'"
-      ],
-      "docUrl": "medicoes/interrupcoes",
-      "related": [
-        "gerar-medicao",
-        "contratos-medicao"
-      ],
-      "dbTables": [
-        "TBContratos"
-      ]
-    },
-    {
-      "id": "relatorio-nao-carrega",
-      "module": "Relatórios",
-      "title": "Relatório Não Carrega / Demora",
-      "keywords": [
-        "relatório",
-        "demora",
-        "não carrega",
-        "lento",
-        "travou",
-        "timeout"
-      ],
-      "path": "Menu lateral → Relatórios",
-      "content": "Relatórios com período muito grande demoram mais para processar. Reduza o período nos filtros. Verifique também se o perfil do usuário tem permissão 'Visualizar' no módulo Relatórios.",
-      "steps": [
-        "Reduza o período nos filtros (ex: 1 mês em vez de 1 ano)",
-        "Verifique se tem permissão no módulo Relatórios",
-        "Se persistir, tente novamente em horário de menor uso"
-      ],
-      "docUrl": "relatorios/relatorio-infracoes",
-      "related": [
-        "relatorio-infracoes",
-        "relatorio-passagens",
-        "power-bi"
-      ]
-    },
-    {
-      "id": "power-bi",
-      "module": "Relatórios",
-      "title": "Relatórios Power BI",
-      "keywords": [
-        "Power BI",
-        "dashboard",
-        "BI",
-        "analytics",
-        "não atualiza"
-      ],
-      "path": "Menu lateral → Relatórios → Power BI",
-      "content": "Dashboards Power BI disponíveis: Comparativo de Placas, Descartes Radares, Boletim de Medição, Disponibilidade, Infração (dia x hora), Processamento, Índice OCR, Fluxo por Porte, Triagem por Usuário. Se não atualiza, verificar Administração → Relatórios Power BI e webhooks.",
-      "steps": [],
-      "docUrl": "relatorios/power-bi",
-      "related": [
-        "relatorio-infracoes",
-        "relatorio-passagens"
-      ]
-    },
-    {
-      "id": "config-layout",
-      "module": "Administração",
-      "title": "Configurar Layout de Exportação",
-      "keywords": [
-        "layout",
-        "arquivo",
-        "exportação",
-        "formato",
-        "RENAINF",
-        "delimitador",
-        "campo"
-      ],
-      "path": "Menu lateral → Administração → Layouts de Arquivos",
-      "content": "Configure os campos e delimitadores dos arquivos de exportação por órgão autuador. Cada órgão pode ter layout diferente (RENAINF, XML, TXT, CSV).",
-      "steps": [
-        "Acesse Administração → Layouts de Arquivos",
-        "Selecione ou crie um layout para o órgão",
-        "Configure campos e delimitadores",
-        "Salvar"
-      ],
-      "docUrl": "administracao/layouts-arquivos",
-      "related": [
-        "exportar-infracoes",
-        "config-enquadramento"
-      ],
-      "dbTables": [
-        "TBCamposLayoutArquivos"
-      ]
-    },
-    {
-      "id": "config-enquadramento",
-      "module": "Administração",
-      "title": "Configurar Enquadramentos",
-      "keywords": [
-        "enquadramento",
-        "artigo",
-        "CTB",
-        "infração",
-        "código",
-        "tipo infração"
-      ],
-      "path": "Menu lateral → Administração → Configurações de Enquadramento",
-      "content": "Gerencie os enquadramentos legais (artigos do CTB) usados nas infrações. Cada enquadramento define tipo, pontos na CNH e valor da multa.",
-      "steps": [
-        "Acesse Administração → Configurações de Enquadramento",
-        "Adicione ou edite o enquadramento",
-        "Configure código, tipo de infração e valores",
-        "Salvar"
-      ],
-      "docUrl": "administracao/configuracoes-enquadramento",
-      "related": [
-        "formas-autuacao",
-        "excecoes",
-        "config-layout"
-      ],
-      "dbTables": [
-        "TBEnquadramentos"
-      ]
-    },
-    {
-      "id": "webhooks",
-      "module": "Administração",
-      "title": "Configurar Webhooks",
-      "keywords": [
-        "webhook",
-        "integração",
-        "API",
-        "notificação",
-        "sistema externo"
-      ],
-      "path": "Menu lateral → Administração → Webhooks",
-      "content": "Webhooks notificam sistemas externos sobre eventos do AxHub. Campos: URL do endpoint, Evento que dispara, Método (POST/PUT), Headers de autenticação, Ativo/Inativo.",
-      "steps": [
-        "Acesse Administração → Webhooks",
-        "Clique em + Novo",
-        "Informe a URL do endpoint externo",
-        "Selecione o Evento que dispara o webhook",
-        "Configure Método e Headers",
-        "Ative e Salve"
-      ],
-      "docUrl": "administracao/webhooks",
-      "related": [
-        "config-sistema"
-      ]
-    },
-    {
-      "id": "arcos",
-      "module": "Administração",
-      "title": "Cadastrar Arcos de Fiscalização",
-      "keywords": [
-        "arco",
-        "ponto",
-        "local",
-        "fiscalização",
-        "localização"
-      ],
-      "path": "Menu lateral → Administração → Arcos",
-      "content": "Arcos são os pontos de fiscalização onde os equipamentos operam. Campos: Nome, Localização, Equipamentos vinculados, Status (Ativo/Inativo).",
-      "steps": [
-        "Acesse Administração → Arcos",
-        "Clique em + Novo",
-        "Informe Nome e Localização",
-        "Vincule equipamentos",
-        "Salvar"
-      ],
+      "path": "Arcos",
       "docUrl": "administracao/arcos",
       "related": [
-        "cadastro-operacoes",
-        "regioes"
+        "cadastros-basicos-equipamentos",
+        "operacoes-cadastro-operacoes"
       ],
-      "dbTables": [
-        "TBArcos",
-        "TBArcoNos"
-      ]
+      "dbTables": []
     },
     {
-      "id": "cadastro-codigo-municipio-faixa",
-      "module": "Operações",
-      "title": "Código do Município na Faixa",
-      "keywords": [
-        "código",
-        "município",
-        "IBGE",
-        "faixa",
-        "cadastro",
-        "UF",
-        "onde cadastrar",
-        "campo",
-        "configurar",
-        "alterar município"
-      ],
-      "path": "Menu lateral → Operações → Faixas → Editar Faixa",
-      "content": "O Código do Município é cadastrado na tela de Faixas (Operações → Faixas). Cada faixa de fiscalização possui o campo 'Código do Município' que deve conter o código IBGE do município onde o equipamento opera. Esse código é obrigatório e validado na exportação de infrações. Exemplo: Goiânia/GO = 5208707, Teresina/PI = 2211001. Se o código estiver errado, a exportação de infrações retorna erro 422.",
-      "steps": [
-        "Acesse Operações → Faixas no menu lateral",
-        "Localize a faixa pelo código do equipamento (ex: GYNTM015)",
-        "Clique no botão Editar (ícone de lápis) na faixa desejada",
-        "Localize o campo Código do Município",
-        "Informe o código IBGE correto do município (consulte em Veículos → Municípios)",
-        "Confira se a UF corresponde ao estado da operação",
-        "Salve a faixa"
-      ],
-      "docUrl": "operacoes/faixas",
-      "related": [
-        "cadastro-municipios",
-        "dependencias-codigo-municipio",
-        "cadastro-faixas"
-      ],
-      "dbTables": [
-        "TBFaixas"
-      ]
-    },
-    {
-      "id": "cadastro-municipios",
-      "module": "Veículos",
-      "title": "Cadastro de Municípios",
-      "keywords": [
-        "município",
-        "IBGE",
-        "cadastro",
-        "UF",
-        "estado",
-        "cidade",
-        "veículos",
-        "tabela municípios"
-      ],
-      "path": "Menu lateral → Veículos → Municípios",
-      "content": "A tabela de Municípios é a base centralizada dos códigos IBGE no sistema. Ela lista todos os municípios disponíveis com Código IBGE, Nome, UF e Status. Quando for cadastrar ou corrigir o código de município em uma faixa, consulte esta tabela para obter o código correto. Se o município não existir na tabela, cadastre-o primeiro aqui.",
-      "steps": [
-        "Acesse Veículos → Municípios no menu lateral",
-        "Use a busca para localizar o município pelo nome",
-        "O código IBGE aparece na primeira coluna",
-        "Para cadastrar um novo município: clique em + Novo",
-        "Preencha: Código IBGE, Nome, UF e marque como Ativo",
-        "Salve o cadastro"
-      ],
-      "docUrl": "veiculos/municipios",
-      "related": [
-        "cadastro-codigo-municipio-faixa",
-        "dependencias-codigo-municipio"
-      ],
-      "dbTables": [
-        "TBFaixas"
-      ]
-    },
-    {
-      "id": "dependencias-codigo-municipio",
-      "module": "Operações",
-      "title": "Onde o Código do Município é utilizado",
-      "keywords": [
-        "dependência",
-        "município",
-        "onde usa",
-        "impacto",
-        "exportação",
-        "faixa",
-        "relatório",
-        "medição",
-        "triagem"
-      ],
-      "path": "Operações → Faixas | Infrações → Exportação | Relatórios | Medições",
-      "content": "O Código do Município configurado na Faixa impacta diversos módulos do AxHub. A cadeia de dependência é: Veículos → Municípios (tabela base) → Operações → Faixas (onde o código é atribuído) → Infrações → Exportação (onde é validado contra a UF). Também é usado em Relatórios (agrupamento por localidade), Medições (desempenho por local) e Triagem (dados de contexto). Se o código estiver incorreto, o principal impacto é na Exportação, que retorna erro 422.",
-      "steps": [
-        "Veículos → Municípios: tabela base com todos os códigos IBGE",
-        "Operações → Faixas: onde o código é configurado por equipamento/faixa",
-        "Infrações → Exportação: valida se a UF do município bate com a operação",
-        "Relatórios: usa o município para filtros e agrupamentos",
-        "Medições: vincula desempenho ao local do equipamento",
-        "Triagem: exibe dados de localização da infração"
-      ],
-      "docUrl": "operacoes/faixas",
-      "related": [
-        "cadastro-codigo-municipio-faixa",
-        "cadastro-municipios",
-        "cadastro-faixas"
-      ],
-      "dbTables": [
-        "TBFaixas"
-      ]
-    },
-    {
-      "id": "cadastro-faixas",
-      "module": "Operações",
-      "title": "Cadastro de Faixas de Fiscalização",
-      "keywords": [
-        "faixa",
-        "cadastro",
-        "operação",
-        "equipamento",
-        "sentido",
-        "logradouro",
-        "pista"
-      ],
-      "path": "Menu lateral → Operações → Faixas",
-      "content": "Faixas representam as pistas de rolamento monitoradas por equipamentos de fiscalização. Cada faixa é vinculada a uma operação e possui: Código, Número da Faixa, Sentido (Norte/Sul, Leste/Oeste), Logradouro, Bairro, Município, UF e Código do Município (IBGE). A faixa herda o contexto geográfico que é usado em toda a cadeia: triagem, auditoria e exportação de infrações.",
-      "steps": [
-        "Acesse Operações → Faixas no menu lateral",
-        "Clique em + Novo para criar ou no ícone de lápis para editar",
-        "Informe o Código do equipamento e o Número da Faixa",
-        "Selecione o Sentido de tráfego",
-        "Preencha Logradouro, Bairro, Município e UF",
-        "Informe o Código do Município (IBGE) correto",
-        "Salve a faixa"
-      ],
-      "docUrl": "operacoes/faixas",
-      "related": [
-        "conceito-faixa",
-        "config-faixa-tablet",
-        "config-faixa-minipc",
-        "adicionar-faixa-operacao"
-      ],
-      "dbTables": [
-        "TBFaixas"
-      ]
-    },
-    {
-      "id": "erro-exportacao-uf-municipio",
-      "module": "Infrações",
-      "title": "Exportação X UF Município",
-      "keywords": [
-        "erro",
-        "exportação",
-        "lote",
-        "UF",
-        "município",
-        "CriarInfracaoUsingPOST",
-        "código 422",
-        "faixa",
-        "código município errado",
-        "GO",
-        "MA"
-      ],
-      "path": "Menu lateral → Infrações → Exportação → Lote com Erro",
-      "content": "Erro 'A UF do município de cometimento GO não é a mesma do código do município informado (MA), código 422' ocorre quando a faixa do equipamento está cadastrada com o código IBGE de município incorreto. É necessário identificar qual faixa gerou o erro, acessar Operação → Faixa, corrigir o código do município e reprocessar o lote. Veja o passo a passo completo com imagens na documentação: Infrações → Exportação → Resolução de Erros.",
-      "steps": [
-        "Acesse Infrações → Exportação e localize o lote com erro (ex: 200509, 200510, 200511)",
-        "Abra o lote e leia a mensagem de erro — ela informa a infração e a placa do veículo",
-        "Filtre pela placa informada no erro (ex: NGB4Z15) para localizar a infração",
-        "Clique no ID da infração para abrir o detalhamento e identifique o campo Faixa/Sentido (ex: GYNTM015-3)",
-        "Acesse Operação → Faixa e pesquise pelo código do equipamento (ex: GYNTM015)",
-        "Edite a faixa e corrija o campo Código do Município para o código IBGE correto (Goiânia = 5208707)",
-        "Salve e reprocesse o lote — todas as infrações desse equipamento são corrigidas automaticamente"
-      ],
-      "docUrl": "infracoes/exportacao",
-      "related": [
-        "exportar-infracoes",
-        "cadastro-municipios",
-        "cadastro-codigo-municipio-faixa"
-      ],
-      "dbTables": [
-        "TBInfracoes"
-      ]
-    },
-    {
-      "id": "erro-exportacao-imagens-obrigatorias",
-      "module": "Infrações",
-      "title": "Erro Exportação: Imagens Obrigatórias Ausentes (código 422)",
-      "keywords": [
-        "erro",
-        "exportação",
-        "lote",
-        "imagens",
-        "IMAGEM-ZOOM",
-        "PANORAMICA1",
-        "PANORAMICA2",
-        "EncerrarLoteUsingPUT",
-        "código 422",
-        "obrigatórias"
-      ],
-      "path": "Menu lateral → Infrações → Exportação → Lote com Erro",
-      "content": "Erro 'As Imagens IMAGEM-ZOOM, PANORAMICA1 e PANORAMICA2 são obrigatórias para o registro do veículo' ocorre quando a infração não possui todas as imagens exigidas pelo órgão autuador. O sistema valida que cada registro tenha pelo menos: IMAGEM-ZOOM (close da placa), PANORAMICA1 (visão ampla) e PANORAMICA2 (contexto). O veículo e número da infração são informados no erro.",
-      "steps": [
-        "Acesse Infrações → Exportação e localize o lote com erro",
-        "Abra o lote e identifique o veículo/infração mencionados na mensagem de erro",
-        "Acesse a infração pelo ID e verifique quais imagens estão ausentes",
-        "Se a imagem existe mas não foi vinculada, associe-a à infração",
-        "Se a imagem não existe (falha no equipamento), verifique se há imagens disponíveis no equipamento/operação",
-        "Caso não haja imagem disponível, a infração deve ser descartada por falta de comprovação",
-        "Após corrigir, reprocesse o lote de exportação"
-      ],
-      "docUrl": "infracoes/exportacao",
-      "related": [
-        "exportar-infracoes",
-        "tipos-imagens",
-        "processamento-imagens"
-      ],
-      "dbTables": [
-        "TBInfracoes",
-        "TBImagens"
-      ]
-    },
-    {
-      "id": "erro-exportacao-lote-geral",
-      "module": "Infrações",
-      "title": "Erros Comuns em Lotes de Exportação",
-      "keywords": [
-        "erro",
-        "lote",
-        "exportação",
-        "EncerrarLoteUsingPUT",
-        "CriarInfracaoUsingPOST",
-        "código 422",
-        "avançar sinal",
-        "faixa exclusiva",
-        "reprocessar"
-      ],
-      "path": "Menu lateral → Infrações → Exportação",
-      "content": "Lotes de exportação podem apresentar erros ao enviar para o órgão autuador. Os erros mais comuns são: (1) Código do município divergente na faixa — corrigir em Operação → Faixa, (2) Imagens obrigatórias ausentes — verificar imagens da infração, (3) Dados incompletos — validar placa, enquadramento e assinaturas. Cada erro informa o veículo e infração afetados. Após corrigir a causa, reprocesse o lote.",
-      "steps": [
-        "Acesse Infrações → Exportação e filtre por Status = Erro",
-        "Abra o lote para ver a mensagem detalhada de erro",
-        "Identifique o tipo de erro: UF divergente, imagens ausentes, dados incompletos",
-        "Para erro de UF/município: corrija a faixa em Operação → Faixa",
-        "Para erro de imagens: verifique a infração e vincule ou descarte",
-        "Para dados incompletos: valide o cadastro do veículo e enquadramento",
-        "Reprocesse o lote após as correções"
-      ],
-      "docUrl": "infracoes/exportacao",
-      "related": [
-        "exportar-infracoes",
-        "erro-exportacao-uf-municipio",
-        "erro-exportacao-imagens-obrigatorias"
-      ],
-      "dbTables": [
-        "TBInfracoes"
-      ]
-    },
-    {
-      "id": "tarja-imagem-duplicada",
+      "id": "administracao-configuracoes-enquadramento",
+      "title": "Configurações de Enquadramento",
       "module": "Administração",
-      "title": "Tarja das Imagens em Duplicidade",
       "keywords": [
-        "tarja",
-        "duplicada",
-        "duplicidade",
-        "fonte",
-        "imagem",
-        "rodapé",
-        "concatenar",
-        "posição tarja",
-        "overlay",
-        "carimbo",
-        "template",
-        "equipamento",
-        "operação"
-      ],
-      "path": "Menu lateral → Administração → Tarjas / Operações → editar Operação",
-      "content": "Quando a imagem de uma infração aparece com duas tarjas sobrepostas — frequentemente com fontes ou tamanhos diferentes — o problema está na configuração da posição da tarja. No AxHub existem dois níveis de tarja: (1) a Tarja do Sistema, configurada em Administração → Tarjas, que define o layout padrão com campos como Data, Hora, Código do Equipamento etc., e (2) a Tarja do Equipamento, que vem gravada pelo próprio equipamento de campo. Se no cadastro da operação o campo 'Tarja Padrão' estiver definido como 'Selecione a Tarja' (sem seleção), o sistema usará a tarja padrão embutida no equipamento. Quando a opção 'Posição Tarja' está configurada como 'Concatenar no Rodapé', o sistema une as duas tarjas — a do equipamento e a do sistema — gerando a duplicidade visual. Para corrigir, você pode: (a) selecionar explicitamente a tarja desejada no cadastro da operação, substituindo a do equipamento, ou (b) alterar a 'Posição Tarja' para não concatenar, ou (c) ajustar o template da tarja em Administração → Tarjas para que o layout fique correto.",
-      "steps": [
-        "Identifique qual operação e equipamento apresentam a tarja duplicada (ex: SE812C-1)",
-        "Acesse Administração → Tarjas para verificar o template da tarja do sistema — confira o nome, posição da tarja, largura, altura e campos usados no template",
-        "Se a 'Posição Tarja' estiver como 'Concatenar no Rodapé', o sistema juntará a tarja do equipamento com a do sistema — essa é a causa mais comum da duplicidade",
-        "Altere 'Posição Tarja' para a posição desejada ou crie uma nova tarja sem concatenação",
-        "Acesse Operações → selecione a operação do equipamento afetado → clique em Editar",
-        "No campo 'Tarja Padrão', selecione a tarja correta em vez de deixar como 'Selecione a Tarja'",
-        "Ao selecionar uma tarja na operação, o sistema usará apenas essa tarja, ignorando a do equipamento",
-        "Salve a operação e reprocesse uma infração para confirmar que a duplicidade foi resolvida"
-      ],
-      "docUrl": "administracao/tarjas",
-      "related": [
-        "processamento-imagens",
-        "tipos-imagens",
-        "triagem-infracoes"
-      ],
-      "dbTables": [
-        "TBImagens",
-        "TBImagemPassagens"
-      ]
-    },
-    {
-      "id": "faixa-errada-tablet-blitz",
-      "module": "Operações",
-      "title": "Faixa Errada no Tablet de Blitz",
-      "keywords": [
-        "faixa errada",
-        "tablet",
-        "faixa 12",
-        "blitz",
-        "passagem não sobe",
-        "imagem não chega",
-        "configuração faixa",
-        "número da faixa",
-        "equipamento tablet",
-        "configuração equipamento"
-      ],
-      "path": "No tablet: Configurações → Configuração do equipamento / No AxHub: Operações → editar Operação → Faixas",
-      "content": "Um problema recorrente em operações de blitz com tablets é a configuração incorreta do número da faixa no equipamento. O número da faixa cadastrado no tablet DEVE ser exatamente igual ao número da faixa cadastrada no AxHub para aquela operação. Caso contrário, as passagens capturadas não serão importadas para o sistema. Exemplo real: o operador configurou a faixa como '12' no tablet, pensando que significava 'faixa 1 e faixa 2', mas o sistema interpretou literalmente como 'faixa 12' — que não existe no cadastro da operação. As passagens ficaram presas no tablet e não subiram. Para corrigir: (1) verificar no AxHub quais faixas estão cadastradas na operação, (2) no tablet, acessar Configurações → Configuração do equipamento e alterar o Nº da Faixa para o número correto. IMPORTANTE: passagens já capturadas com a faixa errada NÃO serão enviadas automaticamente ao corrigir — cada uma precisaria ser editada manualmente, o que pode ser inviável para grandes volumes. A partir da correção, as novas passagens serão enviadas normalmente.",
-      "steps": [
-        "No AxHub, acesse Operações → selecione a operação do equipamento afetado",
-        "Na seção 'Faixas', verifique quais faixas existem e seus números (ex: Faixa 1 = SIMÕES FILHO/SALVADOR, Faixa 2 = FEIRA DE SANTANA/SALVADOR)",
-        "No tablet, acesse o sistema de monitoramento → Configurações → Configuração do equipamento",
-        "Verifique o campo 'Nº da Faixa' — se estiver com um número inexistente (ex: 12), esse é o problema",
-        "Altere para o número correto da faixa conforme o endereço onde o equipamento está operando",
-        "Clique em Salvar no tablet",
-        "A partir desse momento, as novas passagens serão enviadas com a faixa correta",
-        "Passagens anteriores com faixa errada: decidir com o gestor se serão corrigidas manualmente ou descartadas",
-        "Se o endereço de operação não corresponde a nenhuma faixa existente, o gestor do contrato deve cadastrar uma nova faixa no AxHub"
-      ],
-      "docUrl": "operacoes/faixas",
-      "related": [
-        "config-faixa-tablet",
-        "passagens-faixa-errada",
-        "sincronismo-equipamento-blitz"
-      ]
-    },
-    {
-      "id": "sincronismo-equipamento-blitz",
-      "module": "Operações",
-      "title": "Sincronismo de Equipamentos de Blitz",
-      "keywords": [
-        "sincronismo",
-        "sincronizar",
-        "blitz",
-        "offline",
-        "passagem não sobe",
-        "imagem não chega",
-        "cco",
-        "base",
-        "envio parado",
-        "serviço travou",
-        "pendente",
-        "minipc",
-        "tablet",
-        "internet"
-      ],
-      "path": "Operações → Monitoramento Online / AnyDesk para acesso remoto",
-      "content": "Equipamentos de blitz (MiniPCs e Tablets) normalmente trabalham offline durante a operação em campo e sincronizam as passagens quando retornam à base com acesso à internet. Quando as imagens e passagens não chegam ao sistema (CCO), os possíveis problemas são: (1) Equipamento sem internet — verificar se o modem/wifi está funcionando; (2) Serviço de envio travou — o serviço que envia as passagens do equipamento para o servidor pode travar, especialmente quando o equipamento é desligado abruptamente e religado. Nesse caso, é necessário acessar via AnyDesk e executar um comando para reiniciar o serviço; (3) Faixa configurada errada — se a faixa no tablet não corresponde a nenhuma faixa cadastrada no AxHub, as passagens não serão importadas; (4) Volume acumulado — se o equipamento ficou muitos dias sem sincronizar, o envio pode levar horas. Exemplo: o equipamento BA602C ficou offline do dia 10 ao 27 e ao reconectar enviou mais de 2.600 passagens por dia, levando várias horas para concluir. É recomendável deixar o equipamento ligado e conectado até finalizar todo o envio.",
-      "steps": [
-        "Verifique no Monitoramento Online qual a última comunicação do equipamento",
-        "Tente acessar o equipamento via AnyDesk com o ID/Alias cadastrado",
-        "Se conseguir acessar: verifique se o serviço de envio de passagens está rodando",
-        "Se o serviço travou, reinicie-o — as passagens pendentes começarão a ser enviadas automaticamente",
-        "Verifique o volume de passagens pendentes — se há muitos dias acumulados, o envio pode demorar horas",
-        "Para tablets: verifique se a faixa configurada no equipamento está correta (Configurações → Configuração do equipamento)",
-        "Se o equipamento não tem internet, solicite ao operador que o conecte à rede na base",
-        "Acompanhe o envio pelo Relatório de Mapa de Fluxo de Passagens para confirmar que os dias pendentes estão sendo preenchidos",
-        "Deixe o equipamento ligado e conectado até que todas as passagens pendentes sejam enviadas"
-      ],
-      "docUrl": "operacoes/monitoramento-online",
-      "related": [
-        "equipamento-offline",
-        "monitoramento-online",
-        "acesso-remoto-anydesk"
-      ]
-    },
-    {
-      "id": "checklist-operacao-blitz",
-      "module": "Operações",
-      "title": "Checklist Operacional de Blitz",
-      "keywords": [
-        "checklist",
-        "blitz",
-        "verificação",
-        "antes de operar",
-        "operador",
-        "campo",
-        "faixa correta",
-        "endereço",
-        "tablet",
-        "configuração"
-      ],
-      "path": "No AxHub: Operações → Faixas / No tablet: Configurações → Configuração do equipamento",
-      "content": "Antes de iniciar uma operação de blitz, o operador de campo deve seguir um checklist de verificação para evitar problemas de sincronismo e perda de dados. Os erros mais comuns acontecem quando: (1) o número da faixa no tablet não corresponde à faixa cadastrada no AxHub para aquele endereço; (2) o equipamento não é sincronizado ao retornar à base; (3) o operador não sabe quais faixas estão disponíveis para a operação. IMPORTANTE: quem cadastra e gerencia as faixas no AxHub é o gestor do contrato. O suporte Axion NÃO altera faixas — apenas orienta. Se o endereço de operação não corresponde a nenhuma faixa existente, o gestor deve cadastrar uma nova faixa antes de enviar a equipe a campo. O operador recebe do gestor qual número de faixa usar em cada endereço.",
-      "steps": [
-        "ANTES DA OPERAÇÃO: Pergunte ao gestor qual a faixa correta para o endereço da blitz",
-        "Verifique no AxHub (Operações → editar Operação → Faixas) quais faixas existem e seus endereços",
-        "Se o endereço da blitz não tem faixa cadastrada, solicite ao gestor que crie uma nova faixa",
-        "No tablet, acesse Configurações → Configuração do equipamento e confira se o 'Nº da Faixa' está correto para o endereço",
-        "Confirme que o equipamento está carregado e funcionando antes de ir a campo",
-        "DURANTE A OPERAÇÃO: O tablet irá capturar e armazenar as passagens localmente (modo offline)",
-        "AO RETORNAR À BASE: Conecte o tablet à internet (WiFi ou rede) para sincronizar as passagens",
-        "Aguarde a sincronização completa — em dias com alto volume pode levar alguns minutos",
-        "Verifique no AxHub (Relatório de Mapa de Fluxo de Passagens) se as passagens do dia apareceram",
-        "Se não aparecerem: verifique a faixa no tablet e se há internet disponível"
-      ],
-      "docUrl": "operacoes/cadastro-operacoes",
-      "related": [
-        "cadastro-operacoes",
-        "operador-campo-orientacao",
-        "verificar-dias-operacao-equipamento"
-      ]
-    },
-    {
-      "id": "verificar-dias-operacao-equipamento",
-      "module": "Relatórios",
-      "title": "Verificar Dias de Operação do Equipamento",
-      "keywords": [
-        "relatório",
-        "mapa de fluxo",
-        "fluxo de passagens",
-        "dias sem operação",
-        "equipamento parado",
-        "verificar funcionamento",
-        "último dia",
-        "passagens por dia",
-        "fluxo diário"
-      ],
-      "path": "Menu lateral → Relatórios → Mapa de Fluxo de Passagens / Relatório de Fluxo Diário de Veículos",
-      "content": "Para verificar em quais dias um equipamento operou e em quais ficou parado, utilize dois relatórios do AxHub: (1) Mapa de Fluxo de Passagens — mostra uma tabela hora-a-hora de todas as passagens do mês, por equipamento e faixa. As células em vermelho indicam ausência de registro (equipamento parado); células com números indicam passagens naquele horário. É o relatório mais visual para identificar lacunas. (2) Relatório de Fluxo Diário de Veículos — mostra dia a dia o total de fluxo e infrações, por faixa. Dias com valor zero indicam que o equipamento não operou. Ambos os relatórios permitem filtrar por mês/período, grupo de equipamentos e equipamento específico. Use esses relatórios para responder a perguntas como: 'qual foi o último dia que o equipamento operou?', 'quantos dias o equipamento ficou parado?', 'está chegando imagem no sistema?'.",
-      "steps": [
-        "Acesse Relatórios → Mapa de Fluxo de Passagens",
-        "Selecione o mês/período desejado e o equipamento específico",
-        "Clique em 'Emitir Relatório' — a tabela mostrará passagens por hora de cada dia",
-        "Identifique os dias com células vermelhas (sem passagens) — esses são os dias em que o equipamento não operou ou não sincronizou",
-        "Para mais detalhes, acesse Relatórios → Fluxo Diário de Veículos",
-        "Selecione o equipamento e faixa — o relatório mostrará fluxo e infrações dia a dia",
-        "Dias com fluxo zero: o equipamento não operou, estava offline sem sincronismo, ou a faixa estava errada",
-        "Se o equipamento operou mas o relatório mostra zero: verificar se as passagens estão pendentes de sincronismo (equipamento offline) ou se a faixa no tablet estava incorreta"
-      ],
-      "docUrl": "operacoes/cadastro-operacoes",
-      "related": [
-        "cadastro-operacoes",
-        "checklist-operacao-blitz",
-        "afericoes"
-      ]
-    },
-    {
-      "id": "conceito-faixa",
-      "module": "Operações",
-      "title": "O que é uma Faixa no AxHub",
-      "keywords": [
-        "faixa",
-        "o que é faixa",
-        "conceito faixa",
-        "para que serve faixa",
-        "significado faixa",
-        "endereço",
-        "sentido",
-        "local fiscalização"
-      ],
-      "path": "Menu lateral → Operações → editar Operação → seção Faixas",
-      "content": "No AxHub, uma Faixa representa um local físico de fiscalização vinculado a um equipamento. Cada faixa possui: Código (ex: BA604C-1), Número da Faixa (1, 2, 3...), Sentido (ex: SIMÕES FILHO/SALVADOR), Endereço completo, Velocidade permitida, Código do Município (IBGE) e UF. A faixa é o elo entre o equipamento de campo e o sistema — toda passagem capturada é associada a uma faixa. Se a faixa estiver errada ou não existir no cadastro, a passagem não será importada corretamente. Cada operação pode ter múltiplas faixas, representando diferentes endereços onde o equipamento opera.",
-      "steps": [
-        "Acesse Operações → selecione a operação desejada",
-        "Na seção 'Faixas' você verá todas as faixas cadastradas para aquele equipamento",
-        "Cada faixa tem: Código, Número, Sentido, Endereço, Velocidade",
-        "O número da faixa é o que deve ser configurado no equipamento de campo",
-        "Se o equipamento muda de local, mude o número da faixa no equipamento para corresponder ao novo endereço"
-      ],
-      "docUrl": "operacoes/faixas",
-      "related": [
-        "cadastro-faixas",
-        "config-faixa-tablet",
-        "adicionar-faixa-operacao"
-      ],
-      "dbTables": [
-        "TBFaixas"
-      ]
-    },
-    {
-      "id": "config-faixa-tablet",
-      "module": "Equipamentos",
-      "title": "Configurar Faixa no Tablet",
-      "keywords": [
-        "configurar faixa",
-        "tablet",
-        "número da faixa",
-        "configuração equipamento",
-        "mudar faixa",
-        "alterar faixa tablet",
-        "campo",
-        "blitz tablet",
-        "como definir faixa"
-      ],
-      "path": "No tablet: Sistema Axion → Configurações → Configuração do equipamento",
-      "content": "Para configurar ou alterar a faixa em um tablet de blitz, acesse o sistema Axion instalado no tablet → toque em 'Configurações' → 'Configuração do equipamento'. Nessa tela você verá dois campos: 'Equipamento' (código fixo, ex: BA604C) e 'Nº da Faixa' (editável). O 'Nº da Faixa' deve ser EXATAMENTE igual ao número da faixa cadastrada no AxHub para o endereço onde o equipamento vai operar. Exemplo: se no AxHub a faixa 1 é 'SIMÕES FILHO/SALVADOR' e a faixa 2 é 'FEIRA DE SANTANA/SALVADOR', e o operador vai operar em Feira de Santana, ele deve configurar '2' no tablet. NUNCA digite combinações como '12' pensando que é 'faixa 1 e 2' — o sistema interpreta literalmente como faixa número 12. Após alterar, clique em 'Salvar'. As novas capturas usarão a faixa correta a partir desse momento.",
-      "steps": [
-        "No tablet, abra o sistema Axion de monitoramento",
-        "Toque em 'Configurações' no menu lateral",
-        "Toque em 'Configuração do equipamento'",
-        "Verifique o campo 'Equipamento' — deve mostrar o código correto (ex: BA604C)",
-        "No campo 'Nº da Faixa', digite o número da faixa conforme o endereço de operação",
-        "Consulte o gestor ou o AxHub para saber qual número corresponde ao endereço",
-        "Clique em 'Salvar'",
-        "A partir de agora as capturas serão registradas na faixa correta"
-      ],
-      "docUrl": "operacoes/faixas",
-      "related": [
-        "config-faixa-minipc",
-        "conceito-faixa",
-        "faixa-errada-tablet-blitz"
-      ],
-      "dbTables": [
-        "TBFaixas"
-      ]
-    },
-    {
-      "id": "config-faixa-minipc",
-      "module": "Equipamentos",
-      "title": "Faixa em Equipamento Fixo (MiniPC/OCR)",
-      "keywords": [
-        "minipc",
-        "ocr",
-        "equipamento fixo",
-        "faixa fixa",
-        "configuração faixa fixo",
-        "câmera fixa",
-        "ponto fixo",
-        "estático"
-      ],
-      "path": "Menu lateral → Operações → editar Operação → seção Faixas",
-      "content": "Para equipamentos fixos (MiniPC com câmera OCR), a faixa é configurada diretamente no cadastro da operação dentro do AxHub e normalmente não muda, pois o equipamento fica em um ponto fixo. Ao cadastrar a operação, o administrador adiciona as faixas com os endereços exatos do local de instalação. O equipamento fixo já vem pré-configurado de fábrica com o código do equipamento e faixa padrão. Diferente dos tablets de blitz, equipamentos fixos não precisam de alteração de faixa no campo — a configuração é feita uma única vez no momento da instalação. Se for necessário alterar (por exemplo, mudança de endereço do ponto), o acesso é feito via AnyDesk ou diretamente no equipamento. Para equipamentos OCR, a faixa define também o sentido de captura (ex: NORTE-SUL) e a velocidade regulamentada.",
-      "steps": [
-        "No AxHub, acesse Operações → selecione a operação do equipamento fixo",
-        "Na seção 'Faixas', verifique se o endereço, sentido e velocidade estão corretos",
-        "Para adicionar uma faixa: clique em 'Adicionar Faixa' e preencha os dados",
-        "Para editar: clique no ícone de edição da faixa desejada",
-        "Preencha: Código, Número, Sentido, Endereço, Bairro, Município, Cód. Município (IBGE), UF, Velocidade",
-        "Salve a operação",
-        "A configuração no equipamento fixo é feita uma vez na instalação — não muda em campo"
-      ],
-      "docUrl": "operacoes/faixas",
-      "related": [
-        "config-faixa-tablet",
-        "conceito-faixa",
-        "cadastro-faixas"
-      ],
-      "dbTables": [
-        "TBFaixas"
-      ]
-    },
-    {
-      "id": "adicionar-faixa-operacao",
-      "module": "Operações",
-      "title": "Adicionar Nova Faixa a uma Operação",
-      "keywords": [
-        "adicionar faixa",
-        "criar faixa",
-        "nova faixa",
-        "cadastrar faixa",
-        "novo endereço",
-        "novo local",
-        "ampliar operação",
-        "faixa 3",
-        "gestor contrato"
-      ],
-      "path": "Menu lateral → Operações → editar Operação → botão 'Adicionar Faixa'",
-      "content": "Quando a equipe de campo precisa operar em um endereço que não tem faixa cadastrada, o gestor do contrato deve criar uma nova faixa no AxHub antes de enviar a equipe. Exemplo: o equipamento BA604C tinha faixas 1 (Simões Filho/Salvador) e 2 (Feira de Santana/Salvador). Se a equipe precisa operar em Salvador/Feira de Santana, o gestor cria a faixa 3 com esse endereço. Após criar no AxHub, o operador de campo configura o tablet com o número '3'. IMPORTANTE: somente o gestor do contrato pode criar, editar ou remover faixas — o suporte Axion NÃO altera faixas, apenas orienta. O Código da faixa segue o padrão: CÓDIGO_EQUIPAMENTO-NÚMERO (ex: BA604C-3).",
-      "steps": [
-        "Acesse Operações → selecione a operação do equipamento",
-        "Clique no botão 'Adicionar Faixa' na parte inferior da seção Faixas",
-        "Preencha o Número da Faixa (sequencial: se já existe 1 e 2, use 3)",
-        "Preencha o Sentido (ex: SALVADOR/FEIRA DE SANTANA)",
-        "Preencha o Endereço completo: logradouro, número, bairro, município, UF",
-        "Preencha o Código do Município (IBGE) — consulte em Veículos → Municípios",
-        "Defina a Velocidade regulamentada, se aplicável",
-        "Salve a operação",
-        "Informe ao operador de campo o número da nova faixa para configurar no tablet"
-      ],
-      "docUrl": "operacoes/faixas",
-      "related": [
-        "cadastro-faixas",
-        "cadastro-operacoes",
-        "conceito-faixa"
-      ],
-      "dbTables": [
-        "TBFaixas",
-        "TBDocumentoOperacoesRecursosFaixas"
-      ]
-    },
-    {
-      "id": "tipos-equipamento-blitz",
-      "module": "Equipamentos",
-      "title": "Tipos de Equipamentos: MiniPC vs Tablet",
-      "keywords": [
-        "tipo equipamento",
-        "minipc",
-        "tablet",
-        "diferença",
-        "blitz",
-        "fixo",
-        "móvel",
-        "ocr",
-        "câmera",
-        "anydesk",
-        "zero tier"
-      ],
-      "path": "Informação de referência",
-      "content": "No AxHub existem dois tipos principais de equipamentos: (1) MiniPC — computador compacto com câmera OCR, usado em pontos fixos. Fica conectado à internet via cabo ou modem e envia passagens automaticamente. Acesso remoto via AnyDesk usando IP Zero Tier. Exemplo: BA601C (AnyDesk: 1914407146, IP: 172.27.4.1). (2) Tablet — dispositivo móvel usado em operações de blitz. Opera offline durante a fiscalização e sincroniza ao retornar à base. A configuração da faixa é feita pelo operador no próprio tablet (Configurações → Configuração do equipamento). Exemplo: BA604C (AnyDesk: 1062093213). A principal diferença operacional: MiniPCs têm faixa fixa e enviam em tempo real; Tablets precisam de configuração manual da faixa antes de cada operação e sincronizam posteriormente.",
-      "steps": [
-        "MiniPC: verificar status em Operações → Monitoramento Online",
-        "MiniPC: acesso remoto via AnyDesk → IP Zero Tier na porta 80",
-        "MiniPC: faixa configurada na instalação, raramente muda",
-        "Tablet: configurar faixa antes de cada operação (Configurações → Configuração do equipamento)",
-        "Tablet: sincronizar ao voltar à base conectando à internet",
-        "Tablet: verificar volume pendente no Mapa de Fluxo de Passagens",
-        "Ambos: verificar se a faixa no equipamento corresponde à faixa no AxHub"
-      ],
-      "docUrl": "cadastros-basicos/tipos-equipamentos",
-      "related": [
-        "tipos-equipamentos",
-        "config-faixa-tablet",
-        "config-faixa-minipc"
-      ],
-      "dbTables": [
-        "TBEquipamentos"
-      ]
-    },
-    {
-      "id": "passagens-faixa-errada",
-      "module": "Operações",
-      "title": "Passagens Capturadas com Faixa Errada",
-      "keywords": [
-        "passagem errada",
-        "faixa errada",
-        "passagem não sobe",
-        "passagem presa",
-        "corrigir passagem",
-        "volume grande",
-        "perda dados",
-        "faixa inexistente"
-      ],
-      "path": "Menu lateral → Operações → Passagens / Infrações → Triagem",
-      "content": "Quando um equipamento (especialmente tablet) captura passagens com um número de faixa que não existe no cadastro da operação (ex: faixa 12 quando só existem 1, 2 e 3), essas passagens ficam 'presas' — não são importadas para o sistema. Ao corrigir a faixa no equipamento, apenas as NOVAS capturas serão enviadas corretamente. As passagens já capturadas com faixa errada precisam ser corrigidas manualmente, uma a uma, o que pode ser inviável para grandes volumes (ex: 3.766 passagens em um dia). Nesses casos, o gestor deve decidir: (a) corrigir manualmente as passagens importantes, (b) descartar o volume e manter somente as novas capturas corretas. Para evitar esse problema: SEMPRE verificar a faixa no equipamento antes de iniciar a operação.",
-      "steps": [
-        "Identifique quantas passagens foram capturadas com faixa errada",
-        "Verifique no tablet: Passagens → coluna 'Faixa' para ver o número incorreto",
-        "Decida com o gestor: corrigir manualmente ou descartar",
-        "Se corrigir: cada passagem precisa ser editada individualmente — viável apenas para volumes pequenos",
-        "Se descartar: apenas corrija a faixa no equipamento para capturar corretamente daqui em diante",
-        "Prevenção: verificar a faixa ANTES de cada operação usando o checklist de blitz"
-      ],
-      "docUrl": "operacoes/faixas",
-      "related": [
-        "faixa-errada-tablet-blitz",
-        "config-faixa-tablet",
-        "conceito-faixa"
-      ],
-      "dbTables": [
-        "TBImagemPassagens"
-      ]
-    },
-    {
-      "id": "operador-campo-orientacao",
-      "module": "Operações",
-      "title": "Orientação para Operador de Campo",
-      "keywords": [
-        "operador",
-        "campo",
-        "orientação",
-        "treinamento",
-        "como operar",
-        "equipe campo",
-        "wellington",
-        "anderson",
-        "gestor",
-        "responsável"
-      ],
-      "path": "Procedimento operacional",
-      "content": "O operador de campo é responsável por: (1) Configurar a faixa correta no tablet antes de cada operação — perguntando ao gestor qual faixa usar para o endereço da blitz. (2) Nunca inventar números de faixa (ex: '12' pensando que é 'faixa 1 e 2'). (3) Ao retornar à base, conectar o tablet à internet e aguardar a sincronização completa. (4) Se mudar de endereço durante a operação, alterar a faixa no tablet antes de continuar capturando. O gestor do contrato é quem: cadastra e altera faixas no AxHub, informa ao operador qual faixa usar em cada endereço, e decide sobre passagens com faixa errada. O suporte Axion: orienta sobre configuração, reinicia serviços travados via AnyDesk, e valida se os dados estão chegando ao sistema.",
-      "steps": [
-        "ANTES: Pergunte ao gestor qual faixa (número) usar para o endereço da operação",
-        "ANTES: No tablet → Configurações → Configuração do equipamento → confirme o Nº da Faixa",
-        "ANTES: Se o endereço não tem faixa cadastrada, avise o gestor para criar no AxHub",
-        "DURANTE: Se mudar de endereço, altere a faixa no tablet antes de continuar",
-        "DURANTE: Não se preocupe com 'offline' — o tablet armazena localmente",
-        "APÓS: Conecte à internet na base e aguarde sincronizar completamente",
-        "APÓS: Não desligue o tablet antes do sincronismo terminar",
-        "EM CASO DE DÚVIDA: Contate o gestor do contrato ou o suporte Axion"
-      ],
-      "docUrl": "operacoes/cadastro-operacoes",
-      "related": [
-        "checklist-operacao-blitz",
-        "config-faixa-tablet",
-        "tipos-equipamento-blitz"
-      ]
-    },
-    {
-      "id": "acesso-remoto-anydesk",
-      "module": "Equipamentos",
-      "title": "Acesso Remoto via AnyDesk",
-      "keywords": [
-        "anydesk",
-        "acesso remoto",
-        "zero tier",
-        "ip",
-        "conexão",
-        "reiniciar serviço",
-        "travou",
-        "não conecta",
-        "internet lenta"
-      ],
-      "path": "AnyDesk → conectar usando ID ou Alias do equipamento",
-      "content": "O AnyDesk é a ferramenta utilizada para acesso remoto aos equipamentos AxHub. Para MiniPCs, o acesso é feito via IP Zero Tier (rede privada) na porta 80. Para tablets, o acesso é direto pelo ID do AnyDesk, mas depende do tablet estar conectado à internet. Quando o AnyDesk mostra 'offline', significa que o equipamento não tem internet ou está desligado — nesses casos, é necessário pedir ao operador em campo que verifique energia e rede. O acesso remoto é essencial para: reiniciar o serviço de envio de passagens quando trava, verificar a configuração de faixa, diagnosticar problemas de sincronismo e conferir o status do equipamento. Se a internet estiver muito lenta, o AnyDesk pode travar ou demorar — considere pedir ao operador que envie screenshots por WhatsApp para diagnóstico alternativo.",
-      "steps": [
-        "Abra o AnyDesk e digite o ID ou Alias do equipamento",
-        "Para MiniPC: use o IP Zero Tier (ex: 172.27.4.1) na porta 80",
-        "Para Tablet: use o ID numérico do AnyDesk (ex: 1062093213)",
-        "Se conectar: verifique o serviço de envio, a faixa configurada e a internet",
-        "Se o serviço de passagens travou: reinicie-o via linha de comando",
-        "Se não conectar (offline): peça ao operador que verifique se o equipamento está ligado e tem internet",
-        "Alternativa se AnyDesk não funciona: peça ao operador fotos/screenshots via WhatsApp para diagnóstico visual"
-      ],
-      "docUrl": null,
-      "related": [
-        "equipamento-offline",
-        "sincronismo-equipamento-blitz"
-      ]
-    },
-    {
-      "id": "navegacao-sistema",
-      "module": "Acesso",
-      "title": "Navegação no Sistema AxHub",
-      "keywords": [
-        "menu",
-        "navegação",
-        "módulos",
-        "onde fica",
-        "estrutura",
-        "menu lateral",
-        "tela inicial"
-      ],
-      "path": "Menu lateral (barra esquerda do sistema)",
-      "content": "O AxHub é organizado em módulos acessíveis pelo menu lateral esquerdo. Os principais módulos são: Infrações (triagem, auditoria, exportação, consulta), Operações (cadastro, aferições, monitoramento, faixas, eventos), Cadastros Básicos (equipamentos, tipos, modelos, fabricantes, grupos), Veículos (tipos, marcas, modelos, cores, municípios, classificações), Balança (pesagem, tickets, reclassificação), Cronotacógrafo (triagem e consulta), Medição (contratos, índices, interrupções), Relatórios (fluxo, passagens, infrações, processamento, Power BI), Administração (configurações, enquadramentos, tarjas, layouts, webhooks, arcos) e Controle de Acesso (usuários, permissões, perfis, logs). Cada módulo expande em submenus ao clicar.",
-      "steps": [
-        "O menu lateral esquerdo mostra todos os módulos do sistema",
-        "Clique no ícone do módulo desejado para expandir os submenus",
-        "Use a Dashboard (tela inicial) para visão geral de indicadores e alertas",
-        "A barra superior mostra o nome do usuário logado e opções de configuração"
-      ],
-      "docUrl": "primeiros-passos/navegacao",
-      "related": [
-        "dashboard",
-        "login-acesso"
-      ]
-    },
-    {
-      "id": "config-sistema",
-      "module": "Administração",
-      "title": "Configurações do Sistema",
-      "keywords": [
-        "configurações",
+        "configurações de enquadramento",
+        "configuracoes de enquadramento",
+        "configura",
+        "enquadramento",
+        "enquadramentos",
+        "infra",
+        "acessar",
+        "cadastro",
+        "configuracao",
+        "administracao",
         "sistema",
-        "parâmetros",
-        "prazo triagem",
-        "tempo análise",
-        "meta diária",
-        "ajustes gerais"
+        "admin"
       ],
-      "path": "Menu lateral → Administração → Configurações do Sistema",
-      "content": "As Configurações do Sistema definem parâmetros globais do AxHub: Prazo para Triagem (define o limite de dias para o operador analisar as infrações), Tempo de Análise de Imagem (tempo mínimo esperado por imagem na triagem), Motivo de Descarte padrão, Exigências de Dados obrigatórios e Meta diária de processamento. Essas configurações afetam o fluxo de trabalho de todos os operadores e devem ser ajustadas pelo administrador do sistema.",
-      "steps": [
-        "Acesse Administração → Configurações do Sistema",
-        "Ajuste o 'Prazo para Triagem' conforme a necessidade do contrato",
-        "Configure o 'Tempo de Análise de Imagem' mínimo por infração",
-        "Defina a meta diária de processamento por operador",
-        "Clique em Salvar para aplicar as alterações"
+      "content": "Configuração de enquadramentos de infrações",
+      "steps": [],
+      "path": "Configurações de Enquadramento",
+      "docUrl": "administracao/configuracoes-enquadramento",
+      "related": [
+        "enquadramentos",
+        "infracoes-triagem",
+        "glossario-enquadramento"
       ],
+      "dbTables": []
+    },
+    {
+      "id": "administracao-configuracoes-sistema",
+      "title": "Configurações do Sistema",
+      "module": "Administração",
+      "keywords": [
+        "configurações do sistema",
+        "configuracoes do sistema",
+        "configura",
+        "sistema",
+        "gerais",
+        "axhub",
+        "acessar",
+        "funcionalidades",
+        "configuracao",
+        "administracao",
+        "admin"
+      ],
+      "content": "Configurações gerais do AxHub",
+      "steps": [],
+      "path": "Configurações",
       "docUrl": "administracao/configuracoes-sistema",
       "related": [
         "webhooks",
-        "config-layout"
+        "relatorios-power-bi"
       ],
-      "dbTables": [
-        "TBConfiguracoes"
-      ]
+      "dbTables": []
     },
     {
-      "id": "formas-autuacao",
+      "id": "administracao-enquadramentos",
+      "title": "Enquadramentos",
       "module": "Administração",
-      "title": "Formas de Autuação",
       "keywords": [
-        "forma autuação",
-        "autuação",
-        "tipo autuação",
-        "cadastro autuação"
+        "enquadramentos",
+        "tabela",
+        "infra",
+        "trânsito",
+        "acessar",
+        "termos",
+        "configuracao",
+        "administracao",
+        "sistema",
+        "admin"
       ],
-      "path": "Menu lateral → Administração → Formas de Autuação",
-      "content": "As Formas de Autuação definem como a infração foi registrada (automática, manual, etc.). São cadastradas em Administração → Formas de Autuação com Código, Descrição e status Ativo. São usadas no processo de exportação de infrações para o órgão autuador.",
-      "steps": [
-        "Acesse Administração → Formas de Autuação",
-        "Clique em 'Novo' para adicionar uma forma de autuação",
-        "Preencha Código e Descrição",
-        "Clique em Salvar"
+      "content": "Tabela de enquadramentos de infrações de trânsito",
+      "steps": [],
+      "path": "Enquadramentos",
+      "docUrl": "administracao/enquadramentos",
+      "related": [
+        "configuracoes-enquadramento",
+        "formas-autuacao",
+        "glossario-enquadramento",
+        "glossario-autuacao"
       ],
+      "dbTables": []
+    },
+    {
+      "id": "administracao-formas-autuacao",
+      "title": "Formas de Autuação",
+      "module": "Administração",
+      "keywords": [
+        "formas de autuação",
+        "formas de autuacao",
+        "formas",
+        "autua",
+        "cadastro",
+        "acessar",
+        "navegacao",
+        "relacionada",
+        "configuracao",
+        "administracao",
+        "sistema",
+        "admin"
+      ],
+      "content": "Cadastro de formas de autuação",
+      "steps": [],
+      "path": "Formas de Autuação",
       "docUrl": "administracao/formas-autuacao",
       "related": [
-        "config-enquadramento",
-        "sequenciais-infracoes"
+        "enquadramentos",
+        "infracoes-exportacao",
+        "glossario-autuacao"
       ],
-      "dbTables": [
-        "TBFormaAtuacao"
-      ]
+      "dbTables": []
     },
     {
-      "id": "motivos-descarte",
+      "id": "administracao-layouts-arquivos",
+      "title": "Layouts de Arquivos",
       "module": "Administração",
-      "title": "Motivos de Descarte",
       "keywords": [
-        "motivo descarte",
+        "layouts de arquivos",
+        "layouts",
+        "arquivos",
+        "configura",
+        "importa",
+        "exporta",
+        "acessar",
+        "configuracao",
+        "administracao",
+        "sistema",
+        "admin"
+      ],
+      "content": "Configuração de layouts para importação e exportação",
+      "steps": [],
+      "path": "Layouts de Arquivos",
+      "docUrl": "administracao/layouts-arquivos",
+      "related": [
+        "infracoes-exportacao",
+        "glossario-lote-exportacao"
+      ],
+      "dbTables": []
+    },
+    {
+      "id": "administracao-motivos-descartes",
+      "title": "Motivos de Descarte",
+      "module": "Administração",
+      "keywords": [
+        "motivos de descarte",
+        "motivos",
         "descarte",
-        "por que descartar",
-        "imagem ilegível",
-        "placa não identificada",
-        "justificativa descarte"
+        "cadastro",
+        "infra",
+        "acessar",
+        "termos",
+        "configuracao",
+        "administracao",
+        "sistema",
+        "admin"
       ],
-      "path": "Menu lateral → Administração → Motivos de Descarte",
-      "content": "Os Motivos de Descarte são as justificativas utilizadas quando uma infração é descartada durante a triagem. Exemplos comuns: 'Imagem ilegível', 'Placa não identificada', 'Veículo de emergência', 'Equipamento em teste'. São cadastrados em Administração → Motivos de Descarte. Ao descartar uma infração na triagem, o operador deve selecionar um destes motivos, garantindo rastreabilidade do descarte.",
-      "steps": [
-        "Acesse Administração → Motivos de Descarte",
-        "Clique em 'Novo' para adicionar um motivo",
-        "Preencha Código e Descrição (ex: 'Placa não identificada')",
-        "Marque como Ativo e salve",
-        "Na triagem, o operador seleciona o motivo ao descartar uma infração"
-      ],
+      "content": "Cadastro de motivos para descarte de infrações",
+      "steps": [],
+      "path": "Motivos de Descarte",
       "docUrl": "administracao/motivos-descartes",
       "related": [
-        "infracoes-descartadas",
-        "triagem-infracoes",
-        "reabrir-infracao"
+        "infracoes-triagem",
+        "infracoes-infracoes-descartadas"
       ],
-      "dbTables": [
-        "TBInfracoes"
-      ]
+      "dbTables": []
     },
     {
-      "id": "sequenciais-infracoes",
+      "id": "administracao-regioes",
+      "title": "Regiões",
       "module": "Administração",
-      "title": "Sequenciais de Infrações",
       "keywords": [
-        "sequencial",
-        "numeração",
-        "auto infração",
-        "número AIT",
-        "faixa sequencial",
-        "esgotado"
+        "regiões",
+        "cadastro",
+        "geográficas",
+        "acessar",
+        "navegacao",
+        "relacionada",
+        "configuracao",
+        "administracao",
+        "sistema",
+        "admin"
       ],
-      "path": "Menu lateral → Administração → Sequenciais de Infrações",
-      "content": "Os Sequenciais de Infrações controlam a numeração dos autos de infração (AIT). Cada órgão autuador recebe uma faixa sequencial (início/fim) que define o intervalo de números disponíveis. Quando o sequencial se aproxima do fim, o status muda para 'Esgotado' e é necessário solicitar nova faixa ao órgão. Monitore regularmente para evitar interrupção na exportação de infrações.",
-      "steps": [
-        "Acesse Administração → Sequenciais de Infrações",
-        "Verifique o 'Sequencial Atual' e a 'Faixa Fim' para identificar quantos números restam",
-        "Se o status estiver 'Esgotado', solicite nova faixa ao órgão autuador",
-        "Para cadastrar novo sequencial: clique em 'Novo', preencha Órgão, Faixa Início e Faixa Fim",
-        "Salve e o sistema usará automaticamente na próxima exportação"
+      "content": "Cadastro de regiões geográficas",
+      "steps": [],
+      "path": "Regiões",
+      "docUrl": "administracao/regioes",
+      "related": [
+        "operacoes-cadastro-operacoes",
+        "cadastros-basicos-equipamentos"
       ],
+      "dbTables": []
+    },
+    {
+      "id": "administracao-relatorios-power-bi",
+      "title": "Relatórios Power BI",
+      "module": "Administração",
+      "keywords": [
+        "relatórios power bi",
+        "relatorios power bi",
+        "relatórios",
+        "power",
+        "configura",
+        "integrados",
+        "acessar",
+        "disponíveis",
+        "configuracao",
+        "administracao",
+        "sistema",
+        "admin"
+      ],
+      "content": "Configuração de relatórios Power BI integrados",
+      "steps": [],
+      "path": "Relatórios Power BI",
+      "docUrl": "administracao/relatorios-power-bi",
+      "related": [
+        "relatorios-power-bi",
+        "configuracoes-sistema"
+      ],
+      "dbTables": []
+    },
+    {
+      "id": "administracao-sequenciais-infracoes",
+      "title": "Sequenciais de Infrações",
+      "module": "Administração",
+      "keywords": [
+        "sequenciais de infrações",
+        "sequenciais de infracoes",
+        "sequenciais",
+        "infra",
+        "controle",
+        "numéricos",
+        "acessar",
+        "navegacao",
+        "configuracao",
+        "administracao",
+        "sistema",
+        "admin"
+      ],
+      "content": "Controle de sequenciais numéricos de infrações",
+      "steps": [],
+      "path": "Sequenciais de Infrações",
       "docUrl": "administracao/sequenciais-infracoes",
       "related": [
-        "exportar-infracoes",
-        "formas-autuacao"
+        "infracoes-triagem",
+        "infracoes-consulta-infracoes"
       ],
-      "dbTables": [
-        "TBInfracoes"
-      ]
+      "dbTables": []
     },
     {
-      "id": "tipos-imagens",
+      "id": "administracao-sequenciais-lote-exportacao",
+      "title": "Sequenciais de Lote de Exportação",
       "module": "Administração",
-      "title": "Tipos de Imagens",
       "keywords": [
-        "tipo imagem",
-        "panorâmica",
-        "zoom placa",
-        "contexto",
-        "imagem obrigatória",
-        "imagem infração"
+        "sequenciais de lote de exportação",
+        "sequenciais de lote de exportacao",
+        "sequenciais",
+        "lote",
+        "exporta",
+        "controle",
+        "lotes",
+        "exportados",
+        "configuracao",
+        "administracao",
+        "sistema",
+        "admin"
       ],
-      "path": "Menu lateral → Administração → Tipos de Imagens",
-      "content": "Os Tipos de Imagens definem as categorias de imagem capturadas pelos equipamentos: Panorâmica (visão geral do local), Zoom Placa (ampliação da placa), Contexto (imagem complementar). Cada tipo pode ser marcado como 'Obrigatória' — se obrigatória, a infração não será exportada sem essa imagem. Erros de exportação com código 422 (imagens ausentes) geralmente indicam que faltam imagens de tipos marcados como obrigatórios.",
-      "steps": [
-        "Acesse Administração → Tipos de Imagens",
-        "Verifique quais tipos estão marcados como 'Obrigatória'",
-        "Para adicionar: clique em 'Novo', preencha Código e Descrição",
-        "Marque 'Obrigatória' se a imagem deve existir para exportação",
-        "Tipos obrigatórios: se faltarem, a exportação gerará erro 422"
+      "content": "Controle de sequenciais de lotes exportados",
+      "steps": [],
+      "path": "Sequenciais de Lote de Exportação",
+      "docUrl": "administracao/sequenciais-lote-exportacao",
+      "related": [
+        "infracoes-exportacao",
+        "glossario-lote-exportacao"
       ],
+      "dbTables": []
+    },
+    {
+      "id": "administracao-tarjas",
+      "title": "Tarjas",
+      "module": "Administração",
+      "keywords": [
+        "tarjas",
+        "configura",
+        "imagens",
+        "infra",
+        "acessar",
+        "navegacao",
+        "configuracao",
+        "administracao",
+        "sistema",
+        "admin"
+      ],
+      "content": "Configuração de tarjas para imagens de infrações",
+      "steps": [],
+      "path": "Tarjas",
+      "docUrl": "administracao/tarjas",
+      "related": [
+        "infracoes-triagem",
+        "infracoes-exportacao"
+      ],
+      "dbTables": []
+    },
+    {
+      "id": "administracao-tipos-afericoes",
+      "title": "Tipos de Aferições",
+      "module": "Administração",
+      "keywords": [
+        "tipos de aferições",
+        "tipos de afericoes",
+        "tipos",
+        "aferi",
+        "cadastro",
+        "metrológicas",
+        "acessar",
+        "navegacao",
+        "configuracao",
+        "administracao",
+        "sistema",
+        "admin"
+      ],
+      "content": "Cadastro de tipos de aferições metrológicas",
+      "steps": [],
+      "path": "Tipos de Aferições",
+      "docUrl": "administracao/tipos-afericoes",
+      "related": [
+        "operacoes-afericoes",
+        "glossario-afericao"
+      ],
+      "dbTables": []
+    },
+    {
+      "id": "administracao-tipos-imagens",
+      "title": "Tipos de Imagens",
+      "module": "Administração",
+      "keywords": [
+        "tipos de imagens",
+        "tipos",
+        "imagens",
+        "cadastro",
+        "capturadas",
+        "acessar",
+        "navegacao",
+        "configuracao",
+        "administracao",
+        "sistema",
+        "admin"
+      ],
+      "content": "Cadastro de tipos de imagens capturadas",
+      "steps": [],
+      "path": "Tipos de Imagens",
       "docUrl": "administracao/tipos-imagens",
       "related": [
-        "processamento-imagens",
-        "tarja-imagem-duplicada",
-        "erro-exportacao-imagens-obrigatorias"
+        "infracoes-triagem",
+        "cadastros-basicos-equipamentos"
       ],
-      "dbTables": [
-        "TBImagens"
-      ]
+      "dbTables": []
     },
     {
-      "id": "cadastro-equipamentos-basico",
-      "module": "Cadastros Básicos",
-      "title": "Cadastro de Equipamentos",
+      "id": "administracao-webhooks",
+      "title": "Webhooks",
+      "module": "Administração",
       "keywords": [
-        "equipamento",
-        "cadastrar equipamento",
-        "radar",
-        "câmera",
-        "número série",
-        "fabricante",
-        "modelo",
-        "fixo",
-        "móvel",
-        "modo operação"
+        "webhooks",
+        "configura",
+        "integra",
+        "externas",
+        "acessar",
+        "navegacao",
+        "configuracao",
+        "administracao",
+        "sistema",
+        "admin"
       ],
-      "path": "Menu lateral → Cadastros Básicos → Equipamentos",
-      "content": "O cadastro de equipamentos é o registro central de todos os dispositivos de fiscalização gerenciados pelo AxHub. Cada equipamento possui: Número de Série, Código (identificador único como BA601C), Fabricante, Modelo, Tipo (Radar Fixo, OCR, Portátil etc.), Modo de Operação (Fixo ou Móvel) e Grupo de Equipamentos. O cadastro é essencial pois vincula o equipamento às operações, faixas e infrações. Sem cadastro correto, as passagens não são recebidas pelo sistema.",
+      "content": "Configuração de webhooks para integrações externas",
+      "steps": [],
+      "path": "Webhooks",
+      "docUrl": "administracao/webhooks",
+      "related": [
+        "configuracoes-sistema",
+        "infracoes-exportacao"
+      ],
+      "dbTables": []
+    },
+    {
+      "id": "balanca-pesagem",
+      "title": "Pesagem",
+      "module": "Balança",
+      "keywords": [
+        "pesagem",
+        "sidebar_position",
+        "title",
+        "acessar",
+        "tickets",
+        "abertos",
+        "balanca",
+        "peso",
+        "medicao",
+        "sensor"
+      ],
+      "content": "--- sidebar_position: 1 title: Pesagem",
+      "steps": [],
+      "path": "Pesagem",
+      "docUrl": "balanca/pesagem",
+      "related": [
+        "triagem-balanca"
+      ],
+      "dbTables": []
+    },
+    {
+      "id": "balanca-triagem-balanca",
+      "title": "Triagem de Balanca",
+      "module": "Balança",
+      "keywords": [
+        "triagem de balanca",
+        "triagem",
+        "balanca",
+        "sidebar_position",
+        "title",
+        "acessar",
+        "reclassificar",
+        "peso",
+        "medicao",
+        "sensor"
+      ],
+      "content": "--- sidebar_position: 2 title: Triagem de Balanca",
+      "steps": [],
+      "path": "Triagem",
+      "docUrl": "balanca/triagem-balanca",
+      "related": [
+        "pesagem"
+      ],
+      "dbTables": []
+    },
+    {
+      "id": "cadastros-basicos-equipamentos",
+      "title": "Equipamentos",
+      "module": "Cadastros Básicos",
+      "keywords": [
+        "equipamentos",
+        "cadastro",
+        "gestão",
+        "trânsito",
+        "acessar",
+        "listagem",
+        "registrar",
+        "criar",
+        "novo"
+      ],
+      "content": "Cadastro e gestão dos equipamentos de trânsito",
       "steps": [
-        "Acesse Cadastros Básicos → Equipamentos",
-        "Clique em 'Novo' para cadastrar um equipamento",
-        "Preencha: Nº Série, Código, Fabricante, Modelo e Tipo",
-        "Selecione o Modo de Operação: Fixo (ponto fixo) ou Móvel (blitz)",
-        "Vincule a um Grupo de Equipamentos para organização",
-        "Salve o cadastro",
-        "Após cadastrar, vincule a uma Operação em Operações → Cadastro de Operações"
+        "Na listagem, clique em **+ Novo**",
+        "Preencha o **Nº Série** e o **Código** do equipamento",
+        "Informe o **Número Certificado Inmetro** e as datas de emissão/vencimento",
+        "Selecione o **Modelo**, **Tipo** e **Grupo** nos campos dropdown",
+        "Escolha o **Tipo da Operação** (Fixo ou Móvel)",
+        "Clique em **Salvar**",
+        "Fabricantes",
+        "Tipos de Equipamentos",
+        "Modelos de Equipamentos",
+        "Grupos de Equipamentos"
       ],
+      "path": "Equipamentos",
       "docUrl": "cadastros-basicos/equipamentos",
       "related": [
-        "cadastrar-equipamento",
+        "fabricantes",
         "tipos-equipamentos",
-        "grupos-equipamentos"
-      ],
-      "dbTables": [
-        "TBEquipamentos"
-      ]
-    },
-    {
-      "id": "tipos-equipamentos",
-      "module": "Cadastros Básicos",
-      "title": "Tipos de Equipamentos",
-      "keywords": [
-        "tipo equipamento",
-        "lombada eletrônica",
-        "ocr",
-        "radar fixo",
-        "radar misto",
-        "radar portátil",
-        "categoria equipamento"
-      ],
-      "path": "Menu lateral → Cadastros Básicos → Tipos de Equipamentos",
-      "content": "Os Tipos de Equipamentos classificam as categorias de dispositivos suportados pelo AxHub: LOMBADA ELETRÔNICA (controle de velocidade com sensores no solo), OCR (reconhecimento óptico de caracteres para leitura de placas), RADAR FIXO (medição de velocidade em ponto fixo), RADAR MISTO (velocidade + avanço de sinal), RADAR PORTÁTIL (equipamento móvel de blitz). O tipo define quais funcionalidades são aplicáveis ao equipamento.",
-      "steps": [
-        "Acesse Cadastros Básicos → Tipos de Equipamentos",
-        "Visualize os tipos disponíveis ou clique em 'Novo' para adicionar",
-        "Preencha Código e Descrição do tipo",
-        "O tipo é selecionado ao cadastrar um equipamento em Cadastros Básicos → Equipamentos"
-      ],
-      "docUrl": "cadastros-basicos/tipos-equipamentos",
-      "related": [
+        "modelos-equipamentos",
         "grupos-equipamentos",
-        "cadastrar-equipamento",
-        "cadastro-equipamentos-basico"
+        "glossario-afericao"
       ],
-      "dbTables": [
-        "TBEquipamentos"
-      ]
+      "dbTables": []
     },
     {
-      "id": "grupos-equipamentos",
+      "id": "cadastros-basicos-fabricantes",
+      "title": "Fabricantes",
       "module": "Cadastros Básicos",
-      "title": "Grupos de Equipamentos",
       "keywords": [
-        "grupo equipamento",
-        "organizar equipamentos",
-        "projeto",
-        "cliente",
-        "região",
-        "cor dashboard"
+        "fabricantes",
+        "cadastro",
+        "equipamentos",
+        "trânsito",
+        "acessar",
+        "listagem",
+        "registrar",
+        "criar",
+        "novo"
       ],
-      "path": "Menu lateral → Cadastros Básicos → Grupos de Equipamentos",
-      "content": "Grupos de Equipamentos permitem organizar logicamente os equipamentos por projeto, cliente ou região. Cada grupo pode ter uma cor identificadora que aparece no Dashboard. Configurações: Nome, Cor, Desabilitar Monitoramento, Desabilitar Limite Horas Importação. Útil para separar equipamentos de contratos diferentes.",
+      "content": "Cadastro de fabricantes de equipamentos de trânsito",
       "steps": [
-        "Acesse Cadastros Básicos → Grupos de Equipamentos",
-        "Clique em 'Novo' para criar um grupo",
-        "Preencha Nome e selecione uma Cor identificadora",
-        "Configure opções: monitoramento e limites de importação",
-        "Ao cadastrar equipamentos, vincule ao grupo correspondente"
+        "Na listagem, clique em **+ Novo**",
+        "Preencha o **Nome** do fabricante",
+        "Preencha o **Slug** (identificador único, sem espaços ou caracteres especiais)",
+        "Preencha os demais campos conforme necessário",
+        "Clique em **Salvar**",
+        "Após salvar, clique em **Gerar Novo Token** para criar o token de API"
       ],
+      "path": "Fabricantes",
+      "docUrl": "cadastros-basicos/fabricantes",
+      "related": [
+        "equipamentos",
+        "modelos-equipamentos"
+      ],
+      "dbTables": []
+    },
+    {
+      "id": "cadastros-basicos-grupos-equipamentos",
+      "title": "Grupos de Equipamentos",
+      "module": "Cadastros Básicos",
+      "keywords": [
+        "grupos de equipamentos",
+        "grupos",
+        "equipamentos",
+        "agrupamento",
+        "lógico",
+        "organiza",
+        "monitoramento",
+        "cadastro",
+        "registrar",
+        "criar",
+        "novo"
+      ],
+      "content": "Agrupamento lógico de equipamentos para organização e monitoramento",
+      "steps": [
+        "Na listagem, clique em **+ Novo**",
+        "Informe o **Nome do Grupo de Equipamentos**",
+        "Selecione uma **Cor** para identificação visual no mapa",
+        "Configure as opções de **monitoramento** e **limite de horas** conforme necessário",
+        "Clique em **Salvar**"
+      ],
+      "path": "Grupos de Equipamentos",
       "docUrl": "cadastros-basicos/grupos-equipamentos",
       "related": [
-        "tipos-equipamentos",
-        "cadastrar-equipamento"
+        "equipamentos"
       ],
-      "dbTables": [
-        "TBGrupoEquipamentos"
-      ]
+      "dbTables": []
     },
     {
-      "id": "perfis-acesso",
-      "module": "Controle de Acesso",
-      "title": "Perfis de Acesso",
+      "id": "cadastros-basicos-modelos-equipamentos",
+      "title": "Modelos de Equipamentos",
+      "module": "Cadastros Básicos",
       "keywords": [
-        "perfil",
-        "grupo permissões",
-        "papel",
-        "role",
-        "nível acesso",
-        "administrador",
-        "operador",
-        "auditor"
+        "modelos de equipamentos",
+        "modelos",
+        "equipamentos",
+        "cadastro",
+        "portarias",
+        "inmetro",
+        "acessar",
+        "registrar",
+        "criar",
+        "novo"
       ],
-      "path": "Menu lateral → Controle de Acesso → Perfis de Acesso",
-      "content": "Perfis de Acesso agrupam conjuntos de permissões atribuíveis a usuários. Exemplos: 'Administrador' (acesso total), 'Operador de Triagem' (apenas triagem e consulta), 'Auditor' (auditoria e relatórios), 'Gestor' (operações e relatórios). Ao criar um usuário, basta atribuir o perfil adequado. Alterações no perfil afetam todos os usuários vinculados.",
+      "content": "Cadastro dos modelos de equipamentos e portarias INMETRO",
       "steps": [
-        "Acesse Controle de Acesso → Perfis de Acesso",
-        "Clique em 'Novo' para criar um perfil",
-        "Defina o Nome e Descrição (ex: 'Operador Triagem')",
-        "Marque as permissões desejadas por módulo e funcionalidade",
-        "Salve o perfil",
-        "Ao criar/editar um usuário, selecione este perfil"
+        "Na listagem, clique em **+ Novo**",
+        "Informe a **Marca** e o **Modelo** do equipamento",
+        "Preencha o **Número da Portaria** e a **Portaria** completa do INMETRO",
+        "Selecione o **Fabricante** no campo dropdown",
+        "Clique em **Salvar**"
       ],
-      "docUrl": "controle-acesso/perfis-acesso",
+      "path": "Modelos de Equipamentos",
+      "docUrl": "cadastros-basicos/modelos-equipamentos",
       "related": [
-        "permissoes",
-        "criar-usuario",
-        "logs-acesso"
-      ]
+        "equipamentos",
+        "fabricantes",
+        "tipos-equipamentos"
+      ],
+      "dbTables": []
     },
     {
-      "id": "logs-acesso",
-      "module": "Controle de Acesso",
-      "title": "Logs de Acesso ao Sistema",
+      "id": "cadastros-basicos-tipos-equipamentos",
+      "title": "Tipos de Equipamentos",
+      "module": "Cadastros Básicos",
       "keywords": [
-        "log",
-        "histórico acesso",
-        "auditoria acesso",
-        "quem acessou",
-        "registro login",
-        "ação usuário"
+        "tipos de equipamentos",
+        "tipos",
+        "equipamentos",
+        "cadastro",
+        "trânsito",
+        "acessar",
+        "listagem",
+        "registrar",
+        "criar",
+        "novo"
       ],
-      "path": "Menu lateral → Controle de Acesso → Logs de Acesso",
-      "content": "Os Logs de Acesso registram todas as ações dos usuários no sistema: logins, logouts, alterações em cadastros, triagens realizadas, exportações efetuadas. Cada registro mostra Data/Hora, Usuário, IP de origem, Ação realizada e Módulo afetado. Use para investigar alterações, verificar acessos e auditar ações no sistema.",
+      "content": "Cadastro dos tipos de equipamentos de trânsito",
       "steps": [
-        "Acesse Controle de Acesso → Logs de Acesso",
-        "Filtre por período, usuário ou tipo de ação",
-        "Consulte o histórico de atividades do usuário",
-        "Use para investigar alterações ou acessos suspeitos"
+        "Na listagem, clique em **+ Novo**",
+        "Informe o **Nome** do tipo",
+        "Opcionalmente, envie um **ícone** para representação visual",
+        "Clique em **Nova Forma de Atuação** para vincular os tipos de infração que este equipamento detecta",
+        "Clique em **Salvar**"
       ],
-      "docUrl": "controle-acesso/logs-acesso",
+      "path": "Tipos de Equipamentos",
+      "docUrl": "cadastros-basicos/tipos-equipamentos",
       "related": [
-        "criar-usuario",
-        "restricao-ip"
+        "equipamentos",
+        "modelos-equipamentos"
       ],
-      "dbTables": [
-        "TBHorariosAcessos"
-      ]
+      "dbTables": []
     },
     {
-      "id": "restricao-ip",
+      "id": "controle-acesso-acessos-por-ip",
+      "title": "Acessos por IP",
       "module": "Controle de Acesso",
-      "title": "Restrição de Acesso por IP",
       "keywords": [
-        "ip",
-        "restrição",
-        "bloquear ip",
-        "liberar ip",
-        "segurança",
-        "acesso restrito"
+        "acessos por ip",
+        "acessos",
+        "restri",
+        "acesso",
+        "endere",
+        "acessar",
+        "navegacao",
+        "usuario",
+        "permissao",
+        "perfil"
       ],
-      "path": "Menu lateral → Controle de Acesso → Acessos por IP",
-      "content": "A funcionalidade de Acessos por IP permite restringir o acesso ao sistema baseado no endereço IP. Crie regras de 'Permitir' (whitelist) ou 'Bloquear' (blacklist) para IPs específicos. Útil para garantir acesso apenas da rede corporativa ou bloquear IPs suspeitos.",
-      "steps": [
-        "Acesse Controle de Acesso → Acessos por IP",
-        "Clique em 'Novo' para adicionar uma regra",
-        "Informe o Endereço IP e selecione o Tipo: Permitir ou Bloquear",
-        "Opcionalmente vincule a um Usuário específico",
-        "Salve — a regra entra em vigor imediatamente"
-      ],
+      "content": "Restrição de acesso por endereço IP",
+      "steps": [],
+      "path": "%20acessos%20por%20ip.png)",
       "docUrl": "controle-acesso/acessos-por-ip",
       "related": [
-        "acesso-bloqueado",
+        "usuarios",
         "logs-acesso"
       ],
-      "dbTables": [
-        "TBAcessoPorIps"
-      ]
+      "dbTables": []
     },
     {
-      "id": "consulta-cronotacografo",
-      "module": "Cronotacógrafo",
-      "title": "Consultar Registros de Cronotacógrafo",
+      "id": "controle-acesso-logs-acesso",
+      "title": "Logs de Acesso",
+      "module": "Controle de Acesso",
       "keywords": [
-        "cronotacógrafo",
+        "logs de acesso",
+        "logs",
+        "acesso",
+        "registro",
+        "acessos",
+        "usuários",
+        "acessar",
+        "usuario",
+        "permissao",
+        "perfil"
+      ],
+      "content": "Registro de acessos e ações dos usuários",
+      "steps": [],
+      "path": "%20logs%20de%20acesso.png)",
+      "docUrl": "controle-acesso/logs-acesso",
+      "related": [
+        "usuarios",
+        "acessos-por-ip"
+      ],
+      "dbTables": []
+    },
+    {
+      "id": "controle-acesso-perfis-acesso",
+      "title": "Perfis de Acesso",
+      "module": "Controle de Acesso",
+      "keywords": [
+        "perfis de acesso",
+        "perfis",
+        "acesso",
+        "configura",
+        "sistema",
+        "acessar",
+        "cadastro",
+        "usuario",
+        "permissao",
+        "perfil"
+      ],
+      "content": "Configuração de perfis de acesso ao sistema",
+      "steps": [],
+      "path": "%20Perfil%20de%20acesso.png)",
+      "docUrl": "controle-acesso/perfis-acesso",
+      "related": [
+        "usuarios",
+        "permissoes"
+      ],
+      "dbTables": []
+    },
+    {
+      "id": "controle-acesso-permissoes",
+      "title": "Permissões de Acesso",
+      "module": "Controle de Acesso",
+      "keywords": [
+        "permissões de acesso",
+        "permissões",
+        "acesso",
+        "configura",
+        "granular",
+        "perfil",
+        "acessar",
+        "usuario",
+        "permissao"
+      ],
+      "content": "Configuração granular de permissões por perfil",
+      "steps": [],
+      "path": "%20permissao%20de%20acesso.png)",
+      "docUrl": "controle-acesso/permissoes",
+      "related": [
+        "perfis-acesso",
+        "usuarios"
+      ],
+      "dbTables": []
+    },
+    {
+      "id": "controle-acesso-usuarios",
+      "title": "Usuários",
+      "module": "Controle de Acesso",
+      "keywords": [
+        "usuários",
+        "usuarios",
+        "cadastro",
+        "gestão",
+        "sistema",
+        "acessar",
+        "usuário",
+        "usuario",
+        "permissao",
+        "perfil",
+        "acesso"
+      ],
+      "content": "Cadastro e gestão de usuários do sistema",
+      "steps": [],
+      "path": "%20usuario.png)",
+      "docUrl": "controle-acesso/usuarios",
+      "related": [
+        "perfis-acesso",
+        "permissoes",
+        "logs-acesso",
+        "acessos-por-ip"
+      ],
+      "dbTables": []
+    },
+    {
+      "id": "cronotacografo-consulta",
+      "title": "Consulta",
+      "module": "Cronotacógrafo",
+      "keywords": [
         "consulta",
-        "histórico",
-        "jornada motorista",
-        "velocidade",
-        "registro"
+        "registros",
+        "cronotacógrafo",
+        "acessar",
+        "navegacao",
+        "relacionada"
       ],
-      "path": "Menu lateral → Cronotacógrafo → Consulta",
-      "content": "A consulta de cronotacógrafo permite verificar o histórico de registros processados. Filtre por período, placa, equipamento e status. Os resultados mostram: Data/Hora, Veículo, Velocidade registrada e Resultado da análise.",
-      "steps": [
-        "Acesse Cronotacógrafo → Consulta",
-        "Defina os filtros: Período, Placa e/ou Equipamento",
-        "Clique em Pesquisar",
-        "Analise os resultados: Data/Hora, Velocidade, Resultado"
-      ],
+      "content": "Consulta de registros de cronotacógrafo",
+      "steps": [],
+      "path": "Consulta",
       "docUrl": "cronotacografo/consulta",
       "related": [
-        "cronotacografo"
+        "triagem",
+        "glossario-cronotacografo"
       ],
-      "dbTables": [
-        "TBDadosCronotacografos"
-      ]
+      "dbTables": []
     },
     {
-      "id": "eventos-equipamentos",
-      "module": "Operações",
-      "title": "Eventos de Equipamentos",
+      "id": "cronotacografo-triagem",
+      "title": "Triagem",
+      "module": "Cronotacógrafo",
       "keywords": [
-        "evento",
-        "ocorrência",
-        "falha equipamento",
-        "manutenção",
-        "vandalismo",
-        "registro evento",
-        "histórico equipamento"
+        "triagem",
+        "infra",
+        "cronotacógrafo",
+        "acessar",
+        "fluxo",
+        "dados"
       ],
-      "path": "Menu lateral → Operações → Eventos de Equipamentos",
-      "content": "A tela de Eventos permite registrar e consultar ocorrências dos equipamentos: falhas, manutenções, vandalismo, troca de componentes, interrupções. Cada evento registra: Equipamento, Tipo (Falha, Manutenção etc.), Data/Hora, Descrição e Responsável. Essencial para manter histórico e justificar períodos sem operação nas medições.",
+      "content": "Triagem de infrações de cronotacógrafo",
+      "steps": [],
+      "path": "Triagem",
+      "docUrl": "cronotacografo/triagem",
+      "related": [
+        "consulta",
+        "glossario-cronotacografo"
+      ],
+      "dbTables": []
+    },
+    {
+      "id": "glossario-afericao",
+      "title": "Afericao",
+      "module": "Glossário",
+      "keywords": [
+        "afericao",
+        "title",
+        "sidebar_position",
+        "definicao",
+        "base",
+        "legal",
+        "glossario",
+        "termo",
+        "conceito"
+      ],
+      "content": "--- title: \"Afericao\" sidebar_position: 3",
+      "steps": [],
+      "path": "Menu lateral → Glossário → Afericao",
+      "docUrl": "glossario/afericao",
+      "related": [],
+      "dbTables": []
+    },
+    {
+      "id": "glossario-autuacao",
+      "title": "Autuacao",
+      "module": "Glossário",
+      "keywords": [
+        "autuacao",
+        "title",
+        "sidebar_position",
+        "definicao",
+        "base",
+        "legal",
+        "glossario",
+        "termo",
+        "conceito"
+      ],
+      "content": "--- title: \"Autuacao\" sidebar_position: 4",
+      "steps": [],
+      "path": "Menu lateral → Glossário → Autuacao",
+      "docUrl": "glossario/autuacao",
+      "related": [],
+      "dbTables": []
+    },
+    {
+      "id": "glossario-cronotacografo",
+      "title": "Cronotacografo",
+      "module": "Glossário",
+      "keywords": [
+        "cronotacografo",
+        "title",
+        "sidebar_position",
+        "definicao",
+        "base",
+        "legal",
+        "glossario",
+        "termo",
+        "conceito"
+      ],
+      "content": "--- title: \"Cronotacografo\" sidebar_position: 5",
+      "steps": [],
+      "path": "Menu lateral → Glossário → Cronotacografo",
+      "docUrl": "glossario/cronotacografo",
+      "related": [],
+      "dbTables": []
+    },
+    {
+      "id": "glossario-enquadramento",
+      "title": "Enquadramento",
+      "module": "Glossário",
+      "keywords": [
+        "enquadramento",
+        "title",
+        "sidebar_position",
+        "definicao",
+        "base",
+        "legal",
+        "glossario",
+        "termo",
+        "conceito"
+      ],
+      "content": "--- title: \"Enquadramento\" sidebar_position: 1",
+      "steps": [],
+      "path": "Menu lateral → Glossário → Enquadramento",
+      "docUrl": "glossario/enquadramento",
+      "related": [],
+      "dbTables": []
+    },
+    {
+      "id": "glossario-infracao",
+      "title": "Infracao de Transito",
+      "module": "Glossário",
+      "keywords": [
+        "infracao de transito",
+        "infracao",
+        "transito",
+        "title",
+        "sidebar_position",
+        "definicao",
+        "base",
+        "glossario",
+        "termo",
+        "conceito"
+      ],
+      "content": "--- title: \"Infracao de Transito\" sidebar_position: 2",
+      "steps": [],
+      "path": "Menu lateral → Glossário → Infracao de Transito",
+      "docUrl": "glossario/infracao",
+      "related": [],
+      "dbTables": []
+    },
+    {
+      "id": "glossario-lote-exportacao",
+      "title": "Lote de Exportacao",
+      "module": "Glossário",
+      "keywords": [
+        "lote de exportacao",
+        "lote",
+        "exportacao",
+        "title",
+        "sidebar_position",
+        "definicao",
+        "base",
+        "glossario",
+        "termo",
+        "conceito"
+      ],
+      "content": "--- title: \"Lote de Exportacao\" sidebar_position: 6",
+      "steps": [],
+      "path": "Menu lateral → Glossário → Lote de Exportacao",
+      "docUrl": "glossario/lote-exportacao",
+      "related": [],
+      "dbTables": []
+    },
+    {
+      "id": "glossario-medicao-desempenho",
+      "title": "Medicao de Desempenho",
+      "module": "Glossário",
+      "keywords": [
+        "medicao de desempenho",
+        "medicao",
+        "desempenho",
+        "title",
+        "sidebar_position",
+        "definicao",
+        "base",
+        "glossario",
+        "termo",
+        "conceito"
+      ],
+      "content": "--- title: \"Medicao de Desempenho\" sidebar_position: 7",
+      "steps": [],
+      "path": "Menu lateral → Glossário → Medicao de Desempenho",
+      "docUrl": "glossario/medicao-desempenho",
+      "related": [],
+      "dbTables": []
+    },
+    {
+      "id": "glossario-triagem",
+      "title": "Triagem",
+      "module": "Glossário",
+      "keywords": [
+        "triagem",
+        "title",
+        "sidebar_position",
+        "definicao",
+        "base",
+        "legal",
+        "glossario",
+        "termo",
+        "conceito"
+      ],
+      "content": "--- title: \"Triagem\" sidebar_position: 8",
+      "steps": [],
+      "path": "Menu lateral → Glossário → Triagem",
+      "docUrl": "glossario/triagem",
+      "related": [],
+      "dbTables": []
+    },
+    {
+      "id": "infracoes-auditoria",
+      "title": "Auditoria",
+      "module": "Infrações",
+      "keywords": [
+        "auditoria",
+        "infra",
+        "validadas",
+        "descartadas",
+        "triagem",
+        "acessar",
+        "infracao",
+        "multa",
+        "auto",
+        "autuacao"
+      ],
+      "content": "Auditoria de infrações validadas e descartadas na triagem",
       "steps": [
-        "Acesse Operações → Eventos de Equipamentos",
-        "Filtre por equipamento e/ou período",
-        "Para registrar: clique em 'Novo'",
-        "Selecione Equipamento, Tipo de Evento, Data/Hora",
-        "Preencha Descrição detalhada e Responsável",
-        "Salve — o registro fica vinculado ao equipamento"
+        "O sistema apresenta a infração com todas as imagens e dados da triagem",
+        "O auditor analisa e decide:",
+        "O contador de tempo controla a produtividade (configurado em **Configurações do Sistema → aba Triagem**)",
+        "O status é atualizado automaticamente após cada decisão"
       ],
+      "path": "Auditoria",
+      "docUrl": "infracoes/auditoria",
+      "related": [
+        "triagem",
+        "exportacao",
+        "consulta-infracoes",
+        "glossario-autuacao",
+        "glossario-infracao"
+      ],
+      "dbTables": []
+    },
+    {
+      "id": "infracoes-como-auditar-infracoes",
+      "title": "Como Auditar Infracoes",
+      "module": "Infrações",
+      "keywords": [
+        "como auditar infracoes",
+        "auditar",
+        "infracoes",
+        "guia",
+        "analitico",
+        "axhub",
+        "acessar",
+        "infracao",
+        "multa",
+        "auto",
+        "autuacao"
+      ],
+      "content": "Guia Analitico - Como Auditar Infracoes no AxHub",
+      "steps": [],
+      "path": "Menu lateral → Infrações → Como Auditar Infracoes",
+      "docUrl": "infracoes/como-auditar-infracoes",
+      "related": [],
+      "dbTables": []
+    },
+    {
+      "id": "infracoes-consulta-infracoes",
+      "title": "Consulta de Infrações",
+      "module": "Infrações",
+      "keywords": [
+        "consulta de infrações",
+        "consulta de infracoes",
+        "consulta",
+        "infra",
+        "consultar",
+        "processadas",
+        "sistema",
+        "acessar",
+        "infracao",
+        "multa",
+        "auto",
+        "autuacao"
+      ],
+      "content": "Consultar infrações processadas no sistema",
+      "steps": [],
+      "path": "Consulta",
+      "docUrl": "infracoes/consulta-infracoes",
+      "related": [
+        "triagem",
+        "auditoria",
+        "exportacao",
+        "infracoes-descartadas",
+        "glossario-infracao"
+      ],
+      "dbTables": []
+    },
+    {
+      "id": "infracoes-excecoes",
+      "title": "Exceções",
+      "module": "Infrações",
+      "keywords": [
+        "exceções",
+        "excecoes",
+        "exce",
+        "gerenciamento",
+        "regras",
+        "infra",
+        "acessar",
+        "tipos",
+        "infracao",
+        "multa",
+        "auto",
+        "autuacao"
+      ],
+      "content": "Gerenciamento de regras de exceção para infrações",
+      "steps": [],
+      "path": "Exceções",
+      "docUrl": "infracoes/excecoes",
+      "related": [
+        "triagem",
+        "auditoria",
+        "glossario-enquadramento"
+      ],
+      "dbTables": []
+    },
+    {
+      "id": "infracoes-exportacao",
+      "title": "Exportação",
+      "module": "Infrações",
+      "keywords": [
+        "exportação",
+        "exportacao",
+        "exporta",
+        "infra",
+        "validadas",
+        "órgãos",
+        "autuadores",
+        "acessar",
+        "infracao",
+        "multa",
+        "auto",
+        "autuacao"
+      ],
+      "content": "Exportação de infrações validadas para órgãos autuadores",
+      "steps": [
+        "Acesse **Infrações → Exportação**",
+        "Configure o lote:",
+        "Clique em **Gerar lote** — o sistema valida os dados, gera o arquivo e cria o hash de assinatura digital",
+        "Clique em **Enviar lote** via SFTP/API ou faça o download para envio manual"
+      ],
+      "path": "Exportação",
+      "docUrl": "infracoes/exportacao",
+      "related": [
+        "auditoria",
+        "administracao-layouts-arquivos",
+        "administracao-sequenciais-lote-exportacao",
+        "glossario-lote-exportacao",
+        "glossario-autuacao"
+      ],
+      "dbTables": []
+    },
+    {
+      "id": "infracoes-guia-completo-infracoes",
+      "title": "Guia Completo: Processo de Infração",
+      "module": "Infrações",
+      "keywords": [
+        "guia completo: processo de infração",
+        "guia completo: processo de infracao",
+        "guia",
+        "completo",
+        "processo",
+        "infra",
+        "passo",
+        "fluxo",
+        "infracao",
+        "multa",
+        "auto",
+        "autuacao"
+      ],
+      "content": "Passo a passo completo do fluxo de infrações no AxHub — da captura à exportação",
+      "steps": [
+        "✅ Verifica se a placa é válida e legível",
+        "✅ Confere se as imagens estão em qualidade adequada",
+        "✅ Valida dados de local e equipamento",
+        "✅ Confirma o enquadramento legal correto",
+        "✅ Verifica assinaturas digitais de triagem e auditoria",
+        "✅ Checa se não há infrações duplicadas no lote",
+        "✅ Confirma que o prazo legal não foi ultrapassado"
+      ],
+      "path": "Triagem",
+      "docUrl": "infracoes/guia-completo-infracoes",
+      "related": [],
+      "dbTables": []
+    },
+    {
+      "id": "infracoes-infracoes-descartadas",
+      "title": "Infrações Descartadas",
+      "module": "Infrações",
+      "keywords": [
+        "infrações descartadas",
+        "infracoes descartadas",
+        "infra",
+        "descartadas",
+        "consulta",
+        "revisão",
+        "processamento",
+        "acessar",
+        "infracao",
+        "multa",
+        "auto",
+        "autuacao"
+      ],
+      "content": "Consulta e revisão de infrações descartadas no processamento",
+      "steps": [],
+      "path": "Infrações Descartadas",
+      "docUrl": "infracoes/infracoes-descartadas",
+      "related": [
+        "triagem",
+        "administracao-motivos-descartes",
+        "glossario-infracao"
+      ],
+      "dbTables": []
+    },
+    {
+      "id": "infracoes-manual-triagem",
+      "title": "Manual de Triagem",
+      "module": "Infrações",
+      "keywords": [
+        "manual de triagem",
+        "manual",
+        "triagem",
+        "completo",
+        "visual",
+        "analistas",
+        "realizarem",
+        "infracao",
+        "multa",
+        "auto",
+        "autuacao"
+      ],
+      "content": "Manual completo e visual para analistas realizarem triagem de infrações no AxHub — passo a passo ilustrado com imagens de cada etapa",
+      "steps": [
+        "Compare com a placa registrada no sistema",
+        "Se a discrepância for de apenas 1 caractere e o restante bate, **valide** e registre observação",
+        "Se a placa não pode ser confirmada com segurança, **descarte** com motivo \"Placa ilegível\"",
+        "Verifique duplo: a operação e os limites configurados para aquela faixa",
+        "Se a operação e os dados estiverem corretos no sistema, **valide** normalmente",
+        "Se houver suspeita de erro de equipamento, **descarte** com motivo \"Velocidade incoerente\" e **reporte ao supervisor**",
+        "Verifique se há placa de exceção cadastrada para este veículo",
+        "**Não descarte manualmente** — acione o supervisor para cadastrar a exceção corretamente",
+        "Enquanto aguarda, **valide temporariamente** para não perder o registro",
+        "Identifique qual veículo ativou o sensor (geralmente o mais próximo do equipamento)"
+      ],
+      "path": "principal.png)",
+      "docUrl": "infracoes/manual-triagem",
+      "related": [],
+      "dbTables": []
+    },
+    {
+      "id": "infracoes-triagem",
+      "title": "Triagem",
+      "module": "Infrações",
+      "keywords": [
+        "triagem",
+        "revisão",
+        "valida",
+        "infra",
+        "acessar",
+        "tela",
+        "infracao",
+        "multa",
+        "auto",
+        "autuacao"
+      ],
+      "content": "Revisão e validação de infrações",
+      "steps": [],
+      "path": "Triagem",
+      "docUrl": "infracoes/triagem",
+      "related": [
+        "excecoes",
+        "auditoria",
+        "administracao-motivos-descartes",
+        "administracao-configuracoes-enquadramento",
+        "administracao-enquadramentos"
+      ],
+      "dbTables": []
+    },
+    {
+      "id": "medicoes-contratos",
+      "title": "Contratos",
+      "module": "Medições",
+      "keywords": [
+        "contratos",
+        "cadastro",
+        "gestão",
+        "medi",
+        "acessar",
+        "contrato",
+        "medicao",
+        "aferição",
+        "sensor",
+        "calibrar"
+      ],
+      "content": "Cadastro e gestão de contratos de medição",
+      "steps": [],
+      "path": "Contratos",
+      "docUrl": "medicoes/contratos",
+      "related": [
+        "indices-performance",
+        "recursos",
+        "criar-medicao",
+        "interrupcoes",
+        "glossario-medicao-desempenho"
+      ],
+      "dbTables": []
+    },
+    {
+      "id": "medicoes-criar-medicao",
+      "title": "Criar Medição",
+      "module": "Medições",
+      "keywords": [
+        "criar medição",
+        "criar medicao",
+        "criar",
+        "medi",
+        "cria",
+        "nova",
+        "contratual",
+        "acessar",
+        "medicao",
+        "aferição",
+        "sensor",
+        "calibrar"
+      ],
+      "content": "Criação de nova medição contratual",
+      "steps": [
+        "Selecione o contrato e período",
+        "O sistema calcula automaticamente os índices",
+        "Revise os valores e interrupções",
+        "Finalize a medição para aprovação"
+      ],
+      "path": "Nova Medição",
+      "docUrl": "medicoes/criar-medicao",
+      "related": [
+        "contratos",
+        "medicoes-finalizadas",
+        "glossario-medicao-desempenho"
+      ],
+      "dbTables": []
+    },
+    {
+      "id": "medicoes-indices-performance",
+      "title": "Índices de Performance",
+      "module": "Medições",
+      "keywords": [
+        "índices de performance",
+        "indices de performance",
+        "índices",
+        "performance",
+        "configura",
+        "contratual",
+        "acessar",
+        "cadastro",
+        "medicao",
+        "aferição",
+        "sensor",
+        "calibrar"
+      ],
+      "content": "Configuração de índices de performance contratual",
+      "steps": [],
+      "path": "Índices de Performance",
+      "docUrl": "medicoes/indices-performance",
+      "related": [
+        "contratos",
+        "criar-medicao"
+      ],
+      "dbTables": []
+    },
+    {
+      "id": "medicoes-interrupcoes",
+      "title": "Interrupções",
+      "module": "Medições",
+      "keywords": [
+        "interrupções",
+        "interrupcoes",
+        "interrup",
+        "registro",
+        "processamento",
+        "contratuais",
+        "acessar",
+        "cadastro",
+        "medicao",
+        "aferição",
+        "sensor",
+        "calibrar"
+      ],
+      "content": "Registro e processamento de interrupções contratuais",
+      "steps": [],
+      "path": "Interrupções",
+      "docUrl": "medicoes/interrupcoes",
+      "related": [
+        "contratos",
+        "criar-medicao"
+      ],
+      "dbTables": []
+    },
+    {
+      "id": "medicoes-medicoes-finalizadas",
+      "title": "Medições Finalizadas",
+      "module": "Medições",
+      "keywords": [
+        "medições finalizadas",
+        "medicoes finalizadas",
+        "medi",
+        "finalizadas",
+        "consulta",
+        "contratuais",
+        "acessar",
+        "navegacao",
+        "medicao",
+        "aferição",
+        "sensor",
+        "calibrar"
+      ],
+      "content": "Consulta de medições contratuais já finalizadas",
+      "steps": [],
+      "path": "Medições Finalizadas",
+      "docUrl": "medicoes/medicoes-finalizadas",
+      "related": [
+        "criar-medicao",
+        "contratos"
+      ],
+      "dbTables": []
+    },
+    {
+      "id": "medicoes-recursos",
+      "title": "Recursos",
+      "module": "Medições",
+      "keywords": [
+        "recursos",
+        "gestão",
+        "vinculados",
+        "medi",
+        "acessar",
+        "cadastro",
+        "medicao",
+        "aferição",
+        "sensor",
+        "calibrar"
+      ],
+      "content": "Gestão de recursos vinculados a medições",
+      "steps": [],
+      "path": "Recursos",
+      "docUrl": "medicoes/recursos",
+      "related": [
+        "contratos",
+        "cadastros-basicos-equipamentos"
+      ],
+      "dbTables": []
+    },
+    {
+      "id": "operacoes-afericoes",
+      "title": "Afericoes",
+      "module": "Operações",
+      "keywords": [
+        "afericoes",
+        "sidebar_position",
+        "title",
+        "acessar",
+        "listagem",
+        "cadastro",
+        "operacao",
+        "equipamento",
+        "faixa",
+        "radar"
+      ],
+      "content": "--- sidebar_position: 2 title: Afericoes",
+      "steps": [],
+      "path": "Afericoes",
+      "docUrl": "operacoes/afericoes",
+      "related": [
+        "cadastros-basicos-equipamentos",
+        "cadastro-operacoes"
+      ],
+      "dbTables": []
+    },
+    {
+      "id": "operacoes-cadastro-operacoes",
+      "title": "Cadastro de Operacoes",
+      "module": "Operações",
+      "keywords": [
+        "cadastro de operacoes",
+        "cadastro",
+        "operacoes",
+        "sidebar_position",
+        "title",
+        "acessar",
+        "listagem",
+        "operacao",
+        "equipamento",
+        "faixa",
+        "radar"
+      ],
+      "content": "--- sidebar_position: 1 title: Cadastro de Operacoes",
+      "steps": [],
+      "path": "Cadastro de Operacoes",
+      "docUrl": "operacoes/cadastro-operacoes",
+      "related": [
+        "administracao-arcos",
+        "afericoes"
+      ],
+      "dbTables": []
+    },
+    {
+      "id": "operacoes-consulta-placas",
+      "title": "Consulta de Placas",
+      "module": "Operações",
+      "keywords": [
+        "consulta de placas",
+        "consulta",
+        "placas",
+        "passagens",
+        "veículos",
+        "placa",
+        "acessar",
+        "operacao",
+        "equipamento",
+        "faixa",
+        "radar"
+      ],
+      "content": "Consulta de passagens de veículos por placa",
+      "steps": [],
+      "path": "Consulta de Placas",
+      "docUrl": "operacoes/consulta-placas",
+      "related": [
+        "infracoes-consulta-infracoes",
+        "monitoramento-online"
+      ],
+      "dbTables": []
+    },
+    {
+      "id": "operacoes-eventos-equipamentos",
+      "title": "Eventos de Equipamentos",
+      "module": "Operações",
+      "keywords": [
+        "eventos de equipamentos",
+        "eventos",
+        "equipamentos",
+        "registro",
+        "ocorrências",
+        "acessar",
+        "cadastro",
+        "operacao",
+        "equipamento",
+        "faixa",
+        "radar"
+      ],
+      "content": "Registro de eventos e ocorrências dos equipamentos",
+      "steps": [],
+      "path": "Eventos de Equipamentos",
       "docUrl": "operacoes/eventos-equipamentos",
       "related": [
         "monitoramento-online",
-        "equipamento-offline"
+        "cadastros-basicos-equipamentos",
+        "relatorios-eventos-equipamentos"
       ],
-      "dbTables": [
-        "TBEventosEquipamentos"
-      ]
+      "dbTables": []
     },
     {
-      "id": "contratos-medicao",
-      "module": "Medição",
-      "title": "Contratos de Medição",
+      "id": "operacoes-faixas",
+      "title": "Faixas",
+      "module": "Operações",
       "keywords": [
-        "contrato",
-        "medição",
-        "órgão",
-        "vigência",
-        "cadastro contrato",
-        "vincular equipamento"
+        "faixas",
+        "configura",
+        "fiscaliza",
+        "opera",
+        "acessar",
+        "cadastro",
+        "operacao",
+        "equipamento",
+        "faixa",
+        "radar"
       ],
-      "path": "Menu lateral → Medição → Contratos",
-      "content": "Os Contratos vinculam operações de fiscalização aos termos contratuais com o órgão autuador. Cada contrato possui: Número, Órgão contratante, Vigência (Início/Fim), Equipamentos vinculados e Status (Ativo, Encerrado, Suspenso). São a base para gerar medições de desempenho e calcular índices de performance.",
-      "steps": [
-        "Acesse Medição → Contratos",
-        "Clique em 'Novo' para cadastrar um contrato",
-        "Preencha: Número, Órgão, Data de Início e Fim",
-        "Vincule os equipamentos do contrato",
-        "Defina os índices de performance exigidos",
-        "Salve o contrato"
-      ],
-      "docUrl": "medicoes/contratos",
+      "content": "Configuração de faixas de fiscalização por operação",
+      "steps": [],
+      "path": "Faixas",
+      "docUrl": "operacoes/faixas",
       "related": [
-        "gerar-medicao",
-        "indices-performance"
+        "cadastro-operacoes",
+        "cadastros-basicos-equipamentos"
       ],
-      "dbTables": [
-        "TBContratos",
-        "TBContratosFaixas",
-        "TBAjustesContratuais"
-      ]
+      "dbTables": []
     },
     {
-      "id": "indices-performance",
-      "module": "Medição",
-      "title": "Índices de Performance",
+      "id": "operacoes-monitoramento-online",
+      "title": "Monitoramento Online",
+      "module": "Operações",
       "keywords": [
-        "índice",
-        "performance",
-        "disponibilidade",
-        "uptime",
-        "meta",
-        "indicador",
-        "KPI"
+        "monitoramento online",
+        "monitoramento",
+        "online",
+        "tempo",
+        "real",
+        "equipamentos",
+        "acessar",
+        "operacao",
+        "equipamento",
+        "faixa",
+        "radar"
       ],
-      "path": "Menu lateral → Medição → Índices de Performance",
-      "content": "Os Índices de Performance definem metas contratuais: Disponibilidade (percentual de tempo operacional), Uptime (tempo efetivo de operação). Cada índice possui: Contrato vinculado, Indicador, Meta (%) e Fórmula. O AxHub calcula automaticamente com base nos dados operacionais dos equipamentos.",
-      "steps": [
-        "Acesse Medição → Índices de Performance",
-        "Selecione o contrato para ver os índices",
-        "Para adicionar: clique em 'Novo', selecione Contrato e Indicador",
-        "Configure a Meta percentual",
-        "O sistema calcula automaticamente"
-      ],
-      "docUrl": "medicoes/indices-performance",
+      "content": "Monitoramento em tempo real dos equipamentos",
+      "steps": [],
+      "path": "Monitoramento Online",
+      "docUrl": "operacoes/monitoramento-online",
       "related": [
-        "contratos-medicao",
-        "gerar-medicao"
+        "eventos-equipamentos",
+        "primeiros-passos-dashboard",
+        "consulta-placas"
       ],
-      "dbTables": [
-        "TBIndicesPerformances"
-      ]
+      "dbTables": []
     },
     {
-      "id": "postos-pesagem",
-      "module": "Balança",
-      "title": "Postos de Pesagem",
-      "keywords": [
-        "posto",
-        "pesagem",
-        "balança",
-        "localização",
-        "estática",
-        "dinâmica"
-      ],
-      "path": "Menu lateral → Balança → Postos",
-      "content": "Postos de Pesagem são os locais físicos onde veículos são pesados. Cada posto possui: Nome, Localização, Tipo de Balança (Estática ou Dinâmica) e Status. O cadastro é pré-requisito para registrar tickets de pesagem.",
-      "steps": [
-        "Acesse Balança → Postos",
-        "Clique em 'Novo' para cadastrar um posto",
-        "Preencha Nome, Localização e Tipo de Balança",
-        "Marque como Ativo e salve"
-      ],
-      "docUrl": "pesagem/postos",
-      "related": [
-        "ticket-pesagem",
-        "liberar-tickets-pesagem"
-      ],
-      "dbTables": [
-        "TBDadosPesagens"
-      ]
-    },
-    {
-      "id": "liberar-tickets-pesagem",
-      "module": "Balança",
+      "id": "pesagem-liberar-pesagem",
       "title": "Liberar Tickets para Pesagem",
+      "module": "Pesagem",
       "keywords": [
+        "liberar tickets para pesagem",
         "liberar",
-        "ticket",
-        "repesagem",
-        "nova pesagem"
+        "tickets",
+        "pesagem",
+        "libera",
+        "nova",
+        "acessar",
+        "peso",
+        "veiculo",
+        "balanca"
       ],
-      "path": "Menu lateral → Balança → Liberar Tickets",
-      "content": "Permite autorizar nova pesagem quando: pesagem anterior teve problema técnico, veículo precisa ser repesado após descarga parcial, ou houve contestação do resultado.",
-      "steps": [
-        "Acesse Balança → Liberar Tickets",
-        "Informe o Número do Ticket a ser liberado",
-        "Selecione o Motivo da liberação",
-        "Confirme — veículo poderá ser pesado novamente"
-      ],
+      "content": "Liberação de tickets para nova pesagem",
+      "steps": [],
+      "path": "Liberar Tickets para Pesagem",
       "docUrl": "pesagem/liberar-pesagem",
       "related": [
-        "tickets-abertos-pesagem",
-        "ticket-pesagem"
+        "ticket-aberto",
+        "postos"
       ],
-      "dbTables": [
-        "TBDadosPesagens"
-      ]
+      "dbTables": []
     },
     {
-      "id": "tickets-abertos-pesagem",
-      "module": "Balança",
-      "title": "Tickets de Pesagem Abertos",
+      "id": "pesagem-motivos",
+      "title": "Motivos",
+      "module": "Pesagem",
       "keywords": [
-        "ticket aberto",
-        "pesagem pendente",
-        "aguardando",
-        "veículo na balança"
+        "motivos",
+        "cadastro",
+        "pesagem",
+        "libera",
+        "acessar",
+        "motivo",
+        "peso",
+        "veiculo",
+        "balanca"
       ],
-      "path": "Menu lateral → Balança → Tickets Abertos",
-      "content": "Exibe tickets de pesagem não finalizados. Cada ticket mostra: Número, Placa, Data/Hora, Peso Bruto e Status. Tickets abertos há muito tempo podem indicar problemas no processo de pesagem.",
-      "steps": [
-        "Acesse Balança → Tickets Abertos",
-        "Visualize tickets pendentes",
-        "Clique em um ticket para ver detalhes e finalizar",
-        "Se preso: verifique balança e conexão do sistema"
+      "content": "Cadastro de motivos para pesagem e liberação",
+      "steps": [],
+      "path": "Motivos",
+      "docUrl": "pesagem/motivos",
+      "related": [
+        "reclassificar",
+        "postos"
       ],
+      "dbTables": []
+    },
+    {
+      "id": "pesagem-postos",
+      "title": "Postos de Pesagem",
+      "module": "Pesagem",
+      "keywords": [
+        "postos de pesagem",
+        "postos",
+        "pesagem",
+        "cadastro",
+        "gestão",
+        "veicular",
+        "acessar",
+        "peso",
+        "veiculo",
+        "balanca"
+      ],
+      "content": "Cadastro e gestão dos postos de pesagem veicular",
+      "steps": [],
+      "path": "Postos",
+      "docUrl": "pesagem/postos",
+      "related": [
+        "ticket-aberto",
+        "ticket-fechado",
+        "motivos"
+      ],
+      "dbTables": []
+    },
+    {
+      "id": "pesagem-reclassificar",
+      "title": "Reclassificar",
+      "module": "Pesagem",
+      "keywords": [
+        "reclassificar",
+        "reclassifica",
+        "veículos",
+        "pesados",
+        "acessar",
+        "navegacao",
+        "pesagem",
+        "peso",
+        "veiculo",
+        "balanca"
+      ],
+      "content": "Reclassificação de veículos pesados",
+      "steps": [],
+      "path": "Reclassificar",
+      "docUrl": "pesagem/reclassificar",
+      "related": [
+        "ticket-fechado",
+        "motivos"
+      ],
+      "dbTables": []
+    },
+    {
+      "id": "pesagem-ticket-aberto",
+      "title": "Tickets Abertos",
+      "module": "Pesagem",
+      "keywords": [
+        "tickets abertos",
+        "tickets",
+        "abertos",
+        "consulta",
+        "pesagem",
+        "aberto",
+        "acessar",
+        "peso",
+        "veiculo",
+        "balanca"
+      ],
+      "content": "Consulta de tickets de pesagem em aberto",
+      "steps": [],
+      "path": "Tickets Abertos",
       "docUrl": "pesagem/ticket-aberto",
       "related": [
-        "ticket-pesagem",
-        "liberar-tickets-pesagem"
+        "postos",
+        "ticket-fechado",
+        "liberar-pesagem"
       ],
-      "dbTables": [
-        "TBDadosPesagens"
-      ]
+      "dbTables": []
     },
     {
-      "id": "relatorio-infracoes",
-      "module": "Relatórios",
-      "title": "Relatório de Infrações",
+      "id": "pesagem-ticket-fechado",
+      "title": "Tickets Fechados",
+      "module": "Pesagem",
       "keywords": [
-        "relatório infrações",
-        "infrações processadas",
-        "exportadas",
-        "descartadas",
-        "por período",
-        "por equipamento"
+        "tickets fechados",
+        "tickets",
+        "fechados",
+        "consulta",
+        "pesagem",
+        "finalizados",
+        "acessar",
+        "peso",
+        "veiculo",
+        "balanca"
       ],
-      "path": "Menu lateral → Relatórios → Relatório de Infrações",
-      "content": "Gera relatórios detalhados das infrações processadas. Filtre por: Período, Equipamento, Enquadramento e Status (Processada, Descartada, Exportada). Útil para acompanhar produção diária, volume de descartes e análise por tipo de enquadramento.",
-      "steps": [
-        "Acesse Relatórios → Relatório de Infrações",
-        "Defina o período desejado",
-        "Selecione equipamento e/ou status",
-        "Clique em 'Emitir Relatório'"
-      ],
-      "docUrl": "relatorios/relatorio-infracoes",
+      "content": "Consulta de tickets de pesagem finalizados",
+      "steps": [],
+      "path": "Tickets Fechados",
+      "docUrl": "pesagem/ticket-fechado",
       "related": [
-        "consulta-infracoes",
-        "exportar-infracoes",
-        "power-bi"
+        "ticket-aberto",
+        "reclassificar"
       ],
-      "dbTables": [
-        "TBInfracoes"
-      ]
+      "dbTables": []
     },
     {
-      "id": "relatorio-passagens",
-      "module": "Relatórios",
-      "title": "Relatório de Passagens",
+      "id": "primeiros-passos-dashboard",
+      "title": "Dashboard",
+      "module": "Primeiros Passos",
       "keywords": [
-        "relatório passagens",
-        "passagens veículos",
-        "volume passagens",
-        "por faixa",
-        "por placa"
+        "dashboard",
+        "sidebar_position",
+        "title",
+        "acessar",
+        "visao",
+        "geral",
+        "login",
+        "acesso",
+        "senha",
+        "entrar"
       ],
-      "path": "Menu lateral → Relatórios → Relatório de Passagens",
-      "content": "Visualiza todas as passagens de veículos registradas. Filtre por: Período, Equipamento, Faixa e Placa. Diferente do Relatório de Infrações, este inclui TODAS as passagens — com ou sem infração.",
-      "steps": [
-        "Acesse Relatórios → Relatório de Passagens",
-        "Defina Período e Equipamento",
-        "Opcionalmente filtre por Faixa ou Placa",
-        "Clique em 'Emitir Relatório'"
-      ],
-      "docUrl": "relatorios/relatorio-passagens",
+      "content": "--- sidebar_position: 2 title: Dashboard",
+      "steps": [],
+      "path": "Menu lateral → Primeiros Passos → Dashboard",
+      "docUrl": "primeiros-passos/dashboard",
       "related": [
-        "consulta-placas",
-        "relatorio-infracoes"
+        "login",
+        "navegacao"
       ],
-      "dbTables": [
-        "TBImagemPassagens"
-      ]
+      "dbTables": []
     },
     {
-      "id": "processamento-imagens",
-      "module": "Relatórios",
-      "title": "Relatório de Processamento de Imagens",
+      "id": "primeiros-passos-login",
+      "title": "Login",
+      "module": "Primeiros Passos",
       "keywords": [
+        "login",
+        "sidebar_position",
+        "title",
+        "tela",
+        "acessando",
+        "sistema",
+        "acesso",
+        "senha",
+        "entrar"
+      ],
+      "content": "--- sidebar_position: 1 title: Login",
+      "steps": [
+        "Abra o navegador e acesse o endereco do AxHub",
+        "Informe seu Login",
+        "Informe sua Senha",
+        "Clique em Entrar",
+        "Na tela de login clique em Esqueci minha senha",
+        "Informe o e-mail cadastrado",
+        "Acesse sua caixa de entrada e clique no link de redefinicao",
+        "Defina uma nova senha e confirme"
+      ],
+      "path": "Menu lateral → Primeiros Passos → Login",
+      "docUrl": "primeiros-passos/login",
+      "related": [
+        "dashboard"
+      ],
+      "dbTables": []
+    },
+    {
+      "id": "primeiros-passos-navegacao",
+      "title": "Navegacao",
+      "module": "Primeiros Passos",
+      "keywords": [
+        "navegacao",
+        "sidebar_position",
+        "title",
+        "mapa",
+        "online",
+        "estrutura",
+        "login",
+        "acesso",
+        "senha",
+        "entrar"
+      ],
+      "content": "--- sidebar_position: 3 title: Navegacao",
+      "steps": [],
+      "path": "menu lateral",
+      "docUrl": "primeiros-passos/navegacao",
+      "related": [
+        "dashboard",
+        "login"
+      ],
+      "dbTables": []
+    },
+    {
+      "id": "referencia-tecnica-banco-de-dados",
+      "title": "Banco de Dados",
+      "module": "Referência Técnica",
+      "keywords": [
+        "banco de dados",
+        "banco",
+        "dados",
+        "referência",
+        "técnica",
+        "principais",
+        "tabelas",
+        "api",
+        "integracao",
+        "tecnico",
+        "referencia"
+      ],
+      "content": "Referência técnica das principais tabelas SQL Server do AxHub",
+      "steps": [],
+      "path": "Menu lateral → Referência Técnica → Banco de Dados",
+      "docUrl": "referencia-tecnica/banco-de-dados",
+      "related": [],
+      "dbTables": []
+    },
+    {
+      "id": "referencia-tecnica-classificacao-veiculos-integracao",
+      "title": "Classificação de Veículos — Integração",
+      "module": "Referência Técnica",
+      "keywords": [
+        "classificação de veículos — integração",
+        "classificacao de veiculos — integracao",
+        "classifica",
+        "veículos",
+        "integra",
+        "referência",
+        "técnica",
+        "completa",
+        "api",
+        "integracao",
+        "tecnico",
+        "referencia"
+      ],
+      "content": "Referência técnica completa para integração e importação de dados de classificação de veículos no AxHub e AxCross",
+      "steps": [],
+      "path": "Classificações de Veículos",
+      "docUrl": "referencia-tecnica/classificacao-veiculos-integracao",
+      "related": [],
+      "dbTables": []
+    },
+    {
+      "id": "referencia-tecnica-consulta-automatica-veiculos",
+      "title": "Consulta Automática de Dados de Veículos",
+      "module": "Referência Técnica",
+      "keywords": [
+        "consulta automática de dados de veículos",
+        "consulta automatica de dados de veiculos",
+        "consulta",
+        "automática",
+        "dados",
+        "veículos",
+        "guia",
+        "completo",
+        "api",
+        "integracao",
+        "tecnico",
+        "referencia"
+      ],
+      "content": "Guia completo de integração — como o AxHub consulta e popula dados de veículos automaticamente via Web Service",
+      "steps": [],
+      "path": "Menu lateral → Referência Técnica → Consulta Automática de Dados de Veículos",
+      "docUrl": "referencia-tecnica/consulta-automatica-veiculos",
+      "related": [],
+      "dbTables": []
+    },
+    {
+      "id": "relatorios-eventos-equipamentos",
+      "title": "Relatório de Eventos dos Equipamentos",
+      "module": "Relatórios",
+      "keywords": [
+        "relatório de eventos dos equipamentos",
+        "relatorio de eventos dos equipamentos",
+        "relatório",
+        "eventos",
+        "equipamentos",
+        "ocorrências",
+        "acessar",
+        "navegacao",
+        "relatorio",
+        "exportar",
+        "consulta",
+        "dados"
+      ],
+      "content": "Relatório de eventos e ocorrências dos equipamentos",
+      "steps": [],
+      "path": "Eventos dos Equipamentos",
+      "docUrl": "relatorios/eventos-equipamentos",
+      "related": [
+        "operacoes-eventos-equipamentos",
+        "cadastros-basicos-equipamentos"
+      ],
+      "dbTables": []
+    },
+    {
+      "id": "relatorios-falhas-sequenciais",
+      "title": "Relatório de Falhas Sequenciais",
+      "module": "Relatórios",
+      "keywords": [
+        "relatório de falhas sequenciais",
+        "relatorio de falhas sequenciais",
+        "relatório",
+        "falhas",
+        "sequenciais",
+        "equipamentos",
+        "acessar",
+        "navegacao",
+        "relatorio",
+        "exportar",
+        "consulta",
+        "dados"
+      ],
+      "content": "Relatório de falhas sequenciais nos equipamentos",
+      "steps": [],
+      "path": "Falhas Sequenciais",
+      "docUrl": "relatorios/falhas-sequenciais",
+      "related": [
+        "administracao-sequenciais-infracoes"
+      ],
+      "dbTables": []
+    },
+    {
+      "id": "relatorios-fluxo-diario-veiculos",
+      "title": "Fluxo Diário de Veículos",
+      "module": "Relatórios",
+      "keywords": [
+        "fluxo diário de veículos",
+        "fluxo diario de veiculos",
+        "fluxo",
+        "diário",
+        "veículos",
+        "relatório",
+        "equipamento",
+        "acessar",
+        "relatorio",
+        "exportar",
+        "consulta",
+        "dados"
+      ],
+      "content": "Relatório de fluxo diário de veículos por equipamento",
+      "steps": [],
+      "path": "Fluxo Diário de Veículos",
+      "docUrl": "relatorios/fluxo-diario-veiculos",
+      "related": [
+        "operacoes-monitoramento-online",
+        "mapa-fluxo-passagens"
+      ],
+      "dbTables": []
+    },
+    {
+      "id": "relatorios-lote-importacao",
+      "title": "Lotes de Importação",
+      "module": "Relatórios",
+      "keywords": [
+        "lotes de importação",
+        "lotes de importacao",
+        "lotes",
+        "importa",
+        "consulta",
+        "dados",
+        "acessar",
+        "navegacao",
+        "relatorio",
+        "exportar"
+      ],
+      "content": "Consulta de lotes de importação de dados",
+      "steps": [],
+      "path": "Lotes de Importação",
+      "docUrl": "relatorios/lote-importacao",
+      "related": [
+        "cadastros-basicos-equipamentos"
+      ],
+      "dbTables": []
+    },
+    {
+      "id": "relatorios-mapa-fluxo-passagens",
+      "title": "Mapa de Fluxo de Passagens",
+      "module": "Relatórios",
+      "keywords": [
+        "mapa de fluxo de passagens",
+        "mapa",
+        "fluxo",
+        "passagens",
+        "visual",
+        "equipamento",
+        "acessar",
+        "relatorio",
+        "exportar",
+        "consulta",
+        "dados"
+      ],
+      "content": "Mapa visual do fluxo de passagens por equipamento",
+      "steps": [],
+      "path": "Mapa de Fluxo de Passagens",
+      "docUrl": "relatorios/mapa-fluxo-passagens",
+      "related": [
+        "fluxo-diario-veiculos",
+        "operacoes-monitoramento-online"
+      ],
+      "dbTables": []
+    },
+    {
+      "id": "relatorios-mapa-teste",
+      "title": "Mapa de Teste",
+      "module": "Relatórios",
+      "keywords": [
+        "mapa de teste",
+        "mapa",
+        "teste",
+        "relatório",
+        "testes",
+        "captura",
+        "equipamentos",
+        "relatorio",
+        "exportar",
+        "consulta",
+        "dados"
+      ],
+      "content": "Relatório de testes de captura dos equipamentos",
+      "steps": [],
+      "path": "Mapa de Teste",
+      "docUrl": "relatorios/mapa-teste",
+      "related": [],
+      "dbTables": []
+    },
+    {
+      "id": "relatorios-power-bi",
+      "title": "Relatórios Power BI",
+      "module": "Relatórios",
+      "keywords": [
+        "relatórios power bi",
+        "relatorios power bi",
+        "relatórios",
+        "power",
+        "dashboards",
+        "analíticos",
+        "acessar",
+        "disponíveis",
+        "relatorio",
+        "exportar",
+        "consulta",
+        "dados"
+      ],
+      "content": "Dashboards e relatórios analíticos via Power BI",
+      "steps": [],
+      "path": "Power BI",
+      "docUrl": "relatorios/power-bi",
+      "related": [
+        "administracao-relatorios-power-bi"
+      ],
+      "dbTables": []
+    },
+    {
+      "id": "relatorios-processamento-imagens",
+      "title": "Relatorio de Processamento de Imagens",
+      "module": "Relatórios",
+      "keywords": [
+        "relatorio de processamento de imagens",
+        "relatorio",
         "processamento",
-        "imagens processadas",
-        "produtividade",
-        "por usuário",
-        "meta diária"
+        "imagens",
+        "sidebar_position",
+        "title",
+        "acessar",
+        "exportar",
+        "consulta",
+        "dados"
       ],
-      "path": "Menu lateral → Relatórios → Processamento de Imagens",
-      "content": "Apresenta o volume de imagens processadas, podendo detalhar por usuário. Mede a produtividade da equipe de triagem: quantas infrações cada operador analisou, tempo médio e volume diário. Essencial para gestores avaliarem performance da equipe.",
-      "steps": [
-        "Acesse Relatórios → Processamento de Imagens",
-        "Selecione o período",
-        "Use 'Por Usuário' para detalhamento individual",
-        "Compare com a meta diária das configurações do sistema"
-      ],
+      "content": "--- sidebar_position: 8 title: Processamento de Imagens",
+      "steps": [],
+      "path": "Processamento de Imagens",
       "docUrl": "relatorios/processamento-imagens",
       "related": [
-        "tipos-imagens",
-        "tarja-imagem-duplicada"
+        "processamento-por-usuario"
       ],
-      "dbTables": [
-        "TBImagens",
-        "TBHistoricoImagens"
-      ]
+      "dbTables": []
     },
     {
-      "id": "tipos-veiculos",
-      "module": "Veículos",
-      "title": "Cadastro de Tipos de Veículos",
+      "id": "relatorios-processamento-por-usuario",
+      "title": "Processamento por Usuário",
+      "module": "Relatórios",
       "keywords": [
-        "tipo veículo",
-        "automóvel",
-        "caminhão",
-        "motocicleta",
-        "ônibus"
+        "processamento por usuário",
+        "processamento por usuario",
+        "processamento",
+        "usuário",
+        "relatório",
+        "imagens",
+        "acessar",
+        "navegacao",
+        "relatorio",
+        "exportar",
+        "consulta",
+        "dados"
       ],
-      "path": "Menu lateral → Veículos → Tipos de Veículos",
-      "content": "Categorizam veículos no sistema: Automóvel, Caminhão, Motocicleta, Ônibus, Reboque. Utilizados na triagem para classificar o veículo infrator e na pesagem para limites de peso. Cadastro: Código, Descrição, Ativo.",
-      "steps": [
-        "Acesse Veículos → Tipos de Veículos",
-        "Visualize ou clique em 'Novo' para adicionar",
-        "Preencha Código e Descrição",
-        "Marque como Ativo e salve"
+      "content": "Relatório de processamento de imagens por usuário",
+      "steps": [],
+      "path": "Processamento por Usuário",
+      "docUrl": "relatorios/processamento-por-usuario",
+      "related": [
+        "controle-acesso-usuarios",
+        "infracoes-triagem"
       ],
+      "dbTables": []
+    },
+    {
+      "id": "relatorios-relatorio-discrepancias",
+      "title": "Relatório de Discrepâncias",
+      "module": "Relatórios",
+      "keywords": [
+        "relatório de discrepâncias",
+        "relatorio de discrepancias",
+        "relatório",
+        "discrepâncias",
+        "identificadas",
+        "processamento",
+        "acessar",
+        "navegacao",
+        "relatorio",
+        "exportar",
+        "consulta",
+        "dados"
+      ],
+      "content": "Relatório de discrepâncias identificadas no processamento",
+      "steps": [],
+      "path": "Relatório de Discrepâncias",
+      "docUrl": "relatorios/relatorio-discrepancias",
+      "related": [
+        "infracoes-auditoria",
+        "infracoes-triagem"
+      ],
+      "dbTables": []
+    },
+    {
+      "id": "relatorios-relatorio-infracoes",
+      "title": "Relatório de Infrações",
+      "module": "Relatórios",
+      "keywords": [
+        "relatório de infrações",
+        "relatorio de infracoes",
+        "relatório",
+        "infra",
+        "detalhado",
+        "processadas",
+        "acessar",
+        "termos",
+        "relatorio",
+        "exportar",
+        "consulta",
+        "dados"
+      ],
+      "content": "Relatório detalhado de infrações processadas",
+      "steps": [],
+      "path": "Relatório de Infrações",
+      "docUrl": "relatorios/relatorio-infracoes",
+      "related": [
+        "infracoes-consulta-infracoes",
+        "infracoes-exportacao"
+      ],
+      "dbTables": []
+    },
+    {
+      "id": "relatorios-relatorio-logs-envios",
+      "title": "Logs de Envios a Integração",
+      "module": "Relatórios",
+      "keywords": [
+        "logs de envios a integração",
+        "logs de envios a integracao",
+        "logs",
+        "envios",
+        "integra",
+        "relatório",
+        "passagens",
+        "enviadas",
+        "relatorio",
+        "exportar",
+        "consulta",
+        "dados"
+      ],
+      "content": "Relatório de logs de passagens enviadas para integração",
+      "steps": [],
+      "path": "Logs de Envios a Integração",
+      "docUrl": "relatorios/relatorio-logs-envios",
+      "related": [
+        "infracoes-exportacao",
+        "administracao-webhooks"
+      ],
+      "dbTables": []
+    },
+    {
+      "id": "relatorios-relatorio-passagens",
+      "title": "Relatório de Passagens",
+      "module": "Relatórios",
+      "keywords": [
+        "relatório de passagens",
+        "relatorio de passagens",
+        "relatório",
+        "passagens",
+        "veículos",
+        "registradas",
+        "acessar",
+        "navegacao",
+        "relatorio",
+        "exportar",
+        "consulta",
+        "dados"
+      ],
+      "content": "Relatório de passagens de veículos registradas",
+      "steps": [],
+      "path": "Relatório de Passagens",
+      "docUrl": "relatorios/relatorio-passagens",
+      "related": [
+        "operacoes-consulta-placas",
+        "operacoes-monitoramento-online"
+      ],
+      "dbTables": []
+    },
+    {
+      "id": "veiculos-categorias-veiculo",
+      "title": "Categorias de Veículos",
+      "module": "Veículos",
+      "keywords": [
+        "categorias de veículos",
+        "categorias de veiculos",
+        "categorias",
+        "veículos",
+        "cadastro",
+        "acessar",
+        "navegacao",
+        "relacionada",
+        "veiculo",
+        "carro",
+        "caminhao",
+        "placa"
+      ],
+      "content": "Cadastro de categorias de veículos",
+      "steps": [],
+      "path": "Categorias de Veículos",
+      "docUrl": "veiculos/categorias-veiculo",
+      "related": [
+        "classificacoes-veiculos"
+      ],
+      "dbTables": []
+    },
+    {
+      "id": "veiculos-classificacoes-veiculos",
+      "title": "Classificações de Veículos",
+      "module": "Veículos",
+      "keywords": [
+        "classificações de veículos",
+        "classificacoes de veiculos",
+        "classifica",
+        "veículos",
+        "cadastro",
+        "acessar",
+        "navegacao",
+        "relacionada",
+        "veiculo",
+        "carro",
+        "caminhao",
+        "placa"
+      ],
+      "content": "Cadastro de classificações de veículos",
+      "steps": [],
+      "path": "Classificações de Veículos",
+      "docUrl": "veiculos/classificacoes-veiculos",
+      "related": [
+        "categorias-veiculo",
+        "tipos-veiculos"
+      ],
+      "dbTables": []
+    },
+    {
+      "id": "veiculos-cores",
+      "title": "Cores",
+      "module": "Veículos",
+      "keywords": [
+        "cores",
+        "cadastro",
+        "veículos",
+        "acessar",
+        "navegacao",
+        "relacionada",
+        "veiculo",
+        "carro",
+        "caminhao",
+        "placa"
+      ],
+      "content": "Cadastro de cores de veículos",
+      "steps": [],
+      "path": "Cores",
+      "docUrl": "veiculos/cores",
+      "related": [
+        "infracoes-consulta-infracoes"
+      ],
+      "dbTables": []
+    },
+    {
+      "id": "veiculos-especie-veiculo",
+      "title": "Espécies de Veículos",
+      "module": "Veículos",
+      "keywords": [
+        "espécies de veículos",
+        "especies de veiculos",
+        "espécies",
+        "veículos",
+        "cadastro",
+        "acessar",
+        "navegacao",
+        "relacionada",
+        "veiculo",
+        "carro",
+        "caminhao",
+        "placa"
+      ],
+      "content": "Cadastro de espécies de veículos",
+      "steps": [],
+      "path": "Espécies de Veículos",
+      "docUrl": "veiculos/especie-veiculo",
+      "related": [
+        "tipos-veiculos"
+      ],
+      "dbTables": []
+    },
+    {
+      "id": "veiculos-marcas-veiculos",
+      "title": "Marcas de Veículos",
+      "module": "Veículos",
+      "keywords": [
+        "marcas de veículos",
+        "marcas de veiculos",
+        "marcas",
+        "veículos",
+        "cadastro",
+        "acessar",
+        "navegacao",
+        "relacionada",
+        "veiculo",
+        "carro",
+        "caminhao",
+        "placa"
+      ],
+      "content": "Cadastro de marcas de veículos",
+      "steps": [],
+      "path": "Marcas de Veículos",
+      "docUrl": "veiculos/marcas-veiculos",
+      "related": [
+        "modelos-veiculos"
+      ],
+      "dbTables": []
+    },
+    {
+      "id": "veiculos-modelos-veiculos",
+      "title": "Modelos de Veículos",
+      "module": "Veículos",
+      "keywords": [
+        "modelos de veículos",
+        "modelos de veiculos",
+        "modelos",
+        "veículos",
+        "cadastro",
+        "marca",
+        "acessar",
+        "navegacao",
+        "veiculo",
+        "carro",
+        "caminhao",
+        "placa"
+      ],
+      "content": "Cadastro de modelos de veículos por marca",
+      "steps": [],
+      "path": "Modelos de Veículos",
+      "docUrl": "veiculos/modelos-veiculos",
+      "related": [
+        "marcas-veiculos"
+      ],
+      "dbTables": []
+    },
+    {
+      "id": "veiculos-municipios",
+      "title": "Municípios",
+      "module": "Veículos",
+      "keywords": [
+        "municípios",
+        "municipios",
+        "cadastro",
+        "acessar",
+        "navegacao",
+        "relacionada",
+        "veiculo",
+        "carro",
+        "caminhao",
+        "placa"
+      ],
+      "content": "Cadastro de municípios",
+      "steps": [],
+      "path": "Municípios",
+      "docUrl": "veiculos/municipios",
+      "related": [
+        "administracao-regioes"
+      ],
+      "dbTables": []
+    },
+    {
+      "id": "veiculos-tipos-veiculos",
+      "title": "Tipos de Veículos",
+      "module": "Veículos",
+      "keywords": [
+        "tipos de veículos",
+        "tipos de veiculos",
+        "tipos",
+        "veículos",
+        "cadastro",
+        "acessar",
+        "navegacao",
+        "relacionada",
+        "veiculo",
+        "carro",
+        "caminhao",
+        "placa"
+      ],
+      "content": "Cadastro de tipos de veículos",
+      "steps": [],
+      "path": "Tipos de Veículos",
       "docUrl": "veiculos/tipos-veiculos",
       "related": [
         "classificacoes-veiculos",
-        "reclassificar-veiculo"
+        "especie-veiculo"
       ],
-      "dbTables": [
-        "TBCategoriaVeiculos"
-      ]
-    },
-    {
-      "id": "classificacoes-veiculos",
-      "module": "Veículos",
-      "title": "Classificações e Espécies de Veículos",
-      "keywords": [
-        "classificação",
-        "espécie",
-        "categoria",
-        "particular",
-        "oficial",
-        "aluguel",
-        "passageiro",
-        "carga"
-      ],
-      "path": "Menu lateral → Veículos → Classificações / Espécies / Categorias",
-      "content": "O AxHub possui três níveis de classificação: (1) Classificações — porte e uso (leve, pesado), (2) Espécies — finalidade (passageiro, carga, misto), (3) Categorias — tipo de registro (particular, oficial, aluguel, diplomático). Usados na triagem e pesagem para preencher dados do veículo.",
-      "steps": [
-        "Acesse Veículos → Classificações, Espécies ou Categorias",
-        "Cada cadastro: Código, Descrição, Ativo",
-        "Para adicionar: clique em 'Novo', preencha e salve",
-        "São usados automaticamente na triagem e pesagem"
-      ],
-      "docUrl": "veiculos/classificacoes-veiculos",
-      "related": [
-        "tipos-veiculos",
-        "reclassificar-veiculo"
-      ],
-      "dbTables": [
-        "TBClassificacoesVeiculos"
-      ]
-    },
-    {
-      "id": "triagem-passo-a-passo",
-      "module": "Infrações",
-      "title": "Como Fazer Triagem Passo a Passo",
-      "keywords": [
-        "triagem",
-        "passo a passo",
-        "como triar",
-        "processar infração",
-        "analisar imagem",
-        "aprovar",
-        "descartar",
-        "avaliar depois"
-      ],
-      "path": "Menu lateral → Infrações → Triagem",
-      "content": "A triagem é a análise humana das infrações capturadas. O operador visualiza as imagens e decide: Processar (aprovar), Descartar (rejeitar com motivo) ou Avaliar Depois (pular). O painel esquerdo mostra imagens e dados da passagem, o direito mostra campos para preenchimento: Placa, Marca/Modelo, Tipo, Cor, Município, Velocidade Medida e Considerada.",
-      "steps": [
-        "Acesse Infrações → Triagem",
-        "O sistema exibe a próxima infração pendente",
-        "Analise as imagens: placa legível e infração válida?",
-        "Preencha dados do veículo: Placa, Marca, Modelo, Tipo, Cor",
-        "Verifique Velocidade Medida e Considerada",
-        "Infração válida: clique em 'Processar' (botão verde)",
-        "Rejeitar: selecione Motivo de Descarte e clique em 'Descartar'",
-        "Precisa mais tempo: clique em 'Avaliar Depois'"
-      ],
-      "docUrl": "infracoes/triagem",
-      "related": [
-        "triagem-infracoes",
-        "infracao-nao-aparece",
-        "motivos-descarte"
-      ],
-      "dbTables": [
-        "TBInfracoes",
-        "TBImagens"
-      ]
-    },
-    {
-      "id": "exportacao-lotes",
-      "module": "Infrações",
-      "title": "Como Exportar Lotes de Infrações",
-      "keywords": [
-        "exportar",
-        "lote",
-        "enviar",
-        "órgão autuador",
-        "DETRAN",
-        "DER",
-        "gerar lote",
-        "status exportação"
-      ],
-      "path": "Menu lateral → Infrações → Exportação",
-      "content": "A exportação envia infrações processadas ao órgão autuador (DETRAN, DER). Lotes têm status: Pendente, Enviado, Aceito ou Erro. Erros comuns: código do município divergente, imagens ausentes, dados incompletos. Corrija a causa e reprocesse o lote.",
-      "steps": [
-        "Acesse Infrações → Exportação",
-        "Filtre por período e status",
-        "Verifique o status de cada lote",
-        "Se Erro: abra para ver a mensagem detalhada",
-        "Corrija a causa e reprocesse o lote",
-        "Acompanhe até status 'Aceito'"
-      ],
-      "docUrl": "infracoes/exportacao",
-      "related": [
-        "exportar-infracoes",
-        "erro-exportacao-uf-municipio",
-        "erro-exportacao-imagens-obrigatorias"
-      ],
-      "dbTables": [
-        "TBInfracoes"
-      ]
-    },
-    {
-      "id": "regioes",
-      "module": "Administração",
-      "title": "Cadastro de Regiões",
-      "keywords": [
-        "região",
-        "regional",
-        "área",
-        "zona",
-        "geográfica"
-      ],
-      "path": "Menu lateral → Administração → Regiões",
-      "content": "As Regiões organizam geograficamente as operações. Úteis para agrupar equipamentos por área e facilitar gestão por localidade.",
-      "steps": [
-        "Acesse Administração → Regiões",
-        "Clique em 'Novo' para adicionar",
-        "Preencha o Nome da região",
-        "Salve e vincule às operações"
-      ],
-      "docUrl": "administracao/regioes",
-      "related": [
-        "arcos",
-        "cadastro-operacoes"
-      ]
-    },
-    {
-      "id": "motivos-descarte-catalogo",
-      "module": "Infrações",
-      "title": "Catálogo de Motivos de Descarte",
-      "keywords": [
-        "motivo descarte",
-        "catálogo descarte",
-        "por que descartou",
-        "razão descarte",
-        "tipos descarte",
-        "lista motivos",
-        "descarte automático",
-        "descarte manual"
-      ],
-      "path": "Menu lateral → Administração → Motivos de Descarte",
-      "content": "O catálogo de motivos de descarte define todas as razões possíveis para descartar uma infração na triagem. Motivos podem ser de tipo 'Descarte' ou 'Não-Descarte' e são usados tanto em descartes manuais (triagem) quanto automáticos (exceções).",
-      "steps": [
-        "Acesse Administração → Motivos de Descarte",
-        "Consulte a lista de motivos cadastrados (código + descrição)",
-        "Para criar novo motivo: clique 'Novo' → preencha Código, Descrição e Tipo",
-        "Motivos podem ser habilitados/desabilitados sem excluir",
-        "Vincule motivos aos tipos de infração em 'Tipo Infração por Motivo'"
-      ],
-      "docUrl": "administracao/motivos-descarte",
-      "related": [
-        "triagem-infracoes",
-        "infracoes-descartadas",
-        "excecoes"
-      ],
-      "dbTables": [
-        "TBMotivosDescartes",
-        "TBMotivoDescarteTipoInfracoes"
-      ]
-    },
-    {
-      "id": "historico-triagem",
-      "module": "Infrações",
-      "title": "Histórico de Triagem de Infrações",
-      "keywords": [
-        "histórico triagem",
-        "quem triou",
-        "quem descartou",
-        "reabertura infração",
-        "audit trail",
-        "rastrear triagem",
-        "log triagem",
-        "alteração placa triagem"
-      ],
-      "path": "Menu lateral → Infrações → Consulta → Detalhes da Infração → Histórico",
-      "content": "Cada infração mantém um histórico completo de todas as ações de triagem: quem validou, quem descartou, reaberturas, alterações de placa e mudanças de status. Útil para auditorias e rastrear responsabilidades.",
-      "steps": [
-        "Acesse Infrações → Consulta e localize a infração",
-        "Clique na infração para abrir detalhes",
-        "Verifique a seção de Histórico de Triagem",
-        "Cada registro mostra: Usuário, Data/Hora, Status Anterior → Novo Status",
-        "Reaberturas e alterações de placa também aparecem no histórico"
-      ],
-      "docUrl": "infracoes/consulta",
-      "related": [
-        "triagem-infracoes",
-        "reabrir-infracao",
-        "auditoria"
-      ],
-      "dbTables": [
-        "TBHistoricoTriagens",
-        "TBTriagens"
-      ]
-    },
-    {
-      "id": "analise-triagem-produtividade",
-      "module": "Infrações",
-      "title": "Produtividade e Métricas de Triagem",
-      "keywords": [
-        "produtividade triagem",
-        "métricas triagem",
-        "descarte mais comum",
-        "top motivos descarte",
-        "análise triagem",
-        "descarte automático percentual",
-        "tempo triagem"
-      ],
-      "path": "Menu lateral → Relatórios → Processamento por Usuário / Infrações → Consulta",
-      "content": "As métricas de triagem mostram a produtividade dos analistas, os motivos de descarte mais comuns e a proporção entre descartes manuais e automáticos. Os dados vêm de TBTriagens (DescarteAutomatico, InicioTriagem) e TBMotivosDescartes.",
-      "steps": [
-        "Para produtividade por analista: Relatórios → Processamento por Usuário",
-        "Para motivos mais comuns: Infrações → Infrações Descartadas → filtrar período",
-        "Para ver descartes automáticos: verificar campo DescarteAutomatico na consulta",
-        "Para tempo de análise: verificar Configurações → aba Triagem"
-      ],
-      "docUrl": "infracoes/triagem",
-      "related": [
-        "triagem-passo-a-passo",
-        "motivos-descarte-catalogo",
-        "infracoes-descartadas"
-      ],
-      "dbTables": [
-        "TBTriagens",
-        "TBMotivosDescartes",
-        "TBHistoricoTriagens"
-      ]
-    },
-    {
-      "id": "erro-lote-exportacao",
-      "module": "Infrações",
-      "title": "Erros em Lote de Exportação",
-      "keywords": [
-        "erro lote",
-        "lote com erro",
-        "exportação falhou",
-        "status exportação",
-        "reprocessar lote",
-        "lote pendente",
-        "mensagem erro exportação",
-        "lote não enviou"
-      ],
-      "path": "Menu lateral → Infrações → Exportação",
-      "content": "Quando um lote de exportação falha, o sistema registra a mensagem de erro e o status. Causas comuns: dados incompletos (UF/município), imagens obrigatórias ausentes, enquadramento inválido ou falha de comunicação com o órgão. Verifique o campo Mensagem no lote.",
-      "steps": [
-        "Acesse Infrações → Exportação",
-        "Filtre por StatusExportação = 'Erro' ou 'Pendente'",
-        "Clique no lote para ver a Mensagem de erro detalhada",
-        "Corrija os dados apontados (geralmente falta de campo obrigatório)",
-        "Reprocesse o lote clicando em 'Gerar novamente'"
-      ],
-      "docUrl": "infracoes/exportacao",
-      "related": [
-        "exportar-infracoes",
-        "erro-exportacao-uf-municipio",
-        "erro-exportacao-imagens-obrigatorias",
-        "erro-exportacao-lote-geral"
-      ],
-      "dbTables": [
-        "TBLoteExportacoes",
-        "TBInfracoes"
-      ]
-    },
-    {
-      "id": "erro-importacao-lote",
-      "module": "Infrações",
-      "title": "Erros na Importação de Passagens",
-      "keywords": [
-        "erro importação",
-        "importação falhou",
-        "lote importação erro",
-        "passagem não importou",
-        "arquivo entrada erro",
-        "código erro importação",
-        "fabricante erro envio"
-      ],
-      "path": "Menu lateral → Relatórios → Lote de Importação",
-      "content": "Erros de importação ocorrem quando o arquivo enviado pelo fabricante contém dados inválidos. O sistema registra cada erro com código e descrição. Verifique em Relatórios → Lote de Importação. Causas comuns: formato de arquivo errado, equipamento não cadastrado, faixa inexistente.",
-      "steps": [
-        "Acesse Relatórios → Lote de Importação",
-        "Filtre por StatusImportação = 'Erro'",
-        "Verifique CodigoErro e Descrição do erro",
-        "Corrija o arquivo ou cadastro do equipamento correspondente",
-        "O fabricante pode reenviar o arquivo corrigido via API"
-      ],
-      "docUrl": "relatorios/lote-importacao",
-      "related": [
-        "token-fabricante",
-        "cadastrar-equipamento",
-        "infracao-nao-aparece"
-      ],
-      "dbTables": [
-        "TBLoteImportacoes",
-        "TBLoteImportacaoErros"
-      ]
-    },
-    {
-      "id": "ticket-pesagem-ciclo",
-      "module": "Balança",
-      "title": "Ciclo Completo do Ticket de Pesagem",
-      "keywords": [
-        "ticket pesagem completo",
-        "ciclo pesagem",
-        "ticket aberto fechado",
-        "pesagem sequencial",
-        "aferição balança",
-        "eixo pesagem",
-        "ticket preso aberto",
-        "descarte ticket"
-      ],
-      "path": "Menu lateral → Balança → Tickets Abertos / Tickets Fechados",
-      "content": "O ticket de pesagem segue: Abertura (passagem detectada) → Pesagem (veículo na balança) → Classificação (eixos/peso) → Fechamento. Tickets que não fecham ficam 'presos' e devem ser liberados manualmente. Cada ticket tem sequencial, aferição, eixos e motivo de abertura/fechamento.",
-      "steps": [
-        "Consulte tickets abertos em Balança → Tickets Abertos",
-        "Verifique se o veículo já foi pesado (DataHoraFechamento preenchida?)",
-        "Para tickets presos: Balança → Liberar Pesagem",
-        "Para descarte: informe o motivo de descarte do ticket",
-        "Tickets fechados ficam em Balança → Tickets Fechados para consulta"
-      ],
-      "docUrl": "balanca/tickets-abertos",
-      "related": [
-        "ticket-pesagem",
-        "reclassificar-veiculo",
-        "postos-pesagem"
-      ],
-      "dbTables": [
-        "TBTicketPesagens",
-        "TBEixoPesagens",
-        "TBGrupoEixoPesagens",
-        "TBDadosPesagens"
-      ]
-    },
-    {
-      "id": "operacao-status-heartbeat",
-      "module": "Operações",
-      "title": "Status de Operação e Último Heartbeat",
-      "keywords": [
-        "operação ativa",
-        "operação parada",
-        "último heartbeat operação",
-        "sem passagens",
-        "sem infrações",
-        "operação sem dados",
-        "data última passagem",
-        "data última infração"
-      ],
-      "path": "Menu lateral → Operações → Cadastro de Operações",
-      "content": "Cada operação registra a DataHoraUltimaPassagem e DataHoraUltimaInfracao. Se UltimoHeartbeat estiver muito antigo (>24h), o equipamento pode estar offline. Verificar em Monitoramento Online se há comunicação.",
-      "steps": [
-        "Acesse Operações → Cadastro de Operações",
-        "Verifique a coluna 'Último Heartbeat' da operação",
-        "Se estiver há mais de 24h sem heartbeat, o equipamento pode estar offline",
-        "Confira a DataHoraUltimaPassagem — se zerada, não há passagens chegando",
-        "Verifique em Monitoramento Online o status em tempo real"
-      ],
-      "docUrl": "operacoes/cadastro-operacoes",
-      "related": [
-        "equipamento-offline",
-        "monitoramento-online",
-        "cadastro-operacoes"
-      ],
-      "dbTables": [
-        "TBOperacoes",
-        "TBHeartbeatEquipamentos"
-      ]
-    },
-    {
-      "id": "interrupcoes-operacao",
-      "module": "Operações",
-      "title": "Interrupções de Operação",
-      "keywords": [
-        "interrupção",
-        "operação parada",
-        "horas paradas",
-        "equipamento parou",
-        "justificativa parada",
-        "interrupção automática",
-        "horas sem operação"
-      ],
-      "path": "Menu lateral → Medição → Interrupções",
-      "content": "Interrupções registram períodos em que o equipamento ficou parado durante uma operação. Podem ser automáticas (detectadas pelo sistema quando heartbeat para) ou manuais (registradas pelo operador). Impactam diretamente a medição contratual.",
-      "steps": [
-        "Acesse Medição → Interrupções",
-        "Filtre por Operação, Equipamento e Período",
-        "Verifique se a interrupção foi Automática ou manual",
-        "Para registrar manualmente: clique 'Novo' → preencha Equipamento, Data/Hora Início/Fim, Motivo",
-        "Clique 'Processar Interrupções' para que sejam descontadas na medição"
-      ],
-      "docUrl": "medicoes/interrupcoes",
-      "related": [
-        "interrupcao-medicao",
-        "gerar-medicao",
-        "equipamento-offline"
-      ],
-      "dbTables": [
-        "TBOperacoesInterrupcoes",
-        "TBOperacoes",
-        "TBEquipamentos"
-      ]
-    },
-    {
-      "id": "discrepancias-passagens",
-      "module": "Relatórios",
-      "title": "Relatório de Discrepâncias",
-      "keywords": [
-        "discrepância",
-        "anomalia",
-        "passagem vs infração",
-        "percentual discrepância",
-        "media passagem inconsistente",
-        "volume anormal",
-        "relatório discrepância"
-      ],
-      "path": "Menu lateral → Relatórios → Relatório de Discrepâncias",
-      "content": "O relatório de discrepâncias compara volumes de passagens e infrações por faixa/hora, identificando anomalias. Se o percentual de discrepância for muito alto, pode indicar problema no equipamento, erro de configuração ou falha na importação.",
-      "steps": [
-        "Acesse Relatórios → Relatório de Discrepâncias",
-        "Filtre por Período, Equipamento ou Faixa",
-        "Analise os percentuais: PercentualDiscrepanciaPassagem e PercentualDiscrepanciaInfracao",
-        "Valores muito altos (>50%) indicam possível problema no equipamento",
-        "Compare com Monitoramento Online para confirmar se o equipamento está operando normalmente"
-      ],
-      "docUrl": "relatorios/discrepancias",
-      "related": [
-        "monitoramento-online",
-        "equipamento-offline",
-        "relatorio-passagens"
-      ],
-      "dbTables": [
-        "TBDiscrepancias",
-        "TBPassagens",
-        "TBInfracoes"
-      ]
-    },
-    {
-      "id": "volume-quantitativos",
-      "module": "Relatórios",
-      "title": "Quantitativos de Passagens e Infrações",
-      "keywords": [
-        "quantitativo",
-        "volume passagens",
-        "volume infrações",
-        "contagem hora",
-        "fluxo hora",
-        "média passagens",
-        "índice OCR",
-        "placas não lidas",
-        "sequencial passagens"
-      ],
-      "path": "Menu lateral → Relatórios → Fluxo Diário de Veículos / Relatório de Passagens",
-      "content": "Os quantitativos registram por hora: total de passagens, infrações, testes, média de passagens/infrações, sequenciais e índice OCR (placas lidas vs não lidas). Uma queda brusca no volume pode indicar equipamento offline ou falha na importação.",
-      "steps": [
-        "Acesse Relatórios → Fluxo Diário de Veículos para ver volume por hora",
-        "Relatórios → Relatório de Passagens para detalhes por faixa",
-        "Compare volumes entre dias — queda brusca indica problema",
-        "Verifique índice OCR (PlacasLidas / Total) — abaixo de 80% pode indicar problema na câmera",
-        "Use Dashboard para visão rápida dos indicadores do dia"
-      ],
-      "docUrl": "relatorios/passagens",
-      "related": [
-        "relatorio-passagens",
-        "monitoramento-online",
-        "discrepancias-passagens"
-      ],
-      "dbTables": [
-        "TBQuantitativos",
-        "TBPassagens"
-      ]
-    },
-    {
-      "id": "logs-acesso-sistema",
-      "module": "Controle de Acesso",
-      "title": "Logs de Acesso ao Sistema",
-      "keywords": [
-        "log acesso",
-        "quem acessou",
-        "auditoria acesso",
-        "IP acesso",
-        "URL acessada",
-        "rastrear usuário",
-        "sessão usuário"
-      ],
-      "path": "Menu lateral → Controle de Acesso → Logs de Acesso",
-      "content": "Os logs registram todas as ações dos usuários no sistema: Data/Hora, Usuário, IP público e local, URL acessada, método HTTP e body da requisição. Útil para auditoria de segurança e investigar ações suspeitas.",
-      "steps": [
-        "Acesse Controle de Acesso → Logs de Acesso",
-        "Filtre por Usuário, Período ou IP",
-        "Verifique a coluna URL para identificar qual tela foi acessada",
-        "O IP público ajuda a identificar de onde o acesso foi feito",
-        "UserAgent mostra qual navegador/dispositivo foi utilizado"
-      ],
-      "docUrl": "controle-acesso/logs",
-      "related": [
-        "logs-acesso",
-        "restricao-ip",
-        "perfis-acesso"
-      ],
-      "dbTables": [
-        "TBLogsAcessos",
-        "TBUsuarios",
-        "TBUserSessions"
-      ]
-    },
-    {
-      "id": "placas-repetidas-anomalia",
-      "module": "Operações",
-      "title": "Placas Repetidas e Anomalias OCR",
-      "keywords": [
-        "placa repetida",
-        "placa duplicada",
-        "OCR errado",
-        "mesma placa muitas vezes",
-        "anomalia placa",
-        "leitura incorreta",
-        "placa clonada"
-      ],
-      "path": "Menu lateral → Operações → Consulta de Placas",
-      "content": "O sistema detecta placas que aparecem com frequência anormal (muitas passagens em curto período). Pode indicar erro de OCR (câmera lendo placa errada repetidamente) ou veículo com placa clonada. Consulte em Operações → Consulta de Placas filtrando por período e verifique as imagens.",
-      "steps": [
-        "Acesse Operações → Consulta de Placas",
-        "Filtre por placa suspeita e período curto",
-        "Verifique as imagens de cada passagem — se não correspondem ao veículo, é erro de OCR",
-        "Se imagens mostram veículos diferentes com mesma placa, pode ser clonagem",
-        "Para erro de OCR: o analista corrige na triagem ao editar a placa"
-      ],
-      "docUrl": "operacoes/consulta-placas",
-      "related": [
-        "consulta-placas",
-        "triagem-infracoes",
-        "placa-nao-reconhecida"
-      ],
-      "dbTables": [
-        "TBPlacasRepetidas",
-        "TBPassagens"
-      ]
-    },
-    {
-      "id": "medicao-faixas-performance",
-      "module": "Medição",
-      "title": "Performance por Faixa na Medição",
-      "keywords": [
-        "performance faixa",
-        "índice operação",
-        "horas operação faixa",
-        "valor faixa medição",
-        "multa imagem inválida",
-        "IP faixa",
-        "contagem veículos faixa",
-        "BDI medição"
-      ],
-      "path": "Menu lateral → Medição → Medições Finalizadas → Detalhes",
-      "content": "A medição detalha por faixa: total de infrações (válidas/inválidas), horas previstas vs operadas, horas paralisadas, índice de performance (IP), índice OCR, contagem de veículos e valores financeiros (BDI, descontos). Permite auditar a performance contratual de cada equipamento.",
-      "steps": [
-        "Acesse Medição → Medições Finalizadas",
-        "Selecione a medição para ver detalhes por faixa",
-        "Analise o IP (Índice de Performance) — meta contratual geralmente >95%",
-        "Verifique HorasParalisadas e se foram justificadas",
-        "Compare ValorPrevistoPorFaixa vs ValorTotalPorFaixa para identificar descontos"
-      ],
-      "docUrl": "medicoes/medicoes",
-      "related": [
-        "gerar-medicao",
-        "interrupcoes-operacao",
-        "contratos-medicao",
-        "indices-performance"
-      ],
-      "dbTables": [
-        "TBMedicaoFaixas",
-        "TBMedicoes",
-        "TBMedicaoEquipamentos"
-      ]
-    },
-    {
-      "id": "posto-funcionamento",
-      "module": "Balança",
-      "title": "Funcionamento dos Postos de Pesagem",
-      "keywords": [
-        "posto aberto",
-        "posto fechado",
-        "abertura posto",
-        "fechamento posto",
-        "motivo fechamento posto",
-        "horário funcionamento posto",
-        "posto pesagem status"
-      ],
-      "path": "Menu lateral → Balança → Postos",
-      "content": "Os postos de pesagem têm controle de abertura e fechamento. Cada abertura registra o usuário responsável e cada fechamento exige motivo. Um posto sem fechamento registrado pode indicar problema operacional.",
-      "steps": [
-        "Acesse Balança → Postos para ver todos os postos cadastrados",
-        "Verifique o status: se DataHoraFechamento está vazia, o posto está aberto",
-        "Para ver histórico de funcionamento: consulte aberturas/fechamentos por período",
-        "Postos fechados sem motivo devem ser investigados com o operador de campo",
-        "Novos postos são vinculados a equipamentos e operações na criação"
-      ],
-      "docUrl": "balanca/postos",
-      "related": [
-        "postos-pesagem",
-        "ticket-pesagem-ciclo",
-        "liberar-tickets-pesagem"
-      ],
-      "dbTables": [
-        "TBPostoFuncionamentos",
-        "TBPostos",
-        "TBPostoOperacoes"
-      ]
-    },
-    {
-      "id": "falhas-sequenciais",
-      "module": "Relatórios",
-      "title": "Falhas Sequenciais de Infrações",
-      "keywords": [
-        "falha sequencial",
-        "sequencial faltando",
-        "numeração infração quebrada",
-        "sequencial pulou",
-        "gap sequencial",
-        "relatório falhas sequenciais"
-      ],
-      "path": "Menu lateral → Relatórios → Falhas Sequenciais",
-      "content": "O relatório de falhas sequenciais detecta gaps na numeração dos autos de infração. Cada infração recebe um sequencial único, e falhas indicam registros perdidos ou importação incompleta. Importante para auditoria e controle legal.",
-      "steps": [
-        "Acesse Relatórios → Falhas Sequenciais",
-        "Filtre por Período, Faixa ou Operação",
-        "O sistema mostra: DataFalha, Descrição da falha, Total de falhas por faixa",
-        "Investigue falhas cruzando com Lotes de Importação do mesmo período",
-        "Falhas recorrentes na mesma faixa podem indicar problema no equipamento"
-      ],
-      "docUrl": "relatorios/falhas-sequenciais",
-      "related": [
-        "sequenciais-infracoes",
-        "erro-importacao-lote",
-        "relatorio-infracoes"
-      ],
-      "dbTables": [
-        "TBSequencialInfracoesFalhas",
-        "TBSequencialInfracoes"
-      ]
-    },
-    {
-      "id": "guia-completo-infracoes",
-      "module": "Infrações",
-      "title": "Guia Completo — Processo de Infração",
-      "keywords": [
-        "processo infração",
-        "fluxo infração",
-        "como funciona infração",
-        "passo a passo infração",
-        "etapas infração",
-        "captura triagem auditoria exportação",
-        "ciclo infração",
-        "guia infração",
-        "manual infração",
-        "infração completo",
-        "como triar",
-        "como auditar",
-        "como exportar",
-        "fluxo completo"
-      ],
-      "path": "Menu lateral → Infrações",
-      "content": "O processo de infração no AxHub segue 5 etapas obrigatórias: (1) CAPTURA — o equipamento registra imagem, placa, velocidade e data/hora. (2) IMPORTAÇÃO — dados entram no AxHub automaticamente em lotes; exceções configuradas descartam infrações automaticamente nesta fase. (3) TRIAGEM — o analista humano revisa cada infração verificando: placa legível, veículo correto, velocidade coerente, enquadramento correto e qualidade da imagem. Decide: Validar (segue para auditoria), Descartar (com motivo obrigatório) ou Reabrir (recuperar descartada por engano). (4) AUDITORIA — um segundo profissional (auditor) confere o trabalho do analista. Pode Confirmar (segue para exportação), Rejeitar (volta para triagem com observação) ou adicionar observações. Usa filtros avançados e amostragem percentual. (5) EXPORTAÇÃO — o sistema gera o arquivo nos formatos RENAINF/XML/TXT/CSV com 7 validações automáticas (placa, imagens, dados, enquadramento, assinaturas, duplicatas, prazo legal) e envia ao órgão autuador (DETRAN, DER, PRF, Prefeitura) via SFTP, API ou download manual. Status possíveis: Aguardando Triagem → Em Triagem → Válida → Auditada → Exportada (ou Descartada em qualquer fase).",
-      "steps": [
-        "CAPTURA: O equipamento de fiscalização detecta e registra a infração automaticamente (imagem + placa + velocidade + data/hora + local)",
-        "IMPORTAÇÃO: Os dados são enviados ao AxHub em lotes de importação. Exceções automáticas (placas especiais, horários, faixas) descartam infrações nesta fase",
-        "TRIAGEM: Acesse Menu → Infrações → Triagem. Use filtros (Período, Status, Tipo, Operação) para encontrar infrações pendentes",
-        "TRIAGEM - ANÁLISE: Para cada infração, verifique: placa legível?, veículo correto?, velocidade coerente?, enquadramento correto?, imagem boa qualidade?",
-        "TRIAGEM - DECISÃO: Validar (tudo OK, segue para auditoria) ou Descartar (algo errado, informar motivo obrigatório). Pode Reabrir descartada por engano",
-        "AUDITORIA: Acesse Menu → Infrações → Auditoria. Configure filtros (data, equipamento, tipo, analista, amostragem %)",
-        "AUDITORIA - DECISÃO: Confirmar (correto, segue para exportação), Rejeitar (errado, volta para triagem com observação) ou Adicionar observações",
-        "EXPORTAÇÃO: Acesse Menu → Infrações → Exportação. Configure: Órgão destino, Período, Layout (RENAINF/XML/TXT/CSV)",
-        "EXPORTAÇÃO - GERAR LOTE: Clique em Gerar Lote. O sistema valida automaticamente 7 critérios e gera arquivo com assinatura digital",
-        "EXPORTAÇÃO - ENVIAR: Envie via SFTP (automático), API (integração) ou Download (manual)",
-        "CONSULTA: A qualquer momento, consulte todas as infrações em Menu → Infrações → Consulta de Infrações"
-      ],
-      "docUrl": "infracoes/guia-completo-infracoes",
-      "related": [
-        "triagem-infracoes",
-        "auditoria",
-        "exportar-infracoes",
-        "excecoes",
-        "consulta-infracoes",
-        "infracoes-descartadas",
-        "infracao-nao-aparece",
-        "reabrir-infracao"
-      ],
-      "dbTables": [
-        "TBInfracoes",
-        "TBHistoricoTriagens",
-        "TBMotivosDescartes",
-        "TBLoteExportacoes",
-        "TBExcecoes",
-        "TBEnquadramentos",
-        "TBInfracoesEnquadramentos"
-      ]
+      "dbTables": []
     }
-  ],
-  "glossary": [
-    {
-      "term": "Aferição",
-      "definition": "Procedimento técnico de verificação metrológica que atesta conformidade de instrumento de medição com padrões do INMETRO. Validade geralmente 12 meses. Infrações com aferição vencida são invalidadas.",
-      "legal": "Resolução CONTRAN 798/2021, Portaria INMETRO 544/2014"
-    },
-    {
-      "term": "Autuação",
-      "definition": "Ato administrativo formal de lavratura do auto de infração de trânsito. Inclui identificação do veículo, local, data/hora, enquadramento e assinatura.",
-      "legal": "Art. 280 do CTB"
-    },
-    {
-      "term": "Cronotacógrafo",
-      "definition": "Dispositivo obrigatório em veículos de carga e transporte coletivo que registra velocidade, tempo de condução e descanso do motorista.",
-      "legal": "Art. 105 do CTB, Resolução CONTRAN 92/1999"
-    },
-    {
-      "term": "Enquadramento",
-      "definition": "Classificação legal de uma infração conforme artigos do CTB. Define tipo (leve, média, grave, gravíssima), pontos na CNH e valor da multa.",
-      "legal": "Código de Trânsito Brasileiro"
-    },
-    {
-      "term": "Infração de Trânsito",
-      "definition": "Desobediência a qualquer preceito da legislação de trânsito. No AxHub: Detecção → Triagem → Auditoria → Exportação.",
-      "legal": "Art. 161 do CTB"
-    },
-    {
-      "term": "Lote de Exportação",
-      "definition": "Conjunto de infrações validadas agrupadas para envio ao órgão autuador. Inclui arquivo de dados, imagens e hash de assinatura digital.",
-      "legal": ""
-    },
-    {
-      "term": "Triagem",
-      "definition": "Processo de análise humana das infrações detectadas automaticamente. O triador valida ou descarta cada infração.",
-      "legal": ""
-    }
-  ],
-  "dataSourceLinks": {
-    "documentation": "/AxHub.Docs/",
-    "database": "AxHub/Database/AxHub.sql",
-    "widget": "AxHub/widget/axhub-suporte.js",
-    "searchBase": "AxHub/base-pesquisa-suporte.md"
-  }
+  ]
 }
 ```
 
@@ -19722,6 +19686,7 @@ Após adicionar o script, abra o sistema e verifique:
     "seed": "node src/scripts/seed-kb.js"
   },
   "dependencies": {
+    "@whiskeysockets/baileys": "^7.0.0-rc.9",
     "axios": "^1.14.0",
     "cosine-similarity": "^1.0.1",
     "dotenv": "^16.0.0",
@@ -19733,7 +19698,276 @@ Após adicionar o script, abra o sistema e verifique:
     "node-cron": "^4.2.1",
     "openai": "^4.0.0",
     "pdf-parse": "^1.1.4",
+    "qrcode": "^1.5.4",
+    "qrcode-terminal": "^0.12.0",
     "xlsx": "^0.18.5"
+  }
+}
+```
+
+### `axion-ia-api\src\admin-controller.js`
+
+```js
+/**
+ * Controller de administração da KB — re-indexação de docs e Jitbit.
+ * Executa os scripts seed-docs.js e seed-jitbit.js como processos filhos.
+ */
+import { spawn } from "child_process";
+import path from "path";
+import { fileURLToPath } from "url";
+import { KB } from "./models/kb.model.js";
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+
+function executarScript(nomeScript) {
+  return new Promise((resolve, reject) => {
+    const scriptPath = path.join(__dirname, "scripts", nomeScript);
+    const processo = spawn("node", [scriptPath], {
+      cwd: path.join(__dirname, ".."),
+      env: process.env,
+    });
+
+    const linhas = [];
+
+    processo.stdout.on("data", (data) => {
+      const texto = data.toString();
+      linhas.push(texto);
+    });
+
+    processo.stderr.on("data", (data) => {
+      linhas.push(`[stderr] ${data.toString()}`);
+    });
+
+    processo.on("close", (code) => {
+      const saida = linhas.join("").trim();
+      if (code === 0) {
+        resolve(saida);
+      } else {
+        reject(new Error(`Script ${nomeScript} saiu com código ${code}.\n${saida}`));
+      }
+    });
+  });
+}
+
+/** POST /api/admin/reindexar-docs */
+export async function reindexarDocs(req, res) {
+  try {
+    const saida = await executarScript("seed-docs.js");
+    const totalLine = saida.match(/Importados\s*:\s*(\d+)/);
+    const total = totalLine ? parseInt(totalLine[1]) : null;
+    res.json({ ok: true, total, saida });
+  } catch (err) {
+    res.status(500).json({ ok: false, erro: err.message });
+  }
+}
+
+/** POST /api/admin/reindexar-jitbit */
+export async function reindexarJitbit(req, res) {
+  try {
+    const saida = await executarScript("seed-jitbit.js");
+    const totalLine = saida.match(/Importados\s*:\s*(\d+)/);
+    const total = totalLine ? parseInt(totalLine[1]) : null;
+    res.json({ ok: true, total, saida });
+  } catch (err) {
+    res.status(500).json({ ok: false, erro: err.message });
+  }
+}
+
+/** GET /api/admin/kb/stats — estatísticas da KB por módulo */
+export async function statsKB(req, res) {
+  try {
+    const agrupado = await KB.aggregate([
+      { $group: { _id: "$modulo", total: { $sum: 1 } } },
+      { $sort: { total: -1 } },
+    ]);
+
+    const totalGeral = agrupado.reduce((s, g) => s + g.total, 0);
+
+    res.json({
+      totalGeral,
+      porModulo: agrupado.map((g) => ({ modulo: g._id, total: g.total })),
+    });
+  } catch (err) {
+    res.status(500).json({ ok: false, erro: err.message });
+  }
+}
+
+/** DELETE /api/admin/kb/:modulo — remove todas as entradas de um módulo */
+export async function limparModuloKB(req, res) {
+  const { modulo } = req.params;
+  const modulosValidos = ["axhub", "axton", "axcross", "jitbit"];
+
+  if (!modulosValidos.includes(modulo)) {
+    return res.status(400).json({ ok: false, erro: `Módulo inválido. Use: ${modulosValidos.join(", ")}` });
+  }
+
+  try {
+    const resultado = await KB.deleteMany({ modulo });
+    res.json({ ok: true, removidos: resultado.deletedCount });
+  } catch (err) {
+    res.status(500).json({ ok: false, erro: err.message });
+  }
+}
+```
+
+### `axion-ia-api\src\analise-imagem-controller.js`
+
+```js
+/**
+ * analise-imagem-controller.js
+ * Endpoints para análise visual de imagens operacionais (AxHub / AxTon / AxCross / AxionIA).
+ *
+ * ROTAS:
+ *   POST /api/analise-imagem/analisar          → analisa em memória (sem salvar)
+ *   POST /api/analise-imagem/salvar-e-analisar → salva em disco + analisa
+ *   GET  /api/analise-imagem/listar            → lista imagens salvas (todos sistemas)
+ *   GET  /api/analise-imagem/listar/:sistema   → lista imagens de um sistema
+ *   DELETE /api/analise-imagem/:sistema/:nome  → remove imagem salva
+ *
+ * Separação de responsabilidades:
+ *   - docs/img/              → screenshots de manuais Docusaurus (nunca passam aqui)
+ *   - /api/doc/upload-contexto → OCR de documentos em memória (extrator.js)
+ *   - /api/analise-imagem    → imagens operacionais com análise contextual por sistema
+ */
+
+import multer from "multer";
+import {
+  analisarImagem,
+  salvarImagemAnalise,
+  listarImagensAnalise,
+  removerImagemAnalise,
+  validarImagem,
+  validarSistema,
+} from "./services/analise-imagem.js";
+
+// ─── Multer: memória (buffer disponível para análise imediata) ────────────────
+
+const upload = multer({
+  storage: multer.memoryStorage(),
+  limits: { fileSize: 20 * 1024 * 1024 }, // 20 MB
+  fileFilter(_req, file, cb) {
+    const ext = file.originalname.split(".").pop().toLowerCase();
+    const permitidos = ["jpg", "jpeg", "png", "webp", "gif", "bmp"];
+    if (permitidos.includes(ext)) {
+      cb(null, true);
+    } else {
+      cb(new Error(`Tipo de imagem não suportado: .${ext}. Use: ${permitidos.join(", ")}`));
+    }
+  },
+});
+
+/**
+ * Middleware multer com tratamento de erro como JSON.
+ */
+export function uploadImagemMiddleware(req, res, next) {
+  upload.single("imagem")(req, res, (err) => {
+    if (err) {
+      return res.status(422).json({ erro: err.message });
+    }
+    next();
+  });
+}
+
+// ─── POST /api/analise-imagem/analisar ────────────────────────────────────────
+// Analisa imagem em memória (não persiste em disco).
+// Body (multipart): imagem (file), sistema (string), contexto (string, opcional)
+
+export async function analisarSemSalvar(req, res) {
+  try {
+    validarImagem(req.file);
+    const { sistema = "geral", contexto = "" } = req.body;
+
+    const analise = await analisarImagem(
+      req.file.buffer,
+      req.file.mimetype,
+      sistema,
+      contexto
+    );
+
+    return res.json({
+      sucesso: true,
+      arquivo: req.file.originalname,
+      tamanhoKB: Math.round(req.file.size / 1024),
+      salvo: false,
+      analise,
+    });
+  } catch (err) {
+    return res.status(422).json({ erro: err.message });
+  }
+}
+
+// ─── POST /api/analise-imagem/salvar-e-analisar ───────────────────────────────
+// Salva a imagem em uploads/analise/{sistema}/ e retorna a análise.
+// Body (multipart): imagem (file), sistema (string), contexto (string, opcional)
+
+export async function salvarEAnalisar(req, res) {
+  try {
+    validarImagem(req.file);
+    const { sistema, contexto = "" } = req.body;
+    validarSistema(sistema);
+
+    // Salva em disco primeiro
+    const infoArquivo = salvarImagemAnalise(
+      req.file.buffer,
+      req.file.originalname,
+      sistema
+    );
+
+    // Analisa
+    const analise = await analisarImagem(
+      req.file.buffer,
+      req.file.mimetype,
+      sistema,
+      contexto
+    );
+
+    return res.json({
+      sucesso: true,
+      arquivo: infoArquivo,
+      salvo: true,
+      analise,
+    });
+  } catch (err) {
+    return res.status(422).json({ erro: err.message });
+  }
+}
+
+// ─── GET /api/analise-imagem/listar ──────────────────────────────────────────
+// Lista todas as imagens salvas em todos os sistemas.
+
+export function listarTodas(req, res) {
+  try {
+    const imagens = listarImagensAnalise(null);
+    const total = Object.values(imagens).reduce((acc, arr) => acc + arr.length, 0);
+    return res.json({ sucesso: true, total, imagens });
+  } catch (err) {
+    return res.status(400).json({ erro: err.message });
+  }
+}
+
+// ─── GET /api/analise-imagem/listar/:sistema ─────────────────────────────────
+// Lista imagens de um sistema específico.
+
+export function listarPorSistema(req, res) {
+  try {
+    const { sistema } = req.params;
+    const imagens = listarImagensAnalise(sistema);
+    return res.json({ sucesso: true, sistema, total: imagens.length, imagens });
+  } catch (err) {
+    return res.status(400).json({ erro: err.message });
+  }
+}
+
+// ─── DELETE /api/analise-imagem/:sistema/:nome ───────────────────────────────
+// Remove uma imagem salva.
+
+export function removerImagem(req, res) {
+  try {
+    const { sistema, nome } = req.params;
+    const resultado = removerImagemAnalise(sistema, nome);
+    return res.json({ sucesso: true, ...resultado });
+  } catch (err) {
+    return res.status(404).json({ erro: err.message });
   }
 }
 ```
@@ -19744,6 +19978,8 @@ Após adicionar o script, abra o sistema e verifique:
 import express from "express";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
+import path from "path";
+import { fileURLToPath } from "url";
 import routes from "./routes.js";
 import { conectar as conectarAxHub } from "./services/axhub-db.js";
 import { conectar as conectarAxTon } from "./services/axton-db.js";
@@ -19753,8 +19989,15 @@ import { iniciarColetaPNCP } from "./scheduler.js";
 
 dotenv.config();
 
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+
 const app = express();
 app.use(express.json());
+
+// Servir imagens operacionais salvas (análise) como arquivos estáticos
+// Rota: GET /uploads/analise/{sistema}/{arquivo}
+// ≠ docs/img/ (screenshots de manuais — servidos pelo Docusaurus)
+app.use("/uploads/analise", express.static(path.join(__dirname, "../uploads/analise")));
 
 // CORS para painel React (dev)
 app.use((req, res, next) => {
@@ -20810,26 +21053,30 @@ export function salvarConfig(req, res) {
     return res.status(400).json({ erro: "Body inválido" });
   }
 
-  // Ler env atual e mesclar somente chaves permitidas
-  const envAtual = lerEnv();
+  try {
+    // Ler env atual e mesclar somente chaves permitidas
+    const envAtual = lerEnv();
 
-  for (const [chave, valor] of Object.entries(novasConfig)) {
-    if (!CHAVES_PERMITIDAS.includes(chave)) continue;
-    // Ignorar valores mascarados (não sobrescrever senha com máscaras)
-    if (CHAVES_SENSIVEIS.includes(chave) && /^.{0,3}•+$/.test(valor)) continue;
-    envAtual[chave] = valor;
-  }
-
-  salvarEnv(envAtual);
-
-  // Atualizar process.env em memória com valores não-sensíveis
-  for (const chave of CHAVES_PERMITIDAS) {
-    if (envAtual[chave] !== undefined) {
-      process.env[chave] = envAtual[chave];
+    for (const [chave, valor] of Object.entries(novasConfig)) {
+      if (!CHAVES_PERMITIDAS.includes(chave)) continue;
+      // Ignorar valores mascarados (não sobrescrever senha com máscaras)
+      if (CHAVES_SENSIVEIS.includes(chave) && /^.{0,3}•+$/.test(valor)) continue;
+      envAtual[chave] = valor;
     }
-  }
 
-  res.json({ ok: true, mensagem: "Configuração salva. Reinicie a API para aplicar mudanças de conexão." });
+    salvarEnv(envAtual);
+
+    // Atualizar process.env em memória com valores não-sensíveis
+    for (const chave of CHAVES_PERMITIDAS) {
+      if (envAtual[chave] !== undefined) {
+        process.env[chave] = envAtual[chave];
+      }
+    }
+
+    res.json({ ok: true, mensagem: "Configuração salva. Reinicie a API para aplicar mudanças de conexão." });
+  } catch (err) {
+    res.status(500).json({ erro: `Erro ao gravar configuração: ${err.message}` });
+  }
 }
 
 // POST /api/config/testar-mongo — testa conexão MongoDB
@@ -21811,7 +22058,7 @@ export function listarImagensProduto(produto) {
 ```js
 import OpenAI from "openai";
 import dotenv from "dotenv";
-import { systemPrompt } from "./prompt.js";
+import { systemPrompt, whatsappPrompt } from "./prompt.js";
 import { classificarMensagem } from "./classifier.js";
 import { salvarHistorico, salvarNaoRespondida } from "./logger.js";
 import { buscarRespostaSemantica } from "./services/search.js";
@@ -21898,6 +22145,51 @@ ${contexto.status}
   logMongo({ mensagem, resposta, origem: 'openai', score: 0.5 });
 
   return { resposta, origem: 'openai', score: 0.5 };
+}
+
+// Versão otimizada para WhatsApp — respostas curtas e sem formatação laudo
+export async function gerarRespostaWA(mensagem) {
+  // 1. Classificação por keywords (sem custo)
+  const contexto = classificarMensagem(mensagem);
+  if (contexto) {
+    // Reformatar resposta de forma curta para WhatsApp
+    const resposta = `${contexto.acao}`;
+    salvarHistorico({ mensagem, origem: 'kb', resposta });
+    return { resposta, origem: 'kb', score: 1.0 };
+  }
+
+  // 2. Busca semântica por embeddings
+  try {
+    const resultado = await buscarRespostaSemantica(mensagem);
+    if (resultado) {
+      salvarHistorico({ mensagem, origem: 'embedding', resposta: resultado.resposta });
+      return { resposta: resultado.resposta, origem: 'embedding', score: resultado.score, modulo: resultado.modulo };
+    }
+  } catch (err) {
+    console.error("[embedding-search] Erro:", err.message);
+  }
+
+  // 3. Fallback OpenAI com prompt curto para WhatsApp
+  salvarNaoRespondida(mensagem);
+  try {
+    const response = await client.chat.completions.create({
+      model: "gpt-4o-mini",
+      temperature: 0.2,
+      max_tokens: 300,
+      messages: [
+        { role: "system", content: whatsappPrompt },
+        { role: "user", content: mensagem }
+      ]
+    });
+
+    const resposta = response.choices[0].message.content;
+    salvarHistorico({ mensagem, origem: 'openai', resposta });
+    logMongo({ mensagem, resposta, origem: 'openai', score: 0.5 });
+    return { resposta, origem: 'openai', score: 0.5 };
+  } catch (err) {
+    console.error("[openai-fallback] Erro:", err.message);
+    return { resposta: null, origem: 'nenhuma', score: 0 };
+  }
 }
 ```
 
@@ -22089,13 +22381,21 @@ import { salvarHistorico } from "./logger.js";
 import * as scheduler from "./scheduler.js";
 
 /**
- * GET /api/helpdesk/tickets — Lista tickets não respondidos
+ * GET /api/helpdesk/tickets — Lista tickets com filtros
  */
 export async function listarTickets(req, res) {
   try {
-    const mode = parseInt(req.query.mode) || 0;
-    const count = parseInt(req.query.count) || 20;
-    const tickets = await buscarTickets({ mode, count });
+    const mode       = parseInt(req.query.mode) || 0;
+    const count      = parseInt(req.query.count) || 50;
+    const sectionId  = req.query.sectionId  || null;
+    const techId     = req.query.techId     || null;
+    const userId     = req.query.userId     || null;
+    const dateFrom   = req.query.dateFrom   || null;
+    const dateTo     = req.query.dateTo     || null;
+    const statusId   = req.query.statusId   !== undefined ? req.query.statusId : null;
+    const priorityId = req.query.priorityId !== undefined ? req.query.priorityId : null;
+
+    const tickets = await buscarTickets({ mode, count, sectionId, techId, userId, dateFrom, dateTo, statusId, priorityId });
     return res.json({ total: tickets.length, tickets });
   } catch (error) {
     return res.status(500).json({ erro: "Erro ao buscar tickets", detalhe: error.message });
@@ -22482,21 +22782,20 @@ import dotenv from "dotenv";
 
 dotenv.config();
 
-const JITBIT_BASE = process.env.JITBIT_URL || "https://desk.axiontecnologia.com.br";
-const JITBIT_USER = process.env.JITBIT_USER;
-const JITBIT_PASS = process.env.JITBIT_PASS;
-const JITBIT_TOKEN = process.env.JITBIT_TOKEN;
+function getBase() {
+  return (process.env.JITBIT_URL || "https://desk.axiontecnologia.com.br").replace(/\/+$/, "");
+}
 
 function getAuthHeader() {
-  if (JITBIT_TOKEN) {
-    return { "Authorization": `Bearer ${JITBIT_TOKEN}` };
+  if (process.env.JITBIT_TOKEN) {
+    return { "Authorization": `Bearer ${process.env.JITBIT_TOKEN}` };
   }
-  const credentials = Buffer.from(`${JITBIT_USER}:${JITBIT_PASS}`).toString("base64");
+  const credentials = Buffer.from(`${process.env.JITBIT_USER}:${process.env.JITBIT_PASS}`).toString("base64");
   return { "Authorization": `Basic ${credentials}` };
 }
 
 async function jitbitRequest(endpoint, method = "GET", body = null) {
-  const url = `${JITBIT_BASE}/api${endpoint}`;
+  const url = `${getBase()}/api${endpoint}`;
   const options = {
     method,
     headers: {
@@ -22523,9 +22822,27 @@ async function jitbitRequest(endpoint, method = "GET", body = null) {
  * Buscar tickets (com filtros opcionais)
  * mode: "unanswered" | "all" | "unclosed" | "handledbyme"
  */
-export async function buscarTickets({ mode = "unanswered", count = 20, sectionId = null } = {}) {
+export async function buscarTickets({
+  mode = "unanswered",
+  count = 20,
+  sectionId = null,
+  techId = null,
+  userId = null,
+  dateFrom = null,
+  dateTo = null,
+  statusId = null,
+  priorityId = null,
+  handledByUserIdList = null,
+} = {}) {
   let endpoint = `/Tickets?mode=${mode}&count=${count}`;
-  if (sectionId) endpoint += `&sectionId=${sectionId}`;
+  if (sectionId)            endpoint += `&sectionId=${sectionId}`;
+  if (techId)               endpoint += `&techId=${techId}`;
+  if (userId)               endpoint += `&userId=${userId}`;
+  if (dateFrom)             endpoint += `&dateFrom=${encodeURIComponent(dateFrom)}`;
+  if (dateTo)               endpoint += `&dateTo=${encodeURIComponent(dateTo)}`;
+  if (statusId !== null && statusId !== "") endpoint += `&statusId=${statusId}`;
+  if (priorityId !== null && priorityId !== "") endpoint += `&priorityId=${priorityId}`;
+  if (handledByUserIdList)  endpoint += `&handledByUserIdList=${handledByUserIdList}`;
   return jitbitRequest(endpoint);
 }
 
@@ -22551,7 +22868,7 @@ export async function responderTicket(ticketId, corpo) {
   params.append("id", ticketId);
   params.append("body", corpo);
 
-  const url = `${JITBIT_BASE}/api/Comment`;
+  const url = `${getBase()}/api/Comment`;
   const response = await fetch(url, {
     method: "POST",
     headers: {
@@ -22579,14 +22896,26 @@ export async function buscarCategorias() {
  * Criar ticket no Jitbit usando credenciais do próprio usuário
  */
 export async function criarTicketUsuario(email, senha, assunto, descricao, categoryId) {
+  // categoryId=0 é inválido — buscar a primeira categoria disponível
+  let catId = parseInt(categoryId, 10);
+  if (!catId || catId <= 0) {
+    try {
+      const cats = await buscarCategorias();
+      catId = cats?.[0]?.CategoryID;
+      if (!catId) throw new Error("Nenhuma categoria encontrada no Jitbit");
+    } catch (e) {
+      throw new Error(`Não foi possível determinar a categoria: ${e.message}`);
+    }
+  }
+
   const credentials = Buffer.from(`${email}:${senha}`).toString("base64");
   const params = new URLSearchParams();
-  params.append("categoryId", categoryId || 0);
+  params.append("categoryId", catId);
   params.append("subject", assunto);
   params.append("body", descricao);
   params.append("priorityId", "1");
 
-  const url = `${JITBIT_BASE}/api/Ticket`;
+  const url = `${getBase()}/api/Ticket`;
   const response = await fetch(url, {
     method: "POST",
     headers: {
@@ -22603,8 +22932,13 @@ export async function criarTicketUsuario(email, senha, assunto, descricao, categ
     throw new Error(`Jitbit ${response.status}: ${response.statusText}`);
   }
 
-  const ticketId = await response.text();
-  return { sucesso: true, ticketId: ticketId.trim() };
+  const text = await response.text();
+  const ticketId = parseInt(text.trim(), 10);
+  if (isNaN(ticketId)) {
+    // Jitbit retornou HTML ou texto inesperado — provavelmente sessão expirou
+    throw new Error("AUTH_FAILED");
+  }
+  return { sucesso: true, ticketId };
 }
 
 /**
@@ -22642,12 +22976,273 @@ export async function buscarTicketsFiltrados({ tecnicoId = null, dataInicio = nu
   if (dataFim)    endpoint += `&dateTo=${encodeURIComponent(dataFim)}`;
   return jitbitRequest(endpoint);
 }
+
+/**
+ * Anexar arquivo (imagem) a um ticket existente
+ * @param {number} ticketId
+ * @param {string} filename - nome do arquivo ex: foto.jpg
+ * @param {Buffer} buffer   - conteúdo binário
+ * @param {string} mimeType - ex: image/jpeg
+ */
+export async function anexarArquivo(ticketId, filename, buffer, mimeType = "image/jpeg") {
+  // Endpoint correto: /api/AttachFile com campo "uploadFile" e "id" no corpo
+  const boundary = `----FormBoundary${Date.now().toString(16)}`;
+
+  const partId = Buffer.from(
+    `--${boundary}\r\n` +
+    `Content-Disposition: form-data; name="id"\r\n\r\n` +
+    `${ticketId}\r\n`
+  );
+  const partFile = Buffer.from(
+    `--${boundary}\r\n` +
+    `Content-Disposition: form-data; name="uploadFile"; filename="${filename}"\r\n` +
+    `Content-Type: ${mimeType}\r\n\r\n`
+  );
+  const footer = Buffer.from(`\r\n--${boundary}--\r\n`);
+  const body = Buffer.concat([partId, partFile, buffer, footer]);
+
+  const url = `${getBase()}/api/AttachFile`;
+  const response = await fetch(url, {
+    method: "POST",
+    headers: {
+      ...getAuthHeader(),
+      "Content-Type": `multipart/form-data; boundary=${boundary}`,
+      "Content-Length": String(body.length),
+    },
+    body,
+  });
+
+  if (!response.ok) {
+    const msg = await response.text().catch(() => "");
+    throw new Error(`Jitbit AttachFile ${response.status}: ${msg || response.statusText}`);
+  }
+  return { sucesso: true };
+}
+
+/**
+ * Atribuir técnico a um ticket
+ * @param {number} ticketId
+ * @param {number} techUserId - UserID do técnico no Jitbit
+ */
+export async function atribuirTecnico(ticketId, techUserId) {
+  const params = new URLSearchParams();
+  params.append("id", ticketId);
+  params.append("techId", techUserId);
+
+  const url = `${getBase()}/api/UpdateTicket`;
+  const response = await fetch(url, {
+    method: "POST",
+    headers: { ...getAuthHeader(), "Content-Type": "application/x-www-form-urlencoded" },
+    body: params.toString(),
+  });
+
+  if (!response.ok) {
+    throw new Error(`Jitbit UpdateTicket ${response.status}: ${response.statusText}`);
+  }
+  return { sucesso: true };
+}
+
+/**
+ * Listar usuários/técnicos disponíveis no Jitbit
+ */
+export async function listarUsuarios() {
+  return jitbitRequest("/UserList");
+}
 ```
 
 ### `axion-ia-api\src\kb.json`
 
 ```json
 {
+  "sobre_axhub": {
+    "keywords": ["o que e axhub", "o que é axhub", "o que e o axhub", "para que serve axhub", "o que faz axhub", "me fale sobre axhub", "explique axhub"],
+    "assunto": "O que é o AxHub",
+    "causa": "Dúvida sobre o sistema AxHub",
+    "acao": "O AxHub é o sistema de gestão de equipamentos de fiscalização de trânsito da Axion Tecnologia. Integra radares metrológicos e não metrológicos, câmeras OCR e balanças de pesagem. Principais módulos: Infrações (triagem, auditoria, exportação), Operações, Equipamentos, Controle de Acesso e Relatórios.",
+    "status": "Informativo"
+  },
+  "sobre_axton": {
+    "keywords": ["o que e axton", "o que é axton", "o que e o axton", "para que serve axton", "o que faz axton", "me fale sobre axton", "explique axton"],
+    "assunto": "O que é o AxTon",
+    "causa": "Dúvida sobre o sistema AxTon",
+    "acao": "O AxTon é o sistema de pesagem veicular da Axion Tecnologia. Controla balanças fixas e dinâmicas para fiscalização de peso em rodovias, gerando auto de infração (RENAINF), emitindo MDF-e e exportando dados para órgãos como DER e DNIT.",
+    "status": "Informativo"
+  },
+  "sobre_axcross": {
+    "keywords": ["o que e axcross", "o que é axcross", "o que e o axcross", "para que serve axcross", "o que faz axcross", "me fale sobre axcross", "explique axcross"],
+    "assunto": "O que é o AxCross",
+    "causa": "Dúvida sobre o sistema AxCross",
+    "acao": "O AxCross é o sistema de monitoramento de veículos por cruzamento de placas da Axion Tecnologia. Realiza cruzamento em tempo real das placas capturadas por câmeras com listas de monitoramento (alertas), gerando notificações para operadores de segurança.",
+    "status": "Informativo"
+  },
+  "sobre_axblitz": {
+    "keywords": ["o que e axblitz", "o que é axblitz", "para que serve axblitz", "o que faz axblitz", "explique axblitz"],
+    "assunto": "O que é o AxBlitz",
+    "causa": "Dúvida sobre o sistema AxBlitz",
+    "acao": "O AxBlitz é o módulo de operações de blitz da Axion Tecnologia. Permite registrar abordagens em campo, consultar veículos e condutores em tempo real e gerar relatórios das operações de fiscalização.",
+    "status": "Informativo"
+  },
+  "sobre_axion": {
+    "keywords": ["o que e axion", "o que é axion", "o que faz axion", "quem e axion", "empresa axion"],
+    "assunto": "O que é a Axion Tecnologia",
+    "causa": "Dúvida sobre a empresa",
+    "acao": "A Axion Tecnologia é uma empresa especializada em sistemas de fiscalização de trânsito e segurança pública. Desenvolve soluções como AxHub (gestão de equipamentos), AxTon (pesagem veicular), AxCross (monitoramento por cruzamento de placas) e AxBlitz (operações de blitz).",
+    "status": "Informativo"
+  },
+  "axhub_triagem": {
+    "keywords": ["triagem", "triar infração", "validar infração", "descartar infração", "como triar", "infração pendente", "analise infração", "infração aguardando triagem"],
+    "assunto": "Triagem de infrações — AxHub",
+    "causa": "Dúvida sobre o processo de triagem no AxHub",
+    "acao": "Acesse Menu lateral → Infrações → Triagem. A triagem permite revisar, validar ou descartar infrações antes da exportação. Ações disponíveis: Validar (confirma a infração), Descartar (rejeita com motivo obrigatório) e Reabrir (reabre infração descartada). Filtre por Período, Status (Pendente/Validada/Descartada), Tipo de Infração e Operação.",
+    "status": "Informativo"
+  },
+  "axhub_auditoria": {
+    "keywords": ["auditoria", "auditar infração", "como auditar", "auditoria de validas", "auditoria de descartadas", "revisar triagem", "qualidade triagem"],
+    "assunto": "Auditoria de infrações — AxHub",
+    "causa": "Dúvida sobre o processo de auditoria no AxHub",
+    "acao": "Acesse Menu lateral → Infrações → Auditoria. A auditoria permite que auditores revisem as infrações validadas ou descartadas na triagem. Tipos: Auditoria de Válidas (revisar aprovadas) e Auditoria de Descartadas (revisar rejeitadas). O auditor pode Confirmar, Rejeitar (devolve para triagem) ou Adicionar observações. Use filtros por faixa de data, equipamento, tipo de infração, analista e percentual de amostragem.",
+    "status": "Informativo"
+  },
+  "axhub_exportacao": {
+    "keywords": ["exportacao", "exportar infração", "lote exportação", "gerar lote", "enviar lote", "renainf", "exportar para orgao", "exportar detran", "exportar der", "exportar prf", "lote com erro"],
+    "assunto": "Exportação de infrações — AxHub",
+    "causa": "Dúvida sobre exportação de infrações para órgãos autuadores",
+    "acao": "Acesse Menu lateral → Infrações → Exportação. Passos: 1) Gerar Novo Lote (configurar órgão destino, período, layout), 2) Clicar em Gerar — o sistema valida dados e gera o arquivo com assinatura digital, 3) Clicar em Enviar. Status possíveis: Pendente, Enviado, Aceito, Erro. Formatos: RENAINF, XML, TXT, CSV. Pré-requisitos: infrações triadas e auditadas, layouts configurados em Administração → Layouts Arquivos.",
+    "status": "Informativo"
+  },
+  "axhub_sequencial": {
+    "keywords": ["sequencial", "sequencial infracao", "numero auto", "numeracao infracao", "reiniciar sequencial", "sequencial zerado", "numero duplicado infracao"],
+    "assunto": "Sequencial de infrações — AxHub",
+    "causa": "Dúvida sobre numeração/sequencial de infrações no AxHub",
+    "acao": "O sequencial de infrações é o número auto único atribuído a cada infração. Acesse Menu lateral → Administração → Sequenciais para configurar. Cada lote de exportação possui seu próprio sequencial. Em caso de duplicidade ou reset, verifique as configurações do sequencial por equipamento e operação.",
+    "status": "Informativo"
+  },
+  "axhub_usuario": {
+    "keywords": ["usuario axhub", "criar usuario axhub", "cadastrar usuario axhub", "liberar acesso axhub", "novo usuario axhub", "usuario bloqueado axhub", "redefinir senha axhub", "perfil acesso axhub"],
+    "assunto": "Cadastro de usuários — AxHub",
+    "causa": "Dúvida sobre criação ou gestão de usuários no AxHub",
+    "acao": "Acesse Menu lateral → Controle de Acesso → Usuários → + Novo. Campos: Nome, Login (ex: nome.sobrenome), E-mail, Perfil de Acesso, Ativo (Sim/Não). O Perfil de Acesso define as permissões do usuário. Revise periodicamente usuários inativos e desative contas que não estejam em uso. Para desbloquear, verifique se o campo Ativo está marcado.",
+    "status": "Informativo"
+  },
+  "axhub_equipamento": {
+    "keywords": ["equipamento axhub", "radar offline", "camera offline", "equipamento sem comunicacao axhub", "heartbeat axhub", "equipamento nao captura", "equipamento parado axhub"],
+    "assunto": "Equipamentos e monitoramento — AxHub",
+    "causa": "Problema com equipamento no AxHub",
+    "acao": "Acesse Menu lateral → Equipamentos para ver status em tempo real. Verifique: 1) Conectividade de rede do equipamento, 2) Status do heartbeat (último sinal recebido), 3) Eventos de equipamentos para logs de erro. Se offline, acione equipe de campo para verificar alimentação, rede e configuração do equipamento.",
+    "status": "Informativo"
+  },
+  "axhub_relatorio": {
+    "keywords": ["relatorio axhub", "relatorio infracoes", "relatorio passagens", "power bi axhub", "relatorio discrepancias", "exportar relatorio axhub", "estatisticas axhub"],
+    "assunto": "Relatórios — AxHub",
+    "causa": "Dúvida sobre relatórios no AxHub",
+    "acao": "Acesse Menu lateral → Relatórios. Disponível: Relatório de Infrações (por período, equipamento, tipo), Relatório de Passagens (fluxo diário), Relatório de Discrepâncias, Processamento por Usuário, Logs de Envios e integração com Power BI. Para relatórios avançados use Power BI em Relatórios → Power BI.",
+    "status": "Informativo"
+  },
+  "axton_pesagem": {
+    "keywords": ["pesagem", "ticket pesagem", "iniciar pesagem", "como pesar", "balanca axton", "pbt", "peso bruto", "excesso peso", "veiculo pesagem", "fila pesagem"],
+    "assunto": "Processo de pesagem — AxTon",
+    "causa": "Dúvida sobre o processo de pesagem no AxTon",
+    "acao": "Acesse Menu lateral → Tickets de Pesagens. O processo: veículo entra na balança → sistema captura peso automaticamente → operador verifica classificação e dados → confirma ou reclassifica → gera auto de infração se houver excesso. O PBT (Peso Bruto Total) é calculado com base na classificação do veículo.",
+    "status": "Informativo"
+  },
+  "axton_liberar_pesagem": {
+    "keywords": ["liberar pesagem", "liberar veiculo pesagem", "veiculo retido", "liberar ticket", "como liberar pesagem", "liberacao pesagem", "desbloquear pesagem"],
+    "assunto": "Liberar pesagem — AxTon",
+    "causa": "Dúvida sobre liberação de veículo no processo de pesagem",
+    "acao": "Acesse Menu lateral → Tickets de Pesagens → selecione o ticket → clique em Liberar. Preencha: Motivo da Liberação (obrigatório) e Responsável (quem autorizou). Casos de liberação: veículo aguardando após pesagem, liberação por autoridade competente, correção de registro incorreto. A liberação não cancela a infração — apenas libera o veículo fisicamente.",
+    "status": "Informativo"
+  },
+  "axton_reclassificar": {
+    "keywords": ["reclassificar veiculo", "reclassificacao", "classificacao errada axton", "mudar classificacao veiculo", "classificacao automatica errada", "reboque nao detectado", "eixos errados"],
+    "assunto": "Reclassificação de veículos — AxTon",
+    "causa": "Classificação automática incorreta na pesagem",
+    "acao": "Acesse Menu lateral → Tickets de Pesagens → selecione o ticket → clique em Reclassificar. Preencha: Nova Classificação e Motivo. Reclassifique quando: o veículo foi classificado incorretamente, mudança de configuração de eixos ou reboque não detectado. Atenção: a reclassificação altera o PBT permitido e pode impactar o cálculo de excesso de peso.",
+    "status": "Informativo"
+  },
+  "axton_exportacao": {
+    "keywords": ["exportar infracoes axton", "exportacao axton", "renainf axton", "exportar para der", "lote infracoes axton", "exportar pesagem", "enviar infracoes orgao"],
+    "assunto": "Exportação de infrações — AxTon",
+    "causa": "Dúvida sobre exportação de infrações no AxTon",
+    "acao": "Acesse Menu lateral → Exportação. O processo: 1) Gerar Novo Lote (período e filtros), 2) Revisar quantidade de infrações, 3) Clicar em Gerar, 4) Após gerado, clicar em Enviar. Status: Pendente → Enviado → Aceito/Erro. Cada lote contém dados, imagens e assinatura digital. Verifique se as infrações foram auditadas antes de exportar.",
+    "status": "Informativo"
+  },
+  "axton_mdfe_nfe": {
+    "keywords": ["mdfe", "nfe", "mdf-e axton", "nota fiscal pesagem", "manifesto pesagem", "emitir mdfe", "emitir nfe axton"],
+    "assunto": "MDF-e e NF-e — AxTon",
+    "causa": "Dúvida sobre emissão de MDF-e ou NF-e no AxTon",
+    "acao": "O AxTon integra com emissão de MDF-e (Manifesto Eletrônico de Documentos Fiscais) e NF-e (Nota Fiscal Eletrônica). Acesse Menu lateral → MDF-e ou NF-e para consultar os documentos vinculados às pesagens. A emissão é automática quando configurada. Em caso de erro na emissão, verifique as configurações fiscais em Administração.",
+    "status": "Informativo"
+  },
+  "axton_pbt": {
+    "keywords": ["pbt", "peso bruto total", "limite peso", "excesso carga", "peso permitido", "tabela pbt", "configurar pbt"],
+    "assunto": "PBT — Peso Bruto Total (AxTon)",
+    "causa": "Dúvida sobre PBT ou limite de peso no AxTon",
+    "acao": "O PBT (Peso Bruto Total) é o peso máximo permitido para cada tipo de veículo conforme legislação. Acesse Menu lateral → Administração → PBT para visualizar e configurar os limites por classificação de veículo. O excesso de peso é calculado automaticamente comparando o peso medido com o PBT da classificação do veículo.",
+    "status": "Informativo"
+  },
+  "axton_usuario": {
+    "keywords": ["usuario axton", "criar usuario axton", "acesso axton", "perfil axton", "permissao axton", "novo operador axton"],
+    "assunto": "Usuários e acesso — AxTon",
+    "causa": "Dúvida sobre usuários no AxTon",
+    "acao": "Acesse Menu lateral → Controle de Acesso → Usuários → + Novo. Preencha: Nome, Login, E-mail, Perfil de Acesso. O perfil define quais módulos e ações o usuário pode realizar. Para permissões específicas acesse Controle de Acesso → Perfis de Acesso e configure as permissões por módulo.",
+    "status": "Informativo"
+  },
+  "axcross_veiculo_monitorado": {
+    "keywords": ["veiculo monitorado", "cadastrar veiculo monitorado", "placa monitorada", "monitorar placa", "adicionar monitoramento", "lista monitorados", "importar placas monitoradas"],
+    "assunto": "Veículos monitorados — AxCross",
+    "causa": "Dúvida sobre cadastro de veículos monitorados no AxCross",
+    "acao": "Acesse Menu lateral → Veículos Monitorados → Novo Veículo Monitorado. Campos: Placa (Mercosul ou antigo), Classificação (ex: Roubado, VIP, Suspeito), Motivo, Observações, Status (Ativo/Inativo). Para importação em lote use Veículos Monitorados → Importação de Monitorados via CSV. Quando o veículo for detectado em um cruzamento, um alerta é gerado automaticamente.",
+    "status": "Informativo"
+  },
+  "axcross_alerta": {
+    "keywords": ["alerta axcross", "alerta veiculo", "como tratar alerta", "assumir alerta", "resolver alerta", "alerta detectado", "veiculo detectado axcross", "notificacao axcross"],
+    "assunto": "Alertas — AxCross",
+    "causa": "Dúvida sobre alertas no AxCross",
+    "acao": "Acesse Menu lateral → Alertas. Tipos de alerta: Veículo Monitorado (placa monitorada detectada), Equipamento Offline, Falha de Imagem, Ocorrência de Trânsito. Ações: Visualizar (abrir detalhes), Assumir (registrar responsável), Resolver (marcar como resolvido), Descartar (com justificativa). Para criar alerta manual clique em Novo Alerta, selecione Tipo de Ocorrência, Local e descreva a ocorrência.",
+    "status": "Informativo"
+  },
+  "axcross_vigencia": {
+    "keywords": ["vigencia alerta", "expirar monitoramento", "prazo monitoramento", "vencimento alerta", "alerta expirado", "vigencia veiculo monitorado", "desativar automaticamente monitoramento"],
+    "assunto": "Vigência dos alertas — AxCross",
+    "causa": "Dúvida sobre expiração/vigência de veículos monitorados",
+    "acao": "A vigência define prazo de expiração para veículos monitorados. Configure o prazo em Veículos Monitorados → Tipos de Ocorrências → campo Prazo de Expiração (dias). Status possíveis: Ativo (verde), Expira em breve (amarelo), Expirado (vermelho), Desativado (amarelo). O alerta só é gerado se o veículo estiver Habilitado E dentro da vigência. Deixe o campo vazio para vigência ilimitada.",
+    "status": "Informativo"
+  },
+  "axcross_passagem": {
+    "keywords": ["passagem axcross", "consultar passagem", "historico passagens", "passagem detectada", "relatorio passagens axcross", "rastrear veiculo axcross"],
+    "assunto": "Passagens — AxCross",
+    "causa": "Dúvida sobre consulta de passagens no AxCross",
+    "acao": "Acesse Menu lateral → Passagens para consultar o histórico de veículos detectados pelos equipamentos. Filtre por placa, data, local, equipamento ou classificação. O relatório de passagens pode ser exportado em Relatórios → Relatório de Passagens.",
+    "status": "Informativo"
+  },
+  "axcross_usuario": {
+    "keywords": ["usuario axcross", "criar usuario axcross", "acesso axcross", "perfil axcross", "operador axcross", "novo usuario axcross"],
+    "assunto": "Usuários — AxCross",
+    "causa": "Dúvida sobre usuários no AxCross",
+    "acao": "Acesse Menu lateral → Controle de Acesso → Usuários → + Novo. Preencha Nome, Login, E-mail e Perfil de Acesso. O perfil define quais módulos e alertas o operador pode visualizar e gerenciar. Acesse Controle de Acesso → Perfis de Acesso para configurar permissões detalhadas.",
+    "status": "Informativo"
+  },
+  "geral_login": {
+    "keywords": ["nao consigo logar", "esqueci senha", "como entrar no sistema", "senha incorreta", "usuario ou senha invalidos", "acesso negado", "redefinir senha", "recuperar senha"],
+    "assunto": "Problemas de login / acesso ao sistema",
+    "causa": "Credenciais incorretas, usuário inativo ou sem cadastro",
+    "acao": "Verifique: 1) Login e senha corretos (respeite maiúsculas/minúsculas), 2) Se o usuário está cadastrado e Ativo no sistema (Controle de Acesso → Usuários), 3) Se o perfil de acesso tem permissão para acessar o módulo. Para redefinir senha, entre em contato com o administrador do sistema. Se o usuário não existir, realize o cadastro em Controle de Acesso → Usuários → + Novo.",
+    "status": "Informativo"
+  },
+  "geral_camera_offline": {
+    "keywords": ["camera offline", "camera sem imagem", "camera sem sinal", "camera nao captura", "sem imagem camera", "camera rtsp", "camera ip offline", "equipamento camera parado"],
+    "assunto": "Câmera offline ou sem imagem",
+    "causa": "Câmera sem comunicação com o sistema",
+    "acao": "Verifique: 1) Conectividade de rede — ping para o IP da câmera, 2) Se o serviço de captura de imagens está rodando no servidor, 3) Configurações RTSP/IP da câmera em Administração → Equipamentos, 4) Alimentação elétrica e cabeamento físico da câmera. Se a câmera responde ao ping mas não envia imagens, reinicie o serviço de captura ou verifique as credenciais RTSP.",
+    "status": "Informativo"
+  },
+  "geral_relatorio_vazio": {
+    "keywords": ["relatorio vazio", "sem dados relatorio", "relatorio sem resultado", "nao aparece nada no relatorio", "relatorio nao gera", "filtro relatorio errado"],
+    "assunto": "Relatório sem dados / vazio",
+    "causa": "Filtros incorretos ou sem dados no período selecionado",
+    "acao": "Verifique: 1) O período selecionado — confirme que há dados nesse intervalo, 2) Os filtros aplicados — equipamento, operação, status, 3) Se as infrações/pesagens foram processadas corretamente. Tente expandir o período do filtro. Se o problema persistir mesmo com dados visíveis na tela principal, abra um chamado com print dos filtros utilizados.",
+    "status": "Informativo"
+  },
   "erro_404_imagem": {
     "keywords": ["404", "salvar imagem", "erro salvar"],
     "assunto": "Erro ao salvar imagem",
@@ -23167,6 +23762,58 @@ const specSchema = new mongoose.Schema({
 export default mongoose.model("Spec", specSchema);
 ```
 
+### `axion-ia-api\src\models\whatsapp-sessao.model.js`
+
+```js
+import mongoose from "mongoose";
+
+const WhatsAppSessaoSchema = new mongoose.Schema({
+  telefone:      { type: String, required: true, unique: true }, // ex: 5511999999999
+  nome:          { type: String, default: "" },
+  estado:        {
+    type: String,
+    enum: [
+      "inicio",
+      "menu",
+      "aguardando_assunto",
+      "aguardando_sistema",
+      "aguardando_descricao",
+      "aguardando_categoria",
+      "aguardando_foto",
+      "confirmando_ticket",
+      "ticket_criado",
+      "consultando_numero",
+      "respondendo_numero",
+      "respondendo_mensagem",
+      "aguardando_modulo_duvida",
+      "aguardando_duvida",
+      "respondendo_duvida",
+      "encerrado"
+    ],
+    default: "inicio"
+  },
+  dadosParciais: {
+    assunto:      { type: String, default: null },
+    sistema:      { type: String, default: null },
+    descricao:    { type: String, default: null },
+    categoriaId:  { type: Number, default: null },
+    categoriaNome:{ type: String, default: null },
+    ticketId:     { type: Number, default: null },
+    temFoto:      { type: Boolean, default: false },
+  },
+  ultimoTicketId:   { type: Number, default: null },
+  ultimaMensagem:   { type: Date, default: Date.now },
+  ativo:            { type: Boolean, default: true },
+}, { timestamps: true });
+
+WhatsAppSessaoSchema.index({ ultimaMensagem: -1 });
+
+// Expirar sessões inativas depois de 24h (TTL index)
+WhatsAppSessaoSchema.index({ ultimaMensagem: 1 }, { expireAfterSeconds: 86400 });
+
+export const WhatsAppSessao = mongoose.model("whatsapp_sessao", WhatsAppSessaoSchema);
+```
+
 ### `axion-ia-api\src\prompt.js`
 
 ```js
@@ -23236,6 +23883,25 @@ Status:
 - Se for erro comum (404, offline, timeout) → responder com confiança
 - Se houver ambiguidade → escolher interpretação mais lógica
 - NUNCA dizer "não entendi" — sempre gerar resposta coerente
+`;
+
+// Prompt específico para respostas via WhatsApp — curto e direto
+export const whatsappPrompt = `
+Você é a AxionIA, assistente de suporte da Axion Tecnologia via WhatsApp.
+Especialista em: AxHub (trânsito), AxTon (pesagem) e AxCross (cruzamentos).
+
+REGRAS OBRIGATÓRIAS:
+- Resposta máxima: 5 linhas
+- Linguagem simples e direta — como numa mensagem de WhatsApp
+- Sem formatação laudo (sem "Assunto:", "Análise:", "Causa:")
+- Use emojis moderadamente para tornar mais amigável
+- Se não souber, diga: "Não tenho essa informação. Posso abrir um chamado para o suporte técnico?"
+- NUNCA inventar informações técnicas
+
+Formato ideal:
+[resposta direta em 1-3 frases]
+[se houver passos: use numeração simples]
+[oferecer abrir chamado se necessário]
 `;
 ```
 
@@ -23507,6 +24173,9 @@ import { gerarSpecHandler, listarSpecsHandler, obterSpecHandler, atualizarStatus
 import { relatorioPassagens, relatorioImagens, listarEquipamentosRelatorio } from "./relatorio-controller.js";
 import { uploadMiddlewareComErro, uploadContexto } from "./upload-controller.js";
 import { gerarConformidadeHandler, listarConformidadeHandler, obterConformidadeHandler, removerConformidadeHandler } from "./conformidade-controller.js";
+import { iniciarConexao, statusConexao as waStatus, listarSessoes, detalhesSessao, encerrarSessao, enviarManual } from "./whatsapp-controller.js";
+import { reindexarDocs, reindexarJitbit, statsKB, limparModuloKB } from "./admin-controller.js";
+import { uploadImagemMiddleware, analisarSemSalvar, salvarEAnalisar, listarTodas, listarPorSistema, removerImagem } from "./analise-imagem-controller.js";
 
 const router = express.Router();
 
@@ -23632,6 +24301,29 @@ router.post("/conformidade/gerar", gerarConformidadeHandler);
 router.get("/conformidade", listarConformidadeHandler);
 router.get("/conformidade/:id", obterConformidadeHandler);
 router.delete("/conformidade/:id", removerConformidadeHandler);
+
+// WhatsApp
+router.post("/whatsapp/iniciar", iniciarConexao);
+router.get("/whatsapp/status", waStatus);
+router.get("/whatsapp/sessoes", listarSessoes);
+router.get("/whatsapp/sessao/:telefone", detalhesSessao);
+router.delete("/whatsapp/sessao/:telefone", encerrarSessao);
+router.post("/whatsapp/send", enviarManual);
+
+// ─── Análise de Imagens Operacionais ─────────────────────────────────────────
+// Pasta: uploads/analise/{sistema}/  (≠ docs/img/ que são screenshots dos manuais)
+// Sistemas aceitos: axhub | axton | axcross | axionia
+router.post("/analise-imagem/analisar", uploadImagemMiddleware, analisarSemSalvar);
+router.post("/analise-imagem/salvar-e-analisar", uploadImagemMiddleware, salvarEAnalisar);
+router.get("/analise-imagem/listar", listarTodas);
+router.get("/analise-imagem/listar/:sistema", listarPorSistema);
+router.delete("/analise-imagem/:sistema/:nome", removerImagem);
+
+// ─── Admin — Re-indexação da KB ──────────────────────────────────────────────
+router.get("/admin/kb/stats", statsKB);
+router.post("/admin/reindexar-docs", reindexarDocs);
+router.post("/admin/reindexar-jitbit", reindexarJitbit);
+router.delete("/admin/kb/:modulo", limparModuloKB);
 
 export default router;
 ```
@@ -24016,6 +24708,446 @@ export function iniciarColetaPNCP() {
 }
 ```
 
+### `axion-ia-api\src\scripts\seed-docs.js`
+
+```js
+/**
+ * Importa arquivos .md das documentações AxHub, AxTon e AxCross para o MongoDB KB.
+ * Cada arquivo vira um ou mais chunks de ~500 chars com embedding gerado pela OpenAI.
+ *
+ * Uso: node src/scripts/seed-docs.js
+ * Uso (dry-run sem OpenAI): node src/scripts/seed-docs.js --dry-run
+ */
+import mongoose from "mongoose";
+import dotenv from "dotenv";
+import fs from "fs";
+import path from "path";
+import { fileURLToPath } from "url";
+import { KB } from "../models/kb.model.js";
+import { gerarEmbedding } from "../services/embedding.js";
+
+dotenv.config();
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+// scripts/ → src/ → axion-ia-api/ → Axion.Docs/
+const ROOT = path.resolve(__dirname, "../../../");
+const DRY_RUN = process.argv.includes("--dry-run");
+
+const MONGO_URI = process.env.MONGO_URI || "mongodb://localhost:27017/axion-ia";
+
+/** Mapeamento portal → módulo KB */
+const PORTALS = [
+  { dir: path.join(ROOT, "AxHub/docs-portal/docs"), modulo: "axhub" },
+  { dir: path.join(ROOT, "AxTon/docs-portal/docs"), modulo: "axton" },
+  { dir: path.join(ROOT, "AxCross/docs-portal/docs"), modulo: "axcross" },
+];
+
+/** Tamanho máximo de cada chunk (em caracteres) */
+const CHUNK_SIZE = 500;
+
+// ─────────────────────────────────────────────
+// Helpers de parsing
+// ─────────────────────────────────────────────
+
+function extrairFrontmatter(conteudo) {
+  const match = conteudo.match(/^---\s*\n([\s\S]*?)\n---\s*\n/);
+  if (!match) return { title: null, description: null, resto: conteudo };
+
+  const fm = match[1];
+  const title = (fm.match(/^title:\s*(.+)$/m) || [])[1]?.trim() ?? null;
+  const description = (fm.match(/^description:\s*(.+)$/m) || [])[1]?.trim() ?? null;
+  return { title, description, resto: conteudo.slice(match[0].length) };
+}
+
+function limparMarkdown(texto) {
+  return texto
+    // Remove blocos de código
+    .replace(/```[\s\S]*?```/g, "")
+    // Remove inline code
+    .replace(/`[^`]+`/g, "")
+    // Remove imagens
+    .replace(/!\[.*?\]\(.*?\)/g, "")
+    // Remove links mas mantém texto
+    .replace(/\[([^\]]+)\]\([^)]+\)/g, "$1")
+    // Remove headers # mas mantém texto
+    .replace(/^#+\s*/gm, "")
+    // Remove células de tabela e separadores
+    .replace(/^\|.*\|$/gm, (linha) =>
+      linha.replace(/\|/g, " ").replace(/\s{2,}/g, " ").trim()
+    )
+    .replace(/^[-|: ]+$/gm, "")
+    // Remove bold/italic
+    .replace(/\*{1,2}([^*]+)\*{1,2}/g, "$1")
+    .replace(/_{1,2}([^_]+)_{1,2}/g, "$1")
+    // Remove linhas HTML comentário
+    .replace(/<!--[\s\S]*?-->/g, "")
+    // Normaliza espaços múltiplos
+    .replace(/\n{3,}/g, "\n\n")
+    .trim();
+}
+
+function chunkar(texto, titulo, descricao) {
+  const linhas = texto.split("\n").filter((l) => l.trim().length > 0);
+  const chunks = [];
+  let atual = [];
+  let tamanhoAtual = 0;
+
+  for (const linha of linhas) {
+    if (tamanhoAtual + linha.length > CHUNK_SIZE && atual.length > 0) {
+      chunks.push(atual.join("\n").trim());
+      atual = [];
+      tamanhoAtual = 0;
+    }
+    atual.push(linha);
+    tamanhoAtual += linha.length + 1;
+  }
+
+  if (atual.length > 0) {
+    chunks.push(atual.join("\n").trim());
+  }
+
+  // Adiciona cabeçalho de contexto no primeiro chunk
+  if (chunks.length > 0 && titulo) {
+    chunks[0] = `${titulo}${descricao ? `: ${descricao}` : ""}\n\n${chunks[0]}`;
+  }
+
+  return chunks;
+}
+
+// ─────────────────────────────────────────────
+// Leitura recursiva de arquivos .md
+// ─────────────────────────────────────────────
+
+function listarArquivosMd(dir) {
+  const arquivos = [];
+  if (!fs.existsSync(dir)) {
+    console.warn(`  ⚠  Diretório não encontrado: ${dir}`);
+    return arquivos;
+  }
+  for (const item of fs.readdirSync(dir, { withFileTypes: true })) {
+    const fullPath = path.join(dir, item.name);
+    if (item.isDirectory()) {
+      arquivos.push(...listarArquivosMd(fullPath));
+    } else if (item.isFile() && item.name.endsWith(".md")) {
+      arquivos.push(fullPath);
+    }
+  }
+  return arquivos;
+}
+
+// ─────────────────────────────────────────────
+// Main
+// ─────────────────────────────────────────────
+
+async function seed() {
+  if (!DRY_RUN) {
+    await mongoose.connect(MONGO_URI);
+    console.log("📦 MongoDB conectado\n");
+  } else {
+    console.log("🔍 DRY-RUN ativo — nenhum dado será gravado ou chamado à OpenAI\n");
+  }
+
+  let totalImportados = 0;
+  let totalPulados = 0;
+  let totalErros = 0;
+
+  for (const { dir, modulo } of PORTALS) {
+    const arquivos = listarArquivosMd(dir);
+    console.log(`\n📂 [${modulo.toUpperCase()}] ${arquivos.length} arquivos em ${dir}`);
+
+    for (const arquivo of arquivos) {
+      const conteudoBruto = fs.readFileSync(arquivo, "utf-8");
+      const { title, description, resto } = extrairFrontmatter(conteudoBruto);
+      const textoLimpo = limparMarkdown(resto);
+
+      if (textoLimpo.length < 50) {
+        console.log(`  ⏭  Muito curto, pulando: ${path.basename(arquivo)}`);
+        continue;
+      }
+
+      const chunks = chunkar(textoLimpo, title, description);
+      const nomeArquivo = path.relative(dir, arquivo).replace(/\\/g, "/");
+
+      for (let i = 0; i < chunks.length; i++) {
+        const chunk = chunks[i];
+        const pergunta = title
+          ? `${title}${chunks.length > 1 ? ` (parte ${i + 1})` : ""}`
+          : `${nomeArquivo} (parte ${i + 1})`;
+        const chaveUnica = `${modulo}::${nomeArquivo}::${i}`;
+
+        if (DRY_RUN) {
+          console.log(`  [dry] ${chaveUnica} — ${chunk.length} chars`);
+          totalImportados++;
+          continue;
+        }
+
+        // Verifica duplicata pela chave modulo::arquivo::índice
+        const existente = await KB.findOne({ pergunta });
+        if (existente) {
+          console.log(`  ⏭  ${chaveUnica} — já existe`);
+          totalPulados++;
+          continue;
+        }
+
+        try {
+          const textoEmbedding = `${pergunta}\n${chunk}`;
+          const embedding = await gerarEmbedding(textoEmbedding);
+
+          await KB.create({ pergunta, resposta: chunk, modulo, embedding });
+
+          totalImportados++;
+          process.stdout.write(`  ✅ ${chaveUnica}\r`);
+        } catch (err) {
+          console.error(`  ❌ ${chaveUnica} — ${err.message}`);
+          totalErros++;
+        }
+      }
+    }
+  }
+
+  console.log(`\n\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━`);
+  console.log(`✅ Importados : ${totalImportados}`);
+  console.log(`⏭  Pulados    : ${totalPulados}`);
+  console.log(`❌ Erros      : ${totalErros}`);
+
+  if (!DRY_RUN) {
+    await mongoose.disconnect();
+  }
+  process.exit(0);
+}
+
+seed().catch((err) => {
+  console.error("Erro fatal:", err);
+  process.exit(1);
+});
+```
+
+### `axion-ia-api\src\scripts\seed-jitbit.js`
+
+```js
+/**
+ * Importa histórico de chamados fechados do Jitbit para o MongoDB KB.
+ * Filtra apenas tickets com resposta técnica real e gera embeddings.
+ *
+ * Uso: node src/scripts/seed-jitbit.js
+ * Uso (dry-run): node src/scripts/seed-jitbit.js --dry-run
+ */
+import mongoose from "mongoose";
+import dotenv from "dotenv";
+import { KB } from "../models/kb.model.js";
+import { gerarEmbedding } from "../services/embedding.js";
+import { buscarTickets, buscarComentarios } from "../jitbit.js";
+
+dotenv.config();
+
+const DRY_RUN = process.argv.includes("--dry-run");
+const MONGO_URI = process.env.MONGO_URI || "mongodb://localhost:27017/axion-ia";
+
+/** Máximo de tickets a buscar por rodada */
+const TICKETS_POR_BATCH = 300;
+
+/** Tamanho mínimo aceitável para assunto e resposta */
+const MIN_ASSUNTO = 10;
+const MIN_RESPOSTA = 30;
+
+/**
+ * Frases genéricas demais que não ensinam nada à IA.
+ * Comentários que contenham qualquer uma delas são descartados.
+ */
+const FRASES_IGNORADAS = [
+  "verificando",
+  "em análise",
+  "aguardando",
+  "em andamento",
+  "obrigado",
+  "pode fechar",
+  "encerrando",
+  "fechando",
+  "ok, obrigado",
+  "resolvido, obrigado",
+];
+
+// ─────────────────────────────────────────────
+// Helpers
+// ─────────────────────────────────────────────
+
+/** Remove tags HTML de uma string */
+function stripHtml(html) {
+  if (!html) return "";
+  return html
+    .replace(/<br\s*\/?>/gi, "\n")
+    .replace(/<\/p>/gi, "\n")
+    .replace(/<[^>]+>/g, "")
+    .replace(/&nbsp;/g, " ")
+    .replace(/&amp;/g, "&")
+    .replace(/&lt;/g, "<")
+    .replace(/&gt;/g, ">")
+    .replace(/&quot;/g, '"')
+    .replace(/\n{3,}/g, "\n\n")
+    .trim();
+}
+
+/** Verifica se o texto é genérico demais */
+function ehRespostaGenérica(texto) {
+  const lower = texto.toLowerCase();
+  return FRASES_IGNORADAS.some((frase) => lower.includes(frase));
+}
+
+/**
+ * Infere o módulo KB com base no nome da categoria Jitbit.
+ * Se não reconhecer, retorna "jitbit".
+ */
+function inferirModulo(categoria) {
+  if (!categoria) return "jitbit";
+  const lower = categoria.toLowerCase();
+  if (lower.includes("axhub") || lower.includes("bhtr") || lower.includes("der")) return "axhub";
+  if (lower.includes("axton") || lower.includes("pesag") || lower.includes("balança")) return "axton";
+  if (lower.includes("axcross") || lower.includes("monitoramento") || lower.includes("cruzamento")) return "axcross";
+  return "jitbit";
+}
+
+/**
+ * Escolhe o melhor comentário técnico de uma lista.
+ * Prioridade: técnicos (não é o usuário do ticket), mais longo, não genérico.
+ */
+function escolherMelhorComentario(comentarios, userId) {
+  // Filtra comentários de técnicos (userId diferente do criador do ticket)
+  const deTecnico = comentarios.filter(
+    (c) => c.UserID !== userId && !ehRespostaGenérica(stripHtml(c.Body))
+  );
+
+  if (deTecnico.length === 0) return null;
+
+  // Escolhe o mais longo (geralmente mais completo)
+  return deTecnico.sort((a, b) => {
+    const lenA = (a.Body || "").length;
+    const lenB = (b.Body || "").length;
+    return lenB - lenA;
+  })[0];
+}
+
+// ─────────────────────────────────────────────
+// Main
+// ─────────────────────────────────────────────
+
+async function seed() {
+  if (!DRY_RUN) {
+    await mongoose.connect(MONGO_URI);
+    console.log("📦 MongoDB conectado\n");
+  } else {
+    console.log("🔍 DRY-RUN ativo — nenhum dado será gravado ou chamado à OpenAI\n");
+  }
+
+  // Busca tickets fechados (statusId=3 = Closed no Jitbit)
+  console.log(`🌐 Buscando últimos ${TICKETS_POR_BATCH} tickets fechados no Jitbit...`);
+  let tickets;
+  try {
+    tickets = await buscarTickets({ mode: "all", statusId: 3, count: TICKETS_POR_BATCH });
+  } catch (err) {
+    console.error("❌ Erro ao buscar tickets:", err.message);
+    process.exit(1);
+  }
+
+  console.log(`📋 ${tickets.length} tickets encontrados\n`);
+
+  let totalImportados = 0;
+  let totalPulados = 0;
+  let totalSemResposta = 0;
+  let totalErros = 0;
+
+  for (const ticket of tickets) {
+    const assunto = (ticket.Subject || "").trim();
+
+    // Filtra assuntos muito curtos
+    if (assunto.length < MIN_ASSUNTO) {
+      totalPulados++;
+      continue;
+    }
+
+    // Chave única baseada no ID do ticket
+    const chaveUnica = `jitbit::ticket::${ticket.IssueID}`;
+
+    if (!DRY_RUN) {
+      const existente = await KB.findOne({ pergunta: { $regex: `\\[#${ticket.IssueID}\\]` } });
+      if (existente) {
+        process.stdout.write(`  ⏭  #${ticket.IssueID} já existe\r`);
+        totalPulados++;
+        continue;
+      }
+    }
+
+    // Busca comentários do ticket
+    let comentarios;
+    try {
+      comentarios = await buscarComentarios(ticket.IssueID);
+    } catch (err) {
+      console.error(`  ❌ Erro ao buscar comentários do ticket #${ticket.IssueID}: ${err.message}`);
+      totalErros++;
+      continue;
+    }
+
+    if (!comentarios || comentarios.length === 0) {
+      totalSemResposta++;
+      continue;
+    }
+
+    const melhorComentario = escolherMelhorComentario(comentarios, ticket.UserID);
+    if (!melhorComentario) {
+      totalSemResposta++;
+      continue;
+    }
+
+    const respostaLimpa = stripHtml(melhorComentario.Body);
+    if (respostaLimpa.length < MIN_RESPOSTA) {
+      totalSemResposta++;
+      continue;
+    }
+
+    // Monta pergunta (assunto + descrição do ticket se disponível)
+    const descricaoTicket = ticket.Body ? `\n${stripHtml(ticket.Body)}` : "";
+    const pergunta = `[#${ticket.IssueID}] ${assunto}`;
+    const resposta = respostaLimpa;
+    const modulo = inferirModulo(ticket.CategoryName);
+
+    if (DRY_RUN) {
+      console.log(`  [dry] #${ticket.IssueID} [${modulo}] — "${assunto.slice(0, 60)}"`);
+      console.log(`         Resposta: "${resposta.slice(0, 80)}..."`);
+      totalImportados++;
+      continue;
+    }
+
+    try {
+      const textoEmbedding = `${assunto}${descricaoTicket}\n${resposta}`;
+      const embedding = await gerarEmbedding(textoEmbedding);
+
+      await KB.create({ pergunta, resposta, modulo, embedding });
+
+      totalImportados++;
+      process.stdout.write(`  ✅ #${ticket.IssueID} [${modulo}] importado\r`);
+    } catch (err) {
+      console.error(`  ❌ #${ticket.IssueID} — ${err.message}`);
+      totalErros++;
+    }
+  }
+
+  console.log(`\n\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━`);
+  console.log(`✅ Importados      : ${totalImportados}`);
+  console.log(`⏭  Pulados         : ${totalPulados}`);
+  console.log(`💬 Sem resp. técnica: ${totalSemResposta}`);
+  console.log(`❌ Erros           : ${totalErros}`);
+
+  if (!DRY_RUN) {
+    await mongoose.disconnect();
+  }
+  process.exit(0);
+}
+
+seed().catch((err) => {
+  console.error("Erro fatal:", err);
+  process.exit(1);
+});
+```
+
 ### `axion-ia-api\src\scripts\seed-kb.js`
 
 ```js
@@ -24160,6 +25292,248 @@ export async function analisarChamados() {
       openai: resolvidoIA
     }
   };
+}
+```
+
+### `axion-ia-api\src\services\analise-imagem.js`
+
+```js
+/**
+ * analise-imagem.js
+ * Serviço de análise visual de imagens operacionais (infrações, pesagens, cruzamentos).
+ *
+ * ESCOPO: imagens reais dos sistemas AxHub / AxTon / AxCross / AxionIA.
+ * Não confundir com extrator.js (OCR de documentos em memória) nem com
+ * docs/img/ (screenshots dos manuais Docusaurus — não passam por aqui).
+ *
+ * Pasta de armazenamento: axion-ia-api/uploads/analise/{sistema}/
+ */
+
+import fs from "fs";
+import path from "path";
+import { fileURLToPath } from "url";
+import OpenAI from "openai";
+import dotenv from "dotenv";
+dotenv.config();
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
+
+// ─── Pasta raiz de análise (fora de docs/img/) ────────────────────────────────
+export const UPLOADS_ANALISE = path.resolve(__dirname, "../../uploads/analise");
+
+// ─── Prompts especializados por sistema ──────────────────────────────────────
+
+const PROMPTS_SISTEMA = {
+  axhub: `Você é um analista de imagens de fiscalização de trânsito do sistema AxHub.
+Analise esta imagem e identifique:
+- Placa do veículo (se visível)
+- Tipo de veículo (carro, caminhão, moto, ônibus)
+- Velocidade exibida (se aplicável)
+- Status da infração (válida, descartada, pendente)
+- Qualidade da imagem (boa, ruim, ilegível)
+- Anomalias ou problemas visuais detectados
+- Equipamento/câmera responsável (se identificável no rodapé)
+Retorne um JSON com os campos: placa, tipo_veiculo, velocidade, status_infracao, qualidade_imagem, anomalias, observacoes.`,
+
+  axton: `Você é um analista de imagens do sistema de pesagem veicular AxTon.
+Analise esta imagem e identifique:
+- Placa do veículo (se visível)
+- Tipo/categoria do veículo (eixos visíveis, classificação)
+- Peso exibido na balança (se visível)
+- Ticket ou número de pesagem (se visível)
+- Condições da pesagem (veículo parado corretamente, desvio de balança)
+- Anomalias detectadas
+Retorne um JSON com os campos: placa, tipo_veiculo, peso_indicado, numero_ticket, condicao_pesagem, anomalias, observacoes.`,
+
+  axcross: `Você é um analista de imagens do sistema de monitoramento por cruzamento de placas AxCross.
+Analise esta imagem e identifique:
+- Placa do veículo (se visível — principal foco)
+- Qualidade da captura da placa (legível, parcial, ilegível)
+- Local/câmera de captura (se visível)
+- Data/hora exibidos na imagem (se visível)
+- Condições de iluminação e visibilidade
+- Anomalias ou problemas no equipamento
+Retorne um JSON com os campos: placa, qualidade_placa, local_captura, data_hora, condicoes, anomalias, observacoes.`,
+
+  axionia: `Você é um analista do sistema AxionIA.
+Analise esta imagem de interface/dashboard e identifique:
+- Tipo de tela (chat, helpdesk, kb, dashboard, configurações)
+- Problemas visuais ou de usabilidade
+- Erros exibidos na interface
+- Informações relevantes visíveis
+Retorne um JSON com os campos: tipo_tela, problemas_ui, erros_visíveis, informacoes_relevantes, observacoes.`,
+
+  geral: `Analise esta imagem e descreva:
+- O que está sendo exibido
+- Texto visível
+- Elementos relevantes
+- Anomalias ou problemas identificados
+Retorne um JSON com os campos: descricao, texto_visivel, elementos_relevantes, anomalias, observacoes.`,
+};
+
+// ─── Validações ───────────────────────────────────────────────────────────────
+
+const SISTEMAS_VALIDOS = ["axhub", "axton", "axcross", "axionia"];
+const EXTS_VALIDAS = ["jpg", "jpeg", "png", "webp", "gif", "bmp"];
+const MIME_VALIDOS = ["image/jpeg", "image/png", "image/webp", "image/gif", "image/bmp"];
+const MAX_TAMANHO_MB = 20;
+
+export function validarImagem(file) {
+  if (!file) throw new Error("Nenhuma imagem enviada.");
+
+  const ext = file.originalname.split(".").pop().toLowerCase();
+  if (!EXTS_VALIDAS.includes(ext)) {
+    throw new Error(`Extensão não suportada: .${ext}. Use: ${EXTS_VALIDAS.join(", ")}`);
+  }
+  if (!MIME_VALIDOS.includes(file.mimetype)) {
+    throw new Error(`Tipo MIME não suportado: ${file.mimetype}`);
+  }
+  if (file.size > MAX_TAMANHO_MB * 1024 * 1024) {
+    throw new Error(`Imagem muito grande (${Math.round(file.size / 1024 / 1024)}MB). Máximo: ${MAX_TAMANHO_MB}MB`);
+  }
+}
+
+export function validarSistema(sistema) {
+  if (!SISTEMAS_VALIDOS.includes(sistema)) {
+    throw new Error(`Sistema inválido: "${sistema}". Use: ${SISTEMAS_VALIDOS.join(", ")}`);
+  }
+}
+
+// ─── Análise via OpenAI Vision ────────────────────────────────────────────────
+
+export async function analisarImagem(buffer, mimetype, sistema = "geral", contexto = "") {
+  if (!process.env.OPENAI_API_KEY) {
+    return {
+      erro: "OPENAI_API_KEY não configurada.",
+      fallback: true,
+      sistema,
+      timestamp: new Date().toISOString(),
+    };
+  }
+
+  const prompt = PROMPTS_SISTEMA[sistema] ?? PROMPTS_SISTEMA.geral;
+  const promptFinal = contexto
+    ? `${prompt}\n\nContexto adicional fornecido: ${contexto}`
+    : prompt;
+
+  const ext = mimetype.split("/")[1] || "jpeg";
+  const base64 = buffer.toString("base64");
+  const dataUrl = `data:${mimetype};base64,${base64}`;
+
+  const resp = await openai.chat.completions.create({
+    model: "gpt-4o",
+    messages: [
+      {
+        role: "user",
+        content: [
+          { type: "text", text: promptFinal },
+          { type: "image_url", image_url: { url: dataUrl, detail: "high" } },
+        ],
+      },
+    ],
+    max_tokens: 1000,
+    response_format: { type: "json_object" },
+  });
+
+  const rawContent = resp.choices[0]?.message?.content ?? "{}";
+
+  let resultado;
+  try {
+    resultado = JSON.parse(rawContent);
+  } catch {
+    resultado = { raw: rawContent };
+  }
+
+  return {
+    sistema,
+    modelo: "gpt-4o",
+    timestamp: new Date().toISOString(),
+    tokens_usados: resp.usage?.total_tokens ?? null,
+    resultado,
+  };
+}
+
+// ─── Salvar imagem em disco (pasta uploads/analise/{sistema}/) ────────────────
+
+export function salvarImagemAnalise(buffer, originalname, sistema) {
+  validarSistema(sistema);
+
+  const pastaDestino = path.join(UPLOADS_ANALISE, sistema);
+
+  // Garante que a pasta existe
+  if (!fs.existsSync(pastaDestino)) {
+    fs.mkdirSync(pastaDestino, { recursive: true });
+  }
+
+  // Nome único: timestamp_nome-original
+  const ts = Date.now();
+  const nomeSeguro = originalname.replace(/[^a-zA-Z0-9._-]/g, "_");
+  const nomeArquivo = `${ts}_${nomeSeguro}`;
+  const caminhoCompleto = path.join(pastaDestino, nomeArquivo);
+
+  fs.writeFileSync(caminhoCompleto, buffer);
+
+  return {
+    nomeArquivo,
+    caminho: caminhoCompleto,
+    relativo: `uploads/analise/${sistema}/${nomeArquivo}`,
+    tamanhoKB: Math.round(buffer.length / 1024),
+  };
+}
+
+// ─── Listar imagens salvas por sistema ───────────────────────────────────────
+
+export function listarImagensAnalise(sistema) {
+  if (sistema && !SISTEMAS_VALIDOS.includes(sistema)) {
+    throw new Error(`Sistema inválido: "${sistema}". Use: ${SISTEMAS_VALIDOS.join(", ")}`);
+  }
+
+  const pastas = sistema ? [sistema] : SISTEMAS_VALIDOS;
+  const resultado = {};
+
+  for (const s of pastas) {
+    const pasta = path.join(UPLOADS_ANALISE, s);
+    if (!fs.existsSync(pasta)) {
+      resultado[s] = [];
+      continue;
+    }
+
+    const arquivos = fs.readdirSync(pasta)
+      .filter((f) => EXTS_VALIDAS.includes(f.split(".").pop().toLowerCase()))
+      .map((f) => {
+        const stats = fs.statSync(path.join(pasta, f));
+        return {
+          nome: f,
+          sistema: s,
+          tamanhoKB: Math.round(stats.size / 1024),
+          criadoEm: stats.mtime.toISOString(),
+          url: `/uploads/analise/${s}/${f}`,
+        };
+      })
+      .sort((a, b) => b.criadoEm.localeCompare(a.criadoEm));
+
+    resultado[s] = arquivos;
+  }
+
+  return sistema ? resultado[sistema] : resultado;
+}
+
+// ─── Remover imagem salva ─────────────────────────────────────────────────────
+
+export function removerImagemAnalise(sistema, nomeArquivo) {
+  validarSistema(sistema);
+
+  // Garante que o nome não contenha traversal de path
+  const nomeSanitizado = path.basename(nomeArquivo);
+  const caminho = path.join(UPLOADS_ANALISE, sistema, nomeSanitizado);
+
+  if (!fs.existsSync(caminho)) {
+    throw new Error(`Arquivo não encontrado: ${nomeSanitizado}`);
+  }
+
+  fs.unlinkSync(caminho);
+  return { removido: nomeSanitizado, sistema };
 }
 ```
 
@@ -26346,6 +27720,191 @@ export async function treinar(pergunta, resposta, modulo = "geral") {
 }
 ```
 
+### `axion-ia-api\src\services\whatsapp.service.js`
+
+```js
+/**
+ * whatsapp.service.js
+ * Gerencia a conexão WhatsApp via Baileys (100% gratuito, sem servidor externo).
+ * O QR code aparece no terminal na primeira execução — escanear com o WhatsApp do número de atendimento.
+ * A sessão é salva em src/whatsapp-auth/ e reutilizada nos próximos starts.
+ */
+
+import { makeWASocket, useMultiFileAuthState, DisconnectReason, fetchLatestBaileysVersion, downloadMediaMessage } from "@whiskeysockets/baileys";
+import qrcode from "qrcode-terminal";
+import QRCode from "qrcode";
+import path from "path";
+import { fileURLToPath } from "url";
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const AUTH_PATH = path.resolve(__dirname, "..", "whatsapp-auth");
+
+let sock = null;
+let conectado = false;
+let qrAtual = null;
+let onMensagem = null; // callback externo
+
+const estado = {
+  status: "desconectado", // desconectado | conectando | qr_pendente | conectado
+  qr: null,
+  numero: null,
+  erros: 0,
+};
+
+/**
+ * Inicia a conexão WhatsApp.
+ * @param {function} callbackMensagem - fn(telefone, nome, texto) chamada ao receber mensagem
+ */
+export async function iniciarWhatsApp(callbackMensagem) {
+  onMensagem = callbackMensagem;
+
+  const { state, saveCreds } = await useMultiFileAuthState(AUTH_PATH);
+  const { version } = await fetchLatestBaileysVersion();
+
+  estado.status = "conectando";
+
+  sock = makeWASocket({
+    version,
+    auth: state,
+    printQRInTerminal: false, // controlamos manualmente
+    browser: ["AxionIA", "Chrome", "1.0"],
+    connectTimeoutMs: 60000,
+    defaultQueryTimeoutMs: 30000,
+  });
+
+  // Salvar credenciais sempre que atualizar
+  sock.ev.on("creds.update", saveCreds);
+
+  // Eventos de conexão
+  sock.ev.on("connection.update", ({ connection, lastDisconnect, qr }) => {
+    if (qr) {
+      estado.status = "qr_pendente";
+      estado.qr = qr;
+      qrAtual = qr;
+      // Gerar imagem base64 para o painel
+      QRCode.toDataURL(qr, { width: 300, margin: 2 }).then(url => {
+        estado.qr_base64 = url;
+      }).catch(() => {});
+      // Também exibir no terminal como fallback
+      console.log("\n📱 [WhatsApp] QR code disponível no painel em /whatsapp. Também exibido abaixo:\n");
+      qrcode.generate(qr, { small: true });
+      console.log("\n");
+    }
+
+    if (connection === "open") {
+      conectado = true;
+      estado.status = "conectado";
+      estado.qr = null;
+      estado.numero = sock.user?.id?.replace(/:.*@/, "@") || null;
+      console.log("✅ [WhatsApp] Conectado como:", estado.numero);
+    }
+
+    if (connection === "close") {
+      conectado = false;
+      estado.status = "desconectado";
+      const codigo = lastDisconnect?.error?.output?.statusCode;
+      const deveReconectar = codigo !== DisconnectReason.loggedOut;
+      console.log("⚠️  [WhatsApp] Desconectado. Código:", codigo, "| Reconectar:", deveReconectar);
+      if (deveReconectar) {
+        setTimeout(() => iniciarWhatsApp(onMensagem), 5000);
+      } else {
+        estado.status = "desconectado";
+        estado.erros++;
+      }
+    }
+  });
+
+  // Receber mensagens
+  sock.ev.on("messages.upsert", async ({ messages, type }) => {
+    if (type !== "notify") return;
+    for (const msg of messages) {
+      if (msg.key.fromMe) continue; // ignorar mensagens enviadas por nós
+      if (!msg.message) continue;
+
+      const remoteJid = msg.key.remoteJid || "";
+      // Normaliza telefone para armazenamento (remove sufixos)
+      const telefone = remoteJid.replace(/@s\.whatsapp\.net$/, "").replace(/@lid$/, "").replace(/@.*$/, "");
+      const nome = msg.pushName || telefone;
+      const texto =
+        msg.message.conversation ||
+        msg.message.extendedTextMessage?.text ||
+        msg.message.imageMessage?.caption ||
+        "";
+
+      // Baixar imagem se houver
+      let midia = null;
+      if (msg.message.imageMessage) {
+        try {
+          const imgBuffer = await downloadMediaMessage(msg, "buffer", {}, { reuploadRequest: sock.updateMediaMessage });
+          midia = {
+            buffer: imgBuffer,
+            mimeType: msg.message.imageMessage.mimetype || "image/jpeg",
+            filename: `foto_${Date.now()}.jpg`,
+            downloadOk: true,
+          };
+          console.log(`🖼️  [WhatsApp] Imagem recebida (${imgBuffer.length} bytes)`);
+        } catch (err) {
+          console.error("❌ [WhatsApp] Erro ao baixar imagem:", err.message);
+          // Marcar que recebemos uma imagem mesmo sem conseguir baixar
+          midia = { buffer: null, downloadOk: false, filename: `foto_${Date.now()}.jpg` };
+        }
+      }
+
+      // Só ignorar se for mensagem completamente vazia (sem texto nem imagem)
+      if (!texto.trim() && !midia) continue;
+
+      console.log(`📨 [WhatsApp] ${nome} (${remoteJid}): ${texto || "[imagem]"}`);
+
+      if (onMensagem) {
+        try {
+          // Passa o remoteJid completo para o flow poder responder corretamente
+          await onMensagem(telefone, nome, texto.trim(), midia, remoteJid);
+        } catch (err) {
+          console.error("❌ [WhatsApp] Erro no callback de mensagem:", err.message);
+        }
+      }
+    }
+  });
+}
+
+/**
+ * Envia uma mensagem de texto para um número ou JID completo.
+ * @param {string} telefoneOuJid - número (5511...) ou JID completo (xxx@s.whatsapp.net / xxx@lid)
+ * @param {string} texto - mensagem a enviar
+ */
+export async function enviarMensagem(telefoneOuJid, texto) {
+  if (!sock || !conectado) {
+    throw new Error("WhatsApp não está conectado");
+  }
+  // Se já contém @, usar diretamente; senão, montar JID
+  const jid = telefoneOuJid.includes("@") ? telefoneOuJid : `${telefoneOuJid}@s.whatsapp.net`;
+  await sock.sendMessage(jid, { text: texto });
+}
+
+/**
+ * Envia uma imagem para um número ou JID completo.
+ */
+export async function enviarImagem(telefoneOuJid, buffer, caption = "", mimeType = "image/jpeg") {
+  if (!sock || !conectado) throw new Error("WhatsApp não está conectado");
+  const jid = telefoneOuJid.includes("@") ? telefoneOuJid : `${telefoneOuJid}@s.whatsapp.net`;
+  await sock.sendMessage(jid, { image: buffer, caption, mimetype: mimeType });
+}
+
+/**
+ * Retorna o estado atual da conexão (para o painel)
+ */
+export function obterEstado() {
+  return { ...estado };
+}
+
+/**
+ * Retorna o QR code atual (base64 ou string) para exibir no painel
+ */
+export function obterQR() {
+  return qrAtual;
+}
+```
+
 ### `axion-ia-api\src\spec-controller.js`
 
 ```js
@@ -26492,6 +28051,6194 @@ export async function uploadContexto(req, res) {
     });
   } catch (err) {
     return res.status(422).json({ erro: err.message });
+  }
+}
+```
+
+### `axion-ia-api\src\whatsapp-auth\app-state-sync-key-AAAAAHZl.json`
+
+```json
+{"keyData":"BdDDn26szrHROzZY4CtYCT+mKnUVQMSgASltFrMSIBk=","fingerprint":{"rawId":1546762639,"currentIndex":1,"deviceIndexes":[0,1]},"timestamp":"1776972188180"}
+```
+
+### `axion-ia-api\src\whatsapp-auth\app-state-sync-version-critical_block.json`
+
+```json
+{"version":1,"hash":{"type":"Buffer","data":"M//Csf06pufCPJSJVQ0p5WTuib/QarJLPSoKIRc8e5X6vsVFyubvXlrlZLR02RUj0Jo4ADYs2wFKgxLiPtEfddcVzjMypGsgndqU14TnHdhtZP42kyEzDTLojGE+hXF+qQmDkCJia3sL2SbugkZ3Q3cq3J0Nwm0AzoKeTtxsDPs="},"indexValueMap":{"Hst4KNDrxVHgqk7MlmvBa44UIq2MkC1Hl86qAHzG+WA=":{"valueMac":{"type":"Buffer","data":"INZhQyRQG9LIy8D+Q3wimIkZ35Qpe1AaMZobotxacdo="}},"L/xa34pHZNp2tM+ZVXLHvUTaio8OONnDDHo1yGsxsr0=":{"valueMac":{"type":"Buffer","data":"UzIAAAf4RDnGgmNzu7tbTVG4RZODRbaxJXWOsRsr/g8="}},"kIFGMBIEyy8VDMx58j4JejoK+187SftIETqfv7Bdukc=":{"valueMac":{"type":"Buffer","data":"ncM06ZzG/jxs1qMfKa/34nEUy6Y6TW5r/mFYdak0fRc="}}}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\app-state-sync-version-regular_high.json`
+
+```json
+{"version":5,"hash":{"type":"Buffer","data":"uDwlSiXBj4dDq+c9f8z13mS8Wc526KZuJDOXWJffWjGFVkmjNHoVfv0PGkeQH8A9+E7NZNme1TqnNcOgiWKXz3t2qd/bCKZx8qECz42XWeeYoIcOFBGtT/uI0VEE56exaPD/Yu2eIieXWE0kZuNCv4iyaLJTcYb6q/eB88RuZlY="},"indexValueMap":{"SHt4+P6K/BmQXGUt2ZeVl11bgM9vlhq82/5BtdP2dvE=":{"valueMac":{"type":"Buffer","data":"9m3T98vEkUWScDhMYCv/J/UQTJb8pWCLSY9z+0n0dSI="}},"Tvps+AsmWYCgnvStkiWZZ5YACC8Dg8gJfGLkRy8NuII=":{"valueMac":{"type":"Buffer","data":"NfuhfZmfGbjjibfF8QNuaCjmkbKDNARcLuijktW+ZfI="}},"6/ySSTbBk83ggiPhjqMBKbuLLDDzYpocatez05P14nk=":{"valueMac":{"type":"Buffer","data":"do4Tqz8oq4SX6dEB3ageuDYrSlXJ+19kSlP2miZfdCs="}},"NiD5SN5AmNzdnQ4rEeeGIGG7LkoLuacJds1OMrN0o1I=":{"valueMac":{"type":"Buffer","data":"HpfpyCjbl43S63N8QTZrrUW5H6w5ZuVKlk1UhV/WsVs="}},"swR80o07VDByb4ZDufEy9+yVS45OY7/k+/FxwM0ChG0=":{"valueMac":{"type":"Buffer","data":"vubKYYrTI63+m4nDjlICmo0zn4ms3BMshLT/EtpNAQw="}},"ahAm0OFkz4TQdDkKVEPYh9Upajwp3ehjrjc/vJrciUQ=":{"valueMac":{"type":"Buffer","data":"zWFhy6ibBmgUu6eRYhigHMA6l2xzbeSVHsov+H3jIKs="}}}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\app-state-sync-version-regular_low.json`
+
+```json
+{"version":6,"hash":{"type":"Buffer","data":"MqapHEDa/TkPRNsTSDfTudNzl+lEGWTdepUk71q3jtw/ECTrsZBFeape/2xuLGR9OBWgDZA9WHxtx930rLDjItl4In0/r91ZDVWMshspp61ySLhSw4Bwp3SvtD6kFGBHD3eZaoQvWo3SXE3PHQGFJU/7CkP3DytCKLgMyqoyVcM="},"indexValueMap":{"DZCAIYUQL2zLAcWY9H6uSPmmpH3NaW9vSENveK7xVvA=":{"valueMac":{"type":"Buffer","data":"wEiSg4PvtFCsml4K3i4R0NQtyYH3c9gXdCnKcs5jYBQ="}},"NiR+IQfbJmVFV8MpIrZ8x6lz7FfZ8NZlnHJ/DaooD1U=":{"valueMac":{"type":"Buffer","data":"En5I8DuPRkt4/yU3zllp64QtWcQY7m7M8ZsNVOlZF20="}},"TOKl1LF9z0RtOuh6yn+j6gySmDzvHNwBtb8/cs9yHZs=":{"valueMac":{"type":"Buffer","data":"FnT0cKJL5tgPe+dzVe5VsfHZ5mA/kqKiDgS7qU7q07Y="}},"Vz9KKDedTHRVMjlx+fdpudJNtjb9zIx+Pfs8vq85kK8=":{"valueMac":{"type":"Buffer","data":"ynze8eXHpacvxpSbKpaPx4+YxPGthGLDrzXrNLkfghQ="}},"W+8sKc4e1+UG/fGUIeWuQKprsHxd0CSOStBrHxq8XYg=":{"valueMac":{"type":"Buffer","data":"QMQQ+KG21qrZORWxAoel0YpgQurTyBfTVp8Fa9ETkyA="}},"cO0FkhhK5DIuMO1SDMufrpEBDwIqGBhU8S9MW0RTBtk=":{"valueMac":{"type":"Buffer","data":"hDuYyfZ0bJZndJbPo1qX78YfNLvoiQGI7oqQ9eyKZHg="}},"t2tob5q6GeFUvXWwPRgaK/J1AT80RSVUt1Td9FOcR7w=":{"valueMac":{"type":"Buffer","data":"CXmQq2RcSRsLp7w6G9wnFRY06fNQw94esFHNS611LU4="}},"vG7l52E0QkK9TzINVeZMX4werKtM+KihCAVwnCjuCtY=":{"valueMac":{"type":"Buffer","data":"lsWosOywqb1HB0tCMQrFtRqWbsODjDuS0KOK2PCqTSo="}},"4K0+TJ4xgicM3dHBkL4OE43808hs2W6RTUmkOnVisok=":{"valueMac":{"type":"Buffer","data":"s8vcyFddl+QG1XVVG+EhRLI3VefL5UEFCK26oD8HNrk="}},"+x7i7iv+hDSgr26jIDjJHRangkOBFdCFJl+GDUdVZMY=":{"valueMac":{"type":"Buffer","data":"rpEVNOuTdMxmLolHj9QY6137KhyeAW8MNxTTenGuH2Q="}},"by1UfDvGP2KJrvDKqy+nTNMWdO02oyOj8SknvfSokO0=":{"valueMac":{"type":"Buffer","data":"pXuBzBtixRFmgN3VwqbRMcYk4fpEcyCdyOML7eUh5Ck="}}}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\creds.json`
+
+```json
+{"noiseKey":{"private":{"type":"Buffer","data":"0GaBjPAriNBinajYMbaZVwa4FrDipmqEGEjv7YbJzU4="},"public":{"type":"Buffer","data":"YqLjuvxRY7TIVpGMrXNlk++oRxZgZOnrkt3x9M/XrRg="}},"pairingEphemeralKeyPair":{"private":{"type":"Buffer","data":"eE0RuN83D1MewjBkllyaHlOytfapil+5zvvwsmBLvGE="},"public":{"type":"Buffer","data":"9SeVH8cR9Y+Adp2ho60abkBrxNe38Xd7Mtt9VUhVnlY="}},"signedIdentityKey":{"private":{"type":"Buffer","data":"kLGK5prgtucEiEyH2FpBvax5vOFruqhDTOZfLu+zo1I="},"public":{"type":"Buffer","data":"pWTJFwbCR8nh5Nq6bcQxfZoBmImkk2x3rmdbeo0+anA="}},"signedPreKey":{"keyPair":{"private":{"type":"Buffer","data":"kHfmbRzQPgFQVr2yo3dpOEtxkTRgKt9e14IGIcjuP2I="},"public":{"type":"Buffer","data":"pDUQ5K+d014EBIvYxZMN/pto/zHY1EfTZ+pv0Pb2bSQ="}},"signature":{"type":"Buffer","data":"KRkxFo3Y/r0XEkRKMExkGjIz4sK8147ICJzxK+9S4gcT2tN7TGYFa3MXJ8IMWS2BEbnJC2OgMCUs1U0TLL56jQ=="},"keyId":1},"registrationId":195,"advSecretKey":"So9uRoKGek0h/TWy1iVf0dwocauFSX/gFVCcoRp+HL8=","processedHistoryMessages":[{"key":{"remoteJid":"556291092135@s.whatsapp.net","fromMe":false,"id":"AC1822CCD575BD7BF36927D5A0B4CE20","participant":"","addressingMode":"pn"},"messageTimestamp":1776972189},{"key":{"remoteJid":"556291092135@s.whatsapp.net","fromMe":false,"id":"AC5BC8C8F908F978C93DC64E19FF7FD8","participant":"","addressingMode":"pn"},"messageTimestamp":1776972189},{"key":{"remoteJid":"556291092135@s.whatsapp.net","fromMe":false,"id":"AC6F9CCCF9FE7CA1D0C4F0D8D3667A6D","participant":"","addressingMode":"pn"},"messageTimestamp":1776972190},{"key":{"remoteJid":"556291092135@s.whatsapp.net","fromMe":false,"id":"ACD4B0FAE3774F57655F8246EDEF1FE4","participant":"","addressingMode":"pn"},"messageTimestamp":1776972191},{"key":{"remoteJid":"556291092135@s.whatsapp.net","fromMe":false,"id":"AC411A6BAF6B6732D03A57A294543493","participant":"","addressingMode":"pn"},"messageTimestamp":1776972214},{"key":{"remoteJid":"556291092135@s.whatsapp.net","fromMe":false,"id":"AC6479159B681EC3BD48AD2113881D3D","participant":"","addressingMode":"pn"},"messageTimestamp":1776972222}],"nextPreKeyId":813,"firstUnuploadedPreKeyId":813,"accountSyncCounter":1,"accountSettings":{"unarchiveChats":false},"registered":false,"account":{"details":"CI/zxuEFEJDjqc8GGAEgACgA","accountSignatureKey":"VxRLLYnBqRODGaM72jmdzgnf06G74x2JoAQ2PW457UY=","accountSignature":"JFp31zTvrM+XFopmInCBb6iZ3/vHZsofPYt8d/6qlEGwRb/p9XqsWaFJKCxqQa8eFIgxWHWX5sdKhLi+x+/+DA==","deviceSignature":"JnkCbcvT9djDQ5r8OUk7PRB7uo4J2XFcT/9KSUY7nRgksqxKIC49g1qwbEgofJl9f9qoS2RUCuHy6kLGZ1qihA=="},"me":{"id":"556291092135:4@s.whatsapp.net","lid":"192556788924564:4@lid","name":"Aviso"},"signalIdentities":[{"identifier":{"name":"192556788924564:4@lid","deviceId":0},"identifierKey":{"type":"Buffer","data":"BVcUSy2JwakTgxmjO9o5nc4J39Ohu+MdiaAENj1uOe1G"}}],"platform":"android","routingInfo":{"type":"Buffer","data":"CBIICAgF"},"lastAccountSyncTimestamp":1777239290,"myAppStateKeyId":"AAAAAHZl"}
+```
+
+### `axion-ia-api\src\whatsapp-auth\device-list-192556788924564.json`
+
+```json
+["0","4"]
+```
+
+### `axion-ia-api\src\whatsapp-auth\device-list-32817979338799.json`
+
+```json
+["0","92"]
+```
+
+### `axion-ia-api\src\whatsapp-auth\device-list-556291092135.json`
+
+```json
+["4"]
+```
+
+### `axion-ia-api\src\whatsapp-auth\lid-mapping-105321859145805_reverse.json`
+
+```json
+"556292725185"
+```
+
+### `axion-ia-api\src\whatsapp-auth\lid-mapping-192556788924564_reverse.json`
+
+```json
+"556291092135"
+```
+
+### `axion-ia-api\src\whatsapp-auth\lid-mapping-207026298839069_reverse.json`
+
+```json
+"556282012654"
+```
+
+### `axion-ia-api\src\whatsapp-auth\lid-mapping-214443589910746_reverse.json`
+
+```json
+"556281312150"
+```
+
+### `axion-ia-api\src\whatsapp-auth\lid-mapping-214555175190757_reverse.json`
+
+```json
+"556291055936"
+```
+
+### `axion-ia-api\src\whatsapp-auth\lid-mapping-271146150809663_reverse.json`
+
+```json
+"555182988482"
+```
+
+### `axion-ia-api\src\whatsapp-auth\lid-mapping-32817979338799_reverse.json`
+
+```json
+"556292267950"
+```
+
+### `axion-ia-api\src\whatsapp-auth\lid-mapping-49774493442107_reverse.json`
+
+```json
+"556285606429"
+```
+
+### `axion-ia-api\src\whatsapp-auth\lid-mapping-555182988482.json`
+
+```json
+"271146150809663"
+```
+
+### `axion-ia-api\src\whatsapp-auth\lid-mapping-556281312150.json`
+
+```json
+"214443589910746"
+```
+
+### `axion-ia-api\src\whatsapp-auth\lid-mapping-556281861144.json`
+
+```json
+"98037024182469"
+```
+
+### `axion-ia-api\src\whatsapp-auth\lid-mapping-556282012654.json`
+
+```json
+"207026298839069"
+```
+
+### `axion-ia-api\src\whatsapp-auth\lid-mapping-556285606429.json`
+
+```json
+"49774493442107"
+```
+
+### `axion-ia-api\src\whatsapp-auth\lid-mapping-556291055936.json`
+
+```json
+"214555175190757"
+```
+
+### `axion-ia-api\src\whatsapp-auth\lid-mapping-556291092135.json`
+
+```json
+"192556788924564"
+```
+
+### `axion-ia-api\src\whatsapp-auth\lid-mapping-556292267950.json`
+
+```json
+"32817979338799"
+```
+
+### `axion-ia-api\src\whatsapp-auth\lid-mapping-556292725185.json`
+
+```json
+"105321859145805"
+```
+
+### `axion-ia-api\src\whatsapp-auth\lid-mapping-98037024182469_reverse.json`
+
+```json
+"556281861144"
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-1.json`
+
+```json
+{"private":{"type":"Buffer","data":"iFRggfTkxrE1vu+B8zAjzLRgZNoPEjcJ4L275Stlw08="},"public":{"type":"Buffer","data":"U19aeuiZ+HtG3awhELP2wlFj/Jypg7QJ6dDN01uIjSg="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-10.json`
+
+```json
+{"private":{"type":"Buffer","data":"kDvUfSyiKwmeAqajmiv/FfzowLgoYzIvMwKIJIh4tnA="},"public":{"type":"Buffer","data":"4gDkLIUQ+4VdbnSRIacVzH6PrM+zrCkSsXB0xXqOkQw="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-100.json`
+
+```json
+{"private":{"type":"Buffer","data":"eDenDMGjFM+2qZl68hbg8zMuj3HfZNsqQgbNKCf90V0="},"public":{"type":"Buffer","data":"dPIZjOammcw6ZJ8OzRq1XSx/Zy7RKk8AUMjvx1q6x3w="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-101.json`
+
+```json
+{"private":{"type":"Buffer","data":"4Io1jRXi/iW1yANKurRPW9ewO7lw5ovQBuvgpKYkSlY="},"public":{"type":"Buffer","data":"2TIxQd6qSnNBZqOiGXHybdnKMpROQnHLSgW5gW3rfy8="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-102.json`
+
+```json
+{"private":{"type":"Buffer","data":"gEmqtuILERinH+7H7TdhgPeWkNzDe8HbvQFd+/U8KnE="},"public":{"type":"Buffer","data":"mKfdVSXcYasLgiwBrrNM9YXJCX6DxQTesumyPzQd9W4="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-103.json`
+
+```json
+{"private":{"type":"Buffer","data":"KLL6yl1mG78SmccXHSh1Qu87nEQPlmekhypWH6630FY="},"public":{"type":"Buffer","data":"Tl3VhNQMbZ2M/tEZBr/irrRLzfMqSUZbJCXY1pSYejo="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-104.json`
+
+```json
+{"private":{"type":"Buffer","data":"WF8zGSyBTv4PZaFlMDI33QcDr9Qyaw0TQMSDBtJ2k2A="},"public":{"type":"Buffer","data":"/4FO7SAkUayUrjADYnQ1um3b1GHkqRJ5GYkaNZXgjn8="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-105.json`
+
+```json
+{"private":{"type":"Buffer","data":"kL5Kd+v6EbK7AQM/DeqwQHBUTLeUP+4xpnpgliFMQ0Q="},"public":{"type":"Buffer","data":"pllZskOT310J9LSK1sbQQtdFOglqOSXUp7GNZkKxRWI="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-106.json`
+
+```json
+{"private":{"type":"Buffer","data":"CIOFORWxCRVNBVTWW9ih2Sb8c10c+thKgNHnkdnzH3U="},"public":{"type":"Buffer","data":"bnEQaHDngeuQC8oslNAfXMD1x4KMa2O2z78+0mmEeAk="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-107.json`
+
+```json
+{"private":{"type":"Buffer","data":"2H42bPeyg9blIzP7xYVKWNSrK4PV8PFUySaOtjDjtGY="},"public":{"type":"Buffer","data":"pMTBe70bW+SPRlGOZKZGTk+UY9+OZFL4YnGazNND00A="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-108.json`
+
+```json
+{"private":{"type":"Buffer","data":"wC2V1JEMzO+IWtQc13cCuz+Vt4bpvaKEADg6zkFwEWk="},"public":{"type":"Buffer","data":"p40Uawwo/XvTA4t5zyCaa+Kb2g2SSy633cHQ1rIAUB0="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-109.json`
+
+```json
+{"private":{"type":"Buffer","data":"YC8CxKaRD9BHpmtVPmWhMxvqOCpkP5BruKy4ycbp1V8="},"public":{"type":"Buffer","data":"/dNAKULdN4f5Lo8Px1cYI02gPrG1kiU2RB3v9GPGW0U="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-11.json`
+
+```json
+{"private":{"type":"Buffer","data":"MDCAsOZLWp0nIzmWYP/Ct4OOsFEZDCUK5Wg8/SAMslY="},"public":{"type":"Buffer","data":"5W1+cOD9S1U8nY/z+/oc7pdJKTkj9RG/hKHsYNxBmDA="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-110.json`
+
+```json
+{"private":{"type":"Buffer","data":"CFyNpnuyc9G8Qo9wiFjhCw4loqW04CYOCvJQ89zJoHw="},"public":{"type":"Buffer","data":"WYxHoo9kixfZV+INulj4sUfD6VHtzrwkS/O/lMSxhBs="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-111.json`
+
+```json
+{"private":{"type":"Buffer","data":"YCkOxy1H5BEEhALl+a5ruLTREceZ9w6PMk187dSC63M="},"public":{"type":"Buffer","data":"9TEy15yB1jb3O7wmTOXW1eFmjAisQzBPAePITIn42m4="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-112.json`
+
+```json
+{"private":{"type":"Buffer","data":"4G+F83/RKRn8sweF8wxLC/VizAIZc/Y0r4Rc3WxaUGQ="},"public":{"type":"Buffer","data":"vzPR0K9UlcRThgc/MSzz2lTf/mQM2Ed0oh2+P4J1Djo="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-113.json`
+
+```json
+{"private":{"type":"Buffer","data":"QG76i9zruIDwruEDWvcgXlYR+awLLeVK2GyrbnC/bUw="},"public":{"type":"Buffer","data":"nqYiMJhPNKRiaGJuHkKVrGNHH5XRdAfOWMnbC6kgvyM="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-114.json`
+
+```json
+{"private":{"type":"Buffer","data":"4NPxTBi60szyDDOkOIoJXtep+06DMdCYiTRo9s6DxFY="},"public":{"type":"Buffer","data":"vFGwXMTSD9pGOi8Qjzo3gv+WcHm7WptkZWGk8iAgnXM="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-115.json`
+
+```json
+{"private":{"type":"Buffer","data":"2DzN7L4IqMcinmCsD2e3FHZcYObnQKtLm+t1F+VJIU0="},"public":{"type":"Buffer","data":"StSE5a1zUCHw1RgjbcsDsz+RZGMYIQrbxl+NpqSVGRA="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-116.json`
+
+```json
+{"private":{"type":"Buffer","data":"wPrAZw9WOSqGyvO086nesttNeeDMLf5sBImDvSDYiVA="},"public":{"type":"Buffer","data":"zwKrKwMS3wCexziz0Fz7zYCTScpvZKIEPiMwf5AE2AA="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-117.json`
+
+```json
+{"private":{"type":"Buffer","data":"cKgKy/ujs1ur9W3/E0sVQ6znmfYWbc/mLdHToaoP11M="},"public":{"type":"Buffer","data":"7D08VEluVarXkrVduktY6zHo7ki1FnM/sWbUzGt3Vy0="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-118.json`
+
+```json
+{"private":{"type":"Buffer","data":"KN8uVUC5OsT06hSD34EGI1wNY7h/ceu8xqhHD8WuAGM="},"public":{"type":"Buffer","data":"7AIBgamBkVQzYx5FZrInZwzYSIPNuI/KdhaLRfWE/xg="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-119.json`
+
+```json
+{"private":{"type":"Buffer","data":"2Ll1UA9DiqunZ5ZlakjRtDN7uqrBxQMBUTavd5XIZ1E="},"public":{"type":"Buffer","data":"itYAvhg4m8K6OtU4xm8ATMn1qrRvLmv1hlvdcbTTbz8="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-12.json`
+
+```json
+{"private":{"type":"Buffer","data":"2IHcERKwiiHqQRnfAiJA0jwuranLSp4JOlickjCt/lg="},"public":{"type":"Buffer","data":"yLw8GenIIc04kZB7jtGjcqSQ9KR8THI3yfhOdnhLpAw="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-120.json`
+
+```json
+{"private":{"type":"Buffer","data":"UAmkfxMu443nOIxj2X4zMUx5kjNewRszj/ECerZPh3M="},"public":{"type":"Buffer","data":"2cpImdzrIVUjJT5mR00/mAZny9W5wXehtzatzlCGtlA="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-121.json`
+
+```json
+{"private":{"type":"Buffer","data":"cHllsgIwhmg6XlUR10ApYZAT/gJqORnN3AcCDdRXl00="},"public":{"type":"Buffer","data":"x5QdmWwfKd+k4McsCU4vA3g2Ug9lGyS+fKCYVgyyWHA="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-122.json`
+
+```json
+{"private":{"type":"Buffer","data":"GCUWJhyDR7zJDbL0TUaOpwJ/QNyhYRdmlPXtviTCBF0="},"public":{"type":"Buffer","data":"UTehSRAESyKddtkKFJcUfpiV3w8jA78Vt1EBnLypTz8="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-123.json`
+
+```json
+{"private":{"type":"Buffer","data":"mPL/RKN9Rzu+DgsqBYlvIB/yoEgaKWTScpDyClD1N30="},"public":{"type":"Buffer","data":"BvIpfqjcngAHtJFFtdprjrc5BoYzx+lVO2CA4kmLaCY="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-124.json`
+
+```json
+{"private":{"type":"Buffer","data":"OOt8Mrvki7nqN++DL/Hpv4aDum0KxiPU2MSymFYdDGI="},"public":{"type":"Buffer","data":"DQbthq3Na0GQK1K0Ixs6K3KYDESYdAWu6e5VC1C2TkA="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-125.json`
+
+```json
+{"private":{"type":"Buffer","data":"ULS/qE5ZzQ7Ka6N0Us25NJB+uMrBw5/T9c+RuTgzeHM="},"public":{"type":"Buffer","data":"Z90elHkI8OBKUMVDN64pBMBh12U4liIF8viPqMjieQQ="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-126.json`
+
+```json
+{"private":{"type":"Buffer","data":"yE2SxkPNYnTqG5RHBIQHRraQG0rVHBzmyfmwpgtiE38="},"public":{"type":"Buffer","data":"Gd4GCc7Vk2kWbvOaovrEyp4escjhmGGghn+26d43gSI="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-127.json`
+
+```json
+{"private":{"type":"Buffer","data":"QOHgnRuPYr4c0PLfoYR0WwwYVHZYTvHAoHqGww5woWg="},"public":{"type":"Buffer","data":"pqnDJvPB3X+aMMh4B67kW68mSioy8eo9rTHuM2XNLRU="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-128.json`
+
+```json
+{"private":{"type":"Buffer","data":"GKF2W0rHp25/RDWZsvzOEKT9JwgZhn95q3lkZ4wjHUw="},"public":{"type":"Buffer","data":"qGU9LIDLTIxQg2HUOBIqzz2nkBCT+3VJeRGfFuO9IgQ="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-129.json`
+
+```json
+{"private":{"type":"Buffer","data":"cAn2L6wIj4M37EbHOB7Uu/yqkmX9YTsP+PNutYUla08="},"public":{"type":"Buffer","data":"KYqQJgpW3WzMEVNn9kJ/YF2GHrjQ3isXDSUS2eiTBH0="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-13.json`
+
+```json
+{"private":{"type":"Buffer","data":"UDYtOGQw+z/m/WJYsTysT8obmIUDd2nc6blMwaeeQ3U="},"public":{"type":"Buffer","data":"v+n2+BbcTZS8IYqCgXbNwbsfpp7hHaC16cPu0LHcP2o="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-130.json`
+
+```json
+{"private":{"type":"Buffer","data":"2ERfOB/ieOVFp3anCF+ecEbjZVOyAn4+o2qHPeavjWQ="},"public":{"type":"Buffer","data":"pzoLsvii2BkGPUUf0y+cMFkaZt14nfwdYBe8CVuFqCE="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-131.json`
+
+```json
+{"private":{"type":"Buffer","data":"YFMEbhS69HKzTbNcNIzjUzw7z6QFMmJNCaCbturgRWw="},"public":{"type":"Buffer","data":"u5LoQJzPbqlQx2RrKq95/RX2SDyHU1JteYclydPw/R0="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-132.json`
+
+```json
+{"private":{"type":"Buffer","data":"qPzIEuvMob8srFWRS0q6zkamJjyreXoGyvIOJE81pGw="},"public":{"type":"Buffer","data":"GLB4u8EiEV4mJDNbpq5oeS6ILBCCRNSk3tenyDGmoUU="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-133.json`
+
+```json
+{"private":{"type":"Buffer","data":"uIeyg1SiwLivajtrFTeBGLvtmxWLJWr7gI2glAxh1WU="},"public":{"type":"Buffer","data":"sAuRoNG9np1GzNtXj+QK/B+Nk7J7ggIJzXaMMafaVmA="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-134.json`
+
+```json
+{"private":{"type":"Buffer","data":"OKPKdAlrtQQVOGjPsuwOmwd+YtxjedPXhox5jQLxv3w="},"public":{"type":"Buffer","data":"FRWqXogT6dIQ4HpI93QbaQkjIKT23iTFnblD/pFxSlA="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-135.json`
+
+```json
+{"private":{"type":"Buffer","data":"QHsE213ZTgXLKyOgBBLkBYHmISX4ipkGyvFwH2DCxlk="},"public":{"type":"Buffer","data":"XpJP20YYrQLH1bjQu0T7WtPbUPUweM2b7i+vVYBqfRA="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-136.json`
+
+```json
+{"private":{"type":"Buffer","data":"qIiBrygBMdJi4GSyCj1e2hMKgHrQK4GqkktfuPObfFY="},"public":{"type":"Buffer","data":"vnhGme6xO7jOT0A308l7LDOJnlYLkuMiltej9zbam0U="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-137.json`
+
+```json
+{"private":{"type":"Buffer","data":"WMnoPRkqYa5Xvh4mguqtD6mnSbe7RYRJouZDgBoAfWE="},"public":{"type":"Buffer","data":"XYdxUx2vCb4nCXurHG78Q7jpyQTxw603T0jfqydpNHY="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-138.json`
+
+```json
+{"private":{"type":"Buffer","data":"wIXhzPAJEKg8ksJ6eFlvzepkTMcq3Urvjg88kGncQGk="},"public":{"type":"Buffer","data":"6Mk1cNH+4kmC5uqVQABeHcdGPFy1tcH4GMzAfMNb5WA="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-139.json`
+
+```json
+{"private":{"type":"Buffer","data":"QN9RIQ4JnyyuZOpD38hUa77sQ1ZLhxDyNfwDUAdhN14="},"public":{"type":"Buffer","data":"qUZvAKEVZocqzk51HShaB7UlfcYddt+N1vv2ue0FQUU="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-14.json`
+
+```json
+{"private":{"type":"Buffer","data":"iEQYAznDt7mZ/XziE11m10V2gzBMtRPwqCNSjyOhe0c="},"public":{"type":"Buffer","data":"f9UQ9GyRfpkspG2zockYSo6eRGmcElLfKJJ0YoVlzDo="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-140.json`
+
+```json
+{"private":{"type":"Buffer","data":"2L6Qxxl+RUpLHE1cnH8szcY6MODfWeFL3l/zdm7J2V8="},"public":{"type":"Buffer","data":"+iIgPNVvehPszPgDqJ0/rgG7CsRWKaGQv4fONisGlhA="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-141.json`
+
+```json
+{"private":{"type":"Buffer","data":"4OriwO7ghL11hntHpcNLyRHb/WIHWDgQRuG/1N/Us1k="},"public":{"type":"Buffer","data":"aH6KBjkX64poZmsEB6/iki4c7mCxFqO0OO4dowNtJTE="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-142.json`
+
+```json
+{"private":{"type":"Buffer","data":"QO0V+hVGYUg38I8ydS1fwT0XruygJl8DFVtW8tXcCXc="},"public":{"type":"Buffer","data":"C3hZqzok2JNSPvaWLsKwVMdsX7sbRdIr84Mh5WWmP0w="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-143.json`
+
+```json
+{"private":{"type":"Buffer","data":"qK261mcE4zguI0xoqsJfPq6vwpMQf3w9pxnJwu+tT2U="},"public":{"type":"Buffer","data":"c7IYTI+oOFEFxo5BuMt09UNnkftbU3BaQ1BqFcmpVjA="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-144.json`
+
+```json
+{"private":{"type":"Buffer","data":"2G6AM789MTe6m0WxvdTpCfH8OTi3Xzih8y6wDk/uNXA="},"public":{"type":"Buffer","data":"5w1a9vk68sx7ZV1osXLrOIHtV96L631k9olaNBujOyE="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-145.json`
+
+```json
+{"private":{"type":"Buffer","data":"+AFnvl5WKcyw1Db9Ea3q04fBtMmMPTTn2wAwNq74zUY="},"public":{"type":"Buffer","data":"5a+gh3WSRIZppbcK4PgSYakMGn/SA+QklSL8aTzFBlc="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-146.json`
+
+```json
+{"private":{"type":"Buffer","data":"sBJ7jPrM6IPPP+k20nycpY7stzreNOYMjkmhI2zElkg="},"public":{"type":"Buffer","data":"STu5IkKHBax0fZl4alAwUP8PvUwbai1gDK+lxbogvXU="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-147.json`
+
+```json
+{"private":{"type":"Buffer","data":"QHtAjS7b0KfYOpE39bAJ8Vtdb+Eg4HjdEvWHDK5ntH8="},"public":{"type":"Buffer","data":"8U+/0nXt658cH96mHRvPVC5oSmSvq8fJPFgXf+3Fjz4="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-148.json`
+
+```json
+{"private":{"type":"Buffer","data":"EICKH4auX5O8B5itI/P4+WTfwqIK7JrkBwOYb29X4VQ="},"public":{"type":"Buffer","data":"4U1sssIpL27c0zC6eTimcP3iHONxcC66zc511I6PTBM="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-149.json`
+
+```json
+{"private":{"type":"Buffer","data":"qEIXshPsWI6oTUoa/Gz5OArL6U6iFsr4WwH2a6yTSGQ="},"public":{"type":"Buffer","data":"0yQcJdnXrIxVFWSQCMHjKNeWXcK5OH4Y9ebXQF5rn28="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-15.json`
+
+```json
+{"private":{"type":"Buffer","data":"UFV6a+1yddhwBPaWxEFpnw9Mn4zvttkYSph43Bh4d0Q="},"public":{"type":"Buffer","data":"7AtOtLwW9ge8eA/DxU/x4YFoRZgKUCA0negBqf07ZgI="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-150.json`
+
+```json
+{"private":{"type":"Buffer","data":"QNCN12Rf55y86Wb+rWmeNhRyM0ScKFXwfnWvkGV472E="},"public":{"type":"Buffer","data":"V7wg0oVYGp7j/XdZc/Wz86e0DPUAXGJX+LVwdP7jgRA="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-151.json`
+
+```json
+{"private":{"type":"Buffer","data":"oP5WRDq5/TBz2LEfQb1mcWXM1i5bSdBzOf+T9hNaCEk="},"public":{"type":"Buffer","data":"km1z3a0SvDj2uHAGmI00V2iZjU1jGKsmNsv3GCZhrhI="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-152.json`
+
+```json
+{"private":{"type":"Buffer","data":"EIfsMW7eCMd36LEK/x/Ik/so3EfVTwrVGUbRwhYbElM="},"public":{"type":"Buffer","data":"u4Dx0mNWVMuQh7NhZC7IeDuf9OFAipWo+hYJuVrIP0c="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-153.json`
+
+```json
+{"private":{"type":"Buffer","data":"SK8gSlA5Xm/OAgIwIM7lniVuI/nByAEqRtfKKGKzq1o="},"public":{"type":"Buffer","data":"Q+Vo3kcpwgGXdvDTp3Q2p+Jfr5SalfEnnJDE6Hb9m2E="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-154.json`
+
+```json
+{"private":{"type":"Buffer","data":"4ATmdjRhYphv7ck30DbprvZhyrPPDbaTje9pZXSnO3o="},"public":{"type":"Buffer","data":"2pnEXaArNIByEtUEsBcMYsXs6ZRaEXeGP3pgPAVmGzQ="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-155.json`
+
+```json
+{"private":{"type":"Buffer","data":"WFiTrPzANkz/KWvDqfyUnhDoYwyuvja96bpjujlwi08="},"public":{"type":"Buffer","data":"gLJ5C9wGXE+v0+e+et3R6dvj/6iLTlCErhqbhgFMWFU="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-156.json`
+
+```json
+{"private":{"type":"Buffer","data":"6OvNJjc6Li9nZSeCFcmxBHHm/POy745zhkptFIR6LWs="},"public":{"type":"Buffer","data":"6e5kBB0Om4v/0z0rCF6cYXoraX9nxS95LsNjv9T+a20="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-157.json`
+
+```json
+{"private":{"type":"Buffer","data":"mNECjtcpOq3opQGy4mnij61b46WbE/NCDI4pz7NXNGA="},"public":{"type":"Buffer","data":"DfK/oNwp3qwjWAB34e4/tylgDdYCvzh1+x0q8a7Ofg4="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-158.json`
+
+```json
+{"private":{"type":"Buffer","data":"GLqz5ZMDwdQtLBtZm8X7/f3R0oWoxvPL01cqBJp5em0="},"public":{"type":"Buffer","data":"UPv491EUAxK0Pux5I9MAa8EOsmcGzrhGj8yfPp749z0="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-159.json`
+
+```json
+{"private":{"type":"Buffer","data":"cKthGDmVaEjLS3ckE0SkqQH0Zv7cHLfGDYmXCaaeTGc="},"public":{"type":"Buffer","data":"UdGMDX66IpYV73Z7m2SWnhiVqiHpBxmD6HZh+AIM3Ao="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-16.json`
+
+```json
+{"private":{"type":"Buffer","data":"yErNFZKL6FtGxbs4xLb+Qnm3szZLDtbXCQkvR+Y7YEk="},"public":{"type":"Buffer","data":"TaiBGqlERnBsqCdHnwCpqUvKMKp5po3bmCMOfarYiUg="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-160.json`
+
+```json
+{"private":{"type":"Buffer","data":"mMt7+pu4BYSerskChsVusgepErJwfuAqXZUpIMXAinA="},"public":{"type":"Buffer","data":"wNbVH+bLRKMXmdiY6TXY5FKLEkJPiHw+pkrXG5TZP0g="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-161.json`
+
+```json
+{"private":{"type":"Buffer","data":"eCu5JJ2thcPSU8o/kR6GyBTkB2WEaSmbDznD4ISUtVs="},"public":{"type":"Buffer","data":"fna0dpzvAuR2Yg2B7y2sjaS8ygzjnZ2gmK4hS7yWP3A="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-162.json`
+
+```json
+{"private":{"type":"Buffer","data":"0BSTwbxpYm02WRxzE+1ggULjUg5hAUmTVnpYbXL5Xn4="},"public":{"type":"Buffer","data":"BB+nzjuv38ljmsq2Hz89Cc8jc2Z2UtJjJwCNxHZvFj0="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-163.json`
+
+```json
+{"private":{"type":"Buffer","data":"YMIgleDwj85qM9qfD9BfU1zWgCbhJhWYfMQCviz2Nmg="},"public":{"type":"Buffer","data":"VgDZelc4bdszxUab8GW433eR7ltlOsI2to9CDkCO2H4="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-164.json`
+
+```json
+{"private":{"type":"Buffer","data":"KND9pyuB774UkpNVPCagZDTOwTAw6tHLbLqSe3S58Xg="},"public":{"type":"Buffer","data":"aXNSErDG9vra6QuRE4iNczq8D4DeMXETG/a6hCa39Ho="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-165.json`
+
+```json
+{"private":{"type":"Buffer","data":"UAKAXPLf+/xakKYr/EDVzMGxDQ2yAtaCAYEYtNAdFEY="},"public":{"type":"Buffer","data":"yNVHAIlxpeWIWakI8fj/pfkq33vGf1U3le8YTq4+pAI="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-166.json`
+
+```json
+{"private":{"type":"Buffer","data":"WIL4/sqQVNu0U1KK00QAG8UswJVgg1WwRrlrYhCIk0o="},"public":{"type":"Buffer","data":"OnxxwPFk7+ZDf6GRFK1LHI+jac38Nc97XhCYBBiU0hw="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-167.json`
+
+```json
+{"private":{"type":"Buffer","data":"qJawGIYRmB0VsbhpXCa/vBzgAvLBeJHlg+U2CaRpzEk="},"public":{"type":"Buffer","data":"M35x4SAC5XSeXlerhMJnoHrbVolKJwrXSyv8gZ09LBs="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-168.json`
+
+```json
+{"private":{"type":"Buffer","data":"wKpsjb3MYk3avg5t398/BMrQcBmcb5mLrpKLyJf4/Hc="},"public":{"type":"Buffer","data":"azWeEccKf3ZKOwWrtW5EDCxyH5shPbJB7wBeeZTgRi4="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-169.json`
+
+```json
+{"private":{"type":"Buffer","data":"aHgLuI/jIXG2Dd+i+eCboLxOyEfUToD71gOmjAqWmFU="},"public":{"type":"Buffer","data":"Wvro31ZZ51+eEqZnPli7tLN/aYKOWQfJFkKUAfKx+VU="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-17.json`
+
+```json
+{"private":{"type":"Buffer","data":"eE9srlz8eYmCu5X12V9VOYUvQrQdWVseGLo4dm31RmM="},"public":{"type":"Buffer","data":"WtLynTfEfIzzlNAKw6aWoFS3iltbY5SZp3vcvZM4RnY="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-170.json`
+
+```json
+{"private":{"type":"Buffer","data":"IJKOUQljZqJoH7kbrzM2+9B6Pd5+CmFroj9kywEBymg="},"public":{"type":"Buffer","data":"S+wIOZ9Cm1ix3g0WRQ68WHaq2xw5A1zrb7DpYn+KQXQ="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-171.json`
+
+```json
+{"private":{"type":"Buffer","data":"WH5B+vzs9S8p3V8b5YI6+QPs0SIUKjMOdcQAQ+C62Gw="},"public":{"type":"Buffer","data":"sB+JhOe0PrixjGUIwuJNLatIxrdVCVUyJbhy/QjefXM="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-172.json`
+
+```json
+{"private":{"type":"Buffer","data":"mHURfXxa03n0orJsNnx11M9qiQKQeUn8gVQt3bzC1kg="},"public":{"type":"Buffer","data":"u3GVmG4StlqHSh/JjLB7+DKmW8RPLuoQAI07RJALB2g="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-173.json`
+
+```json
+{"private":{"type":"Buffer","data":"yNZxEw5eqRfmVfjOmJuvF61+lRe+G3Gf9oOD3/3uUkQ="},"public":{"type":"Buffer","data":"Gdouk1uROO2LaAq0PmA3a98qGmG8SzXd9dG0LQhd3E0="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-174.json`
+
+```json
+{"private":{"type":"Buffer","data":"SNI8fEuw5RBbMwwX1jOi4rhxYe7CA3Anzxg3k17kXkk="},"public":{"type":"Buffer","data":"udqWLVgGkQxnczQbQQYcHyAfUdQWKv7w0u3n8aWCTVk="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-175.json`
+
+```json
+{"private":{"type":"Buffer","data":"sG8cdfgNhPkoOR/UcnJJ0rxMBtJYwPBKZxP8OlxJSWs="},"public":{"type":"Buffer","data":"2VRls5bzjHE564cEQEGJaIUZO+bbWcf3yOUJJSt7ex8="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-176.json`
+
+```json
+{"private":{"type":"Buffer","data":"qCroRelZfxmY73oIR4dIVrPQfv1L2ReVPDbppjtn80k="},"public":{"type":"Buffer","data":"mIaG0smte23thG4SauUUU/Grr8eZVULGqG3tUu0ZhTs="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-177.json`
+
+```json
+{"private":{"type":"Buffer","data":"AG9TKcLP0NczngStr7V5DegfOLG4+6q7IR1oo934ZVM="},"public":{"type":"Buffer","data":"LQvy3x4B+OoLQqAabSHmJWXqaCFKcRP9FZnVO3q3UE4="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-178.json`
+
+```json
+{"private":{"type":"Buffer","data":"+LYDdkJHofgDoiSrsNUZsC35fTMR9CUVk6l5816MY0E="},"public":{"type":"Buffer","data":"e3XG5r6DBKxH152dnnUJNCP6hYLZENxu/63extlVn3I="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-179.json`
+
+```json
+{"private":{"type":"Buffer","data":"ePJzrigkt3X6JDz0ZVMPRX9u7KZjAOSYOPotBoKvNGw="},"public":{"type":"Buffer","data":"4nWYwuKKFQbkCb70UqzebQt+gBcN/Aht2NuQCZILZ3w="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-18.json`
+
+```json
+{"private":{"type":"Buffer","data":"yJgcRsikM4luLlpOZbC8f7QehkV5kWUJsK0lkUg2qV4="},"public":{"type":"Buffer","data":"5+SDpmQHcmTLxzmH5sNLxBBLFjUOF7TW1ApWvmpv33U="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-180.json`
+
+```json
+{"private":{"type":"Buffer","data":"+L3ghY9S6BEPptyAoLfSSzCkdSrTPe53PHloyLgvd1g="},"public":{"type":"Buffer","data":"B20U127GfC/UDpMmDYESgHPyg49T6jHr3qbaRroS2A8="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-181.json`
+
+```json
+{"private":{"type":"Buffer","data":"8GrsP82+0d8aqb/GAFUl59x65BqdLHY3CI+71t+riGI="},"public":{"type":"Buffer","data":"jd0mNQMdeNTsRcEovUVoT7V9rJzDMgLq8miW0E/ih0Y="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-182.json`
+
+```json
+{"private":{"type":"Buffer","data":"cMc3IPEbEmRXB/Xt+sLRqGO3cf526UnaZIZajTVYwEU="},"public":{"type":"Buffer","data":"vx++FHDEKjGd7uw8e2yrYk6tlxnLcoXT/Sjm+qKGhXA="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-183.json`
+
+```json
+{"private":{"type":"Buffer","data":"qCQyrrVmLqhEICkBveSXY/kuMH3jBj3Q05mTIx+jSkU="},"public":{"type":"Buffer","data":"uV0yJS/5HmUVhTZ7UOIRwXLwcC8KqRGrQ19R+X23QwE="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-184.json`
+
+```json
+{"private":{"type":"Buffer","data":"aHSZKDGTIj+ZuYgpkcGsa2hKVbm+jbOOxmddI9LqsEE="},"public":{"type":"Buffer","data":"9nfTJjz1xlkT3DSHrk8S2GPRHRMwCB3ldPxZYCeqKgM="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-185.json`
+
+```json
+{"private":{"type":"Buffer","data":"2HsPdz/2KYLpPKBcXHV19oZ0wg3CVk/VRfbO6bBTako="},"public":{"type":"Buffer","data":"iWMiKMCj7l/yXOpmtdlxy0J0NkuITf4hPs1Q8h2bHS0="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-186.json`
+
+```json
+{"private":{"type":"Buffer","data":"0C8piDJpZcJFwSmZNqw7gJPk93p9sFFdOcAHB2oujHQ="},"public":{"type":"Buffer","data":"TzbhCOXRcKUIKK7I5jM78YEc9Yo6igh4xMnDEnWN7TA="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-187.json`
+
+```json
+{"private":{"type":"Buffer","data":"8BPOEdusL2SOppamYqCVNcq7bj/UIg/aSNDOrICViEY="},"public":{"type":"Buffer","data":"P2o8mjVZCXrpc5EJFLxPRhAfYvXW/pFv0O6DQawvCjw="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-188.json`
+
+```json
+{"private":{"type":"Buffer","data":"sEVcLoDB/zsgUofZAcieZMPQN5uuXpSORdd9NbMblVk="},"public":{"type":"Buffer","data":"Xiczqopmof3MDsgkfMeia3ykGn7ntsunHo2QBzaSCQY="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-189.json`
+
+```json
+{"private":{"type":"Buffer","data":"iBNx9f4xU4dtbm/XaOJCfFFdKqveuGXOCEjX/YYCZ0Q="},"public":{"type":"Buffer","data":"7F0DXKyTvPEPCqX8w/c1P99V+U8/M7QUVXlY3iuqWX4="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-19.json`
+
+```json
+{"private":{"type":"Buffer","data":"AO97OlNvw98hGXk5sNLUjbbPBTrn1k0foniijWiMBnE="},"public":{"type":"Buffer","data":"yqyx26a6r8sEYjbExzQN/7Rp4r1tA0IWnmV+xA4rbjk="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-190.json`
+
+```json
+{"private":{"type":"Buffer","data":"aGxoitfXXmTTxVPZdxW8qeln/SowSknfgFuHJn/ie2g="},"public":{"type":"Buffer","data":"3yPy5pnS3dFarlKLbN2iWZdjo+cydQHnMd2Qzn7hKBk="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-191.json`
+
+```json
+{"private":{"type":"Buffer","data":"mHTPlNiKBaeN0ABznsSDNQA4dR60kWVZD3UusVpCHXE="},"public":{"type":"Buffer","data":"mQWxYw7Uh8lE8k2LphWzclC3rcoVaxQzdFTzo7gslCo="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-192.json`
+
+```json
+{"private":{"type":"Buffer","data":"YFITAmcQLeE3hwlwBMSuDTbPiCOszaEK4TFf2YA3zEw="},"public":{"type":"Buffer","data":"6agjQfW6uIm5I9b/RV8zqHOnYTb9xOlq63T346nPuB0="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-193.json`
+
+```json
+{"private":{"type":"Buffer","data":"YN9+jNCN5YgnlC4X/M37vxxz7IQW2OqvvAvv6dQoFFU="},"public":{"type":"Buffer","data":"44YXrUerzUd2hgWGmcLWyO9kQ+gpLeTEdhKMtk6WdVo="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-194.json`
+
+```json
+{"private":{"type":"Buffer","data":"MB2EHwYXXoEo3ve2VXikt/SoJs+kGRA85hLhM57Wt1M="},"public":{"type":"Buffer","data":"MLdRiCYV0acb+yTnqblv/QraJW5hvFbOAHu5tsBsqT8="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-195.json`
+
+```json
+{"private":{"type":"Buffer","data":"cNPVZfTSvgiMirC6v0TE96mKItG17/ZMbQ9Qagz3jFI="},"public":{"type":"Buffer","data":"MUXnsAuOw1Gl3c0ZuGU7jgNbmY1Sjt1SYzp1ZLCAmTk="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-196.json`
+
+```json
+{"private":{"type":"Buffer","data":"GJI4q+b3I2mjYs88Dzx4FvWHpfpmJMAfdOogebKbRHs="},"public":{"type":"Buffer","data":"asx2Zrq9ubTGoUoZq9U9UXIeTOE440SaGBlm3iU93HE="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-197.json`
+
+```json
+{"private":{"type":"Buffer","data":"MLrv399qdloq6oAefRSJLeoBbluLTt4EkWoHQk7ZWWI="},"public":{"type":"Buffer","data":"whCm8NWH9KGRXaNyQGX40xPERVcI5YHADAkIS2PaBxs="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-198.json`
+
+```json
+{"private":{"type":"Buffer","data":"oD/+8WdMNlKCwMe2WSuXmvXs9UCOSrqlmBliGzcBs00="},"public":{"type":"Buffer","data":"vASyfHd/66NXRxcNwn9m/HkzxJgS7Peke3C5XCXkigA="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-199.json`
+
+```json
+{"private":{"type":"Buffer","data":"sAnjjXR+vg79DOef08pHmzJQmtYGxg+wACzBLQx/8WE="},"public":{"type":"Buffer","data":"u/0rgXfR4T/Khnc0XHMsx8zmQJvH4IeVitSMaNrq7SA="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-2.json`
+
+```json
+{"private":{"type":"Buffer","data":"AJl9Y6JdqNG5zayzrWcaaI9nMlqMWogV2gv33OP7iXk="},"public":{"type":"Buffer","data":"dlAhzcvk/vOYMzazQxvdPg/v2GFAu2wJabdRk/w/I3E="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-20.json`
+
+```json
+{"private":{"type":"Buffer","data":"qHBTv5OdXsRPXSU7cT1M/D18KIcQeQfDwybbZ3Pda3M="},"public":{"type":"Buffer","data":"FBANtuHFLPhVQgyBfUtTMZfzH2afleMYIit4KND3SSg="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-200.json`
+
+```json
+{"private":{"type":"Buffer","data":"EDAcqNfqTr1aGVX+myJOBYZGf0FXqUssOTYrHmEgrWg="},"public":{"type":"Buffer","data":"DIGofknSW8E/l7rWo/+K7jNNNwjU0cWEL3GkuyvuoSI="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-202.json`
+
+```json
+{"private":{"type":"Buffer","data":"kK/aZKq4UnkFdccb2CLo6pbZ2yJvLkLyqeq5LVGmgmo="},"public":{"type":"Buffer","data":"FBvl9WAf+I7WsdXGHkCahH5FWh4CSyDDV8GvkUZcJzU="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-203.json`
+
+```json
+{"private":{"type":"Buffer","data":"iFMKKlpXWslNc1rW62ixTKfL/CiP9uM8IG+gQ3OJoXQ="},"public":{"type":"Buffer","data":"woxFCkVSCv837VMuMbBdRlktVMWmDoeDTuYeTGu6+Es="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-204.json`
+
+```json
+{"private":{"type":"Buffer","data":"cHCucAzBOFrRoX82TP6rM8ppnG5KfMtedEh9lwIW4lM="},"public":{"type":"Buffer","data":"yApyTVPT07Jw4Fn6WUboPKO9J8HvLwvjLNNOdLjRxGs="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-205.json`
+
+```json
+{"private":{"type":"Buffer","data":"GDURSiTZ8TbKVqIbp9aOHNT49yQr5apW0puYwZb+bkQ="},"public":{"type":"Buffer","data":"fn8BbpK+gvQjdI5toefje64HJcKmUc5V965pZfXKO0w="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-206.json`
+
+```json
+{"private":{"type":"Buffer","data":"+KSyPuXi9cVZGSRRNZbrL6SStJvlkTW6ZIyUTinV43k="},"public":{"type":"Buffer","data":"dSHrpOHczCb8tF3VeW4mFvXcS9+LeIBWKsruDqaBqm4="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-207.json`
+
+```json
+{"private":{"type":"Buffer","data":"+FzeG8jA62Y9nT7Tcb0hech1qdXCl7+KqZk0L6ymSFE="},"public":{"type":"Buffer","data":"inPaoiPZP11F3ySjexUk8TaE6NaFaY+T8wq8lhG7g2Q="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-208.json`
+
+```json
+{"private":{"type":"Buffer","data":"eF+srpYr7Lm0WSkGmHubgX/vQX6fYshG4UGi3gGqgUg="},"public":{"type":"Buffer","data":"NCJ+ltZ3eQd2epdP8or+5HErTz4cHIR3tqjgpVnZHSs="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-209.json`
+
+```json
+{"private":{"type":"Buffer","data":"UKugpMqnD/u2YWA/FSSXnvaoGoiuqBhNHL+aUqcyd34="},"public":{"type":"Buffer","data":"iDHu5S5eWyfXppLUEtNIcXldn9YjSy50gTcxjZhvQgI="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-21.json`
+
+```json
+{"private":{"type":"Buffer","data":"mCWHshzw2XTM/YOIXEf8YN3izLnk/3cMFYfzVoLLu0c="},"public":{"type":"Buffer","data":"v7cm/2mJJ4l0hO3YGNEZvnqrVbmEsENcYSRg1HYHQn4="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-210.json`
+
+```json
+{"private":{"type":"Buffer","data":"EFSn97OfD/YJIlZARgvGqvbjjPnoEyeGOZa+cYduR0k="},"public":{"type":"Buffer","data":"vaWUAzMdpQXTbWAf5pU1yyAjhh9ZxcR11r6n9g75uBc="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-211.json`
+
+```json
+{"private":{"type":"Buffer","data":"mJeD9ZD+2YAv+w3nrkAlSh7w2TTNTS5xr5/GULBjulg="},"public":{"type":"Buffer","data":"NLMl33Tev2M3KEmSfR73s3UVM5eMvNcdCd/oBYHVAEI="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-212.json`
+
+```json
+{"private":{"type":"Buffer","data":"eE0F+ikfFM2br6GbTEMglfzxjXLbnSCyXJjH+HXH6UA="},"public":{"type":"Buffer","data":"Xj2QU+TfXu4MkZL00jF2mFKDDGrsXmzTMjER5+07yUI="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-213.json`
+
+```json
+{"private":{"type":"Buffer","data":"yBWG9iUPfZwT/POPgrLQyQXN5EL7FrYzcc2doLVFbnw="},"public":{"type":"Buffer","data":"MXkx/CXGST2xYhHRNxODEe6dLIKSha5rPwlGTKWuHWc="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-214.json`
+
+```json
+{"private":{"type":"Buffer","data":"kP7EZznIaTtecQIxUKHPmcEtof/9fC1/S4ohYAaF7WU="},"public":{"type":"Buffer","data":"bhIa2lLt64e2z1uQAiPPdgw8F3Pktt+79kgKh4n3nxY="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-215.json`
+
+```json
+{"private":{"type":"Buffer","data":"CLw1nV1R+zdSN2I8D5S3uEoNNUskJTzXdVsNtoVA1kY="},"public":{"type":"Buffer","data":"+wtfpJyLSfmZN22q+rBeoG3Od/PEX9w80sq6se49LAA="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-216.json`
+
+```json
+{"private":{"type":"Buffer","data":"qMm+Z4I3FLQK7+f7hN863NEnfBu7UEp6B36Xi51P3W0="},"public":{"type":"Buffer","data":"6ZWyMUZh6cLhlBtuhr9c1hrI0vxB2OklZkWlC8BpKB0="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-217.json`
+
+```json
+{"private":{"type":"Buffer","data":"WKl3+l5sRywmYLqgBfLrBF70IAlW2itrBBZ1SQmHiF0="},"public":{"type":"Buffer","data":"ZvCIVV19/0G4PTL0WaEu22WH/g0qUKy76erE9Mj86Vg="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-218.json`
+
+```json
+{"private":{"type":"Buffer","data":"IHypm99U885p8Xpjy0Wf2G7WzUvhPEiLKFQYc1oZk04="},"public":{"type":"Buffer","data":"Gjs5yM0DpvtIcD7vBytf1vIL3zbL5lFcz7WAjRfUxWI="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-219.json`
+
+```json
+{"private":{"type":"Buffer","data":"8P6872cVxrBJDr73ejjCrqCMTOhOW10uItax+OyTDVM="},"public":{"type":"Buffer","data":"2/Hfz+zHJ4kIzdK6Y0HEtTSbnSIZDuBVZmBeRkBRolg="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-22.json`
+
+```json
+{"private":{"type":"Buffer","data":"iPfln2uYKwSVCEWfkKo1ZBFEaa4LhrWW2K0vB33jtmQ="},"public":{"type":"Buffer","data":"yd+qnExJePo91ipzvNwOIbvpgG++IybTxYrdAcJ1+RU="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-220.json`
+
+```json
+{"private":{"type":"Buffer","data":"iL/LHYDy9xqNRUqrJf+vOwuWGpNS5W2/7Pynn2cJx2I="},"public":{"type":"Buffer","data":"Oi5enIKs/n3Rg9X3XmR3Kq7f1bttoGCuHEk//Eu9YUo="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-221.json`
+
+```json
+{"private":{"type":"Buffer","data":"0AraOLVbwLN4fdqw7umfj7SNFbpUfLw2KhwFH2WnWnA="},"public":{"type":"Buffer","data":"OKLqPATL203sQVX4gMG8WCtT2eBYC0ep63aoq5yQmUM="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-222.json`
+
+```json
+{"private":{"type":"Buffer","data":"KMmN06ce9FM2PLnRdk+SqdvHxVcQHwYEwhsaNMXbumE="},"public":{"type":"Buffer","data":"mKjfZHdFpQTjGz++998tb8hrIjFbF2rv9wMAWnQz4wc="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-223.json`
+
+```json
+{"private":{"type":"Buffer","data":"SLvleih/wC1J7ynukBBTB2sdiHYKJPd1wAwRekh5CXw="},"public":{"type":"Buffer","data":"lHKOYGgpfec7zxgPqVspWMjh33MSvC2NiG/Bk5j6tgs="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-224.json`
+
+```json
+{"private":{"type":"Buffer","data":"mG6PGJtTNcWs2MJlkPMIqbYbcI1TmDU7uvc0cxvg0Ug="},"public":{"type":"Buffer","data":"s1mPwZNU6NsN5D6+tjtjcj+sV4L54QuM3AUE03Dmjm0="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-225.json`
+
+```json
+{"private":{"type":"Buffer","data":"MAawKX3k7OvIyJw9Iv2x3K/OZ5M7UvWNNv45e0YQnUA="},"public":{"type":"Buffer","data":"MA8opB/RuJaddS7pwWYo2NqtmzM+hyNjHX+/rLoQH30="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-226.json`
+
+```json
+{"private":{"type":"Buffer","data":"iIvzq6UgGn2vrfP5KhqT7wnRmIFnSMhw+baDqpuOrUU="},"public":{"type":"Buffer","data":"3FRSDSYVnSWco3Afa8Bf3j2YjX8+7kuTEA32DSIX9Gc="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-227.json`
+
+```json
+{"private":{"type":"Buffer","data":"sDkfceXbAbA747UpfmhNR44S2mQrnbMr47bLhVF7OEo="},"public":{"type":"Buffer","data":"gcPcpmbBdcR8znEyhJ+9mSF0OdeY3hnwE0ne40nQYGA="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-228.json`
+
+```json
+{"private":{"type":"Buffer","data":"SH1s1UDPbfuMjYTAaF0OGZ+OGQbEYZZ2EI5HedmXH0E="},"public":{"type":"Buffer","data":"NRes4QDWZ079ogbcEzWlLa48clHaT/QVnN/MQGQPUEM="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-229.json`
+
+```json
+{"private":{"type":"Buffer","data":"AFo/2WifnWm9ouqcDwwIIzNugbmVZLfa8Ytw0c/3Vmk="},"public":{"type":"Buffer","data":"+pAZegn59M4WwyPDIfSa0LbJV5l0rI6gXx7LRajF7U0="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-23.json`
+
+```json
+{"private":{"type":"Buffer","data":"UPHePXf0ZLrQzVTn0bpUxcB3Lm5gyzb9n11rdmrgyk4="},"public":{"type":"Buffer","data":"KDm9ngb/gokiMSD42ODtPN9fDN3dZKqKzPWeieqGumA="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-230.json`
+
+```json
+{"private":{"type":"Buffer","data":"8DR/7X1HzGVQbQ6U8V3GCA77VZ+rdsBh1zOT4ofD82o="},"public":{"type":"Buffer","data":"wsOirlYgVxSHKi2MSvNlkpm669vmiEExCPEpG00ErnQ="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-231.json`
+
+```json
+{"private":{"type":"Buffer","data":"uN4xxsuAJFkeO2NUhOQbdBspUhhPmU3tXpK2rWgG9lk="},"public":{"type":"Buffer","data":"777nJOvZAcNivwxzUgWdRpLZ5ZXcgYGgaX510HSCuB0="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-232.json`
+
+```json
+{"private":{"type":"Buffer","data":"iEQ3JyIoSETnWop89Od74HoUeXucdURSEPjKdAt9zVQ="},"public":{"type":"Buffer","data":"XI7WgGrfxHA1/r+9wAy2RUbd+I5eTKmWoJMdIek0Ciw="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-233.json`
+
+```json
+{"private":{"type":"Buffer","data":"yOlmsps5UUQewuzgb0D4gQEoC022+19kIzDaubHNWmc="},"public":{"type":"Buffer","data":"N2QPdbNoK8nEFFHkdVyJnstZde7Ox5h/+3gPhNsYQlQ="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-234.json`
+
+```json
+{"private":{"type":"Buffer","data":"kN4BsibeMp8+t0hMHvD3oP42vUzVX4+l2U0ehb+C52s="},"public":{"type":"Buffer","data":"Cxysle11LKhOZC/0gR+Af9D3Or//nkacuGVtj+4+538="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-235.json`
+
+```json
+{"private":{"type":"Buffer","data":"KCpEJ+ner0OFsiwpm2iyCc9MNNAFntvjjpsvmZd1J28="},"public":{"type":"Buffer","data":"eHqs0DbBzvFHiiCFoCkwtf9U3Vey3ZydPo+X/qV87kw="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-236.json`
+
+```json
+{"private":{"type":"Buffer","data":"UFVcoCJlT39utZTwt5rJF16ss0GPFft/Ktg9Sl6TcFM="},"public":{"type":"Buffer","data":"/37ZdBghMQGsGvCbOjA8B0U+2XOOq0XTgF499uVH7m8="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-237.json`
+
+```json
+{"private":{"type":"Buffer","data":"eIA995KLMSXvwQ5+O5luZ48nuzTpyVI00pvQWU58o00="},"public":{"type":"Buffer","data":"Bw5pvLnZU6DvMzflHFaiminQD4J1BFDeCTfL37I522g="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-238.json`
+
+```json
+{"private":{"type":"Buffer","data":"OK7FMZhPxJQnV5pR42Ft78Z5tPhWpYX48XD9TgGoS2M="},"public":{"type":"Buffer","data":"NbK6gJjimjNsNUxoosxssPZadFwlRDX/rx/qSdXtmRY="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-239.json`
+
+```json
+{"private":{"type":"Buffer","data":"GOwc+Fz7vaK9AesmT9pUXY3743bbdfotrXO3WPY05FA="},"public":{"type":"Buffer","data":"SSF6gsMm4i7JFFBOWue0HfqTnFEHGp0JxtwCsB2+EB0="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-24.json`
+
+```json
+{"private":{"type":"Buffer","data":"OCth0uiZ3eF2QQWmG7ppO44Z9Bkm4ye3OtsskGzAcmQ="},"public":{"type":"Buffer","data":"rRPPfo+8oUskUyuOjxM3qpumiPy8EwXJge2tfOZyjz8="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-240.json`
+
+```json
+{"private":{"type":"Buffer","data":"gBbNS6W0y2l2o+hUdO1IduE4wbrlL/SuvMDx51PsHlI="},"public":{"type":"Buffer","data":"sJWZ6L/DzLj4+1Grm6czEpcpwDWvhGtiI6xOvL6sNwk="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-241.json`
+
+```json
+{"private":{"type":"Buffer","data":"iImdNwIzhqwiPfN04Nt5WYtLk+mC1F5olb6Vdq02pVo="},"public":{"type":"Buffer","data":"oBrVQAoyf3D1w2BUxLm1P12RkhXcMTAL+iryQZxg4Tw="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-242.json`
+
+```json
+{"private":{"type":"Buffer","data":"GJZ9u/3kcOMC6YyYF3346tW/SxT+EejaPIMzv2hew3I="},"public":{"type":"Buffer","data":"OX2Jzq0iNpDLGJEzrlwxgDNlXxYtRyW0CgIntFJdx18="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-243.json`
+
+```json
+{"private":{"type":"Buffer","data":"6FB1bKfo9Z0AyH6jWTRlBWJdjsE5ICEhchjznKi+G10="},"public":{"type":"Buffer","data":"Ipu8pC9PClvtOvvAWfmPW4BGiAms61f9POZQtvPKE3U="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-244.json`
+
+```json
+{"private":{"type":"Buffer","data":"QE7lIKASoGIWQhTLw2xOFg6TtKQxESwDkfSbmtcdwm4="},"public":{"type":"Buffer","data":"IXZc6k1XtAp0PICVHgiffMs/vnkHcGPDkYbh/5/YsAs="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-245.json`
+
+```json
+{"private":{"type":"Buffer","data":"IF3dWvjQ6T+fCpWRv4FBpW+xKJcrqrvPFThptABNuGA="},"public":{"type":"Buffer","data":"XgbgOLXuFi+uizbHHDkcN/NBqoAMCsnwCo5j/zlTqz8="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-246.json`
+
+```json
+{"private":{"type":"Buffer","data":"iAb0dUXi70ZxgjQxsCg1ID4/cdJwQLA2Ghiq1ADqVXU="},"public":{"type":"Buffer","data":"+hyzDUtNXzPawSut4J0Uqd0OsVpAoqxXosFSKfXRaAE="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-247.json`
+
+```json
+{"private":{"type":"Buffer","data":"mDzVf+Z0HVX8VnTk3Mgbnkj1UF36IfnHU1tLip/xDUw="},"public":{"type":"Buffer","data":"67P5R60r0i4tDlsq5FTX1TYSa2dkHFVDsCcLN5+nhmE="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-248.json`
+
+```json
+{"private":{"type":"Buffer","data":"CAVYJHAQXImyP+0OKPATZx/a2HCGhgH/XF2ZB55FCFw="},"public":{"type":"Buffer","data":"0fZxdGsqQe2kifBt8mQ2Yxxc5PUbnXYNtrzI8pd/AgU="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-249.json`
+
+```json
+{"private":{"type":"Buffer","data":"+P7i1VLyiZI/eI0+IU3mBwLO/dsmq2Q9dF9fAUrSkk8="},"public":{"type":"Buffer","data":"YaXrD8SCyS148Lva4XGWG0XDz3FnhOsFSmlguyuej00="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-25.json`
+
+```json
+{"private":{"type":"Buffer","data":"iISWmj8qskSynYQ3cjh0t0o6ujYq/8OlnTG8jo9xak4="},"public":{"type":"Buffer","data":"Zw56ebsNBn5S3Z/4TBON5N21PFnrT+KCSdEUvAUudzw="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-250.json`
+
+```json
+{"private":{"type":"Buffer","data":"AGRdrrMngkapeJ7p8gR9myDD7CWGiOpE7ioqouabTW0="},"public":{"type":"Buffer","data":"L8hlJfbyFfx85JCXhMvO8AVZY7HZBEsNxiPcCvrJTTQ="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-251.json`
+
+```json
+{"private":{"type":"Buffer","data":"sHNKAisylfKYymt2ShUfU3iuXrZKonUpcoN3ywKFxH8="},"public":{"type":"Buffer","data":"3WD7mTckWcH4FSlhI7pjIziYG/wMBl9gFScfrlumVzU="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-252.json`
+
+```json
+{"private":{"type":"Buffer","data":"IOIAy6E5ER27D6JSBNLjaVTj2BiY6+jCpxtHKdkNqXg="},"public":{"type":"Buffer","data":"LGra9oWYqYhlwp8sEcEJKBPEKqWeNZPI/jme4OP+SkE="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-253.json`
+
+```json
+{"private":{"type":"Buffer","data":"OPOn/6qw+UVX1uRcjmfzsitlks2R3aVCRQx0CN6zLnY="},"public":{"type":"Buffer","data":"bIsZRVLnksUhFV/kyScpJb/6/jHcoHwg7WFTW6/8pGU="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-255.json`
+
+```json
+{"private":{"type":"Buffer","data":"8DywXCMV8b1j5v5yeJ94u/7G7js0jZW2KbQ1KesFX0E="},"public":{"type":"Buffer","data":"Vca5PVSatwL1GRD7zj5NVrwc4TknAwqOkRwZk1FntQo="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-256.json`
+
+```json
+{"private":{"type":"Buffer","data":"SD07tLbCnkG1Bkp88d6eb5F/PqMrVWVE9ty6gOL661Y="},"public":{"type":"Buffer","data":"w9i5p32crtskX9rNUNKziU1B4PuutYJC273FlD/iZnQ="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-257.json`
+
+```json
+{"private":{"type":"Buffer","data":"UIJpLV9i8Qr6J+UjCS3+M5a0cnQSvvyfiAURgR+EF0c="},"public":{"type":"Buffer","data":"lx8PU52JQ6Ltl0FdFmESEGdBYOP59tfQ2XAroa0BOys="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-258.json`
+
+```json
+{"private":{"type":"Buffer","data":"YEpIyE/MB9ZLWIoHBCKoENyDsTpZGyljvqUgRJn99EU="},"public":{"type":"Buffer","data":"NPl2gZy/FPSnEbTiRcaNHA/Cdc9Rh3cxhrIx1XbeIjg="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-259.json`
+
+```json
+{"private":{"type":"Buffer","data":"uPiEIj5ezeoELaq3o9xGRwhMNNWVESKSevegitCd51o="},"public":{"type":"Buffer","data":"X19w78xu9CbXyGCm9JVSQAFQLjrB9wdNDqM1N1aMUig="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-26.json`
+
+```json
+{"private":{"type":"Buffer","data":"gD1ZNORBosdqF9XqRkXckWVezIs3T+h64NBZ/xNC8HY="},"public":{"type":"Buffer","data":"XPIayMyewk2Dy4IWPaSd7qNkiDeF7hexailrE+sL3Fc="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-260.json`
+
+```json
+{"private":{"type":"Buffer","data":"2K2DNpxv31PvSLSe8y3AWghGhTyDyRFgqkFUMUACIHE="},"public":{"type":"Buffer","data":"lvomIM0U+EHCWSFfMPEwbtUFgi/qkwxTi7oGuJxkIg4="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-261.json`
+
+```json
+{"private":{"type":"Buffer","data":"4CkODUjyxTKEcAxwQKiJXXmB14OTlmIzVr8XSPs1U0I="},"public":{"type":"Buffer","data":"2cbPwpn0nJ7Nv6H31rn7IzFCqYgY58WxVxuI72+I8EE="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-262.json`
+
+```json
+{"private":{"type":"Buffer","data":"KJwmvw4+aTDUkVH5BTwRgdQU2dFyq4OJBbWSiBuvnkE="},"public":{"type":"Buffer","data":"T80OXRGpg2JkVi4wzffQNHskgdT474r9CSFMWTuWplg="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-263.json`
+
+```json
+{"private":{"type":"Buffer","data":"GEiRfyYzj0yCtDIvf2omeRjVATQrJFdY8wZrzPFRWU8="},"public":{"type":"Buffer","data":"baLESsnyx3zpMzLlfJkAtWDT2g1wCssr6Zw4WXKUrHA="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-264.json`
+
+```json
+{"private":{"type":"Buffer","data":"WLc8r0v21e2pY88EDnvjdWNCEr7hn1pI1JRHn9dFvGM="},"public":{"type":"Buffer","data":"3IiTgW+lvsOKPjWdyTIjflb1puB/nswPvPQJLareQHg="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-265.json`
+
+```json
+{"private":{"type":"Buffer","data":"iPMX5rDUWllGPEKDyMWvSe0XBrWq0wZpRvqHUAtouE0="},"public":{"type":"Buffer","data":"XiQeMEHzQpTgfOhKdR2t/7FWfysNmpJZhIuXQui7MR0="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-266.json`
+
+```json
+{"private":{"type":"Buffer","data":"SC+taTvh3LzlmbYs+z192z+Woafljgv0EknFIB4g1XQ="},"public":{"type":"Buffer","data":"BWVp+/5p2oPivcybHdWIbNBivXmzWpAQORCYz0oOxyo="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-267.json`
+
+```json
+{"private":{"type":"Buffer","data":"GOdWJzX100N0sjQf8j0Sam0i5xIhVCeKXdan2Usn1WQ="},"public":{"type":"Buffer","data":"B2H9M9XF23wtupFMwOTikZ6v4W7Nf5Kp60YA9I/JCn0="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-268.json`
+
+```json
+{"private":{"type":"Buffer","data":"+KiKc9InzOETwgEX8sCeK5XRodptsfu09TzeMKmseUM="},"public":{"type":"Buffer","data":"fxnkTTb322SnThhZV8lqlbBDBksuLBeflrrGu8jGAhk="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-269.json`
+
+```json
+{"private":{"type":"Buffer","data":"6Biec+FCWVzEpZN/7CifmyKPhL2Tcg6Kc6eDl5HKp1k="},"public":{"type":"Buffer","data":"ljMDoA7Icz4MW07ztXlnz3dOL7rQ2sNHvJp897It7Tg="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-27.json`
+
+```json
+{"private":{"type":"Buffer","data":"yMi9IN/1YEco4lH3T40qUYObIvoFhCeVmBHCDVuxmk4="},"public":{"type":"Buffer","data":"+fCjeS9K1AShxyv7k/0c66yNjnPwZ84sEBDrPt83RyQ="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-270.json`
+
+```json
+{"private":{"type":"Buffer","data":"wBeRq3MuYoRae5udzdqetxR6AHZPUa63vZx+XRlsDlk="},"public":{"type":"Buffer","data":"K3aCmjfZDCR/7/Azs6TJsp+gaXsPhvf73JmbtLFPBkw="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-271.json`
+
+```json
+{"private":{"type":"Buffer","data":"wEyLi/5DmRtuUB4cGsXRY4s8fsCsXxIPaLLxVu35BHs="},"public":{"type":"Buffer","data":"LsEUgfpT9v+SZ4j1kEU2l4vica5YtZLdYq2YczDj0V4="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-272.json`
+
+```json
+{"private":{"type":"Buffer","data":"IPlLQGl5a/aaT/Sn91Y8Gs6mgpC9B+T+ncuvrgHPtnM="},"public":{"type":"Buffer","data":"PBwvyXgf/BalZZmvwtQn9sQ2WKjaS42hBi9QqqTv0Xk="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-273.json`
+
+```json
+{"private":{"type":"Buffer","data":"CJVXSELgjlyz+Jt8h90LX8T/n4o+d8LB8nAW1sfvu1g="},"public":{"type":"Buffer","data":"tMffd+fvO6C/bb3DhRiQRith23AmUNrKwrnvQUG3GAk="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-274.json`
+
+```json
+{"private":{"type":"Buffer","data":"6NhCJ+1bugjPbOca+TzoBnD707Ey7Ggjp6aYUTs8CFI="},"public":{"type":"Buffer","data":"xBFwevyciDcQW1coz3dTHZHLWNgTZxk0QU506yjfRmA="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-275.json`
+
+```json
+{"private":{"type":"Buffer","data":"0CNgMlitqxBTtxdD2VTcixRPA7nDbE4XQb7gDwdWdHs="},"public":{"type":"Buffer","data":"iF1sXe6L8652oSv2i0HwBTexbWkc+dkXsZDL4h/nITQ="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-276.json`
+
+```json
+{"private":{"type":"Buffer","data":"0BCO2n76vL3CAxX+57aHeZzkn+E7gC1jy5hNaBTOR0s="},"public":{"type":"Buffer","data":"1KOBbFek+yBcc+i1053M+LxxZdklJYmxm+QKIQxnR0o="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-277.json`
+
+```json
+{"private":{"type":"Buffer","data":"qLDB4iI898ZmWP6LbwnPV2DzBY2LbdeN8rGlc86vDXM="},"public":{"type":"Buffer","data":"2ozb0mxJdch2L/lMANNBrywvHRFUbqFneh+frvUjcXQ="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-278.json`
+
+```json
+{"private":{"type":"Buffer","data":"uCrWqnlKaiwjU0lhrc+KGNJOIb6uOevHxtr/HmFFx3E="},"public":{"type":"Buffer","data":"lXFZVXsvFqt9KXaEWnZEbxBdKydrp/0HIGf06XZN/Wc="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-279.json`
+
+```json
+{"private":{"type":"Buffer","data":"MNLNsqtqNYZnoxU70NL8D5MHnvMzCx2GlWcmJiZ2M3U="},"public":{"type":"Buffer","data":"T9MhgHA+TYzCbo2g1tUBhhI++7cMffRvKzbn7q3r72M="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-28.json`
+
+```json
+{"private":{"type":"Buffer","data":"mGFWLTIg99mvlv61HaQthKw9K2WDdNepdt3ILqIqOXc="},"public":{"type":"Buffer","data":"VYnNWV6S0OPGiwnE9kk+lViX9vYSZpAWRw6ovzUjbyc="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-280.json`
+
+```json
+{"private":{"type":"Buffer","data":"eFtY2zkEZfD3R8nESn/xIE51hHEKKISFzIS/QA8sOkw="},"public":{"type":"Buffer","data":"fKayjDlKc78k9qU3EqCwiKbDIWY8RTHSLr2RnhwleTA="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-281.json`
+
+```json
+{"private":{"type":"Buffer","data":"aB2MZl0OLFj91Nt2GivMhcESY5RkB85+sqd+qBSo8E0="},"public":{"type":"Buffer","data":"zgUZFHFyDaPVtc0owcobJuzmVP5wNfPd4Kjvy0zgkUs="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-282.json`
+
+```json
+{"private":{"type":"Buffer","data":"CPAZ2xsvNVPgoEzm0QX23iSWnBTJ1WU6asWq69DzCnA="},"public":{"type":"Buffer","data":"JtZbCsU9uPIzXF26Pc2zEiqPE3JMBCPHTQQj2cOvwCU="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-283.json`
+
+```json
+{"private":{"type":"Buffer","data":"aFnQGsyXHxOQkWKPYalHyItkDXNqunMpE/b/U4giEFE="},"public":{"type":"Buffer","data":"pwdltHhxCc8mUGuHOGMf5xxLebQC4pHik/EJKr8gBhs="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-284.json`
+
+```json
+{"private":{"type":"Buffer","data":"OC2KPaBXyk+Tlm8FwvvDrKcd+0xJUApOBn602hGtN34="},"public":{"type":"Buffer","data":"kX+jqYT8P4+iHnfcJyfyWsEHCHdfGobXlMJDdipyHTM="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-285.json`
+
+```json
+{"private":{"type":"Buffer","data":"IHH2YFDepkfP2eyYHgKPWcUvqPYziSiSSH/c/Wv8Z2o="},"public":{"type":"Buffer","data":"9fufQuzCCRiT8pWXw6d1+VebMvlozOqU4w5MOmHaQTs="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-286.json`
+
+```json
+{"private":{"type":"Buffer","data":"2AfgNIB2P2MH2TkcZdGqiQXyhsrQC8HDRxUN0UmTS0k="},"public":{"type":"Buffer","data":"Gclcm2qapwXTC9Fz/KdmXAl9GtG/xi6b90Ejz3ou7Vo="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-287.json`
+
+```json
+{"private":{"type":"Buffer","data":"kCp1ty6DXyUR4/emufE1ZXUzG2HFzzYjrS0K9kQPcX4="},"public":{"type":"Buffer","data":"snILhaV5avGQ+BIr2Ajay5Y1o0WVnKu7V+VbPMKLoHQ="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-288.json`
+
+```json
+{"private":{"type":"Buffer","data":"CHWye2msAYFJgjfWBq6YBS6fyUTXUMD0HRrSxr8Hi3A="},"public":{"type":"Buffer","data":"Eso4HAssVmkFCDGIV28N1PP8qmWvV8aeF/mYcFcgQzk="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-289.json`
+
+```json
+{"private":{"type":"Buffer","data":"OIRNHAPvXJ94CN2rmTzahwf04iBCkiJcwmQSr5xCL0s="},"public":{"type":"Buffer","data":"+Kz+QxIWFJa6+DzXnwjPb7v/x016Ro15G0jVoDCS/3Q="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-29.json`
+
+```json
+{"private":{"type":"Buffer","data":"iAB8hDXyFDflepyVwFFY56HEMU23OFDnpnCjC+nZEW0="},"public":{"type":"Buffer","data":"CYMuaq/anqtJT3clotWL8Br9tEIOU4pXQRewezJcWmk="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-290.json`
+
+```json
+{"private":{"type":"Buffer","data":"qD1idAaXBDaa1g+UxVVZr121A4xn50ZPLorXYlUgKm4="},"public":{"type":"Buffer","data":"SCAi/lzHDqK82vJ5+LiJfz0xwZ7EiPSY6EI1s/TsPEs="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-291.json`
+
+```json
+{"private":{"type":"Buffer","data":"2DcO2fmgaZP9bHiStTZScKObJ+imXpFC5mfcurftJVQ="},"public":{"type":"Buffer","data":"N37+v7BPlQgPMfIC10qjLZfCJYIXCPocD47gNwvPVTw="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-292.json`
+
+```json
+{"private":{"type":"Buffer","data":"mOAGa4CB3XD3h6Hke/lIoFD25Ois/Y5iFXxF7jvPG2s="},"public":{"type":"Buffer","data":"Xjy/WTKUOOiPUp9Ndmys1d7MDBIxUJigz0lf7Wh42Dk="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-293.json`
+
+```json
+{"private":{"type":"Buffer","data":"qDWH12Bdp5sa3nKuuvn22HHBFiH/HdQJzvX9G4ssLH0="},"public":{"type":"Buffer","data":"zhuGGJIGMvNYdSl2PrUBWWwKAEr7tLvqim3DTCGKkB0="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-294.json`
+
+```json
+{"private":{"type":"Buffer","data":"wJmv/phBTobCwMJQ2ZrweFAHOtIJ5KLAJ1g9SKq88Eg="},"public":{"type":"Buffer","data":"P0YfUG2WUW3Yq8KroubV/xEJGwlyz1c4Q+3eifANDDY="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-295.json`
+
+```json
+{"private":{"type":"Buffer","data":"0LJ/l+8JNRZaJjwr7juYNko+QXjQ+8u6OzKKKOgWjW8="},"public":{"type":"Buffer","data":"VBaHpcdwo8c91A6p90WzTdwMXFz46W1AZANh1uwsEAk="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-296.json`
+
+```json
+{"private":{"type":"Buffer","data":"aEtNKpcPmLuA+EP5pPZ8XmZor/4+w/PzLSfp7B2+GGs="},"public":{"type":"Buffer","data":"kOmvOBkFIBjq90Q1u5zb5q8pXi+mshgN8usXMK7NOB8="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-297.json`
+
+```json
+{"private":{"type":"Buffer","data":"kE3UiA0OP8jCkBQ235hjHzeX24P3glB6Lav9LEgADUU="},"public":{"type":"Buffer","data":"n56/nvN5h1HYnmHiDXkc26eMIF3VEBIxrdtw0gB2UBw="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-298.json`
+
+```json
+{"private":{"type":"Buffer","data":"2FVL+Y2zj5AlMXverGKRedOToW+Gwwyz5UKUPuQXzUA="},"public":{"type":"Buffer","data":"1kzBVxjYRTZWTaUbwpov4VLuQjZ00l1ZPqzKKhpiwig="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-299.json`
+
+```json
+{"private":{"type":"Buffer","data":"mOo8Y9CTI2iAhka7Q9NUisA40beT8yF4mUe9WLhuk08="},"public":{"type":"Buffer","data":"P7/rTo8ih4TCyD46dQL/izDLQ0VmBbMesz0/rr6RxWo="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-3.json`
+
+```json
+{"private":{"type":"Buffer","data":"eCnBpi9senNvvWs4ow5I1E6plmEeUNNJBh3RZbi+v2k="},"public":{"type":"Buffer","data":"jEXc74y0w2+JFUrSNbLBYiSvikbN9KYtIuLPzOKr0wk="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-30.json`
+
+```json
+{"private":{"type":"Buffer","data":"UMegRtyibSsol5nkxZ910UEXam9/wvLF/+e66kG04FE="},"public":{"type":"Buffer","data":"7hdmcGUTmwjYlUKF1JCilt7D6hobklgaeq09a8WlWW8="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-300.json`
+
+```json
+{"private":{"type":"Buffer","data":"wLxKCaa1du4Kx7yvUjHuj5+wsYoYLM25vpWMZQFv7nw="},"public":{"type":"Buffer","data":"ceonfZJwRxQ5S4klZ7Ljs8swyrtiDB4LHsC3iLAOBCE="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-301.json`
+
+```json
+{"private":{"type":"Buffer","data":"UD2PQc7/FqzUsesLn2UDRxg8TDh8XpsULMHS2h5ZLXY="},"public":{"type":"Buffer","data":"2F4HC9ICr5HTpENHzLDKD3WozZHu4ROTegL2fS2cQic="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-302.json`
+
+```json
+{"private":{"type":"Buffer","data":"CLCSBykpd9mkYyvI+6heWAWcDX0tNtWeLYJu6PCKjEM="},"public":{"type":"Buffer","data":"lo/SOIpUiRdgmRlLH1rMjQuR4Msagaeo1qHjR+5Lg00="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-303.json`
+
+```json
+{"private":{"type":"Buffer","data":"eN1J4h78XNMoe/vYb/0VIKlU69GP7m4csHlWoG0uHHk="},"public":{"type":"Buffer","data":"b9x2S06eorMMLnNvb9Iiq7WBzfH1t3ZzTTIki7uV1R0="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-304.json`
+
+```json
+{"private":{"type":"Buffer","data":"uMyExEc0hcZ12B9R9ZY0DDJIZQDoLgD3kr8MAbVvSlI="},"public":{"type":"Buffer","data":"sYOtLiuyuEqpYa6+5UPenyNQwwY3XRFu0epSEEt2ABE="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-305.json`
+
+```json
+{"private":{"type":"Buffer","data":"yHpktsKJ2vI5ICp2nOH4nvyRHEiT1OLUSBtD0j5+Ylc="},"public":{"type":"Buffer","data":"uk5EfPrSThfGuT2JaCkIfqGC6RkB2YJDOmJ76pNranM="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-306.json`
+
+```json
+{"private":{"type":"Buffer","data":"GL6xYmRFycPYOAkzlo8DK3Fjz7fPUninqoz/mQw4LHk="},"public":{"type":"Buffer","data":"YJdWlCPwh5Wb8R9TsIxPoGX6HDDUj7A0znMYmBXgDgg="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-307.json`
+
+```json
+{"private":{"type":"Buffer","data":"KD0/Lq0w8y9QoSuqiwIS8RJf87FfeWz6qV9k9iARZWs="},"public":{"type":"Buffer","data":"NEGUq+6fuUADyR7Mmd0B6LoM7E/3nI9WYtXUVmQ6F1U="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-308.json`
+
+```json
+{"private":{"type":"Buffer","data":"KMxur+DqCseEA0b0+o0k6UfU/gdOnjEZFaLn6XZIMXw="},"public":{"type":"Buffer","data":"0ObKGWV8VbtfqCFG+vu1S1sfPDhvekmcwBUBQ2X6HQs="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-309.json`
+
+```json
+{"private":{"type":"Buffer","data":"2NOyMGfBoDjKp6iFEaoMT+gPC/fWodkuSno3kq7n6mE="},"public":{"type":"Buffer","data":"ap+st6s4vgbcrfv8S/QW4CK5mfNhoqoVJOjUXzOXs2g="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-31.json`
+
+```json
+{"private":{"type":"Buffer","data":"4JOM66UBIY0cV0DIzb/9VBl1w7pSdKTQLUJtrdmh2mw="},"public":{"type":"Buffer","data":"jKe8ExAPaAY/lbiM/f6qojbrhYmq3wJ3UahE+x5FazI="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-310.json`
+
+```json
+{"private":{"type":"Buffer","data":"6D/pF+FLicFM/pQuc2hyE4liR9JR5O4dtrcOosqp6Vk="},"public":{"type":"Buffer","data":"aGqTT+F889r9mot0RGa2nYfrQGWzgYlpTMkAqvBv3ms="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-311.json`
+
+```json
+{"private":{"type":"Buffer","data":"gEcB0Iy0Itg9ZIHfIUE3QqPS8yadwMBL4tyDiea8bmM="},"public":{"type":"Buffer","data":"IqmfCp6sd8YLfcvZl/NRIS8Ho6LrP6fo8vKHJgnY73M="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-312.json`
+
+```json
+{"private":{"type":"Buffer","data":"qLdTdwFGxTzgmEDDbc6JLBqxySDqkZu5b43UE7MtTm8="},"public":{"type":"Buffer","data":"b69JrtK127usfNhRvURSAVfVrDUb0DUfbf0V32WGsyY="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-313.json`
+
+```json
+{"private":{"type":"Buffer","data":"cJieI4PJkCHbLlR8JEHcttCikZoLUrgNvZUe2qV1MWg="},"public":{"type":"Buffer","data":"QPBvYzddgSrkH18fJYSRuVqn/rKnu7s1rwm3b0jpYVE="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-314.json`
+
+```json
+{"private":{"type":"Buffer","data":"mOZb0bZKCFmS7oy2g0NgQIZRWAETNtFGcaPGIFNOSGw="},"public":{"type":"Buffer","data":"g1X1SfIwbyxX25nRWB9gLvc6qGYo7Z9EvSV8eNRl50Q="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-315.json`
+
+```json
+{"private":{"type":"Buffer","data":"WJKS4xaX1ogAKOZWtXbIxRCCNjnpzWxqw3CDCqx1W38="},"public":{"type":"Buffer","data":"I9YmYEiKwzjzizU3k103wW0wim1ZguL6XuP+bvRNKms="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-316.json`
+
+```json
+{"private":{"type":"Buffer","data":"YHZZotu4gd0E5jQBwNOuETqukQTkP8YXtQGeYNa3pUc="},"public":{"type":"Buffer","data":"WPhd/Wcu/I+zI7o15IApjebkVdQtV6zI3YbMx0S/yyo="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-317.json`
+
+```json
+{"private":{"type":"Buffer","data":"uKlbMcvrOsyN1SiCCwCRUzzoRVLvGsTzPaYqq1boeWk="},"public":{"type":"Buffer","data":"fLQGhN0Mqg5x6YxTPktyy+0SH+vk+px8p7lSTDnRygo="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-318.json`
+
+```json
+{"private":{"type":"Buffer","data":"0JmXBFxel9TlrNiLb7exxsf/C3wLioCi1CwwkZNqCVY="},"public":{"type":"Buffer","data":"R6bvj3YNebgH7okUcYH8CPveZxJWDYySTm5JmjpOCRE="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-319.json`
+
+```json
+{"private":{"type":"Buffer","data":"ePKcdxQxd1qIa99Eykih41s9V5zptxgiliXLEHi/fHU="},"public":{"type":"Buffer","data":"WmLhtL08ImYTISrlTZMtEcg4VbAk+f2QXlFyYUPgckA="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-32.json`
+
+```json
+{"private":{"type":"Buffer","data":"UAp0s06J5IIi5vMt9UnKmA2nosnrBKHdNFit/aUXNlU="},"public":{"type":"Buffer","data":"q0hnTt0UM0uFcSri7SI33nP1I3q9iXJjB8Uy1xgjmB0="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-320.json`
+
+```json
+{"private":{"type":"Buffer","data":"KEQ4o7HQJeLHzLDcb7HTSUrLm0dL7fgvGuaYsmT/9XM="},"public":{"type":"Buffer","data":"vO5Jrr7jtwh+XfmMGdFFunhwzxdCpnTvhEpE/A0LvCQ="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-321.json`
+
+```json
+{"private":{"type":"Buffer","data":"qA2h5zk+xR6jzFyZ+TryDRgYuQV7S/IcrmicYFZ3g2E="},"public":{"type":"Buffer","data":"hPPnhnOBT5GnB2nSYdWzRxA0Y/VvnGevJWMSrfQ3snQ="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-322.json`
+
+```json
+{"private":{"type":"Buffer","data":"sLn8WGiSzeIaobcEBx5CC2ug5E+zL2fahm2iWijQUV8="},"public":{"type":"Buffer","data":"DVa3dMSZd4r5xwsPYo5qi0ODYg+Crb0a6SCPT6EacWU="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-323.json`
+
+```json
+{"private":{"type":"Buffer","data":"mIXhDoawDXXqHEnNgdP3Pc2A3D+CszWhxJrEqTc5V2Y="},"public":{"type":"Buffer","data":"oeTAdvVPfY/UBNGWQLwoNt8wKQMKYEqtyP+49O6RXyo="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-324.json`
+
+```json
+{"private":{"type":"Buffer","data":"wBOQROLN7ycPOYNIYj/uCzQiQnW0iEswEkj54DKh+UE="},"public":{"type":"Buffer","data":"/H85b9A5ZowJANdfJZaOmUgGtidU4kKRKgaw+qPI1XM="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-325.json`
+
+```json
+{"private":{"type":"Buffer","data":"SNsqOh8i8KqWJNwr28rKfTadI5lmv17O/fL2fDExcn4="},"public":{"type":"Buffer","data":"I9B/5apn/JqfxeybVu2oEig/2I47htMYF2eb6PLIOXc="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-326.json`
+
+```json
+{"private":{"type":"Buffer","data":"IJtS8dL1+YjYtkEOHMHJqkum+maPgYPm2ofISV2Kwmg="},"public":{"type":"Buffer","data":"3DyzLYSqy0mR5CHFsJJTK76nlthMSEHHS4lv+8ah9xg="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-327.json`
+
+```json
+{"private":{"type":"Buffer","data":"qFcneztGtdpF7Yhc4TT/0DAZVNplJ5GHQTVzJJzHrm4="},"public":{"type":"Buffer","data":"DRS4dvCOchXScQseMsostYt2qDKwJZFGinyv4oJpGmE="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-328.json`
+
+```json
+{"private":{"type":"Buffer","data":"iHRqNsW6PkhXDQkWsN6Ux+5KjCuLls9pEWuoEASfLGw="},"public":{"type":"Buffer","data":"HatOVcbmVyZykd6Vvpm41BXmPLZ6EfcNcUNnOL7VfmI="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-329.json`
+
+```json
+{"private":{"type":"Buffer","data":"UL3HIRgPWDiqGR1eEv9mjzL7EqXI0+Dp6euNYZeIbVc="},"public":{"type":"Buffer","data":"dQMKac5ZBegVmsIE+tI6Anmv8NUMURiCkJrErAe9dSY="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-33.json`
+
+```json
+{"private":{"type":"Buffer","data":"gBMIo/xLCtNiaqbhCs6Zx/CvsnVq28iVbfypTKFWDVE="},"public":{"type":"Buffer","data":"p91TURO2xIDjTX7vgsoKSAiOAnNlwM+kRSvYsVkoHGY="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-330.json`
+
+```json
+{"private":{"type":"Buffer","data":"KFRrFshr7iV7RU7nY5oTHjoAiisD7eRMI8c9+CmmXVU="},"public":{"type":"Buffer","data":"cFrhoqg+9FXt+pQgNFIOC9+fahYWR2yr7QH8XaoYikc="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-331.json`
+
+```json
+{"private":{"type":"Buffer","data":"QIqvjQPFRB/1DfzCMeDFcwMyt0LR6yhzk27HJ/iWAXs="},"public":{"type":"Buffer","data":"BEuc8FsXySeIJg51xRSqPIB9iKWBE05N60abN+It8hc="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-332.json`
+
+```json
+{"private":{"type":"Buffer","data":"QBJ+VUVcOy/HnmaH/chvmyD5tM+p8PjTUtTU6ZgeC3A="},"public":{"type":"Buffer","data":"ocVfRFrUP8Hsvm7ZTJqCzLxk0VYBAuMwtvy8e8nCpxI="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-333.json`
+
+```json
+{"private":{"type":"Buffer","data":"8Nh/+XOVWdee4KktVvSHNKLCxHyi48kTeylI9zeEqlw="},"public":{"type":"Buffer","data":"DyuXpFgHAGhPgybduaVRTw0ZIadv1ugPQKczqBSmOGI="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-334.json`
+
+```json
+{"private":{"type":"Buffer","data":"GAGOSGQWsEY4i59jkLoS3t9UW3Ra9+/hkffhD86iXV8="},"public":{"type":"Buffer","data":"OAULPam7FMSzPjultigyhTh3B3hD20hRozQ4+F00hmE="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-335.json`
+
+```json
+{"private":{"type":"Buffer","data":"GN9PiHTts7UySe7fnsR7BEQd6zbh5lLfqxkYMzg6XHA="},"public":{"type":"Buffer","data":"nflt8uZWw+P0CjYczYfAvLRDQMxlzZVytz0R4GYSIXg="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-336.json`
+
+```json
+{"private":{"type":"Buffer","data":"QEk1kNO95GYKoNdRADIuv+0222FFh17Ubj1h95jbv2I="},"public":{"type":"Buffer","data":"xwFLLpHYFxUGix2SrKGOqiX3SX/Rdl5EvFijSEGAD0I="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-337.json`
+
+```json
+{"private":{"type":"Buffer","data":"mL4Uno1dJD70z81jaKB4AeNZhNPJz8X8Bn5KeGnifmQ="},"public":{"type":"Buffer","data":"pd8i5cTDPz3d1GGg1kjhQ9wJFNhfiHKbY+C4u94vVwU="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-338.json`
+
+```json
+{"private":{"type":"Buffer","data":"yNWVe2UY56/PtPAb2IhHh97ZsyLP9YScm+xb6FXQ5VQ="},"public":{"type":"Buffer","data":"klnQ4dYD7Gk0Nrgk7fe6iIxxtpocSN8pMbPrQOwRS1Y="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-339.json`
+
+```json
+{"private":{"type":"Buffer","data":"cB08Y52qLWB7K3BtYSyKgCt8f1LC1flCdez50gZD7G4="},"public":{"type":"Buffer","data":"LCfgE6/YOXtBaJyMf7cQd+Bb8ph8eGc2ROHg5aSjzF4="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-34.json`
+
+```json
+{"private":{"type":"Buffer","data":"YBESXDTSg+Cnq27uJsmQ9DRa/DUrEsT+noG1hkIrVF4="},"public":{"type":"Buffer","data":"uvUKUTge6u0McJNSZg/xZoT9BlfcMMi/ApACgATfz1Q="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-340.json`
+
+```json
+{"private":{"type":"Buffer","data":"yErMxs4zG74R/Xz8+sZw75Fn+Opn0hZs8COzqjQmPnk="},"public":{"type":"Buffer","data":"JjykynftOth4wIwaHTyb9m9RgBAIOtYEnqckVepTfT8="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-341.json`
+
+```json
+{"private":{"type":"Buffer","data":"qCwei8rwuGOxCEb3qhgTZ26gIn1aKitt/33V9pJLDkc="},"public":{"type":"Buffer","data":"H2DdouCVhzabkrqN5eNZJtbNLe+Spief/bLrcYifgBQ="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-342.json`
+
+```json
+{"private":{"type":"Buffer","data":"OI3/Oiuc3yVATbEk83pZzLLb0VrByjVRnZg6MvDI3kg="},"public":{"type":"Buffer","data":"zhHKms1Dmn0zsQ3sJmibIpV+80JHzwt66U/2n+B7JAs="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-343.json`
+
+```json
+{"private":{"type":"Buffer","data":"YCSvUukHsePuCuO8Lnk6jbHIGKqWpkKN6EwO7aqbGHs="},"public":{"type":"Buffer","data":"WhcbS+vqVSFba8heIEVlz4ajN80egOl6l0xzAyOlqAE="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-344.json`
+
+```json
+{"private":{"type":"Buffer","data":"SIS425vR5V/f2WbWnoGM7t61+hbN/VYwKPbvfyuUBH4="},"public":{"type":"Buffer","data":"g/lmrjrKSVTTzUuDqsFmswbm5dDiQAEED49K0xcijVQ="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-345.json`
+
+```json
+{"private":{"type":"Buffer","data":"yDQJQmwb/LAbBDBxLX/88HfO14748HjkHiYOkCU8aU0="},"public":{"type":"Buffer","data":"i/yTFkYVeTZcddRQp2SJ6/1BuW3fsy88B+NrjpElVQM="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-346.json`
+
+```json
+{"private":{"type":"Buffer","data":"oNU03V4tf7qeXKDDl09/95yaXs+CmMI1KWoJ54T+n1I="},"public":{"type":"Buffer","data":"KADPMS8UiUeK1t8sZn6UkYFJfZQHZzKAwysMSj+9mis="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-347.json`
+
+```json
+{"private":{"type":"Buffer","data":"4BZWi0k4a0+NwuxPbhZpx06aEB2OUnNqWm6aC//97VM="},"public":{"type":"Buffer","data":"snuP85R35dvrLqarz0bjRGANXYz9ck20GNGLoVIlxTs="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-348.json`
+
+```json
+{"private":{"type":"Buffer","data":"mB+CxgxVZzwXn0f08l2xDsT9GnrAXtrm/lQMOHULI2c="},"public":{"type":"Buffer","data":"rJfECwOveo3CAuqAM1zb/3sgDUXEpopPYDuktcWvX0U="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-349.json`
+
+```json
+{"private":{"type":"Buffer","data":"SGC1iMxDJq+QlwPpdXgM/XF/saGFXjqkFRL3Hqumk1A="},"public":{"type":"Buffer","data":"4Qda74iLp+WtPGp73E6AbmtpgqIzQhWdcbZO+b8kojA="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-35.json`
+
+```json
+{"private":{"type":"Buffer","data":"kMW6fI3A2lYyqMLmAwnAkXPSj9jVE9m4mBS109eCA1U="},"public":{"type":"Buffer","data":"buBgcBkeoXpBegxzjKX2CXcmqEVv0Yn1zvMJiuAb8QY="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-350.json`
+
+```json
+{"private":{"type":"Buffer","data":"oBjOdJMLGNy7HehShNiVrV+sBeAqSVgS+FTX0Xza/2w="},"public":{"type":"Buffer","data":"T3+YxPGlOD66+hTxNZyVJ6sJb3/3m3IVC2V6Cx2iNj4="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-351.json`
+
+```json
+{"private":{"type":"Buffer","data":"oNC7wLg4qW9dVeDZnMvZZgWStdJp35wCWrzxAKbEO30="},"public":{"type":"Buffer","data":"9XEzCtwpRb3ZXt46tjGwF6SAEDdwM4p1hRwL4Nu8O34="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-352.json`
+
+```json
+{"private":{"type":"Buffer","data":"4A9uiSBKsxPPJnrgalHxX647MqWUjt+rsonSHYyoZ10="},"public":{"type":"Buffer","data":"kmmuG9016e8zdGILmnojqxnopxyodLPK76uZfag9yhI="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-353.json`
+
+```json
+{"private":{"type":"Buffer","data":"oP5SISBh/FhpZnnnYxGn3EG9CTEpByu8W9AahnNO1Hw="},"public":{"type":"Buffer","data":"HnqeGP7pDGr+ry/zBCr+ZSQSRb8poRp6RVLtB990BW4="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-354.json`
+
+```json
+{"private":{"type":"Buffer","data":"6MCIo0DtEHSZYfwhT2oTcXVfqC/oi4+HFc4szeCSeVM="},"public":{"type":"Buffer","data":"gVgEtIp1syhmPGS9Ur+h+uFwpiQ1K6LQ+BKvPyGk8zo="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-355.json`
+
+```json
+{"private":{"type":"Buffer","data":"2EZ69n1E4m8dQONyQf+71apRrOaVvRAlWUo9cFrYBGI="},"public":{"type":"Buffer","data":"o99C/7UTJt8tHugXkQa0j2sHUe/7KkIvN4InZAB8LSU="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-356.json`
+
+```json
+{"private":{"type":"Buffer","data":"OEd7WZj52/XaBEvKqe8tLHB5EcuoSc5Tkc7zh83I3mE="},"public":{"type":"Buffer","data":"qlG6wD2BJFRfo63zRS1sdIoVqxVazAj9rusUez7OBxc="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-357.json`
+
+```json
+{"private":{"type":"Buffer","data":"8B1/sKmiJaBhXejKA2Pn55jdKToTfVcypL54tX8jGls="},"public":{"type":"Buffer","data":"lKPFOUageT3OMwBGmgzNRp/a6yeY3Yw2PVfI2GTyDHI="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-358.json`
+
+```json
+{"private":{"type":"Buffer","data":"UBkKjOu86JA7QSp4Dbz5HXcSRgaGrHY9IrRH42Ypo2A="},"public":{"type":"Buffer","data":"EEUcjXK1apmq6gxj5d3YmsfXPpC9IrRdMsRvdIp2EEc="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-359.json`
+
+```json
+{"private":{"type":"Buffer","data":"8O0WlVzeETDkbbUHGcwMIBjbgyZSQfua7Ab/YxIl/X8="},"public":{"type":"Buffer","data":"h4gr2bt1U6R+U22RDR4Y7K7Pp9B23xEHNeh6n86C+mk="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-36.json`
+
+```json
+{"private":{"type":"Buffer","data":"iLvbB5MKa64o/mfq6QxWQ02oIhKghN/8SQ9/InSxtko="},"public":{"type":"Buffer","data":"9FppdZ6GDyJ3VFnmUOJUhEDMUo9+0wfS51zqBuwhAFE="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-360.json`
+
+```json
+{"private":{"type":"Buffer","data":"UJ/NYo+ssuMpyqis88/fF/7NqZNzemkm1S7LVXlPa2c="},"public":{"type":"Buffer","data":"VYtugK0Ui0HO2DjInASq8ugARZJUkPJ5XWM3QguWIgA="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-361.json`
+
+```json
+{"private":{"type":"Buffer","data":"EGZOxFtVj/ZKV5j/eI1Uc8SMSlsW/+GRmsNzS771nFU="},"public":{"type":"Buffer","data":"J3Cr8PGGnGaWFGa8FjZyXFIBV9hrvIF5KTBJ7pgd42U="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-362.json`
+
+```json
+{"private":{"type":"Buffer","data":"wDGobu9nKJ9j2WdY+/v5W4OykBqmuDravHO4NYqt4lc="},"public":{"type":"Buffer","data":"Dpmg5Gcg3uRiDtZfuTmTetWL8RTSh0w/XwLDPuH7fj4="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-363.json`
+
+```json
+{"private":{"type":"Buffer","data":"wLmGDktsRx6NLuOFMovBxGxrKUIODJauOma8tuOlmmg="},"public":{"type":"Buffer","data":"UO10/joQHoaxQGGqIRBivSgOxNUVwyC2ipov4uEZUhU="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-364.json`
+
+```json
+{"private":{"type":"Buffer","data":"mJFemsTRsu3GgP4iHpTfJgHnvARH2cXydfVXsmMimGE="},"public":{"type":"Buffer","data":"2Ij91H4+z/j4LsOJLn4X+X0IgIUGhZ/LODEsjBUsa04="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-365.json`
+
+```json
+{"private":{"type":"Buffer","data":"MNzgoqr8X7wubwEhcG3lyi2Ho/sNrTTJopCfGfNuFmI="},"public":{"type":"Buffer","data":"B0alWsuQvwJQaMWSGdxuAx26+HFfoKXlDAf6yghqdXI="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-366.json`
+
+```json
+{"private":{"type":"Buffer","data":"WNRs2yB9AP39swY4hK1uh46w2OcIQyNpRisE6nio82Q="},"public":{"type":"Buffer","data":"Dg4z7C0ZmaF60vtcQS6NtsiQVTqK+2JR3byeGlnlSi4="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-367.json`
+
+```json
+{"private":{"type":"Buffer","data":"oBjz1xZRuJ8k8dG52Y7m0nJ8lbDUNqlsNHEOhFyK7kU="},"public":{"type":"Buffer","data":"9eHrGJRDph2EuBXHGvNIf3KNMU0+G+YMbb3e4eAjNjQ="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-368.json`
+
+```json
+{"private":{"type":"Buffer","data":"eEfUbdaF1PiH0JqrtOdCRA5NC9lpt3Y8sohFyz4JOW4="},"public":{"type":"Buffer","data":"nht1mLfmrk6ZnwjEHW/YVxO99W4JmntM5guysgL1UF8="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-369.json`
+
+```json
+{"private":{"type":"Buffer","data":"uLocrpeeOWyw8cWHBHHgyLRsGwHQnFigx4mzkDZ/I3Y="},"public":{"type":"Buffer","data":"TUKVY3njzNhRRLRDAoHDsJ4ybf3dgB5OplIcEGmrXRg="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-37.json`
+
+```json
+{"private":{"type":"Buffer","data":"sHdnsW8++hZkaNKGPVftaLE4qlQtt03XTAvD3EbEBEk="},"public":{"type":"Buffer","data":"WlGzsyBo/SwEKWS5Zepb9/5SZsBzIdG104iDk6nZ/20="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-370.json`
+
+```json
+{"private":{"type":"Buffer","data":"wA9O58iuXAFQc12+8Hor02q0piEYRmZ/GjpZoHs/tGw="},"public":{"type":"Buffer","data":"eAp1OqQpbhG2lBRwdzUCFEaN5XC0qyYVmW0nJHjzwCg="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-371.json`
+
+```json
+{"private":{"type":"Buffer","data":"wFiLmbtgpwHN60GNtXkdywbjiBSNi9WuDCFyEERDSGI="},"public":{"type":"Buffer","data":"1/wUmtYhOthTT/19Ypu5l88kfEwI9dLbOPY1g8pBxHg="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-372.json`
+
+```json
+{"private":{"type":"Buffer","data":"2O7ZwGbIaY6qF40gMfhl+n/q3c+HlKthz+swKjqLRlU="},"public":{"type":"Buffer","data":"vLoWecwnt2QuQY3q3QncCxfDAPauoi0sXLdBD/VWbUU="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-373.json`
+
+```json
+{"private":{"type":"Buffer","data":"WADJ0UVmaYcq7Ev8TIxCDEOJhr/CVnNqwe8BAHnpnmE="},"public":{"type":"Buffer","data":"D2LcGhlz4ZlZP1E6aJsZMGrZZVcnN7kqVs3oWbGGVnk="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-374.json`
+
+```json
+{"private":{"type":"Buffer","data":"WGKGjCHdhFd7IJa28FjR4r5BxAFKEz1dSgDAeVMuPno="},"public":{"type":"Buffer","data":"9s+XyK5UZ0kyEnhPjjIvsuRGQ0VHDnDby6HZWavvmhc="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-375.json`
+
+```json
+{"private":{"type":"Buffer","data":"wGM9d9S7/VuVww5aQdpuP9FeQl92FJN5iIjNtHN6bkA="},"public":{"type":"Buffer","data":"JBItmoIp7c2SVfwxhlaH7vNTjgI5/esRSKfZEyno2C4="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-376.json`
+
+```json
+{"private":{"type":"Buffer","data":"iAzPE/mfiYYXcLxnSNKg1Vwp/XwmmymZbjKWAmKyoH4="},"public":{"type":"Buffer","data":"b5zWTaYDMhK//0tesel19y2CusqX9LwBYpa4jj+VxjA="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-377.json`
+
+```json
+{"private":{"type":"Buffer","data":"CK1O22646s3B8YT6rEoAvjYGjGVOGdoZ5YD2bAy1xUQ="},"public":{"type":"Buffer","data":"jeqCXgpz1k4jX+RXEdr35W7Ew6qgR8kyOmJQO1B+mk8="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-378.json`
+
+```json
+{"private":{"type":"Buffer","data":"CKbVG6Omn1doX1q8yukPlE5FGmB30QOFGH6FysA4k2Y="},"public":{"type":"Buffer","data":"oz0gmUmyUHECmCk6kf1sWmTgZlHTEfn28r/b62Y5DXs="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-379.json`
+
+```json
+{"private":{"type":"Buffer","data":"ACoVMpub5k1NHqwPwdr/VctBu7MXvGHRA78zTbxiMno="},"public":{"type":"Buffer","data":"KAfm17Ca11wi04YdgeRbCU/fqgHTn0rzFTEehiFfmUo="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-38.json`
+
+```json
+{"private":{"type":"Buffer","data":"2HTDkHkZT0ne/jVoj7zG2q9trBC65hNI+6/yX/z5FHw="},"public":{"type":"Buffer","data":"5p7tRx/JoRKqNdemM9Mg7uYWIr42K4np8MKxQVZE3kI="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-380.json`
+
+```json
+{"private":{"type":"Buffer","data":"kAxjFkBZuWN5z6T+iBLYbrvpE8CyV3ragWhZ0bs4U1M="},"public":{"type":"Buffer","data":"xJH1NGTEsnLV79TobbeEDYM5byuNKTjL5XHKOF8/iQY="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-381.json`
+
+```json
+{"private":{"type":"Buffer","data":"ML6FDRpki81k46398I31wPRvlnNsZdFGq4RsSGhavV0="},"public":{"type":"Buffer","data":"uN95/J9yv86QWA25gBjre5yvOaUZKqFhdQ5D4pTuZlA="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-382.json`
+
+```json
+{"private":{"type":"Buffer","data":"wOIzwbTfQTtSbeyYz6IbBJqBlOPXwtWh8GbVeK7HbEM="},"public":{"type":"Buffer","data":"UQRYoo7N+UxShihqW78I8xKOAguG0gDfEgL5qk47m1A="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-383.json`
+
+```json
+{"private":{"type":"Buffer","data":"CI1CJUDryRXbMuh88NGTfxXFk+36fOKhMESWrxTtbU0="},"public":{"type":"Buffer","data":"kRQ/d+8HGhr47UXann2AVBDugZexvC0KUoUjq8RI+wM="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-384.json`
+
+```json
+{"private":{"type":"Buffer","data":"CB52y+B2H4DUCCocrdydf5jXdBA1uI9IaiVZWI32f1M="},"public":{"type":"Buffer","data":"3PndtcmX9OusAWFsfNWNlZ0vGlyc+RaChy9LADj6pVk="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-385.json`
+
+```json
+{"private":{"type":"Buffer","data":"YLNykRCgm3sEeX2nDvGhI1l9EfF/4rul19vRZI+Fm3g="},"public":{"type":"Buffer","data":"YDrq7T6aogLme8pWLYvGBazbVuHqoyrpLEYpuZmu3lY="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-386.json`
+
+```json
+{"private":{"type":"Buffer","data":"cPVyWZ0y6VNaKT64UpgYHp/Cvd6zxjqzAAHR4+TWR3c="},"public":{"type":"Buffer","data":"UnyaOYPyZl/5ZYQtpElWsob45prsXBy/yAWv1CPVqSs="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-387.json`
+
+```json
+{"private":{"type":"Buffer","data":"KA7ZQ5ArGmcYRUMPCc+2mIGlUrEraEQQ3H29MpkjTmo="},"public":{"type":"Buffer","data":"wCXcV4n479AFJuPPMEJyA12AFiSAlzd6yyvAfVqQyEA="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-388.json`
+
+```json
+{"private":{"type":"Buffer","data":"aJKdq806pi+FGZlAf0kp5esANpUFu1mZfTtGVdv0V0c="},"public":{"type":"Buffer","data":"dgGqLPC1jVYNc9NeK/LjD3bSAcfRZuYfN6D18miknQc="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-389.json`
+
+```json
+{"private":{"type":"Buffer","data":"QKZbeweuxPpMQU0WBuekAkdcVsbLugR7CwHFEo+OLWo="},"public":{"type":"Buffer","data":"RlnEOv/1i94G2br2QIB+v+X0p/3oRfKSWSbpFhMG0h8="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-39.json`
+
+```json
+{"private":{"type":"Buffer","data":"0JotKZ3snX8kBslpzY/iuYTbJLSThJYdNHxaZqXm83U="},"public":{"type":"Buffer","data":"5c9knN5LUEkpJKNRj+mAujLFEl8/9b0Rb2vb9dk6wEg="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-390.json`
+
+```json
+{"private":{"type":"Buffer","data":"ELUHPRhbrURNNDryGB4bd6yY6eGN9XpxF8NFtToE0UM="},"public":{"type":"Buffer","data":"0S1ez9Xogv052/HtimQFlBNmj5vgbIh4GK4FuoMh1mE="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-391.json`
+
+```json
+{"private":{"type":"Buffer","data":"AMJNBvRHfZUJIDcfnqeE/8bJafydx6EOgvqjbIwP9WA="},"public":{"type":"Buffer","data":"l8DbEAU08Nu++cd0Bk1oO+Jl6ejgdRARlY5xgFdNrQ0="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-392.json`
+
+```json
+{"private":{"type":"Buffer","data":"WJC51LMcXqtNzAnGbnfmXL3nUREVm2yZTohxaVFzVkY="},"public":{"type":"Buffer","data":"2PNbAh9zhhSjdTaN3IFaXTEArEqcSXyQXaTz2lPHZ3A="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-393.json`
+
+```json
+{"private":{"type":"Buffer","data":"AD2gjobzVLYgjFs8x1aYWZrJg1BURnyIijsJyBlWWGs="},"public":{"type":"Buffer","data":"AmVh5NP6Aa9AY9rvHqRtrGUTJid75ZFS5TQdYHRF+VQ="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-394.json`
+
+```json
+{"private":{"type":"Buffer","data":"INz7kRFs3glYp6YNdY9HfCNTxsW6B6EVzC4Exmirm2A="},"public":{"type":"Buffer","data":"ZvH6W+sF4tdQOhtoAAwMQJ5DrfBwuv2MOSR5LEsRCTc="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-395.json`
+
+```json
+{"private":{"type":"Buffer","data":"iPr9ILABLR45cVvvmYTCz4vwNXmudJl+nD/+6jrwcEA="},"public":{"type":"Buffer","data":"+aiLk5/cmOBcM7aFS8NPwLXjQlX9tlFWVycaslBex0M="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-396.json`
+
+```json
+{"private":{"type":"Buffer","data":"UGap0PLZ9OpRZdUNt/CNeg/sBTh9FW45KE+RaUY592E="},"public":{"type":"Buffer","data":"i+RYmCbzva5j2amhYShoaduWe1Q819+WaT6o7sVypSo="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-397.json`
+
+```json
+{"private":{"type":"Buffer","data":"cExyxS0/jMyASkTL5y3BJ6W4uX+XlOka3Pp9de8RC14="},"public":{"type":"Buffer","data":"W7yMDCntylOR6eqgYjmU6yNcBQFG5MeVkaTQvZ7y/k8="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-398.json`
+
+```json
+{"private":{"type":"Buffer","data":"wCwnBeX5qG2AhuURAtcJzO8xAAsue6J8A2islfmgOVM="},"public":{"type":"Buffer","data":"XaXQXJcy+ZElM9pcrS6TMU8SaCueR5RSD37Q0RPaRGc="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-399.json`
+
+```json
+{"private":{"type":"Buffer","data":"oDxKJq/140fX7s96oED3LLCc87QTGjf0G6NI6Mb780g="},"public":{"type":"Buffer","data":"UHmjdwnyw9XW7FBexF6ZPYsTD1+yX+53Cz9zI+grWkU="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-4.json`
+
+```json
+{"private":{"type":"Buffer","data":"8EmH8+sREiPmsGAn6iVT+trsNfOw4AfxjEBkB9sbfFo="},"public":{"type":"Buffer","data":"SbEDS0CT/+yP0rKuVYhlG46+qFEjPPk2PVUvV8QKAS4="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-40.json`
+
+```json
+{"private":{"type":"Buffer","data":"OK97S4poCZKa+nKHBw/qTD++WQsIpEIRl3eNujEeulM="},"public":{"type":"Buffer","data":"SP0Ar/unfzbDodLZVAuZixSEyJD/WHqbfWoIYabgHEE="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-400.json`
+
+```json
+{"private":{"type":"Buffer","data":"YCqBN3jmo8UG5TtCnkAGfrhB8XufwkuBS5HmrxNvOWM="},"public":{"type":"Buffer","data":"JQefGFk1qGk0bkz0fBGizsfKKsv7Tjk/Qmck2DiO8zc="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-401.json`
+
+```json
+{"private":{"type":"Buffer","data":"EPNPdtDPLWEPs3PwXU1LISDEI93ykuHw6YgA1SwzOXY="},"public":{"type":"Buffer","data":"Dfn1IGCo0aPb8PR1gLdLb8sjpwUkDGf8a6xTlHGdnHA="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-402.json`
+
+```json
+{"private":{"type":"Buffer","data":"qAp+UFfTWA6q+qc6TB2GNzRe1VACxmf6EACj++6iS3c="},"public":{"type":"Buffer","data":"NDFhKnCryE7GEgVHY3J9xKfzOAngP2mTMGVu+fhLERI="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-403.json`
+
+```json
+{"private":{"type":"Buffer","data":"QIFJ173ZfZsMkFSSxjmd/V7N04KM3hd84OMoG/R2PUQ="},"public":{"type":"Buffer","data":"aAIAtKHx7ebL+jhN16qtrML7X/BVDPx/ttoB4tRmQA0="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-404.json`
+
+```json
+{"private":{"type":"Buffer","data":"KGs3D+SpRoX+fVkr8pOsciHfIcL6CeWw+JFAhLF4O0M="},"public":{"type":"Buffer","data":"i6CpdBMLFmAWAYwA8SUIEE4ZkhElSb/XADxZ/tqLTz4="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-405.json`
+
+```json
+{"private":{"type":"Buffer","data":"aOSUoUP+tALdBV8OjWj/TnCYNqS0U+MYDKhWRWzJzmw="},"public":{"type":"Buffer","data":"Fb6cAKxJpox4pDj2KB9tO0AQMrpWvzQGleUS0jamZ1E="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-406.json`
+
+```json
+{"private":{"type":"Buffer","data":"ANe69lEbcBLID9Hi4HDGO806xLEoz5+/Jao/ZCbhZHA="},"public":{"type":"Buffer","data":"Atl7hOGecvsD8ZtP6TApPcPMUT+TVCWJlEFq64yLLSU="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-407.json`
+
+```json
+{"private":{"type":"Buffer","data":"cFurkal8Dcw/jnP8EPlG9Q6YLkl27muZUUqkY8LfCl4="},"public":{"type":"Buffer","data":"lrymWk7WeTDaXuxMkPw19+XdFlK5QjIzeVGE0PWLl0A="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-408.json`
+
+```json
+{"private":{"type":"Buffer","data":"OLE06Ipkh8j8iuL1pik1y3BUfo8+FHXeY6ssHGFTTEY="},"public":{"type":"Buffer","data":"T6IqK24gacBkD3oyQaAfLkVHFj5EBwOpnEi4zYFeNHc="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-409.json`
+
+```json
+{"private":{"type":"Buffer","data":"kO5kaCUImyDQB6BqcJ6B5kxC08kj41oaRltON8KO3HY="},"public":{"type":"Buffer","data":"QKjVl0Puf3XGqsT8Af5TFbGbqmkxnCH9NMmXEZ/vAyE="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-41.json`
+
+```json
+{"private":{"type":"Buffer","data":"2EdXfx3jKRGJGgoplTdtWOxtsl9yBFVjrqZSdT/0ckE="},"public":{"type":"Buffer","data":"7wYO5ozxkN7BnfLudX2ISzIwuDRoCV/jcw01oue/jBk="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-410.json`
+
+```json
+{"private":{"type":"Buffer","data":"+GilPF+C8HXzMvxVos/L1lNYDTgytRBKs2Cg5q0eI1c="},"public":{"type":"Buffer","data":"GOj5KBKCLEI1CzkYWMaLKVmNPsDZmLgYgmcXSdRiNXo="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-411.json`
+
+```json
+{"private":{"type":"Buffer","data":"IAt31JMUUj4JGeUWrKPfZZkgZbwansm+CAHOwBvB/ms="},"public":{"type":"Buffer","data":"ZIWS5zyV616g7f/NXx4FeMa81UBzV4GE9WYIX5pHCzc="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-412.json`
+
+```json
+{"private":{"type":"Buffer","data":"mAM4h9YQ66Ewjp2zQOO4gQptreMCJE56x6aXVXVFuHE="},"public":{"type":"Buffer","data":"6WFerH5t7sPVmByHOH576Mp8dwvQp0tXReTpIhy8Hzo="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-413.json`
+
+```json
+{"private":{"type":"Buffer","data":"wMZW8f39WG7AlnwOPKBHLLTeXbuGktI0kz+2koaPLG4="},"public":{"type":"Buffer","data":"eVrJ3zt4dJ5YF1diVdcSG1CN/0TTgjSOZaqF11SI3SE="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-414.json`
+
+```json
+{"private":{"type":"Buffer","data":"2Fh0mvSgT6+Dm06gj/osCxU/VgvBoaeJ/cyL2cQlt3U="},"public":{"type":"Buffer","data":"mctpeYdcqdzhGaAsC9f/4odzyzER+Dzmcl8M5c3ckj4="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-415.json`
+
+```json
+{"private":{"type":"Buffer","data":"ONEk24IbexcEKVcgcl0ajPK0BHbDJ5qAO9gMElvSkV4="},"public":{"type":"Buffer","data":"oK2sTIt3Z9kyPdDBZFr+eMBT2irHUp3Q3gLkBeGYIm0="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-416.json`
+
+```json
+{"private":{"type":"Buffer","data":"YEbTZzhE/v4Or5NuxSSRbcZphMX0uCLff15jFBNqUXM="},"public":{"type":"Buffer","data":"ujKjg5HSrccCx8s14T3Rz8DTN4/IN2r8tzx1YsOZg28="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-417.json`
+
+```json
+{"private":{"type":"Buffer","data":"kNaSGxzWRaZIzR8umPl77EXutLnzZEqNa7xJzVylN3k="},"public":{"type":"Buffer","data":"lH3Y20iECl9tcG6B+C3i4fSyW+vxlfL8BOY11g8vo18="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-418.json`
+
+```json
+{"private":{"type":"Buffer","data":"aI4sOF2X2wDlE3wox5IkPc8z0vxA+5aKarZ6SZUO1ms="},"public":{"type":"Buffer","data":"lm+S8W8NGls52W347g2fz7kP+bE5VwAjxdacpDh2sm0="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-419.json`
+
+```json
+{"private":{"type":"Buffer","data":"4GWOS7AofPuYOP4ORbC2NRtB3YBHk9CDc9AWU6ndtHI="},"public":{"type":"Buffer","data":"5tS8jJP35XgZ/dil6bhc1GmAre8RaN/FwkevoyNC3xM="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-42.json`
+
+```json
+{"private":{"type":"Buffer","data":"cPcJ6tSId6qRjvLiEabOpUOYPGPh7bfNG+CY1pNomGs="},"public":{"type":"Buffer","data":"tUoOpLMHnFMNoPEaq3X2F8HCKHCFwKKXN4quRhhBswI="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-420.json`
+
+```json
+{"private":{"type":"Buffer","data":"ACe3DbpQ5iiKHPOShOaOlW1bRpPXhJIAMPyCNE0mpWY="},"public":{"type":"Buffer","data":"qP8pxLPnN86+7GmWoaiid9YEO2nj1tLxoobFyVnbOxQ="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-421.json`
+
+```json
+{"private":{"type":"Buffer","data":"mLbQpppa/uMrOcD/GaqsDaxzluO68rNngVtbZ+rjvXs="},"public":{"type":"Buffer","data":"D43VxFMHR9Lsxb1mkOGQbWMQFRN0gqhzHAVvmzKMOAc="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-422.json`
+
+```json
+{"private":{"type":"Buffer","data":"8GuyCxjlbJiteSXHB6LGWBGqEso+MgVIT+T2dFFt3XU="},"public":{"type":"Buffer","data":"6nmKGrY5Qkd62rzp/CvExLZrGsRX4BBH4BX4ZZqv8Uw="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-423.json`
+
+```json
+{"private":{"type":"Buffer","data":"kLMpOG0k3B+WtO5WKYRryUhIPXyk6at40YaV8t68NnI="},"public":{"type":"Buffer","data":"vLJDWwFtFLcDrh0b7kCUx2+BSCzFYIIwFBuO6Gza2VA="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-424.json`
+
+```json
+{"private":{"type":"Buffer","data":"QOkr1OzLWfhAqW7Ert4UNSfqUhQ5T9u1odSWyrEnOG4="},"public":{"type":"Buffer","data":"iNGs2dJmhX41JhMyPmjBGCjI2zvgXZmCmDRW3/menyI="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-425.json`
+
+```json
+{"private":{"type":"Buffer","data":"SBgg0u5dg50EFIEb3Kf8IWqZY64NwE46iav/++WYPGk="},"public":{"type":"Buffer","data":"0QZK4mn1An7dcwSuq2p9cHZczrm6+lKMHCR7RBm2nl4="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-426.json`
+
+```json
+{"private":{"type":"Buffer","data":"qHvTHJk2oA7wfrP2d6xP6Nl3l1wVBeFSSDICpRfUPkM="},"public":{"type":"Buffer","data":"mvw1u9gMLl8DYXD8/4O5Zj1AgWFS0FpbVbkRHdT9OGc="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-427.json`
+
+```json
+{"private":{"type":"Buffer","data":"wOmyfEY0lFulZRmdtt1/qC3hCneeuGZrnS7CWSLek1g="},"public":{"type":"Buffer","data":"NWFYiswPuTr7WYVMveZGbzuZ2WTIkBaCsiNuKOKjvEU="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-428.json`
+
+```json
+{"private":{"type":"Buffer","data":"iE/3RfJGbsc5oP6OP+ATFyjEMpC0eF/cPIYKAIPR1mI="},"public":{"type":"Buffer","data":"P8BpBPJTPcKD+7G/T/WytBx0mxeTK6Sn4Rq264kZomY="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-429.json`
+
+```json
+{"private":{"type":"Buffer","data":"WOnbl4a33caearKLwjAkwqHK2PhVc9ZRHjU2Fv/EG3Y="},"public":{"type":"Buffer","data":"ndq2heL/h7XbLTFsCtaonDWfPfgQzdMCIcaFNCbCI2w="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-43.json`
+
+```json
+{"private":{"type":"Buffer","data":"UHQ6bWcaldtXlshFVT4Md+7s9Zpaw6tuW+vmjttzz0A="},"public":{"type":"Buffer","data":"mK5HiNH8rZDvIZo3Rrv4N+y83jEnNyDrsS1G6yMNOVg="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-430.json`
+
+```json
+{"private":{"type":"Buffer","data":"aD5UI5PN4TzoKa+iJ/0awMxYpx5OOhr1c8oRQj6MBHg="},"public":{"type":"Buffer","data":"+as8tYJYrZqEQS9Grbe/WXSQvPUWB3uWP7EoBy37d2k="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-431.json`
+
+```json
+{"private":{"type":"Buffer","data":"yNdgb0+HAreRLuELEXUWQ80GfyvB7icG+mJ0eLopzVs="},"public":{"type":"Buffer","data":"SI7+4TWpwbWsDzxMlhtzITRS0MoKTmrTp+++JEVVGHw="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-432.json`
+
+```json
+{"private":{"type":"Buffer","data":"4ESB1F4OH47PQC2sSbE5Ak/DiM7rFvDRm9/x+VgAXWI="},"public":{"type":"Buffer","data":"3ODaHsnIPj3EhIgZQkAQ+Ai/9KH2hGKoj2OZ4ogCHHM="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-433.json`
+
+```json
+{"private":{"type":"Buffer","data":"eDjm5rqrG0Nwcyi3jp26YJU7m41wXN11buqAdU/CE0c="},"public":{"type":"Buffer","data":"mPYrr+TTZmmRlfy4P8sf7yuqH0hIGhwASjgBUhBQjEQ="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-434.json`
+
+```json
+{"private":{"type":"Buffer","data":"cDDiaTDtGBhCM6E52S9PBtNIpDc4vaqLjZl9YgxxhFc="},"public":{"type":"Buffer","data":"ioMJl9WfviLmjhZUXjXnSoZUtxE1/UOwwF5X2QEsuGg="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-435.json`
+
+```json
+{"private":{"type":"Buffer","data":"eNFZNrKNiRBnWzEDvv5rmKr7sWTQrqkE3RoLRBwahU4="},"public":{"type":"Buffer","data":"3UAwryD3lv+KTVB0JP5vuN7mprEb4M4gTdtvYIP0g0U="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-436.json`
+
+```json
+{"private":{"type":"Buffer","data":"2IFghLvAgLKLbkOeZ06a8fp01kIm5A+CMv0dKnVG6G0="},"public":{"type":"Buffer","data":"Uibw985Tig3KB5Xt14zo/Xn7vpF7J00D0TCHYuT2vDE="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-437.json`
+
+```json
+{"private":{"type":"Buffer","data":"SJaJYRbTYLikc7qOBqycAcvPpvLRnidOM2rCgjm4iEA="},"public":{"type":"Buffer","data":"mNOIWiqOPRAvqTBjd9zZH6gdOCbKNptve9vbXrOEXnc="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-438.json`
+
+```json
+{"private":{"type":"Buffer","data":"KBivdPcVXMDAcOXYp8RYZLPaPK2TyjCvUGAj1vzmJkM="},"public":{"type":"Buffer","data":"psMWOQwxQ7oe4gRNpc2OOHDuvopLUZXH2nR4Mh5mDD0="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-439.json`
+
+```json
+{"private":{"type":"Buffer","data":"8FXWk4fXw8Fn5dTDrOguLEA/qG4qfVRNvBraMBZwa1s="},"public":{"type":"Buffer","data":"9pHPhza5rFxK0h9xT3fnBe3BhuNH50Ylf+3yHTS1NiQ="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-44.json`
+
+```json
+{"private":{"type":"Buffer","data":"II9BDElQAgi5I+IaSZCdEAkqDD9kPiHfVeshmXV00kg="},"public":{"type":"Buffer","data":"YJrIkw1V2t70cxBhxUiW4cdKZxXgRISrMAOFc9om6ik="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-440.json`
+
+```json
+{"private":{"type":"Buffer","data":"QKxszzKwihxbP1orbF7HJKEmtgEaeUyaip0td73kCXU="},"public":{"type":"Buffer","data":"o7cDRwL8N3xNqr8xa262c7lCUYXRPkHUV0oma4MZsEc="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-441.json`
+
+```json
+{"private":{"type":"Buffer","data":"GDAnfZgJxhOX8+Nr40V7DPfnHFDTT5WDgzORfTM5JUA="},"public":{"type":"Buffer","data":"nAMIagarmaPLBslCxqDiKgKeLds2lrEkjAYdn108FQA="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-442.json`
+
+```json
+{"private":{"type":"Buffer","data":"kEuxrQ2CXR5jPU3ujfeeOah2NG0Vg0hAtx+pxmmuI2Y="},"public":{"type":"Buffer","data":"v//+P7FdrGBqeQRQi6EC5NnJXwnq6VO6aF68JN0huiU="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-443.json`
+
+```json
+{"private":{"type":"Buffer","data":"cCVOzDNbJ9tzrPJ5Zaf1tOwhFGF4Am1O7k6c7S42al0="},"public":{"type":"Buffer","data":"Z4q6cXuCl9VvCzkX+wJfXcDjUYvW1xyBy3k5nqjZOnA="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-444.json`
+
+```json
+{"private":{"type":"Buffer","data":"2HUYJdgl5iZ77X8MRWAwdF/Jmw3acVhY6Wyl4cyd4Uo="},"public":{"type":"Buffer","data":"HMNquyUkvIb6XUzSf2R4HETardw6nab7SlwkR9p4r2c="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-445.json`
+
+```json
+{"private":{"type":"Buffer","data":"4Ak98fRYK4KKTCUODW1IZ4A03Ok2760a1eMSCCrFVm8="},"public":{"type":"Buffer","data":"gKkPBLK2A9izy8cdCTbQhE+j4tx88Kbq/QH571ef5TA="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-446.json`
+
+```json
+{"private":{"type":"Buffer","data":"cOc7n16nzMCCE5V4MsEJjPc3Cxk8Dr8jtAmhaBGYpkw="},"public":{"type":"Buffer","data":"VQG3ryBQDCdMg8EtFtw8kozwrNSqmlKUzjzK4lPVh1E="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-447.json`
+
+```json
+{"private":{"type":"Buffer","data":"MH/e+au8Y0+nqbJYOoufDwiWKaGoP7OXcxz6Wfdy8Ug="},"public":{"type":"Buffer","data":"Wh5xiyQX0qsWl8Owg6t6LP2L65LK3EEUJQ60Afh2CHQ="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-448.json`
+
+```json
+{"private":{"type":"Buffer","data":"WL7QCwbrLSMQXamcrsSuQZ/IkVF3L5j/8xBTtT6Qk00="},"public":{"type":"Buffer","data":"CQNwVC+L7L7HuUUzcX+bDiXcG5Ip2q+e4cd3Lu4mEWg="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-449.json`
+
+```json
+{"private":{"type":"Buffer","data":"0DXh1AHalT3U1NhvsADfcYF6qt3t8IFXagK316BNpHo="},"public":{"type":"Buffer","data":"aEKV3tTDu5t9lrI9eMjorRXZ4Tp85VgU76mgBWX6Z20="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-45.json`
+
+```json
+{"private":{"type":"Buffer","data":"UGaxOS3CljdC/EWdIyR6LJcSlbmdWN1k4Cz8WNnN3WA="},"public":{"type":"Buffer","data":"nxtRXXpmzgyZ6z4NrPQo2CFAGdc/EOwYMnaHK1+q0hY="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-450.json`
+
+```json
+{"private":{"type":"Buffer","data":"6IgQogirRKLc2KdYG3qUzT//NZRi8RcBIXjKlqYbing="},"public":{"type":"Buffer","data":"qSl2M6AG3FkEwZs3K82MH6Qz+sDHy9XKsiWdARIV9Hg="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-451.json`
+
+```json
+{"private":{"type":"Buffer","data":"IMwnc7s9fvzL9EJlZi/XWd33VjaKMMDd6eBSTIm7QG8="},"public":{"type":"Buffer","data":"VR3CBJGgvKx2203eI5f3qk6EtVOCyTzI+Z3JbzW/D0M="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-452.json`
+
+```json
+{"private":{"type":"Buffer","data":"aAvJyKf1XyfEg7o3UUjkF/X9uJU0/+BfvMGPGPdatWk="},"public":{"type":"Buffer","data":"nbvQVG0HbvR0Nvypw9r57Lvw+823HyuiEFtXqm/UMRg="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-453.json`
+
+```json
+{"private":{"type":"Buffer","data":"sB0xpljQgw73aEiyxZCddCjsF0jaI697evzIL4D2iUg="},"public":{"type":"Buffer","data":"Cn9BXu8BHUUCTuTmZWO4EVzxRiC5DLbIK3jg76IWpQA="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-454.json`
+
+```json
+{"private":{"type":"Buffer","data":"yPQxd0nQpOSG+5FSfzspfIwrmlv92Ix1D2JRfJFGfUI="},"public":{"type":"Buffer","data":"qIJzcBlvjVsu8nxO7WFFFY2t6YS5Eu8xJdL9O9skjmE="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-455.json`
+
+```json
+{"private":{"type":"Buffer","data":"INryI3m7HJUU8wrwBzDUFweh5DeJo6nwKlxmiKNahnc="},"public":{"type":"Buffer","data":"4UV34/84Rkoc1TACYT2Lh8gbSL10nUtxA/XtTUbczic="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-456.json`
+
+```json
+{"private":{"type":"Buffer","data":"sOnjra8lyurPt10MsmcbEZu30xW0XcRgPBjCEXMs6Hc="},"public":{"type":"Buffer","data":"P76/vvYXW8cP3/kyTgdgu5+CeHWKefIR07XwCYaDoU4="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-457.json`
+
+```json
+{"private":{"type":"Buffer","data":"qC+980j7Po4sgK/CS0wMZwAzKOfDhAv+KsBaRQSe3U4="},"public":{"type":"Buffer","data":"tw+KughnWj2lpVsg+X5JLVj3NZyD8MAY7uUH9iSlSXY="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-458.json`
+
+```json
+{"private":{"type":"Buffer","data":"WFQYSDU4ZFQKLLhc+zysCKdedDdO4cHfPzgb7dX9G00="},"public":{"type":"Buffer","data":"WhjeNuxQlaDhIX8b+nXZn0Yq4M0ZX8GgppI1r+axiA4="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-459.json`
+
+```json
+{"private":{"type":"Buffer","data":"oEGvhC9XF9sbXTFwtM3qOy/UgEucJ1ZW8MlA3IGBlns="},"public":{"type":"Buffer","data":"kzup5V5W+3gXKdMaucyOWk2KyeeFi+8ig8iEqtuDAAc="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-46.json`
+
+```json
+{"private":{"type":"Buffer","data":"wAtbDZVNwW4wq4DgAhvthAFHzR4W9bdeR9UCzS+xLHQ="},"public":{"type":"Buffer","data":"g0VpeAAm8zUQV/+th9jVY6KGsS0lKsv1VcXDdAPxEws="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-460.json`
+
+```json
+{"private":{"type":"Buffer","data":"YO8kwOuBIV+ZloGWtWAQsBH7DoPrlG/L7fFpVHoZ3HE="},"public":{"type":"Buffer","data":"0bs3J6/hVMk0uGQCe8NEI5ITvb1ZUH3JttfECPElW1I="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-461.json`
+
+```json
+{"private":{"type":"Buffer","data":"IArzjxwTnsnrmJI+/4kCJwsuw7hYYrGrDF2Az0CFbnk="},"public":{"type":"Buffer","data":"SsPnNkSvWHc/ER704PpZsVByej11Q+OaktPm+ZUsLwU="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-462.json`
+
+```json
+{"private":{"type":"Buffer","data":"sL5I8/XVxzrHaLU7EjM09ogOC+CHbbcEkUMCu/yde2Q="},"public":{"type":"Buffer","data":"gmMflEjLKJlJD19iqXyjpn9ADAZGvvD86/xabskaCBc="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-463.json`
+
+```json
+{"private":{"type":"Buffer","data":"iGqAENhKYE1/3yLMGFOTULMxQ/6YQPpaosWVltrK70c="},"public":{"type":"Buffer","data":"1q2+zmSBkma85AODI5ZtnAXKibF66Ud/0sjqoLZxvhw="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-464.json`
+
+```json
+{"private":{"type":"Buffer","data":"qA/TBpP8QkYNAgeWTsYh7tmPD+tWrdFpqVFGAlygPEY="},"public":{"type":"Buffer","data":"MzcEB8q16449zx7ukhsc/z+pDdt+hJSB9utQEEVV/Gg="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-465.json`
+
+```json
+{"private":{"type":"Buffer","data":"EJwdj5iKru3CYgZ3qRvZxxDImnvnWtLktzS24BcIV2c="},"public":{"type":"Buffer","data":"L8OubWUV+E+Nk1KXfXvHlREntouwyvGkZi7siURa51k="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-466.json`
+
+```json
+{"private":{"type":"Buffer","data":"2E0WrjQX8kxhAGFsIHwD0FUe+BH5pBo8hDmFAkHFsHs="},"public":{"type":"Buffer","data":"VzQwLfqYwE2n9wCqKa1VEVuG/AXkh2BHocp6DbWhmXM="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-467.json`
+
+```json
+{"private":{"type":"Buffer","data":"aDJawUSSqCldAqCDrB+MfOew5Z5hkVd1v9hvo6SRflU="},"public":{"type":"Buffer","data":"1PCG0yEd2tB7tNc0V25F019yjVUt9Q5St1MnCnGxwks="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-468.json`
+
+```json
+{"private":{"type":"Buffer","data":"eJzop7YN+hjI6fmXil8Bm5ldeI/+11BTMdBdeZy0/HQ="},"public":{"type":"Buffer","data":"RWcpIIHhu+R+RXbyG2b5EIQQan4Vmm+x8E1X4sdb/Rk="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-469.json`
+
+```json
+{"private":{"type":"Buffer","data":"oO66/EG/I42LunXprmiE+WfMTgqtHCqaLnV/iVx5LEs="},"public":{"type":"Buffer","data":"gkI9HpNe7GQDiV/9HB6FPmvZcYjDbWbVWyFd11okHmg="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-47.json`
+
+```json
+{"private":{"type":"Buffer","data":"EEplBi3jd4UmuvYFPpe5Y9D8KovWnYXLy5WESLQkYkI="},"public":{"type":"Buffer","data":"Gf/lRUi8L/1BUMqDX9mUvnjdFeoxhgw5YY8boJFqlnE="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-470.json`
+
+```json
+{"private":{"type":"Buffer","data":"4KhCbwt2lsA8UKWfvxdea/ZLsio2x3vEAa+nkjlwuFo="},"public":{"type":"Buffer","data":"iHuKNi9dtRvIBFG6k+F0SKsrwgqItSbXxM7RxkM3OgY="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-471.json`
+
+```json
+{"private":{"type":"Buffer","data":"IN2VhIwhEwsV9oZ1g9PYgI2FRQSX53gMe1AQFJtGR3k="},"public":{"type":"Buffer","data":"1VUrKbFRCBb3/ODy0/Ge7/Dlj1cioGnYUFREj7AMZxg="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-472.json`
+
+```json
+{"private":{"type":"Buffer","data":"4I22fdHu4C+ZragPF7XOFpjZP7HzWGu/N+8zhihhe14="},"public":{"type":"Buffer","data":"hvsL3fpGY4oegQqtifx4tOG8M8Cn4ExAFQG4rZa0KB0="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-473.json`
+
+```json
+{"private":{"type":"Buffer","data":"4An5tOIAb3r+GczdFP5eXHBU4T+J2ydXjgTazEmXtk4="},"public":{"type":"Buffer","data":"ZXf/sQk1/WyPuFKR1L6v2wBsFMQEoavc0rkWpvJ79hA="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-474.json`
+
+```json
+{"private":{"type":"Buffer","data":"eKkCrRD/AtyfRdLUeTpy4AtEjFlLzgtsveBdi9eVNkc="},"public":{"type":"Buffer","data":"aO5olsEqVoXTAkMi9QkThgaXT2p55D0SPxKvk2p3/Hk="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-475.json`
+
+```json
+{"private":{"type":"Buffer","data":"8AP0E3o6FN2mfZncX/rMxdqsXieuto0/j7guSv0Nl10="},"public":{"type":"Buffer","data":"uQDr4hiv6wEpcDHmsvg8s3tlQlQE3qar05LY4LidrlI="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-476.json`
+
+```json
+{"private":{"type":"Buffer","data":"wI3gwC8Jbm1gO93LJQcKimsSTwjf8qc+wbYjQP7XiHM="},"public":{"type":"Buffer","data":"M8O9l+r3vybZeLh8p+2W1oCOGXt1nLVZIQL7GrxWPUY="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-477.json`
+
+```json
+{"private":{"type":"Buffer","data":"GNV65ImwZZQN60LdIw9D02YD0slZycGeImkAjVb1100="},"public":{"type":"Buffer","data":"Q4vZdf45zI1rQ26UfX5AQF60F13YXBmXCfjsuklnE1k="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-478.json`
+
+```json
+{"private":{"type":"Buffer","data":"4PD5T2fSwLfXGh9LT2A+GwK6YlZF2igMCGGPItFmYl0="},"public":{"type":"Buffer","data":"qi34Mn7r6qHiOZzJm6/pONdjFskHbzxoDDdVPozJXWY="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-479.json`
+
+```json
+{"private":{"type":"Buffer","data":"mNjRcJPYE+geajeSET7cH0ZQXHywuTMOobbEbuWb+HI="},"public":{"type":"Buffer","data":"1Ys8F51tHM1ScmFTKRiffncQMwO7uT8VCVaFYSMFgVU="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-48.json`
+
+```json
+{"private":{"type":"Buffer","data":"KDkm24XAPQX76ux/lz4af3wRJGT8XvQGwjAR4apvh3A="},"public":{"type":"Buffer","data":"w4NieRAyZsIw58bhvDWta6PrcrtpmI7B7ExIycPFnCU="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-480.json`
+
+```json
+{"private":{"type":"Buffer","data":"cDORW3+EHAvrOGYYKBxnZuBjNs5QAPFooY40O9bu/EA="},"public":{"type":"Buffer","data":"eYkl0c02zZRSDcNp988x54fuvIcJYJSK+aBEk1yFaFo="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-481.json`
+
+```json
+{"private":{"type":"Buffer","data":"0KDp6pHxp2IveXV9Aj/UtI8SCGFSunlkJVpW7H/vP38="},"public":{"type":"Buffer","data":"2iGYh430QG0gyPzjyrFhCKPwKnv/572YpIrw37qWgwU="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-482.json`
+
+```json
+{"private":{"type":"Buffer","data":"KPNkXwRCnEfsBy6TjiXKljQXij8qhmi1MxKSXbb0qls="},"public":{"type":"Buffer","data":"DM71BCMg6lfZjNQ62xxtDn1G92W7KEQjyLk/2Vs0R2U="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-483.json`
+
+```json
+{"private":{"type":"Buffer","data":"sDQMODncYuhXtak6OrImmI2DhllSNUV0Hr2PhP8pFXk="},"public":{"type":"Buffer","data":"yCjzMGtQurUeJqSdea5FLtCvCztj+vtTtSHjFGK45HM="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-485.json`
+
+```json
+{"private":{"type":"Buffer","data":"gDuxo388hnkixX3Pjy42jnOP6fsHmPK0k3/OZbsWhVk="},"public":{"type":"Buffer","data":"YzeIoK3lCknLnsOiRWXkDO/i7lYpcYe/ap42t3mWK1o="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-486.json`
+
+```json
+{"private":{"type":"Buffer","data":"kI83odqmOfI6CZihqeTULDsqrRClmu/c8a4Gie2oL3M="},"public":{"type":"Buffer","data":"6jm3ubrXYRSwG+wRXDxPNDqj0QTldQhqGf6h+EFPCGc="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-487.json`
+
+```json
+{"private":{"type":"Buffer","data":"CC6Eha5ZXMVqyHUP9cF7utZFTG1SaprzVV48frNFl0A="},"public":{"type":"Buffer","data":"slKCbdKNxYhvvsA8UM9l5/sI0S1IogKkV0i1A7MwckA="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-488.json`
+
+```json
+{"private":{"type":"Buffer","data":"2NMfZv90R0r3Jyfkefcgw7rMqUEd2RBMxNxN8xaohmQ="},"public":{"type":"Buffer","data":"2Jw5r+yO7jNPX55cAKmB5LAksWWACs+clsfG6Bpojxg="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-489.json`
+
+```json
+{"private":{"type":"Buffer","data":"oH8spS9cP/HJR5Ic8FU/ZgxarMpViKLSH1kPS2WXH0A="},"public":{"type":"Buffer","data":"o2vqYYGQCkzGTQgbBrurQLMEziuHL6wpS9oow6a+6So="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-49.json`
+
+```json
+{"private":{"type":"Buffer","data":"OJl/xHmHFgIHUc+1+19iQsGvu0UjHpfTmeMW80p32E4="},"public":{"type":"Buffer","data":"dU5GDeMzmpnA45sgBGHKyD8vxBqrg/KsnPhfHE+KSRA="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-490.json`
+
+```json
+{"private":{"type":"Buffer","data":"uBJiP/5o/RIM6NhR7lzvhHVH+aK1QuBdPr9eVLmjmlE="},"public":{"type":"Buffer","data":"RyVjMkOgORSooSgO0y7jTDRuExEUw5/SfQA2JRjQ5SU="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-491.json`
+
+```json
+{"private":{"type":"Buffer","data":"AGZHRh2IGbeyxSByYPj5Oyqjgc0R8x817MKNdsImk1c="},"public":{"type":"Buffer","data":"7CfrGVXYDhzoV0HR8U8VQwKYk+atwSrFJhRQOaetNSs="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-492.json`
+
+```json
+{"private":{"type":"Buffer","data":"YG7qsK714kPSaf1b6WUArHJdvqEBexHad11eEbSkK3M="},"public":{"type":"Buffer","data":"iXVTJ/kvlOvc+Wt5e7B+wH21JHITpcN9sqpmvL5Szj0="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-493.json`
+
+```json
+{"private":{"type":"Buffer","data":"CGqCa6JiLlmv4juFyIYIK4R5cBJ/PwalKhE7znyPXnE="},"public":{"type":"Buffer","data":"6Q7HTp7/W82XoZkH2Uk7/RzLhIoyahnB5LsohFNZhxM="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-494.json`
+
+```json
+{"private":{"type":"Buffer","data":"aE+8Nghy7l/IHdQBBcZVHRXNCkwxeoYY0i8nmWlrbV8="},"public":{"type":"Buffer","data":"fQgfVaV9s0CHP2TmA4VHl/boEkWkk/PEVUK2sS9FF3A="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-495.json`
+
+```json
+{"private":{"type":"Buffer","data":"YKTi71mbzqkFdbtCv3UzCusvgp08NB8vBTcDsH5Onmc="},"public":{"type":"Buffer","data":"1E5pIOW56yMZZOkLN720HKga5HP8cUbWL/pgoO0J9wI="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-496.json`
+
+```json
+{"private":{"type":"Buffer","data":"OFe9qeE4IzH6HWKOq45sVkNfJXgshM0yAwhntPmNxWA="},"public":{"type":"Buffer","data":"sozz9mvedPF4maiChcJrx73WGKRmmTyuckkfzENhXCs="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-497.json`
+
+```json
+{"private":{"type":"Buffer","data":"8AFowtnYNL/eNPv9n1dNKmS/Fyeii3AUKmp5FjWQQ1U="},"public":{"type":"Buffer","data":"8eP0ExT42f0dVVboOQENsA77jC5QRgnD4V4be+OsFQU="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-498.json`
+
+```json
+{"private":{"type":"Buffer","data":"CESFV43CJlioE9nubA+haRYeRmPPO6JJBxbdFimJfWA="},"public":{"type":"Buffer","data":"bc3hRPtTbmOEhAwwq8/kRFHQ843i39M1wVJFjdFIR0E="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-499.json`
+
+```json
+{"private":{"type":"Buffer","data":"QIVQw13x/LMwc8N0E0ehFClozhwSKGyv83pq6D6G7lw="},"public":{"type":"Buffer","data":"EI3UmuO0PcAh2Dw5yIXQD8axVSnnOeUJ9PAP41kpVhU="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-5.json`
+
+```json
+{"private":{"type":"Buffer","data":"iOZQ+0n4Sy5DI+lcnuZXEki8yJdjq97ZJ/xsplY1cWA="},"public":{"type":"Buffer","data":"phtndHtLp9Sc4RovRAzZ9SyRvvrHqHUKYQikI5vbDSA="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-50.json`
+
+```json
+{"private":{"type":"Buffer","data":"IN56NDfExcCQIucsone53hLt6OFOUAqC43qee9AJylw="},"public":{"type":"Buffer","data":"s+nr2JeE4g/cRG38NTn6rcenSsL10E0nE2huV1Wbrhg="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-500.json`
+
+```json
+{"private":{"type":"Buffer","data":"wP//z11hP9oOMSwMXsPT2D92I4S6Izvx/evwebXfuFc="},"public":{"type":"Buffer","data":"9/Qmv3nOhfX5iqoO0rkToHNMw3PMAGdfyuqds/E8PWQ="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-501.json`
+
+```json
+{"private":{"type":"Buffer","data":"EIcNdpzotn5GY7SDw1FCyObfOn3nbdCNdinWpNDiUkM="},"public":{"type":"Buffer","data":"zGeXVvjUrcRrqRbm6JGVOToaAsKUKvcQy4tVzzY05SA="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-502.json`
+
+```json
+{"private":{"type":"Buffer","data":"eDlOYIgWlA3Ap+2JDHYJWkjsSvOTtMwNfvKRPKygJnA="},"public":{"type":"Buffer","data":"N04UEBzTQKVofnlGCbHnEi64cXK/LtRvWHCPN63RCgA="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-503.json`
+
+```json
+{"private":{"type":"Buffer","data":"aChBb7eUyFSdhzulb1Rz3hVcB5qN/PQLc/ovzZhR400="},"public":{"type":"Buffer","data":"AneICUXy//lqZUKvmM6ek9zi7z9tbruo7WV0/undMVY="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-504.json`
+
+```json
+{"private":{"type":"Buffer","data":"OBvSBkR5swTydwBXY6Lf0ilDop4dvkMlZJWQqZ4EHHs="},"public":{"type":"Buffer","data":"WxSGnyXPGy/2ye8BfNQ3wqUpgs9FFcFIEO08UAzcbhs="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-505.json`
+
+```json
+{"private":{"type":"Buffer","data":"+LJK4i5t3dtIruG+x0oSRWnVNYtguRSHf/bO/i+SV3c="},"public":{"type":"Buffer","data":"KzwTmV5eyBanT9yYQJBxHGEtJtFVPqmIXqsWKoCpchk="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-506.json`
+
+```json
+{"private":{"type":"Buffer","data":"eA9lCMmIIKVS8cSS3Upr95CQeXpEQhUba2E7FRhlvX8="},"public":{"type":"Buffer","data":"LT+R9Pykr4FEgVW/EdR19uMHk3BrftJJ0TqF5i22cWU="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-507.json`
+
+```json
+{"private":{"type":"Buffer","data":"eOdbezXR+VGZIvdzO79QRuhlM/TqMvP/CvwIEhUvMko="},"public":{"type":"Buffer","data":"sOCw8nvzlRbKcyO3ReT9PEBB2NT4q/uDEZ70GOndjWQ="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-508.json`
+
+```json
+{"private":{"type":"Buffer","data":"uF985HNjb0hWNm+FlM2qP0Wa8zYXs/rwPuT22a/44Ew="},"public":{"type":"Buffer","data":"fZlHyuyZAqMQJIacS1vDMlwN/OsIDVYRzc1JTx1P7Ew="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-509.json`
+
+```json
+{"private":{"type":"Buffer","data":"wCFqwRvpa02rmz/jScNqoq2bmIT/bprUQoUWsdAL4k0="},"public":{"type":"Buffer","data":"WB+taH3fXpfrLMOwq933Tniw/hp1bGXUHDQlu7/Zchs="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-51.json`
+
+```json
+{"private":{"type":"Buffer","data":"yLhH4rL2Iaep017bMiePRqIFf8JSpkYn9hH5M4FGo2c="},"public":{"type":"Buffer","data":"IytKLTwD3ZDEtkRyV11BzNbThEgIT80rEeWQRGxXOnc="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-511.json`
+
+```json
+{"private":{"type":"Buffer","data":"QIXc7XM8RLccqmDPUk/tqhJ3cGxzcNPEBVv2wQUfK1c="},"public":{"type":"Buffer","data":"LN2wQiNMkY0rgkm1AsRTYTVBy21enoZCjqvu6FWAO1A="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-512.json`
+
+```json
+{"private":{"type":"Buffer","data":"iP+c/zpY9IUtace7KN+T3fROj9/NUffYh8jF4KEma0I="},"public":{"type":"Buffer","data":"cIy2+6FrKJSHV/axUX56MY4OLRixOLNdGDY6zWGhaVw="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-513.json`
+
+```json
+{"private":{"type":"Buffer","data":"MABfvbbLoX8HE/z0R++vKszRTQmWn3sv1JaC7RlbXno="},"public":{"type":"Buffer","data":"yUrYXBVCq+/aYUYXCYdxmlN6Mo8AJTNvsgrPAMZXamI="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-514.json`
+
+```json
+{"private":{"type":"Buffer","data":"uKp22zKunfiI5dUOEau8a5PNtrxdWI0XlmCeGrwJbE4="},"public":{"type":"Buffer","data":"B4jtB13amS8Eypf+BrzM8aR89BxL7Mm9Zt77H4tcCQE="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-515.json`
+
+```json
+{"private":{"type":"Buffer","data":"uN4KJsRpQtXh7iZYPDkukM2X+t58OxcOcwq7NrXrjHI="},"public":{"type":"Buffer","data":"JKNL0IObqI9aj3YkFH9uhttI4sbUnnmsXWOzYAEXYBY="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-516.json`
+
+```json
+{"private":{"type":"Buffer","data":"uC+3KkNpor0YO68VgyzVCigTWcppvIZljHav/X/8qG8="},"public":{"type":"Buffer","data":"stOUvGcSNaLsbZQ+guLiRM880ymkWclg0Zt3moA/2gg="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-517.json`
+
+```json
+{"private":{"type":"Buffer","data":"CFrcyP9t25Ub7jmXl8T/pMJ6GGdYRnEDp/urgbaAO2Q="},"public":{"type":"Buffer","data":"BvZamftz6Xf2YHjeR4PEDYZppzIb6Gro66sWw8Xlcgw="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-518.json`
+
+```json
+{"private":{"type":"Buffer","data":"uDHIDLObmTts1sV1EshAm9CJfj/Qeq6ndeFwz3YaGU4="},"public":{"type":"Buffer","data":"504eH1amJGler7ELlkyMtsPV828dXXMzYJYrt+dqeiw="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-52.json`
+
+```json
+{"private":{"type":"Buffer","data":"cBEgg6jgXJsQSfRTMF0tZMNbM/e8QQTPX2QrsqQcF2E="},"public":{"type":"Buffer","data":"eeny+ScMdtahBDeKWxjb71Q7wL/dL+0/xa36ic54hT8="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-520.json`
+
+```json
+{"private":{"type":"Buffer","data":"QLE5tF921CpNYnNX8CTpOclgtHXj0GGzkn4BKrP3NGo="},"public":{"type":"Buffer","data":"FSojTu5IKgR8qV3Jv1LkCqd7f/YU6ibWJC+b8+0vHWM="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-521.json`
+
+```json
+{"private":{"type":"Buffer","data":"MPaW0kkm0nzFe4mpDe1EjbspPms7paCrTboTWD6B0G0="},"public":{"type":"Buffer","data":"aqIjXyVDFn+rre6YtxAeZh21X/7fsqEph5jpojFzlmI="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-522.json`
+
+```json
+{"private":{"type":"Buffer","data":"AOOHYYL+RUSFKoU+PLIGvSSzyfd+TLbgvN0/jV2EfHU="},"public":{"type":"Buffer","data":"sf8aWDCLdXKg/y+uD95GES58fr6uLZ4IWO+tlRD6cjM="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-523.json`
+
+```json
+{"private":{"type":"Buffer","data":"mPF7VsonoFXFFXL0N+u0cCC8ODlfwDR2EV0CXOw3/Gg="},"public":{"type":"Buffer","data":"K4TJUeBIIIua4xm59fHNXYRlgwZq/O2XmhSqh2e+bnE="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-524.json`
+
+```json
+{"private":{"type":"Buffer","data":"aHfhOhu/Ox1Lfa76+3pWCAWpdjYbdR8EZthT3Oc4aWk="},"public":{"type":"Buffer","data":"EY6Kzz42mZYoJjhfNYHjuHBw3fZ4W/HzHqUbSnTFKEg="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-525.json`
+
+```json
+{"private":{"type":"Buffer","data":"cE1oFDBdiCqXQ8A6xjCZWG4sTmwMl+HVRSPr//69oWc="},"public":{"type":"Buffer","data":"eX+/2CEMF5jjlHyV6atE73LXlQIeNmauTc09lJkdikw="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-526.json`
+
+```json
+{"private":{"type":"Buffer","data":"8NMFSvgj0+5SfpV1PZXVokrGI+6mmW9dFGCQ8EbpOFM="},"public":{"type":"Buffer","data":"DDPjKnr/p/fPNVd40xXtzrvMEbpWDCaLJq4KCg2UEgk="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-527.json`
+
+```json
+{"private":{"type":"Buffer","data":"oDjpnytE9UV/ONtzdwqwWccezolsgo+YyNFZWcG/jFs="},"public":{"type":"Buffer","data":"pZN1rGtZ+kbdHGPZsI+2hcnxThTC50uh8PA5gnwapjU="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-528.json`
+
+```json
+{"private":{"type":"Buffer","data":"oHwPNUOWvtOw11Rwqm6PMkmCVe51myH1PUw24M0D1lA="},"public":{"type":"Buffer","data":"sxwp76whxLvJ7UH9rssQUqvTEuYPn3AJ99QfV/jL2mY="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-529.json`
+
+```json
+{"private":{"type":"Buffer","data":"WBbQ6xzgzR+TcnQFUjz2VvYABJtfFXjkzxZW3znSils="},"public":{"type":"Buffer","data":"WXrlp9uDhunaF29mjJpXCjzCNeaEmtqbrebqmfhGOj8="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-53.json`
+
+```json
+{"private":{"type":"Buffer","data":"YLRLMbpRaU2JQAIXZy1ffxPrMoUzL1x3sVeDsLkKyG4="},"public":{"type":"Buffer","data":"yO6ohTufSONDahjeTbKXDy2NI2ZZLukchKXNxePLRDk="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-530.json`
+
+```json
+{"private":{"type":"Buffer","data":"SLBxn3pvBUwrjbaUQp2vlNpZUkx6/udXJmyAcTPWyUc="},"public":{"type":"Buffer","data":"IkCxak+tn5Tocy94JOiKAu/mq0Baj7cUWIcR5wtgZ1A="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-531.json`
+
+```json
+{"private":{"type":"Buffer","data":"mNN1JrprBYSzULbZNefKPunofciIn6UMRGYQ4f/Gzno="},"public":{"type":"Buffer","data":"F964UcTnmvJ0bF0J6M8gnF69fRdvwneq/ZENA3M+Ew0="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-532.json`
+
+```json
+{"private":{"type":"Buffer","data":"sG5WckUrwfcDxX45DJS43/pY5op1Azfz44THa/F2yXk="},"public":{"type":"Buffer","data":"OUy7+YLBnmv1zb7z5HEL6VlHV1AKl8vx50swOwEH/1E="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-533.json`
+
+```json
+{"private":{"type":"Buffer","data":"ODPb1blu8PjJKr6GgHjL7RUhS7l2hW7r07aY/k5XWWk="},"public":{"type":"Buffer","data":"HejYfQMBzAak0OR561ApgDlF2T23zBnsQZPfZrJ7Sz8="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-534.json`
+
+```json
+{"private":{"type":"Buffer","data":"wMvh6Bp5RnhQwsUpdNJeyad/5cYepHPBAHglwF2wSnk="},"public":{"type":"Buffer","data":"bmM2iFWgKt+JGaLFafW0QwbXjKSGEclaCfufJyho6z8="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-535.json`
+
+```json
+{"private":{"type":"Buffer","data":"AIqmVNHxIlgdf/BhhleKbI/50PC4NzQhZjrgyFteEUY="},"public":{"type":"Buffer","data":"grztNeFdyIC8buDfVms3nxSaNv6R/gYaX3nsNpziuTI="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-536.json`
+
+```json
+{"private":{"type":"Buffer","data":"CJE0HMj4KCaCCa6G5RxoexFGQaODGEt4TTPsce9oAWU="},"public":{"type":"Buffer","data":"P7mdBOq7Sl4+a8HWQo6TY1kigw7Pwx6Ss2wDXLfa0GU="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-537.json`
+
+```json
+{"private":{"type":"Buffer","data":"mIoYfL+OTaBXoP/DEmcIRr+VXU4wjVm/9H5MJP/E1Ho="},"public":{"type":"Buffer","data":"MAa273A5bVnRWfhrPoBHgJnoX7Ztjkiu0D+w0HcJRCM="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-538.json`
+
+```json
+{"private":{"type":"Buffer","data":"KJtTO7lSDTOrAARDDPTzXU8tOdi3euo4PHa9nmVTGkI="},"public":{"type":"Buffer","data":"wFtW9DyTviHr0ydgUlDJdOjLlRe8rr8LPYw5NhwEdWY="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-539.json`
+
+```json
+{"private":{"type":"Buffer","data":"sDbotgu8vvEQiziNn3at5fb6VLKkx9gfYjO2/Q7SY0I="},"public":{"type":"Buffer","data":"CZ3tyCZHfRGiWUYVdRen9VGeR/fgcANetOZKPJcJMDo="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-54.json`
+
+```json
+{"private":{"type":"Buffer","data":"wB3PrGmYLkKG9F35SspkNPUlduTnoQF3yAdf8YcmJWs="},"public":{"type":"Buffer","data":"PaWo+g7o1wklsG4CobnXyG/aobeb9FqnTL7gtL9uPB8="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-540.json`
+
+```json
+{"private":{"type":"Buffer","data":"KAshOEoExEX76jMdlmL0rQgIpoSXC9AYX5FWFoSR7k4="},"public":{"type":"Buffer","data":"Nrdkc+nnIA0/fcfgaSAktPnnF1Q7AWmPipezbFlRmAI="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-541.json`
+
+```json
+{"private":{"type":"Buffer","data":"IIqhJ0v5FM61U7TV5QsRYMY5FoiHtO0r2SHNUwkGy2o="},"public":{"type":"Buffer","data":"+mHJt40aYUow4nJCOWJrtfRH2aSY35Yc04ht+wSpjXw="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-542.json`
+
+```json
+{"private":{"type":"Buffer","data":"iFnhXQJa4pFH1XYR97KTe0gFJt5CVeRvhrieVkTcbFU="},"public":{"type":"Buffer","data":"8xXuBGY0Y6Kli9xJ4F38gM1wEhIVOzQqRcAuFgwqfxQ="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-543.json`
+
+```json
+{"private":{"type":"Buffer","data":"CLqYZQAoe3Zp93A0fU+TK8QJOhFyMi+QKv1NWfmFAms="},"public":{"type":"Buffer","data":"lx/tDqdF2y5rR3BSHsw+szKayHPNG2pjPIaG2JDvhBI="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-544.json`
+
+```json
+{"private":{"type":"Buffer","data":"GPOXi3bDzxgwM4cEpW7IwwANQ0va/eqvSgp+6taTVE8="},"public":{"type":"Buffer","data":"EeGGTT8iprxfE8r/2qMgK4z8Am3lAXw4Gv2ST6zb81c="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-545.json`
+
+```json
+{"private":{"type":"Buffer","data":"4Jihxk8Rqiuin+9/OHkl9B6rtD8eVxJozT5Hm7Ol4kA="},"public":{"type":"Buffer","data":"Wrm1gdhObzLQ+qKYbpAsXYEc4zwR5YjG4GKTzfkm+XU="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-546.json`
+
+```json
+{"private":{"type":"Buffer","data":"0K9TADywYBPwFClXVU3VZ6/4JYGFQPCdJf9VqIMXKHk="},"public":{"type":"Buffer","data":"NU7zXFrZIFORwEJlLs8o9f3NhC6dekua3KwiSbbBlzc="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-547.json`
+
+```json
+{"private":{"type":"Buffer","data":"mNJGl2huaH0F+ZOXLpcu4Z+XkPL8ARFbrj3afDKO91Y="},"public":{"type":"Buffer","data":"zSc7PjaIvzl/FPuu2V2/eddOAvZBqFq7rcDI5XRnTyM="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-548.json`
+
+```json
+{"private":{"type":"Buffer","data":"0NXjAIio6L6a54KgxMgXKoY3Ra3nFap9a9sbqsMmSH0="},"public":{"type":"Buffer","data":"q+8JbhSdmN0sSDvMXrlt1a3ExvoQz+NhcEprVeCVdVI="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-549.json`
+
+```json
+{"private":{"type":"Buffer","data":"MDlNOcQuOPbSeNhZFyPcdYTbmh0tlBCt8pSkXgVj5Vo="},"public":{"type":"Buffer","data":"l07aCn34cvmEh4dEsNNSZMSn2nc9l1f8yJcCVdfhZ0w="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-55.json`
+
+```json
+{"private":{"type":"Buffer","data":"OMAyByR2/oS1BRsE0g2Dm5Tg8whdR+kPXjq5nXU8GVU="},"public":{"type":"Buffer","data":"pUugvq+Drux9PDco70bub8uItgsq/QoobOO4hB8wXk4="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-550.json`
+
+```json
+{"private":{"type":"Buffer","data":"mGvkiPtrr5CjljP23HTyZujZNN5TKXiXG8CeIBqrjH4="},"public":{"type":"Buffer","data":"E7B7cL23WLLw5frZW/ZoglcRYcw9D+Nnv4kOYqduv0s="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-551.json`
+
+```json
+{"private":{"type":"Buffer","data":"CE3e6nqSifSGpOrtou3ywFkMYqtkpe1gTY8S1q8Ra0Q="},"public":{"type":"Buffer","data":"0MjeAmjyrq+7E8aVXBMbA/7+Np3AQS9YsH/UJXWHdS4="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-552.json`
+
+```json
+{"private":{"type":"Buffer","data":"mKnsH9FjyPO+YDvC28I1A2lx23zDAap8fGT7YswNr0Q="},"public":{"type":"Buffer","data":"nQjz0+AIWUBlTxdjjt1D1ENhkXRk0qGDxe4uFzmmjRU="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-553.json`
+
+```json
+{"private":{"type":"Buffer","data":"sA2urAfFLzfMduzVInXnlPa/bDRtDmlG6t4wxBjJgHE="},"public":{"type":"Buffer","data":"Pb6LX18z52fNzDmzSz5yZx4M2s+bSzOEz+FsRhb6DEs="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-554.json`
+
+```json
+{"private":{"type":"Buffer","data":"wOvo5h8vzEmxsETzZrrTuhqODgMVlcIHDCxdYLiMDk8="},"public":{"type":"Buffer","data":"k/GtLbRSbyQdhWnfRnYDSS6LyaCVwzxY6x7SqtaxFhA="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-555.json`
+
+```json
+{"private":{"type":"Buffer","data":"6JcpOOKqS4nnLM30/+JrqUzRTH9dVaLmcpDvIz3pYkY="},"public":{"type":"Buffer","data":"mMBSE6soIvJxdoequrD29mBJ+cvGBaILsRAlYeDzAn8="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-556.json`
+
+```json
+{"private":{"type":"Buffer","data":"yP9ZKBH7W6mYW9loNH8dt57E+qiCNeP01nm8TB92T1I="},"public":{"type":"Buffer","data":"lpdqQ8LaOhxJkWMXUgJmE2jKOiHQoYTGZmFOv5IfbC8="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-557.json`
+
+```json
+{"private":{"type":"Buffer","data":"IIYv0LkYrXwL6h30s7Qxo2kgmEdbiqHNJQYrSgEWR0M="},"public":{"type":"Buffer","data":"GS8+twJZeuSdKSQbZDYdGbNvJBULBA5XFhqA7+7P3x8="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-558.json`
+
+```json
+{"private":{"type":"Buffer","data":"yEPA9MnA6ow46BL3ffShjCUfI1aVN+OunfVu/OVt83k="},"public":{"type":"Buffer","data":"d9PQoOWy54La2mNMHUx8Y6jTuQ1ky4GypSTClSJW3iI="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-559.json`
+
+```json
+{"private":{"type":"Buffer","data":"GIDmqTx/01Cz2/vENCpHRDbTzAGHGAo88sK5x9E+5XI="},"public":{"type":"Buffer","data":"zopkDtAWQhiudlWsh5XLPEICuE30TU2LSSgHtS4qLGg="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-56.json`
+
+```json
+{"private":{"type":"Buffer","data":"MEfLJg2ED/nXsc7VK5Txe94O8LtUI2iXKxvBKX0ECVI="},"public":{"type":"Buffer","data":"MeOT3AgAVgSqvCCzpmnwiEArS6XsY/IurYNR0UjYUXQ="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-560.json`
+
+```json
+{"private":{"type":"Buffer","data":"SPm19ZVEyH6PSrfNVhZ99tiqEJZyqPq3w4G6Sd+VJ08="},"public":{"type":"Buffer","data":"fHHPWJ88Ipu84891RLX1sFNxi5JN7F4dW8qkEHB94Fc="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-561.json`
+
+```json
+{"private":{"type":"Buffer","data":"sPAvaApL2s+/aZjtfwCPW4+7tqvw+O5XqwQEjZSGrXc="},"public":{"type":"Buffer","data":"ea7SWpB5NaOKUoREgHRKE9dB4bNC/dLklE2i6/iTeHA="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-562.json`
+
+```json
+{"private":{"type":"Buffer","data":"mI7eYV+wGVnA3GfQ1fiWHwzvHoWYSzd8O9uLZp6Xl0A="},"public":{"type":"Buffer","data":"wGrVnZF8QpedTP6hk8cYVvEbt/YB8FqPPUomh5gOewY="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-563.json`
+
+```json
+{"private":{"type":"Buffer","data":"sK+9bQvnfZpSCve95Tw8rvHnQ2TcDG7y4Ia4X95hIFQ="},"public":{"type":"Buffer","data":"Ev1LPVKbMFdZe7pSwfYv2E42LSypT5yuab9UaHgexFs="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-564.json`
+
+```json
+{"private":{"type":"Buffer","data":"iIK0KjN/eQHURz/wkzgUye9DHD9CulEEBfFv9MEGk0c="},"public":{"type":"Buffer","data":"jIdEEqvGq+yRlNOqVzejKm8JoHq6Ho56czkO9I3ld3E="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-565.json`
+
+```json
+{"private":{"type":"Buffer","data":"8KeW50AgDe5VXJZsKrf8VBfLrde0jIbf6/XyVTBOm3Q="},"public":{"type":"Buffer","data":"6de9OlBR/8AxwP2nKMyCc295j+TGl9faQDJuPOky7mY="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-566.json`
+
+```json
+{"private":{"type":"Buffer","data":"4L4+mey9QnEQBXwwtryTsUcH8wccVlQtc1jmgq/K1XM="},"public":{"type":"Buffer","data":"c1Cxt1qZenAxJfYslP6CHFwAxIoYcasgsUqzCw43eGA="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-567.json`
+
+```json
+{"private":{"type":"Buffer","data":"2P4Wm0gJFYsisbQv+8C9xcAL+h1MvqtV22HKbRvwyUM="},"public":{"type":"Buffer","data":"wt9jNi2+05Ll8TWYjc4Uxp3qTcVKXcvtSey78lhTemo="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-568.json`
+
+```json
+{"private":{"type":"Buffer","data":"cKeOcZoCFyMPTuBVjw/1rz0nOkAaeTC/TqEQr6tprHA="},"public":{"type":"Buffer","data":"t8OzZWbnftupbaR04eYX2vDWZYsk4MCEu4sWp18e1AE="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-569.json`
+
+```json
+{"private":{"type":"Buffer","data":"UFAn6tda7o/yz0kFiCXMo5NToObGA4a0ZyNlPrZCgVU="},"public":{"type":"Buffer","data":"pPlxbF6nICWURQXkxqnNngOfjiYoHJV2YRXnYUAWUiQ="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-57.json`
+
+```json
+{"private":{"type":"Buffer","data":"yOKy19aid7ZTEC7mcMZm/Guh6YHwHwyi7SHMVKIrN3M="},"public":{"type":"Buffer","data":"muinLsm+iytGvylWAz1YBgBLYzEZikfCqGivAn6DMhY="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-570.json`
+
+```json
+{"private":{"type":"Buffer","data":"UPQMvZdujwlPiKrGuHIIgcqUqbOOmR/XIUqRwylue0A="},"public":{"type":"Buffer","data":"lkt4IDTSaReLmbw4pRcNnwiK2n6hsoRcShqk+g5He30="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-571.json`
+
+```json
+{"private":{"type":"Buffer","data":"kIwSv5z55tt/sOcpzv9bQXuTiMXU7M4nRGeppu6biG4="},"public":{"type":"Buffer","data":"u2zf2hk2rr5/ayHTdTh73C5mIAmg+DTY0hWcVqSH4jM="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-572.json`
+
+```json
+{"private":{"type":"Buffer","data":"WBNwoE96be09um8Q8/FcnA48/1oxwTh8AnEos5o1IU8="},"public":{"type":"Buffer","data":"BDJxvHgB76eaSXGsKOBztaeqwDtbcAPpEJVQWPcX4wk="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-574.json`
+
+```json
+{"private":{"type":"Buffer","data":"QGhC4vE0rxVvwy/GNff1sxNejUh89e0RYeHG+2U+yEI="},"public":{"type":"Buffer","data":"2vDId7dkmBJcsXWp+sUqg5NwxyyYt1VIeABO+dvR9WI="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-575.json`
+
+```json
+{"private":{"type":"Buffer","data":"2DQz1XNYC4ifgRBtCjv7umLt9TAqWtSvdrqjSLfwdlo="},"public":{"type":"Buffer","data":"mRySviEkMGJP5wiTp4/Q95Iu8jg6XENd1B2x7zxmZiU="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-576.json`
+
+```json
+{"private":{"type":"Buffer","data":"iF+th0jArHYGD2OjokJlluZ/Hn/FzHnsaO0oUEBgXGQ="},"public":{"type":"Buffer","data":"769UgwGPp2nV2KDYSit08BC/tTRe2ks5InA+XcnfqWU="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-577.json`
+
+```json
+{"private":{"type":"Buffer","data":"uJaBzYeNco3i4eGVnROaHBlPTYezmqJJIAf0I6A/wk4="},"public":{"type":"Buffer","data":"W7zdrpJnV2t/1ywO7zMzwkIbGbe0Hk8Y7EWTzSd0tgc="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-578.json`
+
+```json
+{"private":{"type":"Buffer","data":"eNw5dzZjH5lfOqWzXUFMrzFuDKRiYgWvWdVBEII1Pnk="},"public":{"type":"Buffer","data":"pMtuPNUM6ijAUBrC/ER+tz2IkxBacrwEVhUPQ3cGhD0="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-579.json`
+
+```json
+{"private":{"type":"Buffer","data":"QC60w4ytU8cQaryXrOamWGXYmyCokPBuG7ZSBAO3okw="},"public":{"type":"Buffer","data":"Q21rtvmy7pu45FrpDHVKD3Y3sUrEr4uBzuZChVDwOAo="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-58.json`
+
+```json
+{"private":{"type":"Buffer","data":"YJVfOLF2E6J3Z7EwxkQNnnkxrJOSnpjrnU45BhmMKVA="},"public":{"type":"Buffer","data":"maX3o6G7NlOHVNTKjYuFkIreIqHP72dShixJwRnJ+0k="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-580.json`
+
+```json
+{"private":{"type":"Buffer","data":"yJoqVjEmR3YMn0gm+JOrZk2LpTWLrH5lU7OeDuBoSFo="},"public":{"type":"Buffer","data":"QKh76nlRGl8PwC8vxu4I4BA2PhW5yz3IdR1CCkVpuk8="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-581.json`
+
+```json
+{"private":{"type":"Buffer","data":"OLXv1hn8czp6wKFhaTXdcUMfjZffjaUds5WghkGKN0U="},"public":{"type":"Buffer","data":"RsxF2CqtrKkKt3efb5t4aT9EpQJM9+wfrm67rzr7JkE="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-582.json`
+
+```json
+{"private":{"type":"Buffer","data":"mEDKzO6l7SbS3IYqbyzE7Lsb8XkFYT9T/hdm+OGobEw="},"public":{"type":"Buffer","data":"qFYBZgKIJ0Py/RdMqBqdMgyWp8xG+DB4XYR4Xl9vLT8="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-583.json`
+
+```json
+{"private":{"type":"Buffer","data":"6J8qdz8XkEX11m4umi8rbSh1ItkoYbxO3qYaEmYPXXo="},"public":{"type":"Buffer","data":"JDD8/WDjjLC2MQHLrHtqCY6lzwoaffLe8nNIrinyE2I="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-584.json`
+
+```json
+{"private":{"type":"Buffer","data":"+HmzrVao/dbWTtBjOMWjiwra55lqJrqUCY66A36jVG8="},"public":{"type":"Buffer","data":"h7kWKbKVtzH8iZfwvn3sOHj08E+FYE/WHbYX4JROeko="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-585.json`
+
+```json
+{"private":{"type":"Buffer","data":"yJQZ4AbkXxxRWwyybtY5XED5odwyIoJkjzkqM8uSvlc="},"public":{"type":"Buffer","data":"aCU5B8AzwiXfi6QJKGMJy9Ip8Uwo+DhO9smkyeSE8VI="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-586.json`
+
+```json
+{"private":{"type":"Buffer","data":"aFjJwibCadGxtKGD3f0IQv2uJ+9/HF/YjqZ0fQD/mmc="},"public":{"type":"Buffer","data":"nIhyk+k5Gd6/LjF2OVdO1aaisBIH4SCZWaVcfDE6ai4="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-587.json`
+
+```json
+{"private":{"type":"Buffer","data":"qFK53my1m9deselp/UYmdnzLR33bRPZqMv1cMEIXl38="},"public":{"type":"Buffer","data":"zVQFs17GZatGQAx8ULIa4R5pb8hJSUyG0k+yD7dUSGc="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-588.json`
+
+```json
+{"private":{"type":"Buffer","data":"WG1bgOdQ4dFsEQp+WwyE1RHQQ/liXzUphjHzv8tWFEA="},"public":{"type":"Buffer","data":"QRor4FzZ/xXaqqXI4zVd5NaI891zSPXuia0sdzO3ezY="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-589.json`
+
+```json
+{"private":{"type":"Buffer","data":"cJDcRqpoETE6XAbdawW9mvWSfHfqat7boME3W5cHXmU="},"public":{"type":"Buffer","data":"XDvs3tLP8Do22lok+OsQ40U05tkoD0EZU5t9idDbIyY="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-59.json`
+
+```json
+{"private":{"type":"Buffer","data":"QKEXvGFs5SvKAyF+LnVCoTdaAkoOMsXYn42FFsyCEGo="},"public":{"type":"Buffer","data":"Rivoun9p9JzX1kNQZPP8uwDHv9v+jL87qBo+g/yAB1k="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-590.json`
+
+```json
+{"private":{"type":"Buffer","data":"qJJM14bgVtsI+1jt6HUeYqYE8kd5UY/lgZzD87U3kGw="},"public":{"type":"Buffer","data":"EN9fTNOtKQklpUI6GZgdI0fLahmnUOICb2i2AOD+T0g="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-591.json`
+
+```json
+{"private":{"type":"Buffer","data":"MFy7ilBposZvg7hwCULXwekj/TVS62ZwFngSmYRQ23k="},"public":{"type":"Buffer","data":"66x7uMK3+VCDRnQ0pWMmcbJ4qpHglYXaB8efcZT3s3Q="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-592.json`
+
+```json
+{"private":{"type":"Buffer","data":"6ONtU53X59FhPqMGy+354NAEUuHk9bEES5zfbDSu4Fs="},"public":{"type":"Buffer","data":"AcR0uDfJ1un3EFn4Yc4c5vCwlm5gbW7Ch89n3wBUqXU="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-593.json`
+
+```json
+{"private":{"type":"Buffer","data":"4AQn2vQxOgMgtL2yfzhhFa3ooaWhx1qFB6ub9X8BV2E="},"public":{"type":"Buffer","data":"vck0StyCgObsRbDT8w2kUm1zV5tw0p4EpnASEpZr1ks="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-594.json`
+
+```json
+{"private":{"type":"Buffer","data":"wFvHk6kz4+kD4CymwpvN2yggJPTV3UJYzPymcZ66Ulk="},"public":{"type":"Buffer","data":"HSd28YQC3pvYm8k24AW63iFv1nXTTzp80E0DxrnT4ko="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-595.json`
+
+```json
+{"private":{"type":"Buffer","data":"OJWVCaVn3Anm1uvvG7Xdds79A1GbFMRmLDDH1IihmHI="},"public":{"type":"Buffer","data":"hIjUPo2C8kxSo3wOks6GJ9ZTLSPVnMlq7vYOrrG/ehE="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-596.json`
+
+```json
+{"private":{"type":"Buffer","data":"gKX6puICkkmNIyZ6v0gADEAqA/meOML4v0SWV/IMakQ="},"public":{"type":"Buffer","data":"dAg9Rb8k6jwdV/hVgV2t7vP3I2TTAEmadpavDLSYmHk="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-597.json`
+
+```json
+{"private":{"type":"Buffer","data":"WBqwSZur7ovY+51xIu9SCqZUfKAQeDGiIIQPaxTyWHs="},"public":{"type":"Buffer","data":"ozlrK1pUDI3MP6/ZBaUPtTnwDJHXWpAu+dJ68a1qOT0="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-598.json`
+
+```json
+{"private":{"type":"Buffer","data":"ODo/3vmxhAAH/bFB6fSNq9RDSE0y139aqu7dIstHjFY="},"public":{"type":"Buffer","data":"LQq8z9voBKF+pWm2uJOAfSMGDvL+7zUCbD58BBrkxn8="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-599.json`
+
+```json
+{"private":{"type":"Buffer","data":"IL9oc5+U6mK/Jgk0EuQDUj1CMlSMi2ypIFxPQNYinVo="},"public":{"type":"Buffer","data":"scRIeubRvjcFAjFpLpZcWjW8hS53OzJ/pYkGeYu5l0s="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-6.json`
+
+```json
+{"private":{"type":"Buffer","data":"qI/mZ7UJnvUr6VgAA+Ib/Xk/2lr9xyTb6qvh/xkVd2M="},"public":{"type":"Buffer","data":"fGZw9xljCPXCQrSVUuO4AVsaC0j69gUkDoDvkJAs1iI="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-60.json`
+
+```json
+{"private":{"type":"Buffer","data":"oPZynDPAbt8hJufuaiwklLfy6X8exB3ibgnj4SHyy3c="},"public":{"type":"Buffer","data":"OTSCWMZ/dgF8zpNbVZRnQFxKORuwaA6WHH24mI/vphc="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-600.json`
+
+```json
+{"private":{"type":"Buffer","data":"SH/4C+sQgE5ISL4QZbkmGECPQ/0OxRSZql82lU4xMnY="},"public":{"type":"Buffer","data":"FRrnlKX0xII9MWILFx8GOS5+EPVc/cmTKdJ+rDyTCQg="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-601.json`
+
+```json
+{"private":{"type":"Buffer","data":"mIKO5vQO1n58kISyjyu/4XsLeOXJ4sCrVDKzrDO0PGQ="},"public":{"type":"Buffer","data":"FPkp11aR6DpqERDTDlVHVshK58X9w5jaz1K/4D/ezCc="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-602.json`
+
+```json
+{"private":{"type":"Buffer","data":"2Cb1Gb7LAh0FjeSWTU6RjsBkm9JAYE60t6i0Z+GmcGw="},"public":{"type":"Buffer","data":"Yfpx4Yi+xM7hDkJJTb+Q7cQncBz0Eoq/hZSxfL+Dglk="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-603.json`
+
+```json
+{"private":{"type":"Buffer","data":"WPlqnCGQk0Ap7Ad0uPHj4XZLT7k9q7PiJ9Bj7cjzj0g="},"public":{"type":"Buffer","data":"kGCEgxyaGUd7tvNiiNkhTK8kYz5QhRB/xjSXIC5Zhgk="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-604.json`
+
+```json
+{"private":{"type":"Buffer","data":"WNeBCdgjZRdDNE5E942eVQoMgWLFY1LPh5tvIJYqd0E="},"public":{"type":"Buffer","data":"v2L2sEZRILjY9un4B8Jm4tgskr9tY/XwDJciVfm7rlI="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-605.json`
+
+```json
+{"private":{"type":"Buffer","data":"kECzT00okYk6nnHMlvOME5SIB3FVwhfiLoUTuHr5/nY="},"public":{"type":"Buffer","data":"CvELZnXbFuXNLJFqbAV24eutVvl9TiFo8eW5lrpRBVQ="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-606.json`
+
+```json
+{"private":{"type":"Buffer","data":"4BzDI3gSqPnJ34lGOPkrPVJ3A2BT9ANgYxSD0BBXi2k="},"public":{"type":"Buffer","data":"vf8xbAyPyUKyIv4+CkvcVIqOWOEugpojavz0Q78qfjM="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-607.json`
+
+```json
+{"private":{"type":"Buffer","data":"EBVv2vK4EmkQJK5rxDYFNaakSa8SwPd1QxG4J7bX5VE="},"public":{"type":"Buffer","data":"4ErFiRKWsPttTkkHyzUlZvoiRUVwZsmgo32LGnveNQM="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-608.json`
+
+```json
+{"private":{"type":"Buffer","data":"KFyCUSplvkPYbVyLaUypQO+bVWXPihiDym+8fodTgGk="},"public":{"type":"Buffer","data":"6lZ1gBS3bhYkTPQwW3bMdlGbIs47qy0NdizOZA1g0yU="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-609.json`
+
+```json
+{"private":{"type":"Buffer","data":"WLtHc1j/Kd/NAvAWbhxR+b8GaMuGS8HaTkusV6SWEnM="},"public":{"type":"Buffer","data":"0wBuwmaqmAK4pNEo3LiXxlCHzIXiXrm4bv91KgE+Ams="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-61.json`
+
+```json
+{"private":{"type":"Buffer","data":"oLJTD1e/0Yx+oSyoTEBOMPl6+DDtZefPK5Jzurmzf2M="},"public":{"type":"Buffer","data":"+UI7V6nxAy10OPJpHSJU713iLalic4QMkpcju2HQhgI="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-610.json`
+
+```json
+{"private":{"type":"Buffer","data":"KObyi5STySFgMDikCU4q48J+uk1elYM5pp/UxHieSmE="},"public":{"type":"Buffer","data":"W4FqdeN6D357oekVixijWYX5l7lnGFu+z3FKzMw+ghs="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-611.json`
+
+```json
+{"private":{"type":"Buffer","data":"2FF5V9aGo6smMeMJQwNV9MpQMkZzBTnKa6HFk3LGukg="},"public":{"type":"Buffer","data":"u+oQdebsvmorWsEmmS7mekXg3ZhADKleODz1019PZQ4="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-612.json`
+
+```json
+{"private":{"type":"Buffer","data":"6EVbqoRv3P8tl+GG7uxGjrc8mWFnviNe58y6/TuyTEY="},"public":{"type":"Buffer","data":"bnKuqRbsqmbD64BU3miNRxbSAgPTA4tsIWkZ1I/S3mA="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-613.json`
+
+```json
+{"private":{"type":"Buffer","data":"QB/rTVfXHoEk+4vxDcAQ3Z+SdYDJySd7mv3kC0zsxU4="},"public":{"type":"Buffer","data":"26CEHMXDeo4rZTWjIdO0MSbAGp8XhjBU7Jv7rF8l7nY="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-614.json`
+
+```json
+{"private":{"type":"Buffer","data":"gF0GtAiqr79JWRzs/cHS5ZNjFoRet/d4/yPZimRqHVs="},"public":{"type":"Buffer","data":"d7mhaFNOYD7mh4CTNhVt/qoAW+iWBZVouTpGq24PcCQ="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-615.json`
+
+```json
+{"private":{"type":"Buffer","data":"QJQS6Ab6Xvd2EKtmgiINanH7hpO6IEHZYAGWJ0Vvn2Y="},"public":{"type":"Buffer","data":"ItxRIo0dUzUZNLBMYrmikaornJrYanu8QYUIk/OUDUM="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-616.json`
+
+```json
+{"private":{"type":"Buffer","data":"uBOlme3po8HB9+Gia0ETPlm8sIhPYxNS5R/grGtkmEk="},"public":{"type":"Buffer","data":"6dqxUODCtlH3jwlk2FoYaLDglmvJum1m6d5KxqAS4n8="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-617.json`
+
+```json
+{"private":{"type":"Buffer","data":"oGY+tjdZoX4Mb6Jn4sejM0lHFUJgh318Pb8wXbYR/nA="},"public":{"type":"Buffer","data":"tutPzKBTzwNJvjSJMMPk98sim9D3tJrSnS7fhtrlbk4="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-618.json`
+
+```json
+{"private":{"type":"Buffer","data":"eBbSph6nCythpG0FPZVA/URJEO9r6Njr09y3SCEHZEw="},"public":{"type":"Buffer","data":"QriIYOVuHm8XVMRGl6JRmSQnA5uPEUF5DCqAom6+f3c="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-619.json`
+
+```json
+{"private":{"type":"Buffer","data":"WHQ1CcIJOw+b8v0R1UVFJn2wAsUGYGKiHjbPuJocLl8="},"public":{"type":"Buffer","data":"+IAGKlSOLNOD+/RiU9bi1qypEluubwRFR8eNDaPMuxA="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-62.json`
+
+```json
+{"private":{"type":"Buffer","data":"sGO7p4iP+50tOOsSVxu++/eQTMVXpGO/4DrQQx79/24="},"public":{"type":"Buffer","data":"xzml8J37nr3mSDUVPUW7X6mgnaOLgs5MmO7fICWXgzo="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-620.json`
+
+```json
+{"private":{"type":"Buffer","data":"kPHINQtuXHA/WxAPxxTTOSVI6H+7o58nlxK+14m0IFo="},"public":{"type":"Buffer","data":"TPR5tYJHEMZsPyAadlK98uo5qv7sIuzM+3sp84wk+yU="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-621.json`
+
+```json
+{"private":{"type":"Buffer","data":"EIhUPrALiumWdr+9h9hm5rkmbdGHumUaGeyLpxq6eFs="},"public":{"type":"Buffer","data":"2Va6I5Ze97Cfa/8+IJqt9uBed+G4s1kjfbSh2qKaeyU="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-622.json`
+
+```json
+{"private":{"type":"Buffer","data":"IJ+f5nrae9nYs30t+mae6T56teUa/fmtPAJmPp5mnlo="},"public":{"type":"Buffer","data":"Gm7RTm4ctRo/MCtKVRYUzc0kxcXKX1lxr7USf++oe3g="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-623.json`
+
+```json
+{"private":{"type":"Buffer","data":"0Gdt0o8OR5jAnKzN6pqPZvaREf81D354sL0LRArxKlQ="},"public":{"type":"Buffer","data":"g+Y6QanhVmKqYuPjH211nQSssSH3YegqatrmtdZzqRk="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-624.json`
+
+```json
+{"private":{"type":"Buffer","data":"4D5x/hTc+TGIGCa69hevpArFpLxYmTR9e/ej1vU7K2E="},"public":{"type":"Buffer","data":"dhEMhXWEAlp1066oQiTqWAT4AJwDHKw9ihuaqKc06X4="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-625.json`
+
+```json
+{"private":{"type":"Buffer","data":"6AERIcy0a3jwsPEpFzz8eLumQZYpQVp+0KRIN+bzd1Q="},"public":{"type":"Buffer","data":"uG5gCuF87lfViK5OzZCWx+huyGB+dqVqlU9QYG/2RwQ="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-626.json`
+
+```json
+{"private":{"type":"Buffer","data":"cP/CdA8Hk1uIR/3iB0xDwiSx1mvznuRtg2ijh/GuclU="},"public":{"type":"Buffer","data":"vtSUltwItyxOyDYtZo2X1NuMmvGhLRM3EEGQIoJEUi8="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-627.json`
+
+```json
+{"private":{"type":"Buffer","data":"ALmQBgfqZS7wJggWHx5YD3TVvK4eS6nA4MsmcMG4tGk="},"public":{"type":"Buffer","data":"CmRpKCdGE54O71jRma9qdqdz1WroAIAoc/QZ4a7h8Sg="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-628.json`
+
+```json
+{"private":{"type":"Buffer","data":"MAcCyKKNg45laVA6JjecskN5I6WkQG2VrGHiwmRUCFw="},"public":{"type":"Buffer","data":"NEAmFXxd/IvhA5T0JggR3x2khsxSDAG+cvkua9rjQCI="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-629.json`
+
+```json
+{"private":{"type":"Buffer","data":"YBFSzq2UE9TDc5FqXipxCUzXIgGvDrF+gJLSqWG8Y1Y="},"public":{"type":"Buffer","data":"6+0dPJD6Kgu6uVBiTr2ij60klAqA/guyOr7EnHir3hM="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-63.json`
+
+```json
+{"private":{"type":"Buffer","data":"YKud432/8uPSZuWlWjUIxL/WVpzCvhPQNtdfTeVxxX4="},"public":{"type":"Buffer","data":"reHGS4UTpIiKZTCnhgzvEvIt1p8UhCm6QsarNpE5BDk="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-630.json`
+
+```json
+{"private":{"type":"Buffer","data":"wDO01Yb43SIs+s/edtjUFsUKZd2I7XcNc4Ii4H6OeX0="},"public":{"type":"Buffer","data":"aiBCb1q7+AYXszlefHznM7OYDyCPda/n0zuKSQzE5z0="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-631.json`
+
+```json
+{"private":{"type":"Buffer","data":"UDnybTReLwfj4qAHylM6kOaN8VuVWD7PhpNV/VSxknc="},"public":{"type":"Buffer","data":"8jsbmLsH8tqgks4s+WQ97DsdiRGuWIKHmhlXp3W7MyQ="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-632.json`
+
+```json
+{"private":{"type":"Buffer","data":"uEClTYzxwWj8KfwuSAdvRbeTzNw4sBqXdE1ViYUJaEk="},"public":{"type":"Buffer","data":"nbd1+wkqk08cAcCdnRnv9QB3gcEqYoiTlfGYD8iKtEc="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-633.json`
+
+```json
+{"private":{"type":"Buffer","data":"sBNpvuvW8c/EWzk1xOx2nYqWGiF++gNQqHpZUjt3l1o="},"public":{"type":"Buffer","data":"TKcV13ScqSem4Fny2KIxemtYp3Z1DcAejP4vwAvDoSY="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-634.json`
+
+```json
+{"private":{"type":"Buffer","data":"4IcOyoetgolZjoCcbAGuCJKzFzjRaIEAFp0t6sONikE="},"public":{"type":"Buffer","data":"WdnLmwQ5mX0qRPZ+tD3LapuqLwZxSix94fl9jqdN3Eo="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-635.json`
+
+```json
+{"private":{"type":"Buffer","data":"sAl5xcUp/nQGzD50NKgKBIhdK4iSOSdPxPDpdSh693s="},"public":{"type":"Buffer","data":"gjWda7Xcwwr0FJFIlmXAE+5BwuTRPI4jAdwidnEbkgE="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-636.json`
+
+```json
+{"private":{"type":"Buffer","data":"mNH1SDwyd797YB80MOHHu9rs+4r1sh+jKVLVrMfh/mU="},"public":{"type":"Buffer","data":"WzCouWbHbsDGH9J5vxTKlpesCJkhgMpHGv3jbvcGdm4="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-637.json`
+
+```json
+{"private":{"type":"Buffer","data":"mBmp3qHo4mdt8GRY+rHKLmRcjVEa9k/didIYDlUbfmA="},"public":{"type":"Buffer","data":"dfwyEfTx6eqsnrjrIfdFR/j8P/DghO3VFAh9TmzJUXQ="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-638.json`
+
+```json
+{"private":{"type":"Buffer","data":"UItb8iHTqURiMfE1e0tr65KbC922Iaffy+h8CxX13ko="},"public":{"type":"Buffer","data":"fSUKYj8/hkGTc5KwUv1KLMW4ThVSEZumcdYl3NuOIhY="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-639.json`
+
+```json
+{"private":{"type":"Buffer","data":"oD/VAE2nYSBTEN7GY9l1bPG24gPRiIF170GUSRE0XH0="},"public":{"type":"Buffer","data":"OhOJKq1qiHpy0TNHocwE2hqo51uNelca+N0doRCqxjc="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-640.json`
+
+```json
+{"private":{"type":"Buffer","data":"EFZVknmM6XY0+idA0KVnS9OgHNbgnBVaKg15lYevQWE="},"public":{"type":"Buffer","data":"NZXdEBffP1vzkTKQMoIlnVAMLxFymHMCPsJz28Ge2is="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-641.json`
+
+```json
+{"private":{"type":"Buffer","data":"qJU/vvUy6op4irBAYzKmFufEmEmZ1j0D6gYiITh1TFI="},"public":{"type":"Buffer","data":"tgdd+2uohqqUCJpTKipu6MW7vMzmTvrn5KHjJv9RLjE="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-642.json`
+
+```json
+{"private":{"type":"Buffer","data":"eKNuVxv5nkikslEJ1amHdFuy0FWMdtu1gPdhRsdIqGk="},"public":{"type":"Buffer","data":"PrIGAuu2w+4zbJIvwSvRkK4md7k6IA0HuXbOSRGd+AE="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-643.json`
+
+```json
+{"private":{"type":"Buffer","data":"0IsCM4lu4cMHWgwjfTi9A3rUIquuNobWQ1jIJYUVD1M="},"public":{"type":"Buffer","data":"HwHklqCftP/aRtbznZoeOQ1qTt3dUWRHTJeHB6zdVTo="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-644.json`
+
+```json
+{"private":{"type":"Buffer","data":"UO73hWOHP6YX1u2oGkFC60mcRRxbra1n5xaXYC9wwnE="},"public":{"type":"Buffer","data":"4nhpQUErfVCG5XMqhhZ9vfQ3nZzgxmRuXMDANvxLll8="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-645.json`
+
+```json
+{"private":{"type":"Buffer","data":"AH8GHNU20KgRljyqS69vWGpM1KRuxkbUrwepqCgKLXU="},"public":{"type":"Buffer","data":"lg79vV5w5x8+O8Cv+dopy3OCFswYe4UlnR9ew9tFBnk="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-646.json`
+
+```json
+{"private":{"type":"Buffer","data":"QFCOztLMpeJTa6GtQ5HfcUsZd+v1KeHYvbfFPbyqElI="},"public":{"type":"Buffer","data":"xBZVbgsx7BnlDnfE4zB9B6qclT1KdyQUPndghAKTRBI="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-647.json`
+
+```json
+{"private":{"type":"Buffer","data":"uPj4YvmKH5yi0znZVjCuj3QofB44//E25CWSV6xh+0A="},"public":{"type":"Buffer","data":"fsVAjUEvAf4tHSsVVUi1W/huLgCCcCVEEvwrH4HW12c="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-648.json`
+
+```json
+{"private":{"type":"Buffer","data":"GBWunhJvflW2oxwfr88ofy8bmfqrfPYzcLkEBwM623I="},"public":{"type":"Buffer","data":"czpqI0lx1/sPJOmbEbjAqZVaR75Hjj0K5GZ0Fod/Fzs="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-649.json`
+
+```json
+{"private":{"type":"Buffer","data":"OLSEICzfn77WOdNpj/6mDqP2Ts8T0wvm8wD5V8rRa1E="},"public":{"type":"Buffer","data":"faMZmvi/MzPAN1mkjtmDfbhsqTkh7UwrmNp5GYkT1TM="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-65.json`
+
+```json
+{"private":{"type":"Buffer","data":"yHneNumiID27NI3CVr81uIfTqQFEK1QPO89Q5x1bDlI="},"public":{"type":"Buffer","data":"cCcRF6EB8vvAFc318wwXZYTGziWHV4NImvhitCID4TU="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-650.json`
+
+```json
+{"private":{"type":"Buffer","data":"gFFIQRMr5QZUxz6znqPWT8QRhircaWq2ASaGkbSSLFE="},"public":{"type":"Buffer","data":"g665X2SS8+cwVLT+H7t9fvrckUW1hT0oVAAFOEt9NnE="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-651.json`
+
+```json
+{"private":{"type":"Buffer","data":"CCbfYgEbgwu2+uSIT/GusMfcxkfihiNSM2d04U7urk8="},"public":{"type":"Buffer","data":"7cL9WxJYNYgLN2qPjmVvxDajv7oHtKDF8SWG7ErNjA0="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-652.json`
+
+```json
+{"private":{"type":"Buffer","data":"CADSvzXplUZhwnrN8IJQbOUM5Vi1XHRVoya/3s91lGs="},"public":{"type":"Buffer","data":"LOd7Ho3w831POK/6CJ44SkJnQReSmQ8xbWIKfekP2kI="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-653.json`
+
+```json
+{"private":{"type":"Buffer","data":"ODPbahtyHYSstEF9y3N/SusMxB7jpvEGICfazieNU3c="},"public":{"type":"Buffer","data":"juNZ4y3vglWEKnmwDJz85N6n91DuteFJ0aCqKjgw+gw="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-654.json`
+
+```json
+{"private":{"type":"Buffer","data":"sOmq3X2OV43Mb2T2lVM/UUUSOmODFd03o+Su9z4yiGs="},"public":{"type":"Buffer","data":"pS5A4fKHGS+bi36s8aahNh3wIAw5jpZElRXN9FqTbUU="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-655.json`
+
+```json
+{"private":{"type":"Buffer","data":"+FdL0H/xVoc1xWWhaucbVe+VEKAiZuvArue0Da3d2F4="},"public":{"type":"Buffer","data":"dmqaMPyrnsXWrtfg/SXsZztgZqps/AnIQEO+ci8aUTo="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-656.json`
+
+```json
+{"private":{"type":"Buffer","data":"YMUCO2OEpaNwz1TlSWPxqs/WW/yGVBp+QxiMYmRr5W0="},"public":{"type":"Buffer","data":"jxKvNdBUHins5ZAWpAiegAhpY7mVmeYNCUTlMPSdujk="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-657.json`
+
+```json
+{"private":{"type":"Buffer","data":"wNq4DPRd83lVrgCvvH9FYR2eUMSjVvxdbhY0W33dd3E="},"public":{"type":"Buffer","data":"3PGKFWzmdIvlDo63ir0JXpMq4uyI/zQKH/cX9Njqgnw="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-658.json`
+
+```json
+{"private":{"type":"Buffer","data":"KNXYJIMraLYbhOIEm05BN4zO9q0zR6UsODQaTuRP8VE="},"public":{"type":"Buffer","data":"RUBH2XONpVTz+YU9d39wgsQ5Il/ZJNJ2zPwEJbxJnEw="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-659.json`
+
+```json
+{"private":{"type":"Buffer","data":"6AGWE3V2pbPvvp6h6tQNZAIwjMdiXA6KZji68T2xHUE="},"public":{"type":"Buffer","data":"qGrZ2KiZScEPHP6LpzCnPNrkE/bczbWS/G3mSBD16zQ="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-66.json`
+
+```json
+{"private":{"type":"Buffer","data":"sEwZ/nBvIaoGoq6DGy4rpefCPoLLo75Gzdbt5RsL32w="},"public":{"type":"Buffer","data":"NHhiLF1A5oVlTFM96rN11iJM4S6NvRhg2DgFNoqzBWw="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-660.json`
+
+```json
+{"private":{"type":"Buffer","data":"6GfZcZeZBDZB3nFkL888LEcbiG/f8Q4xdrm8st9rmEA="},"public":{"type":"Buffer","data":"5sgOG7b5U6Lgn7QnrsZfWoWGrSRLnL+IaIY71Rl4QXk="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-661.json`
+
+```json
+{"private":{"type":"Buffer","data":"iJHUjfvdCStq2wQT8BVkscvt4E+JB/oM+o+Xq4z+xH0="},"public":{"type":"Buffer","data":"zFP2P1dnQexJE2XWi0xhNC/syqk4tYZxHnUdYxHBjHc="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-662.json`
+
+```json
+{"private":{"type":"Buffer","data":"eJKajWlAfpg1zwt+VmE2folYS3eZAUBjj5ooC5aVnkw="},"public":{"type":"Buffer","data":"F6NFva5eKCadBUI8y7+3PH2v+q83kNG1jU5EGbatMwg="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-663.json`
+
+```json
+{"private":{"type":"Buffer","data":"+NHYQeRTDYzFHjhuYDrwUqlhlY3oJuz8wo8AZ/bfRE0="},"public":{"type":"Buffer","data":"mVj1Vr+ba477K60NNigXmvFfWmv7tN61abURmlUqxHA="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-664.json`
+
+```json
+{"private":{"type":"Buffer","data":"2F17H+WQCIb9+m96NUEAKB6cr/rOr54VXfZZWTi3F2E="},"public":{"type":"Buffer","data":"f1a3qTCHBDfArj/ZkZ00pC9X/dUzUOSjJsZdK8Alyng="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-665.json`
+
+```json
+{"private":{"type":"Buffer","data":"ECP17YokThHDtX+RPrfo0H/QAP8g7xV6u5yJO4YGuWk="},"public":{"type":"Buffer","data":"WaKYbq9NUewn/BwAJVcvMHX++Kh6N3xkNkhvFbXmSxk="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-666.json`
+
+```json
+{"private":{"type":"Buffer","data":"aAyzFXEFxTGGj7jzxJZFQ0VfcrlFof6nXtqQItptiXo="},"public":{"type":"Buffer","data":"yrRwyVWeKFIMbnARJoQFFQ+eFiBwKG11ilKYQC2nqGw="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-667.json`
+
+```json
+{"private":{"type":"Buffer","data":"oB3xjsnB/O8+mK0VcxXzcU74bUzI8j5m8imCQIUYk3A="},"public":{"type":"Buffer","data":"373Q0wcFNnOfUW83odRmm9Qc67xs2ecnTArt9b4aEXk="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-668.json`
+
+```json
+{"private":{"type":"Buffer","data":"2FoUZyevJOvqdDqOSzc5rISFpQlemD6gTzFxW+b7z1Q="},"public":{"type":"Buffer","data":"kmrA/gGmPt0ZRCH/UPd50xnesSDUjEgThqo2YqYAWRE="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-669.json`
+
+```json
+{"private":{"type":"Buffer","data":"GKlKhSnEpZflsXr43mEDPZiHlnSr55MiT9r2BYrFGmw="},"public":{"type":"Buffer","data":"UagrewIPuS+z6nncwcxrYUIaAVK3AZm1JlGJsAqoY2k="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-67.json`
+
+```json
+{"private":{"type":"Buffer","data":"QOmmkvzCCTx+/7ycjsHlTjlpCRHu/hmy43H2SDcp20U="},"public":{"type":"Buffer","data":"jcP7y3/KaQv8TEluYtLkJyMJimiSz0S69z9Pm0VATU4="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-670.json`
+
+```json
+{"private":{"type":"Buffer","data":"+MnFFtL42fstxbQ452yM0CBRARZoF9mrnThP71oU1FQ="},"public":{"type":"Buffer","data":"xCDSGvH6VQ7piSRJhQ63GnLC/YkpauvitbiRSCZxnB0="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-671.json`
+
+```json
+{"private":{"type":"Buffer","data":"qDBBzbEx/YcLkVAEdTorlGj0XV1YH6UKU3/KLxN0glg="},"public":{"type":"Buffer","data":"+nsLP6yRJbRJNttFxZld+2VlfII6fagdXNWyEexupk0="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-672.json`
+
+```json
+{"private":{"type":"Buffer","data":"8LcWKhtoOJ46d1ORAdBERlPj41axkpb13MDtEe7tw3I="},"public":{"type":"Buffer","data":"XSTB5CmEdYpH7Z6jP6Enh7bZ4CbxXnLxbxEjjjb83Hk="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-673.json`
+
+```json
+{"private":{"type":"Buffer","data":"WNiZUl0FgVXhgZqZ9m+pPGyHCgqR1PoC4ruZ95BKI1Q="},"public":{"type":"Buffer","data":"0WJqTbPtELjpiwOyW/6djSZ1+aYco5HPZvjQmFkZ0Dk="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-674.json`
+
+```json
+{"private":{"type":"Buffer","data":"APcPYJA5Zvl3MuBbxveY0ZXSup+arJ9m8BjKI/KY4WU="},"public":{"type":"Buffer","data":"627y27JdpFV4sFUtP5Zu6x8MblyMaOr6b5k30VdAeR4="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-675.json`
+
+```json
+{"private":{"type":"Buffer","data":"cHd4vF6hzhcpawEdHTWuR30WgyNl/KZEO+Y27OgJ5lg="},"public":{"type":"Buffer","data":"no72N2RqcCbGz5ARIOm2ilTS7LMXdafyQPJSIR2OtGw="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-676.json`
+
+```json
+{"private":{"type":"Buffer","data":"UKTit10Erwe/GNTFitcsQlaHuapzow0fkbzcTaGfEFI="},"public":{"type":"Buffer","data":"qY7EDDiRVA2mvccoZfyI/4DCSstQQXjZHeydijJ1UnA="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-677.json`
+
+```json
+{"private":{"type":"Buffer","data":"CPQfrNBtGRj2bCaXhXcPlKW2U8zAow/IqN5gg8PuiEs="},"public":{"type":"Buffer","data":"WpFxCXKAcrcUEduSvoHdN9p19QuVaISTDOMpf3l0Nl8="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-678.json`
+
+```json
+{"private":{"type":"Buffer","data":"IC4twNw1VJYvupuYh4ClNIwbsyt8CQ5k4BniNunKZns="},"public":{"type":"Buffer","data":"KS04W8FBb3l/zQ3kszRepzIpkPgLSwCuvwvQ/MJ1D2A="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-679.json`
+
+```json
+{"private":{"type":"Buffer","data":"CK7FPLYjPFSn/LzS56KX+dMy7/aJea92hNo2DkY4QFM="},"public":{"type":"Buffer","data":"DyFt2VJrtnwQU7vFBeXJl7gORnbeXMUDx2QA4T/Jq20="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-68.json`
+
+```json
+{"private":{"type":"Buffer","data":"GLwuHl7vg5QeXoK1s82ox7+7WgDz43tjg9BkdfoddnQ="},"public":{"type":"Buffer","data":"FtDBxhkDQr2YacHmVp1fTe1x0Bntb/kk3Jiq37pHaw0="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-680.json`
+
+```json
+{"private":{"type":"Buffer","data":"KCPMPXM7SFeY3VhldqfQ8HIPgIgkryopgeM0NO4nv0A="},"public":{"type":"Buffer","data":"sPRgLEx80QSwZymlg8pdWu94uh4kXvkI+C8DldHJxSE="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-681.json`
+
+```json
+{"private":{"type":"Buffer","data":"QH/I51Ch0q4Dsmj2V2UXcdijISuvQsQwXMej71Metns="},"public":{"type":"Buffer","data":"e9Xfgd5YSJuetrawM637e0zRYStvEAXJzvmSU5wrT0w="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-682.json`
+
+```json
+{"private":{"type":"Buffer","data":"4J9P6ZmDWhrh3dja+CvSAwtaREPmkBpmcCPPF50PcnM="},"public":{"type":"Buffer","data":"jYsK+qNLex82ZifOHUGWOrqlwM20JZhQmeCC8HLDQSs="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-683.json`
+
+```json
+{"private":{"type":"Buffer","data":"mOIis5Xr3xsgXdANvuK1vZm4QOl2w6erKIT0hf0w0Ws="},"public":{"type":"Buffer","data":"zzcOZJyIsNqOx4O0QaTzQ3uJQUcy6ZEUoGLaZQjiKkI="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-684.json`
+
+```json
+{"private":{"type":"Buffer","data":"8DDzJ2YshJKIVaITU891BCmp5j0rlEcPW0o0N/OuJlw="},"public":{"type":"Buffer","data":"dGPe27OGSVcinEOPsp93ye5P/bIP33n7YKBmfH7ghTE="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-685.json`
+
+```json
+{"private":{"type":"Buffer","data":"kLYFUqBk6XICVJqdaAveZkP7VjQANUgcI+8a6PC68Fw="},"public":{"type":"Buffer","data":"W8wNb0c84nUUU+iuI8Jv/p0d7aInyNWgN/7X1jj7+iw="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-686.json`
+
+```json
+{"private":{"type":"Buffer","data":"oJil+amn+/+eeR4cvE+6jmpeW4LZ3PXZ4y1lFec+kEs="},"public":{"type":"Buffer","data":"F0Way/hgR/ceC8DDUVHNsqgUpSznvdVBvA+wnkEBRg8="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-687.json`
+
+```json
+{"private":{"type":"Buffer","data":"0KZhZD+geDTHPKAEi7kbXJEkeFXEtHSdv5hS/NWsen4="},"public":{"type":"Buffer","data":"R5aiaPx5n9cr1jMQprhfOeUoMlt1yssm6oBhOHw7PH0="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-688.json`
+
+```json
+{"private":{"type":"Buffer","data":"gHiS7JN02HDvYKHz8LuYLI1iih9f1hxbfGH9g57PW28="},"public":{"type":"Buffer","data":"J38v29IQJe7UBapLKmavdexrwaxbutuBT+SPDYikSHw="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-689.json`
+
+```json
+{"private":{"type":"Buffer","data":"uPZE4DJ7NwG0Ssed8Q1MpAl0dNahw9LuFTL+22DXll4="},"public":{"type":"Buffer","data":"k+iIXCgyNF2bwBhs6PoQK6dTQBmgTwWFkylHONIgbyg="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-69.json`
+
+```json
+{"private":{"type":"Buffer","data":"8JiIyUOd6mMq/FpMKKx3qBsSnQ0bn3Lq+l7fbcedfUc="},"public":{"type":"Buffer","data":"lJVPBl1QjdIvMvlKyemX/La+YFr9QyScbaYNo/QmAXM="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-690.json`
+
+```json
+{"private":{"type":"Buffer","data":"8CCnQPsbpb6Q77fK8hwog2bpT7pwo6KyGPQnqzC+pks="},"public":{"type":"Buffer","data":"zxHwJnvJkUczSb3MGRre4kfJRRrAxUFNmpwEyK+RxGE="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-691.json`
+
+```json
+{"private":{"type":"Buffer","data":"CF2939k3Z3DXwkL9gonieeSZ5e4GfVtErN0NDo5crmU="},"public":{"type":"Buffer","data":"Gms+Fq7/xKG4A/1Jz6+FZgUto1pb5yFM4g/4Tj1EUF0="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-692.json`
+
+```json
+{"private":{"type":"Buffer","data":"iExUmBhTncP+Y13g0lsp4CmNxCpnGQBXnpsPhYWoL20="},"public":{"type":"Buffer","data":"qLI/r70PWnXMiy5oOLQj7QhHBXArzoMZW06Gr06PcHg="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-693.json`
+
+```json
+{"private":{"type":"Buffer","data":"CM/g5pR9U9rg7ZytjYKuT+pk6cnbaNj9WmKs9sAiVWg="},"public":{"type":"Buffer","data":"oOWE8KlXrk+2GQ1Yfq4rfJZvR+clX0mHMsGCGwLolVg="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-694.json`
+
+```json
+{"private":{"type":"Buffer","data":"QBDylXd9CcexeyzDAGaTQ61osJj2kMAvScPyM79ZJXk="},"public":{"type":"Buffer","data":"yv3HXgOCn8g1GB4G5RpT14+qj3YQF9PVLuMC5j9if3I="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-695.json`
+
+```json
+{"private":{"type":"Buffer","data":"mEXXEIfhkACIquAglB00j/LMUsFLk6IC/f7nDYtYYWk="},"public":{"type":"Buffer","data":"zfxDk5+KA23MB0cmjchfOJqoU34GwNJdn7oZ6AVo2CY="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-696.json`
+
+```json
+{"private":{"type":"Buffer","data":"+JVxkWPMBIuoCRvNM5VwkNon2E03xcfm2ZEQNvO6F1E="},"public":{"type":"Buffer","data":"vSIUp+mFIHEsPVGxsawhV4vj52AWxF/yZfms+CRBiEc="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-697.json`
+
+```json
+{"private":{"type":"Buffer","data":"8IF9eQTcgHFk+7Rp+wuM3ainIBoI4JhohtWoinqYI20="},"public":{"type":"Buffer","data":"9nLBTuCjf/BhsRPjWA0qSRakh5VySRaOK/LrjMOtK0I="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-698.json`
+
+```json
+{"private":{"type":"Buffer","data":"oAjdyp6MCej4D9CqiwccKOqpBIUOOSLZ79v2DHQVdHo="},"public":{"type":"Buffer","data":"7PQGr6kAOvndKGrGI9mRbaZjy32MnJBfBcFeWKlq0C0="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-699.json`
+
+```json
+{"private":{"type":"Buffer","data":"KGDq1OMHd86ccSAwvsadu096894kG/YQ6xDSyBMzlko="},"public":{"type":"Buffer","data":"uj/93EjnJe6Hnu7D9m6GMZZq38fq7t74mykgOaeaxiY="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-7.json`
+
+```json
+{"private":{"type":"Buffer","data":"MMaS2jKe+JNiYGS6mOli5Cax2GzbU4H22Aqfl8xzBk8="},"public":{"type":"Buffer","data":"v+JXny4kljj7dd9MId06mGwmturDajucKbVVkCvrDH0="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-70.json`
+
+```json
+{"private":{"type":"Buffer","data":"IMh6sj8gOYPb+NaJYnLQRCiCFlYxOJUHrVoyr3iWIUA="},"public":{"type":"Buffer","data":"O3B0vFJ7HxacvSlp5pXoA9dP0oq1SfHTkmTk2xV57F0="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-700.json`
+
+```json
+{"private":{"type":"Buffer","data":"SGhbylWOdi/0LQ0/hf1uj9AOLRHy1WcMTeCHv8R6o2A="},"public":{"type":"Buffer","data":"QTuXcM1I+Ln7WzFUpKcTtnIcnkdTByzcgs9OQhmJ9gU="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-701.json`
+
+```json
+{"private":{"type":"Buffer","data":"8MWLZWSIAKdB+aidDSJge4eiQ5gO8Ajt+8TaC+3ZbEc="},"public":{"type":"Buffer","data":"sy1E1ytlIGpnSoj4hvDAe82KEK2smLIsa3dr7qDqJhg="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-702.json`
+
+```json
+{"private":{"type":"Buffer","data":"YOshZ2skAv2akKS6dcJqZklW5OnboFou/9/kMXFShWw="},"public":{"type":"Buffer","data":"mIB3EvZleLX2Gsds+fvLb1jJA4aJSWuK+V8WKqSokRo="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-703.json`
+
+```json
+{"private":{"type":"Buffer","data":"WGpIUZ2d7R4bqD0kdElEyiTqfegJ8f/v6luL8iNwBU8="},"public":{"type":"Buffer","data":"smG8NtY4mKEJfi06soakABQJFfQuIdRD+B2R2xpxz1I="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-704.json`
+
+```json
+{"private":{"type":"Buffer","data":"2Cr07lqRIchoIU3pbOApK/uiq0MUKXCzHRL2xcA47FQ="},"public":{"type":"Buffer","data":"tPdn/XhCuD20L1JsVBJny6p0e8WpOKe5YUDENX0cg0o="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-705.json`
+
+```json
+{"private":{"type":"Buffer","data":"wBjnajceCiQY722OrucTyWaYpAaYYtu61DKTYcvzxmw="},"public":{"type":"Buffer","data":"FIy7RSnPlX9Io7CKZb0SpNrhG7ex/4E+Q6qcHpBC8Vg="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-706.json`
+
+```json
+{"private":{"type":"Buffer","data":"YBYG5ifITA0T4ZCZB52RxcG/00q3yzSJrEFvUT3j0Wc="},"public":{"type":"Buffer","data":"hmLPlpgQhvrGC656HenHJm/J3cJQe5LYSdMnPQ1cEXg="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-707.json`
+
+```json
+{"private":{"type":"Buffer","data":"aPdhnc7Ip1usGUR7udmnjvYSrh4/LPT/Ow7UKqNiqlE="},"public":{"type":"Buffer","data":"jbA/pIsszxIDci5xVCw9TR7tNgF+ENta0bTpeikloik="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-708.json`
+
+```json
+{"private":{"type":"Buffer","data":"kPU4hqG4jkeeXU5LAba9JAGBJo0Yi1JKkBPkzGzYz2k="},"public":{"type":"Buffer","data":"A6yOmqlrfBRUu1MbqDVCn+YCBw8f3IZIVy9As8YiBHo="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-709.json`
+
+```json
+{"private":{"type":"Buffer","data":"qPhWf6zroM5OToToFZTH39oCJv8lA+WvJ9dZ5q3VhHM="},"public":{"type":"Buffer","data":"zhIbCsQR6eTtbTbGGbNwEyHcWBl9HVQrAxKWVfaFWn8="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-71.json`
+
+```json
+{"private":{"type":"Buffer","data":"OAiZBWdpEuYc6AZG79mAkupk9pq2SsCi8CwDoRNXKmg="},"public":{"type":"Buffer","data":"uYw9BWWGc9X1CJ00VebJjEafSvBZgj+IWOrT9UDbwUE="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-710.json`
+
+```json
+{"private":{"type":"Buffer","data":"wIerZq/vfPwNRj9OGLPUU2g+jblInIWT+Ky0ckUzAX0="},"public":{"type":"Buffer","data":"az/uZw1/w0eHBe7EanCqC9kr7EKdmeZ/pvLXc5gzS2U="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-711.json`
+
+```json
+{"private":{"type":"Buffer","data":"WLuO9rLxm5751V2Cvl/Uxbwhzm9gfSpXw0i/11JKy3g="},"public":{"type":"Buffer","data":"fFGde1SE9YOgecsmH0PvV7uIrWKh0H2VF0uoaCgNKR0="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-712.json`
+
+```json
+{"private":{"type":"Buffer","data":"kKB58pJYJBHLtR7pbkMCX/UVbAlrmsQx/u1C8quCoXI="},"public":{"type":"Buffer","data":"bpY9ipDu1w4fDq5opgNQjuc4VIqSygU23CE1ARvYYjw="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-713.json`
+
+```json
+{"private":{"type":"Buffer","data":"UBrPjq1+67+lOdD4509iDpz7PHz18wej5PFLjKj5QFU="},"public":{"type":"Buffer","data":"W1jEbMuR2NXo+fBliY7zu8giR5gZt6geTtejs0yGNjs="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-714.json`
+
+```json
+{"private":{"type":"Buffer","data":"yOQS3izStAQULkV0N16pFLqnXcbN6vM25KTl5cMgXkk="},"public":{"type":"Buffer","data":"KJCMU9Nj6biTR1UqvWUeOpDSJLn3NFUYtRCHXQ9eyD8="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-715.json`
+
+```json
+{"private":{"type":"Buffer","data":"sF/8azhkm8m+tlgCkHV/HYA3QmbMpVDO9WmP+MBDW0A="},"public":{"type":"Buffer","data":"IXZug4lxBk4YMNm+XgfMyb4x6Iw7NUMq28WYfbxt8Bk="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-716.json`
+
+```json
+{"private":{"type":"Buffer","data":"GDLp3Athp+xRX5G+VZpUgQo4VFt1dmlwP00OKEyCAHE="},"public":{"type":"Buffer","data":"AwrUgFbwD4AcmsY18lTSE7uxGl/UR7MjhFBT5kJnYhc="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-717.json`
+
+```json
+{"private":{"type":"Buffer","data":"yI+No7whbuYmiVYoAEwtjx18zm5GvlH2Xk93fV75qWE="},"public":{"type":"Buffer","data":"bDWl18tFH0BAIKkCP/2cVg0U2mM73C3m3dsoSGv9TTY="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-718.json`
+
+```json
+{"private":{"type":"Buffer","data":"CHh+i2/I5KXmPdnkT2zx4j3x6DD1cUw+6UP8hds8X0o="},"public":{"type":"Buffer","data":"W4jWhMm3AheiUe/Ci8bOxYTSg2JF9cKCFtiqutMcDBg="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-719.json`
+
+```json
+{"private":{"type":"Buffer","data":"ACCRJPOFFq0b+6E4mX3ZWnQJAIyImSCxANPvEfWQ3Xg="},"public":{"type":"Buffer","data":"Hy5OhfYzcWqqPW/0CYYq9gQe7e8Q3oRR80KkAYyQwxE="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-72.json`
+
+```json
+{"private":{"type":"Buffer","data":"wE4KiZI5ASLS2IcK3WRpGB5YpjaTnTHV2k+4YhU3tVg="},"public":{"type":"Buffer","data":"wjc8UiSyxMkxAS/SLp00OQcAchc+pDoVXedgR5ygNUM="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-720.json`
+
+```json
+{"private":{"type":"Buffer","data":"EA5laviM4H6ud2IZLbEPl+TC71QCJeLuzS/7C7tq9lY="},"public":{"type":"Buffer","data":"oFziZPPMDoG4saT/qC3kqIKiqIgHTTtXQY1jxLDtTx4="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-721.json`
+
+```json
+{"private":{"type":"Buffer","data":"yBopvPBu29VdXn+S7qmLbbg5eBsbNq4GELL21j+8EVY="},"public":{"type":"Buffer","data":"fDbGhrrmWt7vbI+XXGIEGpkN0WLeTCLdhkwfeT7bvgA="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-722.json`
+
+```json
+{"private":{"type":"Buffer","data":"kIWub7Ds6fS0P4iRcCCGwlV//iKyky2+INGEF/pBPWQ="},"public":{"type":"Buffer","data":"o0//7ajPCGvl/HLc63QGPRWzUoZ9BZVuH3TRyoVYdlA="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-723.json`
+
+```json
+{"private":{"type":"Buffer","data":"uD6+garfk+D7NVp/5xxuufuHjiSE/3f81I05ZVzGz2M="},"public":{"type":"Buffer","data":"9DJ+tVFVd5s6LzidzSLuh9cOkXOXKoZM5VMhkierSS4="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-724.json`
+
+```json
+{"private":{"type":"Buffer","data":"kEoCgq/0H9EjfTF1EK/tizYMGwkANtA/GsB8mbnlZlY="},"public":{"type":"Buffer","data":"mkFI1K/2v6oTHaQf/pTAYpLWXjdj2LuEFL6AVRXPzH4="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-725.json`
+
+```json
+{"private":{"type":"Buffer","data":"UMEPr0WIiPyaQYPX+sA5g9qy1LtYoCzd3lCywdxKKFA="},"public":{"type":"Buffer","data":"RXQz/pNngIrLedPB4ecKtBRXSB2Ff5snqZuzCi2dinw="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-726.json`
+
+```json
+{"private":{"type":"Buffer","data":"QJhKaw6hwTtzrcfWV+Eav/1wnVv3J7lukv8TfQqwTkY="},"public":{"type":"Buffer","data":"IUli9Qs/UoVvvWnUV2nM8M3lslIXIP7abkVoxLqaaUw="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-727.json`
+
+```json
+{"private":{"type":"Buffer","data":"8PkXgjxbTN3axYCyaZKvr3xsjfNi4w/y102AiGveDnU="},"public":{"type":"Buffer","data":"sxdBrECaHAG61Qxxzo3JUhj0dSw5/cV3rDkc31C7qkM="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-728.json`
+
+```json
+{"private":{"type":"Buffer","data":"6Hluaas5dATpenBtwuSNqCB3IU5z+MiO/SBGlC2ISmk="},"public":{"type":"Buffer","data":"RM1fVaRO5UmNtyTXOBBTsCyiuPK3uAAcxx10s5089xc="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-729.json`
+
+```json
+{"private":{"type":"Buffer","data":"+PgAZEXd9H2hnNBgoxjfURgDGWCS+kwywiwrifFiu3k="},"public":{"type":"Buffer","data":"6iUWuHKfMkeRgVYmRel1Ox543OcgM72sqj5MACNtCEY="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-73.json`
+
+```json
+{"private":{"type":"Buffer","data":"iE64C8Dqsi19klqH+i0Kgy5J1AjjIPMEO0VOyR8M5Ws="},"public":{"type":"Buffer","data":"8kA8VdrjocnJ1qAhkxeLOawEzRD6sggGSlyLD1ysck4="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-730.json`
+
+```json
+{"private":{"type":"Buffer","data":"eP1dwYZ13EYOg4nIw6GmKcR07sByp2z90J9Posi7MnA="},"public":{"type":"Buffer","data":"ls/d9qxoGofxyxMcGHyzm/ceBweLYI2HC2pdG34XegE="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-731.json`
+
+```json
+{"private":{"type":"Buffer","data":"qHANIVo4s4TfVdLHARGLGTjULveEXyUk9UmIOHNpEko="},"public":{"type":"Buffer","data":"ZgtcHzA55lSjTlAP3Ohze14hSOtj/dKUbTEB904j7gg="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-732.json`
+
+```json
+{"private":{"type":"Buffer","data":"AIOntFWmXWkUottaWzrQx8ba5n8PVkozElJuwknkE1E="},"public":{"type":"Buffer","data":"xfFjibusdgkMkRi0KsoMa2Nf12f+jwRcl2x8lF7VVko="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-733.json`
+
+```json
+{"private":{"type":"Buffer","data":"0HBc2Os1CTbG6DJ0UEvpcUMwt4P2Sqw306Ca4TxVE3A="},"public":{"type":"Buffer","data":"Dld+OY93bMP0+EQWXk06cUHdK7hPQKd7aMY8lhZjGxk="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-734.json`
+
+```json
+{"private":{"type":"Buffer","data":"6DBvurqJDF+294u+nfO6x0Y92t/5gIz0MNrSpzR30WU="},"public":{"type":"Buffer","data":"SDrbrSYe+iexoo8fEGlt8wdRSnIIMgX13bYbZWCKWiY="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-735.json`
+
+```json
+{"private":{"type":"Buffer","data":"eJMr43QW6ForHa6/lMCm3VE/U/ygNO+GaJAPVrpN3Xc="},"public":{"type":"Buffer","data":"zcpMRPdeQxHZonIIyLWTOeQ+g+pG2go5r0h/edD7PAU="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-736.json`
+
+```json
+{"private":{"type":"Buffer","data":"kBon7ApKdmDvVDkZKMDcXE+w5MY1JCLkS2qw5d9N5n8="},"public":{"type":"Buffer","data":"vVTorfIX2ZATyhk5YeaQXJ9AVkg19dK8vlaCTODRUEw="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-737.json`
+
+```json
+{"private":{"type":"Buffer","data":"kL+mTBt3R26KH2MguuMh3TZ+Mn+VrocmYJ7fyMYw2F0="},"public":{"type":"Buffer","data":"ZobW05eIywS2ZMPW+Lh67c18QI7Y+nEnKTqGibWi6Fw="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-738.json`
+
+```json
+{"private":{"type":"Buffer","data":"SPrJDPL9HFFSGhPuDKKYm394/Xy3ShMf8sP2StzTj3k="},"public":{"type":"Buffer","data":"iP931udwCu1dtlJuP/xlIuat2ZqsJmeEx7LlVQeexRI="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-739.json`
+
+```json
+{"private":{"type":"Buffer","data":"gKn9ExTVHYYx0R0mxp2I8R338cYseC9JTZwz/EfCFkI="},"public":{"type":"Buffer","data":"y8qXwRkLqwknDbv5EDReK5JDAjgA/SzueQKNvqWi0zw="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-74.json`
+
+```json
+{"private":{"type":"Buffer","data":"wO33Z+FQz+vGxYNd+SZhhYGVzDMtrUjcLtMnZ4kmgn4="},"public":{"type":"Buffer","data":"jA+M8LgBZ3tjdokroljYuJtwMWzFURljRY/LKL3XSyw="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-740.json`
+
+```json
+{"private":{"type":"Buffer","data":"uGrzFzhdxkg1PCNz5+JZSEJ9j+mrzSB88OsRw3fjoGs="},"public":{"type":"Buffer","data":"RtB5xC8laTs0LXbBr+A7+CIeF6z5C1/6Ykmfd/VzMzk="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-741.json`
+
+```json
+{"private":{"type":"Buffer","data":"cFY0y8TOILDI0LlzPAXKXq6GTAaH/ZFvUtZp3aMVfV8="},"public":{"type":"Buffer","data":"wsAQRZb4hw7PSE+DIdjuf52K05TtCZjqlG74tqC4IFg="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-742.json`
+
+```json
+{"private":{"type":"Buffer","data":"WA6ZCJsxdnLJPXp1hqHgQJESftvhTXOuusBGYYrNwH8="},"public":{"type":"Buffer","data":"Ho/wUHLl8gtlQaSqWoI6j2/0FiEv0O2UK0WVj/uGfxA="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-743.json`
+
+```json
+{"private":{"type":"Buffer","data":"CAnAUW9VXZKZE4BcPsNwWSbhNphx4SEmVwkKZ0/kknw="},"public":{"type":"Buffer","data":"aV190Zy3gzENtqErWqhYMMbw4a7kWYFcGtxkthrCUWI="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-744.json`
+
+```json
+{"private":{"type":"Buffer","data":"IGf5SYc3Co1r3JujokI/gsWasAc9PeKlR4Wzd7D60WM="},"public":{"type":"Buffer","data":"D6ur0hm0yG8FqJVXpLSmrQuWWi0hmb3gEMkWIo9QhSA="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-745.json`
+
+```json
+{"private":{"type":"Buffer","data":"UAnFNiHYnJ3AHz6KmqFTTU+BCA5yrvXGuF0znH99SVU="},"public":{"type":"Buffer","data":"N6SBLxrh1OmMwPnarNsAdpavL0jVVnc8xPhBm5JnWB0="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-746.json`
+
+```json
+{"private":{"type":"Buffer","data":"KAgEZpxIYT8XPGEWazAbvPnQmedbsY+nTJhahl9h/EQ="},"public":{"type":"Buffer","data":"hid+6Mc2LbzqvdFBiGPwitF7ZjSevzipGDcX5fAXZVY="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-747.json`
+
+```json
+{"private":{"type":"Buffer","data":"oMApkk9b2C8UmdSL6KL8FD2GeR6ihdHpdyMHy9qYrUQ="},"public":{"type":"Buffer","data":"tiA4ErRZsz4JCIgTb30ssQmFWsMJM88Vd4vEUO29xn8="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-748.json`
+
+```json
+{"private":{"type":"Buffer","data":"uLMhid67yaRIB6ncCH/P7rXIs4Kibpwy3v/zipiCSEs="},"public":{"type":"Buffer","data":"i2+SL1YlXY5rECItlrvWoXb7ZypfDga71+oAsa1Mejk="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-749.json`
+
+```json
+{"private":{"type":"Buffer","data":"0K5DgKjRMsCax4q9H4OIczFIiIyyfV1zxxpnsbT0228="},"public":{"type":"Buffer","data":"hyOB1Y1NK4BCMKmk2nCoocvIPNM5h/eYcXB2N8Gt2xE="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-75.json`
+
+```json
+{"private":{"type":"Buffer","data":"aDYDHy4XxvtL0T6tPN+UJQk3+btLPE2en0USY5UUSXk="},"public":{"type":"Buffer","data":"fN1XKdQZwWM0N7MyJAUoZVCt2Sip9q5kxAj1uYebpxI="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-750.json`
+
+```json
+{"private":{"type":"Buffer","data":"cGQdgdW7WPWlOSqtaNC2lovHFHNjy34HTTQpAxkYBEc="},"public":{"type":"Buffer","data":"ncfUceUhndkfSe6fEP3KKPwn9gKjy8v0vT/cpb5JwDI="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-751.json`
+
+```json
+{"private":{"type":"Buffer","data":"mHSIWyUmw4oB9rlnoOMeosOS/ax+sGJPvZKJ53rUY04="},"public":{"type":"Buffer","data":"fRoEN9ShE0EN/rOc7Bi34GndGzQ29e8FtG8aiX+PvmQ="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-752.json`
+
+```json
+{"private":{"type":"Buffer","data":"UCNhv5+O9gr3D+6OhF5uEq5fqkFxmfIAdxB/u9acT3k="},"public":{"type":"Buffer","data":"WEWqq3JVPcLzRZcfnxjJLAr9UZRvCo1W/mVFxeCvSGs="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-753.json`
+
+```json
+{"private":{"type":"Buffer","data":"gOEDyr7h2rnDq/EsfYcaigVueuEH6G/abbh6LcKxh0Y="},"public":{"type":"Buffer","data":"00oLGGQdAZ52TDZYHz9TgEoWximKX/pTxMPsaf45AVQ="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-754.json`
+
+```json
+{"private":{"type":"Buffer","data":"0PGUJm7wZ2Z2e9XtWL1GbD1Alim20fiATeeQ2QLp1nE="},"public":{"type":"Buffer","data":"qXqbHPVScLqWq51EqK4YQJ1shIyK8DeCsYBFMLEVQQc="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-755.json`
+
+```json
+{"private":{"type":"Buffer","data":"OOYzvVVlTkWjsrjGhf1XH+s4oMfqBAY4Xfgbx0cFqno="},"public":{"type":"Buffer","data":"U0RMUFnnoMXVgclXZUWpGqOLwVtPL2BK6VUBN+gppy8="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-756.json`
+
+```json
+{"private":{"type":"Buffer","data":"aOXN0GsCVFidZURadKLtVCxdHQPzcDqeV16KewNuvHQ="},"public":{"type":"Buffer","data":"AcWOgAo5BYiSndviouVjumXpe/DsDnfmY34OPlTBw0Y="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-757.json`
+
+```json
+{"private":{"type":"Buffer","data":"SOQVesEP9tbGQ+CTnqz41CzLZpzslJtjHrTbYH5+W3k="},"public":{"type":"Buffer","data":"BiPtvx1Xp3Dhd3qjG+6NDWz3uBDxInkH+ro/xV0CHgM="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-758.json`
+
+```json
+{"private":{"type":"Buffer","data":"iC2zlcCThtM1bNWIY9G6G2g+hGFQ+NBiu9s9DUj6LVQ="},"public":{"type":"Buffer","data":"TgcUUs76r0JFnSAWcnvC4FPGhcpf4SNCXdJXKNw9mE4="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-759.json`
+
+```json
+{"private":{"type":"Buffer","data":"YJZKAZdsaiQ8SoRTsuf8rdoegqeSuMel4eUk2WVp9Vs="},"public":{"type":"Buffer","data":"FwJPvEZi+WL1DUgEnuuIh6sPPjSJaEZ7cJ3RpChLeB8="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-76.json`
+
+```json
+{"private":{"type":"Buffer","data":"MKlFH2zNz+Uw4091nFptiGpwzvXyCCS26jqsVy/85GU="},"public":{"type":"Buffer","data":"buUXNrR2JmvksS4k0ZsvPU32iOKLjEaa5D+DvKvzOEY="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-760.json`
+
+```json
+{"private":{"type":"Buffer","data":"eGnN2KMxmQfF6/CdEVXh8yfDKhQXdCEYBFMv7g6oiHY="},"public":{"type":"Buffer","data":"6mIzemU4J53Ia09/YohureLFmqfTUu3Ygo265Xjv3G8="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-761.json`
+
+```json
+{"private":{"type":"Buffer","data":"CMGTGTcGv5QnJr5rGgwPT1HxTkIwzhw/13xZ0ea+m10="},"public":{"type":"Buffer","data":"jsdzqO6l1UouV8FXnjNWBxv+PuTLEc6WOK1EZ8DP03c="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-762.json`
+
+```json
+{"private":{"type":"Buffer","data":"mPO5rMfqFVxTGknJrwCQ+fYP0/QaBGjvoCL5BcDOmWI="},"public":{"type":"Buffer","data":"Gu97nzr3RuCeoydDd4UfKA6obNxgt5DmnEJLb44LHCA="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-763.json`
+
+```json
+{"private":{"type":"Buffer","data":"gJAat+IVgwU2mKoTn/7IsCwSW7q84hgfJuW5xDbc3EM="},"public":{"type":"Buffer","data":"OeQ4x894Y4ulVEHWv6ZoKzaiWpFh33kRHK6hMyWvnTA="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-764.json`
+
+```json
+{"private":{"type":"Buffer","data":"4MGerPG1CgUHwhXTxIyzqzFXOCAZnmPhQNITU4jHi10="},"public":{"type":"Buffer","data":"VfqWnzCtVkNOYkoKC/5L+yC/sQMV5mXvoqo9QzXFQAI="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-765.json`
+
+```json
+{"private":{"type":"Buffer","data":"APFWvjvjEOnHK8GOsE4xoXtyulFzGBAns+m2kIovgEk="},"public":{"type":"Buffer","data":"z03J+mK1rbSynP+3W2I2N4kHjz+diFCGuep4scBNWgo="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-766.json`
+
+```json
+{"private":{"type":"Buffer","data":"qLmaKSVlAVoHCTTwnwaJxY1D96BGTViflv7N2MZZl1s="},"public":{"type":"Buffer","data":"NM6kLCFcO8cc5oWZShbzQDVF5csKu7MqVLGzxXfdUUo="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-767.json`
+
+```json
+{"private":{"type":"Buffer","data":"qAqjISGk2iQbKzP8AuVuAI2KZEiCjpttbEjmSVxYUkY="},"public":{"type":"Buffer","data":"Lme4/i7DtFbH7oIQj3MPnrVYUAUtIN2Izsxg2cXN6TU="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-768.json`
+
+```json
+{"private":{"type":"Buffer","data":"IOqoZnAjivzl3jIKTzaVKttVeQi2qty6Q2GZmXrjN3s="},"public":{"type":"Buffer","data":"57S/zzM6zGU4AW/qtYyiNyUHamdpjuxlPjhsWq1QCzI="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-769.json`
+
+```json
+{"private":{"type":"Buffer","data":"0BTG29Vh+X0TLUhms7jWTjxiRQbfvV/A9epV7dIHWns="},"public":{"type":"Buffer","data":"qQjVVc2GtrFgJZgrqnJ2fBcxCp85um+e6sH0Nv9Qykc="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-77.json`
+
+```json
+{"private":{"type":"Buffer","data":"UNPNOdGoigrgW50VM1ZSDQNWdZvlmSvLu4pGK+UCLFI="},"public":{"type":"Buffer","data":"OB4vsfldKTpZIklUElqHwJqalii5pxP7bmaikz39M24="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-770.json`
+
+```json
+{"private":{"type":"Buffer","data":"2P86qMbsw3zBTX51ae+44DsFO+qYi3N8tXUMbka69mM="},"public":{"type":"Buffer","data":"tNUZF3PVeZh1ULPLg8J6sNcLEJd/RM98eH1as4i6+yY="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-771.json`
+
+```json
+{"private":{"type":"Buffer","data":"uB0M8+b8kWo6qinFKW5Mt2uxcrx/brWrg+Pna1XUU04="},"public":{"type":"Buffer","data":"iQSLIqKmPvWh+2u49dWnFRppVa81Y83wzu3gl/Lj4R0="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-772.json`
+
+```json
+{"private":{"type":"Buffer","data":"CFoeVDZCIT7m+bW/u0u89ovDwrgD4DOiuoStzk2Y8Wg="},"public":{"type":"Buffer","data":"GaKHhPXC8D18CrnieWJtjqhgd47Vy+D2DF4th54xuQs="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-773.json`
+
+```json
+{"private":{"type":"Buffer","data":"qE+jhpq3u+bYJ/40vzsoqq+7OQi42a0dxJgTrPR7alE="},"public":{"type":"Buffer","data":"zko9uY946VeNfWH80FquvbIVW0T8PAW1UnRAzNFBj2M="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-774.json`
+
+```json
+{"private":{"type":"Buffer","data":"sM8EDB90rudYuh9ArrhqcCGDqfTIPv6ZRKG2O79zlHg="},"public":{"type":"Buffer","data":"6qhaYOMd2eebKjIWdKH9OU2KO8mWjGmi3Fht5FvL9Qw="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-775.json`
+
+```json
+{"private":{"type":"Buffer","data":"cFyQzSA95Azq5W2lUqBNdv+7+Jq9XZEt5UhnieOl81Q="},"public":{"type":"Buffer","data":"b+j2F0msjRTcxu777f9W+Kg9Dpa9r71q99e8+Z9AZjM="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-776.json`
+
+```json
+{"private":{"type":"Buffer","data":"wKpU1G31IpNg2W1H6EkHD0pHZ8A+xUBjOT2EdkrxXU0="},"public":{"type":"Buffer","data":"E3vTyOmB6V2tXC8J8Blhv1nTmpathvOE/O8gVzcsR1Q="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-777.json`
+
+```json
+{"private":{"type":"Buffer","data":"4KJrRNuXhCnVdaE+WX+JlDCnCyqVbYy5ywUYJ+UtPmY="},"public":{"type":"Buffer","data":"uKg+JOZDcAOHCn3hAr9/JYuRsEGHNekEQgcuyAWV1E4="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-778.json`
+
+```json
+{"private":{"type":"Buffer","data":"ODZdFgtK00s7bNNBw/bxupuYmShLbTEmkOVEvi0N/nM="},"public":{"type":"Buffer","data":"MI+GRoH+bmMtRL4ByLCbMMMbqxQuc5sgnWcZmGl5qUY="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-779.json`
+
+```json
+{"private":{"type":"Buffer","data":"+MqbtUbxUR5hzG2UI4g2BRav9HwAaT8zhqpcpabhWGM="},"public":{"type":"Buffer","data":"t803HHFYxl1jZS6VN26SylqD+M0ivlThA96eSfkjwjk="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-78.json`
+
+```json
+{"private":{"type":"Buffer","data":"sCUm2OmPIaEJXoJCRm1uZ6Goj585JDpYxjnwFeWfbGU="},"public":{"type":"Buffer","data":"PBy/a+Z+OVpytbg1NysQOBNJBd6aeMaQylsRzY9qwSk="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-780.json`
+
+```json
+{"private":{"type":"Buffer","data":"mCO7GxO1F8+aB/BwJhTh8AqYCOiqeMsN1n3LqhYSQEg="},"public":{"type":"Buffer","data":"1afNZkZgwy39K/3Yil/9vkXYacf9qSNbVXMnxzAHN0s="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-781.json`
+
+```json
+{"private":{"type":"Buffer","data":"iP3Cwr07F1SrrnXJcpBTB66FLR1UegZ24uZ+a0z/VW4="},"public":{"type":"Buffer","data":"KCjdpL2qqNk7ead3Y/4eXQ0rdpIO9hG3Ym9y0dUJ8w8="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-783.json`
+
+```json
+{"private":{"type":"Buffer","data":"QEjk8ppMpudF8+JOD4hCsNaQpAHns5B0sbfMdbpPtFQ="},"public":{"type":"Buffer","data":"i+aP3mSjPQvfyaOofJAJWx/SjQmHKLtr8/NmpRMW21g="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-784.json`
+
+```json
+{"private":{"type":"Buffer","data":"GJXR1GCwhFSZ5ygj3PY/8Jm3eytzMBeeq2u4N4ZYLEM="},"public":{"type":"Buffer","data":"EscOMQZUUktX5g2PU+t4MUbHm9Zdds4SPEDug8Wnqzs="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-785.json`
+
+```json
+{"private":{"type":"Buffer","data":"mC89fgRxAMpDfohE8zolNpkmfb0OMK2Hrhu6JzJh0kk="},"public":{"type":"Buffer","data":"YBsNItdky+cZoL4i50HI2LXLw3Ug+/SFyDwSgyUpLk0="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-786.json`
+
+```json
+{"private":{"type":"Buffer","data":"oGaC1XhaL6T4Vw9UVSwLcniCFLBKE407EpcCGiL8SH0="},"public":{"type":"Buffer","data":"e46Sz5m9K5/X90F5PJuvkhYTYkLKt0NNfdK9WfPzG1Q="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-787.json`
+
+```json
+{"private":{"type":"Buffer","data":"YNduDYmrH7KjATcYAwng+1fh8BANxEj0ztaDAwlotkM="},"public":{"type":"Buffer","data":"YRjwYbAbAqSzI9vMnbBy/VC27BFeoxfUf4IkEPjOTDY="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-788.json`
+
+```json
+{"private":{"type":"Buffer","data":"4H8CeLcjzWt57xNjrTuMPvhZQfEE7C3lkI5nn27C+34="},"public":{"type":"Buffer","data":"zJN7rDNCmvz1B1Od7ZlruwafbIaTwfcba3r3A+iwnXM="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-789.json`
+
+```json
+{"private":{"type":"Buffer","data":"mOHTA/b2CdE577UJyi29cXvviqg7+NdjREvd7CKn60M="},"public":{"type":"Buffer","data":"l1lcNgATr4Htwx4lMX6p3xtbVYc5fRr6E8dt6PLz0Rw="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-79.json`
+
+```json
+{"private":{"type":"Buffer","data":"aFzi4Drrdw4KEMK+nyC9VzEZ7DkdtyR1H2MwWvYKfmQ="},"public":{"type":"Buffer","data":"CclBmDXAgAFnjjfxnVF0Bk9IhATKvn6j5fjUdcDaThA="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-790.json`
+
+```json
+{"private":{"type":"Buffer","data":"CBkUGQh+sJRBFNi/EQG/O615JN0ukA49W42zIAFrJXk="},"public":{"type":"Buffer","data":"YHCcR3keV4t/yApP3O2Pqs/dBcxt2lm5GeDwX+SX/EQ="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-791.json`
+
+```json
+{"private":{"type":"Buffer","data":"WApnbOAk4x0nzwlyaaatVn9BqO2G2+34zHfiNEOH0Fo="},"public":{"type":"Buffer","data":"kMhusE4ZH2/i94UnFkZZ4qDgrO/UJZJtkwYjMjRIuQs="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-792.json`
+
+```json
+{"private":{"type":"Buffer","data":"sKMnWookhIAXrIT8MwDuXzGyMCm7/+N081R5L1wyA3I="},"public":{"type":"Buffer","data":"o3YZ+ZkSfDV5i7T8pblXRY8pFopJrEWWGzpYQVOWwho="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-793.json`
+
+```json
+{"private":{"type":"Buffer","data":"8Kg7ovduQNSgr7rzz/rv1jjVW5xkjN7IF8poYTgtpEM="},"public":{"type":"Buffer","data":"Zv9uCKCYDH0RTLX7W69pQW1NmK+yjNAQ4/ZDXhA0OnE="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-794.json`
+
+```json
+{"private":{"type":"Buffer","data":"MLLcGcJJDdXgPp1MGUZvahQKiPq/HmJHQ0lSBoX9blw="},"public":{"type":"Buffer","data":"JescjVnHw464SNgpEa3VjyPP/iYVQpDjM9PYVwLeelI="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-795.json`
+
+```json
+{"private":{"type":"Buffer","data":"CNEPQKGtFzN87/OKRanJV57ocHtrElOff+g0zGG2UEk="},"public":{"type":"Buffer","data":"orL4nJ4N3LjjzYRd3d9IEsk3sPSMjHa3IjaxEfI8zjM="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-796.json`
+
+```json
+{"private":{"type":"Buffer","data":"+D7Ck2lPHIZQYqI5hUnP3GNu/WEUhaexvLZbyKiZoHY="},"public":{"type":"Buffer","data":"kOipqhF8xVuz6UlFOYa5y1pmN2/Uam1cZB3OvKe15xU="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-797.json`
+
+```json
+{"private":{"type":"Buffer","data":"UCfeeY/yjpXJLO5WJVQ8+J/qmLDIW2pxvkYGsPZMp2Q="},"public":{"type":"Buffer","data":"J+ZUucLkiy4+VtjwwW20qyLk3lSue8pmKrvqpVk0Xlo="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-798.json`
+
+```json
+{"private":{"type":"Buffer","data":"CORUn0DF8mAi/JyBoeqgeF/8TgJbgHedVZNFuHtMtEE="},"public":{"type":"Buffer","data":"HyxsEW1WvSiQPYpcS88rgyH72eBv0btc92urpWynlyA="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-799.json`
+
+```json
+{"private":{"type":"Buffer","data":"6OQ2uEGWkP7jagNqb8BNPYq4gg5zTncKC0UeY8ycpkQ="},"public":{"type":"Buffer","data":"mA9X1iN12T1Sxpp2aEnbMiyz4cR0wYLfWQFMUcxnE2M="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-8.json`
+
+```json
+{"private":{"type":"Buffer","data":"4ISVWslFwnPIQTKB71TRGmm/9xFJapb95QNAXXdw6GA="},"public":{"type":"Buffer","data":"NOOcpLEVmIHzrTLg9Gfi9EUJ+LiYVKiQ+2l40Tlqml0="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-80.json`
+
+```json
+{"private":{"type":"Buffer","data":"2OamnOQAZ3x4OQJzKRZ1BB3WGMu3aUuMCKuo1xKgfk4="},"public":{"type":"Buffer","data":"89AffMXvpCTtbXI14dNVm1ZK+VFeAyVjXeqezSSeoAs="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-800.json`
+
+```json
+{"private":{"type":"Buffer","data":"IEnzYFkKGYFHVd7WplmMYrVIsavgZsxL+A1nHV6HD1U="},"public":{"type":"Buffer","data":"1Kpj57o5BhcWPpe0LJDASCK+yDWXwC6pMuqvID3LXyQ="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-801.json`
+
+```json
+{"private":{"type":"Buffer","data":"SNoFv6mDuVfuj5MbcEWJ7Vl2Iir/lOiCtwhVFoApk1k="},"public":{"type":"Buffer","data":"NdxlPPiCko92lUNrQlKuKNgS1TH4GS3Jv+9ob+HqdV4="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-802.json`
+
+```json
+{"private":{"type":"Buffer","data":"eBG7ZVewe7Pd74W6CeOFG7PmwByEEGegy6FSer+mp14="},"public":{"type":"Buffer","data":"9Ln0mQea1xsOPKifVnWr/WbBoAoyi5Ig/J/4sKzVt2Q="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-803.json`
+
+```json
+{"private":{"type":"Buffer","data":"kKECbeiKnVzxkalnPmuDWHuw2gGhYJL3M4O7cS6IgG8="},"public":{"type":"Buffer","data":"YIOql6ISBhKnlbUSczSLyeN18A5GjRY4tyX6H9fpKxQ="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-804.json`
+
+```json
+{"private":{"type":"Buffer","data":"yAqepaQowm4cU9e5cuRKpkhU56/S3vDwyO9gXXaJa2M="},"public":{"type":"Buffer","data":"90GGLuT+a3oZP61QPMkCWAAVK+qaF5gdoCPubK8mTjQ="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-805.json`
+
+```json
+{"private":{"type":"Buffer","data":"+BoeLWsG8YNmFv0AH2PNCaz5UG39/5ElCZtnp9b8PlM="},"public":{"type":"Buffer","data":"Ucm7h40a1FW4F63wW4ZEpvwOhxHe5h35dt70bQaeRj0="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-806.json`
+
+```json
+{"private":{"type":"Buffer","data":"OA8uorHgqsvPbTSj8UDER66nDhJSFm6dcG8UPxilTUo="},"public":{"type":"Buffer","data":"6P6UuQCdzmfFZwVV/+17Vh5SQ/lgGYl+3Kx3yz8Bj0U="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-807.json`
+
+```json
+{"private":{"type":"Buffer","data":"SMG5p3snyMQAyXXJVOwUAsnQqzpvTfzczqrHBqwEw04="},"public":{"type":"Buffer","data":"crlzB/+Or3QUoDbfZs5OL7UGqNKlhyp2LWq2gXN37x8="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-808.json`
+
+```json
+{"private":{"type":"Buffer","data":"KI9dtV4GRAXLDo4KA72waB+wLFLip5o2/TiLbOWne0I="},"public":{"type":"Buffer","data":"BbzGXW8+z24oFnYtPYU3/VK+42j5b4B79sQSj6tZlSM="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-809.json`
+
+```json
+{"private":{"type":"Buffer","data":"cLOzh3GEFW92yep0JW5JUyC/3a46RespUfOfYG62tn4="},"public":{"type":"Buffer","data":"y07f5qh/oDVluwTVNStzEP2MXrkgQ2FK/nqaG+3LCgE="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-81.json`
+
+```json
+{"private":{"type":"Buffer","data":"0D21h8vYtYMmF35PLo4RR/hdNAwtZmqQiO7OcEmsJU0="},"public":{"type":"Buffer","data":"3Yfp1bOUX3PRYPoQA0PDF4DG1zAIdSV27XfefLZX7i4="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-810.json`
+
+```json
+{"private":{"type":"Buffer","data":"4F50Euea2L4hfrD/iqtlc4ma5qSsRCocieiS3ei9Clk="},"public":{"type":"Buffer","data":"jaX2x6H60jJjGI8VobQw4se/kYedgRQLGOrgFNfa61o="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-811.json`
+
+```json
+{"private":{"type":"Buffer","data":"WNuwJWb3VAgEPf0+HfALPZ15rzUlQz+9dQNxWXtpU2w="},"public":{"type":"Buffer","data":"eHf5i0WvCto4Vl5RVfklNiZrMJQwM71wWepzz6rUi3o="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-812.json`
+
+```json
+{"private":{"type":"Buffer","data":"kOOz0ZWPByEQGiBxNduM8ujchuOeE2vbK8xEnQrMQkM="},"public":{"type":"Buffer","data":"O1cSFZJUfprj5USxKp5APJ4YJ14PSmOJgot+PX78iFE="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-82.json`
+
+```json
+{"private":{"type":"Buffer","data":"yPX+Zh2tgRgY/BIOryfGWnuAHjVV58+aGzUK4+VS33A="},"public":{"type":"Buffer","data":"qw5JXu2CpGOVvKhgd4u0GE59p38b1H1e42x7CrBSpCg="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-83.json`
+
+```json
+{"private":{"type":"Buffer","data":"kOdNXYwYgX2LHARBRwM+OGc/6lJ/KczpfbXuxcMSOkQ="},"public":{"type":"Buffer","data":"rLCylwNpz5hUS3PHSHg6TYqIODaJ+g7DPdkd5IF/lXw="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-84.json`
+
+```json
+{"private":{"type":"Buffer","data":"YOI/dQQG9/GgmEeYmZbORP6/vn/I8eC1xCPghMFh+lM="},"public":{"type":"Buffer","data":"kL0tcTWnjmLOcMIG9Nfz13T4phCL1C4wk+VQ4UIZ4Qw="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-85.json`
+
+```json
+{"private":{"type":"Buffer","data":"WMDRqwDbk9Q8tUIhXfABbu2JLAZ3vVFyABZ4qNok23w="},"public":{"type":"Buffer","data":"WiLqasZiXJWQqBJ/Eg9J85tjoHW7JwTaG8W4IAD8ohU="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-86.json`
+
+```json
+{"private":{"type":"Buffer","data":"aPS7Vd0vToEz7ENM6X8xE7MFLhVN7+L7S/bt67blFXY="},"public":{"type":"Buffer","data":"LZxvI5NVpBqeg1jS1HFYDCdmOaDxEpv6uuxwC3xIYQg="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-87.json`
+
+```json
+{"private":{"type":"Buffer","data":"cCKpgK8YXr/VpwdMQ55hdqvmdU+EcUjFgJpf2oWmPV0="},"public":{"type":"Buffer","data":"8vZPhqWmMSPZESS2evFvR+gPDz2AwUo7f8UGs9G0Xnk="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-88.json`
+
+```json
+{"private":{"type":"Buffer","data":"UBdadccKe42zWllRiJntjFMBMALOgPdYk6UZS/fqxkg="},"public":{"type":"Buffer","data":"abOGSUqUbam06YKsp0mKZrievWoJ/R+DKq5wsOX6dCE="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-89.json`
+
+```json
+{"private":{"type":"Buffer","data":"WAW/WcgzIjbehBjJGff6kEbwlnCIwXUIW3gogwP5hUU="},"public":{"type":"Buffer","data":"C3gWbuWBiMt88g9pfwzMPivGmWStaNUYeQQE5BlGtl4="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-9.json`
+
+```json
+{"private":{"type":"Buffer","data":"mFnnaVvPNd0XpdKLgxj+JBw9nuKqhZuDvJKH6bJWKnA="},"public":{"type":"Buffer","data":"KzU7n82/ia5CxaeCOPDsI7T+gWJZ5csOg4CuHO6VXiI="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-90.json`
+
+```json
+{"private":{"type":"Buffer","data":"EJ7xZiFW2arA1ESXuTELd8aO1SMag44x/woKklSQ0Fg="},"public":{"type":"Buffer","data":"/v2VfvNxJrGIPae91AvcJm78rHbx4yVTHiHjr5R6Jzw="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-91.json`
+
+```json
+{"private":{"type":"Buffer","data":"gC8aBqC4xW2StMupc1X8FhGXQR9YDPY0CzoOwsfQvWM="},"public":{"type":"Buffer","data":"3Ku+9NHLOARFBwLkkKAFI997njkd8YajT0pIi3S7A38="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-92.json`
+
+```json
+{"private":{"type":"Buffer","data":"GGkW4refqDUNVtd6uQrN7JfcOeMsvvCb9ZfNUwgglXQ="},"public":{"type":"Buffer","data":"DPUsOfcVtj2uQoZZVx2Xs4Uc28idUCPGOW98XcmWD34="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-93.json`
+
+```json
+{"private":{"type":"Buffer","data":"SK+4QO04OJjFHO9vWZTVpPBLqfBQl6/ogIEEadzVPHs="},"public":{"type":"Buffer","data":"dxvWkecknNlvoMvELR7plcKYqaFnYg2Wzm4Gkfnq6Us="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-94.json`
+
+```json
+{"private":{"type":"Buffer","data":"ME9P/U7M9P/7x18VuCIEzFxZl0T61p1pqBZAAeZs+Uc="},"public":{"type":"Buffer","data":"LMPm2duK6HfTUmHetdur2P1sXg5VUMX5TwZ2L7XUQUo="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-95.json`
+
+```json
+{"private":{"type":"Buffer","data":"WKhjRZ4zOyZ5ZgtzWU6g4otdYsgyKPu8oK8C0kY0ZEs="},"public":{"type":"Buffer","data":"UDJN6ZCoiHCyHk/VBfmKuhJG6Guug9hmVMKxQNU68hc="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-96.json`
+
+```json
+{"private":{"type":"Buffer","data":"sI3+ZW7jdeLZPaRyhnXUXbwhqaS8Z0n8Wr4Fxjrm/Fc="},"public":{"type":"Buffer","data":"7nqzo07UHUG7WEUt4Owlj3/WAmt6D4x+AMx/uVRgPzg="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-97.json`
+
+```json
+{"private":{"type":"Buffer","data":"gFBaWgzDE4un6HvYmxzTG9xI6604Ha3cSKSo/x2K2HA="},"public":{"type":"Buffer","data":"R33/zMWgokbJsGuf6aZuyD+dvOKP/Oc07EqVKMDxEgE="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-98.json`
+
+```json
+{"private":{"type":"Buffer","data":"8BB7GAbv+aenf3zAxi20ihoSkZ6kXww6oiSYH7DGikA="},"public":{"type":"Buffer","data":"5msEwBTEBvD1RGR6eOFDLgjUAEeCxpQu3yTK7Feawx0="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\pre-key-99.json`
+
+```json
+{"private":{"type":"Buffer","data":"QA8g3wSujZo1buJKv72J0CR90sS4UHYFmmMmVNqveVA="},"public":{"type":"Buffer","data":"yLv4rOC6+o5lPhrRfLuSz1YUF/3jE/0dqcHUzrU2ZD0="}}
+```
+
+### `axion-ia-api\src\whatsapp-auth\sender-key-status@broadcast--207026298839069_1--0.json`
+
+```json
+{"type":"Buffer","data":"W3sic2VuZGVyS2V5SWQiOjkwNDgxNTkwNiwic2VuZGVyQ2hhaW5LZXkiOnsiaXRlcmF0aW9uIjo3LCJzZWVkIjp7InR5cGUiOiJCdWZmZXIiLCJkYXRhIjpbNTYsMTksMTkwLDczLDQ3LDc4LDIwMywxMDUsMjUyLDE0NSwzOSwyMiwyMjcsMjcsNTYsMTQ5LDEzOCw1NCw5OSw2NSwwLDEyLDIwOSw0NywxNzgsMTUzLDY4LDg2LDE2MiwyMCwyMSwzXX19LCJzZW5kZXJTaWduaW5nS2V5Ijp7InB1YmxpYyI6eyJ0eXBlIjoiQnVmZmVyIiwiZGF0YSI6WzUsMjIxLDkzLDIsMjAxLDY2LDI0Myw4OCw2OSwwLDk0LDI0MiwxMjAsMjAsNDEsMjQ3LDgsMTIwLDg1LDE1NSwyMDAsMTA1LDc4LDE2MiwxNjAsMTQ4LDY0LDEyOCwyMTQsNSwxODUsNzAsNTRdfSwicHJpdmF0ZSI6eyJ0eXBlIjoiQnVmZmVyIiwiZGF0YSI6W119fSwic2VuZGVyTWVzc2FnZUtleXMiOltdfSx7InNlbmRlcktleUlkIjo5MDQ4MTU5MDYsInNlbmRlckNoYWluS2V5Ijp7Iml0ZXJhdGlvbiI6Niwic2VlZCI6eyJ0eXBlIjoiQnVmZmVyIiwiZGF0YSI6WzE2NCwxMTMsMjUxLDIwNywxNCw0MCwxOTMsMiw5MCwxMzksNzMsMTg0LDIyNSwyMDUsMjMxLDE5MSwyMjYsMTAyLDIyOCw0NSwxNDMsMTY1LDIzOSwyNTMsMTYxLDEyNiw1NSwyNDYsOTYsMjE2LDg5LDE5OV19fSwic2VuZGVyU2lnbmluZ0tleSI6eyJwdWJsaWMiOnsidHlwZSI6IkJ1ZmZlciIsImRhdGEiOls1LDIyMSw5MywyLDIwMSw2NiwyNDMsODgsNjksMCw5NCwyNDIsMTIwLDIwLDQxLDI0Nyw4LDEyMCw4NSwxNTUsMjAwLDEwNSw3OCwxNjIsMTYwLDE0OCw2NCwxMjgsMjE0LDUsMTg1LDcwLDU0XX0sInByaXZhdGUiOnsidHlwZSI6IkJ1ZmZlciIsImRhdGEiOltdfX0sInNlbmRlck1lc3NhZ2VLZXlzIjpbXX1d"}
+```
+
+### `axion-ia-api\src\whatsapp-auth\sender-key-status@broadcast--214555175190757_1--0.json`
+
+```json
+{"type":"Buffer","data":"W3sic2VuZGVyS2V5SWQiOjEyMjc4MTE1NTcsInNlbmRlckNoYWluS2V5Ijp7Iml0ZXJhdGlvbiI6Nywic2VlZCI6eyJ0eXBlIjoiQnVmZmVyIiwiZGF0YSI6WzEyNCwyNSwxNzksNDUsMTEsNjUsMTA0LDI0MSwzNywxNzAsMTAzLDUxLDIwMSwxMDksMjMzLDk1LDIwNSw1OCwyMDIsMjM4LDE0NiwxMzgsMTI3LDI1Miw4MSwxNDksMTIwLDIxOCw5LDMyLDE4OSw2MV19fSwic2VuZGVyU2lnbmluZ0tleSI6eyJwdWJsaWMiOnsidHlwZSI6IkJ1ZmZlciIsImRhdGEiOls1LDIxMywxOTMsMjI1LDEzOSwyNDcsMzIsMjA5LDE5NSwyMCwyMjAsMjM0LDc3LDYwLDEzNCwxLDI0MSwxOTIsMTAwLDY4LDE3MSwxOCwzNywxMTEsNjcsNzMsMTc1LDYwLDI1MywxNTcsMTc5LDIyMSw5XX0sInByaXZhdGUiOnsidHlwZSI6IkJ1ZmZlciIsImRhdGEiOltdfX0sInNlbmRlck1lc3NhZ2VLZXlzIjpbXX1d"}
+```
+
+### `axion-ia-api\src\whatsapp-auth\sender-key-status@broadcast--49774493442107_1--0.json`
+
+```json
+{"type":"Buffer","data":"W3sic2VuZGVyS2V5SWQiOjE0OTU3ODQwMDksInNlbmRlckNoYWluS2V5Ijp7Iml0ZXJhdGlvbiI6NSwic2VlZCI6eyJ0eXBlIjoiQnVmZmVyIiwiZGF0YSI6WzEwNSwyNDcsMjMyLDEwLDIzNSwxNDksNzQsMTg0LDcsMTgwLDE4OSwxNDYsMTk1LDkwLDE4OCw4MywyMjEsMTIxLDE3OSw0NiwxOTAsMjE3LDEwOSwxNjMsMTkwLDIxMCwyMzMsMTIxLDg2LDE1MCw5Myw0Nl19fSwic2VuZGVyU2lnbmluZ0tleSI6eyJwdWJsaWMiOnsidHlwZSI6IkJ1ZmZlciIsImRhdGEiOls1LDU3LDgzLDE3NCwyMjEsMjMwLDAsMjQwLDI4LDIyMSw4OCw5NywyMyw3MiwxLDU1LDgxLDk4LDc2LDksMjUxLDkyLDE4MCwxMywxMzcsMjQyLDk2LDE2LDIzNiwxNzIsMTIzLDI1MCwxMDNdfSwicHJpdmF0ZSI6eyJ0eXBlIjoiQnVmZmVyIiwiZGF0YSI6W119fSwic2VuZGVyTWVzc2FnZUtleXMiOlt7Iml0ZXJhdGlvbiI6Mywic2VlZCI6eyJ0eXBlIjoiQnVmZmVyIiwiZGF0YSI6WzQ3LDU4LDEyMCwxOCwyNDYsMTE5LDQ0LDE2MSwyNDMsMTE5LDE5Niw2Nyw3OCwxNywxMTAsMjMxLDE3MywyMTcsMzIsMTgwLDgwLDIxMyw1MiwxMjUsODgsMjksNzgsMjIxLDE1NywxMzcsMjUxLDIyXX19XX1d"}
+```
+
+### `axion-ia-api\src\whatsapp-auth\sender-key-status@broadcast--556281312150--0.json`
+
+```json
+{"type":"Buffer","data":"W3sic2VuZGVyS2V5SWQiOjk1NjM5ODk3MCwic2VuZGVyQ2hhaW5LZXkiOnsiaXRlcmF0aW9uIjozLCJzZWVkIjp7InR5cGUiOiJCdWZmZXIiLCJkYXRhIjpbMTc3LDE4LDE1NSwyNDksNzQsMzksMjI2LDk2LDE0NywyLDQwLDI0NywxOTksNzMsMTA2LDE3OSw4OSw0MCwxNTUsMTU1LDE3OSwyNSwxNSwzNiwxNzQsMTQzLDE3MCwyMzMsMTE4LDg3LDEyNCwyMTVdfX0sInNlbmRlclNpZ25pbmdLZXkiOnsicHVibGljIjp7InR5cGUiOiJCdWZmZXIiLCJkYXRhIjpbNSwxNjMsMTkwLDIwMywxNzUsMjEzLDE5Miw4NCwyNTMsNTMsMjM3LDI0NywyNDQsNjcsNzgsMTUwLDE4Miw5NywxLDE0OCwxMzAsMTUyLDE5MCwyNDEsMTMyLDIzLDc2LDkxLDE4OSwyMTAsNDIsNTUsMTAyXX0sInByaXZhdGUiOnsidHlwZSI6IkJ1ZmZlciIsImRhdGEiOltdfX0sInNlbmRlck1lc3NhZ2VLZXlzIjpbXX1d"}
+```
+
+### `axion-ia-api\src\whatsapp-auth\session-105321859145805_1.0.json`
+
+```json
+{"_sessions":{"BUf2Q8AAnz8BvLB//P/0lZEpKwFJRkpC03nbhFIWdJ40":{"registrationId":1407882305,"currentRatchet":{"ephemeralKeyPair":{"pubKey":"BRHHMC5p4zS5/K4OtvE0suB4lv2vlMnBvHWRS7qqollK","privKey":"6LUrelJSTRKP060e1lkrYvH6UKYvNXEGdrjmojT/AkI="},"lastRemoteEphemeralKey":"Bfum//HPoCbAZy1WYCQEGRxNnhLd1bfQwrX9LNXeBcE0","previousCounter":0,"rootKey":"mf5xm/x3xmXnNUGTRwSNLJEV07fG4S3wikvFykqka38="},"indexInfo":{"baseKey":"BUf2Q8AAnz8BvLB//P/0lZEpKwFJRkpC03nbhFIWdJ40","baseKeyType":2,"closed":-1,"used":1777061377741,"created":1777061377741,"remoteIdentityKey":"BTT5qEn/4Yti9shuosIfWcNAV0XC7cLCk4j/MhInnEwx"},"_chains":{"Bfum//HPoCbAZy1WYCQEGRxNnhLd1bfQwrX9LNXeBcE0":{"chainKey":{"counter":1,"key":"gw5+UIoPRMxfWQ9WTp2+fMWmD4MKEo9u8INtGWNPvIs="},"chainType":2,"messageKeys":{}},"BRHHMC5p4zS5/K4OtvE0suB4lv2vlMnBvHWRS7qqollK":{"chainKey":{"counter":-1,"key":"Paj1WtI6r0PUJzl5whh2MahmeUuWmEcmzJprObtJ684="},"chainType":1,"messageKeys":{}}}}},"version":"v1"}
+```
+
+### `axion-ia-api\src\whatsapp-auth\session-106558256099461_1.0.json`
+
+```json
+{"_sessions":{"BfVasXRiAm0kM8ALTN4sAv5GakZwFaWq0Elxm8CjTFI2":{"registrationId":1022511267,"currentRatchet":{"ephemeralKeyPair":{"pubKey":"BUS3VRpdiDd2xAsvmbfTPHWTaO1FDNdi0LHm9TNWHyQ9","privKey":"6E9dFcoTon0q1M6mPBlH4ohozZBxYesFVLySI40gDkU="},"lastRemoteEphemeralKey":"BRsCXWEzxbHxbNTDv8Xd/QoMvGb5y3u8VA78TkMblXJg","previousCounter":0,"rootKey":"lDQX1qTsX0kJ3QyVM74oMM9uYEjlqMyTB+FEuZV4kOU="},"indexInfo":{"baseKey":"BfVasXRiAm0kM8ALTN4sAv5GakZwFaWq0Elxm8CjTFI2","baseKeyType":1,"closed":-1,"used":1777240435627,"created":1777240435627,"remoteIdentityKey":"BQvEkdFQMkHP3m9bJeQ3M7vUi6l3okh6fT3yFEGjAmdG"},"_chains":{"BUS3VRpdiDd2xAsvmbfTPHWTaO1FDNdi0LHm9TNWHyQ9":{"chainKey":{"counter":-1,"key":"OWyAmGpAUKNb10/7G8OeX/E8XV00WeyD6XAU1BqSLd0="},"chainType":1,"messageKeys":{}}},"pendingPreKey":{"signedKeyId":3944277,"baseKey":"BfVasXRiAm0kM8ALTN4sAv5GakZwFaWq0Elxm8CjTFI2"}}},"version":"v1"}
+```
+
+### `axion-ia-api\src\whatsapp-auth\session-107172386050074_1.0.json`
+
+```json
+{"_sessions":{"BXovzdZHMaM2YKD0nuqBjWy4/oFZpW2m3/F7ifi66pJ0":{"registrationId":1349040798,"currentRatchet":{"ephemeralKeyPair":{"pubKey":"BVKBaGkocrDnIqwDEZmh2zlwCyKzC4Eduj/i/ymtwXNB","privKey":"qNeCkEoeR87i1s6n+hV9FHBI0M68L/xnrDOdTzhmPmo="},"lastRemoteEphemeralKey":"BfVRnMPa12QYvWJcqW0tmdS8ubSJQzfxyiq1KcBLpSxs","previousCounter":0,"rootKey":"27hphK+IBbKPr9kkKmdr4cW8xrioGrTG+tjqbyTOFj0="},"indexInfo":{"baseKey":"BXovzdZHMaM2YKD0nuqBjWy4/oFZpW2m3/F7ifi66pJ0","baseKeyType":1,"closed":-1,"used":1777219369954,"created":1777219369954,"remoteIdentityKey":"BWl0NL/i5Slj2hsX9legVVemJ8PJPRbPXDp3y6b9J70/"},"_chains":{"BVKBaGkocrDnIqwDEZmh2zlwCyKzC4Eduj/i/ymtwXNB":{"chainKey":{"counter":-1,"key":"+yLodtTgeKaNd0h3HMJdfJ140J/gdNNx2vC4EZheJBA="},"chainType":1,"messageKeys":{}}},"pendingPreKey":{"signedKeyId":9439839,"baseKey":"BXovzdZHMaM2YKD0nuqBjWy4/oFZpW2m3/F7ifi66pJ0","preKeyId":16594830}}},"version":"v1"}
+```
+
+### `axion-ia-api\src\whatsapp-auth\session-109569078485109_1.0.json`
+
+```json
+{"_sessions":{"BTKS/C/63OXZlZj6D3NYCO+cKJZ8dHrOPkLdGOi1xPdz":{"registrationId":2005700677,"currentRatchet":{"ephemeralKeyPair":{"pubKey":"Bf7e7NgFaqEhvlZESsDsT7sWRWSEvnr+vecFsA0uTUNK","privKey":"IKFu3PpRj6rwwKW3L+USpd3XVTlK5Rf+F938e8B/t3E="},"lastRemoteEphemeralKey":"BTT2J//e2ylJJpuAXyPuwIJqltbA41DtYP5kdRDX+Kgn","previousCounter":0,"rootKey":"1AY6qCrguWjOGEX2ypR/hvdmjYE+pCwcisH4o1z172Q="},"indexInfo":{"baseKey":"BTKS/C/63OXZlZj6D3NYCO+cKJZ8dHrOPkLdGOi1xPdz","baseKeyType":1,"closed":-1,"used":1777239292841,"created":1777239292841,"remoteIdentityKey":"BdU+xqN6+Orblut410uctSczG66Fg7HmGXdOjoR3Qcso"},"_chains":{"Bf7e7NgFaqEhvlZESsDsT7sWRWSEvnr+vecFsA0uTUNK":{"chainKey":{"counter":-1,"key":"jP/a5BQ5EmlLpfV0ED912qA0RUJSDL/nKxSEI/du4Kw="},"chainType":1,"messageKeys":{}}},"pendingPreKey":{"signedKeyId":9574821,"baseKey":"BTKS/C/63OXZlZj6D3NYCO+cKJZ8dHrOPkLdGOi1xPdz","preKeyId":14514975}}},"version":"v1"}
+```
+
+### `axion-ia-api\src\whatsapp-auth\session-115917291823106_1.0.json`
+
+```json
+{"_sessions":{"BYOCgevnd5mya0/KHfE4VvWmPguc2Cowj8gzcZkimjQt":{"registrationId":350993283,"currentRatchet":{"ephemeralKeyPair":{"pubKey":"BW4bsvmz/45MiTvLUqOdUb4Q2yrw4BGsgepUdWhS2DQ2","privKey":"gAdToMDOb7x/ux79NmVmwMpXXo9rzw8iPfy9l1b/vnw="},"lastRemoteEphemeralKey":"BXginXdgYR0OFs/QP5kInY3eJELC5s/rv4WdAXKkCGYR","previousCounter":0,"rootKey":"UOWtP2D5VUJTdetR9o1HIP/PMS0NaEs0YCv0RkfhXY0="},"indexInfo":{"baseKey":"BYOCgevnd5mya0/KHfE4VvWmPguc2Cowj8gzcZkimjQt","baseKeyType":1,"closed":1777219369472,"used":1777203876872,"created":1777203876872,"remoteIdentityKey":"BS4m9N5gLx5iTZ5HIUyuuphMVZvSG/rBnrV5gn17uQlj"},"_chains":{"BW4bsvmz/45MiTvLUqOdUb4Q2yrw4BGsgepUdWhS2DQ2":{"chainKey":{"counter":-1,"key":"3tJ8mec7UEQdWueJosmsYdyq/R25Ef491wjTsrymnIo="},"chainType":1,"messageKeys":{}}},"pendingPreKey":{"signedKeyId":2840411,"baseKey":"BYOCgevnd5mya0/KHfE4VvWmPguc2Cowj8gzcZkimjQt","preKeyId":12012603}},"BcZpMxS3HkmY6flq+AK8d8MyaIwtP1b/Nav0lmR+oE80":{"registrationId":1197881470,"currentRatchet":{"ephemeralKeyPair":{"pubKey":"BWNOpCxuHPbz8/t7sCIBJvktUhzuL9vEDOD6rVyCgEBD","privKey":"ED8MVIOobEABFVLZyaviFFt3ygYprRBMXEHBKOPZGG0="},"lastRemoteEphemeralKey":"BRRxCpnR8YUqESyYdVg9JFUoSWu77Ou7Da2rwj4EQWgS","previousCounter":0,"rootKey":"ekXlHTIYt7RrMSzteJIgF3xc3h+gkhwzTGlnGdKFzTs="},"indexInfo":{"baseKey":"BcZpMxS3HkmY6flq+AK8d8MyaIwtP1b/Nav0lmR+oE80","baseKeyType":1,"closed":1777239293244,"used":1777219369470,"created":1777219369470,"remoteIdentityKey":"BcGBT2VCOxKE6lyezQZqIQUe6HqHU1NyE/1yAG8hNfNo"},"_chains":{"BWNOpCxuHPbz8/t7sCIBJvktUhzuL9vEDOD6rVyCgEBD":{"chainKey":{"counter":-1,"key":"o/VeLyR4MFPC8lVkIpzrPDhSC5sIvRUzIZxYFLloqzE="},"chainType":1,"messageKeys":{}}},"pendingPreKey":{"signedKeyId":4621192,"baseKey":"BcZpMxS3HkmY6flq+AK8d8MyaIwtP1b/Nav0lmR+oE80","preKeyId":4660281}},"BXHyEA6WB3ZxuHU5J8zAlZ1OI/e1WOF+Bwg6PRNQ6qUA":{"registrationId":1806134601,"currentRatchet":{"ephemeralKeyPair":{"pubKey":"BZNvMSedJ+UDbRdnc9KJVQ1NrhWZ81lENpZo29kHIOsn","privKey":"KGqyBdBneyQmzE5qxiHg0B5yhIfIIqEHG71wZDSlr0A="},"lastRemoteEphemeralKey":"BRzruIxGZjiZ2kE84hJS56itY57lJhjNYbVQGwkqvE8j","previousCounter":0,"rootKey":"i1MS6JEDg8CaW6F913Ps89NutZT5Ds7u2Pbh3eQ2Kgg="},"indexInfo":{"baseKey":"BXHyEA6WB3ZxuHU5J8zAlZ1OI/e1WOF+Bwg6PRNQ6qUA","baseKeyType":1,"closed":-1,"used":1777239293242,"created":1777239293242,"remoteIdentityKey":"BRzpiNRp7jS0MHxWSC3TFI6dKyW5dtCq4NvPJT3V4pQh"},"_chains":{"BZNvMSedJ+UDbRdnc9KJVQ1NrhWZ81lENpZo29kHIOsn":{"chainKey":{"counter":-1,"key":"Xi/PwjqjQqbIxP3IlGm9uruY1UNTuE+mewyIXinkcQU="},"chainType":1,"messageKeys":{}}},"pendingPreKey":{"signedKeyId":8904732,"baseKey":"BXHyEA6WB3ZxuHU5J8zAlZ1OI/e1WOF+Bwg6PRNQ6qUA","preKeyId":8255791}}},"version":"v1"}
+```
+
+### `axion-ia-api\src\whatsapp-auth\session-120886183071815_1.0.json`
+
+```json
+{"_sessions":{"BSVJO5AjQCG3Wuyc6h3gj4sJTjcdX+UtgBOz35FzlO5a":{"registrationId":411528379,"currentRatchet":{"ephemeralKeyPair":{"pubKey":"BZKvvCEnkecI+ODLSylVCeNKGgCfpszscPJ3woj5rMNv","privKey":"qEdBtfJuOlpnudEFQFDHt9oIyqlVADtFwyehjvZidlM="},"lastRemoteEphemeralKey":"BTFl3QpLspbbQlG8WdK8mY/pTQ1Nk+w9bpQkGuLEZY1M","previousCounter":0,"rootKey":"YCDoSN/bgloVdvOb3o1/fJGBWlq628QFu0N9W3+Czsw="},"indexInfo":{"baseKey":"BSVJO5AjQCG3Wuyc6h3gj4sJTjcdX+UtgBOz35FzlO5a","baseKeyType":1,"closed":1777153492698,"used":1776984319570,"created":1776984319570,"remoteIdentityKey":"BdMsie/K3BmCSocApR93hxA4r87xJSImIgupsXelGhgU"},"_chains":{"BZKvvCEnkecI+ODLSylVCeNKGgCfpszscPJ3woj5rMNv":{"chainKey":{"counter":-1,"key":"+K2BbN9mLut5t+ZXQEJBiTQFsHNjhRNBWmyRvuy5eso="},"chainType":1,"messageKeys":{}}},"pendingPreKey":{"signedKeyId":2544898,"baseKey":"BSVJO5AjQCG3Wuyc6h3gj4sJTjcdX+UtgBOz35FzlO5a","preKeyId":1219}},"BXtQybIBmLm8m4WyogeFFboOQR34tUs8H7ZbJY3YJJAJ":{"registrationId":760964632,"currentRatchet":{"ephemeralKeyPair":{"pubKey":"BRyFygSZ6kR70XRIh+pgVF6iAVcYUPmL0+p1RpPkxkEN","privKey":"oMq0u4ySRPKCQuw2pYG7B2zXQAhoLVqlc2AWAMv133Q="},"lastRemoteEphemeralKey":"BWJW7OpBoAiBw32a/H+2YPvIG3J3dFAoV5zWvu+gWjYg","previousCounter":0,"rootKey":"EGxF5XWf6zKTTeAIM4+vFwX5A/v1S/i/z4sR4w66mcA="},"indexInfo":{"baseKey":"BXtQybIBmLm8m4WyogeFFboOQR34tUs8H7ZbJY3YJJAJ","baseKeyType":1,"closed":-1,"used":1777153492697,"created":1777153492697,"remoteIdentityKey":"BXOAPHSdanLJjKXaj+MnGiDbECKsUg34lZR/hFMQurlq"},"_chains":{"BRyFygSZ6kR70XRIh+pgVF6iAVcYUPmL0+p1RpPkxkEN":{"chainKey":{"counter":-1,"key":"1G9vAfQOM9jyB+reYka0Z+31uptErxvxLW/XCoG3GRE="},"chainType":1,"messageKeys":{}}},"pendingPreKey":{"signedKeyId":11040859,"baseKey":"BXtQybIBmLm8m4WyogeFFboOQR34tUs8H7ZbJY3YJJAJ","preKeyId":6897}}},"version":"v1"}
+```
+
+### `axion-ia-api\src\whatsapp-auth\session-126280678830141_1.0.json`
+
+```json
+{"_sessions":{"BUbksGsHvCcZ+IJoVndOgF2KK3YS33MiAN5vMHdRPANC":{"registrationId":1304424613,"currentRatchet":{"ephemeralKeyPair":{"pubKey":"BY0d0N62+7YtorfJUV4PaWomvDvobD8FDiBqTLRZl61H","privKey":"2EdQPgHonJnRriA2JSM5LOzGco+07rajQADhoqA8zUo="},"lastRemoteEphemeralKey":"Bcoo+oEmH9C3mey+bPKYhkQ+klZoTWREXqijevn9R9JE","previousCounter":0,"rootKey":"mQNe2Ebg9OkLjaSJLFB8ANQCwmZkcrGeKSHYPoeWmE8="},"indexInfo":{"baseKey":"BUbksGsHvCcZ+IJoVndOgF2KK3YS33MiAN5vMHdRPANC","baseKeyType":1,"closed":-1,"used":1777042435213,"created":1777042435213,"remoteIdentityKey":"BYCZftGikcBs8LdcjT2PfPYPfThzkryVD/ItJL+bg/pU"},"_chains":{"BY0d0N62+7YtorfJUV4PaWomvDvobD8FDiBqTLRZl61H":{"chainKey":{"counter":-1,"key":"WyIi4AFhRt2Emey1hiLy51udSzvCBf3iC9Twi0VDYmg="},"chainType":1,"messageKeys":{}}},"pendingPreKey":{"signedKeyId":588788,"baseKey":"BUbksGsHvCcZ+IJoVndOgF2KK3YS33MiAN5vMHdRPANC","preKeyId":977}}},"version":"v1"}
+```
+
+### `axion-ia-api\src\whatsapp-auth\session-143813238612070_1.0.json`
+
+```json
+{"_sessions":{"BYkw1ws+Fo6XBTJufbV66qHcaYZ4h/76pjZoApvk51hZ":{"registrationId":1793568229,"currentRatchet":{"ephemeralKeyPair":{"pubKey":"BfWLZcmn/rXQ9uF/dtssHqZcOQ86CZ9lpwMqU8Moq4p7","privKey":"MPQKXnxrGhdeQUt5RLYdmLTzVNHa4nvQfGyJtFeQC20="},"lastRemoteEphemeralKey":"BbP9YY+mt5TccBrv5gT+eu+uyYUAVrCRqo6wIkdRAiVp","previousCounter":0,"rootKey":"sTkZ0f9Sj2sIeXt7hrGIXuV2gxJi8EE+DXvMAOF9zgU="},"indexInfo":{"baseKey":"BYkw1ws+Fo6XBTJufbV66qHcaYZ4h/76pjZoApvk51hZ","baseKeyType":1,"closed":-1,"used":1777061377214,"created":1777061377214,"remoteIdentityKey":"BbhOzXmB8lt8I5adrpHHt6E2jfJhRE0YCSnsxAtZ/544"},"_chains":{"BfWLZcmn/rXQ9uF/dtssHqZcOQ86CZ9lpwMqU8Moq4p7":{"chainKey":{"counter":-1,"key":"xtjO6B8Vk0Lqclg1/WXXJ29H6NmM84fiW4J0Hw1BiLU="},"chainType":1,"messageKeys":{}}},"pendingPreKey":{"signedKeyId":6178659,"baseKey":"BYkw1ws+Fo6XBTJufbV66qHcaYZ4h/76pjZoApvk51hZ"}}},"version":"v1"}
+```
+
+### `axion-ia-api\src\whatsapp-auth\session-145565199376542_1.0.json`
+
+```json
+{"_sessions":{"BaBFz5BO5fLyHt2/LzizGU/w4xx9iCzoUrTyJJ2WZNA1":{"registrationId":365032164,"currentRatchet":{"ephemeralKeyPair":{"pubKey":"BTI7X26i2ifzBHdRW4DoqextNQoHAHC5O1zZnld01A5m","privKey":"qBKJ4jt9uxx5Wo48OKZHJj633gRBCKZJC8DSOagIhnk="},"lastRemoteEphemeralKey":"BXLM6ZHMHSGSTs9Nm+3bKnLfTwDVWt/o2ZybbAIk5dVJ","previousCounter":0,"rootKey":"JONvUDJ3TqnsO1k82dgD6+tqzDQ7peMDvhXEc7qlxv4="},"indexInfo":{"baseKey":"BaBFz5BO5fLyHt2/LzizGU/w4xx9iCzoUrTyJJ2WZNA1","baseKeyType":1,"closed":-1,"used":1777042576060,"created":1777042576060,"remoteIdentityKey":"Be6esOIc5LEtJTTj3h+SskIMuI014TAiPHERVe/PwOoi"},"_chains":{"BTI7X26i2ifzBHdRW4DoqextNQoHAHC5O1zZnld01A5m":{"chainKey":{"counter":-1,"key":"ekFepD9OQnxjPPZHpj9gJZVJZZj2f/B7opnJtbb83zk="},"chainType":1,"messageKeys":{}}},"pendingPreKey":{"signedKeyId":9792557,"baseKey":"BaBFz5BO5fLyHt2/LzizGU/w4xx9iCzoUrTyJJ2WZNA1"}}},"version":"v1"}
+```
+
+### `axion-ia-api\src\whatsapp-auth\session-147296138346603_1.0.json`
+
+```json
+{"_sessions":{"Bcufo7W1zk+069i+HQhBA3qryPU736nEp/MsFguuYA8q":{"registrationId":897385616,"currentRatchet":{"ephemeralKeyPair":{"pubKey":"BYqxAIvSeaEDb96wLwlpcf0ztXnx1FImSAHl1Q4xF8QI","privKey":"qF0kNSbUlz+3G0coKPvpXXRweqyYfTr8qLV08WylBk8="},"lastRemoteEphemeralKey":"BemDuz2hP2bH6OWaWsVeh5qXT12fWeIztx4t3CZHVdRI","previousCounter":0,"rootKey":"+TCuWvXLRnkCZY5qtfB2d8rngOTZOdi5ycYvJ0R2gB4="},"indexInfo":{"baseKey":"Bcufo7W1zk+069i+HQhBA3qryPU736nEp/MsFguuYA8q","baseKeyType":1,"closed":-1,"used":1777061377725,"created":1777061377725,"remoteIdentityKey":"BfFMTUKieEbQX9Ot1wsPeZmZRY+eYSFXEyXKNSO3NaZY"},"_chains":{"BYqxAIvSeaEDb96wLwlpcf0ztXnx1FImSAHl1Q4xF8QI":{"chainKey":{"counter":-1,"key":"8Je5faBx2MqwplpzGP8/PxCL8eqhPLcj3VvleGozRmo="},"chainType":1,"messageKeys":{}}},"pendingPreKey":{"signedKeyId":15486863,"baseKey":"Bcufo7W1zk+069i+HQhBA3qryPU736nEp/MsFguuYA8q","preKeyId":11171088}}},"version":"v1"}
+```
+
+### `axion-ia-api\src\whatsapp-auth\session-157088797999293_1.0.json`
+
+```json
+{"_sessions":{"BTZRqXjhKrziIZ01s9BEQXOswlB0xogSVp2NmvNifMFW":{"registrationId":697763136,"currentRatchet":{"ephemeralKeyPair":{"pubKey":"BXLJCJVmEviMYrIeLSfUjOYPlbUvZuoVJ0nC2NURiUlE","privKey":"WOq4JJLmJkjBZYW4ho/tEQo1ouY20+zTxQimVTOPqG0="},"lastRemoteEphemeralKey":"BaKU8xvQmKPqMP8r34Eec30jgZ2TwZafFCvNXl3+VqlG","previousCounter":0,"rootKey":"eJdOg5snDZVFocMb3mwQPZylvmcAO9xloZGKkVFuz40="},"indexInfo":{"baseKey":"BTZRqXjhKrziIZ01s9BEQXOswlB0xogSVp2NmvNifMFW","baseKeyType":1,"closed":-1,"used":1777219369725,"created":1777219369725,"remoteIdentityKey":"BTtvvEwI7M1KKUK0Um5aP4jwbWe1nagePi/XvdEy8u1i"},"_chains":{"BXLJCJVmEviMYrIeLSfUjOYPlbUvZuoVJ0nC2NURiUlE":{"chainKey":{"counter":-1,"key":"ZyWMu+nnuAwcmsu3ihfoHlphZSA1p+dappxVyMPZNp8="},"chainType":1,"messageKeys":{}}},"pendingPreKey":{"signedKeyId":2938256,"baseKey":"BTZRqXjhKrziIZ01s9BEQXOswlB0xogSVp2NmvNifMFW","preKeyId":12163818}}},"version":"v1"}
+```
+
+### `axion-ia-api\src\whatsapp-auth\session-160739167879253_1.0.json`
+
+```json
+{"_sessions":{"Bd+IYHOg+Ol7ybhnBNJYzmwF2dE3EsjhpLBFlEcNhXZ+":{"registrationId":100044922,"currentRatchet":{"ephemeralKeyPair":{"pubKey":"BVNEt+xH9tQWoGzYy713OEs3DxT4cH7DXvF6EqPFBRVp","privKey":"2OiYelZdUmZzqzgwelzswHJx4Rky+/B4IfqWbvnB6Hg="},"lastRemoteEphemeralKey":"BRRrkBvOrnxgRqTiWrhwZM7J613P++pKJTBtDfm0zvd4","previousCounter":0,"rootKey":"OG1de95pPem9DgCGkxLQ1av010vZ3UsFuaX5sHYih1s="},"indexInfo":{"baseKey":"Bd+IYHOg+Ol7ybhnBNJYzmwF2dE3EsjhpLBFlEcNhXZ+","baseKeyType":1,"closed":-1,"used":1777117478830,"created":1777117478830,"remoteIdentityKey":"BUWDJm9kmyQKvWBp4lb2BNPRBiJNv/ZdU3rK4LkclPsX"},"_chains":{"BVNEt+xH9tQWoGzYy713OEs3DxT4cH7DXvF6EqPFBRVp":{"chainKey":{"counter":-1,"key":"O53vr2fca6mOY+59KYv0DKZV5xjla/8YVQX7b69d/QM="},"chainType":1,"messageKeys":{}}},"pendingPreKey":{"signedKeyId":10720671,"baseKey":"Bd+IYHOg+Ol7ybhnBNJYzmwF2dE3EsjhpLBFlEcNhXZ+","preKeyId":7778720}}},"version":"v1"}
+```
+
+### `axion-ia-api\src\whatsapp-auth\session-161061307191408_1.0.json`
+
+```json
+{"_sessions":{"BZ6EzM17Dok+b9+vNXmgLnraHS7Z93vdJt+xsAo4TD0e":{"registrationId":916095031,"currentRatchet":{"ephemeralKeyPair":{"pubKey":"BUMvqaKlZQs3eEkJYiTAJHbOMsWjTVbo3ziW7t/71Y8d","privKey":"eGNSf9damwo+uk1YW341pc+7vI1YET05FM68frEaim4="},"lastRemoteEphemeralKey":"BaCRLGZLfChgx+ToGdW1XmDBXMglE4CiZbqemZsxWQ5o","previousCounter":0,"rootKey":"xpJtB2X+4pSxD8XybwBnFEX3ut4SONuImMPDbiQNT8U="},"indexInfo":{"baseKey":"BZ6EzM17Dok+b9+vNXmgLnraHS7Z93vdJt+xsAo4TD0e","baseKeyType":1,"closed":1777043351050,"used":1777043259047,"created":1777043259047,"remoteIdentityKey":"BQuklobD6KqiaMDyYjq1K1LYOztAF3z8wCTYyC50FeIj"},"_chains":{"BUMvqaKlZQs3eEkJYiTAJHbOMsWjTVbo3ziW7t/71Y8d":{"chainKey":{"counter":-1,"key":"kF27gD8yjphqYAxEtjBPqSIby5fi6Bp87O6XE/kEzJ0="},"chainType":1,"messageKeys":{}}},"pendingPreKey":{"signedKeyId":318401,"baseKey":"BZ6EzM17Dok+b9+vNXmgLnraHS7Z93vdJt+xsAo4TD0e","preKeyId":9344383}},"BfGeZaD6Bszp0Xo9p07X9vRYgZ3/diL9ObsBQEF0n65t":{"registrationId":1639263965,"currentRatchet":{"ephemeralKeyPair":{"pubKey":"BbwDYdzUWtQG1sSHoEPYXwIkC9qd+sikRbSEMuiBcSwC","privKey":"KJXX1HBItzoq5k2E39zhoHGCoRPQRkZDOIZCFiKjhlw="},"lastRemoteEphemeralKey":"BbQZwHs48trFdmFlbeSCP6ZlwLociuxQIipcm1WKh4pU","previousCounter":0,"rootKey":"4K93RzzYe2wfrC4SJ1DkYg+O2LMZhp1FqZsVkkH+eD4="},"indexInfo":{"baseKey":"BfGeZaD6Bszp0Xo9p07X9vRYgZ3/diL9ObsBQEF0n65t","baseKeyType":1,"closed":1777061378282,"used":1777043351038,"created":1777043351038,"remoteIdentityKey":"BTIEZshmOaP/Gf4A/L7WNzlIAMGy59NR1OHvUCM4zxYb"},"_chains":{"BbwDYdzUWtQG1sSHoEPYXwIkC9qd+sikRbSEMuiBcSwC":{"chainKey":{"counter":-1,"key":"grCj9HOvy3rP5yWRV+xhYUajQiQyUCdq1OzeslJxpb0="},"chainType":1,"messageKeys":{}}},"pendingPreKey":{"signedKeyId":14075503,"baseKey":"BfGeZaD6Bszp0Xo9p07X9vRYgZ3/diL9ObsBQEF0n65t","preKeyId":1245050}},"BbNCoRn9cUYk5BYAlvYmA1sRQuDlu0KLkSkcYqzXxzNO":{"registrationId":2112968569,"currentRatchet":{"ephemeralKeyPair":{"pubKey":"BSfnOz+lsg87m6jEOiF5s4V5kvH6GRaLoTL5K+s/dOcg","privKey":"aI2kbO15mJgOeS/Jwo7n03ozFv8/or8EURwNHZqs1Fk="},"lastRemoteEphemeralKey":"BS1f1UQmnIp5wIjoZmKUOddhwFsOtzkittH2oUIZbMFH","previousCounter":0,"rootKey":"mztdPI2WudA8VtWQSYXqKrnq09T9ccNie9SL457fYa8="},"indexInfo":{"baseKey":"BbNCoRn9cUYk5BYAlvYmA1sRQuDlu0KLkSkcYqzXxzNO","baseKeyType":1,"closed":-1,"used":1777061378277,"created":1777061378277,"remoteIdentityKey":"Bf9gXQMazDiSBsfMiAer5od7IrY0lPq1aNva07KbZ1gC"},"_chains":{"BSfnOz+lsg87m6jEOiF5s4V5kvH6GRaLoTL5K+s/dOcg":{"chainKey":{"counter":-1,"key":"s6q9FZ//aVX11QXbICkv0Ro3cMKv4S5xOoxcXRJ4jQI="},"chainType":1,"messageKeys":{}}},"pendingPreKey":{"signedKeyId":5341024,"baseKey":"BbNCoRn9cUYk5BYAlvYmA1sRQuDlu0KLkSkcYqzXxzNO","preKeyId":15723758}}},"version":"v1"}
+```
+
+### `axion-ia-api\src\whatsapp-auth\session-163346229780599_1.0.json`
+
+```json
+{"_sessions":{"BYofjiZZ4dEFo2THxc89te82l9z0EUfhfn6QAtzVoo87":{"registrationId":1128813,"currentRatchet":{"ephemeralKeyPair":{"pubKey":"BajZ2lP/zIzBMkqopVCcG0zhlo2v6ovz53qVcEYTeUtS","privKey":"YIJg6jnBHfYDuPv7dV9JWPZJSstxkBoqRNYtTq+EXmk="},"lastRemoteEphemeralKey":"BZ7opRDi56JWaVjS4CQdHmpaINE/xtdboT4B0XjE26VI","previousCounter":0,"rootKey":"t7h9WEz5nKA01/oSd3LNTf7DX3yXjcPEm1KWNB525ss="},"indexInfo":{"baseKey":"BYofjiZZ4dEFo2THxc89te82l9z0EUfhfn6QAtzVoo87","baseKeyType":1,"closed":-1,"used":1777153496416,"created":1777153496416,"remoteIdentityKey":"BWzeacIXpAEH46WJxP4pjXJ5ELif/gMSd9/LPNvfapBJ"},"_chains":{"BajZ2lP/zIzBMkqopVCcG0zhlo2v6ovz53qVcEYTeUtS":{"chainKey":{"counter":-1,"key":"R1tRZJT1Uywrr7B2uaJNXrCuZmg5ASbhqA/e8Hs+xT8="},"chainType":1,"messageKeys":{}}},"pendingPreKey":{"signedKeyId":13603672,"baseKey":"BYofjiZZ4dEFo2THxc89te82l9z0EUfhfn6QAtzVoo87","preKeyId":1741}}},"version":"v1"}
+```
+
+### `axion-ia-api\src\whatsapp-auth\session-165846001389612_1.0.json`
+
+```json
+{"_sessions":{"BcxeB4qJVzNTD7hyB8TDC+o3XxDvSJJoPPdiDuqOJQ9I":{"registrationId":608648068,"currentRatchet":{"ephemeralKeyPair":{"pubKey":"BQRIPWlNZARolSRxX8AqPkIftQutxCEOswiu1ZAa70VY","privKey":"GMbmofitNHsrmBFRSrwbNj5WZvxFFpoWt7gRr6K/n34="},"lastRemoteEphemeralKey":"BUYlIVPv7ACJ6EwDcF5F45Iznr5Fao34rLA9Zw8/J7pt","previousCounter":0,"rootKey":"MG5Mx5mjrxF3ct5j2WRH7eu6R9gI9e+La9lLVnQ4VQo="},"indexInfo":{"baseKey":"BcxeB4qJVzNTD7hyB8TDC+o3XxDvSJJoPPdiDuqOJQ9I","baseKeyType":1,"closed":-1,"used":1776986596701,"created":1776986596701,"remoteIdentityKey":"BQn/cslGG3Omy4U4gy7oVH8mEA1Gk4RCp+4EOf1OKPtA"},"_chains":{"BQRIPWlNZARolSRxX8AqPkIftQutxCEOswiu1ZAa70VY":{"chainKey":{"counter":-1,"key":"Ee/bNQWsxTZyQMP3ErjFYAX96RdFnTawiVXfhDrEq98="},"chainType":1,"messageKeys":{}}},"pendingPreKey":{"signedKeyId":15784091,"baseKey":"BcxeB4qJVzNTD7hyB8TDC+o3XxDvSJJoPPdiDuqOJQ9I","preKeyId":4796}}},"version":"v1"}
+```
+
+### `axion-ia-api\src\whatsapp-auth\session-167576889995360_1.0.json`
+
+```json
+{"_sessions":{"BQbYOWfm8zw4C4epWamwz2+mljm42NbH+uDz+naGRzEb":{"registrationId":1648032138,"currentRatchet":{"ephemeralKeyPair":{"pubKey":"BcYbz2JZbzl4Mk2rPfp45Pob0ZpChg2GneKhgVEcT39s","privKey":"4Kfc/g1QBVwZNDVN2iVWiq0A67IuJj/eX4QYn/tWwWM="},"lastRemoteEphemeralKey":"BQ1mqntyFDtEuaLmOA+BYHqB2aWPAg/wap+Wcr4SfQ1U","previousCounter":0,"rootKey":"rxhzMrU+8Zz4UKBAnbMp5BKdMLF/MHiTtx/lWWLx/Ko="},"indexInfo":{"baseKey":"BQbYOWfm8zw4C4epWamwz2+mljm42NbH+uDz+naGRzEb","baseKeyType":1,"closed":-1,"used":1777239292556,"created":1777239292556,"remoteIdentityKey":"BUY7f8bmFkEi6OMA/V4wR0G2htd8KuEH80XY4GNP2Ts7"},"_chains":{"BcYbz2JZbzl4Mk2rPfp45Pob0ZpChg2GneKhgVEcT39s":{"chainKey":{"counter":-1,"key":"dfHQch2I8bcIh3gHl/oONpEbIV0AJeh285PuQ0v4a1I="},"chainType":1,"messageKeys":{}}},"pendingPreKey":{"signedKeyId":2462822,"baseKey":"BQbYOWfm8zw4C4epWamwz2+mljm42NbH+uDz+naGRzEb","preKeyId":12984072}}},"version":"v1"}
+```
+
+### `axion-ia-api\src\whatsapp-auth\session-168302672379917_1.0.json`
+
+```json
+{"_sessions":{"BX2yxwAVoQ2/26exBh+gz2RkWmZE5oIgQe3qNkOQbZFG":{"registrationId":2130874017,"currentRatchet":{"ephemeralKeyPair":{"pubKey":"Be16cLcc1gvzPqSM3ylT5Ra5TDU5sMFRxM0olniN1yJz","privKey":"0JLX9YadXQOYLN4u+H+KBcpTQe6RJ/AQxmnHp99gm34="},"lastRemoteEphemeralKey":"BQGPwBY6595fnr+rEmlCiSp4dzV5p36CiLwKic8GSnM6","previousCounter":0,"rootKey":"dkZS0JOXfuMpW9YSodHgAYLNA+kndeGctPwR4vqz5yM="},"indexInfo":{"baseKey":"BX2yxwAVoQ2/26exBh+gz2RkWmZE5oIgQe3qNkOQbZFG","baseKeyType":1,"closed":-1,"used":1777024986292,"created":1777024986292,"remoteIdentityKey":"BeZmrGfNVhYafONN5+zNRWwmCgM9OYGjyHW8wH6Dh5Ml"},"_chains":{"Be16cLcc1gvzPqSM3ylT5Ra5TDU5sMFRxM0olniN1yJz":{"chainKey":{"counter":-1,"key":"7x/bWAyUieCCKY47q96YT5oCeoYP5WHpXE3255FisOk="},"chainType":1,"messageKeys":{}}},"pendingPreKey":{"signedKeyId":1959773,"baseKey":"BX2yxwAVoQ2/26exBh+gz2RkWmZE5oIgQe3qNkOQbZFG","preKeyId":1611881}}},"version":"v1"}
+```
+
+### `axion-ia-api\src\whatsapp-auth\session-170910086627397_1.0.json`
+
+```json
+{"_sessions":{"BVkOYPxCt3NYihgO9PtVe1CXRRkJhlLdwn0fUqiK0JZ2":{"registrationId":339196969,"currentRatchet":{"ephemeralKeyPair":{"pubKey":"Be6IpObOxU77ZwxWCGNbccioZIy77DrLNaH0FcKWUwZM","privKey":"yGxfWfe0mNgaWW5bdUJVXvgQRpEkzcqM56KDYRP5304="},"lastRemoteEphemeralKey":"BfMUJgT/e9IG83ejGrglBsrBFjKk2CvpjIwC/ZUpnT0y","previousCounter":0,"rootKey":"iHQ6xaJ9/hpJp8c314CXRz9E/6jr6pS5auB2tOA1eRM="},"indexInfo":{"baseKey":"BVkOYPxCt3NYihgO9PtVe1CXRRkJhlLdwn0fUqiK0JZ2","baseKeyType":1,"closed":-1,"used":1777024988258,"created":1777024988258,"remoteIdentityKey":"BRA1FBnSnNy/jOJmkE/bduP3sOrhVgDek1w+YJU2JZNg"},"_chains":{"Be6IpObOxU77ZwxWCGNbccioZIy77DrLNaH0FcKWUwZM":{"chainKey":{"counter":-1,"key":"w0aKVqdEBk80+aN3DlCEExKZwceqmKqyh4zYc+oZXtE="},"chainType":1,"messageKeys":{}}},"pendingPreKey":{"signedKeyId":15246243,"baseKey":"BVkOYPxCt3NYihgO9PtVe1CXRRkJhlLdwn0fUqiK0JZ2","preKeyId":16487068}}},"version":"v1"}
+```
+
+### `axion-ia-api\src\whatsapp-auth\session-171541195165778_1.0.json`
+
+```json
+{"_sessions":{"BR0ucVzKpNJnsx6u3gmh0crBJMa+0IYcOhOr3xxmLudT":{"registrationId":1034575730,"currentRatchet":{"ephemeralKeyPair":{"pubKey":"BV/xcNLpi/De2ZjI9BEiKZd8/vwqdA669bMA1PJL1I4J","privKey":"wIkFqR4ORjuTrWOKPunrgIge042J62VQkQcRyTeK+H4="},"lastRemoteEphemeralKey":"BTJpyCK7VuO2eLz7yor8k73lckn/y19qaQWFBflQzbQb","previousCounter":0,"rootKey":"WLluZg53IDCbLiAypYtjdNyPGiKXXi0jI+bSEshuNSw="},"indexInfo":{"baseKey":"BR0ucVzKpNJnsx6u3gmh0crBJMa+0IYcOhOr3xxmLudT","baseKeyType":1,"closed":-1,"used":1777203875436,"created":1777203875436,"remoteIdentityKey":"BX1HvMg3d0jLEv1mb2aVuFgGGTJy0YwTVoXivRGaKeBU"},"_chains":{"BV/xcNLpi/De2ZjI9BEiKZd8/vwqdA669bMA1PJL1I4J":{"chainKey":{"counter":-1,"key":"94rw1HHDncaEQkhD/D80q2gJkKxJXZOOBwQZ6WBBbzg="},"chainType":1,"messageKeys":{}}},"pendingPreKey":{"signedKeyId":9243142,"baseKey":"BR0ucVzKpNJnsx6u3gmh0crBJMa+0IYcOhOr3xxmLudT","preKeyId":7780812}}},"version":"v1"}
+```
+
+### `axion-ia-api\src\whatsapp-auth\session-183416611930294_1.0.json`
+
+```json
+{"_sessions":{"BWICrIDLeQ+5HQwgpr0e4uyIiyYPoHJVqNPluCzt5wgT":{"registrationId":2012899121,"currentRatchet":{"ephemeralKeyPair":{"pubKey":"BSISpuF4ay52mUp0nBp9049LDzBY7PX8fbtTBiD+o0xB","privKey":"8Jw7VqE7W5H7+RvdTyDjGU4FIC035+f4p/bY5hEt2kg="},"lastRemoteEphemeralKey":"BcxqNRSJe3hl6aLmjJ1o0nSgDv4gyRpEnKFiVUYTxsFs","previousCounter":0,"rootKey":"KavB5FfTgiIf3HIrZ0eNGozskJYvWt7t4MZEbo7ldCc="},"indexInfo":{"baseKey":"BWICrIDLeQ+5HQwgpr0e4uyIiyYPoHJVqNPluCzt5wgT","baseKeyType":1,"closed":-1,"used":1777239293668,"created":1777239293668,"remoteIdentityKey":"BQhAAx6XGajV8SL9FVWs9YlCpzfjL6tkPpsZG+1LpkUs"},"_chains":{"BSISpuF4ay52mUp0nBp9049LDzBY7PX8fbtTBiD+o0xB":{"chainKey":{"counter":-1,"key":"OfeVhTCy7DCP4VM6P0/jLI/dn6giN3AVexw1YyKn1ig="},"chainType":1,"messageKeys":{}}},"pendingPreKey":{"signedKeyId":12461556,"baseKey":"BWICrIDLeQ+5HQwgpr0e4uyIiyYPoHJVqNPluCzt5wgT","preKeyId":10706009}}},"version":"v1"}
+```
+
+### `axion-ia-api\src\whatsapp-auth\session-192556788924564_1.0.json`
+
+```json
+{"_sessions":{"BSfQ55pz66NwX4ejdnnHiCb+JtMZmkNZRI2fPZ2YIO1Y":{"registrationId":11838246,"currentRatchet":{"ephemeralKeyPair":{"pubKey":"BWv8PNI29kvZwd+7LaeF9uYmerOne5i3UnUsBp/LeJI6","privKey":"OAvR9/9CQ5qVtrEx+zJuROcVHAYSaWua600m0Nq1A28="},"lastRemoteEphemeralKey":"Bf1UOwWNjg0G1lpURmP/DHsboihhS1nHG6ImLMqRalZR","previousCounter":129,"rootKey":"pGcLoK1iXZFw20oW6I5GuEJg1WeU0Nir1DY9IojC3Qk="},"indexInfo":{"baseKey":"BSfQ55pz66NwX4ejdnnHiCb+JtMZmkNZRI2fPZ2YIO1Y","baseKeyType":2,"closed":-1,"used":1777153492269,"created":1776972188525,"remoteIdentityKey":"BVcUSy2JwakTgxmjO9o5nc4J39Ohu+MdiaAENj1uOe1G"},"_chains":{"BbXLLj+7mSxztGs2sqr836MqxRS/gKMucrk0/QN/wg8r":{"chainKey":{"counter":8},"chainType":2,"messageKeys":{}},"BYhWmgl4ftAd2REox0iLD6k2mvlp7446jP1uYeSG2mEP":{"chainKey":{"counter":0},"chainType":2,"messageKeys":{}},"Bf1UOwWNjg0G1lpURmP/DHsboihhS1nHG6ImLMqRalZR":{"chainKey":{"counter":0,"key":"Fs1ewaFKvVGXPGUrXOOzHfPQeDAiajo7m/1n2FqyUu4="},"chainType":2,"messageKeys":{}},"BWv8PNI29kvZwd+7LaeF9uYmerOne5i3UnUsBp/LeJI6":{"chainKey":{"counter":-1,"key":"Ru1FRrr/2yEoVjVAz6pAlGkWm3ZVx43MMzy4M/YDFXY="},"chainType":1,"messageKeys":{}}}}},"version":"v1"}
+```
+
+### `axion-ia-api\src\whatsapp-auth\session-197907898745032_1.0.json`
+
+```json
+{"_sessions":{"BUEW9MF2U47Eo9nn19KXwZ2m92pGcYKcgDTolFcbQSUS":{"registrationId":1017004091,"currentRatchet":{"ephemeralKeyPair":{"pubKey":"BdC4Zc5ybIp75KhfJ/pgznqU9bbSCT8JtUUW/GWIzQIs","privKey":"+E1wV2Cb6xK53J7qyMcYhk05rvgQCksLaI2sUNxqzGg="},"lastRemoteEphemeralKey":"BYXzVexgV2lPdSODLGLIV6EDlltfrnUe24Oe5q7DGzRj","previousCounter":0,"rootKey":"pP2lm0T2NKdH6KoPz/VthmwNAn5WqJGfDANrz9nGpG0="},"indexInfo":{"baseKey":"BUEW9MF2U47Eo9nn19KXwZ2m92pGcYKcgDTolFcbQSUS","baseKeyType":1,"closed":-1,"used":1777153487860,"created":1777153487860,"remoteIdentityKey":"Bc6RdwhahvM8cg7Vbs5NndGTy5MiFZZ1gsSa42YPOGEV"},"_chains":{"BdC4Zc5ybIp75KhfJ/pgznqU9bbSCT8JtUUW/GWIzQIs":{"chainKey":{"counter":-1,"key":"TfOKUiS61xoTCuMiR5OyUyzneu4NMz8rU9bDAraLPCs="},"chainType":1,"messageKeys":{}}},"pendingPreKey":{"signedKeyId":4631636,"baseKey":"BUEW9MF2U47Eo9nn19KXwZ2m92pGcYKcgDTolFcbQSUS","preKeyId":14197898}}},"version":"v1"}
+```
+
+### `axion-ia-api\src\whatsapp-auth\session-199333811114007_1.0.json`
+
+```json
+{"_sessions":{"Ba4FMrE92H5W9MGjIKC6uccueYCKMHjC5jRxZg4yFKhD":{"registrationId":1590663351,"currentRatchet":{"ephemeralKeyPair":{"pubKey":"BW2ikWetRIW46b7av25qrBUnGxAdS+8DcZPGjbhV36Fb","privKey":"sJhUqGLdIbm2rA1pY04CkkXVHmClJ4UL6dt9pscqtEI="},"lastRemoteEphemeralKey":"Bb5666t4kIyV8xRdROsnJOt89XcqYA9IYd7OVAx2+/0T","previousCounter":0,"rootKey":"60eF655Fsut5usvSruYiGPUANwx3Qtwc2WW/FPmOk3s="},"indexInfo":{"baseKey":"Ba4FMrE92H5W9MGjIKC6uccueYCKMHjC5jRxZg4yFKhD","baseKeyType":1,"closed":-1,"used":1777219370206,"created":1777219370206,"remoteIdentityKey":"BScj+TapfDLbcjoOxabO1BLASJjjSDYS7D+f1VftgCRE"},"_chains":{"BW2ikWetRIW46b7av25qrBUnGxAdS+8DcZPGjbhV36Fb":{"chainKey":{"counter":-1,"key":"aZ2UEL7uL+Yr9Fi65uV4BIyyWDkI6RZHT2fx2oNWx+s="},"chainType":1,"messageKeys":{}}},"pendingPreKey":{"signedKeyId":2817664,"baseKey":"Ba4FMrE92H5W9MGjIKC6uccueYCKMHjC5jRxZg4yFKhD","preKeyId":5244607}}},"version":"v1"}
+```
+
+### `axion-ia-api\src\whatsapp-auth\session-203886493208648_1.0.json`
+
+```json
+{"_sessions":{"BYGEid+ydIlWVxvRYPDy8hxnUt3WRGri5d3i+dPcFWhf":{"registrationId":82560328,"currentRatchet":{"ephemeralKeyPair":{"pubKey":"BVs2IOuywMBeynxWM9AxR313aJJqgbhxwTbAozH+4Xl7","privKey":"wBuw1V0dKYoVLKguawt6L4+Ab07qPrblx/XA+pcuh1c="},"lastRemoteEphemeralKey":"BckkctnxXzargCHA1ssuuvRKpe1QTKXS2azw/PGyY/8x","previousCounter":0,"rootKey":"QR1ERZ3Noo95KxUXVX9DYb4FoSYwV/rokNXdGCKqT8A="},"indexInfo":{"baseKey":"BYGEid+ydIlWVxvRYPDy8hxnUt3WRGri5d3i+dPcFWhf","baseKeyType":1,"closed":1777117479244,"used":1777024987011,"created":1777024987011,"remoteIdentityKey":"Bc8WvErd3wa/5ceFezqMeI3F1hj5Am0sHnlKy4ktZLBK"},"_chains":{"BVs2IOuywMBeynxWM9AxR313aJJqgbhxwTbAozH+4Xl7":{"chainKey":{"counter":-1,"key":"hzUHzCZEe0sV33reqjDplsp8uHD8k5D9h8widmqIHxM="},"chainType":1,"messageKeys":{}}},"pendingPreKey":{"signedKeyId":1209630,"baseKey":"BYGEid+ydIlWVxvRYPDy8hxnUt3WRGri5d3i+dPcFWhf","preKeyId":15688400}},"BRrGDoUe6FC28Liyk+ZnGlB8kXBk8YSexzd075YcI0Zp":{"registrationId":1567540813,"currentRatchet":{"ephemeralKeyPair":{"pubKey":"BXUi1d0nqMfeVa2RHgJyemolivHN+sDnWxlSWneWagEs","privKey":"oNVIPud0L3n/+vd7uvdUSPXNzT3XEHpjLcG9RRltO24="},"lastRemoteEphemeralKey":"BSAUAdI2OgYOYImOLt4Rt6sKK8MzSR/FR3HdCEElCtN3","previousCounter":0,"rootKey":"Y945V0n+dnkWGtm8lvPo1yQpItC12TAYl7PPwTY+8Q0="},"indexInfo":{"baseKey":"BRrGDoUe6FC28Liyk+ZnGlB8kXBk8YSexzd075YcI0Zp","baseKeyType":1,"closed":-1,"used":1777117479243,"created":1777117479243,"remoteIdentityKey":"BQB1U6jE1lPmU+E/qbkmw3ygT8r321YRtHAtdK3ezYtz"},"_chains":{"BXUi1d0nqMfeVa2RHgJyemolivHN+sDnWxlSWneWagEs":{"chainKey":{"counter":-1,"key":"IUQ0bwlR6QTOmVDhazRXvwp65fKgSAjO7c/q7ewUCFg="},"chainType":1,"messageKeys":{}}},"pendingPreKey":{"signedKeyId":9817900,"baseKey":"BRrGDoUe6FC28Liyk+ZnGlB8kXBk8YSexzd075YcI0Zp","preKeyId":9014834}}},"version":"v1"}
+```
+
+### `axion-ia-api\src\whatsapp-auth\session-207026298839069_1.0.json`
+
+```json
+{"_sessions":{"BfKflW1FSdoPxDikJ7zwS5WrYu/rTeB9G3cadr5EBvZf":{"registrationId":200920755,"currentRatchet":{"ephemeralKeyPair":{"pubKey":"BTkqAWMypvrnx1+PpPklgSgmNKwgSeVxbsdVxzfXu6BP","privKey":"sAigQypU9gmAZm//bByNt5BsfFLdf2q7tZHqKwk2wWY="},"lastRemoteEphemeralKey":"BRnei5wdHIUpxX6xt+ngXTRi/u1dxpDwlRFknYS2ATV4","previousCounter":0,"rootKey":"/sdJKM+tQW79qFHvAuJ2j2a/U2zVQr3sUDJCMnfLhGw="},"indexInfo":{"baseKey":"BfKflW1FSdoPxDikJ7zwS5WrYu/rTeB9G3cadr5EBvZf","baseKeyType":2,"closed":-1,"used":1777117478374,"created":1777117478374,"remoteIdentityKey":"BazAw1X/rZMdEtw+380DKokvT+2G5AZRaLaI2Zp4CusC"},"_chains":{"BRnei5wdHIUpxX6xt+ngXTRi/u1dxpDwlRFknYS2ATV4":{"chainKey":{"counter":1,"key":"9ote06a4Of9DrORS4AD8USLq0/7DEDQCmkg2HeVHPsw="},"chainType":2,"messageKeys":{}},"BTkqAWMypvrnx1+PpPklgSgmNKwgSeVxbsdVxzfXu6BP":{"chainKey":{"counter":-1,"key":"EowluuPgzzppPkammrbbjHriKt8vVCxOfL3vJkPKFn8="},"chainType":1,"messageKeys":{}}}}},"version":"v1"}
+```
+
+### `axion-ia-api\src\whatsapp-auth\session-210526428741739_1.0.json`
+
+```json
+{"_sessions":{"BUBo0/XGhS6GmeJCEZLFd0RpZfAg8Cl4s8OXcr1YUcVl":{"registrationId":580050937,"currentRatchet":{"ephemeralKeyPair":{"pubKey":"BVgIFxpEPgIG/5kHVnRJ7FREmYcLEI1Cf+8S1IHU1Hkv","privKey":"yAbvN96sjncpunALRWd7tXitjymzHlMlsy4hoLsEq2A="},"lastRemoteEphemeralKey":"BUcMsZO0Ex9pAiZPnS9jyL6dN0EtsUYonhHG2h70ulsd","previousCounter":0,"rootKey":"g61nseh8/qSCs0yWcZQTZ0p9Fs8p3vP3hEQJB73CLqE="},"indexInfo":{"baseKey":"BUBo0/XGhS6GmeJCEZLFd0RpZfAg8Cl4s8OXcr1YUcVl","baseKeyType":1,"closed":-1,"used":1776986596941,"created":1776986596941,"remoteIdentityKey":"Bem4nnJuLLErccxaqys8kfQCHEbASwGZRbDTGHrLXPcD"},"_chains":{"BVgIFxpEPgIG/5kHVnRJ7FREmYcLEI1Cf+8S1IHU1Hkv":{"chainKey":{"counter":-1,"key":"1hIQb+l1huiY0zzI4nvzGdvdgj0kx+EaYhP/jKksSIs="},"chainType":1,"messageKeys":{}}},"pendingPreKey":{"signedKeyId":5432219,"baseKey":"BUBo0/XGhS6GmeJCEZLFd0RpZfAg8Cl4s8OXcr1YUcVl","preKeyId":10327152}}},"version":"v1"}
+```
+
+### `axion-ia-api\src\whatsapp-auth\session-210775687872656_1.0.json`
+
+```json
+{"_sessions":{"BXfyYREkcLoWNP32AzgSLxOnoy2Gk4dW/sKPWudpqgVl":{"registrationId":1158921969,"currentRatchet":{"ephemeralKeyPair":{"pubKey":"BblPK+tltc76PBlk7Inncl441gFTWA30AIJgvFrECuxG","privKey":"eEjVaBzC4BacNF1R+CtiNRd1CxZKxebuTBDOVy0eiW4="},"lastRemoteEphemeralKey":"BSpWNkBNlTiPR/MW7pbYPb4TufCOew4ImgT+1WghqeBP","previousCounter":0,"rootKey":"R2VGWTx6HCP+lCL78G9aYJYGB0+qkqRQ8D4Rj64np4k="},"indexInfo":{"baseKey":"BXfyYREkcLoWNP32AzgSLxOnoy2Gk4dW/sKPWudpqgVl","baseKeyType":1,"closed":-1,"used":1777203876237,"created":1777203876237,"remoteIdentityKey":"BVBVB5XJl6HO6R4Fz2d5YMNGvlkeNLHulAUpwrenJCoU"},"_chains":{"BblPK+tltc76PBlk7Inncl441gFTWA30AIJgvFrECuxG":{"chainKey":{"counter":-1,"key":"E6S04Znj//R0jk3rZ1O1hvIsgQAUBjd2LnSMz1nuNj0="},"chainType":1,"messageKeys":{}}},"pendingPreKey":{"signedKeyId":11715788,"baseKey":"BXfyYREkcLoWNP32AzgSLxOnoy2Gk4dW/sKPWudpqgVl","preKeyId":2941}}},"version":"v1"}
+```
+
+### `axion-ia-api\src\whatsapp-auth\session-21393450217523_1.0.json`
+
+```json
+{"_sessions":{"BShkogu7exHpDGx5arxC7qh1RL8J06CouwEEY1xja3JW":{"registrationId":1600218368,"currentRatchet":{"ephemeralKeyPair":{"pubKey":"BflEA4IYH3Oo1JJSYbb99rCPQcCr9peiXMpD7BU7OdEP","privKey":"IOIOZqgV6q7Ixh+ZOLE6fiKk0MviE5lN4fKhU56l6Uo="},"lastRemoteEphemeralKey":"BWtwAdtAKflqtU8AGAUIKv3u6loPvt9ETl93PoUGQUhg","previousCounter":0,"rootKey":"Gkdy1YEMBtfgEFMnhJQvPCjtIibbMW5m4yFwN2oYzfk="},"indexInfo":{"baseKey":"BShkogu7exHpDGx5arxC7qh1RL8J06CouwEEY1xja3JW","baseKeyType":1,"closed":-1,"used":1777024989577,"created":1777024989577,"remoteIdentityKey":"BWnkNSDzGad8qmgN5ECnbg+GXkL4P75tZRcknYV5vFdl"},"_chains":{"BflEA4IYH3Oo1JJSYbb99rCPQcCr9peiXMpD7BU7OdEP":{"chainKey":{"counter":-1,"key":"Y+C3k4+I0qJAlN7HvUi4jy3BWiFhzA0pZPFA/ZpfKe0="},"chainType":1,"messageKeys":{}}},"pendingPreKey":{"signedKeyId":13354670,"baseKey":"BShkogu7exHpDGx5arxC7qh1RL8J06CouwEEY1xja3JW","preKeyId":8570683}}},"version":"v1"}
+```
+
+### `axion-ia-api\src\whatsapp-auth\session-214443589910746_1.0.json`
+
+```json
+{"_sessions":{"BR8KntPobhW53SLUJ/OmiQDeT0FWTP5tK7HZgi6xAAQL":{"registrationId":264213483,"currentRatchet":{"ephemeralKeyPair":{"pubKey":"BePGawFPrDom9o+VM2dQlSCvGuyt/ZGh4rdT1F0kresn","privKey":"ULQ4qVpynuQp4rCV0Tc7CgMaHzfKKDBU8SNQ35HPDFM="},"lastRemoteEphemeralKey":"BYDkPfJyo5KnMo20m+tKSS8jyFKuH7JEpkf6d//8pIpl","previousCounter":0,"rootKey":"qYLpzAjQsLyTOYCJP/C8TlkMsCTqAfq4+dWjIuwPECE="},"indexInfo":{"baseKey":"BR8KntPobhW53SLUJ/OmiQDeT0FWTP5tK7HZgi6xAAQL","baseKeyType":2,"closed":-1,"used":1777239294354,"created":1777239294354,"remoteIdentityKey":"BQwIRWBP0lvP3iODGDhrCr73WI0SloX323hO10xf8xJh"},"_chains":{"BYDkPfJyo5KnMo20m+tKSS8jyFKuH7JEpkf6d//8pIpl":{"chainKey":{"counter":0,"key":"s59VahVQhY/YQ+gmh+4y0AoU7+eVflmzHDHAhoCfD+Y="},"chainType":2,"messageKeys":{}},"BePGawFPrDom9o+VM2dQlSCvGuyt/ZGh4rdT1F0kresn":{"chainKey":{"counter":-1,"key":"s2oRCMO8vogLupETUGIfKSbQOWJZzHjvpzJe6bQGHcU="},"chainType":1,"messageKeys":{}}}}},"version":"v1"}
+```
+
+### `axion-ia-api\src\whatsapp-auth\session-214555175190757_1.0.json`
+
+```json
+{"_sessions":{"BcNSs6Kpox3+NggqpG3K4kjUhJ1+XRI0ayJt2pAaVLVx":{"registrationId":1709739712,"currentRatchet":{"ephemeralKeyPair":{"pubKey":"BTeHP2VDjfVuPkNV1m960vkJlA5GS1YCh+yOEgBCFi4U","privKey":"cMRi3LU2QMnFnIMUH+dPpawYvD2VH1rTdfI5Fp8VsWw="},"lastRemoteEphemeralKey":"BZr4BSnmv66sAGo8Q1Z+rb7Wdu8TLipNJwpmzIRRI484","previousCounter":0,"rootKey":"WzSLApt8zlrUDfiAYBfhtvLGxQAzGoUUCcF7b4sZrlM="},"indexInfo":{"baseKey":"BcNSs6Kpox3+NggqpG3K4kjUhJ1+XRI0ayJt2pAaVLVx","baseKeyType":2,"closed":-1,"used":1777239292914,"created":1777239292914,"remoteIdentityKey":"BayGwbpX61LK4Ai044APdWv7b0KyskBco7ATU1VVcUcN"},"_chains":{"BZr4BSnmv66sAGo8Q1Z+rb7Wdu8TLipNJwpmzIRRI484":{"chainKey":{"counter":0,"key":"DsWpAk2COoXm6SSkLMVRtE/r8FUd37nPFSPNuwsiEVo="},"chainType":2,"messageKeys":{}},"BTeHP2VDjfVuPkNV1m960vkJlA5GS1YCh+yOEgBCFi4U":{"chainKey":{"counter":-1,"key":"VQQVH6YUwmStiH3Lo+jGS33HvavJRVKT/En8z6aYytY="},"chainType":1,"messageKeys":{}}}}},"version":"v1"}
+```
+
+### `axion-ia-api\src\whatsapp-auth\session-229269716393998_1.0.json`
+
+```json
+{"_sessions":{"BfcsdtFoCdVQorbkdDc4cupyhxktJN/8K+j+nvPhNKJ2":{"registrationId":1287357541,"currentRatchet":{"ephemeralKeyPair":{"pubKey":"BexUUpx0/xY9XnlELoBfknzx6iXCm0Ue47WU5sv10FoD","privKey":"ILXsvfparJI+adcVnCS0ra0kWxNtkQziCAslwZ82sFg="},"lastRemoteEphemeralKey":"BeLfJ8PdVuzUNK1l9fb+eVoAm7L3ObPoMVg73Gp8HTBQ","previousCounter":0,"rootKey":"HnlJZHXrhwBNV55K5rAWVTWM3XWJ6dp5aKqlm43bw4I="},"indexInfo":{"baseKey":"BfcsdtFoCdVQorbkdDc4cupyhxktJN/8K+j+nvPhNKJ2","baseKeyType":1,"closed":-1,"used":1777203876057,"created":1777203876057,"remoteIdentityKey":"BZl3LibtzQFfl8EyOYr91QrjHdHaF/vhV0/cImNtycJf"},"_chains":{"BexUUpx0/xY9XnlELoBfknzx6iXCm0Ue47WU5sv10FoD":{"chainKey":{"counter":-1,"key":"XGAzS0+M4pympP68QvFOH2Ib4ytzYbvtlma4yuKMGXM="},"chainType":1,"messageKeys":{}}},"pendingPreKey":{"signedKeyId":9716610,"baseKey":"BfcsdtFoCdVQorbkdDc4cupyhxktJN/8K+j+nvPhNKJ2","preKeyId":3474}}},"version":"v1"}
+```
+
+### `axion-ia-api\src\whatsapp-auth\session-237821214371905_1.0.json`
+
+```json
+{"_sessions":{"BYPKEOD1ktD9vGI+Jhg/V4TcQqNKvJkcBaKE3vPrUFd3":{"registrationId":86576829,"currentRatchet":{"ephemeralKeyPair":{"pubKey":"BS4FJ0K2nNXt6eVnTssD1YCLXay5FXOmc86hTQ+vp4JZ","privKey":"4Abgd9CaC7036N5s+7aOZ05go7tR6wo7g+tKTrsdAm0="},"lastRemoteEphemeralKey":"Bdbxfxybt/f+Pd7f8n3SNNlVgH6hIciN3vU4mLwm5nIt","previousCounter":0,"rootKey":"/qBOJ9WobPjfH/UpoJctUpg5yuHpTn5uOoWYzt58mIU="},"indexInfo":{"baseKey":"BYPKEOD1ktD9vGI+Jhg/V4TcQqNKvJkcBaKE3vPrUFd3","baseKeyType":1,"closed":1777117476949,"used":1777117469211,"created":1777117469211,"remoteIdentityKey":"Bb6lqy8+NvKkt13BhY/26bkYcVmPZmHUdbMFO2DL5LlU"},"_chains":{"BS4FJ0K2nNXt6eVnTssD1YCLXay5FXOmc86hTQ+vp4JZ":{"chainKey":{"counter":-1,"key":"q6306B/IOcQwT8Q7eJurD4KHuEdcFTIpvWciGEJ1vsM="},"chainType":1,"messageKeys":{}}},"pendingPreKey":{"signedKeyId":10124533,"baseKey":"BYPKEOD1ktD9vGI+Jhg/V4TcQqNKvJkcBaKE3vPrUFd3","preKeyId":14978258}},"BXQ7/BwuFMsMVdWCoVlWT+AoS2yJDW2QCxu2Yw4EU14Y":{"registrationId":86576829,"currentRatchet":{"ephemeralKeyPair":{"pubKey":"Bd3JSBrZHBaxL1hxd2jqOcLtkBE3th51d8H2FPUTrTFk","privKey":"2OJr07+Gqq7426QldV0Y/H+4i0YuzXdE7XUApGoaqEo="},"lastRemoteEphemeralKey":"Bdbxfxybt/f+Pd7f8n3SNNlVgH6hIciN3vU4mLwm5nIt","previousCounter":0,"rootKey":"tT/9UFmES0X+JNdDsveFtOkrt2b5QLFHV8DcBVRzbh8="},"indexInfo":{"baseKey":"BXQ7/BwuFMsMVdWCoVlWT+AoS2yJDW2QCxu2Yw4EU14Y","baseKeyType":1,"closed":-1,"used":1777117476947,"created":1777117476947,"remoteIdentityKey":"Bb6lqy8+NvKkt13BhY/26bkYcVmPZmHUdbMFO2DL5LlU"},"_chains":{"Bd3JSBrZHBaxL1hxd2jqOcLtkBE3th51d8H2FPUTrTFk":{"chainKey":{"counter":-1,"key":"kC26jgPZ+OKJUZz6mRr8zZj41ZpvWZrzuFJpFHzupbw="},"chainType":1,"messageKeys":{}}},"pendingPreKey":{"signedKeyId":10124533,"baseKey":"BXQ7/BwuFMsMVdWCoVlWT+AoS2yJDW2QCxu2Yw4EU14Y","preKeyId":14978338}}},"version":"v1"}
+```
+
+### `axion-ia-api\src\whatsapp-auth\session-239483131830348_1.0.json`
+
+```json
+{"_sessions":{"Bd4FwUu1d7L1PbTGL7BICuOziZtyoXGaAmGm3PeahDww":{"registrationId":464825017,"currentRatchet":{"ephemeralKeyPair":{"pubKey":"BfYHaZ3qbmPMoFsJKkwSOKbA9nOoiIk7+CWQMmQP2xlk","privKey":"0E8gyqv33BAhhUYfx293d5Prc9fBw5BNOqh7SOT0Ck0="},"lastRemoteEphemeralKey":"BRN1h8t6VFpbQgqHG9BMdcp41HHTL2p3heRDnzVWcG4V","previousCounter":0,"rootKey":"Ln4b7EQQ6MeTIvdjFRu/YdQF01qJA8ZqoOh2B1UCxjE="},"indexInfo":{"baseKey":"Bd4FwUu1d7L1PbTGL7BICuOziZtyoXGaAmGm3PeahDww","baseKeyType":1,"closed":1776984318665,"used":1776979551209,"created":1776979551209,"remoteIdentityKey":"BdgO73aOHokX80XD34lXbomFo+KUhYmdMW+0LyGpDXM9"},"_chains":{"BfYHaZ3qbmPMoFsJKkwSOKbA9nOoiIk7+CWQMmQP2xlk":{"chainKey":{"counter":-1,"key":"+EO5Jl0jIjN0ezwxwQvuvJaRo7A12K1b3P9711rfmzg="},"chainType":1,"messageKeys":{}}},"pendingPreKey":{"signedKeyId":4167288,"baseKey":"Bd4FwUu1d7L1PbTGL7BICuOziZtyoXGaAmGm3PeahDww","preKeyId":4346340}},"BXDBlZpCDG8wZ62b+COCWLD+5dazEeXMxDijhpn8rEwG":{"registrationId":1093290609,"currentRatchet":{"ephemeralKeyPair":{"pubKey":"BenNilDjn12VAlBdZ+VtaK6a80VeyM90/BbQ4K7ssVVA","privKey":"GFKMigtuXlSAOJrw4d/Ffz+Y3Zkgk+N1f8RUeNe7dl4="},"lastRemoteEphemeralKey":"BSXEIylVF7Zp1DwSp6tk+YNdhkrSSlfoICrzIJCnkW9t","previousCounter":0,"rootKey":"j4FeIJMWwAAIoyBW2kM375v9zNL4MiMX+pzS8wV38RY="},"indexInfo":{"baseKey":"BXDBlZpCDG8wZ62b+COCWLD+5dazEeXMxDijhpn8rEwG","baseKeyType":1,"closed":1777029015106,"used":1776984318659,"created":1776984318659,"remoteIdentityKey":"Barqv1r8R2beiT2XPoSWHCWcwl3NNqkqpUbT+KlmnLBB"},"_chains":{"BenNilDjn12VAlBdZ+VtaK6a80VeyM90/BbQ4K7ssVVA":{"chainKey":{"counter":-1,"key":"7ldwA4hfex1dORXgQikM2RxdxGzLam9ttS0C6bMeAfM="},"chainType":1,"messageKeys":{}}},"pendingPreKey":{"signedKeyId":2545399,"baseKey":"BXDBlZpCDG8wZ62b+COCWLD+5dazEeXMxDijhpn8rEwG","preKeyId":13752780}},"Ba+ymExg3zMvPyjQNIk6rTZv7UPFZeylYxYuAmvQ5L5s":{"registrationId":541921368,"currentRatchet":{"ephemeralKeyPair":{"pubKey":"BTQWJ86DN5J9dUQa7RiCEEMaQLbx2TRCfhNdIVkMxa85","privKey":"IJ+Q3xQFdQ91eYSWzZKh0MxEYBKMTrXZse4OUtKuikc="},"lastRemoteEphemeralKey":"BY890m/UutREUmfEtYE6+e2TFhbXI4Tb5CEMts985UZg","previousCounter":0,"rootKey":"6iUo2gEHZYK8K21aRvyjsD9qCe7HEwi4HSXJZL1tG/M="},"indexInfo":{"baseKey":"Ba+ymExg3zMvPyjQNIk6rTZv7UPFZeylYxYuAmvQ5L5s","baseKeyType":1,"closed":1777030594383,"used":1777029015103,"created":1777029015103,"remoteIdentityKey":"Bbln6nGcmzl//HefNWH30XRe7MnnhJVZeyPw6p5JGfls"},"_chains":{"BTQWJ86DN5J9dUQa7RiCEEMaQLbx2TRCfhNdIVkMxa85":{"chainKey":{"counter":-1,"key":"4LFbQBXip7h0Oj9ergKbpQSXSl7ottiMcDX5MSN79c8="},"chainType":1,"messageKeys":{}}},"pendingPreKey":{"signedKeyId":725913,"baseKey":"Ba+ymExg3zMvPyjQNIk6rTZv7UPFZeylYxYuAmvQ5L5s","preKeyId":1520448}},"BZJWot6Nj7AXxO9xE/szl6OrIsy6twrtSJf77iSsOhVl":{"registrationId":2084807440,"currentRatchet":{"ephemeralKeyPair":{"pubKey":"BdJsMxG+wasZlf6prFr+OsD3ZxtwL2bWZd5tQMDWXLpc","privKey":"WJ4c66iHifaGg3YP6ZzTYdt9lTcauif0puBlaeTGmFk="},"lastRemoteEphemeralKey":"Bc341Yu+4+cBHZS+H/lRzYCWfjXo0CMImFyTCoDdmlUi","previousCounter":0,"rootKey":"ylXLbn6hsBJMRridTj2Xi/8UO8/qOzzKQ/eXW4x0sNY="},"indexInfo":{"baseKey":"BZJWot6Nj7AXxO9xE/szl6OrIsy6twrtSJf77iSsOhVl","baseKeyType":1,"closed":1777061379303,"used":1777030594378,"created":1777030594378,"remoteIdentityKey":"BRA2HN0vZoJcAX16uGKGl7UJxM/FLkwYSkrBgICtpvB5"},"_chains":{"BdJsMxG+wasZlf6prFr+OsD3ZxtwL2bWZd5tQMDWXLpc":{"chainKey":{"counter":-1,"key":"bP2dkCR7XYMiJCDOsR3/Q2BzbYwxmxSsBG/XKwXwKlY="},"chainType":1,"messageKeys":{}}},"pendingPreKey":{"signedKeyId":14685010,"baseKey":"BZJWot6Nj7AXxO9xE/szl6OrIsy6twrtSJf77iSsOhVl"}},"Bf2g25wzEBqmIH3O0X8xep7fjpSxUFHzIatWa+cOVlhn":{"registrationId":1322334633,"currentRatchet":{"ephemeralKeyPair":{"pubKey":"BTDIgAqL/pf6zmvoq9p65rrSF/25gciAnDE6RvJDGlsS","privKey":"KJjDhAVtbZtD1pTRJVF4W1TohB5g2DEi6bwOt4z9jFc="},"lastRemoteEphemeralKey":"BfCchDvRXVNWUkwVHC0tqYLptzkY01RIag2iAKDdE+IY","previousCounter":0,"rootKey":"lowwA7AR4KT1wfoDcmA1dbpqoEsF44sUKYM9Wq14iRs="},"indexInfo":{"baseKey":"Bf2g25wzEBqmIH3O0X8xep7fjpSxUFHzIatWa+cOVlhn","baseKeyType":1,"closed":1777097318799,"used":1777061379301,"created":1777061379301,"remoteIdentityKey":"BcEBfggMda2F8A98eMvlgCsnWg5qpfslhZYOJJ3UlPFs"},"_chains":{"BTDIgAqL/pf6zmvoq9p65rrSF/25gciAnDE6RvJDGlsS":{"chainKey":{"counter":-1,"key":"CAIdsOQEeFE5YwXopFld4Ow0DytTS27ZEG5lAieo2NA="},"chainType":1,"messageKeys":{}}},"pendingPreKey":{"signedKeyId":15920672,"baseKey":"Bf2g25wzEBqmIH3O0X8xep7fjpSxUFHzIatWa+cOVlhn","preKeyId":6458513}},"BZyInWMmCx6RQwwFuH9FFv6PA/b8qVWUX0sjfKYg35xp":{"registrationId":785039633,"currentRatchet":{"ephemeralKeyPair":{"pubKey":"BfipC5sGJieIuFZ+mHMYnrKuYoSPK3QYkcyRKz92x5YP","privKey":"2Oda2a8QiJekVtIhchZsSu6RZcWqEDO7z+lPRtCM/XI="},"lastRemoteEphemeralKey":"BeLxDiVDo/ePg3dThRL9iHu/Paj2gev2jDIpH2PdBoAY","previousCounter":0,"rootKey":"43zculdJNTOnABfsQIGj7wZh2dxEB+6pXMggHxe8d1E="},"indexInfo":{"baseKey":"BZyInWMmCx6RQwwFuH9FFv6PA/b8qVWUX0sjfKYg35xp","baseKeyType":1,"closed":1777153487592,"used":1777097318791,"created":1777097318791,"remoteIdentityKey":"BYPWCKEiCtsWrv9II9kqy8/ms7ZXlkIjjxqxx9N7tJAR"},"_chains":{"BfipC5sGJieIuFZ+mHMYnrKuYoSPK3QYkcyRKz92x5YP":{"chainKey":{"counter":-1,"key":"RWWne5M8MKWkDUL98xLPU6NK8EHd5OakhXeUkcSLOU8="},"chainType":1,"messageKeys":{}}},"pendingPreKey":{"signedKeyId":5413378,"baseKey":"BZyInWMmCx6RQwwFuH9FFv6PA/b8qVWUX0sjfKYg35xp","preKeyId":8278603}},"BVvw83zTwiIgXcVf1N53Umh1WLnhDxSRnR0JXINk+IJZ":{"registrationId":1289230875,"currentRatchet":{"ephemeralKeyPair":{"pubKey":"BdMPY5smEGRdrCMxifAaMCIpeQvlFauP4jGHTE3G3LA/","privKey":"kOhuj877y+lNhgsAewz9W42xDjzTGCtPQFI3XxT3Oks="},"lastRemoteEphemeralKey":"BUgO6sy7kLgU1GNNZD0Kd0pLsIoTNDvAlRTbn8jmVXh3","previousCounter":0,"rootKey":"gWUw4oLLdz9t1QUQOMFN1qQs0Ns2ZDERstjsIBKssEc="},"indexInfo":{"baseKey":"BVvw83zTwiIgXcVf1N53Umh1WLnhDxSRnR0JXINk+IJZ","baseKeyType":1,"closed":1777153492468,"used":1777153487588,"created":1777153487588,"remoteIdentityKey":"BVNyR+JcpRn37GB5n7zXyuFEJb6F2UyoxBi1T794nZg5"},"_chains":{"BdMPY5smEGRdrCMxifAaMCIpeQvlFauP4jGHTE3G3LA/":{"chainKey":{"counter":-1,"key":"0ZhoqCQUDCu/EWzOSJEGnv++kQQTsMLHnjAx/fcL5NU="},"chainType":1,"messageKeys":{}}},"pendingPreKey":{"signedKeyId":6353644,"baseKey":"BVvw83zTwiIgXcVf1N53Umh1WLnhDxSRnR0JXINk+IJZ","preKeyId":16063146}},"BVOATH1XEVzil3/VtJWzETSb9WYnCJxotcf5pHLXEC9j":{"registrationId":1289230875,"currentRatchet":{"ephemeralKeyPair":{"pubKey":"BVbcpOmzGY/IxpclILdX5bqF603BC+ULpjRzirvJQ142","privKey":"OKw7j+eAzl4mI/bfTKhVW1d1xauCkXps/Co/Py6WT0Q="},"lastRemoteEphemeralKey":"BUgO6sy7kLgU1GNNZD0Kd0pLsIoTNDvAlRTbn8jmVXh3","previousCounter":0,"rootKey":"dq+38KHZGN+XRiMS3YIrvum8snBDFNPyowBgToHJMlI="},"indexInfo":{"baseKey":"BVOATH1XEVzil3/VtJWzETSb9WYnCJxotcf5pHLXEC9j","baseKeyType":1,"closed":1777203875843,"used":1777153492466,"created":1777153492466,"remoteIdentityKey":"BVNyR+JcpRn37GB5n7zXyuFEJb6F2UyoxBi1T794nZg5"},"_chains":{"BVbcpOmzGY/IxpclILdX5bqF603BC+ULpjRzirvJQ142":{"chainKey":{"counter":-1,"key":"KubyCQASWyy+przmc6a3xTIyciAFqYDsZjQ0uPnHles="},"chainType":1,"messageKeys":{}}},"pendingPreKey":{"signedKeyId":6353644,"baseKey":"BVOATH1XEVzil3/VtJWzETSb9WYnCJxotcf5pHLXEC9j","preKeyId":16063475}},"Ba3Cn0QYsFJuAd+bTF+dyYM14oXshMD5OKqI1bF2K/Rx":{"registrationId":543150568,"currentRatchet":{"ephemeralKeyPair":{"pubKey":"BeLFywrQW88YXuO2yQUEImj3Vuu6jsb2eY5WshuQ4OsV","privKey":"wBbSFhRhOiQuObaIwXcRTm6soRvwmSDF2lHUR6MSY3Q="},"lastRemoteEphemeralKey":"BdydRxHVsEPA92uOpaQKMeV19RszIG6/Qqga0/VvIA8V","previousCounter":0,"rootKey":"wPtygIzKofD1It8EQ+beBEQ0TqRC9m7EHLmisQVLKuE="},"indexInfo":{"baseKey":"Ba3Cn0QYsFJuAd+bTF+dyYM14oXshMD5OKqI1bF2K/Rx","baseKeyType":1,"closed":1777219369216,"used":1777203875840,"created":1777203875840,"remoteIdentityKey":"Bae0HmENHtnFkZIrpkFqPt2YkNzci4D9HDaZjoJuhipk"},"_chains":{"BeLFywrQW88YXuO2yQUEImj3Vuu6jsb2eY5WshuQ4OsV":{"chainKey":{"counter":-1,"key":"EVoPgL4fAhIZ5X/iqrL8HHP5btH8AVRKwtplNiMqnnA="},"chainType":1,"messageKeys":{}}},"pendingPreKey":{"signedKeyId":1328833,"baseKey":"Ba3Cn0QYsFJuAd+bTF+dyYM14oXshMD5OKqI1bF2K/Rx","preKeyId":10661207}},"BfSTsSGvVNUCN/6K/v2uBb6aZBfkwTfa2V9FR0S7AvE6":{"registrationId":1110880209,"currentRatchet":{"ephemeralKeyPair":{"pubKey":"BbI1hsnA+erDqnAg2/CROzEq55Wbg5mUcEcMNELLJtFC","privKey":"kEWiSkdNfTlSkFKMlEowI/9koxfLcfbheMX2lk6PCWg="},"lastRemoteEphemeralKey":"BY2y+96yuRkTMKs8DOyOcffbAiuzD4lw3z37UMfjo790","previousCounter":0,"rootKey":"e57msEp0LoE7s7jVMyvACTy5/VSI4xgK0h978GpQwK8="},"indexInfo":{"baseKey":"BfSTsSGvVNUCN/6K/v2uBb6aZBfkwTfa2V9FR0S7AvE6","baseKeyType":1,"closed":-1,"used":1777219369214,"created":1777219369214,"remoteIdentityKey":"BYg8/50qO3NuZbSy8VaySF4Bzf+7ECAf0+uYaZQ0Uv9d"},"_chains":{"BbI1hsnA+erDqnAg2/CROzEq55Wbg5mUcEcMNELLJtFC":{"chainKey":{"counter":-1,"key":"81oGG9ElQNwHErkS0UbK5WOCdWSkYyMq+2n2uX3AP40="},"chainType":1,"messageKeys":{}}},"pendingPreKey":{"signedKeyId":7759481,"baseKey":"BfSTsSGvVNUCN/6K/v2uBb6aZBfkwTfa2V9FR0S7AvE6","preKeyId":4641684}}},"version":"v1"}
+```
+
+### `axion-ia-api\src\whatsapp-auth\session-243894533001460_1.0.json`
+
+```json
+{"_sessions":{"BZTd44mpjNwkTmACWdTbi+kl8LSVxpDYG+YnDxJ9a/g4":{"registrationId":2124386025,"currentRatchet":{"ephemeralKeyPair":{"pubKey":"BaW4hF2hEgN19c+oUKmzyHtUiJIl0keKBZgex94qiVkJ","privKey":"QKUx6TEBhYquqXxm7hgi3D4FGNNnZ3wgXJCv1uwJgn0="},"lastRemoteEphemeralKey":"BXTwYoB5Yi2KweKHq1+JfUWH/cYIIuX1NFFkHAM4z4IY","previousCounter":0,"rootKey":"t8IoVkAmlXRfzaWEyvod7KTzEs/IKjyOhVxJbpo+7tM="},"indexInfo":{"baseKey":"BZTd44mpjNwkTmACWdTbi+kl8LSVxpDYG+YnDxJ9a/g4","baseKeyType":1,"closed":1777239293972,"used":1777117477526,"created":1777117477526,"remoteIdentityKey":"BezIrBuhZKhJmhVgVYIHpmoWO/WOMha1UnF4X1C6nFoi"},"_chains":{"BaW4hF2hEgN19c+oUKmzyHtUiJIl0keKBZgex94qiVkJ":{"chainKey":{"counter":-1,"key":"sdrz5DbY+23wERn7KLrHN1RKIzOgKDBTOg0Xj3+PDyo="},"chainType":1,"messageKeys":{}}},"pendingPreKey":{"signedKeyId":10521543,"baseKey":"BZTd44mpjNwkTmACWdTbi+kl8LSVxpDYG+YnDxJ9a/g4","preKeyId":1057135}},"BZmLm3+/VtRmXBTxNP6K5qX70/gT7Xd7I2RKhUtCVAJc":{"registrationId":1083024285,"currentRatchet":{"ephemeralKeyPair":{"pubKey":"BfMyKr3ibpmvr0XUmlNjQFfcQKyfA9FdB0Kim3enqCk6","privKey":"cHBC+bc4rjXNk0+OTJJue48MBGCigaHqjr7KGmbB01M="},"lastRemoteEphemeralKey":"BWA5cx16JvZMqpsMpfzByWnAVnJx63Q09N7JQHTNKp0/","previousCounter":0,"rootKey":"KZbG2LHAVKlt8GzKlEFtJ+jCs9ryrFUw2Zstyb6fJnE="},"indexInfo":{"baseKey":"BZmLm3+/VtRmXBTxNP6K5qX70/gT7Xd7I2RKhUtCVAJc","baseKeyType":1,"closed":-1,"used":1777239293970,"created":1777239293970,"remoteIdentityKey":"BR1wfYrCmQLZa3tpKL2rP0y9pnulk1W9yGysssWfkWNZ"},"_chains":{"BfMyKr3ibpmvr0XUmlNjQFfcQKyfA9FdB0Kim3enqCk6":{"chainKey":{"counter":-1,"key":"CUDnOIFYhjxyi9o4/uHKbl5Kxx2VEtLefGXBy/mydiU="},"chainType":1,"messageKeys":{}}},"pendingPreKey":{"signedKeyId":1409431,"baseKey":"BZmLm3+/VtRmXBTxNP6K5qX70/gT7Xd7I2RKhUtCVAJc","preKeyId":4439115}}},"version":"v1"}
+```
+
+### `axion-ia-api\src\whatsapp-auth\session-246715839987770_1.0.json`
+
+```json
+{"_sessions":{"BTUS0y6Fu9kfwxTKfzSKx83sKnSRzNG19nB1mK3f9/YQ":{"registrationId":815222451,"currentRatchet":{"ephemeralKeyPair":{"pubKey":"BSf5hj3Z+MyCTpi6OqIqp8p6nDsCv3jNAJSGWJuitiEb","privKey":"WKI/1D+Z1srmBSD23PbDxGqyo1lA+FxiOAISygAxs1c="},"lastRemoteEphemeralKey":"BfGVFnplA9CvApFIwaDaWnTivJQ3iGGOXSYyX6dL+DlL","previousCounter":0,"rootKey":"yPqBmiK0L0kTAkp2EPiFAEIDFQbjvvqiaScSAr3o3Z8="},"indexInfo":{"baseKey":"BTUS0y6Fu9kfwxTKfzSKx83sKnSRzNG19nB1mK3f9/YQ","baseKeyType":1,"closed":1777061376808,"used":1777052939913,"created":1777052939913,"remoteIdentityKey":"BZ1GVJqvO5jJqBq0EvY9qsAT/NxXuy0vzVAk5B1HvyUN"},"_chains":{"BSf5hj3Z+MyCTpi6OqIqp8p6nDsCv3jNAJSGWJuitiEb":{"chainKey":{"counter":-1,"key":"P0zkwy7aMNu0VgJwOULWW+qipuz4kwFmhJjPuVTc5Cg="},"chainType":1,"messageKeys":{}}},"pendingPreKey":{"signedKeyId":3780837,"baseKey":"BTUS0y6Fu9kfwxTKfzSKx83sKnSRzNG19nB1mK3f9/YQ"}},"BZBaWozFm2V0WeCVeN1IZ1A0HTFBZxfPHo++OrcOvCpG":{"registrationId":815222451,"currentRatchet":{"ephemeralKeyPair":{"pubKey":"BfSOETMKyxFt2Ip/HeWQf7K6IZoACUXH4fYCjlfpMjtk","privKey":"uBEZI4dCVbg53rtHkGMY3kR5hgBw9IX9fTaHebD35F0="},"lastRemoteEphemeralKey":"BfGVFnplA9CvApFIwaDaWnTivJQ3iGGOXSYyX6dL+DlL","previousCounter":0,"rootKey":"AMrV+odddee2Jz/IDYRJelzOT7MhW99z6IrF4DVHVE0="},"indexInfo":{"baseKey":"BZBaWozFm2V0WeCVeN1IZ1A0HTFBZxfPHo++OrcOvCpG","baseKeyType":1,"closed":-1,"used":1777061376807,"created":1777061376807,"remoteIdentityKey":"BZ1GVJqvO5jJqBq0EvY9qsAT/NxXuy0vzVAk5B1HvyUN"},"_chains":{"BfSOETMKyxFt2Ip/HeWQf7K6IZoACUXH4fYCjlfpMjtk":{"chainKey":{"counter":-1,"key":"SpQYTlcSffgl035U1qLj1klaQCbE/EYsEpsa5upFGZ8="},"chainType":1,"messageKeys":{}}},"pendingPreKey":{"signedKeyId":3780837,"baseKey":"BZBaWozFm2V0WeCVeN1IZ1A0HTFBZxfPHo++OrcOvCpG","preKeyId":9063555}}},"version":"v1"}
+```
+
+### `axion-ia-api\src\whatsapp-auth\session-247330087375017_1.0.json`
+
+```json
+{"_sessions":{"BY3fFurihpUJZt75M8Jo5XuC/108xcUKb8xtWWUdMJJc":{"registrationId":2108880653,"currentRatchet":{"ephemeralKeyPair":{"pubKey":"BXKoZbSfDkGCQr/IpZ3vBbT+D8CU0vs0sWqh0pw9f3wA","privKey":"aMXGHRmw/c3NIBqNd9I94X3G0H84r+0lBn33uoOCDEA="},"lastRemoteEphemeralKey":"BcjwS4XRtuIawcsUMUF+Er9E+NLTjjFWJfxBUkEFNswa","previousCounter":0,"rootKey":"YJV2tud5dPSAfYnErGtybLiQEK8DLAHgwrTsCq2o+JI="},"indexInfo":{"baseKey":"BY3fFurihpUJZt75M8Jo5XuC/108xcUKb8xtWWUdMJJc","baseKeyType":1,"closed":1777117478157,"used":1777028550779,"created":1777028550779,"remoteIdentityKey":"BYOypow/aJ/S9T3cAh1/+ePZABhQ4ohmCbGW6q+akKYr"},"_chains":{"BXKoZbSfDkGCQr/IpZ3vBbT+D8CU0vs0sWqh0pw9f3wA":{"chainKey":{"counter":-1,"key":"MhcFDQsgC0+ptKsjkDPzTZ+inlDTMPF7zeKpr5+T+lI="},"chainType":1,"messageKeys":{}}},"pendingPreKey":{"signedKeyId":7706188,"baseKey":"BY3fFurihpUJZt75M8Jo5XuC/108xcUKb8xtWWUdMJJc","preKeyId":7456730}},"Be2aJlfeEy9aluU1uFEPmBMBYWCm5RHwTaNVi9gSlPBv":{"registrationId":1643099591,"currentRatchet":{"ephemeralKeyPair":{"pubKey":"BbXF2K6WuXDSkPVp9fglFdcuLEV7QEl5707INm37AM5A","privKey":"6PORGuCrVPx5fEYcuAC7VdaBtUfg5XKWxGrADXKQsUM="},"lastRemoteEphemeralKey":"BaFddgHQwg4k89wTqY/lY2ml+KEx0j5/4wJZpG6c3u99","previousCounter":0,"rootKey":"uw3uL8p2cqN/Ir7XSoVqMe3ndXjaRYX/XGJp9FsVWX8="},"indexInfo":{"baseKey":"Be2aJlfeEy9aluU1uFEPmBMBYWCm5RHwTaNVi9gSlPBv","baseKeyType":1,"closed":-1,"used":1777117478156,"created":1777117478156,"remoteIdentityKey":"BZLRSyb+5c70gWI1djWlRC8FQfL7WdqKjfpxLyFAnQd0"},"_chains":{"BbXF2K6WuXDSkPVp9fglFdcuLEV7QEl5707INm37AM5A":{"chainKey":{"counter":-1,"key":"4sKk0kl1b9zDTIIy7tds4KAxuUOCGwlgS7o0lxYqUJI="},"chainType":1,"messageKeys":{}}},"pendingPreKey":{"signedKeyId":10729080,"baseKey":"Be2aJlfeEy9aluU1uFEPmBMBYWCm5RHwTaNVi9gSlPBv","preKeyId":2324}}},"version":"v1"}
+```
+
+### `axion-ia-api\src\whatsapp-auth\session-248567675511022_1.0.json`
+
+```json
+{"_sessions":{"BfSxrY1jTZH+MydOYOjX9OY7ZXopLAmOinGj0KwBCn0B":{"registrationId":1373041582,"currentRatchet":{"ephemeralKeyPair":{"pubKey":"BQKbbHPAWcxuCuvDvg+s1tXcnmgz6OdFxk9Fo6szBFUT","privKey":"+OtNYJxeqviaExrIdQBREAIwuTMGIP1Y8vYM17R/RWA="},"lastRemoteEphemeralKey":"BRzq4ESpAgH8QbUG2B4Z9XFSxc31CQdt8n2jtNRr/7cR","previousCounter":0,"rootKey":"JOOE4F3+RaDJyBKT2YsP4i6kGyiqeE6drLKxxAtE0q8="},"indexInfo":{"baseKey":"BfSxrY1jTZH+MydOYOjX9OY7ZXopLAmOinGj0KwBCn0B","baseKeyType":1,"closed":-1,"used":1777036916984,"created":1777036916984,"remoteIdentityKey":"BZWMJjn/+OltUd8wOvRaEtFljoWaPck8wu7niHnDnbUI"},"_chains":{"BQKbbHPAWcxuCuvDvg+s1tXcnmgz6OdFxk9Fo6szBFUT":{"chainKey":{"counter":-1,"key":"Qb4zPLQMoGYFcFMRgMa9wRUImlMW4HZHKbQz7RWupnQ="},"chainType":1,"messageKeys":{}}},"pendingPreKey":{"signedKeyId":5682110,"baseKey":"BfSxrY1jTZH+MydOYOjX9OY7ZXopLAmOinGj0KwBCn0B"}}},"version":"v1"}
+```
+
+### `axion-ia-api\src\whatsapp-auth\session-253463233560779_1.0.json`
+
+```json
+{"_sessions":{"BRA6R4Iv0QdymCOFRDJjRN+nKy58KOTipEzx7XYLwqtj":{"registrationId":40127266,"currentRatchet":{"ephemeralKeyPair":{"pubKey":"BbOLl+cHZ4d9u1R91tcGeHhGfR7aeqc4Tq9KHmkqtv1j","privKey":"0Krf+lXo3fPoZjtMDA0D64QUEgMmCXpG4lEQSPovCn4="},"lastRemoteEphemeralKey":"Bb4zO2+cTpt6+styL1wAj/L4gsG3I9GI9KWQpKh7ZP5y","previousCounter":0,"rootKey":"1gdoiJmzgmlmIc30hxwNNnW6FQi4T/QV24MXE0TX944="},"indexInfo":{"baseKey":"BRA6R4Iv0QdymCOFRDJjRN+nKy58KOTipEzx7XYLwqtj","baseKeyType":1,"closed":-1,"used":1777024988940,"created":1777024988940,"remoteIdentityKey":"Baw2NO2FbDvj78o/DvuF7Q9f6BD3Se86pG0dq9wHJXRH"},"_chains":{"BbOLl+cHZ4d9u1R91tcGeHhGfR7aeqc4Tq9KHmkqtv1j":{"chainKey":{"counter":-1,"key":"QNn+ix5DGE9v8qagn3zjTAKZvjUApuyYVF3GcdmA6mE="},"chainType":1,"messageKeys":{}}},"pendingPreKey":{"signedKeyId":9937282,"baseKey":"BRA6R4Iv0QdymCOFRDJjRN+nKy58KOTipEzx7XYLwqtj","preKeyId":8850}}},"version":"v1"}
+```
+
+### `axion-ia-api\src\whatsapp-auth\session-258703160807482_1.0.json`
+
+```json
+{"_sessions":{"BVZMcUsNkAtDqHxysvzgT9eikf279nve+M931FMu4P1I":{"registrationId":1444008074,"currentRatchet":{"ephemeralKeyPair":{"pubKey":"BaeMJIrucyx8qHOfwGMOx9AWNsiLc9RFcKPl2zn5lG8W","privKey":"UPE9q0GxAousV1ehq70Rtm8JoZ7a9lnz4BMH141yoEg="},"lastRemoteEphemeralKey":"BTYRfX/hvTvFe7SwDUXz/04CBGGIfsXhDaCM52scJHNw","previousCounter":0,"rootKey":"rlBc9CEQsCY3jMw1yvEERk2w0Q0fznRQNr4L7QZytCU="},"indexInfo":{"baseKey":"BVZMcUsNkAtDqHxysvzgT9eikf279nve+M931FMu4P1I","baseKeyType":1,"closed":-1,"used":1777117478366,"created":1777117478366,"remoteIdentityKey":"BamOMoVqgvoYMsJD9X+hqaIa2ocneNRrr3DypvlaPgU+"},"_chains":{"BaeMJIrucyx8qHOfwGMOx9AWNsiLc9RFcKPl2zn5lG8W":{"chainKey":{"counter":-1,"key":"ix6KaQWsyQuY0Ptnif5HS44uveokfyApqvup8NqNcC4="},"chainType":1,"messageKeys":{}}},"pendingPreKey":{"signedKeyId":2217052,"baseKey":"BVZMcUsNkAtDqHxysvzgT9eikf279nve+M931FMu4P1I","preKeyId":9506}}},"version":"v1"}
+```
+
+### `axion-ia-api\src\whatsapp-auth\session-259107474923590_1.0.json`
+
+```json
+{"_sessions":{"BXCYGrC0F33bziJO/35DjYley3MBxsV2uz7qY4hHofdV":{"registrationId":462663464,"currentRatchet":{"ephemeralKeyPair":{"pubKey":"BVr4YcG67i7SD7IzhnHaCziISM03ShUAzpEsByJBF1d5","privKey":"yBvL1mVlwVtByTYPfw7jsKy1qSFFGffXs1D9LeIExk8="},"lastRemoteEphemeralKey":"BbqP4BvRtouTnkYa6pAyot1+bTq3UhhVkbkqrDFeLvNs","previousCounter":0,"rootKey":"9zsJvH7z573rg41gYw6Xd4vMqH7+q1PdSkvKXeL0zBQ="},"indexInfo":{"baseKey":"BXCYGrC0F33bziJO/35DjYley3MBxsV2uz7qY4hHofdV","baseKeyType":1,"closed":-1,"used":1777117478604,"created":1777117478604,"remoteIdentityKey":"BehT0A5uhqB+u6U/2g3HjU4kQeDb4k3O0tA8qwaMWc9F"},"_chains":{"BVr4YcG67i7SD7IzhnHaCziISM03ShUAzpEsByJBF1d5":{"chainKey":{"counter":-1,"key":"QEwuJezXUAeSuQxa2rCdP4O/cgfcmzPVxrua4AbmE1Q="},"chainType":1,"messageKeys":{}}},"pendingPreKey":{"signedKeyId":14684509,"baseKey":"BXCYGrC0F33bziJO/35DjYley3MBxsV2uz7qY4hHofdV","preKeyId":13895559}}},"version":"v1"}
+```
+
+### `axion-ia-api\src\whatsapp-auth\session-261104450195552_1.0.json`
+
+```json
+{"_sessions":{"BaaRBI75dV3KLFa+vdImxNMwmKdyW2iWKcDS0+h+YFkD":{"registrationId":811306418,"currentRatchet":{"ephemeralKeyPair":{"pubKey":"BWXYFOCtm//EdVNDfRwpMqiJn4lSOa6/RZoTVpEgo28v","privKey":"OEz7poSZ5awxUao/Vq5S6H0iu/Xjy7HlP4Xtj/b+PGE="},"lastRemoteEphemeralKey":"BUv0vnh2IvrfPe8iFsLEwxaYWibrDyc4krs2mBKdtf8l","previousCounter":0,"rootKey":"It6QOB+WvKzXfw4206rlBGV+Qd7KA4cHv886Yrg/qjo="},"indexInfo":{"baseKey":"BaaRBI75dV3KLFa+vdImxNMwmKdyW2iWKcDS0+h+YFkD","baseKeyType":1,"closed":-1,"used":1776984318147,"created":1776984318147,"remoteIdentityKey":"BY9om7IIB61KJE9t5Wdz0qrCC8oPP0HOEKYA1y9+MaYo"},"_chains":{"BWXYFOCtm//EdVNDfRwpMqiJn4lSOa6/RZoTVpEgo28v":{"chainKey":{"counter":-1,"key":"UmSc6mmWpLVppgx3XPZmwSiM2ME/V4bQ7/ltNVFgQdk="},"chainType":1,"messageKeys":{}}},"pendingPreKey":{"signedKeyId":14520237,"baseKey":"BaaRBI75dV3KLFa+vdImxNMwmKdyW2iWKcDS0+h+YFkD","preKeyId":6103501}}},"version":"v1"}
+```
+
+### `axion-ia-api\src\whatsapp-auth\session-271407640535075_1.0.json`
+
+```json
+{"_sessions":{"BZj0z+U4JlpH5D3COI2TKA1EwX7r+AP0JJ4xSWKvdVtE":{"registrationId":1863334295,"currentRatchet":{"ephemeralKeyPair":{"pubKey":"BdXTP61oYAi5lqz917l90hCBYa+GTo7s3RaJfSfwskNs","privKey":"aF97nd68sgasZj7O33UFhemmKoY7j3+fVl4eJm9wQk4="},"lastRemoteEphemeralKey":"BYkCF6VY0QTZMEduybgtxTph/zplMvuC1Q6+zaDfvOEz","previousCounter":0,"rootKey":"o3UV3Xp9U9wgdMosAssckLRlKOL2KqbLVVnGo7mKXa0="},"indexInfo":{"baseKey":"BZj0z+U4JlpH5D3COI2TKA1EwX7r+AP0JJ4xSWKvdVtE","baseKeyType":1,"closed":-1,"used":1777097319245,"created":1777097319245,"remoteIdentityKey":"BTq++52WnEV8ydYC5263/g2AtbhqHBclhzrxTm5HqWgK"},"_chains":{"BdXTP61oYAi5lqz917l90hCBYa+GTo7s3RaJfSfwskNs":{"chainKey":{"counter":-1,"key":"0q0gijnnrqsZU9RT2wtk0I9iJI28LWRQiH3mOaC6CUM="},"chainType":1,"messageKeys":{}}},"pendingPreKey":{"signedKeyId":15000109,"baseKey":"BZj0z+U4JlpH5D3COI2TKA1EwX7r+AP0JJ4xSWKvdVtE","preKeyId":2722}}},"version":"v1"}
+```
+
+### `axion-ia-api\src\whatsapp-auth\session-272134144307245_1.0.json`
+
+```json
+{"_sessions":{"BUyKUCnNTIaswkjPAbf5ezL/r8o/KwSdrZXQXl7lUoJF":{"registrationId":107660400,"currentRatchet":{"ephemeralKeyPair":{"pubKey":"BTFkwQDFANDMukXqKKw68nu7qV+mctAA3MFesT2VSaUB","privKey":"cGcopAUqLWSGTmMm9HxJDIHJvnnh94HzME6LJXxPpH4="},"lastRemoteEphemeralKey":"BTzE7grsSeWh+m9rRjCLe8gTzXptoxJF19mFEyH6BR0X","previousCounter":0,"rootKey":"bnSk8tD91kX3sV/Kkje94b6su2vWyHWhLAGOborSz/Q="},"indexInfo":{"baseKey":"BUyKUCnNTIaswkjPAbf5ezL/r8o/KwSdrZXQXl7lUoJF","baseKeyType":1,"closed":-1,"used":1777024987628,"created":1777024987628,"remoteIdentityKey":"BS/9bszPbd2xD6yBsv6kw+peMlYRBJwxgdLFvb3QwY9J"},"_chains":{"BTFkwQDFANDMukXqKKw68nu7qV+mctAA3MFesT2VSaUB":{"chainKey":{"counter":-1,"key":"T15ADO0N7Y4TwvHGsq/pZZyZ25X+OASqgFIJrg0kzHM="},"chainType":1,"messageKeys":{}}},"pendingPreKey":{"signedKeyId":7612602,"baseKey":"BUyKUCnNTIaswkjPAbf5ezL/r8o/KwSdrZXQXl7lUoJF","preKeyId":1282}}},"version":"v1"}
+```
+
+### `axion-ia-api\src\whatsapp-auth\session-273529874444357_1.0.json`
+
+```json
+{"_sessions":{"BTCZlK9rXNmSrhqnn2dVk4wtuUAjuvMLXir5wbY8CeAq":{"registrationId":895915179,"currentRatchet":{"ephemeralKeyPair":{"pubKey":"BSK1w9ekh18064X8FFtem7RzU5fPaiiznOH4sdQ6N40E","privKey":"MIshnFMi3fSAPv5rmsEtFqQ1jauqCcqXOpkke+LAWVk="},"lastRemoteEphemeralKey":"BXssFzAw9HMl7mmjtKDTVtDZiSNZ0x7TdQEHmSbIWvAh","previousCounter":0,"rootKey":"cyLAHQSrw+mrtMxMeXPH+xVj2PADiV/DQXT2mcDtOAA="},"indexInfo":{"baseKey":"BTCZlK9rXNmSrhqnn2dVk4wtuUAjuvMLXir5wbY8CeAq","baseKeyType":1,"closed":-1,"used":1777203876449,"created":1777203876449,"remoteIdentityKey":"BU8gQnkw2sJGfnFOOIeRRMah2rpwd2PZxur8lh8S+xFL"},"_chains":{"BSK1w9ekh18064X8FFtem7RzU5fPaiiznOH4sdQ6N40E":{"chainKey":{"counter":-1,"key":"eNjWWGdU5HQfvF99DcWYnJ7vp/A38CGVqiNXVAR4tlQ="},"chainType":1,"messageKeys":{}}},"pendingPreKey":{"signedKeyId":11093650,"baseKey":"BTCZlK9rXNmSrhqnn2dVk4wtuUAjuvMLXir5wbY8CeAq","preKeyId":7861313}}},"version":"v1"}
+```
+
+### `axion-ia-api\src\whatsapp-auth\session-273718400016533_1.0.json`
+
+```json
+{"_sessions":{"BRaINYtnVtvxiny6NUzYwJFMYUDTzJOjgG4uWiDbB50v":{"registrationId":1195815581,"currentRatchet":{"ephemeralKeyPair":{"pubKey":"BcgOppuZEdCO4KY5VSGRKuY1sdJVIQGCee+uOni0FFVh","privKey":"sHOpvj6OCHGF5h5yeGCgE+3Yl/F0slePhs6MiWRE9l8="},"lastRemoteEphemeralKey":"Bdx92YjDuOb7+wWVe5u6kHQe/oYRVTp0SvMALYi/78wt","previousCounter":0,"rootKey":"kuH9n3P7x/pbFl6O/D+rOI57UokjhdlVjwGFkjkf1CI="},"indexInfo":{"baseKey":"BRaINYtnVtvxiny6NUzYwJFMYUDTzJOjgG4uWiDbB50v","baseKeyType":1,"closed":-1,"used":1777117477136,"created":1777117477136,"remoteIdentityKey":"BaIJzkbk07fFuXJoIgUdUt8CO5rPiIwIPsdgFehT6cQj"},"_chains":{"BcgOppuZEdCO4KY5VSGRKuY1sdJVIQGCee+uOni0FFVh":{"chainKey":{"counter":-1,"key":"D1o5bkTGVtgmtKZL3UCZUnifzWSKQK6+bi1VJMnFUD0="},"chainType":1,"messageKeys":{}}},"pendingPreKey":{"signedKeyId":7631909,"baseKey":"BRaINYtnVtvxiny6NUzYwJFMYUDTzJOjgG4uWiDbB50v","preKeyId":144}}},"version":"v1"}
+```
+
+### `axion-ia-api\src\whatsapp-auth\session-277459568197810_1.0.json`
+
+```json
+{"_sessions":{"BXNP+sUdBmQnky7UB87U+Jf1Ek30NlClOkf424WNZOEU":{"registrationId":1134460466,"currentRatchet":{"ephemeralKeyPair":{"pubKey":"BYLvEAyXz1s2TcElucmUA5aoQGFtHTo+L+Mj6ED+LK4j","privKey":"OGUbu/OxQ5G29vCM1cGHbPwcwQESoUrzRlBcsKU96UE="},"lastRemoteEphemeralKey":"BX/1FkMdf/TiWU4N0m5FgZ+23rrq3LLCSoOwZ8GFcghi","previousCounter":0,"rootKey":"OoU80Y/EMhm9wit16w3TFcg8+D3WVhPqG0Smmp45xsE="},"indexInfo":{"baseKey":"BXNP+sUdBmQnky7UB87U+Jf1Ek30NlClOkf424WNZOEU","baseKeyType":1,"closed":-1,"used":1777061378782,"created":1777061378782,"remoteIdentityKey":"BShYWq2GXie4ybZojnZJsCs9koSin38GGA5pdM0NYxEA"},"_chains":{"BYLvEAyXz1s2TcElucmUA5aoQGFtHTo+L+Mj6ED+LK4j":{"chainKey":{"counter":-1,"key":"FkMUVDhNP1hrZC3rrkO8/h11iltmeN3lFAMWGuzUsPY="},"chainType":1,"messageKeys":{}}},"pendingPreKey":{"signedKeyId":16116850,"baseKey":"BXNP+sUdBmQnky7UB87U+Jf1Ek30NlClOkf424WNZOEU","preKeyId":304932}}},"version":"v1"}
+```
+
+### `axion-ia-api\src\whatsapp-auth\session-32817979338799_1.0.json`
+
+```json
+{"_sessions":{"BY5d9Rx8zZbgwz4+i8zoNLWvkdzVrlyocSguG8t/hK1d":{"registrationId":1375879114,"currentRatchet":{"ephemeralKeyPair":{"pubKey":"BffQbcBS69+Sm8mkspOMb42OnfESg2Eh3LtT61CaXysZ","privKey":"qEFf3d1hWVlyeXUIhs1f2hUXGB8m/VZzGQRe2eC3HUU="},"lastRemoteEphemeralKey":"BUcbU46ZSw8F5UTKjxTsCatHxqAUW5Kkx95W1rgo/LAe","previousCounter":0,"rootKey":"+m2qkHh8mbhd4EWSy5FpwjKdaWI/rSCCl8y9qT+Y3sU="},"indexInfo":{"baseKey":"BY5d9Rx8zZbgwz4+i8zoNLWvkdzVrlyocSguG8t/hK1d","baseKeyType":1,"closed":-1,"used":1777203875635,"created":1776972301931,"remoteIdentityKey":"BYpFuuqDGDNQGz/D+Cc8U1W7JYnmbvARoUT8s/XCOyZ9"},"_chains":{"BRUZIShTIBC5IZQt1y02xgmu9iwi51Eb7ef0adSt4OwV":{"chainKey":{"counter":4},"chainType":2,"messageKeys":{}},"BYermhIEC8Zji4m0bbGMPWtrPDkHDyOeqA9hxkAUXG9a":{"chainKey":{"counter":0},"chainType":2,"messageKeys":{}},"BXw6zXLCTx0OEixxUFR1qLj91q0W1CsOxnJrUdLxODNM":{"chainKey":{"counter":0},"chainType":2,"messageKeys":{}},"BWPLqFQqLEHZ9sQwBcHiVDyEyF6rkKyphSqejncSDdFt":{"chainKey":{"counter":0},"chainType":2,"messageKeys":{}},"BaJrDBxa6TS28HLUtzLpiu+yBubXvj/nXdxG2XuXefkr":{"chainKey":{"counter":0},"chainType":2,"messageKeys":{}},"BZYmNyanc36LqGX6Ja5BIqmGtO+BTSxG0B/DILOBSmkV":{"chainKey":{"counter":0},"chainType":2,"messageKeys":{}},"BT+VvFsyUdeFJDu9uFD6BY98yNZKU5PK0qmwvXlvUAx/":{"chainKey":{"counter":0},"chainType":2,"messageKeys":{}},"BdTm79Aqgmsd8CzJ/+G6ddbMo/0SdQ4gIJIlMEeHOFx7":{"chainKey":{"counter":0},"chainType":2,"messageKeys":{}},"BYEANrTiL9DrSXTJ/aTV7ChWcYm/pKfHQfV8VVlxBnpX":{"chainKey":{"counter":0},"chainType":2,"messageKeys":{}},"BWo2gQU8CKJNPXsYDuqa2679zY6itCvfq0gArrGRid9M":{"chainKey":{"counter":0},"chainType":2,"messageKeys":{}},"Bcgn0COIadVxfXFekIbmU8ZUzLzbqueWCau7IxgW+PI/":{"chainKey":{"counter":0},"chainType":2,"messageKeys":{}},"BVe8FQ9WhvKEMEigosusAeYjCgh2NgRkcdtRHcb6MZh8":{"chainKey":{"counter":0},"chainType":2,"messageKeys":{}},"BYY3HIwtRkVxmTmzfcJgoqY8H29X9P2Iskcnck3lOn0k":{"chainKey":{"counter":0},"chainType":2,"messageKeys":{}},"BfBOVbVOfCIy6nU8M+lV8KjqI6f7QSYhyfw1s1X9eF1g":{"chainKey":{"counter":0},"chainType":2,"messageKeys":{}},"BYDG6ePkcCOvpwKeL8XQv2XMWSFAlZrgT9MMgAIbO78O":{"chainKey":{"counter":0},"chainType":2,"messageKeys":{}},"BXldClWe0Z5Tdy6JlVe/pZXGI2gCxSOczLH/9ErAMDk7":{"chainKey":{"counter":0},"chainType":2,"messageKeys":{}},"BUcbU46ZSw8F5UTKjxTsCatHxqAUW5Kkx95W1rgo/LAe":{"chainKey":{"counter":0,"key":"tNufMp+drMlxXaO7t+aGP2pNsViegJYS5Z06B+p2oCw="},"chainType":2,"messageKeys":{}},"BffQbcBS69+Sm8mkspOMb42OnfESg2Eh3LtT61CaXysZ":{"chainKey":{"counter":-1,"key":"rSGY83FpmorcRF7sJAy4pGNi0PbN47uJCUqGL4O2OiA="},"chainType":1,"messageKeys":{}}}}},"version":"v1"}
+```
+
+### `axion-ia-api\src\whatsapp-auth\session-32817979338799_1.92.json`
+
+```json
+{"_sessions":{"Bd4kP1buiI0dXhi8tAqcG+inUn7u8esjsYArWgFvbm1W":{"registrationId":3978,"currentRatchet":{"ephemeralKeyPair":{"pubKey":"BfapqmgMtk5oc/ijwMzhVYDOrmqi5bzEUvDNXLBdn3hz","privKey":"EJfBLTofYFYhv4kNAMpSVVCP0aKvkenRXVvNEXTmE3M="},"lastRemoteEphemeralKey":"BfX+um9JZKcb4juBMLqw47j21/AleXKE3eA5+Bi+iGQ6","previousCounter":1,"rootKey":"Bu9ec2nP/x31x00TOwsO0Hp59OKVHCAlrQw/nNwrNqY="},"indexInfo":{"baseKey":"Bd4kP1buiI0dXhi8tAqcG+inUn7u8esjsYArWgFvbm1W","baseKeyType":2,"closed":-1,"used":1777052958189,"created":1776972301442,"remoteIdentityKey":"BaIj6KaeiSREzHuhuqE5aN3KVPpOlk0wHYYwme4vsyA9"},"_chains":{"BUHXnpkGwnDysEH9u7OBxRNXacVuGVzyrhfZdLaWjQ9A":{"chainKey":{"counter":0},"chainType":2,"messageKeys":{}},"BWdcENlmtMJXvXyaKAKgos2i5qIlamSAbh44ouUhq0Ec":{"chainKey":{"counter":0},"chainType":2,"messageKeys":{}},"BdOb9PC41c6VfCJDzqM5BZTtumDqdFqyaajLQvzEwB4o":{"chainKey":{"counter":0},"chainType":2,"messageKeys":{}},"BX8Y4/FyjoyZc0zvliOQrcTxGGMRS2Mmu9Xs1o77y69Q":{"chainKey":{"counter":0},"chainType":2,"messageKeys":{}},"BdtQ+45OM0S6mpkxM+3qCWYSD7FgoRVckFfHiZ0uyToC":{"chainKey":{"counter":1},"chainType":2,"messageKeys":{}},"Bc2TzWYOR4tNjn0adHrwa1Q54bc1VbCd6TKyK2Vs5/4H":{"chainKey":{"counter":0},"chainType":2,"messageKeys":{}},"BVLEVU7+m6OgswB9fpXF8qJ5zgg8Y7GOCRue1Mpryg03":{"chainKey":{"counter":0},"chainType":2,"messageKeys":{}},"BUVO0xbyor5XQGHygvh/QG2dI+N+hgcxe8+2aL2ADL9v":{"chainKey":{"counter":0},"chainType":2,"messageKeys":{}},"BYoZVfeVYlsycu4Iz60Cx9EQhhb5TbHC8QXfwI39xqwb":{"chainKey":{"counter":0},"chainType":2,"messageKeys":{}},"Ba82H3zzpHTKxojVCLVUP5zygbvqyE/ulL+9c6AsWYIU":{"chainKey":{"counter":5},"chainType":2,"messageKeys":{}},"BTYBjIWwyG1Pp0kMCTYv0PuPuoggwEJnllQTUX/G+0Zp":{"chainKey":{"counter":0},"chainType":2,"messageKeys":{}},"BQ3C4lh4cmOxOLirKwSeM3+8DmYd5PNrTW8XptF+LzML":{"chainKey":{"counter":0},"chainType":2,"messageKeys":{}},"BXiKOxroeTQAJPbMMiIKLKGC30sggcygH1OE7ChGfPF9":{"chainKey":{"counter":0},"chainType":2,"messageKeys":{}},"BQ21oyS+bBAzj44WMO9ZgNNApcCyEjct1qMrO25NEzQU":{"chainKey":{"counter":0},"chainType":2,"messageKeys":{}},"BVDl4086prf4nQzc1jrdGiweq6ZLZz/PoYBxQ94qXI1a":{"chainKey":{"counter":0},"chainType":2,"messageKeys":{}},"BTIABdOmVnPeMa35JGnvr2kddmrHUhNNGFwxcsw56P0Q":{"chainKey":{"counter":0},"chainType":2,"messageKeys":{}},"BU7xCnRVoFJyKVJqWvMWYZ3vgubjmWVRl2NmmMyvPd4V":{"chainKey":{"counter":0},"chainType":2,"messageKeys":{}},"BbCMigPTFK4MINcYH+a92kQVeQguSDYbbt06C+8d0WMu":{"chainKey":{"counter":0},"chainType":2,"messageKeys":{}},"BeI7UlLoPPq5ZQJG3X3QsWh2POz8LqzeMPPDu/YLzKAI":{"chainKey":{"counter":2},"chainType":2,"messageKeys":{}},"BU2N0fiP5/a36uk1lxDWbmo9Dv10Z544ShV5mWkQVkU3":{"chainKey":{"counter":0},"chainType":2,"messageKeys":{}},"BbWDXh76KbXrBZXWI17qds1WCiNyJ64KiBbSVVviv55p":{"chainKey":{"counter":0},"chainType":2,"messageKeys":{}},"BXosnvFEx4DL4fKz1Uvf3kwZKDJf7YjtoXZafroI8dUD":{"chainKey":{"counter":0},"chainType":2,"messageKeys":{}},"BbmzP+utOs5pn/mAoSxhzqBTiZHRawutEagdtqGOLhVg":{"chainKey":{"counter":0},"chainType":2,"messageKeys":{}},"BWV4jM5gZAtZyS0A4oGlcqGFUoHotqLuGHQkiTklhI9U":{"chainKey":{"counter":0},"chainType":2,"messageKeys":{}},"BRI/n+t8C3C9RzSag+ul7kw12CoQhCKwk/smlMU2rRNt":{"chainKey":{"counter":0},"chainType":2,"messageKeys":{}},"BXjzUJUYgQuNMS8wiOy+5LF6QMBe+ov9WZ7vbJqWqh1Q":{"chainKey":{"counter":0},"chainType":2,"messageKeys":{}},"BZcayXpxInUg4MDCvn/ztGoKnei1852kY9FXfvLqHHZU":{"chainKey":{"counter":0},"chainType":2,"messageKeys":{}},"BaET1A+x+OtKi32+PrRrNbcUqo0EPFqaDY53ma2dsw8v":{"chainKey":{"counter":0},"chainType":2,"messageKeys":{}},"Bd8jIwPWPTuQsLHwBImkYL2IJdVt+Tsn8aSO8k0Uwyph":{"chainKey":{"counter":0},"chainType":2,"messageKeys":{}},"Bfloacof8Cf6E80UCwB8tneK/60UIWsjT/vTxorZ2306":{"chainKey":{"counter":0},"chainType":2,"messageKeys":{}},"BTbk+tcn3SIdn1byv7p/HMfj6ocmgYB628Q3LAlP4MwN":{"chainKey":{"counter":0},"chainType":2,"messageKeys":{}},"BZ9ERkCS0adOUW2CmxdvZSKUJX2Mhs0j6vgdN/eGW/hK":{"chainKey":{"counter":0},"chainType":2,"messageKeys":{}},"BQzYE704fjfUq3yHOUDDieGO+TEEybyF7DYg9NbjKx4s":{"chainKey":{"counter":0},"chainType":2,"messageKeys":{}},"BU+WOf4zPi3MyWH1PTsHVbOQsITfS0oW3wEPZRc4XNhG":{"chainKey":{"counter":0},"chainType":2,"messageKeys":{}},"BVnGyggxJz98CsrOf6nYSAMezn77QIUkDMFe/JyRATkl":{"chainKey":{"counter":0},"chainType":2,"messageKeys":{}},"BU9CiNXj8JaWaDfeiJ43oHUdkHnkRkLpqr2bFPd+cVJ/":{"chainKey":{"counter":0},"chainType":2,"messageKeys":{}},"BYzi+1w6i7HGQO2+09i+IelvTQ3PzKOAbPU795uXc858":{"chainKey":{"counter":0},"chainType":2,"messageKeys":{}},"Bc4jEdSlCG6XVDYb/vsn964G09T79hOdPFnFrSetJCZ5":{"chainKey":{"counter":0},"chainType":2,"messageKeys":{}},"BfrxaDy+IPUt0S2IKBEVQ+TWhfgsv03gVhirCJJXVrle":{"chainKey":{"counter":0},"chainType":2,"messageKeys":{}},"BeC6gkpihmpigm2usKdFWmGQvjKRIKIUSZbQTQv+FPtT":{"chainKey":{"counter":0},"chainType":2,"messageKeys":{}},"BTHDGfc9ScyMR1lNNTvBENXdcMf1XDHGS1Zc85mI7xEd":{"chainKey":{"counter":0},"chainType":2,"messageKeys":{}},"BUnfxe6VzZ8aU8muTPr+p0V+4mJ9isvlTT2ipnxDkEJ5":{"chainKey":{"counter":0},"chainType":2,"messageKeys":{}},"BfHrbr4NVi+kQZjLpgin08PrKvWnfWSeW9IJU0rFeypV":{"chainKey":{"counter":0},"chainType":2,"messageKeys":{}},"BQRPfVtCT5R1MInsyOgU6vVRazY6IuCHx6rQUxTBsDoP":{"chainKey":{"counter":0},"chainType":2,"messageKeys":{}},"BVBNI2DhLdUYD7wgsECNTK4ZlF8VpobZkKarHIqWacR5":{"chainKey":{"counter":0},"chainType":2,"messageKeys":{}},"BY9xirFuU+cl6x8zLSiD28AocryMzVcNpDrtG+XIMABq":{"chainKey":{"counter":0},"chainType":2,"messageKeys":{}},"Be8rbgU5S52EQWu5U8uY2lzEpy7jWJ+C6uh2/W3WQXYq":{"chainKey":{"counter":0},"chainType":2,"messageKeys":{}},"BfDvGbIG9w8E0CAFFtHaYN4b/3OuCpdtcZPADXm/4ZUw":{"chainKey":{"counter":0},"chainType":2,"messageKeys":{}},"BTOJXlNyRh6yDmhYjXhFm+YGB/+q8w7tmMfmGB/iXplW":{"chainKey":{"counter":0},"chainType":2,"messageKeys":{}},"BQjEggLtXCbgQNfoeEFDKb1gCIZIX0JJ7qf/wwogHXdU":{"chainKey":{"counter":0},"chainType":2,"messageKeys":{}},"BfWf0pt/Uhszduia0K6usT4qtSlZOQF+CZLHjJWF2gY7":{"chainKey":{"counter":0},"chainType":2,"messageKeys":{}},"BdPZqHZaxI69QBLmK0e0QUWHkiIpD0Y93j+4/ok2091q":{"chainKey":{"counter":0},"chainType":2,"messageKeys":{}},"BT4A9LDWHc6pX+PszMA4OVkMw14FcPhgHwr+jwtcvcRK":{"chainKey":{"counter":0},"chainType":2,"messageKeys":{}},"BQIh9UZ6tEGPZv1cwVjVDt3aywoO6oGJ5JNeEhc3Q18B":{"chainKey":{"counter":0},"chainType":2,"messageKeys":{}},"BQbKGQ1i1FiDNDJYIzD+xsz2ths4D98jBV0OMBfKMXYx":{"chainKey":{"counter":0},"chainType":2,"messageKeys":{}},"BTk/Vpzf2Hhma/9pO6zeLmx+yeFIfKnXiJ28dukyLoEU":{"chainKey":{"counter":0},"chainType":2,"messageKeys":{}},"BTnl2lAR9QNsjU6EUBAH3OmegqnH+0dv7rhsFEVOdh9V":{"chainKey":{"counter":0},"chainType":2,"messageKeys":{}},"BXsD4IHUPUWGftdHx7TqFDr/K7tZlJcSdAIaPvKmaooY":{"chainKey":{"counter":0},"chainType":2,"messageKeys":{}},"BY41WWYsjtpCqBg24xZVUX9gMlMDgpKAR6V8xJsay31A":{"chainKey":{"counter":0},"chainType":2,"messageKeys":{}},"BQ+1tBL4yGY0QUXBWQ20J6uiiliGm2flzmMrjY1pCZEW":{"chainKey":{"counter":0},"chainType":2,"messageKeys":{}},"BVyT78alhyjSN4w6TFhaiNypFSxbq6LgtxL6vclcfVV0":{"chainKey":{"counter":0},"chainType":2,"messageKeys":{}},"BVbKOg0+CHk+ky7nemEQ8a6i/6KIgJHu0fZuKMOV3mFq":{"chainKey":{"counter":0},"chainType":2,"messageKeys":{}},"BZcf/Fxm8VffJtlIh5OGWBgu8rl308nbQEGkgxPUdzFK":{"chainKey":{"counter":0},"chainType":2,"messageKeys":{}},"BSJudNtLeChxUX+9INfuxhhVEIh6QIePp91/92C/pfRC":{"chainKey":{"counter":0},"chainType":2,"messageKeys":{}},"BWab/qZo5Nc+Th3WMI0xrWn58Ord/WSkATgoDoDynehG":{"chainKey":{"counter":0},"chainType":2,"messageKeys":{}},"BZXTNG7RZK5fM3poPWkGrwgxY7uvfUqVCVZ9KLFD4/Yx":{"chainKey":{"counter":0},"chainType":2,"messageKeys":{}},"BaAWyjocauQ/JdjCXx7RKRShKi6UGuBG3t7IxMISu3R6":{"chainKey":{"counter":0},"chainType":2,"messageKeys":{}},"BURYpEvR7k0Pu/TbsktjjNi78GYxfLG1rYVWoWxVZNxG":{"chainKey":{"counter":0},"chainType":2,"messageKeys":{}},"BU6iQ3FMknK5CfWjPLhHBEXV0GuXBr2zC9chhvrpMbpH":{"chainKey":{"counter":0},"chainType":2,"messageKeys":{}},"BSvePJ/M4XQzuhti82TKyUIjvIJLL3Wj+Ei6H4kKU1hr":{"chainKey":{"counter":0},"chainType":2,"messageKeys":{}},"BbRq5F3jcEZeLdtYJklNbjnRK5uhtFK+7Sz6h29WMZkj":{"chainKey":{"counter":0},"chainType":2,"messageKeys":{}},"Bf7VFMslVkVfdpjUelaxffJ77b+qLrfZKwoFRAZAwP0g":{"chainKey":{"counter":0},"chainType":2,"messageKeys":{}},"BXru1fhfQlc5K8fD8Q3ZI/4VQTmO7YtXz4BDLSebRop+":{"chainKey":{"counter":0},"chainType":2,"messageKeys":{}},"BfMrGOyYfBhanjFXVovKtnV1vjhE2Ixbbp9xRfJ6IjxJ":{"chainKey":{"counter":0},"chainType":2,"messageKeys":{}},"BRe7N6u7oGkBiuej59/Zv7C0s3SOiEz6T7avWHKgy4AS":{"chainKey":{"counter":0},"chainType":2,"messageKeys":{}},"BbHSVF9a6iNgcw5d/twSDbs2UOGweYI5uG0rbko8uDMp":{"chainKey":{"counter":0},"chainType":2,"messageKeys":{}},"BYVz00t8bQTo1BSePL6mkVucx5lRILBHXO0aCQo3765L":{"chainKey":{"counter":0},"chainType":2,"messageKeys":{}},"BX9SI3Gk52xDJxzFcoTNqkII1VbE3SnWdVZ4J9mLFBVP":{"chainKey":{"counter":0},"chainType":2,"messageKeys":{}},"BcAvJLvXN/aYzxEXoVAyUf4XJM7PP9G9zU3MQGgo9d54":{"chainKey":{"counter":0},"chainType":2,"messageKeys":{}},"BWJ6syqo8y4KkbIwOyOBOSlMrnhpS/H+mMdD+thkVGE4":{"chainKey":{"counter":0},"chainType":2,"messageKeys":{}},"BY/XHFRJ14oTbkY47SVMjGUee+fQACqSUCSMIm05Dp8l":{"chainKey":{"counter":0},"chainType":2,"messageKeys":{}},"BXRay2I1mpdM4EF6FjjI8CQ1QR8myE7Ukn7YtOb9NwhV":{"chainKey":{"counter":0},"chainType":2,"messageKeys":{}},"BVtmP9fogPZ4mTKUcoLGqRqEWiGI60aDyfdE4bRZutBf":{"chainKey":{"counter":0},"chainType":2,"messageKeys":{}},"BfDciSg27QZEnpb0aaqdT3EPaqf9dnXWq9JfSS3DTj8l":{"chainKey":{"counter":0},"chainType":2,"messageKeys":{}},"BSCgG96KjTl/07+lIOnUPcDJcJ9uBAPiusiK6Y6bVto1":{"chainKey":{"counter":0},"chainType":2,"messageKeys":{}},"BZBzVQrOZDdz7pYRiFeGQZkcwgWlLRjit/HAxNE8fVpg":{"chainKey":{"counter":0},"chainType":2,"messageKeys":{}},"BfIDV93/wIzcDG0VdtSz6v/FYnQ14WD/RhgSl8ABJHoG":{"chainKey":{"counter":0},"chainType":2,"messageKeys":{}},"Bax+6PuTUjpGFoIAj1If9z+Whj7ma2UNcg/BdxRLhyV0":{"chainKey":{"counter":0},"chainType":2,"messageKeys":{}},"BavcC+mArvwbovGshTotsb0S68RXfP9+C5jTFmG5LWY+":{"chainKey":{"counter":0},"chainType":2,"messageKeys":{}},"BSVPlqo+rvvP1tC+IqeP0kDmrfV2R82LfuvsvfiC2O4m":{"chainKey":{"counter":0},"chainType":2,"messageKeys":{}},"BaGpsWQ/CPBA7AOwtCyZVyblL5REpvgWTBCbfP8V2Ww8":{"chainKey":{"counter":0},"chainType":2,"messageKeys":{}},"BfYecBR0USrlyDGCx1WgIEnrJcy6M7hMuyYzp2jBgW02":{"chainKey":{"counter":0},"chainType":2,"messageKeys":{}},"BWktPvc8+c6ALAIgD6tn/FJWB2C7sFCS932ZpJU+p+Zv":{"chainKey":{"counter":0},"chainType":2,"messageKeys":{}},"BRqMKyHdxxW9KKMJqM81za1Ox2YWdqI+huxzz0yfc+Yh":{"chainKey":{"counter":0},"chainType":2,"messageKeys":{}},"Bfy4ULtgJpRRAq9ZuLLipV0rJPvWSXS8NWXdF4ho3NUJ":{"chainKey":{"counter":0},"chainType":2,"messageKeys":{}},"Bf+Hd8fdKi4vQYRJ7OluDwzMJjYhtNdo2izWS52B3mwN":{"chainKey":{"counter":0},"chainType":2,"messageKeys":{}},"BTdAiBugEXqDmZJE8Nz8ya/CB//7jifWLibcv8al9eAZ":{"chainKey":{"counter":0},"chainType":2,"messageKeys":{}},"Bb8QvfH4X4kmpev8Nf4qj9VIEjNzwtqBVHf6WRG8/BsI":{"chainKey":{"counter":0},"chainType":2,"messageKeys":{}},"BWTdI2RJQ23V5K9z++wYvENS7zgo0Sow3VspEMWym3kO":{"chainKey":{"counter":0},"chainType":2,"messageKeys":{}},"BTaDoBVpkcuRiaMqtYnsIjEFSNPkZf/P0QyfDBZ3iVsE":{"chainKey":{"counter":0},"chainType":2,"messageKeys":{}},"BSkA4qNqCnHmjrpotBq2peGh21ygKL8kez1x1q630xll":{"chainKey":{"counter":0},"chainType":2,"messageKeys":{}},"BXarVxqy7T7j5I+pQcfurjoxnZQ34du6dwWThNyUpGd2":{"chainKey":{"counter":0},"chainType":2,"messageKeys":{}},"BfX+um9JZKcb4juBMLqw47j21/AleXKE3eA5+Bi+iGQ6":{"chainKey":{"counter":0,"key":"ZTyZMADOXLcWadjXhZnXLU9tdmdpQiSl6Y/n0vnR9bA="},"chainType":2,"messageKeys":{}},"BfapqmgMtk5oc/ijwMzhVYDOrmqi5bzEUvDNXLBdn3hz":{"chainKey":{"counter":18,"key":"wIsH79MZzKh7R4ML7SNeYHQS4ejLhuVg6gU0mnivFv8="},"chainType":1,"messageKeys":{}}}}},"version":"v1"}
+```
+
+### `axion-ia-api\src\whatsapp-auth\session-39041420550309_1.0.json`
+
+```json
+{"_sessions":{"Bc+RSzGMmd/bX/wGtU5xc12L8XELG9c4+M3+gv0rP0o7":{"registrationId":1088487039,"currentRatchet":{"ephemeralKeyPair":{"pubKey":"BWi4MJXCm6q6V0LbfPMoTWbfmQ7oqFT5NIIUMSrZRt1/","privKey":"CBQUbOmUsGPY08U5QasKtbtliOSZxR2ZjJa9FBkaSnk="},"lastRemoteEphemeralKey":"BRfc58WEr4jw33Oz9mOc3kWII4Yfk3wq4XoKBGsZFXEQ","previousCounter":0,"rootKey":"w28H7cWGitlpwBtjiW8HjZLfuhsZzqAYL7EM+W0jG3E="},"indexInfo":{"baseKey":"Bc+RSzGMmd/bX/wGtU5xc12L8XELG9c4+M3+gv0rP0o7","baseKeyType":1,"closed":-1,"used":1777097319018,"created":1777097319018,"remoteIdentityKey":"BXWBVEEYqu9Ve78MzDouEA3Cv224FeD6vPMvtZX79i1m"},"_chains":{"BWi4MJXCm6q6V0LbfPMoTWbfmQ7oqFT5NIIUMSrZRt1/":{"chainKey":{"counter":-1,"key":"WqmH3TzTcbviEmEVAYiElwqdHkMS2phlw6nG8yfzVLU="},"chainType":1,"messageKeys":{}}},"pendingPreKey":{"signedKeyId":5925720,"baseKey":"Bc+RSzGMmd/bX/wGtU5xc12L8XELG9c4+M3+gv0rP0o7","preKeyId":16508193}}},"version":"v1"}
+```
+
+### `axion-ia-api\src\whatsapp-auth\session-49456850440378_1.0.json`
+
+```json
+{"_sessions":{"BXXht+a1z02ZvlWxWtBuNycWykf56au8d8p60GWXmaM3":{"registrationId":1612608261,"currentRatchet":{"ephemeralKeyPair":{"pubKey":"BW5UjaxOYf/7aYTq0wndewIIn8dPILplaanfUqzcLmEI","privKey":"eIwGXNKZ0hH/E7oB6NbcD0LlZw90LeBeZoIya3xHwGA="},"lastRemoteEphemeralKey":"BRI+sqvhdlRxUq4DswBtE3m2NLPQekKNnbnfcuipXV83","previousCounter":0,"rootKey":"rvdbTucknRqq4U1iBgQDeWGI2QILoTMsoL1vcjW7vjw="},"indexInfo":{"baseKey":"BXXht+a1z02ZvlWxWtBuNycWykf56au8d8p60GWXmaM3","baseKeyType":1,"closed":-1,"used":1777117477740,"created":1777117477740,"remoteIdentityKey":"BS+jyz2bHd9U3/Jf/k5f351OdF6f4Jiry+LDH8QHv9lK"},"_chains":{"BW5UjaxOYf/7aYTq0wndewIIn8dPILplaanfUqzcLmEI":{"chainKey":{"counter":-1,"key":"MdSp9VtjrUOL7FhI3MpW5lcDfwFiN7ZgNQEz744OrIA="},"chainType":1,"messageKeys":{}}},"pendingPreKey":{"signedKeyId":14078165,"baseKey":"BXXht+a1z02ZvlWxWtBuNycWykf56au8d8p60GWXmaM3","preKeyId":13067253}}},"version":"v1"}
+```
+
+### `axion-ia-api\src\whatsapp-auth\session-49774493442107_1.0.json`
+
+```json
+{"_sessions":{"BWaZl5ssAfohvX2KmUcUTsmv5j0JgboKu8Xb1q9NwJo4":{"registrationId":1653374472,"currentRatchet":{"ephemeralKeyPair":{"pubKey":"BVUQMq5SwQy/3lSL47MIBBrzqm/IghqaB9kdZJILXI9x","privKey":"oNLdO77mnIHQcUtTgXWvaEgvk8AYLdnjKhh7yuNGCHI="},"lastRemoteEphemeralKey":"BdxEcoLWovT7jYQrsetmhU7kxP3WWiUFiNZKJZdO0bdf","previousCounter":0,"rootKey":"/gbzGF91Svb8H0nsjjfoHE2RVC5Im15oYS6vVGZq7Fw="},"indexInfo":{"baseKey":"BWaZl5ssAfohvX2KmUcUTsmv5j0JgboKu8Xb1q9NwJo4","baseKeyType":2,"closed":-1,"used":1777239292848,"created":1777239292848,"remoteIdentityKey":"BfpTEwsCQSb2Afa0c3abLXPwKwABkwZnXYsCo8RoPk5Z"},"_chains":{"BdxEcoLWovT7jYQrsetmhU7kxP3WWiUFiNZKJZdO0bdf":{"chainKey":{"counter":0,"key":"7hhzwNV1kuruW4at5izaA2FqpL6Mrh8hEqZASio1soc="},"chainType":2,"messageKeys":{}},"BVUQMq5SwQy/3lSL47MIBBrzqm/IghqaB9kdZJILXI9x":{"chainKey":{"counter":-1,"key":"ppN89rABdicqnDOKzZK/xXtiylVIwpy+K40YRTnflfM="},"chainType":1,"messageKeys":{}}}}},"version":"v1"}
+```
+
+### `axion-ia-api\src\whatsapp-auth\session-53622717051075_1.0.json`
+
+```json
+{"_sessions":{"Be9Pu2cQvELHCH9cBleumGt4Gm2XubnhDLULfByGZOMX":{"registrationId":1270284630,"currentRatchet":{"ephemeralKeyPair":{"pubKey":"BV5I11lj4wpZW6t+M8sQwkRaZVkbeFlX3ro7oEYXWN4M","privKey":"IJX9C/J64L9IYshwi/gIc0FS8Jgqg2sWMG12WikK310="},"lastRemoteEphemeralKey":"BeoNbPUDl65ZRSnUAqu/IuDVGpQHrva4UBPej4PmpjBy","previousCounter":0,"rootKey":"V82DR2Vr8rXlPCqA+aSDu0I7SCZuEINMibqjBxzjtg4="},"indexInfo":{"baseKey":"Be9Pu2cQvELHCH9cBleumGt4Gm2XubnhDLULfByGZOMX","baseKeyType":1,"closed":-1,"used":1777239294330,"created":1777239294330,"remoteIdentityKey":"BQJK4s5w1INKjyF8XJ2m1NOOljPtzv/0nqTk2ppZbaQB"},"_chains":{"BV5I11lj4wpZW6t+M8sQwkRaZVkbeFlX3ro7oEYXWN4M":{"chainKey":{"counter":-1,"key":"as4jqZjjm93P4HT4ff41oIRUK5+fjj1vSgdH5xtoFuc="},"chainType":1,"messageKeys":{}}},"pendingPreKey":{"signedKeyId":7838334,"baseKey":"Be9Pu2cQvELHCH9cBleumGt4Gm2XubnhDLULfByGZOMX","preKeyId":538738}}},"version":"v1"}
+```
+
+### `axion-ia-api\src\whatsapp-auth\session-54185458413597_1.0.json`
+
+```json
+{"_sessions":{"BWBVzuCKNjPtrhFejbSTPgotv9g9HSaXmT5E+C0Psak0":{"registrationId":1587123765,"currentRatchet":{"ephemeralKeyPair":{"pubKey":"BTS7TgNuCaBdZUYXg4hlhSfyctByXAa3h+019Zy4aDQi","privKey":"GJYRo4jrUGOWckNR0BWwZokjcQNjFWrSeyrHubsyE3c="},"lastRemoteEphemeralKey":"BcNKGllsjKq5e6RnJU0UE/9lXvGshaxwdEwX4JPhMkNA","previousCounter":0,"rootKey":"/sLn6zTiNnaWkTwHV42QGZfjTKiPLsowoADBxoqKxSo="},"indexInfo":{"baseKey":"BWBVzuCKNjPtrhFejbSTPgotv9g9HSaXmT5E+C0Psak0","baseKeyType":1,"closed":-1,"used":1777117477960,"created":1777117477960,"remoteIdentityKey":"BQMgHohrSRkzfmyAukOigjRChmpNG/tGJjwMCZMV9+Qh"},"_chains":{"BTS7TgNuCaBdZUYXg4hlhSfyctByXAa3h+019Zy4aDQi":{"chainKey":{"counter":-1,"key":"+0IpWafk2YTHX/aQNLzuYZxfMYNmf72vGR4+y83oygQ="},"chainType":1,"messageKeys":{}}},"pendingPreKey":{"signedKeyId":3211794,"baseKey":"BWBVzuCKNjPtrhFejbSTPgotv9g9HSaXmT5E+C0Psak0","preKeyId":4007839}}},"version":"v1"}
+```
+
+### `axion-ia-api\src\whatsapp-auth\session-54980010631390_1.0.json`
+
+```json
+{"_sessions":{"BbsoFdesLQU4Hvr31+UIpsxACIQTSnWmHK2TPlpLunFq":{"registrationId":990997838,"currentRatchet":{"ephemeralKeyPair":{"pubKey":"BfTFWkCLGrZ5UkkQdVdBJjkOAj4MEVfOjH46khsofVRM","privKey":"iLH08BpUvo6CvlfGc7tP3LMVXYpMhQsVCUSgtE6zKE8="},"lastRemoteEphemeralKey":"BUIkfesV8iS5llu4DLDeVPrtNEac4TtprIkeX6KBPW9s","previousCounter":0,"rootKey":"854Vv4bAk/qVqBQ2KDww1Fb5wuDQnKkAZLkcjIvzjAg="},"indexInfo":{"baseKey":"BbsoFdesLQU4Hvr31+UIpsxACIQTSnWmHK2TPlpLunFq","baseKeyType":1,"closed":-1,"used":1777064049753,"created":1777064049753,"remoteIdentityKey":"BYnzas8CLs6tkIpzi9qv9JzT4AQACJJr3P6EpdS0Vqlp"},"_chains":{"BfTFWkCLGrZ5UkkQdVdBJjkOAj4MEVfOjH46khsofVRM":{"chainKey":{"counter":-1,"key":"vWW82LgREoW+uzK9ywf1TBbS3BcEXub1j1tywW5iCEI="},"chainType":1,"messageKeys":{}}},"pendingPreKey":{"signedKeyId":15348895,"baseKey":"BbsoFdesLQU4Hvr31+UIpsxACIQTSnWmHK2TPlpLunFq","preKeyId":3278}}},"version":"v1"}
+```
+
+### `axion-ia-api\src\whatsapp-auth\session-55302670037082_1.0.json`
+
+```json
+{"_sessions":{"BYBpidSlD560ZwyTBZXMhegGL9MmlVThrrXrUa8omXMF":{"registrationId":1163342883,"currentRatchet":{"ephemeralKeyPair":{"pubKey":"BfJVZLD+/q/9abqZTGYszWhY4d4PAJ8iSPbpIGI16g86","privKey":"SOkhsgQLy4tZqY6TiSYeGhI4/C6HI9vyhSR3Mg6iOXo="},"lastRemoteEphemeralKey":"BaKW+JyBB/tqW2Ws2xsZZbHDagiwSP38xH9D93mGCvNq","previousCounter":0,"rootKey":"TXqfARP/M8TRo19ONs1rOlJC3UuWcaf85VknR+RgEfA="},"indexInfo":{"baseKey":"BYBpidSlD560ZwyTBZXMhegGL9MmlVThrrXrUa8omXMF","baseKeyType":1,"closed":-1,"used":1777153492874,"created":1777153492874,"remoteIdentityKey":"BTft65NC+ih1lmMYFH7AIcp8Nw2Qt3P3F2vGNOfx7KxZ"},"_chains":{"BfJVZLD+/q/9abqZTGYszWhY4d4PAJ8iSPbpIGI16g86":{"chainKey":{"counter":-1,"key":"zjZB3Ybvi9/37rrLxdUDpF0cIba587JJRMu3WYo+/0k="},"chainType":1,"messageKeys":{}}},"pendingPreKey":{"signedKeyId":7984370,"baseKey":"BYBpidSlD560ZwyTBZXMhegGL9MmlVThrrXrUa8omXMF","preKeyId":8994562}}},"version":"v1"}
+```
+
+### `axion-ia-api\src\whatsapp-auth\session-62543364112510_1.0.json`
+
+```json
+{"_sessions":{"BRlgNlZP3LSFw4rKbag3Zhj7xPKwIjEeg4ISx2EWZQ9U":{"registrationId":1628016269,"currentRatchet":{"ephemeralKeyPair":{"pubKey":"BW6O/vbP8gVn0EsXSubUpMh9w2TpUgrb9+ARqJGGDhkg","privKey":"wITgCkj+6CV/fa7+JTh8xYeg1DU9xpdSsNJ5Qrx4v1Q="},"lastRemoteEphemeralKey":"Bf4bOML0dM83cAkLRFfXBEa1etpUrjdB3R+dJw5RxPkY","previousCounter":0,"rootKey":"0KW7QKLBPKfew+5RcU+4e9PG3GAzYDqaqQmjG+l5OTU="},"indexInfo":{"baseKey":"BRlgNlZP3LSFw4rKbag3Zhj7xPKwIjEeg4ISx2EWZQ9U","baseKeyType":1,"closed":-1,"used":1777117479015,"created":1777117479015,"remoteIdentityKey":"BbIZQbpxLo3bLnJYIqammqa9h6eesEIu5PYevcO1OhQr"},"_chains":{"BW6O/vbP8gVn0EsXSubUpMh9w2TpUgrb9+ARqJGGDhkg":{"chainKey":{"counter":-1,"key":"Qyjj9tHFbgDcijKNVJV+DC9YDLpXhX5I8MQKznAcCE4="},"chainType":1,"messageKeys":{}}},"pendingPreKey":{"signedKeyId":12397397,"baseKey":"BRlgNlZP3LSFw4rKbag3Zhj7xPKwIjEeg4ISx2EWZQ9U","preKeyId":15019010}}},"version":"v1"}
+```
+
+### `axion-ia-api\src\whatsapp-auth\session-69269350002865_1.0.json`
+
+```json
+{"_sessions":{"BXZWbA1Dxdc2p7S7+/PbckJsAHk9mzwwdV0grtk4rLZr":{"registrationId":849850202,"currentRatchet":{"ephemeralKeyPair":{"pubKey":"BQ3LSCvTkMM86UIvo7i0Dmh66XXFnjHtcpHimGeNlqIE","privKey":"ePcVq3s5xvB/Vdz9h4+9UVOB362Y9p7UzYnR4TKOUkw="},"lastRemoteEphemeralKey":"BTF6VXYE3lcgkus6ITTNv0lL7vKSPBVPmL5WrDh0altG","previousCounter":0,"rootKey":"Gd3BOM0GKb45qSbDoUOQeRnPKTWqtPwgWCx0Dixq23A="},"indexInfo":{"baseKey":"BXZWbA1Dxdc2p7S7+/PbckJsAHk9mzwwdV0grtk4rLZr","baseKeyType":1,"closed":-1,"used":1777052939674,"created":1777052939674,"remoteIdentityKey":"BXJPEDZ7JHnp2GXNr/9q89mfcKZuDLDxRt4MaHpPlS42"},"_chains":{"BQ3LSCvTkMM86UIvo7i0Dmh66XXFnjHtcpHimGeNlqIE":{"chainKey":{"counter":-1,"key":"rCZoI6Gnrzgfj0lLNLdumFlMcRSpEmRUUMPi6cXLLwI="},"chainType":1,"messageKeys":{}}},"pendingPreKey":{"signedKeyId":9649511,"baseKey":"BXZWbA1Dxdc2p7S7+/PbckJsAHk9mzwwdV0grtk4rLZr","preKeyId":13422706}}},"version":"v1"}
+```
+
+### `axion-ia-api\src\whatsapp-auth\session-80328806944780_1.0.json`
+
+```json
+{"_sessions":{"BebPVBtqybY+myqZRsK8ejge9eauT+fNUY4hwAd8BzMd":{"registrationId":1190981771,"currentRatchet":{"ephemeralKeyPair":{"pubKey":"BZBNmBpae/juu9/pI10W40NA0myYeTGaOZoMTlhp+TMi","privKey":"GFqxhRa0pn0qS0AYcPKzsk1pJJXMel5F+vwt0zRLCnw="},"lastRemoteEphemeralKey":"Bco8FP0gtbwE1AXPj3MtFiObC7LTsCSFeiI5Og9i8z1p","previousCounter":0,"rootKey":"0zrSITpZYVpyGuWODBSP+Zkzztj7mB86D68e3CIVlM0="},"indexInfo":{"baseKey":"BebPVBtqybY+myqZRsK8ejge9eauT+fNUY4hwAd8BzMd","baseKeyType":1,"closed":-1,"used":1777203876648,"created":1777203876648,"remoteIdentityKey":"BWD78pA3nQktFnDwnDOQ3doJ5nB/6lX3UJ+359eMglZp"},"_chains":{"BZBNmBpae/juu9/pI10W40NA0myYeTGaOZoMTlhp+TMi":{"chainKey":{"counter":-1,"key":"PwxArV523PPaXBCiFle933ofMka9qgZDblUvDW0lVZM="},"chainType":1,"messageKeys":{}}},"pendingPreKey":{"signedKeyId":5,"baseKey":"BebPVBtqybY+myqZRsK8ejge9eauT+fNUY4hwAd8BzMd","preKeyId":8491084}}},"version":"v1"}
+```
+
+### `axion-ia-api\src\whatsapp-auth\session-85169302167616_1.0.json`
+
+```json
+{"_sessions":{"BQW6hEYGj1fWUPrNlG08iJQLTe2ivDxgap9SOtwVjT8E":{"registrationId":712274841,"currentRatchet":{"ephemeralKeyPair":{"pubKey":"BRkw6vdZJrwh4juftrY0p4Yi2PuvMId8oYE1xg3H66dG","privKey":"OOlWk1Xf9/FZY8ml1SCgJ2cUTEmnc6XeO5h7gM6Sn28="},"lastRemoteEphemeralKey":"BaZf5qw8U515Rxg+Nj810rzjw4DfvVjaIOfsCuQscIV7","previousCounter":0,"rootKey":"/UMAL61l8I8wl7uyeSHUtTIK+6PiJRkpo1w3sHk+l9M="},"indexInfo":{"baseKey":"BQW6hEYGj1fWUPrNlG08iJQLTe2ivDxgap9SOtwVjT8E","baseKeyType":1,"closed":-1,"used":1777097318140,"created":1777097318140,"remoteIdentityKey":"BTaO9A/lmLjqptwYIQyrwRV+UtrP2BzSYYXRl5WkrOA6"},"_chains":{"BRkw6vdZJrwh4juftrY0p4Yi2PuvMId8oYE1xg3H66dG":{"chainKey":{"counter":-1,"key":"/94RsdE97wgJ1ToXWbN2WG+R1mPVhIL/5l7fCvaQqjE="},"chainType":1,"messageKeys":{}}},"pendingPreKey":{"signedKeyId":6695178,"baseKey":"BQW6hEYGj1fWUPrNlG08iJQLTe2ivDxgap9SOtwVjT8E","preKeyId":3606}}},"version":"v1"}
+```
+
+### `axion-ia-api\src\whatsapp-auth\session-93510145441957_1.0.json`
+
+```json
+{"_sessions":{"BR807JP1JF7Z4WhpGsFBbVc6HnX/sOEuQYkO9GJn+bR0":{"registrationId":1576978794,"currentRatchet":{"ephemeralKeyPair":{"pubKey":"BSS/dn9zCGxOq0CV6elFvkXlhC97St8p/UB4aLA/Oe96","privKey":"KPt7BGtQcMaK/tWjEwyLjfuCkx0XC8u1PXtt2iUozGo="},"lastRemoteEphemeralKey":"BVtrBjoqOr8s1SE/v9d4hxnKBFqyHqmtnR6QrRVmvM9W","previousCounter":0,"rootKey":"kP0oWcJ6/xfKscJcSnWKRBcdCpfv3pca9YfcX2Px8PY="},"indexInfo":{"baseKey":"BR807JP1JF7Z4WhpGsFBbVc6HnX/sOEuQYkO9GJn+bR0","baseKeyType":1,"closed":-1,"used":1777117477325,"created":1777117477325,"remoteIdentityKey":"BRKPRnDuukUJ1ikvCvswjIVOn4qdYknY7d8HAQGSsY8D"},"_chains":{"BSS/dn9zCGxOq0CV6elFvkXlhC97St8p/UB4aLA/Oe96":{"chainKey":{"counter":-1,"key":"ZxMld66PKLdDU0b0W0+TD4fx4iXLWM3QNX2M6WcsGdw="},"chainType":1,"messageKeys":{}}},"pendingPreKey":{"signedKeyId":5662287,"baseKey":"BR807JP1JF7Z4WhpGsFBbVc6HnX/sOEuQYkO9GJn+bR0","preKeyId":922}}},"version":"v1"}
+```
+
+### `axion-ia-api\src\whatsapp-auth\session-94433966059548_1.0.json`
+
+```json
+{"_sessions":{"Bedtgwmp36EXbLPouYsoexEfRGPmfSma/z6L20ccVSZT":{"registrationId":1832215747,"currentRatchet":{"ephemeralKeyPair":{"pubKey":"BdwWgcWeu5cKdqY8ozEraNqavMCsL8FIsbPc6ftxe1BY","privKey":"iOi1B7sn6vGvSBVD5mX248lzZr7YDKwi2NTBVE/mgUU="},"lastRemoteEphemeralKey":"BeIYkgPO6DdnSrYulIRRL1lv6SvMO0fRZK1xVf+y1TEK","previousCounter":0,"rootKey":"eI2SEmT6XiY/Jtu8yjuXBr6ZQJPKqKg0yRl1ZgzvO3s="},"indexInfo":{"baseKey":"Bedtgwmp36EXbLPouYsoexEfRGPmfSma/z6L20ccVSZT","baseKeyType":1,"closed":-1,"used":1777203875630,"created":1777203875630,"remoteIdentityKey":"BehBhIgCQJMWDzQG23JT0EK7mXv3UZxay8zG8nc8oP1M"},"_chains":{"BdwWgcWeu5cKdqY8ozEraNqavMCsL8FIsbPc6ftxe1BY":{"chainKey":{"counter":-1,"key":"D3EewiimdmiNEdnMNizsoRjNETQ1M1m1jVVqZT4AsBE="},"chainType":1,"messageKeys":{}}},"pendingPreKey":{"signedKeyId":7547042,"baseKey":"Bedtgwmp36EXbLPouYsoexEfRGPmfSma/z6L20ccVSZT","preKeyId":14989524}}},"version":"v1"}
+```
+
+### `axion-ia-api\src\whatsapp-auth\session-98037024182469_1.0.json`
+
+```json
+{"_sessions":{"BeunGozCNhFlV+8o4eUGeElUBEtrSzmMJjslRxwMepdw":{"registrationId":75608223,"currentRatchet":{"ephemeralKeyPair":{"pubKey":"BU2wIoRULbstyjCmn2Ue29Ljv7Z91mhJ1Lg1YDgorz1h","privKey":"oBYAEYJih9FJkgBLhDubYyG46kiQ8n/sT8G6I1hTb0c="},"lastRemoteEphemeralKey":"BRhdiz7QvIfeSYNaRvF6BkaHQcRi8GhGTM1xrpfA99Ix","previousCounter":0,"rootKey":"jUtCg7RtASar0cy4EsI7GPvJH6hmDebZLek1qKghcMw="},"indexInfo":{"baseKey":"BeunGozCNhFlV+8o4eUGeElUBEtrSzmMJjslRxwMepdw","baseKeyType":2,"closed":-1,"used":1777061379308,"created":1777061379308,"remoteIdentityKey":"Ba7DhFHxgnFrRAV7JhpCAk7e5AvDnTOktXOUzfbmZPwn"},"_chains":{"BRhdiz7QvIfeSYNaRvF6BkaHQcRi8GhGTM1xrpfA99Ix":{"chainKey":{"counter":1,"key":"4P25d8BvKv2QifJoeBNO11bqzJNP7alk0K2OeCYAyd0="},"chainType":2,"messageKeys":{}},"BU2wIoRULbstyjCmn2Ue29Ljv7Z91mhJ1Lg1YDgorz1h":{"chainKey":{"counter":-1,"key":"mh7/Z4xGyRBoUTKI13B1tE/0xSJ0Y1gdfAiaBhudovc="},"chainType":1,"messageKeys":{}}}}},"version":"v1"}
+```
+
+### `axion-ia-api\src\whatsapp-auth\session-99475855020277_1.0.json`
+
+```json
+{"_sessions":{"BdXg4vXyl0GBfzDKf3qHtm2mIOPL6DlE4EXa0cjJ1N5r":{"registrationId":38179776,"currentRatchet":{"ephemeralKeyPair":{"pubKey":"BVd6xVNznOEO5tAlkfblOvCuXd9PvjXo75ERz6gmSWUw","privKey":"sCBge19JUi10Hrudpp5pwJfGHKuJTHzmhcO/xgm/E24="},"lastRemoteEphemeralKey":"BYd8JXZ0zpcI4EgF3k6ycfBAAdUYmRzjMkB1+RrV/r4o","previousCounter":0,"rootKey":"K2DIgKj0/PzGUAOGYAMsQ4JAric0Sa9JC+59UP9WGAM="},"indexInfo":{"baseKey":"BdXg4vXyl0GBfzDKf3qHtm2mIOPL6DlE4EXa0cjJ1N5r","baseKeyType":1,"closed":-1,"used":1777203877098,"created":1777203877098,"remoteIdentityKey":"Bezc25Xv3URJlYRQQpPhFg4VjOo5Mn/LjeiOoABq4Qga"},"_chains":{"BVd6xVNznOEO5tAlkfblOvCuXd9PvjXo75ERz6gmSWUw":{"chainKey":{"counter":-1,"key":"SJmt7P4m/OzEUUMikgvsialx+0OizFYjJ3Ez9kp1H4c="},"chainType":1,"messageKeys":{}}},"pendingPreKey":{"signedKeyId":4325842,"baseKey":"BdXg4vXyl0GBfzDKf3qHtm2mIOPL6DlE4EXa0cjJ1N5r","preKeyId":7364345}}},"version":"v1"}
+```
+
+### `axion-ia-api\src\whatsapp-auth\tctoken-105321859145805@lid.json`
+
+```json
+{"token":{"type":"Buffer","data":"BAEpheYZHhncv6A="},"timestamp":"1777054496"}
+```
+
+### `axion-ia-api\src\whatsapp-auth\tctoken-181415190732814@lid.json`
+
+```json
+{"token":{"type":"Buffer","data":"BAEpbrH8AU9c9Nw="},"timestamp":"1767914676"}
+```
+
+### `axion-ia-api\src\whatsapp-auth\tctoken-192556788924564@lid.json`
+
+```json
+{"token":{"type":"Buffer","data":"BAEplp5n/ke5y4c="},"timestamp":"1776972187"}
+```
+
+### `axion-ia-api\src\whatsapp-auth\tctoken-199707422929028@lid.json`
+
+```json
+{"token":{"type":"Buffer","data":"BAEpqTVifNh/Bd4="},"timestamp":"1766658461"}
+```
+
+### `axion-ia-api\src\whatsapp-auth\tctoken-235901196185624@lid.json`
+
+```json
+{"token":{"type":"Buffer","data":"BAEpOS2Yj7V91Vw="},"timestamp":"1762351368"}
+```
+
+### `axion-ia-api\src\whatsapp-auth\tctoken-255580803465410@lid.json`
+
+```json
+{"token":{"type":"Buffer","data":"BAEp89mQHxHxfr0="},"timestamp":"1767364974"}
+```
+
+### `axion-ia-api\src\whatsapp-auth\tctoken-261447695204448@lid.json`
+
+```json
+{"token":{"type":"Buffer","data":"BAEpvRuWLbL9AjQ="},"timestamp":"1767450232"}
+```
+
+### `axion-ia-api\src\whatsapp-auth\tctoken-32044902010921@lid.json`
+
+```json
+{"token":{"type":"Buffer","data":"BAEpKKreGia/bT0="},"timestamp":"1767881525"}
+```
+
+### `axion-ia-api\src\whatsapp-auth\tctoken-32817979338799@lid.json`
+
+```json
+{"token":{"type":"Buffer","data":"BAEpQBGDr3Ksiy4="},"timestamp":"1777052863"}
+```
+
+### `axion-ia-api\src\whatsapp-auth\tctoken-44775487090743@lid.json`
+
+```json
+{"token":{"type":"Buffer","data":"BAEpy+wzLHG6dWA="},"timestamp":"1767892057"}
+```
+
+### `axion-ia-api\src\whatsapp-auth\tctoken-50118124380322@lid.json`
+
+```json
+{"token":{"type":"Buffer","data":"BAEpIQveaLWZdxY="},"timestamp":"1764192176"}
+```
+
+### `axion-ia-api\src\whatsapp-auth\tctoken-51200489713748@lid.json`
+
+```json
+{"token":{"type":"Buffer","data":"BAEpoekG/uuEUdo="},"timestamp":"1767914344"}
+```
+
+### `axion-ia-api\src\whatsapp-auth\tctoken-95176609554530@lid.json`
+
+```json
+{"token":{"type":"Buffer","data":"BAEpeRVGt1Fvxwo="},"timestamp":"1763494438"}
+```
+
+### `axion-ia-api\src\whatsapp-auth\tctoken-98037024182469@lid.json`
+
+```json
+{"token":{"type":"Buffer","data":"BAEpGBkxNTusqN0="},"timestamp":"1777059187"}
+```
+
+### `axion-ia-api\src\whatsapp-controller.js`
+
+```js
+/**
+ * whatsapp-controller.js
+ * Endpoints REST para gerenciar a integração WhatsApp via painel.
+ */
+
+import { iniciarWhatsApp, enviarMensagem, obterEstado, obterQR } from "./services/whatsapp.service.js";
+import { processarMensagemWA } from "./whatsapp-flow.js";
+import { WhatsAppSessao } from "./models/whatsapp-sessao.model.js";
+
+let inicializado = false;
+
+/**
+ * POST /api/whatsapp/iniciar — Inicia a conexão WhatsApp (exibe QR no terminal)
+ */
+export async function iniciarConexao(req, res) {
+  if (inicializado) {
+    return res.json({ ok: true, mensagem: "WhatsApp já está iniciado", estado: obterEstado() });
+  }
+  try {
+    inicializado = true;
+    iniciarWhatsApp(processarMensagemWA).catch(err => {
+      console.error("❌ [WhatsApp] Falha ao iniciar:", err.message);
+      inicializado = false;
+    });
+    res.json({ ok: true, mensagem: "Iniciando WhatsApp... Verifique o QR code no terminal da API.", estado: obterEstado() });
+  } catch (err) {
+    inicializado = false;
+    res.status(500).json({ erro: err.message });
+  }
+}
+
+/**
+ * GET /api/whatsapp/status — Retorna status da conexão
+ */
+export function statusConexao(req, res) {
+  const estado = obterEstado();
+  res.json({ ...estado });
+}
+
+/**
+ * GET /api/whatsapp/sessoes — Lista sessões ativas
+ */
+export async function listarSessoes(req, res) {
+  try {
+    const sessoes = await WhatsAppSessao.find({ ativo: true })
+      .sort({ ultimaMensagem: -1 })
+      .limit(100)
+      .lean();
+    res.json({ total: sessoes.length, sessoes });
+  } catch (err) {
+    res.status(500).json({ erro: err.message });
+  }
+}
+
+/**
+ * GET /api/whatsapp/sessao/:telefone — Detalhe de uma sessão
+ */
+export async function detalhesSessao(req, res) {
+  try {
+    const sessao = await WhatsAppSessao.findOne({ telefone: req.params.telefone }).lean();
+    if (!sessao) return res.status(404).json({ erro: "Sessão não encontrada" });
+    res.json(sessao);
+  } catch (err) {
+    res.status(500).json({ erro: err.message });
+  }
+}
+
+/**
+ * DELETE /api/whatsapp/sessao/:telefone — Encerra/reseta sessão
+ */
+export async function encerrarSessao(req, res) {
+  try {
+    await WhatsAppSessao.updateOne(
+      { telefone: req.params.telefone },
+      { estado: "encerrado", ativo: false }
+    );
+    res.json({ ok: true });
+  } catch (err) {
+    res.status(500).json({ erro: err.message });
+  }
+}
+
+/**
+ * POST /api/whatsapp/send — Envia mensagem manual para um número
+ * Body: { telefone, mensagem }
+ */
+export async function enviarManual(req, res) {
+  const { telefone, mensagem } = req.body;
+  if (!telefone || !mensagem) {
+    return res.status(400).json({ erro: "Campos obrigatórios: telefone, mensagem" });
+  }
+  try {
+    await enviarMensagem(telefone, mensagem);
+    res.json({ ok: true });
+  } catch (err) {
+    res.status(500).json({ erro: err.message });
+  }
+}
+```
+
+### `axion-ia-api\src\whatsapp-flow.js`
+
+```js
+/**
+ * whatsapp-flow.js
+ * Máquina de estados da conversa WhatsApp ↔ Jitbit Helpdesk.
+ *
+ * Fluxo de abertura de chamado:
+ *   menu → aguardando_assunto → aguardando_descricao
+ *        → aguardando_categoria → aguardando_foto
+ *        → confirmando_ticket → (cria ticket + anexa foto)
+ */
+
+import { WhatsAppSessao } from "./models/whatsapp-sessao.model.js";
+import { enviarMensagem } from "./services/whatsapp.service.js";
+import { criarTicketUsuario, buscarTicket, buscarComentarios, buscarCategorias, anexarArquivo, atribuirTecnico, listarUsuarios } from "./jitbit.js";
+import { gerarResposta, gerarRespostaWA } from "./engine.js";
+import { classificarMensagem } from "./classifier.js";
+import { salvarHistorico } from "./logger.js";
+
+// Cache de categorias (5 min)
+let _cacheCats = null;
+let _cacheCatsTempo = 0;
+async function obterCategorias() {
+  if (_cacheCats && Date.now() - _cacheCatsTempo < 5 * 60 * 1000) return _cacheCats;
+  _cacheCats = await buscarCategorias();
+  _cacheCatsTempo = Date.now();
+  return _cacheCats;
+}
+
+// Cache de usuários/técnicos (5 min)
+let _cacheUsers = null;
+let _cacheUsersTempo = 0;
+async function obterUsuarios() {
+  if (_cacheUsers && Date.now() - _cacheUsersTempo < 5 * 60 * 1000) return _cacheUsers;
+  try {
+    _cacheUsers = await listarUsuarios();
+  } catch (_) { _cacheUsers = []; }
+  _cacheUsersTempo = Date.now();
+  return _cacheUsers;
+}
+
+// Armazenamento temporário de fotos em memória (não salvar binário no MongoDB)
+const fotosTemp = new Map(); // telefone → { buffer, mimeType, filename }
+
+const MENU = `Olá! Sou o assistente da *Axion Tecnologia* 🤖
+
+Como posso ajudar?
+
+*1* — Abrir novo chamado
+*2* — Consultar chamado
+*3* — Responder chamado
+*4* — Dúvidas do Sistema
+*0* — Falar com atendente`;
+
+const MENU_OPCOES = ["1", "2", "3", "4", "0"];
+
+// --------------------------------------------------------------------------
+
+async function obterOuCriarSessao(telefone, nome, remoteJid) {
+  let sessao = await WhatsAppSessao.findOne({ telefone });
+  if (!sessao) {
+    sessao = await WhatsAppSessao.create({ telefone, nome, estado: "inicio" });
+  } else {
+    sessao.nome = nome || sessao.nome;
+    sessao.ultimaMensagem = new Date();
+    sessao.ativo = true;
+  }
+  // JID completo para responder (não persiste no Mongo)
+  sessao._remoteJid = remoteJid || `${telefone}@s.whatsapp.net`;
+  return sessao;
+}
+
+async function salvarSessao(sessao) {
+  sessao.ultimaMensagem = new Date();
+  await sessao.save();
+}
+
+// --------------------------------------------------------------------------
+
+/**
+ * Ponto de entrada para cada mensagem recebida.
+ * @param {string} telefone
+ * @param {string} nome
+ * @param {string} texto
+ * @param {{ buffer: Buffer, mimeType: string, filename: string }|null} midia
+ */
+export async function processarMensagemWA(telefone, nome, texto, midia = null, remoteJid = null) {
+  const sessao = await obterOuCriarSessao(telefone, nome, remoteJid || `${telefone}@s.whatsapp.net`);
+  const jid = sessao._remoteJid;
+  const t = (texto || "").trim().toLowerCase();
+
+  // Comandos globais
+  if (t === "menu" || t === "inicio" || t === "oi" || t === "olá" || t === "ola") {
+    sessao.estado = "menu";
+    sessao.dadosParciais = {};
+    fotosTemp.delete(telefone);
+    await salvarSessao(sessao);
+    await enviarMensagem(jid, MENU);
+    return;
+  }
+
+  switch (sessao.estado) {
+    case "inicio":
+    case "menu":
+      await handleMenu(sessao, t);
+      break;
+    case "aguardando_assunto":
+      await handleAssunto(sessao, texto);
+      break;
+    case "aguardando_sistema":
+      await handleSistema(sessao, t);
+      break;
+    case "aguardando_descricao":
+      await handleDescricao(sessao, texto);
+      break;
+    case "aguardando_categoria":
+      await handleCategoria(sessao, t);
+      break;
+    case "aguardando_foto":
+      await handleFoto(sessao, t, midia);
+      break;
+    case "confirmando_ticket":
+      await handleConfirmacao(sessao, t);
+      break;
+    case "consultando_numero":
+      await handleConsultaNumero(sessao, texto);
+      break;
+    case "respondendo_numero":
+      await handleRespondendoNumero(sessao, texto);
+      break;
+    case "respondendo_mensagem":
+      await handleRespondendoMensagem(sessao, texto, midia);
+      break;
+    case "aguardando_modulo_duvida":
+      await handleModuloDuvida(sessao, t);
+      break;
+    case "aguardando_duvida":
+      await handleDuvida(sessao, texto);
+      break;
+    case "respondendo_duvida":
+      await handleRespostaDuvida(sessao, t, texto);
+      break;
+    default:
+      sessao.estado = "menu";
+      await salvarSessao(sessao);
+      await enviarMensagem(jid, MENU);
+  }
+}
+
+// --------------------------------------------------------------------------
+// HANDLERS
+// --------------------------------------------------------------------------
+
+async function handleMenu(sessao, opcao) {
+  if (!MENU_OPCOES.includes(opcao)) {
+    // Tenta responder como pergunta direta ao KB antes de dizer "não entendi"
+    const contexto = classificarMensagem(opcao);
+    if (contexto) {
+      await enviarMensagem(sessao._remoteJid,
+        `💡 *${contexto.assunto}*\n\n${contexto.acao}\n\n` +
+        `_Digite *menu* para ver as opções ou faça outra pergunta._`);
+      return;
+    }
+    await enviarMensagem(sessao._remoteJid, `Não entendi. Digite o número da opção:\n\n${MENU}`);
+    return;
+  }
+
+  if (opcao === "1") {
+    sessao.estado = "aguardando_assunto";
+    sessao.dadosParciais = {};
+    await salvarSessao(sessao);
+    await enviarMensagem(sessao._remoteJid, "📝 *Novo Chamado*\n\nQual é o assunto do chamado?\n_(ex: Erro no relatório de passagens)_");
+
+  } else if (opcao === "2") {
+    sessao.estado = "consultando_numero";
+    await salvarSessao(sessao);
+    await enviarMensagem(sessao._remoteJid, "🔍 *Consultar Chamado*\n\nDigite o número do chamado:\n_(ex: 98765)_");
+
+  } else if (opcao === "3") {
+    sessao.estado = "respondendo_numero";
+    await salvarSessao(sessao);
+    await enviarMensagem(sessao._remoteJid, "💬 *Responder Chamado*\n\nDigite o número do chamado que deseja responder:");
+
+  } else if (opcao === "4") {
+    sessao.estado = "aguardando_modulo_duvida";
+    sessao.dadosParciais = {};
+    await salvarSessao(sessao);
+    await enviarMensagem(sessao._remoteJid,
+      `🔎 *Dúvidas do Sistema*\n\nQual sistema você tem dúvida?\n\n*1* — AxHub (Trânsito)\n*2* — AxTon (Pesagem)\n*3* — AxCross (Cruzamentos)\n*0* — Qualquer / Não sei`);
+
+  } else if (opcao === "0") {
+    sessao.estado = "menu";
+    await salvarSessao(sessao);
+    await enviarMensagem(sessao._remoteJid, "👤 Um atendente será notificado em breve. Você também pode acessar diretamente:\nhttps://desk.axiontecnologia.com.br\n\nDigite *menu* a qualquer momento para voltar.");
+  }
+}
+
+async function handleAssunto(sessao, texto) {
+  if (!texto || texto.length < 5) {
+    await enviarMensagem(sessao._remoteJid, "Por favor, descreva o assunto com pelo menos 5 caracteres.");
+    return;
+  }
+  sessao.dadosParciais.assunto = texto;
+  sessao.estado = "aguardando_sistema";
+  sessao.markModified("dadosParciais");
+  await salvarSessao(sessao);
+
+  const SISTEMAS = [
+    "AxBlitz", "AxCross", "AxFlow", "AxHub", "AxionAPI",
+    "AxOCR", "AxRadar", "AxSync", "AxTon", "Azure", "Codtran"
+  ];
+  const lista = SISTEMAS.map((s, i) => `*${i + 1}* — ${s}`).join("\n");
+  await enviarMensagem(sessao._remoteJid,
+    `✅ Assunto registrado: *${texto}*\n\n🖥️ *Selecione o sistema relacionado:*\n\n${lista}\n\n*0* — Não se aplica / Pular`);
+}
+
+async function handleSistema(sessao, opcao) {
+  const SISTEMAS = [
+    "AxBlitz", "AxCross", "AxFlow", "AxHub", "AxionAPI",
+    "AxOCR", "AxRadar", "AxSync", "AxTon", "Azure", "Codtran"
+  ];
+  const idx = parseInt(opcao);
+
+  if (opcao === "0" || isNaN(idx)) {
+    sessao.dadosParciais.sistema = null;
+  } else if (idx >= 1 && idx <= SISTEMAS.length) {
+    sessao.dadosParciais.sistema = SISTEMAS[idx - 1];
+  } else {
+    const lista = SISTEMAS.map((s, i) => `*${i + 1}* — ${s}`).join("\n");
+    await enviarMensagem(sessao._remoteJid, `Digite um número válido ou *0* para pular.\n\n${lista}`);
+    return;
+  }
+
+  sessao.estado = "aguardando_descricao";
+  sessao.markModified("dadosParciais");
+  await salvarSessao(sessao);
+
+  const sistemaStr = sessao.dadosParciais.sistema
+    ? `Sistema: *${sessao.dadosParciais.sistema}*\n\n`
+    : "";
+  await enviarMensagem(sessao._remoteJid,
+    `${sistemaStr}Agora descreva o problema em detalhes:\n_(Quanto mais detalhes, mais rápido o atendimento)_`);
+}
+
+async function handleDescricao(sessao, texto) {
+  if (!texto || texto.length < 10) {
+    await enviarMensagem(sessao._remoteJid, "Por favor, forneça mais detalhes sobre o problema (mínimo 10 caracteres).");
+    return;
+  }
+  sessao.dadosParciais.descricao = texto;
+  sessao.estado = "aguardando_categoria";
+  sessao.markModified("dadosParciais");
+  await salvarSessao(sessao);
+
+  // Montar lista de categorias
+  let listaCats = "0 — Geral (padrão)";
+  try {
+    const cats = await obterCategorias();
+    if (cats?.length) {
+      listaCats = cats.map((c, i) => `*${i + 1}* — ${c.Name}`).join("\n");
+      // Salva mapa índice→id no cache de sessão (não no mongo)
+      sessao._catsCache = cats;
+    }
+  } catch (_) { /* usar padrão */ }
+
+  await enviarMensagem(sessao._remoteJid,
+    `📂 *Selecione a categoria do chamado:*\n\n${listaCats}\n\n*0* — Pular (Geral)`);
+}
+
+async function handleCategoria(sessao, opcao) {
+  const cats = await obterCategorias().catch(() => []);
+  const idx = parseInt(opcao);
+
+  if (opcao === "0" || isNaN(idx)) {
+    sessao.dadosParciais.categoriaId = cats?.[0]?.CategoryID || 0;
+    sessao.dadosParciais.categoriaNome = cats?.[0]?.Name || "Geral";
+  } else if (idx >= 1 && idx <= cats.length) {
+    const cat = cats[idx - 1];
+    sessao.dadosParciais.categoriaId = cat.CategoryID;
+    sessao.dadosParciais.categoriaNome = cat.Name;
+  } else {
+    await enviarMensagem(sessao._remoteJid, `Digite um número válido da lista ou *0* para pular.`);
+    return;
+  }
+
+  sessao.estado = "aguardando_foto";
+  sessao.markModified("dadosParciais");
+  await salvarSessao(sessao);
+
+  await enviarMensagem(sessao._remoteJid,
+    `📸 *Foto do problema*\n\nEnvie uma imagem relacionada ao chamado (opcional).\n\nDigite *0* ou *pular* para continuar sem foto.`);
+}
+
+async function handleFoto(sessao, opcao, midia) {
+  // Usuário enviou imagem com download OK
+  if (midia?.downloadOk && midia?.buffer) {
+    fotosTemp.set(sessao.telefone, midia);
+    sessao.dadosParciais.temFoto = true;
+    sessao.markModified("dadosParciais");
+    console.log(`📎 [WhatsApp] Foto salva em memória para ${sessao.telefone} (${midia.buffer.length} bytes)`);
+    // não salva aqui — salva depois de setar estado
+
+  // Usuário enviou imagem mas download falhou — pedir reenvio
+  } else if (midia && !midia.downloadOk) {
+    await enviarMensagem(sessao._remoteJid,
+      "⚠️ Não consegui processar a imagem. Por favor, tente enviar novamente.\n\nOu digite *0* para continuar sem foto.");
+    return;
+
+  // Usuário digitou "0" / "pular" para continuar sem foto
+  } else if (opcao === "0" || opcao === "pular" || opcao === "nao" || opcao === "não") {
+    sessao.dadosParciais.temFoto = false;
+    fotosTemp.delete(sessao.telefone);
+
+  } else {
+    await enviarMensagem(sessao._remoteJid, "📸 Envie uma imagem ou digite *0* para pular.");
+    return;
+  }
+
+  sessao.estado = "confirmando_ticket";
+  await salvarSessao(sessao);
+
+  // Sugestão IA
+  let sugestaoIA = "";
+  try {
+    const resultado = await gerarResposta(`${sessao.dadosParciais.assunto} ${sessao.dadosParciais.descricao}`);
+    if (resultado.score >= 0.65) {
+      sugestaoIA = `\n\n💡 *Sugestão da IA (${(resultado.score * 100).toFixed(0)}% confiança):*\n${resultado.resposta.substring(0, 300)}...`;
+    }
+  } catch (_) { /* IA indisponível */ }
+
+  const fotoStr = sessao.dadosParciais.temFoto ? "✅ Com foto" : "❌ Sem foto";
+
+  await enviarMensagem(sessao._remoteJid,
+    `📋 *Confirme os dados do chamado:*\n\n` +
+    `*Assunto:* ${sessao.dadosParciais.assunto}\n` +
+    (sessao.dadosParciais.sistema ? `*Sistema:* ${sessao.dadosParciais.sistema}\n` : "") +
+    `*Descrição:* ${sessao.dadosParciais.descricao?.substring(0, 200) || ""}${(sessao.dadosParciais.descricao?.length || 0) > 200 ? "..." : ""}\n` +
+    `*Categoria:* ${sessao.dadosParciais.categoriaNome || "Geral"}\n` +
+    `*Foto:* ${fotoStr}` +
+    sugestaoIA +
+    `\n\n*1* — Confirmar e abrir chamado\n*2* — Cancelar`
+  );
+}
+
+async function handleConfirmacao(sessao, opcao) {
+  if (opcao === "2" || opcao === "cancelar") {
+    sessao.estado = "menu";
+    sessao.dadosParciais = {};
+    fotosTemp.delete(sessao.telefone);
+    await salvarSessao(sessao);
+    await enviarMensagem(sessao._remoteJid, "❌ Chamado cancelado.\n\nDigite *menu* para voltar ao início.");
+    return;
+  }
+
+  if (opcao !== "1" && opcao !== "confirmar" && opcao !== "sim" && opcao !== "s") {
+    await enviarMensagem(sessao._remoteJid, "Digite *1* para confirmar ou *2* para cancelar.");
+    return;
+  }
+
+  await enviarMensagem(sessao._remoteJid, "⏳ Criando chamado, aguarde...");
+
+  try {
+    const resultado = await criarTicketUsuario(
+      process.env.JITBIT_USER,
+      process.env.JITBIT_PASS,
+      sessao.dadosParciais.assunto,
+      `${sessao.dadosParciais.descricao}\n\n${sessao.dadosParciais.sistema ? `Sistema: ${sessao.dadosParciais.sistema}\n` : ""}_Chamado aberto via WhatsApp por ${sessao.nome} (${sessao.telefone})_`,
+      sessao.dadosParciais.categoriaId || 0
+    );
+
+    const ticketId = resultado.ticketId || resultado.id;
+
+    // Anexar foto se houver
+    if (sessao.dadosParciais.temFoto) {
+      const foto = fotosTemp.get(sessao.telefone);
+      if (foto?.buffer) {
+        try {
+          await anexarArquivo(ticketId, foto.filename, foto.buffer, foto.mimeType);
+        } catch (err) {
+          console.error("⚠️  [WhatsApp] Erro ao anexar foto ao ticket:", err.message);
+        }
+        fotosTemp.delete(sessao.telefone);
+      }
+    }
+
+    sessao.ultimoTicketId = ticketId;
+    sessao.estado = "menu";
+    const assuntoFinal = sessao.dadosParciais.assunto;
+    sessao.dadosParciais = {};
+    await salvarSessao(sessao);
+
+    salvarHistorico({
+      mensagem: `[WHATSAPP] ${assuntoFinal} — ${sessao.telefone}`,
+      origem: "helpdesk-widget",
+      resposta: `Ticket #${ticketId} criado via WhatsApp`
+    });
+
+    await enviarMensagem(sessao._remoteJid,
+      `✅ *Chamado aberto com sucesso!*\n\n` +
+      `🎫 Número: *#${ticketId}*\n` +
+      `📌 Assunto: ${assuntoFinal}\n` +
+      `📊 Status: Aguardando atendimento\n\n` +
+      `Você receberá atualizações aqui mesmo.\n` +
+      `Acesse também: https://desk.axiontecnologia.com.br\n\n` +
+      `Digite *menu* para voltar ao início.`
+    );
+  } catch (err) {
+    sessao.estado = "menu";
+    await salvarSessao(sessao);
+    await enviarMensagem(sessao._remoteJid,
+      `❌ Erro ao abrir chamado: ${err.message === "AUTH_FAILED" ? "Credenciais inválidas no sistema." : err.message}\n\nDigite *menu* para tentar novamente.`
+    );
+  }
+}
+
+async function handleConsultaNumero(sessao, texto) {
+  const numero = parseInt(texto.replace(/\D/g, ""));
+  if (!numero) {
+    await enviarMensagem(sessao._remoteJid, "Por favor, envie apenas o número do chamado (ex: 98765).");
+    return;
+  }
+
+  await enviarMensagem(sessao._remoteJid, `🔍 Buscando chamado #${numero}...`);
+
+  try {
+    const ticket = await buscarTicket(numero);
+    const comentarios = await buscarComentarios(numero);
+    const ultimoComentario = comentarios?.length
+      ? `\n\n💬 *Último comentário:*\n${comentarios[comentarios.length - 1]?.Body?.replace(/<[^>]+>/g, "").substring(0, 200) || "-"}`
+      : "";
+
+    sessao.estado = "menu";
+    await salvarSessao(sessao);
+
+    await enviarMensagem(sessao._remoteJid,
+      `📋 *Chamado #${numero}*\n\n` +
+      `*Assunto:* ${ticket.Subject || "-"}\n` +
+      `*Status:* ${ticket.StatusName || ticket.Status || "-"}\n` +
+      `*Prioridade:* ${ticket.PriorityName || "-"}\n` +
+      `*Técnico:* ${ticket.TechFirstName ? `${ticket.TechFirstName} ${ticket.TechLastName || ""}`.trim() : "Não atribuído"}\n` +
+      `*Aberto em:* ${ticket.Date ? new Date(ticket.Date).toLocaleDateString("pt-BR") : "-"}` +
+      ultimoComentario +
+      `\n\nDigite *menu* para voltar ao início.`
+    );
+  } catch (err) {
+    sessao.estado = "menu";
+    await salvarSessao(sessao);
+    await enviarMensagem(sessao._remoteJid, `❌ Chamado #${numero} não encontrado ou você não tem acesso.\n\nDigite *menu* para voltar.`);
+  }
+}
+
+async function handleRespondendoNumero(sessao, texto) {
+  const numero = parseInt(texto.replace(/\D/g, ""));
+  if (!numero) {
+    await enviarMensagem(sessao._remoteJid, "Por favor, envie apenas o número do chamado (ex: 98765).");
+    return;
+  }
+  sessao.dadosParciais.ticketId = numero;
+  sessao.estado = "respondendo_mensagem";
+  await salvarSessao(sessao);
+  await enviarMensagem(sessao._remoteJid, `💬 Chamado *#${numero}*\n\nDigite a mensagem que deseja enviar ao técnico:\n_(Você também pode enviar uma foto)_`);
+}
+
+async function handleRespondendoMensagem(sessao, texto, midia = null) {
+  if ((!texto || texto.length < 3) && !midia) {
+    await enviarMensagem(sessao._remoteJid, "Mensagem muito curta. Digite uma resposta mais detalhada ou envie uma imagem.");
+    return;
+  }
+
+  const ticketId = sessao.dadosParciais.ticketId;
+  await enviarMensagem(sessao._remoteJid, "⏳ Enviando resposta...");
+
+  try {
+    const { responderTicket } = await import("./jitbit.js");
+    const corpoTexto = texto
+      ? `${texto}\n\n_Enviado via WhatsApp por ${sessao.nome} (${sessao.telefone})_`
+      : `_Imagem enviada via WhatsApp por ${sessao.nome} (${sessao.telefone})_`;
+
+    await responderTicket(ticketId, corpoTexto);
+
+    // Anexar foto se enviada junto com a resposta
+    if (midia?.buffer) {
+      try {
+        await anexarArquivo(ticketId, midia.filename, midia.buffer, midia.mimeType);
+      } catch (err) {
+        console.error("⚠️  [WhatsApp] Erro ao anexar foto na resposta:", err.message);
+      }
+    }
+
+    sessao.estado = "menu";
+    sessao.dadosParciais = {};
+    await salvarSessao(sessao);
+
+    await enviarMensagem(sessao._remoteJid,
+      `✅ Resposta enviada com sucesso ao chamado *#${ticketId}*!\n\nDigite *menu* para voltar ao início.`
+    );
+  } catch (err) {
+    sessao.estado = "menu";
+    await salvarSessao(sessao);
+    await enviarMensagem(sessao._remoteJid, `❌ Erro ao enviar resposta: ${err.message}\n\nDigite *menu* para tentar novamente.`);
+  }
+}
+
+// --------------------------------------------------------------------------
+// HANDLERS — DÚVIDAS DO SISTEMA
+// --------------------------------------------------------------------------
+
+const MODULOS_DUVIDA = { "1": "axhub", "2": "axton", "3": "axcross", "0": null };
+const MODULOS_NOME = { "axhub": "AxHub", "axton": "AxTon", "axcross": "AxCross" };
+
+async function handleModuloDuvida(sessao, opcao) {
+  if (!MODULOS_DUVIDA.hasOwnProperty(opcao)) {
+    // Usuário digitou a pergunta diretamente em vez de escolher o módulo
+    // → trata como se tivesse escolhido "qualquer" e já faz a busca
+    const contexto = classificarMensagem(opcao);
+    if (contexto) {
+      await enviarMensagem(sessao._remoteJid,
+        `💡 *${contexto.assunto}*\n\n${contexto.acao}\n\n` +
+        `Esta resposta ajudou?\n*1* — Sim!\n*2* — Não, quero abrir um chamado\n*3* — Tenho outra dúvida`);
+      sessao.dadosParciais.moduloDuvida = null;
+      sessao.dadosParciais.ultimaDuvida = opcao;
+      sessao.dadosParciais.ultimaResposta = contexto.acao.substring(0, 500);
+      sessao.markModified("dadosParciais");
+      sessao.estado = "respondendo_duvida";
+      await salvarSessao(sessao);
+      return;
+    }
+    await enviarMensagem(sessao._remoteJid, "Digite *1* AxHub, *2* AxTon, *3* AxCross ou *0* para qualquer.");
+    return;
+  }
+  sessao.dadosParciais.moduloDuvida = MODULOS_DUVIDA[opcao];
+  sessao.markModified("dadosParciais");
+  sessao.estado = "aguardando_duvida";
+  await salvarSessao(sessao);
+
+  const moduloNome = MODULOS_NOME[MODULOS_DUVIDA[opcao]] || "todos os sistemas";
+  await enviarMensagem(sessao._remoteJid,
+    `💬 *Dúvida — ${moduloNome}*\n\nDigite sua dúvida ou problema:\n_(ex: como cadastrar usuário, como gerar relatório...)_\n\nDigite *0* para voltar ao menu.`);
+}
+
+async function handleDuvida(sessao, texto) {
+  if (!texto || texto.trim().length < 5) {
+    await enviarMensagem(sessao._remoteJid, "Por favor, descreva sua dúvida com mais detalhes.");
+    return;
+  }
+  if (texto.trim() === "0") {
+    sessao.estado = "menu";
+    await salvarSessao(sessao);
+    await enviarMensagem(sessao._remoteJid, MENU);
+    return;
+  }
+
+  await enviarMensagem(sessao._remoteJid, "🔍 Buscando resposta...");
+
+  const modulo = sessao.dadosParciais.moduloDuvida;
+  const pergunta = modulo ? `[${modulo.toUpperCase()}] ${texto}` : texto;
+
+  try {
+    const resultado = await gerarRespostaWA(pergunta);
+    const resposta = resultado.resposta ||
+      "Não encontrei uma resposta específica sobre isso na base de conhecimento. " +
+      "Recomendo abrir um chamado para que nossa equipe possa te ajudar.";
+
+    sessao.dadosParciais.ultimaDuvida = texto;
+    sessao.dadosParciais.ultimaResposta = resposta.substring(0, 500);
+    sessao.markModified("dadosParciais");
+    sessao.estado = "respondendo_duvida";
+    await salvarSessao(sessao);
+
+    const moduloNome = MODULOS_NOME[modulo] || "Sistema";
+    const origemTag = resultado.origem === "kb" ? "📚 Base de conhecimento" :
+                      resultado.origem === "embedding" ? "🔎 Busca semântica" : "🤖 IA";
+
+    await enviarMensagem(sessao._remoteJid,
+      `💡 *${moduloNome}* — ${origemTag}\n\n${resposta}\n\n` +
+      `Esta resposta ajudou?\n*1* — Sim, obrigado!\n*2* — Não, quero abrir um chamado\n*3* — Tenho outra dúvida`);
+
+  } catch (err) {
+    sessao.estado = "menu";
+    await salvarSessao(sessao);
+    await enviarMensagem(sessao._remoteJid,
+      `⚠️ Não consegui buscar uma resposta agora. Deseja abrir um chamado para o suporte?\n\n*1* — Sim, abrir chamado\n*0* — Voltar ao menu`);
+  }
+}
+
+async function handleRespostaDuvida(sessao, opcao, textoCompleto) {
+  if (opcao === "1") {
+    // Satisfeito
+    sessao.estado = "menu";
+    sessao.dadosParciais = {};
+    await salvarSessao(sessao);
+    await enviarMensagem(sessao._remoteJid, `✅ Que bom que ajudou! 😊\n\nDigite *menu* para voltar ao início ou faça outra pergunta a qualquer momento.`);
+
+  } else if (opcao === "2") {
+    // Abrir chamado com a dúvida como contexto
+    const duvida = sessao.dadosParciais.ultimaDuvida || "Dúvida via WhatsApp";
+    sessao.estado = "aguardando_descricao";
+    sessao.dadosParciais = {
+      assunto: `Dúvida: ${duvida.substring(0, 80)}`,
+    };
+    sessao.markModified("dadosParciais");
+    await salvarSessao(sessao);
+    await enviarMensagem(sessao._remoteJid,
+      `📝 Vamos abrir um chamado.\n\nAssunto já preenchido: *${sessao.dadosParciais.assunto}*\n\nForneça mais detalhes sobre o problema:\n_(Quanto mais detalhes, mais rápido o atendimento)_`);
+
+  } else if (opcao === "3") {
+    // Nova dúvida — volta para aguardando_duvida
+    sessao.estado = "aguardando_duvida";
+    await salvarSessao(sessao);
+    const moduloNome = MODULOS_NOME[sessao.dadosParciais.moduloDuvida] || "Sistema";
+    await enviarMensagem(sessao._remoteJid, `💬 *${moduloNome}* — Digite sua próxima dúvida:\n\nOu *0* para voltar ao menu.`);
+
+  } else {
+    await enviarMensagem(sessao._remoteJid, "Digite *1* (ajudou), *2* (abrir chamado) ou *3* (nova dúvida).");
   }
 }
 ```
@@ -27071,6 +34818,7 @@ import Specs from "./pages/Specs.jsx";
 import RelatorioFluxo from "./pages/RelatorioFluxo.jsx";
 import Conformidade from "./pages/Conformidade.jsx";
 import PlanilhaHoras from "./pages/PlanilhaHoras.jsx";
+import WhatsApp from "./pages/WhatsApp.jsx";
 import "./App.css";
 
 function App() {
@@ -27086,6 +34834,7 @@ function App() {
             <li><NavLink to="/">Dashboard</NavLink></li>
             <li><NavLink to="/chat">Chat</NavLink></li>
             <li><NavLink to="/helpdesk">Helpdesk</NavLink></li>
+            <li><NavLink to="/whatsapp">💬 WhatsApp</NavLink></li>
             <li><NavLink to="/gerar-doc">📄 Gerar Doc</NavLink></li>
             <li><NavLink to="/fontes">🔎 Fontes de Pesquisa</NavLink></li>
             <li><NavLink to="/roadmap">🗺️ Roadmap</NavLink></li>
@@ -27113,6 +34862,7 @@ function App() {
             <Route path="/conformidade" element={<Conformidade />} />
             <Route path="/relatorio-fluxo" element={<RelatorioFluxo />} />
             <Route path="/planilha-horas" element={<PlanilhaHoras />} />
+            <Route path="/whatsapp" element={<WhatsApp />} />
             <Route path="/treinamento" element={<Treinamento />} />
             <Route path="/logs" element={<Logs />} />
             <Route path="/kb" element={<KnowledgeBase />} />
@@ -31213,6 +38963,33 @@ export default function GerarDoc() {
 import { useEffect, useState, useRef } from "react";
 import { api } from "../services/api";
 
+const FILTROS_INICIAL = {
+  sectionId: "",
+  techId: "",
+  dateFrom: "",
+  dateTo: "",
+  statusId: "",
+  priorityId: "",
+  somenteMeus: false,
+};
+
+const STATUS_OPCOES = [
+  { value: "", label: "Todos" },
+  { value: "1", label: "Novo" },
+  { value: "2", label: "Em atendimento" },
+  { value: "3", label: "Aguardando resposta" },
+  { value: "4", label: "Resolvido" },
+  { value: "5", label: "Fechado" },
+];
+
+const PRIORIDADE_OPCOES = [
+  { value: "", label: "Todas" },
+  { value: "0", label: "Baixa" },
+  { value: "1", label: "Normal" },
+  { value: "2", label: "Alta" },
+  { value: "3", label: "Crítica" },
+];
+
 export default function Helpdesk() {
   const [tickets, setTickets]       = useState([]);
   const [loading, setLoading]       = useState(true);
@@ -31223,7 +39000,13 @@ export default function Helpdesk() {
   const [acao, setAcao]             = useState(null);
   const [novoTicket, setNovoTicket] = useState({ subject: "", body: "", categoryId: "" });
   const [categorias, setCategorias] = useState([]);
+  const [tecnicos, setTecnicos]     = useState([]);
   const [view, setView]             = useState("lista");
+
+  // Filtros
+  const [filtros, setFiltros]       = useState(FILTROS_INICIAL);
+  const [filtroAberto, setFiltroAberto] = useState(false);
+  const [filtrosAtivos, setFiltrosAtivos] = useState({});
 
   // Polling
   const [polling, setPolling]       = useState(null);
@@ -31248,6 +39031,7 @@ export default function Helpdesk() {
 
   useEffect(() => {
     api.get("/helpdesk/categorias").then(r => setCategorias(r.data.categorias || [])).catch(() => {});
+    api.get("/helpdesk/tecnicos").then(r => setTecnicos(r.data.tecnicos || [])).catch(() => {});
     carregarStatusPolling();
     carregarFila();
   }, []);
@@ -31278,9 +39062,17 @@ export default function Helpdesk() {
 
   const [erroTickets, setErroTickets] = useState(null);
 
-  function carregarTickets() {
+  function carregarTickets(filtrosAplicar) {
     setLoading(true); setTicketSel(null); setDetalhes(null); setErroTickets(null);
-    api.get(`/helpdesk/tickets?mode=${modo}&count=50`)
+    const f = filtrosAplicar || filtrosAtivos;
+    const params = new URLSearchParams({ mode: modo, count: 50 });
+    if (f.sectionId)  params.set("sectionId", f.sectionId);
+    if (f.techId)     params.set("techId", f.techId);
+    if (f.dateFrom)   params.set("dateFrom", f.dateFrom);
+    if (f.dateTo)     params.set("dateTo", f.dateTo);
+    if (f.statusId)   params.set("statusId", f.statusId);
+    if (f.priorityId) params.set("priorityId", f.priorityId);
+    api.get(`/helpdesk/tickets?${params.toString()}`)
       .then(r => setTickets(r.data.tickets || []))
       .catch(err => {
         setTickets([]);
@@ -31289,6 +39081,21 @@ export default function Helpdesk() {
       })
       .finally(() => setLoading(false));
   }
+
+  function aplicarFiltros() {
+    setFiltrosAtivos({ ...filtros });
+    setFiltroAberto(false);
+    carregarTickets(filtros);
+  }
+
+  function resetarFiltros() {
+    setFiltros(FILTROS_INICIAL);
+    setFiltrosAtivos({});
+    setFiltroAberto(false);
+    carregarTickets({});
+  }
+
+  const temFiltrosAtivos = Object.entries(filtrosAtivos).some(([k, v]) => v && v !== "");
 
   function abrirDetalhe(ticket) {
     setTicketSel(ticket); setDetalhes(null); setAcao(null); setView("detalhe"); setCarregandoDet(true);
@@ -31402,7 +39209,14 @@ export default function Helpdesk() {
             {view !== "polling" && view !== "fila" && (
               <>
                 <button className="btn" style={{ background: "var(--surface)", color: "var(--text-muted)", border: "1px solid var(--border)", marginLeft: "auto" }} onClick={() => setView("criar")}>+ Novo Chamado</button>
-                <button className="btn" style={{ background: "var(--surface)", color: "var(--text-muted)", border: "1px solid var(--border)" }} onClick={carregarTickets}>Atualizar</button>
+                <button className="btn" style={{ background: "var(--surface)", color: "var(--text-muted)", border: "1px solid var(--border)" }} onClick={() => carregarTickets()}>Atualizar</button>
+                <button className="btn" onClick={() => setFiltroAberto(p => !p)}
+                  style={{ position: "relative", background: filtroAberto ? "rgba(99,102,241,0.12)" : "var(--surface)", color: filtroAberto ? "var(--accent)" : "var(--text-muted)", border: `1px solid ${filtroAberto || temFiltrosAtivos ? "var(--accent)" : "var(--border)"}` }}>
+                  Filtrar
+                  {temFiltrosAtivos && (
+                    <span style={{ position: "absolute", top: -5, right: -5, width: 10, height: 10, borderRadius: "50%", background: "var(--accent)" }} />
+                  )}
+                </button>
               </>
             )}
 
@@ -31419,6 +39233,73 @@ export default function Helpdesk() {
           </>
         )}
       </div>
+
+      {/* ===== PAINEL DE FILTROS ===== */}
+      {filtroAberto && view === "lista" && (
+        <div className="card" style={{ marginBottom: "1.25rem", borderTop: "2px solid var(--accent)", padding: "1.25rem" }}>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(200px, 1fr))", gap: "1rem", marginBottom: "1rem" }}>
+
+            <div className="form-group" style={{ margin: 0 }}>
+              <label style={{ fontSize: "0.75rem", color: "var(--text-muted)", marginBottom: 4, display: "block" }}>Data de</label>
+              <input type="date" value={filtros.dateFrom}
+                onChange={e => setFiltros(p => ({ ...p, dateFrom: e.target.value }))}
+                style={{ width: "100%", padding: "7px 10px", borderRadius: 7, background: "var(--bg)", border: "1px solid var(--border)", color: "var(--text)", fontSize: "0.85rem" }} />
+            </div>
+
+            <div className="form-group" style={{ margin: 0 }}>
+              <label style={{ fontSize: "0.75rem", color: "var(--text-muted)", marginBottom: 4, display: "block" }}>Data até</label>
+              <input type="date" value={filtros.dateTo}
+                onChange={e => setFiltros(p => ({ ...p, dateTo: e.target.value }))}
+                style={{ width: "100%", padding: "7px 10px", borderRadius: 7, background: "var(--bg)", border: "1px solid var(--border)", color: "var(--text)", fontSize: "0.85rem" }} />
+            </div>
+
+            <div className="form-group" style={{ margin: 0 }}>
+              <label style={{ fontSize: "0.75rem", color: "var(--text-muted)", marginBottom: 4, display: "block" }}>Status</label>
+              <select value={filtros.statusId} onChange={e => setFiltros(p => ({ ...p, statusId: e.target.value }))}
+                style={{ width: "100%", padding: "7px 10px", borderRadius: 7, background: "var(--bg)", border: "1px solid var(--border)", color: "var(--text)", fontSize: "0.85rem" }}>
+                {STATUS_OPCOES.map(o => <option key={o.value} value={o.value}>{o.label}</option>)}
+              </select>
+            </div>
+
+            <div className="form-group" style={{ margin: 0 }}>
+              <label style={{ fontSize: "0.75rem", color: "var(--text-muted)", marginBottom: 4, display: "block" }}>Prioridade</label>
+              <select value={filtros.priorityId} onChange={e => setFiltros(p => ({ ...p, priorityId: e.target.value }))}
+                style={{ width: "100%", padding: "7px 10px", borderRadius: 7, background: "var(--bg)", border: "1px solid var(--border)", color: "var(--text)", fontSize: "0.85rem" }}>
+                {PRIORIDADE_OPCOES.map(o => <option key={o.value} value={o.value}>{o.label}</option>)}
+              </select>
+            </div>
+
+            <div className="form-group" style={{ margin: 0 }}>
+              <label style={{ fontSize: "0.75rem", color: "var(--text-muted)", marginBottom: 4, display: "block" }}>Departamento</label>
+              <select value={filtros.sectionId} onChange={e => setFiltros(p => ({ ...p, sectionId: e.target.value }))}
+                style={{ width: "100%", padding: "7px 10px", borderRadius: 7, background: "var(--bg)", border: "1px solid var(--border)", color: "var(--text)", fontSize: "0.85rem" }}>
+                <option value="">Todos</option>
+                {categorias.map(c => <option key={c.CategoryID} value={c.CategoryID}>{c.Name}</option>)}
+              </select>
+            </div>
+
+            <div className="form-group" style={{ margin: 0 }}>
+              <label style={{ fontSize: "0.75rem", color: "var(--text-muted)", marginBottom: 4, display: "block" }}>Técnico</label>
+              <select value={filtros.techId} onChange={e => setFiltros(p => ({ ...p, techId: e.target.value }))}
+                style={{ width: "100%", padding: "7px 10px", borderRadius: 7, background: "var(--bg)", border: "1px solid var(--border)", color: "var(--text)", fontSize: "0.85rem" }}>
+                <option value="">Todos</option>
+                {tecnicos.map(t => <option key={t.UserID} value={t.UserID}>{t.FirstName} {t.LastName}</option>)}
+              </select>
+            </div>
+
+          </div>
+
+          <div style={{ display: "flex", gap: "0.75rem", alignItems: "center", paddingTop: "0.75rem", borderTop: "1px solid var(--border)" }}>
+            <button className="btn btn-primary" style={{ fontSize: "0.85rem" }} onClick={aplicarFiltros}>Aplicar</button>
+            <button className="btn" style={{ fontSize: "0.85rem", background: "var(--surface)", color: "var(--text-muted)", border: "1px solid var(--border)" }} onClick={resetarFiltros}>Reset</button>
+            {temFiltrosAtivos && (
+              <span style={{ fontSize: "0.75rem", color: "var(--accent)", marginLeft: "auto" }}>
+                Filtros ativos
+              </span>
+            )}
+          </div>
+        </div>
+      )}
 
       {/* ===== FILA DE REVISAO ===== */}
       {view === "fila" && (
@@ -31649,7 +39530,7 @@ export default function Helpdesk() {
               </button>
             </div>
             <p style={{ fontSize: "0.75rem", color: "var(--text-muted)", marginTop: "0.75rem", marginBottom: 0 }}>
-              Score >= 85% resposta automatica · Score >= 65% sugestao para humano · Score abaixo de 65% escalado
+              Score {">="} 85% resposta automatica · Score {">="} 65% sugestao para humano · Score abaixo de 65% escalado
             </p>
           </div>
 
@@ -31723,6 +39604,8 @@ export default function Helpdesk() {
                   <th>Assunto</th>
                   <th>Solicitante</th>
                   <th>Categoria</th>
+                  <th>Prioridade</th>
+                  <th>Técnico</th>
                   <th>Data</th>
                   <th>Acoes</th>
                 </tr>
@@ -31731,11 +39614,21 @@ export default function Helpdesk() {
                 {tickets.map(t => (
                   <tr key={t.IssueID} style={{ cursor: "pointer" }}>
                     <td style={{ fontWeight: 600, color: "var(--accent)" }}>#{t.IssueID}</td>
-                    <td style={{ maxWidth: 280, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }} onClick={() => abrirDetalhe(t)} title={t.Subject}>
+                    <td style={{ maxWidth: 260, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }} onClick={() => abrirDetalhe(t)} title={t.Subject}>
                       {t.Subject}
                     </td>
                     <td style={{ fontSize: "0.85rem" }}>{t.UserName || "-"}</td>
                     <td><span className="badge badge-kb" style={{ whiteSpace: "nowrap" }}>{t.Category || "-"}</span></td>
+                    <td style={{ fontSize: "0.8rem", whiteSpace: "nowrap" }}>
+                      {t.PriorityName ? (
+                        <span style={{ padding: "2px 8px", borderRadius: 5, fontSize: "0.75rem", fontWeight: 600,
+                          background: t.PriorityName === "Crítica" ? "rgba(239,68,68,0.12)" : t.PriorityName === "Alta" ? "rgba(245,158,11,0.12)" : "rgba(99,102,241,0.1)",
+                          color: t.PriorityName === "Crítica" ? "#ef4444" : t.PriorityName === "Alta" ? "#f59e0b" : "var(--accent)" }}>
+                          {t.PriorityName}
+                        </span>
+                      ) : "-"}
+                    </td>
+                    <td style={{ fontSize: "0.8rem" }}>{t.TechFirstName ? `${t.TechFirstName} ${t.TechLastName || ""}`.trim() : "-"}</td>
                     <td style={{ fontSize: "0.8rem", whiteSpace: "nowrap" }}>{t.Date ? new Date(t.Date).toLocaleDateString("pt-BR") : "-"}</td>
                     <td>
                       <div style={{ display: "flex", gap: "0.35rem" }}>
@@ -33050,6 +40943,400 @@ export default function Treinamento() {
           {loading ? "Gerando embedding..." : "Treinar"}
         </button>
       </form>
+    </div>
+  );
+}
+```
+
+### `axion-ia-panel\src\pages\WhatsApp.jsx`
+
+```jsx
+import { useEffect, useState, useRef } from "react";
+import { api } from "../services/api";
+
+export default function WhatsApp() {
+  const [status, setStatus]         = useState(null);
+  const [sessoes, setSessoes]       = useState([]);
+  const [sessSel, setSessSel]       = useState(null);
+  const [loadingInicio, setLoadingInicio] = useState(false);
+  const [envio, setEnvio]           = useState({ telefone: "", mensagem: "" });
+  const [enviando, setEnviando]     = useState(false);
+  const [feedbackEnvio, setFeedbackEnvio] = useState(null);
+  const [view, setView]             = useState("dashboard"); // dashboard | sessoes | enviar
+  const [erro, setErro]             = useState(null);
+  const poolingRef = useRef(null);
+
+  useEffect(() => {
+    carregarStatus();
+    carregarSessoes();
+    poolingRef.current = setInterval(() => {
+      carregarStatus();
+      if (view === "sessoes") carregarSessoes();
+    }, 5000);
+    return () => clearInterval(poolingRef.current);
+  }, [view]);
+
+  async function carregarStatus() {
+    try {
+      const r = await api.get("/whatsapp/status");
+      setStatus(r.data);
+      setErro(null);
+    } catch {
+      setErro("API indisponível");
+    }
+  }
+
+  async function carregarSessoes() {
+    try {
+      const r = await api.get("/whatsapp/sessoes");
+      setSessoes(r.data.sessoes || []);
+    } catch { /* silencioso */ }
+  }
+
+  async function iniciarConexao() {
+    setLoadingInicio(true);
+    try {
+      await api.post("/whatsapp/iniciar");
+      setTimeout(carregarStatus, 2000);
+    } catch (err) {
+      setErro(err.response?.data?.erro || "Erro ao iniciar");
+    } finally {
+      setLoadingInicio(false);
+    }
+  }
+
+  async function encerrarSessao(telefone) {
+    if (!window.confirm(`Encerrar sessão de ${telefone}?`)) return;
+    try {
+      await api.delete(`/whatsapp/sessao/${telefone}`);
+      carregarSessoes();
+    } catch { /* silencioso */ }
+  }
+
+  async function enviarMensagem(e) {
+    e.preventDefault();
+    setEnviando(true);
+    setFeedbackEnvio(null);
+    try {
+      await api.post("/whatsapp/send", envio);
+      setFeedbackEnvio({ tipo: "success", msg: "Mensagem enviada com sucesso!" });
+      setEnvio(p => ({ ...p, mensagem: "" }));
+    } catch (err) {
+      setFeedbackEnvio({ tipo: "error", msg: err.response?.data?.erro || "Erro ao enviar" });
+    } finally {
+      setEnviando(false);
+    }
+  }
+
+  const statusCor = {
+    conectado:     { bg: "rgba(34,197,94,0.12)",  cor: "#22c55e",  label: "Conectado" },
+    qr_pendente:   { bg: "rgba(245,158,11,0.12)", cor: "#f59e0b",  label: "QR Pendente" },
+    conectando:    { bg: "rgba(99,102,241,0.12)", cor: "var(--accent)", label: "Conectando..." },
+    desconectado:  { bg: "rgba(239,68,68,0.12)",  cor: "#ef4444",  label: "Desconectado" },
+  };
+  const sc = statusCor[status?.status] || statusCor.desconectado;
+
+  const estadoLabel = {
+    inicio: "Início",
+    menu: "Menu",
+    aguardando_assunto: "Aguard. Assunto",
+    aguardando_descricao: "Aguard. Descrição",
+    confirmando_ticket: "Confirm. Ticket",
+    ticket_criado: "Ticket Criado",
+    consultando_numero: "Consultando",
+    respondendo_numero: "Respond. Nº",
+    respondendo_mensagem: "Respondendo",
+    encerrado: "Encerrado",
+  };
+
+  return (
+    <div>
+      <div className="page-header">
+        <h2 className="page-title">WhatsApp</h2>
+        <span className="page-subtitle">Integração Jitbit Helpdesk via WhatsApp</span>
+      </div>
+
+      {/* Barra de navegação */}
+      <div className="filters-row" style={{ marginBottom: "1.25rem", gap: "0.5rem" }}>
+        {["dashboard", "sessoes", "enviar"].map(v => (
+          <button key={v} className="btn"
+            onClick={() => setView(v)}
+            style={{
+              background: view === v ? "rgba(99,102,241,0.12)" : "var(--surface)",
+              color: view === v ? "var(--accent)" : "var(--text-muted)",
+              border: `1px solid ${view === v ? "var(--accent)" : "var(--border)"}`,
+              fontWeight: view === v ? 700 : 400,
+            }}>
+            {{ dashboard: "Dashboard", sessoes: `Sessões (${sessoes.length})`, enviar: "Enviar Mensagem" }[v]}
+          </button>
+        ))}
+        <button className="btn" style={{ marginLeft: "auto", background: "var(--surface)", color: "var(--text-muted)", border: "1px solid var(--border)" }}
+          onClick={() => { carregarStatus(); carregarSessoes(); }}>
+          Atualizar
+        </button>
+      </div>
+
+      {erro && (
+        <div className="alert alert-error" style={{ marginBottom: "1rem" }}>{erro}</div>
+      )}
+
+      {/* ===== DASHBOARD ===== */}
+      {view === "dashboard" && (
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1.25rem" }}>
+
+          {/* Card Status */}
+          <div className="card" style={{ borderTop: `2px solid ${sc.cor}` }}>
+            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: "1rem" }}>
+              <div>
+                <div style={{ fontSize: "0.75rem", color: "var(--text-muted)", textTransform: "uppercase", marginBottom: 4 }}>Status da Conexão</div>
+                <span style={{ padding: "4px 14px", borderRadius: 12, fontSize: "0.88rem", fontWeight: 700, background: sc.bg, color: sc.cor }}>
+                  {sc.label}
+                </span>
+              </div>
+              <div style={{ fontSize: "2.5rem" }}>
+                {status?.status === "conectado" ? "✅" : status?.status === "qr_pendente" ? "📱" : "❌"}
+              </div>
+            </div>
+
+            {status?.numero && (
+              <div style={{ marginBottom: "0.75rem" }}>
+                <div style={{ fontSize: "0.72rem", color: "var(--text-muted)", marginBottom: 2 }}>Número conectado</div>
+                <div style={{ fontWeight: 600, fontSize: "0.9rem" }}>{status.numero}</div>
+              </div>
+            )}
+
+            {status?.status === "qr_pendente" && (
+              <div style={{ marginBottom: "0.75rem" }}>
+                {status?.qr_base64 ? (
+                  <div style={{ textAlign: "center" }}>
+                    <p style={{ fontSize: "0.82rem", color: "#f59e0b", marginBottom: "0.75rem" }}>
+                      📱 Escaneie com o WhatsApp do número de atendimento:
+                    </p>
+                    <img src={status.qr_base64} alt="QR Code WhatsApp"
+                      style={{ width: 220, height: 220, borderRadius: 8, border: "3px solid #f59e0b", background: "#fff", padding: 4 }} />
+                    <p style={{ fontSize: "0.72rem", color: "var(--text-muted)", marginTop: "0.5rem" }}>
+                      O QR expira em ~20 segundos — a tela atualiza automaticamente
+                    </p>
+                  </div>
+                ) : (
+                  <div style={{ padding: "10px 14px", borderRadius: 8, background: "rgba(245,158,11,0.08)", border: "1px solid rgba(245,158,11,0.3)", fontSize: "0.82rem", color: "#f59e0b" }}>
+                    ⏳ Gerando QR code... aguarde.
+                  </div>
+                )}
+              </div>
+            )}
+
+            {(status?.status === "desconectado" || !status) && (
+              <button className="btn btn-primary" onClick={iniciarConexao} disabled={loadingInicio}
+                style={{ width: "100%", marginTop: "0.5rem" }}>
+                {loadingInicio ? "Iniciando..." : "Conectar WhatsApp"}
+              </button>
+            )}
+
+            {status?.status === "conectado" && (
+              <div style={{ padding: "8px 12px", borderRadius: 8, background: "rgba(34,197,94,0.07)", border: "1px solid rgba(34,197,94,0.25)", fontSize: "0.82rem", color: "#16a34a" }}>
+                ✅ Pronto para receber mensagens e abrir chamados
+              </div>
+            )}
+          </div>
+
+          {/* Card Estatísticas */}
+          <div className="card">
+            <div style={{ fontSize: "0.75rem", color: "var(--text-muted)", textTransform: "uppercase", marginBottom: "0.75rem" }}>Sessões Ativas</div>
+            <div style={{ fontSize: "2.5rem", fontWeight: 800, color: "var(--accent)", marginBottom: "0.25rem" }}>{sessoes.length}</div>
+            <div style={{ fontSize: "0.82rem", color: "var(--text-muted)", marginBottom: "1.25rem" }}>conversas em andamento</div>
+
+            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "0.75rem" }}>
+              {[
+                { label: "Menu", val: sessoes.filter(s => s.estado === "menu" || s.estado === "inicio").length, cor: "var(--accent)" },
+                { label: "Abrindo Chamado", val: sessoes.filter(s => ["aguardando_assunto","aguardando_descricao","confirmando_ticket"].includes(s.estado)).length, cor: "#f59e0b" },
+                { label: "Consultando", val: sessoes.filter(s => s.estado === "consultando_numero").length, cor: "#8b5cf6" },
+                { label: "Respondendo", val: sessoes.filter(s => ["respondendo_numero","respondendo_mensagem"].includes(s.estado)).length, cor: "#22c55e" },
+              ].map(s => (
+                <div key={s.label} style={{ padding: "10px 12px", borderRadius: 8, background: "var(--surface)", border: "1px solid var(--border)" }}>
+                  <div style={{ fontSize: "1.4rem", fontWeight: 700, color: s.cor }}>{s.val}</div>
+                  <div style={{ fontSize: "0.72rem", color: "var(--text-muted)" }}>{s.label}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Card Como usar */}
+          <div className="card" style={{ gridColumn: "1 / -1" }}>
+            <div style={{ fontSize: "0.75rem", color: "var(--text-muted)", textTransform: "uppercase", marginBottom: "0.75rem" }}>Como Funciona</div>
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(200px, 1fr))", gap: "0.75rem" }}>
+              {[
+                { icon: "1️⃣", titulo: "Conectar", desc: "Clique em Conectar WhatsApp e escaneie o QR code no terminal com o número de atendimento." },
+                { icon: "💬", titulo: "Cliente envia mensagem", desc: "O cliente envia qualquer mensagem para o número. O bot responde automaticamente com o menu." },
+                { icon: "🎫", titulo: "Abertura de chamado", desc: "Cliente escolhe opção 1, informa assunto e descrição. A IA tria e cria o ticket no Jitbit." },
+                { icon: "🔍", titulo: "Consulta e resposta", desc: "Cliente pode consultar status do chamado ou enviar resposta diretamente pelo WhatsApp." },
+              ].map(p => (
+                <div key={p.titulo} style={{ padding: "12px 14px", borderRadius: 8, background: "var(--surface)", border: "1px solid var(--border)" }}>
+                  <div style={{ fontSize: "1.5rem", marginBottom: "0.4rem" }}>{p.icon}</div>
+                  <div style={{ fontWeight: 600, fontSize: "0.85rem", marginBottom: "0.3rem" }}>{p.titulo}</div>
+                  <div style={{ fontSize: "0.78rem", color: "var(--text-muted)", lineHeight: 1.5 }}>{p.desc}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* ===== SESSÕES ===== */}
+      {view === "sessoes" && (
+        <div style={{ display: "grid", gridTemplateColumns: sessSel ? "340px 1fr" : "1fr", gap: "1rem" }}>
+          <div>
+            {sessoes.length === 0 ? (
+              <div className="card" style={{ textAlign: "center", padding: "2.5rem" }}>
+                <div style={{ fontSize: "2.5rem", marginBottom: "0.5rem" }}>💬</div>
+                <p style={{ color: "var(--text-muted)", fontSize: "0.9rem" }}>Nenhuma sessão ativa ainda.<br />Quando um cliente enviar mensagem, aparecerá aqui.</p>
+              </div>
+            ) : (
+              sessoes.map(s => (
+                <div key={s.telefone} className="card"
+                  onClick={() => setSessSel(sessSel?.telefone === s.telefone ? null : s)}
+                  style={{
+                    marginBottom: "0.75rem", cursor: "pointer",
+                    borderLeft: `3px solid ${s.estado === "encerrado" ? "#6b7280" : "var(--accent)"}`,
+                    outline: sessSel?.telefone === s.telefone ? "2px solid var(--accent)" : "none",
+                    opacity: s.estado === "encerrado" ? 0.6 : 1,
+                  }}>
+                  <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start" }}>
+                    <div style={{ flex: 1, minWidth: 0 }}>
+                      <div style={{ fontWeight: 600, fontSize: "0.9rem", marginBottom: 2 }}>{s.nome || s.telefone}</div>
+                      <div style={{ fontSize: "0.75rem", color: "var(--text-muted)", marginBottom: "0.4rem" }}>{s.telefone}</div>
+                      <div style={{ display: "flex", gap: "0.4rem", flexWrap: "wrap" }}>
+                        <span style={{ fontSize: "0.7rem", padding: "2px 8px", borderRadius: 5, background: "rgba(99,102,241,0.1)", color: "var(--accent)" }}>
+                          {estadoLabel[s.estado] || s.estado}
+                        </span>
+                        {s.ultimoTicketId && (
+                          <span style={{ fontSize: "0.7rem", padding: "2px 8px", borderRadius: 5, background: "rgba(34,197,94,0.1)", color: "#22c55e" }}>
+                            #{s.ultimoTicketId}
+                          </span>
+                        )}
+                      </div>
+                    </div>
+                    <div style={{ fontSize: "0.72rem", color: "var(--text-muted)", whiteSpace: "nowrap", marginLeft: "0.5rem" }}>
+                      {s.ultimaMensagem ? new Date(s.ultimaMensagem).toLocaleTimeString("pt-BR", { hour: "2-digit", minute: "2-digit" }) : "-"}
+                    </div>
+                  </div>
+                </div>
+              ))
+            )}
+          </div>
+
+          {sessSel && (
+            <div className="card" style={{ alignSelf: "start", borderLeft: "3px solid var(--accent)" }}>
+              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "1rem" }}>
+                <div>
+                  <div style={{ fontWeight: 700, fontSize: "1rem" }}>{sessSel.nome || sessSel.telefone}</div>
+                  <div style={{ fontSize: "0.78rem", color: "var(--text-muted)" }}>{sessSel.telefone}</div>
+                </div>
+                <button onClick={() => setSessSel(null)} style={{ background: "none", border: "none", cursor: "pointer", color: "var(--text-muted)", fontSize: "1.3rem" }}>×</button>
+              </div>
+
+              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "0.5rem", marginBottom: "1rem" }}>
+                {[
+                  { label: "Estado", val: estadoLabel[sessSel.estado] || sessSel.estado },
+                  { label: "Último ticket", val: sessSel.ultimoTicketId ? `#${sessSel.ultimoTicketId}` : "-" },
+                  { label: "Criado em", val: sessSel.createdAt ? new Date(sessSel.createdAt).toLocaleDateString("pt-BR") : "-" },
+                  { label: "Última msg", val: sessSel.ultimaMensagem ? new Date(sessSel.ultimaMensagem).toLocaleString("pt-BR") : "-" },
+                ].map(i => (
+                  <div key={i.label} style={{ padding: "8px 10px", borderRadius: 7, background: "var(--surface)", border: "1px solid var(--border)" }}>
+                    <div style={{ fontSize: "0.68rem", color: "var(--text-muted)", marginBottom: 2 }}>{i.label}</div>
+                    <div style={{ fontWeight: 600, fontSize: "0.82rem" }}>{i.val}</div>
+                  </div>
+                ))}
+              </div>
+
+              {sessSel.dadosParciais?.assunto && (
+                <div style={{ marginBottom: "0.75rem", padding: "10px 12px", borderRadius: 8, background: "rgba(99,102,241,0.06)", border: "1px solid rgba(99,102,241,0.2)" }}>
+                  <div style={{ fontSize: "0.7rem", color: "var(--text-muted)", marginBottom: 3 }}>Em andamento</div>
+                  <div style={{ fontSize: "0.85rem", fontWeight: 500 }}>{sessSel.dadosParciais.assunto}</div>
+                  {sessSel.dadosParciais.descricao && (
+                    <div style={{ fontSize: "0.8rem", color: "var(--text-muted)", marginTop: 4 }}>{sessSel.dadosParciais.descricao.substring(0, 120)}...</div>
+                  )}
+                </div>
+              )}
+
+              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "0.5rem" }}>
+                <button className="btn btn-primary" style={{ fontSize: "0.82rem" }}
+                  onClick={() => { setView("enviar"); setEnvio(p => ({ ...p, telefone: sessSel.telefone })); }}>
+                  Enviar mensagem
+                </button>
+                <button className="btn" style={{ fontSize: "0.82rem", background: "rgba(239,68,68,0.08)", color: "#ef4444", border: "1px solid rgba(239,68,68,0.3)" }}
+                  onClick={() => encerrarSessao(sessSel.telefone)}>
+                  Encerrar sessão
+                </button>
+              </div>
+            </div>
+          )}
+        </div>
+      )}
+
+      {/* ===== ENVIAR MENSAGEM ===== */}
+      {view === "enviar" && (
+        <div style={{ maxWidth: 520 }}>
+          <div className="card">
+            <h3 style={{ fontSize: "1rem", marginBottom: "1.25rem" }}>Enviar Mensagem Manual</h3>
+
+            {feedbackEnvio && (
+              <div className={`alert ${feedbackEnvio.tipo === "success" ? "alert-success" : "alert-error"}`} style={{ marginBottom: "1rem" }}>
+                {feedbackEnvio.msg}
+              </div>
+            )}
+
+            <form onSubmit={enviarMensagem}>
+              <div className="form-group">
+                <label>Telefone (com DDD e código do país)</label>
+                <input
+                  value={envio.telefone}
+                  onChange={e => setEnvio(p => ({ ...p, telefone: e.target.value }))}
+                  placeholder="5511999999999"
+                  required
+                />
+                <small style={{ fontSize: "0.72rem", color: "var(--text-muted)" }}>Formato: 55 + DDD + número (ex: 5511999999999)</small>
+              </div>
+
+              <div className="form-group">
+                <label>Mensagem</label>
+                <textarea
+                  value={envio.mensagem}
+                  onChange={e => setEnvio(p => ({ ...p, mensagem: e.target.value }))}
+                  placeholder="Digite a mensagem..."
+                  rows={5}
+                  required
+                />
+              </div>
+
+              <div style={{ display: "flex", gap: "0.75rem" }}>
+                <button type="submit" className="btn btn-primary" disabled={enviando || status?.status !== "conectado"}>
+                  {enviando ? "Enviando..." : "Enviar"}
+                </button>
+                {status?.status !== "conectado" && (
+                  <span style={{ fontSize: "0.78rem", color: "#ef4444", alignSelf: "center" }}>WhatsApp não conectado</span>
+                )}
+              </div>
+            </form>
+          </div>
+
+          <div className="card" style={{ marginTop: "1rem" }}>
+            <div style={{ fontSize: "0.75rem", color: "var(--text-muted)", marginBottom: "0.5rem", textTransform: "uppercase" }}>Comandos do Bot</div>
+            {[
+              { cmd: "menu / oi / olá", desc: "Exibe o menu principal" },
+              { cmd: "1", desc: "Abrir novo chamado" },
+              { cmd: "2", desc: "Consultar chamado por número" },
+              { cmd: "3", desc: "Responder chamado existente" },
+              { cmd: "0", desc: "Solicitar atendente humano" },
+            ].map(c => (
+              <div key={c.cmd} style={{ display: "flex", gap: "0.75rem", padding: "6px 0", borderBottom: "1px solid var(--border)", fontSize: "0.82rem" }}>
+                <code style={{ minWidth: 120, color: "var(--accent)", background: "rgba(99,102,241,0.08)", padding: "2px 6px", borderRadius: 4 }}>{c.cmd}</code>
+                <span style={{ color: "var(--text-muted)" }}>{c.desc}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
     </div>
   );
 }
@@ -38457,712 +46744,1612 @@ table tr:nth-child(even) {
 
 ```json
 {
-  "version": "2.0.0",
+  "version": "3.0.0",
+  "updated": "2026-04-27",
   "system": "AxTon",
-  "description": "Base de conhecimento interligada do AxTon — pesagem veicular",
-  "lastUpdate": "2026-03-29",
+  "description": "Base de conhecimento do assistente AxionIA para o sistema AxTon — pesagem veicular",
   "dataSourceLinks": {
     "documentation": "/AxTon.Docs/",
     "database": "AxTon.sql",
     "widget": "axton-suporte.js",
     "searchBase": "base-pesquisa-suporte.md"
   },
+  "totalEntries": 58,
   "entries": [
     {
-      "id": "postos-pesagem",
-      "title": "Postos de Pesagem",
-      "module": "Pesagem",
-      "keywords": ["posto", "pesagem", "local", "cadastrar posto", "ponto", "balança"],
-      "content": "Postos de Pesagem representam os locais físicos onde ocorrem as pesagens de veículos. Cada posto é vinculado a uma localidade e pode ter múltiplos equipamentos.",
-      "steps": ["No menu lateral, clique em Iniciar Pesagem", "Clique em + Novo", "Preencha Nome e Localidade", "Marque como Ativo", "Clique em Salvar"],
-      "path": "Menu lateral → Iniciar Pesagem",
-      "docUrl": "pesagem/postos",
-      "related": ["ticket-aberto", "cadastro-equipamentos", "cadastro-operacoes"],
-      "dbTables": ["Postos", "PostosEquipamentos"]
-    },
-    {
-      "id": "ticket-aberto",
-      "title": "Tickets em Aberto",
-      "module": "Pesagem",
-      "keywords": ["ticket", "aberto", "pendente", "pesagem", "finalizar", "peso"],
-      "content": "Tickets em aberto são registros de pesagem pendentes de finalização. Podem estar aguardando complementação de dados, segunda pesagem ou liberação.",
-      "steps": ["No menu lateral, clique em Tickets de Pesagens", "Localize o ticket desejado", "Clique em Visualizar", "Verifique dados do veículo e pesos", "Clique em Finalizar", "Confirme a operação"],
-      "path": "Menu lateral → Tickets de Pesagens",
-      "docUrl": "pesagem/ticket-aberto",
-      "related": ["ticket-fechado", "postos-pesagem", "liberar-pesagem"],
-      "dbTables": ["Tickets", "TicketsPesagem"]
-    },
-    {
-      "id": "ticket-fechado",
-      "title": "Tickets Fechados",
-      "module": "Pesagem",
-      "keywords": ["ticket", "fechado", "finalizado", "consulta", "histórico", "peso líquido"],
-      "content": "Tickets fechados são registros de pesagem finalizados. Permitem consulta histórica com filtros por período, placa, posto e presença de excesso de peso.",
-      "steps": ["No menu lateral, clique em Tickets de Pesagens e filtre por Fechados", "Defina filtros de período", "Filtre por placa ou posto (opcional)", "Clique em Pesquisar", "Clique sobre o ticket para detalhes"],
-      "path": "Menu lateral → Tickets de Pesagens → Fechados",
-      "docUrl": "pesagem/ticket-fechado",
-      "related": ["ticket-aberto", "relatorio-passagens", "relatorio-infracoes"],
-      "dbTables": ["Tickets", "TicketsPesagem"]
-    },
-    {
-      "id": "reclassificar-veiculo",
-      "title": "Reclassificação de Veículos",
-      "module": "Pesagem",
-      "keywords": ["reclassificar", "classificação", "eixo", "PBT", "tipo veículo", "reboque"],
-      "content": "Permite alterar a classificação de um veículo durante a pesagem quando a classificação automática não corresponde ao veículo real. A reclassificação altera o PBT permitido.",
-      "steps": ["Na tela de Tickets de Pesagens, selecione o ticket", "Informe o número do Ticket", "Verifique a classificação atual", "Selecione a Nova Classificação", "Informe o Motivo", "Clique em Salvar"],
-      "path": "Menu lateral → Tickets de Pesagens → Reclassificar",
-      "docUrl": "pesagem/reclassificar",
-      "related": ["classificacoes-veiculos", "ticket-aberto", "motivos-pesagem"],
-      "dbTables": ["TicketsReclassificacao", "ClassificacoesVeiculos"]
-    },
-    {
-      "id": "liberar-pesagem",
-      "title": "Liberar Pesagem",
-      "module": "Pesagem",
-      "keywords": ["liberar", "liberação", "autorizar", "retido", "pesagem"],
-      "content": "Permite liberar manualmente veículos retidos no processo de pesagem, seja por questões operacionais ou após regularização. Toda liberação gera registro de auditoria.",
-      "steps": ["Na tela de Tickets de Pesagens, localize o ticket pendente", "Localize o ticket pendente", "Informe o Motivo da Liberação", "Registre o Responsável", "Clique em Liberar"],
-      "path": "Menu lateral → Tickets de Pesagens → Liberar",
-      "docUrl": "pesagem/liberar-pesagem",
-      "related": ["ticket-aberto", "motivos-pesagem", "logs-acesso"],
-      "dbTables": ["TicketsLiberacao"]
-    },
-    {
-      "id": "motivos-pesagem",
-      "title": "Motivos de Pesagem",
-      "module": "Pesagem",
-      "keywords": ["motivo", "liberação", "reclassificação", "descarte", "cadastro motivo"],
-      "content": "Cadastro dos motivos padronizados utilizados nas operações de pesagem: liberação, reclassificação e descarte.",
-      "steps": ["Na tela de Iniciar Pesagem, acesse Motivos", "Clique em + Novo", "Informe a Descrição", "Selecione o Tipo", "Marque como Ativo", "Clique em Salvar"],
-      "path": "Menu lateral → Iniciar Pesagem → Motivos",
-      "docUrl": "pesagem/motivos",
-      "related": ["liberar-pesagem", "reclassificar-veiculo"],
-      "dbTables": ["MotivosPesagem"]
-    },
-    {
-      "id": "cadastro-operacoes",
-      "title": "Cadastro de Operações",
-      "module": "Operações",
-      "keywords": ["operação", "cadastrar", "fiscalização", "vigência", "campo"],
-      "content": "Operações representam atividades de fiscalização de pesagem em campo. Cada operação é vinculada a um posto e possui período de vigência definido.",
-      "steps": ["No menu lateral, clique em Operações", "Clique em + Novo", "Informe o Nome da operação", "Selecione o Posto", "Defina as datas de vigência", "Clique em Salvar"],
-      "path": "Menu lateral → Operações",
-      "docUrl": "operacoes/cadastro-operacoes",
-      "related": ["postos-pesagem", "monitoramento-online", "eventos-equipamentos"],
-      "dbTables": ["Operacoes", "OperacoesPostos"]
-    },
-    {
-      "id": "monitoramento-online",
-      "title": "Monitoramento Online",
-      "module": "Operações",
-      "keywords": ["monitoramento", "online", "tempo real", "status", "comunicação", "equipamento"],
-      "content": "Painel de acompanhamento em tempo real do status dos equipamentos de pesagem. Exibe indicadores de Online (verde), Offline (vermelho) e Alerta (amarelo).",
-      "steps": ["No menu lateral, clique em Operações e acesse Monitoramento Online", "Visualize o status dos equipamentos", "Equipamentos vermelhos indicam falha de comunicação", "Verifique a última comunicação de cada equipamento"],
-      "path": "Menu lateral → Operações → Monitoramento Online",
-      "docUrl": "operacoes/monitoramento-online",
-      "related": ["eventos-equipamentos", "cadastro-equipamentos", "interrupcoes"],
-      "dbTables": ["EquipamentosStatus", "EquipamentosComunicacao"]
-    },
-    {
-      "id": "eventos-equipamentos",
-      "title": "Eventos de Equipamentos",
-      "module": "Operações",
-      "keywords": ["evento", "equipamento", "falha", "manutenção", "calibração", "alerta"],
-      "content": "Registro automático de eventos operacionais: inicialização, falhas de comunicação, manutenções e calibrações dos equipamentos de pesagem.",
-      "steps": ["No menu lateral, clique em Operações e acesse Eventos de Equipamentos", "Defina o período e filtros", "Filtre por equipamento ou tipo de evento", "Analise os eventos listados"],
-      "path": "Menu lateral → Operações → Eventos de Equipamentos",
-      "docUrl": "operacoes/eventos-equipamentos",
-      "related": ["monitoramento-online", "cadastro-equipamentos", "interrupcoes"],
-      "dbTables": ["EventosEquipamentos"]
-    },
-    {
-      "id": "consulta-placas",
-      "title": "Consulta de Placas",
-      "module": "Operações",
-      "keywords": ["consulta", "placa", "veículo", "passagem", "histórico"],
-      "content": "Permite pesquisar o histórico de passagens de um veículo específico nos postos de pesagem, com filtros por placa, período e posto.",
-      "steps": ["No menu lateral, clique em Operações e acesse Consulta de Placas", "Informe a Placa (total ou parcial)", "Defina o Período desejado", "Clique em Pesquisar", "Clique sobre um registro para detalhes"],
-      "path": "Menu lateral → Operações → Consulta de Placas",
-      "docUrl": "operacoes/consulta-placas",
-      "related": ["ticket-fechado", "alertas", "relatorio-passagens"],
-      "dbTables": ["Passagens", "Tickets"]
-    },
-    {
-      "id": "alertas",
-      "title": "Alertas Operacionais",
-      "module": "Operações",
-      "keywords": ["alerta", "MDF-e", "excesso", "placa irregular", "reincidência", "notificação"],
-      "content": "Gerenciamento dos alertas detectados pelo sistema: veículos sem MDF-e, excesso de peso, placas irregulares e reincidências. Alertas recentes aparecem no Dashboard.",
-      "steps": ["No menu lateral, clique em Operações e acesse Alertas", "Filtre por tipo de alerta", "Visualize os detalhes", "Trate os alertas pendentes"],
-      "path": "Menu lateral → Operações → Alertas",
-      "docUrl": "operacoes/alertas",
-      "related": ["dashboard", "consulta-placas", "exportacao-infracoes"],
-      "dbTables": ["Alertas", "AlertasTipos"]
-    },
-    {
-      "id": "exportacao-infracoes",
-      "title": "Exportação",
-      "module": "Exportação",
-      "keywords": ["exportação", "lote", "enviar", "órgão", "autuador", "transmitir"],
-      "content": "A funcionalidade de Exportação envia infrações aprovadas na auditoria para o órgão autuador em lotes. Cada lote contém dados, imagens e assinatura digital. Os lotes passam pelos status: Pendente → Enviado → Aceito ou Erro.",
-      "steps": ["No menu lateral, clique em Exportação", "Clique em Gerar Novo Lote", "Defina o período e filtros desejados", "Revise a quantidade de infrações", "Clique em Gerar", "Após gerado, clique em Enviar", "Acompanhe o lote até o status Aceito"],
-      "path": "Menu lateral → Exportação",
-      "docUrl": "infracoes/exportacao",
-      "related": ["falhas-sequenciais", "relatorio-infracoes"],
-      "dbTables": ["Lotes", "LotesInfracoes", "LotesEnvios"]
-    },
-    {
-      "id": "erro-exportacao-lote",
-      "title": "Erro na Exportação de Lote",
-      "module": "Exportação",
-      "keywords": ["erro", "exportação", "lote", "municipio divergente", "imagem ausente", "dados incompletos"],
-      "content": "Erros comuns na exportação de lotes: código do município divergente (verificar cadastro), imagens ausentes (verificar processamento) e dados incompletos (retornar para triagem).",
-      "steps": ["No menu lateral, clique em Exportação", "Localize o lote com status Erro", "Clique em Detalhes para ver os erros", "Corrija cada item conforme a mensagem", "Regere o lote corrigido", "Reenvie ao órgão"],
-      "path": "Menu lateral → Exportação → Detalhes do Lote",
-      "docUrl": "infracoes/exportacao",
-      "related": ["exportacao-infracoes", "municipios"],
-      "dbTables": ["LotesErros"]
-    },
-    {
-      "id": "relatorio-passagens",
-      "title": "Relatório de Passagens",
-      "module": "Relatórios",
-      "keywords": ["relatório", "passagens", "volume", "período", "posto", "classificação"],
-      "content": "Apresenta o volume total de passagens de veículos registradas nos postos de pesagem, com filtros por período, posto e classificação.",
-      "steps": ["No menu lateral, clique em Relatório de Pesagem", "Defina o período", "Filtre por posto (opcional)", "Clique em Gerar", "Exporte para Excel ou PDF"],
-      "path": "Menu lateral → Relatório de Pesagem",
-      "docUrl": "relatorios/relatorio-passagens",
-      "related": ["fluxo-diario", "consulta-placas", "relatorio-infracoes"],
-      "dbTables": ["Passagens"]
-    },
-    {
-      "id": "relatorio-infracoes",
-      "title": "Relatório de Infrações",
-      "module": "Relatórios",
-      "keywords": ["relatório", "infrações", "status", "período", "excesso"],
-      "content": "Exibe infrações de excesso de peso registradas, agrupadas por período, posto e status de processamento.",
-      "steps": ["Acesse Relatórios → Infrações", "Defina período e filtros", "Clique em Gerar", "Analise os dados", "Exporte se necessário"],
-      "path": "Relatórios → Infrações",
-      "docUrl": "relatorios/relatorio-infracoes",
-      "related": ["relatorio-passagens", "processamento-usuario"],
-      "dbTables": ["Infracoes", "InfracoesRelatorio"]
-    },
-    {
-      "id": "fluxo-diario",
-      "title": "Fluxo Diário de Veículos",
-      "module": "Relatórios",
-      "keywords": ["fluxo", "diário", "horário", "tráfego", "pico", "dimensionamento"],
-      "content": "Gráfico e tabela com o fluxo horário de veículos nos postos de pesagem, útil para dimensionamento de equipes e identificação de horários de pico.",
-      "steps": ["Acesse Relatórios → Fluxo Diário", "Selecione o posto e período", "Clique em Gerar", "Analise o gráfico de distribuição horária"],
-      "path": "Relatórios → Fluxo Diário",
-      "docUrl": "relatorios/fluxo-diario-veiculos",
-      "related": ["relatorio-passagens", "monitoramento-online", "dashboard"],
-      "dbTables": ["Passagens"]
-    },
-    {
-      "id": "relatorio-discrepancias",
-      "title": "Relatório de Discrepâncias",
-      "module": "Relatórios",
-      "keywords": ["discrepância", "divergência", "peso esperado", "diferença"],
-      "content": "Identifica discrepâncias entre os dados registrados e valores esperados, incluindo diferenças de peso e classificação.",
-      "steps": ["Acesse Relatórios → Discrepâncias", "Defina período", "Analise as divergências", "Exporte para análise detalhada"],
-      "path": "Relatórios → Discrepâncias",
-      "docUrl": "relatorios/relatorio-discrepancias",
-      "related": ["reclassificar-veiculo", "ticket-fechado"],
-      "dbTables": ["Tickets", "TicketsDiscrepancias"]
-    },
-    {
-      "id": "relatorio-nfe",
-      "title": "Relatório de Notas Fiscais",
-      "module": "Relatórios",
-      "keywords": ["NFe", "nota fiscal", "chave", "origem", "destino", "carga"],
-      "content": "Lista as notas fiscais eletrônicas (NFe) vinculadas às passagens, com dados de origem, destino e chave de acesso.",
-      "steps": ["Acesse Relatórios → Notas Fiscais", "Defina período e filtros", "Clique em Gerar", "Consulte as chaves NFe"],
-      "path": "Relatórios → Notas Fiscais",
-      "docUrl": "relatorios/relatorio-nfe",
-      "related": ["alertas", "consulta-placas"],
-      "dbTables": ["NotasFiscais", "NFe"]
-    },
-    {
-      "id": "processamento-imagens",
-      "title": "Processamento de Imagens",
-      "module": "Relatórios",
-      "keywords": ["imagem", "processamento", "OCR", "reconhecimento", "placa", "taxa"],
-      "content": "Volume de imagens capturadas e processadas pelo sistema, incluindo taxas de reconhecimento de placas e falhas de OCR.",
-      "steps": ["Acesse Relatórios → Processamento de Imagens", "Defina período", "Analise taxa de reconhecimento", "Investigue equipamentos com taxa baixa"],
-      "path": "Relatórios → Processamento de Imagens",
-      "docUrl": "relatorios/processamento-imagens",
-      "related": ["monitoramento-online", "eventos-equipamentos"],
-      "dbTables": ["ImagensProcessamento"]
-    },
-    {
-      "id": "processamento-usuario",
-      "title": "Processamento por Usuário",
-      "module": "Relatórios",
-      "keywords": ["produtividade", "usuário", "operador", "triagem", "tempo médio", "auditoria"],
-      "content": "Exibe a produtividade de cada operador: infrações triadas, aprovadas, descartadas e tempo médio por análise.",
-      "steps": ["Acesse Relatórios → Processamento por Usuário", "Defina período", "Analise a produtividade por operador"],
-      "path": "Relatórios → Processamento por Usuário",
-      "docUrl": "relatorios/processamento-por-usuario",
-      "related": ["relatorio-infracoes"],
-      "dbTables": ["InfracoesTriagem", "InfracoesAuditoria"]
-    },
-    {
-      "id": "power-bi",
-      "title": "Power BI",
-      "module": "Relatórios",
-      "keywords": ["Power BI", "dashboard", "analítico", "BI", "gráfico"],
-      "content": "O AxTon permite integração com Microsoft Power BI para geração de dashboards analíticos avançados, acessados diretamente dentro do sistema.",
-      "steps": ["Acesse Relatórios → Power BI", "Selecione o dashboard desejado", "Interaja com os filtros visuais"],
-      "path": "Relatórios → Power BI",
-      "docUrl": "relatorios/power-bi",
-      "related": ["relatorio-passagens", "relatorio-infracoes", "fluxo-diario"],
-      "dbTables": []
-    },
-    {
-      "id": "mapa-fluxo",
-      "title": "Mapa de Fluxo de Passagens",
-      "module": "Relatórios",
-      "keywords": ["mapa", "fluxo", "geográfico", "rota", "localidade"],
-      "content": "Mapa interativo exibindo o volume de passagens por localidade geográfica, permitindo identificar rotas com maior tráfego de veículos.",
-      "steps": ["Acesse Relatórios → Mapa de Fluxo", "Defina o período", "Analise os pontos no mapa", "Clique em um ponto para detalhes"],
-      "path": "Relatórios → Mapa de Fluxo",
-      "docUrl": "relatorios/mapa-fluxo-passagens",
-      "related": ["relatorio-passagens", "fluxo-diario", "postos-pesagem"],
-      "dbTables": ["Passagens", "Postos"]
-    },
-    {
-      "id": "falhas-sequenciais",
-      "title": "Falhas de Sequenciais",
-      "module": "Relatórios",
-      "keywords": ["falha", "sequencial", "numeração", "lacuna", "duplicação"],
-      "content": "Identifica lacunas ou duplicações na numeração sequencial de infrações, garantindo a integridade dos registros enviados ao órgão.",
-      "steps": ["Acesse Relatórios → Falhas de Sequenciais", "Defina período", "Analise sequenciais ausentes", "Corrija divergências"],
-      "path": "Relatórios → Falhas de Sequenciais",
-      "docUrl": "relatorios/falhas-sequenciais",
-      "related": ["exportacao-infracoes", "sequencial-infracao"],
-      "dbTables": ["InfracoesSequencial"]
-    },
-    {
-      "id": "cadastro-equipamentos",
-      "title": "Cadastro de Equipamentos",
-      "module": "Cadastros Básicos",
-      "keywords": ["equipamento", "balança", "sensor", "cadastrar", "ativo"],
-      "content": "Cadastro dos equipamentos de pesagem utilizados nos postos. Para cadastrar, é necessário ter previamente cadastrado Fabricante, Tipo e Modelo.",
-      "steps": ["Acesse Cadastros Básicos → Equipamentos", "Clique em + Novo", "Selecione Fabricante, Tipo e Modelo", "Informe o número de série", "Vincule ao Posto", "Clique em Salvar"],
-      "path": "Cadastros Básicos → Equipamentos",
-      "docUrl": "cadastros-basicos/equipamentos",
-      "related": ["fabricantes", "tipos-equipamentos", "modelos-equipamentos", "postos-pesagem"],
-      "dbTables": ["Equipamentos"]
-    },
-    {
-      "id": "fabricantes",
-      "title": "Fabricantes de Equipamentos",
-      "module": "Cadastros Básicos",
-      "keywords": ["fabricante", "marca", "equipamento"],
-      "content": "Cadastro dos fabricantes de equipamentos de pesagem. Utilizado como referência no cadastro de equipamentos e modelos.",
-      "steps": ["Acesse Cadastros Básicos → Fabricantes", "Clique em + Novo", "Preencha o Nome", "Clique em Salvar"],
-      "path": "Cadastros Básicos → Fabricantes",
-      "docUrl": "cadastros-basicos/fabricantes",
-      "related": ["cadastro-equipamentos", "modelos-equipamentos"],
-      "dbTables": ["Fabricantes"]
-    },
-    {
-      "id": "tipos-equipamentos",
-      "title": "Tipos de Equipamentos",
-      "module": "Cadastros Básicos",
-      "keywords": ["tipo", "equipamento", "categoria", "classe"],
-      "content": "Categorias de equipamentos de pesagem (balança fixa, portátil, dinâmica etc.).",
-      "steps": ["Acesse Cadastros Básicos → Tipos de Equipamentos", "Clique em + Novo", "Preencha o Nome", "Clique em Salvar"],
-      "path": "Cadastros Básicos → Tipos de Equipamentos",
-      "docUrl": "cadastros-basicos/tipos-equipamentos",
-      "related": ["cadastro-equipamentos", "fabricantes"],
-      "dbTables": ["TiposEquipamentos"]
-    },
-    {
-      "id": "modelos-equipamentos",
-      "title": "Modelos de Equipamentos",
-      "module": "Cadastros Básicos",
-      "keywords": ["modelo", "equipamento", "fabricante"],
-      "content": "Modelos específicos de equipamentos por fabricante. Dependem de Fabricante e Tipo previamente cadastrados.",
-      "steps": ["Acesse Cadastros Básicos → Modelos de Equipamentos", "Clique em + Novo", "Selecione o Fabricante e Tipo", "Informe o Nome do modelo", "Clique em Salvar"],
-      "path": "Cadastros Básicos → Modelos de Equipamentos",
-      "docUrl": "cadastros-basicos/modelos-equipamentos",
-      "related": ["cadastro-equipamentos", "fabricantes", "tipos-equipamentos"],
-      "dbTables": ["ModelosEquipamentos"]
-    },
-    {
-      "id": "grupos-equipamentos",
-      "title": "Grupos de Equipamentos",
-      "module": "Cadastros Básicos",
-      "keywords": ["grupo", "equipamento", "agrupamento", "lógico"],
-      "content": "Agrupamento lógico de equipamentos para facilitar gerenciamento e relatórios por conjunto.",
-      "steps": ["Acesse Cadastros Básicos → Grupos de Equipamentos", "Clique em + Novo", "Informe o Nome do grupo", "Vincule os equipamentos", "Clique em Salvar"],
-      "path": "Cadastros Básicos → Grupos de Equipamentos",
-      "docUrl": "cadastros-basicos/grupos-equipamentos",
-      "related": ["cadastro-equipamentos", "monitoramento-online"],
-      "dbTables": ["GruposEquipamentos"]
-    },
-    {
-      "id": "tipos-veiculos",
-      "title": "Tipos de Veículos",
-      "module": "Veículos",
-      "keywords": ["tipo", "veículo", "caminhão", "carreta", "ônibus"],
-      "content": "Cadastro dos tipos de veículos fiscalizados pelo sistema de pesagem (caminhão, carreta, bitrem, rodotrem etc.).",
-      "steps": ["Acesse Veículos → Tipos de Veículos", "Clique em + Novo", "Preencha Código e Descrição", "Clique em Salvar"],
-      "path": "Veículos → Tipos de Veículos",
-      "docUrl": "veiculos/tipos-veiculos",
-      "related": ["classificacoes-veiculos", "marcas-veiculos"],
-      "dbTables": ["TiposVeiculos"]
-    },
-    {
-      "id": "marcas-veiculos",
-      "title": "Marcas de Veículos",
-      "module": "Veículos",
-      "keywords": ["marca", "fabricante", "veículo"],
-      "content": "Cadastro de marcas/fabricantes de veículos (Mercedes-Benz, Volvo, Scania, DAF etc.).",
-      "steps": ["Acesse Veículos → Marcas de Veículos", "Clique em + Novo", "Preencha o Nome", "Clique em Salvar"],
-      "path": "Veículos → Marcas de Veículos",
-      "docUrl": "veiculos/marcas-veiculos",
-      "related": ["modelos-veiculos", "tipos-veiculos"],
-      "dbTables": ["MarcasVeiculos"]
-    },
-    {
-      "id": "modelos-veiculos",
-      "title": "Modelos de Veículos",
-      "module": "Veículos",
-      "keywords": ["modelo", "veículo", "marca"],
-      "content": "Cadastro de modelos de veículos, vinculados à marca correspondente.",
-      "steps": ["Acesse Veículos → Modelos de Veículos", "Clique em + Novo", "Selecione a Marca", "Informe o Modelo", "Clique em Salvar"],
-      "path": "Veículos → Modelos de Veículos",
-      "docUrl": "veiculos/modelos-veiculos",
-      "related": ["marcas-veiculos", "tipos-veiculos"],
-      "dbTables": ["ModelosVeiculos"]
-    },
-    {
-      "id": "cores-veiculos",
-      "title": "Cores de Veículos",
-      "module": "Veículos",
-      "keywords": ["cor", "veículo"],
-      "content": "Cadastro de cores padronizadas para identificação de veículos.",
-      "steps": ["Acesse Veículos → Cores", "Clique em + Novo", "Preencha o Nome da cor", "Clique em Salvar"],
-      "path": "Veículos → Cores",
-      "docUrl": "veiculos/cores",
-      "related": ["tipos-veiculos"],
-      "dbTables": ["CoresVeiculos"]
-    },
-    {
-      "id": "classificacoes-veiculos",
-      "title": "Classificações de Veículos",
-      "module": "Veículos",
-      "keywords": ["classificação", "eixo", "PBT", "peso bruto total", "CMT"],
-      "content": "Classificações de veículos por número de eixos e PBT (Peso Bruto Total) permitido. Determina o limite de peso para fiscalização.",
-      "steps": ["No menu lateral, clique em Classificações", "Clique em + Novo", "Informe nº de eixos e PBT", "Defina a descrição", "Clique em Salvar"],
-      "path": "Menu lateral → Classificações",
-      "docUrl": "veiculos/classificacoes-veiculos",
-      "related": ["reclassificar-veiculo", "tipos-veiculos", "glossario-pbt"],
-      "dbTables": ["ClassificacoesVeiculos"]
-    },
-    {
-      "id": "municipios",
-      "title": "Municípios",
-      "module": "Veículos",
-      "keywords": ["município", "IBGE", "código", "cidade", "UF"],
-      "content": "Cadastro de municípios com código IBGE, utilizado na exportação de infrações e relatórios.",
-      "steps": ["Acesse Veículos → Municípios", "Clique em + Novo", "Informe o Código IBGE e Nome", "Selecione a UF", "Clique em Salvar"],
-      "path": "Veículos → Municípios",
-      "docUrl": "veiculos/municipios",
-      "related": ["exportacao-infracoes", "postos-pesagem"],
-      "dbTables": ["Municipios"]
-    },
-    {
-      "id": "contratos",
-      "title": "Contratos de Medição",
-      "module": "Medições",
-      "keywords": ["contrato", "medição", "prestação", "serviço", "vigência"],
-      "content": "Registro dos contratos de prestação de serviço de pesagem, vinculando postos, períodos e metas de performance.",
-      "steps": ["Acesse Medições → Contratos", "Clique em + Novo", "Informe Número do contrato", "Selecione o Contratante", "Defina a Vigência", "Vincule os Postos", "Clique em Salvar"],
-      "path": "Medições → Contratos",
-      "docUrl": "medicoes/contratos",
-      "related": ["indices-performance", "interrupcoes", "gerar-medicao"],
-      "dbTables": ["Contratos", "ContratosPostos"]
-    },
-    {
-      "id": "indices-performance",
-      "title": "Índices de Performance",
-      "module": "Medições",
-      "keywords": ["índice", "performance", "disponibilidade", "produtividade", "qualidade", "meta"],
-      "content": "Indicadores de desempenho contratual: disponibilidade de equipamentos (≥95%), tempo de triagem (≤20min), produtividade e qualidade (≥98% aceitação).",
-      "steps": ["Acesse Medições → Índices de Performance", "Selecione o contrato", "Analise os indicadores", "Compare com as metas"],
-      "path": "Medições → Índices de Performance",
-      "docUrl": "medicoes/indices-performance",
-      "related": ["contratos", "interrupcoes", "processamento-usuario"],
-      "dbTables": ["IndicesPerformance"]
-    },
-    {
-      "id": "interrupcoes",
-      "title": "Interrupções Operacionais",
-      "module": "Medições",
-      "keywords": ["interrupção", "parada", "manutenção", "energia", "falha", "disponibilidade"],
-      "content": "Registro de interrupções que afetam a disponibilidade: manutenção preventiva/corretiva, queda de energia, falha de comunicação e força maior.",
-      "steps": ["Acesse Medições → Interrupções", "Clique em + Novo", "Selecione o Equipamento", "Informe o Tipo de interrupção", "Defina o período (Início e Fim)", "Descreva a Justificativa", "Clique em Salvar"],
-      "path": "Medições → Interrupções",
-      "docUrl": "medicoes/interrupcoes",
-      "related": ["monitoramento-online", "eventos-equipamentos", "indices-performance"],
-      "dbTables": ["Interrupcoes"]
-    },
-    {
-      "id": "gerar-medicao",
-      "title": "Gerar Medição Mensal",
-      "module": "Medições",
-      "keywords": ["gerar", "medição", "mensal", "relatório", "contrato"],
-      "content": "Gera o relatório de medição mensal vinculado a um contrato, consolidando indicadores de performance e disponibilidade para faturamento.",
-      "steps": ["Acesse Medições → Gerar Medição", "Selecione o Contrato", "Informe o Período de referência", "Clique em Gerar", "Revise o relatório", "Exporte em PDF ou Excel"],
-      "path": "Medições → Gerar Medição",
-      "docUrl": "medicoes/criar-medicao",
-      "related": ["contratos", "indices-performance", "interrupcoes"],
-      "dbTables": ["Medicoes", "MedicoesDetalhes"]
-    },
-    {
-      "id": "logs-acesso",
-      "title": "Logs de Acesso",
-      "module": "Controle de Acesso",
-      "keywords": ["log", "acesso", "autenticação", "login", "falha", "tentativa"],
-      "content": "Registra todas as autenticações no sistema: acessos bem-sucedidos e tentativas falhas, com data, hora, IP e navegador.",
-      "steps": ["Acesse Controle de Acesso → Logs de Acesso", "Defina o período", "Filtre por usuário ou resultado", "Analise os registros"],
-      "path": "Controle de Acesso → Logs de Acesso",
-      "docUrl": "controle-acesso/logs-acesso",
-      "related": ["restricao-ip", "usuarios", "permissoes"],
-      "dbTables": ["LogsAcesso"]
-    },
-    {
-      "id": "restricao-ip",
-      "title": "Restrição por IP",
-      "module": "Controle de Acesso",
-      "keywords": ["IP", "restrição", "segurança", "endereço", "whitelist"],
-      "content": "Permite configurar quais endereços IP podem acessar o sistema, adicionando camada extra de segurança. Se ativado com lista vazia, ninguém acessa.",
-      "steps": ["Acesse Controle de Acesso → Acessos por IP", "Clique em + Novo", "Informe o Endereço IP", "Adicione uma Descrição", "Marque como Ativo", "Clique em Salvar"],
-      "path": "Controle de Acesso → Acessos por IP",
-      "docUrl": "controle-acesso/acessos-por-ip",
-      "related": ["logs-acesso", "usuarios"],
-      "dbTables": ["RestricaoIP"]
-    },
-    {
-      "id": "permissoes",
-      "title": "Permissões de Acesso",
-      "module": "Controle de Acesso",
-      "keywords": ["permissão", "perfil", "visualizar", "criar", "editar", "excluir", "módulo"],
-      "content": "Matriz de permissões por perfil: Visualizar, Criar, Editar e Excluir para cada módulo. Alterações têm efeito imediato para todos os usuários do perfil.",
-      "steps": ["No menu lateral, abra Administração e clique em Permissões de acesso", "Selecione o Perfil de Acesso", "Para cada módulo, marque as permissões", "Clique em Salvar"],
-      "path": "Menu lateral → Administração → Permissões de acesso",
-      "docUrl": "administracao/permissoes",
-      "related": ["perfis-acesso", "usuarios", "logs-acesso"],
-      "dbTables": ["Permissoes", "PermissoesModulos"]
-    },
-    {
-      "id": "usuarios",
-      "title": "Cadastro de Usuários",
-      "module": "Administração",
-      "keywords": ["usuário", "cadastrar", "login", "senha", "email", "ativo"],
-      "content": "Cadastro de usuários do sistema. Cada usuário recebe login/senha e é vinculado a um perfil de acesso que define suas permissões.",
-      "steps": ["No menu lateral, abra Administração e clique em Usuários", "Clique em + Novo", "Preencha Nome, Email e Login", "Defina a Senha inicial", "Selecione o Perfil de Acesso", "Marque como Ativo", "Clique em Salvar"],
-      "path": "Menu lateral → Administração → Usuários",
-      "docUrl": "administracao/usuarios",
-      "related": ["perfis-acesso", "permissoes", "logs-acesso"],
-      "dbTables": ["Usuarios"]
-    },
-    {
-      "id": "perfis-acesso",
+      "id": "administracao-perfis-acesso",
       "title": "Perfis de Acesso",
       "module": "Administração",
-      "keywords": ["perfil", "acesso", "operador", "supervisor", "administrador"],
-      "content": "Cadastro dos perfis de acesso (Administrador, Supervisor, Operador etc.). Cada perfil agrupa um conjunto de permissões que são herdadas pelos usuários vinculados.",
-      "steps": ["No menu lateral, abra Administração e clique em Perfis de acesso", "Clique em + Novo", "Informe o Nome do perfil", "Defina as permissões", "Clique em Salvar"],
-      "path": "Menu lateral → Administração → Perfis de acesso",
+      "keywords": [
+        "perfis de acesso",
+        "perfis",
+        "acesso",
+        "gestão",
+        "sistema",
+        "axton",
+        "acessar",
+        "configuracao",
+        "administracao",
+        "admin"
+      ],
+      "content": "Gestão de perfis de acesso do sistema AxTon",
+      "steps": [
+        "Na listagem, clique em **+ Novo**",
+        "Informe o **Código** e a **Descrição** do perfil",
+        "Confirme que o campo **Ativo** está marcado",
+        "Clique em **Salvar**",
+        "Após salvar, acesse o módulo de **Permissões de Acesso** para configurar as permissões vinculadas ao perfil"
+      ],
+      "path": "Perfis de acesso",
       "docUrl": "administracao/perfis-acesso",
-      "related": ["usuarios", "permissoes"],
-      "dbTables": ["PerfisAcesso"]
-    },
-    {
-      "id": "dashboard",
-      "title": "Painel Principal (Dashboard)",
-      "module": "Primeiros Passos",
-      "keywords": ["dashboard", "painel", "visão geral", "alertas", "fluxo", "gráfico"],
-      "content": "Tela inicial do AxTon com 5 painéis: Alertas por Tipo, Fluxo de Passagens, Origem das Cargas, Alertas Recentes e Últimas Notas Fiscais. Dados ficam disponíveis após processamento das passagens.",
-      "steps": ["Faça login no AxTon", "O dashboard é exibido automaticamente", "Analise os painéis de alertas e fluxo", "Clique nos itens para detalhes"],
-      "path": "Menu lateral → Dashboards",
-      "docUrl": "primeiros-passos/dashboard",
-      "related": ["alertas", "fluxo-diario", "relatorio-nfe"],
+      "related": [],
       "dbTables": []
     },
     {
-      "id": "login",
-      "title": "Login no Sistema",
-      "module": "Primeiros Passos",
-      "keywords": ["login", "acessar", "senha", "entrar", "primeiro acesso"],
-      "content": "Para acessar o AxTon, utilize o endereço fornecido pelo administrador. Informe login e senha. No primeiro acesso, recomenda-se alterar a senha padrão.",
-      "steps": ["Acesse o endereço do AxTon no navegador", "Informe seu Login", "Informe sua Senha", "Clique em Entrar", "Altere a senha no primeiro acesso"],
-      "path": "Tela de Login",
-      "docUrl": "primeiros-passos/login",
-      "related": ["dashboard", "usuarios", "navegacao"],
+      "id": "administracao-permissoes",
+      "title": "Permissões de Acesso",
+      "module": "Administração",
+      "keywords": [
+        "permissões de acesso",
+        "permissões",
+        "acesso",
+        "configura",
+        "perfil",
+        "sistema",
+        "axton",
+        "configuracao",
+        "administracao",
+        "admin"
+      ],
+      "content": "Configuração das permissões por perfil no sistema AxTon",
+      "steps": [
+        "No menu lateral, abra **Administração** e clique em **Permissões de acesso**",
+        "Selecione o **Perfil de Acesso** a ser configurado",
+        "Para cada funcionalidade listada, marque ou desmarque os tipos de permissão desejados",
+        "Clique em **Salvar** para aplicar as configurações"
+      ],
+      "path": "Permissões de acesso",
+      "docUrl": "administracao/permissoes",
+      "related": [],
       "dbTables": []
     },
     {
-      "id": "navegacao",
-      "title": "Navegação no Sistema",
-      "module": "Primeiros Passos",
-      "keywords": ["navegação", "menu", "sidebar", "tela", "interface"],
-      "content": "O AxTon utiliza menu lateral (sidebar) para navegação. Os módulos são organizados por categorias: Pesagem, Operações, Infrações, Relatórios, etc.",
-      "steps": ["Use o menu lateral para navegar", "Clique na categoria para expandir", "Selecione a funcionalidade desejada"],
-      "path": "Menu lateral (navegação geral)",
-      "docUrl": "primeiros-passos/navegacao",
-      "related": ["dashboard", "login"],
+      "id": "administracao-usuarios",
+      "title": "Usuários",
+      "module": "Administração",
+      "keywords": [
+        "usuários",
+        "usuarios",
+        "gestão",
+        "sistema",
+        "axton",
+        "acessar",
+        "listagem",
+        "configuracao",
+        "administracao",
+        "admin"
+      ],
+      "content": "Gestão de usuários do sistema AxTon",
+      "steps": [
+        "Na listagem, clique em **+ Novo**",
+        "Preencha o **Nome** completo do usuário",
+        "Informe o **Nome de Usuário** para login",
+        "Informe o **E-mail** do usuário",
+        "Defina e confirme a **Senha**",
+        "Selecione o **Perfil de Acesso** correspondente",
+        "Confirme que o campo **Ativo** está marcado",
+        "Clique em **Salvar**"
+      ],
+      "path": "Usuários",
+      "docUrl": "administracao/usuarios",
+      "related": [],
       "dbTables": []
     },
     {
-      "id": "locais",
-      "title": "Cadastro de Locais",
+      "id": "cadastros-basicos-equipamentos",
+      "title": "Equipamentos",
+      "module": "Cadastros Básicos",
+      "keywords": [
+        "equipamentos",
+        "sidebar_position",
+        "title",
+        "acessar",
+        "listagem",
+        "colunas",
+        "cadastro",
+        "registrar",
+        "criar",
+        "novo"
+      ],
+      "content": "--- sidebar_position: 1 title: Equipamentos",
+      "steps": [
+        "Acesse **Cadastros Básicos** → **Equipamentos**",
+        "Clique em **+ Novo**",
+        "Preencha os campos obrigatórios",
+        "Clique em **Salvar**"
+      ],
+      "path": "Equipamentos",
+      "docUrl": "cadastros-basicos/equipamentos",
+      "related": [],
+      "dbTables": []
+    },
+    {
+      "id": "cadastros-basicos-fabricantes",
+      "title": "Fabricantes",
+      "module": "Cadastros Básicos",
+      "keywords": [
+        "fabricantes",
+        "sidebar_position",
+        "title",
+        "acessar",
+        "listagem",
+        "colunas",
+        "cadastro",
+        "registrar",
+        "criar",
+        "novo"
+      ],
+      "content": "--- sidebar_position: 2 title: Fabricantes",
+      "steps": [
+        "Acesse **Cadastros Básicos** → **Fabricantes**",
+        "Clique em **+ Novo**",
+        "Preencha os campos obrigatórios",
+        "Clique em **Salvar**"
+      ],
+      "path": "Fabricantes",
+      "docUrl": "cadastros-basicos/fabricantes",
+      "related": [],
+      "dbTables": []
+    },
+    {
+      "id": "cadastros-basicos-grupos-equipamentos",
+      "title": "Grupos de Equipamentos",
+      "module": "Cadastros Básicos",
+      "keywords": [
+        "grupos de equipamentos",
+        "grupos",
+        "equipamentos",
+        "sidebar_position",
+        "title",
+        "acessar",
+        "listagem",
+        "cadastro",
+        "registrar",
+        "criar",
+        "novo"
+      ],
+      "content": "--- sidebar_position: 5 title: Grupos de Equipamentos",
+      "steps": [
+        "Acesse **Cadastros Básicos** → **Grupos de Equipamentos**",
+        "Clique em **+ Novo**",
+        "Preencha os campos obrigatórios",
+        "Clique em **Salvar**"
+      ],
+      "path": "Grupos de Equipamentos",
+      "docUrl": "cadastros-basicos/grupos-equipamentos",
+      "related": [],
+      "dbTables": []
+    },
+    {
+      "id": "cadastros-basicos-modelos-equipamentos",
+      "title": "Modelos de Equipamentos",
+      "module": "Cadastros Básicos",
+      "keywords": [
+        "modelos de equipamentos",
+        "modelos",
+        "equipamentos",
+        "sidebar_position",
+        "title",
+        "acessar",
+        "listagem",
+        "cadastro",
+        "registrar",
+        "criar",
+        "novo"
+      ],
+      "content": "--- sidebar_position: 4 title: Modelos de Equipamentos",
+      "steps": [
+        "Acesse **Cadastros Básicos** → **Modelos de Equipamentos**",
+        "Clique em **+ Novo**",
+        "Preencha os campos obrigatórios",
+        "Clique em **Salvar**"
+      ],
+      "path": "Modelos de Equipamentos",
+      "docUrl": "cadastros-basicos/modelos-equipamentos",
+      "related": [],
+      "dbTables": []
+    },
+    {
+      "id": "cadastros-basicos-tipos-equipamentos",
+      "title": "Tipos de Equipamentos",
+      "module": "Cadastros Básicos",
+      "keywords": [
+        "tipos de equipamentos",
+        "tipos",
+        "equipamentos",
+        "sidebar_position",
+        "title",
+        "acessar",
+        "listagem",
+        "cadastro",
+        "registrar",
+        "criar",
+        "novo"
+      ],
+      "content": "--- sidebar_position: 3 title: Tipos de Equipamentos",
+      "steps": [
+        "Acesse **Cadastros Básicos** → **Tipos de Equipamentos**",
+        "Clique em **+ Novo**",
+        "Preencha os campos obrigatórios",
+        "Clique em **Salvar**"
+      ],
+      "path": "Tipos de Equipamentos",
+      "docUrl": "cadastros-basicos/tipos-equipamentos",
+      "related": [],
+      "dbTables": []
+    },
+    {
+      "id": "cadastros-classificacao-veiculos",
+      "title": "Classificação de Veículos",
       "module": "Cadastros",
-      "keywords": ["local", "localidade", "endereço", "cadastrar"],
-      "content": "Cadastro de locais (rodovias, trechos, pontos de fiscalização) onde os postos de pesagem são instalados.",
-      "steps": ["No menu lateral, abra Cadastros e clique em Locais", "Clique em + Novo", "Preencha os dados do local", "Clique em Salvar"],
-      "path": "Menu lateral → Cadastros → Locais",
-      "docUrl": "cadastros/locais",
-      "related": ["postos-pesagem", "municipios"],
-      "dbTables": ["Locais"]
-    },
-    {
-      "id": "classificacao-veiculos-cadastro",
-      "title": "Classificação de Veículos (Cadastro)",
-      "module": "Cadastros",
-      "keywords": ["classificação", "veículo", "cadastro", "eixo"],
-      "content": "Cadastro de classificações de veículos por quantidade de eixos e peso permitido, utilizado no módulo de Pesagem.",
-      "steps": ["Acesse Cadastros → Classificação de Veículos", "Clique em + Novo", "Informe os dados", "Clique em Salvar"],
-      "path": "Menu lateral → Cadastros → Classificações",
+      "keywords": [
+        "classificação de veículos",
+        "classificacao de veiculos",
+        "classifica",
+        "veículos",
+        "cadastro",
+        "gestão",
+        "acessar",
+        "listagem",
+        "registrar",
+        "criar",
+        "novo"
+      ],
+      "content": "Cadastro e gestão das classificações de veículos",
+      "steps": [
+        "Na listagem, clique em **+ Novo**",
+        "Informe o **Código** e a **Descrição** da classificação",
+        "Preencha o **Número de Eixos** correspondente à categoria",
+        "Informe o **Peso Máximo** permitido em toneladas",
+        "Confirme que o campo **Ativo** está marcado",
+        "Clique em **Salvar**"
+      ],
+      "path": "Classificações",
       "docUrl": "cadastros/classificacao-veiculos",
-      "related": ["classificacoes-veiculos", "reclassificar-veiculo"],
-      "dbTables": ["ClassificacoesVeiculos"]
+      "related": [],
+      "dbTables": []
     },
     {
-      "id": "sequencial-infracao",
+      "id": "cadastros-locais",
+      "title": "Locais",
+      "module": "Cadastros",
+      "keywords": [
+        "locais",
+        "cadastro",
+        "gestão",
+        "pesagem",
+        "acessar",
+        "listagem",
+        "registrar",
+        "criar",
+        "novo"
+      ],
+      "content": "Cadastro e gestão dos locais de pesagem",
+      "steps": [
+        "Na listagem, clique em **+ Novo**",
+        "Informe o **Código** e a **Descrição** do local",
+        "Preencha o **Endereço**, se disponível",
+        "Verifique se o campo **Ativo** está marcado",
+        "Clique em **Salvar**"
+      ],
+      "path": "Locais",
+      "docUrl": "cadastros/locais",
+      "related": [],
+      "dbTables": []
+    },
+    {
+      "id": "cadastros-sequencial-infracao",
       "title": "Sequencial de Infração",
       "module": "Cadastros",
-      "keywords": ["sequencial", "numeração", "infração", "faixa"],
-      "content": "Configuração da faixa de numeração sequencial utilizada nas infrações de trânsito. Cada operação pode ter sua própria faixa sequencial.",
-      "steps": ["No menu lateral, abra Cadastros e clique em Sequenciais de Infração", "Clique em + Novo", "Defina o número inicial e final", "Vincule à operação", "Clique em Salvar"],
-      "path": "Menu lateral → Cadastros → Sequenciais de Infração",
+      "keywords": [
+        "sequencial de infração",
+        "sequencial de infracao",
+        "sequencial",
+        "infra",
+        "configura",
+        "numera",
+        "acessar",
+        "listagem",
+        "cadastro",
+        "registrar",
+        "criar",
+        "novo"
+      ],
+      "content": "Configuração do sequencial de numeração de infrações",
+      "steps": [
+        "Na listagem, clique em **+ Novo**",
+        "Informe o **Código** e a **Descrição** do sequencial",
+        "Defina o **Número Inicial** a partir do qual a contagem começará",
+        "Informe o **Prefixo**, se aplicável",
+        "Confirme que o campo **Ativo** está marcado",
+        "Clique em **Salvar**"
+      ],
+      "path": "Sequencial de Infração",
       "docUrl": "cadastros/sequencial-infracao",
-      "related": ["falhas-sequenciais", "exportacao-infracoes", "cadastro-operacoes"],
-      "dbTables": ["SequenciaisInfracao"]
-    },
-    {
-      "id": "glossario-pesagem",
-      "title": "Pesagem (Glossário)",
-      "module": "Glossário",
-      "keywords": ["pesagem", "definição", "conceito", "verificação", "peso"],
-      "content": "Pesagem: processo de verificação do peso de um veículo em postos de pesagem. Fluxo: Passagem → Pesagem → Classificação → Verificação de excesso → Infração (se aplicável). Base legal: Resolução CONTRAN 803/2021.",
-      "steps": [],
-      "path": "Informação de referência",
-      "docUrl": "glossario/pesagem",
-      "related": ["glossario-pbt", "glossario-infracao", "postos-pesagem"],
+      "related": [],
       "dbTables": []
     },
     {
-      "id": "glossario-pbt",
-      "title": "PBT — Peso Bruto Total (Glossário)",
-      "module": "Glossário",
-      "keywords": ["PBT", "peso bruto total", "limite", "eixo", "conceito"],
-      "content": "PBT (Peso Bruto Total): peso máximo permitido para circulação, considerando classificação, eixos e tipo de carga. Veículos que ultrapassam o PBT estão sujeitos a autuação. Base legal: Art. 99 do CTB.",
-      "steps": [],
-      "path": "Informação de referência",
-      "docUrl": "glossario/pbt",
-      "related": ["classificacoes-veiculos", "reclassificar-veiculo", "glossario-pesagem"],
+      "id": "controle-acesso-acessos-por-ip",
+      "title": "Restrição por IP",
+      "module": "Controle de Acesso",
+      "keywords": [
+        "restrição por ip",
+        "restricao por ip",
+        "restri",
+        "configurar",
+        "acesso",
+        "endere",
+        "acessar",
+        "configura",
+        "usuario",
+        "permissao",
+        "perfil"
+      ],
+      "content": "Configurar restrição de acesso por endereço IP",
+      "steps": [
+        "Acesse **Controle de Acesso** → **Acessos por IP**",
+        "Clique em **+ Novo**",
+        "Informe o Endereço IP",
+        "Adicione uma Descrição (ex: \"Escritório Central\")",
+        "Marque como Ativo",
+        "Clique em **Salvar**"
+      ],
+      "path": "acesso.png)",
+      "docUrl": "controle-acesso/acessos-por-ip",
+      "related": [],
       "dbTables": []
     },
     {
-      "id": "glossario-nfe",
-      "title": "NFe — Nota Fiscal Eletrônica (Glossário)",
-      "module": "Glossário",
-      "keywords": ["NFe", "nota fiscal", "eletrônica", "documento", "carga"],
-      "content": "NFe (Nota Fiscal Eletrônica): documento fiscal digital que acompanha o transporte de mercadorias. O AxTon captura automaticamente as chaves NFe para rastreabilidade fiscal.",
-      "steps": [],
-      "path": "Informação de referência",
-      "docUrl": "glossario/nfe",
-      "related": ["relatorio-nfe", "glossario-mdfe", "alertas"],
+      "id": "controle-acesso-configurar-permissoes",
+      "title": "Permissões Detalhadas",
+      "module": "Controle de Acesso",
+      "keywords": [
+        "permissões detalhadas",
+        "permissões",
+        "detalhadas",
+        "sidebar_position",
+        "title",
+        "acessar",
+        "configura",
+        "usuario",
+        "permissao",
+        "perfil",
+        "acesso"
+      ],
+      "content": "--- sidebar_position: 3 title: Permissões Detalhadas",
+      "steps": [
+        "No menu lateral, abra **Administração** e clique em **Permissões de acesso**",
+        "Selecione o **Perfil de Acesso**",
+        "Para cada módulo, marque as permissões desejadas",
+        "Clique em **Salvar**"
+      ],
+      "path": "Visualizar, Criar, Editar e Excluir.",
+      "docUrl": "controle-acesso/configurar-permissoes",
+      "related": [],
       "dbTables": []
     },
     {
-      "id": "glossario-mdfe",
-      "title": "MDF-e — Manifesto de Documento Fiscal (Glossário)",
-      "module": "Glossário",
-      "keywords": ["MDF-e", "manifesto", "documento fiscal", "transporte"],
-      "content": "MDF-e (Manifesto de Documento Fiscal Eletrônico): vincula notas fiscais ao transporte. Veículos de carga devem portar MDF-e válido. Ausência gera alerta no AxTon.",
+      "id": "controle-acesso-logs-acesso",
+      "title": "Logs de Acesso",
+      "module": "Controle de Acesso",
+      "keywords": [
+        "logs de acesso",
+        "logs",
+        "acesso",
+        "histórico",
+        "acessos",
+        "sistema",
+        "acessar",
+        "usuario",
+        "permissao",
+        "perfil"
+      ],
+      "content": "Histórico de acessos ao sistema",
       "steps": [],
-      "path": "Informação de referência",
-      "docUrl": "glossario/mdfe",
-      "related": ["glossario-nfe", "alertas"],
+      "path": "sucedidos e tentativas falhas.",
+      "docUrl": "controle-acesso/logs-acesso",
+      "related": [],
       "dbTables": []
     },
     {
       "id": "glossario-infracao",
-      "title": "Infração de Trânsito (Glossário)",
+      "title": "Infração de Trânsito",
       "module": "Glossário",
-      "keywords": ["infração", "trânsito", "autuação", "CTB", "lei"],
-      "content": "Infração de trânsito: desobediência à legislação. No AxTon: Detecção de excesso → Triagem → Auditoria → Exportação ao órgão autuador. Base legal: Art. 161 do CTB.",
+      "keywords": [
+        "infração de trânsito",
+        "infracao de transito",
+        "infra",
+        "trânsito",
+        "sidebar_position",
+        "title",
+        "glossario",
+        "termo",
+        "definicao",
+        "conceito"
+      ],
+      "content": "--- sidebar_position: 5 title: \"Infração de Trânsito\"",
       "steps": [],
-      "path": "Informação de referência",
+      "path": "Menu lateral → Glossário → Infração de Trânsito",
       "docUrl": "glossario/infracao",
-      "related": ["exportacao-infracoes"],
+      "related": [],
+      "dbTables": []
+    },
+    {
+      "id": "glossario-mdfe",
+      "title": "MDF-e (Manifesto de Documento Fiscal)",
+      "module": "Glossário",
+      "keywords": [
+        "mdf-e (manifesto de documento fiscal)",
+        "manifesto",
+        "documento",
+        "fiscal",
+        "sidebar_position",
+        "title",
+        "glossario",
+        "termo",
+        "definicao",
+        "conceito"
+      ],
+      "content": "--- sidebar_position: 4 title: \"MDF-e (Manifesto de Documento Fiscal)\"",
+      "steps": [],
+      "path": "Menu lateral → Glossário → MDF-e (Manifesto de Documento Fiscal)",
+      "docUrl": "glossario/mdfe",
+      "related": [],
+      "dbTables": []
+    },
+    {
+      "id": "glossario-nfe",
+      "title": "NFe (Nota Fiscal Eletrônica)",
+      "module": "Glossário",
+      "keywords": [
+        "nfe (nota fiscal eletrônica)",
+        "nfe (nota fiscal eletronica)",
+        "nota",
+        "fiscal",
+        "eletrônica",
+        "sidebar_position",
+        "title",
+        "glossario",
+        "termo",
+        "definicao",
+        "conceito"
+      ],
+      "content": "--- sidebar_position: 3 title: \"NFe (Nota Fiscal Eletrônica)\"",
+      "steps": [],
+      "path": "Menu lateral → Glossário → NFe (Nota Fiscal Eletrônica)",
+      "docUrl": "glossario/nfe",
+      "related": [],
+      "dbTables": []
+    },
+    {
+      "id": "glossario-pbt",
+      "title": "PBT (Peso Bruto Total)",
+      "module": "Glossário",
+      "keywords": [
+        "pbt (peso bruto total)",
+        "peso",
+        "bruto",
+        "total",
+        "máximo",
+        "permitido",
+        "circula",
+        "glossario",
+        "termo",
+        "definicao",
+        "conceito"
+      ],
+      "content": "Peso máximo permitido para circulação de um veículo, considerando sua classificação, número de eixos e tipo de carga. Veículos que ultrapassam o PBT estão sujeitos a autuação. Base legal: Art. 99 do CTB, Resolução CONTRAN 803/2021",
+      "steps": [],
+      "path": "Menu lateral → Glossário → PBT (Peso Bruto Total)",
+      "docUrl": "glossario/pbt",
+      "related": [],
+      "dbTables": []
+    },
+    {
+      "id": "glossario-pesagem",
+      "title": "Pesagem",
+      "module": "Glossário",
+      "keywords": [
+        "pesagem",
+        "processo",
+        "verifica",
+        "peso",
+        "veículo",
+        "postos",
+        "glossario",
+        "termo",
+        "definicao",
+        "conceito"
+      ],
+      "content": "Processo de verificação do peso de um veículo em postos de pesagem. No AxTon, o fluxo compreende: Passagem → Pesagem → Classificação → Verificação de excesso → Infração (se aplicável). Base legal: Resolução CONTRAN 803/2021",
+      "steps": [],
+      "path": "Menu lateral → Glossário → Pesagem",
+      "docUrl": "glossario/pesagem",
+      "related": [],
       "dbTables": []
     },
     {
       "id": "glossario-triagem",
-      "title": "Triagem (Glossário)",
+      "title": "Triagem",
       "module": "Glossário",
-      "keywords": ["triagem", "análise", "validação", "humana", "conceito"],
-      "content": "Triagem: processo de análise humana das infrações detectadas automaticamente. O triador valida ou descarta cada infração com base nas imagens e dados registrados.",
+      "keywords": [
+        "triagem",
+        "sidebar_position",
+        "title",
+        "glossario",
+        "termo",
+        "definicao",
+        "conceito"
+      ],
+      "content": "--- sidebar_position: 6 title: \"Triagem\"",
       "steps": [],
-      "path": "Informação de referência",
+      "path": "Menu lateral → Glossário → Triagem",
       "docUrl": "glossario/triagem",
-      "related": ["glossario-infracao"],
+      "related": [],
       "dbTables": []
     },
     {
-      "id": "configuracoes-sistema",
+      "id": "infracoes-exportacao",
+      "title": "Exportação de Infrações",
+      "module": "Infrações",
+      "keywords": [
+        "exportação de infrações",
+        "exportacao de infracoes",
+        "exporta",
+        "infra",
+        "sidebar_position",
+        "title",
+        "acessar",
+        "listagem",
+        "infracao",
+        "multa",
+        "auto",
+        "autuacao"
+      ],
+      "content": "--- sidebar_position: 4 title: Exportação de Infrações",
+      "steps": [
+        "No menu lateral, clique em **Exportação**",
+        "Clique em **Gerar Novo Lote**",
+        "Defina o período e filtros",
+        "Revise a quantidade de infrações",
+        "Clique em **Gerar**",
+        "Após gerado, clique em **Enviar**",
+        "Acompanhe o status até \"Aceito\""
+      ],
+      "path": "Exportação",
+      "docUrl": "infracoes/exportacao",
+      "related": [],
+      "dbTables": []
+    },
+    {
+      "id": "medicoes-contratos",
+      "title": "Contratos",
+      "module": "Medições",
+      "keywords": [
+        "contratos",
+        "cadastro",
+        "presta",
+        "servi",
+        "acessar",
+        "listagem",
+        "medicao",
+        "aferição",
+        "sensor",
+        "calibrar"
+      ],
+      "content": "Cadastro de contratos de prestação de serviço",
+      "steps": [
+        "Acesse **Medições** → **Contratos**",
+        "Clique em **+ Novo**",
+        "Informe o Número do contrato",
+        "Selecione o Contratante",
+        "Defina o período de Vigência",
+        "Vincule os Postos de pesagem",
+        "Clique em **Salvar**"
+      ],
+      "path": "Contratos",
+      "docUrl": "medicoes/contratos",
+      "related": [],
+      "dbTables": []
+    },
+    {
+      "id": "medicoes-criar-medicao",
+      "title": "Gerar Medição",
+      "module": "Medições",
+      "keywords": [
+        "gerar medição",
+        "gerar medicao",
+        "gerar",
+        "medi",
+        "relatório",
+        "contratual",
+        "acessar",
+        "campos",
+        "medicao",
+        "aferição",
+        "sensor",
+        "calibrar"
+      ],
+      "content": "Gerar relatório de medição contratual",
+      "steps": [
+        "Acesse **Medições** → **Gerar Medição**",
+        "Selecione o Contrato",
+        "Informe o Período de referência",
+        "Clique em **Gerar**",
+        "Revise o relatório gerado",
+        "Exporte em PDF ou Excel"
+      ],
+      "path": "Gerar Medição",
+      "docUrl": "medicoes/criar-medicao",
+      "related": [],
+      "dbTables": []
+    },
+    {
+      "id": "medicoes-indices-performance",
+      "title": "Índices de Performance",
+      "module": "Medições",
+      "keywords": [
+        "índices de performance",
+        "indices de performance",
+        "índices",
+        "performance",
+        "indicadores",
+        "desempenho",
+        "contratual",
+        "acessar",
+        "medicao",
+        "aferição",
+        "sensor",
+        "calibrar"
+      ],
+      "content": "Indicadores de desempenho contratual",
+      "steps": [],
+      "path": "Índices de Performance",
+      "docUrl": "medicoes/indices-performance",
+      "related": [],
+      "dbTables": []
+    },
+    {
+      "id": "medicoes-interrupcoes",
+      "title": "Interrupções",
+      "module": "Medições",
+      "keywords": [
+        "interrupções",
+        "interrupcoes",
+        "interrup",
+        "registro",
+        "operacionais",
+        "acessar",
+        "tipos",
+        "campos",
+        "medicao",
+        "aferição",
+        "sensor",
+        "calibrar"
+      ],
+      "content": "Registro de interrupções operacionais",
+      "steps": [
+        "Acesse **Medições** → **Interrupções**",
+        "Clique em **+ Novo**",
+        "Selecione o Equipamento",
+        "Informe o Tipo de interrupção",
+        "Defina o período (Início e Fim)",
+        "Descreva a Justificativa",
+        "Clique em **Salvar**"
+      ],
+      "path": "Interrupções",
+      "docUrl": "medicoes/interrupcoes",
+      "related": [],
+      "dbTables": []
+    },
+    {
+      "id": "operacoes-alertas",
+      "title": "Alertas",
+      "module": "Operações",
+      "keywords": [
+        "alertas",
+        "sidebar_position",
+        "title",
+        "acessar",
+        "tipos",
+        "alerta",
+        "operacao",
+        "equipamento",
+        "faixa",
+        "radar"
+      ],
+      "content": "--- sidebar_position: 5 title: Alertas",
+      "steps": [],
+      "path": "Alertas",
+      "docUrl": "operacoes/alertas",
+      "related": [],
+      "dbTables": []
+    },
+    {
+      "id": "operacoes-cadastro-operacoes",
+      "title": "Cadastro de Operações",
+      "module": "Operações",
+      "keywords": [
+        "cadastro de operações",
+        "cadastro de operacoes",
+        "cadastro",
+        "opera",
+        "sidebar_position",
+        "title",
+        "acessar",
+        "listagem",
+        "operacao",
+        "equipamento",
+        "faixa",
+        "radar"
+      ],
+      "content": "--- sidebar_position: 1 title: Cadastro de Operações",
+      "steps": [
+        "No menu lateral, clique em **Operações**",
+        "Clique em **+ Novo**",
+        "Informe o Nome da operação",
+        "Selecione o Posto de pesagem",
+        "Defina as datas de vigência",
+        "Clique em **Salvar**"
+      ],
+      "path": "Operações",
+      "docUrl": "operacoes/cadastro-operacoes",
+      "related": [],
+      "dbTables": []
+    },
+    {
+      "id": "operacoes-consulta-placas",
+      "title": "Consulta de Placas",
+      "module": "Operações",
+      "keywords": [
+        "consulta de placas",
+        "consulta",
+        "placas",
+        "pesquisar",
+        "passagens",
+        "veículos",
+        "placa",
+        "operacao",
+        "equipamento",
+        "faixa",
+        "radar"
+      ],
+      "content": "Pesquisar passagens de veículos por placa",
+      "steps": [
+        "Na tela de **Operações**, acesse **Consulta de Placas**",
+        "Informe a Placa (total ou parcial)",
+        "Defina o Período desejado",
+        "Clique em **Pesquisar**",
+        "Clique sobre um registro para ver detalhes"
+      ],
+      "path": "Consulta de Placas",
+      "docUrl": "operacoes/consulta-placas",
+      "related": [],
+      "dbTables": []
+    },
+    {
+      "id": "operacoes-eventos-equipamentos",
+      "title": "Eventos de Equipamentos",
+      "module": "Operações",
+      "keywords": [
+        "eventos de equipamentos",
+        "eventos",
+        "equipamentos",
+        "sidebar_position",
+        "title",
+        "acessar",
+        "listagem",
+        "operacao",
+        "equipamento",
+        "faixa",
+        "radar"
+      ],
+      "content": "--- sidebar_position: 3 title: Eventos de Equipamentos",
+      "steps": [],
+      "path": "Eventos de Equipamentos",
+      "docUrl": "operacoes/eventos-equipamentos",
+      "related": [],
+      "dbTables": []
+    },
+    {
+      "id": "operacoes-monitoramento-online",
+      "title": "Monitoramento Online",
+      "module": "Operações",
+      "keywords": [
+        "monitoramento online",
+        "monitoramento",
+        "online",
+        "acompanhamento",
+        "tempo",
+        "real",
+        "opera",
+        "operacao",
+        "equipamento",
+        "faixa",
+        "radar"
+      ],
+      "content": "Acompanhamento em tempo real das operações e equipamentos",
+      "steps": [],
+      "path": "Monitoramento Online",
+      "docUrl": "operacoes/monitoramento-online",
+      "related": [],
+      "dbTables": []
+    },
+    {
+      "id": "pesagem-liberar-pesagem",
+      "title": "Liberar Pesagem",
+      "module": "Pesagem",
+      "keywords": [
+        "liberar pesagem",
+        "liberar",
+        "pesagem",
+        "libera",
+        "manual",
+        "veículos",
+        "processo",
+        "peso",
+        "veiculo",
+        "balanca"
+      ],
+      "content": "Liberação manual de veículos no processo de pesagem",
+      "steps": [
+        "Na tela de **Tickets de Pesagens**, localize o ticket e clique em **Liberar**",
+        "Localize o ticket pendente",
+        "Informe o Motivo da Liberação",
+        "Registre o Responsável pela autorização",
+        "Clique em **Liberar**"
+      ],
+      "path": "Liberar",
+      "docUrl": "pesagem/liberar-pesagem",
+      "related": [],
+      "dbTables": []
+    },
+    {
+      "id": "pesagem-motivos",
+      "title": "Motivos de Pesagem",
+      "module": "Pesagem",
+      "keywords": [
+        "motivos de pesagem",
+        "motivos",
+        "pesagem",
+        "sidebar_position",
+        "title",
+        "acessar",
+        "listagem",
+        "peso",
+        "veiculo",
+        "balanca"
+      ],
+      "content": "--- sidebar_position: 6 title: Motivos de Pesagem",
+      "steps": [
+        "Na tela de **Iniciar Pesagem**, acesse **Motivos**",
+        "Clique em **+ Novo**",
+        "Informe a Descrição do motivo",
+        "Selecione o Tipo",
+        "Marque como Ativo",
+        "Clique em **Salvar**"
+      ],
+      "path": "Motivos",
+      "docUrl": "pesagem/motivos",
+      "related": [],
+      "dbTables": []
+    },
+    {
+      "id": "pesagem-postos",
+      "title": "Postos de Pesagem",
+      "module": "Pesagem",
+      "keywords": [
+        "postos de pesagem",
+        "postos",
+        "pesagem",
+        "cadastro",
+        "gerenciamento",
+        "acessar",
+        "listagem",
+        "peso",
+        "veiculo",
+        "balanca"
+      ],
+      "content": "Cadastro e gerenciamento de postos de pesagem",
+      "steps": [
+        "No menu lateral, clique em **Iniciar Pesagem**",
+        "Clique em **+ Novo**",
+        "Preencha o Nome do posto",
+        "Selecione a Localidade",
+        "Informe o Endereço (opcional)",
+        "Marque como Ativo",
+        "Clique em **Salvar**"
+      ],
+      "path": "Iniciar Pesagem",
+      "docUrl": "pesagem/postos",
+      "related": [],
+      "dbTables": []
+    },
+    {
+      "id": "pesagem-reclassificar",
+      "title": "Reclassificação de Veículos",
+      "module": "Pesagem",
+      "keywords": [
+        "reclassificação de veículos",
+        "reclassificacao de veiculos",
+        "reclassifica",
+        "veículos",
+        "sidebar_position",
+        "title",
+        "acessar",
+        "reclassificar",
+        "pesagem",
+        "peso",
+        "veiculo",
+        "balanca"
+      ],
+      "content": "--- sidebar_position: 4 title: Reclassificação de Veículos",
+      "steps": [
+        "Na tela de **Tickets de Pesagens**, selecione o ticket e clique em **Reclassificar**",
+        "Informe o número do Ticket",
+        "Verifique a classificação atual",
+        "Selecione a Nova Classificação",
+        "Informe o Motivo da reclassificação",
+        "Clique em **Salvar**"
+      ],
+      "path": "Reclassificar",
+      "docUrl": "pesagem/reclassificar",
+      "related": [],
+      "dbTables": []
+    },
+    {
+      "id": "pesagem-ticket-aberto",
+      "title": "Tickets em Aberto",
+      "module": "Pesagem",
+      "keywords": [
+        "tickets em aberto",
+        "tickets",
+        "aberto",
+        "gerenciamento",
+        "pesagem",
+        "pendentes",
+        "acessar",
+        "peso",
+        "veiculo",
+        "balanca"
+      ],
+      "content": "Gerenciamento de tickets de pesagem pendentes",
+      "steps": [
+        "No menu lateral, clique em **Tickets de Pesagens**",
+        "Localize o ticket desejado",
+        "Clique em **Visualizar**",
+        "Verifique os dados do veículo e pesos",
+        "Clique em **Finalizar**",
+        "Confirme a operação"
+      ],
+      "path": "Tickets de Pesagens",
+      "docUrl": "pesagem/ticket-aberto",
+      "related": [],
+      "dbTables": []
+    },
+    {
+      "id": "pesagem-ticket-fechado",
+      "title": "Tickets Fechados",
+      "module": "Pesagem",
+      "keywords": [
+        "tickets fechados",
+        "tickets",
+        "fechados",
+        "consulta",
+        "pesagem",
+        "finalizados",
+        "acessar",
+        "peso",
+        "veiculo",
+        "balanca"
+      ],
+      "content": "Consulta de tickets de pesagem finalizados",
+      "steps": [
+        "No menu lateral, clique em **Tickets de Pesagens** e filtre por Fechados",
+        "Defina os filtros de período",
+        "Opcionalmente, filtre por placa ou posto",
+        "Clique em **Pesquisar**",
+        "Clique sobre o ticket para ver os detalhes"
+      ],
+      "path": "Fechados",
+      "docUrl": "pesagem/ticket-fechado",
+      "related": [],
+      "dbTables": []
+    },
+    {
+      "id": "primeiros-passos-dashboard",
+      "title": "Painel Principal (Dashboard)",
+      "module": "Primeiros Passos",
+      "keywords": [
+        "painel principal (dashboard)",
+        "painel",
+        "principal",
+        "dashboard",
+        "axton",
+        "indicadores",
+        "operacionais",
+        "login",
+        "acesso",
+        "senha",
+        "entrar"
+      ],
+      "content": "Painel principal do AxTon com indicadores operacionais, alertas e notas fiscais",
+      "steps": [],
+      "path": "menu lateral",
+      "docUrl": "primeiros-passos/dashboard",
+      "related": [],
+      "dbTables": []
+    },
+    {
+      "id": "primeiros-passos-login",
+      "title": "Login",
+      "module": "Primeiros Passos",
+      "keywords": [
+        "login",
+        "acessar",
+        "sistema",
+        "axton",
+        "campos",
+        "passo",
+        "acesso",
+        "senha",
+        "entrar"
+      ],
+      "content": "Como acessar o sistema AxTon",
+      "steps": [
+        "Informe o **Nome do Usuário** no campo correspondente",
+        "Informe a **Senha** de acesso",
+        "Clique no botão **ENTRAR**"
+      ],
+      "path": "Menu lateral → Primeiros Passos → Login",
+      "docUrl": "primeiros-passos/login",
+      "related": [],
+      "dbTables": []
+    },
+    {
+      "id": "primeiros-passos-navegacao",
+      "title": "Navegação",
+      "module": "Primeiros Passos",
+      "keywords": [
+        "navegação",
+        "navegacao",
+        "navega",
+        "navegar",
+        "sistema",
+        "axton",
+        "estrutura",
+        "interface",
+        "login",
+        "acesso",
+        "senha",
+        "entrar"
+      ],
+      "content": "Como navegar pelo sistema AxTon",
+      "steps": [],
+      "path": "### Itens diretos",
+      "docUrl": "primeiros-passos/navegacao",
+      "related": [],
+      "dbTables": []
+    },
+    {
+      "id": "referencia-tecnica-banco-de-dados",
+      "title": "Banco de Dados",
+      "module": "Referência Técnica",
+      "keywords": [
+        "banco de dados",
+        "banco",
+        "dados",
+        "referência",
+        "técnica",
+        "collections",
+        "mongodb",
+        "api",
+        "integracao",
+        "tecnico",
+        "referencia"
+      ],
+      "content": "Referência técnica das collections MongoDB e API do AxTon",
+      "steps": [],
+      "path": "Menu lateral → Referência Técnica → Banco de Dados",
+      "docUrl": "referencia-tecnica/banco-de-dados",
+      "related": [],
+      "dbTables": []
+    },
+    {
+      "id": "relatorios-falhas-sequenciais",
+      "title": "Falhas de Sequenciais",
+      "module": "Relatórios",
+      "keywords": [
+        "falhas de sequenciais",
+        "falhas",
+        "sequenciais",
+        "sidebar_position",
+        "title",
+        "acessar",
+        "dados",
+        "relatorio",
+        "exportar",
+        "consulta"
+      ],
+      "content": "--- sidebar_position: 10 title: Falhas de Sequenciais",
+      "steps": [],
+      "path": "Falhas de Sequenciais",
+      "docUrl": "relatorios/falhas-sequenciais",
+      "related": [],
+      "dbTables": []
+    },
+    {
+      "id": "relatorios-fluxo-diario-veiculos",
+      "title": "Fluxo Diário de Veículos",
+      "module": "Relatórios",
+      "keywords": [
+        "fluxo diário de veículos",
+        "fluxo diario de veiculos",
+        "fluxo",
+        "diário",
+        "veículos",
+        "volume",
+        "tráfego",
+        "hora",
+        "relatorio",
+        "exportar",
+        "consulta",
+        "dados"
+      ],
+      "content": "Volume de tráfego por hora e dia",
+      "steps": [],
+      "path": "Fluxo Diário de Veículos",
+      "docUrl": "relatorios/fluxo-diario-veiculos",
+      "related": [],
+      "dbTables": []
+    },
+    {
+      "id": "relatorios-mapa-fluxo-passagens",
+      "title": "Mapa de Fluxo de Passagens",
+      "module": "Relatórios",
+      "keywords": [
+        "mapa de fluxo de passagens",
+        "mapa",
+        "fluxo",
+        "passagens",
+        "visualiza",
+        "geográfica",
+        "veículos",
+        "relatorio",
+        "exportar",
+        "consulta",
+        "dados"
+      ],
+      "content": "Visualização geográfica do fluxo de veículos",
+      "steps": [],
+      "path": "Mapa de Fluxo de Passagens",
+      "docUrl": "relatorios/mapa-fluxo-passagens",
+      "related": [],
+      "dbTables": []
+    },
+    {
+      "id": "relatorios-power-bi",
+      "title": "Power BI",
+      "module": "Relatórios",
+      "keywords": [
+        "power bi",
+        "power",
+        "dashboards",
+        "analíticos",
+        "integrados",
+        "acessar",
+        "relatorio",
+        "exportar",
+        "consulta",
+        "dados"
+      ],
+      "content": "Dashboards analíticos integrados com Power BI",
+      "steps": [],
+      "path": "Power BI",
+      "docUrl": "relatorios/power-bi",
+      "related": [],
+      "dbTables": []
+    },
+    {
+      "id": "relatorios-processamento-imagens",
+      "title": "Processamento de Imagens",
+      "module": "Relatórios",
+      "keywords": [
+        "processamento de imagens",
+        "processamento",
+        "imagens",
+        "volume",
+        "processadas",
+        "sistema",
+        "acessar",
+        "relatorio",
+        "exportar",
+        "consulta",
+        "dados"
+      ],
+      "content": "Volume de imagens processadas no sistema",
+      "steps": [],
+      "path": "Processamento de Imagens",
+      "docUrl": "relatorios/processamento-imagens",
+      "related": [],
+      "dbTables": []
+    },
+    {
+      "id": "relatorios-processamento-por-usuario",
+      "title": "Processamento por Usuário",
+      "module": "Relatórios",
+      "keywords": [
+        "processamento por usuário",
+        "processamento por usuario",
+        "processamento",
+        "usuário",
+        "produtividade",
+        "analista",
+        "acessar",
+        "dados",
+        "relatorio",
+        "exportar",
+        "consulta"
+      ],
+      "content": "Produtividade por analista",
+      "steps": [],
+      "path": "Processamento por Usuário",
+      "docUrl": "relatorios/processamento-por-usuario",
+      "related": [],
+      "dbTables": []
+    },
+    {
+      "id": "relatorios-relatorio-discrepancias",
+      "title": "Relatório de Discrepâncias",
+      "module": "Relatórios",
+      "keywords": [
+        "relatório de discrepâncias",
+        "relatorio de discrepancias",
+        "relatório",
+        "discrepâncias",
+        "divergências",
+        "pesagens",
+        "dados",
+        "esperados",
+        "relatorio",
+        "exportar",
+        "consulta"
+      ],
+      "content": "Divergências entre pesagens e dados esperados",
+      "steps": [],
+      "path": "Relatório de Discrepâncias",
+      "docUrl": "relatorios/relatorio-discrepancias",
+      "related": [],
+      "dbTables": []
+    },
+    {
+      "id": "relatorios-relatorio-infracoes",
+      "title": "Relatório de Infrações",
+      "module": "Relatórios",
+      "keywords": [
+        "relatório de infrações",
+        "relatorio de infracoes",
+        "relatório",
+        "infra",
+        "registradas",
+        "período",
+        "status",
+        "acessar",
+        "relatorio",
+        "exportar",
+        "consulta",
+        "dados"
+      ],
+      "content": "Infrações registradas por período e status",
+      "steps": [],
+      "path": "Relatório de Infrações",
+      "docUrl": "relatorios/relatorio-infracoes",
+      "related": [],
+      "dbTables": []
+    },
+    {
+      "id": "relatorios-relatorio-nfe",
+      "title": "Relatório de Notas Fiscais",
+      "module": "Relatórios",
+      "keywords": [
+        "relatório de notas fiscais",
+        "relatorio de notas fiscais",
+        "relatório",
+        "notas",
+        "fiscais",
+        "eletrônicas",
+        "capturadas",
+        "sistema",
+        "relatorio",
+        "exportar",
+        "consulta",
+        "dados"
+      ],
+      "content": "Notas fiscais eletrônicas capturadas pelo sistema",
+      "steps": [],
+      "path": "Relatório de Notas Fiscais",
+      "docUrl": "relatorios/relatorio-nfe",
+      "related": [],
+      "dbTables": []
+    },
+    {
+      "id": "relatorios-relatorio-passagens",
+      "title": "Relatório de Passagens",
+      "module": "Relatórios",
+      "keywords": [
+        "relatório de passagens",
+        "relatorio de passagens",
+        "relatório",
+        "passagens",
+        "volume",
+        "período",
+        "posto",
+        "classifica",
+        "relatorio",
+        "exportar",
+        "consulta",
+        "dados"
+      ],
+      "content": "Volume de passagens por período, posto e classificação",
+      "steps": [],
+      "path": "Relatório de Pesagem",
+      "docUrl": "relatorios/relatorio-passagens",
+      "related": [],
+      "dbTables": []
+    },
+    {
+      "id": "sistema-camera-ip",
+      "title": "Câmera IP",
+      "module": "Sistema",
+      "keywords": [
+        "câmera ip",
+        "camera ip",
+        "câmera",
+        "instala",
+        "configura",
+        "solu",
+        "problemas",
+        "câmeras",
+        "sistema",
+        "configuracao",
+        "parametro",
+        "opcao"
+      ],
+      "content": "Instalação, configuração e solução de problemas de câmeras IP no AxTon",
+      "steps": [
+        "**Verifique o acesso à câmera** — Abra o Google Chrome e digite o IP da câmera na barra de endereço (ex.: `http://192.168.11.21`). Confirme que a imagem ao vivo (Live View) é exibida corretamente.",
+        "**Acesse as Configurações do Sistema** — No AxTon, clique em **Sistema** no menu lateral e depois na aba **Câmera IP**.",
+        "**Preencha o IP** — Informe o endereço IP da câmera (ex.: `192.168.11.21`).",
+        "**Preencha a resolução** — Defina **Altura** (ex.: `1080`) e **Largura** (ex.: `1280`).",
+        "**Informe as credenciais** — Preencha **Usuário de login** (ex.: `admin`) e **Senha de login**.",
+        "**Teste a conexão** — Clique em **Testar câmera** para validar.",
+        "**Salve** — Se o teste for bem-sucedido, clique em **+ Salvar**.",
+        "**Acesse a interface web da câmera** pelo navegador e vá em configurações de **Vídeo / Encode / Stream**.",
+        "**Altere o codec do Stream Principal para H.264** (em vez de H.265). Na UNV: Setup → Video & Audio → Video. Na Intelbras: Configurações → Câmera → Vídeo.",
+        "**Verifique a porta RTSP** — confirme que é **554** (padrão). Na UNV: Setup → Network → Port. Na Intelbras: Configurações → Rede → Portas."
+      ],
+      "path": "aba Câmera IP",
+      "docUrl": "sistema/camera-ip",
+      "related": [],
+      "dbTables": []
+    },
+    {
+      "id": "sistema-configuracoes",
       "title": "Configurações do Sistema",
       "module": "Sistema",
-      "keywords": ["configurações", "sistema", "gerais", "dados órgão", "haenni", "infração", "câmera", "camera ip", "salvar"],
-      "content": "A tela de Configurações do Sistema centraliza os parâmetros fundamentais do AxTon. É dividida em abas: Gerais, Dados do Órgão, HAENNI, Infração e Câmera IP. Após alterar qualquer configuração, clique em + Salvar para persistir.",
-      "steps": ["No menu lateral, clique em Sistema", "Selecione a aba desejada (Gerais, Dados do Órgão, HAENNI, Infração ou Câmera IP)", "Preencha os campos", "Clique em + Salvar"],
-      "path": "Menu lateral → Sistema",
+      "keywords": [
+        "configurações do sistema",
+        "configuracoes do sistema",
+        "configura",
+        "sistema",
+        "sidebar_position",
+        "title",
+        "acessar",
+        "abas",
+        "configuracao",
+        "parametro",
+        "opcao"
+      ],
+      "content": "--- sidebar_position: 1 title: Configurações do Sistema",
+      "steps": [],
+      "path": "Sistema",
       "docUrl": "sistema/configuracoes",
-      "related": ["camera-ip-config", "camera-ip-erro-track", "postos-pesagem"],
-      "dbTables": ["ConfiguracoesSistema"]
+      "related": [],
+      "dbTables": []
     },
     {
-      "id": "camera-ip-config",
-      "title": "Configurar Câmera IP",
-      "module": "Sistema",
-      "keywords": ["câmera", "camera", "ip", "configurar câmera", "instalar câmera", "testar câmera", "uniview", "unv", "intelbras", "vip 1230", "resolução", "stream", "vídeo", "rtsp"],
-      "content": "A aba Câmera IP permite configurar a câmera usada para captura de imagens dos veículos. Informe o IP da câmera, resolução (Altura e Largura), usuário e senha de login. Modelos testados: Uniview IPC2122LB-ADF28KM-G e Intelbras VIP-1230-B. Antes de configurar no AxTon, confirme que a câmera está acessível pelo navegador (Chrome) digitando o IP na barra de endereço.",
-      "steps": ["Verifique acesso à câmera pelo navegador (ex.: http://192.168.11.21)", "Acesse Sistema → Configurações do Sistema → aba Câmera IP", "Preencha o IP da câmera", "Defina Altura (ex.: 1080) e Largura (ex.: 1280)", "Informe Usuário de login e Senha de login", "Clique em Testar câmera para validar", "Clique em + Salvar"],
-      "path": "Menu lateral → Sistema → aba Câmera IP",
-      "docUrl": "sistema/camera-ip",
-      "related": ["configuracoes-sistema", "camera-ip-erro-track", "postos-pesagem"],
-      "dbTables": ["ConfiguracoesSistema", "CameraIP"]
+      "id": "veiculos-classificacoes-veiculos",
+      "title": "Classificações de Veículos",
+      "module": "Veículos",
+      "keywords": [
+        "classificações de veículos",
+        "classificacoes de veiculos",
+        "classifica",
+        "veículos",
+        "eixo",
+        "acessar",
+        "listagem",
+        "colunas",
+        "veiculo",
+        "carro",
+        "caminhao",
+        "placa"
+      ],
+      "content": "Classificações de veículos por eixo e PBT",
+      "steps": [
+        "No menu lateral, clique em **Classificações**",
+        "Clique em **+ Novo**",
+        "Preencha o Código e a Descrição",
+        "Marque como Ativo",
+        "Clique em **Salvar**"
+      ],
+      "path": "Classificações de Veículos",
+      "docUrl": "veiculos/classificacoes-veiculos",
+      "related": [],
+      "dbTables": []
     },
     {
-      "id": "camera-ip-erro-track",
-      "title": "Configurar Câmeras",
-      "module": "Sistema",
-      "keywords": ["erro", "falha", "conectar", "câmera", "camera", "any suitable track", "track not found", "não conecta", "stream", "h265", "h264", "codec", "rtsp", "onvif", "porta 554", "testar câmera falha", "vídeo não aparece"],
-      "content": "Ao tentar conectar uma câmera, o sistema pode exibir a mensagem 'Any suitable track is not found'. Isso significa que o AxTon não conseguiu localizar um stream de vídeo compatível, mesmo que a câmera funcione normalmente pelo navegador. As causas mais comuns são: codec H.265 ativo (o AxTon requer H.264), porta RTSP diferente de 554, protocolo ONVIF desativado na câmera ou firewall bloqueando a comunicação.",
-      "steps": ["Acesse a interface web da câmera pelo navegador (digite o IP da câmera na barra de endereço)", "Vá em Configurações de Vídeo/Encode e altere o codec para H.264 (não H.265)", "Confirme que a porta RTSP está configurada como 554 (padrão)", "Habilite o protocolo ONVIF nas configurações de rede da câmera", "Volte ao AxTon → aba Câmera IP e clique em Testar câmera", "Se o problema persistir, configure o Substream com resolução menor (640×480) e codec H.264", "Para validar o stream, teste no VLC: Mídia → Abrir Transmissão de Rede → rtsp://admin:SENHA@IP:554/stream1"],
-      "path": "Menu lateral → Sistema → aba Câmera IP → Testar câmera",
-      "docUrl": "sistema/camera-ip",
-      "related": ["camera-ip-config", "configuracoes-sistema"],
-      "dbTables": ["ConfiguracoesSistema", "CameraIP"]
+      "id": "veiculos-cores",
+      "title": "Cores",
+      "module": "Veículos",
+      "keywords": [
+        "cores",
+        "sidebar_position",
+        "title",
+        "acessar",
+        "listagem",
+        "colunas",
+        "veiculo",
+        "carro",
+        "caminhao",
+        "placa"
+      ],
+      "content": "--- sidebar_position: 4 title: Cores",
+      "steps": [
+        "Acesse **Veículos** → **Cores**",
+        "Clique em **+ Novo**",
+        "Preencha o Código e a Descrição",
+        "Marque como Ativo",
+        "Clique em **Salvar**"
+      ],
+      "path": "Cores",
+      "docUrl": "veiculos/cores",
+      "related": [],
+      "dbTables": []
+    },
+    {
+      "id": "veiculos-marcas-veiculos",
+      "title": "Marcas de Veículos",
+      "module": "Veículos",
+      "keywords": [
+        "marcas de veículos",
+        "marcas de veiculos",
+        "marcas",
+        "veículos",
+        "sidebar_position",
+        "title",
+        "acessar",
+        "listagem",
+        "veiculo",
+        "carro",
+        "caminhao",
+        "placa"
+      ],
+      "content": "--- sidebar_position: 2 title: Marcas de Veículos",
+      "steps": [
+        "Acesse **Veículos** → **Marcas de Veículos**",
+        "Clique em **+ Novo**",
+        "Preencha o Código e a Descrição",
+        "Marque como Ativo",
+        "Clique em **Salvar**"
+      ],
+      "path": "Marcas de Veículos",
+      "docUrl": "veiculos/marcas-veiculos",
+      "related": [],
+      "dbTables": []
+    },
+    {
+      "id": "veiculos-modelos-veiculos",
+      "title": "Modelos de Veículos",
+      "module": "Veículos",
+      "keywords": [
+        "modelos de veículos",
+        "modelos de veiculos",
+        "modelos",
+        "veículos",
+        "sidebar_position",
+        "title",
+        "acessar",
+        "listagem",
+        "veiculo",
+        "carro",
+        "caminhao",
+        "placa"
+      ],
+      "content": "--- sidebar_position: 3 title: Modelos de Veículos",
+      "steps": [
+        "Acesse **Veículos** → **Modelos de Veículos**",
+        "Clique em **+ Novo**",
+        "Preencha o Código e a Descrição",
+        "Marque como Ativo",
+        "Clique em **Salvar**"
+      ],
+      "path": "Modelos de Veículos",
+      "docUrl": "veiculos/modelos-veiculos",
+      "related": [],
+      "dbTables": []
+    },
+    {
+      "id": "veiculos-municipios",
+      "title": "Municípios",
+      "module": "Veículos",
+      "keywords": [
+        "municípios",
+        "municipios",
+        "sidebar_position",
+        "title",
+        "acessar",
+        "listagem",
+        "colunas",
+        "veiculo",
+        "carro",
+        "caminhao",
+        "placa"
+      ],
+      "content": "--- sidebar_position: 6 title: Municípios",
+      "steps": [
+        "Acesse **Veículos** → **Municípios**",
+        "Clique em **+ Novo**",
+        "Preencha o Código e a Descrição",
+        "Marque como Ativo",
+        "Clique em **Salvar**"
+      ],
+      "path": "Municípios",
+      "docUrl": "veiculos/municipios",
+      "related": [],
+      "dbTables": []
+    },
+    {
+      "id": "veiculos-tipos-veiculos",
+      "title": "Tipos de Veículos",
+      "module": "Veículos",
+      "keywords": [
+        "tipos de veículos",
+        "tipos de veiculos",
+        "tipos",
+        "veículos",
+        "sidebar_position",
+        "title",
+        "acessar",
+        "listagem",
+        "veiculo",
+        "carro",
+        "caminhao",
+        "placa"
+      ],
+      "content": "--- sidebar_position: 1 title: Tipos de Veículos",
+      "steps": [
+        "Acesse **Veículos** → **Tipos de Veículos**",
+        "Clique em **+ Novo**",
+        "Preencha o Código e a Descrição",
+        "Marque como Ativo",
+        "Clique em **Salvar**"
+      ],
+      "path": "Tipos de Veículos",
+      "docUrl": "veiculos/tipos-veiculos",
+      "related": [],
+      "dbTables": []
     }
   ]
 }
@@ -39737,6 +48924,382 @@ npm run typecheck
 |---------|-----------|:-------:|:-------:|
 | **AxHub** | Gestão de Equipamentos de Trânsito | 13 | 119 |
 | **AxTon** | Gestão de Pesagem Veicular | 3 | em andamento |
+```
+
+
+---
+
+## PROJETO: gerar-knowledge-base.mjs
+
+### `gerar-knowledge-base.mjs`
+
+```mjs
+/**
+ * gerar-knowledge-base.mjs
+ * Lê todos os .md de cada portal de docs e gera os knowledge-base.json
+ * para os widgets de suporte de AxHub, AxTon e AxCross.
+ *
+ * Uso: node gerar-knowledge-base.mjs
+ *      node gerar-knowledge-base.mjs --dry-run   (exibe no console sem gravar)
+ */
+
+import fs from "fs";
+import path from "path";
+import { fileURLToPath } from "url";
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const DRY_RUN = process.argv.includes("--dry-run");
+
+// ─── Configuração dos portais ─────────────────────────────────────────────────
+
+const PORTALS = [
+  {
+    system: "AxHub",
+    docsDir: path.join(__dirname, "AxHub/docs-portal/docs"),
+    outputFile: path.join(__dirname, "AxHub/widget/knowledge-base.json"),
+    version: "4.0.0",
+    description: "Base de conhecimento do assistente AxionIA para o sistema AxHub — gestão de equipamentos de fiscalização",
+  },
+  {
+    system: "AxTon",
+    docsDir: path.join(__dirname, "AxTon/docs-portal/docs"),
+    outputFile: path.join(__dirname, "AxTon/widget/knowledge-base.json"),
+    version: "3.0.0",
+    description: "Base de conhecimento do assistente AxionIA para o sistema AxTon — pesagem veicular",
+    dataSourceLinks: {
+      documentation: "/AxTon.Docs/",
+      database: "AxTon.sql",
+      widget: "axton-suporte.js",
+      searchBase: "base-pesquisa-suporte.md",
+    },
+  },
+  {
+    system: "AxCross",
+    docsDir: path.join(__dirname, "AxCross/docs-portal/docs"),
+    outputFile: path.join(__dirname, "AxCross/widget/knowledge-base.json"),
+    version: "2.0.0",
+    description: "Base de conhecimento do assistente AxionIA para o sistema AxCross — monitoramento por cruzamento de placas",
+  },
+];
+
+// ─── Mapeamento de módulos (pasta → nome legível) ─────────────────────────────
+
+const MODULE_NAMES = {
+  "primeiros-passos": "Primeiros Passos",
+  "administracao": "Administração",
+  "cadastros-basicos": "Cadastros Básicos",
+  "cadastros": "Cadastros",
+  "controle-acesso": "Controle de Acesso",
+  "balanca": "Balança",
+  "pesagem": "Pesagem",
+  "veiculos": "Veículos",
+  "medicoes": "Medições",
+  "operacoes": "Operações",
+  "infracoes": "Infrações",
+  "relatorios": "Relatórios",
+  "referencia-tecnica": "Referência Técnica",
+  "glossario": "Glossário",
+  "cronotacografo": "Cronotacógrafo",
+  "sistema": "Sistema",
+  "root": "Geral",
+};
+
+// ─── Keywords extras por módulo ───────────────────────────────────────────────
+
+const MODULE_KEYWORDS = {
+  "primeiros-passos": ["login", "acesso", "senha", "entrar", "primeiro acesso", "inicio", "começar"],
+  "administracao": ["configuracao", "administracao", "sistema", "admin", "configurar"],
+  "cadastros-basicos": ["cadastro", "registrar", "criar", "novo", "adicionar"],
+  "cadastros": ["cadastro", "registrar", "criar", "novo", "adicionar"],
+  "controle-acesso": ["usuario", "permissao", "perfil", "acesso", "grupo", "papel"],
+  "balanca": ["balanca", "peso", "medicao", "sensor", "pesagem"],
+  "pesagem": ["pesagem", "peso", "veiculo", "balanca", "pesar", "ticket"],
+  "veiculos": ["veiculo", "carro", "caminhao", "placa", "tipo veiculo"],
+  "medicoes": ["medicao", "aferição", "sensor", "calibrar"],
+  "operacoes": ["operacao", "equipamento", "faixa", "radar", "camera"],
+  "infracoes": ["infracao", "multa", "auto", "autuacao", "triagem", "exportacao"],
+  "relatorios": ["relatorio", "exportar", "consulta", "dados", "planilha"],
+  "referencia-tecnica": ["api", "integracao", "tecnico", "referencia", "documentacao"],
+  "glossario": ["glossario", "termo", "definicao", "conceito", "significado"],
+  "sistema": ["sistema", "configuracao", "parametro", "opcao"],
+  "root": [],
+};
+
+// ─── Helpers de parsing ───────────────────────────────────────────────────────
+
+function parseFrontmatter(content) {
+  const match = content.match(/^---\s*\n([\s\S]*?)\n---\s*\n/);
+  if (!match) return { title: null, description: null, rest: content };
+
+  const fm = match[1];
+  const title = (fm.match(/^title:\s*["']?(.+?)["']?\s*$/m) || [])[1]?.trim() ?? null;
+  const description = (fm.match(/^description:\s*["']?(.+?)["']?\s*$/m) || [])[1]?.trim() ?? null;
+  return { title, description, rest: content.slice(match[0].length) };
+}
+
+function extractH1(text) {
+  const m = text.match(/^#\s+(.+)$/m);
+  return m ? m[1].trim() : null;
+}
+
+function extractHeadings(text) {
+  const headings = [];
+  for (const m of text.matchAll(/^#{2,4}\s+(.+)$/gm)) {
+    headings.push(m[1].trim());
+  }
+  return headings;
+}
+
+function extractFirstParagraph(text) {
+  // Remove headers, images, tables, blank lines
+  const lines = text.split("\n");
+  const paragraphLines = [];
+  let inTable = false;
+
+  for (const line of lines) {
+    const trimmed = line.trim();
+    if (!trimmed) continue;
+    if (trimmed.startsWith("#")) continue;
+    if (trimmed.startsWith("!")) continue; // image
+    if (trimmed.startsWith("|")) { inTable = true; continue; }
+    if (inTable && !trimmed.startsWith("|")) { inTable = false; }
+    if (inTable) continue;
+    paragraphLines.push(trimmed);
+    if (paragraphLines.length >= 3) break;
+  }
+
+  return paragraphLines.join(" ").replace(/\*\*/g, "").replace(/\*/g, "").trim();
+}
+
+function extractSteps(text) {
+  // Procura seções de "como fazer" com listas numeradas
+  const steps = [];
+  const orderedListRe = /^\d+\.\s+(.+)$/gm;
+  for (const m of text.matchAll(orderedListRe)) {
+    const step = m[1].replace(/\[([^\]]+)\]\([^)]+\)/g, "$1").trim();
+    if (step.length > 3) steps.push(step);
+  }
+  return steps.slice(0, 10); // máximo 10 passos
+}
+
+function extractPath(text) {
+  // Busca "Menu lateral" ou "Como acessar" + conteúdo
+  const pathPattern = text.match(/(?:Menu lateral|Como acessar|Acesso)[^\n]*[-→:]\s*([^\n]{5,80})/i);
+  if (pathPattern) {
+    return pathPattern[1]
+      .replace(/\*\*/g, "")
+      .replace(/\*/g, "")
+      .replace(/\[([^\]]+)\]\([^)]+\)/g, "$1")
+      .replace(/[-→]/g, "→")
+      .trim();
+  }
+  // Fallback: pega linha com "Menu lateral"
+  const menuLine = text.match(/Menu lateral[^\n]{0,80}/i);
+  if (menuLine) {
+    return menuLine[0]
+      .replace(/\*\*/g, "")
+      .replace(/\*/g, "")
+      .replace(/[-→]/g, "→")
+      .trim();
+  }
+  return null;
+}
+
+function extractRelated(text) {
+  // Busca tabela "Navegacao relacionada"
+  const related = [];
+  const navSection = text.match(/##\s+Navegac[aã]o relacionada([\s\S]*?)(?:##|$)/i);
+  if (navSection) {
+    for (const m of navSection[1].matchAll(/\[([^\]]+)\]\(([^)]+)\)/g)) {
+      // extrai o path do link e gera um id
+      const linkPath = m[2]
+        .replace(/^\.\.\//, "")
+        .replace(/^\.\//, "")
+        .replace(/\.md$/, "")
+        .replace(/\//g, "-");
+      related.push(linkPath);
+    }
+  }
+  return related.slice(0, 5);
+}
+
+function generateKeywords(title, description, headings, module) {
+  const rawTerms = [title ?? "", description ?? "", ...(headings ?? [])];
+  const text = rawTerms.join(" ").toLowerCase();
+
+  // Remove caracteres especiais e divide em palavras
+  const words = text
+    .replace(/[^\w\sáéíóúâêôãõàü]/gi, " ")
+    .split(/\s+/)
+    .filter((w) => w.length > 3 && !STOPWORDS.has(w));
+
+  // Deduplicar
+  const unique = [...new Set(words)];
+
+  // Adicionar keywords do módulo
+  const moduleKW = MODULE_KEYWORDS[module] ?? [];
+
+  // Adicionar variações do título
+  const titleKws = [
+    title?.toLowerCase(),
+    title?.toLowerCase().replace(/ção/g, "cao").replace(/ções/g, "coes").replace(/ã/g, "a").replace(/é/g, "e").replace(/á/g, "a").replace(/ú/g, "u").replace(/ó/g, "o").replace(/í/g, "i").replace(/ê/g, "e").replace(/â/g, "a").replace(/ô/g, "o"),
+  ].filter(Boolean);
+
+  return [...new Set([...titleKws, ...unique.slice(0, 6), ...moduleKW.slice(0, 4)])].slice(0, 15);
+}
+
+const STOPWORDS = new Set([
+  "para", "como", "com", "uma", "este", "essa", "esse", "esta", "pelo", "pela",
+  "seus", "suas", "quando", "onde", "qual", "quais", "após", "antes", "entre",
+  "cada", "todo", "toda", "todos", "todas", "mais", "menos", "muito", "pouco",
+  "pode", "deve", "será", "foram", "são", "está", "estão", "pelo", "pela",
+  "mais", "para", "pelo", "pela", "num", "numa", "nos", "nas", "dos", "das",
+  "pelo", "pela", "ser", "ter", "que", "não", "sim", "tem", "vez", "tipo",
+]);
+
+function slugify(str) {
+  return str
+    .toLowerCase()
+    .normalize("NFD").replace(/[\u0300-\u036f]/g, "") // remove acentos
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-|-$/g, "");
+}
+
+function moduleFromDir(dirName) {
+  return MODULE_NAMES[dirName] ?? dirName;
+}
+
+// ─── Parser principal de arquivo .md ─────────────────────────────────────────
+
+function parseMdFile(filePath, docsDir, system) {
+  const raw = fs.readFileSync(filePath, "utf-8");
+  const { title: fmTitle, description: fmDesc, rest } = parseFrontmatter(raw);
+
+  const h1 = extractH1(rest);
+  const title = fmTitle ?? h1 ?? path.basename(filePath, ".md");
+  const description = fmDesc ?? extractFirstParagraph(rest);
+  const headings = extractHeadings(rest);
+
+  // Caminho relativo dentro de docs/
+  const relPath = path.relative(docsDir, filePath).replace(/\\/g, "/");
+  const docUrl = relPath.replace(/\.md$/, "");
+
+  // Módulo = pasta pai (ou 'root' se for direto em docs/)
+  const parts = relPath.split("/");
+  const moduleDir = parts.length > 1 ? parts[0] : "root";
+  const moduleLabel = moduleFromDir(moduleDir);
+
+  // ID = slugify do docUrl
+  const id = slugify(docUrl);
+
+  const steps = extractSteps(rest);
+  const pathStr = extractPath(rest);
+  const related = extractRelated(rest);
+  const keywords = generateKeywords(title, description, headings, moduleDir);
+
+  return {
+    id,
+    title,
+    module: moduleLabel,
+    keywords,
+    content: description,
+    steps,
+    path: pathStr ?? `Menu lateral → ${moduleLabel} → ${title}`,
+    docUrl,
+    related,
+    dbTables: [],
+  };
+}
+
+// ─── Coleta todos os .md de um portal ────────────────────────────────────────
+
+function collectMdFiles(docsDir) {
+  const results = [];
+
+  function walk(dir) {
+    const entries = fs.readdirSync(dir, { withFileTypes: true });
+    for (const entry of entries) {
+      const full = path.join(dir, entry.name);
+      if (entry.isDirectory()) {
+        // Pula pastas de imagens e pastas especiais
+        if (["img", "images", ".docusaurus", "node_modules", "build"].includes(entry.name)) continue;
+        walk(full);
+      } else if (entry.isFile() && entry.name.endsWith(".md")) {
+        // Pula intro.md e glossário (conteúdo genérico)
+        if (["intro.md"].includes(entry.name)) continue;
+        results.push(full);
+      }
+    }
+  }
+
+  walk(docsDir);
+  return results.sort();
+}
+
+// ─── Gera um portal completo ──────────────────────────────────────────────────
+
+function generatePortal(portal) {
+  const { system, docsDir, outputFile, version, description, dataSourceLinks } = portal;
+
+  console.log(`\n${"─".repeat(60)}`);
+  console.log(`  ${system} → ${path.relative(__dirname, docsDir)}`);
+  console.log(`${"─".repeat(60)}`);
+
+  if (!fs.existsSync(docsDir)) {
+    console.warn(`  ⚠️  Pasta não encontrada: ${docsDir}`);
+    return;
+  }
+
+  const mdFiles = collectMdFiles(docsDir);
+  console.log(`  📄 ${mdFiles.length} arquivos .md encontrados`);
+
+  const entries = [];
+  let errors = 0;
+
+  for (const filePath of mdFiles) {
+    try {
+      const entry = parseMdFile(filePath, docsDir, system);
+      entries.push(entry);
+      console.log(`  ✅ ${entry.docUrl} — "${entry.title}"`);
+    } catch (err) {
+      console.error(`  ❌ ${filePath}: ${err.message}`);
+      errors++;
+    }
+  }
+
+  const output = {
+    version,
+    updated: new Date().toISOString().split("T")[0],
+    system,
+    description,
+    ...(dataSourceLinks ? { dataSourceLinks } : {}),
+    totalEntries: entries.length,
+    entries,
+  };
+
+  if (DRY_RUN) {
+    console.log(`\n  [DRY-RUN] Saída para: ${path.relative(__dirname, outputFile)}`);
+    console.log(`  Total: ${entries.length} entradas, ${errors} erros`);
+  } else {
+    fs.writeFileSync(outputFile, JSON.stringify(output, null, 2), "utf-8");
+    console.log(`\n  💾 Gravado: ${path.relative(__dirname, outputFile)}`);
+    console.log(`  Total: ${entries.length} entradas, ${errors} erros`);
+  }
+}
+
+// ─── Entry point ──────────────────────────────────────────────────────────────
+
+console.log("╔══════════════════════════════════════════════════════════╗");
+console.log("║   GERADOR DE KNOWLEDGE-BASE.JSON — Axion Docs            ║");
+console.log(`║   ${new Date().toLocaleString("pt-BR")}${" ".repeat(Math.max(0, 39 - new Date().toLocaleString("pt-BR").length))}║`);
+console.log(DRY_RUN ? "║   MODE: DRY-RUN (nenhum arquivo será gravado)            ║" : "║   MODE: PRODUÇÃO                                         ║");
+console.log("╚══════════════════════════════════════════════════════════╝");
+
+for (const portal of PORTALS) {
+  generatePortal(portal);
+}
+
+console.log("\n✨ Concluído!\n");
 ```
 
 

@@ -8,11 +8,13 @@ description: Consulta de passagens de veículos por placa
 
 Permite consultar o histórico de passagens de veículos por número de placa.
 
-![Consulta de Placas](../img/Operações%20-%20consulta%20de%20placas.png)
-
 ## Como acessar
 
-**Menu lateral** → Operações → **Consulta de Placas**
+**Acesso direto**: `/consultaplacas`
+
+:::info
+A **Consulta de Placas** pode não aparecer no menu lateral dependendo das permissões do perfil de acesso. Nesse caso, acesse diretamente pela URL `/consultaplacas` ou verifique as permissões em [Controle de Acesso → Perfis](../controle-acesso/perfis-acesso).
+:::
 
 | Filtro | Descrição |
 |--------|-----------|

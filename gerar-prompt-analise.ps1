@@ -57,7 +57,8 @@ $singleFiles = @(
   "axion-ia-panel\vite.config.js",
   "MANUAL-AXIONIA.md",
   "BASE-PROJETO-DOCS.md",
-  "openapi.json"
+  "openapi.json",
+  "gerar-knowledge-base.mjs"
 )
 
 foreach ($r in $singleFiles) {

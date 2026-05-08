@@ -10,3 +10,9 @@ build/
 # Logs e dados sensíveis
 **/logs/
 .env
+
+# Arquivos de análise gerados (podem conter chaves de API)
+all-projects-analysis.txt
+all-projects-code.txt
+all-docs.txt
+axhub-audit.txt

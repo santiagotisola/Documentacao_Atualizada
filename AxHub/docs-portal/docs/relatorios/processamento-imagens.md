@@ -4,18 +4,48 @@ title: Processamento de Imagens
 description: Relatorio de processamento de imagens
 ---
 
-# Relatorio de Processamento de Imagens
+# Relatório de Processamento de Imagens
 
-Relatorio que apresenta o volume de imagens processadas no sistema.
+Apresenta o volume total de imagens processadas no sistema em um determinado período, agrupadas por equipamento e status. Permite identificar gargalos de processamento e acompanhar a produtividade operacional.
 
 ## Como acessar
 
-Menu lateral - Relatorios - Processamento de Imagens
+**Menu lateral** → Relatórios → **Processamento de Imagens**
 
-![Processamento de Imagens por Usuario](../img/Relatorio%20-%20Relatorio%20de%20procesamento%20de%20imagens%20por%20usuário.png)
+![Processamento de Imagens](../img/Relatorio%20-%20Relatorio%20de%20procesamento%20de%20imagens%20por%20usuário.png)
 
-## Navegacao relacionada
+## Filtros disponíveis
 
-| Tipo | Pagina | Descricao |
+| Filtro | Descrição |
+|--------|-----------|
+| **Período** | Faixa de datas do processamento |
+| **Equipamento** | Filtrar por equipamento específico |
+| **Operação** | Operação vinculada ao equipamento |
+| **Status** | Processada, Descartada, Pendente |
+
+## Campos exibidos
+
+| Coluna | Descrição |
+|--------|-----------|
+| **Equipamento** | Nome e código do equipamento |
+| **Total de Imagens** | Quantidade total de imagens recebidas |
+| **Processadas** | Imagens efetivamente analisadas |
+| **Descartadas** | Imagens rejeitadas por critério de qualidade |
+| **Pendentes** | Imagens aguardando processamento |
+| **Aproveitamento (%)** | Percentual de imagens processadas com sucesso |
+
+## Exportação
+
+O relatório pode ser exportado em **Excel** ou **PDF** para análise externa e inclusão em relatórios gerenciais.
+
+:::tip Dica
+Use este relatório para identificar equipamentos com baixo aproveitamento de imagens — pode indicar problemas de iluminação, posicionamento ou falha técnica.
+:::
+
+## Navegação relacionada
+
+| Tipo | Página | Descrição |
 |------|--------|-----------|
-| Relacionado | [Processamento por Usuario](./processamento-por-usuario) | Detalhamento por usuario |
+| Relacionado | [Processamento por Usuário](./processamento-por-usuario) | Produtividade por analista |
+| Relacionado | [Eventos dos Equipamentos](./eventos-equipamentos) | Histórico de eventos |
+| Relacionado | [Monitoramento Online](../operacoes/monitoramento-online) | Status em tempo real |

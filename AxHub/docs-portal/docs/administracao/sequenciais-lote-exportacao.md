@@ -1,4 +1,4 @@
----
+﻿---
 sidebar_position: 12
 title: Sequenciais de Lote de Exportação
 description: Controle de sequenciais de lotes exportados
@@ -10,7 +10,7 @@ Permite configurar e monitorar os sequenciais dos lotes de exportação de infra
 
 ## Como acessar
 
-**Menu lateral** → Administração → **Sequenciais de Lote de Exportação**
+**Menu lateral** → Configurações → **Sequenciais de Lote de Exportação**
 
 | Campo | Descrição |
 |-------|-----------|

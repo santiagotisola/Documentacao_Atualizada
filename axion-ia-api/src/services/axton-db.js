@@ -20,15 +20,24 @@ const config = {
 let pool = null;
 
 export async function conectar() {
-  if (pool) return pool;
+  if (pool && pool.connected) return pool;
+  if (pool) {
+    try { await pool.close(); } catch (_) {}
+    pool = null;
+  }
+
   pool = await sql.connect(config);
+  pool.on("error", (err) => {
+    console.error(`❌ [axton-db] Erro no pool: ${err.message}`);
+    pool = null;
+  });
   console.log(`⚖️  SQL Server conectado: ${config.server}/${config.database}`);
   return pool;
 }
 
 export async function desconectar() {
   if (pool) {
-    await pool.close();
+    try { await pool.close(); } catch (_) {}
     pool = null;
   }
 }

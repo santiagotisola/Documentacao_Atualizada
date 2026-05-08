@@ -568,7 +568,7 @@ export default function Helpdesk() {
               </button>
             </div>
             <p style={{ fontSize: "0.75rem", color: "var(--text-muted)", marginTop: "0.75rem", marginBottom: 0 }}>
-              Score >= 85% resposta automatica · Score >= 65% sugestao para humano · Score abaixo de 65% escalado
+              Score {">="} 85% resposta automatica · Score {">="} 65% sugestao para humano · Score abaixo de 65% escalado
             </p>
           </div>
 

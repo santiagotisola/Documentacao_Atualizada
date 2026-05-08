@@ -9,15 +9,17 @@ const ENV_PATH = path.resolve(__dirname, "..", ".env");
 // Chaves editáveis (whitelist)
 const CHAVES_PERMITIDAS = [
   "PORT", "MONGO_URI", "CORS_ORIGIN",
+  "API_TOKEN",
   "OPENAI_API_KEY",
   "JITBIT_URL", "JITBIT_USER", "JITBIT_PASS",
   "AXHUB_DB_HOST", "AXHUB_DB_PORT", "AXHUB_DB_NAME", "AXHUB_DB_USER", "AXHUB_DB_PASS", "AXHUB_DB_ENCRYPT",
   "AXTON_DB_HOST", "AXTON_DB_PORT", "AXTON_DB_NAME", "AXTON_DB_USER", "AXTON_DB_PASS", "AXTON_DB_ENCRYPT",
-  "AXCROSS_DB_HOST", "AXCROSS_DB_PORT", "AXCROSS_DB_NAME", "AXCROSS_DB_USER", "AXCROSS_DB_PASS", "AXCROSS_DB_ENCRYPT"
+  "AXCROSS_DB_HOST", "AXCROSS_DB_PORT", "AXCROSS_DB_NAME", "AXCROSS_DB_USER", "AXCROSS_DB_PASS", "AXCROSS_DB_ENCRYPT",
+  "TELEGRAM_TOKEN", "TELEGRAM_CHAT_ID"
 ];
 
 // Chaves cujo valor é mascarado no GET
-const CHAVES_SENSIVEIS = ["OPENAI_API_KEY", "JITBIT_PASS", "AXHUB_DB_PASS", "AXTON_DB_PASS", "AXCROSS_DB_PASS"];
+const CHAVES_SENSIVEIS = ["API_TOKEN", "OPENAI_API_KEY", "JITBIT_PASS", "AXHUB_DB_PASS", "AXTON_DB_PASS", "AXCROSS_DB_PASS", "TELEGRAM_TOKEN"];
 
 function lerEnv() {
   if (!fs.existsSync(ENV_PATH)) return {};
@@ -39,16 +41,20 @@ function salvarEnv(obj) {
   const linhas = [];
   const grupos = {
     api: ["PORT", "CORS_ORIGIN"],
+    api_token: ["API_TOKEN"],
     openai: ["OPENAI_API_KEY"],
     mongo: ["MONGO_URI"],
     jitbit: ["JITBIT_URL", "JITBIT_USER", "JITBIT_PASS"],
     axhub: ["AXHUB_DB_HOST", "AXHUB_DB_PORT", "AXHUB_DB_NAME", "AXHUB_DB_USER", "AXHUB_DB_PASS", "AXHUB_DB_ENCRYPT"],
     axton: ["AXTON_DB_HOST", "AXTON_DB_PORT", "AXTON_DB_NAME", "AXTON_DB_USER", "AXTON_DB_PASS", "AXTON_DB_ENCRYPT"],
-    axcross: ["AXCROSS_DB_HOST", "AXCROSS_DB_PORT", "AXCROSS_DB_NAME", "AXCROSS_DB_USER", "AXCROSS_DB_PASS", "AXCROSS_DB_ENCRYPT"]
+    axcross: ["AXCROSS_DB_HOST", "AXCROSS_DB_PORT", "AXCROSS_DB_NAME", "AXCROSS_DB_USER", "AXCROSS_DB_PASS", "AXCROSS_DB_ENCRYPT"],
+    telegram: ["TELEGRAM_TOKEN", "TELEGRAM_CHAT_ID"]
   };
 
   linhas.push("# API");
   for (const k of grupos.api) if (obj[k] !== undefined) linhas.push(`${k}=${obj[k]}`);
+  linhas.push("", "# Autenticação");
+  for (const k of grupos.api_token) if (obj[k] !== undefined) linhas.push(`${k}=${obj[k]}`);
   linhas.push("", "# OpenAI");
   for (const k of grupos.openai) if (obj[k] !== undefined) linhas.push(`${k}=${obj[k]}`);
   linhas.push("", "# MongoDB");
@@ -61,6 +67,8 @@ function salvarEnv(obj) {
   for (const k of grupos.axton) if (obj[k] !== undefined) linhas.push(`${k}=${obj[k]}`);
   linhas.push("", "# AxCross SQL Server");
   for (const k of grupos.axcross) if (obj[k] !== undefined) linhas.push(`${k}=${obj[k]}`);
+  linhas.push("", "# Telegram");
+  for (const k of grupos.telegram) if (obj[k] !== undefined) linhas.push(`${k}=${obj[k]}`);
 
   fs.writeFileSync(ENV_PATH, linhas.join("\n") + "\n", "utf-8");
 }

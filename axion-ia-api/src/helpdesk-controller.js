@@ -397,3 +397,155 @@ export async function gerarPlanilhaHoras(req, res) {
   }
 }
 
+// ── SLA Compliance ────────────────────────────────────────────────────────
+
+/**
+ * GET /api/helpdesk/sla-compliance
+ * Query:
+ *   dateFrom           YYYY-MM-DD  (obrigatório)
+ *   dateTo             YYYY-MM-DD  (obrigatório)
+ *   sectionId          ID da categoria/seção (opcional)
+ *   priority           Low|Normal|High|Critical (opcional)
+ *   responseTarget     horas meta de resposta    (default: 24)
+ *   resolutionTarget   horas meta de resolução   (default: 72)
+ *   count              máx tickets a buscar      (default: 300)
+ *
+ * Calcula SLA de resposta e resolução para cada ticket do período.
+ * - Response time  = 1º comentário (tech) - data de criação
+ * - Resolution time = ResolvedDate - data de criação (apenas tickets fechados)
+ */
+export async function relatarSlaCompliance(req, res) {
+  const {
+    dateFrom,
+    dateTo,
+    sectionId       = null,
+    priority        = null,
+    responseTarget  = "24",
+    resolutionTarget = "72",
+    count           = "300",
+  } = req.query;
+
+  if (!dateFrom || !dateTo) {
+    return res.status(400).json({ erro: "Parâmetros obrigatórios: dateFrom, dateTo (YYYY-MM-DD)" });
+  }
+
+  const responseTargetMin   = Number(responseTarget)   * 60;   // converte h → min
+  const resolutionTargetMin = Number(resolutionTarget) * 60;
+
+  try {
+    const todos = await buscarTicketsFiltrados({
+      dataInicio: dateFrom,
+      dataFim:    dateTo,
+      count:      Math.min(Number(count), 500),
+    });
+
+    // Filtra por data de criação, seção e prioridade
+    const dtInicio = new Date(dateFrom);
+    const dtFim    = new Date(dateTo + "T23:59:59Z");
+
+    const filtrados = todos.filter(t => {
+      const dt = new Date(t.IssueDate);
+      if (isNaN(dt) || dt < dtInicio || dt > dtFim) return false;
+      if (sectionId && String(t.CategoryID) !== String(sectionId)) return false;
+      if (priority  && (t.Priority || "").toLowerCase() !== priority.toLowerCase()) return false;
+      return true;
+    });
+
+    // Busca primeiro comentário REAL (não-sistema) de cada ticket em paralelo — lotes de 8
+    const primeiraResposta = new Map(); // IssueID → Date
+    const LOTE = 8;
+    for (let i = 0; i < filtrados.length; i += LOTE) {
+      const lote = filtrados.slice(i, i + LOTE);
+      const resultados = await Promise.allSettled(
+        lote.map(async t => {
+          const comentarios = await buscarComentarios(t.IssueID);
+          const lista = Array.isArray(comentarios) ? comentarios : [];
+          // Filtra comentários de sistema (automáticos) — IsSystem === true
+          const primeiroReal = lista.find(c => !c.IsSystem);
+          // Campo real do Jitbit: CommentDate (fallback para outros nomes)
+          const dataStr = primeiroReal
+            ? (primeiroReal.CommentDate ?? primeiroReal.PostedDate ?? primeiroReal.Date ?? primeiroReal.Created ?? null)
+            : null;
+          return { id: t.IssueID, dataStr };
+        })
+      );
+      for (const r of resultados) {
+        if (r.status === "fulfilled" && r.value.dataStr) {
+          const dt = new Date(r.value.dataStr);
+          if (!isNaN(dt)) primeiraResposta.set(r.value.id, dt);
+        }
+      }
+    }
+
+    // Monta linha por ticket
+    const JITBIT_BASE = "https://desk.axiontecnologia.com.br";
+
+    const tickets = filtrados.map(t => {
+      const criado = new Date(t.IssueDate);
+
+      // ── Response SLA ─────────────────────────────────────────────────────
+      const dtResposta    = primeiraResposta.get(t.IssueID) ?? null;
+      const responseMins  = dtResposta ? Math.round((dtResposta - criado) / 60000) : null;
+      const responseSla   = responseMins !== null
+        ? (responseMins <= responseTargetMin ? "Met" : "Breached")
+        : null;
+
+      // ── Resolution SLA ───────────────────────────────────────────────────
+      const dtResolucao      = t.ResolvedDate ? new Date(t.ResolvedDate) : null;
+      const resolutionMins   = dtResolucao ? Math.round((dtResolucao - criado) / 60000) : null;
+      const resolutionSla    = resolutionMins !== null
+        ? (resolutionMins <= resolutionTargetMin ? "Met" : "Breached")
+        : null; // ticket ainda aberto → sem avaliação
+
+      return {
+        ticketId:       t.IssueID,
+        assunto:        t.Subject || "",
+        prioridade:     t.Priority || "Normal",
+        categoria:      t.Category || "",
+        status:         t.Status || "",
+        criado:         t.IssueDate,
+        responseMins,
+        responseSla,
+        resolutionMins,
+        resolutionSla,
+        url: `${JITBIT_BASE}/helpdesk/Ticket/${t.IssueID}`,
+      };
+    });
+
+    // ── Agregados ─────────────────────────────────────────────────────────
+    const comResposta    = tickets.filter(t => t.responseSla   !== null);
+    const comResolucao   = tickets.filter(t => t.resolutionSla !== null);
+    const responseMet    = comResposta.filter(t => t.responseSla   === "Met").length;
+    const resolutionMet  = comResolucao.filter(t => t.resolutionSla === "Met").length;
+
+    const pct = (num, den) =>
+      den > 0 ? Math.round((num / den) * 1000) / 10 : null;
+
+    return res.json({
+      periodo:      { dateFrom, dateTo },
+      configuracao: {
+        responseTarget:   Number(responseTarget),
+        resolutionTarget: Number(resolutionTarget),
+      },
+      totais: {
+        total:      tickets.length,
+        response: {
+          avaliados:  comResposta.length,
+          met:        responseMet,
+          breached:   comResposta.length - responseMet,
+          percentual: pct(responseMet, comResposta.length),
+        },
+        resolution: {
+          avaliados:  comResolucao.length,
+          met:        resolutionMet,
+          breached:   comResolucao.length - resolutionMet,
+          percentual: pct(resolutionMet, comResolucao.length),
+        },
+      },
+      tickets,
+    });
+  } catch (err) {
+    return res.status(500).json({ erro: "Erro ao calcular SLA compliance", detalhe: err.message });
+  }
+}
+

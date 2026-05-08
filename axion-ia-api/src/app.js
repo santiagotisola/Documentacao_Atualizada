@@ -1,30 +1,73 @@
 import express from "express";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
+import path from "path";
+import { fileURLToPath } from "url";
+import { randomUUID } from "crypto";
+import helmet from "helmet";
+import rateLimit from "express-rate-limit";
 import routes from "./routes.js";
+import { authMiddleware } from "./auth.js";
 import { conectar as conectarAxHub } from "./services/axhub-db.js";
 import { conectar as conectarAxTon } from "./services/axton-db.js";
 import { conectar as conectarAxCross } from "./services/axcross-db.js";
 import { iniciar as iniciarPolling } from "./scheduler.js";
 import { iniciarColetaPNCP } from "./scheduler.js";
+import { axioniAgent } from "./agent/agent.js";
 
-dotenv.config();
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+dotenv.config({ path: path.join(__dirname, "..", ".env") });
 
 const app = express();
-app.use(express.json());
 
-// CORS para painel React (dev)
+// ─── Segurança ────────────────────────────────────────────────────────────────
+app.use(helmet({
+  crossOriginResourcePolicy: { policy: "cross-origin" }, // permite widgets embutidos
+  contentSecurityPolicy: false                            // CSP gerenciado pelo Docusaurus
+}));
+
+// Rate limiting: 120 req/min por IP (anti-DDoS / anti-scraping)
+const limiter = rateLimit({
+  windowMs: 60_000,
+  max: 120,
+  standardHeaders: true,
+  legacyHeaders: false,
+  message: { erro: "Muitas requisições. Tente novamente em 1 minuto." }
+});
+app.use("/api", limiter);
+
+app.use(express.json({ limit: "5mb" }));
+
+// CorrelationId — injeta x-request-id em toda requisição para rastreabilidade
+app.use((req, res, next) => {
+  const id = req.headers["x-request-id"] || randomUUID();
+  req.requestId = id;
+  res.setHeader("x-request-id", id);
+  next();
+});
+
+// CORS para painel React (dev) — deve vir ANTES do authMiddleware
+// para que preflight OPTIONS passe sem token
 app.use((req, res, next) => {
   const origin = req.headers.origin;
-  const allowed = (process.env.CORS_ORIGIN || "http://localhost:3001,http://localhost:3002,http://localhost:3003").split(",");
+  const allowed = (process.env.CORS_ORIGIN || "http://localhost:3001,http://localhost:3002,http://localhost:3003").split(",").map(s => s.trim());
   if (allowed.includes(origin)) {
     res.header("Access-Control-Allow-Origin", origin);
   }
-  res.header("Access-Control-Allow-Headers", "Content-Type");
-  res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+  res.header("Access-Control-Allow-Headers", "Content-Type, Authorization, x-api-token, x-request-id");
+  res.header("Access-Control-Expose-Headers", "x-request-id");
+  res.header("Access-Control-Allow-Methods", "GET, POST, PUT, PATCH, DELETE, OPTIONS");
   if (req.method === "OPTIONS") return res.sendStatus(204);
   next();
 });
+
+// Autenticação — protege todos os endpoints /api (exceto rotas públicas)
+app.use("/api", authMiddleware);
+
+// Servir imagens operacionais salvas (análise) como arquivos estáticos
+// Rota: GET /uploads/analise/{sistema}/{arquivo}
+// ≠ docs/img/ (screenshots de manuais — servidos pelo Docusaurus)
+app.use("/uploads/analise", express.static(path.join(__dirname, "../uploads/analise")));
 
 app.use("/api", routes);
 
@@ -32,7 +75,7 @@ app.use("/api", routes);
 app.get("/", (req, res) => {
   res.json({
     nome: "AxionIA API",
-    versao: "2.0",
+    versao: "3.0",
     status: "online",
     endpoints: {
       chat: "POST /api/chat",
@@ -41,7 +84,8 @@ app.get("/", (req, res) => {
       logs: "GET /api/logs/historico",
       kb: "GET /api/kb",
       axhub: "GET /api/axhub/status",
-      axton: "GET /api/axton/status"
+      axton: "GET /api/axton/status",
+      axcross: "GET /api/axcross/status"
     }
   });
 });
@@ -107,6 +151,9 @@ async function iniciar() {
 
     // Coleta automática PNCP (ativada com PNCP_COLETA_ATIVA=true no .env)
     iniciarColetaPNCP();
+
+    // AxionAgent — scheduler autônomo (ativado com AGENT_INTERVAL=N no .env)
+    axioniAgent.iniciarScheduler();
   });
 }
 

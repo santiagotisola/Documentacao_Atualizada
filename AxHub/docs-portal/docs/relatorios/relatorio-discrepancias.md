@@ -6,7 +6,7 @@ description: Relatório de discrepâncias identificadas no processamento
 
 # Relatório de Discrepâncias
 
-Exibe discrepâncias identificadas durante o processamento de infrações.
+Identifica e exibe discrepâncias entre os dados registrados pelos equipamentos e os dados esperados pelo sistema. Utilizado pela equipe técnica para auditar a qualidade dos registros e detectar problemas operacionais.
 
 ![Relatório de Discrepâncias](../img/Relatorio%20-%20Relatorio%20de%20discrepancias.png)
 
@@ -14,17 +14,46 @@ Exibe discrepâncias identificadas durante o processamento de infrações.
 
 **Menu lateral** → Relatórios → **Relatório de Discrepâncias**
 
+## Filtros disponíveis
+
 | Filtro | Descrição |
 |--------|-----------|
 | **Período** | Faixa de datas |
 | **Equipamento** | Filtrar por equipamento |
-| **Tipo de Discrepância** | Velocidade, placa, imagem |
+| **Tipo de Discrepância** | Velocidade, placa, imagem, data/hora |
+| **Operação** | Filtrar por operação vinculada |
+
+## Tipos de Discrepância
+
+| Tipo | Descrição |
+|------|-----------|
+| **Velocidade** | Velocidade registrada fora do intervalo esperado para o local |
+| **Placa ilegível** | OCR não identificou a placa com confiança mínima |
+| **Imagem ausente** | Infração sem imagem associada no prazo configurado |
+| **Data/Hora inconsistente** | Registro com timestamp incoerente com o período da operação |
+| **Sequencial duplicado** | Dois registros com o mesmo número sequencial |
+
+## Campos exibidos
+
+| Coluna | Descrição |
+|--------|-----------|
+| **Data/Hora** | Momento do registro |
+| **Equipamento** | Equipamento que gerou a discrepância |
+| **Tipo** | Categoria da discrepância |
+| **Descrição** | Detalhamento do problema identificado |
+| **Auto de Infração** | Número do auto relacionado (quando aplicável) |
+| **Status** | Pendente de revisão ou Resolvida |
+
+## Exportação
+
+Exportável em **Excel** para acompanhamento de pendências técnicas e registro em planos de ação.
 
 ---
 
-## Navegacao Relacionada
+## Navegação Relacionada
 
-| Tipo | Pagina | Descricao |
+| Tipo | Página | Descrição |
 |------|--------|-----------|
-| Relacionado | [Auditoria](../infracoes/auditoria) | Revisao de infracoes |
-| Relacionado | [Triagem](../infracoes/triagem) | Origem das discrepancias |
+| Relacionado | [Auditoria](../infracoes/auditoria) | Revisão de infrações |
+| Relacionado | [Triagem](../infracoes/triagem) | Origem das discrepâncias |
+| Relacionado | [Equipamentos](../cadastros-basicos/equipamentos) | Cadastro do equipamento |

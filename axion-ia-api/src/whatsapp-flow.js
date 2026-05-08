@@ -11,7 +11,8 @@
 import { WhatsAppSessao } from "./models/whatsapp-sessao.model.js";
 import { enviarMensagem } from "./services/whatsapp.service.js";
 import { criarTicketUsuario, buscarTicket, buscarComentarios, buscarCategorias, anexarArquivo, atribuirTecnico, listarUsuarios } from "./jitbit.js";
-import { gerarResposta } from "./engine.js";
+import { gerarResposta, gerarRespostaWA } from "./engine.js";
+import { classificarMensagem } from "./classifier.js";
 import { salvarHistorico } from "./logger.js";
 
 // Cache de categorias (5 min)
@@ -46,9 +47,10 @@ Como posso ajudar?
 *1* — Abrir novo chamado
 *2* — Consultar chamado
 *3* — Responder chamado
+*4* — Dúvidas do Sistema
 *0* — Falar com atendente`;
 
-const MENU_OPCOES = ["1", "2", "3", "0"];
+const MENU_OPCOES = ["1", "2", "3", "4", "0"];
 
 // --------------------------------------------------------------------------
 
@@ -103,6 +105,9 @@ export async function processarMensagemWA(telefone, nome, texto, midia = null, r
     case "aguardando_assunto":
       await handleAssunto(sessao, texto);
       break;
+    case "aguardando_sistema":
+      await handleSistema(sessao, t);
+      break;
     case "aguardando_descricao":
       await handleDescricao(sessao, texto);
       break;
@@ -124,6 +129,15 @@ export async function processarMensagemWA(telefone, nome, texto, midia = null, r
     case "respondendo_mensagem":
       await handleRespondendoMensagem(sessao, texto, midia);
       break;
+    case "aguardando_modulo_duvida":
+      await handleModuloDuvida(sessao, t);
+      break;
+    case "aguardando_duvida":
+      await handleDuvida(sessao, texto);
+      break;
+    case "respondendo_duvida":
+      await handleRespostaDuvida(sessao, t, texto);
+      break;
     default:
       sessao.estado = "menu";
       await salvarSessao(sessao);
@@ -137,6 +151,14 @@ export async function processarMensagemWA(telefone, nome, texto, midia = null, r
 
 async function handleMenu(sessao, opcao) {
   if (!MENU_OPCOES.includes(opcao)) {
+    // Tenta responder como pergunta direta ao KB antes de dizer "não entendi"
+    const contexto = classificarMensagem(opcao);
+    if (contexto) {
+      await enviarMensagem(sessao._remoteJid,
+        `💡 *${contexto.assunto}*\n\n${contexto.acao}\n\n` +
+        `_Digite *menu* para ver as opções ou faça outra pergunta._`);
+      return;
+    }
     await enviarMensagem(sessao._remoteJid, `Não entendi. Digite o número da opção:\n\n${MENU}`);
     return;
   }
@@ -157,6 +179,13 @@ async function handleMenu(sessao, opcao) {
     await salvarSessao(sessao);
     await enviarMensagem(sessao._remoteJid, "💬 *Responder Chamado*\n\nDigite o número do chamado que deseja responder:");
 
+  } else if (opcao === "4") {
+    sessao.estado = "aguardando_modulo_duvida";
+    sessao.dadosParciais = {};
+    await salvarSessao(sessao);
+    await enviarMensagem(sessao._remoteJid,
+      `🔎 *Dúvidas do Sistema*\n\nQual sistema você tem dúvida?\n\n*1* — AxHub (Trânsito)\n*2* — AxTon (Pesagem)\n*3* — AxCross (Cruzamentos)\n*0* — Qualquer / Não sei`);
+
   } else if (opcao === "0") {
     sessao.estado = "menu";
     await salvarSessao(sessao);
@@ -170,11 +199,45 @@ async function handleAssunto(sessao, texto) {
     return;
   }
   sessao.dadosParciais.assunto = texto;
+  sessao.estado = "aguardando_sistema";
+  sessao.markModified("dadosParciais");
+  await salvarSessao(sessao);
+
+  const SISTEMAS = [
+    "AxBlitz", "AxCross", "AxFlow", "AxHub", "AxionAPI",
+    "AxOCR", "AxRadar", "AxSync", "AxTon", "Azure", "Codtran"
+  ];
+  const lista = SISTEMAS.map((s, i) => `*${i + 1}* — ${s}`).join("\n");
+  await enviarMensagem(sessao._remoteJid,
+    `✅ Assunto registrado: *${texto}*\n\n🖥️ *Selecione o sistema relacionado:*\n\n${lista}\n\n*0* — Não se aplica / Pular`);
+}
+
+async function handleSistema(sessao, opcao) {
+  const SISTEMAS = [
+    "AxBlitz", "AxCross", "AxFlow", "AxHub", "AxionAPI",
+    "AxOCR", "AxRadar", "AxSync", "AxTon", "Azure", "Codtran"
+  ];
+  const idx = parseInt(opcao);
+
+  if (opcao === "0" || isNaN(idx)) {
+    sessao.dadosParciais.sistema = null;
+  } else if (idx >= 1 && idx <= SISTEMAS.length) {
+    sessao.dadosParciais.sistema = SISTEMAS[idx - 1];
+  } else {
+    const lista = SISTEMAS.map((s, i) => `*${i + 1}* — ${s}`).join("\n");
+    await enviarMensagem(sessao._remoteJid, `Digite um número válido ou *0* para pular.\n\n${lista}`);
+    return;
+  }
+
   sessao.estado = "aguardando_descricao";
   sessao.markModified("dadosParciais");
   await salvarSessao(sessao);
+
+  const sistemaStr = sessao.dadosParciais.sistema
+    ? `Sistema: *${sessao.dadosParciais.sistema}*\n\n`
+    : "";
   await enviarMensagem(sessao._remoteJid,
-    `✅ Assunto registrado: *${texto}*\n\nAgora descreva o problema em detalhes:\n_(Quanto mais detalhes, mais rápido o atendimento)_`);
+    `${sistemaStr}Agora descreva o problema em detalhes:\n_(Quanto mais detalhes, mais rápido o atendimento)_`);
 }
 
 async function handleDescricao(sessao, texto) {
@@ -268,6 +331,7 @@ async function handleFoto(sessao, opcao, midia) {
   await enviarMensagem(sessao._remoteJid,
     `📋 *Confirme os dados do chamado:*\n\n` +
     `*Assunto:* ${sessao.dadosParciais.assunto}\n` +
+    (sessao.dadosParciais.sistema ? `*Sistema:* ${sessao.dadosParciais.sistema}\n` : "") +
     `*Descrição:* ${sessao.dadosParciais.descricao?.substring(0, 200) || ""}${(sessao.dadosParciais.descricao?.length || 0) > 200 ? "..." : ""}\n` +
     `*Categoria:* ${sessao.dadosParciais.categoriaNome || "Geral"}\n` +
     `*Foto:* ${fotoStr}` +
@@ -298,7 +362,7 @@ async function handleConfirmacao(sessao, opcao) {
       process.env.JITBIT_USER,
       process.env.JITBIT_PASS,
       sessao.dadosParciais.assunto,
-      `${sessao.dadosParciais.descricao}\n\n_Chamado aberto via WhatsApp por ${sessao.nome} (${sessao.telefone})_`,
+      `${sessao.dadosParciais.descricao}\n\n${sessao.dadosParciais.sistema ? `Sistema: ${sessao.dadosParciais.sistema}\n` : ""}_Chamado aberto via WhatsApp por ${sessao.nome} (${sessao.telefone})_`,
       sessao.dadosParciais.categoriaId || 0
     );
 
@@ -435,4 +499,117 @@ async function handleRespondendoMensagem(sessao, texto, midia = null) {
   }
 }
 
+// --------------------------------------------------------------------------
+// HANDLERS — DÚVIDAS DO SISTEMA
+// --------------------------------------------------------------------------
+
+const MODULOS_DUVIDA = { "1": "axhub", "2": "axton", "3": "axcross", "0": null };
+const MODULOS_NOME = { "axhub": "AxHub", "axton": "AxTon", "axcross": "AxCross" };
+
+async function handleModuloDuvida(sessao, opcao) {
+  if (!MODULOS_DUVIDA.hasOwnProperty(opcao)) {
+    // Usuário digitou a pergunta diretamente em vez de escolher o módulo
+    // → trata como se tivesse escolhido "qualquer" e já faz a busca
+    const contexto = classificarMensagem(opcao);
+    if (contexto) {
+      await enviarMensagem(sessao._remoteJid,
+        `💡 *${contexto.assunto}*\n\n${contexto.acao}\n\n` +
+        `Esta resposta ajudou?\n*1* — Sim!\n*2* — Não, quero abrir um chamado\n*3* — Tenho outra dúvida`);
+      sessao.dadosParciais.moduloDuvida = null;
+      sessao.dadosParciais.ultimaDuvida = opcao;
+      sessao.dadosParciais.ultimaResposta = contexto.acao.substring(0, 500);
+      sessao.markModified("dadosParciais");
+      sessao.estado = "respondendo_duvida";
+      await salvarSessao(sessao);
+      return;
+    }
+    await enviarMensagem(sessao._remoteJid, "Digite *1* AxHub, *2* AxTon, *3* AxCross ou *0* para qualquer.");
+    return;
+  }
+  sessao.dadosParciais.moduloDuvida = MODULOS_DUVIDA[opcao];
+  sessao.markModified("dadosParciais");
+  sessao.estado = "aguardando_duvida";
+  await salvarSessao(sessao);
+
+  const moduloNome = MODULOS_NOME[MODULOS_DUVIDA[opcao]] || "todos os sistemas";
+  await enviarMensagem(sessao._remoteJid,
+    `💬 *Dúvida — ${moduloNome}*\n\nDigite sua dúvida ou problema:\n_(ex: como cadastrar usuário, como gerar relatório...)_\n\nDigite *0* para voltar ao menu.`);
+}
+
+async function handleDuvida(sessao, texto) {
+  if (!texto || texto.trim().length < 5) {
+    await enviarMensagem(sessao._remoteJid, "Por favor, descreva sua dúvida com mais detalhes.");
+    return;
+  }
+  if (texto.trim() === "0") {
+    sessao.estado = "menu";
+    await salvarSessao(sessao);
+    await enviarMensagem(sessao._remoteJid, MENU);
+    return;
+  }
+
+  await enviarMensagem(sessao._remoteJid, "🔍 Buscando resposta...");
+
+  const modulo = sessao.dadosParciais.moduloDuvida;
+  const pergunta = modulo ? `[${modulo.toUpperCase()}] ${texto}` : texto;
+
+  try {
+    const resultado = await gerarRespostaWA(pergunta);
+    const resposta = resultado.resposta ||
+      "Não encontrei uma resposta específica sobre isso na base de conhecimento. " +
+      "Recomendo abrir um chamado para que nossa equipe possa te ajudar.";
+
+    sessao.dadosParciais.ultimaDuvida = texto;
+    sessao.dadosParciais.ultimaResposta = resposta.substring(0, 500);
+    sessao.markModified("dadosParciais");
+    sessao.estado = "respondendo_duvida";
+    await salvarSessao(sessao);
+
+    const moduloNome = MODULOS_NOME[modulo] || "Sistema";
+    const origemTag = resultado.origem === "kb" ? "📚 Base de conhecimento" :
+                      resultado.origem === "embedding" ? "🔎 Busca semântica" : "🤖 IA";
+
+    await enviarMensagem(sessao._remoteJid,
+      `💡 *${moduloNome}* — ${origemTag}\n\n${resposta}\n\n` +
+      `Esta resposta ajudou?\n*1* — Sim, obrigado!\n*2* — Não, quero abrir um chamado\n*3* — Tenho outra dúvida`);
+
+  } catch (err) {
+    sessao.estado = "menu";
+    await salvarSessao(sessao);
+    await enviarMensagem(sessao._remoteJid,
+      `⚠️ Não consegui buscar uma resposta agora. Deseja abrir um chamado para o suporte?\n\n*1* — Sim, abrir chamado\n*0* — Voltar ao menu`);
+  }
+}
+
+async function handleRespostaDuvida(sessao, opcao, textoCompleto) {
+  if (opcao === "1") {
+    // Satisfeito
+    sessao.estado = "menu";
+    sessao.dadosParciais = {};
+    await salvarSessao(sessao);
+    await enviarMensagem(sessao._remoteJid, `✅ Que bom que ajudou! 😊\n\nDigite *menu* para voltar ao início ou faça outra pergunta a qualquer momento.`);
+
+  } else if (opcao === "2") {
+    // Abrir chamado com a dúvida como contexto
+    const duvida = sessao.dadosParciais.ultimaDuvida || "Dúvida via WhatsApp";
+    sessao.estado = "aguardando_descricao";
+    sessao.dadosParciais = {
+      assunto: `Dúvida: ${duvida.substring(0, 80)}`,
+    };
+    sessao.markModified("dadosParciais");
+    await salvarSessao(sessao);
+    await enviarMensagem(sessao._remoteJid,
+      `📝 Vamos abrir um chamado.\n\nAssunto já preenchido: *${sessao.dadosParciais.assunto}*\n\nForneça mais detalhes sobre o problema:\n_(Quanto mais detalhes, mais rápido o atendimento)_`);
+
+  } else if (opcao === "3") {
+    // Nova dúvida — volta para aguardando_duvida
+    sessao.estado = "aguardando_duvida";
+    await salvarSessao(sessao);
+    const moduloNome = MODULOS_NOME[sessao.dadosParciais.moduloDuvida] || "Sistema";
+    await enviarMensagem(sessao._remoteJid, `💬 *${moduloNome}* — Digite sua próxima dúvida:\n\nOu *0* para voltar ao menu.`);
+
+  } else {
+    await enviarMensagem(sessao._remoteJid, "Digite *1* (ajudou), *2* (abrir chamado) ou *3* (nova dúvida).");
+  }
+}
 

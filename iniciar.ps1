@@ -19,7 +19,7 @@ function Iniciar-Servico {
 }
 
 $d1 = Join-Path $ROOT "axion-ia-api"
-Iniciar-Servico -Titulo "axion-ia-api :3100" -Diretorio $d1 -Comando "node src/app.js"
+Iniciar-Servico -Titulo "axion-ia-api :3100" -Diretorio $d1 -Comando "node --env-file=.env src/app.js"
 Write-Host "[..] axion-ia-api :3100 — aguardando resposta..." -ForegroundColor Yellow
 
 # Aguarda a API responder de verdade (até 30 tentativas de 1s = 30s)

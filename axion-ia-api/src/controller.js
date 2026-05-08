@@ -1,3 +1,4 @@
+import { z } from "zod";
 import { gerarResposta } from "./engine.js";
 import { obterHistorico, obterNaoRespondidas, obterEstatisticas } from "./logger.js";
 import { treinar } from "./services/training.js";
@@ -5,23 +6,30 @@ import { analisarChamados } from "./services/analise.js";
 import { Log } from "./models/log.model.js";
 import { KB } from "./models/kb.model.js";
 
+// Schema de validação do endpoint de chat
+const chatSchema = z.object({
+  mensagem: z.string({ required_error: "mensagem é obrigatória" }).min(1, "mensagem não pode estar vazia").max(4000, "mensagem muito longa (máximo 4000 caracteres)"),
+  sessionId: z.string().max(64).optional()
+});
+
 export async function processarMensagem(req, res) {
+  // Validação de entrada com Zod
+  const parse = chatSchema.safeParse(req.body);
+  if (!parse.success) {
+    return res.status(400).json({ erro: parse.error.errors[0].message });
+  }
+
+  const { mensagem, sessionId } = parse.data;
+
   try {
-    const { mensagem } = req.body;
-
-    if (!mensagem) {
-      return res.status(400).json({
-        erro: "Mensagem não informada"
-      });
-    }
-
-    const resultado = await gerarResposta(mensagem);
+    const resultado = await gerarResposta(mensagem, { sessionId });
 
     return res.json({
       sucesso: true,
       resposta: resultado.resposta,
       origem: resultado.origem,
-      score: resultado.score
+      score: resultado.score,
+      sessionId: sessionId || null
     });
 
   } catch (error) {

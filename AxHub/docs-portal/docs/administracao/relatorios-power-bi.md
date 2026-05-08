@@ -1,4 +1,4 @@
----
+﻿---
 sidebar_position: 5
 title: Relatórios Power BI
 description: Configuração de relatórios Power BI integrados
@@ -12,7 +12,7 @@ Permite configurar e acessar relatórios do Power BI integrados ao AxHub.
 
 ## Como acessar
 
-**Menu lateral** → Administração → **Relatórios Power BI**
+**Menu lateral** → Configurações → **Relatórios Power BI**
 
 ## Relatórios disponíveis
 
