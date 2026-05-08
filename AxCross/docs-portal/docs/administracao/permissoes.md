@@ -12,6 +12,8 @@ Define quais funcionalidades cada perfil de acesso pode utilizar no sistema.
 
 No **menu lateral**, expanda **Administração** e clique em **Permissões de acesso**.
 
+![Permissões de Acesso](../img/Permissões.png)
+
 ## Estrutura de permissões
 
 | Permissão | Descrição |

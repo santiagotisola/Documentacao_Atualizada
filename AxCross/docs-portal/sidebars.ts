@@ -40,6 +40,8 @@ const sidebars: SidebarsConfig = {
       collapsed: false,
       items: [
         'operacoes/veiculos-monitorados',
+        'operacoes/tipos-ocorrencias',
+        'operacoes/alertas',
         'operacoes/vigencia-alertas',
       ],
     },
@@ -53,9 +55,13 @@ const sidebars: SidebarsConfig = {
 
     // ── Sistema ──
     {
-      type: 'doc',
-      id: 'sistema/configuracoes',
+      type: 'category',
       label: '⚙️ Sistema',
+      collapsed: true,
+      items: [
+        'sistema/configuracoes',
+        'sistema/sincronizacao',
+      ],
     },
 
     // ── Cadastros (expansível) ──
@@ -73,9 +79,17 @@ const sidebars: SidebarsConfig = {
 
     // ── Relatórios ──
     {
-      type: 'doc',
-      id: 'relatorios/relatorio-passagens',
-      label: '📊 Relatório de Passagens',
+      type: 'category',
+      label: '📊 Relatórios',
+      collapsed: true,
+      items: [
+        'relatorios/relatorio-passagens',
+        'relatorios/mapeamento-rotas',
+        'relatorios/rastreamento-placas',
+        'relatorios/veiculos-monitorados',
+        'relatorios/ocorrencias-alertas',
+        'relatorios/pdf-gerados',
+      ],
     },
 
     // ── Administração (expansível) ──
@@ -85,8 +99,9 @@ const sidebars: SidebarsConfig = {
       collapsed: true,
       items: [
         'administracao/usuarios',
-        'administracao/permissoes',
         'administracao/perfis-acesso',
+        'administracao/permissoes',
+        'administracao/logs-acesso',
       ],
     },
 

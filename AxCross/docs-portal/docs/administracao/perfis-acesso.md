@@ -12,6 +12,8 @@ Cadastro dos perfis de acesso que agrupam conjuntos de permissões para atribui�
 
 No **menu lateral**, expanda **Administração** e clique em **Perfis de acesso**.
 
+![Perfis de Acesso](../img/Perfis de Acesso.png)
+
 ## Campos
 
 | Campo | Obrigatório | Descrição |
