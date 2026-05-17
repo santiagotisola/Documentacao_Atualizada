@@ -556,18 +556,22 @@ export default function AnaliseEditalAvancada() {
             </div>
           )}
 
-          {/* Ranking com barras */}
+          {/* Ranking com barras e nível de ameaça */}
           <div style={{ display: "grid", gap: "0.6rem" }}>
             {(resultado.concorrentes.ranking || []).map((emp, i) => {
               const pct = emp.percentualAtendimento || 0;
               const corPct = pct >= 70 ? "#10b981" : pct >= 40 ? "#f59e0b" : "#ef4444";
               const bgPct = pct >= 70 ? "#065f4630" : pct >= 40 ? "#92400e30" : "#7f1d1d30";
+              const ameacaCor = emp.nivelAmeaca === "alto" ? "#ef4444" : emp.nivelAmeaca === "medio" ? "#f59e0b" : "#10b981";
+              const ameacaBg = emp.nivelAmeaca === "alto" ? "#ef444425" : emp.nivelAmeaca === "medio" ? "#f59e0b25" : "#10b98125";
+              const ameacaIcon = emp.nivelAmeaca === "alto" ? "🔴" : emp.nivelAmeaca === "medio" ? "🟡" : "🟢";
               return (
-                <div key={i} style={{ background: "rgba(255,255,255,0.04)", border: `1px solid ${emp.conflitoPotencial ? "rgba(239,68,68,0.2)" : "rgba(255,255,255,0.08)"}`, borderRadius: 12, padding: "0.8rem 1rem" }}>
+                <div key={i} style={{ background: "rgba(255,255,255,0.04)", border: `1px solid ${emp.nivelAmeaca === "alto" ? "rgba(239,68,68,0.25)" : emp.nivelAmeaca === "medio" ? "rgba(245,158,11,0.2)" : "rgba(255,255,255,0.08)"}`, borderRadius: 12, padding: "0.8rem 1rem" }}>
                   <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "0.4rem" }}>
                     <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
                       <span style={{ fontSize: "1.1rem", fontWeight: 800, color: i === 0 ? "#fbbf24" : i < 3 ? "#e2e8f0" : "#94a3b8", minWidth: 28 }}>#{i + 1}</span>
                       <span style={{ fontSize: "0.9rem", fontWeight: 700, color: "#e2e8f0" }}>{emp.empresa}</span>
+                      <span style={{ background: ameacaBg, color: ameacaCor, padding: "1px 8px", borderRadius: 6, fontSize: "0.65rem", fontWeight: 700 }}>{ameacaIcon} {emp.nivelAmeaca || "?"}</span>
                       {emp.conflitoPotencial && <span style={{ background: "#ef444425", color: "#ef4444", padding: "1px 6px", borderRadius: 4, fontSize: "0.62rem", fontWeight: 600 }}>⚠️ RISCO</span>}
                     </div>
                     <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
@@ -582,10 +586,19 @@ export default function AnaliseEditalAvancada() {
                     <div style={{ width: `${pct}%`, height: "100%", background: corPct, borderRadius: 3, transition: "width 0.5s" }} />
                   </div>
                   <div style={{ fontSize: "0.75rem", color: "#64748b", marginBottom: "0.4rem" }}>{emp.segmento}</div>
+                  {/* Onde supera Axion */}
+                  {(emp.superaAxionEm || []).length > 0 && (
+                    <div style={{ background: "#7f1d1d15", border: "1px solid #ef444420", borderRadius: 8, padding: "6px 10px", marginBottom: "0.4rem", fontSize: "0.74rem" }}>
+                      <span style={{ color: "#fca5a5", fontWeight: 700 }}>⚡ Supera Axion em: </span>
+                      <span style={{ color: "#f87171" }}>
+                        {emp.superaAxionEm.map(s => `${s.cat} (+${s.diff}pp)`).join(" · ")}
+                      </span>
+                    </div>
+                  )}
                   <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "0.4rem", fontSize: "0.76rem" }}>
                     <div>
                       <span style={{ color: "#10b981", fontWeight: 600 }}>✅ </span>
-                      <span style={{ color: "#94a3b8" }}>{(emp.pontosFortes || []).slice(0, 2).join(" · ")}</span>
+                      <span style={{ color: "#94a3b8" }}>{(emp.pontosFortes || []).slice(0, 3).join(" · ")}</span>
                     </div>
                     <div>
                       <span style={{ color: "#ef4444", fontWeight: 600 }}>❌ </span>
@@ -596,6 +609,57 @@ export default function AnaliseEditalAvancada() {
               );
             })}
           </div>
+
+          {/* ═══ MATRIZ COMPARATIVA POR CATEGORIA ═══ */}
+          {resultado.concorrentes.matrizCategoria && Object.keys(resultado.concorrentes.matrizCategoria).length > 0 && (
+            <div style={{ marginTop: "1.5rem" }}>
+              <h4 style={{ color: "#e2e8f0", marginBottom: "0.8rem", fontSize: "0.95rem" }}>📊 Matriz Comparativa por Categoria</h4>
+              <div style={{ overflowX: "auto", borderRadius: 12, border: "1px solid rgba(255,255,255,0.08)" }}>
+                <table style={{ width: "100%", borderCollapse: "collapse", fontSize: "0.78rem" }}>
+                  <thead>
+                    <tr style={{ background: "rgba(255,255,255,0.06)" }}>
+                      <th style={{ textAlign: "left", padding: "10px 12px", color: "#94a3b8", fontWeight: 600, borderBottom: "1px solid rgba(255,255,255,0.08)", minWidth: 160 }}>Categoria</th>
+                      <th style={{ textAlign: "center", padding: "10px 8px", color: "#a5b4fc", fontWeight: 700, borderBottom: "1px solid rgba(255,255,255,0.08)", minWidth: 80, background: "rgba(99,102,241,0.08)" }}>🎯 Axion</th>
+                      {(Object.values(resultado.concorrentes.matrizCategoria)[0]?.concorrentes || []).map((c, ci) => (
+                        <th key={ci} style={{ textAlign: "center", padding: "10px 8px", color: "#94a3b8", fontWeight: 600, borderBottom: "1px solid rgba(255,255,255,0.08)", minWidth: 80 }}>{c.empresa}</th>
+                      ))}
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {Object.entries(resultado.concorrentes.matrizCategoria).map(([catKey, catData]) => (
+                      <tr key={catKey} style={{ borderBottom: "1px solid rgba(255,255,255,0.04)" }}>
+                        <td style={{ padding: "8px 12px", color: "#cbd5e1", fontWeight: 500 }}>
+                          {catData.icon} {catData.label}
+                          <span style={{ color: "#475569", fontSize: "0.7rem", marginLeft: 6 }}>({catData.totalReqs} req.)</span>
+                        </td>
+                        <td style={{ textAlign: "center", padding: "8px", background: "rgba(99,102,241,0.05)" }}>
+                          <span style={{ fontWeight: 800, fontSize: "0.88rem", color: "#a5b4fc" }}>{catData.axion?.pct ?? "—"}%</span>
+                        </td>
+                        {(catData.concorrentes || []).map((conc, ci) => {
+                          const axPct = catData.axion?.pct || 0;
+                          const superaAxion = conc.pct > axPct + 5;
+                          const inferiorAxion = conc.pct < axPct - 10;
+                          const cellColor = superaAxion ? "#ef4444" : inferiorAxion ? "#10b981" : "#94a3b8";
+                          const cellBg = superaAxion ? "rgba(239,68,68,0.08)" : inferiorAxion ? "rgba(16,185,129,0.05)" : "transparent";
+                          return (
+                            <td key={ci} style={{ textAlign: "center", padding: "8px", background: cellBg }}>
+                              <span style={{ fontWeight: 700, color: cellColor }}>{conc.pct}%</span>
+                              {superaAxion && <span style={{ display: "block", fontSize: "0.6rem", color: "#ef4444" }}>⬆️ supera</span>}
+                            </td>
+                          );
+                        })}
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+              <div style={{ fontSize: "0.7rem", color: "#475569", marginTop: 6 }}>
+                <span style={{ color: "#ef4444" }}>■</span> Supera Axion &nbsp;
+                <span style={{ color: "#10b981" }}>■</span> Inferior à Axion &nbsp;
+                <span style={{ color: "#94a3b8" }}>■</span> Similar
+              </div>
+            </div>
+          )}
 
           {/* Posição Axion — destaque */}
           {resultado.concorrentes.posicaoAxion && (

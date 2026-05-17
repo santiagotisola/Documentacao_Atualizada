@@ -120,49 +120,202 @@ const CATEGORIAS = {
   },
 };
 
-// ─── CONCORRENTES CONHECIDOS ────────────────────────────────────
+// ─── CONCORRENTES CONHECIDOS (com funcionalidades no formato matchRequisito) ──
 
 const CONCORRENTES = [
   { nome: "Perkons (Envision)", regiao: "PR/Curitiba", segmento: "Fiscalização eletrônica, radares", forca: "Líderes em radares fixos, grande base instalada", fraqueza: "Software legado, pouca inovação em IA", site: "perkons.com.br",
-    capacidades: ["radar", "lombada", "semáforo", "câmera", "ocr", "laço indutivo", "equipamento", "infração", "triagem", "exportação", "renainf", "relatório", "manutenção", "aferição", "inmetro", "monitoramento online", "operação", "enquadramento", "tarja"],
-    naoAtende: ["pesagem", "cronotacógrafo", "cerco eletrônico", "cruzamento de placas", "power bi", "saas", "cloud", "ia", "webhook", "api rest"],
-    diferencial: "Maior base instalada de radares fixos no Brasil. Hardware próprio homologado INMETRO." },
-  { nome: "Kapsch TrafficCom", regiao: "Internacional/SP", segmento: "ITS, free-flow, pedágio", forca: "Tecnologia global, V2X, IoT", fraqueza: "Custo alto, pouca capilaridade local", site: "kapsch.net",
-    capacidades: ["radar", "câmera", "ocr", "monitoramento online", "relatório", "equipamento", "semáforo", "mapa", "integração", "api"],
-    naoAtende: ["triagem", "exportação", "renainf", "pesagem", "cronotacógrafo", "cerco eletrônico", "enquadramento", "tarja", "helpdesk", "balança", "arco"],
-    diferencial: "Referência global em ITS e V2X. Forte em projetos de smart city internacionais." },
-  { nome: "Conduent (Xerox)", regiao: "SP/RJ", segmento: "Processamento de infrações", forca: "Escala, processamento massivo", fraqueza: "Atendimento burocrático, custo", site: "conduent.com",
-    capacidades: ["infração", "triagem", "exportação", "renainf", "relatório", "câmera", "ocr", "equipamento", "enquadramento", "manutenção", "operação"],
-    naoAtende: ["pesagem", "cronotacógrafo", "cerco eletrônico", "cruzamento de placas", "power bi", "saas", "cloud", "webhook", "monitoramento de veículos", "balança"],
-    diferencial: "Processamento massivo de infrações. Experiência com grandes contratos estaduais." },
-  { nome: "Velsis (Grupo Dataprom)", regiao: "PR/Nacional", segmento: "Radares, lombadas, controladores", forca: "Hardware próprio, INMETRO", fraqueza: "Software genérico, pouca IA", site: "velsis.com.br",
-    capacidades: ["radar", "lombada", "semáforo", "câmera", "ocr", "laço indutivo", "equipamento", "infração", "triagem", "exportação", "renainf", "relatório", "monitoramento online", "aferição", "inmetro", "manutenção", "operação", "enquadramento"],
-    naoAtende: ["pesagem", "cronotacógrafo", "cerco eletrônico", "power bi", "saas", "cloud", "ia", "webhook", "cruzamento de placas"],
-    diferencial: "Hardware + software integrado com homologação INMETRO. Controladores semafóricos." },
-  { nome: "Pumatronix", regiao: "PR/Curitiba", segmento: "Câmeras OCR, LPR", forca: "Hardware de captura líder", fraqueza: "Não tem plataforma completa", site: "pumatronix.com.br",
-    capacidades: ["câmera", "ocr", "lpr", "equipamento", "monitoramento online"],
-    naoAtende: ["infração", "triagem", "exportação", "renainf", "relatório", "pesagem", "cronotacógrafo", "cerco eletrônico", "dashboard", "enquadramento", "medição", "controle de acesso", "webhook", "tarja"],
-    diferencial: "Líder em câmeras OCR/LPR. Fornece hardware para integradores." },
-  { nome: "Getrak", regiao: "MG/Nacional", segmento: "Rastreamento, monitoramento", forca: "Plataforma de monitoramento veicular", fraqueza: "Foco em rastreamento, não fiscalização", site: "getrak.com.br",
-    capacidades: ["monitoramento de veículos", "rastreamento", "alerta", "cerco eletrônico", "mapa", "relatório", "equipamento"],
-    naoAtende: ["infração", "triagem", "exportação", "renainf", "radar", "lombada", "pesagem", "cronotacógrafo", "aferição", "enquadramento", "tarja", "medição"],
-    diferencial: "Plataforma robusta de monitoramento veicular e cerco eletrônico." },
-  { nome: "Sweda/Tacom", regiao: "SP/Nacional", segmento: "Pesagem veicular", forca: "Balanças dinâmicas, INMETRO", fraqueza: "Só pesagem, sem integração", site: "sweda.com.br",
-    capacidades: ["pesagem", "balança", "pbt", "classificação de veículo", "ticket", "relatório", "equipamento", "manutenção"],
-    naoAtende: ["infração", "triagem", "exportação", "renainf", "radar", "câmera", "ocr", "cerco eletrônico", "cruzamento de placas", "dashboard", "enquadramento", "webhook", "monitoramento online"],
-    diferencial: "Especialista em pesagem veicular com balanças homologadas INMETRO." },
-  { nome: "Brascontec", regiao: "GO/Centro-Oeste", segmento: "Fiscalização, videomonitoramento", forca: "Presença regional, atendimento local", fraqueza: "Tecnologia limitada", site: "brascontec.com.br",
-    capacidades: ["radar", "câmera", "equipamento", "manutenção", "operação", "monitoramento online"],
-    naoAtende: ["triagem", "exportação", "renainf", "pesagem", "cronotacógrafo", "cerco eletrônico", "power bi", "saas", "cloud", "webhook", "api", "dashboard", "enquadramento", "medição"],
-    diferencial: "Presença forte no Centro-Oeste (GO). Atendimento local e relação com órgãos regionais." },
-  { nome: "Autotrack/GTech", regiao: "SP/Nacional", segmento: "Rastreamento + OCR", forca: "Base instalada grande", fraqueza: "Plataforma legada", site: "autotrack.com.br",
-    capacidades: ["rastreamento", "ocr", "câmera", "monitoramento de veículos", "alerta", "mapa", "relatório", "equipamento"],
-    naoAtende: ["infração", "triagem", "exportação", "renainf", "pesagem", "cronotacógrafo", "aferição", "enquadramento", "tarja", "medição", "webhook"],
-    diferencial: "Grande base instalada de rastreamento. Capilaridade nacional." },
-  { nome: "Iteris (Sensys)", regiao: "Internacional/SP", segmento: "ITS, detecção, analytics", forca: "Analytics de tráfego, CV", fraqueza: "Custo internacional, suporte", site: "iteris.com",
-    capacidades: ["radar", "câmera", "ocr", "relatório", "mapa", "monitoramento online", "equipamento", "integração"],
-    naoAtende: ["infração", "triagem", "exportação", "renainf", "pesagem", "cronotacógrafo", "cerco eletrônico", "enquadramento", "tarja", "medição", "helpdesk", "balança"],
-    diferencial: "Analytics de tráfego avançado com computer vision. Forte em detecção e contagem." },
+    diferencial: "Maior base instalada de radares fixos no Brasil. Hardware próprio homologado INMETRO.",
+    funcionalidades: [
+      { termo: ["radar", "medidor de velocidade", "controlador de velocidade", "equipamento fixo", "equipamento estático"], nivel: "atende" },
+      { termo: ["lombada eletrônica", "redutor de velocidade"], nivel: "atende" },
+      { termo: ["semáforo", "avanço de sinal", "sinal vermelho", "controlador semafórico"], nivel: "atende" },
+      { termo: ["câmera", "fotossensor", "registro fotográfico", "captura de imagem"], nivel: "atende" },
+      { termo: ["ocr", "leitura de placa", "reconhecimento de placa", "lpr", "anpr"], nivel: "atende" },
+      { termo: ["laço indutivo", "detector de presença", "sensor indutivo"], nivel: "atende" },
+      { termo: ["equipamento", "cadastro de equipamento", "inventário de equipamento"], nivel: "atende" },
+      { termo: ["infração", "auto de infração", "registro de infração"], nivel: "atende" },
+      { termo: ["triagem", "validar infração", "análise de infração"], nivel: "atende" },
+      { termo: ["exportação", "exportar infração", "lote de exportação", "gerar lote"], nivel: "atende" },
+      { termo: ["renainf", "envio infração", "denatran", "senatran"], nivel: "atende" },
+      { termo: ["relatório", "relatório gerencial", "relatório de infração"], nivel: "atende" },
+      { termo: ["manutenção", "manutenção preventiva", "manutenção corretiva", "assistência técnica"], nivel: "atende" },
+      { termo: ["aferição", "inmetro", "certificado inmetro", "calibração", "metrologia"], nivel: "atende" },
+      { termo: ["monitoramento online", "tempo real", "status online"], nivel: "atende" },
+      { termo: ["operação", "operação de campo", "ponto de fiscalização"], nivel: "atende" },
+      { termo: ["enquadramento", "artigo", "código de infração", "tipo de infração"], nivel: "atende" },
+      { termo: ["tarja", "marca d'água", "proteção de imagem"], nivel: "atende" },
+      { termo: ["faixa", "faixa de velocidade", "pista"], nivel: "atende" },
+      { termo: ["contran", "resolução contran", "ctb", "código de trânsito"], nivel: "atende" },
+      { termo: ["instalação", "implantação"], nivel: "atende" },
+      { termo: ["treinamento", "capacitação"], nivel: "parcial" },
+      { termo: ["suporte", "atendimento", "chamado", "help desk"], nivel: "parcial" },
+      { termo: ["sistema", "software", "plataforma"], nivel: "parcial" },
+      { termo: ["integração", "api", "webservice"], nivel: "parcial" },
+      { termo: ["pórtico", "arco", "portal eletrônico"], nivel: "atende" },
+      { termo: ["nobreak", "energia", "ups"], nivel: "parcial" },
+      { termo: ["servidor", "rack"], nivel: "parcial" },
+    ] },
+  { nome: "Kapsch TrafficCom", regiao: "Internacional/SP", segmento: "ITS, free-flow, pedágio, smart city", forca: "Tecnologia global, V2X, IoT, analytics", fraqueza: "Custo alto, pouca capilaridade local", site: "kapsch.net",
+    diferencial: "Referência global em ITS e V2X. Forte em projetos de smart city internacionais.",
+    funcionalidades: [
+      { termo: ["câmera", "câmera fixa", "câmera ptz", "captura de imagem", "fotossensor", "cftv"], nivel: "atende" },
+      { termo: ["ocr", "leitura de placa", "reconhecimento de placa", "lpr", "anpr"], nivel: "atende" },
+      { termo: ["monitoramento online", "tempo real", "status online", "monitoramento de tráfego"], nivel: "atende" },
+      { termo: ["relatório", "relatório gerencial", "dashboard", "painel", "analytics"], nivel: "atende" },
+      { termo: ["equipamento", "cadastro de equipamento", "sensor"], nivel: "atende" },
+      { termo: ["semáforo", "controlador semafórico", "sinal", "gestão semafórica"], nivel: "atende" },
+      { termo: ["mapa", "georreferenciamento", "localização", "gis", "geoespacial"], nivel: "atende" },
+      { termo: ["integração", "api", "webservice", "rest", "web service"], nivel: "atende" },
+      { termo: ["radar", "medidor de velocidade", "detector"], nivel: "atende" },
+      { termo: ["pórtico", "arco", "portal eletrônico", "free-flow", "pedágio"], nivel: "atende" },
+      { termo: ["servidor", "rack", "data center", "infraestrutura"], nivel: "atende" },
+      { termo: ["switch", "rede", "conectividade", "fibra óptica", "link"], nivel: "atende" },
+      { termo: ["analítico", "inteligência artificial", "ia", "análise de vídeo", "computer vision", "reconhecimento facial"], nivel: "atende" },
+      { termo: ["monitoramento de veículos", "fluxo de veículos", "contagem veicular", "mobilidade"], nivel: "atende" },
+      { termo: ["sistema", "software", "plataforma", "solução"], nivel: "atende" },
+      { termo: ["nuvem", "cloud", "saas", "hospedagem"], nivel: "atende" },
+      { termo: ["manutenção", "manutenção preventiva", "manutenção corretiva"], nivel: "atende" },
+      { termo: ["instalação", "implantação", "projeto executivo"], nivel: "atende" },
+      { termo: ["treinamento", "capacitação", "operação assistida"], nivel: "atende" },
+      { termo: ["nobreak", "energia"], nivel: "parcial" },
+      { termo: ["suporte", "atendimento", "help desk"], nivel: "parcial" },
+      { termo: ["contran", "resolução contran", "ctb"], nivel: "parcial" },
+    ] },
+  { nome: "Conduent (Xerox)", regiao: "SP/RJ", segmento: "Processamento massivo de infrações", forca: "Escala, processamento massivo, grandes contratos", fraqueza: "Atendimento burocrático, custo elevado", site: "conduent.com",
+    diferencial: "Processamento massivo de infrações. Experiência com grandes contratos estaduais.",
+    funcionalidades: [
+      { termo: ["infração", "auto de infração", "registro de infração"], nivel: "atende" },
+      { termo: ["triagem", "validar infração", "análise de infração", "auditoria de infração"], nivel: "atende" },
+      { termo: ["exportação", "exportar infração", "lote de exportação", "gerar lote"], nivel: "atende" },
+      { termo: ["renainf", "envio infração", "denatran", "senatran"], nivel: "atende" },
+      { termo: ["relatório", "relatório gerencial", "relatório de infração"], nivel: "atende" },
+      { termo: ["câmera", "fotossensor", "registro fotográfico", "captura de imagem"], nivel: "atende" },
+      { termo: ["ocr", "leitura de placa", "reconhecimento de placa", "lpr"], nivel: "atende" },
+      { termo: ["equipamento", "cadastro de equipamento"], nivel: "atende" },
+      { termo: ["enquadramento", "artigo", "código de infração"], nivel: "atende" },
+      { termo: ["manutenção", "manutenção preventiva", "manutenção corretiva"], nivel: "atende" },
+      { termo: ["operação", "operação de campo", "ponto de fiscalização"], nivel: "atende" },
+      { termo: ["sistema", "software", "plataforma"], nivel: "atende" },
+      { termo: ["instalação", "implantação"], nivel: "atende" },
+      { termo: ["faixa", "faixa de velocidade"], nivel: "atende" },
+      { termo: ["aferição", "inmetro", "calibração"], nivel: "atende" },
+      { termo: ["tarja", "marca d'água", "proteção de imagem"], nivel: "atende" },
+      { termo: ["contran", "resolução contran", "ctb"], nivel: "atende" },
+      { termo: ["suporte", "atendimento", "chamado"], nivel: "parcial" },
+      { termo: ["integração", "api", "webservice"], nivel: "parcial" },
+      { termo: ["treinamento", "capacitação"], nivel: "parcial" },
+    ] },
+  { nome: "Velsis (Grupo Dataprom)", regiao: "PR/Nacional", segmento: "Radares, lombadas, controladores semafóricos", forca: "Hardware próprio, INMETRO, controladores", fraqueza: "Software genérico, pouca IA", site: "velsis.com.br",
+    diferencial: "Hardware + software integrado com homologação INMETRO. Controladores semafóricos.",
+    funcionalidades: [
+      { termo: ["radar", "medidor de velocidade", "controlador de velocidade", "equipamento fixo"], nivel: "atende" },
+      { termo: ["lombada eletrônica", "redutor de velocidade"], nivel: "atende" },
+      { termo: ["semáforo", "avanço de sinal", "sinal vermelho", "controlador semafórico"], nivel: "atende" },
+      { termo: ["câmera", "fotossensor", "registro fotográfico", "captura de imagem"], nivel: "atende" },
+      { termo: ["ocr", "leitura de placa", "reconhecimento de placa", "lpr"], nivel: "atende" },
+      { termo: ["laço indutivo", "detector de presença", "sensor indutivo"], nivel: "atende" },
+      { termo: ["equipamento", "cadastro de equipamento"], nivel: "atende" },
+      { termo: ["infração", "auto de infração", "registro de infração"], nivel: "atende" },
+      { termo: ["triagem", "validar infração"], nivel: "atende" },
+      { termo: ["exportação", "exportar infração", "gerar lote"], nivel: "atende" },
+      { termo: ["renainf", "denatran", "senatran"], nivel: "atende" },
+      { termo: ["relatório", "relatório gerencial"], nivel: "atende" },
+      { termo: ["monitoramento online", "tempo real", "status online"], nivel: "atende" },
+      { termo: ["aferição", "inmetro", "calibração", "metrologia"], nivel: "atende" },
+      { termo: ["manutenção", "manutenção preventiva", "manutenção corretiva"], nivel: "atende" },
+      { termo: ["operação", "operação de campo"], nivel: "atende" },
+      { termo: ["enquadramento", "artigo", "código de infração"], nivel: "atende" },
+      { termo: ["faixa", "faixa de velocidade", "pista"], nivel: "atende" },
+      { termo: ["pórtico", "arco", "portal eletrônico"], nivel: "atende" },
+      { termo: ["contran", "resolução contran", "ctb"], nivel: "atende" },
+      { termo: ["instalação", "implantação"], nivel: "atende" },
+      { termo: ["sistema", "software", "plataforma"], nivel: "parcial" },
+      { termo: ["treinamento", "capacitação"], nivel: "parcial" },
+      { termo: ["suporte", "atendimento"], nivel: "parcial" },
+      { termo: ["nobreak", "energia"], nivel: "parcial" },
+    ] },
+  { nome: "Pumatronix", regiao: "PR/Curitiba", segmento: "Câmeras OCR, LPR, hardware de captura", forca: "Hardware de captura líder no Brasil", fraqueza: "Não tem plataforma de gestão completa", site: "pumatronix.com.br",
+    diferencial: "Líder em câmeras OCR/LPR. Fornece hardware para integradores.",
+    funcionalidades: [
+      { termo: ["câmera", "fotossensor", "captura de imagem", "câmera fixa", "câmera ptz"], nivel: "atende" },
+      { termo: ["ocr", "leitura de placa", "reconhecimento de placa", "lpr", "anpr"], nivel: "atende" },
+      { termo: ["equipamento", "cadastro de equipamento", "sensor"], nivel: "atende" },
+      { termo: ["monitoramento online", "tempo real"], nivel: "parcial" },
+      { termo: ["pórtico", "arco", "portal eletrônico"], nivel: "atende" },
+      { termo: ["instalação", "implantação"], nivel: "parcial" },
+      { termo: ["manutenção", "assistência técnica"], nivel: "parcial" },
+    ] },
+  { nome: "Getrak", regiao: "MG/Nacional", segmento: "Rastreamento, monitoramento veicular, cerco eletrônico", forca: "Plataforma de monitoramento veicular robusta", fraqueza: "Foco em rastreamento, não fiscalização", site: "getrak.com.br",
+    diferencial: "Plataforma robusta de monitoramento veicular e cerco eletrônico.",
+    funcionalidades: [
+      { termo: ["monitoramento de veículos", "rastreamento", "monitoramento veicular"], nivel: "atende" },
+      { termo: ["cerco eletrônico", "cerco inteligente", "bloqueio veicular"], nivel: "atende" },
+      { termo: ["alerta", "alerta de placa", "notificação automática"], nivel: "atende" },
+      { termo: ["mapa", "georreferenciamento", "localização"], nivel: "atende" },
+      { termo: ["relatório", "relatório gerencial"], nivel: "atende" },
+      { termo: ["equipamento", "cadastro de equipamento"], nivel: "parcial" },
+      { termo: ["câmera", "captura de imagem"], nivel: "parcial" },
+      { termo: ["ocr", "leitura de placa", "lpr"], nivel: "parcial" },
+      { termo: ["sistema", "software", "plataforma"], nivel: "atende" },
+      { termo: ["integração", "api", "webservice"], nivel: "atende" },
+    ] },
+  { nome: "Sweda/Tacom", regiao: "SP/Nacional", segmento: "Pesagem veicular, balanças", forca: "Balanças dinâmicas e estáticas, INMETRO", fraqueza: "Só pesagem, sem integração com fiscalização", site: "sweda.com.br",
+    diferencial: "Especialista em pesagem veicular com balanças homologadas INMETRO.",
+    funcionalidades: [
+      { termo: ["pesagem", "pesagem veicular", "balança dinâmica", "balança estática", "balança"], nivel: "atende" },
+      { termo: ["pbt", "peso bruto total", "excesso de peso", "sobrepeso"], nivel: "atende" },
+      { termo: ["classificação de veículo", "eixo", "cmt"], nivel: "atende" },
+      { termo: ["ticket", "ticket de pesagem", "registro de pesagem"], nivel: "atende" },
+      { termo: ["relatório", "relatório de pesagem"], nivel: "atende" },
+      { termo: ["equipamento", "cadastro de equipamento"], nivel: "atende" },
+      { termo: ["manutenção", "assistência técnica"], nivel: "atende" },
+      { termo: ["aferição", "inmetro", "calibração"], nivel: "atende" },
+      { termo: ["instalação", "implantação"], nivel: "atende" },
+    ] },
+  { nome: "Brascontec", regiao: "GO/Centro-Oeste", segmento: "Fiscalização, videomonitoramento regional", forca: "Presença regional, atendimento local", fraqueza: "Tecnologia limitada, sem inovação", site: "brascontec.com.br",
+    diferencial: "Presença forte no Centro-Oeste (GO). Atendimento local e relação com órgãos regionais.",
+    funcionalidades: [
+      { termo: ["radar", "medidor de velocidade"], nivel: "atende" },
+      { termo: ["câmera", "fotossensor", "captura de imagem", "cftv", "vídeo monitoramento"], nivel: "atende" },
+      { termo: ["equipamento", "cadastro de equipamento"], nivel: "atende" },
+      { termo: ["manutenção", "manutenção preventiva", "manutenção corretiva"], nivel: "atende" },
+      { termo: ["operação", "operação de campo"], nivel: "atende" },
+      { termo: ["monitoramento online", "tempo real"], nivel: "atende" },
+      { termo: ["instalação", "implantação"], nivel: "atende" },
+      { termo: ["pórtico", "arco"], nivel: "parcial" },
+      { termo: ["suporte", "atendimento"], nivel: "atende" },
+      { termo: ["nobreak", "energia"], nivel: "parcial" },
+    ] },
+  { nome: "Autotrack/GTech", regiao: "SP/Nacional", segmento: "Rastreamento + OCR + monitoramento", forca: "Base instalada grande, capilaridade", fraqueza: "Plataforma legada", site: "autotrack.com.br",
+    diferencial: "Grande base instalada de rastreamento. Capilaridade nacional.",
+    funcionalidades: [
+      { termo: ["rastreamento", "monitoramento veicular", "monitoramento de veículos"], nivel: "atende" },
+      { termo: ["ocr", "leitura de placa", "reconhecimento de placa"], nivel: "atende" },
+      { termo: ["câmera", "captura de imagem"], nivel: "atende" },
+      { termo: ["alerta", "alerta de placa", "notificação"], nivel: "atende" },
+      { termo: ["mapa", "georreferenciamento"], nivel: "atende" },
+      { termo: ["relatório", "relatório gerencial"], nivel: "atende" },
+      { termo: ["equipamento", "cadastro de equipamento"], nivel: "atende" },
+      { termo: ["sistema", "software", "plataforma"], nivel: "parcial" },
+      { termo: ["integração", "api"], nivel: "parcial" },
+    ] },
+  { nome: "Iteris (Sensys)", regiao: "Internacional/SP", segmento: "ITS, detecção, analytics de tráfego", forca: "Analytics de tráfego, computer vision", fraqueza: "Custo internacional, suporte limitado", site: "iteris.com",
+    diferencial: "Analytics de tráfego avançado com computer vision. Forte em detecção e contagem.",
+    funcionalidades: [
+      { termo: ["radar", "medidor de velocidade", "detector"], nivel: "atende" },
+      { termo: ["câmera", "câmera fixa", "câmera ptz", "captura de imagem", "cftv"], nivel: "atende" },
+      { termo: ["ocr", "leitura de placa", "reconhecimento de placa", "lpr"], nivel: "atende" },
+      { termo: ["relatório", "dashboard", "painel", "analytics"], nivel: "atende" },
+      { termo: ["mapa", "georreferenciamento", "gis"], nivel: "atende" },
+      { termo: ["monitoramento online", "tempo real", "monitoramento de tráfego"], nivel: "atende" },
+      { termo: ["equipamento", "sensor", "detector"], nivel: "atende" },
+      { termo: ["integração", "api", "webservice"], nivel: "atende" },
+      { termo: ["analítico", "inteligência artificial", "ia", "computer vision", "análise de vídeo"], nivel: "atende" },
+      { termo: ["fluxo de veículos", "contagem veicular", "volume de tráfego"], nivel: "atende" },
+      { termo: ["servidor", "infraestrutura"], nivel: "parcial" },
+      { termo: ["sistema", "software", "plataforma"], nivel: "atende" },
+      { termo: ["instalação", "implantação"], nivel: "parcial" },
+    ] },
 ];
 
 // ─── FUNÇÃO PRINCIPAL: ANÁLISE COMPLETA ─────────────────────────
@@ -1025,121 +1178,213 @@ Responda APENAS com JSON válido.`;
 }
 
 /**
+ * Matching de requisito contra capacidades de concorrente (mesmo algoritmo da Axion)
+ */
+function matchRequisitoConcorrente(texto, funcionalidades) {
+  const lower = texto.toLowerCase();
+  let melhorMatch = null;
+  let melhorScore = 0;
+
+  for (const cap of funcionalidades) {
+    for (const t of cap.termo) {
+      if (lower.includes(t.toLowerCase())) {
+        const score = t.length + (cap.nivel === "atende" ? 20 : cap.nivel === "parcial" ? 10 : 0);
+        if (score > melhorScore) {
+          melhorScore = score;
+          melhorMatch = cap;
+        }
+      }
+    }
+  }
+
+  return melhorMatch ? { nivel: melhorMatch.nivel, score: melhorScore } : null;
+}
+
+/**
  * Análise de concorrentes local AVANÇADA (fallback sem IA)
- * Calcula % de atendimento real cruzando capacidades vs requisitos do edital
+ * Usa o MESMO algoritmo de matching da Axion para todos os concorrentes
+ * Gera comparativo por categoria
  */
 function gerarConcorrentesLocal(categorias, regiaoEdital, dePara = null) {
   const regLower = (regiaoEdital || "").toLowerCase();
 
-  // Extrair termos-chave do edital para matching
-  const todosRequisitos = [];
+  // Extrair requisitos POR CATEGORIA para comparativo
+  const reqPorCategoria = {};
+  let totalReqs = 0;
   for (const [catKey, catData] of Object.entries(categorias)) {
-    for (const item of catData.itens || []) {
-      todosRequisitos.push(item.texto.toLowerCase());
-    }
+    const itens = (catData.itens || []).map(item => item.texto);
+    reqPorCategoria[catKey] = itens;
+    totalReqs += itens.length;
   }
-  const totalReqs = todosRequisitos.length || 1;
+  if (totalReqs === 0) totalReqs = 1;
 
-  // Calcular % da Axion a partir do dePara real
+  // Dados do dePara para Axion
   const axionPct = dePara?.resumo?.percentualCobertura || null;
   const axionAtende = dePara?.resumo?.atendeCompleto || 0;
   const axionParcial = dePara?.resumo?.atendeParcial || 0;
   const axionNaoAtende = dePara?.resumo?.naoAtende || 0;
 
+  // Calcular score da Axion por categoria (do dePara)
+  const axionPorCategoria = {};
+  const diagSource = dePara?.diagnosticoPorCategoria || dePara?.diagnostico || {};
+  for (const [catKey, catDiag] of Object.entries(diagSource)) {
+    axionPorCategoria[catKey] = {
+      atende: catDiag.atende || 0,
+      parcial: catDiag.parcial || 0,
+      naoAtende: catDiag.naoAtende || 0,
+      total: (catDiag.atende || 0) + (catDiag.parcial || 0) + (catDiag.naoAtende || 0),
+    };
+    const tot = axionPorCategoria[catKey].total || 1;
+    axionPorCategoria[catKey].pct = catDiag.cobertura != null
+      ? catDiag.cobertura
+      : Math.round(((catDiag.atende || 0) + (catDiag.parcial || 0) * 0.5) / tot * 100);
+  }
+
+  // Score de cada concorrente — usando matchRequisito real por categoria
   const ranking = CONCORRENTES.map(c => {
-    // Calcular % cruzando capacidades do concorrente vs termos do edital
-    let atende = 0;
-    let naoAtende = 0;
+    let atendeTotal = 0;
+    let parcialTotal = 0;
+    let naoAtendeTotal = 0;
+    const porCategoria = {};
+    const categoriasFortes = [];
+    const categoriasFracas = [];
 
-    for (const reqTexto of todosRequisitos) {
-      const matchCap = c.capacidades?.some(cap => reqTexto.includes(cap.toLowerCase()));
-      const matchNao = c.naoAtende?.some(gap => reqTexto.includes(gap.toLowerCase()));
+    for (const [catKey, itens] of Object.entries(reqPorCategoria)) {
+      let catAtende = 0, catParcial = 0, catNao = 0;
 
-      if (matchCap && !matchNao) atende++;
-      else if (matchNao) naoAtende++;
-      // Se nenhum match, conta como indeterminado (não soma nem subtrai)
+      for (const textoReq of itens) {
+        const m = matchRequisitoConcorrente(textoReq, c.funcionalidades || []);
+        if (m && m.nivel === "atende") { catAtende++; atendeTotal++; }
+        else if (m && m.nivel === "parcial") { catParcial++; parcialTotal++; }
+        else { catNao++; naoAtendeTotal++; }
+      }
+
+      const catTotal = itens.length || 1;
+      const catPct = Math.round(((catAtende + catParcial * 0.5) / catTotal) * 100);
+      porCategoria[catKey] = { atende: catAtende, parcial: catParcial, naoAtende: catNao, total: itens.length, pct: catPct };
+
+      // Marcar categorias fortes e fracas
+      if (catPct >= 50) categoriasFortes.push({ cat: catKey, pct: catPct });
+      if (catPct < 20 && itens.length > 3) categoriasFracas.push({ cat: catKey, pct: catPct });
     }
 
-    const pct = Math.round((atende / totalReqs) * 100);
+    const pctGlobal = Math.round(((atendeTotal + parcialTotal * 0.5) / totalReqs) * 100);
 
     // Região
     const regioesConcorrente = c.regiao.toLowerCase().split("/").map(r => r.trim());
-    const mesmaRegiao = regLower && regioesConcorrente.some(r => regLower.includes(r) || r.includes("nacional"));
     const isLocal = regLower && regioesConcorrente.some(r => r !== "nacional" && r !== "internacional" && regLower.includes(r));
     const isInternacional = regioesConcorrente.some(r => r === "internacional");
+    const mesmaRegiao = regLower && regioesConcorrente.some(r => regLower.includes(r) || r.includes("nacional"));
 
     let distancia = "nacional";
     if (isLocal) distancia = "local";
     else if (isInternacional) distancia = "internacional";
     else if (mesmaRegiao) distancia = "estadual";
 
+    // Comparar contra Axion por categoria — identificar onde concorrente é MELHOR
+    const superaAxionEm = [];
+    const inferiorAxionEm = [];
+    for (const [catKey, catScore] of Object.entries(porCategoria)) {
+      const axionCat = axionPorCategoria[catKey];
+      if (axionCat) {
+        if (catScore.pct > axionCat.pct + 5) {
+          superaAxionEm.push({ cat: catKey, concPct: catScore.pct, axionPct: axionCat.pct, diff: catScore.pct - axionCat.pct });
+        } else if (catScore.pct < axionCat.pct - 10) {
+          inferiorAxionEm.push({ cat: catKey, concPct: catScore.pct, axionPct: axionCat.pct });
+        }
+      }
+    }
+
     // Pontos fortes e fracos contextuais
     const fortes = [c.forca];
-    const fracos = [c.fraqueza];
     if (c.diferencial) fortes.push(c.diferencial);
-    if (pct < 40) fracos.push(`Baixa cobertura dos requisitos deste edital (${pct}%)`);
-    if (isLocal) fortes.push(`Presença local na região do edital`);
+    if (isLocal) fortes.push("Presença local na região do edital");
+    if (categoriasFortes.length > 0) fortes.push(`Forte em: ${categoriasFortes.map(cf => `${CATEGORIAS[cf.cat]?.label || cf.cat} (${cf.pct}%)`).join(", ")}`);
+    if (superaAxionEm.length > 0) fortes.push(`Supera Axion em: ${superaAxionEm.map(s => `${CATEGORIAS[s.cat]?.label || s.cat} (+${s.diff}pp)`).join(", ")}`);
+
+    const fracos = [c.fraqueza];
+    if (categoriasFracas.length > 0) fracos.push(`Fraco em: ${categoriasFracas.map(cf => `${CATEGORIAS[cf.cat]?.label || cf.cat} (${cf.pct}%)`).join(", ")}`);
     if (isInternacional) fracos.push("Custo e suporte internacional dificultam");
 
-    // Risco de conflito
-    let conflito = false;
-    let motivoConflito = "";
-    if (isLocal) {
-      conflito = true;
-      motivoConflito = `Concorrente local na mesma região (${c.regiao})`;
-    }
+    // Nível de ameaça
+    let nivelAmeaca = "baixo";
+    if (pctGlobal >= 40 || superaAxionEm.length >= 2) nivelAmeaca = "alto";
+    else if (pctGlobal >= 25 || superaAxionEm.length >= 1) nivelAmeaca = "medio";
+    if (isLocal && pctGlobal >= 20) nivelAmeaca = nivelAmeaca === "baixo" ? "medio" : "alto";
 
     return {
       empresa: c.nome,
-      percentualAtendimento: pct,
+      percentualAtendimento: pctGlobal,
       pontosFortes: fortes,
       pontosFracos: fracos,
-      conflitoPotencial: conflito,
-      motivoConflito,
+      conflitoPotencial: isLocal || nivelAmeaca === "alto",
+      motivoConflito: isLocal ? `Concorrente local na mesma região (${c.regiao})` : nivelAmeaca === "alto" ? `Alta aderência ao edital (${pctGlobal}%)` : "",
       distanciaRegional: distancia,
       segmento: c.segmento,
       site: c.site,
-      reqAtende: atende,
-      reqNaoAtende: naoAtende,
+      nivelAmeaca,
+      porCategoria,
+      superaAxionEm,
+      categoriasFortes: categoriasFortes.map(cf => cf.cat),
+      reqAtende: atendeTotal,
+      reqParcial: parcialTotal,
+      reqNaoAtende: naoAtendeTotal,
     };
   });
 
   // Ordenar por % de atendimento (maior primeiro)
   ranking.sort((a, b) => b.percentualAtendimento - a.percentualAtendimento);
 
-  // Detectar quem atende mais (potencial 100%)
+  // Quem é mais aderente
   const melhor = ranking[0];
-  const suspeitaDirecionamento = melhor && melhor.percentualAtendimento > 85;
+  const suspeitaDirecionamento = melhor && melhor.percentualAtendimento > 60;
+  const concorrentesMaisAderentes = ranking.filter(r => axionPct !== null && r.percentualAtendimento > axionPct);
 
-  // Alertas de conflito
+  // Alertas
   const alertas = [];
   ranking.forEach(r => {
-    if (r.conflitoPotencial) {
-      alertas.push({ empresa: r.empresa, tipo: "mesma_regiao", descricao: r.motivoConflito, risco: r.percentualAtendimento > 60 ? "alto" : "medio" });
+    if (r.nivelAmeaca === "alto") {
+      alertas.push({ empresa: r.empresa, tipo: "alta_aderencia", descricao: `${r.empresa} tem ${r.percentualAtendimento}% de aderência — ameaça forte`, risco: "alto" });
     }
-    if (r.percentualAtendimento > 80) {
-      alertas.push({ empresa: r.empresa, tipo: "alta_cobertura", descricao: `${r.empresa} atende ${r.percentualAtendimento}% dos requisitos — concorrente forte`, risco: "alto" });
+    if (r.superaAxionEm.length > 0) {
+      alertas.push({ empresa: r.empresa, tipo: "supera_axion", descricao: `Supera Axion em ${r.superaAxionEm.map(s => CATEGORIAS[s.cat]?.label || s.cat).join(", ")}`, risco: r.superaAxionEm.length >= 2 ? "alto" : "medio" });
+    }
+    if (r.distanciaRegional === "local") {
+      alertas.push({ empresa: r.empresa, tipo: "mesma_regiao", descricao: `Concorrente local — ${r.empresa} (${r.distanciaRegional})`, risco: "medio" });
     }
   });
 
-  // Posição Axion — usar dePara real
+  // Gerar matriz comparativa por categoria
+  const matrizCategoria = {};
+  for (const catKey of Object.keys(reqPorCategoria)) {
+    matrizCategoria[catKey] = {
+      label: CATEGORIAS[catKey]?.label || catKey,
+      icon: CATEGORIAS[catKey]?.icon || "📌",
+      totalReqs: reqPorCategoria[catKey].length,
+      axion: axionPorCategoria[catKey] || { pct: 0, atende: 0 },
+      concorrentes: ranking.slice(0, 5).map(r => ({
+        empresa: r.empresa,
+        pct: r.porCategoria[catKey]?.pct || 0,
+        atende: r.porCategoria[catKey]?.atende || 0,
+      })),
+    };
+  }
+
+  // Posição Axion
   const vantagensAxion = ["SaaS unificado (AxHub + AxTon + AxCross)", "IA integrada com análise de editais", "Helpdesk automatizado com AxionIA"];
   const gapsAxion = [];
 
   if (axionPct !== null) {
-    vantagensAxion.push(`${axionPct}% de cobertura confirmada por matching de capacidades`);
+    vantagensAxion.push(`${axionPct}% de cobertura confirmada por De-Para`);
     if (axionAtende > 0) vantagensAxion.push(`${axionAtende} requisitos atendidos integralmente`);
-    if (axionNaoAtende > 0) gapsAxion.push(`${axionNaoAtende} requisito(s) não atendido(s) — ver Plano de Ação no De-Para`);
-    if (axionParcial > 0) gapsAxion.push(`${axionParcial} requisito(s) parcialmente atendido(s) — evolução necessária`);
+    if (axionNaoAtende > 0) gapsAxion.push(`${axionNaoAtende} requisito(s) não atendido(s) — ver Plano de Ação`);
+    if (axionParcial > 0) gapsAxion.push(`${axionParcial} parcialmente atendido(s)`);
   }
 
-  // Comparar Axion vs melhor concorrente
-  if (axionPct !== null && melhor) {
-    if (axionPct > melhor.percentualAtendimento) {
-      vantagensAxion.push(`Cobertura superior ao principal concorrente (${melhor.empresa}: ${melhor.percentualAtendimento}%)`);
-    } else if (axionPct < melhor.percentualAtendimento) {
-      gapsAxion.push(`${melhor.empresa} tem cobertura estimada de ${melhor.percentualAtendimento}% — avaliar diferenciais`);
-    }
+  if (concorrentesMaisAderentes.length > 0) {
+    gapsAxion.push(`⚠️ ${concorrentesMaisAderentes.length} concorrente(s) com aderência superior: ${concorrentesMaisAderentes.map(c => `${c.empresa} (${c.percentualAtendimento}%)`).join(", ")}`);
+  } else if (axionPct !== null && melhor) {
+    vantagensAxion.push(`Cobertura superior a todos os concorrentes mapeados (melhor: ${melhor.empresa} ${melhor.percentualAtendimento}%)`);
   }
 
   if (gapsAxion.length === 0) gapsAxion.push("Sem gaps críticos identificados");
@@ -1147,14 +1392,15 @@ function gerarConcorrentesLocal(categorias, regiaoEdital, dePara = null) {
   return {
     ranking,
     alertasConflito: alertas,
+    matrizCategoria,
     quemAtende100: {
       empresa: suspeitaDirecionamento ? melhor.empresa : "Nenhum concorrente atende 100%",
       justificativa: suspeitaDirecionamento
-        ? `${melhor.empresa} atende ${melhor.percentualAtendimento}% — possível direcionamento ou expertise consolidada no segmento`
-        : "Nenhum concorrente mapeado cobre integralmente todos os requisitos do edital",
-      suspeitaDirecionamento: suspeitaDirecionamento,
+        ? `${melhor.empresa} atende ${melhor.percentualAtendimento}% — maior aderência entre concorrentes`
+        : "Nenhum concorrente mapeado cobre integralmente os requisitos",
+      suspeitaDirecionamento,
       evidencias: suspeitaDirecionamento
-        ? [`Cobertura de ${melhor.percentualAtendimento}%`, `Segmento: ${melhor.segmento}`, melhor.distanciaRegional === "local" ? "Concorrente local" : ""]
+        ? [`Cobertura de ${melhor.percentualAtendimento}%`, `Segmento: ${melhor.segmento}`, `Forte em: ${melhor.categoriasFortes.map(c => CATEGORIAS[c]?.label || c).join(", ")}`, melhor.distanciaRegional === "local" ? "Concorrente local" : ""].filter(Boolean)
         : [],
     },
     posicaoAxion: {
@@ -1162,7 +1408,7 @@ function gerarConcorrentesLocal(categorias, regiaoEdital, dePara = null) {
       vantagensCompetitivas: vantagensAxion,
       gapsVsConcorrentes: gapsAxion,
     },
-    _nota: `Análise competitiva por matching de capacidades: ${todosRequisitos.length} requisitos do edital cruzados com ${CONCORRENTES.length} concorrentes. % indica cobertura estimada por termos-chave.`,
+    _nota: `Análise competitiva: ${totalReqs} requisitos do edital analisados com o mesmo algoritmo de matching para Axion e ${CONCORRENTES.length} concorrentes. Comparativo por ${Object.keys(reqPorCategoria).length} categorias.`,
   };
 }
 
