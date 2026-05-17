@@ -713,6 +713,64 @@ export default function AnaliseEditalAvancada() {
           )}
 
           {/* Dores do cliente */}
+          {/* ═══ SOLUÇÕES DE MERCADO PARA GAPS ═══ */}
+          {(resultado.mercado.solucoesMercado || []).length > 0 && (
+            <div style={{ marginBottom: "1.5rem" }}>
+              <h4 style={{ color: "#c084fc", marginBottom: "0.8rem", fontSize: "1rem" }}>🛒 Soluções Disponíveis no Mercado para os Gaps</h4>
+              <p style={{ color: "#64748b", fontSize: "0.78rem", marginBottom: "0.8rem" }}>
+                Requisitos que o sistema não atende ou atende parcialmente — com soluções encontradas no mercado e regras de negócio para implementação.
+              </p>
+              <div style={{ display: "grid", gap: "0.6rem" }}>
+                {resultado.mercado.solucoesMercado.map((sol, i) => {
+                  const corStatus = sol.status === "nao_atende" ? "#ef4444" : "#f59e0b";
+                  const bgStatus = sol.status === "nao_atende" ? "#ef444418" : "#f59e0b18";
+                  const labelStatus = sol.status === "nao_atende" ? "❌ Não atende" : "⚠️ Parcial";
+                  const corCompl = sol.complexidade === "alta" ? "#ef4444" : sol.complexidade === "media" ? "#f59e0b" : "#10b981";
+                  const iconTipo = { hardware: "🔧", software: "💻", infra: "🏗️", processo: "⚙️", documento: "📋", norma: "📜", comercial: "💰" }[sol.tipo] || "📌";
+                  return (
+                    <div key={i} style={{ background: "rgba(255,255,255,0.03)", border: `1px solid rgba(255,255,255,0.08)`, borderRadius: 12, padding: "1rem", borderLeft: `4px solid ${corStatus}` }}>
+                      {/* Header: requisito + status */}
+                      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: "0.5rem", gap: 8 }}>
+                        <div style={{ flex: 1 }}>
+                          <span style={{ fontSize: "0.72rem", color: corStatus, background: bgStatus, padding: "1px 8px", borderRadius: 6, fontWeight: 600 }}>{labelStatus}</span>
+                          <span style={{ fontSize: "0.72rem", color: "#64748b", marginLeft: 6 }}>{iconTipo} {sol.categoria}</span>
+                        </div>
+                        <div style={{ display: "flex", gap: 4 }}>
+                          <span style={{ fontSize: "0.65rem", background: `${corCompl}20`, color: corCompl, padding: "1px 6px", borderRadius: 4 }}>⚡ {sol.complexidade}</span>
+                          {sol.prioridade && <span style={{ fontSize: "0.65rem", background: "rgba(139,92,246,0.15)", color: "#c084fc", padding: "1px 6px", borderRadius: 4 }}>🎯 {sol.prioridade}</span>}
+                        </div>
+                      </div>
+                      <div style={{ color: "#cbd5e1", fontSize: "0.82rem", fontWeight: 500, marginBottom: "0.5rem" }}>{sol.requisito}</div>
+
+                      {/* Solução de mercado */}
+                      <div style={{ background: "rgba(139,92,246,0.08)", borderRadius: 8, padding: "0.6rem 0.8rem", marginBottom: "0.5rem" }}>
+                        <div style={{ color: "#c084fc", fontSize: "0.75rem", fontWeight: 700, marginBottom: 3 }}>🛒 Solução no Mercado:</div>
+                        <div style={{ color: "#e2e8f0", fontSize: "0.82rem" }}>{sol.solucaoMercado}</div>
+                        {sol.fornecedores?.length > 0 && (
+                          <div style={{ marginTop: 4, display: "flex", flexWrap: "wrap", gap: 4 }}>
+                            {sol.fornecedores.map((f, fi) => (
+                              <span key={fi} style={{ fontSize: "0.68rem", background: "rgba(255,255,255,0.08)", color: "#94a3b8", padding: "1px 8px", borderRadius: 4 }}>{f}</span>
+                            ))}
+                          </div>
+                        )}
+                      </div>
+
+                      {/* Regra de negócio */}
+                      <div style={{ background: "rgba(16,185,129,0.06)", borderRadius: 8, padding: "0.6rem 0.8rem", border: "1px solid rgba(16,185,129,0.15)" }}>
+                        <div style={{ color: "#6ee7b7", fontSize: "0.75rem", fontWeight: 700, marginBottom: 3 }}>📐 Regra de Negócio para Implementação:</div>
+                        <div style={{ color: "#cbd5e1", fontSize: "0.8rem", lineHeight: 1.5 }}>{sol.regraDeNegocio}</div>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+              <div style={{ marginTop: "0.6rem", fontSize: "0.72rem", color: "#475569", fontStyle: "italic" }}>
+                ℹ️ {resultado.mercado.solucoesMercado.length} solução(ões) de mercado mapeada(s) para os gaps do sistema. As regras de negócio podem ser usadas diretamente como especificação para desenvolvimento.
+              </div>
+            </div>
+          )}
+
+          {/* Dores do cliente */}
           <div style={{ marginBottom: "1.2rem" }}>
             <h4 style={{ color: "#f87171", marginBottom: "0.5rem" }}>🔥 Maiores Dores dos Clientes</h4>
             <div style={{ display: "grid", gap: "0.5rem" }}>

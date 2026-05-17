@@ -1531,6 +1531,114 @@ Responda APENAS com JSON válido.`;
 // ─── RESUMO EXECUTIVO ───────────────────────────────────────────
 
 /**
+ * Base de soluções de mercado por termo-chave
+ * Mapeamento: se o requisito contém o termo, a solução é sugerida
+ */
+const SOLUCOES_MERCADO = [
+  // Hardware / Equipamentos
+  { termos: ["nobreak", "ups", "autonomia"], solucao: "NHS, APC, Eaton — Nobreaks industriais com autonomia configurável", tipo: "hardware", fornecedores: ["NHS", "APC by Schneider", "Eaton"], regraDeNegocio: "Incluir nobreak com autonomia >= exigida no edital para cada ponto de instalação. Registrar autonomia real e data de troca de baterias.", complexidade: "baixa" },
+  { termos: ["gabinete", "ip66", "ip65", "outdoor", "proteção"], solucao: "Enerbras, Cemar, Steck — Gabinetes outdoor IP66 para eletrônica embarcada", tipo: "hardware", fornecedores: ["Enerbras", "Cemar/Steck", "Rittal"], regraDeNegocio: "Especificar gabinete com IP >= exigido. Controlar inventário por ponto e registrar manutenções preventivas.", complexidade: "baixa" },
+  { termos: ["câmera", "ocr", "lpr", "captura de placa", "leitura de placa"], solucao: "Pumatronix ITSCAM, Hikvision, Intelbras — Câmeras OCR/LPR com SDK integrável", tipo: "hardware", fornecedores: ["Pumatronix", "Hikvision", "Intelbras"], regraDeNegocio: "Integrar câmera OCR via SDK/API. Armazenar imagem + placa + confiança OCR. Reprocessar imagens com confiança < 80%.", complexidade: "media" },
+  { termos: ["radar", "medição de velocidade", "velocímetro", "medidor"], solucao: "Perkons, Velsis, Sensys — Radares fixos/portáteis com homologação INMETRO", tipo: "hardware", fornecedores: ["Perkons", "Velsis", "Sensys/Iteris"], regraDeNegocio: "Equipamento deve ter portaria INMETRO vigente. Registrar número de série, data aferição e próximo vencimento. Bloquear processamento se aferição vencida.", complexidade: "alta" },
+  { termos: ["laço indutivo", "piezoelétrico", "sensor", "detecção veicular"], solucao: "RENO, Quixote (3M), Loop Detector Inc — Sensores de presença veicular", tipo: "hardware", fornecedores: ["RENO Indústria", "3M/Quixote", "Loop Detector"], regraDeNegocio: "Registrar tipo de sensor por ponto de fiscalização. Manter calibração dentro do prazo. Gerar alerta quando sensor falhar por mais de 1h.", complexidade: "media" },
+  { termos: ["4g", "5g", "fibra", "comunicação", "transmissão"], solucao: "Vivo, Claro, TIM — Links 4G/5G dedicados ou MPLS/Fibra", tipo: "infra", fornecedores: ["Vivo Empresas", "Claro", "TIM"], regraDeNegocio: "Garantir link redundante (4G+fibra ou dual-SIM). Monitorar latência e disponibilidade. Alertar se offline > 30min.", complexidade: "baixa" },
+
+  // Software / Módulos
+  { termos: ["renainf", "envio de infração", "integração renainf"], solucao: "API RENAINF (SERPRO/DENATRAN) — Webservice para envio de infrações", tipo: "software", fornecedores: ["SERPRO", "DENATRAN"], regraDeNegocio: "Implementar módulo de exportação RENAINF no formato XML/JSON padrão. Validar campos obrigatórios antes do envio. Registrar protocolo de retorno e reenviar rejeitados automaticamente.", complexidade: "alta" },
+  { termos: ["jari", "recurso", "defesa", "segunda instância", "cetran"], solucao: "Módulo de gestão recursal com controle de prazos (CTB Art. 281-A)", tipo: "software", fornecedores: ["Desenvolvimento interno"], regraDeNegocio: "Controlar prazo de defesa prévia (15 dias), recurso JARI (30 dias) e CETRAN (30 dias). Gerar pauta automática. Notificar partes. Registrar decisão e fundamentação.", complexidade: "alta" },
+  { termos: ["portal do cidadão", "consulta pelo condutor", "autoatendimento"], solucao: "Portal web público com consulta por placa/CPF e autenticação gov.br", tipo: "software", fornecedores: ["gov.br (Login Único)", "Desenvolvimento interno"], regraDeNegocio: "Portal acessível 24/7 com consulta de infrações, segunda via de boleto, indicação de condutor e acompanhamento de recurso. Autenticação via gov.br nível prata.", complexidade: "media" },
+  { termos: ["ait", "auto de infração", "talão", "código de barras", "qr code"], solucao: "Gerador de AIT com layout CONTRAN + código de barras/QR Code", tipo: "software", fornecedores: ["Desenvolvimento interno"], regraDeNegocio: "Gerar AIT conforme modelo CONTRAN vigente. Incluir QR Code com link para consulta online. Código de barras para pagamento (Febraban). Numerar sequencialmente com controle de faixa.", complexidade: "media" },
+  { termos: ["notificação", "ar digital", "correios", "e-mail", "sms"], solucao: "Correios AR Digital + API de e-mail/SMS (SendGrid, Twilio)", tipo: "software", fornecedores: ["Correios (AR Digital)", "SendGrid", "Twilio", "AWS SES"], regraDeNegocio: "Emitir notificação de autuação e penalidade conforme CTB Art. 281. Registrar data de envio, data de recebimento (AR) e calcular prazo legal a partir do recebimento. Reenviar se AR devolvido.", complexidade: "alta" },
+  { termos: ["indicação de condutor", "nic", "transferência"], solucao: "Módulo NIC — Notificação de Indicação de Condutor com upload de CNH", tipo: "software", fornecedores: ["Desenvolvimento interno"], regraDeNegocio: "Permitir indicação online e presencial. Validar CNH do indicado via RENACH. Controlar prazo de 15 dias para indicação. Aceitar upload de documentos (CNH, procuração).", complexidade: "media" },
+  { termos: ["triagem", "validação de imagem", "conferência", "dupla verificação"], solucao: "Módulo de triagem com fila de trabalho + dupla conferência", tipo: "software", fornecedores: ["Desenvolvimento interno"], regraDeNegocio: "Imagens passam por 2 operadores independentes. Se divergência, vai para supervisor. Registrar operador, data/hora e motivo de descarte. Manter SLA de triagem < 48h.", complexidade: "media" },
+  { termos: ["dashboard", "relatório", "bi", "indicador"], solucao: "Dashboards com gráficos interativos (Recharts, Chart.js) + exportação", tipo: "software", fornecedores: ["Recharts", "Chart.js", "Apache ECharts"], regraDeNegocio: "Dashboard com indicadores: infrações/dia, taxa aprovação triagem, tempo médio processamento, ranking por equipamento. Exportação em PDF, Excel e CSV com filtros por período.", complexidade: "baixa" },
+  { termos: ["api rest", "integração", "webservice", "api"], solucao: "API REST documentada com Swagger/OpenAPI + autenticação JWT", tipo: "software", fornecedores: ["Desenvolvimento interno"], regraDeNegocio: "API com endpoints para consulta de infrações, passagens e equipamentos. Autenticação via JWT com refresh token. Rate limiting por cliente. Documentação OpenAPI 3.0.", complexidade: "media" },
+  { termos: ["log", "auditoria", "rastreabilidade", "registro de ação"], solucao: "Sistema de audit trail com registro imutável de ações", tipo: "software", fornecedores: ["Desenvolvimento interno", "Elasticsearch"], regraDeNegocio: "Registrar TODAS as ações: login, visualização, edição, exclusão, exportação. Campos: usuário, IP, data/hora, ação, dados antes/depois. Logs imutáveis com retenção mínima de 5 anos.", complexidade: "media" },
+  { termos: ["perfil", "acesso", "permissão", "rbac", "controle de acesso"], solucao: "RBAC — Controle de acesso baseado em perfis/papéis", tipo: "software", fornecedores: ["Desenvolvimento interno"], regraDeNegocio: "Perfis mínimos: Administrador, Operador, Auditor, Consulta. Cada perfil com permissões granulares (CRUD por módulo). Administrador gerencia usuários e perfis. Sessão expira após inatividade.", complexidade: "baixa" },
+  { termos: ["cloud", "nuvem", "saas", "disponibilidade", "99"], solucao: "Azure, AWS ou GCP — Cloud com SLA >= 99,5%", tipo: "infra", fornecedores: ["Microsoft Azure", "AWS", "Google Cloud"], regraDeNegocio: "Hospedar em cloud com SLA >= exigido. Monitorar uptime com Uptime Robot ou similar. Implementar health check automático. Escalar horizontalmente sob demanda.", complexidade: "media" },
+
+  // Infraestrutura
+  { termos: ["backup", "retenção", "cópia de segurança"], solucao: "Azure Backup, AWS S3 Glacier, Veeam — Backup automatizado com retenção", tipo: "infra", fornecedores: ["Azure Backup", "AWS S3/Glacier", "Veeam"], regraDeNegocio: "Backup diário automático com retenção mínima conforme edital. Testar restore trimestralmente. Armazenar cópia offsite. Criptografar backups em repouso.", complexidade: "baixa" },
+  { termos: ["ssl", "tls", "certificado", "https"], solucao: "Let's Encrypt (gratuito) ou DigiCert/GlobalSign — Certificados SSL/TLS", tipo: "infra", fornecedores: ["Let's Encrypt", "DigiCert", "GlobalSign"], regraDeNegocio: "Forçar HTTPS em todas as conexões. Certificado válido com renovação automática. TLS 1.2+ obrigatório. HSTS habilitado.", complexidade: "baixa" },
+  { termos: ["vpn", "conexão segura", "túnel"], solucao: "WireGuard, OpenVPN, Fortinet — VPN site-to-site ou client-to-site", tipo: "infra", fornecedores: ["WireGuard", "OpenVPN", "Fortinet"], regraDeNegocio: "VPN site-to-site entre datacenter e órgão. Criptografia AES-256. Autenticação por certificado. Monitorar disponibilidade do túnel.", complexidade: "media" },
+  { termos: ["iso 27001", "segurança da informação"], solucao: "Consultoria ISO 27001 + Cloud com certificação (Azure/AWS)", tipo: "infra", fornecedores: ["Azure (certificado)", "AWS (certificado)"], regraDeNegocio: "Utilizar datacenter com certificação ISO 27001. Documentar política de segurança. Implementar controles de acesso físico e lógico.", complexidade: "alta" },
+
+  // Equipe / Processos
+  { termos: ["suporte", "24x7", "sla", "atendimento"], solucao: "Jitbit, Zendesk, Freshdesk — Helpdesk com SLA automatizado", tipo: "processo", fornecedores: ["Jitbit", "Zendesk", "Freshdesk", "AxionIA"], regraDeNegocio: "Suporte com SLA por severidade: Crítico ≤ 4h, Alto ≤ 8h, Médio ≤ 24h. Registro de todos os chamados. Escalonamento automático se SLA próximo de estourar.", complexidade: "media" },
+  { termos: ["treinamento", "capacitação", "instrutor"], solucao: "Plataforma EAD (Moodle, Google Classroom) + treinamento presencial", tipo: "processo", fornecedores: ["Moodle", "Google Classroom"], regraDeNegocio: "Plano de treinamento com carga horária mínima conforme edital. Material didático (manual, vídeos). Avaliação de conhecimento. Certificado de conclusão.", complexidade: "baixa" },
+  { termos: ["gerente de projeto", "pmp", "gestão de projeto"], solucao: "Certificação PMP (PMI) + ferramentas de gestão (Jira, Monday)", tipo: "processo", fornecedores: ["PMI", "Jira", "Monday.com"], regraDeNegocio: "Designar gerente com certificação PMP ou equivalente. Cronograma com marcos de entrega. Relatórios mensais de progresso. Reuniões semanais de acompanhamento.", complexidade: "media" },
+  { termos: ["operador", "equipe técnica", "residente"], solucao: "Contratação de equipe técnica local com escalas", tipo: "processo", fornecedores: ["RH local"], regraDeNegocio: "Escala de operadores conforme edital (mín. X por turno). Registro de ponto. Backup de pessoal para férias/faltas. Treinamento contínuo.", complexidade: "media" },
+
+  // Documentos / Conformidade
+  { termos: ["atestado", "capacidade técnica", "acervo"], solucao: "Acervo técnico CREA + atestados de clientes anteriores", tipo: "documento", fornecedores: ["CREA/CAU"], regraDeNegocio: "Manter acervo técnico atualizado no CREA. Solicitar atestados aos clientes após conclusão de contratos. Registrar com ART. Arquivar por no mínimo 5 anos.", complexidade: "baixa" },
+  { termos: ["certidão", "cnd", "negativa", "fgts", "trabalhist"], solucao: "Portais oficiais — TST, RFB, FGTS, Estadual, Municipal", tipo: "documento", fornecedores: ["TST", "RFB", "CEF/FGTS"], regraDeNegocio: "Manter certidões atualizadas: CNDT (TST), CND Federal (RFB), CRF (FGTS), Estadual e Municipal. Renovar antes do vencimento. Alertar 15 dias antes da expiração.", complexidade: "baixa" },
+  { termos: ["crea", "responsável técnico", "art"], solucao: "Registro CREA com RT habilitado + ART por contrato", tipo: "documento", fornecedores: ["CREA"], regraDeNegocio: "Manter registro CREA ativo. Emitir ART para cada contrato. RT deve estar vinculado à empresa. Verificar habilitação do RT para a área.", complexidade: "baixa" },
+  { termos: ["lgpd", "proteção de dados", "dados pessoais", "privacidade"], solucao: "Programa LGPD — DPO, DPIA, consentimento, anonimização", tipo: "documento", fornecedores: ["Consultoria LGPD", "OneTrust", "Securiti"], regraDeNegocio: "Designar DPO. Mapear dados pessoais tratados (placa=dado pessoal). Implementar consentimento onde aplicável. Anonimizar dados para relatórios. Política de retenção e exclusão.", complexidade: "alta" },
+
+  // Normas
+  { termos: ["contran", "resolução", "798"], solucao: "Adequação às resoluções CONTRAN vigentes (798/2020 e alterações)", tipo: "norma", fornecedores: ["CONTRAN/SENATRAN"], regraDeNegocio: "Sistema deve seguir requisitos da Resolução CONTRAN 798/2020. Atualizar quando houver nova resolução. Validar formato de AIT, prazos e procedimentos conforme CTB.", complexidade: "alta" },
+  { termos: ["inmetro", "aferição", "calibração", "metrologia"], solucao: "Credenciamento INMETRO + Laboratórios de calibração (RBC/RBLE)", tipo: "norma", fornecedores: ["INMETRO", "Rede RBC"], regraDeNegocio: "Equipamentos com portaria INMETRO vigente. Aferir conforme periodicidade exigida. Bloquear processamento se aferição vencida. Registrar certificado de calibração.", complexidade: "alta" },
+  { termos: ["abnt", "nbr", "15129", "norma técnica"], solucao: "Conformidade ABNT NBR 15129 e normas correlatas", tipo: "norma", fornecedores: ["ABNT"], regraDeNegocio: "Verificar conformidade com NBR aplicável. Documentar aderência. Atualizar quando norma for revisada.", complexidade: "media" },
+  { termos: ["ctb", "código de trânsito"], solucao: "Adequação ao CTB — prazos, procedimentos, penalidades", tipo: "norma", fornecedores: ["CTB/SENATRAN"], regraDeNegocio: "Implementar todos os prazos legais do CTB (notificação, defesa, recurso). Categorias de infração conforme Art. 187-255. Penalidades conforme Art. 256-268.", complexidade: "alta" },
+
+  // Comercial
+  { termos: ["seguro", "responsabilidade civil"], solucao: "Seguradora (Porto Seguro, Bradesco Seguros) — RC Profissional", tipo: "comercial", fornecedores: ["Porto Seguro", "Bradesco Seguros", "Zurich"], regraDeNegocio: "Contratar seguro RC Profissional com cobertura >= valor do contrato. Manter vigente durante toda execução. Renovar antes do vencimento.", complexidade: "baixa" },
+  { termos: ["garantia", "manutenção", "preventiva", "corretiva"], solucao: "Plano de manutenção preventiva e corretiva com SLA", tipo: "comercial", fornecedores: ["Equipe própria"], regraDeNegocio: "Manutenção preventiva mensal. Corretiva com SLA conforme edital. Estoque de peças de reposição. Registro de todas as intervenções.", complexidade: "media" },
+  { termos: ["ipca", "reajuste", "índice"], solucao: "Cláusula de reajuste anual pelo IPCA (IBGE)", tipo: "comercial", fornecedores: ["IBGE"], regraDeNegocio: "Reajuste anual a partir do 12º mês, pelo IPCA acumulado. Calcular automaticamente a data-base. Notificar contratante 30 dias antes.", complexidade: "baixa" },
+];
+
+/**
+ * Busca soluções de mercado para os gaps do dePara
+ */
+function buscarSolucoesMercado(dePara) {
+  if (!dePara?.itens) return [];
+
+  const gaps = (dePara.itens || []).filter(item => {
+    const stats = [item.statusAxHub, item.statusAxTon, item.statusAxCross];
+    const temAtende = stats.some(s => s === "atende");
+    return !temAtende; // Parcial ou não atende
+  });
+
+  const solucoes = [];
+  const jaUsados = new Set();
+
+  for (const gap of gaps) {
+    const textoLower = (gap.requisito || "").toLowerCase();
+
+    for (const sol of SOLUCOES_MERCADO) {
+      const match = sol.termos.some(t => textoLower.includes(t));
+      if (match && !jaUsados.has(sol.solucao)) {
+        jaUsados.add(sol.solucao);
+
+        const isParcial = [gap.statusAxHub, gap.statusAxTon, gap.statusAxCross].some(s => s === "parcial");
+
+        solucoes.push({
+          requisito: gap.requisito?.slice(0, 200),
+          categoria: gap.categoria,
+          status: isParcial ? "parcial" : "nao_atende",
+          solucaoMercado: sol.solucao,
+          tipo: sol.tipo,
+          fornecedores: sol.fornecedores,
+          regraDeNegocio: sol.regraDeNegocio,
+          complexidade: sol.complexidade,
+          prioridade: gap.prioridade || "media",
+        });
+        break; // Uma solução por gap
+      }
+    }
+  }
+
+  // Ordenar: não atende primeiro, depois por prioridade
+  const prioOrdem = { critica: 0, alta: 1, media: 2, baixa: 3 };
+  solucoes.sort((a, b) => {
+    if (a.status !== b.status) return a.status === "nao_atende" ? -1 : 1;
+    return (prioOrdem[a.prioridade] || 2) - (prioOrdem[b.prioridade] || 2);
+  });
+
+  return solucoes;
+}
+
+/**
  * Validação de mercado local (fallback sem IA)
  */
 function gerarMercadoLocal(categorias, dePara = null, concorrentes = null) {
@@ -1569,6 +1677,7 @@ function gerarMercadoLocal(categorias, dePara = null, concorrentes = null) {
       empresas: ranking.filter(r => r.nivelAmeaca === "alto").map(r => r.empresa),
       comparacao,
     },
+    solucoesMercado: buscarSolucoesMercado(dePara),
     doresCliente: [
       { dor: "Análise manual de editais demanda dias de trabalho especializado", impacto: "alto", nossoSaaS_resolve: true, como: "Extração automática e decomposição categórica em minutos" },
       { dor: "Falta de rastreabilidade entre requisitos do edital e funcionalidades existentes", impacto: "alto", nossoSaaS_resolve: true, como: "De-Para automático edital vs produtos (AxHub/AxTon/AxCross)" },
