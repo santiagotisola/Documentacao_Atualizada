@@ -35,6 +35,7 @@ import AnalisesSites from "./pages/AnalisesSites.jsx";
 import ChamadosSites from "./pages/ChamadosSites.jsx";
 import GuiaSites from "./pages/GuiaSites.jsx";
 import IntelligenceHub from "./pages/IntelligenceHub.jsx";
+import PainelProcessos from "./pages/PainelProcessos.jsx";
 import HomePage from "./pages/HomePage.jsx";
 import "./App.css";
 import "./pages/docusaurus-compat.css";
@@ -47,6 +48,7 @@ const PAGE_INFO = {
   "/analise": { title: "Análise de Sites", subtitle: "Comparativo de contratos e operações por site", icon: "🔍" },
   "/guia-sites": { title: "Guia por Site", subtitle: "Manual operacional por contrato", icon: "📖" },
   "/chamados-sites": { title: "Chamados × Sites", subtitle: "Análise de demandas do helpdesk por site", icon: "🎫" },
+  "/processos": { title: "Painel de Processos", subtitle: "Mapeamento completo de sites, módulos e acessos", icon: "🏗️" },
   "/chat": { title: "Chat IA", subtitle: "Assistente inteligente AxionIA", icon: "🤖" },
   "/whatsapp": { title: "WhatsApp", subtitle: "Integração e atendimento via WhatsApp", icon: "💬" },
   "/helpdesk": { title: "Helpdesk", subtitle: "Gestão de tickets e atendimento Jitbit", icon: "🎧" },
@@ -79,6 +81,7 @@ const MENU_SECTIONS = [
       { to: "/analise", icon: ScanSearch, label: "Análise de Sites" },
       { to: "/guia-sites", icon: BookOpen, label: "Guia por Site" },
       { to: "/chamados-sites", icon: Ticket, label: "Chamados × Sites" },
+      { to: "/processos", icon: Globe, label: "Painel de Processos" },
     ]
   },
   {
@@ -249,6 +252,7 @@ function AppContent() {
           <Route path="/config" element={<Configuracoes />} />
           <Route path="/guia-sites" element={<GuiaSites />} />
           <Route path="/chamados-sites" element={<ChamadosSites />} />
+          <Route path="/processos" element={<PainelProcessos />} />
         </Routes>
       </main>
 
