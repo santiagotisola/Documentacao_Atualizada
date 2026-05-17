@@ -31,6 +31,7 @@ export default function AnaliseEditalAvancada() {
   const [sites, setSites] = useState(null);
   const [produtoSelecionado, setProdutoSelecionado] = useState("");
   const [siteSelecionado, setSiteSelecionado] = useState("");
+  const [filtroCat, setFiltroCat] = useState("");
 
   // Carregar catálogo de sites ao montar
   useEffect(() => {
@@ -350,6 +351,57 @@ export default function AnaliseEditalAvancada() {
               ))}
             </div>
           )}
+
+          {/* ─── DIAGNÓSTICO POR CATEGORIA ─── */}
+          {resultado.dePara.diagnosticoPorCategoria && (
+            <div style={{ marginBottom: "1.5rem" }}>
+              <h4 style={{ color: "#a5b4fc", marginBottom: "0.6rem", fontSize: "0.9rem" }}>📊 Diagnóstico por Categoria</h4>
+              <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(220px, 1fr))", gap: "0.6rem" }}>
+                {Object.entries(resultado.dePara.diagnosticoPorCategoria).map(([key, cat]) => {
+                  const cob = cat.cobertura || 0;
+                  const corBarra = cob >= 70 ? "#10b981" : cob >= 40 ? "#f59e0b" : "#ef4444";
+                  return (
+                    <div key={key} style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.08)", borderRadius: 10, padding: "0.7rem" }}>
+                      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "0.4rem" }}>
+                        <span style={{ fontSize: "0.82rem", fontWeight: 700, color: "#e2e8f0" }}>{cat.icon} {cat.label}</span>
+                        <span style={{ fontSize: "0.85rem", fontWeight: 800, color: corBarra }}>{cob}%</span>
+                      </div>
+                      <div style={{ height: 6, background: "rgba(255,255,255,0.08)", borderRadius: 3, overflow: "hidden", marginBottom: "0.4rem" }}>
+                        <div style={{ width: `${cob}%`, height: "100%", background: corBarra, borderRadius: 3, transition: "width 0.5s" }} />
+                      </div>
+                      <div style={{ display: "flex", gap: "0.5rem", fontSize: "0.7rem" }}>
+                        <span style={{ color: "#10b981" }}>✅ {cat.atende}</span>
+                        <span style={{ color: "#f59e0b" }}>⚠️ {cat.parcial}</span>
+                        <span style={{ color: "#ef4444" }}>❌ {cat.naoAtende}</span>
+                        {cat.naPuro > 0 && <span style={{ color: "#475569" }}>— {cat.naPuro}</span>}
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          )}
+
+          {/* ─── FILTRO POR CATEGORIA ─── */}
+          {(() => {
+            const cats = [...new Set((resultado.dePara.itens || []).map(i => i.categoria))];
+            return (
+              <div style={{ display: "flex", gap: "0.3rem", flexWrap: "wrap", marginBottom: "0.8rem" }}>
+                <button
+                  onClick={() => setFiltroCat("")}
+                  style={{ padding: "3px 10px", borderRadius: 6, border: "none", background: !filtroCat ? "rgba(99,102,241,0.3)" : "rgba(255,255,255,0.06)", color: !filtroCat ? "#a5b4fc" : "#64748b", fontSize: "0.72rem", cursor: "pointer", fontWeight: 600 }}
+                >Todos</button>
+                {cats.map(c => (
+                  <button
+                    key={c}
+                    onClick={() => setFiltroCat(c === filtroCat ? "" : c)}
+                    style={{ padding: "3px 10px", borderRadius: 6, border: "none", background: filtroCat === c ? "rgba(99,102,241,0.3)" : "rgba(255,255,255,0.06)", color: filtroCat === c ? "#a5b4fc" : "#94a3b8", fontSize: "0.72rem", cursor: "pointer" }}
+                  >{c}</button>
+                ))}
+              </div>
+            );
+          })()}
+
           <div style={{ overflow: "auto" }}>
             <table style={{ width: "100%", borderCollapse: "collapse", fontSize: "0.8rem" }}>
               <thead>
@@ -358,29 +410,55 @@ export default function AnaliseEditalAvancada() {
                   <th style={{ textAlign: "center", padding: "8px", color: "#94a3b8", width: 80 }}>AxHub</th>
                   <th style={{ textAlign: "center", padding: "8px", color: "#94a3b8", width: 80 }}>AxTon</th>
                   <th style={{ textAlign: "center", padding: "8px", color: "#94a3b8", width: 80 }}>AxCross</th>
-                  <th style={{ textAlign: "left", padding: "8px", color: "#94a3b8" }}>Lacuna</th>
-                  <th style={{ textAlign: "center", padding: "8px", color: "#94a3b8", width: 60 }}>Esforço</th>
+                  <th style={{ textAlign: "left", padding: "8px", color: "#94a3b8" }}>Onde Atende / Lacuna</th>
+                  <th style={{ textAlign: "center", padding: "8px", color: "#94a3b8", width: 70 }}>Validar</th>
                 </tr>
               </thead>
               <tbody>
-                {(resultado.dePara.itens || []).map((item, i) => (
+                {(resultado.dePara.itens || [])
+                  .filter(item => !filtroCat || item.categoria === filtroCat)
+                  .map((item, i) => (
                   <tr key={i} style={{ borderBottom: "1px solid rgba(255,255,255,0.04)" }}>
-                    <td style={{ padding: "8px", color: "#cbd5e1", maxWidth: 250 }}>{item.requisito?.slice(0, 80)}</td>
+                    <td style={{ padding: "8px", color: "#cbd5e1", maxWidth: 280 }}>
+                      <div style={{ fontSize: "0.78rem" }}>{item.requisito?.slice(0, 100)}</div>
+                      <span style={{ fontSize: "0.65rem", color: "#6366f1", fontWeight: 600 }}>{item.categoria}</span>
+                      {item.prioridade && item.prioridade !== "media" && (
+                        <span style={{ marginLeft: 6, fontSize: "0.62rem", padding: "1px 5px", borderRadius: 4, background: item.prioridade === "critica" ? "#ef444420" : item.prioridade === "alta" ? "#f59e0b20" : "#10b98120", color: item.prioridade === "critica" ? "#ef4444" : item.prioridade === "alta" ? "#f59e0b" : "#10b981" }}>
+                          {item.prioridade}
+                        </span>
+                      )}
+                    </td>
                     {["statusAxHub", "statusAxTon", "statusAxCross"].map(col => {
                       const s = STATUS_COLORS[item[col]] || STATUS_COLORS["n/a"];
                       return <td key={col} style={{ textAlign: "center", padding: "4px" }}><span style={{ background: s.bg, color: s.color, padding: "2px 8px", borderRadius: 6, fontSize: "0.72rem" }}>{s.label}</span></td>;
                     })}
-                    <td style={{ padding: "8px", color: "#94a3b8", fontSize: "0.75rem" }}>{item.lacuna || "—"}</td>
+                    <td style={{ padding: "8px", maxWidth: 250 }}>
+                      {item.ondeAtende && <div style={{ fontSize: "0.73rem", color: "#6ee7b7", marginBottom: 2 }}>{item.ondeAtende.slice(0, 120)}</div>}
+                      {item.lacuna && <div style={{ fontSize: "0.73rem", color: "#fca5a5" }}>{item.lacuna.slice(0, 120)}</div>}
+                    </td>
                     <td style={{ textAlign: "center", padding: "4px" }}>
-                      <span style={{ background: item.esforco === "alto" ? "#7f1d1d20" : item.esforco === "medio" ? "#92400e20" : "#065f4620", color: item.esforco === "alto" ? "#ef4444" : item.esforco === "medio" ? "#f59e0b" : "#10b981", padding: "2px 8px", borderRadius: 6, fontSize: "0.72rem" }}>
-                        {item.esforco || "—"}
-                      </span>
+                      {item.validacao?.url ? (
+                        <a href={item.validacao.url} target="_blank" rel="noopener noreferrer"
+                          style={{ fontSize: "0.7rem", color: "#a5b4fc", textDecoration: "none", background: "rgba(99,102,241,0.15)", padding: "3px 8px", borderRadius: 6, display: "inline-block" }}
+                          title={`${item.validacao.teste}\n${item.validacao.url}`}
+                        >🔗 Abrir</a>
+                      ) : item.validacao?.path ? (
+                        <span style={{ fontSize: "0.68rem", color: "#475569" }} title={item.validacao.teste}>{item.validacao.path}</span>
+                      ) : (
+                        <span style={{ fontSize: "0.68rem", color: "#334155" }}>—</span>
+                      )}
                     </td>
                   </tr>
                 ))}
               </tbody>
             </table>
           </div>
+
+          {resultado.dePara._nota && (
+            <div style={{ marginTop: "1rem", background: "rgba(99,102,241,0.06)", border: "1px solid rgba(99,102,241,0.15)", borderRadius: 8, padding: "0.7rem", fontSize: "0.75rem", color: "#94a3b8" }}>
+              ℹ️ {resultado.dePara._nota}
+            </div>
+          )}
         </div>
       )}
 

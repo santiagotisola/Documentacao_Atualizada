@@ -328,10 +328,143 @@ function classificarLocal(textoEdital) {
   return resultado;
 }
 
+// ─── MAPA DE CAPACIDADES REAIS DOS PRODUTOS ────────────────────
+// Baseado na documentação, KB e telas reais do sistema
+
+const CAPACIDADES_AXHUB = {
+  modulos: ["Dashboard", "Infrações", "Cronotacógrafo", "Balança", "Operações", "Veículos", "Equipamentos", "Medição", "Relatórios", "Controle de Acesso", "Configurações"],
+  totalTelas: 70,
+  funcionalidades: [
+    // Software/Sistema
+    { termo: ["sistema de gestão", "plataforma", "software de fiscalização", "sistema de infrações", "sistema de trânsito", "gerenciamento de infrações"], modulo: "Infrações", path: "/infracoes", nivel: "atende", desc: "AxHub é plataforma SaaS completa de gestão de infrações" },
+    { termo: ["dashboard", "painel", "painel sinótico", "visão geral", "indicadores", "kpi"], modulo: "Dashboard", path: "/", nivel: "atende", desc: "Dashboard com ícones de atalho, painel sinótico, status equipamentos, mapa, alertas aferição, triagem mensal" },
+    { termo: ["triagem", "validar infração", "análise de infração", "auditoria de infração", "revisar infração"], modulo: "Infrações", path: "/infracoes/triagem", nivel: "atende", desc: "Triagem com validar/descartar/reabrir + auditoria confirmar/rejeitar" },
+    { termo: ["auditoria", "auditor", "segunda verificação", "dupla verificação", "revisão de infração"], modulo: "Infrações", path: "/infracoes/auditoria", nivel: "atende", desc: "Fluxo auditor: confirmar/rejeitar infrações já triadas" },
+    { termo: ["exportação", "exportar infração", "renainf", "lote de exportação", "envio infração", "gerar lote"], modulo: "Infrações", path: "/infracoes/exportacao", nivel: "atende", desc: "Exportação com RENAINF/XML/TXT/CSV, SFTP/API/download, 7 validações automáticas" },
+    { termo: ["consulta de infração", "buscar infração", "pesquisar infração", "localizar infração"], modulo: "Infrações", path: "/infracoes/consulta", nivel: "atende", desc: "Consulta com filtros: período, status, equipamento, placa" },
+    { termo: ["descarte", "descartar", "motivo de descarte", "infração descartada"], modulo: "Infrações", path: "/infracoes/descartadas", nivel: "atende", desc: "Infrações descartadas com motivo obrigatório + reabrir" },
+    { termo: ["exceções", "exceção de infração", "regra especial"], modulo: "Infrações", path: "/infracoes/excecoes", nivel: "atende", desc: "Cadastro de exceções de infrações" },
+    // Equipamentos & Hardware
+    { termo: ["equipamento", "cadastro de equipamento", "equipamento de fiscalização", "registrar equipamento", "inventário de equipamento"], modulo: "Equipamentos", path: "/equipamentos", nivel: "atende", desc: "Cadastro com Nº série, código, certificado INMETRO, modelo, tipo, grupo, tipo operação" },
+    { termo: ["fabricante", "marca de equipamento", "fornecedor"], modulo: "Equipamentos", path: "/equipamentos/fabricantes", nivel: "atende", desc: "Cadastro de fabricantes com tokens de integração" },
+    { termo: ["modelo de equipamento", "tipo de equipamento", "grupo de equipamento"], modulo: "Equipamentos", path: "/equipamentos/modelos", nivel: "atende", desc: "Modelos e tipos de equipamentos com agrupamento" },
+    { termo: ["câmera", "captura de imagem", "fotossensor", "registro fotográfico", "imagem da infração", "foto da placa"], modulo: "Infrações", path: "/infracoes/triagem", nivel: "atende", desc: "Captura automática: imagem, placa OCR, data/hora, velocidade, local" },
+    { termo: ["radar", "medidor de velocidade", "sensor de velocidade", "controlador de velocidade", "equipamento fixo", "equipamento estático"], modulo: "Operações", path: "/operacoes", nivel: "atende", desc: "Gestão de radares fixos, portáteis e estáticos com aferição INMETRO" },
+    { termo: ["lombada eletrônica", "redutor de velocidade"], modulo: "Operações", path: "/operacoes", nivel: "atende", desc: "Suporte a lombadas eletrônicas como tipo de equipamento" },
+    { termo: ["semáforo", "avanço de sinal", "sinal vermelho", "controlador semafórico"], modulo: "Operações", path: "/operacoes", nivel: "atende", desc: "Fiscalização de avanço de sinal vermelho" },
+    { termo: ["laço indutivo", "detector de presença", "sensor indutivo", "loop"], modulo: "Operações", path: "/operacoes", nivel: "atende", desc: "Integração com laços indutivos via equipamento" },
+    { termo: ["display", "painel de mensagem", "pmv", "mensagem variável"], modulo: "Operações", path: "/operacoes", nivel: "parcial", desc: "Suporte via integração de equipamentos — sem módulo dedicado PMV" },
+    { termo: ["ocr", "leitura de placa", "reconhecimento de placa", "lpr", "anpr", "captura automática de placa"], modulo: "Infrações", path: "/infracoes/triagem", nivel: "atende", desc: "OCR automático na captura + consulta de placas" },
+    { termo: ["nobreak", "energia", "estabilizador", "ups"], modulo: "Equipamentos", path: "/equipamentos", nivel: "parcial", desc: "Cadastro como acessório de equipamento — sem monitoramento dedicado" },
+    // Operações
+    { termo: ["operação", "cadastro de operação", "ponto de fiscalização", "local de fiscalização", "operação de campo"], modulo: "Operações", path: "/operacoes/cadastro", nivel: "atende", desc: "Cadastro completo de operações com local, equipamento, faixa" },
+    { termo: ["aferição", "inmetro", "certificado inmetro", "calibração", "certificado de aferição", "metrologia"], modulo: "Operações", path: "/operacoes/afericoes", nivel: "atende", desc: "Gestão de aferições com alerta de vencimento, histórico de certificados" },
+    { termo: ["faixa", "faixa de velocidade", "faixa de via", "faixa de trânsito", "pista"], modulo: "Operações", path: "/operacoes/faixas", nivel: "atende", desc: "Cadastro de faixas por operação" },
+    { termo: ["monitoramento online", "tempo real", "status online", "equipamento online", "signalr"], modulo: "Operações", path: "/operacoes/monitoramento", nivel: "atende", desc: "Monitoramento online via SignalR com status em tempo real" },
+    { termo: ["evento de equipamento", "log de equipamento", "histórico equipamento"], modulo: "Operações", path: "/operacoes/eventos", nivel: "atende", desc: "Eventos de equipamentos com filtros e histórico" },
+    { termo: ["consulta de placa", "buscar placa", "pesquisar placa", "verificar placa"], modulo: "Operações", path: "/operacoes/consulta-placas", nivel: "atende", desc: "Consulta de placas com histórico de passagens" },
+    // Relatórios
+    { termo: ["relatório", "relatório de infração", "relatório gerencial", "emitir relatório", "gerar relatório"], modulo: "Relatórios", path: "/relatorios", nivel: "atende", desc: "12+ relatórios: infrações, passagens, fluxo, discrepâncias, equipamentos, Power BI" },
+    { termo: ["relatório de passagem", "fluxo de veículos", "contagem de veículos", "volume de tráfego", "fluxo diário", "contagem veicular"], modulo: "Relatórios", path: "/relatorios/passagens", nivel: "atende", desc: "Relatório de passagens com filtros por data, equipamento, faixa" },
+    { termo: ["power bi", "business intelligence", "bi", "painel analítico"], modulo: "Relatórios", path: "/relatorios/power-bi", nivel: "atende", desc: "Integração nativa com Power BI" },
+    { termo: ["mapa de fluxo", "mapa de calor", "mapa de passagens", "georreferenciamento", "google maps", "mapa"], modulo: "Relatórios", path: "/relatorios/mapa-fluxo", nivel: "atende", desc: "Mapa de fluxo com Google Maps integrado" },
+    { termo: ["discrepância", "falha sequencial", "processamento de imagem"], modulo: "Relatórios", path: "/relatorios/discrepancias", nivel: "atende", desc: "Relatórios de discrepâncias e falhas sequenciais" },
+    // Medições / SLA
+    { termo: ["medição", "contrato", "índice de performance", "desempenho", "performance de equipamento", "disponibilidade", "uptime"], modulo: "Medição", path: "/medicoes", nivel: "atende", desc: "Gestão de contratos, índices de performance, interrupções, geração de medição" },
+    { termo: ["sla", "nível de serviço", "acordo de nível", "tempo de resposta", "tempo de atendimento"], modulo: "Medição", path: "/medicoes/indices-performance", nivel: "atende", desc: "Índices de performance por contrato com metas de SLA" },
+    { termo: ["interrupção", "indisponibilidade", "parada", "tempo inoperante"], modulo: "Medição", path: "/medicoes/interrupcoes", nivel: "atende", desc: "Registro e controle de interrupções por equipamento" },
+    // Controle de Acesso / Segurança
+    { termo: ["usuário", "login", "autenticação", "controle de acesso", "senha", "credencial"], modulo: "Controle de Acesso", path: "/controle-acesso/usuarios", nivel: "atende", desc: "OAuth2+PKCE, gestão de usuários, perfis, permissões, logs" },
+    { termo: ["perfil de acesso", "permissão", "nível de acesso", "autorização", "grupo de usuário"], modulo: "Controle de Acesso", path: "/controle-acesso/perfis", nivel: "atende", desc: "Perfis com permissões granulares por módulo" },
+    { termo: ["log de acesso", "auditoria de acesso", "rastreabilidade", "trilha de auditoria"], modulo: "Controle de Acesso", path: "/controle-acesso/logs", nivel: "atende", desc: "Logs completos de acesso com restrição por IP" },
+    // Veículos
+    { termo: ["veículo", "tipo de veículo", "marca de veículo", "modelo de veículo", "categoria veicular", "classificação veicular", "espécie de veículo"], modulo: "Veículos", path: "/veiculos", nivel: "atende", desc: "Cadastros: tipos, espécies, marcas, modelos, cores, classificações, municípios" },
+    { termo: ["placa", "leitura de placa", "registro de placa", "identificação veicular"], modulo: "Veículos", path: "/veiculos", nivel: "atende", desc: "Captura e gestão de placas integrada ao fluxo de infrações" },
+    // Pesagem (módulo Balança do AxHub)
+    { termo: ["pesagem", "balança", "ticket de pesagem", "posto de pesagem", "peso"], modulo: "Balança", path: "/balanca/pesagem", nivel: "atende", desc: "Módulo de pesagem: postos, tickets abertos/fechados, reclassificar, liberar" },
+    { termo: ["reclassificação", "reclassificar pesagem", "alterar classificação"], modulo: "Balança", path: "/balanca/reclassificar", nivel: "atende", desc: "Reclassificação de veículos pesados" },
+    // Administração
+    { termo: ["enquadramento", "artigo", "código de infração", "tipo de infração", "natureza da infração"], modulo: "Administração", path: "/admin/enquadramentos", nivel: "atende", desc: "Cadastro de enquadramentos com formas de autuação" },
+    { termo: ["tarja", "marca d'água", "imagem protegida", "proteção de imagem"], modulo: "Administração", path: "/admin/tarjas", nivel: "atende", desc: "Tarjas e proteção de imagens de infrações" },
+    { termo: ["webhook", "integração", "api", "notificação automática", "webservice", "web service"], modulo: "Administração", path: "/admin/webhooks", nivel: "atende", desc: "Webhooks para integração com sistemas externos" },
+    { termo: ["arco", "portal eletrônico", "pórtico"], modulo: "Administração", path: "/admin/arcos", nivel: "atende", desc: "Cadastro de arcos/pórticos de fiscalização" },
+    { termo: ["layout de arquivo", "formato de exportação", "layout renainf"], modulo: "Administração", path: "/admin/layouts", nivel: "atende", desc: "Layouts configuráveis de arquivos de exportação" },
+    // Cronotacógrafo
+    { termo: ["cronotacógrafo", "tacógrafo", "jornada de motorista", "tempo de direção"], modulo: "Cronotacógrafo", path: "/cronotacografo", nivel: "atende", desc: "Triagem e consulta de cronotacógrafo" },
+    // Normas e conformidade
+    { termo: ["contran", "resolução contran", "ctb", "código de trânsito"], modulo: "Glossário", path: "/glossario", nivel: "atende", desc: "Sistema construído conforme CTB, CONTRAN, DENATRAN" },
+    { termo: ["denatran", "senatran", "renainf"], modulo: "Infrações", path: "/infracoes/exportacao", nivel: "atende", desc: "Exportação RENAINF conforme DENATRAN/SENATRAN" },
+    // Infraestrutura
+    { termo: ["backup", "redundância", "alta disponibilidade", "disaster recovery", "contingência"], modulo: "Referência Técnica", path: null, nivel: "atende", desc: "Hospedagem cloud Azure com backups automáticos" },
+    { termo: ["nuvem", "cloud", "saas", "hospedagem"], modulo: "Referência Técnica", path: null, nivel: "atende", desc: "Plataforma SaaS hospedada em cloud (Azure)" },
+    { termo: ["ssl", "https", "criptografia", "certificado digital", "segurança da informação", "lgpd"], modulo: "Referência Técnica", path: null, nivel: "atende", desc: "HTTPS com certificado SSL, OIDC/OAuth2+PKCE" },
+    // Manutenção e Suporte
+    { termo: ["manutenção", "manutenção preventiva", "manutenção corretiva", "assistência técnica"], modulo: "Operações", path: "/operacoes", nivel: "parcial", desc: "Monitoramento de status online — sem módulo dedicado de ordens de serviço" },
+    { termo: ["suporte", "atendimento", "chamado", "help desk", "helpdesk", "central de atendimento"], modulo: "Referência Técnica", path: null, nivel: "atende", desc: "Helpdesk Jitbit + AxionIA com auto-classificação" },
+    { termo: ["treinamento", "capacitação", "operação assistida"], modulo: "Referência Técnica", path: null, nivel: "parcial", desc: "Documentação online + helpdesk — sem módulo de e-learning" },
+  ],
+};
+
+const CAPACIDADES_AXCROSS = {
+  modulos: ["Dashboard", "Veículos Monitorados", "Equipamentos", "Monitoramento Online", "Relatórios", "Configurações"],
+  totalTelas: 24,
+  funcionalidades: [
+    { termo: ["cruzamento", "cruzamento de dados", "cruzamento de placas", "comparação de placas"], modulo: "Veículos Monitorados", path: "/occurrences/monitoredvehicle", nivel: "atende", desc: "Cruzamento automático de placas detectadas vs base de monitorados" },
+    { termo: ["veículo monitorado", "monitoramento de veículo", "placa monitorada", "placa de interesse", "veículo de interesse"], modulo: "Veículos Monitorados", path: "/occurrences/monitoredvehicle", nivel: "atende", desc: "Cadastro com placa, tipo de ocorrência, habilitado, expiração" },
+    { termo: ["alerta", "alerta de placa", "notificação de placa", "alerta em tempo real", "aviso automático"], modulo: "Veículos Monitorados", path: "/occurrences/monitoredvehicle", nivel: "atende", desc: "Alertas automáticos quando veículo monitorado é detectado" },
+    { termo: ["cerco eletrônico", "cerco inteligente", "bloqueio veicular"], modulo: "Veículos Monitorados", path: "/occurrences/monitoredvehicle", nivel: "atende", desc: "Funciona como cerco eletrônico via rede de equipamentos" },
+    { termo: ["tipo de ocorrência", "categoria de alerta", "classificação de ocorrência"], modulo: "Veículos Monitorados", path: "/occurrences/monitoredvehicle", nivel: "atende", desc: "Classificação com prazo de expiração automática" },
+    { termo: ["vigência", "expiração", "prazo de monitoramento", "validade do alerta"], modulo: "Veículos Monitorados", path: "/occurrences/monitoredvehicle", nivel: "atende", desc: "Controle de vigência: data início/fim, expiração automática" },
+    { termo: ["importação", "importar placas", "carga em lote", "arquivo de placas"], modulo: "Veículos Monitorados", path: "/occurrences/monitoredvehicle", nivel: "atende", desc: "Importação em lote via .txt (uma placa por linha)" },
+    { termo: ["monitoramento online", "tempo real", "monitoramento em tempo real", "mapa ao vivo", "signalr"], modulo: "Monitoramento Online", path: "/monitoringonline/monitoring", nivel: "atende", desc: "Monitoramento em tempo real via SignalR + mapa Google Maps" },
+    { termo: ["mapa de equipamento", "localização de equipamento", "georreferenciamento"], modulo: "Monitoramento Online", path: "/monitoringonline/monitoring", nivel: "atende", desc: "Mapa de equipamentos com Google Maps" },
+    { termo: ["rastreamento", "rastrear placa", "histórico de placa", "rota de veículo", "mapeamento de rota"], modulo: "Relatórios", path: "/reports/reports", nivel: "atende", desc: "Rastreamento de placas + mapeamento de rotas" },
+    { termo: ["relatório de passagem", "consulta de passagem", "histórico de passagem"], modulo: "Relatórios", path: "/reports/reports", nivel: "atende", desc: "Relatórios: passagens, mapeamento rotas, rastreamento, ocorrências" },
+    { termo: ["ocorrência", "relatório de ocorrência", "relatório de alerta"], modulo: "Relatórios", path: "/reports/reports", nivel: "atende", desc: "Relatório de ocorrências e alertas gerados" },
+    { termo: ["pdf", "gerar pdf", "relatório em pdf"], modulo: "Relatórios", path: "/reports/reports", nivel: "atende", desc: "Geração de PDF a partir dos relatórios" },
+    { termo: ["sincronização", "sincronizar passagens", "sincronização de dados"], modulo: "Configurações", path: "/settings/systemsettings", nivel: "atende", desc: "Sincronização de passagens configurável" },
+    { termo: ["equipamento", "cadastro de equipamento"], modulo: "Equipamentos", path: "/equipments/equipment", nivel: "atende", desc: "Gestão de equipamentos com grupos e áreas" },
+    { termo: ["área", "zona de monitoramento", "região monitorada"], modulo: "Equipamentos", path: "/equipments/equipment", nivel: "atende", desc: "Cadastro de áreas para agrupamento de equipamentos" },
+    { termo: ["roubo", "furto", "veículo roubado", "veículo furtado", "veículo clonado"], modulo: "Veículos Monitorados", path: "/occurrences/monitoredvehicle", nivel: "atende", desc: "Monitoramento de veículos com alerta tipo roubo/furto" },
+    { termo: ["reconhecimento", "lpr", "anpr", "ocr", "leitura automática de placa"], modulo: "Equipamentos", path: "/equipments/equipment", nivel: "atende", desc: "Integração com câmeras LPR/ANPR" },
+  ],
+};
+
+const CAPACIDADES_AXTON = {
+  modulos: ["Iniciar Pesagem", "Operações", "Tickets", "Exportação", "Sistema", "Relatórios", "Cadastros", "Administração"],
+  totalTelas: 58,
+  funcionalidades: [
+    { termo: ["pesagem", "pesagem veicular", "pesagem de veículo", "balança dinâmica", "balança estática"], modulo: "Pesagem", path: "/pesagem", nivel: "atende", desc: "Fluxo: passagem → pesagem → classificação → verificação excesso → infração" },
+    { termo: ["ticket", "ticket de pesagem", "registro de pesagem"], modulo: "Tickets", path: "/tickets", nivel: "atende", desc: "Tickets abertos e fechados com reclassificação" },
+    { termo: ["reclassificação", "reclassificar", "alterar classificação veicular"], modulo: "Pesagem", path: "/pesagem/reclassificar", nivel: "atende", desc: "Reclassificação de veículos pesados" },
+    { termo: ["liberar pesagem", "liberar veículo", "dispensar pesagem"], modulo: "Pesagem", path: "/pesagem/liberar", nivel: "atende", desc: "Liberação de pesagem com motivo registrado" },
+    { termo: ["pbt", "peso bruto total", "excesso de peso", "sobrepeso", "sobrecarga"], modulo: "Pesagem", path: "/pesagem", nivel: "atende", desc: "PBT: Art. 99 CTB, Resolução CONTRAN 803/2021" },
+    { termo: ["classificação de veículo", "2c", "3c", "2s1", "2s2", "2s3", "2i2", "eixo", "cmt"], modulo: "Cadastros", path: "/cadastros/classificacao-veiculos", nivel: "atende", desc: "Classificações: 2C(16t), 2CC(12t), 3C(23t), 3CD(19.5t), 4C(31.5t), etc." },
+    { termo: ["local de pesagem", "posto de pesagem", "ponto de pesagem"], modulo: "Cadastros", path: "/cadastros/locais", nivel: "atende", desc: "Locais cadastrados com rodovia, km, município" },
+    { termo: ["exportação", "exportar infração de pesagem", "lote de pesagem"], modulo: "Infrações", path: "/infracoes/exportacao", nivel: "atende", desc: "Exportação de infrações de pesagem por lote" },
+    { termo: ["sequencial de infração", "numeração de infração"], modulo: "Cadastros", path: "/cadastros/sequencial-infracao", nivel: "atende", desc: "Sequenciais: PBT(212-99999), Eixo(1060-99999)" },
+    { termo: ["nota fiscal", "nfe", "mdfe", "manifesto"], modulo: "Relatórios", path: "/relatorios/nfe", nivel: "atende", desc: "Relatório de notas fiscais e MDF-e" },
+    { termo: ["câmera ip", "vídeo monitoramento"], modulo: "Sistema", path: "/sistema/camera-ip", nivel: "atende", desc: "Configuração de câmeras IP integradas" },
+    { termo: ["operação", "monitoramento online", "eventos"], modulo: "Operações", path: "/operacoes", nivel: "atende", desc: "Monitoramento online, eventos, consulta placas, alertas" },
+    { termo: ["relatório", "relatório de pesagem", "fluxo diário"], modulo: "Relatórios", path: "/relatorios", nivel: "atende", desc: "Relatórios: infrações, fluxo, discrepâncias, NF-e, Power BI, mapa" },
+  ],
+};
+
+// Keywords genéricas que se aplicam a QUALQUER dos 3 sistemas
+const CAPACIDADES_COMUNS = [
+  { termo: ["internet", "link dedicado", "conectividade", "banda larga", "comunicação de dados"], nivel: "atende", desc: "Todos os sistemas operam via web (SaaS) com qualquer link internet" },
+  { termo: ["vpn", "rede privada", "túnel"], nivel: "parcial", desc: "Operação via HTTPS/TLS — VPN site-to-site sob demanda" },
+  { termo: ["disponibilidade", "uptime", "99%", "99,5%", "99,9%"], nivel: "atende", desc: "Hospedagem cloud com alta disponibilidade" },
+  { termo: ["certidão", "atestado de capacidade técnica", "atestado técnico"], nivel: "n/a", desc: "Documentação administrativa — não é funcionalidade do sistema" },
+  { termo: ["garantia", "garantia contratual", "seguro garantia"], nivel: "n/a", desc: "Termos contratuais — não é funcionalidade do sistema" },
+  { termo: ["proposta", "planilha de preços", "bdi", "orçamento", "custo", "valor mensal", "valor global"], nivel: "n/a", desc: "Termos comerciais — não é funcionalidade do sistema" },
+  { termo: ["cnpj", "certidão negativa", "débitos trabalhistas", "fazenda", "inss", "fgts"], nivel: "n/a", desc: "Documentação jurídica/fiscal — não é funcionalidade do sistema" },
+  { termo: ["contrato social", "habilitação jurídica", "qualificação técnica", "documentação de habilitação"], nivel: "n/a", desc: "Documentação de habilitação — não é funcionalidade do sistema" },
+];
+
 // ─── 2. DE-PARA (EDITAL vs PROJETOS) ───────────────────────────
 
 async function gerarDeParaProjetos(textoEdital, categorias, produtoAlvo = null) {
-  // Ler documentação dos 3 produtos
   const docsAxHub = await lerDocsRapido("axhub");
   const docsAxTon = await lerDocsRapido("axton");
   const docsAxCross = await lerDocsRapido("axcross");
@@ -347,13 +480,12 @@ async function gerarDeParaProjetos(textoEdital, categorias, produtoAlvo = null) 
     ? `\n\nFOCO DA ANÁLISE: Priorize a validação para o produto ${produtoAlvo === "axhub" ? "AxHub" : produtoAlvo === "axton" ? "AxTon" : "AxCross"}. Analise especificamente o que este produto atende e onde há gaps.`
     : "";
 
-  // Usar IA para fazer o mapeamento De-Para
   const prompt = `Você é um analista técnico de licitações de fiscalização eletrônica veicular.
 
 CONTEXTO: Tenho 3 produtos:
-- AxHub: Sistema de gestão de infrações, passagens, monitoramento de equipamentos, relatórios de fluxo
-- AxTon: Sistema de pesagem veicular (balanças dinâmicas e estáticas)
-- AxCross: Sistema de cruzamento de placas e monitoramento veicular em tempo real${focoProduto}
+- AxHub: ${CAPACIDADES_AXHUB.modulos.join(", ")} (${CAPACIDADES_AXHUB.totalTelas} telas)
+- AxTon: ${CAPACIDADES_AXTON.modulos.join(", ")} (${CAPACIDADES_AXTON.totalTelas} telas)
+- AxCross: ${CAPACIDADES_AXCROSS.modulos.join(", ")} (${CAPACIDADES_AXCROSS.totalTelas} telas)${focoProduto}
 
 DOCUMENTAÇÃO RESUMIDA:
 AxHub: ${docsAxHub.slice(0, 2000)}
@@ -363,7 +495,7 @@ AxCross: ${docsAxCross.slice(0, 1500)}
 REQUISITOS DO EDITAL (${todosRequisitos.length} itens):
 ${todosRequisitos.slice(0, 60).map((r, i) => `${i + 1}. [${r.categoria}] ${r.texto}`).join("\n")}
 
-Gere o DE-PARA em JSON com a seguinte estrutura:
+Gere o DE-PARA em JSON:
 {
   "itens": [
     {
@@ -372,10 +504,11 @@ Gere o DE-PARA em JSON com a seguinte estrutura:
       "statusAxHub": "atende|parcial|nao_atende|n/a",
       "statusAxTon": "atende|parcial|nao_atende|n/a",
       "statusAxCross": "atende|parcial|nao_atende|n/a",
-      "ondeAtende": "descrição de onde/como o produto atende",
+      "ondeAtende": "módulo/tela específica onde atende",
       "lacuna": "o que falta implementar (se não atende)",
       "esforco": "baixo|medio|alto",
-      "prioridade": "critica|alta|media|baixa"
+      "prioridade": "critica|alta|media|baixa",
+      "validacao": { "modulo": "nome", "path": "/caminho", "teste": "como validar" }
     }
   ],
   "resumo": {
@@ -384,6 +517,9 @@ Gere o DE-PARA em JSON com a seguinte estrutura:
     "atendeParcial": N,
     "naoAtende": N,
     "percentualCobertura": N
+  },
+  "diagnosticoPorCategoria": {
+    "nomeCategoria": { "atende": N, "parcial": N, "naoAtende": N, "total": N, "cobertura": N }
   }
 }
 
@@ -399,62 +535,197 @@ Responda APENAS com JSON válido.`;
     }, "De-Para");
 
     if (!response) return gerarDeParaLocal(todosRequisitos, produtoAlvo);
-    return JSON.parse(response.choices[0].message.content);
+    const parsed = JSON.parse(response.choices[0].message.content);
+    if (!parsed.diagnosticoPorCategoria) {
+      parsed.diagnosticoPorCategoria = calcularDiagnosticoPorCategoria(parsed.itens);
+    }
+    return parsed;
   } catch (err) {
-    console.error("[De-Para] IA falhou:", err.message, "— usando mapeamento local");
+    console.error("[De-Para] IA falhou:", err.message, "— usando mapeamento local avançado");
     return gerarDeParaLocal(todosRequisitos, produtoAlvo);
   }
 }
 
 /**
- * De-Para local (fallback sem IA)
- * Mapeia requisitos aos produtos por heurísticas de keywords
+ * Matching avançado: pontua um requisito contra as capacidades de um produto
+ * Retorna { nivel, score, match, modulo, path, desc }
+ */
+function matchRequisito(texto, capacidades) {
+  const lower = texto.toLowerCase();
+  let melhorMatch = null;
+  let melhorScore = 0;
+
+  for (const cap of capacidades) {
+    for (const t of cap.termo) {
+      if (lower.includes(t.toLowerCase())) {
+        // Score: match exato com termo longo vale mais
+        const score = t.length + (cap.nivel === "atende" ? 20 : cap.nivel === "parcial" ? 10 : 0);
+        if (score > melhorScore) {
+          melhorScore = score;
+          melhorMatch = cap;
+        }
+      }
+    }
+  }
+
+  // Segundo pass: verificar capacidades comuns
+  if (!melhorMatch) {
+    for (const cap of CAPACIDADES_COMUNS) {
+      for (const t of cap.termo) {
+        if (lower.includes(t.toLowerCase())) {
+          return { nivel: cap.nivel, score: t.length, match: t, modulo: "Comum", path: null, desc: cap.desc };
+        }
+      }
+    }
+  }
+
+  if (melhorMatch) {
+    return {
+      nivel: melhorMatch.nivel,
+      score: melhorScore,
+      match: melhorMatch.termo[0],
+      modulo: melhorMatch.modulo,
+      path: melhorMatch.path,
+      desc: melhorMatch.desc,
+    };
+  }
+
+  return null;
+}
+
+/**
+ * De-Para local AVANÇADO (fallback sem IA)
+ * Usa mapa de capacidades reais dos 3 produtos com scoring
  */
 function gerarDeParaLocal(requisitos, produtoAlvo = null) {
-  const KW_AXHUB = ["infração", "autuação", "multa", "penalidade", "talonário", "equipamento de fiscalização", "radar", "lombada", "semáforo", "barreira", "fotossensor", "velocidade", "passagem", "fluxo", "veicular", "avanço de sinal", "parada sobre faixa", "faixa exclusiva", "detran", "sne", "equipamento", "câmera", "sensor", "OCR", "display", "nobreak", "sistema", "software", "plataforma", "dashboard", "relatório", "SLA", "manutenção", "calibração", "suporte", "operação", "monitoramento"];
-  const KW_AXTON = ["pesagem", "balança", "peso", "tonelada", "eixo", "pbt", "cmt", "sobrepeso", "veículo de carga", "caminhão", "pesagem dinâmica", "pesagem estática", "reclassificação", "pórtico", "pit stop"];
-  const KW_AXCROSS = ["cruzamento", "monitoramento", "placa", "alerta", "roubo", "furto", "localização", "rastreamento", "veículo monitorado", "cerco eletrônico", "lpr", "anpr", "reconhecimento", "tempo real", "vigilância"];
+  let atende = 0, parcial = 0, naoAtende = 0;
+  const diagnostico = {};
 
-  const classificar = (texto) => {
-    const lower = texto.toLowerCase();
-    const hub = KW_AXHUB.some(k => lower.includes(k));
-    const ton = KW_AXTON.some(k => lower.includes(k));
-    const cross = KW_AXCROSS.some(k => lower.includes(k));
+  const itens = requisitos.slice(0, 120).map(r => {
+    const matchHub = matchRequisito(r.texto, CAPACIDADES_AXHUB.funcionalidades);
+    const matchTon = matchRequisito(r.texto, CAPACIDADES_AXTON.funcionalidades);
+    const matchCross = matchRequisito(r.texto, CAPACIDADES_AXCROSS.funcionalidades);
 
-    // Se há produto alvo, priorizar classificação para ele
-    if (produtoAlvo === "axhub") {
-      return { axhub: hub ? "parcial" : "n/a", axton: "n/a", axcross: "n/a" };
-    } else if (produtoAlvo === "axton") {
-      return { axhub: "n/a", axton: ton ? "parcial" : "n/a", axcross: "n/a" };
-    } else if (produtoAlvo === "axcross") {
-      return { axhub: "n/a", axton: "n/a", axcross: cross ? "parcial" : "n/a" };
+    // Determinar status de cada produto
+    const getStatus = (match, produto) => {
+      if (produtoAlvo && produto !== produtoAlvo) {
+        // Ainda mostrar se atende, mas não é o foco
+        return match ? match.nivel : "n/a";
+      }
+      return match ? match.nivel : "nao_atende";
+    };
+
+    let statusAxHub = getStatus(matchHub, "axhub");
+    let statusAxTon = getStatus(matchTon, "axton");
+    let statusAxCross = getStatus(matchCross, "axcross");
+
+    // Se nenhum match e temos capacidades comuns
+    const matchComum = matchRequisito(r.texto, []);
+    if (!matchHub && !matchTon && !matchCross && matchComum) {
+      if (matchComum.nivel === "n/a") {
+        statusAxHub = "n/a";
+        statusAxTon = "n/a";
+        statusAxCross = "n/a";
+      }
     }
 
-    return {
-      axhub: hub ? "parcial" : "n/a",
-      axton: ton ? "parcial" : "n/a",
-      axcross: cross ? "parcial" : "n/a",
-    };
-  };
+    // Determinar o melhor match para "ondeAtende" e "validacao"
+    const matches = [
+      { prod: "AxHub", match: matchHub, status: statusAxHub },
+      { prod: "AxTon", match: matchTon, status: statusAxTon },
+      { prod: "AxCross", match: matchCross, status: statusAxCross },
+    ].filter(m => m.match);
 
-  const produtoLabel = produtoAlvo === "axhub" ? "AxHub" : produtoAlvo === "axton" ? "AxTon" : produtoAlvo === "axcross" ? "AxCross" : null;
-  let atende = 0, parcial = 0, naoAtende = 0;
-  const itens = requisitos.slice(0, 80).map(r => {
-    const st = classificar(r.texto);
-    const algumAtende = [st.axhub, st.axton, st.axcross].some(s => s !== "n/a");
-    if (algumAtende) parcial++; else naoAtende++;
+    const melhor = matches.sort((a, b) => (b.match?.score || 0) - (a.match?.score || 0))[0];
+
+    let ondeAtende = "";
+    let lacuna = "";
+    let validacao = null;
+
+    if (melhor) {
+      ondeAtende = `${melhor.prod} → ${melhor.match.modulo}: ${melhor.match.desc}`;
+      if (melhor.match.path) {
+        validacao = {
+          modulo: melhor.match.modulo,
+          path: melhor.match.path,
+          produto: melhor.prod,
+          teste: `Acessar ${melhor.prod} → ${melhor.match.modulo} (${melhor.match.path}) e verificar funcionalidade`,
+        };
+      }
+    }
+
+    // Contar status geral (considerando produto alvo ou todos)
+    const statsArr = produtoAlvo
+      ? [produtoAlvo === "axhub" ? statusAxHub : produtoAlvo === "axton" ? statusAxTon : statusAxCross]
+      : [statusAxHub, statusAxTon, statusAxCross];
+
+    const temAtende = statsArr.some(s => s === "atende");
+    const temParcial = statsArr.some(s => s === "parcial");
+    const todosNA = statsArr.every(s => s === "n/a");
+
+    if (temAtende) atende++;
+    else if (temParcial) parcial++;
+    else if (!todosNA) naoAtende++;
+    // Se todos n/a, não conta em nenhuma categoria (é irrelevante)
+
+    if (!lacuna && !temAtende && !temParcial && !todosNA) {
+      lacuna = `Funcionalidade não mapeada nos produtos${produtoAlvo ? ` (${produtoAlvo})` : ""}. Avaliar se é gap real ou se o requisito está coberto indiretamente.`;
+    }
+
+    // Criticidade baseada em palavras do texto
+    const lower = r.texto.toLowerCase();
+    let prioridade = "media";
+    if (lower.match(/obrigatório|obrigatoriamente|deverá|imprescindível|eliminatório|desclassific/)) prioridade = "critica";
+    else if (lower.match(/importante|necessário|indispensável|essencial/)) prioridade = "alta";
+    else if (lower.match(/poderá|facultat|opcional|complementar/)) prioridade = "baixa";
+
+    let esforco = "medio";
+    if (temAtende) esforco = "baixo";
+    else if (temParcial) esforco = "medio";
+    else if (!todosNA) esforco = "alto";
+
+    // Agregar diagnóstico por categoria
+    const cat = r.categoria || "geral";
+    if (!diagnostico[cat]) diagnostico[cat] = { atende: 0, parcial: 0, naoAtende: 0, naPuro: 0, total: 0 };
+    diagnostico[cat].total++;
+    if (temAtende) diagnostico[cat].atende++;
+    else if (temParcial) diagnostico[cat].parcial++;
+    else if (todosNA) diagnostico[cat].naPuro++;
+    else diagnostico[cat].naoAtende++;
+
     return {
-      requisito: r.texto.slice(0, 200),
+      requisito: r.texto.slice(0, 250),
       categoria: r.categoria,
-      statusAxHub: st.axhub,
-      statusAxTon: st.axton,
-      statusAxCross: st.axcross,
-      ondeAtende: algumAtende ? `Identificado por heurística${produtoLabel ? ` (foco: ${produtoLabel})` : ""} — revisar manualmente` : "",
-      lacuna: algumAtende ? "" : `Não identificado automaticamente${produtoLabel ? ` no ${produtoLabel}` : " nos produtos"}`,
-      esforco: "medio",
-      prioridade: "media",
+      statusAxHub,
+      statusAxTon,
+      statusAxCross,
+      ondeAtende,
+      lacuna,
+      esforco,
+      prioridade,
+      validacao,
     };
   });
+
+  const totalRelevantes = atende + parcial + naoAtende;
+  const pctCobertura = totalRelevantes > 0 ? Math.round(((atende + parcial * 0.5) / totalRelevantes) * 100) : 0;
+
+  // Diagnóstico formatado
+  const diagnosticoPorCategoria = {};
+  for (const [cat, d] of Object.entries(diagnostico)) {
+    const catLabel = CATEGORIAS[cat]?.label || cat;
+    const relevantes = d.atende + d.parcial + d.naoAtende;
+    diagnosticoPorCategoria[cat] = {
+      label: catLabel,
+      icon: CATEGORIAS[cat]?.icon || "📌",
+      atende: d.atende,
+      parcial: d.parcial,
+      naoAtende: d.naoAtende,
+      naPuro: d.naPuro,
+      total: d.total,
+      cobertura: relevantes > 0 ? Math.round(((d.atende + d.parcial * 0.5) / relevantes) * 100) : 100,
+    };
+  }
 
   return {
     itens,
@@ -463,11 +734,33 @@ function gerarDeParaLocal(requisitos, produtoAlvo = null) {
       atendeCompleto: atende,
       atendeParcial: parcial,
       naoAtende: naoAtende,
-      percentualCobertura: requisitos.length > 0 ? Math.round((parcial / requisitos.length) * 100) : 0,
+      percentualCobertura: pctCobertura,
     },
+    diagnosticoPorCategoria,
     _fallback: true,
-    _nota: "Análise gerada por heurísticas locais (IA indisponível). Revise manualmente.",
+    _nota: `Análise por matching avançado: ${CAPACIDADES_AXHUB.funcionalidades.length} capacidades AxHub, ${CAPACIDADES_AXCROSS.funcionalidades.length} AxCross, ${CAPACIDADES_AXTON.funcionalidades.length} AxTon mapeadas. Valide nos links fornecidos.`,
   };
+}
+
+function calcularDiagnosticoPorCategoria(itens) {
+  const diagnostico = {};
+  for (const item of itens || []) {
+    const cat = item.categoria || "geral";
+    if (!diagnostico[cat]) diagnostico[cat] = { atende: 0, parcial: 0, naoAtende: 0, naPuro: 0, total: 0 };
+    diagnostico[cat].total++;
+    const stats = [item.statusAxHub, item.statusAxTon, item.statusAxCross];
+    if (stats.some(s => s === "atende")) diagnostico[cat].atende++;
+    else if (stats.some(s => s === "parcial")) diagnostico[cat].parcial++;
+    else if (stats.every(s => s === "n/a")) diagnostico[cat].naPuro++;
+    else diagnostico[cat].naoAtende++;
+  }
+  const result = {};
+  for (const [cat, d] of Object.entries(diagnostico)) {
+    const label = CATEGORIAS[cat]?.label || cat;
+    const relevantes = d.atende + d.parcial + d.naoAtende;
+    result[cat] = { label, icon: CATEGORIAS[cat]?.icon || "📌", atende: d.atende, parcial: d.parcial, naoAtende: d.naoAtende, naPuro: d.naPuro, total: d.total, cobertura: relevantes > 0 ? Math.round(((d.atende + d.parcial * 0.5) / relevantes) * 100) : 100 };
+  }
+  return result;
 }
 
 async function lerDocsRapido(produto) {

@@ -328,6 +328,16 @@ export async function analiseAvancadaHandler(req, res) {
       incluirPromptAdequacao,
     });
 
+    // Enriquecer De-Para com URLs de validação reais
+    if (resultado.dePara?.itens && siteConfig?.url) {
+      for (const item of resultado.dePara.itens) {
+        if (item.validacao?.path) {
+          item.validacao.url = `${siteConfig.url}${item.validacao.path}`;
+          item.validacao.site = siteConfig.nome;
+        }
+      }
+    }
+
     res.status(201).json({
       sucesso: true,
       siteValidado: siteConfig ? { id: siteId, produto: siteConfig.produtoLabel, nome: siteConfig.nome, url: siteConfig.url } : null,
