@@ -1,8 +1,7 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { AXHUB_SITES, AXCROSS_SITES } from '../data/sitesData';
+import { apiFetch } from '../services/api';
 import './ChamadosSites.css';
-
-const API_BASE = 'http://localhost:3100/api';
 
 // Sites AxTon (pesagem) — não existem no sitesData, mapeados manualmente
 const AXTON_SITES = [
@@ -376,7 +375,7 @@ function ChamadosSites() {
     setLoading(true);
     setErro(null);
     try {
-      const resp = await fetch(`${API_BASE}/helpdesk/sites-overview?mode=all&count=300`);
+      const resp = await apiFetch(`/helpdesk/sites-overview?mode=all&count=300`);
       if (!resp.ok) throw new Error(`API ${resp.status}`);
       const json = await resp.json();
       setData(json);
@@ -391,7 +390,7 @@ function ChamadosSites() {
 
   const handleAssociar = async (categoriaId, siteId) => {
     try {
-      await fetch(`${API_BASE}/helpdesk/mapa-sites`, {
+      await apiFetch(`/helpdesk/mapa-sites`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ categoriaId, siteId }),

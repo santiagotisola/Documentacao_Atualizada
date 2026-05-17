@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
-
-const API = "http://localhost:3100/api";
+import { apiFetch } from "../services/api";
 
 const JITBIT_BASE = "https://desk.axiontecnologia.com.br";
 
@@ -162,7 +161,7 @@ export default function SlaCompliance() {
 
   // Carregar categorias
   useEffect(() => {
-    fetch(`${API}/helpdesk/categorias`)
+    apiFetch(`/helpdesk/categorias`)
       .then(r => r.json())
       .then(d => setCategorias(d.categorias || []))
       .catch(() => {});
@@ -182,7 +181,7 @@ export default function SlaCompliance() {
       if (sectionId) params.set("sectionId", sectionId);
       if (priority)  params.set("priority",  priority);
 
-      const r = await fetch(`${API}/helpdesk/sla-compliance?${params}`);
+      const r = await apiFetch(`/helpdesk/sla-compliance?${params}`);
       const d = await r.json();
       if (!r.ok) { setErro(d.erro || "Erro ao buscar dados."); return; }
       setDados(d);

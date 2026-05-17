@@ -1,6 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-
-const API = "http://localhost:3100/api";
+import { apiFetch } from "../services/api";
 
 const ANO_ATUAL = new Date().getFullYear();
 const ANOS = Array.from({ length: ANO_ATUAL - 2023 }, (_, i) => 2024 + i);
@@ -35,7 +34,7 @@ export default function RelatorioFluxo() {
 
   // Carrega lista de equipamentos ao montar
   useEffect(() => {
-    fetch(`${API}/relatorio/equipamentos`)
+    apiFetch(`/relatorio/equipamentos`)
       .then(r => r.json())
       .then(d => setEquipamentos(d.equipamentos || []))
       .catch(() => {});
@@ -46,8 +45,7 @@ export default function RelatorioFluxo() {
     setErro("");
     setDados(null);
     try {
-      const url = `${API}/relatorio/${tipo}?mes=${mes}&ano=${ano}&equipamento=${encodeURIComponent(equipamento)}`;
-      const r = await fetch(url);
+      const r = await apiFetch(`/relatorio/${tipo}?mes=${mes}&ano=${ano}&equipamento=${encodeURIComponent(equipamento)}`);
       const d = await r.json();
       if (!r.ok) {
         setErro(d.erro || "Erro ao buscar dados.");

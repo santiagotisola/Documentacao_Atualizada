@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
-
-const API = "http://localhost:3100/api";
+import { apiFetch } from "../services/api";
 const PRODUTOS = ["axhub", "axton", "axcross"];
 const STATUS_CORES = { rascunho: "#f39c12", revisao: "#2563eb", aprovado: "#27ae60" };
 const STATUS_LABELS = { rascunho: "🟡 Rascunho", revisao: "🔵 Em Revisão", aprovado: "✅ Aprovado" };
@@ -17,8 +16,7 @@ export default function Specs() {
   async function carregarSpecs() {
     setCarregando(true);
     try {
-      const url = produto ? `${API}/spec?produto=${produto}` : `${API}/spec`;
-      const r   = await fetch(url);
+      const r = await apiFetch(produto ? `/spec?produto=${produto}` : `/spec`);
       const d   = await r.json();
       setSpecs(d.lista || []);
       setSelecionada(null);
@@ -30,7 +28,7 @@ export default function Specs() {
     setCarregando(true);
     setSelecionada(null);
     try {
-      const r = await fetch(`${API}/spec/${id}`);
+      const r = await apiFetch(`/spec/${id}`);
       const d = await r.json();
       setSelecionada(d);
     } catch { setMsg("Erro ao carregar detalhe."); }
@@ -39,7 +37,7 @@ export default function Specs() {
 
   async function atualizarStatus(id, status) {
     try {
-      await fetch(`${API}/spec/${id}/status`, {
+      await apiFetch(`/spec/${id}/status`, {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ status }),

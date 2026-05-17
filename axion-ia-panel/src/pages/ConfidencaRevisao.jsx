@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
-
-const API = "http://localhost:3100/api";
+import { apiFetch, getConfiguredUrl, getApiToken } from "../services/api";
 
 export default function ConfidencaRevisao() {
   const [aba, setAba] = useState("fila");  // "fila" | "stats"
@@ -26,12 +25,10 @@ export default function ConfidencaRevisao() {
     setCarregando(true);
     setMsg("");
     try {
-      const url = new URL(`${API}/confianca/fila`);
-      url.searchParams.append("produto", produto);
-      url.searchParams.append("status", status);
-      if (prioridade) url.searchParams.append("prioridade", prioridade);
+      const params = new URLSearchParams({ produto, status });
+      if (prioridade) params.append("prioridade", prioridade);
 
-      const r = await fetch(url);
+      const r = await apiFetch(`/confianca/fila?${params}`);
       const d = await r.json();
       setFila(d.items || []);
     } catch (err) {
@@ -42,10 +39,10 @@ export default function ConfidencaRevisao() {
 
   async function carregarStats() {
     try {
-      const url = new URL(`${API}/confianca/estatisticas`);
-      if (produto) url.searchParams.append("produto", produto);
+      const params = new URLSearchParams();
+      if (produto) params.append("produto", produto);
 
-      const r = await fetch(url);
+      const r = await apiFetch(`/confianca/estatisticas?${params}`);
       const d = await r.json();
       setStats(d);
     } catch (err) {
@@ -66,7 +63,7 @@ export default function ConfidencaRevisao() {
     }
 
     try {
-      const r = await fetch(`${API}/confianca/${selecionado._id}/revisar`, {
+      const r = await apiFetch(`/confianca/${selecionado._id}/revisar`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -92,7 +89,7 @@ export default function ConfidencaRevisao() {
     if (!selecionado) return;
 
     try {
-      const r = await fetch(`${API}/confianca/${selecionado._id}/descartar`, {
+      const r = await apiFetch(`/confianca/${selecionado._id}/descartar`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ motivo: "Descartado pelo revisor" }),
@@ -111,10 +108,12 @@ export default function ConfidencaRevisao() {
 
   async function exportarCsv() {
     try {
-      const url = new URL(`${API}/confianca/exportar/csv`);
-      if (produto) url.searchParams.append("produto", produto);
+      const params = new URLSearchParams();
+      if (produto) params.append("produto", produto);
+      const token = getApiToken();
+      if (token) params.append("token", token);
 
-      window.location.href = url;
+      window.location.href = `${getConfiguredUrl()}/confianca/exportar/csv?${params}`;
     } catch (err) {
       setMsg(`Erro ao exportar: ${err.message}`);
     }

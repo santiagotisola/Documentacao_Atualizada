@@ -1,9 +1,7 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { AXHUB_SITES, AXCROSS_SITES, MODULOS, TIPOS_CONTRATO } from '../data/sitesData';
-import { api } from '../services/api';
+import { api, apiFetch } from '../services/api';
 import './IntelligenceHub.css';
-
-const API_BASE = 'http://localhost:3100/api';
 
 const AXTON_SITES = [
   { id: 'axton-imepi', nome: 'IMEPI', estado: 'PI', sistema: 'AxTon' },
@@ -96,8 +94,8 @@ export default function IntelligenceHub() {
   useEffect(() => {
     setLoading(true);
     Promise.allSettled([
-      fetch(`${API_BASE}/helpdesk/sites-overview`).then(r => r.json()),
-      fetch(`${API_BASE}/helpdesk/sla-overview`).then(r => r.json()),
+      apiFetch(`/helpdesk/sites-overview`).then(r => r.json()),
+      apiFetch(`/helpdesk/sla-overview`).then(r => r.json()),
     ]).then(([chamRes, slaRes]) => {
       if (chamRes.status === 'fulfilled') setChamadosData(chamRes.value);
       if (slaRes.status === 'fulfilled') setSlaData(slaRes.value);

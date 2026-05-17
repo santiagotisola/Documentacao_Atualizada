@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
-
-const API = "http://localhost:3100/api";
+import { apiFetch } from "../services/api";
 
 export default function PlanilhaHoras() {
   const hoje = new Date();
@@ -19,7 +18,7 @@ export default function PlanilhaHoras() {
   const [erro, setErro]               = useState("");
 
   useEffect(() => {
-    fetch(`${API}/helpdesk/tecnicos`)
+    apiFetch(`/helpdesk/tecnicos`)
       .then(r => r.json())
       .then(d => setTecnicos(d.tecnicos || []))
       .catch(() => {});
@@ -40,7 +39,7 @@ export default function PlanilhaHoras() {
       const params = new URLSearchParams({ dataInicio, dataFim });
       if (tecnicoId)   params.set("tecnicoId", tecnicoId);
       if (tecnicoNome) params.set("tecnicoNome", tecnicoNome);
-      const r = await fetch(`${API}/helpdesk/planilha-horas?${params}`);
+      const r = await apiFetch(`/helpdesk/planilha-horas?${params}`);
       const d = await r.json();
       if (!r.ok) { setErro(d.erro || "Erro ao buscar dados."); return; }
       setDados(d);

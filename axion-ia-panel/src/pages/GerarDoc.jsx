@@ -1,6 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-
-const API = "http://localhost:3100/api";
+import { apiFetch } from "../services/api";
 
 const PRODUTOS = [
   { value: "axhub", label: "AxHub — Sistema de Trânsito" },
@@ -44,7 +43,7 @@ export default function GerarDoc() {
   // Carrega as seções quando muda o produto
   useEffect(() => {
     setForm((f) => ({ ...f, secao: "" }));
-    fetch(`${API}/doc/secoes/${form.produto}`)
+    apiFetch(`/doc/secoes/${form.produto}`)
       .then((r) => r.json())
       .then((d) => setSecoes(d.secoes || []))
       .catch(() => setSecoes([]));
@@ -64,7 +63,7 @@ export default function GerarDoc() {
     try {
       const fd = new FormData();
       fd.append("arquivo", file);
-      const r = await fetch(`${API}/doc/upload-contexto`, { method: "POST", body: fd });
+      const r = await apiFetch(`/doc/upload-contexto`, { method: "POST", body: fd });
       const d = await r.json();
       if (!r.ok) { setErro(d.erro || "Erro no upload."); return; }
       setArquivoContexto({ nome: d.nomeArquivo, texto: d.texto, palavras: d.palavrasExtraidas });
@@ -106,7 +105,7 @@ export default function GerarDoc() {
         ].join("").trim();
       }
 
-      const res = await fetch(`${API}/doc/gerar`, {
+      const res = await apiFetch(`/doc/gerar`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
@@ -136,7 +135,7 @@ export default function GerarDoc() {
     setErro(null);
 
     try {
-      const res = await fetch(`${API}/doc/salvar`, {
+      const res = await apiFetch(`/doc/salvar`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

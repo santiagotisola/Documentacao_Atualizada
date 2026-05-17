@@ -58,3 +58,15 @@ api.interceptors.response.use(
     return Promise.reject(error);
   }
 );
+
+// ─── Helper para páginas que usam fetch() nativo ─────────────────────────────
+// Uso: import { apiFetch } from "../services/api";
+//      const r = await apiFetch("/helpdesk/tickets");
+export function apiFetch(path, opts = {}) {
+  const base = getApiUrl();
+  const token = getApiToken();
+  const isFormData = opts.body instanceof FormData;
+  const headers = { ...(isFormData ? {} : { "Content-Type": "application/json" }), ...(opts.headers || {}) };
+  if (token) headers["x-api-token"] = token;
+  return fetch(`${base}${path}`, { ...opts, headers });
+}

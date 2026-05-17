@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
-
-const API = "http://localhost:3100/api";
+import { apiFetch } from "../services/api";
 
 const PRODUTOS = ["axhub", "axton", "axcross"];
 
@@ -22,7 +21,7 @@ export default function Roadmap() {
   async function carregarRoadmaps() {
     setCarregando(true);
     try {
-      const r = await fetch(`${API}/roadmap?produto=${produto}`);
+      const r = await apiFetch(`/roadmap?produto=${produto}`);
       const d = await r.json();
       setRoadmaps(d.lista || []);
       if (d.lista?.length > 0) {
@@ -37,7 +36,7 @@ export default function Roadmap() {
   async function carregarDetalhe(id) {
     setCarregando(true);
     try {
-      const r = await fetch(`${API}/roadmap/${id}`);
+      const r = await apiFetch(`/roadmap/${id}`);
       const d = await r.json();
       setSelecionado(d);
     } catch { setMsg("Erro ao carregar detalhe."); }
@@ -48,7 +47,7 @@ export default function Roadmap() {
     setGerando(true);
     setMsg("");
     try {
-      const r = await fetch(`${API}/roadmap/gerar`, {
+      const r = await apiFetch(`/roadmap/gerar`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ produto }),
@@ -66,7 +65,7 @@ export default function Roadmap() {
   async function atualizarStatus(itemId, status) {
     if (!selecionado) return;
     try {
-      await fetch(`${API}/roadmap/${selecionado._id}/item/${itemId}`, {
+      await apiFetch(`/roadmap/${selecionado._id}/item/${itemId}`, {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ status }),
@@ -79,7 +78,7 @@ export default function Roadmap() {
     setGerandoSpec(item._id);
     setMsg("");
     try {
-      const r = await fetch(`${API}/spec/gerar`, {
+      const r = await apiFetch(`/spec/gerar`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
