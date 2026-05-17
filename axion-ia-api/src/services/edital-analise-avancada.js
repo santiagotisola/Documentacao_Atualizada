@@ -353,7 +353,7 @@ export async function analisarEditalCompleto(textoEdital, opcoes = {}) {
   // 4. Validação de mercado
   let mercado = null;
   if (incluirMercado) {
-    mercado = await validarMercadoSaaS(textoEdital, categorias);
+    mercado = await validarMercadoSaaS(textoEdital, categorias, dePara, concorrentes);
   }
 
   // 5. Prompt de adequação
@@ -1414,7 +1414,7 @@ function gerarConcorrentesLocal(categorias, regiaoEdital, dePara = null) {
 
 // ─── 4. VALIDAÇÃO DE MERCADO SaaS ───────────────────────────────
 
-async function validarMercadoSaaS(textoEdital, categorias) {
+async function validarMercadoSaaS(textoEdital, categorias, dePara = null, concorrentes = null) {
   const prompt = `Você é um consultor de mercado especializado em SaaS para gestão de trânsito, fiscalização eletrônica e cidades inteligentes no Brasil.
 
 MEU PRODUTO (Axion Tecnologia SaaS):
@@ -1470,11 +1470,11 @@ Responda APENAS com JSON válido.`;
       max_tokens: 4000,
     }, "Mercado");
 
-    if (!response) return gerarMercadoLocal(categorias);
+    if (!response) return gerarMercadoLocal(categorias, dePara, concorrentes);
     return JSON.parse(response.choices[0].message.content);
   } catch (err) {
     console.error("[Mercado] Erro:", err.message, "— usando análise local");
-    return gerarMercadoLocal(categorias);
+    return gerarMercadoLocal(categorias, dePara, concorrentes);
   }
 }
 
@@ -1533,13 +1533,41 @@ Responda APENAS com JSON válido.`;
 /**
  * Validação de mercado local (fallback sem IA)
  */
-function gerarMercadoLocal(categorias) {
+function gerarMercadoLocal(categorias, dePara = null, concorrentes = null) {
   const totalReqs = Object.values(categorias).reduce((s, c) => s + c.total, 0);
+
+  // Percentuais da Axion (do dePara)
+  const axPct = dePara?.resumo?.percentualCobertura || 0;
+  const axAtende = dePara?.resumo?.atendeCompleto || 0;
+  const axParcial = dePara?.resumo?.atendeParcial || 0;
+  const axNao = dePara?.resumo?.naoAtende || 0;
+  const axTotal = axAtende + axParcial + axNao;
+
+  // Melhor concorrente
+  const ranking = concorrentes?.ranking || [];
+  const melhor = ranking[0];
+  const melhorPct = melhor?.percentualAtendimento || 0;
+  const concComAmeaca = ranking.filter(r => r.nivelAmeaca === "alto").length;
+
+  // Mensagem comparativa dinâmica
+  let comparacao = "";
+  if (axTotal > 0 && melhor) {
+    comparacao = `Nenhum concorrente mapeado atende 100% dos ${axTotal} requisitos do edital. `
+      + `A Axion Tecnologia cobre ${axPct}% dos requisitos (${axAtende} atende, ${axParcial} parcial, ${axNao} não atende). `
+      + `O concorrente mais aderente é ${melhor.empresa} com ${melhorPct}%`
+      + (melhorPct < axPct ? ` — ${axPct - melhorPct}pp abaixo da Axion.` : melhorPct === axPct ? ` — empatado com Axion.` : ` — ${melhorPct - axPct}pp acima da Axion.`)
+      + (concComAmeaca > 0 ? ` ${concComAmeaca} concorrente(s) com nível de ameaça alto.` : "");
+  } else if (axTotal > 0) {
+    comparacao = `A Axion Tecnologia cobre ${axPct}% dos ${axTotal} requisitos do edital: ${axAtende} atendido(s), ${axParcial} parcial(is), ${axNao} não atendido(s). Nenhum concorrente mapeado cobre integralmente todos os requisitos.`;
+  } else {
+    comparacao = "Nenhum sistema mapeado no mercado atende integralmente todos os requisitos deste edital (análise local — sem validação IA).";
+  }
+
   return {
     concorrenteDireto: {
-      existe: false,
-      empresas: [],
-      comparacao: "Não existe no mercado brasileiro um SaaS que combine análise de editais + IA + gestão de conformidade + helpdesk para o segmento de fiscalização eletrônica (análise local — sem validação IA).",
+      existe: concComAmeaca > 0,
+      empresas: ranking.filter(r => r.nivelAmeaca === "alto").map(r => r.empresa),
+      comparacao,
     },
     doresCliente: [
       { dor: "Análise manual de editais demanda dias de trabalho especializado", impacto: "alto", nossoSaaS_resolve: true, como: "Extração automática e decomposição categórica em minutos" },
