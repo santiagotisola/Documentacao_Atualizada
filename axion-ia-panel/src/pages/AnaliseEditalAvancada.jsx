@@ -410,7 +410,7 @@ export default function AnaliseEditalAvancada() {
                   <th style={{ textAlign: "center", padding: "8px", color: "#94a3b8", width: 80 }}>AxHub</th>
                   <th style={{ textAlign: "center", padding: "8px", color: "#94a3b8", width: 80 }}>AxTon</th>
                   <th style={{ textAlign: "center", padding: "8px", color: "#94a3b8", width: 80 }}>AxCross</th>
-                  <th style={{ textAlign: "left", padding: "8px", color: "#94a3b8" }}>Onde Atende / Lacuna</th>
+                  <th style={{ textAlign: "left", padding: "8px", color: "#94a3b8" }}>Onde Atende / Solução</th>
                   <th style={{ textAlign: "center", padding: "8px", color: "#94a3b8", width: 70 }}>Validar</th>
                 </tr>
               </thead>
@@ -432,9 +432,26 @@ export default function AnaliseEditalAvancada() {
                       const s = STATUS_COLORS[item[col]] || STATUS_COLORS["n/a"];
                       return <td key={col} style={{ textAlign: "center", padding: "4px" }}><span style={{ background: s.bg, color: s.color, padding: "2px 8px", borderRadius: 6, fontSize: "0.72rem" }}>{s.label}</span></td>;
                     })}
-                    <td style={{ padding: "8px", maxWidth: 250 }}>
+                    <td style={{ padding: "8px", maxWidth: 300 }}>
                       {item.ondeAtende && <div style={{ fontSize: "0.73rem", color: "#6ee7b7", marginBottom: 2 }}>{item.ondeAtende.slice(0, 120)}</div>}
-                      {item.lacuna && <div style={{ fontSize: "0.73rem", color: "#fca5a5" }}>{item.lacuna.slice(0, 120)}</div>}
+                      {item.lacuna && <div style={{ fontSize: "0.73rem", color: "#fca5a5", marginBottom: 2 }}>{item.lacuna.slice(0, 120)}</div>}
+                      {item.solucao && (
+                        <div style={{ marginTop: 4, background: "rgba(255,255,255,0.03)", border: `1px solid ${item.solucao.cor}30`, borderRadius: 8, padding: "6px 8px" }}>
+                          <div style={{ display: "flex", alignItems: "center", gap: 4, marginBottom: 3 }}>
+                            <span style={{ fontSize: "0.8rem" }}>{item.solucao.icon}</span>
+                            <span style={{ fontSize: "0.7rem", fontWeight: 700, color: item.solucao.cor }}>{item.solucao.label}</span>
+                            <span style={{ fontSize: "0.6rem", color: "#475569", marginLeft: "auto" }}>⏱ {item.solucao.prazo}</span>
+                          </div>
+                          <div style={{ fontSize: "0.68rem", color: "#94a3b8", lineHeight: 1.3, marginBottom: 3 }}>{item.solucao.descricao?.slice(0, 150)}</div>
+                          <div style={{ fontSize: "0.65rem", color: "#a5b4fc" }}>▸ {item.solucao.acao?.slice(0, 120)}</div>
+                          <div style={{ display: "flex", gap: 8, marginTop: 3, fontSize: "0.62rem" }}>
+                            <span style={{ color: "#64748b" }}>👤 {item.solucao.responsavel}</span>
+                            <span style={{ color: item.solucao.complexidade === "alta" ? "#ef4444" : item.solucao.complexidade === "media" ? "#f59e0b" : "#10b981" }}>
+                              {item.solucao.complexidade === "alta" ? "🔴" : item.solucao.complexidade === "media" ? "🟡" : "🟢"} {item.solucao.complexidade}
+                            </span>
+                          </div>
+                        </div>
+                      )}
                     </td>
                     <td style={{ textAlign: "center", padding: "4px" }}>
                       {item.validacao?.url ? (
@@ -453,6 +470,45 @@ export default function AnaliseEditalAvancada() {
               </tbody>
             </table>
           </div>
+
+          {/* ─── PAINEL RESUMO DE SOLUÇÕES ─── */}
+          {(() => {
+            const itensComSolucao = (resultado.dePara.itens || []).filter(i => i.solucao);
+            if (itensComSolucao.length === 0) return null;
+
+            // Agrupar por tipo de solução
+            const porTipo = {};
+            itensComSolucao.forEach(i => {
+              const tipo = i.solucao.label;
+              if (!porTipo[tipo]) porTipo[tipo] = { icon: i.solucao.icon, cor: i.solucao.cor, itens: [] };
+              porTipo[tipo].itens.push(i);
+            });
+
+            return (
+              <div style={{ marginTop: "1.2rem", background: "rgba(239,68,68,0.04)", border: "1px solid rgba(239,68,68,0.12)", borderRadius: 10, padding: "1rem" }}>
+                <h4 style={{ color: "#fca5a5", marginBottom: "0.7rem", fontSize: "0.9rem" }}>🛠️ Plano de Ação — {itensComSolucao.length} {itensComSolucao.length === 1 ? "item requer" : "itens requerem"} solução</h4>
+                <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(260px, 1fr))", gap: "0.6rem" }}>
+                  {Object.entries(porTipo).map(([tipo, data]) => (
+                    <div key={tipo} style={{ background: "rgba(255,255,255,0.03)", border: `1px solid ${data.cor}25`, borderRadius: 8, padding: "0.7rem" }}>
+                      <div style={{ fontSize: "0.85rem", fontWeight: 700, color: data.cor, marginBottom: "0.4rem" }}>
+                        {data.icon} {tipo} ({data.itens.length})
+                      </div>
+                      {data.itens.map((it, idx) => (
+                        <div key={idx} style={{ fontSize: "0.7rem", color: "#94a3b8", padding: "3px 0", borderBottom: idx < data.itens.length - 1 ? "1px solid rgba(255,255,255,0.04)" : "none" }}>
+                          <div style={{ color: "#cbd5e1", fontWeight: 600 }}>{it.requisito?.slice(0, 80)}</div>
+                          <div style={{ color: "#64748b", marginTop: 2 }}>▸ {it.solucao.acao?.slice(0, 100)}</div>
+                          <div style={{ display: "flex", gap: 8, marginTop: 2 }}>
+                            <span style={{ color: "#475569" }}>⏱ {it.solucao.prazo}</span>
+                            <span style={{ color: "#475569" }}>👤 {it.solucao.responsavel}</span>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  ))}
+                </div>
+              </div>
+            );
+          })()}
 
           {resultado.dePara._nota && (
             <div style={{ marginTop: "1rem", background: "rgba(99,102,241,0.06)", border: "1px solid rgba(99,102,241,0.15)", borderRadius: 8, padding: "0.7rem", fontSize: "0.75rem", color: "#94a3b8" }}>

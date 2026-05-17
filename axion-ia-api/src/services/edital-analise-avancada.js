@@ -462,6 +462,141 @@ const CAPACIDADES_COMUNS = [
   { termo: ["contrato social", "habilitação jurídica", "qualificação técnica", "documentação de habilitação"], nivel: "n/a", desc: "Documentação de habilitação — não é funcionalidade do sistema" },
 ];
 
+// ─── MAPA DE SOLUÇÕES PARA GAPS ─────────────────────────────────
+// Para cada tipo de gap, define a ação recomendada
+
+const SOLUCOES_POR_CATEGORIA = {
+  hardware: {
+    nao_atende: { tipo: "adquirir", icon: "🛒", label: "Adquirir/Integrar", cor: "#f97316",
+      template: (req) => `Adquirir equipamento compatível ou integrar hardware de terceiro via API. O AxHub suporta cadastro de novos tipos de equipamentos e integração via fabricante.`,
+      acao: "Solicitar ao fornecedor de hardware a especificação técnica e validar compatibilidade com a API de integração do AxHub.",
+      responsavel: "Engenharia + Comercial" },
+    parcial: { tipo: "adaptar", icon: "🔧", label: "Adaptar/Configurar", cor: "#f59e0b",
+      template: (req) => `Funcionalidade parcialmente coberta. Configurar parâmetros existentes ou solicitar customização pontual ao time de desenvolvimento.`,
+      acao: "Abrir chamado interno de customização com especificação do requisito do edital.",
+      responsavel: "Suporte + Desenvolvimento" },
+  },
+  software: {
+    nao_atende: { tipo: "desenvolver", icon: "💻", label: "Desenvolver", cor: "#8b5cf6",
+      template: (req) => `Desenvolver funcionalidade no roadmap do produto. Avaliar se é feature genérica (beneficia todos os clientes) ou customização específica para este contrato.`,
+      acao: "Criar task no backlog de desenvolvimento com requisito detalhado e prazo alinhado ao cronograma do edital.",
+      responsavel: "Produto + Desenvolvimento" },
+    parcial: { tipo: "evoluir", icon: "📐", label: "Evoluir Feature", cor: "#f59e0b",
+      template: (req) => `Feature existe mas precisa de evolução para atender 100% do requisito. Mapear gaps específicos e estimar esforço de desenvolvimento.`,
+      acao: "Documentar o que já atende vs o que falta e estimar sprint de desenvolvimento.",
+      responsavel: "Desenvolvimento" },
+  },
+  infraestrutura: {
+    nao_atende: { tipo: "provisionar", icon: "☁️", label: "Provisionar Infra", cor: "#06b6d4",
+      template: (req) => `Provisionar infraestrutura necessária (cloud, rede, certificados). Os sistemas Axion operam em Azure com escalabilidade sob demanda.`,
+      acao: "Solicitar ao time de infra o provisionamento do recurso e documentar na proposta técnica.",
+      responsavel: "Infraestrutura + DevOps" },
+    parcial: { tipo: "configurar", icon: "⚙️", label: "Configurar", cor: "#f59e0b",
+      template: (req) => `Infraestrutura base existe. Ajustar configurações (DNS, SSL, backup, SLA) conforme requisito específico do edital.`,
+      acao: "Revisar configurações atuais e ajustar para atender o requisito.",
+      responsavel: "DevOps" },
+  },
+  processos: {
+    nao_atende: { tipo: "implantar", icon: "📋", label: "Implantar Processo", cor: "#ec4899",
+      template: (req) => `Definir e documentar o processo operacional conforme requisito. Pode envolver criação de POP (Procedimento Operacional Padrão) e treinamento da equipe.`,
+      acao: "Elaborar POP específico e incluir na proposta como compromisso de implantação.",
+      responsavel: "Operações + Qualidade" },
+    parcial: { tipo: "adequar", icon: "📝", label: "Adequar Processo", cor: "#f59e0b",
+      template: (req) => `Processo existe mas precisa de ajustes para conformidade total. Revisar POP atual e adaptar ao requisito do edital.`,
+      acao: "Revisar processo existente e documentar as adequações necessárias.",
+      responsavel: "Operações" },
+  },
+  funcoes: {
+    nao_atende: { tipo: "contratar", icon: "👤", label: "Alocar Equipe", cor: "#14b8a6",
+      template: (req) => `Alocar profissional com a qualificação exigida. Avaliar se é possível via equipe atual ou se precisa contratação/terceirização.`,
+      acao: "Verificar disponibilidade na equipe atual ou iniciar processo seletivo/terceirização.",
+      responsavel: "RH + Operações" },
+    parcial: { tipo: "capacitar", icon: "🎓", label: "Capacitar Equipe", cor: "#f59e0b",
+      template: (req) => `Equipe existe mas precisa de capacitação específica. Planejar treinamento ou certificação complementar.`,
+      acao: "Agendar treinamento/certificação para a equipe designada.",
+      responsavel: "RH + Gestão" },
+  },
+  documentos: {
+    nao_atende: { tipo: "providenciar", icon: "📄", label: "Providenciar Doc", cor: "#64748b",
+      template: (req) => `Providenciar documentação exigida. Verificar prazos de emissão e validade junto aos órgãos competentes.`,
+      acao: "Solicitar emissão do documento junto ao órgão competente com antecedência.",
+      responsavel: "Jurídico + Administrativo" },
+    parcial: { tipo: "atualizar", icon: "🔄", label: "Atualizar Doc", cor: "#f59e0b",
+      template: (req) => `Documento existe mas pode estar desatualizado ou incompleto. Verificar validade e solicitar atualização se necessário.`,
+      acao: "Verificar validade dos documentos existentes e renovar se necessário.",
+      responsavel: "Administrativo" },
+  },
+  normas: {
+    nao_atende: { tipo: "adequar", icon: "📜", label: "Adequar à Norma", cor: "#a855f7",
+      template: (req) => `Verificar conformidade com a norma/resolução citada. Pode exigir homologação, certificação ou atualização do sistema.`,
+      acao: "Consultar a norma específica e mapear os ajustes necessários no produto.",
+      responsavel: "Engenharia + Qualidade" },
+    parcial: { tipo: "complementar", icon: "📎", label: "Complementar", cor: "#f59e0b",
+      template: (req) => `Conformidade parcial com a norma. Identificar cláusulas específicas não atendidas e planejar adequação.`,
+      acao: "Detalhar os pontos da norma não cobertos e estimar esforço de adequação.",
+      responsavel: "Engenharia" },
+  },
+  comercial: {
+    nao_atende: { tipo: "negociar", icon: "💰", label: "Tratar Comercial", cor: "#eab308",
+      template: (req) => `Requisito comercial/financeiro que precisa de análise pela área comercial. Avaliar viabilidade de atendimento na proposta.`,
+      acao: "Encaminhar para análise comercial e incluir na composição de preços.",
+      responsavel: "Comercial + Financeiro" },
+    parcial: { tipo: "ajustar", icon: "📊", label: "Ajustar Proposta", cor: "#f59e0b",
+      template: (req) => `Proposta cobre parcialmente. Revisar composição de custos e ajustar para atender o requisito.`,
+      acao: "Revisar planilha de custos e ajustar a proposta comercial.",
+      responsavel: "Comercial" },
+  },
+};
+
+// Soluções específicas para capacidades "parcial" conhecidas
+const SOLUCOES_PARCIAIS_ESPECIFICAS = {
+  "display": { descricao: "Integrar com módulo de PMV (Painel de Mensagem Variável) via API de equipamentos. O AxHub suporta cadastro de tipos de equipamento customizados.", acao: "Configurar tipo de equipamento PMV e integrar via API do fabricante.", prazo: "2-4 semanas" },
+  "nobreak": { descricao: "Cadastrar nobreaks como acessórios vinculados ao equipamento principal. Para monitoramento dedicado, integrar via SNMP ou API.", acao: "Criar categoria de acessório 'Nobreak' e configurar alertas de status.", prazo: "1-2 semanas" },
+  "manutenção": { descricao: "O monitoramento online detecta equipamentos offline. Para ordens de serviço formais, integrar com sistema de OS ou usar Jitbit como helpdesk de campo.", acao: "Configurar alertas de indisponibilidade + workflow de OS via Jitbit.", prazo: "1-2 semanas" },
+  "treinamento": { descricao: "Documentação completa no portal AxHub Docs + AxionIA para dúvidas. Para e-learning formal, gravar videoaulas das operações principais.", acao: "Gravar série de vídeos tutoriais (triagem, exportação, relatórios) e disponibilizar no portal.", prazo: "2-4 semanas" },
+  "vpn": { descricao: "Operação via HTTPS/TLS com certificado SSL. VPN site-to-site pode ser configurada sob demanda para clientes com requisito específico.", acao: "Provisionar VPN site-to-site se exigido pelo edital.", prazo: "1 semana" },
+};
+
+/**
+ * Gera solução recomendada para um item "nao_atende" ou "parcial"
+ */
+function gerarSolucao(item, matchInfo) {
+  const cat = item.categoria || "software";
+  const stats = [item.statusAxHub, item.statusAxTon, item.statusAxCross];
+  const temParcial = stats.some(s => s === "parcial");
+  const todosNA = stats.every(s => s === "n/a");
+
+  // Se todos N/A (doc/comercial), não precisa de solução técnica
+  if (todosNA) return null;
+
+  const nivelGap = temParcial ? "parcial" : "nao_atende";
+  const templateCat = SOLUCOES_POR_CATEGORIA[cat]?.[nivelGap] || SOLUCOES_POR_CATEGORIA.software[nivelGap];
+
+  // Verificar se há solução específica para capacidade parcial
+  let solucaoEspecifica = null;
+  if (matchInfo && matchInfo.nivel === "parcial") {
+    const lower = item.requisito?.toLowerCase() || "";
+    for (const [key, sol] of Object.entries(SOLUCOES_PARCIAIS_ESPECIFICAS)) {
+      if (lower.includes(key)) {
+        solucaoEspecifica = sol;
+        break;
+      }
+    }
+  }
+
+  return {
+    tipo: templateCat.tipo,
+    icon: templateCat.icon,
+    label: templateCat.label,
+    cor: templateCat.cor,
+    descricao: solucaoEspecifica?.descricao || templateCat.template(item.requisito),
+    acao: solucaoEspecifica?.acao || templateCat.acao,
+    prazo: solucaoEspecifica?.prazo || (nivelGap === "parcial" ? "1-2 semanas" : "2-6 semanas"),
+    responsavel: templateCat.responsavel,
+    complexidade: nivelGap === "parcial" ? "baixa" : (cat === "software" ? "alta" : "media"),
+  };
+}
+
 // ─── 2. DE-PARA (EDITAL vs PROJETOS) ───────────────────────────
 
 async function gerarDeParaProjetos(textoEdital, categorias, produtoAlvo = null) {
@@ -693,6 +828,16 @@ function gerarDeParaLocal(requisitos, produtoAlvo = null) {
     else if (todosNA) diagnostico[cat].naPuro++;
     else diagnostico[cat].naoAtende++;
 
+    // Gerar solução para itens que não atendem ou atendem parcialmente
+    const itemPreliminar = {
+      requisito: r.texto.slice(0, 250),
+      categoria: r.categoria,
+      statusAxHub, statusAxTon, statusAxCross,
+    };
+    const solucao = (!temAtende && !todosNA)
+      ? gerarSolucao(itemPreliminar, melhor?.match || null)
+      : null;
+
     return {
       requisito: r.texto.slice(0, 250),
       categoria: r.categoria,
@@ -704,6 +849,7 @@ function gerarDeParaLocal(requisitos, produtoAlvo = null) {
       esforco,
       prioridade,
       validacao,
+      solucao,
     };
   });
 
