@@ -526,12 +526,12 @@ export default function AnaliseEditalAvancada() {
           {/* Alertas de conflito */}
           {resultado.concorrentes.alertasConflito?.length > 0 && (
             <div style={{ background: "#7f1d1d15", border: "1px solid #ef444440", borderRadius: 12, padding: "1rem", marginBottom: "1.2rem" }}>
-              <h4 style={{ color: "#fca5a5", margin: "0 0 0.5rem", fontSize: "0.9rem" }}>⚠️ Alertas de Conflito de Interesse</h4>
+              <h4 style={{ color: "#fca5a5", margin: "0 0 0.5rem", fontSize: "0.9rem" }}>⚠️ Alertas de Conflito / Risco ({resultado.concorrentes.alertasConflito.length})</h4>
               {resultado.concorrentes.alertasConflito.map((a, i) => (
-                <div key={i} style={{ fontSize: "0.82rem", color: "#fca5a5", padding: "4px 0" }}>
-                  <strong>{a.empresa}</strong> — {a.tipo.replace(/_/g, " ")} — {a.descricao}
-                  <span style={{ marginLeft: 8, background: a.risco === "alto" ? "#ef444430" : "#f59e0b30", color: a.risco === "alto" ? "#ef4444" : "#f59e0b", padding: "1px 8px", borderRadius: 6, fontSize: "0.7rem" }}>
-                    Risco {a.risco}
+                <div key={i} style={{ fontSize: "0.82rem", color: "#fca5a5", padding: "4px 0", display: "flex", alignItems: "center", gap: 8 }}>
+                  <strong>{a.empresa}</strong> — {a.descricao}
+                  <span style={{ background: a.risco === "alto" ? "#ef444430" : "#f59e0b30", color: a.risco === "alto" ? "#ef4444" : "#f59e0b", padding: "1px 8px", borderRadius: 6, fontSize: "0.7rem", whiteSpace: "nowrap" }}>
+                    {a.risco === "alto" ? "🔴" : "🟡"} {a.risco}
                   </span>
                 </div>
               ))}
@@ -542,62 +542,92 @@ export default function AnaliseEditalAvancada() {
           {resultado.concorrentes.quemAtende100 && (
             <div style={{ background: resultado.concorrentes.quemAtende100.suspeitaDirecionamento ? "#7f1d1d15" : "#065f4615", border: `1px solid ${resultado.concorrentes.quemAtende100.suspeitaDirecionamento ? "#ef444440" : "#10b98140"}`, borderRadius: 12, padding: "1rem", marginBottom: "1.2rem" }}>
               <h4 style={{ color: resultado.concorrentes.quemAtende100.suspeitaDirecionamento ? "#fca5a5" : "#6ee7b7", margin: "0 0 0.3rem", fontSize: "0.9rem" }}>
-                {resultado.concorrentes.quemAtende100.suspeitaDirecionamento ? "🚨" : "🏅"} Quem atende 100%: {resultado.concorrentes.quemAtende100.empresa}
+                {resultado.concorrentes.quemAtende100.suspeitaDirecionamento ? "🚨" : "🏅"} {resultado.concorrentes.quemAtende100.empresa}
               </h4>
               <p style={{ color: "#94a3b8", fontSize: "0.82rem", margin: 0 }}>{resultado.concorrentes.quemAtende100.justificativa}</p>
               {resultado.concorrentes.quemAtende100.suspeitaDirecionamento && (
                 <div style={{ marginTop: "0.5rem", fontSize: "0.78rem", color: "#fca5a5" }}>
-                  <strong>⚠️ Suspeita de direcionamento:</strong>
+                  <strong>⚠️ Possível direcionamento:</strong>
                   <ul style={{ margin: "4px 0", paddingLeft: "1.2rem" }}>
-                    {(resultado.concorrentes.quemAtende100.evidencias || []).map((e, i) => <li key={i}>{e}</li>)}
+                    {(resultado.concorrentes.quemAtende100.evidencias || []).filter(Boolean).map((e, i) => <li key={i}>{e}</li>)}
                   </ul>
                 </div>
               )}
             </div>
           )}
 
-          {/* Ranking */}
-          <div style={{ display: "grid", gap: "0.8rem" }}>
-            {(resultado.concorrentes.ranking || []).map((emp, i) => (
-              <div key={i} style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.08)", borderRadius: 12, padding: "1rem" }}>
-                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-                  <span style={{ fontSize: "0.95rem", fontWeight: 700, color: "#e2e8f0" }}>#{i + 1} {emp.empresa}</span>
-                  <div style={{ display: "flex", gap: "0.5rem", alignItems: "center" }}>
-                    <span style={{ fontSize: "0.75rem", color: "#64748b" }}>{emp.distanciaRegional}</span>
-                    <span style={{
-                      background: emp.percentualAtendimento >= 80 ? "#065f4630" : emp.percentualAtendimento >= 50 ? "#92400e30" : "#7f1d1d30",
-                      color: emp.percentualAtendimento >= 80 ? "#10b981" : emp.percentualAtendimento >= 50 ? "#f59e0b" : "#ef4444",
-                      padding: "3px 12px", borderRadius: 8, fontSize: "0.82rem", fontWeight: 700,
-                    }}>
-                      {emp.percentualAtendimento}%
-                    </span>
-                    {emp.conflitoPotencial && <span style={{ background: "#ef444430", color: "#ef4444", padding: "2px 8px", borderRadius: 6, fontSize: "0.7rem" }}>⚠️ Conflito</span>}
+          {/* Ranking com barras */}
+          <div style={{ display: "grid", gap: "0.6rem" }}>
+            {(resultado.concorrentes.ranking || []).map((emp, i) => {
+              const pct = emp.percentualAtendimento || 0;
+              const corPct = pct >= 70 ? "#10b981" : pct >= 40 ? "#f59e0b" : "#ef4444";
+              const bgPct = pct >= 70 ? "#065f4630" : pct >= 40 ? "#92400e30" : "#7f1d1d30";
+              return (
+                <div key={i} style={{ background: "rgba(255,255,255,0.04)", border: `1px solid ${emp.conflitoPotencial ? "rgba(239,68,68,0.2)" : "rgba(255,255,255,0.08)"}`, borderRadius: 12, padding: "0.8rem 1rem" }}>
+                  <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "0.4rem" }}>
+                    <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+                      <span style={{ fontSize: "1.1rem", fontWeight: 800, color: i === 0 ? "#fbbf24" : i < 3 ? "#e2e8f0" : "#94a3b8", minWidth: 28 }}>#{i + 1}</span>
+                      <span style={{ fontSize: "0.9rem", fontWeight: 700, color: "#e2e8f0" }}>{emp.empresa}</span>
+                      {emp.conflitoPotencial && <span style={{ background: "#ef444425", color: "#ef4444", padding: "1px 6px", borderRadius: 4, fontSize: "0.62rem", fontWeight: 600 }}>⚠️ RISCO</span>}
+                    </div>
+                    <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+                      <span style={{ fontSize: "0.68rem", color: "#64748b", background: "rgba(255,255,255,0.05)", padding: "2px 8px", borderRadius: 4 }}>
+                        {emp.distanciaRegional === "local" ? "📍 Local" : emp.distanciaRegional === "estadual" ? "🗺️ Estadual" : emp.distanciaRegional === "internacional" ? "🌍 Internacional" : "🇧🇷 Nacional"}
+                      </span>
+                      <span style={{ background: bgPct, color: corPct, padding: "3px 12px", borderRadius: 8, fontSize: "0.9rem", fontWeight: 800, minWidth: 48, textAlign: "center" }}>{pct}%</span>
+                    </div>
+                  </div>
+                  {/* Barra de progresso */}
+                  <div style={{ height: 6, background: "rgba(255,255,255,0.06)", borderRadius: 3, overflow: "hidden", marginBottom: "0.5rem" }}>
+                    <div style={{ width: `${pct}%`, height: "100%", background: corPct, borderRadius: 3, transition: "width 0.5s" }} />
+                  </div>
+                  <div style={{ fontSize: "0.75rem", color: "#64748b", marginBottom: "0.4rem" }}>{emp.segmento}</div>
+                  <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "0.4rem", fontSize: "0.76rem" }}>
+                    <div>
+                      <span style={{ color: "#10b981", fontWeight: 600 }}>✅ </span>
+                      <span style={{ color: "#94a3b8" }}>{(emp.pontosFortes || []).slice(0, 2).join(" · ")}</span>
+                    </div>
+                    <div>
+                      <span style={{ color: "#ef4444", fontWeight: 600 }}>❌ </span>
+                      <span style={{ color: "#94a3b8" }}>{(emp.pontosFracos || []).slice(0, 2).join(" · ")}</span>
+                    </div>
                   </div>
                 </div>
-                <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "0.5rem", marginTop: "0.6rem", fontSize: "0.78rem" }}>
-                  <div><span style={{ color: "#10b981" }}>✅ Fortes:</span> <span style={{ color: "#94a3b8" }}>{(emp.pontosFortes || []).join(", ")}</span></div>
-                  <div><span style={{ color: "#ef4444" }}>❌ Fracos:</span> <span style={{ color: "#94a3b8" }}>{(emp.pontosFracos || []).join(", ")}</span></div>
-                </div>
-                {emp.motivoConflito && <div style={{ marginTop: "0.4rem", fontSize: "0.75rem", color: "#fca5a5" }}>Conflito: {emp.motivoConflito}</div>}
-              </div>
-            ))}
+              );
+            })}
           </div>
 
-          {/* Posição Axion */}
+          {/* Posição Axion — destaque */}
           {resultado.concorrentes.posicaoAxion && (
-            <div style={{ marginTop: "1.2rem", background: "rgba(99,102,241,0.08)", border: "1px solid rgba(99,102,241,0.3)", borderRadius: 12, padding: "1rem" }}>
-              <h4 style={{ color: "#a5b4fc", margin: "0 0 0.5rem" }}>🎯 Posição Axion Tecnologia</h4>
-              <div style={{ fontSize: "1.5rem", fontWeight: 800, color: "#a5b4fc" }}>{resultado.concorrentes.posicaoAxion.percentualAtendimento}% de atendimento</div>
-              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "0.8rem", marginTop: "0.6rem", fontSize: "0.82rem" }}>
+            <div style={{ marginTop: "1.2rem", background: "linear-gradient(135deg, rgba(99,102,241,0.1) 0%, rgba(139,92,246,0.08) 100%)", border: "2px solid rgba(99,102,241,0.3)", borderRadius: 14, padding: "1.2rem" }}>
+              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "0.8rem" }}>
+                <h4 style={{ color: "#a5b4fc", margin: 0, fontSize: "1rem" }}>🎯 Posição Axion Tecnologia</h4>
+                {resultado.concorrentes.posicaoAxion.percentualAtendimento != null && (
+                  <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+                    <div style={{ width: 120, height: 8, background: "rgba(255,255,255,0.1)", borderRadius: 4, overflow: "hidden" }}>
+                      <div style={{ width: `${resultado.concorrentes.posicaoAxion.percentualAtendimento}%`, height: "100%", background: "linear-gradient(90deg, #6366f1, #a78bfa)", borderRadius: 4 }} />
+                    </div>
+                    <span style={{ fontSize: "1.4rem", fontWeight: 900, color: "#a5b4fc" }}>{resultado.concorrentes.posicaoAxion.percentualAtendimento}%</span>
+                  </div>
+                )}
+              </div>
+              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1rem", fontSize: "0.82rem" }}>
                 <div>
-                  <div style={{ color: "#10b981", fontWeight: 600, marginBottom: 4 }}>Vantagens Competitivas:</div>
-                  {(resultado.concorrentes.posicaoAxion.vantagensCompetitivas || []).map((v, i) => <div key={i} style={{ color: "#94a3b8", padding: "2px 0" }}>• {v}</div>)}
+                  <div style={{ color: "#10b981", fontWeight: 700, marginBottom: 6, fontSize: "0.85rem" }}>✅ Vantagens Competitivas</div>
+                  {(resultado.concorrentes.posicaoAxion.vantagensCompetitivas || []).map((v, i) => <div key={i} style={{ color: "#cbd5e1", padding: "3px 0", borderBottom: "1px solid rgba(255,255,255,0.03)" }}>• {v}</div>)}
                 </div>
                 <div>
-                  <div style={{ color: "#f59e0b", fontWeight: 600, marginBottom: 4 }}>Gaps vs Concorrentes:</div>
-                  {(resultado.concorrentes.posicaoAxion.gapsVsConcorrentes || []).map((g, i) => <div key={i} style={{ color: "#94a3b8", padding: "2px 0" }}>• {g}</div>)}
+                  <div style={{ color: "#f59e0b", fontWeight: 700, marginBottom: 6, fontSize: "0.85rem" }}>⚠️ Pontos de Atenção</div>
+                  {(resultado.concorrentes.posicaoAxion.gapsVsConcorrentes || []).map((g, i) => <div key={i} style={{ color: "#cbd5e1", padding: "3px 0", borderBottom: "1px solid rgba(255,255,255,0.03)" }}>• {g}</div>)}
                 </div>
               </div>
+            </div>
+          )}
+
+          {/* Nota da análise */}
+          {resultado.concorrentes._nota && (
+            <div style={{ marginTop: "0.8rem", fontSize: "0.73rem", color: "#475569", fontStyle: "italic" }}>
+              ℹ️ {resultado.concorrentes._nota}
             </div>
           )}
         </div>
