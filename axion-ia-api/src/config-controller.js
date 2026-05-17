@@ -19,7 +19,7 @@ const CHAVES_PERMITIDAS = [
 ];
 
 // Chaves cujo valor é mascarado no GET
-const CHAVES_SENSIVEIS = ["API_TOKEN", "OPENAI_API_KEY", "JITBIT_PASS", "AXHUB_DB_PASS", "AXTON_DB_PASS", "AXCROSS_DB_PASS", "TELEGRAM_TOKEN"];
+const CHAVES_SENSIVEIS = ["API_TOKEN", "OPENAI_API_KEY", "JITBIT_PASS", "AXHUB_DB_PASS", "AXTON_DB_PASS", "AXCROSS_DB_PASS", "TELEGRAM_TOKEN", "MONGO_URI"];
 
 function lerEnv() {
   if (!fs.existsSync(ENV_PATH)) return {};
@@ -98,7 +98,7 @@ export function obterConfig(req, res) {
   res.json({
     config,
     conexoes: {
-      mongodb: { conectado: mongoConectado, uri: env.MONGO_URI || "" },
+      mongodb: { conectado: mongoConectado, uri: (env.MONGO_URI || "").replace(/\/\/[^@]+@/, "//***:***@") },
       axhub_sql: { configurado: !!(env.AXHUB_DB_USER && env.AXHUB_DB_HOST) },
       axton_sql: { configurado: !!(env.AXTON_DB_USER && env.AXTON_DB_HOST) },
       axcross_sql: { configurado: !!(env.AXCROSS_DB_USER && env.AXCROSS_DB_HOST) }

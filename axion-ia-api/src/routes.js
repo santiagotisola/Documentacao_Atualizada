@@ -231,6 +231,7 @@ router.post("/leitura/upload",            uploadLeituraMiddleware, analisarArqui
 
 // ─── SLA Compliance — Relatório Jitbit ───────────────────────────────────
 router.get("/helpdesk/sla-compliance", relatarSlaCompliance);
+router.get("/helpdesk/relatorio-sla", relatarSlaCompliance);
 
 // ─── Health Check — monitoramento externo ────────────────────────────────────
 router.get("/health", healthCheck);
@@ -251,6 +252,8 @@ router.post("/edital/analisar-rapido",              analisarEditalRapidoHandler)
 router.post("/edital/analise-avancada",             analiseAvancadaHandler);
 router.post("/edital/upload",                       uploadEditalMiddleware, uploadEditalHandler);
 router.get("/sites",                                listarSitesHandler);
+router.get("/edital-avancado/sites",                listarSitesHandler);
+router.get("/edital",                               listarEditaisImportadosHandler);
 router.get("/edital/historico",                     listarEditaisImportadosHandler);
 router.post("/edital/auto-analisar-todos",          autoAnalisarTodosHandler);
 
