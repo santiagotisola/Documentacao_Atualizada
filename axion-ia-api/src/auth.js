@@ -27,12 +27,13 @@ if (!TOKEN) {
 }
 
 // Rotas que NÃO requerem token mesmo com API_TOKEN configurado
+// NOTA: paths sem prefixo /api porque o middleware é montado em app.use("/api", authMiddleware)
 const ROTAS_PUBLICAS = [
-  { method: "POST", path: "/api/chat" },
-  { method: "GET",  path: "/api/axhub/status" },
-  { method: "GET",  path: "/api/axton/status" },
-  { method: "GET",  path: "/api/axcross/status" },
-  { method: "GET",  path: "/api/health" },   // monitoramento externo
+  { method: "POST", path: "/chat" },
+  { method: "GET",  path: "/axhub/status" },
+  { method: "GET",  path: "/axton/status" },
+  { method: "GET",  path: "/axcross/status" },
+  { method: "GET",  path: "/health" },
 ];
 
 function rotaPublica(req) {

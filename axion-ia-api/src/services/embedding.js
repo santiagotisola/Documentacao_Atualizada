@@ -15,7 +15,24 @@ async function aguardar(ms) {
 const MAX_TENTATIVAS = 3;
 const DELAY_BASE_MS  = 500;
 
+// ─── Circuit breaker para quota 429 ──────────────────────────────────────────
+// Quando a quota está esgotada, não adianta fazer 3 retries a cada request.
+// O breaker desliga as tentativas por COOLDOWN_MS e emite apenas 1 log.
+let quotaExhausted = false;
+let quotaCooldownUntil = 0;
+const COOLDOWN_MS = 5 * 60 * 1000; // 5 min
+let quotaLogEmitted = false;
+
 export async function gerarEmbedding(texto) {
+  // Circuit breaker: se quota esgotada, falha rápido sem retry
+  if (quotaExhausted && Date.now() < quotaCooldownUntil) {
+    throw new Error("OpenAI quota esgotada (circuit breaker ativo)");
+  }
+  if (quotaExhausted && Date.now() >= quotaCooldownUntil) {
+    quotaExhausted = false;
+    quotaLogEmitted = false;
+  }
+
   let ultimoErro;
 
   for (let tentativa = 1; tentativa <= MAX_TENTATIVAS; tentativa++) {
@@ -28,9 +45,21 @@ export async function gerarEmbedding(texto) {
     } catch (err) {
       ultimoErro = err;
 
-      // Não retry em erros de autenticação ou input inválido
       const status = err?.status || err?.response?.status;
+
+      // Não retry em erros de autenticação ou input inválido
       if (status === 401 || status === 400) throw err;
+
+      // Quota esgotada: ativar circuit breaker
+      if (status === 429) {
+        quotaExhausted = true;
+        quotaCooldownUntil = Date.now() + COOLDOWN_MS;
+        if (!quotaLogEmitted) {
+          console.warn(`⚠️  [embedding] Quota OpenAI esgotada (429). Circuit breaker ativo por ${COOLDOWN_MS / 60000}min. Próximos requests falharão rápido.`);
+          quotaLogEmitted = true;
+        }
+        throw new Error(`Quota OpenAI esgotada (429): ${err.message}`);
+      }
 
       if (tentativa < MAX_TENTATIVAS) {
         const delay = DELAY_BASE_MS * Math.pow(2, tentativa - 1); // 500, 1000, 2000

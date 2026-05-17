@@ -352,14 +352,27 @@ async function executarColetaPNCP() {
       }
     } catch (err) {
       estadoColeta.erros.push({ ts: new Date().toISOString(), produto, erro: err.message });
-      console.warn(`[PNCP][${produto}] Erro na coleta: ${err.message}`);
+      console.error(`❌ [PNCP][${produto}] Falha na coleta: ${err.message}`);
     }
   }
 
   estadoColeta.ativa = false;
   estadoColeta.ultimaColeta = new Date().toISOString();
   estadoColeta.totalNovos += totalNovos;
-  console.log(`✅ [PNCP] Coleta finalizada — ${totalNovos} novas fontes`);
+
+  const errosRecentes = estadoColeta.erros.filter(e =>
+    new Date(e.ts) > new Date(Date.now() - 24 * 60 * 60 * 1000)
+  );
+
+  if (errosRecentes.length >= 3) {
+    console.error(`🚨 [PNCP] ALERTA: ${errosRecentes.length} falhas de coleta nas últimas 24h. Verifique a conectividade.`);
+  }
+
+  if (totalNovos > 0) {
+    console.log(`✅ [PNCP] Coleta finalizada — ${totalNovos} novas fontes`);
+  } else {
+    console.log(`ℹ️  [PNCP] Coleta finalizada — nenhuma fonte nova`);
+  }
 }
 
 export function iniciarColetaPNCP() {

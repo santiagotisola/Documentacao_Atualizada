@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { api, getConfiguredUrl, setApiUrl } from "../services/api";
+import { api, getConfiguredUrl, setApiUrl, getApiToken, setApiToken } from "../services/api";
 
 const GRUPOS = [
   {
@@ -68,6 +68,7 @@ export default function Configuracoes() {
   const [config, setConfig] = useState({});
   const [conexoes, setConexoes] = useState({});
   const [apiUrl, setApiUrlLocal] = useState(getConfiguredUrl());
+  const [apiToken, setApiTokenLocal] = useState(getApiToken());
   const [loading, setLoading] = useState(true);
   const [salvando, setSalvando] = useState(false);
   const [feedback, setFeedback] = useState(null);
@@ -114,6 +115,12 @@ export default function Configuracoes() {
     setTimeout(() => { carregar(); setFeedback(null); }, 800);
   }
 
+  function salvarToken() {
+    setApiToken(apiToken.trim());
+    setFeedback({ tipo: "success", msg: "Token atualizado. Recarregando configuração..." });
+    setTimeout(() => { carregar(); setFeedback(null); }, 800);
+  }
+
   async function testarConexaoMongo() {
     setTesteMongo({ status: "testando" });
     try {
@@ -137,7 +144,7 @@ export default function Configuracoes() {
       {/* URL do Painel → API */}
       <div className="card config-section">
         <h3 className="config-section-title">Conexão do Painel</h3>
-        <p className="config-hint">URL base da AxionIA API (salva no navegador)</p>
+        <p className="config-hint">URL base e token de autenticação da AxionIA API (salvos no navegador)</p>
         <div style={{ display: "flex", gap: "0.5rem", alignItems: "flex-end" }}>
           <div className="form-group" style={{ flex: 1, marginBottom: 0 }}>
             <label>API URL</label>
@@ -148,6 +155,21 @@ export default function Configuracoes() {
             />
           </div>
           <button type="button" className="btn btn-primary" onClick={salvarApiUrl} style={{ height: 38 }}>
+            Aplicar
+          </button>
+        </div>
+        <div style={{ display: "flex", gap: "0.5rem", alignItems: "flex-end", marginTop: "0.75rem" }}>
+          <div className="form-group" style={{ flex: 1, marginBottom: 0 }}>
+            <label>API Token <code style={{ color: "var(--text-muted)", fontSize: "0.7rem" }}>API_TOKEN</code></label>
+            <input
+              type="password"
+              value={apiToken}
+              onChange={e => setApiTokenLocal(e.target.value)}
+              placeholder="Cole o token definido no .env da API"
+              autoComplete="off"
+            />
+          </div>
+          <button type="button" className="btn btn-primary" onClick={salvarToken} style={{ height: 38 }}>
             Aplicar
           </button>
         </div>

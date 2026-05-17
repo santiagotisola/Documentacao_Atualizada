@@ -72,12 +72,23 @@ export async function healthCheck(req, res) {
     openai:   openaiStatus.value|| { ok: false, erro: openaiStatus.reason?.message },
   };
 
+  // Distinguir serviços obrigatórios de opcionais para cálculo de status
+  const obrigatorios = { mongodb: servicos.mongodb };
+  const opcionais    = { axhub: servicos.axhub, axton: servicos.axton, axcross: servicos.axcross, openai: servicos.openai };
+
+  // Adicionar dicas de configuração
+  if (!servicos.axhub.ok && !process.env.AXHUB_DB_USER)   servicos.axhub.dica   = "Defina AXHUB_DB_USER e AXHUB_DB_HOST no .env";
+  if (!servicos.axton.ok && !process.env.AXTON_DB_USER)    servicos.axton.dica   = "Defina AXTON_DB_USER e AXTON_DB_HOST no .env";
+  if (!servicos.axcross.ok && !process.env.AXCROSS_DB_USER) servicos.axcross.dica = "Defina AXCROSS_DB_USER e AXCROSS_DB_HOST no .env";
+  if (!servicos.openai.ok && !process.env.OPENAI_API_KEY)  servicos.openai.dica  = "Defina OPENAI_API_KEY no .env";
+
+  const obrigOk    = Object.values(obrigatorios).every(s => s.ok);
+  const opcionalOk = Object.values(opcionais).some(s => s.ok);
   const todosOk    = Object.values(servicos).every(s => s.ok);
-  const algumOk    = Object.values(servicos).some(s => s.ok);
-  const statusHttp = todosOk ? 200 : algumOk ? 207 : 503;
+  const statusHttp = todosOk ? 200 : obrigOk ? 207 : 503;
 
   return res.status(statusHttp).json({
-    status:    todosOk ? "healthy" : algumOk ? "degraded" : "unhealthy",
+    status:    todosOk ? "healthy" : obrigOk ? "degraded" : "unhealthy",
     timestamp: new Date().toISOString(),
     requestId: req.requestId || null,
     versao:    "3.0.0",

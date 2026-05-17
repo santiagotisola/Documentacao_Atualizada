@@ -80,7 +80,7 @@ foreach ($item in $urls) {
 
 Write-Host "Abrindo no navegador..." -ForegroundColor Cyan
 Start-Sleep -Seconds 2
-Start-Process "http://localhost:3001/helpdesk"
+Start-Process "http://localhost:3017/helpdesk"
 Start-Sleep -Seconds 1
 Start-Process "http://localhost:3010/AxHub.Docs/"
 Start-Sleep -Seconds 1
