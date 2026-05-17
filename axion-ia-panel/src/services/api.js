@@ -1,6 +1,7 @@
 import axios from "axios";
 
 const DEFAULT_API_URL = "http://localhost:3100/api";
+const DEFAULT_API_TOKEN = "4ca85296b69704ff408e570501c2480af8457da858defbced704ba4ad20d8bf3";
 
 function getApiUrl() {
   return localStorage.getItem("axionia_api_url") || DEFAULT_API_URL;
@@ -16,7 +17,7 @@ export function getConfiguredUrl() {
 }
 
 export function getApiToken() {
-  return localStorage.getItem("axionia_api_token") || "";
+  return localStorage.getItem("axionia_api_token") || DEFAULT_API_TOKEN;
 }
 
 export function setApiToken(token) {
