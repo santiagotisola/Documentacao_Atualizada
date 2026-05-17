@@ -561,7 +561,7 @@ export default function AnaliseImagens() {
       </p>
 
       {/* Abas */}
-      <div style={{ display: "flex", gap: "8px", marginBottom: "24px", borderBottom: "2px solid #eee" }}>
+      <div style={{ display: "flex", gap: "8px", marginBottom: "24px", borderBottom: "2px solid rgba(255,255,255,0.15)" }}>
         {["analisar", "comparar", "lote", "galeria"].map((aba) => (
           <button
             key={aba}
@@ -573,7 +573,7 @@ export default function AnaliseImagens() {
               background: "none",
               cursor: "pointer",
               fontWeight: abaAtiva === aba ? "700" : "400",
-              color: abaAtiva === aba ? "#2563eb" : "#555",
+              color: abaAtiva === aba ? "#60a5fa" : "#94a3b8",
               fontSize: "14px",
               textTransform: "capitalize",
             }}
@@ -928,8 +928,8 @@ export default function AnaliseImagens() {
                 )}
 
                 {/* Contadores */}
-                <div style={{ fontSize: "12px", color: "#555", flexGrow: 1 }}>
-                  <strong style={{ color: "#1e293b" }}>{cmpResultados.filter(r => r.similaridade >= cmpThreshold).length}</strong> exibidas
+                <div style={{ fontSize: "12px", color: "#94a3b8", flexGrow: 1 }}>
+                  <strong style={{ color: "#e2e8f0" }}>{cmpResultados.filter(r => r.similaridade >= cmpThreshold).length}</strong> exibidas
                   {cmpThreshold > 0 && <span style={{ color: "#6366f1" }}> (filtro ≥ {cmpThreshold})</span>}
                   <span style={{ color: "#94a3b8" }}> · </span>
                   <span>{cmpMeta.processadas}/{cmpMeta.totalEncontradas} processadas</span>
@@ -1936,26 +1936,28 @@ const labelStyle = {
   fontSize: "13px",
   fontWeight: "600",
   marginBottom: "4px",
-  color: "#374151",
+  color: "#cbd5e1",
 };
 
 const inputStyle = {
   width: "100%",
   padding: "8px 10px",
-  border: "1px solid #d1d5db",
+  border: "1px solid rgba(255,255,255,0.2)",
   borderRadius: "6px",
   fontSize: "13px",
   boxSizing: "border-box",
+  background: "rgba(255,255,255,0.1)",
+  color: "#e2e8f0",
 };
 
 const btnSecStyle = {
   padding: "5px 12px",
-  background: "#f1f5f9",
-  border: "1px solid #cbd5e1",
+  background: "rgba(255,255,255,0.1)",
+  border: "1px solid rgba(255,255,255,0.2)",
   borderRadius: "5px",
   cursor: "pointer",
   fontSize: "12px",
-  color: "#374151",
+  color: "#cbd5e1",
 };
 
 const btnDangerStyle = {

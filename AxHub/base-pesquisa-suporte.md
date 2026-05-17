@@ -1,6 +1,13 @@
 # BASE DE PESQUISA — SUPORTE AXHUB
 > Consolidação de toda a documentação do sistema AxHub para atendimento de chamados de help desk.
-> Atualizado em: 2026-03-27
+> Atualizado em: 2026-05-16
+
+- **URL Produção:** https://economia.axhub.axion.ws
+- **Stack:** ASP.NET (.NET 9), Razor MVC, jQuery/DataTables, SignalR, Google Maps
+- **Autenticação:** OIDC/OAuth2+PKCE via economia.axion.ws
+- **Versão:** AxHub v.1.1.1
+- **Total de telas:** 70
+- **Módulos:** 11 (Dashboard, Infrações, Cronotacógrafo, Balança, Operações, Veículos, Equipamentos, Medição, Relatórios, Controle de Acesso, Configurações)
 
 ---
 

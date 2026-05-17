@@ -148,7 +148,7 @@ export default function PlanilhaHoras() {
           ].map(({ label, val }) => (
             <div key={label} style={{ background: "#1e293b", border: "1px solid #334155", borderRadius: 8, padding: "8px 16px", textAlign: "center", minWidth: 120 }}>
               <div style={{ fontSize: 18, fontWeight: 700, color: "#60a5fa" }}>{val}</div>
-              <div style={{ fontSize: 11, color: "#64748b" }}>{label}</div>
+              <div style={{ fontSize: 11, color: "#94a3b8" }}>{label}</div>
             </div>
           ))}
         </div>
@@ -178,7 +178,7 @@ export default function PlanilhaHoras() {
                         verticalAlign: "top", background: "#0f172a",
                       }}>
                         {dia}
-                        <div style={{ fontSize: 10, color: "#475569", marginTop: 2 }}>
+                        <div style={{ fontSize: 10, color: "#94a3b8", marginTop: 2 }}>
                           {itens.length} chamado{itens.length > 1 ? "s" : ""}
                         </div>
                       </td>
@@ -216,14 +216,14 @@ export default function PlanilhaHoras() {
       )}
 
       {dados && dados.total === 0 && (
-        <div style={{ textAlign: "center", padding: 60, color: "#64748b" }}>
+        <div style={{ textAlign: "center", padding: 60, color: "#94a3b8" }}>
           <p style={{ fontSize: 36 }}>🗂️</p>
           <p>Nenhuma atividade encontrada para o período e técnico selecionados.</p>
         </div>
       )}
 
       {!dados && !carregando && (
-        <div style={{ textAlign: "center", padding: 60, color: "#64748b" }}>
+        <div style={{ textAlign: "center", padding: 60, color: "#94a3b8" }}>
           <p style={{ fontSize: 36 }}>⏱️</p>
           <p>Selecione o técnico e o período, depois clique em <strong>Consultar</strong>.</p>
           <p style={{ fontSize: 12, marginTop: 8 }}>

@@ -1,11 +1,15 @@
 /**
  * extrator.js
  * Extrai texto de arquivos PDF, DOCX, XLSX, TXT e IMAGENS (via OCR com OpenAI Vision).
+ * Integrado com ocr-processor para PDFs escaneados e table-extractor para tabelas estruturadas.
  */
 
 import { createRequire } from "module";
 import OpenAI from "openai";
 import dotenv from "dotenv";
+import { processarPdfInteligente } from "./ocr-processor.js";
+import { extrairEFormatarTabelas } from "./table-extractor.js";
+
 dotenv.config();
 
 const require = createRequire(import.meta.url);
@@ -25,9 +29,9 @@ export async function extrairTexto(buffer, mimetype, originalname) {
 
   // ─── PDF ─────────────────────────────────────────────────────
   if (mimetype === "application/pdf" || ext === "pdf") {
-    const pdfParse = require("pdf-parse");
-    const data = await pdfParse(buffer);
-    return limpar(data.text);
+    // Usar OCR inteligente com fallback automático para PDFs escaneados
+    const resultado = await processarPdfInteligente(buffer, originalname);
+    return resultado.texto;
   }
 
   // ─── DOCX / DOC ──────────────────────────────────────────────

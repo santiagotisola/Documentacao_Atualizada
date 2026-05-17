@@ -1,30 +1,87 @@
 ---
 sidebar_position: 2
 title: Classificação de Veículos
-description: Cadastro e gestão das classificações de veículos
+description: Cadastro e gestão das classificações de veículos no AxTon com PBT e eixos
 ---
 
 # Classificação de Veículos
 
-O módulo de classificação de veículos define as categorias de veículos reconhecidas pelo sistema AxTon. Cada classificação determina os parâmetros aplicados nas operações de pesagem e fiscalização.
+![Tela de Classificações](../img/axton-classificacoes.png)
+
+O módulo de classificação de veículos define as categorias reconhecidas pelo sistema AxTon. Cada classificação determina o **PBT Regulamentado** (Peso Bruto Total máximo permitido em toneladas) e o número de eixos aplicados nas operações de pesagem.
 
 ## Como acessar
 
-**Menu lateral** → Cadastros → **Classificações**
+**Menu lateral** → **Classificações**
 
 ## Listagem
-
-![Tela de Classificação de Veículos — Lista](../img/classificacao-veiculos.png)
 
 ### Colunas
 
 | Coluna | Descrição |
 |--------|-----------|
-| **Código** | Código de identificação da classificação |
-| **Descrição** | Nome da categoria de veículo |
-| **Número de Eixos** | Quantidade de eixos do veículo na classificação |
-| **Peso Máximo (t)** | Peso bruto total máximo permitido, em toneladas |
-| **Ativo** | Indica se a classificação está habilitada para uso |
+| **Código** | Código numérico da classificação |
+| **Classe** | Sigla da classe (ex: 2C, 3S3, 3T6) |
+| **Denominação** | Nome completo da categoria do veículo |
+| **Eixos** | Quantidade de eixos (dianteiros/traseiros) |
+| **Dimensões** | Comprimento máximo em metros |
+| **PBT Regulamentado** | Peso Bruto Total máximo em toneladas |
+| **Ações** | Editar e Excluir |
+
+### Classificações cadastradas no sistema
+
+| Código | Classe | Denominação | Eixos | PBT (t) |
+|--------|--------|-------------|-------|---------|
+| 65 | **2C** | Caminhão | 2/2 | 16 |
+| 120 | **2CC** | Caminhão | 2/2 | 12 |
+| 67 | **3C** | Caminhão Trucado | 2/3 | 23 |
+| 103 | **3CD** | Caminhão Trucado c/ Eixo Traseiro Misto | 2/3 | 19,5 |
+| 69 | **4C** | Caminhão Simples | 2/4 | 31,5 |
+| 70 | **4CD** | Caminhão Duplo Direcional Trucado | 2/4 | 29 |
+| 68 | **2S1** | Caminhão Trator + Semi Reboque | 3/3 | 26 |
+| 71 | **2S2** | Caminhão Trator + Semi Reboque | 3/4 | 33 |
+| 74 | **2S3** | Caminhão Trator + Semi Reboque | 3/5 | 41,5 |
+| 80 | **2I2** | Caminhão Trator + Semi Reboque | 4/4 | 36 |
+| 82 | **2I3** | Caminhão Trator + Semi Reboque | 5/5 | 45/46 |
+| 84 | **2I1** | Caminhão Trator + Semi Reboque | 4/5 | 43 |
+
+:::info PBT Regulamentado
+O **Peso Bruto Total (PBT)** é o limite legal de peso do veículo conforme a classificação. Pesagens acima desse valor (considerando a tolerância configurada) geram infração automática.
+:::
+
+## Cadastro
+
+### Campos
+
+| Campo | Obrigatório | Descrição |
+|-------|:-----------:|-----------|
+| **Código** | Sim | Código numérico único da classificação |
+| **Classe** | Sim | Sigla (ex: 3S3, 2S2, 3T6) |
+| **Denominação** | Sim | Nome completo da categoria do veículo |
+| **Eixos** | Sim | No formato `dianteiros/traseiros` (ex: 2/3) |
+| **Dimensões** | Não | Comprimento máximo em metros |
+| **PBT Regulamentado** | Sim | Peso máximo em toneladas |
+
+### Passo a passo — Cadastrar classificação
+
+1. Na listagem, clique em **+ Novo**
+2. Informe o **Código** e a **Classe** (sigla)
+3. Preencha a **Denominação** completa
+4. Informe a configuração de **Eixos**
+5. Informe o **PBT Regulamentado** em toneladas
+6. Clique em **Salvar**
+
+:::warning Atenção
+A alteração do PBT de uma classificação impacta diretamente o cálculo de infrações. Consulte a legislação vigente antes de modificar.
+:::
+
+## Veja também
+
+| Funcionalidade | Descrição |
+|---|---|
+| [**Iniciar Pesagem**](../pesagem/ticket-aberto) | Como a classificação é usada na pesagem |
+| [**Reclassificação**](../pesagem/reclassificar) | Corrigir classificação durante pesagem |
+| [**Configurações**](../sistema/configuracoes) | Tolerâncias de PBT e eixo |
 
 ### Ações disponíveis na listagem
 

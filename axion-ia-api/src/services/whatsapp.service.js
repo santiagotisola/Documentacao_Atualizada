@@ -9,6 +9,7 @@ import { makeWASocket, useMultiFileAuthState, DisconnectReason, fetchLatestBaile
 import qrcode from "qrcode-terminal";
 import QRCode from "qrcode";
 import path from "path";
+import fs from "fs/promises";
 import { fileURLToPath } from "url";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -33,8 +34,30 @@ const estado = {
 export async function iniciarWhatsApp(callbackMensagem) {
   onMensagem = callbackMensagem;
 
+  // Garantir que a pasta de auth existe
+  await fs.mkdir(AUTH_PATH, { recursive: true });
+
   const { state, saveCreds } = await useMultiFileAuthState(AUTH_PATH);
   const { version } = await fetchLatestBaileysVersion();
+
+  // Wrapper com retry para evitar crash por lock de arquivo no Windows
+  let salvando = false;
+  const saveCredsSafe = async () => {
+    if (salvando) return; // evitar escritas simultâneas
+    salvando = true;
+    for (let i = 0; i < 3; i++) {
+      try {
+        await saveCreds();
+        salvando = false;
+        return;
+      } catch (err) {
+        console.warn(`⚠️  [WhatsApp] Erro ao salvar creds (tentativa ${i + 1}/3):`, err.message);
+        await new Promise(r => setTimeout(r, 500 * (i + 1)));
+      }
+    }
+    salvando = false;
+    console.error("❌ [WhatsApp] Falha ao salvar credenciais após 3 tentativas");
+  };
 
   estado.status = "conectando";
 
@@ -47,8 +70,8 @@ export async function iniciarWhatsApp(callbackMensagem) {
     defaultQueryTimeoutMs: 30000,
   });
 
-  // Salvar credenciais sempre que atualizar
-  sock.ev.on("creds.update", saveCreds);
+  // Salvar credenciais sempre que atualizar (com proteção contra lock)
+  sock.ev.on("creds.update", saveCredsSafe);
 
   // Eventos de conexão
   sock.ev.on("connection.update", ({ connection, lastDisconnect, qr }) => {
@@ -177,4 +200,25 @@ export function obterEstado() {
  */
 export function obterQR() {
   return qrAtual;
+}
+
+/**
+ * Desconecta o WhatsApp (logout). Será necessário escanear QR novamente.
+ */
+export async function desconectarWhatsApp() {
+  if (sock) {
+    try {
+      await sock.logout();
+    } catch (_) {
+      sock.end(new Error("Desconexão manual"));
+    }
+    sock = null;
+    conectado = false;
+    qrAtual = null;
+    estado.status = "desconectado";
+    estado.qr = null;
+    estado.qr_base64 = undefined;
+    estado.numero = null;
+    console.log("🔌 [WhatsApp] Desconectado manualmente");
+  }
 }

@@ -31,7 +31,7 @@ function cor(prioridade) {
 // ── Gráfico de rosca simples (SVG, sem dependência) ──────────────────────────
 function DonutChart({ met, breached, naoAvaliados, label }) {
   const total     = met + breached + naoAvaliados;
-  if (total === 0) return <div style={{ color: "#475569", fontSize: 12 }}>Sem dados</div>;
+  if (total === 0) return <div style={{ color: "#94a3b8", fontSize: 12 }}>Sem dados</div>;
 
   const R = 44, cx = 60, cy = 60, stroke = 18;
   const circ = 2 * Math.PI * R;
@@ -101,7 +101,7 @@ function KpiCard({ titulo, valor, sub, destaque }) {
       minWidth: 160,
       flex: "1 1 160px",
     }}>
-      <div style={{ fontSize: 11, color: "#64748b", textTransform: "uppercase", letterSpacing: 1, marginBottom: 4 }}>
+      <div style={{ fontSize: 11, color: "#94a3b8", textTransform: "uppercase", letterSpacing: 1, marginBottom: 4 }}>
         {titulo}
       </div>
       <div style={{ fontSize: 28, fontWeight: 800, color: destaque ? "#60a5fa" : "#f1f5f9" }}>
@@ -325,10 +325,10 @@ export default function SlaCompliance() {
 
       {/* ── Loading ───────────────────────────────────────────────────────────── */}
       {carregando && (
-        <div style={{ textAlign: "center", padding: 48, color: "#64748b" }}>
+        <div style={{ textAlign: "center", padding: 48, color: "#94a3b8" }}>
           <div style={{ fontSize: 32 }}>⏳</div>
           <div style={{ marginTop: 8 }}>Buscando tickets e calculando SLA...</div>
-          <div style={{ fontSize: 12, marginTop: 4, color: "#475569" }}>
+          <div style={{ fontSize: 12, marginTop: 4, color: "#94a3b8" }}>
             Pode demorar alguns segundos dependendo do volume de chamados.
           </div>
         </div>
@@ -366,7 +366,7 @@ export default function SlaCompliance() {
           {/* Gráficos */}
           <div style={{ display: "flex", gap: 24, marginBottom: 24, flexWrap: "wrap" }}>
             <div style={{ background: "#1e293b", border: "1px solid #334155", borderRadius: 10, padding: "16px 20px" }}>
-              <div style={{ fontSize: 12, color: "#64748b", marginBottom: 10 }}>RESPONSE SLA</div>
+              <div style={{ fontSize: 12, color: "#94a3b8", marginBottom: 10 }}>RESPONSE SLA</div>
               <DonutChart
                 met={totais.response.met}
                 breached={totais.response.breached}
@@ -375,7 +375,7 @@ export default function SlaCompliance() {
               />
             </div>
             <div style={{ background: "#1e293b", border: "1px solid #334155", borderRadius: 10, padding: "16px 20px" }}>
-              <div style={{ fontSize: 12, color: "#64748b", marginBottom: 10 }}>RESOLUTION SLA</div>
+              <div style={{ fontSize: 12, color: "#94a3b8", marginBottom: 10 }}>RESOLUTION SLA</div>
               <DonutChart
                 met={totais.resolution.met}
                 breached={totais.resolution.breached}
@@ -433,7 +433,7 @@ export default function SlaCompliance() {
               <tbody>
                 {ticketsVisiveis.length === 0 ? (
                   <tr>
-                    <td colSpan={7} style={{ textAlign: "center", padding: 32, color: "#475569" }}>
+                    <td colSpan={7} style={{ textAlign: "center", padding: 32, color: "#94a3b8" }}>
                       Nenhum chamado encontrado.
                     </td>
                   </tr>
@@ -492,7 +492,7 @@ export default function SlaCompliance() {
             </table>
           </div>
 
-          <div style={{ marginTop: 10, fontSize: 11, color: "#475569", textAlign: "right" }}>
+          <div style={{ marginTop: 10, fontSize: 11, color: "#94a3b8", textAlign: "right" }}>
             {ticketsVisiveis.length} de {dados.tickets.length} chamados exibidos
             &nbsp;·&nbsp;
             Meta resposta: {dados.configuracao.responseTarget}h

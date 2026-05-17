@@ -41,7 +41,7 @@ const config: Config = {
       {
         docs: {
           sidebarPath: './sidebars.ts',
-          routeBasePath: '/',
+          routeBasePath: '/docs',
         },
         blog: false,
         theme: {
@@ -79,16 +79,16 @@ const config: Config = {
           title: 'Documentação',
           items: [
             { label: 'Início', to: '/' },
-            { label: 'Primeiros Passos', to: '/primeiros-passos/login' },
-            { label: 'Cadastros Básicos', to: '/cadastros-basicos/fabricantes' },
+            { label: 'Primeiros Passos', to: '/docs/primeiros-passos/login' },
+            { label: 'Cadastros Básicos', to: '/docs/cadastros-basicos/fabricantes' },
           ],
         },
         {
           title: 'Módulos',
           items: [
-            { label: 'Operações', to: '/operacoes/cadastro-operacoes' },
-            { label: 'Infrações', to: '/infracoes/triagem' },
-            { label: 'Pesagem', to: '/pesagem/postos' },
+            { label: 'Operações', to: '/docs/operacoes/cadastro-operacoes' },
+            { label: 'Infrações', to: '/docs/infracoes/triagem' },
+            { label: 'Pesagem', to: '/docs/pesagem/postos' },
           ],
         },
         {

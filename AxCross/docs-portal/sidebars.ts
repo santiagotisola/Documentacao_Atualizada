@@ -112,6 +112,7 @@ const sidebars: SidebarsConfig = {
       collapsed: true,
       items: [
         'referencia-tecnica/banco-de-dados',
+        'referencia-tecnica/classificacao-veiculos-integracao',
       ],
     },
 

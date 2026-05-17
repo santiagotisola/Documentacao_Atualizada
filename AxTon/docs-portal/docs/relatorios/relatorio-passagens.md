@@ -1,35 +1,59 @@
 ---
 sidebar_position: 1
-title: Relatório de Passagens
-description: Volume de passagens por período, posto e classificação
+title: Relatório de Pesagem
+description: Consulta e exportação do relatório de pesagens realizadas no AxTon
 ---
 
-# Relatório de Passagens
+# Relatório de Pesagem
 
-![Tela de Relatório de Pesagem](../img/Relatorio%20de%20pesagem.png)
+![Tela de Relatório de Pesagem](../img/axton-relatorio-pesagem.png)
 
-Apresenta o volume total de passagens de veículos registradas nos postos de pesagem, com filtros por período, posto e classificação.
+O **Relatório de Pesagem** consolida todas as pesagens realizadas em um período, permitindo consulta e exportação em PDF para fins de auditoria e controle operacional.
 
 ## Como acessar
 
 **Menu lateral** → **Relatório de Pesagem**
 
-## Dados do Relatório
+## Filtros disponíveis
 
-### Colunas
+| Campo | Descrição |
+|-------|-----------|
+| **Data Inicial** | Data de início do período da consulta |
+| **Data Final** | Data de encerramento do período |
+
+## Ações
+
+| Ação | Descrição |
+|------|-----------|
+| **Pesquisar** | Consultar as pesagens do período selecionado |
+| **Exportar PDF** | Gerar arquivo PDF com os dados do relatório |
+
+## Dados exibidos
+
+O relatório lista todas as pesagens no período com:
 
 | Coluna | Descrição |
 |--------|-----------|
-| **Data** | Data da passagem |
-| **Posto** | Local da pesagem |
-| **Total Passagens** | Quantidade registrada |
-| **Classificação** | Tipo de veículo predominante |
+| **Data/Hora** | Momento da pesagem |
+| **Placa** | Placa do veículo |
+| **Classe** | Classificação do veículo |
+| **PBT Medido** | Peso Bruto Total registrado (kg) |
+| **PBT Regulamentado** | Limite legal da classificação |
+| **Resultado** | Regular ou Infração |
+| **Operação** | Operação vinculada |
+| **Operador** | Usuário que realizou a pesagem |
 
-### Filtros disponíveis
+## Passo a passo
 
-- Período (data inicial e final)
-- Posto de pesagem
-- Exportar para Excel/PDF
+1. No menu lateral, clique em **Relatório de Pesagem**
+2. Selecione a **Data Inicial** e **Data Final** do período
+3. Clique em **Pesquisar**
+4. Revise os dados na tela
+5. Clique em **Exportar PDF** para gerar o documento
+
+:::tip Dica
+Exporte o relatório ao final de cada operação para manter o histórico de pesagens organizados por data e local.
+:::
 
 ---
 

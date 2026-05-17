@@ -1,30 +1,79 @@
 ---
 sidebar_position: 3
 title: Sequencial de Infração
-description: Configuração do sequencial de numeração de infrações
+description: Configuração do sequencial de numeração de infrações no AxTon
 ---
 
 # Sequencial de Infração
 
-O módulo de sequencial de infração define a numeração utilizada nos registros de infração gerados pelo sistema. Cada sequencial garante a rastreabilidade e unicidade dos autos de infração.
+![Tela de Sequenciais de Infração](../img/axton-sequenciais-infracoes.png)
+
+O sequencial de infração define a **numeração dos autos de infração** gerados pelo sistema. Há um sequencial independente para cada **tipo de infração** (Excesso de PBT, Excesso de Eixo, Excesso de Eixo/PBT).
 
 ## Como acessar
 
-**Menu lateral** → Cadastros → **Sequencial de Infração**
+**Menu lateral** → **Sequênciais de Infração**
 
 ## Listagem
-
-![Tela de Sequencial de Infração — Lista](../img/sequencial-infracao.png)
 
 ### Colunas
 
 | Coluna | Descrição |
 |--------|-----------|
-| **Código** | Código de identificação do sequencial |
-| **Descrição** | Descrição ou identificação do sequencial |
-| **Número Atual** | Número atual do sequencial em uso |
-| **Prefixo** | Prefixo adicionado ao número do auto de infração |
-| **Ativo** | Indica se o sequencial está habilitado para uso |
+| **Sequêncial Inicial** | Número de início da contagem |
+| **Prefixo** | Número máximo até onde o sequêncial vai (limite superior) |
+| **Tipo de Infração** | Qual tipo de infração esse sequêncial controla |
+| **Ações** | Editar e Excluir |
+
+### Sequênciais cadastrados no sistema
+
+| Sequêncial Inicial | Até | Tipo de Infração |
+|--------------------|-----|------------------|
+| **212** | 99.999 | Excesso de PBT |
+| **1.060** | 99.999 | Excesso de Eixo |
+| **1.098** | 99.999 | Excesso de Eixo/PBT |
+
+## Tipos de Infração
+
+| Tipo | Quando ocorre |
+|------|---------------|
+| **Excesso de PBT** | Peso Bruto Total medido supera o PBT Regulamentado + tolerância |
+| **Excesso de Eixo** | Peso em um ou mais eixos supera o limite por eixo + tolerância |
+| **Excesso de Eixo/PBT** | Excesso simultâneo tanto no PBT quanto em eixo |
+
+## Cadastro
+
+### Campos
+
+| Campo | Obrigatório | Descrição |
+|-------|:-----------:|-----------|
+| **Sequêncial Inicial** | Sim | Número de início da contagem de infrações |
+| **Prefixo (Até)** | Sim | Limite superior da numeração |
+| **Tipo de Infração** | Sim | Excesso de PBT, Excesso de Eixo ou Excesso de Eixo/PBT |
+
+### Passo a passo — Configurar sequêncial
+
+1. No menu lateral, clique em **Sequênciais de Infração**
+2. Clique em **+ Novo**
+3. Informe o **Sequêncial Inicial** (próximo número a ser usado)
+4. Informe o valor **Até** (normalmente 99999)
+5. Selecione o **Tipo de Infração**
+6. Clique em **Salvar**
+
+:::warning Atenção
+Configure um sequêncial para **cada tipo de infração**. Se algum tipo não tiver sequêncial configurado, infrações daquele tipo não poderão ser numeradas corretamente.
+:::
+
+:::tip Dica
+Quando o número atingir o limite, edite o sequêncial com um novo número inicial ou amplie o valor máximo.
+:::
+
+## Veja também
+
+| Funcionalidade | Descrição |
+|---|---|
+| [**Sequênciais de Exportação**](../infracoes/exportacao) | Números dos lotes de exportação |
+| [**Configurações**](../sistema/configuracoes) | Tolerâncias e enquadramentos de infração |
 
 ### Ações disponíveis na listagem
 

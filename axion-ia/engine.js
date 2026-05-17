@@ -13,21 +13,13 @@ export async function gerarResposta(mensagem) {
 
   // 2. Se encontrou na base (RESPOSTA INTELIGENTE)
   if (contexto) {
-    return `
-Assunto: ${contexto.assunto}
-
-Análise:
-Foi identificado comportamento relacionado ao cenário descrito.
-
-Causa:
-${contexto.causa}
-
-Ação:
-${contexto.acao}
-
-Status:
-${contexto.status}
-`;
+    let resposta = `Assunto: ${contexto.assunto}\n\n`;
+    if (contexto.causa) resposta += `Causa:\n${contexto.causa}\n\n`;
+    resposta += `Ação:\n${contexto.acao}\n`;
+    if (contexto.status) resposta += `\nStatus:\n${contexto.status}\n`;
+    if (contexto.sistema) resposta += `\nSistema: ${contexto.sistema}`;
+    if (contexto.url) resposta += `\nAcesso: ${contexto.url}`;
+    return resposta.trim();
   }
 
   // 3. Se NÃO encontrou (usa IA com controle)

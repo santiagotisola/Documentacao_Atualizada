@@ -31,7 +31,11 @@ function lerEnv() {
     const idx = trimmed.indexOf("=");
     if (idx === -1) continue;
     const chave = trimmed.substring(0, idx).trim();
-    const valor = trimmed.substring(idx + 1).trim();
+    let valor = trimmed.substring(idx + 1).trim();
+    // Remover aspas envolventes (simples ou duplas)
+    if ((valor.startsWith('"') && valor.endsWith('"')) || (valor.startsWith("'") && valor.endsWith("'"))) {
+      valor = valor.slice(1, -1);
+    }
     obj[chave] = valor;
   }
   return obj;

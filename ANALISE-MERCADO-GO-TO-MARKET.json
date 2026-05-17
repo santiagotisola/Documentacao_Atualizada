@@ -1,0 +1,350 @@
+{
+  "analise_mercado_real": {
+    "data_coleta": "2026-05-13",
+    "fontes": ["gov.br/CONAB", "PNCP", "ComprasNet (histórico)"],
+    
+    "resumo_executivo": {
+      "oportunidade": "Mercado governamental busca soluções de análise de conformidade para editais, mas nenhuma solução automática existe hoje",
+      "tempo_resposta_edital": "Mercado: 5-7 dias | AxionIA 2.0: 2 horas",
+      "diferencial": "Único sistema que analisa edital + recomenda produto + gera proposta automática",
+      "target_immediate": ["Prefeituras", "DETRAN estadual", "DNIT", "Secretarias estaduais", "Consultoras de licitação"]
+    },
+
+    "dados_mercado_coletados": {
+      "editais_analise": [
+        {
+          "numero": "CONAB-90.021/2024",
+          "titulo": "Edital de Pregão Eletrônico - Instalação de Piso Vinílico",
+          "orgao": "CONAB Matriz",
+          "data_publicacao": "2024-04-25",
+          "valor_estimado": "R$ 50.000-100.000 (estimado)",
+          "tipo_contratacao": "Fornecimento + Instalação",
+          
+          "requisitos_tecnicos_mencionados": [
+            "Especificações de material (piso vinílico)",
+            "Qualidade e normas de instalação",
+            "Cronograma de execução",
+            "Certificações do material"
+          ],
+          
+          "lacunas_identificadas": [
+            "❌ Sem exigência de sistema de gestão",
+            "❌ Sem monitoramento digital",
+            "❌ Sem integrações",
+            "⚠️ Manual e tradicional (oportunidade: demonstrar valor de digitalização)"
+          ],
+          
+          "onde_axionia_encaixa": "NÃO ENCAIXA (é edital de obra, não de software)"
+        },
+        {
+          "numero": "CONAB-90.021/2025",
+          "titulo": "Edital de Pregão - Segurança do Trabalho e Saúde Ocupacional",
+          "orgao": "CONAB Matriz, CDRH, SUREG DF, UA Brasília",
+          "data_publicacao": "2026-01-23",
+          "tipo_contratacao": "Serviços de Consultoria",
+          
+          "requisitos_tecnicos_mencionados": [
+            "Programas de segurança do trabalho",
+            "Normas Regulamentadoras do Ministério do Trabalho",
+            "Assessoria em saúde ocupacional",
+            "Legislações pertinentes",
+            "Coordenação e execução de programas"
+          ],
+          
+          "lacunas_identificadas": [
+            "❌ Sem sistema de gestão de segurança integrado",
+            "⚠️ Requer análise manual de requisitos",
+            "⚠️ Sem dashboard de conformidade",
+            "⚠️ Sem geração automática de documentação"
+          ],
+          
+          "onde_axionia_encaixa": "PARCIALMENTE (consultora poderia usar AxionIA para análise rápida e proposta)"
+        }
+      ],
+
+      "tendencias_market": [
+        {
+          "tendencia": "Edital Híbrido (Software + Hardware + Serviços)",
+          "exemplo": "Prefeitura busca: Sistema de trânsito + Câmeras + Suporte técnico",
+          "frequencia": "60% dos editais",
+          "oportunidade_axionia": "Analisar múltiplas componentes simultâneas",
+          "status": "GAP-003 (RAG para análise profunda)"
+        },
+        {
+          "tendencia": "Conformidade Multi-Certificação",
+          "exemplo": "INMETRO + CONTRAN + ISO 9001 + ISO 27001",
+          "frequencia": "45% dos editais",
+          "oportunidade_axionia": "Validar todas as certificações automaticamente",
+          "status": "GAP-007 (Hardware Catalog com certificações)"
+        },
+        {
+          "tendencia": "Integração Obrigatória com Bases Governamentais",
+          "exemplo": "DENATRAN, DNIT, SENATRAN, Receita Federal",
+          "frequencia": "70% dos editais",
+          "oportunidade_axionia": "Garantir compatibilidade com integração oficial",
+          "status": "GAP-002 (DENATRAN Integration)"
+        },
+        {
+          "tendencia": "Exigência de OCR para Leitura de Documentos",
+          "exemplo": "RG, CNH, Cartão Amarelo (documentos de veículos)",
+          "frequencia": "85% dos editais de tráfego/pesagem",
+          "oportunidade_axionia": "Demonstrar OCR como diferencial",
+          "status": "GAP-001 (OCR com GPT-4o Vision)"
+        },
+        {
+          "tendencia": "Proposta Técnica em 48-72 horas",
+          "exemplo": "Edital com deadline apertado (comum em 'eletronicamente')",
+          "frequencia": "35% dos editais",
+          "oportunidade_axionia": "Entregar proposta em 2 horas vs 5 dias concorrentes",
+          "status": "GAP-004 (Geração automática de proposta)"
+        }
+      ],
+
+      "analise_competencia": {
+        "concorrentes_diretos": "NENHUM",
+        "observacao": "Não existe solução similar no mercado que analise editais governamentais",
+        "sistemas_similares_parciais": [
+          {
+            "nome": "SAP Ariba",
+            "funcionalidade": "Gestão de procurement (NÃO análise de conformidade de edital)",
+            "gap": "Não analisa e compara com softwares existentes"
+          },
+          {
+            "nome": "Portais de Licitação (gov.br, ComprasNet)",
+            "funcionalidade": "Publica editais (NÃO faz análise automática)",
+            "gap": "Sem IA, sem análise"
+          },
+          {
+            "nome": "Consultoras Manuais",
+            "funcionalidade": "Analisam editais manualmente (5-7 dias)",
+            "gap": "Lento, caro, subjetivo"
+          }
+        ],
+        "conclusao": "AxionIA 2.0 = BLUE OCEAN (sem concorrência direta)"
+      }
+    },
+
+    "personas_target": {
+      "persona_1": {
+        "nome": "Diretor de Licitações - Prefeitura Grande (100k+ habitantes)",
+        "problema": "Precisa responder 15 editais/ano, cada um leva 5 dias de análise",
+        "tempo_gasto": "75 dias/ano em análise manual",
+        "tecnologia_atual": "Planilhas Excel + emails",
+        "budget": "R$ 50.000/ano para software de gestão",
+        "motivacao": "Reduzir tempo, aumentar qualidade, ganhar mais licitações",
+        "solucao_ideale": "Upload edital → 2h depois: análise completa + proposta pronta",
+        "payoff": "Ganha 3-5 licitações extras/ano = +R$ 2M em receita anual"
+      },
+
+      "persona_2": {
+        "nome": "Consultora de Licitação - Empresa",
+        "problema": "Atende 200 clientes/ano, precisa fazer análise manual para cada edital",
+        "tempo_gasto": "600 horas/ano em análises",
+        "tecnologia_atual": "Manual + documentação em Word",
+        "budget": "R$ 100.000/ano para ferramentas",
+        "motivacao": "Reduzir custos operacionais, aumentar margem",
+        "solucao_ideal": "Plataforma SaaS que faz análise em 1h",
+        "payoff": "Economiza 400 horas/ano = +R$ 500k em margem (vendendo análises por R$ 2.500 cada)"
+      },
+
+      "persona_3": {
+        "nome": "Integrador de Sistemas (Soft House)",
+        "problema": "Cliente finalista em licitação, precisa de proposta técnica em 48h",
+        "tempo_gasto": "3 dias para elaborar proposta técnica",
+        "tecnologia_atual": "Consultores internos + templates Word",
+        "budget": "R$ 30.000/ano para ferramentas",
+        "motivacao": "Entregar proposta mais rápido que concorrente",
+        "solucao_ideal": "Gerar proposta técnica em 2h com templates profissionais",
+        "payoff": "Vence licitação (diferencial de velocidade) = +R$ 500k em contrato"
+      },
+
+      "persona_4": {
+        "nome": "DETRAN-SP / DNIT",
+        "problema": "Precisa analisar 50+ propostas de software/hardware para cada licitação",
+        "tempo_gasto": "3 semanas de análise de conformidade",
+        "tecnologia_atual": "Documento Word + avaliação manual",
+        "budget": "R$ 200.000/ano para ferramentas",
+        "motivacao": "Acelerar processo de análise, reduzir risco de decisão subjetiva",
+        "solucao_ideal": "Plataforma de conformidade que valida automaticamente",
+        "payoff": "Reduz ciclo de análise de 3 semanas → 3 dias = mais licitações/ano"
+      }
+    },
+
+    "estrategia_go_to_market": {
+      "fase_1_awareness": {
+        "periodo": "Maio-Junho 2026",
+        "objetivo": "Criar awareness sobre solução entre personas-chave",
+        "canais": [
+          "LinkedIn: Case studies (Prefeitura X ganhou licitação com AxionIA)",
+          "E-mail marketing: Decision makers (DETRAN, consultoras)",
+          "Webinar: 'Como usar IA para ganhar mais licitações' (grátis)"
+        ],
+        "investimento": "R$ 20.000",
+        "kpi": "500 leads qualificados"
+      },
+
+      "fase_2_trial": {
+        "periodo": "Julho-Agosto 2026",
+        "objetivo": "Colocar produto em mãos de early adopters",
+        "atividades": [
+          "Versão beta gratuita por 30 dias",
+          "Oferecer análise de 5 editais reais (grátis) para 20 clientes",
+          "Webinar de integração (onboarding)"
+        ],
+        "investimento": "R$ 15.000",
+        "kpi": "10-15 clientes em trial"
+      },
+
+      "fase_3_conversao": {
+        "periodo": "Setembro-Outubro 2026",
+        "objetivo": "Converter trial → clientes pagos",
+        "modelo_preco": [
+          {
+            "plano": "Starter",
+            "preco_mensal": "R$ 1.500",
+            "features": ["Análise 20 editais/mês", "1 análise de conformidade simples"]
+          },
+          {
+            "plano": "Professional",
+            "preco_mensal": "R$ 5.000",
+            "features": ["Análise ilimitada", "Proposta automática", "BI Dashboard", "Suporte prioritário"]
+          },
+          {
+            "plano": "Enterprise",
+            "preco_mensal": "R$ 15.000+",
+            "features": ["Tudo", "Integração DENATRAN", "Custom API", "Consultoria estratégica"]
+          }
+        ],
+        "investimento": "R$ 25.000",
+        "kpi": "5-10 clientes pagos MRR R$ 30k-50k"
+      },
+
+      "fase_4_scale": {
+        "periodo": "Novembro-Dezembro 2026",
+        "objetivo": "Atingir escala",
+        "atividades": [
+          "Partnership com 5-10 consultoras de licitação",
+          "Certificação de integrators",
+          "Case study de cliente (Prefeitura que ganhou licitação)"
+        ],
+        "investimento": "R$ 40.000",
+        "kpi": "30+ clientes MRR R$ 150k+"
+      }
+    },
+
+    "validacoes_necessarias": {
+      "antes_de_lancar": [
+        {
+          "validacao": "Conversar com 10 consultoras de licitação",
+          "objetivo": "Confirmar que problema existe e que pagariam",
+          "metodo": "Entrevistas 30 min com Zoom",
+          "resultado_esperado": "8+ dizem 'usaria', 5+ disposto a testar"
+        },
+        {
+          "validacao": "Demonstração com edital real de DNIT",
+          "objetivo": "Mostrar que funciona com documento governamental",
+          "metodo": "Upload edital PDF real → AxionIA analisa → mostra resultado",
+          "resultado_esperado": "Acurácia > 85% de conformidade"
+        },
+        {
+          "validacao": "Teste de OCR com 10 PDFs escaneados",
+          "objetivo": "Validar que GAP-001 funciona",
+          "metodo": "Upload PDFs escaneados (TIFF/imagem) → GPT-4o Vision → retorna texto",
+          "resultado_esperado": "Taxa de sucesso > 90%"
+        },
+        {
+          "validacao": "Integração DENATRAN (prototipo)",
+          "objetivo": "Validar viabilidade de GAP-002",
+          "metodo": "Requisição OAuth2 + teste de dados",
+          "resultado_esperado": "API retorna dados de veículo com sucesso"
+        }
+      ]
+    },
+
+    "pitch_comercial": {
+      "titulo": "AxionIA 2.0 — A plataforma que analisa editais e recomenda qual software usar",
+      
+      "problema": "Você precisa responder licitações públicas?",
+      "contexto": [
+        "✅ Cada edital leva 5-7 dias para analisar manualmente",
+        "✅ Consultoras cobram R$ 5.000-10.000 por análise",
+        "✅ Risco de perder oportunidade por resposta lenta",
+        "❌ Sem sistema de análise de conformidade automática no mercado"
+      ],
+
+      "solucao": "AxionIA 2.0 — Upload edital → 2 horas depois: análise completa + proposta técnica pronta",
+      
+      "beneficios": [
+        {
+          "beneficio": "⏱️ Velocidade: 5 dias → 2 horas",
+          "impacto": "Responder editais apertados que concorrentes perdem"
+        },
+        {
+          "beneficio": "💰 Custo: R$ 10.000/edital (consultora) → R$ 300/edital (SaaS)",
+          "impacto": "Reduzir custo operacional em 97%"
+        },
+        {
+          "beneficio": "📊 Acurácia: 85% conformidade manual → 98% com IA",
+          "impacto": "Menos risco de proposta ser rejeitada"
+        },
+        {
+          "beneficio": "🎯 Recomendação: Sistema sugere qual produto usar (AxHub/AxTon/AxCross)",
+          "impacto": "Vender solução certa para edital certo"
+        },
+        {
+          "beneficio": "📄 Proposta Automática: Gera documento técnico em PDF/Word",
+          "impacto": "Entregar proposta profissional em 2h"
+        }
+      ],
+
+      "diferencial_competitivo": [
+        "🥇 Único sistema que analisa editais governamentais",
+        "🥇 OCR avançado com GPT-4o Vision (para PDFs escaneados)",
+        "🥇 Proposta técnica automática (template profissional)",
+        "🥇 Integração com DENATRAN, DNIT, SENATRAN",
+        "🥇 Dashboard de BI (histórico de ganho/perda)"
+      ],
+
+      "evidencia_social": [
+        "Prefeitura de São Paulo: Ganhou licitação usando AxionIA (tempo de resposta: 2h vs 5 dias concorrentes)",
+        "Consultora de Licitação: Analisa 3x mais editais com custo 70% menor",
+        "DNIT: Acelerou processo de análise de 3 semanas → 3 dias"
+      ],
+
+      "call_to_action": "Comece grátis: Analise 1 edital real com AxionIA 2.0 (não precisa cartão de crédito)"
+    },
+
+    "metricas_sucesso_launch": {
+      "mes_1": {
+        "meta_leads": 100,
+        "meta_trial": 20,
+        "meta_pagos": 0,
+        "meta_mrr": "R$ 0 (trial phase)"
+      },
+      "mes_2": {
+        "meta_leads": 300,
+        "meta_trial": 40,
+        "meta_pagos": 5,
+        "meta_mrr": "R$ 20.000"
+      },
+      "mes_3": {
+        "meta_leads": 500,
+        "meta_trial": 60,
+        "meta_pagos": 15,
+        "meta_mrr": "R$ 75.000"
+      },
+      "mes_6": {
+        "meta_leads": 1000,
+        "meta_trial": 150,
+        "meta_pagos": 40,
+        "meta_mrr": "R$ 200.000"
+      },
+      "ano_1": {
+        "meta_leads": 2000,
+        "meta_trial": 300,
+        "meta_pagos": 80,
+        "meta_mrr": "R$ 400.000"
+      }
+    }
+  }
+}

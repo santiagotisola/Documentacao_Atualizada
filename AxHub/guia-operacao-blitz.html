@@ -2,6 +2,7 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Guia de Operação de Blitz - AxHub</title>
 <style>
   @page { size: A4; margin: 15mm 18mm; }
@@ -55,6 +56,19 @@
   .page-break { page-break-before: always; }
 
   .icon { font-size: 18px; vertical-align: middle; margin-right: 4px; }
+  .cover-subtitle { margin-top: 16px; color: #95a5a6; }
+  .toc-list { padding-left: 20px; line-height: 2; }
+  .toc-link { color: #0077b6; text-decoration: none; }
+  .highlight-error { color: #e74c3c; font-size: 18px; }
+  .badge-row { margin-top: 6px; }
+  .inner-list { padding-left: 16px; margin-top: 6px; }
+  .legend-list { padding-left: 20px; margin: 6px 0; }
+  .color-red { background: #e74c3c; color: #fff; padding: 1px 6px; border-radius: 3px; }
+  .color-yellow { background: #f1c40f; padding: 1px 6px; border-radius: 3px; }
+  .color-green { background: #27ae60; color: #fff; padding: 1px 6px; border-radius: 3px; }
+  .info-list { padding-left: 20px; margin-top: 4px; }
+  .col-35 { width: 35%; }
+  .alert.mt { margin-top: 20px; }
 </style>
 </head>
 <body>
@@ -64,22 +78,22 @@
   <div class="cover-logo">Ax<span>Hub</span></div>
   <h1>Guia de Operação de Equipamentos de Blitz</h1>
   <h2>Configuração de Faixas, Sincronismo e Verificação de Passagens</h2>
-  <p style="margin-top:16px;color:#95a5a6;">Para operadores de campo, gestores de contrato e equipe de suporte</p>
+  <p class="cover-subtitle">Para operadores de campo, gestores de contrato e equipe de suporte</p>
   <div class="version">Versão 1.0 — Março 2026 · Axion Tecnologia</div>
 </div>
 
 <!-- ===== ÍNDICE ===== -->
 <h1>📋 Índice</h1>
-<ol style="padding-left:20px;line-height:2;">
-  <li><a href="#equipamentos" style="color:#0077b6;text-decoration:none;">Seus Equipamentos</a></li>
-  <li><a href="#faixas" style="color:#0077b6;text-decoration:none;">O que são Faixas e por que são importantes</a></li>
-  <li><a href="#erro-faixa" style="color:#0077b6;text-decoration:none;">O Problema: Faixa Errada no Tablet</a></li>
-  <li><a href="#como-corrigir" style="color:#0077b6;text-decoration:none;">Como Corrigir a Faixa</a></li>
-  <li><a href="#sincronismo" style="color:#0077b6;text-decoration:none;">Sincronismo: Como as Passagens Chegam ao Sistema</a></li>
-  <li><a href="#checklist" style="color:#0077b6;text-decoration:none;">Checklist — Antes, Durante e Após a Blitz</a></li>
-  <li><a href="#relatorios" style="color:#0077b6;text-decoration:none;">Como Verificar se o Equipamento Operou</a></li>
-  <li><a href="#responsabilidades" style="color:#0077b6;text-decoration:none;">Quem Faz o Quê</a></li>
-  <li><a href="#problemas-comuns" style="color:#0077b6;text-decoration:none;">Problemas Comuns e Soluções</a></li>
+<ol class="toc-list">
+  <li><a href="#equipamentos" class="toc-link">Seus Equipamentos</a></li>
+  <li><a href="#faixas" class="toc-link">O que são Faixas e por que são importantes</a></li>
+  <li><a href="#erro-faixa" class="toc-link">O Problema: Faixa Errada no Tablet</a></li>
+  <li><a href="#como-corrigir" class="toc-link">Como Corrigir a Faixa</a></li>
+  <li><a href="#sincronismo" class="toc-link">Sincronismo: Como as Passagens Chegam ao Sistema</a></li>
+  <li><a href="#checklist" class="toc-link">Checklist — Antes, Durante e Após a Blitz</a></li>
+  <li><a href="#relatorios" class="toc-link">Como Verificar se o Equipamento Operou</a></li>
+  <li><a href="#responsabilidades" class="toc-link">Quem Faz o Quê</a></li>
+  <li><a href="#problemas-comuns" class="toc-link">Problemas Comuns e Soluções</a></li>
 </ol>
 
 <!-- ===== 1. EQUIPAMENTOS ===== -->
@@ -181,7 +195,7 @@
 
 <div class="section">
   <h2>O que aconteceu?</h2>
-  <p>O operador de campo configurou a faixa no tablet como <strong style="color:#e74c3c;font-size:18px;">12</strong>, pensando que "12" significava "faixa 1 e faixa 2".</p>
+  <p>O operador de campo configurou a faixa no tablet como <strong class="highlight-error">12</strong>, pensando que "12" significava "faixa 1 e faixa 2".</p>
 
   <div class="alert">
     <strong>❌ ERRADO — O sistema entende literalmente</strong>
@@ -220,7 +234,7 @@
   </li>
   <li><strong>Altere o Nº da Faixa</strong><br>
     Digite o <strong>número correto</strong> conforme o endereço onde vai operar:<br>
-    <div style="margin-top:6px;">
+    <div class="badge-row">
       <span class="badge green">1</span> = SIMÕES FILHO / SALVADOR &nbsp;&nbsp;
       <span class="badge green">2</span> = FEIRA DE SANTANA / SALVADOR &nbsp;&nbsp;
       <span class="badge green">3</span> = SALVADOR / FEIRA DE SANTANA
@@ -237,7 +251,7 @@
 <div class="two-col">
   <div class="col">
     <h3>🖥️ MiniPC (BA601C / BA602C)</h3>
-    <ul style="padding-left:16px;margin-top:6px;">
+    <ul class="inner-list">
       <li>Ficam conectados à internet na base</li>
       <li>Enviam passagens <strong>automaticamente</strong></li>
       <li>Se a internet cair, acumulam e enviam quando reconectam</li>
@@ -247,7 +261,7 @@
   </div>
   <div class="col">
     <h3>📱 Tablet (BA603C / BA604C)</h3>
-    <ul style="padding-left:16px;margin-top:6px;">
+    <ul class="inner-list">
       <li>Operam <strong>offline</strong> durante a blitz</li>
       <li>As passagens ficam armazenadas no tablet</li>
       <li><strong>Ao voltar à base</strong> e conectar na internet, sincronizam automaticamente</li>
@@ -307,10 +321,10 @@
   <h2>📊 Relatório de Mapa de Fluxo de Passagens</h2>
   <div class="path-box"><span>Menu lateral →</span> Relatórios <span>→</span> Mapa de Fluxo de Passagens</div>
   <p>Mostra uma <strong>tabela hora-a-hora</strong> de todas as passagens do mês:</p>
-  <ul style="padding-left:20px;margin:6px 0;">
-    <li><span style="background:#e74c3c;color:#fff;padding:1px 6px;border-radius:3px;">Vermelho</span> = Sem passagens naquela hora (equipamento parado)</li>
-    <li><span style="background:#f1c40f;padding:1px 6px;border-radius:3px;">Amarelo</span> = Poucas passagens</li>
-    <li><span style="background:#27ae60;color:#fff;padding:1px 6px;border-radius:3px;">Verde</span> = Volume normal de passagens</li>
+  <ul class="legend-list">
+    <li><span class="color-red">Vermelho</span> = Sem passagens naquela hora (equipamento parado)</li>
+    <li><span class="color-yellow">Amarelo</span> = Poucas passagens</li>
+    <li><span class="color-green">Verde</span> = Volume normal de passagens</li>
   </ul>
   <p>Selecione o mês, o equipamento e clique em <strong>"Emitir Relatório"</strong>.</p>
 </div>
@@ -323,7 +337,7 @@
 
 <div class="alert info">
   <strong>💡 Use esses relatórios para responder:</strong>
-  <ul style="padding-left:20px;margin-top:4px;">
+  <ul class="info-list">
     <li>"Qual foi o último dia que o equipamento operou?"</li>
     <li>"Quantos dias ficou parado?"</li>
     <li>"As imagens estão chegando ao sistema?"</li>
@@ -381,8 +395,8 @@
 
 <table>
   <tr>
-    <th style="width:35%;">Problema</th>
-    <th style="width:35%;">Causa Provável</th>
+    <th class="col-35">Problema</th>
+    <th class="col-35">Causa Provável</th>
     <th>Solução</th>
   </tr>
   <tr>
@@ -427,7 +441,7 @@
   </tr>
 </table>
 
-<div class="alert success" style="margin-top:20px;">
+<div class="alert success mt">
   <strong>📞 Precisa de ajuda?</strong><br>
   Entre em contato com o suporte Axion. Para problemas de acesso ao equipamento, tenha em mãos o <strong>ID do AnyDesk</strong> do equipamento e informe se está <strong>ligado e conectado à internet</strong>.
 </div>

@@ -1,30 +1,49 @@
 /**
- * Any CSS included here will be global. The classic template
- * bundles Infima by default. Infima is a CSS framework designed to
- * work well for content-centric websites.
+ * Axion Tecnologia — Hub Central
+ * Paleta baseada na identidade visual Axion (azul institucional)
  */
 
-/* You can override the default Infima variables here. */
 :root {
-  --ifm-color-primary: #2e8555;
-  --ifm-color-primary-dark: #29784c;
-  --ifm-color-primary-darker: #277148;
-  --ifm-color-primary-darkest: #205d3b;
-  --ifm-color-primary-light: #33925d;
-  --ifm-color-primary-lighter: #359962;
-  --ifm-color-primary-lightest: #3cad6e;
+  --ifm-color-primary: #2980b9;
+  --ifm-color-primary-dark: #2471a3;
+  --ifm-color-primary-darker: #21669a;
+  --ifm-color-primary-darkest: #1b557f;
+  --ifm-color-primary-light: #3498db;
+  --ifm-color-primary-lighter: #5dade2;
+  --ifm-color-primary-lightest: #85c1e9;
   --ifm-code-font-size: 95%;
+  --ifm-font-family-base: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  --ifm-navbar-background-color: #1a365d;
+  --ifm-navbar-link-color: #fff;
+  --ifm-navbar-link-hover-color: #63b3ed;
+  --ifm-footer-background-color: #0f2b46;
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
 }
 
-/* For readability concerns, you should choose a lighter palette in dark mode. */
 [data-theme='dark'] {
-  --ifm-color-primary: #25c2a0;
-  --ifm-color-primary-dark: #21af90;
-  --ifm-color-primary-darker: #1fa588;
-  --ifm-color-primary-darkest: #1a8870;
-  --ifm-color-primary-light: #29d5b0;
-  --ifm-color-primary-lighter: #32d8b4;
-  --ifm-color-primary-lightest: #4fddbf;
+  --ifm-color-primary: #5dade2;
+  --ifm-color-primary-dark: #3498db;
+  --ifm-color-primary-darker: #2980b9;
+  --ifm-color-primary-darkest: #21669a;
+  --ifm-color-primary-light: #85c1e9;
+  --ifm-color-primary-lighter: #aed6f1;
+  --ifm-color-primary-lightest: #d6eaf8;
+  --ifm-navbar-background-color: #0f1f33;
+  --ifm-footer-background-color: #0a1628;
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
+}
+
+/* Navbar estilizada */
+.navbar {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.navbar__title {
+  font-weight: 700;
+  color: #fff;
+}
+
+/* Footer */
+.footer--dark {
+  background: linear-gradient(180deg, var(--ifm-footer-background-color) 0%, #060d18 100%);
 }

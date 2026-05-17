@@ -2,15 +2,27 @@ import dotenv from "dotenv";
 
 dotenv.config();
 
+const JITBIT_DEFAULT_URL = "https://desk.axiontecnologia.com.br/helpdesk";
+const JITBIT_DEFAULT_USER = "Santiago@axiontecnologia.com.br";
+const JITBIT_DEFAULT_PASS = "Axion#2026";
+
+function getJitbitUser() {
+  return process.env.JITBIT_USER || JITBIT_DEFAULT_USER;
+}
+
+function getJitbitPass() {
+  return process.env.JITBIT_PASS || JITBIT_DEFAULT_PASS;
+}
+
 function getBase() {
-  return (process.env.JITBIT_URL || "https://desk.axiontecnologia.com.br").replace(/\/+$/, "");
+  return (process.env.JITBIT_URL || JITBIT_DEFAULT_URL).replace(/\/+$/, "");
 }
 
 function getAuthHeader() {
   if (process.env.JITBIT_TOKEN) {
     return { "Authorization": `Bearer ${process.env.JITBIT_TOKEN}` };
   }
-  const credentials = Buffer.from(`${process.env.JITBIT_USER}:${process.env.JITBIT_PASS}`).toString("base64");
+  const credentials = Buffer.from(`${getJitbitUser()}:${getJitbitPass()}`).toString("base64");
   return { "Authorization": `Basic ${credentials}` };
 }
 

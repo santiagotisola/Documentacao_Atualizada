@@ -41,7 +41,7 @@ const config: Config = {
       {
         docs: {
           sidebarPath: './sidebars.ts',
-          routeBasePath: '/',
+          routeBasePath: '/docs',
         },
         blog: false,
         theme: {
@@ -84,11 +84,11 @@ const config: Config = {
             },
             {
               label: 'Primeiros Passos',
-              to: '/primeiros-passos/login',
+              to: '/docs/primeiros-passos/login',
             },
             {
               label: 'Cadastros',
-              to: '/cadastros/locais',
+              to: '/docs/cadastros/locais',
             },
           ],
         },
@@ -97,15 +97,15 @@ const config: Config = {
           items: [
             {
               label: 'Monitoramento',
-              to: '/operacoes/monitoramento-online',
+              to: '/docs/operacoes/monitoramento-online',
             },
             {
               label: 'Operações',
-              to: '/operacoes/cadastro-operacoes',
+              to: '/docs/operacoes/cadastro-operacoes',
             },
             {
               label: 'Relatórios',
-              to: '/relatorios/relatorio-passagens',
+              to: '/docs/relatorios/relatorio-passagens',
             },
           ],
         },

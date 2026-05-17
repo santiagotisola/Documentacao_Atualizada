@@ -9,15 +9,15 @@ const PRODUTOS = [
 ];
 
 const STATUS_COR = {
-  atendido:     { bg: "#d4edda", texto: "#155724", label: "✅ Atendido" },
-  parcial:      { bg: "#fff3cd", texto: "#856404", label: "⚠️ Parcial" },
-  nao_atendido: { bg: "#f8d7da", texto: "#721c24", label: "❌ Não Atendido" },
+  atendido:     { bg: "rgba(34,197,94,0.15)", texto: "#4ade80", label: "✅ Atendido" },
+  parcial:      { bg: "rgba(245,158,11,0.15)", texto: "#fbbf24", label: "⚠️ Parcial" },
+  nao_atendido: { bg: "rgba(239,68,68,0.15)", texto: "#f87171", label: "❌ Não Atendido" },
 };
 
 const VEREDICTO_COR = {
-  APTO:               { bg: "#d4edda", texto: "#155724", label: "✅ APTO" },
-  PARCIALMENTE_APTO:  { bg: "#fff3cd", texto: "#856404", label: "⚠️ PARCIALMENTE APTO" },
-  INAPTO:             { bg: "#f8d7da", texto: "#721c24", label: "❌ INAPTO" },
+  APTO:               { bg: "rgba(34,197,94,0.15)", texto: "#4ade80", label: "✅ APTO" },
+  PARCIALMENTE_APTO:  { bg: "rgba(245,158,11,0.15)", texto: "#fbbf24", label: "⚠️ PARCIALMENTE APTO" },
+  INAPTO:             { bg: "rgba(239,68,68,0.15)", texto: "#f87171", label: "❌ INAPTO" },
 };
 
 const ABAS = [
@@ -241,11 +241,11 @@ export default function Conformidade() {
       {msg && (
         <div style={{
           padding: "10px 14px",
-          background: msg.startsWith("✅") ? "#d4edda" : msg.startsWith("⏳") ? "#cce5ff" : "#f8d7da",
+          background: msg.startsWith("✅") ? "rgba(34,197,94,0.15)" : msg.startsWith("⏳") ? "rgba(59,130,246,0.15)" : "rgba(239,68,68,0.15)",
           borderRadius: 6,
           marginBottom: 14,
           fontSize: 13,
-          color: msg.startsWith("✅") ? "#155724" : msg.startsWith("⏳") ? "#004085" : "#721c24",
+          color: msg.startsWith("✅") ? "#4ade80" : msg.startsWith("⏳") ? "#60a5fa" : "#f87171",
         }}>{msg}</div>
       )}
 

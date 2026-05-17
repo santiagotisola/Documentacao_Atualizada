@@ -3,7 +3,7 @@
  * Endpoints REST para gerenciar a integração WhatsApp via painel.
  */
 
-import { iniciarWhatsApp, enviarMensagem, obterEstado, obterQR } from "./services/whatsapp.service.js";
+import { iniciarWhatsApp, enviarMensagem, obterEstado, obterQR, desconectarWhatsApp } from "./services/whatsapp.service.js";
 import { processarMensagemWA } from "./whatsapp-flow.js";
 import { WhatsAppSessao } from "./models/whatsapp-sessao.model.js";
 
@@ -92,6 +92,19 @@ export async function enviarManual(req, res) {
   try {
     await enviarMensagem(telefone, mensagem);
     res.json({ ok: true });
+  } catch (err) {
+    res.status(500).json({ erro: err.message });
+  }
+}
+
+/**
+ * POST /api/whatsapp/desconectar — Desconecta o WhatsApp
+ */
+export async function desconectar(req, res) {
+  try {
+    await desconectarWhatsApp();
+    inicializado = false;
+    res.json({ ok: true, mensagem: "WhatsApp desconectado" });
   } catch (err) {
     res.status(500).json({ erro: err.message });
   }

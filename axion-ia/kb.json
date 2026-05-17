@@ -12,5 +12,98 @@
     "causa": "Falta de conectividade",
     "acao": "Necessário verificar rede local",
     "status": "Aguardando normalização"
+  },
+  "axhub_login": {
+    "keywords": ["login", "senha", "acesso", "não consigo entrar", "axhub"],
+    "assunto": "Acesso ao AxHub",
+    "causa": "Credenciais inválidas ou conta bloqueada",
+    "acao": "Verificar se o usuário está Ativo no módulo Controle de Acesso → Usuários. Usar 'Esqueci minha senha' para redefinir. Verificar se IP está bloqueado em Acesso por IP.",
+    "sistema": "AxHub",
+    "url": "https://economia.axhub.axion.ws"
+  },
+  "axhub_triagem": {
+    "keywords": ["triagem", "infração", "validar", "descartar", "infração não aparece"],
+    "assunto": "Triagem de Infrações no AxHub",
+    "causa": "Infrações pendentes de revisão ou não localizadas",
+    "acao": "Menu → Infrações → Triagem. Verificar filtros (período, status, equipamento). Se infração descartada por engano, filtrar Status=Descartada e usar Reabrir.",
+    "sistema": "AxHub",
+    "url": "https://economia.axhub.axion.ws/triagem"
+  },
+  "axhub_exportacao": {
+    "keywords": ["exportação", "lote", "exportar", "RENAINF", "enviar infração", "DETRAN"],
+    "assunto": "Exportação de infrações",
+    "causa": "Dúvida sobre o processo de exportação ou erro ao gerar lote",
+    "acao": "Menu → Infrações → Exportação. Configurar órgão destino, período e layout. Gerar lote → sistema valida 7 critérios automáticos. Enviar via SFTP, API ou download manual. Formatos: RENAINF, XML, TXT, CSV.",
+    "sistema": "AxHub",
+    "url": "https://economia.axhub.axion.ws/loteexportacao"
+  },
+  "axhub_afericao_vencida": {
+    "keywords": ["aferição", "INMETRO", "certificado", "vencido", "vencimento"],
+    "assunto": "Aferição/Certificado INMETRO vencido",
+    "causa": "Equipamento com certificado INMETRO vencido não gera infrações válidas",
+    "acao": "Menu → Operações → Aferições. Verificar data de vencimento. Registrar nova aferição com certificado atualizado. Dashboard mostra alertas de aferições próximas do vencimento.",
+    "sistema": "AxHub",
+    "url": "https://economia.axhub.axion.ws/afericao"
+  },
+  "axhub_pesagem": {
+    "keywords": ["pesagem", "balança", "ticket", "peso", "liberar", "reclassificar"],
+    "assunto": "Pesagem/Balança no AxHub",
+    "causa": "Dúvida sobre tickets de pesagem ou liberação",
+    "acao": "Menu → Balança → Tickets. Verificar tickets abertos, fechados ou pendentes de reclassificação. Liberar Pesagem para autorizar saída. Reclassificação para corrigir classificação veicular.",
+    "sistema": "AxHub",
+    "url": "https://economia.axhub.axion.ws/ticketpesagem/ticketabertos"
+  },
+  "axcross_veiculo_monitorado": {
+    "keywords": ["veículo monitorado", "monitorado", "cruzamento", "vigência", "expirado", "alerta não gera"],
+    "assunto": "Veículo monitorado no AxCross",
+    "causa": "Veículo monitorado não está gerando alerta",
+    "acao": "Verificar: 1) Veículo está Habilitado? 2) Vigência não expirada? 3) Tipo de Ocorrência ativo? Menu → Veículos Monitorados. Se expirado, editar e atualizar Data de Expiração ou zerar prazo do Tipo de Ocorrência.",
+    "sistema": "AxCross",
+    "url": "https://economia.axcross.axion.ws/occurrences/monitoredvehicle/monitoredvehicle"
+  },
+  "axcross_importacao": {
+    "keywords": ["importar", "importação", "lote", "arquivo", "txt", "axcross"],
+    "assunto": "Importação de veículos monitorados no AxCross",
+    "causa": "Necessidade de cadastrar múltiplas placas",
+    "acao": "Menu → Veículos Monitorados → Importação de Monitorados. Usar arquivo .txt com uma placa por linha. Se o tipo de ocorrência tiver prazo, a data de expiração é calculada automaticamente.",
+    "sistema": "AxCross",
+    "url": "https://economia.axcross.axion.ws/occurrences/vehiclemonitoredimport"
+  },
+  "axcross_rastreamento": {
+    "keywords": ["rastrear", "placa", "rastreamento", "localizar", "passagem"],
+    "assunto": "Rastreamento de placas no AxCross",
+    "causa": "Necessidade de localizar passagens de uma placa específica",
+    "acao": "Menu → Relatórios → Rastreamento de Placas. Informar a placa e o período. O sistema mostra todas as passagens com equipamento, faixa, data/hora e imagem.",
+    "sistema": "AxCross",
+    "url": "https://economia.axcross.axion.ws/reports/platetracking"
+  },
+  "axcross_passagens": {
+    "keywords": ["passagem", "relatório passagens", "filtrar", "consultar passagens"],
+    "assunto": "Relatório de Passagens no AxCross",
+    "causa": "Consulta de passagens registradas",
+    "acao": "Menu → Relatórios → Passagens. Filtros: Data, Equipamento, Faixa, Placa (use * como curinga), Área, Cor, Modelo, Classificação. Exportar em Excel.",
+    "sistema": "AxCross",
+    "url": "https://economia.axcross.axion.ws/reports/reports/passages"
+  },
+  "axton_ticket_nao_finaliza": {
+    "keywords": ["ticket não finaliza", "pesagem pendente", "não fecha", "axton"],
+    "assunto": "Ticket de pesagem não finaliza no AxTon",
+    "causa": "Dados obrigatórios incompletos ou classificação incorreta",
+    "acao": "Verificar: 1) Todos os dados obrigatórios preenchidos? 2) Veículo classificado corretamente? 3) Há segunda pesagem pendente? Menu → Tickets de Pesagens.",
+    "sistema": "AxTon"
+  },
+  "axton_exportacao_erro": {
+    "keywords": ["exportação", "erro exportação", "município", "imagem ausente", "axton"],
+    "assunto": "Erro na exportação de lote no AxTon",
+    "causa": "Código do município divergente, imagens ausentes ou dados incompletos",
+    "acao": "Verificar: 1) Código do município em Veículos → Municípios 2) Imagens em Relatórios → Processamento de Imagens 3) Dados incompletos: reabrir infração na Triagem.",
+    "sistema": "AxTon"
+  },
+  "sistemas_urls": {
+    "keywords": ["url", "endereço", "link", "acessar", "sistema", "onde acessar"],
+    "assunto": "URLs dos sistemas Axion",
+    "causa": "Informação de acesso aos sistemas",
+    "acao": "AxHub: https://economia.axhub.axion.ws | AxCross: https://economia.axcross.axion.ws | AxTon: Aplicativo desktop (não tem URL web). Login OIDC: suporte@axiontecnologia.com.br",
+    "sistemas": ["AxHub", "AxCross", "AxTon"]
   }
 }

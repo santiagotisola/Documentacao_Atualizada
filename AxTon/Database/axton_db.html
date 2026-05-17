@@ -115,6 +115,19 @@
   .summary-table td:first-child { color: var(--slate-800); font-weight: 700; }
   .summary-table td:nth-child(2) { font-family: inherit; color: var(--slate-600); }
   .summary-table td:nth-child(3) { font-family: 'Courier New', monospace; color: var(--purple); font-size: 0.78rem; }
+  .overview-desc { color: var(--slate-600); margin-bottom: 24px; }
+  .modules-heading { font-size: 1.2rem; font-weight: 700; margin-bottom: 12px; }
+  .module-badge.blue { background: var(--blue-light); color: var(--blue); }
+  .module-badge.green { background: var(--green-light); color: var(--green); }
+  .module-badge.purple { background: var(--purple-light); color: var(--purple); }
+  .module-badge.amber { background: var(--amber-light); color: var(--amber); }
+  .module-badge.red { background: var(--red-light); color: var(--red); }
+  .diagram-svg { width: 100%; min-width: 650px; }
+  .legend-item { display: flex; align-items: center; gap: 6px; }
+  .legend-line.solid { background: var(--slate-500); }
+  .legend-line.dashed { border-top: 2px dashed var(--slate-500); background: transparent; }
+  .doc-footer { text-align: center; padding: 40px 20px; color: var(--slate-400); font-size: 0.8rem; border-top: 1px solid var(--slate-200); margin-top: 40px; }
+  .legend-embed { background: var(--slate-100); padding: 2px 8px; border-radius: 4px; font-size: 0.75rem; font-weight: 600; }
 </style>
 </head>
 <body>
@@ -161,7 +174,7 @@
 <!-- ===== 1. VISÃO GERAL ===== -->
 <div class="container page-break" id="visao-geral">
   <h2 class="section-title">1. Visão Geral</h2>
-  <p style="color:var(--slate-600);margin-bottom:24px;">
+  <p class="overview-desc">
     O sistema <strong>AxTon</strong> é uma plataforma de pesagem de veículos e controle de infrações de trânsito por excesso de peso.
     Utiliza balanças Haenni para medição por eixo e integra-se com sistemas externos (XTraffic e AxHub) para exportação de dados de infrações.
   </p>
@@ -172,25 +185,25 @@
     <div class="info-card"><div class="label">Nome do Banco</div><div class="value">AxTon</div></div>
   </div>
 
-  <h3 style="font-size:1.2rem;font-weight:700;margin-bottom:12px;">Módulos Funcionais</h3>
+  <h3 class="modules-heading">Módulos Funcionais</h3>
   <div class="module-card">
-    <span class="module-badge" style="background:var(--blue-light);color:var(--blue);">Autenticação &amp; Autorização</span>
+    <span class="module-badge blue">Autenticação &amp; Autorização</span>
     <span class="module-cols">User, AccessProfile, AccessPermission</span>
   </div>
   <div class="module-card">
-    <span class="module-badge" style="background:var(--green-light);color:var(--green);">Classificação de Veículos</span>
+    <span class="module-badge green">Classificação de Veículos</span>
     <span class="module-cols">Classification</span>
   </div>
   <div class="module-card">
-    <span class="module-badge" style="background:var(--purple-light);color:var(--purple);">Configuração do Sistema</span>
+    <span class="module-badge purple">Configuração do Sistema</span>
     <span class="module-cols">Configuration, HaenniScales, DeviceScales</span>
   </div>
   <div class="module-card">
-    <span class="module-badge" style="background:var(--amber-light);color:var(--amber);">Operações de Pesagem</span>
+    <span class="module-badge amber">Operações de Pesagem</span>
     <span class="module-cols">Operation, Weighing, Local</span>
   </div>
   <div class="module-card">
-    <span class="module-badge" style="background:var(--red-light);color:var(--red);">Exportação de Infrações</span>
+    <span class="module-badge red">Exportação de Infrações</span>
     <span class="module-cols">ExportBatch, SequentialInfraction, SequentialExport</span>
   </div>
 </div>
@@ -199,7 +212,7 @@
 <div class="container-wide page-break" id="diagrama">
   <h2 class="section-title">2. Diagrama de Relacionamentos</h2>
   <div class="diagram-container">
-    <svg viewBox="0 0 960 620" xmlns="http://www.w3.org/2000/svg" style="width:100%;min-width:650px;">
+    <svg viewBox="0 0 960 620" xmlns="http://www.w3.org/2000/svg" class="diagram-svg">
       <defs>
         <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" fill="#64748b"/></marker>
         <marker id="arrowBlue" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" fill="#3b82f6"/></marker>
@@ -331,9 +344,9 @@
     </svg>
   </div>
   <div class="diagram-legend">
-    <span style="display:flex;align-items:center;gap:6px;"><span class="legend-line" style="background:var(--slate-500);"></span> Linha sólida = referência embeddada</span>
-    <span style="display:flex;align-items:center;gap:6px;"><span class="legend-line" style="border-top:2px dashed var(--slate-500);background:transparent;"></span> Linha tracejada = FK por ID</span>
-    <span style="display:flex;align-items:center;gap:6px;"><span style="background:var(--slate-100);padding:2px 8px;border-radius:4px;font-size:0.75rem;font-weight:600;">embed</span> Objeto embeddado</span>
+    <span class="legend-item"><span class="legend-line solid"></span> Linha sólida = referência embeddada</span>
+    <span class="legend-item"><span class="legend-line dashed"></span> Linha tracejada = FK por ID</span>
+    <span class="legend-item"><span class="legend-embed">embed</span> Objeto embeddado</span>
   </div>
 </div>
 
@@ -799,7 +812,7 @@
 </div>
 
 <!-- Footer -->
-<div style="text-align:center;padding:40px 20px;color:var(--slate-400);font-size:0.8rem;border-top:1px solid var(--slate-200);margin-top:40px;">
+<div class="doc-footer">
   AxTon — Mapeamento do Banco de Dados &middot; Documento gerado em Março 2026 &middot; Versão 1.0
 </div>
 

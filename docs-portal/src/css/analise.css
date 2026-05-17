@@ -1,0 +1,527 @@
+.analise-page {
+  padding: 1rem 2rem;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+/* ── Tabs de navegação ── */
+.analise-tabs {
+  display: flex;
+  gap: 0;
+  border-bottom: 2px solid var(--ifm-color-emphasis-200);
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.analise-tab {
+  padding: 0.75rem 1.25rem;
+  cursor: pointer;
+  border: none;
+  background: none;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--ifm-color-emphasis-600);
+  border-bottom: 3px solid transparent;
+  transition: all 0.2s;
+}
+
+.analise-tab:hover {
+  color: var(--ifm-color-primary);
+  background: var(--ifm-color-emphasis-100);
+}
+
+.analise-tab.active {
+  color: var(--ifm-color-primary);
+  border-bottom-color: var(--ifm-color-primary);
+  font-weight: 600;
+}
+
+/* ── Filtros ── */
+.filtros-container {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 1.5rem;
+  padding: 1rem;
+  background: var(--ifm-color-emphasis-100);
+  border-radius: 8px;
+}
+
+.filtro-grupo {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.filtro-grupo label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: var(--ifm-color-emphasis-600);
+}
+
+.filtro-grupo select,
+.filtro-grupo input {
+  padding: 0.5rem 0.75rem;
+  border: 1px solid var(--ifm-color-emphasis-300);
+  border-radius: 6px;
+  font-size: 0.9rem;
+  background: var(--ifm-background-color);
+  color: var(--ifm-font-color-base);
+  min-width: 180px;
+}
+
+.filtro-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.35rem 0.75rem;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  cursor: pointer;
+  border: 1px solid var(--ifm-color-emphasis-300);
+  background: var(--ifm-background-color);
+  transition: all 0.2s;
+}
+
+.chip:hover {
+  border-color: var(--ifm-color-primary);
+}
+
+.chip.active {
+  background: var(--ifm-color-primary);
+  color: #fff;
+  border-color: var(--ifm-color-primary);
+}
+
+.chip-cor {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+/* ── Cards de sites ── */
+.sites-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.site-card {
+  border: 1px solid var(--ifm-color-emphasis-200);
+  border-radius: 10px;
+  padding: 1.25rem;
+  background: var(--ifm-background-color);
+  transition: all 0.2s;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+
+.site-card:hover {
+  border-color: var(--ifm-color-primary);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  transform: translateY(-2px);
+}
+
+.site-card.selected {
+  border-color: var(--ifm-color-primary);
+  border-width: 2px;
+  box-shadow: 0 0 0 3px rgba(var(--ifm-color-primary-rgb, 59, 130, 246), 0.1);
+}
+
+.site-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 0.75rem;
+}
+
+.site-card-nome {
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin: 0;
+}
+
+.site-card-badge {
+  font-size: 0.7rem;
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+  font-weight: 600;
+  color: #fff;
+}
+
+.site-card-meta {
+  display: flex;
+  gap: 1rem;
+  font-size: 0.8rem;
+  color: var(--ifm-color-emphasis-600);
+  margin-bottom: 0.5rem;
+}
+
+.site-card-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.5rem;
+  margin-top: 0.75rem;
+}
+
+.stat-item {
+  text-align: center;
+  padding: 0.4rem;
+  background: var(--ifm-color-emphasis-100);
+  border-radius: 6px;
+}
+
+.stat-valor {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--ifm-color-primary);
+}
+
+.stat-label {
+  font-size: 0.7rem;
+  color: var(--ifm-color-emphasis-600);
+}
+
+/* ── Tabela de comparação ── */
+.comparacao-container {
+  overflow-x: auto;
+  margin-bottom: 2rem;
+}
+
+.comparacao-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.85rem;
+}
+
+.comparacao-table th,
+.comparacao-table td {
+  padding: 0.6rem 0.8rem;
+  border: 1px solid var(--ifm-color-emphasis-200);
+  text-align: center;
+}
+
+.comparacao-table th {
+  background: var(--ifm-color-emphasis-100);
+  font-weight: 600;
+  position: sticky;
+  top: 0;
+}
+
+.comparacao-table th:first-child,
+.comparacao-table td:first-child {
+  text-align: left;
+  position: sticky;
+  left: 0;
+  background: var(--ifm-background-color);
+  font-weight: 500;
+  min-width: 200px;
+  z-index: 1;
+}
+
+.comparacao-table th:first-child {
+  z-index: 2;
+}
+
+.check-sim { color: #27ae60; font-weight: bold; }
+.check-nao { color: #e74c3c; }
+.check-parcial { color: #f39c12; }
+
+/* ── Detalhe do site ── */
+.site-detalhe {
+  background: var(--ifm-background-color);
+  border: 1px solid var(--ifm-color-emphasis-200);
+  border-radius: 10px;
+  padding: 2rem;
+  margin-bottom: 2rem;
+}
+
+.site-detalhe-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--ifm-color-emphasis-200);
+}
+
+.site-detalhe h2 {
+  margin: 0;
+}
+
+.detalhe-secoes {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+.detalhe-secao {
+  padding: 1rem;
+  background: var(--ifm-color-emphasis-100);
+  border-radius: 8px;
+}
+
+.detalhe-secao h4 {
+  margin: 0 0 0.75rem;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  color: var(--ifm-color-emphasis-600);
+}
+
+.detalhe-lista {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.detalhe-lista li {
+  padding: 0.3rem 0;
+  font-size: 0.85rem;
+  border-bottom: 1px solid var(--ifm-color-emphasis-200);
+}
+
+.detalhe-lista li:last-child {
+  border-bottom: none;
+}
+
+/* ── Módulo view ── */
+.modulo-card {
+  border: 1px solid var(--ifm-color-emphasis-200);
+  border-radius: 10px;
+  padding: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.modulo-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.modulo-header h3 {
+  margin: 0;
+}
+
+.modulo-icone {
+  font-size: 1.5rem;
+}
+
+.modulo-sites-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.modulo-site-tag {
+  font-size: 0.75rem;
+  padding: 0.25rem 0.6rem;
+  border-radius: 12px;
+  background: var(--ifm-color-emphasis-100);
+  border: 1px solid var(--ifm-color-emphasis-300);
+}
+
+.modulo-site-tag.ativo {
+  background: #d4edda;
+  border-color: #28a745;
+  color: #155724;
+}
+
+.modulo-site-tag.inativo {
+  background: #f8d7da;
+  border-color: #dc3545;
+  color: #721c24;
+}
+
+/* ── Barra de status ── */
+.status-bar {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.75rem 1rem;
+  background: var(--ifm-color-emphasis-100);
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  font-size: 0.85rem;
+}
+
+.status-count {
+  font-weight: 600;
+  color: var(--ifm-color-primary);
+}
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+  .analise-page { padding: 1rem; }
+  .sites-grid { grid-template-columns: 1fr; }
+  .filtros-container { flex-direction: column; }
+  .analise-tabs { overflow-x: auto; }
+  .detalhe-secoes { grid-template-columns: 1fr; }
+  .glossario-grid { grid-template-columns: 1fr; }
+  .glossario-tabela { font-size: 0.75rem; }
+  .glossario-tabela th, .glossario-tabela td { padding: 0.4rem 0.5rem; }
+}
+
+/* ═══════════════════════════════════════════════════════════════════════
+   Painel de Metodologia & Glossário
+   ═══════════════════════════════════════════════════════════════════════ */
+
+.metodologia-painel {
+  margin-bottom: 1.5rem;
+  border: 1px solid var(--ifm-color-emphasis-200);
+  border-radius: 10px;
+  overflow: hidden;
+  background: var(--ifm-background-color);
+}
+
+.metodologia-toggle {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 1.25rem;
+  border: none;
+  background: linear-gradient(135deg, var(--ifm-color-emphasis-100), var(--ifm-background-color));
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--ifm-font-color-base);
+  transition: background 0.2s;
+}
+
+.metodologia-toggle:hover {
+  background: var(--ifm-color-emphasis-100);
+}
+
+.metodologia-seta {
+  transition: transform 0.3s;
+  font-size: 0.8rem;
+}
+
+.metodologia-seta.aberto {
+  transform: rotate(180deg);
+}
+
+.metodologia-conteudo {
+  padding: 0 1.5rem 1.5rem;
+  animation: fadeInMetodologia 0.3s ease;
+}
+
+@keyframes fadeInMetodologia {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.metodologia-secao {
+  margin-top: 1.5rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid var(--ifm-color-emphasis-200);
+}
+
+.metodologia-secao:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.metodologia-secao h3 {
+  font-size: 1.05rem;
+  margin-bottom: 0.75rem;
+}
+
+.metodologia-secao p {
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: var(--ifm-color-emphasis-700);
+}
+
+.metodologia-secao ul {
+  padding-left: 1.25rem;
+  font-size: 0.88rem;
+  line-height: 1.8;
+}
+
+/* ── Glossário grid ── */
+.glossario-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1rem;
+}
+
+.glossario-item {
+  background: var(--ifm-color-emphasis-100);
+  border-radius: 8px;
+  padding: 1rem;
+}
+
+.glossario-item strong {
+  display: block;
+  margin-bottom: 0.4rem;
+  font-size: 0.95rem;
+}
+
+.glossario-item p {
+  margin: 0;
+  font-size: 0.83rem;
+  color: var(--ifm-color-emphasis-600);
+}
+
+/* ── Glossário tabela ── */
+.glossario-tabela {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.83rem;
+  margin-top: 0.5rem;
+}
+
+.glossario-tabela th {
+  background: var(--ifm-color-emphasis-100);
+  font-weight: 600;
+  text-align: left;
+  padding: 0.6rem 0.8rem;
+  border-bottom: 2px solid var(--ifm-color-emphasis-300);
+  white-space: nowrap;
+}
+
+.glossario-tabela td {
+  padding: 0.6rem 0.8rem;
+  border-bottom: 1px solid var(--ifm-color-emphasis-200);
+  vertical-align: top;
+}
+
+.glossario-tabela tr:last-child td {
+  border-bottom: none;
+}
+
+.glossario-tabela tr:hover td {
+  background: var(--ifm-color-emphasis-100);
+}
+
+.glossario-tabela code {
+  font-size: 0.78rem;
+  padding: 0.15rem 0.3rem;
+  background: var(--ifm-color-emphasis-200);
+  border-radius: 3px;
+}
+
+/* ── Descrição contextual por aba ── */
+.descricao-aba {
+  padding: 0.75rem 1rem;
+  margin-bottom: 1rem;
+  background: linear-gradient(90deg, #e8f4fd, var(--ifm-background-color));
+  border-left: 4px solid var(--ifm-color-primary);
+  border-radius: 0 8px 8px 0;
+  font-size: 0.85rem;
+  color: var(--ifm-color-emphasis-700);
+  line-height: 1.5;
+}

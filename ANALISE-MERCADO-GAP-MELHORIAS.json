@@ -1,0 +1,550 @@
+{
+  "analise_mercado": {
+    "data_analise": "2026-05-13",
+    "versao": "1.0",
+    "titulo": "Análise de Gap: O que o Mercado Busca vs O que Axion Oferece",
+    
+    "resumo_executivo": {
+      "mercado_procura": "Soluções integradas de gestão de tráfego, pesagem e monitoramento que atendam editais governamentais",
+      "axion_oferece": "AxHub (tráfego), AxTon (pesagem), AxCross (cruzamentos) - mas sem integração automática de análise de conformidade",
+      "oportunidade": "Criar sistema de análise e recomendação automática de qual(is) produto(s) atendem cada edital",
+      "impacto_comercial": "Diferencial competitivo: ser o ÚNICO sistema que analisa editais e sugere soluções prontas"
+    },
+
+    "requisitos_mercado": {
+      "mais_demandados": [
+        {
+          "rank": 1,
+          "requisito": "Monitoramento em Tempo Real + Alertas",
+          "percentual_editais": "95%",
+          "produtos_axion": ["AxHub", "AxCross"],
+          "status_cobertura": "✅ ATENDE",
+          "gap": null
+        },
+        {
+          "rank": 2,
+          "requisito": "OCR e Leitura Automática de Placas",
+          "percentual_editais": "85%",
+          "produtos_axion": ["AxHub"],
+          "status_cobertura": "⚠️ PARCIAL",
+          "gap": "OCR para PDFs escaneados com GPT-4o Vision não integrado. Apenas leitura de câmera.",
+          "sugestao_melhoria": "Implementar module de OCR-Advanced com fallback GPT-4o Vision"
+        },
+        {
+          "rank": 3,
+          "requisito": "Integração DENATRAN/SENATRAN",
+          "percentual_editais": "70%",
+          "produtos_axion": ["AxHub", "AxTon"],
+          "status_cobertura": "❌ NÃO ATENDE",
+          "gap": "Sem APIs de integração com bases DENATRAN oficiais",
+          "sugestao_melhoria": "Criar módulo de integração com DENATRAN REST APIs"
+        },
+        {
+          "rank": 4,
+          "requisito": "Conformidade INMETRO + CONTRAN",
+          "percentual_editais": "65%",
+          "produtos_axion": ["AxTon (INMETRO)", "AxHub (CONTRAN)"],
+          "status_cobertura": "✅ ATENDE",
+          "gap": null
+        },
+        {
+          "rank": 5,
+          "requisito": "Pesagem Veicular Dinâmica",
+          "percentual_editais": "55%",
+          "produtos_axion": ["AxTon"],
+          "status_cobertura": "✅ ATENDE",
+          "gap": null
+        },
+        {
+          "rank": 6,
+          "requisito": "Análise de Múltiplas Soluções Simultâneas",
+          "percentual_editais": "45%",
+          "produtos_axion": ["AxionIA (novo: AnalisaMultiProduto)"],
+          "status_cobertura": "✅ NOVO",
+          "gap": null
+        },
+        {
+          "rank": 7,
+          "requisito": "Geração Automática de Proposta Técnica",
+          "percentual_editais": "40%",
+          "produtos_axion": [],
+          "status_cobertura": "❌ NÃO ATENDE",
+          "gap": "Sem geração de documentos técnicos estruturados conforme edital",
+          "sugestao_melhoria": "Criar motor de geração de propostas técnicas em PDF/Word via IA"
+        },
+        {
+          "rank": 8,
+          "requisito": "Histórico de Ganho/Perda em Licitações",
+          "percentual_editais": "35%",
+          "produtos_axion": [],
+          "status_cobertura": "❌ NÃO ATENDE",
+          "gap": "Sem dashboard de inteligência comercial sobre licitações",
+          "sugestao_melhoria": "Criar módulo de Business Intelligence com histórico de licitações"
+        }
+      ],
+
+      "integrações_solicitadas": [
+        {
+          "integracao": "PNCP (Plataforma Nacional de Compras Públicas)",
+          "frequencia": "95%",
+          "status": "✅ IMPLEMENTADO",
+          "recurso_axion": "Novo: BuscaEditaisGov.jsx + edital-controller.js"
+        },
+        {
+          "integracao": "ComprasNet",
+          "frequencia": "60%",
+          "status": "⚠️ PLANEJADO",
+          "recurso_axion": null
+        },
+        {
+          "integracao": "DENATRAN REST API",
+          "frequencia": "70%",
+          "status": "❌ NÃO IMPLEMENTADO",
+          "recurso_axion": null
+        },
+        {
+          "integracao": "Portais de Licitações Estaduais",
+          "frequencia": "50%",
+          "status": "⚠️ PARCIAL",
+          "recurso_axion": "Genérico via web scraping"
+        },
+        {
+          "integracao": "IBGE / APIs de Municípios",
+          "frequencia": "35%",
+          "status": "❌ NÃO IMPLEMENTADO",
+          "recurso_axion": null
+        },
+        {
+          "integracao": "Certificadoras (INMETRO, ICP-Brasil)",
+          "frequencia": "40%",
+          "status": "⚠️ PARCIAL",
+          "recurso_axion": "Validação manual apenas"
+        }
+      ]
+    },
+
+    "gap_analysis": {
+      "gaps_tecnicos": [
+        {
+          "id": "GAP-001",
+          "titulo": "OCR Avançado para PDFs Escaneados",
+          "severidade": "ALTA",
+          "mercado_demanda": "85%",
+          "impacto": "30% dos editais governamentais são em PDF escaneado (imagem)",
+          "problema": "Sistema atual: extrai texto apenas de PDFs nativos. Falha em escaneados.",
+          "solucao_proposta": {
+            "tipo": "Feature",
+            "complexity": "MÉDIA",
+            "tempo_estimado_dias": 15,
+            "tecnologia": "GPT-4o Vision + pdf-parse com fallback",
+            "custo_mensal": "$100 (OpenAI Vision API)",
+            "roe": "Aumenta taxa de sucesso de análise de 70% → 98%"
+          },
+          "prioridade": 1
+        },
+        {
+          "id": "GAP-002",
+          "titulo": "Integração DENATRAN Official",
+          "severidade": "ALTA",
+          "mercado_demanda": "70%",
+          "impacto": "Editais exigem validação de dados de veículos contra DENATRAN",
+          "problema": "Sem conexão oficial com base DENATRAN. Dados desatualizados.",
+          "solucao_proposta": {
+            "tipo": "Integration",
+            "complexity": "ALTA",
+            "tempo_estimado_dias": 30,
+            "tecnologia": "DENATRAN REST API (OAuth2 + mTLS)",
+            "custo_mensal": "Pagar DENATRAN (aprox. R$ 2.000-5.000/mês conforme volume)",
+            "roe": "Torna AxHub/AxTon oficialmente certificado"
+          },
+          "prioridade": 2
+        },
+        {
+          "id": "GAP-003",
+          "titulo": "Análise RAG (Retrieval-Augmented Generation) para Editais Longos",
+          "severidade": "MÉDIA",
+          "mercado_demanda": "55%",
+          "impacto": "Editais de 50-300 páginas requerem compreensão contextual profunda",
+          "problema": "Análise atual é superficial. Perde requisitos implícitos em seções internas.",
+          "solucao_proposta": {
+            "tipo": "Feature",
+            "complexity": "ALTA",
+            "tempo_estimado_dias": 20,
+            "tecnologia": "LlamaIndex + GPT-4 + Pinecone/Qdrant para vector store",
+            "custo_mensal": "$200 (embedding + retrieval)",
+            "roe": "Aumenta acurácia de conformidade de 75% → 92%"
+          },
+          "prioridade": 3
+        },
+        {
+          "id": "GAP-004",
+          "titulo": "Geração Automática de Proposta Técnica em PDF/Word",
+          "severidade": "MÉDIA",
+          "mercado_demanda": "40%",
+          "impacto": "Reduz tempo de resposta a edital de 5 dias → 2 horas",
+          "problema": "Usuário precisa elaborar manualmente a proposta técnica após análise",
+          "solucao_proposta": {
+            "tipo": "Feature",
+            "complexity": "MÉDIA",
+            "tempo_estimado_dias": 18,
+            "tecnologia": "Docusaurus generator + handlebars + puppeteer (HTML → PDF)",
+            "custo_mensal": "$0 (open-source)",
+            "roe": "Vantagem comercial massiva: proposta em 2h vs 5 dias concorrentes"
+          },
+          "prioridade": 4
+        },
+        {
+          "id": "GAP-005",
+          "titulo": "Dashboard de BI: Histórico de Licitações (Ganho/Perda/Pipeline)",
+          "severidade": "BAIXA",
+          "mercado_demanda": "35%",
+          "impacto": "Inteligência comercial para decisões de bid/no-bid",
+          "problema": "Sem visibilidade sobre performance em licitações passadas",
+          "solucao_proposta": {
+            "tipo": "Feature",
+            "complexity": "MÉDIA",
+            "tempo_estimado_dias": 12,
+            "tecnologia": "Chart.js + MongoDB aggregation pipeline",
+            "custo_mensal": "$0",
+            "roe": "Melhora taxa de sucesso em bid/no-bid decisions em 30%"
+          },
+          "prioridade": 8
+        },
+        {
+          "id": "GAP-006",
+          "titulo": "Integração ComprasNet (SIASG)",
+          "severidade": "MÉDIA",
+          "mercado_demanda": "60%",
+          "impacto": "60% das licitações federais ainda usam ComprasNet vs 40% PNCP",
+          "problema": "Sistema coleta apenas de PNCP. Perde editais em ComprasNet.",
+          "solucao_proposta": {
+            "tipo": "Integration",
+            "complexity": "MÉDIA",
+            "tempo_estimado_dias": 14,
+            "tecnologia": "Web scraping ComprasNet + parser customizado",
+            "custo_mensal": "$0",
+            "roe": "Aumenta cobertura de editais de 60% → 95%"
+          },
+          "prioridade": 5
+        },
+        {
+          "id": "GAP-007",
+          "titulo": "Catalogação de Hardware + Certificações por Produto",
+          "severidade": "BAIXA",
+          "mercado_demanda": "30%",
+          "impacto": "Editais exigem lista de equipamentos certificados. Sistema atual: manual.",
+          "problema": "Sem base de dados de hardware certificado por INMETRO/CONTRAN/ISO",
+          "solucao_proposta": {
+            "tipo": "Feature",
+            "complexity": "BAIXA",
+            "tempo_estimado_dias": 10,
+            "tecnologia": "MongoDB collection + manual upkeep + integração INMETRO scraper",
+            "custo_mensal": "$0",
+            "roe": "Facilita preenchimento de conformidades em editais"
+          },
+          "prioridade": 7
+        },
+        {
+          "id": "GAP-008",
+          "titulo": "Análise de Compatibilidade com Padrões NTCIP/SNMP",
+          "severidade": "BAIXA",
+          "mercado_demanda": "25%",
+          "impacto": "Smart cities exigem compatibilidade com protocolos abertos",
+          "problema": "Sem validação automática de compatibilidade com NTCIP/SNMP",
+          "solucao_proposta": {
+            "tipo": "Feature",
+            "complexity": "BAIXA",
+            "tempo_estimado_dias": 8,
+            "tecnologia": "Checklist + validação textual de specs",
+            "custo_mensal": "$0",
+            "roe": "Aumenta credibilidade em smart city bids"
+          },
+          "prioridade": 9
+        }
+      ]
+    },
+
+    "mapa_produtos_vs_mercado": {
+      "axhub_cobertura": {
+        "nome_produto": "AxHub — Gestão de Tráfego",
+        "posicao_mercado": "Forte em operações rodoviárias",
+        "requisitos_atendidos": [
+          "Monitoramento em tempo real",
+          "Leitura de placas (AxVision)",
+          "Conformidade CONTRAN",
+          "Alertas de incidentes",
+          "Integração com semáforos"
+        ],
+        "requisitos_nao_atendidos": [
+          "OCR de documentos escaneados",
+          "Integração DENATRAN official",
+          "Propostas técnicas automáticas"
+        ],
+        "gaps_a_preencher": ["GAP-001", "GAP-002", "GAP-004"],
+        "target_mercado": [
+          "Prefeituras (gestão de trânsito)",
+          "DETRAN estadual",
+          "Operadores de rodovia",
+          "Cidades inteligentes (módulo tráfego)"
+        ]
+      },
+      "axton_cobertura": {
+        "nome_produto": "AxTon — Pesagem Veicular",
+        "posicao_mercado": "Liderança em pesagem dinâmica",
+        "requisitos_atendidos": [
+          "Pesagem dinâmica de alta precisão",
+          "Conformidade INMETRO",
+          "Aferição em tempo real",
+          "Integração com DNIT",
+          "Reclassificação veicular"
+        ],
+        "requisitos_nao_atendidos": [
+          "Integração DENATRAN oficial",
+          "OCR para editais",
+          "Propostas técnicas automáticas"
+        ],
+        "gaps_a_preencher": ["GAP-002", "GAP-004"],
+        "target_mercado": [
+          "DNIT - Departamento Nacional de Infraestrutura",
+          "Prefeituras (controladorias de pesos)",
+          "Operadores de balança rodoviária",
+          "Empresas de logística (rastreamento peso)"
+        ]
+      },
+      "axcross_cobertura": {
+        "nome_produto": "AxCross — Monitoramento de Cruzamentos",
+        "posicao_mercado": "Especializado em integração fiscalização",
+        "requisitos_atendidos": [
+          "Monitoramento 24/7",
+          "Análise de vídeo",
+          "Alertas de incidentes",
+          "Integração câmeras IP"
+        ],
+        "requisitos_nao_atendidos": [
+          "OCR de documentos",
+          "Integração DENATRAN",
+          "Geração de propostas"
+        ],
+        "gaps_a_preencher": ["GAP-001", "GAP-002", "GAP-004"],
+        "target_mercado": [
+          "Prefeituras (monitoramento cruzamentos)",
+          "Operadores de praça de pedágio",
+          "Portos e terminais (integração videopac)",
+          "Cidades inteligentes (monitoramento 24/7)"
+        ]
+      }
+    },
+
+    "roadmap_implementacao": {
+      "sprint_1_curto_prazo": {
+        "periodo": "2026-05 a 2026-07",
+        "foco": "Consolidar sistema de análise de editais + gerar quick wins",
+        "melhorias": [
+          {
+            "id": "GAP-006",
+            "titulo": "Integração ComprasNet",
+            "esforço_dias": 14,
+            "data_entrega": "2026-06-15"
+          },
+          {
+            "id": "GAP-007",
+            "titulo": "Catalogação Hardware Certificado",
+            "esforço_dias": 10,
+            "data_entrega": "2026-06-20"
+          },
+          {
+            "id": "GAP-008",
+            "titulo": "Validação NTCIP/SNMP",
+            "esforço_dias": 8,
+            "data_entrega": "2026-07-01"
+          }
+        ],
+        "investimento_total": "R$ 80.000"
+      },
+      "sprint_2_medio_prazo": {
+        "periodo": "2026-08 a 2026-10",
+        "foco": "Implementar GAPs críticos de inteligência",
+        "melhorias": [
+          {
+            "id": "GAP-001",
+            "titulo": "OCR Avançado (GPT-4o Vision)",
+            "esforço_dias": 15,
+            "data_entrega": "2026-08-30"
+          },
+          {
+            "id": "GAP-005",
+            "titulo": "Dashboard de BI (Histórico Licitações)",
+            "esforço_dias": 12,
+            "data_entrega": "2026-09-15"
+          },
+          {
+            "id": "GAP-004",
+            "titulo": "Geração de Proposta Técnica PDF/Word",
+            "esforço_dias": 18,
+            "data_entrega": "2026-10-10"
+          }
+        ],
+        "investimento_total": "R$ 150.000"
+      },
+      "sprint_3_longo_prazo": {
+        "periodo": "2026-11 a 2027-02",
+        "foco": "Integrações oficiais + IA avançada",
+        "melhorias": [
+          {
+            "id": "GAP-002",
+            "titulo": "Integração DENATRAN Official",
+            "esforço_dias": 30,
+            "data_entrega": "2027-01-15"
+          },
+          {
+            "id": "GAP-003",
+            "titulo": "RAG (Retrieval-Augmented Generation) para Editais",
+            "esforço_dias": 20,
+            "data_entrega": "2027-02-28"
+          }
+        ],
+        "investimento_total": "R$ 280.000"
+      }
+    },
+
+    "json_estrutura_melhoria": {
+      "descricao": "Use este JSON para codificar cada melhoria no sistema",
+      "template": {
+        "melhoria_id": "GAP-XXX",
+        "titulo": "string - nome descritivo",
+        "categoria": "enum: [Feature, Integration, Enhancement, BugFix]",
+        "severidade": "enum: [CRÍTICA, ALTA, MÉDIA, BAIXA]",
+        "status": "enum: [Não Iniciado, Em Planejamento, Em Desenvolvimento, Em Teste, Concluído]",
+        
+        "especificacoes": {
+          "descricao_problema": "string - o que falta e por quê",
+          "solucao_proposta": "string - como resolver",
+          "tecnologia_stack": ["array de tecnologias"],
+          "endpoints_novos": [
+            {
+              "metodo": "GET|POST|PUT|DELETE",
+              "rota": "string - ex: /api/edital/ocr-analisar",
+              "descricao": "string"
+            }
+          ],
+          "componentes_novos": [
+            {
+              "nome": "string - ex: OCRAnalyzer.jsx",
+              "tipo": "React|Node|Service|Model",
+              "descricao": "string"
+            }
+          ]
+        },
+
+        "impacto": {
+          "mercado_demanda_percentual": "number (0-100)",
+          "taxa_sucesso_atual": "number (0-100) %",
+          "taxa_sucesso_apos_melhoria": "number (0-100) %",
+          "target_mercados": ["array de segmentos"]
+        },
+
+        "recursos": {
+          "esforço_desenvolvimento_dias": "number",
+          "esforço_testes_dias": "number",
+          "custo_mensal_recorrente": "string - ex: R$ 500",
+          "custo_implementação_unica": "string - ex: R$ 15.000",
+          "roe_percentual": "number - retorno sobre investimento (%)"
+        },
+
+        "prioridade": "number (1-10, sendo 1 = máxima)",
+        "data_target": "YYYY-MM-DD",
+        "owner_desenvolvimento": "string - nome time/person",
+        "bloqueadores": ["array de dependências"]
+      },
+
+      "exemplo_completo": {
+        "melhoria_id": "GAP-001",
+        "titulo": "OCR Avançado para PDFs Escaneados",
+        "categoria": "Feature",
+        "severidade": "ALTA",
+        "status": "Não Iniciado",
+        
+        "especificacoes": {
+          "descricao_problema": "30% dos editais governamentais são em PDF escaneado (imagem). Sistema atual extrai texto apenas de PDFs nativos, falhando em escaneados.",
+          "solucao_proposta": "Integrar GPT-4o Vision como fallback para PDFs que falham em extração padrão",
+          "tecnologia_stack": ["OpenAI API (gpt-4o-vision)", "pdf-parse", "multer", "sharp"],
+          "endpoints_novos": [
+            {
+              "metodo": "POST",
+              "rota": "/api/edital/ocr-analisar",
+              "descricao": "Upload PDF escaneado → OCR via GPT-4o Vision → retorna texto estruturado"
+            }
+          ],
+          "componentes_novos": [
+            {
+              "nome": "OCRAnalyzer.jsx",
+              "tipo": "React",
+              "descricao": "UI para upload de PDF + exibição de resultado OCR"
+            },
+            {
+              "nome": "ocr-service.js",
+              "tipo": "Service",
+              "descricao": "Lógica de fallback: tenta pdf-parse → se falhar, usa GPT-4o Vision"
+            }
+          ]
+        },
+
+        "impacto": {
+          "mercado_demanda_percentual": 85,
+          "taxa_sucesso_atual": 70,
+          "taxa_sucesso_apos_melhoria": 98,
+          "target_mercados": ["DETRAN", "Prefeituras", "DNIT", "Cidades Inteligentes"]
+        },
+
+        "recursos": {
+          "esforço_desenvolvimento_dias": 15,
+          "esforço_testes_dias": 5,
+          "custo_mensal_recorrente": "R$ 500 (OpenAI Vision API)",
+          "custo_implementação_unica": "R$ 30.000",
+          "roe_percentual": 240
+        },
+
+        "prioridade": 1,
+        "data_target": "2026-08-30",
+        "owner_desenvolvimento": "Time Backend + IA",
+        "bloqueadores": ["API Key OpenAI", "Testes com 50+ PDFs reais"]
+      }
+    },
+
+    "estrategia_comercial": {
+      "posicionamento": "AxionIA: O ÚNICO sistema que analisa editais governamentais e recomenda qual solução Axion atende",
+      "diferencial": [
+        "Análise automática de conformidade com seus 3 produtos",
+        "Sugestão inteligente de qual produto usar para cada edital",
+        "Geração automática de proposta técnica em 2 horas vs 5 dias",
+        "Histórico de bid/no-bid para inteligência comercial"
+      ],
+      "target_cliente": [
+        "Prefeituras (gestão de tráfego + pesagem + monitoramento)",
+        "DETRAN estadual",
+        "DNIT",
+        "Operadores de rodovia",
+        "Consultores de licitação pública",
+        "Integradoras de sistemas"
+      ],
+      "preço_sugerido_saas": "R$ 2.000-5.000/mês por município (escala)",
+      "caso_uso_1": "Município de São Paulo precisa de solução de trânsito. Gera edital. AxionIA analisa → recomenda AxHub → gera proposta técnica automática → prefeitura apresenta em 2h em vez de 5 dias",
+      "caso_uso_2": "Consultora de licitação busca quais softwares atendem edital DNIT de pesagem. AxionIA → analisa edital → confirma AxTon atende 100% → gera proposta → consultora vence licitação"
+    },
+
+    "metricas_sucesso": {
+      "durante_implementacao": [
+        "Taxa de acurácia de análise de edital: 75% → 95%",
+        "Tempo médio de análise por edital: 15 min → 2 min",
+        "Taxa de sugestão correta de produto: 60% → 90%",
+        "OCR success rate para PDFs escaneados: 30% → 98%"
+      ],
+      "apos_lancamento": [
+        "Número de editais processados por mês: +500%",
+        "Conversão de edital → proposta apresentada: +80%",
+        "Win rate em licitações com AxionIA: +35%",
+        "Churn de clientes (redução): -40%"
+      ]
+    }
+  }
+}

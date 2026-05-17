@@ -1,0 +1,652 @@
+/**
+ * AnaliseEditalAvancada.jsx — Análise Completa de Editais
+ * Upload de edital → decomposição categórica → de-para → concorrentes → mercado → prompt adequação
+ */
+
+import React, { useState, useEffect } from "react";
+import { api } from "../services/api";
+
+const TABS = [
+  { id: "input", label: "📋 Informar Edital", icon: "📋" },
+  { id: "categorias", label: "📊 Decomposição", icon: "📊" },
+  { id: "depara", label: "🔄 De-Para", icon: "🔄" },
+  { id: "concorrentes", label: "🏆 Concorrentes", icon: "🏆" },
+  { id: "mercado", label: "🌐 Mercado", icon: "🌐" },
+  { id: "adequacao", label: "🔧 Adequação", icon: "🔧" },
+  { id: "resumo", label: "📈 Resumo", icon: "📈" },
+];
+
+export default function AnaliseEditalAvancada() {
+  const [tab, setTab] = useState("input");
+  const [textoEdital, setTextoEdital] = useState("");
+  const [titulo, setTitulo] = useState("");
+  const [orgao, setOrgao] = useState("");
+  const [regiao, setRegiao] = useState("");
+  const [resultado, setResultado] = useState(null);
+  const [carregando, setCarregando] = useState(false);
+  const [uploadando, setUploadando] = useState(false);
+  const [progresso, setProgresso] = useState("");
+  const [erro, setErro] = useState("");
+  const [arquivoInfo, setArquivoInfo] = useState(null);
+  const [sites, setSites] = useState(null);
+  const [produtoSelecionado, setProdutoSelecionado] = useState("");
+  const [siteSelecionado, setSiteSelecionado] = useState("");
+
+  // Carregar catálogo de sites ao montar
+  useEffect(() => {
+    api.get("/sites").then(r => setSites(r.data)).catch(() => {});
+  }, []);
+
+  // Upload de arquivo → extrair texto → preencher textarea
+  const handleUpload = async (e) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    setUploadando(true);
+    setErro("");
+    setProgresso(`📂 Extraindo texto de "${file.name}"...`);
+
+    try {
+      const formData = new FormData();
+      formData.append("arquivo", file);
+
+      const response = await api.post("/edital/upload", formData, {
+        headers: { "Content-Type": "multipart/form-data" },
+      });
+
+      const { texto, arquivo, caracteres, linhas } = response.data;
+      setTextoEdital(texto);
+      setArquivoInfo({ arquivo, caracteres, linhas });
+      setProgresso("");
+
+      // Tentar extrair título/órgão do texto
+      const primeiraLinha = texto.split("\n").find(l => l.trim().length > 10);
+      if (primeiraLinha && !titulo) {
+        const match = primeiraLinha.match(/pregão|edital|concorrência|tomada|convite|rdc/i);
+        if (match) setTitulo(primeiraLinha.trim().slice(0, 120));
+      }
+    } catch (err) {
+      setErro(err.response?.data?.erro || `Erro ao processar "${file.name}"`);
+      setProgresso("");
+    } finally {
+      setUploadando(false);
+    }
+  };
+
+  const handleAnalisar = async () => {
+    if (textoEdital.trim().length < 50) {
+      setErro("Cole o texto do edital (mínimo 50 caracteres)");
+      return;
+    }
+
+    setCarregando(true);
+    setErro("");
+    setProgresso("🔍 Processando análise completa do edital...");
+
+    try {
+      const response = await api.post("/edital/analise-avancada", {
+        textoEdital,
+        titulo: titulo || "Edital Informado",
+        orgao: orgao || "Não identificado",
+        regiao: regiao || "Não informada",
+        siteId: siteSelecionado || null,
+        incluirConcorrentes: true,
+        incluirMercado: true,
+        incluirPromptAdequacao: true,
+      });
+
+      setResultado(response.data);
+      setTab("categorias");
+      setProgresso("");
+    } catch (err) {
+      setErro(err.response?.data?.erro || err.message);
+    } finally {
+      setCarregando(false);
+    }
+  };
+
+  const STATUS_COLORS = {
+    atende: { bg: "#065f4620", color: "#10b981", label: "✅ Atende" },
+    parcial: { bg: "#92400e20", color: "#f59e0b", label: "⚠️ Parcial" },
+    nao_atende: { bg: "#7f1d1d20", color: "#ef4444", label: "❌ Não Atende" },
+    "n/a": { bg: "#1e293b", color: "#64748b", label: "—" },
+  };
+
+  return (
+    <div style={{ padding: "0 1.5rem 2rem" }}>
+      {/* Tabs */}
+      <div style={{ display: "flex", gap: "0.3rem", flexWrap: "wrap", marginBottom: "1.2rem", borderBottom: "1px solid rgba(255,255,255,0.08)", paddingBottom: "0.8rem" }}>
+        {TABS.map(t => (
+          <button
+            key={t.id}
+            onClick={() => (t.id === "input" || resultado) && setTab(t.id)}
+            disabled={t.id !== "input" && !resultado}
+            style={{
+              padding: "0.5rem 1rem", borderRadius: 8, border: "none",
+              background: tab === t.id ? "rgba(99,102,241,0.25)" : "rgba(255,255,255,0.04)",
+              color: tab === t.id ? "#a5b4fc" : t.id !== "input" && !resultado ? "#334155" : "#94a3b8",
+              cursor: t.id === "input" || resultado ? "pointer" : "not-allowed",
+              fontSize: "0.82rem", fontWeight: 600, transition: "all 0.2s",
+            }}
+          >
+            {t.label}
+          </button>
+        ))}
+      </div>
+
+      {/* ═══ TAB INPUT ═══ */}
+      {tab === "input" && (
+        <div style={{ maxWidth: 800 }}>
+          <div style={{ marginBottom: "1rem" }}>
+            <label style={{ display: "block", color: "#94a3b8", fontSize: "0.82rem", marginBottom: 4, fontWeight: 600 }}>Título do Edital</label>
+            <input
+              type="text" value={titulo} onChange={e => setTitulo(e.target.value)}
+              placeholder="Ex: Pregão Eletrônico nº 001/2026 - Fiscalização Eletrônica"
+              style={{ width: "100%", padding: "0.6rem 1rem", background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.1)", borderRadius: 8, color: "#e2e8f0", fontSize: "0.9rem" }}
+            />
+          </div>
+          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1rem", marginBottom: "1rem" }}>
+            <div>
+              <label style={{ display: "block", color: "#94a3b8", fontSize: "0.82rem", marginBottom: 4, fontWeight: 600 }}>Órgão Licitante</label>
+              <input
+                type="text" value={orgao} onChange={e => setOrgao(e.target.value)}
+                placeholder="Ex: Prefeitura de Aparecida de Goiânia"
+                style={{ width: "100%", padding: "0.6rem 1rem", background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.1)", borderRadius: 8, color: "#e2e8f0", fontSize: "0.9rem" }}
+              />
+            </div>
+            <div>
+              <label style={{ display: "block", color: "#94a3b8", fontSize: "0.82rem", marginBottom: 4, fontWeight: 600 }}>Região</label>
+              <input
+                type="text" value={regiao} onChange={e => setRegiao(e.target.value)}
+                placeholder="Ex: GO/Aparecida de Goiânia"
+                style={{ width: "100%", padding: "0.6rem 1rem", background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.1)", borderRadius: 8, color: "#e2e8f0", fontSize: "0.9rem" }}
+              />
+            </div>
+          </div>
+
+          {/* ─── SELETOR DE SISTEMA / SITE ─── */}
+          {sites && (
+            <div style={{ marginBottom: "1rem", background: "rgba(99,102,241,0.06)", borderRadius: 12, padding: "1rem", border: "1px solid rgba(99,102,241,0.15)" }}>
+              <label style={{ display: "block", color: "#a5b4fc", fontSize: "0.82rem", marginBottom: 8, fontWeight: 700 }}>
+                🖥️ Validar contra qual sistema?
+              </label>
+              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "0.8rem" }}>
+                <div>
+                  <label style={{ display: "block", color: "#94a3b8", fontSize: "0.75rem", marginBottom: 4 }}>Produto</label>
+                  <select
+                    value={produtoSelecionado}
+                    onChange={e => { setProdutoSelecionado(e.target.value); setSiteSelecionado(""); }}
+                    style={{ width: "100%", padding: "0.55rem 0.8rem", background: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.12)", borderRadius: 8, color: "#e2e8f0", fontSize: "0.85rem" }}
+                  >
+                    <option value="">— Selecionar produto —</option>
+                    {Object.entries(sites).filter(([k]) => k !== "outros").map(([key, prod]) => (
+                      <option key={key} value={key}>{prod.icon} {prod.label} — {prod.descricao}</option>
+                    ))}
+                  </select>
+                </div>
+                <div>
+                  <label style={{ display: "block", color: "#94a3b8", fontSize: "0.75rem", marginBottom: 4 }}>Instância / Site</label>
+                  <select
+                    value={siteSelecionado}
+                    onChange={e => setSiteSelecionado(e.target.value)}
+                    disabled={!produtoSelecionado}
+                    style={{ width: "100%", padding: "0.55rem 0.8rem", background: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.12)", borderRadius: 8, color: produtoSelecionado ? "#e2e8f0" : "#475569", fontSize: "0.85rem" }}
+                  >
+                    <option value="">— Selecionar site —</option>
+                    {produtoSelecionado && sites[produtoSelecionado]?.sites.map(s => (
+                      <option key={s.id} value={s.id}>
+                        {s.nome} ({s.regiao}) {s.tipo === "homologacao" ? "🧪" : "🟢"}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+              </div>
+              {siteSelecionado && sites[produtoSelecionado] && (() => {
+                const site = sites[produtoSelecionado].sites.find(s => s.id === siteSelecionado);
+                return site ? (
+                  <div style={{ marginTop: 8, padding: "0.5rem 0.8rem", background: "rgba(16,185,129,0.08)", borderRadius: 8, fontSize: "0.78rem", color: "#6ee7b7" }}>
+                    ✅ Análise será validada contra: <strong>{sites[produtoSelecionado].icon} {site.nome}</strong> — <a href={site.url} target="_blank" rel="noopener noreferrer" style={{ color: "#a5b4fc" }}>{site.url}</a>
+                  </div>
+                ) : null;
+              })()}
+            </div>
+          )}
+
+          <div style={{ marginBottom: "1rem" }}>
+            <label style={{ display: "block", color: "#94a3b8", fontSize: "0.82rem", marginBottom: 4, fontWeight: 600 }}>
+              📂 Upload do Edital (PDF, DOCX, TXT)
+            </label>
+            <div style={{
+              border: "2px dashed rgba(99,102,241,0.3)", borderRadius: 12, padding: "1.2rem",
+              background: "rgba(99,102,241,0.04)", textAlign: "center", position: "relative",
+              transition: "all 0.2s",
+            }}>
+              <input
+                type="file"
+                accept=".pdf,.docx,.doc,.txt,.xlsx"
+                onChange={handleUpload}
+                disabled={uploadando}
+                style={{ position: "absolute", inset: 0, opacity: 0, cursor: "pointer" }}
+              />
+              {uploadando ? (
+                <div style={{ color: "#a5b4fc", fontSize: "0.9rem" }}>⏳ Extraindo texto do arquivo...</div>
+              ) : arquivoInfo ? (
+                <div>
+                  <div style={{ color: "#10b981", fontSize: "0.9rem", fontWeight: 700 }}>✅ {arquivoInfo.arquivo}</div>
+                  <div style={{ color: "#64748b", fontSize: "0.78rem", marginTop: 4 }}>
+                    {arquivoInfo.caracteres.toLocaleString()} caracteres • {arquivoInfo.linhas} linhas extraídas
+                  </div>
+                  <div style={{ color: "#94a3b8", fontSize: "0.75rem", marginTop: 4 }}>Clique para trocar o arquivo</div>
+                </div>
+              ) : (
+                <div>
+                  <div style={{ fontSize: "1.5rem", marginBottom: 4 }}>📄</div>
+                  <div style={{ color: "#a5b4fc", fontSize: "0.9rem", fontWeight: 600 }}>Arraste ou clique para enviar</div>
+                  <div style={{ color: "#64748b", fontSize: "0.78rem", marginTop: 4 }}>PDF, DOCX, TXT — Máx 30MB</div>
+                </div>
+              )}
+            </div>
+          </div>
+
+          <div style={{ display: "flex", alignItems: "center", gap: "1rem", marginBottom: "1rem" }}>
+            <div style={{ flex: 1, height: 1, background: "rgba(255,255,255,0.08)" }} />
+            <span style={{ color: "#475569", fontSize: "0.78rem", fontWeight: 600 }}>ou cole o texto manualmente</span>
+            <div style={{ flex: 1, height: 1, background: "rgba(255,255,255,0.08)" }} />
+          </div>
+
+          <div style={{ marginBottom: "1rem" }}>
+            <label style={{ display: "block", color: "#94a3b8", fontSize: "0.82rem", marginBottom: 4, fontWeight: 600 }}>
+              Texto do Edital / Termo de Referência
+            </label>
+            <textarea
+              value={textoEdital}
+              onChange={e => setTextoEdital(e.target.value)}
+              placeholder="Cole aqui o texto completo do edital, termo de referência ou memorial descritivo..."
+              rows={16}
+              style={{ width: "100%", padding: "1rem", background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.1)", borderRadius: 8, color: "#e2e8f0", fontSize: "0.85rem", lineHeight: 1.6, resize: "vertical", fontFamily: "monospace" }}
+            />
+            <div style={{ display: "flex", justifyContent: "space-between", marginTop: 6, fontSize: "0.75rem", color: "#64748b" }}>
+              <span>{textoEdital.length.toLocaleString()} caracteres</span>
+              <span>Mínimo: 50 caracteres</span>
+            </div>
+          </div>
+
+          {erro && <div style={{ background: "#7f1d1d20", border: "1px solid #ef444440", borderRadius: 8, padding: "0.8rem", color: "#fca5a5", marginBottom: "1rem" }}>❌ {erro}</div>}
+          {progresso && <div style={{ background: "#1e1b4b40", border: "1px solid #6366f140", borderRadius: 8, padding: "0.8rem", color: "#a5b4fc", marginBottom: "1rem" }}>{progresso}</div>}
+
+          <button
+            onClick={handleAnalisar}
+            disabled={carregando || textoEdital.length < 50}
+            style={{
+              padding: "0.8rem 2rem", background: carregando ? "#334155" : "linear-gradient(135deg, #6366f1, #8b5cf6)",
+              color: "#fff", border: "none", borderRadius: 10, fontSize: "0.95rem", fontWeight: 700,
+              cursor: carregando ? "wait" : "pointer", width: "100%",
+            }}
+          >
+            {carregando ? "⏳ Processando análise avançada..." : "🚀 Analisar Edital Completo"}
+          </button>
+
+          <div style={{ marginTop: "1.5rem", background: "rgba(255,255,255,0.03)", borderRadius: 12, padding: "1rem", border: "1px solid rgba(255,255,255,0.06)" }}>
+            <h4 style={{ color: "#a5b4fc", margin: "0 0 0.5rem", fontSize: "0.85rem" }}>📌 O que será analisado:</h4>
+            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "0.3rem", fontSize: "0.8rem", color: "#94a3b8" }}>
+              <span>🖥️ Hardware (equipamentos, sensores)</span>
+              <span>💻 Software (sistemas, funcionalidades)</span>
+              <span>🏗️ Infraestrutura (rede, cloud)</span>
+              <span>⚙️ Processos (workflows, operação)</span>
+              <span>👥 Funções/Equipe (técnicos, certificações)</span>
+              <span>📋 Documentos (certidões, atestados)</span>
+              <span>📜 Normas (CONTRAN, INMETRO, ABNT)</span>
+              <span>💰 Comercial (preços, garantias)</span>
+            </div>
+            <div style={{ marginTop: "0.8rem", fontSize: "0.78rem", color: "#64748b", borderTop: "1px solid rgba(255,255,255,0.06)", paddingTop: "0.6rem" }}>
+              + De-Para (edital vs projetos) • Análise de Concorrentes • Validação de Mercado • Prompt de Adequação
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* ═══ TAB CATEGORIAS ═══ */}
+      {tab === "categorias" && resultado?.categorias && (
+        <div>
+          <h3 style={{ color: "#e2e8f0", marginBottom: "1rem" }}>📊 Decomposição do Edital por Categoria</h3>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(300px, 1fr))", gap: "1rem" }}>
+            {Object.entries(resultado.categorias).map(([key, cat]) => (
+              <div key={key} style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.08)", borderRadius: 12, padding: "1rem" }}>
+                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "0.6rem" }}>
+                  <span style={{ fontSize: "1rem", fontWeight: 700, color: "#e2e8f0" }}>{cat.icon} {cat.label}</span>
+                  <span style={{ background: "rgba(99,102,241,0.2)", color: "#a5b4fc", padding: "2px 10px", borderRadius: 12, fontSize: "0.78rem", fontWeight: 700 }}>{cat.total} itens</span>
+                </div>
+                <div style={{ maxHeight: 200, overflow: "auto" }}>
+                  {cat.itens.slice(0, 8).map((item, i) => (
+                    <div key={i} style={{ fontSize: "0.78rem", color: "#94a3b8", padding: "4px 0", borderBottom: "1px solid rgba(255,255,255,0.04)" }}>
+                      <span style={{ color: "#6366f1", fontWeight: 600 }}>L{item.linha}</span> {item.texto.slice(0, 120)}
+                    </div>
+                  ))}
+                  {cat.total > 8 && <div style={{ fontSize: "0.75rem", color: "#64748b", marginTop: 4 }}>+{cat.total - 8} itens...</div>}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {/* ═══ TAB DE-PARA ═══ */}
+      {tab === "depara" && resultado?.dePara && (
+        <div>
+          <h3 style={{ color: "#e2e8f0", marginBottom: "0.5rem" }}>🔄 De-Para: Edital vs Projetos</h3>
+          {resultado.dePara.resumo && (
+            <div style={{ display: "flex", gap: "1rem", marginBottom: "1.2rem", flexWrap: "wrap" }}>
+              {[
+                { label: "Total", value: resultado.dePara.resumo.totalRequisitos, color: "#a5b4fc" },
+                { label: "Atende", value: resultado.dePara.resumo.atendeCompleto, color: "#10b981" },
+                { label: "Parcial", value: resultado.dePara.resumo.atendeParcial, color: "#f59e0b" },
+                { label: "Não Atende", value: resultado.dePara.resumo.naoAtende, color: "#ef4444" },
+                { label: "Cobertura", value: `${resultado.dePara.resumo.percentualCobertura}%`, color: "#8b5cf6" },
+              ].map((s, i) => (
+                <div key={i} style={{ background: "rgba(255,255,255,0.04)", borderRadius: 10, padding: "0.6rem 1.2rem", textAlign: "center" }}>
+                  <div style={{ fontSize: "1.3rem", fontWeight: 800, color: s.color }}>{s.value}</div>
+                  <div style={{ fontSize: "0.72rem", color: "#64748b" }}>{s.label}</div>
+                </div>
+              ))}
+            </div>
+          )}
+          <div style={{ overflow: "auto" }}>
+            <table style={{ width: "100%", borderCollapse: "collapse", fontSize: "0.8rem" }}>
+              <thead>
+                <tr style={{ borderBottom: "2px solid rgba(255,255,255,0.1)" }}>
+                  <th style={{ textAlign: "left", padding: "8px", color: "#94a3b8" }}>Requisito</th>
+                  <th style={{ textAlign: "center", padding: "8px", color: "#94a3b8", width: 80 }}>AxHub</th>
+                  <th style={{ textAlign: "center", padding: "8px", color: "#94a3b8", width: 80 }}>AxTon</th>
+                  <th style={{ textAlign: "center", padding: "8px", color: "#94a3b8", width: 80 }}>AxCross</th>
+                  <th style={{ textAlign: "left", padding: "8px", color: "#94a3b8" }}>Lacuna</th>
+                  <th style={{ textAlign: "center", padding: "8px", color: "#94a3b8", width: 60 }}>Esforço</th>
+                </tr>
+              </thead>
+              <tbody>
+                {(resultado.dePara.itens || []).map((item, i) => (
+                  <tr key={i} style={{ borderBottom: "1px solid rgba(255,255,255,0.04)" }}>
+                    <td style={{ padding: "8px", color: "#cbd5e1", maxWidth: 250 }}>{item.requisito?.slice(0, 80)}</td>
+                    {["statusAxHub", "statusAxTon", "statusAxCross"].map(col => {
+                      const s = STATUS_COLORS[item[col]] || STATUS_COLORS["n/a"];
+                      return <td key={col} style={{ textAlign: "center", padding: "4px" }}><span style={{ background: s.bg, color: s.color, padding: "2px 8px", borderRadius: 6, fontSize: "0.72rem" }}>{s.label}</span></td>;
+                    })}
+                    <td style={{ padding: "8px", color: "#94a3b8", fontSize: "0.75rem" }}>{item.lacuna || "—"}</td>
+                    <td style={{ textAlign: "center", padding: "4px" }}>
+                      <span style={{ background: item.esforco === "alto" ? "#7f1d1d20" : item.esforco === "medio" ? "#92400e20" : "#065f4620", color: item.esforco === "alto" ? "#ef4444" : item.esforco === "medio" ? "#f59e0b" : "#10b981", padding: "2px 8px", borderRadius: 6, fontSize: "0.72rem" }}>
+                        {item.esforco || "—"}
+                      </span>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      )}
+
+      {/* ═══ TAB CONCORRENTES ═══ */}
+      {tab === "concorrentes" && resultado?.concorrentes && (
+        <div>
+          <h3 style={{ color: "#e2e8f0", marginBottom: "1rem" }}>🏆 Análise de Concorrentes vs Edital</h3>
+
+          {/* Alertas de conflito */}
+          {resultado.concorrentes.alertasConflito?.length > 0 && (
+            <div style={{ background: "#7f1d1d15", border: "1px solid #ef444440", borderRadius: 12, padding: "1rem", marginBottom: "1.2rem" }}>
+              <h4 style={{ color: "#fca5a5", margin: "0 0 0.5rem", fontSize: "0.9rem" }}>⚠️ Alertas de Conflito de Interesse</h4>
+              {resultado.concorrentes.alertasConflito.map((a, i) => (
+                <div key={i} style={{ fontSize: "0.82rem", color: "#fca5a5", padding: "4px 0" }}>
+                  <strong>{a.empresa}</strong> — {a.tipo.replace(/_/g, " ")} — {a.descricao}
+                  <span style={{ marginLeft: 8, background: a.risco === "alto" ? "#ef444430" : "#f59e0b30", color: a.risco === "alto" ? "#ef4444" : "#f59e0b", padding: "1px 8px", borderRadius: 6, fontSize: "0.7rem" }}>
+                    Risco {a.risco}
+                  </span>
+                </div>
+              ))}
+            </div>
+          )}
+
+          {/* Quem atende 100% */}
+          {resultado.concorrentes.quemAtende100 && (
+            <div style={{ background: resultado.concorrentes.quemAtende100.suspeitaDirecionamento ? "#7f1d1d15" : "#065f4615", border: `1px solid ${resultado.concorrentes.quemAtende100.suspeitaDirecionamento ? "#ef444440" : "#10b98140"}`, borderRadius: 12, padding: "1rem", marginBottom: "1.2rem" }}>
+              <h4 style={{ color: resultado.concorrentes.quemAtende100.suspeitaDirecionamento ? "#fca5a5" : "#6ee7b7", margin: "0 0 0.3rem", fontSize: "0.9rem" }}>
+                {resultado.concorrentes.quemAtende100.suspeitaDirecionamento ? "🚨" : "🏅"} Quem atende 100%: {resultado.concorrentes.quemAtende100.empresa}
+              </h4>
+              <p style={{ color: "#94a3b8", fontSize: "0.82rem", margin: 0 }}>{resultado.concorrentes.quemAtende100.justificativa}</p>
+              {resultado.concorrentes.quemAtende100.suspeitaDirecionamento && (
+                <div style={{ marginTop: "0.5rem", fontSize: "0.78rem", color: "#fca5a5" }}>
+                  <strong>⚠️ Suspeita de direcionamento:</strong>
+                  <ul style={{ margin: "4px 0", paddingLeft: "1.2rem" }}>
+                    {(resultado.concorrentes.quemAtende100.evidencias || []).map((e, i) => <li key={i}>{e}</li>)}
+                  </ul>
+                </div>
+              )}
+            </div>
+          )}
+
+          {/* Ranking */}
+          <div style={{ display: "grid", gap: "0.8rem" }}>
+            {(resultado.concorrentes.ranking || []).map((emp, i) => (
+              <div key={i} style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.08)", borderRadius: 12, padding: "1rem" }}>
+                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+                  <span style={{ fontSize: "0.95rem", fontWeight: 700, color: "#e2e8f0" }}>#{i + 1} {emp.empresa}</span>
+                  <div style={{ display: "flex", gap: "0.5rem", alignItems: "center" }}>
+                    <span style={{ fontSize: "0.75rem", color: "#64748b" }}>{emp.distanciaRegional}</span>
+                    <span style={{
+                      background: emp.percentualAtendimento >= 80 ? "#065f4630" : emp.percentualAtendimento >= 50 ? "#92400e30" : "#7f1d1d30",
+                      color: emp.percentualAtendimento >= 80 ? "#10b981" : emp.percentualAtendimento >= 50 ? "#f59e0b" : "#ef4444",
+                      padding: "3px 12px", borderRadius: 8, fontSize: "0.82rem", fontWeight: 700,
+                    }}>
+                      {emp.percentualAtendimento}%
+                    </span>
+                    {emp.conflitoPotencial && <span style={{ background: "#ef444430", color: "#ef4444", padding: "2px 8px", borderRadius: 6, fontSize: "0.7rem" }}>⚠️ Conflito</span>}
+                  </div>
+                </div>
+                <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "0.5rem", marginTop: "0.6rem", fontSize: "0.78rem" }}>
+                  <div><span style={{ color: "#10b981" }}>✅ Fortes:</span> <span style={{ color: "#94a3b8" }}>{(emp.pontosFortes || []).join(", ")}</span></div>
+                  <div><span style={{ color: "#ef4444" }}>❌ Fracos:</span> <span style={{ color: "#94a3b8" }}>{(emp.pontosFracos || []).join(", ")}</span></div>
+                </div>
+                {emp.motivoConflito && <div style={{ marginTop: "0.4rem", fontSize: "0.75rem", color: "#fca5a5" }}>Conflito: {emp.motivoConflito}</div>}
+              </div>
+            ))}
+          </div>
+
+          {/* Posição Axion */}
+          {resultado.concorrentes.posicaoAxion && (
+            <div style={{ marginTop: "1.2rem", background: "rgba(99,102,241,0.08)", border: "1px solid rgba(99,102,241,0.3)", borderRadius: 12, padding: "1rem" }}>
+              <h4 style={{ color: "#a5b4fc", margin: "0 0 0.5rem" }}>🎯 Posição Axion Tecnologia</h4>
+              <div style={{ fontSize: "1.5rem", fontWeight: 800, color: "#a5b4fc" }}>{resultado.concorrentes.posicaoAxion.percentualAtendimento}% de atendimento</div>
+              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "0.8rem", marginTop: "0.6rem", fontSize: "0.82rem" }}>
+                <div>
+                  <div style={{ color: "#10b981", fontWeight: 600, marginBottom: 4 }}>Vantagens Competitivas:</div>
+                  {(resultado.concorrentes.posicaoAxion.vantagensCompetitivas || []).map((v, i) => <div key={i} style={{ color: "#94a3b8", padding: "2px 0" }}>• {v}</div>)}
+                </div>
+                <div>
+                  <div style={{ color: "#f59e0b", fontWeight: 600, marginBottom: 4 }}>Gaps vs Concorrentes:</div>
+                  {(resultado.concorrentes.posicaoAxion.gapsVsConcorrentes || []).map((g, i) => <div key={i} style={{ color: "#94a3b8", padding: "2px 0" }}>• {g}</div>)}
+                </div>
+              </div>
+            </div>
+          )}
+        </div>
+      )}
+
+      {/* ═══ TAB MERCADO ═══ */}
+      {tab === "mercado" && resultado?.mercado && (
+        <div>
+          <h3 style={{ color: "#e2e8f0", marginBottom: "1rem" }}>🌐 Validação de Mercado SaaS</h3>
+
+          {/* Concorrente direto */}
+          {resultado.mercado.concorrenteDireto && (
+            <div style={{ background: resultado.mercado.concorrenteDireto.existe ? "#92400e15" : "#065f4615", border: `1px solid ${resultado.mercado.concorrenteDireto.existe ? "#f59e0b40" : "#10b98140"}`, borderRadius: 12, padding: "1rem", marginBottom: "1.2rem" }}>
+              <h4 style={{ color: resultado.mercado.concorrenteDireto.existe ? "#fbbf24" : "#6ee7b7", margin: "0 0 0.3rem", fontSize: "0.9rem" }}>
+                {resultado.mercado.concorrenteDireto.existe ? "⚠️ Existem concorrentes diretos" : "🏆 Sem concorrente direto no mercado"}
+              </h4>
+              <p style={{ color: "#94a3b8", fontSize: "0.82rem", margin: 0 }}>{resultado.mercado.concorrenteDireto.comparacao}</p>
+            </div>
+          )}
+
+          {/* Dores do cliente */}
+          <div style={{ marginBottom: "1.2rem" }}>
+            <h4 style={{ color: "#f87171", marginBottom: "0.5rem" }}>🔥 Maiores Dores dos Clientes</h4>
+            <div style={{ display: "grid", gap: "0.5rem" }}>
+              {(resultado.mercado.doresCliente || []).map((d, i) => (
+                <div key={i} style={{ background: "rgba(255,255,255,0.04)", borderRadius: 10, padding: "0.8rem", border: "1px solid rgba(255,255,255,0.06)" }}>
+                  <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+                    <span style={{ color: "#e2e8f0", fontWeight: 600, fontSize: "0.85rem" }}>{d.dor}</span>
+                    <div style={{ display: "flex", gap: "0.4rem" }}>
+                      <span style={{ fontSize: "0.7rem", background: d.impacto === "alto" ? "#ef444430" : "#f59e0b30", color: d.impacto === "alto" ? "#ef4444" : "#f59e0b", padding: "1px 8px", borderRadius: 6 }}>Impacto {d.impacto}</span>
+                      <span style={{ fontSize: "0.7rem", background: d.nossoSaaS_resolve ? "#10b98130" : "#ef444430", color: d.nossoSaaS_resolve ? "#10b981" : "#ef4444", padding: "1px 8px", borderRadius: 6 }}>
+                        {d.nossoSaaS_resolve ? "✅ Resolvemos" : "❌ Não resolvemos"}
+                      </span>
+                    </div>
+                  </div>
+                  {d.como && <div style={{ fontSize: "0.78rem", color: "#64748b", marginTop: 4 }}>{d.como}</div>}
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Tendências */}
+          <div style={{ marginBottom: "1.2rem" }}>
+            <h4 style={{ color: "#a5b4fc", marginBottom: "0.5rem" }}>📈 Tendências de Mercado 2025-2026</h4>
+            <div style={{ display: "grid", gap: "0.5rem" }}>
+              {(resultado.mercado.tendenciasMercado || []).map((t, i) => (
+                <div key={i} style={{ background: "rgba(255,255,255,0.04)", borderRadius: 10, padding: "0.8rem", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+                  <div>
+                    <span style={{ color: "#e2e8f0", fontWeight: 600, fontSize: "0.85rem" }}>{t.tendencia}</span>
+                    <span style={{ marginLeft: 8, fontSize: "0.7rem", background: "rgba(99,102,241,0.2)", color: "#a5b4fc", padding: "1px 8px", borderRadius: 6 }}>{t.maturidade}</span>
+                  </div>
+                  <span style={{ fontSize: "0.7rem", background: t.nossoSaaS_tem ? "#10b98130" : "#f59e0b30", color: t.nossoSaaS_tem ? "#10b981" : "#f59e0b", padding: "2px 10px", borderRadius: 6 }}>
+                    {t.nossoSaaS_tem ? "✅ Temos" : "🔨 Implementar"}
+                  </span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Para ficar 100% */}
+          <div style={{ marginBottom: "1.2rem" }}>
+            <h4 style={{ color: "#fbbf24", marginBottom: "0.5rem" }}>🎯 Para Ficar 100% Operacional</h4>
+            <div style={{ display: "grid", gap: "0.5rem" }}>
+              {(resultado.mercado.paraFicar100 || []).map((p, i) => (
+                <div key={i} style={{ background: "rgba(255,255,255,0.04)", borderRadius: 10, padding: "0.8rem", border: "1px solid rgba(255,255,255,0.06)" }}>
+                  <div style={{ display: "flex", justifyContent: "space-between" }}>
+                    <span style={{ color: "#e2e8f0", fontWeight: 600, fontSize: "0.85rem" }}>{p.funcionalidade}</span>
+                    <span style={{ fontSize: "0.7rem", background: p.prioridade === "critica" ? "#ef444430" : p.prioridade === "alta" ? "#f59e0b30" : "#10b98130", color: p.prioridade === "critica" ? "#ef4444" : p.prioridade === "alta" ? "#f59e0b" : "#10b981", padding: "1px 8px", borderRadius: 6 }}>{p.prioridade}</span>
+                  </div>
+                  <div style={{ fontSize: "0.78rem", color: "#64748b", marginTop: 4 }}>⏱️ {p.esforco} • {p.impactoMercado}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Validação lógica */}
+          {resultado.mercado.validacaoLogica && (
+            <div style={{ background: resultado.mercado.validacaoLogica.pipelineValido ? "#065f4615" : "#7f1d1d15", border: `1px solid ${resultado.mercado.validacaoLogica.pipelineValido ? "#10b98140" : "#ef444440"}`, borderRadius: 12, padding: "1rem" }}>
+              <h4 style={{ color: resultado.mercado.validacaoLogica.pipelineValido ? "#6ee7b7" : "#fca5a5", margin: "0 0 0.5rem" }}>
+                {resultado.mercado.validacaoLogica.pipelineValido ? "✅" : "⚠️"} Validação da Lógica do SaaS
+              </h4>
+              <p style={{ color: "#94a3b8", fontSize: "0.82rem", margin: "0 0 0.5rem" }}>{resultado.mercado.validacaoLogica.benchmarkMercado}</p>
+              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "0.5rem", fontSize: "0.8rem" }}>
+                <div>
+                  <div style={{ color: "#10b981", fontWeight: 600 }}>Pontos Fortes:</div>
+                  {(resultado.mercado.validacaoLogica.pontosFortesLogica || []).map((p, i) => <div key={i} style={{ color: "#94a3b8" }}>• {p}</div>)}
+                </div>
+                <div>
+                  <div style={{ color: "#f59e0b", fontWeight: 600 }}>Melhorias:</div>
+                  {(resultado.mercado.validacaoLogica.melhorias || []).map((m, i) => <div key={i} style={{ color: "#94a3b8" }}>• {m}</div>)}
+                </div>
+              </div>
+            </div>
+          )}
+        </div>
+      )}
+
+      {/* ═══ TAB ADEQUAÇÃO ═══ */}
+      {tab === "adequacao" && resultado?.promptAdequacao && (
+        <div>
+          <h3 style={{ color: "#e2e8f0", marginBottom: "1rem" }}>🔧 Prompt de Correção/Adequação</h3>
+
+          {resultado.promptAdequacao.estimativaEsforco && (
+            <div style={{ display: "flex", gap: "1rem", marginBottom: "1.2rem", flexWrap: "wrap" }}>
+              <div style={{ background: "rgba(139,92,246,0.1)", borderRadius: 10, padding: "0.8rem 1.5rem", textAlign: "center" }}>
+                <div style={{ fontSize: "1.5rem", fontWeight: 800, color: "#a78bfa" }}>{resultado.promptAdequacao.estimativaEsforco.totalHoras}h</div>
+                <div style={{ fontSize: "0.72rem", color: "#64748b" }}>Esforço Total</div>
+              </div>
+              {Object.entries(resultado.promptAdequacao.estimativaEsforco.porPrioridade || {}).map(([pri, hrs]) => (
+                <div key={pri} style={{ background: "rgba(255,255,255,0.04)", borderRadius: 10, padding: "0.6rem 1.2rem", textAlign: "center" }}>
+                  <div style={{ fontSize: "1.1rem", fontWeight: 700, color: pri === "critica" ? "#ef4444" : pri === "alta" ? "#f59e0b" : "#10b981" }}>{hrs}h</div>
+                  <div style={{ fontSize: "0.7rem", color: "#64748b" }}>{pri}</div>
+                </div>
+              ))}
+            </div>
+          )}
+
+          {/* Ações prioritárias */}
+          <h4 style={{ color: "#a5b4fc", marginBottom: "0.5rem" }}>📋 Ações Prioritárias</h4>
+          <div style={{ display: "grid", gap: "0.5rem", marginBottom: "1.5rem" }}>
+            {(resultado.promptAdequacao.acoesPrioritarias || []).map((a, i) => (
+              <div key={i} style={{ background: "rgba(255,255,255,0.04)", borderRadius: 10, padding: "0.8rem", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+                <span style={{ color: "#e2e8f0", fontSize: "0.85rem" }}>{a.acao}</span>
+                <div style={{ display: "flex", gap: "0.3rem" }}>
+                  <span style={{ fontSize: "0.7rem", background: "rgba(99,102,241,0.2)", color: "#a5b4fc", padding: "1px 8px", borderRadius: 6 }}>{a.produto}</span>
+                  <span style={{ fontSize: "0.7rem", background: "rgba(255,255,255,0.08)", color: "#94a3b8", padding: "1px 8px", borderRadius: 6 }}>{a.prazo}</span>
+                  <span style={{ fontSize: "0.7rem", background: a.complexidade === "alta" ? "#ef444430" : a.complexidade === "media" ? "#f59e0b30" : "#10b98130", color: a.complexidade === "alta" ? "#ef4444" : a.complexidade === "media" ? "#f59e0b" : "#10b981", padding: "1px 8px", borderRadius: 6 }}>{a.complexidade}</span>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Prompt completo */}
+          <h4 style={{ color: "#a5b4fc", marginBottom: "0.5rem" }}>📝 Prompt de Adequação (copiar para uso)</h4>
+          <div style={{ background: "rgba(15,23,42,0.8)", border: "1px solid rgba(255,255,255,0.1)", borderRadius: 12, padding: "1.2rem", fontFamily: "monospace", fontSize: "0.8rem", color: "#94a3b8", lineHeight: 1.8, whiteSpace: "pre-wrap", maxHeight: 400, overflow: "auto" }}>
+            {resultado.promptAdequacao.promptCorrecao}
+          </div>
+        </div>
+      )}
+
+      {/* ═══ TAB RESUMO ═══ */}
+      {tab === "resumo" && resultado?.resumoExecutivo && (
+        <div>
+          <h3 style={{ color: "#e2e8f0", marginBottom: "1rem" }}>📈 Resumo Executivo</h3>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(180px, 1fr))", gap: "1rem", marginBottom: "1.5rem" }}>
+            <div style={{ background: "rgba(99,102,241,0.1)", borderRadius: 12, padding: "1rem", textAlign: "center" }}>
+              <div style={{ fontSize: "2rem", fontWeight: 800, color: "#a5b4fc" }}>{resultado.resumoExecutivo.totalRequisitosIdentificados}</div>
+              <div style={{ fontSize: "0.78rem", color: "#64748b" }}>Requisitos Identificados</div>
+            </div>
+            <div style={{ background: "rgba(16,185,129,0.1)", borderRadius: 12, padding: "1rem", textAlign: "center" }}>
+              <div style={{ fontSize: "2rem", fontWeight: 800, color: "#10b981" }}>{resultado.resumoExecutivo.coberturaGeral}%</div>
+              <div style={{ fontSize: "0.78rem", color: "#64748b" }}>Cobertura Geral</div>
+            </div>
+            <div style={{ background: "rgba(139,92,246,0.1)", borderRadius: 12, padding: "1rem", textAlign: "center" }}>
+              <div style={{ fontSize: "2rem", fontWeight: 800, color: "#a78bfa" }}>{resultado.resumoExecutivo.posicaoMercado || "—"}%</div>
+              <div style={{ fontSize: "0.78rem", color: "#64748b" }}>Posição vs Mercado</div>
+            </div>
+            <div style={{ background: resultado.resumoExecutivo.pipelineValidado ? "rgba(16,185,129,0.1)" : "rgba(239,68,68,0.1)", borderRadius: 12, padding: "1rem", textAlign: "center" }}>
+              <div style={{ fontSize: "2rem", fontWeight: 800, color: resultado.resumoExecutivo.pipelineValidado ? "#10b981" : "#ef4444" }}>{resultado.resumoExecutivo.pipelineValidado ? "✅" : "⚠️"}</div>
+              <div style={{ fontSize: "0.78rem", color: "#64748b" }}>Pipeline Validado</div>
+            </div>
+            <div style={{ background: resultado.resumoExecutivo.temConcorrenteDireto ? "rgba(245,158,11,0.1)" : "rgba(16,185,129,0.1)", borderRadius: 12, padding: "1rem", textAlign: "center" }}>
+              <div style={{ fontSize: "2rem", fontWeight: 800, color: resultado.resumoExecutivo.temConcorrenteDireto ? "#f59e0b" : "#10b981" }}>{resultado.resumoExecutivo.temConcorrenteDireto ? "⚠️" : "🏆"}</div>
+              <div style={{ fontSize: "0.78rem", color: "#64748b" }}>Concorrente Direto</div>
+            </div>
+            <div style={{ background: resultado.resumoExecutivo.alertasConflito > 0 ? "rgba(239,68,68,0.1)" : "rgba(16,185,129,0.1)", borderRadius: 12, padding: "1rem", textAlign: "center" }}>
+              <div style={{ fontSize: "2rem", fontWeight: 800, color: resultado.resumoExecutivo.alertasConflito > 0 ? "#ef4444" : "#10b981" }}>{resultado.resumoExecutivo.alertasConflito}</div>
+              <div style={{ fontSize: "0.78rem", color: "#64748b" }}>Alertas de Conflito</div>
+            </div>
+          </div>
+
+          {/* Distribuição por categoria */}
+          <h4 style={{ color: "#94a3b8", marginBottom: "0.5rem", fontSize: "0.85rem" }}>Distribuição por Categoria</h4>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(200px, 1fr))", gap: "0.5rem" }}>
+            {(resultado.resumoExecutivo.distribuicaoCategoria || []).map((cat, i) => (
+              <div key={i} style={{ background: "rgba(255,255,255,0.04)", borderRadius: 8, padding: "0.6rem 1rem", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+                <span style={{ color: "#cbd5e1", fontSize: "0.82rem" }}>{cat.icon} {cat.categoria}</span>
+                <span style={{ color: "#a5b4fc", fontWeight: 700, fontSize: "0.82rem" }}>{cat.total} ({cat.percentual}%)</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}

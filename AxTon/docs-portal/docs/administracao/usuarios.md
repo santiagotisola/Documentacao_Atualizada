@@ -1,43 +1,71 @@
 ---
 sidebar_position: 1
 title: Usuários
-description: Gestão de usuários do sistema AxTon
+description: Gestão de usuários e contas de acesso no AxTon
 ---
 
 # Usuários
 
-O módulo de usuários permite gerenciar as contas de acesso ao AxTon, definindo credenciais, perfis e dados cadastrais de cada operador do sistema.
+![Tela de Usuários](../img/axton-usuarios.png)
+
+O módulo de usuários gerencia as contas de acesso ao AxTon, permitindo cadastrar operadores, definir credenciais de login e vincular perfis de acesso.
 
 ## Como acessar
 
-**Menu lateral** → Administração → **Usuários**
+**Menu lateral** → **Usuários**
 
 ## Listagem
-
-![Tela de Usuários — Lista](../img/usuarios.png)
 
 ### Colunas
 
 | Coluna | Descrição |
 |--------|-----------|
 | **Nome** | Nome completo do usuário |
-| **Nome de Usuário** | Identificador utilizado no login |
+| **Usuário** | Login utilizado no acesso ao sistema |
 | **E-mail** | Endereço de e-mail do usuário |
-| **Perfil de Acesso** | Perfil atribuído ao usuário |
-| **Ativo** | Indica se a conta está habilitada para acesso |
+| **Celular** | Número de telefone |
+| **Código** | Código do usuário no sistema |
+| **Ações** | Editar e Excluir |
 
-### Ações disponíveis na listagem
+### Usuários cadastrados no sistema
 
-| Ação | Descrição |
-|------|-----------|
-| **+ Novo** | Cadastrar um novo usuário |
-| **Pesquisa** | Buscar usuários por qualquer campo da listagem |
-| **Editar** | Alterar os dados de um usuário existente (ícone lápis) |
-| **Excluir** | Remover um usuário do sistema (ícone X) |
+| Nome | Usuário | E-mail | Código |
+|------|---------|--------|--------|
+| **admin** | admin | — | — |
+| **Operador** | operador | santiago@axion.com.br | — |
 
 ## Cadastro
 
-![Tela de Usuários — Cadastro](../img/usuario-cadastro.png)
+### Campos
+
+| Campo | Obrigatório | Descrição |
+|-------|:-----------:|-----------|
+| **Nome** | Sim | Nome completo do usuário |
+| **Usuário** | Sim | Login de acesso ao sistema |
+| **E-mail** | Não | E-mail para notificações |
+| **Celular** | Não | Telefone de contato |
+| **Código** | Não | Código funcional do operador |
+| **Senha** | Sim | Senha de acesso (mínimo 8 caracteres) |
+
+### Passo a passo — Cadastrar usuário
+
+1. No menu lateral, clique em **Usuários**
+2. Clique em **+ Novo**
+3. Preencha o **Nome** e o **Usuário** (login)
+4. Informe o **E-mail** e o **Celular** (opcional)
+5. Defina uma **Senha** segura
+6. Clique em **Salvar**
+
+:::warning Segurança
+Use senhas fortes com letras maiúsculas, minúsculas, números e caracteres especiais. Não compartilhe credenciais entre operadores.
+:::
+
+## Veja também
+
+| Funcionalidade | Descrição |
+|---|---|
+| [**Perfis de Acesso**](../administracao/perfis-acesso) | Definir níveis de acesso |
+| [**Permissões**](../administracao/permissoes) | Controle granular de permissões |
 
 ### Campos
 

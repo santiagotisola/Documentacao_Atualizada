@@ -18,6 +18,15 @@ import { axioniAgent } from "./agent/agent.js";
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 dotenv.config({ path: path.join(__dirname, "..", ".env") });
 
+// ─── Proteção contra crash por erros não tratados ─────────────────────────────
+process.on("uncaughtException", (err) => {
+  console.error("🔥 [uncaughtException]", err.message);
+  // Não encerrar o processo para manter a API online
+});
+process.on("unhandledRejection", (reason) => {
+  console.error("🔥 [unhandledRejection]", reason?.message || reason);
+});
+
 const app = express();
 
 // ─── Segurança ────────────────────────────────────────────────────────────────
@@ -50,7 +59,7 @@ app.use((req, res, next) => {
 // para que preflight OPTIONS passe sem token
 app.use((req, res, next) => {
   const origin = req.headers.origin;
-  const allowed = (process.env.CORS_ORIGIN || "http://localhost:3001,http://localhost:3002,http://localhost:3003").split(",").map(s => s.trim());
+  const allowed = (process.env.CORS_ORIGIN || "http://localhost:3017,http://localhost:3001,http://localhost:3002,http://localhost:3003,http://localhost:3014,http://localhost:3015").split(",").map(s => s.trim());
   if (allowed.includes(origin)) {
     res.header("Access-Control-Allow-Origin", origin);
   }
@@ -139,7 +148,10 @@ async function iniciar() {
 
     // Iniciar polling automático do Jitbit (se credenciais configuradas)
     const temToken = !!process.env.JITBIT_TOKEN;
-    const temBasic = process.env.JITBIT_URL && process.env.JITBIT_USER && process.env.JITBIT_PASS;
+    const jitbitUrl = process.env.JITBIT_URL || "https://desk.axiontecnologia.com.br/helpdesk";
+    const jitbitUser = process.env.JITBIT_USER || "Santiago@axiontecnologia.com.br";
+    const jitbitPass = process.env.JITBIT_PASS || "Axion#2026";
+    const temBasic = !!(jitbitUrl && jitbitUser && jitbitPass);
     if (temToken || temBasic) {
       const intervalo = process.env.POLLING_INTERVAL || 2;
       const authTipo = temToken ? "Bearer Token" : "Basic Auth";

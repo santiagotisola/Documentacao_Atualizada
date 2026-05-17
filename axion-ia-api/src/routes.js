@@ -12,8 +12,8 @@ import { gerarRoadmapHandler, listarRoadmapsHandler, obterRoadmapHandler, atuali
 import { gerarSpecHandler, listarSpecsHandler, obterSpecHandler, atualizarStatusSpecHandler } from "./spec-controller.js";
 import { relatorioPassagens, relatorioImagens, listarEquipamentosRelatorio } from "./relatorio-controller.js";
 import { uploadMiddlewareComErro, uploadContexto } from "./upload-controller.js";
-import { gerarConformidadeHandler, listarConformidadeHandler, obterConformidadeHandler, removerConformidadeHandler } from "./conformidade-controller.js";
-import { iniciarConexao, statusConexao as waStatus, listarSessoes, detalhesSessao, encerrarSessao, enviarManual } from "./whatsapp-controller.js";
+import { gerarConformidadeHandler, listarConformidadeHandler, obterConformidadeHandler, removerConformidadeHandler, gerarAnalisaMultiProdutoHandler, obterAnalisaMultiProdutoHandler, listarAnalisasMultiProdutoHandler, obterComparacaoHandler, obterLacunasHandler, obterRecomendacoesHandler } from "./conformidade-controller.js";
+import { iniciarConexao, statusConexao as waStatus, listarSessoes, detalhesSessao, encerrarSessao, enviarManual, desconectar } from "./whatsapp-controller.js";
 import { reindexarDocs, reindexarJitbit, statsKB, limparModuloKB } from "./admin-controller.js";
 import { uploadImagemMiddleware, analisarSemSalvar, salvarEAnalisar, listarTodas, listarPorSistema, listarPasta, compararPasta, compararPastaLocal, servirImagemExterna, removerImagem, classificarOcupacao, classificarRoda, classificarCorCamisa, classificarMochila, classificarCalca, gerarCaracteristicas, lerPlacas } from "./analise-imagem-controller.js";
 import { uploadJobMiddleware, criarJobHandler, listarJobs, obterJob, removerJob } from "./job-controller.js";
@@ -22,7 +22,9 @@ import { runAgent, runAgentMode, getAgentState, getSchedulerStatus, startSchedul
 import { validarDispositivo, validarLote, analisarIncidente, heartbeatGeral } from "./varco-controller.js";
 import { analisarTexto, analisarArquivo, uploadLeituraMiddleware } from "./leitura-controller.js";
 import { healthCheck } from "./health-controller.js";
-
+import { listarFilaHandler, obterEstatisticasHandler, obterItemHandler, marcarRevisadoHandler, autoResolverHandler, exportarCsvHandler, descartarItemHandler } from "./confidence-controller.js";
+import { buscarEditaisGovHandler, importarEditalHandler, analisarEditalRapidoHandler, listarEditaisImportadosHandler, autoAnalisarTodosHandler, analiseAvancadaHandler, uploadEditalHandler, uploadEditalMiddleware, listarSitesHandler } from "./edital-controller.js";
+import { sitesOverview, obterMapa, associarSite, desassociarSite, ticketsPorSite } from "./sites-helpdesk-controller.js";
 const router = express.Router();
 
 // AxionIA Chat
@@ -64,6 +66,13 @@ router.post("/helpdesk/fila/:id/rejeitar", rejeitarFila);
 // Planilha de Horas
 router.get("/helpdesk/tecnicos", listarTecnicosHelpdesk);
 router.get("/helpdesk/planilha-horas", gerarPlanilhaHoras);
+
+// Integração Sites × Helpdesk (análise operacional)
+router.get("/helpdesk/sites-overview", sitesOverview);
+router.get("/helpdesk/mapa-sites", obterMapa);
+router.post("/helpdesk/mapa-sites", associarSite);
+router.delete("/helpdesk/mapa-sites/:categoriaId", desassociarSite);
+router.get("/helpdesk/site/:siteId/tickets", ticketsPorSite);
 
 // AxHub — SQL Server
 router.get("/axhub/status", statusConexao);
@@ -143,6 +152,16 @@ router.get("/spec/:id", obterSpecHandler);
 router.patch("/spec/:id/status", atualizarStatusSpecHandler);
 
 // ─── Conformidade com Editais / Licitações ───────────────────────
+
+// ─── Análise Multi-Produto (AxHub + AxTon + AxCross simultâneos) ─ DEVE VIR ANTES DE :id
+router.post("/conformidade/multi/gerar", gerarAnalisaMultiProdutoHandler);
+router.get("/conformidade/multi", listarAnalisasMultiProdutoHandler);
+router.get("/conformidade/multi/:id/comparacao", obterComparacaoHandler);
+router.get("/conformidade/multi/:id/lacunas", obterLacunasHandler);
+router.get("/conformidade/multi/:id/recomendacoes", obterRecomendacoesHandler);
+router.get("/conformidade/multi/:id", obterAnalisaMultiProdutoHandler);
+
+// ─── Conformidade Simples (Um Produto por Vez)
 router.post("/conformidade/gerar", gerarConformidadeHandler);
 router.get("/conformidade", listarConformidadeHandler);
 router.get("/conformidade/:id", obterConformidadeHandler);
@@ -155,6 +174,7 @@ router.get("/whatsapp/sessoes", listarSessoes);
 router.get("/whatsapp/sessao/:telefone", detalhesSessao);
 router.delete("/whatsapp/sessao/:telefone", encerrarSessao);
 router.post("/whatsapp/send", enviarManual);
+router.post("/whatsapp/desconectar", desconectar);
 
 // ─── Análise de Imagens Operacionais ─────────────────────────────────────────
 // Pasta: uploads/analise/{sistema}/  (≠ docs/img/ que são screenshots dos manuais)
@@ -214,5 +234,24 @@ router.get("/helpdesk/sla-compliance", relatarSlaCompliance);
 
 // ─── Health Check — monitoramento externo ────────────────────────────────────
 router.get("/health", healthCheck);
+
+// ─── Confiança — Fila de Revisão de Itens com Baixa Confiança ───────────────────────────
+router.get("/confianca/fila",                         listarFilaHandler);
+router.get("/confianca/estatisticas",                obterEstatisticasHandler);
+router.get("/confianca/:id",                         obterItemHandler);
+router.post("/confianca/:id/revisar",                marcarRevisadoHandler);
+router.post("/confianca/:id/descartar",              descartarItemHandler);
+router.post("/confianca/conformidade/:conformidadeId/auto-resolver", autoResolverHandler);
+router.get("/confianca/exportar/csv",                exportarCsvHandler);
+
+// ─── Editais — Busca, importação e análise automática de editais gov ───────────────────────
+router.get("/edital/buscar",                        buscarEditaisGovHandler);
+router.post("/edital/importar",                     importarEditalHandler);
+router.post("/edital/analisar-rapido",              analisarEditalRapidoHandler);
+router.post("/edital/analise-avancada",             analiseAvancadaHandler);
+router.post("/edital/upload",                       uploadEditalMiddleware, uploadEditalHandler);
+router.get("/sites",                                listarSitesHandler);
+router.get("/edital/historico",                     listarEditaisImportadosHandler);
+router.post("/edital/auto-analisar-todos",          autoAnalisarTodosHandler);
 
 export default router;

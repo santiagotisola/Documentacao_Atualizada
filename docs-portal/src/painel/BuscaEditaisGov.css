@@ -1,0 +1,363 @@
+/* BuscaEditaisGov.css */
+
+.busca-editais-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: var(--font-family, "Segoe UI", Tahoma, Geneva, Verdana, sans-serif);
+}
+
+.cabecalho {
+  margin-bottom: 30px;
+  border-bottom: 2px solid var(--primary, #0066cc);
+  padding-bottom: 15px;
+}
+
+.cabecalho h2 {
+  margin: 0 0 10px 0;
+  color: var(--text, #333);
+  font-size: 28px;
+}
+
+.cabecalho p {
+  margin: 0;
+  color: var(--text-muted, #666);
+  font-size: 14px;
+}
+
+/* ─── ETAPA 1: BUSCA ─── */
+.formulario-busca {
+  background: var(--surface, #f5f5f5);
+  border-radius: 8px;
+  padding: 25px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.grupo-input {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.formulario-busca input {
+  flex: 1;
+  padding: 12px 15px;
+  border: 1px solid var(--border, #ddd);
+  border-radius: 6px;
+  font-size: 16px;
+  background: white;
+}
+
+.formulario-busca input:focus {
+  outline: none;
+  border-color: var(--primary, #0066cc);
+  box-shadow: 0 0 0 3px rgba(0, 102, 204, 0.1);
+}
+
+.formulario-busca button {
+  padding: 12px 25px;
+  background: var(--primary, #0066cc);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 500;
+  transition: background 0.2s;
+}
+
+.formulario-busca button:hover:not(:disabled) {
+  background: var(--primary-dark, #0052a3);
+}
+
+.formulario-busca button:disabled {
+  background: var(--disabled, #ccc);
+  cursor: not-allowed;
+}
+
+/* ─── MENSAGENS ─── */
+.mensagem {
+  padding: 12px 15px;
+  border-radius: 6px;
+  margin-top: 10px;
+  font-size: 14px;
+}
+
+.mensagem {
+  background: #fffbf0;
+  border-left: 4px solid #ff9800;
+  color: #e65100;
+}
+
+.mensagem.info {
+  background: #e3f2fd;
+  border-left-color: #2196f3;
+  color: #1565c0;
+}
+
+.mensagem.sucesso {
+  background: #f1f8e9;
+  border-left-color: #4caf50;
+  color: #33691e;
+}
+
+.mensagem.erro {
+  background: #ffebee;
+  border-left-color: #f44336;
+  color: #c62828;
+}
+
+/* ─── ETAPA 2: RESULTADOS ─── */
+.secao-resultados {
+  background: white;
+  border-radius: 8px;
+  padding: 25px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.controles {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.btn-secundario {
+  padding: 10px 15px;
+  background: var(--surface, #f5f5f5);
+  border: 1px solid var(--border, #ddd);
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: all 0.2s;
+}
+
+.btn-secundario:hover {
+  background: var(--primary, #0066cc);
+  color: white;
+  border-color: var(--primary, #0066cc);
+}
+
+.lista-editais {
+  display: grid;
+  gap: 15px;
+  margin-bottom: 20px;
+  max-height: 600px;
+  overflow-y: auto;
+}
+
+.card-edital {
+  display: flex;
+  gap: 15px;
+  padding: 15px;
+  border: 1px solid var(--border, #e0e0e0);
+  border-radius: 6px;
+  background: var(--surface-light, #fafafa);
+  transition: all 0.2s;
+}
+
+.card-edital:hover {
+  border-color: var(--primary, #0066cc);
+  background: white;
+  box-shadow: 0 2px 6px rgba(0, 102, 204, 0.15);
+}
+
+.card-edital input[type="checkbox"] {
+  margin-top: 4px;
+  cursor: pointer;
+  width: 20px;
+  height: 20px;
+}
+
+.info-edital {
+  flex: 1;
+}
+
+.info-edital h4 {
+  margin: 0 0 8px 0;
+  color: var(--text, #333);
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.info-edital .meta {
+  margin: 0 0 8px 0;
+  font-size: 12px;
+  color: var(--text-muted, #666);
+}
+
+.info-edital .descricao {
+  margin: 0 0 8px 0;
+  font-size: 13px;
+  color: var(--text-secondary, #555);
+  line-height: 1.4;
+}
+
+.info-edital .data {
+  margin: 0;
+  font-size: 12px;
+  color: var(--text-muted, #666);
+}
+
+.rodape-selecao {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 20px;
+  border-top: 1px solid var(--border, #e0e0e0);
+}
+
+.rodape-selecao p {
+  margin: 0;
+  color: var(--text-muted, #666);
+  font-size: 14px;
+}
+
+.btn-principal {
+  padding: 12px 25px;
+  background: var(--success, #4caf50);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 15px;
+  font-weight: 500;
+  transition: background 0.2s;
+}
+
+.btn-principal:hover:not(:disabled) {
+  background: var(--success-dark, #388e3c);
+}
+
+.btn-principal:disabled {
+  background: var(--disabled, #ccc);
+  cursor: not-allowed;
+}
+
+/* ─── ETAPA 3: ANALISANDO ─── */
+.secao-analisando {
+  background: white;
+  border-radius: 8px;
+  padding: 25px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.barra-progresso {
+  position: relative;
+  height: 30px;
+  background: var(--surface, #f5f5f5);
+  border-radius: 6px;
+  margin-bottom: 20px;
+  overflow: hidden;
+  border: 1px solid var(--border, #ddd);
+}
+
+.barra-preenchida {
+  height: 100%;
+  background: linear-gradient(90deg, #4caf50, #66bb6a);
+  transition: width 0.3s ease;
+  border-radius: 6px;
+}
+
+.percentual {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-weight: 600;
+  color: var(--text, #333);
+  font-size: 14px;
+  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.5);
+}
+
+.lista-resultados {
+  display: grid;
+  gap: 12px;
+  margin-bottom: 20px;
+  max-height: 500px;
+  overflow-y: auto;
+}
+
+.resultado {
+  padding: 15px;
+  border-left: 4px solid #ff9800;
+  background: #fffbf0;
+  border-radius: 6px;
+}
+
+.resultado.sucesso {
+  border-left-color: #4caf50;
+  background: #f1f8e9;
+}
+
+.resultado.erro {
+  border-left-color: #f44336;
+  background: #ffebee;
+}
+
+.resultado h4 {
+  margin: 0 0 8px 0;
+  font-size: 15px;
+  color: var(--text, #333);
+}
+
+.resultado > p {
+  margin: 0 0 8px 0;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.resultado.sucesso > p {
+  color: #33691e;
+}
+
+.resultado.erro > p {
+  color: #c62828;
+}
+
+.resumo-analise {
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.resumo-analise p {
+  margin: 5px 0;
+  font-size: 12px;
+  color: var(--text-secondary, #555);
+}
+
+.acoes-finais {
+  display: flex;
+  gap: 10px;
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 1px solid var(--border, #e0e0e0);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .grupo-input {
+    flex-direction: column;
+  }
+
+  .card-edital {
+    flex-direction: column;
+  }
+
+  .rodape-selecao {
+    flex-direction: column;
+    gap: 15px;
+    align-items: flex-start;
+  }
+
+  .controles {
+    flex-direction: column;
+  }
+
+  .btn-secundario,
+  .btn-principal {
+    width: 100%;
+  }
+}

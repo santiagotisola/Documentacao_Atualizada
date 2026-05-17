@@ -2,27 +2,72 @@
 
 ## Visão Geral do Sistema
 
-O **AxCross** é o sistema de **monitoramento de cruzamentos** da Axion Tecnologia. Gerencia equipamentos de fiscalização, operações de monitoramento e relatórios de passagens em cruzamentos viários.
+O **AxCross** é o sistema de **cruzamento e monitoramento de dados de trânsito** da Axion Tecnologia. Gerencia equipamentos de fiscalização, veículos monitorados, alertas automáticos, rastreamento de placas e relatórios de passagens.
+
+- **URL Produção:** https://economia.axcross.axion.ws
+- **Stack:** ASP.NET (.NET 9), Razor MVC, jQuery/DataTables, SignalR, Google Maps
+- **Autenticação:** OIDC/OAuth2+PKCE via economia.axion.ws
+- **Total de telas:** 24
 
 ---
 
 ## Menu lateral do AxCross
 
-### Itens diretos
+### Itens diretos (menu principal)
 
-| Item do menu | Tela / Função |
+| Item do menu | URL | Telas |
+| --- | --- | --- |
+| **Dashboard** | `/` | KPIs, mapa de equipamentos, gráfico passagens/hora |
+| **Veículos Monitorados** | `/occurrences/monitoredvehicle` | 5 sub-telas |
+| **Equipamentos** | `/equipments/equipment` | 4 sub-telas |
+| **Monitoramento Online** | `/monitoringonline/monitoring` | 2 sub-telas |
+| **Relatórios** | `/reports/reports` | 6 sub-telas |
+| **Configurações** | `/settings/systemsettings` | 6 sub-telas |
+
+### Sub-telas por módulo
+
+#### Veículos Monitorados
+| Funcionalidade | URL |
 | --- | --- |
-| **Monitoramento Online** | Acompanhamento em tempo real de equipamentos e passagens |
-| **Operações** | Cadastro e gestão de operações de fiscalização |
-| **Sistema** | Configurações gerais, dados do órgão, integrações |
-| **Relatório de Passagens** | Consulta e exportação de passagens registradas |
+| Veículos Monitorados | `/occurrences/monitoredvehicle/monitoredvehicle` |
+| Tipos de Ocorrências | `/occurrences/occurrencetype` |
+| Alertas | `/occurrences/alert` |
+| Classificações dos Veículos | `/occurrences/vehicleclassification` |
+| Importação de Monitorados | `/occurrences/vehiclemonitoredimport` |
 
-### Categorias expansíveis
-
-| Categoria | Itens |
+#### Equipamentos
+| Funcionalidade | URL |
 | --- | --- |
-| **Cadastros** | Locais, Equipamentos, Faixas |
-| **Administração** | Usuários, Permissões de acesso, Perfis de acesso |
+| Equipamentos | `/equipments/equipment/equipment` |
+| Grupo de Equipamentos | `/equipments/equipmentgroup` |
+| Áreas | `/equipments/area` |
+| Importação de Equipamentos | `/equipments/equipmentimport` |
+
+#### Monitoramento Online
+| Funcionalidade | URL |
+| --- | --- |
+| Monitoramento Online (SignalR) | `/monitoringonline/monitoring/monitoringonline` |
+| Mapa de Equipamentos (Google Maps) | `/monitoringonline/monitoring/equipmentmap` |
+
+#### Relatórios
+| Funcionalidade | URL |
+| --- | --- |
+| Passagens | `/reports/reports/passages` |
+| Mapeamento de Rotas | `/reports/reports/routemapping` |
+| Rastreamento de Placas | `/reports/platetracking` |
+| Veículos Monitorados | `/reports/reports/vehiclemonitored` |
+| Ocorrências e Alertas | `/reports/reports/occurrences` |
+| PDF Gerados | `/reports/reports/reportsgenerated` |
+
+#### Configurações
+| Funcionalidade | URL |
+| --- | --- |
+| Configurações do Sistema | `/settings/systemsettings/indexsettings` |
+| Usuários | `/settings/user` |
+| Perfis de Acesso | `/settings/accessprofile` |
+| Permissões | `/settings/accesspermission` |
+| Logs de Acesso | `/settings/logaccess` |
+| Sincronização de Passagens | `/settings/sync` |
 
 ---
 
@@ -91,56 +136,82 @@ O **AxCross** é o sistema de **monitoramento de cruzamentos** da Axion Tecnolog
 - Pausar, encerrar ou excluir operações
 - Operações com registros não podem ser excluídas
 
-### Cadastros
+### Equipamentos
 
-#### Locais
-
-- Nome, endereço, município, UF
-- Latitude/longitude opcionais para mapa
-- Acesse: Menu lateral → Cadastros → Locais
-
-#### Equipamentos
-
+#### Lista de Equipamentos
+- **Caminho:** Menu lateral → Equipamentos → Equipamentos (`/equipments/equipment/equipment`)
 - Câmeras, detectores, sensores, radares
 - Nome, tipo, modelo, fabricante, número de série, IP
-- Vinculado a um local
-- Acesse: Menu lateral → Cadastros → Equipamentos
+- Exportação em Excel
+- Acesse: Menu lateral → Equipamentos
 
-#### Faixas
+#### Grupo de Equipamentos
+- **Caminho:** Menu lateral → Equipamentos → Grupo de Equipamentos (`/equipments/equipmentgroup`)
+- Agrupamento lógico de equipamentos por região ou finalidade
 
-- Via monitorada em um cruzamento
-- Número da faixa, sentido, equipamento vinculado
-- Velocidade máxima opcional
-- Acesse: Menu lateral → Cadastros → Faixas
+#### Áreas
+- **Caminho:** Menu lateral → Equipamentos → Áreas (`/equipments/area`)
+- Regiões geográficas de monitoramento
+
+#### Importação de Equipamentos
+- **Caminho:** Menu lateral → Equipamentos → Importação (`/equipments/equipmentimport`)
+- Importação em massa de equipamentos via arquivo
 
 ### Relatórios
 
-- Relatório de Passagens: filtro por período, local, equipamento, faixa
-- Exportação em PDF ou CSV
+#### Passagens
+- **Caminho:** Menu lateral → Relatórios → Passagens (`/reports/reports/passages`)
+- **Filtros avançados:** Data/Hora Início, Data/Hora Final, Equipamento, Faixa, Placa (com curinga *), Área, Cor, Modelo, Classificação, Placas Inválidas
+- **Classificações disponíveis:** Automóvel, Caminhão, Caminhonete, Motocicleta, Ônibus, Sem Classe
+- **Cores disponíveis:** Preto, Azul, Marrom, Dourado, Cinza, Verde, Laranja, Roxo, Vermelho, Prata, Bege, Branco, Amarelo
+- Exportação em Excel
 
-### Sistema
+#### Mapeamento de Rotas
+- **Caminho:** Menu lateral → Relatórios → Mapeamento de Rotas (`/reports/reports/routemapping`)
+- Rastreia trajeto de um veículo com base nas passagens em múltiplos equipamentos
 
-- Dados do órgão (nome, CNPJ, endereço)
-- Parâmetros operacionais (intervalo de atualização, timeout, retenção)
-- Integrações (API externa, webhook)
-- Somente administradores
+#### Rastreamento de Placas
+- **Caminho:** Menu lateral → Relatórios → Rastreamento de Placas (`/reports/platetracking`)
+- Busca todas as passagens de uma placa específica com imagens e horários
 
-### Administração
+#### Veículos Monitorados (Relatório)
+- **Caminho:** Menu lateral → Relatórios → Veículos Monitorados (`/reports/reports/vehiclemonitored`)
+- Lista veículos monitorados com status de vigência e últimos alertas
+
+#### Ocorrências e Alertas (Relatório)
+- **Caminho:** Menu lateral → Relatórios → Ocorrências e Alertas (`/reports/reports/occurrences`)
+- Histórico de detecções e alertas gerados por cruzamentos
+
+#### PDF Gerados
+- **Caminho:** Menu lateral → Relatórios → PDF Gerados (`/reports/reports/reportsgenerated`)
+- Download de relatórios previamente gerados em PDF
+
+### Configurações e Administração
+
+#### Configurações do Sistema
+- **Caminho:** Menu lateral → Configurações → Configurações do Sistema (`/settings/systemsettings/indexsettings`)
+- Parâmetros operacionais, dados do órgão, integrações
 
 #### Usuários
-
+- **Caminho:** Menu lateral → Configurações → Usuários (`/settings/user`)
 - Nome, login, e-mail, senha, perfil de acesso
-- Acesse: Menu lateral → Administração → Usuários
-
-#### Permissões de Acesso
-
-- Visualizar, criar, editar, excluir por módulo
-- Acesse: Menu lateral → Administração → Permissões de acesso
+- Ativar/desativar contas
 
 #### Perfis de Acesso
-
+- **Caminho:** Menu lateral → Configurações → Perfis de Acesso (`/settings/accessprofile`)
 - Administrador, Operador, Consulta (padrão)
-- Acesse: Menu lateral → Administração → Perfis de acesso
+
+#### Permissões
+- **Caminho:** Menu lateral → Configurações → Permissões (`/settings/accesspermission`)
+- Visualizar, criar, editar, excluir por módulo
+
+#### Logs de Acesso
+- **Caminho:** Menu lateral → Configurações → Logs de Acesso (`/settings/logaccess`)
+- Auditoria de ações dos usuários no sistema
+
+#### Sincronização de Passagens
+- **Caminho:** Menu lateral → Configurações → Sincronização de Passagens (`/settings/sync`)
+- Controle de sincronização com fonte de dados externa
 
 ---
 

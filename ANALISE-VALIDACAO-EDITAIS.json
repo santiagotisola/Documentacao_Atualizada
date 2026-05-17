@@ -1,0 +1,844 @@
+{
+  "meta": {
+    "titulo": "Análise Estratégica — Sistema de Validação de Editais de Licitação",
+    "versao": "1.0.0",
+    "data": "2026-05-13",
+    "referencia_edital_exemplo": "90.021",
+    "sistemas_analisados": ["AxHub", "AxTon", "AxCross", "AxionIA"],
+    "objetivo": "Avaliar o estado atual, comparar com o mercado e propor melhorias inteligentes para análise e validação de editais de licitação viária/tráfego"
+  },
+
+  "diagnostico_atual": {
+    "resumo": "O sistema possui infraestrutura funcional para análise de conformidade (3 fases: heurística + IA semântica + justificativas), coleta automática PNCP, parse de documentos PDF/DOCX/TXT e avaliação por produto individual. Os principais gaps estão na falta de análise multi-produto simultânea, ausência de scoring de hardware, sem histórico de licitações ganhas/perdidas, e sem geração automática de proposta técnica.",
+    "cobertura_por_sistema": {
+      "AxHub": {
+        "dominio": "Fiscalização eletrônica, radares, câmeras, OCR de placas, cronotacógrafo, pesagem viária",
+        "documentacao_disponivel": true,
+        "operacoes_mapeadas": ["fiscalizacao", "pesagem", "monitoramento", "leitura_placa", "cronotacografo", "central"],
+        "integrado_conformidade": true,
+        "score_cobertura_edital": "ALTO — domínio mais documentado e com maior variedade de operações",
+        "lacunas": [
+          "Sem especificação técnica de hardware (modelo de equipamento, versão firmware)",
+          "Sem mapeamento de requisitos de integração com DENATRAN/SENATRAN",
+          "Sem campos de certificação INMETRO dos equipamentos"
+        ]
+      },
+      "AxTon": {
+        "dominio": "Pesagem veicular rodoviária, balança dinâmica, controle de peso bruto, tacógrafo",
+        "documentacao_disponivel": true,
+        "operacoes_mapeadas": ["posto_pesagem", "balanca_rodoviaria", "controle_peso_veicular", "tacografo"],
+        "integrado_conformidade": true,
+        "score_cobertura_edital": "MÉDIO — domínio especializado, boa cobertura mas falta cross-referência com AxHub",
+        "lacunas": [
+          "Sem especificação de capacidade de pesagem (tonelagem, precisão)",
+          "Sem referência a normas ABNT/INMETRO para balanças",
+          "Sem módulo de integração com SROCC/ANTT"
+        ]
+      },
+      "AxCross": {
+        "dominio": "Monitoramento de cruzamentos, semáforos inteligentes, leitura de placa em interseções",
+        "documentacao_disponivel": true,
+        "operacoes_mapeadas": ["semaforo_inteligente", "cruzamento_monitorado", "leitura_placa_cruzamento", "deteccao_passagem"],
+        "integrado_conformidade": true,
+        "score_cobertura_edital": "MÉDIO-BAIXO — domínio menor, menos licitações específicas no PNCP",
+        "lacunas": [
+          "Sem documentação de protocolos de comunicação (NTCIP, SNMP)",
+          "Sem mapeamento de integração com centrais de tráfego (UTM)",
+          "Sem especificação de tempo de resposta do sistema"
+        ]
+      },
+      "AxionIA": {
+        "dominio": "Motor de IA, análise de conformidade, coleta PNCP, geração de documentação, helpdesk",
+        "modulos_ativos": [
+          "conformidade.js — análise 3 fases (heurística + GPT semântico + justificativas)",
+          "coletor-controller.js — coleta PNCP automática a cada 6h",
+          "comparador.js — comparação de fontes vs documentação",
+          "analise-imagem-controller.js — OCR e análise de imagens de equipamentos",
+          "extrator.js — extração de texto PDF/DOCX/XLSX",
+          "normalizador.js — normalização de texto para busca",
+          "parser.js — pncpParaMd, conversão de dados PNCP"
+        ],
+        "score_cobertura": "ALTO — motor mais avançado do sistema, mas análise restrita a 1 produto por vez",
+        "lacunas": [
+          "Análise de conformidade apenas por produto individual (não compara os 3 simultaneamente)",
+          "Sem persistência de editais analisados vinculada ao número do pregão",
+          "Sem histórico de ganho/perda de licitações",
+          "Sem geração automática de proposta técnica estruturada",
+          "Sem classificação de risco do edital (alto/médio/baixo)",
+          "Sem alerta de editais com prazos vencendo",
+          "Sem módulo de hardware — não valida especificações técnicas de equipamentos",
+          "Limite de 150 requisitos por análise pode truncar editais complexos",
+          "Conformidade não lê fontes externas salvas (Fonte model) — usa só docs-portal"
+        ]
+      }
+    }
+  },
+
+  "comparativo_mercado": {
+    "descricao": "Ferramentas e soluções do mercado para análise de editais de licitação pública no Brasil",
+    "ferramentas": [
+      {
+        "nome": "PNCP (Portal Nacional de Contratações Públicas)",
+        "tipo": "Plataforma governamental",
+        "url": "https://pncp.gov.br",
+        "o_que_faz": "Centraliza editais, atas, contratos e resultados de licitações federais/estaduais/municipais",
+        "integrado_no_sistema": true,
+        "nivel_integracao": "GET /api/consulta/v1/contratacoes/publicacao — busca por palavra-chave, data e UF",
+        "gaps_na_integracao": [
+          "Não baixa o PDF completo do edital automaticamente",
+          "Não extrai texto do documento via API — requer download + parse local",
+          "Sem webhook/push para notificação de novos editais pertinentes"
+        ]
+      },
+      {
+        "nome": "ComprasNet / SIASG",
+        "tipo": "Sistema federal de compras",
+        "url": "https://comprasnet.gov.br",
+        "o_que_faz": "Plataforma oficial do governo federal para licitações, pregões eletrônicos e contratos",
+        "integrado_no_sistema": false,
+        "potencial": "ALTO — maioria dos grandes contratos de fiscalização eletrônica passam pelo ComprasNet",
+        "sugestao": "Adicionar scraping/monitoramento de ComprasNet como segunda fonte além do PNCP"
+      },
+      {
+        "nome": "BLL (Bolsa de Licitações e Leilões)",
+        "tipo": "Marketplace privado de licitações",
+        "url": "https://bll.org.br",
+        "o_que_faz": "Agrega licitações de múltiplas origens, alerta por e-mail, análise de CNPJ",
+        "integrado_no_sistema": false,
+        "potencial": "MÉDIO — bom para municípios que não usam PNCP"
+      },
+      {
+        "nome": "Licitações-e (Banco do Brasil)",
+        "tipo": "Portal de licitações eletrônicas",
+        "url": "https://licitacoes-e.com.br",
+        "o_que_faz": "Pregões eletrônicos principalmente de órgãos estaduais e municipais",
+        "integrado_no_sistema": false,
+        "potencial": "MÉDIO"
+      },
+      {
+        "nome": "GPT-4o / Claude (via API)",
+        "tipo": "LLM para análise semântica",
+        "o_que_faz": "Extração de requisitos, classificação de conformidade, geração de propostas",
+        "integrado_no_sistema": true,
+        "nivel_integracao": "OpenAI GPT via conformidade.js (fases 2 e 3) e engine.js",
+        "gaps": [
+          "Sem structured output (JSON Schema forcing) — respostas podem variar",
+          "Sem uso de GPT-4o para análise de imagens de editais escaneados",
+          "Sem cache de embeddings por edital para reuso"
+        ]
+      },
+      {
+        "nome": "LangChain / LlamaIndex",
+        "tipo": "Framework RAG para documentos longos",
+        "o_que_faz": "Chunking inteligente, RAG com contexto de janela longa, agentes de análise",
+        "integrado_no_sistema": false,
+        "potencial": "ALTO — editais têm 50-300 páginas, RAG com janela longa melhora muito a extração",
+        "sugestao": "Substituir extração simples por RAG chunked para editais > 20 páginas"
+      },
+      {
+        "nome": "Apache Tika / Tesseract OCR",
+        "tipo": "Extração de texto de documentos",
+        "o_que_faz": "OCR de PDFs escaneados, extração de DOCX/XLSX/PPT",
+        "integrado_no_sistema": "PARCIAL — pdf-parse e mammoth disponíveis",
+        "gaps": [
+          "PDFs escaneados (imagem) não são suportados — Tesseract não integrado",
+          "Tabelas de editais em PDF não são preservadas estruturalmente"
+        ]
+      },
+      {
+        "nome": "Elasticsearch / OpenSearch",
+        "tipo": "Engine de busca e indexação",
+        "o_que_faz": "Indexação full-text de editais, busca facetada, highlighting de termos",
+        "integrado_no_sistema": false,
+        "potencial": "MÉDIO-ALTO — para volume alto de editais históricos",
+        "sugestao": "MongoDB Atlas Search pode suprir parcialmente sem nova infraestrutura"
+      }
+    ]
+  },
+
+  "grupos_principais": {
+    "SOFTWARE": {
+      "descricao": "Componentes de software: IA, análise, integração, interface, dados",
+      "topicos": {
+        "S1_EXTRACAO_DOCUMENTOS": {
+          "nome": "Extração e Parse de Documentos",
+          "estado_atual": {
+            "tecnologias": ["pdf-parse (PDFs digitais)", "mammoth (DOCX)", "xlsx (planilhas)", "multer (upload)"],
+            "endpoint": "POST /api/doc/upload-contexto",
+            "limitacoes": [
+              "PDFs escaneados retornam texto vazio",
+              "Tabelas de preços não são estruturadas",
+              "Sem suporte a ZIP com múltiplos documentos",
+              "Limite de tamanho de arquivo não configurável por tipo"
+            ]
+          },
+          "cobertura_atual_pct": 60
+        },
+        "S2_ANALISE_CONFORMIDADE": {
+          "nome": "Análise de Conformidade por IA",
+          "estado_atual": {
+            "fluxo": "Upload texto → Extração heurística (10 padrões) + IA → Scoring por keywords → GPT semântico para incertos → Justificativas técnicas",
+            "veredictos": ["APTO", "PARCIALMENTE_APTO", "INAPTO"],
+            "limitacoes": [
+              "Análise restrita a 1 produto por vez (axhub OU axton OU axcross)",
+              "Limite de 150 requisitos extraídos por edital",
+              "Conformidade lê apenas docs-portal — não inclui fontes externas salvas",
+              "Sem campo de peso/prioridade por requisito",
+              "Sem versão de edital — não detecta mudanças entre revisões"
+            ]
+          },
+          "cobertura_atual_pct": 65
+        },
+        "S3_COLETA_PNCP": {
+          "nome": "Coleta e Monitoramento PNCP",
+          "estado_atual": {
+            "endpoints": ["GET /api/coletor/pncp", "POST /api/coletor/pncp/importar", "POST /api/coletor/pncp/coletar"],
+            "agendamento": "Cron a cada 6h (0 */6 * * *)",
+            "fontes": ["PNCP somente"],
+            "limitacoes": [
+              "Não baixa o PDF do edital — apenas metadados",
+              "Sem alerta por e-mail/WhatsApp de editais relevantes",
+              "Sem filtro por UF ou modalidade de licitação",
+              "Sem deduplicação por número de pregão",
+              "Apenas PNCP — sem ComprasNet, BLL, Licitações-e"
+            ]
+          },
+          "cobertura_atual_pct": 40
+        },
+        "S4_COMPARACAO_MULTI_PRODUTO": {
+          "nome": "Comparação Multi-Sistema Simultânea",
+          "estado_atual": {
+            "disponivel": false,
+            "workaround": "Usuário precisa rodar conformidade 3 vezes (uma por produto)"
+          },
+          "cobertura_atual_pct": 0
+        },
+        "S5_HISTORICO_LICITACOES": {
+          "nome": "Histórico e Business Intelligence de Licitações",
+          "estado_atual": {
+            "disponivel": false,
+            "dados_disponiveis": "Relatórios de conformidade são salvos em MongoDB, mas sem dashboard analítico"
+          },
+          "cobertura_atual_pct": 10
+        },
+        "S6_GERACAO_PROPOSTA": {
+          "nome": "Geração Automática de Proposta Técnica",
+          "estado_atual": {
+            "disponivel": "PARCIAL",
+            "o_que_existe": "doc-generator.js gera documentação genérica em Markdown",
+            "o_que_falta": "Proposta técnica estruturada com base nos requisitos do edital + capacidades do sistema"
+          },
+          "cobertura_atual_pct": 20
+        }
+      }
+    },
+    "HARDWARE": {
+      "descricao": "Componentes de hardware: equipamentos, certificações, especificações técnicas, protocolos",
+      "topicos": {
+        "H1_CATALOGO_EQUIPAMENTOS": {
+          "nome": "Catálogo de Especificações de Hardware",
+          "estado_atual": {
+            "disponivel": false,
+            "problema": "Editais de fiscalização eletrônica frequentemente especificam requisitos de hardware (velocidade de leitura de placa, faixa de atuação, temperatura de operação, IP rating). O sistema não tem base de dados de especificações técnicas dos equipamentos suportados."
+          },
+          "cobertura_atual_pct": 0
+        },
+        "H2_CERTIFICACOES": {
+          "nome": "Mapeamento de Certificações e Normas",
+          "estado_atual": {
+            "disponivel": false,
+            "certificacoes_relevantes": [
+              "INMETRO — balanças e equipamentos de medição (AxTon)",
+              "CONTRAN — equipamentos de fiscalização (AxHub/AxCross)",
+              "ISO 9001 — sistema de gestão da qualidade",
+              "ABNT NBR 14651 — tacógrafo digital",
+              "IEC 60529 — grau de proteção IP de equipamentos externos"
+            ]
+          },
+          "cobertura_atual_pct": 0
+        },
+        "H3_PROTOCOLOS_COMUNICACAO": {
+          "nome": "Protocolos de Comunicação e Integração",
+          "estado_atual": {
+            "disponivel": false,
+            "protocolos_relevantes": [
+              "NTCIP (National Transportation Communications for ITS Protocol) — semáforos",
+              "SNMP — monitoramento de equipamentos de rede",
+              "ONVIF — câmeras IP",
+              "FTP/SFTP — transferência de imagens/vídeos de fiscalização",
+              "SOAP/REST — integração com órgãos de trânsito (DETRAN, SENATRAN)"
+            ]
+          },
+          "cobertura_atual_pct": 0
+        },
+        "H4_COMPATIBILIDADE_FABRICANTES": {
+          "nome": "Matriz de Compatibilidade com Fabricantes",
+          "estado_atual": {
+            "disponivel": false,
+            "fabricantes_comuns_em_editais": [
+              "Pardini — radares e lombadas eletrônicas",
+              "Seltec — equipamentos de fiscalização",
+              "Perkons — balanças e radares",
+              "Citrox — câmeras e sistemas de leitura",
+              "Interbloco — equipamentos de cruzamento"
+            ]
+          },
+          "cobertura_atual_pct": 0
+        }
+      }
+    }
+  },
+
+  "projetos_melhoria": [
+    {
+      "id": "PROJ-001",
+      "grupo": "SOFTWARE",
+      "topico": "S1_EXTRACAO_DOCUMENTOS",
+      "titulo": "OCR para PDFs Escaneados e Extração Estruturada de Tabelas",
+      "prioridade": "ALTA",
+      "impacto": "Editais frequentemente são escaneados ou contêm tabelas de especificações técnicas. Sem OCR, ~30% dos editais enviados retornam texto incompleto.",
+      "tecnologias_sugeridas": ["Tesseract.js (OCR client-side)", "pdf2pic (PDF → imagem)", "GPT-4o Vision (OCR via IA para qualidade superior)"],
+      "arquivos_impactados": [
+        "axion-ia-api/src/services/extrator.js",
+        "axion-ia-api/src/services/parser.js"
+      ],
+      "implementacao": {
+        "descricao": "Adicionar fallback de OCR: se pdf-parse retornar < 200 chars, converter páginas em imagem e enviar ao GPT-4o Vision para extração de texto estruturado",
+        "endpoint_novo": "POST /api/doc/upload-contexto — adicionar flag 'forcarOCR' no body",
+        "passos": [
+          "1. Instalar: npm install pdf2pic tesseract.js",
+          "2. Em extrator.js: após pdf-parse, verificar se texto < 200 chars",
+          "3. Se sim, converter PDF → PNG via pdf2pic",
+          "4. Enviar imagem para GPT-4o: { role: 'user', content: [{type: 'image_url', ...}] }",
+          "5. Retornar texto + flag { ocr: true, metodo: 'gpt4o-vision' }"
+        ],
+        "estimativa_horas": 8
+      }
+    },
+    {
+      "id": "PROJ-002",
+      "grupo": "SOFTWARE",
+      "topico": "S2_ANALISE_CONFORMIDADE",
+      "titulo": "Análise de Conformidade Multi-Sistema Simultânea",
+      "prioridade": "ALTA",
+      "impacto": "Editais de grandes contratos frequentemente cobrem múltiplos subsistemas (pesagem + fiscalização + cruzamentos). Hoje o usuário precisa rodar 3 análises separadas e comparar manualmente.",
+      "tecnologias_sugeridas": ["Promise.all para análise paralela", "Score matrix comparativo"],
+      "arquivos_impactados": [
+        "axion-ia-api/src/services/conformidade.js",
+        "axion-ia-api/src/conformidade-controller.js",
+        "axion-ia-panel/src/pages/Conformidade.jsx"
+      ],
+      "implementacao": {
+        "descricao": "Novo endpoint POST /api/conformidade/gerar-multi que roda análise em paralelo para todos os produtos selecionados e retorna matriz comparativa",
+        "endpoint_novo": "POST /api/conformidade/gerar-multi",
+        "body": {
+          "produtos": ["axhub", "axton", "axcross"],
+          "tituloEdital": "string",
+          "textoEdital": "string",
+          "comJustificativas": true
+        },
+        "response": {
+          "matriz": [
+            {
+              "produto": "axhub",
+              "veredicto": "APTO",
+              "score": 0.87,
+              "atendidos": 42,
+              "parciais": 8,
+              "nao_atendidos": 3
+            }
+          ],
+          "melhorProduto": "axhub",
+          "recomendacao": "string gerada por IA comparando os 3 resultados"
+        },
+        "passos": [
+          "1. Criar gerarMultiConformidade() em conformidade.js",
+          "2. Promise.all([gerarProduto('axhub'), gerarProduto('axton'), gerarProduto('axcross')])",
+          "3. Calcular score numérico: atendidos*1 + parciais*0.5 / total",
+          "4. GPT adicional: prompt comparativo dos 3 resultados → recomendacao",
+          "5. Novo endpoint em conformidade-controller.js",
+          "6. No painel: aba 'Análise Completa' com heat-map dos 3 sistemas"
+        ],
+        "estimativa_horas": 12
+      }
+    },
+    {
+      "id": "PROJ-003",
+      "grupo": "SOFTWARE",
+      "topico": "S2_ANALISE_CONFORMIDADE",
+      "titulo": "Score de Risco do Edital e Classificação Automática",
+      "prioridade": "ALTA",
+      "impacto": "Permite priorizar quais editais merecem investimento de tempo para elaboração de proposta.",
+      "tecnologias_sugeridas": ["Scoring algorítmico", "OpenAI structured output (JSON Schema)"],
+      "arquivos_impactados": [
+        "axion-ia-api/src/services/conformidade.js",
+        "axion-ia-api/src/models/conformidade.model.js"
+      ],
+      "implementacao": {
+        "descricao": "Adicionar ao relatório de conformidade: score de risco (0-100), classificação de chance de vitória, principais pontos de atenção e recomendação go/no-go",
+        "campos_novos_modelo": {
+          "scoreRisco": "Number (0-100, 0=sem risco, 100=inviável)",
+          "classificacaoChance": "String (ALTA/MEDIA/BAIXA/INVIAVEL)",
+          "pontosAtencao": "Array<String>",
+          "recomendacaoGoNoGo": "String (GO/NO-GO/AVALIAR)",
+          "justificativaGoNoGo": "String"
+        },
+        "logica_scoring": {
+          "peso_nao_atendidos": 0.5,
+          "peso_parciais": 0.2,
+          "peso_valor_estimado": 0.15,
+          "peso_prazo_entrega": 0.15,
+          "formula": "score = (nao_atendidos/total)*50 + (parciais/total)*20 + ajuste_prazo + ajuste_valor"
+        },
+        "estimativa_horas": 6
+      }
+    },
+    {
+      "id": "PROJ-004",
+      "grupo": "SOFTWARE",
+      "topico": "S3_COLETA_PNCP",
+      "titulo": "Download Automático e Parse do PDF do Edital via PNCP",
+      "prioridade": "ALTA",
+      "impacto": "Hoje a coleta PNCP salva apenas metadados. O usuário ainda precisa abrir o edital manualmente, copiar o texto e colar no sistema. Automatizar isso elimina o maior atrito do fluxo atual.",
+      "tecnologias_sugeridas": ["axios para download do PDF", "pdf-parse existente", "GPT-4o Vision para PDFs escaneados"],
+      "arquivos_impactados": [
+        "axion-ia-api/src/services/pncp.service.js",
+        "axion-ia-api/src/coletor-controller.js"
+      ],
+      "implementacao": {
+        "descricao": "Ao importar do PNCP, baixar o PDF do edital via link, extrair texto e salvar junto com a Fonte no MongoDB",
+        "api_pncp_documentos": "GET https://pncp.gov.br/api/consulta/v1/orgaos/{cnpj}/compras/{ano}/{sequencial}/arquivos",
+        "passos": [
+          "1. Após buscarContratacoes(), para cada item com link válido:",
+          "2. GET /api/consulta/v1/orgaos/{cnpj}/compras/{ano}/{sequencial}/arquivos",
+          "3. Filtrar arquivo tipo 'EDITAL' (tipoDocumentoDescricao === 'Edital')",
+          "4. Download do PDF: axios.get(urlArquivo, { responseType: 'arraybuffer' })",
+          "5. Extrair texto via pdf-parse (com fallback OCR se < 200 chars)",
+          "6. Salvar em Fonte.textoEdital + Fonte.urlOriginal",
+          "7. Índice automático: agendar análise de conformidade após importar"
+        ],
+        "novo_campo_fonte": {
+          "textoEdital": "String (texto extraído do PDF)",
+          "urlPdf": "String",
+          "hashPdf": "String (MD5 para deduplicação)",
+          "dataDownload": "Date",
+          "paginasTotal": "Number",
+          "ocr": "Boolean"
+        },
+        "estimativa_horas": 10
+      }
+    },
+    {
+      "id": "PROJ-005",
+      "grupo": "SOFTWARE",
+      "topico": "S3_COLETA_PNCP",
+      "titulo": "Monitoramento Multi-Fonte: ComprasNet + BLL + PNCP",
+      "prioridade": "MÉDIA",
+      "impacto": "~40% dos editais municipais e estaduais ainda não estão no PNCP. Expandir para ComprasNet e BLL aumenta significativamente a cobertura.",
+      "tecnologias_sugeridas": ["Puppeteer (scraping ComprasNet)", "RSS feed BLL", "Cheerio (parse HTML)"],
+      "arquivos_impactados": [
+        "axion-ia-api/src/services/pncp.service.js",
+        "axion-ia-api/src/coletor-controller.js",
+        "axion-ia-api/src/scheduler.js"
+      ],
+      "implementacao": {
+        "descricao": "Criar adaptadores para múltiplas fontes com interface unificada. Cada adaptador implementa buscarContratacoes() retornando o mesmo schema.",
+        "arquivos_novos": [
+          "axion-ia-api/src/services/comprasnet.service.js",
+          "axion-ia-api/src/services/bll.service.js"
+        ],
+        "interface_unificada": {
+          "numero": "string",
+          "titulo": "string",
+          "orgao": "string",
+          "uf": "string",
+          "modalidade": "string",
+          "valor": "number",
+          "dataPublicacao": "string",
+          "dataAbertura": "string",
+          "link": "string",
+          "fonte": "PNCP|COMPRASNET|BLL",
+          "urlPdf": "string"
+        },
+        "estimativa_horas": 16
+      }
+    },
+    {
+      "id": "PROJ-006",
+      "grupo": "SOFTWARE",
+      "topico": "S5_HISTORICO_LICITACOES",
+      "titulo": "Dashboard de Inteligência Competitiva de Licitações",
+      "prioridade": "MÉDIA",
+      "impacto": "Sem histórico não é possível aprender quais tipos de edital o sistema ganha ou perde, nem identificar padrões de requisitos problemáticos recorrentes.",
+      "tecnologias_sugeridas": ["MongoDB aggregation", "React charts (recharts)", "Análise de padrões por IA"],
+      "arquivos_impactados": [
+        "axion-ia-api/src/models/conformidade.model.js",
+        "axion-ia-panel/src/pages/Conformidade.jsx"
+      ],
+      "implementacao": {
+        "descricao": "Adicionar ao modelo de Conformidade os campos de acompanhamento e criar tela de BI no painel",
+        "campos_novos_modelo": {
+          "statusLicitacao": "String (PROSPECTANDO/PROPOSTA_ENVIADA/GANHOU/PERDEU/DESCLASSIFICADO/CANCELADO)",
+          "motivoPerda": "String",
+          "concorrentes": "Array<String>",
+          "valorProposto": "Number",
+          "valorVencedor": "Number",
+          "dataResultado": "Date",
+          "observacoes": "String",
+          "numeroProcesso": "String (90.021/2025)"
+        },
+        "tela_bi": {
+          "kpis": [
+            "Taxa de vitória (últimos 12 meses)",
+            "Valor total de contratos ganhos",
+            "Produtos mais bem avaliados em editais",
+            "Requisitos mais frequentemente não atendidos"
+          ],
+          "graficos": [
+            "Linha temporal: editais analisados × ganhos × perdidos",
+            "Pizza: distribuição por produto (AxHub/AxTon/AxCross)",
+            "Barras: top requisitos não atendidos",
+            "Mapa: editais por UF"
+          ]
+        },
+        "estimativa_horas": 14
+      }
+    },
+    {
+      "id": "PROJ-007",
+      "grupo": "SOFTWARE",
+      "topico": "S6_GERACAO_PROPOSTA",
+      "titulo": "Gerador Automático de Proposta Técnica para Licitações",
+      "prioridade": "ALTA",
+      "impacto": "Reduz em horas o tempo de elaboração de propostas técnicas, padroniza o formato e garante que todos os requisitos do edital sejam respondidos.",
+      "tecnologias_sugeridas": ["OpenAI GPT-4o (geração estruturada)", "Markdown → PDF via Puppeteer", "Template engine"],
+      "arquivos_impactados": [
+        "axion-ia-api/src/doc-generator.js",
+        "axion-ia-api/src/doc-controller.js",
+        "axion-ia-panel/src/pages/GerarDoc.jsx"
+      ],
+      "implementacao": {
+        "descricao": "Novo endpoint que recebe o resultado da análise de conformidade e gera proposta técnica estruturada em Markdown (convertível para PDF)",
+        "endpoint_novo": "POST /api/doc/gerar-proposta-tecnica",
+        "body": {
+          "conformidadeId": "string (ID do relatório de conformidade gerado)",
+          "produto": "axhub|axton|axcross",
+          "dadosEmpresa": {
+            "nome": "string",
+            "cnpj": "string",
+            "representante": "string"
+          }
+        },
+        "estrutura_proposta": [
+          "1. Identificação da Empresa",
+          "2. Apresentação da Solução (por produto)",
+          "3. Atendimento aos Requisitos do Edital (tabela item a item)",
+          "4. Especificações Técnicas dos Equipamentos",
+          "5. Cronograma de Implantação",
+          "6. Suporte e Manutenção",
+          "7. Certificações e Atestados",
+          "8. Declarações Obrigatórias"
+        ],
+        "estimativa_horas": 12
+      }
+    },
+    {
+      "id": "PROJ-008",
+      "grupo": "SOFTWARE",
+      "topico": "S2_ANALISE_CONFORMIDADE",
+      "titulo": "Limite de Requisitos Dinâmico e Análise RAG para Editais Longos",
+      "prioridade": "MÉDIA",
+      "impacto": "Editais complexos (ex: 90.021 com muitas cláusulas técnicas) podem ter 200+ requisitos. O limite fixo de 150 trunca a análise.",
+      "tecnologias_sugeridas": ["Chunking por seção do edital", "RAG com MongoDB embeddings", "GPT-4o 128k context"],
+      "arquivos_impactados": [
+        "axion-ia-api/src/services/conformidade.js"
+      ],
+      "implementacao": {
+        "descricao": "Substituir limite fixo de 150 por chunking inteligente por seção do edital. Cada seção é processada separadamente e os resultados são consolidados.",
+        "passos": [
+          "1. Detectar seções do edital por headers (CLÁUSULA, SEÇÃO, CAPÍTULO)",
+          "2. Processar cada seção independentemente",
+          "3. Limite por seção: 30 requisitos",
+          "4. Máximo total: 300 requisitos (2x o atual)",
+          "5. Adicionar campo 'secao' em cada requisito extraído",
+          "6. Consolidar resultados por seção no relatório final"
+        ],
+        "estimativa_horas": 6
+      }
+    },
+    {
+      "id": "PROJ-009",
+      "grupo": "SOFTWARE",
+      "topico": "S3_COLETA_PNCP",
+      "titulo": "Alertas em Tempo Real: WhatsApp + E-mail para Novos Editais",
+      "prioridade": "MÉDIA",
+      "impacto": "Editais de licitação têm prazo de participação curto. Notificação imediata quando um edital relevante é publicado aumenta a janela de preparação.",
+      "tecnologias_sugeridas": ["WhatsApp Business API (já integrado no sistema)", "Nodemailer (e-mail)", "node-cron"],
+      "arquivos_impactados": [
+        "axion-ia-api/src/scheduler.js",
+        "axion-ia-api/src/coletor-controller.js"
+      ],
+      "implementacao": {
+        "descricao": "Ao coletar novos editais do PNCP (cron 6h), disparar alerta via WhatsApp/e-mail com resumo do edital e score de relevância",
+        "formato_alerta": {
+          "canal": "WhatsApp + E-mail",
+          "conteudo": "🔔 Novo edital relevante!\n📋 {titulo}\n🏛️ {orgao} - {uf}\n💰 R$ {valor}\n📅 Abertura: {dataAbertura}\n🎯 Relevância: {score}% para {produto}\n🔗 {link}"
+        },
+        "config_env_novos": [
+          "ALERTA_WHATSAPP_NUMERO=5511999999999",
+          "ALERTA_EMAIL=comercial@axion.com",
+          "ALERTA_SCORE_MINIMO=0.6"
+        ],
+        "estimativa_horas": 6
+      }
+    },
+    {
+      "id": "PROJ-010",
+      "grupo": "HARDWARE",
+      "topico": "H1_CATALOGO_EQUIPAMENTOS",
+      "titulo": "Catálogo de Especificações Técnicas de Equipamentos",
+      "prioridade": "ALTA",
+      "impacto": "Editais de fiscalização eletrônica frequentemente exigem especificações técnicas mínimas de hardware. Sem catálogo, a conformidade não valida requisitos de equipamento.",
+      "tecnologias_sugeridas": ["MongoDB collection 'equipamento'", "JSON Schema de especificações"],
+      "arquivos_novos": [
+        "axion-ia-api/src/models/equipamento.model.js",
+        "axion-ia-api/src/services/hardware-conformidade.js",
+        "axion-ia-api/src/equipamento-controller.js"
+      ],
+      "implementacao": {
+        "descricao": "Criar base de dados de equipamentos com especificações técnicas e integrar na análise de conformidade para validar requisitos de hardware do edital",
+        "schema_equipamento": {
+          "produto": "axhub|axton|axcross",
+          "categoria": "radar|camera|balanca|semaforo|leitor_placa|sensor",
+          "nome": "string",
+          "fabricante": "string",
+          "modelo": "string",
+          "especificacoes": {
+            "velocidade_medicao_kmh": { "min": 0, "max": 300 },
+            "precisao_medicao": "±1 km/h",
+            "faixas_monitoradas": 4,
+            "distancia_leitura_m": 30,
+            "resolucao_camera_mp": 5,
+            "temperatura_operacao_celsius": { "min": -20, "max": 70 },
+            "grau_protecao_ip": "IP66",
+            "tensao_alimentacao_v": "110/220V",
+            "consumo_energia_w": 150
+          },
+          "certificacoes": ["INMETRO RTM 008/2004", "CONTRAN 396/2011"],
+          "compatibilidade_sistemas": ["axhub", "axton"],
+          "normas_atendidas": ["ABNT NBR 10965", "CONTRAN 396/2011"]
+        },
+        "integracao_conformidade": "Ao analisar requisito técnico de hardware, buscar equipamento compatível no catálogo e verificar se especificação atende",
+        "estimativa_horas": 16
+      }
+    },
+    {
+      "id": "PROJ-011",
+      "grupo": "HARDWARE",
+      "topico": "H2_CERTIFICACOES",
+      "titulo": "Base de Certificações e Normas Técnicas Aplicáveis",
+      "prioridade": "ALTA",
+      "impacto": "Editais brasileiros de fiscalização eletrônica obrigatoriamente exigem certificação INMETRO e/ou aprovação CONTRAN. Sem este mapeamento, requisitos legais são ignorados na análise.",
+      "tecnologias_sugeridas": ["MongoDB collection 'certificacao'", "Integração na fase de extração de requisitos"],
+      "arquivos_novos": [
+        "axion-ia-api/src/models/certificacao.model.js",
+        "axion-ia-api/src/services/certificacao.js"
+      ],
+      "implementacao": {
+        "descricao": "Criar catálogo de certificações com mapeamento automático: quando a IA detecta requisito de certificação no edital, verifica quais produtos/equipamentos as possuem",
+        "dados_iniciais": [
+          {
+            "codigo": "INMETRO-RTM-008",
+            "descricao": "Equipamentos de controle de velocidade",
+            "orgao_emissor": "INMETRO",
+            "resolucao": "RTM 008/2004",
+            "obrigatorio_para": ["radar_velocidade", "lombada_eletronica"],
+            "sistemas_axion": ["axhub"],
+            "keywords_edital": ["inmetro", "rtm 008", "controlador de velocidade"]
+          },
+          {
+            "codigo": "CONTRAN-396",
+            "descricao": "Equipamentos de registro de infrações de trânsito",
+            "orgao_emissor": "CONTRAN",
+            "resolucao": "Resolução 396/2011 e suas atualizações",
+            "obrigatorio_para": ["camera_fiscalizacao", "radar", "leitor_placa"],
+            "sistemas_axion": ["axhub", "axcross"],
+            "keywords_edital": ["contran", "resolução 396", "denatran", "senatran"]
+          },
+          {
+            "codigo": "INMETRO-BALANCA",
+            "descricao": "Instrumentos de pesagem em movimento (WIM)",
+            "orgao_emissor": "INMETRO",
+            "resolucao": "Portaria INMETRO 301/2003",
+            "obrigatorio_para": ["balanca_dinamica", "wim"],
+            "sistemas_axion": ["axton"],
+            "keywords_edital": ["wim", "pesagem em movimento", "balança dinâmica"]
+          }
+        ],
+        "estimativa_horas": 8
+      }
+    },
+    {
+      "id": "PROJ-012",
+      "grupo": "HARDWARE",
+      "topico": "H3_PROTOCOLOS_COMUNICACAO",
+      "titulo": "Validação de Protocolos de Comunicação em Editais",
+      "prioridade": "MÉDIA",
+      "impacto": "Editais de semáforos inteligentes e CTT (Central de Tráfego) frequentemente exigem suporte a NTCIP e outros protocolos. Hoje o sistema ignora completamente esses requisitos.",
+      "tecnologias_sugeridas": ["Banco de protocolos em JSON", "Keywords de detecção no extrator de requisitos"],
+      "arquivos_impactados": [
+        "axion-ia-api/src/services/conformidade.js",
+        "axion-ia-api/src/services/normalizador.js"
+      ],
+      "implementacao": {
+        "descricao": "Adicionar dicionário de protocolos de comunicação ao normalizador, criando categoria específica para requisitos de integração/comunicação",
+        "dicionario_protocolos": {
+          "NTCIP": { "descricao": "National Transportation Communications for ITS Protocol", "sistemas": ["axcross"], "suportado": false },
+          "ONVIF": { "descricao": "Open Network Video Interface Forum — câmeras IP", "sistemas": ["axhub", "axcross"], "suportado": true },
+          "SNMP": { "descricao": "Simple Network Management Protocol", "sistemas": ["axhub", "axton", "axcross"], "suportado": false },
+          "FTP_SFTP": { "descricao": "Transferência segura de imagens/vídeos", "sistemas": ["axhub"], "suportado": true },
+          "SOAP_REST": { "descricao": "APIs de integração com DETRAN/SENATRAN", "sistemas": ["axhub"], "suportado": true }
+        },
+        "estimativa_horas": 6
+      }
+    },
+    {
+      "id": "PROJ-013",
+      "grupo": "SOFTWARE",
+      "topico": "S2_ANALISE_CONFORMIDADE",
+      "titulo": "Painel de Edital Inteligente — Tela Dedicada no Painel",
+      "prioridade": "ALTA",
+      "impacto": "A funcionalidade de conformidade está 'escondida' no menu. Criar uma tela principal de 'Editais' com fluxo completo (busca → análise → proposta → histórico) melhora drasticamente a usabilidade.",
+      "tecnologias_sugeridas": ["React", "Stepper component", "Timeline component"],
+      "arquivos_novos": [
+        "axion-ia-panel/src/pages/Editais.jsx",
+        "axion-ia-panel/src/pages/EditalDetalhe.jsx"
+      ],
+      "arquivos_impactados": [
+        "axion-ia-panel/src/App.jsx"
+      ],
+      "implementacao": {
+        "descricao": "Nova tela /editais com fluxo guiado em 5 passos para análise completa de um edital",
+        "fluxo_tela": {
+          "passo_1": "Busca: pesquisar no PNCP ou colar texto/upload do PDF",
+          "passo_2": "Identificação: título, número do pregão, órgão, data abertura",
+          "passo_3": "Análise: selecionar produtos → rodar conformidade multi-sistema",
+          "passo_4": "Resultado: matriz de aderência, score de risco, recomendação go/no-go",
+          "passo_5": "Ação: gerar proposta técnica ou arquivar com status (ganhou/perdeu)"
+        },
+        "componentes_novos": [
+          "MatrizConformidade.jsx — heat-map dos 3 sistemas",
+          "ScoreRisco.jsx — gauge chart do score de risco",
+          "TimelineEdital.jsx — status histórico do processo"
+        ],
+        "rota_nova": "/editais",
+        "estimativa_horas": 20
+      }
+    },
+    {
+      "id": "PROJ-014",
+      "grupo": "SOFTWARE",
+      "topico": "S2_ANALISE_CONFORMIDADE",
+      "titulo": "Análise de Imagens do Edital via GPT-4o Vision",
+      "prioridade": "BAIXA",
+      "impacto": "Alguns editais incluem diagramas técnicos, plantas e esquemas que contêm requisitos visuais (topologia de rede, dimensões de equipamentos). Hoje são completamente ignorados.",
+      "tecnologias_sugeridas": ["GPT-4o Vision", "pdf2pic (conversão PDF → imagem)"],
+      "arquivos_impactados": [
+        "axion-ia-api/src/services/extrator.js",
+        "axion-ia-api/src/services/conformidade.js"
+      ],
+      "implementacao": {
+        "descricao": "Ao processar PDF de edital, identificar páginas com imagens/diagramas e enviar para GPT-4o Vision para extração de requisitos técnicos visuais",
+        "estimativa_horas": 8
+      }
+    },
+    {
+      "id": "PROJ-015",
+      "grupo": "HARDWARE",
+      "topico": "H4_COMPATIBILIDADE_FABRICANTES",
+      "titulo": "Matriz de Compatibilidade de Fabricantes por Produto Axion",
+      "prioridade": "MÉDIA",
+      "impacto": "Órgãos licitantes frequentemente especificam fabricantes homologados ou exigem compatibilidade com equipamentos já instalados. Ter esta matriz permite responder tecnicamente a esses requisitos.",
+      "tecnologias_sugeridas": ["MongoDB collection 'fabricante'", "JSON de compatibilidade"],
+      "arquivos_novos": [
+        "axion-ia-api/src/models/fabricante.model.js"
+      ],
+      "implementacao": {
+        "descricao": "Catálogo de fabricantes e modelos compatíveis com cada sistema Axion, usado na análise de conformidade e geração de proposta",
+        "schema_fabricante": {
+          "nome": "string",
+          "cnpj": "string",
+          "categorias": ["radar", "camera", "balanca"],
+          "modelos_homologados": [
+            {
+              "modelo": "string",
+              "versao_firmware_minima": "string",
+              "protocolos": ["ONVIF", "FTP"],
+              "sistemas_axion": ["axhub"],
+              "data_homologacao": "date"
+            }
+          ]
+        },
+        "estimativa_horas": 8
+      }
+    }
+  ],
+
+  "roadmap_implementacao": {
+    "sprint_1": {
+      "duracao": "2 semanas",
+      "foco": "Foundation — Melhorias na extração e análise core",
+      "projetos": ["PROJ-001", "PROJ-008"],
+      "estimativa_total_horas": 14,
+      "impacto_esperado": "Análise correta de 95% dos editais (incluindo PDFs escaneados), sem truncamento de editais longos"
+    },
+    "sprint_2": {
+      "duracao": "2 semanas",
+      "foco": "Multi-sistema + Risk scoring",
+      "projetos": ["PROJ-002", "PROJ-003"],
+      "estimativa_total_horas": 18,
+      "impacto_esperado": "Análise comparativa dos 3 sistemas em uma operação, com classificação automática de risco go/no-go"
+    },
+    "sprint_3": {
+      "duracao": "2 semanas",
+      "foco": "Automação PNCP + Alertas",
+      "projetos": ["PROJ-004", "PROJ-009"],
+      "estimativa_total_horas": 16,
+      "impacto_esperado": "PDFs baixados automaticamente do PNCP, alertas WhatsApp/e-mail de novos editais"
+    },
+    "sprint_4": {
+      "duracao": "2 semanas",
+      "foco": "Hardware + Certificações",
+      "projetos": ["PROJ-010", "PROJ-011", "PROJ-012"],
+      "estimativa_total_horas": 30,
+      "impacto_esperado": "Validação de requisitos técnicos de hardware e certificações INMETRO/CONTRAN nos editais"
+    },
+    "sprint_5": {
+      "duracao": "3 semanas",
+      "foco": "UX — Tela de Editais + Proposta Técnica + BI",
+      "projetos": ["PROJ-007", "PROJ-013", "PROJ-006"],
+      "estimativa_total_horas": 46,
+      "impacto_esperado": "Fluxo completo de edital: busca → análise → proposta → histórico, com dashboard de BI competitivo"
+    },
+    "sprint_6": {
+      "duracao": "2 semanas",
+      "foco": "Multi-fonte + fabricantes",
+      "projetos": ["PROJ-005", "PROJ-015"],
+      "estimativa_total_horas": 24,
+      "impacto_esperado": "Cobertura de editais de ComprasNet e BLL além do PNCP, com matriz de compatibilidade de fabricantes"
+    }
+  },
+
+  "resumo_executivo": {
+    "estado_atual": "O sistema tem base sólida para análise de conformidade por produto individual, com coleta PNCP funcional. A qualidade da análise textual é boa para editais digitais, mas tem gaps críticos em PDFs escaneados, hardware e análise multi-sistema.",
+    "prioridade_imediata": [
+      "PROJ-001: OCR para PDFs escaneados — elimina 30% de falhas na extração",
+      "PROJ-002: Análise multi-sistema — elimina 3x o trabalho manual atual",
+      "PROJ-004: Download automático do PDF do edital — maior redução de atrito no fluxo",
+      "PROJ-010: Catálogo de hardware — cobre gap crítico em requisitos técnicos de equipamento"
+    ],
+    "diferencial_competitivo": "Com as melhorias dos sprints 1-3, o sistema passa de 'ferramenta de apoio manual' para 'plataforma autônoma de inteligência de licitações', monitorando 24/7, analisando automaticamente e gerando propostas técnicas — cenário sem equivalente direto no mercado de sistemas de tráfego no Brasil.",
+    "estimativa_total_horas": 128,
+    "projetos_total": 15
+  }
+}

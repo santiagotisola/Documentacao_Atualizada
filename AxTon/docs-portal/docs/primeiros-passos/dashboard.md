@@ -1,18 +1,14 @@
 ---
 sidebar_position: 2
 title: Painel Principal (Dashboard)
-description: Painel principal do AxTon com indicadores operacionais, alertas e notas fiscais
+description: Painel principal do AxTon com indicadores operacionais de pesagem, infrações e últimas pesagens
 ---
 
 # Painel Principal (Dashboard)
 
-![Tela do Dashboard](../img/dashboard.png)
+![Tela do Dashboard](../img/axton-dashboard.png)
 
-O Painel Principal é a tela inicial do AxTon após a autenticação.
-
-![Dashboards](../img/Dashborads.png)
-
-Apresenta uma visão completa do estado operacional do sistema, com gráficos, alertas em tempo real e rastreamento de notas fiscais.
+O Painel Principal é a tela inicial do AxTon após a autenticação. Apresenta uma visão consolidada dos indicadores operacionais de pesagem veicular, incluindo contagens do mês, gráficos de distribuição e o histórico das últimas pesagens realizadas.
 
 ## Como acessar
 
@@ -21,43 +17,45 @@ Apresenta uma visão completa do estado operacional do sistema, com gráficos, a
 
 ---
 
-## Painéis do Dashboard
+## Indicadores do Dashboard
 
-O Dashboard é composto por **5 painéis principais**, cada um focado em um aspecto da operação:
+O Dashboard apresenta **4 contadores principais** no topo da tela:
 
-### 1. Alertas por Tipo
+| Indicador | Descrição |
+|-----------|----------|
+| **Pesagens Realizadas em Maio** | Total de pesagens concluídas no mês atual |
+| **Infrações Realizadas em Maio** | Total de infrações registradas no mês atual |
+| **Total de Pesagens na Operação** | Soma de todas as pesagens no contexto da operação ativa |
+| **Total de Infrações na Operação** | Soma de todas as infrações da operação ativa |
 
-| Item | Descrição |
-|------|-----------|
-| **Período** | Últimas 72 horas |
-| **Visualização** | Gráfico de barras horizontal |
-| **Dados** | Quantidade de alertas agrupados por tipo (ex: "Veículo sem MDF-e") |
-| **Utilidade** | Identificar rapidamente os tipos de ocorrências mais frequentes |
+## Seções do Dashboard
 
-### 2. Fluxo de Passagens
+### Distribuição de Pesagens e Infrações Diário
 
-| Item | Descrição |
-|------|-----------|
-| **Período** | Últimas 24 horas |
-| **Visualização** | Gráfico de barras vertical (por hora) |
-| **Dados** | Número de passagens de veículos registradas a cada hora |
-| **Utilidade** | Avaliar o volume de tráfego e identificar horários de pico |
+Gráfico que exibe a distribuição diária de pesagens e infrações. Permite visualizar:
+- Volume de veículos pesados por dia
+- Comparativo entre pesagens regulares e infrações
+- Tendências ao longo da operação
 
-### 3. Origem das Cargas
+### Últimas Pesagens
 
-| Item | Descrição |
-|------|-----------|
-| **Visualização** | Gráfico de rosca (donut) com percentual por UF |
-| **Dados** | Distribuição percentual da origem das cargas por unidade federativa |
-| **Utilidade** | Mapear de onde vêm as cargas que passam pelo posto |
+Lista cronológica das pesagens mais recentes. Cada registro exibe:
 
-### 4. Alertas Recentes
+| Campo | Descrição |
+|-------|-----------|
+| **Placa** | Placa do veículo pesado |
+| **Data/Hora** | Momento exato da pesagem |
+| **Peso (kg)** | Peso bruto total medido |
 
-| Item | Descrição |
-|------|-----------|
-| **Atualização** | Monitoramento em tempo real |
-| **Colunas** | Placa, Local, Data/Hora, Tipo, Ações |
-| **Dados** | Lista dos últimos alertas detectados pelo sistema |
+Exemplos de registros reais do sistema:
+- `SGD5E44` — 27/02/2026 13:42 — **42.800 kg**
+- `RSC7D78` — 27/02/2026 09:06 — **78.450 kg**
+- `RXQ0F30` — 27/02/2026 08:58 — **76.200 kg**
+- `TNJ5R62` — 26/02/2026 16:15 — **92.400 kg** *(exemplo de sobrecarga)*
+
+### Comparativo de Pesagens e Infrações
+
+Gráfico comparativo que correlaciona o total de pesagens com as infrações geradas por período, útil para avaliação de eficiência da operação.
 | **Utilidade** | Ação imediata sobre ocorrências em andamento |
 
 Quando não há alertas recentes, o painel exibe: *"Nenhum alerta recente encontrado — Os alertas aparecerão aqui quando detectados"*.

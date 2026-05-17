@@ -1,8 +1,8 @@
 {
-  "version": "3.0.0",
-  "updated": "2026-04-27",
+  "version": "3.1.0",
+  "updated": "2026-05-08",
   "system": "AxTon",
-  "description": "Base de conhecimento do assistente AxionIA para o sistema AxTon — pesagem veicular",
+  "description": "Base de conhecimento do assistente AxionIA para o sistema AxTon — pesagem veicular. Atualizado com dados reais do sistema (maio/2026).",
   "dataSourceLinks": {
     "documentation": "/AxTon.Docs/",
     "database": "AxTon.sql",
@@ -260,13 +260,14 @@
         "criar",
         "novo"
       ],
-      "content": "Cadastro e gestão das classificações de veículos",
+      "content": "Cadastro e gestão das classificações de veículos com PBT e eixos. Classificações cadastradas: 2C (16t), 2CC (12t), 3C (23t), 3CD (19,5t), 4C (31,5t), 4CD (29t), 2S1 (26t), 2S2 (33t), 2S3 (41,5t), 2I2 (36t), 2I3 (45t), 2I1 (43t).",
       "steps": [
+        "No menu lateral, clique em **Classificações**",
         "Na listagem, clique em **+ Novo**",
-        "Informe o **Código** e a **Descrição** da classificação",
-        "Preencha o **Número de Eixos** correspondente à categoria",
-        "Informe o **Peso Máximo** permitido em toneladas",
-        "Confirme que o campo **Ativo** está marcado",
+        "Informe o **Código** numérico e a **Classe** (sigla)",
+        "Preencha a **Denominação** completa do tipo de veículo",
+        "Informe os **Eixos** no formato dianteiros/traseiros (ex: 2/3)",
+        "Informe o **PBT Regulamentado** em toneladas",
         "Clique em **Salvar**"
       ],
       "path": "Classificações",
@@ -289,12 +290,12 @@
         "criar",
         "novo"
       ],
-      "content": "Cadastro e gestão dos locais de pesagem",
+      "content": "Cadastro e gestão dos locais de pesagem. Locais cadastrados: PI503B (PI 247 KM 115, Uruçuí-PI), PI504B (PI 247 Divisa PI/MA, Uruçuí-PI), PI505B (BR 135 KM 120, Bertolinia-PI).",
       "steps": [
+        "No menu lateral, clique em **Locais**",
         "Na listagem, clique em **+ Novo**",
-        "Informe o **Código** e a **Descrição** do local",
-        "Preencha o **Endereço**, se disponível",
-        "Verifique se o campo **Ativo** está marcado",
+        "Informe o **Código** do local (ex: PI503B)",
+        "Preencha o **CEP**, **Endereço**, **Bairro**, **Município** e **UF**",
         "Clique em **Salvar**"
       ],
       "path": "Locais",
@@ -320,18 +321,46 @@
         "criar",
         "novo"
       ],
-      "content": "Configuração do sequencial de numeração de infrações",
+      "content": "Configuração do sequencial de numeração de infrações. Sequenciais configurados: 212→99999 (Excesso de PBT), 1060→99999 (Excesso de Eixo), 1098→99999 (Excesso de Eixo/PBT).",
       "steps": [
+        "No menu lateral, clique em **Sequenciais de Infração**",
         "Na listagem, clique em **+ Novo**",
-        "Informe o **Código** e a **Descrição** do sequencial",
-        "Defina o **Número Inicial** a partir do qual a contagem começará",
-        "Informe o **Prefixo**, se aplicável",
-        "Confirme que o campo **Ativo** está marcado",
+        "Informe o **Sequencial Inicial** (próximo número a usar)",
+        "Informe o valor **Até** (normalmente 99999)",
+        "Selecione o **Tipo de Infração** (Excesso de PBT / Eixo / Eixo+PBT)",
         "Clique em **Salvar**"
       ],
       "path": "Sequencial de Infração",
       "docUrl": "cadastros/sequencial-infracao",
-      "related": [],
+      "related": ["cadastros-sequencial-exportacao"],
+      "dbTables": []
+    },
+    {
+      "id": "cadastros-sequencial-exportacao",
+      "title": "Sequencial de Exportação",
+      "module": "Cadastros",
+      "keywords": [
+        "sequencial de exportação",
+        "sequencial exportacao",
+        "lote",
+        "exportação",
+        "numeração",
+        "sequencial",
+        "arquivo",
+        "infração"
+      ],
+      "content": "Configuração da numeração dos lotes de exportação. Diferente do sequencial de infração (que numera autos individuais), este numera os arquivos/lotes exportados ao órgão. Sequenciais: 61→99999 (PBT), 67→99999 (Eixo), 71→99999 (Eixo/PBT).",
+      "steps": [
+        "No menu lateral, clique em **Sequenciais de Exportação**",
+        "Clique em **+ Novo**",
+        "Informe o **Sequencial Inicial** (próximo número de lote)",
+        "Informe o **Sequencial Final** (normalmente 99999)",
+        "Selecione o **Tipo de Infração**",
+        "Clique em **Salvar**"
+      ],
+      "path": "Sequenciais de Exportação",
+      "docUrl": "cadastros/sequencial-exportacao",
+      "related": ["infracoes-exportacao", "cadastros-sequencial-infracao"],
       "dbTables": []
     },
     {
@@ -572,15 +601,16 @@
         "auto",
         "autuacao"
       ],
-      "content": "--- sidebar_position: 4 title: Exportação de Infrações",
+      "content": "Exportação de infrações em lotes para o órgão autuador. Tipos: XTraffic e AxHub. Tipos de infração: Excesso de PBT, Excesso de Eixo, Excesso de Eixo/PBT. Sequenciais de exportação: 61→99999 (PBT), 67→99999 (Eixo), 71→99999 (Eixo/PBT). Status possíveis: Ok, Processando, Error.",
       "steps": [
         "No menu lateral, clique em **Exportação**",
-        "Clique em **Gerar Novo Lote**",
-        "Defina o período e filtros",
-        "Revise a quantidade de infrações",
-        "Clique em **Gerar**",
-        "Após gerado, clique em **Enviar**",
-        "Acompanhe o status até \"Aceito\""
+        "Clique em **+ Novo**",
+        "Selecione o **Tipo de Exportação** (XTraffic ou AxHub)",
+        "Selecione o **Tipo de Infração**",
+        "Defina o **Período** (Data Inicial e Data Final)",
+        "Clique em **Salvar**",
+        "Aguarde o status mudar para **Ok**",
+        "Clique em **Visualizar** para conferir o conteúdo"
       ],
       "path": "Exportação",
       "docUrl": "infracoes/exportacao",
@@ -979,18 +1009,48 @@
         "veiculo",
         "balanca"
       ],
-      "content": "Gerenciamento de tickets de pesagem pendentes",
+      "content": "Gerenciamento de tickets de pesagem. Colunas: Data, Placa, PBT, Eixos, Classe, Status (Finalizado), Ações (Visualizar). Exemplos reais: RSC7D78 (74t, 5/9 eixos, 3T6), SGD5E44 (48,5t, 3/6, 3S3), ROM5J10 (23t, 2/3, 3C).",
       "steps": [
         "No menu lateral, clique em **Tickets de Pesagens**",
-        "Localize o ticket desejado",
-        "Clique em **Visualizar**",
-        "Verifique os dados do veículo e pesos",
-        "Clique em **Finalizar**",
-        "Confirme a operação"
+        "Localize o ticket desejado pela placa ou data",
+        "Clique em **Visualizar** para ver os detalhes completos",
+        "Para iniciar nova pesagem, clique em **+ Nova Pesagem**"
       ],
       "path": "Tickets de Pesagens",
       "docUrl": "pesagem/ticket-aberto",
-      "related": [],
+      "related": ["pesagem-iniciar"],
+      "dbTables": []
+    },
+    {
+      "id": "pesagem-iniciar",
+      "title": "Iniciar Pesagem",
+      "module": "Pesagem",
+      "keywords": [
+        "iniciar pesagem",
+        "nova pesagem",
+        "pesagem",
+        "pesar",
+        "balança",
+        "placa",
+        "classificação",
+        "PBT",
+        "eixo",
+        "veiculo",
+        "caminhao",
+        "peso"
+      ],
+      "content": "Fluxo para iniciar uma pesagem veicular. Etapas: 1) Selecionar tipo do veículo (por Classificação ou PBT), 2) Informar a placa, 3) Aguardar leitura da balança HAENNI, 4) Finalizar. Se o peso exceder o PBT Considerado (PBT Reg + tolerância), infração é gerada automaticamente.",
+      "steps": [
+        "No menu lateral, clique em **Iniciar Pesagem**",
+        "Busque e selecione a **Classificação** do veículo (ex: 3S3, 2S2)",
+        "Informe a **Placa** do veículo",
+        "Clique em **Continuar**",
+        "Aguarde a leitura da balança",
+        "Confirme os dados e finalize"
+      ],
+      "path": "Iniciar Pesagem",
+      "docUrl": "pesagem/iniciar-pesagem",
+      "related": ["pesagem-ticket-aberto", "cadastros-classificacao-veiculos"],
       "dbTables": []
     },
     {
@@ -1416,8 +1476,13 @@
         "parametro",
         "opcao"
       ],
-      "content": "--- sidebar_position: 1 title: Configurações do Sistema",
-      "steps": [],
+      "content": "Configurações do sistema AxTon: Gerais (código equipamento, tipo exportação XTraffic/AxHub, URL AxHub, Chave API), Dados do Órgão (código, nome, título), HAENNI (balança: Hnuid, classe, modelo, serial, lacre, validade aferição), Infração (tolerância PBT %, tolerância eixo %, código enquadramento). Fórmula PBT: PBT Considerado = PBT Reg + (PBT Reg × Tolerância%). Excesso = PBT Medido - PBT Considerado.",
+      "steps": [
+        "No menu lateral, clique em **Sistema**",
+        "Selecione a aba desejada: Gerais, Dados do Órgão, HAENNI, Infração ou Câmera IP",
+        "Preencha os campos necessários",
+        "Clique em **Salvar**"
+      ],
       "path": "Sistema",
       "docUrl": "sistema/configuracoes",
       "related": [],

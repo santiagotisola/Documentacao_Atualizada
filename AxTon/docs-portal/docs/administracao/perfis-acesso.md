@@ -10,28 +10,32 @@ O módulo de perfis de acesso define os conjuntos de permissões que serão atri
 
 ## Como acessar
 
-**Menu lateral** → Administração → **Perfis de acesso**
+**Menu lateral** → **Perfis de Acesso**
 
 ## Listagem
 
-![Tela de Perfis de Acesso — Lista](../img/perfil-acesso-usuario.png)
+![Tela de Perfis de Acesso](../img/axton-perfis-acesso.png)
 
 ### Colunas
 
 | Coluna | Descrição |
 |--------|-----------|
-| **Código** | Código de identificação do perfil |
-| **Descrição** | Nome do perfil de acesso |
-| **Ativo** | Indica se o perfil está habilitado para atribuição a usuários |
+| **Nome** | Nome do perfil de acesso |
+| **Ações** | Editar e Excluir |
 
-### Ações disponíveis na listagem
+### Perfis cadastrados no sistema
+
+| Perfil | Descrição de uso |
+|--------|-----------------|
+| **Porteiro** | Operador de cancela com acesso limitado à pesagem |
+
+### Ações disponíveis
 
 | Ação | Descrição |
 |------|-----------|
 | **+ Novo** | Cadastrar um novo perfil de acesso |
-| **Pesquisa** | Buscar perfis por qualquer campo da listagem |
-| **Editar** | Alterar os dados de um perfil existente (ícone lápis) |
-| **Excluir** | Remover um perfil do sistema (ícone X) |
+| **Editar** | Alterar nome e permissões do perfil |
+| **Excluir** | Remover o perfil (não permitido se houver usuários vinculados) |
 
 ## Cadastro
 

@@ -1,0 +1,229 @@
+version: "3.8"
+
+# ============================================================
+# STACK GRATUITA — AxionIA com custo operacional R$ 0
+# Serviços open-source auto-hospedados na VPS existente
+# ============================================================
+# 
+# USO:
+#   docker compose up -d
+#
+# REQUIREMENTS:
+#   VPS: 4+ vCPU, 8+ GB RAM, 50+ GB SSD
+#   (Hostinger KVM4: R$ 80/mês — já existente)
+#
+# CUSTO TOTAL: R$ 80/mês (apenas VPS)
+# ANTES (serviços pagos): R$ 927-2.927/mês
+# ECONOMIA: -97%
+# ============================================================
+
+services:
+
+  # ─── LLM LOCAL (substitui OpenAI) ─────────────────────────
+  # Custo: R$ 0 (open-source)
+  # Performance: ~80% do GPT-4o para análise de textos
+  # Modelos sugeridos: llama3.2, gemma3:12b, mistral:7b
+  ollama:
+    image: ollama/ollama:latest
+    container_name: ollama
+    restart: unless-stopped
+    ports:
+      - "11434:11434"
+    volumes:
+      - ollama_models:/root/.ollama
+    environment:
+      - OLLAMA_KEEP_ALIVE=24h
+      - OLLAMA_NUM_PARALLEL=2
+    # Se tiver GPU NVIDIA, descomente:
+    # deploy:
+    #   resources:
+    #     reservations:
+    #       devices:
+    #         - driver: nvidia
+    #           count: 1
+    #           capabilities: [gpu]
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:11434/api/tags"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # ─── VECTOR DATABASE (substitui Pinecone) ─────────────────
+  # Custo: R$ 0 (open-source)
+  # Armazena embeddings para busca semântica
+  chroma:
+    image: chromadb/chroma:latest
+    container_name: chromadb
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    volumes:
+      - chroma_data:/chroma/chroma
+    environment:
+      - CHROMA_SERVER_AUTH_CREDENTIALS_PROVIDER=chromadb.auth.token.TokenConfigServerAuthCredentialsProvider
+      - CHROMA_SERVER_AUTH_PROVIDER=chromadb.auth.token.TokenAuthServerProvider
+      - CHROMA_AUTH_TOKEN_TRANSPORT_HEADER=AUTHORIZATION
+      - CHROMA_SERVER_AUTH_CREDENTIALS=${CHROMA_TOKEN:-axiontoken123}
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/api/v1/heartbeat"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # ─── MONGODB COMMUNITY (substitui MongoDB Atlas pago) ─────
+  # Custo: R$ 0 (open-source)
+  # Atlas M10: R$ 57/mês → Community: R$ 0
+  mongodb:
+    image: mongo:7.0
+    container_name: mongodb
+    restart: unless-stopped
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+      - ./mongo-init.js:/docker-entrypoint-initdb.d/init.js:ro
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=${MONGO_USER:-axion}
+      - MONGO_INITDB_ROOT_PASSWORD=${MONGO_PASSWORD:-axionpass123}
+      - MONGO_INITDB_DATABASE=axionia
+    healthcheck:
+      test: ["CMD", "mongosh", "--eval", "db.adminCommand('ping')"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+
+  # ─── AXION IA API ──────────────────────────────────────────
+  axion-api:
+    build:
+      context: ./axion-ia-api
+      dockerfile: Dockerfile
+    container_name: axion-api
+    restart: unless-stopped
+    ports:
+      - "3100:3100"
+    environment:
+      - NODE_ENV=production
+      - MONGO_URI=mongodb://axion:axionpass123@mongodb:27017/axionia?authSource=admin
+      - OLLAMA_URL=http://ollama:11434
+      - CHROMA_URL=http://chroma:8000
+      - CHROMA_TOKEN=${CHROMA_TOKEN:-axiontoken123}
+      # OpenAI ainda disponível como fallback opcional
+      - OPENAI_API_KEY=${OPENAI_API_KEY:-}
+      # Modo: "free" usa Ollama | "paid" usa OpenAI | "hybrid" usa ambos
+      - IA_MODE=${IA_MODE:-free}
+    depends_on:
+      ollama:
+        condition: service_healthy
+      chroma:
+        condition: service_healthy
+      mongodb:
+        condition: service_healthy
+    volumes:
+      - ./axion-ia-api/uploads:/app/uploads
+      - ./axion-ia-api/logs:/app/logs
+
+  # ─── AXION PAINEL REACT ────────────────────────────────────
+  axion-panel:
+    build:
+      context: ./axion-ia-panel
+      dockerfile: Dockerfile
+    container_name: axion-panel
+    restart: unless-stopped
+    ports:
+      - "3001:80"
+    depends_on:
+      - axion-api
+
+  # ─── NGINX (proxy + SSL gratuito via Let's Encrypt) ────────
+  # Substitui AWS Load Balancer (R$ 100-300/mês) por NGINX (R$ 0)
+  nginx:
+    image: nginx:alpine
+    container_name: nginx
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+      - certbot_data:/etc/letsencrypt
+      - certbot_www:/var/www/certbot
+    depends_on:
+      - axion-api
+      - axion-panel
+
+  # ─── SSL GRATUITO (Let's Encrypt, substitui AWS ACM pago) ──
+  certbot:
+    image: certbot/certbot:latest
+    container_name: certbot
+    volumes:
+      - certbot_data:/etc/letsencrypt
+      - certbot_www:/var/www/certbot
+    # Renovar automaticamente (a cada 12h verifica se precisa renovar)
+    entrypoint: "/bin/sh -c 'trap exit TERM; while :; do certbot renew; sleep 12h & wait $${!}; done;'"
+
+  # ─── INTERFACE WEB PARA OLLAMA (grátis) ───────────────────
+  # Opcional: acessar modelos via browser (open-webui.com)
+  ollama-webui:
+    image: ghcr.io/open-webui/open-webui:main
+    container_name: ollama-webui
+    restart: unless-stopped
+    ports:
+      - "3002:8080"
+    volumes:
+      - openwebui_data:/app/backend/data
+    environment:
+      - OLLAMA_BASE_URL=http://ollama:11434
+      - WEBUI_AUTH=false
+    depends_on:
+      - ollama
+
+  # ─── MONITORAMENTO GRATUITO (substitui DataDog R$ 200+/mês) ─
+  # Prometheus + Grafana = R$ 0
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: prometheus
+    restart: unless-stopped
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml:ro
+      - prometheus_data:/prometheus
+
+  grafana:
+    image: grafana/grafana:latest
+    container_name: grafana
+    restart: unless-stopped
+    ports:
+      - "3003:3000"
+    volumes:
+      - grafana_data:/var/lib/grafana
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=${GRAFANA_PASSWORD:-admin}
+      - GF_USERS_ALLOW_SIGN_UP=false
+
+  # ─── BACKUP AUTOMÁTICO NO S3 (AWS Free Tier 5GB) ──────────
+  # Backup gratuito com AWS S3 Free Tier (5GB incluso)
+  backup:
+    image: offen/docker-volume-backup:latest
+    container_name: backup
+    restart: unless-stopped
+    volumes:
+      - mongo_data:/backup/mongo:ro
+      - chroma_data:/backup/chroma:ro
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    environment:
+      - BACKUP_CRON_EXPRESSION=0 2 * * *    # Todo dia às 2h da manhã
+      - AWS_S3_BUCKET=${S3_BUCKET:-axionbackup}
+      - AWS_ACCESS_KEY_ID=${AWS_KEY:-}
+      - AWS_SECRET_ACCESS_KEY=${AWS_SECRET:-}
+      - BACKUP_RETENTION_DAYS=7
+
+volumes:
+  ollama_models:
+  chroma_data:
+  mongo_data:
+  certbot_data:
+  certbot_www:
+  openwebui_data:
+  prometheus_data:
+  grafana_data:

@@ -1,0 +1,16 @@
+/* Variáveis de compatibilidade com Docusaurus (Infima) */
+:root {
+  --ifm-background-color: #ffffff;
+  --ifm-card-background-color: #ffffff;
+  --ifm-color-emphasis-100: #f0f0f2;
+  --ifm-color-emphasis-200: #dee0e3;
+  --ifm-color-emphasis-300: #c4c6ca;
+  --ifm-color-emphasis-500: #8d919a;
+  --ifm-color-emphasis-600: #606770;
+  --ifm-color-emphasis-700: #444950;
+  --ifm-color-primary: #2e8555;
+  --ifm-color-primary-dark: #277148;
+  --ifm-color-primary-lightest: #4fddbf;
+  --ifm-color-primary-rgb: 46, 133, 85;
+  --ifm-font-color-base: #1c1e21;
+}

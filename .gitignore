@@ -10,6 +10,13 @@ build/
 # Logs e dados sensíveis
 **/logs/
 .env
+**/.env
+
+# WhatsApp auth (dados sensíveis de sessão)
+**/whatsapp-auth/
+
+# Uploads temporários
+**/uploads/
 
 # Arquivos de análise gerados (podem conter chaves de API)
 all-projects-analysis.txt

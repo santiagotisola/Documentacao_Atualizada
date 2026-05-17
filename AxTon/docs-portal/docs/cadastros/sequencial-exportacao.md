@@ -1,0 +1,69 @@
+---
+sidebar_position: 4
+title: Sequencial de Exportação
+description: Configuração da numeração dos lotes de exportação de infrações no AxTon
+---
+
+# Sequencial de Exportação
+
+![Tela de Sequenciais de Exportação](../img/axton-sequenciais-exportacao.png)
+
+O módulo de **Sequencial de Exportação** controla a numeração dos **lotes de exportação** gerados pelo AxTon. Diferente do Sequencial de Infração (que numera os autos individuais), este sequencial numera os **arquivos de lote** enviados ao órgão autuador.
+
+## Como acessar
+
+**Menu lateral** → **Sequenciais de Exportação**
+
+## Listagem
+
+### Colunas
+
+| Coluna | Descrição |
+|--------|-----------|
+| **Sequencial Inicial** | Número de início da contagem dos lotes |
+| **Sequencial Final** | Número máximo de lotes (limite superior) |
+| **Tipo de Infração** | Tipo de infração do lote |
+| **Ações** | Editar e Excluir |
+
+### Sequenciais cadastrados no sistema
+
+| Sequencial Inicial | Até | Tipo de Infração |
+|--------------------|-----|------------------|
+| **61** | 99.999 | Excesso de PBT |
+| **67** | 99.999 | Excesso de Eixo |
+| **71** | 99.999 | Excesso de Eixo/PBT |
+
+:::info Diferença entre Sequenciais
+- **Sequencial de Infração** → numera cada **auto de infração** individual
+- **Sequencial de Exportação** → numera cada **lote/arquivo** exportado ao órgão
+:::
+
+## Cadastro
+
+### Campos
+
+| Campo | Obrigatório | Descrição |
+|-------|:-----------:|-----------|
+| **Sequencial Inicial** | Sim | Número de início da contagem de lotes |
+| **Sequencial Final** | Sim | Limite superior da numeração |
+| **Tipo de Infração** | Sim | Excesso de PBT, Excesso de Eixo ou Excesso de Eixo/PBT |
+
+### Passo a passo — Configurar sequencial de exportação
+
+1. No menu lateral, clique em **Sequenciais de Exportação**
+2. Clique em **+ Novo**
+3. Informe o **Sequencial Inicial** (próximo número a ser usado)
+4. Informe o **Sequencial Final** (normalmente 99999)
+5. Selecione o **Tipo de Infração**
+6. Clique em **Salvar**
+
+:::warning Atenção
+Configure um sequencial para **cada tipo de infração**. A geração de lotes de exportação exige que o sequencial correspondente esteja configurado.
+:::
+
+## Veja também
+
+| Funcionalidade | Descrição |
+|---|---|
+| [**Exportação de Infrações**](../infracoes/exportacao) | Gerar e enviar lotes de infrações |
+| [**Sequencial de Infração**](../cadastros/sequencial-infracao) | Numeração dos autos individuais |

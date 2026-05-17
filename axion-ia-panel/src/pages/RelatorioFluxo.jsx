@@ -12,7 +12,7 @@ const MESES = [
 
 // Gradiente de cor baseado no valor relativo à linha (máx da linha)
 function corCelula(valor, maximo) {
-  if (!valor || valor === 0 || !maximo) return { bg: "#1e293b", color: "#64748b" };
+  if (!valor || valor === 0 || !maximo) return { bg: "#1e293b", color: "#94a3b8" };
   const pct = valor / maximo;
   if (pct > 0.85) return { bg: "#dc2626", color: "#fff" };   // vermelho
   if (pct > 0.65) return { bg: "#ea580c", color: "#fff" };   // laranja
@@ -161,7 +161,7 @@ export default function RelatorioFluxo() {
           ].map(({ label, val }) => (
             <div key={label} style={{ background: "#1e293b", border: "1px solid #334155", borderRadius: 8, padding: "8px 16px", textAlign: "center", minWidth: 100 }}>
               <div style={{ fontSize: 18, fontWeight: 700, color: "#60a5fa" }}>{val}</div>
-              <div style={{ fontSize: 11, color: "#64748b" }}>{label}</div>
+              <div style={{ fontSize: 11, color: "#94a3b8" }}>{label}</div>
             </div>
           ))}
         </div>
@@ -266,7 +266,7 @@ export default function RelatorioFluxo() {
       )}
 
       {dados && dados.linhas.length === 0 && !carregando && (
-        <div style={{ textAlign: "center", padding: 60, color: "#64748b" }}>
+        <div style={{ textAlign: "center", padding: 60, color: "#94a3b8" }}>
           <p style={{ fontSize: 36 }}>📊</p>
           <p>Nenhum dado encontrado para o período selecionado.</p>
           <p style={{ fontSize: 12 }}>Verifique se o banco AxHub está conectado e se há registros para {MESES[mes-1]}/{ano}.</p>
@@ -274,7 +274,7 @@ export default function RelatorioFluxo() {
       )}
 
       {!dados && !carregando && (
-        <div style={{ textAlign: "center", padding: 60, color: "#64748b" }}>
+        <div style={{ textAlign: "center", padding: 60, color: "#94a3b8" }}>
           <p style={{ fontSize: 36 }}>🗂️</p>
           <p>Selecione o tipo, período e equipamento, depois clique em <strong>Consultar</strong>.</p>
         </div>
@@ -282,7 +282,7 @@ export default function RelatorioFluxo() {
 
       {/* Legenda */}
       <div style={{ display: "flex", gap: 10, marginTop: 16, flexWrap: "wrap", alignItems: "center" }}>
-        <span style={{ fontSize: 11, color: "#64748b" }}>Legenda (relativo ao máximo da linha):</span>
+        <span style={{ fontSize: 11, color: "#94a3b8" }}>Legenda (relativo ao máximo da linha):</span>
         {[
           { bg: "#0f766e", label: "Baixo (< 20%)" },
           { bg: "#16a34a", label: "Normal (20–40%)" },

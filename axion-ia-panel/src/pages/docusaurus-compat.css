@@ -1,0 +1,16 @@
+/* Variáveis de compatibilidade com Docusaurus (Infima) — Portal Light Cards */
+:root {
+  --ifm-background-color: rgba(255,255,255,0.95);
+  --ifm-card-background-color: rgba(255,255,255,0.95);
+  --ifm-color-emphasis-100: #f1f5f9;
+  --ifm-color-emphasis-200: #e2e8f0;
+  --ifm-color-emphasis-300: #cbd5e1;
+  --ifm-color-emphasis-500: #64748b;
+  --ifm-color-emphasis-600: #475569;
+  --ifm-color-emphasis-700: #334155;
+  --ifm-color-primary: #2563eb;
+  --ifm-color-primary-dark: #1e40af;
+  --ifm-color-primary-lightest: #dbeafe;
+  --ifm-color-primary-rgb: 37, 99, 235;
+  --ifm-font-color-base: #1e293b;
+}

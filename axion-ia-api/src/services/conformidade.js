@@ -106,6 +106,10 @@ function extrairHeuristica(texto) {
     /^(ART(?:IGO|\.)\s*\d+[ºª°]?\s*.{3,60})/i,// Art. 1º
   ];
 
+  // ── Padrão para extrair items numerados de linhas com múltiplos itens ──
+  // Exemplo: "1. Login 2. Dashboard 3. API REST"
+  const PATTERN_ITENS_NUMERADOS = /(\d+)\.\s+([^0-9]{10,80}?)(?=\s+\d+\.|$)/gi;
+
   // ── Verbos que indicam obrigação funcional ──
   const VERBOS_REQ = /\b(dever[áa]|dever[ãa]o|deve\s+(?:possuir|ter|conter|incluir|contemplar|realizar|suportar|permitir|garantir|gerar|registrar|emitir|controlar|monitorar|gerenciar|processar|calcular|validar|integrar|exportar|importar)|precisa\s+(?:ter|possuir)|é\s+(?:obrigatório|necessário|requerido)|possibilitar[áa]|disponibilizar[áa])/i;
 
@@ -165,6 +169,20 @@ function extrairHeuristica(texto) {
         matched = true;
         break;
       }
+    }
+
+    // Se encontrou itens numerados na linha (ex: "1. item1 2. item2 3. item3")
+    if (!matched && /\d+\.\s+.{10,}/.test(l)) {
+      let itemMatch;
+      while ((itemMatch = PATTERN_ITENS_NUMERADOS.exec(l)) !== null) {
+        const itemText = itemMatch[2].trim();
+        if (itemText.length >= 10) {
+          add(itemText);
+        }
+      }
+      // Reset para próxima linha
+      PATTERN_ITENS_NUMERADOS.lastIndex = 0;
+      matched = true;
     }
 
     // Linhas com verbos de requisito (mesmo que não comecem com numeração)

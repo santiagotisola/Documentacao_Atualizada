@@ -266,7 +266,7 @@ export default function GerarDoc() {
                         style={{ background: "none", border: "none", color: "#f87171", cursor: "pointer", fontSize: 16, lineHeight: 1 }}>✕</button>
                     </div>
                   )
-                  : <span style={{ fontSize: 12, color: "#64748b" }}>📂 Arraste ou clique para anexar PDF, DOCX, XLSX, TXT ou imagem<br/><small>A IA usará o conteúdo como contexto</small></span>
+                  : <span style={{ fontSize: 12, color: "#94a3b8" }}>📂 Arraste ou clique para anexar PDF, DOCX, XLSX, TXT ou imagem<br/><small>A IA usará o conteúdo como contexto</small></span>
               }
               <input ref={inputFileRef} type="file" accept=".pdf,.docx,.doc,.xlsx,.xls,.csv,.txt,.md,.png,.jpg,.jpeg,.gif,.webp,.bmp,.svg"
                 style={{ display: "none" }} onChange={e => handleArquivo(e.target.files[0])} />
