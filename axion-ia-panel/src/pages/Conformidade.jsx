@@ -34,7 +34,7 @@ const ETAPAS = [
   { id: 4, label: "Gerando justificativas",   descricao: "Análise técnica via IA" },
 ];
 
-export default function Conformidade({ embedded = false }) {
+export default function Conformidade({ embedded = false, preloadData = null }) {
   const [produto, setProduto]         = useState("axhub");
   const [aba, setAba]                 = useState("lista");
   const [lista, setLista]             = useState([]);
@@ -58,21 +58,24 @@ export default function Conformidade({ embedded = false }) {
 
   // Pré-preenche se veio de "Fontes de Pesquisa → 📜 Conformidade" (só no mount)
   useEffect(() => {
-    const preload = sessionStorage.getItem("conformidade_preload");
-    if (!preload) return;
-    try {
-      const { titulo, conteudo, produto: prodPreload } = JSON.parse(preload);
-      if (titulo)      setTituloEdital(titulo);
-      if (conteudo)    setTextoEdital(conteudo);
-      if (prodPreload) setProduto(prodPreload);
-      setAba("novo");
-      setInfoArquivo({
-        nome: titulo || "Documento importado",
-        palavras: (conteudo || "").split(/\s+/).filter(Boolean).length,
-        chars: (conteudo || "").length,
-      });
-    } catch { /* ignora dados corrompidos */ }
-    sessionStorage.removeItem("conformidade_preload");
+    // Prioridade 1: prop direta (overlay inline)
+    const data = preloadData || (() => {
+      const raw = sessionStorage.getItem("conformidade_preload");
+      if (!raw) return null;
+      sessionStorage.removeItem("conformidade_preload");
+      try { return JSON.parse(raw); } catch { return null; }
+    })();
+    if (!data) return;
+    const { titulo, conteudo, produto: prodPreload } = data;
+    if (titulo)      setTituloEdital(titulo);
+    if (conteudo)    setTextoEdital(conteudo);
+    if (prodPreload) setProduto(prodPreload);
+    setAba("novo");
+    setInfoArquivo({
+      nome: titulo || "Documento importado",
+      palavras: (conteudo || "").split(/\s+/).filter(Boolean).length,
+      chars: (conteudo || "").length,
+    });
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   async function carregarLista() {

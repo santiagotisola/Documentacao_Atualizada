@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from "react";
-import { useNavigate } from "react-router-dom";
 import { api } from "../services/api";
+import Conformidade from "./Conformidade";
 
 const PRODUTOS = [
   { value: "axhub",   label: "AxHub",   icon: "🖥️",  cor: "#3b82f6" },
@@ -19,7 +19,6 @@ const TIPOS = [
 // ─── ABAS PRINCIPAIS ──────────────────────────────────────────────
 const ABAS = [
   { id: "fontes",    label: "📋 Fontes Cadastradas" },
-  { id: "pncp",     label: "🔎 Coletar do PNCP"    },
   { id: "adicionar", label: "+ Adicionar Fonte"     },
   { id: "analise",   label: "📊 Análise de Cobertura" },
   { id: "sugestoes", label: "💡 Sugestões de Melhoria" },
@@ -28,6 +27,7 @@ const ABAS = [
 export default function FontesPesquisa() {
   const [produto, setProduto] = useState("axhub");
   const [aba, setAba] = useState("fontes");
+  const [conformidadeFonte, setConformidadeFonte] = useState(null); // fonte selecionada para conformidade
 
   return (
     <div>
@@ -69,11 +69,40 @@ export default function FontesPesquisa() {
         ))}
       </div>
 
-      {aba === "fontes"    && <TabFontes produto={produto} onAnalisar={() => setAba("analise")} />}
-      {aba === "pncp"     && <TabPNCP produto={produto} onImportado={() => setAba("fontes")} />}
+      {aba === "fontes"    && <TabFontes produto={produto} onAnalisar={() => setAba("analise")} onConformidade={setConformidadeFonte} />}
       {aba === "adicionar" && <TabAdicionar produto={produto} onSucesso={() => setAba("fontes")} />}
       {aba === "analise"   && <TabAnalise produto={produto} />}
       {aba === "sugestoes" && <TabSugestoes produto={produto} />}
+
+      {/* ── Overlay: Conformidade inline ── */}
+      {conformidadeFonte && (
+        <div style={{
+          position: "fixed", inset: 0, zIndex: 9999,
+          background: "rgba(0,0,0,0.65)", backdropFilter: "blur(4px)",
+          display: "flex", justifyContent: "center", alignItems: "flex-start",
+          padding: "2rem", overflowY: "auto",
+        }}
+          onClick={e => { if (e.target === e.currentTarget) setConformidadeFonte(null); }}
+        >
+          <div style={{
+            background: "var(--surface)", borderRadius: 16, padding: "1.5rem",
+            width: "100%", maxWidth: 1100, maxHeight: "90vh", overflowY: "auto",
+            border: "1px solid var(--border)", boxShadow: "0 8px 32px rgba(0,0,0,0.5)",
+          }}>
+            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "1rem" }}>
+              <h3 style={{ margin: 0, fontSize: "1rem", color: "var(--text)" }}>
+                📜 Conformidade — {conformidadeFonte.titulo}
+              </h3>
+              <button
+                onClick={() => setConformidadeFonte(null)}
+                style={{ background: "none", border: "none", color: "var(--text-muted)", fontSize: "1.3rem", cursor: "pointer" }}
+                title="Fechar"
+              >✕</button>
+            </div>
+            <Conformidade embedded preloadData={conformidadeFonte} />
+          </div>
+        </div>
+      )}
     </div>
   );
 }
@@ -408,12 +437,11 @@ function TabPNCP({ produto, onImportado }) {
 // ═══════════════════════════════════════════════════════
 // ABA: Fontes Cadastradas
 // ═══════════════════════════════════════════════════════
-function TabFontes({ produto, onAnalisar }) {
+function TabFontes({ produto, onAnalisar, onConformidade }) {
   const [fontes, setFontes] = useState([]);
   const [carregando, setCarregando] = useState(true);
   const [analisando, setAnalisando] = useState(null);
   const [msg, setMsg] = useState(null);
-  const navigate = useNavigate();
 
   const carregar = useCallback(() => {
     setCarregando(true);
@@ -445,15 +473,13 @@ function TabFontes({ produto, onAnalisar }) {
 
   async function handleConformidade(fonte) {
     try {
-      // Busca conteúdo completo (a listagem omite o campo conteudo)
       const r = await api.get(`/fontes/${fonte._id}`);
       const completo = r.data;
-      sessionStorage.setItem("conformidade_preload", JSON.stringify({
+      onConformidade({
         titulo: completo.titulo,
         conteudo: completo.conteudo,
         produto,
-      }));
-      navigate("/conformidade");
+      });
     } catch {
       setMsg({ tipo: "error", texto: "Erro ao carregar conteúdo da fonte para conformidade." });
     }
