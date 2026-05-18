@@ -22,7 +22,7 @@ const INPUT_MODES = [
   { id: "upload", label: "📂 Upload / Colar", desc: "Envie PDF ou cole o texto manualmente" },
 ];
 
-export default function AnaliseEditalAvancada({ embedded = false }) {
+export default function AnaliseEditalAvancada({ embedded = false, onEditalChange }) {
   const [tab, setTab] = useState("input");
   const [inputMode, setInputMode] = useState("buscar");
   const [termoBusca, setTermoBusca] = useState("");
@@ -52,6 +52,13 @@ export default function AnaliseEditalAvancada({ embedded = false }) {
   useEffect(() => {
     api.get("/sites").then(r => setSites(r.data)).catch(() => {});
   }, []);
+
+  // Notificar pipeline pai quando dados do edital mudam
+  useEffect(() => {
+    if (onEditalChange) {
+      onEditalChange({ titulo, texto: textoEdital, produto: produtoSelecionado, orgao });
+    }
+  }, [titulo, textoEdital, produtoSelecionado, orgao]); // eslint-disable-line react-hooks/exhaustive-deps
 
   // Upload de arquivo → extrair texto → preencher textarea
   const handleUpload = async (e) => {

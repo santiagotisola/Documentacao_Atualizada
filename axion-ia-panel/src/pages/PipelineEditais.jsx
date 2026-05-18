@@ -21,6 +21,14 @@ const ETAPAS = [
 export default function PipelineEditais() {
   const [etapa, setEtapa] = useState("avancada");
 
+  // Estado compartilhado do edital — flui da Etapa 1 para as demais
+  const [editalCompartilhado, setEditalCompartilhado] = useState({
+    titulo: "",
+    texto: "",
+    produto: "",
+    orgao: "",
+  });
+
   const etapaAtual = ETAPAS.find(e => e.id === etapa);
   const idxAtual = ETAPAS.findIndex(e => e.id === etapa);
 
@@ -96,8 +104,17 @@ export default function PipelineEditais() {
 
       {/* Content area */}
       <div style={{ flex: 1, overflow: "auto", padding: "0 20px 20px" }}>
-        {etapa === "avancada"     && <AnaliseEditalAvancada embedded />}
-        {etapa === "conformidade" && <Conformidade embedded />}
+        {etapa === "avancada"     && <AnaliseEditalAvancada embedded onEditalChange={setEditalCompartilhado} />}
+        {etapa === "conformidade" && (
+          <Conformidade
+            embedded
+            preloadData={editalCompartilhado.texto ? {
+              titulo: editalCompartilhado.titulo,
+              conteudo: editalCompartilhado.texto,
+              produto: editalCompartilhado.produto,
+            } : null}
+          />
+        )}
         {etapa === "revisao"      && <ConfidencaRevisao embedded />}
         {etapa === "roadmap"      && <Roadmap embedded />}
         {etapa === "specs"        && <Specs embedded />}
