@@ -4,7 +4,7 @@ import {
   Brain, LayoutDashboard, Globe, BookOpen, Ticket,
   Bot, MessageCircle, Headphones,
   ScanSearch, ScanLine, CheckCircle2, BookMarked,
-  Target, ShieldCheck, BarChart3,
+  ShieldCheck, BarChart3,
   Landmark, PieChart, Map, Ruler,
   FileText, Search, Clock, GraduationCap, ScrollText,
   Settings, ExternalLink, Menu, X
@@ -27,7 +27,6 @@ import ConfidencaRevisao from "./pages/ConfidencaRevisao.jsx";
 import PlanilhaHoras from "./pages/PlanilhaHoras.jsx";
 import WhatsApp from "./pages/WhatsApp.jsx";
 import AnaliseImagens from "./pages/AnaliseImagens.jsx";
-import SlaCompliance from "./pages/SlaCompliance.jsx";
 import MapaOperacoes from "./pages/MapaOperacoes.jsx";
 import AnaliseEditalAvancada from "./pages/AnaliseEditalAvancada.jsx";
 import BuscaEditaisGov from "./pages/BuscaEditaisGov.jsx";
@@ -53,7 +52,7 @@ const PAGE_INFO = {
   "/helpdesk": { title: "Helpdesk", subtitle: "Gestão de tickets e atendimento Jitbit", icon: "🎧" },
   "/analise-imagens": { title: "Análise de Imagens", subtitle: "OCR, validação e qualidade de capturas", icon: "📷" },
   "/confianca": { title: "Fila de Revisão", subtitle: "Revisão de confiança OCR por lote", icon: "✅" },
-  "/sla-compliance": { title: "SLA Compliance", subtitle: "Conformidade de SLA por site e período", icon: "🎯" },
+
   "/conformidade": { title: "Conformidade", subtitle: "Verificação de requisitos de editais", icon: "🛡️" },
   "/relatorio-fluxo": { title: "Relatório de Fluxo", subtitle: "Métricas de atendimento e fluxo operacional", icon: "📊" },
   "/editais-gov": { title: "Editais Gov", subtitle: "Busca e análise de editais no PNCP", icon: "🏛️" },
@@ -95,7 +94,6 @@ const MENU_SECTIONS = [
     items: [
       { to: "/analise-imagens", icon: ScanLine, label: "Análise de Imagens" },
       { to: "/confianca", icon: CheckCircle2, label: "Fila de Revisão" },
-      { to: "/sla-compliance", icon: Target, label: "SLA Compliance" },
       { to: "/conformidade", icon: ShieldCheck, label: "Conformidade" },
       { to: "/relatorio-fluxo", icon: BarChart3, label: "Relatório de Fluxo" },
     ]
@@ -241,7 +239,7 @@ function AppContent() {
           <Route path="/confianca" element={<ConfidencaRevisao />} />
           <Route path="/relatorio-fluxo" element={<RelatorioFluxo />} />
           <Route path="/planilha-horas" element={<PlanilhaHoras />} />
-          <Route path="/sla-compliance" element={<SlaCompliance />} />
+
           <Route path="/whatsapp" element={<WhatsApp />} />
           <Route path="/analise-imagens" element={<AnaliseImagens />} />
           <Route path="/treinamento" element={<Treinamento />} />

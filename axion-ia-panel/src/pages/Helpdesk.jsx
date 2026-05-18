@@ -1,5 +1,5 @@
 ﻿import { useEffect, useState, useRef } from "react";
-import { api } from "../services/api";
+import { api, apiFetch } from "../services/api";
 
 const FILTROS_INICIAL = {
   sectionId: "",
@@ -27,6 +27,92 @@ const PRIORIDADE_OPCOES = [
   { value: "2", label: "Alta" },
   { value: "3", label: "Crítica" },
 ];
+
+// ── SLA Compliance helpers ───────────────────────────────────────────────────
+const JITBIT_BASE = "https://desk.axiontecnologia.com.br";
+
+const SLA_PRIORIDADES = [
+  { value: "",         label: "Todas" },
+  { value: "Critical", label: "Crítico" },
+  { value: "High",     label: "Alta" },
+  { value: "Normal",   label: "Normal" },
+  { value: "Low",      label: "Baixa" },
+];
+
+const PRIORIDADE_PT = {
+  Critical: "Crítico",
+  High:     "Alta",
+  Normal:   "Normal",
+  Low:      "Baixa",
+};
+
+function corSla(prioridade) {
+  return { Critical: "#ef4444", High: "#f97316", Normal: "#60a5fa", Low: "#94a3b8" }[prioridade] || "#60a5fa";
+}
+
+function DonutChart({ met, breached, naoAvaliados, label }) {
+  const total = met + breached + naoAvaliados;
+  if (total === 0) return <div style={{ color: "#94a3b8", fontSize: 12 }}>Sem dados</div>;
+  const R = 44, cx = 60, cy = 60, stroke = 18;
+  const circ = 2 * Math.PI * R;
+  function slice(valor, offset, fill) {
+    const dash = (valor / total) * circ;
+    return <circle key={fill} cx={cx} cy={cy} r={R} fill="none" stroke={fill} strokeWidth={stroke} strokeDasharray={`${dash} ${circ - dash}`} strokeDashoffset={-offset} strokeLinecap="butt" transform={`rotate(-90 ${cx} ${cy})`} />;
+  }
+  const offMet = 0, offBreached = (met / total) * circ, offNone = offBreached + (breached / total) * circ;
+  const pct = met + breached > 0 ? Math.round((met / (met + breached)) * 10) / 0.1 : null;
+  return (
+    <div style={{ display: "flex", alignItems: "center", gap: 16 }}>
+      <svg width={120} height={120} viewBox="0 0 120 120">
+        {slice(met, offMet, "#22c55e")}
+        {slice(breached, offBreached, "#ef4444")}
+        {slice(naoAvaliados, offNone, "#334155")}
+        <text x={cx} y={cy - 6} textAnchor="middle" fill="#f1f5f9" fontSize="15" fontWeight="700">{pct !== null ? `${pct}%` : "—"}</text>
+        <text x={cx} y={cy + 10} textAnchor="middle" fill="#94a3b8" fontSize="8">{label}</text>
+      </svg>
+      <div style={{ fontSize: 12 }}>
+        {[{ cor: "#22c55e", txt: `Met: ${met}` }, { cor: "#ef4444", txt: `Breached: ${breached}` }, { cor: "#334155", txt: `Abertos: ${naoAvaliados}` }].map(({ cor: c, txt }) => (
+          <div key={txt} style={{ display: "flex", alignItems: "center", gap: 6, marginBottom: 4 }}>
+            <span style={{ width: 10, height: 10, borderRadius: "50%", background: c, display: "inline-block", flexShrink: 0 }} />
+            <span style={{ color: "#94a3b8" }}>{txt}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function KpiCard({ titulo, valor, sub, destaque }) {
+  return (
+    <div style={{ background: "#1e293b", border: `1px solid ${destaque ? "#2563eb" : "#334155"}`, borderRadius: 10, padding: "14px 20px", minWidth: 160, flex: "1 1 160px" }}>
+      <div style={{ fontSize: 11, color: "#94a3b8", textTransform: "uppercase", letterSpacing: 1, marginBottom: 4 }}>{titulo}</div>
+      <div style={{ fontSize: 28, fontWeight: 800, color: destaque ? "#60a5fa" : "#f1f5f9" }}>{valor ?? "—"}</div>
+      {sub && <div style={{ fontSize: 11, color: "#94a3b8", marginTop: 2 }}>{sub}</div>}
+    </div>
+  );
+}
+
+function SlaBadge({ valor }) {
+  if (valor === null || valor === undefined) return <span style={{ color: "#475569" }}>—</span>;
+  const met = valor === "Met";
+  return <span style={{ display: "inline-block", padding: "2px 10px", borderRadius: 12, fontSize: 12, fontWeight: 700, background: met ? "#14532d" : "#450a0a", color: met ? "#4ade80" : "#f87171" }}>{met ? "Met" : "Breached"}</span>;
+}
+
+function fmtMin(mins) {
+  if (mins === null || mins === undefined) return "—";
+  if (mins < 60) return `${mins} min`;
+  const h = Math.floor(mins / 60), m = mins % 60;
+  return m > 0 ? `${h}h ${m}min` : `${h}h`;
+}
+
+const slaStyles = {
+  select: { padding: "6px 10px", borderRadius: 6, border: "1px solid #334155", background: "#1e293b", color: "#e2e8f0", fontSize: 13, minWidth: 160 },
+  input: { padding: "6px 10px", borderRadius: 6, border: "1px solid #334155", background: "#1e293b", color: "#e2e8f0", fontSize: 13, width: 130 },
+  btnPrimary: { padding: "8px 20px", background: "#2563eb", color: "#fff", border: "none", borderRadius: 6, cursor: "pointer", fontWeight: 600, fontSize: 13, alignSelf: "flex-end" },
+  btnSuccess: { padding: "8px 16px", background: "#16a34a", color: "#fff", border: "none", borderRadius: 6, cursor: "pointer", fontWeight: 600, fontSize: 13, alignSelf: "flex-end" },
+  th: { padding: "8px 10px", border: "1px solid #1e293b", color: "#94a3b8", textAlign: "left", fontWeight: 700, whiteSpace: "nowrap", cursor: "pointer", userSelect: "none" },
+  td: { padding: "7px 10px", border: "1px solid #1e293b", color: "#e2e8f0", verticalAlign: "middle" },
+};
 
 export default function Helpdesk() {
   const [tickets, setTickets]       = useState([]);
@@ -59,6 +145,23 @@ export default function Helpdesk() {
   const [acaoFila, setAcaoFila]     = useState(null);
   const [motivoRejeicao, setMotivoRejeicao] = useState("");
   const filaTimer = useRef(null);
+
+  // SLA Compliance state
+  const hoje = new Date();
+  const anoAtual = hoje.getFullYear();
+  const mesAtual = String(hoje.getMonth() + 1).padStart(2, "0");
+  const ultimoDia = new Date(hoje.getFullYear(), hoje.getMonth() + 1, 0).getDate();
+  const [slaDateFrom, setSlaDateFrom]             = useState(`${anoAtual}-${mesAtual}-01`);
+  const [slaDateTo, setSlaDateTo]                 = useState(`${anoAtual}-${mesAtual}-${String(ultimoDia).padStart(2, "0")}`);
+  const [slaSectionId, setSlaSectionId]           = useState("");
+  const [slaPriority, setSlaPriority]             = useState("");
+  const [slaResponseTarget, setSlaResponseTarget] = useState("24");
+  const [slaResolutionTarget, setSlaResolutionTarget] = useState("72");
+  const [slaDados, setSlaDados]                   = useState(null);
+  const [slaCarregando, setSlaCarregando]         = useState(false);
+  const [slaErro, setSlaErro]                     = useState("");
+  const [slaOrdenacao, setSlaOrdenacao]           = useState({ campo: "ticketId", asc: true });
+  const [slaFiltroTabela, setSlaFiltroTabela]     = useState("todos");
 
   const MODOS = [
     { value: 0, label: "Abertos" },
@@ -211,6 +314,45 @@ export default function Helpdesk() {
   const scoreBg    = s => s >= 0.85 ? "rgba(34,197,94,0.1)" : s >= 0.65 ? "rgba(245,158,11,0.1)" : "rgba(239,68,68,0.1)";
   const decisaoLabel = d => d === "AUTO_RESPONDER" ? "Alta confianca" : d === "SUGERIR" ? "Moderada" : "Baixa";
 
+  // ── SLA Compliance functions ────────────────────────────────────────────────
+  async function buscarSla() {
+    setSlaCarregando(true);
+    setSlaErro("");
+    setSlaDados(null);
+    try {
+      const params = new URLSearchParams({ dateFrom: slaDateFrom, dateTo: slaDateTo, responseTarget: slaResponseTarget, resolutionTarget: slaResolutionTarget });
+      if (slaSectionId) params.set("sectionId", slaSectionId);
+      if (slaPriority)  params.set("priority", slaPriority);
+      const r = await apiFetch(`/helpdesk/sla-compliance?${params}`);
+      const d = await r.json();
+      if (!r.ok) { setSlaErro(d.erro || "Erro ao buscar dados."); return; }
+      setSlaDados(d);
+    } catch { setSlaErro("Erro de comunicação com a API."); }
+    finally { setSlaCarregando(false); }
+  }
+
+  function exportarSlaCsv() {
+    if (!slaDados) return;
+    const header = ["Ticket","Assunto","Prioridade","Categoria","Status","Response (min)","Response SLA","Resolution (min)","Resolution SLA","URL"].join(";");
+    const linhas = slaDados.tickets.map(t => [t.ticketId, `"${(t.assunto||"").replace(/"/g,"'")}"`, PRIORIDADE_PT[t.prioridade]||t.prioridade, t.categoria, t.status, t.responseMins??"", t.responseSla??"", t.resolutionMins??"", t.resolutionSla??"", t.url].join(";"));
+    const csv = "\uFEFF" + [header, ...linhas].join("\n");
+    const blob = new Blob([csv], { type: "text/csv;charset=utf-8" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url; a.download = `sla-compliance-${slaDateFrom}-${slaDateTo}.csv`; a.click();
+    URL.revokeObjectURL(url);
+  }
+
+  const slaTicketsVisiveis = slaDados
+    ? [...slaDados.tickets]
+        .filter(t => slaFiltroTabela === "breached" ? (t.responseSla === "Breached" || t.resolutionSla === "Breached") : true)
+        .sort((a, b) => { const { campo, asc } = slaOrdenacao; const va = a[campo] ?? -Infinity; const vb = b[campo] ?? -Infinity; if (va < vb) return asc ? -1 : 1; if (va > vb) return asc ? 1 : -1; return 0; })
+    : [];
+
+  function toggleSlaOrdem(campo) { setSlaOrdenacao(o => ({ campo, asc: o.campo === campo ? !o.asc : true })); }
+
+  const slaTotais = slaDados?.totais;
+
   return (
     <div>
       <div className="page-header">
@@ -226,7 +368,7 @@ export default function Helpdesk() {
           </button>
         ) : (
           <>
-            {view !== "polling" && view !== "fila" && MODOS.map(m => (
+            {view !== "polling" && view !== "fila" && view !== "sla" && MODOS.map(m => (
               <button key={m.value} className={`btn ${modo === m.value && view === "lista" ? "btn-primary" : ""}`}
                 style={modo !== m.value || view !== "lista" ? { background: "var(--surface)", color: "var(--text-muted)", border: "1px solid var(--border)" } : {}}
                 onClick={() => { setModo(m.value); setView("lista"); }}>
@@ -244,7 +386,12 @@ export default function Helpdesk() {
               )}
             </button>
 
-            {view !== "polling" && view !== "fila" && (
+            <button className="btn" onClick={() => setView("sla")}
+              style={{ background: view === "sla" ? "rgba(37,99,235,0.15)" : "var(--surface)", color: view === "sla" ? "#2563eb" : "var(--text-muted)", border: `1px solid ${view === "sla" ? "#2563eb" : "var(--border)"}`, fontWeight: view === "sla" ? 700 : 400 }}>
+              🎯 SLA Compliance
+            </button>
+
+            {view !== "polling" && view !== "fila" && view !== "sla" && (
               <>
                 <button className="btn" style={{ background: "var(--surface)", color: "var(--text-muted)", border: "1px solid var(--border)", marginLeft: "auto" }} onClick={() => setView("criar")}>+ Novo Chamado</button>
                 <button className="btn" style={{ background: "var(--surface)", color: "var(--text-muted)", border: "1px solid var(--border)" }} onClick={() => carregarTickets()}>Atualizar</button>
@@ -258,7 +405,7 @@ export default function Helpdesk() {
               </>
             )}
 
-            {(view === "polling" || view === "fila" || view === "detalhe") && (
+            {(view === "polling" || view === "fila" || view === "detalhe" || view === "sla") && (
               <button className="btn" style={{ background: "var(--surface)", color: "var(--text-muted)", border: "1px solid var(--border)", marginLeft: "auto" }} onClick={() => setView("lista")}>
                 ← Voltar
               </button>
@@ -336,6 +483,161 @@ export default function Helpdesk() {
               </span>
             )}
           </div>
+        </div>
+      )}
+
+      {/* ===== SLA COMPLIANCE ===== */}
+      {view === "sla" && (
+        <div>
+          <div style={{ marginBottom: 16 }}>
+            <h3 style={{ fontSize: "1.1rem", marginBottom: 4 }}>📊 SLA Compliance</h3>
+            <p style={{ fontSize: "0.8rem", color: "var(--text-muted)", margin: 0 }}>
+              Percentual de chamados que atenderam os targets de resposta e resolução no período selecionado.
+            </p>
+          </div>
+
+          {/* Filtros SLA */}
+          <div style={{ display: "flex", gap: 10, flexWrap: "wrap", alignItems: "flex-end", marginBottom: 16 }}>
+            <div>
+              <div style={{ fontSize: 11, color: "#94a3b8", marginBottom: 4 }}>CATEGORIA</div>
+              <select value={slaSectionId} onChange={e => setSlaSectionId(e.target.value)} style={slaStyles.select}>
+                <option value="">— Todas —</option>
+                {categorias.map(c => <option key={c.CategoryID} value={c.CategoryID}>{c.Name}</option>)}
+              </select>
+            </div>
+            <div>
+              <div style={{ fontSize: 11, color: "#94a3b8", marginBottom: 4 }}>PRIORIDADE</div>
+              <select value={slaPriority} onChange={e => setSlaPriority(e.target.value)} style={slaStyles.select}>
+                {SLA_PRIORIDADES.map(p => <option key={p.value} value={p.value}>{p.label}</option>)}
+              </select>
+            </div>
+            <div>
+              <div style={{ fontSize: 11, color: "#94a3b8", marginBottom: 4 }}>DE</div>
+              <input type="date" value={slaDateFrom} onChange={e => setSlaDateFrom(e.target.value)} style={slaStyles.input} />
+            </div>
+            <div>
+              <div style={{ fontSize: 11, color: "#94a3b8", marginBottom: 4 }}>ATÉ</div>
+              <input type="date" value={slaDateTo} onChange={e => setSlaDateTo(e.target.value)} style={slaStyles.input} />
+            </div>
+            <div>
+              <div style={{ fontSize: 11, color: "#94a3b8", marginBottom: 4 }}>META RESPOSTA (h)</div>
+              <input type="number" min="1" value={slaResponseTarget} onChange={e => setSlaResponseTarget(e.target.value)} style={{ ...slaStyles.input, width: 70 }} />
+            </div>
+            <div>
+              <div style={{ fontSize: 11, color: "#94a3b8", marginBottom: 4 }}>META RESOLUÇÃO (h)</div>
+              <input type="number" min="1" value={slaResolutionTarget} onChange={e => setSlaResolutionTarget(e.target.value)} style={{ ...slaStyles.input, width: 80 }} />
+            </div>
+            <button onClick={buscarSla} disabled={slaCarregando} style={slaStyles.btnPrimary}>
+              {slaCarregando ? "⏳ Calculando..." : "🔍 Gerar Relatório"}
+            </button>
+            {slaDados && <button onClick={exportarSlaCsv} style={slaStyles.btnSuccess}>⬇️ Exportar CSV</button>}
+          </div>
+
+          {slaErro && (
+            <div style={{ background: "#450a0a", border: "1px solid #dc2626", color: "#fca5a5", padding: "10px 14px", borderRadius: 6, marginBottom: 12, fontSize: 13 }}>{slaErro}</div>
+          )}
+
+          {slaCarregando && (
+            <div style={{ textAlign: "center", padding: 48, color: "#94a3b8" }}>
+              <div style={{ fontSize: 32 }}>⏳</div>
+              <div style={{ marginTop: 8 }}>Buscando tickets e calculando SLA...</div>
+              <div style={{ fontSize: 12, marginTop: 4, color: "#94a3b8" }}>Pode demorar alguns segundos dependendo do volume de chamados.</div>
+            </div>
+          )}
+
+          {slaDados && !slaCarregando && (
+            <>
+              {/* Cards KPI */}
+              <div style={{ display: "flex", gap: 12, flexWrap: "wrap", marginBottom: 24 }}>
+                <KpiCard titulo="Total de Chamados" valor={slaTotais.total} sub={`${slaDateFrom} → ${slaDateTo}`} />
+                <KpiCard titulo={`Response SLA (${slaDados.configuracao.responseTarget}h)`} valor={slaTotais.response.percentual !== null ? `${slaTotais.response.percentual}%` : "—"} sub={`${slaTotais.response.met} / ${slaTotais.response.avaliados} atendidos`} destaque />
+                <KpiCard titulo={`Resolution SLA (${slaDados.configuracao.resolutionTarget}h)`} valor={slaTotais.resolution.percentual !== null ? `${slaTotais.resolution.percentual}%` : "—"} sub={`${slaTotais.resolution.met} / ${slaTotais.resolution.avaliados} atendidos`} destaque />
+                <KpiCard titulo="Breached" valor={slaTotais.response.breached + slaTotais.resolution.breached} sub={`${slaTotais.response.breached} resposta  ·  ${slaTotais.resolution.breached} resolução`} />
+              </div>
+
+              {/* Gráficos */}
+              <div style={{ display: "flex", gap: 24, marginBottom: 24, flexWrap: "wrap" }}>
+                <div style={{ background: "#1e293b", border: "1px solid #334155", borderRadius: 10, padding: "16px 20px" }}>
+                  <div style={{ fontSize: 12, color: "#94a3b8", marginBottom: 10 }}>RESPONSE SLA</div>
+                  <DonutChart met={slaTotais.response.met} breached={slaTotais.response.breached} naoAvaliados={slaTotais.total - slaTotais.response.avaliados} label="Resposta" />
+                </div>
+                <div style={{ background: "#1e293b", border: "1px solid #334155", borderRadius: 10, padding: "16px 20px" }}>
+                  <div style={{ fontSize: 12, color: "#94a3b8", marginBottom: 10 }}>RESOLUTION SLA</div>
+                  <DonutChart met={slaTotais.resolution.met} breached={slaTotais.resolution.breached} naoAvaliados={slaTotais.total - slaTotais.resolution.avaliados} label="Resolução" />
+                </div>
+              </div>
+
+              {/* Filtro rápido tabela */}
+              <div style={{ display: "flex", gap: 8, marginBottom: 12 }}>
+                {[
+                  { val: "todos", label: `Todos (${slaDados.tickets.length})` },
+                  { val: "breached", label: `Breached (${slaDados.tickets.filter(t => t.responseSla === "Breached" || t.resolutionSla === "Breached").length})` },
+                ].map(({ val, label }) => (
+                  <button key={val} onClick={() => setSlaFiltroTabela(val)}
+                    style={{ padding: "5px 14px", borderRadius: 6, border: "1px solid #334155", background: slaFiltroTabela === val ? "#2563eb" : "#1e293b", color: slaFiltroTabela === val ? "#fff" : "#94a3b8", cursor: "pointer", fontSize: 12, fontWeight: 600 }}>
+                    {label}
+                  </button>
+                ))}
+              </div>
+
+              {/* Tabela SLA */}
+              <div style={{ overflowX: "auto" }}>
+                <table style={{ borderCollapse: "collapse", width: "100%", fontSize: 12 }}>
+                  <thead>
+                    <tr style={{ background: "#0f172a" }}>
+                      {[
+                        { campo: "ticketId", label: "Ticket" },
+                        { campo: "assunto", label: "Assunto" },
+                        { campo: "prioridade", label: "Prioridade" },
+                        { campo: "responseMins", label: "Resposta" },
+                        { campo: "responseSla", label: "Response SLA" },
+                        { campo: "resolutionMins", label: "Resolução" },
+                        { campo: "resolutionSla", label: "Resolution SLA" },
+                      ].map(({ campo, label }) => (
+                        <th key={campo} onClick={() => toggleSlaOrdem(campo)} style={slaStyles.th}>
+                          {label}{slaOrdenacao.campo === campo ? (slaOrdenacao.asc ? " ▲" : " ▼") : ""}
+                        </th>
+                      ))}
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {slaTicketsVisiveis.length === 0 ? (
+                      <tr><td colSpan={7} style={{ textAlign: "center", padding: 32, color: "#94a3b8" }}>Nenhum chamado encontrado.</td></tr>
+                    ) : slaTicketsVisiveis.map((t, i) => {
+                      const breached = t.responseSla === "Breached" || t.resolutionSla === "Breached";
+                      return (
+                        <tr key={t.ticketId} style={{ background: breached ? "#1c0a0a" : i % 2 === 0 ? "#0f172a" : "#111827", borderLeft: breached ? "3px solid #ef4444" : "3px solid transparent" }}>
+                          <td style={slaStyles.td}>
+                            <a href={`${JITBIT_BASE}/helpdesk/Ticket/${t.ticketId}`} target="_blank" rel="noopener noreferrer" style={{ color: "#60a5fa", textDecoration: "none" }}>#{t.ticketId}</a>
+                          </td>
+                          <td style={{ ...slaStyles.td, maxWidth: 280 }}>
+                            <a href={`${JITBIT_BASE}/helpdesk/Ticket/${t.ticketId}`} target="_blank" rel="noopener noreferrer" style={{ color: "#e2e8f0", textDecoration: "none" }} title={t.assunto}>
+                              {t.assunto.length > 50 ? t.assunto.slice(0, 50) + "…" : t.assunto}
+                            </a>
+                          </td>
+                          <td style={slaStyles.td}>
+                            <span style={{ display: "inline-block", padding: "2px 8px", borderRadius: 10, fontSize: 11, fontWeight: 600, background: corSla(t.prioridade) + "22", color: corSla(t.prioridade), border: `1px solid ${corSla(t.prioridade)}44` }}>
+                              {PRIORIDADE_PT[t.prioridade] || t.prioridade}
+                            </span>
+                          </td>
+                          <td style={{ ...slaStyles.td, color: "#94a3b8" }}>{fmtMin(t.responseMins)}</td>
+                          <td style={slaStyles.td}><SlaBadge valor={t.responseSla} /></td>
+                          <td style={{ ...slaStyles.td, color: "#94a3b8" }}>{fmtMin(t.resolutionMins)}</td>
+                          <td style={slaStyles.td}><SlaBadge valor={t.resolutionSla} /></td>
+                        </tr>
+                      );
+                    })}
+                  </tbody>
+                </table>
+              </div>
+
+              <div style={{ marginTop: 10, fontSize: 11, color: "#94a3b8", textAlign: "right" }}>
+                {slaTicketsVisiveis.length} de {slaDados.tickets.length} chamados exibidos
+                &nbsp;·&nbsp;Meta resposta: {slaDados.configuracao.responseTarget}h
+                &nbsp;·&nbsp;Meta resolução: {slaDados.configuracao.resolutionTarget}h
+              </div>
+            </>
+          )}
         </div>
       )}
 
