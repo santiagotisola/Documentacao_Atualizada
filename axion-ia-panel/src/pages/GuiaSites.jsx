@@ -289,7 +289,7 @@ function FichaAxCross({ site }) {
 
 /* ── Página Principal ────────────────────────────────────────────────── */
 
-function GuiaSites() {
+function GuiaSites({ embedded = false }) {
   const [sistemaFiltro, setSistemaFiltro] = useState('');
   const [tipoFiltro, setTipoFiltro] = useState('');
   const [estadoFiltro, setEstadoFiltro] = useState('');
@@ -314,6 +314,7 @@ function GuiaSites() {
     <>
       <div className="gs-page">
         {/* Header */}
+        {!embedded && (
         <div className="gs-header">
           <h1>📋 Guia por Site</h1>
           <p>
@@ -321,6 +322,7 @@ function GuiaSites() {
             podem variar entre contratos. Selecione um site para ver seu manual específico.
           </p>
         </div>
+        )}
 
         {/* Filtros */}
         <div className="gs-filtros">

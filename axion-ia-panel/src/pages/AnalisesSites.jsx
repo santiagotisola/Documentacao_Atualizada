@@ -1,5 +1,6 @@
 import React, { useState, useMemo } from 'react';
 import { AXHUB_SITES, AXCROSS_SITES, MODULOS, TIPOS_CONTRATO, FEATURE_FLAGS } from '../data/sitesData';
+import GuiaSites from './GuiaSites';
 import './AnalisesSites.css';
 
 /* ═══════════════════════════════════════════════════════════════════════
@@ -253,6 +254,10 @@ const DESCRICOES_ABAS = {
   'modulos': {
     titulo: 'Disponibilidade por módulo',
     texto: 'Visualização centrada nos módulos do sistema. Mostra quais sites possuem cada módulo ativo, útil para entender o alcance funcional de cada contrato.',
+  },
+  'guia': {
+    titulo: 'Manual operacional por site',
+    texto: 'Ficha detalhada de cada site com funcionalidades ativas, relatórios BI (exclusivos vs padrão), equipamentos, fabricantes, colunas de operações e observações. Selecione um site para ver seu guia completo.',
   },
 };
 
@@ -745,6 +750,7 @@ const TABS = [
   { id: 'comparar', label: '⚖️ Comparar' },
   { id: 'detalhe', label: '🔍 Detalhe Individual' },
   { id: 'modulos', label: '🧩 Por Módulo' },
+  { id: 'guia', label: '📋 Guia por Site' },
 ];
 
 function AnalisesSites() {
@@ -909,6 +915,10 @@ function AnalisesSites() {
 
         {tab === 'modulos' && (
           <VistaModulo moduloFiltro={moduloFiltro} />
+        )}
+
+        {tab === 'guia' && (
+          <GuiaSites embedded />
         )}
       </div>
     </>
