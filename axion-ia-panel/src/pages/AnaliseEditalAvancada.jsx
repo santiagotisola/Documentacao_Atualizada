@@ -12,6 +12,7 @@ const TABS = [
   { id: "depara", label: "🔄 De-Para", icon: "🔄" },
   { id: "concorrentes", label: "🏆 Concorrentes", icon: "🏆" },
   { id: "mercado", label: "🌐 Mercado", icon: "🌐" },
+  { id: "multi", label: "⚖️ Multi-Produto", icon: "⚖️" },
   { id: "adequacao", label: "🔧 Adequação", icon: "🔧" },
   { id: "resumo", label: "📈 Resumo", icon: "📈" },
 ];
@@ -42,6 +43,10 @@ export default function AnaliseEditalAvancada({ embedded = false }) {
   const [produtoSelecionado, setProdutoSelecionado] = useState("");
   const [siteSelecionado, setSiteSelecionado] = useState("");
   const [filtroCat, setFiltroCat] = useState("");
+  const [multiProduto, setMultiProduto] = useState(null);
+  const [multiCarregando, setMultiCarregando] = useState(false);
+  const [multiErro, setMultiErro] = useState("");
+  const [multiAba, setMultiAba] = useState("resumo");
 
   // Carregar catálogo de sites ao montar
   useEffect(() => {
@@ -127,22 +132,25 @@ export default function AnaliseEditalAvancada({ embedded = false }) {
     <div style={{ padding: embedded ? "0" : "0 1.5rem 2rem" }}>
       {/* Tabs */}
       <div style={{ display: "flex", gap: "0.3rem", flexWrap: "wrap", marginBottom: "1.2rem", borderBottom: "1px solid rgba(255,255,255,0.08)", paddingBottom: "0.8rem" }}>
-        {TABS.map(t => (
-          <button
-            key={t.id}
-            onClick={() => (t.id === "input" || resultado) && setTab(t.id)}
-            disabled={t.id !== "input" && !resultado}
-            style={{
-              padding: "0.5rem 1rem", borderRadius: 8, border: "none",
-              background: tab === t.id ? "rgba(99,102,241,0.25)" : "rgba(255,255,255,0.04)",
-              color: tab === t.id ? "#a5b4fc" : t.id !== "input" && !resultado ? "#334155" : "#94a3b8",
-              cursor: t.id === "input" || resultado ? "pointer" : "not-allowed",
-              fontSize: "0.82rem", fontWeight: 600, transition: "all 0.2s",
-            }}
-          >
-            {t.label}
-          </button>
-        ))}
+        {TABS.map(t => {
+          const isEnabled = t.id === "input" || resultado || (t.id === "multi" && textoEdital.length >= 50);
+          return (
+            <button
+              key={t.id}
+              onClick={() => isEnabled && setTab(t.id)}
+              disabled={!isEnabled}
+              style={{
+                padding: "0.5rem 1rem", borderRadius: 8, border: "none",
+                background: tab === t.id ? "rgba(99,102,241,0.25)" : "rgba(255,255,255,0.04)",
+                color: tab === t.id ? "#a5b4fc" : !isEnabled ? "#334155" : "#94a3b8",
+                cursor: isEnabled ? "pointer" : "not-allowed",
+                fontSize: "0.82rem", fontWeight: 600, transition: "all 0.2s",
+              }}
+            >
+              {t.label}
+            </button>
+          );
+        })}
       </div>
 
       {/* ═══ TAB INPUT ═══ */}
@@ -945,6 +953,220 @@ export default function AnaliseEditalAvancada({ embedded = false }) {
                   {(resultado.mercado.validacaoLogica.melhorias || []).map((m, i) => <div key={i} style={{ color: "#94a3b8" }}>• {m}</div>)}
                 </div>
               </div>
+            </div>
+          )}
+        </div>
+      )}
+
+      {/* ═══ TAB MULTI-PRODUTO ═══ */}
+      {tab === "multi" && (
+        <div>
+          {!multiProduto && !multiCarregando && (
+            <div style={{ textAlign: "center", padding: "2rem 1rem" }}>
+              <div style={{ fontSize: "3rem", marginBottom: "0.5rem" }}>⚖️</div>
+              <h3 style={{ color: "#e2e8f0", marginBottom: "0.5rem" }}>Comparação Multi-Produto</h3>
+              <p style={{ color: "#64748b", fontSize: "0.85rem", marginBottom: "1.2rem", maxWidth: 500, margin: "0 auto 1.2rem" }}>
+                Compare o edital simultaneamente contra <strong style={{ color: "#a5b4fc" }}>AxHub</strong>, <strong style={{ color: "#a5b4fc" }}>AxTon</strong> e <strong style={{ color: "#a5b4fc" }}>AxCross</strong> para ver qual produto melhor atende.
+              </p>
+              {textoEdital.length < 50 ? (
+                <p style={{ color: "#fbbf24", fontSize: "0.82rem" }}>⚠️ Informe o texto do edital na aba "Informar Edital" primeiro (mín. 50 caracteres)</p>
+              ) : (
+                <button
+                  onClick={async () => {
+                    setMultiCarregando(true);
+                    setMultiErro("");
+                    try {
+                      const res = await api.post("/conformidade/multi/gerar", {
+                        tituloEdital: titulo || "Análise de Edital",
+                        textoEdital,
+                        comJustificativas: true,
+                      });
+                      setMultiProduto(res.data.analise);
+                      setMultiAba("resumo");
+                    } catch (err) {
+                      setMultiErro(err.response?.data?.erro || err.message);
+                    } finally {
+                      setMultiCarregando(false);
+                    }
+                  }}
+                  style={{
+                    padding: "0.8rem 2rem", background: "linear-gradient(135deg, #6366f1, #8b5cf6)",
+                    color: "#fff", border: "none", borderRadius: 10, fontSize: "0.95rem", fontWeight: 700,
+                    cursor: "pointer",
+                  }}
+                >
+                  ⚖️ Comparar 3 Produtos
+                </button>
+              )}
+              {multiErro && <div style={{ marginTop: "1rem", color: "#fca5a5", background: "#7f1d1d20", padding: "0.7rem", borderRadius: 8, fontSize: "0.82rem" }}>❌ {multiErro}</div>}
+            </div>
+          )}
+
+          {multiCarregando && (
+            <div style={{ textAlign: "center", padding: "3rem" }}>
+              <div style={{ fontSize: "2rem", animation: "spin 1s linear infinite" }}>⏳</div>
+              <p style={{ color: "#a5b4fc", marginTop: "0.5rem" }}>Analisando contra 3 produtos... (pode levar 15-30s)</p>
+            </div>
+          )}
+
+          {multiProduto && (
+            <div>
+              {/* Sub-abas do multi */}
+              <div style={{ display: "flex", gap: "0.3rem", marginBottom: "1rem", flexWrap: "wrap" }}>
+                {[
+                  { id: "resumo", label: "📋 Resumo" },
+                  { id: "tipos", label: "🏷️ Por Tipo" },
+                  { id: "lacunas", label: "⚠️ Lacunas" },
+                  { id: "recomendacoes", label: "💡 Recomendações" },
+                ].map(a => (
+                  <button key={a.id} onClick={() => setMultiAba(a.id)} style={{
+                    padding: "0.4rem 0.8rem", borderRadius: 6, border: "none",
+                    background: multiAba === a.id ? "rgba(99,102,241,0.3)" : "rgba(255,255,255,0.05)",
+                    color: multiAba === a.id ? "#a5b4fc" : "#94a3b8",
+                    cursor: "pointer", fontSize: "0.8rem", fontWeight: 600,
+                  }}>{a.label}</button>
+                ))}
+                <button onClick={() => { setMultiProduto(null); setMultiAba("resumo"); }} style={{
+                  marginLeft: "auto", padding: "0.4rem 0.8rem", borderRadius: 6, border: "none",
+                  background: "rgba(255,255,255,0.05)", color: "#64748b", cursor: "pointer", fontSize: "0.78rem",
+                }}>🔄 Refazer</button>
+              </div>
+
+              {/* RESUMO */}
+              {multiAba === "resumo" && multiProduto.resumo && (
+                <div>
+                  <h3 style={{ color: "#e2e8f0", marginBottom: "1rem", fontSize: "1rem" }}>Resumo — Conformidade dos 3 Produtos</h3>
+                  <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "0.8rem", marginBottom: "1.2rem" }}>
+                    {(multiProduto.resumo.produtosAnalisados || []).map((prod, i) => {
+                      const cor = prod.veredicto === "APTO" ? "#10b981" : prod.veredicto === "PARCIALMENTE_APTO" ? "#f59e0b" : "#ef4444";
+                      return (
+                        <div key={i} style={{ background: "rgba(255,255,255,0.04)", border: `1px solid ${cor}40`, borderRadius: 12, padding: "1rem", textAlign: "center" }}>
+                          <div style={{ fontSize: "0.9rem", fontWeight: 700, color: "#e2e8f0", marginBottom: "0.3rem" }}>{prod.nome}</div>
+                          <div style={{ background: `${cor}20`, color: cor, padding: "2px 10px", borderRadius: 6, display: "inline-block", fontSize: "0.75rem", fontWeight: 700, marginBottom: "0.5rem" }}>{prod.veredicto}</div>
+                          <div style={{ fontSize: "1.8rem", fontWeight: 800, color: cor }}>{prod.atendimento}%</div>
+                          <div style={{ height: 6, background: "rgba(255,255,255,0.08)", borderRadius: 3, marginTop: "0.4rem", overflow: "hidden" }}>
+                            <div style={{ width: `${prod.atendimento}%`, height: "100%", background: cor, borderRadius: 3 }} />
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+                  {multiProduto.resumo.resumoPorProduto && (
+                    <div style={{ overflow: "auto" }}>
+                      <table style={{ width: "100%", borderCollapse: "collapse", fontSize: "0.82rem" }}>
+                        <thead>
+                          <tr style={{ borderBottom: "2px solid rgba(255,255,255,0.1)" }}>
+                            <th style={{ textAlign: "left", padding: 8, color: "#94a3b8" }}>Produto</th>
+                            <th style={{ textAlign: "center", padding: 8, color: "#94a3b8" }}>Status</th>
+                            <th style={{ textAlign: "center", padding: 8, color: "#94a3b8" }}>%</th>
+                            <th style={{ textAlign: "center", padding: 8, color: "#10b981" }}>✅</th>
+                            <th style={{ textAlign: "center", padding: 8, color: "#f59e0b" }}>⚠️</th>
+                            <th style={{ textAlign: "center", padding: 8, color: "#ef4444" }}>❌</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {Object.entries(multiProduto.resumo.resumoPorProduto).map(([k, d]) => (
+                            <tr key={k} style={{ borderBottom: "1px solid rgba(255,255,255,0.04)" }}>
+                              <td style={{ padding: 8, color: "#e2e8f0", fontWeight: 600 }}>{d.nome}</td>
+                              <td style={{ textAlign: "center", padding: 8 }}><span style={{ background: d.veredicto === "APTO" ? "#10b98120" : d.veredicto === "PARCIALMENTE_APTO" ? "#f59e0b20" : "#ef444420", color: d.veredicto === "APTO" ? "#10b981" : d.veredicto === "PARCIALMENTE_APTO" ? "#f59e0b" : "#ef4444", padding: "2px 8px", borderRadius: 6, fontSize: "0.75rem" }}>{d.veredicto}</span></td>
+                              <td style={{ textAlign: "center", padding: 8, color: "#a5b4fc", fontWeight: 700 }}>{d.atendimento}</td>
+                              <td style={{ textAlign: "center", padding: 8, color: "#10b981" }}>{d.atendidos}</td>
+                              <td style={{ textAlign: "center", padding: 8, color: "#f59e0b" }}>{d.parciais}</td>
+                              <td style={{ textAlign: "center", padding: 8, color: "#ef4444" }}>{d.naoAtendidos}</td>
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                    </div>
+                  )}
+                </div>
+              )}
+
+              {/* POR TIPO */}
+              {multiAba === "tipos" && multiProduto.comparacao && (
+                <div>
+                  <h3 style={{ color: "#e2e8f0", marginBottom: "1rem", fontSize: "1rem" }}>Análise por Tipo de Requisito</h3>
+                  <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(300px, 1fr))", gap: "0.8rem" }}>
+                    {Object.entries(multiProduto.comparacao).map(([tipo, dados]) => (
+                      <div key={tipo} style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.08)", borderRadius: 12, padding: "1rem" }}>
+                        <div style={{ display: "flex", justifyContent: "space-between", marginBottom: "0.6rem" }}>
+                          <span style={{ fontWeight: 700, color: "#e2e8f0" }}>{dados.emoji} {dados.descricao}</span>
+                          <span style={{ background: "rgba(99,102,241,0.2)", color: "#a5b4fc", padding: "2px 8px", borderRadius: 12, fontSize: "0.75rem" }}>{dados.totalRequisitos}</span>
+                        </div>
+                        {(dados.produtosRanking || []).map((prod, i) => {
+                          const cor = prod.taxa >= 70 ? "#10b981" : prod.taxa >= 40 ? "#f59e0b" : "#ef4444";
+                          return (
+                            <div key={i} style={{ display: "flex", alignItems: "center", gap: "0.5rem", marginBottom: "0.3rem" }}>
+                              <span style={{ color: "#64748b", fontSize: "0.75rem", minWidth: 20 }}>#{i + 1}</span>
+                              <span style={{ color: "#cbd5e1", fontSize: "0.82rem", flex: 1 }}>{prod.produto}</span>
+                              <span style={{ fontSize: "0.72rem", color: "#64748b" }}>✅{prod.atendidos} ⚠️{prod.parciais} ❌{prod.naoAtendidos}</span>
+                              <span style={{ color: cor, fontWeight: 700, fontSize: "0.85rem", minWidth: 40, textAlign: "right" }}>{prod.taxa}%</span>
+                            </div>
+                          );
+                        })}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {/* LACUNAS */}
+              {multiAba === "lacunas" && multiProduto.lacunas && (
+                <div>
+                  <h3 style={{ color: "#e2e8f0", marginBottom: "1rem", fontSize: "1rem" }}>⚠️ Lacunas por Produto</h3>
+                  <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(300px, 1fr))", gap: "0.8rem" }}>
+                    {Object.entries(multiProduto.lacunas).map(([k, dados]) => (
+                      <div key={k} style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.08)", borderRadius: 12, padding: "1rem" }}>
+                        <h4 style={{ color: "#e2e8f0", marginBottom: "0.5rem" }}>{dados.nome}</h4>
+                        <p style={{ color: "#64748b", fontSize: "0.78rem", marginBottom: "0.5rem" }}>{dados.descricao}</p>
+                        {dados.naoAtendidos?.length > 0 && (
+                          <div style={{ marginBottom: "0.5rem" }}>
+                            <div style={{ color: "#ef4444", fontSize: "0.78rem", fontWeight: 700, marginBottom: "0.3rem" }}>❌ Não Atendidos ({dados.naoAtendidos.length})</div>
+                            {dados.naoAtendidos.slice(0, 5).map((req, i) => (
+                              <div key={i} style={{ fontSize: "0.75rem", color: "#94a3b8", padding: "2px 0", borderBottom: "1px solid rgba(255,255,255,0.03)" }}>
+                                <span style={{ color: "#6366f1", fontWeight: 600, marginRight: 4 }}>[{req.tipo}]</span>{req.requisito?.slice(0, 100)}
+                              </div>
+                            ))}
+                            {dados.naoAtendidos.length > 5 && <div style={{ fontSize: "0.7rem", color: "#475569", marginTop: 4 }}>+{dados.naoAtendidos.length - 5} mais</div>}
+                          </div>
+                        )}
+                        {dados.parciais?.length > 0 && (
+                          <div>
+                            <div style={{ color: "#f59e0b", fontSize: "0.78rem", fontWeight: 700, marginBottom: "0.3rem" }}>⚠️ Parciais ({dados.parciais.length})</div>
+                            {dados.parciais.slice(0, 3).map((req, i) => (
+                              <div key={i} style={{ fontSize: "0.75rem", color: "#94a3b8", padding: "2px 0" }}>
+                                <span style={{ color: "#6366f1", fontWeight: 600, marginRight: 4 }}>[{req.tipo}]</span>{req.requisito?.slice(0, 100)}
+                              </div>
+                            ))}
+                          </div>
+                        )}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {/* RECOMENDAÇÕES */}
+              {multiAba === "recomendacoes" && multiProduto.recomendacoes && (
+                <div>
+                  <h3 style={{ color: "#e2e8f0", marginBottom: "1rem", fontSize: "1rem" }}>💡 Recomendações de Melhoria</h3>
+                  <div style={{ display: "grid", gap: "0.5rem" }}>
+                    {(multiProduto.recomendacoes || []).map((rec, i) => {
+                      const cor = rec.prioridade === "ALTA" ? "#ef4444" : rec.prioridade === "MÉDIA" ? "#f59e0b" : "#10b981";
+                      return (
+                        <div key={i} style={{ background: "rgba(255,255,255,0.04)", border: `1px solid ${cor}25`, borderRadius: 10, padding: "0.8rem" }}>
+                          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "0.3rem" }}>
+                            <span style={{ color: "#e2e8f0", fontWeight: 700, fontSize: "0.88rem" }}>{rec.produto}</span>
+                            <span style={{ background: `${cor}20`, color: cor, padding: "2px 10px", borderRadius: 6, fontSize: "0.72rem", fontWeight: 700 }}>{rec.prioridade}</span>
+                          </div>
+                          <p style={{ color: "#cbd5e1", fontSize: "0.82rem", margin: "0 0 0.2rem" }}>🎯 {rec.acao}</p>
+                          <p style={{ color: "#64748b", fontSize: "0.75rem", margin: 0 }}>{rec.tipo} • {rec.quantidade} itens</p>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+              )}
             </div>
           )}
         </div>

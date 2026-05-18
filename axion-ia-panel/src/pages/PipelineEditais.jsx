@@ -1,20 +1,18 @@
 /**
  * PipelineEditais.jsx — Ecossistema Unificado de Editais
- * Fluxo completo: Análise Avançada (com busca) → Conformidade → Multi-Produto → Revisão → Roadmap → Specs
+ * Fluxo completo: Análise de Editais (busca + decomposição + multi-produto) → Conformidade → Revisão → Roadmap → Specs
  */
 
 import { useState } from "react";
 import Conformidade from "./Conformidade";
 import AnaliseEditalAvancada from "./AnaliseEditalAvancada";
-import AnalisaMultiProduto from "./AnalisaMultiProduto";
 import ConfidencaRevisao from "./ConfidencaRevisao";
 import Roadmap from "./Roadmap";
 import Specs from "./Specs";
 
 const ETAPAS = [
-  { id: "avancada",     label: "Análise de Editais",  icon: "📊", desc: "Busque no Gov.br, faça upload ou cole — análise completa com decomposição, de-para e concorrentes" },
-  { id: "conformidade", label: "Conformidade",        icon: "📋", desc: "Analise conformidade por produto" },
-  { id: "multi",        label: "Multi-Produto",       icon: "⚖️", desc: "Compare 3 produtos simultaneamente" },
+  { id: "avancada",     label: "Análise de Editais",  icon: "📊", desc: "Busque, analise e compare — decomposição, de-para, concorrentes, mercado e multi-produto" },
+  { id: "conformidade", label: "Conformidade",        icon: "📋", desc: "Análise detalhada de conformidade por produto individual" },
   { id: "revisao",      label: "Revisão",             icon: "✅", desc: "Revise itens de baixa confiança" },
   { id: "roadmap",      label: "Roadmap",             icon: "🗺️", desc: "Planeje implementação das lacunas" },
   { id: "specs",        label: "Specs",               icon: "📐", desc: "Gere especificações técnicas (PRD)" },
@@ -100,7 +98,6 @@ export default function PipelineEditais() {
       <div style={{ flex: 1, overflow: "auto", padding: "0 20px 20px" }}>
         {etapa === "avancada"     && <AnaliseEditalAvancada embedded />}
         {etapa === "conformidade" && <Conformidade embedded />}
-        {etapa === "multi"        && <AnalisaMultiProduto embedded />}
         {etapa === "revisao"      && <ConfidencaRevisao embedded />}
         {etapa === "roadmap"      && <Roadmap embedded />}
         {etapa === "specs"        && <Specs embedded />}
