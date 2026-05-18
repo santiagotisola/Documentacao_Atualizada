@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { AXHUB_SITES, AXCROSS_SITES, MODULOS, TIPOS_CONTRATO } from '../data/sitesData';
-import { api, apiFetch } from '../services/api';
+import { api } from '../services/api';
 import './IntelligenceHub.css';
 
 const AXTON_SITES = [
@@ -92,15 +92,21 @@ export default function IntelligenceHub() {
 
   // Busca dados consolidados
   useEffect(() => {
-    setLoading(true);
-    Promise.allSettled([
-      apiFetch(`/helpdesk/sites-overview`).then(r => r.json()),
-      apiFetch(`/helpdesk/sla-overview`).then(r => r.json()),
-    ]).then(([chamRes, slaRes]) => {
-      if (chamRes.status === 'fulfilled') setChamadosData(chamRes.value);
-      if (slaRes.status === 'fulfilled') setSlaData(slaRes.value);
-      setLoading(false);
-    });
+    let mounted = true;
+    (async () => {
+      try {
+        const [chamRes, slaRes] = await Promise.all([
+          api.get(`/helpdesk/sites-overview`).then(r => r.data).catch(() => null),
+          api.get(`/helpdesk/sla-compliance`, { params: { dateFrom: new Date(Date.now()-30*86400000).toISOString().slice(0,10), dateTo: new Date().toISOString().slice(0,10) }, timeout: 15000 }).then(r => r.data).catch(() => null),
+        ]);
+        if (mounted) {
+          if (chamRes) setChamadosData(chamRes);
+          if (slaRes) setSlaData(slaRes);
+        }
+      } catch { /* ignore */ }
+      if (mounted) setLoading(false);
+    })();
+    return () => { mounted = false; };
   }, []);
 
   // Cálculos consolidados
