@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { apiFetch, getConfiguredUrl, getApiToken } from "../services/api";
 
-export default function ConfidencaRevisao() {
+export default function ConfidencaRevisao({ embedded = false }) {
   const [aba, setAba] = useState("fila");  // "fila" | "stats"
   const [produto, setProduto] = useState("axhub");
   const [status, setStatus] = useState("PENDENTE");
@@ -128,8 +128,8 @@ export default function ConfidencaRevisao() {
   };
 
   return (
-    <div style={{ padding: "20px", fontFamily: "Arial, sans-serif" }}>
-      <h1>🔍 Fila de Revisão — Itens com Baixa Confiança</h1>
+    <div style={{ padding: embedded ? "0" : "20px", fontFamily: "Arial, sans-serif" }}>
+      {!embedded && <h1>🔍 Fila de Revisão — Itens com Baixa Confiança</h1>}
 
       {/* Tabs */}
       <div style={{ marginBottom: "20px", borderBottom: "2px solid #ddd" }}>

@@ -1,5 +1,6 @@
 ﻿import { useState, useEffect, useRef } from "react";
 import { apiFetch } from "../services/api";
+import ConfidencaRevisao from "./ConfidencaRevisao";
 
 const PRODUTOS = [
   { value: "axhub",   label: "AxHub",   icon: "🖥️",  cor: "#3b82f6" },
@@ -20,8 +21,9 @@ const VEREDICTO_COR = {
 };
 
 const ABAS = [
-  { id: "lista",  label: "📋 Relatórios Gerados" },
-  { id: "novo",   label: "➕ Novo Relatório" },
+  { id: "lista",    label: "📋 Relatórios Gerados" },
+  { id: "novo",     label: "➕ Novo Relatório" },
+  { id: "revisao",  label: "🔍 Fila de Revisão" },
 ];
 
 // Etapas visuais do progresso de análise
@@ -570,6 +572,11 @@ export default function Conformidade() {
             )}
           </div>
         </div>
+      )}
+
+      {/* ── ABA: REVISÃO ── */}
+      {aba === "revisao" && (
+        <ConfidencaRevisao embedded />
       )}
     </div>
   );

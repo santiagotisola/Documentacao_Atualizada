@@ -3,7 +3,7 @@ import { BrowserRouter, Routes, Route, NavLink, Link, useLocation } from "react-
 import {
   Brain, LayoutDashboard, Globe,
   Bot, MessageCircle, Headphones,
-  ScanSearch, ScanLine, CheckCircle2, BookMarked,
+  ScanSearch, ScanLine, BookMarked,
   ShieldCheck, BarChart3,
   Landmark, PieChart, Map, Ruler,
   FileText, Search, Clock, GraduationCap, ScrollText,
@@ -23,7 +23,6 @@ import Specs from "./pages/Specs.jsx";
 import RelatorioFluxo from "./pages/RelatorioFluxo.jsx";
 import Conformidade from "./pages/Conformidade.jsx";
 import AnalisaMultiProduto from "./pages/AnalisaMultiProduto.jsx";
-import ConfidencaRevisao from "./pages/ConfidencaRevisao.jsx";
 import PlanilhaHoras from "./pages/PlanilhaHoras.jsx";
 import WhatsApp from "./pages/WhatsApp.jsx";
 import AnaliseImagens from "./pages/AnaliseImagens.jsx";
@@ -47,7 +46,7 @@ const PAGE_INFO = {
   "/whatsapp": { title: "WhatsApp", subtitle: "Integração e atendimento via WhatsApp", icon: "💬" },
   "/helpdesk": { title: "Helpdesk", subtitle: "Gestão de tickets e atendimento Jitbit", icon: "🎧" },
   "/analise-imagens": { title: "Análise de Imagens", subtitle: "OCR, validação e qualidade de capturas", icon: "📷" },
-  "/confianca": { title: "Fila de Revisão", subtitle: "Revisão de confiança OCR por lote", icon: "✅" },
+
 
   "/conformidade": { title: "Conformidade", subtitle: "Verificação de requisitos de editais", icon: "🛡️" },
   "/relatorio-fluxo": { title: "Relatório de Fluxo", subtitle: "Métricas de atendimento e fluxo operacional", icon: "📊" },
@@ -87,7 +86,6 @@ const MENU_SECTIONS = [
     group: "Qualidade",
     items: [
       { to: "/analise-imagens", icon: ScanLine, label: "Análise de Imagens" },
-      { to: "/confianca", icon: CheckCircle2, label: "Fila de Revisão" },
       { to: "/conformidade", icon: ShieldCheck, label: "Conformidade" },
       { to: "/relatorio-fluxo", icon: BarChart3, label: "Relatório de Fluxo" },
     ]
@@ -230,7 +228,6 @@ function AppContent() {
           <Route path="/specs" element={<Specs />} />
           <Route path="/conformidade" element={<Conformidade />} />
           <Route path="/analisa-multi" element={<AnalisaMultiProduto />} />
-          <Route path="/confianca" element={<ConfidencaRevisao />} />
           <Route path="/relatorio-fluxo" element={<RelatorioFluxo />} />
           <Route path="/planilha-horas" element={<PlanilhaHoras />} />
 
