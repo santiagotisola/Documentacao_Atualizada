@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { BrowserRouter, Routes, Route, NavLink, Link, useLocation } from "react-router-dom";
 import {
-  Brain, LayoutDashboard, Globe, Ticket,
+  Brain, LayoutDashboard, Globe,
   Bot, MessageCircle, Headphones,
   ScanSearch, ScanLine, CheckCircle2, BookMarked,
   ShieldCheck, BarChart3,
@@ -31,7 +31,6 @@ import MapaOperacoes from "./pages/MapaOperacoes.jsx";
 import AnaliseEditalAvancada from "./pages/AnaliseEditalAvancada.jsx";
 import BuscaEditaisGov from "./pages/BuscaEditaisGov.jsx";
 import AnalisesSites from "./pages/AnalisesSites.jsx";
-import ChamadosSites from "./pages/ChamadosSites.jsx";
 import IntelligenceHub from "./pages/IntelligenceHub.jsx";
 import HomePage from "./pages/HomePage.jsx";
 import "./App.css";
@@ -43,7 +42,6 @@ const PAGE_INFO = {
   "/mapa-operacoes": { title: "Mapa de Operações", subtitle: "Ecossistema completo: fluxos, processos, sites e acessos", icon: "🔗" },
   "/dashboard": { title: "Dashboard", subtitle: "Visão geral dos sistemas e serviços", icon: "📊" },
   "/analise": { title: "Análise de Sites", subtitle: "Comparativo de contratos e operações por site", icon: "🔍" },
-  "/chamados-sites": { title: "Chamados × Sites", subtitle: "Análise de demandas do helpdesk por site", icon: "🎫" },
 
   "/chat": { title: "Chat IA", subtitle: "Assistente inteligente AxionIA", icon: "🤖" },
   "/whatsapp": { title: "WhatsApp", subtitle: "Integração e atendimento via WhatsApp", icon: "💬" },
@@ -75,7 +73,6 @@ const MENU_SECTIONS = [
       { to: "/mapa-operacoes", icon: Globe, label: "Mapa de Operações" },
       { to: "/dashboard", icon: LayoutDashboard, label: "Dashboard" },
       { to: "/analise", icon: ScanSearch, label: "Análise de Sites" },
-      { to: "/chamados-sites", icon: Ticket, label: "Chamados × Sites" },
     ]
   },
   {
@@ -243,7 +240,7 @@ function AppContent() {
           <Route path="/logs" element={<Logs />} />
           <Route path="/kb" element={<KnowledgeBase />} />
           <Route path="/config" element={<Configuracoes />} />
-          <Route path="/chamados-sites" element={<ChamadosSites />} />
+
 
         </Routes>
       </main>

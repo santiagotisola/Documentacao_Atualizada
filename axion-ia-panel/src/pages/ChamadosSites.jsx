@@ -364,7 +364,7 @@ const TABS = [
   { id: 'insights', label: '🧠 Insights' },
 ];
 
-function ChamadosSites() {
+function ChamadosSites({ embedded = false }) {
   const [tab, setTab] = useState('overview');
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -413,6 +413,7 @@ function ChamadosSites() {
   return (
     <>
       <div className="ch-page">
+        {!embedded && (
         <div className="ch-header">
           <div>
             <h1>🎫 Chamados × Sites</h1>
@@ -425,6 +426,20 @@ function ChamadosSites() {
             {loading ? '⏳ Carregando...' : '🔄 Atualizar'}
           </button>
         </div>
+        )}
+        {embedded && (
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
+            <div>
+              <h3 style={{ fontSize: '1.1rem', marginBottom: 4 }}>🎫 Chamados × Sites</h3>
+              <p style={{ fontSize: '0.8rem', color: 'var(--text-muted)', margin: 0 }}>
+                Visão integrada: demandas por site, duplicados e inteligência operacional.
+              </p>
+            </div>
+            <button className="btn" style={{ background: 'var(--surface)', color: 'var(--text-muted)', border: '1px solid var(--border)', fontSize: '0.82rem' }} onClick={carregarDados} disabled={loading}>
+              {loading ? '⏳...' : '🔄 Atualizar'}
+            </button>
+          </div>
+        )}
 
         {erro && <div className="ch-erro">{erro}</div>}
 

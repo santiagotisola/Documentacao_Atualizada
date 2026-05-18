@@ -1,5 +1,6 @@
 ﻿import { useEffect, useState, useRef } from "react";
 import { api, apiFetch } from "../services/api";
+import ChamadosSites from "./ChamadosSites";
 
 const FILTROS_INICIAL = {
   sectionId: "",
@@ -368,7 +369,7 @@ export default function Helpdesk() {
           </button>
         ) : (
           <>
-            {view !== "polling" && view !== "fila" && view !== "sla" && MODOS.map(m => (
+            {view !== "polling" && view !== "fila" && view !== "sla" && view !== "sites" && MODOS.map(m => (
               <button key={m.value} className={`btn ${modo === m.value && view === "lista" ? "btn-primary" : ""}`}
                 style={modo !== m.value || view !== "lista" ? { background: "var(--surface)", color: "var(--text-muted)", border: "1px solid var(--border)" } : {}}
                 onClick={() => { setModo(m.value); setView("lista"); }}>
@@ -388,10 +389,15 @@ export default function Helpdesk() {
 
             <button className="btn" onClick={() => setView("sla")}
               style={{ background: view === "sla" ? "rgba(37,99,235,0.15)" : "var(--surface)", color: view === "sla" ? "#2563eb" : "var(--text-muted)", border: `1px solid ${view === "sla" ? "#2563eb" : "var(--border)"}`, fontWeight: view === "sla" ? 700 : 400 }}>
-              🎯 SLA Compliance
+              🎯 SLA
             </button>
 
-            {view !== "polling" && view !== "fila" && view !== "sla" && (
+            <button className="btn" onClick={() => setView("sites")}
+              style={{ background: view === "sites" ? "rgba(14,165,233,0.15)" : "var(--surface)", color: view === "sites" ? "#0ea5e9" : "var(--text-muted)", border: `1px solid ${view === "sites" ? "#0ea5e9" : "var(--border)"}`, fontWeight: view === "sites" ? 700 : 400 }}>
+              🎫 Sites
+            </button>
+
+            {view !== "polling" && view !== "fila" && view !== "sla" && view !== "sites" && (
               <>
                 <button className="btn" style={{ background: "var(--surface)", color: "var(--text-muted)", border: "1px solid var(--border)", marginLeft: "auto" }} onClick={() => setView("criar")}>+ Novo Chamado</button>
                 <button className="btn" style={{ background: "var(--surface)", color: "var(--text-muted)", border: "1px solid var(--border)" }} onClick={() => carregarTickets()}>Atualizar</button>
@@ -405,7 +411,7 @@ export default function Helpdesk() {
               </>
             )}
 
-            {(view === "polling" || view === "fila" || view === "detalhe" || view === "sla") && (
+            {(view === "polling" || view === "fila" || view === "detalhe" || view === "sla" || view === "sites") && (
               <button className="btn" style={{ background: "var(--surface)", color: "var(--text-muted)", border: "1px solid var(--border)", marginLeft: "auto" }} onClick={() => setView("lista")}>
                 ← Voltar
               </button>
@@ -484,6 +490,11 @@ export default function Helpdesk() {
             )}
           </div>
         </div>
+      )}
+
+      {/* ===== CHAMADOS × SITES ===== */}
+      {view === "sites" && (
+        <ChamadosSites embedded />
       )}
 
       {/* ===== SLA COMPLIANCE ===== */}
