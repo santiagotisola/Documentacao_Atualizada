@@ -328,6 +328,8 @@ export default function MapaOperacoes() {
                 {n.link && <Link to={n.link} style={{ background: `${gc.border}20`, color: gc.border, padding: "6px 14px", borderRadius: 8, fontSize: "0.8rem", fontWeight: 600, textDecoration: "none", border: `1px solid ${gc.border}40` }}>Abrir pagina {"\u2192"}</Link>}
               </div>
               <p style={{ color: "#94a3b8", fontSize: "0.88rem", lineHeight: 1.6, margin: 0 }}>{n.desc}</p>
+              {/* Link para fluxo detalhado se existir */}
+              {(() => { const fluxoRelacionado = FLUXOS_DETALHADOS.find(f => n.desc.toLowerCase().includes(f.id) || f.titulo.toLowerCase().includes(n.label.toLowerCase()) || (n.id === "helpdesk" && f.id === "helpdesk-flow") || (n.id === "analise_img" && f.id === "infracao") || (n.id === "conformidade" && f.id === "medicao")); return fluxoRelacionado ? (<button onClick={() => { setAba("fluxos"); setFluxoAberto(fluxoRelacionado.id); setSelectedNode(null); }} style={{ marginTop: "0.6rem", background: `${fluxoRelacionado.cor}20`, border: `1px solid ${fluxoRelacionado.cor}40`, color: fluxoRelacionado.cor, padding: "4px 12px", borderRadius: 6, cursor: "pointer", fontSize: "0.78rem", fontWeight: 600 }}>{"\u{1F4D0}"} Ver fluxo: {fluxoRelacionado.titulo}</button>) : null; })()}
               <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1rem", marginTop: "1rem" }}>
                 <div><div style={{ fontSize: "0.75rem", fontWeight: 700, color: "#64748b", textTransform: "uppercase", marginBottom: "0.4rem" }}>{"\u2B05\uFE0F"} Recebe de ({incoming.length})</div>{incoming.map((c, i) => { const src = NODES.find(nd => nd.id === c.from); return <div key={i} style={{ fontSize: "0.82rem", color: "#cbd5e1", marginBottom: 4 }}>{src?.icon} {src?.label} <span style={{ color: "#64748b" }}>({c.label})</span></div>; })}{incoming.length === 0 && <div style={{ color: "#475569", fontSize: "0.82rem" }}>Fonte primaria</div>}</div>
                 <div><div style={{ fontSize: "0.75rem", fontWeight: 700, color: "#64748b", textTransform: "uppercase", marginBottom: "0.4rem" }}>{"\u27A1\uFE0F"} Envia para ({outgoing.length})</div>{outgoing.map((c, i) => { const tgt = NODES.find(nd => nd.id === c.to); return <div key={i} style={{ fontSize: "0.82rem", color: "#cbd5e1", marginBottom: 4 }}>{tgt?.icon} {tgt?.label} <span style={{ color: "#64748b" }}>({c.label})</span></div>; })}{outgoing.length === 0 && <div style={{ color: "#475569", fontSize: "0.82rem" }}>Ponto final</div>}</div>
@@ -362,6 +364,8 @@ export default function MapaOperacoes() {
             </div>
           ) : (() => {
             const f = FLUXOS_DETALHADOS.find(fl => fl.id === fluxoAberto);
+            const svgW = Math.max(f.etapas.length * 140 + 40, 800);
+            const svgH = 200;
             return (
               <div>
                 <button onClick={() => setFluxoAberto(null)} style={{ background: "rgba(255,255,255,0.08)", border: "1px solid rgba(255,255,255,0.15)", color: "#e2e8f0", padding: "0.4rem 1rem", borderRadius: 6, cursor: "pointer", marginBottom: "1rem", fontSize: "0.82rem" }}>{"\u2190"} Voltar aos fluxos</button>
@@ -373,6 +377,52 @@ export default function MapaOperacoes() {
                     <span>{"\u{1F4CA}"} {f.etapas.length} etapas</span>
                   </div>
                 </div>
+
+                {/* MAPA VISUAL DO PROCESSO (SVG flowchart) */}
+                <div style={{ background: "rgba(255,255,255,0.03)", borderRadius: 12, border: "1px solid rgba(255,255,255,0.08)", overflow: "auto", marginBottom: "1.5rem", padding: "1rem" }}>
+                  <div style={{ fontSize: "0.75rem", color: "rgba(255,255,255,0.4)", marginBottom: "0.5rem", fontWeight: 600 }}>MAPA VISUAL DO FLUXO</div>
+                  <svg viewBox={`0 0 ${svgW} ${svgH}`} style={{ width: "100%", minWidth: 700, height: "auto" }}>
+                    <defs>
+                      <marker id="flow-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d={`M0 0L10 5L0 10z`} fill={f.cor} opacity="0.8" /></marker>
+                    </defs>
+                    {f.etapas.map((e, i) => {
+                      const cx = 70 + i * 140;
+                      const cy = 100;
+                      const isFirst = i === 0;
+                      const isLast = i === f.etapas.length - 1;
+                      const isSystem = e.ator === "Sistema" || e.ator === "IA" || e.ator === "Sistema (cron)" || e.ator === "Sistema (SignalR)";
+                      const nodeShape = isFirst ? "start" : isLast ? "end" : isSystem ? "auto" : "manual";
+                      return (
+                        <g key={i}>
+                          {/* Connection arrow */}
+                          {i > 0 && <line x1={70 + (i-1) * 140 + 50} y1={cy} x2={cx - 50} y2={cy} stroke={f.cor} strokeWidth="2" opacity="0.6" markerEnd="url(#flow-arrow)" />}
+                          {/* Node */}
+                          {nodeShape === "start" && <circle cx={cx} cy={cy} r={28} fill={`${f.cor}25`} stroke={f.cor} strokeWidth="2" />}
+                          {nodeShape === "end" && <><circle cx={cx} cy={cy} r={28} fill={`${f.cor}25`} stroke={f.cor} strokeWidth="2" /><circle cx={cx} cy={cy} r={24} fill="none" stroke={f.cor} strokeWidth="1.5" /></>}
+                          {nodeShape === "auto" && <rect x={cx - 45} y={cy - 22} width={90} height={44} rx={8} fill={`${f.cor}15`} stroke={f.cor} strokeWidth="1.5" strokeDasharray="4 2" />}
+                          {nodeShape === "manual" && <rect x={cx - 45} y={cy - 22} width={90} height={44} rx={8} fill={`${f.cor}15`} stroke={f.cor} strokeWidth="1.5" />}
+                          {/* Step number */}
+                          <circle cx={cx - 30} cy={cy - 15} r={8} fill={f.cor} />
+                          <text x={cx - 30} y={cy - 11} textAnchor="middle" fontSize="8" fill="#fff" fontWeight="700">{e.passo}</text>
+                          {/* Label */}
+                          <text x={cx} y={cy + 4} textAnchor="middle" fontSize="9" fill="#e2e8f0" fontWeight="600">{e.nome.length > 12 ? e.nome.slice(0, 11) + ".." : e.nome}</text>
+                          {/* Actor */}
+                          <text x={cx} y={cy + 42} textAnchor="middle" fontSize="7" fill="rgba(255,255,255,0.4)">{e.ator}</text>
+                        </g>
+                      );
+                    })}
+                    {/* Legend */}
+                    <rect x="10" y={svgH - 35} width="8" height="8" rx="4" fill={`${f.cor}15`} stroke={f.cor} strokeWidth="1.5" strokeDasharray="4 2" />
+                    <text x="22" y={svgH - 28} fontSize="7" fill="rgba(255,255,255,0.4)">Automatico</text>
+                    <rect x="90" y={svgH - 35} width="8" height="8" rx="2" fill={`${f.cor}15`} stroke={f.cor} strokeWidth="1.5" />
+                    <text x="102" y={svgH - 28} fontSize="7" fill="rgba(255,255,255,0.4)">Manual</text>
+                    <circle cx="170" cy={svgH - 31} r="4" fill={`${f.cor}25`} stroke={f.cor} strokeWidth="1.5" />
+                    <text x="178" y={svgH - 28} fontSize="7" fill="rgba(255,255,255,0.4)">Inicio/Fim</text>
+                  </svg>
+                </div>
+
+                {/* TIMELINE DETALHADA */}
+                <div style={{ fontSize: "0.75rem", color: "rgba(255,255,255,0.4)", marginBottom: "0.5rem", fontWeight: 600 }}>DETALHAMENTO POR ETAPA</div>
                 <div style={{ position: "relative", paddingLeft: "2rem" }}>
                   {f.etapas.map((e, i) => (
                     <div key={i} style={{ position: "relative", paddingBottom: i < f.etapas.length - 1 ? "1.5rem" : 0, borderLeft: i < f.etapas.length - 1 ? `2px solid ${f.cor}40` : "none", paddingLeft: "1.5rem", marginLeft: "0.5rem" }}>
@@ -400,21 +450,29 @@ export default function MapaOperacoes() {
           <h3>{"\u{1F4CB}"} Todos os Processos - AxHub ({PROCESSOS_AXHUB.reduce((a, p) => a + p.itens.length, 0)}) + AxCross ({PROCESSOS_AXCROSS.reduce((a, p) => a + p.itens.length, 0)})</h3>
           <h4 style={{ color: "#60a5fa", margin: "1rem 0 0.75rem" }}>AxHub - {PROCESSOS_AXHUB.length} modulos</h4>
           <div className="pp-proc-grid">
-            {PROCESSOS_AXHUB.map(p => (
-              <div key={p.modulo} className="pp-proc-card">
-                <h4>{p.icone} {p.modulo} <span style={{ fontSize: "0.7rem", color: "rgba(255,255,255,0.4)" }}>({p.itens.length})</span></h4>
-                <ul className="pp-proc-list">{p.itens.map((item, i) => <li key={i}>{item}</li>)}</ul>
-              </div>
-            ))}
+            {PROCESSOS_AXHUB.map(p => {
+              const fluxoLink = FLUXOS_DETALHADOS.find(f => f.titulo.toLowerCase().includes(p.modulo.toLowerCase().split(" ")[0]) || (p.modulo === "Infracoes" && f.id === "infracao") || (p.modulo === "Pesagem / Balanca" && f.id === "pesagem") || (p.modulo === "Operacoes" && f.id === "operacao") || (p.modulo === "Medicao" && f.id === "medicao"));
+              return (
+                <div key={p.modulo} className="pp-proc-card">
+                  <h4>{p.icone} {p.modulo} <span style={{ fontSize: "0.7rem", color: "rgba(255,255,255,0.4)" }}>({p.itens.length})</span></h4>
+                  <ul className="pp-proc-list">{p.itens.map((item, i) => <li key={i}>{item}</li>)}</ul>
+                  {fluxoLink && <button onClick={() => { setAba("fluxos"); setFluxoAberto(fluxoLink.id); }} style={{ marginTop: "0.5rem", background: `${fluxoLink.cor}15`, border: `1px solid ${fluxoLink.cor}30`, color: fluxoLink.cor, padding: "3px 10px", borderRadius: 5, cursor: "pointer", fontSize: "0.72rem", fontWeight: 600 }}>{"\u{1F4D0}"} Ver mapa do processo</button>}
+                </div>
+              );
+            })}
           </div>
           <h4 style={{ color: "#f97316", margin: "1.5rem 0 0.75rem" }}>AxCross - {PROCESSOS_AXCROSS.length} modulos</h4>
           <div className="pp-proc-grid">
-            {PROCESSOS_AXCROSS.map(p => (
-              <div key={p.modulo} className="pp-proc-card">
-                <h4>{p.icone} {p.modulo} <span style={{ fontSize: "0.7rem", color: "rgba(255,255,255,0.4)" }}>({p.itens.length})</span></h4>
-                <ul className="pp-proc-list">{p.itens.map((item, i) => <li key={i}>{item}</li>)}</ul>
-              </div>
-            ))}
+            {PROCESSOS_AXCROSS.map(p => {
+              const fluxoLink = FLUXOS_DETALHADOS.find(f => (p.modulo === "Monitoramento Online" && f.id === "monitoramento") || (p.modulo === "Veiculos Monitorados" && f.id === "monitoramento"));
+              return (
+                <div key={p.modulo} className="pp-proc-card">
+                  <h4>{p.icone} {p.modulo} <span style={{ fontSize: "0.7rem", color: "rgba(255,255,255,0.4)" }}>({p.itens.length})</span></h4>
+                  <ul className="pp-proc-list">{p.itens.map((item, i) => <li key={i}>{item}</li>)}</ul>
+                  {fluxoLink && <button onClick={() => { setAba("fluxos"); setFluxoAberto(fluxoLink.id); }} style={{ marginTop: "0.5rem", background: `${fluxoLink.cor}15`, border: `1px solid ${fluxoLink.cor}30`, color: fluxoLink.cor, padding: "3px 10px", borderRadius: 5, cursor: "pointer", fontSize: "0.72rem", fontWeight: 600 }}>{"\u{1F4D0}"} Ver mapa do processo</button>}
+                </div>
+              );
+            })}
           </div>
         </div>
       )}
