@@ -1,18 +1,16 @@
 /**
  * PipelineEditais.jsx — Ecossistema Unificado de Editais
- * Fluxo completo: Análise de Editais (busca + decomposição + multi-produto) → Conformidade → Revisão → Roadmap → Specs
+ * Fluxo completo: Análise de Editais (busca + decomposição + conformidade + multi-produto) → Revisão → Roadmap → Specs
  */
 
 import { useState } from "react";
-import Conformidade from "./Conformidade";
 import AnaliseEditalAvancada from "./AnaliseEditalAvancada";
 import ConfidencaRevisao from "./ConfidencaRevisao";
 import Roadmap from "./Roadmap";
 import Specs from "./Specs";
 
 const ETAPAS = [
-  { id: "avancada",     label: "Análise de Editais",  icon: "📊", desc: "Busque, analise e compare — decomposição, de-para, concorrentes, mercado e multi-produto" },
-  { id: "conformidade", label: "Conformidade",        icon: "📋", desc: "Análise detalhada de conformidade por produto individual" },
+  { id: "avancada",     label: "Análise de Editais",  icon: "📊", desc: "Busque, analise e compare — decomposição, de-para, concorrentes, conformidade, mercado e multi-produto" },
   { id: "revisao",      label: "Revisão",             icon: "✅", desc: "Revise itens de baixa confiança" },
   { id: "roadmap",      label: "Roadmap",             icon: "🗺️", desc: "Planeje implementação das lacunas" },
   { id: "specs",        label: "Specs",               icon: "📐", desc: "Gere especificações técnicas (PRD)" },
@@ -20,14 +18,6 @@ const ETAPAS = [
 
 export default function PipelineEditais() {
   const [etapa, setEtapa] = useState("avancada");
-
-  // Estado compartilhado do edital — flui da Etapa 1 para as demais
-  const [editalCompartilhado, setEditalCompartilhado] = useState({
-    titulo: "",
-    texto: "",
-    produto: "",
-    orgao: "",
-  });
 
   const etapaAtual = ETAPAS.find(e => e.id === etapa);
   const idxAtual = ETAPAS.findIndex(e => e.id === etapa);
@@ -104,17 +94,7 @@ export default function PipelineEditais() {
 
       {/* Content area */}
       <div style={{ flex: 1, overflow: "auto", padding: "0 20px 20px" }}>
-        {etapa === "avancada"     && <AnaliseEditalAvancada embedded onEditalChange={setEditalCompartilhado} />}
-        {etapa === "conformidade" && (
-          <Conformidade
-            embedded
-            preloadData={editalCompartilhado.texto ? {
-              titulo: editalCompartilhado.titulo,
-              conteudo: editalCompartilhado.texto,
-              produto: editalCompartilhado.produto,
-            } : null}
-          />
-        )}
+        {etapa === "avancada"     && <AnaliseEditalAvancada embedded />}
         {etapa === "revisao"      && <ConfidencaRevisao embedded />}
         {etapa === "roadmap"      && <Roadmap embedded />}
         {etapa === "specs"        && <Specs embedded />}
