@@ -1,6 +1,6 @@
 /**
  * AnaliseEditalAvancada.jsx — Análise Completa de Editais
- * Upload de edital → decomposição categórica → de-para → concorrentes → mercado → prompt adequação
+ * Busca gov.br / Upload / Colar texto → decomposição categórica → de-para → concorrentes → mercado → prompt adequação
  */
 
 import React, { useState, useEffect } from "react";
@@ -16,8 +16,18 @@ const TABS = [
   { id: "resumo", label: "📈 Resumo", icon: "📈" },
 ];
 
+const INPUT_MODES = [
+  { id: "buscar", label: "🔍 Buscar no Gov.br", desc: "Pesquise editais na plataforma PNCP" },
+  { id: "upload", label: "📂 Upload / Colar", desc: "Envie PDF ou cole o texto manualmente" },
+];
+
 export default function AnaliseEditalAvancada({ embedded = false }) {
   const [tab, setTab] = useState("input");
+  const [inputMode, setInputMode] = useState("buscar");
+  const [termoBusca, setTermoBusca] = useState("");
+  const [editaisBuscados, setEditaisBuscados] = useState([]);
+  const [buscando, setBuscando] = useState(false);
+  const [msgBusca, setMsgBusca] = useState("");
   const [textoEdital, setTextoEdital] = useState("");
   const [titulo, setTitulo] = useState("");
   const [orgao, setOrgao] = useState("");
@@ -138,6 +148,95 @@ export default function AnaliseEditalAvancada({ embedded = false }) {
       {/* ═══ TAB INPUT ═══ */}
       {tab === "input" && (
         <div style={{ maxWidth: 800 }}>
+          {/* ─── SELETOR DE MODO ─── */}
+          <div style={{ display: "flex", gap: "0.5rem", marginBottom: "1.2rem" }}>
+            {INPUT_MODES.map(m => (
+              <button
+                key={m.id}
+                onClick={() => setInputMode(m.id)}
+                style={{
+                  flex: 1, padding: "0.7rem 1rem", borderRadius: 10,
+                  border: inputMode === m.id ? "2px solid #6366f1" : "1px solid rgba(255,255,255,0.1)",
+                  background: inputMode === m.id ? "rgba(99,102,241,0.12)" : "rgba(255,255,255,0.03)",
+                  color: inputMode === m.id ? "#a5b4fc" : "#94a3b8",
+                  cursor: "pointer", textAlign: "left", transition: "all 0.2s",
+                }}
+              >
+                <div style={{ fontSize: "0.9rem", fontWeight: 700 }}>{m.label}</div>
+                <div style={{ fontSize: "0.72rem", color: "#64748b", marginTop: 2 }}>{m.desc}</div>
+              </button>
+            ))}
+          </div>
+
+          {/* ─── MODO BUSCAR GOV.BR ─── */}
+          {inputMode === "buscar" && (
+            <div style={{ marginBottom: "1.2rem", background: "rgba(99,102,241,0.04)", border: "1px solid rgba(99,102,241,0.15)", borderRadius: 12, padding: "1rem" }}>
+              <form onSubmit={async (e) => {
+                e.preventDefault();
+                if (!termoBusca.trim() || termoBusca.trim().length < 2) { setMsgBusca("❌ Digite pelo menos 2 caracteres"); return; }
+                setBuscando(true); setMsgBusca("🔍 Buscando editais no PNCP...");
+                try {
+                  const res = await api.get("/edital/buscar", { params: { q: termoBusca } });
+                  if (res.data.editais.length === 0) { setMsgBusca("⚠️ Nenhum edital encontrado"); setEditaisBuscados([]); }
+                  else { setEditaisBuscados(res.data.editais); setMsgBusca(`✅ ${res.data.editais.length} edital(is) encontrado(s)`); }
+                } catch (err) { setMsgBusca(`❌ Erro: ${err.response?.data?.erro || err.message}`); }
+                finally { setBuscando(false); }
+              }} style={{ display: "flex", gap: "0.5rem", marginBottom: "0.6rem" }}>
+                <input
+                  type="text" value={termoBusca} onChange={e => setTermoBusca(e.target.value)}
+                  placeholder="Ex: 90.021, CONAB, DETRAN, fiscalização eletrônica..."
+                  disabled={buscando}
+                  style={{ flex: 1, padding: "0.6rem 1rem", background: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.12)", borderRadius: 8, color: "#e2e8f0", fontSize: "0.88rem" }}
+                />
+                <button type="submit" disabled={buscando} style={{
+                  padding: "0.6rem 1.2rem", background: buscando ? "#334155" : "linear-gradient(135deg, #6366f1, #8b5cf6)",
+                  color: "#fff", border: "none", borderRadius: 8, fontWeight: 700, cursor: buscando ? "wait" : "pointer", whiteSpace: "nowrap",
+                }}>
+                  {buscando ? "⏳..." : "🔍 Buscar"}
+                </button>
+              </form>
+
+              {msgBusca && <div style={{ fontSize: "0.82rem", color: msgBusca.startsWith("❌") ? "#fca5a5" : msgBusca.startsWith("⚠️") ? "#fbbf24" : "#6ee7b7", marginBottom: "0.5rem" }}>{msgBusca}</div>}
+
+              {editaisBuscados.length > 0 && (
+                <div style={{ maxHeight: 320, overflow: "auto", display: "flex", flexDirection: "column", gap: "0.4rem" }}>
+                  {editaisBuscados.map((edital) => (
+                    <div
+                      key={edital.id}
+                      onClick={() => {
+                        setTitulo(edital.titulo || "");
+                        setOrgao(edital.orgao || "");
+                        if (edital.descricao) setTextoEdital(prev => prev || edital.descricao);
+                        setMsgBusca(`✅ Edital "${edital.titulo}" selecionado — complete com upload ou texto`);
+                        setEditaisBuscados([]);
+                      }}
+                      style={{
+                        padding: "0.7rem 1rem", background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.08)",
+                        borderRadius: 10, cursor: "pointer", transition: "all 0.15s",
+                      }}
+                      onMouseOver={e => { e.currentTarget.style.borderColor = "#6366f1"; e.currentTarget.style.background = "rgba(99,102,241,0.08)"; }}
+                      onMouseOut={e => { e.currentTarget.style.borderColor = "rgba(255,255,255,0.08)"; e.currentTarget.style.background = "rgba(255,255,255,0.04)"; }}
+                    >
+                      <div style={{ fontSize: "0.88rem", fontWeight: 700, color: "#e2e8f0", marginBottom: 2 }}>{edital.titulo}</div>
+                      <div style={{ display: "flex", gap: "1rem", fontSize: "0.75rem", color: "#64748b" }}>
+                        <span><strong>Nº:</strong> {edital.numero}</span>
+                        <span><strong>Órgão:</strong> {edital.orgao}</span>
+                        {edital.data && <span>📅 {new Date(edital.data).toLocaleDateString("pt-BR")}</span>}
+                      </div>
+                      {edital.descricao && <div style={{ fontSize: "0.75rem", color: "#94a3b8", marginTop: 4 }}>{edital.descricao.slice(0, 150)}</div>}
+                    </div>
+                  ))}
+                </div>
+              )}
+
+              {editaisBuscados.length === 0 && !buscando && !msgBusca && (
+                <div style={{ fontSize: "0.78rem", color: "#475569", textAlign: "center", padding: "0.5rem" }}>
+                  Pesquise por número, órgão ou termo do edital. Ao selecionar, os campos serão preenchidos automaticamente.
+                </div>
+              )}
+            </div>
+          )}
+
           <div style={{ marginBottom: "1rem" }}>
             <label style={{ display: "block", color: "#94a3b8", fontSize: "0.82rem", marginBottom: 4, fontWeight: 600 }}>Título do Edital</label>
             <input
@@ -213,6 +312,7 @@ export default function AnaliseEditalAvancada({ embedded = false }) {
             </div>
           )}
 
+          {inputMode === "upload" && (
           <div style={{ marginBottom: "1rem" }}>
             <label style={{ display: "block", color: "#94a3b8", fontSize: "0.82rem", marginBottom: 4, fontWeight: 600 }}>
               📂 Upload do Edital (PDF, DOCX, TXT)
@@ -248,12 +348,15 @@ export default function AnaliseEditalAvancada({ embedded = false }) {
               )}
             </div>
           </div>
+          )}
 
+          {inputMode === "upload" && (
           <div style={{ display: "flex", alignItems: "center", gap: "1rem", marginBottom: "1rem" }}>
             <div style={{ flex: 1, height: 1, background: "rgba(255,255,255,0.08)" }} />
             <span style={{ color: "#475569", fontSize: "0.78rem", fontWeight: 600 }}>ou cole o texto manualmente</span>
             <div style={{ flex: 1, height: 1, background: "rgba(255,255,255,0.08)" }} />
           </div>
+          )}
 
           <div style={{ marginBottom: "1rem" }}>
             <label style={{ display: "block", color: "#94a3b8", fontSize: "0.82rem", marginBottom: 4, fontWeight: 600 }}>

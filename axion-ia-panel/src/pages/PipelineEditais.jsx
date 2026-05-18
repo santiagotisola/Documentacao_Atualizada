@@ -1,10 +1,9 @@
 /**
  * PipelineEditais.jsx — Ecossistema Unificado de Editais
- * Fluxo completo: Buscar → Conformidade → Análise Avançada → Multi-Produto → Revisão → Roadmap → Specs
+ * Fluxo completo: Análise Avançada (com busca) → Conformidade → Multi-Produto → Revisão → Roadmap → Specs
  */
 
 import { useState } from "react";
-import BuscaEditaisGov from "./BuscaEditaisGov";
 import Conformidade from "./Conformidade";
 import AnaliseEditalAvancada from "./AnaliseEditalAvancada";
 import AnalisaMultiProduto from "./AnalisaMultiProduto";
@@ -13,9 +12,8 @@ import Roadmap from "./Roadmap";
 import Specs from "./Specs";
 
 const ETAPAS = [
-  { id: "buscar",       label: "Buscar Editais",     icon: "🔍", desc: "Descubra editais em gov.br (PNCP)" },
+  { id: "avancada",     label: "Análise de Editais",  icon: "📊", desc: "Busque no Gov.br, faça upload ou cole — análise completa com decomposição, de-para e concorrentes" },
   { id: "conformidade", label: "Conformidade",        icon: "📋", desc: "Analise conformidade por produto" },
-  { id: "avancada",     label: "Análise Avançada",    icon: "📊", desc: "Decomposição, De-Para, Concorrentes, Mercado" },
   { id: "multi",        label: "Multi-Produto",       icon: "⚖️", desc: "Compare 3 produtos simultaneamente" },
   { id: "revisao",      label: "Revisão",             icon: "✅", desc: "Revise itens de baixa confiança" },
   { id: "roadmap",      label: "Roadmap",             icon: "🗺️", desc: "Planeje implementação das lacunas" },
@@ -23,7 +21,7 @@ const ETAPAS = [
 ];
 
 export default function PipelineEditais() {
-  const [etapa, setEtapa] = useState("buscar");
+  const [etapa, setEtapa] = useState("avancada");
 
   const etapaAtual = ETAPAS.find(e => e.id === etapa);
   const idxAtual = ETAPAS.findIndex(e => e.id === etapa);
@@ -100,9 +98,8 @@ export default function PipelineEditais() {
 
       {/* Content area */}
       <div style={{ flex: 1, overflow: "auto", padding: "0 20px 20px" }}>
-        {etapa === "buscar"       && <BuscaEditaisGov embedded />}
-        {etapa === "conformidade" && <Conformidade embedded />}
         {etapa === "avancada"     && <AnaliseEditalAvancada embedded />}
+        {etapa === "conformidade" && <Conformidade embedded />}
         {etapa === "multi"        && <AnalisaMultiProduto embedded />}
         {etapa === "revisao"      && <ConfidencaRevisao embedded />}
         {etapa === "roadmap"      && <Roadmap embedded />}
