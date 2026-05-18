@@ -6,7 +6,7 @@ const PRODUTOS = ["axhub", "axton", "axcross"];
 const COMPLEXIDADE_CORES = { baixa: "#27ae60", media: "#f39c12", alta: "#e74c3c" };
 const PRIORIDADE_LABEL = { 1: "🔴 Alta", 2: "🟡 Média", 3: "🟢 Baixa", 4: "⚪ Baixa", 5: "⚪ Mínima" };
 
-export default function Roadmap() {
+export default function Roadmap({ embedded = false }) {
   const [produto, setProduto]       = useState("axhub");
   const [roadmaps, setRoadmaps]     = useState([]);
   const [selecionado, setSelecionado] = useState(null);
@@ -103,11 +103,13 @@ export default function Roadmap() {
   }) ?? [];
 
   return (
-    <div className="page-container">
-      <div className="page-header">
-        <h2>🗺️ Roadmap de Produto</h2>
-        <p className="page-desc">Backlog gerado automaticamente a partir de lacunas identificadas nas fontes de pesquisa.</p>
-      </div>
+    <div className={embedded ? "" : "page-container"}>
+      {!embedded && (
+        <div className="page-header">
+          <h2>🗺️ Roadmap de Produto</h2>
+          <p className="page-desc">Backlog gerado automaticamente a partir de lacunas identificadas nas fontes de pesquisa.</p>
+        </div>
+      )}
 
       {/* Toolbar */}
       <div className="toolbar" style={{ display: "flex", gap: 12, alignItems: "center", flexWrap: "wrap", marginBottom: 16 }}>

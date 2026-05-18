@@ -8,7 +8,7 @@ import React, { useState, useEffect } from "react";
 import { api } from "../services/api";
 import "./AnalisaMultiProduto.css";
 
-export default function AnalisaMultiProduto() {
+export default function AnalisaMultiProduto({ embedded = false }) {
   const [analise, setAnalise] = useState(null);
   const [carregando, setCarregando] = useState(false);
   const [filtroTipo, setFiltroTipo] = useState("TODOS");
@@ -103,10 +103,10 @@ export default function AnalisaMultiProduto() {
 
   if (!analise) {
     return (
-      <div className="analisa-multi-container">
+      <div className="analisa-multi-container" style={embedded ? { padding: 0 } : {}}>
         <div className="formulario-analise">
-          <h2>📊 Análise de Conformidade Multi-Produto</h2>
-          <p>Compare seu edital/requisitos contra AxHub, AxTon e AxCross simultaneamente</p>
+          {!embedded && <h2>📊 Análise de Conformidade Multi-Produto</h2>}
+          {!embedded && <p>Compare seu edital/requisitos contra AxHub, AxTon e AxCross simultaneamente</p>}
 
           {/* Seletor de Editais Cadastrados */}
           <div className="fontes-section">
@@ -178,7 +178,7 @@ export default function AnalisaMultiProduto() {
   const tiposUnicos = ["TODOS", ...tipos];
 
   return (
-    <div className="analisa-multi-container resultado">
+    <div className="analisa-multi-container resultado" style={embedded ? { padding: 0 } : {}}>
       <div className="cabecalho-resultado">
         <h2>📊 {analise.resumo.tituloEdital}</h2>
         <p>Análise comparativa de conformidade entre 3 produtos</p>

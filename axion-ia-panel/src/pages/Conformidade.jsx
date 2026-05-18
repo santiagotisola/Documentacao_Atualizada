@@ -34,7 +34,7 @@ const ETAPAS = [
   { id: 4, label: "Gerando justificativas",   descricao: "Análise técnica via IA" },
 ];
 
-export default function Conformidade() {
+export default function Conformidade({ embedded = false }) {
   const [produto, setProduto]         = useState("axhub");
   const [aba, setAba]                 = useState("lista");
   const [lista, setLista]             = useState([]);
@@ -204,13 +204,15 @@ export default function Conformidade() {
   ) || [];
 
   return (
-    <div className="page-container">
-      <div className="page-header">
-        <h2 className="page-title">📜 Conformidade com Editais</h2>
-        <span className="page-subtitle">
-          Analisa se o sistema atende os requisitos de um edital ou Termo de Referência para licitação.
-        </span>
-      </div>
+    <div className={embedded ? "" : "page-container"}>
+      {!embedded && (
+        <div className="page-header">
+          <h2 className="page-title">📜 Conformidade com Editais</h2>
+          <span className="page-subtitle">
+            Analisa se o sistema atende os requisitos de um edital ou Termo de Referência para licitação.
+          </span>
+        </div>
+      )}
 
       {/* Seletor de produto */}
       <div style={{ display: "flex", gap: "0.75rem", marginBottom: "1.25rem", flexWrap: "wrap" }}>

@@ -4,7 +4,7 @@ const PRODUTOS = ["axhub", "axton", "axcross"];
 const STATUS_CORES = { rascunho: "#f39c12", revisao: "#2563eb", aprovado: "#27ae60" };
 const STATUS_LABELS = { rascunho: "🟡 Rascunho", revisao: "🔵 Em Revisão", aprovado: "✅ Aprovado" };
 
-export default function Specs() {
+export default function Specs({ embedded = false }) {
   const [produto, setProduto]       = useState("");
   const [specs, setSpecs]           = useState([]);
   const [selecionada, setSelecionada] = useState(null);
@@ -49,11 +49,13 @@ export default function Specs() {
   }
 
   return (
-    <div className="page-container">
-      <div className="page-header">
-        <h2>📐 Especificações Técnicas (PRD)</h2>
-        <p className="page-desc">Specs geradas a partir do roadmap — contêm objetivo, requisitos, arquitetura, pseudocódigo e critérios de aceite.</p>
-      </div>
+    <div className={embedded ? "" : "page-container"}>
+      {!embedded && (
+        <div className="page-header">
+          <h2>📐 Especificações Técnicas (PRD)</h2>
+          <p className="page-desc">Specs geradas a partir do roadmap — contêm objetivo, requisitos, arquitetura, pseudocódigo e critérios de aceite.</p>
+        </div>
+      )}
 
       {/* Filtro de produto */}
       <div style={{ display: "flex", gap: 12, marginBottom: 16, alignItems: "center" }}>

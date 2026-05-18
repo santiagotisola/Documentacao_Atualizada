@@ -16,7 +16,7 @@ const TABS = [
   { id: "resumo", label: "📈 Resumo", icon: "📈" },
 ];
 
-export default function AnaliseEditalAvancada() {
+export default function AnaliseEditalAvancada({ embedded = false }) {
   const [tab, setTab] = useState("input");
   const [textoEdital, setTextoEdital] = useState("");
   const [titulo, setTitulo] = useState("");
@@ -114,7 +114,7 @@ export default function AnaliseEditalAvancada() {
   };
 
   return (
-    <div style={{ padding: "0 1.5rem 2rem" }}>
+    <div style={{ padding: embedded ? "0" : "0 1.5rem 2rem" }}>
       {/* Tabs */}
       <div style={{ display: "flex", gap: "0.3rem", flexWrap: "wrap", marginBottom: "1.2rem", borderBottom: "1px solid rgba(255,255,255,0.08)", paddingBottom: "0.8rem" }}>
         {TABS.map(t => (

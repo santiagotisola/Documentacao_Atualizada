@@ -4,8 +4,8 @@ import {
   Brain, LayoutDashboard, Globe,
   Bot, MessageCircle, Headphones,
   ScanSearch, ScanLine, BookMarked,
-  ShieldCheck, BarChart3,
-  Landmark, PieChart, Map, Ruler,
+  BarChart3,
+  Landmark,
   FileText, Search, Clock, GraduationCap, ScrollText,
   Settings, ExternalLink, Menu, X
 } from "lucide-react";
@@ -18,17 +18,12 @@ import Configuracoes from "./pages/Configuracoes.jsx";
 import Helpdesk from "./pages/Helpdesk.jsx";
 import GerarDoc from "./pages/GerarDoc.jsx";
 import FontesPesquisa from "./pages/FontesPesquisa.jsx";
-import Roadmap from "./pages/Roadmap.jsx";
-import Specs from "./pages/Specs.jsx";
 import RelatorioFluxo from "./pages/RelatorioFluxo.jsx";
-import Conformidade from "./pages/Conformidade.jsx";
-import AnalisaMultiProduto from "./pages/AnalisaMultiProduto.jsx";
 import PlanilhaHoras from "./pages/PlanilhaHoras.jsx";
 import WhatsApp from "./pages/WhatsApp.jsx";
 import AnaliseImagens from "./pages/AnaliseImagens.jsx";
 import MapaOperacoes from "./pages/MapaOperacoes.jsx";
-import AnaliseEditalAvancada from "./pages/AnaliseEditalAvancada.jsx";
-import BuscaEditaisGov from "./pages/BuscaEditaisGov.jsx";
+import PipelineEditais from "./pages/PipelineEditais.jsx";
 import AnalisesSites from "./pages/AnalisesSites.jsx";
 import IntelligenceHub from "./pages/IntelligenceHub.jsx";
 import HomePage from "./pages/HomePage.jsx";
@@ -47,14 +42,9 @@ const PAGE_INFO = {
   "/helpdesk": { title: "Helpdesk", subtitle: "Gestão de tickets e atendimento Jitbit", icon: "🎧" },
   "/analise-imagens": { title: "Análise de Imagens", subtitle: "OCR, validação e qualidade de capturas", icon: "📷" },
 
-
-  "/conformidade": { title: "Conformidade", subtitle: "Verificação de requisitos de editais", icon: "🛡️" },
+  "/pipeline-editais": { title: "Pipeline de Editais", subtitle: "Ecossistema completo: Buscar → Analisar → Revisar → Planejar → Especificar", icon: "🏗️" },
   "/relatorio-fluxo": { title: "Relatório de Fluxo", subtitle: "Métricas de atendimento e fluxo operacional", icon: "📊" },
-  "/editais-gov": { title: "Editais Gov", subtitle: "Busca e análise de editais no PNCP", icon: "🏛️" },
-  "/analise-edital": { title: "Análise Avançada de Edital", subtitle: "Decomposição, De-Para, Concorrentes e Mercado", icon: "📊" },
-  "/analisa-multi": { title: "Multi-Produto", subtitle: "Análise comparativa entre produtos", icon: "📊" },
-  "/roadmap": { title: "Roadmap", subtitle: "Planejamento e evolução de produto", icon: "🗺️" },
-  "/specs": { title: "Specs Técnicas", subtitle: "Especificações técnicas dos sistemas", icon: "📐" },
+
   "/kb": { title: "Knowledge Base", subtitle: "Base de conhecimento com embeddings", icon: "📚" },
   "/gerar-doc": { title: "Gerador de Docs", subtitle: "Documentação automatizada com IA", icon: "📄" },
   "/fontes": { title: "Fontes de Pesquisa", subtitle: "URLs e referências de pesquisa", icon: "🔎" },
@@ -86,18 +76,13 @@ const MENU_SECTIONS = [
     group: "Qualidade",
     items: [
       { to: "/analise-imagens", icon: ScanLine, label: "Análise de Imagens" },
-      { to: "/conformidade", icon: ShieldCheck, label: "Conformidade" },
       { to: "/relatorio-fluxo", icon: BarChart3, label: "Relatório de Fluxo" },
     ]
   },
   {
     group: "Inteligência",
     items: [
-      { to: "/editais-gov", icon: Landmark, label: "Editais Gov" },
-      { to: "/analise-edital", icon: PieChart, label: "Análise de Edital" },
-      { to: "/analisa-multi", icon: PieChart, label: "Multi-Produto" },
-      { to: "/roadmap", icon: Map, label: "Roadmap" },
-      { to: "/specs", icon: Ruler, label: "Specs Técnicas" },
+      { to: "/pipeline-editais", icon: Landmark, label: "Pipeline de Editais" },
     ]
   },
   {
@@ -222,12 +207,7 @@ function AppContent() {
           <Route path="/helpdesk" element={<Helpdesk />} />
           <Route path="/gerar-doc" element={<GerarDoc />} />
           <Route path="/fontes" element={<FontesPesquisa />} />
-          <Route path="/editais-gov" element={<BuscaEditaisGov />} />
-          <Route path="/analise-edital" element={<AnaliseEditalAvancada />} />
-          <Route path="/roadmap" element={<Roadmap />} />
-          <Route path="/specs" element={<Specs />} />
-          <Route path="/conformidade" element={<Conformidade />} />
-          <Route path="/analisa-multi" element={<AnalisaMultiProduto />} />
+          <Route path="/pipeline-editais" element={<PipelineEditais />} />
           <Route path="/relatorio-fluxo" element={<RelatorioFluxo />} />
           <Route path="/planilha-horas" element={<PlanilhaHoras />} />
 

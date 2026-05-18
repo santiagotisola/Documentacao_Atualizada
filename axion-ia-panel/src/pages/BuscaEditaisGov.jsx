@@ -7,7 +7,7 @@ import React, { useState } from "react";
 import { api } from "../services/api";
 import "./BuscaEditaisGov.css";
 
-export default function BuscaEditaisGov() {
+export default function BuscaEditaisGov({ embedded = false }) {
   const [etapa, setEtapa] = useState("buscar"); // buscar | resultados | importar | analisando
   const [termo, setTermo] = useState("");
   const [editaisBuscados, setEditaisBuscados] = useState([]);
@@ -121,11 +121,13 @@ export default function BuscaEditaisGov() {
   };
 
   return (
-    <div className="busca-editais-container">
-      <div className="cabecalho">
-        <h2>🏛️ Busca de Editais no Gov.br</h2>
-        <p>Busque editais de licitações públicas e gere análise de conformidade automaticamente</p>
-      </div>
+    <div className="busca-editais-container" style={embedded ? { padding: 0 } : {}}>
+      {!embedded && (
+        <div className="cabecalho">
+          <h2>🏛️ Busca de Editais no Gov.br</h2>
+          <p>Busque editais de licitações públicas e gere análise de conformidade automaticamente</p>
+        </div>
+      )}
 
       {/* ETAPA 1: BUSCA */}
       {etapa === "buscar" && (
