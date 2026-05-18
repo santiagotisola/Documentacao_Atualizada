@@ -26,9 +26,9 @@ const AnaliseSchema = new mongoose.Schema({
 }, { _id: false });
 
 const FonteSchema = new mongoose.Schema({
-  produto:  { type: String, required: true, enum: ["axhub", "axton", "axcross"] },
+  produto:  { type: String, required: true, enum: ["axhub", "axton", "axcross", "multi"] },
   titulo:   { type: String, required: true, trim: true },
-  tipo:     { type: String, default: "manual", enum: ["manual", "especificacao", "relatorio", "requisito", "outro"] },
+  tipo:     { type: String, default: "manual", enum: ["manual", "especificacao", "relatorio", "requisito", "edital", "pregao", "outro"] },
   conteudo: { type: String, required: true },
   arquivo:  { type: String, default: null },      // nome do arquivo original (se houver)
   status:   { type: String, default: "pendente", enum: ["pendente", "analisado"] },

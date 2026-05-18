@@ -7,6 +7,7 @@ import express from "express";
 import { buscarEditaisPNCP, extrairEspecificacoes, normalizarEdital, verificarDuplicata, sugerirProdutos } from "./services/pncp-scraper.js";
 import { Fonte } from "./models/fonte.model.js";
 import { gerarRelatorioConformidadeEnhanced } from "./services/conformidade-enhanced.js";
+import { analisarMultiploProdutos } from "./services/multi-product-analysis.js";
 import { analisarEditalCompleto } from "./services/edital-analise-avancada.js";
 import { extrairTexto } from "./services/extrator.js";
 import { listarSites, getSiteConfig } from "./config/sites.js";
@@ -98,8 +99,8 @@ export async function importarEditalHandler(req, res) {
     const novaFonte = new Fonte({
       numero,
       titulo,
-      tipo: tipo || "Pregão",
-      produto: "não-determinado", // Será atualizado após análise
+      tipo: "edital",
+      produto: "multi",
       conteudo: conteudo || descricao || titulo,
       link,
       orgao,
@@ -153,7 +154,7 @@ export async function analisarEditalRapidoHandler(req, res) {
       fonte = new Fonte({
         numero,
         titulo: titulo || `Edital ${numero}`,
-        tipo: "Pregão",
+        tipo: "edital",
         produto: "multi",
         conteudo,
         fonte: "PNCP/GOV.BR",
@@ -163,21 +164,34 @@ export async function analisarEditalRapidoHandler(req, res) {
     }
 
     // 3. Gerar análise multi-produto
-    const analise = await gerarRelatorioConformidadeEnhanced({
+    const analise = await analisarMultiploProdutos({
       tituloEdital: fonte.titulo,
       textoEdital: conteudo,
-      produtos,
-      comConfianca,
-      comTabelas,
-      limiarAutoResolve: 0.8,
+      comJustificativas: true,
     });
+
+    // Calcular stats agregadas para compatibilidade com frontend
+    const produtos3 = analise.analisesPorProduto || {};
+    const melhorProduto = Object.values(produtos3)
+      .filter(p => !p.erro)
+      .sort((a, b) => (b.percentualAtendimento || 0) - (a.percentualAtendimento || 0))[0];
+
+    const stats = melhorProduto ? {
+      percentual: melhorProduto.percentualAtendimento || 0,
+      atendidos: melhorProduto.atendidos || 0,
+      parciais: melhorProduto.parciais || 0,
+      naoAtendidos: melhorProduto.naoAtendidos || 0,
+    } : { percentual: 0, atendidos: 0, parciais: 0, naoAtendidos: 0 };
 
     res.status(201).json({
       sucesso: true,
       editalId: fonte._id,
-      analiseId: analise._id,
-      resumo: analise.resumo,
-      stats: analise.stats,
+      resumo: {
+        ...analise.resumo,
+        veredicto: melhorProduto?.veredicto || "INAPTO",
+      },
+      stats,
+      analisesPorProduto: analise.analisesPorProduto,
     });
   } catch (erro) {
     console.error("❌ Erro ao analisar edital:", erro);

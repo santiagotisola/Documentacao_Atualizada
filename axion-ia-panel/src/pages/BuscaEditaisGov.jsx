@@ -81,9 +81,6 @@ export default function BuscaEditaisGov({ embedded = false }) {
           numero: edital.numero,
           titulo: edital.titulo,
           conteudo: edital.descricao || edital.titulo,
-          produtos: ["axhub", "axton", "axcross"],
-          comConfianca: true,
-          comTabelas: true,
         });
 
         novasAnalises.push({
