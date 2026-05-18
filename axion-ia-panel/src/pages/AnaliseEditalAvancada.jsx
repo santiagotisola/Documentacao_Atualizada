@@ -4,7 +4,7 @@
  */
 
 import React, { useState, useEffect } from "react";
-import { api, apiFetch } from "../services/api";
+import { api } from "../services/api";
 
 const TABS = [
   { id: "input", label: "📋 Informar Edital", icon: "📋" },
@@ -13,16 +13,9 @@ const TABS = [
   { id: "concorrentes", label: "🏆 Concorrentes", icon: "🏆" },
   { id: "mercado", label: "🌐 Mercado", icon: "🌐" },
   { id: "multi", label: "⚖️ Multi-Produto", icon: "⚖️" },
-  { id: "conformidade", label: "📜 Conformidade", icon: "📜" },
   { id: "adequacao", label: "🔧 Adequação", icon: "🔧" },
   { id: "resumo", label: "📈 Resumo", icon: "📈" },
 ];
-
-const STATUS_COR = {
-  atendido:     { bg: "rgba(34,197,94,0.15)", texto: "#4ade80", label: "✅ Atendido" },
-  parcial:      { bg: "rgba(245,158,11,0.15)", texto: "#fbbf24", label: "⚠️ Parcial" },
-  nao_atendido: { bg: "rgba(239,68,68,0.15)", texto: "#f87171", label: "❌ Não Atendido" },
-};
 
 const VEREDICTO_COR = {
   APTO:               { bg: "rgba(34,197,94,0.2)", texto: "#4ade80", label: "✅ APTO" },
@@ -60,13 +53,6 @@ export default function AnaliseEditalAvancada({ embedded = false }) {
   const [multiCarregando, setMultiCarregando] = useState(false);
   const [multiErro, setMultiErro] = useState("");
   const [multiAba, setMultiAba] = useState("resumo");
-
-  // Estado Conformidade (integrada)
-  const [confProduto, setConfProduto] = useState("axhub");
-  const [confRelatorio, setConfRelatorio] = useState(null);
-  const [confCarregando, setConfCarregando] = useState(false);
-  const [confErro, setConfErro] = useState("");
-  const [confFiltro, setConfFiltro] = useState("todos");
 
   // Carregar catálogo de sites ao montar
   useEffect(() => {
@@ -153,7 +139,7 @@ export default function AnaliseEditalAvancada({ embedded = false }) {
       {/* Tabs */}
       <div style={{ display: "flex", gap: "0.3rem", flexWrap: "wrap", marginBottom: "1.2rem", borderBottom: "1px solid rgba(255,255,255,0.08)", paddingBottom: "0.8rem" }}>
         {TABS.map(t => {
-          const isEnabled = t.id === "input" || resultado || ((t.id === "multi" || t.id === "conformidade") && textoEdital.length >= 50);
+          const isEnabled = t.id === "input" || resultado || (t.id === "multi" && textoEdital.length >= 50);
           return (
             <button
               key={t.id}
@@ -483,6 +469,28 @@ export default function AnaliseEditalAvancada({ embedded = false }) {
             </div>
           )}
 
+          {/* ─── VEREDICTO POR PRODUTO (Conformidade unificada) ─── */}
+          {resultado.dePara.veredictoPorProduto && (
+            <div style={{ display: "flex", gap: "0.8rem", marginBottom: "1.5rem", flexWrap: "wrap" }}>
+              {Object.entries(resultado.dePara.veredictoPorProduto).filter(([, v]) => v).map(([prod, v]) => {
+                const vc = VEREDICTO_COR[v.veredicto] || { bg: "#1e293b", texto: "#94a3b8", label: v.veredicto };
+                const nome = prod === "axhub" ? "🖥️ AxHub" : prod === "axton" ? "⚖️ AxTon" : "🚦 AxCross";
+                return (
+                  <div key={prod} style={{
+                    flex: "1 1 180px", background: vc.bg, border: `1px solid ${vc.texto}30`,
+                    borderRadius: 12, padding: "0.8rem 1rem", textAlign: "center",
+                  }}>
+                    <div style={{ fontSize: "0.82rem", color: "#e2e8f0", fontWeight: 700, marginBottom: "0.3rem" }}>{nome}</div>
+                    <div style={{ fontSize: "1.1rem", fontWeight: 800, color: vc.texto, marginBottom: "0.3rem" }}>{vc.label}</div>
+                    <div style={{ fontSize: "0.75rem", color: "#94a3b8" }}>
+                      {v.percentual}% — {v.atende} atende / {v.parcial} parcial / {v.naoAtende} gaps
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          )}
+
           {/* ─── DIAGNÓSTICO POR CATEGORIA ─── */}
           {resultado.dePara.diagnosticoPorCategoria && (
             <div style={{ marginBottom: "1.5rem" }}>
@@ -581,6 +589,11 @@ export default function AnaliseEditalAvancada({ embedded = false }) {
                               {item.solucao.complexidade === "alta" ? "🔴" : item.solucao.complexidade === "media" ? "🟡" : "🟢"} {item.solucao.complexidade}
                             </span>
                           </div>
+                        </div>
+                      )}
+                      {item.justificativa && (
+                        <div style={{ fontSize: "0.68rem", color: "#a5b4fc", marginTop: 4, fontStyle: "italic", borderTop: "1px solid rgba(255,255,255,0.05)", paddingTop: 3 }}>
+                          💬 {item.justificativa}
                         </div>
                       )}
                     </td>
@@ -1187,164 +1200,6 @@ export default function AnaliseEditalAvancada({ embedded = false }) {
                   </div>
                 </div>
               )}
-            </div>
-          )}
-        </div>
-      )}
-
-      {/* ═══ TAB CONFORMIDADE ═══ */}
-      {tab === "conformidade" && (
-        <div>
-          {!confRelatorio && !confCarregando && (
-            <div style={{ textAlign: "center", padding: "2rem 1rem" }}>
-              <div style={{ fontSize: "3rem", marginBottom: "0.5rem" }}>📜</div>
-              <h3 style={{ color: "#e2e8f0", marginBottom: "0.5rem" }}>Relatório de Conformidade</h3>
-              <p style={{ color: "#64748b", fontSize: "0.85rem", marginBottom: "1.2rem", maxWidth: 550, margin: "0 auto 1.2rem" }}>
-                Analise item-a-item se o produto atende cada requisito do edital.
-                Cada requisito recebe status <strong style={{ color: "#4ade80" }}>Atendido</strong>, <strong style={{ color: "#fbbf24" }}>Parcial</strong> ou <strong style={{ color: "#f87171" }}>Não Atendido</strong> com justificativa técnica.
-              </p>
-              {textoEdital.length < 50 ? (
-                <p style={{ color: "#fbbf24", fontSize: "0.82rem" }}>⚠️ Informe o texto do edital na aba "Informar Edital" primeiro (mín. 50 caracteres)</p>
-              ) : (
-                <div>
-                  <div style={{ display: "flex", justifyContent: "center", gap: "0.5rem", marginBottom: "1rem" }}>
-                    {[{ v: "axhub", l: "🖥️ AxHub" }, { v: "axton", l: "⚖️ AxTon" }, { v: "axcross", l: "🚦 AxCross" }].map(p => (
-                      <button
-                        key={p.v}
-                        onClick={() => setConfProduto(p.v)}
-                        style={{
-                          padding: "0.5rem 1rem", borderRadius: 8, border: "none",
-                          background: confProduto === p.v ? "rgba(99,102,241,0.3)" : "rgba(255,255,255,0.05)",
-                          color: confProduto === p.v ? "#a5b4fc" : "#94a3b8",
-                          cursor: "pointer", fontWeight: 600, fontSize: "0.85rem",
-                        }}
-                      >
-                        {p.l}
-                      </button>
-                    ))}
-                  </div>
-                  <button
-                    onClick={async () => {
-                      setConfCarregando(true);
-                      setConfErro("");
-                      try {
-                        const res = await apiFetch("/conformidade/gerar", {
-                          method: "POST",
-                          headers: { "Content-Type": "application/json" },
-                          body: JSON.stringify({
-                            produto: confProduto,
-                            tituloEdital: titulo || "Análise de Edital",
-                            textoEdital,
-                            comJustificativas: true,
-                          }),
-                        });
-                        const data = await res.json();
-                        if (data.erro) throw new Error(data.erro);
-                        setConfRelatorio(data.relatorio || data);
-                      } catch (err) {
-                        setConfErro(err.message || "Erro ao gerar conformidade");
-                      } finally {
-                        setConfCarregando(false);
-                      }
-                    }}
-                    style={{
-                      padding: "0.8rem 2rem", background: "linear-gradient(135deg, #6366f1, #8b5cf6)",
-                      color: "#fff", border: "none", borderRadius: 10, fontSize: "0.95rem", fontWeight: 700,
-                      cursor: "pointer",
-                    }}
-                  >
-                    📜 Gerar Relatório de Conformidade ({confProduto.toUpperCase()})
-                  </button>
-                </div>
-              )}
-              {confErro && <div style={{ marginTop: "1rem", color: "#fca5a5", background: "#7f1d1d20", padding: "0.7rem", borderRadius: 8, fontSize: "0.82rem" }}>❌ {confErro}</div>}
-            </div>
-          )}
-
-          {confCarregando && (
-            <div style={{ textAlign: "center", padding: "3rem", color: "#94a3b8" }}>
-              <div style={{ fontSize: "2rem", marginBottom: "1rem" }}>⏳</div>
-              <p>Gerando relatório de conformidade...</p>
-              <p style={{ fontSize: "0.8rem", color: "#64748b" }}>Extraindo requisitos → Scoring → Re-avaliação IA → Justificativas</p>
-            </div>
-          )}
-
-          {confRelatorio && (
-            <div>
-              {/* Header com veredicto */}
-              <div style={{ display: "flex", gap: "1rem", marginBottom: "1.5rem", flexWrap: "wrap", alignItems: "center" }}>
-                {confRelatorio.veredicto && (
-                  <div style={{
-                    padding: "0.6rem 1.2rem", borderRadius: 10,
-                    background: (VEREDICTO_COR[confRelatorio.veredicto] || {}).bg || "#1e293b",
-                    color: (VEREDICTO_COR[confRelatorio.veredicto] || {}).texto || "#94a3b8",
-                    fontWeight: 800, fontSize: "1.1rem",
-                  }}>
-                    {(VEREDICTO_COR[confRelatorio.veredicto] || {}).label || confRelatorio.veredicto}
-                  </div>
-                )}
-                <div style={{ display: "flex", gap: "1rem", flexWrap: "wrap" }}>
-                  <span style={{ color: "#4ade80", fontWeight: 600 }}>✅ {confRelatorio.atendidos || 0}</span>
-                  <span style={{ color: "#fbbf24", fontWeight: 600 }}>⚠️ {confRelatorio.parciais || 0}</span>
-                  <span style={{ color: "#f87171", fontWeight: 600 }}>❌ {confRelatorio.naoAtendidos || 0}</span>
-                  <span style={{ color: "#94a3b8" }}>Total: {confRelatorio.totalRequisitos || 0}</span>
-                  <span style={{ color: "#a5b4fc", fontWeight: 700 }}>{confRelatorio.percentualConformidade || 0}%</span>
-                </div>
-                <button
-                  onClick={() => { setConfRelatorio(null); setConfErro(""); }}
-                  style={{ marginLeft: "auto", background: "rgba(255,255,255,0.05)", border: "none", color: "#94a3b8", padding: "0.4rem 0.8rem", borderRadius: 6, cursor: "pointer", fontSize: "0.8rem" }}
-                >
-                  🔄 Nova análise
-                </button>
-              </div>
-
-              {/* Filtros */}
-              <div style={{ display: "flex", gap: "0.5rem", marginBottom: "1rem", flexWrap: "wrap" }}>
-                {[{ id: "todos", l: "Todos" }, { id: "atendido", l: "✅ Atendidos" }, { id: "parcial", l: "⚠️ Parciais" }, { id: "nao_atendido", l: "❌ Não Atendidos" }].map(f => (
-                  <button
-                    key={f.id}
-                    onClick={() => setConfFiltro(f.id)}
-                    style={{
-                      padding: "0.35rem 0.8rem", borderRadius: 6, border: "none",
-                      background: confFiltro === f.id ? "rgba(99,102,241,0.25)" : "rgba(255,255,255,0.04)",
-                      color: confFiltro === f.id ? "#a5b4fc" : "#64748b",
-                      cursor: "pointer", fontSize: "0.78rem", fontWeight: 600,
-                    }}
-                  >
-                    {f.l}
-                  </button>
-                ))}
-              </div>
-
-              {/* Lista de itens */}
-              <div style={{ display: "flex", flexDirection: "column", gap: "0.5rem", maxHeight: "60vh", overflowY: "auto" }}>
-                {(confRelatorio.itens || [])
-                  .filter(i => confFiltro === "todos" || i.status === confFiltro)
-                  .map((item, idx) => {
-                    const cor = STATUS_COR[item.status] || { bg: "#1e293b", texto: "#94a3b8", label: item.status };
-                    return (
-                      <div key={idx} style={{
-                        background: cor.bg, borderRadius: 8, padding: "0.7rem 1rem",
-                        borderLeft: `3px solid ${cor.texto}`,
-                      }}>
-                        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", gap: "0.5rem" }}>
-                          <span style={{ color: "#e2e8f0", fontSize: "0.83rem", flex: 1 }}>{item.numero}. {item.requisito}</span>
-                          <span style={{ color: cor.texto, fontSize: "0.75rem", fontWeight: 700, whiteSpace: "nowrap" }}>{cor.label}</span>
-                        </div>
-                        {item.justificativa && (
-                          <div style={{ color: "#94a3b8", fontSize: "0.75rem", marginTop: "0.3rem", fontStyle: "italic" }}>
-                            {item.justificativa}
-                          </div>
-                        )}
-                        {item.referenciaDoc && (
-                          <div style={{ color: "#64748b", fontSize: "0.7rem", marginTop: "0.2rem" }}>
-                            📄 {item.referenciaDoc}
-                          </div>
-                        )}
-                      </div>
-                    );
-                  })}
-              </div>
             </div>
           )}
         </div>

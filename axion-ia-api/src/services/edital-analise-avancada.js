@@ -344,6 +344,10 @@ export async function analisarEditalCompleto(textoEdital, opcoes = {}) {
   // 2. De-Para (edital vs projetos) — com produto alvo se selecionado
   const dePara = await gerarDeParaProjetos(textoEdital, categorias, produtoAlvo);
 
+  // 2b. Enriquecer De-Para com veredicto por produto + justificativas (unificação Conformidade)
+  enriquecerComVeredicto(dePara, produtoAlvo);
+  await enriquecerComJustificativas(dePara, produtoAlvo);
+
   // 3. Análise de concorrentes
   let concorrentes = null;
   if (incluirConcorrentes) {
@@ -1090,6 +1094,105 @@ function calcularDiagnosticoPorCategoria(itens) {
     result[cat] = { label, icon: CATEGORIAS[cat]?.icon || "📌", atende: d.atende, parcial: d.parcial, naoAtende: d.naoAtende, naPuro: d.naPuro, total: d.total, cobertura: relevantes > 0 ? Math.round(((d.atende + d.parcial * 0.5) / relevantes) * 100) : 100 };
   }
   return result;
+}
+
+// ─── 2b. VEREDICTO + JUSTIFICATIVAS (Conformidade unificada) ────
+
+/**
+ * Calcula veredicto formal por produto (APTO / PARCIALMENTE_APTO / INAPTO)
+ * a partir da cobertura já calculada no De-Para.
+ */
+function enriquecerComVeredicto(dePara, produtoAlvo) {
+  if (!dePara?.itens?.length) return;
+
+  const calcular = (statusKey) => {
+    let atende = 0, parcial = 0, naoAtende = 0;
+    for (const item of dePara.itens) {
+      const s = item[statusKey];
+      if (s === "atende") atende++;
+      else if (s === "parcial") parcial++;
+      else if (s === "nao_atende") naoAtende++;
+    }
+    const total = atende + parcial + naoAtende;
+    if (total === 0) return null;
+    const pct = Math.round((atende + parcial * 0.5) / total * 100);
+    let veredicto;
+    if (pct >= 80) veredicto = "APTO";
+    else if (pct >= 50) veredicto = "PARCIALMENTE_APTO";
+    else veredicto = "INAPTO";
+    return { atende, parcial, naoAtende, total, percentual: pct, veredicto };
+  };
+
+  dePara.veredictoPorProduto = {};
+  if (!produtoAlvo || produtoAlvo === "axhub")
+    dePara.veredictoPorProduto.axhub = calcular("statusAxHub");
+  if (!produtoAlvo || produtoAlvo === "axton")
+    dePara.veredictoPorProduto.axton = calcular("statusAxTon");
+  if (!produtoAlvo || produtoAlvo === "axcross")
+    dePara.veredictoPorProduto.axcross = calcular("statusAxCross");
+}
+
+/**
+ * Gera justificativas técnicas para itens com lacunas (não-atende ou parcial),
+ * usando GPT em lotes. Análogo ao gerarJustificativasIA da Conformidade.
+ */
+async function enriquecerComJustificativas(dePara, produtoAlvo) {
+  if (!dePara?.itens?.length) return;
+
+  // Só gerar justificativas para itens com gaps no produto-alvo (ou qualquer)
+  const itensComGap = dePara.itens.filter(item => {
+    if (produtoAlvo) {
+      const key = produtoAlvo === "axhub" ? "statusAxHub" : produtoAlvo === "axton" ? "statusAxTon" : "statusAxCross";
+      return item[key] === "parcial" || item[key] === "nao_atende";
+    }
+    return item.statusAxHub !== "atende" || item.statusAxTon !== "atende" || item.statusAxCross !== "atende";
+  }).slice(0, 40); // Limitar para controle de custo
+
+  if (itensComGap.length === 0) return;
+
+  const prodLabel = produtoAlvo ? (produtoAlvo === "axhub" ? "AxHub" : produtoAlvo === "axton" ? "AxTon" : "AxCross") : "AxHub/AxTon/AxCross";
+  const LOTE = 12;
+
+  for (let i = 0; i < itensComGap.length; i += LOTE) {
+    const lote = itensComGap.slice(i, i + LOTE);
+    const prompt = lote.map((item, idx) => {
+      const status = produtoAlvo
+        ? item[produtoAlvo === "axhub" ? "statusAxHub" : produtoAlvo === "axton" ? "statusAxTon" : "statusAxCross"]
+        : "variado";
+      return `${idx + 1}. [${status.toUpperCase()}] "${item.requisito}" — ${item.ondeAtende || item.lacuna || "sem referência"}`;
+    }).join("\n");
+
+    try {
+      const response = await chamarOpenAI({
+        model: "gpt-4o-mini",
+        response_format: { type: "json_object" },
+        messages: [
+          {
+            role: "system",
+            content: `Você é um consultor técnico da Axion Tecnologia analisando gaps entre requisitos de edital e os sistemas ${prodLabel}.
+Para cada item, forneça uma justificativa técnica breve (1-2 frases) explicando:
+- Se parcial: o que o sistema já faz e o que falta
+- Se não atende: por que não atende e se há alternativa viável
+Responda APENAS com JSON: { "justificativas": ["justificativa 1", ...] }
+Mantenha a mesma quantidade e ordem.`,
+          },
+          { role: "user", content: `Gere justificativas:\n${prompt}` },
+        ],
+        temperature: 0.3,
+        max_tokens: 1500,
+      }, "Justificativas");
+
+      if (response) {
+        const parsed = JSON.parse(response.choices[0].message.content);
+        const justificativas = parsed.justificativas || [];
+        lote.forEach((item, idx) => {
+          if (justificativas[idx]) {
+            item.justificativa = justificativas[idx];
+          }
+        });
+      }
+    } catch { /* mantém sem justificativa */ }
+  }
 }
 
 async function lerDocsRapido(produto) {

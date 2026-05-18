@@ -1,6 +1,6 @@
 /**
  * PipelineEditais.jsx — Ecossistema Unificado de Editais
- * Fluxo completo: Análise de Editais (busca + decomposição + conformidade + multi-produto) → Revisão → Roadmap → Specs
+ * Fluxo completo: Análise de Editais (busca + decomposição + de-para com veredicto + multi-produto) → Revisão → Roadmap → Specs
  */
 
 import { useState } from "react";
@@ -10,7 +10,7 @@ import Roadmap from "./Roadmap";
 import Specs from "./Specs";
 
 const ETAPAS = [
-  { id: "avancada",     label: "Análise de Editais",  icon: "📊", desc: "Busque, analise e compare — decomposição, de-para, concorrentes, conformidade, mercado e multi-produto" },
+  { id: "avancada",     label: "Análise de Editais",  icon: "📊", desc: "Busque, analise e compare — decomposição, de-para (com veredicto e justificativas), concorrentes, mercado e multi-produto" },
   { id: "revisao",      label: "Revisão",             icon: "✅", desc: "Revise itens de baixa confiança" },
   { id: "roadmap",      label: "Roadmap",             icon: "🗺️", desc: "Planeje implementação das lacunas" },
   { id: "specs",        label: "Specs",               icon: "📐", desc: "Gere especificações técnicas (PRD)" },
