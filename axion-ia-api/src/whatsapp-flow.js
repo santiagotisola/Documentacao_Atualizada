@@ -148,13 +148,19 @@ export async function processarMensagemWA(telefone, nome, texto, midia = null, r
   try {
   // Verificar se é resposta de aprovação de compras ANTES do LGPD gate
   // (aprovador pode não ter interagido antes e não ter LGPD aceito)
-  const estadosPermitemAprovacao = ["inicio", "encerrado"];
   const textoLimpo = (texto || "").trim().replace(/^\*+|\*+$/g, ""); // strip asteriscos WhatsApp
-  const isTextoAprovacaoExplicito = /^(APROVAR|REJEITAR|SIM|NÃO|NAO|APROVADO|REJEITADO|REPROVAR)/i.test(textoLimpo);
+  const isKeywordAprovacaoForte = /^(APROVAR|REJEITAR|APROVADO|REJEITADO|REPROVAR)/i.test(textoLimpo);
+  const isKeywordAprovacaoFraca = /^(SIM|NÃO|NAO)$/i.test(textoLimpo);
   const isNumericoAprovacao = /^[12]$/.test((texto || "").trim());
   const temVinculacaoAprovacao = sessao.dadosParciais?._pedidoAprovacao;
-  const podeTentarAprovacao = sessao.estado !== "compras_motivo_rejeicao" && 
-    (isTextoAprovacaoExplicito || estadosPermitemAprovacao.includes(sessao.estado) || (isNumericoAprovacao && temVinculacaoAprovacao));
+  const emFluxoCompras = sessao.estado?.startsWith("compras_");
+
+  // Keywords fortes (APROVAR/REJEITAR) funcionam em qualquer estado EXCETO fluxos compras ativos
+  // Keywords fracas (SIM/NÃO) e numérico só funcionam com vinculação direta ao pedido
+  const podeTentarAprovacao = !emFluxoCompras && (
+    isKeywordAprovacaoForte || 
+    ((isKeywordAprovacaoFraca || isNumericoAprovacao) && temVinculacaoAprovacao)
+  );
   
   if (podeTentarAprovacao && await tentarProcessarAprovacao(telefone, texto, jid)) {
     return;

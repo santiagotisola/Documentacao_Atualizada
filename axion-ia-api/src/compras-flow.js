@@ -933,9 +933,14 @@ async function enviarAprovacao(pedido, aprovadorEscolhido) {
   
   if (!verificacao.exists) {
     console.error(`❌ [Compras] Aprovador ${aprovador} NÃO está no WhatsApp — ${pedido.codigo}`);
-    // Notificar solicitante
-    const solJid = `${pedido.solicitante.telefone}@s.whatsapp.net`;
-    await enviarMensagem(solJid, `⚠️ *Atenção:* O número do aprovador *${formatarTelefone(aprovador)}* não está registrado no WhatsApp.\n\nO pedido *${pedido.codigo}* foi criado, mas a aprovação não foi enviada. Contate o gestor manualmente ou abra um novo pedido com outro número.`);
+    // Notificar solicitante (usa JID da sessão para suportar LIDs)
+    try {
+      const sessaoSol = await WhatsAppSessao.findOne({ telefone: pedido.solicitante.telefone });
+      const solJid = sessaoSol?._remoteJid || `${pedido.solicitante.telefone}@s.whatsapp.net`;
+      await enviarMensagem(solJid, `⚠️ *Atenção:* O número do aprovador *${formatarTelefone(aprovador)}* não está registrado no WhatsApp.\n\nO pedido *${pedido.codigo}* foi criado, mas a aprovação não foi enviada. Contate o gestor manualmente ou abra um novo pedido com outro número.`);
+    } catch (err) {
+      console.error(`⚠️ [Compras] Erro ao notificar solicitante (${pedido.solicitante.telefone}):`, err.message);
+    }
     return;
   }
 
@@ -955,11 +960,11 @@ async function enviarAprovacao(pedido, aprovadorEscolhido) {
     // Enviar resumo como texto, e depois a lista de ação
     await enviarMensagem(jidAprovador, msg);
     await enviarListaSelecao(jidAprovador,
-      `Responda para o pedido *${pedido.codigo}*:`,
+      `Responda para o pedido *${pedido.codigo}*:\n\n_Digite APROVAR ou REJEITAR_`,
       "Aprovar ou Rejeitar",
       [{ titulo: "Decisão", opcoes: [
-        { id: "1", titulo: "✅ Aprovar pedido" },
-        { id: "2", titulo: "❌ Rejeitar pedido" },
+        { id: "aprovar", titulo: "✅ Aprovar pedido" },
+        { id: "rejeitar", titulo: "❌ Rejeitar pedido" },
       ]}],
       { rodape: `Pedido ${pedido.codigo}` }
     );
@@ -1056,6 +1061,8 @@ async function listarPedidosPendentesParaAprovador(jid, pendentes, telefone) {
 export async function tentarProcessarAprovacao(telefone, texto, remoteJid) {
   // Strip formatação WhatsApp (* _ ~) e normalizar
   const t = (texto || "").trim().replace(/^\*+|\*+$/g, "").replace(/^_+|_+$/g, "").trim().toUpperCase();
+  
+  console.log(`🔍 [Compras] tentarProcessarAprovacao: tel=${telefone}, texto="${t}", jid=${remoteJid}`);
   
   // Formatos aceitos (texto digitado, botão clicado ou buttonId):
   // "APROVAR" / "REJEITAR" — busca vinculada ou ampla
@@ -1223,11 +1230,16 @@ export async function tentarProcessarAprovacao(telefone, texto, remoteJid) {
     // Encerrar sessão do aprovador
     await encerrarSessaoAprovador(telefone);
     
-    // Notificar solicitante
+    // Notificar solicitante (usa JID da sessão para suportar LIDs)
     if (pedido.solicitante?.telefone) {
-      const jidSolicitante = `${pedido.solicitante.telefone}@s.whatsapp.net`;
-      await enviarMensagem(jidSolicitante,
-        `✅ *Pedido aprovado!*\n\n🏷️ Código: *${codigo}*\n📌 ${pedido.titulo}\n👤 Aprovado por: ${formatarTelefone(aprovadorReal)}\n\nSeu pedido foi aprovado e encaminhado para compras.`);
+      try {
+        const sessaoSolicitante = await WhatsAppSessao.findOne({ telefone: pedido.solicitante.telefone });
+        const jidSolicitante = sessaoSolicitante?._remoteJid || `${pedido.solicitante.telefone}@s.whatsapp.net`;
+        await enviarMensagem(jidSolicitante,
+          `✅ *Pedido aprovado!*\n\n🏷️ Código: *${codigo}*\n📌 ${pedido.titulo}\n👤 Aprovado por: ${formatarTelefone(aprovadorReal)}\n\nSeu pedido foi aprovado e encaminhado para compras.`);
+      } catch (err) {
+        console.error(`⚠️ [Compras] Erro ao notificar solicitante (${pedido.solicitante.telefone}):`, err.message);
+      }
     }
 
     console.log(`✅ [Compras] Pedido ${codigo} APROVADO por ${aprovadorReal} (sessão: ${telefone})`);
@@ -1417,10 +1429,15 @@ async function handleMotivoRejeicao(sessao, texto) {
 
   console.log(`❌ [Compras] Pedido ${codigo} REJEITADO por ${aprovadorReal} — Motivo: ${motivo}`);
 
-  // Notificar solicitante com motivo
+  // Notificar solicitante com motivo (usa JID da sessão para suportar LIDs)
   if (pedido.solicitante?.telefone) {
-    const jidSolicitante = `${pedido.solicitante.telefone}@s.whatsapp.net`;
-    await enviarMensagem(jidSolicitante,
-      `❌ *Pedido rejeitado*\n\n🏷️ Código: *${codigo}*\n📌 ${pedido.titulo}\n👤 Rejeitado por: ${formatarTelefone(aprovadorReal)}\n📝 Motivo: _${motivo}_\n\nSeu pedido foi rejeitado. Entre em contato com o gestor para mais detalhes.`);
+    try {
+      const sessaoSolicitante = await WhatsAppSessao.findOne({ telefone: pedido.solicitante.telefone });
+      const jidSolicitante = sessaoSolicitante?._remoteJid || `${pedido.solicitante.telefone}@s.whatsapp.net`;
+      await enviarMensagem(jidSolicitante,
+        `❌ *Pedido rejeitado*\n\n🏷️ Código: *${codigo}*\n📌 ${pedido.titulo}\n👤 Rejeitado por: ${formatarTelefone(aprovadorReal)}\n📝 Motivo: _${motivo}_\n\nSeu pedido foi rejeitado. Entre em contato com o gestor para mais detalhes.`);
+    } catch (err) {
+      console.error(`⚠️ [Compras] Erro ao notificar solicitante rejeição (${pedido.solicitante.telefone}):`, err.message);
+    }
   }
 }
