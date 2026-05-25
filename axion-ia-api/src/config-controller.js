@@ -55,24 +55,30 @@ function salvarEnv(obj) {
     telegram: ["TELEGRAM_TOKEN", "TELEGRAM_CHAT_ID"]
   };
 
+  // Valores com # ou espaços devem ser envolvidos em aspas para o dotenv interpretar corretamente
+  function formatVal(val) {
+    if (val && (val.includes("#") || val.includes(" "))) return `"${val}"`;
+    return val;
+  }
+
   linhas.push("# API");
-  for (const k of grupos.api) if (obj[k] !== undefined) linhas.push(`${k}=${obj[k]}`);
+  for (const k of grupos.api) if (obj[k] !== undefined) linhas.push(`${k}=${formatVal(obj[k])}`);
   linhas.push("", "# Autenticação");
-  for (const k of grupos.api_token) if (obj[k] !== undefined) linhas.push(`${k}=${obj[k]}`);
+  for (const k of grupos.api_token) if (obj[k] !== undefined) linhas.push(`${k}=${formatVal(obj[k])}`);
   linhas.push("", "# OpenAI");
-  for (const k of grupos.openai) if (obj[k] !== undefined) linhas.push(`${k}=${obj[k]}`);
+  for (const k of grupos.openai) if (obj[k] !== undefined) linhas.push(`${k}=${formatVal(obj[k])}`);
   linhas.push("", "# MongoDB");
-  for (const k of grupos.mongo) if (obj[k] !== undefined) linhas.push(`${k}=${obj[k]}`);
+  for (const k of grupos.mongo) if (obj[k] !== undefined) linhas.push(`${k}=${formatVal(obj[k])}`);
   linhas.push("", "# Jitbit Helpdesk");
-  for (const k of grupos.jitbit) if (obj[k] !== undefined) linhas.push(`${k}=${obj[k]}`);
+  for (const k of grupos.jitbit) if (obj[k] !== undefined) linhas.push(`${k}=${formatVal(obj[k])}`);
   linhas.push("", "# AxHub SQL Server");
-  for (const k of grupos.axhub) if (obj[k] !== undefined) linhas.push(`${k}=${obj[k]}`);
+  for (const k of grupos.axhub) if (obj[k] !== undefined) linhas.push(`${k}=${formatVal(obj[k])}`);
   linhas.push("", "# AxTon SQL Server");
-  for (const k of grupos.axton) if (obj[k] !== undefined) linhas.push(`${k}=${obj[k]}`);
+  for (const k of grupos.axton) if (obj[k] !== undefined) linhas.push(`${k}=${formatVal(obj[k])}`);
   linhas.push("", "# AxCross SQL Server");
-  for (const k of grupos.axcross) if (obj[k] !== undefined) linhas.push(`${k}=${obj[k]}`);
+  for (const k of grupos.axcross) if (obj[k] !== undefined) linhas.push(`${k}=${formatVal(obj[k])}`);
   linhas.push("", "# Telegram");
-  for (const k of grupos.telegram) if (obj[k] !== undefined) linhas.push(`${k}=${obj[k]}`);
+  for (const k of grupos.telegram) if (obj[k] !== undefined) linhas.push(`${k}=${formatVal(obj[k])}`);
 
   fs.writeFileSync(ENV_PATH, linhas.join("\n") + "\n", "utf-8");
 }

@@ -123,10 +123,18 @@ export async function iniciarWhatsApp(callbackMensagem) {
       // Normaliza telefone para armazenamento (remove sufixos)
       const telefone = remoteJid.replace(/@s\.whatsapp\.net$/, "").replace(/@lid$/, "").replace(/@.*$/, "");
       const nome = msg.pushName || telefone;
+
+      // Capturar texto de diferentes tipos de mensagem (incluindo botões clicados)
       const texto =
         msg.message.conversation ||
         msg.message.extendedTextMessage?.text ||
         msg.message.imageMessage?.caption ||
+        msg.message.buttonsResponseMessage?.selectedButtonId ||
+        msg.message.buttonsResponseMessage?.selectedDisplayText ||
+        msg.message.templateButtonReplyMessage?.selectedId ||
+        msg.message.templateButtonReplyMessage?.selectedDisplayText ||
+        msg.message.interactiveResponseMessage?.nativeFlowResponseMessage?.paramsJson && JSON.parse(msg.message.interactiveResponseMessage.nativeFlowResponseMessage.paramsJson)?.id ||
+        msg.message.listResponseMessage?.singleSelectReply?.selectedRowId ||
         "";
 
       // Baixar imagem se houver
@@ -177,6 +185,100 @@ export async function enviarMensagem(telefoneOuJid, texto) {
   // Se já contém @, usar diretamente; senão, montar JID
   const jid = telefoneOuJid.includes("@") ? telefoneOuJid : `${telefoneOuJid}@s.whatsapp.net`;
   await sock.sendMessage(jid, { text: texto });
+}
+
+/**
+ * Envia uma mensagem com botões clicáveis (Quick Reply Buttons).
+ * Se os botões falharem (WhatsApp pode bloquear), envia como texto normal.
+ * @param {string} telefoneOuJid
+ * @param {string} texto - corpo da mensagem
+ * @param {{ id: string, texto: string }[]} botoes - array de botões
+ * @param {string} [rodape] - texto de rodapé opcional
+ */
+export async function enviarMensagemComBotoes(telefoneOuJid, texto, botoes, rodape = "") {
+  if (!sock || !conectado) {
+    throw new Error("WhatsApp não está conectado");
+  }
+  const jid = telefoneOuJid.includes("@") ? telefoneOuJid : `${telefoneOuJid}@s.whatsapp.net`;
+
+  // Tentar enviar com botões interativos
+  try {
+    const buttonMessage = {
+      text: texto,
+      footer: rodape || undefined,
+      buttons: botoes.map((b, i) => ({
+        buttonId: b.id,
+        buttonText: { displayText: b.texto },
+        type: 1
+      })),
+      headerType: 1
+    };
+    await sock.sendMessage(jid, buttonMessage);
+    return;
+  } catch (err) {
+    console.log(`⚠️ [WhatsApp] Botões não suportados, tentando interactiveMessage...`);
+  }
+
+  // Fallback: tentar interactive message (formato mais recente)
+  try {
+    const interactiveMsg = {
+      viewOnceMessage: {
+        message: {
+          interactiveMessage: {
+            body: { text: texto },
+            footer: rodape ? { text: rodape } : undefined,
+            nativeFlowMessage: {
+              buttons: botoes.map(b => ({
+                name: "quick_reply",
+                buttonParamsJson: JSON.stringify({ display_text: b.texto, id: b.id })
+              }))
+            }
+          }
+        }
+      }
+    };
+    await sock.relayMessage(jid, interactiveMsg, {});
+    return;
+  } catch (err2) {
+    console.log(`⚠️ [WhatsApp] InteractiveMessage falhou, enviando como texto.`);
+  }
+
+  // Fallback final: texto puro
+  await sock.sendMessage(jid, { text: texto });
+}
+
+/**
+ * Verifica se um número está registrado no WhatsApp e busca o nome do contato.
+ * @param {string} numero - número sem @, ex: "5562999998888"
+ * @returns {{ exists: boolean, jid: string|null, nome: string|null }}
+ */
+export async function verificarNumeroWhatsApp(numero) {
+  if (!sock || !conectado) throw new Error("WhatsApp não está conectado");
+  const jid = numero.includes("@") ? numero : `${numero}@s.whatsapp.net`;
+  try {
+    const [result] = await sock.onWhatsApp(jid);
+    if (!result?.exists) return { exists: false, jid: null, nome: null };
+
+    // Tentar buscar nome do contato no store
+    let nome = null;
+    try {
+      const contactJid = result.jid;
+      // Buscar no store de contatos do baileys
+      if (sock.store?.contacts?.[contactJid]) {
+        nome = sock.store.contacts[contactJid].name || sock.store.contacts[contactJid].notify || null;
+      }
+      // Fallback: buscar via getBusinessProfile ou status
+      if (!nome) {
+        const [profile] = await sock.getBusinessProfile(contactJid).catch(() => [null]);
+        if (profile?.wid) nome = profile.description || null;
+      }
+    } catch (_) { /* sem nome disponível */ }
+
+    return { exists: true, jid: result.jid, nome };
+  } catch (err) {
+    console.error(`⚠️ [WhatsApp] Erro ao verificar número ${numero}:`, err.message);
+    return { exists: false, jid: null, nome: null };
+  }
 }
 
 /**

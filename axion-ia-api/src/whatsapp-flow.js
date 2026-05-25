@@ -13,7 +13,8 @@ import { enviarMensagem } from "./services/whatsapp.service.js";
 import { criarTicketUsuario, buscarTicket, buscarComentarios, buscarCategorias, anexarArquivo, atribuirTecnico, listarUsuarios } from "./jitbit.js";
 import { gerarResposta, gerarRespostaWA } from "./engine.js";
 import { classificarMensagem } from "./classifier.js";
-import { salvarHistorico } from "./logger.js";
+import { salvarHistorico, salvarErroWhatsApp } from "./logger.js";
+import { iniciarFluxoCompras, iniciarConsultaCompras, processarCompras, tentarProcessarAprovacao } from "./compras-flow.js";
 
 // Cache de categorias (5 min)
 let _cacheCats = null;
@@ -40,6 +41,25 @@ async function obterUsuarios() {
 // Armazenamento temporário de fotos em memória (não salvar binário no MongoDB)
 const fotosTemp = new Map(); // telefone → { buffer, mimeType, filename }
 
+// URL da política de privacidade (configurável via env)
+const LGPD_POLITICA_URL = process.env.LGPD_POLITICA_URL || "http://localhost:3100/public/politica-privacidade.pdf";
+
+const MENSAGEM_LGPD = (nome) => `Olá${nome ? ` *${nome}*` : ""} 👋
+
+Bem-vindo(a) ao Atendimento da *Axion Tecnologia*.
+
+Antes de continuar, informamos que este canal realiza coleta e tratamento de dados pessoais em conformidade com a *Lei Geral de Proteção de Dados (LGPD - Lei nº 13.709/2018)*.
+
+📄 Nossa Política de Privacidade está disponível em:
+${LGPD_POLITICA_URL}
+
+A transmissão de informações e documentos por este canal é realizada com o seu expresso consentimento, em conformidade com a LGPD.
+
+*Podemos continuar nossa conversa?*
+
+*1* — Aceito os termos da Política de Privacidade
+*2* — Não aceito (o atendimento será encerrado)`;
+
 const MENU = `Olá! Sou o assistente da *Axion Tecnologia* 🤖
 
 Como posso ajudar?
@@ -48,9 +68,11 @@ Como posso ajudar?
 *2* — Consultar chamado
 *3* — Responder chamado
 *4* — Dúvidas do Sistema
+*5* — Solicitar Compras
+*6* — Consultar Pedido de Compras
 *0* — Falar com atendente`;
 
-const MENU_OPCOES = ["1", "2", "3", "4", "0"];
+const MENU_OPCOES = ["1", "2", "3", "4", "5", "6", "0"];
 
 // --------------------------------------------------------------------------
 
@@ -58,6 +80,12 @@ async function obterOuCriarSessao(telefone, nome, remoteJid) {
   let sessao = await WhatsAppSessao.findOne({ telefone });
   if (!sessao) {
     sessao = await WhatsAppSessao.create({ telefone, nome, estado: "inicio" });
+  } else if (sessao.estado === "encerrado") {
+    // Sessão encerrada — resetar para novo ciclo completo (LGPD)
+    sessao.estado = "inicio";
+    sessao.lgpdAceito = false;
+    sessao.ativo = true;
+    sessao.nome = nome || sessao.nome;
   } else {
     sessao.nome = nome || sessao.nome;
     sessao.ultimaMensagem = new Date();
@@ -83,12 +111,80 @@ async function salvarSessao(sessao) {
  * @param {{ buffer: Buffer, mimeType: string, filename: string }|null} midia
  */
 export async function processarMensagemWA(telefone, nome, texto, midia = null, remoteJid = null) {
-  const sessao = await obterOuCriarSessao(telefone, nome, remoteJid || `${telefone}@s.whatsapp.net`);
+  let sessao;
+  try {
+    sessao = await obterOuCriarSessao(telefone, nome, remoteJid || `${telefone}@s.whatsapp.net`);
+  } catch (err) {
+    salvarErroWhatsApp({ telefone, estado: "obterSessao", erro: err.message, contexto: { nome, texto: texto?.substring(0, 50) } });
+    return;
+  }
   const jid = sessao._remoteJid;
   const t = (texto || "").trim().toLowerCase();
 
-  // Comandos globais
-  if (t === "menu" || t === "inicio" || t === "oi" || t === "olá" || t === "ola") {
+  try {
+  // Verificar se é resposta de aprovação de compras ANTES do LGPD gate
+  // (aprovador pode não ter interagido antes e não ter LGPD aceito)
+  const estadosPermitemAprovacao = ["inicio", "encerrado"];
+  const textoLimpo = (texto || "").trim().replace(/^\*+|\*+$/g, ""); // strip asteriscos WhatsApp
+  const isTextoAprovacaoExplicito = /^(APROVAR|REJEITAR|SIM|NÃO|NAO|APROVADO|REJEITADO|REPROVAR)/i.test(textoLimpo);
+  const isNumericoAprovacao = /^[12]$/.test((texto || "").trim());
+  const temVinculacaoAprovacao = sessao.dadosParciais?._pedidoAprovacao;
+  const podeTentarAprovacao = sessao.estado !== "compras_motivo_rejeicao" && 
+    (isTextoAprovacaoExplicito || estadosPermitemAprovacao.includes(sessao.estado) || (isNumericoAprovacao && temVinculacaoAprovacao));
+  
+  if (podeTentarAprovacao && await tentarProcessarAprovacao(telefone, texto, jid)) {
+    return;
+  }
+
+  // === LGPD Gate: exigir consentimento antes de qualquer interação ===
+  if (!sessao.lgpdAceito) {
+    if (sessao.estado !== "aguardando_lgpd") {
+      // Primeira interação — apresentar termos LGPD
+      sessao.estado = "aguardando_lgpd";
+      sessao.dadosParciais = {};
+      await salvarSessao(sessao);
+      await enviarMensagem(jid, MENSAGEM_LGPD(sessao.nome));
+      return;
+    }
+    // Sessão já está aguardando resposta LGPD
+    await handleLgpd(sessao, t);
+    return;
+  }
+
+  // Comandos globais (só acessível após LGPD aceito)
+  // Comando de encerramento — funciona em QUALQUER estado (inclusive "atendente")
+  // Nota: "finalizar" NÃO encerra (é usado dentro do fluxo de compras para fechar lista de itens)
+  if (["sair", "encerrar", "terminar", "cancelar"].includes(t)) {
+    sessao.estado = "encerrado";
+    sessao.lgpdAceito = false;
+    sessao.ativo = false;
+    sessao.dadosParciais = {};
+    fotosTemp.delete(telefone);
+    await salvarSessao(sessao);
+    await enviarMensagem(jid, `✅ Atendimento encerrado.\n\nObrigado pelo contato! Ao enviar uma nova mensagem, o atendimento será reiniciado.`);
+    return;
+  }
+  // Se estado é "atendente", o bot fica em silêncio (mensagem vai pro atendente humano)
+  if (sessao.estado === "atendente") {
+    // Silêncio intencional — atendente humano responde
+    return;
+  }
+  // Se estado é "inicio" — qualquer mensagem inicia mostrando o menu
+  if (sessao.estado === "inicio") {
+    sessao.estado = "menu";
+    sessao.dadosParciais = {};
+    fotosTemp.delete(telefone);
+    await salvarSessao(sessao);
+    await enviarMensagem(jid, MENU);
+    return;
+  }
+  // Se estado é "menu" e a mensagem NÃO é uma opção válida — reexibir menu
+  if (sessao.estado === "menu" && !MENU_OPCOES.includes(t)) {
+    await enviarMensagem(jid, MENU);
+    return;
+  }
+  // Atalho: se o usuário está no meio de um fluxo e digita "menu", volta ao início
+  if (t === "menu" || t === "inicio") {
     sessao.estado = "menu";
     sessao.dadosParciais = {};
     fotosTemp.delete(telefone);
@@ -138,16 +234,81 @@ export async function processarMensagemWA(telefone, nome, texto, midia = null, r
     case "respondendo_duvida":
       await handleRespostaDuvida(sessao, t, texto);
       break;
+    // ─── COMPRAS ─────────────────────────────────────────────
+    case "compras_titulo":
+    case "compras_motivo":
+    case "compras_sistema":
+    case "compras_cliente":
+    case "compras_tipo":
+    case "compras_substituicao":
+    case "compras_devolucao":
+    case "compras_motivo_nao_devolucao":
+    case "compras_itens":
+    case "compras_destino":
+    case "compras_prioridade":
+    case "compras_aprovador":
+    case "compras_confirmacao":
+    case "compras_consulta":
+    case "compras_motivo_rejeicao":
+      await processarCompras(sessao, texto, midia);
+      break;
+    case "atendente":
+      await handleAtendente(sessao, t);
+      break;
     default:
       sessao.estado = "menu";
       await salvarSessao(sessao);
       await enviarMensagem(jid, MENU);
+  }
+  } catch (err) {
+    salvarErroWhatsApp({ telefone, estado: sessao?.estado, erro: err.message, contexto: { nome, texto: texto?.substring(0, 100), stack: err.stack?.substring(0, 300) } });
+    try {
+      await enviarMensagem(jid, "⚠️ Ocorreu um erro interno. Digite *menu* para reiniciar.");
+    } catch (_) { /* falha ao notificar */ }
   }
 }
 
 // --------------------------------------------------------------------------
 // HANDLERS
 // --------------------------------------------------------------------------
+
+async function handleLgpd(sessao, opcao) {
+  if (opcao === "1") {
+    // Usuário aceitou os termos
+    sessao.lgpdAceito = true;
+    sessao.lgpdAceitoEm = new Date();
+    sessao.estado = "menu";
+    await salvarSessao(sessao);
+    await enviarMensagem(sessao._remoteJid,
+      `✅ Obrigado! Seu consentimento foi registrado.\n\n${MENU}`);
+  } else if (opcao === "2") {
+    // Usuário recusou — encerrar atendimento
+    sessao.estado = "encerrado";
+    sessao.ativo = false;
+    await salvarSessao(sessao);
+    await enviarMensagem(sessao._remoteJid,
+      `Entendido. O atendimento foi encerrado.\n\nCaso mude de ideia, envie uma mensagem a qualquer momento para reiniciar.`);
+  } else {
+    // Resposta inválida — repetir
+    await enviarMensagem(sessao._remoteJid,
+      `Por favor, responda com o número da opção:\n\n*1* — Aceito os termos da Política de Privacidade\n*2* — Não aceito (o atendimento será encerrado)`);
+  }
+}
+
+async function handleAtendente(sessao, texto) {
+  if (texto === "sair") {
+    // Encerra sessão completamente — próxima mensagem reinicia ciclo com LGPD
+    sessao.estado = "encerrado";
+    sessao.lgpdAceito = false;
+    sessao.ativo = false;
+    await salvarSessao(sessao);
+    await enviarMensagem(sessao._remoteJid,
+      `✅ Atendimento encerrado.\n\nObrigado pelo contato! Ao enviar uma nova mensagem, o atendimento será reiniciado.`);
+    return;
+  }
+  // Modo livre — bot não interfere, apenas registra (atendente humano responde)
+  // Silêncio intencional: a mensagem fica disponível para o atendente no WhatsApp
+}
 
 async function handleMenu(sessao, opcao) {
   if (!MENU_OPCOES.includes(opcao)) {
@@ -187,9 +348,15 @@ async function handleMenu(sessao, opcao) {
       `🔎 *Dúvidas do Sistema*\n\nQual sistema você tem dúvida?\n\n*1* — AxHub (Trânsito)\n*2* — AxTon (Pesagem)\n*3* — AxCross (Cruzamentos)\n*0* — Qualquer / Não sei`);
 
   } else if (opcao === "0") {
-    sessao.estado = "menu";
+    sessao.estado = "atendente";
     await salvarSessao(sessao);
-    await enviarMensagem(sessao._remoteJid, "👤 Um atendente será notificado em breve. Você também pode acessar diretamente:\nhttps://desk.axiontecnologia.com.br\n\nDigite *menu* a qualquer momento para voltar.");
+    await enviarMensagem(sessao._remoteJid, "👤 *Modo Atendente*\n\nVocê está em contato direto com a equipe Axion. Um atendente responderá em breve.\n\nDigite *sair* a qualquer momento para encerrar o atendimento.");
+
+  } else if (opcao === "5") {
+    await iniciarFluxoCompras(sessao);
+
+  } else if (opcao === "6") {
+    await iniciarConsultaCompras(sessao);
   }
 }
 
@@ -399,10 +566,11 @@ async function handleConfirmacao(sessao, opcao) {
       `📌 Assunto: ${assuntoFinal}\n` +
       `📊 Status: Aguardando atendimento\n\n` +
       `Você receberá atualizações aqui mesmo.\n` +
-      `Acesse também: https://desk.axiontecnologia.com.br\n\n` +
+      `🔗 Acompanhe: https://desk.axiontecnologia.com.br/Ticket/${ticketId}\n\n` +
       `Digite *menu* para voltar ao início.`
     );
   } catch (err) {
+    salvarErroWhatsApp({ telefone: sessao.telefone, estado: "confirmando_ticket", erro: err.message, contexto: { assunto: sessao.dadosParciais?.assunto, categoriaId: sessao.dadosParciais?.categoriaId } });
     sessao.estado = "menu";
     await salvarSessao(sessao);
     await enviarMensagem(sessao._remoteJid,

@@ -3,28 +3,25 @@
  * Endpoints REST para gerenciar a integração WhatsApp via painel.
  */
 
-import { iniciarWhatsApp, enviarMensagem, obterEstado, obterQR, desconectarWhatsApp } from "./services/whatsapp.service.js";
+import { iniciarWhatsApp, enviarMensagem, enviarMensagemComBotoes, obterEstado, obterQR, desconectarWhatsApp } from "./services/whatsapp.service.js";
 import { processarMensagemWA } from "./whatsapp-flow.js";
 import { WhatsAppSessao } from "./models/whatsapp-sessao.model.js";
-
-let inicializado = false;
 
 /**
  * POST /api/whatsapp/iniciar — Inicia a conexão WhatsApp (exibe QR no terminal)
  */
 export async function iniciarConexao(req, res) {
-  if (inicializado) {
-    return res.json({ ok: true, mensagem: "WhatsApp já está iniciado", estado: obterEstado() });
+  const estado = obterEstado();
+  // Se já está conectado ou conectando, não re-iniciar
+  if (estado.status === "conectado" || estado.status === "conectando" || estado.status === "qr_pendente") {
+    return res.json({ ok: true, mensagem: "WhatsApp já está iniciado", estado });
   }
   try {
-    inicializado = true;
     iniciarWhatsApp(processarMensagemWA).catch(err => {
       console.error("❌ [WhatsApp] Falha ao iniciar:", err.message);
-      inicializado = false;
     });
     res.json({ ok: true, mensagem: "Iniciando WhatsApp... Verifique o QR code no terminal da API.", estado: obterEstado() });
   } catch (err) {
-    inicializado = false;
     res.status(500).json({ erro: err.message });
   }
 }
@@ -98,12 +95,28 @@ export async function enviarManual(req, res) {
 }
 
 /**
+ * POST /api/whatsapp/send-buttons — Envia mensagem com botões (teste)
+ * Body: { telefone, mensagem, botoes: [{id, texto}], rodape? }
+ */
+export async function enviarComBotoes(req, res) {
+  const { telefone, mensagem, botoes, rodape } = req.body;
+  if (!telefone || !mensagem || !botoes) {
+    return res.status(400).json({ erro: "Campos obrigatórios: telefone, mensagem, botoes" });
+  }
+  try {
+    await enviarMensagemComBotoes(telefone, mensagem, botoes, rodape || "");
+    res.json({ ok: true });
+  } catch (err) {
+    res.status(500).json({ erro: err.message });
+  }
+}
+
+/**
  * POST /api/whatsapp/desconectar — Desconecta o WhatsApp
  */
 export async function desconectar(req, res) {
   try {
     await desconectarWhatsApp();
-    inicializado = false;
     res.json({ ok: true, mensagem: "WhatsApp desconectado" });
   } catch (err) {
     res.status(500).json({ erro: err.message });

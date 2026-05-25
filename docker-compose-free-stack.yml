@@ -111,6 +111,8 @@ services:
       - OPENAI_API_KEY=${OPENAI_API_KEY:-}
       # Modo: "free" usa Ollama | "paid" usa OpenAI | "hybrid" usa ambos
       - IA_MODE=${IA_MODE:-free}
+      # URL pública da Política de Privacidade (LGPD) - ajustar para domínio em produção
+      - LGPD_POLITICA_URL=${LGPD_POLITICA_URL:-http://localhost:3100/public/politica-privacidade.pdf}
     depends_on:
       ollama:
         condition: service_healthy
@@ -121,6 +123,7 @@ services:
     volumes:
       - ./axion-ia-api/uploads:/app/uploads
       - ./axion-ia-api/logs:/app/logs
+      - ./axion-ia-api/public:/app/public
 
   # ─── AXION PAINEL REACT ────────────────────────────────────
   axion-panel:

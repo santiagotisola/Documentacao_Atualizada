@@ -13,7 +13,7 @@ import { gerarSpecHandler, listarSpecsHandler, obterSpecHandler, atualizarStatus
 import { relatorioPassagens, relatorioImagens, listarEquipamentosRelatorio } from "./relatorio-controller.js";
 import { uploadMiddlewareComErro, uploadContexto } from "./upload-controller.js";
 import { gerarConformidadeHandler, listarConformidadeHandler, obterConformidadeHandler, removerConformidadeHandler, gerarAnalisaMultiProdutoHandler, obterAnalisaMultiProdutoHandler, listarAnalisasMultiProdutoHandler, obterComparacaoHandler, obterLacunasHandler, obterRecomendacoesHandler } from "./conformidade-controller.js";
-import { iniciarConexao, statusConexao as waStatus, listarSessoes, detalhesSessao, encerrarSessao, enviarManual, desconectar } from "./whatsapp-controller.js";
+import { iniciarConexao, statusConexao as waStatus, listarSessoes, detalhesSessao, encerrarSessao, enviarManual, enviarComBotoes, desconectar } from "./whatsapp-controller.js";
 import { reindexarDocs, reindexarJitbit, statsKB, limparModuloKB } from "./admin-controller.js";
 import { uploadImagemMiddleware, analisarSemSalvar, salvarEAnalisar, listarTodas, listarPorSistema, listarPasta, compararPasta, compararPastaLocal, servirImagemExterna, removerImagem, classificarOcupacao, classificarRoda, classificarCorCamisa, classificarMochila, classificarCalca, gerarCaracteristicas, lerPlacas } from "./analise-imagem-controller.js";
 import { uploadJobMiddleware, criarJobHandler, listarJobs, obterJob, removerJob } from "./job-controller.js";
@@ -23,6 +23,8 @@ import { validarDispositivo, validarLote, analisarIncidente, heartbeatGeral } fr
 import { analisarTexto, analisarArquivo, uploadLeituraMiddleware } from "./leitura-controller.js";
 import { healthCheck } from "./health-controller.js";
 import { listarFilaHandler, obterEstatisticasHandler, obterItemHandler, marcarRevisadoHandler, autoResolverHandler, exportarCsvHandler, descartarItemHandler } from "./confidence-controller.js";
+import { listarContatos, detalheContato, atualizarContato, statsContatos, listarClientes, criarCliente, atualizarCliente, contatosDoCliente, buscaCRM } from "./crm-controller.js";
+import { listarEquipamentosCRM, statsEquipamentos, detalheEquipamento, atualizarEquipamento, equipamentosDoCliente, buscaEquipamento } from "./equipamento-controller.js";
 import { buscarEditaisGovHandler, importarEditalHandler, analisarEditalRapidoHandler, listarEditaisImportadosHandler, autoAnalisarTodosHandler, analiseAvancadaHandler, uploadEditalHandler, uploadEditalMiddleware, listarSitesHandler } from "./edital-controller.js";
 import { sitesOverview, obterMapa, associarSite, desassociarSite, ticketsPorSite } from "./sites-helpdesk-controller.js";
 const router = express.Router();
@@ -174,6 +176,7 @@ router.get("/whatsapp/sessoes", listarSessoes);
 router.get("/whatsapp/sessao/:telefone", detalhesSessao);
 router.delete("/whatsapp/sessao/:telefone", encerrarSessao);
 router.post("/whatsapp/send", enviarManual);
+router.post("/whatsapp/send-buttons", enviarComBotoes);
 router.post("/whatsapp/desconectar", desconectar);
 
 // ─── Análise de Imagens Operacionais ─────────────────────────────────────────
@@ -256,5 +259,22 @@ router.get("/edital-avancado/sites",                listarSitesHandler);
 router.get("/edital",                               listarEditaisImportadosHandler);
 router.get("/edital/historico",                     listarEditaisImportadosHandler);
 router.post("/edital/auto-analisar-todos",          autoAnalisarTodosHandler);
+
+// ─── CRM — Contatos e Clientes ───────────────────────────────────────────────
+router.get("/crm/contatos",              listarContatos);
+router.get("/crm/contatos/stats",        statsContatos);
+router.get("/crm/contatos/:telefone",    detalheContato);
+router.put("/crm/contatos/:telefone",    atualizarContato);
+router.get("/crm/clientes",             listarClientes);
+router.post("/crm/clientes",            criarCliente);
+router.put("/crm/clientes/:slug",       atualizarCliente);
+router.get("/crm/clientes/:slug/contatos", contatosDoCliente);
+router.get("/crm/clientes/:slug/equipamentos", equipamentosDoCliente);
+router.get("/crm/equipamentos",              listarEquipamentosCRM);
+router.get("/crm/equipamentos/stats",        statsEquipamentos);
+router.get("/crm/equipamentos/busca",        buscaEquipamento);
+router.get("/crm/equipamentos/:alias",       detalheEquipamento);
+router.put("/crm/equipamentos/:alias",       atualizarEquipamento);
+router.get("/crm/busca",                buscaCRM);
 
 export default router;

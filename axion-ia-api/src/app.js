@@ -10,6 +10,8 @@ import routes from "./routes.js";
 import { authMiddleware } from "./auth.js";
 import { conectar as conectarAxHub } from "./services/axhub-db.js";
 import { conectar as conectarAxTon } from "./services/axton-db.js";
+import { iniciarWhatsApp } from "./services/whatsapp.service.js";
+import { processarMensagemWA } from "./whatsapp-flow.js";
 import { conectar as conectarAxCross } from "./services/axcross-db.js";
 import { iniciar as iniciarPolling } from "./scheduler.js";
 import { iniciarColetaPNCP } from "./scheduler.js";
@@ -77,6 +79,10 @@ app.use("/api", authMiddleware);
 // Rota: GET /uploads/analise/{sistema}/{arquivo}
 // ≠ docs/img/ (screenshots de manuais — servidos pelo Docusaurus)
 app.use("/uploads/analise", express.static(path.join(__dirname, "../uploads/analise")));
+
+// Servir documentos públicos (Política de Privacidade LGPD, etc.)
+// Rota: GET /public/{arquivo}
+app.use("/public", express.static(path.join(__dirname, "../public")));
 
 app.use("/api", routes);
 
@@ -166,6 +172,15 @@ async function iniciar() {
 
     // AxionAgent — scheduler autônomo (ativado com AGENT_INTERVAL=N no .env)
     axioniAgent.iniciarScheduler();
+
+    // Auto-start WhatsApp (se auth existir em whatsapp-auth/)
+    if (process.env.WHATSAPP_AUTOSTART !== "false") {
+      iniciarWhatsApp(processarMensagemWA).then(() => {
+        console.log("📱 [WhatsApp] Auto-start concluído");
+      }).catch(err => {
+        console.warn("⚠️  [WhatsApp] Auto-start falhou (inicie manualmente via painel):", err.message);
+      });
+    }
   });
 }
 

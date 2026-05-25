@@ -7,6 +7,7 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 const LOGS_DIR = join(__dirname, '..', 'logs');
 const HISTORICO_FILE = join(LOGS_DIR, 'historico.json');
 const NAO_RESPONDIDAS_FILE = join(LOGS_DIR, 'nao-respondidas.json');
+const WA_ERROS_FILE = join(LOGS_DIR, 'whatsapp-erros.json');
 
 // Criar pasta logs se não existir
 if (!fs.existsSync(LOGS_DIR)) {
@@ -79,6 +80,25 @@ export function salvarNaoRespondida(mensagem) {
 
     salvarJSON(NAO_RESPONDIDAS_FILE, lista);
   });
+}
+
+/**
+ * Salva erros do fluxo WhatsApp para diagnóstico
+ */
+export function salvarErroWhatsApp({ telefone, estado, erro, contexto }) {
+  escreverComFila(WA_ERROS_FILE, () => {
+    const lista = carregarJSON(WA_ERROS_FILE);
+    lista.push({
+      timestamp: new Date().toISOString(),
+      telefone,
+      estado,
+      erro,
+      contexto
+    });
+    const dados = lista.length > MAX_ENTRIES ? lista.slice(-MAX_ENTRIES) : lista;
+    salvarJSON(WA_ERROS_FILE, dados);
+  });
+  console.error(`❌ [WhatsApp-Flow] ${estado} | ${telefone} | ${erro}`);
 }
 
 /**
