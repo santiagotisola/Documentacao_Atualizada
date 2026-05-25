@@ -248,6 +248,30 @@ export async function enviarMensagemComBotoes(telefoneOuJid, texto, botoes, roda
 }
 
 /**
+ * Envia uma Interactive List Message (modal com seleção tipo radio button).
+ * Quando o usuário clica no botão, abre um modal com as opções listadas.
+ * A resposta volta como selectedRowId (já capturada pelo handler).
+ * 
+ * @param {string} telefoneOuJid
+ * @param {string} corpo - texto principal da mensagem
+ * @param {string} textoBotao - texto do botão que abre o modal (ex: "Ver opções")
+ * @param {{ titulo?: string, opcoes: { id: string, titulo: string, descricao?: string }[] }[]} secoes - seções com opções
+ * @param {{ titulo?: string, rodape?: string }} [extras] - título e rodapé opcionais
+ */
+export async function enviarListaSelecao(telefoneOuJid, corpo, textoBotao, secoes, extras = {}) {
+  if (!sock || !conectado) throw new Error("WhatsApp não está conectado");
+  const jid = telefoneOuJid.includes("@") ? telefoneOuJid : `${telefoneOuJid}@s.whatsapp.net`;
+
+  // Texto formatado com opções numeradas (único método confiável no Baileys Web)
+  const textoOpcoes = secoes.map(sec => {
+    const header = sec.titulo ? `*${sec.titulo}*\n` : "";
+    const rows = sec.opcoes.map(op => `*${op.id}* — ${op.titulo}${op.descricao ? ` _(${op.descricao})_` : ""}`).join("\n");
+    return header + rows;
+  }).join("\n\n");
+  await sock.sendMessage(jid, { text: `${corpo}\n\n${textoOpcoes}` });
+}
+
+/**
  * Verifica se um número está registrado no WhatsApp e busca o nome do contato.
  * @param {string} numero - número sem @, ex: "5562999998888"
  * @returns {{ exists: boolean, jid: string|null, nome: string|null }}

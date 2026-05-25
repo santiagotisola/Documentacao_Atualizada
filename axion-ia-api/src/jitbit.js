@@ -189,6 +189,49 @@ export async function criarTicketUsuario(email, senha, assunto, descricao, categ
 }
 
 /**
+ * Criar ticket no Jitbit usando credenciais padrão do módulo (getAuthHeader)
+ */
+export async function criarTicket(assunto, descricao, categoryId = 0) {
+  let catId = parseInt(categoryId, 10);
+  if (!catId || catId <= 0) {
+    try {
+      const cats = await buscarCategorias();
+      catId = cats?.[0]?.CategoryID;
+      if (!catId) throw new Error("Nenhuma categoria encontrada no Jitbit");
+    } catch (e) {
+      throw new Error(`Não foi possível determinar a categoria: ${e.message}`);
+    }
+  }
+
+  const params = new URLSearchParams();
+  params.append("categoryId", catId);
+  params.append("subject", assunto);
+  params.append("body", descricao);
+  params.append("priorityId", "1");
+
+  const url = `${getBase()}/api/Ticket`;
+  const response = await fetch(url, {
+    method: "POST",
+    headers: {
+      ...getAuthHeader(),
+      "Content-Type": "application/x-www-form-urlencoded"
+    },
+    body: params.toString()
+  });
+
+  if (!response.ok) {
+    throw new Error(`Jitbit ${response.status}: ${response.statusText}`);
+  }
+
+  const text = await response.text();
+  const ticketId = parseInt(text.trim(), 10);
+  if (isNaN(ticketId)) {
+    throw new Error(`Resposta inesperada do Jitbit: ${text.substring(0, 100)}`);
+  }
+  return { sucesso: true, ticketId };
+}
+
+/**
  * Extrair lista de técnicos únicos a partir dos tickets recentes
  */
 export async function listarTecnicos() {

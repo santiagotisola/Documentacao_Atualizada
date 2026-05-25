@@ -14,8 +14,8 @@ import { PedidoCompra } from "./models/pedido-compra.model.js";
 import { Cliente } from "./models/cliente.model.js";
 import { Equipamento } from "./models/equipamento.model.js";
 import { WhatsAppSessao } from "./models/whatsapp-sessao.model.js";
-import { enviarMensagem, verificarNumeroWhatsApp, enviarMensagemComBotoes } from "./services/whatsapp.service.js";
-import { criarTicketUsuario, responderTicket } from "./jitbit.js";
+import { enviarMensagem, verificarNumeroWhatsApp, enviarMensagemComBotoes, enviarListaSelecao } from "./services/whatsapp.service.js";
+import { criarTicketUsuario, criarTicket, responderTicket } from "./jitbit.js";
 import { salvarHistorico, salvarErroWhatsApp } from "./logger.js";
 
 // ─── SISTEMAS DISPONÍVEIS ────────────────────────────────────────────────────
@@ -84,12 +84,13 @@ export async function processarCompras(sessao, texto, midia = null) {
   const t = (texto || "").trim();
   const tLower = t.toLowerCase();
 
-  // Comando global cancelar (não se aplica a aprovador respondendo motivo de rejeição)
-  if ((tLower === "cancelar" || tLower === "sair") && sessao.estado !== "compras_motivo_rejeicao") {
+  // Guard de segurança — caso processarCompras seja chamado diretamente
+  // "cancelar" e "sair" normalmente já são capturados pelo whatsapp-flow antes de chegar aqui
+  if ((tLower === "cancelar" || tLower === "voltar") && sessao.estado !== "compras_motivo_rejeicao") {
     sessao.estado = "menu";
     sessao.dadosParciais = {};
     await sessao.save();
-    await enviarMensagem(sessao._remoteJid, "❌ Solicitação cancelada.\n\nDigite *menu* para voltar ao início.");
+    await enviarMensagem(sessao._remoteJid, "↩️ Solicitação de compras cancelada.");
     return;
   }
 
@@ -175,10 +176,14 @@ async function handleComprasMotivo(sessao, texto) {
   sessao.markModified("dadosParciais");
   await sessao.save();
 
-  const lista = SISTEMAS_COMPRAS.map((s, i) => `*${i + 1}* — ${s}`).join("\n");
-  await enviarMensagem(sessao._remoteJid,
-    `✅ Motivo registrado.\n\n` +
-    `🖥️ *Etapa 3/7* — Sistema relacionado:\n\n${lista}\n\n*0* — Não se aplica`);
+  const opcoesSistema = SISTEMAS_COMPRAS.map((s, i) => ({ id: String(i + 1), titulo: s }));
+  opcoesSistema.push({ id: "0", titulo: "Não se aplica" });
+  await enviarListaSelecao(sessao._remoteJid,
+    `✅ Motivo registrado.\n\n🖥️ *Etapa 3/7* — Selecione o sistema relacionado:`,
+    "Ver sistemas",
+    [{ titulo: "Sistemas", opcoes: opcoesSistema }],
+    { rodape: "Etapa 3 de 7" }
+  );
 }
 
 // ─── ETAPA 3: SISTEMA ────────────────────────────────────────────────────────
@@ -237,10 +242,15 @@ async function handleComprasCliente(sessao, opcao) {
   sessao.markModified("dadosParciais");
   await sessao.save();
 
-  await enviarMensagem(sessao._remoteJid,
-    `📦 *Etapa 5/7* — Tipo da solicitação:\n\n` +
-    `*1* — Produto Novo (aquisição)\n` +
-    `*2* — Produto Danificado / Substituição`);
+  await enviarListaSelecao(sessao._remoteJid,
+    `📦 *Etapa 5/7* — Tipo da solicitação:`,
+    "Selecionar tipo",
+    [{ titulo: "Tipo", opcoes: [
+      { id: "1", titulo: "Produto Novo", descricao: "Aquisição de item novo" },
+      { id: "2", titulo: "Substituição", descricao: "Produto danificado / garantia" },
+    ]}],
+    { rodape: "Etapa 5 de 7" }
+  );
 }
 
 // ─── ETAPA 5: TIPO ───────────────────────────────────────────────────────────
@@ -274,7 +284,12 @@ async function handleComprasTipo(sessao, opcao) {
       `_(ex: "Câmera OCR econ-ocr005, queimou após raio, sem imagem")_`);
 
   } else {
-    await enviarMensagem(sessao._remoteJid, "Digite *1* para Produto Novo ou *2* para Substituição.");
+    await enviarListaSelecao(sessao._remoteJid, "Selecione o tipo:", "Selecionar tipo",
+      [{ titulo: "Tipo", opcoes: [
+        { id: "1", titulo: "Produto Novo", descricao: "Aquisição" },
+        { id: "2", titulo: "Substituição", descricao: "Produto danificado / garantia" },
+      ]}]
+    );
   }
 }
 
@@ -306,11 +321,14 @@ async function handleComprasSubstituicao(sessao, texto) {
   sessao.markModified("dadosParciais");
   await sessao.save();
 
-  await enviarMensagem(sessao._remoteJid,
-    `✅ Problema registrado.${infoGarantia}\n\n` +
-    `📦 *Haverá devolução do equipamento danificado?*\n\n` +
-    `*1* — Sim, haverá devolução\n` +
-    `*2* — Não haverá devolução`);
+  await enviarListaSelecao(sessao._remoteJid,
+    `✅ Problema registrado.${infoGarantia}\n\n📦 *Haverá devolução do equipamento danificado?*`,
+    "Selecionar",
+    [{ titulo: "Devolução", opcoes: [
+      { id: "1", titulo: "Sim, haverá devolução" },
+      { id: "2", titulo: "Não haverá devolução" },
+    ]}]
+  );
 }
 
 // ─── ETAPA 5C: DEVOLUÇÃO ─────────────────────────────────────────────────────
@@ -339,7 +357,12 @@ async function handleComprasDevolucao(sessao, opcao) {
       `_(ex: "equipamento queimado", "perda total por vandalismo", "extravio")_`);
 
   } else {
-    await enviarMensagem(sessao._remoteJid, "Digite *1* (sim, devolução) ou *2* (não).");
+    await enviarListaSelecao(sessao._remoteJid, "Selecione:", "Selecionar",
+      [{ titulo: "Devolução", opcoes: [
+        { id: "1", titulo: "Sim, haverá devolução" },
+        { id: "2", titulo: "Não haverá devolução" },
+      ]}]
+    );
   }
 }
 
@@ -379,15 +402,23 @@ async function handleComprasItens(sessao, texto) {
 
     const resumoItens = itens.map((it, i) => `  ${i + 1}. ${it.quantidade}${it.unidade !== "un" ? it.unidade : "x"} ${it.descricao}`).join("\n");
     
-    // Se tem cliente, sugerir endereço
-    let sugestaoDestino = "";
+    // Se tem cliente, sugerir endereço com lista
     if (sessao.dadosParciais.clienteSlug) {
-      sugestaoDestino = `\n\n*1* — Endereço do contrato (${sessao.dadosParciais.clienteNome})\n*2* — Digitar outro endereço`;
+      await enviarMensagem(sessao._remoteJid, `📦 *${itens.length} item(ns) registrado(s):*\n${resumoItens}`);
+      await enviarListaSelecao(sessao._remoteJid,
+        `📍 *Etapa 7/7* — Destino da entrega:`,
+        "Selecionar destino",
+        [{ titulo: "Destino", opcoes: [
+          { id: "1", titulo: "Endereço do contrato", descricao: sessao.dadosParciais.clienteNome },
+          { id: "2", titulo: "Digitar outro endereço" },
+        ]}],
+        { rodape: "Etapa 7 de 7" }
+      );
+    } else {
+      await enviarMensagem(sessao._remoteJid,
+        `📦 *${itens.length} item(ns) registrado(s):*\n${resumoItens}\n\n` +
+        `📍 *Etapa 7/7* — Digite o endereço/unidade de destino:`);
     }
-
-    await enviarMensagem(sessao._remoteJid,
-      `📦 *${itens.length} item(ns) registrado(s):*\n${resumoItens}\n\n` +
-      `📍 *Etapa 7/7* — Destino da entrega:${sugestaoDestino || "\n\nDigite o endereço/unidade de destino:"}`);
     return;
   }
 
@@ -505,13 +536,17 @@ async function handleComprasDestino(sessao, texto) {
   sessao.markModified("dadosParciais");
   await sessao.save();
 
-  await enviarMensagem(sessao._remoteJid,
-    `📍 Destino: *${sessao.dadosParciais.destino}*\n\n` +
-    `⚡ *Prioridade:*\n\n` +
-    `*1* — Baixa (pode aguardar)\n` +
-    `*2* — Média (necessário em dias)\n` +
-    `*3* — Alta (urgente, impacta operação)\n` +
-    `*4* — Emergencial (parada total)`);
+  await enviarListaSelecao(sessao._remoteJid,
+    `📍 Destino: *${sessao.dadosParciais.destino}*\n\n⚡ Selecione a prioridade:`,
+    "Ver prioridades",
+    [{ titulo: "Prioridade", opcoes: [
+      { id: "1", titulo: "Baixa", descricao: "Pode aguardar" },
+      { id: "2", titulo: "Média", descricao: "Necessário em dias" },
+      { id: "3", titulo: "Alta", descricao: "Urgente, impacta operação" },
+      { id: "4", titulo: "Emergencial", descricao: "Parada total" },
+    ]}],
+    { rodape: "Etapa 7 de 7" }
+  );
 }
 
 // ─── ETAPA: PRIORIDADE ───────────────────────────────────────────────────────
@@ -519,7 +554,14 @@ async function handleComprasDestino(sessao, texto) {
 async function handleComprasPrioridade(sessao, opcao) {
   const mapa = { "1": "baixa", "2": "media", "3": "alta", "4": "emergencial" };
   if (!mapa[opcao]) {
-    await enviarMensagem(sessao._remoteJid, "Digite *1* (Baixa), *2* (Média), *3* (Alta) ou *4* (Emergencial).");
+    await enviarListaSelecao(sessao._remoteJid, "Selecione a prioridade:", "Ver prioridades",
+      [{ titulo: "Prioridade", opcoes: [
+        { id: "1", titulo: "Baixa", descricao: "Pode aguardar" },
+        { id: "2", titulo: "Média", descricao: "Necessário em dias" },
+        { id: "3", titulo: "Alta", descricao: "Urgente" },
+        { id: "4", titulo: "Emergencial", descricao: "Parada total" },
+      ]}]
+    );
     return;
   }
   sessao.dadosParciais.prioridade = mapa[opcao];
@@ -530,12 +572,14 @@ async function handleComprasPrioridade(sessao, opcao) {
   // Mostrar aprovador padrão com opção de alterar
   const aprovadorPadrao = process.env.APROVADOR_COMPRAS || "(não configurado)";
   const aprovadorFormatado = aprovadorPadrao !== "(não configurado)" ? formatarTelefone(aprovadorPadrao) : aprovadorPadrao;
-  await enviarMensagem(sessao._remoteJid,
-    `👤 *Aprovador da solicitação:*\n\n` +
-    `📱 WhatsApp: *${aprovadorFormatado}*\n\n` +
-    `*1* — Manter este aprovador\n` +
-    `*2* — Alterar aprovador (digitar outro número)\n\n` +
-    `_O aprovador receberá a notificação via WhatsApp para aprovar/rejeitar._`);
+  await enviarListaSelecao(sessao._remoteJid,
+    `👤 *Aprovador da solicitação:*\n\n📱 WhatsApp: *${aprovadorFormatado}*\n\n_O aprovador receberá a notificação via WhatsApp para aprovar/rejeitar._`,
+    "Selecionar ação",
+    [{ titulo: "Aprovador", opcoes: [
+      { id: "1", titulo: "Manter este aprovador" },
+      { id: "2", titulo: "Alterar aprovador", descricao: "Digitar outro número" },
+    ]}]
+  );
   return;
 }
 
@@ -572,7 +616,12 @@ async function handleComprasAprovador(sessao, texto) {
       await enviarMensagem(sessao._remoteJid, "📱 Digite o número correto do aprovador (com DDD):\n\n_Exemplo: 62984085383_");
       return;
     } else {
-      await enviarMensagem(sessao._remoteJid, "Digite *1* para confirmar ou *2* para digitar outro número.");
+      await enviarListaSelecao(sessao._remoteJid, "Confirme o aprovador:", "Confirmar",
+        [{ titulo: "Confirmação", opcoes: [
+          { id: "1", titulo: "✅ Sim, confirmar" },
+          { id: "2", titulo: "❌ Não, digitar outro" },
+        ]}]
+      );
       return;
     }
   }
@@ -618,12 +667,14 @@ async function handleComprasAprovador(sessao, texto) {
     sessao.markModified("dadosParciais");
     await sessao.save();
 
-    await enviarMensagem(sessao._remoteJid,
-      `✅ Número encontrado no WhatsApp!\n\n` +
-      `📱 Número: *${formatarTelefone(tel)}*${nomeContato}\n\n` +
-      `Este é o aprovador correto?\n\n` +
-      `*1* — ✅ Sim, confirmar\n` +
-      `*2* — ❌ Não, digitar outro número`);
+    await enviarListaSelecao(sessao._remoteJid,
+      `✅ Número encontrado no WhatsApp!\n\n📱 Número: *${formatarTelefone(tel)}*${nomeContato}\n\nEste é o aprovador correto?`,
+      "Confirmar",
+      [{ titulo: "Confirmação", opcoes: [
+        { id: "1", titulo: "✅ Sim, confirmar" },
+        { id: "2", titulo: "❌ Não, digitar outro" },
+      ]}]
+    );
     return;
   }
 
@@ -663,7 +714,12 @@ async function handleComprasAprovador(sessao, texto) {
       `👉 Use apenas números: *DDD + número*\n` +
       `📌 Exemplo: *62984085383*`);
   } else {
-    await enviarMensagem(sessao._remoteJid, "Digite *1* para manter ou *2* para alterar o aprovador.");
+    await enviarListaSelecao(sessao._remoteJid, "Selecione:", "Selecionar ação",
+      [{ titulo: "Aprovador", opcoes: [
+        { id: "1", titulo: "Manter este aprovador" },
+        { id: "2", titulo: "Alterar aprovador", descricao: "Digitar outro número" },
+      ]}]
+    );
   }
 }
 
@@ -739,11 +795,16 @@ async function montarResumoConfirmacao(sessao) {
   resumo += `\n*Destino:* ${d.destino}\n`;
   resumo += `*Prioridade:* ${prioridadeEmoji[d.prioridade]} ${d.prioridade.toUpperCase()}\n`;
   resumo += `*Aprovador:* ${formatarTelefone(d.aprovadorTelefone)}\n`;
-  resumo += `\n─────────────────\n`;
-  resumo += `*1* — ✅ Confirmar e enviar para aprovação\n`;
-  resumo += `*2* — ❌ Cancelar pedido`;
 
   await enviarMensagem(sessao._remoteJid, resumo);
+  await enviarListaSelecao(sessao._remoteJid,
+    `O que deseja fazer?`,
+    "Confirmar ou cancelar",
+    [{ titulo: "Ação", opcoes: [
+      { id: "1", titulo: "✅ Confirmar", descricao: "Enviar para aprovação" },
+      { id: "2", titulo: "❌ Cancelar", descricao: "Descartar este pedido" },
+    ]}]
+  );
 }
 
 // ─── CONFIRMAÇÃO FINAL ───────────────────────────────────────────────────────
@@ -765,12 +826,17 @@ async function handleComprasConfirmacao(sessao, opcao) {
     sessao.estado = "menu";
     sessao.dadosParciais = {};
     await sessao.save();
-    await enviarMensagem(sessao._remoteJid, `❌ Pedido${codigo ? ` ${codigo}` : ""} cancelado.\n\nDigite *menu* para voltar.`);
+    await enviarMensagem(sessao._remoteJid, `↩️ Pedido${codigo ? ` ${codigo}` : ""} cancelado.`);
     return;
   }
 
   if (opcao !== "1" && opcao !== "confirmar" && opcao !== "sim") {
-    await enviarMensagem(sessao._remoteJid, "Digite *1* para confirmar ou *2* para cancelar.");
+    await enviarListaSelecao(sessao._remoteJid, "Selecione:", "Confirmar ou cancelar",
+      [{ titulo: "Ação", opcoes: [
+        { id: "1", titulo: "✅ Confirmar", descricao: "Enviar para aprovação" },
+        { id: "2", titulo: "❌ Cancelar", descricao: "Descartar pedido" },
+      ]}]
+    );
     return;
   }
 
@@ -806,16 +872,15 @@ async function handleComprasConfirmacao(sessao, opcao) {
         `Criado via WhatsApp em ${new Date().toLocaleString("pt-BR")}`,
       ].filter(Boolean).join("\n");
 
-      const resultado = await criarTicketUsuario(
-        process.env.JITBIT_USER,
-        process.env.JITBIT_PASS,
+      const resultado = await criarTicket(
         `[COMPRAS] ${codigo} - ${d.titulo}`,
         corpo,
-        0 // categoria geral
+        0
       );
-      ticketId = resultado.ticketId || resultado.id;
+      ticketId = resultado.ticketId;
       pedido.ticketJitbitId = ticketId;
       await pedido.save();
+      console.log(`🎫 [Compras] Ticket Jitbit #${ticketId} criado para ${codigo}`);
     } catch (err) {
       console.error("⚠️ [Compras] Erro ao criar ticket Jitbit:", err.message);
     }
@@ -884,19 +949,20 @@ async function enviarAprovacao(pedido, aprovadorEscolhido) {
     `💬 Motivo: ${pedido.motivo}\n` +
     (pedido.sistema ? `🖥️ Sistema: ${pedido.sistema}\n` : "") +
     `⚡ Prioridade: ${pedido.prioridade.toUpperCase()}\n` +
-    `\n📦 *Itens:*\n${itensResumo}\n` +
-    `\n─────────────────\n` +
-    `Responda com:\n` +
-    `*1* — ✅ Aprovar pedido\n` +
-    `*2* — ❌ Rejeitar pedido`;
-
-  const botoes = [
-    { id: "1", texto: "1 - ✅ APROVAR" },
-    { id: "2", texto: "2 - ❌ REJEITAR" }
-  ];
+    `\n📦 *Itens:*\n${itensResumo}`;
 
   try {
-    await enviarMensagemComBotoes(jidAprovador, msg, botoes, `Pedido ${pedido.codigo}`);
+    // Enviar resumo como texto, e depois a lista de ação
+    await enviarMensagem(jidAprovador, msg);
+    await enviarListaSelecao(jidAprovador,
+      `Responda para o pedido *${pedido.codigo}*:`,
+      "Aprovar ou Rejeitar",
+      [{ titulo: "Decisão", opcoes: [
+        { id: "1", titulo: "✅ Aprovar pedido" },
+        { id: "2", titulo: "❌ Rejeitar pedido" },
+      ]}],
+      { rodape: `Pedido ${pedido.codigo}` }
+    );
     
     // Registrar aprovação pendente
     pedido.aprovacoes.push({
@@ -952,7 +1018,8 @@ async function enviarAprovacao(pedido, aprovadorEscolhido) {
 async function listarPedidosPendentesParaAprovador(jid, pendentes, telefone) {
   const lista = pendentes.map((p, i) => {
     const solicitante = p.solicitante?.nome || "—";
-    return `  ${i + 1}. *${p.codigo}* — ${p.titulo}\n     👤 ${solicitante} | ⚡ ${p.prioridade || "normal"}`;
+    const ticket = p.ticketJitbitId ? ` | 🎫 #${p.ticketJitbitId}` : "";
+    return `  ${i + 1}. *${p.codigo}* — ${p.titulo}\n     👤 ${solicitante} | ⚡ ${p.prioridade || "normal"}${ticket}`;
   }).join("\n\n");
 
   // Salvar o pedido mais recente como vinculação na sessão
@@ -973,7 +1040,8 @@ async function listarPedidosPendentesParaAprovador(jid, pendentes, telefone) {
     `─────────────────\n` +
     `Para aprovar ou rejeitar, especifique o código:\n` +
     `  *APROVAR PC-XXXX-XXXXXX*\n` +
-    `  *REJEITAR PC-XXXX-XXXXXX*\n\n` +
+    `  *REJEITAR PC-XXXX-XXXXXX*\n` +
+    `  ou pelo ticket: *APROVAR #12345*\n\n` +
     `_Ou responda com 1/2 para o mais recente (*${pendentes[0].codigo}*)_`);
 }
 
@@ -992,19 +1060,23 @@ export async function tentarProcessarAprovacao(telefone, texto, remoteJid) {
   // Formatos aceitos (texto digitado, botão clicado ou buttonId):
   // "APROVAR" / "REJEITAR" — busca vinculada ou ampla
   // "✅ APROVAR" / "❌ REJEITAR" — clique em botão (displayText)
-  // "APROVAR PC-XXXX" / "REJEITAR PC-XXXX" — busca por código
+  // "APROVAR PC-XXXX" / "REJEITAR PC-XXXX" — busca por código do pedido
+  // "APROVAR #12345" / "REJEITAR #12345" — busca por ticket Jitbit
   // "1" / "2" — busca pelo pedido vinculado na sessão
   const matchAprovarCodigo = t.match(/^APROVAR\s+(PC-\d{4}-\d{6})$/);
   const matchRejeitarCodigo = t.match(/^REJEITAR\s+(PC-\d{4}-\d{6})$/);
+  const matchAprovarTicket = t.match(/^APROVAR\s+#?(\d{4,})$/);
+  const matchRejeitarTicket = t.match(/^REJEITAR\s+#?(\d{4,})$/);
   const isAprovarSimples = (t === "APROVAR" || t === "SIM" || t === "APROVADO" || t === "✅ APROVAR" || t === "✅APROVAR");
   const isRejeitarSimples = (t === "REJEITAR" || t === "NAO" || t === "NÃO" || t === "REJEITADO" || t === "REPROVAR" || t === "❌ REJEITAR" || t === "❌REJEITAR");
   const isNumerico = (t === "1" || t === "2");
 
   // Se não é nenhum formato de aprovação, sai
-  if (!matchAprovarCodigo && !matchRejeitarCodigo && !isAprovarSimples && !isRejeitarSimples && !isNumerico) return false;
+  if (!matchAprovarCodigo && !matchRejeitarCodigo && !matchAprovarTicket && !matchRejeitarTicket && !isAprovarSimples && !isRejeitarSimples && !isNumerico) return false;
 
   let pedido = null;
   let codigo = matchAprovarCodigo?.[1] || matchRejeitarCodigo?.[1];
+  const ticketIdBusca = matchAprovarTicket?.[1] || matchRejeitarTicket?.[1];
   let aprovadorReal = telefone; // pode ser LID, será ajustado
 
   // Tentar buscar pedido vinculado na sessão do usuário (prioridade)
@@ -1014,6 +1086,10 @@ export async function tentarProcessarAprovacao(telefone, texto, remoteJid) {
   if (codigo) {
     // Busca por código específico (usuário digitou "APROVAR PC-XXXX")
     pedido = await PedidoCompra.findOne({ codigo, status: "aguardando_aprovacao" });
+  } else if (ticketIdBusca) {
+    // Busca por ticket Jitbit (usuário digitou "APROVAR #12345")
+    pedido = await PedidoCompra.findOne({ ticketJitbitId: parseInt(ticketIdBusca), status: "aguardando_aprovacao" });
+    if (pedido) codigo = pedido.codigo;
   } else if (pedidoVinculado) {
     // Tem pedido vinculado na sessão — usar esse (seguro)
     pedido = await PedidoCompra.findOne({ codigo: pedidoVinculado, status: "aguardando_aprovacao", "aprovacoes.decisao": "pendente" });
@@ -1084,8 +1160,8 @@ export async function tentarProcessarAprovacao(telefone, texto, remoteJid) {
   }
 
   const jid = remoteJid || `${telefone}@s.whatsapp.net`;
-  const aprovou = matchAprovarCodigo || isAprovarSimples || t === "1";
-  const rejeitou = matchRejeitarCodigo || isRejeitarSimples || t === "2";
+  const aprovou = matchAprovarCodigo || matchAprovarTicket || isAprovarSimples || t === "1";
+  const rejeitou = matchRejeitarCodigo || matchRejeitarTicket || isRejeitarSimples || t === "2";
 
   if (aprovou) {
     pedido.status = "aprovado";
@@ -1099,7 +1175,32 @@ export async function tentarProcessarAprovacao(telefone, texto, remoteJid) {
     pedido.markModified("aprovacoes");
     await pedido.save();
 
-    // Salvar reply no ticket Jitbit
+    // Salvar reply no ticket Jitbit (ou criar ticket se não existir)
+    if (!pedido.ticketJitbitId) {
+      // Ticket não foi criado na confirmação — criar agora
+      try {
+        const itensTexto = pedido.itens.map(it => `• ${it.quantidade}${it.unidade !== "un" ? it.unidade : "x"} ${it.descricao}`).join("\n");
+        const corpo = [
+          `PEDIDO DE COMPRAS: ${pedido.codigo}`,
+          `Tipo: ${pedido.tipoSolicitacao === "novo" ? "Produto Novo" : "Substituição"}`,
+          `Motivo: ${pedido.motivo}`,
+          pedido.sistema ? `Sistema: ${pedido.sistema}` : "",
+          pedido.clienteNome ? `Cliente: ${pedido.clienteNome}` : "",
+          `Prioridade: ${pedido.prioridade.toUpperCase()}`,
+          `\nItens:\n${itensTexto}`,
+          pedido.destino?.endereco ? `\nDestino: ${pedido.destino.endereco}` : "",
+          `\n---\nSolicitante: ${pedido.solicitante?.nome} (${pedido.solicitante?.telefone})`,
+          `Criado via WhatsApp — Ticket criado após aprovação`,
+        ].filter(Boolean).join("\n");
+        const resultado = await criarTicket(`[COMPRAS] ${pedido.codigo} - ${pedido.titulo}`, corpo, 0);
+        pedido.ticketJitbitId = resultado.ticketId;
+        await pedido.save();
+        console.log(`🎫 [Compras] Ticket Jitbit #${resultado.ticketId} criado na aprovação para ${pedido.codigo}`);
+      } catch (err) {
+        console.error(`⚠️ [Compras] Erro ao criar ticket na aprovação (${pedido.codigo}):`, err.message);
+      }
+    }
+
     if (pedido.ticketJitbitId) {
       try {
         const replyBody = [
@@ -1115,8 +1216,6 @@ export async function tentarProcessarAprovacao(telefone, texto, remoteJid) {
       } catch (err) {
         console.error(`⚠️ [Compras] Erro ao salvar reply no Jitbit (ticket #${pedido.ticketJitbitId}):`, err.message);
       }
-    } else {
-      console.warn(`⚠️ [Compras] Pedido ${pedido.codigo} sem ticketJitbitId — Jitbit NÃO atualizado`);
     }
 
     await enviarMensagem(jid, `✅ Pedido *${codigo}* *APROVADO* com sucesso!\n\nO setor de compras foi notificado. Atendimento encerrado. Obrigado!`);
@@ -1183,25 +1282,42 @@ async function handleComprasConsulta(sessao, texto) {
       return;
     }
 
-    const itens = pedido.itens.map(it => `  • ${it.quantidade}${it.unidade !== "un" ? it.unidade : "x"} ${it.descricao}`).join("\n");
-    const hist = (pedido.historico || []).slice(-3).map(h => `  ${new Date(h.data).toLocaleDateString("pt-BR")} — ${h.acao}`).join("\n");
+    await exibirDetalhesPedido(sessao, pedido);
 
-    sessao.estado = "menu";
-    await sessao.save();
-    await enviarMensagem(sessao._remoteJid,
-      `📋 *Pedido ${pedido.codigo}*\n\n` +
-      `📌 ${pedido.titulo}\n` +
-      `📊 Status: *${pedido.status}*\n` +
-      `⚡ Prioridade: ${pedido.prioridade}\n` +
-      (pedido.clienteNome ? `🏢 Cliente: ${pedido.clienteNome}\n` : "") +
-      (pedido.ticketJitbitId ? `🎫 Ticket: #${pedido.ticketJitbitId}\n` : "") +
-      `\n📦 *Itens:*\n${itens}\n` +
-      `\n📜 *Histórico:*\n${hist}\n\n` +
-      `Digite *menu* para voltar.`);
+  } else if (texto.match(/^#?\d{4,}$/)) {
+    // Busca por ticket Jitbit (ex: #12345 ou 12345)
+    const ticketId = parseInt(texto.replace("#", ""), 10);
+    const pedido = await PedidoCompra.findOne({ ticketJitbitId: ticketId }).lean();
+    if (!pedido) {
+      await enviarMensagem(sessao._remoteJid, `❌ Nenhum pedido encontrado com ticket #${ticketId}.\n\nDigite o código *PC-XXXX-XXXXXX* ou *meus* para listar seus pedidos.`);
+      return;
+    }
+
+    await exibirDetalhesPedido(sessao, pedido);
 
   } else {
-    await enviarMensagem(sessao._remoteJid, `Digite o código do pedido (ex: *PC-2026-000001*)\nou *meus* para ver seus pedidos.`);
+    await enviarMensagem(sessao._remoteJid, `Digite o código do pedido (ex: *PC-2026-000001*)\nou o ticket (ex: *#12345*)\nou *meus* para ver seus pedidos.`);
   }
+}
+
+// ─── EXIBIR DETALHES DO PEDIDO ───────────────────────────────────────────────
+
+async function exibirDetalhesPedido(sessao, pedido) {
+  const itens = pedido.itens.map(it => `  • ${it.quantidade}${it.unidade !== "un" ? it.unidade : "x"} ${it.descricao}`).join("\n");
+  const hist = (pedido.historico || []).slice(-3).map(h => `  ${new Date(h.data).toLocaleDateString("pt-BR")} — ${h.acao}`).join("\n");
+
+  sessao.estado = "menu";
+  await sessao.save();
+  await enviarMensagem(sessao._remoteJid,
+    `📋 *Pedido ${pedido.codigo}*\n\n` +
+    `📌 ${pedido.titulo}\n` +
+    `📊 Status: *${pedido.status}*\n` +
+    `⚡ Prioridade: ${pedido.prioridade}\n` +
+    (pedido.clienteNome ? `🏢 Cliente: ${pedido.clienteNome}\n` : "") +
+    (pedido.ticketJitbitId ? `🎫 Ticket: *#${pedido.ticketJitbitId}*\n🔗 https://desk.axiontecnologia.com.br/Ticket/${pedido.ticketJitbitId}\n` : "") +
+    `\n📦 *Itens:*\n${itens}\n` +
+    `\n📜 *Histórico:*\n${hist}\n\n` +
+    `Digite *menu* para voltar.`);
 }
 
 // ─── ENCERRAR SESSÃO DO APROVADOR ────────────────────────────────────────────
@@ -1252,7 +1368,31 @@ async function handleMotivoRejeicao(sessao, texto) {
   pedido.markModified("aprovacoes");
   await pedido.save();
 
-  // Salvar reply no ticket Jitbit com motivo
+  // Salvar reply no ticket Jitbit com motivo (ou criar ticket se não existir)
+  if (!pedido.ticketJitbitId) {
+    try {
+      const itensTexto = pedido.itens.map(it => `• ${it.quantidade}${it.unidade !== "un" ? it.unidade : "x"} ${it.descricao}`).join("\n");
+      const corpo = [
+        `PEDIDO DE COMPRAS: ${pedido.codigo}`,
+        `Tipo: ${pedido.tipoSolicitacao === "novo" ? "Produto Novo" : "Substituição"}`,
+        `Motivo: ${pedido.motivo}`,
+        pedido.sistema ? `Sistema: ${pedido.sistema}` : "",
+        pedido.clienteNome ? `Cliente: ${pedido.clienteNome}` : "",
+        `Prioridade: ${pedido.prioridade.toUpperCase()}`,
+        `\nItens:\n${itensTexto}`,
+        pedido.destino?.endereco ? `\nDestino: ${pedido.destino.endereco}` : "",
+        `\n---\nSolicitante: ${pedido.solicitante?.nome} (${pedido.solicitante?.telefone})`,
+        `Criado via WhatsApp — Ticket criado após rejeição`,
+      ].filter(Boolean).join("\n");
+      const resultado = await criarTicket(`[COMPRAS] ${pedido.codigo} - ${pedido.titulo}`, corpo, 0);
+      pedido.ticketJitbitId = resultado.ticketId;
+      await pedido.save();
+      console.log(`🎫 [Compras] Ticket Jitbit #${resultado.ticketId} criado na rejeição para ${pedido.codigo}`);
+    } catch (err) {
+      console.error(`⚠️ [Compras] Erro ao criar ticket na rejeição (${pedido.codigo}):`, err.message);
+    }
+  }
+
   if (pedido.ticketJitbitId) {
     try {
       const replyBody = [

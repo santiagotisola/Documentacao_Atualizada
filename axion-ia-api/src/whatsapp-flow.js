@@ -9,7 +9,7 @@
  */
 
 import { WhatsAppSessao } from "./models/whatsapp-sessao.model.js";
-import { enviarMensagem } from "./services/whatsapp.service.js";
+import { enviarMensagem, enviarListaSelecao } from "./services/whatsapp.service.js";
 import { criarTicketUsuario, buscarTicket, buscarComentarios, buscarCategorias, anexarArquivo, atribuirTecnico, listarUsuarios } from "./jitbit.js";
 import { gerarResposta, gerarRespostaWA } from "./engine.js";
 import { classificarMensagem } from "./classifier.js";
@@ -55,24 +55,48 @@ ${LGPD_POLITICA_URL}
 
 A transmissão de informações e documentos por este canal é realizada com o seu expresso consentimento, em conformidade com a LGPD.
 
-*Podemos continuar nossa conversa?*
+*Podemos continuar nossa conversa?*`;
 
-*1* — Aceito os termos da Política de Privacidade
-*2* — Não aceito (o atendimento será encerrado)`;
+const LGPD_SECOES = [{
+  titulo: "Consentimento",
+  opcoes: [
+    { id: "1", titulo: "Aceito os termos", descricao: "Política de Privacidade" },
+    { id: "2", titulo: "Não aceito", descricao: "O atendimento será encerrado" },
+  ]
+}];
 
-const MENU = `Olá! Sou o assistente da *Axion Tecnologia* 🤖
+const MENU = `Olá! Sou o assistente da *Axion Tecnologia* 🤖\n\nComo posso ajudar?`;
 
-Como posso ajudar?
-
-*1* — Abrir novo chamado
-*2* — Consultar chamado
-*3* — Responder chamado
-*4* — Dúvidas do Sistema
-*5* — Solicitar Compras
-*6* — Consultar Pedido de Compras
-*0* — Falar com atendente`;
+const MENU_SECOES = [{
+  titulo: "Atendimento",
+  opcoes: [
+    { id: "1", titulo: "Abrir novo chamado", descricao: "Registrar um problema ou solicitação" },
+    { id: "2", titulo: "Consultar chamado", descricao: "Ver status de um chamado existente" },
+    { id: "3", titulo: "Responder chamado", descricao: "Enviar informação adicional" },
+    { id: "4", titulo: "Dúvidas do Sistema", descricao: "Perguntar sobre funcionalidades" },
+  ]
+}, {
+  titulo: "Compras",
+  opcoes: [
+    { id: "5", titulo: "Solicitar Compras", descricao: "Abrir pedido de compra/reposição" },
+    { id: "6", titulo: "Consultar Pedido", descricao: "Acompanhar pedido de compras" },
+  ]
+}, {
+  titulo: "Outros",
+  opcoes: [
+    { id: "0", titulo: "Falar com atendente", descricao: "Transferir para atendimento humano" },
+  ]
+}];
 
 const MENU_OPCOES = ["1", "2", "3", "4", "5", "6", "0"];
+
+/** Envia o menu principal como Interactive List (com fallback automático) */
+async function enviarMenu(jid) {
+  await enviarListaSelecao(jid, MENU, "Ver opções", MENU_SECOES, {
+    titulo: "Menu Principal",
+    rodape: "Axion Tecnologia",
+  });
+}
 
 // --------------------------------------------------------------------------
 
@@ -144,6 +168,7 @@ export async function processarMensagemWA(telefone, nome, texto, midia = null, r
       sessao.dadosParciais = {};
       await salvarSessao(sessao);
       await enviarMensagem(jid, MENSAGEM_LGPD(sessao.nome));
+      await enviarListaSelecao(jid, "Selecione uma opção:", "Responder", LGPD_SECOES);
       return;
     }
     // Sessão já está aguardando resposta LGPD
@@ -152,9 +177,8 @@ export async function processarMensagemWA(telefone, nome, texto, midia = null, r
   }
 
   // Comandos globais (só acessível após LGPD aceito)
-  // Comando de encerramento — funciona em QUALQUER estado (inclusive "atendente")
-  // Nota: "finalizar" NÃO encerra (é usado dentro do fluxo de compras para fechar lista de itens)
-  if (["sair", "encerrar", "terminar", "cancelar"].includes(t)) {
+  // "sair" e "encerrar" = encerra sessão completa (reseta LGPD — próxima mensagem reinicia tudo)
+  if (["sair", "encerrar", "terminar"].includes(t)) {
     sessao.estado = "encerrado";
     sessao.lgpdAceito = false;
     sessao.ativo = false;
@@ -162,6 +186,16 @@ export async function processarMensagemWA(telefone, nome, texto, midia = null, r
     fotosTemp.delete(telefone);
     await salvarSessao(sessao);
     await enviarMensagem(jid, `✅ Atendimento encerrado.\n\nObrigado pelo contato! Ao enviar uma nova mensagem, o atendimento será reiniciado.`);
+    return;
+  }
+  // "cancelar", "voltar", "0" (fora do menu) = cancela fluxo atual e volta ao menu (mantém LGPD)
+  if (["cancelar", "voltar"].includes(t) || (t === "0" && sessao.estado !== "menu")) {
+    sessao.estado = "menu";
+    sessao.dadosParciais = {};
+    fotosTemp.delete(telefone);
+    await salvarSessao(sessao);
+    await enviarMensagem(jid, `↩️ Operação cancelada.`);
+    await enviarMenu(jid);
     return;
   }
   // Se estado é "atendente", o bot fica em silêncio (mensagem vai pro atendente humano)
@@ -175,12 +209,12 @@ export async function processarMensagemWA(telefone, nome, texto, midia = null, r
     sessao.dadosParciais = {};
     fotosTemp.delete(telefone);
     await salvarSessao(sessao);
-    await enviarMensagem(jid, MENU);
+    await enviarMenu(jid);
     return;
   }
   // Se estado é "menu" e a mensagem NÃO é uma opção válida — reexibir menu
   if (sessao.estado === "menu" && !MENU_OPCOES.includes(t)) {
-    await enviarMensagem(jid, MENU);
+    await enviarMenu(jid);
     return;
   }
   // Atalho: se o usuário está no meio de um fluxo e digita "menu", volta ao início
@@ -189,7 +223,7 @@ export async function processarMensagemWA(telefone, nome, texto, midia = null, r
     sessao.dadosParciais = {};
     fotosTemp.delete(telefone);
     await salvarSessao(sessao);
-    await enviarMensagem(jid, MENU);
+    await enviarMenu(jid);
     return;
   }
 
@@ -258,7 +292,7 @@ export async function processarMensagemWA(telefone, nome, texto, midia = null, r
     default:
       sessao.estado = "menu";
       await salvarSessao(sessao);
-      await enviarMensagem(jid, MENU);
+      await enviarMenu(jid);
   }
   } catch (err) {
     salvarErroWhatsApp({ telefone, estado: sessao?.estado, erro: err.message, contexto: { nome, texto: texto?.substring(0, 100), stack: err.stack?.substring(0, 300) } });
@@ -279,8 +313,8 @@ async function handleLgpd(sessao, opcao) {
     sessao.lgpdAceitoEm = new Date();
     sessao.estado = "menu";
     await salvarSessao(sessao);
-    await enviarMensagem(sessao._remoteJid,
-      `✅ Obrigado! Seu consentimento foi registrado.\n\n${MENU}`);
+    await enviarMensagem(sessao._remoteJid, `✅ Obrigado! Seu consentimento foi registrado.`);
+    await enviarMenu(sessao._remoteJid);
   } else if (opcao === "2") {
     // Usuário recusou — encerrar atendimento
     sessao.estado = "encerrado";
@@ -290,24 +324,13 @@ async function handleLgpd(sessao, opcao) {
       `Entendido. O atendimento foi encerrado.\n\nCaso mude de ideia, envie uma mensagem a qualquer momento para reiniciar.`);
   } else {
     // Resposta inválida — repetir
-    await enviarMensagem(sessao._remoteJid,
-      `Por favor, responda com o número da opção:\n\n*1* — Aceito os termos da Política de Privacidade\n*2* — Não aceito (o atendimento será encerrado)`);
+    await enviarListaSelecao(sessao._remoteJid, "Por favor, selecione uma opção:", "Responder", LGPD_SECOES);
   }
 }
 
 async function handleAtendente(sessao, texto) {
-  if (texto === "sair") {
-    // Encerra sessão completamente — próxima mensagem reinicia ciclo com LGPD
-    sessao.estado = "encerrado";
-    sessao.lgpdAceito = false;
-    sessao.ativo = false;
-    await salvarSessao(sessao);
-    await enviarMensagem(sessao._remoteJid,
-      `✅ Atendimento encerrado.\n\nObrigado pelo contato! Ao enviar uma nova mensagem, o atendimento será reiniciado.`);
-    return;
-  }
-  // Modo livre — bot não interfere, apenas registra (atendente humano responde)
-  // Silêncio intencional: a mensagem fica disponível para o atendente no WhatsApp
+  // "sair", "encerrar", "cancelar" e "voltar" já são tratados pelos guards globais
+  // Qualquer outra mensagem: silêncio intencional — atendente humano responde
 }
 
 async function handleMenu(sessao, opcao) {
@@ -328,7 +351,7 @@ async function handleMenu(sessao, opcao) {
     sessao.estado = "aguardando_assunto";
     sessao.dadosParciais = {};
     await salvarSessao(sessao);
-    await enviarMensagem(sessao._remoteJid, "📝 *Novo Chamado*\n\nQual é o assunto do chamado?\n_(ex: Erro no relatório de passagens)_");
+    await enviarMensagem(sessao._remoteJid, "📝 *Novo Chamado*\n\nQual é o assunto do chamado?\n_(ex: Erro no relatório de passagens)_\n\n💡 _Digite *cancelar* para voltar ao menu._");
 
   } else if (opcao === "2") {
     sessao.estado = "consultando_numero";
@@ -344,13 +367,21 @@ async function handleMenu(sessao, opcao) {
     sessao.estado = "aguardando_modulo_duvida";
     sessao.dadosParciais = {};
     await salvarSessao(sessao);
-    await enviarMensagem(sessao._remoteJid,
-      `🔎 *Dúvidas do Sistema*\n\nQual sistema você tem dúvida?\n\n*1* — AxHub (Trânsito)\n*2* — AxTon (Pesagem)\n*3* — AxCross (Cruzamentos)\n*0* — Qualquer / Não sei`);
+    await enviarListaSelecao(sessao._remoteJid,
+      `🔎 *Dúvidas do Sistema*\n\nQual sistema você tem dúvida?`,
+      "Ver sistemas",
+      [{ titulo: "Sistemas", opcoes: [
+        { id: "1", titulo: "AxHub", descricao: "Trânsito" },
+        { id: "2", titulo: "AxTon", descricao: "Pesagem" },
+        { id: "3", titulo: "AxCross", descricao: "Cruzamentos" },
+        { id: "0", titulo: "Qualquer / Não sei" },
+      ]}]
+    );
 
   } else if (opcao === "0") {
     sessao.estado = "atendente";
     await salvarSessao(sessao);
-    await enviarMensagem(sessao._remoteJid, "👤 *Modo Atendente*\n\nVocê está em contato direto com a equipe Axion. Um atendente responderá em breve.\n\nDigite *sair* a qualquer momento para encerrar o atendimento.");
+    await enviarMensagem(sessao._remoteJid, "👤 *Modo Atendente*\n\nVocê está em contato direto com a equipe Axion. Um atendente responderá em breve.\n\nDigite *cancelar* para voltar ao menu ou *sair* para encerrar o atendimento.");
 
   } else if (opcao === "5") {
     await iniciarFluxoCompras(sessao);
@@ -374,9 +405,13 @@ async function handleAssunto(sessao, texto) {
     "AxBlitz", "AxCross", "AxFlow", "AxHub", "AxionAPI",
     "AxOCR", "AxRadar", "AxSync", "AxTon", "Azure", "Codtran"
   ];
-  const lista = SISTEMAS.map((s, i) => `*${i + 1}* — ${s}`).join("\n");
-  await enviarMensagem(sessao._remoteJid,
-    `✅ Assunto registrado: *${texto}*\n\n🖥️ *Selecione o sistema relacionado:*\n\n${lista}\n\n*0* — Não se aplica / Pular`);
+  const opcoesSistemas = SISTEMAS.map((s, i) => ({ id: String(i + 1), titulo: s }));
+  opcoesSistemas.push({ id: "0", titulo: "Não se aplica / Pular" });
+  await enviarListaSelecao(sessao._remoteJid,
+    `✅ Assunto registrado: *${texto}*\n\n🖥️ Selecione o sistema relacionado:`,
+    "Ver sistemas",
+    [{ titulo: "Sistemas", opcoes: opcoesSistemas }]
+  );
 }
 
 async function handleSistema(sessao, opcao) {
@@ -418,18 +453,21 @@ async function handleDescricao(sessao, texto) {
   await salvarSessao(sessao);
 
   // Montar lista de categorias
-  let listaCats = "0 — Geral (padrão)";
+  let opcoesCats = [{ id: "0", titulo: "Geral (padrão)" }];
   try {
     const cats = await obterCategorias();
     if (cats?.length) {
-      listaCats = cats.map((c, i) => `*${i + 1}* — ${c.Name}`).join("\n");
-      // Salva mapa índice→id no cache de sessão (não no mongo)
+      opcoesCats = cats.map((c, i) => ({ id: String(i + 1), titulo: c.Name }));
+      opcoesCats.push({ id: "0", titulo: "Pular (Geral)" });
       sessao._catsCache = cats;
     }
   } catch (_) { /* usar padrão */ }
 
-  await enviarMensagem(sessao._remoteJid,
-    `📂 *Selecione a categoria do chamado:*\n\n${listaCats}\n\n*0* — Pular (Geral)`);
+  await enviarListaSelecao(sessao._remoteJid,
+    `📂 Selecione a categoria do chamado:`,
+    "Ver categorias",
+    [{ titulo: "Categorias", opcoes: opcoesCats }]
+  );
 }
 
 async function handleCategoria(sessao, opcao) {
@@ -502,8 +540,15 @@ async function handleFoto(sessao, opcao, midia) {
     `*Descrição:* ${sessao.dadosParciais.descricao?.substring(0, 200) || ""}${(sessao.dadosParciais.descricao?.length || 0) > 200 ? "..." : ""}\n` +
     `*Categoria:* ${sessao.dadosParciais.categoriaNome || "Geral"}\n` +
     `*Foto:* ${fotoStr}` +
-    sugestaoIA +
-    `\n\n*1* — Confirmar e abrir chamado\n*2* — Cancelar`
+    sugestaoIA
+  );
+  await enviarListaSelecao(sessao._remoteJid,
+    `O que deseja fazer?`,
+    "Confirmar ou cancelar",
+    [{ titulo: "Ação", opcoes: [
+      { id: "1", titulo: "✅ Confirmar", descricao: "Abrir chamado" },
+      { id: "2", titulo: "❌ Cancelar", descricao: "Descartar e voltar ao menu" },
+    ]}]
   );
 }
 
@@ -513,12 +558,20 @@ async function handleConfirmacao(sessao, opcao) {
     sessao.dadosParciais = {};
     fotosTemp.delete(sessao.telefone);
     await salvarSessao(sessao);
-    await enviarMensagem(sessao._remoteJid, "❌ Chamado cancelado.\n\nDigite *menu* para voltar ao início.");
+    await enviarMensagem(sessao._remoteJid, "↩️ Chamado cancelado.");
+    await enviarMenu(sessao._remoteJid);
     return;
   }
 
   if (opcao !== "1" && opcao !== "confirmar" && opcao !== "sim" && opcao !== "s") {
-    await enviarMensagem(sessao._remoteJid, "Digite *1* para confirmar ou *2* para cancelar.");
+    await enviarListaSelecao(sessao._remoteJid,
+      "Selecione uma opção:",
+      "Confirmar ou cancelar",
+      [{ titulo: "Ação", opcoes: [
+        { id: "1", titulo: "✅ Confirmar", descricao: "Abrir chamado" },
+        { id: "2", titulo: "❌ Cancelar", descricao: "Descartar" },
+      ]}]
+    );
     return;
   }
 
@@ -566,9 +619,9 @@ async function handleConfirmacao(sessao, opcao) {
       `📌 Assunto: ${assuntoFinal}\n` +
       `📊 Status: Aguardando atendimento\n\n` +
       `Você receberá atualizações aqui mesmo.\n` +
-      `🔗 Acompanhe: https://desk.axiontecnologia.com.br/Ticket/${ticketId}\n\n` +
-      `Digite *menu* para voltar ao início.`
+      `🔗 Acompanhe: https://desk.axiontecnologia.com.br/Ticket/${ticketId}`
     );
+    await enviarMenu(sessao._remoteJid);
   } catch (err) {
     salvarErroWhatsApp({ telefone: sessao.telefone, estado: "confirmando_ticket", erro: err.message, contexto: { assunto: sessao.dadosParciais?.assunto, categoriaId: sessao.dadosParciais?.categoriaId } });
     sessao.estado = "menu";
@@ -605,13 +658,14 @@ async function handleConsultaNumero(sessao, texto) {
       `*Prioridade:* ${ticket.PriorityName || "-"}\n` +
       `*Técnico:* ${ticket.TechFirstName ? `${ticket.TechFirstName} ${ticket.TechLastName || ""}`.trim() : "Não atribuído"}\n` +
       `*Aberto em:* ${ticket.Date ? new Date(ticket.Date).toLocaleDateString("pt-BR") : "-"}` +
-      ultimoComentario +
-      `\n\nDigite *menu* para voltar ao início.`
+      ultimoComentario
     );
+    await enviarMenu(sessao._remoteJid);
   } catch (err) {
     sessao.estado = "menu";
     await salvarSessao(sessao);
-    await enviarMensagem(sessao._remoteJid, `❌ Chamado #${numero} não encontrado ou você não tem acesso.\n\nDigite *menu* para voltar.`);
+    await enviarMensagem(sessao._remoteJid, `❌ Chamado #${numero} não encontrado ou você não tem acesso.`);
+    await enviarMenu(sessao._remoteJid);
   }
 }
 
@@ -658,8 +712,9 @@ async function handleRespondendoMensagem(sessao, texto, midia = null) {
     await salvarSessao(sessao);
 
     await enviarMensagem(sessao._remoteJid,
-      `✅ Resposta enviada com sucesso ao chamado *#${ticketId}*!\n\nDigite *menu* para voltar ao início.`
+      `✅ Resposta enviada com sucesso ao chamado *#${ticketId}*!`
     );
+    await enviarMenu(sessao._remoteJid);
   } catch (err) {
     sessao.estado = "menu";
     await salvarSessao(sessao);
@@ -680,9 +735,16 @@ async function handleModuloDuvida(sessao, opcao) {
     // → trata como se tivesse escolhido "qualquer" e já faz a busca
     const contexto = classificarMensagem(opcao);
     if (contexto) {
-      await enviarMensagem(sessao._remoteJid,
-        `💡 *${contexto.assunto}*\n\n${contexto.acao}\n\n` +
-        `Esta resposta ajudou?\n*1* — Sim!\n*2* — Não, quero abrir um chamado\n*3* — Tenho outra dúvida`);
+    await enviarMensagem(sessao._remoteJid, `💡 *${contexto.assunto}*\n\n${contexto.acao}`);
+    await enviarListaSelecao(sessao._remoteJid,
+      `Esta resposta ajudou?`,
+      "Responder",
+      [{ titulo: "Feedback", opcoes: [
+        { id: "1", titulo: "Sim, ajudou!" },
+        { id: "2", titulo: "Não, abrir chamado" },
+        { id: "3", titulo: "Tenho outra dúvida" },
+      ]}]
+    );
       sessao.dadosParciais.moduloDuvida = null;
       sessao.dadosParciais.ultimaDuvida = opcao;
       sessao.dadosParciais.ultimaResposta = contexto.acao.substring(0, 500);
@@ -691,7 +753,14 @@ async function handleModuloDuvida(sessao, opcao) {
       await salvarSessao(sessao);
       return;
     }
-    await enviarMensagem(sessao._remoteJid, "Digite *1* AxHub, *2* AxTon, *3* AxCross ou *0* para qualquer.");
+    await enviarListaSelecao(sessao._remoteJid, "Selecione o sistema:", "Ver sistemas",
+      [{ titulo: "Sistemas", opcoes: [
+        { id: "1", titulo: "AxHub", descricao: "Trânsito" },
+        { id: "2", titulo: "AxTon", descricao: "Pesagem" },
+        { id: "3", titulo: "AxCross", descricao: "Cruzamentos" },
+        { id: "0", titulo: "Qualquer / Não sei" },
+      ]}]
+    );
     return;
   }
   sessao.dadosParciais.moduloDuvida = MODULOS_DUVIDA[opcao];
@@ -712,7 +781,7 @@ async function handleDuvida(sessao, texto) {
   if (texto.trim() === "0") {
     sessao.estado = "menu";
     await salvarSessao(sessao);
-    await enviarMensagem(sessao._remoteJid, MENU);
+    await enviarMenu(sessao._remoteJid);
     return;
   }
 
@@ -737,15 +806,28 @@ async function handleDuvida(sessao, texto) {
     const origemTag = resultado.origem === "kb" ? "📚 Base de conhecimento" :
                       resultado.origem === "embedding" ? "🔎 Busca semântica" : "🤖 IA";
 
-    await enviarMensagem(sessao._remoteJid,
-      `💡 *${moduloNome}* — ${origemTag}\n\n${resposta}\n\n` +
-      `Esta resposta ajudou?\n*1* — Sim, obrigado!\n*2* — Não, quero abrir um chamado\n*3* — Tenho outra dúvida`);
+    await enviarMensagem(sessao._remoteJid, `💡 *${moduloNome}* — ${origemTag}\n\n${resposta}`);
+    await enviarListaSelecao(sessao._remoteJid,
+      `Esta resposta ajudou?`,
+      "Responder",
+      [{ titulo: "Feedback", opcoes: [
+        { id: "1", titulo: "Sim, obrigado!" },
+        { id: "2", titulo: "Não, abrir chamado" },
+        { id: "3", titulo: "Tenho outra dúvida" },
+      ]}]
+    );
 
   } catch (err) {
     sessao.estado = "menu";
     await salvarSessao(sessao);
-    await enviarMensagem(sessao._remoteJid,
-      `⚠️ Não consegui buscar uma resposta agora. Deseja abrir um chamado para o suporte?\n\n*1* — Sim, abrir chamado\n*0* — Voltar ao menu`);
+    await enviarListaSelecao(sessao._remoteJid,
+      `⚠️ Não consegui buscar uma resposta agora. Deseja abrir um chamado?`,
+      "Selecionar",
+      [{ titulo: "Opções", opcoes: [
+        { id: "1", titulo: "Sim, abrir chamado" },
+        { id: "0", titulo: "Voltar ao menu" },
+      ]}]
+    );
   }
 }
 
@@ -755,7 +837,8 @@ async function handleRespostaDuvida(sessao, opcao, textoCompleto) {
     sessao.estado = "menu";
     sessao.dadosParciais = {};
     await salvarSessao(sessao);
-    await enviarMensagem(sessao._remoteJid, `✅ Que bom que ajudou! 😊\n\nDigite *menu* para voltar ao início ou faça outra pergunta a qualquer momento.`);
+    await enviarMensagem(sessao._remoteJid, `✅ Que bom que ajudou! 😊`);
+    await enviarMenu(sessao._remoteJid);
 
   } else if (opcao === "2") {
     // Abrir chamado com a dúvida como contexto
@@ -777,7 +860,15 @@ async function handleRespostaDuvida(sessao, opcao, textoCompleto) {
     await enviarMensagem(sessao._remoteJid, `💬 *${moduloNome}* — Digite sua próxima dúvida:\n\nOu *0* para voltar ao menu.`);
 
   } else {
-    await enviarMensagem(sessao._remoteJid, "Digite *1* (ajudou), *2* (abrir chamado) ou *3* (nova dúvida).");
+    await enviarListaSelecao(sessao._remoteJid,
+      "Selecione uma opção:",
+      "Responder",
+      [{ titulo: "Feedback", opcoes: [
+        { id: "1", titulo: "Sim, ajudou!" },
+        { id: "2", titulo: "Abrir chamado" },
+        { id: "3", titulo: "Outra dúvida" },
+      ]}]
+    );
   }
 }
 
