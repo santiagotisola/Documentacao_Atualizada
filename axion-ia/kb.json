@@ -26,6 +26,15 @@
     "sistema": "AxHub",
     "modulo": "Operações → Aferições → Triagem"
   },
+  "axhub_bloqueio_limite_passagens": {
+    "keywords": ["limite horas", "bloqueio importação", "passagem rejeitada", "limite passagens", "defasagem", "importação bloqueada", "DesabilitarLimiteHorasImportacao", "dados rejeitados", "equipamento não importa"],
+    "assunto": "Bloqueio por Limite de Horas na Importação de Passagens",
+    "causa": "O sistema rejeita passagens/infrações quando a defasagem entre a captura (DataHoraPassagem) e o momento do envio excede o limite configurado em TBConfiguracoes. O controle funciona em 3 níveis: Equipamento (DesabilitarLimiteHorasImportacao), Grupo (mesmo campo em TBGrupoEquipamentos), e Global (TBConfiguracoes). Mesmo com flag desabilitado, pode bloquear por: cache não atualizado, config global reativada, ou limite do fabricante.",
+    "acao": "DIAGNÓSTICO: (1) Verificar flag no banco: SELECT DesabilitarLimiteHorasImportacao FROM TBEquipamentos WHERE Codigo='X'. (2) Verificar config global: SELECT * FROM TBConfiguracoes WHERE TipoConfiguracao LIKE '%Limite%'. (3) Verificar se é erro do fabricante (código HTTP 429). (4) Reiniciar application pool se flag foi alterado recentemente (cache). (5) Para equipamentos offline/blitz: SEMPRE desabilitar o limite.",
+    "sistema": "AxHub",
+    "modulo": "Equipamentos / Configurações / Importação",
+    "status": "Em investigação"
+  },
   "erro_404_imagem": {
     "keywords": ["404", "imagem", "salvar"],
     "assunto": "Erro ao salvar imagem",
