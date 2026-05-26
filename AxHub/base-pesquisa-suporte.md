@@ -157,8 +157,17 @@
 ### Aferições
 - **Caminho:** Menu lateral → Operações → **Aferições**
 - **O que faz:** Controle de aferições e certificados INMETRO dos equipamentos
-- **Campos:** Equipamento, Nº Certificado, Data Emissão, Data Vencimento, Status (Válido/Vencendo/Vencido)
+- **Campos:** Equipamento, Nº Certificado, Data Emissão, Data Vencimento, Status (Válido/Vencendo/Vencido), Status Lacre (Lacrado/Lacre Rompido), Data Lacre Rompido
 - **IMPORTANTE:** Equipamento com aferição vencida não gera infrações válidas
+
+#### Lacre Rompido (Motivo 003) — ATENÇÃO
+- **Comportamento atual:** Ao marcar "Lacre Rompido", o sistema descarta TODAS as infrações de VELOCIDADE da vigência inteira (DataAfericao até DataVencimento)
+- **Campo DataLacreRompido:** Obrigatório na tela mas NÃO é consumido pela triagem (feature incompleta)
+- **Não adianta alterar a data** — o valor é ignorado na lógica de descarte
+- **Escopo:** Apenas infrações de VELOCIDADE. Avanço de sinal, faixa exclusiva, conversão NÃO são afetadas pelo lacre
+- **Regulamentação:** Portaria INMETRO 492/2021 — medições antes do rompimento são válidas (lacre estava íntegro)
+- **Workaround:** Criar nova aferição eventual (Lacrada) com DataAfericao = data do rompimento. Isso "separa" os períodos
+- **Recuperar descartadas:** Triagem → filtrar Status=Descartada → Reabrir → Reprocessar
 
 ### Faixas
 - **Caminho:** Menu lateral → Operações → **Faixas**

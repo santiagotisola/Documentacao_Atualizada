@@ -1,4 +1,31 @@
 {
+  "axhub_lacre_rompido_descarte": {
+    "keywords": ["lacre rompido", "lacre", "descarte", "motivo 003", "aferição rompida", "descarte total", "DataLacreRompido", "infrações descartadas", "velocidade descartada", "lacre violado"],
+    "assunto": "Lacre Rompido — Descarte de Infrações por Motivo 003",
+    "causa": "O campo DataLacreRompido NÃO é consumido na triagem. Ao marcar status 'Lacre Rompido', o sistema descarta TODAS as infrações de velocidade da vigência inteira (DataAfericao a DataVencimento), ignorando a data informada do rompimento. Feature incompleta desde Jul/2025.",
+    "acao": "WORKAROUND (até correção): Registrar nova aferição eventual (Lacrada) com DataAfericao = data do rompimento. A nova aferição 'separa' os períodos. ATENÇÃO: Informar a data na tela NÃO resolve — o campo não é usado pela triagem. Infrações não-velocidade (avanço sinal, faixa) NÃO são afetadas pelo lacre.",
+    "regulamentacao": "Portaria INMETRO 492/2021 — medições com lacre íntegro são válidas. Descarte deveria ser APENAS a partir da data do rompimento, preservando período anterior. Correção em backlog de desenvolvimento.",
+    "sistema": "AxHub",
+    "modulo": "Operações → Aferições → Triagem",
+    "status": "Pendente correção (campo existe, consumo não implementado)"
+  },
+  "axhub_lacre_rompido_regulamentacao": {
+    "keywords": ["portaria 492", "INMETRO", "regulamentação lacre", "validade medição", "velocidade lacre", "metrologia", "selagem metrológica"],
+    "assunto": "Regulamentação INMETRO sobre Lacre Metrológico (Portaria 492/2021)",
+    "causa": "Dúvida sobre validade de infrações com lacre rompido e qual o comportamento correto",
+    "acao": "Conforme Portaria INMETRO 492/2021: (1) Lacre garante integridade metrológica entre verificações. (2) Medições ANTES do rompimento são VÁLIDAS (lacre estava íntegro). (3) Medições APÓS rompimento são INVÁLIDAS (sem garantia). (4) Apenas VELOCIDADE depende de lacre — avanço de sinal, faixa exclusiva, conversão NÃO são afetados. (5) O motorista NÃO é prejudicado ao manter infrações do período válido.",
+    "regulamentacao": "Portaria INMETRO 492/2021, Resolução CONTRAN 798/2021, Portaria INMETRO 544/2014",
+    "sistema": "AxHub",
+    "modulo": "Operações → Aferições"
+  },
+  "axhub_lacre_rompido_workaround": {
+    "keywords": ["workaround lacre", "contornar descarte", "recuperar infração descartada", "reprocessar", "aferição eventual"],
+    "assunto": "Workaround para Lacre Rompido descartando tudo",
+    "causa": "Sistema descarta todas infrações de velocidade ao marcar lacre rompido, mas operação quer preservar período anterior",
+    "acao": "PASSO A PASSO: (1) Criar nova aferição EVENTUAL para o equipamento. (2) DataAfericao da nova = data do rompimento do lacre. (3) Status Lacre da nova = 'Lacrado'. (4) DataVencimento = manter prazo compatível. (5) A triagem usará a nova aferição (maior DataVencimento) para infrações posteriores. (6) Infrações anteriores ao rompimento que já foram descartadas: Triagem → filtrar Status=Descartada → Reabrir → Reprocessar. CUIDADO: Este é um workaround temporário até a correção definitiva ser implementada.",
+    "sistema": "AxHub",
+    "modulo": "Operações → Aferições → Triagem"
+  },
   "erro_404_imagem": {
     "keywords": ["404", "imagem", "salvar"],
     "assunto": "Erro ao salvar imagem",

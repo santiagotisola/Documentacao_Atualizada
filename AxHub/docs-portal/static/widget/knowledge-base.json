@@ -473,13 +473,51 @@
       "related": [
         "certificado-vencendo",
         "cadastro-operacoes",
-        "cadastrar-equipamento"
+        "cadastrar-equipamento",
+        "lacre-rompido-descarte"
       ],
       "dbTables": [
         "TBAfericoes",
         "TBFaixasAfericoes",
         "TBDocumentosAfericoes"
       ]
+    },
+    {
+      "id": "lacre-rompido-descarte",
+      "module": "Operações",
+      "title": "Lacre Rompido — Descarte de Infrações (Motivo 003)",
+      "keywords": [
+        "lacre rompido",
+        "lacre",
+        "descarte",
+        "motivo 003",
+        "DataLacreRompido",
+        "infrações descartadas",
+        "velocidade descartada",
+        "lacre violado",
+        "aferição rompida"
+      ],
+      "path": "Menu lateral → Operações → Aferições → Status Lacre",
+      "content": "Ao marcar Status Lacre como 'Lacre Rompido', o sistema descarta TODAS as infrações de velocidade da vigência inteira. ATENÇÃO: O campo 'Data Lacre Rompido' é obrigatório na tela mas NÃO é usado pela triagem (feature incompleta). Infrações não-velocidade (avanço sinal, faixa) NÃO são afetadas. Conforme Portaria INMETRO 492/2021, o correto seria descartar apenas a partir da data do rompimento.",
+      "steps": [
+        "O campo DataLacreRompido NÃO é consumido pela triagem",
+        "Infrações de velocidade são descartadas para TODA a vigência",
+        "Infrações de avanço de sinal/faixa NÃO são afetadas pelo lacre",
+        "WORKAROUND: Criar nova aferição eventual (Lacrada) com DataAfericao = data do rompimento",
+        "Para reabrir infrações descartadas: Triagem → filtrar Descartadas → Reabrir"
+      ],
+      "docUrl": "operacoes/afericoes",
+      "related": [
+        "afericoes",
+        "triagem-infracoes"
+      ],
+      "dbTables": [
+        "TBAfericoes",
+        "TBFaixasAfericoes",
+        "TBInfracoes",
+        "TBMotivosDescartes"
+      ],
+      "regulamentacao": "Portaria INMETRO 492/2021 — medições com lacre íntegro são válidas. Correção pendente no backlog."
     },
     {
       "id": "monitoramento-online",
