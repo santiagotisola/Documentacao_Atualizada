@@ -30,10 +30,19 @@
     "keywords": ["bloqueio automático", "bloqueio operação", "10 falhas", "falhas consecutivas", "data antes da operação", "antes do início", "início da operação", "operação bloqueada", "desbloqueio não resolve", "bloqueia novamente", "THE128M", "validação data"],
     "assunto": "Bloqueio Automático por Falhas de Validação de Data da Operação",
     "causa": "O sistema valida que DataHoraPassagem >= Operação.DataInicial. Se o fabricante envia passagens com data ANTERIOR ao início da operação, cada passagem gera uma falha de validação. Após 10 falhas consecutivas → Bloqueio Automático. Desbloquear manualmente NÃO resolve porque o fabricante continua reenviando os mesmos dados antigos (retry automático). Rebloqueio acontece em 2-5 minutos.",
-    "acao": "SOLUÇÕES: (1) IMEDIATA: Ajustar DataInicial da operação para abranger a data das passagens, SE confirmado que equipamento operou nesse período. (2) Contatar fabricante para descartar buffer de passagens anteriores ao início da operação. (3) NÃO ADIANTA apenas desbloquear manualmente — vai rebloquear. ATENÇÃO JURÍDICA: Infrações só são válidas se a Portaria do órgão cobre o período. DESENVOLVIMENTO FUTURO: Sistema deveria DESCARTAR passagens anteriores ao início (com log) ao invés de BLOQUEAR a operação inteira.",
+    "acao": "SOLUÇÕES: (1) IMEDIATA: Ajustar DataInicial da operação para abranger a data das passagens, SE confirmado que equipamento operou nesse período. (2) Contatar fabricante (FOCALLE ou VIZENTEC) para descartar buffer de passagens anteriores ao início da operação. Vizentec WhatsApp: +55 62 99636-0699. (3) NÃO ADIANTA apenas desbloquear manualmente — vai rebloquear em ~2 min. ATENÇÃO JURÍDICA: Infrações só são válidas se a Portaria do órgão cobre o período. DESENVOLVIMENTO FUTURO: Sistema deveria DESCARTAR passagens anteriores ao início (com log) ao invés de BLOQUEAR a operação inteira.",
     "sistema": "AxHub",
     "modulo": "Operações → Bloqueio",
     "status": "Em análise — correção sistêmica pendente"
+  },
+  "axhub_fabricante_limites_dados": {
+    "keywords": ["fabricante", "FOCALLE", "VIZENTEC", "limite dados", "rate limit", "retry", "buffer", "reenvio", "API fabricante", "token fabricante", "passagem rejeitada", "fila envio"],
+    "assunto": "Limites de Dados e Comportamento dos Fabricantes (FOCALLE/VIZENTEC)",
+    "causa": "Fabricantes de equipamentos (FOCALLE e VIZENTEC) transmitem passagens ao AxHub via API REST autenticada por token. Não há documentação pública de limites. Comportamento observado: retry automático e indefinido (30+ dias), intervalo ~2 min, sem backoff exponencial, fabricante NÃO desiste/descarta sozinho.",
+    "acao": "PARA RESOLVER PROBLEMAS DE REENVIO: Contatar diretamente a equipe técnica do fabricante e solicitar limpeza do buffer de retry para o equipamento específico. Vizentec WhatsApp: +55 62 99636-0699. FOCALLE: sem contato público disponível (site fora do ar). IMPORTANTE: O fabricante só para de reenviar quando (1) AxHub aceita, (2) alguém intervém no servidor do fabricante, ou (3) equipamento é desativado.",
+    "sistema": "AxHub",
+    "modulo": "Integração / Fabricantes",
+    "status": "Documentação interna — fabricantes não publicam specs"
   },
   "erro_404_imagem": {
     "keywords": ["404", "imagem", "salvar"],

@@ -370,10 +370,158 @@ FROM (
 
 ---
 
-## 10. Pontos de Atenção para o Suporte
+## 10. Pesquisa: Limites de Dados no Fabricante
+
+### 10.1. Identificação do Fabricante
+
+| Dado | Valor |
+|------|-------|
+| **Site** | STRANS (Teresina-PI) |
+| **Órgão** | Superintendência Municipal de Transportes e Trânsito de Teresina |
+| **Fabricantes do site** | FOCALLE e VIZENTEC |
+| **Equipamento** | THE128M (prefixo THE = Teresina) |
+| **Total equipamentos STRANS** | 58 |
+| **Grupos** | FOCALLE, VIZENTEC, FX EXCLUSIVA |
+
+### 10.2. Mecanismo de Integração AxHub ↔ Fabricante
+
+```
+┌──────────────────────────────────────────────────────────────────────────┐
+│  FLUXO DE DADOS: EQUIPAMENTO → FABRICANTE → AXHUB                        │
+├──────────────────────────────────────────────────────────────────────────┤
+│                                                                          │
+│  1. EQUIPAMENTO (radar/câmera) captura passagem + imagem                 │
+│     └─ Armazena localmente (MiniPC / Controlador)                        │
+│                                                                          │
+│  2. CONTROLADOR DO FABRICANTE envia para SERVIDOR DO FABRICANTE           │
+│     └─ Protocolo proprietário (FOCALLE/VIZENTEC)                         │
+│     └─ Buffer local: acumula se sem internet                             │
+│                                                                          │
+│  3. SERVIDOR DO FABRICANTE → API DO AXHUB (POST)                         │
+│     └─ Autenticação: Token exclusivo por fabricante (TBFabricantes)       │
+│     └─ Payload: dados da passagem + imagem (possivelmente criptografada) │
+│     └─ Se AxHub rejeita (HTTP 4xx) → entra em fila de retry             │
+│                                                                          │
+│  4. AXHUB VALIDA:                                                        │
+│     ├─ Token válido?                                                      │
+│     ├─ Equipamento cadastrado?                                            │
+│     ├─ DataHoraPassagem >= Operação.DataInicial?  ← AQUI FALHA           │
+│     ├─ DataHoraPassagem <= Operação.DataFinal?                            │
+│     └─ Outros checks (duplicata, faixa, etc.)                            │
+│                                                                          │
+│  5. REJEIÇÃO → Fabricante recebe erro → RETENTA                          │
+│     └─ Loop infinito se dados são intrinsecamente inválidos              │
+│                                                                          │
+└──────────────────────────────────────────────────────────────────────────┘
+```
+
+### 10.3. Dados Conhecidos sobre os Fabricantes
+
+#### FOCALLE
+
+| Aspecto | Informação |
+|---------|------------|
+| **Sede** | Goiânia-GO |
+| **Sites que usam** | IBAMETRO, STRANS, DETRANPI, DERSE, economia |
+| **Protocolo** | API REST com token (proprietário) |
+| **Documentação pública** | ❌ Não disponível (site focalle.com.br fora do ar) |
+| **Rate limit documentado** | Não publicado |
+| **Retry policy** | Automático — reenvia dados rejeitados indefinidamente (baseado no comportamento observado) |
+| **Buffer offline** | Equipamentos acumulam localmente e enviam ao reconectar |
+| **Volume referência** | Equipamento BA602C: 2.600+ passagens/dia ao reconectar após 17 dias offline |
+| **Imagem** | Pode ser criptografada (campo `ImagemCriptografada` em TBFabricantes) |
+
+#### VIZENTEC
+
+| Aspecto | Informação |
+|---------|------------|
+| **Sede** | Goiânia-GO |
+| **Sites que usam** | STRANS, DETRANPI |
+| **Protocolo** | API REST com token (proprietário) |
+| **Documentação pública** | ❌ Não disponível (site tem apenas marketing) |
+| **Produtos** | Radares fixos (laço/laser), lombadas eletrônicas, OCR |
+| **Rate limit documentado** | Não publicado |
+| **Retry policy** | Automático (comportamento observado: rebloqueia 2 min após desbloqueio) |
+| **Buffer offline** | Equipamentos (MiniPC) acumulam e sincronizam |
+| **Contato técnico** | WhatsApp: +55 62 99636-0699 (site) |
+| **Imagem** | Própria câmera + iluminador integrado |
+
+### 10.4. Padrões de Transmissão Observados no AxHub
+
+| Padrão | Comportamento | Evidência |
+|--------|---------------|-----------|
+| **Sync após offline** | Equipamento acumula passagens localmente e envia TUDO ao reconectar | KB: "ao reconectar ele começará a enviar tudo automaticamente, podendo levar algum tempo" |
+| **Retry automático** | Fabricante reenvia passagens rejeitadas automaticamente | THE128M: rebloqueou 2 min após desbloqueio → fabricante reenviou imediatamente |
+| **Intervalo de retry** | Estimado: 1-5 minutos entre tentativas | Desbloqueio às 13:30:59, rebloqueio às 13:32:48 (< 2 min) |
+| **Sem expiração de retry** | Fabricante NÃO desiste após N tentativas (ou N é muito alto) | Dados de 30 dias atrás (26/04) ainda sendo reenviados em 26/05 |
+| **Volume por lote** | Não determinado — pode ser 1 passagem por request ou batch | Precisa verificar logs da API |
+| **Heartbeat** | Equipamentos enviam heartbeat separado (TBHeartbeatEquipamentos) | Monitoramento de conectividade independente do envio de passagens |
+
+### 10.5. Limites Conhecidos no Lado AxHub
+
+| Limite | Valor | Onde |
+|--------|-------|------|
+| **Validação temporal** | DataHoraPassagem >= Operação.DataInicial | Obrigatório (sem margem) |
+| **Validação temporal** | DataHoraPassagem <= Operação.DataFinal | Obrigatório |
+| **Limite de horas (import)** | Configurável em TBConfiguracoes | Pode ser desabilitado por equip/grupo |
+| **Bloqueio automático** | 10 falhas consecutivas → bloqueia operação | Proteção contra dados inválidos recorrentes |
+| **Autenticação** | Token por fabricante (TBFabricantes.Token) | Sem token = rejeição total |
+| **Unicidade** | Não determinado (verificar constraint) | Previne duplicatas |
+| **Payload máximo** | Não determinado (verificar IIS/Nginx config) | Pode afetar lotes com imagens grandes |
+
+### 10.6. Conclusão da Pesquisa de Fabricante
+
+```
+┌───────────────────────────────────────────────────────────────────────────┐
+│  RESULTADO DA PESQUISA                                                     │
+├───────────────────────────────────────────────────────────────────────────┤
+│                                                                           │
+│  ❌ FOCALLE e VIZENTEC NÃO publicam documentação técnica de API            │
+│  ❌ Não há especificação pública de rate limits, buffer size, ou retry      │
+│  ❌ Sites institucionais não possuem área de desenvolvedores/docs           │
+│                                                                           │
+│  ✅ O QUE SABEMOS (por comportamento observado):                           │
+│     • Retry é AUTOMÁTICO e INDEFINIDO (30+ dias reenviando)               │
+│     • Intervalo de retry: ~2 minutos (rápido)                             │
+│     • Fabricante NÃO descarta dados por conta própria                     │
+│     • Não há backoff exponencial evidente                                 │
+│     • O fabricante só para quando o AxHub ACEITA ou quando alguém         │
+│       intervém manualmente no servidor do fabricante                       │
+│                                                                           │
+│  📞 AÇÃO NECESSÁRIA:                                                       │
+│     • Contatar equipe técnica FOCALLE/VIZENTEC diretamente                │
+│     • Solicitar: limpeza do buffer de retry para THE128M                  │
+│     • Perguntar: é possível configurar data mínima de envio?              │
+│     • Perguntar: quantas passagens de 26/04 estão pendentes?              │
+│     • Vizentec WhatsApp: +55 62 99636-0699                                │
+│                                                                           │
+└───────────────────────────────────────────────────────────────────────────┘
+```
+
+### 10.7. Recomendação Técnica para o Fabricante
+
+**Mensagem sugerida para enviar ao fabricante:**
+
+> Prezados,
+>
+> O equipamento THE128M (STRANS/Teresina) está com bloqueio automático no AxHub devido a passagens com data de **26/04/2026** sendo reenviadas, porém a operação no sistema só inicia em **27/04/2026**.
+>
+> Solicitamos:
+> 1. Verificar no servidor de vocês quantas passagens de THE128M com data **anterior a 27/04/2026** estão na fila de retry
+> 2. **Descartar/purgar** essas passagens do buffer de reenvio, pois nunca serão aceitas pelo sistema
+> 3. Confirmar: após a limpeza, o equipamento voltará a operar normalmente?
+> 4. Informar: é possível configurar uma "data mínima de envio" para evitar reenvio de dados antigos?
+>
+> Enquanto as passagens antigas continuarem sendo reenviadas, o sistema bloqueará automaticamente a cada 10 tentativas, impossibilitando a operação normal.
+
+---
+
+## 11. Pontos de Atenção para o Suporte
 
 1. **DESBLOQUEAR MANUALMENTE NÃO RESOLVE** — o fabricante vai reenviar e bloquear novamente
 2. **O erro NÃO é sobre "Limite de Horas"** — é sobre data ANTES do início da operação
 3. **O dado de 26/04 pode estar em loop de retry no fabricante** — precisa ser descartado na origem
 4. **Verificar a Portaria do órgão autuador** antes de ajustar a data da operação — infração só é válida se a operação estiver autorizada oficialmente
 5. **Se o equipamento foi instalado antes da formalização** — situação comum em implantações novas (equipamento fica "em teste" antes da operação oficial)
+6. **Fabricante (FOCALLE ou VIZENTEC)** — contatar diretamente para limpar buffer
+7. **Vizentec WhatsApp técnico:** +55 62 99636-0699
