@@ -611,3 +611,38 @@ R: Verificar se o perfil do usuário tem permissão "Visualizar" no módulo Rela
 5. Definir senha temporária e comunicar ao usuário
 **Resultado:** Cadastro realizado com sucesso. Usuário com acesso liberado.
 **Palavras-chave:** sem cadastro, criar usuário, liberar acesso, novo usuário, não consegue entrar, usuário não existe
+
+---
+
+### Bloqueio Automático de Operação
+
+**Chamado:** Equipamento THE128M bloqueado | Desbloqueio não resolve
+**Situação:** Equipamento THE128M (STRANS/Teresina) com bloqueio automático. Desbloqueio manual pelo operador resultou em rebloqueio em 2 minutos. Mensagem: "Bloqueio automatico apos 10 falhas consecutivas de validacao. Ultimo erro: A data e hora (26/04/2026 14:40:55) ocorrem antes o início da operação do equipamento 27/04/2026 00:00:00"
+**Análise:** Fabricante (FOCALLE ou VIZENTEC) está reenviando passagens com data de 26/04/2026, mas a operação no AxHub só inicia em 27/04/2026. O sistema valida DataHoraPassagem >= Operação.DataInicial. Após 10 falhas consecutivas → bloqueio automático. Fabricante faz retry indefinido (~2 min intervalo, 30+ dias), por isso desbloquear manualmente NÃO resolve.
+**Causa:** Passagens capturadas antes da oficialização da operação. Equipamento operou em 26/04 mas operação só foi registrada a partir de 27/04. Dados ficaram no buffer do fabricante e estão em loop de reenvio.
+**Ação realizada:**
+1. Identificar na aba Bloqueio: data da passagem rejeitada vs DataInicial da operação
+2. **OPÇÃO A (ajustar data):** Alterar DataInicial da operação para 26/04/2026 (se confirmado que equipamento já operava)
+3. **OPÇÃO B (fabricante):** Contatar fabricante para limpar buffer de passagens anteriores a 27/04. Vizentec WhatsApp: +55 62 99636-0699
+4. **NÃO** desbloquear manualmente sem resolver a causa raiz
+5. ATENÇÃO: Se ajustar data, verificar se Portaria do órgão cobre o período — infração só é válida se operação autorizada oficialmente
+**Resultado:** Ação pendente — requer intervenção no fabricante ou ajuste da operação.
+**Palavras-chave:** bloqueio automático, 10 falhas, antes do início da operação, desbloqueio não resolve, bloqueia novamente, fabricante reenvio, retry, THE128M, validação data, data antes operação
+
+---
+
+### Fabricantes — Reenvio Persistente de Dados
+
+**Chamado:** Equipamento bloqueia repetidamente | Fabricante não para de enviar dados antigos
+**Situação:** Equipamentos de diferentes sites apresentando rebloqueio após desbloqueio manual. Fabricantes FOCALLE e VIZENTEC continuam reenviando dados rejeitados indefinidamente.
+**Análise:** Fabricantes fazem retry automático de passagens rejeitadas. Comportamento observado: intervalo ~2 min, sem backoff exponencial, 30+ dias reenviando os mesmos dados. Não há documentação pública de limites ou configurações de retry.
+**Causa:** Mecanismo de retry no servidor do fabricante. O fabricante armazena dados não aceitos e retenta indefinidamente até AxHub aceitar ou intervenção manual.
+**Ação realizada:**
+1. Contatar equipe técnica do fabricante diretamente
+2. Solicitar: limpeza do buffer de retry para o equipamento específico
+3. Perguntar: quantas passagens pendentes? É possível configurar data mínima?
+4. Vizentec WhatsApp: +55 62 99636-0699
+5. FOCALLE: contato via canais internos (site institucional indisponível)
+6. Em último caso: Gerar Novo Token bloqueia TODAS transmissões do fabricante (usar com cautela)
+**Resultado:** Dependente de ação do fabricante — sem intervenção deles, retry continua indefinidamente.
+**Palavras-chave:** fabricante, FOCALLE, VIZENTEC, retry, reenvio, buffer, dados antigos, limite dados, rate limit, API fabricante, token, passagem rejeitada

@@ -2483,6 +2483,89 @@
         "especie-veiculo"
       ],
       "dbTables": []
+    },
+    {
+      "id": "operacoes-bloqueio-automatico",
+      "title": "Bloqueio Automático de Operação",
+      "module": "Operações",
+      "keywords": [
+        "bloqueio",
+        "bloqueio automatico",
+        "operação bloqueada",
+        "10 falhas",
+        "falhas consecutivas",
+        "desbloqueio não resolve",
+        "bloqueia novamente",
+        "data antes da operação",
+        "antes do início",
+        "validação data",
+        "fabricante reenviando"
+      ],
+      "content": "Bloqueio automático ocorre após 10 falhas consecutivas de validação. Causa mais comum: fabricante envia passagens com data ANTERIOR ao início da operação (DataHoraPassagem < Operação.DataInicial). DESBLOQUEAR MANUALMENTE NÃO RESOLVE — fabricante reenvia em ~2 minutos e rebloqueia. Soluções: (1) Ajustar DataInicial da operação se equipamento já operava antes da data cadastrada. (2) Contatar fabricante (FOCALLE/VIZENTEC) para limpar buffer de retry. (3) Desenvolvimento: sistema deveria DESCARTAR passagens anteriores ao invés de BLOQUEAR. ATENÇÃO JURÍDICA: infrações só são válidas se Portaria do órgão cobre o período.",
+      "steps": [
+        "NÃO desbloquear manualmente — vai rebloquear em minutos",
+        "Verificar qual a data da passagem rejeitada vs DataInicial da operação",
+        "Se equipamento operava antes da data cadastrada: ajustar DataInicial em Operações → editar a operação",
+        "Se dados são de antes da instalação oficial: contatar fabricante para limpar buffer de retry",
+        "Vizentec WhatsApp técnico: +55 62 99636-0699",
+        "Monitorar após ação — se não bloquear em 10 minutos, resolvido",
+        "Registrar evento em Operações → Eventos de Equipamentos"
+      ],
+      "path": "Operações → Bloqueio",
+      "docUrl": "operacoes/cadastro-operacoes",
+      "related": [
+        "operacoes-cadastro-operacoes",
+        "equipamento-offline",
+        "cadastros-basicos-fabricantes"
+      ],
+      "dbTables": [
+        "TBOperacoes",
+        "TBEquipamentos",
+        "TBPassagens",
+        "TBFabricantes"
+      ]
+    },
+    {
+      "id": "fabricantes-limites-dados",
+      "title": "Fabricantes — Limites de Dados e Retry",
+      "module": "Equipamentos",
+      "keywords": [
+        "fabricante",
+        "FOCALLE",
+        "VIZENTEC",
+        "limite dados",
+        "rate limit",
+        "retry",
+        "buffer",
+        "reenvio",
+        "API fabricante",
+        "token",
+        "passagem rejeitada",
+        "fila envio",
+        "dados antigos"
+      ],
+      "content": "Fabricantes (FOCALLE e VIZENTEC) transmitem passagens via API REST com token. Comportamento: retry automático e INDEFINIDO (30+ dias reenviando), intervalo ~2 min, sem backoff, NÃO desistem sozinhos. Fabricante só para quando AxHub aceita ou intervenção manual no servidor do fabricante. Equipamentos offline acumulam dados localmente e enviam TUDO ao reconectar (pode levar horas). Token: TBFabricantes → Gerar Novo Token invalida anterior imediatamente.",
+      "steps": [
+        "Para problemas de reenvio: contatar equipe técnica do fabricante diretamente",
+        "Vizentec WhatsApp: +55 62 99636-0699",
+        "Solicitar: limpeza do buffer de retry para o equipamento específico",
+        "Perguntar: quantas passagens pendentes no buffer?",
+        "Perguntar: é possível configurar data mínima de envio?",
+        "NUNCA gerar novo token sem comunicar o fabricante — bloqueia todas as transmissões",
+        "Se precisa bloquear fabricante emergencialmente: Gerar Novo Token sem comunicar"
+      ],
+      "path": "Equipamentos → Fabricantes",
+      "docUrl": "cadastros-basicos/fabricantes",
+      "related": [
+        "operacoes-bloqueio-automatico",
+        "equipamento-offline",
+        "cadastros-basicos-equipamentos"
+      ],
+      "dbTables": [
+        "TBFabricantes",
+        "TBEquipamentos",
+        "TBModeloEquipamentos"
+      ]
     }
   ]
 }

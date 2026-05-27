@@ -3129,6 +3129,92 @@
         "TBEnquadramentos",
         "TBInfracoesEnquadramentos"
       ]
+    },
+    {
+      "id": "bloqueio-automatico-operacao",
+      "module": "Operações",
+      "title": "Bloqueio Automático de Operação por Validação de Data",
+      "keywords": [
+        "bloqueio",
+        "bloqueio automatico",
+        "operação bloqueada",
+        "10 falhas",
+        "falhas consecutivas",
+        "desbloqueio",
+        "bloqueia novamente",
+        "data antes",
+        "antes do início",
+        "validação data",
+        "fabricante",
+        "retry",
+        "reenvio"
+      ],
+      "path": "Menu lateral → Operações → Cadastro de Operações → aba Bloqueio",
+      "content": "Bloqueio automático ocorre após 10 falhas consecutivas de validação de passagens. Causa principal: fabricante envia passagens com DataHoraPassagem ANTERIOR à DataInicial da operação. O sistema valida DataHoraPassagem >= Operação.DataInicial. Exemplo real: equipamento THE128M (STRANS/Teresina) com passagens de 26/04/2026 e operação iniciando em 27/04/2026. CRÍTICO: desbloquear manualmente NÃO resolve — fabricante reenvia os mesmos dados em ~2 minutos e rebloqueia automaticamente. Fabricantes FOCALLE e VIZENTEC fazem retry indefinido (30+ dias), sem backoff exponencial.",
+      "steps": [
+        "NÃO desbloquear manualmente sem resolver a causa — vai rebloquear em minutos",
+        "Identificar: qual a data da passagem rejeitada (campo 'Último erro' na aba Bloqueio)",
+        "Comparar com DataInicial da operação do equipamento",
+        "OPÇÃO A (imediata): Se o equipamento já operava antes da data cadastrada, ajustar DataInicial da operação para abranger as passagens",
+        "OPÇÃO B (fabricante): Contatar fabricante para limpar buffer de retry com dados antigos. Vizentec: +55 62 99636-0699",
+        "OPÇÃO C (aguardar): Em alguns casos raros, o fabricante pode esgotar as retentativas sozinho — mas pode levar semanas",
+        "ATENÇÃO JURÍDICA: Infrações só são válidas se a Portaria do órgão autuador cobre o período da data alterada",
+        "Após resolver, monitorar por 10+ minutos — se não rebloquear, está resolvido",
+        "Registrar ação em Operações → Eventos de Equipamentos"
+      ],
+      "docUrl": "operacoes/cadastro-operacoes",
+      "related": [
+        "equipamento-offline",
+        "sincronismo-equipamento-blitz"
+      ],
+      "dbTables": [
+        "TBOperacoes",
+        "TBEquipamentos",
+        "TBPassagens",
+        "TBFabricantes"
+      ]
+    },
+    {
+      "id": "fabricantes-api-retry",
+      "module": "Equipamentos",
+      "title": "Fabricantes — Comportamento de API e Retry de Dados",
+      "keywords": [
+        "fabricante",
+        "FOCALLE",
+        "VIZENTEC",
+        "API",
+        "token",
+        "retry",
+        "reenvio",
+        "buffer",
+        "dados antigos",
+        "limite",
+        "rate limit",
+        "passagem rejeitada",
+        "fila"
+      ],
+      "path": "Menu lateral → Equipamentos → Fabricantes",
+      "content": "Fabricantes de equipamentos (FOCALLE, VIZENTEC, Perkons, Lasertech) transmitem dados ao AxHub via API REST autenticada por Token (campo Token em Fabricantes). Comportamento observado nos fabricantes FOCALLE e VIZENTEC: retry automático INDEFINIDO (dados de 30+ dias continuam sendo reenviados), intervalo entre tentativas ~2 minutos, sem backoff exponencial, NÃO desistem sozinhos. O fabricante só para de reenviar quando: (1) AxHub aceita o dado, (2) intervenção manual no servidor do fabricante, ou (3) equipamento é desativado. Volume referência: equipamento BA602C enviou 2.600+ passagens/dia ao reconectar após 17 dias offline. Nenhum fabricante publica documentação técnica de API ou limites publicamente — informações obtidas por comportamento observado.",
+      "steps": [
+        "Para problemas de reenvio persistente: contatar equipe técnica do fabricante diretamente",
+        "Vizentec WhatsApp técnico: +55 62 99636-0699",
+        "Solicitar ao fabricante: limpeza do buffer de retry para equipamento específico",
+        "Perguntar: quantas passagens pendentes estão no buffer?",
+        "Perguntar: é possível configurar data mínima de envio no equipamento?",
+        "CUIDADO com 'Gerar Novo Token': invalida token anterior IMEDIATAMENTE — fabricante perde acesso",
+        "Só gerar novo token se: comunicar fabricante ANTES, ou se precisa bloquear transmissões em emergência"
+      ],
+      "docUrl": "cadastros-basicos/fabricantes",
+      "related": [
+        "bloqueio-automatico-operacao",
+        "equipamento-offline"
+      ],
+      "dbTables": [
+        "TBFabricantes",
+        "TBEquipamentos",
+        "TBModeloEquipamentos",
+        "TBPassagens"
+      ]
     }
   ],
   "glossary": [
@@ -3165,6 +3251,21 @@
     {
       "term": "Triagem",
       "definition": "Processo de análise humana das infrações detectadas automaticamente. O triador valida ou descarta cada infração.",
+      "legal": ""
+    },
+    {
+      "term": "Bloqueio Automático",
+      "definition": "Mecanismo de proteção que bloqueia a operação de um equipamento após 10 falhas consecutivas de validação de passagens. Causa comum: fabricante reenviando dados com data anterior ao início da operação. Desbloqueio manual não resolve se a causa raiz não for tratada.",
+      "legal": ""
+    },
+    {
+      "term": "Retry de Fabricante",
+      "definition": "Comportamento dos fabricantes FOCALLE e VIZENTEC de reenviar automaticamente passagens rejeitadas pelo AxHub. Retry é indefinido (30+ dias), com intervalo de ~2 minutos, sem backoff exponencial. Só para com intervenção manual no servidor do fabricante.",
+      "legal": ""
+    },
+    {
+      "term": "Token de Fabricante",
+      "definition": "Chave de autenticação gerada pelo AxHub para cada fabricante (campo Token em TBFabricantes). Usado pelo fabricante para enviar passagens e imagens via API. Gerar Novo Token invalida o anterior imediatamente, bloqueando todas as transmissões do fabricante.",
       "legal": ""
     }
   ],
