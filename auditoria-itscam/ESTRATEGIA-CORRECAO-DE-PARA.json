@@ -1,0 +1,979 @@
+{
+  "_metadata": {
+    "titulo": "Estratégia de Correção — ITSCAM 450 SETRANS-GO (Labor)",
+    "data_geracao": "2026-06-03T00:00:00Z",
+    "total_equipamentos": 70,
+    "equipamento_referencia": {
+      "nome": "GOEC6O045 - Faixa 1",
+      "uuid": "0ce96fed-4b52-4737-9e95-f6dd2c969d58",
+      "ip": "179.242.177.86",
+      "status": "100% em conformidade, uptime estável, VARCO ativo",
+      "motivo_escolha": "Zero desvios de configuração, uptime 136.9h sem instabilidade, storage normal (967MB)"
+    },
+    "resumo_casos": {
+      "total_casos": 8,
+      "criticos": 2,
+      "altos": 1,
+      "medios": 1,
+      "baixos": 3,
+      "informativos": 1
+    }
+  },
+  "configuracao_referencia": {
+    "varco": {
+      "enabled": true,
+      "edgeServer": "edge.varco.io",
+      "provisionKey": "yk-pzGzXLGmz6-iO3GhdR7hinksDN7aek-kjQ4WYl_c="
+    },
+    "restPresets": {
+      "pumatronix": {
+        "enabled": true,
+        "url": {
+          "scheme": "http",
+          "host": "",
+          "path": "",
+          "query": []
+        }
+      },
+      "pumatronixCompat_v1_7_6": {
+        "enabled": true,
+        "url": {
+          "scheme": "http",
+          "host": "",
+          "path": "",
+          "query": []
+        }
+      },
+      "helios": {
+        "enabled": true,
+        "url": {
+          "scheme": "https",
+          "host": "helios.policiamilitar.mg.gov.br",
+          "path": "/v3/api/_track/register",
+          "query": []
+        }
+      },
+      "RFB": {
+        "enabled": true,
+        "url": {
+          "scheme": "https",
+          "host": "sivana.rfb.gov.br",
+          "path": "/prod/sivana/rest/upload",
+          "query": []
+        }
+      }
+    },
+    "ftp": {
+      "enable": false
+    },
+    "itscampro": {
+      "enable": false
+    },
+    "lince": {
+      "enabled": false
+    },
+    "protocols": {
+      "blockAPI": false,
+      "cougarAuth": false
+    },
+    "ocr": {
+      "enabled": true,
+      "countryCode": 76,
+      "maxPlates": 2,
+      "lowProbChar": 45,
+      "maxLowProbChars": 0
+    },
+    "classifier": {
+      "enabled": true,
+      "processingQueue": 1,
+      "processingThreads": 1
+    },
+    "perfilDiurno": {
+      "transitions": {
+        "lower": {
+          "endTime": "00:00:00",
+          "holdTime": 60000,
+          "level": 10,
+          "profile": 27839,
+          "startTime": "00:00:00"
+        },
+        "upper": {
+          "endTime": "00:00:00",
+          "holdTime": 60000,
+          "level": 35,
+          "profile": 0,
+          "startTime": "00:00:00"
+        }
+      },
+      "flash": null,
+      "multipleExposures": {
+        "enabled": true,
+        "settings": [
+          {
+            "flash": {
+              "power": []
+            },
+            "gain": {
+              "percentageOfCurrent": true,
+              "value": 100
+            },
+            "shutter": {
+              "percentageOfCurrent": true,
+              "value": 100
+            }
+          }
+        ]
+      }
+    },
+    "perfilNoturno": {
+      "transitions": {
+        "lower": {
+          "endTime": "00:00:00",
+          "holdTime": 60000,
+          "level": 10,
+          "profile": 27839,
+          "startTime": "00:00:00"
+        },
+        "upper": {
+          "endTime": "00:00:00",
+          "holdTime": 60000,
+          "level": 35,
+          "profile": 0,
+          "startTime": "00:00:00"
+        }
+      },
+      "flash": null,
+      "multipleExposures": {
+        "enabled": true,
+        "settings": [
+          {
+            "flash": {
+              "power": [
+                {
+                  "out": 1,
+                  "percent": 65
+                },
+                {
+                  "out": 3,
+                  "percent": 65
+                }
+              ]
+            },
+            "gain": {
+              "percentageOfCurrent": true,
+              "value": 100
+            },
+            "shutter": {
+              "percentageOfCurrent": true,
+              "value": 50
+            }
+          },
+          {
+            "flash": {
+              "power": [
+                {
+                  "out": 1,
+                  "percent": 20
+                },
+                {
+                  "out": 3,
+                  "percent": 20
+                }
+              ]
+            },
+            "gain": {
+              "percentageOfCurrent": true,
+              "value": 100
+            },
+            "shutter": {
+              "percentageOfCurrent": true,
+              "value": 50
+            }
+          }
+        ]
+      }
+    },
+    "rede": {
+      "gateway": "192.168.0.1",
+      "dns": "8.8.8.8"
+    },
+    "dateTime": {
+      "timezone": [
+        "America",
+        "Sao_Paulo"
+      ]
+    },
+    "misc": {
+      "snapshotCrop": {
+        "enable": false,
+        "mode": "static"
+      }
+    }
+  },
+  "casos": [
+    {
+      "id": "CASO-01",
+      "titulo": "VARCO Tunnel Desabilitado + Configuração Zerada",
+      "severidade": "CRITICA",
+      "descricao": "Equipamentos com VARCO desabilitado não possuem conectividade remota. A coleta de config retornou dados nulos em quase todos os campos, indicando que o dispositivo está inacessível ou com firmware em estado de fábrica.",
+      "impacto": "Sem heartbeat, sem imagens de teste, sem acesso remoto para manutenção",
+      "causa_provavel": "Equipamento não provisionado no VARCO ou perda de configuração após reset de fábrica",
+      "equipamentos_afetados": [
+        {
+          "nome": "GOEC6O019 - Faixa 1",
+          "uuid": "6f6eddc7-f900-4d4f-8040-f7d1775d1d1d",
+          "ip_publico": "45.70.144.143",
+          "varco_atual": false,
+          "deviceName_esperado": "GOEC6O019 - FAIXA 1"
+        },
+        {
+          "nome": "GOEC6O019 - Faixa 2",
+          "uuid": "b8925732-54cf-4f01-b4ec-c8bcb1b3bd2e",
+          "ip_publico": "45.70.144.143",
+          "varco_atual": false,
+          "deviceName_esperado": "GOEC6O019 - FAIXA 2"
+        },
+        {
+          "nome": "GOEC6O023 - Faixa 1",
+          "uuid": "64e60ba4-79b7-4447-b726-a3f032327907",
+          "ip_publico": "177.25.228.3",
+          "varco_atual": false,
+          "deviceName_esperado": "GOEC6O023 - FAIXA 1"
+        },
+        {
+          "nome": "GOEC6O049 - Faixa 1",
+          "uuid": "ad0db63e-bb6e-4cb1-99eb-960f486cb692",
+          "ip_publico": "191.58.159.123",
+          "varco_atual": false,
+          "deviceName_esperado": "GOEC6O049 - FAIXA 1"
+        },
+        {
+          "nome": "GOEC6O049 - Faixa 2",
+          "uuid": "3a8b23c7-edf3-43d3-b9be-9211674777e3",
+          "ip_publico": "191.58.159.123",
+          "varco_atual": false,
+          "deviceName_esperado": "GOEC6O049 - FAIXA 2"
+        },
+        {
+          "nome": "GOEC6O052 - Faixa 1",
+          "uuid": "49cbc26f-7a42-47d6-9d32-bc66f740e886",
+          "ip_publico": "187.68.165.85",
+          "varco_atual": false,
+          "deviceName_esperado": "GOEC6O052 - FAIXA 1"
+        }
+      ],
+      "referencia": {
+        "equipamento": "GOEC6O045 - Faixa 1",
+        "config_correta": {
+          "endpoint": "/api/system/maintenance/remoteaccess",
+          "valores": {
+            "enabled": true,
+            "edgeServer": "edge.varco.io",
+            "provisionKey": "yk-pzGzXLGmz6-iO3GhdR7hinksDN7aek-kjQ4WYl_c="
+          }
+        }
+      },
+      "correcao": {
+        "metodo": "Acesso local (IP público ou visita técnica)",
+        "passos": [
+          "1. Acessar câmera via IP público (se disponível) ou acesso físico",
+          "2. Login: admin / #econocr@",
+          "3. Menu: SISTEMA → Manutenção → Acesso Remoto",
+          "4. Habilitar VARCO com os dados abaixo:",
+          "   - Enabled: true",
+          "   - Edge Server: edge.varco.io",
+          "   - Provision Key: yk-pzGzXLGmz6-iO3GhdR7hinksDN7aek-kjQ4WYl_c=",
+          "   - Device Name: [NOME DO EQUIPAMENTO] (ex: GOEC6O019 - FAIXA 1)",
+          "5. Salvar e aguardar reconexão (~30s)",
+          "6. Verificar no portal VARCO se aparece como Online",
+          "7. Após VARCO ativo, aplicar TODAS as configs dos demais casos via tunnel"
+        ],
+        "api_rest": {
+          "method": "PUT",
+          "path": "/api/system/maintenance/remoteaccess",
+          "body": {
+            "remoteAccess": {
+              "varco": {
+                "enabled": true,
+                "edgeServer": "edge.varco.io",
+                "provisionKey": "yk-pzGzXLGmz6-iO3GhdR7hinksDN7aek-kjQ4WYl_c=",
+                "deviceName": "{{DEVICE_NAME}}"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "id": "CASO-02",
+      "titulo": "Perfil Noturno → Upper Profile INCORRETO (Câmera trava em P&B)",
+      "severidade": "CRITICA",
+      "descricao": "O campo transitions.upper.profile do perfil noturno aponta para o próprio perfil ao invés de apontar para o perfil 0 (Diurno). Quando a luminosidade sobe, a câmera deveria voltar ao Diurno mas volta para si mesma, ficando presa no modo P&B indefinidamente.",
+      "impacto": "Imagens diurnas em preto e branco = OCR degradado, classificação incorreta, autuações invalidadas",
+      "causa_provavel": "Erro de configuração manual — profile ID do noturno inserido no campo upper.profile",
+      "equipamentos_afetados": [
+        {
+          "nome": "GOEC6O008 - Faixa 1",
+          "uuid": "5d6880f0-e8f2-4ff0-be25-00c3b31d6522",
+          "ip_publico": "191.58.135.61",
+          "tunnel_url": "https://5d6880f0-e8f2-4ff0-be25-00c3b31d6522-80.tunnel.varco.cloud",
+          "valor_atual": 23483,
+          "valor_correto": 0,
+          "transicoes_atuais": {
+            "lower": {
+              "endTime": "06:00:00",
+              "holdTime": 60000,
+              "level": 10,
+              "profile": 23483,
+              "startTime": "00:00:00"
+            },
+            "upper": {
+              "endTime": "00:00:00",
+              "holdTime": 60000,
+              "level": 30,
+              "profile": 23483,
+              "startTime": "18:01:00"
+            }
+          }
+        }
+      ],
+      "referencia": {
+        "equipamento": "GOEC6O045 - Faixa 1",
+        "config_correta": {
+          "endpoint": "/api/image/profiles",
+          "perfil_index": 1,
+          "campo": "transitions.upper.profile",
+          "valor_correto": 0,
+          "transicoes_completas": {
+            "lower": {
+              "endTime": "00:00:00",
+              "holdTime": 60000,
+              "level": 10,
+              "profile": 27839,
+              "startTime": "00:00:00"
+            },
+            "upper": {
+              "endTime": "00:00:00",
+              "holdTime": 60000,
+              "level": 35,
+              "profile": 0,
+              "startTime": "00:00:00"
+            }
+          }
+        }
+      },
+      "de_para": {
+        "campo": "Perfil Noturno → Transições → Superior → Profile",
+        "errado": 23483,
+        "correto": 0,
+        "explicacao": "O valor 23483 é o ID interno do próprio perfil noturno. Deve ser 0 (ID do perfil Diurno) para que a câmera retorne ao modo colorido quando a luz aumenta."
+      },
+      "correcao": {
+        "metodo": "Via VARCO tunnel + interface web ou API REST",
+        "passos": [
+          "1. Acessar via VARCO tunnel: https://<UUID>-80.tunnel.varco.cloud",
+          "2. Login: admin / #econocr@",
+          "3. Menu: IMAGEM → Perfis de Imagem",
+          "4. Selecionar Perfil NOTURNO (2º perfil)",
+          "5. Aba \"Transições\" → Seção \"Superior\" (Upper)",
+          "6. Campo \"Profile\" → Alterar de 23483 para 0",
+          "7. Salvar",
+          "8. Testar: cobrir sensor de luz → esperar voltar → confirmar que sai do P&B"
+        ],
+        "api_rest": {
+          "method": "PUT",
+          "path": "/api/image/profiles/1",
+          "nota": "Enviar perfil completo com transitions.upper.profile = 0"
+        }
+      }
+    },
+    {
+      "id": "CASO-03",
+      "titulo": "Transições Diurno/Noturno com Janelas de Horário (Risco de travamento P&B)",
+      "severidade": "ALTA",
+      "descricao": "Equipamentos com startTime/endTime diferentes de 00:00:00 nas transições. Isso cria janelas de tempo onde a câmera NÃO consegue transicionar entre perfis, podendo ficar presa em modo noturno (P&B) durante o dia se a condição de luz mudar fora da janela configurada.",
+      "impacto": "Risco de câmera travar em P&B em horários específicos. Não é garantido mas é possível dependendo das condições de luz.",
+      "causa_provavel": "Configuração manual antiga com lógica de horário — o padrão correto é usar SOMENTE luminosidade (sensor) sem restrição de horário.",
+      "equipamentos_afetados": [
+        {
+          "nome": "GOEC6O033 - Faixa 2",
+          "uuid": "34ebe844-ba8e-49f4-bc6f-45d5724ee381",
+          "ip_publico": "45.168.254.127",
+          "tunnel_url": "https://34ebe844-ba8e-49f4-bc6f-45d5724ee381-80.tunnel.varco.cloud",
+          "diurno_lower": {
+            "start": "06:00:00",
+            "end": "18:00:00"
+          },
+          "diurno_upper": {
+            "start": "06:00:00",
+            "end": "17:58:00"
+          },
+          "noturno_lower": {
+            "start": "18:00:00",
+            "end": "06:00:00"
+          },
+          "noturno_upper": {
+            "start": "18:00:00",
+            "end": "06:00:00"
+          },
+          "noturno_upper_profile": 0
+        },
+        {
+          "nome": "GOEC6O040 - Faixa 1",
+          "uuid": "9b5328e3-104b-4afc-b3ce-8880066ca995",
+          "ip_publico": "201.71.213.219",
+          "tunnel_url": "https://9b5328e3-104b-4afc-b3ce-8880066ca995-80.tunnel.varco.cloud",
+          "diurno_lower": {
+            "start": "18:00:00",
+            "end": "00:00:00"
+          },
+          "diurno_upper": {
+            "start": "06:00:00",
+            "end": "00:00:00"
+          },
+          "noturno_lower": {
+            "start": "06:00:00",
+            "end": "00:00:00"
+          },
+          "noturno_upper": {
+            "start": "18:00:00",
+            "end": "00:00:00"
+          },
+          "noturno_upper_profile": 0
+        },
+        {
+          "nome": "GOEC6O040 - Faixa 2",
+          "uuid": "416aff7e-4c34-4356-bbac-aa66d34ffead",
+          "ip_publico": "201.71.213.219",
+          "tunnel_url": "https://416aff7e-4c34-4356-bbac-aa66d34ffead-80.tunnel.varco.cloud",
+          "diurno_lower": {
+            "start": "00:00:00",
+            "end": "18:00:00"
+          },
+          "diurno_upper": {
+            "start": "06:00:00",
+            "end": "00:00:00"
+          },
+          "noturno_lower": {
+            "start": "00:00:00",
+            "end": "06:00:00"
+          },
+          "noturno_upper": {
+            "start": "18:01:00",
+            "end": "00:00:00"
+          },
+          "noturno_upper_profile": 0
+        },
+        {
+          "nome": "GOEC6O055 - Faixa 1",
+          "uuid": "1d0b2132-a825-4823-ab8f-8ce4aa829138",
+          "ip_publico": "191.37.226.77",
+          "tunnel_url": "https://1d0b2132-a825-4823-ab8f-8ce4aa829138-80.tunnel.varco.cloud",
+          "diurno_lower": {
+            "start": "00:00:00",
+            "end": "18:00:00"
+          },
+          "diurno_upper": {
+            "start": "06:00:00",
+            "end": "00:00:00"
+          },
+          "noturno_lower": {
+            "start": "00:00:00",
+            "end": "06:00:00"
+          },
+          "noturno_upper": {
+            "start": "18:01:00",
+            "end": "00:00:00"
+          },
+          "noturno_upper_profile": 0
+        },
+        {
+          "nome": "GOEC6O055 - Faixa 2",
+          "uuid": "fe5f7cf3-a8dd-41e8-b975-72921dbddeac",
+          "ip_publico": "191.37.226.77",
+          "tunnel_url": "https://fe5f7cf3-a8dd-41e8-b975-72921dbddeac-80.tunnel.varco.cloud",
+          "diurno_lower": {
+            "start": "18:00:00",
+            "end": "00:00:00"
+          },
+          "diurno_upper": {
+            "start": "06:00:00",
+            "end": "00:00:00"
+          },
+          "noturno_lower": {
+            "start": "05:59:59",
+            "end": "00:00:00"
+          },
+          "noturno_upper": {
+            "start": "18:01:00",
+            "end": "00:00:00"
+          },
+          "noturno_upper_profile": 0
+        },
+        {
+          "nome": "GOEC6O008 - Faixa 1",
+          "uuid": "5d6880f0-e8f2-4ff0-be25-00c3b31d6522",
+          "ip_publico": "191.58.135.61",
+          "tunnel_url": "https://5d6880f0-e8f2-4ff0-be25-00c3b31d6522-80.tunnel.varco.cloud",
+          "diurno_lower": {
+            "start": "00:00:00",
+            "end": "18:00:00"
+          },
+          "diurno_upper": {
+            "start": "06:00:00",
+            "end": "00:00:00"
+          },
+          "noturno_lower": {
+            "start": "00:00:00",
+            "end": "06:00:00"
+          },
+          "noturno_upper": {
+            "start": "18:01:00",
+            "end": "00:00:00"
+          },
+          "noturno_upper_profile": 23483
+        }
+      ],
+      "referencia": {
+        "equipamento": "GOEC6O045 - Faixa 1",
+        "config_correta": {
+          "endpoint": "/api/image/profiles",
+          "campo": "transitions.lower/upper.startTime e endTime",
+          "valor_correto": "00:00:00 (ou \"0\" no formato interno)",
+          "perfil_diurno_correto": {
+            "lower": {
+              "endTime": "00:00:00",
+              "holdTime": 60000,
+              "level": 10,
+              "profile": 27839,
+              "startTime": "00:00:00"
+            },
+            "upper": {
+              "endTime": "00:00:00",
+              "holdTime": 60000,
+              "level": 35,
+              "profile": 0,
+              "startTime": "00:00:00"
+            }
+          },
+          "perfil_noturno_correto": {
+            "lower": {
+              "endTime": "00:00:00",
+              "holdTime": 60000,
+              "level": 10,
+              "profile": 27839,
+              "startTime": "00:00:00"
+            },
+            "upper": {
+              "endTime": "00:00:00",
+              "holdTime": 60000,
+              "level": 35,
+              "profile": 0,
+              "startTime": "00:00:00"
+            }
+          }
+        }
+      },
+      "de_para": {
+        "regra": "TODOS os campos startTime e endTime de AMBOS os perfis devem ser \"00:00:00\"",
+        "explicacao": "Com horário 00:00:00, a transição funciona 24h baseada apenas no sensor de luminosidade. Com horários específicos, a transição só acontece dentro da janela — fora dela a câmera fica travada no perfil atual.",
+        "exemplos_errados": [
+          {
+            "campo": "diurno.lower.startTime",
+            "errado": "06:00:00",
+            "correto": "00:00:00"
+          },
+          {
+            "campo": "diurno.lower.endTime",
+            "errado": "18:00:00",
+            "correto": "00:00:00"
+          },
+          {
+            "campo": "noturno.upper.startTime",
+            "errado": "18:01:00",
+            "correto": "00:00:00"
+          },
+          {
+            "campo": "noturno.upper.endTime",
+            "errado": "06:00:00",
+            "correto": "00:00:00"
+          }
+        ]
+      },
+      "correcao": {
+        "metodo": "Via VARCO tunnel + interface web ou API REST",
+        "passos": [
+          "1. Acessar via VARCO tunnel",
+          "2. Menu: IMAGEM → Perfis de Imagem",
+          "3. Perfil DIURNO → Transições:",
+          "   - Lower: Start Time = 00:00:00, End Time = 00:00:00",
+          "   - Upper: Start Time = 00:00:00, End Time = 00:00:00",
+          "4. Perfil NOTURNO → Transições:",
+          "   - Lower: Start Time = 00:00:00, End Time = 00:00:00",
+          "   - Upper: Start Time = 00:00:00, End Time = 00:00:00",
+          "   - Upper Profile = 0 (Diurno)",
+          "5. Salvar ambos os perfis"
+        ],
+        "api_rest": {
+          "method": "PUT",
+          "path": "/api/image/profiles/0 e /api/image/profiles/1",
+          "nota": "Enviar perfis completos com todos startTime/endTime = \"00:00:00\""
+        }
+      }
+    },
+    {
+      "id": "CASO-04",
+      "titulo": "Classificador com processingQueue e/ou processingThreads diferentes",
+      "severidade": "BAIXA",
+      "descricao": "O classificador veicular identifica tipo de veículo (carro, moto, caminhão). Com processingQueue=4 ou processingThreads>1, consome mais CPU. O padrão recomendado é queue=1, threads=1 para estabilidade. NOTA: 34 dos 70 equipamentos usam queue=4 — pode ter sido intencional.",
+      "impacto": "Consumo elevado de CPU pode atrasar processamento de OCR em picos de tráfego. Em geral funciona mas com maior carga térmica.",
+      "causa_provavel": "Configuração aplicada em lote com valor diferente ou ajuste intencional para melhorar classificação em vias de alto volume.",
+      "equipamentos_afetados": [
+        {
+          "nome": "GOEC6O010 - Faixa 1",
+          "uuid": "abf8fedb-4f1b-471f-a6bd-4e00484d5737",
+          "tunnel_url": "https://abf8fedb-4f1b-471f-a6bd-4e00484d5737-80.tunnel.varco.cloud",
+          "queue_atual": 4,
+          "threads_atual": 4,
+          "queue_correto": 1,
+          "threads_correto": 1
+        },
+        {
+          "nome": "GOEC6O010 - Faixa 2",
+          "uuid": "481dd19b-4968-4759-860b-35f9ec09c206",
+          "tunnel_url": "https://481dd19b-4968-4759-860b-35f9ec09c206-80.tunnel.varco.cloud",
+          "queue_atual": 1,
+          "threads_atual": 2,
+          "queue_correto": 1,
+          "threads_correto": 1
+        },
+        {
+          "nome": "GOEC6O011 - Faixa 2",
+          "uuid": "d0595c80-9ea7-49af-b2a0-d305d688e567",
+          "tunnel_url": "https://d0595c80-9ea7-49af-b2a0-d305d688e567-80.tunnel.varco.cloud",
+          "queue_atual": 2,
+          "threads_atual": 2,
+          "queue_correto": 1,
+          "threads_correto": 1
+        },
+        {
+          "nome": "GOEC6O028 - Faixa 1",
+          "uuid": "1f460cd7-f607-4c79-8a8e-50a8228850a4",
+          "tunnel_url": "https://1f460cd7-f607-4c79-8a8e-50a8228850a4-80.tunnel.varco.cloud",
+          "queue_atual": 2,
+          "threads_atual": 2,
+          "queue_correto": 1,
+          "threads_correto": 1
+        },
+        {
+          "nome": "GOEC6O052 - Faixa 2",
+          "uuid": "8244f568-59f3-4f27-932e-86cc2eb10fc3",
+          "tunnel_url": "https://8244f568-59f3-4f27-932e-86cc2eb10fc3-80.tunnel.varco.cloud",
+          "queue_atual": 4,
+          "threads_atual": 4,
+          "queue_correto": 1,
+          "threads_correto": 1
+        },
+        {
+          "nome": "GOEC6O058 - Faixa 2",
+          "uuid": "6561d5fd-0aba-413b-a60a-a0d7e1b61b6d",
+          "tunnel_url": "https://6561d5fd-0aba-413b-a60a-a0d7e1b61b6d-80.tunnel.varco.cloud",
+          "queue_atual": 4,
+          "threads_atual": 4,
+          "queue_correto": 1,
+          "threads_correto": 1
+        }
+      ],
+      "referencia": {
+        "equipamento": "GOEC6O045 - Faixa 1",
+        "config_correta": {
+          "endpoint": "/api/equipment/classifier",
+          "valores": {
+            "enabled": true,
+            "processingQueue": 1,
+            "processingThreads": 1
+          }
+        }
+      },
+      "de_para": {
+        "campo": "classifier.processingQueue / classifier.processingThreads",
+        "valores_encontrados": [
+          {
+            "queue": 4,
+            "threads": 1,
+            "qtd": 28,
+            "nota": "Maioria dos desviados — pode ser intencional"
+          },
+          {
+            "queue": 4,
+            "threads": 4,
+            "qtd": 3,
+            "nota": "GOEC6O010-F1, GOEC6O052-F2, GOEC6O058-F2 — alto consumo"
+          },
+          {
+            "queue": 2,
+            "threads": 2,
+            "qtd": 2,
+            "nota": "GOEC6O011-F2, GOEC6O028-F1"
+          },
+          {
+            "queue": 1,
+            "threads": 2,
+            "qtd": 1,
+            "nota": "GOEC6O010-F2"
+          },
+          {
+            "queue": 1,
+            "threads": 1,
+            "qtd": 34,
+            "nota": "PADRÃO REFERÊNCIA"
+          }
+        ],
+        "recomendacao": "Avaliar com equipe se queue=4 é intencional. Se não, padronizar para queue=1, threads=1."
+      },
+      "correcao": {
+        "metodo": "Via VARCO tunnel + API REST",
+        "passos": [
+          "1. Acessar via VARCO tunnel",
+          "2. Menu: EQUIPAMENTO → Classificador",
+          "3. Processing Queue → 1",
+          "4. Processing Threads → 1",
+          "5. Salvar"
+        ],
+        "api_rest": {
+          "method": "PUT",
+          "path": "/api/equipment/classifier",
+          "body": {
+            "classifier": {
+              "processingQueue": 1,
+              "processingThreads": 1
+            }
+          },
+          "nota": "Enviar campo classifier completo para não perder outros valores"
+        }
+      }
+    },
+    {
+      "id": "CASO-05",
+      "titulo": "Níveis de Transição (Level) Diurno/Noturno Diferentes do Padrão",
+      "severidade": "MEDIA",
+      "descricao": "Os campos transitions.lower.level e transitions.upper.level controlam em qual nível de luminosidade a câmera troca de perfil. Valores diferentes do padrão podem causar transições prematuras ou atrasadas.",
+      "impacto": "Transição entre diurno/noturno pode ocorrer cedo/tarde demais, afetando qualidade de imagem.",
+      "causa_provavel": "Ajuste manual de campo para condições específicas do local ou erro de configuração.",
+      "equipamentos_afetados": [
+        {
+          "nome": "GOEC6O009 - Faixa 1",
+          "uuid": "c296d7bf-0d3b-4da1-bf1d-3e4fe998e4a1",
+          "tunnel_url": "https://c296d7bf-0d3b-4da1-bf1d-3e4fe998e4a1-80.tunnel.varco.cloud",
+          "diurno_lower_level": 10,
+          "diurno_upper_level": 40,
+          "noturno_lower_level": 10,
+          "noturno_upper_level": 40,
+          "correto": {
+            "lower": 10,
+            "upper": 35
+          }
+        },
+        {
+          "nome": "GOEC6O009 - Faixa 2",
+          "uuid": "ef0e72ca-d3a5-4f4e-bbf6-40f3737bda3f",
+          "tunnel_url": "https://ef0e72ca-d3a5-4f4e-bbf6-40f3737bda3f-80.tunnel.varco.cloud",
+          "diurno_lower_level": 10,
+          "diurno_upper_level": 40,
+          "noturno_lower_level": 10,
+          "noturno_upper_level": 40,
+          "correto": {
+            "lower": 10,
+            "upper": 35
+          }
+        },
+        {
+          "nome": "GOEC6O013 - Faixa 2",
+          "uuid": "36896650-1bca-4093-9631-667b73bdd93d",
+          "tunnel_url": "https://36896650-1bca-4093-9631-667b73bdd93d-80.tunnel.varco.cloud",
+          "diurno_lower_level": 30,
+          "diurno_upper_level": 30,
+          "noturno_lower_level": 10,
+          "noturno_upper_level": 30,
+          "correto": {
+            "lower": 10,
+            "upper": 35
+          }
+        },
+        {
+          "nome": "GOEC6O008 - Faixa 1",
+          "uuid": "5d6880f0-e8f2-4ff0-be25-00c3b31d6522",
+          "tunnel_url": "https://5d6880f0-e8f2-4ff0-be25-00c3b31d6522-80.tunnel.varco.cloud",
+          "diurno_lower_level": 10,
+          "diurno_upper_level": 30,
+          "noturno_lower_level": 10,
+          "noturno_upper_level": 30,
+          "correto": {
+            "lower": 10,
+            "upper": 35
+          }
+        }
+      ],
+      "referencia": {
+        "equipamento": "GOEC6O045 - Faixa 1",
+        "config_correta": {
+          "diurno_lower_level": 10,
+          "diurno_upper_level": 35,
+          "noturno_lower_level": 10,
+          "noturno_upper_level": 35
+        }
+      },
+      "de_para": {
+        "padrao": {
+          "lower_level": 10,
+          "upper_level": 35,
+          "explicacao": "Lower=10 → quando luminosidade cai para 10, vai pro noturno. Upper=35 → quando sobe para 35, volta pro diurno."
+        }
+      },
+      "correcao": {
+        "metodo": "Via VARCO tunnel",
+        "passos": [
+          "1. Acessar via VARCO tunnel",
+          "2. Menu: IMAGEM → Perfis de Imagem → Perfil Diurno → Transições",
+          "3. Lower Level = 10, Upper Level = 35",
+          "4. Perfil Noturno → Transições",
+          "5. Lower Level = 10, Upper Level = 35",
+          "6. Salvar ambos"
+        ]
+      }
+    },
+    {
+      "id": "CASO-06",
+      "titulo": "OCR maxPlates Reduzido (1 ao invés de 2)",
+      "severidade": "BAIXA",
+      "descricao": "Dois equipamentos têm maxPlates=1, enquanto o padrão é 2. Isso limita a câmera a detectar apenas 1 placa por frame, o que em vias de mão dupla pode perder veículos.",
+      "impacto": "Em cenários com 2 veículos simultâneos no frame, um não será lido.",
+      "causa_provavel": "Ajuste para via de faixa única — pode ser intencional.",
+      "equipamentos_afetados": [
+        {
+          "nome": "GOEC6O009 - Faixa 2",
+          "uuid": "ef0e72ca-d3a5-4f4e-bbf6-40f3737bda3f",
+          "tunnel_url": "https://ef0e72ca-d3a5-4f4e-bbf6-40f3737bda3f-80.tunnel.varco.cloud",
+          "maxPlates_atual": 1,
+          "maxPlates_correto": 2
+        },
+        {
+          "nome": "GOEC6O055 - Faixa 2",
+          "uuid": "fe5f7cf3-a8dd-41e8-b975-72921dbddeac",
+          "tunnel_url": "https://fe5f7cf3-a8dd-41e8-b975-72921dbddeac-80.tunnel.varco.cloud",
+          "maxPlates_atual": 1,
+          "maxPlates_correto": 2
+        }
+      ],
+      "referencia": {
+        "equipamento": "GOEC6O045 - Faixa 1",
+        "config_correta": {
+          "endpoint": "/api/equipment/ocr",
+          "campo": "ocr.maxPlates",
+          "valor": 2
+        }
+      },
+      "correcao": {
+        "api_rest": {
+          "method": "PUT",
+          "path": "/api/equipment/ocr",
+          "campo": "ocr.maxPlates",
+          "valor_correto": 2
+        }
+      }
+    },
+    {
+      "id": "CASO-07",
+      "titulo": "Snapshot Crop Habilitado ou Mode Diferente",
+      "severidade": "BAIXA",
+      "descricao": "Alguns equipamentos têm snapshotCrop habilitado (true) ou mode diferente de \"static\". Pode ser intencional para cortar a imagem antes de enviar.",
+      "impacto": "Imagem enviada pode ser recortada, mostrando apenas parte da cena. Se não intencional, pode prejudicar contexto da autuação.",
+      "equipamentos_afetados": [
+        {
+          "nome": "GOEC6O003 - Faixa 2",
+          "uuid": "ea779324-56d4-4ea5-bfb6-63b4cf751621",
+          "snapshotCrop_atual": true,
+          "snapshotMode_atual": "static",
+          "correto": {
+            "enable": false,
+            "mode": "static"
+          }
+        },
+        {
+          "nome": "GOEC6O008 - Faixa 1",
+          "uuid": "5d6880f0-e8f2-4ff0-be25-00c3b31d6522",
+          "snapshotCrop_atual": true,
+          "snapshotMode_atual": "static",
+          "correto": {
+            "enable": false,
+            "mode": "static"
+          }
+        },
+        {
+          "nome": "GOEC6O013 - Faixa 1",
+          "uuid": "7d9bf2eb-0f9a-4691-bffd-e003fc3781ed",
+          "snapshotCrop_atual": true,
+          "snapshotMode_atual": "static",
+          "correto": {
+            "enable": false,
+            "mode": "static"
+          }
+        }
+      ],
+      "referencia": {
+        "equipamento": "GOEC6O045 - Faixa 1",
+        "config_correta": {
+          "snapshotCrop": false,
+          "snapshotMode": "static"
+        }
+      },
+      "correcao": {
+        "passos": [
+          "1. Acessar via VARCO tunnel",
+          "2. Menu: EQUIPAMENTO → Diversos",
+          "3. Snapshot Crop → Desabilitado",
+          "4. Mode → static",
+          "5. Salvar"
+        ]
+      }
+    },
+    {
+      "id": "CASO-08",
+      "titulo": "Gateway ou DNS Diferente do Padrão",
+      "severidade": "INFORMATIVA",
+      "descricao": "Alguns equipamentos possuem gateway diferente de 192.168.0.1 ou DNS diferente de 8.8.8.8. Pode ser intencional baseado na infraestrutura local do ponto.",
+      "impacto": "Se o gateway local realmente for diferente, é CORRETO estar diferente. Só investigar se houver problemas de conectividade.",
+      "equipamentos_afetados": [
+        {
+          "nome": "GOEC6O046 - Faixa 1",
+          "uuid": "1e26be92-70e4-468f-a582-4e015282a4fe",
+          "ip_publico": "170.81.67.214",
+          "gateway_atual": "192.168.1.1",
+          "dns_atual": "8.8.8.8",
+          "padrao": {
+            "gateway": "192.168.0.1",
+            "dns": "8.8.8.8"
+          }
+        },
+        {
+          "nome": "GOEC6O046 - Faixa 2",
+          "uuid": "4d68163e-8462-4dce-adad-df3b0d7c76af",
+          "ip_publico": "170.81.67.214",
+          "gateway_atual": "192.168.1.1",
+          "dns_atual": "8.8.8.8",
+          "padrao": {
+            "gateway": "192.168.0.1",
+            "dns": "8.8.8.8"
+          }
+        }
+      ],
+      "referencia": {
+        "equipamento": "GOEC6O045 - Faixa 1",
+        "config_correta": {
+          "gateway": "192.168.0.1",
+          "dns": "8.8.8.8"
+        }
+      }
+    }
+  ]
+}
