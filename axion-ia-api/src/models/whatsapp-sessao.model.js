@@ -38,6 +38,9 @@ const WhatsAppSessaoSchema = new mongoose.Schema({
       "compras_confirmacao",
       "compras_consulta",
       "compras_motivo_rejeicao",
+      // Pesquisa de satisfação
+      "avaliacao_nota",
+      "avaliacao_comentario",
       "atendente",
       "encerrado"
     ],
@@ -50,6 +53,8 @@ const WhatsAppSessaoSchema = new mongoose.Schema({
   lgpdAceito:       { type: Boolean, default: false },
   lgpdAceitoEm:     { type: Date, default: null },
   ultimoTicketId:   { type: Number, default: null },
+  remoteJid:        { type: String, default: null }, // JID completo para envio (ex: xxx@lid ou xxx@s.whatsapp.net)
+  pesquisaEnviada:  { type: Boolean, default: false }, // true após enviar pesquisa de satisfação do último ticket
   ultimaMensagem:   { type: Date, default: Date.now },
   ativo:            { type: Boolean, default: true },
 }, { timestamps: true });

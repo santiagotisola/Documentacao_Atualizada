@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { api, setApiUrl, getConfiguredUrl } from "../services/api";
+import DashboardWidgets from "./DashboardWidgets";
 
 /* ═══════════════════════════════════════════════════
    Grid de serviços — acesso rápido
@@ -137,6 +138,8 @@ export default function Dashboard() {
           ))}
         </div>
       </div>
+
+      <DashboardWidgets />
 
       <div className="dash-analytics-section">
         <h3 className="dash-analytics-title">Analytics</h3>

@@ -15,6 +15,7 @@ import { processarMensagemWA } from "./whatsapp-flow.js";
 import { conectar as conectarAxCross } from "./services/axcross-db.js";
 import { iniciar as iniciarPolling } from "./scheduler.js";
 import { iniciarColetaPNCP } from "./scheduler.js";
+import { iniciarTicketClosedPoller } from "./ticket-closed-poller.js";
 import { axioniAgent } from "./agent/agent.js";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -163,6 +164,9 @@ async function iniciar() {
       const authTipo = temToken ? "Bearer Token" : "Basic Auth";
       iniciarPolling(intervalo);
       console.log(`🔑 Jitbit auth: ${authTipo}`);
+
+      // Monitorar tickets fechados para enviar pesquisa de satisfação
+      iniciarTicketClosedPoller();
     } else {
       console.log("ℹ️  Polling Jitbit inativo — configure JITBIT_TOKEN (ou JITBIT_USER+PASS) no .env");
     }

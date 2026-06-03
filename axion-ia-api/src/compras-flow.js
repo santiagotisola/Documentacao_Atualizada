@@ -14,7 +14,7 @@ import { PedidoCompra } from "./models/pedido-compra.model.js";
 import { Cliente } from "./models/cliente.model.js";
 import { Equipamento } from "./models/equipamento.model.js";
 import { WhatsAppSessao } from "./models/whatsapp-sessao.model.js";
-import { enviarMensagem, verificarNumeroWhatsApp, enviarMensagemComBotoes, enviarListaSelecao } from "./services/whatsapp.service.js";
+import { enviarMensagem, verificarNumeroWhatsApp, enviarMensagemComBotoes, enviarListaSelecao, enviarConfirmacao } from "./services/whatsapp.service.js";
 import { criarTicketUsuario, criarTicket, responderTicket } from "./jitbit.js";
 import { salvarHistorico, salvarErroWhatsApp } from "./logger.js";
 

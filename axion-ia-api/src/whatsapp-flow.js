@@ -9,7 +9,7 @@
  */
 
 import { WhatsAppSessao } from "./models/whatsapp-sessao.model.js";
-import { enviarMensagem, enviarListaSelecao } from "./services/whatsapp.service.js";
+import { enviarMensagem, enviarListaSelecao, enviarConfirmacao, enviarImagem, enviarMensagemComBotoes } from "./services/whatsapp.service.js";
 import { criarTicketUsuario, buscarTicket, buscarComentarios, buscarCategorias, anexarArquivo, atribuirTecnico, listarUsuarios } from "./jitbit.js";
 import { gerarResposta, gerarRespostaWA } from "./engine.js";
 import { classificarMensagem } from "./classifier.js";
@@ -115,8 +115,10 @@ async function obterOuCriarSessao(telefone, nome, remoteJid) {
     sessao.ultimaMensagem = new Date();
     sessao.ativo = true;
   }
-  // JID completo para responder (não persiste no Mongo)
-  sessao._remoteJid = remoteJid || `${telefone}@s.whatsapp.net`;
+  // JID completo para responder — persiste no Mongo para polling de tickets fechados
+  const jidFinal = remoteJid || `${telefone}@s.whatsapp.net`;
+  sessao._remoteJid = jidFinal;
+  sessao.remoteJid = jidFinal;
   return sessao;
 }
 
@@ -166,25 +168,8 @@ export async function processarMensagemWA(telefone, nome, texto, midia = null, r
     return;
   }
 
-  // === LGPD Gate: exigir consentimento antes de qualquer interação ===
-  if (!sessao.lgpdAceito) {
-    if (sessao.estado !== "aguardando_lgpd") {
-      // Primeira interação — apresentar termos LGPD
-      sessao.estado = "aguardando_lgpd";
-      sessao.dadosParciais = {};
-      await salvarSessao(sessao);
-      await enviarMensagem(jid, MENSAGEM_LGPD(sessao.nome));
-      await enviarListaSelecao(jid, "Selecione uma opção:", "Responder", LGPD_SECOES);
-      return;
-    }
-    // Sessão já está aguardando resposta LGPD
-    await handleLgpd(sessao, t);
-    return;
-  }
-
-  // Comandos globais (só acessível após LGPD aceito)
-  // "sair" e "encerrar" = encerra sessão completa (reseta LGPD — próxima mensagem reinicia tudo)
-  if (["sair", "encerrar", "terminar"].includes(t)) {
+  // === Comandos globais: "sair"/"encerrar"/"finalizar" funcionam em QUALQUER estado ===
+  if (["sair", "encerrar", "terminar", "finalizar"].includes(t)) {
     sessao.estado = "encerrado";
     sessao.lgpdAceito = false;
     sessao.ativo = false;
@@ -194,6 +179,26 @@ export async function processarMensagemWA(telefone, nome, texto, midia = null, r
     await enviarMensagem(jid, `✅ Atendimento encerrado.\n\nObrigado pelo contato! Ao enviar uma nova mensagem, o atendimento será reiniciado.`);
     return;
   }
+
+  // === LGPD Gate: exigir consentimento antes de qualquer interação ===
+  if (!sessao.lgpdAceito) {
+    if (sessao.estado !== "aguardando_lgpd") {
+      // Primeira interação — apresentar termos LGPD
+      sessao.estado = "aguardando_lgpd";
+      sessao.dadosParciais = {};
+      await salvarSessao(sessao);
+      await enviarMensagem(jid, MENSAGEM_LGPD(sessao.nome));
+      await enviarMensagemComBotoes(jid, "Por favor, selecione uma opção para continuar:", [
+        { id: "1", texto: "✅ ACEITAR" },
+        { id: "2", texto: "❌ NÃO ACEITAR" }
+      ], "Axion Tecnologia");
+      return;
+    }
+    // Sessão já está aguardando resposta LGPD
+    await handleLgpd(sessao, t);
+    return;
+  }
+
   // "cancelar", "voltar", "0" (fora do menu) = cancela fluxo atual e volta ao menu (mantém LGPD)
   if (["cancelar", "voltar"].includes(t) || (t === "0" && sessao.estado !== "menu")) {
     sessao.estado = "menu";
@@ -292,6 +297,13 @@ export async function processarMensagemWA(telefone, nome, texto, midia = null, r
     case "compras_motivo_rejeicao":
       await processarCompras(sessao, texto, midia);
       break;
+    // ─── PESQUISA DE SATISFAÇÃO ──────────────────────────────
+    case "avaliacao_nota":
+      await handleAvaliacaoNota(sessao, t);
+      break;
+    case "avaliacao_comentario":
+      await handleAvaliacaoComentario(sessao, texto);
+      break;
     case "atendente":
       await handleAtendente(sessao, t);
       break;
@@ -313,7 +325,7 @@ export async function processarMensagemWA(telefone, nome, texto, midia = null, r
 // --------------------------------------------------------------------------
 
 async function handleLgpd(sessao, opcao) {
-  if (opcao === "1") {
+  if (opcao === "1" || opcao === "aceitar" || opcao === "sim" || opcao === "aceito" || opcao === "s") {
     // Usuário aceitou os termos
     sessao.lgpdAceito = true;
     sessao.lgpdAceitoEm = new Date();
@@ -321,7 +333,7 @@ async function handleLgpd(sessao, opcao) {
     await salvarSessao(sessao);
     await enviarMensagem(sessao._remoteJid, `✅ Obrigado! Seu consentimento foi registrado.`);
     await enviarMenu(sessao._remoteJid);
-  } else if (opcao === "2") {
+  } else if (opcao === "2" || opcao === "não aceitar" || opcao === "nao aceitar" || opcao === "nao" || opcao === "não") {
     // Usuário recusou — encerrar atendimento
     sessao.estado = "encerrado";
     sessao.ativo = false;
@@ -329,8 +341,11 @@ async function handleLgpd(sessao, opcao) {
     await enviarMensagem(sessao._remoteJid,
       `Entendido. O atendimento foi encerrado.\n\nCaso mude de ideia, envie uma mensagem a qualquer momento para reiniciar.`);
   } else {
-    // Resposta inválida — repetir
-    await enviarListaSelecao(sessao._remoteJid, "Por favor, selecione uma opção:", "Responder", LGPD_SECOES);
+    // Resposta inválida — repetir botões
+    await enviarMensagemComBotoes(sessao._remoteJid, "Selecione uma das opções para continuar:", [
+      { id: "1", texto: "✅ ACEITAR" },
+      { id: "2", texto: "❌ NÃO ACEITAR" }
+    ], "Axion Tecnologia");
   }
 }
 
@@ -608,9 +623,11 @@ async function handleConfirmacao(sessao, opcao) {
     }
 
     sessao.ultimoTicketId = ticketId;
+    sessao.pesquisaEnviada = false;
     sessao.estado = "menu";
     const assuntoFinal = sessao.dadosParciais.assunto;
-    sessao.dadosParciais = {};
+    sessao.dadosParciais = { ticketId, assuntoFinal };
+    sessao.markModified("dadosParciais");
     await salvarSessao(sessao);
 
     salvarHistorico({
@@ -627,6 +644,9 @@ async function handleConfirmacao(sessao, opcao) {
       `Você receberá atualizações aqui mesmo.\n` +
       `🔗 Acompanhe: https://desk.axiontecnologia.com.br/Ticket/${ticketId}`
     );
+
+    // Pesquisa de satisfação será enviada quando o ticket for fechado no helpdesk
+    // (monitorado pelo cron ticketClosedPoller)
     await enviarMenu(sessao._remoteJid);
   } catch (err) {
     salvarErroWhatsApp({ telefone: sessao.telefone, estado: "confirmando_ticket", erro: err.message, contexto: { assunto: sessao.dadosParciais?.assunto, categoriaId: sessao.dadosParciais?.categoriaId } });
@@ -876,5 +896,123 @@ async function handleRespostaDuvida(sessao, opcao, textoCompleto) {
       ]}]
     );
   }
+}
+
+// --------------------------------------------------------------------------
+// HANDLERS — PESQUISA DE SATISFAÇÃO
+// --------------------------------------------------------------------------
+
+// Caminho da imagem de pesquisa de satisfação
+import { fileURLToPath as __futp } from "url";
+import { dirname as __dn, resolve as __rslv } from "path";
+const __pesquisaDir = __dn(__futp(import.meta.url));
+const PESQUISA_IMG_PATH = __rslv(__pesquisaDir, "..", "uploads", "pesquisa-satisfacao-axion.png");
+
+const PESQUISA_PERGUNTAS = [
+  {
+    id: "nota_atendimento",
+    texto: `Seu atendimento foi concluído e registrado com sucesso! 🕗\n\n` +
+      `Avalie nosso atendimento e caso seja necessário entre em contato novamente, será um prazer atender você! 🤩\n\n` +
+      `🎯 *Participe da nossa pesquisa de satisfação*\n\n` +
+      `Digite a nota de atendimento:\n\n` +
+      `*5* — 😄 Meu problema foi resolvido e o atendimento foi excelente.\n` +
+      `*4* — ☺️ Minha solicitação foi atendida e o atendimento foi bom.\n` +
+      `*3* — 😐 Bom atendimento, mas poderia melhorar.\n` +
+      `*2* — 😕 Demorou muito para atender e o atendimento foi ruim.\n` +
+      `*1* — 😟 Péssimo atendimento. Não atendeu minha solicitação.\n\n` +
+      `_Digite *0* para pular a avaliação._`,
+    tipo: "nota" // aceita 1-5 ou 0 para pular
+  },
+  {
+    id: "comentario",
+    texto: `💬 Gostaria de deixar algum comentário ou sugestão para melhorarmos?\n\n_Digite *0* ou *pular* para finalizar sem comentário._`,
+    tipo: "texto" // aceita qualquer texto
+  }
+];
+
+/**
+ * Inicia a pesquisa de satisfação — envia imagem + primeira pergunta.
+ */
+export async function iniciarPesquisaSatisfacao(jid) {
+  // Tentar enviar imagem de pesquisa
+  try {
+    const fs = await import("fs/promises");
+    const imgBuffer = await fs.readFile(PESQUISA_IMG_PATH);
+    await enviarImagem(jid, imgBuffer, "A SUA OPINIÃO É FUNDAMENTAL — Axion Tecnologia", "image/png");
+  } catch (err) {
+    // Imagem não disponível — seguir sem ela
+    console.log(`⚠️  [Pesquisa] Imagem não encontrada: ${err.message}`);
+  }
+
+  // Enviar primeira pergunta (nota)
+  await enviarMensagem(jid, PESQUISA_PERGUNTAS[0].texto);
+}
+
+/**
+ * Handler: recebe a nota (1–5) ou 0 para pular.
+ */
+async function handleAvaliacaoNota(sessao, opcao) {
+  const jid = sessao._remoteJid;
+
+  // Pular avaliação
+  if (opcao === "0" || opcao === "pular") {
+    sessao.estado = "menu";
+    sessao.dadosParciais = {};
+    await salvarSessao(sessao);
+    await enviarMensagem(jid, `✅ Obrigado! O seu atendimento foi finalizado com sucesso.`);
+    await enviarMenu(jid);
+    return;
+  }
+
+  const nota = parseInt(opcao);
+  if (isNaN(nota) || nota < 1 || nota > 5) {
+    await enviarMensagem(jid, `Por favor, digite uma nota de *1* a *5*, ou *0* para pular.`);
+    return;
+  }
+
+  // Salvar nota e avançar para comentário
+  sessao.dadosParciais.avaliacao_nota = nota;
+  sessao.estado = "avaliacao_comentario";
+  sessao.markModified("dadosParciais");
+  await salvarSessao(sessao);
+
+  const emojis = { 5: "😄", 4: "☺️", 3: "😐", 2: "😕", 1: "😟" };
+  await enviarMensagem(jid, `${emojis[nota]} Nota *${nota}* registrada!\n\n${PESQUISA_PERGUNTAS[1].texto}`);
+}
+
+/**
+ * Handler: recebe o comentário opcional ou 0 para pular.
+ */
+async function handleAvaliacaoComentario(sessao, texto) {
+  const jid = sessao._remoteJid;
+  const t = (texto || "").trim().toLowerCase();
+
+  const comentario = (t === "0" || t === "pular") ? null : texto.trim();
+
+  // Salvar resultado final
+  sessao.dadosParciais.avaliacao_comentario = comentario;
+  sessao.markModified("dadosParciais");
+
+  // Registrar avaliação no histórico
+  const nota = sessao.dadosParciais.avaliacao_nota;
+  const ticketId = sessao.dadosParciais.ticketId || sessao.ultimoTicketId;
+
+  salvarHistorico({
+    mensagem: `[PESQUISA] Ticket #${ticketId} — Nota ${nota}/5${comentario ? ` — "${comentario}"` : ""}`,
+    origem: "pesquisa-satisfacao",
+    resposta: `Avaliação registrada: ${nota}/5 | Tel: ${sessao.telefone} | ${sessao.nome}`
+  });
+
+  // Finalizar
+  sessao.estado = "menu";
+  sessao.dadosParciais = {};
+  await salvarSessao(sessao);
+
+  await enviarMensagem(jid,
+    `✅ *Obrigado pela avaliação!*\n\n` +
+    `O seu atendimento foi finalizado com sucesso.\n` +
+    `Caso precise de algo mais, é só nos chamar! 😊`
+  );
+  await enviarMenu(jid);
 }
 

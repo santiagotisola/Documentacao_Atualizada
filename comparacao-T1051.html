@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Comparação T1051 — Fluxo × Triagem</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Segoe UI', Arial, sans-serif; background: #1e1e2e; color: #cdd6f4; padding: 16px; width: 520px; }
+.header { text-align: center; margin-bottom: 16px; }
+.header h1 { font-size: 17px; color: #89b4fa; margin-bottom: 4px; }
+.header p { font-size: 11px; color: #a6adc8; }
+.container { display: flex; flex-direction: column; gap: 12px; }
+.panel { background: #313244; border-radius: 10px; padding: 14px; border: 1px solid #45475a; }
+.panel h2 { font-size: 14px; margin-bottom: 3px; }
+.panel .subtitle { font-size: 10px; color: #a6adc8; margin-bottom: 10px; }
+.panel.fluxo h2 { color: #a6e3a1; }
+.panel.triagem h2 { color: #f9e2af; }
+.panel.bug h2 { color: #f38ba8; }
+table { width: 100%; border-collapse: collapse; font-size: 12px; }
+th { background: #45475a; color: #cdd6f4; padding: 6px 5px; text-align: center; font-weight: 600; }
+td { padding: 5px 4px; text-align: center; border-bottom: 1px solid #45475a; }
+.total-row td { background: #45475a; font-weight: 700; color: #f9e2af; }
+.ok { color: #a6e3a1; }
+.warn { color: #f9e2af; }
+.danger { color: #f38ba8; }
+.badge { display: inline-block; padding: 2px 6px; border-radius: 4px; font-size: 10px; font-weight: 600; }
+.badge-ok { background: #a6e3a122; color: #a6e3a1; border: 1px solid #a6e3a1; }
+.badge-bug { background: #f38ba822; color: #f38ba8; border: 1px solid #f38ba8; }
+.badge-warn { background: #f9e2af22; color: #f9e2af; border: 1px solid #f9e2af; }
+.summary { margin-top: 14px; display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.summary-card { background: #313244; border-radius: 8px; padding: 10px; text-align: center; border: 1px solid #45475a; }
+.summary-card .value { font-size: 22px; font-weight: 700; }
+.summary-card .label { font-size: 10px; color: #a6adc8; margin-top: 2px; }
+.arrow { font-size: 18px; color: #f38ba8; text-align: center; padding: 4px 0; }
+.vs-section { margin-top: 20px; text-align: center; }
+.vs-section h3 { color: #f38ba8; font-size: 14px; margin-bottom: 10px; }
+.vs-row { display: flex; align-items: center; justify-content: center; gap: 10px; margin-bottom: 8px; font-size: 13px; }
+.vs-val { background: #45475a; padding: 4px 12px; border-radius: 6px; min-width: 80px; }
+.footer { text-align: center; margin-top: 14px; font-size: 10px; color: #6c7086; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>🔍 Análise Comparativa — Equipamento T1051 (STRANS)</h1>
+  <p>Período: 23/05/2026 a 27/05/2026 | Fabricante: VIZENTEC | Gerado em: 27/05/2026</p>
+</div>
+
+<div class="container">
+  <!-- PAINEL FLUXO -->
+  <div class="panel fluxo">
+    <h2>📊 Relatório de Fluxo Diário</h2>
+    <div class="subtitle">Fonte: TBPassagens / TBPassagensConjugadas — Filtro: T1051 <span class="badge badge-ok">FUNCIONA</span></div>
+    <table>
+      <thead>
+        <tr><th>Data</th><th>Passagens</th><th>Infrações</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>23/05</td><td>5.169</td><td class="ok">20</td></tr>
+        <tr><td>24/05</td><td>4.072</td><td class="ok">16</td></tr>
+        <tr><td>25/05</td><td>5.185</td><td class="ok">19</td></tr>
+        <tr><td>26/05</td><td>5.526</td><td class="ok">19</td></tr>
+        <tr><td>27/05</td><td>3.071</td><td class="ok">2</td></tr>
+        <tr class="total-row"><td><b>TOTAL</b></td><td><b>23.023</b></td><td><b>76</b></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="arrow">⬇ ≠ DADOS DIFERENTES ⬇</div>
+
+  <!-- PAINEL TRIAGEM -->
+  <div class="panel triagem">
+    <h2>⚙️ Tela de Triagem Infrações</h2>
+    <div class="subtitle">Fonte: TBInfracoes — Filtro por equip. <span class="badge badge-bug">NÃO FUNCIONA</span></div>
+    <table>
+      <thead>
+        <tr><th>Data</th><th>Triagem</th><th>Descart.</th><th>Process.</th><th>Total</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>23/05</td><td class="warn">856</td><td>18</td><td>13</td><td>887</td></tr>
+        <tr><td>24/05</td><td class="warn">821</td><td>27</td><td>9</td><td>857</td></tr>
+        <tr><td>25/05</td><td class="warn">951</td><td>23</td><td>2</td><td>976</td></tr>
+        <tr><td>26/05</td><td class="danger">3.172</td><td>26</td><td>0</td><td>3.198</td></tr>
+        <tr><td>27/05</td><td class="warn">724</td><td>11</td><td>0</td><td>735</td></tr>
+        <tr class="total-row"><td><b>TOTAL</b></td><td><b>6.524</b></td><td><b>105</b></td><td><b>24</b></td><td><b>6.653</b></td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- CARDS RESUMO -->
+<div class="summary">
+  <div class="summary-card">
+    <div class="value ok">76</div>
+    <div class="label">Infrações Fluxo T1051</div>
+  </div>
+  <div class="summary-card">
+    <div class="value danger">6.524</div>
+    <div class="label">Pendentes Triagem (TODOS equip.)</div>
+  </div>
+  <div class="summary-card">
+    <div class="value warn">24</div>
+    <div class="label">Processadas Triagem</div>
+  </div>
+  <div class="summary-card">
+    <div class="value danger" style="font-size:18px;">IDÊNTICO</div>
+    <div class="label">Resultado com qualquer filtro</div>
+  </div>
+</div>
+
+<!-- BUG EVIDÊNCIA -->
+<div class="container" style="margin-top:20px;">
+  <div class="panel bug">
+    <h2>🔴 BUG — Filtro de Equipamento Não Funciona</h2>
+    <div class="subtitle">Teste: selecionar T1051, T1022, ou NENHUM retorna os mesmos dados</div>
+    <table>
+      <thead>
+        <tr><th>Filtro aplicado</th><th>23/05</th><th>24/05</th><th>25/05</th><th>26/05</th><th>27/05</th><th>Total</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>T1051</td><td>856</td><td>820</td><td>951</td><td>3.150</td><td>746</td><td>7.522</td></tr>
+        <tr><td>T1022</td><td>856</td><td>820</td><td>951</td><td>3.149</td><td>751</td><td>7.524</td></tr>
+        <tr><td>Nenhum</td><td>856</td><td>821</td><td>951</td><td>3.172</td><td>724</td><td>7.527</td></tr>
+        <tr class="total-row"><td colspan="7" style="color:#f38ba8;">⚠️ Dados idênticos = Select2 NÃO envia parâmetro equipamentoIds ao backend</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="footer">
+  Axion Tecnologia — Análise de Suporte | Site: STRANS | Equip.: T1051 (VIZENTEC) | Arquivo: ANALISE-T1051-PROGRAMADOR.zip
+</div>
+
+</body>
+</html>

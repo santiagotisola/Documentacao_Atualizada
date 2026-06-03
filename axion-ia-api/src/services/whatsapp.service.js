@@ -5,7 +5,7 @@
  * A sessão é salva em src/whatsapp-auth/ e reutilizada nos próximos starts.
  */
 
-import { makeWASocket, useMultiFileAuthState, DisconnectReason, fetchLatestBaileysVersion, downloadMediaMessage } from "@whiskeysockets/baileys";
+import { makeWASocket, useMultiFileAuthState, DisconnectReason, fetchLatestBaileysVersion, downloadMediaMessage, getAggregateVotesInPollMessage } from "@whiskeysockets/baileys";
 import qrcode from "qrcode-terminal";
 import QRCode from "qrcode";
 import path from "path";
@@ -19,6 +19,9 @@ let sock = null;
 let conectado = false;
 let qrAtual = null;
 let onMensagem = null; // callback externo
+
+// ─── Poll tracking: mapeia msgId → { jid, opcoes } para resolver votos ────────
+const pollStore = new Map(); // msgId → { jid, opcoes: string[], pergunta: string }
 
 const estado = {
   status: "desconectado", // desconectado | conectando | qr_pendente | conectado
@@ -120,8 +123,26 @@ export async function iniciarWhatsApp(callbackMensagem) {
       if (!msg.message) continue;
 
       const remoteJid = msg.key.remoteJid || "";
-      // Normaliza telefone para armazenamento (remove sufixos)
-      const telefone = remoteJid.replace(/@s\.whatsapp\.net$/, "").replace(/@lid$/, "").replace(/@.*$/, "");
+      
+      // Resolver JID real: LID (@lid) não funciona para envio direto
+      // Precisamos converter para @s.whatsapp.net quando possível
+      let jidParaResponder = remoteJid;
+      let telefone;
+      
+      if (remoteJid.endsWith("@lid")) {
+        // LID: tentar extrair o número real via participant ou lidToJid
+        const participant = msg.key.participant || "";
+        if (participant && participant.includes("@s.whatsapp.net")) {
+          jidParaResponder = participant;
+          telefone = participant.replace(/@s\.whatsapp\.net$/, "").replace(/:.*$/, "");
+        } else {
+          // Fallback: usar o próprio LID para telefone/storage mas tentar enviar via LID
+          telefone = remoteJid.replace(/@lid$/, "").replace(/:.*$/, "");
+        }
+      } else {
+        telefone = remoteJid.replace(/@s\.whatsapp\.net$/, "").replace(/@.*$/, "");
+      }
+      
       const nome = msg.pushName || telefone;
 
       // Capturar texto de diferentes tipos de mensagem (incluindo botões clicados)
@@ -163,11 +184,53 @@ export async function iniciarWhatsApp(callbackMensagem) {
 
       if (onMensagem) {
         try {
-          // Passa o remoteJid completo para o flow poder responder corretamente
-          await onMensagem(telefone, nome, texto.trim(), midia, remoteJid);
+          // Passa o jidParaResponder (resolve LID → phone JID quando possível)
+          await onMensagem(telefone, nome, texto.trim(), midia, jidParaResponder);
         } catch (err) {
           console.error("❌ [WhatsApp] Erro no callback de mensagem:", err.message);
         }
+      }
+    }
+  });
+
+  // ─── Capturar votos de Poll (Fase 1: botões via poll) ────────────────────────
+  sock.ev.on("messages.update", async (updates) => {
+    for (const { key, update } of updates) {
+      if (!update.pollUpdates) continue;
+
+      const pollMsg = pollStore.get(key.id);
+      if (!pollMsg) continue;
+
+      try {
+        // Agregar votos
+        const votes = getAggregateVotesInPollMessage({
+          message: { pollCreationMessage: { name: pollMsg.pergunta, options: pollMsg.opcoes.map(o => ({ optionName: o })) } },
+          pollUpdates: update.pollUpdates,
+        });
+
+        // Encontrar opção selecionada (a que tem voto)
+        const selecionada = votes.find(v => v.voters?.length > 0);
+        if (!selecionada) continue;
+
+        const opcaoTexto = selecionada.name;
+        const opcaoIdx = pollMsg.opcoes.indexOf(opcaoTexto);
+        // Mapear para ID (1-based) ou o texto da opção se não tiver ID
+        const respostaId = pollMsg.ids?.[opcaoIdx] || String(opcaoIdx + 1);
+
+        const remoteJid = pollMsg.jid;
+        const telefone = remoteJid.replace(/@s\.whatsapp\.net$/, "").replace(/@lid$/, "").replace(/@.*$/, "");
+
+        console.log(`🗳️ [WhatsApp] Poll vote de ${telefone}: "${opcaoTexto}" → id="${respostaId}"`);
+
+        // Limpar do store (poll respondida)
+        pollStore.delete(key.id);
+
+        // Processar como mensagem normal
+        if (onMensagem) {
+          await onMensagem(telefone, "", respostaId, null, remoteJid);
+        }
+      } catch (err) {
+        console.error("❌ [WhatsApp] Erro ao processar poll vote:", err.message);
       }
     }
   });
@@ -184,7 +247,15 @@ export async function enviarMensagem(telefoneOuJid, texto) {
   }
   // Se já contém @, usar diretamente; senão, montar JID
   const jid = telefoneOuJid.includes("@") ? telefoneOuJid : `${telefoneOuJid}@s.whatsapp.net`;
-  await sock.sendMessage(jid, { text: texto });
+  console.log(`📤 [WhatsApp] Enviando para ${jid}: ${texto.substring(0, 80)}...`);
+  try {
+    const result = await sock.sendMessage(jid, { text: texto });
+    console.log(`✅ [WhatsApp] Mensagem enviada (msgId: ${result?.key?.id || "?"})`);
+    return result;
+  } catch (err) {
+    console.error(`❌ [WhatsApp] ERRO ao enviar para ${jid}:`, err.message);
+    throw err;
+  }
 }
 
 /**
@@ -201,50 +272,22 @@ export async function enviarMensagemComBotoes(telefoneOuJid, texto, botoes, roda
   }
   const jid = telefoneOuJid.includes("@") ? telefoneOuJid : `${telefoneOuJid}@s.whatsapp.net`;
 
-  // Tentar enviar com botões interativos
+  // Baileys (API não-oficial) NÃO consegue renderizar botões interativos no WhatsApp.
+  // O sendMessage não dá erro mas a mensagem chega invisível/vazia no celular.
+  // Solução: enviar sempre como texto formatado com opções numeradas.
+  const opcoesTexto = botoes.map(b => `*${b.id}* — ${b.texto}`).join("\n");
+  const mensagemFinal = rodape 
+    ? `${texto}\n\n${opcoesTexto}\n\n_${rodape}_`
+    : `${texto}\n\n${opcoesTexto}`;
+  
+  console.log(`📤 [WhatsApp] Enviando opções para ${jid}`);
   try {
-    const buttonMessage = {
-      text: texto,
-      footer: rodape || undefined,
-      buttons: botoes.map((b, i) => ({
-        buttonId: b.id,
-        buttonText: { displayText: b.texto },
-        type: 1
-      })),
-      headerType: 1
-    };
-    await sock.sendMessage(jid, buttonMessage);
-    return;
+    const result = await sock.sendMessage(jid, { text: mensagemFinal });
+    console.log(`✅ [WhatsApp] Opções enviadas (msgId: ${result?.key?.id || "?"})`);
   } catch (err) {
-    console.log(`⚠️ [WhatsApp] Botões não suportados, tentando interactiveMessage...`);
+    console.error(`❌ [WhatsApp] ERRO ao enviar opções para ${jid}:`, err.message);
+    throw err;
   }
-
-  // Fallback: tentar interactive message (formato mais recente)
-  try {
-    const interactiveMsg = {
-      viewOnceMessage: {
-        message: {
-          interactiveMessage: {
-            body: { text: texto },
-            footer: rodape ? { text: rodape } : undefined,
-            nativeFlowMessage: {
-              buttons: botoes.map(b => ({
-                name: "quick_reply",
-                buttonParamsJson: JSON.stringify({ display_text: b.texto, id: b.id })
-              }))
-            }
-          }
-        }
-      }
-    };
-    await sock.relayMessage(jid, interactiveMsg, {});
-    return;
-  } catch (err2) {
-    console.log(`⚠️ [WhatsApp] InteractiveMessage falhou, enviando como texto.`);
-  }
-
-  // Fallback final: texto puro
-  await sock.sendMessage(jid, { text: texto });
 }
 
 /**
@@ -262,13 +305,93 @@ export async function enviarListaSelecao(telefoneOuJid, corpo, textoBotao, secoe
   if (!sock || !conectado) throw new Error("WhatsApp não está conectado");
   const jid = telefoneOuJid.includes("@") ? telefoneOuJid : `${telefoneOuJid}@s.whatsapp.net`;
 
-  // Texto formatado com opções numeradas (único método confiável no Baileys Web)
+  // Contar total de opções para decidir se usa Botões ou texto
+  const todasOpcoes = secoes.flatMap(s => s.opcoes);
+
+  // Se <= 3 opções → usar Botões interativos (clicáveis!)
+  if (todasOpcoes.length <= 3) {
+    try {
+      await enviarMensagemComBotoes(jid, corpo, todasOpcoes.map(o => ({ id: o.id, texto: o.titulo })), extras.rodape || "");
+      return;
+    } catch (err) {
+      console.log(`⚠️ [WhatsApp] Botões falhou, usando fallback texto: ${err.message}`);
+    }
+  } else if (todasOpcoes.length <= 12) {
+    // 4-12 opções → tentar botões com mensagem formatada
+    try {
+      // Botões suportam max 3, então enviar como texto formatado com opções numeradas
+      const textoOpcoes = todasOpcoes.map(op => `*${op.id}* — ${op.titulo}${op.descricao ? ` _(${op.descricao})_` : ""}`).join("\n");
+      await sock.sendMessage(jid, { text: `${corpo}\n\n${textoOpcoes}` });
+      return;
+    } catch (err) {
+      console.log(`⚠️ [WhatsApp] Texto formatado falhou: ${err.message}`);
+    }
+  }
+
+  // Fallback: Texto formatado com opções numeradas
   const textoOpcoes = secoes.map(sec => {
     const header = sec.titulo ? `*${sec.titulo}*\n` : "";
     const rows = sec.opcoes.map(op => `*${op.id}* — ${op.titulo}${op.descricao ? ` _(${op.descricao})_` : ""}`).join("\n");
     return header + rows;
   }).join("\n\n");
   await sock.sendMessage(jid, { text: `${corpo}\n\n${textoOpcoes}` });
+}
+
+/**
+ * Envia uma Poll como botão de escolha (Fase 1).
+ * A poll funciona como botões clicáveis no WhatsApp.
+ * O voto é capturado pelo handler messages.update e processado como mensagem.
+ * 
+ * @param {string} telefoneOuJid
+ * @param {string} pergunta - texto da poll (aparece como título)
+ * @param {string[]} opcoes - array de textos das opções (max 12)
+ * @param {string[]} [ids] - IDs correspondentes (se null, usa index+1)
+ */
+export async function enviarPoll(telefoneOuJid, pergunta, opcoes, ids = null) {
+  if (!sock || !conectado) throw new Error("WhatsApp não está conectado");
+  const jid = telefoneOuJid.includes("@") ? telefoneOuJid : `${telefoneOuJid}@s.whatsapp.net`;
+
+  if (opcoes.length > 12) throw new Error("Poll suporta no máximo 12 opções");
+  if (opcoes.length < 1) throw new Error("Poll precisa de pelo menos 1 opção");
+
+  // Enviar poll
+  const msg = await sock.sendMessage(jid, {
+    poll: {
+      name: pergunta,
+      values: opcoes,
+      selectableCount: 1, // Seleção única (comportamento de botão)
+    }
+  });
+
+  // Armazenar no pollStore para resolver o voto depois
+  if (msg?.key?.id) {
+    pollStore.set(msg.key.id, {
+      jid,
+      opcoes,
+      ids: ids || opcoes.map((_, i) => String(i + 1)),
+      pergunta,
+      criado: Date.now(),
+    });
+
+    // Limpar polls antigas (>1h) para não vazar memória
+    for (const [id, poll] of pollStore) {
+      if (Date.now() - poll.criado > 3600000) pollStore.delete(id);
+    }
+  }
+
+  return msg;
+}
+
+/**
+ * Envia confirmação com botões clicáveis (Sim/Não, Confirmar/Cancelar, etc.)
+ * Usa enviarMensagemComBotoes ao invés de Poll.
+ * 
+ * @param {string} telefoneOuJid
+ * @param {string} pergunta - ex: "Confirmar abertura do chamado?"
+ * @param {{ id: string, texto: string }[]} opcoes - ex: [{id:"1", texto:"✅ Confirmar"}, {id:"2", texto:"❌ Cancelar"}]
+ */
+export async function enviarConfirmacao(telefoneOuJid, pergunta, opcoes) {
+  return enviarMensagemComBotoes(telefoneOuJid, pergunta, opcoes, "Axion Tecnologia");
 }
 
 /**

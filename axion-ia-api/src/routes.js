@@ -27,6 +27,7 @@ import { listarContatos, detalheContato, atualizarContato, statsContatos, listar
 import { listarEquipamentosCRM, statsEquipamentos, detalheEquipamento, atualizarEquipamento, equipamentosDoCliente, buscaEquipamento } from "./equipamento-controller.js";
 import { buscarEditaisGovHandler, importarEditalHandler, analisarEditalRapidoHandler, listarEditaisImportadosHandler, autoAnalisarTodosHandler, analiseAvancadaHandler, uploadEditalHandler, uploadEditalMiddleware, listarSitesHandler } from "./edital-controller.js";
 import { sitesOverview, obterMapa, associarSite, desassociarSite, ticketsPorSite } from "./sites-helpdesk-controller.js";
+import { listarContratosHandler, listarTiposHandler, gerarRelatorioHandler, listarRelatoriosHandler, obterRelatorioHandler, removerRelatorioHandler } from "./relatorio-contrato-controller.js";
 const router = express.Router();
 
 // AxionIA Chat
@@ -117,6 +118,14 @@ router.post("/doc/upload-contexto", uploadMiddlewareComErro, uploadContexto);
 router.get("/relatorio/passagens", relatorioPassagens);
 router.get("/relatorio/imagens", relatorioImagens);
 router.get("/relatorio/equipamentos", listarEquipamentosRelatorio);
+
+// Relatórios por Contrato (IA)
+router.get("/relatorio-contrato/contratos", listarContratosHandler);
+router.get("/relatorio-contrato/tipos", listarTiposHandler);
+router.post("/relatorio-contrato/gerar", gerarRelatorioHandler);
+router.get("/relatorio-contrato", listarRelatoriosHandler);
+router.get("/relatorio-contrato/:id", obterRelatorioHandler);
+router.delete("/relatorio-contrato/:id", removerRelatorioHandler);
 
 // Configuração
 router.get("/config", obterConfig);

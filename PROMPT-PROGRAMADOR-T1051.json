@@ -1,0 +1,180 @@
+{
+  "metadata": {
+    "assunto": "Investigação — Divergência Fluxo Diário × Triagem — Equipamento T1051 (STRANS)",
+    "prioridade": "Alta",
+    "reportadoPor": "Equipe de Suporte",
+    "data": "2026-05-27",
+    "site": "STRANS",
+    "url": "https://strans.axhub.axion.ws",
+    "equipamento": "T1051",
+    "fabricante": "VIZENTEC",
+    "grupoId": "f1178243-0080-4d19-95d7-99f26d6fdcdd"
+  },
+  "analise": {
+    "fluxoDiario": {
+      "url": "https://strans.axhub.axion.ws/relatorio/relatoriofluxodiarioveiculos",
+      "filtro": {
+        "grupo": "VIZENTEC",
+        "equipamento": "T1051",
+        "mes": "05/2026"
+      },
+      "dados": [
+        { "data": "2026-05-23", "fluxo": 5169, "infracoes": 20 },
+        { "data": "2026-05-24", "fluxo": 4072, "infracoes": 16 },
+        { "data": "2026-05-25", "fluxo": 5185, "infracoes": 19 },
+        { "data": "2026-05-26", "fluxo": 5526, "infracoes": 19 },
+        { "data": "2026-05-27", "fluxo": 3071, "infracoes": 2 }
+      ],
+      "totais": { "fluxo": 23023, "infracoes": 76 },
+      "conclusao": "Equipamento comunicando normalmente. Infrações sendo geradas."
+    },
+    "triagem": {
+      "url": "https://strans.axhub.axion.ws/triagem",
+      "filtro": {
+        "dataInicio": "2026-05-23 00:00",
+        "dataFim": "2026-05-27 23:59",
+        "exibirProcessadas": true,
+        "equipamento": "Todos (filtro por equip. não funciona)"
+      },
+      "dados": [
+        { "data": "2026-05-23", "triagem": 856, "reavaliar": 0, "descartadas": 18, "processadas": 13, "total": 887 },
+        { "data": "2026-05-24", "triagem": 821, "reavaliar": 0, "descartadas": 27, "processadas": 9, "total": 857 },
+        { "data": "2026-05-25", "triagem": 951, "reavaliar": 0, "descartadas": 23, "processadas": 2, "total": 976 },
+        { "data": "2026-05-26", "triagem": 3172, "reavaliar": 0, "descartadas": 26, "processadas": 0, "total": 3198 },
+        { "data": "2026-05-27", "triagem": 724, "reavaliar": 0, "descartadas": 11, "processadas": 0, "total": 735 }
+      ],
+      "totais": { "triagem": 6524, "reavaliar": 0, "descartadas": 105, "processadas": 24, "total": 6653 }
+    },
+    "testeFiltro": {
+      "descricao": "Filtro por equipamento não funciona - mesmos dados independente da seleção",
+      "testes": [
+        { "equipamento": "T1051", "resultado": [856, 820, 951, 3150, 746], "totalRegistros": 7522 },
+        { "equipamento": "T1022", "resultado": [856, 820, 951, 3149, 751], "totalRegistros": 7524 },
+        { "equipamento": "Nenhum (Todos)", "resultado": [856, 821, 951, 3172, 724], "totalRegistros": 7527 }
+      ],
+      "conclusao": "BUG CONFIRMADO: O filtro de equipamento na tela de Triagem NÃO filtra os dados."
+    }
+  },
+  "bugs": [
+    {
+      "id": "BUG-001",
+      "titulo": "Filtro de equipamento não funciona na tela de Triagem",
+      "severidade": "Alta",
+      "pagina": "/triagem",
+      "componente": "select2 #equipamentoIds",
+      "descricao": "O campo select2 'Equipamento' aceita seleção visual mas o valor NÃO é enviado na query ao backend (ou é ignorado no server-side).",
+      "reproducao": [
+        "Acessar /triagem",
+        "Expandir 'Mais Filtros'",
+        "Selecionar qualquer equipamento (T1051, T1022, etc.)",
+        "Marcar 'Exibir Processadas/Descartadas'",
+        "Clicar Filtrar",
+        "RESULTADO: dados idênticos independente do equipamento selecionado"
+      ],
+      "verificacoes": [
+        "O parâmetro 'equipamentoIds' está sendo enviado no POST/GET do Filtrar?",
+        "O backend está usando esse parâmetro no WHERE da query SQL?",
+        "O select2 está bindando corretamente o value ao form?",
+        "O <select name='EquipamentosIds'> está dentro do <form> que faz submit?",
+        "O ViewModel tem a propriedade List<Guid> EquipamentosIds?"
+      ],
+      "arquivosProvaveis": [
+        "Controllers/TriagemController.cs",
+        "ViewModels/TriagemFiltroViewModel.cs",
+        "Views/Triagem/Index.cshtml",
+        "wwwroot/js/triagem.js ou site.js"
+      ]
+    }
+  ],
+  "questoesTecnicas": [
+    {
+      "id": "Q-001",
+      "pergunta": "Qual a query SQL que gera a coluna 'Infrações' do Relatório de Fluxo Diário?",
+      "hipoteses": [
+        "SELECT COUNT(*) FROM TBPassagensConjugadas WHERE FoiGeradaInfracao = 1",
+        "SELECT COUNT(*) FROM TBInfracoes WHERE StatusProcessamento IN (...)"
+      ]
+    },
+    {
+      "id": "Q-002",
+      "pergunta": "A coluna 'Infrações' no Fluxo Diário conta apenas velocidade ou todos os tipos?",
+      "contexto": "Fluxo T1051 mostra 76 infrações, mas Triagem (TODOS equip.) mostra 24 processadas e 6.524 pendentes"
+    },
+    {
+      "id": "Q-003",
+      "pergunta": "É normal ter 98% das infrações pendentes de triagem? Há processamento automático?",
+      "dados": {
+        "pendentes": 6524,
+        "percentual": "98%",
+        "descartadas": 105,
+        "processadas": 24
+      }
+    },
+    {
+      "id": "Q-004",
+      "pergunta": "O que causou o pico de 3.172 pendentes no dia 26/05?",
+      "contexto": "Média dos outros dias é ~850 pendentes"
+    }
+  ],
+  "schema": {
+    "tabelasPrincipais": {
+      "TBInfracoes": {
+        "chave": "Id (bigint IDENTITY)",
+        "camposChave": [
+          "Equipamento_id (uniqueidentifier) - FK para TBEquipamentos",
+          "StatusProcessamento (nvarchar) - 'Triagem'|'Auditada'|'Exportada'|'Descartada'",
+          "DataHoraPassagem (datetime)",
+          "TipoInfracao (nvarchar)",
+          "IsDeleted (bit)"
+        ]
+      },
+      "TBPassagens": {
+        "chave": "Id (bigint IDENTITY)",
+        "camposChave": [
+          "Equipamento_id (uniqueidentifier)",
+          "DataHoraPassagem (datetime)",
+          "Infracao_id (bigint) - FK para TBInfracoes",
+          "VelocidadeMedida (smallint)"
+        ]
+      },
+      "TBPassagensConjugadas": {
+        "chave": "Id (bigint IDENTITY)",
+        "camposChave": [
+          "Equipamento_id (uniqueidentifier)",
+          "DataHoraPassagem (datetime)",
+          "FoiGeradaInfracao (bit) - indica se gerou infração"
+        ]
+      },
+      "TBTriagens": {
+        "chave": "Id (bigint) = FK para TBInfracoes (1:1)",
+        "camposChave": [
+          "MotivoDescarte_id (uniqueidentifier)",
+          "UsuarioTriagem_id (uniqueidentifier)",
+          "DescarteAutomatico (bit)",
+          "InicioTriagem (datetime)"
+        ]
+      },
+      "TBEquipamentos": {
+        "camposChave": [
+          "Id (uniqueidentifier)",
+          "Codigo (nvarchar) - ex: 'T1051'",
+          "GrupoEquipamento_id (uniqueidentifier) - FK para TBGrupoEquipamentos"
+        ]
+      }
+    },
+    "funcaoAcesso": "dbo.HasAccessEquipment(@userId, @equipamentoId, @operacaoRecursoId, @operacaoId)"
+  },
+  "resumoExecutivo": {
+    "comunicacaoT1051": { "status": "OK", "acao": "Nenhuma" },
+    "geracaoInfracoes": { "status": "OK", "detalhe": "76 no período", "acao": "Nenhuma" },
+    "filtroEquipamentoTriagem": { "status": "BUG", "acao": "Corrigir select2 → backend" },
+    "relacaoFluxoTriagem": { "status": "Não documentada", "acao": "Documentar query SQL de cada um" },
+    "backlogTriagem": { "status": "Alerta", "detalhe": "6.524 pendentes", "acao": "Verificar se é operacional ou técnico" }
+  },
+  "arquivosEntregues": [
+    "PROMPT-PROGRAMADOR-T1051.md",
+    "PROMPT-PROGRAMADOR-T1051.json",
+    "INVESTIGACAO-BUG-FILTRO-TRIAGEM-T1051.md",
+    "scripts-validacao-T1051.sql"
+  ]
+}

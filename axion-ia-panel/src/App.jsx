@@ -4,7 +4,7 @@ import {
   Brain, LayoutDashboard, Globe,
   Bot, MessageCircle, Headphones,
   ScanSearch, ScanLine, BookMarked,
-  BarChart3,
+  BarChart3, ClipboardList,
   Landmark,
   FileText, Search, Clock, GraduationCap, ScrollText,
   Settings, ExternalLink, Menu, X
@@ -19,6 +19,7 @@ import Helpdesk from "./pages/Helpdesk.jsx";
 import GerarDoc from "./pages/GerarDoc.jsx";
 import FontesPesquisa from "./pages/FontesPesquisa.jsx";
 import RelatorioFluxo from "./pages/RelatorioFluxo.jsx";
+import RelatorioContrato from "./pages/RelatorioContrato.jsx";
 import PlanilhaHoras from "./pages/PlanilhaHoras.jsx";
 import WhatsApp from "./pages/WhatsApp.jsx";
 import AnaliseImagens from "./pages/AnaliseImagens.jsx";
@@ -43,6 +44,7 @@ const PAGE_INFO = {
   "/analise-imagens": { title: "Análise de Imagens", subtitle: "OCR, validação e qualidade de capturas", icon: "📷" },
 
   "/pipeline-editais": { title: "Pipeline de Editais", subtitle: "Ecossistema completo: Buscar → Analisar → Revisar → Planejar → Especificar", icon: "🏗️" },
+  "/relatorio-contrato": { title: "Relatório por Contrato", subtitle: "Análises técnicas e viabilidade via IA por site/contrato", icon: "📑" },
   "/relatorio-fluxo": { title: "Relatório de Fluxo", subtitle: "Métricas de atendimento e fluxo operacional", icon: "📊" },
 
   "/kb": { title: "Knowledge Base", subtitle: "Base de conhecimento com embeddings", icon: "📚" },
@@ -76,6 +78,7 @@ const MENU_SECTIONS = [
     group: "Qualidade",
     items: [
       { to: "/analise-imagens", icon: ScanLine, label: "Análise de Imagens" },
+      { to: "/relatorio-contrato", icon: ClipboardList, label: "Relatório por Contrato" },
       { to: "/relatorio-fluxo", icon: BarChart3, label: "Relatório de Fluxo" },
     ]
   },
@@ -209,6 +212,7 @@ function AppContent() {
           <Route path="/fontes" element={<FontesPesquisa />} />
           <Route path="/pipeline-editais" element={<PipelineEditais />} />
           <Route path="/relatorio-fluxo" element={<RelatorioFluxo />} />
+          <Route path="/relatorio-contrato" element={<RelatorioContrato />} />
           <Route path="/planilha-horas" element={<PlanilhaHoras />} />
 
           <Route path="/whatsapp" element={<WhatsApp />} />
