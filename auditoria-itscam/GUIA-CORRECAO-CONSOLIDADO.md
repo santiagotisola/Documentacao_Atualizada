@@ -2,9 +2,10 @@
 
 **Data:** 05/06/2026  
 **Projeto:** Auditoria de Frota ITScam 450 — Grupo Labor (VARCO)  
-**Total de equipamentos:** 70 câmeras (35 pontos × 2 faixas)  
+**Total de equipamentos:** 72 câmeras no VARCO (70 no inventário auditado + 2 adicionais)  
+**Dashboard VARCO:** 72 dispositivos, 65 ativos, 7 offline  
 **Equipamentos referência:** GOEC6O045-F1, GOEC6O022-F1, GOEC6O058-F1 (3 equipamentos 100% conformes, validados idênticos)  
-**Status geral:** 18 em conformidade total (26%), 52 com desvios, 6 offline
+**Status geral:** 18 em conformidade total (26%), 46 com desvios, 6 offline (VARCO desabilitado)
 
 ---
 
@@ -972,7 +973,9 @@ SISTEMA → Geral → Data e Hora → NTP Server
 ---
 
 <a name="tabela-completa"></a>
-## 12. TABELA COMPLETA — 70 EQUIPAMENTOS
+## 12. TABELA COMPLETA — 72 EQUIPAMENTOS (VARCO) / 70 AUDITADOS
+
+> **Nota:** O dashboard VARCO registra 72 dispositivos (65 ativos). Nosso inventário auditado possui 70. Os 2 extras podem ser dispositivos de teste ou reserva cadastrados na organização Labor.
 
 | # | Equipamento | IP | VARCO | Uptime(h) | Storage(MB) | Desvios | Status |
 |---|---|---|---|---|---|---|---|
