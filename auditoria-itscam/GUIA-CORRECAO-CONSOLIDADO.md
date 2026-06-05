@@ -141,16 +141,31 @@ A coleta de configuração retornou dados nulos/zerados, indicando equipamento i
 SISTEMA → Manutenção → Acesso Remoto
 ```
 
-### Comparação: Equipamentos CORRETOS vs Afetados
+### Comparação: Valores CORRETOS (referência) vs Valores ERRADOS (cada equipamento)
 
-| Campo | GOEC6O045-F1 ✅ | GOEC6O022-F1 ✅ | GOEC6O058-F1 ✅ | Afetados (019/023/049/052) ❌ |
-|---|---|---|---|---|
-| VARCO Enabled | **true** | **true** | **true** | **false** (ou null) |
-| Edge Server | edge.varco.io | edge.varco.io | edge.varco.io | (vazio/null) |
-| Provision Key | yk-pzGz...l_c= | yk-pzGz...l_c= | yk-pzGz...l_c= | (vazio/null) |
-| Device Name | GOEC6O045... | GOEC6O022... | GOEC6O058... | (não definido) |
+Todos os 6 equipamentos afetados possuem os **mesmos campos zerados/nulos**. A tabela compara com as 3 referências.
 
-> **Nota:** Os 3 referências possuem valores idênticos. Os 6 afetados retornaram todos os campos como `null` ou `false`, indicando que o módulo VARCO nunca foi provisionado ou perdeu a configuração.
+#### Todos os afetados (019-F1, 019-F2, 023-F1, 049-F1, 049-F2, 052-F1) vs Referências
+
+| Tela no Sistema | Campo API | 045-F1 ✅ | 022-F1 ✅ | 058-F1 ✅ | **Afetados** ❌ | Ação |
+|---|---|---|---|---|---|---|
+| SISTEMA → Manutenção → Acesso Remoto | varco.enabled | true | true | true | **false/null** | → Alterar p/ true |
+| SISTEMA → Manutenção → Acesso Remoto | varco.edgeServer | edge.varco.io | edge.varco.io | edge.varco.io | **(vazio/null)** | → Alterar p/ edge.varco.io |
+| SISTEMA → Manutenção → Acesso Remoto | varco.provisionKey | yk-pzGz...l_c= | yk-pzGz...l_c= | yk-pzGz...l_c= | **(vazio/null)** | → Alterar p/ yk-pzGzXLGmz6-iO3GhdR7hinksDN7aek-kjQ4WYl_c= |
+| SISTEMA → Manutenção → Acesso Remoto | varco.deviceName | GOEC6O045... | GOEC6O022... | GOEC6O058... | **(não definido)** | → Alterar p/ nome do equip. (ex: GOEC6O019 - FAIXA 1) |
+
+### Resumo Visual — O que alterar em cada equipamento
+
+| Equipamento | IP Público | Campos a corrigir | Total alterações |
+|---|---|---|---|
+| **GOEC6O019-F1** | 45.70.144.143 | enabled, edgeServer, provisionKey, deviceName | **4 campos** |
+| **GOEC6O019-F2** | 45.70.144.143 | enabled, edgeServer, provisionKey, deviceName | **4 campos** |
+| **GOEC6O023-F1** | 177.25.228.3 | enabled, edgeServer, provisionKey, deviceName | **4 campos** |
+| **GOEC6O049-F1** | 191.58.159.123 | enabled, edgeServer, provisionKey, deviceName | **4 campos** |
+| **GOEC6O049-F2** | 191.58.159.123 | enabled, edgeServer, provisionKey, deviceName | **4 campos** |
+| **GOEC6O052-F1** | 187.68.165.85 | enabled, edgeServer, provisionKey, deviceName | **4 campos** |
+
+> **Nota:** Os 6 afetados retornaram TODOS os campos como `null` ou `false` — o módulo VARCO nunca foi provisionado ou perdeu a configuração. Necessário acesso local via IP público ou visita técnica.
 
 ### Configuração Correta
 
@@ -528,31 +543,69 @@ O classificador veicular (identifica carro/moto/caminhão) está com `processing
 
 **ATENÇÃO:** 34 dos 70 equipamentos (49%) têm `queue=4`. Isso pode ter sido **configuração intencional em lote**. Antes de corrigir todos, validar com a equipe de campo se foi proposital.
 
-### Comparação: Equipamentos CORRETOS vs Afetados
+### Comparação: Valores CORRETOS (referência) vs Valores ERRADOS (cada equipamento)
 
-| Campo | GOEC6O045-F1 ✅ | GOEC6O022-F1 ✅ | GOEC6O058-F1 ✅ | Afetados ❌ |
-|---|---|---|---|---|
-| classifier.processingQueue | **1** | **1** | **1** | 4, 2 |
-| classifier.processingThreads | **1** | **1** | **1** | 4, 2 |
-| classifier.enabled | true | true | true | true |
+A tabela abaixo mostra os campos do classificador de cada equipamento lado a lado com a referência.  
+**Regra simples:** Queue e Threads devem ser **1**. Qualquer valor maior está ERRADO.
 
-### Equipamentos com Maior Desvio (queue=4 + threads=4)
+#### GOEC6O010 - Faixa 1 vs Referências
 
-Estes 3 são os mais críticos (consumo de CPU elevado):
+| Tela no Sistema | Campo API | 045-F1 ✅ | 022-F1 ✅ | 058-F1 ✅ | **010-F1** ❌ | Ação |
+|---|---|---|---|---|---|---|
+| EQUIPAMENTO → Classificador | classifier.enabled | true | true | true | true ✅ | OK |
+| EQUIPAMENTO → Classificador → Processing Queue | classifier.processingQueue | 1 | 1 | 1 | **4** | → Alterar p/ 1 |
+| EQUIPAMENTO → Classificador → Processing Threads | classifier.processingThreads | 1 | 1 | 1 | **4** | → Alterar p/ 1 |
 
-| Equipamento | UUID | Queue | Threads | Correto |
-|---|---|---|---|---|
-| GOEC6O010 - Faixa 1 | `abf8fedb-4f1b-471f-a6bd-4e00484d5737` | **4** | **4** | 1/1 |
-| GOEC6O052 - Faixa 2 | `8244f568-59f3-4f27-932e-86cc2eb10fc3` | **4** | **4** | 1/1 |
-| GOEC6O058 - Faixa 2 | `6561d5fd-0aba-413b-a60a-a0d7e1b61b6d` | **4** | **4** | 1/1 |
+#### GOEC6O052 - Faixa 2 vs Referências
 
-### Equipamentos com queue=2/threads=2
+| Tela no Sistema | Campo API | 045-F1 ✅ | 022-F1 ✅ | 058-F1 ✅ | **052-F2** ❌ | Ação |
+|---|---|---|---|---|---|---|
+| EQUIPAMENTO → Classificador | classifier.enabled | true | true | true | true ✅ | OK |
+| EQUIPAMENTO → Classificador → Processing Queue | classifier.processingQueue | 1 | 1 | 1 | **4** | → Alterar p/ 1 |
+| EQUIPAMENTO → Classificador → Processing Threads | classifier.processingThreads | 1 | 1 | 1 | **4** | → Alterar p/ 1 |
 
-| Equipamento | UUID | Queue | Threads | Correto |
-|---|---|---|---|---|
-| GOEC6O010 - Faixa 2 | `481dd19b-4968-4759-860b-35f9ec09c206` | 1 | **2** | 1/1 |
-| GOEC6O011 - Faixa 2 | `d0595c80-9ea7-49af-b2a0-d305d688e567` | **2** | **2** | 1/1 |
-| GOEC6O028 - Faixa 1 | `1f460cd7-f607-4c79-8a8e-50a8228850a4` | **2** | **2** | 1/1 |
+#### GOEC6O058 - Faixa 2 vs Referências
+
+| Tela no Sistema | Campo API | 045-F1 ✅ | 022-F1 ✅ | 058-F1 ✅ | **058-F2** ❌ | Ação |
+|---|---|---|---|---|---|---|
+| EQUIPAMENTO → Classificador | classifier.enabled | true | true | true | true ✅ | OK |
+| EQUIPAMENTO → Classificador → Processing Queue | classifier.processingQueue | 1 | 1 | 1 | **4** | → Alterar p/ 1 |
+| EQUIPAMENTO → Classificador → Processing Threads | classifier.processingThreads | 1 | 1 | 1 | **4** | → Alterar p/ 1 |
+
+#### GOEC6O010 - Faixa 2 vs Referências
+
+| Tela no Sistema | Campo API | 045-F1 ✅ | 022-F1 ✅ | 058-F1 ✅ | **010-F2** ❌ | Ação |
+|---|---|---|---|---|---|---|
+| EQUIPAMENTO → Classificador | classifier.enabled | true | true | true | true ✅ | OK |
+| EQUIPAMENTO → Classificador → Processing Queue | classifier.processingQueue | 1 | 1 | 1 | 1 ✅ | OK |
+| EQUIPAMENTO → Classificador → Processing Threads | classifier.processingThreads | 1 | 1 | 1 | **2** | → Alterar p/ 1 |
+
+#### GOEC6O011 - Faixa 2 vs Referências
+
+| Tela no Sistema | Campo API | 045-F1 ✅ | 022-F1 ✅ | 058-F1 ✅ | **011-F2** ❌ | Ação |
+|---|---|---|---|---|---|---|
+| EQUIPAMENTO → Classificador | classifier.enabled | true | true | true | true ✅ | OK |
+| EQUIPAMENTO → Classificador → Processing Queue | classifier.processingQueue | 1 | 1 | 1 | **2** | → Alterar p/ 1 |
+| EQUIPAMENTO → Classificador → Processing Threads | classifier.processingThreads | 1 | 1 | 1 | **2** | → Alterar p/ 1 |
+
+#### GOEC6O028 - Faixa 1 vs Referências
+
+| Tela no Sistema | Campo API | 045-F1 ✅ | 022-F1 ✅ | 058-F1 ✅ | **028-F1** ❌ | Ação |
+|---|---|---|---|---|---|---|
+| EQUIPAMENTO → Classificador | classifier.enabled | true | true | true | true ✅ | OK |
+| EQUIPAMENTO → Classificador → Processing Queue | classifier.processingQueue | 1 | 1 | 1 | **2** | → Alterar p/ 1 |
+| EQUIPAMENTO → Classificador → Processing Threads | classifier.processingThreads | 1 | 1 | 1 | **2** | → Alterar p/ 1 |
+
+### Resumo Visual — O que alterar em cada equipamento
+
+| Equipamento | Queue atual | Threads atual | Ação Queue | Ação Threads | Total alterações |
+|---|---|---|---|---|---|
+| **GOEC6O010-F1** | 4 | 4 | → 1 | → 1 | **2 campos** |
+| **GOEC6O052-F2** | 4 | 4 | → 1 | → 1 | **2 campos** |
+| **GOEC6O058-F2** | 4 | 4 | → 1 | → 1 | **2 campos** |
+| **GOEC6O010-F2** | 1 ✅ | 2 | OK | → 1 | **1 campo** |
+| **GOEC6O011-F2** | 2 | 2 | → 1 | → 1 | **2 campos** |
+| **GOEC6O028-F1** | 2 | 2 | → 1 | → 1 | **2 campos** |
 
 ### Equipamentos com queue=4, threads=1 (28 total)
 
@@ -602,23 +655,55 @@ Os níveis `lower.level` e `upper.level` controlam em qual luminosidade a câmer
 
 Valores diferentes podem causar transições prematuras ou atrasadas.
 
-### Comparação: Equipamentos CORRETOS vs Afetados
+### Comparação: Valores CORRETOS (referência) vs Valores ERRADOS (cada equipamento)
 
-| Campo | GOEC6O045-F1 ✅ | GOEC6O022-F1 ✅ | GOEC6O058-F1 ✅ | 009-F1 ❌ | 009-F2 ❌ | 013-F2 ❌ | 008-F1 ❌ |
-|---|---|---|---|---|---|---|---|
-| Diurno Lower level | **10** | **10** | **10** | 10 ✅ | 10 ✅ | **30** | 10 ✅ |
-| Diurno Upper level | **35** | **35** | **35** | **40** | **40** | **30** | **30** |
-| Noturno Lower level | **10** | **10** | **10** | 10 ✅ | 10 ✅ | 10 ✅ | 10 ✅ |
-| Noturno Upper level | **35** | **35** | **35** | **40** | **40** | **30** | **30** |
+A tabela abaixo mostra os **4 campos de level** de cada equipamento lado a lado com a referência.  
+**Regra simples:** Lower deve ser **10**, Upper deve ser **35**. Qualquer valor diferente está ERRADO.
 
-### Equipamentos Afetados
+#### GOEC6O009 - Faixa 1 vs Referências
 
-| Equipamento | UUID | D.Lower | D.Upper | N.Lower | N.Upper | Correto |
+| Tela no Sistema | Campo API | 045-F1 ✅ | 022-F1 ✅ | 058-F1 ✅ | **009-F1** ❌ | Ação |
 |---|---|---|---|---|---|---|
-| GOEC6O009 - F1 | `c296d7bf-0d3b-4da1-bf1d-3e4fe998e4a1` | 10 ✅ | **40** | 10 ✅ | **40** | 10/35/10/35 |
-| GOEC6O009 - F2 | `ef0e72ca-d3a5-4f4e-bbf6-40f3737bda3f` | 10 ✅ | **40** | 10 ✅ | **40** | 10/35/10/35 |
-| GOEC6O013 - F2 | `36896650-1bca-4093-9631-667b73bdd93d` | **30** | **30** | 10 ✅ | **30** | 10/35/10/35 |
-| GOEC6O008 - F1 | `5d6880f0-e8f2-4ff0-be25-00c3b31d6522` | 10 ✅ | **30** | 10 ✅ | **30** | 10/35/10/35 |
+| IMAGEM → Perfis → Diurno → Transições → Inferior | lower.level | 10 | 10 | 10 | 10 ✅ | OK |
+| IMAGEM → Perfis → Diurno → Transições → Superior | upper.level | 35 | 35 | 35 | **40** | → Alterar p/ 35 |
+| IMAGEM → Perfis → Noturno → Transições → Inferior | lower.level | 10 | 10 | 10 | 10 ✅ | OK |
+| IMAGEM → Perfis → Noturno → Transições → Superior | upper.level | 35 | 35 | 35 | **40** | → Alterar p/ 35 |
+
+#### GOEC6O009 - Faixa 2 vs Referências
+
+| Tela no Sistema | Campo API | 045-F1 ✅ | 022-F1 ✅ | 058-F1 ✅ | **009-F2** ❌ | Ação |
+|---|---|---|---|---|---|---|
+| IMAGEM → Perfis → Diurno → Transições → Inferior | lower.level | 10 | 10 | 10 | 10 ✅ | OK |
+| IMAGEM → Perfis → Diurno → Transições → Superior | upper.level | 35 | 35 | 35 | **40** | → Alterar p/ 35 |
+| IMAGEM → Perfis → Noturno → Transições → Inferior | lower.level | 10 | 10 | 10 | 10 ✅ | OK |
+| IMAGEM → Perfis → Noturno → Transições → Superior | upper.level | 35 | 35 | 35 | **40** | → Alterar p/ 35 |
+
+#### GOEC6O013 - Faixa 2 vs Referências
+
+| Tela no Sistema | Campo API | 045-F1 ✅ | 022-F1 ✅ | 058-F1 ✅ | **013-F2** ❌ | Ação |
+|---|---|---|---|---|---|---|
+| IMAGEM → Perfis → Diurno → Transições → Inferior | lower.level | 10 | 10 | 10 | **30** | → Alterar p/ 10 |
+| IMAGEM → Perfis → Diurno → Transições → Superior | upper.level | 35 | 35 | 35 | **30** | → Alterar p/ 35 |
+| IMAGEM → Perfis → Noturno → Transições → Inferior | lower.level | 10 | 10 | 10 | 10 ✅ | OK |
+| IMAGEM → Perfis → Noturno → Transições → Superior | upper.level | 35 | 35 | 35 | **30** | → Alterar p/ 35 |
+
+#### GOEC6O008 - Faixa 1 vs Referências (já coberto no CASO 02)
+
+| Tela no Sistema | Campo API | 045-F1 ✅ | 022-F1 ✅ | 058-F1 ✅ | **008-F1** ❌ | Ação |
+|---|---|---|---|---|---|---|
+| IMAGEM → Perfis → Diurno → Transições → Inferior | lower.level | 10 | 10 | 10 | 10 ✅ | OK |
+| IMAGEM → Perfis → Diurno → Transições → Superior | upper.level | 35 | 35 | 35 | **30** | → Alterar p/ 35 |
+| IMAGEM → Perfis → Noturno → Transições → Inferior | lower.level | 10 | 10 | 10 | 10 ✅ | OK |
+| IMAGEM → Perfis → Noturno → Transições → Superior | upper.level | 35 | 35 | 35 | **30** | → Alterar p/ 35 |
+
+### Resumo Visual — O que alterar em cada equipamento
+
+| Equipamento | D.Lower | D.Upper | N.Lower | N.Upper | Total alterações |
+|---|---|---|---|---|---|
+| **GOEC6O009-F1** | 10 ✅ | 40 → **35** | 10 ✅ | 40 → **35** | **2 campos** |
+| **GOEC6O009-F2** | 10 ✅ | 40 → **35** | 10 ✅ | 40 → **35** | **2 campos** |
+| **GOEC6O013-F2** | 30 → **10** | 30 → **35** | 10 ✅ | 30 → **35** | **3 campos** |
+| **GOEC6O008-F1** | 10 ✅ | 30 → **35** | 10 ✅ | 30 → **35** | **2 campos** (já no CASO 02) |
 
 ### Onde Corrigir
 
@@ -652,15 +737,37 @@ Para cada equipamento:
 ### O que é
 `maxPlates=2` permite detectar até 2 placas por frame. Com `maxPlates=1`, se dois veículos passarem simultaneamente, o segundo é ignorado.
 
-### Comparação: Equipamentos CORRETOS vs Afetados
+### Comparação: Valores CORRETOS (referência) vs Valores ERRADOS (cada equipamento)
 
-| Campo | GOEC6O045-F1 ✅ | GOEC6O022-F1 ✅ | GOEC6O058-F1 ✅ | 009-F2 ❌ | 055-F2 ❌ |
-|---|---|---|---|---|---|
-| ocr.enabled | true | true | true | true | true |
-| ocr.countryCode | 76 | 76 | 76 | 76 | 76 |
-| ocr.maxPlates | **2** | **2** | **2** | **1** | **1** |
-| ocr.lowProbChar | 45 | 45 | 45 | 45 | 45 |
-| ocr.maxLowProbChars | 0 | 0 | 0 | 0 | 0 |
+A tabela abaixo mostra os campos OCR de cada equipamento lado a lado com a referência.  
+**Regra simples:** maxPlates deve ser **2**. Se estiver 1, está ERRADO.
+
+#### GOEC6O009 - Faixa 2 vs Referências
+
+| Tela no Sistema | Campo API | 045-F1 ✅ | 022-F1 ✅ | 058-F1 ✅ | **009-F2** ❌ | Ação |
+|---|---|---|---|---|---|---|
+| EQUIPAMENTO → OCR | ocr.enabled | true | true | true | true ✅ | OK |
+| EQUIPAMENTO → OCR → Country Code | ocr.countryCode | 76 | 76 | 76 | 76 ✅ | OK |
+| EQUIPAMENTO → OCR → Max Plates | ocr.maxPlates | 2 | 2 | 2 | **1** | → Alterar p/ 2 |
+| EQUIPAMENTO → OCR → Low Prob Char | ocr.lowProbChar | 45 | 45 | 45 | 45 ✅ | OK |
+| EQUIPAMENTO → OCR → Max Low Prob Chars | ocr.maxLowProbChars | 0 | 0 | 0 | 0 ✅ | OK |
+
+#### GOEC6O055 - Faixa 2 vs Referências
+
+| Tela no Sistema | Campo API | 045-F1 ✅ | 022-F1 ✅ | 058-F1 ✅ | **055-F2** ❌ | Ação |
+|---|---|---|---|---|---|---|
+| EQUIPAMENTO → OCR | ocr.enabled | true | true | true | true ✅ | OK |
+| EQUIPAMENTO → OCR → Country Code | ocr.countryCode | 76 | 76 | 76 | 76 ✅ | OK |
+| EQUIPAMENTO → OCR → Max Plates | ocr.maxPlates | 2 | 2 | 2 | **1** | → Alterar p/ 2 |
+| EQUIPAMENTO → OCR → Low Prob Char | ocr.lowProbChar | 45 | 45 | 45 | 45 ✅ | OK |
+| EQUIPAMENTO → OCR → Max Low Prob Chars | ocr.maxLowProbChars | 0 | 0 | 0 | 0 ✅ | OK |
+
+### Resumo Visual — O que alterar em cada equipamento
+
+| Equipamento | maxPlates atual | Ação | Total alterações |
+|---|---|---|---|
+| **GOEC6O009-F2** | 1 | → Alterar p/ 2 | **1 campo** |
+| **GOEC6O055-F2** | 1 | → Alterar p/ 2 | **1 campo** |
 
 ### Equipamentos Afetados
 
@@ -693,12 +800,39 @@ PUT /api/equipment/ocr
 ### O que é
 Com `snapshotCrop=true`, a imagem capturada é **recortada** antes de ser enviada/armazenada. Se não intencional, pode estar cortando parte da cena e prejudicando o contexto das autuações.
 
-### Comparação: Equipamentos CORRETOS vs Afetados
+### Comparação: Valores CORRETOS (referência) vs Valores ERRADOS (cada equipamento)
 
-| Campo | GOEC6O045-F1 ✅ | GOEC6O022-F1 ✅ | GOEC6O058-F1 ✅ | 003-F2 ❌ | 008-F1 ❌ | 013-F1 ❌ |
+A tabela abaixo mostra os campos de snapshotCrop de cada equipamento lado a lado com a referência.  
+**Regra simples:** enable deve ser **false** e mode **static**.
+
+#### GOEC6O003 - Faixa 2 vs Referências
+
+| Tela no Sistema | Campo API | 045-F1 ✅ | 022-F1 ✅ | 058-F1 ✅ | **003-F2** ❌ | Ação |
 |---|---|---|---|---|---|---|
-| snapshotCrop.enable | **false** | **false** | **false** | **true** | **true** | **true** |
-| snapshotCrop.mode | static | static | static | static | static | static |
+| EQUIPAMENTO → Diversos → Snapshot Crop | snapshotCrop.enable | false | false | false | **true** | → Alterar p/ false (Desabilitado) |
+| EQUIPAMENTO → Diversos → Snapshot Crop → Mode | snapshotCrop.mode | static | static | static | static ✅ | OK |
+
+#### GOEC6O008 - Faixa 1 vs Referências (já coberto no CASO 02)
+
+| Tela no Sistema | Campo API | 045-F1 ✅ | 022-F1 ✅ | 058-F1 ✅ | **008-F1** ❌ | Ação |
+|---|---|---|---|---|---|---|
+| EQUIPAMENTO → Diversos → Snapshot Crop | snapshotCrop.enable | false | false | false | **true** | → Alterar p/ false (Desabilitado) |
+| EQUIPAMENTO → Diversos → Snapshot Crop → Mode | snapshotCrop.mode | static | static | static | static ✅ | OK |
+
+#### GOEC6O013 - Faixa 1 vs Referências
+
+| Tela no Sistema | Campo API | 045-F1 ✅ | 022-F1 ✅ | 058-F1 ✅ | **013-F1** ❌ | Ação |
+|---|---|---|---|---|---|---|
+| EQUIPAMENTO → Diversos → Snapshot Crop | snapshotCrop.enable | false | false | false | **true** | → Alterar p/ false (Desabilitado) |
+| EQUIPAMENTO → Diversos → Snapshot Crop → Mode | snapshotCrop.mode | static | static | static | static ✅ | OK |
+
+### Resumo Visual — O que alterar em cada equipamento
+
+| Equipamento | Crop atual | Ação | Total alterações |
+|---|---|---|---|
+| **GOEC6O003-F2** | true (habilitado) | → Desabilitar (false) | **1 campo** |
+| **GOEC6O008-F1** | true (habilitado) | → Desabilitar (false) | **1 campo** (já no CASO 02) |
+| **GOEC6O013-F1** | true (habilitado) | → Desabilitar (false) | **1 campo** |
 
 ### Equipamentos Afetados
 
@@ -728,12 +862,33 @@ O gateway padrão da rede é `192.168.0.1`. Estes 2 equipamentos usam `192.168.1
 
 ### ⚠️ ATENÇÃO: Alterar gateway pode desconectar o equipamento!
 
-### Comparação: Equipamentos CORRETOS vs Afetados
+### Comparação: Valores CORRETOS (referência) vs Valores DIFERENTES (cada equipamento)
 
-| Campo | GOEC6O045-F1 ✅ | GOEC6O022-F1 ✅ | GOEC6O058-F1 ✅ | 046-F1 ⚠️ | 046-F2 ⚠️ |
-|---|---|---|---|---|---|
-| ethernet.ipv4Primary.gateway | **192.168.0.1** | **192.168.0.1** | **192.168.0.1** | **192.168.1.1** | **192.168.1.1** |
-| ethernet.ipv4Primary.dns | 8.8.8.8 | 8.8.8.8 | 8.8.8.8 | 8.8.8.8 ✅ | 8.8.8.8 ✅ |
+A tabela abaixo mostra os campos de rede de cada equipamento lado a lado com a referência.  
+**⚠️ ATENÇÃO:** Este caso pode ser intencional — confirmar com equipe de campo antes de alterar!
+
+#### GOEC6O046 - Faixa 1 vs Referências
+
+| Tela no Sistema | Campo API | 045-F1 ✅ | 022-F1 ✅ | 058-F1 ✅ | **046-F1** ⚠️ | Ação |
+|---|---|---|---|---|---|---|
+| SISTEMA → Rede → Ethernet → IPv4 Primary | ethernet.ipv4Primary.gateway | 192.168.0.1 | 192.168.0.1 | 192.168.0.1 | **192.168.1.1** | ⚠️ Confirmar com equipe se rede local é .1.x |
+| SISTEMA → Rede → Ethernet → IPv4 Primary | ethernet.ipv4Primary.dns | 8.8.8.8 | 8.8.8.8 | 8.8.8.8 | 8.8.8.8 ✅ | OK |
+
+#### GOEC6O046 - Faixa 2 vs Referências
+
+| Tela no Sistema | Campo API | 045-F1 ✅ | 022-F1 ✅ | 058-F1 ✅ | **046-F2** ⚠️ | Ação |
+|---|---|---|---|---|---|---|
+| SISTEMA → Rede → Ethernet → IPv4 Primary | ethernet.ipv4Primary.gateway | 192.168.0.1 | 192.168.0.1 | 192.168.0.1 | **192.168.1.1** | ⚠️ Confirmar com equipe se rede local é .1.x |
+| SISTEMA → Rede → Ethernet → IPv4 Primary | ethernet.ipv4Primary.dns | 8.8.8.8 | 8.8.8.8 | 8.8.8.8 | 8.8.8.8 ✅ | OK |
+
+### Resumo Visual — Decisão necessária
+
+| Equipamento | Gateway atual | Gateway padrão | Ação |
+|---|---|---|---|
+| **GOEC6O046-F1** | 192.168.1.1 | 192.168.0.1 | ⚠️ SÓ alterar se rede local for .0.x |
+| **GOEC6O046-F2** | 192.168.1.1 | 192.168.0.1 | ⚠️ SÓ alterar se rede local for .0.x |
+
+> **RISCO:** Alterar o gateway para 192.168.0.1 num ponto que usa rede 192.168.1.x vai **DESCONECTAR** o equipamento permanentemente até visita técnica!
 
 ### Equipamentos Afetados
 
