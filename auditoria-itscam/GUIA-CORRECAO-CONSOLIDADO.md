@@ -378,66 +378,100 @@ Quando há horário definido, a transição **só funciona dentro daquela janela
 
 **Nota:** GOEC6O008-F1 também tem este problema mas já está coberto no CASO 02.
 
-### Comparação: Equipamentos CORRETOS (valores das transições)
+### Comparação: Valores CORRETOS (referência) vs Valores ERRADOS (cada equipamento)
 
-| Campo | GOEC6O045-F1 ✅ | GOEC6O022-F1 ✅ | GOEC6O058-F1 ✅ |
-|---|---|---|---|
-| Diurno → Lower → startTime | **00:00:00** | **00:00:00** | **00:00:00** |
-| Diurno → Lower → endTime | **00:00:00** | **00:00:00** | **00:00:00** |
-| Diurno → Upper → startTime | **00:00:00** | **00:00:00** | **00:00:00** |
-| Diurno → Upper → endTime | **00:00:00** | **00:00:00** | **00:00:00** |
-| Noturno → Lower → startTime | **00:00:00** | **00:00:00** | **00:00:00** |
-| Noturno → Lower → endTime | **00:00:00** | **00:00:00** | **00:00:00** |
-| Noturno → Upper → startTime | **00:00:00** | **00:00:00** | **00:00:00** |
-| Noturno → Upper → endTime | **00:00:00** | **00:00:00** | **00:00:00** |
-| Noturno → Upper → profile | **0** | **0** | **0** |
-| Lower → level | **10** | **10** | **10** |
-| Upper → level | **35** | **35** | **35** |
-| holdTime (todos) | **60000** | **60000** | **60000** |
+A tabela abaixo mostra **todos os 8 campos de horário** de cada equipamento lado a lado com o valor correto.  
+**Regra simples:** Qualquer valor diferente de `00:00:00` está ERRADO e precisa ser zerado.
 
-> Os 3 equipamentos referência possuem TODOS os campos de horário em 00:00:00. A transição é controlada 100% por luminosidade.
+#### GOEC6O033 - Faixa 2 vs Referências
 
-### Detalhamento por Equipamento
+| Tela no Sistema | Campo API | 045-F1 ✅ | 022-F1 ✅ | 058-F1 ✅ | **033-F2** ❌ | Ação |
+|---|---|---|---|---|---|---|
+| IMAGEM → Perfis → Diurno → Transições → Inferior | lower.startTime | 00:00:00 | 00:00:00 | 00:00:00 | **06:00:00** | → Alterar p/ 00:00:00 |
+| IMAGEM → Perfis → Diurno → Transições → Inferior | lower.endTime | 00:00:00 | 00:00:00 | 00:00:00 | **18:00:00** | → Alterar p/ 00:00:00 |
+| IMAGEM → Perfis → Diurno → Transições → Superior | upper.startTime | 00:00:00 | 00:00:00 | 00:00:00 | **06:00:00** | → Alterar p/ 00:00:00 |
+| IMAGEM → Perfis → Diurno → Transições → Superior | upper.endTime | 00:00:00 | 00:00:00 | 00:00:00 | **17:58:00** | → Alterar p/ 00:00:00 |
+| IMAGEM → Perfis → Noturno → Transições → Inferior | lower.startTime | 00:00:00 | 00:00:00 | 00:00:00 | **18:00:00** | → Alterar p/ 00:00:00 |
+| IMAGEM → Perfis → Noturno → Transições → Inferior | lower.endTime | 00:00:00 | 00:00:00 | 00:00:00 | **06:00:00** | → Alterar p/ 00:00:00 |
+| IMAGEM → Perfis → Noturno → Transições → Superior | upper.startTime | 00:00:00 | 00:00:00 | 00:00:00 | **18:00:00** | → Alterar p/ 00:00:00 |
+| IMAGEM → Perfis → Noturno → Transições → Superior | upper.endTime | 00:00:00 | 00:00:00 | 00:00:00 | **06:00:00** | → Alterar p/ 00:00:00 |
+| IMAGEM → Perfis → Noturno → Transições → Superior | upper.profile | 0 | 0 | 0 | 0 ✅ | OK |
+| IMAGEM → Perfis → Diurno/Noturno → Transições | lower.level | 10 | 10 | 10 | **35** | → Alterar p/ 10 |
+| IMAGEM → Perfis → Diurno/Noturno → Transições | upper.level | 35 | 35 | 35 | **35** | OK |
 
-**GOEC6O033 - Faixa 2:**
-| Perfil | Transição | Start (atual) | End (atual) | Correto |
-|---|---|---|---|---|
-| Diurno | Lower | 06:00:00 | 18:00:00 | 00:00:00 |
-| Diurno | Upper | 06:00:00 | 17:58:00 | 00:00:00 |
-| Noturno | Lower | 18:00:00 | 06:00:00 | 00:00:00 |
-| Noturno | Upper | 18:00:00 | 06:00:00 | 00:00:00 |
+#### GOEC6O040 - Faixa 1 vs Referências
 
-**GOEC6O040 - Faixa 1:**
-| Perfil | Transição | Start (atual) | End (atual) | Correto |
-|---|---|---|---|---|
-| Diurno | Lower | 18:00:00 | 00:00:00 | 00:00:00 |
-| Diurno | Upper | 06:00:00 | 00:00:00 | 00:00:00 |
-| Noturno | Lower | 06:00:00 | 00:00:00 | 00:00:00 |
-| Noturno | Upper | 18:00:00 | 00:00:00 | 00:00:00 |
+| Tela no Sistema | Campo API | 045-F1 ✅ | 022-F1 ✅ | 058-F1 ✅ | **040-F1** ❌ | Ação |
+|---|---|---|---|---|---|---|
+| IMAGEM → Perfis → Diurno → Transições → Inferior | lower.startTime | 00:00:00 | 00:00:00 | 00:00:00 | **18:00:00** | → Alterar p/ 00:00:00 |
+| IMAGEM → Perfis → Diurno → Transições → Inferior | lower.endTime | 00:00:00 | 00:00:00 | 00:00:00 | 00:00:00 ✅ | OK |
+| IMAGEM → Perfis → Diurno → Transições → Superior | upper.startTime | 00:00:00 | 00:00:00 | 00:00:00 | **06:00:00** | → Alterar p/ 00:00:00 |
+| IMAGEM → Perfis → Diurno → Transições → Superior | upper.endTime | 00:00:00 | 00:00:00 | 00:00:00 | 00:00:00 ✅ | OK |
+| IMAGEM → Perfis → Noturno → Transições → Inferior | lower.startTime | 00:00:00 | 00:00:00 | 00:00:00 | **06:00:00** | → Alterar p/ 00:00:00 |
+| IMAGEM → Perfis → Noturno → Transições → Inferior | lower.endTime | 00:00:00 | 00:00:00 | 00:00:00 | 00:00:00 ✅ | OK |
+| IMAGEM → Perfis → Noturno → Transições → Superior | upper.startTime | 00:00:00 | 00:00:00 | 00:00:00 | **18:00:00** | → Alterar p/ 00:00:00 |
+| IMAGEM → Perfis → Noturno → Transições → Superior | upper.endTime | 00:00:00 | 00:00:00 | 00:00:00 | 00:00:00 ✅ | OK |
+| IMAGEM → Perfis → Noturno → Transições → Superior | upper.profile | 0 | 0 | 0 | 0 ✅ | OK |
+| IMAGEM → Perfis → Diurno/Noturno → Transições | lower.level | 10 | 10 | 10 | 10 ✅ | OK |
+| IMAGEM → Perfis → Diurno/Noturno → Transições | upper.level | 35 | 35 | 35 | 35 ✅ | OK |
 
-**GOEC6O040 - Faixa 2:**
-| Perfil | Transição | Start (atual) | End (atual) | Correto |
-|---|---|---|---|---|
-| Diurno | Lower | 00:00:00 | 18:00:00 | 00:00:00 |
-| Diurno | Upper | 06:00:00 | 00:00:00 | 00:00:00 |
-| Noturno | Lower | 00:00:00 | 06:00:00 | 00:00:00 |
-| Noturno | Upper | 18:01:00 | 00:00:00 | 00:00:00 |
+#### GOEC6O040 - Faixa 2 vs Referências
 
-**GOEC6O055 - Faixa 1:**
-| Perfil | Transição | Start (atual) | End (atual) | Correto |
-|---|---|---|---|---|
-| Diurno | Lower | 00:00:00 | 18:00:00 | 00:00:00 |
-| Diurno | Upper | 06:00:00 | 00:00:00 | 00:00:00 |
-| Noturno | Lower | 00:00:00 | 06:00:00 | 00:00:00 |
-| Noturno | Upper | 18:01:00 | 00:00:00 | 00:00:00 |
+| Tela no Sistema | Campo API | 045-F1 ✅ | 022-F1 ✅ | 058-F1 ✅ | **040-F2** ❌ | Ação |
+|---|---|---|---|---|---|---|
+| IMAGEM → Perfis → Diurno → Transições → Inferior | lower.startTime | 00:00:00 | 00:00:00 | 00:00:00 | 00:00:00 ✅ | OK |
+| IMAGEM → Perfis → Diurno → Transições → Inferior | lower.endTime | 00:00:00 | 00:00:00 | 00:00:00 | **18:00:00** | → Alterar p/ 00:00:00 |
+| IMAGEM → Perfis → Diurno → Transições → Superior | upper.startTime | 00:00:00 | 00:00:00 | 00:00:00 | **06:00:00** | → Alterar p/ 00:00:00 |
+| IMAGEM → Perfis → Diurno → Transições → Superior | upper.endTime | 00:00:00 | 00:00:00 | 00:00:00 | 00:00:00 ✅ | OK |
+| IMAGEM → Perfis → Noturno → Transições → Inferior | lower.startTime | 00:00:00 | 00:00:00 | 00:00:00 | 00:00:00 ✅ | OK |
+| IMAGEM → Perfis → Noturno → Transições → Inferior | lower.endTime | 00:00:00 | 00:00:00 | 00:00:00 | **06:00:00** | → Alterar p/ 00:00:00 |
+| IMAGEM → Perfis → Noturno → Transições → Superior | upper.startTime | 00:00:00 | 00:00:00 | 00:00:00 | **18:01:00** | → Alterar p/ 00:00:00 |
+| IMAGEM → Perfis → Noturno → Transições → Superior | upper.endTime | 00:00:00 | 00:00:00 | 00:00:00 | 00:00:00 ✅ | OK |
+| IMAGEM → Perfis → Noturno → Transições → Superior | upper.profile | 0 | 0 | 0 | 0 ✅ | OK |
+| IMAGEM → Perfis → Diurno/Noturno → Transições | lower.level | 10 | 10 | 10 | 10 ✅ | OK |
+| IMAGEM → Perfis → Diurno/Noturno → Transições | upper.level | 35 | 35 | 35 | 35 ✅ | OK |
 
-**GOEC6O055 - Faixa 2:**
-| Perfil | Transição | Start (atual) | End (atual) | Correto |
-|---|---|---|---|---|
-| Diurno | Lower | 18:00:00 | 00:00:00 | 00:00:00 |
-| Diurno | Upper | 06:00:00 | 00:00:00 | 00:00:00 |
-| Noturno | Lower | 05:59:59 | 00:00:00 | 00:00:00 |
-| Noturno | Upper | 18:01:00 | 00:00:00 | 00:00:00 |
+#### GOEC6O055 - Faixa 1 vs Referências
+
+| Tela no Sistema | Campo API | 045-F1 ✅ | 022-F1 ✅ | 058-F1 ✅ | **055-F1** ❌ | Ação |
+|---|---|---|---|---|---|---|
+| IMAGEM → Perfis → Diurno → Transições → Inferior | lower.startTime | 00:00:00 | 00:00:00 | 00:00:00 | 00:00:00 ✅ | OK |
+| IMAGEM → Perfis → Diurno → Transições → Inferior | lower.endTime | 00:00:00 | 00:00:00 | 00:00:00 | **18:00:00** | → Alterar p/ 00:00:00 |
+| IMAGEM → Perfis → Diurno → Transições → Superior | upper.startTime | 00:00:00 | 00:00:00 | 00:00:00 | **06:00:00** | → Alterar p/ 00:00:00 |
+| IMAGEM → Perfis → Diurno → Transições → Superior | upper.endTime | 00:00:00 | 00:00:00 | 00:00:00 | 00:00:00 ✅ | OK |
+| IMAGEM → Perfis → Noturno → Transições → Inferior | lower.startTime | 00:00:00 | 00:00:00 | 00:00:00 | 00:00:00 ✅ | OK |
+| IMAGEM → Perfis → Noturno → Transições → Inferior | lower.endTime | 00:00:00 | 00:00:00 | 00:00:00 | **06:00:00** | → Alterar p/ 00:00:00 |
+| IMAGEM → Perfis → Noturno → Transições → Superior | upper.startTime | 00:00:00 | 00:00:00 | 00:00:00 | **18:01:00** | → Alterar p/ 00:00:00 |
+| IMAGEM → Perfis → Noturno → Transições → Superior | upper.endTime | 00:00:00 | 00:00:00 | 00:00:00 | 00:00:00 ✅ | OK |
+| IMAGEM → Perfis → Noturno → Transições → Superior | upper.profile | 0 | 0 | 0 | 0 ✅ | OK |
+| IMAGEM → Perfis → Diurno/Noturno → Transições | lower.level | 10 | 10 | 10 | 10 ✅ | OK |
+| IMAGEM → Perfis → Diurno/Noturno → Transições | upper.level | 35 | 35 | 35 | 35 ✅ | OK |
+
+#### GOEC6O055 - Faixa 2 vs Referências
+
+| Tela no Sistema | Campo API | 045-F1 ✅ | 022-F1 ✅ | 058-F1 ✅ | **055-F2** ❌ | Ação |
+|---|---|---|---|---|---|---|
+| IMAGEM → Perfis → Diurno → Transições → Inferior | lower.startTime | 00:00:00 | 00:00:00 | 00:00:00 | **18:00:00** | → Alterar p/ 00:00:00 |
+| IMAGEM → Perfis → Diurno → Transições → Inferior | lower.endTime | 00:00:00 | 00:00:00 | 00:00:00 | 00:00:00 ✅ | OK |
+| IMAGEM → Perfis → Diurno → Transições → Superior | upper.startTime | 00:00:00 | 00:00:00 | 00:00:00 | **06:00:00** | → Alterar p/ 00:00:00 |
+| IMAGEM → Perfis → Diurno → Transições → Superior | upper.endTime | 00:00:00 | 00:00:00 | 00:00:00 | 00:00:00 ✅ | OK |
+| IMAGEM → Perfis → Noturno → Transições → Inferior | lower.startTime | 00:00:00 | 00:00:00 | 00:00:00 | **05:59:59** | → Alterar p/ 00:00:00 |
+| IMAGEM → Perfis → Noturno → Transições → Inferior | lower.endTime | 00:00:00 | 00:00:00 | 00:00:00 | 00:00:00 ✅ | OK |
+| IMAGEM → Perfis → Noturno → Transições → Superior | upper.startTime | 00:00:00 | 00:00:00 | 00:00:00 | **18:01:00** | → Alterar p/ 00:00:00 |
+| IMAGEM → Perfis → Noturno → Transições → Superior | upper.endTime | 00:00:00 | 00:00:00 | 00:00:00 | 00:00:00 ✅ | OK |
+| IMAGEM → Perfis → Noturno → Transições → Superior | upper.profile | 0 | 0 | 0 | 0 ✅ | OK |
+| IMAGEM → Perfis → Diurno/Noturno → Transições | lower.level | 10 | 10 | 10 | 10 ✅ | OK |
+| IMAGEM → Perfis → Diurno/Noturno → Transições | upper.level | 35 | 35 | 35 | 35 ✅ | OK |
+
+### Resumo Visual — O que alterar em cada equipamento
+
+| Equipamento | Campos a zerar | Total alterações |
+|---|---|---|
+| **GOEC6O033-F2** | D.Low.start, D.Low.end, D.Up.start, D.Up.end, N.Low.start, N.Low.end, N.Up.start, N.Up.end + lower.level→10 | **9 campos** |
+| **GOEC6O040-F1** | D.Low.start, D.Up.start, N.Low.start, N.Up.start | **4 campos** |
+| **GOEC6O040-F2** | D.Low.end, D.Up.start, N.Low.end, N.Up.start | **4 campos** |
+| **GOEC6O055-F1** | D.Low.end, D.Up.start, N.Low.end, N.Up.start | **4 campos** |
+| **GOEC6O055-F2** | D.Low.start, D.Up.start, N.Low.start, N.Up.start | **4 campos** |
 
 ### Onde Corrigir
 
