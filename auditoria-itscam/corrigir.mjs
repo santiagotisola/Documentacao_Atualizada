@@ -269,7 +269,7 @@ async function autenticar(baseUrl) {
     setTimeout(() => ctrl.abort(), TIMEOUT_MS);
     const res = await fetch(`${baseUrl}/api/auth`, {
       method: 'POST', headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(CREDENTIALS), signal: ctrl.signal,
+      body: JSON.stringify({ params: CREDENTIALS }), signal: ctrl.signal,
     });
     if (!res.ok) return null;
     const data = await res.json();
