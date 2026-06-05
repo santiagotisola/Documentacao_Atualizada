@@ -1,9 +1,9 @@
 # GUIA DE CORREÇÃO CONSOLIDADO — ITScam 450 SETRANS-GO
 
-**Data:** 03/06/2026  
+**Data:** 05/06/2026  
 **Projeto:** Auditoria de Frota ITScam 450 — Grupo Labor (VARCO)  
 **Total de equipamentos:** 70 câmeras (35 pontos × 2 faixas)  
-**Equipamento referência:** GOEC6O045 - Faixa 1 (UUID: `0ce96fed-4b52-4737-9e95-f6dd2c969d58`)  
+**Equipamentos referência:** GOEC6O045-F1, GOEC6O022-F1, GOEC6O058-F1 (3 equipamentos 100% conformes, validados idênticos)  
 **Status geral:** 18 em conformidade total (26%), 52 com desvios, 6 offline
 
 ---
@@ -52,15 +52,24 @@
 ❌ Offline:         6 equipamentos (VARCO desabilitado)
 ```
 
-### Equipamento Referência
+### Equipamentos Referência (3 unidades validadas — valores idênticos entre si)
 
-O **GOEC6O045 - Faixa 1** foi escolhido como referência porque:
-- Zero desvios de configuração
-- Uptime estável: 136.9h sem reboot
-- Storage normal: 967MB (sem fila acumulada)
+Foram selecionados **3 equipamentos** com zero desvios e funcionamento estável para servir como referência tripla. Todos possuem **configurações 100% idênticas** entre si, confirmando que os valores são o padrão correto da frota.
+
+| # | Equipamento | UUID | IP | Uptime | Storage | Status |
+|---|---|---|---|---|---|---|
+| 1 | **GOEC6O045 - Faixa 1** | `0ce96fed-4b52-4737-9e95-f6dd2c969d58` | 179.242.177.86 | 136.9h | 967MB | ✅ Estável |
+| 2 | **GOEC6O022 - Faixa 1** | `29c1d243-f44f-4a40-b62d-06c9cce958c9` | 143.105.141.193 | 122.2h | 296MB | ✅ Estável |
+| 3 | **GOEC6O058 - Faixa 1** | `b5a0f157-e8d4-478c-bf2b-91ebbfcf2a29` | 187.68.160.38 | 123.3h | 312MB | ✅ Estável |
+
+**Por que esses 3:**
+- Todos com zero desvios de configuração (nenhum campo diferente do padrão)
+- Uptime acima de 100h (sem reboot recente, sem clock dessincronizado)
+- Storage saudável (sem fila acumulada)
 - VARCO ativo e funcionando
+- Distribuídos em IPs/pontos diferentes (descarta coincidência)
 
-Todos os valores "corretos" neste documento se baseiam neste equipamento.
+Todos os valores "corretos" neste documento foram extraídos destes 3 equipamentos e confirmados como idênticos.
 
 ---
 
@@ -131,6 +140,17 @@ A coleta de configuração retornou dados nulos/zerados, indicando equipamento i
 ```
 SISTEMA → Manutenção → Acesso Remoto
 ```
+
+### Comparação: Equipamentos CORRETOS vs Afetados
+
+| Campo | GOEC6O045-F1 ✅ | GOEC6O022-F1 ✅ | GOEC6O058-F1 ✅ | Afetados (019/023/049/052) ❌ |
+|---|---|---|---|---|
+| VARCO Enabled | **true** | **true** | **true** | **false** (ou null) |
+| Edge Server | edge.varco.io | edge.varco.io | edge.varco.io | (vazio/null) |
+| Provision Key | yk-pzGz...l_c= | yk-pzGz...l_c= | yk-pzGz...l_c= | (vazio/null) |
+| Device Name | GOEC6O045... | GOEC6O022... | GOEC6O058... | (não definido) |
+
+> **Nota:** Os 3 referências possuem valores idênticos. Os 6 afetados retornaram todos os campos como `null` ou `false`, indicando que o módulo VARCO nunca foi provisionado ou perdeu a configuração.
 
 ### Configuração Correta
 
@@ -219,6 +239,42 @@ PROBLEMA NO 008-F1:
 | Equipamento | UUID | IP | Tunnel |
 |---|---|---|---|
 | GOEC6O008 - Faixa 1 | `5d6880f0-e8f2-4ff0-be25-00c3b31d6522` | 191.58.135.61 | [Tunnel](https://5d6880f0-e8f2-4ff0-be25-00c3b31d6522-80.tunnel.varco.cloud) |
+
+### Comparação: Equipamentos CORRETOS vs GOEC6O008-F1
+
+**Perfil DIURNO — Transições:**
+
+| Campo | GOEC6O045-F1 ✅ | GOEC6O022-F1 ✅ | GOEC6O058-F1 ✅ | GOEC6O008-F1 ❌ |
+|---|---|---|---|---|
+| Lower → startTime | 00:00:00 | 00:00:00 | 00:00:00 | 00:00:00 ✅ |
+| Lower → endTime | 00:00:00 | 00:00:00 | 00:00:00 | **18:00:00** ❌ |
+| Lower → level | 10 | 10 | 10 | 10 ✅ |
+| Lower → holdTime | 60000 | 60000 | 60000 | 60000 ✅ |
+| Upper → startTime | 00:00:00 | 00:00:00 | 00:00:00 | **06:00:00** ❌ |
+| Upper → endTime | 00:00:00 | 00:00:00 | 00:00:00 | 00:00:00 ✅ |
+| Upper → level | 35 | 35 | 35 | **30** ❌ |
+| Upper → holdTime | 60000 | 60000 | 60000 | 60000 ✅ |
+| Upper → profile | 0 | 0 | 0 | 0 ✅ |
+
+**Perfil NOTURNO — Transições:**
+
+| Campo | GOEC6O045-F1 ✅ | GOEC6O022-F1 ✅ | GOEC6O058-F1 ✅ | GOEC6O008-F1 ❌ |
+|---|---|---|---|---|
+| Lower → startTime | 00:00:00 | 00:00:00 | 00:00:00 | 00:00:00 ✅ |
+| Lower → endTime | 00:00:00 | 00:00:00 | 00:00:00 | **06:00:00** ❌ |
+| Lower → level | 10 | 10 | 10 | 10 ✅ |
+| Lower → holdTime | 60000 | 60000 | 60000 | 60000 ✅ |
+| Upper → startTime | 00:00:00 | 00:00:00 | 00:00:00 | **18:01:00** ❌ |
+| Upper → endTime | 00:00:00 | 00:00:00 | 00:00:00 | 00:00:00 ✅ |
+| Upper → level | 35 | 35 | 35 | **30** ❌ |
+| Upper → holdTime | 60000 | 60000 | 60000 | 60000 ✅ |
+| Upper → profile | **0** (Diurno) | **0** (Diurno) | **0** (Diurno) | **23483** 🔴 (aponta p/ si) |
+
+**Outros campos divergentes:**
+
+| Campo | Referências (045/022/058) ✅ | GOEC6O008-F1 ❌ |
+|---|---|---|
+| Snapshot Crop | false | **true** |
 
 ### Configuração Atual vs Correta
 
@@ -322,6 +378,25 @@ Quando há horário definido, a transição **só funciona dentro daquela janela
 
 **Nota:** GOEC6O008-F1 também tem este problema mas já está coberto no CASO 02.
 
+### Comparação: Equipamentos CORRETOS (valores das transições)
+
+| Campo | GOEC6O045-F1 ✅ | GOEC6O022-F1 ✅ | GOEC6O058-F1 ✅ |
+|---|---|---|---|
+| Diurno → Lower → startTime | **00:00:00** | **00:00:00** | **00:00:00** |
+| Diurno → Lower → endTime | **00:00:00** | **00:00:00** | **00:00:00** |
+| Diurno → Upper → startTime | **00:00:00** | **00:00:00** | **00:00:00** |
+| Diurno → Upper → endTime | **00:00:00** | **00:00:00** | **00:00:00** |
+| Noturno → Lower → startTime | **00:00:00** | **00:00:00** | **00:00:00** |
+| Noturno → Lower → endTime | **00:00:00** | **00:00:00** | **00:00:00** |
+| Noturno → Upper → startTime | **00:00:00** | **00:00:00** | **00:00:00** |
+| Noturno → Upper → endTime | **00:00:00** | **00:00:00** | **00:00:00** |
+| Noturno → Upper → profile | **0** | **0** | **0** |
+| Lower → level | **10** | **10** | **10** |
+| Upper → level | **35** | **35** | **35** |
+| holdTime (todos) | **60000** | **60000** | **60000** |
+
+> Os 3 equipamentos referência possuem TODOS os campos de horário em 00:00:00. A transição é controlada 100% por luminosidade.
+
 ### Detalhamento por Equipamento
 
 **GOEC6O033 - Faixa 2:**
@@ -419,6 +494,14 @@ O classificador veicular (identifica carro/moto/caminhão) está com `processing
 
 **ATENÇÃO:** 34 dos 70 equipamentos (49%) têm `queue=4`. Isso pode ter sido **configuração intencional em lote**. Antes de corrigir todos, validar com a equipe de campo se foi proposital.
 
+### Comparação: Equipamentos CORRETOS vs Afetados
+
+| Campo | GOEC6O045-F1 ✅ | GOEC6O022-F1 ✅ | GOEC6O058-F1 ✅ | Afetados ❌ |
+|---|---|---|---|---|
+| classifier.processingQueue | **1** | **1** | **1** | 4, 2 |
+| classifier.processingThreads | **1** | **1** | **1** | 4, 2 |
+| classifier.enabled | true | true | true | true |
+
 ### Equipamentos com Maior Desvio (queue=4 + threads=4)
 
 Estes 3 são os mais críticos (consumo de CPU elevado):
@@ -485,6 +568,15 @@ Os níveis `lower.level` e `upper.level` controlam em qual luminosidade a câmer
 
 Valores diferentes podem causar transições prematuras ou atrasadas.
 
+### Comparação: Equipamentos CORRETOS vs Afetados
+
+| Campo | GOEC6O045-F1 ✅ | GOEC6O022-F1 ✅ | GOEC6O058-F1 ✅ | 009-F1 ❌ | 009-F2 ❌ | 013-F2 ❌ | 008-F1 ❌ |
+|---|---|---|---|---|---|---|---|
+| Diurno Lower level | **10** | **10** | **10** | 10 ✅ | 10 ✅ | **30** | 10 ✅ |
+| Diurno Upper level | **35** | **35** | **35** | **40** | **40** | **30** | **30** |
+| Noturno Lower level | **10** | **10** | **10** | 10 ✅ | 10 ✅ | 10 ✅ | 10 ✅ |
+| Noturno Upper level | **35** | **35** | **35** | **40** | **40** | **30** | **30** |
+
 ### Equipamentos Afetados
 
 | Equipamento | UUID | D.Lower | D.Upper | N.Lower | N.Upper | Correto |
@@ -526,6 +618,16 @@ Para cada equipamento:
 ### O que é
 `maxPlates=2` permite detectar até 2 placas por frame. Com `maxPlates=1`, se dois veículos passarem simultaneamente, o segundo é ignorado.
 
+### Comparação: Equipamentos CORRETOS vs Afetados
+
+| Campo | GOEC6O045-F1 ✅ | GOEC6O022-F1 ✅ | GOEC6O058-F1 ✅ | 009-F2 ❌ | 055-F2 ❌ |
+|---|---|---|---|---|---|
+| ocr.enabled | true | true | true | true | true |
+| ocr.countryCode | 76 | 76 | 76 | 76 | 76 |
+| ocr.maxPlates | **2** | **2** | **2** | **1** | **1** |
+| ocr.lowProbChar | 45 | 45 | 45 | 45 | 45 |
+| ocr.maxLowProbChars | 0 | 0 | 0 | 0 | 0 |
+
 ### Equipamentos Afetados
 
 | Equipamento | UUID | Tunnel | maxPlates Atual | Correto |
@@ -557,6 +659,13 @@ PUT /api/equipment/ocr
 ### O que é
 Com `snapshotCrop=true`, a imagem capturada é **recortada** antes de ser enviada/armazenada. Se não intencional, pode estar cortando parte da cena e prejudicando o contexto das autuações.
 
+### Comparação: Equipamentos CORRETOS vs Afetados
+
+| Campo | GOEC6O045-F1 ✅ | GOEC6O022-F1 ✅ | GOEC6O058-F1 ✅ | 003-F2 ❌ | 008-F1 ❌ | 013-F1 ❌ |
+|---|---|---|---|---|---|---|
+| snapshotCrop.enable | **false** | **false** | **false** | **true** | **true** | **true** |
+| snapshotCrop.mode | static | static | static | static | static | static |
+
 ### Equipamentos Afetados
 
 | Equipamento | UUID | Crop Atual | Mode | Correto |
@@ -584,6 +693,13 @@ EQUIPAMENTO → Diversos
 O gateway padrão da rede é `192.168.0.1`. Estes 2 equipamentos usam `192.168.1.1`. Pode ser correto se a infraestrutura local do ponto usar essa sub-rede.
 
 ### ⚠️ ATENÇÃO: Alterar gateway pode desconectar o equipamento!
+
+### Comparação: Equipamentos CORRETOS vs Afetados
+
+| Campo | GOEC6O045-F1 ✅ | GOEC6O022-F1 ✅ | GOEC6O058-F1 ✅ | 046-F1 ⚠️ | 046-F2 ⚠️ |
+|---|---|---|---|---|---|
+| ethernet.ipv4Primary.gateway | **192.168.0.1** | **192.168.0.1** | **192.168.0.1** | **192.168.1.1** | **192.168.1.1** |
+| ethernet.ipv4Primary.dns | 8.8.8.8 | 8.8.8.8 | 8.8.8.8 | 8.8.8.8 ✅ | 8.8.8.8 ✅ |
 
 ### Equipamentos Afetados
 
