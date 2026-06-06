@@ -1,0 +1,628 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="0c597ab4-5c4a-41ea-805d-8abea8b903cd" name="Changes" comment="Merge remote-tracking branch 'origin/main'" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="PREVIOUS_COMMIT_AUTHORS">
+      <list>
+        <option value="Your Name &lt;you@example.com&gt;" />
+      </list>
+    </option>
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="feature/doc-ax-hub" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;viniciuscm09&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/Axion-Tecnologia/Documentacao_Atualizada.git",
+    "accountId": "4b4db40a-b572-444a-b0b9-d3f826041cb5"
+  }
+}]]></component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/Writerside/hi.tree" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/Writerside/topics/AXSYNC.md" root0="SKIP_INSPECTION" root1="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/Writerside/topics/Arcos.md" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Writerside/topics/Ativos.md" root0="SKIP_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Writerside/topics/AxManage.md" root0="FORCE_HIGHLIGHTING" root1="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/Writerside/topics/Axcross.md" root0="FORCE_HIGHLIGHTING" root1="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/Writerside/topics/Axhub.md" root0="FORCE_HIGHLIGHTING" root1="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/Writerside/topics/Axion-Sistemas.topic" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Writerside/topics/Configurações-de-Enquadramento.md" root0="FORCE_HIGHLIGHTING" root1="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/Writerside/topics/Configurações-do-Sistema.md" root0="FORCE_HIGHLIGHTING" root1="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Writerside/topics/Configurações.md" root0="FORCE_HIGHLIGHTING" root1="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/Writerside/topics/Equipamentos.md" root0="FORCE_HIGHLIGHTING" root1="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/Writerside/topics/Exportação.md" root0="FORCE_HIGHLIGHTING" root1="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/Writerside/topics/Monitoramento-Online.md" root0="FORCE_HIGHLIGHTING" root1="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/Writerside/topics/OCR.md" root0="SKIP_INSPECTION" root1="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/Writerside/topics/Passo-a-Passo.md" root0="FORCE_HIGHLIGHTING" root1="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/Writerside/topics/Triagem-2.md" root0="FORCE_HIGHLIGHTING" root1="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/Writerside/topics/passo-a-passo-Configuração-AxCross.md" root0="FORCE_HIGHLIGHTING" root1="SKIP_INSPECTION" />
+  </component>
+  <component name="InstanceColorv3">
+    <option name="map">
+      <map>
+        <entry key="$PROJECT_DIR$/Writerside/hi.tree">
+          <value>
+            <ColorState>
+              <option name="customOrder" value="1" />
+              <option name="first">
+                <RgbState>
+                  <option name="blue" value="60" />
+                  <option name="darkBlue" value="60" />
+                  <option name="darkGreen" value="68" />
+                  <option name="darkRed" value="206" />
+                  <option name="green" value="68" />
+                  <option name="red" value="206" />
+                </RgbState>
+              </option>
+              <option name="second">
+                <RgbState>
+                  <option name="blue" value="65" />
+                  <option name="darkBlue" value="65" />
+                  <option name="darkGreen" value="126" />
+                  <option name="darkRed" value="231" />
+                  <option name="green" value="126" />
+                  <option name="red" value="231" />
+                </RgbState>
+              </option>
+            </ColorState>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="KubernetesApiPersistence">{}</component>
+  <component name="KubernetesApiProvider">{
+  &quot;isMigrated&quot;: true
+}</component>
+  <component name="McpProjectServerCommands">
+    <commands />
+    <urls />
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 4
+}</component>
+  <component name="ProjectId" id="2hPtwVNFIdTrXAa8Ryjnz83cei6" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;Application.Main.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;junie.onboarding.icon.badge.shown&quot;: &quot;true&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/vinic/source/repos/Documentacao_Atualizada&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;onboarding.tips.debug.path&quot;: &quot;C:/Users/vinic/TI - 2024/Documentacao_ Atualizada/src/Main.java&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;fileTemplates&quot;,
+    &quot;to.speed.mode.migration.done&quot;: &quot;true&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\vinic\Documentacao_Atualizada\Writerside\images" />
+    </key>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-30f59d01ecdd-2fc7cc6b9a17-intellij.indexing.shared.core-IU-253.30387.90" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="SvnConfiguration">
+    <configuration>C:\Users\vinic\AppData\Roaming\Subversion</configuration>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="0c597ab4-5c4a-41ea-805d-8abea8b903cd" name="Changes" comment="" />
+      <created>1717507780367</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1717507780367</updated>
+      <workItem from="1717507781438" duration="196000" />
+      <workItem from="1717507990179" duration="940000" />
+      <workItem from="1717683215412" duration="6708000" />
+      <workItem from="1717759419920" duration="9565000" />
+      <workItem from="1718020309476" duration="11414000" />
+      <workItem from="1718106435259" duration="4047000" />
+      <workItem from="1718125515634" duration="73000" />
+      <workItem from="1718125602810" duration="593000" />
+      <workItem from="1718194382405" duration="2006000" />
+      <workItem from="1718200194970" duration="2140000" />
+      <workItem from="1718202365737" duration="6376000" />
+      <workItem from="1718279794997" duration="2594000" />
+      <workItem from="1718279794997" duration="1095000" />
+      <workItem from="1718283156664" duration="5333000" />
+      <workItem from="1718365991336" duration="5070000" />
+      <workItem from="1718625840777" duration="1800000" />
+      <workItem from="1718711943048" duration="3057000" />
+      <workItem from="1718972281312" duration="2772000" />
+      <workItem from="1719235006274" duration="43000" />
+      <workItem from="1719576343591" duration="1273000" />
+      <workItem from="1720013524166" duration="4103000" />
+      <workItem from="1720097259101" duration="1784000" />
+      <workItem from="1720442206015" duration="488000" />
+      <workItem from="1720442710281" duration="29000" />
+      <workItem from="1720444240654" duration="2554000" />
+      <workItem from="1720542951560" duration="4000" />
+      <workItem from="1720543961671" duration="55000" />
+      <workItem from="1720619303754" duration="3000" />
+      <workItem from="1720621456099" duration="13000" />
+      <workItem from="1720706034732" duration="62000" />
+      <workItem from="1720793149835" duration="142000" />
+      <workItem from="1721398952479" duration="34000" />
+      <workItem from="1721834430308" duration="2000" />
+      <workItem from="1721914367056" duration="7814000" />
+      <workItem from="1722285418866" duration="34000" />
+      <workItem from="1722339992479" duration="15324000" />
+      <workItem from="1722426026513" duration="16762000" />
+      <workItem from="1722515529989" duration="3490000" />
+      <workItem from="1722519075100" duration="3435000" />
+      <workItem from="1722522571528" duration="7909000" />
+      <workItem from="1722601814345" duration="2546000" />
+      <workItem from="1722859430241" duration="12437000" />
+      <workItem from="1722946058865" duration="628000" />
+      <workItem from="1723038624434" duration="1287000" />
+      <workItem from="1723040713124" duration="4822000" />
+      <workItem from="1723122543969" duration="5725000" />
+      <workItem from="1723464600349" duration="31000" />
+      <workItem from="1723464931640" duration="5000" />
+      <workItem from="1744643612695" duration="75000" />
+      <workItem from="1744643707377" duration="1745000" />
+      <workItem from="1765388577477" duration="55000" />
+      <workItem from="1765388649086" duration="352000" />
+      <workItem from="1770814051414" duration="114000" />
+      <workItem from="1770815695020" duration="43000" />
+    </task>
+    <task id="LOCAL-00001" summary="Resolve conflitos após pull">
+      <option name="closed" value="true" />
+      <created>1717682016582</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1717682016582</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Resolve conflitos após pull">
+      <option name="closed" value="true" />
+      <created>1718279839950</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1718279839950</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Resolve conflitos após pull">
+      <option name="closed" value="true" />
+      <created>1718286460193</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1718286460193</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Resolve conflitos após pull">
+      <option name="closed" value="true" />
+      <created>1718286803771</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1718286803771</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Resolve conflitos após pull">
+      <option name="closed" value="true" />
+      <created>1718287762303</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1718287762303</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Resolve conflitos após pull">
+      <option name="closed" value="true" />
+      <created>1718391779487</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1718391779487</updated>
+    </task>
+    <task id="LOCAL-00007" summary="Resolve conflitos após pull">
+      <option name="closed" value="true" />
+      <created>1718391807352</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1718391807352</updated>
+    </task>
+    <task id="LOCAL-00008" summary="Resolve conflitos após pull">
+      <option name="closed" value="true" />
+      <created>1718391946720</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1718391946720</updated>
+    </task>
+    <task id="LOCAL-00009" summary="Resolve conflitos após pull">
+      <option name="closed" value="true" />
+      <created>1718393235660</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1718393235660</updated>
+    </task>
+    <task id="LOCAL-00010" summary="Resolve conflitos após pull">
+      <option name="closed" value="true" />
+      <created>1718989783335</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1718989783335</updated>
+    </task>
+    <task id="LOCAL-00011" summary="Resolve conflitos após pull">
+      <option name="closed" value="true" />
+      <created>1720014612355</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1720014612355</updated>
+    </task>
+    <task id="LOCAL-00012" summary="Resolve conflitos após pull">
+      <option name="closed" value="true" />
+      <created>1720017012257</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1720017012257</updated>
+    </task>
+    <task id="LOCAL-00013" summary="Resolve conflitos após pull">
+      <option name="closed" value="true" />
+      <created>1722277592262</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1722277592262</updated>
+    </task>
+    <task id="LOCAL-00014" summary="Resolve conflitos após pull">
+      <option name="closed" value="true" />
+      <created>1722277669807</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1722277669807</updated>
+    </task>
+    <task id="LOCAL-00015" summary="Resolve conflitos após pull">
+      <option name="closed" value="true" />
+      <created>1722285439968</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1722285439969</updated>
+    </task>
+    <task id="LOCAL-00016" summary="Resolve conflitos após pull">
+      <option name="closed" value="true" />
+      <created>1722342228195</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1722342228195</updated>
+    </task>
+    <task id="LOCAL-00017" summary="Resolve conflitos após pull">
+      <option name="closed" value="true" />
+      <created>1722346601495</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1722346601495</updated>
+    </task>
+    <task id="LOCAL-00018" summary="Resolve conflitos após pull">
+      <option name="closed" value="true" />
+      <created>1722346839510</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1722346839510</updated>
+    </task>
+    <task id="LOCAL-00019" summary="Resolve conflitos após pull">
+      <option name="closed" value="true" />
+      <created>1722347012246</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1722347012246</updated>
+    </task>
+    <task id="LOCAL-00020" summary="Resolve conflitos após pull">
+      <option name="closed" value="true" />
+      <created>1722347160208</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1722347160208</updated>
+    </task>
+    <task id="LOCAL-00021" summary="Resolve conflitos após pull">
+      <option name="closed" value="true" />
+      <created>1722347346518</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1722347346518</updated>
+    </task>
+    <task id="LOCAL-00022" summary="Resolve conflitos após pull">
+      <option name="closed" value="true" />
+      <created>1722348911575</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1722348911575</updated>
+    </task>
+    <task id="LOCAL-00023" summary="Resolve conflitos após pull">
+      <option name="closed" value="true" />
+      <created>1722429345373</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1722429345373</updated>
+    </task>
+    <task id="LOCAL-00024" summary="Resolve conflitos após pull">
+      <option name="closed" value="true" />
+      <created>1722431910309</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1722431910309</updated>
+    </task>
+    <task id="LOCAL-00025" summary="Resolve conflitos após pull">
+      <option name="closed" value="true" />
+      <created>1722437674528</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1722437674528</updated>
+    </task>
+    <task id="LOCAL-00026" summary="Resolve conflitos após pull">
+      <option name="closed" value="true" />
+      <created>1722437796785</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1722437796785</updated>
+    </task>
+    <task id="LOCAL-00027" summary="Resolve conflitos após pull">
+      <option name="closed" value="true" />
+      <created>1722439868436</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1722439868436</updated>
+    </task>
+    <task id="LOCAL-00028" summary="Resolve conflitos após pull">
+      <option name="closed" value="true" />
+      <created>1722440014515</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1722440014515</updated>
+    </task>
+    <task id="LOCAL-00029" summary="Resolve conflitos após pull">
+      <option name="closed" value="true" />
+      <created>1722440144908</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1722440144908</updated>
+    </task>
+    <task id="LOCAL-00030" summary="Resolve conflitos após pull">
+      <option name="closed" value="true" />
+      <created>1722440169939</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1722440169939</updated>
+    </task>
+    <task id="LOCAL-00031" summary="Resolve conflitos após pull">
+      <option name="closed" value="true" />
+      <created>1722860645023</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1722860645023</updated>
+    </task>
+    <task id="LOCAL-00032" summary="Resolve conflitos após pull">
+      <option name="closed" value="true" />
+      <created>1722861001766</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1722861001766</updated>
+    </task>
+    <task id="LOCAL-00033" summary="Resolve conflitos após pull">
+      <option name="closed" value="true" />
+      <created>1722881622063</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1722881622063</updated>
+    </task>
+    <task id="LOCAL-00034" summary="Resolve conflitos após pull">
+      <option name="closed" value="true" />
+      <created>1722882827473</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1722882827473</updated>
+    </task>
+    <task id="LOCAL-00035" summary="Resolve conflitos após pull">
+      <option name="closed" value="true" />
+      <created>1722883303055</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1722883303055</updated>
+    </task>
+    <task id="LOCAL-00036" summary="Resolve conflitos após pull">
+      <option name="closed" value="true" />
+      <created>1723040156459</created>
+      <option name="number" value="00036" />
+      <option name="presentableId" value="LOCAL-00036" />
+      <option name="project" value="LOCAL" />
+      <updated>1723040156459</updated>
+    </task>
+    <task id="LOCAL-00037" summary="Resolve conflitos após pull">
+      <option name="closed" value="true" />
+      <created>1744649013768</created>
+      <option name="number" value="00037" />
+      <option name="presentableId" value="LOCAL-00037" />
+      <option name="project" value="LOCAL" />
+      <updated>1744649013768</updated>
+    </task>
+    <task id="LOCAL-00038" summary="Resolve conflitos após pull">
+      <option name="closed" value="true" />
+      <created>1744649023410</created>
+      <option name="number" value="00038" />
+      <option name="presentableId" value="LOCAL-00038" />
+      <option name="project" value="LOCAL" />
+      <updated>1744649023410</updated>
+    </task>
+    <task id="LOCAL-00039" summary="Resolve conflitos após pull">
+      <option name="closed" value="true" />
+      <created>1744649128932</created>
+      <option name="number" value="00039" />
+      <option name="presentableId" value="LOCAL-00039" />
+      <option name="project" value="LOCAL" />
+      <updated>1744649128932</updated>
+    </task>
+    <task id="LOCAL-00040" summary="Resolve conflitos após pull">
+      <option name="closed" value="true" />
+      <created>1744649136618</created>
+      <option name="number" value="00040" />
+      <option name="presentableId" value="LOCAL-00040" />
+      <option name="project" value="LOCAL" />
+      <updated>1744649136618</updated>
+    </task>
+    <task id="LOCAL-00041" summary="Resolve conflitos após pull">
+      <option name="closed" value="true" />
+      <created>1744649424434</created>
+      <option name="number" value="00041" />
+      <option name="presentableId" value="LOCAL-00041" />
+      <option name="project" value="LOCAL" />
+      <updated>1744649424434</updated>
+    </task>
+    <task id="LOCAL-00042" summary="Resolve conflitos após pull">
+      <option name="closed" value="true" />
+      <created>1765388789713</created>
+      <option name="number" value="00042" />
+      <option name="presentableId" value="LOCAL-00042" />
+      <option name="project" value="LOCAL" />
+      <updated>1765388789713</updated>
+    </task>
+    <task id="LOCAL-00043" summary="Resolve conflitos após pull">
+      <option name="closed" value="true" />
+      <created>1765388798141</created>
+      <option name="number" value="00043" />
+      <option name="presentableId" value="LOCAL-00043" />
+      <option name="project" value="LOCAL" />
+      <updated>1765388798141</updated>
+    </task>
+    <task id="LOCAL-00044" summary="Merge remote-tracking branch 'origin/main'">
+      <option name="closed" value="true" />
+      <created>1765388872562</created>
+      <option name="number" value="00044" />
+      <option name="presentableId" value="LOCAL-00044" />
+      <option name="project" value="LOCAL" />
+      <updated>1765388872562</updated>
+    </task>
+    <task id="LOCAL-00045" summary="Merge remote-tracking branch 'origin/main'">
+      <option name="closed" value="true" />
+      <created>1770835055662</created>
+      <option name="number" value="00045" />
+      <option name="presentableId" value="LOCAL-00045" />
+      <option name="project" value="LOCAL" />
+      <updated>1770835055663</updated>
+    </task>
+    <task id="LOCAL-00046" summary="Merge remote-tracking branch 'origin/main'">
+      <option name="closed" value="true" />
+      <created>1770836831037</created>
+      <option name="number" value="00046" />
+      <option name="presentableId" value="LOCAL-00046" />
+      <option name="project" value="LOCAL" />
+      <updated>1770836831037</updated>
+    </task>
+    <task id="LOCAL-00047" summary="Merge remote-tracking branch 'origin/main'">
+      <option name="closed" value="true" />
+      <created>1770985423612</created>
+      <option name="number" value="00047" />
+      <option name="presentableId" value="LOCAL-00047" />
+      <option name="project" value="LOCAL" />
+      <updated>1770985423612</updated>
+    </task>
+    <option name="localTasksCounter" value="48" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="OPEN_GENERIC_TABS">
+      <map>
+        <entry key="5f438efe-c0dd-426e-9eaa-89ddbaf6cf60" value="TOOL_WINDOW" />
+      </map>
+    </option>
+    <option name="TAB_STATES">
+      <map>
+        <entry key="5f438efe-c0dd-426e-9eaa-89ddbaf6cf60">
+          <value>
+            <State />
+          </value>
+        </entry>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Resolve conflitos após pull" />
+    <MESSAGE value="Merge remote-tracking branch 'origin/main'" />
+    <option name="LAST_COMMIT_MESSAGE" value="Merge remote-tracking branch 'origin/main'" />
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
+  </component>
+</project>
