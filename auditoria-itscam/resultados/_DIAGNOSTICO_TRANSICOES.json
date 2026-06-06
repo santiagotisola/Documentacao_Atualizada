@@ -1,0 +1,2716 @@
+[
+  {
+    "name": "GOEC6O002 - Faixa 1",
+    "risco": "✅ CONFORME",
+    "problemas": [],
+    "total": 0
+  },
+  {
+    "name": "GOEC6O002 - Faixa 2",
+    "risco": "🟡 MÚLTIPLAS DIVERGÊNCIAS",
+    "problemas": [
+      {
+        "tipo": "EXPOSICAO",
+        "local": "Diurno",
+        "campo": "gainMax",
+        "atual": 1000,
+        "correto": 1500
+      },
+      {
+        "tipo": "EXPOSICAO",
+        "local": "Diurno",
+        "campo": "shutterMax",
+        "atual": 1500,
+        "correto": 500
+      },
+      {
+        "tipo": "EXPOSICAO",
+        "local": "Diurno",
+        "campo": "targetValue",
+        "atual": 35,
+        "correto": 38
+      },
+      {
+        "tipo": "EXPOSICAO",
+        "local": "Diurno",
+        "campo": "sharpness",
+        "atual": 40,
+        "correto": 30
+      },
+      {
+        "tipo": "FLASH",
+        "campo": "flash1_out1",
+        "atual": 100,
+        "correto": 65
+      },
+      {
+        "tipo": "FLASH",
+        "campo": "flash1_out3",
+        "atual": 100,
+        "correto": 65
+      },
+      {
+        "tipo": "FLASH",
+        "campo": "flash2_out1",
+        "atual": 7,
+        "correto": 20
+      },
+      {
+        "tipo": "FLASH",
+        "campo": "shutterFlash1",
+        "atual": 100,
+        "correto": 50
+      }
+    ],
+    "total": 8
+  },
+  {
+    "name": "GOEC6O003 - Faixa 1",
+    "risco": "✅ CONFORME",
+    "problemas": [],
+    "total": 0
+  },
+  {
+    "name": "GOEC6O003 - Faixa 2",
+    "risco": "🟡 MÚLTIPLAS DIVERGÊNCIAS",
+    "problemas": [
+      {
+        "tipo": "EXPOSICAO",
+        "local": "Diurno",
+        "campo": "gainMax",
+        "atual": 1000,
+        "correto": 1500
+      },
+      {
+        "tipo": "EXPOSICAO",
+        "local": "Diurno",
+        "campo": "shutterMax",
+        "atual": 1500,
+        "correto": 500
+      },
+      {
+        "tipo": "EXPOSICAO",
+        "local": "Diurno",
+        "campo": "targetValue",
+        "atual": 35,
+        "correto": 38
+      },
+      {
+        "tipo": "EXPOSICAO",
+        "local": "Diurno",
+        "campo": "sharpness",
+        "atual": 40,
+        "correto": 30
+      },
+      {
+        "tipo": "FLASH",
+        "campo": "flash1_out1",
+        "atual": 100,
+        "correto": 65
+      },
+      {
+        "tipo": "FLASH",
+        "campo": "flash1_out3",
+        "atual": 100,
+        "correto": 65
+      },
+      {
+        "tipo": "FLASH",
+        "campo": "flash2_out1",
+        "atual": 100,
+        "correto": 20
+      },
+      {
+        "tipo": "EXPOSICAO",
+        "local": "Noturno",
+        "campo": "gainMax",
+        "atual": 4999,
+        "correto": 4000
+      },
+      {
+        "tipo": "EXPOSICAO",
+        "local": "Noturno",
+        "campo": "shutterMax",
+        "atual": 897,
+        "correto": 800
+      },
+      {
+        "tipo": "FLASH",
+        "campo": "shutterFlash1",
+        "atual": 100,
+        "correto": 50
+      }
+    ],
+    "total": 10
+  },
+  {
+    "name": "GOEC6O004 - Faixa 1",
+    "risco": "✅ CONFORME",
+    "problemas": [],
+    "total": 0
+  },
+  {
+    "name": "GOEC6O004 - Faixa 2",
+    "risco": "🟡 MÚLTIPLAS DIVERGÊNCIAS",
+    "problemas": [
+      {
+        "tipo": "EXPOSICAO",
+        "local": "Diurno",
+        "campo": "gainMax",
+        "atual": 1000,
+        "correto": 1500
+      },
+      {
+        "tipo": "EXPOSICAO",
+        "local": "Diurno",
+        "campo": "shutterMax",
+        "atual": 1500,
+        "correto": 500
+      },
+      {
+        "tipo": "EXPOSICAO",
+        "local": "Diurno",
+        "campo": "targetValue",
+        "atual": 35,
+        "correto": 38
+      },
+      {
+        "tipo": "EXPOSICAO",
+        "local": "Diurno",
+        "campo": "sharpness",
+        "atual": 40,
+        "correto": 30
+      },
+      {
+        "tipo": "FLASH",
+        "campo": "flash1_out1",
+        "atual": 100,
+        "correto": 65
+      },
+      {
+        "tipo": "FLASH",
+        "campo": "flash1_out3",
+        "atual": 100,
+        "correto": 65
+      },
+      {
+        "tipo": "FLASH",
+        "campo": "flash2_out1",
+        "atual": 7,
+        "correto": 20
+      },
+      {
+        "tipo": "FLASH",
+        "campo": "shutterFlash1",
+        "atual": 100,
+        "correto": 50
+      }
+    ],
+    "total": 8
+  },
+  {
+    "name": "GOEC6O006 - Faixa 1",
+    "risco": "✅ CONFORME",
+    "problemas": [],
+    "total": 0
+  },
+  {
+    "name": "GOEC6O006 - Faixa 2",
+    "risco": "🟡 MÚLTIPLAS DIVERGÊNCIAS",
+    "problemas": [
+      {
+        "tipo": "EXPOSICAO",
+        "local": "Diurno",
+        "campo": "gainMax",
+        "atual": 1594,
+        "correto": 1500
+      },
+      {
+        "tipo": "EXPOSICAO",
+        "local": "Diurno",
+        "campo": "shutterMax",
+        "atual": 1500,
+        "correto": 500
+      },
+      {
+        "tipo": "EXPOSICAO",
+        "local": "Diurno",
+        "campo": "targetValue",
+        "atual": 35,
+        "correto": 38
+      },
+      {
+        "tipo": "EXPOSICAO",
+        "local": "Diurno",
+        "campo": "sharpness",
+        "atual": 40,
+        "correto": 30
+      },
+      {
+        "tipo": "FLASH",
+        "campo": "flash1_out1",
+        "atual": 100,
+        "correto": 65
+      },
+      {
+        "tipo": "FLASH",
+        "campo": "flash1_out3",
+        "atual": 100,
+        "correto": 65
+      },
+      {
+        "tipo": "FLASH",
+        "campo": "flash2_out1",
+        "atual": 45,
+        "correto": 20
+      },
+      {
+        "tipo": "FLASH",
+        "campo": "shutterFlash1",
+        "atual": 100,
+        "correto": 50
+      }
+    ],
+    "total": 8
+  },
+  {
+    "name": "GOEC6O007 - Faixa 1",
+    "risco": "✅ CONFORME",
+    "problemas": [],
+    "total": 0
+  },
+  {
+    "name": "GOEC6O007 - Faixa 2",
+    "risco": "🟡 MÚLTIPLAS DIVERGÊNCIAS",
+    "problemas": [
+      {
+        "tipo": "EXPOSICAO",
+        "local": "Diurno",
+        "campo": "gainMax",
+        "atual": 1000,
+        "correto": 1500
+      },
+      {
+        "tipo": "EXPOSICAO",
+        "local": "Diurno",
+        "campo": "shutterMax",
+        "atual": 1500,
+        "correto": 500
+      },
+      {
+        "tipo": "EXPOSICAO",
+        "local": "Diurno",
+        "campo": "targetValue",
+        "atual": 35,
+        "correto": 38
+      },
+      {
+        "tipo": "EXPOSICAO",
+        "local": "Diurno",
+        "campo": "sharpness",
+        "atual": 40,
+        "correto": 30
+      },
+      {
+        "tipo": "FLASH",
+        "campo": "flash1_out1",
+        "atual": 100,
+        "correto": 65
+      },
+      {
+        "tipo": "FLASH",
+        "campo": "flash1_out3",
+        "atual": 100,
+        "correto": 65
+      },
+      {
+        "tipo": "FLASH",
+        "campo": "flash2_out1",
+        "atual": 7,
+        "correto": 20
+      },
+      {
+        "tipo": "FLASH",
+        "campo": "shutterFlash1",
+        "atual": 100,
+        "correto": 50
+      }
+    ],
+    "total": 8
+  },
+  {
+    "name": "GOEC6O008 - Faixa 1",
+    "risco": "🔴 TRAVADO (não volta p/ diurno)",
+    "problemas": [
+      {
+        "tipo": "TRANSICAO_TEMPORAL",
+        "local": "Diurno→Noturno",
+        "campo": "lower",
+        "start": "00:00:00",
+        "end": "18:00:00",
+        "correcao": "start=00:00:00, end=00:00:00"
+      },
+      {
+        "tipo": "TRANSICAO_TEMPORAL",
+        "local": "Diurno←Noturno",
+        "campo": "upper",
+        "start": "06:00:00",
+        "end": "00:00:00",
+        "correcao": "start=00:00:00, end=00:00:00"
+      },
+      {
+        "tipo": "TRANSICAO_TEMPORAL",
+        "local": "Noturno→Noturno",
+        "campo": "lower",
+        "start": "00:00:00",
+        "end": "06:00:00",
+        "correcao": "start=00:00:00, end=00:00:00"
+      },
+      {
+        "tipo": "TRANSICAO_TEMPORAL",
+        "local": "Noturno→Diurno",
+        "campo": "upper",
+        "start": "18:01:00",
+        "end": "00:00:00",
+        "correcao": "start=00:00:00, end=00:00:00"
+      },
+      {
+        "tipo": "UPPER_PROFILE_ERRADO",
+        "local": "Noturno",
+        "atual": 23483,
+        "correto": 0,
+        "impacto": "Camera NAO volta para diurno!"
+      },
+      {
+        "tipo": "LEVEL",
+        "local": "Diurno upper",
+        "atual": 30,
+        "correto": 35
+      },
+      {
+        "tipo": "LEVEL",
+        "local": "Noturno upper",
+        "atual": 30,
+        "correto": 35
+      },
+      {
+        "tipo": "EXPOSICAO",
+        "local": "Diurno",
+        "campo": "gainMax",
+        "atual": 1400,
+        "correto": 1500
+      },
+      {
+        "tipo": "EXPOSICAO",
+        "local": "Diurno",
+        "campo": "shutterMax",
+        "atual": 1450,
+        "correto": 500
+      },
+      {
+        "tipo": "EXPOSICAO",
+        "local": "Diurno",
+        "campo": "targetValue",
+        "atual": 45,
+        "correto": 38
+      },
+      {
+        "tipo": "EXPOSICAO",
+        "local": "Diurno",
+        "campo": "sharpness",
+        "atual": 20,
+        "correto": 30
+      },
+      {
+        "tipo": "FLASH",
+        "campo": "flash1_out1",
+        "atual": 100,
+        "correto": 65
+      },
+      {
+        "tipo": "FLASH",
+        "campo": "flash1_out3",
+        "correto": 65
+      },
+      {
+        "tipo": "FLASH",
+        "campo": "flash2_out1",
+        "atual": 5,
+        "correto": 20
+      },
+      {
+        "tipo": "EXPOSICAO",
+        "local": "Noturno",
+        "campo": "gainMax",
+        "atual": 2400,
+        "correto": 4000
+      },
+      {
+        "tipo": "EXPOSICAO",
+        "local": "Noturno",
+        "campo": "shutterMax",
+        "atual": 2000,
+        "correto": 800
+      },
+      {
+        "tipo": "FLASH",
+        "campo": "shutterFlash1",
+        "atual": 100,
+        "correto": 50
+      }
+    ],
+    "total": 17
+  },
+  {
+    "name": "GOEC6O008 - Faixa 2",
+    "risco": "🟡 MÚLTIPLAS DIVERGÊNCIAS",
+    "problemas": [
+      {
+        "tipo": "EXPOSICAO",
+        "local": "Diurno",
+        "campo": "gainMax",
+        "atual": 1000,
+        "correto": 1500
+      },
+      {
+        "tipo": "EXPOSICAO",
+        "local": "Diurno",
+        "campo": "shutterMax",
+        "atual": 1500,
+        "correto": 500
+      },
+      {
+        "tipo": "EXPOSICAO",
+        "local": "Diurno",
+        "campo": "targetValue",
+        "atual": 35,
+        "correto": 38
+      },
+      {
+        "tipo": "EXPOSICAO",
+        "local": "Diurno",
+        "campo": "sharpness",
+        "atual": 40,
+        "correto": 30
+      },
+      {
+        "tipo": "FLASH",
+        "campo": "flash1_out1",
+        "atual": 100,
+        "correto": 65
+      },
+      {
+        "tipo": "FLASH",
+        "campo": "flash1_out3",
+        "atual": 100,
+        "correto": 65
+      },
+      {
+        "tipo": "FLASH",
+        "campo": "flash2_out1",
+        "atual": 7,
+        "correto": 20
+      },
+      {
+        "tipo": "FLASH",
+        "campo": "shutterFlash1",
+        "atual": 100,
+        "correto": 50
+      }
+    ],
+    "total": 8
+  },
+  {
+    "name": "GOEC6O009 - Faixa 1",
+    "risco": "🟡 MÚLTIPLAS DIVERGÊNCIAS",
+    "problemas": [
+      {
+        "tipo": "LEVEL",
+        "local": "Diurno upper",
+        "atual": 40,
+        "correto": 35
+      },
+      {
+        "tipo": "LEVEL",
+        "local": "Noturno upper",
+        "atual": 40,
+        "correto": 35
+      },
+      {
+        "tipo": "EXPOSICAO",
+        "local": "Diurno",
+        "campo": "shutterMax",
+        "atual": 1200,
+        "correto": 500
+      },
+      {
+        "tipo": "EXPOSICAO",
+        "local": "Diurno",
+        "campo": "targetValue",
+        "atual": 40,
+        "correto": 38
+      },
+      {
+        "tipo": "EXPOSICAO",
+        "local": "Diurno",
+        "campo": "sharpness",
+        "atual": 40,
+        "correto": 30
+      },
+      {
+        "tipo": "FLASH",
+        "campo": "flash1_out1",
+        "atual": 100,
+        "correto": 65
+      },
+      {
+        "tipo": "FLASH",
+        "campo": "flash1_out3",
+        "atual": 100,
+        "correto": 65
+      },
+      {
+        "tipo": "FLASH",
+        "campo": "flash2_out1",
+        "atual": 7,
+        "correto": 20
+      },
+      {
+        "tipo": "EXPOSICAO",
+        "local": "Noturno",
+        "campo": "shutterMax",
+        "atual": 2155,
+        "correto": 800
+      }
+    ],
+    "total": 9
+  },
+  {
+    "name": "GOEC6O009 - Faixa 2",
+    "risco": "🟡 MÚLTIPLAS DIVERGÊNCIAS",
+    "problemas": [
+      {
+        "tipo": "LEVEL",
+        "local": "Diurno upper",
+        "atual": 40,
+        "correto": 35
+      },
+      {
+        "tipo": "LEVEL",
+        "local": "Noturno upper",
+        "atual": 40,
+        "correto": 35
+      },
+      {
+        "tipo": "EXPOSICAO",
+        "local": "Diurno",
+        "campo": "gainMax",
+        "atual": 1000,
+        "correto": 1500
+      },
+      {
+        "tipo": "EXPOSICAO",
+        "local": "Diurno",
+        "campo": "shutterMax",
+        "atual": 1200,
+        "correto": 500
+      },
+      {
+        "tipo": "EXPOSICAO",
+        "local": "Diurno",
+        "campo": "targetValue",
+        "atual": 40,
+        "correto": 38
+      },
+      {
+        "tipo": "EXPOSICAO",
+        "local": "Diurno",
+        "campo": "sharpness",
+        "atual": 40,
+        "correto": 30
+      },
+      {
+        "tipo": "FLASH",
+        "campo": "flash1_out1",
+        "atual": 70,
+        "correto": 65
+      },
+      {
+        "tipo": "FLASH",
+        "campo": "flash1_out3",
+        "atual": 70,
+        "correto": 65
+      },
+      {
+        "tipo": "FLASH",
+        "campo": "flash2_out1",
+        "atual": 25,
+        "correto": 20
+      },
+      {
+        "tipo": "FLASH",
+        "campo": "shutterFlash1",
+        "atual": 100,
+        "correto": 50
+      }
+    ],
+    "total": 10
+  },
+  {
+    "name": "GOEC6O010 - Faixa 1",
+    "risco": "✅ CONFORME",
+    "problemas": [],
+    "total": 0
+  },
+  {
+    "name": "GOEC6O010 - Faixa 2",
+    "risco": "🟡 MÚLTIPLAS DIVERGÊNCIAS",
+    "problemas": [
+      {
+        "tipo": "EXPOSICAO",
+        "local": "Diurno",
+        "campo": "gainMax",
+        "atual": 1000,
+        "correto": 1500
+      },
+      {
+        "tipo": "EXPOSICAO",
+        "local": "Diurno",
+        "campo": "shutterMax",
+        "atual": 1500,
+        "correto": 500
+      },
+      {
+        "tipo": "EXPOSICAO",
+        "local": "Diurno",
+        "campo": "targetValue",
+        "atual": 35,
+        "correto": 38
+      },
+      {
+        "tipo": "EXPOSICAO",
+        "local": "Diurno",
+        "campo": "sharpness",
+        "atual": 40,
+        "correto": 30
+      },
+      {
+        "tipo": "FLASH",
+        "campo": "flash1_out1",
+        "atual": 100,
+        "correto": 65
+      },
+      {
+        "tipo": "FLASH",
+        "campo": "flash1_out3",
+        "atual": 100,
+        "correto": 65
+      },
+      {
+        "tipo": "FLASH",
+        "campo": "flash2_out1",
+        "atual": 7,
+        "correto": 20
+      },
+      {
+        "tipo": "FLASH",
+        "campo": "shutterFlash1",
+        "atual": 100,
+        "correto": 50
+      }
+    ],
+    "total": 8
+  },
+  {
+    "name": "GOEC6O011 - Faixa 1",
+    "risco": "✅ CONFORME",
+    "problemas": [],
+    "total": 0
+  },
+  {
+    "name": "GOEC6O011 - Faixa 2",
+    "risco": "🟡 MÚLTIPLAS DIVERGÊNCIAS",
+    "problemas": [
+      {
+        "tipo": "EXPOSICAO",
+        "local": "Diurno",
+        "campo": "gainMax",
+        "atual": 1400,
+        "correto": 1500
+      },
+      {
+        "tipo": "EXPOSICAO",
+        "local": "Diurno",
+        "campo": "shutterMax",
+        "atual": 1200,
+        "correto": 500
+      },
+      {
+        "tipo": "EXPOSICAO",
+        "local": "Diurno",
+        "campo": "targetValue",
+        "atual": 40,
+        "correto": 38
+      },
+      {
+        "tipo": "EXPOSICAO",
+        "local": "Diurno",
+        "campo": "sharpness",
+        "atual": 25,
+        "correto": 30
+      },
+      {
+        "tipo": "FLASH",
+        "campo": "flash1_out1",
+        "atual": 100,
+        "correto": 65
+      },
+      {
+        "tipo": "FLASH",
+        "campo": "flash1_out3",
+        "atual": 100,
+        "correto": 65
+      },
+      {
+        "tipo": "FLASH",
+        "campo": "flash2_out1",
+        "atual": 5,
+        "correto": 20
+      },
+      {
+        "tipo": "EXPOSICAO",
+        "local": "Noturno",
+        "campo": "gainMax",
+        "atual": 1400,
+        "correto": 4000
+      },
+      {
+        "tipo": "EXPOSICAO",
+        "local": "Noturno",
+        "campo": "shutterMax",
+        "atual": 1400,
+        "correto": 800
+      },
+      {
+        "tipo": "FLASH",
+        "campo": "shutterFlash1",
+        "atual": 100,
+        "correto": 50
+      }
+    ],
+    "total": 10
+  },
+  {
+    "name": "GOEC6O013 - Faixa 1",
+    "risco": "🔵 DIVERGÊNCIAS MENORES",
+    "problemas": [
+      {
+        "tipo": "FLASH",
+        "campo": "flash1_out1",
+        "atual": 100,
+        "correto": 65
+      },
+      {
+        "tipo": "FLASH",
+        "campo": "flash1_out3",
+        "atual": 100,
+        "correto": 65
+      },
+      {
+        "tipo": "FLASH",
+        "campo": "flash2_out1",
+        "atual": 63,
+        "correto": 20
+      }
+    ],
+    "total": 3
+  },
+  {
+    "name": "GOEC6O013 - Faixa 2",
+    "risco": "🟡 MÚLTIPLAS DIVERGÊNCIAS",
+    "problemas": [
+      {
+        "tipo": "LEVEL",
+        "local": "Diurno lower",
+        "atual": 30,
+        "correto": 10
+      },
+      {
+        "tipo": "LEVEL",
+        "local": "Diurno upper",
+        "atual": 30,
+        "correto": 35
+      },
+      {
+        "tipo": "LEVEL",
+        "local": "Noturno upper",
+        "atual": 30,
+        "correto": 35
+      },
+      {
+        "tipo": "EXPOSICAO",
+        "local": "Diurno",
+        "campo": "gainMax",
+        "atual": 1000,
+        "correto": 1500
+      },
+      {
+        "tipo": "EXPOSICAO",
+        "local": "Diurno",
+        "campo": "shutterMax",
+        "atual": 1500,
+        "correto": 500
+      },
+      {
+        "tipo": "EXPOSICAO",
+        "local": "Diurno",
+        "campo": "targetValue",
+        "atual": 35,
+        "correto": 38
+      },
+      {
+        "tipo": "EXPOSICAO",
+        "local": "Diurno",
+        "campo": "sharpness",
+        "atual": 40,
+        "correto": 30
+      },
+      {
+        "tipo": "FLASH",
+        "campo": "flash1_out1",
+        "atual": 82,
+        "correto": 65
+      },
+      {
+        "tipo": "FLASH",
+        "campo": "flash1_out3",
+        "atual": 82,
+        "correto": 65
+      },
+      {
+        "tipo": "FLASH",
+        "campo": "flash2_out1",
+        "atual": 75,
+        "correto": 20
+      },
+      {
+        "tipo": "FLASH",
+        "campo": "shutterFlash1",
+        "atual": 45,
+        "correto": 50
+      }
+    ],
+    "total": 11
+  },
+  {
+    "name": "GOEC6O018 - Faixa 1",
+    "risco": "✅ CONFORME",
+    "problemas": [],
+    "total": 0
+  },
+  {
+    "name": "GOEC6O018 - Faixa 2",
+    "risco": "🟡 MÚLTIPLAS DIVERGÊNCIAS",
+    "problemas": [
+      {
+        "tipo": "EXPOSICAO",
+        "local": "Diurno",
+        "campo": "gainMax",
+        "atual": 1000,
+        "correto": 1500
+      },
+      {
+        "tipo": "EXPOSICAO",
+        "local": "Diurno",
+        "campo": "shutterMax",
+        "atual": 1500,
+        "correto": 500
+      },
+      {
+        "tipo": "EXPOSICAO",
+        "local": "Diurno",
+        "campo": "targetValue",
+        "atual": 35,
+        "correto": 38
+      },
+      {
+        "tipo": "EXPOSICAO",
+        "local": "Diurno",
+        "campo": "sharpness",
+        "atual": 40,
+        "correto": 30
+      },
+      {
+        "tipo": "FLASH",
+        "campo": "flash1_out1",
+        "atual": 100,
+        "correto": 65
+      },
+      {
+        "tipo": "FLASH",
+        "campo": "flash1_out3",
+        "atual": 100,
+        "correto": 65
+      },
+      {
+        "tipo": "FLASH",
+        "campo": "flash2_out1",
+        "atual": 7,
+        "correto": 20
+      },
+      {
+        "tipo": "EXPOSICAO",
+        "local": "Noturno",
+        "campo": "shutterMax",
+        "atual": 3398,
+        "correto": 800
+      },
+      {
+        "tipo": "FLASH",
+        "campo": "shutterFlash1",
+        "atual": 100,
+        "correto": 50
+      }
+    ],
+    "total": 9
+  },
+  {
+    "name": "GOEC6O020 - Faixa 1",
+    "risco": "✅ CONFORME",
+    "problemas": [],
+    "total": 0
+  },
+  {
+    "name": "GOEC6O020 - Faixa 2",
+    "risco": "🟡 MÚLTIPLAS DIVERGÊNCIAS",
+    "problemas": [
+      {
+        "tipo": "EXPOSICAO",
+        "local": "Diurno",
+        "campo": "gainMax",
+        "atual": 1000,
+        "correto": 1500
+      },
+      {
+        "tipo": "EXPOSICAO",
+        "local": "Diurno",
+        "campo": "shutterMax",
+        "atual": 1500,
+        "correto": 500
+      },
+      {
+        "tipo": "EXPOSICAO",
+        "local": "Diurno",
+        "campo": "targetValue",
+        "atual": 35,
+        "correto": 38
+      },
+      {
+        "tipo": "EXPOSICAO",
+        "local": "Diurno",
+        "campo": "sharpness",
+        "atual": 40,
+        "correto": 30
+      },
+      {
+        "tipo": "FLASH",
+        "campo": "flash1_out1",
+        "atual": 100,
+        "correto": 65
+      },
+      {
+        "tipo": "FLASH",
+        "campo": "flash1_out3",
+        "atual": 100,
+        "correto": 65
+      },
+      {
+        "tipo": "FLASH",
+        "campo": "flash2_out1",
+        "atual": 7,
+        "correto": 20
+      },
+      {
+        "tipo": "FLASH",
+        "campo": "shutterFlash1",
+        "atual": 100,
+        "correto": 50
+      }
+    ],
+    "total": 8
+  },
+  {
+    "name": "GOEC6O021 - Faixa 1",
+    "risco": "✅ CONFORME",
+    "problemas": [],
+    "total": 0
+  },
+  {
+    "name": "GOEC6O022 - Faixa 1",
+    "risco": "✅ CONFORME",
+    "problemas": [],
+    "total": 0
+  },
+  {
+    "name": "GOEC6O022 - Faixa 2",
+    "risco": "🟡 MÚLTIPLAS DIVERGÊNCIAS",
+    "problemas": [
+      {
+        "tipo": "EXPOSICAO",
+        "local": "Diurno",
+        "campo": "gainMax",
+        "atual": 1000,
+        "correto": 1500
+      },
+      {
+        "tipo": "EXPOSICAO",
+        "local": "Diurno",
+        "campo": "shutterMax",
+        "atual": 1500,
+        "correto": 500
+      },
+      {
+        "tipo": "EXPOSICAO",
+        "local": "Diurno",
+        "campo": "targetValue",
+        "atual": 35,
+        "correto": 38
+      },
+      {
+        "tipo": "EXPOSICAO",
+        "local": "Diurno",
+        "campo": "sharpness",
+        "atual": 40,
+        "correto": 30
+      },
+      {
+        "tipo": "FLASH",
+        "campo": "flash1_out1",
+        "atual": 100,
+        "correto": 65
+      },
+      {
+        "tipo": "FLASH",
+        "campo": "flash1_out3",
+        "atual": 100,
+        "correto": 65
+      },
+      {
+        "tipo": "FLASH",
+        "campo": "flash2_out1",
+        "atual": 7,
+        "correto": 20
+      },
+      {
+        "tipo": "FLASH",
+        "campo": "shutterFlash1",
+        "atual": 100,
+        "correto": 50
+      }
+    ],
+    "total": 8
+  },
+  {
+    "name": "GOEC6O028 - Faixa 1",
+    "risco": "🟡 MÚLTIPLAS DIVERGÊNCIAS",
+    "problemas": [
+      {
+        "tipo": "EXPOSICAO",
+        "local": "Diurno",
+        "campo": "gainMax",
+        "atual": 1400,
+        "correto": 1500
+      },
+      {
+        "tipo": "EXPOSICAO",
+        "local": "Diurno",
+        "campo": "shutterMax",
+        "atual": 1200,
+        "correto": 500
+      },
+      {
+        "tipo": "EXPOSICAO",
+        "local": "Diurno",
+        "campo": "targetValue",
+        "atual": 40,
+        "correto": 38
+      },
+      {
+        "tipo": "EXPOSICAO",
+        "local": "Diurno",
+        "campo": "sharpness",
+        "atual": 25,
+        "correto": 30
+      },
+      {
+        "tipo": "FLASH",
+        "campo": "flash1_out1",
+        "atual": 100,
+        "correto": 65
+      },
+      {
+        "tipo": "FLASH",
+        "campo": "flash1_out3",
+        "atual": 100,
+        "correto": 65
+      },
+      {
+        "tipo": "FLASH",
+        "campo": "flash2_out1",
+        "atual": 5,
+        "correto": 20
+      },
+      {
+        "tipo": "EXPOSICAO",
+        "local": "Noturno",
+        "campo": "gainMax",
+        "atual": 1400,
+        "correto": 4000
+      },
+      {
+        "tipo": "EXPOSICAO",
+        "local": "Noturno",
+        "campo": "shutterMax",
+        "atual": 1400,
+        "correto": 800
+      },
+      {
+        "tipo": "FLASH",
+        "campo": "shutterFlash1",
+        "atual": 100,
+        "correto": 50
+      }
+    ],
+    "total": 10
+  },
+  {
+    "name": "GOEC6O029 - Faixa 1",
+    "risco": "✅ CONFORME",
+    "problemas": [],
+    "total": 0
+  },
+  {
+    "name": "GOEC6O029 - Faixa 2",
+    "risco": "🟡 MÚLTIPLAS DIVERGÊNCIAS",
+    "problemas": [
+      {
+        "tipo": "EXPOSICAO",
+        "local": "Diurno",
+        "campo": "gainMax",
+        "atual": 1000,
+        "correto": 1500
+      },
+      {
+        "tipo": "EXPOSICAO",
+        "local": "Diurno",
+        "campo": "shutterMax",
+        "atual": 1500,
+        "correto": 500
+      },
+      {
+        "tipo": "EXPOSICAO",
+        "local": "Diurno",
+        "campo": "targetValue",
+        "atual": 35,
+        "correto": 38
+      },
+      {
+        "tipo": "EXPOSICAO",
+        "local": "Diurno",
+        "campo": "sharpness",
+        "atual": 40,
+        "correto": 30
+      },
+      {
+        "tipo": "FLASH",
+        "campo": "flash1_out1",
+        "atual": 100,
+        "correto": 65
+      },
+      {
+        "tipo": "FLASH",
+        "campo": "flash1_out3",
+        "atual": 100,
+        "correto": 65
+      },
+      {
+        "tipo": "FLASH",
+        "campo": "flash2_out1",
+        "atual": 7,
+        "correto": 20
+      },
+      {
+        "tipo": "FLASH",
+        "campo": "shutterFlash1",
+        "atual": 100,
+        "correto": 50
+      }
+    ],
+    "total": 8
+  },
+  {
+    "name": "GOEC6O033 - Faixa 1",
+    "risco": "✅ CONFORME",
+    "problemas": [],
+    "total": 0
+  },
+  {
+    "name": "GOEC6O033 - Faixa 2",
+    "risco": "🟠 TRANSIÇÃO COM HORÁRIO (pode travar)",
+    "problemas": [
+      {
+        "tipo": "TRANSICAO_TEMPORAL",
+        "local": "Diurno→Noturno",
+        "campo": "lower",
+        "start": "06:00:00",
+        "end": "18:00:00",
+        "correcao": "start=00:00:00, end=00:00:00"
+      },
+      {
+        "tipo": "TRANSICAO_TEMPORAL",
+        "local": "Diurno←Noturno",
+        "campo": "upper",
+        "start": "06:00:00",
+        "end": "17:58:00",
+        "correcao": "start=00:00:00, end=00:00:00"
+      },
+      {
+        "tipo": "TRANSICAO_TEMPORAL",
+        "local": "Noturno→Noturno",
+        "campo": "lower",
+        "start": "18:00:00",
+        "end": "06:00:00",
+        "correcao": "start=00:00:00, end=00:00:00"
+      },
+      {
+        "tipo": "TRANSICAO_TEMPORAL",
+        "local": "Noturno→Diurno",
+        "campo": "upper",
+        "start": "18:00:00",
+        "end": "06:00:00",
+        "correcao": "start=00:00:00, end=00:00:00"
+      },
+      {
+        "tipo": "LEVEL",
+        "local": "Diurno lower",
+        "atual": 35,
+        "correto": 10
+      },
+      {
+        "tipo": "LEVEL",
+        "local": "Noturno lower",
+        "atual": 35,
+        "correto": 10
+      },
+      {
+        "tipo": "EXPOSICAO",
+        "local": "Diurno",
+        "campo": "gainMax",
+        "atual": 1000,
+        "correto": 1500
+      },
+      {
+        "tipo": "EXPOSICAO",
+        "local": "Diurno",
+        "campo": "shutterMax",
+        "atual": 1500,
+        "correto": 500
+      },
+      {
+        "tipo": "EXPOSICAO",
+        "local": "Diurno",
+        "campo": "targetValue",
+        "atual": 35,
+        "correto": 38
+      },
+      {
+        "tipo": "EXPOSICAO",
+        "local": "Diurno",
+        "campo": "sharpness",
+        "atual": 40,
+        "correto": 30
+      },
+      {
+        "tipo": "FLASH",
+        "campo": "flash1_out1",
+        "atual": 100,
+        "correto": 65
+      },
+      {
+        "tipo": "FLASH",
+        "campo": "flash1_out3",
+        "atual": 100,
+        "correto": 65
+      },
+      {
+        "tipo": "FLASH",
+        "campo": "flash2_out1",
+        "atual": 7,
+        "correto": 20
+      },
+      {
+        "tipo": "EXPOSICAO",
+        "local": "Noturno",
+        "campo": "shutterMax",
+        "atual": 2000,
+        "correto": 800
+      },
+      {
+        "tipo": "FLASH",
+        "campo": "shutterFlash1",
+        "atual": 100,
+        "correto": 50
+      }
+    ],
+    "total": 15
+  },
+  {
+    "name": "GOEC6O036 - Faixa 1",
+    "risco": "🟡 MÚLTIPLAS DIVERGÊNCIAS",
+    "problemas": [
+      {
+        "tipo": "EXPOSICAO",
+        "local": "Diurno",
+        "campo": "gainMax",
+        "atual": 1800,
+        "correto": 1500
+      },
+      {
+        "tipo": "EXPOSICAO",
+        "local": "Diurno",
+        "campo": "shutterMax",
+        "atual": 1200,
+        "correto": 500
+      },
+      {
+        "tipo": "EXPOSICAO",
+        "local": "Diurno",
+        "campo": "targetValue",
+        "atual": 40,
+        "correto": 38
+      },
+      {
+        "tipo": "EXPOSICAO",
+        "local": "Diurno",
+        "campo": "sharpness",
+        "atual": 20,
+        "correto": 30
+      },
+      {
+        "tipo": "FLASH",
+        "campo": "flash2_out1",
+        "atual": 5,
+        "correto": 20
+      },
+      {
+        "tipo": "EXPOSICAO",
+        "local": "Noturno",
+        "campo": "gainMax",
+        "atual": 2400,
+        "correto": 4000
+      },
+      {
+        "tipo": "EXPOSICAO",
+        "local": "Noturno",
+        "campo": "shutterMax",
+        "atual": 1800,
+        "correto": 800
+      }
+    ],
+    "total": 7
+  },
+  {
+    "name": "GOEC6O040 - Faixa 1",
+    "risco": "🟠 TRANSIÇÃO COM HORÁRIO (pode travar)",
+    "problemas": [
+      {
+        "tipo": "TRANSICAO_TEMPORAL",
+        "local": "Diurno→Noturno",
+        "campo": "lower",
+        "start": "18:00:00",
+        "end": "00:00:00",
+        "correcao": "start=00:00:00, end=00:00:00"
+      },
+      {
+        "tipo": "TRANSICAO_TEMPORAL",
+        "local": "Diurno←Noturno",
+        "campo": "upper",
+        "start": "06:00:00",
+        "end": "00:00:00",
+        "correcao": "start=00:00:00, end=00:00:00"
+      },
+      {
+        "tipo": "TRANSICAO_TEMPORAL",
+        "local": "Noturno→Noturno",
+        "campo": "lower",
+        "start": "06:00:00",
+        "end": "00:00:00",
+        "correcao": "start=00:00:00, end=00:00:00"
+      },
+      {
+        "tipo": "TRANSICAO_TEMPORAL",
+        "local": "Noturno→Diurno",
+        "campo": "upper",
+        "start": "18:00:00",
+        "end": "00:00:00",
+        "correcao": "start=00:00:00, end=00:00:00"
+      }
+    ],
+    "total": 4
+  },
+  {
+    "name": "GOEC6O040 - Faixa 2",
+    "risco": "🟠 TRANSIÇÃO COM HORÁRIO (pode travar)",
+    "problemas": [
+      {
+        "tipo": "TRANSICAO_TEMPORAL",
+        "local": "Diurno→Noturno",
+        "campo": "lower",
+        "start": "00:00:00",
+        "end": "18:00:00",
+        "correcao": "start=00:00:00, end=00:00:00"
+      },
+      {
+        "tipo": "TRANSICAO_TEMPORAL",
+        "local": "Diurno←Noturno",
+        "campo": "upper",
+        "start": "06:00:00",
+        "end": "00:00:00",
+        "correcao": "start=00:00:00, end=00:00:00"
+      },
+      {
+        "tipo": "TRANSICAO_TEMPORAL",
+        "local": "Noturno→Noturno",
+        "campo": "lower",
+        "start": "00:00:00",
+        "end": "06:00:00",
+        "correcao": "start=00:00:00, end=00:00:00"
+      },
+      {
+        "tipo": "TRANSICAO_TEMPORAL",
+        "local": "Noturno→Diurno",
+        "campo": "upper",
+        "start": "18:01:00",
+        "end": "00:00:00",
+        "correcao": "start=00:00:00, end=00:00:00"
+      },
+      {
+        "tipo": "EXPOSICAO",
+        "local": "Diurno",
+        "campo": "gainMax",
+        "atual": 1000,
+        "correto": 1500
+      },
+      {
+        "tipo": "EXPOSICAO",
+        "local": "Diurno",
+        "campo": "shutterMax",
+        "atual": 1500,
+        "correto": 500
+      },
+      {
+        "tipo": "EXPOSICAO",
+        "local": "Diurno",
+        "campo": "targetValue",
+        "atual": 35,
+        "correto": 38
+      },
+      {
+        "tipo": "EXPOSICAO",
+        "local": "Diurno",
+        "campo": "sharpness",
+        "atual": 40,
+        "correto": 30
+      },
+      {
+        "tipo": "FLASH",
+        "campo": "flash1_out1",
+        "atual": 100,
+        "correto": 65
+      },
+      {
+        "tipo": "FLASH",
+        "campo": "flash1_out3",
+        "atual": 100,
+        "correto": 65
+      },
+      {
+        "tipo": "FLASH",
+        "campo": "flash2_out1",
+        "atual": 7,
+        "correto": 20
+      },
+      {
+        "tipo": "FLASH",
+        "campo": "shutterFlash1",
+        "atual": 100,
+        "correto": 50
+      }
+    ],
+    "total": 12
+  },
+  {
+    "name": "GOEC6O041 - Faixa 1",
+    "risco": "✅ CONFORME",
+    "problemas": [],
+    "total": 0
+  },
+  {
+    "name": "GOEC6O041 - Faixa 2",
+    "risco": "🟡 MÚLTIPLAS DIVERGÊNCIAS",
+    "problemas": [
+      {
+        "tipo": "EXPOSICAO",
+        "local": "Diurno",
+        "campo": "gainMax",
+        "atual": 1000,
+        "correto": 1500
+      },
+      {
+        "tipo": "EXPOSICAO",
+        "local": "Diurno",
+        "campo": "shutterMax",
+        "atual": 1500,
+        "correto": 500
+      },
+      {
+        "tipo": "EXPOSICAO",
+        "local": "Diurno",
+        "campo": "targetValue",
+        "atual": 35,
+        "correto": 38
+      },
+      {
+        "tipo": "EXPOSICAO",
+        "local": "Diurno",
+        "campo": "sharpness",
+        "atual": 40,
+        "correto": 30
+      },
+      {
+        "tipo": "FLASH",
+        "campo": "flash1_out1",
+        "atual": 100,
+        "correto": 65
+      },
+      {
+        "tipo": "FLASH",
+        "campo": "flash1_out3",
+        "atual": 100,
+        "correto": 65
+      },
+      {
+        "tipo": "FLASH",
+        "campo": "flash2_out1",
+        "atual": 7,
+        "correto": 20
+      },
+      {
+        "tipo": "FLASH",
+        "campo": "shutterFlash1",
+        "atual": 100,
+        "correto": 50
+      }
+    ],
+    "total": 8
+  },
+  {
+    "name": "GOEC6O043 - Faixa 1",
+    "risco": "✅ CONFORME",
+    "problemas": [],
+    "total": 0
+  },
+  {
+    "name": "GOEC6O043 - Faixa 2",
+    "risco": "🟡 MÚLTIPLAS DIVERGÊNCIAS",
+    "problemas": [
+      {
+        "tipo": "EXPOSICAO",
+        "local": "Diurno",
+        "campo": "gainMax",
+        "atual": 1000,
+        "correto": 1500
+      },
+      {
+        "tipo": "EXPOSICAO",
+        "local": "Diurno",
+        "campo": "shutterMax",
+        "atual": 1500,
+        "correto": 500
+      },
+      {
+        "tipo": "EXPOSICAO",
+        "local": "Diurno",
+        "campo": "targetValue",
+        "atual": 35,
+        "correto": 38
+      },
+      {
+        "tipo": "EXPOSICAO",
+        "local": "Diurno",
+        "campo": "sharpness",
+        "atual": 40,
+        "correto": 30
+      },
+      {
+        "tipo": "FLASH",
+        "campo": "flash1_out1",
+        "atual": 100,
+        "correto": 65
+      },
+      {
+        "tipo": "FLASH",
+        "campo": "flash1_out3",
+        "atual": 100,
+        "correto": 65
+      },
+      {
+        "tipo": "FLASH",
+        "campo": "flash2_out1",
+        "atual": 7,
+        "correto": 20
+      },
+      {
+        "tipo": "FLASH",
+        "campo": "shutterFlash1",
+        "atual": 100,
+        "correto": 50
+      }
+    ],
+    "total": 8
+  },
+  {
+    "name": "GOEC6O045 - Faixa 1",
+    "risco": "✅ CONFORME",
+    "problemas": [],
+    "total": 0
+  },
+  {
+    "name": "GOEC6O045 - Faixa 2",
+    "risco": "🟡 MÚLTIPLAS DIVERGÊNCIAS",
+    "problemas": [
+      {
+        "tipo": "EXPOSICAO",
+        "local": "Diurno",
+        "campo": "gainMax",
+        "atual": 1000,
+        "correto": 1500
+      },
+      {
+        "tipo": "EXPOSICAO",
+        "local": "Diurno",
+        "campo": "shutterMax",
+        "atual": 1500,
+        "correto": 500
+      },
+      {
+        "tipo": "EXPOSICAO",
+        "local": "Diurno",
+        "campo": "targetValue",
+        "atual": 35,
+        "correto": 38
+      },
+      {
+        "tipo": "EXPOSICAO",
+        "local": "Diurno",
+        "campo": "sharpness",
+        "atual": 40,
+        "correto": 30
+      },
+      {
+        "tipo": "FLASH",
+        "campo": "flash1_out1",
+        "atual": 100,
+        "correto": 65
+      },
+      {
+        "tipo": "FLASH",
+        "campo": "flash1_out3",
+        "atual": 100,
+        "correto": 65
+      },
+      {
+        "tipo": "FLASH",
+        "campo": "flash2_out1",
+        "atual": 7,
+        "correto": 20
+      },
+      {
+        "tipo": "FLASH",
+        "campo": "shutterFlash1",
+        "atual": 100,
+        "correto": 50
+      }
+    ],
+    "total": 8
+  },
+  {
+    "name": "GOEC6O046 - Faixa 1",
+    "risco": "✅ CONFORME",
+    "problemas": [],
+    "total": 0
+  },
+  {
+    "name": "GOEC6O046 - Faixa 2",
+    "risco": "🟡 MÚLTIPLAS DIVERGÊNCIAS",
+    "problemas": [
+      {
+        "tipo": "EXPOSICAO",
+        "local": "Diurno",
+        "campo": "gainMax",
+        "atual": 1000,
+        "correto": 1500
+      },
+      {
+        "tipo": "EXPOSICAO",
+        "local": "Diurno",
+        "campo": "shutterMax",
+        "atual": 1500,
+        "correto": 500
+      },
+      {
+        "tipo": "EXPOSICAO",
+        "local": "Diurno",
+        "campo": "targetValue",
+        "atual": 35,
+        "correto": 38
+      },
+      {
+        "tipo": "EXPOSICAO",
+        "local": "Diurno",
+        "campo": "sharpness",
+        "atual": 40,
+        "correto": 30
+      },
+      {
+        "tipo": "FLASH",
+        "campo": "flash1_out1",
+        "atual": 100,
+        "correto": 65
+      },
+      {
+        "tipo": "FLASH",
+        "campo": "flash1_out3",
+        "atual": 100,
+        "correto": 65
+      },
+      {
+        "tipo": "FLASH",
+        "campo": "flash2_out1",
+        "atual": 7,
+        "correto": 20
+      },
+      {
+        "tipo": "FLASH",
+        "campo": "shutterFlash1",
+        "atual": 100,
+        "correto": 50
+      }
+    ],
+    "total": 8
+  },
+  {
+    "name": "GOEC6O048 - Faixa 1",
+    "risco": "✅ CONFORME",
+    "problemas": [],
+    "total": 0
+  },
+  {
+    "name": "GOEC6O048 - Faixa 2",
+    "risco": "🟡 MÚLTIPLAS DIVERGÊNCIAS",
+    "problemas": [
+      {
+        "tipo": "EXPOSICAO",
+        "local": "Diurno",
+        "campo": "gainMax",
+        "atual": 1000,
+        "correto": 1500
+      },
+      {
+        "tipo": "EXPOSICAO",
+        "local": "Diurno",
+        "campo": "shutterMax",
+        "atual": 1500,
+        "correto": 500
+      },
+      {
+        "tipo": "EXPOSICAO",
+        "local": "Diurno",
+        "campo": "targetValue",
+        "atual": 35,
+        "correto": 38
+      },
+      {
+        "tipo": "EXPOSICAO",
+        "local": "Diurno",
+        "campo": "sharpness",
+        "atual": 40,
+        "correto": 30
+      },
+      {
+        "tipo": "FLASH",
+        "campo": "flash1_out1",
+        "atual": 100,
+        "correto": 65
+      },
+      {
+        "tipo": "FLASH",
+        "campo": "flash1_out3",
+        "atual": 100,
+        "correto": 65
+      },
+      {
+        "tipo": "FLASH",
+        "campo": "flash2_out1",
+        "atual": 7,
+        "correto": 20
+      },
+      {
+        "tipo": "FLASH",
+        "campo": "shutterFlash1",
+        "atual": 100,
+        "correto": 50
+      }
+    ],
+    "total": 8
+  },
+  {
+    "name": "GOEC6O050 - Faixa 1",
+    "risco": "✅ CONFORME",
+    "problemas": [],
+    "total": 0
+  },
+  {
+    "name": "GOEC6O050 - Faixa 2",
+    "risco": "🟡 MÚLTIPLAS DIVERGÊNCIAS",
+    "problemas": [
+      {
+        "tipo": "EXPOSICAO",
+        "local": "Diurno",
+        "campo": "gainMax",
+        "atual": 1000,
+        "correto": 1500
+      },
+      {
+        "tipo": "EXPOSICAO",
+        "local": "Diurno",
+        "campo": "shutterMax",
+        "atual": 1500,
+        "correto": 500
+      },
+      {
+        "tipo": "EXPOSICAO",
+        "local": "Diurno",
+        "campo": "targetValue",
+        "atual": 35,
+        "correto": 38
+      },
+      {
+        "tipo": "EXPOSICAO",
+        "local": "Diurno",
+        "campo": "sharpness",
+        "atual": 40,
+        "correto": 30
+      },
+      {
+        "tipo": "FLASH",
+        "campo": "flash1_out1",
+        "atual": 100,
+        "correto": 65
+      },
+      {
+        "tipo": "FLASH",
+        "campo": "flash1_out3",
+        "atual": 100,
+        "correto": 65
+      },
+      {
+        "tipo": "FLASH",
+        "campo": "flash2_out1",
+        "atual": 100,
+        "correto": 20
+      },
+      {
+        "tipo": "FLASH",
+        "campo": "shutterFlash1",
+        "atual": 100,
+        "correto": 50
+      }
+    ],
+    "total": 8
+  },
+  {
+    "name": "GOEC6O051 - Faixa 1",
+    "risco": "✅ CONFORME",
+    "problemas": [],
+    "total": 0
+  },
+  {
+    "name": "GOEC6O051 - Faixa 2",
+    "risco": "🟡 MÚLTIPLAS DIVERGÊNCIAS",
+    "problemas": [
+      {
+        "tipo": "EXPOSICAO",
+        "local": "Diurno",
+        "campo": "gainMax",
+        "atual": 1000,
+        "correto": 1500
+      },
+      {
+        "tipo": "EXPOSICAO",
+        "local": "Diurno",
+        "campo": "shutterMax",
+        "atual": 1500,
+        "correto": 500
+      },
+      {
+        "tipo": "EXPOSICAO",
+        "local": "Diurno",
+        "campo": "targetValue",
+        "atual": 35,
+        "correto": 38
+      },
+      {
+        "tipo": "EXPOSICAO",
+        "local": "Diurno",
+        "campo": "sharpness",
+        "atual": 40,
+        "correto": 30
+      },
+      {
+        "tipo": "FLASH",
+        "campo": "flash1_out1",
+        "atual": 100,
+        "correto": 65
+      },
+      {
+        "tipo": "FLASH",
+        "campo": "flash1_out3",
+        "atual": 100,
+        "correto": 65
+      },
+      {
+        "tipo": "FLASH",
+        "campo": "flash2_out1",
+        "atual": 7,
+        "correto": 20
+      },
+      {
+        "tipo": "FLASH",
+        "campo": "shutterFlash1",
+        "atual": 100,
+        "correto": 50
+      }
+    ],
+    "total": 8
+  },
+  {
+    "name": "GOEC6O052 - Faixa 2",
+    "risco": "🔵 DIVERGÊNCIAS MENORES",
+    "problemas": [
+      {
+        "tipo": "EXPOSICAO",
+        "local": "Diurno",
+        "campo": "sharpness",
+        "atual": 40,
+        "correto": 30
+      },
+      {
+        "tipo": "FLASH",
+        "campo": "flash1_out1",
+        "atual": 100,
+        "correto": 65
+      },
+      {
+        "tipo": "FLASH",
+        "campo": "flash1_out3",
+        "atual": 100,
+        "correto": 65
+      },
+      {
+        "tipo": "FLASH",
+        "campo": "flash2_out1",
+        "atual": 7,
+        "correto": 20
+      },
+      {
+        "tipo": "FLASH",
+        "campo": "shutterFlash1",
+        "atual": 100,
+        "correto": 50
+      }
+    ],
+    "total": 5
+  },
+  {
+    "name": "GOEC6O053 - Faixa 1",
+    "risco": "🟡 MÚLTIPLAS DIVERGÊNCIAS",
+    "problemas": [
+      {
+        "tipo": "EXPOSICAO",
+        "local": "Diurno",
+        "campo": "gainMax",
+        "atual": 1000,
+        "correto": 1500
+      },
+      {
+        "tipo": "EXPOSICAO",
+        "local": "Diurno",
+        "campo": "shutterMax",
+        "atual": 1500,
+        "correto": 500
+      },
+      {
+        "tipo": "EXPOSICAO",
+        "local": "Diurno",
+        "campo": "targetValue",
+        "atual": 35,
+        "correto": 38
+      },
+      {
+        "tipo": "EXPOSICAO",
+        "local": "Diurno",
+        "campo": "sharpness",
+        "atual": 40,
+        "correto": 30
+      },
+      {
+        "tipo": "FLASH",
+        "campo": "flash1_out1",
+        "atual": 70,
+        "correto": 65
+      },
+      {
+        "tipo": "FLASH",
+        "campo": "flash1_out3",
+        "atual": 70,
+        "correto": 65
+      },
+      {
+        "tipo": "FLASH",
+        "campo": "flash2_out1",
+        "atual": 25,
+        "correto": 20
+      },
+      {
+        "tipo": "FLASH",
+        "campo": "shutterFlash1",
+        "atual": 100,
+        "correto": 50
+      }
+    ],
+    "total": 8
+  },
+  {
+    "name": "GOEC6O053 - Faixa 2",
+    "risco": "🟡 MÚLTIPLAS DIVERGÊNCIAS",
+    "problemas": [
+      {
+        "tipo": "EXPOSICAO",
+        "local": "Diurno",
+        "campo": "gainMax",
+        "atual": 1000,
+        "correto": 1500
+      },
+      {
+        "tipo": "EXPOSICAO",
+        "local": "Diurno",
+        "campo": "shutterMax",
+        "atual": 1500,
+        "correto": 500
+      },
+      {
+        "tipo": "EXPOSICAO",
+        "local": "Diurno",
+        "campo": "targetValue",
+        "atual": 35,
+        "correto": 38
+      },
+      {
+        "tipo": "EXPOSICAO",
+        "local": "Diurno",
+        "campo": "sharpness",
+        "atual": 40,
+        "correto": 30
+      },
+      {
+        "tipo": "FLASH",
+        "campo": "flash1_out1",
+        "atual": 70,
+        "correto": 65
+      },
+      {
+        "tipo": "FLASH",
+        "campo": "flash1_out3",
+        "atual": 70,
+        "correto": 65
+      },
+      {
+        "tipo": "FLASH",
+        "campo": "flash2_out1",
+        "atual": 25,
+        "correto": 20
+      },
+      {
+        "tipo": "FLASH",
+        "campo": "shutterFlash1",
+        "atual": 100,
+        "correto": 50
+      }
+    ],
+    "total": 8
+  },
+  {
+    "name": "GOEC6O054 - Faixa 1",
+    "risco": "✅ CONFORME",
+    "problemas": [],
+    "total": 0
+  },
+  {
+    "name": "GOEC6O054 - Faixa 2",
+    "risco": "🟡 MÚLTIPLAS DIVERGÊNCIAS",
+    "problemas": [
+      {
+        "tipo": "EXPOSICAO",
+        "local": "Diurno",
+        "campo": "gainMax",
+        "atual": 1000,
+        "correto": 1500
+      },
+      {
+        "tipo": "EXPOSICAO",
+        "local": "Diurno",
+        "campo": "shutterMax",
+        "atual": 1500,
+        "correto": 500
+      },
+      {
+        "tipo": "EXPOSICAO",
+        "local": "Diurno",
+        "campo": "targetValue",
+        "atual": 35,
+        "correto": 38
+      },
+      {
+        "tipo": "EXPOSICAO",
+        "local": "Diurno",
+        "campo": "sharpness",
+        "atual": 40,
+        "correto": 30
+      },
+      {
+        "tipo": "FLASH",
+        "campo": "flash1_out1",
+        "atual": 100,
+        "correto": 65
+      },
+      {
+        "tipo": "FLASH",
+        "campo": "flash1_out3",
+        "atual": 100,
+        "correto": 65
+      },
+      {
+        "tipo": "FLASH",
+        "campo": "flash2_out1",
+        "atual": 7,
+        "correto": 20
+      },
+      {
+        "tipo": "FLASH",
+        "campo": "shutterFlash1",
+        "atual": 100,
+        "correto": 50
+      }
+    ],
+    "total": 8
+  },
+  {
+    "name": "GOEC6O055 - Faixa 1",
+    "risco": "🟠 TRANSIÇÃO COM HORÁRIO (pode travar)",
+    "problemas": [
+      {
+        "tipo": "TRANSICAO_TEMPORAL",
+        "local": "Diurno→Noturno",
+        "campo": "lower",
+        "start": "00:00:00",
+        "end": "18:00:00",
+        "correcao": "start=00:00:00, end=00:00:00"
+      },
+      {
+        "tipo": "TRANSICAO_TEMPORAL",
+        "local": "Diurno←Noturno",
+        "campo": "upper",
+        "start": "06:00:00",
+        "end": "00:00:00",
+        "correcao": "start=00:00:00, end=00:00:00"
+      },
+      {
+        "tipo": "TRANSICAO_TEMPORAL",
+        "local": "Noturno→Noturno",
+        "campo": "lower",
+        "start": "00:00:00",
+        "end": "06:00:00",
+        "correcao": "start=00:00:00, end=00:00:00"
+      },
+      {
+        "tipo": "TRANSICAO_TEMPORAL",
+        "local": "Noturno→Diurno",
+        "campo": "upper",
+        "start": "18:01:00",
+        "end": "00:00:00",
+        "correcao": "start=00:00:00, end=00:00:00"
+      },
+      {
+        "tipo": "EXPOSICAO",
+        "local": "Diurno",
+        "campo": "targetValue",
+        "atual": 40,
+        "correto": 38
+      },
+      {
+        "tipo": "FLASH",
+        "campo": "flash1_out1",
+        "atual": 100,
+        "correto": 65
+      },
+      {
+        "tipo": "FLASH",
+        "campo": "flash1_out3",
+        "atual": 100,
+        "correto": 65
+      },
+      {
+        "tipo": "FLASH",
+        "campo": "flash2_out1",
+        "atual": 7,
+        "correto": 20
+      },
+      {
+        "tipo": "EXPOSICAO",
+        "local": "Noturno",
+        "campo": "shutterMax",
+        "atual": 1200,
+        "correto": 800
+      },
+      {
+        "tipo": "FLASH",
+        "campo": "shutterFlash1",
+        "atual": 100,
+        "correto": 50
+      }
+    ],
+    "total": 10
+  },
+  {
+    "name": "GOEC6O055 - Faixa 2",
+    "risco": "🟠 TRANSIÇÃO COM HORÁRIO (pode travar)",
+    "problemas": [
+      {
+        "tipo": "TRANSICAO_TEMPORAL",
+        "local": "Diurno→Noturno",
+        "campo": "lower",
+        "start": "18:00:00",
+        "end": "00:00:00",
+        "correcao": "start=00:00:00, end=00:00:00"
+      },
+      {
+        "tipo": "TRANSICAO_TEMPORAL",
+        "local": "Diurno←Noturno",
+        "campo": "upper",
+        "start": "06:00:00",
+        "end": "00:00:00",
+        "correcao": "start=00:00:00, end=00:00:00"
+      },
+      {
+        "tipo": "TRANSICAO_TEMPORAL",
+        "local": "Noturno→Noturno",
+        "campo": "lower",
+        "start": "05:59:59",
+        "end": "00:00:00",
+        "correcao": "start=00:00:00, end=00:00:00"
+      },
+      {
+        "tipo": "TRANSICAO_TEMPORAL",
+        "local": "Noturno→Diurno",
+        "campo": "upper",
+        "start": "18:01:00",
+        "end": "00:00:00",
+        "correcao": "start=00:00:00, end=00:00:00"
+      },
+      {
+        "tipo": "EXPOSICAO",
+        "local": "Diurno",
+        "campo": "gainMax",
+        "atual": 1000,
+        "correto": 1500
+      },
+      {
+        "tipo": "EXPOSICAO",
+        "local": "Diurno",
+        "campo": "shutterMax",
+        "atual": 1500,
+        "correto": 500
+      },
+      {
+        "tipo": "EXPOSICAO",
+        "local": "Diurno",
+        "campo": "targetValue",
+        "atual": 35,
+        "correto": 38
+      },
+      {
+        "tipo": "EXPOSICAO",
+        "local": "Diurno",
+        "campo": "sharpness",
+        "atual": 40,
+        "correto": 30
+      },
+      {
+        "tipo": "FLASH",
+        "campo": "flash1_out1",
+        "atual": 100,
+        "correto": 65
+      },
+      {
+        "tipo": "FLASH",
+        "campo": "flash1_out3",
+        "atual": 100,
+        "correto": 65
+      },
+      {
+        "tipo": "FLASH",
+        "campo": "flash2_out1",
+        "atual": 7,
+        "correto": 20
+      },
+      {
+        "tipo": "EXPOSICAO",
+        "local": "Noturno",
+        "campo": "shutterMax",
+        "atual": 1200,
+        "correto": 800
+      },
+      {
+        "tipo": "FLASH",
+        "campo": "shutterFlash1",
+        "atual": 100,
+        "correto": 50
+      }
+    ],
+    "total": 13
+  },
+  {
+    "name": "GOEC6O056 - Faixa 1",
+    "risco": "✅ CONFORME",
+    "problemas": [],
+    "total": 0
+  },
+  {
+    "name": "GOEC6O056 - Faixa 2",
+    "risco": "🟡 MÚLTIPLAS DIVERGÊNCIAS",
+    "problemas": [
+      {
+        "tipo": "EXPOSICAO",
+        "local": "Diurno",
+        "campo": "gainMax",
+        "atual": 1000,
+        "correto": 1500
+      },
+      {
+        "tipo": "EXPOSICAO",
+        "local": "Diurno",
+        "campo": "shutterMax",
+        "atual": 1500,
+        "correto": 500
+      },
+      {
+        "tipo": "EXPOSICAO",
+        "local": "Diurno",
+        "campo": "targetValue",
+        "atual": 35,
+        "correto": 38
+      },
+      {
+        "tipo": "EXPOSICAO",
+        "local": "Diurno",
+        "campo": "sharpness",
+        "atual": 40,
+        "correto": 30
+      },
+      {
+        "tipo": "FLASH",
+        "campo": "flash1_out1",
+        "atual": 100,
+        "correto": 65
+      },
+      {
+        "tipo": "FLASH",
+        "campo": "flash1_out3",
+        "atual": 100,
+        "correto": 65
+      },
+      {
+        "tipo": "FLASH",
+        "campo": "flash2_out1",
+        "atual": 7,
+        "correto": 20
+      },
+      {
+        "tipo": "FLASH",
+        "campo": "shutterFlash1",
+        "atual": 100,
+        "correto": 50
+      }
+    ],
+    "total": 8
+  },
+  {
+    "name": "GOEC6O057 - Faixa 1",
+    "risco": "🟡 MÚLTIPLAS DIVERGÊNCIAS",
+    "problemas": [
+      {
+        "tipo": "EXPOSICAO",
+        "local": "Diurno",
+        "campo": "gainMax",
+        "atual": 1000,
+        "correto": 1500
+      },
+      {
+        "tipo": "EXPOSICAO",
+        "local": "Diurno",
+        "campo": "shutterMax",
+        "atual": 1500,
+        "correto": 500
+      },
+      {
+        "tipo": "EXPOSICAO",
+        "local": "Diurno",
+        "campo": "targetValue",
+        "atual": 35,
+        "correto": 38
+      },
+      {
+        "tipo": "EXPOSICAO",
+        "local": "Diurno",
+        "campo": "sharpness",
+        "atual": 20,
+        "correto": 30
+      },
+      {
+        "tipo": "FLASH",
+        "campo": "flash1_out1",
+        "atual": 70,
+        "correto": 65
+      },
+      {
+        "tipo": "FLASH",
+        "campo": "flash1_out3",
+        "atual": 70,
+        "correto": 65
+      },
+      {
+        "tipo": "FLASH",
+        "campo": "flash2_out1",
+        "atual": 25,
+        "correto": 20
+      },
+      {
+        "tipo": "FLASH",
+        "campo": "shutterFlash1",
+        "atual": 100,
+        "correto": 50
+      }
+    ],
+    "total": 8
+  },
+  {
+    "name": "GOEC6O057 - Faixa 2",
+    "risco": "🟡 MÚLTIPLAS DIVERGÊNCIAS",
+    "problemas": [
+      {
+        "tipo": "EXPOSICAO",
+        "local": "Diurno",
+        "campo": "gainMax",
+        "atual": 1000,
+        "correto": 1500
+      },
+      {
+        "tipo": "EXPOSICAO",
+        "local": "Diurno",
+        "campo": "shutterMax",
+        "atual": 1500,
+        "correto": 500
+      },
+      {
+        "tipo": "EXPOSICAO",
+        "local": "Diurno",
+        "campo": "targetValue",
+        "atual": 35,
+        "correto": 38
+      },
+      {
+        "tipo": "EXPOSICAO",
+        "local": "Diurno",
+        "campo": "sharpness",
+        "atual": 40,
+        "correto": 30
+      },
+      {
+        "tipo": "FLASH",
+        "campo": "flash1_out1",
+        "atual": 70,
+        "correto": 65
+      },
+      {
+        "tipo": "FLASH",
+        "campo": "flash1_out3",
+        "atual": 70,
+        "correto": 65
+      },
+      {
+        "tipo": "FLASH",
+        "campo": "flash2_out1",
+        "atual": 25,
+        "correto": 20
+      },
+      {
+        "tipo": "FLASH",
+        "campo": "shutterFlash1",
+        "atual": 100,
+        "correto": 50
+      }
+    ],
+    "total": 8
+  },
+  {
+    "name": "GOEC6O058 - Faixa 1",
+    "risco": "✅ CONFORME",
+    "problemas": [],
+    "total": 0
+  },
+  {
+    "name": "GOEC6O058 - Faixa 2",
+    "risco": "🟡 MÚLTIPLAS DIVERGÊNCIAS",
+    "problemas": [
+      {
+        "tipo": "EXPOSICAO",
+        "local": "Diurno",
+        "campo": "gainMax",
+        "atual": 1000,
+        "correto": 1500
+      },
+      {
+        "tipo": "EXPOSICAO",
+        "local": "Diurno",
+        "campo": "shutterMax",
+        "atual": 1500,
+        "correto": 500
+      },
+      {
+        "tipo": "EXPOSICAO",
+        "local": "Diurno",
+        "campo": "targetValue",
+        "atual": 35,
+        "correto": 38
+      },
+      {
+        "tipo": "EXPOSICAO",
+        "local": "Diurno",
+        "campo": "sharpness",
+        "atual": 40,
+        "correto": 30
+      },
+      {
+        "tipo": "FLASH",
+        "campo": "flash1_out1",
+        "atual": 100,
+        "correto": 65
+      },
+      {
+        "tipo": "FLASH",
+        "campo": "flash1_out3",
+        "atual": 100,
+        "correto": 65
+      },
+      {
+        "tipo": "FLASH",
+        "campo": "flash2_out1",
+        "atual": 7,
+        "correto": 20
+      },
+      {
+        "tipo": "FLASH",
+        "campo": "shutterFlash1",
+        "atual": 100,
+        "correto": 50
+      }
+    ],
+    "total": 8
+  },
+  {
+    "name": "GOEC6O059 - Faixa 1",
+    "risco": "✅ CONFORME",
+    "problemas": [],
+    "total": 0
+  },
+  {
+    "name": "GOEC6O059 - Faixa 2",
+    "risco": "🟡 MÚLTIPLAS DIVERGÊNCIAS",
+    "problemas": [
+      {
+        "tipo": "EXPOSICAO",
+        "local": "Diurno",
+        "campo": "gainMax",
+        "atual": 1000,
+        "correto": 1500
+      },
+      {
+        "tipo": "EXPOSICAO",
+        "local": "Diurno",
+        "campo": "shutterMax",
+        "atual": 1500,
+        "correto": 500
+      },
+      {
+        "tipo": "EXPOSICAO",
+        "local": "Diurno",
+        "campo": "targetValue",
+        "atual": 35,
+        "correto": 38
+      },
+      {
+        "tipo": "EXPOSICAO",
+        "local": "Diurno",
+        "campo": "sharpness",
+        "atual": 40,
+        "correto": 30
+      },
+      {
+        "tipo": "FLASH",
+        "campo": "flash1_out1",
+        "atual": 100,
+        "correto": 65
+      },
+      {
+        "tipo": "FLASH",
+        "campo": "flash1_out3",
+        "atual": 100,
+        "correto": 65
+      },
+      {
+        "tipo": "FLASH",
+        "campo": "flash2_out1",
+        "atual": 7,
+        "correto": 20
+      },
+      {
+        "tipo": "FLASH",
+        "campo": "shutterFlash1",
+        "atual": 100,
+        "correto": 50
+      }
+    ],
+    "total": 8
+  }
+]

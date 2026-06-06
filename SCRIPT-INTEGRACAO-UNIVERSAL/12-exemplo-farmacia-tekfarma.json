@@ -1,0 +1,252 @@
+{
+  "modulo": "exemplo-farmacia-tekfarma",
+  "versao": "1.0.0",
+  "descricao": "EXEMPLO PRÁTICO — Como utilizar todos os módulos anteriores para integrar com um sistema de farmácia (tipo TekFarma). Serve como modelo base para qualquer outro tipo de negócio.",
+  "cenario": {
+    "empresa": "Farmácia Exemplo",
+    "sistema_erp": "TekFarma (ou similar)",
+    "necessidades": [
+      "WhatsApp para atender clientes (consultar medicamentos, pedir entregas)",
+      "Helpdesk para equipe interna (TI, problemas com sistema)",
+      "Relatórios automáticos (vendas diárias, estoque crítico, SNGPC)",
+      "Documentação do sistema para treinamento de funcionários",
+      "IA para responder dúvidas frequentes de operação"
+    ]
+  },
+  "modulos_utilizados": ["01", "02", "03", "04", "05", "06", "07", "08", "09", "11"],
+  "tabela_relacionamento_preenchida": {
+    "sistemas": [
+      {
+        "id": "erp_tekfarma",
+        "nome": "TekFarma - ERP Farmácia",
+        "tipo": "erp",
+        "plataforma": "tekfarma",
+        "conexao": {
+          "tipo_conexao": "banco_direto",
+          "banco_tipo": "mysql",
+          "banco_host": "ENV:TEKFARMA_DB_HOST",
+          "banco_porta": "ENV:TEKFARMA_DB_PORT",
+          "banco_nome": "ENV:TEKFARMA_DB_NAME",
+          "banco_user": "ENV:TEKFARMA_DB_USER",
+          "banco_pass": "ENV:TEKFARMA_DB_PASS"
+        },
+        "tabelas_principais": [
+          "produtos (estoque, preços, controlados)",
+          "vendas (histórico de vendas)",
+          "clientes (cadastro de clientes)",
+          "receitas (SNGPC)",
+          "financeiro (contas a pagar/receber)",
+          "fornecedores",
+          "pbm_transacoes"
+        ],
+        "modulos_habilitados": ["estoque", "vendas", "financeiro", "clientes", "sngpc", "pbm"]
+      },
+      {
+        "id": "helpdesk_interno",
+        "nome": "Helpdesk Interno (criado do zero — módulo 03)",
+        "tipo": "helpdesk",
+        "plataforma": "proprio",
+        "conexao": {
+          "tipo_conexao": "mongodb_local",
+          "uri": "ENV:MONGO_URI",
+          "collection": "tickets"
+        },
+        "categorias": ["sistema_tekfarma", "hardware_loja", "fiscal", "pbm", "geral"],
+        "tecnicos": ["TI-João", "TI-Maria", "Gerente"]
+      },
+      {
+        "id": "whatsapp_farmacia",
+        "nome": "WhatsApp da Farmácia",
+        "tipo": "mensageria",
+        "plataforma": "baileys",
+        "conexao": {
+          "numero": "ENV:WHATSAPP_FARMACIA_NUMERO",
+          "auth_path": "./whatsapp-auth-farmacia/"
+        }
+      },
+      {
+        "id": "ia_openai",
+        "nome": "OpenAI GPT-4o",
+        "tipo": "ia",
+        "plataforma": "openai",
+        "conexao": {
+          "api_key": "ENV:OPENAI_API_KEY",
+          "modelo_chat": "gpt-4o-mini",
+          "modelo_embedding": "text-embedding-3-small"
+        }
+      }
+    ]
+  },
+  "fluxo_whatsapp_farmacia": {
+    "descricao": "Como o WhatsApp funciona para a farmácia",
+    "menu_personalizado": [
+      {"numero": 1, "texto": "💊 Consultar medicamento", "estado": "consulta_medicamento"},
+      {"numero": 2, "texto": "🚗 Solicitar entrega", "estado": "solicitar_entrega"},
+      {"numero": 3, "texto": "📋 Enviar receita", "estado": "enviar_receita"},
+      {"numero": 4, "texto": "📞 Falar com farmacêutico", "estado": "transferir_farmaceutico"},
+      {"numero": 5, "texto": "❓ Dúvidas", "estado": "faq_ia"},
+      {"numero": 0, "texto": "Encerrar", "estado": "encerrado"}
+    ],
+    "estados_farmacia": [
+      {
+        "estado": "consulta_medicamento",
+        "fluxo": [
+          "Pergunta: 'Qual medicamento você procura?'",
+          "Usuário responde: 'Dipirona 500mg'",
+          "Sistema: Consulta ERP → SELECT * FROM produtos WHERE nome LIKE '%dipirona%'",
+          "Responde: '✅ Dipirona 500mg - R$ 8,90 (23 unidades em estoque)' OU '❌ Não disponível no momento'"
+        ]
+      },
+      {
+        "estado": "solicitar_entrega",
+        "fluxo": [
+          "Pergunta: 'Qual seu endereço para entrega?'",
+          "Coleta: endereço, produtos desejados, forma de pagamento",
+          "Sistema: Cria pedido no ERP + Notifica balcão",
+          "Confirma: 'Pedido #123 registrado! Entrega em até 45 min.'"
+        ]
+      },
+      {
+        "estado": "enviar_receita",
+        "fluxo": [
+          "Pergunta: 'Envie a foto da receita médica'",
+          "Recebe imagem → Salva em storage",
+          "IA analisa imagem (OCR) → Extrai: médico, medicamentos, tipo receita",
+          "Verifica estoque de cada medicamento",
+          "Responde com disponibilidade e preços"
+        ]
+      }
+    ]
+  },
+  "knowledge_base_farmacia": {
+    "descricao": "Exemplos de KB para treinar o assistente IA da farmácia",
+    "entradas_exemplo": [
+      {
+        "pergunta": "horario de funcionamento|que horas abre|que horas fecha|funciona domingo",
+        "resposta": "🕐 Nosso horário de funcionamento:\n- Segunda a Sexta: 7h às 22h\n- Sábado: 8h às 20h\n- Domingo: 8h às 14h\n- Feriados: 8h às 12h",
+        "modulo": "geral"
+      },
+      {
+        "pergunta": "como pedir entrega|delivery|entrega em casa|entrega a domicílio",
+        "resposta": "🚗 Para solicitar entrega:\n1. Envie a lista de medicamentos\n2. Informe seu endereço\n3. Escolha a forma de pagamento\n\nEntregamos em até 45 minutos na região central.\nTaxa de entrega: R$ 5,00 (grátis acima de R$ 50).",
+        "modulo": "entrega"
+      },
+      {
+        "pergunta": "aceita convenio|pbm|farmacia popular|desconto medicamento",
+        "resposta": "💊 Trabalhamos com os seguintes convênios e PBMs:\n- Farmácia Popular do Brasil\n- Vidalink\n- e-Pharma\n- Orizon\n- Funcionalcard\n\nPara usar o desconto, apresente documento com foto e receita médica.",
+        "modulo": "pbm"
+      },
+      {
+        "pergunta": "precisa de receita|medicamento controlado|tarja preta|tarja vermelha",
+        "resposta": "📋 Sobre receitas:\n- **Tarja vermelha**: Receita simples (válida 30 dias)\n- **Tarja preta (C1)**: Receita azul (válida 30 dias)\n- **Antibióticos**: Receita com 2 vias (válida 10 dias)\n\n⚠️ Não vendemos controlados sem receita válida. Envie foto da receita pelo WhatsApp para verificarmos.",
+        "modulo": "sngpc"
+      }
+    ]
+  },
+  "relatorios_farmacia": {
+    "agendados": [
+      {
+        "nome": "Estoque Crítico",
+        "cron": "0 7 * * *",
+        "descricao": "Produtos abaixo do mínimo — enviar para gerente todo dia às 7h",
+        "query": "SELECT * FROM produtos WHERE estoque_atual < estoque_minimo AND ativo = 1",
+        "destino": "telegram_gerente"
+      },
+      {
+        "nome": "Vendas do Dia",
+        "cron": "0 22 * * *",
+        "descricao": "Resumo das vendas ao fim do dia",
+        "metricas": ["total_vendas", "ticket_medio", "itens_vendidos", "formas_pagamento"],
+        "destino": "email_diretoria"
+      },
+      {
+        "nome": "SNGPC Mensal",
+        "cron": "0 8 1 * *",
+        "descricao": "Relatório de controlados para envio à ANVISA",
+        "metricas": ["receitas_cadastradas", "dispensacoes", "estoque_controlados"],
+        "destino": "farmaceutico_responsavel"
+      },
+      {
+        "nome": "Medicamentos Vencendo",
+        "cron": "0 8 * * 1",
+        "descricao": "Produtos com vencimento nos próximos 30 dias",
+        "query": "SELECT * FROM produtos WHERE validade <= DATE_ADD(NOW(), INTERVAL 30 DAY) AND estoque_atual > 0",
+        "destino": "telegram_estoque"
+      }
+    ]
+  },
+  "como_replicar_para_outro_negocio": {
+    "descricao": "Passos para adaptar este modelo para qualquer tipo de empresa",
+    "passos": [
+      {
+        "passo": 1,
+        "titulo": "Identificar módulos necessários",
+        "descricao": "Listar: precisa de WhatsApp? Helpdesk? ERP? Quais relatórios?",
+        "decisoes": [
+          "Se tem atendimento ao cliente → Módulos 01, 02, 09",
+          "Se tem sistema de gestão → Módulos 04, 06",
+          "Se precisa de suporte técnico → Módulo 03",
+          "Se precisa de relatórios → Módulo 05, 08",
+          "Se precisa treinar equipe → Módulo 11"
+        ]
+      },
+      {
+        "passo": 2,
+        "titulo": "Preencher tabela de relacionamento (módulo 07)",
+        "descricao": "Cadastrar todos os sistemas com credenciais"
+      },
+      {
+        "passo": 3,
+        "titulo": "Personalizar WhatsApp",
+        "descricao": "Adaptar menu, estados e fluxos para o seu negócio"
+      },
+      {
+        "passo": 4,
+        "titulo": "Treinar Knowledge Base",
+        "descricao": "Cadastrar perguntas e respostas do seu domínio"
+      },
+      {
+        "passo": 5,
+        "titulo": "Configurar Helpdesk",
+        "descricao": "Escolher sistema existente OU criar próprio (seção helpdesk_minimo do módulo 03)"
+      },
+      {
+        "passo": 6,
+        "titulo": "Definir relatórios",
+        "descricao": "Criar templates e agendar geração automática"
+      },
+      {
+        "passo": 7,
+        "titulo": "Deploy",
+        "descricao": "Subir com Docker ou PM2 + configurar variáveis de ambiente"
+      }
+    ]
+  },
+  "outros_cenarios_adaptaveis": {
+    "clinica_medica": {
+      "whatsapp": ["agendamento", "confirmacao_consulta", "resultado_exame", "receita"],
+      "erp": "Sistema de prontuário (Tasy, MV, PEP)",
+      "relatorios": ["consultas_dia", "faturamento_convenio", "produtividade_medico"]
+    },
+    "escritorio_contabilidade": {
+      "whatsapp": ["envio_documentos", "consulta_impostos", "prazo_entrega", "duvidas"],
+      "erp": "Sistema contábil (Domínio, Alterdata, Questor)",
+      "relatorios": ["clientes_pendentes", "declaracoes_prazo", "faturamento_mensal"]
+    },
+    "oficina_mecanica": {
+      "whatsapp": ["orcamento", "status_servico", "agendamento", "fotos_servico"],
+      "erp": "Sistema de OS (Car System, AutoGestor)",
+      "relatorios": ["servicos_dia", "pecas_estoque", "faturamento"]
+    },
+    "imobiliaria": {
+      "whatsapp": ["consulta_imovel", "agendamento_visita", "documentacao", "status_contrato"],
+      "erp": "CRM imobiliário (Vista, Imoview, Jetimob)",
+      "relatorios": ["visitas_semana", "propostas_abertas", "comissoes"]
+    },
+    "restaurante": {
+      "whatsapp": ["cardapio", "pedido_delivery", "reserva", "horario"],
+      "erp": "Sistema de comandas (iFood Gestor, Consumer)",
+      "relatorios": ["vendas_dia", "pratos_mais_pedidos", "estoque_ingredientes"]
+    }
+  }
+}

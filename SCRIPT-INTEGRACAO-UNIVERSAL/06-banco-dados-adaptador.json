@@ -1,0 +1,166 @@
+{
+  "modulo": "banco-dados-adaptador",
+  "versao": "1.0.0",
+  "descricao": "Adaptador multi-banco que abstrai conexões a SQL Server, MySQL, PostgreSQL, MongoDB, SQLite e APIs REST. Você configura os acessos na tabela de relacionamento (módulo 07) e usa uma interface unificada.",
+  "bancos_suportados": {
+    "sql_server": {
+      "pacote_npm": "mssql@^11.0.0",
+      "porta_padrao": 1433,
+      "config": {
+        "server": "string (host ou IP)",
+        "port": "number",
+        "database": "string",
+        "user": "string",
+        "password": "string",
+        "options": {
+          "encrypt": "boolean (true para Azure)",
+          "trustServerCertificate": "boolean",
+          "connectionTimeout": 10000,
+          "requestTimeout": 15000
+        }
+      },
+      "exemplo_query": "SELECT TOP 100 * FROM {tabela} WHERE {condicao} ORDER BY {campo} DESC"
+    },
+    "mysql": {
+      "pacote_npm": "mysql2@^3.0.0",
+      "porta_padrao": 3306,
+      "config": {
+        "host": "string",
+        "port": "number",
+        "database": "string",
+        "user": "string",
+        "password": "string",
+        "ssl": "object?"
+      },
+      "exemplo_query": "SELECT * FROM {tabela} WHERE {condicao} LIMIT 100"
+    },
+    "postgresql": {
+      "pacote_npm": "pg@^8.0.0",
+      "porta_padrao": 5432,
+      "config": {
+        "host": "string",
+        "port": "number",
+        "database": "string",
+        "user": "string",
+        "password": "string",
+        "ssl": "object?"
+      },
+      "exemplo_query": "SELECT * FROM {tabela} WHERE {condicao} LIMIT 100"
+    },
+    "mongodb": {
+      "pacote_npm": "mongoose@^8.0.0",
+      "porta_padrao": 27017,
+      "config": {
+        "uri": "mongodb://user:pass@host:port/database",
+        "opcoes": {
+          "maxPoolSize": 10,
+          "serverSelectionTimeoutMS": 5000
+        }
+      },
+      "exemplo_query": "collection.find({campo: valor}).limit(100).sort({campo: -1})"
+    },
+    "sqlite": {
+      "pacote_npm": "better-sqlite3@^11.0.0",
+      "config": {
+        "path": "caminho/para/database.db"
+      },
+      "uso": "Banco local para desenvolvimento, cache, dados temporários"
+    },
+    "api_rest": {
+      "pacote_npm": "axios@^1.0.0",
+      "config": {
+        "base_url": "string",
+        "auth_tipo": "none|basic|bearer|api_key|oauth2",
+        "auth_valor": "string (token, api_key, etc)",
+        "headers_extras": {"key": "value"},
+        "timeout_ms": 10000
+      },
+      "exemplo_query": "GET {base_url}/endpoint?param1=valor1&param2=valor2"
+    }
+  },
+  "interface_unificada": {
+    "descricao": "Todas as conexões são abstraídas por esta interface — você não precisa saber qual banco está usando",
+    "operacoes": [
+      {
+        "operacao": "conectar",
+        "parametros": {"sistema_id": "string (referência à tabela de relacionamento)"},
+        "retorno": {"conectado": "boolean", "tipo": "string", "versao": "string?"}
+      },
+      {
+        "operacao": "consultar",
+        "parametros": {
+          "sistema_id": "string",
+          "tabela_ou_endpoint": "string",
+          "filtros": {"campo": "valor"},
+          "ordenar": {"campo": "asc|desc"},
+          "limite": "number",
+          "pagina": "number"
+        },
+        "retorno": {"dados": ["array de objetos"], "total": "number", "pagina": "number"}
+      },
+      {
+        "operacao": "inserir",
+        "parametros": {"sistema_id": "string", "tabela_ou_endpoint": "string", "dados": "object"},
+        "retorno": {"id": "string|number", "sucesso": "boolean"}
+      },
+      {
+        "operacao": "atualizar",
+        "parametros": {"sistema_id": "string", "tabela_ou_endpoint": "string", "id": "string|number", "dados": "object"},
+        "retorno": {"sucesso": "boolean", "linhas_afetadas": "number"}
+      },
+      {
+        "operacao": "deletar",
+        "parametros": {"sistema_id": "string", "tabela_ou_endpoint": "string", "id": "string|number"},
+        "retorno": {"sucesso": "boolean"}
+      },
+      {
+        "operacao": "executarQuery",
+        "descricao": "Para queries complexas que não se encaixam na interface genérica",
+        "parametros": {"sistema_id": "string", "query": "string", "parametros": ["array?"]},
+        "retorno": {"dados": ["array"], "linhas_afetadas": "number?"}
+      },
+      {
+        "operacao": "listarTabelas",
+        "parametros": {"sistema_id": "string"},
+        "retorno": [{"nome": "string", "tipo": "tabela|view|collection", "registros_aprox": "number?"}]
+      },
+      {
+        "operacao": "descreverTabela",
+        "parametros": {"sistema_id": "string", "tabela": "string"},
+        "retorno": [{"campo": "string", "tipo": "string", "obrigatorio": "boolean", "chave": "boolean"}]
+      }
+    ]
+  },
+  "pool_conexoes": {
+    "descricao": "Gerenciamento de conexões para performance",
+    "configuracao": {
+      "max_conexoes_por_banco": 10,
+      "timeout_idle_ms": 30000,
+      "retry_attempts": 3,
+      "retry_delay_ms": 1000,
+      "health_check_interval_ms": 60000
+    }
+  },
+  "seguranca": {
+    "boas_praticas": [
+      "NUNCA concatenar valores diretamente na query (use parâmetros)",
+      "Credenciais em variáveis de ambiente (nunca no código)",
+      "Conexões com timeout definido",
+      "Pool de conexões com limite",
+      "Logs de acesso sem expor dados sensíveis",
+      "Encrypt em trânsito (SSL/TLS) quando possível"
+    ],
+    "exemplo_query_segura": {
+      "errado": "SELECT * FROM Users WHERE nome = '" + "valor_usuario" + "'",
+      "correto_sql": "SELECT * FROM Users WHERE nome = @nome",
+      "correto_mongo": "collection.find({ nome: valor_sanitizado })"
+    }
+  },
+  "api_endpoints_banco": [
+    {"metodo": "GET", "rota": "/api/db/:sistemaId/status", "descricao": "Testa conexão com banco específico"},
+    {"metodo": "GET", "rota": "/api/db/:sistemaId/tabelas", "descricao": "Lista tabelas/collections do banco"},
+    {"metodo": "GET", "rota": "/api/db/:sistemaId/tabela/:nome", "descricao": "Descreve estrutura da tabela"},
+    {"metodo": "POST", "rota": "/api/db/:sistemaId/query", "descricao": "Executa query (read-only por padrão)"},
+    {"metodo": "GET", "rota": "/api/db/status-geral", "descricao": "Status de todas as conexões configuradas"}
+  ]
+}

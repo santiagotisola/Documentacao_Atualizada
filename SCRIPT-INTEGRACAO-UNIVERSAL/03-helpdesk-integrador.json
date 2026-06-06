@@ -1,0 +1,271 @@
+{
+  "modulo": "helpdesk-integrador",
+  "versao": "1.0.0",
+  "descricao": "Integrador genérico de Helpdesk. Funciona com qualquer sistema de tickets (Jitbit, Zendesk, Freshdesk, osTicket, GLPI, Zammad). Inclui auto-resposta via IA, fila de revisão, polling automático e SLA.",
+  "sistemas_suportados": {
+    "jitbit": {
+      "tipo_auth": "basic|bearer_token",
+      "base_url_exemplo": "https://desk.empresa.com.br/helpdesk",
+      "doc_api": "https://www.jitbit.com/helpdesk/helpdesk-api/"
+    },
+    "zendesk": {
+      "tipo_auth": "bearer_token|oauth2",
+      "base_url_exemplo": "https://empresa.zendesk.com/api/v2",
+      "doc_api": "https://developer.zendesk.com/api-reference/"
+    },
+    "freshdesk": {
+      "tipo_auth": "api_key",
+      "base_url_exemplo": "https://empresa.freshdesk.com/api/v2",
+      "doc_api": "https://developers.freshdesk.com/api/"
+    },
+    "osticket": {
+      "tipo_auth": "api_key",
+      "base_url_exemplo": "http://helpdesk.empresa.com/api",
+      "doc_api": "https://docs.osticket.com/en/latest/Developer%20Documentation/API.html"
+    },
+    "glpi": {
+      "tipo_auth": "session_token|api_key",
+      "base_url_exemplo": "http://glpi.empresa.com/apirest.php",
+      "doc_api": "https://glpi-project.org/DOC/EN/"
+    },
+    "zammad": {
+      "tipo_auth": "bearer_token",
+      "base_url_exemplo": "https://helpdesk.empresa.com/api/v1",
+      "doc_api": "https://docs.zammad.org/en/latest/api/intro.html"
+    },
+    "criar_proprio": {
+      "descricao": "Se não tem helpdesk, criar um mínimo com MongoDB",
+      "ver_secao": "helpdesk_minimo"
+    }
+  },
+  "interface_unificada": {
+    "descricao": "Independente do sistema escolhido, todas as operações passam por esta interface padronizada",
+    "operacoes": [
+      {
+        "operacao": "listarTickets",
+        "parametros": {
+          "status": "aberto|pendente|respondido|fechado|todos",
+          "limite": 50,
+          "pagina": 1,
+          "atribuido_a": "tecnico_id?",
+          "categoria": "string?",
+          "desde": "date?"
+        },
+        "retorno": [{
+          "id": "number|string",
+          "assunto": "string",
+          "descricao": "string",
+          "status": "string",
+          "prioridade": "baixa|media|alta|critica",
+          "categoria": "string",
+          "criado_por": {"nome": "string", "email": "string", "telefone": "string?"},
+          "atribuido_a": {"nome": "string", "id": "string"},
+          "criado_em": "date",
+          "atualizado_em": "date",
+          "sla_vence_em": "date?"
+        }]
+      },
+      {
+        "operacao": "buscarTicket",
+        "parametros": {"id": "number|string"},
+        "retorno": {
+          "ticket": "objeto completo",
+          "comentarios": [{"autor": "string", "texto": "string", "data": "date", "privado": "boolean"}],
+          "anexos": [{"nome": "string", "url": "string", "tamanho_kb": "number"}],
+          "historico": [{"acao": "string", "de": "string", "para": "string", "data": "date"}]
+        }
+      },
+      {
+        "operacao": "criarTicket",
+        "parametros": {
+          "assunto": "string (obrigatório)",
+          "descricao": "string (obrigatório)",
+          "categoria": "string?",
+          "prioridade": "string?",
+          "criado_por_email": "string?",
+          "criado_por_nome": "string?",
+          "criado_por_telefone": "string?",
+          "anexos": ["file[]?"]
+        },
+        "retorno": {"id": "number|string", "numero": "string", "url": "string"}
+      },
+      {
+        "operacao": "responderTicket",
+        "parametros": {
+          "id": "number|string",
+          "resposta": "string",
+          "privado": "boolean (default: false)",
+          "anexos": ["file[]?"]
+        }
+      },
+      {
+        "operacao": "atualizarTicket",
+        "parametros": {
+          "id": "number|string",
+          "status": "string?",
+          "prioridade": "string?",
+          "categoria": "string?",
+          "atribuir_a": "string?"
+        }
+      },
+      {
+        "operacao": "listarCategorias",
+        "retorno": [{"id": "string", "nome": "string", "pai": "string?"}]
+      },
+      {
+        "operacao": "listarTecnicos",
+        "retorno": [{"id": "string", "nome": "string", "email": "string", "departamento": "string?"}]
+      }
+    ]
+  },
+  "auto_resposta_ia": {
+    "descricao": "Pipeline de resposta automática: busca tickets sem resposta, gera sugestão via IA, decide se envia ou coloca em fila",
+    "fluxo": [
+      {
+        "passo": 1,
+        "acao": "Polling periódico (a cada N minutos)",
+        "detalhe": "Buscar tickets com status 'aberto' ou 'sem resposta'"
+      },
+      {
+        "passo": 2,
+        "acao": "Extrair texto do ticket",
+        "detalhe": "Assunto + Descrição + Último comentário do cliente"
+      },
+      {
+        "passo": 3,
+        "acao": "Gerar resposta via Motor IA (módulo 01)",
+        "detalhe": "Enviar para engine.gerarResposta() com módulo contextual"
+      },
+      {
+        "passo": 4,
+        "acao": "Avaliar confiança",
+        "decisoes": {
+          "score_gte_085": {
+            "acao": "AUTO_RESPONDER",
+            "detalhe": "Publica resposta diretamente no ticket",
+            "condicao_extra": "Modo revisão desabilitado (MODO_REVISAO=false)"
+          },
+          "score_065_a_084": {
+            "acao": "SUGERIR",
+            "detalhe": "Adiciona à fila de revisão humana"
+          },
+          "score_lt_065": {
+            "acao": "ESCALAR",
+            "detalhe": "Marca como 'precisa atenção humana', notifica equipe"
+          }
+        }
+      }
+    ],
+    "configuracao": {
+      "polling_interval_minutos": 2,
+      "modo_revisao": true,
+      "max_tickets_por_ciclo": 50,
+      "horario_funcionamento": {"inicio": "08:00", "fim": "18:00", "timezone": "America/Sao_Paulo"},
+      "ignorar_categorias": ["spam", "teste"],
+      "notificar_escalamento": {"canal": "telegram|email|slack", "destino": "id_ou_email"}
+    }
+  },
+  "fila_revisao": {
+    "descricao": "Quando a IA não tem confiança suficiente, coloca na fila para humano revisar",
+    "schema": {
+      "ticketId": "number|string",
+      "assunto": "string",
+      "pergunta_cliente": "string",
+      "resposta_sugerida": "string",
+      "score_confianca": "number (0-1)",
+      "status": "pendente|aprovado|rejeitado|editado",
+      "revisado_por": "string?",
+      "resposta_final": "string?",
+      "criado_em": "date"
+    },
+    "endpoints": [
+      {"metodo": "GET", "rota": "/api/helpdesk/fila", "descricao": "Lista itens pendentes de revisão"},
+      {"metodo": "POST", "rota": "/api/helpdesk/fila/:id/aprovar", "descricao": "Aprova e envia resposta sugerida"},
+      {"metodo": "POST", "rota": "/api/helpdesk/fila/:id/rejeitar", "descricao": "Rejeita sugestão (não envia)"},
+      {"metodo": "POST", "rota": "/api/helpdesk/fila/:id/editar", "descricao": "Edita resposta antes de enviar", "body": {"resposta_editada": "string"}}
+    ]
+  },
+  "helpdesk_minimo": {
+    "descricao": "Se você NÃO tem um sistema de helpdesk, use esta estrutura mínima com MongoDB para criar um",
+    "schema_ticket": {
+      "numero": {"tipo": "auto_increment", "descricao": "Número sequencial do chamado"},
+      "assunto": "string",
+      "descricao": "string",
+      "status": {"tipo": "enum", "valores": ["aberto", "em_andamento", "aguardando_cliente", "resolvido", "fechado"]},
+      "prioridade": {"tipo": "enum", "valores": ["baixa", "media", "alta", "critica"]},
+      "categoria": "string",
+      "criado_por": {"nome": "string", "email": "string?", "telefone": "string?"},
+      "atribuido_a": {"nome": "string?", "id": "string?"},
+      "comentarios": [{"autor": "string", "texto": "string", "data": "date", "privado": "boolean"}],
+      "anexos": [{"nome": "string", "path": "string", "tipo": "string"}],
+      "sla": {"prazo_horas": "number", "vence_em": "date", "violado": "boolean"},
+      "origem": {"tipo": "enum", "valores": ["whatsapp", "email", "portal", "telefone", "api"]},
+      "criado_em": "date",
+      "atualizado_em": "date",
+      "fechado_em": "date?"
+    },
+    "endpoints_minimos": [
+      {"metodo": "POST", "rota": "/api/tickets", "descricao": "Criar ticket"},
+      {"metodo": "GET", "rota": "/api/tickets", "descricao": "Listar tickets", "query": "status, prioridade, atribuido_a, page, limit"},
+      {"metodo": "GET", "rota": "/api/tickets/:id", "descricao": "Detalhes do ticket"},
+      {"metodo": "PATCH", "rota": "/api/tickets/:id", "descricao": "Atualizar ticket (status, prioridade, atribuição)"},
+      {"metodo": "POST", "rota": "/api/tickets/:id/comentario", "descricao": "Adicionar comentário"},
+      {"metodo": "POST", "rota": "/api/tickets/:id/anexo", "descricao": "Anexar arquivo"},
+      {"metodo": "GET", "rota": "/api/tickets/dashboard", "descricao": "Métricas (abertos, pendentes, SLA)"}
+    ],
+    "sla_configuracao": {
+      "regras": [
+        {"prioridade": "critica", "prazo_horas": 2, "notificar_em": 1},
+        {"prioridade": "alta", "prazo_horas": 8, "notificar_em": 4},
+        {"prioridade": "media", "prazo_horas": 24, "notificar_em": 12},
+        {"prioridade": "baixa", "prazo_horas": 72, "notificar_em": 48}
+      ]
+    }
+  },
+  "mapeamento_adaptadores": {
+    "descricao": "Como mapear as operações genéricas para cada sistema real",
+    "exemplo_jitbit": {
+      "listarTickets": "GET {base_url}/api/Tickets?mode=unanswered&count={limite}",
+      "buscarTicket": "GET {base_url}/api/Ticket/{id}",
+      "criarTicket": "POST {base_url}/api/Ticket",
+      "responderTicket": "POST {base_url}/api/Comment",
+      "listarCategorias": "GET {base_url}/api/Categories",
+      "auth_header": "Authorization: Basic {base64(user:pass)}"
+    },
+    "exemplo_zendesk": {
+      "listarTickets": "GET {base_url}/tickets.json?status=open&page={pagina}",
+      "buscarTicket": "GET {base_url}/tickets/{id}.json",
+      "criarTicket": "POST {base_url}/tickets.json",
+      "responderTicket": "PUT {base_url}/tickets/{id}.json (com comment)",
+      "listarCategorias": "GET {base_url}/ticket_fields.json",
+      "auth_header": "Authorization: Bearer {token}"
+    },
+    "exemplo_freshdesk": {
+      "listarTickets": "GET {base_url}/tickets?filter=open&page={pagina}",
+      "buscarTicket": "GET {base_url}/tickets/{id}?include=conversations",
+      "criarTicket": "POST {base_url}/tickets",
+      "responderTicket": "POST {base_url}/tickets/{id}/reply",
+      "listarCategorias": "GET {base_url}/ticket_fields",
+      "auth_header": "Authorization: Basic {base64(api_key:X)}"
+    }
+  },
+  "integracao_whatsapp_helpdesk": {
+    "descricao": "Como conectar o módulo WhatsApp ao Helpdesk",
+    "fluxo": [
+      "1. Usuário envia mensagem no WhatsApp",
+      "2. Máquina de estados coleta: assunto, descrição, categoria",
+      "3. Chama helpdesk.criarTicket() com dados coletados",
+      "4. Armazena ticketId na sessão WhatsApp",
+      "5. Quando helpdesk responde (via polling), notifica usuário no WhatsApp",
+      "6. Ciclo continua até resolução"
+    ],
+    "evento_novo_ticket": {
+      "trigger": "whatsapp.ticket_criado",
+      "acao": "helpdesk.criarTicket(dados)"
+    },
+    "evento_resposta_helpdesk": {
+      "trigger": "polling detecta novo comentário",
+      "acao": "whatsapp.enviarMensagem(telefone, resposta)"
+    }
+  }
+}

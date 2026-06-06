@@ -1,0 +1,29 @@
+{
+  "name": "axion-integracao-universal",
+  "version": "1.0.0",
+  "description": "Framework modular de integração inteligente - IA + WhatsApp + Helpdesk + ERP",
+  "type": "module",
+  "main": "src/app.js",
+  "scripts": {
+    "start": "node --env-file=.env src/app.js",
+    "dev": "node --watch --env-file=.env src/app.js"
+  },
+  "dependencies": {
+    "@whiskeysockets/baileys": "^7.0.0-rc.9",
+    "axios": "^1.7.0",
+    "cors": "^2.8.5",
+    "docx": "^8.5.0",
+    "dotenv": "^16.4.0",
+    "exceljs": "^4.4.0",
+    "express": "^4.21.0",
+    "express-rate-limit": "^7.4.0",
+    "mongoose": "^8.8.0",
+    "mssql": "^11.0.0",
+    "mysql2": "^3.11.0",
+    "node-cron": "^3.0.3",
+    "openai": "^4.70.0",
+    "pg": "^8.13.0",
+    "qrcode": "^1.5.4",
+    "qrcode-terminal": "^0.12.0"
+  }
+}

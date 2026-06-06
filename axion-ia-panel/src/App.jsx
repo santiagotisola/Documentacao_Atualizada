@@ -5,9 +5,10 @@ import {
   Bot, MessageCircle, Headphones,
   ScanSearch, ScanLine, BookMarked,
   BarChart3, ClipboardList,
-  Landmark,
+  Landmark, Radio,
   FileText, Search, Clock, GraduationCap, ScrollText,
-  Settings, ExternalLink, Menu, X
+  Settings, ExternalLink, Menu, X,
+  Camera, Construction, PieChart, Map
 } from "lucide-react";
 import Dashboard from "./pages/Dashboard.jsx";
 import Treinamento from "./pages/Treinamento.jsx";
@@ -27,33 +28,35 @@ import MapaOperacoes from "./pages/MapaOperacoes.jsx";
 import PipelineEditais from "./pages/PipelineEditais.jsx";
 import AnalisesSites from "./pages/AnalisesSites.jsx";
 import IntelligenceHub from "./pages/IntelligenceHub.jsx";
+import VarcoMonitor from "./pages/VarcoMonitor.jsx";
 import HomePage from "./pages/HomePage.jsx";
 import "./App.css";
 import "./pages/docusaurus-compat.css";
 
-/* ─── Page metadata for gradient headers ─── */
+/* ─── Page metadata for headers ─── */
 const PAGE_INFO = {
-  "/intelligence-hub": { title: "Intelligence Hub", subtitle: "Gerenciador unificado de dados, relatórios e performance", icon: "🧠" },
-  "/mapa-operacoes": { title: "Mapa de Operações", subtitle: "Ecossistema completo: fluxos, processos, sites e acessos", icon: "🔗" },
-  "/dashboard": { title: "Dashboard", subtitle: "Visão geral dos sistemas e serviços", icon: "📊" },
-  "/analise": { title: "Análise de Sites", subtitle: "Comparativo de contratos e operações por site", icon: "🔍" },
+  "/intelligence-hub": { title: "Intelligence Hub", subtitle: "Gerenciador unificado de dados, relatórios e performance", Icon: Brain },
+  "/mapa-operacoes": { title: "Mapa de Operações", subtitle: "Ecossistema completo: fluxos, processos, sites e acessos", Icon: Globe },
+  "/dashboard": { title: "Dashboard", subtitle: "Visão geral dos sistemas e serviços", Icon: LayoutDashboard },
+  "/analise": { title: "Análise de Sites", subtitle: "Comparativo de contratos e operações por site", Icon: ScanSearch },
 
-  "/chat": { title: "Chat IA", subtitle: "Assistente inteligente AxionIA", icon: "🤖" },
-  "/whatsapp": { title: "WhatsApp", subtitle: "Integração e atendimento via WhatsApp", icon: "💬" },
-  "/helpdesk": { title: "Helpdesk", subtitle: "Gestão de tickets e atendimento Jitbit", icon: "🎧" },
-  "/analise-imagens": { title: "Análise de Imagens", subtitle: "OCR, validação e qualidade de capturas", icon: "📷" },
+  "/chat": { title: "Chat IA", subtitle: "Assistente inteligente AxionIA", Icon: Bot },
+  "/whatsapp": { title: "WhatsApp", subtitle: "Integração e atendimento via WhatsApp", Icon: MessageCircle },
+  "/helpdesk": { title: "Helpdesk", subtitle: "Gestão de tickets e atendimento Jitbit", Icon: Headphones },
+  "/analise-imagens": { title: "Análise de Imagens", subtitle: "OCR, validação e qualidade de capturas", Icon: Camera },
 
-  "/pipeline-editais": { title: "Pipeline de Editais", subtitle: "Ecossistema completo: Buscar → Analisar → Revisar → Planejar → Especificar", icon: "🏗️" },
-  "/relatorio-contrato": { title: "Relatório por Contrato", subtitle: "Análises técnicas e viabilidade via IA por site/contrato", icon: "📑" },
-  "/relatorio-fluxo": { title: "Relatório de Fluxo", subtitle: "Métricas de atendimento e fluxo operacional", icon: "📊" },
+  "/pipeline-editais": { title: "Pipeline de Editais", subtitle: "Ecossistema completo: Buscar → Analisar → Revisar → Planejar → Especificar", Icon: Construction },
+  "/relatorio-contrato": { title: "Relatório por Contrato", subtitle: "Análises técnicas e viabilidade via IA por site/contrato", Icon: ClipboardList },
+  "/relatorio-fluxo": { title: "Relatório de Fluxo", subtitle: "Métricas de atendimento e fluxo operacional", Icon: BarChart3 },
 
-  "/kb": { title: "Knowledge Base", subtitle: "Base de conhecimento com embeddings", icon: "📚" },
-  "/gerar-doc": { title: "Gerador de Docs", subtitle: "Documentação automatizada com IA", icon: "📄" },
-  "/fontes": { title: "Fontes de Pesquisa", subtitle: "URLs e referências de pesquisa", icon: "🔎" },
-  "/treinamento": { title: "Treinamento", subtitle: "Capacitação e aprendizado da IA", icon: "🎓" },
-  "/planilha-horas": { title: "Planilha de Horas", subtitle: "Controle de tempo e atividades", icon: "⏱️" },
-  "/logs": { title: "Logs do Sistema", subtitle: "Auditoria e rastreio de operações", icon: "📋" },
-  "/config": { title: "Configurações", subtitle: "Configurações do sistema e conexões", icon: "⚙️" },
+  "/kb": { title: "Knowledge Base", subtitle: "Base de conhecimento com embeddings", Icon: BookMarked },
+  "/gerar-doc": { title: "Gerador de Docs", subtitle: "Documentação automatizada com IA", Icon: FileText },
+  "/fontes": { title: "Fontes de Pesquisa", subtitle: "URLs e referências de pesquisa", Icon: Search },
+  "/treinamento": { title: "Treinamento", subtitle: "Capacitação e aprendizado da IA", Icon: GraduationCap },
+  "/planilha-horas": { title: "Planilha de Horas", subtitle: "Controle de tempo e atividades", Icon: Clock },
+  "/logs": { title: "Logs do Sistema", subtitle: "Auditoria e rastreio de operações", Icon: ScrollText },
+  "/config": { title: "Configurações", subtitle: "Configurações do sistema e conexões", Icon: Settings },
+  "/varco": { title: "VARCO Monitor", subtitle: "Monitoramento da frota ITScam 450 — 72 dispositivos SETRANS-GO", Icon: Radio },
 };
 
 const MENU_SECTIONS = [
@@ -78,6 +81,7 @@ const MENU_SECTIONS = [
     group: "Qualidade",
     items: [
       { to: "/analise-imagens", icon: ScanLine, label: "Análise de Imagens" },
+      { to: "/varco", icon: Radio, label: "VARCO Monitor" },
       { to: "/relatorio-contrato", icon: ClipboardList, label: "Relatório por Contrato" },
       { to: "/relatorio-fluxo", icon: BarChart3, label: "Relatório de Fluxo" },
     ]
@@ -186,17 +190,23 @@ function AppContent() {
       )}
 
       {/* ─── Page Header (inner pages) ─── */}
-      {!isHome && PAGE_INFO[location.pathname] && (
-        <section className="inner-page-hero">
-          <div className="inner-page-hero-inner">
-            <span className="inner-page-hero-icon">{PAGE_INFO[location.pathname].icon}</span>
-            <div>
-              <h1 className="inner-page-hero-title">{PAGE_INFO[location.pathname].title}</h1>
-              <p className="inner-page-hero-subtitle">{PAGE_INFO[location.pathname].subtitle}</p>
+      {!isHome && PAGE_INFO[location.pathname] && (() => {
+        const info = PAGE_INFO[location.pathname];
+        const IconComp = info.Icon;
+        return (
+          <section className="inner-page-hero">
+            <div className="inner-page-hero-inner">
+              <span className="inner-page-hero-icon">
+                {IconComp && <IconComp size={24} strokeWidth={1.5} />}
+              </span>
+              <div>
+                <h1 className="inner-page-hero-title">{info.title}</h1>
+                <p className="inner-page-hero-subtitle">{info.subtitle}</p>
+              </div>
             </div>
-          </div>
-        </section>
-      )}
+          </section>
+        );
+      })()}
 
       {/* ─── Main content ─── */}
       <main className={isHome ? "portal-home" : "page-content"}>
@@ -220,6 +230,7 @@ function AppContent() {
           <Route path="/treinamento" element={<Treinamento />} />
           <Route path="/logs" element={<Logs />} />
           <Route path="/kb" element={<KnowledgeBase />} />
+          <Route path="/varco" element={<VarcoMonitor />} />
           <Route path="/config" element={<Configuracoes />} />
 
 

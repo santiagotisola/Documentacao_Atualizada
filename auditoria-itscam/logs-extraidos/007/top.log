@@ -1,0 +1,136 @@
+top - 13:42:42 up 23:01,  1 user,  load average: 6.89, 5.79, 5.64
+Tasks: 126 total,   2 running,  65 sleeping,   0 stopped,   6 zombie
+%Cpu0  :  18.6/17.4   36[|||||||||||||||||||                                  ]
+%Cpu1  :  31.6/20.7   52[||||||||||||||||||||||||||||                         ]
+%Cpu2  :  34.2/21.1   55[|||||||||||||||||||||||||||||                        ]
+%Cpu3  :  38.3/21.9   60[||||||||||||||||||||||||||||||||                     ]
+GiB Mem : 45.1/1.708    [                                                     ]
+GiB Swap:  0.0/0.000    [                                                     ]
+
+  PID USER      PR  NI    VIRT    RES  %CPU %MEM     TIME+ S COMMAND
+    1 root      20   0   27.3m   5.8m   0.0  0.3   0:43.48 S systemd
+  197 root      20   0  123.5m  71.5m   0.0  4.1   2:27.65 S  `- systemd-journ+
+  209 root      20   0   16.0m   4.0m   0.0  0.2   0:00.61 S  `- systemd-udevd
+  215 systemd+  20   0    7.2m   3.2m   0.0  0.2   0:00.39 S  `- systemd-netwo+
+  278 systemd+  20   0   10.7m   4.1m   0.0  0.2   0:00.54 S  `- systemd-resol+
+  279 root      20   0    2.3m   0.4m   0.0  0.0   0:00.01 S  `- login
+  361 root      20   0   11.4m   8.6m   0.0  0.5   0:00.39 S      `- camera-cli
+  283 dbus      20   0    5.0m   2.9m   0.0  0.2   1:46.24 S  `- dbus-daemon
+  286 root      20   0    6.7m   1.6m   0.0  0.1   0:00.85 S  `- systemd-logind
+  302 root      20   0   45.3m  10.7m   0.0  0.6   3:02.76 S  `- NetworkManager
+  303 root      20   0   47.3m   5.6m   0.0  0.3   8:06.83 S  `- swupdate
+  326 root      20   0   28.3m   5.0m   0.0  0.3  14:23.99 S      `- swupdate
+  313 redis     20   0   29.3m   3.4m   3.6  0.2  33:41.66 S  `- redis-server
+  334 root      20   0    7.6m   6.1m   0.0  0.3   6:03.74 S  `- python3
+  337 root      20   0 1224.5m  89.0m  75.0  5.1  73:53.95 S  `- node
+  725 root      20   0    2.3m   0.3m   0.0  0.0   0:00.02 S      `- sh
+  726 root      20   0   38.6m   5.9m  50.0  0.3   0:00.26 R          `- journ+
+  727 root      20   0    2.4m   1.4m  14.3  0.1   0:00.08 S          `- gzip
+  728 root      20   0    2.3m   0.4m   0.0  0.0   0:00.01 S      `- sh
+  730 root      20   0    5.1m   2.2m  21.4  0.1   0:00.11 R          `- top
+  729 root      20   0    0.0m   0.0m   0.0  0.0   0:00.01 Z      `- sh
+  732 root      20   0    0.0m   0.0m   0.0  0.0   0:00.01 Z      `- sh
+  734 root      20   0    0.0m   0.0m   3.6  0.0   0:00.01 Z      `- sh
+  736 root      20   0    0.0m   0.0m   3.6  0.0   0:00.01 Z      `- sh
+  738 root      20   0    0.0m   0.0m   3.6  0.0   0:00.01 Z      `- sh
+  739 root      20   0    0.0m   0.0m   3.6  0.0   0:00.01 Z      `- sh
+  742 root      20   0    2.3m   0.4m   7.1  0.0   0:00.02 S      `- sh
+  340 root      20   0    5.3m   3.6m   0.0  0.2   0:00.45 S  `- sshd
+  367 root      20   0 1374.2m 634.5m 114.3 36.3   2530:17 S  `- itscamd
+  368 root      20   0   15.8m  11.4m   0.0  0.7   0:02.12 S  `- python3
+  709 root      20   0   12.1m   1.9m   0.0  0.1   0:00.19 S  `- chronyd
+  785 root      20   0  495.2m  77.3m   0.0  4.4  24:20.46 S  `- fail2ban-serv+
+ 1965 root      20   0  526.8m  11.6m   0.0  0.7  43:20.40 S  `- varco-device
+    2 root      20   0    0.0m   0.0m   0.0  0.0   0:00.27 S kthreadd
+    3 root       0 -20    0.0m   0.0m   0.0  0.0   0:00.00 I  `- rcu_gp
+    4 root       0 -20    0.0m   0.0m   0.0  0.0   0:00.00 I  `- rcu_par_gp
+    8 root       0 -20    0.0m   0.0m   0.0  0.0   0:00.00 I  `- mm_percpu_wq
+    9 root      20   0    0.0m   0.0m   0.0  0.0   2:52.00 S  `- ksoftirqd/0
+   10 root      20   0    0.0m   0.0m   0.0  0.0   7:14.27 I  `- rcu_preempt
+   11 root      20   0    0.0m   0.0m   0.0  0.0   0:00.01 I  `- rcu_sched
+   12 root      20   0    0.0m   0.0m   0.0  0.0   0:00.00 I  `- rcu_bh
+   13 root      rt   0    0.0m   0.0m   0.0  0.0   0:33.91 S  `- migration/0
+   14 root      20   0    0.0m   0.0m   0.0  0.0   0:00.00 S  `- cpuhp/0
+   15 root      20   0    0.0m   0.0m   0.0  0.0   0:00.00 S  `- cpuhp/1
+   16 root      rt   0    0.0m   0.0m   0.0  0.0   0:18.28 S  `- migration/1
+   17 root      20   0    0.0m   0.0m   0.0  0.0   0:10.10 S  `- ksoftirqd/1
+   20 root      20   0    0.0m   0.0m   0.0  0.0   0:00.00 S  `- cpuhp/2
+   21 root      rt   0    0.0m   0.0m   0.0  0.0   0:17.02 S  `- migration/2
+   22 root      20   0    0.0m   0.0m   0.0  0.0   0:07.54 S  `- ksoftirqd/2
+   25 root      20   0    0.0m   0.0m   0.0  0.0   0:00.00 S  `- cpuhp/3
+   26 root      rt   0    0.0m   0.0m   0.0  0.0   0:18.69 S  `- migration/3
+   27 root      20   0    0.0m   0.0m   0.0  0.0   0:07.72 S  `- ksoftirqd/3
+   30 root      20   0    0.0m   0.0m   0.0  0.0   0:00.00 S  `- kdevtmpfs
+   32 root       0 -20    0.0m   0.0m   0.0  0.0   0:00.00 I  `- netns
+   33 root      20   0    0.0m   0.0m   0.0  0.0   0:00.00 S  `- rcu_tasks_kth+
+   34 root      20   0    0.0m   0.0m   0.0  0.0   1:09.94 I  `- kworker/0:1-e+
+   35 root      20   0    0.0m   0.0m   0.0  0.0   3:54.57 D  `- kworker/1:1+e+
+   36 root      20   0    0.0m   0.0m   0.0  0.0   0:00.00 S  `- oom_reaper
+   37 root       0 -20    0.0m   0.0m   0.0  0.0   0:00.00 I  `- writeback
+   38 root      20   0    0.0m   0.0m   0.0  0.0   0:00.00 S  `- kcompactd0
+   39 root      25   5    0.0m   0.0m   0.0  0.0   0:00.00 S  `- ksmd
+   40 root       0 -20    0.0m   0.0m   0.0  0.0   0:00.00 I  `- crypto
+   41 root       0 -20    0.0m   0.0m   0.0  0.0   0:00.00 I  `- kblockd
+   42 root      20   0    0.0m   0.0m   0.0  0.0   0:00.00 S  `- kconsole
+   43 root       0 -20    0.0m   0.0m   0.0  0.0   0:00.00 I  `- devfreq_wq
+   44 root      20   0    0.0m   0.0m   0.0  0.0   0:02.23 I  `- kworker/2:1-pm
+   45 root      rt   0    0.0m   0.0m   0.0  0.0   0:04.41 S  `- watchdogd
+   46 root       0 -20    0.0m   0.0m   0.0  0.0   0:00.00 I  `- cfg80211
+   47 root      20   0    0.0m   0.0m   0.0  0.0   0:00.00 S  `- kswapd0
+   48 root     -51   0    0.0m   0.0m   0.0  0.0   0:00.00 S  `- irq/72-rockch+
+   49 root     -51   0    0.0m   0.0m   0.0  0.0   0:00.00 S  `- irq/73-rockch+
+   50 root       0 -20    0.0m   0.0m   0.0  0.0   0:00.00 I  `- rkvdec
+   51 root     -51   0    0.0m   0.0m   0.0  0.0   0:00.00 S  `- irq/54-ffb800+
+   54 root       0 -20    0.0m   0.0m   0.0  0.0   0:00.00 I  `- iommu_wq
+   55 root       0 -20    0.0m   0.0m   0.0  0.0   0:00.00 I  `- vdpu
+   56 root     -51   0    0.0m   0.0m   0.0  0.0   0:00.00 S  `- irq/57-ffb904+
+   57 root       0 -20    0.0m   0.0m   0.0  0.0   0:00.00 I  `- vepu
+   58 root     -51   0    0.0m   0.0m   0.0  0.0   0:18.34 S  `- irq/56-ffb900+
+   59 root       0 -20    0.0m   0.0m   0.0  0.0   0:00.00 I  `- iep
+   60 root     -51   0    0.0m   0.0m   0.0  0.0   0:00.00 S  `- irq/45-ffb200+
+   61 root      20   0    0.0m   0.0m   0.0  0.0   0:00.00 S  `- hwrng
+   64 root     -51   0    0.0m   0.0m   0.0  0.0   0:00.00 S  `- irq/75-rk817
+   65 root       0 -20    0.0m   0.0m   0.0  0.0   0:00.00 I  `- rkisp bridge +
+   66 root     -51   0    0.0m   0.0m   0.0  0.0   0:24.19 S  `- irq/38-rockch+
+   67 root     -51   0    0.0m   0.0m   0.0  0.0   5:41.45 S  `- irq/39-rockch+
+   68 root       0 -20    0.0m   0.0m   0.0  0.0   0:00.00 I  `- dm_bufio_cache
+   69 root      20   0    0.0m   0.0m   0.0  0.0   2:44.17 D  `- kworker/1:2+e+
+   70 root       0 -20    0.0m   0.0m   0.0  0.0   0:00.00 I  `- ipv6_addrconf
+   71 root      10 -10    0.0m   0.0m   0.0  0.0   0:00.00 S  `- krfcommd
+   74 root     -51   0    0.0m   0.0m   0.0  0.0   0:00.00 S  `- irq/41-rga
+   75 root       0 -20    0.0m   0.0m   0.0  0.0   0:00.00 I  `- mmc_complete
+   76 root       0 -20    0.0m   0.0m   0.0  0.0   0:10.18 I  `- kworker/1:1H-+
+   78 root       0 -20    0.0m   0.0m   0.0  0.0   0:00.00 I  `- rkvenc
+   79 root       0 -20    0.0m   0.0m   0.0  0.0   0:00.00 I  `- iommu_wq
+   80 root     -51   0    0.0m   0.0m   0.0  0.0   0:00.00 S  `- irq/59-ffbb00+
+   84 root       0 -20    0.0m   0.0m   0.0  0.0   0:06.05 I  `- kworker/3:1H-+
+  138 root      20   0    0.0m   0.0m   0.0  0.0   0:07.83 S  `- jbd2/mmcblk0p+
+  139 root       0 -20    0.0m   0.0m   0.0  0.0   0:00.00 I  `- ext4-rsv-conv+
+  269 root      20   0    0.0m   0.0m   0.0  0.0   0:00.00 S  `- jbd2/mmcblk0p+
+  270 root       0 -20    0.0m   0.0m   0.0  0.0   0:00.00 I  `- ext4-rsv-conv+
+  271 root      20   0    0.0m   0.0m   0.0  0.0   0:00.00 S  `- jbd2/mmcblk0p+
+  272 root       0 -20    0.0m   0.0m   0.0  0.0   0:00.00 I  `- ext4-rsv-conv+
+  291 root       0 -20    0.0m   0.0m   0.0  0.0   0:00.00 I  `- npu_power_off+
+  292 root       0 -20    0.0m   0.0m   0.0  0.0   0:00.00 I  `- galcore workq+
+  293 root       0 -20    0.0m   0.0m   0.0  0.0   1:41.92 S  `- galcore_deamo+
+  298 root       0 -20    0.0m   0.0m   0.0  0.0   0:00.00 I  `- stmmac_wq
+  783 root      20   0    0.0m   0.0m   0.0  0.0   0:02.31 I  `- kworker/1:4-m+
+ 1783 root       0 -20    0.0m   0.0m   0.0  0.0   0:02.19 I  `- kworker/2:0H-+
+  809 root      20   0    0.0m   0.0m   0.0  0.0   0:00.00 I  `- kworker/2:2-c+
+  304 root      20   0    0.0m   0.0m   0.0  0.0   0:00.00 I  `- kworker/0:2-c+
+  696 root       0 -20    0.0m   0.0m   0.0  0.0   0:00.30 I  `- kworker/0:0H-+
+  899 root      20   0    0.0m   0.0m   0.0  0.0   0:00.00 I  `- kworker/1:0
+ 1943 root       0 -20    0.0m   0.0m   0.0  0.0   0:00.17 I  `- kworker/0:3H-+
+ 2947 root      20   0    0.0m   0.0m   0.0  0.0   0:00.31 I  `- kworker/3:2-m+
+ 3035 root      20   0    0.0m   0.0m   0.0  0.0   0:02.04 I  `- kworker/u8:2-+
+ 3377 root      20   0    0.0m   0.0m   0.0  0.0   0:00.00 I  `- kworker/3:0-c+
+ 3412 root      20   0    0.0m   0.0m   0.0  0.0   0:00.96 I  `- kworker/u8:1-+
+ 3632 root       0 -20    0.0m   0.0m   0.0  0.0   0:00.00 I  `- kworker/2:2H
+ 3645 root       0 -20    0.0m   0.0m   3.6  0.0   0:00.02 I  `- kworker/0:1H-+
+ 3676 root       0 -20    0.0m   0.0m   0.0  0.0   0:00.00 I  `- kworker/1:2H
+ 3722 root       0 -20    0.0m   0.0m   0.0  0.0   0:00.00 I  `- kworker/3:2H
+ 3785 root      20   0    0.0m   0.0m   0.0  0.0   0:00.12 I  `- kworker/3:1-e+
+ 3869 root      20   0    0.0m   0.0m   0.0  0.0   0:00.50 I  `- kworker/u8:0-+
+ 4052 root       0 -20    0.0m   0.0m   0.0  0.0   0:00.00 I  `- kworker/0:2H
+  520 root       0 -20    0.0m   0.0m   0.0  0.0   0:00.00 I  `- kworker/2:1H
+  635 root       0 -20    0.0m   0.0m   0.0  0.0   0:00.00 I  `- kworker/1:0H

@@ -1,0 +1,210 @@
+{
+  "modulo": "erp-conector",
+  "versao": "1.0.0",
+  "descricao": "Conector genérico para ERPs e sistemas de gestão. Permite consultar estoque, financeiro, clientes, vendas de qualquer ERP via adaptador padronizado. Inclui exemplos para sistemas de farmácia, varejo e indústria.",
+  "tipos_erp_suportados": {
+    "sistemas_farmacia": {
+      "exemplos": ["TekFarma", "Trier", "Softpharma", "Linx", "HiDoctor"],
+      "modulos_comuns": ["vendas", "estoque", "financeiro", "sngpc", "pbm", "fiscal", "receitas", "farmacia_popular"]
+    },
+    "sistemas_varejo": {
+      "exemplos": ["Bling", "Tiny", "Mercos", "ContaAzul", "Nuvemshop"],
+      "modulos_comuns": ["vendas", "estoque", "financeiro", "nfe", "clientes", "pedidos"]
+    },
+    "sistemas_industria": {
+      "exemplos": ["TOTVS", "SAP", "Sankhya", "Senior", "Mega"],
+      "modulos_comuns": ["producao", "estoque", "compras", "financeiro", "rh", "fiscal", "qualidade"]
+    },
+    "sistemas_saude": {
+      "exemplos": ["MV", "Tasy", "Soul MV", "Philips Tasy"],
+      "modulos_comuns": ["pacientes", "prontuario", "agendamento", "faturamento", "estoque"]
+    }
+  },
+  "interface_unificada_erp": {
+    "descricao": "Operações padronizadas que qualquer ERP deve implementar via adaptador",
+    "modulo_estoque": {
+      "operacoes": [
+        {
+          "operacao": "consultarProduto",
+          "parametros": {"codigo": "string?", "nome": "string?", "ean": "string?"},
+          "retorno": {
+            "codigo": "string",
+            "nome": "string",
+            "ean": "string?",
+            "estoque_atual": "number",
+            "estoque_minimo": "number",
+            "preco_venda": "number",
+            "preco_custo": "number",
+            "categoria": "string",
+            "fornecedor": "string?",
+            "localizacao": "string?",
+            "validade": "date?",
+            "controlado": "boolean",
+            "ativo": "boolean"
+          }
+        },
+        {
+          "operacao": "listarEstoqueBaixo",
+          "descricao": "Produtos com estoque abaixo do mínimo",
+          "retorno": [{"codigo": "string", "nome": "string", "estoque_atual": "number", "estoque_minimo": "number"}]
+        },
+        {
+          "operacao": "movimentarEstoque",
+          "parametros": {"codigo": "string", "quantidade": "number", "tipo": "entrada|saida", "motivo": "string"},
+          "retorno": {"sucesso": true, "estoque_anterior": "number", "estoque_novo": "number"}
+        }
+      ]
+    },
+    "modulo_financeiro": {
+      "operacoes": [
+        {
+          "operacao": "consultarContasReceber",
+          "parametros": {"cliente_id": "string?", "vencimento_de": "date?", "vencimento_ate": "date?", "status": "aberto|pago|vencido"},
+          "retorno": [{"id": "string", "cliente": "string", "valor": "number", "vencimento": "date", "status": "string"}]
+        },
+        {
+          "operacao": "consultarContasPagar",
+          "parametros": {"fornecedor_id": "string?", "vencimento_de": "date?", "vencimento_ate": "date?"},
+          "retorno": [{"id": "string", "fornecedor": "string", "valor": "number", "vencimento": "date", "status": "string"}]
+        },
+        {
+          "operacao": "fluxoCaixa",
+          "parametros": {"periodo_de": "date", "periodo_ate": "date"},
+          "retorno": {"entradas": "number", "saidas": "number", "saldo": "number", "detalhamento": []}
+        }
+      ]
+    },
+    "modulo_vendas": {
+      "operacoes": [
+        {
+          "operacao": "registrarVenda",
+          "parametros": {
+            "cliente_id": "string?",
+            "itens": [{"codigo": "string", "quantidade": "number", "preco_unitario": "number", "desconto": "number?"}],
+            "forma_pagamento": "dinheiro|cartao_credito|cartao_debito|pix|boleto",
+            "observacao": "string?"
+          },
+          "retorno": {"venda_id": "string", "total": "number", "nfe_numero": "string?"}
+        },
+        {
+          "operacao": "consultarVendas",
+          "parametros": {"data_de": "date", "data_ate": "date", "cliente_id": "string?"},
+          "retorno": [{"id": "string", "data": "date", "cliente": "string", "total": "number", "itens_qtd": "number"}]
+        },
+        {
+          "operacao": "rankingProdutos",
+          "parametros": {"periodo_dias": 30, "limite": 20},
+          "retorno": [{"codigo": "string", "nome": "string", "quantidade_vendida": "number", "faturamento": "number"}]
+        }
+      ]
+    },
+    "modulo_clientes": {
+      "operacoes": [
+        {
+          "operacao": "buscarCliente",
+          "parametros": {"cpf_cnpj": "string?", "nome": "string?", "telefone": "string?"},
+          "retorno": {"id": "string", "nome": "string", "cpf_cnpj": "string", "telefone": "string", "email": "string?", "endereco": "object", "compras_total": "number"}
+        },
+        {
+          "operacao": "cadastrarCliente",
+          "parametros": {"nome": "string", "cpf_cnpj": "string", "telefone": "string?", "email": "string?", "endereco": "object?"}
+        },
+        {
+          "operacao": "historicoCliente",
+          "parametros": {"cliente_id": "string", "limite": 50},
+          "retorno": [{"tipo": "venda|devolucao|chamado", "data": "date", "descricao": "string", "valor": "number?"}]
+        }
+      ]
+    }
+  },
+  "adaptador_exemplo_farmacia": {
+    "descricao": "Exemplo concreto de como adaptar para um sistema de farmácia tipo TekFarma",
+    "modulos_especificos": {
+      "sngpc": {
+        "operacoes": [
+          {"operacao": "registrarReceita", "parametros": {"crm_medico": "string", "tipo_receita": "A|B|C", "paciente": "string", "medicamentos": ["array"]}},
+          {"operacao": "gerarRelatorioSNGPC", "parametros": {"mes": "number", "ano": "number"}, "retorno": {"bmpo": "file", "bspo": "file", "rmnra": "file"}}
+        ]
+      },
+      "pbm": {
+        "operacoes": [
+          {"operacao": "consultarBeneficio", "parametros": {"cpf": "string", "pbm_operadora": "string"}, "retorno": {"autorizado": "boolean", "desconto": "number", "medicamentos_cobertos": ["array"]}},
+          {"operacao": "autorizarVendaPBM", "parametros": {"transacao_id": "string", "medicamento": "string", "quantidade": "number"}}
+        ]
+      },
+      "farmacia_popular": {
+        "operacoes": [
+          {"operacao": "consultarElegibilidade", "parametros": {"cpf": "string", "medicamento_ean": "string"}},
+          {"operacao": "registrarDispensacao", "parametros": {"cpf": "string", "receita_id": "string", "medicamentos": ["array"]}}
+        ]
+      }
+    }
+  },
+  "como_conectar_qualquer_erp": {
+    "passo_a_passo": [
+      {
+        "passo": 1,
+        "titulo": "Identificar tipo de API do ERP",
+        "opcoes": [
+          {"tipo": "REST API", "descricao": "O ERP expõe endpoints HTTP (mais comum em sistemas modernos)"},
+          {"tipo": "SOAP/XML", "descricao": "APIs XML antigas (TOTVS Protheus, alguns legados)"},
+          {"tipo": "Banco direto", "descricao": "Conectar diretamente ao banco SQL do ERP (quando não tem API)"},
+          {"tipo": "Arquivo/FTP", "descricao": "Troca de arquivos CSV/XML via pasta ou FTP"},
+          {"tipo": "Webhook", "descricao": "ERP envia notificações quando algo muda"}
+        ]
+      },
+      {
+        "passo": 2,
+        "titulo": "Criar adaptador",
+        "descricao": "Implementar a interface unificada (acima) traduzindo para o formato do ERP específico",
+        "exemplo": {
+          "interface": "consultarProduto({codigo})",
+          "adaptador_tekfarma": "GET https://api.tekfarma.local/produtos/{codigo}",
+          "adaptador_totvs": "GET https://totvs.empresa.com/api/framework/v1/products/{codigo}",
+          "adaptador_sql_direto": "SELECT * FROM Produtos WHERE Codigo = @codigo"
+        }
+      },
+      {
+        "passo": 3,
+        "titulo": "Configurar na tabela de relacionamento",
+        "descricao": "Adicionar credenciais e URLs no módulo 07 (tabela-relacionamento-sistemas.json)"
+      },
+      {
+        "passo": 4,
+        "titulo": "Testar conexão",
+        "endpoint_teste": "GET /api/erp/status",
+        "retorno_esperado": {"conectado": true, "sistema": "TekFarma", "versao": "3.2.1", "modulos_disponiveis": ["estoque", "vendas", "financeiro"]}
+      }
+    ]
+  },
+  "api_endpoints_erp": [
+    {"metodo": "GET", "rota": "/api/erp/status", "descricao": "Testa conexão com ERP"},
+    {"metodo": "GET", "rota": "/api/erp/estoque/:codigo", "descricao": "Consulta estoque de produto"},
+    {"metodo": "GET", "rota": "/api/erp/estoque/baixo", "descricao": "Produtos abaixo do mínimo"},
+    {"metodo": "GET", "rota": "/api/erp/vendas", "descricao": "Histórico de vendas", "query": "data_de, data_ate, cliente_id"},
+    {"metodo": "GET", "rota": "/api/erp/financeiro/receber", "descricao": "Contas a receber"},
+    {"metodo": "GET", "rota": "/api/erp/financeiro/pagar", "descricao": "Contas a pagar"},
+    {"metodo": "GET", "rota": "/api/erp/financeiro/fluxo", "descricao": "Fluxo de caixa"},
+    {"metodo": "GET", "rota": "/api/erp/clientes/:id", "descricao": "Dados do cliente"},
+    {"metodo": "GET", "rota": "/api/erp/clientes/:id/historico", "descricao": "Histórico do cliente"},
+    {"metodo": "POST", "rota": "/api/erp/vendas", "descricao": "Registrar venda"},
+    {"metodo": "GET", "rota": "/api/erp/ranking/produtos", "descricao": "Ranking de produtos mais vendidos"}
+  ],
+  "integracao_ia_erp": {
+    "descricao": "Como o motor IA usa dados do ERP para responder perguntas",
+    "exemplos_perguntas": [
+      {
+        "pergunta": "Tem dipirona em estoque?",
+        "fluxo": "engine detecta intenção 'consulta_estoque' → chama erp.consultarProduto({nome: 'dipirona'}) → retorna quantidade"
+      },
+      {
+        "pergunta": "Qual o faturamento de ontem?",
+        "fluxo": "engine detecta intenção 'consulta_financeiro' → chama erp.consultarVendas({data: ontem}) → soma totais → responde"
+      },
+      {
+        "pergunta": "O cliente João tem débito?",
+        "fluxo": "engine detecta intenção 'consulta_financeiro' → chama erp.consultarContasReceber({nome: 'João', status: 'vencido'}) → lista"
+      }
+    ]
+  }
+}

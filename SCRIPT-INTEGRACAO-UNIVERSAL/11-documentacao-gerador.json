@@ -1,0 +1,148 @@
+{
+  "modulo": "documentacao-gerador",
+  "versao": "1.0.0",
+  "descricao": "Gerador automatizado de documentação e manuais de usuário. A partir de screenshots, dados do sistema ou texto, gera documentação completa em Markdown/MDX para portais Docusaurus, PDF ou Word.",
+  "fluxo_geracao_manual": {
+    "descricao": "Passo a passo para gerar um manual completo de qualquer sistema",
+    "etapas": [
+      {
+        "etapa": 1,
+        "nome": "Captura de contexto",
+        "opcoes": [
+          {"metodo": "screenshots", "descricao": "Fornecer capturas de tela de cada funcionalidade", "formato": "PNG/JPG, organizadas por módulo"},
+          {"metodo": "api_specs", "descricao": "Fornecer OpenAPI/Swagger do sistema", "formato": "JSON/YAML"},
+          {"metodo": "texto_livre", "descricao": "Descrever funcionalidades em texto", "formato": "Markdown ou texto"},
+          {"metodo": "video", "descricao": "Gravar vídeo navegando pelo sistema (futuro)", "formato": "MP4"}
+        ]
+      },
+      {
+        "etapa": 2,
+        "nome": "Processamento IA",
+        "descricao": "A IA analisa o contexto fornecido e gera conteúdo estruturado",
+        "prompt_geracao": "Analise estas informações sobre o módulo '{modulo}' do sistema '{sistema}'. Gere documentação completa incluindo: 1) Visão geral da funcionalidade, 2) Pré-requisitos, 3) Passo a passo com referência às imagens, 4) Dicas e boas práticas, 5) Problemas comuns e soluções. Formato: Markdown com frontmatter Docusaurus."
+      },
+      {
+        "etapa": 3,
+        "nome": "Estruturação",
+        "descricao": "Organizar em estrutura de navegação do portal",
+        "estrutura_padrao": {
+          "intro.md": "Visão geral do produto",
+          "instalacao.md": "Requisitos e instalação",
+          "primeiros-passos.md": "Guia rápido inicial",
+          "modulos/": {
+            "[modulo-nome]/": {
+              "visao-geral.md": "O que é e para que serve",
+              "como-usar.md": "Tutorial passo a passo",
+              "configuracao.md": "Opções avançadas",
+              "faq.md": "Perguntas frequentes"
+            }
+          },
+          "integracoes.md": "Como integrar com outros sistemas",
+          "api-referencia.md": "Referência da API (se aplicável)",
+          "changelog.md": "Histórico de versões"
+        }
+      },
+      {
+        "etapa": 4,
+        "nome": "Exportação",
+        "opcoes_saida": [
+          {"formato": "docusaurus", "descricao": "Site de docs estático (React/MDX)", "comando_deploy": "npm run build"},
+          {"formato": "pdf", "descricao": "Documento PDF formatado (via Puppeteer)", "uso": "Entrega a clientes, impressão"},
+          {"formato": "docx", "descricao": "Word editável", "uso": "Quando cliente precisa editar"},
+          {"formato": "html_single", "descricao": "HTML única página", "uso": "Embutir em sistema"}
+        ]
+      }
+    ]
+  },
+  "catalogo_imagens": {
+    "descricao": "Mapeamento de screenshots disponíveis por produto e módulo",
+    "schema": {
+      "produto": "string (nome do sistema)",
+      "modulos": [
+        {
+          "nome": "string",
+          "imagens": [
+            {
+              "arquivo": "NomeDoArquivo.png",
+              "descricao_ia": "string (gerada pela IA ao analisar a imagem)",
+              "tela": "string (qual tela do sistema)",
+              "ordem": "number (sequência no tutorial)"
+            }
+          ]
+        }
+      ]
+    },
+    "como_popular": [
+      "1. Criar pasta por produto: /docs/imagens/{produto}/",
+      "2. Nomear screenshots descritivamente: Login.png, Dashboard-Vendas.png, etc.",
+      "3. Chamar POST /api/doc/gerar-catalogo com caminho da pasta",
+      "4. IA analisa cada imagem e gera descrição + associação de tela"
+    ]
+  },
+  "frontmatter_docusaurus": {
+    "descricao": "Metadados que cada página de docs deve ter",
+    "template": {
+      "---": "",
+      "id": "identificador-unico",
+      "title": "Título da Página",
+      "sidebar_label": "Label curto no menu",
+      "sidebar_position": 1,
+      "description": "Descrição para SEO",
+      "tags": ["tag1", "tag2"],
+      "---": ""
+    }
+  },
+  "api_endpoints_docs": [
+    {
+      "metodo": "POST",
+      "rota": "/api/doc/gerar",
+      "descricao": "Gerar documentação de um módulo via IA",
+      "body": {
+        "produto": "string",
+        "modulo": "string",
+        "tipo": "tutorial|referencia|guia|faq",
+        "contexto": "string? (texto adicional)",
+        "imagens": ["string[]? (nomes dos arquivos de imagem)"]
+      },
+      "retorno": {"markdown": "string", "titulo": "string", "imagens_referenciadas": ["string[]"]}
+    },
+    {
+      "metodo": "POST",
+      "rota": "/api/doc/salvar",
+      "descricao": "Salvar documentação gerada no portal",
+      "body": {"produto": "string", "modulo": "string", "conteudo": "string (markdown)", "arquivo": "string (nome.md)"}
+    },
+    {
+      "metodo": "GET",
+      "rota": "/api/doc/imagens/:produto",
+      "descricao": "Listar screenshots disponíveis para um produto"
+    },
+    {
+      "metodo": "GET",
+      "rota": "/api/doc/secoes/:produto",
+      "descricao": "Listar seções/módulos já documentados"
+    },
+    {
+      "metodo": "POST",
+      "rota": "/api/doc/upload-contexto",
+      "descricao": "Upload de arquivo (PDF, DOCX) para usar como contexto na geração"
+    },
+    {
+      "metodo": "POST",
+      "rota": "/api/doc/exportar-pdf",
+      "descricao": "Exportar documentação como PDF",
+      "body": {"produto": "string", "modulos": ["string[]? (vazio = todos)"], "template_capa": "string?"}
+    }
+  ],
+  "integracao_conhecimento": {
+    "descricao": "Documentação gerada alimenta a Knowledge Base do motor IA",
+    "fluxo": [
+      "1. Manual gerado → Markdown com seções",
+      "2. Cada seção vira uma entrada na KB (módulo 01)",
+      "3. Perguntas são derivadas do título/conteúdo",
+      "4. Embeddings são gerados automaticamente",
+      "5. Quando cliente pergunta no WhatsApp/Chat → IA busca na KB → Encontra no manual"
+    ],
+    "beneficio": "O manual que você gera AUTOMATICAMENTE treina o assistente IA para responder perguntas sobre aquele assunto"
+  }
+}

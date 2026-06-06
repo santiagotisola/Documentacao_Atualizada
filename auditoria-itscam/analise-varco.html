@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Análise VARCO — ITScam 450 Fleet</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Segoe UI', system-ui, sans-serif; background: #0f172a; color: #e2e8f0; min-height: 100vh; }
+.header { background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%); border-bottom: 1px solid #334155; padding: 24px 32px; }
+.header h1 { font-size: 1.5rem; color: #f1f5f9; margin-bottom: 4px; }
+.header .subtitle { color: #94a3b8; font-size: 0.875rem; }
+.dashboard { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 16px; padding: 24px 32px; }
+.card { background: #1e293b; border: 1px solid #334155; border-radius: 12px; padding: 20px; text-align: center; }
+.card .number { font-size: 2.5rem; font-weight: 700; }
+.card .label { color: #94a3b8; font-size: 0.8rem; margin-top: 4px; text-transform: uppercase; letter-spacing: 0.5px; }
+.card.ok .number { color: #4ade80; }
+.card.warn .number { color: #fbbf24; }
+.card.err .number { color: #f87171; }
+.card.info .number { color: #60a5fa; }
+.container { padding: 0 32px 32px; }
+.tabs { display: flex; gap: 4px; margin-bottom: 20px; flex-wrap: wrap; }
+.tab { padding: 10px 20px; background: #1e293b; border: 1px solid #334155; border-radius: 8px; cursor: pointer; font-size: 0.85rem; color: #94a3b8; transition: all 0.2s; }
+.tab:hover { background: #334155; color: #e2e8f0; }
+.tab.active { background: #3b82f6; border-color: #3b82f6; color: #fff; }
+.panel { display: none; }
+.panel.active { display: block; }
+table { width: 100%; border-collapse: collapse; font-size: 0.8rem; }
+th { background: #1e293b; color: #94a3b8; text-transform: uppercase; font-size: 0.7rem; letter-spacing: 0.5px; padding: 10px 12px; text-align: left; position: sticky; top: 0; z-index: 10; }
+td { padding: 8px 12px; border-bottom: 1px solid #1e293b; }
+tr:hover td { background: #1e293b; }
+.badge { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 0.7rem; font-weight: 600; }
+.badge-ok { background: #064e3b; color: #4ade80; }
+.badge-warn { background: #451a03; color: #fbbf24; }
+.badge-err { background: #450a0a; color: #f87171; }
+.badge-null { background: #1e1b4b; color: #a78bfa; }
+.group-header { background: #1e293b; padding: 16px 20px; border-radius: 8px; margin-bottom: 12px; border-left: 4px solid #3b82f6; }
+.group-header h3 { font-size: 1rem; margin-bottom: 6px; }
+.group-header .equips { color: #94a3b8; font-size: 0.8rem; line-height: 1.6; }
+.diff-table { margin-bottom: 24px; background: #1e293b; border-radius: 8px; overflow: hidden; }
+.diff-table table { margin: 0; }
+.diff-table th { background: #334155; }
+.val-wrong { color: #f87171; font-weight: 600; }
+.val-correct { color: #4ade80; }
+.filter-bar { display: flex; gap: 12px; margin-bottom: 16px; align-items: center; flex-wrap: wrap; }
+.filter-bar input, .filter-bar select { background: #1e293b; border: 1px solid #334155; color: #e2e8f0; padding: 8px 14px; border-radius: 6px; font-size: 0.85rem; }
+.filter-bar input { min-width: 250px; }
+.filter-bar select { min-width: 160px; }
+.param-dist { margin-bottom: 20px; }
+.param-dist h4 { color: #60a5fa; font-size: 0.9rem; margin-bottom: 8px; padding: 8px 12px; background: #1e293b; border-radius: 6px; }
+.bar-container { display: flex; align-items: center; gap: 8px; margin-bottom: 4px; padding: 4px 12px; }
+.bar-label { min-width: 180px; font-size: 0.8rem; font-family: monospace; }
+.bar { height: 22px; border-radius: 4px; display: flex; align-items: center; padding: 0 8px; font-size: 0.7rem; font-weight: 600; min-width: 30px; }
+.bar.correct { background: #065f46; color: #4ade80; }
+.bar.wrong { background: #7f1d1d; color: #fca5a5; }
+.bar-count { font-size: 0.75rem; color: #94a3b8; min-width: 40px; }
+.tunnel-link { color: #60a5fa; text-decoration: none; font-size: 0.75rem; }
+.tunnel-link:hover { text-decoration: underline; }
+.search-highlight { background: #fbbf24; color: #000; padding: 0 2px; border-radius: 2px; }
+#loading { text-align: center; padding: 60px; color: #94a3b8; }
+.section-title { font-size: 1.1rem; margin-bottom: 16px; color: #f1f5f9; padding-bottom: 8px; border-bottom: 1px solid #334155; }
+.scroll-table { max-height: 70vh; overflow-y: auto; border-radius: 8px; border: 1px solid #334155; }
+.tooltip { position: relative; cursor: help; }
+.tooltip:hover::after { content: attr(data-tip); position: absolute; bottom: 100%; left: 50%; transform: translateX(-50%); background: #334155; color: #e2e8f0; padding: 4px 8px; border-radius: 4px; font-size: 0.7rem; white-space: nowrap; z-index: 100; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>📡 Análise de Configuração — ITScam 450 / VARCO</h1>
+  <div class="subtitle">SETRANS-GO • Referência: GOEC6O045 - Faixa 1 • Gerado em 05/06/2026</div>
+</div>
+
+<div class="dashboard" id="dashboard"></div>
+
+<div class="container">
+  <div class="tabs" id="tabs">
+    <div class="tab active" data-panel="overview">Visão Geral</div>
+    <div class="tab" data-panel="groups">Grupos de Configuração</div>
+    <div class="tab" data-panel="inventory">Inventário Completo</div>
+    <div class="tab" data-panel="params">Distribuição por Parâmetro</div>
+    <div class="tab" data-panel="tunnels">Túneis VARCO</div>
+  </div>
+
+  <div class="panel active" id="panel-overview"></div>
+  <div class="panel" id="panel-groups"></div>
+  <div class="panel" id="panel-inventory"></div>
+  <div class="panel" id="panel-params"></div>
+  <div class="panel" id="panel-tunnels"></div>
+</div>
+
+<div id="loading">Carregando dados...</div>
+
+<script>
+// Inline data - will be injected
+let DEVICES = [];
+const REF_NAME = 'GOEC6O045 - Faixa 1';
+
+// Extract params from a device
+function extractParams(device) {
+  const p = {};
+  const raw = device.raw;
+  
+  // VARCO
+  if (raw.varco) {
+    p['VARCO.enabled'] = raw.varco.varco?.enabled ?? raw.varco.enabled ?? null;
+    p['VARCO.edgeServer'] = raw.varco.varco?.edgeServer ?? raw.varco.edgeServer ?? null;
+  } else {
+    p['VARCO.enabled'] = null;
+    p['VARCO.edgeServer'] = null;
+  }
+  
+  // Profiles (transitions)
+  if (Array.isArray(raw.profiles) && raw.profiles.length >= 2) {
+    const diurno = raw.profiles[0]?.transitions;
+    const noturno = raw.profiles[1]?.transitions;
+    if (diurno) {
+      p['Diurno.lower.startTime'] = diurno.lower?.startTime ?? null;
+      p['Diurno.lower.endTime'] = diurno.lower?.endTime ?? null;
+      p['Diurno.lower.level'] = diurno.lower?.level ?? null;
+      p['Diurno.lower.holdTime'] = diurno.lower?.holdTime ?? null;
+      p['Diurno.upper.startTime'] = diurno.upper?.startTime ?? null;
+      p['Diurno.upper.endTime'] = diurno.upper?.endTime ?? null;
+      p['Diurno.upper.level'] = diurno.upper?.level ?? null;
+      p['Diurno.upper.holdTime'] = diurno.upper?.holdTime ?? null;
+      p['Diurno.upper.profile'] = diurno.upper?.profile ?? null;
+    }
+    if (noturno) {
+      p['Noturno.lower.startTime'] = noturno.lower?.startTime ?? null;
+      p['Noturno.lower.endTime'] = noturno.lower?.endTime ?? null;
+      p['Noturno.lower.level'] = noturno.lower?.level ?? null;
+      p['Noturno.lower.holdTime'] = noturno.lower?.holdTime ?? null;
+      p['Noturno.upper.startTime'] = noturno.upper?.startTime ?? null;
+      p['Noturno.upper.endTime'] = noturno.upper?.endTime ?? null;
+      p['Noturno.upper.level'] = noturno.upper?.level ?? null;
+      p['Noturno.upper.holdTime'] = noturno.upper?.holdTime ?? null;
+      p['Noturno.upper.profile'] = noturno.upper?.profile ?? null;
+    }
+  } else {
+    ['Diurno.lower.startTime','Diurno.lower.endTime','Diurno.lower.level','Diurno.lower.holdTime',
+     'Diurno.upper.startTime','Diurno.upper.endTime','Diurno.upper.level','Diurno.upper.holdTime','Diurno.upper.profile',
+     'Noturno.lower.startTime','Noturno.lower.endTime','Noturno.lower.level','Noturno.lower.holdTime',
+     'Noturno.upper.startTime','Noturno.upper.endTime','Noturno.upper.level','Noturno.upper.holdTime','Noturno.upper.profile'
+    ].forEach(k => p[k] = null);
+  }
+  
+  // OCR
+  if (raw.ocr?.ocr) {
+    const o = raw.ocr.ocr;
+    p['OCR.enabled'] = o.enabled ?? null;
+    p['OCR.countryCode'] = o.countryCode ?? null;
+    p['OCR.maxPlates'] = o.maxPlates ?? null;
+    p['OCR.lowProbChar'] = o.lowProbChar ?? null;
+    p['OCR.maxLowProbChars'] = o.maxLowProbChars ?? null;
+    p['OCR.processingQueue'] = o.processingQueue ?? null;
+    p['OCR.processingThreads'] = o.processingThreads ?? null;
+    p['OCR.processingMode'] = o.processingMode ?? null;
+    p['OCR.vehicleType'] = o.vehicleType ?? null;
+  } else {
+    ['OCR.enabled','OCR.countryCode','OCR.maxPlates','OCR.lowProbChar','OCR.maxLowProbChars',
+     'OCR.processingQueue','OCR.processingThreads','OCR.processingMode','OCR.vehicleType'
+    ].forEach(k => p[k] = null);
+  }
+  
+  // Classifier
+  if (raw.classifier?.classifier) {
+    const c = raw.classifier.classifier;
+    p['Classificador.enabled'] = c.enabled ?? null;
+    p['Classificador.processingQueue'] = c.processingQueue ?? null;
+    p['Classificador.processingThreads'] = c.processingThreads ?? null;
+    p['Classificador.sceneType'] = c.sceneType ?? null;
+    p['Classificador.minProbability'] = c.minProbability ?? null;
+  } else {
+    ['Classificador.enabled','Classificador.processingQueue','Classificador.processingThreads',
+     'Classificador.sceneType','Classificador.minProbability'
+    ].forEach(k => p[k] = null);
+  }
+  
+  // Misc (SnapshotCrop)
+  if (raw.misc?.snapshotCrop) {
+    p['SnapshotCrop.enable'] = raw.misc.snapshotCrop.enable ?? null;
+    p['SnapshotCrop.mode'] = raw.misc.snapshotCrop.mode ?? null;
+  } else {
+    p['SnapshotCrop.enable'] = null;
+    p['SnapshotCrop.mode'] = null;
+  }
+  
+  // FTP
+  p['FTP.enable'] = raw.ftp?.enable ?? null;
+  
+  // IO Ports
+  if (Array.isArray(raw.ioPorts) && raw.ioPorts.length >= 3) {
+    p['IO.port1.earlyUs'] = raw.ioPorts[0]?.earlyUs;
+    p['IO.port1.isReserved'] = raw.ioPorts[0]?.isReserved;
+    p['IO.port3.earlyUs'] = raw.ioPorts[2]?.earlyUs;
+    p['IO.port3.isReserved'] = raw.ioPorts[2]?.isReserved;
+  } else {
+    p['IO.port1.earlyUs'] = undefined;
+    p['IO.port1.isReserved'] = undefined;
+    p['IO.port3.earlyUs'] = undefined;
+    p['IO.port3.isReserved'] = undefined;
+  }
+  
+  // SNMP
+  p['SNMP.enabled'] = raw.snmp?.enabled ?? null;
+  
+  // Reboot
+  p['Reboot.scheduled.enabled'] = raw.reboot?.scheduled?.enabled ?? null;
+  p['Reboot.periodic.enabled'] = raw.reboot?.periodic?.enabled ?? null;
+  
+  // DateTime
+  p['NTP.server'] = raw.dateTime?.ntp?.server ?? null;
+  p['Timezone'] = raw.dateTime?.timezone ?? null;
+  
+  // Video
+  if (Array.isArray(raw.video) && raw.video.length > 0) {
+    p['Video.framerate'] = raw.video[0]?.framerate ?? null;
+    p['Video.quality'] = raw.video[0]?.quality ?? null;
+    p['Video.useTriggerFrames'] = raw.video[0]?.useTriggerFrames ?? null;
+  } else {
+    p['Video.framerate'] = null;
+    p['Video.quality'] = null;
+    p['Video.useTriggerFrames'] = null;
+  }
+  
+  // Firmware
+  p['Firmware.version'] = raw.firmware?.version ?? null;
+  
+  return p;
+}
+
+function init(data) {
+  DEVICES = data;
+  document.getElementById('loading').style.display = 'none';
+  
+  // Extract all params
+  const allParams = DEVICES.map(d => ({ nome: d.nome, uuid: d.uuid, ip: d.ip, params: extractParams(d) }));
+  
+  // Reference
+  const ref = allParams.find(d => d.nome === REF_NAME);
+  if (!ref) { alert('Referência não encontrada!'); return; }
+  
+  // Compare
+  const results = allParams.map(d => {
+    const diffs = {};
+    let diffCount = 0;
+    for (const [key, refVal] of Object.entries(ref.params)) {
+      const val = d.params[key];
+      if (String(val) !== String(refVal)) {
+        diffs[key] = { atual: val, correto: refVal };
+        diffCount++;
+      }
+    }
+    return { ...d, diffs, diffCount, conforme: diffCount === 0 };
+  });
+  
+  const conformes = results.filter(r => r.conforme);
+  const divergentes = results.filter(r => !r.conforme);
+  
+  // Group by identical diff patterns
+  const groupMap = new Map();
+  divergentes.forEach(d => {
+    const key = Object.entries(d.diffs).map(([k,v]) => `${k}=${v.atual}`).sort().join('|');
+    if (!groupMap.has(key)) groupMap.set(key, { diffs: d.diffs, devices: [] });
+    groupMap.get(key).devices.push(d);
+  });
+  const groups = [...groupMap.values()].sort((a,b) => b.devices.length - a.devices.length);
+  
+  // Dashboard
+  document.getElementById('dashboard').innerHTML = `
+    <div class="card ok"><div class="number">${DEVICES.length}</div><div class="label">Total Dispositivos</div></div>
+    <div class="card ok"><div class="number">${conformes.length}</div><div class="label">100% Conformes</div></div>
+    <div class="card warn"><div class="number">${divergentes.length}</div><div class="label">Com Divergências</div></div>
+    <div class="card info"><div class="number">${groups.length}</div><div class="label">Grupos Distintos</div></div>
+    <div class="card err"><div class="number">${divergentes.reduce((s,d) => s + d.diffCount, 0)}</div><div class="label">Total Divergências</div></div>
+  `;
+  
+  // Overview Panel
+  renderOverview(results, conformes, divergentes, groups, ref);
+  
+  // Groups Panel
+  renderGroups(groups, ref);
+  
+  // Inventory Panel
+  renderInventory(results);
+  
+  // Params Panel
+  renderParams(allParams, ref);
+  
+  // Tunnels Panel
+  renderTunnels();
+  
+  // Tab clicks
+  document.querySelectorAll('.tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+      document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+      document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+      tab.classList.add('active');
+      document.getElementById('panel-' + tab.dataset.panel).classList.add('active');
+    });
+  });
+}
+
+function renderOverview(results, conformes, divergentes, groups, ref) {
+  const panel = document.getElementById('panel-overview');
+  
+  // Reference table
+  let refHtml = `<h3 class="section-title">🎯 Configuração Referência (${REF_NAME})</h3>
+    <div class="scroll-table" style="max-height:400px"><table><thead><tr><th>Seção</th><th>Parâmetro</th><th>Valor</th></tr></thead><tbody>`;
+  
+  const sections = {};
+  for (const [key, val] of Object.entries(ref.params)) {
+    const section = key.split('.')[0];
+    if (!sections[section]) sections[section] = [];
+    sections[section].push({ key, val });
+  }
+  for (const [section, params] of Object.entries(sections)) {
+    params.forEach((p, i) => {
+      refHtml += `<tr><td>${i === 0 ? section : ''}</td><td><code>${p.key}</code></td><td><code>${p.val}</code></td></tr>`;
+    });
+  }
+  refHtml += '</tbody></table></div>';
+  
+  // Top issues
+  let issuesHtml = '<h3 class="section-title" style="margin-top:24px">⚡ Principais Problemas</h3><div class="scroll-table" style="max-height:300px"><table><thead><tr><th>Parâmetro</th><th>Dispositivos Afetados</th><th>% Incorreto</th></tr></thead><tbody>';
+  
+  const paramIssues = {};
+  divergentes.forEach(d => {
+    for (const key of Object.keys(d.diffs)) {
+      if (!paramIssues[key]) paramIssues[key] = 0;
+      paramIssues[key]++;
+    }
+  });
+  const sortedIssues = Object.entries(paramIssues).sort((a,b) => b[1] - a[1]);
+  sortedIssues.forEach(([param, count]) => {
+    const pct = ((count / DEVICES.length) * 100).toFixed(0);
+    issuesHtml += `<tr><td><code>${param}</code></td><td>${count}</td><td><span class="badge ${pct > 30 ? 'badge-err' : 'badge-warn'}">${pct}%</span></td></tr>`;
+  });
+  issuesHtml += '</tbody></table></div>';
+  
+  panel.innerHTML = refHtml + issuesHtml;
+}
+
+function renderGroups(groups, ref) {
+  const panel = document.getElementById('panel-groups');
+  let html = `<h3 class="section-title">📊 ${groups.length} Grupos de Configuração Idêntica</h3>`;
+  
+  groups.forEach((group, i) => {
+    const diffEntries = Object.entries(group.diffs);
+    html += `
+      <div class="group-header">
+        <h3>Grupo ${i+1} — ${group.devices.length} equipamento(s) | ${diffEntries.length} divergência(s)</h3>
+        <div class="equips">${group.devices.map(d => d.nome).join(' • ')}</div>
+      </div>
+      <div class="diff-table"><table><thead><tr><th>Parâmetro</th><th>Valor Atual ❌</th><th>Valor Correto ✅</th></tr></thead><tbody>`;
+    
+    diffEntries.forEach(([key, {atual, correto}]) => {
+      html += `<tr><td><code>${key}</code></td><td class="val-wrong">${atual === null ? 'null' : atual === undefined ? 'undefined' : atual}</td><td class="val-correct">${correto}</td></tr>`;
+    });
+    html += '</tbody></table></div>';
+  });
+  
+  panel.innerHTML = html;
+}
+
+function renderInventory(results) {
+  const panel = document.getElementById('panel-inventory');
+  let html = `
+    <div class="filter-bar">
+      <input type="text" id="filter-inv" placeholder="Buscar equipamento..." oninput="filterInventory()">
+      <select id="filter-status" onchange="filterInventory()">
+        <option value="all">Todos</option>
+        <option value="ok">Conformes</option>
+        <option value="div">Divergentes</option>
+      </select>
+    </div>
+    <div class="scroll-table"><table id="inv-table"><thead><tr><th>#</th><th>Equipamento</th><th>IP</th><th>Status</th><th>Divergências</th><th>Grupo</th></tr></thead><tbody>`;
+  
+  results.sort((a,b) => a.nome.localeCompare(b.nome)).forEach((d, i) => {
+    const status = d.conforme ? '<span class="badge badge-ok">✅ Conforme</span>' : '<span class="badge badge-warn">⚠️ Divergente</span>';
+    html += `<tr data-name="${d.nome.toLowerCase()}" data-status="${d.conforme ? 'ok' : 'div'}">
+      <td>${i+1}</td><td><strong>${d.nome}</strong></td><td><code>${d.ip || '-'}</code></td><td>${status}</td><td>${d.diffCount}</td><td>${d.conforme ? 'Referência' : Object.keys(d.diffs).slice(0,2).join(', ') + (d.diffCount > 2 ? '...' : '')}</td></tr>`;
+  });
+  html += '</tbody></table></div>';
+  panel.innerHTML = html;
+  
+  window.filterInventory = function() {
+    const search = document.getElementById('filter-inv').value.toLowerCase();
+    const status = document.getElementById('filter-status').value;
+    document.querySelectorAll('#inv-table tbody tr').forEach(row => {
+      const matchName = !search || row.dataset.name.includes(search);
+      const matchStatus = status === 'all' || row.dataset.status === status;
+      row.style.display = matchName && matchStatus ? '' : 'none';
+    });
+  };
+}
+
+function renderParams(allParams, ref) {
+  const panel = document.getElementById('panel-params');
+  let html = `<h3 class="section-title">📈 Distribuição de Valores por Parâmetro</h3>
+    <div class="filter-bar"><input type="text" id="filter-param" placeholder="Filtrar parâmetro..." oninput="filterParams()"></div>
+    <div id="params-container">`;
+  
+  const paramKeys = Object.keys(ref.params).sort();
+  
+  paramKeys.forEach(key => {
+    // Count values
+    const valMap = new Map();
+    allParams.forEach(d => {
+      const v = String(d.params[key] ?? 'null');
+      if (!valMap.has(v)) valMap.set(v, []);
+      valMap.get(v).push(d.nome);
+    });
+    
+    const refVal = String(ref.params[key] ?? 'null');
+    const sorted = [...valMap.entries()].sort((a,b) => b[1].length - a[1].length);
+    const maxCount = sorted[0]?.[1].length || 1;
+    
+    html += `<div class="param-dist" data-param="${key.toLowerCase()}"><h4><code>${key}</code> <span style="color:#94a3b8;font-weight:normal;font-size:0.8rem">(correto: ${refVal})</span></h4>`;
+    
+    sorted.forEach(([val, devices]) => {
+      const pct = (devices.length / DEVICES.length * 100).toFixed(0);
+      const isCorrect = val === refVal;
+      const barWidth = (devices.length / maxCount * 100);
+      const tooltipDevices = devices.slice(0, 5).join(', ') + (devices.length > 5 ? ` (+${devices.length - 5})` : '');
+      html += `<div class="bar-container">
+        <span class="bar-label">${val}</span>
+        <div class="bar ${isCorrect ? 'correct' : 'wrong'}" style="width:${barWidth}%" title="${tooltipDevices}">${devices.length} (${pct}%)</div>
+        <span class="badge ${isCorrect ? 'badge-ok' : 'badge-err'}">${isCorrect ? '✅' : '❌'}</span>
+      </div>`;
+    });
+    html += '</div>';
+  });
+  
+  html += '</div>';
+  panel.innerHTML = html;
+  
+  window.filterParams = function() {
+    const search = document.getElementById('filter-param').value.toLowerCase();
+    document.querySelectorAll('.param-dist').forEach(el => {
+      el.style.display = !search || el.dataset.param.includes(search) ? '' : 'none';
+    });
+  };
+}
+
+function renderTunnels() {
+  const panel = document.getElementById('panel-tunnels');
+  let html = `<h3 class="section-title">🔗 Túneis VARCO (acesso remoto)</h3>
+    <div class="scroll-table"><table><thead><tr><th>#</th><th>Equipamento</th><th>UUID</th><th>Túnel HTTP</th></tr></thead><tbody>`;
+  
+  DEVICES.forEach((d, i) => {
+    const tunnelUrl = d.uuid ? `https://${d.uuid}-80.tunnel.varco.cloud` : '-';
+    html += `<tr><td>${i+1}</td><td>${d.nome}</td><td><code style="font-size:0.7rem">${d.uuid || '-'}</code></td>
+      <td>${d.uuid ? `<a href="${tunnelUrl}" target="_blank" class="tunnel-link">${tunnelUrl}</a>` : '-'}</td></tr>`;
+  });
+  html += '</tbody></table></div>';
+  panel.innerHTML = html;
+}
+
+// Load data
+fetch('./analise-dados.json')
+  .then(r => r.json())
+  .then(init)
+  .catch(e => {
+    document.getElementById('loading').innerHTML = `<p style="color:#f87171">Erro ao carregar dados: ${e.message}</p><p style="margin-top:8px;color:#94a3b8">Certifique-se de abrir via servidor HTTP (npx serve auditoria-itscam/)</p>`;
+  });
+</script>
+</body>
+</html>

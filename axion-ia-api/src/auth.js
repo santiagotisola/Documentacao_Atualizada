@@ -34,6 +34,8 @@ const ROTAS_PUBLICAS = [
   { method: "GET",  path: "/axton/status" },
   { method: "GET",  path: "/axcross/status" },
   { method: "GET",  path: "/health" },
+  { method: "GET",  path: "/varco/frota" },
+  { method: "GET",  path: "/varco/auditoria" },
 ];
 
 function rotaPublica(req) {

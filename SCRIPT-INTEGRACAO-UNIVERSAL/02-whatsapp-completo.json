@@ -1,0 +1,284 @@
+{
+  "modulo": "whatsapp-completo",
+  "versao": "1.0.0",
+  "descricao": "Módulo completo de integração WhatsApp: conexão via Baileys (gratuito), máquina de estados para conversas, LGPD, criação de tickets, atendimento automatizado. Adaptável para qualquer negócio.",
+  "dependencias": {
+    "obrigatorias": [
+      "@whiskeysockets/baileys@^7.0.0 (conexão WhatsApp gratuita)",
+      "qrcode@^1.5.4 (geração QR Code)",
+      "qrcode-terminal@^0.12.0 (QR no terminal)",
+      "mongoose@^8.0.0 (persistência de sessões)"
+    ],
+    "opcionais": [
+      "sharp (processamento de imagens recebidas)",
+      "fluent-ffmpeg (processamento de áudio)"
+    ]
+  },
+  "opcoes_conexao": {
+    "baileys_gratuito": {
+      "descricao": "Conexão direta ao WhatsApp Web via protocolo reverso. 100% gratuito.",
+      "limitacoes": "Não oficial, risco de ban se enviar spam. Máximo ~5000 msgs/dia.",
+      "custo": "R$ 0,00",
+      "ideal_para": "PMEs, startups, volume baixo-médio",
+      "como_conectar": {
+        "passo_1": "Iniciar serviço → Gera QR Code no terminal",
+        "passo_2": "Escanear QR com WhatsApp do número comercial",
+        "passo_3": "Sessão persiste em disco (não precisa re-escanear)",
+        "passo_4": "Reconexão automática em caso de queda"
+      }
+    },
+    "evolution_api": {
+      "descricao": "Wrapper open-source sobre Baileys com API REST pronta. Self-hosted.",
+      "custo": "R$ 0,00 (self-hosted) ou ~R$ 50/mês (cloud)",
+      "ideal_para": "Múltiplas instâncias, painel admin, webhooks"
+    },
+    "whatsapp_business_api_oficial": {
+      "descricao": "API oficial da Meta. Mais estável, sem risco de ban.",
+      "custo": "~R$ 0,25 por conversa iniciada pela empresa",
+      "ideal_para": "Grandes volumes, compliance regulatório"
+    }
+  },
+  "maquina_estados": {
+    "descricao": "Cada conversa tem um ESTADO que determina o que fazer com a próxima mensagem. Isso permite fluxos complexos sem perder contexto.",
+    "estados_base": [
+      {
+        "estado": "inicio",
+        "descricao": "Primeiro contato do usuário",
+        "acao": "Enviar mensagem de boas-vindas + solicitar aceite LGPD",
+        "proximo_estado": "aguardando_lgpd"
+      },
+      {
+        "estado": "aguardando_lgpd",
+        "descricao": "Aguarda usuário aceitar política de privacidade",
+        "acao_se_aceitar": "Exibir menu principal",
+        "acao_se_recusar": "Informar que não pode atender sem consentimento",
+        "proximo_estado_aceite": "menu",
+        "proximo_estado_recusa": "encerrado"
+      },
+      {
+        "estado": "menu",
+        "descricao": "Menu principal com opções numeradas",
+        "opcoes_padrao": [
+          {"numero": 1, "texto": "Abrir chamado/solicitação", "proximo": "aguardando_assunto"},
+          {"numero": 2, "texto": "Consultar status", "proximo": "aguardando_numero_consulta"},
+          {"numero": 3, "texto": "Falar com atendente", "proximo": "transferir_humano"},
+          {"numero": 4, "texto": "Dúvidas frequentes", "proximo": "faq_ia"},
+          {"numero": 0, "texto": "Encerrar", "proximo": "encerrado"}
+        ]
+      },
+      {
+        "estado": "aguardando_assunto",
+        "descricao": "Coleta o assunto/título do chamado",
+        "validacao": "Mínimo 5 caracteres",
+        "armazena_em": "dadosParciais.assunto",
+        "proximo_estado": "aguardando_descricao"
+      },
+      {
+        "estado": "aguardando_descricao",
+        "descricao": "Coleta descrição detalhada do problema",
+        "validacao": "Mínimo 10 caracteres",
+        "armazena_em": "dadosParciais.descricao",
+        "proximo_estado": "aguardando_categoria"
+      },
+      {
+        "estado": "aguardando_categoria",
+        "descricao": "Solicita categoria do chamado (lista dinâmica do sistema)",
+        "armazena_em": "dadosParciais.categoria",
+        "proximo_estado": "aguardando_foto"
+      },
+      {
+        "estado": "aguardando_foto",
+        "descricao": "Pergunta se quer anexar foto/evidência (opcional)",
+        "acao_se_sim": "Aguardar imagem → salvar → próximo estado",
+        "acao_se_nao": "Ir direto para confirmação",
+        "proximo_estado": "confirmando_ticket"
+      },
+      {
+        "estado": "confirmando_ticket",
+        "descricao": "Mostra resumo do chamado e pede confirmação",
+        "mensagem_template": "📋 *Resumo do chamado:*\n\n*Assunto:* {assunto}\n*Descrição:* {descricao}\n*Categoria:* {categoria}\n*Anexo:* {tem_foto}\n\nConfirma a abertura? (Sim/Não)",
+        "acao_confirmar": "Criar ticket no helpdesk → Enviar número",
+        "acao_cancelar": "Voltar ao menu",
+        "proximo_estado_confirmar": "ticket_criado",
+        "proximo_estado_cancelar": "menu"
+      },
+      {
+        "estado": "ticket_criado",
+        "descricao": "Ticket criado com sucesso",
+        "mensagem_template": "✅ Chamado #{numero_ticket} aberto!\n\nVocê será notificado quando houver atualização.\n\nDigite *menu* para voltar ao início.",
+        "proximo_estado": "menu"
+      },
+      {
+        "estado": "faq_ia",
+        "descricao": "Modo FAQ — usa o motor IA para responder perguntas",
+        "acao": "Enviar mensagem do usuário para engine.gerarResposta()",
+        "permanece_no_estado": true,
+        "sair_com": "menu|sair|voltar"
+      },
+      {
+        "estado": "transferir_humano",
+        "descricao": "Transfere para atendente humano",
+        "acao": "Notificar equipe (Telegram/Email) + Pausar automação para este número",
+        "proximo_estado": "aguardando_humano"
+      }
+    ]
+  },
+  "modelo_sessao": {
+    "descricao": "Estrutura de dados para cada conversa ativa no WhatsApp",
+    "schema": {
+      "telefone": {"tipo": "string", "formato": "5511999999999", "unico": true, "indexado": true},
+      "nome": {"tipo": "string", "descricao": "Nome do contato (extraído do WhatsApp)"},
+      "estado": {"tipo": "string", "enum": "[todos os estados da máquina]"},
+      "dadosParciais": {
+        "tipo": "object",
+        "descricao": "Dados coletados durante o fluxo (assunto, descrição, etc.)",
+        "campos_dinamicos": true
+      },
+      "lgpdAceito": {"tipo": "boolean", "padrao": false},
+      "ultimoTicketId": {"tipo": "number", "descricao": "ID do último ticket criado"},
+      "remoteJid": {"tipo": "string", "descricao": "Identificador interno do WhatsApp"},
+      "pesquisaEnviada": {"tipo": "boolean", "descricao": "Se pesquisa de satisfação já foi enviada"},
+      "ultimaMensagem": {"tipo": "date", "ttl_horas": 24, "descricao": "Sessão expira após 24h sem atividade"},
+      "ativo": {"tipo": "boolean", "padrao": true},
+      "metadata": {
+        "tipo": "object",
+        "descricao": "Campos extras para seu sistema específico",
+        "exemplo": {"clienteId": "abc123", "plano": "premium", "filial": "loja-01"}
+      }
+    }
+  },
+  "api_endpoints_whatsapp": [
+    {
+      "metodo": "POST",
+      "rota": "/api/whatsapp/iniciar",
+      "descricao": "Inicia conexão WhatsApp (gera QR Code)",
+      "resposta": {"status": "qr_gerado|conectado|erro", "qrCode": "base64?"}
+    },
+    {
+      "metodo": "GET",
+      "rota": "/api/whatsapp/status",
+      "descricao": "Verifica se WhatsApp está conectado",
+      "resposta": {"conectado": true, "numero": "5511999999999", "uptime_min": 1440}
+    },
+    {
+      "metodo": "POST",
+      "rota": "/api/whatsapp/send",
+      "descricao": "Envia mensagem manual para um número",
+      "body": {"telefone": "5511999999999", "mensagem": "Texto aqui"},
+      "uso": "Notificações proativas, avisos, follow-ups"
+    },
+    {
+      "metodo": "POST",
+      "rota": "/api/whatsapp/send-buttons",
+      "descricao": "Envia mensagem com botões de ação",
+      "body": {
+        "telefone": "5511999999999",
+        "texto": "Escolha uma opção:",
+        "botoes": [
+          {"id": "btn_1", "texto": "Opção 1"},
+          {"id": "btn_2", "texto": "Opção 2"}
+        ]
+      }
+    },
+    {
+      "metodo": "GET",
+      "rota": "/api/whatsapp/sessoes",
+      "descricao": "Lista todas as sessões ativas",
+      "resposta": [{"telefone": "string", "nome": "string", "estado": "string", "ultimaMensagem": "date"}]
+    },
+    {
+      "metodo": "GET",
+      "rota": "/api/whatsapp/sessao/:telefone",
+      "descricao": "Detalhes de uma sessão específica"
+    },
+    {
+      "metodo": "DELETE",
+      "rota": "/api/whatsapp/sessao/:telefone",
+      "descricao": "Encerra sessão de um contato"
+    },
+    {
+      "metodo": "POST",
+      "rota": "/api/whatsapp/desconectar",
+      "descricao": "Desconecta o WhatsApp (logout)"
+    }
+  ],
+  "webhooks_eventos": {
+    "descricao": "Eventos que o módulo WhatsApp emite para outros módulos consumirem",
+    "eventos": [
+      {
+        "evento": "whatsapp.mensagem_recebida",
+        "payload": {"telefone": "string", "nome": "string", "mensagem": "string", "tipo": "text|image|audio|document", "timestamp": "date"},
+        "uso": "Gatilho principal — processa mensagem na máquina de estados"
+      },
+      {
+        "evento": "whatsapp.ticket_criado",
+        "payload": {"telefone": "string", "ticketId": "number", "assunto": "string", "categoria": "string"},
+        "uso": "Sincronizar com helpdesk, CRM, notificar equipe"
+      },
+      {
+        "evento": "whatsapp.sessao_expirada",
+        "payload": {"telefone": "string", "nome": "string", "ultimoEstado": "string"},
+        "uso": "Limpar recursos, enviar pesquisa de satisfação"
+      },
+      {
+        "evento": "whatsapp.lgpd_aceito",
+        "payload": {"telefone": "string", "nome": "string", "dataAceite": "date"},
+        "uso": "Registrar consentimento no CRM/banco"
+      },
+      {
+        "evento": "whatsapp.transferir_humano",
+        "payload": {"telefone": "string", "nome": "string", "contexto": "string"},
+        "uso": "Notificar equipe de suporte para assumir conversa"
+      }
+    ]
+  },
+  "lgpd_compliance": {
+    "descricao": "Implementação de LGPD obrigatória para coleta de dados via WhatsApp",
+    "requisitos": [
+      "Consentimento explícito antes de coletar qualquer dado",
+      "Informar finalidade do tratamento",
+      "Permitir revogação do consentimento",
+      "Sessões com TTL (expiram automaticamente)",
+      "Link para política de privacidade",
+      "Não armazenar mensagens além do necessário"
+    ],
+    "mensagem_lgpd_template": "Olá {nome}! 👋\n\nPara te atender, preciso processar alguns dados pessoais conforme a LGPD.\n\n📋 *Política de Privacidade:* {URL_POLITICA}\n\nVocê concorda com o tratamento dos seus dados para fins de atendimento?\n\n1️⃣ Sim, concordo\n2️⃣ Não concordo"
+  },
+  "personalizacao_por_negocio": {
+    "farmacia": {
+      "estados_extras": [
+        {"estado": "consulta_medicamento", "descricao": "Busca disponibilidade de medicamento"},
+        {"estado": "agendamento_entrega", "descricao": "Agendar entrega a domicílio"},
+        {"estado": "receita_digital", "descricao": "Receber foto da receita médica"}
+      ],
+      "menu_personalizado": [
+        {"numero": 1, "texto": "Consultar medicamento"},
+        {"numero": 2, "texto": "Status do meu pedido"},
+        {"numero": 3, "texto": "Agendar entrega"},
+        {"numero": 4, "texto": "Enviar receita médica"},
+        {"numero": 5, "texto": "Falar com farmacêutico"},
+        {"numero": 0, "texto": "Encerrar"}
+      ]
+    },
+    "helpdesk_ti": {
+      "estados_extras": [
+        {"estado": "prioridade", "descricao": "Definir urgência do chamado"},
+        {"estado": "tipo_incidente", "descricao": "Classificar tipo de incidente"}
+      ],
+      "menu_personalizado": [
+        {"numero": 1, "texto": "Abrir chamado"},
+        {"numero": 2, "texto": "Consultar chamado"},
+        {"numero": 3, "texto": "Problema urgente"},
+        {"numero": 4, "texto": "Solicitar acesso"},
+        {"numero": 0, "texto": "Encerrar"}
+      ]
+    },
+    "erp_gestao": {
+      "estados_extras": [
+        {"estado": "consulta_estoque", "descricao": "Verificar estoque de produto"},
+        {"estado": "consulta_financeiro", "descricao": "Posição financeira do cliente"},
+        {"estado": "pedido_compra", "descricao": "Fluxo de pedido de compra"}
+      ]
+    }
+  }
+}

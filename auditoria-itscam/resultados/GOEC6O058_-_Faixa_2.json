@@ -1,0 +1,1576 @@
+{
+  "_device": {
+    "name": "GOEC6O058 - Faixa 2",
+    "uuid": "6561d5fd-0aba-413b-a60a-a0d7e1b61b6d",
+    "ip": "187.68.160.38"
+  },
+  "_timestamp": "2026-06-02T21:23:26.009Z",
+  "_tunnelUrl": "https://6561d5fd-0aba-413b-a60a-a0d7e1b61b6d-80.tunnel.varco.cloud",
+  "menus": {
+    "01-ESTADO-ATUAL": {
+      "/api/equipment/info": {
+        "nome": "Info Equipamento",
+        "data": {
+          "equipmentModel": "ITSCAM 450 LM (S09L8AJ)",
+          "macAddress": "F8:D4:62:01:A9:E2",
+          "gpsCoordinates": null
+        }
+      },
+      "/api/equipment/boards": {
+        "nome": "Placas/Hardware",
+        "data": [
+          {
+            "model": "S450-23M-PECCARY",
+            "serialNumber": "92501703",
+            "version": "2"
+          },
+          {
+            "model": "CPU450",
+            "serialNumber": "510994",
+            "version": "1"
+          },
+          {
+            "model": "LM450-CTRL-YTOT",
+            "serialNumber": "92501580",
+            "version": "2"
+          },
+          {
+            "model": "L8-5-50-PERCHERON",
+            "serialNumber": "0",
+            "version": "1"
+          },
+          {
+            "model": "FT450",
+            "serialNumber": "92501616",
+            "version": "1"
+          }
+        ]
+      },
+      "/api/system/firmware": {
+        "nome": "Firmware",
+        "data": {
+          "version": "v1.7.8"
+        }
+      },
+      "/api/system/maintenance/storage/usage": {
+        "nome": "Storage",
+        "data": {
+          "disk": {
+            "total": 5884276736,
+            "used": 1597808640,
+            "mountPoint": "/dev/mmcblk0p9",
+            "device": "/dev/mmcblk0",
+            "filesystem": null
+          }
+        }
+      },
+      "/api/equipment/misc/readonly/volatile": {
+        "nome": "Dados Voláteis (CPU, Temp)",
+        "data": {
+          "ae": {
+            "ctrlMode": "incr_saturated",
+            "lastRun": 443874015,
+            "level": 0
+          },
+          "fps": {
+            "mjpeg": 3
+          },
+          "gps": {
+            "altitude": 0,
+            "available": false,
+            "bearing": 0,
+            "dop": 0,
+            "fix": "none",
+            "latitude": 0,
+            "longitude": 0,
+            "numSatellites": 0,
+            "secondsSinceLastFix": 2147483647,
+            "speed": 0,
+            "time": 1780370339
+          },
+          "isp": {
+            "freeBuffers": 13,
+            "gain": 4000,
+            "iris": 1000,
+            "irisModel": "dcIris",
+            "shutter": 800
+          },
+          "lens": {
+            "focus": 947,
+            "zoom": 2397
+          },
+          "profile": {
+            "id": 27839,
+            "name": "Noturno"
+          },
+          "rebootNeeded": false,
+          "whitebalance": {
+            "blue": 100,
+            "green": 100,
+            "red": 100
+          }
+        }
+      },
+      "/api/equipment/misc/readonly/constants": {
+        "nome": "Constantes Sistema",
+        "data": {
+          "framePeriodUs": 33211,
+          "hdrAvailable": false,
+          "imageHeight": 1200,
+          "imageWidth": 1920,
+          "lensModel": "L8-5-50",
+          "maxExps": 4,
+          "pixelType": "NV12",
+          "relativeSensitivity": 1,
+          "sensorType": "S450-23M-PECCARY"
+        }
+      }
+    },
+    "02-IMAGEM": {
+      "/api/image/profiles": {
+        "nome": "Perfis de Imagem (Diurno/Noturno)",
+        "data": [
+          {
+            "active": false,
+            "advanced": {
+              "exposition": {
+                "updateFactor": 0.0990000069141388,
+                "updateRate": 100
+              },
+              "iris": {
+                "updateRate": 1000
+              },
+              "whitebalance": {
+                "updateRate": 500
+              }
+            },
+            "color": {
+              "blacklevel": 0,
+              "brightness": 0,
+              "contrast": 0,
+              "gamma": 130,
+              "saturation": 0
+            },
+            "description": "",
+            "exposure": {
+              "gain": {
+                "automatic": true,
+                "fixedValue": 1,
+                "maxValue": 1000,
+                "minValue": 1
+              },
+              "highGainMode": false,
+              "iris": {
+                "automatic": true,
+                "fixedValue": 1000
+              },
+              "level": {
+                "roi": {
+                  "enabled": true,
+                  "x0": 374,
+                  "x1": 1249,
+                  "x2": 687,
+                  "x3": 1914,
+                  "y0": 678,
+                  "y1": 462,
+                  "y2": 1180,
+                  "y3": 964
+                },
+                "targetValue": 35
+              },
+              "shutter": {
+                "automatic": true,
+                "fixedValue": 99,
+                "maxValue": 1500,
+                "minValue": 48
+              }
+            },
+            "filter": {
+              "sharpnessLevel": 40,
+              "timedomainLevel": 0
+            },
+            "hdr": {
+              "enable": false
+            },
+            "id": 0,
+            "lens": {
+              "exchanger": true,
+              "focus": 947,
+              "zfMirrorProfile0": true,
+              "zoom": 2397
+            },
+            "movFilter": {
+              "enabled": false,
+              "onlyCheck": false,
+              "roi": {
+                "enabled": true,
+                "x0": 0,
+                "x1": 798,
+                "x2": 1903,
+                "x3": 403,
+                "y0": 0,
+                "y1": 22,
+                "y2": 904,
+                "y3": 1195
+              },
+              "threshold": 5
+            },
+            "multipleExposures": {
+              "enabled": true,
+              "settings": [
+                {
+                  "flash": {
+                    "power": []
+                  },
+                  "gain": {
+                    "percentageOfCurrent": true,
+                    "value": 100
+                  },
+                  "shutter": {
+                    "percentageOfCurrent": true,
+                    "value": 100
+                  }
+                }
+              ]
+            },
+            "name": "Diurno",
+            "overlay": {
+              "enable": false,
+              "text": "SEQUENCIAL: {rid} DATA PASSAGEM: {day}/{month}/{year} HORA PASSAGEM: {hour}:{minute}:{second}:{msec} PLACA: {plates} CODIGO EQUIPAMENTO: [CODIGOEQUIPAMENTO] MODELO OCR: AX-OCR LOCAL: [LOCAL] NOME DA VIA: [VIA] SENTIDO: [SENTIDO] FAIXA: [NUMERO]"
+            },
+            "transitions": {
+              "lower": {
+                "endTime": "00:00:00",
+                "holdTime": 60000,
+                "level": 10,
+                "profile": 27839,
+                "startTime": "00:00:00"
+              },
+              "upper": {
+                "endTime": "00:00:00",
+                "holdTime": 60000,
+                "level": 35,
+                "profile": 0,
+                "startTime": "00:00:00"
+              }
+            },
+            "trigger": {
+              "enabled": true,
+              "event": "constant",
+              "minimumInterval": 100,
+              "port": 2,
+              "roi": {
+                "enabled": false,
+                "x0": 0,
+                "x1": 0,
+                "x2": 0,
+                "x3": 0,
+                "y0": 0,
+                "y1": 0,
+                "y2": 0,
+                "y3": 0
+              },
+              "threshold": 0
+            },
+            "whitebalance": {
+              "automatic": true,
+              "weights": {
+                "blue": 100,
+                "green": 100,
+                "red": 100
+              }
+            }
+          },
+          {
+            "active": true,
+            "advanced": {
+              "exposition": {
+                "updateFactor": 0.0990000069141388,
+                "updateRate": 100
+              },
+              "iris": {
+                "updateRate": 1000
+              },
+              "whitebalance": {
+                "updateRate": 500
+              }
+            },
+            "color": {
+              "blacklevel": 0,
+              "brightness": 0,
+              "contrast": 30,
+              "gamma": 12,
+              "saturation": -100
+            },
+            "description": "",
+            "exposure": {
+              "gain": {
+                "automatic": true,
+                "fixedValue": 2697,
+                "maxValue": 4000,
+                "minValue": 1
+              },
+              "highGainMode": false,
+              "iris": {
+                "automatic": false,
+                "fixedValue": 1000
+              },
+              "level": {
+                "roi": {
+                  "enabled": false,
+                  "x0": 10,
+                  "x1": 840,
+                  "x2": 403,
+                  "x3": 1900,
+                  "y0": 150,
+                  "y1": 28,
+                  "y2": 1179,
+                  "y3": 846
+                },
+                "targetValue": 35
+              },
+              "shutter": {
+                "automatic": true,
+                "fixedValue": 2000,
+                "maxValue": 800,
+                "minValue": 48
+              }
+            },
+            "filter": {
+              "sharpnessLevel": 0,
+              "timedomainLevel": 0
+            },
+            "hdr": {
+              "enable": false
+            },
+            "id": 27839,
+            "lens": {
+              "exchanger": false,
+              "focus": 947,
+              "zfMirrorProfile0": true,
+              "zoom": 2397
+            },
+            "movFilter": {
+              "enabled": false,
+              "onlyCheck": false,
+              "roi": {
+                "enabled": false,
+                "x0": 0,
+                "x1": 1920,
+                "x2": 1920,
+                "x3": 0,
+                "y0": 0,
+                "y1": 0,
+                "y2": 1200,
+                "y3": 1200
+              },
+              "threshold": 5
+            },
+            "multipleExposures": {
+              "enabled": true,
+              "settings": [
+                {
+                  "flash": {
+                    "power": [
+                      {
+                        "out": 1,
+                        "percent": 100
+                      },
+                      {
+                        "out": 3,
+                        "percent": 100
+                      }
+                    ]
+                  },
+                  "gain": {
+                    "percentageOfCurrent": true,
+                    "value": 100
+                  },
+                  "shutter": {
+                    "percentageOfCurrent": true,
+                    "value": 100
+                  }
+                },
+                {
+                  "flash": {
+                    "power": [
+                      {
+                        "out": 1,
+                        "percent": 7
+                      },
+                      {
+                        "out": 3,
+                        "percent": 7
+                      }
+                    ]
+                  },
+                  "gain": {
+                    "percentageOfCurrent": true,
+                    "value": 100
+                  },
+                  "shutter": {
+                    "percentageOfCurrent": true,
+                    "value": 100
+                  }
+                }
+              ]
+            },
+            "name": "Noturno",
+            "overlay": {
+              "enable": false,
+              "text": "SEQUENCIAL: {rid} DATA PASSAGEM: {day}/{month}/{year} HORA PASSAGEM: {hour}:{minute}:{second}:{msec} PLACA: {plates} CODIGO EQUIPAMENTO: GOEC6O032 MODELO OCR: AX-OCR LOCAL: Planaltina-GO NOME DA VIA: GO 118 KM 6 SENTIDO: Planaltina-GO/Divisa-DF FAIXA: 01"
+            },
+            "transitions": {
+              "lower": {
+                "endTime": "00:00:00",
+                "holdTime": 60000,
+                "level": 10,
+                "profile": 27839,
+                "startTime": "00:00:00"
+              },
+              "upper": {
+                "endTime": "00:00:00",
+                "holdTime": 60000,
+                "level": 35,
+                "profile": 0,
+                "startTime": "00:00:00"
+              }
+            },
+            "trigger": {
+              "enabled": true,
+              "event": "constant",
+              "minimumInterval": 100,
+              "port": 2,
+              "roi": {
+                "enabled": false,
+                "x0": 0,
+                "x1": 0,
+                "x2": 0,
+                "x3": 0,
+                "y0": 0,
+                "y1": 0,
+                "y2": 0,
+                "y3": 0
+              },
+              "threshold": 0
+            },
+            "whitebalance": {
+              "automatic": false,
+              "weights": {
+                "blue": 100,
+                "green": 100,
+                "red": 100
+              }
+            }
+          }
+        ]
+      },
+      "/api/equipment/transitioner": {
+        "nome": "Transicionador de Perfis",
+        "data": {
+          "automatic": true,
+          "levelSmoothing": "simple",
+          "resetProfiles": "not",
+          "smoothingTime": 100
+        }
+      },
+      "/api/equipment/autofocus": {
+        "nome": "Autofoco",
+        "data": {
+          "coarseStep": 400,
+          "contrastThreshold": 0,
+          "roi": {
+            "centerX": 960,
+            "centerY": 600,
+            "height": 600,
+            "width": 960
+          },
+          "run": false,
+          "updateRate": 150
+        }
+      }
+    },
+    "03-VIDEO": {
+      "/api/video/streams": {
+        "nome": "Streams de Vídeo",
+        "data": {
+          "mjpeg": {
+            "available": true,
+            "main": {
+              "available": true,
+              "enabled": true,
+              "framerate": 12,
+              "quality": 85,
+              "useTriggerFrames": true
+            }
+          },
+          "rtsp": {
+            "available": true,
+            "enable": false,
+            "port": 554,
+            "rtpPort": 5004,
+            "rtcpPort": 5005,
+            "httpEnabled": false,
+            "httpPort": 8555,
+            "transport": "tcp",
+            "url": "/streaming/mjpeg",
+            "authentication": false,
+            "username": "",
+            "password": ""
+          }
+        }
+      }
+    },
+    "04-EQUIPAMENTO/04a-OCR": {
+      "/api/equipment/ocr": {
+        "nome": "Config OCR",
+        "data": {
+          "ocr": {
+            "avgCharHeight": 20,
+            "avgPlateAngle": 0,
+            "avgPlateSlant": 0,
+            "classifierExpansion": 10,
+            "countryCode": 76,
+            "enabled": true,
+            "licensed": true,
+            "lowProbChar": 45,
+            "maxCharHeight": 60,
+            "maxLowProbChars": 0,
+            "maxPlates": 2,
+            "minCharHeight": 9,
+            "minProbPerChar": 85,
+            "processingMode": 3,
+            "processingQueue": 4,
+            "processingThreads": 4,
+            "processingTimeout": 1000,
+            "roi": {
+              "enabled": true,
+              "x0": 110,
+              "x1": 1074,
+              "x2": 450,
+              "x3": 1910,
+              "y0": 534,
+              "y1": 405,
+              "y2": 1197,
+              "y3": 990
+            },
+            "useClassifierResult": false,
+            "vehicleType": 3
+          }
+        }
+      }
+    },
+    "04-EQUIPAMENTO/04b-CLASSIFICADOR": {
+      "/api/equipment/classifier": {
+        "nome": "Classificador Veicular",
+        "data": {
+          "classifier": {
+            "enableCharacteristics": false,
+            "enableSpeed": false,
+            "enabled": true,
+            "firstOnly": false,
+            "licensed": true,
+            "minProbability": 20,
+            "modelType": 0,
+            "processingQueue": 4,
+            "processingThreads": 4,
+            "sceneType": 0,
+            "speedCalibrationRegion1": {
+              "p0top1sz": 1,
+              "x0": 10,
+              "x1": 10,
+              "x2": 10,
+              "y0": 10,
+              "y1": 10,
+              "y2": 10
+            },
+            "speedCalibrationRegion2": {
+              "p0top1sz": 1,
+              "x0": 10,
+              "x1": 10,
+              "x2": 10,
+              "y0": 10,
+              "y1": 10,
+              "y2": 10
+            },
+            "triggerEnabled": false,
+            "triggerRegion0": {
+              "dir": "disabled",
+              "x0": 0,
+              "x1": 0,
+              "y0": 0,
+              "y1": 0
+            },
+            "triggerRegion1": {
+              "dir": "disabled",
+              "x0": 0,
+              "x1": 0,
+              "y0": 0,
+              "y1": 0
+            },
+            "triggerRegion2": {
+              "dir": "disabled",
+              "x0": 0,
+              "x1": 0,
+              "y0": 0,
+              "y1": 0
+            },
+            "triggerRegion3": {
+              "dir": "disabled",
+              "x0": 0,
+              "x1": 0,
+              "y0": 0,
+              "y1": 0
+            }
+          }
+        }
+      }
+    },
+    "04-EQUIPAMENTO/04c-FAIXAS": {
+      "/api/equipment/lanes": {
+        "nome": "Faixas de Trânsito",
+        "data": {
+          "lanes": {
+            "enabled": false,
+            "region0": {
+              "enabled": true,
+              "name": "1",
+              "x0": 404,
+              "x1": 963,
+              "x2": 615,
+              "x3": 1498,
+              "y0": 503,
+              "y1": 425,
+              "y2": 1025,
+              "y3": 864
+            },
+            "region1": {
+              "enabled": false,
+              "name": "2",
+              "x0": 843,
+              "x1": 1228,
+              "x2": 1392,
+              "x3": 1913,
+              "y0": 309,
+              "y1": 276,
+              "y2": 757,
+              "y3": 652
+            },
+            "region2": {
+              "enabled": false,
+              "name": "Lane 3",
+              "x0": 0,
+              "x1": 0,
+              "x2": 0,
+              "x3": 0,
+              "y0": 0,
+              "y1": 0,
+              "y2": 0,
+              "y3": 0
+            }
+          }
+        }
+      }
+    },
+    "04-EQUIPAMENTO/04d-ANALYTICS": {
+      "/api/equipment/analytics": {
+        "nome": "Analytics",
+        "data": {
+          "voting": {
+            "enabled": true,
+            "forwardWithoutPlateIfTracker": false,
+            "keepBestOnly": true,
+            "maxDiffChars": 1,
+            "samePlateDebounce": 60,
+            "useClassifier": false
+          }
+        }
+      }
+    },
+    "04-EQUIPAMENTO/04e-INDICADOR-VEICULO": {
+      "/api/equipment/vehicleIndicator": {
+        "nome": "Indicador de Veículo",
+        "data": {
+          "vehicleIndicator": {
+            "vehicleCounterActiveHigh": true,
+            "vehicleCounterEnabled": false,
+            "vehicleCounterGpio": 1,
+            "vehicleCounterMinLowTimeMs": 100,
+            "vehicleCounterPulseWidthMs": 100,
+            "vehicleCounterType": 0,
+            "vehicleCounterUdpPort": 8080,
+            "vehicleCounterUdpSampleTimeMs": 250,
+            "vehicleCounterUdpServer": ""
+          }
+        }
+      }
+    },
+    "04-EQUIPAMENTO/04f-SERVIDORES": {
+      "/api/equipment/servers/ftp": {
+        "nome": "Servidor FTP",
+        "data": {
+          "ftp": {
+            "address": "127.0.0.1",
+            "anonymous": false,
+            "enable": false,
+            "filename": "PTX_{year,digits:4:4:0}{month,digits:2:2:0}{day,digits:2:2:0}_{hour,digits:2:2:0}{minute,digits:2:2:0}{second,digits:2:2:0}_{msec,digits:3:3:0}_{plates,digits:7:7:0}_{framePos,digits:2:2:0}.jpg",
+            "local": {
+              "bufferSizeKb": 102400,
+              "ttl": 7200
+            },
+            "password": "",
+            "port": 21,
+            "protocol": "ftp",
+            "quality": 85,
+            "transfer": {
+              "pollInterval": 300,
+              "timeout": 60000
+            },
+            "username": ""
+          }
+        }
+      },
+      "/api/equipment/servers/lince": {
+        "nome": "Servidor Lince",
+        "data": {
+          "lince": {
+            "authCode": "",
+            "clientEndpoint": "",
+            "clientId": "",
+            "enabled": false,
+            "environment": "development",
+            "loginStatus": "undefinedError",
+            "sendRecsNone": false,
+            "timeoutResponse": 2000
+          }
+        }
+      },
+      "/api/equipment/servers/lince/status": {
+        "nome": "Status Lince",
+        "data": {
+          "loginStatus": "undefinedError"
+        }
+      },
+      "/api/equipment/servers/itscampro": {
+        "nome": "ITScam Pro",
+        "data": {
+          "itscampro": {
+            "address": "127.0.0.1",
+            "debug": false,
+            "enable": false,
+            "legacyMode": false,
+            "port": 9000,
+            "status": "DISCONNECTED"
+          }
+        }
+      },
+      "/api/equipment/servers/itscampro/status": {
+        "nome": "Status ITScam Pro",
+        "data": {
+          "status": "DISCONNECTED"
+        }
+      },
+      "/api/equipment/servers/protocols": {
+        "nome": "Protocolos",
+        "data": {
+          "configCgi": {
+            "blockAPI": false
+          },
+          "cougar": {
+            "auth": {
+              "password": "",
+              "require": false
+            }
+          },
+          "itscamprotocol": {
+            "flash": 2,
+            "fotoColorida": false,
+            "gammaDif": 0,
+            "ganhoDif": 0,
+            "legacyMode": false,
+            "numPhotos": 1,
+            "saturacaoDif": 0,
+            "serverType": 0,
+            "tipoShutter": 1,
+            "triggerDif": 0,
+            "wbDif": 0
+          }
+        }
+      },
+      "/api/equipment/servers/restapiclient/presets": {
+        "nome": "REST API Client Presets",
+        "data": {
+          "pumatronix": {
+            "enabled": true,
+            "method": "post",
+            "url": {
+              "scheme": "http",
+              "host": "",
+              "path": "",
+              "query": []
+            },
+            "tls": {
+              "insecure": false,
+              "mtlsKey": ""
+            },
+            "headers": [],
+            "body": {
+              "variant": "singlepart",
+              "parts": [
+                {
+                  "name": "",
+                  "type": "json",
+                  "data": "{\n    \"cameraId\": \"{{cameraId}}\",\n    \"equipmentId\": \"{{equipmentId}}\",\n    \"registerId\": \"{{registerId}}\",\n    \"timestamp\": \"{{utcYear}}-{{utcMonth}}-{{utcDay}}T{{utcHours}}:{{utcMinutes}}:{{utcSeconds}}.{{utcMilliseconds}}Z\",\n    \"latitude\": \"{{latitude}}\",\n    \"longitude\": \"{{longitude}}\",\n    \"recognitionList\": {{recognitionList}},\n    \"imageList\": {{imageList}}\n}"
+                }
+              ]
+            },
+            "jpeg": {
+              "quality": 85,
+              "resolution": "0x0"
+            },
+            "timeout": 0,
+            "retries": 0,
+            "sendIndividualRequests": false,
+            "sendWithoutOcr": false,
+            "persistency": {
+              "enabled": true,
+              "maxDiskUsage": 2147483648,
+              "maxFileAge": 604800,
+              "newestFirst": false
+            }
+          },
+          "pumatronixCompat_v1_7_6": {
+            "enabled": true,
+            "method": "post",
+            "url": {
+              "scheme": "http",
+              "host": "",
+              "path": "",
+              "query": []
+            },
+            "tls": {
+              "insecure": true,
+              "mtlsKey": ""
+            },
+            "headers": [],
+            "body": {
+              "variant": "singlepart",
+              "parts": [
+                {
+                  "name": "",
+                  "type": "json",
+                  "data": "{\n    \"cameraId\": \"{{cameraId}}\",\n    \"equipmentId\": \"{{equipmentId}}\",\n    \"registerId\": \"{{registerId}}\",\n    \"timestamp\": \"{{utcYear}}-{{utcMonth}}-{{utcDay}}T{{utcHours}}:{{utcMinutes}}:{{utcSeconds}}.{{utcMilliseconds}}Z\",\n    \"latitude\": \"{{latitude}}\",\n    \"longitude\": \"{{longitude}}\",\n    \"recognitions\": {{recognitionList}},\n    \"imageList\": {{imageList}}\n}"
+                }
+              ]
+            },
+            "jpeg": {
+              "quality": 85,
+              "resolution": "0x0"
+            },
+            "timeout": 0,
+            "retries": 0,
+            "sendIndividualRequests": false,
+            "sendWithoutOcr": false,
+            "persistency": {
+              "enabled": true,
+              "maxDiskUsage": 2147483648,
+              "maxFileAge": 604800,
+              "newestFirst": false
+            }
+          },
+          "helios": {
+            "enabled": true,
+            "method": "post",
+            "url": {
+              "scheme": "https",
+              "host": "helios.policiamilitar.mg.gov.br",
+              "path": "/v3/api/_track/register",
+              "query": []
+            },
+            "tls": {
+              "insecure": true,
+              "mtlsKey": ""
+            },
+            "headers": [
+              {
+                "name": "Authorization",
+                "value": "AUTH-TOKEN"
+              }
+            ],
+            "body": {
+              "variant": "singlepart",
+              "parts": [
+                {
+                  "name": "",
+                  "type": "json",
+                  "data": "{\n  \"cam\": \"CAMERA-ID\",\n  \"dat\": \"{{localYear}}-{{localMonth}}-{{localDay}} {{localHours}}:{{localMinutes}}:{{localSeconds}}\",\n  \"img\": \"data:image/jpeg;base64,{{image}}\",\n  \"plc\": \"{{plate}}\"\n}"
+                }
+              ]
+            },
+            "jpeg": {
+              "quality": 70,
+              "resolution": "320x320"
+            },
+            "timeout": 0,
+            "retries": 0,
+            "sendIndividualRequests": true,
+            "sendWithoutOcr": true,
+            "persistency": {
+              "enabled": true,
+              "maxDiskUsage": 2147483648,
+              "maxFileAge": 604800,
+              "newestFirst": false
+            }
+          },
+          "RFB": {
+            "enabled": true,
+            "method": "post",
+            "url": {
+              "scheme": "https",
+              "host": "sivana.rfb.gov.br",
+              "path": "/prod/sivana/rest/upload",
+              "query": []
+            },
+            "tls": {
+              "insecure": true,
+              "mtlsKey": "SELECIONE A CHAVE NECESSÁRIA"
+            },
+            "headers": [],
+            "body": {
+              "variant": "singlepart",
+              "parts": [
+                {
+                  "name": "",
+                  "type": "json",
+                  "data": "{\n  \"totalLinhas\":1,\n  \"passagens\":[{\n    \"placa\":\"{{plate}}\",\n    \"ponto\":\"PONTOXYZTESTERFB\",\n    \"sentido\":\"SUL\",\n    \"dataHora\":\"{{utcYear}}-{{utcMonth}}-{{utcDay}}T{{utcHours}}:{{utcMinutes}}:{{utcSeconds}}\",\n    \"foto\":\"{{image}}\"\n  }]\n}"
+                }
+              ]
+            },
+            "jpeg": {
+              "quality": 85,
+              "resolution": "0x0"
+            },
+            "timeout": 5000,
+            "retries": 0,
+            "sendIndividualRequests": true,
+            "sendWithoutOcr": false,
+            "persistency": {
+              "enabled": false,
+              "maxDiskUsage": 2147483648,
+              "maxFileAge": 604800,
+              "newestFirst": false
+            }
+          }
+        }
+      }
+    },
+    "04-EQUIPAMENTO/04g-ASSINATURA-IMAGEM": {
+      "/api/equipment/imageSign": {
+        "nome": "Assinatura de Imagem",
+        "data": {
+          "sign": {
+            "appendMode": "4xx_concat",
+            "enabled": false,
+            "loaded": false,
+            "update": false
+          }
+        }
+      }
+    },
+    "04-EQUIPAMENTO/04h-PORTAS-IO": {
+      "/api/equipment/ioPorts": {
+        "nome": "Portas IO",
+        "data": [
+          {
+            "canFlash": true,
+            "canTrigger": false,
+            "earlyUs": 7,
+            "group": "out",
+            "identifier": "1",
+            "isInput": false,
+            "isOn": false,
+            "isReserved": true,
+            "port": 1,
+            "protection": "itslux",
+            "type": "flash"
+          },
+          {
+            "canFlash": false,
+            "canTrigger": true,
+            "earlyUs": 0,
+            "group": "in",
+            "identifier": "1",
+            "isInput": true,
+            "isOn": false,
+            "isReserved": false,
+            "port": 2,
+            "protection": "none",
+            "type": "general"
+          },
+          {
+            "canFlash": true,
+            "canTrigger": false,
+            "earlyUs": 7,
+            "group": "out",
+            "identifier": "2",
+            "isInput": false,
+            "isOn": false,
+            "isReserved": true,
+            "port": 3,
+            "protection": "itslux",
+            "type": "flash"
+          },
+          {
+            "canFlash": false,
+            "canTrigger": true,
+            "earlyUs": 0,
+            "group": "in",
+            "identifier": "2",
+            "isInput": true,
+            "isOn": false,
+            "isReserved": false,
+            "port": 4,
+            "protection": "none",
+            "type": "general"
+          }
+        ]
+      },
+      "/api/equipment/ioBasic": {
+        "nome": "IO Básico",
+        "data": [
+          {
+            "isInput": false,
+            "isOn": false
+          },
+          {
+            "isInput": true,
+            "isOn": false
+          },
+          {
+            "isInput": false,
+            "isOn": false
+          },
+          {
+            "isInput": true,
+            "isOn": false
+          }
+        ]
+      }
+    },
+    "04-EQUIPAMENTO/04i-DIVERSOS": {
+      "/api/equipment/misc": {
+        "nome": "Configurações Diversas",
+        "data": {
+          "cameraOrientation": false,
+          "irisHint": "dcIris",
+          "jpegQuality": 85,
+          "legacyTsyncGpio": -1,
+          "scenario1Crop": {
+            "x0": 435,
+            "x1": 1714,
+            "y0": 480,
+            "y1": 1199
+          },
+          "scenario1Overlay": "",
+          "scenario1OverlayTextSize": 24,
+          "scenario2Crop": {
+            "x0": 0,
+            "x1": 1919,
+            "y0": 0,
+            "y1": 1199
+          },
+          "scenario2Overlay": "",
+          "scenario2OverlayTextSize": 32,
+          "scenarioOverlayColor": "blackOverWhite",
+          "scenarioOverlayPos": "overlaidBottom",
+          "snapshotCrop": {
+            "enable": false,
+            "mode": "static",
+            "x0": 188,
+            "x1": 1615,
+            "y0": 186,
+            "y1": 1049
+          }
+        }
+      }
+    },
+    "05-SISTEMA/05a-GERAL": {
+      "/api/equipment/general": {
+        "nome": "Config Geral",
+        "data": {
+          "language": "pt-BR",
+          "equipmentName": "GOEC6O058",
+          "equipmentModel": "ITSCAM 450 LM (S09L8AJ)"
+        }
+      },
+      "/api/equipment/dateAndTime": {
+        "nome": "Data e Hora",
+        "data": {
+          "timezone": [
+            "America",
+            "Sao_Paulo"
+          ],
+          "useNTPServer": true,
+          "ntpServerAddress": [
+            "time.google.com"
+          ],
+          "serveNtp": false,
+          "currentDateAndTime": "2026-06-02T21:23:47.000Z",
+          "timezoneOffset": "-0300"
+        }
+      }
+    },
+    "05-SISTEMA/05b-REDE": {
+      "/api/equipment/network": {
+        "nome": "Rede Completa",
+        "data": {
+          "ethernet": {
+            "hostname": "FAIXA02",
+            "ipv4Primary": {
+              "mode": "manual",
+              "address": "192.168.0.202",
+              "mask": "255.255.255.0",
+              "gateway": "192.168.0.1",
+              "dns": "8.8.8.8"
+            }
+          },
+          "wifi": {
+            "enabled": false,
+            "hwSupport": false,
+            "hwPresent": false
+          },
+          "gsm": {
+            "enabled": false,
+            "apn": "",
+            "username": "",
+            "password": "",
+            "hwSupport": false,
+            "hwPresent": false
+          },
+          "https": {
+            "enabled": false
+          },
+          "firewall": {
+            "enabled": false,
+            "rules": [
+              {
+                "port": 22,
+                "interface": [
+                  "eth1",
+                  "gsm"
+                ],
+                "protocol": [
+                  "tcp",
+                  "udp"
+                ],
+                "enabled": true,
+                "redirectTo": ""
+              },
+              {
+                "port": 80,
+                "interface": [
+                  "eth1",
+                  "gsm"
+                ],
+                "protocol": [
+                  "tcp",
+                  "udp"
+                ],
+                "enabled": true,
+                "redirectTo": ""
+              },
+              {
+                "port": 123,
+                "interface": [
+                  "eth1",
+                  "gsm"
+                ],
+                "protocol": [
+                  "tcp",
+                  "udp"
+                ],
+                "enabled": true,
+                "redirectTo": ""
+              },
+              {
+                "port": 161,
+                "interface": [
+                  "eth1",
+                  "gsm"
+                ],
+                "protocol": [
+                  "tcp",
+                  "udp"
+                ],
+                "enabled": true,
+                "redirectTo": ""
+              },
+              {
+                "port": 443,
+                "interface": [
+                  "eth1",
+                  "gsm"
+                ],
+                "protocol": [
+                  "tcp",
+                  "udp"
+                ],
+                "enabled": true,
+                "redirectTo": ""
+              },
+              {
+                "port": 50000,
+                "interface": [
+                  "eth1",
+                  "gsm"
+                ],
+                "protocol": [
+                  "tcp",
+                  "udp"
+                ],
+                "enabled": true,
+                "redirectTo": ""
+              },
+              {
+                "port": 60000,
+                "interface": [
+                  "eth1",
+                  "gsm"
+                ],
+                "protocol": [
+                  "tcp",
+                  "udp"
+                ],
+                "enabled": true,
+                "redirectTo": ""
+              }
+            ],
+            "fail2ban": {
+              "enabled": true
+            },
+            "defaultSystemPorts": {
+              "22": {
+                "allowFiltering": true
+              },
+              "53": {
+                "allowFiltering": false
+              },
+              "80": {
+                "allowFiltering": true
+              },
+              "123": {
+                "allowFiltering": true
+              },
+              "161": {
+                "allowFiltering": true
+              },
+              "443": {
+                "allowFiltering": true
+              },
+              "1534": {
+                "allowFiltering": false
+              },
+              "5355": {
+                "allowFiltering": false
+              },
+              "6379": {
+                "allowFiltering": false
+              },
+              "8080": {
+                "allowFiltering": false
+              },
+              "8081": {
+                "allowFiltering": false
+              },
+              "50000": {
+                "allowFiltering": true
+              },
+              "60000": {
+                "allowFiltering": true
+              }
+            },
+            "pluginPorts": []
+          },
+          "routes": {
+            "routes": []
+          },
+          "ddns": {
+            "enabled": false,
+            "providers": [
+              "noip.com"
+            ]
+          }
+        }
+      },
+      "/api/equipment/network/ethernet": {
+        "nome": "Ethernet",
+        "data": {
+          "ethernet": {
+            "hostname": "FAIXA02",
+            "ipv4Primary": {
+              "mode": "manual",
+              "address": "192.168.0.202",
+              "mask": "255.255.255.0",
+              "gateway": "192.168.0.1",
+              "dns": "8.8.8.8"
+            }
+          }
+        }
+      },
+      "/api/equipment/network/firewall": {
+        "nome": "Firewall",
+        "data": {
+          "firewall": {
+            "enabled": false,
+            "rules": [
+              {
+                "port": 22,
+                "interface": [
+                  "eth1",
+                  "gsm"
+                ],
+                "protocol": [
+                  "tcp",
+                  "udp"
+                ],
+                "enabled": true,
+                "redirectTo": ""
+              },
+              {
+                "port": 80,
+                "interface": [
+                  "eth1",
+                  "gsm"
+                ],
+                "protocol": [
+                  "tcp",
+                  "udp"
+                ],
+                "enabled": true,
+                "redirectTo": ""
+              },
+              {
+                "port": 123,
+                "interface": [
+                  "eth1",
+                  "gsm"
+                ],
+                "protocol": [
+                  "tcp",
+                  "udp"
+                ],
+                "enabled": true,
+                "redirectTo": ""
+              },
+              {
+                "port": 161,
+                "interface": [
+                  "eth1",
+                  "gsm"
+                ],
+                "protocol": [
+                  "tcp",
+                  "udp"
+                ],
+                "enabled": true,
+                "redirectTo": ""
+              },
+              {
+                "port": 443,
+                "interface": [
+                  "eth1",
+                  "gsm"
+                ],
+                "protocol": [
+                  "tcp",
+                  "udp"
+                ],
+                "enabled": true,
+                "redirectTo": ""
+              },
+              {
+                "port": 50000,
+                "interface": [
+                  "eth1",
+                  "gsm"
+                ],
+                "protocol": [
+                  "tcp",
+                  "udp"
+                ],
+                "enabled": true,
+                "redirectTo": ""
+              },
+              {
+                "port": 60000,
+                "interface": [
+                  "eth1",
+                  "gsm"
+                ],
+                "protocol": [
+                  "tcp",
+                  "udp"
+                ],
+                "enabled": true,
+                "redirectTo": ""
+              }
+            ],
+            "fail2ban": {
+              "enabled": true
+            },
+            "defaultSystemPorts": {
+              "22": {
+                "allowFiltering": true
+              },
+              "53": {
+                "allowFiltering": false
+              },
+              "80": {
+                "allowFiltering": true
+              },
+              "123": {
+                "allowFiltering": true
+              },
+              "161": {
+                "allowFiltering": true
+              },
+              "443": {
+                "allowFiltering": true
+              },
+              "1534": {
+                "allowFiltering": false
+              },
+              "5355": {
+                "allowFiltering": false
+              },
+              "6379": {
+                "allowFiltering": false
+              },
+              "8080": {
+                "allowFiltering": false
+              },
+              "8081": {
+                "allowFiltering": false
+              },
+              "50000": {
+                "allowFiltering": true
+              },
+              "60000": {
+                "allowFiltering": true
+              }
+            },
+            "pluginPorts": []
+          }
+        }
+      },
+      "/api/equipment/network/routes": {
+        "nome": "Rotas",
+        "data": {
+          "routes": {
+            "routes": []
+          }
+        }
+      }
+    },
+    "05-SISTEMA/05c-MANUTENCAO": {
+      "/api/system/maintenance/automaticreboot": {
+        "nome": "Reboot Automático",
+        "data": {
+          "scheduled": {
+            "enabled": false,
+            "weekdays": [
+              0
+            ],
+            "hour": 0
+          },
+          "periodic": {
+            "enabled": false,
+            "hours": 24
+          }
+        }
+      },
+      "/api/system/maintenance/remoteaccess": {
+        "nome": "Acesso Remoto",
+        "data": {
+          "remoteAccess": {
+            "varco": {
+              "enabled": true,
+              "edgeServer": "edge.varco.io",
+              "provisionKey": "yk-pzGzXLGmz6-iO3GhdR7hinksDN7aek-kjQ4WYl_c=",
+              "deviceName": "GOEC6O058-FAIXA2"
+            }
+          }
+        }
+      },
+      "/api/system/maintenance/sdcard": {
+        "nome": "SDCard",
+        "data": {
+          "shouldUseInServices": false
+        }
+      }
+    },
+    "05-SISTEMA/05d-MONITORAMENTO": {
+      "/api/system/monitoring/snmp": {
+        "nome": "SNMP",
+        "data": {
+          "enabled": false,
+          "v2": {
+            "enabled": false,
+            "community": ""
+          },
+          "v3": {
+            "enabled": false,
+            "securityName": "",
+            "authenticationPassphrase": "",
+            "privacyPassphrase": ""
+          }
+        }
+      }
+    },
+    "05-SISTEMA/05e-LICENCAS": {
+      "/api/system/licenses": {
+        "nome": "Licenças",
+        "data": {
+          "analytics": {
+            "classifier": {
+              "customer": "PUMATRONIX",
+              "maxConnections": 1,
+              "maxThreads": 4,
+              "serial": "0x439b14f95f0b5ec1",
+              "sha1": "f92c17af0a87b49b8f2505c0362dd1b2be32146e",
+              "state": 0,
+              "ttl": -1,
+              "version": "1.19.0"
+            },
+            "ocr": {
+              "customer": "PUMATRONIX",
+              "maxConnections": 1,
+              "maxThreads": 4,
+              "serial": "0x439b14f95f0b5ec1",
+              "sha1": "d94d270a73a3e939df9c0ce83b9a86a14be2c6f3",
+              "state": 0,
+              "ttl": -1,
+              "version": "3.29.0"
+            }
+          },
+          "deviceId": {
+            "serial": "0x439b14f95f0b5ec1"
+          }
+        }
+      }
+    },
+    "05-SISTEMA/05f-USUARIOS": {
+      "/api/system/users": {
+        "nome": "Usuários",
+        "data": [
+          {
+            "id": "1",
+            "username": "admin",
+            "isAdmin": true,
+            "lastLoggedIn": 1780435405923
+          }
+        ]
+      }
+    }
+  }
+}

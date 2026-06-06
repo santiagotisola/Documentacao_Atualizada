@@ -1,0 +1,21 @@
+{
+  "caso": "03",
+  "inicio": "2026-06-05T16:13:25.952Z",
+  "operacoes": [
+    {
+      "equip": "GOEC6O040 - Faixa 1",
+      "resultado": "OFFLINE"
+    },
+    {
+      "equip": "GOEC6O040 - Faixa 2",
+      "resultado": "OFFLINE"
+    }
+  ],
+  "fim": "2026-06-05T16:13:26.478Z",
+  "resumo": {
+    "aplicados": 0,
+    "ja_ok": 0,
+    "falha": 2,
+    "cancelados": 0
+  }
+}

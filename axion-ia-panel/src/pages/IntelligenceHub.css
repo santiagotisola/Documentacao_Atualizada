@@ -623,10 +623,10 @@
 }
 
 .ih-rel-btn:hover {
-  border-color: #3b82f6;
-  background: #fff;
+  border-color: #4a9eff;
+  background: var(--surface-raised);
   transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.3);
 }
 
 .ih-rel-btn span {
@@ -639,12 +639,12 @@
 
 .ih-rel-btn small {
   font-size: 0.75rem;
-  color: #94a3b8;
+  color: var(--text-muted);
 }
 
 .ih-relatorio-output {
-  background: #f8fafc;
-  border: 1px solid #e2e8f0;
+  background: var(--surface);
+  border: 1px solid var(--border);
 }
 
 .ih-rel-header {
@@ -654,9 +654,9 @@
 }
 
 .ih-btn-copy {
-  background: #e2e8f0;
+  background: var(--surface-raised);
   border: none;
-  color: #334155;
+  color: var(--text-secondary);
   padding: 0.4rem 0.75rem;
   border-radius: 5px;
   cursor: pointer;
@@ -664,25 +664,26 @@
 }
 
 .ih-btn-copy:hover {
-  background: #cbd5e1;
+  background: rgba(74,158,255,0.15);
 }
 
 .ih-rel-content {
-  background: #f1f5f9;
+  background: var(--bg);
   border-radius: 8px;
   padding: 1rem;
   font-size: 0.8rem;
-  color: #334155;
+  color: var(--text-secondary);
   white-space: pre-wrap;
   font-family: 'JetBrains Mono', monospace;
   max-height: 500px;
   overflow-y: auto;
   line-height: 1.5;
+  border: 1px solid var(--border);
 }
 
 .ih-vazio {
   text-align: center;
-  color: #64748b;
+  color: var(--text-muted);
   padding: 2rem;
 }
 

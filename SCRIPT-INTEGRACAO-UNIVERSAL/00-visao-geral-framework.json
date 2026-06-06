@@ -1,0 +1,137 @@
+{
+  "meta": {
+    "nome": "AxionIA Integration Framework",
+    "versao": "1.0.0",
+    "descricao": "Framework modular de integração inteligente. Extraído do ecossistema AxionIA para ser reutilizado em qualquer sistema, plataforma ou software proprietário.",
+    "autor": "Baseado em AxionIA - Axion Tecnologia",
+    "licenca": "Proprietário — Uso interno"
+  },
+  "como_comecar": {
+    "passo_1": {
+      "titulo": "Escolha seus módulos",
+      "instrucao": "Nem todos são obrigatórios. Escolha conforme sua necessidade.",
+      "minimo_viavel": ["01-nucleo-ia-engine", "06-banco-dados-adaptador", "07-tabela-relacionamento-sistemas"],
+      "recomendado": ["01", "02", "03", "06", "07", "08"],
+      "completo": ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11"]
+    },
+    "passo_2": {
+      "titulo": "Configure a tabela de relacionamento (07)",
+      "instrucao": "Preencha com os dados de acesso dos seus sistemas. É o único arquivo que você PRECISA editar com seus dados reais."
+    },
+    "passo_3": {
+      "titulo": "Instale dependências base",
+      "comando": "npm init -y && npm install express mongoose openai @whiskeysockets/baileys qrcode node-cron axios dotenv cors"
+    },
+    "passo_4": {
+      "titulo": "Crie o .env",
+      "instrucao": "Copie o modelo do módulo 07 (seção exemplo_env_file) e preencha suas credenciais"
+    },
+    "passo_5": {
+      "titulo": "Inicie o servidor",
+      "comando": "node --env-file=.env src/app.js"
+    }
+  },
+  "arquitetura_geral": {
+    "descricao": "Diagrama de como os módulos se relacionam",
+    "camadas": {
+      "entrada": {
+        "descricao": "Canais por onde chegam mensagens/dados",
+        "componentes": ["WhatsApp (02)", "API REST (endpoints diretos)", "Scheduler (08)", "Webhooks externos"]
+      },
+      "processamento": {
+        "descricao": "Lógica central de decisão e resposta",
+        "componentes": ["Motor IA (01)", "Máquina de Estados (02)", "Fila de Revisão (03)"]
+      },
+      "integracao": {
+        "descricao": "Conexões com sistemas externos",
+        "componentes": ["Helpdesk (03)", "ERP (04)", "Bancos de Dados (06)", "Storage (07)"]
+      },
+      "saida": {
+        "descricao": "O que o sistema produz",
+        "componentes": ["Relatórios (05)", "Documentação (11)", "Mensagens WhatsApp", "Tickets", "Notificações"]
+      },
+      "suporte": {
+        "descricao": "Módulos auxiliares",
+        "componentes": ["CRM (09)", "Conformidade (10)", "Scheduler (08)", "Tabela Config (07)"]
+      }
+    },
+    "fluxo_tipico": [
+      "1. ENTRADA: Mensagem chega (WhatsApp, API, ou polling detecta ticket)",
+      "2. ROTEAMENTO: Máquina de estados decide o que fazer",
+      "3. PROCESSAMENTO: Motor IA gera resposta (KB → Embeddings → LLM)",
+      "4. INTEGRAÇÃO: Se necessário, consulta ERP/Helpdesk/Banco",
+      "5. DECISÃO: Score define se auto-envia, sugere, ou escala",
+      "6. SAÍDA: Resposta enviada (WhatsApp, ticket, API response)",
+      "7. REGISTRO: Log salvo, CRM atualizado, métricas computadas"
+    ]
+  },
+  "stack_tecnologica": {
+    "backend": {
+      "runtime": "Node.js 20+",
+      "framework": "Express.js",
+      "linguagem": "JavaScript (ESModules)"
+    },
+    "banco_principal": {
+      "tipo": "MongoDB",
+      "orm": "Mongoose",
+      "uso": "Sessões, KB, logs, filas, CRM"
+    },
+    "bancos_externos": {
+      "tipo": "SQL Server / MySQL / PostgreSQL",
+      "pacote": "mssql / mysql2 / pg",
+      "uso": "Dados dos sistemas proprietários (ERP, legados)"
+    },
+    "ia": {
+      "provedor": "OpenAI (ou compatível: Anthropic, Google, Ollama)",
+      "modelos": "GPT-4o (chat), text-embedding-3-small (embeddings)",
+      "alternativa_gratuita": "Ollama + Llama3 + nomic-embed (100% local)"
+    },
+    "whatsapp": {
+      "biblioteca": "Baileys @whiskeysockets/baileys",
+      "alternativa": "Evolution API (self-hosted)"
+    },
+    "deploy": {
+      "opcoes": ["PM2 (simples)", "Docker Compose (recomendado)", "Cloud (Railway, Render, VPS)"],
+      "requisitos_minimos": "2GB RAM, 1 vCPU, 10GB disco"
+    }
+  },
+  "custos_estimados": {
+    "gratuito_total": {
+      "descricao": "Usando Ollama local + Baileys + MongoDB local + helpdesk próprio",
+      "custo_mensal": "R$ 0,00 (apenas servidor/VPS)",
+      "limitacoes": "IA local menos inteligente, precisa GPU para bom desempenho"
+    },
+    "custo_baixo": {
+      "descricao": "OpenAI gpt-4o-mini + Baileys gratuito + MongoDB Atlas free",
+      "custo_mensal": "R$ 30-80/mês",
+      "ideal_para": "PMEs com até 500 atendimentos/mês"
+    },
+    "custo_medio": {
+      "descricao": "OpenAI gpt-4o + WhatsApp oficial + VPS dedicada",
+      "custo_mensal": "R$ 200-500/mês",
+      "ideal_para": "Empresas com 1000-5000 atendimentos/mês"
+    }
+  },
+  "seguranca": {
+    "checklist": [
+      "✅ Credenciais em variáveis de ambiente (nunca no código)",
+      "✅ CORS configurado (apenas origens autorizadas)",
+      "✅ Rate limiting em endpoints públicos",
+      "✅ Queries parametrizadas (sem SQL injection)",
+      "✅ LGPD: consentimento antes de coletar dados",
+      "✅ TTL em sessões (dados expiram automaticamente)",
+      "✅ Logs sem dados sensíveis (mascarar CPF, telefone)",
+      "✅ HTTPS em produção",
+      "✅ Backup automático do MongoDB"
+    ]
+  },
+  "proximo_passos_recomendados": [
+    "1. Leia este arquivo (00) para visão geral",
+    "2. Abra o módulo 07 (tabela-relacionamento) e preencha com seus sistemas",
+    "3. Comece pelo módulo 01 (motor IA) — é o núcleo de tudo",
+    "4. Adicione WhatsApp (02) se precisa de atendimento automatizado",
+    "5. Adicione Helpdesk (03) se precisa de gestão de tickets",
+    "6. Configure relatórios (05) conforme necessidade",
+    "7. Use o exemplo da farmácia (12) como referência completa"
+  ]
+}

@@ -1,0 +1,274 @@
+{
+  "modulo": "tabela-relacionamento-sistemas",
+  "versao": "1.0.0",
+  "descricao": "TABELA CENTRAL — Aqui você informa os dados de acesso de TODOS os seus sistemas, módulos e integrações. Os outros módulos consultam esta tabela para saber como se conectar a cada sistema. É o 'hub de configuração' do ecossistema.",
+  "instrucoes": [
+    "1. Preencha apenas os sistemas que você vai usar",
+    "2. Cada sistema tem um 'id' único que é referenciado pelos outros módulos",
+    "3. Credenciais devem ser armazenadas em variáveis de ambiente (.env) — aqui coloque apenas os nomes das variáveis",
+    "4. Teste cada conexão com GET /api/db/{id}/status antes de usar"
+  ],
+  "sistemas": [
+    {
+      "id": "helpdesk_principal",
+      "nome": "Sistema de Helpdesk",
+      "tipo": "helpdesk",
+      "plataforma": "jitbit|zendesk|freshdesk|osticket|glpi|proprio",
+      "conexao": {
+        "base_url": "ENV:HELPDESK_URL",
+        "auth_tipo": "basic|bearer|api_key",
+        "auth_user": "ENV:HELPDESK_USER",
+        "auth_pass": "ENV:HELPDESK_PASS",
+        "auth_token": "ENV:HELPDESK_TOKEN"
+      },
+      "modulos_habilitados": ["tickets", "categorias", "tecnicos", "sla"],
+      "status": "ativo|inativo|configurando"
+    },
+    {
+      "id": "erp_principal",
+      "nome": "Sistema ERP / Gestão",
+      "tipo": "erp",
+      "plataforma": "tekfarma|totvs|sap|bling|custom",
+      "conexao": {
+        "tipo_conexao": "api_rest|banco_direto|soap",
+        "base_url": "ENV:ERP_URL",
+        "auth_tipo": "bearer|basic|api_key|oauth2",
+        "auth_token": "ENV:ERP_TOKEN",
+        "banco_host": "ENV:ERP_DB_HOST",
+        "banco_porta": "ENV:ERP_DB_PORT",
+        "banco_nome": "ENV:ERP_DB_NAME",
+        "banco_user": "ENV:ERP_DB_USER",
+        "banco_pass": "ENV:ERP_DB_PASS",
+        "banco_tipo": "sql_server|mysql|postgresql"
+      },
+      "modulos_habilitados": ["estoque", "vendas", "financeiro", "clientes", "fiscal"],
+      "status": "ativo|inativo|configurando"
+    },
+    {
+      "id": "banco_principal",
+      "nome": "Banco de Dados Principal (NoSQL)",
+      "tipo": "banco_dados",
+      "plataforma": "mongodb",
+      "conexao": {
+        "uri": "ENV:MONGO_URI",
+        "database": "nome_do_banco"
+      },
+      "uso": "Sessões, logs, KB, filas, cache",
+      "status": "ativo"
+    },
+    {
+      "id": "banco_sql_1",
+      "nome": "Banco SQL — Módulo 1",
+      "tipo": "banco_dados",
+      "plataforma": "sql_server|mysql|postgresql",
+      "conexao": {
+        "host": "ENV:SQL1_HOST",
+        "porta": "ENV:SQL1_PORT",
+        "database": "ENV:SQL1_DB",
+        "user": "ENV:SQL1_USER",
+        "password": "ENV:SQL1_PASS",
+        "encrypt": false
+      },
+      "tabelas_principais": ["Tabela1", "Tabela2", "Tabela3"],
+      "status": "ativo|inativo"
+    },
+    {
+      "id": "banco_sql_2",
+      "nome": "Banco SQL — Módulo 2",
+      "tipo": "banco_dados",
+      "plataforma": "sql_server|mysql|postgresql",
+      "conexao": {
+        "host": "ENV:SQL2_HOST",
+        "porta": "ENV:SQL2_PORT",
+        "database": "ENV:SQL2_DB",
+        "user": "ENV:SQL2_USER",
+        "password": "ENV:SQL2_PASS",
+        "encrypt": false
+      },
+      "tabelas_principais": [],
+      "status": "inativo"
+    },
+    {
+      "id": "ia_provider",
+      "nome": "Provedor de Inteligência Artificial",
+      "tipo": "ia",
+      "plataforma": "openai|anthropic|google|azure_openai|ollama",
+      "conexao": {
+        "api_key": "ENV:AI_API_KEY",
+        "base_url": "https://api.openai.com/v1 (ou URL do Ollama local)",
+        "modelo_chat": "gpt-4o|claude-sonnet-4-20250514|gemini-2.0-flash",
+        "modelo_embedding": "text-embedding-3-small"
+      },
+      "configuracao": {
+        "max_tokens": 1500,
+        "temperatura": 0.3,
+        "custo_estimado_por_1000_msgs": "R$ 20,00"
+      },
+      "status": "ativo"
+    },
+    {
+      "id": "whatsapp",
+      "nome": "WhatsApp Business",
+      "tipo": "mensageria",
+      "plataforma": "baileys|evolution_api|meta_oficial",
+      "conexao": {
+        "metodo": "baileys (direto, gratuito)",
+        "auth_path": "./whatsapp-auth/",
+        "numero": "ENV:WHATSAPP_NUMERO",
+        "webhook_url": "ENV:WHATSAPP_WEBHOOK (se usar Evolution/Meta)"
+      },
+      "configuracao": {
+        "lgpd_url": "ENV:LGPD_POLITICA_URL",
+        "sessao_ttl_horas": 24,
+        "max_msgs_por_dia": 5000
+      },
+      "status": "ativo|inativo"
+    },
+    {
+      "id": "notificacoes",
+      "nome": "Canal de Notificações",
+      "tipo": "notificacao",
+      "plataforma": "telegram|slack|email|discord",
+      "conexao": {
+        "telegram_token": "ENV:TELEGRAM_TOKEN",
+        "telegram_chat_id": "ENV:TELEGRAM_CHAT_ID",
+        "slack_webhook": "ENV:SLACK_WEBHOOK_URL",
+        "email_smtp_host": "ENV:SMTP_HOST",
+        "email_smtp_port": "ENV:SMTP_PORT",
+        "email_user": "ENV:SMTP_USER",
+        "email_pass": "ENV:SMTP_PASS"
+      },
+      "uso": "Alertas de escalamento, relatórios agendados, notificações de erro",
+      "status": "ativo|inativo"
+    },
+    {
+      "id": "storage",
+      "nome": "Armazenamento de Arquivos",
+      "tipo": "storage",
+      "plataforma": "local|s3|azure_blob|google_cloud",
+      "conexao": {
+        "tipo": "local",
+        "path_local": "./uploads/",
+        "s3_bucket": "ENV:S3_BUCKET",
+        "s3_region": "ENV:S3_REGION",
+        "s3_key": "ENV:S3_KEY",
+        "s3_secret": "ENV:S3_SECRET"
+      },
+      "uso": "Anexos de tickets, fotos WhatsApp, relatórios gerados, backups",
+      "status": "ativo"
+    },
+    {
+      "id": "portal_docs",
+      "nome": "Portal de Documentação",
+      "tipo": "documentacao",
+      "plataforma": "docusaurus|vitepress|gitbook|custom",
+      "conexao": {
+        "url_base": "ENV:DOCS_URL",
+        "porta": 3010,
+        "diretorio": "./docs-portal/"
+      },
+      "modulos_docs": ["manual_usuario", "referencia_tecnica", "integracao", "faq"],
+      "status": "ativo|inativo"
+    },
+    {
+      "id": "api_propria",
+      "nome": "API do Sistema (este serviço)",
+      "tipo": "api",
+      "plataforma": "express_nodejs",
+      "conexao": {
+        "porta": "ENV:PORT (default 3100)",
+        "cors_origins": "ENV:CORS_ORIGIN",
+        "api_token": "ENV:API_TOKEN (vazio = sem autenticação)"
+      },
+      "status": "ativo"
+    }
+  ],
+  "template_novo_sistema": {
+    "descricao": "Use este template para adicionar um novo sistema à tabela",
+    "template": {
+      "id": "identificador_unico_sem_espacos",
+      "nome": "Nome descritivo do sistema",
+      "tipo": "helpdesk|erp|banco_dados|ia|mensageria|notificacao|storage|documentacao|api|custom",
+      "plataforma": "nome_da_plataforma_ou_custom",
+      "conexao": {
+        "COMENTARIO": "Preencha apenas os campos relevantes para este tipo",
+        "base_url": "ENV:NOME_DA_VARIAVEL",
+        "auth_tipo": "tipo de autenticação",
+        "auth_token": "ENV:NOME_DA_VARIAVEL"
+      },
+      "modulos_habilitados": ["lista", "de", "modulos"],
+      "status": "configurando"
+    }
+  },
+  "exemplo_env_file": {
+    "descricao": "Modelo de arquivo .env com todas as variáveis referenciadas acima",
+    "conteudo": [
+      "# === API ===",
+      "PORT=3100",
+      "CORS_ORIGIN=http://localhost:3017",
+      "API_TOKEN=",
+      "",
+      "# === IA ===",
+      "AI_API_KEY=sk-proj-...",
+      "",
+      "# === MONGODB ===",
+      "MONGO_URI=mongodb://localhost:27017/meu-sistema",
+      "",
+      "# === HELPDESK ===",
+      "HELPDESK_URL=https://desk.empresa.com.br/helpdesk",
+      "HELPDESK_USER=admin@empresa.com",
+      "HELPDESK_PASS=senha_aqui",
+      "HELPDESK_TOKEN=",
+      "",
+      "# === ERP (se usar API) ===",
+      "ERP_URL=https://api.erp.local",
+      "ERP_TOKEN=token_aqui",
+      "",
+      "# === ERP (se conectar direto no banco) ===",
+      "ERP_DB_HOST=192.168.1.100",
+      "ERP_DB_PORT=1433",
+      "ERP_DB_NAME=ERPDatabase",
+      "ERP_DB_USER=sa",
+      "ERP_DB_PASS=senha",
+      "",
+      "# === SQL Módulo 1 ===",
+      "SQL1_HOST=localhost",
+      "SQL1_PORT=1433",
+      "SQL1_DB=ModuloDB",
+      "SQL1_USER=user",
+      "SQL1_PASS=pass",
+      "",
+      "# === WHATSAPP ===",
+      "WHATSAPP_NUMERO=5511999999999",
+      "LGPD_POLITICA_URL=https://empresa.com/politica-privacidade.pdf",
+      "",
+      "# === NOTIFICAÇÕES ===",
+      "TELEGRAM_TOKEN=bot123456:ABC...",
+      "TELEGRAM_CHAT_ID=-1001234567890",
+      "",
+      "# === SCHEDULER ===",
+      "POLLING_INTERVAL=2",
+      "MODO_REVISAO=true"
+    ]
+  },
+  "diagrama_relacionamento": {
+    "descricao": "Como os sistemas se conectam entre si via esta tabela",
+    "fluxo": "Qualquer módulo (01-11) → consulta tabela-relacionamento → obtém conexão → executa operação",
+    "exemplo": {
+      "modulo_whatsapp_quer_criar_ticket": [
+        "1. WhatsApp (módulo 02) precisa criar ticket",
+        "2. Consulta tabela: sistemas.find({id: 'helpdesk_principal'})",
+        "3. Obtém: base_url, auth_tipo, auth_token",
+        "4. Chama: helpdesk-integrador (módulo 03) com conexão obtida",
+        "5. Ticket criado no sistema correto"
+      ],
+      "modulo_relatorio_quer_dados": [
+        "1. Gerador de Relatórios (módulo 05) precisa de dados",
+        "2. Consulta tabela: sistemas.find({id: 'erp_principal'})",
+        "3. Obtém: tipo_conexao (api ou banco), credenciais",
+        "4. Chama: banco-dados-adaptador (módulo 06) com conexão",
+        "5. Dados retornados, relatório gerado"
+      ]
+    }
+  }
+}

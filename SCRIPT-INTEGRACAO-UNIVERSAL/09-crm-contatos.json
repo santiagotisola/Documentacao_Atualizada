@@ -1,0 +1,93 @@
+{
+  "modulo": "crm-contatos",
+  "versao": "1.0.0",
+  "descricao": "Módulo de CRM e gestão de contatos. Centraliza informações de clientes vindas de múltiplas fontes (WhatsApp, Helpdesk, ERP, formulários). Permite segmentação, histórico unificado e automação de relacionamento.",
+  "schema_contato": {
+    "telefone": {"tipo": "string", "unico": true, "indexado": true, "descricao": "Chave principal de identificação"},
+    "nome": "string",
+    "email": "string?",
+    "cpf_cnpj": "string?",
+    "empresa": "string?",
+    "cargo": "string?",
+    "tags": ["array de strings para segmentação"],
+    "origem": {"tipo": "enum", "valores": ["whatsapp", "helpdesk", "formulario", "importacao", "manual"]},
+    "cliente_id": {"tipo": "string?", "descricao": "Referência ao cadastro no ERP (se existir)"},
+    "endereco": {
+      "logradouro": "string?",
+      "numero": "string?",
+      "bairro": "string?",
+      "cidade": "string?",
+      "uf": "string?",
+      "cep": "string?"
+    },
+    "preferencias": {
+      "canal_preferido": "whatsapp|email|telefone",
+      "horario_contato": "string?",
+      "idioma": "pt-br"
+    },
+    "metricas": {
+      "total_interacoes": "number",
+      "ultimo_contato": "date",
+      "tickets_abertos": "number",
+      "tickets_resolvidos": "number",
+      "satisfacao_media": "number (1-5)",
+      "ltv_estimado": "number?"
+    },
+    "lgpd": {
+      "consentimento": "boolean",
+      "data_consentimento": "date?",
+      "finalidade": ["atendimento", "marketing", "pesquisa"],
+      "pode_marketing": "boolean"
+    },
+    "criado_em": "date",
+    "atualizado_em": "date"
+  },
+  "schema_cliente": {
+    "descricao": "Clientes são contatos elevados — com contrato, produtos, etc.",
+    "slug": {"tipo": "string", "unico": true, "descricao": "Identificador amigável (url-safe)"},
+    "nome": "string",
+    "nome_fantasia": "string?",
+    "cnpj": "string?",
+    "produtos": ["lista de produtos/módulos contratados"],
+    "status_contrato": {"tipo": "enum", "valores": ["ativo", "suspenso", "cancelado", "prospecto"]},
+    "plano": "string?",
+    "contatos": ["array de telefones vinculados"],
+    "uf": "string?",
+    "site_id": "string? (referência a instalação/filial)",
+    "valor_mensal": "number?",
+    "data_inicio_contrato": "date?",
+    "data_fim_contrato": "date?",
+    "notas": "string?"
+  },
+  "funcionalidades": {
+    "unificacao_automatica": {
+      "descricao": "Quando um contato chega pelo WhatsApp e já existe no Helpdesk, unifica automaticamente",
+      "regra_match": "telefone OU email OU cpf_cnpj"
+    },
+    "historico_unificado": {
+      "descricao": "Todas as interações do contato em uma timeline única",
+      "fontes": ["mensagens_whatsapp", "tickets_helpdesk", "compras_erp", "chamadas_telefone"]
+    },
+    "segmentacao_tags": {
+      "descricao": "Usar tags para segmentar contatos para campanhas, priorização, etc.",
+      "exemplos_tags": ["vip", "inadimplente", "novo_cliente", "farmacia", "rede", "individual"]
+    },
+    "automacoes": [
+      {"trigger": "contato sem interação há 30 dias", "acao": "Enviar mensagem de follow-up"},
+      {"trigger": "ticket resolvido", "acao": "Enviar pesquisa de satisfação em 24h"},
+      {"trigger": "aniversário do contrato", "acao": "Enviar mensagem de renovação"}
+    ]
+  },
+  "api_endpoints_crm": [
+    {"metodo": "GET", "rota": "/api/crm/contatos", "query": "nome, telefone, tag, origem, page, limit"},
+    {"metodo": "GET", "rota": "/api/crm/contatos/:telefone", "descricao": "Detalhes + histórico do contato"},
+    {"metodo": "PUT", "rota": "/api/crm/contatos/:telefone", "descricao": "Atualizar dados do contato"},
+    {"metodo": "POST", "rota": "/api/crm/contatos", "descricao": "Criar contato manualmente"},
+    {"metodo": "GET", "rota": "/api/crm/clientes", "descricao": "Listar clientes (contratos)"},
+    {"metodo": "GET", "rota": "/api/crm/clientes/:slug", "descricao": "Detalhes do cliente"},
+    {"metodo": "POST", "rota": "/api/crm/clientes", "descricao": "Cadastrar novo cliente"},
+    {"metodo": "GET", "rota": "/api/crm/busca", "query": "q (busca global)", "descricao": "Busca unificada"},
+    {"metodo": "GET", "rota": "/api/crm/dashboard", "descricao": "Métricas gerais (total contatos, novos no mês, etc.)"},
+    {"metodo": "POST", "rota": "/api/crm/importar", "descricao": "Importar contatos de CSV/Excel"}
+  ]
+}

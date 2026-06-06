@@ -1,0 +1,102 @@
+{
+  "modulo": "scheduler-automacao",
+  "versao": "1.0.0",
+  "descricao": "Módulo de automação e agendamento de tarefas. Executa jobs periódicos como polling de helpdesk, geração de relatórios, health checks, limpeza de dados, notificações programadas.",
+  "dependencias": {
+    "obrigatorias": ["node-cron@^3.0.0 (agendamento cron)"],
+    "opcionais": ["bull ou bullmq (filas avançadas com Redis)", "agenda (jobs com MongoDB)"]
+  },
+  "tipos_jobs": {
+    "polling": {
+      "descricao": "Verifica periodicamente um sistema externo por novidades",
+      "exemplos": [
+        {"nome": "polling_helpdesk", "acao": "Buscar tickets sem resposta e processar via IA", "intervalo": "2 minutos"},
+        {"nome": "polling_email", "acao": "Verificar caixa de entrada por novos chamados", "intervalo": "5 minutos"},
+        {"nome": "health_check", "acao": "Verificar se sistemas externos estão online", "intervalo": "5 minutos"}
+      ]
+    },
+    "geracao": {
+      "descricao": "Gera algo periodicamente (relatórios, backups, exports)",
+      "exemplos": [
+        {"nome": "relatorio_diario", "acao": "Gerar e enviar relatório de vendas do dia", "cron": "0 18 * * 1-5"},
+        {"nome": "backup_kb", "acao": "Exportar knowledge base para JSON", "cron": "0 2 * * *"},
+        {"nome": "relatorio_sla", "acao": "Gerar relatório de SLA semanal", "cron": "0 8 * * 1"}
+      ]
+    },
+    "limpeza": {
+      "descricao": "Remove dados expirados ou temporários",
+      "exemplos": [
+        {"nome": "limpar_sessoes", "acao": "Remover sessões WhatsApp expiradas (TTL)", "cron": "0 * * * *"},
+        {"nome": "limpar_logs", "acao": "Remover logs com mais de 90 dias", "cron": "0 3 1 * *"},
+        {"nome": "limpar_temp", "acao": "Remover arquivos temporários", "cron": "0 4 * * *"}
+      ]
+    },
+    "notificacao": {
+      "descricao": "Envia notificações programadas",
+      "exemplos": [
+        {"nome": "lembrete_sla", "acao": "Avisar sobre tickets prestes a violar SLA", "intervalo": "15 minutos"},
+        {"nome": "resumo_matinal", "acao": "Enviar resumo do dia anterior no Telegram", "cron": "0 8 * * 1-5"},
+        {"nome": "pesquisa_satisfacao", "acao": "Enviar pesquisa 24h após resolução do ticket", "intervalo": "1 hora"}
+      ]
+    }
+  },
+  "configuracao_job": {
+    "schema": {
+      "id": "string (unico)",
+      "nome": "string",
+      "tipo": "polling|geracao|limpeza|notificacao|custom",
+      "habilitado": "boolean",
+      "cron": "string (expressão cron) — OU —",
+      "intervalo_ms": "number (milissegundos entre execuções)",
+      "horario_funcionamento": {
+        "dias": ["seg", "ter", "qua", "qui", "sex"],
+        "hora_inicio": "08:00",
+        "hora_fim": "18:00",
+        "timezone": "America/Sao_Paulo"
+      },
+      "retry": {
+        "tentativas": 3,
+        "delay_ms": 5000,
+        "backoff": "exponencial"
+      },
+      "timeout_ms": 30000,
+      "concorrencia_max": 1,
+      "notificar_erro": {"canal": "telegram", "destino": "ENV:TELEGRAM_CHAT_ID"}
+    }
+  },
+  "estados_scheduler": {
+    "descricao": "O scheduler mantém estado para monitoramento",
+    "schema": {
+      "jobs_ativos": "number",
+      "jobs_pausados": "number",
+      "ultima_execucao": {"job_id": "string", "timestamp": "date", "resultado": "sucesso|erro"},
+      "proxima_execucao": {"job_id": "string", "timestamp": "date"},
+      "estatisticas_24h": {
+        "executados": "number",
+        "sucesso": "number",
+        "erros": "number",
+        "tempo_medio_ms": "number"
+      }
+    }
+  },
+  "api_endpoints_scheduler": [
+    {"metodo": "GET", "rota": "/api/scheduler/status", "descricao": "Status geral do scheduler"},
+    {"metodo": "GET", "rota": "/api/scheduler/jobs", "descricao": "Lista todos os jobs configurados"},
+    {"metodo": "POST", "rota": "/api/scheduler/start", "descricao": "Iniciar scheduler (todos os jobs habilitados)"},
+    {"metodo": "POST", "rota": "/api/scheduler/stop", "descricao": "Parar scheduler"},
+    {"metodo": "POST", "rota": "/api/scheduler/job/:id/executar", "descricao": "Executar job manualmente agora"},
+    {"metodo": "PATCH", "rota": "/api/scheduler/job/:id", "descricao": "Atualizar configuração de job (habilitar/desabilitar, mudar cron)"},
+    {"metodo": "GET", "rota": "/api/scheduler/historico", "descricao": "Histórico de execuções com resultados"}
+  ],
+  "cron_referencia_rapida": {
+    "a_cada_2_minutos": "*/2 * * * *",
+    "a_cada_5_minutos": "*/5 * * * *",
+    "a_cada_hora": "0 * * * *",
+    "diario_8h": "0 8 * * *",
+    "diario_18h": "0 18 * * *",
+    "seg_a_sex_8h": "0 8 * * 1-5",
+    "semanal_segunda_8h": "0 8 * * 1",
+    "mensal_dia_1": "0 8 1 * *",
+    "formato": "minuto hora dia_mes mes dia_semana"
+  }
+}

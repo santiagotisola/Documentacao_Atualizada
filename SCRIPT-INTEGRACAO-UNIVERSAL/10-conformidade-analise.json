@@ -1,0 +1,89 @@
+{
+  "modulo": "conformidade-analise",
+  "versao": "1.0.0",
+  "descricao": "Módulo de análise de conformidade e compliance. Verifica se produtos/serviços atendem requisitos de editais, normas regulatórias, ou padrões internos. Usa IA para comparar especificações e identificar gaps.",
+  "casos_uso": [
+    "Verificar se produto atende requisitos de edital de licitação",
+    "Comparar funcionalidades entre produtos concorrentes",
+    "Análise de gaps entre o que tem e o que precisa",
+    "Gerar recomendações de melhorias priorizadas",
+    "Compliance com normas (ANVISA, INMETRO, ISO, LGPD)"
+  ],
+  "fluxo_analise": [
+    {
+      "passo": 1,
+      "nome": "Entrada de requisitos",
+      "descricao": "Importar documento de requisitos (edital PDF, checklist, norma)",
+      "formatos_aceitos": ["pdf", "docx", "xlsx", "json", "texto_livre"]
+    },
+    {
+      "passo": 2,
+      "nome": "Extração de itens",
+      "descricao": "IA extrai cada requisito individual do documento",
+      "resultado": [{"id": "REQ-001", "descricao": "texto do requisito", "categoria": "string", "obrigatorio": "boolean"}]
+    },
+    {
+      "passo": 3,
+      "nome": "Mapeamento com sistema",
+      "descricao": "Para cada requisito, verificar se o sistema/produto atende",
+      "fontes_verificacao": ["knowledge_base", "documentacao", "funcionalidades_cadastradas", "analise_ia"]
+    },
+    {
+      "passo": 4,
+      "nome": "Classificação",
+      "descricao": "Cada requisito recebe classificação",
+      "classificacoes": {
+        "atende": "Sistema já possui a funcionalidade/requisito",
+        "atende_parcial": "Possui parcialmente, precisa de ajuste",
+        "nao_atende": "Não possui, precisa desenvolver",
+        "nao_aplicavel": "Requisito não se aplica ao contexto"
+      }
+    },
+    {
+      "passo": 5,
+      "nome": "Gerar relatório",
+      "descricao": "Produzir análise completa com percentual de aderência, gaps e recomendações"
+    }
+  ],
+  "schema_analise": {
+    "id": "string",
+    "titulo": "string",
+    "produto_analisado": "string",
+    "documento_referencia": "string (nome do edital/norma)",
+    "data_analise": "date",
+    "resultado": {
+      "total_requisitos": "number",
+      "atende": "number",
+      "atende_parcial": "number",
+      "nao_atende": "number",
+      "nao_aplicavel": "number",
+      "percentual_aderencia": "number (0-100)"
+    },
+    "itens": [{
+      "id": "string",
+      "requisito": "string",
+      "classificacao": "atende|atende_parcial|nao_atende|nao_aplicavel",
+      "evidencia": "string (como atende)",
+      "gap": "string? (o que falta)",
+      "recomendacao": "string? (como resolver)",
+      "prioridade": "alta|media|baixa",
+      "esforco_estimado": "string?"
+    }],
+    "recomendacoes_priorizadas": [{
+      "gap_id": "string",
+      "titulo": "string",
+      "descricao": "string",
+      "impacto": "alto|medio|baixo",
+      "esforco": "alto|medio|baixo",
+      "prioridade_calculada": "number (1-10)"
+    }]
+  },
+  "api_endpoints_conformidade": [
+    {"metodo": "POST", "rota": "/api/conformidade/analisar", "body": {"produto": "string", "requisitos": "file|json|text"}, "descricao": "Executar análise de conformidade"},
+    {"metodo": "GET", "rota": "/api/conformidade", "descricao": "Listar análises realizadas"},
+    {"metodo": "GET", "rota": "/api/conformidade/:id", "descricao": "Detalhes de uma análise"},
+    {"metodo": "GET", "rota": "/api/conformidade/:id/gaps", "descricao": "Apenas os gaps identificados"},
+    {"metodo": "GET", "rota": "/api/conformidade/:id/recomendacoes", "descricao": "Recomendações priorizadas"},
+    {"metodo": "POST", "rota": "/api/conformidade/comparar", "body": {"produtos": ["array"], "requisitos": "file|json"}, "descricao": "Comparar múltiplos produtos"}
+  ]
+}

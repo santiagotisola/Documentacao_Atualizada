@@ -1,0 +1,239 @@
+{
+  "modulo": "gerador-relatorios",
+  "versao": "1.0.0",
+  "descricao": "Sistema de geração de relatórios em múltiplos formatos (PDF, Word, HTML, Excel). Conecta-se a qualquer fonte de dados e gera relatórios automatizados com templates personalizáveis.",
+  "dependencias": {
+    "pdf": ["puppeteer-core (Chrome headless para HTML→PDF)", "pdfkit (geração programática)"],
+    "word": ["docx (geração de .docx)", "markdown-it (parser markdown)"],
+    "excel": ["exceljs (planilhas .xlsx)", "json2csv (exportação CSV)"],
+    "html": ["ejs ou handlebars (templates HTML)"]
+  },
+  "tipos_relatorio": {
+    "operacional": {
+      "descricao": "Relatórios do dia-a-dia: vendas, estoque, atendimentos",
+      "frequencia": "diário|semanal|mensal",
+      "exemplos": [
+        "Vendas do dia por operador",
+        "Estoque abaixo do mínimo",
+        "Tickets abertos vs. resolvidos",
+        "Equipamentos com heartbeat atrasado"
+      ]
+    },
+    "gerencial": {
+      "descricao": "Relatórios para tomada de decisão: KPIs, tendências, comparativos",
+      "frequencia": "semanal|mensal|trimestral",
+      "exemplos": [
+        "Faturamento mensal comparativo",
+        "SLA compliance por período",
+        "Ranking de produtos/serviços",
+        "Análise de satisfação do cliente"
+      ]
+    },
+    "compliance": {
+      "descricao": "Relatórios regulatórios: ANVISA, SNGPC, fiscal",
+      "frequencia": "sob demanda|mensal",
+      "exemplos": [
+        "SNGPC (BMPO, BSPO, RMNRA)",
+        "Relatório de conformidade",
+        "Auditoria de acessos",
+        "Relatório LGPD (tratamento de dados)"
+      ]
+    },
+    "contratual": {
+      "descricao": "Relatórios de acompanhamento de contratos e SLA",
+      "frequencia": "mensal",
+      "exemplos": [
+        "SLA por contrato",
+        "Disponibilidade de equipamentos",
+        "Horas técnicas utilizadas",
+        "Incidentes por severidade"
+      ]
+    }
+  },
+  "arquitetura_geracao": {
+    "fluxo": [
+      {
+        "passo": 1,
+        "nome": "Definir template",
+        "descricao": "Escolher ou criar template (HTML/Markdown) com placeholders para dados"
+      },
+      {
+        "passo": 2,
+        "nome": "Coletar dados",
+        "descricao": "Buscar dados das fontes configuradas (ERP, BD, API, Helpdesk)",
+        "fontes_possiveis": ["banco_sql", "mongodb", "api_externa", "arquivo_csv", "helpdesk"]
+      },
+      {
+        "passo": 3,
+        "nome": "Processar dados",
+        "descricao": "Agregar, filtrar, calcular métricas, gerar gráficos"
+      },
+      {
+        "passo": 4,
+        "nome": "Renderizar",
+        "descricao": "Aplicar dados ao template gerando o documento final"
+      },
+      {
+        "passo": 5,
+        "nome": "Exportar",
+        "descricao": "Salvar no formato desejado (PDF, DOCX, XLSX, HTML)"
+      },
+      {
+        "passo": 6,
+        "nome": "Distribuir (opcional)",
+        "descricao": "Enviar por email, WhatsApp, salvar em nuvem, notificar"
+      }
+    ]
+  },
+  "template_relatorio": {
+    "descricao": "Estrutura de um template de relatório",
+    "schema": {
+      "id": "string (unico)",
+      "nome": "string",
+      "descricao": "string",
+      "tipo": "operacional|gerencial|compliance|contratual",
+      "formato_saida": ["pdf", "docx", "xlsx", "html"],
+      "fonte_dados": {
+        "tipo": "sql|mongodb|api|csv",
+        "conexao": "referencia ao módulo 07 (tabela-relacionamento)",
+        "query_ou_endpoint": "string",
+        "parametros": {"data_inicio": "date", "data_fim": "date", "filtros": "object"}
+      },
+      "secoes": [
+        {
+          "titulo": "string",
+          "tipo": "cabecalho|tabela|grafico|texto|metricas|lista",
+          "dados_campo": "string (path no JSON de dados)",
+          "formatacao": {"largura": "string?", "alinhamento": "string?", "cor": "string?"}
+        }
+      ],
+      "cabecalho": {
+        "logo_url": "string?",
+        "titulo": "string",
+        "subtitulo": "string?",
+        "data_geracao": true,
+        "periodo": true
+      },
+      "rodape": {
+        "texto": "Gerado automaticamente por {SISTEMA} em {DATA}",
+        "paginacao": true
+      },
+      "agendamento": {
+        "habilitado": false,
+        "cron": "0 8 * * 1",
+        "destinatarios": ["email@empresa.com"],
+        "canal_envio": "email|whatsapp|slack"
+      }
+    }
+  },
+  "exemplos_templates": {
+    "vendas_diarias": {
+      "nome": "Vendas do Dia",
+      "tipo": "operacional",
+      "formato_saida": ["pdf", "xlsx"],
+      "fonte_dados": {
+        "tipo": "sql",
+        "query": "SELECT * FROM Vendas WHERE Data = @hoje ORDER BY Hora DESC"
+      },
+      "secoes": [
+        {"titulo": "Resumo", "tipo": "metricas", "campos": ["total_vendas", "ticket_medio", "itens_vendidos", "clientes_atendidos"]},
+        {"titulo": "Detalhamento", "tipo": "tabela", "colunas": ["hora", "cliente", "itens", "total", "pagamento"]},
+        {"titulo": "Top 10 Produtos", "tipo": "grafico", "tipo_grafico": "barra_horizontal"}
+      ]
+    },
+    "sla_mensal": {
+      "nome": "Compliance SLA Mensal",
+      "tipo": "contratual",
+      "formato_saida": ["pdf"],
+      "fonte_dados": {
+        "tipo": "api",
+        "endpoint": "/api/helpdesk/sla-compliance?mes={mes}&ano={ano}"
+      },
+      "secoes": [
+        {"titulo": "Indicadores Gerais", "tipo": "metricas", "campos": ["tickets_total", "dentro_sla", "fora_sla", "percentual_compliance"]},
+        {"titulo": "Por Prioridade", "tipo": "tabela", "colunas": ["prioridade", "total", "dentro_sla", "fora_sla", "media_horas"]},
+        {"titulo": "Evolução Mensal", "tipo": "grafico", "tipo_grafico": "linha"}
+      ]
+    }
+  },
+  "geracao_manual_documentacao": {
+    "descricao": "Como gerar manuais/documentação a partir de dados do sistema",
+    "fluxo": [
+      {
+        "passo": 1,
+        "nome": "Capturar screenshots/dados",
+        "descricao": "Usar Puppeteer para capturar telas do sistema OU listar funcionalidades via API"
+      },
+      {
+        "passo": 2,
+        "nome": "Gerar descrições via IA",
+        "descricao": "Enviar screenshots/dados para LLM com prompt: 'Descreva esta tela e crie tutorial passo-a-passo'"
+      },
+      {
+        "passo": 3,
+        "nome": "Estruturar em Markdown/MDX",
+        "descricao": "Montar estrutura de documentação com navegação"
+      },
+      {
+        "passo": 4,
+        "nome": "Exportar formato final",
+        "descricao": "PDF (via Puppeteer), DOCX (via docx lib), HTML (site Docusaurus)"
+      }
+    ],
+    "template_manual": {
+      "estrutura": [
+        "1. Introdução e Visão Geral",
+        "2. Requisitos e Instalação",
+        "3. Primeiros Passos",
+        "4. Módulos/Funcionalidades (um capítulo por módulo)",
+        "5. Configurações Avançadas",
+        "6. Integrações",
+        "7. FAQ / Troubleshooting",
+        "8. Glossário"
+      ]
+    },
+    "catalogo_imagens": {
+      "descricao": "Mapa de screenshots disponíveis por produto/módulo",
+      "schema": {
+        "produto": "string",
+        "modulo": "string",
+        "imagens": [{"arquivo": "string", "descricao": "string", "tela": "string"}]
+      }
+    }
+  },
+  "api_endpoints_relatorios": [
+    {
+      "metodo": "GET",
+      "rota": "/api/relatorio/templates",
+      "descricao": "Lista templates de relatório disponíveis"
+    },
+    {
+      "metodo": "POST",
+      "rota": "/api/relatorio/gerar",
+      "descricao": "Gera relatório a partir de template",
+      "body": {"template_id": "string", "parametros": {"data_inicio": "date", "data_fim": "date", "filtros": "object"}, "formato": "pdf|docx|xlsx|html"}
+    },
+    {
+      "metodo": "GET",
+      "rota": "/api/relatorio/historico",
+      "descricao": "Lista relatórios já gerados"
+    },
+    {
+      "metodo": "GET",
+      "rota": "/api/relatorio/:id/download",
+      "descricao": "Download de relatório gerado"
+    },
+    {
+      "metodo": "POST",
+      "rota": "/api/relatorio/agendar",
+      "descricao": "Agendar geração automática",
+      "body": {"template_id": "string", "cron": "string", "destinatarios": ["string"], "formato": "string"}
+    },
+    {
+      "metodo": "POST",
+      "rota": "/api/doc/gerar",
+      "descricao": "Gerar documentação/manual via IA",
+      "body": {"produto": "string", "modulo": "string", "tipo": "tutorial|referencia|guia"}
+    }
+  ]
+}

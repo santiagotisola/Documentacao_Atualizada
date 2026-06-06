@@ -432,7 +432,78 @@ SJW1J10 #2911 (18/05/2026): InfractionType=1, InfractionCode=-68312 ❌  [APÓS 
 
 ---
 
-## 8. Referências
+## 8. Resolução Final — Resposta ao Chamado
+
+**Data da resolução:** 02/06/2026  
+**Analista:** Equipe Axion  
+**Status:** ✅ RESOLVIDO — Sem bug no cálculo atual
+
+### 8.1 Conclusão Técnica
+
+O sistema **está calculando corretamente** com base na configuração vigente:
+
+| Parâmetro | Valor Atual | Efeito |
+|-----------|:-----------:|--------|
+| `InfractionLimitAxlePBT` | 50.000 kg | Veículos com PBT regulamentado ≤ 50t → checa **somente eixo** |
+| `TolerancePercentage` (PBT) | 5% | Tolerância sobre PBT regulamentado |
+| `TolerancePercentageAxle` | 12,5% | Tolerância sobre peso por eixo |
+
+**Pesagem #2911 (SJW1J10, 18/05/2026):**
+- PBT regulamentado = 29.000 kg → 29.000 ≤ 50.000 → sistema avalia **somente eixo**
+- Eixo E3E4: 20.850 kg > 19.125 kg (17.000 × 1,125) → excesso = +1.725 kg
+- Resultado: **Excesso de Eixo (-68312)** → ✅ Correto para a configuração atual
+
+**Pesagem #1541 (SJW1J10, 05/05/2025):**
+- Resultado registrado: "Excesso de Eixo/PBT" → indica que na época a configuração estava diferente (limite abaixo de 29.000)
+- Não há backup nem log de configuração de 2025 para confirmar o valor exato
+
+### 8.2 Por que a divergência entre 2025 e 2026?
+
+A infração é calculada **uma única vez no momento da pesagem** e fica congelada no registro. A única explicação para resultados diferentes com o mesmo veículo é que o parâmetro `InfractionLimitAxlePBT` foi alterado entre as duas datas.
+
+Possíveis causas da alteração:
+1. Correção manual da configuração
+2. Reinstalação/atualização que restaurou o valor padrão (50.000 kg)
+3. Confusão de unidade (campo rotulado "TN" mas sistema usa kg)
+
+### 8.3 Limitações
+
+- **Não é possível validar retroativamente** a pesagem de 2025
+- Não existe histórico/log de alterações de configuração no sistema
+- Não há backup da configuração vigente naquela época
+- O resultado gravado é definitivo e não recalcula automaticamente
+
+### 8.4 Resposta para o Cliente (Daniel)
+
+> Fizemos a análise completa da divergência entre a pesagem de 2025 e a de 2026 para o mesmo veículo (PBT regulamentado = 29.000 kg).
+>
+> **Conclusão: O sistema está calculando corretamente.**
+>
+> O cálculo de infração é feito uma única vez no momento da pesagem, usando a configuração vigente naquele dia. O parâmetro que controla se o PBT é avaliado é o `InfractionLimitAxlePBT`:
+>
+> - Se o PBT regulamentado do veículo ≤ esse limite → sistema checa **somente eixo**
+> - Se o PBT regulamentado > esse limite → sistema checa **eixo e PBT**
+>
+> Hoje esse parâmetro está em **50.000 kg**. Como 29.000 ≤ 50.000, o sistema corretamente avalia apenas eixo — e foi exatamente o que ocorreu na pesagem de 2026 (resultado: "Excesso de Eixo").
+>
+> A pesagem de 2025 ter saído como "Eixo/PBT" indica que **naquela época a configuração estava diferente** (limite abaixo de 29.000). Isso é consistente com uma alteração de configuração entre as duas datas — possivelmente uma correção, reinstalação ou atualização que restaurou o valor para o padrão do sistema.
+>
+> **Não temos como validar retroativamente** o resultado de 2025 porque:
+> 1. Não existe histórico/log de alterações de configuração
+> 2. Não há backup da configuração antiga
+> 3. O resultado da pesagem fica "congelado" no momento em que é feita
+>
+> **Em resumo:**
+> - ✅ A configuração atual está aplicando a regra corretamente conforme resolução CONTRAN vigente
+> - ✅ A pesagem de 2026 está correta para a configuração vigente
+> - ⚠️ A pesagem de 2025 foi gerada sob uma configuração diferente que não temos como recuperar
+> - Não há bug no sistema — é uma questão de configuração que foi alterada entre as duas datas
+>
+> Se houver dúvida sobre qual deveria ser a regra correta (se PBT deveria valer para veículos abaixo de 50t), isso precisa ser validado com a área de negócio/resolução CONTRAN aplicável ao site.
+
+---
+
+## 9. Referências
 
 - **Lei 14.229/2021**: https://www.planalto.gov.br/ccivil_03/_ato2019-2022/2021/lei/l14229.htm
 - **MP 1.050/2021**: https://www.planalto.gov.br/ccivil_03/_ato2019-2022/2021/Mpv/mpv1050.htm

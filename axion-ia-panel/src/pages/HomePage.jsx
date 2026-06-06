@@ -59,7 +59,7 @@ export default function HomePage() {
       <section className="hero-section">
         <div className="hero-inner">
           <span className="hero-badge">Plataforma Unificada de Inteligência</span>
-          <h1 className="hero-title">AXION TECNOLOGIA</h1>
+          <h1 className="hero-title">Axion Tecnologia</h1>
           <p className="hero-subtitle">
             Gestão inteligente de trânsito, pesagem veicular e monitoramento cruzado
           </p>
@@ -86,7 +86,7 @@ export default function HomePage() {
 
       {/* ══ Serviços ══ */}
       <section className="services-section">
-        <h2 className="section-heading">SERVIÇOS</h2>
+        <h2 className="section-heading">Serviços</h2>
         <div className="services-filter">
           {FILTER_TABS.map(tab => (
             <button
@@ -102,7 +102,7 @@ export default function HomePage() {
           {filtered.map(svc => (
             <Link to={svc.to} key={svc.to} className="svc-card">
               <div className="svc-card-icon" style={{ background: svc.color }}>
-                <svc.icon size={36} strokeWidth={1.5} color="#fff" />
+                <svc.icon size={24} strokeWidth={1.5} color="#fff" />
               </div>
               <span className="svc-card-label">{svc.label}</span>
             </Link>
@@ -112,10 +112,10 @@ export default function HomePage() {
 
       {/* ══ Produtos ══ */}
       <section className="products-section">
-        <h2 className="section-heading dark">NOSSOS PRODUTOS</h2>
+        <h2 className="section-heading dark">Nossos Produtos</h2>
         <div className="products-grid">
           <article className="product-card">
-            <Globe size={44} strokeWidth={1.4} />
+            <Globe size={28} strokeWidth={1.5} />
             <h3>AxHub</h3>
             <p>Gestão de trânsito e infrações com OCR e inteligência artificial</p>
             <a href="http://localhost:3010/AxHub.Docs" target="_blank" rel="noreferrer" className="product-link">
@@ -123,7 +123,7 @@ export default function HomePage() {
             </a>
           </article>
           <article className="product-card">
-            <Shield size={44} strokeWidth={1.4} />
+            <Shield size={28} strokeWidth={1.5} />
             <h3>AxTon</h3>
             <p>Pesagem veicular automatizada com controle de conformidade</p>
             <a href="http://localhost:3011/AxTon.Docs" target="_blank" rel="noreferrer" className="product-link">
@@ -131,7 +131,7 @@ export default function HomePage() {
             </a>
           </article>
           <article className="product-card">
-            <TrendingUp size={44} strokeWidth={1.4} />
+            <TrendingUp size={28} strokeWidth={1.5} />
             <h3>AxCross</h3>
             <p>Monitoramento cruzado de veículos com alertas em tempo real</p>
             <a href="http://localhost:3012/AxCross.Docs" target="_blank" rel="noreferrer" className="product-link">

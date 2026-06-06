@@ -1,0 +1,200 @@
+{
+  "modulo": "nucleo-ia-engine",
+  "versao": "1.0.0",
+  "descricao": "Motor de inteligência artificial com 3 camadas: classificação por palavras-chave, busca semântica por embeddings e geração via LLM. Núcleo central reutilizável para qualquer sistema.",
+  "dependencias": {
+    "obrigatorias": ["openai>=4.0.0", "mongoose>=8.0.0"],
+    "opcionais": ["@xenova/transformers (embeddings locais gratuitos)"]
+  },
+  "arquitetura": {
+    "camadas_processamento": [
+      {
+        "ordem": 1,
+        "nome": "classificacao_keywords",
+        "descricao": "Busca por palavras-chave na Knowledge Base. Custo zero, resposta instantânea.",
+        "custo": "R$ 0,00",
+        "latencia_ms": 5,
+        "score_minimo": 1.0,
+        "quando_usar": "Perguntas frequentes com respostas predefinidas"
+      },
+      {
+        "ordem": 2,
+        "nome": "busca_semantica_embeddings",
+        "descricao": "Transforma a pergunta em vetor e compara com vetores da KB via similaridade de cosseno.",
+        "custo": "~R$ 0,001 por consulta",
+        "latencia_ms": 200,
+        "score_minimo": 0.80,
+        "quando_usar": "Quando keywords não encontram match, mas existe conhecimento na base"
+      },
+      {
+        "ordem": 3,
+        "nome": "geracao_llm",
+        "descricao": "Envia para LLM (GPT-4o, Claude, Gemini, Llama) com contexto da KB + histórico de sessão.",
+        "custo": "~R$ 0,02 por resposta",
+        "latencia_ms": 2000,
+        "score_minimo": null,
+        "quando_usar": "Quando as camadas anteriores não atingem score mínimo"
+      }
+    ]
+  },
+  "configuracao": {
+    "llm_provider": {
+      "tipo": "enum",
+      "opcoes": ["openai", "anthropic", "google", "ollama_local", "azure_openai"],
+      "padrao": "openai",
+      "descricao": "Provedor de LLM. Pode trocar sem alterar a lógica."
+    },
+    "modelo": {
+      "tipo": "string",
+      "padrao": "gpt-4o",
+      "alternativas": ["gpt-4o-mini", "claude-sonnet-4-20250514", "gemini-2.0-flash", "llama3:8b"]
+    },
+    "embedding_modelo": {
+      "tipo": "string",
+      "padrao": "text-embedding-3-small",
+      "alternativas": ["text-embedding-3-large", "nomic-embed-text (local gratuito)"]
+    },
+    "score_auto_resposta": {
+      "tipo": "number",
+      "padrao": 0.85,
+      "descricao": "Score mínimo para responder automaticamente sem revisão humana"
+    },
+    "score_sugestao": {
+      "tipo": "number",
+      "padrao": 0.65,
+      "descricao": "Score mínimo para sugerir resposta (vai para fila de revisão)"
+    },
+    "score_escalar": {
+      "tipo": "number",
+      "descricao": "Abaixo de score_sugestao, escala para humano"
+    },
+    "max_tokens_resposta": 1500,
+    "temperatura": 0.3,
+    "historico_sessao_max_mensagens": 10
+  },
+  "knowledge_base": {
+    "estrutura_entrada": {
+      "pergunta": "Texto da pergunta ou variações separadas por |",
+      "resposta": "Resposta completa em markdown",
+      "modulo": "Categoria/módulo (ex: vendas, estoque, suporte)",
+      "tags": ["tag1", "tag2"],
+      "embedding": [0.123, -0.456, "...vetor 1536 dimensões"],
+      "ativo": true,
+      "prioridade": 1
+    },
+    "exemplo_farmacia": {
+      "pergunta": "como cadastrar receita médica|receita controlada|SNGPC receita",
+      "resposta": "Para cadastrar uma receita médica:\n1. Acesse Vendas > Nova Venda\n2. Selecione o produto controlado\n3. Clique em 'Vincular Receita'\n4. Preencha: CRM do médico, data, tipo de receita\n5. Escaneie o documento\n6. Confirme a venda",
+      "modulo": "sngpc",
+      "tags": ["receita", "controlado", "anvisa", "sngpc"]
+    },
+    "operacoes": {
+      "treinar": {
+        "endpoint": "POST /api/treinar",
+        "body": {
+          "pergunta": "string",
+          "resposta": "string",
+          "modulo": "string",
+          "tags": ["array"]
+        },
+        "descricao": "Adiciona novo conhecimento à base. Gera embedding automaticamente."
+      },
+      "buscar": {
+        "endpoint": "POST /api/chat",
+        "body": {
+          "mensagem": "string",
+          "sessionId": "string (opcional)",
+          "modulo": "string (opcional, filtra por módulo)"
+        },
+        "resposta": {
+          "resposta": "string",
+          "origem": "kb|semantica|openai",
+          "score": 0.95,
+          "modulo": "string",
+          "tempo_ms": 150
+        }
+      },
+      "listar_kb": {
+        "endpoint": "GET /api/kb?modulo=vendas&page=1&limit=50",
+        "descricao": "Lista entradas da knowledge base com filtros"
+      }
+    }
+  },
+  "prompt_sistema_template": {
+    "descricao": "Template do system prompt que define a personalidade e regras do assistente",
+    "template": "Você é o assistente virtual de {NOME_EMPRESA}. Seu papel é ajudar {TIPO_USUARIO} com dúvidas sobre {DOMINIO_SISTEMA}.\n\nRegras:\n- Responda APENAS sobre {DOMINIO_SISTEMA}\n- Se não souber, diga que vai encaminhar para suporte humano\n- Use linguagem {FORMALIDADE}\n- Limite respostas a {MAX_CARACTERES} caracteres\n- Sempre sugira próximos passos\n\nContexto da Knowledge Base:\n{CONTEXTO_KB}\n\nHistórico da conversa:\n{HISTORICO}",
+    "variaveis": {
+      "NOME_EMPRESA": "Nome da sua empresa",
+      "TIPO_USUARIO": "clientes|funcionários|parceiros",
+      "DOMINIO_SISTEMA": "gestão farmacêutica|helpdesk|vendas|etc",
+      "FORMALIDADE": "formal|informal|técnica",
+      "MAX_CARACTERES": 2000,
+      "CONTEXTO_KB": "[Preenchido automaticamente pela busca semântica]",
+      "HISTORICO": "[Últimas N mensagens da sessão]"
+    }
+  },
+  "fluxo_decisao": {
+    "descricao": "Lógica de decisão para cada mensagem recebida",
+    "etapas": [
+      {
+        "etapa": 1,
+        "acao": "Classificar intenção por keywords",
+        "resultado_positivo": "Retorna resposta da KB direto (score=1.0)",
+        "resultado_negativo": "Vai para etapa 2"
+      },
+      {
+        "etapa": 2,
+        "acao": "Busca semântica por embeddings (cosine similarity)",
+        "resultado_positivo": "score >= 0.80 → Retorna resposta encontrada",
+        "resultado_negativo": "Vai para etapa 3"
+      },
+      {
+        "etapa": 3,
+        "acao": "Gerar via LLM com contexto",
+        "resultado_positivo": "Retorna resposta gerada",
+        "resultado_negativo": "Escala para humano"
+      },
+      {
+        "etapa": 4,
+        "acao": "Avaliar confiança da resposta",
+        "thresholds": {
+          "auto_enviar": ">= 0.85",
+          "sugerir_revisao": ">= 0.65 e < 0.85",
+          "escalar_humano": "< 0.65"
+        }
+      }
+    ]
+  },
+  "api_endpoints_nucleo": [
+    {
+      "metodo": "POST",
+      "rota": "/api/chat",
+      "descricao": "Endpoint principal de conversação",
+      "body": {"mensagem": "string", "sessionId": "string?", "modulo": "string?"},
+      "resposta": {"resposta": "string", "origem": "string", "score": "number"}
+    },
+    {
+      "metodo": "POST",
+      "rota": "/api/treinar",
+      "descricao": "Treinar knowledge base",
+      "body": {"pergunta": "string", "resposta": "string", "modulo": "string", "tags": "string[]"}
+    },
+    {
+      "metodo": "GET",
+      "rota": "/api/kb",
+      "descricao": "Listar knowledge base",
+      "query": {"modulo": "string?", "page": "number?", "limit": "number?"}
+    },
+    {
+      "metodo": "DELETE",
+      "rota": "/api/kb/:id",
+      "descricao": "Remover entrada da KB"
+    },
+    {
+      "metodo": "GET",
+      "rota": "/api/logs",
+      "descricao": "Histórico de conversas",
+      "query": {"sessionId": "string?", "desde": "date?", "ate": "date?"}
+    }
+  ]
+}

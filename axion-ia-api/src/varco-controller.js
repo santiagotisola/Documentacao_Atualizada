@@ -398,3 +398,88 @@ export async function heartbeatGeral(req, res) {
     return res.status(500).json({ erro: err.message });
   }
 }
+
+// ─── GET /api/varco/frota — Lista todos dispositivos direto do VARCO ─────────
+
+const VARCO_CREDENTIALS = {
+  email: "suporte@axiontecnologia.com.br",
+  password: "Axiontecnologia@2026"
+};
+
+let cachedToken = null;
+let tokenExpiry = 0;
+
+async function getVarcoToken() {
+  if (cachedToken && Date.now() < tokenExpiry) return cachedToken;
+  const res = await fetch("https://varco.io/api/auth/login", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(VARCO_CREDENTIALS)
+  });
+  if (!res.ok) throw new Error("Falha login VARCO: " + res.status);
+  const data = await res.json();
+  cachedToken = data.token;
+  tokenExpiry = Date.now() + 3600_000; // 1h
+  return cachedToken;
+}
+
+export async function listarFrota(req, res) {
+  try {
+    const token = await getVarcoToken();
+    const devRes = await fetch("https://varco.io/api/devices?limit=100&offset=0", {
+      headers: { Authorization: `Bearer ${token}` }
+    });
+    if (!devRes.ok) throw new Error("Falha ao buscar dispositivos: " + devRes.status);
+    const raw = await devRes.json();
+    const devices = Object.values(raw).map(d => ({
+      name: d.commonName,
+      uuid: d.uuid,
+      ip: d.lastSeenIP,
+      status: d.status,
+      connected: d.connected,
+      lastSeen: d.lastSeenAt,
+      registeredAt: d.registeredAt,
+      availability: d.todayAvailability,
+      tunnel: `https://${d.uuid}-80.tunnel.varco.cloud`
+    }));
+    devices.sort((a, b) => a.name.localeCompare(b.name));
+
+    const online = devices.filter(d => d.connected).length;
+    return res.json({
+      total: devices.length,
+      online,
+      offline: devices.length - online,
+      devices
+    });
+  } catch (err) {
+    return res.status(500).json({ erro: err.message });
+  }
+}
+
+// ─── GET /api/varco/auditoria — Status da auditoria de configuração ──────────
+
+import { readFileSync, existsSync } from "fs";
+import { resolve } from "path";
+
+export function auditoriaStatus(req, res) {
+  try {
+    const dataFile = resolve(process.cwd(), "../auditoria-itscam/analise-dados.json");
+    const invFile = resolve(process.cwd(), "../auditoria-itscam/devices-inventory.json");
+
+    if (!existsSync(dataFile)) {
+      return res.status(404).json({ erro: "Dados de auditoria não encontrados. Execute a análise primeiro." });
+    }
+
+    const devices = JSON.parse(readFileSync(dataFile, "utf8"));
+    const inventory = existsSync(invFile) ? JSON.parse(readFileSync(invFile, "utf8")) : [];
+
+    return res.json({
+      total: devices.length,
+      inventario: inventory.length,
+      ultimaAtualizacao: new Date().toISOString(),
+      devices
+    });
+  } catch (err) {
+    return res.status(500).json({ erro: err.message });
+  }
+}

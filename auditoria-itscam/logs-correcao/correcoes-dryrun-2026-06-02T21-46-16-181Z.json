@@ -1,0 +1,1036 @@
+{
+  "inicio": "2026-06-02T21:46:16.175Z",
+  "modo": "dry-run",
+  "correcoes": [
+    {
+      "correcao": "P1-01",
+      "device": "GOEC6O003 - Faixa 2",
+      "endpoint": "/api/equipment/classifier",
+      "payload": {
+        "classifier": {
+          "processingQueue": 1,
+          "processingThreads": 1
+        }
+      },
+      "status": "DRY_RUN"
+    },
+    {
+      "correcao": "P1-01",
+      "device": "GOEC6O004 - Faixa 1",
+      "endpoint": "/api/equipment/classifier",
+      "payload": {
+        "classifier": {
+          "processingQueue": 1,
+          "processingThreads": 1
+        }
+      },
+      "status": "DRY_RUN"
+    },
+    {
+      "correcao": "P1-01",
+      "device": "GOEC6O004 - Faixa 2",
+      "endpoint": "/api/equipment/classifier",
+      "payload": {
+        "classifier": {
+          "processingQueue": 1,
+          "processingThreads": 1
+        }
+      },
+      "status": "DRY_RUN"
+    },
+    {
+      "correcao": "P1-01",
+      "device": "GOEC6O006 - Faixa 1",
+      "endpoint": "/api/equipment/classifier",
+      "payload": {
+        "classifier": {
+          "processingQueue": 1,
+          "processingThreads": 1
+        }
+      },
+      "status": "DRY_RUN"
+    },
+    {
+      "correcao": "P1-01",
+      "device": "GOEC6O006 - Faixa 2",
+      "endpoint": "/api/equipment/classifier",
+      "payload": {
+        "classifier": {
+          "processingQueue": 1,
+          "processingThreads": 1
+        }
+      },
+      "status": "DRY_RUN"
+    },
+    {
+      "correcao": "P1-01",
+      "device": "GOEC6O007 - Faixa 1",
+      "endpoint": "/api/equipment/classifier",
+      "payload": {
+        "classifier": {
+          "processingQueue": 1,
+          "processingThreads": 1
+        }
+      },
+      "status": "DRY_RUN"
+    },
+    {
+      "correcao": "P1-01",
+      "device": "GOEC6O007 - Faixa 2",
+      "endpoint": "/api/equipment/classifier",
+      "payload": {
+        "classifier": {
+          "processingQueue": 1,
+          "processingThreads": 1
+        }
+      },
+      "status": "DRY_RUN"
+    },
+    {
+      "correcao": "P1-01",
+      "device": "GOEC6O008 - Faixa 2",
+      "endpoint": "/api/equipment/classifier",
+      "payload": {
+        "classifier": {
+          "processingQueue": 1,
+          "processingThreads": 1
+        }
+      },
+      "status": "DRY_RUN"
+    },
+    {
+      "correcao": "P1-01",
+      "device": "GOEC6O013 - Faixa 1",
+      "endpoint": "/api/equipment/classifier",
+      "payload": {
+        "classifier": {
+          "processingQueue": 1,
+          "processingThreads": 1
+        }
+      },
+      "status": "DRY_RUN"
+    },
+    {
+      "correcao": "P1-01",
+      "device": "GOEC6O013 - Faixa 2",
+      "endpoint": "/api/equipment/classifier",
+      "payload": {
+        "classifier": {
+          "processingQueue": 1,
+          "processingThreads": 1
+        }
+      },
+      "status": "DRY_RUN"
+    },
+    {
+      "correcao": "P1-01",
+      "device": "GOEC6O018 - Faixa 1",
+      "endpoint": "/api/equipment/classifier",
+      "payload": {
+        "classifier": {
+          "processingQueue": 1,
+          "processingThreads": 1
+        }
+      },
+      "status": "DRY_RUN"
+    },
+    {
+      "correcao": "P1-01",
+      "device": "GOEC6O018 - Faixa 2",
+      "endpoint": "/api/equipment/classifier",
+      "payload": {
+        "classifier": {
+          "processingQueue": 1,
+          "processingThreads": 1
+        }
+      },
+      "status": "DRY_RUN"
+    },
+    {
+      "correcao": "P1-01",
+      "device": "GOEC6O020 - Faixa 1",
+      "endpoint": "/api/equipment/classifier",
+      "payload": {
+        "classifier": {
+          "processingQueue": 1,
+          "processingThreads": 1
+        }
+      },
+      "status": "DRY_RUN"
+    },
+    {
+      "correcao": "P1-01",
+      "device": "GOEC6O020 - Faixa 2",
+      "endpoint": "/api/equipment/classifier",
+      "payload": {
+        "classifier": {
+          "processingQueue": 1,
+          "processingThreads": 1
+        }
+      },
+      "status": "DRY_RUN"
+    },
+    {
+      "correcao": "P1-01",
+      "device": "GOEC6O021 - Faixa 1",
+      "endpoint": "/api/equipment/classifier",
+      "payload": {
+        "classifier": {
+          "processingQueue": 1,
+          "processingThreads": 1
+        }
+      },
+      "status": "DRY_RUN"
+    },
+    {
+      "correcao": "P1-01",
+      "device": "GOEC6O022 - Faixa 1",
+      "endpoint": "/api/equipment/classifier",
+      "payload": {
+        "classifier": {
+          "processingQueue": 1,
+          "processingThreads": 1
+        }
+      },
+      "status": "DRY_RUN"
+    },
+    {
+      "correcao": "P1-01",
+      "device": "GOEC6O022 - Faixa 2",
+      "endpoint": "/api/equipment/classifier",
+      "payload": {
+        "classifier": {
+          "processingQueue": 1,
+          "processingThreads": 1
+        }
+      },
+      "status": "DRY_RUN"
+    },
+    {
+      "correcao": "P1-01",
+      "device": "GOEC6O029 - Faixa 1",
+      "endpoint": "/api/equipment/classifier",
+      "payload": {
+        "classifier": {
+          "processingQueue": 1,
+          "processingThreads": 1
+        }
+      },
+      "status": "DRY_RUN"
+    },
+    {
+      "correcao": "P1-01",
+      "device": "GOEC6O029 - Faixa 2",
+      "endpoint": "/api/equipment/classifier",
+      "payload": {
+        "classifier": {
+          "processingQueue": 1,
+          "processingThreads": 1
+        }
+      },
+      "status": "DRY_RUN"
+    },
+    {
+      "correcao": "P1-01",
+      "device": "GOEC6O033 - Faixa 1",
+      "endpoint": "/api/equipment/classifier",
+      "payload": {
+        "classifier": {
+          "processingQueue": 1,
+          "processingThreads": 1
+        }
+      },
+      "status": "DRY_RUN"
+    },
+    {
+      "correcao": "P1-01",
+      "device": "GOEC6O033 - Faixa 2",
+      "endpoint": "/api/equipment/classifier",
+      "payload": {
+        "classifier": {
+          "processingQueue": 1,
+          "processingThreads": 1
+        }
+      },
+      "status": "DRY_RUN"
+    },
+    {
+      "correcao": "P1-01",
+      "device": "GOEC6O036 - Faixa 1",
+      "endpoint": "/api/equipment/classifier",
+      "payload": {
+        "classifier": {
+          "processingQueue": 1,
+          "processingThreads": 1
+        }
+      },
+      "status": "DRY_RUN"
+    },
+    {
+      "correcao": "P1-01",
+      "device": "GOEC6O040 - Faixa 1",
+      "endpoint": "/api/equipment/classifier",
+      "payload": {
+        "classifier": {
+          "processingQueue": 1,
+          "processingThreads": 1
+        }
+      },
+      "status": "DRY_RUN"
+    },
+    {
+      "correcao": "P1-01",
+      "device": "GOEC6O040 - Faixa 2",
+      "endpoint": "/api/equipment/classifier",
+      "payload": {
+        "classifier": {
+          "processingQueue": 1,
+          "processingThreads": 1
+        }
+      },
+      "status": "DRY_RUN"
+    },
+    {
+      "correcao": "P1-01",
+      "device": "GOEC6O041 - Faixa 1",
+      "endpoint": "/api/equipment/classifier",
+      "payload": {
+        "classifier": {
+          "processingQueue": 1,
+          "processingThreads": 1
+        }
+      },
+      "status": "DRY_RUN"
+    },
+    {
+      "correcao": "P1-01",
+      "device": "GOEC6O041 - Faixa 2",
+      "endpoint": "/api/equipment/classifier",
+      "payload": {
+        "classifier": {
+          "processingQueue": 1,
+          "processingThreads": 1
+        }
+      },
+      "status": "DRY_RUN"
+    },
+    {
+      "correcao": "P1-01",
+      "device": "GOEC6O043 - Faixa 1",
+      "endpoint": "/api/equipment/classifier",
+      "payload": {
+        "classifier": {
+          "processingQueue": 1,
+          "processingThreads": 1
+        }
+      },
+      "status": "DRY_RUN"
+    },
+    {
+      "correcao": "P1-01",
+      "device": "GOEC6O043 - Faixa 2",
+      "endpoint": "/api/equipment/classifier",
+      "payload": {
+        "classifier": {
+          "processingQueue": 1,
+          "processingThreads": 1
+        }
+      },
+      "status": "DRY_RUN"
+    },
+    {
+      "correcao": "P1-01",
+      "device": "GOEC6O045 - Faixa 1",
+      "endpoint": "/api/equipment/classifier",
+      "payload": {
+        "classifier": {
+          "processingQueue": 1,
+          "processingThreads": 1
+        }
+      },
+      "status": "DRY_RUN"
+    },
+    {
+      "correcao": "P1-01",
+      "device": "GOEC6O045 - Faixa 2",
+      "endpoint": "/api/equipment/classifier",
+      "payload": {
+        "classifier": {
+          "processingQueue": 1,
+          "processingThreads": 1
+        }
+      },
+      "status": "DRY_RUN"
+    },
+    {
+      "correcao": "P1-01",
+      "device": "GOEC6O046 - Faixa 1",
+      "endpoint": "/api/equipment/classifier",
+      "payload": {
+        "classifier": {
+          "processingQueue": 1,
+          "processingThreads": 1
+        }
+      },
+      "status": "DRY_RUN"
+    },
+    {
+      "correcao": "P1-01",
+      "device": "GOEC6O046 - Faixa 2",
+      "endpoint": "/api/equipment/classifier",
+      "payload": {
+        "classifier": {
+          "processingQueue": 1,
+          "processingThreads": 1
+        }
+      },
+      "status": "DRY_RUN"
+    },
+    {
+      "correcao": "P1-01",
+      "device": "GOEC6O048 - Faixa 1",
+      "endpoint": "/api/equipment/classifier",
+      "payload": {
+        "classifier": {
+          "processingQueue": 1,
+          "processingThreads": 1
+        }
+      },
+      "status": "DRY_RUN"
+    },
+    {
+      "correcao": "P1-01",
+      "device": "GOEC6O048 - Faixa 2",
+      "endpoint": "/api/equipment/classifier",
+      "payload": {
+        "classifier": {
+          "processingQueue": 1,
+          "processingThreads": 1
+        }
+      },
+      "status": "DRY_RUN"
+    },
+    {
+      "correcao": "P1-01",
+      "device": "GOEC6O050 - Faixa 1",
+      "endpoint": "/api/equipment/classifier",
+      "payload": {
+        "classifier": {
+          "processingQueue": 1,
+          "processingThreads": 1
+        }
+      },
+      "status": "DRY_RUN"
+    },
+    {
+      "correcao": "P1-01",
+      "device": "GOEC6O050 - Faixa 2",
+      "endpoint": "/api/equipment/classifier",
+      "payload": {
+        "classifier": {
+          "processingQueue": 1,
+          "processingThreads": 1
+        }
+      },
+      "status": "DRY_RUN"
+    },
+    {
+      "correcao": "P1-01",
+      "device": "GOEC6O051 - Faixa 1",
+      "endpoint": "/api/equipment/classifier",
+      "payload": {
+        "classifier": {
+          "processingQueue": 1,
+          "processingThreads": 1
+        }
+      },
+      "status": "DRY_RUN"
+    },
+    {
+      "correcao": "P1-01",
+      "device": "GOEC6O051 - Faixa 2",
+      "endpoint": "/api/equipment/classifier",
+      "payload": {
+        "classifier": {
+          "processingQueue": 1,
+          "processingThreads": 1
+        }
+      },
+      "status": "DRY_RUN"
+    },
+    {
+      "correcao": "P1-01",
+      "device": "GOEC6O053 - Faixa 1",
+      "endpoint": "/api/equipment/classifier",
+      "payload": {
+        "classifier": {
+          "processingQueue": 1,
+          "processingThreads": 1
+        }
+      },
+      "status": "DRY_RUN"
+    },
+    {
+      "correcao": "P1-01",
+      "device": "GOEC6O053 - Faixa 2",
+      "endpoint": "/api/equipment/classifier",
+      "payload": {
+        "classifier": {
+          "processingQueue": 1,
+          "processingThreads": 1
+        }
+      },
+      "status": "DRY_RUN"
+    },
+    {
+      "correcao": "P1-01",
+      "device": "GOEC6O054 - Faixa 1",
+      "endpoint": "/api/equipment/classifier",
+      "payload": {
+        "classifier": {
+          "processingQueue": 1,
+          "processingThreads": 1
+        }
+      },
+      "status": "DRY_RUN"
+    },
+    {
+      "correcao": "P1-01",
+      "device": "GOEC6O054 - Faixa 2",
+      "endpoint": "/api/equipment/classifier",
+      "payload": {
+        "classifier": {
+          "processingQueue": 1,
+          "processingThreads": 1
+        }
+      },
+      "status": "DRY_RUN"
+    },
+    {
+      "correcao": "P1-01",
+      "device": "GOEC6O055 - Faixa 1",
+      "endpoint": "/api/equipment/classifier",
+      "payload": {
+        "classifier": {
+          "processingQueue": 1,
+          "processingThreads": 1
+        }
+      },
+      "status": "DRY_RUN"
+    },
+    {
+      "correcao": "P1-01",
+      "device": "GOEC6O056 - Faixa 1",
+      "endpoint": "/api/equipment/classifier",
+      "payload": {
+        "classifier": {
+          "processingQueue": 1,
+          "processingThreads": 1
+        }
+      },
+      "status": "DRY_RUN"
+    },
+    {
+      "correcao": "P1-01",
+      "device": "GOEC6O056 - Faixa 2",
+      "endpoint": "/api/equipment/classifier",
+      "payload": {
+        "classifier": {
+          "processingQueue": 1,
+          "processingThreads": 1
+        }
+      },
+      "status": "DRY_RUN"
+    },
+    {
+      "correcao": "P1-01",
+      "device": "GOEC6O057 - Faixa 1",
+      "endpoint": "/api/equipment/classifier",
+      "payload": {
+        "classifier": {
+          "processingQueue": 1,
+          "processingThreads": 1
+        }
+      },
+      "status": "DRY_RUN"
+    },
+    {
+      "correcao": "P1-01",
+      "device": "GOEC6O057 - Faixa 2",
+      "endpoint": "/api/equipment/classifier",
+      "payload": {
+        "classifier": {
+          "processingQueue": 1,
+          "processingThreads": 1
+        }
+      },
+      "status": "DRY_RUN"
+    },
+    {
+      "correcao": "P1-01",
+      "device": "GOEC6O059 - Faixa 1",
+      "endpoint": "/api/equipment/classifier",
+      "payload": {
+        "classifier": {
+          "processingQueue": 1,
+          "processingThreads": 1
+        }
+      },
+      "status": "DRY_RUN"
+    },
+    {
+      "correcao": "P1-01",
+      "device": "GOEC6O059 - Faixa 2",
+      "endpoint": "/api/equipment/classifier",
+      "payload": {
+        "classifier": {
+          "processingQueue": 1,
+          "processingThreads": 1
+        }
+      },
+      "status": "DRY_RUN"
+    },
+    {
+      "correcao": "P1-02",
+      "device": "GOEC6O008 - Faixa 1",
+      "endpoint": "/api/video/streams",
+      "payload": {
+        "mjpeg": {
+          "main": {
+            "framerate": 12,
+            "quality": 85,
+            "useTriggerFrames": true
+          }
+        }
+      },
+      "status": "DRY_RUN"
+    },
+    {
+      "correcao": "P1-02",
+      "device": "GOEC6O020 - Faixa 1",
+      "endpoint": "/api/video/streams",
+      "payload": {
+        "mjpeg": {
+          "main": {
+            "framerate": 12,
+            "quality": 85,
+            "useTriggerFrames": true
+          }
+        }
+      },
+      "status": "DRY_RUN"
+    },
+    {
+      "correcao": "P1-02",
+      "device": "GOEC6O028 - Faixa 1",
+      "endpoint": "/api/video/streams",
+      "payload": {
+        "mjpeg": {
+          "main": {
+            "framerate": 12,
+            "quality": 85,
+            "useTriggerFrames": true
+          }
+        }
+      },
+      "status": "DRY_RUN"
+    },
+    {
+      "correcao": "P1-02",
+      "device": "GOEC6O041 - Faixa 1",
+      "endpoint": "/api/video/streams",
+      "payload": {
+        "mjpeg": {
+          "main": {
+            "framerate": 12,
+            "quality": 85,
+            "useTriggerFrames": true
+          }
+        }
+      },
+      "status": "DRY_RUN"
+    },
+    {
+      "correcao": "P1-02",
+      "device": "GOEC6O045 - Faixa 1",
+      "endpoint": "/api/video/streams",
+      "payload": {
+        "mjpeg": {
+          "main": {
+            "framerate": 12,
+            "quality": 85,
+            "useTriggerFrames": true
+          }
+        }
+      },
+      "status": "DRY_RUN"
+    },
+    {
+      "correcao": "P1-02",
+      "device": "GOEC6O050 - Faixa 1",
+      "endpoint": "/api/video/streams",
+      "payload": {
+        "mjpeg": {
+          "main": {
+            "framerate": 12,
+            "quality": 85,
+            "useTriggerFrames": true
+          }
+        }
+      },
+      "status": "DRY_RUN"
+    },
+    {
+      "correcao": "P1-02",
+      "device": "GOEC6O051 - Faixa 1",
+      "endpoint": "/api/video/streams",
+      "payload": {
+        "mjpeg": {
+          "main": {
+            "framerate": 12,
+            "quality": 85,
+            "useTriggerFrames": true
+          }
+        }
+      },
+      "status": "DRY_RUN"
+    },
+    {
+      "correcao": "P1-03",
+      "device": "GOEC6O008 - Faixa 1",
+      "endpoint": "/api/equipment/ocr",
+      "payload": {
+        "ocr": {
+          "processingThreads": 4,
+          "processingQueue": 4,
+          "processingMode": 3,
+          "processingTimeout": 1000
+        }
+      },
+      "status": "DRY_RUN"
+    },
+    {
+      "correcao": "P1-03",
+      "device": "GOEC6O010 - Faixa 1",
+      "endpoint": "/api/equipment/ocr",
+      "payload": {
+        "ocr": {
+          "processingThreads": 4,
+          "processingQueue": 4,
+          "processingMode": 3,
+          "processingTimeout": 1000
+        }
+      },
+      "status": "DRY_RUN"
+    },
+    {
+      "correcao": "P1-03",
+      "device": "GOEC6O011 - Faixa 2",
+      "endpoint": "/api/equipment/ocr",
+      "payload": {
+        "ocr": {
+          "processingThreads": 4,
+          "processingQueue": 4,
+          "processingMode": 3,
+          "processingTimeout": 1000
+        }
+      },
+      "status": "DRY_RUN"
+    },
+    {
+      "correcao": "P1-03",
+      "device": "GOEC6O028 - Faixa 1",
+      "endpoint": "/api/equipment/ocr",
+      "payload": {
+        "ocr": {
+          "processingThreads": 4,
+          "processingQueue": 4,
+          "processingMode": 3,
+          "processingTimeout": 1000
+        }
+      },
+      "status": "DRY_RUN"
+    },
+    {
+      "correcao": "P1-03",
+      "device": "GOEC6O055 - Faixa 2",
+      "endpoint": "/api/equipment/ocr",
+      "payload": {
+        "ocr": {
+          "processingThreads": 4,
+          "processingQueue": 4,
+          "processingMode": 3,
+          "processingTimeout": 1000
+        }
+      },
+      "status": "DRY_RUN"
+    },
+    {
+      "correcao": "P1-04",
+      "device": "GOEC6O009 - Faixa 1",
+      "endpoint": "/api/equipment/ocr",
+      "payload": {
+        "ocr": {
+          "vehicleType": 3,
+          "maxPlates": 2
+        }
+      },
+      "status": "DRY_RUN"
+    },
+    {
+      "correcao": "P1-04",
+      "device": "GOEC6O009 - Faixa 2",
+      "endpoint": "/api/equipment/ocr",
+      "payload": {
+        "ocr": {
+          "vehicleType": 3,
+          "maxPlates": 2
+        }
+      },
+      "status": "DRY_RUN"
+    },
+    {
+      "correcao": "P1-04",
+      "device": "GOEC6O055 - Faixa 2",
+      "endpoint": "/api/equipment/ocr",
+      "payload": {
+        "ocr": {
+          "vehicleType": 3,
+          "maxPlates": 2
+        }
+      },
+      "status": "DRY_RUN"
+    },
+    {
+      "correcao": "P2-01",
+      "device": "GOEC6O011 - Faixa 2",
+      "endpoint": "/api/equipment/dateAndTime",
+      "payload": {
+        "ntpServerAddress": [
+          "time.google.com"
+        ]
+      },
+      "status": "DRY_RUN"
+    },
+    {
+      "correcao": "P2-01",
+      "device": "GOEC6O028 - Faixa 1",
+      "endpoint": "/api/equipment/dateAndTime",
+      "payload": {
+        "ntpServerAddress": [
+          "time.google.com"
+        ]
+      },
+      "status": "DRY_RUN"
+    },
+    {
+      "correcao": "P2-02",
+      "device": "GOEC6O008 - Faixa 1",
+      "endpoint": "/api/equipment/ioPorts",
+      "payload": [
+        {
+          "port": 1,
+          "earlyUs": 7,
+          "isReserved": true,
+          "type": "flash",
+          "protection": "itslux"
+        },
+        {
+          "port": 3,
+          "earlyUs": 7,
+          "isReserved": true,
+          "type": "flash",
+          "protection": "itslux"
+        }
+      ],
+      "status": "DRY_RUN"
+    },
+    {
+      "correcao": "P2-03",
+      "device": "GOEC6O033 - Faixa 2",
+      "endpoint": "/api/equipment/ioPorts",
+      "payload": [
+        {
+          "port": 1,
+          "isReserved": true,
+          "type": "flash",
+          "protection": "itslux"
+        },
+        {
+          "port": 3,
+          "isReserved": true,
+          "type": "flash",
+          "protection": "itslux"
+        }
+      ],
+      "status": "DRY_RUN"
+    },
+    {
+      "correcao": "P2-04",
+      "device": "GOEC6O009 - Faixa 1",
+      "endpoint": "/api/equipment/classifier",
+      "payload": {
+        "classifier": {
+          "sceneType": 0,
+          "minProbability": 20
+        }
+      },
+      "status": "DRY_RUN"
+    },
+    {
+      "correcao": "P2-04",
+      "device": "GOEC6O009 - Faixa 2",
+      "endpoint": "/api/equipment/classifier",
+      "payload": {
+        "classifier": {
+          "sceneType": 0,
+          "minProbability": 20
+        }
+      },
+      "status": "DRY_RUN"
+    },
+    {
+      "correcao": "P2-04",
+      "device": "GOEC6O011 - Faixa 2",
+      "endpoint": "/api/equipment/classifier",
+      "payload": {
+        "classifier": {
+          "sceneType": 0,
+          "minProbability": 20
+        }
+      },
+      "status": "DRY_RUN"
+    },
+    {
+      "correcao": "P2-04",
+      "device": "GOEC6O028 - Faixa 1",
+      "endpoint": "/api/equipment/classifier",
+      "payload": {
+        "classifier": {
+          "sceneType": 0,
+          "minProbability": 20
+        }
+      },
+      "status": "DRY_RUN"
+    },
+    {
+      "correcao": "P2-04",
+      "device": "GOEC6O054 - Faixa 1",
+      "endpoint": "/api/equipment/classifier",
+      "payload": {
+        "classifier": {
+          "sceneType": 0,
+          "minProbability": 20
+        }
+      },
+      "status": "DRY_RUN"
+    },
+    {
+      "correcao": "P2-04",
+      "device": "GOEC6O055 - Faixa 2",
+      "endpoint": "/api/equipment/classifier",
+      "payload": {
+        "classifier": {
+          "sceneType": 0,
+          "minProbability": 20
+        }
+      },
+      "status": "DRY_RUN"
+    },
+    {
+      "correcao": "P3-01",
+      "device": "GOEC6O009 - Faixa 1",
+      "endpoint": "/api/system/monitoring/snmp",
+      "payload": {
+        "enabled": false,
+        "v2": {
+          "enabled": false,
+          "community": ""
+        }
+      },
+      "status": "DRY_RUN"
+    },
+    {
+      "correcao": "P3-01",
+      "device": "GOEC6O009 - Faixa 2",
+      "endpoint": "/api/system/monitoring/snmp",
+      "payload": {
+        "enabled": false,
+        "v2": {
+          "enabled": false,
+          "community": ""
+        }
+      },
+      "status": "DRY_RUN"
+    },
+    {
+      "correcao": "P3-02",
+      "device": "GOEC6O009 - Faixa 1",
+      "endpoint": "/api/system/maintenance/automaticreboot",
+      "payload": {
+        "scheduled": {
+          "enabled": false,
+          "weekdays": [
+            0
+          ],
+          "hour": 0
+        },
+        "periodic": {
+          "enabled": false,
+          "hours": 24
+        }
+      },
+      "status": "DRY_RUN"
+    },
+    {
+      "correcao": "P3-02",
+      "device": "GOEC6O009 - Faixa 2",
+      "endpoint": "/api/system/maintenance/automaticreboot",
+      "payload": {
+        "scheduled": {
+          "enabled": false,
+          "weekdays": [
+            0
+          ],
+          "hour": 0
+        },
+        "periodic": {
+          "enabled": false,
+          "hours": 24
+        }
+      },
+      "status": "DRY_RUN"
+    },
+    {
+      "correcao": "P3-03",
+      "device": "GOEC6O036 - Faixa 1",
+      "endpoint": "/api/equipment/servers/ftp",
+      "payload": {
+        "ftp": {
+          "username": "",
+          "password": ""
+        }
+      },
+      "status": "DRY_RUN"
+    },
+    {
+      "correcao": "P3-03",
+      "device": "GOEC6O054 - Faixa 2",
+      "endpoint": "/api/equipment/servers/ftp",
+      "payload": {
+        "ftp": {
+          "username": "",
+          "password": ""
+        }
+      },
+      "status": "DRY_RUN"
+    }
+  ],
+  "resumo": {
+    "total": 80,
+    "sucesso": 80,
+    "falha": 0,
+    "skipped": 0
+  },
+  "fim": "2026-06-02T21:46:16.181Z"
+}
