@@ -1,0 +1,15 @@
+[
+  {
+    "codigoEquipamento": "{{cameraId}}",
+    "numeroFaixa": 2,
+    "codigoClassificacao": "{{vehicleType}}",
+    "dataHoraPassagem": "{{localYear}}-{{localMonth}}-{{localDay}}T{{localHours}}:{{localMinutes}}:{{localSeconds}}.{{localMilliseconds}}Z",
+    "placaVeiculo": "{{plate}}",
+    "imagens": [
+      {
+        "nomeArquivo": "{{cameraId}}-2-{{plate}}-{{localYear}}-{{localMonth}}-{{localDay}}-{{localHours}}-{{localMinutes}}-{{localSeconds}}-{{localMilliseconds}}.jpg",
+        "imagemBase64": "{{image}}"
+      }
+    ]
+  }
+]

@@ -19,7 +19,7 @@ import { uploadImagemMiddleware, analisarSemSalvar, salvarEAnalisar, listarTodas
 import { uploadJobMiddleware, criarJobHandler, listarJobs, obterJob, removerJob } from "./job-controller.js";
 import { validarFluxoAlerta } from "./validate-controller.js";
 import { runAgent, runAgentMode, getAgentState, getSchedulerStatus, startScheduler, stopScheduler } from "./agent-controller.js";
-import { validarDispositivo, validarLote, analisarIncidente, heartbeatGeral, listarFrota, auditoriaStatus } from "./varco-controller.js";
+import { validarDispositivo, validarLote, analisarIncidente, heartbeatGeral, listarFrota, auditoriaStatus, auditoriaAprimorada, configPadrao } from "./varco-controller.js";
 import { analisarTexto, analisarArquivo, uploadLeituraMiddleware } from "./leitura-controller.js";
 import { healthCheck } from "./health-controller.js";
 import { listarFilaHandler, obterEstatisticasHandler, obterItemHandler, marcarRevisadoHandler, autoResolverHandler, exportarCsvHandler, descartarItemHandler } from "./confidence-controller.js";
@@ -238,6 +238,8 @@ router.post("/varco/analisar-incidente",  analisarIncidente);
 router.get("/varco/heartbeat",            heartbeatGeral);
 router.get("/varco/frota",                listarFrota);
 router.get("/varco/auditoria",            auditoriaStatus);
+router.get("/varco/auditoria-aprimorada", auditoriaAprimorada);
+router.get("/varco/config-padrao",        configPadrao);
 
 // ─── Leitura Estratégica — Agente 80/20 ──────────────────────────────────────
 router.post("/leitura/analisar",          analisarTexto);

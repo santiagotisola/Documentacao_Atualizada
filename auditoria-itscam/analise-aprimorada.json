@@ -1,0 +1,1968 @@
+{
+  "geradoEm": "2026-06-08T13:38:41.150Z",
+  "dadosBase": "2026-06-08T12:43:23.940Z",
+  "totalDispositivos": 72,
+  "totalRegras": 26,
+  "resumo": {
+    "conformes": 25,
+    "divergentes": 39,
+    "offline": 8,
+    "porSeveridade": {
+      "critico": 1,
+      "alto": 61,
+      "medio": 21,
+      "baixo": 2
+    }
+  },
+  "topDivergencias": [
+    {
+      "id": "CLASSIFIER_QUEUE",
+      "titulo": "Classificador Queue",
+      "count": 32
+    },
+    {
+      "id": "CLASSIFIER_THREADS",
+      "titulo": "Classificador Threads",
+      "count": 7
+    },
+    {
+      "id": "PROFILE_TRANSITION_LOWER_TIME",
+      "titulo": "Perfil Transição: Lower startTime/endTime",
+      "count": 6
+    },
+    {
+      "id": "PROFILE_TRANSITION_UPPER_TIME",
+      "titulo": "Perfil Transição: Upper startTime/endTime",
+      "count": 6
+    },
+    {
+      "id": "OCR_PROCESSING_THREADS",
+      "titulo": "OCR Processing Threads",
+      "count": 5
+    },
+    {
+      "id": "PROFILE_TRANSITION_UPPER_LEVEL",
+      "titulo": "Perfil Transição: Upper Level",
+      "count": 4
+    },
+    {
+      "id": "VIDEO_FRAMERATE",
+      "titulo": "Vídeo Framerate",
+      "count": 4
+    },
+    {
+      "id": "SNAPSHOT_CROP_DISABLED",
+      "titulo": "Snapshot Crop Desabilitado",
+      "count": 3
+    },
+    {
+      "id": "OCR_PROCESSING_QUEUE",
+      "titulo": "OCR Processing Queue",
+      "count": 3
+    },
+    {
+      "id": "VIDEO_QUALITY",
+      "titulo": "Vídeo Qualidade JPEG",
+      "count": 2
+    }
+  ],
+  "dispositivos": [
+    {
+      "nome": "GOEC6O002 - Faixa 1",
+      "uuid": "c5de0eb2-761e-427a-9efb-e85b7576203d",
+      "ip": "191.56.244.218",
+      "status": "online",
+      "firmware": "v1.7.8",
+      "totalRegras": 26,
+      "conformes": 26,
+      "divergencias": []
+    },
+    {
+      "nome": "GOEC6O002 - Faixa 2",
+      "uuid": "fb1a2de8-aa93-4515-8d09-baee3bec45b1",
+      "ip": "191.56.244.218",
+      "status": "online",
+      "firmware": "v1.7.8",
+      "totalRegras": 26,
+      "conformes": 26,
+      "divergencias": []
+    },
+    {
+      "nome": "GOEC6O003 - Faixa 1",
+      "uuid": "1792282c-bacb-4808-8ff6-e44404b72de5",
+      "ip": "177.25.226.58",
+      "status": "online",
+      "firmware": "v1.7.8",
+      "totalRegras": 26,
+      "conformes": 26,
+      "divergencias": []
+    },
+    {
+      "nome": "GOEC6O003 - Faixa 2",
+      "uuid": "ea779324-56d4-4ea5-bfb6-63b4cf751621",
+      "ip": "177.25.226.58",
+      "status": "online",
+      "firmware": "v1.7.8",
+      "totalRegras": 26,
+      "conformes": 24,
+      "divergencias": [
+        {
+          "id": "CLASSIFIER_QUEUE",
+          "titulo": "Classificador Queue",
+          "secao": "classifier",
+          "menu": "Equipamento > Classificador",
+          "campo": "classifier.processingQueue",
+          "severidade": "alto",
+          "ok": false,
+          "atual": 4,
+          "esperado": 1
+        },
+        {
+          "id": "SNAPSHOT_CROP_DISABLED",
+          "titulo": "Snapshot Crop Desabilitado",
+          "secao": "misc",
+          "menu": "Equipamento > Diversos",
+          "campo": "snapshotCrop.enable",
+          "severidade": "medio",
+          "ok": false,
+          "atual": true,
+          "esperado": false
+        }
+      ]
+    },
+    {
+      "nome": "GOEC6O004 - Faixa 1",
+      "uuid": "fe1f2f2d-327c-4e87-b865-0b9d32cca00b",
+      "ip": "186.211.161.242",
+      "status": "online",
+      "firmware": "v1.7.8",
+      "totalRegras": 26,
+      "conformes": 25,
+      "divergencias": [
+        {
+          "id": "CLASSIFIER_QUEUE",
+          "titulo": "Classificador Queue",
+          "secao": "classifier",
+          "menu": "Equipamento > Classificador",
+          "campo": "classifier.processingQueue",
+          "severidade": "alto",
+          "ok": false,
+          "atual": 4,
+          "esperado": 1
+        }
+      ]
+    },
+    {
+      "nome": "GOEC6O004 - Faixa 2",
+      "uuid": "abe3e1cd-9071-4dc9-8ce8-5c51d4417fce",
+      "ip": "186.211.161.242",
+      "status": "online",
+      "firmware": "v1.7.8",
+      "totalRegras": 26,
+      "conformes": 25,
+      "divergencias": [
+        {
+          "id": "CLASSIFIER_QUEUE",
+          "titulo": "Classificador Queue",
+          "secao": "classifier",
+          "menu": "Equipamento > Classificador",
+          "campo": "classifier.processingQueue",
+          "severidade": "alto",
+          "ok": false,
+          "atual": 4,
+          "esperado": 1
+        }
+      ]
+    },
+    {
+      "nome": "GOEC6O005 - Faixa 1",
+      "uuid": "0b6cdb29-2876-40fd-8e57-51572a2a1021",
+      "ip": "160.19.243.71",
+      "status": "online",
+      "firmware": "v1.7.8",
+      "totalRegras": 26,
+      "conformes": 26,
+      "divergencias": []
+    },
+    {
+      "nome": "GOEC6O005 - Faixa 2",
+      "uuid": "3df4eaee-9d2d-480d-b04c-faf75662dc70",
+      "ip": "160.19.243.71",
+      "status": "online",
+      "firmware": "v1.7.8",
+      "totalRegras": 26,
+      "conformes": 26,
+      "divergencias": []
+    },
+    {
+      "nome": "GOEC6O006 - Faixa 1",
+      "uuid": "29a63deb-dfe5-4765-a10a-57485f03f301",
+      "ip": "191.56.243.74",
+      "status": "online",
+      "firmware": "v1.7.8",
+      "totalRegras": 26,
+      "conformes": 25,
+      "divergencias": [
+        {
+          "id": "CLASSIFIER_QUEUE",
+          "titulo": "Classificador Queue",
+          "secao": "classifier",
+          "menu": "Equipamento > Classificador",
+          "campo": "classifier.processingQueue",
+          "severidade": "alto",
+          "ok": false,
+          "atual": 4,
+          "esperado": 1
+        }
+      ]
+    },
+    {
+      "nome": "GOEC6O006 - Faixa 2",
+      "uuid": "a8f7026c-21b1-4415-8978-51788088124d",
+      "ip": "191.56.243.74",
+      "status": "online",
+      "firmware": "v1.7.8",
+      "totalRegras": 26,
+      "conformes": 25,
+      "divergencias": [
+        {
+          "id": "CLASSIFIER_QUEUE",
+          "titulo": "Classificador Queue",
+          "secao": "classifier",
+          "menu": "Equipamento > Classificador",
+          "campo": "classifier.processingQueue",
+          "severidade": "alto",
+          "ok": false,
+          "atual": 4,
+          "esperado": 1
+        }
+      ]
+    },
+    {
+      "nome": "GOEC6O007 - Faixa 1",
+      "uuid": "2c1ab0be-d0a3-4742-98ed-a916cb12fa22",
+      "ip": "187.43.171.203",
+      "status": "online",
+      "firmware": "v1.7.8",
+      "totalRegras": 26,
+      "conformes": 26,
+      "divergencias": []
+    },
+    {
+      "nome": "GOEC6O007 - Faixa 2",
+      "uuid": "33e77a95-b079-4ce2-9d03-69d5f2c82293",
+      "ip": "187.43.171.203",
+      "status": "online",
+      "firmware": "v1.7.8",
+      "totalRegras": 26,
+      "conformes": 26,
+      "divergencias": []
+    },
+    {
+      "nome": "GOEC6O008 - Faixa 1",
+      "uuid": "5d6880f0-e8f2-4ff0-be25-00c3b31d6522",
+      "ip": "191.58.157.152",
+      "status": "online",
+      "firmware": "v1.7.8",
+      "totalRegras": 26,
+      "conformes": 17,
+      "divergencias": [
+        {
+          "id": "PROFILE_TRANSITION_UPPER_LEVEL",
+          "titulo": "Perfil Transição: Upper Level",
+          "secao": "profiles",
+          "menu": "Imagem > Perfis > Transições",
+          "campo": "transitions.upper.level",
+          "severidade": "alto",
+          "ok": false,
+          "erros": [
+            {
+              "perfil": 0,
+              "atual": 30,
+              "esperado": 35
+            },
+            {
+              "perfil": 1,
+              "atual": 30,
+              "esperado": 35
+            }
+          ],
+          "esperado": 35
+        },
+        {
+          "id": "PROFILE_TRANSITION_LOWER_TIME",
+          "titulo": "Perfil Transição: Lower startTime/endTime",
+          "secao": "profiles",
+          "menu": "Imagem > Perfis > Transições",
+          "campo": "transitions.lower.startTime / endTime",
+          "severidade": "alto",
+          "ok": false,
+          "erros": [
+            {
+              "perfil": 0,
+              "campo": "endTime",
+              "atual": "18:00:00",
+              "esperado": "00:00:00"
+            },
+            {
+              "perfil": 1,
+              "campo": "endTime",
+              "atual": "06:00:00",
+              "esperado": "00:00:00"
+            }
+          ]
+        },
+        {
+          "id": "PROFILE_TRANSITION_UPPER_TIME",
+          "titulo": "Perfil Transição: Upper startTime/endTime",
+          "secao": "profiles",
+          "menu": "Imagem > Perfis > Transições",
+          "campo": "transitions.upper.startTime / endTime",
+          "severidade": "alto",
+          "ok": false,
+          "erros": [
+            {
+              "perfil": 0,
+              "campo": "startTime",
+              "atual": "06:00:00",
+              "esperado": "00:00:00"
+            },
+            {
+              "perfil": 1,
+              "campo": "startTime",
+              "atual": "18:01:00",
+              "esperado": "00:00:00"
+            }
+          ]
+        },
+        {
+          "id": "PROFILE_TRANSITION_UPPER_PROFILE",
+          "titulo": "Perfil Transição: Upper Profile (P&B)",
+          "secao": "profiles",
+          "menu": "Imagem > Perfis > Transições",
+          "campo": "transitions.upper.profile",
+          "severidade": "critico",
+          "ok": false,
+          "erros": [
+            {
+              "perfil": 1,
+              "atual": 23483,
+              "esperado": 0
+            }
+          ],
+          "esperado": 0
+        },
+        {
+          "id": "OCR_PROCESSING_QUEUE",
+          "titulo": "OCR Processing Queue",
+          "secao": "ocr",
+          "menu": "Equipamento > OCR",
+          "campo": "ocr.processingQueue",
+          "severidade": "medio",
+          "ok": false,
+          "atual": 2,
+          "esperado": 4
+        },
+        {
+          "id": "OCR_PROCESSING_THREADS",
+          "titulo": "OCR Processing Threads",
+          "secao": "ocr",
+          "menu": "Equipamento > OCR",
+          "campo": "ocr.processingThreads",
+          "severidade": "medio",
+          "ok": false,
+          "atual": 2,
+          "esperado": 4
+        },
+        {
+          "id": "SNAPSHOT_CROP_DISABLED",
+          "titulo": "Snapshot Crop Desabilitado",
+          "secao": "misc",
+          "menu": "Equipamento > Diversos",
+          "campo": "snapshotCrop.enable",
+          "severidade": "medio",
+          "ok": false,
+          "atual": true,
+          "esperado": false
+        },
+        {
+          "id": "VIDEO_FRAMERATE",
+          "titulo": "Vídeo Framerate",
+          "secao": "video",
+          "menu": "Vídeo > Streams",
+          "campo": "mjpeg.main.framerate",
+          "severidade": "medio",
+          "ok": false,
+          "atual": 1,
+          "esperado": 12
+        },
+        {
+          "id": "VIDEO_QUALITY",
+          "titulo": "Vídeo Qualidade JPEG",
+          "secao": "video",
+          "menu": "Vídeo > Streams",
+          "campo": "mjpeg.main.quality",
+          "severidade": "medio",
+          "ok": false,
+          "atual": 60,
+          "esperado": 85
+        }
+      ]
+    },
+    {
+      "nome": "GOEC6O008 - Faixa 2",
+      "uuid": "d741e55b-19d6-4b2d-9c55-3651c310e1b1",
+      "ip": "191.58.157.152",
+      "status": "online",
+      "firmware": "v1.7.8",
+      "totalRegras": 26,
+      "conformes": 26,
+      "divergencias": []
+    },
+    {
+      "nome": "GOEC6O009 - Faixa 1",
+      "uuid": "c296d7bf-0d3b-4da1-bf1d-3e4fe998e4a1",
+      "ip": "187.43.180.235",
+      "status": "online",
+      "firmware": "v1.7.8",
+      "totalRegras": 26,
+      "conformes": 22,
+      "divergencias": [
+        {
+          "id": "PROFILE_TRANSITION_UPPER_LEVEL",
+          "titulo": "Perfil Transição: Upper Level",
+          "secao": "profiles",
+          "menu": "Imagem > Perfis > Transições",
+          "campo": "transitions.upper.level",
+          "severidade": "alto",
+          "ok": false,
+          "erros": [
+            {
+              "perfil": 0,
+              "atual": 40,
+              "esperado": 35
+            },
+            {
+              "perfil": 1,
+              "atual": 40,
+              "esperado": 35
+            }
+          ],
+          "esperado": 35
+        },
+        {
+          "id": "OCR_VEHICLE_TYPE",
+          "titulo": "OCR Vehicle Type",
+          "secao": "ocr",
+          "menu": "Equipamento > OCR",
+          "campo": "ocr.vehicleType",
+          "severidade": "alto",
+          "ok": false,
+          "atual": 1,
+          "esperado": 3
+        },
+        {
+          "id": "CLASSIFIER_QUEUE",
+          "titulo": "Classificador Queue",
+          "secao": "classifier",
+          "menu": "Equipamento > Classificador",
+          "campo": "classifier.processingQueue",
+          "severidade": "alto",
+          "ok": false,
+          "atual": 4,
+          "esperado": 1
+        },
+        {
+          "id": "SNMP_DISABLED",
+          "titulo": "SNMP Desabilitado",
+          "secao": "snmp",
+          "menu": "Sistema > Monitoramento > SNMP",
+          "campo": "enabled",
+          "severidade": "baixo",
+          "ok": false,
+          "atual": true,
+          "esperado": false
+        }
+      ]
+    },
+    {
+      "nome": "GOEC6O009 - Faixa 2",
+      "uuid": "ef0e72ca-d3a5-4f4e-bbf6-40f3737bda3f",
+      "ip": "187.43.180.235",
+      "status": "online",
+      "firmware": "v1.7.8",
+      "totalRegras": 26,
+      "conformes": 21,
+      "divergencias": [
+        {
+          "id": "PROFILE_TRANSITION_UPPER_LEVEL",
+          "titulo": "Perfil Transição: Upper Level",
+          "secao": "profiles",
+          "menu": "Imagem > Perfis > Transições",
+          "campo": "transitions.upper.level",
+          "severidade": "alto",
+          "ok": false,
+          "erros": [
+            {
+              "perfil": 0,
+              "atual": 40,
+              "esperado": 35
+            },
+            {
+              "perfil": 1,
+              "atual": 40,
+              "esperado": 35
+            }
+          ],
+          "esperado": 35
+        },
+        {
+          "id": "OCR_MAX_PLATES",
+          "titulo": "OCR Max Plates",
+          "secao": "ocr",
+          "menu": "Equipamento > OCR",
+          "campo": "ocr.maxPlates",
+          "severidade": "alto",
+          "ok": false,
+          "atual": 1,
+          "esperado": 2
+        },
+        {
+          "id": "OCR_VEHICLE_TYPE",
+          "titulo": "OCR Vehicle Type",
+          "secao": "ocr",
+          "menu": "Equipamento > OCR",
+          "campo": "ocr.vehicleType",
+          "severidade": "alto",
+          "ok": false,
+          "atual": 1,
+          "esperado": 3
+        },
+        {
+          "id": "CLASSIFIER_QUEUE",
+          "titulo": "Classificador Queue",
+          "secao": "classifier",
+          "menu": "Equipamento > Classificador",
+          "campo": "classifier.processingQueue",
+          "severidade": "alto",
+          "ok": false,
+          "atual": 4,
+          "esperado": 1
+        },
+        {
+          "id": "SNMP_DISABLED",
+          "titulo": "SNMP Desabilitado",
+          "secao": "snmp",
+          "menu": "Sistema > Monitoramento > SNMP",
+          "campo": "enabled",
+          "severidade": "baixo",
+          "ok": false,
+          "atual": true,
+          "esperado": false
+        }
+      ]
+    },
+    {
+      "nome": "GOEC6O010 - Faixa 1",
+      "uuid": "abf8fedb-4f1b-471f-a6bd-4e00484d5737",
+      "ip": "138.97.25.44",
+      "status": "online",
+      "firmware": "v1.7.8",
+      "totalRegras": 26,
+      "conformes": 23,
+      "divergencias": [
+        {
+          "id": "OCR_PROCESSING_THREADS",
+          "titulo": "OCR Processing Threads",
+          "secao": "ocr",
+          "menu": "Equipamento > OCR",
+          "campo": "ocr.processingThreads",
+          "severidade": "medio",
+          "ok": false,
+          "atual": 2,
+          "esperado": 4
+        },
+        {
+          "id": "CLASSIFIER_QUEUE",
+          "titulo": "Classificador Queue",
+          "secao": "classifier",
+          "menu": "Equipamento > Classificador",
+          "campo": "classifier.processingQueue",
+          "severidade": "alto",
+          "ok": false,
+          "atual": 4,
+          "esperado": 1
+        },
+        {
+          "id": "CLASSIFIER_THREADS",
+          "titulo": "Classificador Threads",
+          "secao": "classifier",
+          "menu": "Equipamento > Classificador",
+          "campo": "classifier.processingThreads",
+          "severidade": "alto",
+          "ok": false,
+          "atual": 4,
+          "esperado": 1
+        }
+      ]
+    },
+    {
+      "nome": "GOEC6O010 - Faixa 2",
+      "uuid": "481dd19b-4968-4759-860b-35f9ec09c206",
+      "ip": "138.97.25.44",
+      "status": "online",
+      "firmware": "v1.7.8",
+      "totalRegras": 26,
+      "conformes": 25,
+      "divergencias": [
+        {
+          "id": "CLASSIFIER_THREADS",
+          "titulo": "Classificador Threads",
+          "secao": "classifier",
+          "menu": "Equipamento > Classificador",
+          "campo": "classifier.processingThreads",
+          "severidade": "alto",
+          "ok": false,
+          "atual": 2,
+          "esperado": 1
+        }
+      ]
+    },
+    {
+      "nome": "GOEC6O011 - Faixa 1",
+      "uuid": "259688db-e246-42df-b327-192de761ec5d",
+      "ip": "187.61.123.9",
+      "status": "online",
+      "firmware": "v1.7.8",
+      "totalRegras": 26,
+      "conformes": 25,
+      "divergencias": [
+        {
+          "id": "CLASSIFIER_QUEUE",
+          "titulo": "Classificador Queue",
+          "secao": "classifier",
+          "menu": "Equipamento > Classificador",
+          "campo": "classifier.processingQueue",
+          "severidade": "alto",
+          "ok": false,
+          "atual": 4,
+          "esperado": 1
+        }
+      ]
+    },
+    {
+      "nome": "GOEC6O011 - Faixa 2",
+      "uuid": "d0595c80-9ea7-49af-b2a0-d305d688e567",
+      "ip": "187.61.123.9",
+      "status": "online",
+      "firmware": "v1.7.8",
+      "totalRegras": 26,
+      "conformes": 19,
+      "divergencias": [
+        {
+          "id": "OCR_PROCESSING_MODE",
+          "titulo": "OCR Processing Mode",
+          "secao": "ocr",
+          "menu": "Equipamento > OCR",
+          "campo": "ocr.processingMode",
+          "severidade": "medio",
+          "ok": false,
+          "atual": 2,
+          "esperado": 3
+        },
+        {
+          "id": "OCR_PROCESSING_QUEUE",
+          "titulo": "OCR Processing Queue",
+          "secao": "ocr",
+          "menu": "Equipamento > OCR",
+          "campo": "ocr.processingQueue",
+          "severidade": "medio",
+          "ok": false,
+          "atual": 2,
+          "esperado": 4
+        },
+        {
+          "id": "OCR_PROCESSING_THREADS",
+          "titulo": "OCR Processing Threads",
+          "secao": "ocr",
+          "menu": "Equipamento > OCR",
+          "campo": "ocr.processingThreads",
+          "severidade": "medio",
+          "ok": false,
+          "atual": 2,
+          "esperado": 4
+        },
+        {
+          "id": "CLASSIFIER_QUEUE",
+          "titulo": "Classificador Queue",
+          "secao": "classifier",
+          "menu": "Equipamento > Classificador",
+          "campo": "classifier.processingQueue",
+          "severidade": "alto",
+          "ok": false,
+          "atual": 2,
+          "esperado": 1
+        },
+        {
+          "id": "CLASSIFIER_THREADS",
+          "titulo": "Classificador Threads",
+          "secao": "classifier",
+          "menu": "Equipamento > Classificador",
+          "campo": "classifier.processingThreads",
+          "severidade": "alto",
+          "ok": false,
+          "atual": 2,
+          "esperado": 1
+        },
+        {
+          "id": "DATETIME_NTP_SERVER",
+          "titulo": "Servidor NTP",
+          "secao": "dateTime",
+          "menu": "Equipamento > Data e Hora",
+          "campo": "ntpServerAddress",
+          "severidade": "medio",
+          "ok": false,
+          "atual": "200.160.0.8",
+          "esperado": "time.google.com"
+        },
+        {
+          "id": "VIDEO_FRAMERATE",
+          "titulo": "Vídeo Framerate",
+          "secao": "video",
+          "menu": "Vídeo > Streams",
+          "campo": "mjpeg.main.framerate",
+          "severidade": "medio",
+          "ok": false,
+          "atual": 1,
+          "esperado": 12
+        }
+      ]
+    },
+    {
+      "nome": "GOEC6O013 - Faixa 1",
+      "uuid": "7d9bf2eb-0f9a-4691-bffd-e003fc3781ed",
+      "ip": "187.43.160.194",
+      "status": "online",
+      "firmware": "v1.7.8",
+      "totalRegras": 26,
+      "conformes": 24,
+      "divergencias": [
+        {
+          "id": "CLASSIFIER_QUEUE",
+          "titulo": "Classificador Queue",
+          "secao": "classifier",
+          "menu": "Equipamento > Classificador",
+          "campo": "classifier.processingQueue",
+          "severidade": "alto",
+          "ok": false,
+          "atual": 4,
+          "esperado": 1
+        },
+        {
+          "id": "SNAPSHOT_CROP_DISABLED",
+          "titulo": "Snapshot Crop Desabilitado",
+          "secao": "misc",
+          "menu": "Equipamento > Diversos",
+          "campo": "snapshotCrop.enable",
+          "severidade": "medio",
+          "ok": false,
+          "atual": true,
+          "esperado": false
+        }
+      ]
+    },
+    {
+      "nome": "GOEC6O013 - Faixa 2",
+      "uuid": "36896650-1bca-4093-9631-667b73bdd93d",
+      "ip": "187.43.160.194",
+      "status": "online",
+      "firmware": "v1.7.8",
+      "totalRegras": 26,
+      "conformes": 24,
+      "divergencias": [
+        {
+          "id": "PROFILE_TRANSITION_LOWER_LEVEL",
+          "titulo": "Perfil Transição: Lower Level",
+          "secao": "profiles",
+          "menu": "Imagem > Perfis > Transições",
+          "campo": "transitions.lower.level",
+          "severidade": "alto",
+          "ok": false,
+          "erros": [
+            {
+              "perfil": 0,
+              "atual": 30,
+              "esperado": 10
+            }
+          ],
+          "esperado": 10
+        },
+        {
+          "id": "PROFILE_TRANSITION_UPPER_LEVEL",
+          "titulo": "Perfil Transição: Upper Level",
+          "secao": "profiles",
+          "menu": "Imagem > Perfis > Transições",
+          "campo": "transitions.upper.level",
+          "severidade": "alto",
+          "ok": false,
+          "erros": [
+            {
+              "perfil": 0,
+              "atual": 30,
+              "esperado": 35
+            },
+            {
+              "perfil": 1,
+              "atual": 30,
+              "esperado": 35
+            }
+          ],
+          "esperado": 35
+        }
+      ]
+    },
+    {
+      "nome": "GOEC6O018 - Faixa 1",
+      "uuid": "0e154d78-62b4-4e0f-867c-0d93b7c79c74",
+      "ip": "177.200.42.236",
+      "status": "online",
+      "firmware": "v1.7.8",
+      "totalRegras": 26,
+      "conformes": 26,
+      "divergencias": []
+    },
+    {
+      "nome": "GOEC6O018 - Faixa 2",
+      "uuid": "def24641-a5f4-4673-973c-88cba3fbb571",
+      "ip": "177.200.42.236",
+      "status": "online",
+      "firmware": "v1.7.8",
+      "totalRegras": 26,
+      "conformes": 25,
+      "divergencias": [
+        {
+          "id": "CLASSIFIER_QUEUE",
+          "titulo": "Classificador Queue",
+          "secao": "classifier",
+          "menu": "Equipamento > Classificador",
+          "campo": "classifier.processingQueue",
+          "severidade": "alto",
+          "ok": false,
+          "atual": 4,
+          "esperado": 1
+        }
+      ]
+    },
+    {
+      "nome": "GOEC6O019 - Faixa 1",
+      "uuid": "6f6eddc7-f900-4d4f-8040-f7d1775d1d1d",
+      "ip": "45.70.146.16",
+      "status": "online",
+      "firmware": "v1.7.8",
+      "totalRegras": 26,
+      "conformes": 25,
+      "divergencias": [
+        {
+          "id": "CLASSIFIER_QUEUE",
+          "titulo": "Classificador Queue",
+          "secao": "classifier",
+          "menu": "Equipamento > Classificador",
+          "campo": "classifier.processingQueue",
+          "severidade": "alto",
+          "ok": false,
+          "atual": 4,
+          "esperado": 1
+        }
+      ]
+    },
+    {
+      "nome": "GOEC6O019 - Faixa 2",
+      "uuid": "b8925732-54cf-4f01-b4ec-c8bcb1b3bd2e",
+      "ip": "45.70.146.16",
+      "status": "online",
+      "firmware": "v1.7.8",
+      "totalRegras": 26,
+      "conformes": 25,
+      "divergencias": [
+        {
+          "id": "CLASSIFIER_QUEUE",
+          "titulo": "Classificador Queue",
+          "secao": "classifier",
+          "menu": "Equipamento > Classificador",
+          "campo": "classifier.processingQueue",
+          "severidade": "alto",
+          "ok": false,
+          "atual": 4,
+          "esperado": 1
+        }
+      ]
+    },
+    {
+      "nome": "GOEC6O020 - Faixa 1",
+      "uuid": "b29feb12-0a55-4c12-aab9-771abea27059",
+      "ip": "179.249.65.190",
+      "status": "online",
+      "firmware": "v1.7.8",
+      "totalRegras": 26,
+      "conformes": 25,
+      "divergencias": [
+        {
+          "id": "CLASSIFIER_QUEUE",
+          "titulo": "Classificador Queue",
+          "secao": "classifier",
+          "menu": "Equipamento > Classificador",
+          "campo": "classifier.processingQueue",
+          "severidade": "alto",
+          "ok": false,
+          "atual": 4,
+          "esperado": 1
+        }
+      ]
+    },
+    {
+      "nome": "GOEC6O020 - Faixa 2",
+      "uuid": "21484385-21b6-49ae-a2f7-bd33fd4bed6b",
+      "ip": "179.249.65.190",
+      "status": "online",
+      "firmware": "v1.7.8",
+      "totalRegras": 26,
+      "conformes": 26,
+      "divergencias": []
+    },
+    {
+      "nome": "GOEC6O021 - Faixa 1",
+      "uuid": "f07c775c-96f6-420f-b5c8-0857e686dc35",
+      "ip": "177.25.231.58",
+      "status": "online",
+      "firmware": "v1.7.8",
+      "totalRegras": 26,
+      "conformes": 26,
+      "divergencias": []
+    },
+    {
+      "nome": "GOEC6O022 - Faixa 1",
+      "uuid": "29c1d243-f44f-4a40-b62d-06c9cce958c9",
+      "ip": "149.19.166.50",
+      "status": "online",
+      "firmware": "v1.7.8",
+      "totalRegras": 26,
+      "conformes": 26,
+      "divergencias": []
+    },
+    {
+      "nome": "GOEC6O022 - Faixa 2",
+      "uuid": "dfb678d9-4e51-45c5-b7a0-15a972fe354b",
+      "ip": "149.19.166.50",
+      "status": "online",
+      "firmware": "v1.7.8",
+      "totalRegras": 26,
+      "conformes": 26,
+      "divergencias": []
+    },
+    {
+      "nome": "GOEC6O023 - Faixa 1",
+      "status": "offline",
+      "divergencias": [],
+      "extras": null
+    },
+    {
+      "nome": "GOEC6O028 - Faixa 1",
+      "uuid": "1f460cd7-f607-4c79-8a8e-50a8228850a4",
+      "ip": "177.25.225.6",
+      "status": "online",
+      "firmware": "v1.7.8",
+      "totalRegras": 26,
+      "conformes": 18,
+      "divergencias": [
+        {
+          "id": "OCR_PROCESSING_MODE",
+          "titulo": "OCR Processing Mode",
+          "secao": "ocr",
+          "menu": "Equipamento > OCR",
+          "campo": "ocr.processingMode",
+          "severidade": "medio",
+          "ok": false,
+          "atual": 2,
+          "esperado": 3
+        },
+        {
+          "id": "OCR_PROCESSING_QUEUE",
+          "titulo": "OCR Processing Queue",
+          "secao": "ocr",
+          "menu": "Equipamento > OCR",
+          "campo": "ocr.processingQueue",
+          "severidade": "medio",
+          "ok": false,
+          "atual": 2,
+          "esperado": 4
+        },
+        {
+          "id": "OCR_PROCESSING_THREADS",
+          "titulo": "OCR Processing Threads",
+          "secao": "ocr",
+          "menu": "Equipamento > OCR",
+          "campo": "ocr.processingThreads",
+          "severidade": "medio",
+          "ok": false,
+          "atual": 2,
+          "esperado": 4
+        },
+        {
+          "id": "CLASSIFIER_QUEUE",
+          "titulo": "Classificador Queue",
+          "secao": "classifier",
+          "menu": "Equipamento > Classificador",
+          "campo": "classifier.processingQueue",
+          "severidade": "alto",
+          "ok": false,
+          "atual": 2,
+          "esperado": 1
+        },
+        {
+          "id": "CLASSIFIER_THREADS",
+          "titulo": "Classificador Threads",
+          "secao": "classifier",
+          "menu": "Equipamento > Classificador",
+          "campo": "classifier.processingThreads",
+          "severidade": "alto",
+          "ok": false,
+          "atual": 2,
+          "esperado": 1
+        },
+        {
+          "id": "DATETIME_NTP_SERVER",
+          "titulo": "Servidor NTP",
+          "secao": "dateTime",
+          "menu": "Equipamento > Data e Hora",
+          "campo": "ntpServerAddress",
+          "severidade": "medio",
+          "ok": false,
+          "atual": "200.160.0.8",
+          "esperado": "time.google.com"
+        },
+        {
+          "id": "VIDEO_FRAMERATE",
+          "titulo": "Vídeo Framerate",
+          "secao": "video",
+          "menu": "Vídeo > Streams",
+          "campo": "mjpeg.main.framerate",
+          "severidade": "medio",
+          "ok": false,
+          "atual": 1,
+          "esperado": 12
+        },
+        {
+          "id": "VIDEO_QUALITY",
+          "titulo": "Vídeo Qualidade JPEG",
+          "secao": "video",
+          "menu": "Vídeo > Streams",
+          "campo": "mjpeg.main.quality",
+          "severidade": "medio",
+          "ok": false,
+          "atual": 10,
+          "esperado": 85
+        }
+      ]
+    },
+    {
+      "nome": "GOEC6O029 - Faixa 1",
+      "uuid": "d4c91424-ff2b-408a-930d-f12b595a6212",
+      "ip": "177.25.224.79",
+      "status": "online",
+      "firmware": "v1.7.8",
+      "totalRegras": 26,
+      "conformes": 25,
+      "divergencias": [
+        {
+          "id": "CLASSIFIER_QUEUE",
+          "titulo": "Classificador Queue",
+          "secao": "classifier",
+          "menu": "Equipamento > Classificador",
+          "campo": "classifier.processingQueue",
+          "severidade": "alto",
+          "ok": false,
+          "atual": 4,
+          "esperado": 1
+        }
+      ]
+    },
+    {
+      "nome": "GOEC6O029 - Faixa 2",
+      "status": "offline",
+      "divergencias": [],
+      "extras": null
+    },
+    {
+      "nome": "GOEC6O033 - Faixa 1",
+      "uuid": "5468c818-1b5d-4d0e-a7c1-57319784e3dc",
+      "ip": "45.168.254.127",
+      "status": "online",
+      "firmware": "v1.7.8",
+      "totalRegras": 26,
+      "conformes": 25,
+      "divergencias": [
+        {
+          "id": "CLASSIFIER_QUEUE",
+          "titulo": "Classificador Queue",
+          "secao": "classifier",
+          "menu": "Equipamento > Classificador",
+          "campo": "classifier.processingQueue",
+          "severidade": "alto",
+          "ok": false,
+          "atual": 4,
+          "esperado": 1
+        }
+      ]
+    },
+    {
+      "nome": "GOEC6O033 - Faixa 2",
+      "uuid": "34ebe844-ba8e-49f4-bc6f-45d5724ee381",
+      "ip": "45.168.254.127",
+      "status": "online",
+      "firmware": "v1.7.8",
+      "totalRegras": 26,
+      "conformes": 23,
+      "divergencias": [
+        {
+          "id": "PROFILE_TRANSITION_LOWER_LEVEL",
+          "titulo": "Perfil Transição: Lower Level",
+          "secao": "profiles",
+          "menu": "Imagem > Perfis > Transições",
+          "campo": "transitions.lower.level",
+          "severidade": "alto",
+          "ok": false,
+          "erros": [
+            {
+              "perfil": 0,
+              "atual": 35,
+              "esperado": 10
+            },
+            {
+              "perfil": 1,
+              "atual": 35,
+              "esperado": 10
+            }
+          ],
+          "esperado": 10
+        },
+        {
+          "id": "PROFILE_TRANSITION_LOWER_TIME",
+          "titulo": "Perfil Transição: Lower startTime/endTime",
+          "secao": "profiles",
+          "menu": "Imagem > Perfis > Transições",
+          "campo": "transitions.lower.startTime / endTime",
+          "severidade": "alto",
+          "ok": false,
+          "erros": [
+            {
+              "perfil": 0,
+              "campo": "startTime",
+              "atual": "06:00:00",
+              "esperado": "00:00:00"
+            },
+            {
+              "perfil": 0,
+              "campo": "endTime",
+              "atual": "18:00:00",
+              "esperado": "00:00:00"
+            },
+            {
+              "perfil": 1,
+              "campo": "startTime",
+              "atual": "18:00:00",
+              "esperado": "00:00:00"
+            },
+            {
+              "perfil": 1,
+              "campo": "endTime",
+              "atual": "06:00:00",
+              "esperado": "00:00:00"
+            }
+          ]
+        },
+        {
+          "id": "PROFILE_TRANSITION_UPPER_TIME",
+          "titulo": "Perfil Transição: Upper startTime/endTime",
+          "secao": "profiles",
+          "menu": "Imagem > Perfis > Transições",
+          "campo": "transitions.upper.startTime / endTime",
+          "severidade": "alto",
+          "ok": false,
+          "erros": [
+            {
+              "perfil": 0,
+              "campo": "startTime",
+              "atual": "06:00:00",
+              "esperado": "00:00:00"
+            },
+            {
+              "perfil": 0,
+              "campo": "endTime",
+              "atual": "17:58:00",
+              "esperado": "00:00:00"
+            },
+            {
+              "perfil": 1,
+              "campo": "startTime",
+              "atual": "18:00:00",
+              "esperado": "00:00:00"
+            },
+            {
+              "perfil": 1,
+              "campo": "endTime",
+              "atual": "06:00:00",
+              "esperado": "00:00:00"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "nome": "GOEC6O036 - Faixa 1",
+      "uuid": "e433c575-ba3b-4d88-bd96-9ee28225b73f",
+      "ip": "191.56.246.141",
+      "status": "online",
+      "firmware": "v1.7.8",
+      "totalRegras": 26,
+      "conformes": 26,
+      "divergencias": []
+    },
+    {
+      "nome": "GOEC6O040 - Faixa 1",
+      "uuid": "9b5328e3-104b-4afc-b3ce-8880066ca995",
+      "ip": "201.71.213.219",
+      "status": "online",
+      "firmware": "v1.7.8",
+      "totalRegras": 26,
+      "conformes": 24,
+      "divergencias": [
+        {
+          "id": "PROFILE_TRANSITION_LOWER_TIME",
+          "titulo": "Perfil Transição: Lower startTime/endTime",
+          "secao": "profiles",
+          "menu": "Imagem > Perfis > Transições",
+          "campo": "transitions.lower.startTime / endTime",
+          "severidade": "alto",
+          "ok": false,
+          "erros": [
+            {
+              "perfil": 0,
+              "campo": "startTime",
+              "atual": "18:00:00",
+              "esperado": "00:00:00"
+            },
+            {
+              "perfil": 1,
+              "campo": "startTime",
+              "atual": "06:00:00",
+              "esperado": "00:00:00"
+            }
+          ]
+        },
+        {
+          "id": "PROFILE_TRANSITION_UPPER_TIME",
+          "titulo": "Perfil Transição: Upper startTime/endTime",
+          "secao": "profiles",
+          "menu": "Imagem > Perfis > Transições",
+          "campo": "transitions.upper.startTime / endTime",
+          "severidade": "alto",
+          "ok": false,
+          "erros": [
+            {
+              "perfil": 0,
+              "campo": "startTime",
+              "atual": "06:00:00",
+              "esperado": "00:00:00"
+            },
+            {
+              "perfil": 1,
+              "campo": "startTime",
+              "atual": "18:00:00",
+              "esperado": "00:00:00"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "nome": "GOEC6O040 - Faixa 2",
+      "uuid": "416aff7e-4c34-4356-bbac-aa66d34ffead",
+      "ip": "201.71.213.219",
+      "status": "online",
+      "firmware": "v1.7.8",
+      "totalRegras": 26,
+      "conformes": 24,
+      "divergencias": [
+        {
+          "id": "PROFILE_TRANSITION_LOWER_TIME",
+          "titulo": "Perfil Transição: Lower startTime/endTime",
+          "secao": "profiles",
+          "menu": "Imagem > Perfis > Transições",
+          "campo": "transitions.lower.startTime / endTime",
+          "severidade": "alto",
+          "ok": false,
+          "erros": [
+            {
+              "perfil": 0,
+              "campo": "endTime",
+              "atual": "18:00:00",
+              "esperado": "00:00:00"
+            },
+            {
+              "perfil": 1,
+              "campo": "endTime",
+              "atual": "06:00:00",
+              "esperado": "00:00:00"
+            }
+          ]
+        },
+        {
+          "id": "PROFILE_TRANSITION_UPPER_TIME",
+          "titulo": "Perfil Transição: Upper startTime/endTime",
+          "secao": "profiles",
+          "menu": "Imagem > Perfis > Transições",
+          "campo": "transitions.upper.startTime / endTime",
+          "severidade": "alto",
+          "ok": false,
+          "erros": [
+            {
+              "perfil": 0,
+              "campo": "startTime",
+              "atual": "06:00:00",
+              "esperado": "00:00:00"
+            },
+            {
+              "perfil": 1,
+              "campo": "startTime",
+              "atual": "18:01:00",
+              "esperado": "00:00:00"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "nome": "GOEC6O041 - Faixa 1",
+      "uuid": "b2faa440-b39f-479b-a3bd-afbadfbfe194",
+      "ip": "179.242.189.214",
+      "status": "online",
+      "firmware": "v1.7.8",
+      "totalRegras": 26,
+      "conformes": 26,
+      "divergencias": []
+    },
+    {
+      "nome": "GOEC6O041 - Faixa 2",
+      "uuid": "de950460-2405-4ec4-838d-4a8ef2b49720",
+      "ip": "179.242.189.214",
+      "status": "online",
+      "firmware": "v1.7.8",
+      "totalRegras": 26,
+      "conformes": 26,
+      "divergencias": []
+    },
+    {
+      "nome": "GOEC6O043 - Faixa 1",
+      "uuid": "f29258aa-8c64-47c6-8912-54b3dffbc5dc",
+      "ip": "186.237.219.7",
+      "status": "online",
+      "firmware": "v1.7.8",
+      "totalRegras": 26,
+      "conformes": 25,
+      "divergencias": [
+        {
+          "id": "CLASSIFIER_QUEUE",
+          "titulo": "Classificador Queue",
+          "secao": "classifier",
+          "menu": "Equipamento > Classificador",
+          "campo": "classifier.processingQueue",
+          "severidade": "alto",
+          "ok": false,
+          "atual": 4,
+          "esperado": 1
+        }
+      ]
+    },
+    {
+      "nome": "GOEC6O043 - Faixa 2",
+      "uuid": "9e7e2c3c-bf75-40c4-b0ca-42b3950a0955",
+      "ip": "186.237.219.7",
+      "status": "online",
+      "firmware": "v1.7.8",
+      "totalRegras": 26,
+      "conformes": 25,
+      "divergencias": [
+        {
+          "id": "CLASSIFIER_QUEUE",
+          "titulo": "Classificador Queue",
+          "secao": "classifier",
+          "menu": "Equipamento > Classificador",
+          "campo": "classifier.processingQueue",
+          "severidade": "alto",
+          "ok": false,
+          "atual": 4,
+          "esperado": 1
+        }
+      ]
+    },
+    {
+      "nome": "GOEC6O045 - Faixa 1",
+      "uuid": "0ce96fed-4b52-4737-9e95-f6dd2c969d58",
+      "ip": "179.242.187.113",
+      "status": "online",
+      "firmware": "v1.7.8",
+      "totalRegras": 26,
+      "conformes": 26,
+      "divergencias": []
+    },
+    {
+      "nome": "GOEC6O045 - Faixa 2",
+      "uuid": "66ee7d2d-f271-40c6-a1dd-91459d77d803",
+      "ip": "179.242.187.113",
+      "status": "online",
+      "firmware": "v1.7.8",
+      "totalRegras": 26,
+      "conformes": 26,
+      "divergencias": []
+    },
+    {
+      "nome": "GOEC6O046 - Faixa 1",
+      "uuid": "1e26be92-70e4-468f-a582-4e015282a4fe",
+      "ip": "170.81.67.214",
+      "status": "online",
+      "firmware": "v1.7.8",
+      "totalRegras": 26,
+      "conformes": 25,
+      "divergencias": [
+        {
+          "id": "CLASSIFIER_QUEUE",
+          "titulo": "Classificador Queue",
+          "secao": "classifier",
+          "menu": "Equipamento > Classificador",
+          "campo": "classifier.processingQueue",
+          "severidade": "alto",
+          "ok": false,
+          "atual": 4,
+          "esperado": 1
+        }
+      ]
+    },
+    {
+      "nome": "GOEC6O046 - Faixa 2",
+      "uuid": "4d68163e-8462-4dce-adad-df3b0d7c76af",
+      "ip": "170.81.67.214",
+      "status": "online",
+      "firmware": "v1.7.8",
+      "totalRegras": 26,
+      "conformes": 26,
+      "divergencias": []
+    },
+    {
+      "nome": "GOEC6O048 - Faixa 1",
+      "status": "offline",
+      "divergencias": [],
+      "extras": null
+    },
+    {
+      "nome": "GOEC6O048 - Faixa 2",
+      "status": "offline",
+      "divergencias": [],
+      "extras": null
+    },
+    {
+      "nome": "GOEC6O049 - Faixa 1",
+      "status": "offline",
+      "divergencias": [],
+      "extras": null
+    },
+    {
+      "nome": "GOEC6O049 - Faixa 2",
+      "status": "offline",
+      "divergencias": [],
+      "extras": null
+    },
+    {
+      "nome": "GOEC6O050 - Faixa 1",
+      "uuid": "fc487783-cc4a-4d77-9bc4-5399ba479587",
+      "ip": "177.223.44.84",
+      "status": "online",
+      "firmware": "v1.7.8",
+      "totalRegras": 26,
+      "conformes": 25,
+      "divergencias": [
+        {
+          "id": "CLASSIFIER_QUEUE",
+          "titulo": "Classificador Queue",
+          "secao": "classifier",
+          "menu": "Equipamento > Classificador",
+          "campo": "classifier.processingQueue",
+          "severidade": "alto",
+          "ok": false,
+          "atual": 4,
+          "esperado": 1
+        }
+      ]
+    },
+    {
+      "nome": "GOEC6O050 - Faixa 2",
+      "uuid": "f435e113-b74b-4721-b15c-066731fe0668",
+      "ip": "177.223.44.84",
+      "status": "online",
+      "firmware": "v1.7.8",
+      "totalRegras": 26,
+      "conformes": 26,
+      "divergencias": []
+    },
+    {
+      "nome": "GOEC6O051 - Faixa 1",
+      "status": "offline",
+      "divergencias": [],
+      "extras": null
+    },
+    {
+      "nome": "GOEC6O051 - Faixa 2",
+      "status": "offline",
+      "divergencias": [],
+      "extras": null
+    },
+    {
+      "nome": "GOEC6O052 - Faixa 2",
+      "uuid": "8244f568-59f3-4f27-932e-86cc2eb10fc3",
+      "ip": "187.68.165.85",
+      "status": "online",
+      "firmware": "v1.7.8",
+      "totalRegras": 26,
+      "conformes": 24,
+      "divergencias": [
+        {
+          "id": "CLASSIFIER_QUEUE",
+          "titulo": "Classificador Queue",
+          "secao": "classifier",
+          "menu": "Equipamento > Classificador",
+          "campo": "classifier.processingQueue",
+          "severidade": "alto",
+          "ok": false,
+          "atual": 4,
+          "esperado": 1
+        },
+        {
+          "id": "CLASSIFIER_THREADS",
+          "titulo": "Classificador Threads",
+          "secao": "classifier",
+          "menu": "Equipamento > Classificador",
+          "campo": "classifier.processingThreads",
+          "severidade": "alto",
+          "ok": false,
+          "atual": 4,
+          "esperado": 1
+        }
+      ]
+    },
+    {
+      "nome": "GOEC6O052- Faixa 1",
+      "uuid": "49cbc26f-7a42-47d6-9d32-bc66f740e886",
+      "ip": "187.68.165.85",
+      "status": "online",
+      "firmware": "v1.7.8",
+      "totalRegras": 26,
+      "conformes": 24,
+      "divergencias": [
+        {
+          "id": "CLASSIFIER_QUEUE",
+          "titulo": "Classificador Queue",
+          "secao": "classifier",
+          "menu": "Equipamento > Classificador",
+          "campo": "classifier.processingQueue",
+          "severidade": "alto",
+          "ok": false,
+          "atual": 4,
+          "esperado": 1
+        },
+        {
+          "id": "CLASSIFIER_THREADS",
+          "titulo": "Classificador Threads",
+          "secao": "classifier",
+          "menu": "Equipamento > Classificador",
+          "campo": "classifier.processingThreads",
+          "severidade": "alto",
+          "ok": false,
+          "atual": 4,
+          "esperado": 1
+        }
+      ]
+    },
+    {
+      "nome": "GOEC6O053 - Faixa 1",
+      "uuid": "b2071e67-3658-4a52-a543-13713f2c1e33",
+      "ip": "179.249.76.74",
+      "status": "online",
+      "firmware": "v1.7.8",
+      "totalRegras": 26,
+      "conformes": 26,
+      "divergencias": []
+    },
+    {
+      "nome": "GOEC6O053 - Faixa 2",
+      "uuid": "3bb822e1-3f89-4a2e-aa79-c8a6041288d9",
+      "ip": "179.249.76.74",
+      "status": "online",
+      "firmware": "v1.7.8",
+      "totalRegras": 26,
+      "conformes": 26,
+      "divergencias": []
+    },
+    {
+      "nome": "GOEC6O054 - Faixa 1",
+      "uuid": "8f419e79-5a4c-4af3-8a89-79304110c391",
+      "ip": "187.43.168.205",
+      "status": "online",
+      "firmware": "v1.7.8",
+      "totalRegras": 26,
+      "conformes": 25,
+      "divergencias": [
+        {
+          "id": "CLASSIFIER_QUEUE",
+          "titulo": "Classificador Queue",
+          "secao": "classifier",
+          "menu": "Equipamento > Classificador",
+          "campo": "classifier.processingQueue",
+          "severidade": "alto",
+          "ok": false,
+          "atual": 4,
+          "esperado": 1
+        }
+      ]
+    },
+    {
+      "nome": "GOEC6O054 - Faixa 2",
+      "uuid": "06821a80-8d82-484e-908e-a9a55ba73b7b",
+      "ip": "187.43.168.205",
+      "status": "online",
+      "firmware": "v1.7.8",
+      "totalRegras": 26,
+      "conformes": 25,
+      "divergencias": [
+        {
+          "id": "CLASSIFIER_QUEUE",
+          "titulo": "Classificador Queue",
+          "secao": "classifier",
+          "menu": "Equipamento > Classificador",
+          "campo": "classifier.processingQueue",
+          "severidade": "alto",
+          "ok": false,
+          "atual": 4,
+          "esperado": 1
+        }
+      ]
+    },
+    {
+      "nome": "GOEC6O055 - Faixa 1",
+      "uuid": "1d0b2132-a825-4823-ab8f-8ce4aa829138",
+      "ip": "191.37.226.77",
+      "status": "online",
+      "firmware": "v1.7.8",
+      "totalRegras": 26,
+      "conformes": 24,
+      "divergencias": [
+        {
+          "id": "PROFILE_TRANSITION_LOWER_TIME",
+          "titulo": "Perfil Transição: Lower startTime/endTime",
+          "secao": "profiles",
+          "menu": "Imagem > Perfis > Transições",
+          "campo": "transitions.lower.startTime / endTime",
+          "severidade": "alto",
+          "ok": false,
+          "erros": [
+            {
+              "perfil": 0,
+              "campo": "endTime",
+              "atual": "18:00:00",
+              "esperado": "00:00:00"
+            },
+            {
+              "perfil": 1,
+              "campo": "endTime",
+              "atual": "06:00:00",
+              "esperado": "00:00:00"
+            }
+          ]
+        },
+        {
+          "id": "PROFILE_TRANSITION_UPPER_TIME",
+          "titulo": "Perfil Transição: Upper startTime/endTime",
+          "secao": "profiles",
+          "menu": "Imagem > Perfis > Transições",
+          "campo": "transitions.upper.startTime / endTime",
+          "severidade": "alto",
+          "ok": false,
+          "erros": [
+            {
+              "perfil": 0,
+              "campo": "startTime",
+              "atual": "06:00:00",
+              "esperado": "00:00:00"
+            },
+            {
+              "perfil": 1,
+              "campo": "startTime",
+              "atual": "18:01:00",
+              "esperado": "00:00:00"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "nome": "GOEC6O055 - Faixa 2",
+      "uuid": "fe5f7cf3-a8dd-41e8-b975-72921dbddeac",
+      "ip": "191.37.226.77",
+      "status": "online",
+      "firmware": "v1.7.8",
+      "totalRegras": 26,
+      "conformes": 21,
+      "divergencias": [
+        {
+          "id": "PROFILE_TRANSITION_LOWER_TIME",
+          "titulo": "Perfil Transição: Lower startTime/endTime",
+          "secao": "profiles",
+          "menu": "Imagem > Perfis > Transições",
+          "campo": "transitions.lower.startTime / endTime",
+          "severidade": "alto",
+          "ok": false,
+          "erros": [
+            {
+              "perfil": 0,
+              "campo": "startTime",
+              "atual": "18:00:00",
+              "esperado": "00:00:00"
+            },
+            {
+              "perfil": 1,
+              "campo": "startTime",
+              "atual": "05:59:59",
+              "esperado": "00:00:00"
+            }
+          ]
+        },
+        {
+          "id": "PROFILE_TRANSITION_UPPER_TIME",
+          "titulo": "Perfil Transição: Upper startTime/endTime",
+          "secao": "profiles",
+          "menu": "Imagem > Perfis > Transições",
+          "campo": "transitions.upper.startTime / endTime",
+          "severidade": "alto",
+          "ok": false,
+          "erros": [
+            {
+              "perfil": 0,
+              "campo": "startTime",
+              "atual": "06:00:00",
+              "esperado": "00:00:00"
+            },
+            {
+              "perfil": 1,
+              "campo": "startTime",
+              "atual": "18:01:00",
+              "esperado": "00:00:00"
+            }
+          ]
+        },
+        {
+          "id": "OCR_MAX_PLATES",
+          "titulo": "OCR Max Plates",
+          "secao": "ocr",
+          "menu": "Equipamento > OCR",
+          "campo": "ocr.maxPlates",
+          "severidade": "alto",
+          "ok": false,
+          "atual": 1,
+          "esperado": 2
+        },
+        {
+          "id": "CLASSIFIER_QUEUE",
+          "titulo": "Classificador Queue",
+          "secao": "classifier",
+          "menu": "Equipamento > Classificador",
+          "campo": "classifier.processingQueue",
+          "severidade": "alto",
+          "ok": false,
+          "atual": 4,
+          "esperado": 1
+        },
+        {
+          "id": "VIDEO_FRAMERATE",
+          "titulo": "Vídeo Framerate",
+          "secao": "video",
+          "menu": "Vídeo > Streams",
+          "campo": "mjpeg.main.framerate",
+          "severidade": "medio",
+          "ok": false,
+          "atual": 5,
+          "esperado": 12
+        }
+      ]
+    },
+    {
+      "nome": "GOEC6O056 - Faixa 1",
+      "uuid": "07b43518-06b0-4186-89b8-201132a845ac",
+      "ip": "170.81.93.157",
+      "status": "online",
+      "firmware": "v1.7.8",
+      "totalRegras": 26,
+      "conformes": 25,
+      "divergencias": [
+        {
+          "id": "CLASSIFIER_QUEUE",
+          "titulo": "Classificador Queue",
+          "secao": "classifier",
+          "menu": "Equipamento > Classificador",
+          "campo": "classifier.processingQueue",
+          "severidade": "alto",
+          "ok": false,
+          "atual": 4,
+          "esperado": 1
+        }
+      ]
+    },
+    {
+      "nome": "GOEC6O056 - Faixa 2",
+      "uuid": "8dfa023b-1492-4d06-ad06-13aa51fe8fa2",
+      "ip": "170.81.93.157",
+      "status": "online",
+      "firmware": "v1.7.8",
+      "totalRegras": 26,
+      "conformes": 25,
+      "divergencias": [
+        {
+          "id": "CLASSIFIER_QUEUE",
+          "titulo": "Classificador Queue",
+          "secao": "classifier",
+          "menu": "Equipamento > Classificador",
+          "campo": "classifier.processingQueue",
+          "severidade": "alto",
+          "ok": false,
+          "atual": 4,
+          "esperado": 1
+        }
+      ]
+    },
+    {
+      "nome": "GOEC6O057 - Faixa 1",
+      "uuid": "41d74d00-032e-4a4c-864e-ac86ea4d01aa",
+      "ip": "138.97.25.51",
+      "status": "online",
+      "firmware": "v1.7.8",
+      "totalRegras": 26,
+      "conformes": 25,
+      "divergencias": [
+        {
+          "id": "CLASSIFIER_QUEUE",
+          "titulo": "Classificador Queue",
+          "secao": "classifier",
+          "menu": "Equipamento > Classificador",
+          "campo": "classifier.processingQueue",
+          "severidade": "alto",
+          "ok": false,
+          "atual": 4,
+          "esperado": 1
+        }
+      ]
+    },
+    {
+      "nome": "GOEC6O057 - Faixa 2",
+      "uuid": "78fd907c-0085-4d9b-963d-b4e8ee2ad47b",
+      "ip": "138.97.25.51",
+      "status": "online",
+      "firmware": "v1.7.8",
+      "totalRegras": 26,
+      "conformes": 26,
+      "divergencias": []
+    },
+    {
+      "nome": "GOEC6O058 - Faixa 1",
+      "uuid": "b5a0f157-e8d4-478c-bf2b-91ebbfcf2a29",
+      "ip": "187.68.160.38",
+      "status": "online",
+      "firmware": "v1.7.8",
+      "totalRegras": 26,
+      "conformes": 26,
+      "divergencias": []
+    },
+    {
+      "nome": "GOEC6O058 - Faixa 2",
+      "uuid": "6561d5fd-0aba-413b-a60a-a0d7e1b61b6d",
+      "ip": "187.68.160.38",
+      "status": "online",
+      "firmware": "v1.7.8",
+      "totalRegras": 26,
+      "conformes": 24,
+      "divergencias": [
+        {
+          "id": "CLASSIFIER_QUEUE",
+          "titulo": "Classificador Queue",
+          "secao": "classifier",
+          "menu": "Equipamento > Classificador",
+          "campo": "classifier.processingQueue",
+          "severidade": "alto",
+          "ok": false,
+          "atual": 4,
+          "esperado": 1
+        },
+        {
+          "id": "CLASSIFIER_THREADS",
+          "titulo": "Classificador Threads",
+          "secao": "classifier",
+          "menu": "Equipamento > Classificador",
+          "campo": "classifier.processingThreads",
+          "severidade": "alto",
+          "ok": false,
+          "atual": 4,
+          "esperado": 1
+        }
+      ]
+    },
+    {
+      "nome": "GOEC6O059 - Faixa 1",
+      "uuid": "97a97d01-3d12-4f16-94b0-831575825255",
+      "ip": "170.81.93.198",
+      "status": "online",
+      "firmware": "v1.7.8",
+      "totalRegras": 26,
+      "conformes": 26,
+      "divergencias": []
+    },
+    {
+      "nome": "GOEC6O059 - Faixa 2",
+      "uuid": "cedcda0f-9104-498c-9f52-8f6e3ebfdcfb",
+      "ip": "170.81.93.198",
+      "status": "online",
+      "firmware": "v1.7.8",
+      "totalRegras": 26,
+      "conformes": 24,
+      "divergencias": [
+        {
+          "id": "OCR_PROCESSING_THREADS",
+          "titulo": "OCR Processing Threads",
+          "secao": "ocr",
+          "menu": "Equipamento > OCR",
+          "campo": "ocr.processingThreads",
+          "severidade": "medio",
+          "ok": false,
+          "atual": 1,
+          "esperado": 4
+        },
+        {
+          "id": "CLASSIFIER_QUEUE",
+          "titulo": "Classificador Queue",
+          "secao": "classifier",
+          "menu": "Equipamento > Classificador",
+          "campo": "classifier.processingQueue",
+          "severidade": "alto",
+          "ok": false,
+          "atual": 4,
+          "esperado": 1
+        }
+      ]
+    }
+  ]
+}

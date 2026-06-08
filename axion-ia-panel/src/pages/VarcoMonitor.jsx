@@ -1,16 +1,13 @@
 import React, { useState, useEffect, useMemo } from "react";
-import { Radio, CheckCircle2, AlertTriangle, XCircle, RefreshCw, Search, ChevronDown, ChevronUp, ExternalLink, Wrench, Eye, Copy, Terminal } from "lucide-react";
+import { Radio, CheckCircle2, AlertTriangle, XCircle, RefreshCw, Search, ChevronDown, ChevronUp, ExternalLink, Wrench, Eye, Copy, Terminal, Shield } from "lucide-react";
 
 const API_BASE = "http://localhost:3100";
 
-/* ═══ Referências para análise de conformidade (consenso por maioria) ═══ */
-const REFERENCES = [
-  "GOEC6O045 - Faixa 1",
-  "GOEC6O045 - Faixa 2",
-  "GOEC6O048 - Faixa 1",
-  "GOEC6O048 - Faixa 2",
-  "GOEC6O040 - Faixa 1",
-];
+/* ═══ Referências para análise de conformidade (consenso por maioria) ═══
+   Usa TODOS os equipamentos online como base de votação.
+   O consenso é determinado pelo valor mais frequente na frota inteira.
+   Equipamentos com valor igual ao consenso = CONFORMES (referência).
+═══════════════════════════════════════════════════════════════════════════ */
 
 /* ══════════ WIN11 FLUENT DARK THEME ══════════ */
 const C = {
@@ -182,23 +179,18 @@ export default function VarcoMonitor() {
     const allParams = auditDevices.filter(d => d.raw).map(d => ({ nome: d.nome, uuid: d.uuid, ip: d.ip, params: extractParams(d.raw) }));
     if (!allParams.length) return null;
 
-    // Find all reference devices (only those with valid data)
-    const refs = allParams.filter(d => REFERENCES.includes(d.nome));
-    if (refs.length === 0) return null;
-
-    // Build consensus: for each param, take the value that appears most across references
-    const paramKeys = Object.keys(refs[0].params);
+    // Build consensus from ALL devices (majority vote across entire fleet)
+    const paramKeys = Object.keys(allParams[0].params);
     const consensus = {};
     for (const key of paramKeys) {
       const votes = {};
-      refs.forEach(r => {
+      allParams.forEach(r => {
         const v = String(r.params[key]);
         votes[v] = (votes[v] || 0) + 1;
       });
       const winner = Object.entries(votes).sort((a, b) => b[1] - a[1])[0];
-      consensus[key] = { value: refs[0].params[key], voteStr: winner[0], count: winner[1], total: refs.length };
-      // Use actual typed value from a ref that has the winning value
-      const matchRef = refs.find(r => String(r.params[key]) === winner[0]);
+      consensus[key] = { value: allParams[0].params[key], voteStr: winner[0], count: winner[1], total: allParams.length };
+      const matchRef = allParams.find(r => String(r.params[key]) === winner[0]);
       if (matchRef) consensus[key].value = matchRef.params[key];
     }
 
@@ -215,6 +207,7 @@ export default function VarcoMonitor() {
     const conformes = results.filter(r => r.conforme);
     const divergentes = results.filter(r => !r.conforme);
 
+    // Group divergentes by identical variation pattern
     const groupMap = new Map();
     divergentes.forEach(d => {
       const key = Object.entries(d.diffs).map(([k, v]) => `${k}=${v.atual}`).sort().join("|");
@@ -223,7 +216,10 @@ export default function VarcoMonitor() {
     });
     const groups = [...groupMap.values()].sort((a, b) => b.devices.length - a.devices.length);
 
-    return { results, conformes, divergentes, groups, refs, consensus };
+    // Offline devices (no raw data)
+    const offline = auditDevices.filter(d => !d.raw).map(d => ({ nome: d.nome, uuid: d.uuid, ip: d.ip }));
+
+    return { results, conformes, divergentes, groups, consensus, offline, totalAnalisados: allParams.length, totalInventario: auditDevices.length };
   }, [auditDevices]);
 
   const liveStats = useMemo(() => {
@@ -257,6 +253,7 @@ export default function VarcoMonitor() {
       <div style={{ display: "flex", gap: "2px", marginBottom: "16px", borderBottom: `2px solid ${C.border}` }}>
         {[
           { id: "auditoria", label: "Auditoria & Correções", icon: <Wrench size={13} /> },
+          { id: "padrao", label: "vs Padrão", icon: <Shield size={13} /> },
           { id: "grupos", label: "Grupos", icon: <Eye size={13} /> },
           { id: "inventario", label: "Inventário", icon: <Radio size={13} /> },
           { id: "comandos", label: "Comandos", icon: <Terminal size={13} /> },
@@ -272,13 +269,14 @@ export default function VarcoMonitor() {
       {loading && <div style={{ textAlign: "center", padding: "40px", color: C.textMuted }}>Carregando...</div>}
 
       {!loading && tab === "auditoria" && analysis && <AuditoriaTab analysis={analysis} />}
+      {!loading && tab === "padrao" && <PadraoTab />}
       {!loading && tab === "grupos" && analysis && <GruposTab groups={analysis.groups} expandedGroup={expandedGroup} setExpandedGroup={setExpandedGroup} />}
       {!loading && tab === "inventario" && analysis && <InventarioTab results={filteredResults} filter={filter} setFilter={setFilter} statusFilter={statusFilter} setStatusFilter={setStatusFilter} expandedDevice={expandedDevice} setExpandedDevice={setExpandedDevice} liveDevices={liveDevices} />}
       {!loading && tab === "comandos" && analysis && <ComandosTab groups={analysis.groups} />}
 
       {/* Footer */}
       <div style={{ marginTop: "16px", padding: "10px", background: C.surface, border: `1px solid ${C.border}`, borderRadius: "6px", fontSize: "11px", color: C.textMuted, display: "flex", justifyContent: "space-between" }}>
-        <span>Referências: {REFERENCES.length} dispositivos | Coleta: 05/06/2026</span>
+        <span>Inventário: {auditDevices.length} equipamentos | Consenso: frota completa | Atualizado: 08/06/2026</span>
         <button onClick={fetchAll} style={{ display: "flex", alignItems: "center", gap: "4px", padding: "4px 10px", border: `1px solid ${C.border}`, borderRadius: "4px", background: C.raised, color: C.textSecondary, cursor: "pointer", fontSize: "11px" }}>
           <RefreshCw size={11} /> {lastUpdate && lastUpdate.toLocaleTimeString("pt-BR")}
         </button>
@@ -301,9 +299,10 @@ function StatCard({ label, value, color, icon }) {
 }
 
 function AuditoriaTab({ analysis }) {
-  const { conformes, divergentes, groups, refs, consensus } = analysis;
+  const { conformes, divergentes, groups, consensus, offline, totalAnalisados, totalInventario } = analysis;
   const totalDiv = divergentes.reduce((s, d) => s + d.diffCount, 0);
   const [expandedRow, setExpandedRow] = useState(null);
+  const [showAllRefs, setShowAllRefs] = useState(false);
 
   // Build detailed problem analysis
   const problemRank = {};
@@ -416,20 +415,67 @@ function AuditoriaTab({ analysis }) {
 
   return (
     <div>
-      {/* Reference info */}
+      {/* Full fleet inventory panel */}
       <div style={{ marginBottom: "14px", padding: "12px 14px", background: C.accentBg, border: `1px solid ${C.accentBorder}`, borderRadius: "8px" }}>
         <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "6px" }}>
-          <strong style={{ color: C.accent, fontSize: "13px" }}>Base de Referência — Consenso por Maioria</strong>
-          <span style={{ fontSize: "11px", color: C.textMuted }}>{refs.length} dispositivos validados</span>
+          <strong style={{ color: C.accent, fontSize: "13px" }}>Base de Referência — Consenso por Maioria (Frota Completa)</strong>
+          <span style={{ fontSize: "11px", color: C.textMuted }}>{totalInventario} inventário | {totalAnalisados} analisados | {offline.length} offline</span>
         </div>
-        <div style={{ display: "flex", flexWrap: "wrap", gap: "6px" }}>
-          {refs.map(r => (
-            <span key={r.nome} style={{ background: C.codeBg, padding: "3px 8px", borderRadius: "4px", fontSize: "11px", color: C.textSecondary, border: `1px solid ${C.border}` }}>{r.nome}</span>
-          ))}
-        </div>
-        <p style={{ margin: "8px 0 0", fontSize: "11px", color: C.textMuted, lineHeight: "1.5" }}>
-          Para cada parâmetro, o valor correto é determinado pelo que aparece na maioria das referências acima. Isso elimina falsos positivos causados por uma única referência com problema.
+        <p style={{ margin: "0 0 8px", fontSize: "11px", color: C.textMuted, lineHeight: "1.5" }}>
+          O valor correto de cada parâmetro é determinado pela <strong style={{ color: C.accent }}>maioria dos {totalAnalisados} equipamentos online</strong>. 
+          Todos que possuem exatamente os mesmos valores da maioria são classificados como <strong style={{ color: C.success }}>CONFORMES</strong> (referências).
+          Os demais são organizados em <strong style={{ color: C.warning }}>GRUPOS DE VARIAÇÃO</strong>.
         </p>
+
+        {/* Conformes (references) */}
+        <div style={{ marginBottom: "8px" }}>
+          <div style={{ display: "flex", alignItems: "center", gap: "6px", marginBottom: "4px" }}>
+            <span style={{ fontSize: "11px", fontWeight: 600, color: C.success }}>✅ CONFORMES — {conformes.length} equipamentos (referência)</span>
+            <button onClick={() => setShowAllRefs(!showAllRefs)} style={{ border: `1px solid ${C.border}`, borderRadius: "3px", background: C.raised, color: C.textMuted, cursor: "pointer", fontSize: "10px", padding: "1px 6px" }}>
+              {showAllRefs ? "ocultar" : "ver todos"}
+            </button>
+          </div>
+          {showAllRefs && (
+            <div style={{ display: "flex", flexWrap: "wrap", gap: "4px", maxHeight: "120px", overflowY: "auto", padding: "4px 0" }}>
+              {conformes.map(r => (
+                <span key={r.nome} style={{ background: "rgba(108,203,95,0.06)", padding: "2px 6px", borderRadius: "3px", fontSize: "10px", color: C.success, border: `1px solid rgba(108,203,95,0.15)` }}>{r.nome}</span>
+              ))}
+            </div>
+          )}
+        </div>
+
+        {/* Divergentes organized by group */}
+        <div style={{ marginBottom: "6px" }}>
+          <div style={{ fontSize: "11px", fontWeight: 600, color: C.warning, marginBottom: "4px" }}>⚠️ DIVERGENTES — {divergentes.length} equipamentos em {groups.length} grupos de variação</div>
+          <div style={{ maxHeight: "180px", overflowY: "auto" }}>
+            {groups.map((g, i) => (
+              <div key={i} style={{ marginBottom: "5px", padding: "4px 8px", background: C.codeBg, borderRadius: "4px", border: `1px solid ${C.borderLight}` }}>
+                <div style={{ display: "flex", alignItems: "center", gap: "6px", marginBottom: "2px" }}>
+                  <span style={{ fontSize: "10px", fontWeight: 700, color: C.warning, background: C.warningBg, padding: "1px 5px", borderRadius: "3px" }}>Grupo {i + 1}</span>
+                  <span style={{ fontSize: "10px", color: C.textMuted }}>{g.devices.length} equip — {Object.keys(g.diffs).length} divergência(s)</span>
+                  <span style={{ fontSize: "9px", color: C.textMuted, fontFamily: "monospace" }}>[{Object.keys(g.diffs).join(", ")}]</span>
+                </div>
+                <div style={{ display: "flex", flexWrap: "wrap", gap: "3px" }}>
+                  {g.devices.map(d => (
+                    <span key={d.nome} style={{ fontSize: "9px", color: C.textSecondary, padding: "1px 4px", background: C.raised, borderRadius: "2px" }}>{d.nome}</span>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Offline */}
+        {offline.length > 0 && (
+          <div>
+            <div style={{ fontSize: "11px", fontWeight: 600, color: C.danger, marginBottom: "4px" }}>❌ OFFLINE — {offline.length} equipamentos (sem dados)</div>
+            <div style={{ display: "flex", flexWrap: "wrap", gap: "4px" }}>
+              {offline.map(d => (
+                <span key={d.nome} style={{ fontSize: "9px", color: C.danger, padding: "1px 5px", background: C.dangerBg, borderRadius: "3px", border: `1px solid ${C.dangerBorder}` }}>{d.nome}</span>
+              ))}
+            </div>
+          </div>
+        )}
       </div>
 
       {/* Summary cards */}
@@ -475,7 +521,7 @@ function AuditoriaTab({ analysis }) {
             const ep = PARAM_TO_ENDPOINT[section] || {};
             const correctVal = consensus[param]?.value;
             const consensusCount = consensus[param]?.count || 0;
-            const consensusTotal = consensus[param]?.total || refs.length;
+            const consensusTotal = consensus[param]?.total || totalDevices;
             const wrongs = [...info.values.entries()].sort((a, b) => b[1] - a[1]);
             const severity = getSeverity(param, info.count, totalDevices);
             const sev = severityColors[severity];
@@ -574,11 +620,14 @@ function AuditoriaTab({ analysis }) {
                         </div>
 
                         <div style={{ marginBottom: "10px" }}>
-                          <div style={{ fontSize: "10px", color: C.accent, marginBottom: "3px", textTransform: "uppercase", letterSpacing: "0.5px" }}>Referências com valor correto ({consensusCount}/{consensusTotal})</div>
-                          <div style={{ display: "flex", flexWrap: "wrap", gap: "4px" }}>
-                            {refs.filter(r => String(r.params[param]) === String(correctVal)).map(r => (
+                          <div style={{ fontSize: "10px", color: C.accent, marginBottom: "3px", textTransform: "uppercase", letterSpacing: "0.5px" }}>Equipamentos com valor correto ({consensusCount}/{consensusTotal})</div>
+                          <div style={{ display: "flex", flexWrap: "wrap", gap: "4px", maxHeight: "60px", overflowY: "auto" }}>
+                            {conformes.filter(r => String(r.params[param]) === String(correctVal)).slice(0, 10).map(r => (
                               <span key={r.nome} style={{ background: "rgba(108,203,95,0.08)", border: "1px solid rgba(108,203,95,0.2)", padding: "2px 6px", borderRadius: "3px", fontSize: "10px", color: C.success }}>{r.nome}</span>
                             ))}
+                            {conformes.filter(r => String(r.params[param]) === String(correctVal)).length > 10 && (
+                              <span style={{ fontSize: "10px", color: C.textMuted, padding: "2px 4px" }}>+{conformes.filter(r => String(r.params[param]) === String(correctVal)).length - 10} mais</span>
+                            )}
                           </div>
                         </div>
 
@@ -774,6 +823,188 @@ function InventarioTab({ results, filter, setFilter, statusFilter, setStatusFilt
             })}
           </tbody>
         </table>
+      </div>
+    </div>
+  );
+}
+
+// ═══════════════════════════════════════════════════════════════════════
+// PADRÃO TAB — Análise vs Config Padrão (26 regras, severidade, REST API Client)
+// ═══════════════════════════════════════════════════════════════════════
+function PadraoTab() {
+  const [data, setData] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [filterSev, setFilterSev] = useState("all");
+  const [expandedDev, setExpandedDev] = useState(null);
+
+  useEffect(() => {
+    setLoading(true);
+    fetch(`${API_BASE}/api/varco/auditoria-aprimorada`)
+      .then(r => { if (!r.ok) throw new Error(`HTTP ${r.status}`); return r.json(); })
+      .then(d => { setData(d); setLoading(false); })
+      .catch(e => { setError(e.message); setLoading(false); });
+  }, []);
+
+  if (loading) return <div style={{ padding: "30px", textAlign: "center", color: C.textMuted }}>Carregando análise aprimorada...</div>;
+  if (error) return <div style={{ padding: "14px", background: C.dangerBg, border: `1px solid ${C.dangerBorder}`, borderRadius: "8px", color: C.danger }}>Erro: {error}. Execute: <code>node auditoria-itscam/analise-aprimorada.mjs</code></div>;
+  if (!data) return null;
+
+  const { resumo, topDivergencias, dispositivos, totalRegras, geradoEm } = data;
+  const sevColors = {
+    critico: { bg: "rgba(255,0,60,0.08)", border: "rgba(255,0,60,0.25)", text: "#ff4d6a", badge: "🔴" },
+    alto: { bg: C.dangerBg, border: C.dangerBorder, text: C.danger, badge: "🟠" },
+    medio: { bg: C.warningBg, border: C.warningBorder, text: C.warning, badge: "🟡" },
+    baixo: { bg: "rgba(255,255,255,0.04)", border: C.border, text: C.textMuted, badge: "🔵" },
+  };
+
+  const divergentes = dispositivos.filter(d => d.status === 'online' && d.divergencias?.length > 0);
+  const filtrados = filterSev === "all" ? divergentes : divergentes.filter(d => d.divergencias.some(div => div.severidade === filterSev));
+
+  return (
+    <div>
+      {/* Summary cards */}
+      <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(130px, 1fr))", gap: "8px", marginBottom: "14px" }}>
+        <div style={{ background: C.successBg, border: `1px solid ${C.successBorder}`, borderRadius: "8px", padding: "10px 12px", textAlign: "center" }}>
+          <div style={{ fontSize: "22px", fontWeight: 700, color: C.success }}>{resumo.conformes}</div>
+          <div style={{ fontSize: "10px", color: C.textMuted }}>CONFORMES</div>
+        </div>
+        <div style={{ background: C.warningBg, border: `1px solid ${C.warningBorder}`, borderRadius: "8px", padding: "10px 12px", textAlign: "center" }}>
+          <div style={{ fontSize: "22px", fontWeight: 700, color: C.warning }}>{resumo.divergentes}</div>
+          <div style={{ fontSize: "10px", color: C.textMuted }}>DIVERGENTES</div>
+        </div>
+        <div style={{ background: C.dangerBg, border: `1px solid ${C.dangerBorder}`, borderRadius: "8px", padding: "10px 12px", textAlign: "center" }}>
+          <div style={{ fontSize: "22px", fontWeight: 700, color: C.danger }}>{resumo.offline}</div>
+          <div style={{ fontSize: "10px", color: C.textMuted }}>OFFLINE</div>
+        </div>
+        <div style={{ background: "rgba(255,0,60,0.06)", border: "1px solid rgba(255,0,60,0.2)", borderRadius: "8px", padding: "10px 12px", textAlign: "center" }}>
+          <div style={{ fontSize: "22px", fontWeight: 700, color: "#ff4d6a" }}>{resumo.porSeveridade?.critico || 0}</div>
+          <div style={{ fontSize: "10px", color: C.textMuted }}>CRÍTICOS</div>
+        </div>
+      </div>
+
+      {/* Info bar */}
+      <div style={{ padding: "8px 12px", background: C.accentBg, border: `1px solid ${C.accentBorder}`, borderRadius: "6px", marginBottom: "12px", fontSize: "12px", color: C.textSecondary, display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+        <span>📏 {totalRegras} regras de validação vs config padrão | Gerado: {new Date(geradoEm).toLocaleString("pt-BR")}</span>
+        <span style={{ fontSize: "11px", color: C.textMuted }}>Config: <code>config-padrao/padrao-faixa-*.json</code></span>
+      </div>
+
+      {/* Top divergences */}
+      {topDivergencias?.length > 0 && (
+        <div style={{ marginBottom: "14px", padding: "10px 12px", background: C.surface, border: `1px solid ${C.border}`, borderRadius: "8px" }}>
+          <div style={{ fontSize: "12px", fontWeight: 600, color: C.textSecondary, marginBottom: "6px" }}>Top Divergências</div>
+          <div style={{ display: "flex", flexWrap: "wrap", gap: "6px" }}>
+            {topDivergencias.map(t => (
+              <span key={t.id} style={{ padding: "3px 8px", background: C.raised, border: `1px solid ${C.border}`, borderRadius: "4px", fontSize: "11px", color: C.textSecondary }}>
+                <strong style={{ color: C.warning }}>{t.count}x</strong> {t.titulo}
+              </span>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {/* Severity filter */}
+      <div style={{ display: "flex", gap: "6px", marginBottom: "12px", flexWrap: "wrap" }}>
+        {[{ id: "all", label: "Todos" }, { id: "critico", label: "🔴 Crítico" }, { id: "alto", label: "🟠 Alto" }, { id: "medio", label: "🟡 Médio" }, { id: "baixo", label: "🔵 Baixo" }].map(s => (
+          <button key={s.id} onClick={() => setFilterSev(s.id)} style={{ padding: "4px 10px", border: `1px solid ${filterSev === s.id ? C.accent : C.border}`, borderRadius: "4px", background: filterSev === s.id ? C.accentBg : "transparent", color: filterSev === s.id ? C.accent : C.textMuted, cursor: "pointer", fontSize: "11px" }}>
+            {s.label} {s.id !== "all" && `(${resumo.porSeveridade?.[s.id] || 0})`}
+          </button>
+        ))}
+      </div>
+
+      {/* Device list */}
+      <div style={{ maxHeight: "500px", overflowY: "auto", border: `1px solid ${C.border}`, borderRadius: "8px" }}>
+        {filtrados.map(dev => (
+          <div key={dev.uuid || dev.nome} style={{ borderBottom: `1px solid ${C.borderLight}` }}>
+            <div onClick={() => setExpandedDev(expandedDev === dev.nome ? null : dev.nome)} style={{ display: "grid", gridTemplateColumns: "1fr 100px 80px 30px", alignItems: "center", padding: "8px 12px", cursor: "pointer", background: expandedDev === dev.nome ? C.raised : "transparent" }}>
+              <div>
+                <span style={{ fontWeight: 500, fontSize: "13px" }}>{dev.nome}</span>
+                <span style={{ marginLeft: "8px", fontSize: "11px", color: C.textMuted }}>{dev.firmware}</span>
+                {dev.usuarios && <span style={{ marginLeft: "6px", fontSize: "10px", color: C.accent }}>👤 {dev.usuarios.total}</span>}
+              </div>
+              <div style={{ textAlign: "center" }}>
+                <span style={{ fontSize: "11px", color: C.success }}>{dev.conformes}</span>
+                <span style={{ fontSize: "11px", color: C.textMuted }}>/</span>
+                <span style={{ fontSize: "11px", color: C.textMuted }}>{dev.totalRegras}</span>
+              </div>
+              <div style={{ textAlign: "center" }}>
+                {dev.divergencias.map(d => sevColors[d.severidade]?.badge || "⚪").slice(0, 5).join("")}
+              </div>
+              <div style={{ textAlign: "right", color: C.textMuted }}>{expandedDev === dev.nome ? <ChevronUp size={14}/> : <ChevronDown size={14}/>}</div>
+            </div>
+
+            {expandedDev === dev.nome && (
+              <div style={{ padding: "8px 16px 12px", background: C.surface }}>
+                {/* Usuarios */}
+                {dev.usuarios?.usuarios && (
+                  <div style={{ marginBottom: "8px", padding: "6px 10px", background: C.raised, borderRadius: "6px", fontSize: "11px" }}>
+                    <strong style={{ color: C.accent }}>👤 Usuários configurados:</strong>{" "}
+                    {dev.usuarios.usuarios.map(u => (
+                      <span key={u.username} style={{ marginLeft: "6px", padding: "1px 5px", background: C.codeBg, borderRadius: "3px", color: u.role === "admin" ? C.warning : C.textSecondary }}>
+                        {u.username} ({u.role})
+                      </span>
+                    ))}
+                  </div>
+                )}
+                {/* REST API Client */}
+                {dev.restApiClient?.status === "coletado" && (
+                  <div style={{ marginBottom: "8px", padding: "6px 10px", background: C.raised, borderRadius: "6px", fontSize: "11px" }}>
+                    <strong style={{ color: C.success }}>📡 REST API Client:</strong> Configurado
+                  </div>
+                )}
+                {/* Logs alteração */}
+                {dev.logsAlteracao?.alteracoesRecentes?.length > 0 && (
+                  <div style={{ marginBottom: "8px", padding: "6px 10px", background: C.raised, borderRadius: "6px", fontSize: "11px" }}>
+                    <strong style={{ color: C.warning }}>📝 Últimas alterações:</strong>
+                    {dev.logsAlteracao.alteracoesRecentes.slice(0, 3).map((a, i) => (
+                      <div key={i} style={{ marginTop: "3px", paddingLeft: "12px", color: C.textMuted }}>
+                        {a.timestamp} — <span style={{ color: C.accent }}>{a.usuario}</span>: {a.mensagem?.slice(0, 80)}
+                      </div>
+                    ))}
+                  </div>
+                )}
+                {/* Divergences table */}
+                <table style={{ width: "100%", borderCollapse: "collapse", fontSize: "11px" }}>
+                  <thead>
+                    <tr style={{ background: C.tableHeader }}>
+                      <th style={{ textAlign: "left", padding: "4px 8px" }}>Sev</th>
+                      <th style={{ textAlign: "left", padding: "4px 8px" }}>Regra</th>
+                      <th style={{ textAlign: "left", padding: "4px 8px" }}>Menu</th>
+                      <th style={{ textAlign: "left", padding: "4px 8px" }}>Atual</th>
+                      <th style={{ textAlign: "left", padding: "4px 8px" }}>Esperado</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {dev.divergencias.filter(d => filterSev === "all" || d.severidade === filterSev).map((div, i) => (
+                      <tr key={i} style={{ borderTop: `1px solid ${C.borderLight}` }}>
+                        <td style={{ padding: "3px 8px" }}>{sevColors[div.severidade]?.badge}</td>
+                        <td style={{ padding: "3px 8px", color: C.textSecondary }}>{div.titulo}</td>
+                        <td style={{ padding: "3px 8px", color: C.textMuted, fontSize: "10px" }}>{div.menu}</td>
+                        <td style={{ padding: "3px 8px" }} className="wrong">{div.erros?.length ? div.erros.map(e => `P${e.perfil}:${e.atual}`).join(", ") : String(div.atual ?? "null")}</td>
+                        <td style={{ padding: "3px 8px" }} className="correct">{String(div.esperado ?? "—")}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            )}
+          </div>
+        ))}
+      </div>
+
+      {/* REST API Client Template Reference */}
+      <div style={{ marginTop: "14px", padding: "10px 12px", background: C.surface, border: `1px solid ${C.border}`, borderRadius: "8px" }}>
+        <div style={{ fontSize: "12px", fontWeight: 600, color: C.textSecondary, marginBottom: "6px" }}>📡 REST API Client — Template Padrão</div>
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "8px" }}>
+          <div style={{ padding: "6px 10px", background: C.codeBg, borderRadius: "4px", fontSize: "10px", fontFamily: "monospace", color: C.textSecondary }}>
+            <div style={{ color: C.accent, marginBottom: "3px" }}>Faixa 1:</div>
+            {`{ cameraId, numeroFaixa: 1, vehicleType, plate, imagens: [cameraId-1-plate-timestamp.jpg] }`}
+          </div>
+          <div style={{ padding: "6px 10px", background: C.codeBg, borderRadius: "4px", fontSize: "10px", fontFamily: "monospace", color: C.textSecondary }}>
+            <div style={{ color: C.accent, marginBottom: "3px" }}>Faixa 2:</div>
+            {`{ cameraId, numeroFaixa: 2, vehicleType, plate, imagens: [cameraId-2-plate-timestamp.jpg] }`}
+          </div>
+        </div>
       </div>
     </div>
   );

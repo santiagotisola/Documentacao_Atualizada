@@ -36,6 +36,8 @@ const ROTAS_PUBLICAS = [
   { method: "GET",  path: "/health" },
   { method: "GET",  path: "/varco/frota" },
   { method: "GET",  path: "/varco/auditoria" },
+  { method: "GET",  path: "/varco/auditoria-aprimorada" },
+  { method: "GET",  path: "/varco/config-padrao" },
 ];
 
 function rotaPublica(req) {

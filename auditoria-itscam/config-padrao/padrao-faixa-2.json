@@ -1,0 +1,124 @@
+{
+  "_meta": {
+    "descricao": "Configuração padrão ITScam 450 — FAIXA 2",
+    "modelo": "ITSCAM450",
+    "firmware": "v1.7.8",
+    "criadoEm": "2026-06-08",
+    "nota": "Valores extraídos do dispositivo GOEC6O002-F2 (referência OK)"
+  },
+  "varco": {
+    "remoteAccess": {
+      "varco": {
+        "enabled": true,
+        "edgeServer": "edge.varco.io",
+        "provisionKey": "yk-pzGzXLGmz6-iO3GhdR7hinksDN7aek-kjQ4WYl_c="
+      }
+    }
+  },
+  "profiles": {
+    "_nota": "Valores padronizados para transições (horário e nível). ROI é por equipamento.",
+    "transitions": {
+      "lower": {
+        "endTime": "00:00:00",
+        "holdTime": 60000,
+        "level": 10,
+        "startTime": "00:00:00"
+      },
+      "upper": {
+        "endTime": "00:00:00",
+        "holdTime": 60000,
+        "level": 35,
+        "profile": 0,
+        "startTime": "00:00:00"
+      }
+    }
+  },
+  "ocr": {
+    "ocr": {
+      "countryCode": 76,
+      "enabled": true,
+      "maxPlates": 2,
+      "minProbPerChar": 85,
+      "processingMode": 3,
+      "processingQueue": 4,
+      "processingThreads": 4,
+      "processingTimeout": 1000,
+      "maxLowProbChars": 0,
+      "lowProbChar": 45,
+      "useClassifierResult": false,
+      "vehicleType": 3
+    }
+  },
+  "classifier": {
+    "classifier": {
+      "enabled": true,
+      "processingQueue": 1,
+      "processingThreads": 1,
+      "minProbability": 20,
+      "enableSpeed": false,
+      "enableCharacteristics": false,
+      "sceneType": 0,
+      "modelType": 0
+    }
+  },
+  "misc": {
+    "snapshotCrop": {
+      "enable": false,
+      "mode": "static"
+    }
+  },
+  "ftp": {
+    "ftp": {
+      "enable": false,
+      "address": "127.0.0.1",
+      "port": 21,
+      "protocol": "ftp",
+      "quality": 85
+    }
+  },
+  "snmp": {
+    "enabled": false
+  },
+  "reboot": {
+    "scheduled": {
+      "enabled": false
+    },
+    "periodic": {
+      "enabled": false
+    }
+  },
+  "dateTime": {
+    "timezone": ["America", "Sao_Paulo"],
+    "useNTPServer": true,
+    "ntpServerAddress": ["time.google.com"]
+  },
+  "video": {
+    "mjpeg": {
+      "main": {
+        "enabled": true,
+        "framerate": 12,
+        "quality": 85,
+        "useTriggerFrames": true
+      }
+    },
+    "rtsp": {
+      "enable": false
+    }
+  },
+  "restApiClient": {
+    "numeroFaixa": 2,
+    "template": {
+      "codigoEquipamento": "{{cameraId}}",
+      "numeroFaixa": 2,
+      "codigoClassificacao": "{{vehicleType}}",
+      "dataHoraPassagem": "{{localYear}}-{{localMonth}}-{{localDay}}T{{localHours}}:{{localMinutes}}:{{localSeconds}}.{{localMilliseconds}}Z",
+      "placaVeiculo": "{{plate}}",
+      "imagens": [
+        {
+          "nomeArquivo": "{{cameraId}}-2-{{plate}}-{{localYear}}-{{localMonth}}-{{localDay}}-{{localHours}}-{{localMinutes}}-{{localSeconds}}-{{localMilliseconds}}.jpg",
+          "imagemBase64": "{{image}}"
+        }
+      ]
+    }
+  }
+}

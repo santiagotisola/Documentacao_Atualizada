@@ -486,3 +486,36 @@ export function auditoriaStatus(req, res) {
     return res.status(500).json({ erro: err.message });
   }
 }
+
+// ─── GET /api/varco/auditoria-aprimorada ─────────────────────────────────────
+export function auditoriaAprimorada(req, res) {
+  try {
+    const dataFile = resolve(process.cwd(), "../auditoria-itscam/analise-aprimorada.json");
+
+    if (!existsSync(dataFile)) {
+      return res.status(404).json({ erro: "Análise aprimorada não encontrada. Execute: node auditoria-itscam/analise-aprimorada.mjs" });
+    }
+
+    const data = JSON.parse(readFileSync(dataFile, "utf8"));
+    return res.json(data);
+  } catch (err) {
+    return res.status(500).json({ erro: err.message });
+  }
+}
+
+// ─── GET /api/varco/config-padrao ────────────────────────────────────────────
+export function configPadrao(req, res) {
+  try {
+    const faixa = req.query.faixa === "2" ? "2" : "1";
+    const padFile = resolve(process.cwd(), `../auditoria-itscam/config-padrao/padrao-faixa-${faixa}.json`);
+
+    if (!existsSync(padFile)) {
+      return res.status(404).json({ erro: `Config padrão faixa ${faixa} não encontrada.` });
+    }
+
+    const data = JSON.parse(readFileSync(padFile, "utf8"));
+    return res.json(data);
+  } catch (err) {
+    return res.status(500).json({ erro: err.message });
+  }
+}
