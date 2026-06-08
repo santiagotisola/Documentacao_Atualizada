@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Axion Tecnologia — Documentação</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+    
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    
+    body {
+      font-family: 'Segoe UI Variable Display', 'Inter', 'Segoe UI', system-ui, sans-serif;
+      background: #0a0a0a;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Win11 Bloom Background */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background: 
+        radial-gradient(ellipse 60% 50% at 30% 60%, rgba(96, 205, 255, 0.12) 0%, transparent 50%),
+        radial-gradient(ellipse 50% 40% at 70% 30%, rgba(160, 100, 255, 0.08) 0%, transparent 50%),
+        radial-gradient(ellipse 40% 60% at 50% 80%, rgba(255, 120, 200, 0.06) 0%, transparent 50%),
+        radial-gradient(ellipse 60% 40% at 80% 70%, rgba(0, 200, 150, 0.06) 0%, transparent 50%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .container {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      max-width: 900px;
+      width: 100%;
+    }
+
+    .logo {
+      font-size: 1rem;
+      font-weight: 500;
+      color: rgba(255, 255, 255, 0.4);
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      margin-bottom: 1rem;
+    }
+
+    h1 {
+      font-size: 3rem;
+      font-weight: 800;
+      color: #fff;
+      letter-spacing: -0.03em;
+      margin-bottom: 0.5rem;
+      text-shadow: 0 2px 32px rgba(96, 205, 255, 0.2);
+    }
+
+    .subtitle {
+      font-size: 1.1rem;
+      color: rgba(255, 255, 255, 0.5);
+      margin-bottom: 3rem;
+      font-weight: 300;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.5rem;
+      width: 100%;
+    }
+
+    .card {
+      background: rgba(45, 45, 45, 0.5);
+      backdrop-filter: saturate(150%) blur(20px);
+      -webkit-backdrop-filter: saturate(150%) blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.07);
+      border-radius: 16px;
+      padding: 2.5rem 2rem;
+      text-decoration: none;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .card:hover {
+      transform: translateY(-6px) scale(1.02);
+      border-color: rgba(96, 205, 255, 0.3);
+      box-shadow: 0 12px 40px rgba(96, 205, 255, 0.1), 0 4px 16px rgba(0, 0, 0, 0.3);
+    }
+
+    .card-icon {
+      width: 72px;
+      height: 72px;
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+    }
+
+    .card-axhub .card-icon { background: linear-gradient(135deg, rgba(96, 205, 255, 0.2), rgba(0, 120, 212, 0.15)); }
+    .card-axton .card-icon { background: linear-gradient(135deg, rgba(0, 200, 150, 0.2), rgba(0, 150, 100, 0.15)); }
+    .card-axcross .card-icon { background: linear-gradient(135deg, rgba(255, 179, 64, 0.2), rgba(211, 84, 0, 0.15)); }
+
+    .card-axhub:hover { border-color: rgba(96, 205, 255, 0.4); box-shadow: 0 12px 40px rgba(96, 205, 255, 0.15), 0 4px 16px rgba(0, 0, 0, 0.3); }
+    .card-axton:hover { border-color: rgba(0, 200, 150, 0.4); box-shadow: 0 12px 40px rgba(0, 200, 150, 0.15), 0 4px 16px rgba(0, 0, 0, 0.3); }
+    .card-axcross:hover { border-color: rgba(255, 179, 64, 0.4); box-shadow: 0 12px 40px rgba(255, 179, 64, 0.15), 0 4px 16px rgba(0, 0, 0, 0.3); }
+
+    .card-title {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: #fff;
+      letter-spacing: -0.02em;
+    }
+
+    .card-desc {
+      font-size: 0.875rem;
+      color: rgba(255, 255, 255, 0.5);
+      line-height: 1.5;
+    }
+
+    .card-badge {
+      font-size: 0.7rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      padding: 4px 12px;
+      border-radius: 20px;
+      margin-top: 0.5rem;
+    }
+
+    .card-axhub .card-badge { background: rgba(96, 205, 255, 0.12); color: #60cdff; }
+    .card-axton .card-badge { background: rgba(0, 200, 150, 0.12); color: #00c896; }
+    .card-axcross .card-badge { background: rgba(255, 179, 64, 0.12); color: #ffb340; }
+
+    .footer {
+      margin-top: 3rem;
+      font-size: 0.8rem;
+      color: rgba(255, 255, 255, 0.25);
+    }
+
+    @media (max-width: 768px) {
+      h1 { font-size: 2rem; }
+      .cards { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="logo">Axion Tecnologia</div>
+    <h1>Documentação</h1>
+    <p class="subtitle">Portais de documentação dos sistemas Axion</p>
+
+    <div class="cards">
+      <a href="AxHub.Docs/" class="card card-axhub">
+        <div class="card-icon">🏗️</div>
+        <div class="card-title">AxHub</div>
+        <div class="card-desc">Gestão de Infrações de Trânsito e Monitoramento Viário</div>
+        <div class="card-badge">Documentação Completa</div>
+      </a>
+
+      <a href="AxTon.Docs/" class="card card-axton">
+        <div class="card-icon">⚖️</div>
+        <div class="card-title">AxTon</div>
+        <div class="card-desc">Pesagem Veicular, Fiscalização e Controle de Infrações por Excesso de Peso</div>
+        <div class="card-badge">Documentação Completa</div>
+      </a>
+
+      <a href="AxCross.Docs/" class="card card-axcross">
+        <div class="card-icon">🚦</div>
+        <div class="card-title">AxCross</div>
+        <div class="card-desc">Monitoramento de Cruzamentos, Alertas e Controle de Veículos</div>
+        <div class="card-badge">Documentação Completa</div>
+      </a>
+    </div>
+
+    <div class="footer">
+      Axion Tecnologia &copy; 2026 — Windows 11 Fluent Design
+    </div>
+  </div>
+</body>
+</html>

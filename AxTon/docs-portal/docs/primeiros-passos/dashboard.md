@@ -21,59 +21,97 @@ O Painel Principal é a tela inicial do AxTon após a autenticação. Apresenta 
 
 O Dashboard apresenta **4 contadores principais** no topo da tela:
 
-| Indicador | Descrição |
-|-----------|----------|
-| **Pesagens Realizadas em Maio** | Total de pesagens concluídas no mês atual |
-| **Infrações Realizadas em Maio** | Total de infrações registradas no mês atual |
-| **Total de Pesagens na Operação** | Soma de todas as pesagens no contexto da operação ativa |
-| **Total de Infrações na Operação** | Soma de todas as infrações da operação ativa |
+| Indicador | O que mostra | Inteligência |
+|-----------|-------------|--------------|
+| **Pesagens Realizadas no Mês** | Total de pesagens concluídas no mês atual | Atualizado em tempo real a cada pesagem finalizada |
+| **Infrações Realizadas no Mês** | Total de infrações registradas no mês atual | Conta apenas infrações confirmadas (não descartadas) |
+| **Total de Pesagens na Operação** | Soma de todas as pesagens da operação ativa | Reinicia quando uma nova operação é criada |
+| **Total de Infrações na Operação** | Soma de todas as infrações da operação ativa | Permite comparar eficiência entre operações |
+
+---
 
 ## Seções do Dashboard
 
-### Distribuição de Pesagens e Infrações Diário
+### 1. Distribuição de Pesagens e Infrações Diário
 
-Gráfico que exibe a distribuição diária de pesagens e infrações. Permite visualizar:
-- Volume de veículos pesados por dia
-- Comparativo entre pesagens regulares e infrações
-- Tendências ao longo da operação
+Gráfico de barras que exibe a distribuição diária. O sistema calcula automaticamente:
+- **Barras azuis:** Volume de veículos pesados por dia
+- **Barras vermelhas:** Infrações geradas naquele dia
+- **Tendência:** Permite identificar dias de maior movimento e dias com mais infrações
 
-### Últimas Pesagens
+**Utilidade:** Dimensionar equipe de campo e planejar operações futuras.
 
-Lista cronológica das pesagens mais recentes. Cada registro exibe:
+### 2. Últimas Pesagens
+
+Lista cronológica das pesagens mais recentes com atualização em tempo real:
 
 | Campo | Descrição |
 |-------|-----------|
 | **Placa** | Placa do veículo pesado |
 | **Data/Hora** | Momento exato da pesagem |
-| **Peso (kg)** | Peso bruto total medido |
+| **Peso (kg)** | Peso bruto total medido pela balança |
 
-Exemplos de registros reais do sistema:
-- `SGD5E44` — 27/02/2026 13:42 — **42.800 kg**
-- `RSC7D78` — 27/02/2026 09:06 — **78.450 kg**
-- `RXQ0F30` — 27/02/2026 08:58 — **76.200 kg**
-- `TNJ5R62` — 26/02/2026 16:15 — **92.400 kg** *(exemplo de sobrecarga)*
+**Exemplos de registros:**
+- `SGD5E44` — 27/02/2026 13:42 — **42.800 kg** *(dentro do limite)*
+- `RSC7D78` — 27/02/2026 09:06 — **78.450 kg** *(excesso detectado)*
+- `RXQ0F30` — 27/02/2026 08:58 — **76.200 kg** *(excesso detectado)*
+- `TNJ5R62` — 26/02/2026 16:15 — **92.400 kg** *(sobrecarga severa)*
 
-### Comparativo de Pesagens e Infrações
+### 3. Comparativo de Pesagens e Infrações
 
-Gráfico comparativo que correlaciona o total de pesagens com as infrações geradas por período, útil para avaliação de eficiência da operação.
-| **Utilidade** | Ação imediata sobre ocorrências em andamento |
+Gráfico que correlaciona o total de pesagens com as infrações geradas por período. Permite avaliar:
+- **Taxa de infração:** Percentual de veículos em excesso de peso
+- **Eficiência da operação:** Quanto maior a taxa, mais assertivo é o posto
 
-Quando não há alertas recentes, o painel exibe: *"Nenhum alerta recente encontrado — Os alertas aparecerão aqui quando detectados"*.
+### 4. Alertas Operacionais
+
+Painel de alertas em tempo real para ação imediata:
+- Equipamentos offline
+- Falhas de comunicação com balança
+- Operações sem pesagem há mais de X horas
+
+Quando não há alertas: *"Nenhum alerta recente encontrado"*.
 
 ### 5. Últimas Notas Fiscais
 
-| Item | Descrição |
-|------|-----------|
-| **Atualização** | Últimas notas fiscais registradas no sistema |
-| **Colunas** | Chave NFe, Placa, Origem, Destino, Data/Hora |
-| **Dados** | Notas fiscais eletrônicas (NFe) capturadas dos veículos em trânsito |
-| **Utilidade** | Rastrear a documentação fiscal vinculada às passagens |
+| Campo | Descrição |
+|-------|-----------|
+| **Chave NFe** | Número da nota fiscal eletrônica |
+| **Placa** | Veículo associado |
+| **Origem** | Cidade de origem da carga |
+| **Destino** | Cidade de destino da carga |
+| **Data/Hora** | Momento da captura |
+
+**Utilidade:** Rastrear a documentação fiscal vinculada aos veículos pesados, cruzando dados de carga com peso medido.
 
 ---
 
-## Menu lateral
+## Menu Lateral — Estrutura Completa
 
-O menu lateral exibe todos os módulos disponíveis para o perfil de acesso do usuário autenticado. Os itens são organizados de forma hierárquica, permitindo expandir e recolher as categorias.
+O menu lateral exibe todos os módulos disponíveis conforme o perfil de acesso:
+
+| Módulo | Ícone | Função principal |
+|--------|-------|-----------------|
+| **Iniciar Pesagem** | ⚖️ | Processo completo de pesagem |
+| **Operações** | 🔧 | Gestão de operações em campo |
+| **Tickets de Pesagens** | 📋 | Registro de todas as pesagens |
+| **Exportação** | 📤 | Envio de infrações ao órgão |
+| **Relatório de Pesagem** | 📊 | Consulta e PDF |
+| **Sequenciais de Infração** | 🔢 | Numeração de autos |
+| **Cadastros** | 📁 | Locais, Classificações |
+| **Sistema** | ⚙️ | Configurações gerais |
+| **Usuários** | 👤 | Gestão de acessos |
+| **Perfis de Acesso** | 🔐 | Permissões por perfil |
+
+---
+
+## Passo a passo — Navegação no Dashboard
+
+1. Após o login, observe os **4 indicadores no topo** para visão rápida do dia
+2. Verifique o **gráfico diário** para identificar tendências
+3. Confira as **últimas pesagens** para acompanhar o fluxo em tempo real
+4. Verifique os **alertas** para ação imediata sobre problemas
+5. Use o **menu lateral** para acessar qualquer módulo do sistema
 
 ---
 

@@ -133,20 +133,20 @@ function extractParams(raw) {
 }
 
 const PARAM_TO_ENDPOINT = {
-  "VARCO": { endpoint: "/api/system/maintenance/remoteaccess", method: "PUT" },
-  "Diurno": { endpoint: "/api/image/profiles", method: "PUT", note: "Array[0].transitions" },
-  "Noturno": { endpoint: "/api/image/profiles", method: "PUT", note: "Array[1].transitions" },
-  "OCR": { endpoint: "/api/equipment/ocr", method: "PUT" },
-  "Classificador": { endpoint: "/api/equipment/classifier", method: "PUT" },
-  "SnapshotCrop": { endpoint: "/api/equipment/misc", method: "PUT", note: "campo snapshotCrop" },
-  "FTP": { endpoint: "/api/equipment/servers/ftp", method: "PUT" },
-  "IO": { endpoint: "/api/equipment/ioPorts", method: "PUT" },
-  "SNMP": { endpoint: "/api/system/monitoring/snmp", method: "PUT" },
-  "Reboot": { endpoint: "/api/system/maintenance/automaticreboot", method: "PUT" },
-  "NTP": { endpoint: "/api/equipment/dateAndTime", method: "PUT" },
-  "Timezone": { endpoint: "/api/equipment/dateAndTime", method: "PUT" },
-  "Video": { endpoint: "/api/video/streams", method: "PUT", note: "Array[0]" },
-  "Firmware": { endpoint: null, note: "Atualizar firmware manualmente" },
+  "VARCO": { endpoint: "/api/system/maintenance/remoteaccess", method: "PUT", menu: "Sistema › Manutenção › Acesso Remoto", campo: "VARCO" },
+  "Diurno": { endpoint: "/api/image/profiles/0", method: "PUT", menu: "Imagem › Perfis › Perfil 1 (Diurno) › Transições", campo: "Transições de Imagem" },
+  "Noturno": { endpoint: "/api/image/profiles/1", method: "PUT", menu: "Imagem › Perfis › Perfil 2 (Noturno) › Transições", campo: "Transições de Imagem" },
+  "OCR": { endpoint: "/api/equipment/ocr", method: "PUT", menu: "Equipamento › Reconhecimento › aba Jidosha (OCR)", campo: "Configurações OCR" },
+  "Classificador": { endpoint: "/api/equipment/classifier", method: "PUT", menu: "Equipamento › Reconhecimento › aba Classifier", campo: "Configurações do Classificador" },
+  "SnapshotCrop": { endpoint: "/api/equipment/misc", method: "PUT", menu: "Equipamento › Diversos › Recorte de Snapshot", campo: "snapshotCrop" },
+  "FTP": { endpoint: "/api/equipment/servers/ftp", method: "PUT", menu: "Equipamento › Servidores › FTP", campo: "Habilitar envio FTP" },
+  "IO": { endpoint: "/api/equipment/ioPorts", method: "PUT", menu: "Equipamento › Portas IO", campo: "Configuração de Portas" },
+  "SNMP": { endpoint: "/api/system/monitoring/snmp", method: "PUT", menu: "Sistema › Monitoramento › SNMP", campo: "Habilitar SNMP" },
+  "Reboot": { endpoint: "/api/system/maintenance/automaticreboot", method: "PUT", menu: "Sistema › Manutenção › Reboot Automático", campo: "Agendamento de Reboot" },
+  "NTP": { endpoint: "/api/equipment/dateAndTime", method: "PUT", menu: "Sistema › Geral › Data e Hora › NTP", campo: "Servidor NTP" },
+  "Timezone": { endpoint: "/api/equipment/dateAndTime", method: "PUT", menu: "Sistema › Geral › Data e Hora", campo: "Fuso Horário" },
+  "Video": { endpoint: "/api/video/streams/0", method: "PUT", menu: "Vídeo › Streams › Stream 1", campo: "Configurações de Vídeo" },
+  "Firmware": { endpoint: null, menu: "Sistema › Manutenção › Atualização de Firmware", campo: "Upload de firmware (.fw)" },
 };
 
 export default function VarcoMonitor() {
@@ -179,9 +179,10 @@ export default function VarcoMonitor() {
 
   const analysis = useMemo(() => {
     if (!auditDevices.length) return null;
-    const allParams = auditDevices.map(d => ({ nome: d.nome, uuid: d.uuid, ip: d.ip, params: extractParams(d.raw || {}) }));
+    const allParams = auditDevices.filter(d => d.raw).map(d => ({ nome: d.nome, uuid: d.uuid, ip: d.ip, params: extractParams(d.raw) }));
+    if (!allParams.length) return null;
 
-    // Find all reference devices
+    // Find all reference devices (only those with valid data)
     const refs = allParams.filter(d => REFERENCES.includes(d.nome));
     if (refs.length === 0) return null;
 
@@ -319,56 +320,81 @@ function AuditoriaTab({ analysis }) {
 
   // Descriptions for each parameter category explaining what it does and why it matters
   const PARAM_DESCRIPTIONS = {
-    "VARCO.enabled": { desc: "Habilita comunicação remota via plataforma VARCO", impact: "Sem VARCO, não é possível corrigir parâmetros remotamente. Equipamento isolado.", causa: "Configuração de fábrica não aplicada, ou reset manual do dispositivo." },
-    "VARCO.edgeServer": { desc: "Endereço do servidor edge VARCO para túnel reverso", impact: "Sem edge server, o dispositivo não estabelece túnel de gerenciamento remoto.", causa: "Campo não preenchido na configuração VARCO do dispositivo." },
-    "Diurno.lower.startTime": { desc: "Início da transição para perfil diurno (horário inferior)", impact: "Imagem pode ficar com ganho errado, gerando OCR de baixa qualidade.", causa: "Perfil de imagem diferente aplicado manualmente ou não sincronizado." },
-    "Diurno.lower.endTime": { desc: "Fim da transição inferior do perfil diurno", impact: "Mesma causa: ajuste de brilho/ganho fora do padrão.", causa: "Cópia parcial de configuração entre equipamentos." },
-    "Diurno.lower.level": { desc: "Nível de luminosidade do threshold inferior diurno", impact: "Threshold errado pode causar fotos muito claras ou escuras.", causa: "Ajuste local feito por técnico sem atualizar template padrão." },
-    "Diurno.lower.holdTime": { desc: "Tempo de espera (ms) antes de mudar perfil diurno", impact: "Transição muito rápida entre perfis gera frames inconsistentes.", causa: "Valor default de firmware diferente da versão padrão." },
-    "Diurno.upper.startTime": { desc: "Início da transição superior do perfil diurno", impact: "Impacta qualidade da imagem na mudança de iluminação.", causa: "Perfil não padronizado após manutenção." },
-    "Diurno.upper.endTime": { desc: "Fim da transição superior do perfil diurno", impact: "Mesma causa: janela de transição de brilho.", causa: "Diferença entre versões de firmware." },
-    "Diurno.upper.level": { desc: "Nível de luminosidade do threshold superior diurno", impact: "Imagens saturadas ou subexpostas durante o dia.", causa: "Ajuste manual ou cópia de config incompleta." },
-    "Diurno.upper.holdTime": { desc: "Tempo de espera (ms) antes da transição superior diurna", impact: "Flickering na imagem durante mudanças de luz.", causa: "Valor divergente entre lotes de firmware." },
-    "Diurno.upper.profile": { desc: "ID do perfil de imagem diurno superior", impact: "Perfil errado = parâmetros de cor/ganho/shutter completamente diferentes.", causa: "Profile ID não atualizado após redefinição de templates." },
-    "Noturno.lower.startTime": { desc: "Início da transição para perfil noturno (threshold inferior)", impact: "Ativação tardia/antecipada do modo noturno gera imagens escuras.", causa: "Timezone ou configuração de horários divergente." },
-    "Noturno.lower.endTime": { desc: "Fim da transição inferior do perfil noturno", impact: "Mesma causa: timing de ativação do perfil noturno.", causa: "Configuração incompleta pós-manutenção." },
-    "Noturno.lower.level": { desc: "Nível de luminosidade do threshold inferior noturno", impact: "IR/Flash pode não ativar no momento correto.", causa: "Ajuste local ou firmware com defaults diferentes." },
-    "Noturno.lower.holdTime": { desc: "Tempo de espera antes de transicionar para noturno", impact: "Fotos transitórias com qualidade degradada.", causa: "Valor padrão diferente entre lotes." },
-    "Noturno.upper.startTime": { desc: "Início da transição superior noturna", impact: "Qualidade de imagem noturna comprometida.", causa: "Não sincronizado com template padrão." },
-    "Noturno.upper.endTime": { desc: "Fim da transição superior noturna", impact: "Impacta janela de operação do IR.", causa: "Configuração manual divergente." },
-    "Noturno.upper.level": { desc: "Nível de luminosidade do threshold superior noturno", impact: "Flash/IR ativa muito cedo ou muito tarde.", causa: "Threshold não calibrado para o local." },
-    "Noturno.upper.holdTime": { desc: "Tempo de espera na transição superior noturna", impact: "Instabilidade de imagem durante a transição.", causa: "Diferença de firmware ou ajuste manual." },
-    "Noturno.upper.profile": { desc: "ID do perfil de imagem noturno", impact: "Perfil noturno errado = fotos sem IR ou com ganho excessivo.", causa: "Profile ID não atualizado." },
-    "OCR.enabled": { desc: "Habilita o motor de reconhecimento de placas (OCR)", impact: "Sem OCR, nenhuma placa é lida. Equipamento inútil para fiscalização.", causa: "OCR desabilitado por engano ou após reset." },
-    "OCR.countryCode": { desc: "País do formato de placa (BR = Brasil)", impact: "Formato errado = OCR não reconhece placas brasileiras.", causa: "Default de fábrica com país errado." },
-    "OCR.maxPlates": { desc: "Número máximo de placas por frame", impact: "Limitar pode perder veículos em faixas movimentadas.", causa: "Performance tuning aplicado incorretamente." },
-    "OCR.lowProbChar": { desc: "Threshold mínimo de confiança por caractere", impact: "Muito alto = rejeita placas válidas. Muito baixo = aceita lixo.", causa: "Ajuste de sensibilidade não padronizado." },
-    "OCR.maxLowProbChars": { desc: "Máximo de caracteres de baixa confiança aceitos", impact: "Impacta taxa de rejeição vs acurácia de leitura.", causa: "Tuning individual não replicado." },
-    "OCR.processingQueue": { desc: "Tamanho da fila de processamento OCR", impact: "Fila pequena = descarte de frames sob carga.", causa: "Limitação de memória ou config manual." },
-    "OCR.processingThreads": { desc: "Threads dedicadas ao processamento OCR", impact: "Menos threads = mais latência e possível perda de leituras.", causa: "Config de performance divergente." },
-    "OCR.processingMode": { desc: "Modo de processamento (freeflow/triggered)", impact: "Modo errado = OCR não processa ou processa desnecessariamente.", causa: "Tipo de instalação configurado incorretamente." },
-    "OCR.vehicleType": { desc: "Tipo de veículo alvo (all/car/truck)", impact: "Filtro errado descarta veículos válidos da leitura.", causa: "Aplicação de template errado para o ponto." },
-    "Classificador.enabled": { desc: "Habilita classificação veicular por IA", impact: "Sem classificador, não há diferenciação moto/carro/caminhão.", causa: "Feature não ativada após deploy." },
-    "Classificador.processingQueue": { desc: "Fila de processamento do classificador", impact: "Fila insuficiente causa timeout na classificação.", causa: "Default de firmware diferente." },
-    "Classificador.processingThreads": { desc: "Threads do classificador veicular", impact: "Menos threads = classificação mais lenta.", causa: "Otimização de CPU aplicada individualmente." },
-    "Classificador.sceneType": { desc: "Tipo de cena para o classificador (road/highway)", impact: "Cena errada = modelo de IA menos preciso para o contexto.", causa: "Template aplicado sem considerar tipo de via." },
-    "Classificador.minProbability": { desc: "Confiança mínima para aceitar classificação", impact: "Muito alto = muitas rejeições. Muito baixo = classificações erradas.", causa: "Threshold não padronizado entre equipamentos." },
-    "SnapshotCrop.enable": { desc: "Recorte automático da imagem de snapshot", impact: "Sem crop, imagem completa é enviada (mais pesada, com área irrelevante).", causa: "Feature não ativada em alguns equipamentos." },
-    "SnapshotCrop.mode": { desc: "Modo de recorte (plate/vehicle/custom)", impact: "Modo errado gera recortes inúteis ou muito grandes.", causa: "Configuração manual inconsistente." },
-    "FTP.enable": { desc: "Upload de imagens via FTP para servidor central", impact: "Sem FTP, imagens não chegam ao servidor de armazenamento.", causa: "FTP desabilitado após teste ou manutenção." },
-    "IO.port1.earlyUs": { desc: "Tempo de antecipação (μs) da porta IO 1 (trigger)", impact: "Trigger antecipado/atrasado = veículo não capturado na posição ideal.", causa: "Calibração de laço não padronizada." },
-    "IO.port1.isReserved": { desc: "Porta IO 1 reservada para trigger principal", impact: "Se não reservada, pode conflitar com outros sinais.", causa: "Configuração de hardware divergente." },
-    "IO.port3.earlyUs": { desc: "Tempo de antecipação (μs) da porta IO 3", impact: "Mesmo impacto: timing de captura incorreto.", causa: "Calibração local não replicada." },
-    "IO.port3.isReserved": { desc: "Porta IO 3 reservada", impact: "Conflito de sinais se não reservada corretamente.", causa: "Setup de hardware inconsistente." },
-    "SNMP.enabled": { desc: "Monitoramento SNMP do equipamento", impact: "Sem SNMP, o NMS não monitora saúde do dispositivo.", causa: "Protocolo não ativado na instalação." },
-    "Reboot.scheduled.enabled": { desc: "Reboot programado (ex: diário às 4h)", impact: "Sem reboot automático, memory leaks acumulam e causam travamento.", causa: "Feature de manutenção não ativada." },
-    "Reboot.periodic.enabled": { desc: "Reboot periódico baseado em uptime", impact: "Complementa o scheduled para evitar degradação.", causa: "Não configurado como padrão." },
-    "NTP.server": { desc: "Servidor NTP para sincronização de relógio", impact: "Horário errado = timestamps de infração inválidos legalmente.", causa: "NTP server diferente ou não configurado." },
-    "Timezone": { desc: "Fuso horário do equipamento", impact: "Fuso errado invalida toda autuação do equipamento.", causa: "Timezone não ajustado após deploy." },
-    "Video.framerate": { desc: "Taxa de frames do stream de vídeo (fps)", impact: "FPS baixo = menor chance de captura. FPS alto = mais processamento.", causa: "Ajuste de performance individual." },
-    "Video.quality": { desc: "Qualidade de compressão do vídeo", impact: "Qualidade baixa = imagens borradas para OCR.", causa: "Redução de banda aplicada manualmente." },
-    "Video.useTriggerFrames": { desc: "Usar frames do trigger para processamento", impact: "Se desativado, OCR usa frames aleatórios do stream.", causa: "Configuração de captura divergente." },
-    "Firmware.version": { desc: "Versão do firmware instalado no equipamento", impact: "Firmwares diferentes = comportamentos diferentes em todas as features.", causa: "Atualização não aplicada uniformemente na frota." },
+    // ═══ VARCO (Acesso Remoto) ═══
+    "VARCO.enabled": { menu: "Sistema › Manutenção › Acesso Remoto › VARCO › Habilitado", desc: "Habilita comunicação remota via plataforma VARCO", impact: "Sem VARCO, equipamento fica isolado — só acesso local (físico).", causa: "Reset de fábrica ou configuração inicial incompleta.", campo: "Switch 'Habilitado'" },
+    "VARCO.edgeServer": { menu: "Sistema › Manutenção › Acesso Remoto › VARCO › Edge Server", desc: "Servidor edge VARCO para túnel reverso", impact: "Sem edge server, túnel de gerência remota não conecta.", causa: "Campo não preenchido ou URL errada.", campo: "Campo de texto 'Edge Server'" },
+
+    // ═══ PERFIS DE IMAGEM — DIURNO (Perfil 1) ═══
+    "Diurno.lower.startTime": { menu: "Imagem › Perfis › Perfil 1 (Diurno) › Transições › Inferior › Início", desc: "Início da transição inferior — quando começa a ativar perfil diurno", impact: "Imagem com ganho errado durante transição dia/noite.", causa: "Horário configurado diferente do template padrão.", campo: "Campo 'Início' na linha 'Inferior'" },
+    "Diurno.lower.endTime": { menu: "Imagem › Perfis › Perfil 1 (Diurno) › Transições › Inferior › Fim", desc: "Fim da transição inferior do perfil diurno", impact: "Ganho de imagem fora do padrão durante transição.", causa: "Cópia parcial de configuração entre equipamentos.", campo: "Campo 'Fim' na linha 'Inferior'" },
+    "Diurno.lower.level": { menu: "Imagem › Perfis › Perfil 1 (Diurno) › Transições › Inferior › Nível", desc: "Nível de luminosidade threshold inferior (padrão: 10)", impact: "Fotos muito claras ou escuras no período de transição.", causa: "Ajuste local por técnico sem atualizar template.", campo: "Slider 'Nível' na linha 'Inferior'" },
+    "Diurno.lower.holdTime": { menu: "Imagem › Perfis › Perfil 1 (Diurno) › Transições › Inferior › Tempo de espera", desc: "Tempo (ms) antes de mudar perfil (padrão: 60000ms = 1min)", impact: "Transição muito rápida gera frames inconsistentes.", causa: "Default de firmware diferente.", campo: "Campo 'Tempo de espera (ms)' na linha 'Inferior'" },
+    "Diurno.upper.startTime": { menu: "Imagem › Perfis › Perfil 1 (Diurno) › Transições › Superior › Início", desc: "Início da transição superior do perfil diurno", impact: "Qualidade de imagem comprometida na mudança de iluminação.", causa: "Perfil não padronizado após manutenção.", campo: "Campo 'Início' na linha 'Superior'" },
+    "Diurno.upper.endTime": { menu: "Imagem › Perfis › Perfil 1 (Diurno) › Transições › Superior › Fim", desc: "Fim da transição superior do perfil diurno", impact: "Janela de transição de brilho inadequada.", causa: "Diferença entre versões de firmware.", campo: "Campo 'Fim' na linha 'Superior'" },
+    "Diurno.upper.level": { menu: "Imagem › Perfis › Perfil 1 (Diurno) › Transições › Superior › Nível", desc: "Nível de luminosidade threshold superior (padrão: 35)", impact: "Imagens saturadas ou subexpostas durante o dia.", causa: "Ajuste manual ou cópia de config incompleta.", campo: "Slider 'Nível' na linha 'Superior'" },
+    "Diurno.upper.holdTime": { menu: "Imagem › Perfis › Perfil 1 (Diurno) › Transições › Superior › Tempo de espera", desc: "Tempo (ms) antes da transição superior (padrão: 60000ms)", impact: "Flickering na imagem durante mudanças de luz.", causa: "Valor divergente entre lotes de firmware.", campo: "Campo 'Tempo de espera (ms)' na linha 'Superior'" },
+    "Diurno.upper.profile": { menu: "Imagem › Perfis › Perfil 1 (Diurno) › Transições › Superior › Perfil destino", desc: "ID do perfil de destino ao atingir threshold superior", impact: "Perfil errado = parâmetros de cor/ganho completamente diferentes.", causa: "Profile ID não atualizado após redefinição de templates.", campo: "Dropdown 'Perfil' na linha 'Superior'" },
+
+    // ═══ PERFIS DE IMAGEM — NOTURNO (Perfil 2) ═══
+    "Noturno.lower.startTime": { menu: "Imagem › Perfis › Perfil 2 (Noturno) › Transições › Inferior › Início", desc: "Início da transição inferior para perfil noturno", impact: "Ativação tardia/antecipada do modo noturno = imagens escuras.", causa: "Configuração de horários divergente.", campo: "Campo 'Início' na linha 'Inferior'" },
+    "Noturno.lower.endTime": { menu: "Imagem › Perfis › Perfil 2 (Noturno) › Transições › Inferior › Fim", desc: "Fim da transição inferior do perfil noturno", impact: "Timing errado na ativação do perfil noturno.", causa: "Configuração incompleta pós-manutenção.", campo: "Campo 'Fim' na linha 'Inferior'" },
+    "Noturno.lower.level": { menu: "Imagem › Perfis › Perfil 2 (Noturno) › Transições › Inferior › Nível", desc: "Nível de luminosidade threshold inferior noturno (padrão: 10)", impact: "IR/Flash pode não ativar no momento correto.", causa: "Ajuste local ou firmware com defaults diferentes.", campo: "Slider 'Nível' na linha 'Inferior'" },
+    "Noturno.lower.holdTime": { menu: "Imagem › Perfis › Perfil 2 (Noturno) › Transições › Inferior › Tempo de espera", desc: "Tempo antes de transicionar para noturno (padrão: 60000ms)", impact: "Fotos transitórias com qualidade degradada.", causa: "Valor padrão diferente entre lotes.", campo: "Campo 'Tempo de espera (ms)' na linha 'Inferior'" },
+    "Noturno.upper.startTime": { menu: "Imagem › Perfis › Perfil 2 (Noturno) › Transições › Superior › Início", desc: "Início da transição superior noturna", impact: "Qualidade de imagem noturna comprometida.", causa: "Não sincronizado com template padrão.", campo: "Campo 'Início' na linha 'Superior'" },
+    "Noturno.upper.endTime": { menu: "Imagem › Perfis › Perfil 2 (Noturno) › Transições › Superior › Fim", desc: "Fim da transição superior noturna", impact: "Janela de operação do IR inadequada.", causa: "Configuração manual divergente.", campo: "Campo 'Fim' na linha 'Superior'" },
+    "Noturno.upper.level": { menu: "Imagem › Perfis › Perfil 2 (Noturno) › Transições › Superior › Nível", desc: "Nível de luminosidade threshold superior noturno (padrão: 35)", impact: "Flash/IR ativa muito cedo ou muito tarde.", causa: "Threshold não calibrado para o local.", campo: "Slider 'Nível' na linha 'Superior'" },
+    "Noturno.upper.holdTime": { menu: "Imagem › Perfis › Perfil 2 (Noturno) › Transições › Superior › Tempo de espera", desc: "Tempo na transição superior noturna (padrão: 60000ms)", impact: "Instabilidade de imagem durante a transição.", causa: "Diferença de firmware ou ajuste manual.", campo: "Campo 'Tempo de espera (ms)' na linha 'Superior'" },
+    "Noturno.upper.profile": { menu: "Imagem › Perfis › Perfil 2 (Noturno) › Transições › Superior › Perfil destino", desc: "ID do perfil noturno de destino (padrão: 0)", impact: "Perfil noturno errado = fotos sem IR ou com ganho excessivo.", causa: "Profile ID não atualizado.", campo: "Dropdown 'Perfil' na linha 'Superior'" },
+
+    // ═══ OCR (Reconhecimento de Placas) ═══
+    "OCR.enabled": { menu: "Equipamento › Reconhecimento › aba Jidosha › Habilitar", desc: "Habilita o motor de reconhecimento de placas (OCR)", impact: "Sem OCR, nenhuma placa é lida — equipamento inútil para fiscalização.", causa: "OCR desabilitado por engano ou após reset.", campo: "Switch 'Habilitado' no topo" },
+    "OCR.countryCode": { menu: "Equipamento › Reconhecimento › aba Jidosha › País", desc: "País do formato de placa (BR = Brasil)", impact: "Formato errado = OCR não reconhece placas brasileiras.", causa: "Default de fábrica com país errado.", campo: "Dropdown 'País'" },
+    "OCR.maxPlates": { menu: "Equipamento › Reconhecimento › aba Jidosha › Máx. placas", desc: "Máximo de placas detectadas por frame (padrão: 2)", impact: "Limitar a 1 pode perder veículos em faixas movimentadas.", causa: "Performance tuning aplicado incorretamente.", campo: "Slider 'Máximo de placas'" },
+    "OCR.lowProbChar": { menu: "Equipamento › Reconhecimento › aba Jidosha › Confiança mín. caractere", desc: "Threshold mínimo de confiança por caractere", impact: "Muito alto = rejeita placas válidas. Muito baixo = aceita lixo.", causa: "Ajuste de sensibilidade não padronizado.", campo: "Slider 'Probabilidade baixa por caractere'" },
+    "OCR.maxLowProbChars": { menu: "Equipamento › Reconhecimento › aba Jidosha › Máx. caracteres baixa confiança", desc: "Máximo de caracteres de baixa confiança aceitos por placa", impact: "Impacta taxa de rejeição vs acurácia de leitura.", causa: "Tuning individual não replicado.", campo: "Slider 'Máximo de caracteres com baixa probabilidade'" },
+    "OCR.processingQueue": { menu: "Equipamento › Reconhecimento › aba Jidosha › Fila de processamento", desc: "Tamanho da fila de processamento OCR (padrão: 1)", impact: "Fila grande = mais memória sem benefício em faixa única.", causa: "Template genérico não ajustado.", campo: "Slider 'Fila de processamento'" },
+    "OCR.processingThreads": { menu: "Equipamento › Reconhecimento › aba Jidosha › Threads de processamento", desc: "Threads dedicadas ao processamento OCR (padrão: 1)", impact: "Mais threads = mais CPU sem ganho real em faixa única.", causa: "Config de performance divergente.", campo: "Slider 'Threads de processamento'" },
+    "OCR.processingMode": { menu: "Equipamento › Reconhecimento › aba Jidosha › Modo de processamento", desc: "Modo: freeflow (contínuo) ou triggered (por trigger IO)", impact: "Modo errado = OCR não processa ou processa desnecessariamente.", causa: "Tipo de instalação configurado incorretamente.", campo: "Dropdown 'Modo de processamento'" },
+    "OCR.vehicleType": { menu: "Equipamento › Reconhecimento › aba Jidosha › Tipo de veículo", desc: "Filtro de veículo alvo (all/car/truck)", impact: "Filtro errado descarta veículos válidos da leitura.", causa: "Template errado para o ponto.", campo: "Dropdown 'Tipo de veículo'" },
+
+    // ═══ CLASSIFICADOR (IA Veicular) ═══
+    "Classificador.enabled": { menu: "Equipamento › Reconhecimento › aba Classifier › Habilitar", desc: "Habilita classificação veicular por IA (moto/carro/caminhão)", impact: "Sem classificador, todas infrações ficam sem tipo veicular.", causa: "Feature não ativada após deploy.", campo: "Switch 'Habilitado'" },
+    "Classificador.processingQueue": { menu: "Equipamento › Reconhecimento › aba Classifier › Fila de processamento", desc: "Fila de processamento do classificador (padrão: 1)", impact: "Fila grande desperdiça memória em câmera de faixa única.", causa: "Template de fábrica genérico (valor 4) não ajustado para faixa única.", campo: "Slider 'Fila de processamento'" },
+    "Classificador.processingThreads": { menu: "Equipamento › Reconhecimento › aba Classifier › Threads de processamento", desc: "Threads do classificador veicular (padrão: 1)", impact: "Threads extras consomem CPU sem benefício em faixa única.", causa: "Otimização de CPU aplicada individualmente.", campo: "Slider 'Threads de processamento'" },
+    "Classificador.sceneType": { menu: "Equipamento › Reconhecimento › aba Classifier › Cenário", desc: "Tipo de cena: 0=Close-up, 1=Far-field", impact: "Cena errada = modelo de IA menos preciso para o contexto.", causa: "Template aplicado sem considerar tipo de via.", campo: "Dropdown 'Cenário'" },
+    "Classificador.minProbability": { menu: "Equipamento › Reconhecimento › aba Classifier › Confiabilidade mínima", desc: "Confiança mínima para aceitar classificação (padrão: 20%)", impact: "Muito alto = muitas rejeições. Muito baixo = erros.", causa: "Threshold não padronizado entre equipamentos.", campo: "Slider 'Confiabilidade mínima (%)'" },
+
+    // ═══ SNAPSHOT CROP ═══
+    "SnapshotCrop.enable": { menu: "Equipamento › Diversos › Recorte de Snapshot › Habilitar", desc: "Recorte automático da imagem de snapshot", impact: "Sem crop, imagem completa é enviada (mais pesada).", causa: "Feature não ativada em alguns equipamentos.", campo: "Switch 'Habilitar recorte'" },
+    "SnapshotCrop.mode": { menu: "Equipamento › Diversos › Recorte de Snapshot › Modo", desc: "Modo de recorte (plate/vehicle/custom)", impact: "Modo errado gera recortes inúteis ou muito grandes.", causa: "Configuração manual inconsistente.", campo: "Dropdown 'Modo de recorte'" },
+
+    // ═══ FTP (Envio de Imagens) ═══
+    "FTP.enable": { menu: "Equipamento › Servidores › FTP › Habilitar", desc: "Upload de imagens via FTP para servidor central", impact: "Sem FTP, imagens não chegam ao servidor — PERDA TOTAL de evidências.", causa: "FTP desabilitado após teste ou manutenção.", campo: "Switch 'Habilitar FTP'" },
+
+    // ═══ PORTAS IO (Trigger/Laço) ═══
+    "IO.port1.earlyUs": { menu: "Equipamento › Portas IO › Porta 1 › Antecipação (μs)", desc: "Tempo de antecipação da porta IO 1 (trigger de laço)", impact: "Trigger antecipado/atrasado = veículo fora da posição ideal.", causa: "Calibração de laço não padronizada.", campo: "Campo numérico 'Antecipação (μs)' - Porta 1" },
+    "IO.port1.isReserved": { menu: "Equipamento › Portas IO › Porta 1 › Reservada", desc: "Porta IO 1 reservada para trigger principal", impact: "Se não reservada, pode conflitar com outros sinais.", causa: "Configuração de hardware divergente.", campo: "Switch 'Reservada' - Porta 1" },
+    "IO.port3.earlyUs": { menu: "Equipamento › Portas IO › Porta 3 › Antecipação (μs)", desc: "Tempo de antecipação da porta IO 3", impact: "Timing de captura incorreto = frame sem veículo.", causa: "Calibração local não replicada.", campo: "Campo numérico 'Antecipação (μs)' - Porta 3" },
+    "IO.port3.isReserved": { menu: "Equipamento › Portas IO › Porta 3 › Reservada", desc: "Porta IO 3 reservada", impact: "Conflito de sinais se não reservada.", causa: "Setup de hardware inconsistente.", campo: "Switch 'Reservada' - Porta 3" },
+
+    // ═══ SNMP (Monitoramento) ═══
+    "SNMP.enabled": { menu: "Sistema › Monitoramento › SNMP › Habilitar", desc: "Monitoramento SNMP do equipamento", impact: "Sem SNMP, NMS não monitora saúde do dispositivo.", causa: "Protocolo não ativado na instalação.", campo: "Switch 'Habilitar SNMP'" },
+
+    // ═══ REBOOT (Manutenção Automática) ═══
+    "Reboot.scheduled.enabled": { menu: "Sistema › Manutenção › Reboot Automático › Agendado › Habilitar", desc: "Reboot programado (ex: diário às 4h)", impact: "Sem reboot automático, memory leaks causam travamento.", causa: "Feature de manutenção não ativada.", campo: "Switch 'Habilitar reboot agendado'" },
+    "Reboot.periodic.enabled": { menu: "Sistema › Manutenção › Reboot Automático › Periódico › Habilitar", desc: "Reboot periódico baseado em uptime", impact: "Complementa o agendado para evitar degradação.", causa: "Não configurado como padrão.", campo: "Switch 'Habilitar reboot periódico'" },
+
+    // ═══ DATA/HORA (NTP e Timezone) ═══
+    "NTP.server": { menu: "Sistema › Geral › Data e Hora › NTP › Servidor", desc: "Servidor NTP para sincronização de relógio", impact: "Horário errado = timestamps de infração inválidos legalmente.", causa: "NTP server diferente ou não configurado.", campo: "Campo de texto 'Servidor NTP'" },
+    "Timezone": { menu: "Sistema › Geral › Data e Hora › Fuso Horário", desc: "Fuso horário do equipamento", impact: "Fuso errado invalida toda autuação do equipamento.", causa: "Timezone não ajustado após deploy.", campo: "Dropdown 'Fuso horário'" },
+
+    // ═══ VÍDEO (Stream) ═══
+    "Video.framerate": { menu: "Vídeo › Streams › Stream 1 › Taxa de frames", desc: "Taxa de frames do stream de vídeo (fps)", impact: "FPS baixo = menor chance de captura.", causa: "Ajuste de performance individual.", campo: "Slider 'FPS'" },
+    "Video.quality": { menu: "Vídeo › Streams › Stream 1 › Qualidade", desc: "Qualidade de compressão JPEG (1-100)", impact: "Qualidade baixa = imagens borradas para OCR.", causa: "Redução de banda aplicada manualmente.", campo: "Slider 'Qualidade'" },
+    "Video.useTriggerFrames": { menu: "Vídeo › Streams › Stream 1 › Usar frames do trigger", desc: "Usar frames do trigger IO para processamento OCR", impact: "Se desativado, OCR usa frames aleatórios do stream.", causa: "Configuração de captura divergente.", campo: "Switch 'Usar frames do trigger'" },
+
+    // ═══ FIRMWARE ═══
+    "Firmware.version": { menu: "Sistema › Manutenção › Atualização de Firmware", desc: "Versão do firmware instalado", impact: "Firmwares diferentes = comportamentos diferentes em todas as features.", causa: "Atualização não aplicada uniformemente na frota.", campo: "Atualizar via upload de arquivo .fw" },
   };
 
   const getSeverity = (param, count, total) => {
@@ -433,12 +459,12 @@ function AuditoriaTab({ analysis }) {
 
       <div style={{ border: `1px solid ${C.border}`, borderRadius: "8px", overflow: "hidden" }}>
         {/* Table header */}
-        <div style={{ display: "grid", gridTemplateColumns: "70px 1fr 80px 200px 130px 90px", gap: 0, background: C.raised, padding: "10px 0", borderBottom: `1px solid ${C.border}`, fontSize: "11px", fontWeight: 600, color: C.textSecondary }}>
+        <div style={{ display: "grid", gridTemplateColumns: "70px 1fr 80px 200px 180px 90px", gap: 0, background: C.raised, padding: "10px 0", borderBottom: `1px solid ${C.border}`, fontSize: "11px", fontWeight: 600, color: C.textSecondary }}>
           <div style={{ padding: "0 10px", textAlign: "center" }}>Severidade</div>
           <div style={{ padding: "0 10px" }}>Parâmetro</div>
           <div style={{ padding: "0 10px", textAlign: "center" }}>Equipamentos</div>
           <div style={{ padding: "0 10px" }}>Valor Incorreto → Correto</div>
-          <div style={{ padding: "0 10px" }}>Endpoint API</div>
+          <div style={{ padding: "0 10px" }}>Menu / Endpoint</div>
           <div style={{ padding: "0 10px", textAlign: "center" }}>Referências OK</div>
         </div>
 
@@ -461,7 +487,7 @@ function AuditoriaTab({ analysis }) {
                 {/* Main row */}
                 <div
                   onClick={() => setExpandedRow(isExpanded ? null : idx)}
-                  style={{ display: "grid", gridTemplateColumns: "70px 1fr 80px 200px 130px 90px", gap: 0, padding: "10px 0", borderTop: idx > 0 ? `1px solid ${C.borderLight}` : "none", cursor: "pointer", background: isExpanded ? "rgba(255,255,255,0.02)" : "transparent", transition: "background 0.1s" }}
+                  style={{ display: "grid", gridTemplateColumns: "70px 1fr 80px 200px 180px 90px", gap: 0, padding: "10px 0", borderTop: idx > 0 ? `1px solid ${C.borderLight}` : "none", cursor: "pointer", background: isExpanded ? "rgba(255,255,255,0.02)" : "transparent", transition: "background 0.1s" }}
                 >
                   <div style={{ padding: "0 10px", textAlign: "center" }}>
                     <span style={{ background: sev.bg, border: `1px solid ${sev.border}`, color: sev.text, padding: "2px 6px", borderRadius: "4px", fontSize: "9px", fontWeight: 700, letterSpacing: "0.3px" }}>{sev.label}</span>
@@ -482,8 +508,8 @@ function AuditoriaTab({ analysis }) {
                     ))}
                   </div>
                   <div style={{ padding: "0 10px" }}>
-                    {ep.endpoint
-                      ? <code style={{ fontSize: "10px", color: C.accent }}>{ep.method} {ep.endpoint.replace("/api/", "")}</code>
+                    {ep.menu
+                      ? <span style={{ fontSize: "10px", color: C.accent }}>{ep.menu.split(" › ").slice(0, 3).join(" › ")}</span>
                       : <span style={{ color: C.textMuted, fontSize: "10px" }}>Manual</span>}
                   </div>
                   <div style={{ padding: "0 10px", textAlign: "center" }}>
@@ -497,6 +523,13 @@ function AuditoriaTab({ analysis }) {
                     <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "12px", marginTop: "12px" }}>
                       {/* Left: Description & Impact */}
                       <div>
+                        {/* Menu breadcrumb */}
+                        {paramInfo.menu && (
+                          <div style={{ marginBottom: "10px", padding: "6px 8px", background: "rgba(96,205,255,0.04)", borderRadius: "4px", border: `1px solid rgba(96,205,255,0.1)` }}>
+                            <div style={{ fontSize: "10px", color: C.textMuted, marginBottom: "2px" }}>📍 Onde encontrar na interface</div>
+                            <div style={{ fontSize: "11px", color: C.accent, fontWeight: 500 }}>{paramInfo.menu}</div>
+                          </div>
+                        )}
                         <div style={{ marginBottom: "10px" }}>
                           <div style={{ fontSize: "10px", color: C.textMuted, marginBottom: "3px", textTransform: "uppercase", letterSpacing: "0.5px" }}>O que é</div>
                           <div style={{ fontSize: "12px", color: C.textSecondary, lineHeight: "1.5" }}>{paramInfo.desc}</div>
@@ -562,17 +595,35 @@ function AuditoriaTab({ analysis }) {
 
                     {/* How to fix */}
                     <div style={{ marginTop: "12px", padding: "10px 12px", background: C.surface, border: `1px solid ${C.border}`, borderRadius: "6px" }}>
-                      <div style={{ fontSize: "10px", color: C.accent, marginBottom: "4px", textTransform: "uppercase", letterSpacing: "0.5px" }}>Como Corrigir</div>
+                      <div style={{ fontSize: "10px", color: C.accent, marginBottom: "6px", textTransform: "uppercase", letterSpacing: "0.5px" }}>Como Corrigir</div>
+
+                      {/* Menu path */}
+                      <div style={{ marginBottom: "8px", padding: "6px 10px", background: "rgba(96,205,255,0.06)", border: `1px solid rgba(96,205,255,0.15)`, borderRadius: "4px" }}>
+                        <div style={{ fontSize: "10px", color: C.textMuted, marginBottom: "2px" }}>📍 Caminho no menu ITScam:</div>
+                        <div style={{ fontSize: "12px", color: C.accent, fontWeight: 600 }}>{paramInfo.menu || "—"}</div>
+                        {paramInfo.campo && <div style={{ fontSize: "11px", color: C.textSecondary, marginTop: "2px" }}>Campo: <strong style={{ color: C.text }}>{paramInfo.campo}</strong></div>}
+                      </div>
+
+                      {/* Step by step */}
                       {ep.endpoint ? (
                         <div style={{ fontSize: "12px", color: C.textSecondary, lineHeight: "1.8" }}>
-                          <div>1. Acessar equipamento via túnel VARCO: <code>https://[UUID]-80.tunnel.varco.cloud</code></div>
-                          <div>2. Enviar requisição: <code style={{ color: C.accent }}>{ep.method} {ep.endpoint}</code>{ep.note && <span style={{ color: C.textMuted }}> ({ep.note})</span>}</div>
-                          <div>3. Payload: definir <code>{param.split(".").slice(1).join(".")}</code> = <code style={{ color: "#7dffb3" }}>{String(correctVal)}</code></div>
-                          <div>4. Script automático: <code>node auditoria-itscam/corrigir.mjs --param="{param}" --valor="{String(correctVal)}" --todos</code></div>
+                          <div><strong style={{ color: C.text }}>Via Interface Web:</strong></div>
+                          <div style={{ paddingLeft: "12px" }}>
+                            <div>1. Acessar: <code style={{ color: C.accent }}>https://[UUID]-80.tunnel.varco.cloud</code></div>
+                            <div>2. Login: <code>admin</code> / <code>#econocr@</code></div>
+                            <div>3. Navegar: <span style={{ color: C.accent }}>{paramInfo.menu || ep.menu || "—"}</span></div>
+                            <div>4. Alterar <strong style={{ color: C.text }}>{paramInfo.campo || param.split(".").slice(1).join(".")}</strong> para <code style={{ color: "#7dffb3", fontWeight: 700 }}>{String(correctVal)}</code></div>
+                            <div>5. Clicar <strong style={{ color: C.success }}>Aplicar</strong></div>
+                          </div>
+                          <div style={{ marginTop: "8px" }}><strong style={{ color: C.text }}>Via API (automático):</strong></div>
+                          <div style={{ paddingLeft: "12px" }}>
+                            <div>• Endpoint: <code style={{ color: C.accent }}>{ep.method} {ep.endpoint}</code></div>
+                            <div>• Script: <code>node auditoria-itscam/corrigir.mjs --caso=XX --todos</code></div>
+                          </div>
                         </div>
                       ) : (
                         <div style={{ fontSize: "12px", color: C.textSecondary }}>
-                          {ep.note || "Requer intervenção manual no equipamento. Acesso via IP local necessário."}
+                          Requer acesso físico ou remoto (TeamViewer/RDP) ao equipamento para atualização de firmware.
                         </div>
                       )}
                     </div>

@@ -1,99 +1,145 @@
 /**
  * AxCross - Axion Tecnologia
- * Tema Cruzamentos — Paleta laranja/amber
+ * Windows 11 25H2 Fluent Design — Bloom Amber
+ * Mica + Acrylic + Segoe UI Variable
  */
 
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
 :root {
-  --ifm-color-primary: #e67e22;
-  --ifm-color-primary-dark: #d35400;
-  --ifm-color-primary-darker: #ba4a00;
+  --win11-accent: #ffb340;
+  --win11-accent-dark: #e67e22;
+  --win11-accent-light: #ffd080;
+  --win11-bg-solid: #f3f3f3;
+  --win11-bg-mica: rgba(243, 243, 243, 0.72);
+  --win11-bg-acrylic: rgba(255, 255, 255, 0.65);
+  --win11-surface: rgba(255, 255, 255, 0.7);
+  --win11-card: rgba(255, 255, 255, 0.6);
+  --win11-border: rgba(0, 0, 0, 0.06);
+  --win11-text: #1a1a1a;
+  --win11-text-secondary: #5c5c5c;
+  --win11-shadow: 0 2px 8px rgba(0, 0, 0, 0.04), 0 8px 32px rgba(0, 0, 0, 0.08);
+
+  --ifm-color-primary: #d35400;
+  --ifm-color-primary-dark: #ba4a00;
+  --ifm-color-primary-darker: #a04000;
   --ifm-color-primary-darkest: #873600;
-  --ifm-color-primary-light: #f0a04b;
-  --ifm-color-primary-lighter: #f5c07a;
-  --ifm-color-primary-lightest: #fae5cd;
+  --ifm-color-primary-light: #e67e22;
+  --ifm-color-primary-lighter: #f0a04b;
+  --ifm-color-primary-lightest: #f5c07a;
 
   --ifm-code-font-size: 95%;
-  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
+  --docusaurus-highlighted-code-line-bg: rgba(211, 84, 0, 0.08);
 
-  --ifm-navbar-background-color: #3c2415;
-  --ifm-navbar-link-color: #ecf0f1;
-  --ifm-navbar-link-hover-color: #f0a04b;
+  --ifm-navbar-background-color: var(--win11-bg-acrylic);
+  --ifm-navbar-link-color: var(--win11-text);
+  --ifm-navbar-link-hover-color: var(--ifm-color-primary);
 
-  --ifm-menu-color: #3c2415;
-  --ifm-menu-color-active: #e67e22;
-  --ifm-menu-color-background-active: #fdf2e9;
+  --ifm-menu-color: var(--win11-text);
+  --ifm-menu-color-active: var(--ifm-color-primary);
+  --ifm-menu-color-background-active: rgba(211, 84, 0, 0.06);
 
   --ifm-link-color: #d35400;
   --ifm-link-hover-color: #873600;
 
-  --ifm-footer-background-color: #3c2415;
-  --ifm-footer-color: #ecf0f1;
-  --ifm-footer-link-color: #f5c07a;
-  --ifm-footer-link-hover-color: #fae5cd;
+  --ifm-footer-background-color: var(--win11-bg-mica);
+  --ifm-footer-color: var(--win11-text);
+  --ifm-footer-link-color: var(--ifm-color-primary);
+  --ifm-footer-link-hover-color: var(--ifm-color-primary-dark);
 
-  --ifm-font-family-base: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  --ifm-font-family-base: 'Segoe UI Variable Display', 'Segoe UI Variable', 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
+  --ifm-border-radius: 8px;
+  --ifm-global-radius: 8px;
 }
 
 [data-theme='dark'] {
-  --ifm-color-primary: #f0a04b;
-  --ifm-color-primary-dark: #e67e22;
-  --ifm-color-primary-darker: #d35400;
-  --ifm-color-primary-darkest: #ba4a00;
-  --ifm-color-primary-light: #f5c07a;
-  --ifm-color-primary-lighter: #fae5cd;
-  --ifm-color-primary-lightest: #fef5ec;
-  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
+  --win11-bg-solid: #0a0a0a;
+  --win11-bg-mica: rgba(10, 10, 10, 0.85);
+  --win11-bg-acrylic: rgba(30, 30, 30, 0.72);
+  --win11-surface: rgba(40, 40, 40, 0.65);
+  --win11-card: rgba(45, 45, 45, 0.6);
+  --win11-border: rgba(255, 255, 255, 0.07);
+  --win11-text: #f5f5f5;
+  --win11-text-secondary: #9e9e9e;
+  --win11-shadow: 0 2px 8px rgba(0, 0, 0, 0.2), 0 8px 32px rgba(0, 0, 0, 0.35);
 
-  --ifm-navbar-background-color: #1e120a;
-  --ifm-footer-background-color: #1e120a;
+  --ifm-color-primary: #ffb340;
+  --ifm-color-primary-dark: #f0a04b;
+  --ifm-color-primary-darker: #e67e22;
+  --ifm-color-primary-darkest: #d35400;
+  --ifm-color-primary-light: #ffd080;
+  --ifm-color-primary-lighter: #ffe0a6;
+  --ifm-color-primary-lightest: #fff0d4;
+  --docusaurus-highlighted-code-line-bg: rgba(255, 179, 64, 0.08);
+
+  --ifm-navbar-background-color: var(--win11-bg-acrylic);
+  --ifm-footer-background-color: var(--win11-bg-mica);
+  --ifm-background-color: var(--win11-bg-solid);
 }
 
+/* ===== Global ===== */
+html { background: var(--win11-bg-solid); }
+body { font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11'; -webkit-font-smoothing: antialiased; }
+
+/* ===== Navbar — Acrylic ===== */
 .navbar {
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.15);
+  backdrop-filter: saturate(180%) blur(20px);
+  -webkit-backdrop-filter: saturate(180%) blur(20px);
+  border-bottom: 1px solid var(--win11-border);
+  box-shadow: none;
 }
+.navbar__title { font-weight: 700; font-size: 1.1rem; letter-spacing: -0.01em; }
+.navbar__link { font-weight: 500; font-size: 0.875rem; border-radius: 6px; padding: 6px 12px; transition: background 0.15s ease; }
+.navbar__link:hover { background: rgba(211, 84, 0, 0.06); }
+[data-theme='dark'] .navbar__link:hover { background: rgba(255, 179, 64, 0.08); }
 
-.navbar__title {
-  color: #ecf0f1;
-  font-weight: 700;
-  font-size: 1.25rem;
-}
-
-.navbar__link {
-  color: #bdc3c7 !important;
-  font-weight: 500;
-}
-
-.navbar__link:hover,
-.navbar__link--active {
-  color: #f0a04b !important;
-}
-
+/* ===== Sidebar ===== */
+.menu__link { border-radius: 6px; padding: 8px 12px; font-size: 0.875rem; font-weight: 400; transition: all 0.15s ease; }
+.menu__link:hover { background: rgba(0, 0, 0, 0.03); }
+[data-theme='dark'] .menu__link:hover { background: rgba(255, 255, 255, 0.04); }
 .menu__link--active:not(.menu__link--sublist) {
-  border-left: 3px solid #e67e22;
-  padding-left: calc(var(--ifm-menu-link-padding-horizontal) - 3px);
-  background-color: #fdf2e9;
-}
-
-[data-theme='dark'] .menu__link--active:not(.menu__link--sublist) {
-  background-color: rgba(230, 126, 34, 0.15);
-}
-
-table th {
-  background-color: #fdf2e9;
-  color: #3c2415;
+  border-left: 3px solid var(--ifm-color-primary);
+  padding-left: calc(12px - 3px);
+  background: rgba(211, 84, 0, 0.06);
   font-weight: 600;
-  border-bottom: 2px solid #e67e22;
+}
+[data-theme='dark'] .menu__link--active:not(.menu__link--sublist) { background: rgba(255, 179, 64, 0.08); }
+
+/* ===== Tables ===== */
+table { border-radius: 8px; overflow: hidden; border: 1px solid var(--win11-border); }
+table th {
+  background: rgba(211, 84, 0, 0.04); color: var(--win11-text);
+  font-weight: 600; font-size: 0.825rem; text-transform: uppercase; letter-spacing: 0.03em;
+  border-bottom: 1px solid var(--win11-border);
+}
+[data-theme='dark'] table th { background: rgba(255, 179, 64, 0.06); color: var(--win11-text); }
+table tr:nth-child(even) { background: rgba(0, 0, 0, 0.015); }
+[data-theme='dark'] table tr:nth-child(even) { background: rgba(255, 255, 255, 0.02); }
+table td, table th { border-color: var(--win11-border); }
+
+/* ===== Content ===== */
+.markdown > h1 { font-weight: 700; letter-spacing: -0.02em; }
+.markdown > h2 { font-weight: 600; letter-spacing: -0.01em; padding-bottom: 0.3em; border-bottom: 1px solid var(--win11-border); }
+.prism-code { border-radius: 8px !important; border: 1px solid var(--win11-border); }
+.alert { border-radius: 8px; border-left-width: 4px; backdrop-filter: blur(8px); }
+
+/* ===== Footer ===== */
+.footer {
+  backdrop-filter: saturate(150%) blur(16px);
+  -webkit-backdrop-filter: saturate(150%) blur(16px);
+  border-top: 1px solid var(--win11-border);
 }
 
-[data-theme='dark'] table th {
-  background-color: rgba(230, 126, 34, 0.15);
-  color: #ecf0f1;
-}
+/* ===== Scrollbar ===== */
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: rgba(0, 0, 0, 0.15); border-radius: 8px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(0, 0, 0, 0.3); }
+[data-theme='dark'] ::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.12); }
+[data-theme='dark'] ::-webkit-scrollbar-thumb:hover { background: rgba(255, 255, 255, 0.25); }
 
-table tr:nth-child(even) {
-  background-color: #fafbfc;
+/* ===== Pagination ===== */
+.pagination-nav__link {
+  border-radius: 8px; border: 1px solid var(--win11-border); transition: all 0.2s ease;
 }
-
-[data-theme='dark'] table tr:nth-child(even) {
-  background-color: rgba(255, 255, 255, 0.03);
-}
+.pagination-nav__link:hover { box-shadow: var(--win11-shadow); border-color: var(--ifm-color-primary); }

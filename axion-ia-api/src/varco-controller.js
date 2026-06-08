@@ -464,20 +464,23 @@ import { resolve } from "path";
 export function auditoriaStatus(req, res) {
   try {
     const dataFile = resolve(process.cwd(), "../auditoria-itscam/analise-dados.json");
-    const invFile = resolve(process.cwd(), "../auditoria-itscam/devices-inventory.json");
 
     if (!existsSync(dataFile)) {
       return res.status(404).json({ erro: "Dados de auditoria não encontrados. Execute a análise primeiro." });
     }
 
-    const devices = JSON.parse(readFileSync(dataFile, "utf8"));
-    const inventory = existsSync(invFile) ? JSON.parse(readFileSync(invFile, "utf8")) : [];
+    const data = JSON.parse(readFileSync(dataFile, "utf8"));
 
+    // Suporta formato antigo (array puro) e novo (objeto com .devices)
+    if (data.devices) {
+      return res.json(data);
+    }
+    // Fallback: array direto
     return res.json({
-      total: devices.length,
-      inventario: inventory.length,
+      total: data.length,
+      inventario: data.length,
       ultimaAtualizacao: new Date().toISOString(),
-      devices
+      devices: data
     });
   } catch (err) {
     return res.status(500).json({ erro: err.message });
