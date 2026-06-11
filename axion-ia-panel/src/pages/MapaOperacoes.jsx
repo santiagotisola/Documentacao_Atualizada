@@ -215,14 +215,18 @@ const AXCROSS_EXTRA = [
   { id: "imperatriz-cross", nome: "IMPERATRIZ", url: "https://imperatriz.axcross.axion.ws", estado: "MA", status: "ativo" },
   { id: "ipempe-cross", nome: "IPEMPE", url: "https://ipempe.axcross.axion.ws", estado: "PE", status: "ativo" },
   { id: "sefazpi-cross", nome: "SEFAZPI", url: "https://sefazpi.axcross.axion.ws", estado: "PI", status: "ativo" },
+  { id: "goiania-cross", nome: "GOIÂNIA", url: "https://goiania.axcross.axion.ws", estado: "GO", status: "ativo" },
+  { id: "economia-cross", nome: "ECONOMIA", url: "https://economia.axcross.axion.ws", estado: "GO", status: "ativo" },
   { id: "homologacao-cross", nome: "HOMOLOGACAO", url: "https://homologacao.axcross.axion.ws", estado: "-", status: "ativo" },
 ];
 
 const GRUPOS_ACESSO = [
-  { grupo: "Grupo Axion (suporte)", login: "suporte@axiontecnologia.com.br", sites: ["homologacao.axhub.axion.ws", "goiania.axhub.axion.ws", "imepi.axhub.axion.ws", "ipemmt.axcross.axion.ws", "derse.axcross.axion.ws", "economia.axion.ws", "homologacao.axcross.axion.ws", "identity.axion.ws", "ipemce.axcross.axion.ws", "strans.axhub.axion.ws"] },
-  { grupo: "Grupo Admin (operacao)", login: "Admin", sites: ["smtt.axhub.axion.ws", "ipemmt.axhub.axion.ws", "derse.axhub.axion.ws", "detranma.axhub.axion.ws", "detranpi.axhub.axion.ws", "goiania.id.axion.ws", "homologacao.axhub.axion.ws", "ibametro.axhub.axion.ws", "imepi.axhub.axion.ws", "imeqpb.axhub.axion.ws", "imetropa.axhub.axion.ws", "imperatriz.axhub.axion.ws", "ipemce.axhub.axion.ws", "itps.axhub.axion.ws", "setrans.axhub.axion.ws", "strans.axhub.axion.ws"] },
-  { grupo: "Grupo Admin (alt)", login: "admin", sites: ["goiania.id.axion.ws", "ipempe.axhub.axion.ws", "strans.axhub.axion.ws"] },
-  { grupo: "Grupo AxCross (2025)", login: "suporte@axiontecnologia.com.br", sites: ["setrans.axcross.axion.ws", "detranma.axcross.axion.ws", "goiania.axion.ws", "imperatriz.axcross.axion.ws", "ipempe.axcross.axion.ws", "sefazpi.axcross.axion.ws"] },
+  { grupo: "Grupo Axion (suporte)", login: "suporte@axiontecnologia.com.br", senha: "Axion#2023", sites: ["homologacao.axhub.axion.ws", "goiania.axhub.axion.ws", "imepi.axhub.axion.ws", "ipemmt.axcross.axion.ws", "derse.axcross.axion.ws", "economia.axion.ws", "economia.axcross.axion.ws", "homologacao.axcross.axion.ws", "identity.axion.ws", "ipemce.axcross.axion.ws", "strans.axhub.axion.ws"] },
+  { grupo: "Grupo Admin (operacao)", login: "Admin", senha: "labor5383", sites: ["smtt.axhub.axion.ws", "ipemmt.axhub.axion.ws", "derse.axhub.axion.ws", "detranma.axhub.axion.ws", "detranpi.axhub.axion.ws", "goiania.id.axion.ws", "homologacao.axhub.axion.ws", "ibametro.axhub.axion.ws", "imepi.axhub.axion.ws", "imeqpb.axhub.axion.ws", "imetropa.axhub.axion.ws", "imperatriz.axhub.axion.ws", "ipemce.axhub.axion.ws", "itps.axhub.axion.ws", "setrans.axhub.axion.ws", "strans.axhub.axion.ws"] },
+  { grupo: "Grupo Admin (alt)", login: "admin", senha: "Labor5383", sites: ["goiania.id.axion.ws", "ipempe.axhub.axion.ws", "strans.axhub.axion.ws"] },
+  { grupo: "Grupo AxCross (2025)", login: "suporte@axiontecnologia.com.br", senha: "Axion#2025", sites: ["setrans.axcross.axion.ws", "detranma.axcross.axion.ws", "goiania.axion.ws", "goiania.id.axion.ws", "goiania.axcross.axion.ws", "imperatriz.axcross.axion.ws", "ipempe.axcross.axion.ws", "sefazpi.axcross.axion.ws"] },
+  { grupo: "AxCross DETRANPI", login: "detranpi", senha: "Axion@2025", sites: ["detranpi.axcross.axion.ws"] },
+  { grupo: "AxCross IPEMCE", login: "ipemce", senha: "Axion#2023", sites: ["ipemce.axhub.axion.ws"] },
 ];
 
 // ===== COMPONENTE PRINCIPAL =====

@@ -176,6 +176,8 @@ const AXCROSS_EXTRA = [
   { id: "imperatriz-cross", nome: "IMPERATRIZ", url: "https://imperatriz.axcross.axion.ws", estado: "MA", status: "ativo" },
   { id: "ipempe-cross", nome: "IPEMPE", url: "https://ipempe.axcross.axion.ws", estado: "PE", status: "ativo" },
   { id: "sefazpi-cross", nome: "SEFAZPI", url: "https://sefazpi.axcross.axion.ws", estado: "PI", status: "ativo" },
+  { id: "goiania-cross", nome: "GOIÂNIA", url: "https://goiania.axcross.axion.ws", estado: "GO", status: "ativo" },
+  { id: "economia-cross", nome: "ECONOMIA", url: "https://economia.axcross.axion.ws", estado: "GO", status: "ativo" },
   { id: "homologacao-cross", nome: "HOMOLOGAÇÃO", url: "https://homologacao.axcross.axion.ws", estado: "—", status: "ativo" },
 ];
 
@@ -187,22 +189,25 @@ const SERVICOS_AUXILIARES = [
   { id: "goiania-id", nome: "Goiânia Identity", url: "https://goiania.id.axion.ws", tipo: "Auth" },
 ];
 
-// ─── Grupos de acesso (sem senhas — referência operacional) ───────
+// ─── Grupos de acesso — referência operacional ───────────────────
 const GRUPOS_ACESSO = [
   {
     grupo: "Grupo Axion (suporte)",
     login: "suporte@axiontecnologia.com.br",
+    senha: "Axion#2023",
     sites: [
       "homologacao.axhub.axion.ws", "goiania.axhub.axion.ws",
       "imepi.axhub.axion.ws", "ipemmt.axcross.axion.ws",
       "derse.axcross.axion.ws", "economia.axion.ws",
-      "homologacao.axcross.axion.ws", "identity.axion.ws",
-      "ipemce.axcross.axion.ws", "strans.axhub.axion.ws",
+      "economia.axcross.axion.ws", "homologacao.axcross.axion.ws",
+      "identity.axion.ws", "ipemce.axcross.axion.ws",
+      "strans.axhub.axion.ws",
     ]
   },
   {
     grupo: "Grupo Admin (operação)",
     login: "Admin",
+    senha: "labor5383",
     sites: [
       "smtt.axhub.axion.ws", "ipemmt.axhub.axion.ws",
       "derse.axhub.axion.ws", "detranma.axhub.axion.ws",
@@ -217,6 +222,7 @@ const GRUPOS_ACESSO = [
   {
     grupo: "Grupo Admin (alt login)",
     login: "admin",
+    senha: "Labor5383",
     sites: [
       "goiania.id.axion.ws", "ipempe.axhub.axion.ws", "strans.axhub.axion.ws",
     ]
@@ -224,9 +230,11 @@ const GRUPOS_ACESSO = [
   {
     grupo: "Grupo AxCross (Axion 2025)",
     login: "suporte@axiontecnologia.com.br",
+    senha: "Axion#2025",
     sites: [
       "setrans.axcross.axion.ws", "detranma.axcross.axion.ws",
       "goiania.axion.ws", "goiania.id.axion.ws",
+      "goiania.axcross.axion.ws",
       "imperatriz.axcross.axion.ws", "ipempe.axcross.axion.ws",
       "sefazpi.axcross.axion.ws",
     ]
@@ -234,11 +242,13 @@ const GRUPOS_ACESSO = [
   {
     grupo: "AxCross DETRANPI",
     login: "detranpi",
+    senha: "Axion@2025",
     sites: ["detranpi.axcross.axion.ws"],
   },
   {
     grupo: "AxCross IPEMCE",
     login: "ipemce",
+    senha: "Axion#2023",
     sites: ["ipemce.axhub.axion.ws"],
   },
 ];
@@ -276,6 +286,12 @@ export default function PainelProcessos() {
   const totalAxhub = todosSites.filter(s => s.sistema === "AxHub").length;
   const totalAxcross = todosSites.filter(s => s.sistema === "AxCross").length;
   const totalAtivos = todosSites.filter(s => s.status === "ativo").length;
+  const totalEquip = todosSites.reduce((a, s) => {
+    const eq = typeof s.equipamentos === "object" ? (s.equipamentos?.total || 0) : (s.equipamentos || 0);
+    return a + eq;
+  }, 0);
+  const totalVeiculos = todosSites.reduce((a, s) => a + (s.veiculos || 0), 0);
+  const totalPassagens = todosSites.reduce((a, s) => a + (s.passagensDia || 0), 0);
 
   const ABAS = [
     { id: "sites", label: "🏢 Sites", count: todosSites.length },
@@ -306,12 +322,16 @@ export default function PainelProcessos() {
           <div className="pp-stat-label">Ativos</div>
         </div>
         <div className="pp-stat">
-          <div className="pp-stat-value">{PROCESSOS_AXHUB.reduce((a, p) => a + p.itens.length, 0)}</div>
-          <div className="pp-stat-label">Processos AxHub</div>
+          <div className="pp-stat-value">{totalEquip.toLocaleString("pt-BR")}</div>
+          <div className="pp-stat-label">Equipamentos</div>
         </div>
         <div className="pp-stat">
-          <div className="pp-stat-value">{PROCESSOS_AXCROSS.reduce((a, p) => a + p.itens.length, 0)}</div>
-          <div className="pp-stat-label">Processos AxCross</div>
+          <div className="pp-stat-value">{totalVeiculos.toLocaleString("pt-BR")}</div>
+          <div className="pp-stat-label">Veículos Monit.</div>
+        </div>
+        <div className="pp-stat">
+          <div className="pp-stat-value">{totalPassagens.toLocaleString("pt-BR")}</div>
+          <div className="pp-stat-label">Passagens/Dia</div>
         </div>
       </div>
 
@@ -353,6 +373,9 @@ export default function PainelProcessos() {
                   <th>URL</th>
                   <th>Versão</th>
                   <th>Equip.</th>
+                  <th>Faixas</th>
+                  <th>Veículos</th>
+                  <th>Pass./Dia</th>
                   <th>Status</th>
                 </tr>
               </thead>
@@ -378,7 +401,10 @@ export default function PainelProcessos() {
                       </a>
                     </td>
                     <td>{s.versao || "—"}</td>
-                    <td>{s.equipamentos?.total || "—"}</td>
+                    <td>{typeof s.equipamentos === "object" ? (s.equipamentos?.total ?? "—") : (s.equipamentos ?? "—")}</td>
+                    <td>{s.faixas ?? "—"}</td>
+                    <td>{s.veiculos != null ? s.veiculos.toLocaleString("pt-BR") : "—"}</td>
+                    <td>{s.passagensDia != null ? s.passagensDia.toLocaleString("pt-BR") : "—"}</td>
                     <td>
                       <span className={`pp-badge pp-badge-${s.status === "ativo" ? "ativo" : "inativo"}`}>
                         {s.status === "ativo" ? "● Ativo" : "● Inativo"}
@@ -420,7 +446,23 @@ export default function PainelProcessos() {
                 </div>
                 <div className="pp-detail-item">
                   <label>Equipamentos</label>
-                  <span>{siteDetalhe.equipamentos?.total || "—"}</span>
+                  <span>{typeof siteDetalhe.equipamentos === "object" ? (siteDetalhe.equipamentos?.total ?? "—") : (siteDetalhe.equipamentos ?? "—")}</span>
+                </div>
+                <div className="pp-detail-item">
+                  <label>Faixas</label>
+                  <span>{siteDetalhe.faixas ?? "—"}</span>
+                </div>
+                <div className="pp-detail-item">
+                  <label>Veículos Monitorados</label>
+                  <span>{siteDetalhe.veiculos != null ? siteDetalhe.veiculos.toLocaleString("pt-BR") : "—"}</span>
+                </div>
+                <div className="pp-detail-item">
+                  <label>Alertas</label>
+                  <span>{siteDetalhe.alertas ?? "—"}</span>
+                </div>
+                <div className="pp-detail-item">
+                  <label>Passagens/Dia</label>
+                  <span>{siteDetalhe.passagensDia != null ? siteDetalhe.passagensDia.toLocaleString("pt-BR") : "—"}</span>
                 </div>
                 <div className="pp-detail-item">
                   <label>Fabricantes</label>
@@ -501,6 +543,8 @@ export default function PainelProcessos() {
                 <h4>{g.grupo}</h4>
                 <div className="pp-cred-info">
                   <span>👤 {g.login}</span>
+                  <span>•</span>
+                  <span>🔒 {g.senha}</span>
                   <span>•</span>
                   <span>{g.sites.length} sites</span>
                 </div>

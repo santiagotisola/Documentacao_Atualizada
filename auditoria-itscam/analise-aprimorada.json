@@ -1,16 +1,16 @@
 {
-  "geradoEm": "2026-06-08T13:38:41.150Z",
-  "dadosBase": "2026-06-08T12:43:23.940Z",
+  "geradoEm": "2026-06-09T19:01:30.964Z",
+  "dadosBase": "2026-06-09T19:01:05.138Z",
   "totalDispositivos": 72,
   "totalRegras": 26,
   "resumo": {
-    "conformes": 25,
-    "divergentes": 39,
-    "offline": 8,
+    "conformes": 35,
+    "divergentes": 31,
+    "offline": 6,
     "porSeveridade": {
       "critico": 1,
-      "alto": 61,
-      "medio": 21,
+      "alto": 36,
+      "medio": 22,
       "baixo": 2
     }
   },
@@ -18,21 +18,11 @@
     {
       "id": "CLASSIFIER_QUEUE",
       "titulo": "Classificador Queue",
-      "count": 32
+      "count": 23
     },
     {
       "id": "CLASSIFIER_THREADS",
       "titulo": "Classificador Threads",
-      "count": 7
-    },
-    {
-      "id": "PROFILE_TRANSITION_LOWER_TIME",
-      "titulo": "Perfil Transição: Lower startTime/endTime",
-      "count": 6
-    },
-    {
-      "id": "PROFILE_TRANSITION_UPPER_TIME",
-      "titulo": "Perfil Transição: Upper startTime/endTime",
       "count": 6
     },
     {
@@ -41,19 +31,14 @@
       "count": 5
     },
     {
-      "id": "PROFILE_TRANSITION_UPPER_LEVEL",
-      "titulo": "Perfil Transição: Upper Level",
+      "id": "SNAPSHOT_CROP_DISABLED",
+      "titulo": "Snapshot Crop Desabilitado",
       "count": 4
     },
     {
       "id": "VIDEO_FRAMERATE",
       "titulo": "Vídeo Framerate",
       "count": 4
-    },
-    {
-      "id": "SNAPSHOT_CROP_DISABLED",
-      "titulo": "Snapshot Crop Desabilitado",
-      "count": 3
     },
     {
       "id": "OCR_PROCESSING_QUEUE",
@@ -63,6 +48,21 @@
     {
       "id": "VIDEO_QUALITY",
       "titulo": "Vídeo Qualidade JPEG",
+      "count": 2
+    },
+    {
+      "id": "OCR_VEHICLE_TYPE",
+      "titulo": "OCR Vehicle Type",
+      "count": 2
+    },
+    {
+      "id": "SNMP_DISABLED",
+      "titulo": "SNMP Desabilitado",
+      "count": 2
+    },
+    {
+      "id": "PROFILE_TRANSITION_UPPER_LEVEL",
+      "titulo": "Perfil Transição: Upper Level",
       "count": 2
     }
   ],
@@ -104,19 +104,8 @@
       "status": "online",
       "firmware": "v1.7.8",
       "totalRegras": 26,
-      "conformes": 24,
+      "conformes": 25,
       "divergencias": [
-        {
-          "id": "CLASSIFIER_QUEUE",
-          "titulo": "Classificador Queue",
-          "secao": "classifier",
-          "menu": "Equipamento > Classificador",
-          "campo": "classifier.processingQueue",
-          "severidade": "alto",
-          "ok": false,
-          "atual": 4,
-          "esperado": 1
-        },
         {
           "id": "SNAPSHOT_CROP_DISABLED",
           "titulo": "Snapshot Crop Desabilitado",
@@ -137,20 +126,8 @@
       "status": "online",
       "firmware": "v1.7.8",
       "totalRegras": 26,
-      "conformes": 25,
-      "divergencias": [
-        {
-          "id": "CLASSIFIER_QUEUE",
-          "titulo": "Classificador Queue",
-          "secao": "classifier",
-          "menu": "Equipamento > Classificador",
-          "campo": "classifier.processingQueue",
-          "severidade": "alto",
-          "ok": false,
-          "atual": 4,
-          "esperado": 1
-        }
-      ]
+      "conformes": 26,
+      "divergencias": []
     },
     {
       "nome": "GOEC6O004 - Faixa 2",
@@ -159,20 +136,8 @@
       "status": "online",
       "firmware": "v1.7.8",
       "totalRegras": 26,
-      "conformes": 25,
-      "divergencias": [
-        {
-          "id": "CLASSIFIER_QUEUE",
-          "titulo": "Classificador Queue",
-          "secao": "classifier",
-          "menu": "Equipamento > Classificador",
-          "campo": "classifier.processingQueue",
-          "severidade": "alto",
-          "ok": false,
-          "atual": 4,
-          "esperado": 1
-        }
-      ]
+      "conformes": 26,
+      "divergencias": []
     },
     {
       "nome": "GOEC6O005 - Faixa 1",
@@ -201,20 +166,8 @@
       "status": "online",
       "firmware": "v1.7.8",
       "totalRegras": 26,
-      "conformes": 25,
-      "divergencias": [
-        {
-          "id": "CLASSIFIER_QUEUE",
-          "titulo": "Classificador Queue",
-          "secao": "classifier",
-          "menu": "Equipamento > Classificador",
-          "campo": "classifier.processingQueue",
-          "severidade": "alto",
-          "ok": false,
-          "atual": 4,
-          "esperado": 1
-        }
-      ]
+      "conformes": 26,
+      "divergencias": []
     },
     {
       "nome": "GOEC6O006 - Faixa 2",
@@ -223,20 +176,8 @@
       "status": "online",
       "firmware": "v1.7.8",
       "totalRegras": 26,
-      "conformes": 25,
-      "divergencias": [
-        {
-          "id": "CLASSIFIER_QUEUE",
-          "titulo": "Classificador Queue",
-          "secao": "classifier",
-          "menu": "Equipamento > Classificador",
-          "campo": "classifier.processingQueue",
-          "severidade": "alto",
-          "ok": false,
-          "atual": 4,
-          "esperado": 1
-        }
-      ]
+      "conformes": 26,
+      "divergencias": []
     },
     {
       "nome": "GOEC6O007 - Faixa 1",
@@ -265,76 +206,8 @@
       "status": "online",
       "firmware": "v1.7.8",
       "totalRegras": 26,
-      "conformes": 17,
+      "conformes": 20,
       "divergencias": [
-        {
-          "id": "PROFILE_TRANSITION_UPPER_LEVEL",
-          "titulo": "Perfil Transição: Upper Level",
-          "secao": "profiles",
-          "menu": "Imagem > Perfis > Transições",
-          "campo": "transitions.upper.level",
-          "severidade": "alto",
-          "ok": false,
-          "erros": [
-            {
-              "perfil": 0,
-              "atual": 30,
-              "esperado": 35
-            },
-            {
-              "perfil": 1,
-              "atual": 30,
-              "esperado": 35
-            }
-          ],
-          "esperado": 35
-        },
-        {
-          "id": "PROFILE_TRANSITION_LOWER_TIME",
-          "titulo": "Perfil Transição: Lower startTime/endTime",
-          "secao": "profiles",
-          "menu": "Imagem > Perfis > Transições",
-          "campo": "transitions.lower.startTime / endTime",
-          "severidade": "alto",
-          "ok": false,
-          "erros": [
-            {
-              "perfil": 0,
-              "campo": "endTime",
-              "atual": "18:00:00",
-              "esperado": "00:00:00"
-            },
-            {
-              "perfil": 1,
-              "campo": "endTime",
-              "atual": "06:00:00",
-              "esperado": "00:00:00"
-            }
-          ]
-        },
-        {
-          "id": "PROFILE_TRANSITION_UPPER_TIME",
-          "titulo": "Perfil Transição: Upper startTime/endTime",
-          "secao": "profiles",
-          "menu": "Imagem > Perfis > Transições",
-          "campo": "transitions.upper.startTime / endTime",
-          "severidade": "alto",
-          "ok": false,
-          "erros": [
-            {
-              "perfil": 0,
-              "campo": "startTime",
-              "atual": "06:00:00",
-              "esperado": "00:00:00"
-            },
-            {
-              "perfil": 1,
-              "campo": "startTime",
-              "atual": "18:01:00",
-              "esperado": "00:00:00"
-            }
-          ]
-        },
         {
           "id": "PROFILE_TRANSITION_UPPER_PROFILE",
           "titulo": "Perfil Transição: Upper Profile (P&B)",
@@ -426,30 +299,8 @@
       "status": "online",
       "firmware": "v1.7.8",
       "totalRegras": 26,
-      "conformes": 22,
+      "conformes": 24,
       "divergencias": [
-        {
-          "id": "PROFILE_TRANSITION_UPPER_LEVEL",
-          "titulo": "Perfil Transição: Upper Level",
-          "secao": "profiles",
-          "menu": "Imagem > Perfis > Transições",
-          "campo": "transitions.upper.level",
-          "severidade": "alto",
-          "ok": false,
-          "erros": [
-            {
-              "perfil": 0,
-              "atual": 40,
-              "esperado": 35
-            },
-            {
-              "perfil": 1,
-              "atual": 40,
-              "esperado": 35
-            }
-          ],
-          "esperado": 35
-        },
         {
           "id": "OCR_VEHICLE_TYPE",
           "titulo": "OCR Vehicle Type",
@@ -460,17 +311,6 @@
           "ok": false,
           "atual": 1,
           "esperado": 3
-        },
-        {
-          "id": "CLASSIFIER_QUEUE",
-          "titulo": "Classificador Queue",
-          "secao": "classifier",
-          "menu": "Equipamento > Classificador",
-          "campo": "classifier.processingQueue",
-          "severidade": "alto",
-          "ok": false,
-          "atual": 4,
-          "esperado": 1
         },
         {
           "id": "SNMP_DISABLED",
@@ -492,7 +332,7 @@
       "status": "online",
       "firmware": "v1.7.8",
       "totalRegras": 26,
-      "conformes": 21,
+      "conformes": 22,
       "divergencias": [
         {
           "id": "PROFILE_TRANSITION_UPPER_LEVEL",
@@ -539,17 +379,6 @@
           "esperado": 3
         },
         {
-          "id": "CLASSIFIER_QUEUE",
-          "titulo": "Classificador Queue",
-          "secao": "classifier",
-          "menu": "Equipamento > Classificador",
-          "campo": "classifier.processingQueue",
-          "severidade": "alto",
-          "ok": false,
-          "atual": 4,
-          "esperado": 1
-        },
-        {
           "id": "SNMP_DISABLED",
           "titulo": "SNMP Desabilitado",
           "secao": "snmp",
@@ -569,7 +398,7 @@
       "status": "online",
       "firmware": "v1.7.8",
       "totalRegras": 26,
-      "conformes": 23,
+      "conformes": 25,
       "divergencias": [
         {
           "id": "OCR_PROCESSING_THREADS",
@@ -581,28 +410,6 @@
           "ok": false,
           "atual": 2,
           "esperado": 4
-        },
-        {
-          "id": "CLASSIFIER_QUEUE",
-          "titulo": "Classificador Queue",
-          "secao": "classifier",
-          "menu": "Equipamento > Classificador",
-          "campo": "classifier.processingQueue",
-          "severidade": "alto",
-          "ok": false,
-          "atual": 4,
-          "esperado": 1
-        },
-        {
-          "id": "CLASSIFIER_THREADS",
-          "titulo": "Classificador Threads",
-          "secao": "classifier",
-          "menu": "Equipamento > Classificador",
-          "campo": "classifier.processingThreads",
-          "severidade": "alto",
-          "ok": false,
-          "atual": 4,
-          "esperado": 1
         }
       ]
     },
@@ -635,20 +442,8 @@
       "status": "online",
       "firmware": "v1.7.8",
       "totalRegras": 26,
-      "conformes": 25,
-      "divergencias": [
-        {
-          "id": "CLASSIFIER_QUEUE",
-          "titulo": "Classificador Queue",
-          "secao": "classifier",
-          "menu": "Equipamento > Classificador",
-          "campo": "classifier.processingQueue",
-          "severidade": "alto",
-          "ok": false,
-          "atual": 4,
-          "esperado": 1
-        }
-      ]
+      "conformes": 26,
+      "divergencias": []
     },
     {
       "nome": "GOEC6O011 - Faixa 2",
@@ -1121,101 +916,8 @@
       "status": "online",
       "firmware": "v1.7.8",
       "totalRegras": 26,
-      "conformes": 23,
-      "divergencias": [
-        {
-          "id": "PROFILE_TRANSITION_LOWER_LEVEL",
-          "titulo": "Perfil Transição: Lower Level",
-          "secao": "profiles",
-          "menu": "Imagem > Perfis > Transições",
-          "campo": "transitions.lower.level",
-          "severidade": "alto",
-          "ok": false,
-          "erros": [
-            {
-              "perfil": 0,
-              "atual": 35,
-              "esperado": 10
-            },
-            {
-              "perfil": 1,
-              "atual": 35,
-              "esperado": 10
-            }
-          ],
-          "esperado": 10
-        },
-        {
-          "id": "PROFILE_TRANSITION_LOWER_TIME",
-          "titulo": "Perfil Transição: Lower startTime/endTime",
-          "secao": "profiles",
-          "menu": "Imagem > Perfis > Transições",
-          "campo": "transitions.lower.startTime / endTime",
-          "severidade": "alto",
-          "ok": false,
-          "erros": [
-            {
-              "perfil": 0,
-              "campo": "startTime",
-              "atual": "06:00:00",
-              "esperado": "00:00:00"
-            },
-            {
-              "perfil": 0,
-              "campo": "endTime",
-              "atual": "18:00:00",
-              "esperado": "00:00:00"
-            },
-            {
-              "perfil": 1,
-              "campo": "startTime",
-              "atual": "18:00:00",
-              "esperado": "00:00:00"
-            },
-            {
-              "perfil": 1,
-              "campo": "endTime",
-              "atual": "06:00:00",
-              "esperado": "00:00:00"
-            }
-          ]
-        },
-        {
-          "id": "PROFILE_TRANSITION_UPPER_TIME",
-          "titulo": "Perfil Transição: Upper startTime/endTime",
-          "secao": "profiles",
-          "menu": "Imagem > Perfis > Transições",
-          "campo": "transitions.upper.startTime / endTime",
-          "severidade": "alto",
-          "ok": false,
-          "erros": [
-            {
-              "perfil": 0,
-              "campo": "startTime",
-              "atual": "06:00:00",
-              "esperado": "00:00:00"
-            },
-            {
-              "perfil": 0,
-              "campo": "endTime",
-              "atual": "17:58:00",
-              "esperado": "00:00:00"
-            },
-            {
-              "perfil": 1,
-              "campo": "startTime",
-              "atual": "18:00:00",
-              "esperado": "00:00:00"
-            },
-            {
-              "perfil": 1,
-              "campo": "endTime",
-              "atual": "06:00:00",
-              "esperado": "00:00:00"
-            }
-          ]
-        }
-      ]
+      "conformes": 26,
+      "divergencias": []
     },
     {
       "nome": "GOEC6O036 - Faixa 1",
@@ -1234,53 +936,18 @@
       "status": "online",
       "firmware": "v1.7.8",
       "totalRegras": 26,
-      "conformes": 24,
+      "conformes": 25,
       "divergencias": [
         {
-          "id": "PROFILE_TRANSITION_LOWER_TIME",
-          "titulo": "Perfil Transição: Lower startTime/endTime",
-          "secao": "profiles",
-          "menu": "Imagem > Perfis > Transições",
-          "campo": "transitions.lower.startTime / endTime",
-          "severidade": "alto",
+          "id": "SNAPSHOT_CROP_DISABLED",
+          "titulo": "Snapshot Crop Desabilitado",
+          "secao": "misc",
+          "menu": "Equipamento > Diversos",
+          "campo": "snapshotCrop.enable",
+          "severidade": "medio",
           "ok": false,
-          "erros": [
-            {
-              "perfil": 0,
-              "campo": "startTime",
-              "atual": "18:00:00",
-              "esperado": "00:00:00"
-            },
-            {
-              "perfil": 1,
-              "campo": "startTime",
-              "atual": "06:00:00",
-              "esperado": "00:00:00"
-            }
-          ]
-        },
-        {
-          "id": "PROFILE_TRANSITION_UPPER_TIME",
-          "titulo": "Perfil Transição: Upper startTime/endTime",
-          "secao": "profiles",
-          "menu": "Imagem > Perfis > Transições",
-          "campo": "transitions.upper.startTime / endTime",
-          "severidade": "alto",
-          "ok": false,
-          "erros": [
-            {
-              "perfil": 0,
-              "campo": "startTime",
-              "atual": "06:00:00",
-              "esperado": "00:00:00"
-            },
-            {
-              "perfil": 1,
-              "campo": "startTime",
-              "atual": "18:00:00",
-              "esperado": "00:00:00"
-            }
-          ]
+          "atual": true,
+          "esperado": false
         }
       ]
     },
@@ -1291,55 +958,8 @@
       "status": "online",
       "firmware": "v1.7.8",
       "totalRegras": 26,
-      "conformes": 24,
-      "divergencias": [
-        {
-          "id": "PROFILE_TRANSITION_LOWER_TIME",
-          "titulo": "Perfil Transição: Lower startTime/endTime",
-          "secao": "profiles",
-          "menu": "Imagem > Perfis > Transições",
-          "campo": "transitions.lower.startTime / endTime",
-          "severidade": "alto",
-          "ok": false,
-          "erros": [
-            {
-              "perfil": 0,
-              "campo": "endTime",
-              "atual": "18:00:00",
-              "esperado": "00:00:00"
-            },
-            {
-              "perfil": 1,
-              "campo": "endTime",
-              "atual": "06:00:00",
-              "esperado": "00:00:00"
-            }
-          ]
-        },
-        {
-          "id": "PROFILE_TRANSITION_UPPER_TIME",
-          "titulo": "Perfil Transição: Upper startTime/endTime",
-          "secao": "profiles",
-          "menu": "Imagem > Perfis > Transições",
-          "campo": "transitions.upper.startTime / endTime",
-          "severidade": "alto",
-          "ok": false,
-          "erros": [
-            {
-              "perfil": 0,
-              "campo": "startTime",
-              "atual": "06:00:00",
-              "esperado": "00:00:00"
-            },
-            {
-              "perfil": 1,
-              "campo": "startTime",
-              "atual": "18:01:00",
-              "esperado": "00:00:00"
-            }
-          ]
-        }
-      ]
+      "conformes": 26,
+      "divergencias": []
     },
     {
       "nome": "GOEC6O041 - Faixa 1",
@@ -1459,15 +1079,23 @@
     },
     {
       "nome": "GOEC6O048 - Faixa 1",
-      "status": "offline",
-      "divergencias": [],
-      "extras": null
+      "uuid": "43d7e92f-482e-4822-bf76-ef2c5cc4dfd9",
+      "ip": "179.249.70.250",
+      "status": "online",
+      "firmware": "v1.7.8",
+      "totalRegras": 26,
+      "conformes": 26,
+      "divergencias": []
     },
     {
       "nome": "GOEC6O048 - Faixa 2",
-      "status": "offline",
-      "divergencias": [],
-      "extras": null
+      "uuid": "d23fe240-246f-4601-8987-d864ecb24d22",
+      "ip": "179.249.70.250",
+      "status": "online",
+      "firmware": "v1.7.8",
+      "totalRegras": 26,
+      "conformes": 26,
+      "divergencias": []
     },
     {
       "nome": "GOEC6O049 - Faixa 1",
@@ -1662,55 +1290,8 @@
       "status": "online",
       "firmware": "v1.7.8",
       "totalRegras": 26,
-      "conformes": 24,
-      "divergencias": [
-        {
-          "id": "PROFILE_TRANSITION_LOWER_TIME",
-          "titulo": "Perfil Transição: Lower startTime/endTime",
-          "secao": "profiles",
-          "menu": "Imagem > Perfis > Transições",
-          "campo": "transitions.lower.startTime / endTime",
-          "severidade": "alto",
-          "ok": false,
-          "erros": [
-            {
-              "perfil": 0,
-              "campo": "endTime",
-              "atual": "18:00:00",
-              "esperado": "00:00:00"
-            },
-            {
-              "perfil": 1,
-              "campo": "endTime",
-              "atual": "06:00:00",
-              "esperado": "00:00:00"
-            }
-          ]
-        },
-        {
-          "id": "PROFILE_TRANSITION_UPPER_TIME",
-          "titulo": "Perfil Transição: Upper startTime/endTime",
-          "secao": "profiles",
-          "menu": "Imagem > Perfis > Transições",
-          "campo": "transitions.upper.startTime / endTime",
-          "severidade": "alto",
-          "ok": false,
-          "erros": [
-            {
-              "perfil": 0,
-              "campo": "startTime",
-              "atual": "06:00:00",
-              "esperado": "00:00:00"
-            },
-            {
-              "perfil": 1,
-              "campo": "startTime",
-              "atual": "18:01:00",
-              "esperado": "00:00:00"
-            }
-          ]
-        }
-      ]
+      "conformes": 26,
+      "divergencias": []
     },
     {
       "nome": "GOEC6O055 - Faixa 2",
@@ -1719,54 +1300,8 @@
       "status": "online",
       "firmware": "v1.7.8",
       "totalRegras": 26,
-      "conformes": 21,
+      "conformes": 23,
       "divergencias": [
-        {
-          "id": "PROFILE_TRANSITION_LOWER_TIME",
-          "titulo": "Perfil Transição: Lower startTime/endTime",
-          "secao": "profiles",
-          "menu": "Imagem > Perfis > Transições",
-          "campo": "transitions.lower.startTime / endTime",
-          "severidade": "alto",
-          "ok": false,
-          "erros": [
-            {
-              "perfil": 0,
-              "campo": "startTime",
-              "atual": "18:00:00",
-              "esperado": "00:00:00"
-            },
-            {
-              "perfil": 1,
-              "campo": "startTime",
-              "atual": "05:59:59",
-              "esperado": "00:00:00"
-            }
-          ]
-        },
-        {
-          "id": "PROFILE_TRANSITION_UPPER_TIME",
-          "titulo": "Perfil Transição: Upper startTime/endTime",
-          "secao": "profiles",
-          "menu": "Imagem > Perfis > Transições",
-          "campo": "transitions.upper.startTime / endTime",
-          "severidade": "alto",
-          "ok": false,
-          "erros": [
-            {
-              "perfil": 0,
-              "campo": "startTime",
-              "atual": "06:00:00",
-              "esperado": "00:00:00"
-            },
-            {
-              "perfil": 1,
-              "campo": "startTime",
-              "atual": "18:01:00",
-              "esperado": "00:00:00"
-            }
-          ]
-        },
         {
           "id": "OCR_MAX_PLATES",
           "titulo": "OCR Max Plates",

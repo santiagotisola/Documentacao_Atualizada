@@ -23,6 +23,18 @@ const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 
 // ─── Helpers ─────────────────────────────────────────────────────────────────
 
+/**
+ * Verifica se a requisição tem permissão de admin.
+ * Usa API_TOKEN do .env ou header X-Admin-Token.
+ * Em produção, integrar com middleware de autenticação real.
+ */
+function _isAdminRequest(req) {
+  const adminToken = process.env.API_TOKEN;
+  if (!adminToken) return true; // sem token configurado = desenvolvimento local
+  const headerToken = req.headers["x-admin-token"] || req.headers["authorization"]?.replace("Bearer ", "");
+  return headerToken === adminToken;
+}
+
 function minAtras(data) {
   if (!data) return Infinity;
   return Math.round((Date.now() - new Date(data).getTime()) / 60_000);
@@ -401,20 +413,20 @@ export async function heartbeatGeral(req, res) {
 
 // ─── GET /api/varco/frota — Lista todos dispositivos direto do VARCO ─────────
 
-const VARCO_CREDENTIALS = {
-  email: "suporte@axiontecnologia.com.br",
-  password: "Axiontecnologia@2026"
-};
-
 let cachedToken = null;
 let tokenExpiry = 0;
 
 async function getVarcoToken() {
   if (cachedToken && Date.now() < tokenExpiry) return cachedToken;
+
+  const email = process.env.VARCO_EMAIL;
+  const password = process.env.VARCO_PASSWORD;
+  if (!email || !password) throw new Error("VARCO_EMAIL e VARCO_PASSWORD não configurados no .env");
+
   const res = await fetch("https://varco.io/api/auth/login", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(VARCO_CREDENTIALS)
+    body: JSON.stringify({ email, password })
   });
   if (!res.ok) throw new Error("Falha login VARCO: " + res.status);
   const data = await res.json();
@@ -460,6 +472,9 @@ export async function listarFrota(req, res) {
 
 import { readFileSync, existsSync } from "fs";
 import { resolve } from "path";
+import { execFile } from "child_process";
+import { promisify } from "util";
+const execFileAsync = promisify(execFile);
 
 export function auditoriaStatus(req, res) {
   try {
@@ -503,6 +518,32 @@ export function auditoriaAprimorada(req, res) {
   }
 }
 
+// ─── POST /api/varco/recoleta ────────────────────────────────────────────────
+export async function recoletaVarco(req, res) {
+  if (!_isAdminRequest(req)) return res.status(403).json({ erro: "Acesso restrito a administradores." });
+  try {
+    const script = resolve(process.cwd(), "../auditoria-itscam/validar-config.mjs");
+    if (!existsSync(script)) {
+      return res.status(404).json({ erro: "Script validar-config.mjs não encontrado." });
+    }
+    console.log(`[AUDIT] varco/recoleta executado por ${req.ip} em ${new Date().toISOString()}`);
+    const { stdout } = await execFileAsync("node", [script], {
+      cwd: resolve(process.cwd(), ".."),
+      timeout: 180000,
+    });
+
+    // Read the freshly generated JSON
+    const resultFile = resolve(process.cwd(), "../auditoria-itscam/validacao-config.json");
+    if (existsSync(resultFile)) {
+      const data = JSON.parse(readFileSync(resultFile, "utf8"));
+      return res.json({ ok: true, geradoEm: data.geradoEm, resumo: data.resumo });
+    }
+    return res.json({ ok: true, msg: "Coleta concluída mas arquivo de resultado não encontrado." });
+  } catch (err) {
+    return res.status(500).json({ erro: err.message });
+  }
+}
+
 // ─── GET /api/varco/config-padrao ────────────────────────────────────────────
 export function configPadrao(req, res) {
   try {
@@ -515,6 +556,75 @@ export function configPadrao(req, res) {
 
     const data = JSON.parse(readFileSync(padFile, "utf8"));
     return res.json(data);
+  } catch (err) {
+    return res.status(500).json({ erro: err.message });
+  }
+}
+
+// ─── GET /api/varco/plano-correcao ───────────────────────────────────────────
+export function planoCorrecao(req, res) {
+  try {
+    const dataFile = resolve(process.cwd(), "../auditoria-itscam/plano-correcao.json");
+    if (!existsSync(dataFile)) {
+      return res.status(404).json({ erro: "Plano de correção não encontrado. Execute: node auditoria-itscam/corrigir-frota.mjs --plano" });
+    }
+    const data = JSON.parse(readFileSync(dataFile, "utf8"));
+    return res.json(data);
+  } catch (err) {
+    return res.status(500).json({ erro: err.message });
+  }
+}
+
+// ─── POST /api/varco/gerar-plano ─────────────────────────────────────────────
+export async function gerarPlano(req, res) {
+  if (!_isAdminRequest(req)) return res.status(403).json({ erro: "Acesso restrito a administradores." });
+  try {
+    const script = resolve(process.cwd(), "../auditoria-itscam/corrigir-frota.mjs");
+    if (!existsSync(script)) {
+      return res.status(404).json({ erro: "Script corrigir-frota.mjs não encontrado." });
+    }
+    console.log(`[AUDIT] varco/gerar-plano executado por ${req.ip} em ${new Date().toISOString()}`);
+    const { stdout } = await execFileAsync("node", [script, "--plano"], {
+      cwd: resolve(process.cwd(), ".."),
+      timeout: 300000,
+    });
+    const dataFile = resolve(process.cwd(), "../auditoria-itscam/plano-correcao.json");
+    if (existsSync(dataFile)) {
+      const data = JSON.parse(readFileSync(dataFile, "utf8"));
+      return res.json({ ok: true, plano: data });
+    }
+    return res.json({ ok: true, msg: "Plano gerado" });
+  } catch (err) {
+    return res.status(500).json({ erro: err.message });
+  }
+}
+
+// ─── POST /api/varco/aplicar-correcao ────────────────────────────────────────
+export async function aplicarCorrecao(req, res) {
+  if (!_isAdminRequest(req)) return res.status(403).json({ erro: "Acesso restrito a administradores." });
+  try {
+    const { caso } = req.body || {};
+    // Sanitize: caso deve ser alfanumérico simples (previne command injection)
+    if (caso && !/^[a-zA-Z0-9_-]+$/.test(caso)) {
+      return res.status(400).json({ erro: "Parâmetro 'caso' contém caracteres inválidos." });
+    }
+    const script = resolve(process.cwd(), "../auditoria-itscam/corrigir-frota.mjs");
+    if (!existsSync(script)) {
+      return res.status(404).json({ erro: "Script corrigir-frota.mjs não encontrado." });
+    }
+    console.log(`[AUDIT] varco/aplicar-correcao caso=${caso || 'todos'} por ${req.ip} em ${new Date().toISOString()}`);
+    const args = ["--aplicar"];
+    if (caso) args.push(`--caso=${caso}`);
+    const { stdout } = await execFileAsync("node", [script, ...args], {
+      cwd: resolve(process.cwd(), ".."),
+      timeout: 300000,
+    });
+    const dataFile = resolve(process.cwd(), "../auditoria-itscam/plano-correcao.json");
+    if (existsSync(dataFile)) {
+      const data = JSON.parse(readFileSync(dataFile, "utf8"));
+      return res.json({ ok: true, resultado: data });
+    }
+    return res.json({ ok: true, msg: "Correção aplicada" });
   } catch (err) {
     return res.status(500).json({ erro: err.message });
   }

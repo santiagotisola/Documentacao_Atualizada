@@ -13,13 +13,13 @@ import { gerarSpecHandler, listarSpecsHandler, obterSpecHandler, atualizarStatus
 import { relatorioPassagens, relatorioImagens, listarEquipamentosRelatorio } from "./relatorio-controller.js";
 import { uploadMiddlewareComErro, uploadContexto } from "./upload-controller.js";
 import { gerarConformidadeHandler, listarConformidadeHandler, obterConformidadeHandler, removerConformidadeHandler, gerarAnalisaMultiProdutoHandler, obterAnalisaMultiProdutoHandler, listarAnalisasMultiProdutoHandler, obterComparacaoHandler, obterLacunasHandler, obterRecomendacoesHandler } from "./conformidade-controller.js";
-import { iniciarConexao, statusConexao as waStatus, listarSessoes, detalhesSessao, encerrarSessao, enviarManual, enviarComBotoes, desconectar } from "./whatsapp-controller.js";
+import { iniciarConexao, statusConexao as waStatus, listarSessoes, detalhesSessao, encerrarSessao, enviarManual, enviarComBotoes, desconectar, restart } from "./whatsapp-controller.js";
 import { reindexarDocs, reindexarJitbit, statsKB, limparModuloKB } from "./admin-controller.js";
 import { uploadImagemMiddleware, analisarSemSalvar, salvarEAnalisar, listarTodas, listarPorSistema, listarPasta, compararPasta, compararPastaLocal, servirImagemExterna, removerImagem, classificarOcupacao, classificarRoda, classificarCorCamisa, classificarMochila, classificarCalca, gerarCaracteristicas, lerPlacas } from "./analise-imagem-controller.js";
 import { uploadJobMiddleware, criarJobHandler, listarJobs, obterJob, removerJob } from "./job-controller.js";
 import { validarFluxoAlerta } from "./validate-controller.js";
 import { runAgent, runAgentMode, getAgentState, getSchedulerStatus, startScheduler, stopScheduler } from "./agent-controller.js";
-import { validarDispositivo, validarLote, analisarIncidente, heartbeatGeral, listarFrota, auditoriaStatus, auditoriaAprimorada, configPadrao } from "./varco-controller.js";
+import { validarDispositivo, validarLote, analisarIncidente, heartbeatGeral, listarFrota, auditoriaStatus, auditoriaAprimorada, configPadrao, recoletaVarco, planoCorrecao, gerarPlano, aplicarCorrecao } from "./varco-controller.js";
 import { analisarTexto, analisarArquivo, uploadLeituraMiddleware } from "./leitura-controller.js";
 import { healthCheck } from "./health-controller.js";
 import { listarFilaHandler, obterEstatisticasHandler, obterItemHandler, marcarRevisadoHandler, autoResolverHandler, exportarCsvHandler, descartarItemHandler } from "./confidence-controller.js";
@@ -28,6 +28,7 @@ import { listarEquipamentosCRM, statsEquipamentos, detalheEquipamento, atualizar
 import { buscarEditaisGovHandler, importarEditalHandler, analisarEditalRapidoHandler, listarEditaisImportadosHandler, autoAnalisarTodosHandler, analiseAvancadaHandler, uploadEditalHandler, uploadEditalMiddleware, listarSitesHandler } from "./edital-controller.js";
 import { sitesOverview, obterMapa, associarSite, desassociarSite, ticketsPorSite } from "./sites-helpdesk-controller.js";
 import { listarContratosHandler, listarTiposHandler, gerarRelatorioHandler, listarRelatoriosHandler, obterRelatorioHandler, removerRelatorioHandler } from "./relatorio-contrato-controller.js";
+import { testarLogin, alterarSenha, validarAcesso } from "./credenciais-controller.js";
 const router = express.Router();
 
 // AxionIA Chat
@@ -187,6 +188,7 @@ router.delete("/whatsapp/sessao/:telefone", encerrarSessao);
 router.post("/whatsapp/send", enviarManual);
 router.post("/whatsapp/send-buttons", enviarComBotoes);
 router.post("/whatsapp/desconectar", desconectar);
+router.post("/whatsapp/restart", restart);
 
 // ─── Análise de Imagens Operacionais ─────────────────────────────────────────
 // Pasta: uploads/analise/{sistema}/  (≠ docs/img/ que são screenshots dos manuais)
@@ -240,6 +242,10 @@ router.get("/varco/frota",                listarFrota);
 router.get("/varco/auditoria",            auditoriaStatus);
 router.get("/varco/auditoria-aprimorada", auditoriaAprimorada);
 router.get("/varco/config-padrao",        configPadrao);
+router.post("/varco/recoleta",            recoletaVarco);
+router.get("/varco/plano-correcao",       planoCorrecao);
+router.post("/varco/gerar-plano",         gerarPlano);
+router.post("/varco/aplicar-correcao",    aplicarCorrecao);
 
 // ─── Leitura Estratégica — Agente 80/20 ──────────────────────────────────────
 router.post("/leitura/analisar",          analisarTexto);
@@ -289,5 +295,10 @@ router.get("/crm/equipamentos/busca",        buscaEquipamento);
 router.get("/crm/equipamentos/:alias",       detalheEquipamento);
 router.put("/crm/equipamentos/:alias",       atualizarEquipamento);
 router.get("/crm/busca",                buscaCRM);
+
+// ─── Credenciais — Gerenciamento de Senhas ───────────────────────────────────
+router.post("/credenciais/login",          testarLogin);
+router.post("/credenciais/alterar-senha",  alterarSenha);
+router.post("/credenciais/validar",        validarAcesso);
 
 export default router;

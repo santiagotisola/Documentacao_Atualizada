@@ -1,7 +1,7 @@
 {
   "total": 72,
   "inventario": 72,
-  "ultimaAtualizacao": "2026-06-08T12:43:23.940Z",
+  "ultimaAtualizacao": "2026-06-09T19:01:05.138Z",
   "devices": [
     {
       "nome": "GOEC6O002 - Faixa 1",
@@ -591,7 +591,7 @@
             "time.google.com"
           ],
           "serveNtp": false,
-          "currentDateAndTime": "2026-06-08T12:41:35.000Z",
+          "currentDateAndTime": "2026-06-09T18:59:00.000Z",
           "timezoneOffset": "-0300"
         },
         "video": {
@@ -1213,7 +1213,7 @@
             "time.google.com"
           ],
           "serveNtp": false,
-          "currentDateAndTime": "2026-06-08T12:41:25.000Z",
+          "currentDateAndTime": "2026-06-09T18:59:00.000Z",
           "timezoneOffset": "-0300"
         },
         "video": {
@@ -1835,7 +1835,7 @@
             "time.google.com"
           ],
           "serveNtp": false,
-          "currentDateAndTime": "2026-06-08T12:41:26.000Z",
+          "currentDateAndTime": "2026-06-09T18:59:00.000Z",
           "timezoneOffset": "-0300"
         },
         "video": {
@@ -2262,7 +2262,7 @@
             "licensed": true,
             "minProbability": 20,
             "modelType": 0,
-            "processingQueue": 4,
+            "processingQueue": 1,
             "processingThreads": 1,
             "sceneType": 0,
             "speedCalibrationRegion1": {
@@ -2457,7 +2457,7 @@
             "time.google.com"
           ],
           "serveNtp": false,
-          "currentDateAndTime": "2026-06-08T12:41:41.000Z",
+          "currentDateAndTime": "2026-06-09T18:59:00.000Z",
           "timezoneOffset": "-0300"
         },
         "video": {
@@ -2884,7 +2884,7 @@
             "licensed": true,
             "minProbability": 20,
             "modelType": 0,
-            "processingQueue": 4,
+            "processingQueue": 1,
             "processingThreads": 1,
             "sceneType": 0,
             "speedCalibrationRegion1": {
@@ -3079,7 +3079,7 @@
             "time.google.com"
           ],
           "serveNtp": false,
-          "currentDateAndTime": "2026-06-08T12:41:24.000Z",
+          "currentDateAndTime": "2026-06-09T18:59:00.000Z",
           "timezoneOffset": "-0300"
         },
         "video": {
@@ -3506,7 +3506,7 @@
             "licensed": true,
             "minProbability": 20,
             "modelType": 0,
-            "processingQueue": 4,
+            "processingQueue": 1,
             "processingThreads": 1,
             "sceneType": 0,
             "speedCalibrationRegion1": {
@@ -3701,7 +3701,7 @@
             "time.google.com"
           ],
           "serveNtp": false,
-          "currentDateAndTime": "2026-06-08T12:41:48.000Z",
+          "currentDateAndTime": "2026-06-09T18:59:05.000Z",
           "timezoneOffset": "-0300"
         },
         "video": {
@@ -4323,7 +4323,7 @@
             "time.google.com"
           ],
           "serveNtp": false,
-          "currentDateAndTime": "2026-06-08T12:41:47.000Z",
+          "currentDateAndTime": "2026-06-09T18:59:05.000Z",
           "timezoneOffset": "-0300"
         },
         "video": {
@@ -4945,7 +4945,7 @@
             "time.google.com"
           ],
           "serveNtp": false,
-          "currentDateAndTime": "2026-06-08T12:41:48.000Z",
+          "currentDateAndTime": "2026-06-09T18:59:05.000Z",
           "timezoneOffset": "-0300"
         },
         "video": {
@@ -5372,7 +5372,7 @@
             "licensed": true,
             "minProbability": 20,
             "modelType": 0,
-            "processingQueue": 4,
+            "processingQueue": 1,
             "processingThreads": 1,
             "sceneType": 0,
             "speedCalibrationRegion1": {
@@ -5567,7 +5567,7 @@
             "time.google.com"
           ],
           "serveNtp": false,
-          "currentDateAndTime": "2026-06-08T12:41:53.000Z",
+          "currentDateAndTime": "2026-06-09T18:59:12.000Z",
           "timezoneOffset": "-0300"
         },
         "video": {
@@ -5994,7 +5994,7 @@
             "licensed": true,
             "minProbability": 20,
             "modelType": 0,
-            "processingQueue": 4,
+            "processingQueue": 1,
             "processingThreads": 1,
             "sceneType": 0,
             "speedCalibrationRegion1": {
@@ -6189,7 +6189,7 @@
             "time.google.com"
           ],
           "serveNtp": false,
-          "currentDateAndTime": "2026-06-08T12:41:53.000Z",
+          "currentDateAndTime": "2026-06-09T18:59:13.000Z",
           "timezoneOffset": "-0300"
         },
         "video": {
@@ -6811,7 +6811,7 @@
             "time.google.com"
           ],
           "serveNtp": false,
-          "currentDateAndTime": "2026-06-08T12:41:58.000Z",
+          "currentDateAndTime": "2026-06-09T18:59:18.000Z",
           "timezoneOffset": "-0300"
         },
         "video": {
@@ -7433,7 +7433,7 @@
             "time.google.com"
           ],
           "serveNtp": false,
-          "currentDateAndTime": "2026-06-08T12:41:58.000Z",
+          "currentDateAndTime": "2026-06-09T18:59:18.000Z",
           "timezoneOffset": "-0300"
         },
         "video": {
@@ -7519,17 +7519,17 @@
               },
               "level": {
                 "roi": {
-                  "enabled": false,
-                  "x0": 0,
-                  "x1": 0,
-                  "x2": 0,
-                  "x3": 0,
-                  "y0": 0,
-                  "y1": 0,
-                  "y2": 0,
-                  "y3": 0
+                  "enabled": true,
+                  "x0": 190,
+                  "x1": 1726,
+                  "x2": 190,
+                  "x3": 1726,
+                  "y0": 186,
+                  "y1": 186,
+                  "y2": 1146,
+                  "y3": 1146
                 },
-                "targetValue": 45
+                "targetValue": 37
               },
               "shutter": {
                 "automatic": true,
@@ -7580,20 +7580,20 @@
                     "value": 100
                   },
                   "shutter": {
-                    "percentageOfCurrent": false,
-                    "value": 1000
+                    "percentageOfCurrent": true,
+                    "value": 100
                   }
                 }
               ]
             },
-            "name": "Tarde",
+            "name": "Diurno",
             "overlay": {
               "enable": false,
               "text": ""
             },
             "transitions": {
               "lower": {
-                "endTime": "18:00:00",
+                "endTime": "00:00:00",
                 "holdTime": 60000,
                 "level": 10,
                 "profile": 23483,
@@ -7602,15 +7602,15 @@
               "upper": {
                 "endTime": "00:00:00",
                 "holdTime": 60000,
-                "level": 30,
+                "level": 35,
                 "profile": 0,
-                "startTime": "06:00:00"
+                "startTime": "00:00:00"
               }
             },
             "trigger": {
               "enabled": true,
               "event": "constant",
-              "minimumInterval": 250,
+              "minimumInterval": 100,
               "port": 2,
               "roi": {
                 "enabled": false,
@@ -7767,7 +7767,7 @@
             },
             "transitions": {
               "lower": {
-                "endTime": "06:00:00",
+                "endTime": "00:00:00",
                 "holdTime": 60000,
                 "level": 10,
                 "profile": 23483,
@@ -7776,9 +7776,9 @@
               "upper": {
                 "endTime": "00:00:00",
                 "holdTime": 60000,
-                "level": 30,
+                "level": 35,
                 "profile": 23483,
-                "startTime": "18:01:00"
+                "startTime": "00:00:00"
               }
             },
             "trigger": {
@@ -7910,10 +7910,10 @@
           "jpegQuality": 85,
           "legacyTsyncGpio": -1,
           "scenario1Crop": {
-            "x0": 80,
-            "x1": 1359,
-            "y0": 135,
-            "y1": 854
+            "x0": 166,
+            "x1": 1445,
+            "y0": 228,
+            "y1": 947
           },
           "scenario1Overlay": "",
           "scenario1OverlayTextSize": 32,
@@ -7930,10 +7930,10 @@
           "snapshotCrop": {
             "enable": true,
             "mode": "static",
-            "x0": 0,
-            "x1": 1919,
-            "y0": 0,
-            "y1": 1199
+            "x0": 31,
+            "x1": 1570,
+            "y0": 258,
+            "y1": 1097
           }
         },
         "ftp": {
@@ -8047,7 +8047,7 @@
             "time.google.com"
           ],
           "serveNtp": false,
-          "currentDateAndTime": "2026-06-08T12:42:01.000Z",
+          "currentDateAndTime": "2026-06-09T18:59:18.000Z",
           "timezoneOffset": "-0300"
         },
         "video": {
@@ -8669,7 +8669,7 @@
             "time.google.com"
           ],
           "serveNtp": false,
-          "currentDateAndTime": "2026-06-08T12:42:01.000Z",
+          "currentDateAndTime": "2026-06-09T18:59:18.000Z",
           "timezoneOffset": "-0300"
         },
         "video": {
@@ -8860,7 +8860,7 @@
               "upper": {
                 "endTime": "00:00:00",
                 "holdTime": 60000,
-                "level": 40,
+                "level": 35,
                 "profile": 0,
                 "startTime": "00:00:00"
               }
@@ -9042,7 +9042,7 @@
               "upper": {
                 "endTime": "00:00:00",
                 "holdTime": 60000,
-                "level": 40,
+                "level": 35,
                 "profile": 0,
                 "startTime": "00:00:00"
               }
@@ -9118,7 +9118,7 @@
             "licensed": true,
             "minProbability": 60,
             "modelType": 0,
-            "processingQueue": 4,
+            "processingQueue": 1,
             "processingThreads": 1,
             "sceneType": 1,
             "speedCalibrationRegion1": {
@@ -9316,7 +9316,7 @@
             "time.google.com"
           ],
           "serveNtp": false,
-          "currentDateAndTime": "2026-06-08T12:41:58.000Z",
+          "currentDateAndTime": "2026-06-09T18:59:18.000Z",
           "timezoneOffset": "-0300"
         },
         "video": {
@@ -9743,7 +9743,7 @@
             "licensed": true,
             "minProbability": 50,
             "modelType": 0,
-            "processingQueue": 4,
+            "processingQueue": 1,
             "processingThreads": 1,
             "sceneType": 0,
             "speedCalibrationRegion1": {
@@ -9941,7 +9941,7 @@
             "time.google.com"
           ],
           "serveNtp": false,
-          "currentDateAndTime": "2026-06-08T12:42:06.000Z",
+          "currentDateAndTime": "2026-06-09T18:59:23.000Z",
           "timezoneOffset": "-0300"
         },
         "video": {
@@ -10368,8 +10368,8 @@
             "licensed": true,
             "minProbability": 20,
             "modelType": 0,
-            "processingQueue": 4,
-            "processingThreads": 4,
+            "processingQueue": 1,
+            "processingThreads": 1,
             "sceneType": 0,
             "speedCalibrationRegion1": {
               "p0top1sz": 1,
@@ -10563,7 +10563,7 @@
             "time.google.com"
           ],
           "serveNtp": false,
-          "currentDateAndTime": "2026-06-08T12:42:06.000Z",
+          "currentDateAndTime": "2026-06-09T18:59:22.000Z",
           "timezoneOffset": "-0300"
         },
         "video": {
@@ -11185,7 +11185,7 @@
             "time.google.com"
           ],
           "serveNtp": false,
-          "currentDateAndTime": "2026-06-08T12:42:06.000Z",
+          "currentDateAndTime": "2026-06-09T18:59:22.000Z",
           "timezoneOffset": "-0300"
         },
         "video": {
@@ -11612,7 +11612,7 @@
             "licensed": true,
             "minProbability": 20,
             "modelType": 0,
-            "processingQueue": 4,
+            "processingQueue": 1,
             "processingThreads": 1,
             "sceneType": 0,
             "speedCalibrationRegion1": {
@@ -11807,7 +11807,7 @@
             "time.google.com"
           ],
           "serveNtp": false,
-          "currentDateAndTime": "2026-06-08T12:42:05.000Z",
+          "currentDateAndTime": "2026-06-09T18:59:22.000Z",
           "timezoneOffset": "-0300"
         },
         "video": {
@@ -12434,7 +12434,7 @@
             "200.160.0.8"
           ],
           "serveNtp": false,
-          "currentDateAndTime": "2026-06-08T12:42:05.000Z",
+          "currentDateAndTime": "2026-06-09T18:59:22.000Z",
           "timezoneOffset": "-0300"
         },
         "video": {
@@ -13056,7 +13056,7 @@
             "time.google.com"
           ],
           "serveNtp": false,
-          "currentDateAndTime": "2026-06-08T12:42:11.000Z",
+          "currentDateAndTime": "2026-06-09T18:59:28.000Z",
           "timezoneOffset": "-0300"
         },
         "video": {
@@ -13683,7 +13683,7 @@
             "time.google.com"
           ],
           "serveNtp": false,
-          "currentDateAndTime": "2026-06-08T12:42:11.000Z",
+          "currentDateAndTime": "2026-06-09T18:59:28.000Z",
           "timezoneOffset": "-0300"
         },
         "video": {
@@ -14305,7 +14305,7 @@
             "time.google.com"
           ],
           "serveNtp": false,
-          "currentDateAndTime": "2026-06-08T12:42:10.000Z",
+          "currentDateAndTime": "2026-06-09T18:59:28.000Z",
           "timezoneOffset": "-0300"
         },
         "video": {
@@ -14927,7 +14927,7 @@
             "time.google.com"
           ],
           "serveNtp": false,
-          "currentDateAndTime": "2026-06-08T12:42:11.000Z",
+          "currentDateAndTime": "2026-06-09T18:59:27.000Z",
           "timezoneOffset": "-0300"
         },
         "video": {
@@ -15549,7 +15549,7 @@
             "time.google.com"
           ],
           "serveNtp": false,
-          "currentDateAndTime": "2026-06-08T12:42:28.000Z",
+          "currentDateAndTime": "2026-06-09T18:59:48.000Z",
           "timezoneOffset": "-0300"
         },
         "video": {
@@ -16171,7 +16171,7 @@
             "time.google.com"
           ],
           "serveNtp": false,
-          "currentDateAndTime": "2026-06-08T12:42:36.000Z",
+          "currentDateAndTime": "2026-06-09T19:00:15.000Z",
           "timezoneOffset": "-0300"
         },
         "video": {
@@ -16793,7 +16793,7 @@
             "time.google.com"
           ],
           "serveNtp": false,
-          "currentDateAndTime": "2026-06-08T12:42:36.000Z",
+          "currentDateAndTime": "2026-06-09T18:59:55.000Z",
           "timezoneOffset": "-0300"
         },
         "video": {
@@ -17415,7 +17415,7 @@
             "time.google.com"
           ],
           "serveNtp": false,
-          "currentDateAndTime": "2026-06-08T12:42:36.000Z",
+          "currentDateAndTime": "2026-06-09T18:59:55.000Z",
           "timezoneOffset": "-0300"
         },
         "video": {
@@ -18037,7 +18037,7 @@
             "time.google.com"
           ],
           "serveNtp": false,
-          "currentDateAndTime": "2026-06-08T12:42:36.000Z",
+          "currentDateAndTime": "2026-06-09T18:59:56.000Z",
           "timezoneOffset": "-0300"
         },
         "video": {
@@ -18659,7 +18659,7 @@
             "time.google.com"
           ],
           "serveNtp": false,
-          "currentDateAndTime": "2026-06-08T12:42:36.000Z",
+          "currentDateAndTime": "2026-06-09T18:59:55.000Z",
           "timezoneOffset": "-0300"
         },
         "video": {
@@ -19281,7 +19281,7 @@
             "time.google.com"
           ],
           "serveNtp": false,
-          "currentDateAndTime": "2026-06-08T12:42:40.000Z",
+          "currentDateAndTime": "2026-06-09T19:00:22.000Z",
           "timezoneOffset": "-0300"
         },
         "video": {
@@ -19915,7 +19915,7 @@
             "200.160.0.8"
           ],
           "serveNtp": false,
-          "currentDateAndTime": "2026-06-08T12:42:41.000Z",
+          "currentDateAndTime": "2026-06-09T19:00:24.000Z",
           "timezoneOffset": "-0300"
         },
         "video": {
@@ -20537,7 +20537,7 @@
             "time.google.com"
           ],
           "serveNtp": false,
-          "currentDateAndTime": "2026-06-08T12:42:42.000Z",
+          "currentDateAndTime": "2026-06-09T19:00:24.000Z",
           "timezoneOffset": "-0300"
         },
         "video": {
@@ -21166,7 +21166,7 @@
             "time.google.com"
           ],
           "serveNtp": false,
-          "currentDateAndTime": "2026-06-08T12:42:46.000Z",
+          "currentDateAndTime": "2026-06-09T19:00:29.000Z",
           "timezoneOffset": "-0300"
         },
         "video": {
@@ -21217,7 +21217,7 @@
         },
         "profiles": [
           {
-            "active": false,
+            "active": true,
             "advanced": {
               "exposition": {
                 "updateFactor": 0.0990000069141388,
@@ -21326,18 +21326,18 @@
             },
             "transitions": {
               "lower": {
-                "endTime": "18:00:00",
+                "endTime": "00:00:00",
                 "holdTime": 60000,
-                "level": 35,
+                "level": 10,
                 "profile": 27839,
-                "startTime": "06:00:00"
+                "startTime": "00:00:00"
               },
               "upper": {
-                "endTime": "17:58:00",
+                "endTime": "00:00:00",
                 "holdTime": 60000,
                 "level": 35,
                 "profile": 0,
-                "startTime": "06:00:00"
+                "startTime": "00:00:00"
               }
             },
             "trigger": {
@@ -21368,7 +21368,7 @@
             }
           },
           {
-            "active": true,
+            "active": false,
             "advanced": {
               "exposition": {
                 "updateFactor": 0.0990000069141388,
@@ -21508,18 +21508,18 @@
             },
             "transitions": {
               "lower": {
-                "endTime": "06:00:00",
+                "endTime": "00:00:00",
                 "holdTime": 60000,
-                "level": 35,
+                "level": 10,
                 "profile": 27839,
-                "startTime": "18:00:00"
+                "startTime": "00:00:00"
               },
               "upper": {
-                "endTime": "06:00:00",
+                "endTime": "00:00:00",
                 "holdTime": 60000,
                 "level": 35,
                 "profile": 0,
-                "startTime": "18:00:00"
+                "startTime": "00:00:00"
               }
             },
             "trigger": {
@@ -21707,7 +21707,7 @@
             "identifier": "1",
             "isInput": false,
             "isOn": false,
-            "isReserved": false,
+            "isReserved": true,
             "port": 1,
             "protection": "itslux",
             "type": "flash"
@@ -21733,7 +21733,7 @@
             "identifier": "2",
             "isInput": false,
             "isOn": false,
-            "isReserved": false,
+            "isReserved": true,
             "port": 3,
             "protection": "itslux",
             "type": "flash"
@@ -21788,7 +21788,7 @@
             "time.google.com"
           ],
           "serveNtp": false,
-          "currentDateAndTime": "2026-06-08T12:42:46.000Z",
+          "currentDateAndTime": "2026-06-09T19:00:28.000Z",
           "timezoneOffset": "-0300"
         },
         "video": {
@@ -22410,7 +22410,7 @@
             "time.google.com"
           ],
           "serveNtp": false,
-          "currentDateAndTime": "2026-06-08T12:42:47.000Z",
+          "currentDateAndTime": "2026-06-09T19:00:30.000Z",
           "timezoneOffset": "-0300"
         },
         "video": {
@@ -22461,7 +22461,7 @@
         },
         "profiles": [
           {
-            "active": false,
+            "active": true,
             "advanced": {
               "exposition": {
                 "updateFactor": 0.0990000069141388,
@@ -22574,14 +22574,14 @@
                 "holdTime": 60000,
                 "level": 10,
                 "profile": 27839,
-                "startTime": "18:00:00"
+                "startTime": "00:00:00"
               },
               "upper": {
                 "endTime": "00:00:00",
                 "holdTime": 60000,
                 "level": 35,
                 "profile": 0,
-                "startTime": "06:00:00"
+                "startTime": "00:00:00"
               }
             },
             "trigger": {
@@ -22612,7 +22612,7 @@
             }
           },
           {
-            "active": true,
+            "active": false,
             "advanced": {
               "exposition": {
                 "updateFactor": 0.0990000069141388,
@@ -22756,14 +22756,14 @@
                 "holdTime": 60000,
                 "level": 10,
                 "profile": 27839,
-                "startTime": "06:00:00"
+                "startTime": "00:00:00"
               },
               "upper": {
                 "endTime": "00:00:00",
                 "holdTime": 60000,
                 "level": 35,
                 "profile": 0,
-                "startTime": "18:00:00"
+                "startTime": "00:00:00"
               }
             },
             "trigger": {
@@ -22913,7 +22913,7 @@
           "scenarioOverlayColor": "blackOverWhite",
           "scenarioOverlayPos": "overlaidBottom",
           "snapshotCrop": {
-            "enable": false,
+            "enable": true,
             "mode": "static",
             "x0": 8,
             "x1": 1343,
@@ -23032,7 +23032,7 @@
             "time.google.com"
           ],
           "serveNtp": false,
-          "currentDateAndTime": "2026-06-08T12:42:47.000Z",
+          "currentDateAndTime": "2026-06-09T19:00:29.000Z",
           "timezoneOffset": "-0300"
         },
         "video": {
@@ -23083,7 +23083,7 @@
         },
         "profiles": [
           {
-            "active": false,
+            "active": true,
             "advanced": {
               "exposition": {
                 "updateFactor": 0.0990000069141388,
@@ -23192,7 +23192,7 @@
             },
             "transitions": {
               "lower": {
-                "endTime": "18:00:00",
+                "endTime": "00:00:00",
                 "holdTime": 60000,
                 "level": 10,
                 "profile": 27839,
@@ -23203,7 +23203,7 @@
                 "holdTime": 60000,
                 "level": 35,
                 "profile": 0,
-                "startTime": "06:00:00"
+                "startTime": "00:00:00"
               }
             },
             "trigger": {
@@ -23234,7 +23234,7 @@
             }
           },
           {
-            "active": true,
+            "active": false,
             "advanced": {
               "exposition": {
                 "updateFactor": 0.0990000069141388,
@@ -23374,7 +23374,7 @@
             },
             "transitions": {
               "lower": {
-                "endTime": "06:00:00",
+                "endTime": "00:00:00",
                 "holdTime": 60000,
                 "level": 10,
                 "profile": 27839,
@@ -23385,7 +23385,7 @@
                 "holdTime": 60000,
                 "level": 35,
                 "profile": 0,
-                "startTime": "18:01:00"
+                "startTime": "00:00:00"
               }
             },
             "trigger": {
@@ -23654,7 +23654,7 @@
             "time.google.com"
           ],
           "serveNtp": false,
-          "currentDateAndTime": "2026-06-08T12:42:47.000Z",
+          "currentDateAndTime": "2026-06-09T19:00:29.000Z",
           "timezoneOffset": "-0300"
         },
         "video": {
@@ -24276,7 +24276,7 @@
             "time.google.com"
           ],
           "serveNtp": false,
-          "currentDateAndTime": "2026-06-08T12:42:52.000Z",
+          "currentDateAndTime": "2026-06-09T19:00:35.000Z",
           "timezoneOffset": "-0300"
         },
         "video": {
@@ -24898,7 +24898,7 @@
             "time.google.com"
           ],
           "serveNtp": false,
-          "currentDateAndTime": "2026-06-08T12:42:52.000Z",
+          "currentDateAndTime": "2026-06-09T19:00:35.000Z",
           "timezoneOffset": "-0300"
         },
         "video": {
@@ -25520,7 +25520,7 @@
             "time.google.com"
           ],
           "serveNtp": false,
-          "currentDateAndTime": "2026-06-08T12:42:51.000Z",
+          "currentDateAndTime": "2026-06-09T19:00:34.000Z",
           "timezoneOffset": "-0300"
         },
         "video": {
@@ -26142,7 +26142,7 @@
             "time.google.com"
           ],
           "serveNtp": false,
-          "currentDateAndTime": "2026-06-08T12:42:51.000Z",
+          "currentDateAndTime": "2026-06-09T19:00:34.000Z",
           "timezoneOffset": "-0300"
         },
         "video": {
@@ -26764,7 +26764,7 @@
             "time.google.com"
           ],
           "serveNtp": false,
-          "currentDateAndTime": "2026-06-08T12:42:52.000Z",
+          "currentDateAndTime": "2026-06-09T19:00:35.000Z",
           "timezoneOffset": "-0300"
         },
         "video": {
@@ -27386,7 +27386,7 @@
             "time.google.com"
           ],
           "serveNtp": false,
-          "currentDateAndTime": "2026-06-08T12:42:57.000Z",
+          "currentDateAndTime": "2026-06-09T19:00:41.000Z",
           "timezoneOffset": "-0300"
         },
         "video": {
@@ -28008,7 +28008,7 @@
             "time.google.com"
           ],
           "serveNtp": false,
-          "currentDateAndTime": "2026-06-08T12:42:56.000Z",
+          "currentDateAndTime": "2026-06-09T19:00:40.000Z",
           "timezoneOffset": "-0300"
         },
         "video": {
@@ -28630,7 +28630,7 @@
             "time.google.com"
           ],
           "serveNtp": false,
-          "currentDateAndTime": "2026-06-08T12:42:56.000Z",
+          "currentDateAndTime": "2026-06-09T19:00:40.000Z",
           "timezoneOffset": "-0300"
         },
         "video": {
@@ -28668,15 +28668,1245 @@
       "nome": "GOEC6O048 - Faixa 1",
       "uuid": "43d7e92f-482e-4822-bf76-ef2c5cc4dfd9",
       "ip": "179.249.70.250",
-      "raw": null,
-      "error": "AUTH_FAILED"
+      "raw": {
+        "varco": {
+          "remoteAccess": {
+            "varco": {
+              "enabled": true,
+              "edgeServer": "edge.varco.io",
+              "provisionKey": "yk-pzGzXLGmz6-iO3GhdR7hinksDN7aek-kjQ4WYl_c=",
+              "deviceName": "GOEC6O048 - FAIXA 1"
+            }
+          }
+        },
+        "profiles": [
+          {
+            "active": true,
+            "advanced": {
+              "exposition": {
+                "updateFactor": 0.0990000069141388,
+                "updateRate": 100
+              },
+              "iris": {
+                "updateRate": 1000
+              },
+              "whitebalance": {
+                "updateRate": 500
+              }
+            },
+            "color": {
+              "blacklevel": 0,
+              "brightness": 0,
+              "contrast": 0,
+              "gamma": 130,
+              "saturation": 0
+            },
+            "description": "",
+            "exposure": {
+              "gain": {
+                "automatic": true,
+                "fixedValue": 1,
+                "maxValue": 1500,
+                "minValue": 1
+              },
+              "highGainMode": false,
+              "iris": {
+                "automatic": true,
+                "fixedValue": 1000
+              },
+              "level": {
+                "roi": {
+                  "enabled": true,
+                  "x0": 168,
+                  "x1": 861,
+                  "x2": 509,
+                  "x3": 1919,
+                  "y0": 149,
+                  "y1": 80,
+                  "y2": 1165,
+                  "y3": 968
+                },
+                "targetValue": 38
+              },
+              "shutter": {
+                "automatic": true,
+                "fixedValue": 99,
+                "maxValue": 500,
+                "minValue": 48
+              }
+            },
+            "filter": {
+              "sharpnessLevel": 30,
+              "timedomainLevel": 0
+            },
+            "hdr": {
+              "enable": false
+            },
+            "id": 0,
+            "lens": {
+              "exchanger": true,
+              "focus": 872,
+              "zfMirrorProfile0": true,
+              "zoom": 2761
+            },
+            "movFilter": {
+              "enabled": false,
+              "onlyCheck": false,
+              "roi": {
+                "enabled": true,
+                "x0": 0,
+                "x1": 798,
+                "x2": 1903,
+                "x3": 403,
+                "y0": 0,
+                "y1": 22,
+                "y2": 904,
+                "y3": 1195
+              },
+              "threshold": 5
+            },
+            "multipleExposures": {
+              "enabled": true,
+              "settings": [
+                {
+                  "flash": {
+                    "power": []
+                  },
+                  "gain": {
+                    "percentageOfCurrent": true,
+                    "value": 100
+                  },
+                  "shutter": {
+                    "percentageOfCurrent": true,
+                    "value": 100
+                  }
+                }
+              ]
+            },
+            "name": "Diurno",
+            "overlay": {
+              "enable": false,
+              "text": "SEQUENCIAL: {rid} DATA PASSAGEM: {day}/{month}/{year} HORA PASSAGEM: {hour}:{minute}:{second}:{msec} PLACA: {plates} CODIGO EQUIPAMENTO: GOEC6O009 MODELO OCR: AX-OCR LOCAL: Pontalina-GO NOME DA VIA: GO 215, Km 20 SENTIDO: Entroncamento GO319-GO/Pontalina-GO FAIXA: 01"
+            },
+            "transitions": {
+              "lower": {
+                "endTime": "00:00:00",
+                "holdTime": 60000,
+                "level": 10,
+                "profile": 27839,
+                "startTime": "00:00:00"
+              },
+              "upper": {
+                "endTime": "00:00:00",
+                "holdTime": 60000,
+                "level": 35,
+                "profile": 0,
+                "startTime": "00:00:00"
+              }
+            },
+            "trigger": {
+              "enabled": true,
+              "event": "constant",
+              "minimumInterval": 100,
+              "port": 2,
+              "roi": {
+                "enabled": false,
+                "x0": 0,
+                "x1": 0,
+                "x2": 0,
+                "x3": 0,
+                "y0": 0,
+                "y1": 0,
+                "y2": 0,
+                "y3": 0
+              },
+              "threshold": 0
+            },
+            "whitebalance": {
+              "automatic": true,
+              "weights": {
+                "blue": 100,
+                "green": 100,
+                "red": 100
+              }
+            }
+          },
+          {
+            "active": false,
+            "advanced": {
+              "exposition": {
+                "updateFactor": 0.0990000069141388,
+                "updateRate": 100
+              },
+              "iris": {
+                "updateRate": 1000
+              },
+              "whitebalance": {
+                "updateRate": 500
+              }
+            },
+            "color": {
+              "blacklevel": 0,
+              "brightness": 0,
+              "contrast": 30,
+              "gamma": 12,
+              "saturation": -100
+            },
+            "description": "",
+            "exposure": {
+              "gain": {
+                "automatic": true,
+                "fixedValue": 2697,
+                "maxValue": 4000,
+                "minValue": 1
+              },
+              "highGainMode": false,
+              "iris": {
+                "automatic": false,
+                "fixedValue": 1000
+              },
+              "level": {
+                "roi": {
+                  "enabled": false,
+                  "x0": 10,
+                  "x1": 840,
+                  "x2": 403,
+                  "x3": 1900,
+                  "y0": 150,
+                  "y1": 28,
+                  "y2": 1179,
+                  "y3": 846
+                },
+                "targetValue": 35
+              },
+              "shutter": {
+                "automatic": true,
+                "fixedValue": 2000,
+                "maxValue": 800,
+                "minValue": 48
+              }
+            },
+            "filter": {
+              "sharpnessLevel": 0,
+              "timedomainLevel": 0
+            },
+            "hdr": {
+              "enable": false
+            },
+            "id": 27839,
+            "lens": {
+              "exchanger": false,
+              "focus": 872,
+              "zfMirrorProfile0": true,
+              "zoom": 2761
+            },
+            "movFilter": {
+              "enabled": false,
+              "onlyCheck": false,
+              "roi": {
+                "enabled": false,
+                "x0": 0,
+                "x1": 1920,
+                "x2": 1920,
+                "x3": 0,
+                "y0": 0,
+                "y1": 0,
+                "y2": 1200,
+                "y3": 1200
+              },
+              "threshold": 5
+            },
+            "multipleExposures": {
+              "enabled": true,
+              "settings": [
+                {
+                  "flash": {
+                    "power": [
+                      {
+                        "out": 1,
+                        "percent": 65
+                      },
+                      {
+                        "out": 3,
+                        "percent": 65
+                      }
+                    ]
+                  },
+                  "gain": {
+                    "percentageOfCurrent": true,
+                    "value": 100
+                  },
+                  "shutter": {
+                    "percentageOfCurrent": true,
+                    "value": 50
+                  }
+                },
+                {
+                  "flash": {
+                    "power": [
+                      {
+                        "out": 1,
+                        "percent": 20
+                      },
+                      {
+                        "out": 3,
+                        "percent": 20
+                      }
+                    ]
+                  },
+                  "gain": {
+                    "percentageOfCurrent": true,
+                    "value": 100
+                  },
+                  "shutter": {
+                    "percentageOfCurrent": true,
+                    "value": 50
+                  }
+                }
+              ]
+            },
+            "name": "Noturno",
+            "overlay": {
+              "enable": false,
+              "text": "SEQUENCIAL: {rid} DATA PASSAGEM: {day}/{month}/{year} HORA PASSAGEM: {hour}:{minute}:{second}:{msec} PLACA: {plates} CODIGO EQUIPAMENTO: GOEC6O009 MODELO OCR: AX-OCR LOCAL: Pontalina-GO NOME DA VIA: GO 215, Km 20 SENTIDO: Entroncamento GO319-GO/Pontalina-GO FAIXA: 01"
+            },
+            "transitions": {
+              "lower": {
+                "endTime": "00:00:00",
+                "holdTime": 60000,
+                "level": 10,
+                "profile": 27839,
+                "startTime": "00:00:00"
+              },
+              "upper": {
+                "endTime": "00:00:00",
+                "holdTime": 60000,
+                "level": 35,
+                "profile": 0,
+                "startTime": "00:00:00"
+              }
+            },
+            "trigger": {
+              "enabled": true,
+              "event": "constant",
+              "minimumInterval": 100,
+              "port": 2,
+              "roi": {
+                "enabled": false,
+                "x0": 0,
+                "x1": 0,
+                "x2": 0,
+                "x3": 0,
+                "y0": 0,
+                "y1": 0,
+                "y2": 0,
+                "y3": 0
+              },
+              "threshold": 0
+            },
+            "whitebalance": {
+              "automatic": false,
+              "weights": {
+                "blue": 100,
+                "green": 100,
+                "red": 100
+              }
+            }
+          }
+        ],
+        "ocr": {
+          "ocr": {
+            "avgCharHeight": 20,
+            "avgPlateAngle": 0,
+            "avgPlateSlant": 0,
+            "classifierExpansion": 10,
+            "countryCode": 76,
+            "enabled": true,
+            "licensed": true,
+            "lowProbChar": 45,
+            "maxCharHeight": 60,
+            "maxLowProbChars": 0,
+            "maxPlates": 2,
+            "minCharHeight": 9,
+            "minProbPerChar": 85,
+            "processingMode": 3,
+            "processingQueue": 4,
+            "processingThreads": 4,
+            "processingTimeout": 1000,
+            "roi": {
+              "enabled": true,
+              "x0": 346,
+              "x1": 1184,
+              "x2": 528,
+              "x3": 1429,
+              "y0": 715,
+              "y1": 461,
+              "y2": 900,
+              "y3": 579
+            },
+            "useClassifierResult": false,
+            "vehicleType": 3
+          }
+        },
+        "classifier": {
+          "classifier": {
+            "enableCharacteristics": false,
+            "enableSpeed": false,
+            "enabled": true,
+            "firstOnly": false,
+            "licensed": true,
+            "minProbability": 20,
+            "modelType": 0,
+            "processingQueue": 1,
+            "processingThreads": 1,
+            "sceneType": 0,
+            "speedCalibrationRegion1": {
+              "p0top1sz": 1,
+              "x0": 10,
+              "x1": 10,
+              "x2": 10,
+              "y0": 10,
+              "y1": 10,
+              "y2": 10
+            },
+            "speedCalibrationRegion2": {
+              "p0top1sz": 1,
+              "x0": 10,
+              "x1": 10,
+              "x2": 10,
+              "y0": 10,
+              "y1": 10,
+              "y2": 10
+            },
+            "triggerEnabled": false,
+            "triggerRegion0": {
+              "dir": "disabled",
+              "x0": 0,
+              "x1": 0,
+              "y0": 0,
+              "y1": 0
+            },
+            "triggerRegion1": {
+              "dir": "disabled",
+              "x0": 0,
+              "x1": 0,
+              "y0": 0,
+              "y1": 0
+            },
+            "triggerRegion2": {
+              "dir": "disabled",
+              "x0": 0,
+              "x1": 0,
+              "y0": 0,
+              "y1": 0
+            },
+            "triggerRegion3": {
+              "dir": "disabled",
+              "x0": 0,
+              "x1": 0,
+              "y0": 0,
+              "y1": 0
+            }
+          }
+        },
+        "misc": {
+          "cameraOrientation": false,
+          "irisHint": "dcIris",
+          "jpegQuality": 85,
+          "legacyTsyncGpio": -1,
+          "scenario1Crop": {
+            "x0": 398,
+            "x1": 1677,
+            "y0": 171,
+            "y1": 890
+          },
+          "scenario1Overlay": "",
+          "scenario1OverlayTextSize": 24,
+          "scenario2Crop": {
+            "x0": 0,
+            "x1": 1919,
+            "y0": 0,
+            "y1": 1199
+          },
+          "scenario2Overlay": "",
+          "scenario2OverlayTextSize": 32,
+          "scenarioOverlayColor": "blackOverWhite",
+          "scenarioOverlayPos": "overlaidBottom",
+          "snapshotCrop": {
+            "enable": false,
+            "mode": "static",
+            "x0": 8,
+            "x1": 1343,
+            "y0": 82,
+            "y1": 901
+          }
+        },
+        "ftp": {
+          "ftp": {
+            "address": "127.0.0.1",
+            "anonymous": false,
+            "enable": false,
+            "filename": "PTX_{year,digits:4:4:0}{month,digits:2:2:0}{day,digits:2:2:0}_{hour,digits:2:2:0}{minute,digits:2:2:0}{second,digits:2:2:0}_{msec,digits:3:3:0}_{plates,digits:7:7:0}_{framePos,digits:2:2:0}.jpg",
+            "local": {
+              "bufferSizeKb": 102400,
+              "ttl": 7200
+            },
+            "password": "",
+            "port": 21,
+            "protocol": "ftp",
+            "quality": 85,
+            "transfer": {
+              "pollInterval": 300,
+              "timeout": 60000
+            },
+            "username": ""
+          }
+        },
+        "ioPorts": [
+          {
+            "canFlash": true,
+            "canTrigger": false,
+            "earlyUs": 7,
+            "group": "out",
+            "identifier": "1",
+            "isInput": false,
+            "isOn": false,
+            "isReserved": true,
+            "port": 1,
+            "protection": "itslux",
+            "type": "flash"
+          },
+          {
+            "canFlash": false,
+            "canTrigger": true,
+            "earlyUs": 0,
+            "group": "in",
+            "identifier": "1",
+            "isInput": true,
+            "isOn": false,
+            "isReserved": false,
+            "port": 2,
+            "protection": "none",
+            "type": "general"
+          },
+          {
+            "canFlash": true,
+            "canTrigger": false,
+            "earlyUs": 7,
+            "group": "out",
+            "identifier": "2",
+            "isInput": false,
+            "isOn": false,
+            "isReserved": true,
+            "port": 3,
+            "protection": "itslux",
+            "type": "flash"
+          },
+          {
+            "canFlash": false,
+            "canTrigger": true,
+            "earlyUs": 0,
+            "group": "in",
+            "identifier": "2",
+            "isInput": true,
+            "isOn": false,
+            "isReserved": false,
+            "port": 4,
+            "protection": "none",
+            "type": "general"
+          }
+        ],
+        "snmp": {
+          "enabled": false,
+          "v2": {
+            "enabled": false,
+            "community": ""
+          },
+          "v3": {
+            "enabled": false,
+            "securityName": "",
+            "authenticationPassphrase": "",
+            "privacyPassphrase": ""
+          }
+        },
+        "reboot": {
+          "scheduled": {
+            "enabled": false,
+            "weekdays": [
+              0
+            ],
+            "hour": 0
+          },
+          "periodic": {
+            "enabled": false,
+            "hours": 24
+          }
+        },
+        "dateTime": {
+          "timezone": [
+            "America",
+            "Sao_Paulo"
+          ],
+          "useNTPServer": true,
+          "ntpServerAddress": [
+            "time.google.com"
+          ],
+          "serveNtp": false,
+          "currentDateAndTime": "2026-06-09T19:00:41.000Z",
+          "timezoneOffset": "-0300"
+        },
+        "video": {
+          "mjpeg": {
+            "available": true,
+            "main": {
+              "available": true,
+              "enabled": true,
+              "framerate": 12,
+              "quality": 85,
+              "useTriggerFrames": true
+            }
+          },
+          "rtsp": {
+            "available": true,
+            "enable": false,
+            "port": 554,
+            "rtpPort": 5004,
+            "rtcpPort": 5005,
+            "httpEnabled": false,
+            "httpPort": 8555,
+            "transport": "tcp",
+            "url": "/streaming/mjpeg",
+            "authentication": false,
+            "username": "",
+            "password": ""
+          }
+        },
+        "firmware": {
+          "version": "v1.7.8"
+        }
+      }
     },
     {
       "nome": "GOEC6O048 - Faixa 2",
       "uuid": "d23fe240-246f-4601-8987-d864ecb24d22",
       "ip": "179.249.70.250",
-      "raw": null,
-      "error": "AUTH_FAILED"
+      "raw": {
+        "varco": {
+          "remoteAccess": {
+            "varco": {
+              "enabled": true,
+              "edgeServer": "edge.varco.io",
+              "provisionKey": "yk-pzGzXLGmz6-iO3GhdR7hinksDN7aek-kjQ4WYl_c=",
+              "deviceName": "GOEC6O048 - FAIXA 2"
+            }
+          }
+        },
+        "profiles": [
+          {
+            "active": true,
+            "advanced": {
+              "exposition": {
+                "updateFactor": 0.0990000069141388,
+                "updateRate": 100
+              },
+              "iris": {
+                "updateRate": 1000
+              },
+              "whitebalance": {
+                "updateRate": 500
+              }
+            },
+            "color": {
+              "blacklevel": 0,
+              "brightness": 0,
+              "contrast": 0,
+              "gamma": 130,
+              "saturation": 0
+            },
+            "description": "",
+            "exposure": {
+              "gain": {
+                "automatic": true,
+                "fixedValue": 1,
+                "maxValue": 1000,
+                "minValue": 1
+              },
+              "highGainMode": false,
+              "iris": {
+                "automatic": true,
+                "fixedValue": 1000
+              },
+              "level": {
+                "roi": {
+                  "enabled": true,
+                  "x0": 168,
+                  "x1": 861,
+                  "x2": 509,
+                  "x3": 1919,
+                  "y0": 149,
+                  "y1": 80,
+                  "y2": 1165,
+                  "y3": 968
+                },
+                "targetValue": 35
+              },
+              "shutter": {
+                "automatic": true,
+                "fixedValue": 99,
+                "maxValue": 1500,
+                "minValue": 48
+              }
+            },
+            "filter": {
+              "sharpnessLevel": 40,
+              "timedomainLevel": 0
+            },
+            "hdr": {
+              "enable": false
+            },
+            "id": 0,
+            "lens": {
+              "exchanger": true,
+              "focus": 808,
+              "zfMirrorProfile0": true,
+              "zoom": 2703
+            },
+            "movFilter": {
+              "enabled": false,
+              "onlyCheck": false,
+              "roi": {
+                "enabled": true,
+                "x0": 0,
+                "x1": 798,
+                "x2": 1903,
+                "x3": 403,
+                "y0": 0,
+                "y1": 22,
+                "y2": 904,
+                "y3": 1195
+              },
+              "threshold": 5
+            },
+            "multipleExposures": {
+              "enabled": true,
+              "settings": [
+                {
+                  "flash": {
+                    "power": []
+                  },
+                  "gain": {
+                    "percentageOfCurrent": true,
+                    "value": 100
+                  },
+                  "shutter": {
+                    "percentageOfCurrent": true,
+                    "value": 100
+                  }
+                }
+              ]
+            },
+            "name": "Diurno",
+            "overlay": {
+              "enable": false,
+              "text": "SEQUENCIAL: {rid} DATA PASSAGEM: {day}/{month}/{year} HORA PASSAGEM: {hour}:{minute}:{second}:{msec} PLACA: {plates} CODIGO EQUIPAMENTO: [CODIGOEQUIPAMENTO] MODELO OCR: AX-OCR LOCAL: [LOCAL] NOME DA VIA: [VIA] SENTIDO: [SENTIDO] FAIXA: [NUMERO]"
+            },
+            "transitions": {
+              "lower": {
+                "endTime": "00:00:00",
+                "holdTime": 60000,
+                "level": 10,
+                "profile": 27839,
+                "startTime": "00:00:00"
+              },
+              "upper": {
+                "endTime": "00:00:00",
+                "holdTime": 60000,
+                "level": 35,
+                "profile": 0,
+                "startTime": "00:00:00"
+              }
+            },
+            "trigger": {
+              "enabled": true,
+              "event": "constant",
+              "minimumInterval": 100,
+              "port": 2,
+              "roi": {
+                "enabled": false,
+                "x0": 0,
+                "x1": 0,
+                "x2": 0,
+                "x3": 0,
+                "y0": 0,
+                "y1": 0,
+                "y2": 0,
+                "y3": 0
+              },
+              "threshold": 0
+            },
+            "whitebalance": {
+              "automatic": true,
+              "weights": {
+                "blue": 100,
+                "green": 100,
+                "red": 100
+              }
+            }
+          },
+          {
+            "active": false,
+            "advanced": {
+              "exposition": {
+                "updateFactor": 0.0990000069141388,
+                "updateRate": 100
+              },
+              "iris": {
+                "updateRate": 1000
+              },
+              "whitebalance": {
+                "updateRate": 500
+              }
+            },
+            "color": {
+              "blacklevel": 0,
+              "brightness": 0,
+              "contrast": 30,
+              "gamma": 12,
+              "saturation": -100
+            },
+            "description": "",
+            "exposure": {
+              "gain": {
+                "automatic": true,
+                "fixedValue": 2697,
+                "maxValue": 4000,
+                "minValue": 1
+              },
+              "highGainMode": false,
+              "iris": {
+                "automatic": false,
+                "fixedValue": 1000
+              },
+              "level": {
+                "roi": {
+                  "enabled": false,
+                  "x0": 10,
+                  "x1": 840,
+                  "x2": 403,
+                  "x3": 1900,
+                  "y0": 150,
+                  "y1": 28,
+                  "y2": 1179,
+                  "y3": 846
+                },
+                "targetValue": 35
+              },
+              "shutter": {
+                "automatic": true,
+                "fixedValue": 2000,
+                "maxValue": 800,
+                "minValue": 48
+              }
+            },
+            "filter": {
+              "sharpnessLevel": 0,
+              "timedomainLevel": 0
+            },
+            "hdr": {
+              "enable": false
+            },
+            "id": 27839,
+            "lens": {
+              "exchanger": false,
+              "focus": 808,
+              "zfMirrorProfile0": true,
+              "zoom": 2703
+            },
+            "movFilter": {
+              "enabled": false,
+              "onlyCheck": false,
+              "roi": {
+                "enabled": false,
+                "x0": 0,
+                "x1": 1920,
+                "x2": 1920,
+                "x3": 0,
+                "y0": 0,
+                "y1": 0,
+                "y2": 1200,
+                "y3": 1200
+              },
+              "threshold": 5
+            },
+            "multipleExposures": {
+              "enabled": true,
+              "settings": [
+                {
+                  "flash": {
+                    "power": [
+                      {
+                        "out": 1,
+                        "percent": 100
+                      },
+                      {
+                        "out": 3,
+                        "percent": 100
+                      }
+                    ]
+                  },
+                  "gain": {
+                    "percentageOfCurrent": true,
+                    "value": 100
+                  },
+                  "shutter": {
+                    "percentageOfCurrent": true,
+                    "value": 100
+                  }
+                },
+                {
+                  "flash": {
+                    "power": [
+                      {
+                        "out": 1,
+                        "percent": 7
+                      },
+                      {
+                        "out": 3,
+                        "percent": 7
+                      }
+                    ]
+                  },
+                  "gain": {
+                    "percentageOfCurrent": true,
+                    "value": 100
+                  },
+                  "shutter": {
+                    "percentageOfCurrent": true,
+                    "value": 100
+                  }
+                }
+              ]
+            },
+            "name": "Noturno",
+            "overlay": {
+              "enable": false,
+              "text": "SEQUENCIAL: {rid} DATA PASSAGEM: {day}/{month}/{year} HORA PASSAGEM: {hour}:{minute}:{second}:{msec} PLACA: {plates} CODIGO EQUIPAMENTO: GOEC6O032 MODELO OCR: AX-OCR LOCAL: Planaltina-GO NOME DA VIA: GO 118 KM 6 SENTIDO: Planaltina-GO/Divisa-DF FAIXA: 01"
+            },
+            "transitions": {
+              "lower": {
+                "endTime": "00:00:00",
+                "holdTime": 60000,
+                "level": 10,
+                "profile": 27839,
+                "startTime": "00:00:00"
+              },
+              "upper": {
+                "endTime": "00:00:00",
+                "holdTime": 60000,
+                "level": 35,
+                "profile": 0,
+                "startTime": "00:00:00"
+              }
+            },
+            "trigger": {
+              "enabled": true,
+              "event": "constant",
+              "minimumInterval": 100,
+              "port": 2,
+              "roi": {
+                "enabled": false,
+                "x0": 0,
+                "x1": 0,
+                "x2": 0,
+                "x3": 0,
+                "y0": 0,
+                "y1": 0,
+                "y2": 0,
+                "y3": 0
+              },
+              "threshold": 0
+            },
+            "whitebalance": {
+              "automatic": false,
+              "weights": {
+                "blue": 100,
+                "green": 100,
+                "red": 100
+              }
+            }
+          }
+        ],
+        "ocr": {
+          "ocr": {
+            "avgCharHeight": 20,
+            "avgPlateAngle": 0,
+            "avgPlateSlant": 0,
+            "classifierExpansion": 10,
+            "countryCode": 76,
+            "enabled": true,
+            "licensed": true,
+            "lowProbChar": 45,
+            "maxCharHeight": 60,
+            "maxLowProbChars": 0,
+            "maxPlates": 2,
+            "minCharHeight": 9,
+            "minProbPerChar": 85,
+            "processingMode": 3,
+            "processingQueue": 4,
+            "processingThreads": 4,
+            "processingTimeout": 1000,
+            "roi": {
+              "enabled": true,
+              "x0": 434,
+              "x1": 1269,
+              "x2": 541,
+              "x3": 1457,
+              "y0": 559,
+              "y1": 291,
+              "y2": 676,
+              "y3": 400
+            },
+            "useClassifierResult": false,
+            "vehicleType": 3
+          }
+        },
+        "classifier": {
+          "classifier": {
+            "enableCharacteristics": false,
+            "enableSpeed": false,
+            "enabled": true,
+            "firstOnly": false,
+            "licensed": true,
+            "minProbability": 20,
+            "modelType": 0,
+            "processingQueue": 1,
+            "processingThreads": 1,
+            "sceneType": 0,
+            "speedCalibrationRegion1": {
+              "p0top1sz": 1,
+              "x0": 10,
+              "x1": 10,
+              "x2": 10,
+              "y0": 10,
+              "y1": 10,
+              "y2": 10
+            },
+            "speedCalibrationRegion2": {
+              "p0top1sz": 1,
+              "x0": 10,
+              "x1": 10,
+              "x2": 10,
+              "y0": 10,
+              "y1": 10,
+              "y2": 10
+            },
+            "triggerEnabled": false,
+            "triggerRegion0": {
+              "dir": "disabled",
+              "x0": 0,
+              "x1": 0,
+              "y0": 0,
+              "y1": 0
+            },
+            "triggerRegion1": {
+              "dir": "disabled",
+              "x0": 0,
+              "x1": 0,
+              "y0": 0,
+              "y1": 0
+            },
+            "triggerRegion2": {
+              "dir": "disabled",
+              "x0": 0,
+              "x1": 0,
+              "y0": 0,
+              "y1": 0
+            },
+            "triggerRegion3": {
+              "dir": "disabled",
+              "x0": 0,
+              "x1": 0,
+              "y0": 0,
+              "y1": 0
+            }
+          }
+        },
+        "misc": {
+          "cameraOrientation": false,
+          "irisHint": "dcIris",
+          "jpegQuality": 85,
+          "legacyTsyncGpio": -1,
+          "scenario1Crop": {
+            "x0": 398,
+            "x1": 1677,
+            "y0": 171,
+            "y1": 890
+          },
+          "scenario1Overlay": "",
+          "scenario1OverlayTextSize": 24,
+          "scenario2Crop": {
+            "x0": 0,
+            "x1": 1919,
+            "y0": 0,
+            "y1": 1199
+          },
+          "scenario2Overlay": "",
+          "scenario2OverlayTextSize": 32,
+          "scenarioOverlayColor": "blackOverWhite",
+          "scenarioOverlayPos": "overlaidBottom",
+          "snapshotCrop": {
+            "enable": false,
+            "mode": "static",
+            "x0": 40,
+            "x1": 1403,
+            "y0": 280,
+            "y1": 1099
+          }
+        },
+        "ftp": {
+          "ftp": {
+            "address": "127.0.0.1",
+            "anonymous": false,
+            "enable": false,
+            "filename": "PTX_{year,digits:4:4:0}{month,digits:2:2:0}{day,digits:2:2:0}_{hour,digits:2:2:0}{minute,digits:2:2:0}{second,digits:2:2:0}_{msec,digits:3:3:0}_{plates,digits:7:7:0}_{framePos,digits:2:2:0}.jpg",
+            "local": {
+              "bufferSizeKb": 102400,
+              "ttl": 7200
+            },
+            "password": "",
+            "port": 21,
+            "protocol": "ftp",
+            "quality": 85,
+            "transfer": {
+              "pollInterval": 300,
+              "timeout": 60000
+            },
+            "username": ""
+          }
+        },
+        "ioPorts": [
+          {
+            "canFlash": true,
+            "canTrigger": false,
+            "earlyUs": 7,
+            "group": "out",
+            "identifier": "1",
+            "isInput": false,
+            "isOn": false,
+            "isReserved": true,
+            "port": 1,
+            "protection": "itslux",
+            "type": "flash"
+          },
+          {
+            "canFlash": false,
+            "canTrigger": true,
+            "earlyUs": 0,
+            "group": "in",
+            "identifier": "1",
+            "isInput": true,
+            "isOn": false,
+            "isReserved": false,
+            "port": 2,
+            "protection": "none",
+            "type": "general"
+          },
+          {
+            "canFlash": true,
+            "canTrigger": false,
+            "earlyUs": 7,
+            "group": "out",
+            "identifier": "2",
+            "isInput": false,
+            "isOn": false,
+            "isReserved": true,
+            "port": 3,
+            "protection": "itslux",
+            "type": "flash"
+          },
+          {
+            "canFlash": false,
+            "canTrigger": true,
+            "earlyUs": 0,
+            "group": "in",
+            "identifier": "2",
+            "isInput": true,
+            "isOn": false,
+            "isReserved": false,
+            "port": 4,
+            "protection": "none",
+            "type": "general"
+          }
+        ],
+        "snmp": {
+          "enabled": false,
+          "v2": {
+            "enabled": false,
+            "community": ""
+          },
+          "v3": {
+            "enabled": false,
+            "securityName": "",
+            "authenticationPassphrase": "",
+            "privacyPassphrase": ""
+          }
+        },
+        "reboot": {
+          "scheduled": {
+            "enabled": false,
+            "weekdays": [
+              0
+            ],
+            "hour": 0
+          },
+          "periodic": {
+            "enabled": false,
+            "hours": 24
+          }
+        },
+        "dateTime": {
+          "timezone": [
+            "America",
+            "Sao_Paulo"
+          ],
+          "useNTPServer": true,
+          "ntpServerAddress": [
+            "time.google.com"
+          ],
+          "serveNtp": false,
+          "currentDateAndTime": "2026-06-09T19:00:41.000Z",
+          "timezoneOffset": "-0300"
+        },
+        "video": {
+          "mjpeg": {
+            "available": true,
+            "main": {
+              "available": true,
+              "enabled": true,
+              "framerate": 12,
+              "quality": 85,
+              "useTriggerFrames": true
+            }
+          },
+          "rtsp": {
+            "available": true,
+            "enable": false,
+            "port": 554,
+            "rtpPort": 5004,
+            "rtcpPort": 5005,
+            "httpEnabled": false,
+            "httpPort": 8555,
+            "transport": "tcp",
+            "url": "/streaming/mjpeg",
+            "authentication": false,
+            "username": "",
+            "password": ""
+          }
+        },
+        "firmware": {
+          "version": "v1.7.8"
+        }
+      }
     },
     {
       "nome": "GOEC6O049 - Faixa 1",
@@ -29280,7 +30510,7 @@
             "time.google.com"
           ],
           "serveNtp": false,
-          "currentDateAndTime": "2026-06-08T12:43:02.000Z",
+          "currentDateAndTime": "2026-06-09T19:00:45.000Z",
           "timezoneOffset": "-0300"
         },
         "video": {
@@ -29902,7 +31132,7 @@
             "time.google.com"
           ],
           "serveNtp": false,
-          "currentDateAndTime": "2026-06-08T12:43:02.000Z",
+          "currentDateAndTime": "2026-06-09T19:00:45.000Z",
           "timezoneOffset": "-0300"
         },
         "video": {
@@ -30538,7 +31768,7 @@
             "time.google.com"
           ],
           "serveNtp": false,
-          "currentDateAndTime": "2026-06-08T12:43:06.000Z",
+          "currentDateAndTime": "2026-06-09T19:00:50.000Z",
           "timezoneOffset": "-0300"
         },
         "video": {
@@ -31160,7 +32390,7 @@
             "time.google.com"
           ],
           "serveNtp": false,
-          "currentDateAndTime": "2026-06-08T12:43:07.000Z",
+          "currentDateAndTime": "2026-06-09T19:00:50.000Z",
           "timezoneOffset": "-0300"
         },
         "video": {
@@ -31782,7 +33012,7 @@
             "time.google.com"
           ],
           "serveNtp": false,
-          "currentDateAndTime": "2026-06-08T12:43:06.000Z",
+          "currentDateAndTime": "2026-06-09T19:00:50.000Z",
           "timezoneOffset": "-0300"
         },
         "video": {
@@ -32404,7 +33634,7 @@
             "time.google.com"
           ],
           "serveNtp": false,
-          "currentDateAndTime": "2026-06-08T12:43:06.000Z",
+          "currentDateAndTime": "2026-06-09T19:00:50.000Z",
           "timezoneOffset": "-0300"
         },
         "video": {
@@ -33053,7 +34283,7 @@
             "time.google.com"
           ],
           "serveNtp": false,
-          "currentDateAndTime": "2026-06-08T12:43:12.000Z",
+          "currentDateAndTime": "2026-06-09T19:00:55.000Z",
           "timezoneOffset": "-0300"
         },
         "video": {
@@ -33675,7 +34905,7 @@
             "time.google.com"
           ],
           "serveNtp": false,
-          "currentDateAndTime": "2026-06-08T12:43:12.000Z",
+          "currentDateAndTime": "2026-06-09T19:00:55.000Z",
           "timezoneOffset": "-0300"
         },
         "video": {
@@ -33726,7 +34956,7 @@
         },
         "profiles": [
           {
-            "active": false,
+            "active": true,
             "advanced": {
               "exposition": {
                 "updateFactor": 0.0990000069141388,
@@ -33835,7 +35065,7 @@
             },
             "transitions": {
               "lower": {
-                "endTime": "18:00:00",
+                "endTime": "00:00:00",
                 "holdTime": 60000,
                 "level": 10,
                 "profile": 27839,
@@ -33846,7 +35076,7 @@
                 "holdTime": 60000,
                 "level": 35,
                 "profile": 0,
-                "startTime": "06:00:00"
+                "startTime": "00:00:00"
               }
             },
             "trigger": {
@@ -33877,7 +35107,7 @@
             }
           },
           {
-            "active": true,
+            "active": false,
             "advanced": {
               "exposition": {
                 "updateFactor": 0.0990000069141388,
@@ -34017,7 +35247,7 @@
             },
             "transitions": {
               "lower": {
-                "endTime": "06:00:00",
+                "endTime": "00:00:00",
                 "holdTime": 60000,
                 "level": 10,
                 "profile": 27839,
@@ -34028,7 +35258,7 @@
                 "holdTime": 60000,
                 "level": 35,
                 "profile": 0,
-                "startTime": "18:01:00"
+                "startTime": "00:00:00"
               }
             },
             "trigger": {
@@ -34297,7 +35527,7 @@
             "time.google.com"
           ],
           "serveNtp": false,
-          "currentDateAndTime": "2026-06-08T12:43:11.000Z",
+          "currentDateAndTime": "2026-06-09T19:00:54.000Z",
           "timezoneOffset": "-0300"
         },
         "video": {
@@ -34348,7 +35578,7 @@
         },
         "profiles": [
           {
-            "active": false,
+            "active": true,
             "advanced": {
               "exposition": {
                 "updateFactor": 0.0990000069141388,
@@ -34461,14 +35691,14 @@
                 "holdTime": 60000,
                 "level": 10,
                 "profile": 27839,
-                "startTime": "18:00:00"
+                "startTime": "00:00:00"
               },
               "upper": {
                 "endTime": "00:00:00",
                 "holdTime": 60000,
                 "level": 35,
                 "profile": 0,
-                "startTime": "06:00:00"
+                "startTime": "00:00:00"
               }
             },
             "trigger": {
@@ -34499,7 +35729,7 @@
             }
           },
           {
-            "active": true,
+            "active": false,
             "advanced": {
               "exposition": {
                 "updateFactor": 0.0990000069141388,
@@ -34643,14 +35873,14 @@
                 "holdTime": 60000,
                 "level": 10,
                 "profile": 27839,
-                "startTime": "05:59:59"
+                "startTime": "00:00:00"
               },
               "upper": {
                 "endTime": "00:00:00",
                 "holdTime": 60000,
                 "level": 35,
                 "profile": 0,
-                "startTime": "18:01:00"
+                "startTime": "00:00:00"
               }
             },
             "trigger": {
@@ -34919,7 +36149,7 @@
             "time.google.com"
           ],
           "serveNtp": false,
-          "currentDateAndTime": "2026-06-08T12:43:11.000Z",
+          "currentDateAndTime": "2026-06-09T19:00:54.000Z",
           "timezoneOffset": "-0300"
         },
         "video": {
@@ -35541,7 +36771,7 @@
             "time.google.com"
           ],
           "serveNtp": false,
-          "currentDateAndTime": "2026-06-08T12:43:11.000Z",
+          "currentDateAndTime": "2026-06-09T19:00:54.000Z",
           "timezoneOffset": "-0300"
         },
         "video": {
@@ -36163,7 +37393,7 @@
             "time.google.com"
           ],
           "serveNtp": false,
-          "currentDateAndTime": "2026-06-08T12:43:16.000Z",
+          "currentDateAndTime": "2026-06-09T19:00:59.000Z",
           "timezoneOffset": "-0300"
         },
         "video": {
@@ -36785,7 +38015,7 @@
             "time.google.com"
           ],
           "serveNtp": false,
-          "currentDateAndTime": "2026-06-08T12:43:16.000Z",
+          "currentDateAndTime": "2026-06-09T19:00:59.000Z",
           "timezoneOffset": "-0300"
         },
         "video": {
@@ -37407,7 +38637,7 @@
             "time.google.com"
           ],
           "serveNtp": false,
-          "currentDateAndTime": "2026-06-08T12:43:16.000Z",
+          "currentDateAndTime": "2026-06-09T19:00:59.000Z",
           "timezoneOffset": "-0300"
         },
         "video": {
@@ -38029,7 +39259,7 @@
             "time.google.com"
           ],
           "serveNtp": false,
-          "currentDateAndTime": "2026-06-08T12:43:17.000Z",
+          "currentDateAndTime": "2026-06-09T19:01:00.000Z",
           "timezoneOffset": "-0300"
         },
         "video": {
@@ -38651,7 +39881,7 @@
             "time.google.com"
           ],
           "serveNtp": false,
-          "currentDateAndTime": "2026-06-08T12:43:17.000Z",
+          "currentDateAndTime": "2026-06-09T19:01:00.000Z",
           "timezoneOffset": "-0300"
         },
         "video": {
@@ -39273,7 +40503,7 @@
             "time.google.com"
           ],
           "serveNtp": false,
-          "currentDateAndTime": "2026-06-08T12:43:21.000Z",
+          "currentDateAndTime": "2026-06-09T19:01:04.000Z",
           "timezoneOffset": "-0300"
         },
         "video": {
@@ -39895,7 +41125,7 @@
             "time.google.com"
           ],
           "serveNtp": false,
-          "currentDateAndTime": "2026-06-08T12:43:21.000Z",
+          "currentDateAndTime": "2026-06-09T19:01:04.000Z",
           "timezoneOffset": "-0300"
         },
         "video": {

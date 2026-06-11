@@ -1,6 +1,8 @@
 import React, { useState, useMemo } from 'react';
 import { AXHUB_SITES, AXCROSS_SITES, MODULOS, TIPOS_CONTRATO, FEATURE_FLAGS } from '../data/sitesData';
 import GuiaSites from './GuiaSites';
+import IntelligenceDashboard from './IntelligenceDashboard';
+import CredenciaisManager from '../components/CredenciaisManager';
 import './AnalisesSites.css';
 
 /* ═══════════════════════════════════════════════════════════════════════
@@ -746,6 +748,8 @@ function VistaModulo({ moduloFiltro }) {
    ═══════════════════════════════════════════════════════════════════════ */
 
 const TABS = [
+  { id: 'intelligence', label: '🧠 Intelligence' },
+  { id: 'credenciais', label: '🔑 Credenciais' },
   { id: 'visao-geral', label: '📊 Visão Geral' },
   { id: 'comparar', label: '⚖️ Comparar' },
   { id: 'detalhe', label: '🔍 Detalhe Individual' },
@@ -754,7 +758,7 @@ const TABS = [
 ];
 
 function AnalisesSites() {
-  const [tab, setTab] = useState('visao-geral');
+  const [tab, setTab] = useState('intelligence');
   const [sistema, setSistema] = useState('axhub');
   const [tipoFiltro, setTipoFiltro] = useState('');
   const [estadoFiltro, setEstadoFiltro] = useState('');
@@ -919,6 +923,14 @@ function AnalisesSites() {
 
         {tab === 'guia' && (
           <GuiaSites embedded />
+        )}
+
+        {tab === 'intelligence' && (
+          <IntelligenceDashboard />
+        )}
+
+        {tab === 'credenciais' && (
+          <CredenciaisManager />
         )}
       </div>
     </>

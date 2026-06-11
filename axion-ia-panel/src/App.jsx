@@ -28,7 +28,9 @@ import MapaOperacoes from "./pages/MapaOperacoes.jsx";
 import PipelineEditais from "./pages/PipelineEditais.jsx";
 import AnalisesSites from "./pages/AnalisesSites.jsx";
 import IntelligenceHub from "./pages/IntelligenceHub.jsx";
+import PainelProcessos from "./pages/PainelProcessos.jsx";
 import VarcoMonitor from "./pages/VarcoMonitor.jsx";
+import IntelligenceDashboard from "./pages/IntelligenceDashboard.jsx";
 import HomePage from "./pages/HomePage.jsx";
 import "./App.css";
 import "./pages/docusaurus-compat.css";
@@ -37,6 +39,7 @@ import "./pages/docusaurus-compat.css";
 const PAGE_INFO = {
   "/intelligence-hub": { title: "Intelligence Hub", subtitle: "Gerenciador unificado de dados, relatórios e performance", Icon: Brain },
   "/mapa-operacoes": { title: "Mapa de Operações", subtitle: "Ecossistema completo: fluxos, processos, sites e acessos", Icon: Globe },
+  "/painel-processos": { title: "Painel de Processos", subtitle: "Sites, credenciais, métricas e processos operacionais", Icon: ClipboardList },
   "/dashboard": { title: "Dashboard", subtitle: "Visão geral dos sistemas e serviços", Icon: LayoutDashboard },
   "/analise": { title: "Análise de Sites", subtitle: "Comparativo de contratos e operações por site", Icon: ScanSearch },
 
@@ -214,6 +217,7 @@ function AppContent() {
           <Route path="/" element={<HomePage />} />
           <Route path="/intelligence-hub" element={<IntelligenceHub />} />
           <Route path="/mapa-operacoes" element={<MapaOperacoes />} />
+          <Route path="/painel-processos" element={<PainelProcessos />} />
           <Route path="/analise" element={<AnalisesSites />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/chat" element={<Chat />} />
@@ -231,6 +235,7 @@ function AppContent() {
           <Route path="/logs" element={<Logs />} />
           <Route path="/kb" element={<KnowledgeBase />} />
           <Route path="/varco" element={<VarcoMonitor />} />
+          <Route path="/intelligence-dashboard" element={<IntelligenceDashboard />} />
           <Route path="/config" element={<Configuracoes />} />
 
 

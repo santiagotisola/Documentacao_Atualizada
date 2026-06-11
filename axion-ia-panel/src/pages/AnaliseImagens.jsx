@@ -604,13 +604,13 @@ export default function AnaliseImagens() {
               <div
                 onClick={() => fileRef.current.click()}
                 style={{
-                  border: "2px dashed #cbd5e1",
+                  border: "2px dashed rgba(255,255,255,0.15)",
                   borderRadius: "8px",
                   padding: "20px",
                   textAlign: "center",
                   cursor: "pointer",
-                  background: "#f8fafc",
-                  color: "#64748b",
+                  background: "rgba(255,255,255,0.04)",
+                  color: "#9d9d9d",
                   fontSize: "13px",
                 }}
               >
@@ -663,7 +663,7 @@ export default function AnaliseImagens() {
             </button>
 
             {erro && (
-              <div style={{ background: "#fef2f2", border: "1px solid #fecaca", padding: "10px", borderRadius: "6px", color: "#dc2626", fontSize: "13px" }}>
+              <div style={{ background: "rgba(248,113,113,0.08)", border: "1px solid rgba(248,113,113,0.3)", padding: "10px", borderRadius: "6px", color: "#f87171", fontSize: "13px" }}>
                 {erro}
               </div>
             )}
@@ -675,14 +675,14 @@ export default function AnaliseImagens() {
               <img
                 src={preview}
                 alt="preview"
-                style={{ width: "100%", maxHeight: "280px", objectFit: "contain", border: "1px solid #e2e8f0", borderRadius: "8px", background: "#f8fafc" }}
+                style={{ width: "100%", maxHeight: "280px", objectFit: "contain", border: "1px solid rgba(255,255,255,0.08)", borderRadius: "8px", background: "rgba(255,255,255,0.04)" }}
               />
             )}
 
             {resultado && (
-              <div style={{ background: "#f0fdf4", border: "1px solid #bbf7d0", borderRadius: "8px", padding: "14px" }}>
+              <div style={{ background: "rgba(52,211,153,0.06)", border: "1px solid rgba(52,211,153,0.2)", borderRadius: "8px", padding: "14px" }}>
                 <div style={{ display: "flex", justifyContent: "space-between", marginBottom: "10px" }}>
-                  <strong style={{ fontSize: "13px", color: "#15803d" }}>
+                  <strong style={{ fontSize: "13px", color: "#6ccb5f" }}>
                     {resultado.salvo ? "✅ Salvo + Analisado" : "✅ Analisado"}
                   </strong>
                   <span style={{ fontSize: "11px", color: "#888" }}>
@@ -697,8 +697,8 @@ export default function AnaliseImagens() {
                 )}
 
                 <pre style={{
-                  background: "#fff",
-                  border: "1px solid #d1fae5",
+                  background: "rgba(255,255,255,0.04)",
+                  border: "1px solid rgba(52,211,153,0.15)",
                   borderRadius: "6px",
                   padding: "10px",
                   fontSize: "12px",
@@ -721,13 +721,13 @@ export default function AnaliseImagens() {
 
           {/* ══ PAINEL DE FILTROS (topo, horizontal) ══ */}
           <form onSubmit={(e) => executarComparacao(e, 0)}
-            style={{ background: "#f8fafc", border: "1px solid #e2e8f0", borderRadius: "12px", padding: "16px", display: "flex", flexDirection: "column", gap: "12px" }}>
+            style={{ background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.08)", borderRadius: "12px", padding: "16px", display: "flex", flexDirection: "column", gap: "12px" }}>
 
             {/* Linha 1: modo + imagem de referência + pasta + botão */}
             <div style={{ display: "flex", gap: "12px", alignItems: "flex-end", flexWrap: "wrap" }}>
 
               {/* Toggle modo */}
-              <div style={{ display: "flex", borderRadius: "8px", overflow: "hidden", border: "1px solid #e2e8f0", height: "36px", flexShrink: 0 }}>
+              <div style={{ display: "flex", borderRadius: "8px", overflow: "hidden", border: "1px solid rgba(255,255,255,0.08)", height: "36px", flexShrink: 0 }}>
                 {[
                   { value: "local", label: "⚡ Local", desc: "aHash 16×16 — sem tokens, instantâneo" },
                   { value: "ia",    label: "🤖 GPT-4o", desc: "OpenAI Vision — lê texto e contexto, usa tokens" },
@@ -735,8 +735,8 @@ export default function AnaliseImagens() {
                   <button key={m.value} type="button" title={m.desc}
                     onClick={() => { setCmpModo(m.value); setCmpResultados([]); setCmpMeta(null); }}
                     style={{ padding: "0 14px", border: "none", cursor: "pointer", fontWeight: cmpModo === m.value ? "700" : "400", fontSize: "12px",
-                      background: cmpModo === m.value ? (m.value === "local" ? "#16a34a" : "#7c3aed") : "#fff",
-                      color: cmpModo === m.value ? "#fff" : "#555", transition: "all .15s", whiteSpace: "nowrap" }}>
+                      background: cmpModo === m.value ? (m.value === "local" ? "#16a34a" : "#7c3aed") : "rgba(255,255,255,0.06)",
+                      color: cmpModo === m.value ? "#fff" : "#c5c5c5", transition: "all .15s", whiteSpace: "nowrap" }}>
                     {m.label}
                   </button>
                 ))}
@@ -746,7 +746,7 @@ export default function AnaliseImagens() {
               <div style={{ display: "flex", alignItems: "center", gap: "8px", flexShrink: 0 }}>
                 <div onClick={() => cmpFileRef.current.click()}
                   style={{ border: "2px dashed #2563eb", borderRadius: "8px", padding: "4px 12px", cursor: "pointer",
-                    background: "#eff6ff", color: "#1d4ed8", fontSize: "12px", height: "36px", display: "flex", alignItems: "center", gap: "6px", whiteSpace: "nowrap" }}>
+                    background: "rgba(96,205,255,0.08)", color: "#60cdff", fontSize: "12px", height: "36px", display: "flex", alignItems: "center", gap: "6px", whiteSpace: "nowrap" }}>
                   📷 {cmpArquivo ? cmpArquivo.name.substring(0, 28) + (cmpArquivo.name.length > 28 ? "…" : "") : "Selecionar imagem de referência"}
                 </div>
                 <input ref={cmpFileRef} type="file" accept="image/*" style={{ display: "none" }} onChange={onCmpFileChange} />
@@ -799,16 +799,16 @@ export default function AnaliseImagens() {
                   <div style={{ position: "relative", flexShrink: 0 }}>
                     <button type="button" onClick={() => setCmpPresetsAberto(p => !p)}
                       title="Presets de características sem precisar de IA"
-                      style={{ height: "34px", padding: "0 8px", background: "#f1f5f9", color: "#475569",
-                        border: "1px solid #e2e8f0", borderRadius: "6px", cursor: "pointer",
+                      style={{ height: "34px", padding: "0 8px", background: "rgba(255,255,255,0.06)", color: "#c5c5c5",
+                        border: "1px solid rgba(255,255,255,0.08)", borderRadius: "6px", cursor: "pointer",
                         fontWeight: "700", fontSize: "12px" }}>
                       📝 Presets
                     </button>
                     {cmpPresetsAberto && (
                       <div style={{ position: "absolute", right: 0, top: "calc(100% + 4px)", zIndex: 100, width: "300px",
-                        background: "#fff", border: "1px solid #e2e8f0", borderRadius: "10px",
-                        boxShadow: "0 8px 24px rgba(0,0,0,.12)", padding: "10px", display: "flex", flexDirection: "column", gap: "6px" }}>
-                        <div style={{ fontSize: "11px", fontWeight: "700", color: "#1e293b", marginBottom: "4px" }}>
+                        background: "#2d2d2d", border: "1px solid rgba(255,255,255,0.08)", borderRadius: "10px",
+                        boxShadow: "0 8px 24px rgba(0,0,0,.4)", padding: "10px", display: "flex", flexDirection: "column", gap: "6px" }}>
+                        <div style={{ fontSize: "11px", fontWeight: "700", color: "#ffffff", marginBottom: "4px" }}>
                           📝 Selecione um preset (sem IA)
                         </div>
                         {[
@@ -826,11 +826,11 @@ export default function AnaliseImagens() {
                         ].map(p => (
                           <button key={p.v} type="button"
                             onClick={() => { setCmpCaracteristicas(p.v); setCmpPresetsAberto(false); }}
-                            style={{ padding: "6px 10px", background: "#f8fafc", border: "1px solid #e2e8f0",
+                            style={{ padding: "6px 10px", background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.06)",
                               borderRadius: "6px", cursor: "pointer", fontSize: "11px", textAlign: "left",
-                              color: "#374151", transition: "background .1s" }}
-                            onMouseEnter={e => e.target.style.background = "#eff6ff"}
-                            onMouseLeave={e => e.target.style.background = "#f8fafc"}>
+                              color: "#e0e0e0", transition: "background .1s" }}
+                            onMouseEnter={e => e.target.style.background = "rgba(96,205,255,0.08)"}
+                            onMouseLeave={e => e.target.style.background = "rgba(255,255,255,0.04)"}>
                             {p.label}
                           </button>
                         ))}
@@ -861,14 +861,14 @@ export default function AnaliseImagens() {
 
               {/* Verificar pasta */}
               <button type="button" onClick={verificarPasta}
-                style={{ height: "34px", padding: "0 12px", background: "#fff", border: "1px solid #e2e8f0", borderRadius: "6px",
-                  cursor: "pointer", fontSize: "11px", color: "#475569", flexShrink: 0 }}>
+                style={{ height: "34px", padding: "0 12px", background: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.08)", borderRadius: "6px",
+                  cursor: "pointer", fontSize: "11px", color: "#c5c5c5", flexShrink: 0 }}>
                 🔎 Verificar pasta
               </button>
 
               {/* Info pasta */}
               {cmpListaPasta && (
-                <div style={{ fontSize: "11px", color: "#166534", background: "#f0fdf4", border: "1px solid #bbf7d0",
+                <div style={{ fontSize: "11px", color: "#6ccb5f", background: "rgba(52,211,153,0.08)", border: "1px solid rgba(52,211,153,0.2)",
                   borderRadius: "6px", padding: "4px 10px", height: "34px", display: "flex", alignItems: "center" }}>
                   ✓ {cmpListaPasta.total} imagens encontradas
                 </div>
@@ -895,7 +895,7 @@ export default function AnaliseImagens() {
             </div>
 
             {cmpErro && (
-              <div style={{ background: "#fef2f2", border: "1px solid #fecaca", padding: "8px 12px", borderRadius: "6px", color: "#dc2626", fontSize: "12px" }}>
+              <div style={{ background: "rgba(248,113,113,0.08)", border: "1px solid rgba(248,113,113,0.3)", padding: "8px 12px", borderRadius: "6px", color: "#f87171", fontSize: "12px" }}>
                 ⚠ {cmpErro}
               </div>
             )}
@@ -917,12 +917,12 @@ export default function AnaliseImagens() {
 
                 {/* Thumb referência */}
                 {cmpPreview && (
-                  <div style={{ display: "flex", alignItems: "center", gap: "8px", background: "#eff6ff", border: "2px solid #bfdbfe",
+                  <div style={{ display: "flex", alignItems: "center", gap: "8px", background: "rgba(96,205,255,0.06)", border: "2px solid rgba(96,205,255,0.2)",
                     borderRadius: "8px", padding: "6px 10px", flexShrink: 0 }}>
                     <img src={cmpPreview} alt="ref" style={{ width: "44px", height: "44px", objectFit: "cover", borderRadius: "5px", border: "2px solid #2563eb" }} />
                     <div style={{ fontSize: "11px" }}>
-                      <div style={{ fontWeight: "700", color: "#1d4ed8" }}>Referência</div>
-                      <div style={{ color: "#475569" }}>{cmpArquivo?.name?.substring(0, 20)}…</div>
+                      <div style={{ fontWeight: "700", color: "#60cdff" }}>Referência</div>
+                      <div style={{ color: "#9d9d9d" }}>{cmpArquivo?.name?.substring(0, 20)}…</div>
                     </div>
                   </div>
                 )}
@@ -935,7 +935,7 @@ export default function AnaliseImagens() {
                   <span>{cmpMeta.processadas}/{cmpMeta.totalEncontradas} processadas</span>
                   {cmpMeta.temMais && <span style={{ color: "#f59e0b" }}> · {cmpMeta.totalEncontradas - cmpMeta.proximoOffset} restantes</span>}
                   {cmpMeta.criterio && (
-                    <span style={{ marginLeft: "8px", background: "#f1f5f9", border: "1px solid #e2e8f0", padding: "1px 7px", borderRadius: "99px", fontSize: "10px", color: "#94a3b8" }}>
+                    <span style={{ marginLeft: "8px", background: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.08)", padding: "1px 7px", borderRadius: "99px", fontSize: "10px", color: "#9d9d9d" }}>
                       {cmpMeta.criterio.algoritmo}
                     </span>
                   )}
@@ -953,15 +953,15 @@ export default function AnaliseImagens() {
                     </span>
                   ))}
                   <details style={{ position: "relative" }}>
-                    <summary style={{ listStyle: "none", cursor: "pointer", fontSize: "11px", color: "#2563eb", padding: "2px 8px",
-                      border: "1px solid #bfdbfe", borderRadius: "6px", background: "#eff6ff", userSelect: "none" }}>
+                    <summary style={{ listStyle: "none", cursor: "pointer", fontSize: "11px", color: "#60cdff", padding: "2px 8px",
+                      border: "1px solid rgba(96,205,255,0.2)", borderRadius: "6px", background: "rgba(96,205,255,0.06)", userSelect: "none" }}>
                       📖 Legenda
                     </summary>
                     <div style={{ position: "absolute", right: 0, top: "calc(100% + 6px)", zIndex: 50, width: "380px",
-                      background: "#fff", border: "1px solid #e2e8f0", borderRadius: "10px", boxShadow: "0 8px 24px rgba(0,0,0,.12)", padding: "14px" }}>
-                      <div style={{ fontWeight: "700", fontSize: "12px", color: "#1e293b", marginBottom: "10px" }}>📖 Como interpretar os resultados</div>
+                      background: "#2d2d2d", border: "1px solid rgba(255,255,255,0.08)", borderRadius: "10px", boxShadow: "0 8px 24px rgba(0,0,0,.4)", padding: "14px" }}>
+                      <div style={{ fontWeight: "700", fontSize: "12px", color: "#ffffff", marginBottom: "10px" }}>📖 Como interpretar os resultados</div>
 
-                      <div style={{ fontSize: "11px", color: "#475569", marginBottom: "10px", lineHeight: "1.5" }}>
+                      <div style={{ fontSize: "11px", color: "#c5c5c5", marginBottom: "10px", lineHeight: "1.5" }}>
                         <strong>Score (0–10):</strong> Quanto maior, mais parecida é a imagem com a referência.<br/>
                         Calculado por <strong>Average Hash (aHash)</strong>: reduz cada imagem para 16×16 px em escala de cinza e compara bit a bit.
                       </div>
@@ -977,19 +977,19 @@ export default function AnaliseImagens() {
                             <span style={{ background: s.cor, color: "#fff", fontWeight: "800", fontSize: "11px", padding: "1px 6px", borderRadius: "5px", flexShrink: 0 }}>{s.faixa}</span>
                             <div>
                               <div style={{ fontWeight: "700", fontSize: "11px", color: s.cor }}>{s.label}</div>
-                              <div style={{ fontSize: "10px", color: "#475569" }}>{s.desc}</div>
+                              <div style={{ fontSize: "10px", color: "#c5c5c5" }}>{s.desc}</div>
                             </div>
                           </div>
                         ))}
                       </div>
 
-                      <div style={{ fontSize: "11px", color: "#475569", marginBottom: "8px" }}>
+                      <div style={{ fontSize: "11px", color: "#c5c5c5", marginBottom: "8px" }}>
                         <strong>Hamming N bits:</strong> número de bits do hash que diferem. 0 = idêntica · ~20 = muito semelhante · ≥100 = diferente · 128 = aleatória.
                       </div>
-                      <div style={{ fontSize: "11px", color: "#475569", marginBottom: "8px" }}>
+                      <div style={{ fontSize: "11px", color: "#c5c5c5", marginBottom: "8px" }}>
                         <strong>#N</strong> = posição no ranking · <strong>score no canto</strong> = nota de similaridade · <strong>faixa colorida</strong> = nível de correspondência
                       </div>
-                      <div style={{ background: "#fffbeb", border: "1px solid #fde68a", borderRadius: "6px", padding: "8px", fontSize: "10px", color: "#78350f" }}>
+                      <div style={{ background: "rgba(251,191,36,0.08)", border: "1px solid rgba(251,191,36,0.2)", borderRadius: "6px", padding: "8px", fontSize: "10px", color: "#fbbf24" }}>
                         💡 <strong>Dica:</strong> Câmeras de monitoramento raramente atingem score 9+ mesmo sendo o mesmo veículo — ângulo, luz e movimento alteram o hash. Use <strong>score 5–8</strong> como faixa de investigação principal.
                       </div>
                     </div>
@@ -1029,7 +1029,7 @@ export default function AnaliseImagens() {
               }
 
               return (
-                <div style={{ background: "#f8fafc", border: "1px solid #e2e8f0", borderRadius: "10px", padding: "10px 14px", display: "flex", flexDirection: "column", gap: "8px" }}>
+                <div style={{ background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.08)", borderRadius: "10px", padding: "10px 14px", display: "flex", flexDirection: "column", gap: "8px" }}>
 
                   {/* Linha 1: Faixa de similaridade */}
                   <div style={{ display: "flex", gap: "8px", alignItems: "center", flexWrap: "wrap" }}>
@@ -1435,7 +1435,7 @@ export default function AnaliseImagens() {
                     />
                     {cmpPlacaFiltro && (
                       <button type="button" onClick={() => setCmpPlacaFiltro("")}
-                        style={{ padding: "3px 8px", background: "#fee2e2", color: "#b91c1c",
+                        style={{ padding: "3px 8px", background: "rgba(248,113,113,0.12)", color: "#f87171",
                           border: "none", borderRadius: "6px", fontSize: "11px", cursor: "pointer" }}>✕ limpar</button>
                     )}
                     <button type="button"
@@ -1540,7 +1540,7 @@ export default function AnaliseImagens() {
                 if (cmpPlacaFiltro.trim() && !placaDetectada) motivos.push(`placas não lidas ainda — clique "🔢 Ler placas (GPT-4o)"`);
                 if (cmpPlacaFiltro.trim() && placaDetectada) motivos.push(`nenhuma placa contendo "${cmpPlacaFiltro}" — limpe o filtro Placa`);
                 return (
-                  <div style={{ padding: "32px", textAlign: "center", color: "#94a3b8", background: "#f8fafc", borderRadius: "10px", border: "1px dashed #e2e8f0" }}>
+                  <div style={{ padding: "32px", textAlign: "center", color: "#9d9d9d", background: "rgba(255,255,255,0.03)", borderRadius: "10px", border: "1px dashed rgba(255,255,255,0.08)" }}>
                     <div style={{ fontSize: "14px", marginBottom: "8px" }}>Nenhuma imagem visível com os filtros atuais.</div>
                     {motivos.map((m, i) => <div key={i} style={{ fontSize: "12px", color: "#f59e0b", marginTop: "4px" }}>⚠️ {m}</div>)}
                   </div>
@@ -1738,18 +1738,18 @@ export default function AnaliseImagens() {
 
           {/* Formulário */}
           <form onSubmit={submeterLote} style={{ display: "flex", flexDirection: "column", gap: "14px" }}>
-            <div style={{ background: "#f0fdf4", border: "1px solid #bbf7d0", borderRadius: "8px", padding: "10px", fontSize: "12px", color: "#166534" }}>
+            <div style={{ background: "rgba(52,211,153,0.06)", border: "1px solid rgba(52,211,153,0.2)", borderRadius: "8px", padding: "10px", fontSize: "12px", color: "#6ccb5f" }}>
               <strong>⚡ Processamento em lote</strong><br/>
               Enfileira o job no servidor e processa em background. Feche a tela — os resultados ficam salvos no MongoDB.
             </div>
 
             {/* Modo */}
-            <div style={{ display: "flex", gap: "0", borderRadius: "8px", overflow: "hidden", border: "1px solid #e2e8f0" }}>
+            <div style={{ display: "flex", gap: "0", borderRadius: "8px", overflow: "hidden", border: "1px solid rgba(255,255,255,0.08)" }}>
               {[{ value: "local", label: "⚡ Local (gratuito)" }, { value: "ia", label: "🤖 IA (GPT-4o)" }].map((m) => (
                 <button key={m.value} type="button" onClick={() => setLoteModo(m.value)}
                   style={{ flex: 1, padding: "8px 10px", border: "none", cursor: "pointer", fontWeight: loteModo === m.value ? "700" : "400", fontSize: "12px",
-                    background: loteModo === m.value ? (m.value === "local" ? "#16a34a" : "#7c3aed") : "#f8fafc",
-                    color: loteModo === m.value ? "#fff" : "#555" }}>
+                    background: loteModo === m.value ? (m.value === "local" ? "#16a34a" : "#7c3aed") : "rgba(255,255,255,0.04)",
+                    color: loteModo === m.value ? "#fff" : "#c5c5c5" }}>
                   {m.label}
                 </button>
               ))}
@@ -1758,7 +1758,7 @@ export default function AnaliseImagens() {
             {/* Imagem de referência */}
             <div>
               <label style={labelStyle}>Imagem de Referência</label>
-              <div onClick={() => loteFileRef.current.click()} style={{ border: "2px dashed #2563eb", borderRadius: "8px", padding: "12px", textAlign: "center", cursor: "pointer", background: "#eff6ff", color: "#1d4ed8", fontSize: "12px" }}>
+              <div onClick={() => loteFileRef.current.click()} style={{ border: "2px dashed #2563eb", borderRadius: "8px", padding: "12px", textAlign: "center", cursor: "pointer", background: "rgba(96,205,255,0.06)", color: "#60cdff", fontSize: "12px" }}>
                 {loteArquivo ? loteArquivo.name : "Clique para selecionar"}
               </div>
               <input ref={loteFileRef} type="file" accept="image/*" style={{ display: "none" }} onChange={onLoteFileChange} />
@@ -1788,14 +1788,14 @@ export default function AnaliseImagens() {
               {loteCarregando ? "Enfileirando..." : "📦 Enfileirar Job"}
             </button>
 
-            {loteErro && <div style={{ background: "#fef2f2", border: "1px solid #fecaca", padding: "10px", borderRadius: "6px", color: "#dc2626", fontSize: "13px" }}>{loteErro}</div>}
+            {loteErro && <div style={{ background: "rgba(248,113,113,0.08)", border: "1px solid rgba(248,113,113,0.3)", padding: "10px", borderRadius: "6px", color: "#f87171", fontSize: "13px" }}>{loteErro}</div>}
           </form>
 
           {/* Painel de status */}
           <div>
             {/* Job ativo — progresso em tempo real */}
             {loteJobAtivo && (
-              <div style={{ background: "#f8fafc", border: "1px solid #e2e8f0", borderRadius: "10px", padding: "16px", marginBottom: "20px" }}>
+              <div style={{ background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.08)", borderRadius: "10px", padding: "16px", marginBottom: "20px" }}>
                 <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "8px" }}>
                   <strong style={{ fontSize: "13px" }}>Job em andamento</strong>
                   <span style={{
@@ -1851,9 +1851,9 @@ export default function AnaliseImagens() {
             {loteJobs.length === 0 && <div style={{ fontSize: "13px", color: "#888" }}>Nenhum job encontrado.</div>}
             {loteJobs.map((j) => (
               <div key={j._id} onClick={() => { setLoteJobAtivo(j); if (j.status === "processando") iniciarPolling(j._id); }}
-                style={{ padding: "10px 12px", border: "1px solid #e2e8f0", borderRadius: "8px", marginBottom: "8px", cursor: "pointer",
-                  background: loteJobAtivo?._id === j._id ? "#eff6ff" : "#fff",
-                  borderLeft: `4px solid ${j.status === "concluido" ? "#22c55e" : j.status === "erro" ? "#ef4444" : j.status === "processando" ? "#3b82f6" : "#e2e8f0"}` }}>
+                style={{ padding: "10px 12px", border: "1px solid rgba(255,255,255,0.08)", borderRadius: "8px", marginBottom: "8px", cursor: "pointer",
+                  background: loteJobAtivo?._id === j._id ? "rgba(96,205,255,0.08)" : "rgba(255,255,255,0.03)",
+                  borderLeft: `4px solid ${j.status === "concluido" ? "#22c55e" : j.status === "erro" ? "#ef4444" : j.status === "processando" ? "#3b82f6" : "rgba(255,255,255,0.08)"}` }}>
                 <div style={{ display: "flex", justifyContent: "space-between", fontSize: "12px" }}>
                   <span style={{ fontWeight: "600", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap", maxWidth: "260px" }}>
                     {j.refImageNome ?? "imagem"} → {j.pasta}
@@ -1887,7 +1887,7 @@ export default function AnaliseImagens() {
             const imgs = galeria[sis] ?? [];
             return (
               <div key={sis} style={{ marginBottom: "28px" }}>
-                <h4 style={{ marginBottom: "10px", fontSize: "14px", color: "#374151" }}>
+                <h4 style={{ marginBottom: "10px", fontSize: "14px", color: "#e0e0e0" }}>
                   {label} ({imgs.length})
                 </h4>
 
@@ -1896,7 +1896,7 @@ export default function AnaliseImagens() {
                 ) : (
                   <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(180px, 1fr))", gap: "12px" }}>
                     {imgs.map((img) => (
-                      <div key={img.nome} style={{ border: "1px solid #e2e8f0", borderRadius: "8px", overflow: "hidden", background: "#fafafa" }}>
+                      <div key={img.nome} style={{ border: "1px solid rgba(255,255,255,0.08)", borderRadius: "8px", overflow: "hidden", background: "rgba(255,255,255,0.03)" }}>
                         <img
                           src={`http://localhost:3100${img.url}`}
                           alt={img.nome}
@@ -1905,7 +1905,7 @@ export default function AnaliseImagens() {
                           title="Clique para reanalisar"
                         />
                         <div style={{ padding: "6px 8px" }}>
-                          <p style={{ fontSize: "11px", color: "#555", margin: 0, wordBreak: "break-all" }}>{img.nome.slice(14)}</p>
+                          <p style={{ fontSize: "11px", color: "#c5c5c5", margin: 0, wordBreak: "break-all" }}>{img.nome.slice(14)}</p>
                           <p style={{ fontSize: "10px", color: "#aaa", margin: "2px 0 6px" }}>{img.tamanhoKB} KB</p>
                           <div style={{ display: "flex", gap: "6px" }}>
                             <button onClick={() => reanalisarDaGaleria(sis, img)} style={{ ...btnSecStyle, fontSize: "11px", padding: "3px 7px" }}>
@@ -1962,10 +1962,10 @@ const btnSecStyle = {
 
 const btnDangerStyle = {
   padding: "5px 12px",
-  background: "#fef2f2",
-  border: "1px solid #fecaca",
+  background: "rgba(248,113,113,0.1)",
+  border: "1px solid rgba(248,113,113,0.3)",
   borderRadius: "5px",
   cursor: "pointer",
   fontSize: "12px",
-  color: "#dc2626",
+  color: "#f87171",
 };

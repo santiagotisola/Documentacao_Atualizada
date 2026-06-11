@@ -842,3 +842,11 @@
 .divider { color: var(--text-muted); }
 .divider::before,
 .divider::after { background: var(--border); }
+
+/* Badges taxa */
+.taxa-0 { background: rgba(248,113,113,0.12); color: #f87171; }
+.taxa-1 { background: rgba(251,191,36,0.12); color: #fbbf24; }
+.taxa-2 { background: rgba(52,211,153,0.12); color: #34d399; }
+.taxa-3, .taxa-4 { background: rgba(52,211,153,0.18); color: #6ee7b7; }
+.mais { color: var(--text-muted); }
+.secao-lacuna .tipo { background: rgba(255,255,255,0.08); color: var(--text-secondary); }

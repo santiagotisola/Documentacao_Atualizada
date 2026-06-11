@@ -1,16 +1,16 @@
-/* Variáveis de compatibilidade com Docusaurus (Infima) — Portal Light Cards */
+/* Variáveis de compatibilidade com Docusaurus (Infima) — Windows 11 Dark */
 :root {
-  --ifm-background-color: rgba(255,255,255,0.95);
-  --ifm-card-background-color: rgba(255,255,255,0.95);
-  --ifm-color-emphasis-100: #f1f5f9;
-  --ifm-color-emphasis-200: #e2e8f0;
-  --ifm-color-emphasis-300: #cbd5e1;
-  --ifm-color-emphasis-500: #64748b;
-  --ifm-color-emphasis-600: #475569;
-  --ifm-color-emphasis-700: #334155;
-  --ifm-color-primary: #2563eb;
-  --ifm-color-primary-dark: #1e40af;
-  --ifm-color-primary-lightest: #dbeafe;
-  --ifm-color-primary-rgb: 37, 99, 235;
-  --ifm-font-color-base: #1e293b;
+  --ifm-background-color: var(--surface, #2d2d2d);
+  --ifm-card-background-color: var(--surface-card, #2d2d2d);
+  --ifm-color-emphasis-100: var(--surface-raised, #383838);
+  --ifm-color-emphasis-200: var(--border, rgba(255,255,255,0.0578));
+  --ifm-color-emphasis-300: var(--border-hover, rgba(255,255,255,0.12));
+  --ifm-color-emphasis-500: var(--text-muted, #9d9d9d);
+  --ifm-color-emphasis-600: var(--text-secondary, #c5c5c5);
+  --ifm-color-emphasis-700: var(--text, #ffffff);
+  --ifm-color-primary: var(--accent, #60cdff);
+  --ifm-color-primary-dark: #0078d4;
+  --ifm-color-primary-lightest: rgba(96,205,255,0.12);
+  --ifm-color-primary-rgb: 96, 205, 255;
+  --ifm-font-color-base: var(--text, #ffffff);
 }

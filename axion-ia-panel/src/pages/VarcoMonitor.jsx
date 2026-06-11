@@ -1,7 +1,25 @@
 import React, { useState, useEffect, useMemo } from "react";
-import { Radio, CheckCircle2, AlertTriangle, XCircle, RefreshCw, Search, ChevronDown, ChevronUp, ExternalLink, Wrench, Eye, Copy, Terminal, Shield } from "lucide-react";
+import { Radio, CheckCircle2, AlertTriangle, XCircle, RefreshCw, Search, ChevronDown, ChevronUp, ExternalLink, Wrench, Eye, Copy, Terminal, Shield, Play } from "lucide-react";
 
 const API_BASE = "http://localhost:3100";
+
+// Helper: abre o túnel VARCO ao clicar no nome do equipamento
+function TunnelLink({ nome, uuid, style = {} }) {
+  if (!uuid) return <span style={style}>{nome}</span>;
+  const url = `https://${uuid}-80.tunnel.varco.cloud`;
+  return (
+    <a
+      href={url}
+      target="_blank"
+      rel="noopener noreferrer"
+      title={`Abrir túnel: ${url}`}
+      onClick={e => e.stopPropagation()}
+      style={{ color: "inherit", textDecoration: "none", borderBottom: "1px dashed rgba(96,205,255,0.4)", cursor: "pointer", ...style }}
+    >
+      {nome}
+    </a>
+  );
+}
 
 /* ═══ Referências para análise de conformidade (consenso por maioria) ═══
    Usa TODOS os equipamentos online como base de votação.
@@ -157,6 +175,27 @@ export default function VarcoMonitor() {
   const [expandedGroup, setExpandedGroup] = useState(null);
   const [expandedDevice, setExpandedDevice] = useState(null);
   const [lastUpdate, setLastUpdate] = useState(null);
+  const [recoletando, setRecoletando] = useState(false);
+  const [recoletaMsg, setRecoletaMsg] = useState(null);
+
+  const recoletarVarco = async () => {
+    setRecoletando(true);
+    setRecoletaMsg(null);
+    try {
+      const res = await fetch(`${API_BASE}/api/varco/recoleta`, { method: "POST" });
+      const data = await res.json();
+      if (res.ok && data.ok) {
+        setRecoletaMsg({ tipo: "ok", texto: `Coleta concluída — ${data.resumo?.conformes || 0} conformes, ${data.resumo?.alterados || 0} alterados, ${data.resumo?.offline || 0} offline` });
+        await fetchAll(); // Refresh panel data
+      } else {
+        setRecoletaMsg({ tipo: "erro", texto: data.erro || "Falha na recoleta" });
+      }
+    } catch (e) {
+      setRecoletaMsg({ tipo: "erro", texto: e.message });
+    } finally {
+      setRecoletando(false);
+    }
+  };
 
   const fetchAll = async () => {
     setLoading(true); setError(null);
@@ -249,10 +288,28 @@ export default function VarcoMonitor() {
         <StatCard label="Grupos" value={analysis?.groups.length || 0} color="#a78bfa" icon={<Eye size={16} />} />
       </div>
 
+      {/* Recoleta VARCO button */}
+      <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "16px" }}>
+        <button
+          onClick={recoletarVarco}
+          disabled={recoletando}
+          style={{ display: "flex", alignItems: "center", gap: "6px", padding: "8px 16px", border: `1px solid ${C.accentBorder}`, borderRadius: "6px", background: recoletando ? C.surface : C.accentBg, color: C.accent, cursor: recoletando ? "wait" : "pointer", fontSize: "12px", fontWeight: 600, opacity: recoletando ? 0.7 : 1 }}
+        >
+          <RefreshCw size={14} className={recoletando ? "spin" : ""} />
+          {recoletando ? "Coletando dados ao vivo (~90s)..." : "Atualizar — Recoletar do VARCO"}
+        </button>
+        {recoletaMsg && (
+          <span style={{ fontSize: "11px", padding: "4px 10px", borderRadius: "4px", background: recoletaMsg.tipo === "ok" ? C.successBg : C.dangerBg, color: recoletaMsg.tipo === "ok" ? C.success : C.danger, border: `1px solid ${recoletaMsg.tipo === "ok" ? C.successBorder : C.dangerBorder}` }}>
+            {recoletaMsg.tipo === "ok" ? "✅" : "❌"} {recoletaMsg.texto}
+          </span>
+        )}
+      </div>
+
       {/* Tabs */}
       <div style={{ display: "flex", gap: "2px", marginBottom: "16px", borderBottom: `2px solid ${C.border}` }}>
         {[
           { id: "auditoria", label: "Auditoria & Correções", icon: <Wrench size={13} /> },
+          { id: "correcoes", label: "Plano de Correção", icon: <Play size={13} /> },
           { id: "padrao", label: "vs Padrão", icon: <Shield size={13} /> },
           { id: "grupos", label: "Grupos", icon: <Eye size={13} /> },
           { id: "inventario", label: "Inventário", icon: <Radio size={13} /> },
@@ -269,6 +326,7 @@ export default function VarcoMonitor() {
       {loading && <div style={{ textAlign: "center", padding: "40px", color: C.textMuted }}>Carregando...</div>}
 
       {!loading && tab === "auditoria" && analysis && <AuditoriaTab analysis={analysis} />}
+      {!loading && tab === "correcoes" && <CorrecoesTab liveDevices={liveDevices} />}
       {!loading && tab === "padrao" && <PadraoTab />}
       {!loading && tab === "grupos" && analysis && <GruposTab groups={analysis.groups} expandedGroup={expandedGroup} setExpandedGroup={setExpandedGroup} />}
       {!loading && tab === "inventario" && analysis && <InventarioTab results={filteredResults} filter={filter} setFilter={setFilter} statusFilter={statusFilter} setStatusFilter={setStatusFilter} expandedDevice={expandedDevice} setExpandedDevice={setExpandedDevice} liveDevices={liveDevices} />}
@@ -312,7 +370,7 @@ function AuditoriaTab({ analysis }) {
       problemRank[key].count++;
       const val = String(d.diffs[key].atual);
       problemRank[key].values.set(val, (problemRank[key].values.get(val) || 0) + 1);
-      problemRank[key].devices.push(d.nome);
+      problemRank[key].devices.push({ nome: d.nome, uuid: d.uuid });
     }
   });
   const sorted = Object.entries(problemRank).sort((a, b) => b[1].count - a[1].count);
@@ -324,23 +382,23 @@ function AuditoriaTab({ analysis }) {
     "VARCO.edgeServer": { menu: "Sistema › Manutenção › Acesso Remoto › VARCO › Edge Server", desc: "Servidor edge VARCO para túnel reverso", impact: "Sem edge server, túnel de gerência remota não conecta.", causa: "Campo não preenchido ou URL errada.", campo: "Campo de texto 'Edge Server'" },
 
     // ═══ PERFIS DE IMAGEM — DIURNO (Perfil 1) ═══
-    "Diurno.lower.startTime": { menu: "Imagem › Perfis › Perfil 1 (Diurno) › Transições › Inferior › Início", desc: "Início da transição inferior — quando começa a ativar perfil diurno", impact: "Imagem com ganho errado durante transição dia/noite.", causa: "Horário configurado diferente do template padrão.", campo: "Campo 'Início' na linha 'Inferior'" },
-    "Diurno.lower.endTime": { menu: "Imagem › Perfis › Perfil 1 (Diurno) › Transições › Inferior › Fim", desc: "Fim da transição inferior do perfil diurno", impact: "Ganho de imagem fora do padrão durante transição.", causa: "Cópia parcial de configuração entre equipamentos.", campo: "Campo 'Fim' na linha 'Inferior'" },
-    "Diurno.lower.level": { menu: "Imagem › Perfis › Perfil 1 (Diurno) › Transições › Inferior › Nível", desc: "Nível de luminosidade threshold inferior (padrão: 10)", impact: "Fotos muito claras ou escuras no período de transição.", causa: "Ajuste local por técnico sem atualizar template.", campo: "Slider 'Nível' na linha 'Inferior'" },
-    "Diurno.lower.holdTime": { menu: "Imagem › Perfis › Perfil 1 (Diurno) › Transições › Inferior › Tempo de espera", desc: "Tempo (ms) antes de mudar perfil (padrão: 60000ms = 1min)", impact: "Transição muito rápida gera frames inconsistentes.", causa: "Default de firmware diferente.", campo: "Campo 'Tempo de espera (ms)' na linha 'Inferior'" },
-    "Diurno.upper.startTime": { menu: "Imagem › Perfis › Perfil 1 (Diurno) › Transições › Superior › Início", desc: "Início da transição superior do perfil diurno", impact: "Qualidade de imagem comprometida na mudança de iluminação.", causa: "Perfil não padronizado após manutenção.", campo: "Campo 'Início' na linha 'Superior'" },
-    "Diurno.upper.endTime": { menu: "Imagem › Perfis › Perfil 1 (Diurno) › Transições › Superior › Fim", desc: "Fim da transição superior do perfil diurno", impact: "Janela de transição de brilho inadequada.", causa: "Diferença entre versões de firmware.", campo: "Campo 'Fim' na linha 'Superior'" },
+    "Diurno.lower.startTime": { menu: "Imagem › Transições › Agenda de Transições › lápis (✏️) 'Diurno (inferior)' › Início", desc: "Início da janela em que a transição inferior opera (padrão: 00:00:00 = 24h)", impact: "Com horário restrito, a câmera NÃO troca para Noturno fora dessa janela — fica presa no modo Diurno mesmo de noite.", causa: "Configuração copiada de equipamento antigo com restrição de horário.", campo: "Campo 'Início' na edição da linha 'Diurno (inferior)'" },
+    "Diurno.lower.endTime": { menu: "Imagem › Transições › Agenda de Transições › lápis (✏️) 'Diurno (inferior)' › Fim", desc: "Fim da janela em que a transição inferior opera (padrão: 00:00:00 = 24h)", impact: "Com horário restrito, a câmera NÃO troca para Noturno fora dessa janela — imagens ficam escuras/ilegíveis.", causa: "Horário configurado diferente do template padrão.", campo: "Campo 'Fim' na edição da linha 'Diurno (inferior)'" },
+    "Diurno.lower.level": { menu: "Imagem › Transições › Agenda de Transições › lápis (✏️) 'Diurno (inferior)' › Nível", desc: "Luminosidade que dispara troca para Noturno (padrão: 10 = só quando realmente escurece)", impact: "Com valor 30, uma nuvem ou sombra já faz a câmera ir para P&B em pleno dia.", causa: "Ajuste local por técnico sem atualizar template.", campo: "Slider/campo 'Nível' — valor exibido como 'Nível < 10' na barra azul" },
+    "Diurno.lower.holdTime": { menu: "Imagem › Transições › Agenda de Transições › lápis (✏️) 'Diurno (inferior)' › Tempo de espera", desc: "Tempo (ms) que a luminosidade deve ficar abaixo do nível antes de trocar (padrão: 60000ms = 1min)", impact: "Transição muito rápida gera frames inconsistentes.", causa: "Default de firmware diferente.", campo: "Campo 'Tempo de espera (ms)' na edição da transição" },
+    "Diurno.upper.startTime": { menu: "Imagem › Transições › Agenda de Transições › lápis (✏️) 'Diurno (superior)' › Início", desc: "Início da janela em que a transição superior opera (padrão: 00:00:00 = 24h)", impact: "Com horário restrito, a câmera NÃO volta para Diurno fora dessa janela — fica presa em P&B de manhã.", causa: "Perfil não padronizado após manutenção.", campo: "Campo 'Início' na edição da linha 'Diurno (superior)'" },
+    "Diurno.upper.endTime": { menu: "Imagem › Transições › Agenda de Transições › lápis (✏️) 'Diurno (superior)' › Fim", desc: "Fim da janela em que a transição superior opera (padrão: 00:00:00 = 24h)", impact: "Janela restrita impede retorno ao modo colorido quando amanhece.", causa: "Diferença entre versões de firmware.", campo: "Campo 'Fim' na edição da linha 'Diurno (superior)'" },
     "Diurno.upper.level": { menu: "Imagem › Perfis › Perfil 1 (Diurno) › Transições › Superior › Nível", desc: "Nível de luminosidade threshold superior (padrão: 35)", impact: "Imagens saturadas ou subexpostas durante o dia.", causa: "Ajuste manual ou cópia de config incompleta.", campo: "Slider 'Nível' na linha 'Superior'" },
     "Diurno.upper.holdTime": { menu: "Imagem › Perfis › Perfil 1 (Diurno) › Transições › Superior › Tempo de espera", desc: "Tempo (ms) antes da transição superior (padrão: 60000ms)", impact: "Flickering na imagem durante mudanças de luz.", causa: "Valor divergente entre lotes de firmware.", campo: "Campo 'Tempo de espera (ms)' na linha 'Superior'" },
     "Diurno.upper.profile": { menu: "Imagem › Perfis › Perfil 1 (Diurno) › Transições › Superior › Perfil destino", desc: "ID do perfil de destino ao atingir threshold superior", impact: "Perfil errado = parâmetros de cor/ganho completamente diferentes.", causa: "Profile ID não atualizado após redefinição de templates.", campo: "Dropdown 'Perfil' na linha 'Superior'" },
 
     // ═══ PERFIS DE IMAGEM — NOTURNO (Perfil 2) ═══
-    "Noturno.lower.startTime": { menu: "Imagem › Perfis › Perfil 2 (Noturno) › Transições › Inferior › Início", desc: "Início da transição inferior para perfil noturno", impact: "Ativação tardia/antecipada do modo noturno = imagens escuras.", causa: "Configuração de horários divergente.", campo: "Campo 'Início' na linha 'Inferior'" },
-    "Noturno.lower.endTime": { menu: "Imagem › Perfis › Perfil 2 (Noturno) › Transições › Inferior › Fim", desc: "Fim da transição inferior do perfil noturno", impact: "Timing errado na ativação do perfil noturno.", causa: "Configuração incompleta pós-manutenção.", campo: "Campo 'Fim' na linha 'Inferior'" },
-    "Noturno.lower.level": { menu: "Imagem › Perfis › Perfil 2 (Noturno) › Transições › Inferior › Nível", desc: "Nível de luminosidade threshold inferior noturno (padrão: 10)", impact: "IR/Flash pode não ativar no momento correto.", causa: "Ajuste local ou firmware com defaults diferentes.", campo: "Slider 'Nível' na linha 'Inferior'" },
-    "Noturno.lower.holdTime": { menu: "Imagem › Perfis › Perfil 2 (Noturno) › Transições › Inferior › Tempo de espera", desc: "Tempo antes de transicionar para noturno (padrão: 60000ms)", impact: "Fotos transitórias com qualidade degradada.", causa: "Valor padrão diferente entre lotes.", campo: "Campo 'Tempo de espera (ms)' na linha 'Inferior'" },
-    "Noturno.upper.startTime": { menu: "Imagem › Perfis › Perfil 2 (Noturno) › Transições › Superior › Início", desc: "Início da transição superior noturna", impact: "Qualidade de imagem noturna comprometida.", causa: "Não sincronizado com template padrão.", campo: "Campo 'Início' na linha 'Superior'" },
-    "Noturno.upper.endTime": { menu: "Imagem › Perfis › Perfil 2 (Noturno) › Transições › Superior › Fim", desc: "Fim da transição superior noturna", impact: "Janela de operação do IR inadequada.", causa: "Configuração manual divergente.", campo: "Campo 'Fim' na linha 'Superior'" },
+    "Noturno.lower.startTime": { menu: "Imagem › Transições › Agenda de Transições › lápis (✏️) 'Noturno (inferior)' › Início", desc: "Início da janela da transição inferior noturna (padrão: 00:00:00 = 24h)", impact: "Câmera fica presa no modo Noturno sem poder transicionar — imagens P&B de dia.", causa: "Configuração de horários divergente.", campo: "Campo 'Início' na edição da linha 'Noturno (inferior)'" },
+    "Noturno.lower.endTime": { menu: "Imagem › Transições › Agenda de Transições › lápis (✏️) 'Noturno (inferior)' › Fim", desc: "Fim da janela da transição inferior noturna (padrão: 00:00:00 = 24h)", impact: "Restrição de horário impede transição noturna adequada.", causa: "Configuração incompleta pós-manutenção.", campo: "Campo 'Fim' na edição da linha 'Noturno (inferior)'" },
+    "Noturno.lower.level": { menu: "Imagem › Transições › Agenda de Transições › lápis (✏️) 'Noturno (inferior)' › Nível", desc: "Nível de luminosidade threshold inferior noturno (padrão: 10)", impact: "IR/Flash pode não ativar no momento correto.", causa: "Ajuste local ou firmware com defaults diferentes.", campo: "Slider/campo 'Nível' — aparece como 'Nível < 10' na barra azul" },
+    "Noturno.lower.holdTime": { menu: "Imagem › Transições › Agenda de Transições › lápis (✏️) 'Noturno (inferior)' › Tempo de espera", desc: "Tempo antes de transicionar (padrão: 60000ms)", impact: "Fotos transitórias com qualidade degradada.", causa: "Valor padrão diferente entre lotes.", campo: "Campo 'Tempo de espera (ms)' na edição da transição" },
+    "Noturno.upper.startTime": { menu: "Imagem › Transições › Agenda de Transições › lápis (✏️) 'Noturno (superior)' › Início", desc: "Início da janela da transição superior noturna (padrão: 00:00:00 = 24h)", impact: "Câmera não volta ao Diurno quando amanhece — fica em P&B.", causa: "Não sincronizado com template padrão.", campo: "Campo 'Início' na edição da linha 'Noturno (superior)'" },
+    "Noturno.upper.endTime": { menu: "Imagem › Transições › Agenda de Transições › lápis (✏️) 'Noturno (superior)' › Fim", desc: "Fim da janela da transição superior noturna (padrão: 00:00:00 = 24h)", impact: "Restrição impede retorno ao modo diurno.", causa: "Configuração manual divergente.", campo: "Campo 'Fim' na edição da linha 'Noturno (superior)'" },
     "Noturno.upper.level": { menu: "Imagem › Perfis › Perfil 2 (Noturno) › Transições › Superior › Nível", desc: "Nível de luminosidade threshold superior noturno (padrão: 35)", impact: "Flash/IR ativa muito cedo ou muito tarde.", causa: "Threshold não calibrado para o local.", campo: "Slider 'Nível' na linha 'Superior'" },
     "Noturno.upper.holdTime": { menu: "Imagem › Perfis › Perfil 2 (Noturno) › Transições › Superior › Tempo de espera", desc: "Tempo na transição superior noturna (padrão: 60000ms)", impact: "Instabilidade de imagem durante a transição.", causa: "Diferença de firmware ou ajuste manual.", campo: "Campo 'Tempo de espera (ms)' na linha 'Superior'" },
     "Noturno.upper.profile": { menu: "Imagem › Perfis › Perfil 2 (Noturno) › Transições › Superior › Perfil destino", desc: "ID do perfil noturno de destino (padrão: 0)", impact: "Perfil noturno errado = fotos sem IR ou com ganho excessivo.", causa: "Profile ID não atualizado.", campo: "Dropdown 'Perfil' na linha 'Superior'" },
@@ -438,7 +496,7 @@ function AuditoriaTab({ analysis }) {
           {showAllRefs && (
             <div style={{ display: "flex", flexWrap: "wrap", gap: "4px", maxHeight: "120px", overflowY: "auto", padding: "4px 0" }}>
               {conformes.map(r => (
-                <span key={r.nome} style={{ background: "rgba(108,203,95,0.06)", padding: "2px 6px", borderRadius: "3px", fontSize: "10px", color: C.success, border: `1px solid rgba(108,203,95,0.15)` }}>{r.nome}</span>
+                <TunnelLink key={r.nome} nome={r.nome} uuid={r.uuid} style={{ background: "rgba(108,203,95,0.06)", padding: "2px 6px", borderRadius: "3px", fontSize: "10px", color: C.success, border: "1px solid rgba(108,203,95,0.15)", display: "inline-block" }} />
               ))}
             </div>
           )}
@@ -457,7 +515,7 @@ function AuditoriaTab({ analysis }) {
                 </div>
                 <div style={{ display: "flex", flexWrap: "wrap", gap: "3px" }}>
                   {g.devices.map(d => (
-                    <span key={d.nome} style={{ fontSize: "9px", color: C.textSecondary, padding: "1px 4px", background: C.raised, borderRadius: "2px" }}>{d.nome}</span>
+                    <TunnelLink key={d.nome} nome={d.nome} uuid={d.uuid} style={{ fontSize: "9px", color: C.textSecondary, padding: "1px 4px", background: C.raised, borderRadius: "2px", display: "inline-block" }} />
                   ))}
                 </div>
               </div>
@@ -471,7 +529,7 @@ function AuditoriaTab({ analysis }) {
             <div style={{ fontSize: "11px", fontWeight: 600, color: C.danger, marginBottom: "4px" }}>❌ OFFLINE — {offline.length} equipamentos (sem dados)</div>
             <div style={{ display: "flex", flexWrap: "wrap", gap: "4px" }}>
               {offline.map(d => (
-                <span key={d.nome} style={{ fontSize: "9px", color: C.danger, padding: "1px 5px", background: C.dangerBg, borderRadius: "3px", border: `1px solid ${C.dangerBorder}` }}>{d.nome}</span>
+                <TunnelLink key={d.nome} nome={d.nome} uuid={d.uuid} style={{ fontSize: "9px", color: C.danger, padding: "1px 5px", background: C.dangerBg, borderRadius: "3px", border: `1px solid ${C.dangerBorder}`, display: "inline-block" }} />
               ))}
             </div>
           </div>
@@ -494,6 +552,61 @@ function AuditoriaTab({ analysis }) {
           <div style={{ fontSize: "22px", fontWeight: 700, color: C.text }}>{sorted.length}</div>
           <div style={{ fontSize: "11px", color: C.textSecondary, marginBottom: "4px" }}>Tipos de Erro</div>
           <div style={{ fontSize: "10px", color: C.textMuted }}>{sorted.filter(([p, i]) => getSeverity(p, i.count, totalDevices) === "critical").length} críticos</div>
+        </div>
+      </div>
+
+      {/* Field insights - common observed issues */}
+      <div style={{ marginBottom: "16px", border: `1px solid rgba(255,165,0,0.2)`, borderRadius: "8px", overflow: "hidden" }}>
+        <div style={{ padding: "10px 14px", background: "rgba(255,165,0,0.06)", borderBottom: `1px solid rgba(255,165,0,0.12)` }}>
+          <h4 style={{ margin: 0, fontSize: "13px", color: "#ffb347" }}>💡 Insights de Campo — Problemas Observados</h4>
+        </div>
+        <div style={{ padding: "12px 14px" }}>
+          {/* Transition B&W issue */}
+          <div style={{ marginBottom: "12px", padding: "10px 12px", background: C.codeBg, borderRadius: "6px", border: `1px solid ${C.borderLight}` }}>
+            <div style={{ display: "flex", alignItems: "center", gap: "8px", marginBottom: "6px" }}>
+              <span style={{ fontSize: "11px", fontWeight: 700, color: C.warning, background: C.warningBg, padding: "2px 6px", borderRadius: "3px" }}>TRANSIÇÃO</span>
+              <span style={{ fontSize: "12px", fontWeight: 600, color: C.text }}>Câmera fica preto e branco (Noturno/IR) durante o dia</span>
+            </div>
+            <div style={{ fontSize: "11px", color: C.textSecondary, lineHeight: "1.7" }}>
+              <p style={{ margin: "0 0 6px" }}>
+                <strong style={{ color: C.danger }}>Sintoma:</strong> Imagem em preto e branco em plena luz do dia (ex: 14:59). Status da câmera mostra "Noturno" ativo.
+              </p>
+              <p style={{ margin: "0 0 6px" }}>
+                <strong style={{ color: C.warning }}>Causa raiz:</strong> O parâmetro <code style={{ color: C.accent }}>Diurno.lower.level</code> (threshold de transição inferior) está configurado em <strong style={{ color: "#ff7eb3" }}>35</strong> ao invés do padrão <strong style={{ color: "#7dffb3" }}>10</strong>.
+                Com nível 35, qualquer oscilação de luminosidade — nuvem passando, sombra, chuva — faz o sensor cair abaixo do threshold e a câmera ativa o perfil Noturno (modo IR / P&B).
+              </p>
+              <p style={{ margin: "0 0 6px" }}>
+                <strong style={{ color: C.accent }}>Mecanismo:</strong> Menu <em>Imagem › Perfis › Transições</em> → Regra "Diurno (inferior)" define: se nível &lt; 35, mudar para perfil Noturno.
+                O perfil Noturno usa ganho alto + IR, resultando em imagem monocromática.
+              </p>
+              <p style={{ margin: "0 0 6px" }}>
+                <strong style={{ color: C.success }}>Correção:</strong> Reduzir <code style={{ color: C.accent }}>Lower Level</code> de 35 para <strong style={{ color: "#7dffb3" }}>10</strong>. 
+                Com threshold em 10, a câmera só muda para Noturno quando realmente escurece (anoitecer real), evitando transições espúrias durante o dia.
+              </p>
+              <p style={{ margin: 0, fontSize: "10px", color: C.textMuted }}>
+                📊 Afeta {divergentes.filter(d => d.diffs["Diurno.lower.level"]).length} equipamento(s) nesta frota | Parâmetros relacionados: Diurno.lower.level, Diurno.lower.holdTime, Noturno.upper.level
+              </p>
+            </div>
+          </div>
+
+          {/* Transition timing issue */}
+          <div style={{ padding: "10px 12px", background: C.codeBg, borderRadius: "6px", border: `1px solid ${C.borderLight}` }}>
+            <div style={{ display: "flex", alignItems: "center", gap: "8px", marginBottom: "6px" }}>
+              <span style={{ fontSize: "11px", fontWeight: 700, color: "#ff99a4", background: C.dangerBg, padding: "2px 6px", borderRadius: "3px" }}>HORÁRIO</span>
+              <span style={{ fontSize: "12px", fontWeight: 600, color: C.text }}>Janelas de transição com horários divergentes (startTime/endTime)</span>
+            </div>
+            <div style={{ fontSize: "11px", color: C.textSecondary, lineHeight: "1.7" }}>
+              <p style={{ margin: "0 0 6px" }}>
+                <strong style={{ color: C.danger }}>Sintoma:</strong> Transição diurno/noturno não ocorre no momento esperado. Câmera pode ignorar threshold ou aplicar perfil errado fora da janela.
+              </p>
+              <p style={{ margin: "0 0 6px" }}>
+                <strong style={{ color: C.warning }}>Causa raiz:</strong> Os campos <code style={{ color: C.accent }}>startTime</code>/<code style={{ color: C.accent }}>endTime</code> das transições estão com valores customizados (ex: 06:00-17:58, 18:00-06:00) ao invés do padrão <strong style={{ color: "#7dffb3" }}>00:00:00</strong> (janela 24h).
+              </p>
+              <p style={{ margin: 0 }}>
+                <strong style={{ color: C.success }}>Correção:</strong> Definir startTime e endTime como <strong style={{ color: "#7dffb3" }}>00:00:00</strong> para que a regra de transição por nível de luz funcione 24h sem restrição de horário.
+              </p>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -623,7 +736,7 @@ function AuditoriaTab({ analysis }) {
                           <div style={{ fontSize: "10px", color: C.accent, marginBottom: "3px", textTransform: "uppercase", letterSpacing: "0.5px" }}>Equipamentos com valor correto ({consensusCount}/{consensusTotal})</div>
                           <div style={{ display: "flex", flexWrap: "wrap", gap: "4px", maxHeight: "60px", overflowY: "auto" }}>
                             {conformes.filter(r => String(r.params[param]) === String(correctVal)).slice(0, 10).map(r => (
-                              <span key={r.nome} style={{ background: "rgba(108,203,95,0.08)", border: "1px solid rgba(108,203,95,0.2)", padding: "2px 6px", borderRadius: "3px", fontSize: "10px", color: C.success }}>{r.nome}</span>
+                              <TunnelLink key={r.nome} nome={r.nome} uuid={r.uuid} style={{ background: "rgba(108,203,95,0.08)", border: "1px solid rgba(108,203,95,0.2)", padding: "2px 6px", borderRadius: "3px", fontSize: "10px", color: C.success, display: "inline-block" }} />
                             ))}
                             {conformes.filter(r => String(r.params[param]) === String(correctVal)).length > 10 && (
                               <span style={{ fontSize: "10px", color: C.textMuted, padding: "2px 4px" }}>+{conformes.filter(r => String(r.params[param]) === String(correctVal)).length - 10} mais</span>
@@ -634,8 +747,8 @@ function AuditoriaTab({ analysis }) {
                         <div>
                           <div style={{ fontSize: "10px", color: C.danger, marginBottom: "3px", textTransform: "uppercase", letterSpacing: "0.5px" }}>Equipamentos afetados ({info.count})</div>
                           <div style={{ maxHeight: "80px", overflowY: "auto", display: "flex", flexWrap: "wrap", gap: "3px" }}>
-                            {info.devices.map(name => (
-                              <span key={name} style={{ background: C.dangerBg, padding: "1px 5px", borderRadius: "3px", fontSize: "10px", color: C.danger }}>{name}</span>
+                            {info.devices.map(d => (
+                              <TunnelLink key={d.nome} nome={d.nome} uuid={d.uuid} style={{ background: C.dangerBg, padding: "1px 5px", borderRadius: "3px", fontSize: "10px", color: C.danger, display: "inline-block" }} />
                             ))}
                           </div>
                         </div>
@@ -702,6 +815,262 @@ function AuditoriaTab({ analysis }) {
   );
 }
 
+// ═══════════════════════════════════════════════════════════
+// CORREÇÕES TAB — Plano de Correção com análise e execução
+// ═══════════════════════════════════════════════════════════
+function CorrecoesTab({ liveDevices = [] }) {
+  const uuidMap = useMemo(() => {
+    const m = {};
+    liveDevices.forEach(d => { if (d.name && d.uuid) m[d.name] = d.uuid; });
+    return m;
+  }, [liveDevices]);
+  const [plano, setPlano] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [gerando, setGerando] = useState(false);
+  const [aplicando, setAplicando] = useState(null);
+  const [msg, setMsg] = useState(null);
+  const [expandedCaso, setExpandedCaso] = useState(null);
+
+  const carregarPlano = async () => {
+    setLoading(true);
+    try {
+      const res = await fetch(`${API_BASE}/api/varco/plano-correcao`);
+      if (res.ok) setPlano(await res.json());
+      else setPlano(null);
+    } catch { setPlano(null); }
+    finally { setLoading(false); }
+  };
+
+  const gerarNovoPlano = async () => {
+    setGerando(true); setMsg(null);
+    try {
+      const res = await fetch(`${API_BASE}/api/varco/gerar-plano`, { method: "POST" });
+      const data = await res.json();
+      if (res.ok && data.ok) { setPlano(data.plano); setMsg({ tipo: "ok", texto: "Plano gerado com sucesso!" }); }
+      else setMsg({ tipo: "erro", texto: data.erro || "Falha ao gerar plano" });
+    } catch (e) { setMsg({ tipo: "erro", texto: e.message }); }
+    finally { setGerando(false); }
+  };
+
+  const aplicarCaso = async (casoId) => {
+    setAplicando(casoId); setMsg(null);
+    try {
+      const res = await fetch(`${API_BASE}/api/varco/aplicar-correcao`, {
+        method: "POST", headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ caso: casoId }),
+      });
+      const data = await res.json();
+      if (res.ok && data.ok) {
+        setMsg({ tipo: "ok", texto: `Caso ${casoId} aplicado! ${data.resultado?.casos?.[0]?.afetados?.filter(a => a.corrigido)?.length || 0} corrigidos.` });
+        setPlano(data.resultado);
+      } else setMsg({ tipo: "erro", texto: data.erro || "Falha" });
+    } catch (e) { setMsg({ tipo: "erro", texto: e.message }); }
+    finally { setAplicando(null); }
+  };
+
+  useEffect(() => { carregarPlano(); }, []);
+
+  const sevColors = {
+    critico: { bg: "rgba(255,0,60,0.08)", border: "rgba(255,0,60,0.25)", text: "#ff4d6a", label: "CRÍTICO" },
+    alto: { bg: C.dangerBg, border: C.dangerBorder, text: C.danger, label: "ALTO" },
+    medio: { bg: C.warningBg, border: C.warningBorder, text: C.warning, label: "MÉDIO" },
+    baixo: { bg: "rgba(255,255,255,0.04)", border: C.border, text: C.textMuted, label: "BAIXO" },
+  };
+
+  return (
+    <div>
+      {/* Header actions */}
+      <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "16px" }}>
+        <button onClick={gerarNovoPlano} disabled={gerando}
+          style={{ display: "flex", alignItems: "center", gap: "6px", padding: "8px 16px", border: `1px solid ${C.accentBorder}`, borderRadius: "6px", background: gerando ? C.surface : C.accentBg, color: C.accent, cursor: gerando ? "wait" : "pointer", fontSize: "12px", fontWeight: 600 }}>
+          <RefreshCw size={14} className={gerando ? "spin" : ""} />
+          {gerando ? "Analisando frota (~3min)..." : "Gerar Novo Plano de Correção"}
+        </button>
+        {msg && (
+          <span style={{ fontSize: "11px", padding: "4px 10px", borderRadius: "4px", background: msg.tipo === "ok" ? C.successBg : C.dangerBg, color: msg.tipo === "ok" ? C.success : C.danger, border: `1px solid ${msg.tipo === "ok" ? C.successBorder : C.dangerBorder}` }}>
+            {msg.tipo === "ok" ? "✅" : "❌"} {msg.texto}
+          </span>
+        )}
+      </div>
+
+      {loading && <div style={{ textAlign: "center", padding: "40px", color: C.textMuted }}>Carregando plano...</div>}
+
+      {!loading && !plano && (
+        <div style={{ padding: "40px", textAlign: "center", background: C.surface, borderRadius: "8px", border: `1px solid ${C.border}` }}>
+          <p style={{ color: C.textMuted, fontSize: "13px", margin: "0 0 12px" }}>Nenhum plano de correção encontrado.</p>
+          <p style={{ color: C.textSecondary, fontSize: "12px", margin: 0 }}>Clique em <strong style={{ color: C.accent }}>"Gerar Novo Plano"</strong> para analisar todos os equipamentos e identificar correções necessárias.</p>
+        </div>
+      )}
+
+      {!loading && plano && (
+        <div>
+          {/* Summary */}
+          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr 1fr", gap: "10px", marginBottom: "16px" }}>
+            <div style={{ background: C.surface, border: `1px solid ${C.border}`, borderRadius: "8px", padding: "12px" }}>
+              <div style={{ fontSize: "20px", fontWeight: 700, color: C.text }}>{plano.resumo?.casosComAfetados || 0}</div>
+              <div style={{ fontSize: "10px", color: C.textMuted }}>Tipos de Erro</div>
+            </div>
+            <div style={{ background: C.dangerBg, border: `1px solid ${C.dangerBorder}`, borderRadius: "8px", padding: "12px" }}>
+              <div style={{ fontSize: "20px", fontWeight: 700, color: C.danger }}>{plano.resumo?.criticos || 0}</div>
+              <div style={{ fontSize: "10px", color: C.danger }}>Críticos</div>
+            </div>
+            <div style={{ background: C.warningBg, border: `1px solid ${C.warningBorder}`, borderRadius: "8px", padding: "12px" }}>
+              <div style={{ fontSize: "20px", fontWeight: 700, color: C.warning }}>{plano.resumo?.equipamentosUnicos || 0}</div>
+              <div style={{ fontSize: "10px", color: C.warning }}>Equipamentos Afetados</div>
+            </div>
+            <div style={{ background: C.surface, border: `1px solid ${C.border}`, borderRadius: "8px", padding: "12px" }}>
+              <div style={{ fontSize: "20px", fontWeight: 700, color: C.textSecondary }}>{plano.resumo?.totalErrosEncontrados || 0}</div>
+              <div style={{ fontSize: "10px", color: C.textMuted }}>Total de Ocorrências</div>
+            </div>
+          </div>
+
+          <div style={{ fontSize: "10px", color: C.textMuted, marginBottom: "12px" }}>
+            Plano gerado em: {plano.geradoEm ? new Date(plano.geradoEm).toLocaleString("pt-BR") : "—"} | Modo: {plano.modo}
+          </div>
+
+          {/* Cases list */}
+          {plano.casos?.map((caso) => {
+            const sev = sevColors[caso.severidade] || sevColors.baixo;
+            const isExp = expandedCaso === caso.id;
+            const hasAfetados = caso.totalAfetados > 0;
+
+            return (
+              <div key={caso.id} style={{ marginBottom: "8px", border: `1px solid ${hasAfetados ? sev.border : C.borderLight}`, borderRadius: "8px", overflow: "hidden", opacity: hasAfetados ? 1 : 0.6 }}>
+                {/* Case header */}
+                <div
+                  onClick={() => setExpandedCaso(isExp ? null : caso.id)}
+                  style={{ display: "flex", alignItems: "center", gap: "10px", padding: "12px 14px", cursor: "pointer", background: isExp ? "rgba(255,255,255,0.02)" : "transparent" }}
+                >
+                  <span style={{ background: sev.bg, border: `1px solid ${sev.border}`, color: sev.text, padding: "2px 8px", borderRadius: "4px", fontSize: "9px", fontWeight: 700, minWidth: "60px", textAlign: "center" }}>{sev.label}</span>
+                  <span style={{ fontSize: "13px", fontWeight: 600, color: C.text, flex: 1 }}>{caso.titulo}</span>
+                  <span style={{ fontSize: "12px", color: hasAfetados ? sev.text : C.textMuted, fontWeight: 600 }}>
+                    {hasAfetados ? `${caso.totalAfetados} equip` : "✅ OK"}
+                  </span>
+                  {isExp ? <ChevronUp size={14} color={C.textMuted} /> : <ChevronDown size={14} color={C.textMuted} />}
+                </div>
+
+                {/* Expanded details */}
+                {isExp && (
+                  <div style={{ borderTop: `1px solid ${C.borderLight}`, padding: "14px", background: C.surface }}>
+                    {/* Seção 1: O QUE É e POR QUE CORRIGIR */}
+                    <div style={{ marginBottom: "14px", padding: "12px", background: "rgba(255,255,255,0.02)", borderRadius: "6px", border: `1px solid ${C.borderLight}` }}>
+                      <div style={{ fontSize: "11px", fontWeight: 600, color: C.text, marginBottom: "8px" }}>💡 Entenda o problema</div>
+                      <div style={{ fontSize: "12px", color: C.textSecondary, lineHeight: "1.6", marginBottom: "10px" }}>{caso.descricao}</div>
+                      <div style={{ fontSize: "12px", color: "#ff7eb3", lineHeight: "1.6", padding: "8px 10px", background: "rgba(255,0,60,0.04)", borderRadius: "4px", borderLeft: "3px solid #ff4d6a" }}>
+                        <strong>Impacto:</strong> {caso.problema}
+                      </div>
+                    </div>
+
+                    {/* Seção 2: ONDE CORRIGIR (passo a passo) */}
+                    <div style={{ marginBottom: "14px", padding: "12px", background: C.accentBg, borderRadius: "6px", border: `1px solid ${C.accentBorder}` }}>
+                      <div style={{ fontSize: "11px", fontWeight: 600, color: C.accent, marginBottom: "6px" }}>🔧 Como corrigir</div>
+                      <div style={{ fontSize: "12px", color: C.textSecondary, lineHeight: "1.6" }}>{caso.correcao}</div>
+                      <div style={{ marginTop: "8px", fontSize: "10px", color: C.textMuted }}>
+                        <strong>Caminho na interface:</strong> <code style={{ color: C.accent, background: C.codeBg, padding: "2px 6px", borderRadius: "3px" }}>{caso.menu}</code>
+                      </div>
+                    </div>
+
+                    <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "14px", marginBottom: "14px" }}>
+                      {/* Left: Affected devices */}
+                      <div>
+                        <div style={{ fontSize: "10px", color: C.textMuted, textTransform: "uppercase", letterSpacing: "0.5px", marginBottom: "6px" }}>
+                          ❌ Equipamentos com ERRO ({caso.totalAfetados})
+                        </div>
+                        {caso.totalAfetados === 0 ? (
+                          <div style={{ padding: "20px", textAlign: "center", background: C.successBg, borderRadius: "6px", border: `1px solid ${C.successBorder}` }}>
+                            <div style={{ fontSize: "12px", color: C.success }}>✅ Nenhum equipamento afetado</div>
+                            <div style={{ fontSize: "10px", color: C.textMuted, marginTop: "4px" }}>Toda a frota está com o valor correto</div>
+                          </div>
+                        ) : (
+                          <div style={{ maxHeight: "200px", overflowY: "auto", border: `1px solid ${C.borderLight}`, borderRadius: "6px" }}>
+                            <table style={{ width: "100%", borderCollapse: "collapse", fontSize: "11px" }}>
+                              <thead>
+                                <tr style={{ background: C.tableHeader }}>
+                                  <th style={{ padding: "6px 8px", textAlign: "left", color: C.textSecondary }}>Equipamento</th>
+                                  <th style={{ padding: "6px 8px", textAlign: "center", color: C.textSecondary }}>Valor Atual</th>
+                                  <th style={{ padding: "6px 8px", textAlign: "center", color: C.textSecondary }}>Deveria Ser</th>
+                                  <th style={{ padding: "6px 8px", textAlign: "center", color: C.textSecondary }}>Status</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                {caso.afetados.map((a, i) => (
+                                  <tr key={i} style={{ borderTop: i > 0 ? `1px solid ${C.borderLight}` : "none" }}>
+                                    <td style={{ padding: "5px 8px", color: C.text, fontWeight: 500 }}><TunnelLink nome={a.nome} uuid={a.uuid} /></td>
+                                    <td style={{ padding: "5px 8px", textAlign: "center", fontFamily: "monospace", color: "#ff7eb3", fontWeight: 600 }}>{String(a.atual).slice(0, 30)}</td>
+                                    <td style={{ padding: "5px 8px", textAlign: "center", fontFamily: "monospace", color: "#7dffb3", fontWeight: 600 }}>{String(a.correto)}</td>
+                                    <td style={{ padding: "5px 8px", textAlign: "center" }}>
+                                      {a.corrigido === true && <span style={{ color: C.success, fontSize: "10px" }}>✅ corrigido</span>}
+                                      {a.corrigido === false && <span style={{ color: C.danger, fontSize: "10px" }}>❌ falhou</span>}
+                                      {a.corrigido === undefined && <span style={{ color: C.warning, fontSize: "10px" }}>⏳ pendente</span>}
+                                    </td>
+                                  </tr>
+                                ))}
+                              </tbody>
+                            </table>
+                          </div>
+                        )}
+                      </div>
+
+                      {/* Right: Reference examples (equipamentos corretos) */}
+                      <div>
+                        <div style={{ fontSize: "10px", color: C.textMuted, textTransform: "uppercase", letterSpacing: "0.5px", marginBottom: "6px" }}>
+                          ✅ Exemplos de equipamentos CORRETOS (referência)
+                        </div>
+                        {caso.conformes?.length > 0 ? (
+                          <div style={{ padding: "10px", background: C.successBg, borderRadius: "6px", border: `1px solid ${C.successBorder}` }}>
+                            {caso.conformes.map((c, i) => (
+                              <div key={i} style={{ display: "flex", alignItems: "center", gap: "8px", padding: "6px 0", borderTop: i > 0 ? `1px solid rgba(125,255,179,0.15)` : "none" }}>
+                                <span style={{ color: C.success, fontSize: "12px" }}>✅</span>
+                                <TunnelLink nome={c.nome} uuid={c.uuid || uuidMap[c.nome]} style={{ fontSize: "12px", color: C.text, fontWeight: 500 }} />
+                                <span style={{ fontSize: "10px", color: C.textMuted }}>({c.faixa})</span>
+                              </div>
+                            ))}
+                            <div style={{ marginTop: "8px", fontSize: "10px", color: C.textMuted, fontStyle: "italic" }}>
+                              Estes equipamentos já possuem o valor correto. Use como referência para comparação.
+                            </div>
+                          </div>
+                        ) : (
+                          <div style={{ padding: "12px", textAlign: "center", background: C.warningBg, borderRadius: "6px", border: `1px solid ${C.warningBorder}` }}>
+                            <div style={{ fontSize: "11px", color: C.warning }}>⚠️ Nenhum equipamento conforme encontrado</div>
+                            <div style={{ fontSize: "10px", color: C.textMuted, marginTop: "4px" }}>Todos os equipamentos acessíveis têm este erro</div>
+                          </div>
+                        )}
+
+                        {/* API info compact */}
+                        <div style={{ marginTop: "10px", padding: "8px", background: C.codeBg, borderRadius: "4px", fontSize: "10px", color: C.textMuted }}>
+                          <div><strong>API Endpoint:</strong> <code style={{ color: C.accent }}>{caso.endpoint}</code></div>
+                          <div><strong>Parâmetro:</strong> <code style={{ color: C.text }}>{caso.parametro}</code></div>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Action button */}
+                    {caso.totalAfetados > 0 && (
+                      <div style={{ display: "flex", alignItems: "center", gap: "10px", paddingTop: "12px", borderTop: `1px solid ${C.borderLight}` }}>
+                        <button
+                          onClick={() => aplicarCaso(caso.id)}
+                          disabled={aplicando === caso.id}
+                          style={{ display: "flex", alignItems: "center", gap: "6px", padding: "8px 16px", border: `1px solid ${C.successBorder}`, borderRadius: "6px", background: C.successBg, color: C.success, cursor: aplicando === caso.id ? "wait" : "pointer", fontSize: "12px", fontWeight: 600 }}
+                        >
+                          <Play size={12} />
+                          {aplicando === caso.id ? "Aplicando..." : `Aplicar Caso ${caso.id} — Corrigir ${caso.totalAfetados} equip(s)`}
+                        </button>
+                        <span style={{ fontSize: "10px", color: C.textMuted }}>
+                          Executa correção remota via API em todos os equipamentos listados
+                        </span>
+                      </div>
+                    )}
+                  </div>
+                )}
+              </div>
+            );
+          })}
+        </div>
+      )}
+    </div>
+  );
+}
+
 function GruposTab({ groups, expandedGroup, setExpandedGroup }) {
   return (
     <div>
@@ -722,7 +1091,7 @@ function GruposTab({ groups, expandedGroup, setExpandedGroup }) {
             {isExp && (
               <div style={{ borderTop: `1px solid ${C.border}`, padding: "10px 14px", background: C.surface }}>
                 <div style={{ marginBottom: "10px", display: "flex", flexWrap: "wrap", gap: "4px" }}>
-                  {group.devices.map(d => <span key={d.nome} style={{ background: C.codeBg, color: C.textSecondary, padding: "2px 7px", borderRadius: "3px", fontSize: "11px" }}>{d.nome}</span>)}
+                  {group.devices.map(d => <TunnelLink key={d.nome} nome={d.nome} uuid={d.uuid} style={{ background: C.codeBg, color: C.textSecondary, padding: "2px 7px", borderRadius: "3px", fontSize: "11px", display: "inline-block" }} />)}
                 </div>
                 <table style={{ width: "100%", borderCollapse: "collapse", fontSize: "12px" }}>
                   <thead><tr style={{ background: C.tableHeader }}>
@@ -788,7 +1157,7 @@ function InventarioTab({ results, filter, setFilter, statusFilter, setStatusFilt
                 <React.Fragment key={d.nome}>
                   <tr onClick={() => setExpandedDevice(isExp ? null : d.nome)} style={{ borderTop: `1px solid ${C.borderLight}`, cursor: d.conforme ? "default" : "pointer", background: isExp ? C.raised : "" }}>
                     <td style={{ padding: "5px 8px", color: C.textMuted }}>{i + 1}</td>
-                    <td style={{ padding: "5px 8px", fontWeight: 500, color: C.text }}>{d.nome}</td>
+                    <td style={{ padding: "5px 8px", fontWeight: 500, color: C.text }}><TunnelLink nome={d.nome} uuid={d.uuid} /></td>
                     <td style={{ padding: "5px 8px", textAlign: "center" }}>
                       {live && <span style={{ display: "inline-block", width: "7px", height: "7px", borderRadius: "50%", background: live.connected ? C.success : C.danger }} />}
                     </td>
@@ -918,7 +1287,7 @@ function PadraoTab() {
           <div key={dev.uuid || dev.nome} style={{ borderBottom: `1px solid ${C.borderLight}` }}>
             <div onClick={() => setExpandedDev(expandedDev === dev.nome ? null : dev.nome)} style={{ display: "grid", gridTemplateColumns: "1fr 100px 80px 30px", alignItems: "center", padding: "8px 12px", cursor: "pointer", background: expandedDev === dev.nome ? C.raised : "transparent" }}>
               <div>
-                <span style={{ fontWeight: 500, fontSize: "13px" }}>{dev.nome}</span>
+                <TunnelLink nome={dev.nome} uuid={dev.uuid} style={{ fontWeight: 500, fontSize: "13px" }} />
                 <span style={{ marginLeft: "8px", fontSize: "11px", color: C.textMuted }}>{dev.firmware}</span>
                 {dev.usuarios && <span style={{ marginLeft: "6px", fontSize: "10px", color: C.accent }}>👤 {dev.usuarios.total}</span>}
               </div>

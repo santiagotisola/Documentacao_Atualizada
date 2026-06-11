@@ -38,6 +38,10 @@ const ROTAS_PUBLICAS = [
   { method: "GET",  path: "/varco/auditoria" },
   { method: "GET",  path: "/varco/auditoria-aprimorada" },
   { method: "GET",  path: "/varco/config-padrao" },
+  { method: "POST", path: "/varco/recoleta" },
+  { method: "GET",  path: "/varco/plano-correcao" },
+  { method: "POST", path: "/varco/gerar-plano" },
+  { method: "POST", path: "/varco/aplicar-correcao" },
 ];
 
 function rotaPublica(req) {

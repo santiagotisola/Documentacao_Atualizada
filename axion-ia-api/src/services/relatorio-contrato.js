@@ -525,6 +525,10 @@ export async function listarContratos() {
     status: s.status,
     equipamentos: s.equipamentos?.total || 0,
     fabricantes: s.fabricantes || [],
+    ocr: s.ocr || null,
+    bi_reports: s.bi?.length || 0,
+    passagens_dia: s.passagensDia || null,
+    versao: s.versao || null,
   }));
 
   for (const s of sites.axcross) {
@@ -537,6 +541,10 @@ export async function listarContratos() {
       produto: "axcross",
       status: s.status,
       equipamentos: s.equipamentos || 0,
+      ocr: null,
+      bi_reports: 0,
+      passagens_dia: null,
+      versao: null,
     });
   }
 

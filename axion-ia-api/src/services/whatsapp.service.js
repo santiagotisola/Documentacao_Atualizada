@@ -30,6 +30,12 @@ const estado = {
   erros: 0,
 };
 
+// ─── Controle de reconexão com backoff exponencial ────────────────────────────
+const MAX_RECONNECT_ATTEMPTS = 10;
+const BASE_RECONNECT_DELAY_MS = 5000; // 5s, 10s, 20s, 40s... até ~42min
+let _reconnectAttempts = 0;
+let _reconnectTimer = null;
+
 /**
  * Inicia a conexão WhatsApp.
  * @param {function} callbackMensagem - fn(telefone, nome, texto) chamada ao receber mensagem
@@ -97,6 +103,7 @@ export async function iniciarWhatsApp(callbackMensagem) {
       estado.status = "conectado";
       estado.qr = null;
       estado.numero = sock.user?.id?.replace(/:.*@/, "@") || null;
+      _reconnectAttempts = 0; // reset on successful connection
       console.log("✅ [WhatsApp] Conectado como:", estado.numero);
     }
 
@@ -107,7 +114,16 @@ export async function iniciarWhatsApp(callbackMensagem) {
       const deveReconectar = codigo !== DisconnectReason.loggedOut;
       console.log("⚠️  [WhatsApp] Desconectado. Código:", codigo, "| Reconectar:", deveReconectar);
       if (deveReconectar) {
-        setTimeout(() => iniciarWhatsApp(onMensagem), 5000);
+        _reconnectAttempts++;
+        if (_reconnectAttempts > MAX_RECONNECT_ATTEMPTS) {
+          console.error(`❌ [WhatsApp] Limite de reconexões atingido (${MAX_RECONNECT_ATTEMPTS}). Desistindo. Use POST /whatsapp/restart para tentar novamente.`);
+          estado.status = "erro_reconexao";
+          estado.erros++;
+        } else {
+          const delay = Math.min(BASE_RECONNECT_DELAY_MS * Math.pow(2, _reconnectAttempts - 1), 5 * 60 * 1000); // max 5min
+          console.log(`🔄 [WhatsApp] Reconectando em ${Math.round(delay / 1000)}s (tentativa ${_reconnectAttempts}/${MAX_RECONNECT_ATTEMPTS})`);
+          _reconnectTimer = setTimeout(() => iniciarWhatsApp(onMensagem), delay);
+        }
       } else {
         estado.status = "desconectado";
         estado.erros++;
@@ -470,4 +486,23 @@ export async function desconectarWhatsApp() {
     estado.numero = null;
     console.log("🔌 [WhatsApp] Desconectado manualmente");
   }
+}
+
+/**
+ * Reinicia a conexão WhatsApp (reseta contadores e tenta novamente).
+ */
+export async function reiniciarWhatsApp() {
+  if (_reconnectTimer) {
+    clearTimeout(_reconnectTimer);
+    _reconnectTimer = null;
+  }
+  _reconnectAttempts = 0;
+  if (sock) {
+    try { sock.end(new Error("Restart manual")); } catch (_) {}
+    sock = null;
+  }
+  conectado = false;
+  estado.status = "conectando";
+  console.log("🔄 [WhatsApp] Reiniciando conexão (reset manual)...");
+  await iniciarWhatsApp(onMensagem);
 }
