@@ -25,6 +25,12 @@ Exibe a tabela completa de enquadramentos de infrações de trânsito conforme o
 Esta tela ainda não possui screenshot cadastrada. Será adicionada em breve.
 :::
 
+:::info Dados na Tarja
+O **Código** e **Descrição** do enquadramento aparecem nas **tarjas das infrações**.  
+Para entender como esses dados são exibidos, consulte:  
+👉 **[Configuração de Dados da Tarja](./configuracao-dados-tarja#codigo-da-infracao)**
+:::
+
 ## Termos Tecnicos
 
 | Termo | Definicao |

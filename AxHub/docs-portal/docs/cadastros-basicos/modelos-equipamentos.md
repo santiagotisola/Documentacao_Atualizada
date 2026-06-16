@@ -51,6 +51,15 @@ O cadastro de modelos de equipamentos registra os modelos específicos de hardwa
 
 :::warning Importante
 A portaria INMETRO é obrigatória para a validade legal das infrações geradas pelo equipamento. Certifique-se de informar corretamente o número e a referência completa da portaria de homologação.
+
+Esta informação aparece nas **tarjas das infrações** geradas por equipamentos deste modelo.
+:::
+
+:::tip Como aparece na tarja
+A portaria cadastrada aqui aparece automaticamente na tarja impressa nas infrações.  
+Para entender como alterar ou corrigir a portaria que aparece na tarja, consulte:
+
+👉 **[Configuração de Dados da Tarja](../administracao/configuracao-dados-tarja#portaria-do-equipamento)**
 :::
 
 :::tip Dica

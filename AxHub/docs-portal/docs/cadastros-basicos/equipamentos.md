@@ -71,6 +71,16 @@ O cadastro de equipamentos é o registro central de todos os dispositivos de fis
 O certificado INMETRO é obrigatório para que o equipamento tenha validade legal na geração de infrações. Mantenha as datas de emissão e vencimento atualizadas para controle de prazos de aferição.
 :::
 
+:::info Dados na Tarja
+Os seguintes dados cadastrados aqui aparecem nas **tarjas das infrações**:
+- **Código** do equipamento
+- **Nº Série** (Serial)
+- **Certificado INMETRO**
+
+Para entender como esses dados são exibidos e como alterá-los, consulte:  
+👉 **[Configuração de Dados da Tarja](../administracao/configuracao-dados-tarja)**
+:::
+
 :::tip Hierarquia de cadastros
 Antes de cadastrar um equipamento, certifique-se de que o **Fabricante**, **Modelo**, **Tipo** e **Grupo** já estão cadastrados no sistema. A ordem recomendada de cadastro é:
 1. Fabricantes
