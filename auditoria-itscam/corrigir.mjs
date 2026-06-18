@@ -36,6 +36,7 @@ const FILTRO_EQUIP = getArg('equip');
 const TODOS = hasFlag('todos');
 const AUTO_SIM = hasFlag('sim');
 const DRY_RUN = hasFlag('dry');
+const VERBOSE = hasFlag('verbose');
 
 if (!CASO_ID) {
   console.log(`
@@ -158,8 +159,15 @@ const CASOS = {
       { nome: 'GOEC6O010 - Faixa 2', uuid: '481dd19b-4968-4759-860b-35f9ec09c206' },
       { nome: 'GOEC6O011 - Faixa 2', uuid: 'd0595c80-9ea7-49af-b2a0-d305d688e567' },
       { nome: 'GOEC6O028 - Faixa 1', uuid: '1f460cd7-f607-4c79-8a8e-50a8228850a4' },
+      { nome: 'GOEC6O043 - Faixa 2', uuid: '9e7e2c3c-bf75-40c4-b0ca-42b3950a0955' },
+      { nome: 'GOEC6O046 - Faixa 1', uuid: '1e26be92-70e4-468f-a582-4e015282a4fe' },
+      { nome: 'GOEC6O049 - Faixa 1', uuid: 'ad0db63e-bb6e-4cb1-99eb-960f486cb692' },
       { nome: 'GOEC6O052 - Faixa 2', uuid: '8244f568-59f3-4f27-932e-86cc2eb10fc3' },
+      { nome: 'GOEC6O052- Faixa 1', uuid: '49cbc26f-7a42-47d6-9d32-bc66f740e886' },
+      { nome: 'GOEC6O054 - Faixa 2', uuid: '06821a80-8d82-484e-908e-a9a55ba73b7b' },
+      { nome: 'GOEC6O055 - Faixa 2', uuid: 'fe5f7cf3-a8dd-41e8-b975-72921dbddeac' },
       { nome: 'GOEC6O058 - Faixa 2', uuid: '6561d5fd-0aba-413b-a60a-a0d7e1b61b6d' },
+      { nome: 'GOEC6O059 - Faixa 2', uuid: 'cedcda0f-9104-498c-9f52-8f6e3ebfdcfb' },
     ],
     buildPayload: () => ({ classifier: { processingQueue: 1, processingThreads: 1 } }),
     validar: (d) => {
@@ -184,9 +192,21 @@ const CASOS = {
     buildPayload: (equip, data, idx) => {
       const profiles = Array.isArray(data) ? data : data?.profiles || [];
       const perfil = JSON.parse(JSON.stringify(profiles[idx] || {}));
+      
+      // Verifica se este perfil específico precisa de correção
+      const currentLowerLevel = perfil?.transitions?.lower?.level;
+      const currentUpperLevel = perfil?.transitions?.upper?.level;
+      const needsCorrection = currentLowerLevel !== 10 || currentUpperLevel !== 35;
+      
+      if (!needsCorrection) {
+        return null; // Sinaliza que não precisa corrigir este perfil
+      }
+      
       if (perfil.transitions) {
         perfil.transitions.lower.level = 10;
+        perfil.transitions.lower.profile = idx;
         perfil.transitions.upper.level = 35;
+        perfil.transitions.upper.profile = idx === 0 ? 1 : 0;
       }
       return perfil;
     },
@@ -429,10 +449,11 @@ async function main() {
     if (caso.multi_endpoint) {
       for (let i = 0; i < caso.endpoints_escrita.length; i++) {
         const payload = caso.buildPayload(equip, dados, i);
+        if (payload === null) continue; // Perfil já correto
         const r = await gravar(baseUrl, token, caso.endpoints_escrita[i], payload);
-        if (!r.ok) { sucesso = false; console.log(` ❌ Erro no perfil ${i}`); break; }
+        if (!r.ok) { sucesso = false; console.log(` ❌ Erro no perfil ${i} (HTTP ${r.status})`); break; }
       }
-      if (sucesso) console.log(' ✅ Ambos os perfis');
+      if (sucesso) console.log(' ✅ Perfis corrigidos');
     } else {
       const payload = caso.buildPayload(equip, dados);
       const r = await gravar(baseUrl, token, caso.endpoint_escrita, payload);
