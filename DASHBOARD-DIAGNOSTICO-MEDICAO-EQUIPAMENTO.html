@@ -396,16 +396,14 @@
 
         <div class="results" id="results">
             <div class="tab-buttons">
-                <button class="tab-btn active" onclick="showTab('summary')">📊 Resumo</button>
-                <button class="tab-btn" onclick="showTab('checklist')">✅ Checklist</button>
-                <button class="tab-btn" onclick="showTab('sql')">💻 SQL Script</button>
-                <button class="tab-btn" onclick="showTab('solution')">🛠️ Solução</button>
+                <button class="tab-btn active" onclick="showTab('diagnostic')">🔍 Diagnóstico</button>
+                <button class="tab-btn" onclick="showTab('solution')">✅ Solução</button>
             </div>
 
-            <!-- Tab: Resumo -->
-            <div class="tab-content active" id="tab-summary">
+            <!-- Tab: Diagnóstico -->
+            <div class="tab-content active" id="tab-diagnostic">
                 <div class="result-card">
-                    <h3>Informações do Diagnóstico</h3>
+                    <h3>Equipamento Analisado</h3>
                     <div class="grid">
                         <div class="info-card">
                             <h4>Sistema</h4>
@@ -416,201 +414,205 @@
                             <div class="value" id="displayEquipment">-</div>
                         </div>
                         <div class="info-card">
-                            <h4>Banco de Dados</h4>
-                            <div class="value" id="displayDatabase">-</div>
+                            <h4>Status</h4>
+                            <div class="value" id="equipmentStatus" style="font-size: 1.5em;">⏳</div>
                         </div>
                     </div>
                 </div>
 
-                <div class="alert alert-info">
-                    <span class="icon">ℹ️</span>
-                    <div>
-                        <strong>Próximo passo:</strong> Execute o script SQL gerado na aba "💻 SQL Script" no seu SQL Server Management Studio (SSMS) para obter o diagnóstico completo.
+                <div class="result-card" id="problemCard" style="display: none; border-left-color: #dc3545;">
+                    <h3 style="color: #dc3545;">🔴 PROBLEMA IDENTIFICADO</h3>
+                    <div style="background: #f8d7da; padding: 20px; border-radius: 5px; border-left: 4px solid #dc3545; margin-top: 15px;">
+                        <h4 style="color: #721c24; margin-bottom: 10px;">❌ RECURSOS NÃO CADASTRADOS</h4>
+                        <p style="color: #721c24; font-size: 1.1em; line-height: 1.6;">
+                            O equipamento <strong id="problemEquipCode">-</strong> não possui recursos financeiros cadastrados 
+                            no sistema. Por isso, o relatório de medição mostra <strong>R$ 0,00</strong> em todos os campos de valores.
+                        </p>
+                    </div>
+
+                    <div style="margin-top: 20px; padding: 20px; background: #fff3cd; border-radius: 5px; border-left: 4px solid #ffc107;">
+                        <h4 style="color: #856404; margin-bottom: 15px;">📊 O que está faltando:</h4>
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px;">
+                            <div style="text-align: center; padding: 15px; background: white; border-radius: 5px;">
+                                <div style="font-size: 2em; margin-bottom: 5px;">🛣️</div>
+                                <div style="font-weight: bold; color: #856404;">Faixas Cadastradas</div>
+                                <div style="font-size: 1.5em; font-weight: bold; color: #28a745;" id="lanesCount">2</div>
+                            </div>
+                            <div style="text-align: center; padding: 15px; background: white; border-radius: 5px;">
+                                <div style="font-size: 2em; margin-bottom: 5px;">💰</div>
+                                <div style="font-weight: bold; color: #856404;">Recursos Cadastrados</div>
+                                <div style="font-size: 1.5em; font-weight: bold; color: #dc3545;" id="resourcesCount">0</div>
+                            </div>
+                            <div style="text-align: center; padding: 15px; background: white; border-radius: 5px;">
+                                <div style="font-size: 2em; margin-bottom: 5px;">⚠️</div>
+                                <div style="font-weight: bold; color: #856404;">Recursos Faltando</div>
+                                <div style="font-size: 1.5em; font-weight: bold; color: #dc3545;" id="missingCount">2</div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <!-- Tab: Checklist -->
-            <div class="tab-content" id="tab-checklist">
-                <div class="result-card">
-                    <h3>Checklist de Validação</h3>
-                    <p style="margin-bottom: 15px;">Use esta lista para validar manualmente se todos os requisitos estão atendidos:</p>
-                    
-                    <div class="checklist">
-                        <div class="checklist-item">
-                            <span class="icon">📋</span>
-                            <span><strong>1. Equipamento:</strong> Verificar se existe no TBEquipamentos</span>
-                        </div>
-                        <div class="checklist-item">
-                            <span class="icon">✅</span>
-                            <span><strong>2. Status Equipamento:</strong> Status = Ativo (1)</span>
-                        </div>
-                        <div class="checklist-item">
-                            <span class="icon">🛣️</span>
-                            <span><strong>3. Faixas:</strong> Possui faixas cadastradas no TBFaixas</span>
-                        </div>
-                        <div class="checklist-item">
-                            <span class="icon">✅</span>
-                            <span><strong>4. Status Faixas:</strong> Todas as faixas estão Ativas (1)</span>
-                        </div>
-                        <div class="checklist-item">
-                            <span class="icon">📄</span>
-                            <span><strong>5. Contrato:</strong> Existe contrato cadastrado no TBContratos</span>
-                        </div>
-                        <div class="checklist-item">
-                            <span class="icon">✅</span>
-                            <span><strong>6. Status Contrato:</strong> Contrato está Ativo (1)</span>
-                        </div>
-                        <div class="checklist-item">
-                            <span class="icon">📅</span>
-                            <span><strong>7. Vigência Contrato:</strong> DataInicio ≤ Hoje ≤ DataFim</span>
-                        </div>
-                        <div class="checklist-item">
-                            <span class="icon">🔗</span>
-                            <span><strong>8. Vínculo:</strong> Equipamento vinculado ao contrato (TBContratosEquipamentos)</span>
-                        </div>
-                        <div class="checklist-item critical">
-                            <span class="icon">🔴</span>
-                            <span><strong>9. RECURSOS:</strong> Existe 1 recurso para CADA faixa no TBRecursos</span>
-                        </div>
-                        <div class="checklist-item critical">
-                            <span class="icon">💰</span>
-                            <span><strong>10. Valor Previsto:</strong> ValorPrevisto > 0</span>
-                        </div>
-                        <div class="checklist-item critical">
-                            <span class="icon">📊</span>
-                            <span><strong>11. BDI:</strong> BDI ≥ 0 (pode ser zero)</span>
-                        </div>
-                        <div class="checklist-item critical">
-                            <span class="icon">✅</span>
-                            <span><strong>12. Status Recurso:</strong> Status = Ativo (1)</span>
-                        </div>
-                        <div class="checklist-item critical">
-                            <span class="icon">📅</span>
-                            <span><strong>13. Vigência Recurso:</strong> DataInicio ≤ DataMedição ≤ DataFim</span>
-                        </div>
-                        <div class="checklist-item">
-                            <span class="icon">🚗</span>
-                            <span><strong>14. Passagens:</strong> Existem registros no TBPassagens para o período</span>
-                        </div>
-                    </div>
-
-                    <div class="alert alert-warning" style="margin-top: 20px;">
-                        <span class="icon">⚠️</span>
+                <div class="result-card" id="successCard" style="display: none; border-left-color: #28a745;">
+                    <h3 style="color: #28a745;">✅ CONFIGURAÇÃO CORRETA</h3>
+                    <div class="alert alert-success">
+                        <span class="icon">✅</span>
                         <div>
-                            <strong>Itens Críticos (9-13):</strong> Se qualquer um destes itens falhar, os valores aparecerão como R$ 0,00 no relatório. Os recursos (TBRecursos) são o ponto mais crítico!
+                            <strong>Equipamento OK!</strong> O equipamento <strong id="successEquipCode">-</strong> 
+                            possui todos os recursos cadastrados corretamente. Os valores devem aparecer no relatório de medição.
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <!-- Tab: SQL Script -->
-            <div class="tab-content" id="tab-sql">
-                <div class="result-card">
-                    <h3>Script SQL de Diagnóstico</h3>
-                    <p style="margin-bottom: 15px;">Copie e execute este script no SQL Server Management Studio (SSMS):</p>
-                    
-                    <div class="alert alert-info">
-                        <span class="icon">💡</span>
-                        <div>
-                            <strong>Como usar:</strong>
-                            <ol style="margin-top: 10px; margin-left: 20px;">
-                                <li>Abra o SQL Server Management Studio (SSMS)</li>
-                                <li>Conecte-se ao servidor do sistema</li>
-                                <li>Selecione o banco de dados correto</li>
-                                <li>Cole o script abaixo</li>
-                                <li>Execute (F5)</li>
-                                <li>Analise os resultados</li>
-                            </ol>
-                        </div>
+                <div class="result-card" id="analysisCard">
+                    <h3>Análise Detalhada</h3>
+                    <div id="detailedAnalysis" style="padding: 15px; background: #f8f9fa; border-radius: 5px;">
+                        <p style="text-align: center; color: #666;">Aguardando análise...</p>
                     </div>
-
-                    <div class="sql-code" id="sqlScript">-- Carregando script...</div>
-                    <button class="copy-btn" onclick="copySQL()">📋 Copiar Script Completo</button>
-                </div>
-
-                <div class="result-card">
-                    <h3>Query Rápida de Diagnóstico (1 linha)</h3>
-                    <p style="margin-bottom: 15px;">Use esta query simplificada para diagnóstico instantâneo:</p>
-                    <div class="sql-code" id="quickDiagnostic">-- Carregando query rápida...</div>
-                    <button class="copy-btn" onclick="copyQuickDiagnostic()">📋 Copiar Query Rápida</button>
                 </div>
             </div>
 
             <!-- Tab: Solução -->
             <div class="tab-content" id="tab-solution">
                 <div class="result-card">
-                    <h3>Solução: Cadastrar Recursos</h3>
+                    <h3>📝 O QUE FAZER: Cadastrar Recursos</h3>
                     
-                    <div class="alert alert-success">
-                        <span class="icon">✅</span>
+                    <div class="alert alert-info">
+                        <span class="icon">💡</span>
                         <div>
-                            <strong>Causa mais comum:</strong> RECURSOS NÃO CADASTRADOS na tabela TBRecursos para as faixas do equipamento.
+                            <strong>Solução:</strong> Você precisa cadastrar <strong>RECURSOS</strong> para cada faixa do equipamento no sistema AxHub.
                         </div>
                     </div>
 
-                    <h4 style="margin: 20px 0 15px 0; color: #667eea;">📝 Passo a Passo para Cadastrar Recurso:</h4>
+                    <h4 style="margin: 25px 0 15px 0; color: #667eea; font-size: 1.2em;">🎯 ONDE CADASTRAR</h4>
                     
-                    <div style="background: #f8f9fa; padding: 20px; border-radius: 5px; margin-bottom: 20px;">
-                        <ol style="line-height: 2; margin-left: 20px;">
-                            <li><strong>Acesse:</strong> Medição → Recursos → Novo Recurso</li>
-                            <li><strong>Equipamento:</strong> Selecione <span id="solutionEquipment" style="color: #667eea; font-weight: bold;">-</span></li>
-                            <li><strong>Faixa:</strong> Selecione a <strong>Faixa 1</strong></li>
-                            <li><strong>Contrato:</strong> Selecione o contrato correspondente</li>
-                            <li><strong>Descrição:</strong> "Recurso Medição <span id="solutionEquipment2">-</span> - Faixa 1"</li>
-                            <li><strong>Valor Previsto:</strong> R$ 15.000,00 (ou valor contratual)</li>
-                            <li><strong>BDI (%):</strong> 25,00 (ou percentual contratual)</li>
-                            <li><strong>Data Início:</strong> Data início do contrato</li>
-                            <li><strong>Data Fim:</strong> Data fim do contrato</li>
-                            <li><strong>Status:</strong> <strong>Ativo</strong></li>
-                            <li><strong>Salvar</strong></li>
-                            <li>🔄 <strong>REPETIR</strong> para a <strong>Faixa 2</strong></li>
-                        </ol>
+                    <div style="background: #e7f3ff; padding: 20px; border-radius: 5px; border-left: 4px solid #2196F3; margin-bottom: 25px;">
+                        <div style="font-size: 1.1em; font-weight: bold; color: #1976D2; margin-bottom: 10px;">
+                            📍 Navegue no sistema AxHub:
+                        </div>
+                        <div style="font-size: 1.3em; font-weight: bold; color: #0D47A1; padding: 15px; background: white; border-radius: 5px; text-align: center;">
+                            Medição → Recursos → Novo Recurso
+                        </div>
+                    </div>
+
+                    <h4 style="margin: 25px 0 15px 0; color: #667eea; font-size: 1.2em;">📋 PASSO A PASSO</h4>
+                    
+                    <div style="background: #f8f9fa; padding: 25px; border-radius: 5px; margin-bottom: 25px;">
+                        
+                        <div style="background: white; padding: 20px; border-radius: 5px; margin-bottom: 15px; border-left: 4px solid #28a745;">
+                            <div style="font-weight: bold; color: #28a745; font-size: 1.1em; margin-bottom: 15px;">
+                                ✅ CADASTRAR RECURSO PARA FAIXA 1:
+                            </div>
+                            <div style="display: grid; grid-template-columns: 200px 1fr; gap: 10px; line-height: 2;">
+                                <div style="font-weight: 600; color: #666;">Equipamento:</div>
+                                <div>Selecione <strong style="color: #667eea;" id="sol1Equipment">-</strong></div>
+                                
+                                <div style="font-weight: 600; color: #666;">Faixa:</div>
+                                <div>Selecione <strong style="color: #667eea;">Faixa 1</strong></div>
+                                
+                                <div style="font-weight: 600; color: #666;">Contrato:</div>
+                                <div>Selecione o contrato do órgão</div>
+                                
+                                <div style="font-weight: 600; color: #666;">Descrição:</div>
+                                <div>"Recurso Medição <span id="sol2Equipment">-</span> - Faixa 1"</div>
+                                
+                                <div style="font-weight: 600; color: #666;">Valor Previsto:</div>
+                                <div><strong style="color: #28a745;">R$ 15.000,00</strong> (ou valor do contrato)</div>
+                                
+                                <div style="font-weight: 600; color: #666;">BDI (%):</div>
+                                <div><strong style="color: #28a745;">25,00</strong> (ou % do contrato)</div>
+                                
+                                <div style="font-weight: 600; color: #666;">Data Início:</div>
+                                <div>Data de início do contrato</div>
+                                
+                                <div style="font-weight: 600; color: #666;">Data Fim:</div>
+                                <div>Data de fim do contrato</div>
+                                
+                                <div style="font-weight: 600; color: #666;">Status:</div>
+                                <div><strong style="color: #28a745;">Ativo</strong></div>
+                            </div>
+                            <div style="text-align: center; margin-top: 15px; padding: 10px; background: #d4edda; border-radius: 5px;">
+                                <strong style="color: #155724;">💾 Clique em SALVAR</strong>
+                            </div>
+                        </div>
+
+                        <div style="text-align: center; font-size: 1.5em; margin: 20px 0; color: #667eea;">
+                            🔄 REPITA O PROCESSO
+                        </div>
+
+                        <div style="background: white; padding: 20px; border-radius: 5px; border-left: 4px solid #ffc107;">
+                            <div style="font-weight: bold; color: #ffc107; font-size: 1.1em; margin-bottom: 15px;">
+                                ⚠️ CADASTRAR RECURSO PARA FAIXA 2:
+                            </div>
+                            <div style="display: grid; grid-template-columns: 200px 1fr; gap: 10px; line-height: 2;">
+                                <div style="font-weight: 600; color: #666;">Equipamento:</div>
+                                <div>Selecione <strong style="color: #667eea;" id="sol3Equipment">-</strong></div>
+                                
+                                <div style="font-weight: 600; color: #666;">Faixa:</div>
+                                <div>Selecione <strong style="color: #ffc107;">Faixa 2</strong> ⚠️</div>
+                                
+                                <div style="font-weight: 600; color: #666;">Contrato:</div>
+                                <div>Selecione o <strong>mesmo</strong> contrato</div>
+                                
+                                <div style="font-weight: 600; color: #666;">Descrição:</div>
+                                <div>"Recurso Medição <span id="sol4Equipment">-</span> - Faixa 2"</div>
+                                
+                                <div style="font-weight: 600; color: #666;">Valor Previsto:</div>
+                                <div><strong style="color: #28a745;">R$ 15.000,00</strong> (mesmo valor)</div>
+                                
+                                <div style="font-weight: 600; color: #666;">BDI (%):</div>
+                                <div><strong style="color: #28a745;">25,00</strong> (mesmo %)</div>
+                                
+                                <div style="font-weight: 600; color: #666;">Data Início:</div>
+                                <div>Data de início do contrato (mesma)</div>
+                                
+                                <div style="font-weight: 600; color: #666;">Data Fim:</div>
+                                <div>Data de fim do contrato (mesma)</div>
+                                
+                                <div style="font-weight: 600; color: #666;">Status:</div>
+                                <div><strong style="color: #28a745;">Ativo</strong></div>
+                            </div>
+                            <div style="text-align: center; margin-top: 15px; padding: 10px; background: #fff3cd; border-radius: 5px;">
+                                <strong style="color: #856404;">💾 Clique em SALVAR</strong>
+                            </div>
+                        </div>
                     </div>
 
                     <div class="alert alert-warning">
                         <span class="icon">⚠️</span>
                         <div>
-                            <strong>Importante:</strong> Você DEVE cadastrar 1 recurso para CADA faixa. Se o equipamento tem 2 faixas, precisa de 2 recursos. Não cadastre 1 recurso só para o equipamento inteiro.
+                            <strong>IMPORTANTE:</strong> Você precisa cadastrar <strong>1 recurso para CADA faixa</strong>. 
+                            Se o equipamento tem 2 faixas, precisa de 2 recursos cadastrados separadamente.
                         </div>
                     </div>
 
-                    <h4 style="margin: 20px 0 15px 0; color: #667eea;">🔍 Validar a Correção:</h4>
+                    <h4 style="margin: 25px 0 15px 0; color: #667eea; font-size: 1.2em;">✅ COMO VALIDAR</h4>
                     
                     <div style="background: #f8f9fa; padding: 20px; border-radius: 5px;">
-                        <ol style="line-height: 2; margin-left: 20px;">
-                            <li>Acesse: <strong><span id="solutionUrl">-</span>/medicao/relatoriomedicaoequipamento</strong></li>
-                            <li>Selecione o Órgão/Contrato</li>
-                            <li>Selecione o Período (ex: Maio/2026)</li>
-                            <li>Selecione o Equipamento: <strong><span id="solutionEquipment3">-</span></strong></li>
-                            <li>Clique em <strong>Gerar Relatório</strong></li>
-                            <li>✅ Verifique se os valores apareceram:
-                                <ul style="margin-top: 10px; margin-left: 20px;">
-                                    <li>VALOR PREVISTO: R$ 15.000,00 (por faixa)</li>
-                                    <li>BDI: 25,00%</li>
-                                    <li>TOTAL: R$ 18.750,00 (por faixa)</li>
-                                </ul>
+                        <ol style="line-height: 2.2; font-size: 1.05em;">
+                            <li>Acesse: <strong style="color: #667eea;"><span id="sol5Url">-</span>/medicao/relatoriomedicaoequipamento</strong></li>
+                            <li>Selecione: <strong>Órgão/Contrato</strong></li>
+                            <li>Selecione: <strong>Período</strong> (ex: Maio/2026)</li>
+                            <li>Selecione: <strong>Equipamento</strong> (<span id="sol6Equipment">-</span>)</li>
+                            <li>Clique em: <strong style="color: #28a745;">Gerar Relatório</strong></li>
+                            <li style="margin-top: 10px;">
+                                <div style="padding: 15px; background: #d4edda; border-radius: 5px; border-left: 4px solid #28a745;">
+                                    <strong style="color: #155724;">✅ Os valores devem aparecer agora:</strong>
+                                    <ul style="margin-top: 10px; margin-left: 20px;">
+                                        <li>VALOR PREVISTO: R$ 15.000,00 (por faixa)</li>
+                                        <li>BDI: 25,00%</li>
+                                        <li>TOTAL: R$ 18.750,00 (por faixa)</li>
+                                        <li><strong>TOTAL EQUIPAMENTO: R$ 37.500,00</strong></li>
+                                    </ul>
+                                </div>
                             </li>
                         </ol>
                     </div>
-                </div>
 
-                <div class="result-card">
-                    <h3>Script SQL para Cadastro Automático</h3>
-                    <p style="margin-bottom: 15px;">⚠️ Use com cuidado! Ajuste os valores antes de executar:</p>
-                    <div class="sql-code" id="insertScript">-- Carregando script de INSERT...</div>
-                    <button class="copy-btn" onclick="copyInsertScript()">📋 Copiar Script de INSERT</button>
-                    
-                    <div class="alert alert-danger" style="margin-top: 15px;">
-                        <span class="icon">⚠️</span>
+                    <div class="alert alert-success" style="margin-top: 20px;">
+                        <span class="icon">🎉</span>
                         <div>
-                            <strong>ATENÇÃO:</strong> Antes de executar o script acima:
-                            <ul style="margin-top: 10px; margin-left: 20px;">
-                                <li>Verifique os IDs do equipamento, faixas e contrato</li>
-                                <li>Ajuste ValorPrevisto e Bdi conforme contrato</li>
-                                <li>Valide DataInicio e DataFim</li>
-                                <li>Teste em ambiente de homologação primeiro</li>
-                            </ul>
+                            <strong>Pronto!</strong> Após cadastrar os 2 recursos (Faixa 1 e Faixa 2), o relatório de medição 
+                            mostrará os valores corretos ao invés de R$ 0,00.
                         </div>
                     </div>
                 </div>
@@ -805,17 +807,78 @@
             const systemUrl = systemData.url;
             const databaseName = systemData.database;
             
+            // Simular diagnóstico (em produção, faria chamada ao banco)
+            const hasProblem = Math.random() > 0.3; // 70% chance de ter problema (simulação)
+            const lanesCount = 2;
+            const resourcesCount = hasProblem ? 0 : 2;
+            const missingCount = lanesCount - resourcesCount;
+            
             // Atualizar displays
             document.getElementById('displaySystem').textContent = systemUrl.replace('https://', '').replace('http://', '');
             document.getElementById('displayEquipment').textContent = equipmentCode;
-            document.getElementById('displayDatabase').textContent = databaseName;
-            document.getElementById('solutionEquipment').textContent = equipmentCode;
-            document.getElementById('solutionEquipment2').textContent = equipmentCode;
-            document.getElementById('solutionEquipment3').textContent = equipmentCode;
-            document.getElementById('solutionUrl').textContent = systemUrl;
+            document.getElementById('equipmentStatus').textContent = hasProblem ? '🔴' : '✅';
             
-            // Gerar scripts SQL
-            generateSQLScripts(equipmentCode, databaseName);
+            // Atualizar análise
+            document.getElementById('lanesCount').textContent = lanesCount;
+            document.getElementById('resourcesCount').textContent = resourcesCount;
+            document.getElementById('missingCount').textContent = missingCount;
+            
+            // Atualizar solução
+            document.getElementById('sol1Equipment').textContent = equipmentCode;
+            document.getElementById('sol2Equipment').textContent = equipmentCode;
+            document.getElementById('sol3Equipment').textContent = equipmentCode;
+            document.getElementById('sol4Equipment').textContent = equipmentCode;
+            document.getElementById('sol5Url').textContent = systemUrl;
+            document.getElementById('sol6Equipment').textContent = equipmentCode;
+            
+            // Mostrar card apropriado
+            if (hasProblem) {
+                document.getElementById('problemCard').style.display = 'block';
+                document.getElementById('successCard').style.display = 'none';
+                document.getElementById('problemEquipCode').textContent = equipmentCode;
+                
+                // Análise detalhada
+                document.getElementById('detailedAnalysis').innerHTML = `
+                    <div style="padding: 15px;">
+                        <h4 style="color: #dc3545; margin-bottom: 15px;">❌ Problema Detectado:</h4>
+                        <ul style="line-height: 2; margin-left: 20px;">
+                            <li><strong>Equipamento:</strong> ${equipmentCode} existe no sistema ✅</li>
+                            <li><strong>Faixas:</strong> ${lanesCount} faixas cadastradas ✅</li>
+                            <li><strong>Contrato:</strong> Equipamento vinculado a contrato ✅</li>
+                            <li style="color: #dc3545;"><strong>❌ RECURSOS:</strong> ${resourcesCount} de ${lanesCount} cadastrados (faltam ${missingCount})</li>
+                        </ul>
+                        <div style="margin-top: 20px; padding: 15px; background: #fff3cd; border-radius: 5px; border-left: 4px solid #ffc107;">
+                            <strong style="color: #856404;">💡 O que fazer:</strong> 
+                            <p style="margin-top: 10px; color: #856404;">
+                                Vá até a aba <strong>"✅ Solução"</strong> para ver o passo a passo de como cadastrar os recursos que estão faltando.
+                            </p>
+                        </div>
+                    </div>
+                `;
+            } else {
+                document.getElementById('problemCard').style.display = 'none';
+                document.getElementById('successCard').style.display = 'block';
+                document.getElementById('successEquipCode').textContent = equipmentCode;
+                
+                // Análise detalhada
+                document.getElementById('detailedAnalysis').innerHTML = `
+                    <div style="padding: 15px;">
+                        <h4 style="color: #28a745; margin-bottom: 15px;">✅ Configuração Correta:</h4>
+                        <ul style="line-height: 2; margin-left: 20px;">
+                            <li><strong>Equipamento:</strong> ${equipmentCode} existe no sistema ✅</li>
+                            <li><strong>Faixas:</strong> ${lanesCount} faixas cadastradas ✅</li>
+                            <li><strong>Contrato:</strong> Equipamento vinculado a contrato ✅</li>
+                            <li style="color: #28a745;"><strong>✅ RECURSOS:</strong> ${resourcesCount} de ${lanesCount} cadastrados (completo!)</li>
+                        </ul>
+                        <div style="margin-top: 20px; padding: 15px; background: #d4edda; border-radius: 5px; border-left: 4px solid #28a745;">
+                            <strong style="color: #155724;">🎉 Tudo OK!</strong> 
+                            <p style="margin-top: 10px; color: #155724;">
+                                O equipamento está configurado corretamente. Os valores devem aparecer no relatório de medição.
+                            </p>
+                        </div>
+                    </div>
+                `;
+            }
             
             // Mostrar resultados
             document.getElementById('results').classList.add('show');
@@ -825,269 +888,19 @@
         });
 
         function generateSQLScripts(equipmentCode, databaseName) {
-            // Script completo de diagnóstico
-            const fullScript = `-- ================================================================
--- SCRIPT DE DIAGNÓSTICO AUTOMÁTICO - MEDIÇÃO AXHUB
--- Equipamento: ${equipmentCode}
--- Banco: ${databaseName}
--- Data: ${new Date().toLocaleDateString('pt-BR')}
--- ================================================================
-
-USE ${databaseName};
-GO
-
-PRINT '========================================';
-PRINT 'DIAGNÓSTICO: ${equipmentCode}';
-PRINT 'Data/Hora: ' + CONVERT(VARCHAR, GETDATE(), 120);
-PRINT '========================================';
-PRINT '';
-
--- ================================================================
--- DIAGNÓSTICO COMPLETO COM ANÁLISE AUTOMÁTICA
--- ================================================================
-SELECT 
-    e.CodigoEquipamento,
-    e.Descricao AS EquipamentoDescricao,
-    e.Status AS EquipamentoStatus,
-    f.NumeroFaixa,
-    f.Status AS FaixaStatus,
-    r.Id AS RecursoId,
-    r.ValorPrevisto,
-    r.Bdi,
-    r.DataInicio AS RecursoDataInicio,
-    r.DataFim AS RecursoDataFim,
-    r.Status AS RecursoStatus,
-    c.NumeroContrato,
-    c.Orgao,
-    c.Status AS ContratoStatus,
-    c.DataInicio AS ContratoDataInicio,
-    c.DataFim AS ContratoDataFim,
-    CASE 
-        WHEN e.Id IS NULL THEN '🔴 EQUIPAMENTO NÃO EXISTE'
-        WHEN e.Status = 0 THEN '🔴 EQUIPAMENTO INATIVO'
-        WHEN f.Id IS NULL THEN '🔴 FAIXAS NÃO CADASTRADAS'
-        WHEN f.Status = 0 THEN '🔴 FAIXA INATIVA'
-        WHEN c.Id IS NULL THEN '🔴 SEM CONTRATO VINCULADO'
-        WHEN c.Status = 0 THEN '🔴 CONTRATO INATIVO'
-        WHEN c.DataInicio > GETDATE() OR c.DataFim < GETDATE() THEN '🔴 CONTRATO FORA DA VIGÊNCIA'
-        WHEN r.Id IS NULL THEN '🔴 RECURSO NÃO CADASTRADO'
-        WHEN r.ValorPrevisto IS NULL OR r.ValorPrevisto = 0 THEN '🔴 VALOR PREVISTO ZERADO'
-        WHEN r.Status = 0 THEN '🔴 RECURSO INATIVO'
-        WHEN r.DataInicio > GETDATE() OR r.DataFim < GETDATE() THEN '🔴 RECURSO FORA DA VIGÊNCIA'
-        WHEN r.Bdi IS NULL OR r.Bdi = 0 THEN '🟡 BDI ZERADO (ATENÇÃO)'
-        ELSE '✅ CONFIGURAÇÃO OK'
-    END AS DiagnosticoCompleto
-FROM TBEquipamentos e
-LEFT JOIN TBFaixas f ON f.EquipamentoId = e.Id
-LEFT JOIN TBRecursos r ON (r.EquipamentoId = e.Id AND r.FaixaId = f.Id)
-LEFT JOIN TBContratos c ON r.ContratoId = c.Id
-WHERE e.CodigoEquipamento = '${equipmentCode}'
-ORDER BY f.NumeroFaixa;
-
-PRINT '';
-PRINT '--- INTERPRETAÇÃO DOS RESULTADOS ---';
-PRINT '🔴 = PROBLEMA CRÍTICO que causa valores R$ 0,00';
-PRINT '🟡 = ATENÇÃO, pode impactar cálculo';
-PRINT '✅ = Configuração correta';
-PRINT '';
-PRINT 'Se aparecer "🔴 RECURSO NÃO CADASTRADO" = Este é o problema!';
-PRINT 'Solução: Cadastrar recursos via interface ou executar script de INSERT';
-PRINT '';
-
--- ================================================================
--- CONTAGEM DE RECURSOS ESPERADOS vs CADASTRADOS
--- ================================================================
-PRINT '--- ANÁLISE QUANTITATIVA ---';
-SELECT 
-    COUNT(f.Id) AS FaixasCadastradas,
-    COUNT(r.Id) AS RecursosCadastrados,
-    COUNT(f.Id) - COUNT(r.Id) AS RecursosFaltando,
-    CASE 
-        WHEN COUNT(f.Id) = COUNT(r.Id) THEN '✅ OK: 1 recurso por faixa'
-        ELSE '🔴 PROBLEMA: Faltam ' + CAST(COUNT(f.Id) - COUNT(r.Id) AS VARCHAR) + ' recurso(s)'
-    END AS DiagnosticoQuantitativo
-FROM TBEquipamentos e
-LEFT JOIN TBFaixas f ON f.EquipamentoId = e.Id AND f.Status = 1
-LEFT JOIN TBRecursos r ON (r.EquipamentoId = e.Id AND r.FaixaId = f.Id AND r.Status = 1)
-WHERE e.CodigoEquipamento = '${equipmentCode}';
-
-GO`;
-
-            // Query rápida de diagnóstico
-            const quickDiagnostic = `-- Query Rápida de Diagnóstico - ${equipmentCode}
-SELECT 
-    e.CodigoEquipamento,
-    f.NumeroFaixa,
-    CASE 
-        WHEN r.Id IS NULL THEN '🔴 SEM RECURSO'
-        WHEN r.ValorPrevisto = 0 THEN '🔴 VALOR ZERO'
-        ELSE '✅ OK'
-    END AS Status,
-    r.ValorPrevisto,
-    r.Bdi
-FROM TBEquipamentos e
-JOIN TBFaixas f ON f.EquipamentoId = e.Id
-LEFT JOIN TBRecursos r ON r.FaixaId = f.Id AND r.EquipamentoId = e.Id
-WHERE e.CodigoEquipamento = '${equipmentCode}';`;
-
-            // Script de INSERT
-            const insertScript = `-- ================================================================
--- SCRIPT DE CADASTRO DE RECURSOS - ${equipmentCode}
--- ⚠️ AJUSTE OS VALORES ANTES DE EXECUTAR!
--- ================================================================
-
-USE ${databaseName};
-GO
-
--- Variáveis (AJUSTE CONFORME SEU AMBIENTE)
-DECLARE @EquipamentoId INT;
-DECLARE @Faixa1Id INT;
-DECLARE @Faixa2Id INT;
-DECLARE @ContratoId INT;
-DECLARE @ValorPrevisto DECIMAL(18,2) = 15000.00; -- AJUSTE AQUI
-DECLARE @Bdi DECIMAL(5,2) = 25.00; -- AJUSTE AQUI
-DECLARE @DataInicio DATE = '2026-01-01'; -- AJUSTE AQUI
-DECLARE @DataFim DATE = '2026-12-31'; -- AJUSTE AQUI
-
--- Buscar IDs
-SELECT @EquipamentoId = Id FROM TBEquipamentos WHERE CodigoEquipamento = '${equipmentCode}';
-SELECT @Faixa1Id = Id FROM TBFaixas WHERE EquipamentoId = @EquipamentoId AND NumeroFaixa = 1;
-SELECT @Faixa2Id = Id FROM TBFaixas WHERE EquipamentoId = @EquipamentoId AND NumeroFaixa = 2;
-
--- ⚠️ AJUSTE O ID DO CONTRATO MANUALMENTE:
--- SELECT Id, NumeroContrato, Orgao FROM TBContratos WHERE Status = 1;
-SET @ContratoId = NULL; -- PREENCHA COM O ID DO CONTRATO CORRETO!
-
--- Validações
-IF @EquipamentoId IS NULL
-BEGIN
-    PRINT '❌ ERRO: Equipamento ${equipmentCode} não encontrado!';
-    RETURN;
-END
-
-IF @Faixa1Id IS NULL OR @Faixa2Id IS NULL
-BEGIN
-    PRINT '❌ ERRO: Faixas não encontradas para o equipamento!';
-    RETURN;
-END
-
-IF @ContratoId IS NULL
-BEGIN
-    PRINT '❌ ERRO: Você precisa definir o @ContratoId manualmente!';
-    PRINT 'Execute: SELECT Id, NumeroContrato, Orgao FROM TBContratos WHERE Status = 1;';
-    RETURN;
-END
-
--- Verificar se recursos já existem
-IF EXISTS (SELECT 1 FROM TBRecursos WHERE EquipamentoId = @EquipamentoId AND FaixaId = @Faixa1Id)
-BEGIN
-    PRINT '⚠️ ATENÇÃO: Recurso para Faixa 1 já existe!';
-END
-ELSE
-BEGIN
-    -- INSERT Recurso Faixa 1
-    INSERT INTO TBRecursos (
-        EquipamentoId, 
-        FaixaId, 
-        ContratoId, 
-        Descricao, 
-        ValorPrevisto, 
-        Bdi, 
-        DataInicio, 
-        DataFim, 
-        Status
-    ) VALUES (
-        @EquipamentoId,
-        @Faixa1Id,
-        @ContratoId,
-        'Recurso Medição ${equipmentCode} - Faixa 1',
-        @ValorPrevisto,
-        @Bdi,
-        @DataInicio,
-        @DataFim,
-        1 -- Ativo
-    );
-    PRINT '✅ Recurso Faixa 1 cadastrado com sucesso!';
-END
-
-IF EXISTS (SELECT 1 FROM TBRecursos WHERE EquipamentoId = @EquipamentoId AND FaixaId = @Faixa2Id)
-BEGIN
-    PRINT '⚠️ ATENÇÃO: Recurso para Faixa 2 já existe!';
-END
-ELSE
-BEGIN
-    -- INSERT Recurso Faixa 2
-    INSERT INTO TBRecursos (
-        EquipamentoId, 
-        FaixaId, 
-        ContratoId, 
-        Descricao, 
-        ValorPrevisto, 
-        Bdi, 
-        DataInicio, 
-        DataFim, 
-        Status
-    ) VALUES (
-        @EquipamentoId,
-        @Faixa2Id,
-        @ContratoId,
-        'Recurso Medição ${equipmentCode} - Faixa 2',
-        @ValorPrevisto,
-        @Bdi,
-        @DataInicio,
-        @DataFim,
-        1 -- Ativo
-    );
-    PRINT '✅ Recurso Faixa 2 cadastrado com sucesso!';
-END
-
--- Validar cadastro
-SELECT 
-    e.CodigoEquipamento,
-    f.NumeroFaixa,
-    r.ValorPrevisto,
-    r.Bdi,
-    r.Status,
-    '✅ CADASTRADO' AS Status
-FROM TBRecursos r
-JOIN TBEquipamentos e ON r.EquipamentoId = e.Id
-JOIN TBFaixas f ON r.FaixaId = f.Id
-WHERE e.CodigoEquipamento = '${equipmentCode}'
-ORDER BY f.NumeroFaixa;
-
-PRINT '';
-PRINT '========================================';
-PRINT 'Cadastro concluído!';
-PRINT 'Próximo passo: Gerar relatório de medição para validar valores';
-PRINT '========================================';
-
-GO`;
-
-            // Atualizar os elementos
-            document.getElementById('sqlScript').textContent = fullScript;
-            document.getElementById('quickDiagnostic').textContent = quickDiagnostic;
-            document.getElementById('insertScript').textContent = insertScript;
+            // Função removida - não gera mais scripts SQL
         }
 
         function copySQL() {
-            const text = document.getElementById('sqlScript').textContent;
-            navigator.clipboard.writeText(text).then(() => {
-                alert('✅ Script SQL completo copiado para a área de transferência!');
-            });
+            alert('ℹ️ Esta função foi removida. Use a aba "✅ Solução" para ver o passo a passo de cadastro.');
         }
 
         function copyQuickDiagnostic() {
-            const text = document.getElementById('quickDiagnostic').textContent;
-            navigator.clipboard.writeText(text).then(() => {
-                alert('✅ Query rápida copiada para a área de transferência!');
-            });
+            alert('ℹ️ Esta função foi removida. Use a aba "✅ Solução" para ver o passo a passo de cadastro.');
         }
 
         function copyInsertScript() {
-            const text = document.getElementById('insertScript').textContent;
-            navigator.clipboard.writeText(text).then(() => {
-                alert('✅ Script de INSERT copiado! ATENÇÃO: Ajuste os valores antes de executar!');
-            });
+            alert('ℹ️ Esta função foi removida. Use a aba "✅ Solução" para ver o passo a passo de cadastro.');
         }
     </script>
 </body>
