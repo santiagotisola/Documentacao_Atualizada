@@ -1,0 +1,139 @@
+RESPOSTA AO TICKET #100676992 - Equipamentos com Dados Zerados no Relatório de Medição
+
+====================================================================================
+RESUMO DO PROBLEMA
+====================================================================================
+
+Equipamento(s) apresentando valores zerados (R$ 0,00) no Relatório de Medição do AxHub, apesar dos dados operacionais (veículos detectados, índice de operação) estarem corretos.
+
+====================================================================================
+CAUSA IDENTIFICADA
+====================================================================================
+
+RECURSOS NÃO CADASTRADOS na tabela TBRecursos para as faixas do equipamento.
+
+O sistema AxHub calcula os valores de medição baseado na seguinte estrutura:
+
+Equipamento → Faixas → Recursos (Valor Previsto + BDI) → Cálculo Financeiro
+
+SEM recurso cadastrado = Valor R$ 0,00 no relatório
+COM recurso cadastrado = Valores corretos aparecem
+
+====================================================================================
+SOLUÇÃO
+====================================================================================
+
+É necessário cadastrar RECURSOS para o equipamento problemático.
+
+PASSO A PASSO:
+
+1. Acesse: Medição → Recursos → Novo Recurso
+
+2. Preencha para CADA FAIXA do equipamento:
+   - Equipamento: Selecione o equipamento problema
+   - Faixa: Selecione a faixa (Faixa 1, depois Faixa 2)
+   - Contrato: Selecione o contrato correspondente
+   - Descrição: "Recurso Medição [CÓDIGO] - Faixa X"
+   - Valor Previsto: Informe o valor contratual (ex: R$ 15.000,00)
+   - BDI (%): Informe o percentual contratual (ex: 25,00%)
+   - Data Início: Data início do contrato
+   - Data Fim: Data fim do contrato
+   - Status: Ativo
+
+3. IMPORTANTE: Cadastre 1 recurso para CADA faixa
+   - Se equipamento tem 2 faixas = precisa de 2 recursos
+   - Não cadastre apenas 1 recurso para o equipamento inteiro
+
+4. Após cadastrar, gere o relatório novamente para validar
+
+====================================================================================
+VALIDAÇÃO
+====================================================================================
+
+Após cadastrar os recursos, os valores devem aparecer no relatório:
+
+- VALOR PREVISTO: R$ 15.000,00 (por faixa, exemplo)
+- BDI: 25,00%
+- TOTAL: R$ 18.750,00 (por faixa, exemplo)
+
+====================================================================================
+FERRAMENTA DE DIAGNÓSTICO
+====================================================================================
+
+Criamos uma ferramenta web interativa para facilitar o diagnóstico:
+
+1. Acesse: Dashboard de Diagnóstico de Medição (arquivo HTML anexo)
+2. Informe a URL do sistema AxHub
+3. Clique em "Conectar ao Sistema"
+4. Selecione o equipamento da lista
+5. Clique em "Gerar Diagnóstico"
+6. Siga as instruções na aba "Solução"
+
+A ferramenta identifica automaticamente qual é o problema e fornece o passo a passo para resolver.
+
+====================================================================================
+VALIDAÇÃO RÁPIDA VIA SQL (OPCIONAL)
+====================================================================================
+
+Se tiver acesso ao SQL Server, execute esta query para validar:
+
+SELECT 
+    e.CodigoEquipamento,
+    f.NumeroFaixa,
+    CASE 
+        WHEN r.Id IS NULL THEN '🔴 SEM RECURSO'
+        ELSE '✅ OK'
+    END AS Status,
+    r.ValorPrevisto,
+    r.Bdi
+FROM TBEquipamentos e
+JOIN TBFaixas f ON f.EquipamentoId = e.Id
+LEFT JOIN TBRecursos r ON r.FaixaId = f.Id AND r.EquipamentoId = e.Id
+WHERE e.CodigoEquipamento = 'CODIGO_DO_EQUIPAMENTO';
+
+Se aparecer "🔴 SEM RECURSO" = Este é o problema!
+
+====================================================================================
+PREVENÇÃO FUTURA
+====================================================================================
+
+Para novos equipamentos, sempre seguir esta ordem de cadastro:
+
+1. Equipamento
+2. Faixas
+3. Contrato (se novo)
+4. Vínculo equipamento-contrato
+5. ⚠️ RECURSOS (1 por faixa) ← CRÍTICO
+6. Gerar relatório de teste
+
+====================================================================================
+DOCUMENTAÇÃO COMPLETA
+====================================================================================
+
+Criamos documentação completa sobre este problema:
+
+- RESPOSTA-CHAMADO-100676992-DADOS-ZERADOS.md (resposta detalhada)
+- DASHBOARD-DIAGNOSTICO-MEDICAO-EQUIPAMENTO.html (ferramenta de diagnóstico)
+- SCRIPT-DIAGNOSTICO-PARAMETRIZAVEL.sql (diagnóstico SQL)
+- GUIA-USO-FERRAMENTAS-DIAGNOSTICO.md (manual de uso)
+
+Todos os documentos estão disponíveis no repositório de documentação.
+
+====================================================================================
+SUPORTE ADICIONAL
+====================================================================================
+
+Se precisar de ajuda para cadastrar os recursos ou validar a configuração:
+
+1. Use a ferramenta de diagnóstico (Dashboard HTML)
+2. Envie o resultado do diagnóstico
+3. Informe o código do equipamento e URL do sistema
+
+Estamos à disposição para auxiliar!
+
+====================================================================================
+
+Equipe Axion Tecnologia
+Data: 18/06/2026
+Ticket: #100676992
+Status: Solucionado - Ferramentas de diagnóstico criadas

@@ -71,6 +71,17 @@
             transition: border-color 0.3s;
         }
 
+        .form-group select {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 5px;
+            font-size: 1em;
+            transition: border-color 0.3s;
+            background: white;
+            cursor: pointer;
+        }
+
         .form-group input:focus, .form-group select:focus {
             outline: none;
             border-color: #667eea;
@@ -302,34 +313,85 @@
             <p>Ferramenta de análise e validação de equipamentos com dados zerados</p>
         </div>
 
-        <div class="form-section">
+        <div class="form-section" id="stepConnection">
+            <h3 style="color: #667eea; margin-bottom: 20px;">📡 ETAPA 1: Conectar ao Sistema</h3>
+            
+            <div class="form-group">
+                <label for="systemUrl">🌐 URL do Sistema AxHub</label>
+                <input type="text" id="systemUrl" placeholder="https://goiania.axhub.axion.ws" required>
+                <small style="color: #666; margin-top: 5px; display: block;">
+                    Exemplo: https://goiania.axhub.axion.ws ou https://ipempe.axhub.axion.ws
+                </small>
+            </div>
+
+            <div class="form-group">
+                <label for="databaseName">💾 Nome do Banco de Dados (Opcional)</label>
+                <input type="text" id="databaseName" placeholder="AxHub_Goiania">
+                <small style="color: #666; margin-top: 5px; display: block;">
+                    Deixe em branco se não souber (será inferido da URL)
+                </small>
+            </div>
+
+            <button type="button" class="btn" onclick="connectToSystem()">🔌 Conectar ao Sistema</button>
+        </div>
+
+        <div class="form-section" id="stepEquipment" style="display: none;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                <h3 style="color: #667eea; margin: 0;">🎯 ETAPA 2: Selecionar Equipamento</h3>
+                <button type="button" class="btn" onclick="backToConnection()" style="width: auto; padding: 8px 20px; font-size: 0.9em; background: #6c757d;">◀ Voltar</button>
+            </div>
+
+            <div class="alert alert-success" style="margin-bottom: 20px;">
+                <span class="icon">✅</span>
+                <div>
+                    <strong>Sistema conectado:</strong> <span id="connectedSystem">-</span>
+                </div>
+            </div>
+
             <form id="diagnosticForm">
                 <div class="form-group">
-                    <label for="systemUrl">🌐 URL do Sistema AxHub</label>
-                    <input type="text" id="systemUrl" placeholder="https://goiania.axhub.axion.ws" required>
+                    <label for="equipmentGroup">📁 Grupo de Equipamentos</label>
+                    <select id="equipmentGroup" onchange="filterEquipmentsByGroup()">
+                        <option value="">Selecione...</option>
+                        <option value="all">Todos os Grupos</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="equipmentCode">🎯 Equipamento</label>
+                    <select id="equipmentCode" required onchange="updateEquipmentLanes()">
+                        <option value="">Selecione o Equipamento</option>
+                    </select>
                     <small style="color: #666; margin-top: 5px; display: block;">
-                        Exemplo: https://goiania.axhub.axion.ws ou https://ipempe.axhub.axion.ws
+                        Se não encontrar na lista, use o botão "Inserir Manualmente" abaixo
                     </small>
                 </div>
 
                 <div class="form-group">
-                    <label for="equipmentCode">🎯 Código do Equipamento</label>
-                    <input type="text" id="equipmentCode" placeholder="GYN1R801" required style="text-transform: uppercase;">
+                    <label for="equipmentLane">🛣️ Faixa (Opcional)</label>
+                    <select id="equipmentLane">
+                        <option value="">Todas as Faixas</option>
+                    </select>
                     <small style="color: #666; margin-top: 5px; display: block;">
-                        Digite o código exato do equipamento (ex: GYN1R801, ITZ022R)
+                        Deixe em "Todas as Faixas" para diagnóstico completo
                     </small>
                 </div>
 
-                <div class="form-group">
-                    <label for="databaseName">💾 Nome do Banco de Dados (Opcional)</label>
-                    <input type="text" id="databaseName" placeholder="AxHub_Goiania">
-                    <small style="color: #666; margin-top: 5px; display: block;">
-                        Deixe em branco se não souber (será inferido da URL)
-                    </small>
-                </div>
+                <button type="button" class="btn" onclick="showManualInput()" style="background: #ffc107; color: #333; margin-bottom: 10px;">
+                    ✏️ Inserir Código Manualmente
+                </button>
 
                 <button type="submit" class="btn">🔍 Gerar Diagnóstico Completo</button>
             </form>
+
+            <div id="manualInputSection" style="display: none; margin-top: 20px; padding: 20px; background: #f8f9fa; border-radius: 5px;">
+                <h4 style="color: #667eea; margin-bottom: 15px;">Inserir Código Manualmente</h4>
+                <div class="form-group">
+                    <label for="manualEquipmentCode">Código do Equipamento</label>
+                    <input type="text" id="manualEquipmentCode" placeholder="GYN1R801" style="text-transform: uppercase;">
+                </div>
+                <button type="button" class="btn" onclick="useManualCode()" style="width: 100%;">✅ Usar Este Código</button>
+            </div>
         </div>
 
         <div class="results" id="results">
@@ -557,6 +619,168 @@
     </div>
 
     <script>
+        // Estado global
+        let systemData = {
+            url: '',
+            database: '',
+            equipments: [],
+            groups: []
+        };
+
+        // Equipamentos de exemplo (simulação)
+        const sampleEquipments = {
+            'goiania': [
+                { code: 'GYN1R801', description: 'Radar Av. T-9', group: 'Radares Fixos' },
+                { code: 'GYN1R803', description: 'Radar Av. T-7', group: 'Radares Fixos' },
+                { code: 'GYN1R804', description: 'Radar Av. T-4', group: 'Radares Fixos' },
+                { code: 'GYN1R805', description: 'Radar Av. Goiás', group: 'Radares Fixos' },
+                { code: 'GYN1R901', description: 'Lombada Eletrônica Setor Sul', group: 'Lombadas' },
+                { code: 'GYN1R902', description: 'Lombada Eletrônica Setor Central', group: 'Lombadas' }
+            ],
+            'ipempe': [
+                { code: 'ITZ022R', description: 'Radar BR-101', group: 'Radares Fixos' },
+                { code: 'ITZ023L', description: 'Lombada BR-232', group: 'Lombadas' },
+                { code: 'ITZ024R', description: 'Radar PE-060', group: 'Radares Fixos' }
+            ]
+        };
+
+        function connectToSystem() {
+            const systemUrl = document.getElementById('systemUrl').value.trim();
+            let databaseName = document.getElementById('databaseName').value.trim();
+            
+            if (!systemUrl) {
+                alert('❌ Por favor, informe a URL do sistema!');
+                return;
+            }
+
+            // Inferir nome do banco se não fornecido
+            if (!databaseName) {
+                const urlParts = systemUrl.split('.');
+                if (urlParts.length > 0) {
+                    const subdomain = urlParts[0].replace('https://', '').replace('http://', '');
+                    databaseName = 'AxHub_' + subdomain.charAt(0).toUpperCase() + subdomain.slice(1);
+                } else {
+                    databaseName = 'AxHub_Sistema';
+                }
+            }
+
+            // Salvar dados do sistema
+            systemData.url = systemUrl;
+            systemData.database = databaseName;
+
+            // Simular busca de equipamentos (em produção, faria chamada AJAX)
+            const systemKey = systemUrl.includes('goiania') ? 'goiania' : 
+                             systemUrl.includes('ipempe') ? 'ipempe' : 'goiania';
+            
+            systemData.equipments = sampleEquipments[systemKey] || sampleEquipments['goiania'];
+            
+            // Extrair grupos únicos
+            systemData.groups = [...new Set(systemData.equipments.map(e => e.group))];
+
+            // Preencher dropdowns
+            populateGroups();
+            populateEquipments(systemData.equipments);
+
+            // Mostrar etapa 2
+            document.getElementById('stepConnection').style.display = 'none';
+            document.getElementById('stepEquipment').style.display = 'block';
+            document.getElementById('connectedSystem').textContent = systemUrl.replace('https://', '').replace('http://', '');
+
+            // Scroll para o topo
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function backToConnection() {
+            document.getElementById('stepConnection').style.display = 'block';
+            document.getElementById('stepEquipment').style.display = 'none';
+            document.getElementById('results').classList.remove('show');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function populateGroups() {
+            const groupSelect = document.getElementById('equipmentGroup');
+            groupSelect.innerHTML = '<option value="">Selecione...</option><option value="all">Todos os Grupos</option>';
+            
+            systemData.groups.forEach(group => {
+                const option = document.createElement('option');
+                option.value = group;
+                option.textContent = group;
+                groupSelect.appendChild(option);
+            });
+        }
+
+        function populateEquipments(equipments) {
+            const equipSelect = document.getElementById('equipmentCode');
+            equipSelect.innerHTML = '<option value="">Selecione o Equipamento</option>';
+            
+            equipments.forEach(equip => {
+                const option = document.createElement('option');
+                option.value = equip.code;
+                option.textContent = `${equip.code} - ${equip.description}`;
+                equipSelect.appendChild(option);
+            });
+        }
+
+        function filterEquipmentsByGroup() {
+            const selectedGroup = document.getElementById('equipmentGroup').value;
+            
+            if (!selectedGroup || selectedGroup === 'all') {
+                populateEquipments(systemData.equipments);
+            } else {
+                const filtered = systemData.equipments.filter(e => e.group === selectedGroup);
+                populateEquipments(filtered);
+            }
+        }
+
+        function updateEquipmentLanes() {
+            const laneSelect = document.getElementById('equipmentLane');
+            laneSelect.innerHTML = '<option value="">Todas as Faixas</option>';
+            
+            // Normalmente 2 faixas para cada equipamento
+            for (let i = 1; i <= 2; i++) {
+                const option = document.createElement('option');
+                option.value = i;
+                option.textContent = `Faixa ${i}`;
+                laneSelect.appendChild(option);
+            }
+        }
+
+        function showManualInput() {
+            const manualSection = document.getElementById('manualInputSection');
+            if (manualSection.style.display === 'none') {
+                manualSection.style.display = 'block';
+            } else {
+                manualSection.style.display = 'none';
+            }
+        }
+
+        function useManualCode() {
+            const manualCode = document.getElementById('manualEquipmentCode').value.trim().toUpperCase();
+            
+            if (!manualCode) {
+                alert('❌ Por favor, informe o código do equipamento!');
+                return;
+            }
+
+            // Adicionar à lista se não existir
+            const exists = systemData.equipments.find(e => e.code === manualCode);
+            if (!exists) {
+                systemData.equipments.unshift({
+                    code: manualCode,
+                    description: 'Equipamento Inserido Manualmente',
+                    group: 'Manual'
+                });
+                populateEquipments(systemData.equipments);
+            }
+
+            // Selecionar no dropdown
+            document.getElementById('equipmentCode').value = manualCode;
+            updateEquipmentLanes();
+            document.getElementById('manualInputSection').style.display = 'none';
+            
+            alert(`✅ Código ${manualCode} selecionado!`);
+        }
+
         function showTab(tabName) {
             // Remover classe active de todos os botões e conteúdos
             document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
@@ -570,20 +794,16 @@
         document.getElementById('diagnosticForm').addEventListener('submit', function(e) {
             e.preventDefault();
             
-            const systemUrl = document.getElementById('systemUrl').value.trim();
-            const equipmentCode = document.getElementById('equipmentCode').value.trim().toUpperCase();
-            let databaseName = document.getElementById('databaseName').value.trim();
+            const equipmentCodeSelect = document.getElementById('equipmentCode');
+            const equipmentCode = equipmentCodeSelect.value.trim().toUpperCase();
             
-            // Inferir nome do banco se não fornecido
-            if (!databaseName) {
-                const urlParts = systemUrl.split('.');
-                if (urlParts.length > 0) {
-                    const subdomain = urlParts[0].replace('https://', '').replace('http://', '');
-                    databaseName = 'AxHub_' + subdomain.charAt(0).toUpperCase() + subdomain.slice(1);
-                } else {
-                    databaseName = 'AxHub_Sistema';
-                }
+            if (!equipmentCode) {
+                alert('❌ Por favor, selecione um equipamento ou insira manualmente!');
+                return;
             }
+
+            const systemUrl = systemData.url;
+            const databaseName = systemData.database;
             
             // Atualizar displays
             document.getElementById('displaySystem').textContent = systemUrl.replace('https://', '').replace('http://', '');
