@@ -67,6 +67,8 @@ Script SQL pronto com 9 queries de diagnóstico automático.
 
 | Arquivo | Tipo | Descrição | Quando Usar |
 |---------|------|-----------|-------------|
+| **[RESUMO-EXECUTIVO-AXION-IA-MEDICAO.md](RESUMO-EXECUTIVO-AXION-IA-MEDICAO.md)** | Resumo Executivo | Formato AxionIA Intelligence Hub | ⭐ Apresentar para colaboradores e gestores |
+| **[RELATORIO-ABNT-CICLO-MEDICAO-AXHUB.md](RELATORIO-ABNT-CICLO-MEDICAO-AXHUB.md)** | Relatório ABNT | Documento técnico completo formatado ABNT | Documentação formal e acadêmica |
 | **[RELATORIO-ANALISE-MEDICAO-GOIANIA-AXION-IA.md](RELATORIO-ANALISE-MEDICAO-GOIANIA-AXION-IA.md)** | Relatório | Formato Intelligence Hub para gestão | Apresentar análise para gestores |
 | **[ENTREGA-ANALISE-DADOS-REAIS-SISTEMA.md](ENTREGA-ANALISE-DADOS-REAIS-SISTEMA.md)** | Resumo Executivo | Documento de entrega final | Documentar solução implementada |
 | **[ROTEIRO-DIAGNOSTICO-COMPARATIVO-MEDICAO-GOIANIA.md](ROTEIRO-DIAGNOSTICO-COMPARATIVO-MEDICAO-GOIANIA.md)** | Roteiro | 10 passos de diagnóstico manual | Seguir passo a passo sem SQL |
@@ -318,9 +320,11 @@ TOTAL = VALOR FAIXA + VALOR BDI
 | 18/06/2026 | CICLO-COMPLETO-CADASTRO-MEDICAO-AXHUB.md | 1.0 |
 | 18/06/2026 | GUIA-OPERACIONAL-RAPIDO-MEDICAO.md | 1.0 |
 | 18/06/2026 | COMPARACAO-IPEMPE-VS-GOIANIA-MEDICAO.sql | 1.0 |
-| 18/06/2026 | **INDICE-DOCUMENTACAO-MEDICAO.md** | 1.0 |
+| 18/06/2026 | INDICE-DOCUMENTACAO-MEDICAO.md | 1.0 |
+| 18/06/2026 | **RESUMO-EXECUTIVO-AXION-IA-MEDICAO.md** | 1.0 |
+| 18/06/2026 | **RELATORIO-ABNT-CICLO-MEDICAO-AXHUB.md** | 1.0 |
 
-**Total:** 13 documentos criados
+**Total:** 15 documentos criados
 
 ---
 
