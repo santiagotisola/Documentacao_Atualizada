@@ -8,6 +8,16 @@
 
 ## 🎯 Início Rápido
 
+### ⭐ NOVO: Ferramentas de Diagnóstico Automático
+
+👉 **RECOMENDADO para diagnóstico rápido:** [DASHBOARD-DIAGNOSTICO-MEDICAO-EQUIPAMENTO.html](DASHBOARD-DIAGNOSTICO-MEDICAO-EQUIPAMENTO.html)
+
+Interface web interativa - basta abrir no navegador, informar código do equipamento e gerar diagnóstico completo!
+
+**Ou use:** [SCRIPT-DIAGNOSTICO-PARAMETRIZAVEL.sql](SCRIPT-DIAGNOSTICO-PARAMETRIZAVEL.sql) (para quem tem acesso SQL)
+
+---
+
 ### Para Operadores/Usuários
 
 👉 **Comece aqui:** [GUIA-OPERACIONAL-RAPIDO-MEDICAO.md](GUIA-OPERACIONAL-RAPIDO-MEDICAO.md)
@@ -80,6 +90,23 @@ Script SQL pronto com 9 queries de diagnóstico automático.
 | Arquivo | Formato | Descrição |
 |---------|---------|-----------|
 | **[Guia-Calculo-Medicao.pdf](Guia-Calculo-Medicao.pdf)** | PDF | Manual oficial de cálculo de medição |
+
+---
+
+### 6. 🔧 Ferramentas de Diagnóstico (NOVO!)
+
+| Arquivo | Tipo | Descrição | Quando Usar |
+|---------|------|-----------|-------------|
+| **[DASHBOARD-DIAGNOSTICO-MEDICAO-EQUIPAMENTO.html](DASHBOARD-DIAGNOSTICO-MEDICAO-EQUIPAMENTO.html)** ⭐ | Dashboard Web | Interface visual interativa para diagnóstico | ⭐ Operadores sem acesso SQL, análise rápida |
+| **[SCRIPT-DIAGNOSTICO-PARAMETRIZAVEL.sql](SCRIPT-DIAGNOSTICO-PARAMETRIZAVEL.sql)** | Script SQL | Script universal parametrizável (alterar apenas código equipamento) | DBAs, diagnóstico técnico completo |
+| **[GUIA-USO-FERRAMENTAS-DIAGNOSTICO.md](GUIA-USO-FERRAMENTAS-DIAGNOSTICO.md)** | Manual | Guia completo de uso das ferramentas | Aprender a usar as ferramentas de diagnóstico |
+| **[RESPOSTA-CHAMADO-100676992-DADOS-ZERADOS.md](RESPOSTA-CHAMADO-100676992-DADOS-ZERADOS.md)** | Resposta Formal | Resposta ao chamado #100676992 com solução completa | Responder tickets de helpdesk, documentar solução |
+
+**✨ Destaques das Ferramentas:**
+- 🌐 **Dashboard HTML:** Interface moderna, funciona offline, gera scripts automaticamente
+- 💻 **Script Parametrizável:** Diagnóstico automático completo em 1 execução
+- 📋 **Guia de Uso:** Exemplos práticos passo a passo
+- 📝 **Resposta Chamado:** Documentação formal pronta
 
 ---
 
@@ -323,8 +350,12 @@ TOTAL = VALOR FAIXA + VALOR BDI
 | 18/06/2026 | INDICE-DOCUMENTACAO-MEDICAO.md | 1.0 |
 | 18/06/2026 | **RESUMO-EXECUTIVO-AXION-IA-MEDICAO.md** | 1.0 |
 | 18/06/2026 | **RELATORIO-ABNT-CICLO-MEDICAO-AXHUB.md** | 1.0 |
+| 18/06/2026 | **DASHBOARD-DIAGNOSTICO-MEDICAO-EQUIPAMENTO.html** ⭐ | 1.0 |
+| 18/06/2026 | **SCRIPT-DIAGNOSTICO-PARAMETRIZAVEL.sql** ⭐ | 1.0 |
+| 18/06/2026 | **GUIA-USO-FERRAMENTAS-DIAGNOSTICO.md** ⭐ | 1.0 |
+| 18/06/2026 | **RESPOSTA-CHAMADO-100676992-DADOS-ZERADOS.md** ⭐ | 1.0 |
 
-**Total:** 15 documentos criados
+**Total:** 19 documentos criados (⭐ 4 ferramentas de diagnóstico adicionadas)
 
 ---
 
