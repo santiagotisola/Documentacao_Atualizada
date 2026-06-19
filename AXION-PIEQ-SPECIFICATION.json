@@ -1,0 +1,986 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "platform": {
+    "name": "AxionIA - Plataforma Inteligente de Engenharia de Qualidade",
+    "acronym": "PIEQ",
+    "alias": "Autonomous Quality Engineering Platform (AQE)",
+    "version": "1.0.0",
+    "description": "Plataforma autônoma de QA com IA generativa, descoberta automática, geração de cenários, validação contínua e conformidade com governança corporativa",
+    "vendor": "Axion Tecnologia",
+    "license": "Proprietary",
+    "repository": "https://github.com/Axion-Tecnologia/axion-pieq"
+  },
+  
+  "architecture": {
+    "type": "Modular Microservices",
+    "style": "Event-Driven + Agent-Based",
+    "deployment": "Hybrid (On-Premise + Cloud)",
+    "scalability": "Horizontal",
+    "availability": "99.5% SLA"
+  },
+
+  "core_capabilities": {
+    "intelligent_discovery": {
+      "enabled": true,
+      "description": "Descoberta automática de sistema (menus, APIs, banco, fluxos)",
+      "components": {
+        "uiDiscovery": {
+          "enabled": true,
+          "scanMenus": true,
+          "scanForms": true,
+          "scanModals": true,
+          "scanTables": true,
+          "scanCharts": true,
+          "extractFields": true,
+          "extractButtons": true,
+          "extractValidations": true,
+          "detectNavigationFlows": true,
+          "mapUserJourneys": true
+        },
+        "apiDiscovery": {
+          "enabled": true,
+          "scanEndpoints": true,
+          "scanSwagger": true,
+          "scanOpenAPI": true,
+          "extractSchemas": true,
+          "detectRateLimit": true,
+          "detectAuthentication": true,
+          "mapDependencies": true,
+          "detectVersions": true
+        },
+        "databaseDiscovery": {
+          "enabled": true,
+          "scanTables": true,
+          "scanViews": true,
+          "scanStoredProcedures": true,
+          "scanFunctions": true,
+          "scanTriggers": true,
+          "scanIndexes": true,
+          "scanRelationships": true,
+          "detectConstraints": true,
+          "analyzeSchema": true,
+          "supportedEngines": ["MongoDB", "SQL Server", "PostgreSQL", "MySQL", "Oracle"]
+        },
+        "integrationDiscovery": {
+          "enabled": true,
+          "scanWebhooks": true,
+          "scanMessageQueues": true,
+          "scanExternalAPIs": true,
+          "scanFileTransfers": true,
+          "detectProtocols": ["REST", "GraphQL", "gRPC", "SOAP", "WebSocket", "AMQP"]
+        },
+        "reportDiscovery": {
+          "enabled": true,
+          "scanReportTemplates": true,
+          "scanDashboards": true,
+          "extractKPIs": true,
+          "detectDataSources": true
+        }
+      }
+    },
+
+    "test_generation": {
+      "enabled": true,
+      "description": "Geração inteligente de casos de teste",
+      "methods": {
+        "naturalLanguage": {
+          "enabled": true,
+          "provider": "OpenAI GPT-4",
+          "examples": [
+            "Valide o cadastro de equipamento alterando velocidade para 100 km/h",
+            "Teste o fluxo completo de abertura de chamado via WhatsApp",
+            "Verifique se o relatório de medição exibe valores corretos após alteração"
+          ]
+        },
+        "aiGenerated": {
+          "enabled": true,
+          "strategy": "Exploratory + Boundary + Equivalence Partitioning",
+          "coverageFocus": ["happy path", "edge cases", "negative scenarios", "error handling"]
+        },
+        "templateBased": {
+          "enabled": true,
+          "library": "PIEQ Test Library",
+          "customTemplates": true
+        },
+        "codeBased": {
+          "enabled": true,
+          "languages": ["JavaScript", "TypeScript", "Python"],
+          "frameworks": ["Jest", "Vitest", "Playwright", "Cypress"]
+        }
+      }
+    },
+
+    "execution_engine": {
+      "enabled": true,
+      "description": "Motor de execução paralela e distribuída",
+      "modes": {
+        "continuous": {
+          "enabled": true,
+          "schedule": "cron",
+          "triggers": ["commit", "PR", "deploy", "schedule", "manual", "webhook"]
+        },
+        "onDemand": {
+          "enabled": true,
+          "timeout": 3600
+        },
+        "parallel": {
+          "enabled": true,
+          "maxWorkers": 10,
+          "isolatedEnvironments": true
+        },
+        "distributed": {
+          "enabled": true,
+          "gridSupport": true,
+          "cloudProviders": ["AWS", "Azure", "GCP", "On-Premise"]
+        }
+      },
+      "retryStrategy": {
+        "enabled": true,
+        "maxRetries": 3,
+        "backoffStrategy": "exponential",
+        "retryOnFailure": ["timeout", "network", "flaky"],
+        "skipOnFailure": ["assertion", "validation"]
+      },
+      "environmentManagement": {
+        "enabled": true,
+        "environments": ["development", "staging", "production", "sandbox"],
+        "isolationLevel": "container",
+        "dataRefresh": "automatic"
+      }
+    },
+
+    "synthetic_data_generation": {
+      "enabled": true,
+      "description": "Geração inteligente de massa de dados",
+      "providers": {
+        "fakerJS": {
+          "enabled": true,
+          "locales": ["pt_BR", "en_US"]
+        },
+        "customGenerators": {
+          "enabled": true,
+          "generators": {
+            "cpf": {
+              "valid": true,
+              "format": "###.###.###-##"
+            },
+            "cnpj": {
+              "valid": true,
+              "format": "##.###.###/####-##"
+            },
+            "placa": {
+              "format": "mercosul",
+              "pattern": "AAA#A##"
+            },
+            "renavam": {
+              "length": 11
+            },
+            "cnh": {
+              "length": 11,
+              "category": ["A", "B", "AB", "C", "D", "E"]
+            },
+            "equipamento": {
+              "prefix": ["ITZ", "GOE", "GYN"],
+              "pattern": "AAA###A"
+            },
+            "velocidade": {
+              "min": 40,
+              "max": 120,
+              "step": 10
+            },
+            "coordenadas": {
+              "format": "decimal",
+              "precision": 6
+            }
+          }
+        },
+        "aiGenerated": {
+          "enabled": true,
+          "provider": "OpenAI",
+          "contextAware": true,
+          "scenarios": ["normal", "boundary", "extreme", "invalid"]
+        }
+      },
+      "strategies": {
+        "boundaryValues": true,
+        "equivalencePartitioning": true,
+        "negativeScenarios": true,
+        "edgeCases": true,
+        "stressData": true
+      }
+    },
+
+    "test_domains": {
+      "functional": {
+        "enabled": true,
+        "types": [
+          "unit",
+          "integration",
+          "system",
+          "endToEnd",
+          "regression",
+          "smoke",
+          "sanity",
+          "acceptance",
+          "exploratory"
+        ]
+      },
+      "nonFunctional": {
+        "enabled": true,
+        "types": [
+          "performance",
+          "load",
+          "stress",
+          "scalability",
+          "reliability",
+          "resilience",
+          "recovery",
+          "security",
+          "usability",
+          "compatibility",
+          "accessibility"
+        ]
+      },
+      "specialized": {
+        "enabled": true,
+        "types": [
+          "api",
+          "ui",
+          "database",
+          "etl",
+          "reporting",
+          "mobile",
+          "cross-browser",
+          "cross-platform"
+        ]
+      },
+      "advanced": {
+        "enabled": true,
+        "types": [
+          "mutation",
+          "property-based",
+          "chaos-engineering",
+          "contract-testing",
+          "visual-regression",
+          "snapshot-testing"
+        ]
+      }
+    },
+
+    "ai_intelligence": {
+      "enabled": true,
+      "description": "Inteligência artificial integrada",
+      "capabilities": {
+        "naturalLanguageProcessing": {
+          "enabled": true,
+          "provider": "OpenAI GPT-4",
+          "useCases": [
+            "test case generation from user stories",
+            "bug report analysis",
+            "test result interpretation",
+            "documentation generation"
+          ]
+        },
+        "rootCauseAnalysis": {
+          "enabled": true,
+          "methods": [
+            "log correlation",
+            "stack trace analysis",
+            "pattern recognition",
+            "historical data comparison"
+          ],
+          "outputs": [
+            "probable cause",
+            "affected modules",
+            "suggested fixes",
+            "similar incidents"
+          ]
+        },
+        "testGenerationAI": {
+          "enabled": true,
+          "strategies": [
+            "combinatorial testing",
+            "boundary value analysis",
+            "decision table testing",
+            "state transition testing",
+            "use case testing"
+          ]
+        },
+        "predictiveAnalytics": {
+          "enabled": true,
+          "models": [
+            "failure prediction",
+            "flaky test detection",
+            "test execution time estimation",
+            "risk assessment"
+          ]
+        },
+        "selfHealing": {
+          "enabled": true,
+          "actions": [
+            "automatic locator update",
+            "retry with different strategy",
+            "environment reset",
+            "data refresh"
+          ]
+        },
+        "impactAnalysis": {
+          "enabled": true,
+          "scope": [
+            "code changes → affected tests",
+            "requirement changes → test updates",
+            "data model changes → validation updates",
+            "API contract changes → integration tests"
+          ]
+        }
+      }
+    },
+
+    "evidence_capture": {
+      "enabled": true,
+      "description": "Captura automática de evidências",
+      "artifacts": {
+        "screenshots": {
+          "enabled": true,
+          "trigger": ["on failure", "on step", "on assertion"],
+          "format": ["png", "jpg"],
+          "resolution": "1920x1080",
+          "annotated": true
+        },
+        "videos": {
+          "enabled": true,
+          "trigger": ["on failure", "critical tests"],
+          "format": "mp4",
+          "fps": 30,
+          "duration": "full execution"
+        },
+        "logs": {
+          "enabled": true,
+          "levels": ["debug", "info", "warn", "error"],
+          "sources": ["application", "browser", "network", "database"],
+          "structured": true
+        },
+        "apiPayloads": {
+          "enabled": true,
+          "capture": ["request", "response", "headers", "cookies"],
+          "sanitize": ["password", "token", "apiKey", "secret"]
+        },
+        "databaseQueries": {
+          "enabled": true,
+          "capture": ["SQL", "execution time", "rows affected", "before/after state"]
+        },
+        "networkTraffic": {
+          "enabled": true,
+          "capture": ["HAR", "timing", "status codes", "payload size"]
+        },
+        "executionHistory": {
+          "enabled": true,
+          "retention": "90 days",
+          "fields": [
+            "timestamp",
+            "environment",
+            "version",
+            "user",
+            "duration",
+            "status",
+            "result",
+            "errors"
+          ]
+        },
+        "complianceReports": {
+          "enabled": true,
+          "standards": ["ISO 27001", "LGPD", "GDPR"],
+          "formats": ["PDF", "HTML", "JSON"]
+        }
+      }
+    },
+
+    "health_scoring": {
+      "enabled": true,
+      "description": "Sistema de pontuação de qualidade",
+      "metrics": {
+        "successRate": {
+          "weight": 30,
+          "calculation": "(passed tests / total tests) * 100"
+        },
+        "stability": {
+          "weight": 25,
+          "calculation": "1 - (flaky tests / total tests)"
+        },
+        "coverage": {
+          "weight": 20,
+          "calculation": "(covered features / total features) * 100"
+        },
+        "executionTime": {
+          "weight": 10,
+          "calculation": "baseline time / actual time"
+        },
+        "falsePositives": {
+          "weight": 10,
+          "calculation": "1 - (false positives / total failures)"
+        },
+        "criticality": {
+          "weight": 5,
+          "calculation": "business impact score"
+        }
+      },
+      "thresholds": {
+        "excellent": 95,
+        "good": 80,
+        "attention": 60,
+        "risk": 40,
+        "critical": 0
+      },
+      "visualization": {
+        "dashboard": true,
+        "trends": true,
+        "alerts": true,
+        "reports": true
+      }
+    },
+
+    "intelligent_diagnostics": {
+      "enabled": true,
+      "description": "Diagnóstico inteligente de falhas",
+      "workflow": [
+        "detect failure",
+        "collect context",
+        "correlate logs",
+        "identify failure point",
+        "determine root cause",
+        "suggest remediation",
+        "predict impact",
+        "generate report"
+      ],
+      "techniques": {
+        "logCorrelation": {
+          "enabled": true,
+          "sources": ["application", "infrastructure", "database", "external services"]
+        },
+        "patternMatching": {
+          "enabled": true,
+          "library": "known error patterns",
+          "mlBased": true
+        },
+        "stackTraceAnalysis": {
+          "enabled": true,
+          "sourceMapping": true,
+          "lineHighlight": true
+        },
+        "historicalComparison": {
+          "enabled": true,
+          "lookbackPeriod": "30 days",
+          "similarityThreshold": 0.85
+        }
+      },
+      "outputs": {
+        "rootCauseReport": true,
+        "affectedModules": true,
+        "suggestedFixes": true,
+        "preventiveMeasures": true,
+        "escalationPath": true
+      }
+    }
+  },
+
+  "integrations": {
+    "versionControl": {
+      "git": {
+        "enabled": true,
+        "providers": ["GitHub", "GitLab", "Bitbucket", "Azure DevOps"],
+        "webhooks": true,
+        "branchStrategy": "GitFlow",
+        "triggerOnPR": true
+      }
+    },
+    "cicd": {
+      "enabled": true,
+      "providers": [
+        "GitHub Actions",
+        "GitLab CI",
+        "Jenkins",
+        "Azure Pipelines",
+        "CircleCI",
+        "Travis CI"
+      ],
+      "stages": ["build", "test", "deploy", "monitor"]
+    },
+    "ticketing": {
+      "enabled": true,
+      "systems": [
+        {
+          "name": "Jitbit",
+          "url": "https://desk.axiontecnologia.com.br",
+          "integration": "REST API",
+          "autoCreateIssue": true,
+          "autoLinkEvidence": true
+        },
+        {
+          "name": "Jira",
+          "integration": "REST API",
+          "supported": true
+        }
+      ]
+    },
+    "observability": {
+      "enabled": true,
+      "tools": [
+        {
+          "name": "Grafana",
+          "purpose": "dashboards",
+          "metrics": true
+        },
+        {
+          "name": "Prometheus",
+          "purpose": "metrics collection",
+          "scrapeInterval": "15s"
+        },
+        {
+          "name": "ELK Stack",
+          "purpose": "log aggregation",
+          "retention": "90 days"
+        }
+      ]
+    },
+    "messaging": {
+      "enabled": true,
+      "providers": [
+        {
+          "name": "Slack",
+          "notifications": true,
+          "channels": ["#qa-alerts", "#test-results"]
+        },
+        {
+          "name": "Microsoft Teams",
+          "notifications": true
+        },
+        {
+          "name": "Email",
+          "smtp": true,
+          "templates": true
+        }
+      ]
+    },
+    "cloudProviders": {
+      "enabled": true,
+      "aws": {
+        "enabled": true,
+        "services": ["S3", "Lambda", "RDS", "CloudWatch"]
+      },
+      "azure": {
+        "enabled": true,
+        "services": ["Blob Storage", "Functions", "SQL Database", "Monitor"]
+      }
+    }
+  },
+
+  "governance_compliance": {
+    "enabled": true,
+    "description": "Conformidade com frameworks de governança",
+    "frameworks": {
+      "itil": {
+        "enabled": true,
+        "version": "ITIL v4",
+        "practices": [
+          "Change Management",
+          "Incident Management",
+          "Problem Management",
+          "Service Level Management",
+          "Continual Improvement"
+        ],
+        "implementation": {
+          "changeApproval": true,
+          "impactAssessment": true,
+          "rollbackPlan": true,
+          "postImplementationReview": true
+        }
+      },
+      "cobit": {
+        "enabled": true,
+        "version": "COBIT 2019",
+        "domains": [
+          "EDM - Evaluate, Direct, Monitor",
+          "APO - Align, Plan, Organise",
+          "BAI - Build, Acquire, Implement",
+          "DSS - Deliver, Service, Support",
+          "MEA - Monitor, Evaluate, Assess"
+        ],
+        "controls": {
+          "accessControl": true,
+          "auditTrail": true,
+          "dataProtection": true,
+          "riskManagement": true
+        }
+      },
+      "iso27001": {
+        "enabled": true,
+        "version": "ISO/IEC 27001:2022",
+        "controls": [
+          "A.5 - Organizational Controls",
+          "A.6 - People Controls",
+          "A.7 - Physical Controls",
+          "A.8 - Technological Controls"
+        ],
+        "implementation": {
+          "accessControl": true,
+          "cryptography": true,
+          "incidentManagement": true,
+          "complianceMonitoring": true,
+          "auditLogging": true,
+          "securityTesting": true
+        }
+      },
+      "devSecOps": {
+        "enabled": true,
+        "practices": [
+          "Security as Code",
+          "Automated Security Testing",
+          "Vulnerability Scanning",
+          "Dependency Checking",
+          "SAST/DAST",
+          "Container Security"
+        ]
+      }
+    },
+    "auditTrail": {
+      "enabled": true,
+      "retention": "7 years",
+      "tamperProof": true,
+      "fields": [
+        "timestamp",
+        "user",
+        "action",
+        "resource",
+        "result",
+        "ipAddress",
+        "userAgent"
+      ],
+      "exports": ["JSON", "CSV", "PDF"]
+    },
+    "dataProtection": {
+      "enabled": true,
+      "lgpd": {
+        "compliance": true,
+        "dataMinimization": true,
+        "consentManagement": true,
+        "rightToErasure": true
+      },
+      "encryption": {
+        "atRest": "AES-256",
+        "inTransit": "TLS 1.3"
+      },
+      "sensitiveDataMasking": {
+        "enabled": true,
+        "patterns": ["CPF", "CNPJ", "email", "phone", "password", "token"]
+      }
+    }
+  },
+
+  "technology_stack": {
+    "frontend": {
+      "framework": "React 18",
+      "buildTool": "Vite",
+      "styling": "CSS Modules + Tailwind CSS",
+      "stateManagement": "Zustand",
+      "routing": "React Router v6"
+    },
+    "backend": {
+      "runtime": "Node.js v20+",
+      "framework": "Express.js",
+      "language": "JavaScript ES Modules",
+      "apiStyle": "REST + GraphQL"
+    },
+    "testing": {
+      "unit": ["Jest", "Vitest"],
+      "integration": ["Supertest", "Testcontainers"],
+      "e2e": ["Playwright", "Cypress"],
+      "api": ["Postman/Newman", "REST Assured"],
+      "performance": ["k6", "JMeter", "Artillery"],
+      "security": ["OWASP ZAP", "Snyk", "SonarQube"]
+    },
+    "ai": {
+      "provider": "OpenAI",
+      "models": ["gpt-4", "gpt-4-turbo", "text-embedding-3-large"],
+      "localFallback": "Ollama (llama3)"
+    },
+    "database": {
+      "primary": "MongoDB",
+      "cache": "Redis",
+      "search": "Elasticsearch",
+      "timeSeries": "InfluxDB"
+    },
+    "infrastructure": {
+      "containerization": "Docker",
+      "orchestration": "Kubernetes",
+      "serviceMesh": "Istio",
+      "monitoring": ["Prometheus", "Grafana", "Jaeger"]
+    }
+  },
+
+  "deployment": {
+    "strategy": "Blue-Green + Canary",
+    "environments": [
+      {
+        "name": "development",
+        "url": "http://localhost:3100",
+        "autoRefresh": true
+      },
+      {
+        "name": "staging",
+        "url": "https://staging.axion.ws",
+        "requireApproval": false
+      },
+      {
+        "name": "production",
+        "url": "https://axion.ws",
+        "requireApproval": true,
+        "backupBeforeDeploy": true
+      }
+    ],
+    "rollback": {
+      "automatic": true,
+      "conditions": ["health score < 60", "error rate > 5%", "response time > 3s"]
+    }
+  },
+
+  "security": {
+    "authentication": {
+      "methods": ["JWT", "OAuth 2.0", "SAML"],
+      "mfa": true,
+      "sessionTimeout": 3600
+    },
+    "authorization": {
+      "model": "RBAC",
+      "roles": [
+        "admin",
+        "qa_engineer",
+        "developer",
+        "viewer",
+        "auditor"
+      ],
+      "permissions": {
+        "admin": ["*"],
+        "qa_engineer": ["read", "execute", "create_tests", "view_reports"],
+        "developer": ["read", "view_reports"],
+        "viewer": ["read"],
+        "auditor": ["read", "view_audit_logs", "export_reports"]
+      }
+    },
+    "vulnerabilityScanning": {
+      "enabled": true,
+      "schedule": "daily",
+      "tools": ["Snyk", "OWASP Dependency-Check"]
+    }
+  },
+
+  "monitoring": {
+    "healthCheck": {
+      "enabled": true,
+      "interval": 60,
+      "endpoints": ["/health", "/ready", "/metrics"]
+    },
+    "metrics": {
+      "enabled": true,
+      "collect": [
+        "test_execution_count",
+        "test_pass_rate",
+        "test_duration",
+        "api_response_time",
+        "system_resources",
+        "error_rate"
+      ],
+      "retention": "90 days"
+    },
+    "alerts": {
+      "enabled": true,
+      "channels": ["email", "slack", "pagerduty"],
+      "rules": [
+        {
+          "name": "High failure rate",
+          "condition": "failure_rate > 20%",
+          "severity": "critical"
+        },
+        {
+          "name": "Slow execution",
+          "condition": "avg_duration > baseline * 2",
+          "severity": "warning"
+        },
+        {
+          "name": "System down",
+          "condition": "health_check_failed",
+          "severity": "critical"
+        }
+      ]
+    }
+  },
+
+  "reporting": {
+    "formats": ["HTML", "PDF", "JSON", "XML", "Markdown"],
+    "templates": [
+      "Executive Summary",
+      "Detailed Test Report",
+      "Compliance Report",
+      "Trend Analysis",
+      "Health Score Dashboard"
+    ],
+    "distribution": {
+      "automatic": true,
+      "schedule": "daily",
+      "recipients": ["qa_team", "management", "stakeholders"]
+    },
+    "dashboards": {
+      "realTime": true,
+      "widgets": [
+        "test execution status",
+        "pass/fail ratio",
+        "coverage metrics",
+        "health score",
+        "performance trends",
+        "top failures",
+        "environment status"
+      ]
+    }
+  },
+
+  "extensibility": {
+    "plugins": {
+      "enabled": true,
+      "marketplace": true,
+      "customPlugins": true,
+      "api": "RESTful + GraphQL"
+    },
+    "webhooks": {
+      "enabled": true,
+      "events": [
+        "test.started",
+        "test.completed",
+        "test.failed",
+        "suite.completed",
+        "environment.changed",
+        "alert.triggered"
+      ]
+    },
+    "customReporters": {
+      "enabled": true,
+      "sdk": "Node.js + TypeScript"
+    }
+  },
+
+  "roadmap": {
+    "phase1": {
+      "version": "1.0",
+      "duration": "3 months",
+      "features": [
+        "Core discovery engine",
+        "Basic test generation",
+        "Playwright integration",
+        "MongoDB persistence",
+        "Simple dashboard"
+      ]
+    },
+    "phase2": {
+      "version": "1.5",
+      "duration": "3 months",
+      "features": [
+        "AI-powered test generation",
+        "Root cause analysis",
+        "Health scoring",
+        "API testing",
+        "Advanced reporting"
+      ]
+    },
+    "phase3": {
+      "version": "2.0",
+      "duration": "6 months",
+      "features": [
+        "Full governance compliance",
+        "Self-healing tests",
+        "Predictive analytics",
+        "Multi-tenant support",
+        "Marketplace for plugins"
+      ]
+    }
+  },
+
+  "systems_under_test": {
+    "axionEcosystem": {
+      "axhub": {
+        "type": "Web Application",
+        "url": "https://*.axion.ws/axhub",
+        "technology": "ASP.NET Core + SQL Server",
+        "contracts": 15,
+        "modules": [
+          "equipamentos",
+          "medicao",
+          "enquadramentos",
+          "tarjas",
+          "portarias",
+          "afericoes",
+          "relatorios"
+        ]
+      },
+      "axcross": {
+        "type": "Web Application",
+        "url": "https://*.axion.ws/axcross",
+        "technology": "ASP.NET Core + SQL Server",
+        "contracts": 9,
+        "modules": [
+          "cruzamentos",
+          "veiculos-monitorados",
+          "alertas",
+          "equipamentos",
+          "relatorios"
+        ]
+      },
+      "axton": {
+        "type": "Web Application",
+        "url": "https://*.axion.ws/axton",
+        "technology": "ASP.NET Core + SQL Server",
+        "contracts": 2,
+        "modules": [
+          "pesagem",
+          "balancas",
+          "reclassificacao",
+          "relatorios"
+        ]
+      },
+      "axioniaPanel": {
+        "type": "React SPA",
+        "url": "http://localhost:3017",
+        "technology": "React 18 + Vite",
+        "pages": 38,
+        "modules": [
+          "dashboard",
+          "intelligence-hub",
+          "whatsapp",
+          "chat",
+          "helpdesk",
+          "varco-monitor",
+          "diagnostico-medicao",
+          "duplicidade-infracoes",
+          "analise-imagens",
+          "mapa-operacoes",
+          "relatorio-contrato",
+          "pipeline-editais",
+          "gerador-docs"
+        ]
+      },
+      "axioniaApi": {
+        "type": "REST API",
+        "url": "http://localhost:3100",
+        "technology": "Node.js + Express + MongoDB",
+        "endpoints": 250,
+        "controllers": 32
+      }
+    }
+  },
+
+  "metadata": {
+    "created": "2026-06-19",
+    "author": "Santiago - Axion Tecnologia",
+    "purpose": "Specification for Autonomous Quality Engineering Platform",
+    "status": "Draft",
+    "reviewers": ["QA Team", "Engineering Team", "Architecture Team"],
+    "approvalRequired": true
+  }
+}

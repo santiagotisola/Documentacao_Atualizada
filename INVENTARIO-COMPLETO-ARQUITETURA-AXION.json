@@ -1,0 +1,1187 @@
+{
+  "workspace": "Axion.Docs",
+  "versao": "3.0.0",
+  "dataAnalise": "2026-06-19",
+  "descricao": "Inventário completo da arquitetura de sistemas Axion para plataforma de testes automatizados",
+  
+  "frontend": {
+    "axion-ia-panel": {
+      "tipo": "React + Vite",
+      "porta": 3017,
+      "url": "http://localhost:3017",
+      "descricao": "Painel principal de gerenciamento e intelligence hub",
+      "tecnologias": [
+        "React 18.3.1",
+        "React Router DOM 6.28.0",
+        "Vite 6.0.0",
+        "Axios 1.7.9",
+        "Lucide React 1.16.0 (ícones)",
+        "TanStack React Query 5.100.9",
+        "React Hook Form 7.75.0",
+        "Recharts 3.8.1 (gráficos)",
+        "Sonner 2.0.7 (notificações)"
+      ],
+      "estrutura": {
+        "pages": [
+          "AnalisaMultiProduto.jsx - Análise comparativa de múltiplos produtos (AxHub + AxTon + AxCross)",
+          "AnaliseEditalAvancada.jsx - Análise avançada de editais com IA",
+          "AnaliseImagens.jsx - OCR, validação e qualidade de capturas",
+          "AnalisesSites.jsx - Comparativo de contratos e operações por site",
+          "AxHubDashboard.jsx - Dashboard específico do AxHub",
+          "BuscaEditaisGov.jsx - Busca de editais em portais governamentais",
+          "ChamadosSites.css|jsx - Gestão de tickets por site",
+          "Chat.jsx - Assistente inteligente AxionIA",
+          "ConfidencaRevisao.jsx - Revisão de itens com baixa confiança",
+          "Configuracoes.jsx - Configurações do sistema e conexões",
+          "Conformidade.jsx - Análise de conformidade com editais",
+          "Dashboard.jsx - Visão geral dos sistemas e serviços",
+          "DashboardWidgets.css|jsx - Widgets para dashboards",
+          "DiagnosticoMedicao.css|jsx - Diagnóstico inteligente de equipamentos com valores zerados",
+          "DuplicidadeInfracoes.jsx - Auditoria de infrações duplicadas",
+          "FontesPesquisa.jsx - URLs e referências de pesquisa",
+          "GerarDoc.jsx - Documentação automatizada com IA",
+          "GuiaSites.css|jsx - Guia de sites operacionais",
+          "Helpdesk.jsx - Gestão de tickets e atendimento Jitbit",
+          "HomePage.jsx - Página inicial do sistema",
+          "IntelligenceDashboard.css|jsx - Dashboard de inteligência empresarial",
+          "IntelligenceHub.css|jsx - Hub unificado de dados, relatórios e performance (ROTA PADRÃO /)",
+          "KnowledgeBase.jsx - Base de conhecimento com embeddings",
+          "Logs.jsx - Auditoria e rastreio de operações",
+          "MapaOperacoes.jsx - Ecossistema completo: fluxos, processos, sites e acessos",
+          "PainelProcessos.css|jsx - Sites, credenciais, métricas e processos operacionais",
+          "PipelineEditais.jsx - Ecossistema completo: Buscar → Analisar → Revisar → Planejar → Especificar",
+          "PlanilhaHoras.jsx - Controle de tempo e atividades",
+          "RelatorioContrato.jsx - Análises técnicas e viabilidade via IA por site/contrato",
+          "RelatorioFluxo.jsx - Métricas de atendimento e fluxo operacional",
+          "Roadmap.jsx - Geração de backlog a partir de lacunas",
+          "SlaCompliance.jsx - Relatório de conformidade SLA Jitbit",
+          "Specs.jsx - Especificação técnica de funcionalidades (PRD)",
+          "Treinamento.jsx - Capacitação e aprendizado da IA",
+          "VarcoMonitor.jsx - Monitoramento frota ITScam 450 (72 dispositivos SETRANS-GO)",
+          "WhatsApp.jsx - Integração e atendimento via WhatsApp"
+        ],
+        "components": [
+          "CredenciaisManager.css",
+          "CredenciaisManager.jsx - Gerenciador de credenciais de sites"
+        ],
+        "services": [
+          "api.js - Cliente HTTP centralizado (Axios) para comunicação com backend"
+        ],
+        "data": [
+          "sitesCredentials.js - Credenciais de acesso aos sites",
+          "sitesData.js - Dados consolidados de todos os sites AxHub e AxCross"
+        ],
+        "config": [
+          "App.jsx - Configuração de rotas e layout principal",
+          "main.jsx - Entry point da aplicação",
+          "vite.config.js - Configuração do bundler"
+        ]
+      },
+      "rotas": {
+        "/": "IntelligenceHub - Rota padrão do painel",
+        "/intelligence-hub": "Intelligence Hub - Gerenciador unificado de dados",
+        "/mapa-operacoes": "Mapa de Operações - Ecossistema completo",
+        "/painel-processos": "Painel de Processos - Sites, credenciais, métricas",
+        "/dashboard": "Dashboard - Visão geral dos sistemas",
+        "/analise": "Análise de Sites - Comparativo de contratos",
+        "/chat": "Chat IA - Assistente inteligente",
+        "/whatsapp": "WhatsApp - Integração e atendimento",
+        "/helpdesk": "Helpdesk - Gestão de tickets Jitbit",
+        "/analise-imagens": "Análise de Imagens - OCR e validação",
+        "/pipeline-editais": "Pipeline de Editais - Ecossistema completo",
+        "/relatorio-contrato": "Relatório por Contrato - Análises técnicas IA",
+        "/relatorio-fluxo": "Relatório de Fluxo - Métricas de atendimento",
+        "/kb": "Knowledge Base - Base de conhecimento",
+        "/gerar-doc": "Gerador de Docs - Documentação automatizada",
+        "/fontes": "Fontes de Pesquisa - URLs e referências",
+        "/treinamento": "Treinamento - Capacitação da IA",
+        "/planilha-horas": "Planilha de Horas - Controle de tempo",
+        "/logs": "Logs do Sistema - Auditoria",
+        "/config": "Configurações - Sistema e conexões",
+        "/varco": "VARCO Monitor - Monitoramento frota ITScam 450",
+        "/duplicidade": "Auditoria de Duplicidades - Infrações duplicadas",
+        "/diagnostico-medicao": "Diagnóstico de Medição - Equipamentos com valores zerados"
+      },
+      "menuStructure": {
+        "Operação": [
+          "Intelligence Hub",
+          "Mapa de Operações",
+          "Dashboard",
+          "Análise de Sites"
+        ],
+        "Atendimento": [
+          "Chat IA",
+          "WhatsApp",
+          "Helpdesk"
+        ],
+        "Qualidade": [
+          "Análise de Imagens",
+          "Diagnóstico Medição",
+          "Auditoria Duplicidades",
+          "VARCO Monitor",
+          "Relatório por Contrato",
+          "Relatório de Fluxo"
+        ],
+        "Inteligência": [
+          "Pipeline de Editais"
+        ],
+        "Recursos": [
+          "Knowledge Base",
+          "Gerador de Docs",
+          "Fontes de Pesquisa",
+          "Treinamento",
+          "Planilha de Horas",
+          "Logs do Sistema"
+        ],
+        "Sistema": [
+          "Configurações"
+        ]
+      }
+    }
+  },
+  
+  "backend": {
+    "axion-ia-api": {
+      "tipo": "Node.js + Express",
+      "porta": 3100,
+      "url": "http://localhost:3100",
+      "descricao": "API backend principal com integração IA, bancos SQL Server e MongoDB",
+      "versao": "3.0.0",
+      "tecnologias": [
+        "Express 4.18.2",
+        "Mongoose 9.3.3 (MongoDB ODM)",
+        "MSSQL 12.2.1 (SQL Server)",
+        "OpenAI 4.0.0 (Inteligência Artificial)",
+        "@whiskeysockets/baileys 7.0.0 (WhatsApp)",
+        "Axios 1.14.0",
+        "Cheerio 1.2.0 (Web Scraping)",
+        "Multer 2.1.1 (Upload de arquivos)",
+        "Sharp 0.34.5 (Processamento de imagens)",
+        "PDF-Parse 1.1.4",
+        "XLSX 0.18.5 (Excel)",
+        "Helmet 8.1.0 (Segurança)",
+        "Express-Rate-Limit 8.4.1 (Anti-DDoS)",
+        "Node-Cron 4.2.1 (Agendamento)",
+        "p-queue 9.2.0 (Fila de processamento)",
+        "Cosine-Similarity 1.0.1 (Embeddings)",
+        "QRCode 1.5.4 (WhatsApp QR)",
+        "Zod 3.25.76 (Validação)"
+      ],
+      "estrutura": {
+        "controllers": [
+          "admin-controller.js - Administração da KB (reindexação, estatísticas, limpeza)",
+          "agent-controller.js - Orquestrador central AxionAgent (scheduler, automação)",
+          "analise-imagem-controller.js - OCR, classificação de elementos visuais, comparação de pastas",
+          "axcross-controller.js - Integração com banco AxCross (passagens, equipamentos)",
+          "axhub-controller.js - Integração com banco AxHub (infrações, equipamentos, operações)",
+          "axton-controller.js - Integração com banco AxTon (pesagens, infrações)",
+          "coletor-controller.js - Coleta automática de editais (PNCP, portais gov)",
+          "confidence-controller.js - Fila de revisão de itens com baixa confiança",
+          "config-controller.js - Gerenciamento de configurações do sistema",
+          "conformidade-controller.js - Análise de conformidade com editais/licitações",
+          "controller.js - Chat IA, histórico, estatísticas, treinamento, KB",
+          "credenciais-controller.js - Teste de login, alteração de senha, validação de acesso",
+          "crm-controller.js - Gestão de contatos e clientes",
+          "doc-controller.js - Geração e armazenamento de documentação com IA",
+          "duplicidade-controller.js - Detecção e análise de infrações duplicadas",
+          "edital-controller.js - Busca, importação, análise automática de editais",
+          "equipamento-controller.js - Gestão de equipamentos do CRM",
+          "fontes-controller.js - Análise de usabilidade de fontes de pesquisa",
+          "health-controller.js - Health check para monitoramento externo",
+          "helpdesk-controller.js - Integração Jitbit (tickets, categorias, polling, SLA)",
+          "job-controller.js - Processamento em lote (jobs assíncronos)",
+          "leitura-controller.js - Agente 80/20 de leitura estratégica",
+          "medicao-controller.js - Diagnóstico inteligente de medição (valores zerados)",
+          "relatorio-contrato-controller.js - Relatórios técnicos por contrato via IA",
+          "relatorio-controller.js - Relatórios de fluxo diário (passagens, imagens)",
+          "roadmap-controller.js - Geração de backlog a partir de lacunas",
+          "sites-helpdesk-controller.js - Mapa de sites × categorias Jitbit",
+          "spec-controller.js - Especificações técnicas (PRD)",
+          "upload-controller.js - Upload de contexto para documentação",
+          "validate-controller.js - Validação de fluxo de alertas",
+          "varco-controller.js - Validador de integração câmeras VARCO → AxHub",
+          "whatsapp-controller.js - Integração WhatsApp (conexão, envio, sessões)"
+        ],
+        "endpoints": {
+          "chat": [
+            "POST /api/chat - Processar mensagem IA"
+          ],
+          "logs": [
+            "GET /api/logs/historico - Histórico de logs",
+            "GET /api/logs/pendentes - Logs pendentes",
+            "GET /api/logs/estatisticas - Estatísticas de uso",
+            "GET /api/logs - Consultar logs MongoDB",
+            "GET /api/analise - Análise de dados"
+          ],
+          "embeddings": [
+            "POST /api/treinar - Treinar IA com novos dados",
+            "GET /api/kb - Listar entradas da KB"
+          ],
+          "helpdesk": [
+            "GET /api/helpdesk/tickets - Listar tickets",
+            "GET /api/helpdesk/ticket/:id - Detalhe de ticket",
+            "POST /api/helpdesk/classificar/:id - Classificar ticket",
+            "POST /api/helpdesk/responder/:id - Responder com IA",
+            "POST /api/helpdesk/processar - Processar pendentes",
+            "GET /api/helpdesk/categorias - Listar categorias",
+            "POST /api/helpdesk/criar - Criar chamado",
+            "GET /api/helpdesk/polling - Status do polling",
+            "POST /api/helpdesk/polling/iniciar - Iniciar polling",
+            "POST /api/helpdesk/polling/pausar - Pausar polling",
+            "POST /api/helpdesk/polling/retomar - Retomar polling",
+            "POST /api/helpdesk/polling/limpar - Limpar fila",
+            "GET /api/helpdesk/fila - Obter fila de revisão",
+            "POST /api/helpdesk/fila/modo - Configurar modo revisão",
+            "POST /api/helpdesk/fila/:id/aprovar - Aprovar item da fila",
+            "POST /api/helpdesk/fila/:id/rejeitar - Rejeitar item da fila",
+            "GET /api/helpdesk/tecnicos - Listar técnicos",
+            "GET /api/helpdesk/planilha-horas - Planilha de horas",
+            "GET /api/helpdesk/sla-compliance - Relatório SLA",
+            "GET /api/helpdesk/sites-overview - Visão geral de sites",
+            "GET /api/helpdesk/mapa-sites - Obter mapa de sites",
+            "POST /api/helpdesk/mapa-sites - Associar site",
+            "DELETE /api/helpdesk/mapa-sites/:categoriaId - Desassociar site",
+            "GET /api/helpdesk/site/:siteId/tickets - Tickets por site"
+          ],
+          "axhub": [
+            "GET /api/axhub/status - Status da conexão",
+            "GET /api/axhub/resumo - Resumo geral",
+            "GET /api/axhub/equipamentos - Listar equipamentos",
+            "GET /api/axhub/operacoes - Listar operações",
+            "GET /api/axhub/infracoes - Estatísticas de infrações",
+            "GET /api/axhub/heartbeat - Heartbeat dos equipamentos",
+            "GET /api/axhub/monitoramentos - Listar monitoramentos",
+            "GET /api/axhub/passagens - Últimas passagens",
+            "GET /api/axhub/triagens - Estatísticas de triagens",
+            "GET /api/axhub/tabelas - Listar tabelas do banco"
+          ],
+          "medicao": [
+            "GET /api/medicao/sistemas - Listar sistemas de medição",
+            "GET /api/medicao/equipamentos - Listar equipamentos",
+            "GET /api/medicao/diagnostico - Gerar diagnóstico inteligente",
+            "GET /api/medicao/analise-sistema - Analisar sistema específico"
+          ],
+          "axton": [
+            "GET /api/axton/status - Status da conexão",
+            "GET /api/axton/resumo - Resumo geral",
+            "GET /api/axton/pesagens - Últimas pesagens",
+            "GET /api/axton/infracoes - Últimas infrações",
+            "GET /api/axton/heartbeat - Heartbeat dos equipamentos",
+            "GET /api/axton/tabelas - Listar tabelas do banco"
+          ],
+          "axcross": [
+            "GET /api/axcross/status - Status da conexão",
+            "GET /api/axcross/resumo - Resumo geral",
+            "GET /api/axcross/equipamentos - Listar equipamentos",
+            "GET /api/axcross/locais - Listar locais",
+            "GET /api/axcross/operacoes - Listar operações",
+            "GET /api/axcross/passagens - Estatísticas de passagens",
+            "GET /api/axcross/heartbeat - Heartbeat dos equipamentos",
+            "GET /api/axcross/tabelas - Listar tabelas do banco"
+          ],
+          "documentacao": [
+            "POST /api/doc/gerar - Gerar documentação",
+            "POST /api/doc/salvar - Salvar documento",
+            "GET /api/doc/imagens/:produto - Listar imagens",
+            "GET /api/doc/secoes/:produto - Listar seções",
+            "POST /api/doc/upload-contexto - Upload de contexto"
+          ],
+          "relatorios": [
+            "GET /api/relatorio/passagens - Relatório de passagens",
+            "GET /api/relatorio/imagens - Relatório de imagens",
+            "GET /api/relatorio/equipamentos - Equipamentos para relatório"
+          ],
+          "relatorioContrato": [
+            "GET /api/relatorio-contrato/contratos - Listar contratos",
+            "GET /api/relatorio-contrato/tipos - Tipos de relatório",
+            "POST /api/relatorio-contrato/gerar - Gerar relatório",
+            "GET /api/relatorio-contrato - Listar relatórios",
+            "GET /api/relatorio-contrato/:id - Obter relatório",
+            "DELETE /api/relatorio-contrato/:id - Remover relatório"
+          ],
+          "config": [
+            "GET /api/config - Obter configuração",
+            "POST /api/config - Salvar configuração",
+            "POST /api/config/testar-mongo - Testar conexão MongoDB"
+          ],
+          "coletor": [
+            "GET /api/coletor/operacoes - Operações do coletor",
+            "GET /api/coletor/pncp - Buscar no PNCP",
+            "POST /api/coletor/pncp/importar - Importar editais",
+            "POST /api/coletor/pncp/coletar - Coletar produto",
+            "GET /api/coletor/config - Obter configuração",
+            "POST /api/coletor/config - Salvar configuração",
+            "GET /api/coletor/status - Status do coletor"
+          ],
+          "fontes": [
+            "POST /api/fontes - Adicionar fonte",
+            "GET /api/fontes - Listar fontes",
+            "GET /api/fontes/mapa/:produto - Mapa de cobertura",
+            "GET /api/fontes/sugestoes/:produto - Sugestões por produto",
+            "GET /api/fontes/:id - Obter fonte",
+            "POST /api/fontes/:id/analisar - Analisar fonte",
+            "DELETE /api/fontes/:id - Remover fonte"
+          ],
+          "roadmap": [
+            "POST /api/roadmap/gerar - Gerar roadmap",
+            "GET /api/roadmap - Listar roadmaps",
+            "GET /api/roadmap/:id - Obter roadmap",
+            "PATCH /api/roadmap/:id/item/:itemId - Atualizar item",
+            "POST /api/roadmap/:id/item - Adicionar item"
+          ],
+          "spec": [
+            "POST /api/spec/gerar - Gerar especificação",
+            "GET /api/spec - Listar specs",
+            "GET /api/spec/:id - Obter spec",
+            "PATCH /api/spec/:id/status - Atualizar status"
+          ],
+          "conformidade": [
+            "POST /api/conformidade/gerar - Gerar conformidade simples",
+            "GET /api/conformidade - Listar conformidades",
+            "GET /api/conformidade/:id - Obter conformidade",
+            "DELETE /api/conformidade/:id - Remover conformidade",
+            "POST /api/conformidade/multi/gerar - Análise multi-produto",
+            "GET /api/conformidade/multi - Listar análises multi",
+            "GET /api/conformidade/multi/:id - Obter análise multi",
+            "GET /api/conformidade/multi/:id/comparacao - Comparação",
+            "GET /api/conformidade/multi/:id/lacunas - Lacunas",
+            "GET /api/conformidade/multi/:id/recomendacoes - Recomendações"
+          ],
+          "whatsapp": [
+            "POST /api/whatsapp/iniciar - Iniciar conexão",
+            "GET /api/whatsapp/status - Status da conexão",
+            "GET /api/whatsapp/sessoes - Listar sessões",
+            "GET /api/whatsapp/sessao/:telefone - Detalhes da sessão",
+            "DELETE /api/whatsapp/sessao/:telefone - Encerrar sessão",
+            "POST /api/whatsapp/send - Enviar mensagem",
+            "POST /api/whatsapp/send-buttons - Enviar com botões",
+            "POST /api/whatsapp/desconectar - Desconectar",
+            "POST /api/whatsapp/restart - Reiniciar"
+          ],
+          "analiseImagem": [
+            "POST /api/analise-imagem/analisar - Analisar sem salvar",
+            "POST /api/analise-imagem/salvar-e-analisar - Salvar e analisar",
+            "POST /api/analise-imagem/comparar-pasta - Comparar pasta",
+            "POST /api/analise-imagem/comparar-pasta-local - Comparar local",
+            "GET /api/analise-imagem/imagem-externa - Servir imagem externa",
+            "POST /api/analise-imagem/gerar-caracteristicas - Características",
+            "POST /api/analise-imagem/classificar-ocupacao - Classificar ocupação",
+            "POST /api/analise-imagem/classificar-roda - Classificar roda",
+            "POST /api/analise-imagem/classificar-cor-camisa - Classificar cor camisa",
+            "POST /api/analise-imagem/classificar-mochila - Classificar mochila",
+            "POST /api/analise-imagem/classificar-calca - Classificar calça",
+            "POST /api/analise-imagem/ler-placa - Ler placas OCR",
+            "GET /api/analise-imagem/listar - Listar todas",
+            "GET /api/analise-imagem/listar/:sistema - Listar por sistema",
+            "GET /api/analise-imagem/listar-pasta - Listar pasta",
+            "DELETE /api/analise-imagem/:sistema/:nome - Remover imagem"
+          ],
+          "jobs": [
+            "POST /api/jobs/comparar-pasta - Criar job de comparação",
+            "GET /api/jobs - Listar jobs",
+            "GET /api/jobs/:id - Obter job",
+            "DELETE /api/jobs/:id - Remover job"
+          ],
+          "admin": [
+            "GET /api/admin/kb/stats - Estatísticas da KB",
+            "POST /api/admin/reindexar-docs - Reindexar documentação",
+            "POST /api/admin/reindexar-jitbit - Reindexar Jitbit",
+            "DELETE /api/admin/kb/:modulo - Limpar módulo da KB"
+          ],
+          "agent": [
+            "POST /api/agent/run - Executar agente",
+            "POST /api/agent/run/:mode - Executar modo específico",
+            "GET /api/agent/state - Estado do agente",
+            "GET /api/agent/scheduler - Status do scheduler",
+            "POST /api/agent/scheduler/start - Iniciar scheduler",
+            "POST /api/agent/scheduler/stop - Parar scheduler"
+          ],
+          "varco": [
+            "POST /api/varco/validar-dispositivo - Validar dispositivo",
+            "POST /api/varco/validar-lote - Validar lote",
+            "POST /api/varco/analisar-incidente - Analisar incidente",
+            "GET /api/varco/heartbeat - Heartbeat geral",
+            "GET /api/varco/frota - Listar frota",
+            "GET /api/varco/auditoria - Status de auditoria",
+            "GET /api/varco/auditoria-aprimorada - Auditoria aprimorada",
+            "GET /api/varco/config-padrao - Config padrão",
+            "POST /api/varco/recoleta - Recoletar dados",
+            "GET /api/varco/plano-correcao - Plano de correção",
+            "POST /api/varco/gerar-plano - Gerar plano",
+            "POST /api/varco/aplicar-correcao - Aplicar correção"
+          ],
+          "leitura": [
+            "POST /api/leitura/analisar - Analisar texto (80/20)",
+            "POST /api/leitura/upload - Upload e análise"
+          ],
+          "confianca": [
+            "GET /api/confianca/fila - Fila de revisão",
+            "GET /api/confianca/estatisticas - Estatísticas",
+            "GET /api/confianca/:id - Obter item",
+            "POST /api/confianca/:id/revisar - Marcar como revisado",
+            "POST /api/confianca/:id/descartar - Descartar item",
+            "POST /api/confianca/conformidade/:conformidadeId/auto-resolver - Auto-resolver",
+            "GET /api/confianca/exportar/csv - Exportar CSV"
+          ],
+          "edital": [
+            "GET /api/edital/buscar - Buscar editais gov",
+            "POST /api/edital/importar - Importar edital",
+            "POST /api/edital/analisar-rapido - Análise rápida",
+            "POST /api/edital/analise-avancada - Análise avançada",
+            "POST /api/edital/upload - Upload de edital",
+            "GET /api/sites - Listar sites",
+            "GET /api/edital - Listar editais importados",
+            "GET /api/edital/historico - Histórico",
+            "POST /api/edital/auto-analisar-todos - Auto-análise"
+          ],
+          "crm": [
+            "GET /api/crm/contatos - Listar contatos",
+            "GET /api/crm/contatos/stats - Estatísticas contatos",
+            "GET /api/crm/contatos/:telefone - Detalhe contato",
+            "PUT /api/crm/contatos/:telefone - Atualizar contato",
+            "GET /api/crm/clientes - Listar clientes",
+            "POST /api/crm/clientes - Criar cliente",
+            "PUT /api/crm/clientes/:slug - Atualizar cliente",
+            "GET /api/crm/clientes/:slug/contatos - Contatos do cliente",
+            "GET /api/crm/clientes/:slug/equipamentos - Equipamentos do cliente"
+          ],
+          "equipamento": [
+            "GET /api/equipamentos - Listar equipamentos",
+            "GET /api/equipamentos/stats - Estatísticas",
+            "GET /api/equipamentos/:id - Detalhe equipamento",
+            "PUT /api/equipamentos/:id - Atualizar equipamento",
+            "GET /api/equipamentos/busca - Buscar equipamento"
+          ],
+          "credenciais": [
+            "POST /api/credenciais/testar - Testar login",
+            "POST /api/credenciais/alterar-senha - Alterar senha",
+            "POST /api/credenciais/validar - Validar acesso"
+          ],
+          "duplicidade": [
+            "GET /api/duplicidade/buscar - Buscar infrações",
+            "POST /api/duplicidade/varredura - Varredura de duplicidades",
+            "GET /api/duplicidade/:id - Detalhe infração",
+            "POST /api/duplicidade/comparar - Comparar infrações",
+            "GET /api/duplicidade/estatisticas - Estatísticas"
+          ],
+          "health": [
+            "GET /api/health - Health check"
+          ]
+        },
+        "models": [
+          "approval.model.js - Aprovações de pedidos",
+          "cliente.model.js - Clientes CRM",
+          "confianca-revisao.model.js - Fila de revisão de baixa confiança",
+          "conformidade-multi.model.js - Análises multi-produto",
+          "conformidade.model.js - Conformidade com editais",
+          "contato.model.js - Contatos CRM",
+          "equipamento.model.js - Equipamentos CRM",
+          "fonte.model.js - Fontes de pesquisa",
+          "job.model.js - Jobs de processamento em lote",
+          "kb.model.js - Knowledge Base (embeddings)",
+          "log.model.js - Logs do sistema",
+          "pedido-compra.model.js - Pedidos de compra",
+          "relatorio-contrato.model.js - Relatórios por contrato",
+          "roadmap.model.js - Roadmaps de backlog",
+          "spec.model.js - Especificações técnicas (PRD)",
+          "whatsapp-sessao.model.js - Sessões WhatsApp"
+        ],
+        "services": [
+          "analise-imagem.js - Análise de imagens com OpenAI Vision",
+          "analise.js - Motor de análise IA",
+          "axcross-db.js - Conexão SQL Server AxCross",
+          "axhub-db.js - Conexão SQL Server AxHub",
+          "axton-db.js - Conexão SQL Server AxTon",
+          "comparador.js - Comparação de dados",
+          "confidence-queue.js - Fila de confiança",
+          "confidence-scorer.js - Pontuação de confiança",
+          "conformidade-enhanced.js - Conformidade aprimorada",
+          "conformidade.js - Motor de conformidade",
+          "edital-analise-avancada.js - Análise avançada de editais",
+          "embedding.js - Geração de embeddings (OpenAI)",
+          "extrator.js - Extração de dados",
+          "ia-adapter.js - Adaptador OpenAI",
+          "job-queue.js - Fila de jobs",
+          "multi-product-analysis.js - Análise multi-produto",
+          "normalizador.js - Normalização de dados",
+          "ocr-processor.js - Processamento OCR",
+          "parser.js - Parser de documentos",
+          "pncp-scraper.js - Scraper PNCP",
+          "pncp.service.js - Serviço PNCP",
+          "relatorio-contrato.js - Geração de relatórios",
+          "requirement-classifier.js - Classificador de requisitos",
+          "roadmap-engine.js - Motor de roadmap",
+          "search.js - Motor de busca",
+          "spec-engine.js - Motor de especificações",
+          "stack-free.js - Stack free tier",
+          "table-extractor.js - Extração de tabelas",
+          "training.js - Treinamento da IA",
+          "whatsapp-flows.js - Fluxos WhatsApp",
+          "whatsapp-transport.js - Transporte WhatsApp",
+          "whatsapp.service.js - Serviço WhatsApp"
+        ],
+        "agent": [
+          "agent.js - Agente principal AxionIA",
+          "config.js - Configuração do agente",
+          "orchestrator.js - Orquestrador de tarefas",
+          "state.js - Gerenciamento de estado",
+          "tasks.js - Definição de tarefas"
+        ],
+        "config": [
+          "sites.js - Configuração de sites operacionais"
+        ],
+        "scripts": [
+          "seed-docs.js - Seed de documentação na KB",
+          "seed-jitbit.js - Seed de tickets Jitbit na KB",
+          "seed-kb.js - Seed geral da KB"
+        ]
+      },
+      "variaveisAmbiente": {
+        "obrigatorias": [
+          "PORT=3100",
+          "OPENAI_API_KEY - Chave da API OpenAI",
+          "MONGO_URI - URI de conexão MongoDB",
+          "JITBIT_URL - URL base do Jitbit Helpdesk",
+          "JITBIT_USER - Usuário Jitbit",
+          "JITBIT_PASS - Senha Jitbit"
+        ],
+        "opcionais": [
+          "CORS_ORIGIN - Origem CORS (padrão: http://localhost:3001)",
+          "API_TOKEN - Token de autenticação da API",
+          "AXHUB_DB_* - Conexão SQL Server AxHub",
+          "AXTON_DB_* - Conexão SQL Server AxTon",
+          "AXCROSS_DB_* - Conexão SQL Server AxCross",
+          "VARCO_EMAIL - Email VARCO IoT",
+          "VARCO_PASSWORD - Senha VARCO IoT",
+          "TELEGRAM_TOKEN - Token Telegram",
+          "TELEGRAM_CHAT_ID - Chat ID Telegram"
+        ]
+      },
+      "features": [
+        "Rate Limiting: 120 req/min por IP (anti-DDoS)",
+        "Helmet Security: Proteção contra vulnerabilidades web",
+        "Polling Automático: Tickets Jitbit fechados",
+        "Scheduler: Node-Cron para tarefas agendadas",
+        "WhatsApp Integration: Baileys (sem API oficial)",
+        "OCR: OpenAI Vision + classificação de elementos",
+        "Embeddings: Cosine similarity para busca semântica",
+        "File Upload: Multer com Sharp para processamento de imagens",
+        "PDF/Excel: Parsing de documentos",
+        "Web Scraping: Cheerio para portais gov",
+        "SQL Server: Conexão com 3 bancos (AxHub, AxTon, AxCross)",
+        "MongoDB: Armazenamento de sessões, logs, KB",
+        "Queue Processing: p-queue para processamento assíncrono",
+        "Error Recovery: Handlers para uncaughtException e unhandledRejection"
+      ]
+    }
+  },
+  
+  "docs": {
+    "portaisDocusaurus": [
+      {
+        "nome": "AxHub.Docs",
+        "porta": 3010,
+        "url": "http://localhost:3010/AxHub.Docs",
+        "baseUrl": "/AxHub.Docs",
+        "descricao": "Manual completo do sistema AxHub (fiscalização eletrônica)",
+        "estrutura": [
+          "administracao/ - Gestão administrativa",
+          "balanca/ - Módulo de balança",
+          "cadastros-basicos/ - Cadastros fundamentais",
+          "controle-acesso/ - Gestão de acessos",
+          "cronotacografo/ - Módulo de cronotacógrafo",
+          "glossario/ - Glossário de termos",
+          "img/ - Imagens da documentação",
+          "infracoes/ - Gestão de infrações",
+          "medicoes/ - Medições e aferições",
+          "operacoes/ - Operações do sistema",
+          "pesagem/ - Pesagem de veículos",
+          "Planilhas/ - Planilhas de referência",
+          "primeiros-passos/ - Guia de início",
+          "referencia-tecnica/ - Referência técnica",
+          "relatorios/ - Relatórios do sistema",
+          "veiculos/ - Gestão de veículos",
+          "intro.md - Introdução ao AxHub"
+        ]
+      },
+      {
+        "nome": "AxTon.Docs",
+        "porta": 3011,
+        "url": "http://localhost:3011/AxTon.Docs",
+        "baseUrl": "/AxTon.Docs",
+        "descricao": "Manual completo do sistema AxTon (pesagem de veículos)",
+        "estrutura": [
+          "administracao/ - Gestão administrativa",
+          "cadastros/ - Cadastros gerais",
+          "cadastros-basicos/ - Cadastros fundamentais",
+          "controle-acesso/ - Gestão de acessos",
+          "glossario/ - Glossário de termos",
+          "img/ - Imagens da documentação",
+          "infracoes/ - Gestão de infrações",
+          "medicoes/ - Medições e aferições",
+          "operacoes/ - Operações do sistema",
+          "pesagem/ - Pesagem de veículos",
+          "primeiros-passos/ - Guia de início",
+          "referencia-tecnica/ - Referência técnica",
+          "relatorios/ - Relatórios do sistema",
+          "sistema/ - Configurações do sistema",
+          "veiculos/ - Gestão de veículos",
+          "intro.md - Introdução ao AxTon"
+        ]
+      },
+      {
+        "nome": "AxCross.Docs",
+        "porta": 3012,
+        "url": "http://localhost:3012/AxCross.Docs",
+        "baseUrl": "/AxCross.Docs",
+        "descricao": "Manual completo do sistema AxCross (controle de acesso)",
+        "estrutura": [
+          "administracao/ - Gestão administrativa",
+          "cadastros/ - Cadastros gerais",
+          "glossario/ - Glossário de termos",
+          "img/ - Imagens da documentação",
+          "intro.md - Introdução ao AxCross",
+          "operacoes/ - Operações do sistema",
+          "primeiros-passos/ - Guia de início",
+          "referencia-tecnica/ - Referência técnica",
+          "relatorios/ - Relatórios do sistema",
+          "sistema/ - Configurações do sistema"
+        ]
+      }
+    ]
+  },
+  
+  "scripts": {
+    "powershell": [
+      {
+        "nome": "iniciar.ps1",
+        "descricao": "Script principal para iniciar todos os serviços do workspace",
+        "funcoes": [
+          "Limpa portas 3017, 3010, 3011, 3012, 3100",
+          "Inicia axion-ia-api na porta 3100",
+          "Aguarda resposta da API (health check)",
+          "Inicia axion-ia-panel na porta 3017",
+          "Inicia AxHub.Docs na porta 3010",
+          "Inicia AxTon.Docs na porta 3011",
+          "Inicia AxCross.Docs na porta 3012",
+          "Verifica status de todos os serviços",
+          "Abre navegador com todas as URLs"
+        ]
+      },
+      {
+        "nome": "encerrar.ps1",
+        "descricao": "Encerra todos os serviços do workspace",
+        "funcoes": [
+          "Para processos nas portas 3001, 3010, 3011, 3012, 3100",
+          "Mata processos Node.js remanescentes"
+        ]
+      },
+      {
+        "nome": "analisar-documentacao-helpdesk.ps1",
+        "descricao": "Análise de documentação do helpdesk"
+      },
+      {
+        "nome": "converter-md-para-word.ps1",
+        "descricao": "Converte arquivos Markdown para Word"
+      },
+      {
+        "nome": "converter-md-para-word-v2.ps1",
+        "descricao": "Versão 2 do conversor MD → Word"
+      },
+      {
+        "nome": "gerar-analise.ps1",
+        "descricao": "Gera análises automatizadas"
+      },
+      {
+        "nome": "gerar-codigo.ps1",
+        "descricao": "Gerador de código automatizado"
+      },
+      {
+        "nome": "gerar-diagnostico-imepi.ps1",
+        "descricao": "Diagnóstico específico para IMEPI"
+      },
+      {
+        "nome": "gerar-prompt-analise.ps1",
+        "descricao": "Geração de prompts para análise IA"
+      },
+      {
+        "nome": "novo-projeto-docs.ps1",
+        "descricao": "Scaffolding de novo projeto de documentação"
+      },
+      {
+        "nome": "SCRIPT-INTEGRACAO-UNIVERSAL/gerar-pacote-cliente.ps1",
+        "descricao": "Geração de pacote de integração para clientes"
+      }
+    ],
+    "javascript": [
+      {
+        "nome": "analisar-equipamentos-faixas.mjs",
+        "descricao": "Análise de equipamentos e faixas de medição"
+      },
+      {
+        "nome": "analisar-xlsx.mjs",
+        "descricao": "Análise de planilhas Excel"
+      },
+      {
+        "nome": "analise-envios.mjs",
+        "descricao": "Análise de envios de dados"
+      },
+      {
+        "nome": "compare-002-007.mjs",
+        "descricao": "Comparação entre equipamentos 002 e 007"
+      },
+      {
+        "nome": "compare-faixas-007.mjs",
+        "descricao": "Comparação de faixas do equipamento 007"
+      },
+      {
+        "nome": "exportar-contatos-multi360.mjs",
+        "descricao": "Exportação de contatos Multi360"
+      },
+      {
+        "nome": "gerar-knowledge-base.mjs",
+        "descricao": "Geração da base de conhecimento"
+      },
+      {
+        "nome": "gerar-pdf.mjs",
+        "descricao": "Gerador de PDF dos manuais"
+      },
+      {
+        "nome": "gerar-pdf-lgpd.mjs",
+        "descricao": "Gerador de PDF específico para LGPD"
+      },
+      {
+        "nome": "gerar-pdf-portais.mjs",
+        "descricao": "Gerador de PDF dos portais"
+      },
+      {
+        "nome": "gerar-pdf-portais-win11.cjs",
+        "descricao": "Gerador de PDF otimizado para Win11"
+      },
+      {
+        "nome": "gerar-video-axton.cjs",
+        "descricao": "Gerador de vídeo de apresentação do AxTon"
+      },
+      {
+        "nome": "gerar-video-narrado-axton.cjs",
+        "descricao": "Gerador de vídeo narrado do AxTon"
+      },
+      {
+        "nome": "gerar-word.mjs",
+        "descricao": "Gerador de documentos Word"
+      },
+      {
+        "nome": "validar-credenciais.mjs",
+        "descricao": "Validador de credenciais de acesso"
+      },
+      {
+        "nome": "validate-pipeline.js",
+        "descricao": "Validação de pipeline de processamento"
+      },
+      {
+        "nome": "fix-encoding.js",
+        "descricao": "Correção de encoding de arquivos"
+      },
+      {
+        "nome": "axion-ia-api/cleanup-duplicates.js",
+        "descricao": "Limpeza de duplicidades no banco"
+      },
+      {
+        "nome": "axion-ia-api/fix-aprovador.mjs",
+        "descricao": "Correção de dados de aprovador"
+      },
+      {
+        "nome": "axion-ia-api/fix-encoding.js",
+        "descricao": "Correção de encoding da API"
+      },
+      {
+        "nome": "axion-ia-api/import-axton-backup.cjs",
+        "descricao": "Importação de backup do AxTon"
+      },
+      {
+        "nome": "axion-ia-api/importar-contatos-multi360.mjs",
+        "descricao": "Importação de contatos Multi360"
+      },
+      {
+        "nome": "axion-ia-api/importar-equipamentos-zerotier.mjs",
+        "descricao": "Importação de equipamentos ZeroTier"
+      },
+      {
+        "nome": "axion-ia-api/query-ambas-placas.cjs",
+        "descricao": "Query de placas (ambas)"
+      },
+      {
+        "nome": "axion-ia-api/query-placas.cjs",
+        "descricao": "Query de placas"
+      },
+      {
+        "nome": "axion-ia-api/seed.mjs",
+        "descricao": "Seed de dados inicial"
+      },
+      {
+        "nome": "axion-ia-api/validar-completo.cjs",
+        "descricao": "Validação completa de dados"
+      },
+      {
+        "nome": "AxTon/validar-infracoes-lei14229.mjs",
+        "descricao": "Validação de infrações Lei 14.229"
+      },
+      {
+        "nome": "auditoria-itscam/verificar-equipamento.mjs",
+        "descricao": "Verificação de equipamento ITScam"
+      },
+      {
+        "nome": "auditoria-itscam/validar.mjs",
+        "descricao": "Validador de auditoria ITScam"
+      },
+      {
+        "nome": "auditoria-itscam/validar-config.mjs",
+        "descricao": "Validador de configuração ITScam"
+      },
+      {
+        "nome": "auditoria-itscam/reverter-ocr.mjs",
+        "descricao": "Reversão de OCR"
+      },
+      {
+        "nome": "auditoria-itscam/reverter-ocr-dinamico.mjs",
+        "descricao": "Reversão dinâmica de OCR"
+      },
+      {
+        "nome": "investigacao-duplicidade-UJN9C59/investigacao.mjs",
+        "descricao": "Investigação de duplicidade específica"
+      },
+      {
+        "nome": "investigacao-duplicidade-UJN9C59/proposta-correcao.mjs",
+        "descricao": "Proposta de correção de duplicidade"
+      }
+    ]
+  },
+  
+  "databases": {
+    "mongodb": {
+      "nome": "axion-ia",
+      "descricao": "Banco MongoDB principal para armazenamento de sessões, logs, KB e dados IA",
+      "collections": [
+        "kbs - Knowledge Base (embeddings de documentação e tickets)",
+        "logs - Logs do sistema",
+        "whatsappsessaos - Sessões WhatsApp",
+        "conformidades - Análises de conformidade",
+        "conformidademultis - Análises multi-produto",
+        "specs - Especificações técnicas (PRD)",
+        "roadmaps - Roadmaps de backlog",
+        "jobs - Jobs de processamento em lote",
+        "confiancarevisaos - Fila de revisão de baixa confiança",
+        "fontes - Fontes de pesquisa",
+        "relatoriocontratos - Relatórios por contrato",
+        "aprovacoes - Aprovações de pedidos",
+        "pedidocompras - Pedidos de compra",
+        "contatos - Contatos CRM",
+        "clientes - Clientes CRM",
+        "equipamentos - Equipamentos CRM"
+      ],
+      "usoEmbeddings": true,
+      "modeloEmbedding": "text-embedding-ada-002 (OpenAI)"
+    },
+    "sqlserver": [
+      {
+        "nome": "AxHub",
+        "descricao": "Banco de dados do sistema AxHub (fiscalização eletrônica)",
+        "tabelasPrincipais": [
+          "dbo.Equipamentos - Equipamentos de fiscalização",
+          "dbo.Infracoes - Infrações registradas",
+          "dbo.Operacoes - Operações do sistema",
+          "dbo.Passagens - Passagens de veículos",
+          "dbo.Triagens - Triagens de infrações",
+          "dbo.Monitoramentos - Monitoramentos em tempo real",
+          "dbo.Usuarios - Usuários do sistema",
+          "dbo.Imagens - Imagens das infrações",
+          "dbo.Medicoes - Medições de equipamentos",
+          "dbo.Afericoes - Aferições metrológicas"
+        ],
+        "conexao": "AXHUB_DB_* no .env"
+      },
+      {
+        "nome": "AxTon",
+        "descricao": "Banco de dados do sistema AxTon (pesagem de veículos)",
+        "tabelasPrincipais": [
+          "dbo.Pesagens - Pesagens de veículos",
+          "dbo.Infracoes - Infrações de peso",
+          "dbo.Equipamentos - Equipamentos de pesagem",
+          "dbo.Usuarios - Usuários do sistema",
+          "dbo.Operacoes - Operações do sistema",
+          "dbo.Veiculos - Veículos cadastrados"
+        ],
+        "conexao": "AXTON_DB_* no .env"
+      },
+      {
+        "nome": "AxCross",
+        "descricao": "Banco de dados do sistema AxCross (controle de acesso)",
+        "tabelasPrincipais": [
+          "dbo.Passagens - Passagens de controle de acesso",
+          "dbo.Equipamentos - Equipamentos de controle",
+          "dbo.Locais - Locais de acesso",
+          "dbo.Operacoes - Operações do sistema",
+          "dbo.Usuarios - Usuários do sistema"
+        ],
+        "conexao": "AXCROSS_DB_* no .env"
+      }
+    ]
+  },
+  
+  "integracoes": {
+    "externas": [
+      {
+        "nome": "Jitbit Helpdesk",
+        "tipo": "REST API",
+        "descricao": "Sistema de tickets e atendimento",
+        "endpoints": "https://desk.axiontecnologia.com.br/helpdesk",
+        "autenticacao": "Basic Auth (user + password)",
+        "recursos": [
+          "Listar tickets",
+          "Criar tickets",
+          "Comentar tickets",
+          "Alterar status",
+          "Listar categorias",
+          "Obter técnicos"
+        ],
+        "polling": "Automático via scheduler para tickets fechados"
+      },
+      {
+        "nome": "OpenAI API",
+        "tipo": "REST API",
+        "descricao": "Inteligência Artificial (GPT-4, Embeddings, Vision)",
+        "modelos": [
+          "gpt-4o - Modelo principal de chat",
+          "text-embedding-ada-002 - Geração de embeddings",
+          "gpt-4-vision-preview - Análise de imagens/OCR"
+        ],
+        "usos": [
+          "Chat IA",
+          "Análise de documentos",
+          "Classificação de tickets",
+          "Geração de documentação",
+          "OCR e análise de imagens",
+          "Análise de conformidade",
+          "Geração de especificações"
+        ]
+      },
+      {
+        "nome": "VARCO IoT Platform",
+        "tipo": "REST API",
+        "descricao": "Plataforma de gerenciamento de câmeras ITScam 450",
+        "frota": "72 dispositivos SETRANS-GO",
+        "recursos": [
+          "Listar frota",
+          "Validar dispositivos",
+          "Heartbeat de câmeras",
+          "Auditoria de status",
+          "Recoleta de dados"
+        ]
+      },
+      {
+        "nome": "PNCP (Portal Nacional de Contratações Públicas)",
+        "tipo": "Web Scraping",
+        "descricao": "Coleta automática de editais governamentais",
+        "tecnologia": "Cheerio + Axios",
+        "recursos": [
+          "Buscar editais",
+          "Importar editais",
+          "Análise automática"
+        ]
+      },
+      {
+        "nome": "WhatsApp Business",
+        "tipo": "Baileys (Socket Connection)",
+        "descricao": "Integração WhatsApp sem API oficial",
+        "biblioteca": "@whiskeysockets/baileys 7.0.0",
+        "recursos": [
+          "Conexão via QR Code",
+          "Envio de mensagens",
+          "Botões interativos",
+          "Gestão de sessões",
+          "Fluxos conversacionais"
+        ]
+      }
+    ]
+  },
+  
+  "deployment": {
+    "desenvolvimento": {
+      "metodo": "Scripts PowerShell (iniciar.ps1 / encerrar.ps1)",
+      "portas": {
+        "3100": "axion-ia-api",
+        "3017": "axion-ia-panel",
+        "3010": "AxHub.Docs",
+        "3011": "AxTon.Docs",
+        "3012": "AxCross.Docs"
+      }
+    },
+    "producao": {
+      "recomendacoes": [
+        "PM2 para gerenciamento de processos Node.js",
+        "Nginx como reverse proxy",
+        "MongoDB Atlas para banco de dados",
+        "SSL/TLS obrigatório",
+        "Variáveis de ambiente seguras",
+        "Backups automáticos MongoDB",
+        "Monitoramento via /api/health"
+      ]
+    }
+  },
+  
+  "testing": {
+    "estrategias": [
+      {
+        "tipo": "Testes de Integração API",
+        "ferramentas": ["Postman", "Jest", "Supertest"],
+        "cobertura": [
+          "Todos os endpoints REST",
+          "Autenticação e autorização",
+          "Validação de entrada",
+          "Tratamento de erros",
+          "Rate limiting"
+        ]
+      },
+      {
+        "tipo": "Testes de Interface (E2E)",
+        "ferramentas": ["Playwright", "Cypress"],
+        "cobertura": [
+          "Fluxo de login",
+          "Navegação entre páginas",
+          "Formulários de criação",
+          "Visualização de dados",
+          "Interações com dashboards"
+        ]
+      },
+      {
+        "tipo": "Testes de Banco de Dados",
+        "ferramentas": ["Jest", "MSSQL scripts"],
+        "cobertura": [
+          "Queries SQL Server (AxHub, AxTon, AxCross)",
+          "Operações MongoDB (CRUD)",
+          "Embeddings e busca semântica",
+          "Integridade referencial"
+        ]
+      },
+      {
+        "tipo": "Testes de IA/ML",
+        "ferramentas": ["Postman", "Custom scripts"],
+        "cobertura": [
+          "Classificação de tickets",
+          "OCR de imagens",
+          "Análise de conformidade",
+          "Geração de embeddings",
+          "Busca semântica"
+        ]
+      },
+      {
+        "tipo": "Testes de Integrações",
+        "cobertura": [
+          "Jitbit API",
+          "VARCO IoT",
+          "WhatsApp Baileys",
+          "OpenAI API",
+          "PNCP Scraper"
+        ]
+      }
+    ],
+    "areasCobertura": {
+      "criticas": [
+        "Criação e classificação de tickets",
+        "Análise de imagens OCR",
+        "Consultas SQL Server (infrações, equipamentos)",
+        "Autenticação e autorização",
+        "Upload e processamento de arquivos"
+      ],
+      "secundarias": [
+        "Geração de documentação",
+        "Relatórios e dashboards",
+        "Configurações do sistema",
+        "Logs e auditoria"
+      ]
+    }
+  },
+  
+  "documentacao": {
+    "manuais": [
+      "AxHub.Docs - Manual completo AxHub (Docusaurus)",
+      "AxTon.Docs - Manual completo AxTon (Docusaurus)",
+      "AxCross.Docs - Manual completo AxCross (Docusaurus)"
+    ],
+    "analises": [
+      "ANALISE-COMPLETA-DASHBOARD-AXHUB-IPEMPE.md",
+      "ANALISE-COMPLETA-LOCAIS-PORTARIA-TARJA.md",
+      "ANALISE-COMPARATIVA-ITZ022R-ITZ023L.md",
+      "ANALISE-EQUIPAMENTOS-FAIXAS-2026-06-17.md",
+      "ANALISE-ESTRATEGICA-SAAS-COMPLETA.md",
+      "ANALISE-MEDICAO-FAIXAS-VALORES-ZERADOS-GOIANIA.md",
+      "ANALISE-MERCADO-2026.md",
+      "ANALISE-MULTI360-VS-AXION-CRM.md",
+      "ANALISE-ORIGEM-DADOS-TEMPLATE-TARJA.md",
+      "ANALISE-VALIDACAO-T1051-23-05-2026.md",
+      "ANALISE-WHATSAPP-PROJETO.md"
+    ],
+    "guias": [
+      "BASE-PROJETO-DOCS.md",
+      "CHECKLIST-IMPLEMENTACAO.md",
+      "CICLO-COMPLETO-CADASTRO-MEDICAO-AXHUB.md",
+      "CONSOLIDACAO-PROJETO-HELPDESK-COMPLETA.md",
+      "DIAGRAMA-FLUXO-DADOS-TARJA.md",
+      "GUIA-CORRECAO-ERRO-PORTARIA-492-2012.md",
+      "GUIA-IMPLEMENTACAO-ODOO-HELPDESK.md",
+      "GUIA-OPERACIONAL-RAPIDO-MEDICAO.md",
+      "GUIA-PRATICO-ATUALIZAR-DADOS-TARJA-INFRACAO.md",
+      "GUIA-PRATICO-REVISAR-AXCROSS.md",
+      "GUIA-USO-FERRAMENTAS-DIAGNOSTICO.md",
+      "GUIA-USO-OCR-CONFIANCA.md",
+      "GUIA-VALIDACAO-CONTRATOS-FAIXAS.md"
+    ],
+    "relatorios": [
+      "RELATORIO-ABNT-CICLO-MEDICAO-AXHUB.md",
+      "RELATORIO-ANALISE-INTEGRACAO-IMAGENS.md",
+      "RELATORIO-ANALISE-MEDICAO-GOIANIA-AXION-IA.md",
+      "RESUMO-EXECUTIVO-AXION-IA-MEDICAO.md",
+      "RESUMO-EXECUTIVO-HELPDESK-2026.md",
+      "RESUMO-EXECUTIVO-VALIDACAO-TARJA.md",
+      "RESUMO-EXECUTIVO.md"
+    ],
+    "diagnosticos": [
+      "DIAGNOSTICO-GOEC6O008-NOTURNO-COMPARATIVO.md",
+      "DIAGNOSTICO-HEARTBEAT-VS-PASSAGENS-IPEMPE.md",
+      "DIAGNOSTICO-T4129-FAIXA-VERMELHA.md"
+    ],
+    "scripts": [
+      "SCRIPT-DIAGNOSTICO-MEDICAO-GOIANIA.sql",
+      "SCRIPT-DIAGNOSTICO-PARAMETRIZAVEL.sql",
+      "SCRIPT-DIAGNOSTICO-PORTARIA-492-2012.sql",
+      "SCRIPTS-CORRECAO-HEARTBEAT-IPEMPE.sql"
+    ]
+  },
+  
+  "observacoes": {
+    "pontosCriticos": [
+      "Rate Limiting configurado para 120 req/min - ajustar em produção conforme carga",
+      "MongoDB URI deve usar authentication em produção",
+      "Senhas Jitbit com # devem estar entre aspas duplas no .env",
+      "WhatsApp Baileys pode requerer re-autenticação periódica (QR Code)",
+      "OpenAI API tem limites de rate - implementar retry logic",
+      "SQL Server connections devem usar pooling em produção",
+      "Embeddings consomem tokens OpenAI - considerar cache",
+      "Arquivos de upload armazenados em uploads/ - configurar limpeza periódica",
+      "Logs acumulam no MongoDB - implementar rotação",
+      "VARCO IoT requer credenciais específicas para frota SETRANS-GO"
+    ],
+    "melhorias": [
+      "Implementar autenticação JWT para API",
+      "Adicionar cache Redis para queries frequentes",
+      "Implementar WebSockets para atualizações em tempo real",
+      "Adicionar testes automatizados (Jest + Supertest)",
+      "Implementar CI/CD com GitHub Actions",
+      "Adicionar monitoramento com Prometheus + Grafana",
+      "Implementar backup automático MongoDB",
+      "Adicionar compressão de imagens no upload",
+      "Implementar retry logic para chamadas OpenAI",
+      "Adicionar documentação OpenAPI/Swagger"
+    ]
+  }
+}
