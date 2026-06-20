@@ -1,0 +1,51 @@
+{
+  "caso": "09",
+  "inicio": "2026-06-18T10:31:19.073Z",
+  "operacoes": [
+    {
+      "equip": "GOEC6O054 - Faixa 2",
+      "resultado": "APLICADO",
+      "backup": {
+        "ocr": {
+          "avgCharHeight": 20,
+          "avgPlateAngle": 0,
+          "avgPlateSlant": 0,
+          "classifierExpansion": 10,
+          "countryCode": 76,
+          "enabled": true,
+          "licensed": true,
+          "lowProbChar": 45,
+          "maxCharHeight": 60,
+          "maxLowProbChars": 0,
+          "maxPlates": 2,
+          "minCharHeight": 9,
+          "minProbPerChar": 85,
+          "processingMode": 3,
+          "processingQueue": 4,
+          "processingThreads": 4,
+          "processingTimeout": 1000,
+          "roi": {
+            "enabled": true,
+            "x0": 437,
+            "x1": 1236,
+            "x2": 839,
+            "x3": 1919,
+            "y0": 562,
+            "y1": 413,
+            "y2": 1195,
+            "y3": 1004
+          },
+          "useClassifierResult": false,
+          "vehicleType": 3
+        }
+      }
+    }
+  ],
+  "fim": "2026-06-18T10:31:39.823Z",
+  "resumo": {
+    "aplicados": 1,
+    "ja_ok": 0,
+    "falha": 0,
+    "cancelados": 0
+  }
+}

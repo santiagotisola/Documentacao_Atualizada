@@ -10,8 +10,8 @@
   background: var(--win11-card, rgba(255, 255, 255, 0.6));
   border: 1px solid var(--win11-border, rgba(0, 0, 0, 0.06));
   border-radius: 12px;
-  backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
   transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
   cursor: pointer; min-height: 150px; text-align: center;
 }
@@ -70,26 +70,30 @@
 .btnPrimary {
   background: rgba(255, 255, 255, 0.95); color: #3d1c00;
   font-weight: 600; border-radius: 8px; border: none;
+  -webkit-backdrop-filter: blur(8px);
   backdrop-filter: blur(8px); transition: all 0.2s ease;
 }
 .btnPrimary:hover { background: #fff; transform: translateY(-1px); box-shadow: 0 4px 16px rgba(255, 179, 64, 0.3); }
 .btnAccess {
   background: rgba(211, 84, 0, 0.9); color: #fff;
   font-weight: 600; border-radius: 8px; border: none;
+  -webkit-backdrop-filter: blur(8px);
   backdrop-filter: blur(8px); transition: all 0.2s ease;
 }
 .btnAccess:hover { background: #d35400; transform: translateY(-1px); box-shadow: 0 4px 16px rgba(211, 84, 0, 0.3); }
 .btnOutline {
   border: 1.5px solid rgba(255, 255, 255, 0.4); color: #fff;
-  border-radius: 8px; backdrop-filter: blur(8px); transition: all 0.2s ease;
+  border-radius: 8px;
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px); transition: all 0.2s ease;
 }
 .btnOutline:hover { border-color: rgba(255, 255, 255, 0.8); background: rgba(255, 255, 255, 0.08); }
 
 /* Stats bar — Mica */
 .stats {
   background: var(--win11-bg-acrylic, rgba(255, 255, 255, 0.65));
-  backdrop-filter: saturate(150%) blur(16px);
   -webkit-backdrop-filter: saturate(150%) blur(16px);
+  backdrop-filter: saturate(150%) blur(16px);
   padding: 1.25rem 0;
   border-bottom: 1px solid var(--win11-border, rgba(0, 0, 0, 0.06));
 }

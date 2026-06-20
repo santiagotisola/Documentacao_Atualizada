@@ -1,0 +1,29 @@
+{
+  "caso": "05",
+  "inicio": "2026-06-17T19:48:35.295Z",
+  "operacoes": [
+    {
+      "equip": "GOEC6O009 - Faixa 1",
+      "resultado": "OFFLINE"
+    },
+    {
+      "equip": "GOEC6O009 - Faixa 2",
+      "resultado": "OFFLINE"
+    },
+    {
+      "equip": "GOEC6O013 - Faixa 2",
+      "resultado": "DRY_RUN"
+    },
+    {
+      "equip": "GOEC6O008 - Faixa 1",
+      "resultado": "OFFLINE"
+    }
+  ],
+  "fim": "2026-06-17T19:48:36.807Z",
+  "resumo": {
+    "aplicados": 0,
+    "ja_ok": 0,
+    "falha": 3,
+    "cancelados": 0
+  }
+}

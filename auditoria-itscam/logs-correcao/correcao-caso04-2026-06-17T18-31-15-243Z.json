@@ -1,0 +1,220 @@
+{
+  "caso": "04",
+  "inicio": "2026-06-17T18:31:08.634Z",
+  "operacoes": [
+    {
+      "equip": "GOEC6O010 - Faixa 1",
+      "resultado": "JA_OK"
+    },
+    {
+      "equip": "GOEC6O010 - Faixa 2",
+      "resultado": "APLICADO",
+      "backup": {
+        "classifier": {
+          "enableCharacteristics": false,
+          "enableSpeed": false,
+          "enabled": true,
+          "firstOnly": false,
+          "licensed": true,
+          "minProbability": 20,
+          "modelType": 0,
+          "processingQueue": 1,
+          "processingThreads": 2,
+          "sceneType": 0,
+          "speedCalibrationRegion1": {
+            "p0top1sz": 1,
+            "x0": 10,
+            "x1": 10,
+            "x2": 10,
+            "y0": 10,
+            "y1": 10,
+            "y2": 10
+          },
+          "speedCalibrationRegion2": {
+            "p0top1sz": 1,
+            "x0": 10,
+            "x1": 10,
+            "x2": 10,
+            "y0": 10,
+            "y1": 10,
+            "y2": 10
+          },
+          "triggerEnabled": false,
+          "triggerRegion0": {
+            "dir": "disabled",
+            "x0": 0,
+            "x1": 0,
+            "y0": 0,
+            "y1": 0
+          },
+          "triggerRegion1": {
+            "dir": "disabled",
+            "x0": 0,
+            "x1": 0,
+            "y0": 0,
+            "y1": 0
+          },
+          "triggerRegion2": {
+            "dir": "disabled",
+            "x0": 0,
+            "x1": 0,
+            "y0": 0,
+            "y1": 0
+          },
+          "triggerRegion3": {
+            "dir": "disabled",
+            "x0": 0,
+            "x1": 0,
+            "y0": 0,
+            "y1": 0
+          }
+        }
+      }
+    },
+    {
+      "equip": "GOEC6O011 - Faixa 2",
+      "resultado": "JA_OK"
+    },
+    {
+      "equip": "GOEC6O028 - Faixa 1",
+      "resultado": "APLICADO",
+      "backup": {
+        "classifier": {
+          "enableCharacteristics": false,
+          "enableSpeed": false,
+          "enabled": true,
+          "firstOnly": false,
+          "licensed": true,
+          "minProbability": 20,
+          "modelType": 0,
+          "processingQueue": 2,
+          "processingThreads": 2,
+          "sceneType": 1,
+          "speedCalibrationRegion1": {
+            "p0top1sz": 1,
+            "x0": 10,
+            "x1": 10,
+            "x2": 10,
+            "y0": 10,
+            "y1": 10,
+            "y2": 10
+          },
+          "speedCalibrationRegion2": {
+            "p0top1sz": 1,
+            "x0": 10,
+            "x1": 10,
+            "x2": 10,
+            "y0": 10,
+            "y1": 10,
+            "y2": 10
+          },
+          "triggerEnabled": false,
+          "triggerRegion0": {
+            "dir": "disabled",
+            "x0": 0,
+            "x1": 0,
+            "y0": 0,
+            "y1": 0
+          },
+          "triggerRegion1": {
+            "dir": "disabled",
+            "x0": 0,
+            "x1": 0,
+            "y0": 0,
+            "y1": 0
+          },
+          "triggerRegion2": {
+            "dir": "disabled",
+            "x0": 0,
+            "x1": 0,
+            "y0": 0,
+            "y1": 0
+          },
+          "triggerRegion3": {
+            "dir": "disabled",
+            "x0": 0,
+            "x1": 0,
+            "y0": 0,
+            "y1": 0
+          }
+        }
+      }
+    },
+    {
+      "equip": "GOEC6O052 - Faixa 2",
+      "resultado": "APLICADO",
+      "backup": {
+        "classifier": {
+          "enableCharacteristics": false,
+          "enableSpeed": false,
+          "enabled": true,
+          "firstOnly": false,
+          "licensed": true,
+          "minProbability": 20,
+          "modelType": 0,
+          "processingQueue": 4,
+          "processingThreads": 4,
+          "sceneType": 0,
+          "speedCalibrationRegion1": {
+            "p0top1sz": 1,
+            "x0": 10,
+            "x1": 10,
+            "x2": 10,
+            "y0": 10,
+            "y1": 10,
+            "y2": 10
+          },
+          "speedCalibrationRegion2": {
+            "p0top1sz": 1,
+            "x0": 10,
+            "x1": 10,
+            "x2": 10,
+            "y0": 10,
+            "y1": 10,
+            "y2": 10
+          },
+          "triggerEnabled": false,
+          "triggerRegion0": {
+            "dir": "disabled",
+            "x0": 0,
+            "x1": 0,
+            "y0": 0,
+            "y1": 0
+          },
+          "triggerRegion1": {
+            "dir": "disabled",
+            "x0": 0,
+            "x1": 0,
+            "y0": 0,
+            "y1": 0
+          },
+          "triggerRegion2": {
+            "dir": "disabled",
+            "x0": 0,
+            "x1": 0,
+            "y0": 0,
+            "y1": 0
+          },
+          "triggerRegion3": {
+            "dir": "disabled",
+            "x0": 0,
+            "x1": 0,
+            "y0": 0,
+            "y1": 0
+          }
+        }
+      }
+    },
+    {
+      "equip": "GOEC6O058 - Faixa 2",
+      "resultado": "OFFLINE"
+    }
+  ],
+  "fim": "2026-06-17T18:31:15.243Z",
+  "resumo": {
+    "aplicados": 3,
+    "ja_ok": 2,
+    "falha": 1,
+    "cancelados": 0
+  }
+}

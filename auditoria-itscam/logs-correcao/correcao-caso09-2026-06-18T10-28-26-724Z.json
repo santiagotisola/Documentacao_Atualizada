@@ -1,0 +1,17 @@
+{
+  "caso": "09",
+  "inicio": "2026-06-18T10:28:24.951Z",
+  "operacoes": [
+    {
+      "equip": "GOEC6O029 - Faixa 1",
+      "resultado": "DRY_RUN"
+    }
+  ],
+  "fim": "2026-06-18T10:28:26.724Z",
+  "resumo": {
+    "aplicados": 0,
+    "ja_ok": 0,
+    "falha": 0,
+    "cancelados": 0
+  }
+}

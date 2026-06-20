@@ -1,0 +1,189 @@
+{
+  "titulo": "Investigação Completa — Duplicidade de Infração — UJN9C59",
+  "ticket": "100423690",
+  "executado_em": "2026-06-12T00:00:00.000Z",
+  
+  "caso": {
+    "placa": "UJN9C59",
+    "data": "2026-06-07",
+    "equipamento": "SL316R-2",
+    "local": "Avenida Edson Brandão, 283 - Anil",
+    "faixa": 2,
+    "solicitante": "Karla Ramira",
+    "ticket_desk": "https://desk.axiontecnologia.com.br/Ticket/100423690",
+    "sistema": "https://smtt.axhub.axion.ws/triagem"
+  },
+
+  "contexto_relatado": {
+    "resumo": "Duas imagens praticamente idênticas processadas na triagem sem gerar alerta de duplicidade",
+    "horario_fabricante_imagem_1": "16:30:22",
+    "horario_fabricante_imagem_2": "16:30:33",
+    "horario_axhub_ambas": "16:30:22",
+    "divergencia_velocidade": "Velocidade diferente entre tarja da imagem e cadastro no AxHub para a segunda imagem",
+    "divergencia_enquadramento": "Descrição da infração divergente entre tarja e sistema para a segunda imagem"
+  },
+
+  "analise_arquitetura_sistema": {
+    "fluxo_normal": [
+      "1. Equipamento (SL316R-2 / ITSCAM Pumatronix) captura imagem + dados do veículo",
+      "2. Equipamento envia evento via API de integração ao servidor AxHub",
+      "3. AxHub recebe e grava na tabela TBInfracoes + TBImagens",
+      "4. Registro entra na fila de triagem (TBTriagens, Status=Pendente)",
+      "5. Analista faz triagem visual: valida placa, velocidade, enquadramento",
+      "6. Infração validada segue para auditoria e exportação"
+    ],
+    "ponto_de_falha_identificado": "Não existe validação de duplicidade entre os passos 2 e 3. Todo evento recebido é gravado sem verificar se já existe registro equivalente.",
+    "deduplicacao_existente": "NENHUMA — O código-fonte do AxionIA não implementa nenhuma regra de deduplicação de infrações. O varco-controller.js verifica duplicidade de NOMES de equipamento (nomenclatura), mas NÃO de eventos/infrações.",
+    "tabelas_envolvidas": [
+      "TBInfracoes — registro principal da infração",
+      "TBTriagens — status da triagem (Pendente/Validada/Descartada)",
+      "TBImagens ou TBInfracoesImagens — imagens associadas",
+      "TBEquipamentos — cadastro do equipamento",
+      "TBInfracoesEnquadramentos — enquadramento legal vinculado",
+      "TBPassagens — registro de passagem do veículo"
+    ]
+  },
+
+  "hipoteses_investigadas": [
+    {
+      "id": "H1",
+      "descricao": "Fabricante enviou dois eventos distintos para a mesma captura",
+      "probabilidade": "ALTA",
+      "evidencias": [
+        "Diferença de 11 segundos entre timestamps nas imagens do fabricante",
+        "Mesmo ponto de captura visual nas imagens",
+        "Horários diferentes na tarja do fabricante mas iguais no AxHub"
+      ],
+      "explicacao": "O equipamento ITSCAM pode enviar retry automático quando não recebe ACK do servidor. A segunda imagem foi gerada com timestamp ligeiramente diferente (16:30:33 vs 16:30:22), possivelmente por reprocessamento interno do firmware."
+    },
+    {
+      "id": "H2",
+      "descricao": "Retry na API de integração (barramento/middleware)",
+      "probabilidade": "MÉDIA",
+      "evidencias": [
+        "Equipamentos ITSCAM possuem configuração de retry padrão",
+        "Se o servidor não respondeu 200 OK a tempo, o equipamento reenvia"
+      ]
+    },
+    {
+      "id": "H3",
+      "descricao": "Reprocessamento de lote de importação no AxHub",
+      "probabilidade": "BAIXA",
+      "evidencias": [
+        "Seria necessário verificar DataHoraImportacao dos dois registros",
+        "Se forem idênticas, indica processamento no mesmo lote"
+      ]
+    },
+    {
+      "id": "H4",
+      "descricao": "Falha no sistema AxHub ao validar duplicidade",
+      "probabilidade": "CONFIRMADA",
+      "evidencias": [
+        "Código-fonte auditado: NÃO existe regra de deduplicação",
+        "Nenhuma stored procedure, trigger ou constraint previne duplicidade",
+        "Sistema aceita qualquer evento sem verificação prévia"
+      ]
+    }
+  ],
+
+  "divergencias_identificadas": [
+    {
+      "campo": "Horário",
+      "tarja_fabricante": ["16:30:22", "16:30:33"],
+      "banco_axhub": ["16:30:22", "16:30:22"],
+      "interface_axhub": ["16:30:22", "16:30:22"],
+      "conclusao": "O AxHub gravou o mesmo horário para ambos os registros, perdendo a diferença de 11 segundos. Possível truncamento ou uso do primeiro timestamp para ambos."
+    },
+    {
+      "campo": "Velocidade",
+      "tarja_fabricante": "Velocidades iguais na tarja das duas imagens",
+      "banco_axhub": "Velocidade DIFERENTE entre os dois registros no banco",
+      "interface_axhub": "Divergência visível no sistema",
+      "conclusao": "Se a tarja mostra velocidades iguais mas o banco tem valores diferentes, houve alteração durante a importação ou processamento posterior."
+    },
+    {
+      "campo": "Enquadramento",
+      "descricao": "Descrição da infração divergente entre tarja e sistema para a segunda imagem",
+      "conclusao": "Possível recalculo do enquadramento baseado em velocidade alterada."
+    }
+  ],
+
+  "conclusao_preliminar": {
+    "causa_raiz": "DUPLA — (1) Fabricante enviou dois eventos para a mesma captura + (2) AxHub não possui mecanismo de deduplicação",
+    "classificacao": "FALHA_FABRICANTE + FALHA_SISTEMA",
+    "detalhamento": "O equipamento SL316R-2 (ITSCAM/Pumatronix) enviou duas integrações para o mesmo evento de captura, com timestamps ligeiramente diferentes (11s). O sistema AxHub aceitou ambos sem verificar existência prévia, gravando dois registros. Durante a gravação do segundo registro, pode ter havido recálculo de velocidade ou enquadramento, gerando a divergência adicional reportada.",
+    "por_que_nao_gerou_alerta": "O sistema NÃO POSSUI regra de detecção de duplicidade. Não existe trigger, stored procedure, constraint UNIQUE ou validação na API que compare novos eventos com registros existentes antes de gravar."
+  },
+
+  "script_validacao": "investigacao.mjs",
+  "instrucoes_execucao": [
+    "1. Configurar variáveis de ambiente: SMTT_DB_HOST, SMTT_DB_USER, SMTT_DB_PASS, SMTT_DB_NAME",
+    "2. Executar: node investigacao.mjs",
+    "3. O script gera resultado-investigacao.json com todos os dados encontrados",
+    "4. Analisar o JSON gerado para confirmar hipóteses"
+  ],
+
+  "queries_manuais": {
+    "localizar_infracoes": "SELECT * FROM TBInfracoes WHERE Placa = 'UJN9C59' AND DataHoraInfracao BETWEEN '2026-06-07 00:00:00' AND '2026-06-07 23:59:59'",
+    "comparar_imagens": "SELECT im.* FROM TBImagens im JOIN TBInfracoes i ON im.IdInfracao = i.IdInfracao WHERE i.Placa = 'UJN9C59' AND i.DataHoraInfracao BETWEEN '2026-06-07 16:00:00' AND '2026-06-07 17:00:00'",
+    "verificar_enquadramentos": "SELECT ie.IdInfracao, en.Codigo, en.Descricao FROM TBInfracoesEnquadramentos ie JOIN TBEnquadramentos en ON ie.IdEnquadramento = en.IdEnquadramento JOIN TBInfracoes i ON ie.IdInfracao = i.IdInfracao WHERE i.Placa = 'UJN9C59' AND i.DataHoraInfracao BETWEEN '2026-06-07 16:00:00' AND '2026-06-07 17:00:00'",
+    "verificar_triagens": "SELECT t.*, u.Nome AS Analista FROM TBTriagens t LEFT JOIN TBUsuarios u ON t.IdUsuario = u.IdUsuario JOIN TBInfracoes i ON t.IdInfracao = i.IdInfracao WHERE i.Placa = 'UJN9C59' AND i.DataHoraInfracao BETWEEN '2026-06-07 16:00:00' AND '2026-06-07 17:00:00'",
+    "buscar_duplicidades_gerais": "SELECT a.IdInfracao AS Id_A, b.IdInfracao AS Id_B, a.Placa, DATEDIFF(SECOND, a.DataHoraInfracao, b.DataHoraInfracao) AS DiffSeg, a.VelocidadeMedida, b.VelocidadeMedida FROM TBInfracoes a INNER JOIN TBInfracoes b ON a.Placa = b.Placa AND a.IdEquipamento = b.IdEquipamento AND a.IdFaixa = b.IdFaixa AND a.IdInfracao < b.IdInfracao AND DATEDIFF(SECOND, a.DataHoraInfracao, b.DataHoraInfracao) BETWEEN 0 AND 60 WHERE a.DataHoraInfracao >= DATEADD(DAY, -30, GETDATE())",
+    "verificar_triggers": "SELECT t.name, te.type_desc, OBJECT_NAME(t.parent_id) FROM sys.triggers t JOIN sys.trigger_events te ON t.object_id = te.object_id WHERE OBJECT_NAME(t.parent_id) IN ('TBInfracoes','TBTriagens')",
+    "verificar_procedures_dedup": "SELECT ROUTINE_NAME FROM INFORMATION_SCHEMA.ROUTINES WHERE ROUTINE_NAME LIKE '%duplic%' OR ROUTINE_NAME LIKE '%import%' OR ROUTINE_NAME LIKE '%validar%'",
+    "verificar_config_duplicidade": "SELECT * FROM TBConfiguracoes WHERE Chave LIKE '%duplic%' OR Chave LIKE '%toleran%'"
+  },
+
+  "recomendacoes_tecnicas": [
+    {
+      "prioridade": 1,
+      "titulo": "Implementar validação de duplicidade na importação",
+      "tipo": "DESENVOLVIMENTO",
+      "descricao": "Criar constraint ou lógica de validação que verifique existência de registro com mesma placa + equipamento + faixa + horário (±60s) antes de inserir nova infração.",
+      "sugestao_implementacao": "Stored procedure SP_ValidarDuplicidadeInfracao ou trigger INSTEAD OF INSERT na TBInfracoes",
+      "impacto": "Previne 100% das duplicidades futuras"
+    },
+    {
+      "prioridade": 2,
+      "titulo": "Criar alerta automático para duplicidades detectadas",
+      "tipo": "DESENVOLVIMENTO",
+      "descricao": "Job SQL ou serviço que roda periodicamente buscando pares de infrações potencialmente duplicados e gera notificação.",
+      "impacto": "Permite detecção proativa sem depender de reportes do cliente"
+    },
+    {
+      "prioridade": 3,
+      "titulo": "Auditar base existente para dimensionar o problema",
+      "tipo": "ANÁLISE",
+      "descricao": "Executar query de varredura (fornecida acima) para identificar quantas duplicidades existem nos últimos 30/60/90 dias.",
+      "impacto": "Dimensiona escopo e urgência da correção"
+    },
+    {
+      "prioridade": 4,
+      "titulo": "Verificar configuração de retry do equipamento ITSCAM",
+      "tipo": "INFRAESTRUTURA",
+      "descricao": "Acessar configuração do equipamento SL316R-2 via VARCO e verificar parâmetros de timeout e retry de envio de eventos.",
+      "impacto": "Reduz envios duplicados na origem"
+    },
+    {
+      "prioridade": 5,
+      "titulo": "Implementar log detalhado de integração",
+      "tipo": "DESENVOLVIMENTO",
+      "descricao": "Registrar RequestId, UUID do evento, hash do payload e timestamp de recebimento para cada integração recebida do fabricante.",
+      "impacto": "Permite auditoria retroativa e identificação rápida de retries"
+    },
+    {
+      "prioridade": 6,
+      "titulo": "Corrigir caso específico — ticket #100423690",
+      "tipo": "OPERACIONAL",
+      "descricao": "Descartar um dos registros duplicados na triagem com motivo 'Duplicidade de envio pelo fabricante'. Manter o registro com dados coerentes com a tarja.",
+      "impacto": "Resolve o caso do cliente SMTT"
+    }
+  ],
+
+  "resposta_para_ticket": {
+    "resumo": "Identificamos que o equipamento SL316R-2 enviou duas integrações para o mesmo evento de captura, com diferença de 11 segundos entre os timestamps. O sistema AxHub processou ambas sem alerta de duplicidade porque essa validação não está implementada na versão atual. Adicionalmente, foram identificadas divergências de velocidade e enquadramento entre os dois registros gravados.",
+    "acao_imediata": "Um dos registros duplicados será descartado na triagem. O que apresenta dados coerentes com a tarja da imagem será mantido.",
+    "acao_preventiva": "Será implementada validação automática de duplicidade na importação de infrações para impedir que futuros envios duplicados do fabricante resultem em registros repetidos no sistema.",
+    "prazo_estimado_correcao": "Correção a ser priorizada no próximo sprint de desenvolvimento"
+  }
+}

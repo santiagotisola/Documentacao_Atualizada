@@ -1,0 +1,18 @@
+{
+  "caso": "VehicleType",
+  "inicio": "2026-06-17T14:13:47.803Z",
+  "operacoes": [
+    {
+      "equip": "GOEC6O009 - Faixa 1",
+      "resultado": "JA_OK"
+    },
+    {
+      "equip": "GOEC6O009 - Faixa 2",
+      "resultado": "JA_OK"
+    }
+  ],
+  "fim": "2026-06-17T14:13:50.455Z",
+  "aplicados": 0,
+  "jaOk": 2,
+  "falhas": 0
+}

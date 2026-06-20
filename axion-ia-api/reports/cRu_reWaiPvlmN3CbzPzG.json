@@ -1,0 +1,1919 @@
+{
+  "id": "cRu_reWaiPvlmN3CbzPzG",
+  "systemUrl": "https://homologacao.axhub.axion.ws/",
+  "createdAt": "2026-06-19T20:23:09.901Z",
+  "duration": "N/A",
+  "summary": {
+    "totalScreens": 67,
+    "totalForms": 19,
+    "totalTests": 29,
+    "totalIssues": 0
+  },
+  "screens": [
+    {
+      "route": "https://homologacao.axhub.axion.ws/",
+      "title": "Sem título",
+      "screenshot": "cRu_reWaiPvlmN3CbzPzG-page-0-sem-t-tulo-1781900621892.png",
+      "forms": 0,
+      "dependencies": [
+        {
+          "type": "select-dependency",
+          "field": "",
+          "optionsCount": 11,
+          "source": "Banco de dados (tabela relacionada)"
+        },
+        {
+          "type": "select-dependency",
+          "field": "",
+          "optionsCount": 12,
+          "source": "Banco de dados (tabela relacionada)"
+        },
+        {
+          "type": "select-dependency",
+          "field": "",
+          "optionsCount": 12,
+          "source": "Banco de dados (tabela relacionada)"
+        }
+      ],
+      "timestamp": "2026-06-19T20:23:53.676Z"
+    },
+    {
+      "route": "https://homologacao.axhub.axion.ws/triagem",
+      "title": "Triagem Infrações",
+      "screenshot": "cRu_reWaiPvlmN3CbzPzG-page-1-triagem-infra-es-1781900637728.png",
+      "forms": 0,
+      "dependencies": [
+        {
+          "type": "select-dependency",
+          "field": "",
+          "optionsCount": 12,
+          "source": "Banco de dados (tabela relacionada)"
+        },
+        {
+          "type": "select-dependency",
+          "field": "",
+          "optionsCount": 85,
+          "source": "Banco de dados (tabela relacionada)"
+        },
+        {
+          "type": "select-dependency",
+          "field": "",
+          "optionsCount": 85,
+          "source": "Banco de dados (tabela relacionada)"
+        },
+        {
+          "type": "select-dependency",
+          "field": "",
+          "optionsCount": 53,
+          "source": "Banco de dados (tabela relacionada)"
+        },
+        {
+          "type": "select-dependency",
+          "field": "",
+          "optionsCount": 5,
+          "source": "Banco de dados (tabela relacionada)"
+        },
+        {
+          "type": "select-dependency",
+          "field": "",
+          "optionsCount": 7,
+          "source": "Banco de dados (tabela relacionada)"
+        },
+        {
+          "type": "select-dependency",
+          "field": "",
+          "optionsCount": 11,
+          "source": "Banco de dados (tabela relacionada)"
+        },
+        {
+          "type": "select-dependency",
+          "field": "",
+          "optionsCount": 11,
+          "source": "Banco de dados (tabela relacionada)"
+        }
+      ],
+      "timestamp": "2026-06-19T20:23:58.488Z"
+    },
+    {
+      "route": "https://homologacao.axhub.axion.ws/auditoria",
+      "title": "Auditoria",
+      "screenshot": "cRu_reWaiPvlmN3CbzPzG-page-2-auditoria-1781900643022.png",
+      "forms": 0,
+      "dependencies": [
+        {
+          "type": "select-dependency",
+          "field": "",
+          "optionsCount": 12,
+          "source": "Banco de dados (tabela relacionada)"
+        },
+        {
+          "type": "select-dependency",
+          "field": "",
+          "optionsCount": 85,
+          "source": "Banco de dados (tabela relacionada)"
+        },
+        {
+          "type": "select-dependency",
+          "field": "",
+          "optionsCount": 85,
+          "source": "Banco de dados (tabela relacionada)"
+        },
+        {
+          "type": "select-dependency",
+          "field": "",
+          "optionsCount": 53,
+          "source": "Banco de dados (tabela relacionada)"
+        },
+        {
+          "type": "select-dependency",
+          "field": "",
+          "optionsCount": 5,
+          "source": "Banco de dados (tabela relacionada)"
+        },
+        {
+          "type": "select-dependency",
+          "field": "",
+          "optionsCount": 7,
+          "source": "Banco de dados (tabela relacionada)"
+        },
+        {
+          "type": "select-dependency",
+          "field": "",
+          "optionsCount": 14,
+          "source": "Banco de dados (tabela relacionada)"
+        },
+        {
+          "type": "select-dependency",
+          "field": "",
+          "optionsCount": 52,
+          "source": "Banco de dados (tabela relacionada)"
+        },
+        {
+          "type": "select-dependency",
+          "field": "",
+          "optionsCount": 11,
+          "source": "Banco de dados (tabela relacionada)"
+        },
+        {
+          "type": "select-dependency",
+          "field": "",
+          "optionsCount": 11,
+          "source": "Banco de dados (tabela relacionada)"
+        }
+      ],
+      "timestamp": "2026-06-19T20:24:03.664Z"
+    },
+    {
+      "route": "https://homologacao.axhub.axion.ws/excecao",
+      "title": "Exceções",
+      "screenshot": "cRu_reWaiPvlmN3CbzPzG-page-3-exce-es-1781900646949.png",
+      "forms": 0,
+      "dependencies": [
+        {
+          "type": "select-dependency",
+          "field": "",
+          "optionsCount": 4,
+          "source": "Banco de dados (tabela relacionada)"
+        }
+      ],
+      "timestamp": "2026-06-19T20:24:07.355Z"
+    },
+    {
+      "route": "https://homologacao.axhub.axion.ws/loteexportacao",
+      "title": "Lotes de Exportação",
+      "screenshot": "cRu_reWaiPvlmN3CbzPzG-page-4-lotes-de-exporta-o-1781900650752.png",
+      "forms": 0,
+      "dependencies": [
+        {
+          "type": "select-dependency",
+          "field": "",
+          "optionsCount": 3,
+          "source": "Banco de dados (tabela relacionada)"
+        }
+      ],
+      "timestamp": "2026-06-19T20:24:11.119Z"
+    },
+    {
+      "route": "https://homologacao.axhub.axion.ws/consultainfracao",
+      "title": "Consulta de Infrações",
+      "screenshot": "cRu_reWaiPvlmN3CbzPzG-page-5-consulta-de-infra-es-1781900657630.png",
+      "forms": 0,
+      "dependencies": [
+        {
+          "type": "select-dependency",
+          "field": "",
+          "optionsCount": 12,
+          "source": "Banco de dados (tabela relacionada)"
+        },
+        {
+          "type": "select-dependency",
+          "field": "",
+          "optionsCount": 85,
+          "source": "Banco de dados (tabela relacionada)"
+        },
+        {
+          "type": "select-dependency",
+          "field": "",
+          "optionsCount": 85,
+          "source": "Banco de dados (tabela relacionada)"
+        },
+        {
+          "type": "select-dependency",
+          "field": "",
+          "optionsCount": 53,
+          "source": "Banco de dados (tabela relacionada)"
+        },
+        {
+          "type": "select-dependency",
+          "field": "",
+          "optionsCount": 5,
+          "source": "Banco de dados (tabela relacionada)"
+        },
+        {
+          "type": "select-dependency",
+          "field": "",
+          "optionsCount": 7,
+          "source": "Banco de dados (tabela relacionada)"
+        },
+        {
+          "type": "select-dependency",
+          "field": "",
+          "optionsCount": 8,
+          "source": "Banco de dados (tabela relacionada)"
+        },
+        {
+          "type": "select-dependency",
+          "field": "",
+          "optionsCount": 14,
+          "source": "Banco de dados (tabela relacionada)"
+        },
+        {
+          "type": "select-dependency",
+          "field": "",
+          "optionsCount": 11,
+          "source": "Banco de dados (tabela relacionada)"
+        },
+        {
+          "type": "select-dependency",
+          "field": "",
+          "optionsCount": 11,
+          "source": "Banco de dados (tabela relacionada)"
+        }
+      ],
+      "timestamp": "2026-06-19T20:24:17.947Z"
+    },
+    {
+      "route": "https://homologacao.axhub.axion.ws/consultainfracoesdescartadas",
+      "title": "Infrações Descartadas",
+      "screenshot": "cRu_reWaiPvlmN3CbzPzG-page-6-infra-es-descartadas-1781900662758.png",
+      "forms": 0,
+      "dependencies": [
+        {
+          "type": "select-dependency",
+          "field": "",
+          "optionsCount": 12,
+          "source": "Banco de dados (tabela relacionada)"
+        },
+        {
+          "type": "select-dependency",
+          "field": "",
+          "optionsCount": 85,
+          "source": "Banco de dados (tabela relacionada)"
+        },
+        {
+          "type": "select-dependency",
+          "field": "",
+          "optionsCount": 53,
+          "source": "Banco de dados (tabela relacionada)"
+        },
+        {
+          "type": "select-dependency",
+          "field": "",
+          "optionsCount": 7,
+          "source": "Banco de dados (tabela relacionada)"
+        },
+        {
+          "type": "select-dependency",
+          "field": "",
+          "optionsCount": 11,
+          "source": "Banco de dados (tabela relacionada)"
+        },
+        {
+          "type": "select-dependency",
+          "field": "",
+          "optionsCount": 11,
+          "source": "Banco de dados (tabela relacionada)"
+        }
+      ],
+      "timestamp": "2026-06-19T20:24:23.014Z"
+    },
+    {
+      "route": "https://homologacao.axhub.axion.ws/cronotacografo",
+      "title": "Triagem de Cronotacógrafo",
+      "screenshot": "cRu_reWaiPvlmN3CbzPzG-page-7-triagem-de-cronotac-grafo-1781900666186.png",
+      "forms": 0,
+      "dependencies": [
+        {
+          "type": "select-dependency",
+          "field": "",
+          "optionsCount": 12,
+          "source": "Banco de dados (tabela relacionada)"
+        },
+        {
+          "type": "select-dependency",
+          "field": "",
+          "optionsCount": 85,
+          "source": "Banco de dados (tabela relacionada)"
+        },
+        {
+          "type": "select-dependency",
+          "field": "",
+          "optionsCount": 85,
+          "source": "Banco de dados (tabela relacionada)"
+        },
+        {
+          "type": "select-dependency",
+          "field": "",
+          "optionsCount": 53,
+          "source": "Banco de dados (tabela relacionada)"
+        },
+        {
+          "type": "select-dependency",
+          "field": "",
+          "optionsCount": 5,
+          "source": "Banco de dados (tabela relacionada)"
+        },
+        {
+          "type": "select-dependency",
+          "field": "",
+          "optionsCount": 7,
+          "source": "Banco de dados (tabela relacionada)"
+        },
+        {
+          "type": "select-dependency",
+          "field": "",
+          "optionsCount": 11,
+          "source": "Banco de dados (tabela relacionada)"
+        },
+        {
+          "type": "select-dependency",
+          "field": "",
+          "optionsCount": 11,
+          "source": "Banco de dados (tabela relacionada)"
+        }
+      ],
+      "timestamp": "2026-06-19T20:24:26.656Z"
+    },
+    {
+      "route": "https://homologacao.axhub.axion.ws/consultacronotacografo",
+      "title": "Consulta de Cronotacógrafo",
+      "screenshot": "cRu_reWaiPvlmN3CbzPzG-page-8-consulta-de-cronotac-grafo-1781900669589.png",
+      "forms": 1,
+      "dependencies": [
+        {
+          "type": "select-dependency",
+          "field": "",
+          "optionsCount": 2,
+          "source": "Banco de dados (tabela relacionada)"
+        }
+      ],
+      "timestamp": "2026-06-19T20:24:30.444Z"
+    },
+    {
+      "route": "https://homologacao.axhub.axion.ws/operacao",
+      "title": "Cadastro de Operações",
+      "screenshot": "cRu_reWaiPvlmN3CbzPzG-page-9-cadastro-de-opera-es-1781900674196.png",
+      "forms": 0,
+      "dependencies": [
+        {
+          "type": "select-dependency",
+          "field": "",
+          "optionsCount": 12,
+          "source": "Banco de dados (tabela relacionada)"
+        },
+        {
+          "type": "select-dependency",
+          "field": "",
+          "optionsCount": 3,
+          "source": "Banco de dados (tabela relacionada)"
+        },
+        {
+          "type": "select-dependency",
+          "field": "",
+          "optionsCount": 2,
+          "source": "Banco de dados (tabela relacionada)"
+        }
+      ],
+      "timestamp": "2026-06-19T20:24:34.488Z"
+    },
+    {
+      "route": "https://homologacao.axhub.axion.ws/eventoequipamento",
+      "title": "Eventos dos Equipamentos",
+      "screenshot": "cRu_reWaiPvlmN3CbzPzG-page-10-eventos-dos-equipamentos-1781900677474.png",
+      "forms": 0,
+      "dependencies": [
+        {
+          "type": "select-dependency",
+          "field": "",
+          "optionsCount": 10,
+          "source": "Banco de dados (tabela relacionada)"
+        },
+        {
+          "type": "select-dependency",
+          "field": "",
+          "optionsCount": 3,
+          "source": "Banco de dados (tabela relacionada)"
+        }
+      ],
+      "timestamp": "2026-06-19T20:24:37.773Z"
+    },
+    {
+      "route": "https://homologacao.axhub.axion.ws/faixa",
+      "title": "Faixas",
+      "screenshot": "cRu_reWaiPvlmN3CbzPzG-page-11-faixas-1781900680749.png",
+      "forms": 0,
+      "dependencies": [
+        {
+          "type": "select-dependency",
+          "field": "",
+          "optionsCount": 2,
+          "source": "Banco de dados (tabela relacionada)"
+        }
+      ],
+      "timestamp": "2026-06-19T20:24:40.850Z"
+    },
+    {
+      "route": "https://homologacao.axhub.axion.ws/afericao",
+      "title": "Aferições",
+      "screenshot": "cRu_reWaiPvlmN3CbzPzG-page-12-aferi-es-1781900684627.png",
+      "forms": 0,
+      "dependencies": [
+        {
+          "type": "select-dependency",
+          "field": "",
+          "optionsCount": 12,
+          "source": "Banco de dados (tabela relacionada)"
+        },
+        {
+          "type": "select-dependency",
+          "field": "",
+          "optionsCount": 2,
+          "source": "Banco de dados (tabela relacionada)"
+        },
+        {
+          "type": "select-dependency",
+          "field": "",
+          "optionsCount": 1,
+          "source": "Banco de dados (tabela relacionada)"
+        },
+        {
+          "type": "select-dependency",
+          "field": "",
+          "optionsCount": 4,
+          "source": "Banco de dados (tabela relacionada)"
+        }
+      ],
+      "timestamp": "2026-06-19T20:24:45.020Z"
+    },
+    {
+      "route": "https://homologacao.axhub.axion.ws/consultaplaca",
+      "title": "Consulta de Placas",
+      "screenshot": "cRu_reWaiPvlmN3CbzPzG-page-13-consulta-de-placas-1781900688402.png",
+      "forms": 1,
+      "dependencies": [],
+      "timestamp": "2026-06-19T20:24:48.746Z"
+    },
+    {
+      "route": "https://homologacao.axhub.axion.ws/classificacaoveiculo",
+      "title": "Classificações de Veículos",
+      "screenshot": "cRu_reWaiPvlmN3CbzPzG-page-14-classifica-es-de-ve-culos-1781900691703.png",
+      "forms": 0,
+      "dependencies": [
+        {
+          "type": "select-dependency",
+          "field": "",
+          "optionsCount": 3,
+          "source": "Banco de dados (tabela relacionada)"
+        }
+      ],
+      "timestamp": "2026-06-19T20:24:51.879Z"
+    },
+    {
+      "route": "https://homologacao.axhub.axion.ws/marcamodeloveiculo",
+      "title": "Modelos de Veículos",
+      "screenshot": "cRu_reWaiPvlmN3CbzPzG-page-15-modelos-de-ve-culos-1781900695057.png",
+      "forms": 0,
+      "dependencies": [
+        {
+          "type": "select-dependency",
+          "field": "",
+          "optionsCount": 3,
+          "source": "Banco de dados (tabela relacionada)"
+        }
+      ],
+      "timestamp": "2026-06-19T20:24:55.159Z"
+    },
+    {
+      "route": "https://homologacao.axhub.axion.ws/marcaveiculo",
+      "title": "Marcas de Veículos",
+      "screenshot": "cRu_reWaiPvlmN3CbzPzG-page-16-marcas-de-ve-culos-1781900698201.png",
+      "forms": 0,
+      "dependencies": [
+        {
+          "type": "select-dependency",
+          "field": "",
+          "optionsCount": 3,
+          "source": "Banco de dados (tabela relacionada)"
+        }
+      ],
+      "timestamp": "2026-06-19T20:24:58.371Z"
+    },
+    {
+      "route": "https://homologacao.axhub.axion.ws/tipoveiculo",
+      "title": "Tipos de Veículos",
+      "screenshot": "cRu_reWaiPvlmN3CbzPzG-page-17-tipos-de-ve-culos-1781900701355.png",
+      "forms": 0,
+      "dependencies": [
+        {
+          "type": "select-dependency",
+          "field": "",
+          "optionsCount": 3,
+          "source": "Banco de dados (tabela relacionada)"
+        }
+      ],
+      "timestamp": "2026-06-19T20:25:01.493Z"
+    },
+    {
+      "route": "https://homologacao.axhub.axion.ws/categoriaveiculo",
+      "title": "Categorias de Veículos",
+      "screenshot": "cRu_reWaiPvlmN3CbzPzG-page-18-categorias-de-ve-culos-1781900704335.png",
+      "forms": 0,
+      "dependencies": [
+        {
+          "type": "select-dependency",
+          "field": "",
+          "optionsCount": 3,
+          "source": "Banco de dados (tabela relacionada)"
+        }
+      ],
+      "timestamp": "2026-06-19T20:25:04.760Z"
+    },
+    {
+      "route": "https://homologacao.axhub.axion.ws/especieveiculo",
+      "title": "Espécies de Veículos",
+      "screenshot": "cRu_reWaiPvlmN3CbzPzG-page-19-esp-cies-de-ve-culos-1781900707631.png",
+      "forms": 0,
+      "dependencies": [
+        {
+          "type": "select-dependency",
+          "field": "",
+          "optionsCount": 3,
+          "source": "Banco de dados (tabela relacionada)"
+        }
+      ],
+      "timestamp": "2026-06-19T20:25:07.801Z"
+    },
+    {
+      "route": "https://homologacao.axhub.axion.ws/cor",
+      "title": "Cores",
+      "screenshot": "cRu_reWaiPvlmN3CbzPzG-page-20-cores-1781900710801.png",
+      "forms": 0,
+      "dependencies": [
+        {
+          "type": "select-dependency",
+          "field": "",
+          "optionsCount": 3,
+          "source": "Banco de dados (tabela relacionada)"
+        }
+      ],
+      "timestamp": "2026-06-19T20:25:10.963Z"
+    },
+    {
+      "route": "https://homologacao.axhub.axion.ws/municipio",
+      "title": "Municípios",
+      "screenshot": "cRu_reWaiPvlmN3CbzPzG-page-21-munic-pios-1781900713692.png",
+      "forms": 0,
+      "dependencies": [
+        {
+          "type": "select-dependency",
+          "field": "",
+          "optionsCount": 10,
+          "source": "Banco de dados (tabela relacionada)"
+        },
+        {
+          "type": "select-dependency",
+          "field": "",
+          "optionsCount": 3,
+          "source": "Banco de dados (tabela relacionada)"
+        }
+      ],
+      "timestamp": "2026-06-19T20:25:14.020Z"
+    },
+    {
+      "route": "https://homologacao.axhub.axion.ws/equipamento",
+      "title": "Cadastro de Equipamentos",
+      "screenshot": "cRu_reWaiPvlmN3CbzPzG-page-22-cadastro-de-equipamentos-1781900716781.png",
+      "forms": 0,
+      "dependencies": [
+        {
+          "type": "select-dependency",
+          "field": "",
+          "optionsCount": 4,
+          "source": "Banco de dados (tabela relacionada)"
+        },
+        {
+          "type": "select-dependency",
+          "field": "",
+          "optionsCount": 4,
+          "source": "Banco de dados (tabela relacionada)"
+        }
+      ],
+      "timestamp": "2026-06-19T20:25:17.398Z"
+    },
+    {
+      "route": "https://homologacao.axhub.axion.ws/grupoequipamento",
+      "title": "Grupos de Equipamentos",
+      "screenshot": "cRu_reWaiPvlmN3CbzPzG-page-23-grupos-de-equipamentos-1781900720139.png",
+      "forms": 0,
+      "dependencies": [
+        {
+          "type": "select-dependency",
+          "field": "",
+          "optionsCount": 4,
+          "source": "Banco de dados (tabela relacionada)"
+        }
+      ],
+      "timestamp": "2026-06-19T20:25:20.339Z"
+    },
+    {
+      "route": "https://homologacao.axhub.axion.ws/tipoequipamento",
+      "title": "Tipos de Equipamentos",
+      "screenshot": "cRu_reWaiPvlmN3CbzPzG-page-24-tipos-de-equipamentos-1781900723191.png",
+      "forms": 0,
+      "dependencies": [
+        {
+          "type": "select-dependency",
+          "field": "",
+          "optionsCount": 4,
+          "source": "Banco de dados (tabela relacionada)"
+        }
+      ],
+      "timestamp": "2026-06-19T20:25:23.290Z"
+    },
+    {
+      "route": "https://homologacao.axhub.axion.ws/fabricante",
+      "title": "Fabricantes",
+      "screenshot": "cRu_reWaiPvlmN3CbzPzG-page-25-fabricantes-1781900726047.png",
+      "forms": 0,
+      "dependencies": [
+        {
+          "type": "select-dependency",
+          "field": "",
+          "optionsCount": 3,
+          "source": "Banco de dados (tabela relacionada)"
+        }
+      ],
+      "timestamp": "2026-06-19T20:25:26.197Z"
+    },
+    {
+      "route": "https://homologacao.axhub.axion.ws/modeloequipamento",
+      "title": "Modelos de Equipamentos",
+      "screenshot": "cRu_reWaiPvlmN3CbzPzG-page-26-modelos-de-equipamentos-1781900728905.png",
+      "forms": 0,
+      "dependencies": [
+        {
+          "type": "select-dependency",
+          "field": "",
+          "optionsCount": 3,
+          "source": "Banco de dados (tabela relacionada)"
+        }
+      ],
+      "timestamp": "2026-06-19T20:25:29.246Z"
+    },
+    {
+      "route": "https://homologacao.axhub.axion.ws/medicao/relatoriomedicaoequipamento",
+      "title": "Nova Medição",
+      "screenshot": "cRu_reWaiPvlmN3CbzPzG-page-27-nova-medi-o-1781900732079.png",
+      "forms": 1,
+      "dependencies": [
+        {
+          "type": "select-dependency",
+          "field": "GrupoEquipamentoId",
+          "optionsCount": 12,
+          "source": "Banco de dados (tabela relacionada)"
+        },
+        {
+          "type": "select-dependency",
+          "field": "EquipamentosIds",
+          "optionsCount": 67,
+          "source": "Banco de dados (tabela relacionada)"
+        },
+        {
+          "type": "select-dependency",
+          "field": "",
+          "optionsCount": 196,
+          "source": "Banco de dados (tabela relacionada)"
+        }
+      ],
+      "timestamp": "2026-06-19T20:25:32.612Z"
+    },
+    {
+      "route": "https://homologacao.axhub.axion.ws/medicao",
+      "title": "Medições Finalizadas",
+      "screenshot": "cRu_reWaiPvlmN3CbzPzG-page-28-medi-es-finalizadas-1781900735512.png",
+      "forms": 0,
+      "dependencies": [
+        {
+          "type": "select-dependency",
+          "field": "",
+          "optionsCount": 12,
+          "source": "Banco de dados (tabela relacionada)"
+        },
+        {
+          "type": "select-dependency",
+          "field": "",
+          "optionsCount": 2,
+          "source": "Banco de dados (tabela relacionada)"
+        }
+      ],
+      "timestamp": "2026-06-19T20:25:35.663Z"
+    },
+    {
+      "route": "https://homologacao.axhub.axion.ws/operacaointerrupcao",
+      "title": "Interrupções de Operação",
+      "screenshot": "cRu_reWaiPvlmN3CbzPzG-page-29-interrup-es-de-opera-o-1781900738454.png",
+      "forms": 0,
+      "dependencies": [
+        {
+          "type": "select-dependency",
+          "field": "",
+          "optionsCount": 2,
+          "source": "Banco de dados (tabela relacionada)"
+        }
+      ],
+      "timestamp": "2026-06-19T20:25:38.613Z"
+    },
+    {
+      "route": "https://homologacao.axhub.axion.ws/operacaorecurso",
+      "title": "Recursos da Operação",
+      "screenshot": "cRu_reWaiPvlmN3CbzPzG-page-30-recursos-da-opera-o-1781900741437.png",
+      "forms": 0,
+      "dependencies": [
+        {
+          "type": "select-dependency",
+          "field": "",
+          "optionsCount": 2,
+          "source": "Banco de dados (tabela relacionada)"
+        }
+      ],
+      "timestamp": "2026-06-19T20:25:41.572Z"
+    },
+    {
+      "route": "https://homologacao.axhub.axion.ws/contrato",
+      "title": "Contratos",
+      "screenshot": "cRu_reWaiPvlmN3CbzPzG-page-31-contratos-1781900744362.png",
+      "forms": 0,
+      "dependencies": [
+        {
+          "type": "select-dependency",
+          "field": "",
+          "optionsCount": 2,
+          "source": "Banco de dados (tabela relacionada)"
+        }
+      ],
+      "timestamp": "2026-06-19T20:25:44.515Z"
+    },
+    {
+      "route": "https://homologacao.axhub.axion.ws/indiceperformance",
+      "title": "Índices de Performance",
+      "screenshot": "cRu_reWaiPvlmN3CbzPzG-page-32-ndices-de-performance-1781900747316.png",
+      "forms": 0,
+      "dependencies": [
+        {
+          "type": "select-dependency",
+          "field": "",
+          "optionsCount": 3,
+          "source": "Banco de dados (tabela relacionada)"
+        }
+      ],
+      "timestamp": "2026-06-19T20:25:47.463Z"
+    },
+    {
+      "route": "https://homologacao.axhub.axion.ws/relatorio/relatorioeventoequipamento",
+      "title": "Eventos dos Equipamentos",
+      "screenshot": "cRu_reWaiPvlmN3CbzPzG-page-33-eventos-dos-equipamentos-1781900750405.png",
+      "forms": 1,
+      "dependencies": [
+        {
+          "type": "select-dependency",
+          "field": "GrupoEquipamentoId",
+          "optionsCount": 12,
+          "source": "Banco de dados (tabela relacionada)"
+        },
+        {
+          "type": "select-dependency",
+          "field": "EquipamentosIds",
+          "optionsCount": 84,
+          "source": "Banco de dados (tabela relacionada)"
+        }
+      ],
+      "timestamp": "2026-06-19T20:25:51.076Z"
+    },
+    {
+      "route": "https://homologacao.axhub.axion.ws/relatorio/relatoriofalhasequencial",
+      "title": "Falhas Sequenciais",
+      "screenshot": "cRu_reWaiPvlmN3CbzPzG-page-34-falhas-sequenciais-1781900754159.png",
+      "forms": 1,
+      "dependencies": [
+        {
+          "type": "select-dependency",
+          "field": "GrupoEquipamentoId",
+          "optionsCount": 12,
+          "source": "Banco de dados (tabela relacionada)"
+        },
+        {
+          "type": "select-dependency",
+          "field": "EquipamentosIds",
+          "optionsCount": 84,
+          "source": "Banco de dados (tabela relacionada)"
+        },
+        {
+          "type": "select-dependency",
+          "field": "",
+          "optionsCount": 196,
+          "source": "Banco de dados (tabela relacionada)"
+        },
+        {
+          "type": "select-dependency",
+          "field": "",
+          "optionsCount": 2,
+          "source": "Banco de dados (tabela relacionada)"
+        }
+      ],
+      "timestamp": "2026-06-19T20:25:54.778Z"
+    },
+    {
+      "route": "https://homologacao.axhub.axion.ws/relatorio/relatoriofluxodiarioveiculos",
+      "title": "Fluxo Diário de Veículos",
+      "screenshot": "cRu_reWaiPvlmN3CbzPzG-page-35-fluxo-di-rio-de-ve-culos-1781900757865.png",
+      "forms": 1,
+      "dependencies": [
+        {
+          "type": "select-dependency",
+          "field": "GrupoEquipamentoId",
+          "optionsCount": 12,
+          "source": "Banco de dados (tabela relacionada)"
+        },
+        {
+          "type": "select-dependency",
+          "field": "EquipamentosIds",
+          "optionsCount": 84,
+          "source": "Banco de dados (tabela relacionada)"
+        },
+        {
+          "type": "select-dependency",
+          "field": "FaixasIds",
+          "optionsCount": 196,
+          "source": "Banco de dados (tabela relacionada)"
+        }
+      ],
+      "timestamp": "2026-06-19T20:25:58.682Z"
+    },
+    {
+      "route": "https://homologacao.axhub.axion.ws/relatorio/relatorioloteimportacao",
+      "title": "Lote de Importação",
+      "screenshot": "cRu_reWaiPvlmN3CbzPzG-page-36-lote-de-importa-o-1781900761776.png",
+      "forms": 1,
+      "dependencies": [
+        {
+          "type": "select-dependency",
+          "field": "GrupoEquipamentoId",
+          "optionsCount": 12,
+          "source": "Banco de dados (tabela relacionada)"
+        },
+        {
+          "type": "select-dependency",
+          "field": "CodigoEquipamento",
+          "optionsCount": 85,
+          "source": "Banco de dados (tabela relacionada)"
+        },
+        {
+          "type": "select-dependency",
+          "field": "CodigoFabricante",
+          "optionsCount": 14,
+          "source": "Banco de dados (tabela relacionada)"
+        },
+        {
+          "type": "select-dependency",
+          "field": "TipoRemessa",
+          "optionsCount": 2,
+          "source": "Banco de dados (tabela relacionada)"
+        },
+        {
+          "type": "select-dependency",
+          "field": "Status",
+          "optionsCount": 3,
+          "source": "Banco de dados (tabela relacionada)"
+        },
+        {
+          "type": "select-dependency",
+          "field": "",
+          "optionsCount": 2,
+          "source": "Banco de dados (tabela relacionada)"
+        }
+      ],
+      "timestamp": "2026-06-19T20:26:02.623Z"
+    },
+    {
+      "route": "https://homologacao.axhub.axion.ws/relatorio/relatoriomapafluxopassagens",
+      "title": "Mapa de Fluxo de Passagens",
+      "screenshot": "cRu_reWaiPvlmN3CbzPzG-page-37-mapa-de-fluxo-de-passagens-1781900765689.png",
+      "forms": 1,
+      "dependencies": [
+        {
+          "type": "select-dependency",
+          "field": "GrupoEquipamentoId",
+          "optionsCount": 12,
+          "source": "Banco de dados (tabela relacionada)"
+        },
+        {
+          "type": "select-dependency",
+          "field": "EquipamentoId",
+          "optionsCount": 85,
+          "source": "Banco de dados (tabela relacionada)"
+        }
+      ],
+      "timestamp": "2026-06-19T20:26:06.237Z"
+    },
+    {
+      "route": "https://homologacao.axhub.axion.ws/relatorio/relatoriomapadeteste",
+      "title": "Mapa de Teste de Equipamentos",
+      "screenshot": "cRu_reWaiPvlmN3CbzPzG-page-38-mapa-de-teste-de-equipamentos-1781900769151.png",
+      "forms": 2,
+      "dependencies": [
+        {
+          "type": "select-dependency",
+          "field": "GrupoEquipamentoId",
+          "optionsCount": 12,
+          "source": "Banco de dados (tabela relacionada)"
+        },
+        {
+          "type": "select-dependency",
+          "field": "EquipamentosIds",
+          "optionsCount": 85,
+          "source": "Banco de dados (tabela relacionada)"
+        }
+      ],
+      "timestamp": "2026-06-19T20:26:09.758Z"
+    },
+    {
+      "route": "https://homologacao.axhub.axion.ws/relatorio/relatorioprocessamentoimagens",
+      "title": "Processamento de Imagens",
+      "screenshot": "cRu_reWaiPvlmN3CbzPzG-page-39-processamento-de-imagens-1781900772797.png",
+      "forms": 1,
+      "dependencies": [
+        {
+          "type": "select-dependency",
+          "field": "GrupoEquipamentoId",
+          "optionsCount": 12,
+          "source": "Banco de dados (tabela relacionada)"
+        },
+        {
+          "type": "select-dependency",
+          "field": "EquipamentosIds",
+          "optionsCount": 84,
+          "source": "Banco de dados (tabela relacionada)"
+        },
+        {
+          "type": "select-dependency",
+          "field": "FaixasIds",
+          "optionsCount": 196,
+          "source": "Banco de dados (tabela relacionada)"
+        }
+      ],
+      "timestamp": "2026-06-19T20:26:13.676Z"
+    },
+    {
+      "route": "https://homologacao.axhub.axion.ws/relatorio/relatorioprocessamentoporusuario",
+      "title": "Processamento Por Usuário",
+      "screenshot": "cRu_reWaiPvlmN3CbzPzG-page-40-processamento-por-usu-rio-1781900776689.png",
+      "forms": 1,
+      "dependencies": [
+        {
+          "type": "select-dependency",
+          "field": "UsuariosIds",
+          "optionsCount": 14,
+          "source": "Banco de dados (tabela relacionada)"
+        },
+        {
+          "type": "select-dependency",
+          "field": "",
+          "optionsCount": 4,
+          "source": "Banco de dados (tabela relacionada)"
+        }
+      ],
+      "timestamp": "2026-06-19T20:26:17.087Z"
+    },
+    {
+      "route": "https://homologacao.axhub.axion.ws/relatorio/relatorioinfracoes",
+      "title": "Infrações",
+      "screenshot": "cRu_reWaiPvlmN3CbzPzG-page-41-infra-es-1781900780001.png",
+      "forms": 1,
+      "dependencies": [
+        {
+          "type": "select-dependency",
+          "field": "GrupoEquipamentoId",
+          "optionsCount": 12,
+          "source": "Banco de dados (tabela relacionada)"
+        },
+        {
+          "type": "select-dependency",
+          "field": "EquipamentosIds",
+          "optionsCount": 84,
+          "source": "Banco de dados (tabela relacionada)"
+        },
+        {
+          "type": "select-dependency",
+          "field": "FaixasIds",
+          "optionsCount": 196,
+          "source": "Banco de dados (tabela relacionada)"
+        },
+        {
+          "type": "select-dependency",
+          "field": "",
+          "optionsCount": 2,
+          "source": "Banco de dados (tabela relacionada)"
+        }
+      ],
+      "timestamp": "2026-06-19T20:26:20.676Z"
+    },
+    {
+      "route": "https://homologacao.axhub.axion.ws/relatorio/relatoriopassagem",
+      "title": "Passagens",
+      "screenshot": "cRu_reWaiPvlmN3CbzPzG-page-42-passagens-1781900784029.png",
+      "forms": 1,
+      "dependencies": [
+        {
+          "type": "select-dependency",
+          "field": "GrupoEquipamentoId",
+          "optionsCount": 12,
+          "source": "Banco de dados (tabela relacionada)"
+        },
+        {
+          "type": "select-dependency",
+          "field": "EquipamentosIds",
+          "optionsCount": 85,
+          "source": "Banco de dados (tabela relacionada)"
+        },
+        {
+          "type": "select-dependency",
+          "field": "FaixasIds",
+          "optionsCount": 196,
+          "source": "Banco de dados (tabela relacionada)"
+        },
+        {
+          "type": "select-dependency",
+          "field": "ClassificacaoId",
+          "optionsCount": 6,
+          "source": "Banco de dados (tabela relacionada)"
+        },
+        {
+          "type": "select-dependency",
+          "field": "CorId",
+          "optionsCount": 15,
+          "source": "Banco de dados (tabela relacionada)"
+        }
+      ],
+      "timestamp": "2026-06-19T20:26:24.723Z"
+    },
+    {
+      "route": "https://homologacao.axhub.axion.ws/relatorio/relatoriobloqueiooperacao",
+      "title": "Bloqueio de Operação",
+      "screenshot": "cRu_reWaiPvlmN3CbzPzG-page-43-bloqueio-de-opera-o-1781900787729.png",
+      "forms": 1,
+      "dependencies": [
+        {
+          "type": "select-dependency",
+          "field": "GrupoEquipamentoId",
+          "optionsCount": 12,
+          "source": "Banco de dados (tabela relacionada)"
+        },
+        {
+          "type": "select-dependency",
+          "field": "EquipamentoId",
+          "optionsCount": 85,
+          "source": "Banco de dados (tabela relacionada)"
+        },
+        {
+          "type": "select-dependency",
+          "field": "TipoRegistro",
+          "optionsCount": 5,
+          "source": "Banco de dados (tabela relacionada)"
+        }
+      ],
+      "timestamp": "2026-06-19T20:26:28.201Z"
+    },
+    {
+      "route": "https://homologacao.axhub.axion.ws/relatorio/relatoriodiscrepancia",
+      "title": "Discrepâncias",
+      "screenshot": "cRu_reWaiPvlmN3CbzPzG-page-44-discrep-ncias-1781900791281.png",
+      "forms": 1,
+      "dependencies": [
+        {
+          "type": "select-dependency",
+          "field": "GrupoEquipamentoId",
+          "optionsCount": 12,
+          "source": "Banco de dados (tabela relacionada)"
+        },
+        {
+          "type": "select-dependency",
+          "field": "EquipamentosIds",
+          "optionsCount": 84,
+          "source": "Banco de dados (tabela relacionada)"
+        },
+        {
+          "type": "select-dependency",
+          "field": "FaixasIds",
+          "optionsCount": 196,
+          "source": "Banco de dados (tabela relacionada)"
+        },
+        {
+          "type": "select-dependency",
+          "field": "",
+          "optionsCount": 2,
+          "source": "Banco de dados (tabela relacionada)"
+        }
+      ],
+      "timestamp": "2026-06-19T20:26:31.727Z"
+    },
+    {
+      "route": "https://homologacao.axhub.axion.ws/relatorio/relatoriologpassagens",
+      "title": "Histórico de Envios",
+      "screenshot": "cRu_reWaiPvlmN3CbzPzG-page-45-hist-rico-de-envios-1781900794766.png",
+      "forms": 1,
+      "dependencies": [
+        {
+          "type": "select-dependency",
+          "field": "WebHookId",
+          "optionsCount": 1,
+          "source": "Banco de dados (tabela relacionada)"
+        },
+        {
+          "type": "select-dependency",
+          "field": "GrupoEquipamentoId",
+          "optionsCount": 12,
+          "source": "Banco de dados (tabela relacionada)"
+        },
+        {
+          "type": "select-dependency",
+          "field": "EquipamentoId",
+          "optionsCount": 85,
+          "source": "Banco de dados (tabela relacionada)"
+        },
+        {
+          "type": "select-dependency",
+          "field": "Status",
+          "optionsCount": 3,
+          "source": "Banco de dados (tabela relacionada)"
+        }
+      ],
+      "timestamp": "2026-06-19T20:26:35.186Z"
+    },
+    {
+      "route": "https://homologacao.axhub.axion.ws/relatorio/relatoriobi",
+      "title": "Power BI",
+      "screenshot": "cRu_reWaiPvlmN3CbzPzG-page-46-power-bi-1781900798011.png",
+      "forms": 0,
+      "dependencies": [],
+      "timestamp": "2026-06-19T20:26:38.126Z"
+    },
+    {
+      "route": "https://homologacao.axhub.axion.ws/perfilacesso",
+      "title": "Perfis de Acesso",
+      "screenshot": "cRu_reWaiPvlmN3CbzPzG-page-47-perfis-de-acesso-1781900800886.png",
+      "forms": 0,
+      "dependencies": [
+        {
+          "type": "select-dependency",
+          "field": "",
+          "optionsCount": 3,
+          "source": "Banco de dados (tabela relacionada)"
+        }
+      ],
+      "timestamp": "2026-06-19T20:26:40.984Z"
+    },
+    {
+      "route": "https://homologacao.axhub.axion.ws/permissaoacesso",
+      "title": "Permissões",
+      "screenshot": "cRu_reWaiPvlmN3CbzPzG-page-48-permiss-es-1781900803761.png",
+      "forms": 0,
+      "dependencies": [
+        {
+          "type": "select-dependency",
+          "field": "",
+          "optionsCount": 10,
+          "source": "Banco de dados (tabela relacionada)"
+        },
+        {
+          "type": "select-dependency",
+          "field": "",
+          "optionsCount": 3,
+          "source": "Banco de dados (tabela relacionada)"
+        }
+      ],
+      "timestamp": "2026-06-19T20:26:43.877Z"
+    },
+    {
+      "route": "https://homologacao.axhub.axion.ws/usuario",
+      "title": "Usuários",
+      "screenshot": "cRu_reWaiPvlmN3CbzPzG-page-49-usu-rios-1781900806876.png",
+      "forms": 0,
+      "dependencies": [
+        {
+          "type": "select-dependency",
+          "field": "",
+          "optionsCount": 4,
+          "source": "Banco de dados (tabela relacionada)"
+        }
+      ],
+      "timestamp": "2026-06-19T20:26:47.032Z"
+    },
+    {
+      "route": "https://homologacao.axhub.axion.ws/logacesso",
+      "title": "Histórico de Acesso",
+      "screenshot": "cRu_reWaiPvlmN3CbzPzG-page-50-hist-rico-de-acesso-1781900810048.png",
+      "forms": 1,
+      "dependencies": [
+        {
+          "type": "select-dependency",
+          "field": "",
+          "optionsCount": 14,
+          "source": "Banco de dados (tabela relacionada)"
+        },
+        {
+          "type": "select-dependency",
+          "field": "",
+          "optionsCount": 11,
+          "source": "Banco de dados (tabela relacionada)"
+        },
+        {
+          "type": "select-dependency",
+          "field": "",
+          "optionsCount": 11,
+          "source": "Banco de dados (tabela relacionada)"
+        }
+      ],
+      "timestamp": "2026-06-19T20:26:50.446Z"
+    },
+    {
+      "route": "https://homologacao.axhub.axion.ws/acessoporip",
+      "title": "Acessos Por IP",
+      "screenshot": "cRu_reWaiPvlmN3CbzPzG-page-51-acessos-por-ip-1781900813248.png",
+      "forms": 0,
+      "dependencies": [
+        {
+          "type": "select-dependency",
+          "field": "",
+          "optionsCount": 3,
+          "source": "Banco de dados (tabela relacionada)"
+        }
+      ],
+      "timestamp": "2026-06-19T20:26:53.547Z"
+    },
+    {
+      "route": "https://homologacao.axhub.axion.ws/arco",
+      "title": "Arcos",
+      "screenshot": "cRu_reWaiPvlmN3CbzPzG-page-52-arcos-1781900816440.png",
+      "forms": 0,
+      "dependencies": [
+        {
+          "type": "select-dependency",
+          "field": "",
+          "optionsCount": 3,
+          "source": "Banco de dados (tabela relacionada)"
+        }
+      ],
+      "timestamp": "2026-06-19T20:26:56.580Z"
+    },
+    {
+      "route": "https://homologacao.axhub.axion.ws/infracaoenquadramento",
+      "title": "Vínculos de Enquadramento",
+      "screenshot": "cRu_reWaiPvlmN3CbzPzG-page-53-v-nculos-de-enquadramento-1781900819538.png",
+      "forms": 0,
+      "dependencies": [
+        {
+          "type": "select-dependency",
+          "field": "",
+          "optionsCount": 3,
+          "source": "Banco de dados (tabela relacionada)"
+        }
+      ],
+      "timestamp": "2026-06-19T20:26:59.693Z"
+    },
+    {
+      "route": "https://homologacao.axhub.axion.ws/configuracao",
+      "title": "Configurações",
+      "screenshot": "cRu_reWaiPvlmN3CbzPzG-page-54-configura-es-1781900823098.png",
+      "forms": 1,
+      "dependencies": [
+        {
+          "type": "select-dependency",
+          "field": "ConfiguracoesGerais.MotivoDescarteId",
+          "optionsCount": 53,
+          "source": "Banco de dados (tabela relacionada)"
+        },
+        {
+          "type": "select-dependency",
+          "field": "ConfiguracoesGerais.TipoImagemLadoEsquerdoId",
+          "optionsCount": 9,
+          "source": "Banco de dados (tabela relacionada)"
+        },
+        {
+          "type": "select-dependency",
+          "field": "ConfiguracoesGerais.TipoImagemLadoDireitoId",
+          "optionsCount": 9,
+          "source": "Banco de dados (tabela relacionada)"
+        },
+        {
+          "type": "select-dependency",
+          "field": "ConfiguracoesGerais.MotivoDescarteAfericaoId",
+          "optionsCount": 53,
+          "source": "Banco de dados (tabela relacionada)"
+        },
+        {
+          "type": "select-dependency",
+          "field": "ConfiguracoesOrgao.Uf",
+          "optionsCount": 26,
+          "source": "Banco de dados (tabela relacionada)"
+        },
+        {
+          "type": "select-dependency",
+          "field": "ConfiguracoesGerais.LimiteTempoInterrupcao",
+          "optionsCount": 3,
+          "source": "Banco de dados (tabela relacionada)"
+        },
+        {
+          "type": "select-dependency",
+          "field": "ConfiguracoesGerais.TipoIntegracaoExportacaoId",
+          "optionsCount": 7,
+          "source": "Banco de dados (tabela relacionada)"
+        }
+      ],
+      "timestamp": "2026-06-19T20:27:09.940Z"
+    },
+    {
+      "route": "https://homologacao.axhub.axion.ws/enquadramento",
+      "title": "Enquadramentos",
+      "screenshot": "cRu_reWaiPvlmN3CbzPzG-page-55-enquadramentos-1781900832781.png",
+      "forms": 0,
+      "dependencies": [
+        {
+          "type": "select-dependency",
+          "field": "",
+          "optionsCount": 3,
+          "source": "Banco de dados (tabela relacionada)"
+        }
+      ],
+      "timestamp": "2026-06-19T20:27:12.950Z"
+    },
+    {
+      "route": "https://homologacao.axhub.axion.ws/formaatuacao",
+      "title": "Formas de Autuação",
+      "screenshot": "cRu_reWaiPvlmN3CbzPzG-page-56-formas-de-autua-o-1781900835820.png",
+      "forms": 0,
+      "dependencies": [
+        {
+          "type": "select-dependency",
+          "field": "",
+          "optionsCount": 3,
+          "source": "Banco de dados (tabela relacionada)"
+        }
+      ],
+      "timestamp": "2026-06-19T20:27:15.967Z"
+    },
+    {
+      "route": "https://homologacao.axhub.axion.ws/layoutarquivo",
+      "title": "Layouts de Exportação",
+      "screenshot": "cRu_reWaiPvlmN3CbzPzG-page-57-layouts-de-exporta-o-1781900838858.png",
+      "forms": 0,
+      "dependencies": [
+        {
+          "type": "select-dependency",
+          "field": "",
+          "optionsCount": 3,
+          "source": "Banco de dados (tabela relacionada)"
+        }
+      ],
+      "timestamp": "2026-06-19T20:27:18.993Z"
+    },
+    {
+      "route": "https://homologacao.axhub.axion.ws/motivodescarte",
+      "title": "Motivos de Descarte",
+      "screenshot": "cRu_reWaiPvlmN3CbzPzG-page-58-motivos-de-descarte-1781900841812.png",
+      "forms": 0,
+      "dependencies": [
+        {
+          "type": "select-dependency",
+          "field": "",
+          "optionsCount": 2,
+          "source": "Banco de dados (tabela relacionada)"
+        },
+        {
+          "type": "select-dependency",
+          "field": "",
+          "optionsCount": 3,
+          "source": "Banco de dados (tabela relacionada)"
+        }
+      ],
+      "timestamp": "2026-06-19T20:27:22.049Z"
+    },
+    {
+      "route": "https://homologacao.axhub.axion.ws/regiao",
+      "title": "Regiões",
+      "screenshot": "cRu_reWaiPvlmN3CbzPzG-page-59-regi-es-1781900844810.png",
+      "forms": 0,
+      "dependencies": [
+        {
+          "type": "select-dependency",
+          "field": "",
+          "optionsCount": 3,
+          "source": "Banco de dados (tabela relacionada)"
+        }
+      ],
+      "timestamp": "2026-06-19T20:27:24.936Z"
+    },
+    {
+      "route": "https://homologacao.axhub.axion.ws/relatoriopowerbi",
+      "title": "Cadastro do Power BI",
+      "screenshot": "cRu_reWaiPvlmN3CbzPzG-page-60-cadastro-do-power-bi-1781900847615.png",
+      "forms": 0,
+      "dependencies": [
+        {
+          "type": "select-dependency",
+          "field": "",
+          "optionsCount": 3,
+          "source": "Banco de dados (tabela relacionada)"
+        }
+      ],
+      "timestamp": "2026-06-19T20:27:27.702Z"
+    },
+    {
+      "route": "https://homologacao.axhub.axion.ws/sequencialloteexportacao",
+      "title": "Numeração de Lotes",
+      "screenshot": "cRu_reWaiPvlmN3CbzPzG-page-61-numera-o-de-lotes-1781900850387.png",
+      "forms": 0,
+      "dependencies": [
+        {
+          "type": "select-dependency",
+          "field": "",
+          "optionsCount": 4,
+          "source": "Banco de dados (tabela relacionada)"
+        }
+      ],
+      "timestamp": "2026-06-19T20:27:30.471Z"
+    },
+    {
+      "route": "https://homologacao.axhub.axion.ws/sequencialinfracao",
+      "title": "Numeração de Infrações",
+      "screenshot": "cRu_reWaiPvlmN3CbzPzG-page-62-numera-o-de-infra-es-1781900853189.png",
+      "forms": 0,
+      "dependencies": [
+        {
+          "type": "select-dependency",
+          "field": "",
+          "optionsCount": 4,
+          "source": "Banco de dados (tabela relacionada)"
+        }
+      ],
+      "timestamp": "2026-06-19T20:27:33.294Z"
+    },
+    {
+      "route": "https://homologacao.axhub.axion.ws/tarja",
+      "title": "Tarjas",
+      "screenshot": "cRu_reWaiPvlmN3CbzPzG-page-63-tarjas-1781900856135.png",
+      "forms": 0,
+      "dependencies": [
+        {
+          "type": "select-dependency",
+          "field": "",
+          "optionsCount": 4,
+          "source": "Banco de dados (tabela relacionada)"
+        }
+      ],
+      "timestamp": "2026-06-19T20:27:36.231Z"
+    },
+    {
+      "route": "https://homologacao.axhub.axion.ws/tipoafericao",
+      "title": "Tipos de Aferições",
+      "screenshot": "cRu_reWaiPvlmN3CbzPzG-page-64-tipos-de-aferi-es-1781900858935.png",
+      "forms": 0,
+      "dependencies": [
+        {
+          "type": "select-dependency",
+          "field": "",
+          "optionsCount": 3,
+          "source": "Banco de dados (tabela relacionada)"
+        }
+      ],
+      "timestamp": "2026-06-19T20:27:39.008Z"
+    },
+    {
+      "route": "https://homologacao.axhub.axion.ws/tipoimagem",
+      "title": "Tipos de Imagens",
+      "screenshot": "cRu_reWaiPvlmN3CbzPzG-page-65-tipos-de-imagens-1781900861745.png",
+      "forms": 0,
+      "dependencies": [
+        {
+          "type": "select-dependency",
+          "field": "",
+          "optionsCount": 3,
+          "source": "Banco de dados (tabela relacionada)"
+        }
+      ],
+      "timestamp": "2026-06-19T20:27:41.827Z"
+    },
+    {
+      "route": "https://homologacao.axhub.axion.ws/webhook",
+      "title": "Webhooks",
+      "screenshot": "cRu_reWaiPvlmN3CbzPzG-page-66-webhooks-1781900864487.png",
+      "forms": 0,
+      "dependencies": [
+        {
+          "type": "select-dependency",
+          "field": "",
+          "optionsCount": 3,
+          "source": "Banco de dados (tabela relacionada)"
+        }
+      ],
+      "timestamp": "2026-06-19T20:27:44.571Z"
+    }
+  ],
+  "forms": [
+    {
+      "formId": "form",
+      "formName": "",
+      "tests": [
+        {
+          "type": "form-validation",
+          "formId": "form",
+          "fieldsCount": 2,
+          "passed": true
+        }
+      ],
+      "issues": [],
+      "screenshots": [
+        "cRu_reWaiPvlmN3CbzPzG-form-form-filled-1781900670160.png"
+      ]
+    },
+    {
+      "formId": "formConsultaPlaca",
+      "formName": "",
+      "tests": [
+        {
+          "type": "required-field",
+          "field": "placaVeiculo",
+          "label": "Placa do Veículo *",
+          "passed": true
+        },
+        {
+          "type": "maxlength",
+          "field": "placaVeiculo",
+          "maxlength": 8,
+          "passed": true
+        },
+        {
+          "type": "maxlength",
+          "field": "baseDadosConsulta",
+          "maxlength": 50,
+          "passed": true
+        },
+        {
+          "type": "form-validation",
+          "formId": "formConsultaPlaca",
+          "fieldsCount": 2,
+          "passed": true
+        }
+      ],
+      "issues": [],
+      "screenshots": [
+        "cRu_reWaiPvlmN3CbzPzG-form-formConsultaPlaca-filled-1781900688627.png"
+      ]
+    },
+    {
+      "formId": "form-0",
+      "formName": "",
+      "tests": [
+        {
+          "type": "form-validation",
+          "formId": "form-0",
+          "fieldsCount": 5,
+          "passed": true
+        }
+      ],
+      "issues": [],
+      "screenshots": [
+        "cRu_reWaiPvlmN3CbzPzG-form-form-0-filled-1781900732487.png"
+      ]
+    },
+    {
+      "formId": "form-0",
+      "formName": "",
+      "tests": [
+        {
+          "type": "form-validation",
+          "formId": "form-0",
+          "fieldsCount": 6,
+          "passed": true
+        }
+      ],
+      "issues": [],
+      "screenshots": [
+        "cRu_reWaiPvlmN3CbzPzG-form-form-0-filled-1781900750968.png"
+      ]
+    },
+    {
+      "formId": "form-0",
+      "formName": "",
+      "tests": [
+        {
+          "type": "form-validation",
+          "formId": "form-0",
+          "fieldsCount": 6,
+          "passed": true
+        }
+      ],
+      "issues": [],
+      "screenshots": [
+        "cRu_reWaiPvlmN3CbzPzG-form-form-0-filled-1781900754662.png"
+      ]
+    },
+    {
+      "formId": "frmReport",
+      "formName": "",
+      "tests": [
+        {
+          "type": "form-validation",
+          "formId": "frmReport",
+          "fieldsCount": 9,
+          "passed": true
+        }
+      ],
+      "issues": [],
+      "screenshots": [
+        "cRu_reWaiPvlmN3CbzPzG-form-frmReport-filled-1781900758528.png"
+      ]
+    },
+    {
+      "formId": "form-0",
+      "formName": "",
+      "tests": [
+        {
+          "type": "form-validation",
+          "formId": "form-0",
+          "fieldsCount": 7,
+          "passed": true
+        }
+      ],
+      "issues": [],
+      "screenshots": [
+        "cRu_reWaiPvlmN3CbzPzG-form-form-0-filled-1781900762439.png"
+      ]
+    },
+    {
+      "formId": "frmReport",
+      "formName": "",
+      "tests": [
+        {
+          "type": "form-validation",
+          "formId": "frmReport",
+          "fieldsCount": 4,
+          "passed": true
+        }
+      ],
+      "issues": [],
+      "screenshots": [
+        "cRu_reWaiPvlmN3CbzPzG-form-frmReport-filled-1781900766103.png"
+      ]
+    },
+    {
+      "formId": "frmReport",
+      "formName": "",
+      "tests": [
+        {
+          "type": "form-validation",
+          "formId": "frmReport",
+          "fieldsCount": 3,
+          "passed": true
+        }
+      ],
+      "issues": [],
+      "screenshots": [
+        "cRu_reWaiPvlmN3CbzPzG-form-frmReport-filled-1781900769540.png"
+      ]
+    },
+    {
+      "formId": "teste-modal-body",
+      "formName": "",
+      "tests": [
+        {
+          "type": "form-validation",
+          "formId": "teste-modal-body",
+          "fieldsCount": 0,
+          "passed": true
+        }
+      ],
+      "issues": [],
+      "screenshots": [
+        "cRu_reWaiPvlmN3CbzPzG-form-teste-modal-body-filled-1781900769639.png"
+      ]
+    },
+    {
+      "formId": "frmReport",
+      "formName": "",
+      "tests": [
+        {
+          "type": "form-validation",
+          "formId": "frmReport",
+          "fieldsCount": 7,
+          "passed": true
+        }
+      ],
+      "issues": [],
+      "screenshots": [
+        "cRu_reWaiPvlmN3CbzPzG-form-frmReport-filled-1781900773518.png"
+      ]
+    },
+    {
+      "formId": "form-0",
+      "formName": "",
+      "tests": [
+        {
+          "type": "form-validation",
+          "formId": "form-0",
+          "fieldsCount": 4,
+          "passed": true
+        }
+      ],
+      "issues": [],
+      "screenshots": [
+        "cRu_reWaiPvlmN3CbzPzG-form-form-0-filled-1781900776986.png"
+      ]
+    },
+    {
+      "formId": "form-0",
+      "formName": "",
+      "tests": [
+        {
+          "type": "form-validation",
+          "formId": "form-0",
+          "fieldsCount": 6,
+          "passed": true
+        }
+      ],
+      "issues": [],
+      "screenshots": [
+        "cRu_reWaiPvlmN3CbzPzG-form-form-0-filled-1781900780544.png"
+      ]
+    },
+    {
+      "formId": "form-0",
+      "formName": "",
+      "tests": [
+        {
+          "type": "maxlength",
+          "field": "Placa",
+          "maxlength": 7,
+          "passed": true
+        },
+        {
+          "type": "form-validation",
+          "formId": "form-0",
+          "fieldsCount": 11,
+          "passed": true
+        }
+      ],
+      "issues": [],
+      "screenshots": [
+        "cRu_reWaiPvlmN3CbzPzG-form-form-0-filled-1781900784550.png"
+      ]
+    },
+    {
+      "formId": "form-0",
+      "formName": "",
+      "tests": [
+        {
+          "type": "form-validation",
+          "formId": "form-0",
+          "fieldsCount": 5,
+          "passed": true
+        }
+      ],
+      "issues": [],
+      "screenshots": [
+        "cRu_reWaiPvlmN3CbzPzG-form-form-0-filled-1781900788094.png"
+      ]
+    },
+    {
+      "formId": "form-0",
+      "formName": "",
+      "tests": [
+        {
+          "type": "form-validation",
+          "formId": "form-0",
+          "fieldsCount": 6,
+          "passed": true
+        }
+      ],
+      "issues": [],
+      "screenshots": [
+        "cRu_reWaiPvlmN3CbzPzG-form-form-0-filled-1781900791638.png"
+      ]
+    },
+    {
+      "formId": "frmReport",
+      "formName": "",
+      "tests": [
+        {
+          "type": "form-validation",
+          "formId": "frmReport",
+          "fieldsCount": 8,
+          "passed": true
+        }
+      ],
+      "issues": [],
+      "screenshots": [
+        "cRu_reWaiPvlmN3CbzPzG-form-frmReport-filled-1781900795096.png"
+      ]
+    },
+    {
+      "formId": "form-0",
+      "formName": "",
+      "tests": [
+        {
+          "type": "form-validation",
+          "formId": "form-0",
+          "fieldsCount": 3,
+          "passed": true
+        }
+      ],
+      "issues": [],
+      "screenshots": [
+        "cRu_reWaiPvlmN3CbzPzG-form-form-0-filled-1781900810321.png"
+      ]
+    },
+    {
+      "formId": "form",
+      "formName": "",
+      "tests": [
+        {
+          "type": "maxlength",
+          "field": "ConfiguracoesGerais.PrazoDiasTriagem",
+          "maxlength": 6,
+          "passed": true
+        },
+        {
+          "type": "maxlength",
+          "field": "ConfiguracoesOrgao.CodigoEntidade",
+          "maxlength": 3,
+          "passed": true
+        },
+        {
+          "type": "maxlength",
+          "field": "ConfiguracoesOrgao.CodigoOrgaoAutuador",
+          "maxlength": 6,
+          "passed": true
+        },
+        {
+          "type": "maxlength",
+          "field": "ConfiguracoesOrgao.Telefone",
+          "maxlength": 15,
+          "passed": true
+        },
+        {
+          "type": "maxlength",
+          "field": "ConfiguracoesOrgao.NomeGestorGeral",
+          "maxlength": 6,
+          "passed": true
+        },
+        {
+          "type": "maxlength",
+          "field": "ConfiguracoesOrgao.CnpjOrgaoAutuador",
+          "maxlength": 18,
+          "passed": true
+        },
+        {
+          "type": "form-validation",
+          "formId": "form",
+          "fieldsCount": 82,
+          "passed": true
+        }
+      ],
+      "issues": [],
+      "screenshots": [
+        "cRu_reWaiPvlmN3CbzPzG-form-form-filled-1781900829745.png"
+      ]
+    }
+  ],
+  "issues": [],
+  "recommendations": []
+}

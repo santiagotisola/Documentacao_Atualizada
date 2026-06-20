@@ -1,0 +1,14 @@
+{
+  "data": "2026-06-19T21:04:21.292Z",
+  "stats": {
+    "paginasValidadas": 55,
+    "formulariosEncontrados": 19,
+    "camposValidados": 88,
+    "camposObrigatorios": 0,
+    "camposComLimite": 4,
+    "camposComMascara": 0,
+    "errosValidacao": [],
+    "screenshots": 18
+  },
+  "erros": []
+}

@@ -1,0 +1,352 @@
+{
+  "caso": "05",
+  "inicio": "2026-06-17T18:54:11.941Z",
+  "operacoes": [
+    {
+      "equip": "GOEC6O009 - Faixa 2",
+      "resultado": "FALHA",
+      "backup": [
+        {
+          "active": true,
+          "advanced": {
+            "exposition": {
+              "updateFactor": 0.0990000069141388,
+              "updateRate": 100
+            },
+            "iris": {
+              "updateRate": 1000
+            },
+            "whitebalance": {
+              "updateRate": 500
+            }
+          },
+          "color": {
+            "blacklevel": 0,
+            "brightness": 0,
+            "contrast": 0,
+            "gamma": 130,
+            "saturation": 0
+          },
+          "description": "",
+          "exposure": {
+            "gain": {
+              "automatic": true,
+              "fixedValue": 1,
+              "maxValue": 1000,
+              "minValue": 1
+            },
+            "highGainMode": false,
+            "iris": {
+              "automatic": true,
+              "fixedValue": 1000
+            },
+            "level": {
+              "roi": {
+                "enabled": true,
+                "x0": 166,
+                "x1": 1122,
+                "x2": 509,
+                "x3": 1858,
+                "y0": 314,
+                "y1": 123,
+                "y2": 1135,
+                "y3": 755
+              },
+              "targetValue": 40
+            },
+            "shutter": {
+              "automatic": true,
+              "fixedValue": 99,
+              "maxValue": 1200,
+              "minValue": 48
+            }
+          },
+          "filter": {
+            "sharpnessLevel": 40,
+            "timedomainLevel": 0
+          },
+          "hdr": {
+            "enable": false
+          },
+          "id": 0,
+          "lens": {
+            "exchanger": true,
+            "focus": 779,
+            "zfMirrorProfile0": true,
+            "zoom": 2867
+          },
+          "movFilter": {
+            "enabled": false,
+            "onlyCheck": false,
+            "roi": {
+              "enabled": true,
+              "x0": 0,
+              "x1": 798,
+              "x2": 1903,
+              "x3": 403,
+              "y0": 0,
+              "y1": 22,
+              "y2": 904,
+              "y3": 1195
+            },
+            "threshold": 5
+          },
+          "multipleExposures": {
+            "enabled": true,
+            "settings": [
+              {
+                "flash": {
+                  "power": []
+                },
+                "gain": {
+                  "percentageOfCurrent": true,
+                  "value": 100
+                },
+                "shutter": {
+                  "percentageOfCurrent": true,
+                  "value": 100
+                }
+              }
+            ]
+          },
+          "name": "Diurno",
+          "overlay": {
+            "enable": false,
+            "text": "SEQUENCIAL: {rid} DATA PASSAGEM: {day}/{month}/{year} HORA PASSAGEM: {hour}:{minute}:{second}:{msec} PLACA: {plates} CODIGO EQUIPAMENTO: [CODIGOEQUIPAMENTO] MODELO OCR: AX-OCR LOCAL: [LOCAL] NOME DA VIA: [VIA] SENTIDO: [SENTIDO] FAIXA: [NUMERO]"
+          },
+          "transitions": {
+            "lower": {
+              "endTime": "00:00:00",
+              "holdTime": 60000,
+              "level": 10,
+              "profile": 0,
+              "startTime": "00:00:00"
+            },
+            "upper": {
+              "endTime": "00:00:00",
+              "holdTime": 60000,
+              "level": 35,
+              "profile": 1,
+              "startTime": "00:00:00"
+            }
+          },
+          "trigger": {
+            "enabled": true,
+            "event": "constant",
+            "minimumInterval": 100,
+            "port": 2,
+            "roi": {
+              "enabled": false,
+              "x0": 0,
+              "x1": 0,
+              "x2": 0,
+              "x3": 0,
+              "y0": 0,
+              "y1": 0,
+              "y2": 0,
+              "y3": 0
+            },
+            "threshold": 0
+          },
+          "whitebalance": {
+            "automatic": true,
+            "weights": {
+              "blue": 100,
+              "green": 100,
+              "red": 100
+            }
+          }
+        },
+        {
+          "active": false,
+          "advanced": {
+            "exposition": {
+              "updateFactor": 0.0990000069141388,
+              "updateRate": 100
+            },
+            "iris": {
+              "updateRate": 1000
+            },
+            "whitebalance": {
+              "updateRate": 500
+            }
+          },
+          "color": {
+            "blacklevel": 0,
+            "brightness": 0,
+            "contrast": 30,
+            "gamma": 12,
+            "saturation": -100
+          },
+          "description": "",
+          "exposure": {
+            "gain": {
+              "automatic": true,
+              "fixedValue": 2697,
+              "maxValue": 4000,
+              "minValue": 1
+            },
+            "highGainMode": false,
+            "iris": {
+              "automatic": false,
+              "fixedValue": 1000
+            },
+            "level": {
+              "roi": {
+                "enabled": false,
+                "x0": 10,
+                "x1": 840,
+                "x2": 403,
+                "x3": 1900,
+                "y0": 150,
+                "y1": 28,
+                "y2": 1179,
+                "y3": 846
+              },
+              "targetValue": 40
+            },
+            "shutter": {
+              "automatic": true,
+              "fixedValue": 2000,
+              "maxValue": 800,
+              "minValue": 48
+            }
+          },
+          "filter": {
+            "sharpnessLevel": 40,
+            "timedomainLevel": 20
+          },
+          "hdr": {
+            "enable": false
+          },
+          "id": 27839,
+          "lens": {
+            "exchanger": false,
+            "focus": 779,
+            "zfMirrorProfile0": true,
+            "zoom": 2867
+          },
+          "movFilter": {
+            "enabled": false,
+            "onlyCheck": false,
+            "roi": {
+              "enabled": false,
+              "x0": 0,
+              "x1": 1920,
+              "x2": 1920,
+              "x3": 0,
+              "y0": 0,
+              "y1": 0,
+              "y2": 1200,
+              "y3": 1200
+            },
+            "threshold": 5
+          },
+          "multipleExposures": {
+            "enabled": true,
+            "settings": [
+              {
+                "flash": {
+                  "power": [
+                    {
+                      "out": 1,
+                      "percent": 70
+                    },
+                    {
+                      "out": 3,
+                      "percent": 70
+                    }
+                  ]
+                },
+                "gain": {
+                  "percentageOfCurrent": true,
+                  "value": 100
+                },
+                "shutter": {
+                  "percentageOfCurrent": true,
+                  "value": 100
+                }
+              },
+              {
+                "flash": {
+                  "power": [
+                    {
+                      "out": 1,
+                      "percent": 25
+                    },
+                    {
+                      "out": 3,
+                      "percent": 25
+                    }
+                  ]
+                },
+                "gain": {
+                  "percentageOfCurrent": true,
+                  "value": 100
+                },
+                "shutter": {
+                  "percentageOfCurrent": true,
+                  "value": 50
+                }
+              }
+            ]
+          },
+          "name": "Noturno",
+          "overlay": {
+            "enable": false,
+            "text": "SEQUENCIAL: {rid} DATA PASSAGEM: {day}/{month}/{year} HORA PASSAGEM: {hour}:{minute}:{second}:{msec} PLACA: {plates} CODIGO EQUIPAMENTO: GOEC6O032 MODELO OCR: AX-OCR LOCAL: Planaltina-GO NOME DA VIA: GO 118 KM 6 SENTIDO: Planaltina-GO/Divisa-DF FAIXA: 01"
+          },
+          "transitions": {
+            "lower": {
+              "endTime": "00:00:00",
+              "holdTime": 60000,
+              "level": 10,
+              "profile": 27839,
+              "startTime": "00:00:00"
+            },
+            "upper": {
+              "endTime": "00:00:00",
+              "holdTime": 60000,
+              "level": 40,
+              "profile": 0,
+              "startTime": "00:00:00"
+            }
+          },
+          "trigger": {
+            "enabled": true,
+            "event": "constant",
+            "minimumInterval": 100,
+            "port": 2,
+            "roi": {
+              "enabled": false,
+              "x0": 0,
+              "x1": 0,
+              "x2": 0,
+              "x3": 0,
+              "y0": 0,
+              "y1": 0,
+              "y2": 0,
+              "y3": 0
+            },
+            "threshold": 0
+          },
+          "whitebalance": {
+            "automatic": false,
+            "weights": {
+              "blue": 100,
+              "green": 100,
+              "red": 100
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "fim": "2026-06-17T18:54:13.388Z",
+  "resumo": {
+    "aplicados": 0,
+    "ja_ok": 0,
+    "falha": 1,
+    "cancelados": 0
+  }
+}

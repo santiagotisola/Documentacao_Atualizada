@@ -1,0 +1,89 @@
+{
+  "caso": "06",
+  "inicio": "2026-06-17T18:32:34.043Z",
+  "operacoes": [
+    {
+      "equip": "GOEC6O009 - Faixa 2",
+      "resultado": "APLICADO",
+      "backup": {
+        "ocr": {
+          "avgCharHeight": 20,
+          "avgPlateAngle": 0,
+          "avgPlateSlant": 0,
+          "classifierExpansion": 10,
+          "countryCode": 76,
+          "enabled": true,
+          "licensed": true,
+          "lowProbChar": 45,
+          "maxCharHeight": 60,
+          "maxLowProbChars": 0,
+          "maxPlates": 1,
+          "minCharHeight": 9,
+          "minProbPerChar": 85,
+          "processingMode": 3,
+          "processingQueue": 4,
+          "processingThreads": 4,
+          "processingTimeout": 1000,
+          "roi": {
+            "enabled": true,
+            "x0": 262,
+            "x1": 1240,
+            "x2": 608,
+            "x3": 1919,
+            "y0": 376,
+            "y1": 189,
+            "y2": 1187,
+            "y3": 776
+          },
+          "useClassifierResult": false,
+          "vehicleType": 3
+        }
+      }
+    },
+    {
+      "equip": "GOEC6O055 - Faixa 2",
+      "resultado": "APLICADO",
+      "backup": {
+        "ocr": {
+          "avgCharHeight": 20,
+          "avgPlateAngle": 0,
+          "avgPlateSlant": 0,
+          "classifierExpansion": 10,
+          "countryCode": 76,
+          "enabled": true,
+          "licensed": true,
+          "lowProbChar": 45,
+          "maxCharHeight": 60,
+          "maxLowProbChars": 0,
+          "maxPlates": 1,
+          "minCharHeight": 9,
+          "minProbPerChar": 85,
+          "processingMode": 3,
+          "processingQueue": 4,
+          "processingThreads": 4,
+          "processingTimeout": 1000,
+          "roi": {
+            "enabled": true,
+            "x0": 239,
+            "x1": 1039,
+            "x2": 781,
+            "x3": 1863,
+            "y0": 373,
+            "y1": 165,
+            "y2": 1152,
+            "y3": 686
+          },
+          "useClassifierResult": false,
+          "vehicleType": 3
+        }
+      }
+    }
+  ],
+  "fim": "2026-06-17T18:32:37.087Z",
+  "resumo": {
+    "aplicados": 2,
+    "ja_ok": 0,
+    "falha": 0,
+    "cancelados": 0
+  }
+}

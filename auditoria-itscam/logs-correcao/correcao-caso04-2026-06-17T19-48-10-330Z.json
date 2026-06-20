@@ -1,0 +1,37 @@
+{
+  "caso": "04",
+  "inicio": "2026-06-17T19:48:04.731Z",
+  "operacoes": [
+    {
+      "equip": "GOEC6O010 - Faixa 1",
+      "resultado": "JA_OK"
+    },
+    {
+      "equip": "GOEC6O010 - Faixa 2",
+      "resultado": "JA_OK"
+    },
+    {
+      "equip": "GOEC6O011 - Faixa 2",
+      "resultado": "JA_OK"
+    },
+    {
+      "equip": "GOEC6O028 - Faixa 1",
+      "resultado": "JA_OK"
+    },
+    {
+      "equip": "GOEC6O052 - Faixa 2",
+      "resultado": "JA_OK"
+    },
+    {
+      "equip": "GOEC6O058 - Faixa 2",
+      "resultado": "OFFLINE"
+    }
+  ],
+  "fim": "2026-06-17T19:48:10.330Z",
+  "resumo": {
+    "aplicados": 0,
+    "ja_ok": 5,
+    "falha": 1,
+    "cancelados": 0
+  }
+}

@@ -1,6 +1,6 @@
 # Relatório de Divergências - Auditoria ITScam 450
 
-**Data:** 2026-06-02T21:30:52.624Z
+**Data:** 2026-06-17T13:56:14.289Z
 **Referência:** GOEC6O058 - Faixa 1
 **Total equipamentos:** 70
 **Coletados com sucesso:** 64

@@ -1,0 +1,21 @@
+{
+  "caso": "08",
+  "inicio": "2026-06-17T19:52:22.152Z",
+  "operacoes": [
+    {
+      "equip": "GOEC6O046 - Faixa 1",
+      "resultado": "ERRO_LEITURA"
+    },
+    {
+      "equip": "GOEC6O046 - Faixa 2",
+      "resultado": "OFFLINE"
+    }
+  ],
+  "fim": "2026-06-17T19:52:23.347Z",
+  "resumo": {
+    "aplicados": 0,
+    "ja_ok": 0,
+    "falha": 2,
+    "cancelados": 0
+  }
+}
