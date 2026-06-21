@@ -15,6 +15,7 @@
  * - analise.routes.js - Imagens, OCR, jobs, validações
  * - crm.routes.js - CRM, contatos, clientes, equipamentos
  * - varco.routes.js - VARCO, WhatsApp, validation manager
+ * - portal.routes.js - Portal do Cidadão (consultas, contestações, auth)
  */
 
 import express from "express";
@@ -26,6 +27,7 @@ import adminRoutes from "./admin.routes.js";
 import analiseRoutes from "./analise.routes.js";
 import crmRoutes from "./crm.routes.js";
 import varcoRoutes from "./varco.routes.js";
+import portalRoutes from "./portal.routes.js";
 
 const router = express.Router();
 
@@ -41,5 +43,6 @@ router.use(adminRoutes);     // Config, admin, agent
 router.use(analiseRoutes);   // Imagens, OCR, jobs
 router.use(crmRoutes);       // CRM, contatos, clientes
 router.use(varcoRoutes);     // VARCO, WhatsApp, validation
+router.use("/portal", portalRoutes); // Portal do Cidadão
 
 export default router;
