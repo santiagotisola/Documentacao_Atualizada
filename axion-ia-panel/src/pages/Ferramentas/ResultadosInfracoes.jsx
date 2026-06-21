@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react';
 import { useLocation, useNavigate, Link } from 'react-router-dom';
 import { ArrowLeft, FileSpreadsheet, TrendingUp, DollarSign, AlertCircle } from 'lucide-react';
-import TabelaInfracoes from '../components/ferramentas/TabelaInfracoes';
+import TabelaInfracoes from '../../components/ferramentas/TabelaInfracoes';
 
 export default function ResultadosInfracoes() {
   const location = useLocation();

@@ -1,7 +1,7 @@
 import React from 'react';
 import { useLocation, Link } from 'react-router-dom';
 import { ArrowLeft, Search } from 'lucide-react';
-import FormConsultaInfracoes from '../components/ferramentas/FormConsultaInfracoes';
+import FormConsultaInfracoes from '../../components/ferramentas/FormConsultaInfracoes';
 
 export default function ConsultaInfracoes() {
   return (
