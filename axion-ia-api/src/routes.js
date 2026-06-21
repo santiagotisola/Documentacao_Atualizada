@@ -1,39 +1,20 @@
-import express from "express";
-import { processarMensagem, consultarHistorico, consultarPendentes, consultarEstatisticas, treinarIA, consultarLogsMongo, consultarAnalise, listarEntradasKB } from "./controller.js";
-import { listarTickets, detalheTicket, classificarTicket, responderTicketIA, processarPendentes as processarHelpdeskPendentes, listarCategorias, criarChamado, statusPolling, iniciarPolling, pausarPolling, retomarPolling, limparPolling, obterFila, setModoRevisao, aprovarFila, rejeitarFila, listarTecnicosHelpdesk, gerarPlanilhaHoras, relatarSlaCompliance } from "./helpdesk-controller.js";
-import { statusConexao, resumoGeral, listarEquipamentos, listarOperacoes, statsInfracoes, heartbeatEquipamentos, listarTabelas, listarMonitoramentos, ultimasPassagens, statsTriagens } from "./axhub-controller.js";
-import { statusConexao as axtonStatus, resumoGeral as axtonResumo, listarTabelas as axtonTabelas, ultimasPesagens as axtonPesagens, ultimasInfracoes as axtonInfracoes, heartbeatEquipamentos as axtonHeartbeat } from "./axton-controller.js";
-import { statusConexao as axcrossStatus, resumoGeral as axcrossResumo, listarEquipamentos as axcrossEquipamentos, statsPassagens as axcrossPassagens, heartbeatEquipamentos as axcrossHeartbeat, listarTabelas as axcrossTabelas, listarLocais as axcrossLocais, listarOperacoes as axcrossOperacoes } from "./axcross-controller.js";
-import { obterConfig, salvarConfig, testarMongo } from "./config-controller.js";
-import { gerarDoc, salvarDoc, listarImagens, listarSecoes } from "./doc-controller.js";
-import { adicionarFonte, listarFontes, obterFonte, removerFonte, analisarFonteById, mapaCobertura, sugestoesPorProduto } from "./fontes-controller.js";
-import { buscarPNCP, importarSelecionados, coletarProduto, obterConfig as coletorConfig, salvarConfig as coletorSalvar, statusColetor, listarOperacoes as coletorOperacoes } from "./coletor-controller.js";
-import { gerarRoadmapHandler, listarRoadmapsHandler, obterRoadmapHandler, atualizarItemHandler, adicionarItemHandler } from "./roadmap-controller.js";
-import { gerarSpecHandler, listarSpecsHandler, obterSpecHandler, atualizarStatusSpecHandler } from "./spec-controller.js";
-import { relatorioPassagens, relatorioImagens, listarEquipamentosRelatorio } from "./relatorio-controller.js";
-import { uploadMiddlewareComErro, uploadContexto } from "./upload-controller.js";
-import { gerarConformidadeHandler, listarConformidadeHandler, obterConformidadeHandler, removerConformidadeHandler, gerarAnalisaMultiProdutoHandler, obterAnalisaMultiProdutoHandler, listarAnalisasMultiProdutoHandler, obterComparacaoHandler, obterLacunasHandler, obterRecomendacoesHandler } from "./conformidade-controller.js";
-import { iniciarConexao, statusConexao as waStatus, listarSessoes, detalhesSessao, encerrarSessao, enviarManual, enviarComBotoes, desconectar, restart } from "./whatsapp-controller.js";
-import { reindexarDocs, reindexarJitbit, statsKB, limparModuloKB } from "./admin-controller.js";
-import { uploadImagemMiddleware, analisarSemSalvar, salvarEAnalisar, listarTodas, listarPorSistema, listarPasta, compararPasta, compararPastaLocal, servirImagemExterna, removerImagem, classificarOcupacao, classificarRoda, classificarCorCamisa, classificarMochila, classificarCalca, gerarCaracteristicas, lerPlacas } from "./analise-imagem-controller.js";
-import { uploadJobMiddleware, criarJobHandler, listarJobs, obterJob, removerJob } from "./job-controller.js";
-import { validarFluxoAlerta } from "./validate-controller.js";
-import { runAgent, runAgentMode, getAgentState, getSchedulerStatus, startScheduler, stopScheduler } from "./agent-controller.js";
-import { validarDispositivo, validarLote, analisarIncidente, heartbeatGeral, listarFrota, auditoriaStatus, auditoriaAprimorada, configPadrao, recoletaVarco, planoCorrecao, gerarPlano, aplicarCorrecao } from "./varco-controller.js";
-import { analisarTexto, analisarArquivo, uploadLeituraMiddleware } from "./leitura-controller.js";
-import { healthCheck } from "./health-controller.js";
-import { listarFilaHandler, obterEstatisticasHandler, obterItemHandler, marcarRevisadoHandler, autoResolverHandler, exportarCsvHandler, descartarItemHandler } from "./confidence-controller.js";
-import { listarContatos, detalheContato, atualizarContato, statsContatos, listarClientes, criarCliente, atualizarCliente, contatosDoCliente, buscaCRM } from "./crm-controller.js";
-import { listarEquipamentosCRM, statsEquipamentos, detalheEquipamento, atualizarEquipamento, equipamentosDoCliente, buscaEquipamento } from "./equipamento-controller.js";
-import { buscarEditaisGovHandler, importarEditalHandler, analisarEditalRapidoHandler, listarEditaisImportadosHandler, autoAnalisarTodosHandler, analiseAvancadaHandler, uploadEditalHandler, uploadEditalMiddleware, listarSitesHandler } from "./edital-controller.js";
-import { sitesOverview, obterMapa, associarSite, desassociarSite, ticketsPorSite } from "./sites-helpdesk-controller.js";
-import { listarContratosHandler, listarTiposHandler, gerarRelatorioHandler, listarRelatoriosHandler, obterRelatorioHandler, removerRelatorioHandler } from "./relatorio-contrato-controller.js";
-import { testarLogin, alterarSenha, validarAcesso } from "./credenciais-controller.js";
-import { buscarInfracoes, varreduraDuplicidades, detalheInfracao, compararInfracoes, estatisticasDuplicidades } from "./duplicidade-controller.js";
-import { listarSistemas, listarEquipamentos as medicaoListarEquipamentos, gerarDiagnostico, analisarSistema } from "./medicao-controller.js";
-import { startValidation, discoverUI, discoverAPI, getReport, listValidations } from "./validation-manager-controller.js";
-import { startVisualValidation, getVisualValidationStatus, getVisualValidationReport, getScreenshot, listVisualValidations } from "./visual-validation-controller.js";
-const router = express.Router();
+/**
+ * 🗂️ MAIN ROUTES FILE (DEPRECATED)
+ * 
+ * ⚠️ ESTE ARQUIVO ESTÁ DEPRECATED!
+ * Rotas foram movidas para src/routes/ (módulos separados)
+ * 
+ * Este arquivo mantém a estrutura original para backward compatibility
+ * mas agora apenas importa o index modular.
+ * 
+ * @deprecated Use import routes from "./routes/index.js" instead
+ * @refactor Fase 1 - Quick Wins (2026-06-21)
+ */
+
+import routes from "./routes/index.js";
+
+// Export compatibilidade com código existente
+export default routes;
 
 // AxionIA Chat
 router.post("/chat", processarMensagem);
