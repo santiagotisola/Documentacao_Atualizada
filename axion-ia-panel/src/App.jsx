@@ -43,6 +43,9 @@ import DiagnosticHub from "./pages/DiagnosticHub.jsx";
 import HomePage from "./pages/HomePage.jsx";
 import ConsultaInfracoes from "./pages/Ferramentas/ConsultaInfracoes.jsx";
 import ResultadosInfracoes from "./pages/Ferramentas/ResultadosInfracoes.jsx";
+import AnalisePesagem from "./pages/Ferramentas/AnalisePesagem.jsx";
+import ConsultaCruzamentos from "./pages/Ferramentas/ConsultaCruzamentos.jsx";
+import QualityDashboard from "./pages/Quality/Dashboard.jsx";
 import "./App.css";
 import "./pages/docusaurus-compat.css";
 
@@ -81,6 +84,9 @@ const PAGE_INFO = {
   "/diagnostico-medicao": { title: "Diagnóstico de Medição", subtitle: "Análise inteligente de equipamentos com valores zerados no relatório", Icon: Activity },
   "/ferramentas/consulta-infracoes": { title: "Consultar Infrações", subtitle: "Ferramenta de análise e suporte — Consulte infrações por CPF ou Placa (AxHub)", Icon: Search },
   "/ferramentas/resultados-infracoes": { title: "Resultados da Consulta", subtitle: "Análise detalhada de infrações encontradas", Icon: FileText },
+  "/ferramentas/pesagem": { title: "Análise de Pesagem AxTon", subtitle: "Ferramenta de suporte — Consulte pesagens veiculares", Icon: Scale },
+  "/ferramentas/cruzamentos": { title: "Monitoramento AxCross", subtitle: "Ferramenta de suporte — Consulte cruzamentos e alertas", Icon: Navigation },
+  "/quality": { title: "Quality Engineering Platform", subtitle: "Plataforma de análise automatizada de qualidade, segurança e performance", Icon: Shield },
 };
 
 const MENU_SECTIONS = [
@@ -104,6 +110,8 @@ const MENU_SECTIONS = [
     group: "Ferramentas",
     items: [
       { to: "/ferramentas/consulta-infracoes", icon: Search, label: "Consultar Infrações" },
+      { to: "/ferramentas/pesagem", icon: Scale, label: "Análise Pesagem (AxTon)" },
+      { to: "/ferramentas/cruzamentos", icon: Navigation, label: "Cruzamentos (AxCross)" },
     ]
   },
   {
@@ -116,6 +124,7 @@ const MENU_SECTIONS = [
   {
     group: "Qualidade",
     items: [
+      { to: "/quality", icon: Shield, label: "Quality Platform" },
       { to: "/duplicidade", icon: Shield, label: "Auditoria Duplicidades" },
       { to: "/varco", icon: Radio, label: "VARCO Monitor" },
       { to: "/relatorio-contrato", icon: ClipboardList, label: "Relatório por Contrato" },
@@ -279,6 +288,9 @@ function AppContent() {
           <Route path="/intelligence-dashboard" element={<IntelligenceDashboard />} />
           <Route path="/ferramentas/consulta-infracoes" element={<ConsultaInfracoes />} />
           <Route path="/ferramentas/resultados-infracoes" element={<ResultadosInfracoes />} />
+          <Route path="/ferramentas/pesagem" element={<AnalisePesagem />} />
+          <Route path="/ferramentas/cruzamentos" element={<ConsultaCruzamentos />} />
+          <Route path="/quality" element={<QualityDashboard />} />
           <Route path="/config" element={<Configuracoes />} />
 
 
