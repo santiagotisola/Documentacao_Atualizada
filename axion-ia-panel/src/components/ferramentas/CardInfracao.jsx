@@ -1,7 +1,10 @@
 import React from 'react';
 import { Calendar, MapPin, Camera, DollarSign, FileText, AlertCircle } from 'lucide-react';
-import { format } from 'date-fns';
-import { ptBR } from 'date-fns/locale';
+
+// Helper para formatar data
+const formatarData = (data) => {
+  return new Date(data).toLocaleDateString('pt-BR');
+};
 
 export default function CardInfracao({ infracao }) {
   const getStatusColor = (status) => {
@@ -44,8 +47,7 @@ export default function CardInfracao({ infracao }) {
           <div className="flex-1">
             <p className="text-xs text-gray-500">Data e Hora</p>
             <p className="text-sm font-semibold text-gray-900">
-              {format(new Date(infracao.DataDaInfracao), "dd/MM/yyyy 'às' ", { locale: ptBR })}
-              {infracao.HoraDaInfracao}
+              {formatarData(infracao.DataDaInfracao)} às {infracao.HoraDaInfracao}
             </p>
           </div>
         </div>

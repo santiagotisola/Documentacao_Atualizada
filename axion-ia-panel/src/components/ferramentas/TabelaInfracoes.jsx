@@ -1,7 +1,10 @@
 import React, { useState, useMemo } from 'react';
 import { ChevronDown, ChevronUp, Calendar, MapPin, DollarSign, FileText, ArrowUpDown } from 'lucide-react';
-import { format } from 'date-fns';
-import { ptBR } from 'date-fns/locale';
+
+// Helper para formatar data
+const formatarData = (data) => {
+  return new Date(data).toLocaleDateString('pt-BR');
+};
 
 export default function TabelaInfracoes({ infracoes }) {
   const [ordenacao, setOrdenacao] = useState({ campo: 'DataDaInfracao', direcao: 'desc' });
@@ -88,7 +91,7 @@ export default function TabelaInfracoes({ infracoes }) {
                     <Calendar className="w-4 h-4 text-gray-400 mr-2" />
                     <div>
                       <div className="text-sm text-gray-900">
-                        {format(new Date(infracao.DataDaInfracao), 'dd/MM/yyyy', { locale: ptBR })}
+                        {formatarData(infracao.DataDaInfracao)}
                       </div>
                       <div className="text-xs text-gray-500">
                         {infracao.HoraDaInfracao}
