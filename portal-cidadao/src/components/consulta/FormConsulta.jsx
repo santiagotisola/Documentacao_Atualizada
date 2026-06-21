@@ -3,9 +3,10 @@ import { useNavigate } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
-import { Search, User, Car } from 'lucide-react'
+import { Search, User, Car, Shield } from 'lucide-react'
 import { consultarInfracoes } from '@services/api'
 import { toast } from 'react-hot-toast'
+import { useRecaptcha } from '../../hooks/useRecaptcha'
 
 // Validação com Zod
 const schema = z.object({
@@ -25,6 +26,7 @@ export default function FormConsulta() {
   const [loading, setLoading] = useState(false)
   const [tipoSelecionado, setTipoSelecionado] = useState('cpf')
   const navigate = useNavigate()
+  const { ready: recaptchaReady, execute: executeRecaptcha } = useRecaptcha()
   
   const {
     register,
@@ -90,8 +92,16 @@ export default function FormConsulta() {
     try {
       setLoading(true)
       
-      // TODO: Implementar reCAPTCHA
-      const recaptchaToken = 'development-token'
+      // Gerar token reCAPTCHA
+      let recaptchaToken;
+      try {
+        recaptchaToken = await executeRecaptcha('consultar');
+      } catch (error) {
+        toast.error('Erro ao verificar reCAPTCHA. Tente novamente.');
+        console.error('reCAPTCHA error:', error);
+        setLoading(false);
+        return;
+      }
       
       const result = await consultarInfracoes({
         tipo: data.tipo,
@@ -194,13 +204,18 @@ export default function FormConsulta() {
 
           <button
             type="submit"
-            disabled={loading}
+            disabled={loading || !recaptchaReady}
             className="btn btn-primary w-full text-lg flex items-center justify-center space-x-2"
           >
             {loading ? (
               <>
                 <div className="spinner w-5 h-5"></div>
                 <span>Consultando...</span>
+              </>
+            ) : !recaptchaReady ? (
+              <>
+                <Shield size={20} className="animate-pulse" />
+                <span>Carregando verificação de segurança...</span>
               </>
             ) : (
               <>
@@ -209,6 +224,29 @@ export default function FormConsulta() {
               </>
             )}
           </button>
+
+          {/* Badge reCAPTCHA */}
+          <p className="text-xs text-gray-500 text-center mt-4">
+            Este site é protegido pelo reCAPTCHA e as{' '}
+            <a 
+              href="https://policies.google.com/privacy" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="text-blue-600 hover:underline"
+            >
+              Políticas de Privacidade
+            </a>
+            {' '}e{' '}
+            <a 
+              href="https://policies.google.com/terms" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="text-blue-600 hover:underline"
+            >
+              Termos de Serviço
+            </a>
+            {' '}do Google se aplicam.
+          </p>
         </form>
 
         {/* Informações */}

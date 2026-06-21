@@ -1,5 +1,6 @@
 import { conectar as conectarAxHub } from '../../services/axhub-db.js';
 import { hashCPF, validarCPF, validarPlaca, sanitizeSQLString } from '../../utils/portal.utils.js';
+import { verifyRecaptcha, isValidScore, getThreshold } from '../../utils/recaptcha.js';
 
 /**
  * Consulta infrações por CPF ou Placa
@@ -18,10 +19,35 @@ export async function consultarInfracoes(req, res) {
       return res.status(400).json({ erro: 'Tipo inválido. Use "cpf" ou "placa"' });
     }
     
-    // TODO: Implementar verificação reCAPTCHA
-    // if (!recaptchaToken) {
-    //   return res.status(400).json({ erro: 'Token reCAPTCHA obrigatório' });
-    // }
+    // Verificação reCAPTCHA v3
+    if (!recaptchaToken) {
+      return res.status(400).json({ erro: 'Token reCAPTCHA obrigatório' });
+    }
+    
+    // Verificar token com Google API
+    const remoteIp = req.ip || req.headers['x-forwarded-for'] || req.connection.remoteAddress;
+    const recaptchaResult = await verifyRecaptcha(recaptchaToken, remoteIp);
+    
+    if (!recaptchaResult.success) {
+      console.warn('reCAPTCHA verification failed:', recaptchaResult['error-codes']);
+      return res.status(400).json({ 
+        erro: 'Validação reCAPTCHA falhou. Tente novamente.',
+        errorCodes: recaptchaResult['error-codes']
+      });
+    }
+    
+    // Validar score (threshold configurável via ENV)
+    const threshold = getThreshold();
+    if (!isValidScore(recaptchaResult.score, threshold)) {
+      console.warn(`reCAPTCHA score too low: ${recaptchaResult.score} (threshold: ${threshold})`);
+      return res.status(403).json({ 
+        erro: 'Comportamento suspeito detectado. Tente novamente mais tarde.',
+        score: recaptchaResult.score
+      });
+    }
+    
+    // Log para análise (remover ou enviar para analytics em produção)
+    console.log(`✅ reCAPTCHA: score=${recaptchaResult.score}, action=${recaptchaResult.action}, hostname=${recaptchaResult.hostname}`);
     
     let valorLimpo = valor.replace(/\D/g, '');
     
