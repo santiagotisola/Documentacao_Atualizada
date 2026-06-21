@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { AXHUB_SITES, AXCROSS_SITES, MODULOS, TIPOS_CONTRATO } from '../data/sitesData';
 import { api } from '../services/api';
+import { KPICard, LoadingSpinner } from '../components/ui';
+import { Building2, TrendingUp, Ticket, AlertCircle, Camera, Target } from 'lucide-react';
 import './IntelligenceHub.css';
 
 const AXTON_SITES = [
@@ -67,13 +69,29 @@ function MiniBar({ value, max, color }) {
   );
 }
 
-function KPICard({ icon, label, value, sublabel, color }) {
+// KPICard agora vem de ../components/ui
+// Mantém compatibilidade com props antigas via wrapper
+function KPICardCompat({ icon, label, value, sublabel, color }) {
+  // Converte emoji para lucide icon se necessário
+  const iconMap = {
+    '🏢': <Building2 />,
+    '💯': <TrendingUp />,
+    '🎫': <Ticket />,
+    '🔴': <AlertCircle />,
+    '📷': <Camera />,
+    '🎯': <Target />
+  };
+  const iconElement = iconMap[icon] || icon;
+  
   return (
-    <div className="ih-kpi-card" style={{ borderTopColor: color }}>
-      <span className="ih-kpi-icon">{icon}</span>
-      <span className="ih-kpi-value">{value}</span>
-      <span className="ih-kpi-label">{label}</span>
-      {sublabel && <span className="ih-kpi-sub">{sublabel}</span>}
+    <div style={{ borderTop: `3px solid ${color}`, borderRadius: '8px' }}>
+      <KPICard 
+        icon={iconElement}
+        label={label}
+        value={value}
+        sublabel={sublabel}
+        size="medium"
+      />
     </div>
   );
 }
@@ -174,7 +192,7 @@ export default function IntelligenceHub() {
 
       {/* Conteúdo */}
       <div className="ih-content">
-        {loading && <div className="ih-loading">Carregando dados de inteligência...</div>}
+        {loading && <LoadingSpinner message="Carregando dados de inteligência..." />}
 
         {!loading && tab === 'overview' && <OverviewTab kpis={kpis} sitesComScore={sitesComScore} chamadosData={chamadosData} />}
         {!loading && tab === 'sites' && (
@@ -208,12 +226,12 @@ function OverviewTab({ kpis, sitesComScore, chamadosData }) {
     <div className="ih-overview">
       {/* KPIs Grid */}
       <div className="ih-kpi-grid">
-        <KPICard icon="🏢" label="Sites Totais" value={kpis.totalSites} sublabel={`${kpis.sitesAtivos} ativos`} color="#3b82f6" />
-        <KPICard icon="💯" label="Health Score Médio" value={`${kpis.avgScore}%`} color={scoreColor(kpis.avgScore)} />
-        <KPICard icon="🎫" label="Chamados Totais" value={kpis.totalChamados} sublabel={`${kpis.chamadosAbertos} abertos`} color="#8b5cf6" />
-        <KPICard icon="🔴" label="Críticos" value={kpis.criticos} color="#ef4444" />
-        <KPICard icon="📷" label="OCR Médio" value={`${kpis.avgOCR}%`} color="#06b6d4" />
-        <KPICard icon="🎯" label="SLA Compliance" value={kpis.slaCompliance ? `${kpis.slaCompliance}%` : '—'} color="#22c55e" />
+        <KPICardCompat icon="🏢" label="Sites Totais" value={kpis.totalSites} sublabel={`${kpis.sitesAtivos} ativos`} color="#3b82f6" />
+        <KPICardCompat icon="💯" label="Health Score Médio" value={`${kpis.avgScore}%`} color={scoreColor(kpis.avgScore)} />
+        <KPICardCompat icon="🎫" label="Chamados Totais" value={kpis.totalChamados} sublabel={`${kpis.chamadosAbertos} abertos`} color="#8b5cf6" />
+        <KPICardCompat icon="🔴" label="Críticos" value={kpis.criticos} color="#ef4444" />
+        <KPICardCompat icon="📷" label="OCR Médio" value={`${kpis.avgOCR}%`} color="#06b6d4" />
+        <KPICardCompat icon="🎯" label="SLA Compliance" value={kpis.slaCompliance ? `${kpis.slaCompliance}%` : '—'} color="#22c55e" />
       </div>
 
       {/* Alertas */}
