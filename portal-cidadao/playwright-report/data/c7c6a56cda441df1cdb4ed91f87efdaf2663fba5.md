@@ -1,0 +1,336 @@
+# Instructions
+
+- Following Playwright test failed.
+- Explain why, be concise, respect Playwright best practices.
+- Provide a snippet of code with the fix, if possible.
+
+# Test info
+
+- Name: portal.spec.js >> Autenticação (Registro e Login) >> deve carregar página de login
+- Location: tests\e2e\portal.spec.js:106:3
+
+# Error details
+
+```
+Error: expect(locator).toBeVisible() failed
+
+Locator: getByText('Portal do Cidadão')
+Expected: visible
+Error: strict mode violation: getByText('Portal do Cidadão') resolved to 3 elements:
+    1) <span class="text-xl font-bold text-gray-900">Portal do Cidadão</span> aka getByRole('link', { name: 'A Portal do Cidadão Powered' })
+    2) <h1 class="text-4xl font-bold text-gray-900 mb-2">Portal do Cidadão</h1> aka locator('h1')
+    3) <h3 class="text-white font-semibold text-lg mb-4">Portal do Cidadão</h3> aka getByRole('contentinfo').getByRole('heading', { name: 'Portal do Cidadão' })
+
+Call log:
+  - Expect "toBeVisible" with timeout 5000ms
+  - waiting for getByText('Portal do Cidadão')
+
+```
+
+# Page snapshot
+
+```yaml
+- generic [ref=e2]:
+  - generic [ref=e3]:
+    - banner [ref=e4]:
+      - navigation [ref=e5]:
+        - generic [ref=e6]:
+          - link "A Portal do Cidadão Powered by Axion" [ref=e7] [cursor=pointer]:
+            - /url: /
+            - generic [ref=e9]: A
+            - generic [ref=e10]:
+              - text: Portal do Cidadão
+              - paragraph [ref=e11]: Powered by Axion
+          - generic [ref=e12]:
+            - link "Consultar Infrações" [ref=e13] [cursor=pointer]:
+              - /url: /
+            - link "Entrar" [ref=e14] [cursor=pointer]:
+              - /url: /login
+              - img [ref=e15]
+              - generic [ref=e18]: Entrar
+    - main [ref=e19]:
+      - generic [ref=e21]:
+        - generic [ref=e22]:
+          - heading "Portal do Cidadão" [level=1] [ref=e23]
+          - paragraph [ref=e24]: Gerencie suas infrações de trânsito
+        - generic [ref=e25]:
+          - generic [ref=e26]:
+            - button "Entrar" [ref=e27] [cursor=pointer]:
+              - img [ref=e28]
+              - text: Entrar
+            - button "Registrar" [ref=e31] [cursor=pointer]:
+              - img [ref=e32]
+              - text: Registrar
+          - generic [ref=e36]:
+            - generic [ref=e37]:
+              - generic [ref=e38]: CPF
+              - textbox "000.000.000-00" [ref=e39]
+            - generic [ref=e40]:
+              - generic [ref=e41]: Senha
+              - generic [ref=e42]:
+                - textbox "••••••••" [ref=e43]
+                - button [ref=e44] [cursor=pointer]:
+                  - img [ref=e45]
+            - button "Entrar" [ref=e48] [cursor=pointer]:
+              - img [ref=e49]
+              - text: Entrar
+            - link "Esqueceu sua senha?" [ref=e53] [cursor=pointer]:
+              - /url: /login
+        - link "← Voltar para home" [ref=e55] [cursor=pointer]:
+          - /url: /
+    - contentinfo [ref=e56]:
+      - generic [ref=e57]:
+        - generic [ref=e58]:
+          - generic [ref=e59]:
+            - heading "Portal do Cidadão" [level=3] [ref=e60]
+            - paragraph [ref=e61]: Consulte e conteste infrações de trânsito de forma rápida e segura. Plataforma oficial para acesso aos seus dados.
+            - generic [ref=e62]:
+              - generic [ref=e64]: A
+              - generic [ref=e65]: Powered by Axion Tecnologia
+          - generic [ref=e66]:
+            - heading "Links Úteis" [level=3] [ref=e67]
+            - list [ref=e68]:
+              - listitem [ref=e69]:
+                - link "Consultar Infrações" [ref=e70] [cursor=pointer]:
+                  - /url: /
+              - listitem [ref=e71]:
+                - link "Meus Processos" [ref=e72] [cursor=pointer]:
+                  - /url: /meus-processos
+              - listitem [ref=e73]:
+                - link "Como Contestar" [ref=e74] [cursor=pointer]:
+                  - /url: "#"
+              - listitem [ref=e75]:
+                - link "Perguntas Frequentes" [ref=e76] [cursor=pointer]:
+                  - /url: "#"
+              - listitem [ref=e77]:
+                - link "Política de Privacidade" [ref=e78] [cursor=pointer]:
+                  - /url: "#"
+          - generic [ref=e79]:
+            - heading "Contato" [level=3] [ref=e80]
+            - list [ref=e81]:
+              - listitem [ref=e82]:
+                - img [ref=e83]
+                - link "contato@axion.com.br" [ref=e86] [cursor=pointer]:
+                  - /url: mailto:contato@axion.com.br
+              - listitem [ref=e87]:
+                - img [ref=e88]
+                - link "(81) 99999-9999" [ref=e90] [cursor=pointer]:
+                  - /url: tel:+5581999999999
+              - listitem [ref=e91]:
+                - img [ref=e92]
+                - generic [ref=e95]: Recife, PE - Brasil
+        - generic [ref=e96]:
+          - paragraph [ref=e97]: © 2026 Axion Tecnologia. Todos os direitos reservados.
+          - paragraph [ref=e98]: LGPD Compliant | Dados protegidos por criptografia AES-256
+  - generic [ref=e99]:
+    - img [ref=e101]
+    - button "Open Tanstack query devtools" [ref=e149] [cursor=pointer]:
+      - img [ref=e150]
+```
+
+# Test source
+
+```ts
+  10  |     // Verificar título
+  11  |     await expect(page).toHaveTitle(/Portal do Cidadão/);
+  12  |     
+  13  |     // Verificar header
+  14  |     await expect(page.locator('header')).toBeVisible();
+  15  |     
+  16  |     // Verificar formulário de consulta
+  17  |     await expect(page.getByText('Consultar Infrações')).toBeVisible();
+  18  |   });
+  19  | 
+  20  |   test('deve exibir validação de CPF inválido', async ({ page }) => {
+  21  |     await page.goto('/');
+  22  |     
+  23  |     // Selecionar tipo CPF (já é default)
+  24  |     // Preencher CPF inválido
+  25  |     await page.fill('input[type="text"]', '12345678900');
+  26  |     
+  27  |     // Clicar em consultar
+  28  |     await page.click('button:has-text("Consultar Infrações")');
+  29  |     
+  30  |     // Verificar mensagem de erro (pode ser toast ou inline)
+  31  |     // Ajustar seletor conforme implementação
+  32  |     await expect(page.locator('text=/CPF inválido|Formato inválido/')).toBeVisible({ timeout: 5000 });
+  33  |   });
+  34  | 
+  35  |   test('deve consultar por CPF válido', async ({ page }) => {
+  36  |     await page.goto('/');
+  37  |     
+  38  |     // Preencher CPF válido (com dígitos verificadores corretos)
+  39  |     await page.fill('input[type="text"]', '123.456.789-09');
+  40  |     
+  41  |     // Aguardar reCAPTCHA carregar
+  42  |     await page.waitForTimeout(2000);
+  43  |     
+  44  |     // Clicar em consultar
+  45  |     await page.click('button:has-text("Consultar Infrações")');
+  46  |     
+  47  |     // Aguardar navegação ou resposta
+  48  |     await page.waitForURL('**/resultados', { timeout: 15000 }).catch(() => {
+  49  |       // Pode não redirecionar se não encontrar infrações
+  50  |     });
+  51  |     
+  52  |     // Verificar se está na página de resultados ou se exibe "nenhuma infração"
+  53  |     const hasResultados = await page.url().includes('/resultados');
+  54  |     const hasToast = await page.locator('text=/Nenhuma infração|Erro/').isVisible({ timeout: 5000 }).catch(() => false);
+  55  |     
+  56  |     expect(hasResultados || hasToast).toBeTruthy();
+  57  |   });
+  58  | 
+  59  |   test('deve consultar por placa', async ({ page }) => {
+  60  |     await page.goto('/');
+  61  |     
+  62  |     // Selecionar tipo placa
+  63  |     await page.click('button:has-text("Por Placa")');
+  64  |     
+  65  |     // Verificar que o placeholder mudou
+  66  |     await expect(page.locator('input[type="text"]')).toHaveAttribute('placeholder', /ABC-1234/);
+  67  |     
+  68  |     // Preencher placa
+  69  |     await page.fill('input[type="text"]', 'ABC-1234');
+  70  |     
+  71  |     // Aguardar reCAPTCHA
+  72  |     await page.waitForTimeout(2000);
+  73  |     
+  74  |     // Clicar em consultar
+  75  |     await page.click('button:has-text("Consultar Infrações")');
+  76  |     
+  77  |     // Aguardar resposta
+  78  |     await page.waitForTimeout(3000);
+  79  |     
+  80  |     // Verificar navegação ou toast
+  81  |     const currentUrl = page.url();
+  82  |     expect(currentUrl).toMatch(/\/(resultados)?|\/$/);
+  83  |   });
+  84  | 
+  85  |   test('deve alternar entre CPF e Placa', async ({ page }) => {
+  86  |     await page.goto('/');
+  87  |     
+  88  |     // Inicialmente CPF
+  89  |     await expect(page.locator('button:has-text("Por CPF")')).toHaveClass(/border-primary-600|bg-primary-50/);
+  90  |     
+  91  |     // Clicar em Placa
+  92  |     await page.click('button:has-text("Por Placa")');
+  93  |     
+  94  |     // Verificar que Placa está selecionado
+  95  |     await expect(page.locator('button:has-text("Por Placa")')).toHaveClass(/border-primary-600|bg-primary-50/);
+  96  |     
+  97  |     // Verificar que input foi limpo
+  98  |     await expect(page.locator('input[type="text"]')).toHaveValue('');
+  99  |   });
+  100 | });
+  101 | 
+  102 | /**
+  103 |  * Testes E2E - Fluxo de Registro e Login
+  104 |  */
+  105 | test.describe('Autenticação (Registro e Login)', () => {
+  106 |   test('deve carregar página de login', async ({ page }) => {
+  107 |     await page.goto('/login');
+  108 |     
+  109 |     // Verificar título
+> 110 |     await expect(page.getByText('Portal do Cidadão')).toBeVisible();
+      |                                                       ^ Error: expect(locator).toBeVisible() failed
+  111 |     
+  112 |     // Verificar tabs
+  113 |     await expect(page.getByText('Entrar')).toBeVisible();
+  114 |     await expect(page.getByText('Registrar')).toBeVisible();
+  115 |   });
+  116 | 
+  117 |   test('deve exibir validação de campos obrigatórios no login', async ({ page }) => {
+  118 |     await page.goto('/login');
+  119 |     
+  120 |     // Tentar submeter sem preencher
+  121 |     await page.click('button:has-text("Entrar")');
+  122 |     
+  123 |     // Verificar mensagens de erro
+  124 |     await expect(page.locator('text=/obrigatório|inválido/i')).toBeVisible({ timeout: 2000 });
+  125 |   });
+  126 | 
+  127 |   test('deve exibir validação de senha fraca no registro', async ({ page }) => {
+  128 |     await page.goto('/login');
+  129 |     
+  130 |     // Ir para aba Registrar
+  131 |     await page.click('button:has-text("Registrar")');
+  132 |     
+  133 |     // Preencher CPF
+  134 |     await page.locator('input[type="text"]').first().fill('123.456.789-09');
+  135 |     
+  136 |     // Preencher nome
+  137 |     const nomeInput = page.locator('input[type="text"]').nth(1);
+  138 |     await nomeInput.fill('Teste User');
+  139 |     
+  140 |     // Preencher email
+  141 |     await page.fill('input[type="email"]', 'teste@example.com');
+  142 |     
+  143 |     // Preencher senha fraca
+  144 |     const senhaInput = page.locator('input[type="password"]').first();
+  145 |     await senhaInput.fill('123');
+  146 |     
+  147 |     // Verificar indicador de força
+  148 |     await expect(page.locator('text=/Fraca|fraca/i')).toBeVisible({ timeout: 2000 });
+  149 |   });
+  150 | 
+  151 |   test('deve mostrar/ocultar senha', async ({ page }) => {
+  152 |     await page.goto('/login');
+  153 |     
+  154 |     // Verificar que senha está oculta
+  155 |     const senhaInput = page.locator('input[type="password"]').first();
+  156 |     await expect(senhaInput).toBeVisible();
+  157 |     
+  158 |     // Clicar no botão de mostrar
+  159 |     await page.click('button[type="button"]:near(input[type="password"])').catch(() => {
+  160 |       // Se não encontrar, tentar outro seletor
+  161 |       page.click('svg:has-text("Eye")').catch(() => {});
+  162 |     });
+  163 |     
+  164 |     // Verificar que mudou para text
+  165 |     await page.waitForTimeout(500);
+  166 |     const visibleInput = page.locator('input[type="text"]:near(button)');
+  167 |     const isVisible = await visibleInput.count() > 0;
+  168 |     
+  169 |     expect(isVisible).toBeTruthy();
+  170 |   });
+  171 | });
+  172 | 
+  173 | /**
+  174 |  * Testes E2E - Página de Resultados
+  175 |  */
+  176 | test.describe('Página de Resultados', () => {
+  177 |   test('deve exibir mensagem quando não há infrações', async ({ page }) => {
+  178 |     // Navegar diretamente (simular estado)
+  179 |     await page.goto('/resultados', { waitUntil: 'networkidle' });
+  180 |     
+  181 |     // Verificar redirecionamento ou mensagem
+  182 |     const currentUrl = page.url();
+  183 |     
+  184 |     if (currentUrl.includes('/resultados')) {
+  185 |       // Se ficou na página, deve mostrar mensagem
+  186 |       await expect(page.locator('text=/Nenhuma infração|Nova consulta/i')).toBeVisible({ timeout: 5000 });
+  187 |     } else {
+  188 |       // Se redirecionou para home
+  189 |       expect(currentUrl).toContain('/');
+  190 |     }
+  191 |   });
+  192 | 
+  193 |   test('deve permitir voltar para home', async ({ page }) => {
+  194 |     // Tentar acessar resultados
+  195 |     await page.goto('/resultados');
+  196 |     
+  197 |     // Se redirecionou, testar navegação não faz sentido
+  198 |     if (page.url().includes('/resultados')) {
+  199 |       // Clicar em "Nova consulta" ou "Voltar"
+  200 |       await page.click('a:has-text("Nova consulta")').catch(() => {
+  201 |         page.click('a:has-text("Voltar")').catch(() => {});
+  202 |       });
+  203 |       
+  204 |       // Verificar que voltou para home
+  205 |       await page.waitForURL('/', { timeout: 5000 });
+  206 |       expect(page.url()).toMatch(/\/$|\/$/);
+  207 |     }
+  208 |   });
+  209 | });
+  210 | 
+```
