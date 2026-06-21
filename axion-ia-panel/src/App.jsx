@@ -46,6 +46,8 @@ import ResultadosInfracoes from "./pages/Ferramentas/ResultadosInfracoes.jsx";
 import AnalisePesagem from "./pages/Ferramentas/AnalisePesagem.jsx";
 import ConsultaCruzamentos from "./pages/Ferramentas/ConsultaCruzamentos.jsx";
 import QualityDashboard from "./pages/Quality/Dashboard.jsx";
+import ChamadosSites from "./pages/ChamadosSites.jsx";
+import SlaCompliance from "./pages/SlaCompliance.jsx";
 import "./App.css";
 import "./pages/docusaurus-compat.css";
 
@@ -87,6 +89,11 @@ const PAGE_INFO = {
   "/ferramentas/pesagem": { title: "Análise de Pesagem AxTon", subtitle: "Ferramenta de suporte — Consulte pesagens veiculares", Icon: Scale },
   "/ferramentas/cruzamentos": { title: "Monitoramento AxCross", subtitle: "Ferramenta de suporte — Consulte cruzamentos e alertas", Icon: Navigation },
   "/quality": { title: "Quality Engineering Platform", subtitle: "Plataforma de análise automatizada de qualidade, segurança e performance", Icon: Shield },
+  "/mapa-operacoes": { title: "Mapa de Operações", subtitle: "Visão completa dos sites e processos operacionais", Icon: Map },
+  "/painel-processos": { title: "Painel de Processos", subtitle: "Sites, credenciais e métricas operacionais", Icon: PieChart },
+  "/intelligence-dashboard": { title: "Intelligence Dashboard", subtitle: "Dashboard inteligente com analytics e métricas avançadas", Icon: PieChart },
+  "/chamados-sites": { title: "Chamados por Site", subtitle: "Gestão operacional de chamados por contrato/site", Icon: Headphones },
+  "/sla-compliance": { title: "SLA Compliance", subtitle: "Monitoramento e métricas de SLA por contrato", Icon: Activity },
 };
 
 const MENU_SECTIONS = [
@@ -95,6 +102,9 @@ const MENU_SECTIONS = [
     items: [
       { to: "/operations-hub", icon: Brain, label: "Operations Hub" },
       { to: "/dashboard", icon: LayoutDashboard, label: "Dashboard" },
+      { to: "/intelligence-dashboard", icon: PieChart, label: "Intelligence Dashboard" },
+      { to: "/mapa-operacoes", icon: Map, label: "Mapa de Operações" },
+      { to: "/painel-processos", icon: PieChart, label: "Painel de Processos" },
       { to: "/analise", icon: ScanSearch, label: "Análise de Sites" },
     ]
   },
@@ -104,6 +114,7 @@ const MENU_SECTIONS = [
       { to: "/chat", icon: Bot, label: "Chat IA" },
       { to: "/whatsapp", icon: MessageCircle, label: "WhatsApp" },
       { to: "/helpdesk", icon: Headphones, label: "Helpdesk" },
+      { to: "/chamados-sites", icon: Headphones, label: "Chamados Sites" },
     ]
   },
   {
@@ -119,16 +130,27 @@ const MENU_SECTIONS = [
     items: [
       { to: "/search-hub", icon: Search, label: "Search Hub" },
       { to: "/diagnostic-hub", icon: Activity, label: "Diagnostic Hub" },
+      { to: "/analise-imagens", icon: Camera, label: "Análise de Imagens" },
     ]
   },
   {
-    group: "Qualidade",
+    group: "Validação",
+    items: [
+      { to: "/validation-hub", icon: TestTube, label: "Validation Hub" },
+      { to: "/validation-manager", icon: TestTube, label: "Validation Manager" },
+      { to: "/visual-validation", icon: Eye, label: "Validação Visual" },
+    ]
+  },
+  {
+    group: "Qualidade & Relatórios",
     items: [
       { to: "/quality", icon: Shield, label: "Quality Platform" },
       { to: "/duplicidade", icon: Shield, label: "Auditoria Duplicidades" },
       { to: "/varco", icon: Radio, label: "VARCO Monitor" },
+      { to: "/diagnostico-medicao", icon: Activity, label: "Diagnóstico Medição" },
       { to: "/relatorio-contrato", icon: ClipboardList, label: "Relatório por Contrato" },
       { to: "/relatorio-fluxo", icon: BarChart3, label: "Relatório de Fluxo" },
+      { to: "/sla-compliance", icon: Activity, label: "SLA Compliance" },
     ]
   },
   {
@@ -291,6 +313,8 @@ function AppContent() {
           <Route path="/ferramentas/pesagem" element={<AnalisePesagem />} />
           <Route path="/ferramentas/cruzamentos" element={<ConsultaCruzamentos />} />
           <Route path="/quality" element={<QualityDashboard />} />
+          <Route path="/chamados-sites" element={<ChamadosSites />} />
+          <Route path="/sla-compliance" element={<SlaCompliance />} />
           <Route path="/config" element={<Configuracoes />} />
 
 
