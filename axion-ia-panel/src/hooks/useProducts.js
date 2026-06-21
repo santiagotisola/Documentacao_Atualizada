@@ -127,6 +127,22 @@ export function useAxHubHeartbeat(options = {}) {
   });
 }
 
+/**
+ * Hook para listar tabelas do banco AxHub
+ * @param {Object} options - Opções do useQuery
+ */
+export function useAxHubTabelas(options = {}) {
+  return useQuery({
+    queryKey: [...productKeys.axhub(), 'tabelas'],
+    queryFn: async () => {
+      const { data } = await api.get('/axhub/tabelas');
+      return data.tabelas;
+    },
+    staleTime: 300_000, // 5 minutos (tabelas mudam raramente)
+    ...options
+  });
+}
+
 // ═══════════════════════════════════════════════════════════════════
 // AXTON HOOKS
 // ═══════════════════════════════════════════════════════════════════
