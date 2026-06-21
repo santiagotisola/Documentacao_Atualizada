@@ -9,7 +9,6 @@
  */
 
 import React from 'react';
-import PropTypes from 'prop-types';
 import './StatusBadge.css';
 
 /**
@@ -57,16 +56,6 @@ export default function StatusBadge({
     </span>
   );
 }
-
-StatusBadge.propTypes = {
-  label: PropTypes.string.isRequired,
-  variant: PropTypes.oneOf(['success', 'warning', 'error', 'info', 'neutral', 'active', 'inactive']),
-  size: PropTypes.oneOf(['small', 'medium', 'large']),
-  icon: PropTypes.node,
-  outlined: PropTypes.bool,
-  onClick: PropTypes.func,
-  className: PropTypes.string
-};
 
 // ═══════════════════════════════════════════════════════════════════
 // HELPER FUNCTIONS (para uso comum)

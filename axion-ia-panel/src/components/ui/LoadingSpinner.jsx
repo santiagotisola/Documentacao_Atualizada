@@ -9,7 +9,6 @@
  */
 
 import React from 'react';
-import PropTypes from 'prop-types';
 import './LoadingSpinner.css';
 
 /**
@@ -58,14 +57,6 @@ export default function LoadingSpinner({
   return <div className={spinnerClasses}>{spinnerContent}</div>;
 }
 
-LoadingSpinner.propTypes = {
-  size: PropTypes.oneOf(['small', 'medium', 'large']),
-  color: PropTypes.string,
-  text: PropTypes.string,
-  fullScreen: PropTypes.bool,
-  className: PropTypes.string
-};
-
 // ═══════════════════════════════════════════════════════════════════
 // HELPER COMPONENTS
 // ═══════════════════════════════════════════════════════════════════
@@ -81,11 +72,6 @@ export function LoadingCard({ text = 'Carregando...', height = '200px' }) {
   );
 }
 
-LoadingCard.propTypes = {
-  text: PropTypes.string,
-  height: PropTypes.string
-};
-
 /**
  * Loading state para botões
  */
@@ -97,7 +83,3 @@ export function LoadingButton({ text = 'Aguarde...' }) {
     </span>
   );
 }
-
-LoadingButton.propTypes = {
-  text: PropTypes.string
-};

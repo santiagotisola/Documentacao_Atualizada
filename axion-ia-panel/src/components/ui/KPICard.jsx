@@ -9,7 +9,6 @@
  */
 
 import React from 'react';
-import PropTypes from 'prop-types';
 import './KPICard.css';
 
 /**
@@ -80,16 +79,3 @@ export default function KPICard({
     </div>
   );
 }
-
-KPICard.propTypes = {
-  icon: PropTypes.node.isRequired,
-  label: PropTypes.string.isRequired,
-  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
-  sublabel: PropTypes.string,
-  color: PropTypes.string,
-  trend: PropTypes.oneOf(['up', 'down', 'neutral']),
-  trendValue: PropTypes.string,
-  size: PropTypes.oneOf(['small', 'medium', 'large']),
-  onClick: PropTypes.func,
-  className: PropTypes.string
-};

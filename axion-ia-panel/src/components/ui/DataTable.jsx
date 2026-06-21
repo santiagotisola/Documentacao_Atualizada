@@ -9,7 +9,6 @@
  */
 
 import React, { useState } from 'react';
-import PropTypes from 'prop-types';
 import LoadingSpinner from './LoadingSpinner';
 import './DataTable.css';
 
@@ -155,22 +154,3 @@ export default function DataTable({
     </div>
   );
 }
-
-DataTable.propTypes = {
-  columns: PropTypes.arrayOf(PropTypes.shape({
-    key: PropTypes.string.isRequired,
-    header: PropTypes.string.isRequired,
-    width: PropTypes.string,
-    align: PropTypes.oneOf(['left', 'center', 'right']),
-    sortable: PropTypes.bool,
-    render: PropTypes.func
-  })).isRequired,
-  data: PropTypes.array.isRequired,
-  onRowClick: PropTypes.func,
-  loading: PropTypes.bool,
-  emptyMessage: PropTypes.string,
-  sortable: PropTypes.bool,
-  striped: PropTypes.bool,
-  hoverable: PropTypes.bool,
-  className: PropTypes.string
-};
