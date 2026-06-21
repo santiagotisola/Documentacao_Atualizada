@@ -350,6 +350,29 @@ export default function Helpdesk() {
         .sort((a, b) => { const { campo, asc } = slaOrdenacao; const va = a[campo] ?? -Infinity; const vb = b[campo] ?? -Infinity; if (va < vb) return asc ? -1 : 1; if (va > vb) return asc ? 1 : -1; return 0; })
     : [];
 
+  // ── Calcular Ranking de Sites por Volume ──────────────────────────────────
+  const chamadosRanking = slaDados
+    ? Object.values(
+        slaDados.tickets.reduce((acc, ticket) => {
+          const siteId = ticket.site || ticket.siteId || "outros";
+          const siteNome = ticket.siteNome || siteId;
+          if (!acc[siteId]) {
+            acc[siteId] = { siteId, siteNome, total: 0, met: 0, breached: 0 };
+          }
+          acc[siteId].total++;
+          if (ticket.responseSla === "Met" && ticket.resolutionSla === "Met") {
+            acc[siteId].met++;
+          }
+          if (ticket.responseSla === "Breached" || ticket.resolutionSla === "Breached") {
+            acc[siteId].breached++;
+          }
+          return acc;
+        }, {})
+      )
+        .sort((a, b) => b.total - a.total)
+        .slice(0, 15)
+    : [];
+
   function toggleSlaOrdem(campo) { setSlaOrdenacao(o => ({ campo, asc: o.campo === campo ? !o.asc : true })); }
 
   const slaTotais = slaDados?.totais;
@@ -577,6 +600,55 @@ export default function Helpdesk() {
                   <DonutChart met={slaTotais.resolution.met} breached={slaTotais.resolution.breached} naoAvaliados={slaTotais.total - slaTotais.resolution.avaliados} label="Resolução" />
                 </div>
               </div>
+
+              {/* Ranking de Sites por Volume de Chamados */}
+              {chamadosRanking.length > 0 && (
+                <div style={{ background: "#1e293b", border: "1px solid #334155", borderRadius: 10, padding: "16px 20px", marginBottom: 24 }}>
+                  <div style={{ fontSize: 14, color: "#94a3b8", fontWeight: 700, marginBottom: 12 }}>🏢 RANKING DE SITES POR VOLUME</div>
+                  <div style={{ overflowX: "auto" }}>
+                    <table style={{ borderCollapse: "collapse", width: "100%", fontSize: 12 }}>
+                      <thead>
+                        <tr style={{ background: "#0f172a" }}>
+                          <th style={{ ...slaStyles.th, width: "50%" }}>Site</th>
+                          <th style={{ ...slaStyles.th, textAlign: "center" }}>Total</th>
+                          <th style={{ ...slaStyles.th, textAlign: "center" }}>Breached</th>
+                          <th style={{ ...slaStyles.th, textAlign: "center" }}>Compliance</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {chamadosRanking.map((site, i) => {
+                          const compliance = site.total > 0 ? Math.round((site.met / site.total) * 100) : 0;
+                          return (
+                            <tr key={i} style={{ background: i % 2 === 0 ? "#0f172a" : "#111827" }}>
+                              <td style={slaStyles.td}><strong>{site.siteNome || site.siteId || "N/A"}</strong></td>
+                              <td style={{ ...slaStyles.td, textAlign: "center" }}>{site.total}</td>
+                              <td style={{ ...slaStyles.td, textAlign: "center" }}>
+                                {site.breached > 0 ? (
+                                  <span style={{ color: "#ef4444", fontWeight: 700 }}>{site.breached}</span>
+                                ) : (
+                                  <span style={{ color: "#94a3b8" }}>0</span>
+                                )}
+                              </td>
+                              <td style={{ ...slaStyles.td, textAlign: "center" }}>
+                                <span style={{ 
+                                  padding: "2px 10px", 
+                                  borderRadius: 12, 
+                                  fontSize: 11, 
+                                  fontWeight: 700,
+                                  background: compliance >= 80 ? "#14532d" : compliance >= 60 ? "#854d0e" : "#450a0a",
+                                  color: compliance >= 80 ? "#4ade80" : compliance >= 60 ? "#fbbf24" : "#f87171"
+                                }}>
+                                  {compliance}%
+                                </span>
+                              </td>
+                            </tr>
+                          );
+                        })}
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              )}
 
               {/* Filtro rápido tabela */}
               <div style={{ display: "flex", gap: 8, marginBottom: 12 }}>

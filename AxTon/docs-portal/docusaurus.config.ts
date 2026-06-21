@@ -62,10 +62,6 @@ const config: Config = {
     },
     navbar: {
       title: 'AxTon',
-      logo: {
-        alt: 'AxTon Logo',
-        src: 'img/axion-logo.png',
-      },
       items: [
         {
           type: 'docSidebar',

@@ -59,10 +59,6 @@ const config: Config = {
     },
     navbar: {
       title: 'AxHub',
-      logo: {
-        alt: 'AxHub Logo',
-        src: 'img/axion-logo.png',
-      },
       items: [
         {
           type: 'docSidebar',

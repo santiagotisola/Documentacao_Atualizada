@@ -1,4 +1,4 @@
-﻿# iniciar.ps1 - Liga todos os servicos do projeto Axion.Docs
+﻿# iniciar.ps1 - Liga todos os servicos do projeto Axion.Docs em um ÚNICO terminal
 $ROOT = Split-Path -Parent $MyInvocation.MyCommand.Path
 
 Write-Host "=== AXION DOCS - Iniciando servicos ===" -ForegroundColor Cyan
@@ -12,53 +12,50 @@ foreach ($p in $portas) {
 Start-Sleep -Seconds 2
 Write-Host "[OK] Portas limpas" -ForegroundColor Green
 
-# Função auxiliar: inicia processo em nova janela PowerShell visível
-function Start-Servico {
-    param([string]$Titulo, [string]$Diretorio, [string]$Comando)
-    Start-Process "powershell.exe" -ArgumentList "-NoExit", "-Command", "Set-Location '$Diretorio'; `$host.UI.RawUI.WindowTitle = '$Titulo'; $Comando" -WorkingDirectory $Diretorio
-}
+# Salva PIDs em arquivo para o encerrar.ps1
+$pidFile = Join-Path $ROOT ".pids.txt"
+if (Test-Path $pidFile) { Remove-Item $pidFile }
 
-$d1 = Join-Path $ROOT "axion-ia-api"
-Start-Servico -Titulo "axion-ia-api :3100" -Diretorio $d1 -Comando "node --env-file=.env src/app.js"
-Write-Host "[..] axion-ia-api :3100 — aguardando resposta..." -ForegroundColor Yellow
+# Inicia cada serviço como Job
+Write-Host "`nIniciando jobs..." -ForegroundColor Cyan
 
-# Aguarda a API responder de verdade (até 30 tentativas de 1s = 30s)
-$apiOk = $false
-for ($i = 1; $i -le 30; $i++) {
-    Start-Sleep -Seconds 1
-    try {
-        $r = Invoke-WebRequest -Uri "http://localhost:3100/" -UseBasicParsing -TimeoutSec 2 -ErrorAction Stop
-        if ($r.StatusCode -eq 200) { $apiOk = $true; break }
-    } catch { }
-    Write-Host "   $i/30..." -ForegroundColor DarkGray -NoNewline
-}
-Write-Host ""
-if ($apiOk) {
-    Write-Host "[OK] axion-ia-api :3100 respondendo" -ForegroundColor Green
-} else {
-    Write-Host "[!!] axion-ia-api nao respondeu em 30s — continuando mesmo assim" -ForegroundColor Red
-}
+$job1 = Start-Job -ScriptBlock {
+    Set-Location $using:ROOT\axion-ia-api
+    node --env-file=.env src/app.js
+} -Name "axion-ia-api"
+Write-Host "[Job $($job1.Id)] axion-ia-api :3100" -ForegroundColor Yellow
 
-$d2 = Join-Path $ROOT "axion-ia-panel"
-Start-Servico -Titulo "axion-ia-panel :3017" -Diretorio $d2 -Comando "npm run dev"
-Write-Host "[..] axion-ia-panel :3017" -ForegroundColor Yellow
+$job2 = Start-Job -ScriptBlock {
+    Set-Location $using:ROOT\axion-ia-panel
+    npm run dev
+} -Name "axion-ia-panel"
+Write-Host "[Job $($job2.Id)] axion-ia-panel :3017" -ForegroundColor Yellow
 
-$d3 = Join-Path $ROOT "AxHub\docs-portal"
-Start-Servico -Titulo "AxHub.Docs :3010" -Diretorio $d3 -Comando "npm run serve -- --port 3010"
-Write-Host "[..] AxHub.Docs :3010" -ForegroundColor Yellow
+$job3 = Start-Job -ScriptBlock {
+    Set-Location "$using:ROOT\AxHub\docs-portal"
+    npm run serve -- --port 3010
+} -Name "AxHub.Docs"
+Write-Host "[Job $($job3.Id)] AxHub.Docs :3010" -ForegroundColor Yellow
 
-$d4 = Join-Path $ROOT "AxTon\docs-portal"
-Start-Servico -Titulo "AxTon.Docs :3011" -Diretorio $d4 -Comando "npm run serve -- --port 3011"
-Write-Host "[..] AxTon.Docs :3011" -ForegroundColor Yellow
+$job4 = Start-Job -ScriptBlock {
+    Set-Location "$using:ROOT\AxTon\docs-portal"
+    npm run serve -- --port 3011 2>&1 | Out-Null  # Silencia erros conhecidos
+} -Name "AxTon.Docs"
+Write-Host "[Job $($job4.Id)] AxTon.Docs :3011" -ForegroundColor Yellow
 
-$d5 = Join-Path $ROOT "AxCross\docs-portal"
-Start-Servico -Titulo "AxCross.Docs :3012" -Diretorio $d5 -Comando "npm run serve -- --port 3012"
-Write-Host "[..] AxCross.Docs :3012" -ForegroundColor Yellow
+$job5 = Start-Job -ScriptBlock {
+    Set-Location "$using:ROOT\AxCross\docs-portal"
+    npm run serve -- --port 3012
+} -Name "AxCross.Docs"
+Write-Host "[Job $($job5.Id)] AxCross.Docs :3012" -ForegroundColor Yellow
 
-Write-Host "Aguardando 20s..." -ForegroundColor Cyan
+# Salva IDs dos jobs
+"$($job1.Id),$($job2.Id),$($job3.Id),$($job4.Id),$($job5.Id)" | Out-File $pidFile
+
+Write-Host "`nAguardando inicializacao..." -ForegroundColor Cyan
 Start-Sleep -Seconds 20
 
-Write-Host "--- STATUS ---" -ForegroundColor Cyan
+Write-Host "`n--- STATUS ---" -ForegroundColor Cyan
 $urls = @(
     "http://localhost:3100/api/doc/secoes/axhub|axion-ia-api  :3100",
     "http://localhost:3017/|axion-ia-panel :3017",
@@ -78,15 +75,36 @@ foreach ($item in $urls) {
     }
 }
 
-Write-Host "Abrindo no navegador..." -ForegroundColor Cyan
+Write-Host "`nAbrindo no navegador..." -ForegroundColor Cyan
 Start-Sleep -Seconds 2
 Start-Process "http://localhost:3017/helpdesk"
 Start-Sleep -Seconds 1
 Start-Process "http://localhost:3010/AxHub.Docs/"
 Start-Sleep -Seconds 1
-Start-Process "http://localhost:3011/AxTon.Docs/"
-Start-Sleep -Seconds 1
 Start-Process "http://localhost:3012/AxCross.Docs/"
 
-Write-Host "=== Todos iniciados! Para encerrar: encerrar.ps1 ===" -ForegroundColor Green
-pause
+Write-Host "`n=== Servicos rodando em background ===" -ForegroundColor Green
+Write-Host "Para ver logs: Get-Job | Receive-Job" -ForegroundColor Cyan
+Write-Host "Para encerrar: .\encerrar.ps1 ou Ctrl+C" -ForegroundColor Cyan
+Write-Host "`nJobs ativos:" -ForegroundColor Yellow
+Get-Job | Format-Table Id, Name, State -AutoSize
+
+Write-Host "`nPressione Ctrl+C para encerrar ou feche esta janela..." -ForegroundColor White
+# Mantém o script rodando
+try {
+    while ($true) {
+        Start-Sleep -Seconds 5
+        # Verifica se algum job morreu
+        $deadJobs = Get-Job | Where-Object { $_.State -eq 'Failed' -or $_.State -eq 'Stopped' }
+        if ($deadJobs) {
+            Write-Host "`n[ALERTA] Jobs com problema:" -ForegroundColor Red
+            $deadJobs | Format-Table Id, Name, State -AutoSize
+        }
+    }
+} finally {
+    Write-Host "`nEncerrando jobs..." -ForegroundColor Yellow
+    Get-Job | Stop-Job
+    Get-Job | Remove-Job
+    if (Test-Path $pidFile) { Remove-Item $pidFile }
+    Write-Host "[OK] Encerrado" -ForegroundColor Green
+}

@@ -223,4 +223,31 @@ export const getUser = () => {
   return user ? JSON.parse(user) : null
 }
 
-export default api
+// Exportação default com todos os métodos
+const apiService = {
+  // Axios instance
+  axios: api,
+  
+  // Consulta
+  consultarInfracoes,
+  
+  // Contestação
+  criarContestacao,
+  listarContestacoes,
+  buscarContestacao,
+  
+  // Upload
+  uploadArquivo,
+  
+  // Chat
+  enviarMensagemChat,
+  
+  // Autenticação
+  login,
+  registrar,
+  logout,
+  isAuthenticated,
+  getUser
+}
+
+export default apiService

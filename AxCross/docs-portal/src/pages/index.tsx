@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Layout from '@theme/Layout';
 import Link from '@docusaurus/Link';
 import styles from './index.module.css';
@@ -42,6 +42,14 @@ function ServiceCard({ icone, titulo, desc, link, cor }) {
 }
 
 export default function Home(): React.JSX.Element {
+  const [accessUrl, setAccessUrl] = useState('');
+
+  const handleAccessSystem = () => {
+    if (accessUrl) {
+      window.open(accessUrl.startsWith('http') ? accessUrl : `https://${accessUrl}`, '_blank');
+    }
+  };
+
   return (
     <Layout title="Início" description="AxCross — Manual do Usuário">
       <header className={styles.hero}>
@@ -53,8 +61,28 @@ export default function Home(): React.JSX.Element {
           </p>
           <div className={styles.heroBtns}>
             <Link to="/docs/" className={`button button--lg ${styles.btnPrimary}`}>📖 Manual Completo</Link>
-            <a href="https://economia.axcross.axion.ws" target="_blank" rel="noopener noreferrer" className={`button button--lg ${styles.btnAccess}`}>🖥️ Acessar Sistema</a>
-            <Link to="/docs/primeiros-passos/login" className={`button button--lg button--outline ${styles.btnOutline}`}>🚀 Primeiros Passos</Link>
+            <Link to="/docs/primeiros-passos" className={`button button--lg button--outline ${styles.btnSecondary}`}>🚀 Primeiros Passos</Link>
+          </div>
+          <div style={{ marginTop: '1.5rem', maxWidth: '500px', marginLeft: 'auto', marginRight: 'auto' }}>
+            <div style={{ display: 'flex', gap: '0.5rem' }}>
+              <input 
+                type="text"
+                placeholder="Digite a URL do sistema (ex: economia.axcross.axion.ws)"
+                value={accessUrl}
+                onChange={e => setAccessUrl(e.target.value)}
+                onKeyPress={e => { if (e.key === 'Enter') handleAccessSystem(); }}
+                style={{ flex: 1, padding: '0.75rem 1rem', border: '2px solid #e67e22', borderRadius: '8px', fontSize: '1rem', outline: 'none' }}
+              />
+              <button 
+                onClick={handleAccessSystem}
+                disabled={!accessUrl}
+                style={{ padding: '0.75rem 1.5rem', backgroundColor: accessUrl ? '#e67e22' : '#95a5a6', color: 'white', border: 'none', borderRadius: '8px', fontSize: '1rem', fontWeight: '600', cursor: accessUrl ? 'pointer' : 'not-allowed', transition: 'all 0.2s' }}
+                onMouseEnter={e => { if (accessUrl) e.currentTarget.style.backgroundColor = '#d35400'; }}
+                onMouseLeave={e => { if (accessUrl) e.currentTarget.style.backgroundColor = '#e67e22'; }}
+              >
+                🖥️ Acessar
+              </button>
+            </div>
           </div>
         </div>
       </header>

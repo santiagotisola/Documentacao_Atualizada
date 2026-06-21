@@ -28,6 +28,7 @@ import MapaOperacoes from "./pages/MapaOperacoes.jsx";
 import PipelineEditais from "./pages/PipelineEditais.jsx";
 import AnalisesSites from "./pages/AnalisesSites.jsx";
 import IntelligenceHub from "./pages/IntelligenceHub.jsx";
+import OperationsHub from "./pages/OperationsHub.jsx";
 import PainelProcessos from "./pages/PainelProcessos.jsx";
 import VarcoMonitor from "./pages/VarcoMonitor.jsx";
 import DuplicidadeInfracoes from "./pages/DuplicidadeInfracoes.jsx";
@@ -35,12 +36,16 @@ import IntelligenceDashboard from "./pages/IntelligenceDashboard.jsx";
 import DiagnosticoMedicao from "./pages/DiagnosticoMedicao.jsx";
 import ValidationManager from "./pages/ValidationManager.jsx";
 import VisualValidationManager from "./pages/VisualValidationManager.jsx";
+import ValidationHub from "./pages/ValidationHub.jsx";
+import SearchHub from "./pages/SearchHub.jsx";
+import DiagnosticHub from "./pages/DiagnosticHub.jsx";
 import HomePage from "./pages/HomePage.jsx";
 import "./App.css";
 import "./pages/docusaurus-compat.css";
 
 /* ─── Page metadata for headers ─── */
 const PAGE_INFO = {
+  "/operations-hub": { title: "Operations Hub", subtitle: "Centro de comando operacional — Processos, Métricas e Inteligência", Icon: Brain },
   "/intelligence-hub": { title: "Intelligence Hub", subtitle: "Gerenciador unificado de dados, relatórios e performance", Icon: Brain },
   "/mapa-operacoes": { title: "Mapa de Operações", subtitle: "Ecossistema completo: fluxos, processos, sites e acessos", Icon: Globe },
   "/painel-processos": { title: "Painel de Processos", subtitle: "Sites, credenciais, métricas e processos operacionais", Icon: ClipboardList },
@@ -50,7 +55,10 @@ const PAGE_INFO = {
   "/chat": { title: "Chat IA", subtitle: "Assistente inteligente AxionIA", Icon: Bot },
   "/whatsapp": { title: "WhatsApp", subtitle: "Integração e atendimento via WhatsApp", Icon: MessageCircle },
   "/helpdesk": { title: "Helpdesk", subtitle: "Gestão de tickets e atendimento Jitbit", Icon: Headphones },
+  "/search-hub": { title: "Search Hub", subtitle: "Central unificada de buscas — Sistemas, Imagens e Documentos", Icon: Search },
+  "/diagnostic-hub": { title: "Diagnostic Hub", subtitle: "Central de diagnóstico — Medição, Health, Logs e Queries", Icon: Activity },
   "/analise-imagens": { title: "Análise de Imagens", subtitle: "OCR, validação e qualidade de capturas", Icon: Camera },
+  "/validation-hub": { title: "Validation Hub", subtitle: "Validação unificada (UI + API + Visual) com seleção de sites", Icon: TestTube },
   "/validation-manager": { title: "Gerenciador de Validação", subtitle: "Validação automatizada de sistemas web (UI + API)", Icon: TestTube },
   "/visual-validation": { title: "Validação Visual Completa", subtitle: "CRUD, Screenshots, Ortografia e Dependências", Icon: Eye },
 
@@ -74,8 +82,7 @@ const MENU_SECTIONS = [
   {
     group: "Operação",
     items: [
-      { to: "/intelligence-hub", icon: Brain, label: "Intelligence Hub" },
-      { to: "/mapa-operacoes", icon: Globe, label: "Mapa de Operações" },
+      { to: "/operations-hub", icon: Brain, label: "Operations Hub" },
       { to: "/dashboard", icon: LayoutDashboard, label: "Dashboard" },
       { to: "/analise", icon: ScanSearch, label: "Análise de Sites" },
     ]
@@ -89,12 +96,15 @@ const MENU_SECTIONS = [
     ]
   },
   {
+    group: "Busca & Análise",
+    items: [
+      { to: "/search-hub", icon: Search, label: "Search Hub" },
+      { to: "/diagnostic-hub", icon: Activity, label: "Diagnostic Hub" },
+    ]
+  },
+  {
     group: "Qualidade",
     items: [
-      { to: "/visual-validation", icon: Eye, label: "Validação Visual Completa" },
-      { to: "/validation-manager", icon: TestTube, label: "Validação de Sistemas" },
-      { to: "/analise-imagens", icon: ScanLine, label: "Análise de Imagens" },
-      { to: "/diagnostico-medicao", icon: Activity, label: "Diagnóstico Medição" },
       { to: "/duplicidade", icon: Shield, label: "Auditoria Duplicidades" },
       { to: "/varco", icon: Radio, label: "VARCO Monitor" },
       { to: "/relatorio-contrato", icon: ClipboardList, label: "Relatório por Contrato" },
@@ -112,7 +122,6 @@ const MENU_SECTIONS = [
     items: [
       { to: "/kb", icon: BookMarked, label: "Knowledge Base" },
       { to: "/gerar-doc", icon: FileText, label: "Gerador de Docs" },
-      { to: "/fontes", icon: Search, label: "Fontes de Pesquisa" },
       { to: "/treinamento", icon: GraduationCap, label: "Treinamento" },
       { to: "/planilha-horas", icon: Clock, label: "Planilha de Horas" },
       { to: "/logs", icon: ScrollText, label: "Logs do Sistema" },
@@ -227,6 +236,7 @@ function AppContent() {
       <main className={isHome ? "portal-home" : "page-content"}>
         <Routes>
           <Route path="/" element={<HomePage />} />
+          <Route path="/operations-hub" element={<OperationsHub />} />
           <Route path="/intelligence-hub" element={<IntelligenceHub />} />
           <Route path="/mapa-operacoes" element={<MapaOperacoes />} />
           <Route path="/painel-processos" element={<PainelProcessos />} />
@@ -242,9 +252,13 @@ function AppContent() {
           <Route path="/planilha-horas" element={<PlanilhaHoras />} />
 
           <Route path="/whatsapp" element={<WhatsApp />} />
+          <Route path="/search-hub" element={<SearchHub />} />
+          <Route path="/diagnostic-hub" element={<DiagnosticHub />} />
           <Route path="/analise-imagens" element={<AnaliseImagens />} />
+          <Route path="/validation-hub" element={<ValidationHub />} />
           <Route path="/validation-manager" element={<ValidationManager />} />
           <Route path="/visual-validation" element={<VisualValidationManager />} />
+          <Route path="/fontes" element={<FontesPesquisa />} />
           <Route path="/treinamento" element={<Treinamento />} />
           <Route path="/logs" element={<Logs />} />
           <Route path="/kb" element={<KnowledgeBase />} />

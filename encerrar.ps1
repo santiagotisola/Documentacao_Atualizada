@@ -5,7 +5,16 @@
 Write-Host ""
 Write-Host "Encerrando todos os servicos..." -ForegroundColor Red
 
-$PORTAS = @(3001, 3010, 3011, 3012, 3100)
+# Encerra jobs do PowerShell (se existirem)
+$jobs = Get-Job -ErrorAction SilentlyContinue
+if ($jobs) {
+    Write-Host "  Encerrando jobs PowerShell..." -ForegroundColor Yellow
+    $jobs | Stop-Job
+    $jobs | Remove-Job -Force
+}
+
+# Encerra processos nas portas
+$PORTAS = @(3017, 3010, 3011, 3012, 3100)
 foreach ($p in $PORTAS) {
     $pids = Get-NetTCPConnection -LocalPort $p -State Listen -ErrorAction SilentlyContinue |
             Select-Object -ExpandProperty OwningProcess
@@ -15,8 +24,10 @@ foreach ($p in $PORTAS) {
     }
 }
 
-# Mata qualquer node remanescente
-Get-Process -Name "node" -ErrorAction SilentlyContinue | Stop-Process -Force -ErrorAction SilentlyContinue
+# Remove arquivo de PIDs se existir
+$ROOT = Split-Path -Parent $MyInvocation.MyCommand.Path
+$pidFile = Join-Path $ROOT ".pids.txt"
+if (Test-Path $pidFile) { Remove-Item $pidFile -Force }
 
 Write-Host ""
 Write-Host "[OK] Todos os servicos encerrados." -ForegroundColor Green

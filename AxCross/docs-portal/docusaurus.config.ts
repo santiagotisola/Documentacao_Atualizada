@@ -59,10 +59,6 @@ const config: Config = {
     },
     navbar: {
       title: 'AxCross',
-      logo: {
-        alt: 'AxCross Logo',
-        src: 'img/axion-logo.png',
-      },
       items: [
         {
           type: 'docSidebar',
