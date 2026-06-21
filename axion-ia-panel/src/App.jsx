@@ -9,7 +9,8 @@ import {
   FileText, Search, Clock, GraduationCap, ScrollText,
   Settings, ExternalLink, Menu, X,
   Camera, Construction, PieChart, Map, Shield, Activity, TestTube, Eye,
-  Wrench, Scale, Navigation
+  Wrench, Scale, Navigation,
+  FileSearch, Layers, CheckCircle, ClipboardCheck, BookOpen, GitBranch, FileCode, Database
 } from "lucide-react";
 import Dashboard from "./pages/Dashboard.jsx";
 import Treinamento from "./pages/Treinamento.jsx";
@@ -48,6 +49,15 @@ import ConsultaCruzamentos from "./pages/Ferramentas/ConsultaCruzamentos.jsx";
 import QualityDashboard from "./pages/Quality/Dashboard.jsx";
 import ChamadosSites from "./pages/ChamadosSites.jsx";
 import SlaCompliance from "./pages/SlaCompliance.jsx";
+import AnalisaMultiProduto from "./pages/AnalisaMultiProduto.jsx";
+import AnaliseEditalAvancada from "./pages/AnaliseEditalAvancada.jsx";
+import BuscaEditaisGov from "./pages/BuscaEditaisGov.jsx";
+import Conformidade from "./pages/Conformidade.jsx";
+import ConfidencaRevisao from "./pages/ConfidencaRevisao.jsx";
+import GuiaSites from "./pages/GuiaSites.jsx";
+import Roadmap from "./pages/Roadmap.jsx";
+import Specs from "./pages/Specs.jsx";
+import AxHubDashboard from "./pages/AxHubDashboard.jsx";
 import "./App.css";
 import "./pages/docusaurus-compat.css";
 
@@ -94,6 +104,15 @@ const PAGE_INFO = {
   "/intelligence-dashboard": { title: "Intelligence Dashboard", subtitle: "Dashboard inteligente com analytics e métricas avançadas", Icon: PieChart },
   "/chamados-sites": { title: "Chamados por Site", subtitle: "Gestão operacional de chamados por contrato/site", Icon: Headphones },
   "/sla-compliance": { title: "SLA Compliance", subtitle: "Monitoramento e métricas de SLA por contrato", Icon: Activity },
+  "/axhub-dashboard": { title: "AxHub Dashboard", subtitle: "Dashboard SQL Server — Status, resumo e tabelas do AxHub", Icon: Database },
+  "/busca-editais-gov": { title: "Busca Editais Gov.br", subtitle: "Busca e importação automática de editais na plataforma PNCP", Icon: Search },
+  "/analise-edital-avancada": { title: "Análise Avançada de Editais", subtitle: "Decomposição, de-para, concorrentes e análise de mercado", Icon: FileSearch },
+  "/analisa-multi-produto": { title: "Análise Multi-Produto", subtitle: "Análise de edital contra AxHub, AxTon e AxCross", Icon: Layers },
+  "/conformidade": { title: "Conformidade", subtitle: "Gestão de relatórios de conformidade e adequação de produtos", Icon: CheckCircle },
+  "/confianca-revisao": { title: "Fila de Revisão", subtitle: "Revisão de análises com status, prioridades e validação", Icon: ClipboardCheck },
+  "/guia-sites": { title: "Guia de Sites", subtitle: "Particularidades e especificações de cada contrato/cliente", Icon: BookOpen },
+  "/roadmap": { title: "Roadmap de Produtos", subtitle: "Planejamento e gestão de features por produto", Icon: GitBranch },
+  "/specs": { title: "Especificações Técnicas", subtitle: "Gestão de specs e documentação técnica de produtos", Icon: FileCode },
 };
 
 const MENU_SECTIONS = [
@@ -103,6 +122,7 @@ const MENU_SECTIONS = [
       { to: "/operations-hub", icon: Brain, label: "Operations Hub" },
       { to: "/dashboard", icon: LayoutDashboard, label: "Dashboard" },
       { to: "/intelligence-dashboard", icon: PieChart, label: "Intelligence Dashboard" },
+      { to: "/axhub-dashboard", icon: Database, label: "AxHub Dashboard" },
       { to: "/mapa-operacoes", icon: Map, label: "Mapa de Operações" },
       { to: "/painel-processos", icon: PieChart, label: "Painel de Processos" },
       { to: "/analise", icon: ScanSearch, label: "Análise de Sites" },
@@ -139,6 +159,7 @@ const MENU_SECTIONS = [
       { to: "/validation-hub", icon: TestTube, label: "Validation Hub" },
       { to: "/validation-manager", icon: TestTube, label: "Validation Manager" },
       { to: "/visual-validation", icon: Eye, label: "Validação Visual" },
+      { to: "/confianca-revisao", icon: ClipboardCheck, label: "Fila de Revisão" },
     ]
   },
   {
@@ -157,6 +178,17 @@ const MENU_SECTIONS = [
     group: "Inteligência",
     items: [
       { to: "/pipeline-editais", icon: Landmark, label: "Pipeline de Editais" },
+      { to: "/busca-editais-gov", icon: Search, label: "Busca Editais Gov.br" },
+      { to: "/analise-edital-avancada", icon: FileSearch, label: "Análise Avançada" },
+      { to: "/analisa-multi-produto", icon: Layers, label: "Análise Multi-Produto" },
+      { to: "/conformidade", icon: CheckCircle, label: "Conformidade" },
+    ]
+  },
+  {
+    group: "Gestão",
+    items: [
+      { to: "/roadmap", icon: GitBranch, label: "Roadmap Produtos" },
+      { to: "/specs", icon: FileCode, label: "Especificações" },
     ]
   },
   {
@@ -164,6 +196,7 @@ const MENU_SECTIONS = [
     items: [
       { to: "/kb", icon: BookMarked, label: "Knowledge Base" },
       { to: "/gerar-doc", icon: FileText, label: "Gerador de Docs" },
+      { to: "/guia-sites", icon: BookOpen, label: "Guia de Sites" },
       { to: "/treinamento", icon: GraduationCap, label: "Treinamento" },
       { to: "/planilha-horas", icon: Clock, label: "Planilha de Horas" },
       { to: "/logs", icon: ScrollText, label: "Logs do Sistema" },
@@ -315,6 +348,15 @@ function AppContent() {
           <Route path="/quality" element={<QualityDashboard />} />
           <Route path="/chamados-sites" element={<ChamadosSites />} />
           <Route path="/sla-compliance" element={<SlaCompliance />} />
+          <Route path="/axhub-dashboard" element={<AxHubDashboard />} />
+          <Route path="/busca-editais-gov" element={<BuscaEditaisGov />} />
+          <Route path="/analise-edital-avancada" element={<AnaliseEditalAvancada />} />
+          <Route path="/analisa-multi-produto" element={<AnalisaMultiProduto />} />
+          <Route path="/conformidade" element={<Conformidade />} />
+          <Route path="/confianca-revisao" element={<ConfidencaRevisao />} />
+          <Route path="/guia-sites" element={<GuiaSites />} />
+          <Route path="/roadmap" element={<Roadmap />} />
+          <Route path="/specs" element={<Specs />} />
           <Route path="/config" element={<Configuracoes />} />
 
 
