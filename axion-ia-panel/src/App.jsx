@@ -8,7 +8,8 @@ import {
   Landmark, Radio,
   FileText, Search, Clock, GraduationCap, ScrollText,
   Settings, ExternalLink, Menu, X,
-  Camera, Construction, PieChart, Map, Shield, Activity, TestTube, Eye
+  Camera, Construction, PieChart, Map, Shield, Activity, TestTube, Eye,
+  Wrench, Scale, Navigation
 } from "lucide-react";
 import Dashboard from "./pages/Dashboard.jsx";
 import Treinamento from "./pages/Treinamento.jsx";
@@ -40,6 +41,8 @@ import ValidationHub from "./pages/ValidationHub.jsx";
 import SearchHub from "./pages/SearchHub.jsx";
 import DiagnosticHub from "./pages/DiagnosticHub.jsx";
 import HomePage from "./pages/HomePage.jsx";
+import ConsultaInfracoes from "./pages/Ferramentas/ConsultaInfracoes.jsx";
+import ResultadosInfracoes from "./pages/Ferramentas/ResultadosInfracoes.jsx";
 import "./App.css";
 import "./pages/docusaurus-compat.css";
 
@@ -76,6 +79,8 @@ const PAGE_INFO = {
   "/varco": { title: "VARCO Monitor", subtitle: "Monitoramento da frota ITScam 450 — 72 dispositivos SETRANS-GO", Icon: Radio },
   "/duplicidade": { title: "Auditoria de Duplicidades", subtitle: "Detecção e análise de infrações duplicadas no AxHub", Icon: Shield },
   "/diagnostico-medicao": { title: "Diagnóstico de Medição", subtitle: "Análise inteligente de equipamentos com valores zerados no relatório", Icon: Activity },
+  "/ferramentas/consulta-infracoes": { title: "Consultar Infrações", subtitle: "Ferramenta de análise e suporte — Consulte infrações por CPF ou Placa (AxHub)", Icon: Search },
+  "/ferramentas/resultados-infracoes": { title: "Resultados da Consulta", subtitle: "Análise detalhada de infrações encontradas", Icon: FileText },
 };
 
 const MENU_SECTIONS = [
@@ -93,6 +98,12 @@ const MENU_SECTIONS = [
       { to: "/chat", icon: Bot, label: "Chat IA" },
       { to: "/whatsapp", icon: MessageCircle, label: "WhatsApp" },
       { to: "/helpdesk", icon: Headphones, label: "Helpdesk" },
+    ]
+  },
+  {
+    group: "Ferramentas",
+    items: [
+      { to: "/ferramentas/consulta-infracoes", icon: Search, label: "Consultar Infrações" },
     ]
   },
   {
@@ -266,6 +277,8 @@ function AppContent() {
           <Route path="/duplicidade" element={<DuplicidadeInfracoes />} />
           <Route path="/diagnostico-medicao" element={<DiagnosticoMedicao />} />
           <Route path="/intelligence-dashboard" element={<IntelligenceDashboard />} />
+          <Route path="/ferramentas/consulta-infracoes" element={<ConsultaInfracoes />} />
+          <Route path="/ferramentas/resultados-infracoes" element={<ResultadosInfracoes />} />
           <Route path="/config" element={<Configuracoes />} />
 
 
