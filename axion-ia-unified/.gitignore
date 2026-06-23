@@ -1,0 +1,59 @@
+# Dependencies
+node_modules/
+**/node_modules/
+package-lock.json
+**/package-lock.json
+
+# Build outputs
+dist/
+build/
+**/dist/
+**/build/
+.vite/
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+pnpm-debug.log*
+
+# Environment
+.env
+.env.local
+.env.*.local
+**/.env
+**/.env.local
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Uploads & Media
+uploads/
+videos/
+screenshots/
+reports/
+**/uploads/
+**/videos/
+**/screenshots/
+**/reports/
+
+# Test & Validation
+validacao-*/
+demo-*/
+test-*.png
+**/validacao-*/
+**/demo-*/
+
+# PIDs
+.pids
+.pids.txt
+*.pid
+
+# OS
+Thumbs.db
+desktop.ini

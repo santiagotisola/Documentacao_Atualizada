@@ -1,0 +1,154 @@
+{
+  "axhub_lacre_rompido_descarte": {
+    "keywords": ["lacre rompido", "lacre", "descarte", "motivo 003", "aferição rompida", "descarte total", "DataLacreRompido", "infrações descartadas", "velocidade descartada", "lacre violado"],
+    "assunto": "Lacre Rompido — Descarte de Infrações por Motivo 003",
+    "causa": "O campo DataLacreRompido NÃO é consumido na triagem. Ao marcar status 'Lacre Rompido', o sistema descarta TODAS as infrações de velocidade da vigência inteira (DataAfericao a DataVencimento), ignorando a data informada do rompimento. Feature incompleta desde Jul/2025.",
+    "acao": "WORKAROUND (até correção): Registrar nova aferição eventual (Lacrada) com DataAfericao = data do rompimento. A nova aferição 'separa' os períodos. ATENÇÃO: Informar a data na tela NÃO resolve — o campo não é usado pela triagem. Infrações não-velocidade (avanço sinal, faixa) NÃO são afetadas pelo lacre.",
+    "regulamentacao": "Portaria INMETRO 492/2021 — medições com lacre íntegro são válidas. Descarte deveria ser APENAS a partir da data do rompimento, preservando período anterior. Correção em backlog de desenvolvimento.",
+    "sistema": "AxHub",
+    "modulo": "Operações → Aferições → Triagem",
+    "status": "Pendente correção (campo existe, consumo não implementado)"
+  },
+  "axhub_lacre_rompido_regulamentacao": {
+    "keywords": ["portaria 492", "INMETRO", "regulamentação lacre", "validade medição", "velocidade lacre", "metrologia", "selagem metrológica"],
+    "assunto": "Regulamentação INMETRO sobre Lacre Metrológico (Portaria 492/2021)",
+    "causa": "Dúvida sobre validade de infrações com lacre rompido e qual o comportamento correto",
+    "acao": "Conforme Portaria INMETRO 492/2021: (1) Lacre garante integridade metrológica entre verificações. (2) Medições ANTES do rompimento são VÁLIDAS (lacre estava íntegro). (3) Medições APÓS rompimento são INVÁLIDAS (sem garantia). (4) Apenas VELOCIDADE depende de lacre — avanço de sinal, faixa exclusiva, conversão NÃO são afetados. (5) O motorista NÃO é prejudicado ao manter infrações do período válido.",
+    "regulamentacao": "Portaria INMETRO 492/2021, Resolução CONTRAN 798/2021, Portaria INMETRO 544/2014",
+    "sistema": "AxHub",
+    "modulo": "Operações → Aferições"
+  },
+  "axhub_lacre_rompido_workaround": {
+    "keywords": ["workaround lacre", "contornar descarte", "recuperar infração descartada", "reprocessar", "aferição eventual"],
+    "assunto": "Workaround para Lacre Rompido descartando tudo",
+    "causa": "Sistema descarta todas infrações de velocidade ao marcar lacre rompido, mas operação quer preservar período anterior",
+    "acao": "PASSO A PASSO: (1) Criar nova aferição EVENTUAL para o equipamento. (2) DataAfericao da nova = data do rompimento do lacre. (3) Status Lacre da nova = 'Lacrado'. (4) DataVencimento = manter prazo compatível. (5) A triagem usará a nova aferição (maior DataVencimento) para infrações posteriores. (6) Infrações anteriores ao rompimento que já foram descartadas: Triagem → filtrar Status=Descartada → Reabrir → Reprocessar. CUIDADO: Este é um workaround temporário até a correção definitiva ser implementada.",
+    "sistema": "AxHub",
+    "modulo": "Operações → Aferições → Triagem"
+  },
+  "axhub_bloqueio_validacao_operacao": {
+    "keywords": ["bloqueio automático", "bloqueio operação", "10 falhas", "falhas consecutivas", "data antes da operação", "antes do início", "início da operação", "operação bloqueada", "desbloqueio não resolve", "bloqueia novamente", "THE128M", "validação data"],
+    "assunto": "Bloqueio Automático por Falhas de Validação de Data da Operação",
+    "causa": "O sistema valida que DataHoraPassagem >= Operação.DataInicial. Se o fabricante envia passagens com data ANTERIOR ao início da operação, cada passagem gera uma falha de validação. Após 10 falhas consecutivas → Bloqueio Automático. Desbloquear manualmente NÃO resolve porque o fabricante continua reenviando os mesmos dados antigos (retry automático). Rebloqueio acontece em 2-5 minutos.",
+    "acao": "SOLUÇÕES: (1) IMEDIATA: Ajustar DataInicial da operação para abranger a data das passagens, SE confirmado que equipamento operou nesse período. (2) Contatar fabricante (FOCALLE ou VIZENTEC) para descartar buffer de passagens anteriores ao início da operação. Vizentec WhatsApp: +55 62 99636-0699. (3) NÃO ADIANTA apenas desbloquear manualmente — vai rebloquear em ~2 min. ATENÇÃO JURÍDICA: Infrações só são válidas se a Portaria do órgão cobre o período. DESENVOLVIMENTO FUTURO: Sistema deveria DESCARTAR passagens anteriores ao início (com log) ao invés de BLOQUEAR a operação inteira.",
+    "sistema": "AxHub",
+    "modulo": "Operações → Bloqueio",
+    "status": "Em análise — correção sistêmica pendente"
+  },
+  "axhub_fabricante_limites_dados": {
+    "keywords": ["fabricante", "FOCALLE", "VIZENTEC", "limite dados", "rate limit", "retry", "buffer", "reenvio", "API fabricante", "token fabricante", "passagem rejeitada", "fila envio"],
+    "assunto": "Limites de Dados e Comportamento dos Fabricantes (FOCALLE/VIZENTEC)",
+    "causa": "Fabricantes de equipamentos (FOCALLE e VIZENTEC) transmitem passagens ao AxHub via API REST autenticada por token. Não há documentação pública de limites. Comportamento observado: retry automático e indefinido (30+ dias), intervalo ~2 min, sem backoff exponencial, fabricante NÃO desiste/descarta sozinho.",
+    "acao": "PARA RESOLVER PROBLEMAS DE REENVIO: Contatar diretamente a equipe técnica do fabricante e solicitar limpeza do buffer de retry para o equipamento específico. Vizentec WhatsApp: +55 62 99636-0699. FOCALLE: sem contato público disponível (site fora do ar). IMPORTANTE: O fabricante só para de reenviar quando (1) AxHub aceita, (2) alguém intervém no servidor do fabricante, ou (3) equipamento é desativado.",
+    "sistema": "AxHub",
+    "modulo": "Integração / Fabricantes",
+    "status": "Documentação interna — fabricantes não publicam specs"
+  },
+  "erro_404_imagem": {
+    "keywords": ["404", "imagem", "salvar"],
+    "assunto": "Erro ao salvar imagem",
+    "causa": "Falha no serviço de upload de imagens",
+    "acao": "Atualização do serviço realizada",
+    "status": "Normalizado"
+  },
+  "sem_comunicacao": {
+    "keywords": ["offline", "sem comunicação", "sem internet"],
+    "assunto": "Equipamento sem comunicação",
+    "causa": "Falta de conectividade",
+    "acao": "Necessário verificar rede local",
+    "status": "Aguardando normalização"
+  },
+  "axhub_login": {
+    "keywords": ["login", "senha", "acesso", "não consigo entrar", "axhub"],
+    "assunto": "Acesso ao AxHub",
+    "causa": "Credenciais inválidas ou conta bloqueada",
+    "acao": "Verificar se o usuário está Ativo no módulo Controle de Acesso → Usuários. Usar 'Esqueci minha senha' para redefinir. Verificar se IP está bloqueado em Acesso por IP.",
+    "sistema": "AxHub",
+    "url": "https://economia.axhub.axion.ws"
+  },
+  "axhub_triagem": {
+    "keywords": ["triagem", "infração", "validar", "descartar", "infração não aparece"],
+    "assunto": "Triagem de Infrações no AxHub",
+    "causa": "Infrações pendentes de revisão ou não localizadas",
+    "acao": "Menu → Infrações → Triagem. Verificar filtros (período, status, equipamento). Se infração descartada por engano, filtrar Status=Descartada e usar Reabrir.",
+    "sistema": "AxHub",
+    "url": "https://economia.axhub.axion.ws/triagem"
+  },
+  "axhub_exportacao": {
+    "keywords": ["exportação", "lote", "exportar", "RENAINF", "enviar infração", "DETRAN"],
+    "assunto": "Exportação de infrações",
+    "causa": "Dúvida sobre o processo de exportação ou erro ao gerar lote",
+    "acao": "Menu → Infrações → Exportação. Configurar órgão destino, período e layout. Gerar lote → sistema valida 7 critérios automáticos. Enviar via SFTP, API ou download manual. Formatos: RENAINF, XML, TXT, CSV.",
+    "sistema": "AxHub",
+    "url": "https://economia.axhub.axion.ws/loteexportacao"
+  },
+  "axhub_afericao_vencida": {
+    "keywords": ["aferição", "INMETRO", "certificado", "vencido", "vencimento"],
+    "assunto": "Aferição/Certificado INMETRO vencido",
+    "causa": "Equipamento com certificado INMETRO vencido não gera infrações válidas",
+    "acao": "Menu → Operações → Aferições. Verificar data de vencimento. Registrar nova aferição com certificado atualizado. Dashboard mostra alertas de aferições próximas do vencimento.",
+    "sistema": "AxHub",
+    "url": "https://economia.axhub.axion.ws/afericao"
+  },
+  "axhub_pesagem": {
+    "keywords": ["pesagem", "balança", "ticket", "peso", "liberar", "reclassificar"],
+    "assunto": "Pesagem/Balança no AxHub",
+    "causa": "Dúvida sobre tickets de pesagem ou liberação",
+    "acao": "Menu → Balança → Tickets. Verificar tickets abertos, fechados ou pendentes de reclassificação. Liberar Pesagem para autorizar saída. Reclassificação para corrigir classificação veicular.",
+    "sistema": "AxHub",
+    "url": "https://economia.axhub.axion.ws/ticketpesagem/ticketabertos"
+  },
+  "axcross_veiculo_monitorado": {
+    "keywords": ["veículo monitorado", "monitorado", "cruzamento", "vigência", "expirado", "alerta não gera"],
+    "assunto": "Veículo monitorado no AxCross",
+    "causa": "Veículo monitorado não está gerando alerta",
+    "acao": "Verificar: 1) Veículo está Habilitado? 2) Vigência não expirada? 3) Tipo de Ocorrência ativo? Menu → Veículos Monitorados. Se expirado, editar e atualizar Data de Expiração ou zerar prazo do Tipo de Ocorrência.",
+    "sistema": "AxCross",
+    "url": "https://economia.axcross.axion.ws/occurrences/monitoredvehicle/monitoredvehicle"
+  },
+  "axcross_importacao": {
+    "keywords": ["importar", "importação", "lote", "arquivo", "txt", "axcross"],
+    "assunto": "Importação de veículos monitorados no AxCross",
+    "causa": "Necessidade de cadastrar múltiplas placas",
+    "acao": "Menu → Veículos Monitorados → Importação de Monitorados. Usar arquivo .txt com uma placa por linha. Se o tipo de ocorrência tiver prazo, a data de expiração é calculada automaticamente.",
+    "sistema": "AxCross",
+    "url": "https://economia.axcross.axion.ws/occurrences/vehiclemonitoredimport"
+  },
+  "axcross_rastreamento": {
+    "keywords": ["rastrear", "placa", "rastreamento", "localizar", "passagem"],
+    "assunto": "Rastreamento de placas no AxCross",
+    "causa": "Necessidade de localizar passagens de uma placa específica",
+    "acao": "Menu → Relatórios → Rastreamento de Placas. Informar a placa e o período. O sistema mostra todas as passagens com equipamento, faixa, data/hora e imagem.",
+    "sistema": "AxCross",
+    "url": "https://economia.axcross.axion.ws/reports/platetracking"
+  },
+  "axcross_passagens": {
+    "keywords": ["passagem", "relatório passagens", "filtrar", "consultar passagens"],
+    "assunto": "Relatório de Passagens no AxCross",
+    "causa": "Consulta de passagens registradas",
+    "acao": "Menu → Relatórios → Passagens. Filtros: Data, Equipamento, Faixa, Placa (use * como curinga), Área, Cor, Modelo, Classificação. Exportar em Excel.",
+    "sistema": "AxCross",
+    "url": "https://economia.axcross.axion.ws/reports/reports/passages"
+  },
+  "axton_ticket_nao_finaliza": {
+    "keywords": ["ticket não finaliza", "pesagem pendente", "não fecha", "axton"],
+    "assunto": "Ticket de pesagem não finaliza no AxTon",
+    "causa": "Dados obrigatórios incompletos ou classificação incorreta",
+    "acao": "Verificar: 1) Todos os dados obrigatórios preenchidos? 2) Veículo classificado corretamente? 3) Há segunda pesagem pendente? Menu → Tickets de Pesagens.",
+    "sistema": "AxTon"
+  },
+  "axton_exportacao_erro": {
+    "keywords": ["exportação", "erro exportação", "município", "imagem ausente", "axton"],
+    "assunto": "Erro na exportação de lote no AxTon",
+    "causa": "Código do município divergente, imagens ausentes ou dados incompletos",
+    "acao": "Verificar: 1) Código do município em Veículos → Municípios 2) Imagens em Relatórios → Processamento de Imagens 3) Dados incompletos: reabrir infração na Triagem.",
+    "sistema": "AxTon"
+  },
+  "sistemas_urls": {
+    "keywords": ["url", "endereço", "link", "acessar", "sistema", "onde acessar"],
+    "assunto": "URLs dos sistemas Axion",
+    "causa": "Informação de acesso aos sistemas",
+    "acao": "AxHub: https://economia.axhub.axion.ws | AxCross: https://economia.axcross.axion.ws | AxTon: Aplicativo desktop (não tem URL web). Login OIDC: suporte@axiontecnologia.com.br",
+    "sistemas": ["AxHub", "AxCross", "AxTon"]
+  }
+}

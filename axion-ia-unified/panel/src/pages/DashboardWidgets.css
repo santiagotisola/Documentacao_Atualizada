@@ -1,0 +1,259 @@
+/* ═══════════════════════════════════════════════════════════════
+   Dashboard Widgets — Estilo TheAdmin
+   thetheme.io/theadmin/dashboard/general.html
+   ═══════════════════════════════════════════════════════════════ */
+
+.dashboard-widgets {
+  margin-top: 1.5rem;
+}
+
+/* ─── KPI Cards Row ─── */
+.widget-kpi-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.widget-kpi-card {
+  background: var(--surface, #1e293b);
+  border: 1px solid var(--border, rgba(255,255,255,0.08));
+  border-radius: 12px;
+  padding: 1.25rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  transition: transform 0.15s, box-shadow 0.15s;
+}
+.widget-kpi-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+}
+
+.widget-kpi-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  flex-shrink: 0;
+}
+
+.widget-kpi-body {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.widget-kpi-label {
+  font-size: 0.75rem;
+  color: var(--text-muted, #64748b);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  font-weight: 600;
+}
+.widget-kpi-value {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--text, #f1f5f9);
+  line-height: 1;
+}
+.widget-kpi-trend {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  margin-top: 2px;
+}
+.widget-kpi-trend.up { color: #22c55e; }
+.widget-kpi-trend.down { color: #ef4444; }
+
+/* ─── Widget Cards (charts, activity, tasks) ─── */
+.widget-card {
+  background: var(--surface, #1e293b);
+  border: 1px solid var(--border, rgba(255,255,255,0.08));
+  border-radius: 12px;
+  overflow: hidden;
+}
+.widget-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 1.25rem 0.5rem;
+}
+.widget-card-header h4 {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--text, #f1f5f9);
+  margin: 0;
+}
+.widget-badge {
+  font-size: 0.68rem;
+  background: rgba(59,130,246,0.12);
+  color: #60a5fa;
+  padding: 3px 8px;
+  border-radius: 20px;
+  font-weight: 600;
+}
+
+/* ─── Charts Row ─── */
+.widget-charts-row {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+.widget-chart-body {
+  padding: 0.5rem 0.75rem 1rem;
+}
+
+/* ─── Bottom Row ─── */
+.widget-bottom-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+/* ─── Activity Feed ─── */
+.widget-activity-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  max-height: 320px;
+  overflow-y: auto;
+}
+.widget-activity-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 0.7rem 1.25rem;
+  border-bottom: 1px solid var(--border, rgba(255,255,255,0.05));
+  transition: background 0.12s;
+}
+.widget-activity-item:hover {
+  background: rgba(255,255,255,0.02);
+}
+.widget-activity-item:last-child { border-bottom: none; }
+
+.widget-activity-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  margin-top: 6px;
+  flex-shrink: 0;
+}
+.widget-activity-dot.info { background: #3b82f6; }
+.widget-activity-dot.success { background: #22c55e; }
+.widget-activity-dot.error { background: #ef4444; }
+
+.widget-activity-content {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+.widget-activity-text {
+  font-size: 0.82rem;
+  color: var(--text, #e2e8f0);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.widget-activity-time {
+  font-size: 0.7rem;
+  color: var(--text-muted, #64748b);
+}
+.widget-activity-empty {
+  padding: 1.5rem;
+  text-align: center;
+  color: var(--text-muted, #64748b);
+  font-size: 0.82rem;
+}
+
+/* ─── Quick Tasks (Todo) ─── */
+.widget-task-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  max-height: 240px;
+  overflow-y: auto;
+}
+.widget-task-item {
+  padding: 0.6rem 1.25rem;
+  border-bottom: 1px solid var(--border, rgba(255,255,255,0.05));
+}
+.widget-task-item:last-child { border-bottom: none; }
+.widget-task-item label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  font-size: 0.82rem;
+  color: var(--text, #e2e8f0);
+}
+.widget-task-item input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+  accent-color: #8b5cf6;
+  cursor: pointer;
+}
+.widget-task-item.done label span {
+  text-decoration: line-through;
+  opacity: 0.5;
+}
+
+.widget-task-add {
+  display: flex;
+  gap: 8px;
+  padding: 0.75rem 1.25rem;
+  border-top: 1px solid var(--border, rgba(255,255,255,0.08));
+}
+.widget-task-add input {
+  flex: 1;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid var(--border, rgba(255,255,255,0.1));
+  border-radius: 6px;
+  padding: 6px 10px;
+  font-size: 0.8rem;
+  color: var(--text, #e2e8f0);
+  outline: none;
+  transition: border-color 0.15s;
+}
+.widget-task-add input:focus {
+  border-color: #8b5cf6;
+}
+.widget-task-add input::placeholder {
+  color: var(--text-muted, #64748b);
+}
+.widget-task-add button {
+  background: #8b5cf6;
+  border: none;
+  border-radius: 6px;
+  color: #fff;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.widget-task-add button:hover {
+  background: #7c3aed;
+}
+
+/* ─── Responsive ─── */
+@media (max-width: 900px) {
+  .widget-charts-row,
+  .widget-bottom-row {
+    grid-template-columns: 1fr;
+  }
+}
+@media (max-width: 600px) {
+  .widget-kpi-row {
+    grid-template-columns: 1fr 1fr;
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "name": "axion-ia-unified",
+  "version": "4.0.0",
+  "description": "Monorepo Unificado Axion IA - Panel + API + Engine",
+  "private": true,
+  "type": "module",
+  "author": "Axion Tecnologia",
+  "license": "MIT",
+  "scripts": {
+    "dev": "concurrently -n \"PANEL,API,ENGINE\" -c \"cyan,green,magenta\" \"npm run dev:panel\" \"npm run dev:api\" \"npm run dev:engine\"",
+    "dev:panel": "cd panel && npm run dev",
+    "dev:api": "cd api && node --env-file=.env src/app.js",
+    "dev:engine": "cd engine && node app.js",
+    "build": "npm run build:panel",
+    "build:panel": "cd panel && npm run build",
+    "preview": "cd panel && npm run preview",
+    "install:all": "npm install && cd panel && npm install && cd ../api && npm install && cd ../engine && npm install",
+    "clean": "rimraf panel/node_modules panel/dist api/node_modules engine/node_modules node_modules",
+    "test": "npm run test --workspaces --if-present",
+    "lint": "npm run lint --workspaces --if-present"
+  },
+  "workspaces": [
+    "panel",
+    "api",
+    "engine"
+  ],
+  "devDependencies": {
+    "concurrently": "^8.2.2",
+    "rimraf": "^5.0.5"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=9.0.0"
+  },
+  "keywords": [
+    "axion",
+    "ia",
+    "helpdesk",
+    "monorepo",
+    "unified"
+  ]
+}
