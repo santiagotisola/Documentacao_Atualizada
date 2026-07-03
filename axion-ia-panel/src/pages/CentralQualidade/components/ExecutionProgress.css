@@ -1,0 +1,238 @@
+.exec-progress {
+  background: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.12);
+}
+
+/* Header */
+.exec-progress__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.25rem 1.5rem;
+  color: white;
+  gap: 1rem;
+}
+
+.exec-progress__header--running { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
+.exec-progress__header--success { background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%); color: #fff; }
+.exec-progress__header--error   { background: linear-gradient(135deg, #ff416c 0%, #ff4b2b 100%); }
+
+.exec-header-left {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.exec-header-icon {
+  font-size: 2rem;
+}
+
+.exec-progress__header h3 {
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+.exec-header-sub {
+  font-size: 0.85rem;
+  opacity: 0.85;
+}
+
+.exec-close-btn {
+  background: rgba(255,255,255,0.2);
+  border: 1.5px solid rgba(255,255,255,0.4);
+  color: white;
+  border-radius: 6px;
+  padding: 0.4rem 0.8rem;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: background 0.15s;
+  white-space: nowrap;
+}
+
+.exec-close-btn:hover { background: rgba(255,255,255,0.35); }
+
+/* Progress bar */
+.exec-progress__bar-wrap {
+  height: 6px;
+  background: #ecf0f1;
+}
+
+.exec-progress__bar {
+  height: 100%;
+  transition: width 0.5s ease;
+  border-radius: 0 3px 3px 0;
+}
+
+.exec-progress__bar--running { background: #667eea; }
+.exec-progress__bar--success { background: #27ae60; }
+.exec-progress__bar--error   { background: #e74c3c; }
+
+.exec-progress__pct {
+  text-align: right;
+  font-size: 0.78rem;
+  color: #95a5a6;
+  padding: 0.2rem 1rem 0;
+  font-weight: 600;
+}
+
+/* Steps */
+.exec-steps {
+  padding: 0.75rem 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  max-height: 480px;
+  overflow-y: auto;
+}
+
+.exec-step {
+  border-radius: 8px;
+  border: 1.5px solid #e9ecef;
+  background: #fafafa;
+  overflow: hidden;
+  transition: border-color 0.2s;
+}
+
+.exec-step__header {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.65rem 0.9rem;
+}
+
+.exec-step__icon { font-size: 1.1rem; flex-shrink: 0; }
+
+.exec-step__num {
+  font-size: 0.75rem;
+  color: #95a5a6;
+  font-weight: 600;
+  min-width: 52px;
+}
+
+.exec-step__label {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #2c3e50;
+  flex: 1;
+}
+
+.exec-step__label--pending { color: #bdc3c7; font-weight: 400; }
+
+.exec-step__message {
+  padding: 0 0.9rem 0.6rem 2.5rem;
+  font-size: 0.82rem;
+  color: #7f8c8d;
+}
+
+/* Status variants */
+.step--running {
+  border-color: #667eea;
+  background: #f5f3ff;
+}
+
+.step--running .exec-step__label { color: #667eea; }
+
+.step--success {
+  border-color: #27ae60;
+  background: #f0fff4;
+}
+
+.step--success .exec-step__icon { color: #27ae60; }
+.step--success .exec-step__label { color: #1e8449; }
+
+.step--warning {
+  border-color: #f39c12;
+  background: #fffbf0;
+}
+
+.step--error {
+  border-color: #e74c3c;
+  background: #fff5f5;
+}
+
+.step--error .exec-step__label { color: #c0392b; }
+
+.step--pending {
+  border-color: #ecf0f1;
+  background: #fafafa;
+  opacity: 0.5;
+}
+
+/* Spinner */
+.exec-spinner {
+  width: 16px;
+  height: 16px;
+  border: 2.5px solid #e0d9ff;
+  border-top-color: #667eea;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+  flex-shrink: 0;
+}
+
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* Screenshot */
+.exec-step__screenshot {
+  padding: 0 0.9rem 0.75rem 2.5rem;
+}
+
+.exec-step__screenshot img {
+  max-width: 100%;
+  border-radius: 6px;
+  border: 1.5px solid #ddd;
+  cursor: pointer;
+  transition: transform 0.15s;
+  max-height: 200px;
+  object-fit: cover;
+}
+
+.exec-step__screenshot img:hover {
+  transform: scale(1.02);
+  border-color: #667eea;
+}
+
+/* Summary */
+.exec-summary {
+  margin: 0.75rem 1rem 1rem;
+  padding: 1rem;
+  background: #f0fff4;
+  border: 1.5px solid #a9dfbf;
+  border-radius: 8px;
+}
+
+.exec-summary h4 {
+  margin: 0 0 0.75rem;
+  font-size: 0.95rem;
+  color: #1e8449;
+}
+
+.exec-summary ul {
+  margin: 0 0 0.75rem;
+  padding-left: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.exec-summary li {
+  font-size: 0.88rem;
+  color: #2c3e50;
+}
+
+.exec-link-axhub {
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  background: #27ae60;
+  color: white;
+  border-radius: 6px;
+  text-decoration: none;
+  font-size: 0.88rem;
+  font-weight: 600;
+  transition: background 0.15s;
+}
+
+.exec-link-axhub:hover { background: #219a52; }
