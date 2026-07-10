@@ -6,9 +6,9 @@ description: Registro de interrupções operacionais
 
 # Interrupções
 
-![Relatório de Pesagem](../img/Relatorio%20de%20pesagem.png)
+Relatório de Pesagem](../img/Relatorio%20de%20pesagem.png)
 
-Registro das interrupções que afetam a disponibilidade dos equipamentos ou operações de pesagem.
+Registro das interrupções que afetam a disponibilidade dos Equipamentos ou operações de pesagem.
 
 ## Como acessar
 
@@ -28,7 +28,7 @@ Registro das interrupções que afetam a disponibilidade dos equipamentos ou ope
 
 | Campo | Obrigatório | Descrição |
 |-------|:-----------:|-----------|
-| **Equipamento** | Sim | Equipamento afetado |
+| Equipamento | Sim | Equipamento afetado |
 | **Tipo** | Sim | Categoria da interrupção |
 | **Início** | Sim | Data/hora do início |
 | **Fim** | Sim | Data/hora do término |

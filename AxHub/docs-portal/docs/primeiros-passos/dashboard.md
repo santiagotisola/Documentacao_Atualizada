@@ -1,29 +1,29 @@
 ﻿---
 sidebar_position: 2
 title: Dashboard
-description: Painel principal do sistema AxHub com monitoramento em tempo real
+description: Use Dashboard principal do sistema AxHub com monitoramento em tempo real
 ---
 
 # Dashboard
 
-O Dashboard e a tela inicial do AxHub apos o login. Apresenta indicadores, mapa de equipamentos e alertas em **tempo real**.
+O Dashboard e a tela inicial do AxHub após o Login Apresenta indicadores, mapa de Equipamentos e alertas em **tempo real**.
 
 ## Como acessar
 
-O Dashboard e exibido automaticamente apos o Login. Clique no logo do AxHub para retornar.
+O Dashboard e exibido automaticamente após o Login Clique no logo do AxHub para retornar.
 
 ## Visao Geral
 
 ![Dashboard](../img/Dasboard.png)
 
-O dashboard é composto por seis componentes principais:
+O Dashboard é composto por seis componentes principais:
 
 1. **Triagem Mensal** — Estatísticas de processamento de imagens
-2. **Mapa de Equipamentos** — Localização geográfica e status
-3. **Painel Sinótico** — Filtros por grupo de equipamentos
-4. **Status dos Equipamentos** — Situação operacional em tempo real
+2. **Mapa de Equipamentos — Localização geográfica e status
+3. Use Dashboard Sinótico** — Filtros por grupo de Equipamentos
+4. **Status dos Equipamentos — Situação operacional em tempo real
 5. **Defasagem de Processamento** — Atraso no processamento
-6. **Imagens Capturadas na Semana** — Volume de capturas e análises
+6. **Imagens Capturadas na Semana** — Volume de capturas e Análises
 
 ---
 
@@ -37,14 +37,14 @@ Atalhos rápidos para as funcionalidades mais utilizadas do sistema.
 
 ## Triagem Mensal
 
-Gráfico de linhas mostrando a **evolução mensal do processamento de imagens** capturadas pelos equipamentos de fiscalização.
+Gráfico de linhas mostrando a **evolução mensal do processamento de imagens** capturadas pelos Equipamentos de fiscalização.
 
 ### Informações exibidas
 
 | Linha | Descrição | Cor |
 |-------|-----------|-----|
-| **Total de Imagens** | Total de imagens capturadas pelos equipamentos no mês | Azul |
-| **Total Descartes** | Imagens descartadas (não geraram infração) | Verde |
+| **Total de Imagens** | Total de imagens capturadas pelos Equipamentos no mês | Azul |
+| **Total Descartes** | Imagens descartadas (não geraram Infração | Verde |
 | **Total Processadas** | Imagens que passaram pela triagem e foram validadas | Laranja |
 
 ### Como interpretar
@@ -62,24 +62,24 @@ Use este gráfico para:
 
 ---
 
-## Painel Sinotico
+## Use Dashboard Sinotico
 
-![Painel Sinotico](../img/dashboard-painel-sinotico.png)
+Use Dashboard Sinotico](../img/dashboard-painel-sinotico.png)
 
-![Painel Sinotico Tela Cheia](../img/dashboard-painel-sinotico-tela-cheia.png)
+Use Dashboard Sinotico Tela Cheia](../img/dashboard-painel-sinotico-tela-cheia.png)
 
-Interface de **seleção e filtragem por Grupos de Equipamentos**. Permite visualizar apenas os dados de um grupo específico (projeto, cliente ou região).
+Interface de **seleção e filtragem por Grupos de Equipamentos Permite visualizar apenas os dados de um grupo específico (projeto, cliente ou região).
 
 ### Funcionalidades
 
 | Controle | Função |
 |----------|--------|
-| **Dropdown Grupos** | Seleciona grupo específico para filtrar dashboard |
-| **Tela cheia** | Expande o painel sinótico em tela cheia |
-| **Atualizar** | Recarrega os dados do painel |
+| **Dropdown Grupos** | Seleciona grupo específico para filtrar Dashboard |
+| **Tela cheia** | Expande o Use Dashboard sinótico em tela cheia |
+| **Atualizar** | Recarrega os dados do Use Dashboard |
 
 :::info Grupos de Equipamentos
-Grupos são configurados em **Equipamentos → Grupos de Equipamentos**. Cada grupo possui uma cor que identifica seus equipamentos no mapa.
+Grupos são configurados em Equipamentos → Grupos de Equipamentos Cada grupo possui uma cor que identifica seus Equipamentos no mapa.
 :::
 
 ---
@@ -90,21 +90,21 @@ Grupos são configurados em **Equipamentos → Grupos de Equipamentos**. Cada gr
 
 ![Status dos Equipamentos Tela Cheia](../img/dashboard-status-equipamento-tela-cheia.png)
 
-Lista exibindo a **situação operacional atual de cada equipamento** em tempo real.
+Lista exibindo a **situação operacional atual de cada Equipamento em tempo real.
 
 ### Informações exibidas
 
 | Campo | Descrição | Origem dos dados |
 |-------|-----------|------------------|
-| **Código** | Identificador único do equipamento (Ex: PE005C) | Cadastro do equipamento |
-| **Local** | Cidade/rodovia onde está instalado | Descrição do equipamento ou operação |
+| **Código** | Identificador único do Equipamento (Ex: PE005C) | Cadastro do Equipamento |
+| **Local** | Cidade/rodovia onde está instalado | Descrição do Equipamento ou operação |
 | **Número de Faixas** | Quantidade de faixas monitoradas | Contagem de faixas cadastradas |
 | **Data/Hora** | Última comunicação recebida (heartbeat) | Registro de heartbeat |
 | **Status** | ✅ Verde = Online<br/>❌ Vermelho = Offline | Calculado em tempo real |
 
 ### Como funciona o Status
 
-O status é determinado pelo **heartbeat** (pulso de vida) do equipamento:
+O status é determinado pelo **heartbeat** (pulso de vida) do Equipamento
 
 #### ✅ Online
 - Última comunicação **há menos de 2 horas**
@@ -125,27 +125,27 @@ Equipamentos offline por longos períodos (dias/semanas) indicam falha crítica.
 
 ### O que é Heartbeat?
 
-**Heartbeat** (pulso de vida) é um sinal periódico enviado pelo equipamento para o servidor, confirmando que está operacional.
+**Heartbeat** (pulso de vida) é um sinal periódico enviado pelo Equipamento para o servidor, confirmando que está operacional.
 
 - **Frequência**: Geralmente a cada 5-10 minutos
-- **Dados enviados**: ID do equipamento, data/hora, status operacional
+- **Dados enviados**: ID do Equipamento data/hora, status operacional
 - **Registro**: Sistema atualiza tabela `TBHeartbeatEquipamentos`
 
 :::tip Monitoramento Proativo
-Configure alertas automáticos (email/WhatsApp) quando um equipamento ficar offline por mais de 30 minutos. Entre em contato com o suporte Axion para ativar.
+Configure alertas automáticos (email/WhatsApp) quando um Equipamento ficar offline por mais de 30 minutos. Entre em contato com o suporte Axion para ativar.
 :::
 
 ### Para que serve
 
 #### Operacional
-- ✅ Monitorar quais equipamentos estão funcionando
+- ✅ Monitorar quais Equipamentos estão funcionando
 - ⚠️ Identificar falhas imediatamente
 - 📞 Priorizar atendimento técnico
 
 #### Gerencial
 - 📊 Calcular % de disponibilidade (uptime)
 - 📉 Verificar SLA de contratos de manutenção
-- 💰 Validar pagamento por equipamento ativo
+- 💰 Validar pagamento por Equipamento ativo
 
 ---
 
@@ -155,37 +155,37 @@ Configure alertas automáticos (email/WhatsApp) quando um equipamento ficar offl
 
 ![Mapa de Equipamentos](../img/dashboard-mapa-equipamento.png)
 
-Mapa geográfico interativo exibindo a **localização em tempo real de todos os equipamentos** cadastrados no sistema.
+Mapa geográfico interativo exibindo a **localização em tempo real de todos os Equipamentos cadastrados no sistema.
 
 ### Informações exibidas
 
 | Elemento | Descrição |
 |----------|-----------|
-| **Marcadores coloridos** | Cada cor representa um **Grupo de Equipamentos** diferente |
+| **Marcadores coloridos** | Cada cor representa um **Grupo de Equipamentos diferente |
 | **Ícone azul (câmera)** | Equipamento online e operacional |
 | **Ícone vermelho** | Equipamento offline ou com problemas |
-| **Contador no ícone** | Número de equipamentos naquele ponto (quando agrupados) |
-| **Legenda inferior** | "X Grupos de Equipamentos" com filtros por grupo |
+| **Contador no ícone** | Número de Equipamentos naquele ponto (quando agrupados) |
+| **Legenda inferior** | "X Grupos de Equipamentos com filtros por grupo |
 
 ### Cores dos marcadores
 
-A cor de cada marcador é definida pelo **Grupo de Equipamentos** ao qual ele pertence:
+A cor de cada marcador é definida pelo **Grupo de Equipamentos ao qual ele pertence:
 
-- Configure cores em: **Equipamentos → Grupos de Equipamentos**
+- Configure cores em: Equipamentos → Grupos de Equipamentos
 - Escolha cores distintas para facilitar identificação visual
 - Mesmas cores aparecem no mapa e na legenda
 
 ### Para que serve
 
 - **Monitoramento geográfico**: Visualizar distribuição territorial
-- **Detecção rápida de falhas**: Identificar equipamentos offline por região
+- **Detecção rápida de falhas**: Identificar Equipamentos offline por região
 - **Planejamento de manutenção**: Roteirizar visitas técnicas
 - **Análise de cobertura**: Identificar gaps de fiscalização
 
 :::tip Navegação no mapa
 - **Zoom**: Use a roda do mouse ou os controles +/- no canto
 - **Mover**: Clique e arraste o mapa
-- **Detalhes**: Clique em um marcador para ver informações do equipamento
+- **Detalhes**: Clique em um marcador para ver informações do Equipamento
 :::
 
 ---
@@ -220,7 +220,7 @@ Defasagem alta indica:
 Se a defasagem estiver alta:
 1. Priorize imagens mais antigas
 2. Aloque mais analistas temporariamente
-3. Avalie ajuste de configurações de captura
+3. Avalie ajuste de Configurações de captura
 :::
 
 ---
@@ -236,7 +236,7 @@ Estatísticas de **processamento de imagens nos últimos 7 dias**.
 | **Total** | Total de imagens capturadas na semana |
 | **Não Analisadas** | Imagens aguardando triagem (pendentes) |
 | **Analisadas** | Imagens que passaram por triagem |
-| **Válidas** | Imagens aprovadas (geraram infração) |
+| **Válidas** | Imagens aprovadas (geraram Infração |
 
 ### Como interpretar
 
@@ -271,13 +271,13 @@ Use esses indicadores para:
 
 ![Alertas de Afericao](../img/dashboard-alertas-afericao.png)
 
-Lista de equipamentos com **certificados INMETRO próximos do vencimento** ou já vencidos.
+Lista de Equipamentos com **certificados INMETRO próximos do vencimento** ou já vencidos.
 
 ### Informações exibidas
 
 | Coluna | Descrição |
 |--------|-----------|
-| **Equipamento** | Código e descrição do equipamento |
+| Equipamento | Código e descrição do Equipamento |
 | **Certificado** | Número do certificado INMETRO |
 | **Vencimento** | Data de vencimento do certificado |
 | **Status** | Dias restantes ou "Vencido" |
@@ -289,10 +289,10 @@ Lista de equipamentos com **certificados INMETRO próximos do vencimento** ou j�
 | 🟢 **OK** | > 30 dias | Sem ação necessária |
 | 🟡 **Atenção** | 15-30 dias | Agendar aferição |
 | 🟠 **Urgente** | 1-14 dias | Priorizar aferição |
-| 🔴 **Vencido** | 0 dias | Equipamento inválido para gerar infrações |
+| 🔴 **Vencido** | 0 dias | Equipamento inválido para gerar Infrações |
 
 :::danger Certificado Vencido
-Infrações capturadas por equipamentos com certificado INMETRO vencido são **automaticamente invalidadas** pelo sistema e não podem ser exportadas.
+Infrações capturadas por Equipamentos com certificado INMETRO vencido são **automaticamente invalidadas** pelo sistema e não podem ser exportadas.
 
 **Ação obrigatória**: Realizar aferição imediatamente.
 :::
@@ -324,7 +324,7 @@ Exibe o aproveitamento de leitura de placas pelo OCR nas últimas 48 horas.
 | Indicador | Descrição |
 |-----------|-----------|
 | **Aproveitamento OCR (%)** | Percentual de placas lidas corretamente pelo OCR |
-| **Passagens** | Total de passagens de veículos registradas no período |
+| **Passagens** | Total de passagens de Veículos registradas no período |
 | **Leituras** | Total de leituras de placa realizadas com sucesso |
 
 ### Como interpretar
@@ -358,7 +358,7 @@ Para melhorar o aproveitamento:
 
 ![Ultimos Eventos](../img/dashboard-ultimos-eventos.png)
 
-Registro cronológico dos **últimos eventos e ocorrências** dos equipamentos.
+Registro cronológico dos **últimos eventos e ocorrências** dos Equipamentos
 
 ### Tipos de eventos
 
@@ -373,7 +373,7 @@ Registro cronológico dos **últimos eventos e ocorrências** dos equipamentos.
 ### Para que serve
 
 - **Auditoria**: Rastrear histórico de problemas
-- **Manutenção preditiva**: Identificar equipamentos com falhas recorrentes
+- **Manutenção preditiva**: Identificar Equipamentos com falhas recorrentes
 - **SLA**: Comprovar tempo de indisponibilidade
 
 :::info Eventos Completos
@@ -389,8 +389,8 @@ Para visualizar o histórico completo de eventos, acesse:
 |-----------|-----------|------------------|
 | **Passagens hoje** | Total de passagens capturadas no dia | Conta registros em `TBPassagens` com data de hoje |
 | **Infracoes pendentes** | Infracoes aguardando triagem | Conta registros em `TBInfracoes` com status "Pendente" |
-| **Equipamentos offline** | Equipamentos sem comunicacao | Conta equipamentos sem heartbeat há > 2 horas |
-| **Certificados vencendo** | Certificados INMETRO proximo do vencimento | Conta equipamentos com vencimento < 30 dias |
+| Equipamentos offline** | Equipamentos sem comunicacao | Conta Equipamentos sem heartbeat há > 2 horas |
+| **Certificados vencendo** | Certificados INMETRO próximo do vencimento | Conta Equipamentos com vencimento < 30 dias |
 
 :::tip Interpretação dos Indicadores
 - **Passagens hoje**: Indica volume operacional diário. Compare com média histórica.
@@ -403,21 +403,21 @@ Para visualizar o histórico completo de eventos, acesse:
 
 ## ⚡ Atualização em Tempo Real
 
-O dashboard é **automaticamente atualizado** para exibir dados em tempo real.
+O Dashboard é **automaticamente atualizado** para exibir dados em tempo real.
 
 ### Frequência de atualização
 
 | Componente | Atualização |
 |------------|-------------|
-| **Status Equipamentos** | A cada 30 segundos |
-| **Mapa de Equipamentos** | A cada 60 segundos |
+| **Status Equipamentos | A cada 30 segundos |
+| **Mapa de Equipamentos | A cada 60 segundos |
 | **Indicadores** | A cada 30 segundos |
 | **Gráfico Triagem Mensal** | A cada 5 minutos |
 | **Imagens da Semana** | A cada 60 segundos |
 
 :::info Atualização Manual
 Para forçar atualização imediata:
-1. Clique no botão **"Atualizar"** no Painel Sinótico
+1. Clique no botão **"Atualizar"** no Use Dashboard Sinótico
 2. Ou recarregue a página (F5)
 :::
 
@@ -427,7 +427,7 @@ Para forçar atualização imediata:
 
 ### Para Operadores
 
-1. **Monitore equipamentos offline diariamente**
+1. **Monitore Equipamentos offline diariamente**
    - ✅ Equipamentos offline > 30 min → Verificar no local
    - ✅ Equipamentos offline > 2h → Abrir chamado técnico
 
@@ -441,18 +441,18 @@ Para forçar atualização imediata:
 
 ### Para Gestores
 
-1. **Revise dashboard semanalmente**
+1. **Revise Dashboard semanalmente**
    - 📊 Analisar tendências do gráfico de triagem mensal
-   - 📊 Verificar uptime dos equipamentos
+   - 📊 Verificar uptime dos Equipamentos
    - 📊 Avaliar produtividade da equipe
 
 2. **Configure alertas proativos**
-   - ⚠️ Email/WhatsApp quando equipamento ficar offline
+   - ⚠️ Email/WhatsApp quando Equipamento ficar offline
    - ⚠️ Notificação de certificados vencendo
    - ⚠️ Alerta de defasagem > 100 imagens
 
 3. **Documente ocorrências**
-   - 📝 Registre eventos em **Operações → Eventos de Equipamentos**
+   - 📝 Registre eventos em **Operações → Eventos de Equipamentos
    - 📝 Mantenha histórico de manutenções
    - 📝 Rastreie falhas recorrentes
 
@@ -463,7 +463,7 @@ Para forçar atualização imediata:
 ### Dashboard não carrega
 
 **Possíveis causas:**
-- ❌ Sessão expirada → Faça login novamente
+- ❌ Sessão expirada → Faça Login novamente
 - ❌ Problema de rede → Verifique conexão com internet
 - ❌ Servidor fora do ar → Entre em contato com suporte
 
@@ -473,11 +473,11 @@ Para forçar atualização imediata:
 
 **Possíveis causas:**
 - ❌ Heartbeat não está sendo enviado
-- ❌ Problema na rede do equipamento
+- ❌ Problema na rede do Equipamento
 - ❌ Configuração incorreta do IP/porta
 
 **Ação:** 
-1. Verifique se o equipamento está realmente enviando dados
+1. Verifique se o Equipamento está realmente enviando dados
 2. Consulte **Operações → Monitoramento Online** para mais detalhes
 3. Entre em contato com suporte técnico Axion
 
@@ -501,11 +501,11 @@ Para forçar atualização imediata:
 |-------|-------------|
 | **Online** | Equipamento está funcionando e enviando dados |
 | **Offline** | Equipamento sem comunicação há mais de 2 horas |
-| **Heartbeat** | "Pulso de vida" — sinal periódico do equipamento |
+| **Heartbeat** | "Pulso de vida" — sinal periódico do Equipamento |
 | **Triagem** | Revisão manual/automática das imagens capturadas |
 | **Defasagem** | Atraso no processamento de imagens |
 | **OCR** | Tecnologia de leitura automática de placas |
-| **Uptime** | Percentual de tempo que equipamento está online |
+| **Uptime** | Percentual de tempo que Equipamento está online |
 | **SLA** | Acordo de Nível de Serviço (prazos contratuais) |
 
 ---
@@ -515,9 +515,9 @@ Para forçar atualização imediata:
 | Tipo | Pagina | Descricao |
 |------|--------|-----------|
 | Anterior | [Login](./login) | Autenticacao do sistema |
-| Proximo | [Navegacao](./navegacao) | Como navegar pelo sistema |
-| Relacionado | [Monitoramento Online](../operacoes/monitoramento-online) | Detalhes dos equipamentos |
-| Relacionado | [Eventos de Equipamentos](../operacoes/eventos-equipamentos) | Historico de eventos |
+| próximo | [Navegacao](./navegacao) | Como navegar pelo sistema |
+| Relacionado | [Monitoramento Online](../operacoes/monitoramento-online) | Detalhes dos Equipamentos |
+| Relacionado | [Eventos de Equipamentos](../operacoes/eventos-equipamentos) | histórico de eventos |
 | Relacionado | [Triagem](../infracoes/triagem) | Processo de triagem de infracoes |
 | Relacionado | [Grupos de Equipamentos](../cadastros-basicos/grupos-equipamentos) | Configurar grupos e cores |
 | Glossario | [Afericao](../glossario/afericao) | Certificado de afericao INMETRO |

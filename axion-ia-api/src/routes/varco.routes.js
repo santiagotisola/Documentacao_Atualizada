@@ -13,6 +13,7 @@ import { validarDispositivo, validarLote, analisarIncidente, heartbeatGeral, lis
 import { iniciarConexao, statusConexao, listarSessoes, detalhesSessao, encerrarSessao, enviarManual, enviarComBotoes, desconectar, restart } from "../whatsapp-controller.js";
 import { startValidation, discoverUI, discoverAPI, getReport, listValidations } from "../validation-manager-controller.js";
 import { startVisualValidation, getVisualValidationStatus, getVisualValidationReport, getScreenshot, listVisualValidations } from "../visual-validation-controller.js";
+import { scanProject, applyFix, applyBatchFix, applyToAllSimilar, getGlossary, scanURL, scanURLBatch, scanSiteComplete } from "../linguistic-controller.js";
 
 const router = express.Router();
 
@@ -66,5 +67,21 @@ router.get("/visual-validation/status/:id", getVisualValidationStatus);
 router.get("/visual-validation/report/:id", getVisualValidationReport);
 router.get("/visual-validation/screenshot/:id/:index", getScreenshot);
 router.get("/visual-validation/list", listVisualValidations);
+
+// ═══════════════════════════════════════════════════════════════════
+// LINGUISTIC VALIDATION (Ortografia + Gramática + Terminologia)
+// ═══════════════════════════════════════════════════════════════════
+
+// Scan de projetos locais
+router.post("/linguistic/scan", scanProject);
+router.post("/linguistic/fix", applyFix);
+router.post("/linguistic/fix-batch", applyBatchFix);
+router.post("/linguistic/fix-all-similar", applyToAllSimilar);
+router.get("/linguistic/glossary", getGlossary);
+
+// Scan de URLs/Sites
+router.post("/linguistic/scan-url", scanURL);
+router.post("/linguistic/scan-urls", scanURLBatch);
+router.post("/linguistic/scan-site-complete", scanSiteComplete);
 
 export default router;

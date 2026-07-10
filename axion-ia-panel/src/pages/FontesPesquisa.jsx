@@ -572,7 +572,7 @@ function TabFontes({ produto, onAnalisar, onConformidade }) {
                       className="btn btn-sm"
                       onClick={() => handleAnalisar(f._id)}
                       disabled={analisando === f._id}
-                      title="Rodar análise de cobertura"
+                      title="Rodar Análise de cobertura"
                     >
                       {analisando === f._id ? "..." : "🔍 Analisar"}
                     </button>
@@ -1239,7 +1239,7 @@ function TabSugestoes({ produto }) {
 
       {/* Lista de ações passo a passo */}
       {!sugestoesFiltradas?.length ? (
-        <p style={{ color: "var(--text-muted)" }}>Nenhuma ação para esta seção.</p>
+        <p style={{ color: "var(--text-muted)" }}>Nenhuma ação para está seção.</p>
       ) : (
         <div style={{ display: "flex", flexDirection: "column", gap: "0.6rem" }}>
           {sugestoesFiltradas.map((s, i) => {
@@ -1279,7 +1279,7 @@ function TabSugestoes({ produto }) {
                     <div style={{ display: "flex", flexDirection: "column", gap: "0.6rem" }}>
 
                       <div style={{ background: "var(--surface2)", borderRadius: 6, padding: "0.75rem" }}>
-                        <div style={{ fontSize: "0.7rem", fontWeight: 700, color: "var(--text-muted)", marginBottom: 5, textTransform: "uppercase" }}>🔍 Por que esta ação é necessária</div>
+                        <div style={{ fontSize: "0.7rem", fontWeight: 700, color: "var(--text-muted)", marginBottom: 5, textTransform: "uppercase" }}>🔍 Por que está ação é necessária</div>
                         <div style={{ fontSize: "0.83rem", lineHeight: 1.55 }}>
                           {s.motivo || `O requisito "${s.titulo}" foi identificado na fonte de pesquisa mas não possui documentação correspondente no portal do ${produto.toUpperCase()}.`}
                         </div>

@@ -1,18 +1,18 @@
 ﻿---
 sidebar_position: 5
 title: Relatórios Power BI
-description: Configuração de relatórios Power BI integrados
+description: Configuração de Relatórios Power BI integrados
 ---
 
 # Relatórios Power BI
 
-Permite configurar e acessar relatórios do Power BI integrados ao AxHub.
+Permite configurar e acessar Relatórios do Power BI integrados ao AxHub.
 
 ![Menu Power BI](../img/Relatórios%20BI%20-.menu.png)
 
 ## Como acessar
 
-**Menu lateral** → Configurações → **Relatórios Power BI**
+**Menu lateral** → Configurações → Relatórios Power BI**
 
 ## Relatórios disponíveis
 
@@ -21,12 +21,12 @@ Permite configurar e acessar relatórios do Power BI integrados ao AxHub.
 | **Comparativo de Placas** | Placas corrigidas e validadas no processamento |
 | **Dados Descartes** | Análise de descartes de radares CEV |
 | **Boletim de Medição** | Resumo de medição contratual |
-| **Disponibilidade** | Índice de disponibilidade dos equipamentos |
-| **Infração - Dia x Hora** | Distribuição de infrações por dia e hora |
+| **Disponibilidade** | Índice de disponibilidade dos Equipamentos |
+| Infração - Dia x Hora** | Distribuição de Infrações por dia e hora |
 | **Processamento** | Análise do processamento de imagens |
 | **Índice do OCR** | Performance do reconhecimento de placas |
-| **Fluxo por Porte** | Médio diário de fluxo por porte de veículo |
-| **Triagem por Usuário** | Produtividade na triagem por analista |
+| **Fluxo por Porte** | Médio diário de fluxo por porte de Veículo |
+| **Triagem por Usuário | Produtividade na triagem por analista |
 
 ## Termos Tecnicos
 
@@ -40,5 +40,5 @@ Permite configurar e acessar relatórios do Power BI integrados ao AxHub.
 
 | Tipo | Pagina | Descricao |
 |------|--------|-----------|
-| Relacionado | [Power BI (Relatorios)](../relatorios/power-bi) | Visualizar relatorios |
-| Relacionado | [Configuracoes do Sistema](./configuracoes-sistema) | Config geral |
+| Relacionado | [Power BI (Relatorios)](../Relatórios/power-bi) | Visualizar Relatórios |
+| Relacionado | [Use 'Use 'Use 'Use 'Use 'Use 'Use 'Use 'Use 'Use 'Use 'Use 'Use 'Use 'Use 'Use 'Use 'Use 'Use 'Use 'Use 'Use 'Use 'Use 'Configuração'uração'uração'uração'uração'uração'uração'uração'uração'uração'uração'uração'uração'uração'uração'uração'uração'uração'uração'uração'uração'uração'uração'uração'uracoes do Sistema](./configuracoes-sistema) | Config geral |

@@ -1,12 +1,12 @@
 ---
 sidebar_position: 1
 title: Triagem
-description: Triagem de infrações de cronotacógrafo
+description: Triagem de Infrações de cronotacógrafo
 ---
 
 # Triagem — Cronotacógrafo
 
-A tela de Triagem do Cronotacógrafo permite que os analistas revisem as infrações de excesso de jornada e outras violações detectadas nos registros de cronotacógrafo dos veículos pesados.
+A tela de Triagem do Cronotacógrafo permite que os analistas revisem as Infrações de excesso de jornada e outras violações detectadas nos registros de cronotacógrafo dos Veículos pesados.
 
 ![Histórico de Triagem do Cronotacógrafo](../img/cronotacografo-triagem-historico.png)
 
@@ -16,7 +16,7 @@ A tela de Triagem do Cronotacógrafo permite que os analistas revisem as infraç
 
 ## Fluxo de triagem do cronotacógrafo
 
-A triagem do cronotacógrafo é paralela à triagem de infrações convencionais, porém com uma etapa adicional: a **consulta ao sistema de registros de cronotacógrafo** antes de confirmar a infração.
+A triagem do cronotacógrafo é paralela à triagem de Infrações convencionais, porém com uma etapa adicional: a **consulta ao sistema de registros de cronotacógrafo** antes de confirmar a Infração
 
 ## Dados da triagem — `TBTriagensCronotacografos`
 
@@ -26,9 +26,9 @@ A triagem do cronotacógrafo usa o mesmo Id da passagem (`TBPassagensCronotacogr
 |-------|------|-----------|
 | **Id** | = PassagemCronotacografo_id | Identity shared com a passagem |
 | **Motivo Descarte** | FK | Motivo de descarte aplicado na triagem |
-| **Usuário** | FK | Usuário responsável pela triagem |
-| **Usuário Triagem** | FK | Analista que fez a triagem manual |
-| **Usuário Auditoria** | FK | Auditor que validou a triagem |
+| Usuário | FK | Usuário responsável pela triagem |
+| Usuário Triagem** | FK | Analista que fez a triagem manual |
+| Usuário Auditoria** | FK | Auditor que validou a triagem |
 | **Status Consulta Cronotacógrafo** | varchar(15) | Estado da consulta ao banco externo: `Pendente`, `Consultado`, `Erro`, `NaoAplicavel` |
 
 ## Dados verificados na consult — `TBDadosCronotacografos`
@@ -64,5 +64,5 @@ A triagem do cronotacógrafo usa o mesmo Id da passagem (`TBPassagensCronotacogr
 
 | Tipo | Pagina | Descricao |
 |------|--------|-----------|
-| Proximo | [Consulta](./consulta) | Consultar registros processados |
+| próximo | [Consulta](./consulta) | Consultar registros processados |
 | Glossario | [Cronotacografo](../glossario/cronotacografo) | Definicao tecnica e base legal |

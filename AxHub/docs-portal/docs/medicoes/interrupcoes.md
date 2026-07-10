@@ -6,7 +6,7 @@ description: Registro e processamento de interrupções contratuais
 
 # Interrupções
 
-Permite registrar interrupções no funcionamento dos equipamentos que impactam a medição contratual.
+Permite registrar interrupções no funcionamento dos Equipamentos que impactam a medição contratual.
 
 ![Lista de Interrupções](../img/Medição%20-%20interrupções.png)
 
@@ -20,7 +20,7 @@ Permite registrar interrupções no funcionamento dos equipamentos que impactam 
 
 | Campo | Descrição |
 |-------|-----------|
-| **Equipamento** | Equipamento afetado |
+| Equipamento | Equipamento afetado |
 | **Data/Hora Início** | Início da interrupção |
 | **Data/Hora Fim** | Fim da interrupção |
 | **Motivo** | Causa da interrupção |

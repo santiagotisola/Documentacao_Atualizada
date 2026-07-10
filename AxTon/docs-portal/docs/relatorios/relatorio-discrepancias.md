@@ -6,13 +6,13 @@ description: Divergências entre pesagens e dados esperados
 
 # Relatório de Discrepâncias
 
-![Relatório de Pesagem](../img/Relatorio%20de%20pesagem.png)
+Relatório de Pesagem](../img/Relatorio%20de%20pesagem.png)
 
 Identifica discrepâncias entre os dados registrados e os valores esperados, incluindo diferenças de peso e classificação.
 
 ## Como acessar
 
-**Menu lateral** → Relatórios → **Relatório de Discrepâncias**
+**Menu lateral** → Relatórios → Relatório de Discrepâncias**
 
 ## Dados do Relatório
 

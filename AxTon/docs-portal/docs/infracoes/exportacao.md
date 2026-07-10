@@ -1,14 +1,14 @@
 ﻿---
 sidebar_position: 4
 title: Exportação de Infrações
-description: Exportar lotes de infrações para o órgão autuador no AxTon
+description: Exportar lotes de Infrações para o órgão autuador no AxTon
 ---
 
 # Exportação de Infrações
 
 ![Tela de Exportação](../img/axton-exportacao.png)
 
-A exportação envia as infrações registradas para o órgão autuador em **lotes numerados**. Cada lote contém as infrações de um determinado período e tipo, com sequencial próprio.
+A exportação envia as Infrações registradas para o órgão autuador em **lotes numerados**. Cada lote contém as Infrações de um determinado período e tipo, com sequencial próprio.
 
 ## Como acessar
 
@@ -22,11 +22,11 @@ A exportação envia as infrações registradas para o órgão autuador em **lot
 |--------|-----------|
 | **Arquivo** | Formato do arquivo exportado (ex: XTraffic) |
 | **Tipo Exportação** | Sistema destino (XTraffic ou AxHub) |
-| **Tipo Infração** | Excesso de PBT, Eixo ou Eixo/PBT |
+| **Tipo Infração | Excesso de PBT, Eixo ou Eixo/PBT |
 | **Sequencial** | Número do lote de exportação |
 | **Data Gerada** | Data em que o lote foi criado |
-| **Data Inicial** | Período inicial das infrações |
-| **Data Final** | Período final das infrações |
+| **Data Inicial** | Período inicial das Infrações |
+| **Data Final** | Período final das Infrações |
 | **Logs** | Informações de processamento |
 | **Status** | Ok, Processando ou Error |
 | **Ações** | Visualizar e Excluir |
@@ -72,14 +72,14 @@ A exportação envia as infrações registradas para o órgão autuador em **lot
 1. No menu lateral, clique em **Exportação**
 2. Clique em **+ Novo**
 3. Selecione o **Tipo de Exportação** (XTraffic ou AxHub)
-4. Selecione o **Tipo de Infração**
+4. Selecione o **Tipo de Infração
 5. Defina o **Período** (Data Inicial e Final)
 6. Clique em **Salvar**
 7. Aguarde o status mudar para **Ok**
 8. Clique em **Visualizar** para conferir o conteúdo
 
 :::tip Dica
-Gere lotes separados para cada **Tipo de Infração**. O órgão autuador geralmente exige arquivos separados por enquadramento.
+Gere lotes separados para cada **Tipo de Infração órgão autuador geralmente exige arquivos separados por enquadramento.
 :::
 
 :::warning Atenção

@@ -329,7 +329,7 @@
       var subject = subjectEl ? subjectEl.value.trim() : '';
       var body = bodyEl ? bodyEl.value.trim() : '';
 
-      if (!email || !pass) { msgEl.innerHTML = '<div class="ax-hd-error">Preencha login e senha.</div>'; return; }
+      if (!email || !pass) { msgEl.innerHTML = '<div class="ax-hd-error">Preencha Login e senha.</div>'; return; }
       if (!subject) { msgEl.innerHTML = '<div class="ax-hd-error">Preencha o assunto.</div>'; return; }
       if (!body) { msgEl.innerHTML = '<div class="ax-hd-error">Descreva o problema.</div>'; return; }
 

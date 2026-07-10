@@ -1,6 +1,6 @@
 ﻿---
 sidebar_position: 5
-title: "Infração de Trânsito"
+title: Infração de Trânsito"
 ---
 
 # Infração de Trânsito

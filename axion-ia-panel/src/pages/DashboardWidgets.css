@@ -16,18 +16,20 @@
 }
 
 .widget-kpi-card {
-  background: var(--surface, #1e293b);
-  border: 1px solid var(--border, rgba(255,255,255,0.08));
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-top: 3px solid var(--widget-color, #6366f1);
   border-radius: 12px;
   padding: 1.25rem;
   display: flex;
   align-items: center;
   gap: 1rem;
   transition: transform 0.15s, box-shadow 0.15s;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.05);
 }
 .widget-kpi-card:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.09);
 }
 
 .widget-kpi-icon {
@@ -48,7 +50,7 @@
 }
 .widget-kpi-label {
   font-size: 0.75rem;
-  color: var(--text-muted, #64748b);
+  color: #6b7280;
   text-transform: uppercase;
   letter-spacing: 0.04em;
   font-weight: 600;
@@ -56,7 +58,7 @@
 .widget-kpi-value {
   font-size: 1.5rem;
   font-weight: 800;
-  color: var(--text, #f1f5f9);
+  color: #111827;
   line-height: 1;
 }
 .widget-kpi-trend {
@@ -72,10 +74,11 @@
 
 /* ─── Widget Cards (charts, activity, tasks) ─── */
 .widget-card {
-  background: var(--surface, #1e293b);
-  border: 1px solid var(--border, rgba(255,255,255,0.08));
+  background: #fff;
+  border: 1px solid #e5e7eb;
   border-radius: 12px;
   overflow: hidden;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.05);
 }
 .widget-card-header {
   display: flex;
@@ -86,7 +89,7 @@
 .widget-card-header h4 {
   font-size: 0.9rem;
   font-weight: 700;
-  color: var(--text, #f1f5f9);
+  color: #111827;
   margin: 0;
 }
 .widget-badge {
@@ -130,11 +133,11 @@
   align-items: flex-start;
   gap: 12px;
   padding: 0.7rem 1.25rem;
-  border-bottom: 1px solid var(--border, rgba(255,255,255,0.05));
+  border-bottom: 1px solid #f1f5f9;
   transition: background 0.12s;
 }
 .widget-activity-item:hover {
-  background: rgba(255,255,255,0.02);
+  background: #f8fafc;
 }
 .widget-activity-item:last-child { border-bottom: none; }
 
@@ -157,14 +160,14 @@
 }
 .widget-activity-text {
   font-size: 0.82rem;
-  color: var(--text, #e2e8f0);
+  color: #374151;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 .widget-activity-time {
   font-size: 0.7rem;
-  color: var(--text-muted, #64748b);
+  color: #9ca3af;
 }
 .widget-activity-empty {
   padding: 1.5rem;
@@ -183,7 +186,7 @@
 }
 .widget-task-item {
   padding: 0.6rem 1.25rem;
-  border-bottom: 1px solid var(--border, rgba(255,255,255,0.05));
+  border-bottom: 1px solid #f1f5f9;
 }
 .widget-task-item:last-child { border-bottom: none; }
 .widget-task-item label {
@@ -192,7 +195,7 @@
   gap: 10px;
   cursor: pointer;
   font-size: 0.82rem;
-  color: var(--text, #e2e8f0);
+  color: #374151;
 }
 .widget-task-item input[type="checkbox"] {
   width: 16px;

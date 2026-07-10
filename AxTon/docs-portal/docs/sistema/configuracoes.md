@@ -1,14 +1,14 @@
 ﻿---
 sidebar_position: 1
 title: Configurações do Sistema
-description: Configurações gerais, dados do órgão, HAENNI, infração e câmera IP no AxTon
+description: Configurações gerais, dados do órgão, HAENNI, Infração e câmera IP no AxTon
 ---
 
 # Configurações do Sistema
 
 ![Tela de Configurações do Sistema](../img/axton-sistema.png)
 
-A tela de **Configurações do Sistema** centraliza todos os parâmetros operacionais do AxTon. Organizada em abas, cobre desde dados do órgão fiscalizador até a integração com a balança e o AxHub.
+A tela de Configurações do Sistema** centraliza todos os parâmetros operacionais do AxTon. Organizada em abas, cobre desde dados do órgão fiscalizador até a integração com a balança e o AxHub.
 
 ## Como acessar
 
@@ -21,7 +21,7 @@ A tela de **Configurações do Sistema** centraliza todos os parâmetros operaci
 | **Gerais** | Parâmetros gerais do sistema e integração com AxHub |
 | **Dados do Órgão** | Informações do órgão fiscalizador |
 | **HAENNI** | Configuração da balança HAENNI |
-| **Infração** | Parâmetros de cálculo e enquadramento de infrações |
+| Infração | Parâmetros de cálculo e enquadramento de Infrações |
 | **Câmera IP** | Configuração da câmera de captura de imagens |
 
 ---
@@ -30,8 +30,8 @@ A tela de **Configurações do Sistema** centraliza todos os parâmetros operaci
 
 | Campo | Descrição |
 |-------|-----------|
-| **Código do Equipamento** | Identificador único deste equipamento de pesagem |
-| **Tipo de Exportação** | XTraffic ou AxHub (formato dos lotes de infração) |
+| **Código do Equipamento | Identificador único deste Equipamento de pesagem |
+| **Tipo de Exportação** | XTraffic ou AxHub (formato dos lotes de Infração |
 | **Imagem obrigatória** | Exige foto da pesagem para finalizar o ticket |
 | **Url AxHub** | Endereço de integração com o sistema AxHub |
 | **Chave de Api** | Token de autenticação do AxHub |
@@ -40,26 +40,26 @@ A tela de **Configurações do Sistema** centraliza todos os parâmetros operaci
 
 ## Aba Infração — Cálculos e Tolerâncias
 
-Esta aba define os **limites de tolerância** aplicados antes de gerar uma infração.
+está aba define os **limites de tolerância** aplicados antes de gerar uma Infração
 
 | Campo | Descrição |
 |-------|-----------|
-| **Tolerância PBT (%)** | Percentual acima do PBT regulamentado que não gera infração |
+| **Tolerância PBT (%)** | Percentual acima do PBT regulamentado que não gera Infração |
 | **Tolerância Eixo/Grupo (%)** | Percentual de tolerância por eixo |
 | **Tolerância Transbordo (%)** | Tolerância específica para transbordo |
 | **Cód. Enquadramento Excesso de PBT** | Código legal do enquadramento |
 | **Cód. Enquadramento Excesso de Eixo** | Código legal do enquadramento |
 | **Cód. Enquadramento Excesso Eixo/PBT** | Código legal do enquadramento |
 
-### Como funcionam os cálculos de infração
+### Como funcionam os cálculos de Infração
 
 #### Infração de Excesso de PBT
 
-Ocorre quando o **PBT Regulamentado do veículo for maior que 50.000 kg**.
+Ocorre quando o **PBT Regulamentado do Veículo for maior que 50.000 kg**.
 
 ```
 PBT Considerado = PBT Regulamentado + (PBT Regulamentado × Tolerância PBT %)
-Excesso de PBT  = PBT Medido - PBT Considerado
+Excesso de PBT = PBT Medido - PBT Considerado
 ```
 
 **Exemplo:**
@@ -75,7 +75,7 @@ Ocorre quando o peso em um ou mais eixos supera o limite regulamentado + tolerâ
 
 ```
 Peso Eixo Considerado = Peso Limite Eixo + (Peso Limite Eixo × Tolerância Eixo %)
-Excesso de Eixo       = Peso Eixo Medido - Peso Eixo Considerado
+Excesso de Eixo = Peso Eixo Medido - Peso Eixo Considerado
 ```
 
 ---
@@ -88,7 +88,7 @@ Configura a integração com a balança veicular HAENNI:
 |-------|-----------|
 | **URL do Servidor** | Endereço do servidor da balança |
 | **Hnuid** | Identificador único do hardware HAENNI |
-| **Classe** | Classe do equipamento |
+| **Classe** | Classe do Equipamento |
 | **Modelo** | Modelo da balança |
 | **Serial** | Número de série |
 | **Nº Lacre** | Número do lacre de verificação metrólogica |
@@ -112,7 +112,7 @@ O sistema bloqueia o uso da balança quando a **validade da aferição** expirar
 | **Título do Órgão** | Descrição que aparece nos documentos gerados |
 
 :::tip Dica
-Após alterar qualquer configuração, clique em **Salvar** no topo da tela para persistir as mudanças.
+Após alterar qualquer Configuração clique em **Salvar** no topo da tela para persistir as mudanças.
 :::
 
 ## Veja também

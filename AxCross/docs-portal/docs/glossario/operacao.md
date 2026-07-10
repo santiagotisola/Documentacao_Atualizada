@@ -11,9 +11,9 @@ Atividade de fiscalização planejada e executada em um ou mais cruzamentos dura
 
 | Status | Descrição |
 |--------|-----------|
-| **Ativa** | Operação em andamento — equipamentos monitorando e registrando passagens |
+| **Ativa** | Operação em andamento — Equipamentos monitorando e registrando passagens |
 | **Pausada** | Operação temporariamente interrompida — pode ser retomada |
-| **Encerrada** | Operação finalizada — dados consolidados para relatório |
+| **Encerrada** | Operação finalizada — dados consolidados para Relatório |
 
 ## Campos principais
 

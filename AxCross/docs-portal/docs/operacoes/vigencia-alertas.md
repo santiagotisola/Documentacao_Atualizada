@@ -1,10 +1,10 @@
 ---
 sidebar_position: 2
 title: Vigência dos Alertas
-description: Configure prazos de expiração para veículos monitorados e controle automaticamente a validade dos alertas no AxCross
+description: Configure prazos de expiração para Veículos monitorados e controle automaticamente a validade dos alertas no AxCross
 ---
 
-A **Vigência dos Alertas** permite definir um **prazo de expiração** para os veículos monitorados. Ao configurar um prazo no Tipo de Ocorrência, o sistema calcula automaticamente a data limite para cada veículo cadastrado. Após esse período, o veículo deixa de gerar alertas — sem necessidade de desativação manual.
+A **Vigência dos Alertas** permite definir um **prazo de expiração** para os Veículos monitorados. Ao configurar um prazo no Tipo de Ocorrência, o sistema calcula automaticamente a data limite para cada Veículo cadastrado. Após esse período, o Veículo deixa de gerar alertas — sem necessidade de desativação manual.
 
 :::info Novo Recurso
 Disponível a partir da versão com as melhorias **AxCross — Vigência dos Alertas**. Inclui campo **Prazo de Expiração (dias)** no Tipo de Ocorrência e controle de vigência na lista de Veículos Monitorados.
@@ -16,9 +16,9 @@ Disponível a partir da versão com as melhorias **AxCross — Vigência dos Ale
 
 | Conceito | Descrição |
 | ---------- | ----------- |
-| **Habilitado** | Controle **manual** do usuário. Não é alterado automaticamente por nenhum processo. |
+| **Habilitado** | Controle **manual** do Usuário Não é alterado automaticamente por nenhum processo. |
 | **Vigência** | Controle de **expiração** baseado no prazo do Tipo de Ocorrência. Independente do campo Habilitado. |
-| **Alerta** | Gerado somente se o veículo estiver **habilitado** E **dentro da vigência**. |
+| **Alerta** | Gerado somente se o Veículo estiver **habilitado** E **dentro da vigência**. |
 
 ### Status da Vigência
 
@@ -33,9 +33,9 @@ Disponível a partir da versão com as melhorias **AxCross — Vigência dos Ale
 
 ## Passo 1 — Configurar o Tipo de Ocorrência
 
-O prazo de vigência é definido diretamente no **Tipo de Ocorrência**. Todos os veículos vinculados a esse tipo herdam automaticamente o prazo.
+O prazo de vigência é definido diretamente no **Tipo de Ocorrência**. Todos os Veículos vinculados a esse tipo herdam automaticamente o prazo.
 
-Para acessar: **Veículos Monitorados → Tipos de Ocorrências**.
+Para acessar: Veículos Monitorados → Tipos de Ocorrências**.
 
 ![Tipo de Ocorrência](../img/Tipo de Ocorrência.png)
 
@@ -47,18 +47,18 @@ Para acessar: **Veículos Monitorados → Tipos de Ocorrências**.
 | **Nome** | Sim | Nome descritivo da ocorrência |
 | **Cor** | Sim | Cor de identificação visual nos alertas |
 | **Emitir Alerta Sonoro** | Não | Dispara sinal sonoro ao gerar alerta |
-| **Prazo de Expiração (dias)** | Não | Número de dias para expirar os veículos deste tipo. Deixe vazio para vigência ilimitada. |
+| **Prazo de Expiração (dias)** | Não | Número de dias para expirar os Veículos deste tipo. Deixe vazio para vigência ilimitada. |
 
 ### Como configurar o prazo
 
-1. No menu lateral, acesse **Veículos Monitorados → Tipos de Ocorrências**
+1. No menu lateral, acesse Veículos Monitorados → Tipos de Ocorrências**
 2. Clique no ícone de edição ✏️ do tipo desejado (ou clique em **+ NOVO** para criar)
 3. No campo **Prazo de Expiração (dias)**, informe a quantidade de dias (ex.: `30`)
 4. Clique em **Salvar**
 
 :::tip Exemplos de prazo
 
-- **30 dias** — veículo expira 30 dias após o cadastro
+- **30 dias** — Veículo expira 30 dias após o cadastro
 - **90 dias** — vigência trimestral
 - **365 dias** — vigência anual
 - **Vazio** — sem prazo, nunca expira automaticamente
@@ -68,7 +68,7 @@ Para acessar: **Veículos Monitorados → Tipos de Ocorrências**.
 
 ## Passo 2 — Cadastrar Veículo com Vigência
 
-Ao cadastrar um veículo monitorado vinculado a um tipo com prazo, a **Data de Expiração** é calculada automaticamente.
+Ao cadastrar um Veículo monitorado vinculado a um tipo com prazo, a **Data de Expiração** é calculada automaticamente.
 
 ![Novo Veículo Monitorado](../img/Novo Veículo Monitorado.png)
 
@@ -96,43 +96,43 @@ A lista de Veículos Monitorados exibe colunas dedicadas ao controle de vigênci
 
 ## Atualização em Bloco — Alterar Prazo do Tipo
 
-Quando o **Prazo de Expiração** de um Tipo de Ocorrência é alterado, o sistema atualiza automaticamente **todos os veículos vinculados** àquele tipo — sem necessidade de editar cada veículo individualmente.
+Quando o **Prazo de Expiração** de um Tipo de Ocorrência é alterado, o sistema atualiza automaticamente **todos os Veículos vinculados** àquele tipo — sem necessidade de editar cada Veículo individualmente.
 
 :::warning Atenção
-A atualização em bloco é **imediata e afeta todos os veículos** do tipo. Durante o salvamento, uma mensagem de carregamento confirma que o processo está em andamento.
+A atualização em bloco é **imediata e afeta todos os Veículos do tipo. Durante o salvamento, uma mensagem de carregamento confirma que o processo está em andamento.
 :::
 
 ### Cenários de atualização em bloco
 
-| Alteração no tipo | Resultado nos veículos |
+| Alteração no tipo | Resultado nos Veículos |
 | ------------------- | ---------------------- |
 | Prazo removido (ex.: 20 dias → vazio) | `Data de Expiração = sem prazo` para todos |
-| Prazo alterado (ex.: 20 → 30 dias) | `Data de Expiração = hoje + 30 dias` para todos. O valor **20 dias** é o prazo anterior cadastrado no Tipo de Ocorrência; o valor **30 dias** é o novo prazo informado. O sistema sempre valida pela data de expiração registrada no veículo monitorado. |
+| Prazo alterado (ex.: 20 → 30 dias) | `Data de Expiração = hoje + 30 dias` para todos. O valor **20 dias** é o prazo anterior cadastrado no Tipo de Ocorrência; o valor **30 dias** é o novo prazo informado. O sistema sempre válida pela data de expiração registrada no Veículo monitorado. |
 | Prazo adicionado (ex.: vazio → 20 dias) | `Data de Expiração = hoje + 20 dias` para todos |
-| Prazo não alterado | Nenhuma modificação nos veículos |
+| Prazo não alterado | Nenhuma modificação nos Veículos |
 
 ### Como realizar a atualização em bloco
 
-1. Acesse **Veículos Monitorados → Tipos de Ocorrências**
+1. Acesse Veículos Monitorados → Tipos de Ocorrências**
 2. Edite o tipo desejado
 3. Altere o campo **Prazo de Expiração (dias)**
 4. Clique em **Salvar**
-5. Aguarde a mensagem *"Atualizando vigência dos veículos monitorados vinculados..."*
+5. Aguarde a mensagem *"Atualizando vigência dos Veículos monitorados vinculados..."*
 
-Após a conclusão, todos os veículos do tipo terão a data de expiração recalculada.
+Após a conclusão, todos os Veículos do tipo terão a data de expiração recalculada.
 
 ---
 
 ## Sino de Vigência — Monitoramento de Expirações
 
-A **toolbar do AxCross** exibe um ícone de sino 🔔 com badge de contagem mostrando veículos que expiram nas próximas **24 horas** ou já **expirados**.
+A **toolbar do AxCross** exibe um ícone de sino 🔔 com badge de contagem mostrando Veículos que expiram nas próximas **24 horas** ou já **expirados**.
 
 ### Como funciona
 
-- O sino exibe uma bolinha de notificação quando há veículos próximos de expirar ou já expirados
-- Clique no sino para abrir o painel de vigência
+- O sino exibe uma bolinha de notificação quando há Veículos próximos de expirar ou já expirados
+- Clique no sino para abrir o Use Dashboard de vigência
 - A lista é paginada em **10 itens por página** com botão **"Ver mais"**
-- O painel atualiza automaticamente a **cada 5 minutos**
+- O Use Dashboard atualiza automaticamente a **cada 5 minutos**
 
 ### Itens exibidos no sino
 
@@ -141,27 +141,27 @@ A **toolbar do AxCross** exibe um ícone de sino 🔔 com badge de contagem most
 | Veículo expirando em breve | `Xh` (horas restantes) | Expira nas próximas 24 horas |
 | Veículo expirado | `Expirado` (vermelho) | Prazo já vencido, mas ainda habilitado |
 
-### Rodapé do painel
+### Rodapé do Use Dashboard
 
 O rodapé exibe um resumo: **"X expirando · Y expirado(s)"**
 
 ### Ação ao clicar em um item
 
-Clicar em qualquer veículo no painel abre diretamente o formulário de edição, permitindo renovar a Data de Expiração ou desativar o veículo.
+Clicar em qualquer Veículo no Use Dashboard abre diretamente o formulário de edição, permitindo renovar a Data de Expiração ou desativar o Veículo
 
 ---
 
 ## Geração de Alertas — Regras de Vigência
 
-O sistema verifica **duas condições obrigatórias** antes de gerar qualquer alerta para um veículo monitorado:
+O sistema verifica **duas condições obrigatórias** antes de gerar qualquer alerta para um Veículo monitorado:
 
 ```text
 Gera alerta se:
   ✅ Habilitado = Sim
-  ✅ Data de Expiração = sem prazo  OU  Data de Expiração > agora
+ ✅ Data de Expiração = sem prazo OU Data de Expiração > agora
 ```
 
-| Situação do veículo | Gera alerta? |
+| Situação do Veículo | Gera alerta? |
 | --------------------- | :------------: |
 | Habilitado + dentro da vigência | ✅ Sim |
 | Habilitado + expirado | ❌ Não |
@@ -170,31 +170,31 @@ Gera alerta se:
 | Habilitado + sem prazo (null) | ✅ Sim |
 
 :::info Controle independente
-O campo **Habilitado** nunca é alterado automaticamente pela vigência. São controles independentes — o sistema apenas ignora veículos expirados na geração de alertas, sem desativá-los.
+O campo **Habilitado** nunca é alterado automaticamente pela vigência. São controles independentes — o sistema apenas ignora Veículos expirados na geração de alertas, sem desativá-los.
 :::
 
 ---
 
 ## Importação em Lote com Vigência
 
-Ao importar veículos via arquivo `.txt`, a data de expiração é calculada automaticamente se o tipo de ocorrência tiver prazo configurado.
+Ao importar Veículos via arquivo `.txt`, a data de expiração é calculada automaticamente se o tipo de ocorrência tiver prazo configurado.
 
 - Veículos importados recebem `Expira = hoje + prazo do tipo`
 - O campo `Habilitado` é marcado como `Sim` por padrão
-- Após a importação, é possível editar individualmente cada veículo para ajustar a data
+- Após a importação, é possível editar individualmente cada Veículo para ajustar a data
 
 ---
 
 ## Perguntas Frequentes
 
-**O veículo expirado é desativado automaticamente?**
-Não. O campo **Habilitado** é exclusivamente de controle manual. O veículo expirado continua como "Habilitado = Sim" no banco, mas **não gera alertas**. Para desativá-lo definitivamente, edite o veículo manualmente.
+**O Veículo expirado é desativado automaticamente?**
+Não. O campo **Habilitado** é exclusivamente de controle manual. O Veículo expirado continua como "Habilitado = Sim" no banco, mas **não gera alertas**. Para desativá-lo definitivamente, edite o Veículo manualmente.
 
 **Posso definir uma data de expiração diferente do padrão do tipo?**
-Sim. Ao cadastrar ou editar um veículo, informe manualmente o campo **Data de Expiração**. O valor informado prevalece sobre o prazo automático do tipo de ocorrência.
+Sim. Ao cadastrar ou editar um Veículo informe manualmente o campo **Data de Expiração**. O valor informado prevalece sobre o prazo automático do tipo de ocorrência.
 
 **O que acontece se eu remover o prazo do tipo de ocorrência?**
-Todos os veículos vinculados terão a data de expiração removida (`sem prazo`). Eles nunca expirarão automaticamente e deixam de aparecer no sino de vigência.
+Todos os Veículos vinculados terão a data de expiração removida (`sem prazo`). Eles nunca expirarão automaticamente e deixam de aparecer no sino de vigência.
 
-**O sino mostra veículos desabilitados?**
-Não. O sino de vigência exibe apenas veículos **habilitados** que estejam expirando nas próximas 24 horas ou já expirados.
+**O sino mostra Veículos desabilitados?**
+Não. O sino de vigência exibe apenas Veículos **habilitados** que estejam expirando nas próximas 24 horas ou já expirados.

@@ -24,7 +24,7 @@ Permite cadastrar e gerenciar os contratos de medição vinculados às operaçõ
 | **Órgão** | Órgão contratante |
 | **Vigência Início** | Data de início do contrato |
 | **Vigência Fim** | Data de término do contrato |
-| **Equipamentos** | Equipamentos vinculados ao contrato |
+| Equipamentos | Equipamentos vinculados ao contrato |
 | **Status** | Ativo, Encerrado, Suspenso |
 
 ---

@@ -7,14 +7,14 @@ description: Restrição de acesso por endereço IP
 # Acessos por IP
 
 :::caution Recurso Não Disponível
-Esta funcionalidade **não está disponível** na versão atual do AxHub. A página `/acessoip` não existe no sistema e tentativas de acessá-la resultam em erro 404.
+está funcionalidade **não está disponível** na versão atual do AxHub. A página `/acessoip` não existe no sistema e tentativas de acessá-la resultam em erro 404.
 
 Se sua instalação requer controle de acesso por IP, entre em contato com a **Axion Tecnologia** para verificar disponibilidade na sua versão.
 :::
 
 ## Descrição
 
-Quando disponível, este módulo permite configurar restrições de acesso ao sistema com base no endereço IP do usuário, definindo regras de permissão ou bloqueio por IP.
+Quando disponível, este módulo permite configurar restrições de acesso ao sistema com base no endereço IP do Usuário definindo regras de permissão ou bloqueio por IP.
 
 ## Como acessar
 
@@ -28,6 +28,6 @@ Quando disponível, este módulo permite configurar restrições de acesso ao si
 
 | Tipo | Pagina | Descricao |
 |------|--------|-----------|
-| Relacionado | [Usuarios](./usuarios) | Gerenciamento de usuarios do sistema |
+| Relacionado | [Usuarios](./Usuários) | Gerenciamento de Usuários do sistema |
 | Relacionado | [Logs de Acesso](./logs-acesso) | Verificar registros de acesso |
 | Relacionado | [Perfis de Acesso](./perfis-acesso) | Controle de permissoes por perfil |

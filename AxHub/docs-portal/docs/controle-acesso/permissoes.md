@@ -6,7 +6,7 @@ description: Configuração granular de permissões por perfil
 
 # Permissões de Acesso
 
-Permite configurar permissões detalhadas para cada perfil de acesso, controlando quais operações cada grupo de usuários pode executar em cada módulo do sistema.
+Permite configurar permissões detalhadas para cada perfil de acesso, controlando quais operações cada grupo de Usuários pode executar em cada módulo do sistema.
 
 ![Permissões de Acesso](../img/Controle%20de%20acessos%20-%20permissao%20de%20acesso.png)
 
@@ -20,7 +20,7 @@ As permissões são organizadas por **módulo** e **operação**. Cada combinaç
 
 | Coluna | Descrição |
 |--------|-----------|
-| **Módulo** | Seção do sistema (Infrações, Operações, etc.) |
+| **Módulo** | Seção do sistema Infrações Operações, etc.) |
 | **Visualizar** | Permissão para consultar e listar dados |
 | **Criar** | Permissão para inserir novos registros |
 | **Editar** | Permissão para alterar registros existentes |
@@ -36,24 +36,24 @@ As permissões são organizadas por **módulo** e **operação**. Cada combinaç
 4. Clique em **Salvar** para aplicar as alterações
 
 :::warning Atenção
-As alterações de permissão têm efeito imediato. Usuários com sessão ativa podem precisar fazer logout e login novamente para que as novas permissões sejam aplicadas.
+As alterações de permissão têm efeito imediato. Usuários com sessão ativa podem precisar fazer Logout e Login novamente para que as novas permissões sejam aplicadas.
 :::
 
-## Módulos disponíveis para configuração
+## Módulos disponíveis para Configuração
 
 | Módulo | Funções configuráveis |
 |--------|----------------------|
-| **Dashboard** | Visualizar indicadores e gráficos |
-| **Infrações** | Triagem, auditoria, exportação, consulta |
+| Dashboard | Visualizar indicadores e gráficos |
+| Infrações | Triagem, auditoria, exportação, consulta |
 | **Cronotacógrafo** | Consulta e triagem de registros |
 | **Balança** | Pesagem e triagem |
 | **Operações** | Aferiçoes, monitoramento, cadastros |
-| **Veículos** | Consulta e manutenção de cadastros |
-| **Equipamentos** | Cadastro e manutenção |
+| Veículos | Consulta e manutenção de cadastros |
+| Equipamentos | Cadastro e manutenção |
 | **Medição** | Contratos, criação e aprovação de medições |
-| **Relatórios** | Acesso por tipo de relatório |
-| **Controle de Acesso** | Gestão de usuários e perfis |
-| **Configurações** | Parâmetros do sistema |
+| Relatórios | Acesso por tipo de Relatório |
+| **Controle de Acesso** | Gestão de Usuários e perfis |
+| Configurações | Parâmetros do sistema |
 
 ---
 

@@ -8,7 +8,7 @@ description: Consulta de tickets de pesagem finalizados
 
 ![Layout do Ticket](../img/layout%20ticket%20Axton.png)
 
-Tickets fechados são registros de pesagem já finalizados. Permitem consulta histórica e geração de relatórios.
+Tickets fechados são registros de pesagem já finalizados. Permitem consulta histórica e geração de Relatórios
 
 ## Como acessar
 
@@ -21,7 +21,7 @@ Tickets fechados são registros de pesagem já finalizados. Permitem consulta hi
 | Coluna | Descrição |
 |--------|-----------|
 | **Nº Ticket** | Número sequencial do ticket |
-| **Placa** | Placa do veículo |
+| **Placa** | Placa do Veículo |
 | **Data/Hora** | Data e hora da pesagem |
 | **Peso Bruto** | Peso total registrado |
 | **Peso Líquido** | Peso da carga (bruto - tara) |
@@ -31,7 +31,7 @@ Tickets fechados são registros de pesagem já finalizados. Permitem consulta hi
 ### Filtros disponíveis
 
 - Período (data inicial e final)
-- Placa do veículo
+- Placa do Veículo
 - Posto de pesagem
 - Com/sem excesso de peso
 

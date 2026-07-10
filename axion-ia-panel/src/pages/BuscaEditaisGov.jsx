@@ -122,7 +122,7 @@ export default function BuscaEditaisGov({ embedded = false }) {
       {!embedded && (
         <div className="cabecalho">
           <h2>🏛️ Busca de Editais no Gov.br</h2>
-          <p>Busque editais de licitações públicas e gere análise de conformidade automaticamente</p>
+          <p>Busque editais de licitações públicas e gere Análise de conformidade automaticamente</p>
         </div>
       )}
 

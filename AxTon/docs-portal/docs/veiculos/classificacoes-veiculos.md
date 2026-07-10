@@ -1,18 +1,18 @@
 ---
 sidebar_position: 5
 title: Classificações de Veículos
-description: Classificações de veículos por eixo e PBT
+description: Classificações de Veículos por eixo e PBT
 ---
 
 # Classificações de Veículos
 
 ![Classificação de Veículos — Cadastro](../img/classificacao-veiculos-cadastro.png)
 
-Classificações de veículos por eixo e PBT. Estes dados são utilizados automaticamente nas operações de pesagem e triagem de infrações.
+Classificações de Veículos por eixo e PBT. Estes dados são utilizados automaticamente nas operações de pesagem e triagem de Infrações
 
 ## Como acessar
 
-**Menu lateral** → Veículos → **Classificações de Veículos**
+**Menu lateral** → Veículos → **Classificações de Veículos
 
 ## Listagem
 

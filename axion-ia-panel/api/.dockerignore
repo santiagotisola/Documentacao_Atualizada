@@ -1,0 +1,23 @@
+# Não rastrear arquivos de autenticação WhatsApp
+*.json
+!package.json
+!package-lock.json
+session-*
+auth_info_baileys/
+
+# Logs
+logs/
+*.log
+
+# Screenshots de testes
+screenshots/
+
+# Reports gerados
+reports/
+
+# Node modules
+node_modules/
+
+# Cache
+.npm
+.cache

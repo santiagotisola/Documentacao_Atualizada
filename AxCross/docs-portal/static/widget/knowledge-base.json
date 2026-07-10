@@ -4,20 +4,20 @@
   "description": "Base de conhecimento do assistente AxionIA para o sistema AxCross",
   "entries": [
     {
-      "id": "login",
+      "id": "Login",
       "title": "Login no Sistema",
       "module": "Primeiros Passos",
-      "keywords": ["login", "entrar", "acessar", "senha", "credencial", "autenticacao"],
-      "content": "A tela de login é o ponto de entrada do AxCross. Informe nome de usuário e senha para acessar o sistema.",
+      "keywords": ["Login", "entrar", "acessar", "senha", "credencial", "autenticacao"],
+      "content": "A tela de Login é o ponto de entrada do AxCross. Informe nome de Usuário e senha para acessar o sistema.",
       "steps": [
         "Abra o navegador e acesse o endereço do AxCross",
         "Informe o Nome do Usuário",
         "Informe a Senha",
         "Clique em ENTRAR"
       ],
-      "path": "Tela de login do AxCross",
-      "docUrl": "primeiros-passos/login",
-      "related": ["recuperar-senha", "usuarios"],
+      "path": "Tela de Login do AxCross",
+      "docUrl": "primeiros-passos/Login",
+      "related": ["recuperar-senha", "Usuários"],
       "dbTables": []
     },
     {
@@ -25,32 +25,32 @@
       "title": "Recuperar Senha",
       "module": "Primeiros Passos",
       "keywords": ["esqueci senha", "recuperar senha", "redefinir senha", "senha esquecida"],
-      "content": "Se esqueceu a senha, clique em 'Esqueceu a Senha?' na tela de login. O sistema envia instruções de recuperação para o e-mail cadastrado.",
+      "content": "Se esqueceu a senha, clique em 'Esqueceu a Senha?' na tela de Login O sistema envia instruções de recuperação para o e-mail cadastrado.",
       "steps": [
-        "Na tela de login, clique em 'Esqueceu a Senha?'",
+        "Na tela de Login clique em 'Esqueceu a Senha?'",
         "Informe o e-mail cadastrado",
         "Acesse seu e-mail e siga as instruções",
         "Defina a nova senha"
       ],
-      "path": "Tela de login → Esqueceu a Senha?",
-      "docUrl": "primeiros-passos/login",
-      "related": ["login", "usuarios"],
+      "path": "Tela de Login → Esqueceu a Senha?",
+      "docUrl": "primeiros-passos/Login",
+      "related": ["Login", "Usuários"],
       "dbTables": []
     },
     {
-      "id": "dashboard",
-      "title": "Painel Principal (Dashboard)",
+      "id": "Dashboard",
+      "title": "Use Dashboard Principal Dashboard",
       "module": "Primeiros Passos",
-      "keywords": ["dashboard", "painel", "tela inicial", "indicadores", "graficos", "visao geral"],
-      "content": "O Dashboard é a tela inicial após o login. Exibe indicadores de status dos equipamentos, fluxo de passagens, passagens por local e alertas recentes.",
+      "keywords": ["Dashboard", "Use Dashboard", "tela inicial", "indicadores", "graficos", "visao geral"],
+      "content": "O Dashboard é a tela inicial após o Login Exibe indicadores de status dos Equipamentos fluxo de passagens, passagens por local e alertas recentes.",
       "steps": [
-        "Faça login no sistema",
+        "Faça Login no sistema",
         "O Dashboard é exibido automaticamente",
-        "Para retornar ao Dashboard: clique no logo AxCross no topo esquerdo"
+        "Para retornar ao Dashboard clique no logo AxCross no topo esquerdo"
       ],
-      "path": "Tela inicial após login",
-      "docUrl": "primeiros-passos/dashboard",
-      "related": ["monitoramento-online", "login"],
+      "path": "Tela inicial após Login",
+      "docUrl": "primeiros-passos/Dashboard",
+      "related": ["monitoramento-online", "Login"],
       "dbTables": []
     },
     {
@@ -63,29 +63,29 @@
         "O menu lateral está sempre visível à esquerda",
         "Clique em um item direto para acessar a tela",
         "Clique em uma categoria para expandir/recolher os itens",
-        "Cadastros: Locais, Equipamentos, Faixas",
-        "Administração: Usuários, Permissões, Perfis de acesso"
+        "Cadastros: Locais, Equipamentos Faixas",
+        "Administração: Usuários Permissões, Perfis de acesso"
       ],
       "path": "Menu lateral do AxCross",
       "docUrl": "primeiros-passos/navegacao",
-      "related": ["dashboard"],
+      "related": ["Dashboard"],
       "dbTables": []
     },
     {
       "id": "monitoramento-online",
       "title": "Monitoramento Online",
       "module": "Operações",
-      "keywords": ["monitoramento", "online", "tempo real", "mapa", "status", "equipamento", "passagem"],
-      "content": "O monitoramento online permite acompanhar em tempo real o funcionamento dos equipamentos e o registro de passagens nos cruzamentos monitorados.",
+      "keywords": ["monitoramento", "online", "tempo real", "mapa", "status", "Equipamento", "passagem"],
+      "content": "O monitoramento online permite acompanhar em tempo real o funcionamento dos Equipamentos e o registro de passagens nos cruzamentos monitorados.",
       "steps": [
         "No menu lateral, clique em Monitoramento Online",
-        "Visualize o mapa de equipamentos com status em tempo real",
+        "Visualize o mapa de Equipamentos com status em tempo real",
         "Consulte as últimas passagens registradas",
-        "Verifique alertas de equipamentos offline ou com falhas"
+        "Verifique alertas de Equipamentos offline ou com falhas"
       ],
       "path": "Menu lateral → Monitoramento Online",
       "docUrl": "operacoes/monitoramento-online",
-      "related": ["cadastro-operacoes", "equipamentos", "locais"],
+      "related": ["cadastro-operacoes", "Equipamentos", "locais"],
       "dbTables": []
     },
     {
@@ -93,7 +93,7 @@
       "title": "Cadastro de Operações",
       "module": "Operações",
       "keywords": ["operacao", "operacoes", "cadastro operacao", "nova operacao", "fiscalizacao"],
-      "content": "Permite criar e gerenciar operações de fiscalização, definindo local, período, equipamentos e parâmetros de monitoramento.",
+      "content": "Permite criar e gerenciar operações de fiscalização, definindo local, período, Equipamentos e parâmetros de monitoramento.",
       "steps": [
         "No menu lateral, clique em Operações",
         "Clique em Nova Operação",
@@ -110,7 +110,7 @@
       "title": "Configurações do Sistema",
       "module": "Sistema",
       "keywords": ["configuracao", "sistema", "parametros", "orgao", "webhook", "integracao"],
-      "content": "Tela de configurações gerais do AxCross onde são definidos dados do órgão, parâmetros operacionais e integrações.",
+      "content": "Tela de Configurações gerais do AxCross onde são definidos dados do órgão, parâmetros operacionais e integrações.",
       "steps": [
         "No menu lateral, clique em Sistema",
         "Configure os dados gerais do órgão",
@@ -127,7 +127,7 @@
       "id": "locais",
       "title": "Cadastro de Locais",
       "module": "Cadastros",
-      "keywords": ["local", "locais", "cruzamento", "endereco", "ponto", "cadastrar local"],
+      "keywords": ["local", "locais", "cruzamento", "endereço", "ponto", "cadastrar local"],
       "content": "Cadastro dos cruzamentos e pontos monitorados pelo sistema AxCross. Cada local pode ter coordenadas geográficas para exibição no mapa.",
       "steps": [
         "No menu lateral, expanda Cadastros e clique em Locais",
@@ -138,25 +138,25 @@
       ],
       "path": "Menu lateral → Cadastros → Locais",
       "docUrl": "cadastros/locais",
-      "related": ["equipamentos", "faixas"],
+      "related": ["Equipamentos", "faixas"],
       "dbTables": []
     },
     {
-      "id": "equipamentos",
+      "id": "Equipamentos",
       "title": "Cadastro de Equipamentos",
       "module": "Cadastros",
-      "keywords": ["equipamento", "camera", "detector", "sensor", "radar", "cadastrar equipamento", "ip"],
-      "content": "Cadastro e gestão dos equipamentos de fiscalização instalados nos cruzamentos. Inclui câmeras, detectores, sensores e radares.",
+      "keywords": ["Equipamento", "camera", "detector", "sensor", "radar", "cadastrar Equipamento", "ip"],
+      "content": "Cadastro e gestão dos Equipamentos de fiscalização instalados nos cruzamentos. Inclui câmeras, detectores, sensores e radares.",
       "steps": [
         "No menu lateral, expanda Cadastros e clique em Equipamentos",
         "Clique em Novo Equipamento",
         "Preencha Nome, Tipo, Modelo, Fabricante e Número de Série",
         "Selecione o Local de instalação",
-        "Opcionalmente informe o IP do equipamento",
+        "Opcionalmente informe o IP do Equipamento",
         "Clique em Salvar"
       ],
       "path": "Menu lateral → Cadastros → Equipamentos",
-      "docUrl": "cadastros/equipamentos",
+      "docUrl": "cadastros/Equipamentos",
       "related": ["locais", "faixas", "monitoramento-online"],
       "dbTables": []
     },
@@ -165,7 +165,7 @@
       "title": "Cadastro de Faixas",
       "module": "Cadastros",
       "keywords": ["faixa", "via", "pista", "sentido", "cadastrar faixa", "velocidade"],
-      "content": "Configuração das faixas de monitoramento em cada cruzamento. Cada faixa representa uma via monitorada por equipamentos de fiscalização.",
+      "content": "Configuração das faixas de monitoramento em cada cruzamento. Cada faixa representa uma via monitorada por Equipamentos de fiscalização.",
       "steps": [
         "No menu lateral, expanda Cadastros e clique em Faixas",
         "Clique em Nova Faixa",
@@ -177,15 +177,15 @@
       ],
       "path": "Menu lateral → Cadastros → Faixas",
       "docUrl": "cadastros/faixas",
-      "related": ["locais", "equipamentos"],
+      "related": ["locais", "Equipamentos"],
       "dbTables": []
     },
     {
-      "id": "relatorio-passagens",
+      "id": "relatório-passagens",
       "title": "Relatório de Passagens",
       "module": "Relatórios",
-      "keywords": ["relatorio", "passagens", "consulta", "exportar", "pdf", "csv", "fluxo"],
-      "content": "Permite consultar e exportar as passagens registradas nos cruzamentos monitorados, com filtros por período, local, equipamento e faixa.",
+      "keywords": ["Use Relatório (com acento)", "passagens", "consulta", "exportar", "pdf", "csv", "fluxo"],
+      "content": "Permite consultar e exportar as passagens registradas nos cruzamentos monitorados, com filtros por período, local, Equipamento e faixa.",
       "steps": [
         "No menu lateral, clique em Relatório de Passagens",
         "Defina o período (Data Início e Data Fim)",
@@ -199,20 +199,20 @@
       "dbTables": []
     },
     {
-      "id": "usuarios",
+      "id": "Usuários",
       "title": "Cadastro de Usuários",
       "module": "Administração",
-      "keywords": ["usuario", "criar usuario", "novo usuario", "cadastrar usuario", "acesso"],
-      "content": "Cadastro e gestão dos usuários que têm acesso ao sistema AxCross. Cada usuário é vinculado a um perfil de acesso.",
+      "keywords": ["Usuário", "criar Usuário", "novo Usuário", "cadastrar Usuário", "acesso"],
+      "content": "Cadastro e gestão dos Usuários que têm acesso ao sistema AxCross. Cada Usuário é vinculado a um perfil de acesso.",
       "steps": [
         "No menu lateral, expanda Administração e clique em Usuários",
         "Clique em Novo Usuário",
-        "Preencha Nome, Login, E-mail e Senha",
+        "Preencha Nome, Login E-mail e Senha",
         "Selecione o Perfil de Acesso",
         "Clique em Salvar"
       ],
       "path": "Menu lateral → Administração → Usuários",
-      "docUrl": "administracao/usuarios",
+      "docUrl": "administracao/Usuários",
       "related": ["permissoes", "perfis-acesso"],
       "dbTables": []
     },
@@ -230,7 +230,7 @@
       ],
       "path": "Menu lateral → Administração → Permissões de acesso",
       "docUrl": "administracao/permissoes",
-      "related": ["perfis-acesso", "usuarios"],
+      "related": ["perfis-acesso", "Usuários"],
       "dbTables": []
     },
     {
@@ -248,42 +248,42 @@
       ],
       "path": "Menu lateral → Administração → Perfis de acesso",
       "docUrl": "administracao/perfis-acesso",
-      "related": ["permissoes", "usuarios"],
+      "related": ["permissoes", "Usuários"],
       "dbTables": []
     },
     {
-      "id": "erro-equipamento-offline",
+      "id": "erro-Equipamento-offline",
       "title": "Equipamento Offline",
       "module": "Suporte",
-      "keywords": ["offline", "equipamento offline", "sem comunicacao", "falha", "conexao", "nao conecta"],
-      "content": "Quando um equipamento aparece como offline no monitoramento, pode indicar falha de comunicação, queda de energia ou problema físico no equipamento.",
+      "keywords": ["offline", "Equipamento offline", "sem comunicacao", "falha", "conexao", "não conecta"],
+      "content": "Quando um Equipamento aparece como offline no monitoramento, pode indicar falha de comunicação, queda de energia ou problema físico no Equipamento",
       "steps": [
-        "Verifique se o equipamento está energizado",
+        "Verifique se o Equipamento está energizado",
         "Confirme que o cabo de rede está conectado",
-        "Teste o ping para o IP do equipamento",
-        "Se persistir, reinicie o equipamento",
+        "Teste o ping para o IP do Equipamento",
+        "Se persistir, reinicie o Equipamento",
         "Caso continue offline, acione a equipe de manutenção"
       ],
-      "path": "Monitoramento Online → Status do equipamento",
+      "path": "Monitoramento Online → Status do Equipamento",
       "docUrl": "operacoes/monitoramento-online",
-      "related": ["equipamentos", "monitoramento-online"],
+      "related": ["Equipamentos", "monitoramento-online"],
       "dbTables": []
     },
     {
-      "id": "erro-login",
+      "id": "erro-Login",
       "title": "Erro ao Fazer Login",
       "module": "Suporte",
-      "keywords": ["erro login", "nao consigo entrar", "senha invalida", "usuario bloqueado", "acesso negado"],
-      "content": "Erros de login podem ocorrer por senha incorreta, usuário inativo ou conta bloqueada após múltiplas tentativas.",
+      "keywords": ["erro Login", "não consigo entrar", "senha inválida", "Usuário bloqueado", "acesso negado"],
+      "content": "Erros de Login podem ocorrer por senha incorreta, Usuário inativo ou conta bloqueada após múltiplas tentativas.",
       "steps": [
-        "Verifique se o nome de usuário está correto",
+        "Verifique se o nome de Usuário está correto",
         "Confira se a tecla Caps Lock está ativada",
         "Tente recuperar a senha via 'Esqueceu a Senha?'",
         "Se a conta estiver bloqueada, contate o administrador do sistema"
       ],
-      "path": "Tela de login",
-      "docUrl": "primeiros-passos/login",
-      "related": ["login", "recuperar-senha", "usuarios"],
+      "path": "Tela de Login",
+      "docUrl": "primeiros-passos/Login",
+      "related": ["Login", "recuperar-senha", "Usuários"],
       "dbTables": []
     }
   ]

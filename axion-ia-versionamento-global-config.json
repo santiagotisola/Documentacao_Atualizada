@@ -1,0 +1,628 @@
+{
+  "version": "1.0.0",
+  "moduleName": "Global Version Management & Standardization — AxionIA v4.0",
+  "description": "Motor de auditoria, sincronização e padronização de versionamento para todos os ambientes, contratos e portais Axion. Garante consistência institucional e rastreabilidade de versões.",
+  "lastUpdate": "2026-06-23",
+  "integration": "Governance Engine (v4.0)",
+  
+  "problem": {
+    "identified": "Ambientes não apresentam versão corretamente ou exibem informações inconsistentes",
+    "example": {
+      "environment": "Goiânia",
+      "url": "https://goiania.axhub.axion.ws/",
+      "issue": "Não apresenta corretamente o versionamento da aplicação",
+      "expected": "AxHub v.1.2.4",
+      "actual": "Sem informação de versão no rodapé"
+    },
+    
+    "impacts": [
+      "Dificuldade no suporte técnico (não sabe qual versão o cliente usa)",
+      "Inconsistência visual entre ambientes",
+      "Problemas em auditorias",
+      "Falta de rastreabilidade de versões",
+      "Confusão para equipes de manutenção",
+      "Má impressão profissional"
+    ]
+  },
+  
+  "objective": {
+    "primary": "Implementar mecanismo centralizado de auditoria e sincronização de versões",
+    "goals": [
+      "Garantir que todos os ambientes exibam corretamente a versão",
+      "Evitar divergências entre instâncias",
+      "Padronizar informações institucionais",
+      "Automatizar atualização de versões",
+      "Criar auditoria recorrente",
+      "Gerar relatórios de conformidade"
+    ]
+  },
+  
+  "scope": {
+    "environments": [
+      "Produção",
+      "Homologação",
+      "Desenvolvimento",
+      "Testes",
+      "UAT (User Acceptance Testing)"
+    ],
+    
+    "applications": [
+      "AxHub (principais e contratos)",
+      "AxCross (principais e contratos)",
+      "AxTon (principais e contratos)",
+      "AxionIA Painel",
+      "AxDashboard",
+      "Multi360",
+      "VARCO",
+      "APIs públicas (Swagger/OpenAPI)",
+      "Portais de documentação (Docusaurus)",
+      "Microsserviços com interface web",
+      "Páginas institucionais",
+      "Landing pages",
+      "Portais administrativos"
+    ],
+    
+    "contracts": [
+      "Todos os contratos cadastrados no sistema",
+      "Exemplo: IPEM/PA, Goiânia, etc."
+    ]
+  },
+  
+  "validation": {
+    "footerElements": {
+      "systemName": {
+        "required": true,
+        "format": "AxHub | AxCross | AxTon | AxionIA",
+        "example": "AxHub",
+        "location": "rodapé, canto esquerdo ou centro"
+      },
+      
+      "version": {
+        "required": true,
+        "format": "v.{major}.{minor}.{patch}",
+        "example": "v.1.2.4",
+        "pattern": "^v\\.[0-9]+\\.[0-9]+\\.[0-9]+$",
+        "location": "rodapé, após nome do sistema"
+      },
+      
+      "companyName": {
+        "required": true,
+        "standard": "Axion Tecnologia",
+        "notAllowed": ["AXION", "axion", "Axion Tech", "Axiontecnologia"],
+        "location": "rodapé, linha do copyright"
+      },
+      
+      "copyright": {
+        "required": true,
+        "format": "© {year} Axion Tecnologia",
+        "example": "© 2026 Axion Tecnologia",
+        "autoUpdate": true,
+        "location": "rodapé"
+      },
+      
+      "institutionalLink": {
+        "required": true,
+        "url": "https://www.axiontecnologia.com.br",
+        "text": "www.axiontecnologia.com.br",
+        "openInNewTab": true,
+        "location": "rodapé"
+      },
+      
+      "supportContact": {
+        "required": true,
+        "options": [
+          {
+            "type": "email",
+            "value": "suporte@axiontecnologia.com.br",
+            "display": "Suporte: suporte@axiontecnologia.com.br"
+          },
+          {
+            "type": "phone",
+            "value": "(62) 3XXX-XXXX",
+            "display": "Tel: (62) 3XXX-XXXX"
+          },
+          {
+            "type": "link",
+            "value": "https://desk.axiontecnologia.com.br/helpdesk",
+            "display": "Central de Atendimento"
+          }
+        ],
+        "location": "rodapé ou menu ajuda"
+      },
+      
+      "releaseDate": {
+        "required": false,
+        "format": "DD/MM/YYYY",
+        "example": "23/06/2026",
+        "displayAs": "Atualizado em: 23/06/2026",
+        "location": "rodapé (opcional)"
+      },
+      
+      "buildNumber": {
+        "required": false,
+        "format": "Build {number}",
+        "example": "Build 2024.06.23.1",
+        "location": "rodapé (opcional, apenas para devs)"
+      }
+    },
+    
+    "standardFooterTemplate": {
+      "layout": "horizontal",
+      "example": "AxHub v.1.2.4 | © 2026 Axion Tecnologia | www.axiontecnologia.com.br | Suporte: suporte@axiontecnologia.com.br",
+      "css": {
+        "fontSize": "12px",
+        "color": "#6b7280",
+        "backgroundColor": "#f9fafb",
+        "padding": "1rem",
+        "textAlign": "center",
+        "borderTop": "1px solid #e5e7eb"
+      }
+    }
+  },
+  
+  "versionSource": {
+    "principle": "Single Source of Truth",
+    "description": "A versão NÃO deve ser cadastrada manualmente em cada ambiente. Deve ser obtida automaticamente de uma fonte única.",
+    
+    "options": [
+      {
+        "method": "package.json",
+        "description": "Ler versão do package.json do projeto",
+        "path": "./package.json",
+        "field": "version",
+        "example": {
+          "version": "1.2.4"
+        },
+        "pros": ["Simples", "Padrão NPM", "Versionamento semântico"],
+        "cons": ["Precisa rebuild para atualizar"]
+      },
+      
+      {
+        "method": "Environment Variable",
+        "description": "Versão injetada via variável de ambiente",
+        "variable": "REACT_APP_VERSION",
+        "example": "REACT_APP_VERSION=1.2.4",
+        "pros": ["Flexível", "Sem rebuild", "CI/CD friendly"],
+        "cons": ["Precisa configurar em cada ambiente"]
+      },
+      
+      {
+        "method": "API Endpoint",
+        "description": "Buscar versão de endpoint centralizado",
+        "endpoint": "GET /api/version",
+        "response": {
+          "system": "AxHub",
+          "version": "1.2.4",
+          "buildDate": "2026-06-23",
+          "buildNumber": "2024.06.23.1",
+          "environment": "production"
+        },
+        "pros": ["Centralizado", "Tempo real", "Auditável"],
+        "cons": ["Dependência de API", "Mais complexo"]
+      },
+      
+      {
+        "method": "version.json",
+        "description": "Arquivo JSON estático gerado no build",
+        "path": "./public/version.json",
+        "content": {
+          "system": "AxHub",
+          "version": "1.2.4",
+          "buildDate": "2026-06-23T19:30:00.000Z",
+          "buildNumber": "2024.06.23.1",
+          "commit": "abc123def456"
+        },
+        "pros": ["Simples", "Sem API", "Rápido"],
+        "cons": ["Precisa rebuild"]
+      },
+      
+      {
+        "method": "Git Tag",
+        "description": "Versão extraída de tag Git durante build",
+        "command": "git describe --tags --abbrev=0",
+        "example": "v1.2.4",
+        "pros": ["Rastreável", "Versionamento oficial", "CI/CD"],
+        "cons": ["Precisa tags no Git"]
+      }
+    ],
+    
+    "recommended": {
+      "method": "API Endpoint + version.json (fallback)",
+      "reason": "Combina centralização com redundância"
+    }
+  },
+  
+  "audit": {
+    "automated": true,
+    "frequency": "daily",
+    "time": "03:00",
+    "timezone": "America/Sao_Paulo",
+    
+    "checks": [
+      {
+        "id": "version_missing",
+        "name": "Ambientes sem informação de versão",
+        "severity": "critical",
+        "action": "Corrigir imediatamente"
+      },
+      {
+        "id": "version_divergent",
+        "name": "Ambientes com versão divergente do esperado",
+        "severity": "high",
+        "action": "Investigar e corrigir"
+      },
+      {
+        "id": "footer_incomplete",
+        "name": "Ambientes com rodapé incompleto",
+        "severity": "medium",
+        "action": "Completar informações"
+      },
+      {
+        "id": "institutional_text_different",
+        "name": "Ambientes com textos institucionais diferentes",
+        "severity": "medium",
+        "action": "Padronizar"
+      },
+      {
+        "id": "links_invalid",
+        "name": "Ambientes com links inválidos",
+        "severity": "high",
+        "action": "Corrigir URLs"
+      },
+      {
+        "id": "emails_outdated",
+        "name": "Ambientes com e-mails desatualizados",
+        "severity": "medium",
+        "action": "Atualizar contatos"
+      },
+      {
+        "id": "nomenclature_inconsistent",
+        "name": "Ambientes com nomenclatura inconsistente",
+        "severity": "low",
+        "action": "Padronizar nomes"
+      },
+      {
+        "id": "copyright_year_outdated",
+        "name": "Copyright com ano desatualizado",
+        "severity": "low",
+        "action": "Atualizar ano automaticamente"
+      },
+      {
+        "id": "system_name_wrong",
+        "name": "Nome do sistema incorreto",
+        "severity": "critical",
+        "action": "Corrigir imediatamente"
+      }
+    ],
+    
+    "discovery": {
+      "method": "web_scraping",
+      "tools": ["Puppeteer", "Playwright", "Selenium"],
+      "steps": [
+        "1. Obter lista de todos os ambientes cadastrados",
+        "2. Para cada ambiente, acessar a URL",
+        "3. Extrair conteúdo do rodapé (footer)",
+        "4. Parsear informações (nome, versão, copyright, links)",
+        "5. Comparar com padrão esperado",
+        "6. Gerar relatório de conformidade"
+      ]
+    }
+  },
+  
+  "report": {
+    "generate": true,
+    "formats": ["json", "html", "csv", "excel", "pdf"],
+    
+    "structure": {
+      "summary": {
+        "totalEnvironments": 0,
+        "compliant": 0,
+        "nonCompliant": 0,
+        "complianceRate": "0%",
+        "criticalIssues": 0,
+        "highIssues": 0,
+        "mediumIssues": 0,
+        "lowIssues": 0
+      },
+      
+      "details": [
+        {
+          "environment": "Goiânia",
+          "url": "https://goiania.axhub.axion.ws/",
+          "system": "AxHub",
+          "contract": "Prefeitura de Goiânia",
+          "status": "❌ Não Conforme",
+          "issues": [
+            {
+              "check": "version_missing",
+              "severity": "critical",
+              "found": "Não encontrada",
+              "expected": "AxHub v.1.2.4",
+              "action": "Corrigir"
+            },
+            {
+              "check": "footer_incomplete",
+              "severity": "medium",
+              "found": "Apenas copyright",
+              "expected": "Nome + Versão + Copyright + Link + Suporte",
+              "action": "Completar"
+            }
+          ]
+        },
+        {
+          "environment": "IPEM/PA",
+          "url": "https://ipempa.axhub.axion.ws/",
+          "system": "AxHub",
+          "contract": "IPEM Pará",
+          "status": "✅ Conforme",
+          "issues": [],
+          "footer": "AxHub v.1.2.4 | © 2026 Axion Tecnologia | www.axiontecnologia.com.br"
+        }
+      ]
+    },
+    
+    "tableFormat": {
+      "columns": [
+        "Ambiente",
+        "URL",
+        "Sistema",
+        "Versão Encontrada",
+        "Versão Esperada",
+        "Status",
+        "Ações"
+      ],
+      "example": "| Goiânia | https://goiania.axhub.axion.ws | AxHub | Não encontrada | AxHub v.1.2.4 | ❌ Corrigir |"
+    },
+    
+    "distribution": {
+      "slack": {
+        "enabled": true,
+        "channel": "#governanca-versoes",
+        "notifyOn": ["critical_issues", "audit_complete"]
+      },
+      
+      "email": {
+        "enabled": true,
+        "recipients": [
+          "equipe.desenvolvimento@axiontecnologia.com.br",
+          "equipe.qualidade@axiontecnologia.com.br"
+        ],
+        "subject": "Relatório de Auditoria de Versionamento - {date}"
+      },
+      
+      "jitbit": {
+        "enabled": true,
+        "createTicket": true,
+        "onlyCritical": true,
+        "category": "Governança/Versionamento"
+      }
+    }
+  },
+  
+  "synchronization": {
+    "automated": true,
+    "description": "Sempre que uma nova versão for publicada, atualizar automaticamente todos os ambientes",
+    
+    "workflow": [
+      {
+        "step": 1,
+        "action": "Nova versão criada (Git tag ou package.json atualizado)",
+        "trigger": "CI/CD pipeline"
+      },
+      {
+        "step": 2,
+        "action": "Build e deploy da aplicação",
+        "output": "Artefatos de produção"
+      },
+      {
+        "step": 3,
+        "action": "Atualizar API /api/version com nova versão",
+        "database": "MongoDB - collection: versions"
+      },
+      {
+        "step": 4,
+        "action": "Gerar version.json em todos os builds",
+        "location": "./public/version.json"
+      },
+      {
+        "step": 5,
+        "action": "Sincronizar rodapé de todos os contratos",
+        "method": "Atualização em cascata"
+      },
+      {
+        "step": 6,
+        "action": "Atualizar portais administrativos",
+        "targets": ["AxHub Admin", "AxCross Admin", "AxTon Admin"]
+      },
+      {
+        "step": 7,
+        "action": "Atualizar dashboards",
+        "targets": ["AxDashboard", "AxionIA Painel"]
+      },
+      {
+        "step": 8,
+        "action": "Atualizar páginas institucionais relacionadas",
+        "targets": ["Documentação", "Landing pages"]
+      },
+      {
+        "step": 9,
+        "action": "Validar consistência após publicação",
+        "method": "Executar auditoria imediata"
+      },
+      {
+        "step": 10,
+        "action": "Notificar equipes",
+        "channels": ["Slack", "Email"]
+      }
+    ],
+    
+    "rollback": {
+      "enabled": true,
+      "method": "Git revert + redeploy",
+      "notification": "Notificar equipes sobre rollback"
+    }
+  },
+  
+  "implementation": {
+    "frontend": {
+      "component": "VersionFooter.jsx",
+      "location": "src/components/Layout/VersionFooter.jsx",
+      
+      "code": {
+        "react": "// VersionFooter.jsx\nimport { useState, useEffect } from 'react';\n\nconst VersionFooter = ({ system }) => {\n  const [versionInfo, setVersionInfo] = useState(null);\n\n  useEffect(() => {\n    // Tentar buscar de API primeiro\n    fetch('/api/version')\n      .then(res => res.json())\n      .then(data => setVersionInfo(data))\n      .catch(() => {\n        // Fallback: buscar version.json\n        fetch('/version.json')\n          .then(res => res.json())\n          .then(data => setVersionInfo(data))\n          .catch(() => {\n            // Fallback final: package.json\n            setVersionInfo({\n              system: system,\n              version: process.env.REACT_APP_VERSION || 'dev'\n            });\n          });\n      });\n  }, [system]);\n\n  if (!versionInfo) return null;\n\n  const currentYear = new Date().getFullYear();\n\n  return (\n    <footer className=\"version-footer\">\n      <div className=\"footer-content\">\n        <span className=\"system-info\">\n          {versionInfo.system} v.{versionInfo.version}\n        </span>\n        <span className=\"separator\">|</span>\n        <span className=\"copyright\">\n          © {currentYear} Axion Tecnologia\n        </span>\n        <span className=\"separator\">|</span>\n        <a \n          href=\"https://www.axiontecnologia.com.br\"\n          target=\"_blank\"\n          rel=\"noopener noreferrer\"\n          className=\"institutional-link\"\n        >\n          www.axiontecnologia.com.br\n        </a>\n        <span className=\"separator\">|</span>\n        <span className=\"support\">\n          Suporte: suporte@axiontecnologia.com.br\n        </span>\n      </div>\n    </footer>\n  );\n};\n\nexport default VersionFooter;"
+      }
+    },
+    
+    "backend": {
+      "endpoint": "/api/version",
+      "method": "GET",
+      "controller": "VersionController.js",
+      
+      "code": {
+        "nodejs": "// VersionController.js\nconst packageJson = require('../../package.json');\nconst versionModel = require('../models/Version');\n\nconst getVersion = async (req, res) => {\n  try {\n    // Buscar versão do banco (Single Source of Truth)\n    const currentVersion = await versionModel.findOne({ active: true });\n    \n    if (currentVersion) {\n      return res.json({\n        system: currentVersion.system,\n        version: currentVersion.version,\n        buildDate: currentVersion.buildDate,\n        buildNumber: currentVersion.buildNumber,\n        environment: process.env.NODE_ENV,\n        commit: currentVersion.commit\n      });\n    }\n    \n    // Fallback: package.json\n    res.json({\n      system: 'AxHub',\n      version: packageJson.version,\n      buildDate: new Date().toISOString(),\n      environment: process.env.NODE_ENV\n    });\n  } catch (error) {\n    console.error('Erro ao buscar versão:', error);\n    res.status(500).json({ error: 'Erro ao buscar versão' });\n  }\n};\n\nmodule.exports = { getVersion };"
+      },
+      
+      "database": {
+        "collection": "versions",
+        "schema": {
+          "system": "String (AxHub, AxCross, AxTon)",
+          "version": "String (1.2.4)",
+          "buildDate": "Date",
+          "buildNumber": "String (2024.06.23.1)",
+          "commit": "String (hash do Git)",
+          "active": "Boolean",
+          "createdAt": "Date",
+          "updatedAt": "Date"
+        }
+      }
+    },
+    
+    "cicd": {
+      "pipeline": "Azure DevOps / GitHub Actions / GitLab CI",
+      
+      "steps": [
+        {
+          "name": "Extract Version",
+          "command": "git describe --tags --abbrev=0 | sed 's/v//'"
+        },
+        {
+          "name": "Generate version.json",
+          "command": "echo '{\"system\":\"AxHub\",\"version\":\"'$VERSION'\",\"buildDate\":\"'$(date -u +%Y-%m-%dT%H:%M:%S.000Z)'\",\"commit\":\"'$COMMIT_SHA'\"}' > public/version.json"
+        },
+        {
+          "name": "Update Database",
+          "command": "node scripts/update-version-db.js --version $VERSION --commit $COMMIT_SHA"
+        },
+        {
+          "name": "Build Application",
+          "command": "npm run build"
+        },
+        {
+          "name": "Deploy",
+          "command": "npm run deploy"
+        },
+        {
+          "name": "Audit Environments",
+          "command": "node scripts/audit-versions.js --notify"
+        }
+      ]
+    }
+  },
+  
+  "benefits": [
+    "✅ Uniformidade entre ambientes",
+    "✅ Facilidade de suporte técnico (identificação rápida de versão)",
+    "✅ Melhor rastreabilidade de versões",
+    "✅ Redução de inconsistências visuais",
+    "✅ Maior confiabilidade para auditorias",
+    "✅ Facilita manutenção e troubleshooting",
+    "✅ Melhora imagem profissional",
+    "✅ Conformidade com padrões de governança",
+    "✅ Histórico completo de versões",
+    "✅ Automatização de processos manuais"
+  ],
+  
+  "metrics": {
+    "complianceRate": {
+      "target": 100,
+      "current": null,
+      "unit": "%",
+      "description": "Porcentagem de ambientes em conformidade"
+    },
+    
+    "criticalIssues": {
+      "target": 0,
+      "current": null,
+      "unit": "issues",
+      "description": "Número de problemas críticos pendentes"
+    },
+    
+    "timeToSync": {
+      "target": 5,
+      "current": null,
+      "unit": "minutes",
+      "description": "Tempo para sincronizar todos os ambientes após deploy"
+    },
+    
+    "auditFrequency": {
+      "target": "daily",
+      "current": null,
+      "description": "Frequência de auditorias automatizadas"
+    }
+  },
+  
+  "integration": {
+    "governanceEngine": {
+      "enabled": true,
+      "description": "Integra com Governance Engine do AxionIA v4.0",
+      "frameworks": ["ITIL", "COBIT"],
+      "processes": [
+        "Change Management (ITIL)",
+        "Configuration Management (ITIL)",
+        "Release Management (ITIL)"
+      ]
+    },
+    
+    "cicd": {
+      "enabled": true,
+      "triggerOn": ["tag_created", "release_published"],
+      "actions": [
+        "Update version database",
+        "Generate version.json",
+        "Audit all environments",
+        "Notify teams"
+      ]
+    },
+    
+    "monitoring": {
+      "enabled": true,
+      "tool": "Prometheus + Grafana",
+      "metrics": [
+        "version_compliance_rate",
+        "version_audit_duration",
+        "version_sync_time",
+        "critical_issues_count"
+      ]
+    }
+  },
+  
+  "commandLine": {
+    "usage": "node scripts/version-management.js [command] [options]",
+    
+    "commands": {
+      "audit": "Auditar todos os ambientes",
+      "sync": "Sincronizar versão em todos os ambientes",
+      "report": "Gerar relatório de conformidade",
+      "fix": "Corrigir problemas identificados",
+      "list": "Listar todos os ambientes cadastrados"
+    },
+    
+    "examples": {
+      "audit": "node scripts/version-management.js audit --format html",
+      "sync": "node scripts/version-management.js sync --version 1.2.4",
+      "report": "node scripts/version-management.js report --output ./reports",
+      "fix": "node scripts/version-management.js fix --environment goiania",
+      "list": "node scripts/version-management.js list --system AxHub"
+    }
+  }
+}

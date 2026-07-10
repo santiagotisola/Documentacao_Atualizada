@@ -1,25 +1,25 @@
 ---
 sidebar_position: 4
 title: Relatório de Eventos dos Equipamentos
-description: Relatório de eventos e ocorrências dos equipamentos
+description: Relatório de eventos e ocorrências dos Equipamentos
 ---
 
 # Relatório de Eventos dos Equipamentos
 
-Exibe o histórico de eventos registrados nos equipamentos de fiscalização. Permite identificar falhas, manutenções e ocorrências operacionais para acompanhamento do SLA contratual.
+Exibe o histórico de eventos registrados nos Equipamentos de fiscalização. Permite identificar falhas, manutenções e ocorrências operacionais para acompanhamento do SLA contratual.
 
-![Relatório de Eventos](../img/Relatorios%20-%20relatorio%20de%20eventos%20dos%20equipamentos.png)
+Relatório de Eventos](../img/Relatorios%20-%20relatorio%20de%20eventos%20dos%20equipamentos.png)
 
 ## Como acessar
 
-**Menu lateral** → Relatórios → **Eventos dos Equipamentos**
+**Menu lateral** → Relatórios → **Eventos dos Equipamentos
 
 ## Filtros disponíveis
 
 | Filtro | Descrição |
 |--------|-----------|
 | **Período** | Faixa de datas |
-| **Equipamento** | Filtrar por equipamento |
+| Equipamento | Filtrar por Equipamento |
 | **Tipo de Evento** | Falha, manutenção, vandalismo, reinicialização |
 | **Região** | Filtrar por região geográfica |
 
@@ -28,7 +28,7 @@ Exibe o histórico de eventos registrados nos equipamentos de fiscalização. Pe
 | Coluna | Descrição |
 |--------|-----------|
 | **Data/Hora** | Momento do evento |
-| **Equipamento** | Nome e código do equipamento |
+| Equipamento | Nome e código do Equipamento |
 | **Tipo de Evento** | Categoria do evento registrado |
 | **Descrição** | Detalhamento do evento |
 | **Duração** | Tempo de duração do evento (para falhas) |
@@ -37,10 +37,10 @@ Exibe o histórico de eventos registrados nos equipamentos de fiscalização. Pe
 
 ## Exportação
 
-Exportável em **Excel** para inclusão em relatórios de performance e planos de manutenção.
+Exportável em **Excel** para inclusão em Relatórios de performance e planos de manutenção.
 
 :::tip Dica
-Use em conjunto com o [Relatório de Falhas Sequenciais](./falhas-sequenciais) para identificar equipamentos com problemas recorrentes.
+Use em conjunto com o Relatório de Falhas Sequenciais](./falhas-sequenciais) para identificar Equipamentos com problemas recorrentes.
 :::
 
 ---
@@ -50,6 +50,6 @@ Use em conjunto com o [Relatório de Falhas Sequenciais](./falhas-sequenciais) p
 | Tipo | Página | Descrição |
 |------|--------|-----------|
 | Relacionado | [Eventos (Operações)](../operacoes/eventos-equipamentos) | Dados operacionais em tempo real |
-| Relacionado | [Equipamentos](../cadastros-basicos/equipamentos) | Cadastro do equipamento |
+| Relacionado | [Equipamentos](../cadastros-basicos/Equipamentos) | Cadastro do Equipamento |
 | Relacionado | [Falhas Sequenciais](./falhas-sequenciais) | Relatório de falhas recorrentes |
 | Relacionado | [Interrupções](../medicoes/interrupcoes) | Interrupções que afetam medição |

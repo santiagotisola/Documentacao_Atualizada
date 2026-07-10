@@ -28,20 +28,20 @@ A tela exibe a matriz de permissões organizada por **perfil de acesso** e **fun
 
 | Permissão | Descrição |
 |-----------|-----------|
-| **Visualizar** | Permite ao usuário acessar e visualizar os dados da funcionalidade |
-| **Criar** | Permite ao usuário cadastrar novos registros na funcionalidade |
-| **Editar** | Permite ao usuário alterar registros existentes |
-| **Excluir** | Permite ao usuário remover registros do sistema |
+| **Visualizar** | Permite ao Usuário acessar e visualizar os dados da funcionalidade |
+| **Criar** | Permite ao Usuário cadastrar novos registros na funcionalidade |
+| **Editar** | Permite ao Usuário alterar registros existentes |
+| **Excluir** | Permite ao Usuário remover registros do sistema |
 
 ### Passo a passo — Configurar permissões de um perfil
 
 1. No menu lateral, abra **Administração** e clique em **Permissões de acesso**
 2. Selecione o **Perfil de Acesso** a ser configurado
 3. Para cada funcionalidade listada, marque ou desmarque os tipos de permissão desejados
-4. Clique em **Salvar** para aplicar as configurações
+4. Clique em **Salvar** para aplicar as Configurações
 
 :::warning Impacto imediato
-As alterações nas permissões de um perfil têm efeito imediato para todos os usuários vinculados a esse perfil. Usuários com sessão ativa poderão perceber a alteração no próximo acesso a uma funcionalidade afetada.
+As alterações nas permissões de um perfil têm efeito imediato para todos os Usuários vinculados a esse perfil. Usuários com sessão ativa poderão perceber a alteração no próximo acesso a uma funcionalidade afetada.
 :::
 
 ## Permissões por Módulo (sistema real)
@@ -53,17 +53,17 @@ A tabela abaixo lista as permissões disponíveis por módulo conforme o sistema
 | Módulo | Ações disponíveis |
 |--------|-------------------|
 | **Classificações** | grid.view, form.saveorupdate, grid.delete |
-| **Configurações** | grid.view, form.saveorupdate |
+| Configurações | grid.view, form.saveorupdate |
 | **Dispositivo** | grid.view, form.saveorupdate, grid.delete |
 | **Exportação** | grid.view, form.saveorupdate, grid.delete |
 | **Locais** | grid.view, form.saveorupdate, grid.delete |
 | **Operações** | grid.view, form.saveorupdate, grid.delete |
 | **Perfil de Acesso** | grid.view, form.saveorupdate, grid.delete |
 | **Pesagem** | start-weighing, ticket-actions |
-| **Relatório** | grid.view, export.pdf |
+| Relatório | grid.view, export.pdf |
 | **Sequencial** | grid.view, form.saveorupdate, grid.delete |
 | **Tickets** | grid.view, grid.delete |
-| **Usuários** | grid.view, form.saveorupdate, grid.delete |
+| Usuários | grid.view, form.saveorupdate, grid.delete |
 
 ### Tipos de ação
 
@@ -74,7 +74,7 @@ A tabela abaixo lista as permissões disponíveis por módulo conforme o sistema
 | **grid.delete** | Excluir registros |
 | **start-weighing** | Iniciar processo de pesagem |
 | **ticket-actions** | Ações nos tickets (visualizar, reclassificar) |
-| **export.pdf** | Exportar relatórios em PDF |
+| **export.pdf** | Exportar Relatórios em PDF |
 
 :::tip Perfil Porteiro
 Para operadores de cancela/portaria, configure o perfil **Porteiro** com acesso apenas a:

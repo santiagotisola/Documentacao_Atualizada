@@ -1,0 +1,190 @@
+Módulo,Método,Endpoint,Descrição,Dependências,Status
+Chat,POST,/api/chat,Processar mensagem IA,"OPENAI_API_KEY, MONGO_URI",Não configurado
+Logs,GET,/api/logs/historico,Histórico de logs,MONGO_URI,Não configurado
+Logs,GET,/api/logs/pendentes,Logs pendentes,MONGO_URI,Não configurado
+Logs,GET,/api/logs/estatisticas,Estatísticas de uso,MONGO_URI,Não configurado
+Logs,GET,/api/logs,Consultar logs MongoDB,MONGO_URI,Não configurado
+Logs,GET,/api/analise,Análise de dados,MONGO_URI,Não configurado
+Embeddings,POST,/api/treinar,Treinar IA com novos dados,OPENAI_API_KEY,Não configurado
+Embeddings,GET,/api/kb,Listar entradas da KB,MONGO_URI,Não configurado
+Helpdesk,GET,/api/helpdesk/tickets,Listar tickets,"JITBIT_URL, JITBIT_USER, JITBIT_PASS",Não configurado
+Helpdesk,GET,/api/helpdesk/ticket/:id,Detalhe de ticket,JITBIT_*,Não configurado
+Helpdesk,POST,/api/helpdesk/classificar/:id,Classificar ticket,"JITBIT_*, OPENAI_API_KEY",Não configurado
+Helpdesk,POST,/api/helpdesk/responder/:id,Responder com IA,"JITBIT_*, OPENAI_API_KEY",Não configurado
+Helpdesk,POST,/api/helpdesk/processar,Processar pendentes,JITBIT_*,Não configurado
+Helpdesk,GET,/api/helpdesk/categorias,Listar categorias,JITBIT_*,Não configurado
+Helpdesk,POST,/api/helpdesk/criar,Criar chamado,JITBIT_*,Não configurado
+Helpdesk,GET,/api/helpdesk/polling,Status do polling,JITBIT_*,Não configurado
+Helpdesk,POST,/api/helpdesk/polling/iniciar,Iniciar polling,JITBIT_*,Não configurado
+Helpdesk,POST,/api/helpdesk/polling/pausar,Pausar polling,JITBIT_*,Não configurado
+Helpdesk,POST,/api/helpdesk/polling/retomar,Retomar polling,JITBIT_*,Não configurado
+Helpdesk,POST,/api/helpdesk/polling/limpar,Limpar fila,JITBIT_*,Não configurado
+Helpdesk,GET,/api/helpdesk/fila,Obter fila de revisão,MONGO_URI,Não configurado
+Helpdesk,POST,/api/helpdesk/fila/modo,Configurar modo revisão,MONGO_URI,Não configurado
+Helpdesk,POST,/api/helpdesk/fila/:id/aprovar,Aprovar item da fila,MONGO_URI,Não configurado
+Helpdesk,POST,/api/helpdesk/fila/:id/rejeitar,Rejeitar item da fila,MONGO_URI,Não configurado
+Helpdesk,GET,/api/helpdesk/tecnicos,Listar técnicos,JITBIT_*,Não configurado
+Helpdesk,GET,/api/helpdesk/planilha-horas,Planilha de horas,JITBIT_*,Não configurado
+Helpdesk,GET,/api/helpdesk/sla-compliance,Relatório SLA,JITBIT_*,Não configurado
+Helpdesk,GET,/api/helpdesk/sites-overview,Visão geral de sites,"JITBIT_*, MONGO_URI",Não configurado
+Helpdesk,GET,/api/helpdesk/mapa-sites,Obter mapa de sites,MONGO_URI,Não configurado
+Helpdesk,POST,/api/helpdesk/mapa-sites,Associar site,MONGO_URI,Não configurado
+Helpdesk,DELETE,/api/helpdesk/mapa-sites/:categoriaId,Desassociar site,MONGO_URI,Não configurado
+Helpdesk,GET,/api/helpdesk/site/:siteId/tickets,Tickets por site,"JITBIT_*, MONGO_URI",Não configurado
+AxHub,GET,/api/axhub/status,Status da conexão,AXHUB_DB_*,Não configurado
+AxHub,GET,/api/axhub/resumo,Resumo geral,AXHUB_DB_*,Não configurado
+AxHub,GET,/api/axhub/equipamentos,Listar equipamentos,AXHUB_DB_*,Não configurado
+AxHub,GET,/api/axhub/operacoes,Listar operações,AXHUB_DB_*,Não configurado
+AxHub,GET,/api/axhub/infracoes,Estatísticas de infrações,AXHUB_DB_*,Não configurado
+AxHub,GET,/api/axhub/heartbeat,Heartbeat dos equipamentos,AXHUB_DB_*,Não configurado
+AxHub,GET,/api/axhub/monitoramentos,Listar monitoramentos,AXHUB_DB_*,Não configurado
+AxHub,GET,/api/axhub/passagens,Últimas passagens,AXHUB_DB_*,Não configurado
+AxHub,GET,/api/axhub/triagens,Estatísticas de triagens,AXHUB_DB_*,Não configurado
+AxHub,GET,/api/axhub/tabelas,Listar tabelas do banco,AXHUB_DB_*,Não configurado
+AxTon,GET,/api/axton/status,Status da conexão,AXTON_DB_*,Não configurado
+AxTon,GET,/api/axton/resumo,Resumo geral,AXTON_DB_*,Não configurado
+AxTon,GET,/api/axton/pesagens,Últimas pesagens,AXTON_DB_*,Não configurado
+AxTon,GET,/api/axton/infracoes,Últimas infrações,AXTON_DB_*,Não configurado
+AxTon,GET,/api/axton/heartbeat,Heartbeat dos equipamentos,AXTON_DB_*,Não configurado
+AxTon,GET,/api/axton/tabelas,Listar tabelas do banco,AXTON_DB_*,Não configurado
+AxCross,GET,/api/axcross/status,Status da conexão,AXCROSS_DB_*,Não configurado
+AxCross,GET,/api/axcross/resumo,Resumo geral,AXCROSS_DB_*,Não configurado
+AxCross,GET,/api/axcross/equipamentos,Listar equipamentos,AXCROSS_DB_*,Não configurado
+AxCross,GET,/api/axcross/locais,Listar locais,AXCROSS_DB_*,Não configurado
+AxCross,GET,/api/axcross/operacoes,Listar operações,AXCROSS_DB_*,Não configurado
+AxCross,GET,/api/axcross/passagens,Estatísticas de passagens,AXCROSS_DB_*,Não configurado
+AxCross,GET,/api/axcross/heartbeat,Heartbeat dos equipamentos,AXCROSS_DB_*,Não configurado
+AxCross,GET,/api/axcross/tabelas,Listar tabelas do banco,AXCROSS_DB_*,Não configurado
+Medição,GET,/api/medicao/sistemas,Listar sistemas de medição,AXHUB_DB_*,Mock data
+Medição,GET,/api/medicao/equipamentos,Listar equipamentos,AXHUB_DB_*,Mock data
+Medição,GET,/api/medicao/diagnostico,Gerar diagnóstico inteligente,"AXHUB_DB_*, OPENAI_API_KEY",Mock data
+Medição,GET,/api/medicao/analise-sistema,Analisar sistema específico,"AXHUB_DB_*, OPENAI_API_KEY",Mock data
+Relatórios,GET,/api/relatorio/passagens,Relatório de passagens,AXHUB_DB_*,Funcional
+Relatórios,GET,/api/relatorio/imagens,Relatório de imagens,AXHUB_DB_*,Funcional
+Relatórios,GET,/api/relatorio/equipamentos,Listar equipamentos para relatório,AXHUB_DB_*,Funcional
+Relatório Contrato,GET,/api/relatorio-contrato/contratos,Listar contratos,Nenhuma,Funcional
+Relatório Contrato,GET,/api/relatorio-contrato/tipos,Listar tipos de relatório,Nenhuma,Funcional
+Relatório Contrato,POST,/api/relatorio-contrato/gerar,Gerar relatório,"OPENAI_API_KEY, MONGO_URI",Não configurado
+Relatório Contrato,GET,/api/relatorio-contrato,Listar relatórios,MONGO_URI,Não configurado
+Relatório Contrato,GET,/api/relatorio-contrato/:id,Obter relatório,MONGO_URI,Não configurado
+Relatório Contrato,DELETE,/api/relatorio-contrato/:id,Remover relatório,MONGO_URI,Não configurado
+Config,GET,/api/config,Obter configuração,MONGO_URI,Não configurado
+Config,POST,/api/config,Salvar configuração,MONGO_URI,Não configurado
+Config,POST,/api/config/testar-mongo,Testar conexão MongoDB,MONGO_URI,Não configurado
+Coletor,GET,/api/coletor/operacoes,Operações do coletor,MONGO_URI,Não configurado
+Coletor,GET,/api/coletor/pncp,Buscar no PNCP,OPENAI_API_KEY,Não configurado
+Coletor,POST,/api/coletor/pncp/importar,Importar editais,"OPENAI_API_KEY, MONGO_URI",Não configurado
+Coletor,POST,/api/coletor/pncp/coletar,Coletar produto,"OPENAI_API_KEY, MONGO_URI",Não configurado
+Coletor,GET,/api/coletor/config,Obter configuração,MONGO_URI,Não configurado
+Coletor,POST,/api/coletor/config,Salvar configuração,MONGO_URI,Não configurado
+Coletor,GET,/api/coletor/status,Status do coletor,MONGO_URI,Não configurado
+Fontes,POST,/api/fontes,Adicionar fonte,MONGO_URI,Não configurado
+Fontes,GET,/api/fontes,Listar fontes,MONGO_URI,Não configurado
+Fontes,GET,/api/fontes/mapa/:produto,Mapa de cobertura,MONGO_URI,Não configurado
+Fontes,GET,/api/fontes/sugestoes/:produto,Sugestões por produto,"MONGO_URI, OPENAI_API_KEY",Não configurado
+Fontes,GET,/api/fontes/:id,Obter fonte,MONGO_URI,Não configurado
+Fontes,POST,/api/fontes/:id/analisar,Analisar fonte,"MONGO_URI, OPENAI_API_KEY",Não configurado
+Fontes,DELETE,/api/fontes/:id,Remover fonte,MONGO_URI,Não configurado
+Roadmap,POST,/api/roadmap/gerar,Gerar roadmap,"OPENAI_API_KEY, MONGO_URI",Não configurado
+Roadmap,GET,/api/roadmap,Listar roadmaps,MONGO_URI,Não configurado
+Roadmap,GET,/api/roadmap/:id,Obter roadmap,MONGO_URI,Não configurado
+Roadmap,PATCH,/api/roadmap/:id/item/:itemId,Atualizar item,MONGO_URI,Não configurado
+Roadmap,POST,/api/roadmap/:id/item,Adicionar item,MONGO_URI,Não configurado
+Spec,POST,/api/spec/gerar,Gerar especificação,"OPENAI_API_KEY, MONGO_URI",Não configurado
+Spec,GET,/api/spec,Listar specs,MONGO_URI,Não configurado
+Spec,GET,/api/spec/:id,Obter spec,MONGO_URI,Não configurado
+Spec,PATCH,/api/spec/:id/status,Atualizar status,MONGO_URI,Não configurado
+Conformidade,POST,/api/conformidade/gerar,Gerar conformidade simples,"OPENAI_API_KEY, MONGO_URI",Não configurado
+Conformidade,GET,/api/conformidade,Listar conformidades,MONGO_URI,Não configurado
+Conformidade,GET,/api/conformidade/:id,Obter conformidade,MONGO_URI,Não configurado
+Conformidade,DELETE,/api/conformidade/:id,Remover conformidade,MONGO_URI,Não configurado
+Conformidade,POST,/api/conformidade/multi/gerar,Análise multi-produto,"OPENAI_API_KEY, MONGO_URI",Não configurado
+Conformidade,GET,/api/conformidade/multi,Listar análises multi,MONGO_URI,Não configurado
+Conformidade,GET,/api/conformidade/multi/:id,Obter análise multi,MONGO_URI,Não configurado
+Conformidade,GET,/api/conformidade/multi/:id/comparacao,Comparação,MONGO_URI,Não configurado
+Conformidade,GET,/api/conformidade/multi/:id/lacunas,Lacunas,MONGO_URI,Não configurado
+Conformidade,GET,/api/conformidade/multi/:id/recomendacoes,Recomendações,MONGO_URI,Não configurado
+Editais Gov,GET,/api/editais-gov/buscar,Buscar editais gov,OPENAI_API_KEY,Não configurado
+WhatsApp,POST,/api/whatsapp/iniciar,Iniciar conexão,Baileys,Integrado
+WhatsApp,GET,/api/whatsapp/status,Status da conexão,Baileys,Integrado
+WhatsApp,GET,/api/whatsapp/sessoes,Listar sessões,MONGO_URI,Não configurado
+WhatsApp,GET,/api/whatsapp/sessao/:telefone,Detalhes da sessão,MONGO_URI,Não configurado
+WhatsApp,DELETE,/api/whatsapp/sessao/:telefone,Encerrar sessão,MONGO_URI,Não configurado
+WhatsApp,POST,/api/whatsapp/send,Enviar mensagem,Baileys,Integrado
+WhatsApp,POST,/api/whatsapp/send-buttons,Enviar com botões,Baileys,Integrado
+WhatsApp,POST,/api/whatsapp/desconectar,Desconectar,Baileys,Integrado
+WhatsApp,POST,/api/whatsapp/restart,Reiniciar,Baileys,Integrado
+Análise Imagem,POST,/api/analise-imagem/analisar,Analisar sem salvar,OPENAI_API_KEY,Não configurado
+Análise Imagem,POST,/api/analise-imagem/salvar-e-analisar,Salvar e analisar,OPENAI_API_KEY,Não configurado
+Análise Imagem,POST,/api/analise-imagem/comparar-pasta,Comparar pasta,OPENAI_API_KEY,Não configurado
+Análise Imagem,POST,/api/analise-imagem/comparar-pasta-local,Comparar local (gratuito),Nenhuma,Funcional
+Análise Imagem,GET,/api/analise-imagem/imagem-externa,Servir imagem externa,Nenhuma,Funcional
+Análise Imagem,POST,/api/analise-imagem/gerar-caracteristicas,Gerar características,OPENAI_API_KEY,Não configurado
+Análise Imagem,POST,/api/analise-imagem/classificar-ocupacao,Classificar ocupação,OPENAI_API_KEY,Não configurado
+Análise Imagem,POST,/api/analise-imagem/classificar-roda,Classificar roda,OPENAI_API_KEY,Não configurado
+Análise Imagem,POST,/api/analise-imagem/classificar-cor-camisa,Classificar cor camisa,OPENAI_API_KEY,Não configurado
+Análise Imagem,POST,/api/analise-imagem/classificar-mochila,Classificar mochila,OPENAI_API_KEY,Não configurado
+Análise Imagem,POST,/api/analise-imagem/classificar-calca,Classificar calça,OPENAI_API_KEY,Não configurado
+Análise Imagem,POST,/api/analise-imagem/ler-placa,Ler placas OCR,OPENAI_API_KEY,Não configurado
+Análise Imagem,GET,/api/analise-imagem/listar,Listar todas,Nenhuma,Funcional
+Análise Imagem,GET,/api/analise-imagem/listar/:sistema,Listar por sistema,Nenhuma,Funcional
+Análise Imagem,GET,/api/analise-imagem/listar-pasta,Listar pasta,Nenhuma,Funcional
+Análise Imagem,DELETE,/api/analise-imagem/:sistema/:nome,Remover imagem,Nenhuma,Funcional
+Jobs,POST,/api/jobs/comparar-pasta,Criar job de comparação,"OPENAI_API_KEY, MONGO_URI",Não configurado
+Jobs,GET,/api/jobs,Listar jobs,MONGO_URI,Não configurado
+Jobs,GET,/api/jobs/:id,Obter job,MONGO_URI,Não configurado
+Jobs,DELETE,/api/jobs/:id,Remover job,MONGO_URI,Não configurado
+Admin,GET,/api/admin/kb/stats,Estatísticas da KB,MONGO_URI,Não configurado
+Admin,POST,/api/admin/reindexar-docs,Reindexar documentação,"OPENAI_API_KEY, MONGO_URI",Não configurado
+Admin,POST,/api/admin/reindexar-jitbit,Reindexar Jitbit,"JITBIT_*, OPENAI_API_KEY, MONGO_URI",Não configurado
+Admin,DELETE,/api/admin/kb/:modulo,Limpar módulo da KB,MONGO_URI,Não configurado
+Agent,POST,/api/agent/run,Executar agente,"OPENAI_API_KEY, MONGO_URI",Não configurado
+Agent,POST,/api/agent/run/:mode,Executar modo específico,"OPENAI_API_KEY, MONGO_URI",Não configurado
+Agent,GET,/api/agent/state,Estado do agente,MONGO_URI,Não configurado
+Agent,GET,/api/agent/scheduler,Status do scheduler,MONGO_URI,Não configurado
+Agent,POST,/api/agent/scheduler/start,Iniciar scheduler,MONGO_URI,Não configurado
+Agent,POST,/api/agent/scheduler/stop,Parar scheduler,MONGO_URI,Não configurado
+VARCO,POST,/api/varco/validar-dispositivo,Validar dispositivo,"VARCO_EMAIL, VARCO_PASSWORD",Não configurado
+VARCO,POST,/api/varco/validar-lote,Validar lote,"VARCO_EMAIL, VARCO_PASSWORD",Não configurado
+VARCO,POST,/api/varco/analisar-incidente,Analisar incidente,"VARCO_EMAIL, VARCO_PASSWORD, OPENAI_API_KEY",Não configurado
+VARCO,GET,/api/varco/heartbeat,Heartbeat geral,"VARCO_EMAIL, VARCO_PASSWORD",Não configurado
+VARCO,GET,/api/varco/frota,Listar frota (72 dispositivos),"VARCO_EMAIL, VARCO_PASSWORD",Não configurado
+VARCO,GET,/api/varco/auditoria,Auditoria de status,"VARCO_EMAIL, VARCO_PASSWORD",Não configurado
+VARCO,POST,/api/varco/auditoria-aprimorada,Auditoria aprimorada,"VARCO_EMAIL, VARCO_PASSWORD, OPENAI_API_KEY",Não configurado
+VARCO,GET,/api/varco/config-padrao,Configuração padrão,"VARCO_EMAIL, VARCO_PASSWORD",Não configurado
+VARCO,POST,/api/varco/recoleta,Recoletar VARCO,"VARCO_EMAIL, VARCO_PASSWORD",Não configurado
+VARCO,POST,/api/varco/plano-correcao,Obter plano de correção,MONGO_URI,Não configurado
+VARCO,POST,/api/varco/plano-correcao/gerar,Gerar plano,"VARCO_EMAIL, VARCO_PASSWORD, OPENAI_API_KEY",Não configurado
+VARCO,POST,/api/varco/plano-correcao/aplicar,Aplicar correção,"VARCO_EMAIL, VARCO_PASSWORD",Não configurado
+Validation,POST,/api/validation/start,Iniciar validação,Playwright,Funcional
+Validation,POST,/api/validation/discover/ui,Descobrir UI,Playwright,Funcional
+Validation,POST,/api/validation/discover/api,Descobrir API,Playwright,Funcional
+Validation,GET,/api/validation/report/:id,Obter relatório,MONGO_URI,Não configurado
+Validation,GET,/api/validation/list,Listar validações,MONGO_URI,Não configurado
+Visual Validation,POST,/api/visual-validation/start,Iniciar validação visual,Playwright,Funcional
+Visual Validation,GET,/api/visual-validation/status/:id,Status da validação,Playwright,Funcional
+Visual Validation,GET,/api/visual-validation/report/:id,Obter relatório,Playwright,Funcional
+Visual Validation,GET,/api/visual-validation/screenshot/:id/:index,Obter screenshot,Nenhuma,Funcional
+Visual Validation,GET,/api/visual-validation/list,Listar validações,MONGO_URI,Não configurado
+Quality,GET,/api/quality/specification,Obter especificação,Nenhuma,Funcional
+Quality,GET,/api/quality/modules,Listar módulos,Nenhuma,Funcional
+Quality,GET,/api/quality/projects,Listar projetos,Nenhuma,Funcional
+Quality,GET,/api/quality/scans,Listar scans,MONGO_URI,Não configurado
+Quality,GET,/api/quality/stats,Estatísticas,MONGO_URI,Não configurado
+Quality,GET,/api/quality/roadmap,Roadmap PIEQ,Nenhuma,Funcional
+Quality,POST,/api/quality/scan,Criar scan,MONGO_URI,Não configurado
+Quality,GET,/api/quality/scan/:id,Obter scan,MONGO_URI,Não configurado
+Quality,GET,/api/quality/report/:id,Obter relatório,MONGO_URI,Não configurado
+Portal,POST,/api/portal/consultar,Consultar infrações,AXHUB_DB_*,Não configurado
+Portal,GET,/api/portal/infracao/:autoInfracao,Buscar infração,AXHUB_DB_*,Não configurado
+Portal,POST,/api/portal/auth/registrar,Registrar usuário,MONGO_URI,Não configurado
+Portal,POST,/api/portal/auth/login,Login usuário,MONGO_URI,Não configurado
+Portal,GET,/api/portal/auth/perfil,Obter perfil,MONGO_URI,Não configurado
+Portal,PUT,/api/portal/auth/perfil,Atualizar perfil,MONGO_URI,Não configurado
+Portal,PUT,/api/portal/auth/senha,Alterar senha,MONGO_URI,Não configurado
+Portal,POST,/api/portal/contestar,Criar contestação,MONGO_URI,Comentado
+Portal,GET,/api/portal/contestacoes,Listar contestações,MONGO_URI,Comentado
+Portal,GET,/api/portal/contestacoes/:id,Buscar contestação,MONGO_URI,Comentado
+Portal,DELETE,/api/portal/contestacoes/:id,Cancelar contestação,MONGO_URI,Comentado
+Portal,POST,/api/portal/contestacoes/:id/documentos,Adicionar documento,MONGO_URI,Comentado
+Portal,GET,/api/portal/health,Health check,Nenhuma,Funcional

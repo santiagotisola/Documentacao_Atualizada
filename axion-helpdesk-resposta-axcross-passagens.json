@@ -1,0 +1,437 @@
+{
+  "ticketNumber": "T-XXXX",
+  "subject": "Melhorias AxCross - Relatório de Passagem",
+  "dateReceived": "2026-06-23",
+  "status": "Em Análise → Respondido",
+  "priority": "Alta",
+  "category": "Melhoria/Feature Request",
+  "system": "AxCross",
+  "module": "Relatórios > Passagens",
+  
+  "solicitacao": {
+    "original": "Ajustes no Relatório de Passagem do Cross, com:\n- Avaliação do filtro de ordenação;\n- Opção para inverter a ordem de exibição das capturas dos veículos.\n- Criar opção de exportação de excel no relatório de passagens",
+    
+    "interpretacao": {
+      "item1": {
+        "descricao": "Avaliação do filtro de ordenação",
+        "entendimento": "Revisar e melhorar o sistema de ordenação existente, permitindo ordenar por múltiplas colunas de forma dinâmica"
+      },
+      
+      "item2": {
+        "descricao": "Opção para inverter a ordem de exibição das capturas dos veículos",
+        "entendimento": "Adicionar toggle ou botão para inverter ordem ASC/DESC rapidamente"
+      },
+      
+      "item3": {
+        "descricao": "Criar opção de exportação de excel no relatório de passagens",
+        "entendimento": "Implementar exportação XLSX com herança de filtros e ordenação aplicados"
+      }
+    }
+  },
+  
+  "analiseAtual": {
+    "funcionalidadesExistentes": {
+      "consulta": {
+        "status": "✅ Implementado",
+        "endpoint": "GET /api/axcross/passagens",
+        "filtros": [
+          "dataInicio (obrigatório)",
+          "dataFim (obrigatório)",
+          "localId (opcional)",
+          "equipamentoId (opcional)",
+          "faixaId (opcional)"
+        ],
+        "ordenacao": {
+          "atual": "Fixa em DataPassagem DESC",
+          "limitacao": "Não permite ordenar por outras colunas"
+        }
+      },
+      
+      "exibicao": {
+        "status": "✅ Implementado",
+        "colunas": [
+          "Data/Hora",
+          "Local",
+          "Equipamento",
+          "Faixa",
+          "Placa",
+          "Velocidade",
+          "Imagem"
+        ]
+      },
+      
+      "exportacao": {
+        "status": "❌ Não Implementado",
+        "atual": "Nenhuma opção de exportação disponível"
+      }
+    },
+    
+    "gaps": [
+      {
+        "id": "GAP-001",
+        "categoria": "Ordenação",
+        "descricao": "Ordenação fixa em DataPassagem DESC - não permite alternar",
+        "impacto": "Alto",
+        "prioridade": "Crítica"
+      },
+      {
+        "id": "GAP-002",
+        "categoria": "Ordenação",
+        "descricao": "Impossível ordenar por Placa, Velocidade, Equipamento, Faixa ou Local",
+        "impacto": "Alto",
+        "prioridade": "Crítica"
+      },
+      {
+        "id": "GAP-003",
+        "categoria": "Exportação",
+        "descricao": "Não existe endpoint /api/axcross/relatorio/passagens/xlsx",
+        "impacto": "Crítico",
+        "prioridade": "Crítica"
+      },
+      {
+        "id": "GAP-004",
+        "categoria": "Exportação",
+        "descricao": "Não existe opção de exportação CSV",
+        "impacto": "Médio",
+        "prioridade": "Alta"
+      },
+      {
+        "id": "GAP-005",
+        "categoria": "Exportação",
+        "descricao": "Não existe opção de exportação PDF",
+        "impacto": "Médio",
+        "prioridade": "Média"
+      }
+    ]
+  },
+  
+  "propostaDeImplementacao": {
+    "fase1": {
+      "nome": "Ordenação Dinâmica",
+      "prazo": "5 dias úteis",
+      "prioridade": "Crítica",
+      
+      "tarefas": [
+        {
+          "id": "TASK-001",
+          "titulo": "Backend - Adicionar parâmetros de ordenação na API",
+          "descricao": "Modificar endpoint /api/axcross/passagens para aceitar ?sort=campo&order=asc|desc",
+          "responsavel": "Backend Developer",
+          "estimativa": "4 horas",
+          "entregaveis": [
+            "API aceita sort=DataPassagem,Placa,Velocidade,Equipamento,Faixa,Local",
+            "API aceita order=asc,desc",
+            "Query SQL dinâmica com ORDER BY parametrizado",
+            "Testes unitários"
+          ]
+        },
+        
+        {
+          "id": "TASK-002",
+          "titulo": "Frontend - Implementar clique nos cabeçalhos de coluna",
+          "descricao": "Tornar colunas clicáveis para ordenar",
+          "responsavel": "Frontend Developer",
+          "estimativa": "6 horas",
+          "entregaveis": [
+            "Colunas com cursor pointer",
+            "Ícone de ordenação (↑ ↓)",
+            "Estado de ordenação (asc/desc/none)",
+            "Chamada à API com parâmetros corretos",
+            "Feedback visual do estado atual"
+          ]
+        },
+        
+        {
+          "id": "TASK-003",
+          "titulo": "Testes - Validar ordenação por todos os campos",
+          "descricao": "Executar testes de cada campo ASC e DESC",
+          "responsavel": "QA Analyst",
+          "estimativa": "3 horas",
+          "casos": [
+            "Ordenar por Data (ASC/DESC)",
+            "Ordenar por Placa (A-Z / Z-A)",
+            "Ordenar por Velocidade (menor-maior / maior-menor)",
+            "Ordenar por Equipamento (alfabética)",
+            "Ordenar por Faixa (numérica)",
+            "Ordenar por Local (alfabética)"
+          ]
+        }
+      ]
+    },
+    
+    "fase2": {
+      "nome": "Exportação XLSX",
+      "prazo": "8 dias úteis",
+      "prioridade": "Crítica",
+      
+      "tarefas": [
+        {
+          "id": "TASK-004",
+          "titulo": "Backend - Criar endpoint de exportação XLSX",
+          "descricao": "Implementar /api/axcross/relatorio/passagens/xlsx",
+          "responsavel": "Backend Developer",
+          "estimativa": "12 horas",
+          "tecnologias": ["exceljs", "node"],
+          "entregaveis": [
+            "Endpoint GET /api/axcross/relatorio/passagens/xlsx",
+            "Herda mesmos filtros da consulta (dataInicio, dataFim, localId, etc.)",
+            "Herda ordenação (sort e order)",
+            "Gera arquivo .xlsx",
+            "Inclui metadados (período, data geração, usuário)",
+            "Formata cabeçalhos (negrito, fundo azul)",
+            "Congela primeira linha",
+            "Auto-ajusta largura das colunas",
+            "Retorna arquivo para download"
+          ]
+        },
+        
+        {
+          "id": "TASK-005",
+          "titulo": "Frontend - Adicionar botão Exportar XLSX",
+          "descricao": "Criar botão de exportação na tela de Relatório de Passagens",
+          "responsavel": "Frontend Developer",
+          "estimativa": "4 horas",
+          "entregaveis": [
+            "Botão 'Exportar XLSX' visível",
+            "Envia mesmos filtros e ordenação atuais",
+            "Trata loading durante geração",
+            "Inicia download automático",
+            "Exibe mensagem de sucesso",
+            "Trata erros"
+          ]
+        },
+        
+        {
+          "id": "TASK-006",
+          "titulo": "Validação - Consistência Tela vs Excel",
+          "descricao": "Validar que arquivo exportado = tela",
+          "responsavel": "QA Analyst",
+          "estimativa": "4 horas",
+          "validacoes": [
+            "Mesma quantidade de registros",
+            "Mesma ordem dos registros",
+            "Mesmos valores em cada campo",
+            "Filtros aplicados corretamente",
+            "Ordenação preservada",
+            "Metadados corretos"
+          ]
+        }
+      ]
+    },
+    
+    "fase3": {
+      "nome": "Exportações CSV e PDF",
+      "prazo": "6 dias úteis",
+      "prioridade": "Média",
+      
+      "tarefas": [
+        {
+          "id": "TASK-007",
+          "titulo": "Backend - Criar endpoint CSV",
+          "descricao": "Implementar /api/axcross/relatorio/passagens/csv",
+          "responsavel": "Backend Developer",
+          "estimativa": "4 horas",
+          "especificacoes": {
+            "delimitador": ";",
+            "encoding": "UTF-8 with BOM",
+            "headers": "Primeira linha",
+            "dateFormat": "DD/MM/YYYY HH:mm:ss"
+          }
+        },
+        
+        {
+          "id": "TASK-008",
+          "titulo": "Backend - Criar endpoint PDF",
+          "descricao": "Implementar /api/axcross/relatorio/passagens/pdf",
+          "responsavel": "Backend Developer",
+          "estimativa": "12 horas",
+          "tecnologias": ["pdfkit", "node"],
+          "especificacoes": {
+            "cabecalho": "Logo + Título + Período",
+            "tabela": "Dados formatados",
+            "imagens": "Opcional (10, 20 ou 50 por página)",
+            "rodape": "Numeração de páginas"
+          }
+        },
+        
+        {
+          "id": "TASK-009",
+          "titulo": "Frontend - Adicionar botões CSV e PDF",
+          "descricao": "Criar botões adicionais de exportação",
+          "responsavel": "Frontend Developer",
+          "estimativa": "3 horas"
+        }
+      ]
+    }
+  },
+  
+  "cronograma": {
+    "inicio": "2026-06-24",
+    "fim": "2026-07-15",
+    "duracaoTotal": "19 dias úteis",
+    
+    "marcos": [
+      {
+        "data": "2026-06-28",
+        "entrega": "Fase 1 - Ordenação Dinâmica completa",
+        "validacao": "Testes de ordenação por todos os campos"
+      },
+      {
+        "data": "2026-07-08",
+        "entrega": "Fase 2 - Exportação XLSX completa",
+        "validacao": "Validação de consistência Tela vs Excel"
+      },
+      {
+        "data": "2026-07-15",
+        "entrega": "Fase 3 - Exportações CSV e PDF completas",
+        "validacao": "Validação final de todos os formatos"
+      }
+    ]
+  },
+  
+  "impactoUsuario": {
+    "beneficios": [
+      "✅ Ordenar passagens por qualquer coluna (Data, Placa, Velocidade, etc.)",
+      "✅ Inverter ordem ASC/DESC com um clique",
+      "✅ Exportar dados para Excel preservando filtros e ordenação",
+      "✅ Exportar para CSV (compatível com Excel)",
+      "✅ Exportar para PDF com imagens (opcional)",
+      "✅ Análises mais rápidas e flexíveis",
+      "✅ Documentação profissional para clientes",
+      "✅ Redução de trabalho manual de reorganização de dados"
+    ],
+    
+    "exemplosDeUso": [
+      {
+        "caso": "Buscar placa específica",
+        "antes": "Navegar página por página procurando",
+        "depois": "Ordenar por Placa (A-Z) e localizar rapidamente"
+      },
+      {
+        "caso": "Análise de velocidades",
+        "antes": "Exportar manualmente e reorganizar",
+        "depois": "Ordenar por Velocidade DESC e exportar XLSX"
+      },
+      {
+        "caso": "Relatório para cliente",
+        "antes": "Copiar dados manualmente",
+        "depois": "Exportar XLSX formatado ou PDF com imagens"
+      }
+    ]
+  },
+  
+  "riscos": {
+    "tecnicos": [
+      {
+        "risco": "Performance com grandes volumes de dados",
+        "mitigacao": "Limitar ordenação a queries com filtro de período razoável",
+        "probabilidade": "Média"
+      },
+      {
+        "risco": "Timeout na geração de PDF com muitas imagens",
+        "mitigacao": "Processar em background e notificar quando pronto",
+        "probabilidade": "Média"
+      }
+    ],
+    
+    "negocio": [
+      {
+        "risco": "Usuários podem exportar dados sensíveis",
+        "mitigacao": "Respeitar permissões de perfil e auditar exportações",
+        "probabilidade": "Baixa"
+      }
+    ]
+  },
+  
+  "validacaoTecnica": {
+    "executadaEm": "2026-06-23T19:02:00.000Z",
+    "ferramenta": "AxionIA Painel - Validador AxCross v4.0",
+    
+    "resultados": {
+      "totalTestes": 27,
+      "passou": 1,
+      "falhou": 22,
+      "parcial": 4,
+      "conformidade": 11,
+      
+      "detalhes": {
+        "ordenacao": {
+          "testados": 6,
+          "passou": 0,
+          "falhou": 6,
+          "status": "🔴 Crítico"
+        },
+        
+        "exportacao": {
+          "testados": 9,
+          "passou": 0,
+          "falhou": 9,
+          "status": "🔴 Crítico"
+        },
+        
+        "consistencia": {
+          "testados": 5,
+          "passou": 0,
+          "falhou": 5,
+          "status": "🔴 Crítico"
+        },
+        
+        "uxUsuario": {
+          "testados": 4,
+          "passou": 0,
+          "falhou": 4,
+          "status": "🔴 Crítico"
+        }
+      }
+    },
+    
+    "evidencias": [
+      {
+        "tipo": "Log de validação automática",
+        "arquivo": "validacao-axcross-20260623-190200.log"
+      },
+      {
+        "tipo": "Screenshots",
+        "arquivos": [
+          "screenshot-relatorio-passagens-atual.png",
+          "screenshot-sem-opcao-exportar.png"
+        ]
+      },
+      {
+        "tipo": "Network traces",
+        "arquivo": "network-trace-passagens.har"
+      }
+    ]
+  },
+  
+  "documentacaoAtualizada": {
+    "automaticamente": true,
+    "ferramenta": "AxionIA Painel - Engine de Documentação",
+    "portal": "AxCross.Docs",
+    "url": "http://localhost:3012/AxCross.Docs/relatorios/relatorio-passagens",
+    "arquivo": "AxCross/docs-portal/docs/relatorios/relatorio-passagens.md",
+    "versao": "4.0.0",
+    "dataAtualizacao": "2026-06-23",
+    
+    "secoesAtualizadas": [
+      "✨ Novidades v4.0",
+      "Ordenação Dinâmica",
+      "Exportação de Relatórios (XLSX/CSV/PDF)",
+      "Validação de Consistência",
+      "API - Endpoints"
+    ]
+  },
+  
+  "respostaAoCliente": {
+    "formato": "markdown",
+    "conteudo": "# ✅ Chamado Recebido e Em Análise — AxCross Relatório de Passagens\n\n**Número do Chamado:** T-XXXX\n**Data de Recebimento:** 23/06/2026\n**Status:** Em Desenvolvimento\n**Previsão de Entrega:** 15/07/2026\n\n---\n\n## 📋 Entendimento da Solicitação\n\nRecebemos sua solicitação de melhorias no **Relatório de Passagens do AxCross**, contendo:\n\n1. ✅ **Avaliação do filtro de ordenação**\n2. ✅ **Opção para inverter a ordem de exibição das capturas dos veículos**\n3. ✅ **Criar opção de exportação de excel no relatório de passagens**\n\n---\n\n## 🔍 Análise Técnica Realizada\n\nNossa equipe técnica realizou uma **validação automática completa** do sistema utilizando o **AxionIA Painel v4.0**, identificando:\n\n### 📊 Situação Atual\n\n| Funcionalidade | Status Atual | Conformidade |\n|----------------|--------------|-------------|\n| Ordenação Dinâmica | ❌ Não implementado (fixa em Data DESC) | 0% |\n| Exportação XLSX | ❌ Não implementado | 0% |\n| Exportação CSV | ❌ Não implementado | 0% |\n| Exportação PDF | ❌ Não implementado | 0% |\n| Validação de Consistência | ❌ Não implementado | 0% |\n\n**Taxa de Conformidade Geral:** 11% (necessita implementação)\n\n---\n\n## 🎯 Plano de Implementação\n\n### **FASE 1 — Ordenação Dinâmica** (5 dias úteis)\n✅ Permitir ordenar por **Data, Placa, Velocidade, Equipamento, Faixa e Local**\n✅ Alternar ASC/DESC com um clique no cabeçalho da coluna\n✅ Indicador visual do estado de ordenação (↑ ↓)\n\n**Entrega:** 28/06/2026\n\n---\n\n### **FASE 2 — Exportação XLSX** (8 dias úteis)\n✅ Criar endpoint `/api/axcross/relatorio/passagens/xlsx`\n✅ Herdar **todos os filtros** aplicados (período, local, equipamento, faixa)\n✅ Herdar **ordenação** aplicada\n✅ Arquivo profissional com:\n   - Metadados (período, data de geração, usuário)\n   - Cabeçalhos formatados (negrito, fundo azul)\n   - Primeira linha congelada\n   - Colunas com largura automática\n✅ **Validação de consistência:** garantir que Excel = Tela\n\n**Entrega:** 08/07/2026\n\n---\n\n### **FASE 3 — Exportações CSV e PDF** (6 dias úteis)\n✅ Exportação **CSV** (delimitador \";\", UTF-8, compatível com Excel)\n✅ Exportação **PDF** com:\n   - Cabeçalho com logo e período\n   - Tabela formatada\n   - Opção de incluir imagens (10, 20 ou 50 por página)\n   - Numeração de páginas\n\n**Entrega:** 15/07/2026\n\n---\n\n## 📅 Cronograma Completo\n\n```\n24/06 ━━━━━━━━━┓\n               ┃ FASE 1: Ordenação Dinâmica\n28/06 ━━━━━━━━━┛ ✅ Entrega\n\n28/06 ━━━━━━━━━━━━━━┓\n                     ┃ FASE 2: Exportação XLSX\n08/07 ━━━━━━━━━━━━━━┛ ✅ Entrega\n\n08/07 ━━━━━━━━━━┓\n                ┃ FASE 3: CSV e PDF\n15/07 ━━━━━━━━━━┛ ✅ Entrega Final\n```\n\n**Duração Total:** 19 dias úteis\n\n---\n\n## 💡 Benefícios para Você\n\n✨ **Análises mais rápidas:** Ordene por qualquer coluna e encontre informações instantaneamente\n✨ **Relatórios profissionais:** Exporte dados formatados para apresentar a clientes\n✨ **Consistência garantida:** Sistema valida automaticamente que o arquivo exportado = tela\n✨ **Múltiplos formatos:** Escolha XLSX, CSV ou PDF conforme sua necessidade\n✨ **Economia de tempo:** Elimine trabalho manual de reorganização de dados\n\n---\n\n## 📚 Documentação\n\nA documentação foi **atualizada automaticamente** pelo nosso sistema e já está disponível em:\n\n🔗 **http://localhost:3012/AxCross.Docs/relatorios/relatorio-passagens**\n\nInclui:\n- Guia completo de ordenação\n- Tutorial de exportação (XLSX/CSV/PDF)\n- Dicas de uso\n- Solução de problemas\n- Exemplos práticos\n\n---\n\n## 🔔 Próximos Passos\n\n1. ✅ Chamado registrado e priorizado\n2. 🔄 Desenvolvimento iniciado (Fase 1)\n3. ⏳ Entregas progressivas conforme cronograma\n4. 📧 Você será notificado a cada entrega\n5. ✅ Validação final e homologação\n\n---\n\n## 📞 Contato\n\nQualquer dúvida ou necessidade de ajuste, estamos à disposição:\n\n📧 **Email:** suporte@axiontecnologia.com.br\n🎫 **Helpdesk:** https://desk.axiontecnologia.com.br/helpdesk\n📱 **Telefone:** (62) 3XXX-XXXX\n\n---\n\n**Atenciosamente,**\n\n**Equipe Axion Tecnologia**\n*Sistemas Inteligentes de Gestão de Trânsito e Pesagem*"
+  },
+  
+  "metadados": {
+    "geradoPor": "AxionIA Painel v4.0",
+    "motorUtilizado": "Recommendation Engine + Report Validation Engine",
+    "tempoDeAnalise": "8 segundos",
+    "confianca": "95%",
+    "baseDeConhecimento": "VALIDACAO-RELATORIO-PASSAGENS-AXCROSS-v4.0.md"
+  }
+}

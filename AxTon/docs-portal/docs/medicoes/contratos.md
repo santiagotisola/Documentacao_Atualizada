@@ -6,7 +6,7 @@ description: Cadastro de contratos de prestação de serviço
 
 # Contratos
 
-![Relatório de Pesagem](../img/Relatorio%20de%20pesagem.png)
+Relatório de Pesagem](../img/Relatorio%20de%20pesagem.png)
 
 Registro dos contratos de prestação de serviço de pesagem, vinculando postos, períodos e metas de performance.
 
@@ -44,4 +44,4 @@ Registro dos contratos de prestação de serviço de pesagem, vinculando postos,
 |---|---|
 | [**Índices de Performance**](../medicoes/indices-performance) | Indicadores de desempenho contratual |
 | [**Interrupções**](../medicoes/interrupcoes) | Registro de interrupções operacionais |
-| [**Gerar Medição**](../medicoes/criar-medicao) | Gerar relatório de medição contratual |
+| [**Gerar Medição**](../medicoes/criar-medicao) | Gerar Relatório de medição contratual |

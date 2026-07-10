@@ -1,0 +1,231 @@
+/**
+ * Seleção Visual Persistente - Estilos Globais
+ * 
+ * Adiciona destaque visual persistente para itens selecionáveis
+ * em listas, tabelas e cards.
+ */
+
+/* ==================== LISTA SELECIONÁVEL ==================== */
+
+.lista-item,
+.table-row-selectable,
+.card-selectable {
+  transition: all 0.2s ease;
+  cursor: pointer;
+  position: relative;
+}
+
+.lista-item:hover,
+.table-row-selectable:hover,
+.card-selectable:hover {
+  background-color: #f7fafc; /* gray-50 */
+}
+
+/* Estado selecionado */
+.lista-item.selecionado,
+.table-row-selectable.selected,
+.card-selectable.selected {
+  background-color: #e5e7eb !important; /* gray-200 */
+  border-left: 4px solid #3b82f6; /* blue-500 */
+  font-weight: 500;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+/* Indicador visual adicional (opcional) */
+.lista-item.selecionado::before,
+.table-row-selectable.selected::before,
+.card-selectable.selected::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background: linear-gradient(180deg, #3b82f6 0%, #2563eb 100%);
+}
+
+/* ==================== TABELAS ==================== */
+
+/* Linhas de tabela selecionáveis */
+tr.table-row-selectable.selected td {
+  background-color: #eff6ff !important; /* blue-50 */
+  font-weight: 500;
+}
+
+tr.table-row-selectable.selected td:first-child {
+  border-left: 4px solid #3b82f6;
+}
+
+/* ==================== CARDS ==================== */
+
+.card-selectable {
+  border: 2px solid transparent;
+  border-radius: 8px;
+  padding: 1rem;
+}
+
+.card-selectable:hover {
+  border-color: #cbd5e0; /* gray-300 */
+}
+
+.card-selectable.selected {
+  border-color: #3b82f6 !important; /* blue-500 */
+  background-color: #eff6ff !important; /* blue-50 */
+  box-shadow: 0 4px 6px rgba(59, 130, 246, 0.1);
+}
+
+/* ==================== CONTRATOS (específico) ==================== */
+
+.contrato-item {
+  padding: 1rem;
+  margin-bottom: 0.5rem;
+  border-radius: 8px;
+  border: 2px solid transparent;
+  transition: all 0.2s;
+  cursor: pointer;
+}
+
+.contrato-item:hover {
+  background-color: #f7fafc;
+  border-color: #e2e8f0;
+}
+
+.contrato-item.selecionado {
+  background-color: #e5e7eb;
+  border-left: 4px solid #3b82f6;
+  border-color: #cbd5e0;
+  font-weight: 500;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* ==================== TICKETS (Helpdesk) ==================== */
+
+.ticket-row {
+  padding: 0.75rem;
+  border-bottom: 1px solid #e5e7eb;
+  transition: background-color 0.2s;
+  cursor: pointer;
+}
+
+.ticket-row:hover {
+  background-color: #f9fafb;
+}
+
+.ticket-row.selected {
+  background-color: #eff6ff !important;
+  border-left: 4px solid #3b82f6;
+  font-weight: 500;
+}
+
+/* ==================== SITES (Análise de Sites) ==================== */
+
+.site-card {
+  border: 2px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin-bottom: 1rem;
+  transition: all 0.3s;
+  cursor: pointer;
+}
+
+.site-card:hover {
+  border-color: #cbd5e0;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+.site-card.selected {
+  border-color: #3b82f6 !important;
+  background-color: #eff6ff;
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.15);
+  font-weight: 500;
+}
+
+/* Indicador de seleção no canto */
+.site-card.selected::after {
+  content: '✓';
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  width: 24px;
+  height: 24px;
+  background-color: #3b82f6;
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+/* ==================== EDITAIS (Pipeline) ==================== */
+
+.edital-card {
+  border: 2px solid #e5e7eb;
+  border-radius: 8px;
+  padding: 1rem;
+  margin-bottom: 0.75rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.edital-card:hover {
+  border-color: #cbd5e0;
+  background-color: #f9fafb;
+}
+
+.edital-card.selected {
+  border-color: #10b981 !important; /* green-500 */
+  background-color: #d1fae5 !important; /* green-100 */
+  box-shadow: 0 2px 8px rgba(16, 185, 129, 0.2);
+}
+
+/* ==================== RESPONSIVO ==================== */
+
+@media (max-width: 768px) {
+  .lista-item.selecionado,
+  .table-row-selectable.selected,
+  .card-selectable.selected {
+    border-left-width: 3px;
+  }
+  
+  .site-card.selected::after {
+    width: 20px;
+    height: 20px;
+    font-size: 12px;
+  }
+}
+
+/* ==================== ACESSIBILIDADE ==================== */
+
+/* Foco para navegação por teclado */
+.lista-item:focus,
+.table-row-selectable:focus,
+.card-selectable:focus,
+.contrato-item:focus,
+.ticket-row:focus,
+.site-card:focus,
+.edital-card:focus {
+  outline: 2px solid #3b82f6;
+  outline-offset: 2px;
+}
+
+/* Animação suave de seleção */
+@keyframes selecao-flash {
+  0% {
+    background-color: transparent;
+  }
+  50% {
+    background-color: #dbeafe; /* blue-100 */
+  }
+  100% {
+    background-color: #e5e7eb; /* gray-200 */
+  }
+}
+
+.lista-item.selecionado,
+.table-row-selectable.selected,
+.card-selectable.selected {
+  animation: selecao-flash 0.3s ease;
+}

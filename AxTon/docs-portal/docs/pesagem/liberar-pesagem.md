@@ -1,14 +1,14 @@
 ---
 sidebar_position: 5
 title: Liberar Pesagem
-description: Liberação manual de veículos no processo de pesagem
+description: Liberação manual de Veículos no processo de pesagem
 ---
 
 # Liberar Pesagem
 
 ![Dados da Pesagem](../img/inicar%20pesagem%20-%20dados%20da%20pesagem.png)
 
-Permite liberar manualmente veículos que estão retidos no processo de pesagem, seja por questões operacionais ou após regularização.
+Permite liberar manualmente Veículos que estão retidos no processo de pesagem, seja por questões operacionais ou após regularização.
 
 ## Como acessar
 

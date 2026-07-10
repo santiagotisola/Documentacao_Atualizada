@@ -1,0 +1,725 @@
+{
+  "audit_metadata": {
+    "engine": "AxionIA Integration Intelligence Engine",
+    "version": "2.0.0",
+    "mode": "audit_validate_sync_monitor",
+    "execution_date": "2026-06-23",
+    "scope": "global",
+    "auto_discovery": true,
+    "recursive_scan": true
+  },
+  "executive_summary": {
+    "overall_status": "OPERATIONAL_WITH_CRITICAL_GAPS",
+    "health_score": 78,
+    "quality_score": 82,
+    "integration_score": 65,
+    "availability_score": 85,
+    "total_projects": 5,
+    "total_urls": 41,
+    "total_apis": 180,
+    "total_dashboards": 8,
+    "total_reports": 15,
+    "critical_issues": 12,
+    "high_issues": 28,
+    "medium_issues": 45,
+    "low_issues": 18
+  },
+  "discovered_projects": {
+    "axhub": {
+      "name": "AxHub",
+      "type": "Sistema de Gestão de Infrações de Trânsito",
+      "sites_count": 18,
+      "status": "active",
+      "urls": [
+        "https://ibametro.axhub.axion.ws",
+        "https://imepi.axhub.axion.ws",
+        "https://imeqpb.axhub.axion.ws",
+        "https://imetropa.axhub.axion.ws",
+        "https://ipemce.axhub.axion.ws",
+        "https://ipempe.axhub.axion.ws",
+        "https://derse.axhub.axion.ws",
+        "https://strans.axhub.axion.ws",
+        "https://detranma.axhub.axion.ws",
+        "https://detranpi.axhub.axion.ws",
+        "https://goiania.axhub.axion.ws",
+        "https://ipemmt.axhub.axion.ws",
+        "https://itps.axhub.axion.ws",
+        "https://smtt.axhub.axion.ws",
+        "https://economia.axhub.axion.ws",
+        "https://imperatriz.axhub.axion.ws",
+        "https://homologacao.axhub.axion.ws",
+        "https://setrans.axhub.axion.ws"
+      ],
+      "authentication": {
+        "type": "multiple",
+        "methods": ["basic_auth", "oidc"],
+        "default_credentials": {
+          "username": "admin",
+          "password": "Labor#5383"
+        },
+        "oidc_sites": ["goiania", "economia"]
+      },
+      "database": {
+        "type": "SQL Server",
+        "status": "configured_not_connected",
+        "required_env_vars": ["AXHUB_DB_HOST", "AXHUB_DB_PORT", "AXHUB_DB_NAME", "AXHUB_DB_USER", "AXHUB_DB_PASS"]
+      }
+    },
+    "axcross": {
+      "name": "AxCross",
+      "type": "Sistema de Monitoramento de Cruzamentos",
+      "sites_count": 12,
+      "status": "active",
+      "urls": [
+        "https://derse.axcross.axion.ws",
+        "https://detranpi.axcross.axion.ws",
+        "https://detranma.axcross.axion.ws",
+        "https://imperatriz.axcross.axion.ws",
+        "https://ipemce.axcross.axion.ws",
+        "https://ipemmt.axcross.axion.ws",
+        "https://ipempe.axcross.axion.ws",
+        "https://sefazpi.axcross.axion.ws",
+        "https://goiania.axcross.axion.ws",
+        "https://economia.axcross.axion.ws",
+        "https://setrans.axcross.axion.ws",
+        "https://homologacao.axcross.axion.ws"
+      ],
+      "authentication": {
+        "type": "unified",
+        "default_credentials": {
+          "username": "suporte@axiontecnologia.com.br",
+          "password": "Axion#2026"
+        }
+      },
+      "database": {
+        "type": "SQL Server",
+        "status": "configured_not_connected",
+        "required_env_vars": ["AXCROSS_DB_HOST", "AXCROSS_DB_PORT", "AXCROSS_DB_NAME", "AXCROSS_DB_USER", "AXCROSS_DB_PASS"]
+      }
+    },
+    "axton": {
+      "name": "AxTon",
+      "type": "Sistema de Pesagem Veicular",
+      "sites_count": 0,
+      "status": "active",
+      "urls": [],
+      "authentication": {
+        "type": "not_documented",
+        "default_credentials": null
+      },
+      "database": {
+        "type": "SQL Server",
+        "status": "configured_not_connected",
+        "required_env_vars": ["AXTON_DB_HOST", "AXTON_DB_PORT", "AXTON_DB_NAME", "AXTON_DB_USER", "AXTON_DB_PASS"]
+      }
+    },
+    "varco": {
+      "name": "VARCO IoT Platform",
+      "type": "Plataforma de Monitoramento de Câmeras ITScam 450",
+      "sites_count": 1,
+      "status": "active",
+      "urls": ["https://[UUID]-80.tunnel.varco.cloud"],
+      "devices_count": 72,
+      "authentication": {
+        "type": "api_credentials",
+        "required_env_vars": ["VARCO_EMAIL", "VARCO_PASSWORD"]
+      },
+      "database": null
+    },
+    "axion_ia_panel": {
+      "name": "AxionIA Panel",
+      "type": "Painel Central de Gerenciamento",
+      "sites_count": 1,
+      "status": "active",
+      "urls": ["http://localhost:3017"],
+      "api_url": "http://localhost:3100",
+      "authentication": {
+        "type": "api_token",
+        "default_token": "4ca85296b69704ff408e570501c2480af8457da858defbced704ba4ad20d8bf3"
+      },
+      "database": {
+        "type": "MongoDB",
+        "status": "configured_not_connected",
+        "required_env_vars": ["MONGO_URI"]
+      }
+    }
+  },
+  "discovered_urls": {
+    "total": 41,
+    "by_category": {
+      "axhub_sites": 18,
+      "axcross_sites": 12,
+      "documentation_portals": 3,
+      "auth_services": 3,
+      "panel": 1,
+      "api": 1,
+      "helpdesk": 1,
+      "varco": 1,
+      "external": 1
+    },
+    "detailed_list": {
+      "documentation_portals": [
+        {
+          "url": "http://localhost:3010/AxHub.Docs",
+          "name": "AxHub Docs",
+          "status": "active",
+          "framework": "Docusaurus 3.9.2",
+          "modules": 14
+        },
+        {
+          "url": "http://localhost:3011/AxTon.Docs",
+          "name": "AxTon Docs",
+          "status": "active",
+          "framework": "Docusaurus 3.9.2",
+          "modules": 13
+        },
+        {
+          "url": "http://localhost:3012/AxCross.Docs",
+          "name": "AxCross Docs",
+          "status": "active",
+          "framework": "Docusaurus 3.9.2",
+          "modules": 9
+        }
+      ],
+      "auth_services": [
+        {
+          "url": "https://identity.axion.ws",
+          "name": "Identity Axion",
+          "type": "Auth",
+          "used_by": "Geral"
+        },
+        {
+          "url": "https://goiania.id.axion.ws",
+          "name": "Goiânia Identity",
+          "type": "Auth",
+          "used_by": "GOIÂNIA AxHub/AxCross"
+        },
+        {
+          "url": "https://economia.axion.ws",
+          "name": "Economia OIDC",
+          "type": "Auth",
+          "used_by": "ECONOMIA AxHub/AxCross"
+        }
+      ],
+      "external_services": [
+        {
+          "url": "https://desk.axiontecnologia.com.br/helpdesk",
+          "name": "Jitbit Helpdesk",
+          "type": "Ticketing System",
+          "integration": "configured"
+        }
+      ]
+    }
+  },
+  "discovered_apis": {
+    "total_endpoints": 180,
+    "base_url": "http://localhost:3100/api",
+    "authentication": "x-api-token header",
+    "rate_limiting": "120 req/min",
+    "by_module": {
+      "chat": 1,
+      "logs": 5,
+      "embeddings": 2,
+      "helpdesk": 28,
+      "axhub": 10,
+      "axton": 6,
+      "axcross": 7,
+      "medicao": 4,
+      "relatorios": 3,
+      "relatorio_contrato": 6,
+      "config": 3,
+      "coletor": 7,
+      "fontes": 7,
+      "roadmap": 5,
+      "spec": 4,
+      "conformidade": 11,
+      "editais_gov": 1,
+      "whatsapp": 9,
+      "analise_imagem": 15,
+      "jobs": 4,
+      "admin": 4,
+      "agent": 6,
+      "varco": 12,
+      "validation": 5,
+      "visual_validation": 5,
+      "quality": 9,
+      "portal": 16
+    },
+    "critical_endpoints": [
+      {
+        "path": "/api/chat",
+        "method": "POST",
+        "description": "Processar mensagem IA",
+        "dependencies": ["OPENAI_API_KEY", "MONGO_URI"],
+        "status": "configured_not_tested"
+      },
+      {
+        "path": "/api/helpdesk/tickets",
+        "method": "GET",
+        "description": "Listar tickets Jitbit",
+        "dependencies": ["JITBIT_URL", "JITBIT_USER", "JITBIT_PASS"],
+        "status": "configured_not_tested"
+      },
+      {
+        "path": "/api/axhub/status",
+        "method": "GET",
+        "description": "Status conexão AxHub SQL Server",
+        "dependencies": ["AXHUB_DB_*"],
+        "status": "not_configured"
+      },
+      {
+        "path": "/api/varco/frota",
+        "method": "GET",
+        "description": "Listar frota VARCO (72 dispositivos)",
+        "dependencies": ["VARCO_EMAIL", "VARCO_PASSWORD"],
+        "status": "configured_not_tested"
+      }
+    ]
+  },
+  "discovered_dashboards": {
+    "total": 8,
+    "list": [
+      {
+        "id": "dashboard",
+        "name": "Dashboard Principal",
+        "route": "/dashboard",
+        "description": "Visão geral dos sistemas e serviços",
+        "status": "implemented",
+        "data_sources": ["API health check", "MongoDB stats"]
+      },
+      {
+        "id": "intelligence_dashboard",
+        "name": "Intelligence Dashboard",
+        "route": "/intelligence-dashboard",
+        "description": "Analytics e métricas avançadas",
+        "status": "implemented",
+        "data_sources": ["AxHub", "AxCross", "Helpdesk", "VARCO"]
+      },
+      {
+        "id": "axhub_dashboard",
+        "name": "AxHub Dashboard",
+        "route": "/axhub-dashboard",
+        "description": "Dashboard SQL Server AxHub",
+        "status": "implemented",
+        "data_sources": ["SQL Server AxHub"]
+      },
+      {
+        "id": "operations_hub",
+        "name": "Operations Hub",
+        "route": "/operations-hub",
+        "description": "Centro de comando operacional",
+        "status": "implemented",
+        "data_sources": ["Processos", "Métricas", "Sites"]
+      },
+      {
+        "id": "intelligence_hub",
+        "name": "Intelligence Hub",
+        "route": "/intelligence-hub",
+        "description": "Gerenciador unificado de dados",
+        "status": "implemented",
+        "data_sources": ["Multi-source aggregation"]
+      },
+      {
+        "id": "quality_dashboard",
+        "name": "Quality Dashboard (PIEQ)",
+        "route": "/quality",
+        "description": "Quality Engineering Platform",
+        "status": "partial",
+        "data_sources": ["Scans", "Validations", "Reports"],
+        "issues": ["Not fully integrated with live data"]
+      },
+      {
+        "id": "diagnostic_hub",
+        "name": "Diagnostic Hub",
+        "route": "/diagnostic-hub",
+        "description": "Central de diagnóstico",
+        "status": "implemented",
+        "data_sources": ["Medição", "Health", "Logs"]
+      },
+      {
+        "id": "search_hub",
+        "name": "Search Hub",
+        "route": "/search-hub",
+        "description": "Central unificada de buscas",
+        "status": "implemented",
+        "data_sources": ["Sistemas", "Imagens", "Documentos"]
+      }
+    ]
+  },
+  "discovered_reports": {
+    "total": 15,
+    "by_type": {
+      "operational": 6,
+      "analytical": 4,
+      "compliance": 3,
+      "quality": 2
+    },
+    "list": [
+      {
+        "id": "relatorio_fluxo",
+        "name": "Relatório de Fluxo",
+        "route": "/relatorio-fluxo",
+        "description": "Métricas de atendimento e fluxo operacional",
+        "status": "implemented",
+        "api_endpoint": "/api/relatorio/passagens"
+      },
+      {
+        "id": "relatorio_contrato",
+        "name": "Relatório por Contrato",
+        "route": "/relatorio-contrato",
+        "description": "Análises técnicas via IA por site/contrato",
+        "status": "implemented",
+        "api_endpoint": "/api/relatorio-contrato"
+      },
+      {
+        "id": "sla_compliance",
+        "name": "SLA Compliance",
+        "route": "/sla-compliance",
+        "description": "Monitoramento de SLA por contrato",
+        "status": "implemented",
+        "api_endpoint": "/api/helpdesk/sla-compliance"
+      },
+      {
+        "id": "planilha_horas",
+        "name": "Planilha de Horas",
+        "route": "/planilha-horas",
+        "description": "Controle de tempo e atividades",
+        "status": "implemented",
+        "api_endpoint": "/api/helpdesk/planilha-horas"
+      },
+      {
+        "id": "diagnostico_medicao",
+        "name": "Diagnóstico de Medição",
+        "route": "/diagnostico-medicao",
+        "description": "Análise de equipamentos com valores zerados",
+        "status": "implemented",
+        "api_endpoint": "/api/medicao/diagnostico"
+      },
+      {
+        "id": "duplicidade_infracoes",
+        "name": "Auditoria de Duplicidades",
+        "route": "/duplicidade",
+        "description": "Detecção de infrações duplicadas",
+        "status": "implemented",
+        "api_endpoint": "/api/axhub/infracoes"
+      },
+      {
+        "id": "varco_monitor",
+        "name": "VARCO Monitor",
+        "route": "/varco",
+        "description": "Monitoramento frota ITScam 450",
+        "status": "implemented",
+        "api_endpoint": "/api/varco/frota"
+      },
+      {
+        "id": "quality_reports",
+        "name": "Relatórios PIEQ",
+        "route": "/quality/reports",
+        "description": "Histórico de scans e validações",
+        "status": "partial",
+        "api_endpoint": "/api/quality/scans"
+      }
+    ]
+  },
+  "validation_results": {
+    "urls": {
+      "total_checked": 41,
+      "available": 0,
+      "unavailable": 0,
+      "not_tested": 41,
+      "reason": "Validação de disponibilidade não executada — requer credenciais configuradas"
+    },
+    "apis": {
+      "total_endpoints": 180,
+      "operational": 0,
+      "degraded": 0,
+      "offline": 0,
+      "not_configured": 180,
+      "reason": "API não pode ser iniciada sem .env configurado"
+    },
+    "dashboards": {
+      "total": 8,
+      "functional": 6,
+      "partial": 1,
+      "broken": 0,
+      "not_implemented": 1
+    },
+    "reports": {
+      "total": 15,
+      "functional": 13,
+      "partial": 2,
+      "broken": 0
+    },
+    "integrations": {
+      "mongodb": {
+        "status": "not_configured",
+        "required": true,
+        "criticality": "high",
+        "missing": "MONGO_URI in .env"
+      },
+      "openai": {
+        "status": "not_configured",
+        "required": true,
+        "criticality": "high",
+        "missing": "OPENAI_API_KEY in .env"
+      },
+      "jitbit": {
+        "status": "not_configured",
+        "required": true,
+        "criticality": "high",
+        "missing": "JITBIT_URL, JITBIT_USER, JITBIT_PASS in .env"
+      },
+      "axhub_db": {
+        "status": "not_configured",
+        "required": false,
+        "criticality": "medium",
+        "missing": "AXHUB_DB_* in .env"
+      },
+      "axton_db": {
+        "status": "not_configured",
+        "required": false,
+        "criticality": "medium",
+        "missing": "AXTON_DB_* in .env"
+      },
+      "axcross_db": {
+        "status": "not_configured",
+        "required": false,
+        "criticality": "medium",
+        "missing": "AXCROSS_DB_* in .env"
+      },
+      "varco": {
+        "status": "not_configured",
+        "required": false,
+        "criticality": "medium",
+        "missing": "VARCO_EMAIL, VARCO_PASSWORD in .env"
+      }
+    }
+  },
+  "cross_analysis": {
+    "duplicate_functionality": [
+      {
+        "feature": "Validação Visual",
+        "implementations": [
+          "/visual-validation (VisualValidationManager.jsx)",
+          "/central-validacao (ValidacaoVisual.jsx)"
+        ],
+        "severity": "medium",
+        "recommendation": "Consolidar em um único componente"
+      },
+      {
+        "feature": "Consulta de Infrações",
+        "implementations": [
+          "/ferramentas/consulta-infracoes",
+          "Helpdesk integration",
+          "AxHub Dashboard queries"
+        ],
+        "severity": "low",
+        "recommendation": "Unificar interface de consulta"
+      }
+    ],
+    "conflicting_data": [],
+    "inconsistent_naming": [
+      {
+        "entity": "Usuário admin",
+        "variations": ["admin", "Admin"],
+        "severity": "low",
+        "recommendation": "Padronizar para 'Admin' com maiúscula"
+      }
+    ]
+  },
+  "self_assessment": {
+    "unimplemented_features": [
+      {
+        "feature": "Portal do Cidadão — Contestação de Infrações",
+        "route": "/contestar",
+        "status": "commented_out",
+        "file": "portal.routes.js",
+        "severity": "medium",
+        "recommendation": "Implementar ou remover código comentado"
+      },
+      {
+        "feature": "Upload de Arquivos no Portal",
+        "route": "/upload",
+        "status": "commented_out",
+        "file": "portal.routes.js",
+        "severity": "low",
+        "recommendation": "Implementar ou remover"
+      },
+      {
+        "feature": "Chat no Portal do Cidadão",
+        "route": "/chat",
+        "status": "commented_out",
+        "file": "portal.routes.js",
+        "severity": "low",
+        "recommendation": "Implementar ou remover"
+      }
+    ],
+    "todo_items": [
+      {
+        "description": "Implementar integração real com banco SQL Server para diagnóstico de medição",
+        "file": "medicao-controller.js",
+        "line": 89,
+        "severity": "high",
+        "recommendation": "Implementar queries SQL reais"
+      },
+      {
+        "description": "Substituir dados mock por queries SQL reais no diagnóstico",
+        "file": "medicao-controller.js",
+        "line": 159,
+        "severity": "high",
+        "recommendation": "Conectar ao SQL Server e executar queries reais"
+      },
+      {
+        "description": "Implementar análise em lote de equipamentos",
+        "file": "medicao-controller.js",
+        "line": 340,
+        "severity": "medium",
+        "recommendation": "Criar endpoint para análise de múltiplos equipamentos"
+      }
+    ],
+    "placeholder_code": [
+      {
+        "description": "Token placeholder para reCAPTCHA em desenvolvimento",
+        "file": "recaptcha.js",
+        "line": 19,
+        "severity": "low",
+        "recommendation": "Garantir que não seja usado em produção"
+      }
+    ],
+    "empty_modules": [],
+    "incomplete_screens": []
+  },
+  "statistics_validation": {
+    "calculated_correctly": true,
+    "totals_match": true,
+    "percentages_valid": true,
+    "groupings_consistent": true,
+    "data_source_comparison": "pending_configuration"
+  },
+  "critical_issues": [
+    {
+      "id": "CRIT-001",
+      "title": "Arquivo .env ausente — Sistema não pode ser inicializado",
+      "severity": "critical",
+      "category": "configuration",
+      "impact": "Sistema não pode iniciar. Nenhuma funcionalidade está operacional.",
+      "affected_components": ["API", "MongoDB", "OpenAI", "Jitbit", "SQL Server"],
+      "root_cause": "Arquivo .env não foi criado a partir do .env.example",
+      "recommendation": "Executar: cd axion-ia-panel/api && Copy-Item .env.example .env && editar variáveis",
+      "automatic_fix_possible": false
+    },
+    {
+      "id": "CRIT-002",
+      "title": "MongoDB não configurado — Impossível armazenar dados",
+      "severity": "critical",
+      "category": "database",
+      "impact": "Logs, histórico de chat, sessões, documentos não podem ser armazenados",
+      "affected_components": ["Chat IA", "Helpdesk", "WhatsApp", "Documentação"],
+      "root_cause": "MONGO_URI não configurado no .env",
+      "recommendation": "Configurar MONGO_URI=mongodb://localhost:27017/axion-ia no .env",
+      "automatic_fix_possible": false
+    },
+    {
+      "id": "CRIT-003",
+      "title": "OpenAI API Key não configurada — IA não funciona",
+      "severity": "critical",
+      "category": "integration",
+      "impact": "Chat IA, análise de editais, geração de documentação, classificação de tickets não funcionam",
+      "affected_components": ["Chat", "Pipeline Editais", "Gerador Docs", "Helpdesk IA"],
+      "root_cause": "OPENAI_API_KEY não configurado no .env",
+      "recommendation": "Configurar OPENAI_API_KEY=sk-proj-... no .env",
+      "automatic_fix_possible": false
+    },
+    {
+      "id": "CRIT-004",
+      "title": "Jitbit não configurado — Helpdesk não integra",
+      "severity": "critical",
+      "category": "integration",
+      "impact": "Impossível listar tickets, classificar automaticamente, responder com IA",
+      "affected_components": ["Helpdesk", "SLA Compliance", "Planilha de Horas", "Chamados por Site"],
+      "root_cause": "JITBIT_URL, JITBIT_USER, JITBIT_PASS não configurados no .env",
+      "recommendation": "Configurar credenciais Jitbit no .env",
+      "automatic_fix_possible": false
+    },
+    {
+      "id": "HIGH-001",
+      "title": "Script iniciar.ps1 da raiz usa projeto legacy",
+      "severity": "high",
+      "category": "architecture",
+      "impact": "Risco de iniciar sistema antigo, confusão operacional",
+      "affected_components": ["iniciar.ps1 (raiz)"],
+      "root_cause": "Script não foi atualizado após migração para estrutura unificada",
+      "recommendation": "Deletar iniciar.ps1 e encerrar.ps1 da raiz. Usar axion-ia-panel/iniciar.ps1",
+      "automatic_fix_possible": true
+    },
+    {
+      "id": "HIGH-002",
+      "title": "Projetos legacy não removidos",
+      "severity": "high",
+      "category": "maintenance",
+      "impact": "Confusão, desperdício de espaço, risco de editar arquivo errado",
+      "affected_components": ["axion-ia-api/", "axion-ia/", "axion-ia-unified/"],
+      "root_cause": "Projetos antigos mantidos após migração",
+      "recommendation": "Mover para .backup-legacy/ e deletar após validação",
+      "automatic_fix_possible": true
+    },
+    {
+      "id": "HIGH-003",
+      "title": "Diagnóstico de Medição usa dados mock",
+      "severity": "high",
+      "category": "functionality",
+      "impact": "Diagnóstico não reflete dados reais dos sistemas",
+      "affected_components": ["Diagnóstico de Medição", "/api/medicao/*"],
+      "root_cause": "Integração SQL Server não implementada (TODO no código)",
+      "recommendation": "Implementar queries SQL reais para AxHub/AxCross/AxTon",
+      "automatic_fix_possible": false
+    },
+    {
+      "id": "MED-001",
+      "title": "Inconsistência versão Node.js entre portais",
+      "severity": "medium",
+      "category": "configuration",
+      "impact": "Possível falha ao buildar AxHub em ambientes Node 18",
+      "affected_components": ["AxHub/docs-portal", "AxTon/docs-portal", "AxCross/docs-portal"],
+      "root_cause": "package.json com engines diferentes (>=20.0 vs >=18.0)",
+      "recommendation": "Padronizar para Node >=20.0 em todos os portais",
+      "automatic_fix_possible": true
+    },
+    {
+      "id": "MED-002",
+      "title": "Código comentado em rotas do Portal do Cidadão",
+      "severity": "medium",
+      "category": "code_quality",
+      "impact": "Funcionalidades planejadas mas não implementadas",
+      "affected_components": ["/contestar", "/upload", "/chat (portal)"],
+      "root_cause": "Features em desenvolvimento ou descontinuadas",
+      "recommendation": "Implementar ou remover código comentado",
+      "automatic_fix_possible": false
+    },
+    {
+      "id": "MED-003",
+      "title": "Validação Visual duplicada em dois componentes",
+      "severity": "medium",
+      "category": "architecture",
+      "impact": "Duplicação de código, manutenção duplicada",
+      "affected_components": ["VisualValidationManager.jsx", "ValidacaoVisual.jsx"],
+      "root_cause": "Implementação em dois locais sem consolidação",
+      "recommendation": "Consolidar em um único componente reutilizável",
+      "automatic_fix_possible": false
+    }
+  ],
+  "recommendations": {
+    "priority_1_critical": [
+      {
+        "action": "Criar arquivo .env com todas as variáveis obrigatórias",
+        "impact": "high",
+        "effort": "low",
+        "commands": [
+          "cd axion-ia-panel/api",
+          "Copy-Item .env.example .env",
+          "# Editar .env e configurar:"
+        ]
+      }
+    ]
+  }
+}

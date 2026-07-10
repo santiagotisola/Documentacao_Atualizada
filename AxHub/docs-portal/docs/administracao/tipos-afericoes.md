@@ -6,7 +6,7 @@ description: Cadastro de tipos de aferições metrológicas
 
 # Tipos de Aferições
 
-Permite cadastrar os tipos de aferições metrológicas realizadas nos equipamentos.
+Permite cadastrar os tipos de aferições metrológicas realizadas nos Equipamentos
 
 ## Como acessar
 
@@ -20,7 +20,7 @@ Permite cadastrar os tipos de aferições metrológicas realizadas nos equipamen
 | **Ativo** | Status do registro |
 
 :::note Sem screenshot
-Esta tela ainda não possui screenshot cadastrada. Será adicionada em breve.
+está tela ainda não possui screenshot cadastrada. Será adicionada em breve.
 :::
 
 ---

@@ -1,45 +1,45 @@
 ---
 sidebar_position: 3
 title: "Manual de Triagem"
-description: Manual completo e visual para analistas realizarem triagem de infrações no AxHub — passo a passo ilustrado com imagens de cada etapa
+description: Manual completo e visual para analistas realizarem triagem de Infrações no AxHub — passo a passo ilustrado com imagens de cada etapa
 ---
 
 # Manual de Triagem — Guia do Analista
 
-Este manual foi criado para **analistas de triagem**. Ele explica, passo a passo e com imagens, como revisar, validar ou descartar infrações no AxHub.
+Este manual foi criado para **analistas de triagem**. Ele explica, passo a passo e com imagens, como revisar, validar ou descartar Infrações no AxHub.
 
 :::info Para quem é este manual?
-Analistas responsáveis pela **revisão visual das infrações** capturadas pelos equipamentos de fiscalização (radares, câmeras, lombadas eletrônicas).
+Analistas responsáveis pela **revisão visual das Infrações capturadas pelos Equipamentos de fiscalização (radares, câmeras, lombadas eletrônicas).
 :::
 
 ---
 
 ## O que é a Triagem?
 
-A triagem é a etapa onde **você, analista**, revisa cada infração capturada pelo equipamento antes que ela siga para auditoria e exportação ao órgão autuador.
+A triagem é a etapa onde **você, analista**, revisa cada Infração capturada pelo Equipamento antes que ela siga para auditoria e exportação ao órgão autuador.
 
-Sua análise garante que:
-- ✅ Apenas infrações **válidas** e com **dados corretos** sigam adiante
+Sua Análise garante que:
+- ✅ Apenas Infrações **válidas** e com **dados corretos** sigam adiante
 - ❌ Infrações com **imagem ruim**, **placa ilegível** ou **erros de captura** sejam descartadas
 - 🔒 O processo atenda aos **requisitos legais** do contrato
 
 :::warning Responsabilidade do analista
-Cada infração validada poderá gerar uma **multa real** ao condutor do veículo. Revise com atenção.
+Cada Infração validada poderá gerar uma **multa real** ao condutor do Veículo Revise com atenção.
 :::
 
 ---
 
 ## Como Acessar a Triagem
 
-### Passo 1 — Fazer login no sistema
+### Passo 1 — Fazer Login no sistema
 
-Acesse o AxHub pelo navegador e faça login com seu usuário e senha.
+Acesse o AxHub pelo navegador e faça Login com seu Usuário e senha.
 
-![Tela de login do AxHub](../img/Login.png)
+![Tela de Login do AxHub](../img/Login.png)
 
 ### Passo 2 — Navegar até a Triagem
 
-No menu lateral esquerdo, clique em **Infrações** e depois em **Triagem**.
+No menu lateral esquerdo, clique em Infrações e depois em **Triagem**.
 
 ![Menu principal — acesso à Triagem](../img/triagem-menu-principal.png)
 
@@ -47,16 +47,16 @@ No menu lateral esquerdo, clique em **Infrações** e depois em **Triagem**.
 
 ## Tela Principal de Triagem
 
-Ao entrar na triagem, você verá a tela de **consulta de infrações**.
+Ao entrar na triagem, você verá a tela de **consulta de Infrações
 
-![Tela de consulta de infrações na Triagem](../img/triagem-consultar-infracoes.png)
+![Tela de consulta de Infrações na Triagem](../img/triagem-consultar-infracoes.png)
 
 ### O que cada área da tela significa
 
 | Área | O que você encontra |
 |------|---------------------|
-| **Filtros** (topo) | Campos para buscar infrações por período, status, tipo, operação |
-| **Lista de infrações** (centro) | Todas as infrações que correspondem aos filtros aplicados |
+| **Filtros** (topo) | Campos para buscar Infrações por período, status, tipo, operação |
+| **Lista de Infrações (centro) | Todas as Infrações que correspondem aos filtros aplicados |
 | **Paginação** (rodapé) | Navegação entre páginas quando há muitos registros |
 | **Botões de ação** | Validar, Descartar, Reabrir |
 
@@ -66,7 +66,7 @@ Ao entrar na triagem, você verá a tela de **consulta de infrações**.
 
 ### Passo 1 — Definir os filtros de busca
 
-Antes de iniciar, filtre as infrações que você vai analisar.
+Antes de iniciar, filtre as Infrações que você vai analisar.
 
 ![Filtros disponíveis na Triagem](../img/triagem-filtro-auditoria.png)
 
@@ -88,7 +88,7 @@ Após configurar os filtros, clique em **Pesquisar** ou pressione **Enter**.
 
 ### Passo 2 — Visualizar o resultado
 
-Após a pesquisa, a lista de infrações pendentes é carregada.
+Após a pesquisa, a lista de Infrações pendentes é carregada.
 
 ![Resultado da consulta de infrações](../img/triagem-consultar-resultado.png)
 
@@ -96,11 +96,11 @@ Cada linha mostra:
 
 | Coluna | O que significa |
 |--------|-----------------|
-| **Número Auto** | Identificador único da infração |
+| **Número Auto** | Identificador único da Infração |
 | **Placa** | Placa capturada pelo OCR |
-| **Data/Hora** | Quando ocorreu a infração |
-| **Tipo** | Tipo de infração (velocidade, sinal, etc.) |
-| **Vel. Medida** | Velocidade capturada pelo equipamento |
+| **Data/Hora** | Quando ocorreu a Infração |
+| **Tipo** | Tipo de Infração (velocidade, sinal, etc.) |
+| **Vel. Medida** | Velocidade capturada pelo Equipamento |
 | **Vel. Considerada** | Velocidade após aplicação da tolerância legal |
 | **Vel. Regulamentada** | Limite de velocidade permitido no local |
 | **Status** | `Pendente` · `Válida` · `Descartada` |
@@ -108,24 +108,24 @@ Cada linha mostra:
 
 ---
 
-### Passo 3 — Abrir e analisar a infração
+### Passo 3 — Abrir e analisar a Infração
 
-Clique sobre a infração para abri-la. Você verá a imagem capturada e todos os dados.
+Clique sobre a Infração para abri-la. Você verá a imagem capturada e todos os dados.
 
-:::info O que você deve verificar obrigatoriamente em cada infração:
+:::info O que você deve verificar obrigatoriamente em cada Infração
 :::
 
-#### ✅ Checklist de análise
+#### ✅ Checklist de Análise
 
 | # | O que verificar | Como verificar | Critério para VALIDAR |
 |---|-----------------|----------------|-----------------------|
 | 1 | **Placa legível?** | Olhar a imagem — a placa deve estar clara, sem obstrução | Todos os caracteres da placa devem ser legíveis |
 | 2 | **Placa correta?** | Comparar placa na imagem com placa no sistema | A placa reconhecida deve corresponder à placa na foto |
-| 3 | **Veículo na imagem é o infrator?** | Verificar que não há outro veículo obstruindo | O veículo que aparece na imagem é o que cometeu a infração |
+| 3 | Veículo na imagem é o infrator?** | Verificar que não há outro Veículo obstruindo | O Veículo que aparece na imagem é o que cometeu a Infração |
 | 4 | **Velocidade coerente?** | Ver velocidade medida vs. velocidade regulamentada | Vel. considerada deve ser MAIOR que vel. regulamentada |
-| 5 | **Enquadramento correto?** | Verificar o tipo de infração e artigo | Deve corresponder ao tipo de via e comportamento detectado |
-| 6 | **Qualidade da imagem?** | Verificar se a imagem está nítida, com boa iluminação | Imagem deve permitir identificação clara do veículo e placa |
-| 7 | **Data e hora plausíveis?** | Conferir se a data/hora da infração faz sentido | Sem datas futuras ou muito defasadas |
+| 5 | **Enquadramento correto?** | Verificar o tipo de Infração e artigo | Deve corresponder ao tipo de via e comportamento detectado |
+| 6 | **Qualidade da imagem?** | Verificar se a imagem está nítida, com boa iluminação | Imagem deve permitir identificação clara do Veículo e placa |
+| 7 | **Data e hora plausíveis?** | Conferir se a data/hora da Infração faz sentido | Sem datas futuras ou muito defasadas |
 
 ---
 
@@ -147,7 +147,7 @@ Clique em **Validar** quando **todos** os critérios do checklist estiverem aten
   VALIDAR
 ```
 
-Ao validar, a infração recebe status **"Válida"** e segue automaticamente para a fila de **Auditoria**.
+Ao validar, a Infração recebe status **"Válida"** e segue automaticamente para a fila de **Auditoria**.
 
 ---
 
@@ -160,9 +160,9 @@ Clique em **Descartar** quando qualquer um dos critérios abaixo for identificad
 | **Placa ilegível** | Não é possível ler a placa na imagem |
 | **Imagem escura / borrada** | Qualidade insuficiente para identificação |
 | **Placa divergente** | Placa na imagem diferente da placa no sistema |
-| **Veículo não identificado** | Não é possível ver o veículo claramente |
+| Veículo não identificado** | Não é possível ver o Veículo claramente |
 | **Velocidade incoerente** | Velocidade registrada suspeita (muito acima ou abaixo) |
-| **Enquadramento incorreto** | Tipo de infração não corresponde ao ocorrido |
+| **Enquadramento incorreto** | Tipo de Infração não corresponde ao ocorrido |
 | **Exceção não processada** | Veículo isento que não foi descartado automaticamente |
 | **Erro de captura** | Imagem de teste, erro técnico ou duplicidade |
 
@@ -186,10 +186,10 @@ Ao descartar, você **obrigatoriamente** deve selecionar o motivo do descarte. S
 
 #### 🔄 Quando REABRIR
 
-Use **Reabrir** quando uma infração foi descartada por engano e precisa de nova análise.
+Use **Reabrir** quando uma Infração foi descartada por engano e precisa de nova Análise
 
 :::warning Cuidado
-Reabrir infrações altera o histórico. Sempre registre observação explicando o motivo da reabertura.
+Reabrir Infrações altera o histórico. Sempre registre observação explicando o motivo da reabertura.
 :::
 
 ---
@@ -198,7 +198,7 @@ Reabrir infrações altera o histórico. Sempre registre observação explicando
 
 Após clicar em Validar ou Descartar, o sistema solicita confirmação. Revise e confirme.
 
-A infração muda de status imediatamente e o resultado aparece na lista atualizada.
+A Infração muda de status imediatamente e o resultado aparece na lista atualizada.
 
 ![Resultado atualizado após triagem](../img/triagem-consultar-resultado.png)
 
@@ -220,80 +220,80 @@ Se **parte da placa está legível** mas alguns caracteres estão duvidosos:
 Se a velocidade registrada parece anormalmente alta (ex: 200 km/h em via urbana):
 1. Verifique duplo: a operação e os limites configurados para aquela faixa
 2. Se a operação e os dados estiverem corretos no sistema, **valide** normalmente
-3. Se houver suspeita de erro de equipamento, **descarte** com motivo "Velocidade incoerente" e **reporte ao supervisor**
+3. Se houver suspeita de erro de Equipamento **descarte** com motivo "Velocidade incoerente" e **reporte ao supervisor**
 
 ---
 
-### 🟡 O veículo é uma ambulância / viatura policial
+### 🟡 O Veículo é uma ambulância / viatura policial
 
-Se o veículo reconhecido aparenta ser emergência:
-1. Verifique se há placa de exceção cadastrada para este veículo
+Se o Veículo reconhecido aparenta ser emergência:
+1. Verifique se há placa de exceção cadastrada para este Veículo
 2. **Não descarte manualmente** — acione o supervisor para cadastrar a exceção corretamente
 3. Enquanto aguarda, **valide temporariamente** para não perder o registro
 
 ---
 
-### 🟡 A imagem mostra dois veículos
+### 🟡 A imagem mostra dois Veículos
 
-Se mais de um veículo aparece na imagem:
-1. Identifique qual veículo ativou o sensor (geralmente o mais próximo do equipamento)
-2. Verifique se a placa do sistema corresponde ao veículo correto
-3. Se não for possível determinar com certeza, **descarte** com motivo "Veículo não identificado"
+Se mais de um Veículo aparece na imagem:
+1. Identifique qual Veículo ativou o sensor (geralmente o mais próximo do Equipamento
+2. Verifique se a placa do sistema corresponde ao Veículo correto
+3. Se não for possível determinar com certeza, **descarte** com motivo Veículo não identificado"
 
 ---
 
 ### 🟡 A data/hora parece errada
 
-Se a data da infração é uma data futura ou muito defasada do esperado:
+Se a data da Infração é uma data futura ou muito defasada do esperado:
 1. Compare com a data de importação do lote
-2. Se parecer erro de relógio do equipamento, **descarte** e **reporte ao supervisor técnico**
+2. Se parecer erro de relógio do Equipamento **descarte** e **reporte ao supervisor técnico**
 
 ---
 
 ## Acompanhando seu Desempenho
 
-O AxHub registra o trabalho de cada analista. Você pode verificar seu desempenho nos relatórios:
+O AxHub registra o trabalho de cada analista. Você pode verificar seu desempenho nos Relatórios
 
-**Menu** → **Relatórios** → **Relatório de Processamento de Imagens por Usuário**
+**Menu** → Relatórios → Relatório de Processamento de Imagens por Usuário
 
-![Relatório de processamento de imagens por usuário](../img/Relatorio%20-%20Relatorio%20de%20procesamento%20de%20imagens%20por%20usu%C3%A1rio.png)
+Relatório de processamento de imagens por usuário](../img/Relatorio%20-%20Relatorio%20de%20procesamento%20de%20imagens%20por%20usu%C3%A1rio.png)
 
-Este relatório mostra:
-- Total de infrações analisadas por você
+Este Relatório mostra:
+- Total de Infrações analisadas por você
 - Quantas foram validadas vs. descartadas
-- Taxa de validação / descarte
+- Taxa de Validação / descarte
 - Comparativo entre analistas
 
 :::info Metas de qualidade
-Contratos com requisitos de qualidade podem ter metas de taxa de validação. Consulte seu supervisor sobre os indicadores do seu contrato.
+Contratos com requisitos de qualidade podem ter metas de taxa de Validação Consulte seu supervisor sobre os indicadores do seu contrato.
 :::
 
 ---
 
 ## Infrações Descartadas — Consulta
 
-Para ver todas as infrações que foram descartadas (por você ou por outros analistas):
+Para ver todas as Infrações que foram descartadas (por você ou por outros analistas):
 
-**Menu** → **Infrações** → **Descartadas**
+**Menu** → Infrações → **Descartadas**
 
 ![Consulta de Infrações Descartadas](../img/triagem-infracoes-descartadas.png)
 
-Use esta tela para:
-- Verificar o motivo do descarte de uma infração específica
-- Reabrir uma infração descartada por engano
+Use está tela para:
+- Verificar o motivo do descarte de uma Infração específica
+- Reabrir uma Infração descartada por engano
 - Auditar descartes suspeitos
 
 ---
 
 ## Exceções Automáticas
 
-O sistema pode descartar infrações **automaticamente**, antes mesmo de chegarem à sua fila, quando regras de exceção estão configuradas.
+O sistema pode descartar Infrações **automaticamente**, antes mesmo de chegarem à sua fila, quando regras de exceção estão configuradas.
 
-**Menu** → **Infrações** → **Exceções**
+**Menu** → Infrações → **Exceções**
 
 ![Tela de Exceções automáticas](../img/triagem-excecoes.png)
 
-Se uma infração de um veículo isento chegou até você, **acione o supervisor** — a regra de exceção pode não estar cadastrada.
+Se uma Infração de um Veículo isento chegou até você, **acione o supervisor** — a regra de exceção pode não estar cadastrada.
 
 ---
 
@@ -301,9 +301,9 @@ Se uma infração de um veículo isento chegou até você, **acione o supervisor
 
 | Situação | O que fazer |
 |----------|-------------|
-| Muitas infrações pendentes | Filtre por **tipo de infração** e work em lotes homogêneos |
+| Muitas Infrações pendentes | Filtre por **tipo de Infração e work em lotes homogêneos |
 | Dúvida sobre enquadramento | Consulte **Administração → Enquadramentos** para ver a descrição |
-| Placa divergente recorrente de um equipamento | Reporte ao suporte — pode ser calibração do OCR |
+| Placa divergente recorrente de um Equipamento | Reporte ao suporte — pode ser calibração do OCR |
 | Sistema lento ao carregar imagens | Recarregue a página e verifique conexão de rede |
 | Infração reaberta pelo auditor | Ela volta ao status "Pendente" e reaparece na sua fila |
 
@@ -312,32 +312,32 @@ Se uma infração de um veículo isento chegou até você, **acione o supervisor
 ## Resumo Visual do Processo
 
 ```
-  Infração capturada pelo equipamento
+  Infração capturada pelo Equipamento
              ↓
   Importada para o AxHub (status: Aguardando Triagem)
              ↓
   Exceção automática? ──SIM──→ Descartada automaticamente
              ↓ NÃO
-  Analista abre a infração
+  Analista abre a Infração
              ↓
   ┌──────────────────────────────────┐
-  │  Verifica:                       │
-  │  □ Placa legível e correta?      │
-  │  □ Veículo correto na imagem?    │
-  │  □ Velocidade coerente?          │
-  │  □ Enquadramento correto?        │
-  │  □ Imagem com boa qualidade?     │
+ │ Verifica: │
+ │ □ Placa legível e correta? │
+ │ □ Veículo correto na imagem? │
+ │ □ Velocidade coerente? │
+ │ □ Enquadramento correto? │
+ │ □ Imagem com boa qualidade? │
   └──────────────────────────────────┘
              ↓
      Tudo OK?
-    ╱         ╲
-  SIM          NÃO
-   ↓             ↓
-VALIDAR       DESCARTAR
-   ↓          (motivo obrigatório)
-Status:            ↓
-"Válida"       Status:
-   ↓          "Descartada"
+    ╱ ╲
+  SIM NÃO
+   ↓ ↓
+VALIDAR DESCARTAR
+   ↓ (motivo obrigatório)
+Status: ↓
+"Válida" Status:
+   ↓ "Descartada"
    ↓
 Auditoria
    ↓
@@ -348,11 +348,11 @@ Exportação ao órgão autuador
 
 ## Próximas Etapas Após a Triagem
 
-Após validar uma infração, ela segue automaticamente para:
+Após validar uma Infração ela segue automaticamente para:
 
 | Etapa | O que acontece |
 |-------|----------------|
-| [**Auditoria**](./auditoria) | Um auditor confere sua análise |
+| [**Auditoria**](./auditoria) | Um auditor confere sua Análise |
 | [**Exportação**](./exportacao) | O sistema gera o lote para o órgão autuador |
 
 ---
@@ -361,9 +361,9 @@ Após validar uma infração, ela segue automaticamente para:
 
 | Página | Descrição |
 |--------|-----------|
-| [Auditoria](./auditoria) | Next step — como o auditor revisa as infrações validadas |
+| [Auditoria](./auditoria) | Next step — como o auditor revisa as Infrações validadas |
 | [Exceções](./excecoes) | Regras de descarte automático antes da triagem |
-| [Infrações Descartadas](./infracoes-descartadas) | Consultar e reabrir infrações descartadas |
-| [Exportação](./exportacao) | Como as infrações são enviadas ao órgão |
+| Infrações Descartadas](./infracoes-descartadas) | Consultar e reabrir Infrações descartadas |
+| [Exportação](./exportacao) | Como as Infrações são enviadas ao órgão |
 | [Motivos de Descarte](../administracao/motivos-descartes) | Configurar os motivos disponíveis |
 | [Guia Completo do Processo](./guia-completo-infracoes) | Visão geral de todas as etapas |

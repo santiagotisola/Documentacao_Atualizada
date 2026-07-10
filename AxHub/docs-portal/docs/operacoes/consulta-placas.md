@@ -1,12 +1,12 @@
 ---
 sidebar_position: 6
 title: Consulta de Placas
-description: Consulta de passagens de veículos por placa
+description: Consulta de passagens de Veículos por placa
 ---
 
 # Consulta de Placas
 
-Permite consultar o histórico de passagens de veículos por número de placa.
+Permite consultar o histórico de passagens de Veículos por número de placa.
 
 ## Como acessar
 
@@ -18,14 +18,14 @@ A **Consulta de Placas** pode não aparecer no menu lateral dependendo das permi
 
 | Filtro | Descrição |
 |--------|-----------|
-| **Placa** | Número da placa do veículo |
+| **Placa** | Número da placa do Veículo |
 | **Período** | Faixa de data para a consulta |
-| **Equipamento** | Filtrar por equipamento específico |
+| Equipamento | Filtrar por Equipamento específico |
 
 | Coluna do Resultado | Descrição |
 |---------------------|-----------|
 | **Data/Hora** | Momento da passagem |
-| **Equipamento** | Onde o veículo foi registrado |
+| Equipamento | Onde o Veículo foi registrado |
 | **Faixa** | Faixa de tráfego |
 | **Velocidade** | Velocidade registrada (quando aplicável) |
 | **Imagem** | Foto da passagem |
@@ -36,5 +36,5 @@ A **Consulta de Placas** pode não aparecer no menu lateral dependendo das permi
 
 | Tipo | Pagina | Descricao |
 |------|--------|-----------|
-| Relacionado | [Consulta de Infracoes](../infracoes/consulta-infracoes) | Infracoes do veiculo |
+| Relacionado | [Consulta de Infracoes](../infracoes/consulta-infracoes) | Infracoes do Use Veículo (com acento) |
 | Relacionado | [Monitoramento Online](./monitoramento-online) | Passagens em tempo real |

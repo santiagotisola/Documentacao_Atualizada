@@ -6,13 +6,13 @@ description: Modelos por fabricante
 
 # Modelos de Equipamentos
 
-![Configuração de Sistema](../img/configuracao%20de%20sistema%20-%20dados.png)
+Configuração de Sistema](../img/configuracao%20de%20sistema%20-%20dados.png)
 
 Modelos por fabricante. Estes registros são fundamentais para o funcionamento do sistema de pesagem.
 
 ## Como acessar
 
-**Menu lateral** → Cadastros Básicos → **Modelos de Equipamentos**
+**Menu lateral** → Cadastros Básicos → **Modelos de Equipamentos
 
 ## Listagem
 
@@ -21,12 +21,12 @@ Modelos por fabricante. Estes registros são fundamentais para o funcionamento d
 | Coluna | Descrição |
 |--------|-----------|
 | **Código** | Identificador único |
-| **Nome** | Nome do modelos de equipamentos |
+| **Nome** | Nome do modelos de Equipamentos |
 | **Ativo** | Status do registro |
 
 ### Passo a passo — Cadastrar
 
-1. Acesse **Cadastros Básicos** → **Modelos de Equipamentos**
+1. Acesse **Cadastros Básicos** → **Modelos de Equipamentos
 2. Clique em **+ Novo**
 3. Preencha os campos obrigatórios
 4. Clique em **Salvar**

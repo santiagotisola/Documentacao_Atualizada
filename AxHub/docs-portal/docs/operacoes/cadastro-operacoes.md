@@ -22,7 +22,7 @@ Menu lateral - Operacoes - Cadastro de Operacoes
 
 ## Campos
 
-| Campo | Obrigatorio | Descricao |
+| Campo | obrigatório | Descricao |
 |-------|-------------|-----------|
 | Equipamento | Sim | Equipamento vinculado a operacao |
 | Arco | Sim | Arco onde a operacao ocorre |
@@ -30,7 +30,7 @@ Menu lateral - Operacoes - Cadastro de Operacoes
 | Data Fim | Sim | Data e hora de termino da operacao |
 | Enquadramentos | Sim | Enquadramentos legais habilitados |
 | Velocidade Regulamentada | Condicional | Velocidade limite da via |
-| Observacao | Nao | Informacoes adicionais |
+| Observacao | não | Informacoes adicionais |
 
 ## Navegacao relacionada
 

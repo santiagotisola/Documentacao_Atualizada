@@ -1,28 +1,28 @@
 ---
 sidebar_position: 2
 title: Câmera IP
-description: Instalação, configuração e solução de problemas de câmeras IP no AxTon
+description: Instalação, Configuração e solução de problemas de câmeras IP no AxTon
 ---
 
 # Câmera IP
 
 ![Tela de Câmera IP](../img/Sistema%20-%20camera%20ip.png)
 
-A aba **Câmera IP** nas Configurações do Sistema permite configurar a câmera utilizada para captura de imagens dos veículos durante a pesagem.
+A aba **Câmera IP** nas Configurações do Sistema permite configurar a câmera utilizada para captura de imagens dos Veículos durante a pesagem.
 
 ## Como acessar
 
 **Menu lateral** → **Sistema** → aba **Câmera IP**
 
-## Campos da configuração
+## Campos da Configuração
 
 | Campo | Descrição | Exemplo |
 |-------|-----------|---------|
 | **IP** | Endereço IP da câmera na rede local | `192.168.11.21` |
 | **Altura** | Altura da resolução da imagem em pixels | `1080` |
 | **Largura** | Largura da resolução da imagem em pixels | `1280` |
-| **Usuário de login** | Credencial de acesso à câmera | `admin` |
-| **Senha de login** | Senha de acesso à câmera | *(definida pelo fabricante/instalador)* |
+| Usuário de Login | Credencial de acesso à câmera | `admin` |
+| **Senha de Login | Senha de acesso à câmera | *(definida pelo fabricante/instalador)* |
 
 ## Câmeras compatíveis testadas
 
@@ -37,7 +37,7 @@ A aba **Câmera IP** nas Configurações do Sistema permite configurar a câmera
 2. **Acesse as Configurações do Sistema** — No AxTon, clique em **Sistema** no menu lateral e depois na aba **Câmera IP**.
 3. **Preencha o IP** — Informe o endereço IP da câmera (ex.: `192.168.11.21`).
 4. **Preencha a resolução** — Defina **Altura** (ex.: `1080`) e **Largura** (ex.: `1280`).
-5. **Informe as credenciais** — Preencha **Usuário de login** (ex.: `admin`) e **Senha de login**.
+5. **Informe as credenciais** — Preencha Usuário de Login (ex.: `admin`) e **Senha de Login
 6. **Teste a conexão** — Clique em **Testar câmera** para validar.
 7. **Salve** — Se o teste for bem-sucedido, clique em **+ Salvar**.
 
@@ -60,7 +60,7 @@ Este é o erro mais comum ao configurar câmeras IP no AxTon. Ele ocorre quando 
 
 #### Passo a passo para resolver
 
-1. **Acesse a interface web da câmera** pelo navegador e vá em configurações de **Vídeo / Encode / Stream**.
+1. **Acesse a interface web da câmera** pelo navegador e vá em Configurações de **Vídeo / Encode / Stream**.
 2. **Altere o codec do Stream Principal para H.264** (em vez de H.265). Na UNV: Setup → Video & Audio → Video. Na Intelbras: Configurações → Câmera → Vídeo.
 3. **Verifique a porta RTSP** — confirme que é **554** (padrão). Na UNV: Setup → Network → Port. Na Intelbras: Configurações → Rede → Portas.
 4. **Habilite o protocolo ONVIF** se disponível. Na UNV: Setup → Network → Protocol → ONVIF. Na Intelbras: Configurações → Rede → ONVIF.
@@ -68,7 +68,7 @@ Este é o erro mais comum ao configurar câmeras IP no AxTon. Ele ocorre quando 
 6. **Se persistir**, tente usar o **Substream** configurando resolução menor (ex.: 640×480) e codec H.264.
 
 :::warning Atenção
-Após alterar configurações na câmera, aguarde alguns segundos para a câmera reiniciar o serviço de streaming antes de testar novamente no AxTon.
+Após alterar Configurações na câmera, aguarde alguns segundos para a câmera reiniciar o serviço de streaming antes de testar novamente no AxTon.
 :::
 
 :::tip Dica
@@ -82,7 +82,7 @@ Para confirmar que o stream RTSP funciona, teste no VLC Media Player: **Mídia �
 | Câmera ligada? | Verifique alimentação PoE ou fonte de energia |
 | IP correto? | Confirme o IP acessando pelo navegador |
 | Mesma rede? | O servidor AxTon e a câmera devem estar na mesma sub-rede ou com rota configurada |
-| Credenciais válidas? | Teste login diretamente na interface web da câmera |
+| Credenciais válidas? | Teste Login diretamente na interface web da câmera |
 | Porta liberada? | Verifique se a porta 554 (RTSP) e 80 (HTTP) estão abertas |
 
 ## Referência de portas

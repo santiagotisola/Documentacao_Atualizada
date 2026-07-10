@@ -22,6 +22,7 @@ export {
   useAxHubEquipamentos,
   useAxHubInfracoes,
   useAxHubHeartbeat,
+  useAxHubTabelas,
   useAxTonStatus,
   useAxTonResumo,
   useAxTonPesagens,

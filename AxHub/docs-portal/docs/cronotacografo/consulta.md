@@ -20,15 +20,15 @@ A cada registro de cronotacógrafo, o sistema verifica:
 
 1. **Validade do certificado** — se o certificado do aparelho está dentro do prazo
 2. **Regularidade do condutor** — se o tempo de jornada está dentro do limite legal
-3. **Integridade do lacre** — se o equipamento não foi adulterado
+3. **Integridade do lacre** — se o Equipamento não foi adulterado
 
 ## Filtros disponíveis
 
 | Filtro | Descrição |
 |--------|-----------|
 | **Período** | Faixa de datas |
-| **Placa** | Filtrar por placa do veículo |
-| **Equipamento** | Filtrar por equipamento de fiscalização |
+| **Placa** | Filtrar por placa do Veículo |
+| Equipamento | Filtrar por Equipamento de fiscalização |
 | **Status** | Processado, Pendente, Descartado, Irregular |
 
 ## Campos do resultado
@@ -36,12 +36,12 @@ A cada registro de cronotacógrafo, o sistema verifica:
 | Coluna do Resultado | Descrição |
 |---------------------|-----------|
 | **Data/Hora** | Momento do registro |
-| **Placa** | Placa do veículo |
-| **Equipamento** | Equipamento que registrou |
+| **Placa** | Placa do Veículo |
+| Equipamento | Equipamento que registrou |
 | **Velocidade** | Velocidade registrada |
 | **Status Cronotacógrafo** | `Regular`, `Irregular`, `Vencido`, `NaoEncontrado` |
 | **Status Processamento** | `Processado`, `Pendente`, `Descartado` |
-| **Infração Gerada** | Número do auto (quando houver infração) |
+| Infração Gerada** | Número do auto (quando houver Infração |
 
 ## Status do Cronotacógrafo
 
@@ -54,7 +54,7 @@ A cada registro de cronotacógrafo, o sistema verifica:
 
 ## Exportação
 
-Exportável em **Excel** para análise e inclusão em autos de infração administrativos.
+Exportável em **Excel** para Análise e inclusão em autos de Infração administrativos.
 
 ---
 

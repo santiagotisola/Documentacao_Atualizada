@@ -2,7 +2,7 @@
 
 ## Visão Geral
 
-O AxionIA é um assistente inteligente embeddável que aparece como botão flutuante no canto inferior direito do sistema. Ao clicar, abre um painel com busca por texto livre, filtro por módulo e passo a passo das operações. Funciona sem dependências externas e não interfere no sistema existente.
+O AxionIA é um assistente inteligente embeddável que aparece como botão flutuante no canto inferior direito do sistema. Ao clicar, abre um Use Dashboard com busca por texto livre, filtro por módulo e passo a passo das operações. Funciona sem dependências externas e não interfere no sistema existente.
 
 ---
 
@@ -68,8 +68,8 @@ Se o `knowledge-base.json` estiver em outro local, especifique antes do script:
 
 ## Funcionalidades
 
-- **Busca por texto livre** — com normalização de acentos (ex: "infraçao" encontra "infração")
-- **Filtro por categoria** — Infrações, Operações, Medições, Veículos, etc.
+- **Busca por texto livre** — com normalização de acentos (ex: "infraçao" encontra Infração
+- **Filtro por categoria** — Infrações Operações, Medições, Veículos etc.
 - **Passo a passo** — cada artigo tem etapas numeradas detalhadas
 - **Link para Help Desk** — abre chamado em `desk.axiontecnologia.com.br` quando não encontra resposta
 - **Responsivo** — funciona em desktop e mobile
@@ -81,10 +81,10 @@ Se o `knowledge-base.json` estiver em outro local, especifique antes do script:
 
 ```
 widget/
-├── axhub-suporte.js       # Widget (15KB) — CSS + HTML + lógica de busca
-├── knowledge-base.json    # Base de conhecimento (26KB) — 30 artigos + 7 glossário
-├── demo.html              # Página de demonstração
-└── INTEGRACAO.md          # Este documento
+├── axhub-suporte.js # Widget (15KB) — CSS + HTML + lógica de busca
+├── knowledge-base.json # Base de conhecimento (26KB) — 30 artigos + 7 glossário
+├── demo.html # Página de demonstração
+└── INTEGRACAO.md # Este documento
 ```
 
 ---
@@ -129,7 +129,7 @@ O widget tenta carregar a base nesta ordem:
 Após adicionar o script, abra o sistema e verifique:
 
 - [ ] Botão azul (ícone de chat) aparece no canto inferior direito
-- [ ] Clicar no botão abre o painel de suporte
+- [ ] Clicar no botão abre o Use Dashboard de suporte
 - [ ] Digitar uma busca (ex: "exportar") retorna resultados
 - [ ] Clicar em um resultado mostra o passo a passo
 - [ ] Link "Abrir chamado no Help Desk" funciona

@@ -12,7 +12,7 @@ Conjunto agrupado de infracoes processadas e validadas, formatado para envio ao 
 
 ## Base Legal
 
-Resolucao CONTRAN 619/2016, que define o formato e conteudo obrigatorio dos registros de infracao para integracao entre sistemas.
+Resolucao CONTRAN 619/2016, que define o formato e conteudo obrigatório dos registros de Use Infração (com acento) para integracao entre sistemas.
 
 ## Uso no Sistema AxHub
 

@@ -1,25 +1,25 @@
 ---
 sidebar_position: 6
 title: Fluxo Diário de Veículos
-description: Relatório de fluxo diário de veículos por equipamento
+description: Relatório de fluxo diário de Veículos por Equipamento
 ---
 
 # Fluxo Diário de Veículos
 
-Exibe o volume diário de veículos registrados por cada equipamento em forma de tabela e gráfico. Permite acompanhar a evolução do fluxo ao longo do período selecionado e comparar o desempenho entre equipamentos.
+Exibe o volume diário de Veículos registrados por cada Equipamento em forma de tabela e gráfico. Permite acompanhar a evolução do fluxo ao longo do período selecionado e comparar o desempenho entre Equipamentos
 
 ![Fluxo Diário](../img/Relatorios%20-%20relatorio%20de%20fluxo%20diario%20de%20veiculos.png)
 
 ## Como acessar
 
-**Menu lateral** → Relatórios → **Fluxo Diário de Veículos**
+**Menu lateral** → Relatórios → **Fluxo Diário de Veículos
 
 ## Filtros disponíveis
 
 | Filtro | Descrição |
 |--------|-----------|
 | **Período** | Faixa de datas |
-| **Equipamento** | Filtrar por equipamento |
+| Equipamento | Filtrar por Equipamento |
 | **Faixa** | Faixa de tráfego |
 | **Região** | Filtrar por região geográfica |
 
@@ -28,19 +28,19 @@ Exibe o volume diário de veículos registrados por cada equipamento em forma de
 | Coluna | Descrição |
 |--------|-----------|
 | **Data** | Data de referência do registro |
-| **Equipamento** | Nome e código do equipamento |
+| Equipamento | Nome e código do Equipamento |
 | **Faixa** | Faixa de tráfego monitorada |
-| **Total Passagens** | Quantidade total de veículos registrados no dia |
+| **Total Passagens** | Quantidade total de Veículos registrados no dia |
 | **Leituras OCR** | Placas lidas com sucesso pelo OCR |
 | **Aproveitamento (%)** | Percentual de leitura de placas |
-| **Infrações** | Quantidade de infrações geradas no dia |
+| Infrações | Quantidade de Infrações geradas no dia |
 
 ## Exportação
 
-Disponível em **Excel** para análise em planilhas externas ou inclusão em relatórios contratuais.
+Disponível em **Excel** para Análise em planilhas externas ou inclusão em Relatórios contratuais.
 
 :::tip Dica
-Combine com o [Mapa de Fluxo de Passagens](./mapa-fluxo-passagens) para visualizar espacialmente os dados tabulares deste relatório.
+Combine com o [Mapa de Fluxo de Passagens](./mapa-fluxo-passagens) para visualizar espacialmente os dados tabulares deste Relatório
 :::
 
 ---
@@ -51,4 +51,4 @@ Combine com o [Mapa de Fluxo de Passagens](./mapa-fluxo-passagens) para visualiz
 |------|--------|-----------|
 | Relacionado | [Monitoramento Online](../operacoes/monitoramento-online) | Status em tempo real |
 | Relacionado | [Mapa Fluxo Passagens](./mapa-fluxo-passagens) | Visualização em mapa |
-| Relacionado | [Relatório de Passagens](./relatorio-passagens) | Detalhamento por passagem |
+| Relacionado | Relatório de Passagens](./relatorio-passagens) | Detalhamento por passagem |

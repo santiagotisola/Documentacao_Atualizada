@@ -19,7 +19,7 @@ Exibe os lotes de dados importados para o sistema, permitindo acompanhar o statu
 | Filtro | Descrição |
 |--------|-----------|
 | **Período** | Faixa de datas da importação |
-| **Equipamento** | Filtrar por equipamento de origem |
+| Equipamento | Filtrar por Equipamento de origem |
 | **Status** | Sucesso, Erro, Parcial |
 
 ## Campos exibidos

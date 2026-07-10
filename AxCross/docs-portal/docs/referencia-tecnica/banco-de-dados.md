@@ -16,11 +16,11 @@ O AxCross utiliza **SQL Server** como banco de dados relacional. Abaixo estão t
 |---|---|---|
 | `TBLocais` | Cruzamentos e pontos de monitoramento | Nome, Latitude, Longitude |
 | `TBEquipamentos` | Câmeras e sensores | Nome, IP, LocalId |
-| `TBFaixas` | Faixas de pista por equipamento | Nome, Sentido, EquipamentoId |
+| `TBFaixas` | Faixas de pista por Equipamento | Nome, Sentido, EquipamentoId |
 | `TBOperacoes` | Sessões de monitoramento ativas | DataInicio, DataFim, Status |
-| `TBPassagens` | Detecções de veículos | Placa, DataPassagem, Velocidade |
+| `TBPassagens` | Detecções de Veículos | Placa, DataPassagem, Velocidade |
 | `TBHeartbeatEquipamentos` | Status de comunicação das câmeras | Status, UltimoSinal |
-| `TBUsuarios` | Usuários do sistema | Nome, Login, PerfilId |
+| `TBUsuarios` | Usuários do sistema | Nome, Login PerfilId |
 | `TBPerfis` | Perfis de acesso | Nome, Descricao |
 | `TBConfiguracoes` | Configurações chave-valor do sistema | Chave, Valor, Grupo |
 
@@ -34,7 +34,7 @@ Armazena os cruzamentos e pontos monitorados, com geolocalização.
 |---|---|:---:|---|
 | `Id` | INT (PK) | Sim | Identificador único |
 | `Nome` | NVARCHAR(200) | Sim | Nome do cruzamento/local |
-| `Endereco` | NVARCHAR(500) | Não | Endereço completo |
+| endereço | NVARCHAR(500) | Não | Endereço completo |
 | `Latitude` | FLOAT | Não | Coordenada de latitude |
 | `Longitude` | FLOAT | Não | Coordenada de longitude |
 | `Cidade` | NVARCHAR(100) | Não | Cidade |
@@ -51,10 +51,10 @@ Câmeras e sensores instalados nos cruzamentos.
 | Campo | Tipo | Obrigatório | Descrição |
 |---|---|:---:|---|
 | `Id` | INT (PK) | Sim | Identificador único |
-| `Nome` | NVARCHAR(200) | Sim | Nome do equipamento |
+| `Nome` | NVARCHAR(200) | Sim | Nome do Equipamento |
 | `Tipo` | NVARCHAR(100) | Não | Tipo (Câmera, Sensor, Radar) |
-| `Fabricante` | NVARCHAR(100) | Não | Fabricante do equipamento |
-| `Modelo` | NVARCHAR(100) | Não | Modelo do equipamento |
+| `Fabricante` | NVARCHAR(100) | Não | Fabricante do Equipamento |
+| `Modelo` | NVARCHAR(100) | Não | Modelo do Equipamento |
 | `NumeroSerie` | NVARCHAR(100) | Não | Número de série |
 | `IP` | NVARCHAR(50) | Não | Endereço IP na rede |
 | `LocalId` | INT (FK) | Não | Referência a TBLocais |
@@ -65,7 +65,7 @@ Câmeras e sensores instalados nos cruzamentos.
 
 ## TBFaixas
 
-Faixas de pista monitoradas por cada equipamento.
+Faixas de pista monitoradas por cada Equipamento
 
 | Campo | Tipo | Obrigatório | Descrição |
 |---|---|:---:|---|
@@ -102,12 +102,12 @@ Operações com `DataFim = NULL` e `Status = 'Ativa'` estão em execução. Veri
 
 ## TBPassagens
 
-Registro de cada veículo detectado pelos equipamentos.
+Registro de cada Veículo detectado pelos Equipamentos
 
 | Campo | Tipo | Obrigatório | Descrição |
 |---|---|:---:|---|
 | `Id` | INT (PK) | Sim | Identificador único |
-| `Placa` | NVARCHAR(20) | Não | Placa do veículo (OCR) |
+| `Placa` | NVARCHAR(20) | Não | Placa do Veículo (OCR) |
 | `DataPassagem` | DATETIME | Sim | Data/hora da detecção |
 | `Velocidade` | DECIMAL(10,2) | Não | Velocidade medida (km/h) |
 | `FaixaId` | INT (FK) | Não | Referência a TBFaixas |
@@ -142,8 +142,8 @@ Configurações gerais do sistema em formato chave-valor.
 | Campo | Tipo | Obrigatório | Descrição |
 |---|---|:---:|---|
 | `Id` | INT (PK) | Sim | Identificador único |
-| `Chave` | NVARCHAR(200) | Sim | Nome da configuração |
-| `Valor` | NVARCHAR(MAX) | Não | Valor da configuração |
+| `Chave` | NVARCHAR(200) | Sim | Nome da Configuração |
+| `Valor` | NVARCHAR(MAX) | Não | Valor da Configuração |
 | `Grupo` | NVARCHAR(100) | Não | Grupo de agrupamentos (ex: Email, API, Sistema) |
 
 ---
@@ -152,12 +152,12 @@ Configurações gerais do sistema em formato chave-valor.
 
 ```
 TBLocais ──────────────────┬──> TBEquipamentos ──> TBFaixas
-    │                      │         │
-    │                      │         ▼
-    │                      │    TBHeartbeatEquipamentos
-    │                      │
-    ▼                      ▼
-TBOperacoes           TBPassagens
+    │ │ │
+    │ │ ▼
+ │ │ TBHeartbeatEquipamentos
+    │ │
+    ▼ ▼
+TBOperacoes TBPassagens
 ```
 
 ---
@@ -168,8 +168,8 @@ TBOperacoes           TBPassagens
 |---|---|---|
 | GET | `/api/axcross/status` | Testa conexão com banco |
 | GET | `/api/axcross/resumo` | Contagem de todos os registros |
-| GET | `/api/axcross/locais` | Lista locais com total de equipamentos |
-| GET | `/api/axcross/equipamentos` | Lista equipamentos por local |
+| GET | `/api/axcross/locais` | Lista locais com total de Equipamentos |
+| GET | `/api/axcross/Equipamentos` | Lista Equipamentos por local |
 | GET | `/api/axcross/passagens` | Estatísticas e últimas passagens |
 | GET | `/api/axcross/operacoes` | Últimas 50 operações |
 | GET | `/api/axcross/heartbeat` | Status das câmeras |
@@ -199,11 +199,11 @@ curl http://localhost:3100/api/axcross/resumo
 
 ```json
 {
-  "equipamentos": 12,
+  Equipamentos 12,
   "operacoes": 340,
   "passagens": 185000,
   "locais": 8,
-  "usuarios": 5
+  Usuários 5
 }
 ```
 
@@ -244,7 +244,7 @@ curl http://localhost:3100/api/axcross/passagens
   "total": 185000,
   "porLocal": [
     { "Nome": "Cruzamento Av. Brasil x Rua XV", "total": 42000 },
-    { "Nome": "Viaduto Central Sul",            "total": 31500 }
+    { "Nome": "Viaduto Central Sul", "total": 31500 }
   ],
   "ultimas": [
     {
@@ -271,8 +271,8 @@ curl http://localhost:3100/api/axcross/heartbeat
 {
   "total": 12,
   "heartbeat": [
-    { "Equipamento": "Câmera Norte - F1", "IP": "192.168.1.101", "Status": "Online",  "UltimoSinal": "2026-03-31T22:08:00" },
-    { "Equipamento": "Câmera Sul - F2",   "IP": "192.168.1.102", "Status": "Offline", "UltimoSinal": "2026-03-31T19:30:00" }
+ { Equipamento "Câmera Norte - F1", "IP": "192.168.1.101", "Status": "Online", "UltimoSinal": "2026-03-31T22:08:00" },
+  { Equipamento "Câmera Sul - F2", "IP": "192.168.1.102", "Status": "Offline", "UltimoSinal": "2026-03-31T19:30:00" }
   ]
 }
 ```
@@ -284,7 +284,7 @@ curl http://localhost:3100/api/axcross/heartbeat
 ```sql
 SELECT
   DATEPART(HOUR, DataPassagem) AS Hora,
-  COUNT(*)                     AS Total
+  COUNT(*) AS Total
 FROM TBPassagens
 WHERE CAST(DataPassagem AS DATE) = CAST(GETDATE() AS DATE)
 GROUP BY DATEPART(HOUR, DataPassagem)
@@ -297,7 +297,7 @@ ORDER BY Hora;
 
 ```sql
 SELECT
-  e.Nome AS Equipamento,
+  e.Nome AS Equipamento
   e.IP,
   h.Status,
   h.UltimoSinal,

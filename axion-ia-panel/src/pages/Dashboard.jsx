@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { api, setApiUrl, getConfiguredUrl } from "../services/api";
+import { StatCard } from "../components/common";
 import DashboardWidgets from "./DashboardWidgets";
+import QuickSelect from "../components/QuickSelect.jsx";
 
 /* ═══════════════════════════════════════════════════
    Grid de serviços — acesso rápido
@@ -20,10 +22,7 @@ const SERVICOS = [
   { icon: "📚", titulo: "Knowledge Base",    desc: "Base de conhecimento",      link: "/kb",              cor: "#6366f1", cat: "Análise" },
 
   // ── 3. Sistemas (operação) ──
-  { icon: "🖥️", titulo: "AxHub",             desc: "Fiscalização eletrônica",   link: "https://economia.axhub.axion.ws",     cor: "#3498db", cat: "Sistemas", ext: true },
-  { icon: "🚦", titulo: "AxCross",           desc: "Cruzamento de dados",       link: "https://economia.axcross.axion.ws",   cor: "#e67e22", cat: "Sistemas", ext: true },
-  { icon: "⚖️", titulo: "AxTon",             desc: "Pesagem veicular (desktop)", link: null,                                  cor: "#1abc9c", cat: "Sistemas" },
-  { icon: "📘", titulo: "Manual AxHub",      desc: "Documentação completa",     link: "http://localhost:3010/AxHub.Docs/",   cor: "#2980b9", cat: "Sistemas", ext: true },
+  { icon: "", titulo: "Manual AxHub",      desc: "Documentação completa",     link: "http://localhost:3010/AxHub.Docs/",   cor: "#2980b9", cat: "Sistemas", ext: true },
   { icon: "📗", titulo: "Manual AxTon",      desc: "Documentação completa",     link: "http://localhost:3011/AxTon.Docs/",   cor: "#16a085", cat: "Sistemas", ext: true },
   { icon: "📙", titulo: "Manual AxCross",    desc: "Documentação completa",     link: "http://localhost:3012/AxCross.Docs/", cor: "#d35400", cat: "Sistemas", ext: true },
 
@@ -113,14 +112,14 @@ export default function Dashboard() {
         <h2 className="dash-hero-title">AxionIA</h2>
         <p className="dash-hero-sub">Plataforma Inteligente de Gestão de Trânsito</p>
         <div className="dash-stats-bar">
-          <div className="dash-stat"><span className="dash-stat-num">3</span><span className="dash-stat-label">Sistemas</span></div>
-          <div className="dash-stat"><span className="dash-stat-num">{SERVICOS.length}</span><span className="dash-stat-label">Módulos</span></div>
-          <div className="dash-stat"><span className="dash-stat-num">24/7</span><span className="dash-stat-label">WhatsApp</span></div>
-          <div className="dash-stat"><span className="dash-stat-num">IA</span><span className="dash-stat-label">Classificação</span></div>
+          <StatCard value="3" label="Sistemas" />
+          <StatCard value={SERVICOS.length} label="Módulos" />
+          <StatCard value="24/7" label="WhatsApp" />
+          <StatCard value="IA" label="Classificação" />
           {helpdeskKpi && (
             <>
-              <div className="dash-stat"><span className="dash-stat-num">{helpdeskKpi.totalChamados}</span><span className="dash-stat-label">Chamados</span></div>
-              <div className="dash-stat"><span className="dash-stat-num">{helpdeskKpi.abertos}</span><span className="dash-stat-label">Abertos</span></div>
+              <StatCard value={helpdeskKpi.totalChamados} label="Chamados" />
+              <StatCard value={helpdeskKpi.abertos} label="Abertos" />
             </>
           )}
         </div>
@@ -145,15 +144,15 @@ export default function Dashboard() {
 
       <div className="dash-analytics-section">
         <h3 className="dash-analytics-title">Analytics</h3>
-        <div className="tab-bar">
-          {TABS.map(t => (
-            <button key={t.id}
-              className={`tab-btn ${tab === t.id ? "active" : ""}`}
-              onClick={() => setTab(t.id)}>
-              <span className="tab-icon">{t.icon}</span>
-              {t.label}
-            </button>
-          ))}
+        <div style={{ display: 'flex', alignItems: 'center', gap: 8, padding: '8px 0' }}>
+          <QuickSelect
+            options={TABS.map(t => ({ ...t, icon: t.icon }))}
+            value={tab}
+            onChange={setTab}
+            color="#8b5cf6"
+            label="Aba"
+            width={200}
+          />
         </div>
         <div className="tab-content">
           {tab === "geral"  && <TabVisaoGeral />}
@@ -593,17 +592,6 @@ function TabConfiguracoes() {
 /* ═══════════════════════════════════════════════════
    Componentes reutilizáveis
    ═══════════════════════════════════════════════════ */
-function StatCard({ label, value, color }) {
-  return (
-    <div className="card">
-      <div className="label">{label}</div>
-      <div className="value" style={color ? { color } : {}}>
-        {typeof value === "number" ? value.toLocaleString("pt-BR") : value ?? "—"}
-      </div>
-    </div>
-  );
-}
-
 function ConnectionCard({ titulo, conectado, servidor, banco, erro, envVars }) {
   return (
     <div className="connection-card" data-status={conectado ? "ok" : "fail"}>

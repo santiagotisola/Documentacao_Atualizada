@@ -6,26 +6,26 @@ title: Visão Geral
 
 # AxHub — Manual do Usuário
 
-Bem-vindo ao manual do usuário do **AxHub**, o sistema de gestão de equipamentos de trânsito da Axion Tecnologia.
+Bem-vindo ao manual do Usuário do **AxHub**, o sistema de gestão de Equipamentos de trânsito da Axion Tecnologia.
 
 ## O que é o AxHub?
 
-O AxHub é uma plataforma completa para **gestão de equipamentos de fiscalização de trânsito**, integrando radares metrológicos e não metrológicos, câmeras OCR e balanças de pesagem.
+O AxHub é uma plataforma completa para **gestão de Equipamentos de fiscalização de trânsito**, integrando radares metrológicos e não metrológicos, câmeras OCR e balanças de pesagem.
 
 ## Estrutura do Sistema
 
 | # | Módulo | Descrição |
 |---|--------|-----------|
-| 1 | [Primeiros Passos](./primeiros-passos/login) | Login, navegação e dashboard |
+| 1 | [Primeiros Passos](./primeiros-passos/login) | Login navegação e Dashboard |
 | 2 | [Infrações](./infracoes/triagem) | Triagem, auditoria, consulta e exportação |
 | 3 | [Cronotacógrafo](./cronotacografo/consulta) | Consulta e processamento de cronotacógrafos |
 | 4 | [Balança](./pesagem/postos) | Pesagem e controle de excesso de peso |
 | 5 | [Operações](./operacoes/cadastro-operacoes) | Configuração e gestão de operações |
-| 6 | [Veículos](./veiculos/tipos-veiculos) | Cadastro e consulta de veículos |
-| 7 | [Equipamentos](./cadastros-basicos/equipamentos) | Gestão de equipamentos de fiscalização |
+| 6 | [Veículos](./veiculos/tipos-veiculos) | Cadastro e consulta de Veículos |
+| 7 | [Equipamentos](./cadastros-basicos/Equipamentos) | Gestão de Equipamentos de fiscalização |
 | 8 | [Medição](./medicoes/contratos) | Medições contratuais e índices de performance |
-| 9 | [Relatórios](./relatorios/relatorio-infracoes) | Dashboards e relatórios operacionais |
-| 10 | [Controle de Acesso](./controle-acesso/usuarios) | Gestão de usuários e permissões |
+| 9 | [Relatórios](./relatorios/relatorio-infracoes) | Dashboards e Relatórios operacionais |
+| 10 | [Controle de Acesso](./controle-acesso/usuarios) | Gestão de Usuários e permissões |
 | 11 | [Administração](./administracao/configuracoes-sistema) | Configurações gerais do sistema |
 
 ## Como usar este manual
@@ -46,6 +46,6 @@ Em cada tela do AxHub, você encontrará um link de ajuda que o direcionará dir
 | Termo | Definicao |
 |-------|-----------|
 | [Cronotacografo](./glossario/cronotacografo) | Ver definicao no glossario |
-| [Infracao de Transito](./glossario/infracao) | Ver definicao no glossario |
+| Use Infração (com acento) de Transito](./glossario/infracao) | Ver definicao no glossario |
 | [Medicao de Desempenho](./glossario/medicao-desempenho) | Ver definicao no glossario |
 | [Triagem](./glossario/triagem) | Ver definicao no glossario |

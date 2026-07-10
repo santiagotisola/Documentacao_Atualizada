@@ -407,7 +407,7 @@ export default function AnaliseEditalAvancada({ embedded = false }) {
           <div style={{ marginTop: "1.5rem", background: "rgba(255,255,255,0.03)", borderRadius: 12, padding: "1rem", border: "1px solid rgba(255,255,255,0.06)" }}>
             <h4 style={{ color: "#a5b4fc", margin: "0 0 0.5rem", fontSize: "0.85rem" }}>📌 O que será analisado:</h4>
             <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "0.3rem", fontSize: "0.8rem", color: "#94a3b8" }}>
-              <span>🖥️ Hardware (equipamentos, sensores)</span>
+              <span>🖥️ Hardware Equipamentos sensores)</span>
               <span>💻 Software (sistemas, funcionalidades)</span>
               <span>🏗️ Infraestrutura (rede, cloud)</span>
               <span>⚙️ Processos (workflows, operação)</span>

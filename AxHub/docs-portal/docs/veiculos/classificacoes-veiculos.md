@@ -1,18 +1,18 @@
 ---
 sidebar_position: 4
 title: Classificações de Veículos
-description: Cadastro de classificações de veículos
+description: Cadastro de classificações de Veículos
 ---
 
 # Classificações de Veículos
 
-Permite cadastrar e gerenciar as classificações dos veículos.
+Permite cadastrar e gerenciar as classificações dos Veículos
 
 ![Lista de Classificações](../img/Veículos%20-%20Classificações%20dos%20Veiculos.png)
 
 ## Como acessar
 
-**Menu lateral** → Veículos → **Classificações de Veículos**
+**Menu lateral** → Veículos → **Classificações de Veículos
 
 ## Cadastro
 
@@ -22,7 +22,7 @@ Permite cadastrar e gerenciar as classificações dos veículos.
 |-------|-----------|
 | **Código** | Código identificador |
 | **Descrição** | Nome da classificação |
-| **Tipo de Veículo** | Tipo vinculado |
+| **Tipo de Veículo | Tipo vinculado |
 | **Ativo** | Status do registro |
 
 ---

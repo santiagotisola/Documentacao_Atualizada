@@ -17,10 +17,10 @@ Exibe os tickets de pesagem que ainda não foram finalizados.
 | Coluna | Descrição |
 |--------|-----------|
 | **Número** | Identificador do ticket |
-| **Placa** | Placa do veículo |
+| **Placa** | Placa do Veículo |
 | **Data/Hora** | Momento da pesagem |
 | **Peso Bruto** | Peso total registrado |
-| **Status** | Aguardando, em análise, etc. |
+| **Status** | Aguardando, em Análise etc. |
 
 ---
 
@@ -29,5 +29,5 @@ Exibe os tickets de pesagem que ainda não foram finalizados.
 | Tipo | Pagina | Descricao |
 |------|--------|-----------|
 | Anterior | [Postos](./postos) | Postos de pesagem |
-| Proximo | [Ticket Fechado](./ticket-fechado) | Tickets finalizados |
+| próximo | [Ticket Fechado](./ticket-fechado) | Tickets finalizados |
 | Acao | [Liberar Pesagem](./liberar-pesagem) | Liberar ticket |

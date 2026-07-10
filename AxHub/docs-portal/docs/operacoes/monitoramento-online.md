@@ -1,12 +1,12 @@
 ---
 sidebar_position: 4
 title: Monitoramento Online
-description: Monitoramento em tempo real dos equipamentos
+description: Monitoramento em tempo real dos Equipamentos
 ---
 
 # Monitoramento Online
 
-Permite acompanhar em tempo real o status e funcionamento dos equipamentos de fiscalização.
+Permite acompanhar em tempo real o status e funcionamento dos Equipamentos de fiscalização.
 
 ![Monitoramento Online](../img/Operações%20-%20Monitoramento%20online.png)
 
@@ -20,10 +20,10 @@ Permite acompanhar em tempo real o status e funcionamento dos equipamentos de fi
 
 | Coluna | Descrição |
 |--------|-----------|
-| **Equipamento** | Nome e código do equipamento |
+| Equipamento | Nome e código do Equipamento |
 | **Status** | Online, Offline, Manutenção |
 | **Última Comunicação** | Data/hora do último sinal recebido |
-| **Passagens (dia)** | Quantidade de veículos registrados no dia |
+| **Passagens (dia)** | Quantidade de Veículos registrados no dia |
 
 ---
 
@@ -31,6 +31,6 @@ Permite acompanhar em tempo real o status e funcionamento dos equipamentos de fi
 
 | Tipo | Pagina | Descricao |
 |------|--------|-----------|
-| Relacionado | [Eventos de Equipamentos](./eventos-equipamentos) | Historico de eventos |
+| Relacionado | [Eventos de Equipamentos](./eventos-equipamentos) | histórico de eventos |
 | Relacionado | [Dashboard](../primeiros-passos/dashboard) | Visao geral do sistema |
 | Relacionado | [Consulta de Placas](./consulta-placas) | Buscar veiculos |

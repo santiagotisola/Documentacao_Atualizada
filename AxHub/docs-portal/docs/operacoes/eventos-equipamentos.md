@@ -1,18 +1,18 @@
 ---
 sidebar_position: 5
 title: Eventos de Equipamentos
-description: Registro de eventos e ocorrências dos equipamentos
+description: Registro de eventos e ocorrências dos Equipamentos
 ---
 
 # Eventos de Equipamentos
 
-Permite consultar e registrar eventos e ocorrências relacionados aos equipamentos.
+Permite consultar e registrar eventos e ocorrências relacionados aos Equipamentos
 
 ![Lista de Eventos](../img/Operações%20-%20eventos%20de%20equipamentos.png)
 
 ## Como acessar
 
-**Menu lateral** → Operações → **Eventos de Equipamentos**
+**Menu lateral** → Operações → **Eventos de Equipamentos
 
 ## Cadastro de evento
 
@@ -20,7 +20,7 @@ Permite consultar e registrar eventos e ocorrências relacionados aos equipament
 
 | Campo | Descrição |
 |-------|-----------|
-| **Equipamento** | Equipamento relacionado ao evento |
+| Equipamento | Equipamento relacionado ao evento |
 | **Tipo de Evento** | Falha, manutenção, vandalismo, etc. |
 | **Data/Hora** | Momento da ocorrência |
 | **Descrição** | Detalhamento do evento |
@@ -33,5 +33,5 @@ Permite consultar e registrar eventos e ocorrências relacionados aos equipament
 | Tipo | Pagina | Descricao |
 |------|--------|-----------|
 | Relacionado | [Monitoramento Online](./monitoramento-online) | Acompanhamento tempo real |
-| Relacionado | [Equipamentos](../cadastros-basicos/equipamentos) | Cadastro de equipamentos |
-| Relatorio | [Rel. Eventos Equipamentos](../relatorios/eventos-equipamentos) | Relatorio detalhado |
+| Relacionado | [Equipamentos](../cadastros-basicos/Equipamentos) | Cadastro de Equipamentos |
+| Relatório | [Rel. Eventos Equipamentos](../relatorios/eventos-equipamentos) | Relatório detalhado |

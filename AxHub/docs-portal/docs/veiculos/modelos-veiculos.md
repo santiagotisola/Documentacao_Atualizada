@@ -1,18 +1,18 @@
 ---
 sidebar_position: 7
 title: Modelos de Veículos
-description: Cadastro de modelos de veículos por marca
+description: Cadastro de modelos de Veículos por marca
 ---
 
 # Modelos de Veículos
 
-Permite cadastrar e gerenciar os modelos de veículos vinculados às marcas.
+Permite cadastrar e gerenciar os modelos de Veículos vinculados às marcas.
 
 ![Lista de Modelos](../img/Veículos%20-%20marcas-modelos%20de%20veiculos.png)
 
 ## Como acessar
 
-**Menu lateral** → Veículos → **Modelos de Veículos**
+**Menu lateral** → Veículos → **Modelos de Veículos
 
 ## Cadastro
 

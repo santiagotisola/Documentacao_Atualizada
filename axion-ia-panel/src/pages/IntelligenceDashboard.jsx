@@ -1,5 +1,7 @@
 import React, { useState, useMemo } from 'react';
 import { AXHUB_SITES, AXCROSS_SITES } from '../data/sitesData';
+import { StatCard } from '../components/common';
+import QuickSelect from '../components/QuickSelect.jsx';
 import './IntelligenceDashboard.css';
 
 /* ═══════════════════════════════════════════════════════════════════════
@@ -296,24 +298,6 @@ function calcSaaSMetrics(axhubSites, axcrossSites, healthScores, anomalies) {
       }
     },
     {
-      provider: 'Multi360',
-      ours: false,
-      metrics: {
-        sites: 40,
-        equipamentos: 2200,
-        passagensDia: 850000,
-        sla: 95,
-        uptime: 99.5,
-        featureAdoption: 60,
-        estados: 15,
-        produtos: 2,
-        bi: 25,
-        ocr: 30,
-        avgHealth: 72,
-      },
-      fonte: 'Estimativa baseada em dados públicos e licitações 2024-2025'
-    },
-    {
       provider: 'Velsis/Kapsch',
       ours: false,
       metrics: {
@@ -374,6 +358,231 @@ function calcSaaSMetrics(axhubSites, axcrossSites, healthScores, anomalies) {
 /* ═══════════════════════════════════════════════════════════════════════
    Componentes Visuais
    ═══════════════════════════════════════════════════════════════════════ */
+
+/* ─── Gauge circular para tema claro ─── */
+function LightGauge({ value, color, size = 130 }) {
+  const r = (size - 16) / 2;
+  const circ = 2 * Math.PI * r;
+  const offset = circ - Math.min(1, Math.max(0, value / 100)) * circ;
+  return (
+    <svg width={size} height={size} viewBox={`0 0 ${size} ${size}`}>
+      <circle cx={size/2} cy={size/2} r={r} fill="none" stroke="#e8edf4" strokeWidth="10" />
+      <circle cx={size/2} cy={size/2} r={r} fill="none" stroke={color} strokeWidth="10"
+        strokeDasharray={circ} strokeDashoffset={offset} strokeLinecap="round"
+        style={{ transform:'rotate(-90deg)', transformOrigin:'50% 50%', transition:'stroke-dashoffset 1.2s ease' }}
+      />
+      <text x="50%" y="50%" textAnchor="middle" dominantBaseline="central"
+        fill="#1e293b" fontSize={size * 0.19} fontWeight="800">{value}%</text>
+    </svg>
+  );
+}
+
+/* ─── Overview Dashboard — Layout inspirado no design de referência ─── */
+function OverviewDashboard({ healthScores, avgHealth, anomalies, activeSites, sites, saasMetrics, correctionPlan }) {
+  const avgOCR = useMemo(() => {
+    const withOCR = AXHUB_SITES.filter(s => s.status === 'ativo' && s.ocr);
+    if (!withOCR.length) return 0;
+    return Math.round(withOCR.reduce((a, s) => a + s.ocr, 0) / withOCR.length);
+  }, []);
+
+  const sitesOnlinePct = sites.length ? Math.round(activeSites.length / sites.length * 100) : 0;
+  const slaPct = saasMetrics?.slaCompliance || 0;
+
+  const GAUGES = [
+    { value: avgHealth,       label: 'Health Score',  sub: 'média geral',    color: avgHealth >= 80 ? '#22c55e' : avgHealth >= 60 ? '#f59e0b' : '#ef4444' },
+    { value: avgOCR,          label: 'OCR Médio',     sub: 'sites AxHub',    color: '#3b82f6' },
+    { value: sitesOnlinePct,  label: 'Sites Ativos',  sub: `${activeSites.length} de ${sites.length}`, color: '#8b5cf6' },
+    { value: slaPct,          label: 'SLA',           sub: 'compliance',     color: slaPct >= 95 ? '#22c55e' : '#f59e0b' },
+  ];
+
+  // Top 8 sites para bar chart
+  const top8 = healthScores.slice(0, 8);
+  const maxBar = 130;
+
+  // 5 piores e 5 melhores
+  const worst5 = [...healthScores].sort((a, b) => a.score - b.score).slice(0, 5);
+  const best5  = healthScores.slice(0, 5);
+
+  // Anomalias agrupadas
+  const sevGroups = [
+    { label: 'Crítico',  count: anomalies.filter(a => a.severity === 'high').length,   color: '#ef4444' },
+    { label: 'Atenção',  count: anomalies.filter(a => a.severity === 'medium').length,  color: '#f59e0b' },
+    { label: 'Baixo',    count: anomalies.filter(a => a.severity === 'low').length,     color: '#22c55e' },
+  ];
+  const maxSev = Math.max(...sevGroups.map(g => g.count), 1);
+
+  const card = { background: '#fff', borderRadius: 16, padding: '20px 24px', boxShadow: '0 1px 6px rgba(0,0,0,0.07)', border: '1px solid #f1f5f9' };
+
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
+
+      {/* ── Linha 1: 4 Gauges conectados ── */}
+      <div style={{ ...card, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '28px 16px' }}>
+        {GAUGES.map((g, i) => (
+          <React.Fragment key={g.label}>
+            <div style={{ textAlign: 'center', minWidth: 140, padding: '0 8px' }}>
+              <LightGauge value={g.value} color={g.color} size={120} />
+              <div style={{ fontWeight: 800, fontSize: 14, color: '#1e293b', marginTop: 6, letterSpacing: '0.01em' }}>{g.label}</div>
+              <div style={{ fontSize: 11, color: '#94a3b8', marginTop: 2 }}>{g.sub}</div>
+            </div>
+            {i < 3 && (
+              <div style={{ flex: 1, display: 'flex', alignItems: 'center', maxWidth: 80 }}>
+                <div style={{ height: 2, flex: 1, background: 'linear-gradient(90deg,#e2e8f0,#cbd5e1)' }} />
+                <div style={{ width: 8, height: 8, borderRadius: '50%', background: '#cbd5e1', flexShrink: 0 }} />
+                <div style={{ height: 2, flex: 1, background: 'linear-gradient(90deg,#cbd5e1,#e2e8f0)' }} />
+              </div>
+            )}
+          </React.Fragment>
+        ))}
+      </div>
+
+      {/* ── Linha 2: 2 Gráficos de barras ── */}
+      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16 }}>
+
+        {/* Esquerda: Health Score por Site */}
+        <div style={card}>
+          <div style={{ fontWeight: 700, fontSize: 13, color: '#374151', marginBottom: 16, display:'flex', justifyContent:'space-between' }}>
+            <span>📊 Health Score por Site</span>
+            <span style={{ fontSize: 11, color: '#94a3b8' }}>Top {top8.length} sites</span>
+          </div>
+          <svg width="100%" viewBox={`0 0 ${top8.length * 44} 160`} preserveAspectRatio="xMidYMid meet">
+            {/* Gridlines */}
+            {[25,50,75,100].map(v => (
+              <line key={v} x1={0} y1={maxBar - (v/100)*maxBar} x2={top8.length*44} y2={maxBar-(v/100)*maxBar}
+                stroke="#f1f5f9" strokeWidth={1} />
+            ))}
+            {[25,50,75,100].map(v => (
+              <text key={`t${v}`} x={2} y={maxBar-(v/100)*maxBar-2} fontSize={8} fill="#cbd5e1">{v}%</text>
+            ))}
+            {top8.map(({ site, score }, i) => {
+              const barH = (score / 100) * maxBar;
+              const x = i * 44 + 6;
+              const c = score >= 80 ? '#22c55e' : score >= 60 ? '#f59e0b' : '#ef4444';
+              return (
+                <g key={site.id}>
+                  {/* Shadow bar */}
+                  <rect x={x+2} y={maxBar-barH+2} width={28} height={barH} rx={5} fill={c} fillOpacity={0.12} />
+                  {/* Main bar */}
+                  <rect x={x} y={maxBar-barH} width={28} height={barH} rx={5} fill={c} fillOpacity={0.9} />
+                  {/* Score label */}
+                  <text x={x+14} y={maxBar-barH-5} textAnchor="middle" fontSize={9} fill={c} fontWeight={700}>{score}%</text>
+                  {/* Site label */}
+                  <text x={x+14} y={maxBar+14} textAnchor="middle" fontSize={9} fill="#94a3b8">{site.nome.slice(0,5)}</text>
+                </g>
+              );
+            })}
+          </svg>
+        </div>
+
+        {/* Direita: Anomalias por Severidade */}
+        <div style={card}>
+          <div style={{ fontWeight: 700, fontSize: 13, color: '#374151', marginBottom: 16, display:'flex', justifyContent:'space-between' }}>
+            <span>⚡ Anomalias por Severidade</span>
+            <span style={{ fontSize: 11, color: '#94a3b8' }}>{anomalies.length} total</span>
+          </div>
+          <svg width="100%" viewBox="0 0 280 160" preserveAspectRatio="xMidYMid meet">
+            {/* Gridlines */}
+            {[0,25,50,75,100].map(pct => {
+              const y = maxBar - (pct/100)*maxBar;
+              return <line key={pct} x1={30} y1={y} x2={280} y2={y} stroke="#f1f5f9" strokeWidth={1} />;
+            })}
+            {sevGroups.map((g, i) => {
+              const barH = (g.count / maxSev) * maxBar;
+              const x = 40 + i * 80;
+              return (
+                <g key={g.label}>
+                  <rect x={x+4} y={maxBar-barH+2} width={50} height={barH} rx={5} fill={g.color} fillOpacity={0.12} />
+                  <rect x={x} y={maxBar-barH} width={50} height={barH} rx={5} fill={g.color} fillOpacity={0.85} />
+                  <text x={x+25} y={maxBar-barH-6} textAnchor="middle" fontSize={11} fill={g.color} fontWeight={800}>{g.count}</text>
+                  <text x={x+25} y={maxBar+14} textAnchor="middle" fontSize={10} fill="#94a3b8">{g.label}</text>
+                </g>
+              );
+            })}
+          </svg>
+          <div style={{ display:'flex', gap:12, justifyContent:'center', marginTop:4 }}>
+            {sevGroups.map(g => (
+              <div key={g.label} style={{ display:'flex', alignItems:'center', gap:4, fontSize:11, color:'#6b7280' }}>
+                <div style={{ width:10, height:10, borderRadius:3, background:g.color }} />
+                {g.label}: <strong style={{ color:'#374151' }}>{g.count}</strong>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* ── Linha 3: Colunas (piores) + Barras horizontais (melhores) ── */}
+      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16 }}>
+
+        {/* Esquerda: Top 5 piores — colunas verticais */}
+        <div style={card}>
+          <div style={{ fontWeight: 700, fontSize: 13, color: '#374151', marginBottom: 16 }}>
+            🔴 5 Sites Críticos
+          </div>
+          <svg width="100%" viewBox="0 0 280 160" preserveAspectRatio="xMidYMid meet">
+            {[25,50,75,100].map(v => (
+              <line key={v} x1={30} y1={maxBar-(v/100)*maxBar} x2={280} y2={maxBar-(v/100)*maxBar}
+                stroke="#f1f5f9" strokeWidth={1} />
+            ))}
+            {worst5.map(({ site, score }, i) => {
+              const barH = (score / 100) * maxBar;
+              const x = 34 + i * 48;
+              const c = score >= 60 ? '#f59e0b' : '#ef4444';
+              return (
+                <g key={site.id}>
+                  <rect x={x+2} y={maxBar-barH+2} width={36} height={barH} rx={5} fill={c} fillOpacity={0.12} />
+                  <rect x={x} y={maxBar-barH} width={36} height={barH} rx={5} fill={`url(#grad-${i})`} />
+                  <defs>
+                    <linearGradient id={`grad-${i}`} x1="0" y1="0" x2="0" y2="1">
+                      <stop offset="0%" stopColor={c} stopOpacity={0.9} />
+                      <stop offset="100%" stopColor={c} stopOpacity={0.4} />
+                    </linearGradient>
+                  </defs>
+                  <text x={x+18} y={maxBar-barH-5} textAnchor="middle" fontSize={9} fill={c} fontWeight={700}>{score}%</text>
+                  <text x={x+18} y={maxBar+14} textAnchor="middle" fontSize={8} fill="#94a3b8">{site.nome.slice(0,5)}</text>
+                </g>
+              );
+            })}
+          </svg>
+        </div>
+
+        {/* Direita: Top 5 melhores — barras horizontais */}
+        <div style={card}>
+          <div style={{ fontWeight: 700, fontSize: 13, color: '#374151', marginBottom: 12 }}>
+            🟢 5 Sites em Destaque
+          </div>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+            {best5.map(({ site, score }, i) => {
+              const c = score >= 80 ? '#22c55e' : '#f59e0b';
+              const labels = ['A','B','C','D','E'];
+              return (
+                <div key={site.id} style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+                  <div style={{ width: 22, height: 22, borderRadius: 6, background: `${c}18`,
+                    display:'flex', alignItems:'center', justifyContent:'center',
+                    fontSize: 10, fontWeight: 800, color: c, flexShrink: 0 }}>
+                    {labels[i]}
+                  </div>
+                  <div style={{ flex: 1 }}>
+                    <div style={{ display:'flex', justifyContent:'space-between', marginBottom: 3 }}>
+                      <span style={{ fontSize: 11, fontWeight: 600, color: '#374151' }}>{site.nome}</span>
+                      <span style={{ fontSize: 11, fontWeight: 800, color: c }}>{score}%</span>
+                    </div>
+                    <div style={{ height: 8, background: '#f1f5f9', borderRadius: 10, overflow: 'hidden' }}>
+                      <div style={{
+                        height: '100%', width: `${score}%`, borderRadius: 10,
+                        background: `linear-gradient(90deg, ${c}cc, ${c})`,
+                        transition: 'width 1s ease',
+                      }} />
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
 
 function RadialGauge({ value, label, color, size = 100 }) {
   const radius = (size - 12) / 2;
@@ -514,22 +723,10 @@ function HeatmapChart({ data }) {
 
       {/* Stats bar */}
       <div className="heatmap-stats">
-        <div className="heatmap-stat">
-          <span className="heatmap-stat-value">{(totalPassagens / 1000000).toFixed(1)}M</span>
-          <span className="heatmap-stat-label">Total/Semana</span>
-        </div>
-        <div className="heatmap-stat">
-          <span className="heatmap-stat-value">{(avgPerHour / 1000).toFixed(1)}k</span>
-          <span className="heatmap-stat-label">Média/Hora</span>
-        </div>
-        <div className="heatmap-stat highlight">
-          <span className="heatmap-stat-value">{peakGlobal.day} {peakGlobal.hour}h</span>
-          <span className="heatmap-stat-label">Pico ({(peakGlobal.value / 1000).toFixed(1)}k)</span>
-        </div>
-        <div className="heatmap-stat">
-          <span className="heatmap-stat-value">{lowHours}h</span>
-          <span className="heatmap-stat-label">Horas baixas/dia</span>
-        </div>
+        <StatCard value={`${(totalPassagens / 1000000).toFixed(1)}M`} label="Total/Semana" className="heatmap-stat" />
+        <StatCard value={`${(avgPerHour / 1000).toFixed(1)}k`} label="Média/Hora" className="heatmap-stat" />
+        <StatCard value={`${peakGlobal.day} ${peakGlobal.hour}h`} label={`Pico (${(peakGlobal.value / 1000).toFixed(1)}k)`} className="heatmap-stat highlight" />
+        <StatCard value={`${lowHours}h`} label="Horas baixas/dia" className="heatmap-stat" />
       </div>
 
       <div className="heatmap-grid-enhanced">
@@ -947,7 +1144,7 @@ function NetworkTopology({ sites, sistema }) {
         <span><span className="topo-dot" style={{ background: '#22c55e' }} /> Health ≥ 80%</span>
         <span><span className="topo-dot" style={{ background: '#f59e0b' }} /> Health 60-79%</span>
         <span><span className="topo-dot" style={{ background: '#ef4444' }} /> Health &lt; 60%</span>
-        <span>⬤ Tamanho = Nº equipamentos</span>
+        <span>⬤ Tamanho = Nº Equipamentos</span>
       </div>
     </div>
   );
@@ -1634,8 +1831,8 @@ function SaaSMetricsView({ metrics }) {
       <div className="saas-tabs">
         {[
           { id: 'overview', label: '📊 KPIs SaaS' },
-          { id: 'market', label: '🏆 Comparativo de Mercado' },
-          { id: 'gaps', label: '🎯 Gap Analysis' },
+          { id: 'market',   label: '🏆 Comparativo de Mercado' },
+          { id: 'gaps',     label: '🎯 Gap Analysis' },
           { id: 'maturity', label: '📈 Maturidade' },
         ].map(t => (
           <button key={t.id} className={`saas-tab ${activeTab === t.id ? 'active' : ''}`} onClick={() => setActiveTab(t.id)}>
@@ -1928,6 +2125,8 @@ function SaaSMetricsView({ metrics }) {
 function HealthConformityView({ healthScores, activeSites, sistema, anomalies, onHealthDetail }) {
   const [subTab, setSubTab] = useState('overview');
   const [selectedSite, setSelectedSite] = useState(null);
+  const [overviewSite, setOverviewSite] = useState(null);
+  const [actionsSite, setActionsSite] = useState('__all__');
 
   const audits = useMemo(() =>
     activeSites.map(s => auditSite(s, s._sistema || (s.faixas != null ? 'axcross' : 'axhub')))
@@ -1978,12 +2177,12 @@ function HealthConformityView({ healthScores, activeSites, sistema, anomalies, o
         </div>
       </div>
 
-      {/* Sub-tabs */}
+      {/* Sub-tabs — botões de menu */}
       <div className="hc-subtabs">
         {[
           { id: 'overview', label: '📋 Visão Geral' },
-          { id: 'details', label: '🔍 Por Site' },
-          { id: 'actions', label: '🛠️ Plano de Ações' },
+          { id: 'details',  label: '🔍 Por Site' },
+          { id: 'actions',  label: '🛠️ Plano de Ações' },
         ].map(t => (
           <button key={t.id} className={`hc-subtab ${subTab === t.id ? 'active' : ''}`} onClick={() => setSubTab(t.id)}>
             {t.label}
@@ -1991,141 +2190,366 @@ function HealthConformityView({ healthScores, activeSites, sistema, anomalies, o
         ))}
       </div>
 
-      {/* Sub-tab: Overview — Health cards grid */}
-      {subTab === 'overview' && (
-        <div className="health-grid">
-          {healthScores.map(({ site, score }) => (
-            <HealthScoreCard key={site.id} site={site} score={score} sistema={sistema} onClick={() => { setSelectedSite(site.id); setSubTab('details'); }} />
-          ))}
-        </div>
-      )}
+      {/* Sub-tab: Overview — QuickSelect + detalhe */}
+      {subTab === 'overview' && (() => {
+        const avgH = Math.round(healthScores.reduce((a, h) => a + h.score, 0) / (healthScores.length || 1));
 
-      {/* Sub-tab: Detalhes por site — Audit + Anomalias + Correção inline */}
-      {subTab === 'details' && (
-        <div className="hc-details">
-          {siteData
-            .filter(d => !selectedSite || d.site.id === selectedSite)
-            .map(({ site, score, sist, audit, anomalies: siteAnom, corrections }) => (
-            <div key={site.id} className={`hc-site-card ${score >= 80 ? 'hc-good' : score >= 50 ? 'hc-warn' : 'hc-bad'}`}>
-              {/* Site Header */}
-              <div className="hc-site-header">
-                <div className="hc-site-left">
-                  <span className="hc-site-badge">{sist === 'axhub' ? '🔵' : '🟠'}</span>
-                  <span className="hc-site-name">{site.nome}</span>
-                  <span className="hc-site-estado">{site.estado}</span>
+        const overviewOptions = [
+          {
+            id: '__all__',
+            label: 'Todos os Sites',
+            desc: `${healthScores.length} sites · média ${avgH}% · ${conformes} conformes · ${criticos} críticos`,
+            badge: `${avgH}%`,
+          },
+          ...healthScores.map(({ site, score }) => {
+            const sist = site._sistema || (site.faixas != null ? 'axcross' : 'axhub');
+            const statsText = sist === 'axhub'
+              ? `${site.equipamentos?.total || 0} equip · ${site.bi?.length || 0} BI`
+              : `${site.equipamentos || 0} equip · ${(site.passagensDia || 0).toLocaleString('pt-BR')} p/d`;
+            const c = score >= 80 ? '#22c55e' : score >= 60 ? '#f59e0b' : '#ef4444';
+            return { id: site.id, label: site.nome, desc: `${site.estado} · ${statsText}`, badge: `${score}%`, _color: c };
+          }),
+        ];
+
+        const sel = overviewSite === '__all__'
+          ? (
+            <div style={{
+              marginTop: 16, background: '#fff', borderRadius: 16,
+              border: '2px solid #6366f144', boxShadow: '0 2px 12px rgba(0,0,0,0.07)',
+              padding: '20px 24px',
+            }}>
+              <div style={{ fontWeight: 700, fontSize: 14, color: '#374151', marginBottom: 14 }}>
+                📊 Resumo Geral — {healthScores.length} Sites
+              </div>
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(110px, 1fr))', gap: 10 }}>
+                <div style={{ background: '#f8fafc', borderRadius: 10, padding: '12px 14px', textAlign: 'center' }}>
+                  <LightGauge value={avgH} color={avgH >= 80 ? '#22c55e' : avgH >= 60 ? '#f59e0b' : '#ef4444'} size={80} />
+                  <div style={{ fontSize: 11, color: '#94a3b8', marginTop: 4 }}>Média Health</div>
                 </div>
-                <div className="hc-site-right">
-                  <RadialGauge value={score} label="Health" size={56} />
-                  {audit && (
-                    <span className={`hc-compliance-badge ${audit.compliance === 100 ? 'badge-conforme' : audit.compliance < 50 ? 'badge-critico' : 'badge-divergente'}`}>
-                      {audit.compliance}% conforme
-                    </span>
+                <div style={{ background: '#f0fdf4', borderRadius: 10, padding: '12px 14px', textAlign: 'center' }}>
+                  <div style={{ fontSize: 22, fontWeight: 800, color: '#22c55e' }}>{conformes}</div>
+                  <div style={{ fontSize: 11, color: '#94a3b8' }}>✅ Conformes</div>
+                </div>
+                <div style={{ background: '#fffbeb', borderRadius: 10, padding: '12px 14px', textAlign: 'center' }}>
+                  <div style={{ fontSize: 22, fontWeight: 800, color: '#f59e0b' }}>{divergentes}</div>
+                  <div style={{ fontSize: 11, color: '#94a3b8' }}>⚠️ Divergentes</div>
+                </div>
+                <div style={{ background: '#fef2f2', borderRadius: 10, padding: '12px 14px', textAlign: 'center' }}>
+                  <div style={{ fontSize: 22, fontWeight: 800, color: '#ef4444' }}>{criticos}</div>
+                  <div style={{ fontSize: 11, color: '#94a3b8' }}>🔴 Críticos</div>
+                </div>
+                <div style={{ background: '#f8fafc', borderRadius: 10, padding: '12px 14px', textAlign: 'center' }}>
+                  <div style={{ fontSize: 22, fontWeight: 800, color: '#6366f1' }}>{correctionPlan.length}</div>
+                  <div style={{ fontSize: 11, color: '#94a3b8' }}>🛠️ Ações</div>
+                </div>
+              </div>
+              <div style={{ marginTop: 14, display: 'flex', gap: 8 }}>
+                <button onClick={() => { setSubTab('details'); }}
+                  style={{ padding: '8px 16px', borderRadius: 8, border: 'none', background: '#6366f1', color: '#fff', fontWeight: 700, fontSize: 12, cursor: 'pointer' }}>
+                  🔍 Ver Todos os Detalhes
+                </button>
+                <button onClick={() => { setSubTab('actions'); }}
+                  style={{ padding: '8px 16px', borderRadius: 8, border: '1px solid #e5e7eb', background: '#fff', color: '#374151', fontWeight: 600, fontSize: 12, cursor: 'pointer' }}>
+                  🛠️ Plano de Ações
+                </button>
+              </div>
+            </div>
+          )
+          : overviewSite
+          ? (() => {
+              const found = healthScores.find(h => h.site.id === overviewSite);
+              if (!found) return null;
+              const { site, score } = found;
+              const sist = site._sistema || (site.faixas != null ? 'axcross' : 'axhub');
+              const audit = audits.find(a => a.site.id === site.id);
+              const c = score >= 80 ? '#22c55e' : score >= 60 ? '#f59e0b' : '#ef4444';
+              return (
+                <div style={{
+                  marginTop: 16, background: '#fff', borderRadius: 16,
+                  border: `2px solid ${c}44`, boxShadow: '0 2px 12px rgba(0,0,0,0.07)',
+                  padding: '20px 24px', display: 'flex', alignItems: 'center', gap: 28, flexWrap: 'wrap',
+                }}>
+                  {/* Gauge */}
+                  <div style={{ textAlign: 'center', flexShrink: 0 }}>
+                    <LightGauge value={score} color={c} size={110} />
+                    <div style={{ fontSize: 11, fontWeight: 700, color: c, marginTop: 4 }}>Health Score</div>
+                  </div>
+                  {/* Info */}
+                  <div style={{ flex: 1, minWidth: 180 }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 6 }}>
+                      <span style={{ fontWeight: 800, fontSize: 18, color: '#1e293b' }}>{site.nome}</span>
+                      <span style={{ fontSize: 11, background: sist === 'axhub' ? '#eff6ff' : '#f0fdf4', color: sist === 'axhub' ? '#3b82f6' : '#10b981', borderRadius: 20, padding: '2px 10px', fontWeight: 700 }}>
+                        {sist === 'axhub' ? '🚦 AxHub' : '📡 AxCross'}
+                      </span>
+                      <span style={{ fontSize: 11, color: '#94a3b8' }}>📍 {site.estado}</span>
+                    </div>
+                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(120px, 1fr))', gap: 10, marginTop: 8 }}>
+                      {sist === 'axhub' ? (
+                        <>
+                          <div style={{ background: '#f8fafc', borderRadius: 10, padding: '10px 14px', textAlign: 'center' }}>
+                            <div style={{ fontSize: 18, fontWeight: 800, color: '#1e293b' }}>{site.equipamentos?.total || 0}</div>
+                            <div style={{ fontSize: 11, color: '#94a3b8' }}>Equipamentos</div>
+                          </div>
+                          <div style={{ background: '#f8fafc', borderRadius: 10, padding: '10px 14px', textAlign: 'center' }}>
+                            <div style={{ fontSize: 18, fontWeight: 800, color: '#3b82f6' }}>{site.bi?.length || 0}</div>
+                            <div style={{ fontSize: 11, color: '#94a3b8' }}>BI Reports</div>
+                          </div>
+                          {site.ocr != null && (
+                            <div style={{ background: '#f8fafc', borderRadius: 10, padding: '10px 14px', textAlign: 'center' }}>
+                              <div style={{ fontSize: 18, fontWeight: 800, color: site.ocr > 80 ? '#22c55e' : '#f59e0b' }}>{site.ocr}%</div>
+                              <div style={{ fontSize: 11, color: '#94a3b8' }}>OCR</div>
+                            </div>
+                          )}
+                        </>
+                      ) : (
+                        <>
+                          <div style={{ background: '#f8fafc', borderRadius: 10, padding: '10px 14px', textAlign: 'center' }}>
+                            <div style={{ fontSize: 18, fontWeight: 800, color: '#1e293b' }}>{site.equipamentos || 0}</div>
+                            <div style={{ fontSize: 11, color: '#94a3b8' }}>Equipamentos</div>
+                          </div>
+                          <div style={{ background: '#f8fafc', borderRadius: 10, padding: '10px 14px', textAlign: 'center' }}>
+                            <div style={{ fontSize: 18, fontWeight: 800, color: '#10b981' }}>{site.faixas || 0}</div>
+                            <div style={{ fontSize: 11, color: '#94a3b8' }}>Faixas</div>
+                          </div>
+                          <div style={{ background: '#f8fafc', borderRadius: 10, padding: '10px 14px', textAlign: 'center' }}>
+                            <div style={{ fontSize: 18, fontWeight: 800, color: '#6366f1' }}>{(site.passagensDia || 0).toLocaleString('pt-BR')}</div>
+                            <div style={{ fontSize: 11, color: '#94a3b8' }}>Pass/dia</div>
+                          </div>
+                        </>
+                      )}
+                      {audit && (
+                        <div style={{ background: audit.compliance === 100 ? '#f0fdf4' : audit.compliance < 50 ? '#fef2f2' : '#fffbeb', borderRadius: 10, padding: '10px 14px', textAlign: 'center' }}>
+                          <div style={{ fontSize: 18, fontWeight: 800, color: audit.compliance === 100 ? '#22c55e' : audit.compliance < 50 ? '#ef4444' : '#f59e0b' }}>{audit.compliance}%</div>
+                          <div style={{ fontSize: 11, color: '#94a3b8' }}>Conformidade</div>
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                  {/* Ação */}
+                  <button
+                    onClick={() => { setSelectedSite(overviewSite); setSubTab('details'); }}
+                    style={{ padding: '10px 20px', borderRadius: 10, border: 'none', background: c, color: '#fff', fontWeight: 700, fontSize: 13, cursor: 'pointer', flexShrink: 0 }}
+                  >
+                    🔍 Ver Detalhes
+                  </button>
+                </div>
+              );
+            })()
+          : (
+            <div style={{ marginTop: 12, padding: '16px', background: '#f8fafc', borderRadius: 12, textAlign: 'center', color: '#94a3b8', fontSize: 13 }}>
+              ☝️ Selecione um site acima para ver seu health score e detalhes
+            </div>
+          );
+
+        return (
+          <div>
+            <QuickSelect
+              options={overviewOptions}
+              value={overviewSite}
+              onChange={setOverviewSite}
+              label="Site"
+              color="#6366f1"
+              width={340}
+              showSearch
+            />
+            {sel}
+          </div>
+        );
+      })()}
+
+      {/* Sub-tab: Detalhes por site — QuickSelect + detalhe inline */}
+      {subTab === 'details' && (() => {
+        const avgH = Math.round(healthScores.reduce((a, h) => a + h.score, 0) / (healthScores.length || 1));
+        const detailOptions = [
+          {
+            id: '__all__',
+            label: 'Todos os Sites',
+            desc: `${healthScores.length} sites · média ${avgH}% · ${criticos} críticos`,
+            badge: `${avgH}%`,
+          },
+          ...healthScores.map(({ site, score }) => {
+            const sist = site._sistema || (site.faixas != null ? 'axcross' : 'axhub');
+            const statsText = sist === 'axhub'
+              ? `${site.equipamentos?.total || 0} equip · ${site.bi?.length || 0} BI`
+              : `${site.equipamentos || 0} equip · ${(site.passagensDia || 0).toLocaleString('pt-BR')} p/d`;
+            return { id: site.id, label: site.nome, desc: `${site.estado} · ${statsText}`, badge: `${score}%` };
+          }),
+        ];
+
+        const detailValue = selectedSite || '__all__';
+        const handleDetailChange = (v) => setSelectedSite(v === '__all__' ? null : v);
+
+        const visibleData = selectedSite
+          ? siteData.filter(d => d.site.id === selectedSite)
+          : siteData;
+
+        return (
+          <div>
+            <QuickSelect
+              options={detailOptions}
+              value={detailValue}
+              onChange={handleDetailChange}
+              label="Site"
+              color="#6366f1"
+              width={340}
+              showSearch
+            />
+            <div className="hc-details" style={{ marginTop: 16 }}>
+              {visibleData.map(({ site, score, sist, audit, anomalies: siteAnom, corrections }) => (
+                <div key={site.id} className={`hc-site-card ${score >= 80 ? 'hc-good' : score >= 50 ? 'hc-warn' : 'hc-bad'}`}>
+                  <div className="hc-site-header">
+                    <div className="hc-site-left">
+                      <span className="hc-site-badge">{sist === 'axhub' ? '🔵' : '🟠'}</span>
+                      <span className="hc-site-name">{site.nome}</span>
+                      <span className="hc-site-estado">{site.estado}</span>
+                    </div>
+                    <div className="hc-site-right">
+                      <LightGauge value={score} color={score >= 80 ? '#22c55e' : score >= 60 ? '#f59e0b' : '#ef4444'} size={56} />
+                      {audit && (
+                        <span className={`hc-compliance-badge ${audit.compliance === 100 ? 'badge-conforme' : audit.compliance < 50 ? 'badge-critico' : 'badge-divergente'}`}>
+                          {audit.compliance}% conforme
+                        </span>
+                      )}
+                    </div>
+                  </div>
+
+                  {audit && audit.compliance < 100 && (
+                    <div className="hc-section">
+                      <div className="hc-section-title">🔍 Divergências de Conformidade</div>
+                      <div className="hc-criteria-list">
+                        {audit.results.filter(r => !r.conforme).map(r => (
+                          <div key={r.id} className="hc-criteria-item">
+                            <span className="hc-crit-icon">❌</span>
+                            <span className="hc-crit-label">{r.label}</span>
+                            <span className="hc-crit-value">{r.valorAtual}</span>
+                            <span className="hc-crit-bench">Meta: {r.benchmark}</span>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+
+                  {siteAnom.length > 0 && (
+                    <div className="hc-section">
+                      <div className="hc-section-title">⚡ Alertas ({siteAnom.length})</div>
+                      <div className="hc-anomaly-list">
+                        {siteAnom.map((a, i) => (
+                          <div key={i} className={`hc-anomaly-item sev-${a.severity}`}>
+                            <span className="hc-anom-sev">{a.severity === 'high' ? '🔴' : a.severity === 'medium' ? '🟡' : '🔵'}</span>
+                            <span className="hc-anom-msg">{a.msg}</span>
+                            <span className="hc-anom-action">{a.acao}</span>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+
+                  {corrections.length > 0 && (
+                    <div className="hc-section">
+                      <div className="hc-section-title">🛠️ Ações de Correção ({corrections.length})</div>
+                      <div className="hc-corrections-list">
+                        {corrections.map((c, i) => (
+                          <div key={i} className="hc-correction-item">
+                            <span className={`hc-corr-sev sev-${c.severidade}`}>{c.severidade === 'alta' ? '🔴' : c.severidade === 'media' ? '🟡' : '🟢'}</span>
+                            <div className="hc-corr-content">
+                              <span className="hc-corr-action">{c.acao}</span>
+                              <span className="hc-corr-meta">{c.responsavel} • {c.prazo}</span>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+
+                  {audit?.compliance === 100 && siteAnom.length === 0 && (
+                    <div className="hc-section hc-all-good">
+                      <span>✅ Site em plena conformidade — nenhuma ação necessária</span>
+                    </div>
                   )}
                 </div>
-              </div>
-
-              {/* Audit criteria inline */}
-              {audit && audit.compliance < 100 && (
-                <div className="hc-section">
-                  <div className="hc-section-title">🔍 Divergências de Conformidade</div>
-                  <div className="hc-criteria-list">
-                    {audit.results.filter(r => !r.conforme).map(r => (
-                      <div key={r.id} className="hc-criteria-item">
-                        <span className="hc-crit-icon">❌</span>
-                        <span className="hc-crit-label">{r.label}</span>
-                        <span className="hc-crit-value">{r.valorAtual}</span>
-                        <span className="hc-crit-bench">Meta: {r.benchmark}</span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              )}
-
-              {/* Anomalies for this site */}
-              {siteAnom.length > 0 && (
-                <div className="hc-section">
-                  <div className="hc-section-title">⚡ Alertas ({siteAnom.length})</div>
-                  <div className="hc-anomaly-list">
-                    {siteAnom.map((a, i) => (
-                      <div key={i} className={`hc-anomaly-item sev-${a.severity}`}>
-                        <span className="hc-anom-sev">{a.severity === 'high' ? '🔴' : a.severity === 'medium' ? '🟡' : '🔵'}</span>
-                        <span className="hc-anom-msg">{a.msg}</span>
-                        <span className="hc-anom-action">{a.acao}</span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              )}
-
-              {/* Corrections for this site */}
-              {corrections.length > 0 && (
-                <div className="hc-section">
-                  <div className="hc-section-title">🛠️ Ações de Correção ({corrections.length})</div>
-                  <div className="hc-corrections-list">
-                    {corrections.map((c, i) => (
-                      <div key={i} className="hc-correction-item">
-                        <span className={`hc-corr-sev sev-${c.severidade}`}>{c.severidade === 'alta' ? '🔴' : c.severidade === 'media' ? '🟡' : '🟢'}</span>
-                        <div className="hc-corr-content">
-                          <span className="hc-corr-action">{c.acao}</span>
-                          <span className="hc-corr-meta">{c.responsavel} • {c.prazo}</span>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              )}
-
-              {/* All good */}
-              {audit?.compliance === 100 && siteAnom.length === 0 && (
-                <div className="hc-section hc-all-good">
-                  <span>✅ Site em plena conformidade — nenhuma ação necessária</span>
-                </div>
-              )}
-            </div>
-          ))}
-          {selectedSite && (
-            <button className="hc-back-btn" onClick={() => setSelectedSite(null)}>
-              ← Ver todos os sites
-            </button>
-          )}
-        </div>
-      )}
-
-      {/* Sub-tab: Plano de Ações consolidado */}
-      {subTab === 'actions' && (
-        <div className="hc-actions">
-          <div className="hc-actions-header">
-            <h4>🛠️ Plano de Correção Consolidado — {correctionPlan.length} ações</h4>
-            <div className="hc-actions-stats">
-              <span className="hc-act-stat alta">{correctionPlan.filter(c => c.severidade === 'alta').length} urgentes</span>
-              <span className="hc-act-stat media">{correctionPlan.filter(c => c.severidade === 'media').length} médias</span>
-              <span className="hc-act-stat baixa">{correctionPlan.filter(c => c.severidade === 'baixa').length} baixas</span>
+              ))}
             </div>
           </div>
-          <div className="hc-actions-list">
-            {correctionPlan.map((c, i) => (
-              <div key={i} className={`hc-action-card sev-${c.severidade}`}>
-                <div className="hc-action-header">
-                  <span className={`hc-action-sev sev-${c.severidade}`}>
-                    {c.severidade === 'alta' ? '🔴 URGENTE' : c.severidade === 'media' ? '🟡 MÉDIA' : '🟢 BAIXA'}
-                  </span>
-                  <span className="hc-action-site">{c.site} ({c.estado})</span>
-                  <span className="hc-action-sistema">{c.sistema === 'axhub' ? '🔵' : '🟠'}</span>
-                </div>
-                <div className="hc-action-body">
-                  <div className="hc-action-name">{c.acao}</div>
-                  <div className="hc-action-details">
-                    <span>👤 {c.responsavel}</span>
-                    <span>⏱️ {c.prazo}</span>
-                    <span>📋 {c.criterio}: {c.valorAtual} → {c.benchmark}</span>
-                  </div>
-                  <div className="hc-action-procedure">{c.procedimento}</div>
+        );
+      })()}
+
+      {/* Sub-tab: Plano de Ações — QuickSelect + lista filtrada */}
+      {subTab === 'actions' && (() => {
+        // Sites únicos que têm ações
+        const sitesComAcoes = [...new Map(correctionPlan.map(c => [c.site, c])).values()];
+        const actionsOptions = [
+          {
+            id: '__all__',
+            label: 'Todos os Sites',
+            desc: `${correctionPlan.length} ações · ${correctionPlan.filter(c => c.severidade === 'alta').length} urgentes · ${correctionPlan.filter(c => c.severidade === 'media').length} médias`,
+            badge: `${correctionPlan.length}`,
+          },
+          ...sitesComAcoes.map(c => {
+            const total = correctionPlan.filter(a => a.site === c.site).length;
+            const urgentes = correctionPlan.filter(a => a.site === c.site && a.severidade === 'alta').length;
+            return {
+              id: c.site,
+              label: c.site,
+              desc: `${c.estado} · ${c.sistema === 'axhub' ? '🔵 AxHub' : '🟠 AxCross'} · ${total} ação${total !== 1 ? 'ões' : ''}${urgentes ? ` · ${urgentes} urgente${urgentes !== 1 ? 's' : ''}` : ''}`,
+              badge: `${total}`,
+            };
+          }),
+        ];
+
+        const visibleActions = actionsSite === '__all__'
+          ? correctionPlan
+          : correctionPlan.filter(c => c.site === actionsSite);
+
+        const alta = visibleActions.filter(c => c.severidade === 'alta').length;
+        const media = visibleActions.filter(c => c.severidade === 'media').length;
+        const baixa = visibleActions.filter(c => c.severidade === 'baixa').length;
+
+        return (
+          <div>
+            <QuickSelect
+              options={actionsOptions}
+              value={actionsSite}
+              onChange={setActionsSite}
+              label="Site"
+              color="#6366f1"
+              width={340}
+              showSearch
+            />
+            <div className="hc-actions" style={{ marginTop: 16 }}>
+              <div className="hc-actions-header">
+                <h4>🛠️ {actionsSite === '__all__' ? 'Plano de Correção Consolidado' : `Ações — ${actionsSite}`} — {visibleActions.length} ações</h4>
+                <div className="hc-actions-stats">
+                  <span className="hc-act-stat alta">{alta} urgentes</span>
+                  <span className="hc-act-stat media">{media} médias</span>
+                  <span className="hc-act-stat baixa">{baixa} baixas</span>
                 </div>
               </div>
-            ))}
+              <div className="hc-actions-list">
+                {visibleActions.map((c, i) => (
+                  <div key={i} className={`hc-action-card sev-${c.severidade}`}>
+                    <div className="hc-action-header">
+                      <span className={`hc-action-sev sev-${c.severidade}`}>
+                        {c.severidade === 'alta' ? '🔴 URGENTE' : c.severidade === 'media' ? '🟡 MÉDIA' : '🟢 BAIXA'}
+                      </span>
+                      <span className="hc-action-site">{c.site} ({c.estado})</span>
+                      <span className="hc-action-sistema">{c.sistema === 'axhub' ? '🔵' : '🟠'}</span>
+                    </div>
+                    <div className="hc-action-body">
+                      <div className="hc-action-name">{c.acao}</div>
+                      <div className="hc-action-details">
+                        <span>👤 {c.responsavel}</span>
+                        <span>⏱️ {c.prazo}</span>
+                        <span>📋 {c.criterio}: {c.valorAtual} → {c.benchmark}</span>
+                      </div>
+                      <div className="hc-action-procedure">{c.procedimento}</div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
-        </div>
-      )}
+        );
+      })()}
     </div>
   );
 }
@@ -2217,6 +2641,8 @@ export default function IntelligenceDashboard() {
     anomalies
   ), [healthScores, anomalies]);
 
+  const correctionPlan = useMemo(() => generateCorrectionPlan(activeSites), [activeSites]);
+
   const VIEWS = [
     { id: 'overview', label: '🎯 Overview', icon: '🎯' },
     { id: 'health', label: '💊 Saúde & Conformidade', icon: '💊' },
@@ -2237,11 +2663,26 @@ export default function IntelligenceDashboard() {
           <p>Observabilidade operacional avançada — Auditoria, Conformidade, Health Score, SaaS Metrics, Benchmark de Mercado</p>
         </div>
         <div className="intel-header-controls">
-          <select value={sistema} onChange={e => setSistema(e.target.value)} className="intel-select">
-            <option value="todos">Todos (AxHub + AxCross)</option>
-            <option value="axhub">AxHub (Fiscalização)</option>
-            <option value="axcross">AxCross (Cruzamento)</option>
-          </select>
+          <div style={{ display: 'flex', borderRadius: 8, overflow: 'hidden', border: '1.5px solid #e5e7eb' }}>
+            {[
+              { v: 'todos',   label: 'Todos' },
+              { v: 'axhub',   label: '🚦 AxHub' },
+              { v: 'axcross', label: '📡 AxCross' },
+            ].map(op => (
+              <button
+                key={op.v}
+                onClick={() => setSistema(op.v)}
+                style={{
+                  padding: '5px 10px', border: 'none', cursor: 'pointer', fontSize: 12, fontWeight: 600,
+                  background: sistema === op.v ? '#6366f1' : '#f9fafb',
+                  color: sistema === op.v ? '#fff' : '#6b7280',
+                  transition: 'all 0.15s',
+                }}
+              >
+                {op.label}
+              </button>
+            ))}
+          </div>
         </div>
       </div>
 
@@ -2312,17 +2753,15 @@ export default function IntelligenceDashboard() {
       {/* Content */}
       <div className="intel-content">
         {view === 'overview' && (
-          <div className="intel-overview-grid">
-            <div className="intel-section">
-              <AnomalyPanel anomalies={anomalies.slice(0, 5)} />
-            </div>
-            <div className="intel-section">
-              <CapacityPanel capacity={capacity} sistema={sistema} />
-            </div>
-            <div className="intel-section full-width">
-              <HeatmapChart data={heatmapData} />
-            </div>
-          </div>
+          <OverviewDashboard
+            healthScores={healthScores}
+            avgHealth={avgHealth}
+            anomalies={anomalies}
+            activeSites={activeSites}
+            sites={sites}
+            saasMetrics={saasMetrics}
+            correctionPlan={correctionPlan}
+          />
         )}
 
         {view === 'health' && (

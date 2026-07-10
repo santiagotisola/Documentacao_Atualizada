@@ -1,12 +1,12 @@
 ---
 sidebar_position: 2
 title: Triagem
-description: Revisão e validação de infrações
+description: Revisão e Validação de Infrações
 ---
 
 # Triagem — Infrações
 
-Permite revisar, validar ou descartar infrações pendentes antes da exportação para os órgãos autuadores.
+Permite revisar, validar ou descartar Infrações pendentes antes da exportação para os órgãos autuadores.
 
 ## Como acessar
 
@@ -22,14 +22,14 @@ Permite revisar, validar ou descartar infrações pendentes antes da exportaçã
 
 | Campo | Descrição |
 |-------|-----------|
-| **Número Auto** | Identificador único da infração |
-| **Placa Veículo** | Placa do veículo infrator |
-| **Data/Hora** | Momento da infração |
-| **Imagem** | Foto capturada pelo equipamento |
+| **Número Auto** | Identificador único da Infração |
+| **Placa Veículo | Placa do Veículo infrator |
+| **Data/Hora** | Momento da Infração |
+| **Imagem** | Foto capturada pelo Equipamento |
 | **Velocidade Medida** | Velocidade capturada |
 | **Velocidade Considerada** | Velocidade após tolerância |
 | **Velocidade Regulamentada** | Velocidade permitida no local |
-| **Tipo Infração** | Tipo de infração registrada |
+| **Tipo Infração | Tipo de Infração registrada |
 | **Status Triagem** | `Pendente` · `Validada` · `Descartada` |
 | **Motivo Descarte** | Motivo informado ao descartar |
 | **Operador** | Usuário que realizou a triagem |
@@ -40,9 +40,9 @@ Permite revisar, validar ou descartar infrações pendentes antes da exportaçã
 
 | Filtro | Descrição |
 |--------|-----------|
-| **Período** | Data/Hora da infração |
+| **Período** | Data/Hora da Infração |
 | **Status Triagem** | Estado atual da triagem |
-| **Tipo Infração** | Tipo de infração |
+| **Tipo Infração | Tipo de Infração |
 | **Operação** | Operação vinculada |
 
 ## Resultado da consulta
@@ -53,9 +53,9 @@ Permite revisar, validar ou descartar infrações pendentes antes da exportaçã
 
 | Ação | Descrição |
 |------|-----------|
-| **Validar** | Confirma a infração para exportação |
+| **Validar** | Confirma a Infração para exportação |
 | **Descartar** | Rejeita com motivo obrigatório |
-| **Reabrir** | Reabre infração descartada para nova análise |
+| **Reabrir** | Reabre Infração descartada para nova Análise |
 
 ## Infrações descartadas
 
@@ -79,7 +79,7 @@ Permite revisar, validar ou descartar infrações pendentes antes da exportaçã
 
 | Tabela | Descrição |
 |--------|-----------|
-| `TBInfracoes` | Registro principal da infração |
+| `TBInfracoes` | Registro principal da Infração |
 | `TBTriagens` | Registro da triagem realizada |
 | `TBMotivosDescarte` | Motivos disponíveis para descarte |
 | `TBUsuarios` | Operador que realizou a triagem |
@@ -88,7 +88,7 @@ Permite revisar, validar ou descartar infrações pendentes antes da exportaçã
 
 | Termo | Definicao |
 |-------|-----------|
-| [Infracao de Transito](../glossario/infracao) | Ver definicao no glossario |
+| Use Infração (com acento) de Transito](../glossario/infracao) | Ver definicao no glossario |
 | [Lote de Exportacao](../glossario/lote-exportacao) | Ver definicao no glossario |
 | [Triagem](../glossario/triagem) | Ver definicao no glossario |
 
@@ -101,8 +101,8 @@ Permite revisar, validar ou descartar infrações pendentes antes da exportaçã
 | Proxima etapa | [Excecoes](./excecoes) | Infracoes fora dos criterios padrao |
 | Proxima etapa | [Auditoria](./auditoria) | Revisao das infracoes aprovadas |
 | Configuracao | [Motivos de Descarte](../administracao/motivos-descartes) | Motivos disponiveis |
-| Configuracao | [Config. Enquadramentos](../administracao/configuracoes-enquadramento) | Tipos de enquadramento |
+| Configuracao | Use Configuração Enquadramentos](../administracao/configuracoes-enquadramento) | Tipos de enquadramento |
 | Configuracao | [Enquadramentos](../administracao/enquadramentos) | Lista de enquadramentos |
 | Glossario | [Enquadramento](../glossario/enquadramento) | Definicao tecnica CTB |
-| Glossario | [Infracao](../glossario/infracao) | O que constitui uma infracao |
+| Glossario | [Infracao](../glossario/Use Infração (com acento)) | O que constitui uma Use Infração (com acento) |
 | Glossario | [Triagem](../glossario/triagem) | Definicao do processo |

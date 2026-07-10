@@ -116,6 +116,12 @@ const REGRAS = [
   { id: 'OCR_VEHICLE_TYPE', secao: 'ocr', titulo: 'OCR Vehicle Type', menu: 'Equipamento > OCR', severidade: 'alto',
     extrair: (raw) => raw?.ocr?.ocr?.vehicleType,
     esperado: (pad) => pad.ocr.ocr.vehicleType },
+  { id: 'OCR_MAX_LOW_PROB', secao: 'ocr', titulo: 'OCR Max Low Prob Chars', menu: 'Equipamento > OCR', severidade: 'medio',
+    extrair: (raw) => raw?.ocr?.ocr?.maxLowProbChars,
+    esperado: (pad) => pad.ocr.ocr.maxLowProbChars },
+  { id: 'OCR_USE_CLASSIFIER', secao: 'ocr', titulo: 'OCR Usa Resultado do Classificador', menu: 'Equipamento > OCR', severidade: 'medio',
+    extrair: (raw) => raw?.ocr?.ocr?.useClassifierResult,
+    esperado: (pad) => pad.ocr.ocr.useClassifierResult },
 
   // ─── CLASSIFICADOR ───
   { id: 'CLASS_ENABLED', secao: 'classifier', titulo: 'Classificador Habilitado', menu: 'Equipamento > Classificador', severidade: 'critico',
@@ -127,6 +133,9 @@ const REGRAS = [
   { id: 'CLASS_THREADS', secao: 'classifier', titulo: 'Classificador Threads', menu: 'Equipamento > Classificador', severidade: 'alto',
     extrair: (raw) => raw?.classifier?.classifier?.processingThreads,
     esperado: (pad) => pad.classifier.classifier.processingThreads },
+  { id: 'CLASS_MIN_PROB', secao: 'classifier', titulo: 'Classificador Probabilidade Mínima', menu: 'Equipamento > Classificador', severidade: 'medio',
+    extrair: (raw) => raw?.classifier?.classifier?.minProbability,
+    esperado: (pad) => pad.classifier.classifier.minProbability },
 
   // ─── MISC ───
   { id: 'SNAPSHOT_CROP', secao: 'misc', titulo: 'Snapshot Crop Desabilitado', menu: 'Equipamento > Diversos', severidade: 'medio',
@@ -161,6 +170,12 @@ const REGRAS = [
   { id: 'FTP_OFF', secao: 'ftp', titulo: 'FTP Desabilitado', menu: 'Equipamento > Servidores > FTP', severidade: 'baixo',
     extrair: (raw) => raw?.ftp?.ftp?.enable,
     esperado: (pad) => pad.ftp.ftp.enable },
+  { id: 'REBOOT_SCHED', secao: 'reboot', titulo: 'Reboot Agendado Desabilitado', menu: 'Sistema > Manutenção > Reboot Automático', severidade: 'baixo',
+    extrair: (raw) => raw?.reboot?.scheduled?.enabled,
+    esperado: (pad) => pad.reboot.scheduled.enabled },
+  { id: 'REBOOT_PERIODIC', secao: 'reboot', titulo: 'Reboot Periódico Desabilitado', menu: 'Sistema > Manutenção > Reboot Automático', severidade: 'baixo',
+    extrair: (raw) => raw?.reboot?.periodic?.enabled,
+    esperado: (pad) => pad.reboot.periodic.enabled },
 ];
 
 // ═══════════════════════════════════════════════════════════════

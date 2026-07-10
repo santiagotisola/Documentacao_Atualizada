@@ -1,5 +1,8 @@
 import { useEffect, useState } from "react";
+import { useSearchParams } from "react-router-dom";
 import { api, getConfiguredUrl, setApiUrl, getApiToken, setApiToken } from "../services/api";
+import AxHubDashboard from "./AxHubDashboard.jsx";
+import KnowledgeBase from "./KnowledgeBase.jsx";
 
 const GRUPOS = [
   {
@@ -65,6 +68,14 @@ const GRUPOS = [
 ];
 
 export default function Configuracoes() {
+  const [searchParams] = useSearchParams();
+  const [abaConfig, setAbaConfig] = useState(searchParams.get("tab") || 'vars');
+
+  // Sincroniza tab quando URL muda (ex: redirect de /axhub-dashboard ou /kb)
+  useEffect(() => {
+    const tab = searchParams.get("tab");
+    if (tab) setAbaConfig(tab);
+  }, [searchParams]);
   const [config, setConfig] = useState({});
   const [conexoes, setConexoes] = useState({});
   const [apiUrl, setApiUrlLocal] = useState(getConfiguredUrl());
@@ -131,19 +142,46 @@ export default function Configuracoes() {
     }
   }
 
-  if (loading) return <p style={{ color: "var(--text-muted)" }}>Carregando configuração...</p>;
+  if (loading) return <p style={{ color: "var(--text-muted)" }}>Carregando Configuração</p>;
 
   return (
     <div style={{ maxWidth: 720 }}>
       <h2 className="page-title">⚙️ Configurações</h2>
 
-      {feedback && (
-        <div className={`alert alert-${feedback.tipo}`}>{feedback.msg}</div>
-      )}
+      {/* Barra de tabs */}
+      <div style={{ display: 'flex', gap: '0', marginBottom: '1.5rem', borderBottom: '2px solid var(--border)', overflowX: 'auto' }}>
+        {[
+          { id: 'vars',           label: '⚙️ Variáveis & Conexões' },
+          { id: 'axhub-sql',      label: '🗄️ AxHub SQL' },
+          { id: 'axton-sql',      label: '🗄️ AxTon SQL' },
+          { id: 'axcross-sql',    label: '🗄️ AxCross SQL' },
+          { id: 'axhub-dashboard',label: '📊 AxHub Dashboard' },
+          { id: 'kb',             label: '📚 Knowledge Base' },
+        ].map(t => (
+          <button key={t.id} onClick={() => setAbaConfig(t.id)} style={{
+            padding: '8px 16px', border: 'none', cursor: 'pointer', whiteSpace: 'nowrap',
+            background: 'transparent', fontWeight: abaConfig === t.id ? 700 : 400,
+            color: abaConfig === t.id ? 'var(--accent)' : 'var(--text-muted)',
+            borderBottom: abaConfig === t.id ? '2px solid var(--accent)' : '2px solid transparent',
+            marginBottom: '-2px', fontSize: '0.875rem',
+          }}>{t.label}</button>
+        ))}
+      </div>
+
+      {abaConfig === 'axhub-sql'       && <SqlMonitorTab produto="AxHub"   apiPath="axhub"   campos={['AXHUB_DB_HOST','AXHUB_DB_PORT','AXHUB_DB_NAME','AXHUB_DB_USER','AXHUB_DB_PASS']} />}
+      {abaConfig === 'axton-sql'       && <SqlMonitorTab produto="AxTon"   apiPath="axton"   campos={['AXTON_DB_HOST','AXTON_DB_PORT','AXTON_DB_NAME','AXTON_DB_USER','AXTON_DB_PASS']} />}
+      {abaConfig === 'axcross-sql'     && <SqlMonitorTab produto="AxCross" apiPath="axcross" campos={['AXCROSS_DB_HOST','AXCROSS_DB_PORT','AXCROSS_DB_NAME','AXCROSS_DB_USER','AXCROSS_DB_PASS']} />}
+      {abaConfig === 'axhub-dashboard' && <AxHubDashboard />}
+      {abaConfig === 'kb'              && <KnowledgeBase />}
+
+      {abaConfig === 'vars' && <>
+        {feedback && (
+          <div className={`alert alert-${feedback.tipo}`}>{feedback.msg}</div>
+        )}
 
       {/* URL do Painel → API */}
       <div className="card config-section">
-        <h3 className="config-section-title">Conexão do Painel</h3>
+        <h3 className="config-section-title">Conexão do Use Dashboard</h3>
         <p className="config-hint">URL base e token de autenticação da AxionIA API (salvos no navegador)</p>
         <div style={{ display: "flex", gap: "0.5rem", alignItems: "flex-end" }}>
           <div className="form-group" style={{ flex: 1, marginBottom: 0 }}>
@@ -235,6 +273,7 @@ export default function Configuracoes() {
           ⚠️ Após salvar alterações de conexão (MongoDB, SQL Server), reinicie a API para aplicar.
         </p>
       </form>
+      </>}
     </div>
   );
 }
@@ -247,6 +286,126 @@ function StatusBadge({ label, conectado, detalhe }) {
         <div style={{ fontWeight: 600, fontSize: "0.85rem" }}>{label}</div>
         <div style={{ color: "var(--text-muted)", fontSize: "0.75rem" }}>{detalhe || "—"}</div>
       </div>
+    </div>
+  );
+}
+
+/* ════════════════════════════════════════════════════════════
+   Monitor SQL genérico — reutilizado para AxHub, AxTon, AxCross
+   ════════════════════════════════════════════════════════════ */
+function SqlMonitorTab({ produto, apiPath, campos }) {
+  const [status, setStatus]   = useState(null);
+  const [resumo, setResumo]   = useState(null);
+  const [tabelas, setTabelas] = useState(null);
+  const [subtab, setSubtab]   = useState('resumo');
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    api.get(`/${apiPath}/status`)
+      .then(r => setStatus(r.data))
+      .catch(() => setStatus({ conectado: false, erro: 'API indisponível' }))
+      .finally(() => setLoading(false));
+  }, [apiPath]);
+
+  useEffect(() => {
+    if (status?.conectado) {
+      api.get(`/${apiPath}/resumo`).then(r => setResumo(r.data)).catch(() => {});
+    }
+  }, [status, apiPath]);
+
+  if (loading) return <p style={{ color: 'var(--text-muted)' }}>Verificando conexão SQL Server...</p>;
+
+  return (
+    <div style={{ maxWidth: 720 }}>
+      {/* Status card */}
+      <div className="card" style={{ marginBottom: '1rem' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+          <span style={{ width: 10, height: 10, borderRadius: '50%', flexShrink: 0,
+            background: status?.conectado ? 'var(--success)' : 'var(--danger)' }} />
+          <div>
+            <strong style={{ color: status?.conectado ? 'var(--success)' : 'var(--danger)' }}>
+              {status?.conectado ? '✓ Conectado' : '✗ Desconectado'}
+            </strong>
+            {status?.servidor && (
+              <span style={{ color: 'var(--text-muted)', marginLeft: '0.5rem', fontSize: '0.85rem' }}>
+                {status.servidor}/{status.banco}
+              </span>
+            )}
+            {status?.erro && (
+              <span style={{ color: 'var(--danger)', marginLeft: '0.5rem', fontSize: '0.85rem' }}>
+                — {status.erro}
+              </span>
+            )}
+          </div>
+        </div>
+      </div>
+
+      {!status?.conectado && (
+        <div className="card config-section">
+          <p style={{ color: 'var(--text-muted)', fontSize: '0.9rem', marginBottom: '0.75rem' }}>
+            Configure as variáveis em <strong>⚙️ Variáveis & Conexões</strong> e reinicie a API.
+          </p>
+          <pre style={{ background: 'var(--bg)', padding: '0.75rem', borderRadius: 6,
+            fontSize: '0.8rem', border: '1px solid var(--border)', lineHeight: 1.7 }}>
+            {campos.map(c => `${c}=valor`).join('\n')}
+          </pre>
+        </div>
+      )}
+
+      {status?.conectado && (
+        <>
+          <div style={{ display: 'flex', gap: '0.5rem', marginBottom: '1rem' }}>
+            {[['resumo', 'Resumo'], ['tabelas', 'Tabelas']].map(([id, label]) => (
+              <button key={id}
+                className={`btn ${subtab === id ? 'btn-primary' : ''}`}
+                onClick={() => {
+                  setSubtab(id);
+                  if (id === 'tabelas' && !tabelas)
+                    api.get(`/${apiPath}/tabelas`).then(r => setTabelas(r.data.tabelas)).catch(() => setTabelas([]));
+                }}
+                style={subtab !== id ? { background: 'var(--surface)', color: 'var(--text-muted)', border: '1px solid var(--border)' } : {}}>
+                {label}
+              </button>
+            ))}
+          </div>
+
+          {subtab === 'resumo' && resumo && (
+            <div className="cards-grid">
+              {Object.entries(resumo).map(([k, v]) => (
+                <div key={k} className="card" style={{ padding: '1.25rem', textAlign: 'center' }}>
+                  <div style={{ fontSize: '1.6rem', fontWeight: 700, color: 'var(--accent)' }}>
+                    {typeof v === 'number' ? Number(v).toLocaleString('pt-BR') : v}
+                  </div>
+                  <div style={{ color: 'var(--text-muted)', fontSize: '0.8rem', marginTop: '0.25rem', textTransform: 'capitalize' }}>
+                    {k}
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+          {subtab === 'resumo' && !resumo && <p style={{ color: 'var(--text-muted)' }}>Carregando dados...</p>}
+
+          {subtab === 'tabelas' && tabelas && (
+            <div className="card">
+              <p style={{ color: 'var(--text-muted)', marginBottom: '0.75rem', fontSize: '0.875rem' }}>
+                {tabelas.length} tabelas no banco {produto}
+              </p>
+              <table className="data-table">
+                <thead><tr><th>Tabela</th><th style={{ textAlign: 'right' }}>Registros</th></tr></thead>
+                <tbody>
+                  {tabelas.map(t => (
+                    <tr key={t.tabela}>
+                      <td style={{ fontFamily: 'monospace', fontSize: '0.85rem' }}>{t.tabela}</td>
+                      <td style={{ textAlign: 'right' }}>{Number(t.registros).toLocaleString('pt-BR')}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          )}
+          {subtab === 'tabelas' && !tabelas && <p style={{ color: 'var(--text-muted)' }}>Carregando tabelas...</p>}
+        </>
+      )}
     </div>
   );
 }

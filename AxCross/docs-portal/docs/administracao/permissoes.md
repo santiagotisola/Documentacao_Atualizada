@@ -31,5 +31,5 @@ No **menu lateral**, expanda **Administração** e clique em **Permissões de ac
 4. Clique em **Salvar**
 
 :::caution Permissão necessária
-Apenas administradores podem alterar as configurações de permissões.
+Apenas administradores podem alterar as Configurações de permissões.
 :::

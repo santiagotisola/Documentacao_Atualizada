@@ -1,0 +1,121 @@
+{
+  "id": "scenario-001",
+  "name": "Login e Consulta de Multas - AxHub Goiânia",
+  "description": "Cenário gravado: Login no sistema, navegação até multas e consulta de registros",
+  "system": "AxHub",
+  "environment": "Produção - Goiânia",
+  "url": "https://goiania.axhub.axion.ws",
+  "createdAt": "2026-06-24T13:10:00.000Z",
+  "createdBy": "usuario@axiontecnologia.com.br",
+  "category": "AxHub",
+  "reusable": true,
+  "steps": [
+    {
+      "type": "navigate",
+      "action": "navigate",
+      "url": "https://goiania.axhub.axion.ws/login",
+      "description": "Navegar para página de login",
+      "waitFor": "input[name='username']",
+      "timeout": 5000
+    },
+    {
+      "type": "fill",
+      "action": "fill",
+      "selector": "input[name='username']",
+      "value": "admin@goiania.go.gov.br",
+      "description": "Preencher campo de usuário"
+    },
+    {
+      "type": "fill",
+      "action": "fill",
+      "selector": "input[name='password']",
+      "value": "******",
+      "description": "Preencher campo de senha",
+      "sensitive": true
+    },
+    {
+      "type": "click",
+      "action": "click",
+      "selector": "button[type='submit']",
+      "description": "Clicar no botão Entrar",
+      "waitForNavigation": true
+    },
+    {
+      "type": "wait",
+      "action": "wait",
+      "selector": ".dashboard-container",
+      "description": "Aguardar carregamento do dashboard",
+      "timeout": 3000
+    },
+    {
+      "type": "click",
+      "action": "click",
+      "selector": "a[href='/multas']",
+      "description": "Navegar para o menu Multas"
+    },
+    {
+      "type": "wait",
+      "action": "wait",
+      "selector": ".multas-grid",
+      "description": "Aguardar carregamento da lista de multas",
+      "timeout": 3000
+    },
+    {
+      "type": "fill",
+      "action": "fill",
+      "selector": "input[name='search']",
+      "value": "ABC1234",
+      "description": "Buscar por placa de veículo"
+    },
+    {
+      "type": "click",
+      "action": "click",
+      "selector": "button.btn-search",
+      "description": "Clicar no botão de busca"
+    },
+    {
+      "type": "wait",
+      "action": "wait",
+      "selector": ".result-row",
+      "description": "Aguardar resultados da busca",
+      "timeout": 3000
+    },
+    {
+      "type": "screenshot",
+      "action": "screenshot",
+      "name": "resultado-busca-multas",
+      "description": "Capturar screenshot dos resultados"
+    },
+    {
+      "type": "validate",
+      "action": "validate",
+      "selector": ".result-count",
+      "expectedText": "1 resultado encontrado",
+      "description": "Validar que encontrou 1 resultado"
+    }
+  ],
+  "expectedDuration": 15000,
+  "validations": [
+    {
+      "type": "url",
+      "expected": "https://goiania.axhub.axion.ws/multas",
+      "description": "Validar que está na página de multas"
+    },
+    {
+      "type": "element",
+      "selector": ".result-row",
+      "shouldExist": true,
+      "description": "Validar que há resultados exibidos"
+    },
+    {
+      "type": "text",
+      "selector": ".result-placa",
+      "contains": "ABC1234",
+      "description": "Validar que a placa buscada está nos resultados"
+    }
+  ],
+  "tags": ["login", "consulta", "multas", "regressão"],
+  "executionCount": 0,
+  "lastExecutedAt": null,
+  "successRate": 0
+}

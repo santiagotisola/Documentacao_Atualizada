@@ -432,7 +432,7 @@ export default function Conformidade({ embedded = false, preloadData = null }) {
             {!carregando && lista.length === 0 && (
               <div style={{ padding: 32, textAlign: "center", color: "#aaa" }}>
                 <p style={{ fontSize: 36 }}>📜</p>
-                <p style={{ fontSize: 13 }}>Nenhum relatório gerado ainda.</p>
+                <p style={{ fontSize: 13 }}>Nenhum Relatório gerado ainda.</p>
                 <button
                   onClick={() => setAba("novo")}
                   style={{ marginTop: 8, padding: "7px 16px", background: "#2563eb", color: "#fff", border: "none", borderRadius: 6, fontSize: 12, cursor: "pointer" }}
@@ -489,7 +489,7 @@ export default function Conformidade({ embedded = false, preloadData = null }) {
             {!selecionado && !carregando && (
               <div style={{ padding: 40, textAlign: "center", color: "#ccc" }}>
                 <p style={{ fontSize: 40 }}>👈</p>
-                <p style={{ fontSize: 14 }}>Selecione um relatório para ver os detalhes.</p>
+                <p style={{ fontSize: 14 }}>Selecione um Relatório para ver os detalhes.</p>
               </div>
             )}
             {carregando && <p style={{ padding: 20, color: "#888" }}>Carregando...</p>}
@@ -1038,7 +1038,7 @@ function ListaRequisitos({ itens, produto }) {
                 {/* Justificativa da IA */}
                 {item.justificativa && !eJuridico && (
                   <div style={{ marginBottom: 10, padding: "8px 12px", background: "#fff", border: "1px solid #e2e8f0", borderRadius: 6 }}>
-                    <div style={{ fontSize: 10, fontWeight: 700, color: "#888", marginBottom: 3 }}>🤖 ANÁLISE DA IA</div>
+                    <div style={{ fontSize: 10, fontWeight: 700, color: "#888", marginBottom: 3 }}>🤖 Análise DA IA</div>
                     <p style={{ margin: 0, fontSize: 12, color: "#555", fontStyle: "italic", lineHeight: 1.5 }}>{item.justificativa}</p>
                   </div>
                 )}

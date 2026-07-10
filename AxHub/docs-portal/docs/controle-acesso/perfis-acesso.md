@@ -30,5 +30,5 @@ Permite criar e gerenciar perfis que agrupam permissões de acesso ao sistema.
 
 | Tipo | Pagina | Descricao |
 |------|--------|-----------|
-| Relacionado | [Usuarios](./usuarios) | Usuarios com este perfil |
+| Relacionado | [Usuários](./usuarios) | Usuários com este perfil |
 | Relacionado | [Permissoes](./permissoes) | Permissoes do perfil |

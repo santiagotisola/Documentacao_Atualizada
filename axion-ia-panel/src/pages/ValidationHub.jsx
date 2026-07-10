@@ -313,7 +313,7 @@ const ValidationHub = () => {
         {/* ========== HEADER ========== */}
         <div className="validation-header">
           <h1>🔬 Validation Hub</h1>
-          <p>Central unificada de validação de sistemas AxHub e AxCross</p>
+          <p>Central unificada de Validação de sistemas AxHub e AxCross</p>
         </div>
 
         {/* ========== TAB SELECTOR ========== */}
@@ -442,7 +442,7 @@ const ValidationHub = () => {
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
                 disabled={isValidating}
-                placeholder="usuario"
+                placeholder="Usuário"
                 autoComplete="username"
               />
             </div>

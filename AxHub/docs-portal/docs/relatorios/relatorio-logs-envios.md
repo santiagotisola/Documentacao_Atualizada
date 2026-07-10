@@ -6,7 +6,7 @@ description: Relatório de logs de passagens enviadas para integração
 
 # Logs de Envios a Integração
 
-Exibe o log de passagens e infrações enviadas para sistemas de integração externos (DETRAN, órgãos autuadores, etc.). Permite rastrear envios com sucesso e identificar falhas de comunicação.
+Exibe o log de passagens e Infrações enviadas para sistemas de integração externos (DETRAN, órgãos autuadores, etc.). Permite rastrear envios com sucesso e identificar falhas de comunicação.
 
 ![Logs de Envios](../img/Relatorio%20-%20Relatorio%20de%20log%20de%20passagens%20enviadas%20a%20integração.png)
 
@@ -21,7 +21,7 @@ Exibe o log de passagens e infrações enviadas para sistemas de integração ex
 | **Período** | Faixa de datas do envio |
 | **Destino** | Sistema de destino da integração |
 | **Status** | Sucesso, Erro, Pendente |
-| **Tipo de Registro** | Passagem, Infração, Lote |
+| **Tipo de Registro** | Passagem, Infração Lote |
 
 ## Campos exibidos
 
@@ -52,6 +52,6 @@ Registros com status **Erro** podem ser reenviados manualmente. Verifique a disp
 
 | Tipo | Página | Descrição |
 |------|--------|-----------|
-| Relacionado | [Exportação](../infracoes/exportacao) | Lotes de infração exportados |
+| Relacionado | [Exportação](../infracoes/exportacao) | Lotes de Infração exportados |
 | Relacionado | [Webhooks](../administracao/webhooks) | Configuração de integrações |
 | Relacionado | [Lotes de Importação](./lote-importacao) | Dados recebidos |

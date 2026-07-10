@@ -1,15 +1,15 @@
 ﻿---
 sidebar_position: 13
 title: Tarjas
-description: Configuração de tarjas e templates para imagens de infrações
+description: Configuração de tarjas e templates para imagens de Infrações
 ---
 
 # Tarjas
 
-Permite configurar as tarjas aplicadas nas imagens de infrações. Existem dois tipos principais de tarjas no sistema:
+Permite configurar as tarjas aplicadas nas imagens de Infrações Existem dois tipos principais de tarjas no sistema:
 
 1. **Tarjas de Proteção de Dados:** Para anonimização (placas, rostos)
-2. **Tarjas de Informação:** Templates com dados da infração e equipamento
+2. **Tarjas de Informação:** Templates com dados da Infração e Equipamento
 
 ## Como acessar
 
@@ -26,7 +26,7 @@ Permite configurar as tarjas aplicadas nas imagens de infrações. Existem dois 
 | **Ativo** | Status do registro |
 
 :::note Sem screenshot
-Esta tela ainda não possui screenshot cadastrada. Será adicionada em breve.
+está tela ainda não possui screenshot cadastrada. Será adicionada em breve.
 :::
 
 ## Templates de Tarja
@@ -35,15 +35,15 @@ Templates são modelos que definem **quais informações** aparecem na tarja e *
 
 ### Variáveis Disponíveis
 
-Os templates utilizam **variáveis entre chaves** que são automaticamente substituídas por valores reais ao gerar a infração:
+Os templates utilizam **variáveis entre chaves** que são automaticamente substituídas por valores reais ao gerar a Infração
 
 | Categoria | Variáveis |
 |-----------|-----------|
-| **Equipamento** | `{CodigoEquipamento}` `{SerialEquipamento}` `{MarcaModeloEquipamento}` |
+| Equipamento | `{CodigoEquipamento}` `{SerialEquipamento}` `{MarcaModeloEquipamento}` |
 | **Localização** | `{CodigoLocalOperacaoEquipamento}` `{NumeroFaixa}` `{SentidoFaixa}` |
 | **Aferição** | `{DataAfericaoInmetro}` `{DataVencimentoAfericao}` `{CertificadoEquipamento}` `{NumeroCertificadoInmetro}` |
 | **Portaria** | `{PortariaEquipamento}` `{PortariaNaoMetrologico}` |
-| **Infração** | `{DataPassagemInfracao}` `{CodigoEnquadramento}` `{DescricaoEnquadramento}` |
+| Infração | `{DataPassagemInfracao}` `{CodigoEnquadramento}` `{DescricaoEnquadramento}` |
 | **Órgão** | `{CodigoOrgaoAutuador}` |
 
 ### Exemplo de Template
@@ -51,7 +51,7 @@ Os templates utilizam **variáveis entre chaves** que são automaticamente subst
 ```
 Cód. Equipamento : {CodigoEquipamento}
 Endereço : {CodigoLocalOperacaoEquipamento}
-Faixa : {NumeroFaixa}        Sentido : {SentidoFaixa}
+Faixa : {NumeroFaixa} Sentido : {SentidoFaixa}
 Data : {DataPassagemInfracao}
 ─────────────────────────────────────────────────────
 Data aferição : {DataAfericaoInmetro}
@@ -72,7 +72,7 @@ As informações exibidas na tarja vêm de **diferentes cadastros** do sistema. 
 :::tip Guia Completo Disponível
 Para um **guia detalhado passo a passo** sobre como alterar cada informação que aparece na tarja (portaria, endereço, marca/modelo, aferições, etc.), consulte:
 
-👉 **[Configuração de Dados da Tarja](./configuracao-dados-tarja)**
+👉 Configuração de Dados da Tarja](./configuracao-dados-tarja)**
 
 Este guia explica:
 - Onde alterar cada campo da tarja
@@ -112,10 +112,10 @@ Este guia explica:
    - Use as variáveis entre chaves listadas acima
    - Mantenha a formatação e espaçamentos desejados
 4. Clique em **Salvar**
-5. Teste gerando uma nova infração
+5. Teste gerando uma nova Infração
 
 :::warning Importante
-Alterações no template afetam apenas **novas infrações**.  
+Alterações no template afetam apenas **novas Infrações  
 Infrações já geradas permanecem com o template anterior.
 :::
 
@@ -123,14 +123,14 @@ Infrações já geradas permanecem com o template anterior.
 
 O sistema permite criar várias tarjas diferentes para diferentes finalidades:
 
-- **Por tipo de infração:** Velocidade, avanço de sinal, conversão proibida
-- **Por tipo de equipamento:** Radar, OCR, Lombada eletrônica
+- **Por tipo de Infração Velocidade, avanço de sinal, conversão proibida
+- **Por tipo de Equipamento Radar, OCR, Lombada eletrônica
 - **Por produto:** AxHub, AxTon (pesagem), AxCross (monitoramento)
 - **Variações:** Tarja completa, tarja simplificada
 
 Para configurar qual tarja usar:
 - Por enquadramento: Configurações → Enquadramentos → Campo "Tarja Padrão"
-- Por equipamento: Equipamentos → Equipamentos → Campo "Template de Tarja"
+- Por Equipamento Equipamentos → Equipamentos → Campo "Template de Tarja"
 
 ---
 
@@ -138,7 +138,7 @@ Para configurar qual tarja usar:
 
 | Tipo | Pagina | Descricao |
 |------|--------|-----------|
-| Guia | [Configuração de Dados da Tarja](./configuracao-dados-tarja) | Como alterar informações exibidas |
+| Guia | Configuração de Dados da Tarja](./configuracao-dados-tarja) | Como alterar informações exibidas |
 | Relacionado | [Modelos de Equipamentos](../cadastros-basicos/modelos-equipamentos) | Portaria INMETRO |
 | Relacionado | [Enquadramentos](./enquadramentos) | Código e descrição |
 | Relacionado | [Triagem](../infracoes/triagem) | Tarja aplicada na imagem |

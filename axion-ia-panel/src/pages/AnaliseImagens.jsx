@@ -630,7 +630,7 @@ export default function AnaliseImagens() {
               <textarea
                 value={contexto}
                 onChange={(e) => setContexto(e.target.value)}
-                placeholder="Ex: Infração registrada às 14h, equipamento DIP-0496 faixa 1..."
+                placeholder="Ex: Infração registrada às 14h, Equipamento DIP-0496 faixa 1..."
                 rows={3}
                 style={{ ...inputStyle, resize: "vertical" }}
               />
@@ -758,7 +758,7 @@ export default function AnaliseImagens() {
               {/* Pasta */}
               <div style={{ flex: 1, minWidth: "220px" }}>
                 <input type="text" value={cmpPasta} onChange={(e) => setCmpPasta(e.target.value)}
-                  placeholder="Pasta: C:\fotos  ou  axhub  ou  caminho relativo"
+ placeholder="Pasta: C:\fotos ou axhub ou caminho relativo"
                   style={{ ...inputStyle, height: "36px", margin: 0, padding: "0 10px" }} />
               </div>
 
@@ -887,7 +887,7 @@ export default function AnaliseImagens() {
                   <div style={{ flex: 1, minWidth: "180px" }}>
                     <label style={{ fontSize: "11px", color: "#64748b", display: "block", marginBottom: "3px" }}>Contexto (prompt)</label>
                     <input type="text" value={cmpContexto} onChange={(e) => setCmpContexto(e.target.value)}
-                      placeholder="Ex: Foco em veículos de duas rodas"
+                      placeholder="Ex: Foco em Veículos de duas rodas"
                       style={{ ...inputStyle, height: "34px", margin: 0, padding: "0 10px", fontSize: "12px" }} />
                   </div>
                 </>
@@ -990,7 +990,7 @@ export default function AnaliseImagens() {
                         <strong>#N</strong> = posição no ranking · <strong>score no canto</strong> = nota de similaridade · <strong>faixa colorida</strong> = nível de correspondência
                       </div>
                       <div style={{ background: "rgba(251,191,36,0.08)", border: "1px solid rgba(251,191,36,0.2)", borderRadius: "6px", padding: "8px", fontSize: "10px", color: "#fbbf24" }}>
-                        💡 <strong>Dica:</strong> Câmeras de monitoramento raramente atingem score 9+ mesmo sendo o mesmo veículo — ângulo, luz e movimento alteram o hash. Use <strong>score 5–8</strong> como faixa de investigação principal.
+                        💡 <strong>Dica:</strong> Câmeras de monitoramento raramente atingem score 9+ mesmo sendo o mesmo Veículo — ângulo, luz e movimento alteram o hash. Use <strong>score 5–8</strong> como faixa de investigação principal.
                       </div>
                     </div>
                   </details>
@@ -1769,7 +1769,7 @@ export default function AnaliseImagens() {
             <div>
               <label style={labelStyle}>Pasta (absoluta ou relativa)</label>
               <input type="text" value={lotePasta} onChange={(e) => setLotePasta(e.target.value)}
-                placeholder="Ex: C:\Downloads\fotos  ou  axhub" style={inputStyle} />
+ placeholder="Ex: C:\Downloads\fotos ou axhub" style={inputStyle} />
             </div>
 
             {/* Máx imagens */}

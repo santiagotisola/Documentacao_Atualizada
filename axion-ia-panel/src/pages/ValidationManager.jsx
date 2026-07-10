@@ -161,7 +161,7 @@ const ValidationManager = () => {
         {/* Header */}
         <div className="validation-header">
           <h1>🧪 Gerenciador de Validação de Sistemas</h1>
-          <p>Configure e execute validação automatizada de sistemas web</p>
+          <p>Configure e execute Validação automatizada de sistemas web</p>
         </div>
 
         {/* Presets */}
@@ -223,7 +223,7 @@ const ValidationManager = () => {
               </label>
               <input
                 type="text"
-                placeholder="usuario"
+                placeholder="Usuário"
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
                 disabled={isValidating}
@@ -414,7 +414,7 @@ const ValidationManager = () => {
             <ul>
               <li>🔍 <strong>UI Discovery:</strong> Analisa interface, botões, formulários e elementos interativos</li>
               <li>🔌 <strong>API Discovery:</strong> Detecta endpoints, métodos HTTP e estrutura de dados</li>
-              <li>📊 <strong>Relatório:</strong> Gera documentação completa dos elementos descobertos</li>
+              <li>📊 <strong>Relatório</strong> Gera documentação completa dos elementos descobertos</li>
               <li>🧪 <strong>Testes:</strong> Prepara base para geração automática de testes (integração PIEQ)</li>
             </ul>
           </div>

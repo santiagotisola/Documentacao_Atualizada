@@ -1,0 +1,41 @@
+Categoria,Nome,URL,Status,Tipo,Estado,Autenticação,Observações
+AxHub Sites,IBAMETRO,https://ibametro.axhub.axion.ws,Ativo,Metrologia,BA,admin/Labor#5383,OCR 96.76% - Maior de todos os sites
+AxHub Sites,IMEPI,https://imepi.axhub.axion.ws,Ativo,Metrologia,PI,admin/Labor#5383,Equipamentos AXION próprios
+AxHub Sites,IMEQPB,https://imeqpb.axhub.axion.ws,Ativo,Metrologia,PB,Admin/Labor#5383,OCR 49.96% - Baixo desempenho
+AxHub Sites,IMETROPA,https://imetropa.axhub.axion.ws,Ativo,Metrologia,PA,Admin/Labor#5383,Menor volume de passagens (41k/dia)
+AxHub Sites,IPEMCE,https://ipemce.axhub.axion.ws,Ativo,Metrologia,CE,Admin/Labor#5383,Metrologia com layout de operações tipo Trânsito
+AxHub Sites,IPEMPE,https://ipempe.axhub.axion.ws,Ativo,Metrologia,PE,admin/Labor#5383,Menu 82 com funcionalidades ativas parciais
+AxHub Sites,DERSE,https://derse.axhub.axion.ws,Ativo,Rodovias,PI,Admin/Labor#5383,Maior parque de equipamentos (159). v.1.2.4
+AxHub Sites,STRANS,https://strans.axhub.axion.ws,Ativo,Trânsito Municipal,PI,Admin/Labor#5383,Trânsito municipal com defasagem ativa
+AxHub Sites,DETRANMA,https://detranma.axhub.axion.ws,Ativo,Trânsito Estadual,MA,Admin/Labor#5383,Menor quantidade de BI (6)
+AxHub Sites,DETRANPI,https://detranpi.axhub.axion.ws,Ativo,Trânsito Estadual,PI,Admin/Labor#5383,Contrato híbrido: velocidade + pesagem. 77 equip
+AxHub Sites,GOIÂNIA,https://goiania.axhub.axion.ws,Ativo,Trânsito Municipal,GO,OIDC (goiania.id.axion.ws),Contrato mais completo: 13 relatórios BI. 253 equip
+AxHub Sites,IPEMMT,https://ipemmt.axhub.axion.ws,Ativo,Metrologia,MT,admin/Labor#5383,Provisionado mas sem equipamentos. v.1.2.0
+AxHub Sites,ITPS,https://itps.axhub.axion.ws,Ativo,Metrologia,SE,Admin/Labor#5383,v.1.2.0 confirmado em 11/06/2026
+AxHub Sites,SMTT,https://smtt.axhub.axion.ws,Ativo,Trânsito Municipal,AL,Admin/Labor#5383,Grupo exclusivo: LOCAL/HORÁRIO NÃO PERMITIDO
+AxHub Sites,ECONOMIA,https://economia.axhub.axion.ws,Ativo,Fiscal,GO,OIDC (economia.axion.ws),72 equip VARCO (35 pontos × 2 faixas). ITScam 450 LM
+AxHub Sites,IMPERATRIZ,https://imperatriz.axhub.axion.ws,Ativo,Trânsito Municipal,MA,Admin/Labor#5383,v.1.2.0. 21 equip. 49.7k pass/dia
+AxHub Sites,HOMOLOGAÇÃO,https://homologacao.axhub.axion.ws,Ativo,Homologação,—,Admin/Labor#5383,Ambiente de homologação/testes. Senha pode ser diferente
+AxHub Sites,SETRANS,https://setrans.axhub.axion.ws,Ativo,Rodovias,PI,Admin/Labor#5383,Adicionado em 10/06/2026. v.1.1.1
+AxCross Sites,DERSE,https://derse.axcross.axion.ws,Ativo,Rodovias,PI,suporte@axiontecnologia.com.br/Axion#2026,166 equip. 329 faixas. 422k veículos monitorados
+AxCross Sites,DETRANPI,https://detranpi.axcross.axion.ws,Ativo,Trânsito Estadual,PI,suporte@axiontecnologia.com.br/Axion#2026,77 equip. 153 faixas
+AxCross Sites,DETRANMA,https://detranma.axcross.axion.ws,Ativo,Trânsito Estadual,MA,suporte@axiontecnologia.com.br/Axion#2026,60 equip. 119 faixas
+AxCross Sites,IMPERATRIZ,https://imperatriz.axcross.axion.ws,Ativo,Trânsito Municipal,MA,suporte@axiontecnologia.com.br/Axion#2026,21 equip. 41 faixas. 49.7k pass/dia
+AxCross Sites,IPEMCE,https://ipemce.axcross.axion.ws,Ativo,Metrologia,CE,suporte@axiontecnologia.com.br/Axion#2026,21 equip. 41 faixas
+AxCross Sites,IPEMMT,https://ipemmt.axcross.axion.ws,Ativo,Metrologia,MT,suporte@axiontecnologia.com.br/Axion#2026,Provisionado mas sem equipamentos
+AxCross Sites,IPEMPE,https://ipempe.axcross.axion.ws,Ativo,Metrologia,PE,suporte@axiontecnologia.com.br/Axion#2026,17 equip. 33 faixas
+AxCross Sites,SEFAZPI,https://sefazpi.axcross.axion.ws,Ativo,Fiscal,PI,suporte@axiontecnologia.com.br/Axion#2026,Site fiscal específico
+AxCross Sites,GOIÂNIA,https://goiania.axcross.axion.ws,Ativo,Trânsito Municipal,GO,suporte@axiontecnologia.com.br/Axion#2026,253 equip. 501 faixas
+AxCross Sites,ECONOMIA,https://economia.axcross.axion.ws,Ativo,Fiscal,GO,suporte@axiontecnologia.com.br/Axion#2026,72 equip VARCO. 143 faixas
+AxCross Sites,SETRANS,https://setrans.axcross.axion.ws,Ativo,Rodovias,PI,suporte@axiontecnologia.com.br/Axion#2026,Adicionado em 10/06/2026
+AxCross Sites,HOMOLOGAÇÃO,https://homologacao.axcross.axion.ws,Ativo,Homologação,—,suporte@axiontecnologia.com.br/Axion#2026,Ambiente de homologação/testes
+Documentação,AxHub Docs,http://localhost:3010/AxHub.Docs,Ativo,Portal de Documentação,—,Público,Docusaurus 3.9.2. 14 módulos. Node >=20.0
+Documentação,AxTon Docs,http://localhost:3011/AxTon.Docs,Ativo,Portal de Documentação,—,Público,Docusaurus 3.9.2. 13 módulos. Node >=18.0
+Documentação,AxCross Docs,http://localhost:3012/AxCross.Docs,Ativo,Portal de Documentação,—,Público,Docusaurus 3.9.2. 9 módulos. Node >=18.0
+Auth Services,Identity Axion,https://identity.axion.ws,Ativo,Autenticação,—,N/A,Serviço de autenticação geral
+Auth Services,Goiânia Identity,https://goiania.id.axion.ws,Ativo,Autenticação,GO,N/A,Usado por GOIÂNIA AxHub/AxCross (OIDC)
+Auth Services,Economia OIDC,https://economia.axion.ws,Ativo,Autenticação,GO,N/A,Usado por ECONOMIA AxHub/AxCross (OIDC)
+Painel,AxionIA Panel,http://localhost:3017,Não configurado,Painel Central,—,x-api-token,React 18.3 + Vite 6.0. 36+ páginas. Requer .env
+API,AxionIA API,http://localhost:3100/api,Não configurado,API Backend,—,x-api-token,Node.js + Express 4.18. 180+ endpoints. Requer .env
+External,Jitbit Helpdesk,https://desk.axiontecnologia.com.br/helpdesk,Configurado,Ticketing System,—,JITBIT_USER/JITBIT_PASS,Integração completa. 28 endpoints mapeados
+VARCO,VARCO IoT Platform,https://[UUID]-80.tunnel.varco.cloud,Não configurado,IoT Platform,GO,VARCO_EMAIL/VARCO_PASSWORD,72 dispositivos ITScam 450. SETRANS-GO

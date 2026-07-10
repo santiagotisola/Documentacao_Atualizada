@@ -1,0 +1,45 @@
+﻿{
+    "success":  true,
+    "timestamp":  "2026-06-23T13:36:12.147Z",
+    "site_url":  "https://demo.axhub.axion.ws/",
+    "crawled":  true,
+    "stats":  {
+                  "total_pages":  1,
+                  "successful":  0,
+                  "failed":  1,
+                  "total_texts":  0,
+                  "total_issues":  0,
+                  "avg_quality_score":  0
+              },
+    "breakdown":  {
+                      "by_severity":  {
+                                          "high":  0,
+                                          "medium":  0,
+                                          "low":  0
+                                      },
+                      "by_category":  {
+                                          "orthography":  0,
+                                          "grammar":  0,
+                                          "terminology":  0,
+                                          "style":  0
+                                      }
+                  },
+    "pages_with_most_issues":  [
+
+                               ],
+    "common_issues":  [
+
+                      ],
+    "pages":  [
+                  {
+                      "url":  "https://demo.axhub.axion.ws/",
+                      "status":  "error",
+                      "error":  "fetch failed",
+                      "texts_analyzed":  0,
+                      "issues":  [
+
+                                 ],
+                      "quality_score":  0
+                  }
+              ]
+}

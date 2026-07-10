@@ -1,6 +1,7 @@
 ﻿import React, { useState, useMemo } from "react";
 import { Link } from "react-router-dom";
 import { AXHUB_SITES, AXCROSS_SITES } from "../data/sitesData";
+import QuickSelect from "../components/QuickSelect.jsx";
 import "./PainelProcessos.css";
 
 /* =================================================================
@@ -238,6 +239,15 @@ export default function MapaOperacoes() {
   const [filtroSistema, setFiltroSistema] = useState("todos");
   const [busca, setBusca] = useState("");
   const [fluxoAberto, setFluxoAberto] = useState(null);
+  
+  // Estados para zoom e pan
+  const [zoom, setZoom] = useState(1);
+  const [panX, setPanX] = useState(0);
+  const [panY, setPanY] = useState(0);
+  const [isDragging, setIsDragging] = useState(false);
+  const [dragStart, setDragStart] = useState({ x: 0, y: 0 });
+  const [isFullscreen, setIsFullscreen] = useState(false);
+  const [buscaNo, setBuscaNo] = useState("");
 
   const todosSites = useMemo(() => {
     const axhub = AXHUB_SITES.map(s => ({ ...s, sistema: "AxHub" }));
@@ -257,6 +267,49 @@ export default function MapaOperacoes() {
   const activeConns = selectedPipeline ? CONNECTIONS.filter(c => activeSteps.includes(c.from) && activeSteps.includes(c.to)) : CONNECTIONS;
   const relatedNodes = hoveredNode ? new Set([hoveredNode, ...CONNECTIONS.filter(c => c.from === hoveredNode).map(c => c.to), ...CONNECTIONS.filter(c => c.to === hoveredNode).map(c => c.from)]) : null;
   const nodePos = {}; NODES.forEach(n => { nodePos[n.id] = { x: n.x, y: n.y }; });
+
+  // Funções de zoom e pan
+  const handleZoomIn = () => setZoom(prev => Math.min(prev + 0.2, 3));
+  const handleZoomOut = () => setZoom(prev => Math.max(prev - 0.2, 0.5));
+  const handleZoomReset = () => { setZoom(1); setPanX(0); setPanY(0); };
+  
+  const handleMouseDown = (e) => {
+    if (e.target.tagName !== 'rect' && e.target.tagName !== 'text') {
+      setIsDragging(true);
+      setDragStart({ x: e.clientX - panX, y: e.clientY - panY });
+    }
+  };
+  
+  const handleMouseMove = (e) => {
+    if (isDragging) {
+      setPanX(e.clientX - dragStart.x);
+      setPanY(e.clientY - dragStart.y);
+    }
+  };
+  
+  const handleMouseUp = () => setIsDragging(false);
+  
+  const handleWheel = (e) => {
+    e.preventDefault();
+    const delta = e.deltaY * -0.001;
+    setZoom(prev => Math.min(Math.max(prev + delta, 0.5), 3));
+  };
+  
+  // Buscar nós
+  const nosFiltrados = useMemo(() => {
+    if (!buscaNo) return NODES;
+    const q = buscaNo.toLowerCase();
+    return NODES.filter(n => 
+      n.label.toLowerCase().includes(q) || 
+      n.desc.toLowerCase().includes(q) ||
+      n.id.toLowerCase().includes(q)
+    );
+  }, [buscaNo]);
+  
+  const noDestacado = useMemo(() => {
+    if (!buscaNo || nosFiltrados.length === 0) return null;
+    return nosFiltrados[0].id;
+  }, [buscaNo, nosFiltrados]);
 
   const ABAS = [
     { id: "mapa", label: "\u{1F517} Mapa Visual" },
@@ -279,17 +332,131 @@ export default function MapaOperacoes() {
       </div>
 
       {/* Tabs */}
-      <nav className="pp-tabs">
-        {ABAS.map(a => (
-          <button key={a.id} className={`pp-tab ${aba === a.id ? "active" : ""}`} onClick={() => setAba(a.id)}>{a.label}</button>
-        ))}
-      </nav>
+      <div style={{ padding: '8px 0 4px', display: 'flex', alignItems: 'center', gap: 10 }}>
+        <QuickSelect options={ABAS} value={aba} onChange={setAba} color="#6366f1" label="Seção" />
+      </div>
 
       {/* ABA: MAPA VISUAL */}
       {aba === "mapa" && (
         <div>
+          {/* Controles de Zoom e Busca */}
+          <div style={{ display: "flex", gap: "1rem", marginBottom: "1rem", flexWrap: "wrap", alignItems: "center" }}>
+            <input 
+              type="text" 
+              placeholder="🔍 Buscar nó no mapa..."
+              value={buscaNo}
+              onChange={(e) => setBuscaNo(e.target.value)}
+              style={{
+                flex: "1 1 300px",
+                padding: "0.6rem 1rem",
+                background: "rgba(255,255,255,0.05)",
+                border: "1px solid rgba(255,255,255,0.15)",
+                borderRadius: 8,
+                color: "#e2e8f0",
+                fontSize: "0.85rem"
+              }}
+            />
+            
+            <div style={{ display: "flex", gap: "0.5rem", alignItems: "center" }}>
+              <button 
+                onClick={handleZoomOut}
+                title="Zoom Out"
+                style={{
+                  padding: "0.5rem 0.8rem",
+                  background: "rgba(255,255,255,0.08)",
+                  border: "1px solid rgba(255,255,255,0.15)",
+                  borderRadius: 6,
+                  color: "#e2e8f0",
+                  cursor: "pointer",
+                  fontSize: "1rem",
+                  fontWeight: "bold"
+                }}
+              >
+                -
+              </button>
+              
+              <span style={{ 
+                fontSize: "0.8rem", 
+                color: "#94a3b8", 
+                minWidth: "50px", 
+                textAlign: "center",
+                fontFamily: "monospace"
+              }}>
+                {(zoom * 100).toFixed(0)}%
+              </span>
+              
+              <button 
+                onClick={handleZoomIn}
+                title="Zoom In"
+                style={{
+                  padding: "0.5rem 0.8rem",
+                  background: "rgba(255,255,255,0.08)",
+                  border: "1px solid rgba(255,255,255,0.15)",
+                  borderRadius: 6,
+                  color: "#e2e8f0",
+                  cursor: "pointer",
+                  fontSize: "1rem",
+                  fontWeight: "bold"
+                }}
+              >
+                +
+              </button>
+              
+              <button 
+                onClick={handleZoomReset}
+                title="Reset View"
+                style={{
+                  padding: "0.5rem 1rem",
+                  background: "rgba(255,255,255,0.08)",
+                  border: "1px solid rgba(255,255,255,0.15)",
+                  borderRadius: 6,
+                  color: "#e2e8f0",
+                  cursor: "pointer",
+                  fontSize: "0.8rem",
+                  fontWeight: 600
+                }}
+              >
+                🎯 Reset
+              </button>
+              
+              <button 
+                onClick={() => setIsFullscreen(!isFullscreen)}
+                title={isFullscreen ? "Exit Fullscreen" : "Fullscreen"}
+                style={{
+                  padding: "0.5rem 1rem",
+                  background: isFullscreen ? "rgba(99,102,241,0.2)" : "rgba(255,255,255,0.08)",
+                  border: "1px solid rgba(255,255,255,0.15)",
+                  borderRadius: 6,
+                  color: "#e2e8f0",
+                  cursor: "pointer",
+                  fontSize: "0.8rem",
+                  fontWeight: 600
+                }}
+              >
+                {isFullscreen ? "🗗 Exit" : "⛶ Full"}
+              </button>
+            </div>
+          </div>
+          
+          {/* Resultados da busca */}
+          {buscaNo && nosFiltrados.length > 0 && (
+            <div style={{
+              background: "rgba(99,102,241,0.1)",
+              border: "1px solid rgba(99,102,241,0.3)",
+              borderRadius: 8,
+              padding: "0.75rem 1rem",
+              marginBottom: "1rem",
+              fontSize: "0.85rem",
+              color: "#e2e8f0"
+            }}>
+              🔍 {nosFiltrados.length} nó{nosFiltrados.length > 1 ? 's' : ''} encontrado{nosFiltrados.length > 1 ? 's' : ''}: {' '}
+              {nosFiltrados.slice(0, 5).map(n => n.label).join(", ")}
+              {nosFiltrados.length > 5 && ` e mais ${nosFiltrados.length - 5}...`}
+            </div>
+          )}
+          
           <div style={{ display: "flex", gap: "0.5rem", flexWrap: "wrap", marginBottom: "1.2rem" }}>
-            <button onClick={() => setSelectedPipeline(null)} style={{ padding: "0.5rem 1rem", borderRadius: 8, border: "1px solid rgba(255,255,255,0.15)", background: !selectedPipeline ? "rgba(99,102,241,0.3)" : "rgba(255,255,255,0.05)", color: "#e2e8f0", cursor: "pointer", fontSize: "0.82rem", fontWeight: 600 }}>{"\u{1F517}"} Todas</button>
+            <button onClick={() => setSelectedPipeline(null)} style={{ padding: "0.5rem 1rem", borderRadius: 8, border: "1px solid rgba(255,255,255,0.15)", background: !selectedPipeline ? "rgba(99,102,241,0.3)" : "rgba(255,255,255,0.05)", color: "#e2e8f0", cursor: "pointer", fontSize: "0.82rem", fontWeight: 600 }}>🔗 Todas</button>
             {PIPELINES.map(p => (
               <button key={p.id} onClick={() => setSelectedPipeline(selectedPipeline === p.id ? null : p.id)} style={{ padding: "0.5rem 1rem", borderRadius: 8, border: `1px solid ${selectedPipeline === p.id ? p.color : "rgba(255,255,255,0.15)"}`, background: selectedPipeline === p.id ? `${p.color}30` : "rgba(255,255,255,0.05)", color: selectedPipeline === p.id ? p.color : "#94a3b8", cursor: "pointer", fontSize: "0.82rem", fontWeight: 600 }}>{p.icon} {p.name}</button>
             ))}
@@ -300,13 +467,81 @@ export default function MapaOperacoes() {
               <div style={{ fontSize: "1rem", fontWeight: 700, color: p.color, marginBottom: "0.3rem" }}>{p.icon} {p.name}</div>
               <div style={{ fontSize: "0.85rem", color: "#cbd5e1" }}>{p.summary}</div>
               <div style={{ display: "flex", gap: "0.4rem", marginTop: "0.6rem", flexWrap: "wrap" }}>
-                {p.steps.map((s, i) => { const node = NODES.find(n => n.id === s); return (<React.Fragment key={s}><span style={{ background: `${p.color}25`, color: p.color, padding: "2px 10px", borderRadius: 6, fontSize: "0.78rem", fontWeight: 600 }}>{node?.icon} {node?.label}</span>{i < p.steps.length - 1 && <span style={{ color: "#475569" }}>{"\u2192"}</span>}</React.Fragment>); })}
+                {p.steps.map((s, i) => { const node = NODES.find(n => n.id === s); return (<React.Fragment key={s}><span style={{ background: `${p.color}25`, color: p.color, padding: "2px 10px", borderRadius: 6, fontSize: "0.78rem", fontWeight: 600 }}>{node?.icon} {node?.label}</span>{i < p.steps.length - 1 && <span style={{ color: "#475569" }}>→</span>}</React.Fragment>); })}
               </div>
             </div>
           ); })()}
 
-          <div style={{ background: "rgba(255,255,255,0.03)", borderRadius: 16, border: "1px solid rgba(255,255,255,0.08)", overflow: "auto" }}>
-            <svg viewBox="0 0 1060 870" style={{ width: "100%", minWidth: 900, height: "auto" }}>
+          <div 
+            style={{ 
+              background: "rgba(255,255,255,0.03)", 
+              borderRadius: 16, 
+              border: "1px solid rgba(255,255,255,0.08)", 
+              overflow: "hidden",
+              position: isFullscreen ? "fixed" : "relative",
+              top: isFullscreen ? 0 : "auto",
+              left: isFullscreen ? 0 : "auto",
+              width: isFullscreen ? "100vw" : "100%",
+              height: isFullscreen ? "100vh" : "auto",
+              zIndex: isFullscreen ? 9999 : 1,
+              display: "flex",
+              flexDirection: "column"
+            }}
+          >
+            {/* Header no modo fullscreen */}
+            {isFullscreen && (
+              <div style={{
+                background: "rgba(15,23,42,0.95)",
+                padding: "1rem",
+                borderBottom: "1px solid rgba(255,255,255,0.1)",
+                display: "flex",
+                justifyContent: "space-between",
+                alignItems: "center"
+              }}>
+                <span style={{ color: "#e2e8f0", fontWeight: 600 }}>🗺️ Mapa de Operações - Modo Fullscreen</span>
+                <button 
+                  onClick={() => setIsFullscreen(false)}
+                  style={{
+                    padding: "0.4rem 1rem",
+                    background: "rgba(239,68,68,0.2)",
+                    border: "1px solid rgba(239,68,68,0.4)",
+                    borderRadius: 6,
+                    color: "#fca5a5",
+                    cursor: "pointer",
+                    fontSize: "0.8rem",
+                    fontWeight: 600
+                  }}
+                >
+                  ✕ Fechar
+                </button>
+              </div>
+            )}
+            
+            <div 
+              style={{ 
+                flex: 1,
+                overflow: "hidden",
+                position: "relative",
+                cursor: isDragging ? "grabbing" : "grab"
+              }}
+              onMouseDown={handleMouseDown}
+              onMouseMove={handleMouseMove}
+              onMouseUp={handleMouseUp}
+              onMouseLeave={handleMouseUp}
+              onWheel={handleWheel}
+            >
+              {/* SVG com zoom e pan */}
+              <svg 
+                viewBox="0 0 1060 870" 
+                style={{ 
+                  width: "100%", 
+                  minWidth: isFullscreen ? "100%" : 900, 
+                  height: isFullscreen ? "100%" : "auto",
+                  transform: `scale(${zoom}) translate(${panX / zoom}px, ${panY / zoom}px)`,
+                  transformOrigin: "center center",
+                  transition: isDragging ? "none" : "transform 0.1s ease-out"
+                }}
+              >
               <defs>{Object.entries(CONNECTION_COLORS).map(([type, color]) => (<marker key={type} id={`arrow-${type}`} viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M0 0L10 5L0 10z" fill={color} opacity="0.7" /></marker>))}</defs>
               <rect x="20" y="30" width="200" height="780" rx="16" fill={GROUP_COLORS.entrada.bg} stroke={GROUP_COLORS.entrada.border} strokeWidth="1" strokeDasharray="4 4" opacity="0.5" />
               <text x="120" y="22" textAnchor="middle" fontSize="11" fill={GROUP_COLORS.entrada.border} fontWeight="700">{GROUP_COLORS.entrada.label}</text>
@@ -321,8 +556,97 @@ export default function MapaOperacoes() {
               <rect x="900" y="270" width="140" height="380" rx="16" fill={GROUP_COLORS.saida.bg} stroke={GROUP_COLORS.saida.border} strokeWidth="1" strokeDasharray="4 4" opacity="0.5" />
               <text x="970" y="262" textAnchor="middle" fontSize="11" fill={GROUP_COLORS.saida.border} fontWeight="700">{GROUP_COLORS.saida.label}</text>
               {activeConns.map((c, i) => { const f = nodePos[c.from], t = nodePos[c.to]; if (!f || !t) return null; const dimmed = selectedPipeline && !activeSteps.includes(c.from); const relHighlight = relatedNodes && relatedNodes.has(c.from) && relatedNodes.has(c.to); const opacity = dimmed ? 0.08 : relHighlight ? 0.9 : relatedNodes ? 0.15 : 0.35; const color = CONNECTION_COLORS[c.type] || "#64748b"; const mx = (f.x + t.x) / 2, my = (f.y + t.y) / 2; return (<g key={i}><line x1={f.x + 60} y1={f.y} x2={t.x - 60} y2={t.y} stroke={color} strokeWidth={relHighlight ? 2.5 : 1.5} opacity={opacity} markerEnd={`url(#arrow-${c.type})`} />{opacity > 0.2 && <text x={mx} y={my - 6} textAnchor="middle" fontSize="8" fill={color} opacity={0.8} fontWeight="600">{c.label}</text>}</g>); })}
-              {NODES.map(n => { const dimmed = selectedPipeline && !activeSteps.includes(n.id); const isHovered = hoveredNode === n.id; const isRelated = relatedNodes?.has(n.id); const opacity = dimmed ? 0.15 : isHovered ? 1 : isRelated ? 0.95 : relatedNodes ? 0.3 : 0.85; const gc = GROUP_COLORS[n.group]; return (<g key={n.id} opacity={opacity} onMouseEnter={() => setHoveredNode(n.id)} onMouseLeave={() => setHoveredNode(null)} onClick={() => setSelectedNode(selectedNode === n.id ? null : n.id)} style={{ cursor: "pointer" }}><rect x={n.x - 55} y={n.y - 18} width={110} height={36} rx={10} fill={isHovered ? `${gc.border}30` : "rgba(15,23,42,0.8)"} stroke={isHovered ? gc.border : `${gc.border}50`} strokeWidth={isHovered ? 2 : 1} /><text x={n.x} y={n.y + 5} textAnchor="middle" fontSize="11" fontWeight="700" fill={isHovered ? "#f8fafc" : "#cbd5e1"}>{n.icon} {n.label}</text></g>); })}
+              {NODES.map(n => { 
+                const dimmed = selectedPipeline && !activeSteps.includes(n.id); 
+                const isHovered = hoveredNode === n.id; 
+                const isRelated = relatedNodes?.has(n.id); 
+                const isSearchHighlighted = noDestacado === n.id;
+                const isSearchResult = buscaNo && nosFiltrados.some(nf => nf.id === n.id);
+                const opacity = dimmed ? 0.15 : isHovered || isSearchHighlighted ? 1 : isRelated || isSearchResult ? 0.95 : relatedNodes ? 0.3 : 0.85; 
+                const gc = GROUP_COLORS[n.group]; 
+                return (
+                  <g key={n.id} opacity={opacity} onMouseEnter={() => setHoveredNode(n.id)} onMouseLeave={() => setHoveredNode(null)} onClick={() => setSelectedNode(selectedNode === n.id ? null : n.id)} style={{ cursor: "pointer" }}>
+                    <rect 
+                      x={n.x - 55} 
+                      y={n.y - 18} 
+                      width={110} 
+                      height={36} 
+                      rx={10} 
+                      fill={isHovered || isSearchHighlighted ? `${gc.border}30` : "rgba(15,23,42,0.8)"} 
+                      stroke={isSearchHighlighted ? "#fbbf24" : isHovered ? gc.border : `${gc.border}50`} 
+                      strokeWidth={isSearchHighlighted ? 3 : isHovered ? 2 : 1} 
+                    />
+                    {isSearchHighlighted && (
+                      <rect 
+                        x={n.x - 58} 
+                        y={n.y - 21} 
+                        width={116} 
+                        height={42} 
+                        rx={12} 
+                        fill="none" 
+                        stroke="#fbbf24" 
+                        strokeWidth={2} 
+                        opacity={0.6}
+                        strokeDasharray="4 2"
+                      >
+                        <animate attributeName="stroke-opacity" values="0.3;1;0.3" dur="1.5s" repeatCount="indefinite" />
+                      </rect>
+                    )}
+                    <text x={n.x} y={n.y + 5} textAnchor="middle" fontSize="11" fontWeight="700" fill={isHovered || isSearchHighlighted ? "#f8fafc" : "#cbd5e1"}>{n.icon} {n.label}</text>
+                  </g>
+                ); 
+              })}
             </svg>
+            
+            {/* Minimap */}
+            <div style={{
+              position: "absolute",
+              bottom: "1rem",
+              right: "1rem",
+              width: "150px",
+              height: "120px",
+              background: "rgba(15,23,42,0.9)",
+              border: "1px solid rgba(255,255,255,0.2)",
+              borderRadius: 8,
+              overflow: "hidden",
+              pointerEvents: "none"
+            }}>
+              <svg viewBox="0 0 1060 870" style={{ width: "100%", height: "100%" }}>
+                <rect width="1060" height="870" fill="rgba(15,23,42,0.5)" />
+                {NODES.map(n => (
+                  <circle 
+                    key={n.id} 
+                    cx={n.x} 
+                    cy={n.y} 
+                    r={4} 
+                    fill={selectedNode === n.id ? "#fbbf24" : GROUP_COLORS[n.group].border} 
+                    opacity={0.6}
+                  />
+                ))}
+                {/* Viewport indicator */}
+                <rect 
+                  x="0" 
+                  y="0" 
+                  width={1060 / zoom} 
+                  height={870 / zoom} 
+                  fill="none" 
+                  stroke="#60a5fa" 
+                  strokeWidth={2 / zoom}
+                  opacity={0.5}
+                />
+              </svg>
+              <div style={{
+                position: "absolute",
+                top: 4,
+                left: 4,
+                fontSize: "0.65rem",
+                color: "rgba(255,255,255,0.6)",
+                fontWeight: 600
+              }}>
+                MINIMAP
+              </div>
+            </div>
+            </div>
           </div>
 
           {selectedNode && (() => { const n = NODES.find(nd => nd.id === selectedNode); const incoming = CONNECTIONS.filter(c => c.to === selectedNode); const outgoing = CONNECTIONS.filter(c => c.from === selectedNode); const gc = GROUP_COLORS[n.group]; return (
@@ -333,7 +657,7 @@ export default function MapaOperacoes() {
               </div>
               <p style={{ color: "#94a3b8", fontSize: "0.88rem", lineHeight: 1.6, margin: 0 }}>{n.desc}</p>
               {/* Link para fluxo detalhado se existir */}
-              {(() => { const fluxoRelacionado = FLUXOS_DETALHADOS.find(f => n.desc.toLowerCase().includes(f.id) || f.titulo.toLowerCase().includes(n.label.toLowerCase()) || (n.id === "helpdesk" && f.id === "helpdesk-flow") || (n.id === "analise_img" && f.id === "infracao") || (n.id === "conformidade" && f.id === "medicao")); return fluxoRelacionado ? (<button onClick={() => { setAba("fluxos"); setFluxoAberto(fluxoRelacionado.id); setSelectedNode(null); }} style={{ marginTop: "0.6rem", background: `${fluxoRelacionado.cor}20`, border: `1px solid ${fluxoRelacionado.cor}40`, color: fluxoRelacionado.cor, padding: "4px 12px", borderRadius: 6, cursor: "pointer", fontSize: "0.78rem", fontWeight: 600 }}>{"\u{1F4D0}"} Ver fluxo: {fluxoRelacionado.titulo}</button>) : null; })()}
+              {(() => { const fluxoRelacionado = FLUXOS_DETALHADOS.find(f => n.desc.toLowerCase().includes(f.id) || f.titulo.toLowerCase().includes(n.label.toLowerCase()) || (n.id === "helpdesk" && f.id === "helpdesk-flow") || (n.id === "analise_img" && f.id === Use Infração (com acento) || (n.id === "conformidade" && f.id === "medicao")); return fluxoRelacionado ? (<button onClick={() => { setAba("fluxos"); setFluxoAberto(fluxoRelacionado.id); setSelectedNode(null); }} style={{ marginTop: "0.6rem", background: `${fluxoRelacionado.cor}20`, border: `1px solid ${fluxoRelacionado.cor}40`, color: fluxoRelacionado.cor, padding: "4px 12px", borderRadius: 6, cursor: "pointer", fontSize: "0.78rem", fontWeight: 600 }}>{"\u{1F4D0}"} Ver fluxo: {fluxoRelacionado.titulo}</button>) : null; })()}
               <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1rem", marginTop: "1rem" }}>
                 <div><div style={{ fontSize: "0.75rem", fontWeight: 700, color: "#64748b", textTransform: "uppercase", marginBottom: "0.4rem" }}>{"\u2B05\uFE0F"} Recebe de ({incoming.length})</div>{incoming.map((c, i) => { const src = NODES.find(nd => nd.id === c.from); return <div key={i} style={{ fontSize: "0.82rem", color: "#cbd5e1", marginBottom: 4 }}>{src?.icon} {src?.label} <span style={{ color: "#64748b" }}>({c.label})</span></div>; })}{incoming.length === 0 && <div style={{ color: "#475569", fontSize: "0.82rem" }}>Fonte primaria</div>}</div>
                 <div><div style={{ fontSize: "0.75rem", fontWeight: 700, color: "#64748b", textTransform: "uppercase", marginBottom: "0.4rem" }}>{"\u27A1\uFE0F"} Envia para ({outgoing.length})</div>{outgoing.map((c, i) => { const tgt = NODES.find(nd => nd.id === c.to); return <div key={i} style={{ fontSize: "0.82rem", color: "#cbd5e1", marginBottom: 4 }}>{tgt?.icon} {tgt?.label} <span style={{ color: "#64748b" }}>({c.label})</span></div>; })}{outgoing.length === 0 && <div style={{ color: "#475569", fontSize: "0.82rem" }}>Ponto final</div>}</div>
@@ -368,60 +692,83 @@ export default function MapaOperacoes() {
             </div>
           ) : (() => {
             const f = FLUXOS_DETALHADOS.find(fl => fl.id === fluxoAberto);
-            const svgW = Math.max(f.etapas.length * 140 + 40, 800);
-            const svgH = 200;
+            const svgW = Math.max(f.etapas.length * 280 + 80, 1400);
+            const svgH = 360;
             return (
               <div>
-                <button onClick={() => setFluxoAberto(null)} style={{ background: "rgba(255,255,255,0.08)", border: "1px solid rgba(255,255,255,0.15)", color: "#e2e8f0", padding: "0.4rem 1rem", borderRadius: 6, cursor: "pointer", marginBottom: "1rem", fontSize: "0.82rem" }}>{"\u2190"} Voltar aos fluxos</button>
+                <button onClick={() => setFluxoAberto(null)} style={{ background: "rgba(255,255,255,0.08)", border: "1px solid rgba(255,255,255,0.15)", color: "#e2e8f0", padding: "0.4rem 1rem", borderRadius: 6, cursor: "pointer", marginBottom: "1rem", fontSize: "0.82rem" }}>← Voltar aos fluxos</button>
                 <div style={{ borderLeft: `3px solid ${f.cor}`, paddingLeft: "1rem", marginBottom: "1rem" }}>
                   <h3 style={{ color: f.cor, margin: "0 0 0.3rem" }}>{f.titulo}</h3>
                   <p style={{ color: "rgba(255,255,255,0.6)", margin: "0 0 0.5rem", fontSize: "0.88rem" }}>{f.descricao}</p>
                   <div style={{ display: "flex", gap: "0.75rem", fontSize: "0.8rem", color: "rgba(255,255,255,0.5)" }}>
-                    <span>{"\u{1F3F7}\uFE0F"} {f.sistema}</span>
-                    <span>{"\u{1F4CA}"} {f.etapas.length} etapas</span>
+                    <span>🏷️ {f.sistema}</span>
+                    <span>📊 {f.etapas.length} etapas</span>
                   </div>
                 </div>
 
                 {/* MAPA VISUAL DO PROCESSO (SVG flowchart) */}
                 <div style={{ background: "rgba(255,255,255,0.03)", borderRadius: 12, border: "1px solid rgba(255,255,255,0.08)", overflow: "auto", marginBottom: "1.5rem", padding: "1rem" }}>
-                  <div style={{ fontSize: "0.75rem", color: "rgba(255,255,255,0.4)", marginBottom: "0.5rem", fontWeight: 600 }}>MAPA VISUAL DO FLUXO</div>
-                  <svg viewBox={`0 0 ${svgW} ${svgH}`} style={{ width: "100%", minWidth: 700, height: "auto" }}>
+                  <div style={{ fontSize: "1rem", color: "#e2e8f0", marginBottom: "1rem", fontWeight: 700 }}>📐 MAPA VISUAL DO FLUXO</div>
+                  <svg viewBox={`0 0 ${svgW} ${svgH}`} style={{ width: "100%", minWidth: 1100, height: "auto", maxHeight: "500px" }}>
                     <defs>
-                      <marker id="flow-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d={`M0 0L10 5L0 10z`} fill={f.cor} opacity="0.8" /></marker>
+                      <marker id="flow-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" fill={f.cor} opacity="1" /></marker>
+                      <filter id="text-shadow">
+                        <feDropShadow dx="0" dy="2" stdDeviation="2" floodOpacity="0.8" floodColor="#000" />
+                      </filter>
                     </defs>
                     {f.etapas.map((e, i) => {
-                      const cx = 70 + i * 140;
-                      const cy = 100;
+                      const cx = 140 + i * 280;
+                      const cy = 180;
                       const isFirst = i === 0;
                       const isLast = i === f.etapas.length - 1;
                       const isSystem = e.ator === "Sistema" || e.ator === "IA" || e.ator === "Sistema (cron)" || e.ator === "Sistema (SignalR)";
                       const nodeShape = isFirst ? "start" : isLast ? "end" : isSystem ? "auto" : "manual";
+                      const nodeWidth = 180;
+                      const nodeHeight = 80;
                       return (
                         <g key={i}>
                           {/* Connection arrow */}
-                          {i > 0 && <line x1={70 + (i-1) * 140 + 50} y1={cy} x2={cx - 50} y2={cy} stroke={f.cor} strokeWidth="2" opacity="0.6" markerEnd="url(#flow-arrow)" />}
-                          {/* Node */}
-                          {nodeShape === "start" && <circle cx={cx} cy={cy} r={28} fill={`${f.cor}25`} stroke={f.cor} strokeWidth="2" />}
-                          {nodeShape === "end" && <><circle cx={cx} cy={cy} r={28} fill={`${f.cor}25`} stroke={f.cor} strokeWidth="2" /><circle cx={cx} cy={cy} r={24} fill="none" stroke={f.cor} strokeWidth="1.5" /></>}
-                          {nodeShape === "auto" && <rect x={cx - 45} y={cy - 22} width={90} height={44} rx={8} fill={`${f.cor}15`} stroke={f.cor} strokeWidth="1.5" strokeDasharray="4 2" />}
-                          {nodeShape === "manual" && <rect x={cx - 45} y={cy - 22} width={90} height={44} rx={8} fill={`${f.cor}15`} stroke={f.cor} strokeWidth="1.5" />}
-                          {/* Step number */}
-                          <circle cx={cx - 30} cy={cy - 15} r={8} fill={f.cor} />
-                          <text x={cx - 30} y={cy - 11} textAnchor="middle" fontSize="8" fill="#fff" fontWeight="700">{e.passo}</text>
-                          {/* Label */}
-                          <text x={cx} y={cy + 4} textAnchor="middle" fontSize="9" fill="#e2e8f0" fontWeight="600">{e.nome.length > 12 ? e.nome.slice(0, 11) + ".." : e.nome}</text>
-                          {/* Actor */}
-                          <text x={cx} y={cy + 42} textAnchor="middle" fontSize="7" fill="rgba(255,255,255,0.4)">{e.ator}</text>
+                          {i > 0 && <line x1={140 + (i-1) * 280 + nodeWidth/2} y1={cy} x2={cx - nodeWidth/2 - 10} y2={cy} stroke={f.cor} strokeWidth="4" opacity="0.8" markerEnd="url(#flow-arrow)" />}
+                          
+                          {/* Node background */}
+                          {nodeShape === "start" && <circle cx={cx} cy={cy} r={50} fill={`${f.cor}40`} stroke={f.cor} strokeWidth="4" />}
+                          {nodeShape === "end" && <><circle cx={cx} cy={cy} r={50} fill={`${f.cor}40`} stroke={f.cor} strokeWidth="4" /><circle cx={cx} cy={cy} r={42} fill="none" stroke={f.cor} strokeWidth="3" /></>}
+                          {nodeShape === "auto" && <rect x={cx - nodeWidth/2} y={cy - nodeHeight/2} width={nodeWidth} height={nodeHeight} rx={12} fill={`${f.cor}25`} stroke={f.cor} strokeWidth="3" strokeDasharray="8 4" />}
+                          {nodeShape === "manual" && <rect x={cx - nodeWidth/2} y={cy - nodeHeight/2} width={nodeWidth} height={nodeHeight} rx={12} fill={`${f.cor}30`} stroke={f.cor} strokeWidth="3" />}
+                          
+                          {/* Step number badge */}
+                          <circle cx={cx - 70} cy={cy - 35} r={18} fill={f.cor} stroke="#fff" strokeWidth="2" />
+                          <text x={cx - 70} y={cy - 28} textAnchor="middle" fontSize="20" fill="#fff" fontWeight="900">{e.passo}</text>
+                          
+                          {/* Label background para melhor legibilidade */}
+                          <rect x={cx - 85} y={cy - 12} width={170} height={28} rx={6} fill="rgba(0,0,0,0.6)" />
+                          
+                          {/* Label (nome da etapa) - MUITO MAIOR */}
+                          <text x={cx} y={cy + 6} textAnchor="middle" fontSize="18" fill="#ffffff" fontWeight="800" filter="url(#text-shadow)">
+                            {e.nome.length > 18 ? e.nome.slice(0, 17) + ".." : e.nome}
+                          </text>
+                          
+                          {/* Actor label com background */}
+                          <rect x={cx - 75} y={cy + 60} width={150} height={30} rx={6} fill="rgba(15,23,42,0.95)" stroke={f.cor} strokeWidth="1.5" />
+                          <text x={cx} y={cy + 80} textAnchor="middle" fontSize="15" fill="#fff" fontWeight="700">{e.ator}</text>
                         </g>
                       );
                     })}
-                    {/* Legend */}
-                    <rect x="10" y={svgH - 35} width="8" height="8" rx="4" fill={`${f.cor}15`} stroke={f.cor} strokeWidth="1.5" strokeDasharray="4 2" />
-                    <text x="22" y={svgH - 28} fontSize="7" fill="rgba(255,255,255,0.4)">Automatico</text>
-                    <rect x="90" y={svgH - 35} width="8" height="8" rx="2" fill={`${f.cor}15`} stroke={f.cor} strokeWidth="1.5" />
-                    <text x="102" y={svgH - 28} fontSize="7" fill="rgba(255,255,255,0.4)">Manual</text>
-                    <circle cx="170" cy={svgH - 31} r="4" fill={`${f.cor}25`} stroke={f.cor} strokeWidth="1.5" />
-                    <text x="178" y={svgH - 28} fontSize="7" fill="rgba(255,255,255,0.4)">Inicio/Fim</text>
+                    
+                    {/* Legend - MUITO MAIOR E MAIS LEGÍVEL */}
+                    <g transform="translate(20, 20)">
+                      <rect x="0" y="0" width="380" height="80" rx="10" fill="rgba(15,23,42,0.95)" stroke={f.cor} strokeWidth="2" />
+                      <text x="15" y="28" fontSize="16" fill="#fff" fontWeight="900">LEGENDA:</text>
+                      
+                      <rect x="15" y="42" width="20" height="20" rx="8" fill={`${f.cor}25`} stroke={f.cor} strokeWidth="2.5" strokeDasharray="6 3" />
+                      <text x="45" y="57" fontSize="15" fill="#fff" fontWeight="700">Automático</text>
+                      
+                      <rect x="145" y="42" width="20" height="20" rx="4" fill={`${f.cor}30`} stroke={f.cor} strokeWidth="2.5" />
+                      <text x="175" y="57" fontSize="15" fill="#fff" fontWeight="700">Manual</text>
+                      
+                      <circle cx="285" cy="52" r="10" fill={`${f.cor}40`} stroke={f.cor} strokeWidth="2.5" />
+                      <text x="305" y="57" fontSize="15" fill="#fff" fontWeight="700">Início/Fim</text>
+                    </g>
                   </svg>
                 </div>
 

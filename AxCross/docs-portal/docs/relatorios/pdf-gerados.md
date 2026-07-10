@@ -1,26 +1,26 @@
 ---
 sidebar_position: 6
 title: PDF Gerados
-description: Consulta e download de relatórios PDF gerados no AxCross
+description: Consulta e download de Relatórios PDF gerados no AxCross
 ---
 
 # PDF Gerados
 
-Lista todos os relatórios em formato PDF que foram gerados no sistema, permitindo download, visualização e reprocessamento.
+Lista todos os Relatórios em formato PDF que foram gerados no sistema, permitindo download, visualização e reprocessamento.
 
 ## Como acessar
 
-No **menu lateral**, clique em **Relatórios** e selecione **PDF Gerados**.
+No **menu lateral**, clique em Relatórios e selecione **PDF Gerados**.
 
-![Relatórios Gerados](../img/Relatórios Gerados.png)
+Relatórios Gerados](../img/Relatórios Gerados.png)
 
 ## Informações exibidas
 
 | Campo | Descrição |
 |-------|-----------|
-| **Nome do Arquivo** | Nome identificador do relatório gerado |
-| **Tipo** | Tipo de relatório (Passagens, Ocorrências, Veículos Monitorados, etc.) |
-| **Período** | Intervalo de datas do relatório |
+| **Nome do Arquivo** | Nome identificador do Relatório gerado |
+| **Tipo** | Tipo de Relatório (Passagens, Ocorrências, Veículos Monitorados, etc.) |
+| **Período** | Intervalo de datas do Relatório |
 | **Gerado por** | Usuário que solicitou a geração |
 | **Data de Geração** | Data e hora em que o PDF foi criado |
 | **Status** | Processando, Concluído, Erro |
@@ -31,13 +31,13 @@ No **menu lateral**, clique em **Relatórios** e selecione **PDF Gerados**.
 |------|-----------|
 | **Download** | Baixar o arquivo PDF gerado |
 | **Visualizar** | Abrir o PDF diretamente no navegador |
-| **Reprocessar** | Gerar novamente o relatório (quando houver erro) |
+| **Reprocessar** | Gerar novamente o Relatório (quando houver erro) |
 | **Excluir** | Remover o arquivo da lista |
 
-## Passo a passo — Baixar um relatório
+## Passo a passo — Baixar um Relatório
 
-1. Acesse **Relatórios → PDF Gerados** no menu lateral
-2. Localize o relatório na lista (use a pesquisa se necessário)
+1. Acesse Relatórios → PDF Gerados** no menu lateral
+2. Localize o Relatório na lista (use a pesquisa se necessário)
 3. Clique no ícone de **Download** na coluna Ação
 4. O arquivo será baixado para o seu computador
 
@@ -46,5 +46,5 @@ Relatórios com grande volume de dados podem levar alguns minutos para serem ger
 :::
 
 :::info Retenção de arquivos
-PDFs gerados ficam disponíveis por um período limitado conforme a política de retenção configurada no sistema. Faça o download dos relatórios importantes para armazenamento externo.
+PDFs gerados ficam disponíveis por um período limitado conforme a política de retenção configurada no sistema. Faça o download dos Relatórios importantes para armazenamento externo.
 :::

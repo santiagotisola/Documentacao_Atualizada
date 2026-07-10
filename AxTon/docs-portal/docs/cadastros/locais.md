@@ -66,7 +66,7 @@ O cadastro de locais registra os pontos físicos onde as operações de pesagem 
 5. Clique em **Salvar**
 
 :::tip Código do Local
-O código do local é utilizado para vincular operações e gerar relatórios. Use um padrão legível como `[UF][Número Rodovia][Letra]` para facilitar identificação.
+O código do local é utilizado para vincular operações e gerar Relatórios Use um padrão legível como `[UF][Número Rodovia][Letra]` para facilitar identificação.
 :::
 
 :::warning Atenção
@@ -78,7 +78,7 @@ A exclusão de um local somente será possível se não houver operações ou pe
 | Funcionalidade | Descrição |
 |---|---|
 | [**Operações**](../operacoes/cadastro-operacoes) | Vincular locais a operações de pesagem |
-| [**Configurações do Sistema**](../sistema/configuracoes) | Configurações gerais do AxTon |
+| Configurações do Sistema**](../sistema/configuracoes) | Configurações gerais do AxTon |
 
 ### Colunas
 

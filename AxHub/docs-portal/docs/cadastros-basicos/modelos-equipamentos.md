@@ -1,16 +1,16 @@
 ---
 sidebar_position: 3
 title: Modelos de Equipamentos
-description: Cadastro dos modelos de equipamentos e portarias INMETRO
+description: Cadastro dos modelos de Equipamentos e portarias INMETRO
 ---
 
 # Modelos de Equipamentos
 
-O cadastro de modelos de equipamentos registra os modelos específicos de hardware com suas respectivas portarias INMETRO de homologação.
+O cadastro de modelos de Equipamentos registra os modelos específicos de hardware com suas respectivas portarias INMETRO de homologação.
 
 ## Como acessar
 
-**Menu lateral** → Equipamentos → **Modelos de Equipamentos**
+**Menu lateral** → Equipamentos → **Modelos de Equipamentos
 
 ## Listagem
 
@@ -20,7 +20,7 @@ O cadastro de modelos de equipamentos registra os modelos específicos de hardwa
 
 | Coluna | Descrição |
 |--------|-----------|
-| **Marca** | Marca comercial do equipamento (ex: VELSIS, FOCALLE, PERKONS) |
+| **Marca** | Marca comercial do Equipamento (ex: VELSIS, FOCALLE, PERKONS) |
 | **Modelo** | Modelo específico (ex: F-DIP, VSIS-OCR, SmartPlu PRO) |
 | **Número Portaria** | Número da portaria INMETRO de homologação |
 | **Portaria** | Referência completa da portaria (ex: PORTARIA INMETRO/DIMEL Nº 245/2022) |
@@ -35,7 +35,7 @@ O cadastro de modelos de equipamentos registra os modelos específicos de hardwa
 
 | Campo | Obrigatório | Descrição |
 |-------|:-----------:|-----------|
-| **Marca** | Sim | Marca comercial do equipamento |
+| **Marca** | Sim | Marca comercial do Equipamento |
 | **Modelo** | Sim | Nome/código do modelo |
 | **Número da Portaria** | Sim | Número da portaria INMETRO que homologa este modelo |
 | **Portaria** | Sim | Referência completa da portaria (ex: "PORTARIA INMETRO/DIMEL Nº 245/2022") |
@@ -44,26 +44,26 @@ O cadastro de modelos de equipamentos registra os modelos específicos de hardwa
 ### Passo a passo — Cadastrar modelo
 
 1. Na listagem, clique em **+ Novo**
-2. Informe a **Marca** e o **Modelo** do equipamento
+2. Informe a **Marca** e o **Modelo** do Equipamento
 3. Preencha o **Número da Portaria** e a **Portaria** completa do INMETRO
 4. Selecione o **Fabricante** no campo dropdown
 5. Clique em **Salvar**
 
 :::warning Importante
-A portaria INMETRO é obrigatória para a validade legal das infrações geradas pelo equipamento. Certifique-se de informar corretamente o número e a referência completa da portaria de homologação.
+A portaria INMETRO é obrigatória para a validade legal das Infrações geradas pelo Equipamento Certifique-se de informar corretamente o número e a referência completa da portaria de homologação.
 
-Esta informação aparece nas **tarjas das infrações** geradas por equipamentos deste modelo.
+está informação aparece nas **tarjas das Infrações geradas por Equipamentos deste modelo.
 :::
 
 :::tip Como aparece na tarja
-A portaria cadastrada aqui aparece automaticamente na tarja impressa nas infrações.  
+A portaria cadastrada aqui aparece automaticamente na tarja impressa nas Infrações  
 Para entender como alterar ou corrigir a portaria que aparece na tarja, consulte:
 
-👉 **[Configuração de Dados da Tarja](../administracao/configuracao-dados-tarja#portaria-do-equipamento)**
+👉 Configuração de Dados da Tarja](../administracao/configuracao-dados-tarja#portaria-do-equipamento)**
 :::
 
 :::tip Dica
-Um mesmo fabricante pode possuir múltiplos modelos de equipamento. Cada modelo deve ser cadastrado individualmente com sua respectiva portaria INMETRO.
+Um mesmo fabricante pode possuir múltiplos modelos de Equipamento Cada modelo deve ser cadastrado individualmente com sua respectiva portaria INMETRO.
 :::
 
 ---

@@ -32,5 +32,5 @@ Webhooks permitem integrar o AxHub com sistemas de terceiros como ERPs, DETRAN e
 
 | Tipo | Pagina | Descricao |
 |------|--------|-----------|
-| Relacionado | [Configuracoes do Sistema](./configuracoes-sistema) | Config geral |
+| Relacionado | [Use 'Use 'Use 'Use 'Use 'Use 'Use 'Use 'Use 'Use 'Use 'Use 'Use 'Use 'Use 'Use 'Use 'Use 'Use 'Use 'Use 'Use 'Use 'Use 'Configuração'uração'uração'uração'uração'uração'uração'uração'uração'uração'uração'uração'uração'uração'uração'uração'uração'uração'uração'uração'uração'uração'uração'uração'uracoes do Sistema](./configuracoes-sistema) | Config geral |
 | Relacionado | [Exportacao](../infracoes/exportacao) | Webhook de exportacao |

@@ -1,12 +1,12 @@
 ---
 sidebar_position: 8
 title: Mapa de Fluxo de Passagens
-description: Mapa visual do fluxo de passagens por equipamento
+description: Mapa visual do fluxo de passagens por Equipamento
 ---
 
 # Mapa de Fluxo de Passagens
 
-Visualização geográfica do fluxo de passagens de veículos por equipamento. Os equipamentos são exibidos no mapa com indicadores de volume de tráfego, permitindo análise espacial da distribuição de passagens e infrações.
+Visualização geográfica do fluxo de passagens de Veículos por Equipamento Os Equipamentos são exibidos no mapa com indicadores de volume de tráfego, permitindo Análise espacial da distribuição de passagens e Infrações
 
 ![Mapa de Fluxo](../img/Relatorios%20-%20mapa%20de%20fluxo%20de%20passagens.png)
 
@@ -20,7 +20,7 @@ Visualização geográfica do fluxo de passagens de veículos por equipamento. O
 |--------|-----------|
 | **Período** | Faixa de datas |
 | **Região** | Filtrar por região geográfica |
-| **Equipamento** | Exibir equipamento específico |
+| Equipamento | Exibir Equipamento específico |
 | **Tipo de Dado** | Passagens, Infrações ou Aproveitamento OCR |
 
 ## Funcionalidades do Mapa
@@ -28,12 +28,12 @@ Visualização geográfica do fluxo de passagens de veículos por equipamento. O
 | Recurso | Descrição |
 |---------|-----------|
 | **Marcadores coloridos** | Cor indica volume de tráfego (verde = baixo, vermelho = alto) |
-| **Clique no equipamento** | Exibe resumo: passagens, infrações e aproveitamento |
+| **Clique no Equipamento | Exibe resumo: passagens, Infrações e aproveitamento |
 | **Zoom e navegação** | Mapa interativo com controle de zoom e arrasto |
 | **Clusters** | Equipamentos próximos são agrupados em escala reduzida |
 
 :::tip Dica
-O mapa usa a posição geográfica configurada no cadastro de cada equipamento. Verifique a [configuração de equipamentos](../cadastros-basicos/equipamentos) caso algum aparelho não esteja visível.
+O mapa usa a posição geográfica configurada no cadastro de cada Equipamento Verifique a Configuração de equipamentos](../cadastros-basicos/equipamentos) caso algum aparelho não esteja visível.
 :::
 
 ---
@@ -44,4 +44,4 @@ O mapa usa a posição geográfica configurada no cadastro de cada equipamento. 
 |------|--------|-----------|
 | Relacionado | [Fluxo Diário de Veículos](./fluxo-diario-veiculos) | Dados tabulares detalhados |
 | Relacionado | [Monitoramento Online](../operacoes/monitoramento-online) | Status em tempo real |
-| Relacionado | [Equipamentos](../cadastros-basicos/equipamentos) | Cadastro de equipamentos |
+| Relacionado | [Equipamentos](../cadastros-basicos/Equipamentos) | Cadastro de Equipamentos |

@@ -1,5 +1,6 @@
 import React, { useState, useMemo } from 'react';
 import { AXHUB_SITES, AXCROSS_SITES } from '../data/sitesData';
+import { Badge, StatCard } from '../components/common';
 import './GuiaSites.css';
 
 /* ═══════════════════════════════════════════════════════════════════════
@@ -80,35 +81,17 @@ function FichaAxHub({ site }) {
             🔗 {site.url}
           </a>
         </div>
-        <span className="gs-badge" style={{ background: getBadgeColor(site.tipo) }}>{site.tipo}</span>
+        <Badge color={getBadgeColor(site.tipo)}>{site.tipo}</Badge>
       </div>
 
       {/* Info Grid */}
       <div className="gs-info-grid">
-        <div className="gs-info-card">
-          <span className="gs-info-label">Estado</span>
-          <span className="gs-info-valor">📍 {site.estado}</span>
-        </div>
-        <div className="gs-info-card">
-          <span className="gs-info-label">Versão</span>
-          <span className="gs-info-valor">🏷️ {site.versao || '—'}</span>
-        </div>
-        <div className="gs-info-card">
-          <span className="gs-info-label">Menus</span>
-          <span className="gs-info-valor">📋 {site.menuCount || '—'}</span>
-        </div>
-        <div className="gs-info-card">
-          <span className="gs-info-label">OCR</span>
-          <span className="gs-info-valor">{site.ocr ? `${site.ocr}%` : '—'}</span>
-        </div>
-        <div className="gs-info-card">
-          <span className="gs-info-label">Equipamentos</span>
-          <span className="gs-info-valor">📡 {site.equipamentos?.total || '—'}</span>
-        </div>
-        <div className="gs-info-card">
-          <span className="gs-info-label">Passagens/dia</span>
-          <span className="gs-info-valor">{site.passagensDia ? site.passagensDia.toLocaleString('pt-BR') : '—'}</span>
-        </div>
+        <StatCard value={`📍 ${site.estado}`} label="Estado" size="small" />
+        <StatCard value={site.versao || '—'} label="Versão" size="small" />
+        <StatCard value={site.menuCount || '—'} label="Menus" size="small" />
+        <StatCard value={site.ocr ? `${site.ocr}%` : '—'} label="OCR" size="small" />
+        <StatCard value={site.equipamentos?.total || '—'} label="Equipamentos" size="small" />
+        <StatCard value={site.passagensDia ? site.passagensDia.toLocaleString('pt-BR') : '—'} label="Passagens/dia" size="small" />
       </div>
 
       {/* Funcionalidades Ativas */}
@@ -212,35 +195,17 @@ function FichaAxCross({ site }) {
             🔗 {site.url}
           </a>
         </div>
-        <span className="gs-badge" style={{ background: getBadgeColor(site.tipo) }}>{site.tipo}</span>
+        <Badge color={getBadgeColor(site.tipo)}>{site.tipo}</Badge>
       </div>
 
       {/* Info Grid */}
       <div className="gs-info-grid">
-        <div className="gs-info-card">
-          <span className="gs-info-label">Estado</span>
-          <span className="gs-info-valor">📍 {site.estado}</span>
-        </div>
-        <div className="gs-info-card">
-          <span className="gs-info-label">Equipamentos</span>
-          <span className="gs-info-valor">📡 {site.equipamentos}</span>
-        </div>
-        <div className="gs-info-card">
-          <span className="gs-info-label">Faixas</span>
-          <span className="gs-info-valor">🛤️ {site.faixas}</span>
-        </div>
-        <div className="gs-info-card">
-          <span className="gs-info-label">Alertas</span>
-          <span className="gs-info-valor">🚨 {site.alertas}</span>
-        </div>
-        <div className="gs-info-card">
-          <span className="gs-info-label">Veículos Monitorados</span>
-          <span className="gs-info-valor">🚗 {site.veiculos?.toLocaleString('pt-BR') || '0'}</span>
-        </div>
-        <div className="gs-info-card">
-          <span className="gs-info-label">Passagens/dia</span>
-          <span className="gs-info-valor">{site.passagensDia ? site.passagensDia.toLocaleString('pt-BR') : '—'}</span>
-        </div>
+        <StatCard value={`📍 ${site.estado}`} label="Estado" size="small" />
+        <StatCard value={site.equipamentos} label="Equipamentos" size="small" />
+        <StatCard value={site.faixas} label="Faixas" size="small" />
+        <StatCard value={site.alertas} label="Alertas" size="small" />
+        <StatCard value={site.veiculos?.toLocaleString('pt-BR') || '0'} label="Veículos Monitorados" size="small" />
+        <StatCard value={site.passagensDia ? site.passagensDia.toLocaleString('pt-BR') : '—'} label="Passagens/dia" size="small" />
       </div>
 
       {/* MDF-e */}

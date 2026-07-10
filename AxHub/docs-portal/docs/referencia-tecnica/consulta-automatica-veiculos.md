@@ -1,56 +1,56 @@
 ---
 sidebar_position: 3
 title: Consulta Automática de Dados de Veículos
-description: Guia completo de integração — como o AxHub consulta e popula dados de veículos automaticamente via Web Service
+description: Guia completo de integração — como o AxHub consulta e popula dados de Veículos automaticamente via Web Service
 ---
 
 # Consulta Automática de Dados de Veículos
 
 > **Guia de Integração — Banco de Dados**
-> Este documento descreve o processo de consulta automática de dados de veículos no AxHub: como funciona, quais tabelas são envolvidas, quais dados são retornados e como consultar e integrar essas informações.
+> Este documento descreve o processo de consulta automática de dados de Veículos no AxHub: como funciona, quais tabelas são envolvidas, quais dados são retornados e como consultar e integrar essas informações.
 
 ---
 
 ## O que é a Consulta Automática?
 
-A **Consulta Automática** é o processo pelo qual o AxHub envia a placa de um veículo detectado para um **Web Service externo** (DETRAN, SERPRO ou similar) e recebe de volta todos os dados cadastrais desse veículo. O resultado é armazenado automaticamente na tabela `TBVeiculos`, sem necessidade de nenhuma ação manual do operador.
+A **Consulta Automática** é o processo pelo qual o AxHub envia a placa de um Veículo detectado para um **Web Service externo** (DETRAN, SERPRO ou similar) e recebe de volta todos os dados cadastrais desse Veículo O resultado é armazenado automaticamente na tabela `TBVeiculos`, sem necessidade de nenhuma ação manual do operador.
 
 ### Quando acontece?
 
 | Evento | Momento da consulta |
 |---|---|
-| **Importação de infrações** | Ao importar o lote de infrações do equipamento, o sistema consulta a placa de cada infração |
+| **Importação de Infrações | Ao importar o lote de Infrações do Equipamento o sistema consulta a placa de cada Infração |
 | **Passagem registrada** | Ao receber uma passagem, o sistema envia a placa para consulta |
 | **Triagem manual** | O analista pode acionar uma reconsulta de placa na tela de triagem |
-| **Cronotacógrafo** | Ao registrar passagem de cronotacógrafo, o sistema consulta dados do veículo |
+| **Cronotacógrafo** | Ao registrar passagem de cronotacógrafo, o sistema consulta dados do Veículo |
 
 ---
 
 ## Fluxo Completo da Consulta Automática
 
 ```
-EQUIPAMENTO (sensor/radar)
+Equipamento (sensor/radar)
         │
-        │  [captura placa + imagem + velocidade]
+ │ [captura placa + imagem + velocidade]
         ▼
 IMPORTAÇÃO DE LOTE
   TBLoteImportacoes
   (NomeArquivoEntrada, StatusImportacao, Equipamento_id)
         │
-        │  [para cada infração/passagem no lote]
+ │ [para cada infração/passagem no lote]
         ▼
 CONSULTA WEB SERVICE EXTERNO
   (DETRAN / SERPRO / RENAINF)
   ┌─────────────────────────────────┐
-  │  Entrada:  Placa do veículo     │
-  │  Saída:    Marca, Modelo, Ano,  │
-  │            Tipo, Espécie, Cor,  │
-  │            Proprietário, etc.   │
+ │ Entrada: Placa do Veículo │
+ │ Saída: Marca, Modelo, Ano, │
+ │ Tipo, Espécie, Cor, │
+  │ Proprietário, etc. │
   └─────────────────────────────────┘
         │
-        │  [resposta do WS gravada em]
+ │ [resposta do WS gravada em]
         ▼
-TBVeiculos (dados completos do veículo)
+TBVeiculos (dados completos do Veículo
 TBPassagemDadosVeiculos (marca/cor por passagem)
 TBDadosCronotacografos (dados de jornada)
         │
@@ -63,12 +63,12 @@ TBInfracoes / TBPassagens
 
 ## Tabela Central: `TBVeiculos`
 
-É a tabela que armazena o resultado completo de cada consulta ao Web Service. Vinculada à infração e/ou passagem de cronotacógrafo.
+É a tabela que armazena o resultado completo de cada consulta ao Web Service. Vinculada à Infração e/ou passagem de cronotacógrafo.
 
 | Coluna (Banco de Dados) | Tipo | Nulo | Nome no Sistema | Descrição |
 |---|---|:---:|---|---|
 | `Id` | `uniqueidentifier` | Não | **ID** | Chave primária (GUID) |
-| `Infracao_id` | `bigint` | Sim | **Infração** | FK → `TBInfracoes.Id` — vínculo com a infração gerada |
+| `Infracao_id` | `bigint` | Sim | Infração | FK → `TBInfracoes.Id` — vínculo com a Infração gerada |
 | `PassagemCronotacografo_id` | `bigint` | Sim | **Passagem Crono.** | FK → `TBPassagensCronotacografos.Id` |
 | `MarcaVeiculo` | `nvarchar(60)` | Sim | **Marca** | Ex: `VOLKSWAGEN`, `TOYOTA`, `HONDA` |
 | `ModeloVeiculo` | `nvarchar(60)` | Sim | **Modelo** | Ex: `GOL`, `COROLLA`, `CIVIC` |
@@ -92,7 +92,7 @@ TBInfracoes / TBPassagens
 | `CaixaCambio` | `nvarchar(255)` | Sim | **Câmbio** | Manual, Automático, etc. |
 | `Renavam` | `nvarchar(11)` | Sim | **RENAVAM** | Registro Nacional de Veículo |
 | `UfPlaca` | `nvarchar(2)` | Sim | **UF da Placa** | Ex: `GO`, `SP`, `RJ` |
-| `NomeProprietario` | `nvarchar(200)` | Sim | **Proprietário** | Nome do proprietário do veículo |
+| `NomeProprietario` | `nvarchar(200)` | Sim | **Proprietário** | Nome do proprietário do Veículo |
 | `CpfCnpj` | `nvarchar(14)` | Sim | **CPF/CNPJ** | Documento do proprietário |
 | `MunicipioProprietario` | `nvarchar(255)` | Sim | **Município** | Cidade do proprietário |
 | `UfProprietario` | `nvarchar(2)` | Sim | **UF** | Estado do proprietário |
@@ -130,24 +130,24 @@ Armazena os dados de marca e cor retornados pelo sistema de OCR/IA para cada pas
 
 ## Tabela: `TBLoteImportacoes`
 
-Registra cada arquivo de importação recebido dos equipamentos. Ponto de entrada do fluxo.
+Registra cada arquivo de importação recebido dos Equipamentos Ponto de entrada do fluxo.
 
 | Coluna (Banco de Dados) | Tipo | Nome no Sistema | Descrição |
 |---|---|---|---|
 | `Id` | `uniqueidentifier` | **ID** | Chave primária |
-| `NomeArquivoEntrada` | `nvarchar(40)` | **Arquivo** | Nome do arquivo gerado pelo equipamento |
-| `CodigoFabricante` | `nvarchar(50)` | **Fabricante** | Código do fabricante do equipamento |
+| `NomeArquivoEntrada` | `nvarchar(40)` | **Arquivo** | Nome do arquivo gerado pelo Equipamento |
+| `CodigoFabricante` | `nvarchar(50)` | **Fabricante** | Código do fabricante do Equipamento |
 | `NumeroFaixa` | `tinyint` | **Faixa** | Número da faixa de captura |
-| `TipoImportacao` | `nvarchar(20)` | **Tipo** | Tipo do lote: INFRACAO, PASSAGEM, etc. |
+| `TipoImportacao` | `nvarchar(20)` | **Tipo** | Tipo do lote: Use Infração (com acento) PASSAGEM, etc. |
 | `StatusImportacao` | `nvarchar(20)` | **Status** | PENDENTE, PROCESSANDO, CONCLUIDO, ERRO |
-| `CodigoEquipamento` | `nvarchar(12)` | **Equipamento** | Código do equipamento que gerou o arquivo |
+| `CodigoEquipamento` | `nvarchar(12)` | Equipamento | Código do Equipamento que gerou o arquivo |
 | `DataRemessa` | `date` | **Data** | Data de envio do arquivo |
 | `HoraInicio` | `nvarchar(6)` | **Hora Início** | Período do lote |
 | `HoraFim` | `nvarchar(6)` | **Hora Fim** | Período do lote |
 | `UrlArquivoEntrada` | `nvarchar(255)` | **URL Arquivo** | Caminho de armazenamento |
 | `CodigoErro` | `nvarchar(255)` | **Código de Erro** | Código do erro caso falhe |
 | `Excecao` | `nvarchar(255)` | **Exceção** | Mensagem de exceção |
-| `Equipamento_id` | `uniqueidentifier` | **Equipamento FK** | FK → `TBEquipamentos.Id` |
+| `Equipamento_id` | `uniqueidentifier` | Equipamento FK** | FK → `TBEquipamentos.Id` |
 
 ---
 
@@ -177,9 +177,9 @@ Registra os lotes de exportação enviados ao órgão autuador (DETRAN/DER/PRF).
 | `UrlArquivo` | `nvarchar(2000)` | **URL Arquivo** | Caminho do arquivo gerado |
 | `StatusExportacao` | `nvarchar(50)` | **Status** | GERADO, ENVIADO, ACEITO, REJEITADO |
 | `Mensagem` | `nvarchar(max)` | **Mensagem** | Retorno do órgão autuador |
-| `DataIncialInfracoes` | `datetime` | **Data Inicial** | Período das infrações no lote |
-| `DataFinalInfracoes` | `datetime` | **Data Final** | Período das infrações no lote |
-| `TipoInfracao` | `nvarchar(50)` | **Tipo Infração** | VELOCIDADE, PESO, SEMAFORO, etc. |
+| `DataIncialInfracoes` | `datetime` | **Data Inicial** | Período das Infrações no lote |
+| `DataFinalInfracoes` | `datetime` | **Data Final** | Período das Infrações no lote |
+| `TipoInfracao` | `nvarchar(50)` | **Tipo Infração | VELOCIDADE, PESO, SEMAFORO, etc. |
 | `Prefixo` | `nvarchar(10)` | **Prefixo** | Prefixo do órgão no arquivo |
 
 ---
@@ -194,7 +194,7 @@ Permite integração em tempo real via notificação HTTP quando eventos ocorrem
 | `UniformResourceIdentifier` | `nvarchar(250)` | **URL** | Endpoint de destino da notificação |
 | `Evento` | `nvarchar(100)` | **Evento** | Tipo de evento que dispara o webhook |
 | `Ativo` | `bit` | **Ativo** | Se o webhook está habilitado |
-| `Codigo` | `bigint` | **Código** | Código identificador |
+| código | `bigint` | **Código** | Código identificador |
 | `Nome` | `nvarchar(50)` | **Nome** | Nome descritivo do webhook |
 | `Transacional` | `bit` | **Transacional** | Se garante entrega transacional |
 
@@ -204,8 +204,8 @@ Permite integração em tempo real via notificação HTTP quando eventos ocorrem
 
 ```
 TBLoteImportacoes ──────── TBEquipamentos
-   │ Id                          │ Id
-   │                             │
+   │ Id │ Id
+   │ │
    └──────────────────────────── FK
    │
    │ [cada linha do lote gera]
@@ -213,7 +213,7 @@ TBLoteImportacoes ──────── TBEquipamentos
 TBInfracoes / TBPassagens
    │ Id
    │ ClassificacaoVeiculo_id ──► TBClassificacoesVeiculos
-   │ LoteImportacao_id       ──► TBLoteImportacoes
+   │ LoteImportacao_id ──► TBLoteImportacoes
    │
    │ [consulta automática ao WS externo]
    ▼
@@ -221,9 +221,9 @@ TBVeiculos
    │ Infracao_id ──────────────► TBInfracoes
    │ PassagemCronotacografo_id ► TBPassagensCronotacografos
    │ (MarcaVeiculo, ModeloVeiculo, AnoVeiculo,
-   │  TipoVeiculo, Especie, Categoria, Cor,
-   │  NomeProprietario, Renavam, Chassi,
-   │  WebServiceConsultado, DataHoraConsulta)
+ │ TipoVeiculo, Especie, Categoria, Cor,
+ │ NomeProprietario, Renavam, Chassi,
+ │ WebServiceConsultado, DataHoraConsulta)
    │
 TBPassagemDadosVeiculos
    │ Passagem_id ──────────────► TBPassagens
@@ -234,17 +234,17 @@ TBPassagemDadosVeiculos
 
 ## Tabelas de Domínio para Cadastro Manual
 
-Estas tabelas são populadas uma vez (pela equipe de configuração) e servem de referência para classificar os dados retornados pela consulta automática.
+Estas tabelas são populadas uma vez (pela equipe de Configuração e servem de referência para classificar os dados retornados pela consulta automática.
 
 | Tabela | Tela no Sistema | Campos | Uso |
 |---|---|---|---|
-| `TBTipoVeiculos` | Veículos → Tipos | `Codigo`, `Nome` | Automóvel, Caminhão, Ônibus, Motocicleta |
-| `TBEspecieVeiculos` | Veículos → Espécies | `Codigo`, `Nome` | Passageiro, Carga, Misto |
-| `TBCategoriaVeiculos` | Veículos → Categorias | `Codigo`, `Nome` | Particular, Aluguel, Oficial |
-| `TBMarcaVeiculos` | Veículos → Marcas | `Codigo`, `Nome`, `Keywords` | Toyota, VW, Honda |
-| `TBMarcaModeloVeiculos` | Veículos → Modelos | `Modelo`, `Codigo`, `Marca`, `Keywords` | Corolla, Gol, Civic |
-| `TBCores` | Veículos → Cores | `Codigo`, `Nome` | Prata, Branco, Preto |
-| `TBClassificacoesVeiculos` | Veículos → Classificações | `Codigo`, `Descricao`, `ComprMin`, `ComprMax` | Pequeno, Médio, Grande |
+| `TBTipoVeiculos` | Veículos → Tipos | código `Nome` | Automóvel, Caminhão, Ônibus, Motocicleta |
+| `TBEspecieVeiculos` | Veículos → Espécies | código `Nome` | Passageiro, Carga, Misto |
+| `TBCategoriaVeiculos` | Veículos → Categorias | código `Nome` | Particular, Aluguel, Oficial |
+| `TBMarcaVeiculos` | Veículos → Marcas | código `Nome`, `Keywords` | Toyota, VW, Honda |
+| `TBMarcaModeloVeiculos` | Veículos → Modelos | `Modelo`, código `Marca`, `Keywords` | Corolla, Gol, Civic |
+| `TBCores` | Veículos → Cores | código `Nome` | Prata, Branco, Preto |
+| `TBClassificacoesVeiculos` | Veículos → Classificações | código `Descricao`, `ComprMin`, `ComprMax` | Pequeno, Médio, Grande |
 
 ---
 
@@ -254,34 +254,34 @@ Estas tabelas são populadas uma vez (pela equipe de configuração) e servem de
 
 ```sql
 SELECT TOP 100
-    v.DataHoraConsulta      AS [Data Consulta],
-    v.WebServiceConsultado  AS [Web Service],
-    i.PlacaVeiculo          AS [Placa],
-    v.MarcaVeiculo          AS [Marca],
-    v.ModeloVeiculo         AS [Modelo],
-    v.AnoVeiculo            AS [Ano Fab.],
-    v.AnoModelo             AS [Ano Modelo],
-    v.TipoVeiculo           AS [Tipo],
-    v.Especie               AS [Espécie],
-    v.Categoria             AS [Categoria],
-    v.Cor                   AS [Cor],
-    v.NomeProprietario      AS [Proprietário],
-    v.UfPlaca               AS [UF],
-    v.Restricao             AS [Restrição],
-    v.Debitos               AS [Débitos]
+    v.DataHoraConsulta AS [Data Consulta],
+ v.WebServiceConsultado AS [Web Service],
+    i.PlacaVeiculo AS [Placa],
+    v.MarcaVeiculo AS [Marca],
+    v.ModeloVeiculo AS [Modelo],
+    v.AnoVeiculo AS [Ano Fab.],
+    v.AnoModelo AS [Ano Modelo],
+    v.TipoVeiculo AS [Tipo],
+    v.Especie AS [Espécie],
+    v.Categoria AS [Categoria],
+    v.Cor AS [Cor],
+    v.NomeProprietario AS [Proprietário],
+    v.UfPlaca AS [UF],
+    v.Restricao AS [Restrição],
+    v.Debitos AS [Débitos]
 FROM TBVeiculos v
 INNER JOIN TBInfracoes i ON v.Infracao_id = i.Id
 WHERE v.DataHoraConsulta >= DATEADD(day, -7, GETDATE())
 ORDER BY v.DataHoraConsulta DESC;
 ```
 
-### Identificar infrações sem consulta realizada
+### Identificar Infrações sem consulta realizada
 
 ```sql
 SELECT
-    i.Id                AS InfracaoId,
-    i.PlacaVeiculo      AS Placa,
-    i.DataHoraPassagem  AS DataPassagem,
+    i.Id AS InfracaoId,
+    i.PlacaVeiculo AS Placa,
+ i.DataHoraPassagem AS DataPassagem,
     i.StatusProcessamento
 FROM TBInfracoes i
 LEFT JOIN TBVeiculos v ON v.Infracao_id = i.Id
@@ -295,13 +295,13 @@ ORDER BY i.DataHoraPassagem DESC;
 
 ```sql
 SELECT
-    l.NomeArquivoEntrada    AS [Arquivo],
-    l.CodigoEquipamento     AS [Equipamento],
-    l.StatusImportacao      AS [Status],
-    l.DataRemessa           AS [Data],
-    e.CodigoErro            AS [Cód. Erro],
-    e.DescicaoErro          AS [Descrição do Erro],
-    e.Sequencia             AS [Linha]
+ l.NomeArquivoEntrada AS [Arquivo],
+    l.CodigoEquipamento AS Equipamento
+    l.StatusImportacao AS [Status],
+    l.DataRemessa AS [Data],
+    e.CodigoErro AS [Cód. Erro],
+    e.DescicaoErro AS [Descrição do Erro],
+    e.Sequencia AS [Linha]
 FROM TBLoteImportacoes l
 INNER JOIN TBLoteImportacaoErros e ON e.LoteImportacao_id = l.Id
 ORDER BY l.DataRemessa DESC;
@@ -311,34 +311,34 @@ ORDER BY l.DataRemessa DESC;
 
 ```sql
 SELECT
-    x.DataHoraGeracao       AS [Gerado em],
-    x.StatusExportacao      AS [Status],
-    x.TipoInfracao          AS [Tipo],
-    x.DataIncialInfracoes   AS [Período início],
-    x.DataFinalInfracoes    AS [Período fim],
-    x.Sequencial            AS [Sequencial],
-    x.Mensagem              AS [Retorno órgão]
+    x.DataHoraGeracao AS [Gerado em],
+    x.StatusExportacao AS [Status],
+    x.TipoInfracao AS [Tipo],
+  x.DataIncialInfracoes AS [Período início],
+ x.DataFinalInfracoes AS [Período fim],
+    x.Sequencial AS [Sequencial],
+    x.Mensagem AS [Retorno órgão]
 FROM TBLoteExportacoes x
 ORDER BY x.DataHoraGeracao DESC;
 ```
 
-### Consultar passagens com dados de veículo (OCR/IA)
+### Consultar passagens com dados de Veículo (OCR/IA)
 
 ```sql
 SELECT
-    p.DataHoraPassagem          AS [Data/Hora],
-    p.PlacaVeiculo              AS [Placa],
-    d.Marca                     AS [Marca],
-    d.MarcaModelo               AS [Marca/Modelo],
-    d.Cor                       AS [Cor],
-    c.Descricao                 AS [Classificação],
-    p.TamanhoVeiculo            AS [Tamanho (cm)],
-    p.VelocidadeMedida          AS [Velocidade],
-    e.Codigo                    AS [Equipamento]
+    p.DataHoraPassagem AS [Data/Hora],
+    p.PlacaVeiculo AS [Placa],
+    d.Marca AS [Marca],
+    d.MarcaModelo AS [Marca/Modelo],
+    d.Cor AS [Cor],
+    c.Descricao AS [Classificação],
+    p.TamanhoVeiculo AS [Tamanho (cm)],
+    p.VelocidadeMedida AS [Velocidade],
+    e.Codigo AS Equipamento
 FROM TBPassagens p
-LEFT JOIN TBPassagemDadosVeiculos d     ON d.Passagem_id = p.Id
-LEFT JOIN TBClassificacoesVeiculos c    ON c.Id = p.ClassificacaoVeiculo_id
-LEFT JOIN TBEquipamentos e              ON e.Id = p.Equipamento_id
+LEFT JOIN TBPassagemDadosVeiculos d ON d.Passagem_id = p.Id
+LEFT JOIN TBClassificacoesVeiculos c ON c.Id = p.ClassificacaoVeiculo_id
+LEFT JOIN TBEquipamentos e ON e.Id = p.Equipamento_id
 WHERE p.DataHoraPassagem >= DATEADD(day, -1, GETDATE())
 ORDER BY p.DataHoraPassagem DESC;
 ```
@@ -347,11 +347,11 @@ ORDER BY p.DataHoraPassagem DESC;
 
 ```sql
 SELECT
-    Nome                        AS [Nome],
-    UniformResourceIdentifier   AS [URL destino],
-    Evento                      AS [Evento],
-    Ativo                       AS [Ativo],
-    Transacional                AS [Transacional]
+    Nome AS [Nome],
+  UniformResourceIdentifier AS [URL destino],
+    Evento AS [Evento],
+    Ativo AS [Ativo],
+    Transacional AS [Transacional]
 FROM TBWebHooks
 ORDER BY Ativo DESC, Nome;
 ```
@@ -362,9 +362,9 @@ ORDER BY Ativo DESC, Nome;
 
 | Item | Descrição |
 |---|---|
-| **Placa nula** | Se `PlacaVeiculo IS NULL`, a consulta não é realizada. Verificar OCR do equipamento. |
+| **Placa nula** | Se `PlacaVeiculo IS NULL`, a consulta não é realizada. Verificar OCR do Equipamento |
 | **WS indisponível** | Se o Web Service estiver offline, `TBVeiculos` não é populado. `DataHoraConsulta` ficará nulo. |
-| **Consulta por infração** | `TBVeiculos.Infracao_id` é FK para `TBInfracoes` — uma infração pode ter no máximo 1 registro em `TBVeiculos`. |
+| **Consulta por Infração | `TBVeiculos.Infracao_id` é FK para `TBInfracoes` — uma Infração pode ter no máximo 1 registro em `TBVeiculos`. |
 | **Dados de OCR vs WS** | `TBPassagemDadosVeiculos` usa OCR/IA (identificação visual). `TBVeiculos` usa o WS externo (cadastro oficial). São fontes diferentes. |
 | **Ano como inteiro** | `AnoVeiculo` e `AnoModelo` são `int`, não `date`. Use diretamente como número: `WHERE AnoVeiculo = 2022`. |
 | **CPF/CNPJ sem máscara** | O campo `CpfCnpj` armazena apenas números (11 ou 14 dígitos), sem pontos ou traços. |

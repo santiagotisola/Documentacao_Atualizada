@@ -1,18 +1,18 @@
 ﻿---
 sidebar_position: 3
 title: Eventos de Equipamentos
-description: Registro de eventos operacionais dos equipamentos
+description: Registro de eventos operacionais dos Equipamentos
 ---
 
 # Eventos de Equipamentos
 
 ![Operação](../img/operacoes.png)
 
-Registro automático de eventos operacionais dos equipamentos de pesagem: inicialização, falhas, manutenções e alertas.
+Registro automático de eventos operacionais dos Equipamentos de pesagem: inicialização, falhas, manutenções e alertas.
 
 ## Como acessar
 
-**Menu lateral** → Operações → **Eventos de Equipamentos**
+**Menu lateral** → Operações → **Eventos de Equipamentos
 
 ## Listagem
 
@@ -21,7 +21,7 @@ Registro automático de eventos operacionais dos equipamentos de pesagem: inicia
 | Coluna | Descrição |
 |--------|-----------|
 | **Data/Hora** | Momento do evento |
-| **Equipamento** | Equipamento que gerou o evento |
+| Equipamento | Equipamento que gerou o evento |
 | **Tipo** | Categoria do evento |
 | **Descrição** | Detalhes do evento |
 | **Severidade** | Info, Aviso, Erro, Crítico |

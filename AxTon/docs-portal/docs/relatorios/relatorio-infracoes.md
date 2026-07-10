@@ -6,13 +6,13 @@ description: Infrações registradas por período e status
 
 # Relatório de Infrações
 
-![Relatório de Pesagem](../img/Relatorio%20de%20pesagem.png)
+Relatório de Pesagem](../img/Relatorio%20de%20pesagem.png)
 
-Exibe as infrações de excesso de peso registradas, agrupadas por período, posto e status de processamento.
+Exibe as Infrações de excesso de peso registradas, agrupadas por período, posto e status de processamento.
 
 ## Como acessar
 
-**Menu lateral** → Relatórios → **Relatório de Infrações**
+**Menu lateral** → Relatórios → Relatório de Infrações
 
 ## Dados do Relatório
 
@@ -22,7 +22,7 @@ Exibe as infrações de excesso de peso registradas, agrupadas por período, pos
 |--------|-----------|
 | **ID** | Identificador |
 | **Placa** | Veículo |
-| **Data** | Data da infração |
+| **Data** | Data da Infração |
 | **Peso** | Peso bruto |
 | **Excesso** | Peso excedente |
 | **Status** | Estado atual |

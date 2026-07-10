@@ -1,0 +1,1214 @@
+{
+  "workflowId": "WF-AxHub - production",
+  "name": "Cenário gravado em AxHub (production)",
+  "steps": [
+    {
+      "step": 1,
+      "action": "navigate",
+      "validation": {
+        "title": "Login - AXHub",
+        "url": "https://homologacao.axhub.axion.ws/Home/Login?ReturnUrl=%2F",
+        "visibleElements": 1
+      }
+    },
+    {
+      "step": 2,
+      "action": "click",
+      "selector": "#Username",
+      "validation": {
+        "title": "Login - AXHub",
+        "url": "https://homologacao.axhub.axion.ws/Home/Login?ReturnUrl=%2F",
+        "visibleElements": 1
+      }
+    },
+    {
+      "step": 3,
+      "action": "input",
+      "selector": "#Username",
+      "value": "a",
+      "validation": {
+        "title": "Login - AXHub",
+        "url": "https://homologacao.axhub.axion.ws/Home/Login?ReturnUrl=%2F",
+        "visibleElements": 1
+      }
+    },
+    {
+      "step": 4,
+      "action": "input",
+      "selector": "#Username",
+      "value": "adm",
+      "validation": {
+        "title": "Login - AXHub",
+        "url": "https://homologacao.axhub.axion.ws/Home/Login?ReturnUrl=%2F",
+        "visibleElements": 1
+      }
+    },
+    {
+      "step": 5,
+      "action": "input",
+      "selector": "#Username",
+      "value": "admin",
+      "validation": {
+        "title": "Login - AXHub",
+        "url": "https://homologacao.axhub.axion.ws/Home/Login?ReturnUrl=%2F",
+        "visibleElements": 1
+      }
+    },
+    {
+      "step": 6,
+      "action": "click",
+      "selector": ".min-h-fullscreen",
+      "validation": {
+        "title": "Login - AXHub",
+        "url": "https://homologacao.axhub.axion.ws/Home/Login?ReturnUrl=%2F",
+        "visibleElements": 1
+      }
+    },
+    {
+      "step": 7,
+      "action": "input",
+      "selector": "#Username",
+      "value": "Ad",
+      "validation": {
+        "title": "Login - AXHub",
+        "url": "https://homologacao.axhub.axion.ws/Home/Login?ReturnUrl=%2F",
+        "visibleElements": 1
+      }
+    },
+    {
+      "step": 8,
+      "action": "input",
+      "selector": "#Username",
+      "value": "Adm",
+      "validation": {
+        "title": "Login - AXHub",
+        "url": "https://homologacao.axhub.axion.ws/Home/Login?ReturnUrl=%2F",
+        "visibleElements": 1
+      }
+    },
+    {
+      "step": 9,
+      "action": "input",
+      "selector": "#Username",
+      "value": "Admin",
+      "validation": {
+        "title": "Login - AXHub",
+        "url": "https://homologacao.axhub.axion.ws/Home/Login?ReturnUrl=%2F",
+        "visibleElements": 1
+      }
+    },
+    {
+      "step": 10,
+      "action": "input",
+      "selector": "#Password",
+      "value": "{{PASSWORD}}",
+      "validation": {
+        "title": "Login - AXHub",
+        "url": "https://homologacao.axhub.axion.ws/Home/Login?ReturnUrl=%2F",
+        "visibleElements": 1
+      }
+    },
+    {
+      "step": 11,
+      "action": "input",
+      "selector": "#Password",
+      "value": "{{PASSWORD}}",
+      "validation": {
+        "title": "Login - AXHub",
+        "url": "https://homologacao.axhub.axion.ws/Home/Login?ReturnUrl=%2F",
+        "visibleElements": 1
+      }
+    },
+    {
+      "step": 12,
+      "action": "input",
+      "selector": "#Password",
+      "value": "{{PASSWORD}}",
+      "validation": {
+        "title": "Login - AXHub",
+        "url": "https://homologacao.axhub.axion.ws/Home/Login?ReturnUrl=%2F",
+        "visibleElements": 1
+      }
+    },
+    {
+      "step": 13,
+      "action": "input",
+      "selector": "#Password",
+      "value": "{{PASSWORD}}",
+      "validation": {
+        "title": "Login - AXHub",
+        "url": "https://homologacao.axhub.axion.ws/Home/Login?ReturnUrl=%2F",
+        "visibleElements": 1
+      }
+    },
+    {
+      "step": 14,
+      "action": "input",
+      "selector": "#Password",
+      "value": "{{PASSWORD}}",
+      "validation": {
+        "title": "Login - AXHub",
+        "url": "https://homologacao.axhub.axion.ws/Home/Login?ReturnUrl=%2F",
+        "visibleElements": 1
+      }
+    },
+    {
+      "step": 15,
+      "action": "input",
+      "selector": "#Password",
+      "value": "{{PASSWORD}}",
+      "validation": {
+        "title": "Login - AXHub",
+        "url": "https://homologacao.axhub.axion.ws/Home/Login?ReturnUrl=%2F",
+        "visibleElements": 1
+      }
+    },
+    {
+      "step": 16,
+      "action": "input",
+      "selector": "#Password",
+      "value": "{{PASSWORD}}",
+      "validation": {
+        "title": "Login - AXHub",
+        "url": "https://homologacao.axhub.axion.ws/Home/Login?ReturnUrl=%2F",
+        "visibleElements": 1
+      }
+    },
+    {
+      "step": 17,
+      "action": "navigate",
+      "validation": {
+        "title": "Bem vindo - AXHub",
+        "url": "https://homologacao.axhub.axion.ws/",
+        "visibleElements": 191
+      }
+    },
+    {
+      "step": 18,
+      "action": "click",
+      "selector": "span",
+      "validation": {
+        "title": "Bem vindo - AXHub",
+        "url": "https://homologacao.axhub.axion.ws/",
+        "visibleElements": 204
+      }
+    },
+    {
+      "step": 19,
+      "action": "click",
+      "selector": ".title",
+      "validation": {
+        "title": "Bem vindo - AXHub",
+        "url": "https://homologacao.axhub.axion.ws/",
+        "visibleElements": 204
+      }
+    },
+    {
+      "step": 20,
+      "action": "navigate",
+      "validation": {
+        "title": "Classificações de Veículos - AXHub",
+        "url": "https://homologacao.axhub.axion.ws/classificacaoveiculo",
+        "visibleElements": 193
+      }
+    },
+    {
+      "step": 21,
+      "action": "navigate",
+      "validation": {
+        "title": "Classificações de Veículos - AXHub",
+        "url": "https://homologacao.axhub.axion.ws/classificacaoveiculo/new",
+        "visibleElements": 184
+      }
+    },
+    {
+      "step": 22,
+      "action": "click",
+      "selector": "#Codigo",
+      "validation": {
+        "title": "Classificações de Veículos - AXHub",
+        "url": "https://homologacao.axhub.axion.ws/classificacaoveiculo/new",
+        "visibleElements": 184
+      }
+    },
+    {
+      "step": 23,
+      "action": "input",
+      "selector": "#Codigo",
+      "value": "a",
+      "validation": {
+        "title": "Classificações de Veículos - AXHub",
+        "url": "https://homologacao.axhub.axion.ws/classificacaoveiculo/new",
+        "visibleElements": 184
+      }
+    },
+    {
+      "step": 24,
+      "action": "input",
+      "selector": "#Codigo",
+      "value": "asas",
+      "validation": {
+        "title": "Classificações de Veículos - AXHub",
+        "url": "https://homologacao.axhub.axion.ws/classificacaoveiculo/new",
+        "visibleElements": 184
+      }
+    },
+    {
+      "step": 25,
+      "action": "input",
+      "selector": "#Codigo",
+      "value": "asasassa",
+      "validation": {
+        "title": "Classificações de Veículos - AXHub",
+        "url": "https://homologacao.axhub.axion.ws/classificacaoveiculo/new",
+        "visibleElements": 184
+      }
+    },
+    {
+      "step": 26,
+      "action": "input",
+      "selector": "#Codigo",
+      "value": "asasassasas",
+      "validation": {
+        "title": "Classificações de Veículos - AXHub",
+        "url": "https://homologacao.axhub.axion.ws/classificacaoveiculo/new",
+        "visibleElements": 184
+      }
+    },
+    {
+      "step": 27,
+      "action": "input",
+      "selector": "#Codigo",
+      "value": "asasassasasas",
+      "validation": {
+        "title": "Classificações de Veículos - AXHub",
+        "url": "https://homologacao.axhub.axion.ws/classificacaoveiculo/new",
+        "visibleElements": 184
+      }
+    },
+    {
+      "step": 28,
+      "action": "click",
+      "selector": "#Descricao",
+      "validation": {
+        "title": "Classificações de Veículos - AXHub",
+        "url": "https://homologacao.axhub.axion.ws/classificacaoveiculo/new",
+        "visibleElements": 184
+      }
+    },
+    {
+      "step": 29,
+      "action": "input",
+      "selector": "#Descricao",
+      "value": "ss",
+      "validation": {
+        "title": "Classificações de Veículos - AXHub",
+        "url": "https://homologacao.axhub.axion.ws/classificacaoveiculo/new",
+        "visibleElements": 184
+      }
+    },
+    {
+      "step": 30,
+      "action": "input",
+      "selector": "#Descricao",
+      "value": "sssss",
+      "validation": {
+        "title": "Classificações de Veículos - AXHub",
+        "url": "https://homologacao.axhub.axion.ws/classificacaoveiculo/new",
+        "visibleElements": 184
+      }
+    },
+    {
+      "step": 31,
+      "action": "input",
+      "selector": "#Descricao",
+      "value": "ssssssas",
+      "validation": {
+        "title": "Classificações de Veículos - AXHub",
+        "url": "https://homologacao.axhub.axion.ws/classificacaoveiculo/new",
+        "visibleElements": 184
+      }
+    },
+    {
+      "step": 32,
+      "action": "input",
+      "selector": "#Descricao",
+      "value": "ssssssasas",
+      "validation": {
+        "title": "Classificações de Veículos - AXHub",
+        "url": "https://homologacao.axhub.axion.ws/classificacaoveiculo/new",
+        "visibleElements": 184
+      }
+    },
+    {
+      "step": 33,
+      "action": "click",
+      "selector": "#ComprimentoMinimoVeiculo",
+      "validation": {
+        "title": "Classificações de Veículos - AXHub",
+        "url": "https://homologacao.axhub.axion.ws/classificacaoveiculo/new",
+        "visibleElements": 184
+      }
+    },
+    {
+      "step": 34,
+      "action": "input",
+      "selector": "#ComprimentoMinimoVeiculo",
+      "value": "65656",
+      "validation": {
+        "title": "Classificações de Veículos - AXHub",
+        "url": "https://homologacao.axhub.axion.ws/classificacaoveiculo/new",
+        "visibleElements": 184
+      }
+    },
+    {
+      "step": 35,
+      "action": "input",
+      "selector": "#ComprimentoMinimoVeiculo",
+      "value": "6565656565",
+      "validation": {
+        "title": "Classificações de Veículos - AXHub",
+        "url": "https://homologacao.axhub.axion.ws/classificacaoveiculo/new",
+        "visibleElements": 184
+      }
+    },
+    {
+      "step": 36,
+      "action": "input",
+      "selector": "#ComprimentoMinimoVeiculo",
+      "value": "656565656565656",
+      "validation": {
+        "title": "Classificações de Veículos - AXHub",
+        "url": "https://homologacao.axhub.axion.ws/classificacaoveiculo/new",
+        "visibleElements": 184
+      }
+    },
+    {
+      "step": 37,
+      "action": "input",
+      "selector": "#ComprimentoMinimoVeiculo",
+      "value": "656565656565656565656",
+      "validation": {
+        "title": "Classificações de Veículos - AXHub",
+        "url": "https://homologacao.axhub.axion.ws/classificacaoveiculo/new",
+        "visibleElements": 184
+      }
+    },
+    {
+      "step": 38,
+      "action": "input",
+      "selector": "#ComprimentoMinimoVeiculo",
+      "value": "65656565656565656565656565",
+      "validation": {
+        "title": "Classificações de Veículos - AXHub",
+        "url": "https://homologacao.axhub.axion.ws/classificacaoveiculo/new",
+        "visibleElements": 184
+      }
+    },
+    {
+      "step": 39,
+      "action": "input",
+      "selector": "#ComprimentoMinimoVeiculo",
+      "value": "6565656565656565656565656565656",
+      "validation": {
+        "title": "Classificações de Veículos - AXHub",
+        "url": "https://homologacao.axhub.axion.ws/classificacaoveiculo/new",
+        "visibleElements": 184
+      }
+    },
+    {
+      "step": 40,
+      "action": "input",
+      "selector": "#ComprimentoMinimoVeiculo",
+      "value": "656565656565656565656565656565656565",
+      "validation": {
+        "title": "Classificações de Veículos - AXHub",
+        "url": "https://homologacao.axhub.axion.ws/classificacaoveiculo/new",
+        "visibleElements": 184
+      }
+    },
+    {
+      "step": 41,
+      "action": "input",
+      "selector": "#ComprimentoMinimoVeiculo",
+      "value": "656565656565656565656565656565656565656565",
+      "validation": {
+        "title": "Classificações de Veículos - AXHub",
+        "url": "https://homologacao.axhub.axion.ws/classificacaoveiculo/new",
+        "visibleElements": 184
+      }
+    },
+    {
+      "step": 42,
+      "action": "input",
+      "selector": "#ComprimentoMinimoVeiculo",
+      "value": "65656565656565656565656565656565656565656565656",
+      "validation": {
+        "title": "Classificações de Veículos - AXHub",
+        "url": "https://homologacao.axhub.axion.ws/classificacaoveiculo/new",
+        "visibleElements": 184
+      }
+    },
+    {
+      "step": 43,
+      "action": "input",
+      "selector": "#ComprimentoMinimoVeiculo",
+      "value": "6565656565656565656565656565656565656565656565655656",
+      "validation": {
+        "title": "Classificações de Veículos - AXHub",
+        "url": "https://homologacao.axhub.axion.ws/classificacaoveiculo/new",
+        "visibleElements": 184
+      }
+    },
+    {
+      "step": 44,
+      "action": "input",
+      "selector": "#ComprimentoMinimoVeiculo",
+      "value": "656565656565656565656565656565656565656565656565565656565",
+      "validation": {
+        "title": "Classificações de Veículos - AXHub",
+        "url": "https://homologacao.axhub.axion.ws/classificacaoveiculo/new",
+        "visibleElements": 184
+      }
+    },
+    {
+      "step": 45,
+      "action": "input",
+      "selector": "#ComprimentoMinimoVeiculo",
+      "value": "6565656565656565656565656565656565656565656565655656565656656",
+      "validation": {
+        "title": "Classificações de Veículos - AXHub",
+        "url": "https://homologacao.axhub.axion.ws/classificacaoveiculo/new",
+        "visibleElements": 184
+      }
+    },
+    {
+      "step": 46,
+      "action": "input",
+      "selector": "#ComprimentoMinimoVeiculo",
+      "value": "656565656565656565656565656565656565656565656565565656565665666",
+      "validation": {
+        "title": "Classificações de Veículos - AXHub",
+        "url": "https://homologacao.axhub.axion.ws/classificacaoveiculo/new",
+        "visibleElements": 184
+      }
+    },
+    {
+      "step": 47,
+      "action": "input",
+      "selector": "#ComprimentoMinimoVeiculo",
+      "value": "6565656565656565656565656565656565656565656565655656565656656666666666666666666",
+      "validation": {
+        "title": "Classificações de Veículos - AXHub",
+        "url": "https://homologacao.axhub.axion.ws/classificacaoveiculo/new",
+        "visibleElements": 184
+      }
+    },
+    {
+      "step": 48,
+      "action": "input",
+      "selector": "#ComprimentoMinimoVeiculo",
+      "value": "6565656565656565656565656565656565656565656565655656565656656666666666666666666666666666666666",
+      "validation": {
+        "title": "Classificações de Veículos - AXHub",
+        "url": "https://homologacao.axhub.axion.ws/classificacaoveiculo/new",
+        "visibleElements": 184
+      }
+    },
+    {
+      "step": 49,
+      "action": "input",
+      "selector": "#ComprimentoMinimoVeiculo",
+      "value": "656565656565656565656565656565656565656565656565565656565665666666666666666666666666666666666666666666",
+      "validation": {
+        "title": "Classificações de Veículos - AXHub",
+        "url": "https://homologacao.axhub.axion.ws/classificacaoveiculo/new",
+        "visibleElements": 184
+      }
+    },
+    {
+      "step": 50,
+      "action": "click",
+      "selector": "#ComprimentoMaximoVeiculo",
+      "validation": {
+        "title": "Classificações de Veículos - AXHub",
+        "url": "https://homologacao.axhub.axion.ws/classificacaoveiculo/new",
+        "visibleElements": 184
+      }
+    },
+    {
+      "step": 51,
+      "action": "input",
+      "selector": "#ComprimentoMaximoVeiculo",
+      "value": "6.6",
+      "validation": {
+        "title": "Classificações de Veículos - AXHub",
+        "url": "https://homologacao.axhub.axion.ws/classificacaoveiculo/new",
+        "visibleElements": 184
+      }
+    },
+    {
+      "step": 52,
+      "action": "input",
+      "selector": "#ComprimentoMaximoVeiculo",
+      "value": "6.66",
+      "validation": {
+        "title": "Classificações de Veículos - AXHub",
+        "url": "https://homologacao.axhub.axion.ws/classificacaoveiculo/new",
+        "visibleElements": 184
+      }
+    },
+    {
+      "step": 53,
+      "action": "input",
+      "selector": "#ComprimentoMaximoVeiculo",
+      "value": "6.6665",
+      "validation": {
+        "title": "Classificações de Veículos - AXHub",
+        "url": "https://homologacao.axhub.axion.ws/classificacaoveiculo/new",
+        "visibleElements": 184
+      }
+    },
+    {
+      "step": 54,
+      "action": "input",
+      "selector": "#ComprimentoMaximoVeiculo",
+      "value": "6.6665656565",
+      "validation": {
+        "title": "Classificações de Veículos - AXHub",
+        "url": "https://homologacao.axhub.axion.ws/classificacaoveiculo/new",
+        "visibleElements": 184
+      }
+    },
+    {
+      "step": 55,
+      "action": "input",
+      "selector": "#ComprimentoMaximoVeiculo",
+      "value": "6.666565656555",
+      "validation": {
+        "title": "Classificações de Veículos - AXHub",
+        "url": "https://homologacao.axhub.axion.ws/classificacaoveiculo/new",
+        "visibleElements": 184
+      }
+    },
+    {
+      "step": 56,
+      "action": "input",
+      "selector": "#ComprimentoMaximoVeiculo",
+      "value": "6.666565656555555555555555555",
+      "validation": {
+        "title": "Classificações de Veículos - AXHub",
+        "url": "https://homologacao.axhub.axion.ws/classificacaoveiculo/new",
+        "visibleElements": 184
+      }
+    },
+    {
+      "step": 57,
+      "action": "input",
+      "selector": "#ComprimentoMaximoVeiculo",
+      "value": "6.6665656565555555555555555555555555555555555",
+      "validation": {
+        "title": "Classificações de Veículos - AXHub",
+        "url": "https://homologacao.axhub.axion.ws/classificacaoveiculo/new",
+        "visibleElements": 184
+      }
+    },
+    {
+      "step": 58,
+      "action": "input",
+      "selector": "#ComprimentoMaximoVeiculo",
+      "value": "6.66656565655555555555555555555555555555555555555555555555",
+      "validation": {
+        "title": "Classificações de Veículos - AXHub",
+        "url": "https://homologacao.axhub.axion.ws/classificacaoveiculo/new",
+        "visibleElements": 184
+      }
+    },
+    {
+      "step": 59,
+      "action": "input",
+      "selector": "#ComprimentoMaximoVeiculo",
+      "value": "6.666565656555555555555555555555555555555555555555555555555556",
+      "validation": {
+        "title": "Classificações de Veículos - AXHub",
+        "url": "https://homologacao.axhub.axion.ws/classificacaoveiculo/new",
+        "visibleElements": 184
+      }
+    },
+    {
+      "step": 60,
+      "action": "input",
+      "selector": "#ComprimentoMaximoVeiculo",
+      "value": "6.6665656565555555555555555555555555555555555555555555555555565656",
+      "validation": {
+        "title": "Classificações de Veículos - AXHub",
+        "url": "https://homologacao.axhub.axion.ws/classificacaoveiculo/new",
+        "visibleElements": 184
+      }
+    },
+    {
+      "step": 61,
+      "action": "input",
+      "selector": "#ComprimentoMaximoVeiculo",
+      "value": "6.666565656555555555555555555555555555555555555555555555555556565656",
+      "validation": {
+        "title": "Classificações de Veículos - AXHub",
+        "url": "https://homologacao.axhub.axion.ws/classificacaoveiculo/new",
+        "visibleElements": 184
+      }
+    },
+    {
+      "step": 62,
+      "action": "input",
+      "selector": "#ComprimentoMaximoVeiculo",
+      "value": "6.66656565655555555555555555555555555555555555555555555555555656565666666666666",
+      "validation": {
+        "title": "Classificações de Veículos - AXHub",
+        "url": "https://homologacao.axhub.axion.ws/classificacaoveiculo/new",
+        "visibleElements": 184
+      }
+    },
+    {
+      "step": 63,
+      "action": "input",
+      "selector": "#ComprimentoMaximoVeiculo",
+      "value": "6.666565656555555555555555555555555555555555555555555555555556565656666666666666666666666666666",
+      "validation": {
+        "title": "Classificações de Veículos - AXHub",
+        "url": "https://homologacao.axhub.axion.ws/classificacaoveiculo/new",
+        "visibleElements": 184
+      }
+    },
+    {
+      "step": 64,
+      "action": "input",
+      "selector": "#ComprimentoMaximoVeiculo",
+      "value": "6.666565656555555555555555555555555555555555555555555555555556565656666666666666666666666666666666666666666666",
+      "validation": {
+        "title": "Classificações de Veículos - AXHub",
+        "url": "https://homologacao.axhub.axion.ws/classificacaoveiculo/new",
+        "visibleElements": 184
+      }
+    },
+    {
+      "step": 65,
+      "action": "input",
+      "selector": "#ComprimentoMaximoVeiculo",
+      "value": "6.6665656565555555555555555555555555555555555555555555555555565656566666666666666666666666666666666666666666666666666666665",
+      "validation": {
+        "title": "Classificações de Veículos - AXHub",
+        "url": "https://homologacao.axhub.axion.ws/classificacaoveiculo/new",
+        "visibleElements": 184
+      }
+    },
+    {
+      "step": 66,
+      "action": "input",
+      "selector": "#ComprimentoMaximoVeiculo",
+      "value": "6.66656565655555555555555555555555555555555555555555555555555656565666666666666666666666666666666666666666666666666666666656565",
+      "validation": {
+        "title": "Classificações de Veículos - AXHub",
+        "url": "https://homologacao.axhub.axion.ws/classificacaoveiculo/new",
+        "visibleElements": 184
+      }
+    },
+    {
+      "step": 67,
+      "action": "input",
+      "selector": "#ComprimentoMaximoVeiculo",
+      "value": "6.666565656555555555555555555555555555555555555555555555555556565656666666666666666666666666666666666666666666666666666666565656565",
+      "validation": {
+        "title": "Classificações de Veículos - AXHub",
+        "url": "https://homologacao.axhub.axion.ws/classificacaoveiculo/new",
+        "visibleElements": 184
+      }
+    },
+    {
+      "step": 68,
+      "action": "input",
+      "selector": "#ComprimentoMaximoVeiculo",
+      "value": "6.66656565655555555555555555555555555555555555555555555555555656565666666666666666666666666666666666666666666666666666666656565656565656",
+      "validation": {
+        "title": "Classificações de Veículos - AXHub",
+        "url": "https://homologacao.axhub.axion.ws/classificacaoveiculo/new",
+        "visibleElements": 184
+      }
+    },
+    {
+      "step": 69,
+      "action": "input",
+      "selector": "#ComprimentoMaximoVeiculo",
+      "value": "6.6665656565555555555555555555555555555555555555555555555555565656566666666666666666666666666666666666666666666666666666665656565656565656",
+      "validation": {
+        "title": "Classificações de Veículos - AXHub",
+        "url": "https://homologacao.axhub.axion.ws/classificacaoveiculo/new",
+        "visibleElements": 184
+      }
+    },
+    {
+      "step": 70,
+      "action": "input",
+      "selector": "#ComprimentoMaximoVeiculo",
+      "value": "6.66656565655555555555555555555555555555555555555555555555555656565666666666666666666666666666666666666666666666666666666656565656565656566666666666",
+      "validation": {
+        "title": "Classificações de Veículos - AXHub",
+        "url": "https://homologacao.axhub.axion.ws/classificacaoveiculo/new",
+        "visibleElements": 184
+      }
+    },
+    {
+      "step": 71,
+      "action": "input",
+      "selector": "#ComprimentoMaximoVeiculo",
+      "value": "6.66656565655555555555555555555555555555555555555555555555555656565666666666666666666666666666666666666666666666666666666656565656565656566666666666666666666666666",
+      "validation": {
+        "title": "Classificações de Veículos - AXHub",
+        "url": "https://homologacao.axhub.axion.ws/classificacaoveiculo/new",
+        "visibleElements": 184
+      }
+    },
+    {
+      "step": 72,
+      "action": "input",
+      "selector": "#ComprimentoMaximoVeiculo",
+      "value": "6.66656565655555555555555555555555555555555555555555555555555656565666666666666666666666666666666666666666666666666666666656565656565656566666666666666666666666666666666666666666",
+      "validation": {
+        "title": "Classificações de Veículos - AXHub",
+        "url": "https://homologacao.axhub.axion.ws/classificacaoveiculo/new",
+        "visibleElements": 184
+      }
+    },
+    {
+      "step": 73,
+      "action": "input",
+      "selector": "#ComprimentoMaximoVeiculo",
+      "value": "6.666565656555555555555555555555555555555555555555555555555556565656666666666666666666666666666666666666666666666666666666565656565656565666666666666666666666666666666666666666666666666666666666",
+      "validation": {
+        "title": "Classificações de Veículos - AXHub",
+        "url": "https://homologacao.axhub.axion.ws/classificacaoveiculo/new",
+        "visibleElements": 184
+      }
+    },
+    {
+      "step": 74,
+      "action": "input",
+      "selector": "#ComprimentoMaximoVeiculo",
+      "value": "6.666565656555555555555555555555555555555555555555555555555556565656666666666666666666666666666666666666666666666666666666565656565656565666666666666666666666666666666666666666666666666666666666666666666666666",
+      "validation": {
+        "title": "Classificações de Veículos - AXHub",
+        "url": "https://homologacao.axhub.axion.ws/classificacaoveiculo/new",
+        "visibleElements": 184
+      }
+    },
+    {
+      "step": 75,
+      "action": "input",
+      "selector": "#ComprimentoMaximoVeiculo",
+      "value": "6.6665656565555555555555555555555555555555555555555555555555565656566666666666666666666666666666666666666666666666666666665656565656565656666666666666666666666666666666666666666666666666666666666666666666666666666666666666666",
+      "validation": {
+        "title": "Classificações de Veículos - AXHub",
+        "url": "https://homologacao.axhub.axion.ws/classificacaoveiculo/new",
+        "visibleElements": 184
+      }
+    },
+    {
+      "step": 76,
+      "action": "input",
+      "selector": "#ComprimentoMaximoVeiculo",
+      "value": "6.66656565655555555555555555555555555555555555555555555555555656565666666666666666666666666666666666666666666666666666666656565656565656566666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666",
+      "validation": {
+        "title": "Classificações de Veículos - AXHub",
+        "url": "https://homologacao.axhub.axion.ws/classificacaoveiculo/new",
+        "visibleElements": 184
+      }
+    },
+    {
+      "step": 77,
+      "action": "input",
+      "selector": "#ComprimentoMaximoVeiculo",
+      "value": "6.66656565655555555555555555555555555555555555555555555555555656565666666666666666666666666666666666666666666666666666666656565656565656566666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666",
+      "validation": {
+        "title": "Classificações de Veículos - AXHub",
+        "url": "https://homologacao.axhub.axion.ws/classificacaoveiculo/new",
+        "visibleElements": 184
+      }
+    },
+    {
+      "step": 78,
+      "action": "input",
+      "selector": "#ComprimentoMaximoVeiculo",
+      "value": "6.66656565655555555555555555555555555555555555555555555555555656565666666666666666666666666666666666666666666666666666666656565656565656566666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666",
+      "validation": {
+        "title": "Classificações de Veículos - AXHub",
+        "url": "https://homologacao.axhub.axion.ws/classificacaoveiculo/new",
+        "visibleElements": 184
+      }
+    },
+    {
+      "step": 79,
+      "action": "input",
+      "selector": "#ComprimentoMaximoVeiculo",
+      "value": "6.66656565655555555555555555555555555555555555555555555555555656565666666666666666666666666666666666666666666666666666666656565656565656566666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666",
+      "validation": {
+        "title": "Classificações de Veículos - AXHub",
+        "url": "https://homologacao.axhub.axion.ws/classificacaoveiculo/new",
+        "visibleElements": 184
+      }
+    },
+    {
+      "step": 80,
+      "action": "input",
+      "selector": "#ComprimentoMaximoVeiculo",
+      "value": "6.666565656555555555555555555555555555555555555555555555555556565656666666666666666666666666666666666666666666666666666666565656565656565666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666565",
+      "validation": {
+        "title": "Classificações de Veículos - AXHub",
+        "url": "https://homologacao.axhub.axion.ws/classificacaoveiculo/new",
+        "visibleElements": 184
+      }
+    },
+    {
+      "step": 81,
+      "action": "input",
+      "selector": "#ComprimentoMaximoVeiculo",
+      "value": "6.66656565655555555555555555555555555555555555555555555555555656565666666666666666666666666666666666666666666666666666666656565656565656566666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666656565656",
+      "validation": {
+        "title": "Classificações de Veículos - AXHub",
+        "url": "https://homologacao.axhub.axion.ws/classificacaoveiculo/new",
+        "visibleElements": 184
+      }
+    },
+    {
+      "step": 82,
+      "action": "input",
+      "selector": "#ComprimentoMaximoVeiculo",
+      "value": "6.666565656555555555555555555555555555555555555555555555555556565656666666666666666666666666666666666666666666666666666666565656565656565666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666565656565656",
+      "validation": {
+        "title": "Classificações de Veículos - AXHub",
+        "url": "https://homologacao.axhub.axion.ws/classificacaoveiculo/new",
+        "visibleElements": 184
+      }
+    },
+    {
+      "step": 83,
+      "action": "input",
+      "selector": "#ComprimentoMaximoVeiculo",
+      "value": "6.6665656565555555555555555555555555555555555555555555555555565656566666666666666666666666666666666666666666666666666666665656565656565656666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666665656565656565656",
+      "validation": {
+        "title": "Classificações de Veículos - AXHub",
+        "url": "https://homologacao.axhub.axion.ws/classificacaoveiculo/new",
+        "visibleElements": 184
+      }
+    },
+    {
+      "step": 84,
+      "action": "input",
+      "selector": "#ComprimentoMaximoVeiculo",
+      "value": "6.666565656555555555555555555555555555555555555555555555555556565656666666666666666666666666666666666666666666666666666666565656565656565666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666565656565656565656589",
+      "validation": {
+        "title": "Classificações de Veículos - AXHub",
+        "url": "https://homologacao.axhub.axion.ws/classificacaoveiculo/new",
+        "visibleElements": 184
+      }
+    },
+    {
+      "step": 85,
+      "action": "input",
+      "selector": "#ComprimentoMaximoVeiculo",
+      "value": "6.66656565655555555555555555555555555555555555555555555555555656565666666666666666666666666666666666666666666666666666666656565656565656566666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666656565656565656565658989898",
+      "validation": {
+        "title": "Classificações de Veículos - AXHub",
+        "url": "https://homologacao.axhub.axion.ws/classificacaoveiculo/new",
+        "visibleElements": 184
+      }
+    },
+    {
+      "step": 86,
+      "action": "input",
+      "selector": "#ComprimentoMaximoVeiculo",
+      "value": "6.666565656555555555555555555555555555555555555555555555555556565656666666666666666666666666666666666666666666666666666666565656565656565666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666565656565656565656589898989898",
+      "validation": {
+        "title": "Classificações de Veículos - AXHub",
+        "url": "https://homologacao.axhub.axion.ws/classificacaoveiculo/new",
+        "visibleElements": 184
+      }
+    },
+    {
+      "step": 87,
+      "action": "input",
+      "selector": "#ComprimentoMaximoVeiculo",
+      "value": "6.666565656555555555555555555555555555555555555555555555555556565656666666666666666666666666666666666666666666666666666666565656565656565666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666565656565656565656589898989898989898",
+      "validation": {
+        "title": "Classificações de Veículos - AXHub",
+        "url": "https://homologacao.axhub.axion.ws/classificacaoveiculo/new",
+        "visibleElements": 184
+      }
+    },
+    {
+      "step": 88,
+      "action": "click",
+      "selector": "#PbtVeiculo",
+      "validation": {
+        "title": "Classificações de Veículos - AXHub",
+        "url": "https://homologacao.axhub.axion.ws/classificacaoveiculo/new",
+        "visibleElements": 184
+      }
+    },
+    {
+      "step": 89,
+      "action": "input",
+      "selector": "#PbtVeiculo",
+      "value": "98",
+      "validation": {
+        "title": "Classificações de Veículos - AXHub",
+        "url": "https://homologacao.axhub.axion.ws/classificacaoveiculo/new",
+        "visibleElements": 184
+      }
+    },
+    {
+      "step": 90,
+      "action": "input",
+      "selector": "#PbtVeiculo",
+      "value": "9898989",
+      "validation": {
+        "title": "Classificações de Veículos - AXHub",
+        "url": "https://homologacao.axhub.axion.ws/classificacaoveiculo/new",
+        "visibleElements": 184
+      }
+    },
+    {
+      "step": 91,
+      "action": "input",
+      "selector": "#PbtVeiculo",
+      "value": "9898989898",
+      "validation": {
+        "title": "Classificações de Veículos - AXHub",
+        "url": "https://homologacao.axhub.axion.ws/classificacaoveiculo/new",
+        "visibleElements": 184
+      }
+    },
+    {
+      "step": 92,
+      "action": "input",
+      "selector": "#PbtVeiculo",
+      "value": "9898989898888888888",
+      "validation": {
+        "title": "Classificações de Veículos - AXHub",
+        "url": "https://homologacao.axhub.axion.ws/classificacaoveiculo/new",
+        "visibleElements": 184
+      }
+    },
+    {
+      "step": 93,
+      "action": "input",
+      "selector": "#PbtVeiculo",
+      "value": "9898989898888888888888888888888888",
+      "validation": {
+        "title": "Classificações de Veículos - AXHub",
+        "url": "https://homologacao.axhub.axion.ws/classificacaoveiculo/new",
+        "visibleElements": 184
+      }
+    },
+    {
+      "step": 94,
+      "action": "input",
+      "selector": "#PbtVeiculo",
+      "value": "98989898988888888888888888888888888888888888888888",
+      "validation": {
+        "title": "Classificações de Veículos - AXHub",
+        "url": "https://homologacao.axhub.axion.ws/classificacaoveiculo/new",
+        "visibleElements": 184
+      }
+    },
+    {
+      "step": 95,
+      "action": "input",
+      "selector": "#PbtVeiculo",
+      "value": "98989898988888888888888888888888888888888888888888888888888888888",
+      "validation": {
+        "title": "Classificações de Veículos - AXHub",
+        "url": "https://homologacao.axhub.axion.ws/classificacaoveiculo/new",
+        "visibleElements": 184
+      }
+    },
+    {
+      "step": 96,
+      "action": "click",
+      "selector": ".form-control-label",
+      "validation": {
+        "title": "Classificações de Veículos - AXHub",
+        "url": "https://homologacao.axhub.axion.ws/classificacaoveiculo/new",
+        "visibleElements": 184
+      }
+    },
+    {
+      "step": 97,
+      "action": "click",
+      "selector": "#LabelRedeNeural",
+      "validation": {
+        "title": "Classificações de Veículos - AXHub",
+        "url": "https://homologacao.axhub.axion.ws/classificacaoveiculo/new",
+        "visibleElements": 184
+      }
+    },
+    {
+      "step": 98,
+      "action": "input",
+      "selector": "#LabelRedeNeural",
+      "value": ".",
+      "validation": {
+        "title": "Classificações de Veículos - AXHub",
+        "url": "https://homologacao.axhub.axion.ws/classificacaoveiculo/new",
+        "visibleElements": 184
+      }
+    },
+    {
+      "step": 99,
+      "action": "input",
+      "selector": "#LabelRedeNeural",
+      "value": ".665",
+      "validation": {
+        "title": "Classificações de Veículos - AXHub",
+        "url": "https://homologacao.axhub.axion.ws/classificacaoveiculo/new",
+        "visibleElements": 184
+      }
+    },
+    {
+      "step": 100,
+      "action": "input",
+      "selector": "#LabelRedeNeural",
+      "value": ".66565656",
+      "validation": {
+        "title": "Classificações de Veículos - AXHub",
+        "url": "https://homologacao.axhub.axion.ws/classificacaoveiculo/new",
+        "visibleElements": 184
+      }
+    },
+    {
+      "step": 101,
+      "action": "input",
+      "selector": "#LabelRedeNeural",
+      "value": ".665656565656",
+      "validation": {
+        "title": "Classificações de Veículos - AXHub",
+        "url": "https://homologacao.axhub.axion.ws/classificacaoveiculo/new",
+        "visibleElements": 184
+      }
+    },
+    {
+      "step": 102,
+      "action": "click",
+      "selector": "#Uvp",
+      "validation": {
+        "title": "Classificações de Veículos - AXHub",
+        "url": "https://homologacao.axhub.axion.ws/classificacaoveiculo/new",
+        "visibleElements": 184
+      }
+    },
+    {
+      "step": 103,
+      "action": "input",
+      "selector": "#Uvp",
+      "value": "",
+      "validation": {
+        "title": "Classificações de Veículos - AXHub",
+        "url": "https://homologacao.axhub.axion.ws/classificacaoveiculo/new",
+        "visibleElements": 184
+      }
+    },
+    {
+      "step": 104,
+      "action": "input",
+      "selector": "#Uvp",
+      "value": ".66",
+      "validation": {
+        "title": "Classificações de Veículos - AXHub",
+        "url": "https://homologacao.axhub.axion.ws/classificacaoveiculo/new",
+        "visibleElements": 184
+      }
+    },
+    {
+      "step": 105,
+      "action": "input",
+      "selector": "#Uvp",
+      "value": "",
+      "validation": {
+        "title": "Classificações de Veículos - AXHub",
+        "url": "https://homologacao.axhub.axion.ws/classificacaoveiculo/new",
+        "visibleElements": 184
+      }
+    },
+    {
+      "step": 106,
+      "action": "input",
+      "selector": "#Uvp",
+      "value": "",
+      "validation": {
+        "title": "Classificações de Veículos - AXHub",
+        "url": "https://homologacao.axhub.axion.ws/classificacaoveiculo/new",
+        "visibleElements": 184
+      }
+    },
+    {
+      "step": 107,
+      "action": "input",
+      "selector": "#Uvp",
+      "value": "",
+      "validation": {
+        "title": "Classificações de Veículos - AXHub",
+        "url": "https://homologacao.axhub.axion.ws/classificacaoveiculo/new",
+        "visibleElements": 184
+      }
+    },
+    {
+      "step": 108,
+      "action": "click",
+      "selector": ".k-button-text",
+      "validation": {
+        "title": "Classificações de Veículos - AXHub",
+        "url": "https://homologacao.axhub.axion.ws/classificacaoveiculo/new",
+        "visibleElements": 184
+      }
+    },
+    {
+      "step": 109,
+      "action": "click",
+      "selector": ".row",
+      "validation": {
+        "title": "Classificações de Veículos - AXHub",
+        "url": "https://homologacao.axhub.axion.ws/classificacaoveiculo/new",
+        "visibleElements": 184
+      }
+    },
+    {
+      "step": 110,
+      "action": "input",
+      "selector": "#Uvp",
+      "value": "9",
+      "validation": {
+        "title": "Classificações de Veículos - AXHub",
+        "url": "https://homologacao.axhub.axion.ws/classificacaoveiculo/new",
+        "visibleElements": 184
+      }
+    },
+    {
+      "step": 111,
+      "action": "input",
+      "selector": "#Uvp",
+      "value": "98989",
+      "validation": {
+        "title": "Classificações de Veículos - AXHub",
+        "url": "https://homologacao.axhub.axion.ws/classificacaoveiculo/new",
+        "visibleElements": 184
+      }
+    },
+    {
+      "step": 112,
+      "action": "navigate",
+      "validation": {
+        "title": "Classificações de Veículos - AXHub",
+        "url": "https://homologacao.axhub.axion.ws/classificacaoveiculo",
+        "visibleElements": 193
+      }
+    }
+  ]
+}

@@ -6,13 +6,13 @@ description: Configurações gerais do AxCross
 
 # Configurações do Sistema
 
-Tela de configurações gerais do AxCross, onde são definidos parâmetros operacionais, dados do órgão e integrações.
+Tela de Configurações gerais do AxCross, onde são definidos parâmetros operacionais, dados do órgão e integrações.
 
 ## Como acessar
 
 No **menu lateral**, clique em **Sistema**.
 
-![Configurações do Sistema](../img/Configurações.png)
+Configurações do Sistema](../img/Configurações.png)
 
 ## Seções
 
@@ -30,7 +30,7 @@ No **menu lateral**, clique em **Sistema**.
 | Campo | Descrição |
 |-------|-----------|
 | **Intervalo de atualização** | Frequência de atualização do monitoramento online (segundos) |
-| **Timeout de conexão** | Tempo máximo de espera para comunicação com equipamentos |
+| **Timeout de conexão** | Tempo máximo de espera para comunicação com Equipamentos |
 | **Retenção de dados** | Período de retenção dos registros de passagem |
 
 ### Integrações
@@ -41,5 +41,5 @@ No **menu lateral**, clique em **Sistema**.
 | **Webhook** | URL de callback para notificações |
 
 :::caution Permissão necessária
-Apenas usuários com perfil de administrador têm acesso às configurações do sistema.
+Apenas Usuários com perfil de administrador têm acesso às Configurações do sistema.
 :::

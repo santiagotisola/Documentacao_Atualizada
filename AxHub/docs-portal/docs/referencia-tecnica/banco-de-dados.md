@@ -14,25 +14,25 @@ O AxHub utiliza **SQL Server** com **120 tabelas**. Abaixo estão as principais 
 
 | Domínio | Tabelas principais |
 |---|---|
-| **Equipamentos** | TBEquipamentos, TBTipoEquipamentos, TBModeloEquipamentos, TBFabricantes, TBFaixas, TBGrupoEquipamentos, TBHeartbeatEquipamentos |
+| Equipamentos | TBEquipamentos, TBTipoEquipamentos, TBModeloEquipamentos, TBFabricantes, TBFaixas, TBGrupoEquipamentos, TBHeartbeatEquipamentos |
 | **Passagens** | TBPassagens, TBPassagensMonitoramentos, TBPassagensConjugadas, TBPassagensCronotacografos, TBImagemPassagens |
-| **Infrações** | TBInfracoes, TBInfracoesEnquadramentos, TBEnquadramentos, TBSequencialInfracoes, TBMotivosDescartes |
+| Infrações | TBInfracoes, TBInfracoesEnquadramentos, TBEnquadramentos, TBSequencialInfracoes, TBMotivosDescartes |
 | **Triagem/Auditoria** | TBTriagens, TBTriagensCronotacografos, TBHistoricoTriagens |
 | **Operações** | TBOperacoes, TBOperacoesFaixas, TBPostos, TBPostoOperacoes, TBOperacoesRecursos |
 | **Pesagens** | TBDadosPesagens, TBEixoPesagens, TBGrupoEixoPesagens, TBTicketPesagens, TBAfericoes |
-| **Veículos Monitorados** | TBMonitoramentos, TBPassagensMonitoramentos, TBImagemPassagensMonitoramentos |
+| Veículos Monitorados** | TBMonitoramentos, TBPassagensMonitoramentos, TBImagemPassagensMonitoramentos |
 | **Contratos** | TBContratos, TBAjustesContratuais, TBContratosFaixas |
 | **Exportação** | TBLoteExportacoes, TBLoteImportacoes, TBSequencialLoteExportacoes, TBLayoutArquivos |
 | **Usuários/Acesso** | TBUsuarios, TBPerfilAcessos, TBPermissoesAcesso, TBLogsAcessos, TBUserSessions, TBAcessosBloqueadosPeriodo |
-| **Veículos** | TBVeiculos, TBCategoriaVeiculos, TBClassificacoesVeiculos, TBTipoVeiculos, TBEspecieVeiculos |
-| **Relatórios** | TBRelatoriosPowerBi, TBQuantitativos |
+| Veículos | TBVeiculos, TBCategoriaVeiculos, TBClassificacoesVeiculos, TBTipoVeiculos, TBEspecieVeiculos |
+| Relatórios | TBRelatoriosPowerBi, TBQuantitativos |
 
 ---
 
 ## Tabelas principais
 
 ### TBPassagens
-Registro de cada veículo que passa pelos pontos monitorados.
+Registro de cada Veículo que passa pelos pontos monitorados.
 
 | Campo | Descrição |
 |---|---|
@@ -52,19 +52,19 @@ Infrações geradas após triagem e auditoria.
 | Campo | Descrição |
 |---|---|
 | `IdInfracao` | Identificador único |
-| `DataHoraInfracao` | Data/hora da infração |
+| `DataHoraInfracao` | Data/hora da Infração |
 | `Placa` | Placa autuada |
 | `IdEquipamento` | FK → TBEquipamentos |
 | `Status` | Pendente, Auditada, Exportada, Descartada |
 
 **Relacionamentos importantes:**
-- `TBInfracoesEnquadramentos` — liga infração ao enquadramento legal
+- `TBInfracoesEnquadramentos` — liga Infração ao enquadramento legal
 - `TBInfracoesExcessoPeso` — dados específicos de excesso de peso
 
 ---
 
 ### TBTriagens
-Controle do processo de triagem (validação das passagens/infrações).
+Controle do processo de triagem Validação das passagens/infrações).
 
 | Campo | Descrição |
 |---|---|
@@ -112,13 +112,13 @@ Contador do número sequencial das AITs (Autos de Infração de Trânsito).
 | `Prefix` | Prefixo do código da AIT |
 
 :::warning Atenção
-Nunca altere esta tabela manualmente sem autorização. O número sequencial incorreto pode gerar AITs inválidas ou duplicadas.
+Nunca altere está tabela manualmente sem autorização. O número sequencial incorreto pode gerar AITs inválidas ou duplicadas.
 :::
 
 ---
 
 ### TBHeartbeatEquipamentos
-Status de comunicação de cada equipamento.
+Status de comunicação de cada Equipamento
 
 | Campo | Descrição |
 |---|---|
@@ -132,7 +132,7 @@ Equipamentos sem heartbeat nas últimas 2 horas devem ser verificados. Compare `
 ---
 
 ### TBUserSessions / TBAcessosBloqueadosPeriodo
-Controle de sessões ativas e bloqueios de usuário.
+Controle de sessões ativas e bloqueios de Usuário
 
 | Tabela | Finalidade |
 |---|---|
@@ -148,10 +148,10 @@ Controle de sessões ativas e bloqueios de usuário.
 |---|---|---|
 | GET | `/api/axhub/status` | Testa conexão com banco |
 | GET | `/api/axhub/resumo` | Contagem geral de registros |
-| GET | `/api/axhub/equipamentos` | Lista equipamentos |
+| GET | `/api/axhub/Equipamentos` | Lista Equipamentos |
 | GET | `/api/axhub/operacoes` | Últimas 50 operações |
-| GET | `/api/axhub/infracoes` | Estatísticas e últimas infrações |
-| GET | `/api/axhub/heartbeat` | Status dos equipamentos |
+| GET | `/api/axhub/infracoes` | Estatísticas e últimas Infrações |
+| GET | `/api/axhub/heartbeat` | Status dos Equipamentos |
 | GET | `/api/axhub/monitoramentos` | Veículos monitorados e últimas detecções |
 | GET | `/api/axhub/passagens` | Últimas 20 passagens |
 | GET | `/api/axhub/triagens` | Contagem de triagens por status |
@@ -181,30 +181,30 @@ curl http://localhost:3100/api/axhub/resumo
 
 ```json
 {
-  "equipamentos": 42,
+  Equipamentos 42,
   "operacoes": 1580,
   "infracoes": 94320,
   "passagens": 2847500,
-  "usuarios": 18,
+  Usuários 18,
   "triagens": 91200
 }
 ```
 
 ---
 
-### Listar equipamentos (JavaScript / Axios)
+### Listar Equipamentos (JavaScript / Axios)
 
 ```js
 import api from '../services/api';
 
 const { data } = await api.get('/axhub/equipamentos');
-console.log(data.total);        // 42
+console.log(data.total); // 42
 console.log(data.equipamentos); // [{ IdEquipamento, NumeroSerie, Descricao, ... }]
 ```
 
 ---
 
-### Verificar infrações por enquadramento
+### Verificar Infrações por enquadramento
 
 ```bash
 curl http://localhost:3100/api/axhub/infracoes
@@ -215,11 +215,11 @@ curl http://localhost:3100/api/axhub/infracoes
   "total": 94320,
   "porEnquadramento": [
     { "Enquadramento": "Excesso de Velocidade", "Total": 52400 },
-    { "Enquadramento": "Excesso de Peso PBT",  "Total": 18900 },
-    { "Enquadramento": "Excesso de Eixo",      "Total": 9200  }
+ { "Enquadramento": "Excesso de Peso PBT", "Total": 18900 },
+ { "Enquadramento": "Excesso de Eixo", "Total": 9200 }
   ],
   "ultimas": [
-    { "IdInfracao": 94320, "DataHoraInfracao": "2026-03-31T22:10:00", "Placa": "ABC1D23", "Equipamento": "Radar Km-42" }
+    { "IdInfracao": 94320, "DataHoraInfracao": "2026-03-31T22:10:00", "Placa": "ABC1D23", Equipamento "Radar Km-42" }
   ]
 }
 ```
@@ -240,7 +240,7 @@ curl http://localhost:3100/api/axhub/monitoramentos
       "IdPassagemMonitoramento": 8821,
       "DataHora": "2026-03-31T21:45:00",
       "Placa": "XYZ9A10",
-      "Equipamento": "Câmera Norte - P1",
+      Equipamento "Câmera Norte - P1",
       "Local": "Posto Km-12 BR-101"
     }
   ]
@@ -258,23 +258,23 @@ curl http://localhost:3100/api/axhub/triagens
 ```json
 {
   "porStatus": [
-    { "Status": "Aprovada",   "Total": 82000 },
-    { "Status": "Pendente",   "Total": 3120  },
-    { "Status": "Descartada", "Total": 6100  }
+  { "Status": "Aprovada", "Total": 82000 },
+ { "Status": "Pendente", "Total": 3120 },
+ { "Status": "Descartada", "Total": 6100 }
   ]
 }
 ```
 
 ---
 
-### Query SQL direta — equipamentos offline
+### Query SQL direta — Equipamentos offline
 
 ```sql
 -- Equipamentos sem heartbeat nas últimas 2 horas
 SELECT
-  e.Descricao AS Equipamento,
+  e.Descricao AS Equipamento
   e.NumeroSerie,
-  h.DataHora  AS UltimoHeartbeat,
+ h.DataHora AS UltimoHeartbeat,
   DATEDIFF(MINUTE, h.DataHora, GETDATE()) AS MinutosSemSinal
 FROM TBHeartbeatEquipamentos h
 JOIN TBEquipamentos e ON h.IdEquipamento = e.IdEquipamento
@@ -284,7 +284,7 @@ ORDER BY h.DataHora ASC;
 
 ---
 
-### Query SQL direta — infrações pendentes de exportação
+### Query SQL direta — Infrações pendentes de exportação
 
 ```sql
 -- Infrações auditadas mas não exportadas

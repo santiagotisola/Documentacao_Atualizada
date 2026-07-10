@@ -8,7 +8,7 @@ description: "Definicao tecnica de Cronotacografo com base no CTB"
 
 ## Definicao
 
-Instrumento de controle de tempo de direcao, parada e velocidade, obrigatorio em veiculos de transporte e conducao escolar, alem de veiculos de carga com PBT superior a 4.536 kg.
+Instrumento de controle de tempo de direcao, parada e velocidade, obrigatório em veiculos de transporte e conducao escolar, alem de veiculos de carga com PBT superior a 4.536 kg.
 
 ## Base Legal
 
@@ -16,7 +16,7 @@ Art. 105, II do CTB e Resolucao CONTRAN 92/1999. A obrigatoriedade e regulamenta
 
 ## Uso no Sistema AxHub
 
-O modulo **Cronotacografo** do AxHub permite a triagem e consulta de registros capturados pelos equipamentos de fiscalizacao.
+O modulo **Cronotacografo** do AxHub permite a triagem e consulta de registros capturados pelos Equipamentos de fiscalizacao.
 
 ## Paginas Relacionadas
 

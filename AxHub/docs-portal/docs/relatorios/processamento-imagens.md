@@ -1,12 +1,12 @@
 ﻿---
 sidebar_position: 8
 title: Processamento de Imagens
-description: Relatorio de processamento de imagens
+description: Relatório de processamento de imagens
 ---
 
 # Relatório de Processamento de Imagens
 
-Apresenta o volume total de imagens processadas no sistema em um determinado período, agrupadas por equipamento e status. Permite identificar gargalos de processamento e acompanhar a produtividade operacional.
+Apresenta o volume total de imagens processadas no sistema em um determinado período, agrupadas por Equipamento e status. Permite identificar gargalos de processamento e acompanhar a produtividade operacional.
 
 ## Como acessar
 
@@ -19,15 +19,15 @@ Apresenta o volume total de imagens processadas no sistema em um determinado per
 | Filtro | Descrição |
 |--------|-----------|
 | **Período** | Faixa de datas do processamento |
-| **Equipamento** | Filtrar por equipamento específico |
-| **Operação** | Operação vinculada ao equipamento |
+| Equipamento | Filtrar por Equipamento específico |
+| **Operação** | Operação vinculada ao Equipamento |
 | **Status** | Processada, Descartada, Pendente |
 
 ## Campos exibidos
 
 | Coluna | Descrição |
 |--------|-----------|
-| **Equipamento** | Nome e código do equipamento |
+| Equipamento | Nome e código do Equipamento |
 | **Total de Imagens** | Quantidade total de imagens recebidas |
 | **Processadas** | Imagens efetivamente analisadas |
 | **Descartadas** | Imagens rejeitadas por critério de qualidade |
@@ -36,10 +36,10 @@ Apresenta o volume total de imagens processadas no sistema em um determinado per
 
 ## Exportação
 
-O relatório pode ser exportado em **Excel** ou **PDF** para análise externa e inclusão em relatórios gerenciais.
+O Relatório pode ser exportado em **Excel** ou **PDF** para Análise externa e inclusão em Relatórios gerenciais.
 
 :::tip Dica
-Use este relatório para identificar equipamentos com baixo aproveitamento de imagens — pode indicar problemas de iluminação, posicionamento ou falha técnica.
+Use este Relatório para identificar Equipamentos com baixo aproveitamento de imagens — pode indicar problemas de iluminação, posicionamento ou falha técnica.
 :::
 
 ## Navegação relacionada

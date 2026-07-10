@@ -16,16 +16,16 @@ Guia de orientacao sobre a estrutura de menus e a navegacao geral do sistema AxH
 
 | Modulo | Descricao |
 |--------|-----------|
-| Dashboard | Painel principal com indicadores e mapa |
+| Dashboard | Use Dashboard principal com indicadores e mapa |
 | Infracoes | Triagem auditoria e consulta de infracoes |
 | Operacoes | Cadastro de operacoes e afericoes |
-| Equipamentos | Cadastro de equipamentos fabricantes modelos tipos e grupos |
+| Equipamentos | Cadastro de Equipamentos fabricantes modelos tipos e grupos |
 | Veiculos | Cadastro de tipos especies marcas modelos cores e municipios |
 | Balanca | Pesagem de veiculos e triagem de balanca |
 | Cronotacografo | Triagem e consulta de registros de cronotacografo |
-| Relatorios | Relatorios operacionais e gerenciais |
+| Relatórios | Relatórios operacionais e gerenciais |
 | Administracao | Configuracoes arcos regioes faixas e enquadramentos |
-| Controle de Acesso | Usuarios perfis permissoes e logs |
+| Controle de Acesso | Usuários perfis permissoes e logs |
 
 ## Navegacao relacionada
 

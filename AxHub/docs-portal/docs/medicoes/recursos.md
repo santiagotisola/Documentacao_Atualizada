@@ -21,7 +21,7 @@ Permite gerenciar os recursos utilizados nas medições contratuais.
 | Campo | Descrição |
 |-------|-----------|
 | **Descrição** | Nome do recurso |
-| **Tipo** | Equipamento, pessoal, veicular |
+| **Tipo** | Equipamento pessoal, veicular |
 | **Contrato** | Contrato vinculado |
 | **Status** | Ativo ou Inativo |
 

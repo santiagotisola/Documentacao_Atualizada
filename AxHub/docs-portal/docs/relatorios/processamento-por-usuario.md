@@ -1,7 +1,7 @@
 ---
 sidebar_position: 11
 title: Processamento por Usuário
-description: Relatório de processamento de imagens por usuário
+description: Relatório de processamento de imagens por Usuário
 ---
 
 # Processamento por Usuário
@@ -12,14 +12,14 @@ Exibe a produtividade de processamento de imagens por analista/usuário em um de
 
 ## Como acessar
 
-**Menu lateral** → Relatórios → **Processamento por Usuário**
+**Menu lateral** → Relatórios → **Processamento por Usuário
 
 ## Filtros disponíveis
 
 | Filtro | Descrição |
 |--------|-----------|
 | **Período** | Faixa de datas |
-| **Usuário** | Filtrar por analista específico |
+| Usuário | Filtrar por analista específico |
 | **Operação** | Filtrar por operação vinculada |
 | **Status** | Processadas, Descartadas ou Todas |
 
@@ -27,20 +27,20 @@ Exibe a produtividade de processamento de imagens por analista/usuário em um de
 
 | Coluna | Descrição |
 |--------|-----------|
-| **Usuário** | Analista responsável |
+| Usuário | Analista responsável |
 | **Processadas** | Quantidade de imagens triadas no período |
-| **Validadas** | Imagens confirmadas como infração |
+| **Validadas** | Imagens confirmadas como Infração |
 | **Descartadas** | Imagens rejeitadas com motivo |
 | **Média/Hora** | Produtividade média por hora trabalhada |
-| **Tempo Médio** | Tempo médio por análise (segundos) |
+| **Tempo Médio** | Tempo médio por Análise (segundos) |
 | **Período** | Faixa de datas analisada |
 
 ## Exportação
 
-Exportável em **Excel** para inclusão em relatórios de gestão operacional.
+Exportável em **Excel** para inclusão em Relatórios de gestão operacional.
 
 :::tip Dica
-Compare o **Tempo Médio** entre analistas para identificar usuários que podem precisar de treinamento adicional no fluxo de triagem.
+Compare o **Tempo Médio** entre analistas para identificar Usuários que podem precisar de treinamento adicional no fluxo de triagem.
 :::
 
 ---
@@ -49,6 +49,6 @@ Compare o **Tempo Médio** entre analistas para identificar usuários que podem 
 
 | Tipo | Página | Descrição |
 |------|--------|-----------|
-| Relacionado | [Processamento de Imagens](./processamento-imagens) | Visão agregada por equipamento |
-| Relacionado | [Usuários](../controle-acesso/usuarios) | Cadastro de usuários |
+| Relacionado | [Processamento de Imagens](./processamento-imagens) | Visão agregada por Equipamento |
+| Relacionado | [Usuários](../controle-acesso/usuarios) | Cadastro de Usuários |
 | Relacionado | [Triagem](../infracoes/triagem) | Processo de triagem |

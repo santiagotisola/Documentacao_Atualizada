@@ -8,7 +8,7 @@ description: "Definicao tecnica de Medicao de Desempenho"
 
 ## Definicao
 
-Processo de mensuracao da performance operacional dos equipamentos de fiscalizacao, baseado em indicadores como disponibilidade, tempo de resposta e volume de registros validos.
+Processo de mensuracao da performance operacional dos Equipamentos de fiscalizacao, baseado em indicadores como disponibilidade, tempo de resposta e volume de registros validos.
 
 ## Base Legal
 

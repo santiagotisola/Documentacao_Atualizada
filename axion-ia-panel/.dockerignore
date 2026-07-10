@@ -1,0 +1,25 @@
+# Diretórios de desenvolvimento
+node_modules/
+api/
+engine/
+
+# Arquivos de build
+dist/
+*.local
+
+# Logs
+logs/
+*.log
+
+# Cache
+.cache/
+.npm/
+
+# IDEs
+.vscode/
+.idea/
+
+# Outros
+.DS_Store
+.env
+.env.local

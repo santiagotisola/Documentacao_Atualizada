@@ -17,7 +17,7 @@
 | **Art. 1º, II** | Tolerância por eixo: **12,5%** |
 | **Art. 1º, §1º** | Veículos com PBT ≤ 50 t → fiscalizar **APENAS PBT** (não eixo) |
 | **Art. 1º, §2º** | Se ultrapassar tolerância de PBT → **TAMBÉM** fiscalizar eixo (cumulativo) |
-| **Art. 5º, II** | "Não poderá haver fiscalização de excesso de peso quanto ao peso bruto transmitido por eixo nos veículos com PBT regulamentar ≤ 50 t, **exceto se for excedido o limite de peso bruto total**" |
+| **Art. 5º, II** | "Não poderá haver fiscalização de excesso de peso quanto ao peso bruto transmitido por eixo nos Veículos com PBT regulamentar ≤ 50 t, **exceto se for excedido o limite de peso bruto total**" |
 
 ### Resumo da Lógica Legal (≤ 50t):
 ```
@@ -29,7 +29,7 @@ SE PBT_Regulamentado ≤ 50.000 kg:
         → NÃO pode autuar por eixo (mesmo que eixo exceda)
 ```
 
-### Para veículos > 50t:
+### Para Veículos > 50t:
 ```
 SE PBT_Regulamentado > 50.000 kg:
     → Verificar PBT E eixo desde o início (ambas dimensões)
@@ -43,8 +43,8 @@ SE PBT_Regulamentado > 50.000 kg:
 
 | Parâmetro | Valor Atual | Significado |
 |-----------|:-----------:|-------------|
-| Peso regulamentado **máximo** para considerar infrações de PBT ou Eixo | **50.000** | Se RegulatedPBT ≤ este valor → só verifica eixo |
-| Peso regulamentado **mínimo** para considerar infrações de PBT, Eixo, PBT e EIXO | **50.050** | Se RegulatedPBT > este valor → verifica ambos |
+| Peso regulamentado **máximo** para considerar Infrações de PBT ou Eixo | **50.000** | Se RegulatedPBT ≤ este valor → só verifica eixo |
+| Peso regulamentado **mínimo** para considerar Infrações de PBT, Eixo, PBT e EIXO | **50.050** | Se RegulatedPBT > este valor → verifica ambos |
 
 ### Parâmetros em `Configuration` (MongoDB):
 
@@ -54,9 +54,9 @@ SE PBT_Regulamentado > 50.000 kg:
 | `TolerancePercentageAxle` | 12.5 | Tolerância eixo (12,5%) ✅ correto |
 | `InfractionLimitAxlePBT` | 50.000 | Divisor da lógica 50t |
 | `InfractionMinAllInfraction` | 50.050 | Comentário no ticket PDF |
-| `StructPBT` | (código) | Código de infração PBT |
-| `StructAxle` | (código) | Código de infração eixo |
-| `StructAxlePBT` | (código) | Código de infração PBT+Eixo |
+| `StructPBT` | (código) | Código de Infração PBT |
+| `StructAxle` | (código) | Código de Infração eixo |
+| `StructAxlePBT` | (código) | Código de Infração PBT+Eixo |
 
 ---
 
@@ -85,10 +85,10 @@ SE RegulatedPBT > 50.000:
 
 | Cenário | Lei manda | Sistema faz | Status |
 |---------|-----------|-------------|:------:|
-| Caminhão 29t, pesou 32t (excede PBT) | ❌ Infração de PBT | ✅ Nenhuma infração PBT (não olha PBT!) | **❌ ERRADO** |
-| Caminhão 45t, pesou 47t PBT (tolerância 5% = 47,25t) | ✅ Sem infração | ✅ Sem infração | ✅ |
-| Caminhão 45t no PBT, 1 eixo 200 kg acima tolerância | ✅ Sem infração (PBT dentro; §2º não dispara) | ❌ Gera infração de eixo | **❌ ERRADO** |
-| Caminhão 45t, pesou 48t PBT + 1 eixo acima | ❌ Infração PBT + eixo | ❌ Sistema só gera infração de eixo | **❌ ERRADO** |
+| Caminhão 29t, pesou 32t (excede PBT) | ❌ Infração de PBT | ✅ Nenhuma Infração PBT (não olha PBT!) | **❌ ERRADO** |
+| Caminhão 45t, pesou 47t PBT (tolerância 5% = 47,25t) | ✅ Sem Infração | ✅ Sem Infração | ✅ |
+| Caminhão 45t no PBT, 1 eixo 200 kg acima tolerância | ✅ Sem Infração (PBT dentro; §2º não dispara) | ❌ Gera Infração de eixo | **❌ ERRADO** |
+| Caminhão 45t, pesou 48t PBT + 1 eixo acima | ❌ Infração PBT + eixo | ❌ Sistema só gera Infração de eixo | **❌ ERRADO** |
 | CVC 57t, pesou 60t + 1 eixo acima | ❌ Infração cumulativa PBT+eixo | ✅ Infração cumulativa | ✅ |
 
 ---
@@ -142,7 +142,7 @@ Excesso E3E4 = 20.850 - 19.125 = 1.725 kg ✅ (há excesso)
 ```
 
 ### Por que o sistema errou:
-O sistema vê `RegulatedPBT (29.000) ≤ InfractionLimitAxlePBT (50.000)` e chama **apenas** `_addInfractionAxle()` — que só verifica excesso por eixo. Nunca verifica PBT para veículos ≤ 50t.
+O sistema vê `RegulatedPBT (29.000) ≤ InfractionLimitAxlePBT (50.000)` e chama **apenas** `_addInfractionAxle()` — que só verifica excesso por eixo. Nunca verifica PBT para Veículos ≤ 50t.
 
 ---
 
@@ -154,7 +154,7 @@ Ao gerar exportação com filtro "Excesso Eixo", aparece o registro da placa SJW
 ### Causa raiz:
 O campo `Infraction.InfractionType` foi gravado como `ExcessAxle` no MongoDB (porque a lógica invertida só verificou eixo). Como a busca de exportação filtra por `InfractionType`, o registro só aparece em "Excesso Eixo".
 
-### Tipos de infração no dropdown da Exportação:
+### Tipos de Infração no dropdown da Exportação:
 | Filtro | Enum | Descrição |
 |--------|------|-----------|
 | Excesso PBT | `ExcessPBT` | Só PBT excedido |
@@ -169,7 +169,7 @@ O campo `Infraction.InfractionType` foi gravado como `ExcessAxle` no MongoDB (po
 ```csharp
 if (RegulatedPBT <= InfractionLimitAxlePBT) // ≤ 50.000
 {
-    _addInfractionAxle();  // Só verifica eixo ← INVERTIDO!
+ _addInfractionAxle(); // Só verifica eixo ← INVERTIDO!
 }
 else // > 50.000
 {
@@ -211,8 +211,8 @@ Antes de aplicar a correção no código, confirmar com dados reais do banco:
 
 | # | Validação | Query sugerida |
 |---|-----------|----------------|
-| 1 | Pesagem de caminhão ≤ 50t que ficou dentro do PBT mas estourou eixo → sistema gerou infração de eixo? **Se sim = bug confirmado** | `db.Weighing.find({ RegulatedPBT: { $lte: 50000 }, "Infraction.InfractionType": "ExcessAxle" })` |
-| 2 | Pesagem de caminhão ≤ 50t que estourou só PBT (todos eixos OK) → ficou sem infração? **Se sim = bug confirmado** | Verificar se existe algum registro com PBT constatado > considerado mas sem infração |
+| 1 | Pesagem de caminhão ≤ 50t que ficou dentro do PBT mas estourou eixo → sistema gerou Infração de eixo? **Se sim = bug confirmado** | `db.Weighing.find({ RegulatedPBT: { $lte: 50000 }, "Infraction.InfractionType": "ExcessAxle" })` |
+| 2 | Pesagem de caminhão ≤ 50t que estourou só PBT (todos eixos OK) → ficou sem Infração **Se sim = bug confirmado** | Verificar se existe algum registro com PBT constatado > considerado mas sem Infração |
 | 3 | CVC > 50t com excesso simultâneo → confirmar que entra como `ExcessAxlePBT` | `db.Weighing.find({ RegulatedPBT: { $gt: 50000 }, "Infraction.InfractionType": "ExcessAxlePBT" })` |
 
 ---
@@ -225,14 +225,14 @@ Antes de aplicar a correção no código, confirmar com dados reais do banco:
 | Tolerância Eixo 12,5% | ✅ Correto |
 | Patamar 50t como divisor | ✅ Correto (InfractionLimitAxlePBT = 50.000) |
 | Cálculo de excesso (fórmulas) | ✅ Correto |
-| **Lógica de qual infração gerar (≤ 50t)** | **❌ INVERTIDA** |
+| **Lógica de qual Infração gerar (≤ 50t)** | **❌ INVERTIDA** |
 | Exportação filtra por InfractionType | ✅ Funciona corretamente (dado está errado na origem) |
 
 ### Consequências da inversão:
 
-1. **Veículos ≤ 50t com excesso de PBT puro** → passam sem infração (o sistema ignora PBT)
-2. **Veículos ≤ 50t com excesso de eixo mas dentro do PBT** → são autuados indevidamente (a lei proíbe)
-3. **Veículos ≤ 50t com excesso de PBT + eixo** → recebem apenas infração de eixo (deveria ser cumulativa)
+1. Veículos ≤ 50t com excesso de PBT puro** → passam sem Infração (o sistema ignora PBT)
+2. Veículos ≤ 50t com excesso de eixo mas dentro do PBT** → são autuados indevidamente (a lei proíbe)
+3. Veículos ≤ 50t com excesso de PBT + eixo** → recebem apenas Infração de eixo (deveria ser cumulativa)
 
 ### Ação requerida:
 Correção no arquivo `Weighing.cs` (linhas ~77-121) para inverter a lógica conforme a Lei 14.229/2021, Art. 1º §1º e §2º.
@@ -244,4 +244,4 @@ Correção no arquivo `Weighing.cs` (linhas ~77-121) para inverter a lógica con
 - **Lei 14.229/2021**: https://www.planalto.gov.br/ccivil_03/_ato2019-2022/2021/lei/l14229.htm
 - **Resolução 882/2021** (CONTRAN): Arquivo local `Resolucao8822021.pdf`
 - **Código fonte**: `Axion.AxTon.Core/Domain/Weighing.cs` (linhas 77-121)
-- **Configuração**: `StartWeighingFormComponent.cs` (linha 222 — lê InfractionLimitAxlePBT)
+- **Configuração `StartWeighingFormComponent.cs` (linha 222 — lê InfractionLimitAxlePBT)

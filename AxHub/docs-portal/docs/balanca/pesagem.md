@@ -1,12 +1,12 @@
 ﻿---
 sidebar_position: 1
 title: Módulo de Pesagem (Balança)
-description: Visão geral do módulo de pesagem de veículos no AxHub
+description: Visão geral do módulo de pesagem de Veículos no AxHub
 ---
 
 # Módulo de Pesagem (Balança)
 
-O módulo de **Balança** gerencia o fluxo completo de pesagem de veículos integrada ao AxHub, desde a captura de infrações de excesso de peso até o encerramento e reclassificação dos tickets.
+O módulo de **Balança** gerencia o fluxo completo de pesagem de Veículos integrada ao AxHub, desde a captura de Infrações de excesso de peso até o encerramento e reclassificação dos tickets.
 
 ## Como acessar
 
@@ -16,7 +16,7 @@ O módulo de **Balança** gerencia o fluxo completo de pesagem de veículos inte
 
 | Sub-menu | URL | Descrição |
 |----------|-----|-----------|
-| **Liberar Pesagem** | `/ticketpesagem/liberarpesagem` | Libera tickets pendentes para análise |
+| **Liberar Pesagem** | `/ticketpesagem/liberarpesagem` | Libera tickets pendentes para Análise |
 | **Ticket Aberto** | `/ticketpesagem/ticketabertos` | Lista tickets em andamento |
 | **Ticket Fechado** | `/ticketpesagem/ticketfechados` | Lista tickets encerrados |
 | **Reclassificar** | `/ticketpesagem/ticketreclassificacao` | Permite reclassificar tickets já processados |
@@ -31,17 +31,17 @@ Captura de Infração → Liberar Pesagem → Ticket Aberto → Análise → Tic
                                                        Reclassificar (se necessário)
 ```
 
-1. **Captura**: O sistema de pesagem registra automaticamente infrações de excesso de peso
-2. **Liberar**: O operador acessa **Balança → Liberar Pesagem** e libera os tickets para análise
-3. **Análise**: Os tickets liberados aparecem em **Ticket Aberto** para revisão
-4. **Encerramento**: Após análise, o ticket é encerrado e vai para **Ticket Fechado**
+1. **Captura**: O sistema de pesagem registra automaticamente Infrações de excesso de peso
+2. **Liberar**: O operador acessa **Balança → Liberar Pesagem** e libera os tickets para Análise
+3. Análise Os tickets liberados aparecem em **Ticket Aberto** para revisão
+4. **Encerramento**: Após Análise o ticket é encerrado e vai para **Ticket Fechado**
 5. **Reclassificação**: Se necessário, use **Reclassificar** para corrigir a classificação
 
 ## Tickets Abertos
 
 ![Tickets Abertos](../img/Balança%20-%20Tickets%20Abertos.png)
 
-Exibe os tickets de pesagem que estão em aberto, aguardando análise ou encerramento.
+Exibe os tickets de pesagem que estão em aberto, aguardando Análise ou encerramento.
 
 ## Tickets Fechados
 
@@ -60,9 +60,9 @@ Tela para liberar em lote os tickets que chegaram do sistema de pesagem.
 | Coluna | Descrição |
 |--------|-----------|
 | **Data/Hora** | Momento da pesagem |
-| **Placa** | Placa do veículo pesado |
+| **Placa** | Placa do Veículo pesado |
 | **PBT** | Peso Bruto Total registrado |
-| **PBT Limite** | Limite legal de peso para o tipo de veículo |
+| **PBT Limite** | Limite legal de peso para o tipo de Veículo |
 | **Excesso** | Peso acima do limite, se houver |
 | **Status** | Regular, Excesso ou Descartado |
 

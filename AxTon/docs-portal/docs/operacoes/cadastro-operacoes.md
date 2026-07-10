@@ -8,7 +8,7 @@ description: Cadastrar e gerenciar operações de pesagem veicular no AxTon
 
 ![Tela de Operações](../img/axton-operacoes.png)
 
-Operações representam as atividades de fiscalização de pesagem veicular realizadas em campo. Cada operação é vinculada a um **local de pesagem**, possui período de vigência e um **usuário responsável**.
+Operações representam as atividades de fiscalização de pesagem veicular realizadas em campo. Cada operação é vinculada a um **local de pesagem**, possui período de vigência e um Usuário responsável**.
 
 ## Como acessar
 
@@ -23,7 +23,7 @@ Operações representam as atividades de fiscalização de pesagem veicular real
 | **Início** | Data e hora de abertura da operação |
 | **Fim** | Data e hora de encerramento |
 | **Local** | Código e descrição do local de pesagem |
-| **Usuário** | Usuário que criou/gerencia a operação |
+| Usuário | Usuário que criou/gerencia a operação |
 | **Status** | Em Andamento ou Concluído |
 | **Ações** | Editar e Excluir |
 
@@ -52,7 +52,7 @@ Operações representam as atividades de fiscalização de pesagem veicular real
 | **Local** | Sim | Local de pesagem (ex: PI503B, PI504B) |
 | **Data Início** | Sim | Abertura da operação |
 | **Data Fim** | Não | Encerramento (vazio = operação aberta) |
-| **Usuário** | Sim | Responsável pela operação |
+| Usuário | Sim | Responsável pela operação |
 
 ### Passo a passo
 
@@ -60,7 +60,7 @@ Operações representam as atividades de fiscalização de pesagem veicular real
 2. Clique em **+ Novo**
 3. Selecione o **Local** de pesagem
 4. Defina a **Data de Início**
-5. Selecione o **Usuário** responsável
+5. Selecione o Usuário responsável
 6. Clique em **Salvar**
 
 :::tip Encerrar uma operação
@@ -77,7 +77,7 @@ Somente operações com status **Em Andamento** permitem registrar novas pesagen
 |---|---|
 | [**Iniciar Pesagem**](../pesagem/ticket-aberto) | Registrar uma nova pesagem na operação |
 | [**Locais**](../cadastros/locais) | Gerenciar os locais de pesagem |
-| [**Usuários**](../administracao/usuarios) | Gerenciar usuários do sistema |
+| [**Usuários**](../administracao/usuarios) | Gerenciar Usuários do sistema |
 
 ---
 
@@ -85,7 +85,7 @@ Somente operações com status **Em Andamento** permitem registrar novas pesagen
 
 | Funcionalidade | Descrição |
 |---|---|
-| [**Monitoramento Online**](../operacoes/monitoramento-online) | Acompanhamento em tempo real dos equipamentos e operações |
-| [**Eventos de Equipamentos**](../operacoes/eventos-equipamentos) | Registro de eventos operacionais dos equipamentos |
-| [**Consulta de Placas**](../operacoes/consulta-placas) | Pesquisar passagens de veículos por placa |
+| [**Monitoramento Online**](../operacoes/monitoramento-online) | Acompanhamento em tempo real dos Equipamentos e operações |
+| [**Eventos de Equipamentos**](../operacoes/eventos-Equipamentos) | Registro de eventos operacionais dos Equipamentos |
+| [**Consulta de Placas**](../operacoes/consulta-placas) | Pesquisar passagens de Veículos por placa |
 | [**Alertas**](../operacoes/alertas) | Gestão de alertas operacionais e notificações |

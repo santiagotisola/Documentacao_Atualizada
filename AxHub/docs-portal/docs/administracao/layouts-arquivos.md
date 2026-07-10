@@ -21,7 +21,7 @@ Permite configurar os layouts de arquivos utilizados para importação e exporta
 | **Encoding** | Codificação do arquivo (UTF-8, ISO-8859-1) |
 
 :::note Sem screenshot
-Esta tela ainda não possui screenshot cadastrada. Será adicionada em breve.
+está tela ainda não possui screenshot cadastrada. Será adicionada em breve.
 :::
 
 ---

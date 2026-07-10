@@ -1,18 +1,18 @@
 ---
 sidebar_position: 3
 title: Categorias de Veículos
-description: Cadastro de categorias de veículos
+description: Cadastro de categorias de Veículos
 ---
 
 # Categorias de Veículos
 
-Permite cadastrar e gerenciar as categorias de veículos.
+Permite cadastrar e gerenciar as categorias de Veículos
 
 ![Lista de Categorias](../img/Veículos%20-%20categoia%20de%20veículos.png)
 
 ## Como acessar
 
-**Menu lateral** → Veículos → **Categorias de Veículos**
+**Menu lateral** → Veículos → **Categorias de Veículos
 
 ## Cadastro
 

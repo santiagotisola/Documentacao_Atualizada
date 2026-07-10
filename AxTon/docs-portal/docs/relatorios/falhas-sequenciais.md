@@ -1,14 +1,14 @@
 ﻿---
 sidebar_position: 10
 title: Falhas de Sequenciais
-description: Detecção de falhas na numeração de infrações
+description: Detecção de falhas na numeração de Infrações
 ---
 
 # Falhas de Sequenciais
 
 ![Sequencial de Exportação](../img/sequencial%20de%20exportacao.png)
 
-Identifica lacunas ou duplicações na numeração sequencial de infrações, garantindo a integridade dos registros.
+Identifica lacunas ou duplicações na numeração sequencial de Infrações garantindo a integridade dos registros.
 
 ## Como acessar
 

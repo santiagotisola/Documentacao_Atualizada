@@ -1,0 +1,164 @@
+{
+  "scenarios": [
+    {
+      "scenarioId": "SCN-000001",
+      "type": "navigation",
+      "category": "Navigation",
+      "name": "Navegar para: Home",
+      "description": "Acessa a página \"Home\" e valida carregamento",
+      "priority": "medium",
+      "steps": [
+        {
+          "action": "navigate",
+          "url": "http://test.com/home",
+          "expectedTitle": "Home",
+          "validations": [
+            {
+              "type": "title",
+              "expected": "Home"
+            },
+            {
+              "type": "status",
+              "expected": 200
+            },
+            {
+              "type": "loadTime",
+              "expected": "< 3s"
+            }
+          ]
+        }
+      ],
+      "metadata": {
+        "pageURL": "http://test.com/home",
+        "pageTitle": "Home",
+        "generated": "2026-06-24T12:00:52.460Z"
+      }
+    },
+    {
+      "scenarioId": "SCN-000002",
+      "type": "navigation",
+      "category": "Navigation",
+      "name": "Navegar para: About",
+      "description": "Acessa a página \"About\" e valida carregamento",
+      "priority": "medium",
+      "steps": [
+        {
+          "action": "navigate",
+          "url": "http://test.com/about",
+          "expectedTitle": "About",
+          "validations": [
+            {
+              "type": "title",
+              "expected": "About"
+            },
+            {
+              "type": "status",
+              "expected": 200
+            },
+            {
+              "type": "loadTime",
+              "expected": "< 3s"
+            }
+          ]
+        }
+      ],
+      "metadata": {
+        "pageURL": "http://test.com/about",
+        "pageTitle": "About",
+        "generated": "2026-06-24T12:00:52.460Z"
+      }
+    },
+    {
+      "scenarioId": "SCN-000003",
+      "type": "form",
+      "category": "Form Validation",
+      "name": "[login-form] Happy Path - Preenchimento completo válido",
+      "description": "Preenche todos os campos do formulário \"login-form\" com dados válidos e submete",
+      "priority": "high",
+      "steps": [
+        {
+          "action": "navigate",
+          "url": "http://test.com/login"
+        },
+        {
+          "action": "fill",
+          "selector": "[name=\"username\"]",
+          "value": "Valor de teste válido",
+          "field": "username"
+        },
+        {
+          "action": "fill",
+          "selector": "[name=\"password\"]",
+          "value": "Senha@123",
+          "field": "password"
+        },
+        {
+          "action": "submit",
+          "expectedResult": "success"
+        }
+      ],
+      "metadata": {
+        "formId": "login-form",
+        "pageURL": "http://test.com/login"
+      }
+    },
+    {
+      "scenarioId": "SCN-000004",
+      "type": "api",
+      "category": "API Validation",
+      "name": "[API] GET http://test.com/api/users...",
+      "description": "Valida endpoint GET http://test.com/api/users",
+      "priority": "high",
+      "steps": [
+        {
+          "action": "api_call",
+          "method": "GET",
+          "url": "http://test.com/api/users",
+          "validations": [
+            {
+              "type": "status",
+              "expected": [
+                200,
+                201,
+                204
+              ]
+            },
+            {
+              "type": "responseTime",
+              "expected": "< 2s"
+            },
+            {
+              "type": "contentType",
+              "expected": "application/json"
+            }
+          ]
+        }
+      ],
+      "metadata": {
+        "apiURL": "http://test.com/api/users",
+        "method": "GET"
+      }
+    }
+  ],
+  "stats": {
+    "total": 4,
+    "byType": {
+      "navigation": 2,
+      "form": 1,
+      "table": 0,
+      "api": 1,
+      "exploratory": 0,
+      "regression": 0
+    },
+    "byPriority": {
+      "high": 2,
+      "medium": 2,
+      "low": 0
+    },
+    "byCategory": {
+      "Navigation": 2,
+      "Form Validation": 1,
+      "API Validation": 1
+    }
+  }
+}

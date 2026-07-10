@@ -1,12 +1,12 @@
 ---
 sidebar_position: 4
 title: Exportação
-description: Exportação de infrações validadas para órgãos autuadores
+description: Exportação de Infrações validadas para órgãos autuadores
 ---
 
 # Exportação
 
-A tela de Exportação permite enviar as infrações validadas pelo fluxo de triagem e auditoria para os órgãos autuadores (DETRAN, DER, PRF, etc.), gerando os arquivos nos layouts exigidos por cada órgão.
+A tela de Exportação permite enviar as Infrações validadas pelo fluxo de triagem e auditoria para os órgãos autuadores (DETRAN, DER, PRF, etc.), gerando os arquivos nos layouts exigidos por cada órgão.
 
 ![Tela de Exportação de Infrações](../img/triagem-exportacao.png)
 
@@ -16,20 +16,20 @@ A tela de Exportação permite enviar as infrações validadas pelo fluxo de tri
 
 ## Como usar
 
-1. Acesse **Infrações → Exportação**
+1. Acesse Infrações → Exportação**
 2. Configure o lote:
    - **Órgão destino**: DETRAN, Prefeitura, DER, PRF, etc.
    - **Período**: Infrações a exportar por data
-   - **Status**: Apenas infrações auditadas e válidas
+   - **Status**: Apenas Infrações auditadas e válidas
    - **Layout**: Formato do arquivo (configurado em Administração → Layouts Arquivos)
-3. Clique em **Gerar lote** — o sistema valida os dados, gera o arquivo e cria o hash de assinatura digital
+3. Clique em **Gerar lote** — o sistema válida os dados, gera o arquivo e cria o hash de assinatura digital
 4. Clique em **Enviar lote** via SFTP/API ou faça o download para envio manual
 
 ## Formatos suportados
 
 | Formato | Descrição |
 |---------|-----------|
-| **RENAINF** | Padrão nacional para infrações de trânsito |
+| **RENAINF** | Padrão nacional para Infrações de trânsito |
 | **XML** | Layout customizável por órgão |
 | **TXT** | Arquivo texto com delimitadores definidos |
 | **CSV** | Para importação em sistemas legados |
@@ -38,7 +38,7 @@ A tela de Exportação permite enviar as infrações validadas pelo fluxo de tri
 
 - ✅ Placa válida e legível
 - ✅ Imagens em qualidade adequada
-- ✅ Dados de local e equipamento completos
+- ✅ Dados de local e Equipamento completos
 - ✅ Enquadramento legal correto
 - ✅ Assinaturas digitais de triagem e auditoria presentes
 - ✅ Infração não duplicada no lote

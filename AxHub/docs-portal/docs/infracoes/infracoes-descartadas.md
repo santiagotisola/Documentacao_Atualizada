@@ -1,12 +1,12 @@
 ---
 sidebar_position: 6
 title: Infrações Descartadas
-description: Consulta e revisão de infrações descartadas no processamento
+description: Consulta e revisão de Infrações descartadas no processamento
 ---
 
 # Infrações Descartadas
 
-As infrações descartadas são consultadas diretamente pela tela de **Consulta de Infrações**, utilizando o filtro de **Status de Processamento = Descartada**. Não existe uma tela exclusiva para infrações descartadas — o fluxo é unificado na consulta.
+As Infrações descartadas são consultadas diretamente pela tela de **Consulta de Infrações utilizando o filtro de **Status de Processamento = Descartada**. Não existe uma tela exclusiva para Infrações descartadas — o fluxo é unificado na consulta.
 
 ## Como acessar
 
@@ -20,8 +20,8 @@ Ou acesse diretamente: `/consultainfracao`
 |--------|-----------|
 | **Status Processamento** | Selecione **Descartada** para ver apenas as descartadas |
 | **Motivo Descarte** | Filtrar pelo motivo do descarte |
-| **Grupo de Equipamentos** | Filtrar por grupo (ex: IMEPI-OCR) |
-| **Equipamento** | Ponto de fiscalização específico |
+| **Grupo de Equipamentos | Filtrar por grupo (ex: IMEPI-OCR) |
+| Equipamento | Ponto de fiscalização específico |
 | **Período** | Faixa de datas |
 
 ## Status de Processamento disponíveis
@@ -39,9 +39,9 @@ Ou acesse diretamente: `/consultainfracao`
 
 ## Funcionalidades
 
-- Consultar infrações descartadas por analista, equipamento e período
+- Consultar Infrações descartadas por analista, Equipamento e período
 - Visualizar motivo do descarte e observações
-- Exportar relatório de descartadas
+- Exportar Relatório de descartadas
 
 :::info
 Infrações descartadas por **exceção automática** também aparecem com status "Descartada", identificadas pelo motivo configurado na regra de exceção. Veja [Exceções](./excecoes) para configurar regras de descarte automático.

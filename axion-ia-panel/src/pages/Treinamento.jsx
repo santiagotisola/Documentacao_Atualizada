@@ -42,7 +42,7 @@ export default function Treinamento() {
           <input
             value={pergunta}
             onChange={e => setPergunta(e.target.value)}
-            placeholder="Ex: erro ao salvar imagem no equipamento"
+            placeholder="Ex: erro ao salvar imagem no Equipamento"
           />
         </div>
 

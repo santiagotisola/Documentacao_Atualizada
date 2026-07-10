@@ -52,11 +52,11 @@ Benef�cios deste processo:
 
 ![triagem infracoes descartadas](../img/triagem-infracoes-descartadas.png)
 
-### Passo 4 - Relatorio   Relatorio de infra��es
+### Passo 4 - Relatório Relatório de infra��es
 
 > ?? _Descreva aqui o que o usu�rio deve fazer neste passo._
 
-![Relatorio   Relatorio de infra��es](../img/Relatorio - Relatorio de infra��es.png)
+Relatório Relatório de infra��es](../img/relatório - Use Relatório (com acento) de infra��es.png)
 
 
 ---
@@ -102,10 +102,10 @@ Antes de confirmar qualquer opera��o, verifique:
 [?? Etapa 1]
     ?
 [?? Etapa 2]
-  ?       ?
-[? OK]  [? Erro]
-    ?          ?
-[?? Resultado OK]  [?? A��o de Erro]
+  ? ?
+[? OK] [? Erro]
+    ? ?
+[?? Resultado OK] [?? A��o de Erro]
 ```
 
 ---

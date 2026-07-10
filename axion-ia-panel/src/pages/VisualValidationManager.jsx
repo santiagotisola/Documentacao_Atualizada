@@ -288,7 +288,7 @@ const VisualValidationManager = () => {
                       <div className="summary-content">
                         <h4>Formulários</h4>
                         <p className="summary-value">{report.summary.totalForms}</p>
-                        <p className="summary-detail">Com validação CRUD</p>
+                        <p className="summary-detail">Com Validação CRUD</p>
                       </div>
                     </div>
                   )}
@@ -314,7 +314,7 @@ const VisualValidationManager = () => {
                       <div className="summary-content">
                         <h4>Issues Encontradas</h4>
                         <p className="summary-value">{report.summary.totalIssues}</p>
-                        <p className="summary-detail">Erros de ortografia e validação</p>
+                        <p className="summary-detail">Erros de ortografia e Validação</p>
                       </div>
                     </div>
                   )}
@@ -398,7 +398,7 @@ const VisualValidationManager = () => {
             <h4>O que é validado?</h4>
             <ul>
               <li>🔍 <strong>Navegação:</strong> Todas as páginas e rotas do sistema</li>
-              <li>📝 <strong>Formulários:</strong> Campos, tipos, validações, limites</li>
+              <li>📝 <strong>Formulários:</strong> Campos, tipos, Validações limites</li>
               <li>✅ <strong>CRUD:</strong> Create, Read, Update, Delete operations</li>
               <li>📸 <strong>Screenshots:</strong> Captura visual de cada tela</li>
               <li>🔤 <strong>Ortografia:</strong> Verifica erros em labels e placeholders</li>

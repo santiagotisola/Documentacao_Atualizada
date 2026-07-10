@@ -54,6 +54,16 @@ const ROTAS_PUBLICAS = [
   { method: "GET",  path: "/visual-validation/report" },
   { method: "GET",  path: "/visual-validation/screenshot" },
   { method: "GET",  path: "/visual-validation/list" },
+  // Linguistic Validation - Rotas públicas para validação linguística
+  { method: "POST", path: "/linguistic/scan" },
+  { method: "POST", path: "/linguistic/fix" },
+  { method: "POST", path: "/linguistic/fix-batch" },
+  { method: "POST", path: "/linguistic/fix-all-similar" },
+  { method: "GET",  path: "/linguistic/glossary" },
+  // Linguistic URL Validation - Validação de sites/URLs
+  { method: "POST", path: "/linguistic/scan-url" },
+  { method: "POST", path: "/linguistic/scan-urls" },
+  { method: "POST", path: "/linguistic/scan-site-complete" },
 ];
 
 function rotaPublica(req) {

@@ -1,46 +1,46 @@
 ---
 sidebar_position: 14
 title: Configuração de Dados da Tarja
-description: Guia completo para atualizar informações exibidas nas tarjas de infrações
+description: Guia completo para atualizar informações exibidas nas tarjas de Infrações
 ---
 
 # Configuração de Dados da Tarja
 
-Este guia explica **passo a passo** como alterar as informações que aparecem nas **tarjas impressas** nas infrações de trânsito do sistema AxHub.
+Este guia explica **passo a passo** como alterar as informações que aparecem nas **tarjas impressas** nas Infrações de trânsito do sistema AxHub.
 
 :::info O que você vai aprender
 - Como alterar a **portaria** que aparece na tarja
-- Como atualizar **marca/modelo** do equipamento
+- Como atualizar **marca/modelo** do Equipamento
 - Como corrigir **endereço**, **faixa**, **sentido**
 - Como atualizar **datas de aferição** e **certificados**
 - Onde cada informação é configurada no sistema
 :::
 
 :::warning Importante
-**Alterações afetam apenas NOVAS infrações!**  
+**Alterações afetam apenas NOVAS Infrações  
 Infrações já geradas NÃO são atualizadas automaticamente.  
-Para reprocessar infrações antigas, é necessário acesso técnico ao banco de dados.
+Para reprocessar Infrações antigas, é necessário acesso técnico ao banco de dados.
 :::
 
-## O que é a Tarja de Infração?
+## O que é a Tarja de Infração
 
-A **tarja** é a imagem impressa/sobreposta na foto da infração que contém informações como:
+A **tarja** é a imagem impressa/sobreposta na foto da Infração que contém informações como:
 
 ```
 ┌────────────────────────────────────────────────────────┐
-│  Cód. Equipamento: [código]                           │
-│  Endereço: [logradouro, número]                       │
-│  Faixa: [nº]         Sentido: [crescente/decrescente] │
-│  Data: 00/00/0000 00:00:00                            │
-│  ─────────────────────────────────────────────────── │
-│  Data aferição: 00/00/0000                            │
-│  Data venc. aferição: 00/00/0000                      │
-│  Certif.: 00000/0000                                  │
-│  Portaria: PORTARIA INMETRO/DIMEL Nº 492/2021        │
-│  ─────────────────────────────────────────────────── │
-│  Marca/Modelo: VELSIS VSIS-OCR                        │
-│  Infração: 00000                                      │
-│  Descrição: TRANSITAR...                              │
+│ Cód. Equipamento [código] │
+│ Endereço: [logradouro, número] │
+│ Faixa: [nº] Sentido: [crescente/decrescente] │
+│ Data: 00/00/0000 00:00:00 │
+│ ─────────────────────────────────────────────────── │
+│ Data aferição: 00/00/0000 │
+│ Data venc. aferição: 00/00/0000 │
+│ Certif.: 00000/0000 │
+│ Portaria: PORTARIA INMETRO/DIMEL Nº 492/2021 │
+│ ─────────────────────────────────────────────────── │
+│ Marca/Modelo: VELSIS VSIS-OCR │
+│ Infração 00000 │
+│ Descrição: TRANSITAR... │
 └────────────────────────────────────────────────────────┘
 ```
 
@@ -57,13 +57,13 @@ O template é um **modelo** que define quais informações aparecem e como são 
 Menu → Configurações → Tarjas → Editar "Tarja Axion"
 ```
 
-O template usa **variáveis** entre chaves `{NomeDaVariavel}` que são substituídas por valores reais na hora de gerar a infração.
+O template usa **variáveis** entre chaves `{NomeDaVariavel}` que são substituídas por valores reais na hora de gerar a Infração
 
 **Exemplo de template:**
 ```
 Cód. Equipamento : {CodigoEquipamento}
 Endereço : {CodigoLocalOperacaoEquipamento}
-Faixa : {NumeroFaixa}        Sentido : {SentidoFaixa}
+Faixa : {NumeroFaixa} Sentido : {SentidoFaixa}
 Portaria : {PortariaEquipamento}
 ```
 
@@ -88,13 +88,13 @@ Corrigir portaria que aparece com data incorreta ou formato antigo
 
 **Vantagens:**
 - ✅ Correção permanente
-- ✅ Afeta todos equipamentos deste modelo
+- ✅ Afeta todos Equipamentos deste modelo
 - ✅ Mantém consistência no sistema
 
 **Passo a passo:**
 
-1. Acessar: **Menu** → **Equipamentos** → **Modelos de Equipamentos**
-2. Localizar o modelo (ex: buscar por marca e modelo do equipamento)
+1. Acessar: **Menu** → Equipamentos → **Modelos de Equipamentos
+2. Localizar o modelo (ex: buscar por marca e modelo do Equipamento
 3. Clicar em **Editar** (ícone de lápis)
 4. No campo **"Portaria"**, corrigir para o formato correto:
    ```
@@ -103,12 +103,12 @@ Corrigir portaria que aparece com data incorreta ou formato antigo
    Exemplo: `PORTARIA INMETRO/DIMEL Nº 492/2021`
 5. Verificar também o campo **"Número Portaria"**: apenas o número
 6. Clicar em **Salvar**
-7. Validar gerando uma nova infração de teste
+7. Validar gerando uma nova Infração de teste
 
 ⏱️ **Tempo estimado:** 5 minutos
 
 :::tip Consulte a documentação oficial
-Para mais detalhes sobre modelos de equipamentos, consulte [Modelos de Equipamentos](../cadastros-basicos/modelos-equipamentos).
+Para mais detalhes sobre modelos de Equipamentos consulte [Modelos de Equipamentos](../cadastros-basicos/modelos-equipamentos).
 :::
 
 ### Opção 2: Alterar o Template da Tarja (Workaround)
@@ -117,7 +117,7 @@ Use quando a portaria está correta no cadastro, mas errada na tarja (duplicidad
 
 **Passo a passo:**
 
-1. Acessar: **Menu** → **Configurações** → **Tarjas**
+1. Acessar: **Menu** → Configurações → **Tarjas**
 2. Localizar "Tarja Axion" e clicar em **Editar**
 3. No campo **Template**, localizar:
    ```
@@ -128,7 +128,7 @@ Use quando a portaria está correta no cadastro, mas errada na tarja (duplicidad
    Portaria não metrológico : {PortariaEquipamento}
    ```
 5. Clicar em **Salvar**
-6. Testar com nova infração
+6. Testar com nova Infração
 
 ⏱️ **Tempo estimado:** 3 minutos
 
@@ -142,11 +142,11 @@ Use quando a portaria está correta no cadastro, mas errada na tarja (duplicidad
 | Endereço | `{CodigoLocalOperacaoEquipamento}` | Equipamentos → Operações → Editar |
 | Faixa | `{NumeroFaixa}` | Equipamentos → Equipamentos → Aba Faixas |
 | Sentido | `{SentidoFaixa}` | Equipamentos → Equipamentos → Aba Faixas |
-| Data Infração | `{DataPassagemInfracao}` | 🔒 Automático (capturado pelo equipamento) |
+| Data Infração | `{DataPassagemInfracao}` | 🔒 Automático (capturado pelo Equipamento |
 | Data Aferição | `{DataAfericaoInmetro}` | Operações → Aferições → Editar |
 | Data Venc. Aferição | `{DataVencimentoAfericao}` | Operações → Aferições → Editar |
 | Certificado | `{CertificadoEquipamento}` | Equipamentos ou Aferições |
-| **Portaria** | `{PortariaEquipamento}` | **Equipamentos → Modelos → Editar** |
+| **Portaria** | `{PortariaEquipamento}` | Equipamentos → Modelos → Editar** |
 | Reg. não metrológico | `{NumeroCertificadoInmetro}` | Operações → Aferições → Editar |
 | Marca/Modelo | `{MarcaModeloEquipamento}` | Equipamentos → Modelos → Editar |
 | Código Órgão | `{CodigoOrgaoAutuador}` | Configurações → Geral |
@@ -161,15 +161,15 @@ Use quando a portaria está correta no cadastro, mas errada na tarja (duplicidad
 **Origem:** Cadastro do Equipamento → Campo "Código"
 
 **Como alterar:**
-1. **Menu** → **Equipamentos** → **Equipamentos**
-2. Localizar o equipamento (buscar por código, endereço ou modelo)
+1. **Menu** → Equipamentos → Equipamentos
+2. Localizar o Equipamento (buscar por código, endereço ou modelo)
 3. Clicar em **Editar**
 4. Alterar o campo **"Código"**
 5. Clicar em **Salvar**
 
 :::caution Atenção
-Alterar o código pode afetar relatórios e históricos.  
-**Recomendado:** NÃO alterar após equipamento em uso.
+Alterar o código pode afetar Relatórios e históricos.  
+**Recomendado:** NÃO alterar após Equipamento em uso.
 :::
 
 ### 2. Endereço
@@ -180,15 +180,15 @@ Alterar o código pode afetar relatórios e históricos.
 
 **Como alterar:**
 1. **Menu** → **Operações** → **Operações**
-2. Localizar a operação do equipamento
+2. Localizar a operação do Equipamento
 3. Clicar em **Editar**
 4. Alterar o campo **"Endereço"**
 5. Formato recomendado: "Logradouro, Número - Bairro"
 6. Clicar em **Salvar**
 
 :::tip Dica
-Uma operação agrupa vários equipamentos do mesmo local.  
-Alterar o endereço da operação afeta **TODOS os equipamentos** vinculados.
+Uma operação agrupa vários Equipamentos do mesmo local.  
+Alterar o endereço da operação afeta **TODOS os Equipamentos vinculados.
 :::
 
 ### 3. Número da Faixa
@@ -198,8 +198,8 @@ Alterar o endereço da operação afeta **TODOS os equipamentos** vinculados.
 **Origem:** Cadastro do Equipamento → Aba "Faixas" → Campo "Número"
 
 **Como alterar:**
-1. **Menu** → **Equipamentos** → **Equipamentos**
-2. Localizar o equipamento
+1. **Menu** → Equipamentos → Equipamentos
+2. Localizar o Equipamento
 3. Clicar na aba **"Faixas"**
 4. Selecionar a faixa desejada
 5. Clicar em **Editar**
@@ -218,8 +218,8 @@ Se necessário, desativar a faixa antiga e criar nova.
 **Origem:** Cadastro do Equipamento → Aba "Faixas" → Campo "Sentido"
 
 **Como alterar:**
-1. **Menu** → **Equipamentos** → **Equipamentos**
-2. Localizar o equipamento
+1. **Menu** → Equipamentos → Equipamentos
+2. Localizar o Equipamento
 3. Clicar na aba **"Faixas"**
 4. Selecionar a faixa
 5. Clicar em **Editar**
@@ -236,18 +236,18 @@ Se necessário, desativar a faixa antiga e criar nova.
 
 **Aparece como:** `Data : 00/00/0000 00:00:00`  
 **Variável:** `{DataPassagemInfracao}`  
-**Origem:** 🔒 Capturado AUTOMATICAMENTE pelo equipamento
+**Origem:** 🔒 Capturado AUTOMATICAMENTE pelo Equipamento
 
 :::danger Não alterar manualmente
-Este campo é gerado automaticamente pelo equipamento no momento da infração.  
-Reflete o momento real da infração e NÃO deve ser alterado manualmente.
+Este campo é gerado automaticamente pelo Equipamento no momento da Infração  
+Reflete o momento real da Infração e NÃO deve ser alterado manualmente.
 :::
 
 **Se a data estiver errada:**
-- Verificar relógio do equipamento
-- Verificar configuração de data/hora
+- Verificar relógio do Equipamento
+- Verificar Configuração de data/hora
 - Sincronizar com servidor NTP se disponível
-- Para infrações já geradas com data errada: consultar equipe técnica
+- Para Infrações já geradas com data errada: consultar equipe técnica
 
 ### 6. Data da Aferição {#data-da-afericao}
 
@@ -257,7 +257,7 @@ Reflete o momento real da infração e NÃO deve ser alterado manualmente.
 
 **Como alterar:**
 1. **Menu** → **Operações** → **Aferições**
-2. Localizar a aferição (filtrar por equipamento)
+2. Localizar a aferição (filtrar por Equipamento
 3. Clicar em **Editar**
 4. Alterar o campo **"Data da Aferição"**
 5. Formato: DD/MM/AAAA
@@ -266,7 +266,7 @@ Reflete o momento real da infração e NÃO deve ser alterado manualmente.
 :::tip Quando criar nova aferição
 1. Ao receber certificado do INMETRO
 2. Preencher todos os campos obrigatórios
-3. Vincular equipamento e faixas
+3. Vincular Equipamento e faixas
 4. Definir data de vencimento (geralmente 1 ano após)
 :::
 
@@ -302,9 +302,9 @@ Mantenha calendário de aferições atualizado e agende renovação 60 dias ante
 - Cadastro do Equipamento → Campo "Certificado"
 - Cadastro de Aferições → Campo "Número INMETRO"
 
-**Como alterar (Opção 1 - No Equipamento):**
-1. **Menu** → **Equipamentos** → **Equipamentos**
-2. Localizar o equipamento
+**Como alterar (Opção 1 - No Equipamento
+1. **Menu** → Equipamentos → Equipamentos
+2. Localizar o Equipamento
 3. Clicar em **Editar**
 4. Localizar campo **"Certificado"** ou **"Número do Certificado"**
 5. Formato: "00000/0000" (número/ano)
@@ -331,7 +331,7 @@ Mantenha calendário de aferições atualizado e agende renovação 60 dias ante
 **Origem:** Cadastro de Modelos de Equipamentos → Campo "Portaria"
 
 **Como alterar:**
-1. **Menu** → **Equipamentos** → **Modelos de Equipamentos**
+1. **Menu** → Equipamentos → **Modelos de Equipamentos
 2. Localizar o modelo (ex: "VSIS-OCR", marca "VELSIS")
 3. Clicar em **Editar**
 4. Alterar o campo **"Portaria"**
@@ -349,8 +349,8 @@ Mantenha calendário de aferições atualizado e agende renovação 60 dias ante
 | 115/2019 | Etilômetros | 20/03/2019 |
 
 :::info Importante
-- A portaria é definida no **MODELO**, não no equipamento individual
-- Alterar a portaria do modelo afeta **TODOS os equipamentos** deste modelo
+- A portaria é definida no **MODELO**, não no Equipamento individual
+- Alterar a portaria do modelo afeta **TODOS os Equipamentos deste modelo
 - Verificar a portaria correta no site do INMETRO: https://www.gov.br/inmetro
 :::
 
@@ -361,7 +361,7 @@ Mantenha calendário de aferições atualizado e agende renovação 60 dias ante
 **Origem:** Cadastro de Modelos → Campos "Marca" + "Modelo" (concatenados)
 
 **Como alterar:**
-1. **Menu** → **Equipamentos** → **Modelos de Equipamentos**
+1. **Menu** → Equipamentos → **Modelos de Equipamentos
 2. Localizar o modelo
 3. Clicar em **Editar**
 4. Alterar os campos:
@@ -381,18 +381,18 @@ Resultado na tarja: "PERKONS VECTRA"
 ```
 
 :::caution Atenção
-Alterar marca/modelo afeta **TODOS os equipamentos** deste modelo.  
-**Recomendado:** NÃO alterar após equipamentos em uso.
+Alterar marca/modelo afeta **TODOS os Equipamentos deste modelo.  
+**Recomendado:** NÃO alterar após Equipamentos em uso.
 :::
 
 ### 11. Código da Infração {#codigo-da-infracao}
 
-**Aparece como:** `Infração : 00000`  
+**Aparece como:** Infração : 00000`  
 **Variável:** `{CodigoEnquadramento}`  
 **Origem:** Cadastro de Enquadramentos → Campo "Código"
 
 **Como alterar:**
-1. **Menu** → **Configurações** → **Enquadramentos**
+1. **Menu** → Configurações → **Enquadramentos**
 2. Localizar o enquadramento (buscar por código ou descrição)
 3. Clicar em **Editar**
 4. Alterar campo **"Código"**
@@ -408,7 +408,7 @@ Alterar marca/modelo afeta **TODOS os equipamentos** deste modelo.
 | 74740 | Excesso acima de 50% | Mais de 50% |
 
 :::warning Importante
-O código deve seguir o CTB. Código errado = infração inválida legalmente.
+O código deve seguir o CTB. Código errado = Infração inválida legalmente.
 :::
 
 ### 12. Descrição da Infração
@@ -418,7 +418,7 @@ O código deve seguir o CTB. Código errado = infração inválida legalmente.
 **Origem:** Cadastro de Enquadramentos → Campo "Descrição"
 
 **Como alterar:**
-1. **Menu** → **Configurações** → **Enquadramentos**
+1. **Menu** → Configurações → **Enquadramentos**
 2. Localizar o enquadramento
 3. Clicar em **Editar**
 4. Alterar campo **"Descrição"**
@@ -432,16 +432,16 @@ O código deve seguir o CTB. Código errado = infração inválida legalmente.
 **Origem:** Cadastro do Equipamento → Campo "Número de Série"
 
 **Como alterar:**
-1. **Menu** → **Equipamentos** → **Equipamentos**
-2. Localizar o equipamento
+1. **Menu** → Equipamentos → Equipamentos
+2. Localizar o Equipamento
 3. Clicar em **Editar**
 4. Alterar campo **"Número de Série"** ou **"Serial"**
-5. Usar o serial da etiqueta física do equipamento
+5. Usar o serial da etiqueta física do Equipamento
 6. Clicar em **Salvar**
 
 :::tip Onde encontrar o serial
-- Etiqueta física no equipamento
-- Manual do equipamento
+- Etiqueta física no Equipamento
+- Manual do Equipamento
 - Nota fiscal de compra
 - Certificado INMETRO
 :::
@@ -451,18 +451,18 @@ O código deve seguir o CTB. Código errado = infração inválida legalmente.
 Entenda como os dados se relacionam:
 
 ```
-MODELO DE EQUIPAMENTO (ex: VSIS-OCR, F-DIP, VECTRA)
-├── Portaria ← Todos equipamentos deste modelo
-├── Marca ← Todos equipamentos deste modelo
-└── Modelo ← Todos equipamentos deste modelo
+MODELO DE Equipamento (ex: VSIS-OCR, F-DIP, VECTRA)
+├── Portaria ← Todos Equipamentos deste modelo
+├── Marca ← Todos Equipamentos deste modelo
+└── Modelo ← Todos Equipamentos deste modelo
     │
-    └── EQUIPAMENTO (ex: identificado por código)
-        ├── Código ← Específico deste equipamento
-        ├── Serial ← Específico deste equipamento
-        └── Certificado ← Específico deste equipamento
+    └── Equipamento (ex: identificado por código)
+        ├── Código ← Específico deste Equipamento
+        ├── Serial ← Específico deste Equipamento
+        └── Certificado ← Específico deste Equipamento
             │
             └── OPERAÇÃO (ex: endereço do local)
-                ├── Endereço ← Todos equipamentos desta operação
+                ├── Endereço ← Todos Equipamentos desta operação
                 └── Código Órgão ← Geralmente global
                     │
                     └── FAIXAS (ex: numeradas 1, 2, 3...)
@@ -474,7 +474,7 @@ MODELO DE EQUIPAMENTO (ex: VSIS-OCR, F-DIP, VECTRA)
                                 ├── Data Vencimento ← Equipamento + Faixas
                                 └── Número INMETRO ← Equipamento + Faixas
                                     │
-                                    └── INFRAÇÃO (gerada)
+                                    └── Infração (gerada)
                                         └── TARJA ← Busca TODOS dados acima
 ```
 
@@ -482,20 +482,20 @@ MODELO DE EQUIPAMENTO (ex: VSIS-OCR, F-DIP, VECTRA)
 
 ### Alterei o campo no sistema, mas a tarja ainda mostra o valor antigo. Por quê?
 
-As alterações afetam apenas **NOVAS infrações**. Infrações já geradas permanecem com os dados antigos.
+As alterações afetam apenas **NOVAS Infrações Infrações já geradas permanecem com os dados antigos.
 
 **Soluções:**
-- ✅ Aguardar nova infração (dados virão atualizados)
-- ⚠️ Reprocessar infrações antigas (requer acesso SQL ao banco de dados)
+- ✅ Aguardar nova Infração (dados virão atualizados)
+- ⚠️ Reprocessar Infrações antigas (requer acesso SQL ao banco de dados)
 - ⏱️ Limpar cache do navegador e aguardar alguns minutos
 
-### Posso alterar a tarja de uma infração já gerada?
+### Posso alterar a tarja de uma Infração já gerada?
 
 ⚠️ **Tecnicamente sim, mas NÃO é recomendado!**
 
 **Por quê:**
-- A tarja reflete os dados no momento da infração
-- Alterar retroativamente pode invalidar a infração legalmente
+- A tarja reflete os dados no momento da Infração
+- Alterar retroativamente pode invalidar a Infração legalmente
 - Pode ser considerado adulteração de documento
 
 **Quando pode:**
@@ -510,45 +510,45 @@ Use a **Tabela de Referência Rápida** no início desta página para localizar 
 
 ### Preciso alterar o template da tarja. Como faço?
 
-1. **Menu** → **Configurações** → **Tarjas**
+1. **Menu** → Configurações → **Tarjas**
 2. Localizar a tarja (ex: "Tarja Axion")
 3. Clicar em **Editar**
 4. Alterar o campo **"Template"** ou **"Layout"**
 5. Usar variáveis entre chaves: `{NomeDaVariavel}`
 6. Consultar a tabela de variáveis disponíveis acima
 7. Clicar em **Salvar**
-8. Testar com infração de teste
+8. Testar com Infração de teste
 
 ### O que acontece se eu deixar uma aferição vencer?
 
 **Consequências:**
 - ❌ Infrações geradas com aferição vencida são juridicamente questionáveis
-- ⚠️ Sistema pode bloquear geração de novas infrações
+- ⚠️ Sistema pode bloquear geração de novas Infrações
 - ⚖️ Equipamento opera ilegalmente
 - 📝 Defesas de autuação podem ser aceitas
 
 **Como evitar:**
 - 📅 Agendar aferição 60 dias antes do vencimento
 - 🔔 Configurar alertas 30 dias antes
-- 📊 Monitorar dashboard de vencimentos
+- 📊 Monitorar Dashboard de vencimentos
 
-### Posso usar a mesma aferição para vários equipamentos?
+### Posso usar a mesma aferição para vários Equipamentos
 
 ✅ **Sim, SE:**
-- Os equipamentos estão fisicamente juntos
+- Os Equipamentos estão fisicamente juntos
 - A aferição foi feita para o conjunto
-- O certificado INMETRO lista todos os equipamentos
+- O certificado INMETRO lista todos os Equipamentos
 - As faixas estão todas cobertas pela aferição
 
 **Como fazer:**
 1. Cadastrar a aferição: **Operações** → **Aferições** → **Nova**
-2. Na aba **"Equipamentos"**, adicionar cada equipamento
+2. Na aba Equipamentos adicionar cada Equipamento
 3. Selecionar faixas de cada um
-4. Todos os equipamentos vinculados usarão esta aferição
+4. Todos os Equipamentos vinculados usarão está aferição
 
 :::caution Atenção
-Certificado INMETRO deve cobrir todos os equipamentos.  
-Não vincular equipamentos que não estão no certificado.
+Certificado INMETRO deve cobrir todos os Equipamentos  
+Não vincular Equipamentos que não estão no certificado.
 :::
 
 ## Checklist de Validação
@@ -559,12 +559,12 @@ Após alterar informações, validar:
 - [ ] Mensagem de sucesso foi exibida
 - [ ] Não há mensagens de erro
 - [ ] Valores aparecem corretos ao reabrir cadastro
-- [ ] Gerou infração de teste
-- [ ] Tarja da infração de teste mostra dados atualizados
+- [ ] Gerou Infração de teste
+- [ ] Tarja da Infração de teste mostra dados atualizados
 - [ ] Formato dos dados está correto (datas, códigos, etc.)
 - [ ] Documentou a alteração (se crítica)
 - [ ] Backup foi feito antes (se crítica)
-- [ ] Equipe foi notificada (se afeta múltiplos usuários)
+- [ ] Equipe foi notificada (se afeta múltiplos Usuários
 
 ## Impacto das Alterações
 
@@ -585,13 +585,13 @@ Após alterar informações, validar:
 
 | Termo | Definição |
 |-------|-----------|
-| **Aferição** | Processo de calibração e certificação do equipamento pelo INMETRO |
+| **Aferição** | Processo de calibração e certificação do Equipamento pelo INMETRO |
 | **INMETRO** | Instituto Nacional de Metrologia, Qualidade e Tecnologia |
-| **Portaria** | Norma legal que regulamenta o uso de equipamentos de fiscalização |
+| **Portaria** | Norma legal que regulamenta o uso de Equipamentos de fiscalização |
 | **Template** | Modelo/layout que define como a tarja será exibida |
-| **Tarja** | Imagem sobreposta na foto da infração com informações do equipamento |
+| **Tarja** | Imagem sobreposta na foto da Infração com informações do Equipamento |
 | **Variável** | Placeholder no template substituído por valor real (ex: `{CodigoEquipamento}`) |
-| **Enquadramento** | Código e descrição da infração conforme CTB |
+| **Enquadramento** | Código e descrição da Infração conforme CTB |
 | **CTB** | Código de Trânsito Brasileiro (Lei nº 9.503/1997) |
 
 ---
@@ -602,7 +602,7 @@ Após alterar informações, validar:
 |------|--------|-----------|
 | Configuração | [Tarjas](./tarjas) | Configuração básica de tarjas |
 | Cadastro | [Modelos de Equipamentos](../cadastros-basicos/modelos-equipamentos) | Como cadastrar modelos e portarias |
-| Cadastro | [Equipamentos](../cadastros-basicos/equipamentos) | Cadastro de equipamentos |
+| Cadastro | [Equipamentos](../cadastros-basicos/Equipamentos) | Cadastro de Equipamentos |
 | Configuração | [Enquadramentos](./enquadramentos) | Cadastro de enquadramentos CTB |
 | Operação | [Triagem](../infracoes/triagem) | Onde a tarja é visualizada |
 | Operação | [Exportação](../infracoes/exportacao) | Imagem exportada com tarja |
@@ -614,5 +614,5 @@ Em caso de dúvidas ou problemas técnicos, abra um chamado no helpdesk informan
 - Equipamento afetado
 - Campo que precisa alterar
 - Screenshots do problema
-- Categoria: "AxHub - Configurações"
+- Categoria: "AxHub - Configurações
 :::

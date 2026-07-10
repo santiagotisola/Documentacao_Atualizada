@@ -1,12 +1,12 @@
 ---
 sidebar_position: 1
 title: Fabricantes
-description: Cadastro de fabricantes de equipamentos de trânsito
+description: Cadastro de fabricantes de Equipamentos de trânsito
 ---
 
 # Fabricantes
 
-O cadastro de fabricantes permite registrar as empresas que fabricam os equipamentos de trânsito integrados ao AxHub. Cada fabricante possui credenciais de API para envio de dados ao sistema.
+O cadastro de fabricantes permite registrar as empresas que fabricam os Equipamentos de trânsito integrados ao AxHub. Cada fabricante possui credenciais de API para envio de dados ao sistema.
 
 ## Como acessar
 
@@ -45,7 +45,7 @@ A tela de listagem exibe todos os fabricantes cadastrados no sistema.
 |-------|:-----------:|-----------|
 | **Nome** | Sim | Nome do fabricante |
 | **Slug** | Sim | Identificador único em formato URL (ex: "axion"). Usado internamente para identificar o fabricante nas integrações |
-| **Agrupador Sequencial** | Não | Código para agrupar sequenciais de infrações por fabricante |
+| **Agrupador Sequencial** | Não | Código para agrupar sequenciais de Infrações por fabricante |
 | **Código do Fabricante** | Não | Código externo do fabricante |
 | **Token** | — | Token de autenticação gerado automaticamente. Usado pelo fabricante para enviar dados via API |
 | **Certificado** | Não | Certificado digital do fabricante para comunicação segura |

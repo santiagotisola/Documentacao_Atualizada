@@ -6,7 +6,7 @@ description: Gestão de perfis de acesso no AxCross
 
 # Perfis de Acesso
 
-Cadastro dos perfis de acesso que agrupam conjuntos de permissões para atribuição a usuários.
+Cadastro dos perfis de acesso que agrupam conjuntos de permissões para atribuição a Usuários
 
 ## Como acessar
 
@@ -34,10 +34,10 @@ No **menu lateral**, expanda **Administração** e clique em **Perfis de acesso*
 
 | Perfil | Descrição |
 |--------|-----------|
-| **Administrador** | Acesso total a todos os módulos e configurações |
-| **Operador** | Acesso a monitoramento, operações e relatórios |
-| **Consulta** | Acesso somente leitura aos relatórios |
+| **Administrador** | Acesso total a todos os módulos e Configurações |
+| **Operador** | Acesso a monitoramento, operações e Relatórios |
+| **Consulta** | Acesso somente leitura aos Relatórios |
 
 :::info Importante
-Perfis vinculados a usuários ativos não podem ser excluídos. Inative o perfil para bloquear o acesso.
+Perfis vinculados a Usuários ativos não podem ser excluídos. Inative o perfil para bloquear o acesso.
 :::

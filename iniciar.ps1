@@ -20,33 +20,38 @@ if (Test-Path $pidFile) { Remove-Item $pidFile }
 Write-Host "`nIniciando jobs..." -ForegroundColor Cyan
 
 $job1 = Start-Job -ScriptBlock {
-    Set-Location $using:ROOT\axion-ia-api
+    param($rootPath)
+    Set-Location "$rootPath\axion-ia-panel\api"
     node --env-file=.env src/app.js
-} -Name "axion-ia-api"
-Write-Host "[Job $($job1.Id)] axion-ia-api :3100" -ForegroundColor Yellow
+} -ArgumentList $ROOT -Name "axion-ia-api"
+Write-Host "[Job $($job1.Id)] axion-ia-api (v4) :3100" -ForegroundColor Yellow
 
 $job2 = Start-Job -ScriptBlock {
-    Set-Location $using:ROOT\axion-ia-panel
+    param($rootPath)
+    Set-Location "$rootPath\axion-ia-panel"
     npm run dev
-} -Name "axion-ia-panel"
+} -ArgumentList $ROOT -Name "axion-ia-panel"
 Write-Host "[Job $($job2.Id)] axion-ia-panel :3017" -ForegroundColor Yellow
 
 $job3 = Start-Job -ScriptBlock {
-    Set-Location "$using:ROOT\AxHub\docs-portal"
+    param($rootPath)
+    Set-Location "$rootPath\AxHub\docs-portal"
     npm run serve -- --port 3010
-} -Name "AxHub.Docs"
+} -ArgumentList $ROOT -Name "AxHub.Docs"
 Write-Host "[Job $($job3.Id)] AxHub.Docs :3010" -ForegroundColor Yellow
 
 $job4 = Start-Job -ScriptBlock {
-    Set-Location "$using:ROOT\AxTon\docs-portal"
-    npm run serve -- --port 3011 2>&1 | Out-Null  # Silencia erros conhecidos
-} -Name "AxTon.Docs"
+    param($rootPath)
+    Set-Location "$rootPath\AxTon\docs-portal"
+    npm run start -- --port 3011 --host localhost
+} -ArgumentList $ROOT -Name "AxTon.Docs"
 Write-Host "[Job $($job4.Id)] AxTon.Docs :3011" -ForegroundColor Yellow
 
 $job5 = Start-Job -ScriptBlock {
-    Set-Location "$using:ROOT\AxCross\docs-portal"
+    param($rootPath)
+    Set-Location "$rootPath\AxCross\docs-portal"
     npm run serve -- --port 3012
-} -Name "AxCross.Docs"
+} -ArgumentList $ROOT -Name "AxCross.Docs"
 Write-Host "[Job $($job5.Id)] AxCross.Docs :3012" -ForegroundColor Yellow
 
 # Salva IDs dos jobs

@@ -1,14 +1,14 @@
 ﻿---
 sidebar_position: 2
 title: Fabricantes
-description: Cadastro dos fabricantes de equipamentos
+description: Cadastro dos fabricantes de Equipamentos
 ---
 
 # Fabricantes
 
-![Configuração de Sistema](../img/configuracao%20de%20sistema%20-%20dados.png)
+Configuração de Sistema](../img/configuracao%20de%20sistema%20-%20dados.png)
 
-Cadastro dos fabricantes de equipamentos. Estes registros são fundamentais para o funcionamento do sistema de pesagem.
+Cadastro dos fabricantes de Equipamentos Estes registros são fundamentais para o funcionamento do sistema de pesagem.
 
 ## Como acessar
 

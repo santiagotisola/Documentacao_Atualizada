@@ -4,14 +4,14 @@
 **Solicitante:** Karla Ramira  
 **Usuário afetado:** MATHEUS ROCHA DA SILVA (matheus.silva)  
 **Sites:** IMEPI, ITPS, IMETROPA  
-**Data da análise:** 29/05/2026  
+**Data da Análise 29/05/2026  
 **Equipe responsável:** Axion Tecnologia — Suporte Nível 2  
 
 ---
 
 ## 1. Resumo Executivo
 
-Após análise técnica detalhada dos logs de console do navegador, comportamento de rede e estrutura da aplicação, **identificamos que o travamento NÃO é causado pelo sistema AxHub**, nem por problema de permissão, perfil de usuário ou configuração de máquina.
+Após Análise técnica detalhada dos logs de console do navegador, comportamento de rede e estrutura da aplicação, **identificamos que o travamento NÃO é causado pelo sistema AxHub**, nem por problema de permissão, perfil de Usuário ou Configuração de máquina.
 
 O travamento é causado por **falha em um serviço externo de consulta de cronotacógrafo** que o sistema utiliza como dependência, resultando em centenas de requisições com erro que congestionam o navegador.
 
@@ -51,20 +51,20 @@ O navegador Google Chrome possui um **limite técnico de 6 conexões simultânea
 - A interface para de responder a cliques e teclado
 - Imagens param de carregar (erro 404 adicional)
 - Componentes JavaScript não inicializam (erro Kendo DropDownList)
-- O usuário percebe como "travamento geral"
+- O Usuário percebe como "travamento geral"
 
 ---
 
-## 3. Por que afeta ESTE usuário com mais frequência
+## 3. Por que afeta ESTE Usuário com mais frequência
 
-O travamento não é específico do usuário `matheus.silva` — é **específico do momento e do volume de dados**:
+O travamento não é específico do Usuário `matheus.silva` — é **específico do momento e do volume de dados**:
 
 | Fator | Explicação |
 |-------|-----------|
 | Lote grande de passagens | Quanto mais passagens no lote, mais consultas simultâneas |
 | Horário de operação | Horários de pico = mais passagens acumuladas = mais requisições |
 | Máquina CCO | Rede local pode ter latência adicional ao serviço externo |
-| Outros usuários "funcionam" | Podem estar em lotes menores ou o serviço externo voltou momentaneamente |
+| Outros Usuários "funcionam" | Podem estar em lotes menores ou o serviço externo voltou momentaneamente |
 
 **Nota:** O fato de funcionar no notebook da Karla confirma que é um problema de **momento/volume** — não de máquina ou perfil. Quando ela testou, o lote era diferente ou o serviço externo estava temporariamente respondendo.
 
@@ -139,7 +139,7 @@ Enquanto o serviço externo não é restabelecido:
 
 ## 8. Conclusão
 
-O travamento reportado pelo usuário Matheus Rocha da Silva é **real e reproduzível**, porém sua causa é uma **dependência externa ao sistema AxHub** — especificamente o webservice de consulta de cronotacógrafo que está retornando erro para todas as requisições.
+O travamento reportado pelo Usuário Matheus Rocha da Silva é **real e reproduzível**, porém sua causa é uma **dependência externa ao sistema AxHub** — especificamente o webservice de consulta de cronotacógrafo que está retornando erro para todas as requisições.
 
 O sistema AxHub está funcionando conforme projetado. O travamento visual no navegador é consequência do acúmulo de requisições com falha na fila de rede do browser, causado pela indisponibilidade do serviço externo.
 
@@ -160,4 +160,4 @@ Data: 29/05/2026
 
 ---
 
-*Documento gerado com base na análise técnica dos logs de console do navegador (DevTools), comportamento de rede e arquitetura do sistema AxHub hospedado no Azure App Service.*
+*Documento gerado com base na Análise técnica dos logs de console do navegador (DevTools), comportamento de rede e arquitetura do sistema AxHub hospedado no Azure App Service.*

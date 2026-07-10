@@ -1,0 +1,6 @@
+import { useEffect } from 'react';
+const Infracoes = ({ metricas, setMetricas }) => {
+  useEffect(() => { setMetricas(prev => ({ ...prev, consultasHoje: 45, tempoMedio: 1.8 })); }, [setMetricas]);
+  return (<div className="infracoes"><h2>🚗 Consultar Infrações (AxHub)</h2><p style={{color:'#64748b',marginBottom:'1.5rem'}}>Ferramenta de Análise e suporte — Consulte Infrações por CPF ou Placa</p><div style={{background:'white',padding:'2rem',borderRadius:'8px'}}><div style={{marginBottom:'1.5rem'}}><label style={{display:'block',marginBottom:'0.5rem',fontWeight:'500'}}>Tipo de Consulta:</label><div style={{display:'flex',gap:'1rem'}}><button style={{padding:'0.5rem 1rem',background:'#667eea',color:'white',border:'none',borderRadius:'4px',cursor:'pointer'}}>Por Placa</button><button style={{padding:'0.5rem 1rem',background:'#f1f5f9',color:'#1a202c',border:'none',borderRadius:'4px',cursor:'pointer'}}>Por CPF</button></div></div><div style={{marginBottom:'1rem'}}><input type="text" placeholder="Digite a placa (ex: ABC1234)" style={{width:'100%',padding:'0.75rem',border:'1px solid #cbd5e1',borderRadius:'4px',fontSize:'1rem'}} /></div><button style={{padding:'0.75rem 2rem',background:'#667eea',color:'white',border:'none',borderRadius:'4px',fontWeight:'600',cursor:'pointer'}}>🔍 Consultar</button></div></div>);
+};
+export default Infracoes;

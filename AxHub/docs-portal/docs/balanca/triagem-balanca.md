@@ -6,7 +6,7 @@ description: Gestao e triagem de infracoes de excesso de peso
 
 # Triagem de Balanca
 
-Módulo de gerenciamento das infrações de excesso de peso geradas pelo sistema de pesagem. O fluxo de trabalho envolve liberar pesagens para triagem, reclassificar tickets e gerenciar os postos e motivos de encerramento.
+Módulo de gerenciamento das Infrações de excesso de peso geradas pelo sistema de pesagem. O fluxo de trabalho envolve liberar pesagens para triagem, reclassificar tickets e gerenciar os postos e motivos de encerramento.
 
 :::info
 O menu **Balança** agrupa as seguintes telas: **Liberar Pesagem**, **Ticket Aberto**, **Ticket Fechado**, **Reclassificar**, **Posto Pesagem** e **Motivos**. Não há uma tela única de "Triagem de Balança" — cada etapa é acessada pelo sub-item correspondente.
@@ -18,9 +18,9 @@ O menu **Balança** agrupa as seguintes telas: **Liberar Pesagem**, **Ticket Abe
 
 ## Fluxo de Triagem de Pesagem
 
-1. Acesse **Balança → Liberar Pesagem** para liberar tickets pendentes para análise
+1. Acesse **Balança → Liberar Pesagem** para liberar tickets pendentes para Análise
 2. Em **Balança → Ticket Aberto** visualize os tickets em andamento
-3. Realize a análise e classifique cada ticket
+3. Realize a Análise e classifique cada ticket
 4. Tickets encerrados aparecem em **Balança → Ticket Fechado**
 5. Para corrigir a classificação de um ticket, use **Balança → Reclassificar**
 

@@ -1,34 +1,34 @@
 ---
 sidebar_position: 1
 title: Veículos Monitorados
-description: Cadastro e gestão de veículos monitorados no AxCross
+description: Cadastro e gestão de Veículos monitorados no AxCross
 ---
 
-O módulo **Veículos Monitorados** permite registrar placas e veículos de interesse para monitoramento especial. Quando um veículo cadastrado é detectado em qualquer cruzamento, o sistema gera um alerta automático para a equipe operacional.
+O módulo Veículos Monitorados** permite registrar placas e Veículos de interesse para monitoramento especial. Quando um Veículo cadastrado é detectado em qualquer cruzamento, o sistema gera um alerta automático para a equipe operacional.
 
 ![Menu Veículos Monitorados](<../img/Menu veiculos monitorados.png>)
 
 ## Como acessar
 
-No **menu lateral**, clique em **Veículos Monitorados**.
+No **menu lateral**, clique em Veículos Monitorados**.
 
 O módulo é composto pelos seguintes submódulos:
 
 | Submódulo | Descrição |
 | --------- | --------- |
-| [**Veículos Monitorados**](#lista-de-veiculos) | Cadastro e consulta das placas monitoradas |
+| Veículos Monitorados**](#lista-de-veiculos) | Cadastro e consulta das placas monitoradas |
 | [**Tipos de Ocorrências**](#tipos-de-ocorrencias) | Categorias de ocorrência para alertas |
 | [**Alertas**](#alertas-gerados) | Alertas gerados automaticamente e gestão de ocorrências |
-| [**Classificações dos Veículos**](#classificacoes-dos-veiculos) | Tipos e categorias de veículos |
+| [**Classificações dos Veículos**](#classificacoes-dos-veiculos) | Tipos e categorias de Veículos |
 | [**Importação de Monitorados**](#importacao-em-lote) | Importar lista de placas via CSV |
 
 ---
 
 ## Lista de Veículos Monitorados {#lista-de-veiculos}
 
-Exibe todos os veículos cadastrados para monitoramento, com filtros por placa, classificação e status.
+Exibe todos os Veículos cadastrados para monitoramento, com filtros por placa, classificação e status.
 
-![Veículos Monitorados - Lista](../img/Veículos Monitorados.png)
+Veículos Monitorados - Lista](../img/Veículos Monitorados.png)
 
 ![Monitoramento Online - Filtros](../img/Monitoramento Online.- fitros.png)
 
@@ -36,27 +36,27 @@ Exibe todos os veículos cadastrados para monitoramento, com filtros por placa, 
 
 | Campo | Obrigatório | Descrição |
 | ----- | :---------: | --------- |
-| **Placa** | Sim | Placa do veículo no formato Mercosul ou antigo |
-| **Classificação** | Sim | Categoria do veículo (ex.: Roubado, VIP, Suspeito) |
+| **Placa** | Sim | Placa do Veículo no formato Mercosul ou antigo |
+| **Classificação** | Sim | Categoria do Veículo (ex.: Roubado, VIP, Suspeito) |
 | **Motivo** | Não | Razão do monitoramento |
 | **Observações** | Não | Informações complementares |
 | **Status** | Sim | Ativo ou Inativo |
 
-### Cadastrar novo veículo monitorado
+### Cadastrar novo Veículo monitorado
 
 ![Novo Veículo Monitorado](../img/Novo Veículo Monitorado.png)
 
-1. Na lista de veículos monitorados, clique em **Novo Veículo Monitorado**
-2. Informe a **Placa** do veículo
+1. Na lista de Veículos monitorados, clique em **Novo Veículo Monitorado**
+2. Informe a **Placa** do Veículo
 3. Selecione a **Classificação**
 4. Opcionalmente, preencha **Motivo** e **Observações**
 5. Clique em **Salvar**
 
-### Editar veículo monitorado
+### Editar Veículo monitorado
 
 ![Editar Veículo Monitorado](../img/Editar Veículo Monitorado.png)
 
-1. Localize o veículo na lista e clique no ícone de edição ✏️
+1. Localize o Veículo na lista e clique no ícone de edição ✏️
 2. Altere os campos desejados
 3. Clique em **Salvar**
 
@@ -64,14 +64,14 @@ Exibe todos os veículos cadastrados para monitoramento, com filtros por placa, 
 
 ## Monitoramento Online {#monitoramento-online}
 
-Após o cadastro, os veículos monitorados são destacados em tempo real na tela de **Monitoramento Online** quando detectados.
+Após o cadastro, os Veículos monitorados são destacados em tempo real na tela de **Monitoramento Online** quando detectados.
 
 ![Monitoramento Online](../img/Monitoramento Online.png)
 
 ![Monitoramento Online - Filtros](../img/Monitoramento Online.- fitros.png)
 
 :::info Alerta automático
-Toda vez que um veículo monitorado ativo for detectado por um equipamento, o sistema gera um alerta automático na lista de [Alertas](#alertas-gerados) e notifica a tela de monitoramento online.
+Toda vez que um Veículo monitorado ativo for detectado por um Equipamento o sistema gera um alerta automático na lista de [Alertas](#alertas-gerados) e notifica a tela de monitoramento online.
 :::
 
 ---
@@ -80,7 +80,7 @@ Toda vez que um veículo monitorado ativo for detectado por um equipamento, o si
 
 Define as categorias utilizadas para classificar as ocorrências registradas nos alertas.
 
-Para acessar: **Veículos Monitorados → Tipos de Ocorrências**.
+Para acessar: Veículos Monitorados → Tipos de Ocorrências**.
 
 | Campo | Descrição |
 | ------- | ----------- |
@@ -88,7 +88,7 @@ Para acessar: **Veículos Monitorados → Tipos de Ocorrências**.
 | **Nome** | Nome do tipo de ocorrência |
 | **Cor** | Cor de identificação visual nos alertas |
 | **Emitir Alerta Sonoro** | Dispara sinal sonoro ao gerar alerta |
-| **Prazo de Expiração (dias)** | Dias para expirar automaticamente os veículos vinculados. Vazio = sem expiração. |
+| **Prazo de Expiração (dias)** | Dias para expirar automaticamente os Veículos vinculados. Vazio = sem expiração. |
 
 **Passo a passo — Cadastrar tipo de ocorrência:**
 
@@ -100,16 +100,16 @@ Para acessar: **Veículos Monitorados → Tipos de Ocorrências**.
 6. Clique em **Salvar**
 
 :::info Vigência dos Alertas
-O campo **Prazo de Expiração (dias)** ativa o controle de vigência para todos os veículos deste tipo. Ao salvar, o sistema recalcula automaticamente a data de expiração de todos os veículos vinculados. Consulte [Vigência dos Alertas](vigencia-alertas.md) para detalhes completos.
+O campo **Prazo de Expiração (dias)** ativa o controle de vigência para todos os Veículos deste tipo. Ao salvar, o sistema recalcula automaticamente a data de expiração de todos os Veículos vinculados. Consulte [Vigência dos Alertas](vigencia-alertas.md) para detalhes completos.
 :::
 
 ---
 
 ## Alertas {#alertas-gerados}
 
-Os alertas registram eventos detectados pelo sistema que requerem atenção, como detecção de veículos monitorados, equipamentos offline ou ocorrências de trânsito.
+Os alertas registram eventos detectados pelo sistema que requerem atenção, como detecção de Veículos monitorados, Equipamentos offline ou ocorrências de trânsito.
 
-Para acessar: **Veículos Monitorados → Alertas**.
+Para acessar: Veículos Monitorados → Alertas**.
 
 ![Lista de Alertas](../img/Alertas.png)
 
@@ -118,18 +118,18 @@ Para acessar: **Veículos Monitorados → Alertas**.
 | Coluna | Descrição |
 | -------- | ----------- |
 | **Data/Hora** | Momento da detecção |
-| **Placa** | Placa do veículo detectado |
+| **Placa** | Placa do Veículo detectado |
 | **Local** | Cruzamento onde foi detectado |
-| **Equipamento** | Câmera/sensor que realizou a leitura |
-| **Classificação** | Categoria do veículo monitorado |
+| Equipamento | Câmera/sensor que realizou a leitura |
+| **Classificação** | Categoria do Veículo monitorado |
 | **Status** | Pendente, Assumido ou Resolvido |
 
 ### Tipos de alerta
 
 | Tipo | Descrição |
 | ------ | ----------- |
-| **Veículo Monitorado** | Placa cadastrada como monitorada foi detectada |
-| **Equipamento Offline** | Equipamento sem comunicação além do tempo limite |
+| Veículo Monitorado** | Placa cadastrada como monitorada foi detectada |
+| Equipamento Offline** | Equipamento sem comunicação além do tempo limite |
 | **Falha de Imagem** | Equipamento detectou passagem mas sem imagem |
 | **Ocorrência de Trânsito** | Evento registrado manualmente pela operação |
 
@@ -156,7 +156,7 @@ Configure os tipos de ocorrência disponíveis para categorizar os alertas manua
 
 1. Na tela de Alertas, clique em **Novo Alerta**
 2. Selecione o **Tipo de Ocorrência**
-3. Informe o **Local** e **Equipamento** relacionado
+3. Informe o **Local** e Equipamento relacionado
 4. Descreva a **Ocorrência**
 5. Clique em **Salvar**
 
@@ -164,19 +164,19 @@ Configure os tipos de ocorrência disponíveis para categorizar os alertas manua
 
 Para exportar e consultar ocorrências registradas:
 
-![Relatório de Ocorrências](../img/Relatório de Ocorrências.png)
+Relatório de Ocorrências](../img/Relatório de Ocorrências.png)
 
 :::tip Dica
-Acesse o relatório de ocorrências para consolidar as tratativas realizadas e gerar evidências de fiscalização.
+Acesse o Relatório de ocorrências para consolidar as tratativas realizadas e gerar evidências de fiscalização.
 :::
 
 ---
 
 ## Classificações dos Veículos {#classificacoes-dos-veiculos}
 
-Gerencia as categorias disponíveis para classificar os veículos monitorados (ex.: Roubado, Suspeito, VIP, Autorizado).
+Gerencia as categorias disponíveis para classificar os Veículos monitorados (ex.: Roubado, Suspeito, VIP, Autorizado).
 
-Para acessar: **Veículos Monitorados → Classificações dos Veículos**.
+Para acessar: Veículos Monitorados → Classificações dos Veículos
 
 ![Classificações dos Veículos](../img/Classificações dos Veículos.png)
 
@@ -198,15 +198,15 @@ Para acessar: **Veículos Monitorados → Classificações dos Veículos**.
 
 Permite importar múltiplas placas de uma só vez através de um arquivo CSV.
 
-Para acessar: **Veículos Monitorados → Importação de Monitorados**.
+Para acessar: Veículos Monitorados → Importação de Monitorados**.
 
-![Veículos Monitorados - Importar](../img/Veículos Monitorados - importar.png)
+Veículos Monitorados - Importar](../img/Veículos Monitorados - importar.png)
 
 ### Passo a passo
 
-![Veículos Monitorados - Selecionar arquivo para importar](../img/Veículos Monitorados - importar placas.png)
+Veículos Monitorados - Selecionar arquivo para importar](../img/Veículos Monitorados - importar placas.png)
 
-![Veículos Monitorados - Escolher Arquivo](<../img/Veículos Monitorados - importar placas - escolher arquivo.png>)
+Veículos Monitorados - Escolher Arquivo](<../img/Veículos Monitorados - importar placas - escolher arquivo.png>)
 
 1. Clique em **Importar**
 2. Clique em **Escolher Arquivo**

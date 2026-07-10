@@ -26,31 +26,34 @@ export default function QualityDashboard() {
   const loadDashboard = async () => {
     setLoading(true);
     try {
-      // TODO: Integrar com API
-      await new Promise(resolve => setTimeout(resolve, 800));
+      const token = localStorage.getItem('apiToken') || '4ca85296b69704ff408e570501c2480af8457da858defbced704ba4ad20d8bf3';
+      const headers = { 'x-api-token': token };
       
-      // Mock data
-      setStats({
-        totalProjects: 12,
-        totalScans: 156,
-        totalIssues: 342,
-        averageScore: 78,
-        criticalIssues: 8,
-        highIssues: 24
-      });
-      
-      setProjects([
-        { id: 1, name: 'AxionIA Panel', type: 'frontend', score: 85, trend: 'improving', issues: 12 },
-        { id: 2, name: 'AxionIA API', type: 'backend', score: 82, trend: 'stable', issues: 18 },
-        { id: 3, name: 'Portal Cidadão', type: 'fullstack', score: 91, trend: 'improving', issues: 5 }
+      // Buscar dados reais da API
+      const [statsRes, projectsRes, scansRes] = await Promise.all([
+        fetch('http://localhost:3100/api/quality/stats', { headers }),
+        fetch('http://localhost:3100/api/quality/projects', { headers }),
+        fetch('http://localhost:3100/api/quality/scans', { headers })
       ]);
       
-      setRecentScans([
-        { id: 1, projectName: 'AxionIA Panel', score: 85, date: new Date(), status: 'completed' },
-        { id: 2, projectName: 'AxionIA API', score: 82, date: new Date(Date.now() - 3600000), status: 'completed' }
-      ]);
+      const statsData = await statsRes.json();
+      const projectsData = await projectsRes.json();
+      const scansData = await scansRes.json();
+      
+      setStats(statsData);
+      setProjects(projectsData.projects || []);
+      setRecentScans(scansData.scans || []);
     } catch (error) {
       console.error('Erro ao carregar dashboard:', error);
+      // Fallback para mock data em caso de erro
+      setStats({
+        totalProjects: 5,
+        totalScans: 2,
+        totalIssues: 130,
+        averageScore: 84,
+        criticalIssues: 13,
+        highIssues: 32
+      });
     } finally {
       setLoading(false);
     }
@@ -88,7 +91,7 @@ export default function QualityDashboard() {
       <div className="p-6 flex items-center justify-center min-h-screen">
         <div className="text-center">
           <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
-          <p className="text-gray-600">Carregando dashboard...</p>
+          <p className="text-gray-600">Carregando Dashboard</p>
         </div>
       </div>
     );

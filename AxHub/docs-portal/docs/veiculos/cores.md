@@ -1,12 +1,12 @@
 ---
 sidebar_position: 5
 title: Cores
-description: Cadastro de cores de veículos
+description: Cadastro de cores de Veículos
 ---
 
 # Cores
 
-Permite cadastrar e gerenciar as cores dos veículos.
+Permite cadastrar e gerenciar as cores dos Veículos
 
 ![Lista de Cores](../img/Veículos%20-%20cores.png)
 

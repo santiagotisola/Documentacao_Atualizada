@@ -1,0 +1,3287 @@
+{
+  "scenarioId": "cenario1",
+  "name": "Cenário gravado em AxHub (production)",
+  "description": "",
+  "category": "AxHub",
+  "createdBy": "sistema@axiontecnologia.com.br",
+  "createdAt": "2026-06-24T17:27:04.388Z",
+  "duration": "131.50",
+  "steps": [
+    {
+      "step": 1,
+      "action": "navigate",
+      "type": "navigation",
+      "description": "Navegou para https://homologacao.axhub.axion.ws/Home/Login?ReturnUrl=https%3A%2F%2Fhomologacao.axhub.axion.ws%2Fnao-autorizado",
+      "timestamp": "2026-06-24T17:27:19.201Z",
+      "duration": 6.696,
+      "url": "https://homologacao.axhub.axion.ws/Home/Login?ReturnUrl=https%3A%2F%2Fhomologacao.axhub.axion.ws%2Fnao-autorizado",
+      "screenshot": "screenshots/step-001.png",
+      "validation": {
+        "title": "Login - AXHub",
+        "url": "https://homologacao.axhub.axion.ws/Home/Login?ReturnUrl=https%3A%2F%2Fhomologacao.axhub.axion.ws%2Fnao-autorizado",
+        "visibleElements": 1
+      }
+    },
+    {
+      "step": 2,
+      "action": "click",
+      "type": "interaction",
+      "description": "Clicou em \"#Username\"",
+      "timestamp": "2026-06-24T17:27:27.336Z",
+      "duration": 0.303,
+      "selector": "#Username",
+      "text": "",
+      "screenshot": "screenshots/step-002.png",
+      "validation": {
+        "title": "Login - AXHub",
+        "url": "https://homologacao.axhub.axion.ws/Home/Login?ReturnUrl=https%3A%2F%2Fhomologacao.axhub.axion.ws%2Fnao-autorizado",
+        "visibleElements": 1
+      }
+    },
+    {
+      "step": 3,
+      "action": "input",
+      "type": "interaction",
+      "description": "Preencheu campo #Username",
+      "timestamp": "2026-06-24T17:27:28.869Z",
+      "duration": 0.487,
+      "selector": "#Username",
+      "value": "Ad",
+      "screenshot": "screenshots/step-003.png",
+      "validation": {
+        "title": "Login - AXHub",
+        "url": "https://homologacao.axhub.axion.ws/Home/Login?ReturnUrl=https%3A%2F%2Fhomologacao.axhub.axion.ws%2Fnao-autorizado",
+        "visibleElements": 1
+      }
+    },
+    {
+      "step": 4,
+      "action": "input",
+      "type": "interaction",
+      "description": "Preencheu campo #Username",
+      "timestamp": "2026-06-24T17:27:29.382Z",
+      "duration": 0.352,
+      "selector": "#Username",
+      "value": "Admi",
+      "screenshot": "screenshots/step-004.png",
+      "validation": {
+        "title": "Login - AXHub",
+        "url": "https://homologacao.axhub.axion.ws/Home/Login?ReturnUrl=https%3A%2F%2Fhomologacao.axhub.axion.ws%2Fnao-autorizado",
+        "visibleElements": 1
+      }
+    },
+    {
+      "step": 5,
+      "action": "input",
+      "type": "interaction",
+      "description": "Preencheu campo #Username",
+      "timestamp": "2026-06-24T17:27:29.890Z",
+      "duration": 0.315,
+      "selector": "#Username",
+      "value": "Admin",
+      "screenshot": "screenshots/step-005.png",
+      "validation": {
+        "title": "Login - AXHub",
+        "url": "https://homologacao.axhub.axion.ws/Home/Login?ReturnUrl=https%3A%2F%2Fhomologacao.axhub.axion.ws%2Fnao-autorizado",
+        "visibleElements": 1
+      }
+    },
+    {
+      "step": 6,
+      "action": "input",
+      "type": "interaction",
+      "description": "Preencheu campo #Password",
+      "timestamp": "2026-06-24T17:27:35.521Z",
+      "duration": 0.314,
+      "selector": "#Password",
+      "value": "{{PASSWORD}}",
+      "screenshot": "screenshots/step-006.png",
+      "validation": {
+        "title": "Login - AXHub",
+        "url": "https://homologacao.axhub.axion.ws/Home/Login?ReturnUrl=https%3A%2F%2Fhomologacao.axhub.axion.ws%2Fnao-autorizado",
+        "visibleElements": 1
+      }
+    },
+    {
+      "step": 7,
+      "action": "input",
+      "type": "interaction",
+      "description": "Preencheu campo #Password",
+      "timestamp": "2026-06-24T17:27:36.035Z",
+      "duration": 0.302,
+      "selector": "#Password",
+      "value": "{{PASSWORD}}",
+      "screenshot": "screenshots/step-007.png",
+      "validation": {
+        "title": "Login - AXHub",
+        "url": "https://homologacao.axhub.axion.ws/Home/Login?ReturnUrl=https%3A%2F%2Fhomologacao.axhub.axion.ws%2Fnao-autorizado",
+        "visibleElements": 1
+      }
+    },
+    {
+      "step": 8,
+      "action": "input",
+      "type": "interaction",
+      "description": "Preencheu campo #Password",
+      "timestamp": "2026-06-24T17:27:36.549Z",
+      "duration": 0.272,
+      "selector": "#Password",
+      "value": "{{PASSWORD}}",
+      "screenshot": "screenshots/step-008.png",
+      "validation": {
+        "title": "Login - AXHub",
+        "url": "https://homologacao.axhub.axion.ws/Home/Login?ReturnUrl=https%3A%2F%2Fhomologacao.axhub.axion.ws%2Fnao-autorizado",
+        "visibleElements": 1
+      }
+    },
+    {
+      "step": 9,
+      "action": "input",
+      "type": "interaction",
+      "description": "Preencheu campo #Password",
+      "timestamp": "2026-06-24T17:27:37.064Z",
+      "duration": 0.259,
+      "selector": "#Password",
+      "value": "{{PASSWORD}}",
+      "screenshot": "screenshots/step-009.png",
+      "validation": {
+        "title": "Login - AXHub",
+        "url": "https://homologacao.axhub.axion.ws/Home/Login?ReturnUrl=https%3A%2F%2Fhomologacao.axhub.axion.ws%2Fnao-autorizado",
+        "visibleElements": 1
+      }
+    },
+    {
+      "step": 10,
+      "action": "input",
+      "type": "interaction",
+      "description": "Preencheu campo #Password",
+      "timestamp": "2026-06-24T17:27:39.101Z",
+      "duration": 0.255,
+      "selector": "#Password",
+      "value": "{{PASSWORD}}",
+      "screenshot": "screenshots/step-010.png",
+      "validation": {
+        "title": "Login - AXHub",
+        "url": "https://homologacao.axhub.axion.ws/Home/Login?ReturnUrl=https%3A%2F%2Fhomologacao.axhub.axion.ws%2Fnao-autorizado",
+        "visibleElements": 1
+      }
+    },
+    {
+      "step": 11,
+      "action": "input",
+      "type": "interaction",
+      "description": "Preencheu campo #Password",
+      "timestamp": "2026-06-24T17:27:42.686Z",
+      "duration": 0.265,
+      "selector": "#Password",
+      "value": "{{PASSWORD}}",
+      "screenshot": "screenshots/step-011.png",
+      "validation": {
+        "title": "Login - AXHub",
+        "url": "https://homologacao.axhub.axion.ws/Home/Login?ReturnUrl=https%3A%2F%2Fhomologacao.axhub.axion.ws%2Fnao-autorizado",
+        "visibleElements": 1
+      }
+    },
+    {
+      "step": 12,
+      "action": "input",
+      "type": "interaction",
+      "description": "Preencheu campo #Password",
+      "timestamp": "2026-06-24T17:27:43.189Z",
+      "duration": 0.345,
+      "selector": "#Password",
+      "value": "{{PASSWORD}}",
+      "screenshot": "screenshots/step-012.png",
+      "validation": {
+        "title": "Login - AXHub",
+        "url": "https://homologacao.axhub.axion.ws/Home/Login?ReturnUrl=https%3A%2F%2Fhomologacao.axhub.axion.ws%2Fnao-autorizado",
+        "visibleElements": 1
+      }
+    },
+    {
+      "step": 13,
+      "action": "navigate",
+      "type": "navigation",
+      "description": "Navegou para https://homologacao.axhub.axion.ws/nao-autorizado",
+      "timestamp": "2026-06-24T17:27:44.397Z",
+      "duration": 0.989,
+      "url": "https://homologacao.axhub.axion.ws/nao-autorizado",
+      "screenshot": "screenshots/step-013.png",
+      "validation": {
+        "title": "Acesso Negado - AXHub",
+        "url": "https://homologacao.axhub.axion.ws/nao-autorizado",
+        "visibleElements": 1
+      }
+    },
+    {
+      "step": 14,
+      "action": "navigate",
+      "type": "navigation",
+      "description": "Navegou para https://homologacao.axhub.axion.ws/",
+      "timestamp": "2026-06-24T17:27:50.002Z",
+      "duration": 0.878,
+      "url": "https://homologacao.axhub.axion.ws/",
+      "screenshot": "screenshots/step-014.png",
+      "validation": {
+        "title": "Bem vindo - AXHub",
+        "url": "https://homologacao.axhub.axion.ws/",
+        "visibleElements": 191
+      }
+    },
+    {
+      "step": 15,
+      "action": "click",
+      "type": "interaction",
+      "description": "Clicou em \"×\"",
+      "timestamp": "2026-06-24T17:27:56.480Z",
+      "duration": 0.733,
+      "selector": ".close",
+      "text": "×",
+      "screenshot": "screenshots/step-015.png",
+      "validation": {
+        "title": "Bem vindo - AXHub",
+        "url": "https://homologacao.axhub.axion.ws/",
+        "visibleElements": 204
+      }
+    },
+    {
+      "step": 16,
+      "action": "click",
+      "type": "interaction",
+      "description": "Clicou em \"Cronotacógrafo\"",
+      "timestamp": "2026-06-24T17:27:59.019Z",
+      "duration": 0.42,
+      "selector": ".title",
+      "text": "Cronotacógrafo",
+      "screenshot": "screenshots/step-016.png",
+      "validation": {
+        "title": "Bem vindo - AXHub",
+        "url": "https://homologacao.axhub.axion.ws/",
+        "visibleElements": 204
+      }
+    },
+    {
+      "step": 17,
+      "action": "navigate",
+      "type": "navigation",
+      "description": "Navegou para https://homologacao.axhub.axion.ws/cronotacografo",
+      "timestamp": "2026-06-24T17:28:00.898Z",
+      "duration": 0.5,
+      "url": "https://homologacao.axhub.axion.ws/cronotacografo",
+      "screenshot": "screenshots/step-017.png",
+      "validation": {
+        "title": "Triagem de Cronotacógrafo - AXHub",
+        "url": "https://homologacao.axhub.axion.ws/cronotacografo",
+        "visibleElements": 177
+      }
+    },
+    {
+      "step": 18,
+      "action": "click",
+      "type": "interaction",
+      "description": "Clicou em \"#dataHoraInicio\"",
+      "timestamp": "2026-06-24T17:28:04.645Z",
+      "duration": 0.386,
+      "selector": "#dataHoraInicio",
+      "text": "",
+      "screenshot": "screenshots/step-018.png",
+      "validation": {
+        "title": "Triagem de Cronotacógrafo - AXHub",
+        "url": "https://homologacao.axhub.axion.ws/cronotacografo",
+        "visibleElements": 181
+      }
+    },
+    {
+      "step": 19,
+      "action": "click",
+      "type": "interaction",
+      "description": "Clicou em \"9\"",
+      "timestamp": "2026-06-24T17:28:07.212Z",
+      "duration": 0.193,
+      "selector": ".flatpickr-day",
+      "text": "9",
+      "screenshot": "screenshots/step-019.png",
+      "validation": {
+        "title": "Triagem de Cronotacógrafo - AXHub",
+        "url": "https://homologacao.axhub.axion.ws/cronotacografo",
+        "visibleElements": 181
+      }
+    },
+    {
+      "step": 20,
+      "action": "input",
+      "type": "interaction",
+      "description": "Preencheu campo #dataHoraInicio",
+      "timestamp": "2026-06-24T17:28:07.411Z",
+      "duration": 0.137,
+      "selector": "#dataHoraInicio",
+      "value": "09/06/2026 12:00",
+      "screenshot": "screenshots/step-020.png",
+      "validation": {
+        "title": "Triagem de Cronotacógrafo - AXHub",
+        "url": "https://homologacao.axhub.axion.ws/cronotacografo",
+        "visibleElements": 181
+      }
+    },
+    {
+      "step": 21,
+      "action": "click",
+      "type": "interaction",
+      "description": "Clicou em \"Mais Filtros\"",
+      "timestamp": "2026-06-24T17:28:07.721Z",
+      "duration": 0.165,
+      "selector": ".card-title",
+      "text": "Mais Filtros",
+      "screenshot": "screenshots/step-021.png",
+      "validation": {
+        "title": "Triagem de Cronotacógrafo - AXHub",
+        "url": "https://homologacao.axhub.axion.ws/cronotacografo",
+        "visibleElements": 181
+      }
+    },
+    {
+      "step": 22,
+      "action": "click",
+      "type": "interaction",
+      "description": "Clicou em \" Filtrar\"",
+      "timestamp": "2026-06-24T17:28:09.293Z",
+      "duration": 0.175,
+      "selector": "#filtrar",
+      "text": " Filtrar",
+      "screenshot": "screenshots/step-022.png",
+      "validation": {
+        "title": "Triagem de Cronotacógrafo - AXHub",
+        "url": "https://homologacao.axhub.axion.ws/cronotacografo",
+        "visibleElements": 181
+      }
+    },
+    {
+      "step": 23,
+      "action": "click",
+      "type": "interaction",
+      "description": "Clicou em \" Limpar\"",
+      "timestamp": "2026-06-24T17:28:11.305Z",
+      "duration": 0.143,
+      "selector": "#limpar",
+      "text": " Limpar",
+      "screenshot": "screenshots/step-023.png",
+      "validation": {
+        "title": "Triagem de Cronotacógrafo - AXHub",
+        "url": "https://homologacao.axhub.axion.ws/cronotacografo",
+        "visibleElements": 181
+      }
+    },
+    {
+      "step": 24,
+      "action": "input",
+      "type": "interaction",
+      "description": "Preencheu campo #dataHoraFim",
+      "timestamp": "2026-06-24T17:28:11.452Z",
+      "duration": 0.151,
+      "selector": "#dataHoraFim",
+      "value": "",
+      "screenshot": "screenshots/step-024.png",
+      "validation": {
+        "title": "Triagem de Cronotacógrafo - AXHub",
+        "url": "https://homologacao.axhub.axion.ws/cronotacografo",
+        "visibleElements": 181
+      }
+    },
+    {
+      "step": 25,
+      "action": "click",
+      "type": "interaction",
+      "description": "Clicou em \"#dataHoraInicio\"",
+      "timestamp": "2026-06-24T17:28:12.820Z",
+      "duration": 0.2,
+      "selector": "#dataHoraInicio",
+      "text": "",
+      "screenshot": "screenshots/step-025.png",
+      "validation": {
+        "title": "Triagem de Cronotacógrafo - AXHub",
+        "url": "https://homologacao.axhub.axion.ws/cronotacografo",
+        "visibleElements": 181
+      }
+    },
+    {
+      "step": 26,
+      "action": "click",
+      "type": "interaction",
+      "description": "Clicou em \"2\"",
+      "timestamp": "2026-06-24T17:28:14.370Z",
+      "duration": 0.245,
+      "selector": ".flatpickr-day",
+      "text": "2",
+      "screenshot": "screenshots/step-026.png",
+      "validation": {
+        "title": "Triagem de Cronotacógrafo - AXHub",
+        "url": "https://homologacao.axhub.axion.ws/cronotacografo",
+        "visibleElements": 181
+      }
+    },
+    {
+      "step": 27,
+      "action": "input",
+      "type": "interaction",
+      "description": "Preencheu campo #dataHoraInicio",
+      "timestamp": "2026-06-24T17:28:14.617Z",
+      "duration": 0.192,
+      "selector": "#dataHoraInicio",
+      "value": "02/06/2026 12:00",
+      "screenshot": "screenshots/step-027.png",
+      "validation": {
+        "title": "Triagem de Cronotacógrafo - AXHub",
+        "url": "https://homologacao.axhub.axion.ws/cronotacografo",
+        "visibleElements": 181
+      }
+    },
+    {
+      "step": 28,
+      "action": "input",
+      "type": "interaction",
+      "description": "Preencheu campo ",
+      "timestamp": "2026-06-24T17:28:17.911Z",
+      "duration": 0.158,
+      "selector": "",
+      "value": "00",
+      "screenshot": "screenshots/step-028.png",
+      "validation": {
+        "title": "Triagem de Cronotacógrafo - AXHub",
+        "url": "https://homologacao.axhub.axion.ws/cronotacografo",
+        "visibleElements": 181
+      }
+    },
+    {
+      "step": 29,
+      "action": "click",
+      "type": "interaction",
+      "description": "Clicou em \"2\"",
+      "timestamp": "2026-06-24T17:28:22.519Z",
+      "duration": 0.137,
+      "selector": ".flatpickr-day",
+      "text": "2",
+      "screenshot": "screenshots/step-029.png",
+      "validation": {
+        "title": "Triagem de Cronotacógrafo - AXHub",
+        "url": "https://homologacao.axhub.axion.ws/cronotacografo",
+        "visibleElements": 181
+      }
+    },
+    {
+      "step": 30,
+      "action": "input",
+      "type": "interaction",
+      "description": "Preencheu campo #dataHoraInicio",
+      "timestamp": "2026-06-24T17:28:22.657Z",
+      "duration": 0.153,
+      "selector": "#dataHoraInicio",
+      "value": "02/06/2026 00:00",
+      "screenshot": "screenshots/step-030.png",
+      "validation": {
+        "title": "Triagem de Cronotacógrafo - AXHub",
+        "url": "https://homologacao.axhub.axion.ws/cronotacografo",
+        "visibleElements": 181
+      }
+    },
+    {
+      "step": 31,
+      "action": "click",
+      "type": "interaction",
+      "description": "Clicou em \" Filtrar\"",
+      "timestamp": "2026-06-24T17:28:28.122Z",
+      "duration": 0.144,
+      "selector": "#filtrar",
+      "text": " Filtrar",
+      "screenshot": "screenshots/step-031.png",
+      "validation": {
+        "title": "Triagem de Cronotacógrafo - AXHub",
+        "url": "https://homologacao.axhub.axion.ws/cronotacografo",
+        "visibleElements": 181
+      }
+    },
+    {
+      "step": 32,
+      "action": "click",
+      "type": "interaction",
+      "description": "Clicou em \"Mais Filtros\"",
+      "timestamp": "2026-06-24T17:28:29.663Z",
+      "duration": 0.132,
+      "selector": ".collapsed",
+      "text": "Mais Filtros",
+      "screenshot": "screenshots/step-032.png",
+      "validation": {
+        "title": "Triagem de Cronotacógrafo - AXHub",
+        "url": "https://homologacao.axhub.axion.ws/cronotacografo",
+        "visibleElements": 181
+      }
+    },
+    {
+      "step": 33,
+      "action": "click",
+      "type": "interaction",
+      "description": "Clicou em \"Relatórios\"",
+      "timestamp": "2026-06-24T17:28:32.217Z",
+      "duration": 0.184,
+      "selector": ".title",
+      "text": "Relatórios",
+      "screenshot": "screenshots/step-033.png",
+      "validation": {
+        "title": "Triagem de Cronotacógrafo - AXHub",
+        "url": "https://homologacao.axhub.axion.ws/cronotacografo",
+        "visibleElements": 181
+      }
+    },
+    {
+      "step": 34,
+      "action": "navigate",
+      "type": "navigation",
+      "description": "Navegou para https://homologacao.axhub.axion.ws/relatorio/relatorioeventoequipamento",
+      "timestamp": "2026-06-24T17:28:34.254Z",
+      "duration": 0.441,
+      "url": "https://homologacao.axhub.axion.ws/relatorio/relatorioeventoequipamento",
+      "screenshot": "screenshots/step-034.png",
+      "validation": {
+        "title": "Relatórios de Eventos dos Equipamentos - AXHub",
+        "url": "https://homologacao.axhub.axion.ws/relatorio/relatorioeventoequipamento",
+        "visibleElements": 175
+      }
+    },
+    {
+      "step": 35,
+      "action": "click",
+      "type": "interaction",
+      "description": "Clicou em \"Buscar\"",
+      "timestamp": "2026-06-24T17:28:40.871Z",
+      "duration": 0.178,
+      "selector": "#buscar",
+      "text": "Buscar",
+      "screenshot": "screenshots/step-035.png",
+      "validation": {
+        "title": "Relatórios de Eventos dos Equipamentos - AXHub",
+        "url": "https://homologacao.axhub.axion.ws/relatorio/relatorioeventoequipamento",
+        "visibleElements": 186
+      }
+    },
+    {
+      "step": 36,
+      "action": "click",
+      "type": "interaction",
+      "description": "Clicou em \"OK\"",
+      "timestamp": "2026-06-24T17:28:42.402Z",
+      "duration": 0.151,
+      "selector": ".swal2-confirm",
+      "text": "OK",
+      "screenshot": "screenshots/step-036.png",
+      "validation": {
+        "title": "Relatórios de Eventos dos Equipamentos - AXHub",
+        "url": "https://homologacao.axhub.axion.ws/relatorio/relatorioeventoequipamento",
+        "visibleElements": 185
+      }
+    },
+    {
+      "step": 37,
+      "action": "click",
+      "type": "interaction",
+      "description": "Clicou em \"24\"",
+      "timestamp": "2026-06-24T17:28:44.959Z",
+      "duration": 0.162,
+      "selector": ".k-link",
+      "text": "24",
+      "screenshot": "screenshots/step-037.png",
+      "validation": {
+        "title": "Relatórios de Eventos dos Equipamentos - AXHub",
+        "url": "https://homologacao.axhub.axion.ws/relatorio/relatorioeventoequipamento",
+        "visibleElements": 185
+      }
+    },
+    {
+      "step": 38,
+      "action": "click",
+      "type": "interaction",
+      "description": "Clicou em \"Todos os Grupos\"",
+      "timestamp": "2026-06-24T17:28:46.496Z",
+      "duration": 0.132,
+      "selector": "#select2-grupo-container",
+      "text": "Todos os Grupos",
+      "screenshot": "screenshots/step-038.png",
+      "validation": {
+        "title": "Relatórios de Eventos dos Equipamentos - AXHub",
+        "url": "https://homologacao.axhub.axion.ws/relatorio/relatorioeventoequipamento",
+        "visibleElements": 185
+      }
+    },
+    {
+      "step": 39,
+      "action": "click",
+      "type": "interaction",
+      "description": "Clicou em \".k-virtual-scrollable-wrap\"",
+      "timestamp": "2026-06-24T17:28:47.521Z",
+      "duration": 0.179,
+      "selector": ".k-virtual-scrollable-wrap",
+      "text": "",
+      "screenshot": "screenshots/step-039.png",
+      "validation": {
+        "title": "Relatórios de Eventos dos Equipamentos - AXHub",
+        "url": "https://homologacao.axhub.axion.ws/relatorio/relatorioeventoequipamento",
+        "visibleElements": 185
+      }
+    },
+    {
+      "step": 40,
+      "action": "click",
+      "type": "interaction",
+      "description": "Clicou em \"Buscar\"",
+      "timestamp": "2026-06-24T17:28:48.535Z",
+      "duration": 0.166,
+      "selector": "#buscar",
+      "text": "Buscar",
+      "screenshot": "screenshots/step-040.png",
+      "validation": {
+        "title": "Relatórios de Eventos dos Equipamentos - AXHub",
+        "url": "https://homologacao.axhub.axion.ws/relatorio/relatorioeventoequipamento",
+        "visibleElements": 185
+      }
+    },
+    {
+      "step": 41,
+      "action": "click",
+      "type": "interaction",
+      "description": "Clicou em \"Operações\"",
+      "timestamp": "2026-06-24T17:28:51.083Z",
+      "duration": 0.188,
+      "selector": ".title",
+      "text": "Operações",
+      "screenshot": "screenshots/step-041.png",
+      "validation": {
+        "title": "Relatórios de Eventos dos Equipamentos - AXHub",
+        "url": "https://homologacao.axhub.axion.ws/relatorio/relatorioeventoequipamento",
+        "visibleElements": 185
+      }
+    },
+    {
+      "step": 42,
+      "action": "navigate",
+      "type": "navigation",
+      "description": "Navegou para https://homologacao.axhub.axion.ws/faixa",
+      "timestamp": "2026-06-24T17:28:53.608Z",
+      "duration": 0.385,
+      "url": "https://homologacao.axhub.axion.ws/faixa",
+      "screenshot": "screenshots/step-042.png",
+      "validation": {
+        "title": "Faixas - AXHub",
+        "url": "https://homologacao.axhub.axion.ws/faixa",
+        "visibleElements": 175
+      }
+    },
+    {
+      "step": 43,
+      "action": "click",
+      "type": "interaction",
+      "description": "Clicou em \"T1021-1\"",
+      "timestamp": "2026-06-24T17:28:57.255Z",
+      "duration": 0.199,
+      "selector": ".k-table-td",
+      "text": "T1021-1",
+      "screenshot": "screenshots/step-043.png",
+      "validation": {
+        "title": "Faixas - AXHub",
+        "url": "https://homologacao.axhub.axion.ws/faixa",
+        "visibleElements": 344
+      }
+    },
+    {
+      "step": 44,
+      "action": "click",
+      "type": "interaction",
+      "description": "Clicou em \"Cronotacógrafo\"",
+      "timestamp": "2026-06-24T17:29:01.333Z",
+      "duration": 0.22,
+      "selector": ".title",
+      "text": "Cronotacógrafo",
+      "screenshot": "screenshots/step-044.png",
+      "validation": {
+        "title": "Faixas - AXHub",
+        "url": "https://homologacao.axhub.axion.ws/faixa",
+        "visibleElements": 344
+      }
+    },
+    {
+      "step": 45,
+      "action": "navigate",
+      "type": "navigation",
+      "description": "Navegou para https://homologacao.axhub.axion.ws/consultacronotacografo",
+      "timestamp": "2026-06-24T17:29:04.650Z",
+      "duration": 1.249,
+      "url": "https://homologacao.axhub.axion.ws/consultacronotacografo",
+      "screenshot": "screenshots/step-045.png",
+      "validation": {
+        "title": "Consulta de Cronotacógrafo - AXHub",
+        "url": "https://homologacao.axhub.axion.ws/consultacronotacografo",
+        "visibleElements": 184
+      }
+    }
+  ],
+  "evidences": {
+    "screenshots": [
+      "screenshots/step-001.png",
+      "screenshots/step-002.png",
+      "screenshots/step-003.png",
+      "screenshots/step-004.png",
+      "screenshots/step-005.png",
+      "screenshots/step-006.png",
+      "screenshots/step-007.png",
+      "screenshots/step-008.png",
+      "screenshots/step-009.png",
+      "screenshots/step-010.png",
+      "screenshots/step-011.png",
+      "screenshots/step-012.png",
+      "screenshots/step-013.png",
+      "screenshots/step-014.png",
+      "screenshots/step-015.png",
+      "screenshots/step-016.png",
+      "screenshots/step-017.png",
+      "screenshots/step-018.png",
+      "screenshots/step-019.png",
+      "screenshots/step-020.png",
+      "screenshots/step-021.png",
+      "screenshots/step-022.png",
+      "screenshots/step-023.png",
+      "screenshots/step-024.png",
+      "screenshots/step-025.png",
+      "screenshots/step-026.png",
+      "screenshots/step-027.png",
+      "screenshots/step-028.png",
+      "screenshots/step-029.png",
+      "screenshots/step-030.png",
+      "screenshots/step-031.png",
+      "screenshots/step-032.png",
+      "screenshots/step-033.png",
+      "screenshots/step-034.png",
+      "screenshots/step-035.png",
+      "screenshots/step-036.png",
+      "screenshots/step-037.png",
+      "screenshots/step-038.png",
+      "screenshots/step-039.png",
+      "screenshots/step-040.png",
+      "screenshots/step-041.png",
+      "screenshots/step-042.png",
+      "screenshots/step-043.png",
+      "screenshots/step-044.png",
+      "screenshots/step-045.png"
+    ],
+    "network": [
+      {
+        "url": "https://homologacao.axhub.axion.ws/infracao?datasHorasPassagens=17%2F06%2F2026%2000%3A00&dataInicio=&dataFim=&horaInicio=&dataHoraInicio=01%2F04%2F2026%2012%3A00&dataHoraFim=&operacaoId=&usuarioTriagemId=&motivoDescarteId=&tipoEquipamentoId=&grupoEquipamentoId=&placa=&numeroInfracao=&exibirProcessadas=false&exibirHomologadas=false&statusProcessamento=0&etapaTriagem=0&isInfracao=true&numeroAuto=",
+        "status": 302,
+        "method": "GET",
+        "timestamp": 1782322038922
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/Home/Login?ReturnUrl=https%3A%2F%2Fhomologacao.axhub.axion.ws%2Fnao-autorizado",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322039195
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/css/core.min.css",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322039387
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/css/app.min.css",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322039936
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/css/kendo.theadmin.css?v=O7VwSP8rjrmBzZ-Fo4LD-F24ZtnVJzsqKK9ugXipFLk",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322040320
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/css/kendo.custom.css?v=a9aOlraxSrmUqzq1Gtgm1vtVwnHRq6al7Owi2WfFyqg",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322040347
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/css/custom.css?v=CU1UngmY_m6VLpPd8qeqfRsF_C3-9oKLyRS3zaybwd0",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322040348
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/css/plugins.all.min.css?v=Otw15_aYbfeplId5fn8aBtq9YbE8xaQUjEnFYoA6uE4",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322040352
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/css/thirdparty.bundle.css?v=Aq6T6xYx9E_8u6hHNpwrwKvL8BWrEPjj2YpseBWIiSU",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322040395
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/css/font.css?v=9XlJwVpNuPeFIoyiTKEhVt_EPOTqwcu6ABAGCIXW65s",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322040508
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/js/kendo/jszip.min.js?v=xgOYhOfm9WY0Fu2ybMiUjV372F8pJzhUMLL0o5Af5D8",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322041019
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/js/kendo/kendo.maskedDatePicker.min.js?v=opA62mK8EiuVzgQYBSDm-kY-5WgSlJOPRCs6Siitpbc",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322041069
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/js/core.min.js",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322041170
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/js/kendo/kendo.aspnetmvc.min.js?v=ADQqQAvb5EopGSkkcHq1l5U5sGogGtc3QYfZ-OP6bBo",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322041185
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/js/kendo/cultures/kendo.culture.pt-BR.min.js?v=8C8B4Cd4nxlpjfzJEgoMVahfAPv4qKlqxzb4IMbl1cA",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322041234
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/js/kendo/messages/kendo.messages.pt-BR.min.js?v=amZmqBRvU_rKjdVN2pyylsNPXBMkSbpL8bzxwiD6ois",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322041337
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/img/logo.svg",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322041355
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/img/axion-grey.png",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322041400
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/js/jquery.validation.all.min.js?v=qgb0vGVp2SpiFgCC1-czLl7tvUwSTiSvvhNPDTigZLA",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322041525
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/js/globalize.all.min.js?v=kZ-95WxC5aAv_oBlcv4qilVARTgN7BjVcRjsApdu9nM",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322041903
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/js/plugins.all.min.js?v=7G8SL8E462D6QXaTFNXtYkeS2aTrK6h19fc-r31_tvc",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322043659
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/js/app.min.js",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322043837
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/js/kendo/kendo.all.min.js?v=YqyyQi-hEbM8RnK5ji99PSGgdOSyo6mjiF2vNkLlDOs",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322043857
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/js/script.js?v=ubnxLJkl4mX_b02CEgqpX6wAmuvsQznkY3Gl5SEUxUc",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322044472
+      },
+      {
+        "url": "https://challenges.cloudflare.com/turnstile/v0/api.js",
+        "status": 302,
+        "method": "GET",
+        "timestamp": 1782322044659
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/js/jquery.cascadingDropDown.js?v=lK3ooxGGxdpnjJJWjgDKMN88JphDA3ZGEemiXDpPbeI",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322044675
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/js/enums.js?v=HQJ3cEvUxMATYl4TAyQyx47BX787kqcH2zGQIRjk9yI",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322044680
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/js/placa-mercosul-brasil.js?v=J4yrDYVS-WrGU7c-JKcY85YlXijtxbpKJlJMX68FPgk",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322044680
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/js/util.js?v=zuJ-2QCpebDiDyxSL1Iew-x8o5YItYFUjBDmns8XwCc",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322044680
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/js/grid-actions.js?v=SvrLFuPftdwAuXHtnHizyIrHYq64hV_OIdaySJqszXQ",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322044682
+      },
+      {
+        "url": "https://challenges.cloudflare.com/turnstile/v0/b/25e6c66701a0/api.js",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322044734
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/fonts/gudea-v5-latin-700.woff2",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322044805
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/fonts/gudea-v5-latin-regular.woff2",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322044818
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/fonts/themify.woff?-fvbane",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322044850
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/img/bg_login.jpg",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322044851
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/fonts/fontawesome-webfont.woff2?v=4.7.0",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322044856
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/js/liveSearch.js?v=eDnEyZ1fHYJJNEaB_uBRck0sS1RtMKAFolGW5n5UTRc",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322044967
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/js/changelog.js?v=P5uRtsk04tnwbHKkenqLBlK4YO2CxvMJghAqUZ53-ck",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322044973
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/js/global-select2.js?v=XWgfVgbMyAuFGVsWzWqowVbSsilYfyu7OAswx55dueI",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322045018
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/img/icons/manifest.json",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322045642
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/js/thirdparty.bundle.js?v=MjRZhnBI0m3lyonMNVaR2LW7LbB5g43ZURKCF7gZErw",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322047671
+      },
+      {
+        "url": "https://challenges.cloudflare.com/cdn-cgi/challenge-platform/h/b/turnstile/f/ov2/av0/rch/0fe54/1x00000000000000000000AA/auto/fbE/new/normal?lang=auto",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322048132
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/vendor/ionicons/css/ionicons.min.css",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322048238
+      },
+      {
+        "url": "https://challenges.cloudflare.com/cdn-cgi/challenge-platform/h/b/cmg/1",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322048255
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/img/icons/favicon.ico",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322048505
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/img/icons/favicon-32x32.png",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322048713
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/img/loading.svg",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322063690
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/Home/Login?ReturnUrl=https%3A%2F%2Fhomologacao.axhub.axion.ws%2Fnao-autorizado",
+        "status": 302,
+        "method": "POST",
+        "timestamp": 1782322064070
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/nao-autorizado",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322064386
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/css/core.min.css",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322064420
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/css/app.min.css",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322064421
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/css/kendo.theadmin.css?v=O7VwSP8rjrmBzZ-Fo4LD-F24ZtnVJzsqKK9ugXipFLk",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322064421
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/css/kendo.custom.css?v=a9aOlraxSrmUqzq1Gtgm1vtVwnHRq6al7Owi2WfFyqg",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322064422
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/css/plugins.all.min.css?v=Otw15_aYbfeplId5fn8aBtq9YbE8xaQUjEnFYoA6uE4",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322064422
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/css/custom.css?v=CU1UngmY_m6VLpPd8qeqfRsF_C3-9oKLyRS3zaybwd0",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322064423
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/css/thirdparty.bundle.css?v=Aq6T6xYx9E_8u6hHNpwrwKvL8BWrEPjj2YpseBWIiSU",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322064433
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/css/font.css?v=9XlJwVpNuPeFIoyiTKEhVt_EPOTqwcu6ABAGCIXW65s",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322064434
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/js/core.min.js",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322064438
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/js/kendo/jszip.min.js?v=xgOYhOfm9WY0Fu2ybMiUjV372F8pJzhUMLL0o5Af5D8",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322064439
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/js/kendo/kendo.all.min.js?v=YqyyQi-hEbM8RnK5ji99PSGgdOSyo6mjiF2vNkLlDOs",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322064439
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/js/kendo/kendo.maskedDatePicker.min.js?v=opA62mK8EiuVzgQYBSDm-kY-5WgSlJOPRCs6Siitpbc",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322064440
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/js/kendo/kendo.aspnetmvc.min.js?v=ADQqQAvb5EopGSkkcHq1l5U5sGogGtc3QYfZ-OP6bBo",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322064447
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/js/kendo/cultures/kendo.culture.pt-BR.min.js?v=8C8B4Cd4nxlpjfzJEgoMVahfAPv4qKlqxzb4IMbl1cA",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322064448
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/js/kendo/messages/kendo.messages.pt-BR.min.js?v=amZmqBRvU_rKjdVN2pyylsNPXBMkSbpL8bzxwiD6ois",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322064449
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/js/jquery.validation.all.min.js?v=qgb0vGVp2SpiFgCC1-czLl7tvUwSTiSvvhNPDTigZLA",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322064450
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/js/globalize.all.min.js?v=kZ-95WxC5aAv_oBlcv4qilVARTgN7BjVcRjsApdu9nM",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322064451
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/js/plugins.all.min.js?v=7G8SL8E462D6QXaTFNXtYkeS2aTrK6h19fc-r31_tvc",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322064451
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/js/thirdparty.bundle.js?v=MjRZhnBI0m3lyonMNVaR2LW7LbB5g43ZURKCF7gZErw",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322064452
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/js/app.min.js",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322064453
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/js/script.js?v=ubnxLJkl4mX_b02CEgqpX6wAmuvsQznkY3Gl5SEUxUc",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322064453
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/js/util.js?v=zuJ-2QCpebDiDyxSL1Iew-x8o5YItYFUjBDmns8XwCc",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322064453
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/js/jquery.cascadingDropDown.js?v=lK3ooxGGxdpnjJJWjgDKMN88JphDA3ZGEemiXDpPbeI",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322064454
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/js/placa-mercosul-brasil.js?v=J4yrDYVS-WrGU7c-JKcY85YlXijtxbpKJlJMX68FPgk",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322064456
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/js/enums.js?v=HQJ3cEvUxMATYl4TAyQyx47BX787kqcH2zGQIRjk9yI",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322064464
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/js/grid-actions.js?v=SvrLFuPftdwAuXHtnHizyIrHYq64hV_OIdaySJqszXQ",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322064465
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/js/liveSearch.js?v=eDnEyZ1fHYJJNEaB_uBRck0sS1RtMKAFolGW5n5UTRc",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322064466
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/js/changelog.js?v=P5uRtsk04tnwbHKkenqLBlK4YO2CxvMJghAqUZ53-ck",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322064467
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/js/global-select2.js?v=XWgfVgbMyAuFGVsWzWqowVbSsilYfyu7OAswx55dueI",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322064468
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/fonts/fontawesome-webfont.woff2?v=4.7.0",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322064764
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/fonts/themify.woff?-fvbane",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322064765
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/fonts/gudea-v5-latin-regular.woff2",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322064766
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/fonts/gudea-v5-latin-700.woff2",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322064767
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/_content/NToastNotify/toastr.js?8.0.0.0",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322064767
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/img/icons/manifest.json",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322064903
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/vendor/ionicons/css/ionicons.min.css",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322065290
+      },
+      {
+        "url": "https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322065421
+      },
+      {
+        "url": "https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322065422
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/img/icons/favicon.ico",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322065434
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322069999
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/css/core.min.css",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322070023
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/css/app.min.css",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322070030
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/css/kendo.theadmin.css?v=O7VwSP8rjrmBzZ-Fo4LD-F24ZtnVJzsqKK9ugXipFLk",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322070031
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/css/kendo.custom.css?v=a9aOlraxSrmUqzq1Gtgm1vtVwnHRq6al7Owi2WfFyqg",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322070032
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/css/plugins.all.min.css?v=Otw15_aYbfeplId5fn8aBtq9YbE8xaQUjEnFYoA6uE4",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322070033
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/css/custom.css?v=CU1UngmY_m6VLpPd8qeqfRsF_C3-9oKLyRS3zaybwd0",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322070033
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/css/thirdparty.bundle.css?v=Aq6T6xYx9E_8u6hHNpwrwKvL8BWrEPjj2YpseBWIiSU",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322070034
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/css/font.css?v=9XlJwVpNuPeFIoyiTKEhVt_EPOTqwcu6ABAGCIXW65s",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322070035
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/js/core.min.js",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322070035
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/js/kendo/jszip.min.js?v=xgOYhOfm9WY0Fu2ybMiUjV372F8pJzhUMLL0o5Af5D8",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322070036
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/js/kendo/kendo.all.min.js?v=YqyyQi-hEbM8RnK5ji99PSGgdOSyo6mjiF2vNkLlDOs",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322070036
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/js/kendo/kendo.maskedDatePicker.min.js?v=opA62mK8EiuVzgQYBSDm-kY-5WgSlJOPRCs6Siitpbc",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322070036
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/js/kendo/kendo.aspnetmvc.min.js?v=ADQqQAvb5EopGSkkcHq1l5U5sGogGtc3QYfZ-OP6bBo",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322070037
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/js/kendo/cultures/kendo.culture.pt-BR.min.js?v=8C8B4Cd4nxlpjfzJEgoMVahfAPv4qKlqxzb4IMbl1cA",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322070037
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/js/kendo/messages/kendo.messages.pt-BR.min.js?v=amZmqBRvU_rKjdVN2pyylsNPXBMkSbpL8bzxwiD6ois",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322070037
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/_content/NToastNotify/toastr.js?8.0.0.0",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322070039
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/js/jquery.validation.all.min.js?v=qgb0vGVp2SpiFgCC1-czLl7tvUwSTiSvvhNPDTigZLA",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322070040
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/js/globalize.all.min.js?v=kZ-95WxC5aAv_oBlcv4qilVARTgN7BjVcRjsApdu9nM",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322070041
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/js/plugins.all.min.js?v=7G8SL8E462D6QXaTFNXtYkeS2aTrK6h19fc-r31_tvc",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322070041
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/js/thirdparty.bundle.js?v=MjRZhnBI0m3lyonMNVaR2LW7LbB5g43ZURKCF7gZErw",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322070042
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/js/app.min.js",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322070043
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/js/script.js?v=ubnxLJkl4mX_b02CEgqpX6wAmuvsQznkY3Gl5SEUxUc",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322070045
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/js/util.js?v=zuJ-2QCpebDiDyxSL1Iew-x8o5YItYFUjBDmns8XwCc",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322070047
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/js/jquery.cascadingDropDown.js?v=lK3ooxGGxdpnjJJWjgDKMN88JphDA3ZGEemiXDpPbeI",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322070048
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/js/placa-mercosul-brasil.js?v=J4yrDYVS-WrGU7c-JKcY85YlXijtxbpKJlJMX68FPgk",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322070050
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/js/enums.js?v=HQJ3cEvUxMATYl4TAyQyx47BX787kqcH2zGQIRjk9yI",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322070051
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/js/grid-actions.js?v=SvrLFuPftdwAuXHtnHizyIrHYq64hV_OIdaySJqszXQ",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322070052
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/js/liveSearch.js?v=eDnEyZ1fHYJJNEaB_uBRck0sS1RtMKAFolGW5n5UTRc",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322070052
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/js/changelog.js?v=P5uRtsk04tnwbHKkenqLBlK4YO2CxvMJghAqUZ53-ck",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322070052
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/js/global-select2.js?v=XWgfVgbMyAuFGVsWzWqowVbSsilYfyu7OAswx55dueI",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322070053
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/fonts/fontawesome-webfont.woff2?v=4.7.0",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322070183
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/fonts/themify.woff?-fvbane",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322070184
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/fonts/gudea-v5-latin-regular.woff2",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322070185
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/fonts/gudea-v5-latin-700.woff2",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322070186
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/img/logo-light.svg",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322070186
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/css/dashboard.css?v=8GZo-Gym_2ZyBQdZRBuTI3_go4TrfysB52YE6kh6LqU",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322070187
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/img/logo-icon-light.svg",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322070189
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/img/icons/manifest.json",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322070315
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/img/login-user.png",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322070655
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/js/dashboard.js?v=NKpfRnpPN99gHZ4W3VAxEayLTpuHgEYqjTgqaKXAHBU",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322070665
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/usuario/obtemmetadiariaprocessamentousuario",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322070687
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/operacao/alertasbloqueio",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322070689
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/afericao/alertasvencimento",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322070700
+      },
+      {
+        "url": "https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322070720
+      },
+      {
+        "url": "https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322070738
+      },
+      {
+        "url": "https://maps.googleapis.com/maps/api/js?key=AIzaSyBzLdKQ2u4Igm-pQDptSgtUpgtGXw4V_yM&loading=async&callback=initMap",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322070739
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/notify.mp3",
+        "status": 206,
+        "method": "GET",
+        "timestamp": 1782322070929
+      },
+      {
+        "url": "https://maps.googleapis.com/maps-api-v3/api/js/65/5e/intl/pt_br/main.js",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322071001
+      },
+      {
+        "url": "https://homologacao.processor.axion.ws/hub/v1/dashboard/negotiate?negotiateVersion=1",
+        "status": 204,
+        "method": "OPTIONS",
+        "timestamp": 1782322071035
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/data/changelog.json",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322071098
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/afericao/alertasvencimento",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322071216
+      },
+      {
+        "url": "https://maps.googleapis.com/maps-api-v3/api/js/65/5e/intl/pt_br/layers.js",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322071252
+      },
+      {
+        "url": "https://maps.googleapis.com/maps-api-v3/api/js/65/5e/intl/pt_br/common.js",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322071253
+      },
+      {
+        "url": "https://maps.googleapis.com/maps-api-v3/api/js/65/5e/intl/pt_br/util.js",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322071254
+      },
+      {
+        "url": "https://maps.googleapis.com/maps-api-v3/api/js/65/5e/intl/pt_br/map.js",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322071268
+      },
+      {
+        "url": "https://maps.googleapis.com/maps/api/mapsjs/gen_204?csp_test=true",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322071271
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/dashboard/relatorioocr",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322071272
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/dashboard/topmotivosdescarte?id=202606",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322071284
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/dashboard/imageminfracaomensal/202606",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322071485
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/dashboard/heatmaphorasemana?id=0",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322071513
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/home/getviewprazo?_=1782322070064",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322071586
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/dashboard/obterultimoseventos",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322071589
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/dashboard/obterstatusequipamentos",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322071735
+      },
+      {
+        "url": "https://homologacao.processor.axion.ws/hub/v1/dashboard/negotiate?negotiateVersion=1",
+        "status": 200,
+        "method": "POST",
+        "timestamp": 1782322071982
+      },
+      {
+        "url": "https://maps.googleapis.com/maps-api-v3/api/js/65/5e/intl/pt_br/marker.js",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322071987
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/dashboard/obterimagenscapturadas",
+        "status": 200,
+        "method": "POST",
+        "timestamp": 1782322072000
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/dashboard/obterdefasagemprocessamento",
+        "status": 200,
+        "method": "POST",
+        "timestamp": 1782322072019
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/vendor/moment/moment.min.js",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322073238
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/vendor/chartjs/Chart.min.js",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322073571
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/vendor/ionicons/css/ionicons.min.css",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322073798
+      },
+      {
+        "url": "https://maps.gstatic.com/mapfiles/openhand_8_8.cur",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322073905
+      },
+      {
+        "url": "https://maps.googleapis.com/maps-api-v3/api/js/65/5e/intl/pt_br/log.js",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322074094
+      },
+      {
+        "url": "https://maps.googleapis.com/maps-api-v3/api/js/65/5e/intl/pt_br/onion.js",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322074095
+      },
+      {
+        "url": "https://maps.gstatic.com/mapfiles/transparent.png",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322074187
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/img/red-pulse.svg",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322074272
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/img/green-pulse.svg",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322074276
+      },
+      {
+        "url": "https://maps.googleapis.com/maps-api-v3/api/js/65/5e/intl/pt_br/controls.js",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322074960
+      },
+      {
+        "url": "https://maps.googleapis.com/$rpc/google.internal.maps.mapsjs.v1.MapsJsInternalService/GetViewportInfo",
+        "status": 200,
+        "method": "OPTIONS",
+        "timestamp": 1782322074985
+      },
+      {
+        "url": "data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20fill%3D%22none%22%20viewBox%3D%220%200%2016%2010%22%3E%3Cpath%20fill%3D%22%233c4043%22%20fill-rule%3D%22evenodd%22%20d%3D%22M1.5%200C.671573%200%200%20.671573%200%201.5v7C0%209.32843.671573%2010%201.5%2010h13c.8284%200%201.5-.67157%201.5-1.5v-7c0-.828427-.6716-1.5-1.5-1.5zM5%207c-.55228%200-1%20.44772-1%201%200%20.55229.44772%201%201%201h6c.5523%200%201-.44771%201-1%200-.55228-.4477-1-1-1zM1%204.25c0-.13807.11193-.25.25-.25h1.5c.13807%200%20.25.11193.25.25v1.5c0%20.13807-.11193.25-.25.25H1.5c-.27614%200-.5-.22386-.5-.5zM1.5%201c-.27614%200-.5.22386-.5.5v1.25c0%20.13807.11193.25.25.25h1.5c.13807%200%20.25-.11193.25-.25v-1.5C3%201.11193%202.88807%201%202.75%201zM4%204.25c0-.13807.11193-.25.25-.25h1.5c.13807%200%20.25.11193.25.25v1.5c0%20.13807-.11193.25-.25.25h-1.5C4.11193%206%204%205.88807%204%205.75zM4.25%201c-.13807%200-.25.11193-.25.25v1.5c0%20.13807.11193.25.25.25h1.5c.13807%200%20.25-.11193.25-.25v-1.5C6%201.11193%205.88807%201%205.75%201zM7%204.25c0-.13807.11193-.25.25-.25h1.5c.13807%200%20.25.11193.25.25v1.5c0%20.13807-.11193.25-.25.25h-1.5C7.11193%206%207%205.88807%207%205.75zM7.25%201c-.13807%200-.25.11193-.25.25v1.5c0%20.13807.11193.25.25.25h1.5c.13807%200%20.25-.11193.25-.25v-1.5C9%201.11193%208.88807%201%208.75%201zM10%204.25c0-.13807.1119-.25.25-.25h1.5c.1381%200%20.25.11193.25.25v1.5c0%20.13807-.1119.25-.25.25h-1.5c-.1381%200-.25-.11193-.25-.25zM10.25%201c-.1381%200-.25.11193-.25.25v1.5c0%20.13807.1119.25.25.25h1.5c.1381%200%20.25-.11193.25-.25v-1.5c0-.13807-.1119-.25-.25-.25zM13%204.25c0-.13807.1119-.25.25-.25h1.5c.1381%200%20.25.11193.25.25V5.5c0%20.27614-.2239.5-.5.5h-1.25c-.1381%200-.25-.11193-.25-.25zM13.25%201c-.1381%200-.25.11193-.25.25v1.5c0%20.13807.1119.25.25.25h1.5c.1381%200%20.25-.11193.25-.25V1.5c0-.27614-.2239-.5-.5-.5z%22%20clip-rule%3D%22evenodd%22/%3E%3C/svg%3E",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322075081
+      },
+      {
+        "url": "data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2024%2024%22%3E%3Cpath%20d%3D%22M12%2021q-1.625%200-3.012-.8Q7.6%2019.4%206.8%2018H4v-2h2.1q-.075-.5-.087-1Q6%2014.5%206%2014H4v-2h2q0-.5.013-1%20.012-.5.087-1H4V8h2.8q.35-.575.788-1.075.437-.5%201.012-.875L7%204.4%208.4%203l2.15%202.15q.7-.225%201.425-.225t1.425.225L15.6%203%2017%204.4l-1.65%201.65q.575.375%201.038.862Q16.85%207.4%2017.2%208H20v2h-2.1q.075.5.088%201%20.012.5.012%201h2v2h-2q0%20.5-.012%201-.013.5-.088%201H20v2h-2.8q-.8%201.4-2.188%202.2-1.387.8-3.012.8Zm0-2q1.65%200%202.825-1.175T16%2015v-4q0-1.65-1.175-2.825T12%207%209.175%208.175%208%2011v4q0%201.65%201.175%202.825T12%2019m-2-3h4v-2h-4Zm0-4h4v-2h-4Zm2%201%22/%3E%3C/svg%3E",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322075082
+      },
+      {
+        "url": "data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2018%2018%22%3E%3Cpath%20fill%3D%22%23666%22%20d%3D%22M0%200v6h2V2h4V0zm16%200h-4v2h4v4h2V0zm0%2016h-4v2h6v-6h-2zM2%2012H0v6h6v-2H2z%22/%3E%3C/svg%3E",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322075083
+      },
+      {
+        "url": "data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2018%2018%22%3E%3Cpath%20fill%3D%22%23333%22%20d%3D%22M0%200v6h2V2h4V0zm16%200h-4v2h4v4h2V0zm0%2016h-4v2h6v-6h-2zM2%2012H0v6h6v-2H2z%22/%3E%3C/svg%3E",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322075083
+      },
+      {
+        "url": "data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2018%2018%22%3E%3Cpath%20fill%3D%22%23111%22%20d%3D%22M0%200v6h2V2h4V0zm16%200h-4v2h4v4h2V0zm0%2016h-4v2h6v-6h-2zM2%2012H0v6h6v-2H2z%22/%3E%3C/svg%3E",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322075084
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/img/device.png",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322075119
+      },
+      {
+        "url": "https://fonts.googleapis.com/css?family=Google+Sans+Text:400&text=%E2%86%90%E2%86%92%E2%86%91%E2%86%93&lang=pt",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322075238
+      },
+      {
+        "url": "https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Google+Sans:400,500,700|Google+Sans+Text:400,500,700&lang=pt",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322075243
+      },
+      {
+        "url": "data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20fill%3D%22none%22%20viewBox%3D%220%200%2069%2029%22%3E%3Cg%20fill%3D%22%23fff%22%20stroke%3D%22%23fff%22%20stroke-width%3D%221.5%22%20opacity%3D%22.9%22%3E%3Cpath%20d%3D%22m17.4706%207.33616.5412-.54112-.5519-.53011c-1.3636-1.30974-3.2017-2.31971-5.7591-2.31971-4.6137%200-8.50262%203.75517-8.50262%208.39578%200%204.6407%203.88892%208.3958%208.50262%208.3958%202.4704%200%204.3765-.8188%205.8732-2.3679%201.5695-1.5729%202.0216-3.7363%202.0216-5.4119%200-.5232-.044-1.0254-.1295-1.4529l-.1206-.6029h-8.3947v3.5942h4.8301c-.1724.5966-.4321%201.0286-.7491%201.3461-.6288.6214-1.5823%201.3094-3.331%201.3094-2.65245%200-4.73598-2.1312-4.73598-4.8099%200-2.67861%202.08353-4.80981%204.73598-4.80981%201.4362%200%202.4752.5607%203.257%201.29229l.5298.49574.513-.51303z%22/%3E%3Cpath%20d%3D%22M24.8656%2020.7286c3.089%200%205.6036-2.4192%205.6036-5.6692%200-3.2681-2.5162-5.66931-5.6036-5.66931-3.0873%200-5.6035%202.40121-5.6035%205.66931%200%203.25%202.5145%205.6692%205.6035%205.6692Zm0-7.9004c1.014%200%201.9766.837%201.9766%202.2312%200%201.3805-.9653%202.2311-1.9766%202.2311-1.0099%200-1.9765-.8574-1.9765-2.2311%200-1.3874.9639-2.2312%201.9765-2.2312Z%22/%3E%3Cpath%20d%3D%22M35.7511%2017.2905h-.0042c-1.0099%200-1.9766-.8574-1.9766-2.2311%200-1.3874.964-2.2312%201.9766-2.2312%201.0139%200%201.9765.837%201.9765%202.2312%200%201.3845-.968%202.2367-1.9723%202.2311Zm-.0124%203.4381c3.089%200%205.6035-2.4192%205.6035-5.6692%200-3.2681-2.5162-5.66931-5.6035-5.66931-3.0874%200-5.6036%202.40121-5.6036%205.66931%200%203.2508%202.5236%205.6692%205.6036%205.6692Z%22/%3E%3Cpath%20d%3D%22M51.953%2010.4357v-.74997h-3.5531v.12253c-.55-.26178-1.2022-.42639-1.9191-.42639-2.8837%200-5.464%202.51793-5.464%205.69393%200%202.1269%201.164%203.9479%202.8033%204.9137l-.0658.0273-1.8806.7802-.6929.2874.2876.6928c.6228%201.5004%202.2776%203.3697%205.0535%203.3697%201.4105%200%202.787-.4145%203.814-1.4093%201.0332-1.0009%201.6171-2.4965%201.6171-4.4653zm-7.2194%209.9844-.0002-.0005c.5552.2005%201.1446.309%201.7474.309.6808%200%201.3058-.1467%201.841-.3891-.0876.3891-.2417.671-.4252.8682-.2812.3022-.7202.5011-1.3747.5011-.91190000000001%200-1.5201-.6476-1.7883-1.2887Zm1.9361-7.5919c.9722%200%201.878.8483%201.878%202.2558%200%201.3796-.8956%202.2147-1.878%202.2147-1.0428%200-1.993-.8738-1.993-2.2147%200-1.3754.9595-2.2558%201.993-2.2558Zm9.069-7.60739v-.75h-3.6599V20.4412h3.6599z%22/%3E%3Cpath%20d%3D%22m63.9128%2016.0614-.6183-.4122-.4179.6145c-.4562.6709-1.0102%201.0432-1.8025%201.0432-.4306%200-.7595-.0981-1.0197-.2622-.07-.0441-.1383-.0951-.2046-.1536l5.6999-2.3625.6825-.283L65.9596%2013.5589l-.219-.5514c-.4528-1.2075-1.8899-3.60918-4.9128-3.60918-2.9833%200-5.3244%202.36358-5.3244%205.66928%200%203.1475%202.3222%205.6693%205.5625%205.6693%202.6043%200%204.1111-1.5991%204.7283-2.5156l.421-.625L65.5882%2017.1783zm-2.5667-3.2103-1.9353.8015c.3795-.5743%201.0107-.8572%201.4909-.8572.1653%200%20.3136.0207.4444.0557Z%22/%3E%3C/g%3E%3Cpath%20fill%3D%22%233c4043%22%20d%3D%22M11.7008%2019.9868c-4.21304%200-7.75262-3.4328-7.75262-7.6458%200-4.21297%203.53958-7.64578%207.75262-7.64578%202.3323%200%203.9912.91159%205.2395%202.11061l-1.47%201.47003c-.8952-.83767-2.1106-1.49467-3.7695-1.49467-3.07972%200-5.48598%202.48016-5.48598%205.55981%200%203.0797%202.40626%205.5599%205.48598%205.5599%201.9956%200%203.1289-.8048%203.8598-1.5275.5995-.5996.9855-1.4537%201.1333-2.628h-4.9931v-2.0942h7.0298c.0739.3695.115.8212.115%201.3058%200%201.5685-.427%203.5067-1.8067%204.8864-1.3469%201.3961-3.0551%202.1434-5.3381%202.1434m18.0184-4.9274c0%202.8333-2.1763%204.9192-4.8536%204.9192-2.6772%200-4.8535-2.0859-4.8535-4.9192%200-2.8498%202.1763-4.9193%204.8535-4.9193%202.6773%200%204.8536%202.0695%204.8536%204.9193m-2.127%200c0-1.7739-1.2648-2.9812-2.7266-2.9812s-2.7265%201.2155-2.7265%202.9812c0%201.7492%201.2647%202.9811%202.7265%202.9811s2.7266-1.2237%202.7266-2.9811m13%200c0%202.8333-2.1763%204.9192-4.8535%204.9192-2.6691%200-4.8536-2.0859-4.8536-4.9192%200-2.8498%202.1763-4.9193%204.8536-4.9193%202.6772%200%204.8535%202.0695%204.8535%204.9193m-2.1188%200c0-1.7739-1.2647-2.9812-2.7265-2.9812s-2.7266%201.2155-2.7266%202.9812c0%201.7492%201.2648%202.9811%202.7266%202.9811%201.4618.0082%202.7265-1.2237%202.7265-2.9811m12.7296-4.6237v8.8366c0%203.6382-2.1435%205.1246-4.6811%205.1246-2.3899%200-3.8188-1.6014-4.3609-2.9072l1.8807-.7802c.3367.8048%201.158%201.7493%202.4802%201.7493%201.626%200%202.628-1.0101%202.628-2.8908v-.7063h-.074c-.4845.5995-1.4207%201.1169-2.5951%201.1169-2.4637%200-4.714-2.1434-4.714-4.9028%200-2.7758%202.2585-4.9439%204.714-4.9439%201.1744%200%202.1106.5256%202.5951%201.1004h.074v-.7966zm-1.9053%204.6483c0-1.7328-1.158-3.0058-2.628-3.0058-1.4947%200-2.743%201.2647-2.743%203.0058%200%201.7164%201.2483%202.9647%202.743%202.9647%201.47%200%202.628-1.2483%202.628-2.9647m5.691-9.86319V19.6912h-2.1599V5.22081zm8.5081%2011.46459%201.6754%201.1169c-.5421.8049-1.8478%202.1846-4.1063%202.1846-2.8004%200-4.8125-2.1599-4.8125-4.9193%200-2.9237%202.0367-4.9193%204.5744-4.9193%202.554%200%203.8023%202.0285%204.213%203.129l.2217.5584-6.5782%202.7266c.501.9855%201.2894%201.4946%202.3898%201.4946%201.1005%200%201.8643-.5502%202.4227-1.3715m-5.1656-1.7739%204.4019-1.8231c-.2464-.616-.9691-1.043-1.8314-1.043-1.1005%200-2.628.9691-2.5705%202.8661%22/%3E%3C/svg%3E",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322075554
+      },
+      {
+        "url": "data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2023%2038%22%3E%3Cpath%20d%3D%22M16.6%2038.1h-5.5l-.2-2.9-.2%202.9H5.2L5%2025.3l-.8%202a1.53%201.53%200%2001-1.9.9l-1.2-.4a1.58%201.58%200%2001-1-1.9v-.1c.3-.9%203.1-11.2%203.1-11.2a2.66%202.66%200%20012.3-2l.6-.5a6.93%206.93%200%20014.7-12%206.8%206.8%200%20014.9%202%207%207%200%20012%204.9%206.65%206.65%200%2001-2.2%205l.7.5a2.78%202.78%200%20012.4%202s2.9%2011.2%202.9%2011.3a1.53%201.53%200%2001-.9%201.9l-1.3.4a1.63%201.63%200%2001-1.9-.9l-.7-1.8zm-3.6-2h1.7l.2-15.8%201.9-.3%202.4%206.3.3-.1c-.2-.8-.8-3.2-2.8-10.9a.63.63%200%2000-.6-.5h-.6l-1.1-.9h-1.9l-.3-2a4.83%204.83%200%20003.5-4.7A4.78%204.78%200%200011%202.3h-.2a4.9%204.9%200%2000-1.4%209.6l-.3%202H7.2l-1%20.9h-.6a.74.74%200%2000-.6.5c-2%207.5-2.7%2010-3%2010.9l.3.1L4.8%2020l1.9.3.2%2015.8h1.6l.6-8.4a1.52%201.52%200%20011.5-1.4%201.5%201.5%200%20011.5%201.4zm6.6-9.7%22%20style%3D%22isolation%3Aisolate%22%20fill%3D%22%23333%22%20opacity%3D%22.7%22/%3E%3Cpath%20d%3D%22m5.9%2013.6%201.1-.9h7.8l1.2.9%22%20fill%3D%22%23ce592c%22/%3E%3Cellipse%20cx%3D%2210.9%22%20cy%3D%2213.1%22%20rx%3D%222.7%22%20ry%3D%22.3%22%20style%3D%22isolation%3Aisolate%22%20fill%3D%22%23ce592c%22%20opacity%3D%22.5%22/%3E%3Cpath%20d%3D%22m20.6%2026.1-2.9-11.3a1.71%201.71%200%2000-1.6-1.2H5.7a1.69%201.69%200%2000-1.5%201.3L1.1%2026.2a.61.61%200%2000.3.7l1.1.4a.61.61%200%2000.7-.3l2.7-6.7.2%2016.8h3.6l.6-9.3a.47.47%200%2001.44-.5h.06c.4%200%20.4.2.5.5l.6%209.3h3.6l.2-16.8%202.5%206.6a.52.52%200%2000.66.31l1.2-.40000000000001a.57.57%200%2000.5-.7Z%22%20fill%3D%22%23fdbf2d%22/%3E%3Cpath%20d%3D%22m7%2013.6%203.9%206.7%203.9-6.7%22%20style%3D%22isolation%3Aisolate%22%20fill%3D%22%23cf572e%22%20opacity%3D%22.6%22/%3E%3Ccircle%20cx%3D%2210.9%22%20cy%3D%227%22%20r%3D%225.9%22%20fill%3D%22%23fdbf2d%22/%3E%3C/svg%3E",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322075645
+      },
+      {
+        "url": "data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2024%2038%22%3E%3Cpath%20d%3D%22m22%2026.6-2.9-11.3a2.78%202.78%200%2000-2.4-2l-.7-.5a6.82%206.82%200%20002.2-5%206.9%206.9%200%2000-13.8%200%207%207%200%20002.2%205.1l-.6.5a2.55%202.55%200%2000-2.3%202s-3%2011.1-3%2011.2v.1a1.58%201.58%200%20001%201.9l1.2.4a1.63%201.63%200%20001.9-.9l.8-2%20.2%2012.8h11.3l.2-12.6.7%201.8a1.54%201.54%200%20001.5%201%201.09%201.09%200%2000.5-.1l1.3-.4a1.85%201.85%200%2000.7-2Zm-1.2.9-1.2.4a.61.61%200%2001-.7-.3L16.4%2021l-.2%2016.8H6.8L6.6%2021l-2.7%206.7a.52.52%200%2001-.66.31l-1.1-.4a.52.52%200%2001-.31-.66l3.1-11.3a1.69%201.69%200%20011.5-1.3h.2l1-.9h2.3a5.9%205.9%200%20113.2%200h2.3l1.1.9h.2a1.71%201.71%200%20011.6%201.2l2.9%2011.3a.84.84%200%2001-.4.7Z%22%20fill%3D%22%23333%22%20fill-opacity%3D%22.2%22/%3E%26quot%3B%3C/svg%3E",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322075646
+      },
+      {
+        "url": "data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2040%2050%22%3E%3Cpath%20d%3D%22m34-30.4-2.9-11.3a2.78%202.78%200%2000-2.4-2l-.7-.5a6.82%206.82%200%20002.2-5%206.9%206.9%200%2000-13.8%200%207%207%200%20002.2%205.1l-.6.5a2.55%202.55%200%2000-2.3%202s-3%2011.1-3%2011.2v.1a1.58%201.58%200%20001%201.9l1.2.4a1.63%201.63%200%20001.9-.9l.8-2%20.2%2012.8h11.3l.2-12.6.7%201.8a1.54%201.54%200%20001.5%201%201.09%201.09%200%2000.5-.1l1.3-.4a1.85%201.85%200%2000.7-2Zm-1.2.9-1.2.4a.61.61%200%2001-.7-.3L28.4-36l-.2%2016.8h-9.4L18.6-36l-2.7%206.7a.52.52%200%2001-.66.31l-1.1-.4a.52.52%200%2001-.31-.66l3.1-11.3a1.69%201.69%200%20011.5-1.3h.2l1-.9h2.3a5.9%205.9%200%20113.2%200h2.3l1.1.9h.2a1.71%201.71%200%20011.6%201.2l2.9%2011.3a.84.84%200%2001-.4.7ZM34%2029.6l-2.9-11.3a2.78%202.78%200%2000-2.4-2l-.7-.5a6.82%206.82%200%20002.2-5%206.9%206.9%200%2000-13.8%200%207%207%200%20002.2%205.1l-.6.5a2.55%202.55%200%2000-2.3%202s-3%2011.1-3%2011.2v.1a1.58%201.58%200%20001%201.9l1.2.4a1.63%201.63%200%20001.9-.9l.8-2%20.2%2012.8h11.3l.2-12.6.7%201.8a1.54%201.54%200%20001.5%201%201.09%201.09%200%2000.5-.1l1.3-.4a1.85%201.85%200%2000.7-2Zm-1.2.9-1.2.4a.61.61%200%2001-.7-.3L28.4%2024l-.2%2016.8h-9.4L18.6%2024l-2.7%206.7a.52.52%200%2001-.66.31l-1.1-.4a.52.52%200%2001-.31-.66l3.1-11.3a1.69%201.69%200%20011.5-1.3h.2l1-.9h2.3a5.9%205.9%200%20113.2%200h2.3l1.1.9h.2a1.71%201.71%200%20011.6%201.2l2.9%2011.3a.84.84%200%2001-.4.7Z%22%20fill%3D%22%23333%22%20fill-opacity%3D%22.2%22/%3E%3Cpath%20d%3D%22M15.4%2038.8h-4a1.64%201.64%200%2001-1.4-1.1l-3.1-8a.9.9%200%2001-.5.1l-1.4.1a1.62%201.62%200%2001-1.6-1.4L2.3%2015.4l1.6-1.3a6.87%206.87%200%2001-3-4.6A7.14%207.14%200%20012%204%207.6%207.6%200%20016.7.9%207.14%207.14%200%200112.2%202a7.28%207.28%200%20012.3%209.6l2.1-.1.1%201c0%20.2.1.5.1.8a2.41%202.41%200%20011%201s1.9%203.2%202.8%204.9c.7%201.2%202.1%204.2%202.8%205.9a2.1%202.1%200%2001-.8%202.6l-.6.4a1.63%201.63%200%2001-1.5.2l-.6-.3a8.93%208.93%200%2000.5%201.3%207.91%207.91%200%20001.8%202.6l.6.3v4.6l-4.5-.1a7.32%207.32%200%2001-2.5-1.5zm-10-19.2%203.5%209.8%202.9%207.5h1.6V35l-1.9-9.4%203.1%205.4a8.24%208.24%200%20003.8%203.8h2.1v-1.4a14%2014%200%2001-2.2-3.1%2044.55%2044.55%200%2001-2.2-8L14.8%2016l3.2%205.6c.6%201.1%202.1%203.6%202.8%204.9l.6-.4c-.8-1.6-2.1-4.6-2.8-5.8-.9-1.7-2.8-4.9-2.8-4.9a.54.54%200%2000-.4-.3l-.7-.1-.1-.7a4.33%204.33%200%2000-.1-.5l-5.3.3%202.2-1.9a4.3%204.3%200%2000.9-1%205.17%205.17%200%2000.8-4%205.67%205.67%200%2000-2.2-3.4%205.09%205.09%200%2000-4-.8%205.67%205.67%200%2000-3.4%202.2%205.17%205.17%200%2000-.8%204%205.67%205.67%200%20002.2%203.4%203.13%203.13%200%20001%20.5l1.6.6-3.2%202.6%201%2011.5h.4z%22%20fill%3D%22%23333%22/%3E%3Cpath%20d%3D%22m3.35%2015.9%201.1%2012.5a.39.39%200%2000.36.42h.14l1.4-.1a.66.66%200%2000.5-.4l-.2-3.8-3.3-8.6Z%22%20fill%3D%22%23fdbf2d%22/%3E%3Cpath%20d%3D%22m5.2%2028.8%201.1-.1a.66.66%200%2000.5-.4l-.2-3.8-1.2-3.1Z%22%20fill%3D%22%23ce592b%22%20fill-opacity%3D%22.25%22/%3E%3Cpath%20d%3D%22m21.4%2035.70000000000001-3.8-1.2-2.7-7.8L12%2015.5l3.4-2.9c.2%202.4%202.2%2014.1%203.7%2017.1%200%200%201.3%202.6%202.3%203.1zM13%2027.6l-2-.3%202.5%2010.1.9.4v-2.9%22%20fill%3D%22%23e5892b%22/%3E%3Cpath%20d%3D%22M17.8%2025.4c-.4-1.5-.7-3.1-1.1-4.8-.1-.4-.1-.7-.2-1.1l-1.1-2-1.7-1.6s.9%205%202.4%207.1a19.12%2019.12%200%20001.7%202.4Z%22%20style%3D%22isolation%3Aisolate%22%20fill%3D%22%23cf572e%22%20opacity%3D%22.6%22/%3E%3Cpath%20d%3D%22M14.4%2037.8h-3a.43.43%200%2001-.4-.4l-3-7.8-1.7-4.8-3-9%208.9-.4s2.9%2011.3%204.3%2014.4c1.9%204.1%203.1%204.7%205%205.8h-3.2s-4.1-1.2-5.9-7.7a.59.59%200%2000-.6-.4.62.62%200%2000-.3.7s.5%202.4.9%203.6a34.87%2034.87%200%20002%206%22%20fill%3D%22%23fdbf2d%22/%3E%3Cpath%20d%3D%22m15.4%2012.7-3.3%202.9-8.9.4%203.3-2.7%22%20fill%3D%22%23ce592b%22/%3E%3Cpath%20d%3D%22m9.1%2021.1%201.4-6.2-5.9.5%22%20style%3D%22isolation%3Aisolate%22%20fill%3D%22%23cf572e%22%20opacity%3D%22.6%22/%3E%3Cpath%20d%3D%22M12%2013.5a4.75%204.75%200%2001-2.6%201.1c-1.5.3-2.9.2-2.9%200s1.1-.6%202.7-1%22%20fill%3D%22%23bb3d19%22/%3E%3Ccircle%20cx%3D%227.92%22%20cy%3D%228.19%22%20r%3D%226.3%22%20fill%3D%22%23fdbf2d%22/%3E%3Cpath%20d%3D%22M4.7%2013.6a6.21%206.21%200%20008.4-1.9v-.1a8.89%208.89%200%2001-8.4%202%22%20fill%3D%22%23ce592b%22%20fill-opacity%3D%22.25%22/%3E%3Cpath%20d%3D%22m21.2%2027.2.6-.4a1.09%201.09%200%2000.4-1.3c-.7-1.5-2.1-4.6-2.8-5.8-.9-1.7-2.8-4.9-2.8-4.9a1.6%201.6%200%2000-2.17-.65l-.23.15a1.68%201.68%200%2000-.4%202.1s2.3%203.9%203.1%205.3c.6%201%202.1%203.7%202.9%205.1a.94.94%200%20001.24.49z%22%20fill%3D%22%23fdbf2d%22/%3E%3Cpath%20d%3D%22M19.4%2019.8c-.9-1.7-2.8-4.9-2.8-4.9a1.6%201.6%200%2000-2.17-.65l-.23.15-.3.3c1.1%201.5%202.9%203.8%203.9%205.4%201.1%201.8%202.9%205%203.8%206.7l.1-.1a1.09%201.09%200%2000.4-1.3%2057.67%2057.67%200%2000-2.7-5.6Z%22%20fill%3D%22%23ce592b%22%20fill-opacity%3D%22.25%22/%3E%3C/svg%3E",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322075646
+      },
+      {
+        "url": "data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20fill%3D%22none%22%20viewBox%3D%220%200%2024%2024%22%3E%3Cpath%20fill%3D%22%23666%22%20d%3D%22m12%2010.8-4.6%204.6L6%2014l6-6%206%206-1.4%201.4z%22/%3E%3C/svg%3E",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322075647
+      },
+      {
+        "url": "data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20fill%3D%22none%22%20viewBox%3D%220%200%2024%2024%22%3E%3Cpath%20fill%3D%22%23333%22%20d%3D%22m12%2010.8-4.6%204.6L6%2014l6-6%206%206-1.4%201.4z%22/%3E%3C/svg%3E",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322075647
+      },
+      {
+        "url": "data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20fill%3D%22none%22%20viewBox%3D%220%200%2024%2024%22%3E%3Cpath%20fill%3D%22%23d1d1d1%22%20d%3D%22m12%2010.8-4.6%204.6L6%2014l6-6%206%206-1.4%201.4z%22/%3E%3C/svg%3E",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322075648
+      },
+      {
+        "url": "data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20fill%3D%22none%22%20viewBox%3D%220%200%2024%2024%22%3E%3Cpath%20fill%3D%22%23666%22%20d%3D%22m14%2018-6-6%206-6%201.4%201.4-4.6%204.6%204.6%204.6z%22/%3E%3C/svg%3E",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322075648
+      },
+      {
+        "url": "data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20fill%3D%22none%22%20viewBox%3D%220%200%2024%2024%22%3E%3Cpath%20fill%3D%22%23333%22%20d%3D%22m14%2018-6-6%206-6%201.4%201.4-4.6%204.6%204.6%204.6z%22/%3E%3C/svg%3E",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322075648
+      },
+      {
+        "url": "data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20fill%3D%22none%22%20viewBox%3D%220%200%2024%2024%22%3E%3Cpath%20fill%3D%22%23d1d1d1%22%20d%3D%22m14%2018-6-6%206-6%201.4%201.4-4.6%204.6%204.6%204.6z%22/%3E%3C/svg%3E",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322075648
+      },
+      {
+        "url": "data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20fill%3D%22none%22%20viewBox%3D%220%200%2024%2024%22%3E%3Cpath%20fill%3D%22%23666%22%20d%3D%22M12.6%2012%208%207.4%209.4%206l6%206-6%206L8%2016.6z%22/%3E%3C/svg%3E",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322075649
+      },
+      {
+        "url": "data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20fill%3D%22none%22%20viewBox%3D%220%200%2024%2024%22%3E%3Cpath%20fill%3D%22%23333%22%20d%3D%22M12.6%2012%208%207.4%209.4%206l6%206-6%206L8%2016.6z%22/%3E%3C/svg%3E",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322075649
+      },
+      {
+        "url": "data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20fill%3D%22none%22%20viewBox%3D%220%200%2024%2024%22%3E%3Cpath%20fill%3D%22%23d1d1d1%22%20d%3D%22M12.6%2012%208%207.4%209.4%206l6%206-6%206L8%2016.6z%22/%3E%3C/svg%3E",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322075650
+      },
+      {
+        "url": "data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20fill%3D%22none%22%20viewBox%3D%220%200%2024%2024%22%3E%3Cpath%20fill%3D%22%23666%22%20d%3D%22m12%2015.4-6-6L7.4%208l4.6%204.6L16.6%208%2018%209.4z%22/%3E%3C/svg%3E",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322075650
+      },
+      {
+        "url": "data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20fill%3D%22none%22%20viewBox%3D%220%200%2024%2024%22%3E%3Cpath%20fill%3D%22%23333%22%20d%3D%22m12%2015.4-6-6L7.4%208l4.6%204.6L16.6%208%2018%209.4z%22/%3E%3C/svg%3E",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322075650
+      },
+      {
+        "url": "data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20fill%3D%22%23666%22%20viewBox%3D%220%20-960%20960%20960%22%3E%3Cpath%20d%3D%22M440-440H200v-80h240v-240h80v240h240v80H520v240h-80z%22/%3E%3C/svg%3E",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322075650
+      },
+      {
+        "url": "data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20fill%3D%22%23333%22%20viewBox%3D%220%20-960%20960%20960%22%3E%3Cpath%20d%3D%22M440-440H200v-80h240v-240h80v240h240v80H520v240h-80z%22/%3E%3C/svg%3E",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322075651
+      },
+      {
+        "url": "data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20fill%3D%22%23111%22%20viewBox%3D%220%20-960%20960%20960%22%3E%3Cpath%20d%3D%22M440-440H200v-80h240v-240h80v240h240v80H520v240h-80z%22/%3E%3C/svg%3E",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322075651
+      },
+      {
+        "url": "data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20fill%3D%22%23d1d1d1%22%20viewBox%3D%220%20-960%20960%20960%22%3E%3Cpath%20d%3D%22M440-440H200v-80h240v-240h80v240h240v80H520v240h-80z%22/%3E%3C/svg%3E",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322075651
+      },
+      {
+        "url": "data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20fill%3D%22%23666%22%20viewBox%3D%220%20-960%20960%20960%22%3E%3Cpath%20d%3D%22M200-440v-80h560v80z%22/%3E%3C/svg%3E",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322075651
+      },
+      {
+        "url": "data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20fill%3D%22%23333%22%20viewBox%3D%220%20-960%20960%20960%22%3E%3Cpath%20d%3D%22M200-440v-80h560v80z%22/%3E%3C/svg%3E",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322075651
+      },
+      {
+        "url": "data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20fill%3D%22%23111%22%20viewBox%3D%220%20-960%20960%20960%22%3E%3Cpath%20d%3D%22M200-440v-80h560v80z%22/%3E%3C/svg%3E",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322075652
+      },
+      {
+        "url": "data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20fill%3D%22%23d1d1d1%22%20viewBox%3D%220%20-960%20960%20960%22%3E%3Cpath%20d%3D%22M200-440v-80h560v80z%22/%3E%3C/svg%3E",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322075652
+      },
+      {
+        "url": "data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20fill%3D%22none%22%20viewBox%3D%220%200%2024%2024%22%3E%3Cpath%20fill%3D%22%23666%22%20d%3D%22m12%2019.175%202.125-2.125%201.425%201.4L12%2022l-3.55-3.55%201.425-1.4zM4.825%2012l2.125%202.125-1.4%201.425L2%2012l3.55-3.55%201.4%201.425zm14.35%200L17.05%209.875l1.4-1.425L22%2012l-3.55%203.55-1.4-1.425zM12%204.825%209.875%206.95%208.45%205.55%2012%202l3.55%203.55-1.425%201.4z%22/%3E%3C/svg%3E",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322075652
+      },
+      {
+        "url": "data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20fill%3D%22none%22%20viewBox%3D%220%200%2024%2024%22%3E%3Cpath%20fill%3D%22%231a73e8%22%20d%3D%22m12%2019.175%202.125-2.125%201.425%201.4L12%2022l-3.55-3.55%201.425-1.4zM4.825%2012l2.125%202.125-1.4%201.425L2%2012l3.55-3.55%201.4%201.425zm14.35%200L17.05%209.875l1.4-1.425L22%2012l-3.55%203.55-1.4-1.425zM12%204.825%209.875%206.95%208.45%205.55%2012%202l3.55%203.55-1.425%201.4z%22/%3E%3C/svg%3E",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322075652
+      },
+      {
+        "url": "data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20fill%3D%22none%22%20viewBox%3D%220%200%2024%2024%22%3E%3Cpath%20fill%3D%22%23d1d1d1%22%20d%3D%22m12%2019.175%202.125-2.125%201.425%201.4L12%2022l-3.55-3.55%201.425-1.4zM4.825%2012l2.125%202.125-1.4%201.425L2%2012l3.55-3.55%201.4%201.425zm14.35%200L17.05%209.875l1.4-1.425L22%2012l-3.55%203.55-1.4-1.425zM12%204.825%209.875%206.95%208.45%205.55%2012%202l3.55%203.55-1.425%201.4z%22/%3E%3C/svg%3E",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322075653
+      },
+      {
+        "url": "data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2024%2024%22%3E%3Cpath%20fill%3D%22none%22%20d%3D%22M0%200h24v24H0z%22/%3E%3Cpath%20fill%3D%22%23666%22%20d%3D%22m12.06%209.06%204-4-4-4-1.41%201.41%201.59%201.59h-.18c-2.3%200-4.6.88-6.35%202.64-3.52%203.51-3.52%209.21%200%2012.72%201.5%201.5%203.4%202.36%205.36%202.58v-2.02c-1.44-.21-2.84-.86-3.95-1.97-2.73-2.73-2.73-7.17%200-9.9%201.37-1.37%203.16-2.05%204.95-2.05h.17l-1.59%201.59zm8.94%203c-.19-1.74-.88-3.32-1.91-4.61l-1.43%201.43c.69.92%201.15%202%201.32%203.18zm-7.94%207.92V22c1.74-.19%203.32-.88%204.61-1.91l-1.43-1.43c-.91.68-2%201.15-3.18%201.32m4.6-2.74%201.43%201.43c1.04-1.29%201.72-2.88%201.91-4.61h-2.02c-.17%201.18-.64%202.27-1.32%203.18%22/%3E%3C/svg%3E",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322075653
+      },
+      {
+        "url": "data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2024%2024%22%3E%3Cpath%20fill%3D%22none%22%20d%3D%22M0%200h24v24H0z%22/%3E%3Cpath%20fill%3D%22%23333%22%20d%3D%22m12.06%209.06%204-4-4-4-1.41%201.41%201.59%201.59h-.18c-2.3%200-4.6.88-6.35%202.64-3.52%203.51-3.52%209.21%200%2012.72%201.5%201.5%203.4%202.36%205.36%202.58v-2.02c-1.44-.21-2.84-.86-3.95-1.97-2.73-2.73-2.73-7.17%200-9.9%201.37-1.37%203.16-2.05%204.95-2.05h.17l-1.59%201.59zm8.94%203c-.19-1.74-.88-3.32-1.91-4.61l-1.43%201.43c.69.92%201.15%202%201.32%203.18zm-7.94%207.92V22c1.74-.19%203.32-.88%204.61-1.91l-1.43-1.43c-.91.68-2%201.15-3.18%201.32m4.6-2.74%201.43%201.43c1.04-1.29%201.72-2.88%201.91-4.61h-2.02c-.17%201.18-.64%202.27-1.32%203.18%22/%3E%3C/svg%3E",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322075654
+      },
+      {
+        "url": "data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2024%2024%22%3E%3Cpath%20fill%3D%22none%22%20d%3D%22M0%200h24v24H0z%22/%3E%3Cpath%20fill%3D%22%23111%22%20d%3D%22m12.06%209.06%204-4-4-4-1.41%201.41%201.59%201.59h-.18c-2.3%200-4.6.88-6.35%202.64-3.52%203.51-3.52%209.21%200%2012.72%201.5%201.5%203.4%202.36%205.36%202.58v-2.02c-1.44-.21-2.84-.86-3.95-1.97-2.73-2.73-2.73-7.17%200-9.9%201.37-1.37%203.16-2.05%204.95-2.05h.17l-1.59%201.59zm8.94%203c-.19-1.74-.88-3.32-1.91-4.61l-1.43%201.43c.69.92%201.15%202%201.32%203.18zm-7.94%207.92V22c1.74-.19%203.32-.88%204.61-1.91l-1.43-1.43c-.91.68-2%201.15-3.18%201.32m4.6-2.74%201.43%201.43c1.04-1.29%201.72-2.88%201.91-4.61h-2.02c-.17%201.18-.64%202.27-1.32%203.18%22/%3E%3C/svg%3E",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322075654
+      },
+      {
+        "url": "data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2018%2016%22%3E%3Cpath%20fill%3D%22%23666%22%20d%3D%22M0%2016h8V9H0zm10%200h8V9h-8zM0%207h8V0H0zm10-7v7h8V0z%22/%3E%3C/svg%3E",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322075654
+      },
+      {
+        "url": "data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2018%2016%22%3E%3Cpath%20fill%3D%22%23333%22%20d%3D%22M0%2016h8V9H0zm10%200h8V9h-8zM0%207h8V0H0zm10-7v7h8V0z%22/%3E%3C/svg%3E",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322075655
+      },
+      {
+        "url": "data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2018%2016%22%3E%3Cpath%20fill%3D%22%23111%22%20d%3D%22M0%2016h8V9H0zm10%200h8V9h-8zM0%207h8V0H0zm10-7v7h8V0z%22/%3E%3C/svg%3E",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322075655
+      },
+      {
+        "url": "data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2022%2013%22%3E%3Cpath%20fill%3D%22%23666%22%20d%3D%22M2.75%205H10V0H4.4zM0%2013h10V7H2zm20-6h-8v6h10zm-2.4-7H12v5h7.25z%22/%3E%3C/svg%3E",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322075656
+      },
+      {
+        "url": "data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2022%2013%22%3E%3Cpath%20fill%3D%22%23333%22%20d%3D%22M2.75%205H10V0H4.4zM0%2013h10V7H2zm20-6h-8v6h10zm-2.4-7H12v5h7.25z%22/%3E%3C/svg%3E",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322075656
+      },
+      {
+        "url": "data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2022%2013%22%3E%3Cpath%20fill%3D%22%23111%22%20d%3D%22M2.75%205H10V0H4.4zM0%2013h10V7H2zm20-6h-8v6h10zm-2.4-7H12v5h7.25z%22/%3E%3C/svg%3E",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322075657
+      },
+      {
+        "url": "https://maps.googleapis.com/$rpc/google.internal.maps.mapsjs.v1.MapsJsInternalService/GetViewportInfo",
+        "status": 200,
+        "method": "POST",
+        "timestamp": 1782322075670
+      },
+      {
+        "url": "https://fonts.gstatic.com/s/roboto/v51/KFO7CnqEu92Fr1ME7kSn66aGLdTylUAMa3yUBA.woff2",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322075712
+      },
+      {
+        "url": "https://maps.gstatic.com/mapfiles/api-3/images/drag-cross_hdpi.png",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322075737
+      },
+      {
+        "url": "https://maps.gstatic.com/mapfiles/api-3/images/cb_scout5_hdpi.png",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322075795
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/img/icons/favicon.ico",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322076103
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/cronotacografo",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322080885
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/css/core.min.css",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322080932
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/css/app.min.css",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322080933
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/css/kendo.theadmin.css?v=O7VwSP8rjrmBzZ-Fo4LD-F24ZtnVJzsqKK9ugXipFLk",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322080934
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/css/kendo.custom.css?v=a9aOlraxSrmUqzq1Gtgm1vtVwnHRq6al7Owi2WfFyqg",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322080936
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/css/plugins.all.min.css?v=Otw15_aYbfeplId5fn8aBtq9YbE8xaQUjEnFYoA6uE4",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322080939
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/css/custom.css?v=CU1UngmY_m6VLpPd8qeqfRsF_C3-9oKLyRS3zaybwd0",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322080946
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/css/thirdparty.bundle.css?v=Aq6T6xYx9E_8u6hHNpwrwKvL8BWrEPjj2YpseBWIiSU",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322080947
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/css/font.css?v=9XlJwVpNuPeFIoyiTKEhVt_EPOTqwcu6ABAGCIXW65s",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322080950
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/js/core.min.js",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322080950
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/js/kendo/jszip.min.js?v=xgOYhOfm9WY0Fu2ybMiUjV372F8pJzhUMLL0o5Af5D8",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322080951
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/js/kendo/kendo.all.min.js?v=YqyyQi-hEbM8RnK5ji99PSGgdOSyo6mjiF2vNkLlDOs",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322080952
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/js/kendo/kendo.maskedDatePicker.min.js?v=opA62mK8EiuVzgQYBSDm-kY-5WgSlJOPRCs6Siitpbc",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322080953
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/js/kendo/kendo.aspnetmvc.min.js?v=ADQqQAvb5EopGSkkcHq1l5U5sGogGtc3QYfZ-OP6bBo",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322080953
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/js/kendo/cultures/kendo.culture.pt-BR.min.js?v=8C8B4Cd4nxlpjfzJEgoMVahfAPv4qKlqxzb4IMbl1cA",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322080953
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/js/kendo/messages/kendo.messages.pt-BR.min.js?v=amZmqBRvU_rKjdVN2pyylsNPXBMkSbpL8bzxwiD6ois",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322080954
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/img/logo-icon-light.svg",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322080954
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/img/logo-light.svg",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322080955
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/img/login-user.png",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322080955
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/_content/NToastNotify/toastr.js?8.0.0.0",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322080967
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/js/jquery.validation.all.min.js?v=qgb0vGVp2SpiFgCC1-czLl7tvUwSTiSvvhNPDTigZLA",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322080968
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/js/globalize.all.min.js?v=kZ-95WxC5aAv_oBlcv4qilVARTgN7BjVcRjsApdu9nM",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322080969
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/js/plugins.all.min.js?v=7G8SL8E462D6QXaTFNXtYkeS2aTrK6h19fc-r31_tvc",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322080970
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/js/thirdparty.bundle.js?v=MjRZhnBI0m3lyonMNVaR2LW7LbB5g43ZURKCF7gZErw",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322080971
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/js/app.min.js",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322080971
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/js/script.js?v=ubnxLJkl4mX_b02CEgqpX6wAmuvsQznkY3Gl5SEUxUc",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322080972
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/js/util.js?v=zuJ-2QCpebDiDyxSL1Iew-x8o5YItYFUjBDmns8XwCc",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322080972
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/js/jquery.cascadingDropDown.js?v=lK3ooxGGxdpnjJJWjgDKMN88JphDA3ZGEemiXDpPbeI",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322080982
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/js/placa-mercosul-brasil.js?v=J4yrDYVS-WrGU7c-JKcY85YlXijtxbpKJlJMX68FPgk",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322080983
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/js/enums.js?v=HQJ3cEvUxMATYl4TAyQyx47BX787kqcH2zGQIRjk9yI",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322080986
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/js/grid-actions.js?v=SvrLFuPftdwAuXHtnHizyIrHYq64hV_OIdaySJqszXQ",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322080987
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/js/liveSearch.js?v=eDnEyZ1fHYJJNEaB_uBRck0sS1RtMKAFolGW5n5UTRc",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322080987
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/js/changelog.js?v=P5uRtsk04tnwbHKkenqLBlK4YO2CxvMJghAqUZ53-ck",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322080988
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/js/global-select2.js?v=XWgfVgbMyAuFGVsWzWqowVbSsilYfyu7OAswx55dueI",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322080989
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/fonts/fontawesome-webfont.woff2?v=4.7.0",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322081139
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/fonts/themify.woff?-fvbane",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322081144
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/fonts/gudea-v5-latin-regular.woff2",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322081145
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/fonts/gudea-v5-latin-700.woff2",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322081146
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/lib/flatpickr/flatpickr.min.css",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322081147
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/lib/flatpickr/flatpickr.min.js",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322081148
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/img/icons/manifest.json",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322081200
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/operacao/alertasbloqueio",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322081388
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/afericao/alertasvencimento",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322081394
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/usuario/obtemmetadiariaprocessamentousuario",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322081397
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/lib/flatpickr/l10n/pt.js",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322081397
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/js/triagem-cronotacografo.js?v=7l07Cqw2GzVzLR_4GLfVEYKgvIwhn5VLs0MmQkMokAM",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322081398
+      },
+      {
+        "url": "https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322081665
+      },
+      {
+        "url": "https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322081666
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/vendor/ionicons/css/ionicons.min.css",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322081780
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/img/icons/favicon.ico",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322081968
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/data/changelog.json",
+        "status": 304,
+        "method": "GET",
+        "timestamp": 1782322082121
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/cronotacografo/datahandler",
+        "status": 200,
+        "method": "POST",
+        "timestamp": 1782322089292
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/faixa/getfaixasporequipamento",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322091351
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/cronotacografo/datahandler",
+        "status": 200,
+        "method": "POST",
+        "timestamp": 1782322108051
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/relatorio/relatorioeventoequipamento",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322114250
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/css/core.min.css",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322114277
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/css/app.min.css",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322114279
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/css/kendo.theadmin.css?v=O7VwSP8rjrmBzZ-Fo4LD-F24ZtnVJzsqKK9ugXipFLk",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322114279
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/css/kendo.custom.css?v=a9aOlraxSrmUqzq1Gtgm1vtVwnHRq6al7Owi2WfFyqg",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322114281
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/css/plugins.all.min.css?v=Otw15_aYbfeplId5fn8aBtq9YbE8xaQUjEnFYoA6uE4",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322114281
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/css/custom.css?v=CU1UngmY_m6VLpPd8qeqfRsF_C3-9oKLyRS3zaybwd0",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322114282
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/css/thirdparty.bundle.css?v=Aq6T6xYx9E_8u6hHNpwrwKvL8BWrEPjj2YpseBWIiSU",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322114284
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/css/font.css?v=9XlJwVpNuPeFIoyiTKEhVt_EPOTqwcu6ABAGCIXW65s",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322114284
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/js/core.min.js",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322114285
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/js/kendo/jszip.min.js?v=xgOYhOfm9WY0Fu2ybMiUjV372F8pJzhUMLL0o5Af5D8",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322114286
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/js/kendo/kendo.all.min.js?v=YqyyQi-hEbM8RnK5ji99PSGgdOSyo6mjiF2vNkLlDOs",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322114286
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/js/kendo/kendo.maskedDatePicker.min.js?v=opA62mK8EiuVzgQYBSDm-kY-5WgSlJOPRCs6Siitpbc",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322114286
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/js/kendo/kendo.aspnetmvc.min.js?v=ADQqQAvb5EopGSkkcHq1l5U5sGogGtc3QYfZ-OP6bBo",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322114287
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/js/kendo/cultures/kendo.culture.pt-BR.min.js?v=8C8B4Cd4nxlpjfzJEgoMVahfAPv4qKlqxzb4IMbl1cA",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322114287
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/js/kendo/messages/kendo.messages.pt-BR.min.js?v=amZmqBRvU_rKjdVN2pyylsNPXBMkSbpL8bzxwiD6ois",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322114287
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/img/logo-icon-light.svg",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322114288
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/img/logo-light.svg",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322114288
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/img/login-user.png",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322114288
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/fonts/fontawesome-webfont.woff2?v=4.7.0",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322114534
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/fonts/themify.woff?-fvbane",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322114535
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/fonts/gudea-v5-latin-regular.woff2",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322114535
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/fonts/gudea-v5-latin-700.woff2",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322114536
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/img/icons/manifest.json",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322114560
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/afericao/alertasvencimento",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322115537
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/usuario/obtemmetadiariaprocessamentousuario",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322115548
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/operacao/alertasbloqueio",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322115586
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/_content/NToastNotify/toastr.js?8.0.0.0",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322115630
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/js/jquery.validation.all.min.js?v=qgb0vGVp2SpiFgCC1-czLl7tvUwSTiSvvhNPDTigZLA",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322115631
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/js/globalize.all.min.js?v=kZ-95WxC5aAv_oBlcv4qilVARTgN7BjVcRjsApdu9nM",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322115632
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/js/plugins.all.min.js?v=7G8SL8E462D6QXaTFNXtYkeS2aTrK6h19fc-r31_tvc",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322115680
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/js/thirdparty.bundle.js?v=MjRZhnBI0m3lyonMNVaR2LW7LbB5g43ZURKCF7gZErw",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322115896
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/js/app.min.js",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322115913
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/js/script.js?v=ubnxLJkl4mX_b02CEgqpX6wAmuvsQznkY3Gl5SEUxUc",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322115917
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/js/util.js?v=zuJ-2QCpebDiDyxSL1Iew-x8o5YItYFUjBDmns8XwCc",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322115918
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/js/jquery.cascadingDropDown.js?v=lK3ooxGGxdpnjJJWjgDKMN88JphDA3ZGEemiXDpPbeI",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322115919
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/js/placa-mercosul-brasil.js?v=J4yrDYVS-WrGU7c-JKcY85YlXijtxbpKJlJMX68FPgk",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322115920
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/js/enums.js?v=HQJ3cEvUxMATYl4TAyQyx47BX787kqcH2zGQIRjk9yI",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322115921
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/js/grid-actions.js?v=SvrLFuPftdwAuXHtnHizyIrHYq64hV_OIdaySJqszXQ",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322115921
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/js/liveSearch.js?v=eDnEyZ1fHYJJNEaB_uBRck0sS1RtMKAFolGW5n5UTRc",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322116004
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/js/changelog.js?v=P5uRtsk04tnwbHKkenqLBlK4YO2CxvMJghAqUZ53-ck",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322116005
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/js/global-select2.js?v=XWgfVgbMyAuFGVsWzWqowVbSsilYfyu7OAswx55dueI",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322116015
+      },
+      {
+        "url": "https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322116039
+      },
+      {
+        "url": "https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322116041
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/vendor/ionicons/css/ionicons.min.css",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322116220
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/img/icons/favicon.ico",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322116238
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/data/changelog.json",
+        "status": 304,
+        "method": "GET",
+        "timestamp": 1782322116341
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/relatorio/datahandlerfiltereventoequipamento",
+        "status": 200,
+        "method": "POST",
+        "timestamp": 1782322128854
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/faixa",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322133603
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/css/core.min.css",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322133631
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/css/app.min.css",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322133632
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/css/kendo.theadmin.css?v=O7VwSP8rjrmBzZ-Fo4LD-F24ZtnVJzsqKK9ugXipFLk",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322133632
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/css/kendo.custom.css?v=a9aOlraxSrmUqzq1Gtgm1vtVwnHRq6al7Owi2WfFyqg",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322133633
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/css/plugins.all.min.css?v=Otw15_aYbfeplId5fn8aBtq9YbE8xaQUjEnFYoA6uE4",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322133634
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/css/custom.css?v=CU1UngmY_m6VLpPd8qeqfRsF_C3-9oKLyRS3zaybwd0",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322133634
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/css/thirdparty.bundle.css?v=Aq6T6xYx9E_8u6hHNpwrwKvL8BWrEPjj2YpseBWIiSU",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322133634
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/css/font.css?v=9XlJwVpNuPeFIoyiTKEhVt_EPOTqwcu6ABAGCIXW65s",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322133635
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/js/core.min.js",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322133635
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/js/kendo/jszip.min.js?v=xgOYhOfm9WY0Fu2ybMiUjV372F8pJzhUMLL0o5Af5D8",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322133635
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/js/kendo/kendo.all.min.js?v=YqyyQi-hEbM8RnK5ji99PSGgdOSyo6mjiF2vNkLlDOs",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322133636
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/js/kendo/kendo.maskedDatePicker.min.js?v=opA62mK8EiuVzgQYBSDm-kY-5WgSlJOPRCs6Siitpbc",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322133640
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/js/kendo/kendo.aspnetmvc.min.js?v=ADQqQAvb5EopGSkkcHq1l5U5sGogGtc3QYfZ-OP6bBo",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322133641
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/js/kendo/cultures/kendo.culture.pt-BR.min.js?v=8C8B4Cd4nxlpjfzJEgoMVahfAPv4qKlqxzb4IMbl1cA",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322133642
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/js/kendo/messages/kendo.messages.pt-BR.min.js?v=amZmqBRvU_rKjdVN2pyylsNPXBMkSbpL8bzxwiD6ois",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322133644
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/img/logo-icon-light.svg",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322133646
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/img/logo-light.svg",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322133648
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/img/login-user.png",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322133649
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/fonts/fontawesome-webfont.woff2?v=4.7.0",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322133828
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/fonts/themify.woff?-fvbane",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322133829
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/fonts/gudea-v5-latin-regular.woff2",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322133831
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/fonts/gudea-v5-latin-700.woff2",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322133831
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/img/icons/manifest.json",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322133859
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/_content/NToastNotify/toastr.js?8.0.0.0",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322134662
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/js/jquery.validation.all.min.js?v=qgb0vGVp2SpiFgCC1-czLl7tvUwSTiSvvhNPDTigZLA",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322134663
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/js/globalize.all.min.js?v=kZ-95WxC5aAv_oBlcv4qilVARTgN7BjVcRjsApdu9nM",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322134663
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/js/plugins.all.min.js?v=7G8SL8E462D6QXaTFNXtYkeS2aTrK6h19fc-r31_tvc",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322134699
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/usuario/obtemmetadiariaprocessamentousuario",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322134703
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/js/thirdparty.bundle.js?v=MjRZhnBI0m3lyonMNVaR2LW7LbB5g43ZURKCF7gZErw",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322134961
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/afericao/alertasvencimento",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322134967
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/operacao/alertasbloqueio",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322134967
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/js/app.min.js",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322134980
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/js/script.js?v=ubnxLJkl4mX_b02CEgqpX6wAmuvsQznkY3Gl5SEUxUc",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322134981
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/js/util.js?v=zuJ-2QCpebDiDyxSL1Iew-x8o5YItYFUjBDmns8XwCc",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322134981
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/js/jquery.cascadingDropDown.js?v=lK3ooxGGxdpnjJJWjgDKMN88JphDA3ZGEemiXDpPbeI",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322134982
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/js/placa-mercosul-brasil.js?v=J4yrDYVS-WrGU7c-JKcY85YlXijtxbpKJlJMX68FPgk",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322134982
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/js/enums.js?v=HQJ3cEvUxMATYl4TAyQyx47BX787kqcH2zGQIRjk9yI",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322134982
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/js/grid-actions.js?v=SvrLFuPftdwAuXHtnHizyIrHYq64hV_OIdaySJqszXQ",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322134982
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/js/liveSearch.js?v=eDnEyZ1fHYJJNEaB_uBRck0sS1RtMKAFolGW5n5UTRc",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322134983
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/js/changelog.js?v=P5uRtsk04tnwbHKkenqLBlK4YO2CxvMJghAqUZ53-ck",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322134983
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/js/global-select2.js?v=XWgfVgbMyAuFGVsWzWqowVbSsilYfyu7OAswx55dueI",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322134984
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/js/grid-actions.js",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322135149
+      },
+      {
+        "url": "https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322135154
+      },
+      {
+        "url": "https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322135154
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/img/icons/favicon.ico",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322135377
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/faixa/datahandler",
+        "status": 200,
+        "method": "POST",
+        "timestamp": 1782322135571
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/data/changelog.json",
+        "status": 304,
+        "method": "GET",
+        "timestamp": 1782322135584
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/consultacronotacografo",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322144645
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/css/core.min.css",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322144684
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/css/app.min.css",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322144686
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/css/kendo.theadmin.css?v=O7VwSP8rjrmBzZ-Fo4LD-F24ZtnVJzsqKK9ugXipFLk",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322144686
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/css/kendo.custom.css?v=a9aOlraxSrmUqzq1Gtgm1vtVwnHRq6al7Owi2WfFyqg",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322144687
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/css/plugins.all.min.css?v=Otw15_aYbfeplId5fn8aBtq9YbE8xaQUjEnFYoA6uE4",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322144687
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/css/custom.css?v=CU1UngmY_m6VLpPd8qeqfRsF_C3-9oKLyRS3zaybwd0",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322144689
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/css/thirdparty.bundle.css?v=Aq6T6xYx9E_8u6hHNpwrwKvL8BWrEPjj2YpseBWIiSU",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322144689
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/css/font.css?v=9XlJwVpNuPeFIoyiTKEhVt_EPOTqwcu6ABAGCIXW65s",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322144698
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/js/core.min.js",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322144699
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/js/kendo/jszip.min.js?v=xgOYhOfm9WY0Fu2ybMiUjV372F8pJzhUMLL0o5Af5D8",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322144699
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/js/kendo/kendo.all.min.js?v=YqyyQi-hEbM8RnK5ji99PSGgdOSyo6mjiF2vNkLlDOs",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322144700
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/js/kendo/kendo.maskedDatePicker.min.js?v=opA62mK8EiuVzgQYBSDm-kY-5WgSlJOPRCs6Siitpbc",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322144700
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/js/kendo/kendo.aspnetmvc.min.js?v=ADQqQAvb5EopGSkkcHq1l5U5sGogGtc3QYfZ-OP6bBo",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322144702
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/js/kendo/cultures/kendo.culture.pt-BR.min.js?v=8C8B4Cd4nxlpjfzJEgoMVahfAPv4qKlqxzb4IMbl1cA",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322144702
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/js/kendo/messages/kendo.messages.pt-BR.min.js?v=amZmqBRvU_rKjdVN2pyylsNPXBMkSbpL8bzxwiD6ois",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322144703
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/img/logo-icon-light.svg",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322144703
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/img/logo-light.svg",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322144704
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/img/login-user.png",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322144704
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/_content/NToastNotify/toastr.js?8.0.0.0",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322144710
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/js/jquery.validation.all.min.js?v=qgb0vGVp2SpiFgCC1-czLl7tvUwSTiSvvhNPDTigZLA",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322144711
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/js/globalize.all.min.js?v=kZ-95WxC5aAv_oBlcv4qilVARTgN7BjVcRjsApdu9nM",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322144711
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/js/plugins.all.min.js?v=7G8SL8E462D6QXaTFNXtYkeS2aTrK6h19fc-r31_tvc",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322144712
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/js/thirdparty.bundle.js?v=MjRZhnBI0m3lyonMNVaR2LW7LbB5g43ZURKCF7gZErw",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322144712
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/js/app.min.js",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322144712
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/js/script.js?v=ubnxLJkl4mX_b02CEgqpX6wAmuvsQznkY3Gl5SEUxUc",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322144712
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/js/util.js?v=zuJ-2QCpebDiDyxSL1Iew-x8o5YItYFUjBDmns8XwCc",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322144713
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/js/jquery.cascadingDropDown.js?v=lK3ooxGGxdpnjJJWjgDKMN88JphDA3ZGEemiXDpPbeI",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322144714
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/js/placa-mercosul-brasil.js?v=J4yrDYVS-WrGU7c-JKcY85YlXijtxbpKJlJMX68FPgk",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322144715
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/js/enums.js?v=HQJ3cEvUxMATYl4TAyQyx47BX787kqcH2zGQIRjk9yI",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322144715
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/js/grid-actions.js?v=SvrLFuPftdwAuXHtnHizyIrHYq64hV_OIdaySJqszXQ",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322144715
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/js/liveSearch.js?v=eDnEyZ1fHYJJNEaB_uBRck0sS1RtMKAFolGW5n5UTRc",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322144715
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/js/changelog.js?v=P5uRtsk04tnwbHKkenqLBlK4YO2CxvMJghAqUZ53-ck",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322144715
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/js/global-select2.js?v=XWgfVgbMyAuFGVsWzWqowVbSsilYfyu7OAswx55dueI",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322144715
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/fonts/fontawesome-webfont.woff2?v=4.7.0",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322144853
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/fonts/themify.woff?-fvbane",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322144853
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/fonts/gudea-v5-latin-regular.woff2",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322144854
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/fonts/gudea-v5-latin-700.woff2",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322144854
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/img/icons/manifest.json",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322144910
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/usuario/obtemmetadiariaprocessamentousuario",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322145222
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/operacao/alertasbloqueio",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322145228
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/afericao/alertasvencimento",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322145233
+      },
+      {
+        "url": "https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322145248
+      },
+      {
+        "url": "https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322145249
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/vendor/ionicons/css/ionicons.min.css",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322145336
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/img/icons/favicon.ico",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322145421
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/data/changelog.json",
+        "status": 304,
+        "method": "GET",
+        "timestamp": 1782322145584
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/consultacronotacografo/datahandler",
+        "status": 200,
+        "method": "POST",
+        "timestamp": 1782322145720
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/consultacronotacografo/getconsultaquantidade",
+        "status": 200,
+        "method": "GET",
+        "timestamp": 1782322145886
+      },
+      {
+        "url": "https://homologacao.axhub.axion.ws/consultacronotacografo/datahandler",
+        "status": 200,
+        "method": "POST",
+        "timestamp": 1782322146131
+      }
+    ],
+    "console": [
+      {
+        "type": "warn",
+        "text": "As of February 21st, 2024, google.maps.Marker is deprecated. Please use google.maps.marker.AdvancedMarkerElement instead. At this time, google.maps.Marker is not scheduled to be discontinued, but google.maps.marker.AdvancedMarkerElement is recommended over google.maps.Marker. While google.maps.Marker will continue to receive bug fixes for any major regressions, existing bugs in google.maps.Marker will not be addressed. At least 12 months notice will be given before support is discontinued. Please see https://developers.google.com/maps/deprecations for additional details and https://developers.google.com/maps/documentation/javascript/advanced-markers/migration for the migration guide.",
+        "timestamp": 1782322071801
+      }
+    ],
+    "errors": [
+      {
+        "message": "target.className.split is not a function",
+        "stack": "TypeError: target.className.split is not a function\n    at <anonymous> (:6:60)",
+        "timestamp": 1782322123582
+      }
+    ]
+  },
+  "parameters": {
+    "_USERNAME": "Admin",
+    "_DATAHORAINICIO": "02/06/2026 00:00",
+    "_DATAHORAFIM": "",
+    "": "00"
+  },
+  "reusable": true,
+  "parameterizable": true
+}

@@ -22,7 +22,7 @@ Permite cadastrar e gerenciar os arcos de fiscalização vinculados às operaç�
 |-------|-----------|
 | **Nome** | Identificação do arco |
 | **Localização** | Endereço ou referência |
-| **Equipamentos** | Equipamentos vinculados ao arco |
+| Equipamentos | Equipamentos vinculados ao arco |
 | **Status** | Ativo ou Inativo |
 
 ---

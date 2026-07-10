@@ -1,112 +1,218 @@
-import React, { useState } from "react";
+﻿import React, { useState, useEffect, useMemo } from "react";
 import { Link } from "react-router-dom";
+import { api } from "../services/api.js";
+import { AXHUB_SITES, AXCROSS_SITES } from "../data/sitesData.js";
 import {
-  Brain, LayoutDashboard, ScanSearch, BookOpen, Ticket,
-  Bot, MessageCircle, Headphones,
-  ScanLine, CheckCircle2, Target, ShieldCheck, BarChart3,
-  Landmark, PieChart, Map, Ruler,
-  BookMarked, FileText, Search, GraduationCap, Clock, ScrollText,
-  Settings, ArrowRight, Globe, Shield, TrendingUp
+  Brain, LayoutDashboard, ScanSearch, Headphones,
+  ScanLine, Target, ShieldCheck, Globe, Shield, TrendingUp,
+  ArrowRight, RefreshCw, BarChart3, Map
 } from "lucide-react";
 
-const FILTER_TABS = [
-  { id: "all", label: "Todos" },
-  { id: "operation", label: "Operação" },
-  { id: "support", label: "Atendimento" },
-  { id: "quality", label: "Qualidade" },
-  { id: "intelligence", label: "Inteligência" },
-  { id: "resources", label: "Recursos" },
-];
+/* ─── Gauge SVG (tema claro) ─── */
+function Gauge({ value, max = 100, color, size = 120, label, unit = "%" }) {
+  const r = (size - 18) / 2;
+  const circ = 2 * Math.PI * r;
+  const pct = typeof value === "number" ? Math.min(1, Math.max(0, value / max)) : 0;
+  const offset = circ - pct * circ;
+  const cx = size / 2, cy = size / 2;
+  const display = value === null ? "—" : (unit === "%" ? `${value}%` : String(value));
+  return (
+    <div style={{ textAlign: "center" }}>
+      <svg width={size} height={size} viewBox={`0 0 ${size} ${size}`}>
+        <circle cx={cx} cy={cy} r={r} fill="none" stroke="#e8edf4" strokeWidth={11} />
+        <circle cx={cx} cy={cy} r={r} fill="none" stroke={color} strokeWidth={10}
+          strokeDasharray={circ} strokeDashoffset={offset} strokeLinecap="round"
+          style={{ transform: "rotate(-90deg)", transformOrigin: "50% 50%", transition: "stroke-dashoffset 1.2s ease" }} />
+        <text x="50%" y="46%" textAnchor="middle" dominantBaseline="central"
+          fill="#1e293b" fontSize={size * 0.18} fontWeight="800">{display}</text>
+        <text x="50%" y="66%" textAnchor="middle" dominantBaseline="central"
+          fill="#94a3b8" fontSize={size * 0.085}>{label}</text>
+      </svg>
+    </div>
+  );
+}
 
-const SERVICES = [
-  { to: "/intelligence-hub", icon: Brain, label: "Intelligence Hub", group: "operation", color: "#3b82f6" },
-  { to: "/dashboard", icon: LayoutDashboard, label: "Dashboard", group: "operation", color: "#60a5fa" },
-  { to: "/analise", icon: ScanSearch, label: "Análise de Sites", group: "operation", color: "#2563eb" },
-  { to: "/guia-sites", icon: BookOpen, label: "Guia por Site", group: "operation", color: "#1d4ed8" },
-  { to: "/chamados-sites", icon: Ticket, label: "Chamados × Sites", group: "operation", color: "#1e40af" },
+/* ─── KPI Card (gauge + link) ─── */
+function KpiCard({ value, max, color, label, unit, linkTo, linkLabel }) {
+  return (
+    <Link to={linkTo} className="hp-kpi-card" style={{ "--kpi-color": color }}>
+      <Gauge value={value} max={max} color={color} size={120} label={label} unit={unit} />
+      <div className="hp-kpi-link">{linkLabel} <ArrowRight size={12} /></div>
+    </Link>
+  );
+}
 
-  { to: "/chat", icon: Bot, label: "Chat IA", group: "support", color: "#059669" },
-  { to: "/whatsapp", icon: MessageCircle, label: "WhatsApp", group: "support", color: "#10b981" },
-  { to: "/helpdesk", icon: Headphones, label: "Helpdesk", group: "support", color: "#34d399" },
+/* ─── Progress bar ─── */
+function ProgressRow({ label, value, max, color }) {
+  const pct = Math.min(100, Math.round((value / max) * 100));
+  return (
+    <div style={{ marginBottom: 10 }}>
+      <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 4 }}>
+        <span style={{ fontSize: 12, color: "#64748b" }}>{label}</span>
+        <span style={{ fontSize: 12, fontWeight: 700, color }}>{value}/{max}</span>
+      </div>
+      <div style={{ height: 6, background: "#f1f5f9", borderRadius: 4, overflow: "hidden" }}>
+        <div style={{ height: "100%", width: `${pct}%`, background: color, borderRadius: 4, transition: "width 1.2s ease" }} />
+      </div>
+    </div>
+  );
+}
 
-  { to: "/analise-imagens", icon: ScanLine, label: "Análise de Imagens", group: "quality", color: "#7c3aed" },
-  { to: "/confianca", icon: CheckCircle2, label: "Fila de Revisão", group: "quality", color: "#8b5cf6" },
-  { to: "/sla-compliance", icon: Target, label: "SLA Compliance", group: "quality", color: "#a78bfa" },
-  { to: "/conformidade", icon: ShieldCheck, label: "Conformidade", group: "quality", color: "#6d28d9" },
-  { to: "/relatorio-fluxo", icon: BarChart3, label: "Relatório de Fluxo", group: "quality", color: "#5b21b6" },
+/* ─── Dashboard Module Card ─── */
+function ModuleCard({ icon: Icon, title, color, metric, metricLabel, desc, to, href, tag }) {
+  const inner = (
+    <div className="hp-module-card" style={{ "--mc-color": color }}>
+      <div className="hp-mc-header">
+        <div className="hp-mc-icon" style={{ background: color + "18" }}>
+          <Icon size={18} color={color} strokeWidth={1.8} />
+        </div>
+        {tag && <span className="hp-mc-tag" style={{ color, background: color + "12" }}>{tag}</span>}
+      </div>
+      <div className="hp-mc-metric" style={{ color }}>{metric}</div>
+      <div className="hp-mc-metric-lbl">{metricLabel}</div>
+      <div className="hp-mc-title">{title}</div>
+      <div className="hp-mc-desc">{desc}</div>
+      <div className="hp-mc-link" style={{ color }}>
+        {href ? "Abrir Docs" : "Ver Dashboard"} <ArrowRight size={12} />
+      </div>
+    </div>
+  );
+  if (href) return <a href={href} target="_blank" rel="noreferrer" style={{ textDecoration: "none" }}>{inner}</a>;
+  return <Link to={to} style={{ textDecoration: "none" }}>{inner}</Link>;
+}
 
-  { to: "/editais-gov", icon: Landmark, label: "Editais Gov", group: "intelligence", color: "#d97706" },
-  { to: "/analisa-multi", icon: PieChart, label: "Multi-Produto", group: "intelligence", color: "#f59e0b" },
-  { to: "/roadmap", icon: Map, label: "Roadmap", group: "intelligence", color: "#eab308" },
-  { to: "/specs", icon: Ruler, label: "Specs Técnicas", group: "intelligence", color: "#ca8a04" },
-
-  { to: "/kb", icon: BookMarked, label: "Knowledge Base", group: "resources", color: "#0891b2" },
-  { to: "/gerar-doc", icon: FileText, label: "Gerador de Docs", group: "resources", color: "#06b6d4" },
-  { to: "/fontes", icon: Search, label: "Fontes de Pesquisa", group: "resources", color: "#22d3ee" },
-  { to: "/treinamento", icon: GraduationCap, label: "Treinamento", group: "resources", color: "#0e7490" },
-  { to: "/planilha-horas", icon: Clock, label: "Planilha de Horas", group: "resources", color: "#155e75" },
-  { to: "/logs", icon: ScrollText, label: "Logs do Sistema", group: "resources", color: "#164e63" },
-  { to: "/config", icon: Settings, label: "Configurações", group: "resources", color: "#475569" },
-];
-
+/* ─── Home Page ─── */
 export default function HomePage() {
-  const [filter, setFilter] = useState("all");
-  const filtered = filter === "all" ? SERVICES : SERVICES.filter(s => s.group === filter);
+  const [metrics, setMetrics] = useState({ tickets: null, loading: true });
+
+  const allSites = useMemo(() => [...AXHUB_SITES, ...AXCROSS_SITES], []);
+  const activeSites = useMemo(() => allSites.filter(s => s.status === "ativo"), [allSites]);
+
+  const topSites = useMemo(() =>
+    [...activeSites]
+      .filter(s => s.equipamentos)
+      .sort((a, b) => {
+        const ae = typeof a.equipamentos === "number" ? a.equipamentos : (a.equipamentos?.total || 0);
+        const be = typeof b.equipamentos === "number" ? b.equipamentos : (b.equipamentos?.total || 0);
+        return be - ae;
+      })
+      .slice(0, 5),
+    [activeSites]
+  );
+
+  const fetchMetrics = () => {
+    setMetrics(m => ({ ...m, loading: true }));
+    api.get("/helpdesk/tickets?mode=0&count=200")
+      .then(r => setMetrics({ tickets: r.data.total ?? 0, loading: false }))
+      .catch(() => setMetrics({ tickets: null, loading: false }));
+  };
+
+  useEffect(() => { fetchMetrics(); }, []);
+
+  const HEALTH = 89;
+  const OCR = 70.6;
+  const SITES_PCT = Math.round((activeSites.length / allSites.length) * 100);
 
   return (
     <div className="home-page">
-      {/* ══ Hero ══ */}
-      <section className="hero-section">
-        <div className="hero-inner">
-          <span className="hero-badge">Plataforma Unificada de Inteligência</span>
-          <h1 className="hero-title">Axion Tecnologia</h1>
-          <p className="hero-subtitle">
-            Gestão inteligente de trânsito, pesagem veicular e monitoramento cruzado
-          </p>
-          <div className="hero-stats">
-            <div className="hero-stat">
-              <strong>3</strong>
-              <span>Produtos</span>
+
+      {/* ══ Header ══ */}
+      <section className="hp-header">
+        <div className="hp-header-inner">
+          <div>
+            <div className="hp-badge">Plataforma Unificada de Inteligência</div>
+            <h1 className="hp-title">Axion Tecnologia</h1>
+            <p className="hp-sub">Gestão inteligente de trânsito, pesagem veicular e monitoramento cruzado</p>
+          </div>
+          <button className="hp-refresh" onClick={fetchMetrics} title="Atualizar">
+            <RefreshCw size={13} style={{ animation: metrics.loading ? "spin 1s linear infinite" : "none" }} />
+            Atualizar
+          </button>
+        </div>
+      </section>
+
+      {/* ══ KPI Gauges ══ */}
+      <section className="hp-kpis">
+        <div className="hp-kpis-grid">
+          <KpiCard value={HEALTH} color="#3b82f6" label="Health Score" linkTo="/analise" linkLabel="Intelligence Hub" />
+          <KpiCard value={OCR} color="#06b6d4" label="OCR Médio" linkTo="/analise-imagens" linkLabel="Análise de Imagens" />
+          <KpiCard value={SITES_PCT} color="#10b981" label="Sites Ativos" linkTo="/operations-hub" linkLabel="Operations Hub" />
+          <KpiCard value={metrics.tickets !== null ? Math.min(metrics.tickets, 999) : null}
+            max={200} unit="" color="#f59e0b" label="Tickets Abertos" linkTo="/central-atendimento?tab=helpdesk" linkLabel="Helpdesk" />
+        </div>
+
+        {/* Mini bottom stats */}
+        <div className="hp-stats-row">
+          <div className="hp-stats-block">
+            <div className="hp-stats-label">Top Sites por Equipamentos</div>
+            <div style={{ display: "flex", gap: 16, alignItems: "flex-end", justifyContent: "center" }}>
+              {topSites.map((s, i) => {
+                const eq = typeof s.equipamentos === "number" ? s.equipamentos : (s.equipamentos?.total || 0);
+                const maxEq = typeof topSites[0]?.equipamentos === "number" ? topSites[0].equipamentos : (topSites[0]?.equipamentos?.total || 1);
+                const h = Math.max(12, Math.round((eq / maxEq) * 64));
+                const colors = ["#3b82f6", "#06b6d4", "#10b981", "#8b5cf6", "#f59e0b"];
+                return (
+                  <div key={s.id} style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 4 }}>
+                    <span style={{ fontSize: 10, color: colors[i], fontWeight: 700 }}>{eq}</span>
+                    <div style={{ width: 16, height: h, borderRadius: "3px 3px 0 0", background: colors[i], opacity: 0.85 }} />
+                    <span style={{ fontSize: 9, color: "#94a3b8", maxWidth: 44, textAlign: "center", lineHeight: 1.2 }}>
+                      {s.nome.slice(0, 7)}
+                    </span>
+                  </div>
+                );
+              })}
             </div>
-            <div className="hero-stat">
-              <strong>25+</strong>
-              <span>Sites Ativos</span>
-            </div>
-            <div className="hero-stat">
-              <strong>24/7</strong>
-              <span>Monitoramento</span>
-            </div>
-            <div className="hero-stat">
-              <strong>IA</strong>
-              <span>Integrada</span>
-            </div>
+          </div>
+          <div className="hp-stats-block" style={{ minWidth: 220 }}>
+            <div className="hp-stats-label">Distribuição por Sistema</div>
+            <ProgressRow label="AxHub" value={AXHUB_SITES.filter(s => s.status === "ativo").length} max={AXHUB_SITES.length} color="#3b82f6" />
+            <ProgressRow label="AxCross" value={AXCROSS_SITES.filter(s => s.status === "ativo").length} max={AXCROSS_SITES.length} color="#f59e0b" />
+            <ProgressRow label="Total Ativos" value={activeSites.length} max={allSites.length} color="#10b981" />
           </div>
         </div>
       </section>
 
-      {/* ══ Serviços ══ */}
-      <section className="services-section">
-        <h2 className="section-heading">Serviços</h2>
-        <div className="services-filter">
-          {FILTER_TABS.map(tab => (
-            <button
-              key={tab.id}
-              className={`svc-filter-btn ${filter === tab.id ? "active" : ""}`}
-              onClick={() => setFilter(tab.id)}
-            >
-              {tab.label}
-            </button>
-          ))}
-        </div>
-        <div className="svc-grid">
-          {filtered.map(svc => (
-            <Link to={svc.to} key={svc.to} className="svc-card">
-              <div className="svc-card-icon" style={{ background: svc.color }}>
-                <svc.icon size={24} strokeWidth={1.5} color="#fff" />
-              </div>
-              <span className="svc-card-label">{svc.label}</span>
-            </Link>
-          ))}
+      {/* ══ Módulos ══ */}
+      <section className="hp-modules">
+        <h2 className="hp-section-title">Módulos do Sistema</h2>
+        <div className="hp-modules-grid">
+          <ModuleCard icon={Brain} title="Intelligence Hub" color="#3b82f6"
+            metric={`${HEALTH}%`} metricLabel="health score médio"
+            desc="Conformidade, health scores e anomalias por site"
+            to="/analise" tag="Live" />
+          <ModuleCard icon={LayoutDashboard} title="Operations Hub" color="#6366f1"
+            metric={String(activeSites.length)} metricLabel={`de ${allSites.length} sites`}
+            desc="KPIs operacionais, performance e mapa de rede"
+            to="/operations-hub" tag="Hub" />
+          <ModuleCard icon={Headphones} title="Helpdesk" color="#ef4444"
+            metric={metrics.tickets !== null ? String(metrics.tickets) : "—"}
+            metricLabel="tickets abertos"
+            desc="Chamados Jitbit com triagem e resposta via IA"
+            to="/central-atendimento?tab=helpdesk" tag="Jitbit" />
+          <ModuleCard icon={ScanLine} title="Análise de Imagens" color="#8b5cf6"
+            metric={`${OCR}%`} metricLabel="OCR médio AxHub"
+            desc="Análise contextual com GPT-4o Vision"
+            to="/analise-imagens" tag="GPT-4o" />
+          <ModuleCard icon={Target} title="SLA Compliance" color="#10b981"
+            metric="SLA" metricLabel="métricas de atendimento"
+            desc="Conformidade por prioridade, técnico e categoria"
+            to="/sla-compliance" />
+          <ModuleCard icon={ShieldCheck} title="Conformidade" color="#f59e0b"
+            metric="Editais" metricLabel="validação de requisitos"
+            desc="Requisitos técnicos por contrato e edital"
+            to="/conformidade" />
+          <ModuleCard icon={ScanSearch} title="Análise de Sites" color="#06b6d4"
+            metric={String(activeSites.length)} metricLabel="sites monitorados"
+            desc="Auditoria, anomalias e plano de correção"
+            to="/analise" />
+          <ModuleCard icon={BarChart3} title="Relatórios" color="#a78bfa"
+            metric="PDF" metricLabel="exportação e relatórios"
+            desc="Fluxo, SLA, planilha de horas e mais"
+            to="/relatorio-fluxo" />
+          <ModuleCard icon={Map} title="Hub de Análise" color="#34d399"
+            metric="4" metricLabel="módulos integrados"
+            desc="Busca unificada, diagnóstico e logs"
+            to="/hub-analise" />
         </div>
       </section>
 
@@ -140,6 +246,7 @@ export default function HomePage() {
           </article>
         </div>
       </section>
+
     </div>
   );
 }

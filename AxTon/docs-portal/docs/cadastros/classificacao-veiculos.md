@@ -1,14 +1,14 @@
 ---
 sidebar_position: 2
 title: Classificação de Veículos
-description: Cadastro e gestão das classificações de veículos no AxTon com PBT e eixos
+description: Cadastro e gestão das classificações de Veículos no AxTon com PBT e eixos
 ---
 
 # Classificação de Veículos
 
 ![Tela de Classificações](../img/axton-classificacoes.png)
 
-O módulo de classificação de veículos define as categorias reconhecidas pelo sistema AxTon. Cada classificação determina o **PBT Regulamentado** (Peso Bruto Total máximo permitido em toneladas) e o número de eixos aplicados nas operações de pesagem.
+O módulo de classificação de Veículos define as categorias reconhecidas pelo sistema AxTon. Cada classificação determina o **PBT Regulamentado** (Peso Bruto Total máximo permitido em toneladas) e o número de eixos aplicados nas operações de pesagem.
 
 ## Como acessar
 
@@ -22,7 +22,7 @@ O módulo de classificação de veículos define as categorias reconhecidas pelo
 |--------|-----------|
 | **Código** | Código numérico da classificação |
 | **Classe** | Sigla da classe (ex: 2C, 3S3, 3T6) |
-| **Denominação** | Nome completo da categoria do veículo |
+| **Denominação** | Nome completo da categoria do Veículo |
 | **Eixos** | Quantidade de eixos (dianteiros/traseiros) |
 | **Dimensões** | Comprimento máximo em metros |
 | **PBT Regulamentado** | Peso Bruto Total máximo em toneladas |
@@ -46,7 +46,7 @@ O módulo de classificação de veículos define as categorias reconhecidas pelo
 | 84 | **2I1** | Caminhão Trator + Semi Reboque | 4/5 | 43 |
 
 :::info PBT Regulamentado
-O **Peso Bruto Total (PBT)** é o limite legal de peso do veículo conforme a classificação. Pesagens acima desse valor (considerando a tolerância configurada) geram infração automática.
+O **Peso Bruto Total (PBT)** é o limite legal de peso do Veículo conforme a classificação. Pesagens acima desse valor (considerando a tolerância configurada) geram Infração automática.
 :::
 
 ## Cadastro
@@ -57,7 +57,7 @@ O **Peso Bruto Total (PBT)** é o limite legal de peso do veículo conforme a cl
 |-------|:-----------:|-----------|
 | **Código** | Sim | Código numérico único da classificação |
 | **Classe** | Sim | Sigla (ex: 3S3, 2S2, 3T6) |
-| **Denominação** | Sim | Nome completo da categoria do veículo |
+| **Denominação** | Sim | Nome completo da categoria do Veículo |
 | **Eixos** | Sim | No formato `dianteiros/traseiros` (ex: 2/3) |
 | **Dimensões** | Não | Comprimento máximo em metros |
 | **PBT Regulamentado** | Sim | Peso máximo em toneladas |
@@ -67,12 +67,12 @@ O **Peso Bruto Total (PBT)** é o limite legal de peso do veículo conforme a cl
 1. Na listagem, clique em **+ Novo**
 2. Informe o **Código** e a **Classe** (sigla)
 3. Preencha a **Denominação** completa
-4. Informe a configuração de **Eixos**
+4. Informe a Configuração de **Eixos**
 5. Informe o **PBT Regulamentado** em toneladas
 6. Clique em **Salvar**
 
 :::warning Atenção
-A alteração do PBT de uma classificação impacta diretamente o cálculo de infrações. Consulte a legislação vigente antes de modificar.
+A alteração do PBT de uma classificação impacta diretamente o cálculo de Infrações Consulte a legislação vigente antes de modificar.
 :::
 
 ## Veja também
@@ -101,7 +101,7 @@ A alteração do PBT de uma classificação impacta diretamente o cálculo de in
 | Campo | Obrigatório | Descrição |
 |-------|:-----------:|-----------|
 | **Código** | Sim | Código único de identificação da classificação |
-| **Descrição** | Sim | Nome da categoria de veículo (ex.: Caminhão 2 Eixos, Bitrem) |
+| **Descrição** | Sim | Nome da categoria de Veículo (ex.: Caminhão 2 Eixos, Bitrem) |
 | **Número de Eixos** | Sim | Quantidade de eixos que define a classificação |
 | **Peso Máximo (t)** | Sim | Limite máximo de peso bruto total para a categoria, em toneladas |
 | **Ativo** | Sim | Define se a classificação estará disponível nas operações |
@@ -116,9 +116,9 @@ A alteração do PBT de uma classificação impacta diretamente o cálculo de in
 6. Clique em **Salvar**
 
 :::warning Peso máximo
-O valor do peso máximo deve estar em conformidade com a legislação vigente para cada categoria de veículo. Consulte a regulamentação do órgão responsável antes de cadastrar ou alterar esses valores.
+O valor do peso máximo deve estar em conformidade com a legislação vigente para cada categoria de Veículo Consulte a regulamentação do órgão responsável antes de cadastrar ou alterar esses valores.
 :::
 
 :::tip Hierarquia de cadastros
-As classificações de veículos devem ser cadastradas antes do registro de operações de pesagem, pois são utilizadas na identificação do tipo de veículo fiscalizado.
+As classificações de Veículos devem ser cadastradas antes do registro de operações de pesagem, pois são utilizadas na identificação do tipo de Veículo fiscalizado.
 :::

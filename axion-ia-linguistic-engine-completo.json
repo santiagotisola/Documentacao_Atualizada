@@ -1,0 +1,988 @@
+{
+  "version": "1.0.0",
+  "moduleName": "Linguistic Validation Engine — AxionIA v4.0",
+  "description": "Motor corporativo de validação linguística automatizada para todos os projetos Axion. Combina ortografia, gramática, terminologia e padronização textual em uma única plataforma de auditoria.",
+  "lastUpdate": "2026-06-23",
+  "integration": "Spelling Validation Engine (v4.0)",
+  
+  "module": {
+    "name": "AxionIA - Linguistic Validation Engine",
+    "version": "1.0.0",
+    "enabled": true,
+    "type": "quality_assurance",
+    "category": "linguistic_analysis",
+    "priority": "high"
+  },
+  
+  "scope": {
+    "projects": [
+      "AxHub",
+      "AxCross",
+      "AxTon",
+      "AxionIA",
+      "AxDashboard",
+      "Multi360",
+      "VARCO",
+      "Documentação (Docusaurus)",
+      "APIs (Swagger/OpenAPI)",
+      "Scripts (PowerShell/Bash)",
+      "Todos os demais projetos cadastrados"
+    ],
+    
+    "sources": {
+      "userInterface": [
+        "menus",
+        "submenus",
+        "títulos",
+        "abas",
+        "botões",
+        "labels",
+        "tooltips",
+        "mensagens",
+        "alertas",
+        "notificações",
+        "descrições",
+        "placeholders",
+        "textos de ajuda",
+        "breadcrumbs",
+        "cards",
+        "modais",
+        "dropdowns",
+        "checkboxes",
+        "radio buttons",
+        "sliders"
+      ],
+      
+      "content": [
+        "relatórios",
+        "dashboards",
+        "configurações",
+        "documentação",
+        "tutoriais",
+        "guias",
+        "manuais",
+        "FAQs",
+        "changelogs",
+        "release notes"
+      ],
+      
+      "code": [
+        "comentários no código",
+        "docstrings",
+        "JSDoc",
+        "XML documentation comments",
+        "README files",
+        "CONTRIBUTING files"
+      ],
+      
+      "communication": [
+        "arquivos de tradução (i18n)",
+        "templates de email",
+        "mensagens de erro",
+        "mensagens de sucesso",
+        "mensagens de validação",
+        "logs apresentados ao usuário",
+        "notificações push",
+        "SMS templates",
+        "WhatsApp templates"
+      ]
+    }
+  },
+  
+  "validation": {
+    "orthography": {
+      "enabled": true,
+      "description": "Validação ortográfica contra dicionários oficiais",
+      "dictionaries": [
+        "Aurélio (450.000 palavras)",
+        "VOLP - Vocabulário Ortográfico da Língua Portuguesa",
+        "Michaelis",
+        "Houaiss (referência)",
+        "Dicionário customizado Axion"
+      ],
+      "rules": [
+        "Verificar palavras não encontradas",
+        "Detectar palavras duplicadas consecutivas",
+        "Identificar capitalização incorreta",
+        "Validar uso de hífen"
+      ]
+    },
+    
+    "grammar": {
+      "enabled": true,
+      "description": "Análise gramatical baseada em regras ABNT",
+      "rules": {
+        "concordanciaVerbal": {
+          "enabled": true,
+          "severity": "high",
+          "examples": {
+            "erro": "A equipe fizeram o trabalho",
+            "correto": "A equipe fez o trabalho"
+          }
+        },
+        
+        "concordanciaNominal": {
+          "enabled": true,
+          "severity": "high",
+          "examples": {
+            "erro": "Os documento estão prontos",
+            "correto": "Os documentos estão prontos"
+          }
+        },
+        
+        "regenciaVerbal": {
+          "enabled": true,
+          "severity": "medium",
+          "examples": {
+            "erro": "Assistir o filme",
+            "correto": "Assistir ao filme"
+          }
+        },
+        
+        "regenciaNominal": {
+          "enabled": true,
+          "severity": "medium",
+          "examples": {
+            "erro": "Obediência às normas",
+            "correto": "Obediência às normas"
+          }
+        },
+        
+        "crase": {
+          "enabled": true,
+          "severity": "medium",
+          "rules": [
+            "Antes de palavra feminina determinada",
+            "Em expressões de tempo determinadas",
+            "Em locuções adverbiais femininas",
+            "Em locuções prepositivas",
+            "Em locuções conjuntivas"
+          ],
+          "examples": {
+            "erro": "Vou a padaria",
+            "correto": "Vou à padaria"
+          }
+        },
+        
+        "colocacaoPronominal": {
+          "enabled": true,
+          "severity": "low",
+          "rules": [
+            "Próclise (pronome antes do verbo)",
+            "Ênclise (pronome após o verbo)",
+            "Mesóclise (pronome no meio do verbo)"
+          ],
+          "examples": {
+            "erro": "Me disseram que...",
+            "correto": "Disseram-me que..."
+          }
+        }
+      }
+    },
+    
+    "accentuation": {
+      "enabled": true,
+      "description": "Validação de acentuação gráfica",
+      "rules": [
+        "Acentos agudos (á, é, í, ó, ú)",
+        "Acentos circunflexos (â, ê, ô)",
+        "Acentos graves (crase: à, às)",
+        "Til (ã, õ)",
+        "Trema (removido pelo Acordo Ortográfico)"
+      ],
+      "commonErrors": [
+        "veiculo → veículo",
+        "publico → público",
+        "numero → número",
+        "relatorio → relatório",
+        "historico → histórico"
+      ]
+    },
+    
+    "capitalization": {
+      "enabled": true,
+      "description": "Padronização de uso de maiúsculas/minúsculas",
+      "rules": {
+        "sentenceStart": "Primeira letra maiúscula no início de frases",
+        "properNouns": "Nomes próprios com inicial maiúscula",
+        "acronyms": "Siglas em maiúsculas (ABNT, SQL, API)",
+        "titles": {
+          "style": "sentence_case",
+          "options": ["sentence_case", "title_case", "all_caps"],
+          "recommendation": "Usar sentence case para títulos de seções"
+        },
+        "brandNames": {
+          "AxHub": "AxHub (não Axhub, não AXHUB)",
+          "AxCross": "AxCross",
+          "AxTon": "AxTon",
+          "AxionIA": "AxionIA"
+        }
+      }
+    },
+    
+    "punctuation": {
+      "enabled": true,
+      "description": "Validação de pontuação e formatação",
+      "rules": {
+        "endOfSentence": {
+          "required": true,
+          "allowed": [".", "!", "?"],
+          "error": "Frase sem pontuação final"
+        },
+        
+        "spacing": {
+          "afterPunctuation": 1,
+          "beforePunctuation": 0,
+          "error": "Espaçamento incorreto ao redor de pontuação"
+        },
+        
+        "ellipsis": {
+          "format": "...",
+          "error": "Usar ... (três pontos) não .. (dois)",
+          "avoid": "reticências excessivas (......)"
+        },
+        
+        "quotes": {
+          "style": "aspas duplas",
+          "opening": "\"",
+          "closing": "\"",
+          "avoid": "« » (usar apenas em citações específicas)"
+        },
+        
+        "dash": {
+          "types": {
+            "travessao": "— (para pausas, diálogos)",
+            "hifen": "- (para palavras compostas)",
+            "menosUnario": "− (operador matemático)"
+          }
+        },
+        
+        "apostrophe": {
+          "correct": "'",
+          "avoid": "`",
+          "error": "Não usar acento grave como apóstrofo"
+        }
+      }
+    },
+    
+    "pluralization": {
+      "enabled": true,
+      "description": "Validação de plural/singular correto",
+      "rules": [
+        "Singular após numeral 1",
+        "Plural após numerais maiores que 1",
+        "Concordância com quantificadores (muitos, poucos, alguns)",
+        "Plural de palavras compostas",
+        "Plural de substantivos terminados em -ão (ões, ães, ãos)"
+      ],
+      "examples": {
+        "erro": "1 relatórios encontrados",
+        "correto": "1 relatório encontrado"
+      }
+    },
+    
+    "terminology_consistency": {
+      "enabled": true,
+      "description": "Garantir uso consistente de termos técnicos e nomenclaturas",
+      "standardTerms": {
+        "produtos": {
+          "AxHub": ["AxHub", "NOT: Axhub, NOT: ax-hub, NOT: AXHUB"],
+          "AxCross": ["AxCross", "NOT: Axcross, NOT: ax-cross"],
+          "AxTon": ["AxTon", "NOT: Axton, NOT: ax-ton"],
+          "AxionIA": ["AxionIA", "NOT: Axion IA, NOT: axion-ia"]
+        },
+        
+        "tecnicos": {
+          "usuário": ["usuário", "NOT: utilizador"],
+          "equipamento": ["equipamento", "NOT: aparelho (exceto em contexto específico)"],
+          "veículo": ["veículo", "NOT: veiculo (sem acento)"],
+          "operação": ["operação", "NOT: operacao"],
+          "relatório": ["relatório", "NOT: report"],
+          "configuração": ["configuração", "NOT: setup (traduzir)"],
+          "dashboard": ["dashboard", "painel de controle (traduzir se necessário)"],
+          "login": ["login", "autenticação (traduzir se necessário)"],
+          "logout": ["logout", "sair (traduzir se necessário)"]
+        },
+        
+        "verbos": {
+          "excluir": ["excluir", "NOT: deletar"],
+          "configurar": ["configurar", "NOT: setar"],
+          "imprimir": ["imprimir", "NOT: printar"],
+          "iniciar": ["iniciar", "NOT: startar"],
+          "fazer login": ["fazer login", "NOT: logar"],
+          "baixar": ["baixar", "NOT: fazer download (preferir português)"],
+          "carregar": ["carregar", "NOT: fazer upload (preferir português)"]
+        },
+        
+        "abreviacoes": {
+          "etc": "etc. (com ponto)",
+          "ex": "ex. (exemplo)",
+          "obs": "obs. (observação)",
+          "pág": "pág. (página)",
+          "fig": "fig. (figura)"
+        }
+      },
+      
+      "forbiddenTerms": [
+        "logar (usar: fazer login)",
+        "deletar (usar: excluir)",
+        "setar (usar: configurar, definir)",
+        "printar (usar: imprimir)",
+        "startar (usar: iniciar)",
+        "debugar (usar: depurar)",
+        "attachar (usar: anexar)",
+        "commitar (usar: confirmar, enviar)",
+        "linkar (usar: vincular)",
+        "plugar (usar: conectar)"
+      ]
+    },
+    
+    "duplicate_text_detection": {
+      "enabled": true,
+      "description": "Identificar textos duplicados ou muito semelhantes",
+      "threshold": 0.85,
+      "types": {
+        "identicalText": {
+          "description": "Texto exatamente igual em múltiplos lugares",
+          "action": "Consolidar em componente reutilizável ou variável de tradução"
+        },
+        
+        "similarText": {
+          "description": "Textos com >85% de similaridade",
+          "action": "Revisar e padronizar"
+        },
+        
+        "consecutiveDuplicates": {
+          "description": "Palavras duplicadas consecutivas",
+          "example": "o o sistema",
+          "action": "Remover duplicação"
+        }
+      }
+    },
+    
+    "abbreviation_standardization": {
+      "enabled": true,
+      "description": "Padronizar uso de abreviações e siglas",
+      "rules": {
+        "firstMention": "Escrever por extenso seguido de sigla entre parênteses",
+        "subsequentMentions": "Usar apenas a sigla",
+        "punctuation": "Siglas não levam pontos (SQL, não S.Q.L.)",
+        "plural": "Siglas não levam 's' no plural (os PDFs, não os PDF's)"
+      },
+      
+      "standardAbbreviations": {
+        "ABNT": "Associação Brasileira de Normas Técnicas",
+        "API": "Application Programming Interface",
+        "CRUD": "Create, Read, Update, Delete",
+        "PDF": "Portable Document Format",
+        "SQL": "Structured Query Language",
+        "XML": "eXtensible Markup Language",
+        "JSON": "JavaScript Object Notation",
+        "HTTP": "Hypertext Transfer Protocol",
+        "HTTPS": "Hypertext Transfer Protocol Secure",
+        "URL": "Uniform Resource Locator",
+        "UI": "User Interface",
+        "UX": "User Experience"
+      }
+    },
+    
+    "ui_text_consistency": {
+      "enabled": true,
+      "description": "Garantir consistência de textos em elementos de UI",
+      "rules": {
+        "buttonLabels": {
+          "style": "verbo no infinitivo ou imperativo",
+          "examples": {
+            "bom": ["Salvar", "Excluir", "Cancelar", "Confirmar"],
+            "evitar": ["Salvando...", "Você quer excluir?"]
+          }
+        },
+        
+        "errorMessages": {
+          "format": "Descrição clara + sugestão de ação",
+          "tone": "profissional, não culpar o usuário",
+          "examples": {
+            "bom": "Não foi possível salvar. Verifique sua conexão e tente novamente.",
+            "evitar": "Erro! Você errou!"
+          }
+        },
+        
+        "successMessages": {
+          "format": "Confirmação clara do que aconteceu",
+          "examples": {
+            "bom": "Relatório gerado com sucesso!",
+            "evitar": "OK"
+          }
+        },
+        
+        "placeholders": {
+          "format": "Exemplo ou instrução curta",
+          "examples": {
+            "bom": "Digite o nome do equipamento",
+            "evitar": "nome"
+          }
+        }
+      }
+    },
+    
+    "technical_term_review": {
+      "enabled": true,
+      "description": "Revisão de termos técnicos específicos do domínio",
+      "domains": {
+        "transito": [
+          "cruzamento",
+          "faixa de rodagem",
+          "equipamento de fiscalização",
+          "veículo monitorado",
+          "alerta de cruzamento",
+          "passagem de veículo",
+          "captura de imagem",
+          "OCR de placa"
+        ],
+        
+        "pesagem": [
+          "pesagem veicular",
+          "balança rodoviária",
+          "eixo",
+          "PBT (Peso Bruto Total)",
+          "CMT (Capacidade Máxima de Tração)",
+          "tolerância de pesagem",
+          "reclassificação",
+          "infração por excesso de peso"
+        ],
+        
+        "softwareEngineering": [
+          "endpoint",
+          "middleware",
+          "webhook",
+          "microserviço",
+          "container",
+          "deploy",
+          "rollback",
+          "pipeline",
+          "CI/CD"
+        ]
+      }
+    }
+  },
+  
+  "reference_standards": {
+    "portuguese_language": [
+      "Dicionário Aurélio",
+      "Dicionário Michaelis",
+      "VOLP - Vocabulário Ortográfico da Língua Portuguesa (ABL)",
+      "Acordo Ortográfico da Língua Portuguesa (1990)",
+      "Normas ABNT aplicáveis à redação técnica",
+      "Manual de Redação da Presidência da República"
+    ],
+    
+    "internal_glossary": {
+      "enabled": true,
+      "location": "./dictionaries/axion-glossary.json",
+      "updateFrequency": "mensal",
+      "contributors": ["Equipe de Produto", "Equipe de Desenvolvimento", "Suporte"]
+    },
+    
+    "project_dictionary": {
+      "enabled": true,
+      "location": "./dictionaries/project-specific-terms.json",
+      "perProject": true,
+      "allowCustomTerms": true
+    }
+  },
+  
+  "scan": {
+    "recursive": true,
+    "maxDepth": 10,
+    "followSymlinks": false,
+    
+    "fileTypes": {
+      "markup": {
+        "include_html": true,
+        "include_cshtml": true,
+        "include_razor": true,
+        "include_xml": true,
+        "include_svg": true
+      },
+      
+      "data": {
+        "include_json": true,
+        "include_yaml": true,
+        "include_yml": true,
+        "include_toml": true,
+        "include_ini": true
+      },
+      
+      "frameworks": {
+        "include_vue": true,
+        "include_react": true,
+        "include_jsx": true,
+        "include_tsx": true,
+        "include_angular": true,
+        "include_svelte": true
+      },
+      
+      "programming": {
+        "include_typescript": true,
+        "include_javascript": true,
+        "include_csharp": true,
+        "include_python": true,
+        "include_java": true,
+        "include_php": true
+      },
+      
+      "resources": {
+        "include_resx": true,
+        "include_properties": true,
+        "include_po": true,
+        "include_pot": true
+      },
+      
+      "documentation": {
+        "include_markdown": true,
+        "include_md": true,
+        "include_mdx": true,
+        "include_txt": true,
+        "include_rst": true,
+        "include_adoc": true
+      }
+    },
+    
+    "excludePatterns": [
+      "**/node_modules/**",
+      "**/dist/**",
+      "**/build/**",
+      "**/.git/**",
+      "**/.docusaurus/**",
+      "**/coverage/**",
+      "**/*.min.js",
+      "**/*.min.css",
+      "**/vendor/**",
+      "**/packages/**"
+    ],
+    
+    "textExtraction": {
+      "html": "Extrair conteúdo de tags (ignorar atributos de código)",
+      "jsx": "Extrair strings literais e atributos de texto",
+      "json": "Extrair valores de chaves específicas (não chaves)",
+      "yaml": "Extrair valores de strings",
+      "markdown": "Extrair texto puro (ignorar código)",
+      "code": "Extrair apenas comentários e docstrings"
+    }
+  },
+  
+  "report": {
+    "generate": true,
+    
+    "structure": {
+      "summary": {
+        "totalErrors": 0,
+        "errorsByType": {},
+        "errorsBySeverity": {},
+        "errorsByProject": {},
+        "errorsByFile": {},
+        "mostCommonErrors": []
+      },
+      
+      "details": [
+        {
+          "id": "unique-id",
+          "project": "AxHub",
+          "module": "Configurações",
+          "page": "Autenticação",
+          "component": "AuthForm",
+          "file": "src/pages/Settings/Auth.jsx",
+          "line": 45,
+          "column": 12,
+          "errorType": "orthography",
+          "severity": "medium",
+          "confidence": 0.95,
+          "originalText": "Configuracões do Sistema",
+          "suggestedText": "Configurações do Sistema",
+          "explanation": "Falta de til na palavra 'Configurações'",
+          "rule": "accentuation",
+          "occurrences": 1,
+          "context": "...no menu <Configuracões> do Sistema, acesse...",
+          "screenshot": "./evidence/auth-form-error.png"
+        }
+      ]
+    },
+    
+    "include": {
+      "include_location": true,
+      "include_project": true,
+      "include_module": true,
+      "include_page": true,
+      "include_component": true,
+      "include_original_text": true,
+      "include_suggested_text": true,
+      "include_severity": true,
+      "include_confidence": true,
+      "include_occurrences": true,
+      "include_context": true,
+      "include_screenshot": true,
+      "include_rule": true,
+      "include_explanation": true
+    },
+    
+    "groupBy": [
+      {
+        "primary": "project",
+        "secondary": "severity",
+        "tertiary": "errorType"
+      },
+      {
+        "primary": "severity",
+        "secondary": "project",
+        "tertiary": "file"
+      },
+      {
+        "primary": "errorType",
+        "secondary": "occurrences",
+        "tertiary": "project"
+      }
+    ]
+  },
+  
+  "auto_fix": {
+    "enabled": false,
+    "modes": {
+      "preview": {
+        "enabled": true,
+        "description": "Mostrar diff antes de aplicar correção"
+      },
+      
+      "apply": {
+        "enabled": false,
+        "requireApproval": true,
+        "description": "Aplicar correção após aprovação"
+      },
+      
+      "batch": {
+        "enabled": true,
+        "description": "Aplicar mesma correção a todas as ocorrências idênticas",
+        "apply_same_fix_to_identical_occurrences": true
+      }
+    },
+    
+    "preservation": {
+      "preserve_variables": true,
+      "preserve_placeholders": true,
+      "preserve_html_tags": true,
+      "preserve_code_blocks": true,
+      "preserve_urls": true,
+      "preserve_emails": true,
+      "preserve_numbers": true,
+      "preserve_dates": true
+    },
+    
+    "safety": {
+      "createBackup": true,
+      "backupLocation": "./backups/linguistic-fixes",
+      "versionControl": "git",
+      "createBranch": "linguistic-fixes-{timestamp}",
+      "requireReview": true
+    }
+  },
+  
+  "output": {
+    "formats": {
+      "json": {
+        "enabled": true,
+        "pretty": true,
+        "path": "./reports/linguistic-validation.json"
+      },
+      
+      "html": {
+        "enabled": true,
+        "interactive": true,
+        "path": "./reports/linguistic-validation.html",
+        "includeCharts": true,
+        "includeScreenshots": true
+      },
+      
+      "csv": {
+        "enabled": true,
+        "delimiter": ";",
+        "encoding": "UTF-8-BOM",
+        "path": "./reports/linguistic-validation.csv"
+      },
+      
+      "pdf": {
+        "enabled": true,
+        "template": "professional",
+        "path": "./reports/linguistic-validation.pdf",
+        "includeSummary": true,
+        "includeDetails": true,
+        "includeRecommendations": true
+      },
+      
+      "excel": {
+        "enabled": true,
+        "path": "./reports/linguistic-validation.xlsx",
+        "sheets": [
+          "Resumo",
+          "Erros Críticos",
+          "Erros Altos",
+          "Erros Médios",
+          "Erros Baixos",
+          "Por Projeto",
+          "Por Tipo"
+        ]
+      }
+    },
+    
+    "groupBy": {
+      "default": "projeto",
+      "options": [
+        "projeto",
+        "módulo",
+        "tela",
+        "tipo_de_erro",
+        "severidade",
+        "arquivo",
+        "componente"
+      ]
+    }
+  },
+  
+  "severity": {
+    "critical": {
+      "description": "Erro grave que impede compreensão ou causa má impressão profissional",
+      "priority": 1,
+      "color": "#dc2626",
+      "examples": [
+        "Erro ortográfico em título principal",
+        "Erro em mensagem de erro crítica",
+        "Nome do produto escrito errado",
+        "Expressão gramaticalmente incorreta em destaque"
+      ]
+    },
+    
+    "high": {
+      "description": "Erro visível em área importante",
+      "priority": 2,
+      "color": "#ea580c",
+      "examples": [
+        "Erro em label de campo obrigatório",
+        "Erro em botão principal",
+        "Inconsistência terminológica relevante",
+        "Erro em menu principal"
+      ]
+    },
+    
+    "medium": {
+      "description": "Erro em área secundária",
+      "priority": 3,
+      "color": "#ca8a04",
+      "examples": [
+        "Erro em tooltip",
+        "Erro em texto de ajuda",
+        "Inconsistência de estilo menor",
+        "Erro em mensagem informativa"
+      ]
+    },
+    
+    "low": {
+      "description": "Erro menor ou questão de estilo",
+      "priority": 4,
+      "color": "#65a30d",
+      "examples": [
+        "Espaçamento duplo",
+        "Uso de maiúscula inconsistente (mas não errado)",
+        "Sugestão de termo alternativo",
+        "Melhoria de clareza"
+      ]
+    }
+  },
+  
+  "integration": {
+    "vscode": {
+      "enabled": true,
+      "extension": "axion-linguistic-validator",
+      "features": {
+        "diagnostics": true,
+        "quickFix": true,
+        "hoverInfo": true,
+        "codeActions": [
+          "Corrigir ortografia",
+          "Ignorar palavra (adicionar ao dicionário)",
+          "Ignorar regra neste arquivo",
+          "Ver alternativas",
+          "Aplicar a todas as ocorrências"
+        ]
+      }
+    },
+    
+    "cicd": {
+      "enabled": true,
+      "pipeline": "Azure DevOps / GitHub Actions / GitLab CI",
+      "triggerOn": ["pull_request", "push_to_main"],
+      "failBuild": {
+        "onCritical": true,
+        "onHigh": false,
+        "onMedium": false,
+        "onLow": false
+      },
+      "generateReport": true,
+      "uploadArtifacts": true,
+      "commentOnPR": true
+    },
+    
+    "helpdesk": {
+      "enabled": true,
+      "system": "Jitbit",
+      "autoCreateTicket": false,
+      "attachReport": true,
+      "priority": "medium",
+      "category": "Qualidade/Linguística",
+      "assignTo": "Equipe de Qualidade"
+    },
+    
+    "slack": {
+      "enabled": true,
+      "channel": "#qualidade-linguistica",
+      "notifyOn": ["critical_errors", "validation_complete"],
+      "includeSummary": true
+    }
+  },
+  
+  "execution": {
+    "modes": {
+      "fullScan": {
+        "description": "Varredura completa de todos os arquivos e projetos",
+        "duration": "30-60 minutos",
+        "output": "Relatório completo",
+        "schedule": "semanal"
+      },
+      
+      "quickScan": {
+        "description": "Varredura apenas de arquivos modificados recentemente",
+        "duration": "5-10 minutos",
+        "output": "Relatório incremental",
+        "schedule": "diário"
+      },
+      
+      "watch": {
+        "description": "Monitoramento contínuo de arquivos em tempo real",
+        "realTime": true,
+        "notifyOnError": true,
+        "editor": "VS Code"
+      },
+      
+      "diff": {
+        "description": "Valida apenas arquivos alterados no Git",
+        "compareWith": "main",
+        "faster": true,
+        "useCase": "Pull Request"
+      },
+      
+      "projectSpecific": {
+        "description": "Valida apenas um projeto específico",
+        "example": "npm run validate:linguistic -- --project AxHub"
+      }
+    },
+    
+    "schedule": {
+      "enabled": true,
+      "frequency": "daily",
+      "time": "02:00",
+      "timezone": "America/Sao_Paulo",
+      "daysOfWeek": ["monday", "tuesday", "wednesday", "thursday", "friday"]
+    },
+    
+    "performance": {
+      "parallelProcessing": true,
+      "maxWorkers": 4,
+      "cacheResults": true,
+      "cacheDuration": "24h",
+      "skipUnchangedFiles": true
+    }
+  },
+  
+  "example": {
+    "project": "AxHub",
+    "page": "Configurações do Sistema",
+    "tab": "Autenticação",
+    "file": "src/pages/Settings/Authentication.jsx",
+    "line": 45,
+    
+    "detectedIssue": {
+      "type": "orthography",
+      "severity": "high",
+      "original": "Configuracões do Sistema",
+      "suggested": "Configurações do Sistema",
+      "rule": "accentuation",
+      "explanation": "Falta til (~) na palavra 'Configurações'",
+      "confidence": 0.98,
+      "context": "...acesse o menu <Configuracões> do Sistema para..."
+    }
+  },
+  
+  "goals": [
+    "Eliminar 100% dos erros ortográficos críticos",
+    "Padronizar nomenclaturas em todos os projetos",
+    "Uniformizar textos repetidos",
+    "Melhorar a experiência do usuário com textos claros",
+    "Centralizar terminologia técnica",
+    "Reduzir inconsistências entre projetos",
+    "Gerar auditorias recorrentes automatizadas",
+    "Criar cultura de qualidade linguística",
+    "Reduzir custo de correções manuais",
+    "Melhorar imagem profissional da empresa"
+  ],
+  
+  "metrics": {
+    "coverage": {
+      "target": 100,
+      "current": 0,
+      "unit": "%"
+    },
+    
+    "errorRate": {
+      "target": 0.1,
+      "current": null,
+      "unit": "errors per 1000 words"
+    },
+    
+    "fixTime": {
+      "target": 2,
+      "current": null,
+      "unit": "hours per 1000 errors"
+    },
+    
+    "consistency": {
+      "target": 95,
+      "current": null,
+      "unit": "%"
+    }
+  },
+  
+  "commandLine": {
+    "usage": "node scripts/linguistic-validation.js [options]",
+    
+    "options": {
+      "--scan": "Executar varredura completa",
+      "--quick": "Varredura rápida (apenas modificados)",
+      "--watch": "Modo watch (monitoramento contínuo)",
+      "--diff": "Validar apenas arquivos alterados",
+      "--project <name>": "Validar projeto específico",
+      "--severity <level>": "Filtrar por severidade (critical/high/medium/low)",
+      "--fix": "Aplicar correções automaticamente (requer aprovação)",
+      "--preview": "Mostrar preview das correções",
+      "--report <format>": "Formato do relatório (json/html/csv/pdf/excel)",
+      "--output <path>": "Caminho para salvar relatório",
+      "--ci": "Modo CI/CD (exit code 1 se erros críticos)",
+      "--help": "Exibir ajuda"
+    },
+    
+    "examples": {
+      "fullScan": "node scripts/linguistic-validation.js --scan --report html",
+      "quickScan": "node scripts/linguistic-validation.js --quick",
+      "watchMode": "node scripts/linguistic-validation.js --watch",
+      "ciMode": "node scripts/linguistic-validation.js --diff --ci --report json",
+      "specificProject": "node scripts/linguistic-validation.js --scan --project AxCross",
+      "autoFix": "node scripts/linguistic-validation.js --scan --fix --preview"
+    }
+  }
+}

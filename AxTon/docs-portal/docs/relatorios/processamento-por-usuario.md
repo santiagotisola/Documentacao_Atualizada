@@ -8,11 +8,11 @@ description: Produtividade por analista
 
 ![Tempo de Análise de Imagem](../img/tempo%20de%20analise%20de%20imagem.png)
 
-Exibe a produtividade de cada operador: infrações triadas, aprovadas, descartadas e tempo médio por análise.
+Exibe a produtividade de cada operador: Infrações triadas, aprovadas, descartadas e tempo médio por Análise
 
 ## Como acessar
 
-**Menu lateral** → Relatórios → **Processamento por Usuário**
+**Menu lateral** → Relatórios → **Processamento por Usuário
 
 ## Dados do Relatório
 
@@ -20,11 +20,11 @@ Exibe a produtividade de cada operador: infrações triadas, aprovadas, descarta
 
 | Coluna | Descrição |
 |--------|-----------|
-| **Usuário** | Nome do operador |
+| Usuário | Nome do operador |
 | **Processadas** | Infrações triadas |
 | **Aprovadas** | Quantidade aprovada |
 | **Descartadas** | Quantidade descartada |
-| **Tempo Médio** | Minutos por infração |
+| **Tempo Médio** | Minutos por Infração |
 
 ### Filtros disponíveis
 

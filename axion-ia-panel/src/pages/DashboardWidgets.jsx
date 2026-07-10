@@ -52,11 +52,11 @@ function PerformanceChart({ data }) {
                 <stop offset="95%" stopColor="#22c55e" stopOpacity={0} />
               </linearGradient>
             </defs>
-            <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.06)" />
-            <XAxis dataKey="dia" stroke="#64748b" fontSize={11} />
-            <YAxis stroke="#64748b" fontSize={11} />
+            <CartesianGrid strokeDasharray="3 3" stroke="#f1f5f9" />
+            <XAxis dataKey="dia" stroke="#9ca3af" fontSize={11} />
+            <YAxis stroke="#9ca3af" fontSize={11} />
             <Tooltip
-              contentStyle={{ background: "#1e293b", border: "1px solid rgba(255,255,255,0.1)", borderRadius: 8, color: "#e2e8f0" }}
+              contentStyle={{ background: "#fff", border: "1px solid #e5e7eb", borderRadius: 8, color: "#111827" }}
             />
             <Area type="monotone" dataKey="atendimentos" stroke="#8b5cf6" fill="url(#gradAtend)" strokeWidth={2} name="Atendimentos" />
             <Area type="monotone" dataKey="resolvidos" stroke="#22c55e" fill="url(#gradResolv)" strokeWidth={2} name="Resolvidos" />
@@ -78,11 +78,11 @@ function TopChannelsChart({ data }) {
       <div className="widget-chart-body">
         <ResponsiveContainer width="100%" height={220}>
           <BarChart data={data} margin={{ top: 10, right: 10, left: 0, bottom: 0 }}>
-            <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.06)" />
-            <XAxis dataKey="canal" stroke="#64748b" fontSize={11} />
-            <YAxis stroke="#64748b" fontSize={11} />
+            <CartesianGrid strokeDasharray="3 3" stroke="#f1f5f9" />
+            <XAxis dataKey="canal" stroke="#9ca3af" fontSize={11} />
+            <YAxis stroke="#9ca3af" fontSize={11} />
             <Tooltip
-              contentStyle={{ background: "#1e293b", border: "1px solid rgba(255,255,255,0.1)", borderRadius: 8, color: "#e2e8f0" }}
+              contentStyle={{ background: "#fff", border: "1px solid #e5e7eb", borderRadius: 8, color: "#111827" }}
             />
             <Bar dataKey="total" fill="#3b82f6" radius={[4, 4, 0, 0]} name="Interações" />
           </BarChart>

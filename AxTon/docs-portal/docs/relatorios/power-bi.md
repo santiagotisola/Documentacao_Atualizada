@@ -8,7 +8,7 @@ description: Dashboards analíticos integrados com Power BI
 
 ![Dashboard](../img/Dashborads.png)
 
-O AxTon permite integração com Microsoft Power BI para geração de dashboards analíticos avançados. Os relatórios são acessados diretamente dentro do sistema.
+O AxTon permite integração com Microsoft Power BI para geração de dashboards analíticos avançados. Os Relatórios são acessados diretamente dentro do sistema.
 
 ## Como acessar
 

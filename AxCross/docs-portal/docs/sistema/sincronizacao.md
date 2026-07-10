@@ -6,11 +6,11 @@ description: Sincronização de dados de passagens com Elastic Search no AxCross
 
 # Sincronização de Passagens
 
-Permite sincronizar os registros de passagens do banco de dados com o mecanismo de busca **Elastic Search**, garantindo que os relatórios e consultas utilizem dados atualizados.
+Permite sincronizar os registros de passagens do banco de dados com o mecanismo de busca **Elastic Search**, garantindo que os Relatórios e consultas utilizem dados atualizados.
 
 ## Como acessar
 
-No **menu lateral**, clique em **Configurações** e selecione **Sincronização de dados**.
+No **menu lateral**, clique em Configurações e selecione **Sincronização de dados**.
 
 ![Sincronização de Passagens](../img/Sincronização de Passagens.png)
 
@@ -22,7 +22,7 @@ No **menu lateral**, clique em **Configurações** e selecione **Sincronização
 
 ## Passo a passo — Executar sincronização
 
-1. Acesse **Configurações → Sincronização de dados** no menu lateral
+1. Acesse Configurações → Sincronização de dados** no menu lateral
 2. Informe a **Data de Início** da sincronização
 3. Clique em **Sincronizar passagens com Elastic Search**
 4. Aguarde a conclusão do processo
@@ -34,7 +34,7 @@ A sincronização deve ser executada nas seguintes situações:
 | Situação | Descrição |
 |----------|-----------|
 | **Após migração de dados** | Quando registros são importados em lote para o sistema |
-| **Dados desatualizados** | Quando relatórios não refletem as passagens mais recentes |
+| **Dados desatualizados** | Quando Relatórios não refletem as passagens mais recentes |
 | **Após falha de sincronização** | Para reprocessar dados que não foram indexados corretamente |
 | **Manutenção programada** | Como parte de rotinas de manutenção periódica |
 
@@ -43,5 +43,5 @@ A sincronização pode consumir recursos significativos do servidor. Recomenda-s
 :::
 
 :::caution Permissão necessária
-Apenas usuários com perfil de **Administrador** têm acesso à função de sincronização.
+Apenas Usuários com perfil de **Administrador** têm acesso à função de sincronização.
 :::

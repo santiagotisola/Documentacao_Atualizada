@@ -1,18 +1,18 @@
 ---
 sidebar_position: 1
 title: Relatório de Pesagem
-description: Consulta e exportação do relatório de pesagens realizadas no AxTon
+description: Consulta e exportação do Relatório de pesagens realizadas no AxTon
 ---
 
 # Relatório de Pesagem
 
 ![Tela de Relatório de Pesagem](../img/axton-relatorio-pesagem.png)
 
-O **Relatório de Pesagem** consolida todas as pesagens realizadas em um período, permitindo consulta e exportação em PDF para fins de auditoria e controle operacional.
+O Relatório de Pesagem** consolida todas as pesagens realizadas em um período, permitindo consulta e exportação em PDF para fins de auditoria e controle operacional.
 
 ## Como acessar
 
-**Menu lateral** → **Relatório de Pesagem**
+**Menu lateral** → Relatório de Pesagem**
 
 ## Filtros disponíveis
 
@@ -26,17 +26,17 @@ O **Relatório de Pesagem** consolida todas as pesagens realizadas em um períod
 | Ação | Descrição |
 |------|-----------|
 | **Pesquisar** | Consultar as pesagens do período selecionado |
-| **Exportar PDF** | Gerar arquivo PDF com os dados do relatório |
+| **Exportar PDF** | Gerar arquivo PDF com os dados do Relatório |
 
 ## Dados exibidos
 
-O relatório lista todas as pesagens no período com:
+O Relatório lista todas as pesagens no período com:
 
 | Coluna | Descrição |
 |--------|-----------|
 | **Data/Hora** | Momento da pesagem |
-| **Placa** | Placa do veículo |
-| **Classe** | Classificação do veículo |
+| **Placa** | Placa do Veículo |
+| **Classe** | Classificação do Veículo |
 | **PBT Medido** | Peso Bruto Total registrado (kg) |
 | **PBT Regulamentado** | Limite legal da classificação |
 | **Resultado** | Regular ou Infração |
@@ -45,14 +45,14 @@ O relatório lista todas as pesagens no período com:
 
 ## Passo a passo
 
-1. No menu lateral, clique em **Relatório de Pesagem**
+1. No menu lateral, clique em Relatório de Pesagem**
 2. Selecione a **Data Inicial** e **Data Final** do período
 3. Clique em **Pesquisar**
 4. Revise os dados na tela
 5. Clique em **Exportar PDF** para gerar o documento
 
 :::tip Dica
-Exporte o relatório ao final de cada operação para manter o histórico de pesagens organizados por data e local.
+Exporte o Relatório ao final de cada operação para manter o histórico de pesagens organizados por data e local.
 :::
 
 ---
@@ -61,12 +61,12 @@ Exporte o relatório ao final de cada operação para manter o histórico de pes
 
 | Relatório | Descrição |
 |---|---|
-| [**Relatório de Infrações**](../relatorios/relatorio-infracoes) | Infrações registradas por período e status |
+| Relatório de Infrações**](../relatorios/relatorio-infracoes) | Infrações registradas por período e status |
 | [**Fluxo Diário de Veículos**](../relatorios/fluxo-diario-veiculos) | Volume de tráfego por hora e dia |
-| [**Relatório de Discrepâncias**](../relatorios/relatorio-discrepancias) | Divergências entre pesagens e dados esperados |
-| [**Relatório de Notas Fiscais**](../relatorios/relatorio-nfe) | Notas fiscais eletrônicas capturadas pelo sistema |
+| Relatório de Discrepâncias**](../relatorios/relatorio-discrepancias) | Divergências entre pesagens e dados esperados |
+| Relatório de Notas Fiscais**](../relatorios/relatorio-nfe) | Notas fiscais eletrônicas capturadas pelo sistema |
 | [**Processamento de Imagens**](../relatorios/processamento-imagens) | Volume de imagens processadas no sistema |
 | [**Processamento por Usuário**](../relatorios/processamento-por-usuario) | Produtividade por analista |
-| [**Power BI**](../relatorios/power-bi) | Dashboards avançados de análise |
+| [**Power BI**](../relatorios/power-bi) | Dashboards avançados de Análise |
 | [**Mapa de Fluxo de Passagens**](../relatorios/mapa-fluxo-passagens) | Visualização geográfica do fluxo |
 | [**Falhas Sequenciais**](../relatorios/falhas-sequenciais) | Análise de falhas na numeração sequencial |

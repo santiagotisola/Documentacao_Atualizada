@@ -1,0 +1,350 @@
+{
+  "meta": {
+    "documento": "ESPINHA-DORSAL-AXION-SISTEMAS",
+    "versao": "1.0",
+    "gerado_em": "2026-07-03",
+    "descricao": "Conceito, arquitetura e ciclos de todos os sistemas Axion Tecnologia",
+    "baseado_em": "ANALISE-SISTEMA-COMPLETA-2026-07-03T11-35-18.json"
+  },
+
+  "missao": {
+    "declaracao": "Transformar dados de fiscalização pública em inteligência operacional, reduzindo o custo de atendimento, acelerando conformidade contratual e garantindo qualidade dos sistemas em campo — com IA como camada transversal.",
+    "posicionamento": "Suíte integrada de fiscalização eletrônica inteligente para órgãos públicos brasileiros",
+    "diferencial_competitivo": "Única plataforma que une IA generativa (GPT-4o) com 3 sistemas de fiscalização (trânsito + pesagem + cruzamento)",
+    "mercado_alvo": [
+      "Órgãos Metrológicos Estaduais (IPEM, IMEPI, etc.) — 27 clientes potenciais",
+      "Prefeituras (Trânsito/SMTT) — 5.570 municípios no Brasil",
+      "DETRANs — 27 estados",
+      "Concessionárias de Rodovias — 90+ contratos vigentes"
+    ],
+    "tam_estimado_brl": "R$ 2,6 bilhões/ano",
+    "concorrentes_sem_ia": ["Perkons", "Gatsometer", "Velsis", "Teletrans", "Autoban"]
+  },
+
+  "produtos_saas": {
+    "axhub": {
+      "nome": "AxHub",
+      "tagline": "Fiscalização Eletrônica de Trânsito",
+      "stack": ".NET + SQL Server",
+      "sites_ativos": 18,
+      "lista_sites": ["ibametro","imepi","imeqpb","imetropa","ipemce","ipempe","derse","strans","detranma","detranpi","goiania","ipemmt","itps","smtt","economia","imperatriz","setrans","homologacao"],
+      "versao_mais_avancada": "v1.2.4 (DERSE — 104 menus)",
+      "versao_mais_comum": "v1.2.3 (90 menus)",
+      "modulos_principais": ["Triagem","OCR","Equipamentos","Operações","Infrações","Passagens","Aferição","Heartbeat","Monitoramentos","Tabelas"],
+      "integracao_axion_ia": {
+        "driver": "mssql",
+        "prefixo_rota": "/axhub",
+        "endpoints": 10
+      },
+      "dados_produzidos": ["Registros de infrações","Triagens OCR aprovado/rejeitado","Heartbeat de equipamentos","Relatórios de passagens","Histórico de aferições metrológicas"]
+    },
+
+    "axton": {
+      "nome": "AxTon",
+      "tagline": "Pesagem Veicular Metrológica",
+      "stack": ".NET + SQL Server",
+      "modulos_principais": ["Pesagens","Infrações de peso","Laudos","Reclassificações","Aferições metrológicas"],
+      "integracao_axion_ia": {
+        "driver": "mssql",
+        "prefixo_rota": "/axton",
+        "endpoints": 6
+      },
+      "dados_produzidos": ["Registros de pesagens com laudo","Infrações por excesso de peso (DNIT/CONTRAN)","Estatísticas de tráfego pesado por rodovia"]
+    },
+
+    "axcross": {
+      "nome": "AxCross",
+      "tagline": "Cruzamento de Placas e Monitoramento Veicular",
+      "stack": ".NET + SQL Server",
+      "sites_ativos": 12,
+      "lista_sites": ["derse","detranpi","detranma","imperatriz","ipemce","ipemmt","ipempe","sefazpi","goiania","economia","setrans","homologacao"],
+      "versao_atual": "v1.2.0",
+      "data_lancamento_versao": "2026-05-22",
+      "modulos_principais": ["Veículos Monitorados","Alertas de Cruzamento","Passagens","Equipamentos","Relatórios","Configurações"],
+      "integracao_axion_ia": {
+        "driver": "mssql",
+        "prefixo_rota": "/axcross",
+        "endpoints": 8
+      },
+      "dados_produzidos": ["Passagens de veículos monitorados","Alertas de cruzamento com vigência","Relatórios de circulação por rodovia"]
+    }
+  },
+
+  "plataforma_ia": {
+    "nome": "AxionIA Platform",
+    "versao": "v4.0 — 22 Engines Ativos",
+    "componentes": {
+      "frontend": { "stack": "React 18 + Vite", "porta": 3017, "paginas": 132, "rotas": 59, "linhas_codigo": 55909 },
+      "backend": { "stack": "Node.js + Express", "porta": 3100, "endpoints": 287, "modelos_mongodb": 19 },
+      "engine": { "stack": "GPT-4o + Embeddings + KB", "kb_entradas_aprox": 1000 }
+    },
+    "localizacao_monorepo": {
+      "frontend": "axion-ia-panel/",
+      "backend": "axion-ia-panel/api/",
+      "engine": "axion-ia-panel/engine/",
+      "script_iniciar": "axion-ia-panel/iniciar.ps1",
+      "script_encerrar": "axion-ia-panel/encerrar.ps1"
+    },
+
+    "engines": [
+      {
+        "id": 1,
+        "nome": "Intelligence Engine",
+        "proposito": "Responder perguntas, classificar tickets e gerar análises com GPT-4o",
+        "fluxo": ["Pergunta → Classificador (keywords)", "→ Match KB: resposta instantânea", "→ Sem match: busca embedding (cosine similarity)", "→ Sem match: GPT-4o com prompt especializado", "→ Log → Fila de revisão (se confiança baixa)"],
+        "modelos_ia": ["gpt-4o", "gpt-4o-mini", "text-embedding-ada-002"],
+        "rotas_api": ["/chat", "/treinar", "/kb", "/analise", "/logs"],
+        "paginas_painel": ["/chat", "/kb", "/treinamento", "/logs"]
+      },
+      {
+        "id": 2,
+        "nome": "Atendimento Engine",
+        "proposito": "Atender clientes automaticamente via Helpdesk e WhatsApp",
+        "fluxo_helpdesk": ["Ticket Jitbit → Classificação IA → Match KB", "→ Confiança Alta: Resposta automática", "→ Confiança Baixa: Fila de revisão humana", "→ Aprovação → Envio + log de melhoria"],
+        "fluxo_whatsapp": ["Mensagem → LGPD Accept → Menu → Sistema → Descrição", "→ Foto? → Criação automática de ticket Jitbit", "→ Consulta de ticket existente"],
+        "polling_intervalo_seg": "2-10",
+        "modos": ["Automático", "Revisão Humana"],
+        "kpis": ["SLA Met/Breached", "Horas por técnico", "Chamados por site", "Confiança média"],
+        "rotas_api": ["/helpdesk/*", "/whatsapp/*", "/confianca/*"],
+        "paginas_painel": ["/helpdesk", "/whatsapp", "/confianca-revisao", "/sla-compliance", "/planilha-horas"]
+      },
+      {
+        "id": 3,
+        "nome": "Qualidade Engine",
+        "proposito": "Monitorar, auditar e comparar todos os 30 sites clientes",
+        "versao": "Central de Sites v3.0",
+        "total_modulos": 18,
+        "grupos": {
+          "VISÃO": ["Dashboard Executivo (16 KPIs)","Visão Geral","Lista","Guia","Credenciais"],
+          "ANÁLISE": ["Performance","OCR","Equipamentos","APIs"],
+          "QUALIDADE": ["Health Check","Indicadores","Conformidade","Auditoria","Segurança"],
+          "COMPARAÇÃO": ["Comparar Sites","Comparador Global (14 dimensões)"],
+          "IA": ["IA Insights (5 tipos análise GPT-4o)","Timeline (changelog)"]
+        },
+        "health_score_formula": "Online 25pts + Versão 15pts + OCR 20pts + Equip 15pts + URL 10pts + Chamados 15pts",
+        "total_sites_monitorados": 30,
+        "paginas_painel": ["/central-sites"]
+      },
+      {
+        "id": 4,
+        "nome": "Mercado Engine",
+        "proposito": "Encontrar, analisar e responder a editais de licitação automaticamente",
+        "pipeline": ["Busca PNCP → Importar edital", "Análise Heurística (keywords) + GPT-4o (semântica)", "Score por requisito → Conformidade % → APTO/PARCIAL/INAPTO", "Lacunas → Roadmap → Spec técnica → Aprovação"],
+        "analise_multi_produto": true,
+        "coleta_automatica": "Scheduler PNCP",
+        "rotas_api": ["/edital/*", "/conformidade/*", "/roadmap/*", "/spec/*", "/fontes/*", "/coletor/*"],
+        "paginas_painel": ["/pipeline-editais","/busca-editais-gov","/analise-edital-avancada","/analisa-multi-produto","/roadmap","/specs","/conformidade","/fontes"]
+      },
+      {
+        "id": 5,
+        "nome": "Validação Engine",
+        "proposito": "Validar software, equipamentos e dados automaticamente",
+        "modulos": {
+          "CUTI": "Testes inteligentes por site",
+          "VARCO": "Câmeras ITScam Pumatronix — heartbeat + análise de incidente",
+          "Visual_Validation": "Screenshots comparados por similaridade pixel (pixelmatch)",
+          "Duplicidade": "Auditoria de documentos duplicados",
+          "Diagnostico_Medicao": "Detecção de anomalias em aferições"
+        },
+        "jobs_em_batch": "até 500 imagens/job",
+        "rotas_api": ["/varco/*", "/analise-imagem/*", "/jobs/*", "/validate-alert-flow"],
+        "paginas_painel": ["/cuti","/validation-hub","/visual-validation","/varco","/diagnostico-medicao","/duplicidade"]
+      },
+      {
+        "id": 6,
+        "nome": "Documentação Engine",
+        "proposito": "Gerar, publicar e manter documentação técnica semi-automaticamente",
+        "fluxo": ["Fontes (PDFs, specs, editais) → Análise cobertura", "GPT-4o → Geração de seção", "Revisão → Publicação no Docusaurus correto", "KB Re-indexação → Embeddings atualizados"],
+        "portais": {
+          "axhub": { "porta": 3010, "docs": 190 },
+          "axton": { "porta": 3011 },
+          "axcross": { "porta": 3012 }
+        },
+        "rotas_api": ["/doc/*", "/admin/*"],
+        "paginas_painel": ["/gerar-doc", "/fontes", "/treinamento"]
+      }
+    ]
+  },
+
+  "ciclos_de_processo": [
+    {
+      "id": 1,
+      "nome": "Ciclo de Atendimento ao Cliente",
+      "canais": ["Jitbit Helpdesk", "WhatsApp"],
+      "fluxo": "Entrada → Classificação IA → Resposta → Revisão Humana → Resolução → Log → Melhoria KB",
+      "kpis": ["SLA %", "Confiança média", "Chamados/dia", "Tempo médio resolução"],
+      "modulos_envolvidos": ["Chat IA","WhatsApp Bot","Helpdesk","Fila de Revisão","SLA Compliance"],
+      "dados_consumidos": ["Jitbit API", "KB MongoDB", "GPT-4o"],
+      "dados_produzidos": ["Logs de interação", "Aprovações/Rejeições", "Novas entradas KB"]
+    },
+    {
+      "id": 2,
+      "nome": "Ciclo de Gestão de Sites",
+      "canais": ["SQL Server AxHub/AxCross", "Jitbit Helpdesk", "sitesData.js"],
+      "fluxo": "Coleta de dados → Health Check → Identificação alertas → Diagnóstico → Ação corretiva",
+      "kpis": ["Score saúde médio", "Sites online/offline", "OCR médio %", "Chamados em aberto/site"],
+      "modulos_envolvidos": ["Central de Sites v3.0 (18 módulos)"],
+      "dados_consumidos": ["SQL Server AxHub","SQL Server AxCross","Jitbit","sitesData.js"],
+      "dados_produzidos": ["Relatório de saúde","Alertas de anomalia","Recomendações IA"]
+    },
+    {
+      "id": 3,
+      "nome": "Ciclo de Intelligence de Mercado",
+      "canais": ["PNCP API", "OpenAI"],
+      "fluxo": "Busca edital → Importação → Análise heurística+IA → Conformidade → Lacunas → Roadmap → Spec → Aprovação",
+      "kpis": ["Editais analisados", "% Conformidade média", "Features no roadmap", "Specs aprovadas"],
+      "modulos_envolvidos": ["Pipeline Editais","Busca Gov.br","Análise Edital Avançada","Análise Multi-Produto","Roadmap","Specs","Conformidade"],
+      "dados_consumidos": ["PNCP API", "PDFs de editais", "Fontes de pesquisa"],
+      "dados_produzidos": ["Análises de conformidade", "Roadmaps de produto", "Especificações técnicas"]
+    },
+    {
+      "id": 4,
+      "nome": "Ciclo de Validação e Qualidade",
+      "canais": ["APIs dos sites", "OCR", "Câmeras Pumatronix"],
+      "fluxo": "Script CUTI → Execução → Score → Alertas → Diagnóstico → Correção",
+      "kpis": ["Testes passando %", "Anomalias detectadas", "Dispositivos VARCO online"],
+      "modulos_envolvidos": ["CUTI","Validation Hub","VARCO Monitor","Validação Visual","Diagnóstico Medição"],
+      "dados_consumidos": ["APIs AxHub/AxCross","Câmeras ITScam","Screenshots"],
+      "dados_produzidos": ["Relatórios de validação", "Alertas de anomalia", "Jobs de comparação"]
+    },
+    {
+      "id": 5,
+      "nome": "Ciclo de Treinamento da IA",
+      "canais": ["MongoDB", "OpenAI Embeddings"],
+      "fluxo": "Nova FAQ/correção → Gerar embedding → Salvar KB → Re-indexar → Testar resposta",
+      "kpis": ["Entradas na KB", "Acertos KB %", "Score confiança médio"],
+      "modulos_envolvidos": ["Knowledge Base","Treinamento","Logs","Admin Re-indexação"],
+      "dados_consumidos": ["Logs de chat", "Correções manuais", "Documentação dos produtos"],
+      "dados_produzidos": ["Embeddings vetoriais", "Respostas melhoradas", "Métricas de precisão"]
+    },
+    {
+      "id": 6,
+      "nome": "Ciclo de Gestão Operacional",
+      "canais": ["Jitbit Helpdesk API", "SQL Server AxHub"],
+      "fluxo": "Coleta de dados operacionais → Relatório de fluxo → SLA → Planilha de horas → Contrato",
+      "kpis": ["Horas por técnico", "SLA Met % ", "Chamados resolvidos", "Produtividade equipe"],
+      "modulos_envolvidos": ["Operations Hub","Relatório de Fluxo","SLA Compliance","Planilha de Horas","Relatório por Contrato"],
+      "dados_consumidos": ["Jitbit API (tickets, técnicos)", "SQL Server AxHub"],
+      "dados_produzidos": ["Planilhas de horas", "Relatórios SLA", "Relatórios por contrato"]
+    },
+    {
+      "id": 7,
+      "nome": "Ciclo de Análise de Imagens",
+      "canais": ["OpenAI Vision API", "SQL Server", "ITScam Pumatronix"],
+      "fluxo": "Imagem recebida → OCR/análise IA → Score confiança → Validação → Log → Triagem",
+      "kpis": ["Triagem % aprovação", "Tempo OCR médio", "Precisão leitura placa"],
+      "modulos_envolvidos": ["Análise de Imagens","VARCO Monitor","Diagnóstico de Medição"],
+      "classificadores": ["ocupação", "roda", "cor de camisa", "mochila", "calça", "placa"],
+      "dados_consumidos": ["Imagens de câmeras", "SQL Server AxHub (referência)"],
+      "dados_produzidos": ["Triagens aprovadas/rejeitadas", "Análises de incidente", "Placas lidas"]
+    },
+    {
+      "id": 8,
+      "nome": "Ciclo de Documentação Automática",
+      "canais": ["OpenAI", "Docusaurus", "MongoDB"],
+      "fluxo": "Importar fonte → Analisar lacunas IA → Gerar seção doc → Revisão → Publicar Docusaurus → Atualizar KB",
+      "kpis": ["Docs publicados", "Cobertura % por produto", "Lacunas fechadas"],
+      "modulos_envolvidos": ["Gerador de Docs","Fontes de Pesquisa","3 portais Docusaurus"],
+      "dados_consumidos": ["PDFs, manuais, editais, specs", "Fontes web"],
+      "dados_produzidos": ["Páginas de documentação MDX", "Análises de cobertura", "Sugestões de melhoria"]
+    },
+    {
+      "id": 9,
+      "nome": "Ciclo de Monitoramento WhatsApp",
+      "canais": ["WhatsApp Web", "Jitbit Helpdesk", "MongoDB"],
+      "fluxo": "Mensagem → LGPD Accept → Menu interativo → Sistema → Descrição → Foto? → Ticket Jitbit → Resposta IA",
+      "kpis": ["Sessões ativas", "Tickets criados via WA", "LGPD aceitos", "Taxa de resolução"],
+      "modulos_envolvidos": ["WhatsApp Bot","Sessões WhatsApp","Integração Jitbit"],
+      "estados_sessao": ["init","awaiting_lgpd","menu","awaiting_subject","awaiting_system","awaiting_description","awaiting_category","awaiting_photo","confirming_ticket","ticket_created","closed"],
+      "dados_consumidos": ["Mensagens WhatsApp", "KB MongoDB", "GPT-4o"],
+      "dados_produzidos": ["Sessões persistidas", "Tickets Jitbit", "Logs de conversa"]
+    }
+  ],
+
+  "integracoes_externas": [
+    { "nome": "Jitbit Helpdesk", "tipo": "REST API", "direcao": "bidirectional", "autenticacao": "Basic Auth (token)", "endpoints_key": ["GET /helpdesk/Tickets","POST /helpdesk/PostReply","GET /helpdesk/Categories"] },
+    { "nome": "OpenAI API", "tipo": "REST API", "direcao": "outbound", "modelos": ["gpt-4o","gpt-4o-mini","text-embedding-ada-002"] },
+    { "nome": "SQL Server AxHub", "tipo": "Database", "direcao": "inbound", "driver": "mssql" },
+    { "nome": "SQL Server AxTon", "tipo": "Database", "direcao": "inbound", "driver": "mssql" },
+    { "nome": "SQL Server AxCross", "tipo": "Database", "direcao": "inbound", "driver": "mssql" },
+    { "nome": "MongoDB", "tipo": "Database", "direcao": "bidirectional", "driver": "mongoose", "collections": ["logs","kbs","roadmaps","specs","conformidades","jobs","fontes","whatsappsessaos","approvals"] },
+    { "nome": "PNCP", "tipo": "REST API", "direcao": "inbound", "url": "https://pncp.gov.br/api", "uso": "Busca de editais licitatórios" },
+    { "nome": "WhatsApp Web", "tipo": "WebSocket/Session", "direcao": "bidirectional", "driver": "whatsapp-web.js" },
+    { "nome": "ITScam Pumatronix", "tipo": "REST API", "direcao": "inbound", "uso": "Câmeras VARCO — validação, heartbeat, incidentes" }
+  ],
+
+  "arquitetura_tecnica": {
+    "stack_completa": {
+      "frontend": "React 18 + Vite 6.x + React Router v6 + Lucide React + Axios + Recharts + React Hook Form + Sonner",
+      "backend": "Node.js 18/20 LTS + Express + mssql + mongoose + openai + whatsapp-web.js",
+      "databases": ["MongoDB 7.x (principal)", "SQL Server 2019 × 3 (AxHub, AxTon, AxCross)"],
+      "docs": "Docusaurus 3.x × 3 portais",
+      "design_system": "Windows 11 Fluent Design Dark Mode"
+    },
+    "css_tokens": {
+      "--bg": "#202020",
+      "--surface": "#2d2d2d",
+      "--accent": "#60cdff",
+      "--border": "#3d3d3d",
+      "--text": "#f3f3f3",
+      "--text-muted": "#8b8b8b"
+    },
+    "principios": [
+      "IA como Serviço Transversal — Todo sistema tem acesso ao GPT-4o via /agent/run",
+      "Dados em Loop Fechado — Cada ação gera log → log alimenta KB → KB melhora IA",
+      "Dark Mode Windows 11 — UI consistente com design Fluent em todo o painel",
+      "SQL Server para Produtos, MongoDB para IA — Separação clara de responsabilidades",
+      "URL como estado — Navegação via ?tab= para deep-linking",
+      "Portais de Documentação separados por produto (AxHub/AxTon/AxCross)"
+    ]
+  },
+
+  "numeros_sistema": {
+    "data_referencia": "2026-07-03",
+    "paginas_react": 132,
+    "rotas": 59,
+    "endpoints_api": 287,
+    "modelos_mongodb": 19,
+    "docs_publicados": 190,
+    "sites_monitorados": 30,
+    "sites_axhub": 18,
+    "sites_axcross": 12,
+    "ciclos_de_processo": 9,
+    "integracoes_externas": 9,
+    "linhas_codigo_painel": 55909,
+    "versao_plataforma": "v4.0",
+    "modulos_central_sites": 18
+  },
+
+  "gaps_estrategicos": {
+    "nao_existe_ainda": [
+      { "item": "CRM (Cliente/Contato/Empresa)", "impacto": "ALTO", "esforco": "Médio" },
+      { "item": "Portal do Cliente (autoatendimento)", "impacto": "ALTO", "esforco": "Alto" },
+      { "item": "Billing/Controle de contratos SaaS", "impacto": "ALTO", "esforco": "Alto" },
+      { "item": "Notificações proativas (email/push)", "impacto": "MÉDIO", "esforco": "Baixo" },
+      { "item": "App Mobile para fiscais em campo", "impacto": "ALTO", "esforco": "Alto" },
+      { "item": "Dashboard por contrato/cliente", "impacto": "MÉDIO", "esforco": "Médio" },
+      { "item": "Integração Multi360 CRM", "impacto": "MÉDIO", "esforco": "Médio" }
+    ],
+    "debitos_tecnicos": [
+      { "item": "Duplicação de páginas (Dashboard/Hub)", "severidade": "ALTA" },
+      { "item": "Falta de componentização", "severidade": "ALTA" },
+      { "item": "Controllers axhub/axton/axcross com código 90% idêntico", "severidade": "MÉDIA" },
+      { "item": "sitesData.js estático (deveria ser DB)", "severidade": "MÉDIA" }
+    ]
+  },
+
+  "linha_do_tempo": [
+    { "periodo": "2023-2024", "eventos": ["AxHub v1.0 lançado","AxTon v1.0 lançado","AxCross v1.0 lançado"] },
+    { "periodo": "Jan-Mar 2026", "eventos": ["AxionIA v1.0 (chat + KB + Jitbit)","AxCross v1.0.0 (31/03/2026)","WhatsApp Bot v1.0"] },
+    { "periodo": "Abr-Mai 2026", "eventos": ["AxCross v1.1.0 (29/04/2026)","AxCross v1.2.0 (22/05/2026)","AxionIA v2.0 (PNCP + Conformidade)","Análise Multi-Produto"] },
+    { "periodo": "Jun 2026", "eventos": ["AxHub v1.2.4 DERSE (104 menus)","AxionIA v3.0 (VARCO + Validação Visual + Roadmap)","Central de Qualidade v1.0","Central de Sites v2.0"] },
+    { "periodo": "Jul 2026", "eventos": ["AxionIA v4.0 — 22 Engines Ativos","Central de Sites v3.0 — 18 módulos unificados","gerar-analise-json.mjs — Inventário completo","ESPINHA-DORSAL-AXION-SISTEMAS-2026 gerado"] }
+  ],
+
+  "proximos_passos": {
+    "curto_prazo_1_3_meses": ["CRM básico — Modelos Cliente/Contato/Empresa no MongoDB","Notificações — Email automático para alertas críticos de sites","Consolidar Dashboards — Unificar Intelligence Hub + Operations Hub","sitesData.js → DB — Migrar configuração estática para MongoDB"],
+    "medio_prazo_3_6_meses": ["Portal do Cliente — Autoatendimento para órgãos públicos","App Mobile — React Native para fiscais em campo","Multi360 CRM — Integração com CRM existente","Billing — Controle de contratos e vigências"],
+    "longo_prazo_6_12_meses": ["AxHub v2.0 — Full rewrite com nova arquitetura","IA Preditiva — Previsão de falhas de equipamento por ML","Marketplace de Módulos — Órgãos compram engines individualmente","Expansão — Chile, Colômbia, México"]
+  }
+}

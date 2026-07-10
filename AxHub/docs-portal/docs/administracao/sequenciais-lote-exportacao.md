@@ -6,7 +6,7 @@ description: Controle de sequenciais de lotes exportados
 
 # Sequenciais de Lote de Exportação
 
-Permite configurar e monitorar os sequenciais dos lotes de exportação de infrações.
+Permite configurar e monitorar os sequenciais dos lotes de exportação de Infrações
 
 ## Como acessar
 
@@ -20,7 +20,7 @@ Permite configurar e monitorar os sequenciais dos lotes de exportação de infra
 | **Status** | Ativo, Esgotado |
 
 :::note Sem screenshot
-Esta tela ainda não possui screenshot cadastrada. Será adicionada em breve.
+está tela ainda não possui screenshot cadastrada. Será adicionada em breve.
 :::
 
 ---

@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useMemo } from "react";
 import { Radio, CheckCircle2, AlertTriangle, XCircle, RefreshCw, Search, ChevronDown, ChevronUp, ExternalLink, Wrench, Eye, Copy, Terminal, Shield, Play } from "lucide-react";
+import QuickSelect from "../components/QuickSelect.jsx";
 
 const API_BASE = "http://localhost:3100";
 
@@ -153,13 +154,13 @@ const PARAM_TO_ENDPOINT = {
   "Noturno": { endpoint: "/api/image/profiles/1", method: "PUT", menu: "Imagem › Perfis › Perfil 2 (Noturno) › Transições", campo: "Transições de Imagem" },
   "OCR": { endpoint: "/api/equipment/ocr", method: "PUT", menu: "Equipamento › Reconhecimento › aba Jidosha (OCR)", campo: "Configurações OCR" },
   "Classificador": { endpoint: "/api/equipment/classifier", method: "PUT", menu: "Equipamento › Reconhecimento › aba Classifier", campo: "Configurações do Classificador" },
-  "SnapshotCrop": { endpoint: "/api/equipment/misc", method: "PUT", menu: "Equipamento › Diversos › Recorte de Snapshot", campo: "snapshotCrop" },
+  "SnapshotCrop": { endpoint: "/api/equipment/misc", method: "PUT", menu: "Equipamento › Imagens › Snapshot Crop", campo: "snapshotCrop" },
   "FTP": { endpoint: "/api/equipment/servers/ftp", method: "PUT", menu: "Equipamento › Servidores › FTP", campo: "Habilitar envio FTP" },
-  "IO": { endpoint: "/api/equipment/ioPorts", method: "PUT", menu: "Equipamento › Portas IO", campo: "Configuração de Portas" },
-  "SNMP": { endpoint: "/api/system/monitoring/snmp", method: "PUT", menu: "Sistema › Monitoramento › SNMP", campo: "Habilitar SNMP" },
-  "Reboot": { endpoint: "/api/system/maintenance/automaticreboot", method: "PUT", menu: "Sistema › Manutenção › Reboot Automático", campo: "Agendamento de Reboot" },
-  "NTP": { endpoint: "/api/equipment/dateAndTime", method: "PUT", menu: "Sistema › Geral › Data e Hora › NTP", campo: "Servidor NTP" },
-  "Timezone": { endpoint: "/api/equipment/dateAndTime", method: "PUT", menu: "Sistema › Geral › Data e Hora", campo: "Fuso Horário" },
+  "IO": { endpoint: "/api/equipment/ioPorts", method: "PUT", menu: "Equipamento › Entradas e Saídas", campo: "Configuração de Portas" },
+  "SNMP": { endpoint: "/api/system/monitoring/snmp", method: "POST", buildPayload: (_, val) => ({ enabled: val }), menu: "Sistema › Monitoramento › SNMP", campo: "Habilitar SNMP" },
+  "Reboot": { endpoint: "/api/system/maintenance/automaticreboot", method: "POST", buildPayload: (param, val) => { const sub = param.split(".")[1]; return { [sub]: { enabled: val } }; }, menu: "Sistema › Manutenção › Reboot Automático", campo: "Agendamento de Reboot" },
+  "NTP": { endpoint: "/api/equipment/dateAndTime", method: "PUT", menu: "Equipamento › Data e Hora › NTP", campo: "Servidor NTP" },
+  "Timezone": { endpoint: "/api/equipment/dateAndTime", method: "PUT", menu: "Equipamento › Data e Hora", campo: "Fuso Horário" },
   "Video": { endpoint: "/api/video/streams/0", method: "PUT", menu: "Vídeo › Streams › Stream 1", campo: "Configurações de Vídeo" },
   "Firmware": { endpoint: null, menu: "Sistema › Manutenção › Atualização de Firmware", campo: "Upload de firmware (.fw)" },
 };
@@ -302,7 +303,7 @@ export default function VarcoMonitor() {
           </div>
           <div style={{ fontSize: "11px", color: C.textSecondary, display: "flex", gap: "16px", flexWrap: "wrap" }}>
             <div>
-              <span style={{ color: C.textMuted }}>Login:</span>{" "}
+              <span style={{ color: C.textMuted }}>Login</span>{" "}
               <code style={{ background: "rgba(255,255,255,0.08)", padding: "2px 6px", borderRadius: "3px", color: C.text, fontWeight: 600 }}>Admin</code>
             </div>
             <div>
@@ -334,20 +335,21 @@ export default function VarcoMonitor() {
       </div>
 
       {/* Tabs */}
-      <div style={{ display: "flex", gap: "2px", marginBottom: "16px", borderBottom: `2px solid ${C.border}` }}>
-        {[
-          { id: "auditoria", label: "Auditoria & Correções", icon: <Wrench size={13} /> },
-          { id: "correcoes", label: "Plano de Correção", icon: <Play size={13} /> },
-          { id: "padrao", label: "vs Padrão", icon: <Shield size={13} /> },
-          { id: "grupos", label: "Grupos", icon: <Eye size={13} /> },
-          { id: "inventario", label: "Inventário", icon: <Radio size={13} /> },
-          { id: "comandos", label: "Comandos", icon: <Terminal size={13} /> },
-        ].map(t => (
-          <button key={t.id} onClick={() => setTab(t.id)}
-            style={{ display: "flex", alignItems: "center", gap: "5px", padding: "9px 14px", border: "none", borderBottom: tab === t.id ? `2px solid ${C.accent}` : "2px solid transparent", background: "none", cursor: "pointer", fontSize: "13px", fontWeight: tab === t.id ? 600 : 400, color: tab === t.id ? C.accent : C.textMuted, marginBottom: "-2px" }}>
-            {t.icon} {t.label}
-          </button>
-        ))}
+      <div style={{ padding: '8px 0 12px' }}>
+        <QuickSelect
+          options={[
+            { id: "auditoria",  label: "Auditoria & Correções" },
+            { id: "correcoes",  label: "Plano de Correção" },
+            { id: "padrao",    label: "vs Padrão" },
+            { id: "grupos",    label: "Grupos" },
+            { id: "inventario",label: "Inventário" },
+            { id: "comandos",  label: "Comandos" },
+          ]}
+          value={tab}
+          onChange={setTab}
+          color="#60cdff"
+          label="Visão"
+        />
       </div>
 
       {error && <div style={{ padding: "10px", background: C.dangerBg, border: `1px solid ${C.dangerBorder}`, borderRadius: "8px", color: C.danger, marginBottom: "12px", fontSize: "13px" }}>⚠️ {error}</div>}
@@ -361,13 +363,87 @@ export default function VarcoMonitor() {
       {!loading && tab === "comandos" && analysis && <ComandosTab groups={analysis.groups} />}
 
       {/* Footer */}
-      <div style={{ marginTop: "16px", padding: "10px", background: C.surface, border: `1px solid ${C.border}`, borderRadius: "6px", fontSize: "11px", color: C.textMuted, display: "flex", justifyContent: "space-between" }}>
-        <span>Inventário: {auditDevices.length} equipamentos | Consenso: frota completa | Atualizado: 08/06/2026</span>
-        <button onClick={fetchAll} style={{ display: "flex", alignItems: "center", gap: "4px", padding: "4px 10px", border: `1px solid ${C.border}`, borderRadius: "4px", background: C.raised, color: C.textSecondary, cursor: "pointer", fontSize: "11px" }}>
-          <RefreshCw size={11} /> {lastUpdate && lastUpdate.toLocaleTimeString("pt-BR")}
-        </button>
+      <div style={{ marginTop: "20px", border: `1px solid ${C.border}`, borderRadius: "8px", overflow: "hidden" }}>
+        {/* Linha superior: info + refresh */}
+        <div style={{ padding: "8px 14px", background: C.surface, fontSize: "11px", color: C.textMuted, display: "flex", justifyContent: "space-between", alignItems: "center", borderBottom: `1px solid ${C.border}` }}>
+          <span>Inventário: {auditDevices.length} equipamentos | Consenso: frota completa</span>
+          <button onClick={fetchAll} style={{ display: "flex", alignItems: "center", gap: "4px", padding: "4px 10px", border: `1px solid ${C.border}`, borderRadius: "4px", background: C.raised, color: C.textSecondary, cursor: "pointer", fontSize: "11px" }}>
+            <RefreshCw size={11} /> {lastUpdate && lastUpdate.toLocaleTimeString("pt-BR")}
+          </button>
+        </div>
+        {/* Linha inferior: exportar relatório */}
+        <RelatorioFooter />
       </div>
       <style>{`.spin{animation:spin 1s linear infinite}@keyframes spin{from{transform:rotate(0)}to{transform:rotate(360deg)}}code{background:rgba(255,255,255,0.08);padding:1px 5px;border-radius:3px;font-size:12px;font-family:'Fira Code',monospace;color:#e2e8f0}.wrong{color:#fb7185;font-weight:600}.correct{color:#6ee7b7;font-weight:600}`}</style>
+    </div>
+  );
+}
+
+function RelatorioFooter() {
+  const [loading, setLoading] = useState(false);
+  const [erro, setErro]       = useState(null);
+
+  const DL_BASE = `${API_BASE}/api/varco/relatorio/download`;
+
+  async function exportarPDF() {
+    setLoading(true); setErro(null);
+    try {
+      // Abre o relatório HTML em nova aba — o usuário usa Ctrl+P → Salvar como PDF
+      window.open(`${DL_BASE}?format=print`, "_blank");
+    } catch (e) { setErro(e.message); }
+    finally { setLoading(false); }
+  }
+
+  async function exportarWord() {
+    setLoading(true); setErro(null);
+    try {
+      // Download direto via link com Content-Disposition: attachment
+      const a  = document.createElement("a");
+      a.href   = `${DL_BASE}?format=doc`;
+      a.target = "_blank";
+      a.click();
+    } catch (e) { setErro(e.message); }
+    finally { setLoading(false); }
+  }
+
+  async function fetchData() {
+    const res = await fetch(`${API_BASE}/api/varco/relatorio`, {
+      headers: { Authorization: `Bearer ${TOKEN}` }
+    });
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    return res.json();
+  }
+
+  return (
+    <div style={{ padding: "12px 14px", background: C.raised, display: "flex", alignItems: "center", gap: "10px", flexWrap: "wrap" }}>
+      <span style={{ fontSize: "12px", fontWeight: 600, color: C.textSecondary, marginRight: "4px" }}>
+        📋 Relatório de Erros:
+      </span>
+
+      <button
+        onClick={exportarPDF}
+        disabled={loading}
+        title="Gera o relatório e abre a janela de impressão. Use 'Salvar como PDF'."
+        style={{ display: "flex", alignItems: "center", gap: "6px", padding: "6px 14px", border: `1px solid ${C.dangerBorder}`, borderRadius: "6px", background: C.dangerBg, color: C.danger, cursor: loading ? "wait" : "pointer", fontSize: "12px", fontWeight: 600, opacity: loading ? 0.6 : 1 }}
+      >
+        📄 Exportar PDF
+      </button>
+
+      <button
+        onClick={exportarWord}
+        disabled={loading}
+        title="Baixa o relatório como arquivo .doc compatível com Microsoft Word."
+        style={{ display: "flex", alignItems: "center", gap: "6px", padding: "6px 14px", border: `1px solid ${C.accentBorder}`, borderRadius: "6px", background: C.accentBg, color: C.accent, cursor: loading ? "wait" : "pointer", fontSize: "12px", fontWeight: 600, opacity: loading ? 0.6 : 1 }}
+      >
+        📝 Exportar Word (.doc)
+      </button>
+
+      {loading && <span style={{ fontSize: "11px", color: C.textMuted }}>⏳ Gerando...</span>}
+      {erro && <span style={{ fontSize: "11px", color: C.danger, background: C.dangerBg, padding: "3px 8px", borderRadius: "4px", border: `1px solid ${C.dangerBorder}` }}>❌ {erro}</span>}
+
+      <span style={{ marginLeft: "auto", fontSize: "10px", color: C.textMuted }}>
+        Dados de: validacao-config.json (validação contra script padrão)
+      </span>
     </div>
   );
 }
@@ -390,6 +466,107 @@ function AuditoriaTab({ analysis }) {
   const [expandedRow, setExpandedRow] = useState(null);
   const [showAllRefs, setShowAllRefs] = useState(false);
 
+  // ─── Status real-time do VARCO Cloud ────────────────────────────────────────
+  // Map uuid → { connected: bool, lastSeen: string }
+  const [frotaStatus, setFrotaStatus] = useState({});
+  useEffect(() => {
+    fetch(`${API_BASE}/api/varco/frota`, {
+      headers: { "X-Admin-Token": "4ca85296b69704ff408e570501c2480af8457da858defbced704ba4ad20d8bf3" }
+    })
+      .then(r => r.json())
+      .then(data => {
+        if (data.devices) {
+          const map = {};
+          data.devices.forEach(d => { map[d.uuid] = { connected: d.connected, lastSeen: d.lastSeen }; });
+          setFrotaStatus(map);
+        }
+      })
+      .catch(() => {}); // silencioso — botões ficam habilitados sem status
+  }, []);
+
+  // ─── ITScam API state ───────────────────────────────────────────────────────
+  // status: { "uuid::param": "idle"|"loading"|"ok"|"error" }
+  const [itscamStatus, setItscamStatus] = useState({});
+  // resultados: { "uuid::param": { antes, depois, erro } }
+  const [itscamResult, setItscamResult] = useState({});
+  // lote status: { "param": "idle"|"loading"|"ok"|"error" }
+  const [loteStatus, setLoteStatus] = useState({});
+  const [loteResult, setLoteResult] = useState({});
+
+  const setStatus = (uuid, param, s) =>
+    setItscamStatus(prev => ({ ...prev, [`${uuid}::${param}`]: s }));
+  const setResult = (uuid, param, r) =>
+    setItscamResult(prev => ({ ...prev, [`${uuid}::${param}`]: r }));
+
+  const aplicarDispositivo = async (uuid, endpoint, payload, param, method = "PUT") => {
+    setStatus(uuid, param, "loading");
+    try {
+      const res = await fetch(`${API_BASE}/api/varco/itscam/aplicar`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json", "X-Admin-Token": "4ca85296b69704ff408e570501c2480af8457da858defbced704ba4ad20d8bf3" },
+        body: JSON.stringify({ uuid, endpoint, payload, method }),
+      });
+      const data = await res.json();
+      if (res.ok && data.ok) {
+        setStatus(uuid, param, "ok");
+        setResult(uuid, param, data);
+      } else {
+        setStatus(uuid, param, "error");
+        setResult(uuid, param, { erro: data.erro || data.detalhe || "Falha desconhecida" });
+      }
+    } catch (e) {
+      setStatus(uuid, param, "error");
+      setResult(uuid, param, { erro: e.message });
+    }
+  };
+
+  const aplicarLote = async (devices, endpoint, payload, param, method = "PUT") => {
+    // Separa online e offline (se status disponível)
+    const online = devices.filter(d => {
+      const fs = frotaStatus[d.uuid];
+      return !fs || fs.connected !== false; // se não sabe, assume online
+    });
+    const offlineDevs = devices.filter(d => {
+      const fs = frotaStatus[d.uuid];
+      return fs && fs.connected === false;
+    });
+
+    // Marca offline imediatamente
+    offlineDevs.forEach(d => {
+      setStatus(d.uuid, param, "offline");
+    });
+
+    if (online.length === 0) {
+      setLoteStatus(prev => ({ ...prev, [param]: "error" }));
+      setLoteResult(prev => ({ ...prev, [param]: { sucesso: 0, total: devices.length, offlineCount: offlineDevs.length } }));
+      return;
+    }
+
+    setLoteStatus(prev => ({ ...prev, [param]: "loading" }));
+    // Marca online como loading individualmente
+    online.forEach(d => setStatus(d.uuid, param, "loading"));
+    try {
+      const res = await fetch(`${API_BASE}/api/varco/itscam/aplicar-lote`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json", "X-Admin-Token": "4ca85296b69704ff408e570501c2480af8457da858defbced704ba4ad20d8bf3" },
+        body: JSON.stringify({ devices: online, endpoint, payload, method }),
+      });
+      const data = await res.json();
+      if (data.resultados) {
+        data.resultados.forEach(r => {
+          setStatus(r.uuid, param, r.ok ? "ok" : "error");
+          setResult(r.uuid, param, r.ok ? { ok: true } : { erro: r.erro });
+        });
+      }
+      const sucesso = data.resultados?.filter(r => r.ok).length ?? 0;
+      setLoteStatus(prev => ({ ...prev, [param]: sucesso > 0 ? "ok" : "error" }));
+      setLoteResult(prev => ({ ...prev, [param]: { ...data, sucesso, total: devices.length, offlineCount: offlineDevs.length } }));
+    } catch (e) {
+      setLoteStatus(prev => ({ ...prev, [param]: "error" }));
+      online.forEach(d => setStatus(d.uuid, param, "error"));
+    }
+  };
+
   // Build detailed problem analysis
   const problemRank = {};
   divergentes.forEach(d => {
@@ -410,23 +587,23 @@ function AuditoriaTab({ analysis }) {
     "VARCO.edgeServer": { menu: "Sistema › Manutenção › Acesso Remoto › VARCO › Edge Server", desc: "Servidor edge VARCO para túnel reverso", impact: "Sem edge server, túnel de gerência remota não conecta.", causa: "Campo não preenchido ou URL errada.", campo: "Campo de texto 'Edge Server'" },
 
     // ═══ PERFIS DE IMAGEM — DIURNO (Perfil 1) ═══
-    "Diurno.lower.startTime": { menu: "Imagem › Transições › Agenda de Transições › lápis (✏️) 'Diurno (inferior)' › Início", desc: "Início da janela em que a transição inferior opera (padrão: 00:00:00 = 24h)", impact: "Com horário restrito, a câmera NÃO troca para Noturno fora dessa janela — fica presa no modo Diurno mesmo de noite.", causa: "Configuração copiada de equipamento antigo com restrição de horário.", campo: "Campo 'Início' na edição da linha 'Diurno (inferior)'" },
-    "Diurno.lower.endTime": { menu: "Imagem › Transições › Agenda de Transições › lápis (✏️) 'Diurno (inferior)' › Fim", desc: "Fim da janela em que a transição inferior opera (padrão: 00:00:00 = 24h)", impact: "Com horário restrito, a câmera NÃO troca para Noturno fora dessa janela — imagens ficam escuras/ilegíveis.", causa: "Horário configurado diferente do template padrão.", campo: "Campo 'Fim' na edição da linha 'Diurno (inferior)'" },
-    "Diurno.lower.level": { menu: "Imagem › Transições › Agenda de Transições › lápis (✏️) 'Diurno (inferior)' › Nível", desc: "Luminosidade que dispara troca para Noturno (padrão: 10 = só quando realmente escurece)", impact: "Com valor 30, uma nuvem ou sombra já faz a câmera ir para P&B em pleno dia.", causa: "Ajuste local por técnico sem atualizar template.", campo: "Slider/campo 'Nível' — valor exibido como 'Nível < 10' na barra azul" },
-    "Diurno.lower.holdTime": { menu: "Imagem › Transições › Agenda de Transições › lápis (✏️) 'Diurno (inferior)' › Tempo de espera", desc: "Tempo (ms) que a luminosidade deve ficar abaixo do nível antes de trocar (padrão: 60000ms = 1min)", impact: "Transição muito rápida gera frames inconsistentes.", causa: "Default de firmware diferente.", campo: "Campo 'Tempo de espera (ms)' na edição da transição" },
-    "Diurno.upper.startTime": { menu: "Imagem › Transições › Agenda de Transições › lápis (✏️) 'Diurno (superior)' › Início", desc: "Início da janela em que a transição superior opera (padrão: 00:00:00 = 24h)", impact: "Com horário restrito, a câmera NÃO volta para Diurno fora dessa janela — fica presa em P&B de manhã.", causa: "Perfil não padronizado após manutenção.", campo: "Campo 'Início' na edição da linha 'Diurno (superior)'" },
-    "Diurno.upper.endTime": { menu: "Imagem › Transições › Agenda de Transições › lápis (✏️) 'Diurno (superior)' › Fim", desc: "Fim da janela em que a transição superior opera (padrão: 00:00:00 = 24h)", impact: "Janela restrita impede retorno ao modo colorido quando amanhece.", causa: "Diferença entre versões de firmware.", campo: "Campo 'Fim' na edição da linha 'Diurno (superior)'" },
+    "Diurno.lower.startTime": { menu: "Imagem › Perfis › Perfil 1 (Diurno) › Transições › Inferior › Início", desc: "Início da janela em que a transição inferior opera (padrão: 00:00:00 = 24h)", impact: "Com horário restrito, a câmera NÃO troca para Noturno fora dessa janela — fica presa no modo Diurno mesmo de noite.", causa: "Configuração copiada de equipamento antigo com restrição de horário.", campo: "Campo 'Início' na edição da linha 'Diurno (inferior)'" },
+    "Diurno.lower.endTime": { menu: "Imagem › Perfis › Perfil 1 (Diurno) › Transições › Inferior › Fim", desc: "Fim da janela em que a transição inferior opera (padrão: 00:00:00 = 24h)", impact: "Com horário restrito, a câmera NÃO troca para Noturno fora dessa janela — imagens ficam escuras/ilegíveis.", causa: "Horário configurado diferente do template padrão.", campo: "Campo 'Fim' na edição da linha 'Diurno (inferior)'" },
+    "Diurno.lower.level": { menu: "Imagem › Perfis › Perfil 1 (Diurno) › Transições › Inferior › Nível", desc: "Luminosidade que dispara troca para Noturno (padrão: 10 = só quando realmente escurece)", impact: "Com valor 30, uma nuvem ou sombra já faz a câmera ir para P&B em pleno dia.", causa: "Ajuste local por técnico sem atualizar template.", campo: "Slider/campo 'Nível' — valor exibido como 'Nível < 10' na barra azul" },
+    "Diurno.lower.holdTime": { menu: "Imagem › Perfis › Perfil 1 (Diurno) › Transições › Inferior › Tempo de espera", desc: "Tempo (ms) que a luminosidade deve ficar abaixo do nível antes de trocar (padrão: 60000ms = 1min)", impact: "Transição muito rápida gera frames inconsistentes.", causa: "Default de firmware diferente.", campo: "Campo 'Tempo de espera (ms)' na edição da transição" },
+    "Diurno.upper.startTime": { menu: "Imagem › Perfis › Perfil 1 (Diurno) › Transições › Superior › Início", desc: "Início da janela em que a transição superior opera (padrão: 00:00:00 = 24h)", impact: "Com horário restrito, a câmera NÃO volta para Diurno fora dessa janela — fica presa em P&B de manhã.", causa: "Perfil não padronizado após manutenção.", campo: "Campo 'Início' na edição da linha 'Diurno (superior)'" },
+    "Diurno.upper.endTime": { menu: "Imagem › Perfis › Perfil 1 (Diurno) › Transições › Superior › Fim", desc: "Fim da janela em que a transição superior opera (padrão: 00:00:00 = 24h)", impact: "Janela restrita impede retorno ao modo colorido quando amanhece.", causa: "Diferença entre versões de firmware.", campo: "Campo 'Fim' na edição da linha 'Diurno (superior)'" },
     "Diurno.upper.level": { menu: "Imagem › Perfis › Perfil 1 (Diurno) › Transições › Superior › Nível", desc: "Nível de luminosidade threshold superior (padrão: 35)", impact: "Imagens saturadas ou subexpostas durante o dia.", causa: "Ajuste manual ou cópia de config incompleta.", campo: "Slider 'Nível' na linha 'Superior'" },
     "Diurno.upper.holdTime": { menu: "Imagem › Perfis › Perfil 1 (Diurno) › Transições › Superior › Tempo de espera", desc: "Tempo (ms) antes da transição superior (padrão: 60000ms)", impact: "Flickering na imagem durante mudanças de luz.", causa: "Valor divergente entre lotes de firmware.", campo: "Campo 'Tempo de espera (ms)' na linha 'Superior'" },
     "Diurno.upper.profile": { menu: "Imagem › Perfis › Perfil 1 (Diurno) › Transições › Superior › Perfil destino", desc: "ID do perfil de destino ao atingir threshold superior", impact: "Perfil errado = parâmetros de cor/ganho completamente diferentes.", causa: "Profile ID não atualizado após redefinição de templates.", campo: "Dropdown 'Perfil' na linha 'Superior'" },
 
     // ═══ PERFIS DE IMAGEM — NOTURNO (Perfil 2) ═══
-    "Noturno.lower.startTime": { menu: "Imagem › Transições › Agenda de Transições › lápis (✏️) 'Noturno (inferior)' › Início", desc: "Início da janela da transição inferior noturna (padrão: 00:00:00 = 24h)", impact: "Câmera fica presa no modo Noturno sem poder transicionar — imagens P&B de dia.", causa: "Configuração de horários divergente.", campo: "Campo 'Início' na edição da linha 'Noturno (inferior)'" },
-    "Noturno.lower.endTime": { menu: "Imagem › Transições › Agenda de Transições › lápis (✏️) 'Noturno (inferior)' › Fim", desc: "Fim da janela da transição inferior noturna (padrão: 00:00:00 = 24h)", impact: "Restrição de horário impede transição noturna adequada.", causa: "Configuração incompleta pós-manutenção.", campo: "Campo 'Fim' na edição da linha 'Noturno (inferior)'" },
-    "Noturno.lower.level": { menu: "Imagem › Transições › Agenda de Transições › lápis (✏️) 'Noturno (inferior)' › Nível", desc: "Nível de luminosidade threshold inferior noturno (padrão: 10)", impact: "IR/Flash pode não ativar no momento correto.", causa: "Ajuste local ou firmware com defaults diferentes.", campo: "Slider/campo 'Nível' — aparece como 'Nível < 10' na barra azul" },
-    "Noturno.lower.holdTime": { menu: "Imagem › Transições › Agenda de Transições › lápis (✏️) 'Noturno (inferior)' › Tempo de espera", desc: "Tempo antes de transicionar (padrão: 60000ms)", impact: "Fotos transitórias com qualidade degradada.", causa: "Valor padrão diferente entre lotes.", campo: "Campo 'Tempo de espera (ms)' na edição da transição" },
-    "Noturno.upper.startTime": { menu: "Imagem › Transições › Agenda de Transições › lápis (✏️) 'Noturno (superior)' › Início", desc: "Início da janela da transição superior noturna (padrão: 00:00:00 = 24h)", impact: "Câmera não volta ao Diurno quando amanhece — fica em P&B.", causa: "Não sincronizado com template padrão.", campo: "Campo 'Início' na edição da linha 'Noturno (superior)'" },
-    "Noturno.upper.endTime": { menu: "Imagem › Transições › Agenda de Transições › lápis (✏️) 'Noturno (superior)' › Fim", desc: "Fim da janela da transição superior noturna (padrão: 00:00:00 = 24h)", impact: "Restrição impede retorno ao modo diurno.", causa: "Configuração manual divergente.", campo: "Campo 'Fim' na edição da linha 'Noturno (superior)'" },
+    "Noturno.lower.startTime": { menu: "Imagem › Perfis › Perfil 2 (Noturno) › Transições › Inferior › Início", desc: "Início da janela da transição inferior noturna (padrão: 00:00:00 = 24h)", impact: "Câmera fica presa no modo Noturno sem poder transicionar — imagens P&B de dia.", causa: "Configuração de horários divergente.", campo: "Campo 'Início' na edição da linha 'Noturno (inferior)'" },
+    "Noturno.lower.endTime": { menu: "Imagem › Perfis › Perfil 2 (Noturno) › Transições › Inferior › Fim", desc: "Fim da janela da transição inferior noturna (padrão: 00:00:00 = 24h)", impact: "Restrição de horário impede transição noturna adequada.", causa: "Configuração incompleta pós-manutenção.", campo: "Campo 'Fim' na edição da linha 'Noturno (inferior)'" },
+    "Noturno.lower.level": { menu: "Imagem › Perfis › Perfil 2 (Noturno) › Transições › Inferior › Nível", desc: "Nível de luminosidade threshold inferior noturno (padrão: 10)", impact: "IR/Flash pode não ativar no momento correto.", causa: "Ajuste local ou firmware com defaults diferentes.", campo: "Slider/campo 'Nível' — aparece como 'Nível < 10' na barra azul" },
+    "Noturno.lower.holdTime": { menu: "Imagem › Perfis › Perfil 2 (Noturno) › Transições › Inferior › Tempo de espera", desc: "Tempo antes de transicionar (padrão: 60000ms)", impact: "Fotos transitórias com qualidade degradada.", causa: "Valor padrão diferente entre lotes.", campo: "Campo 'Tempo de espera (ms)' na edição da transição" },
+    "Noturno.upper.startTime": { menu: "Imagem › Perfis › Perfil 2 (Noturno) › Transições › Superior › Início", desc: "Início da janela da transição superior noturna (padrão: 00:00:00 = 24h)", impact: "Câmera não volta ao Diurno quando amanhece — fica em P&B.", causa: "Não sincronizado com template padrão.", campo: "Campo 'Início' na edição da linha 'Noturno (superior)'" },
+    "Noturno.upper.endTime": { menu: "Imagem › Perfis › Perfil 2 (Noturno) › Transições › Superior › Fim", desc: "Fim da janela da transição superior noturna (padrão: 00:00:00 = 24h)", impact: "Restrição impede retorno ao modo diurno.", causa: "Configuração manual divergente.", campo: "Campo 'Fim' na edição da linha 'Noturno (superior)'" },
     "Noturno.upper.level": { menu: "Imagem › Perfis › Perfil 2 (Noturno) › Transições › Superior › Nível", desc: "Nível de luminosidade threshold superior noturno (padrão: 35)", impact: "Flash/IR ativa muito cedo ou muito tarde.", causa: "Threshold não calibrado para o local.", campo: "Slider 'Nível' na linha 'Superior'" },
     "Noturno.upper.holdTime": { menu: "Imagem › Perfis › Perfil 2 (Noturno) › Transições › Superior › Tempo de espera", desc: "Tempo na transição superior noturna (padrão: 60000ms)", impact: "Instabilidade de imagem durante a transição.", causa: "Diferença de firmware ou ajuste manual.", campo: "Campo 'Tempo de espera (ms)' na linha 'Superior'" },
     "Noturno.upper.profile": { menu: "Imagem › Perfis › Perfil 2 (Noturno) › Transições › Superior › Perfil destino", desc: "ID do perfil noturno de destino (padrão: 0)", impact: "Perfil noturno errado = fotos sem IR ou com ganho excessivo.", causa: "Profile ID não atualizado.", campo: "Dropdown 'Perfil' na linha 'Superior'" },
@@ -450,28 +627,28 @@ function AuditoriaTab({ analysis }) {
     "Classificador.minProbability": { menu: "Equipamento › Reconhecimento › aba Classifier › Confiabilidade mínima", desc: "Confiança mínima para aceitar classificação (padrão: 20%)", impact: "Muito alto = muitas rejeições. Muito baixo = erros.", causa: "Threshold não padronizado entre equipamentos.", campo: "Slider 'Confiabilidade mínima (%)'" },
 
     // ═══ SNAPSHOT CROP ═══
-    "SnapshotCrop.enable": { menu: "Equipamento › Diversos › Recorte de Snapshot › Habilitar", desc: "Recorte automático da imagem de snapshot", impact: "Sem crop, imagem completa é enviada (mais pesada).", causa: "Feature não ativada em alguns equipamentos.", campo: "Switch 'Habilitar recorte'" },
-    "SnapshotCrop.mode": { menu: "Equipamento › Diversos › Recorte de Snapshot › Modo", desc: "Modo de recorte (plate/vehicle/custom)", impact: "Modo errado gera recortes inúteis ou muito grandes.", causa: "Configuração manual inconsistente.", campo: "Dropdown 'Modo de recorte'" },
+    "SnapshotCrop.enable": { menu: "Equipamento › Imagens › Snapshot Crop › Habilitar", desc: "Recorte automático da imagem de snapshot. Acesse Equipamento › Imagens e procure a seção 'Snapshot Crop' ou 'Recorte de Snapshot' na página.", impact: "Sem crop, imagem completa é enviada (mais pesada).", causa: "Feature não ativada em alguns equipamentos.", campo: "Switch 'Habilitar' (dentro de Snapshot Crop)" },
+    "SnapshotCrop.mode": { menu: "Equipamento › Imagens › Snapshot Crop › Modo", desc: "Modo de recorte: static (posição fixa) | plate (recorta a placa) | vehicle (recorta o veículo). Acesse Equipamento › Imagens e procure 'Snapshot Crop'.", impact: "Modo errado gera recortes inúteis ou muito grandes.", causa: "Configuração manual inconsistente.", campo: "Dropdown 'Mode' ou 'Modo' (dentro de Snapshot Crop)" },
 
     // ═══ FTP (Envio de Imagens) ═══
     "FTP.enable": { menu: "Equipamento › Servidores › FTP › Habilitar", desc: "Upload de imagens via FTP para servidor central", impact: "Sem FTP, imagens não chegam ao servidor — PERDA TOTAL de evidências.", causa: "FTP desabilitado após teste ou manutenção.", campo: "Switch 'Habilitar FTP'" },
 
     // ═══ PORTAS IO (Trigger/Laço) ═══
-    "IO.port1.earlyUs": { menu: "Equipamento › Portas IO › Porta 1 › Antecipação (μs)", desc: "Tempo de antecipação da porta IO 1 (trigger de laço)", impact: "Trigger antecipado/atrasado = veículo fora da posição ideal.", causa: "Calibração de laço não padronizada.", campo: "Campo numérico 'Antecipação (μs)' - Porta 1" },
-    "IO.port1.isReserved": { menu: "Equipamento › Portas IO › Porta 1 › Reservada", desc: "Porta IO 1 reservada para trigger principal", impact: "Se não reservada, pode conflitar com outros sinais.", causa: "Configuração de hardware divergente.", campo: "Switch 'Reservada' - Porta 1" },
-    "IO.port3.earlyUs": { menu: "Equipamento › Portas IO › Porta 3 › Antecipação (μs)", desc: "Tempo de antecipação da porta IO 3", impact: "Timing de captura incorreto = frame sem veículo.", causa: "Calibração local não replicada.", campo: "Campo numérico 'Antecipação (μs)' - Porta 3" },
-    "IO.port3.isReserved": { menu: "Equipamento › Portas IO › Porta 3 › Reservada", desc: "Porta IO 3 reservada", impact: "Conflito de sinais se não reservada.", causa: "Setup de hardware inconsistente.", campo: "Switch 'Reservada' - Porta 3" },
+    "IO.port1.earlyUs": { menu: "Equipamento › Entradas e Saídas › Porta 1 › Antecipação (μs)", desc: "Tempo de antecipação da porta IO 1 (trigger de laço)", impact: "Trigger antecipado/atrasado = veículo fora da posição ideal.", causa: "Calibração de laço não padronizada.", campo: "Campo numérico 'Antecipação (μs)' - Porta 1" },
+    "IO.port1.isReserved": { menu: "Equipamento › Entradas e Saídas › Porta 1 › Reservada", desc: "Porta IO 1 reservada para trigger principal", impact: "Se não reservada, pode conflitar com outros sinais.", causa: "Configuração de hardware divergente.", campo: "Switch 'Reservada' - Porta 1" },
+    "IO.port3.earlyUs": { menu: "Equipamento › Entradas e Saídas › Porta 3 › Antecipação (μs)", desc: "Tempo de antecipação da porta IO 3", impact: "Timing de captura incorreto = frame sem veículo.", causa: "Calibração local não replicada.", campo: "Campo numérico 'Antecipação (μs)' - Porta 3" },
+    "IO.port3.isReserved": { menu: "Equipamento › Entradas e Saídas › Porta 3 › Reservada", desc: "Porta IO 3 reservada", impact: "Conflito de sinais se não reservada.", causa: "Setup de hardware inconsistente.", campo: "Switch 'Reservada' - Porta 3" },
 
     // ═══ SNMP (Monitoramento) ═══
-    "SNMP.enabled": { menu: "Sistema › Monitoramento › SNMP › Habilitar", desc: "Monitoramento SNMP do equipamento", impact: "Sem SNMP, NMS não monitora saúde do dispositivo.", causa: "Protocolo não ativado na instalação.", campo: "Switch 'Habilitar SNMP'" },
+    "SNMP.enabled": { menu: "Sistema › Monitoramento › SNMP › Habilitar", desc: "Agente SNMP ativo quando o padrão da frota é desabilitado", impact: "SNMP ativo com variável de template não resolvida ({$SNMP_COMMUNITY}) — agente ineficaz e exposição desnecessária de protocolo de rede.", causa: "Provisionamento automatizado deixou SNMP habilitado com template não resolvido. Correção via API: POST /api/system/monitoring/snmp com enabled=false.", campo: "Switch 'Habilitar SNMP'" },
 
     // ═══ REBOOT (Manutenção Automática) ═══
-    "Reboot.scheduled.enabled": { menu: "Sistema › Manutenção › Reboot Automático › Agendado › Habilitar", desc: "Reboot programado (ex: diário às 4h)", impact: "Sem reboot automático, memory leaks causam travamento.", causa: "Feature de manutenção não ativada.", campo: "Switch 'Habilitar reboot agendado'" },
-    "Reboot.periodic.enabled": { menu: "Sistema › Manutenção › Reboot Automático › Periódico › Habilitar", desc: "Reboot periódico baseado em uptime", impact: "Complementa o agendado para evitar degradação.", causa: "Não configurado como padrão.", campo: "Switch 'Habilitar reboot periódico'" },
+    "Reboot.scheduled.enabled": { menu: "Sistema › Manutenção › Reboot Automático › Agendado › Habilitar", desc: "Reboot agendado automático do equipamento", impact: "Padrão da frota é desabilitado — reboot manual apenas.", causa: "Reboot agendado ativo fora do padrão. Correção via API: POST /api/system/maintenance/automaticreboot com scheduled.enabled=false.", campo: "Switch 'Habilitar reboot agendado'" },
+    "Reboot.periodic.enabled": { menu: "Sistema › Manutenção › Reboot Automático › Periódico › Habilitar", desc: "Reboot periódico baseado em uptime", impact: "Padrão da frota é desabilitado.", causa: "Reboot periódico ativo fora do padrão. Correção via API: POST /api/system/maintenance/automaticreboot com periodic.enabled=false.", campo: "Switch 'Habilitar reboot periódico'" },
 
     // ═══ DATA/HORA (NTP e Timezone) ═══
-    "NTP.server": { menu: "Sistema › Geral › Data e Hora › NTP › Servidor", desc: "Servidor NTP para sincronização de relógio", impact: "Horário errado = timestamps de infração inválidos legalmente.", causa: "NTP server diferente ou não configurado.", campo: "Campo de texto 'Servidor NTP'" },
-    "Timezone": { menu: "Sistema › Geral › Data e Hora › Fuso Horário", desc: "Fuso horário do equipamento", impact: "Fuso errado invalida toda autuação do equipamento.", causa: "Timezone não ajustado após deploy.", campo: "Dropdown 'Fuso horário'" },
+    "NTP.server": { menu: "Equipamento › Data e Hora › NTP › Servidor", desc: "Servidor NTP para sincronização de relógio", impact: "Horário errado = timestamps de infração inválidos legalmente.", causa: "NTP server diferente ou não configurado.", campo: "Campo de texto 'Servidor NTP'" },
+    "Timezone": { menu: "Equipamento › Data e Hora › Fuso Horário", desc: "Fuso horário do equipamento", impact: "Fuso errado invalida toda autuação do equipamento.", causa: "Timezone não ajustado após deploy.", campo: "Dropdown 'Fuso horário'" },
 
     // ═══ VÍDEO (Stream) ═══
     "Video.framerate": { menu: "Vídeo › Streams › Stream 1 › Taxa de frames", desc: "Taxa de frames do stream de vídeo (fps)", impact: "FPS baixo = menor chance de captura.", causa: "Ajuste de performance individual.", campo: "Slider 'FPS'" },
@@ -785,7 +962,37 @@ function AuditoriaTab({ analysis }) {
 
                     {/* How to fix */}
                     <div style={{ marginTop: "12px", padding: "10px 12px", background: C.surface, border: `1px solid ${C.border}`, borderRadius: "6px" }}>
-                      <div style={{ fontSize: "10px", color: C.accent, marginBottom: "6px", textTransform: "uppercase", letterSpacing: "0.5px" }}>Como Corrigir</div>
+                      <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "6px" }}>
+                        <div style={{ fontSize: "10px", color: C.accent, textTransform: "uppercase", letterSpacing: "0.5px" }}>Como Corrigir</div>
+                        {ep.endpoint && info.devices.some(d => d.uuid) && (() => {
+                          const onlineDevs = info.devices.filter(d => {
+                            const fs = frotaStatus[d.uuid];
+                            return d.uuid && (!fs || fs.connected !== false);
+                          });
+                          const offlineCount = info.devices.filter(d => {
+                            const fs = frotaStatus[d.uuid];
+                            return d.uuid && fs && fs.connected === false;
+                          }).length;
+                          const loteLabel = loteStatus[param] === "loading"
+                            ? "⏳ Aplicando..."
+                            : loteStatus[param] === "ok"
+                              ? `✅ Aplicado (${loteResult[param]?.sucesso}/${loteResult[param]?.total}${loteResult[param]?.offlineCount > 0 ? ` · ${loteResult[param].offlineCount} offline` : ""})`
+                              : loteStatus[param] === "error"
+                                ? `❌ Falha${loteResult[param]?.offlineCount > 0 ? ` (${loteResult[param].offlineCount} offline)` : ""}`
+                                : onlineDevs.length === 0
+                                  ? `📡 Todos offline (${offlineCount})`
+                                  : `✅ Aplicar em todos (${onlineDevs.length}${offlineCount > 0 ? ` online · ${offlineCount} offline` : ""})`;
+                          return (
+                            <button
+                              onClick={() => aplicarLote(info.devices.filter(d => d.uuid), ep.endpoint, ep.buildPayload ? ep.buildPayload(param, correctVal) : { [ep.campo || param.split(".")[0]]: { [param.split(".")[1]]: correctVal } }, param, ep.method || "PUT")}
+                              disabled={loteStatus[param] === "loading" || onlineDevs.length === 0}
+                              style={{ fontSize: "10px", padding: "3px 10px", borderRadius: "4px", border: `1px solid ${onlineDevs.length === 0 ? C.border : loteStatus[param] === "error" ? C.danger : C.success}`, background: loteStatus[param] === "ok" ? "rgba(108,203,95,0.2)" : loteStatus[param] === "error" ? C.dangerBg : onlineDevs.length === 0 ? C.surface : "rgba(108,203,95,0.08)", color: onlineDevs.length === 0 ? C.textMuted : loteStatus[param] === "error" ? C.danger : C.success, cursor: loteStatus[param] === "loading" || onlineDevs.length === 0 ? "default" : "pointer", fontWeight: 600 }}
+                            >
+                              {loteLabel}
+                            </button>
+                          );
+                        })()}
+                      </div>
 
                       {/* Menu path */}
                       <div style={{ marginBottom: "8px", padding: "6px 10px", background: "rgba(96,205,255,0.06)", border: `1px solid rgba(96,205,255,0.15)`, borderRadius: "4px" }}>
@@ -794,13 +1001,93 @@ function AuditoriaTab({ analysis }) {
                         {paramInfo.campo && <div style={{ fontSize: "11px", color: C.textSecondary, marginTop: "2px" }}>Campo: <strong style={{ color: C.text }}>{paramInfo.campo}</strong></div>}
                       </div>
 
-                      {/* Step by step */}
                       {ep.endpoint ? (
                         <div style={{ fontSize: "12px", color: C.textSecondary, lineHeight: "1.8" }}>
-                          <div><strong style={{ color: C.text }}>Via Interface Web:</strong></div>
+                          {/* Tabela de dispositivos afetados com ações diretas */}
+                          {info.devices.some(d => d.uuid) && (
+                            <div style={{ marginBottom: "10px" }}>
+                              <div style={{ fontSize: "10px", color: C.textMuted, marginBottom: "5px", textTransform: "uppercase", letterSpacing: "0.5px" }}>Dispositivos afetados — ações diretas</div>
+                              <table style={{ width: "100%", borderCollapse: "collapse", fontSize: "11px" }}>
+                                <thead>
+                                  <tr style={{ background: C.tableHeader }}>
+                                    <th style={{ padding: "4px 8px", textAlign: "left", color: C.textSecondary }}>Equipamento</th>
+                                    <th style={{ padding: "4px 8px", textAlign: "left", color: C.textSecondary }}>Interface Web</th>
+                                    <th style={{ padding: "4px 8px", textAlign: "left", color: C.textSecondary }}>Caminho</th>
+                                    <th style={{ padding: "4px 6px", textAlign: "center", color: C.textSecondary }}>Aplicar</th>
+                                    <th style={{ padding: "4px 6px", textAlign: "center", color: C.textSecondary }}>Status</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                {info.devices.map(d => {
+                                    const sKey = `${d.uuid}::${param}`;
+                                    const st = itscamStatus[sKey] || "idle";
+                                    const res = itscamResult[sKey];
+                                    const tunnelUrl = d.uuid ? `https://${d.uuid}-80.tunnel.varco.cloud` : null;
+                                    const frotaInfo = d.uuid ? frotaStatus[d.uuid] : null;
+                                    const isOffline = frotaInfo && frotaInfo.connected === false;
+                                    const lastSeenStr = isOffline && frotaInfo.lastSeen
+                                      ? (() => { try { return new Date(frotaInfo.lastSeen).toLocaleDateString("pt-BR"); } catch { return frotaInfo.lastSeen; } })()
+                                      : null;
+                                    return (
+                                      <tr key={d.nome} style={{ borderTop: `1px solid ${C.borderLight}`, opacity: isOffline ? 0.7 : 1 }}>
+                                        <td style={{ padding: "5px 8px", color: C.text, fontWeight: 600, fontSize: "11px" }}>
+                                          {d.nome}
+                                          {isOffline && (
+                                            <span title={`Offline desde ${lastSeenStr || "desconhecido"}`} style={{ marginLeft: "5px", fontSize: "10px", color: C.danger, fontWeight: 400 }}>
+                                              📡 offline
+                                            </span>
+                                          )}
+                                        </td>
+                                        <td style={{ padding: "5px 8px" }}>
+                                          {tunnelUrl ? (
+                                            <a href={tunnelUrl} target="_blank" rel="noopener noreferrer" style={{ color: isOffline ? C.textMuted : C.accent, fontSize: "11px", textDecoration: "none", fontFamily: "monospace" }} title={isOffline ? `Device offline — último acesso: ${lastSeenStr || "desconhecido"}` : "Abre a interface web do equipamento"}>
+                                              🌐 Abrir
+                                            </a>
+                                          ) : (
+                                            <span style={{ color: C.textMuted, fontSize: "11px" }}>sem tunnel</span>
+                                          )}
+                                        </td>
+                                        <td style={{ padding: "5px 8px" }}>
+                                          <span style={{ fontSize: "10px", color: C.textSecondary }} title={paramInfo.menu}>
+                                            {ep.menu ? ep.menu.split(" › ").slice(0, 3).join(" › ") : "—"}
+                                          </span>
+                                        </td>
+                                        <td style={{ padding: "5px 6px", textAlign: "center" }}>
+                                          {d.uuid ? (
+                                            isOffline ? (
+                                              <span title={`Device offline — último acesso: ${lastSeenStr || "desconhecido"}`} style={{ fontSize: "10px", color: C.textMuted, cursor: "default" }}>
+                                                📡 Offline
+                                              </span>
+                                            ) : (
+                                              <button
+                                                onClick={() => aplicarDispositivo(d.uuid, ep.endpoint, ep.buildPayload ? ep.buildPayload(param, correctVal) : { [ep.campo || param.split(".")[0]]: { [param.split(".")[1]]: correctVal } }, param, ep.method || "PUT")}
+                                                disabled={st === "loading" || st === "ok"}
+                                                title={`Aplicar ${param} = ${correctVal} via REST API`}
+                                                style={{ fontSize: "10px", padding: "2px 8px", borderRadius: "3px", border: `1px solid ${st === "ok" ? C.success : st === "error" ? C.danger : C.accent}`, background: st === "ok" ? "rgba(108,203,95,0.1)" : st === "error" ? C.dangerBg : "transparent", color: st === "ok" ? C.success : st === "error" ? C.danger : C.accent, cursor: st === "loading" || st === "ok" ? "default" : "pointer" }}
+                                              >
+                                                {st === "loading" ? "⏳" : st === "ok" ? "✅" : st === "error" ? "❌" : "▶ Aplicar"}
+                                              </button>
+                                            )
+                                          ) : "—"}
+                                        </td>
+                                        <td style={{ padding: "5px 6px", textAlign: "center", fontSize: "10px" }}>
+                                          {st === "ok" && <span style={{ color: C.success }}>Aplicado</span>}
+                                          {st === "error" && <span style={{ color: C.danger }} title={res?.erro}>Falha</span>}
+                                          {st === "offline" && <span style={{ color: C.textMuted }} title={`Último acesso: ${lastSeenStr || "desconhecido"}`}>Offline</span>}
+                                          {st === "loading" && <span style={{ color: C.accent }}>...</span>}
+                                        </td>
+                                      </tr>
+                                    );
+                                  })}
+                                </tbody>
+                              </table>
+                            </div>
+                          )}
+
+                          <div><strong style={{ color: C.text }}>Via Interface Web (manual):</strong></div>
                           <div style={{ paddingLeft: "12px" }}>
-                            <div>1. Acessar: <code style={{ color: C.accent }}>https://[UUID]-80.tunnel.varco.cloud</code></div>
-                            <div>2. Login: <code>Admin</code> / <code>#econocr@</code></div>
+                            <div>1. Clique em <strong style={{ color: C.accent }}>🌐 Abrir</strong> na coluna da tabela acima</div>
+                            <div>2. Login <code>Admin</code> / <code>#econocr@</code></div>
                             <div>3. Navegar: <span style={{ color: C.accent }}>{paramInfo.menu || ep.menu || "—"}</span></div>
                             <div>4. Alterar <strong style={{ color: C.text }}>{paramInfo.campo || param.split(".").slice(1).join(".")}</strong> para <code style={{ color: "#7dffb3", fontWeight: 700 }}>{String(correctVal)}</code></div>
                             <div>5. Clicar <strong style={{ color: C.success }}>Aplicar</strong></div>
@@ -813,7 +1100,30 @@ function AuditoriaTab({ analysis }) {
                         </div>
                       ) : (
                         <div style={{ fontSize: "12px", color: C.textSecondary }}>
-                          Requer acesso físico ou remoto (TeamViewer/RDP) ao equipamento para atualização de firmware.
+                          {info.devices.some(d => d.uuid) ? (
+                            <>
+                              <div style={{ marginBottom: "8px", padding: "6px 10px", background: C.dangerBg, border: `1px solid ${C.dangerBorder}`, borderRadius: "4px", fontSize: "11px", color: C.danger }}>
+                                ⚠️ <strong>Endpoint somente leitura (HTTP 404)</strong> — correção automática via REST não disponível neste firmware. Use a interface web diretamente.
+                              </div>
+                              <div style={{ marginBottom: "6px" }}>
+                                <div style={{ fontSize: "10px", color: C.textMuted, marginBottom: "5px", textTransform: "uppercase", letterSpacing: "0.5px" }}>Dispositivos afetados — acesso direto</div>
+                                <div style={{ display: "flex", flexWrap: "wrap", gap: "4px" }}>
+                                  {info.devices.map(d => (
+                                    <TunnelLink key={d.nome} nome={d.nome} uuid={d.uuid} style={{ background: C.dangerBg, padding: "2px 8px", borderRadius: "3px", fontSize: "11px", color: C.danger, display: "inline-block" }} />
+                                  ))}
+                                </div>
+                              </div>
+                              <div style={{ paddingLeft: "0" }}>
+                                <div>1. Clique no link acima para abrir a interface web do equipamento</div>
+                                <div>2. Login <code>Admin</code> / <code>#econocr@</code></div>
+                                <div>3. Navegar: <span style={{ color: C.accent }}>{paramInfo.menu || ep.menu || "—"}</span></div>
+                                <div>4. Alterar <strong style={{ color: C.text }}>{paramInfo.campo || param.split(".").slice(1).join(".")}</strong> para <code style={{ color: "#7dffb3", fontWeight: 700 }}>{String(correctVal)}</code></div>
+                                <div>5. Clicar <strong style={{ color: C.success }}>Salvar</strong> — aguardar confirmação visual na página</div>
+                              </div>
+                            </>
+                          ) : (
+                            <span>Requer acesso físico ou remoto (TeamViewer/RDP) ao equipamento para atualização de firmware.</span>
+                          )}
                         </div>
                       )}
                     </div>
@@ -872,7 +1182,7 @@ function CorrecoesTab({ liveDevices = [] }) {
   const gerarNovoPlano = async () => {
     setGerando(true); setMsg(null);
     try {
-      const res = await fetch(`${API_BASE}/api/varco/gerar-plano`, { 
+      const res = await fetch(`${API_BASE}/api/varco/plano-correcao/gerar`, { 
         method: "POST",
         headers: {
           "X-Admin-Token": "4ca85296b69704ff408e570501c2480af8457da858defbced704ba4ad20d8bf3"
@@ -888,7 +1198,7 @@ function CorrecoesTab({ liveDevices = [] }) {
   const aplicarCaso = async (casoId) => {
     setAplicando(casoId); setMsg(null);
     try {
-      const res = await fetch(`${API_BASE}/api/varco/aplicar-correcao`, {
+      const res = await fetch(`${API_BASE}/api/varco/plano-correcao/aplicar`, {
         method: "POST", 
         headers: { 
           "Content-Type": "application/json",
@@ -935,7 +1245,7 @@ function CorrecoesTab({ liveDevices = [] }) {
       {!loading && !plano && (
         <div style={{ padding: "40px", textAlign: "center", background: C.surface, borderRadius: "8px", border: `1px solid ${C.border}` }}>
           <p style={{ color: C.textMuted, fontSize: "13px", margin: "0 0 12px" }}>Nenhum plano de correção encontrado.</p>
-          <p style={{ color: C.textSecondary, fontSize: "12px", margin: 0 }}>Clique em <strong style={{ color: C.accent }}>"Gerar Novo Plano"</strong> para analisar todos os equipamentos e identificar correções necessárias.</p>
+          <p style={{ color: C.textSecondary, fontSize: "12px", margin: 0 }}>Clique em <strong style={{ color: C.accent }}>"Gerar Novo Plano"</strong> para analisar todos os Equipamentos e identificar correções necessárias.</p>
         </div>
       )}
 
@@ -1015,7 +1325,7 @@ function CorrecoesTab({ liveDevices = [] }) {
                         </div>
                         {caso.totalAfetados === 0 ? (
                           <div style={{ padding: "20px", textAlign: "center", background: C.successBg, borderRadius: "6px", border: `1px solid ${C.successBorder}` }}>
-                            <div style={{ fontSize: "12px", color: C.success }}>✅ Nenhum equipamento afetado</div>
+                            <div style={{ fontSize: "12px", color: C.success }}>✅ Nenhum Equipamento afetado</div>
                             <div style={{ fontSize: "10px", color: C.textMuted, marginTop: "4px" }}>Toda a frota está com o valor correto</div>
                           </div>
                         ) : (
@@ -1068,8 +1378,8 @@ function CorrecoesTab({ liveDevices = [] }) {
                           </div>
                         ) : (
                           <div style={{ padding: "12px", textAlign: "center", background: C.warningBg, borderRadius: "6px", border: `1px solid ${C.warningBorder}` }}>
-                            <div style={{ fontSize: "11px", color: C.warning }}>⚠️ Nenhum equipamento conforme encontrado</div>
-                            <div style={{ fontSize: "10px", color: C.textMuted, marginTop: "4px" }}>Todos os equipamentos acessíveis têm este erro</div>
+                            <div style={{ fontSize: "11px", color: C.warning }}>⚠️ Nenhum Equipamento conforme encontrado</div>
+                            <div style={{ fontSize: "10px", color: C.textMuted, marginTop: "4px" }}>Todos os Equipamentos acessíveis têm este erro</div>
                           </div>
                         )}
 
@@ -1212,7 +1522,7 @@ function InventarioTab({ results, filter, setFilter, statusFilter, setStatusFilt
               <th style={{ padding: "7px 8px", textAlign: "left", color: C.textSecondary }}>#</th>
               <th style={{ padding: "7px 8px", textAlign: "left", color: C.textSecondary }}>Equipamento</th>
               <th style={{ padding: "7px 8px", textAlign: "center", color: C.textSecondary }}>🟢</th>
-              <th style={{ padding: "7px 8px", textAlign: "center", color: C.textSecondary }}>Config</th>
+              <th style={{ padding: "7px 8px", textAlign: "center", color: C.textSecondary }}>Use Configuração</th>
               <th style={{ padding: "7px 8px", textAlign: "center", color: C.textSecondary }}>Erros</th>
               <th style={{ padding: "7px 8px", textAlign: "left", color: C.textSecondary }}>Túnel</th>
             </tr>
@@ -1283,7 +1593,7 @@ function PadraoTab() {
       .catch(e => { setError(e.message); setLoading(false); });
   }, []);
 
-  if (loading) return <div style={{ padding: "30px", textAlign: "center", color: C.textMuted }}>Carregando análise aprimorada...</div>;
+  if (loading) return <div style={{ padding: "30px", textAlign: "center", color: C.textMuted }}>Carregando Análise aprimorada...</div>;
   if (error) return <div style={{ padding: "14px", background: C.dangerBg, border: `1px solid ${C.dangerBorder}`, borderRadius: "8px", color: C.danger }}>Erro: {error}. Execute: <code>node auditoria-itscam/analise-aprimorada.mjs</code></div>;
   if (!data) return null;
 
@@ -1323,7 +1633,7 @@ function PadraoTab() {
       {/* Info bar */}
       <div style={{ padding: "8px 12px", background: C.accentBg, border: `1px solid ${C.accentBorder}`, borderRadius: "6px", marginBottom: "12px", fontSize: "12px", color: C.textSecondary, display: "flex", justifyContent: "space-between", alignItems: "center" }}>
         <span>📏 {totalRegras} regras de validação vs config padrão | Gerado: {new Date(geradoEm).toLocaleString("pt-BR")}</span>
-        <span style={{ fontSize: "11px", color: C.textMuted }}>Config: <code>config-padrao/padrao-faixa-*.json</code></span>
+        <span style={{ fontSize: "11px", color: C.textMuted }}>Use Configuração <code>config-padrao/padrao-faixa-*.json</code></span>
       </div>
 
       {/* Top divergences */}
@@ -1543,7 +1853,7 @@ function ComandosTab({ groups }) {
           <div style={{ color: C.success }}># Corrigir TODOS os grupos de uma vez</div>
           <div>node auditoria-itscam/corrigir-grupo.mjs --todos --sim</div>
           <br/>
-          <div style={{ color: C.success }}># Corrigir por caso (todos equipamentos)</div>
+          <div style={{ color: C.success }}># Corrigir por caso (todos Equipamentos</div>
           <div>node auditoria-itscam/corrigir.mjs --caso=03 --todos --sim</div>
           <div>node auditoria-itscam/corrigir.mjs --caso=04 --todos --sim</div>
           <div>node auditoria-itscam/corrigir.mjs --caso=05 --todos --sim</div>
@@ -1592,12 +1902,12 @@ function ComandosTab({ groups }) {
             </tr>
             <tr style={{ borderTop: `1px solid ${C.borderLight}` }}>
               <td style={{ padding: "6px" }}><code>validar.mjs</code></td>
-              <td style={{ padding: "6px", color: C.textMuted }}>Valida configurações (read-only)</td>
+              <td style={{ padding: "6px", color: C.textMuted }}>válida Configurações (read-only)</td>
               <td style={{ padding: "6px", textAlign: "center" }}><span style={{ background: C.successBg, color: C.success, padding: "2px 6px", borderRadius: "3px", fontSize: "10px" }}>✓ Implementado</span></td>
             </tr>
             <tr style={{ borderTop: `1px solid ${C.borderLight}` }}>
               <td style={{ padding: "6px" }}><code>recoletar-dados.mjs</code></td>
-              <td style={{ padding: "6px", color: C.textMuted }}>Atualiza análise da frota</td>
+              <td style={{ padding: "6px", color: C.textMuted }}>Atualiza Análise da frota</td>
               <td style={{ padding: "6px", textAlign: "center" }}><span style={{ background: C.successBg, color: C.success, padding: "2px 6px", borderRadius: "3px", fontSize: "10px" }}>✓ Implementado</span></td>
             </tr>
           </tbody>

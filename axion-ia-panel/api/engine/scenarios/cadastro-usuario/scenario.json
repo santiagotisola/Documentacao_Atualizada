@@ -1,0 +1,156 @@
+{
+  "scenarioId": "cadastro-usuario",
+  "name": "Cadastro de Usuário — AxHub",
+  "description": "Fluxo completo: login → Controle de Acesso → Usuários → Novo → preenche dados → Salvar → verifica criação",
+  "category": "AxHub",
+  "createdBy": "suporte@axiontecnologia.com.br",
+  "createdAt": "2026-06-25T11:00:00.000Z",
+  "duration": "45.00",
+  "metadata": {
+    "baseUrl": "https://homologacao.axhub.axion.ws",
+    "sistema": "AxHub",
+    "modulo": "Controle de Acesso > Usuários"
+  },
+  "steps": [
+    {
+      "step": 1,
+      "action": "navigate",
+      "type": "navigation",
+      "description": "Navega para a página de login do AxHub",
+      "url": "https://homologacao.axhub.axion.ws/Home/Login",
+      "validation": { "title": "Login - AXHub" }
+    },
+    {
+      "step": 2,
+      "action": "click",
+      "type": "interaction",
+      "description": "Clica no campo de usuário",
+      "selector": "#Username"
+    },
+    {
+      "step": 3,
+      "action": "input",
+      "type": "interaction",
+      "description": "Preenche o campo de usuário",
+      "selector": "#Username",
+      "value": "suporte@axiontecnologia.com.br"
+    },
+    {
+      "step": 4,
+      "action": "input",
+      "type": "interaction",
+      "description": "Preenche a senha",
+      "selector": "#Password",
+      "value": "Axion#2023"
+    },
+    {
+      "step": 5,
+      "action": "click",
+      "type": "interaction",
+      "description": "Clica em Entrar",
+      "selector": "button[type='submit']"
+    },
+    {
+      "step": 6,
+      "action": "navigate",
+      "type": "navigation",
+      "description": "Aguarda redirecionamento para o painel principal",
+      "url": "https://homologacao.axhub.axion.ws/",
+      "validation": { "title": "Bem vindo - AXHub" }
+    },
+    {
+      "step": 7,
+      "action": "navigate",
+      "type": "navigation",
+      "description": "Navega para Controle de Acesso > Usuários",
+      "url": "https://homologacao.axhub.axion.ws/usuario",
+      "validation": { "title": "Usuários - AXHub" }
+    },
+    {
+      "step": 8,
+      "action": "click",
+      "type": "interaction",
+      "description": "Clica no botão Novo para abrir formulário de cadastro",
+      "selector": "a[href='/usuario/new']"
+    },
+    {
+      "step": 9,
+      "action": "navigate",
+      "type": "navigation",
+      "description": "Aguarda abertura do formulário de novo usuário",
+      "url": "https://homologacao.axhub.axion.ws/usuario/new",
+      "validation": { "title": "Usuários - AXHub" }
+    },
+    {
+      "step": 10,
+      "action": "input",
+      "type": "interaction",
+      "description": "Preenche o campo Nome de Usuário",
+      "selector": "#NomeUsuario",
+      "value": "teste.cuti.2026"
+    },
+    {
+      "step": 11,
+      "action": "input",
+      "type": "interaction",
+      "description": "Preenche o campo Senha",
+      "selector": "#Senha",
+      "value": "Teste@2026!"
+    },
+    {
+      "step": 12,
+      "action": "input",
+      "type": "interaction",
+      "description": "Preenche a confirmação de senha",
+      "selector": "#ConfirmarSenha",
+      "value": "Teste@2026!"
+    },
+    {
+      "step": 13,
+      "action": "input",
+      "type": "interaction",
+      "description": "Preenche o campo Nome completo",
+      "selector": "#Nome",
+      "value": "Usuário Teste CUTI"
+    },
+    {
+      "step": 14,
+      "action": "input",
+      "type": "interaction",
+      "description": "Preenche o campo Email",
+      "selector": "#Email",
+      "value": "teste.cuti.2026@axiontecnologia.com.br"
+    },
+    {
+      "step": 15,
+      "action": "input",
+      "type": "interaction",
+      "description": "Preenche o campo Telefone",
+      "selector": "#telefone",
+      "value": "(62) 99999-0001"
+    },
+    {
+      "step": 16,
+      "action": "click",
+      "type": "interaction",
+      "description": "Clica no botão Salvar para criar o usuário",
+      "selector": "button.k-button:has-text('Salvar'), button.primary"
+    },
+    {
+      "step": 17,
+      "action": "navigate",
+      "type": "navigation",
+      "description": "Verifica redirecionamento para lista de usuários após salvar",
+      "url": "https://homologacao.axhub.axion.ws/usuario",
+      "validation": { "title": "Usuários - AXHub" }
+    },
+    {
+      "step": 18,
+      "action": "verify",
+      "type": "validation",
+      "description": "Verifica que o usuário criado aparece na lista",
+      "selector": "table",
+      "expectedText": "teste.cuti"
+    }
+  ]
+}

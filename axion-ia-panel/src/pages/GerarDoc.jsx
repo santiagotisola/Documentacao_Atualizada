@@ -214,7 +214,7 @@ export default function GerarDoc() {
               name="tema"
               value={form.tema}
               onChange={handleChange}
-              placeholder="Ex: Manual de Auditoria, Como Exportar Infrações..."
+              placeholder="Ex: Manual de Auditoria, Como Exportar Infrações"
             />
           </div>
 

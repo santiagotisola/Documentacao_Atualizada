@@ -618,7 +618,7 @@ export default function CredenciaisManager() {
                     </button>
                     <button
                       className="cred-btn-icon"
-                      title="Validar acesso (testar login)"
+                      title="Validar acesso (testar Login"
                       onClick={() => handleValidateAccess(site.id)}
                     >
                       ✅

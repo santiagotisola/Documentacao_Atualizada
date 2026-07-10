@@ -6,7 +6,7 @@ description: Cadastro de motivos para pesagem e liberação
 
 # Motivos
 
-Permite cadastrar os motivos utilizados nos processos de pesagem e liberação de veículos.
+Permite cadastrar os motivos utilizados nos processos de pesagem e liberação de Veículos
 
 ![Lista de Motivos](../img/Balança%20-%20Motivos.png)
 

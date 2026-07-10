@@ -1,0 +1,737 @@
+{
+  "version": "3.0.0",
+  "exportDate": "2026-06-23T19:02:00.000Z",
+  "systemName": "AxionIA Painel — Central de Atendimento",
+  "description": "Configuração completa do sistema de validação automática, resposta ao helpdesk e gestão de documentação",
+  
+  "modules": {
+    "centralAtendimento": {
+      "enabled": true,
+      "tabs": [
+        {
+          "id": "chat",
+          "icon": "🤖",
+          "label": "Chat IA",
+          "enabled": true,
+          "route": "/central-atendimento?tab=chat"
+        },
+        {
+          "id": "whatsapp",
+          "icon": "💬",
+          "label": "WhatsApp",
+          "enabled": true,
+          "route": "/central-atendimento?tab=whatsapp"
+        },
+        {
+          "id": "helpdesk",
+          "icon": "🎧",
+          "label": "Helpdesk",
+          "enabled": true,
+          "route": "/central-atendimento?tab=helpdesk"
+        },
+        {
+          "id": "sites",
+          "icon": "🏢",
+          "label": "Por Site",
+          "enabled": true,
+          "route": "/central-atendimento?tab=sites"
+        },
+        {
+          "id": "historico",
+          "icon": "📊",
+          "label": "Histórico",
+          "enabled": true,
+          "route": "/central-atendimento?tab=historico"
+        },
+        {
+          "id": "validador",
+          "icon": "🔬",
+          "label": "Validador AxCross",
+          "enabled": true,
+          "route": "/central-atendimento?tab=validador"
+        }
+      ]
+    },
+    
+    "validadorAxCross": {
+      "enabled": true,
+      "version": "4.0.0",
+      "description": "Sistema automatizado de validação, resposta ao helpdesk e atualização de documentação",
+      
+      "sitesAxCross": [
+        {
+          "id": "goiania",
+          "nome": "Goiânia (Produção)",
+          "url": "https://goiania.axcross.axion.ws",
+          "login": "Axion#2025",
+          "ambiente": "producao",
+          "telas": [
+            {
+              "id": "dashboard",
+              "nome": "Dashboard",
+              "path": "/dashboard",
+              "descricao": "Visão geral do sistema"
+            },
+            {
+              "id": "passagens",
+              "nome": "Relatório de Passagens",
+              "path": "/relatorios/passagens",
+              "descricao": "Relatório principal de validação"
+            },
+            {
+              "id": "veiculos",
+              "nome": "Veículos Monitorados",
+              "path": "/veiculos",
+              "descricao": "Listagem de veículos"
+            },
+            {
+              "id": "alertas",
+              "nome": "Alertas Ativos",
+              "path": "/alertas",
+              "descricao": "Alertas de cruzamento"
+            }
+          ]
+        },
+        {
+          "id": "demo",
+          "nome": "Ambiente Demo",
+          "url": "https://demo.axcross.axion.ws",
+          "login": "demo/demo123",
+          "ambiente": "homologacao",
+          "telas": [
+            {
+              "id": "passagens",
+              "nome": "Relatório de Passagens",
+              "path": "/relatorios/passagens",
+              "descricao": "Relatório para testes"
+            },
+            {
+              "id": "config",
+              "nome": "Configurações",
+              "path": "/configuracoes",
+              "descricao": "Configurações do sistema"
+            }
+          ]
+        }
+      ],
+      
+      "testesDisponiveis": [
+        {
+          "id": "ordenacao-data",
+          "categoria": "ordenacao",
+          "nome": "Ordenação por Data/Hora",
+          "descricao": "Testa ordenação ASC e DESC por data",
+          "tela": "passagens",
+          "prioridade": "alta",
+          "tempoEstimado": 120,
+          "passos": [
+            "Clicar na coluna Data/Hora",
+            "Verificar se ordena DESC (mais recentes primeiro)",
+            "Clicar novamente",
+            "Verificar se ordena ASC (mais antigas primeiro)"
+          ],
+          "validacao": {
+            "tipo": "visual",
+            "criterios": [
+              "Primeira linha contém data mais recente em DESC",
+              "Primeira linha contém data mais antiga em ASC",
+              "Ícone de ordenação visível no cabeçalho"
+            ]
+          }
+        },
+        {
+          "id": "ordenacao-placa",
+          "categoria": "ordenacao",
+          "nome": "Ordenação por Placa",
+          "descricao": "Testa ordenação alfabética de placas",
+          "tela": "passagens",
+          "prioridade": "alta",
+          "tempoEstimado": 120,
+          "passos": [
+            "Clicar na coluna Placa",
+            "Verificar ordenação alfabética A-Z",
+            "Clicar novamente",
+            "Verificar ordenação Z-A"
+          ],
+          "validacao": {
+            "tipo": "visual",
+            "criterios": [
+              "Primeira placa inicia com letra menor em ASC",
+              "Primeira placa inicia com letra maior em DESC"
+            ]
+          }
+        },
+        {
+          "id": "ordenacao-velocidade",
+          "categoria": "ordenacao",
+          "nome": "Ordenação por Velocidade",
+          "descricao": "Testa ordenação numérica de velocidade",
+          "tela": "passagens",
+          "prioridade": "media",
+          "tempoEstimado": 90,
+          "passos": [
+            "Clicar na coluna Velocidade",
+            "Verificar velocidades em ordem crescente",
+            "Clicar novamente",
+            "Verificar velocidades em ordem decrescente"
+          ]
+        },
+        {
+          "id": "exportacao-xlsx",
+          "categoria": "exportacao",
+          "nome": "Exportação XLSX",
+          "descricao": "Valida exportação de planilha Excel",
+          "tela": "passagens",
+          "prioridade": "critica",
+          "tempoEstimado": 180,
+          "passos": [
+            "Aplicar filtros (período, local)",
+            "Definir ordenação",
+            "Clicar em Exportar XLSX",
+            "Verificar se arquivo baixa",
+            "Abrir arquivo e validar dados",
+            "Verificar metadados",
+            "Verificar formatação de cabeçalhos"
+          ],
+          "validacao": {
+            "tipo": "arquivo",
+            "criterios": [
+              "Arquivo .xlsx gerado",
+              "Metadados presentes (período, data, usuário)",
+              "Cabeçalhos formatados (negrito, azul)",
+              "Dados ordenados conforme tela",
+              "Primeira linha congelada"
+            ]
+          }
+        },
+        {
+          "id": "exportacao-csv",
+          "categoria": "exportacao",
+          "nome": "Exportação CSV",
+          "descricao": "Valida exportação CSV",
+          "tela": "passagens",
+          "prioridade": "critica",
+          "tempoEstimado": 150,
+          "passos": [
+            "Aplicar filtros",
+            "Clicar em Exportar CSV",
+            "Verificar delimitador \";\"",
+            "Verificar UTF-8 com BOM",
+            "Abrir no Excel para validar compatibilidade"
+          ],
+          "validacao": {
+            "tipo": "arquivo",
+            "criterios": [
+              "Delimitador ponto-e-vírgula (;)",
+              "Codificação UTF-8 com BOM",
+              "Primeira linha com cabeçalhos",
+              "Abre corretamente no Excel"
+            ]
+          }
+        },
+        {
+          "id": "exportacao-pdf",
+          "categoria": "exportacao",
+          "nome": "Exportação PDF",
+          "descricao": "Valida exportação PDF com imagens",
+          "tela": "passagens",
+          "prioridade": "alta",
+          "tempoEstimado": 240,
+          "passos": [
+            "Aplicar filtros",
+            "Selecionar número de imagens por página",
+            "Clicar em Exportar PDF",
+            "Verificar geração do PDF",
+            "Abrir e validar layout",
+            "Verificar imagens inline"
+          ]
+        },
+        {
+          "id": "filtros-periodo",
+          "categoria": "filtros",
+          "nome": "Filtros de Período",
+          "descricao": "Testa filtro por data início/fim",
+          "tela": "passagens",
+          "prioridade": "alta",
+          "tempoEstimado": 120,
+          "passos": [
+            "Definir data início",
+            "Definir data fim",
+            "Clicar em Consultar",
+            "Verificar se passagens estão no período"
+          ]
+        },
+        {
+          "id": "consistencia-tela-excel",
+          "categoria": "consistencia",
+          "nome": "Consistência Tela vs Excel",
+          "descricao": "Valida se Excel = Tela",
+          "tela": "passagens",
+          "prioridade": "critica",
+          "tempoEstimado": 300,
+          "passos": [
+            "Contar registros na tela",
+            "Exportar XLSX",
+            "Contar registros no arquivo",
+            "Comparar quantidades",
+            "Comparar ordem dos IDs",
+            "Verificar se filtros foram aplicados"
+          ],
+          "validacao": {
+            "tipo": "comparacao",
+            "criterios": [
+              "Quantidade de registros idêntica",
+              "Ordem preservada",
+              "Mesmos IDs nas mesmas posições",
+              "Filtros aplicados corretamente"
+            ]
+          }
+        },
+        {
+          "id": "perfil-salvar",
+          "categoria": "perfis",
+          "nome": "Salvar Perfil de Usuário",
+          "descricao": "Testa salvamento de configuração",
+          "tela": "passagens",
+          "prioridade": "media",
+          "tempoEstimado": 180,
+          "passos": [
+            "Configurar filtros personalizados",
+            "Definir ordenação",
+            "Clicar em Salvar Perfil",
+            "Nomear o perfil",
+            "Verificar salvamento"
+          ]
+        },
+        {
+          "id": "perfil-carregar",
+          "categoria": "perfis",
+          "nome": "Carregar Perfil Salvo",
+          "descricao": "Testa carregamento de perfil",
+          "tela": "passagens",
+          "prioridade": "media",
+          "tempoEstimado": 120,
+          "passos": [
+            "Abrir lista de perfis",
+            "Selecionar perfil salvo",
+            "Verificar se filtros foram aplicados",
+            "Verificar se ordenação foi aplicada"
+          ]
+        }
+      ],
+      
+      "categorias": {
+        "ordenacao": {
+          "nome": "Ordenação Dinâmica",
+          "icone": "🔄",
+          "prioridade": 1,
+          "descricao": "Testes de ordenação por múltiplos campos"
+        },
+        "exportacao": {
+          "nome": "Exportação de Relatórios",
+          "icone": "📤",
+          "prioridade": 2,
+          "descricao": "Testes de exportação em diferentes formatos"
+        },
+        "filtros": {
+          "nome": "Filtros e Consultas",
+          "icone": "🔍",
+          "prioridade": 3,
+          "descricao": "Testes de filtros e buscas"
+        },
+        "consistencia": {
+          "nome": "Validação de Consistência",
+          "icone": "✅",
+          "prioridade": 4,
+          "descricao": "Testes de integridade de dados"
+        },
+        "perfis": {
+          "nome": "Perfis de Usuário",
+          "icone": "👤",
+          "prioridade": 5,
+          "descricao": "Testes de perfis e configurações"
+        }
+      },
+      
+      "validacaoAutomatica": {
+        "enabled": true,
+        "timeout": 10000,
+        "retryAttempts": 3,
+        "fases": [
+          {
+            "numero": 1,
+            "nome": "Ordenação Dinâmica",
+            "descricao": "Validando ordenação por múltiplos campos",
+            "testes": [
+              "ordenacao-data",
+              "ordenacao-placa",
+              "ordenacao-velocidade",
+              "ordenacao-equipamento",
+              "ordenacao-faixa",
+              "ordenacao-local"
+            ],
+            "duracaoEstimada": 600
+          },
+          {
+            "numero": 2,
+            "nome": "Exportação",
+            "descricao": "Validando exportações em múltiplos formatos",
+            "testes": [
+              "exportacao-xlsx",
+              "exportacao-csv",
+              "exportacao-pdf"
+            ],
+            "duracaoEstimada": 800
+          },
+          {
+            "numero": 3,
+            "nome": "Consistência",
+            "descricao": "Validando consistência de dados",
+            "testes": [
+              "consistencia-tela-excel",
+              "consistencia-filtros",
+              "consistencia-ordenacao"
+            ],
+            "duracaoEstimada": 800
+          },
+          {
+            "numero": 4,
+            "nome": "Perfis de Usuário",
+            "descricao": "Validando perfis e configurações",
+            "testes": [
+              "perfil-salvar",
+              "perfil-carregar",
+              "perfil-deletar",
+              "perfil-padrao"
+            ],
+            "duracaoEstimada": 500
+          }
+        ],
+        
+        "resultadosEsperados": {
+          "totalTestes": 27,
+          "conformidadeMinima": 80,
+          "categorias": {
+            "ordenacao": {
+              "testes": 6,
+              "pesoCategoria": 25
+            },
+            "exportacao": {
+              "testes": 9,
+              "pesoCategoria": 35
+            },
+            "consistencia": {
+              "testes": 5,
+              "pesoCategoria": 25
+            },
+            "perfis": {
+              "testes": 4,
+              "pesoCategoria": 15
+            },
+            "uxUsuario": {
+              "testes": 3,
+              "pesoCategoria": 0
+            }
+          }
+        }
+      },
+      
+      "helpdeskIntegration": {
+        "enabled": true,
+        "platform": "jitbit",
+        "apiUrl": "https://desk.axiontecnologia.com.br/helpdesk/api",
+        "webhooks": {
+          "novoTicket": "/api/helpdesk/webhook/novo-ticket",
+          "ticketAtualizado": "/api/helpdesk/webhook/ticket-atualizado"
+        },
+        
+        "templateResposta": {
+          "formato": "markdown",
+          "secoes": [
+            {
+              "nome": "cabecalho",
+              "template": "# Validação Técnica - Relatório de Passagens AxCross v{{versao}}\n\n**Data da Validação:** {{dataValidacao}}\n**Técnico:** Sistema Automático de Validação AxionIA\n**Status:** {{statusEmoji}} **{{statusTexto}}** ({{conformidade}}% de conformidade)"
+            },
+            {
+              "nome": "resumoExecutivo",
+              "template": "## 📊 Resumo Executivo\n\n| Categoria | Testados | ✅ Passou | ❌ Falhou | ⚠️ Parcial |\n|-----------|:--------:|:--------:|:--------:|:--------:|\n{{tabelaResultados}}\n| **TOTAL** | **{{totalTestes}}** | **{{totalPassou}}** | **{{totalFalhou}}** | **{{totalParcial}}** |"
+            },
+            {
+              "nome": "implementado",
+              "template": "## ✅ O que está funcionando\n\n{{listaImplementado}}"
+            },
+            {
+              "nome": "faltante",
+              "template": "## ❌ O que precisa ser implementado (PRIORITÁRIO)\n\n{{listaFaltante}}"
+            },
+            {
+              "nome": "acoesRecomendadas",
+              "template": "## 🎯 Ações Recomendadas\n\n**FASE 1 - Crítico (8 dias úteis):**\n{{fase1}}\n\n**FASE 2 - Importante (9 dias úteis):**\n{{fase2}}\n\n**FASE 3 - Melhoria (5 dias úteis):**\n{{fase3}}\n\n**Cronograma Total:** {{diasTotais}} dias úteis (previsão: {{dataInicio}} - {{dataFim}})"
+            },
+            {
+              "nome": "documentacao",
+              "template": "## 📄 Documentação Técnica\n\nRelatório completo disponível em: **{{arquivoRelatorio}}**\n\nDocumentação atualizada em: **{{caminhoDocumentacao}}**"
+            },
+            {
+              "nome": "rodape",
+              "template": "---\n\n**Status do Chamado:** {{statusChamado}}\n**Próxima Validação:** {{proximaValidacao}}"
+            }
+          ],
+          
+          "statusMapping": {
+            "critico": {
+              "emoji": "🔴",
+              "texto": "NÃO CONFORME",
+              "conformidadeMaxima": 30
+            },
+            "atencao": {
+              "emoji": "🟡",
+              "texto": "ATENÇÃO NECESSÁRIA",
+              "conformidadeMaxima": 70
+            },
+            "aprovado": {
+              "emoji": "🟢",
+              "texto": "CONFORME",
+              "conformidadeMaxima": 100
+            }
+          }
+        }
+      },
+      
+      "documentacaoIntegration": {
+        "enabled": true,
+        "platform": "docusaurus",
+        "portais": [
+          {
+            "id": "axhub",
+            "nome": "AxHub.Docs",
+            "path": "AxHub/docs-portal",
+            "url": "http://localhost:3010/AxHub.Docs",
+            "port": 3010
+          },
+          {
+            "id": "axton",
+            "nome": "AxTon.Docs",
+            "path": "AxTon/docs-portal",
+            "url": "http://localhost:3011/AxTon.Docs",
+            "port": 3011
+          },
+          {
+            "id": "axcross",
+            "nome": "AxCross.Docs",
+            "path": "AxCross/docs-portal",
+            "url": "http://localhost:3012/AxCross.Docs",
+            "port": 3012
+          }
+        ],
+        
+        "templateDocumentacao": {
+          "formato": "mdx",
+          "frontmatter": {
+            "sidebar_position": 1,
+            "title": "{{titulo}}",
+            "description": "{{descricao}}",
+            "last_update": {
+              "date": "{{dataAtualizacao}}",
+              "author": "Sistema Automático AxionIA"
+            }
+          },
+          
+          "secoes": [
+            {
+              "nome": "introducao",
+              "template": "# {{titulo}}\n\n{{descricaoCurta}}\n\n## ✨ Novidades {{versao}}\n\n{{listaNovidades}}"
+            },
+            {
+              "nome": "comoAcessar",
+              "template": "---\n\n## Como acessar\n\n{{instrucoes}}\n\n![{{nomeImagem}}](../img/{{arquivoImagem}})"
+            },
+            {
+              "nome": "funcionalidades",
+              "template": "---\n\n## {{tituloFuncionalidade}}\n\n{{descricaoFuncionalidade}}\n\n{{conteudoFuncionalidade}}"
+            },
+            {
+              "nome": "api",
+              "template": "---\n\n## API - Endpoints\n\n{{listaEndpoints}}"
+            },
+            {
+              "nome": "dicas",
+              "template": "---\n\n## Dicas de Uso\n\n{{listaDicas}}"
+            },
+            {
+              "nome": "solucaoProblemas",
+              "template": "---\n\n## Solução de Problemas\n\n{{listaProblemas}}"
+            },
+            {
+              "nome": "rodape",
+              "template": "---\n\n**Última atualização:** {{dataFormatada}}\n**Versão:** {{versao}}\n**Status:** {{status}}"
+            }
+          ]
+        }
+      }
+    }
+  },
+  
+  "api": {
+    "baseUrl": "http://localhost:3100",
+    "endpoints": {
+      "validacao": {
+        "iniciar": "/api/validacao/iniciar",
+        "status": "/api/validacao/status/:id",
+        "resultado": "/api/validacao/resultado/:id"
+      },
+      "helpdesk": {
+        "responderTicket": "/api/helpdesk/responder-ticket",
+        "listarTickets": "/api/helpdesk/tickets",
+        "obterTicket": "/api/helpdesk/ticket/:id"
+      },
+      "documentacao": {
+        "atualizar": "/api/docs/atualizar",
+        "listarPortais": "/api/docs/portais",
+        "rebuild": "/api/docs/rebuild/:portal"
+      },
+      "axcross": {
+        "passagens": "/api/axcross/passagens",
+        "exportarXlsx": "/api/axcross/relatorio/passagens/xlsx",
+        "exportarCsv": "/api/axcross/relatorio/passagens/csv",
+        "exportarPdf": "/api/axcross/relatorio/passagens/pdf",
+        "validarConsistencia": "/api/axcross/validar-consistencia"
+      }
+    },
+    
+    "authentication": {
+      "type": "bearer",
+      "tokenEndpoint": "/api/auth/login",
+      "refreshEndpoint": "/api/auth/refresh"
+    }
+  },
+  
+  "database": {
+    "mongodb": {
+      "enabled": true,
+      "host": "localhost",
+      "port": 27017,
+      "database": "axionia",
+      "collections": {
+        "validacoes": "validacoes",
+        "tickets": "tickets",
+        "perfisUsuario": "perfis_usuario",
+        "logAcoes": "log_acoes"
+      }
+    },
+    
+    "sqlserver": {
+      "enabled": true,
+      "host": "localhost",
+      "port": 1433,
+      "database": "AxCross",
+      "tables": {
+        "passagens": "TBPassagens",
+        "locais": "TBLocais",
+        "equipamentos": "TBEquipamentos",
+        "faixas": "TBFaixas"
+      }
+    }
+  },
+  
+  "ui": {
+    "theme": {
+      "primaryColor": "#3b82f6",
+      "successColor": "#10b981",
+      "warningColor": "#f59e0b",
+      "errorColor": "#ef4444",
+      "infoColor": "#3b82f6"
+    },
+    
+    "icons": {
+      "validacao": "🔬",
+      "helpdesk": "🎧",
+      "documentacao": "📚",
+      "sucesso": "✅",
+      "falha": "❌",
+      "aviso": "⚠️",
+      "info": "ℹ️",
+      "loading": "🔄"
+    },
+    
+    "layout": {
+      "sidebarWidth": "350px",
+      "logPanelHeight": "400px",
+      "maxWidth": "1600px"
+    }
+  },
+  
+  "features": {
+    "validacaoAutomatica": {
+      "enabled": true,
+      "descricao": "Executa testes automatizados conforme especificação"
+    },
+    "respostaHelpdesk": {
+      "enabled": true,
+      "descricao": "Gera e envia resposta técnica ao Jitbit"
+    },
+    "atualizacaoDocumentacao": {
+      "enabled": true,
+      "descricao": "Atualiza documentação Docusaurus automaticamente"
+    },
+    "notificacoes": {
+      "enabled": true,
+      "descricao": "Envia notificações por email"
+    },
+    "agendamento": {
+      "enabled": false,
+      "descricao": "Agendar validações automáticas"
+    }
+  },
+  
+  "logging": {
+    "level": "info",
+    "format": "json",
+    "outputs": [
+      "console",
+      "file",
+      "mongodb"
+    ],
+    "file": {
+      "path": "./logs",
+      "maxSize": "10MB",
+      "maxFiles": 10
+    }
+  },
+  
+  "monitoring": {
+    "enabled": true,
+    "metrics": {
+      "validacoesExecutadas": true,
+      "tempoMedioValidacao": true,
+      "taxaSucesso": true,
+      "ticketsRespondidos": true
+    }
+  },
+  
+  "security": {
+    "cors": {
+      "enabled": true,
+      "origins": [
+        "http://localhost:3017",
+        "http://localhost:3010",
+        "http://localhost:3011",
+        "http://localhost:3012"
+      ]
+    },
+    "rateLimit": {
+      "enabled": true,
+      "maxRequests": 100,
+      "windowMs": 60000
+    }
+  },
+  
+  "metadata": {
+    "autor": "Sistema AxionIA",
+    "empresa": "Axion Tecnologia",
+    "contato": "contato@axiontecnologia.com.br",
+    "repositorio": "https://github.com/Axion-Tecnologia/Documentacao_Atualizada",
+    "documentacao": "http://localhost:3017/docs",
+    "suporte": "https://desk.axiontecnologia.com.br/helpdesk"
+  }
+}

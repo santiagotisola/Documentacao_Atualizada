@@ -8,7 +8,7 @@ description: Criação de nova medição contratual
 
 Permite gerar uma nova medição contratual com base nos dados de operação do período.
 
-![Relatório de Medição](../img/Medição%20-%20nova%20medição%20-%20relatorio%20de%20medição%20de%20equipamento.png)
+Relatório de Medição](../img/Medição%20-%20nova%20medição%20-%20relatorio%20de%20medição%20de%20equipamento.png)
 
 ## Como acessar
 
@@ -22,7 +22,7 @@ Permite gerar uma nova medição contratual com base nos dados de operação do 
 |-------|-----------|
 | **Contrato** | Contrato a ser medido |
 | **Período** | Mês/ano de referência |
-| **Equipamentos** | Seleção dos equipamentos incluídos |
+| Equipamentos | Seleção dos Equipamentos incluídos |
 
 ## Fluxo
 
@@ -38,5 +38,5 @@ Permite gerar uma nova medição contratual com base nos dados de operação do 
 | Tipo | Pagina | Descricao |
 |------|--------|-----------|
 | Relacionado | [Contratos](./contratos) | Contrato vinculado |
-| Relacionado | [Medicoes Finalizadas](./medicoes-finalizadas) | Historico |
+| Relacionado | [Medicoes Finalizadas](./medicoes-finalizadas) | histórico |
 | Glossario | [Medicao de Desempenho](../glossario/medicao-desempenho) | Definicao tecnica |

@@ -14,15 +14,15 @@ O AxTon utiliza **MongoDB** como banco de dados NoSQL. Abaixo estão todas as co
 
 | Collection | Finalidade |
 |---|---|
-| `User` | Autenticação e usuários do sistema |
+| Use Usuário | Autenticação e Usuários do sistema |
 | `AccessProfile` | Perfis de acesso |
 | `AccessPermission` | Permissões individuais (hierárquicas) |
-| `Classification` | Classificação de veículos com eixos e PBT |
+| `Classification` | Classificação de Veículos com eixos e PBT |
 | `Configuration` | Configurações do dispositivo e câmera |
 | `Weighing` | Pesagens registradas |
 | `Operation` | Sessões de pesagem |
 | `Local` | Locais de operação |
-| `ExportBatch` | Lotes de exportação de infrações |
+| `ExportBatch` | Lotes de exportação de Infrações |
 | `SequentialInfraction` | Contador de numeração de AITs |
 | `SequentialExport` | Faixas de numeração de exportação |
 
@@ -46,8 +46,8 @@ Define câmera, balança, tolerâncias e integração com AxHub.
 | `ApiKey` | string | Chave de API do AxHub |
 | `ExportType` | enum | `XTrafficExportInfraction`, `AxHubExportInfraction` |
 | `EntityCode` | string | Código do órgão autuador |
-| `StructPBT` | string | Código estrutura para infração PBT |
-| `StructAxle` | string | Código estrutura para infração de eixo |
+| `StructPBT` | string | Código estrutura para Infração PBT |
+| `StructAxle` | string | Código estrutura para Infração de eixo |
 
 ---
 
@@ -56,18 +56,18 @@ Define câmera, balança, tolerâncias e integração com AxHub.
 | Campo | Tipo | Descrição |
 |---|---|---|
 | `WeighingDate` | DateTime | Data/hora da pesagem |
-| `LicensePlate` | string | Placa do veículo |
+| `LicensePlate` | string | Placa do Veículo |
 | `Axles` | string | Configuração de eixos (ex: E1E2E3) |
 | `Pbt` | string | PBT regulamentado |
-| `Classification` | string | Classificação do veículo |
+| `Classification` | string | Classificação do Veículo |
 | `WeighingStatus` | enum | `Started`, `Finish`, `Canceled` |
-| `Infraction` | object | Dados da infração (Ait, SequentialInfraction, InfractionType) |
+| `Infraction` | object | Dados da Infração (Ait, SequentialInfraction, InfractionType) |
 | `OperationId` | ObjectId | Referência à Operation |
 | `ExportBatchId` | ObjectId | Referência ao lote de exportação |
 | `ImageName` | string | Nome do arquivo de imagem capturada |
 | `WeighingNumber` | long | Número sequencial da pesagem |
 
-### Tipos de infração (InfractionType)
+### Tipos de Infração (InfractionType)
 | Valor | Descrição |
 |---|---|
 | `ExcessPBT` | Excesso de Peso Bruto Total |
@@ -76,16 +76,16 @@ Define câmera, balança, tolerâncias e integração com AxHub.
 
 ---
 
-## Classification (classificação de veículos)
+## Classification (classificação de Veículos
 
 | Campo | Tipo | Descrição |
 |---|---|---|
 | `Code` | string | Código da classificação |
 | `Name` | string | Nome (ex: Caminhão 2 eixos) |
-| `Class` | string | Classe do veículo |
+| `Class` | string | Classe do Veículo |
 | `Axles` | string | Configuração de eixos (ex: E1E2) |
 | `Pbt` | string | PBT máximo regulamentado |
-| `Type` | string | Tipo do veículo |
+| `Type` | string | Tipo do Veículo |
 
 ---
 
@@ -98,7 +98,7 @@ Define câmera, balança, tolerâncias e integração com AxHub.
 | `Message` | string | Mensagem de erro (quando Error) |
 | `InitialDateInfractions` | DateTime | Data inicial do lote |
 | `FinalDateInfractions` | DateTime | Data final do lote |
-| `InfractionType` | enum | Tipo de infração do lote |
+| `InfractionType` | enum | Tipo de Infração do lote |
 | `ExportType` | enum | Destino da exportação |
 | `Sequential` | int | Número sequencial do lote |
 | `UrlFile` | string | URL do arquivo gerado |
@@ -112,7 +112,7 @@ Quando `ExportStatus = Error`, leia o campo `Message` para identificar a causa. 
 ## Diagrama de relacionamentos
 
 ```
-User ──────────> AccessProfile ──> AccessPermission (hierárquico)
+Use Usuário ──────────> AccessProfile ──> AccessPermission (hierárquico)
 
 Operation ──────> Local (embeddado)
     ▼
@@ -120,8 +120,8 @@ Weighing ──────> ExportBatch
     ├──> WeighingAxleGroup ──> WeighingAxle
     └──> Infraction (embeddado)
 
-SequentialInfraction  (contador independente)
-SequentialExport      (faixa independente)
+SequentialInfraction (contador independente)
+SequentialExport (faixa independente)
 ```
 
 ---
@@ -133,8 +133,8 @@ SequentialExport      (faixa independente)
 | GET | `/api/axton/status` | Testa conexão com banco |
 | GET | `/api/axton/resumo` | Contagem de registros |
 | GET | `/api/axton/pesagens` | Últimas 20 pesagens |
-| GET | `/api/axton/infracoes` | Últimas 20 infrações |
-| GET | `/api/axton/heartbeat` | Status dos equipamentos |
+| GET | `/api/axton/infracoes` | Últimas 20 Infrações |
+| GET | `/api/axton/heartbeat` | Status dos Equipamentos |
 | GET | `/api/axton/tabelas` | Todas as tabelas com contagem |
 
 ---
@@ -161,11 +161,11 @@ curl http://localhost:3100/api/axton/resumo
 
 ```json
 {
-  "equipamentos": 3,
+  Equipamentos 3,
   "operacoes": 520,
   "pesagens": 148000,
   "infracoes": 12400,
-  "usuarios": 8
+  Usuários 8
 }
 ```
 
@@ -187,7 +187,7 @@ curl http://localhost:3100/api/axton/pesagens
       "Placa": "ABC1D23",
       "PBT": 14500,
       "Status": "Finish",
-      "Equipamento": "Balança Posto Norte"
+      Equipamento "Balança Posto Norte"
     }
   ]
 }
@@ -195,7 +195,7 @@ curl http://localhost:3100/api/axton/pesagens
 
 ---
 
-### Últimas infrações
+### Últimas Infrações
 
 ```bash
 curl http://localhost:3100/api/axton/infracoes
@@ -213,7 +213,7 @@ curl http://localhost:3100/api/axton/infracoes
       "PBTRegulamentado": 23000,
       "PBTMedido": 28450,
       "Status": "Pendente",
-      "Equipamento": "Balança Posto Norte"
+      Equipamento "Balança Posto Norte"
     }
   ]
 }
@@ -221,7 +221,7 @@ curl http://localhost:3100/api/axton/infracoes
 
 ---
 
-### Heartbeat de equipamentos
+### Heartbeat de Equipamentos
 
 ```bash
 curl http://localhost:3100/api/axton/heartbeat
@@ -231,8 +231,8 @@ curl http://localhost:3100/api/axton/heartbeat
 {
   "total": 3,
   "heartbeats": [
-    { "Equipamento": "Balança Posto Norte", "NumeroSerie": "HN-001", "UltimoHeartbeat": "2026-03-31T22:07:00", "Status": "Online" },
-    { "Equipamento": "Balança Posto Sul",   "NumeroSerie": "HN-002", "UltimoHeartbeat": "2026-03-31T22:07:30", "Status": "Online" }
+    { Equipamento "Balança Posto Norte", "NumeroSerie": "HN-001", "UltimoHeartbeat": "2026-03-31T22:07:00", "Status": "Online" },
+  { Equipamento "Balança Posto Sul", "NumeroSerie": "HN-002", "UltimoHeartbeat": "2026-03-31T22:07:30", "Status": "Online" }
   ]
 }
 ```
@@ -256,7 +256,7 @@ db.collection('Weighing').find({
 
 ---
 
-### Query MongoDB — infrações ainda não exportadas
+### Query MongoDB — Infrações ainda não exportadas
 
 ```javascript
 // MongoDB Driver (Node.js)

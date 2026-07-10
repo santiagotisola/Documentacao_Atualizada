@@ -1,0 +1,583 @@
+{
+  "version": "1.0.0",
+  "moduleName": "Validação Ortográfica Automatizada — AxionIA",
+  "description": "Módulo para varredura, análise e correção automática de erros ortográficos, gramaticais e terminológicos em toda a interface dos sistemas",
+  "lastUpdate": "2026-06-23",
+  
+  "scope": {
+    "systems": ["AxHub", "AxCross", "AxTon", "VARCO", "Multi360", "AxionIA Painel"],
+    "environments": ["producao", "homologacao", "desenvolvimento"],
+    "fileTypes": [
+      "HTML",
+      "JSX/TSX",
+      "Vue/React components",
+      "Markdown (documentação)",
+      "JSON (i18n files)",
+      "SQL (mensagens de erro)",
+      "API responses (messages)"
+    ]
+  },
+  
+  "dictionaries": {
+    "aurelio": {
+      "enabled": true,
+      "source": "https://dicionario.priberam.org/api",
+      "fallback": "local",
+      "localPath": "./dictionaries/aurelio-completo.dic",
+      "totalWords": 450000,
+      "includes": [
+        "Português brasileiro",
+        "Variantes regionais",
+        "Neologismos aceitos",
+        "Termos técnicos"
+      ]
+    },
+    
+    "abnt": {
+      "enabled": true,
+      "standards": {
+        "NBR6023": {
+          "name": "Referências bibliográficas",
+          "rules": [
+            "Formatação de citações",
+            "Ordenação alfabética",
+            "Uso de et al.",
+            "Vírgulas e pontos"
+          ]
+        },
+        
+        "NBR6024": {
+          "name": "Numeração progressiva",
+          "rules": [
+            "Hierarquia de seções",
+            "Numeração de capítulos",
+            "Alíneas e subalíneas"
+          ]
+        },
+        
+        "NBR6028": {
+          "name": "Resumo",
+          "rules": [
+            "Estrutura",
+            "Extensão",
+            "Palavras-chave"
+          ]
+        },
+        
+        "NBR10520": {
+          "name": "Citações",
+          "rules": [
+            "Citações diretas",
+            "Citações indiretas",
+            "Sistema autor-data",
+            "Notas de rodapé"
+          ]
+        }
+      }
+    },
+    
+    "vadeMecum2026": {
+      "enabled": true,
+      "edition": "2026 Free",
+      "categories": {
+        "constituicao": {
+          "terms": ["República Federativa", "Poder Executivo", "Poder Legislativo", "Supremo Tribunal Federal"]
+        },
+        
+        "codigos": {
+          "civil": ["pessoa jurídica", "pessoa física", "boa-fé objetiva"],
+          "penal": ["dolo", "culpa", "contravenção", "delito"],
+          "processoCivil": ["petição inicial", "contestação", "sentença"],
+          "tributario": ["tributo", "imposto", "taxa", "contribuição"]
+        },
+        
+        "leis": {
+          "lgpd": ["dado pessoal", "titular", "controlador", "operador", "encarregado"],
+          "leiDeAcesso": ["informação pública", "transparência ativa", "transparência passiva"],
+          "marcoRegulatorio": ["infraestrutura", "regulação", "concessão"]
+        }
+      }
+    },
+    
+    "customDictionary": {
+      "enabled": true,
+      "terms": {
+        "produtos": [
+          "AxHub",
+          "AxCross",
+          "AxTon",
+          "AxionIA",
+          "Axion Tecnologia"
+        ],
+        
+        "tecnologias": [
+          "Jitbit",
+          "Docusaurus",
+          "MongoDB",
+          "SQL Server",
+          "React",
+          "Node.js",
+          "Vite"
+        ],
+        
+        "termosTecnicos": [
+          "helpdesk",
+          "dashboard",
+          "backend",
+          "frontend",
+          "endpoint",
+          "webhook",
+          "middleware",
+          "upload",
+          "download",
+          "deploy"
+        ],
+        
+        "aceitasEmIngles": [
+          "software",
+          "hardware",
+          "backup",
+          "login",
+          "logout",
+          "firewall",
+          "layout",
+          "design",
+          "framework"
+        ]
+      }
+    }
+  },
+  
+  "validationRules": {
+    "spelling": {
+      "enabled": true,
+      "checkAgainst": ["aurelio", "vadeMecum2026", "customDictionary"],
+      "caseSensitive": false,
+      "ignoreNumbers": true,
+      "ignoreUrls": true,
+      "ignoreEmails": true,
+      "ignoreHtmlTags": true,
+      "ignoreCodeBlocks": true
+    },
+    
+    "grammar": {
+      "enabled": true,
+      "rules": {
+        "concordanciaVerbal": {
+          "enabled": true,
+          "examples": {
+            "erro": "A equipe fizeram o trabalho",
+            "correto": "A equipe fez o trabalho"
+          }
+        },
+        
+        "concordanciaNominal": {
+          "enabled": true,
+          "examples": {
+            "erro": "As documentação está completa",
+            "correto": "A documentação está completa"
+          }
+        },
+        
+        "regenciaVerbal": {
+          "enabled": true,
+          "examples": {
+            "erro": "Cheguei em casa",
+            "correto": "Cheguei a casa"
+          }
+        },
+        
+        "crase": {
+          "enabled": true,
+          "rules": [
+            "Antes de palavra feminina",
+            "Em expressões de tempo",
+            "Em locuções adverbiais"
+          ],
+          "examples": {
+            "erro": "Vou a padaria",
+            "correto": "Vou à padaria"
+          }
+        }
+      }
+    },
+    
+    "terminology": {
+      "enabled": true,
+      "standardization": {
+        "preferredTerms": {
+          "usuário": ["usuário", "NOT: utilizador"],
+          "equipamento": ["equipamento", "NOT: aparelho, NOT: dispositivo"],
+          "veículo": ["veículo", "NOT: veiculo (sem acento)"],
+          "operação": ["operação", "NOT: operacao"],
+          "relatório": ["relatório", "NOT: report"]
+        },
+        
+        "forbiddenTerms": [
+          "logar (usar: fazer login)",
+          "deletar (usar: excluir)",
+          "setar (usar: configurar, definir)",
+          "printar (usar: imprimir)",
+          "startar (usar: iniciar)"
+        ]
+      },
+      
+      "consistency": {
+        "enabled": true,
+        "checkAcrossFiles": true,
+        "suggestMostUsed": true
+      }
+    },
+    
+    "style": {
+      "enabled": true,
+      "rules": {
+        "capitalization": {
+          "sentenceStart": "Primeira letra maiúscula",
+          "properNouns": "Nomes próprios maiúsculos",
+          "titles": "Title Case ou Sentence case consistente"
+        },
+        
+        "punctuation": {
+          "endSentence": "Frases devem terminar com . ! ?",
+          "spacing": "Espaço após pontuação",
+          "ellipsis": "Usar ... (três pontos)"
+        },
+        
+        "formatting": {
+          "quotes": "Usar \"aspas duplas\" para citações",
+          "apostrophe": "Usar ' (apóstrofo) não ` (acento grave)",
+          "dash": "Usar — (travessão) não - (hífen) para pausas"
+        }
+      }
+    }
+  },
+  
+  "scanLocations": {
+    "interface": {
+      "enabled": true,
+      "elements": [
+        "labels",
+        "buttons",
+        "titles",
+        "headings",
+        "paragraphs",
+        "tooltips",
+        "placeholders",
+        "errorMessages",
+        "successMessages",
+        "warningMessages",
+        "infoMessages",
+        "modalTitles",
+        "modalContent",
+        "menuItems",
+        "tabLabels",
+        "breadcrumbs"
+      ],
+      
+      "selectors": [
+        "label",
+        "button",
+        "h1, h2, h3, h4, h5, h6",
+        "p",
+        "[title]",
+        "[placeholder]",
+        ".error-message",
+        ".success-message",
+        ".alert",
+        ".modal-title",
+        ".menu-item",
+        ".tab-label"
+      ]
+    },
+    
+    "code": {
+      "enabled": true,
+      "patterns": [
+        "*.jsx",
+        "*.tsx",
+        "*.vue",
+        "*.html",
+        "*.md",
+        "*.json (apenas valores de texto)"
+      ],
+      
+      "excludePatterns": [
+        "**/node_modules/**",
+        "**/build/**",
+        "**/dist/**",
+        "**/.docusaurus/**",
+        "**/coverage/**",
+        "**/*.min.js"
+      ],
+      
+      "textExtraction": {
+        "jsx": "Extrai strings de componentes React",
+        "html": "Extrai conteúdo de tags",
+        "json": "Extrai valores de chaves de tradução",
+        "md": "Extrai texto puro (ignora código)"
+      }
+    },
+    
+    "documentation": {
+      "enabled": true,
+      "paths": [
+        "AxHub/docs-portal/docs/**/*.md",
+        "AxHub/docs-portal/docs/**/*.mdx",
+        "AxTon/docs-portal/docs/**/*.md",
+        "AxTon/docs-portal/docs/**/*.mdx",
+        "AxCross/docs-portal/docs/**/*.md",
+        "AxCross/docs-portal/docs/**/*.mdx",
+        "README.md",
+        "CHANGELOG.md"
+      ]
+    },
+    
+    "api": {
+      "enabled": true,
+      "checkResponses": true,
+      "fields": [
+        "message",
+        "error",
+        "description",
+        "title",
+        "label"
+      ]
+    },
+    
+    "database": {
+      "enabled": false,
+      "tables": [],
+      "columns": [],
+      "note": "Validação de banco desabilitada por padrão (dados sensíveis)"
+    }
+  },
+  
+  "errorClassification": {
+    "critical": {
+      "description": "Erros que impedem a compreensão ou causam má impressão profissional",
+      "examples": [
+        "Erro ortográfico em título principal",
+        "Erro em mensagem de erro crítica",
+        "Termo técnico incorreto",
+        "Expressão gramaticalmente errada"
+      ],
+      "priority": 1
+    },
+    
+    "high": {
+      "description": "Erros visíveis em áreas importantes",
+      "examples": [
+        "Erro em label de campo obrigatório",
+        "Erro em botão principal",
+        "Inconsistência terminológica",
+        "Erro em menu principal"
+      ],
+      "priority": 2
+    },
+    
+    "medium": {
+      "description": "Erros em áreas secundárias",
+      "examples": [
+        "Erro em tooltip",
+        "Erro em texto de ajuda",
+        "Inconsistência de estilo",
+        "Erro em mensagem informativa"
+      ],
+      "priority": 3
+    },
+    
+    "low": {
+      "description": "Erros menores ou questões de estilo",
+      "examples": [
+        "Espaçamento duplo",
+        "Uso de maiúscula inconsistente (mas não errado)",
+        "Sugestão de termo alternativo"
+      ],
+      "priority": 4
+    }
+  },
+  
+  "correctionSuggestions": {
+    "automated": {
+      "enabled": true,
+      "applyAutomatically": false,
+      "requireApproval": true,
+      "confidence": {
+        "high": ">95% - Aplicar automaticamente (com aprovação)",
+        "medium": "80-95% - Sugerir para revisão",
+        "low": "<80% - Apenas reportar"
+      }
+    },
+    
+    "context": {
+      "showBefore": 50,
+      "showAfter": 50,
+      "highlightError": true,
+      "showSuggestion": true,
+      "showAlternatives": true
+    }
+  },
+  
+  "reporting": {
+    "formats": ["JSON", "HTML", "Markdown", "Excel"],
+    
+    "structure": {
+      "summary": {
+        "totalErrors": 0,
+        "byPriority": {
+          "critical": 0,
+          "high": 0,
+          "medium": 0,
+          "low": 0
+        },
+        "byType": {
+          "spelling": 0,
+          "grammar": 0,
+          "terminology": 0,
+          "style": 0
+        },
+        "byLocation": {
+          "interface": 0,
+          "code": 0,
+          "documentation": 0,
+          "api": 0
+        }
+      },
+      
+      "details": {
+        "groupBy": ["screen", "file", "type", "priority"],
+        "includeContext": true,
+        "includeSuggestions": true,
+        "includeScreenshots": true
+      }
+    },
+    
+    "template": {
+      "header": "## 📝 Relatório de Validação Ortográfica — AxionIA\n\n**Data:** {{date}}\n**Sistema:** {{system}}\n**Ambiente:** {{environment}}\n**Total de Erros:** {{totalErrors}}\n\n---\n\n",
+      
+      "errorEntry": "### {{priority}} — {{type}}\n\n**Localização:** {{location}}\n**Arquivo:** {{file}}:{{line}}\n**Tela:** {{screen}}\n\n**Erro encontrado:**\n```\n{{error}}\n```\n\n**Contexto:**\n```\n{{context}}\n```\n\n**Correção sugerida:**\n```\n{{suggestion}}\n```\n\n**Alternativas:**\n{{alternatives}}\n\n---\n\n"
+    }
+  },
+  
+  "integration": {
+    "vscode": {
+      "enabled": true,
+      "diagnostics": true,
+      "quickFix": true,
+      "hoverInfo": true,
+      "codeActions": [
+        "Corrigir ortografia",
+        "Ignorar palavra (adicionar ao dicionário)",
+        "Ignorar regra neste arquivo",
+        "Ver alternativas"
+      ]
+    },
+    
+    "cicd": {
+      "enabled": true,
+      "failOnCritical": true,
+      "failOnHigh": false,
+      "generateReport": true,
+      "uploadArtifacts": true
+    },
+    
+    "helpdesk": {
+      "enabled": true,
+      "autoCreateTicket": false,
+      "attachReport": true,
+      "priority": "medium",
+      "category": "Qualidade/Interface"
+    }
+  },
+  
+  "execution": {
+    "modes": {
+      "scan": {
+        "description": "Varredura completa de todos os arquivos e interfaces",
+        "duration": "15-30 minutos",
+        "output": "Relatório completo"
+      },
+      
+      "watch": {
+        "description": "Monitoramento contínuo de arquivos modificados",
+        "realTime": true,
+        "notifyOnError": true
+      },
+      
+      "diff": {
+        "description": "Valida apenas arquivos alterados (Git diff)",
+        "compareWith": "main",
+        "faster": true
+      }
+    },
+    
+    "schedule": {
+      "enabled": true,
+      "frequency": "daily",
+      "time": "02:00",
+      "timezone": "America/Sao_Paulo"
+    }
+  },
+  
+  "examples": {
+    "error1": {
+      "found": "Configurações do Sistema - aba Autenticação",
+      "issue": "Configurações (correto) vs Configuracões (erro)",
+      "location": "AxHub > Settings > Authentication Tab",
+      "file": "src/pages/Settings/Authentication.jsx",
+      "line": 45,
+      "priority": "high",
+      "type": "spelling",
+      "suggestion": "Configurações",
+      "context": "...no menu <Configuracões> do Sistema, acesse..."
+    },
+    
+    "error2": {
+      "found": "Equipamentos cadastrado com sucesso",
+      "issue": "Concordância: cadastrado vs cadastrados",
+      "location": "AxCross > Equipment > Success Message",
+      "file": "src/components/Equipment/SuccessToast.jsx",
+      "line": 12,
+      "priority": "medium",
+      "type": "grammar",
+      "suggestion": "Equipamento cadastrado com sucesso OU Equipamentos cadastrados com sucesso",
+      "context": "toast.success('Equipamentos cadastrado com sucesso')"
+    },
+    
+    "error3": {
+      "found": "Clique aqui para fazer o download do relatório",
+      "issue": "Terminologia: download vs baixar",
+      "location": "AxTon > Reports > Download Button",
+      "file": "src/pages/Reports/ExportButton.tsx",
+      "line": 89,
+      "priority": "low",
+      "type": "terminology",
+      "suggestion": "Clique aqui para baixar o relatório",
+      "note": "Preferir termos em português quando possível"
+    }
+  },
+  
+  "commandLine": {
+    "usage": "node scripts/validacao-ortografica.js [options]",
+    
+    "options": {
+      "--scan": "Executar varredura completa",
+      "--watch": "Modo watch (monitoramento contínuo)",
+      "--diff": "Validar apenas arquivos alterados",
+      "--system <name>": "Validar sistema específico (AxHub/AxCross/AxTon)",
+      "--fix": "Aplicar correções automaticamente (requer aprovação)",
+      "--report <format>": "Formato do relatório (json/html/md/excel)",
+      "--output <path>": "Caminho para salvar relatório",
+      "--ci": "Modo CI/CD (exit code 1 se erros críticos)",
+      "--help": "Exibir ajuda"
+    },
+    
+    "examples": {
+      "fullScan": "node scripts/validacao-ortografica.js --scan --report html --output ./reports",
+      "watchMode": "node scripts/validacao-ortografica.js --watch",
+      "ciMode": "node scripts/validacao-ortografica.js --diff --ci --report json",
+      "specificSystem": "node scripts/validacao-ortografica.js --scan --system AxCross --fix"
+    }
+  }
+}

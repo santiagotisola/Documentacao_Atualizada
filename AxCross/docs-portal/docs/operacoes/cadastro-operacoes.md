@@ -6,7 +6,7 @@ description: Cadastro e gestão de operações de fiscalização no AxCross
 
 # Cadastro de Operações
 
-Permite criar e gerenciar operações de fiscalização, definindo local, período, equipamentos e parâmetros de monitoramento.
+Permite criar e gerenciar operações de fiscalização, definindo local, período, Equipamentos e parâmetros de monitoramento.
 
 ## Como acessar
 

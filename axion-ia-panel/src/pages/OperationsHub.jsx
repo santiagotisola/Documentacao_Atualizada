@@ -1,10 +1,13 @@
 import React, { useState, useEffect, useMemo } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import { AXHUB_SITES, AXCROSS_SITES } from '../data/sitesData';
 import { api } from '../services/api';
 import { KPICard as UIKPICard, LoadingSpinner } from '../components/ui';
 import { Building2, TrendingUp, Ticket, AlertCircle, Camera, Target, Users, Activity } from 'lucide-react';
 import CredenciaisManager from '../components/CredenciaisManager';
+import QuickSelect from '../components/QuickSelect.jsx';
+import IntelligenceDashboardPage from './IntelligenceDashboard';
+import QualityDashboardPage from './CentralQualidade/components/Dashboard';
 import './OperationsHub.css';
 
 /* ═══════════════════════════════════════════════════════════════════
@@ -65,27 +68,80 @@ const PIPELINES = [
   { id: "conhecimento", name: "Pipeline de Conhecimento", icon: "📚", color: "#ec4899", summary: "Gera docs → Treina Q&A → Embeddings → Chat IA" },
 ];
 
-const PROCESSOS_AXHUB = [
-  { modulo: "Infrações", icone: "🚨", itens: ["Triagem", "Auditoria", "Consulta", "Exportação", "Exceções", "Descartadas"] },
-  { modulo: "Operações", icone: "🔧", itens: ["Cadastro", "Aferições", "Faixas", "Monitoramento", "Eventos", "Consulta Placas"] },
-  { modulo: "Equipamentos", icone: "📡", itens: ["Fabricantes", "Tipos", "Modelos", "Grupos", "Lista"] },
-  { modulo: "Medição", icone: "📏", itens: ["Contratos", "Performance", "Criar", "Interrupções", "Finalizadas", "Recursos"] },
-  { modulo: "Pesagem/Balança", icone: "⚖️", itens: ["Postos", "Tickets Aberto", "Tickets Fechado", "Liberar", "Reclassificar", "Motivos"] },
-  { modulo: "Cronotacógrafo", icone: "⏱️", itens: ["Triagem", "Consulta"] },
-  { modulo: "Relatórios/BI", icone: "📈", itens: ["Infrações", "Eventos", "Passagens", "Fluxo", "Falhas", "Discrepâncias", "Logs", "Power BI"] },
-  { modulo: "Veículos", icone: "🚗", itens: ["Tipos", "Espécies", "Marcas", "Modelos", "Cores", "Categorias", "Classificações", "Municípios"] },
-  { modulo: "Controle Acesso", icone: "🔐", itens: ["Usuários", "Perfis", "Permissões", "Logs", "Restrição IP"] },
-  { modulo: "Administração", icone: "⚙️", itens: ["Configurações", "Arcos", "Enquadramentos", "Layouts", "Motivos", "Regiões", "Sequenciais", "Tarjas", "Webhooks"] },
-];
+// ── MINI BAR — barra de progresso inline ───────────────────────────
+function MiniBar({ value, max, color }) {
+  const pct = max > 0 ? Math.min(100, (value / max) * 100) : 0;
+  return (
+    <div style={{ height: '6px', background: '#e5e7eb', borderRadius: '3px', overflow: 'hidden', minWidth: '60px' }}>
+      <div style={{ height: '100%', width: `${pct}%`, background: color, borderRadius: '3px', transition: 'width 0.3s' }} />
+    </div>
+  );
+}
 
-const PROCESSOS_AXCROSS = [
-  { modulo: "Veículos Monitorados", icone: "🚗", itens: ["Lista", "Tipos Ocorrências", "Alertas Tempo Real", "Classificações", "Importação Lote"] },
-  { modulo: "Equipamentos", icone: "📡", itens: ["Lista", "Grupos", "Áreas", "Importação"] },
-  { modulo: "Monitoramento Online", icone: "🗺️", itens: ["Tempo Real (SignalR)", "Mapa Google Maps"] },
-  { modulo: "Relatórios", icone: "📈", itens: ["Passagens", "Rotas", "Rastreamento", "Monitorados", "Ocorrências", "PDFs"] },
-  { modulo: "MDF-e (Fiscal)", icone: "📄", itens: ["Painel Fiscal", "OCR + SEFAZ", "Manifesto Eletrônico"] },
-  { modulo: "Configurações", icone: "⚙️", itens: ["Sistema", "Usuários", "Perfis", "Permissões", "Logs", "Sincronização"] },
+// ── GAUGE — arco SVG semi-circular (mesmo da HomePage) ──────────────
+function OpsGauge({ value, max = 100, color = '#3b82f6', size = 110, label, unit = '%' }) {
+  const pct   = max > 0 ? Math.min(1, value / max) : 0;
+  const R     = 38;
+  const cx    = size / 2;
+  const cy    = size / 2 + 8;
+  const arc   = Math.PI * R;
+  const dash  = pct * arc;
+  const gap   = arc - dash;
+  const fontSize = value >= 1000 ? 12 : value >= 100 ? 14 : 17;
+  return (
+    <div className="ops-gauge-wrap">
+      <svg width={size} height={size * 0.7} viewBox={`0 0 ${size} ${size * 0.7}`}>
+        <path d={`M${cx - R},${cy} A${R},${R} 0 0 1 ${cx + R},${cy}`}
+          fill="none" stroke="#e5e7eb" strokeWidth="7" strokeLinecap="round" />
+        <path d={`M${cx - R},${cy} A${R},${R} 0 0 1 ${cx + R},${cy}`}
+          fill="none" stroke={color} strokeWidth="7" strokeLinecap="round"
+          strokeDasharray={`${dash} ${gap}`} style={{ transition: 'stroke-dasharray 0.6s ease' }} />
+        <text x={cx} y={cy - 4} textAnchor="middle" fontSize={fontSize} fontWeight="700" fill="#1f2937">
+          {value}{unit}
+        </text>
+      </svg>
+      {label && <span className="ops-gauge-label">{label}</span>}
+    </div>
+  );
+}
+
+// ── OPS KPI CARD — gauge + sub-info + link ──────────────────────────
+function OpsKpiCard({ value, max, color, label, unit = '%', sublabel, link }) {
+  const inner = (
+    <div className="ops-kpi-new" style={{ '--kpi-color': color }}>
+      <OpsGauge value={value} max={max} color={color} unit={unit} />
+      <div className="ops-kpi-new-label">{label}</div>
+      {sublabel && <div className="ops-kpi-new-sub">{sublabel}</div>}
+      {link && <div className="ops-kpi-new-link">Ver detalhes →</div>}
+    </div>
+  );
+  if (link) return <Link to={link} style={{ textDecoration: 'none' }}>{inner}</Link>;
+  return inner;
+}
+
+// ── LAUNCHER — módulos de acesso rápido ─────────────────────────────
+const SERVICOS_LAUNCHER = [
+  { icon: '🤖', titulo: 'Chat IA',            desc: 'Assistente inteligente',    link: '/central-atendimento?tab=chat',      cor: '#8b5cf6', cat: 'Atendimento' },
+  { icon: '💬', titulo: 'WhatsApp Bot',       desc: 'Atendimento automático',    link: '/central-atendimento?tab=whatsapp',  cor: '#25d366', cat: 'Atendimento' },
+  { icon: '🎫', titulo: 'Helpdesk',           desc: 'Tickets Jitbit',            link: '/central-atendimento?tab=helpdesk',  cor: '#ef4444', cat: 'Atendimento' },
+  { icon: '🔍', titulo: 'Análise Imagens',    desc: 'OCR e validação',           link: '/hub-analise?tab=imagens',           cor: '#06b6d4', cat: 'Análise' },
+  { icon: '🧪', titulo: 'Validação Sistemas', desc: 'Testes automatizados',      link: '/central-validacao',                 cor: '#a855f7', cat: 'Análise' },
+  { icon: '✅', titulo: 'Fila de Revisão',    desc: 'Confiança OCR',             link: '/hub-analise?tab=logs',              cor: '#14b8a6', cat: 'Análise' },
+  { icon: '📚', titulo: 'Knowledge Base',     desc: 'Base de conhecimento',      link: '/kb',                                cor: '#6366f1', cat: 'Análise' },
+  { icon: '🏛️', titulo: 'Editais Gov',        desc: 'Busca PNCP',               link: '/editais-gov',                       cor: '#10b981', cat: 'Inteligência' },
+  { icon: '📊', titulo: 'Análise Multi',      desc: 'Comparativo de produtos',   link: '/analisa-multi',                     cor: '#f59e0b', cat: 'Inteligência' },
+  { icon: '🗺️', titulo: 'Roadmap',            desc: 'Planejamento de produto',   link: '/roadmap',                           cor: '#0ea5e9', cat: 'Inteligência' },
+  { icon: '📐', titulo: 'Specs',              desc: 'Especificações técnicas',   link: '/specs',                             cor: '#64748b', cat: 'Inteligência' },
+  { icon: '🎯', titulo: 'SLA Compliance',     desc: 'Conformidade de SLA',       link: '/sla-compliance',                    cor: '#ec4899', cat: 'Qualidade' },
+  { icon: '📜', titulo: 'Conformidade',       desc: 'Editais e requisitos',      link: '/conformidade',                      cor: '#d97706', cat: 'Qualidade' },
+  { icon: '📄', titulo: 'Gerar Doc',          desc: 'Documentação automática',   link: '/gerar-doc',                         cor: '#f59e0b', cat: 'Admin' },
+  { icon: '⏱️', titulo: 'Planilha Horas',     desc: 'Controle de tempo',         link: '/planilha-horas',                    cor: '#0369a1', cat: 'Admin' },
+  { icon: '🎓', titulo: 'Treinamento',        desc: 'Capacitação IA',            link: '/treinamento',                       cor: '#4f46e5', cat: 'Admin' },
+  { icon: '📋', titulo: 'Logs',               desc: 'Auditoria e rastreio',      link: '/hub-analise?tab=logs',              cor: '#64748b', cat: 'Admin' },
+  { icon: '🔬', titulo: 'Análise de Sites',   desc: 'Comparativo de contratos',  link: '/analise',                           cor: '#0891b2', cat: 'Operação' },
+  { icon: '📋', titulo: 'Guia por Site',      desc: 'Manual por contrato',       link: '/guia-sites',                        cor: '#059669', cat: 'Operação' },
 ];
+const CATS_LAUNCHER = ['Todos', 'Atendimento', 'Análise', 'Inteligência', 'Qualidade', 'Admin', 'Operação'];
 
 // ── HELPERS ─────────────────────────────────────────────────────────
 function scoreColor(score) {
@@ -144,19 +200,28 @@ function KPICard({ icon, label, value, sublabel, color, link }) {
 
 // ── ABAS ────────────────────────────────────────────────────────────
 const TABS = [
-  { id: 'dashboard', label: '📊 Dashboard', desc: 'KPIs consolidados' },
-  { id: 'mapa', label: '🗺️ Mapa Visual', desc: 'Diagrama interativo' },
-  { id: 'sites', label: '🏢 Sites & Credenciais', desc: 'Métricas + Acessos' },
-  { id: 'processos', label: '📋 Processos', desc: 'AxHub/AxCross' },
-  { id: 'fluxos', label: '🔄 Fluxos BPM', desc: 'Passo a passo' },
-  { id: 'relatorios', label: '📈 Relatórios', desc: 'Geração e exportação' },
+  { id: 'dashboard',       label: '📊 Dashboard',       desc: 'KPIs consolidados' },
+  { id: 'performance',     label: '⚡ Performance',      desc: 'Health Score & OCR' },
+  { id: 'qualidade',       label: '🛡️ Qualidade',        desc: 'Projetos e scans' },
+  { id: 'observabilidade', label: '🔭 Observabilidade',  desc: 'Health avançado & anomalias' },
+  { id: 'mapa',            label: '🗺️ Mapa Visual',      desc: 'Diagrama interativo' },
+  { id: 'launcher',        label: '🚀 Acesso Rápido',    desc: 'Todos os módulos' },
+  { id: 'relatorios',      label: '📈 Relatórios',       desc: 'Geração e exportação' },
 ];
 
 /* ═══════════════════════════════════════════════════════════════════
    COMPONENTE PRINCIPAL
    ═══════════════════════════════════════════════════════════════════ */
 export default function OperationsHub() {
-  const [tab, setTab] = useState('dashboard');
+  const navigate = useNavigate();
+  const [searchParams, setSearchParams] = useSearchParams();
+  const tabFromUrl = searchParams.get('tab') || 'dashboard';
+  const [tab, setTab] = useState(tabFromUrl);
+
+  // Sincronizar URL ao trocar de aba
+  useEffect(() => {
+    setSearchParams(tab === 'dashboard' ? {} : { tab }, { replace: true });
+  }, [tab]);
   const [chamadosData, setChamadosData] = useState(null);
   const [slaData, setSlaData] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -164,7 +229,16 @@ export default function OperationsHub() {
   const [filtroEstado, setFiltroEstado] = useState('Todos');
   const [selectedSite, setSelectedSite] = useState(null);
   const [showCredenciais, setShowCredenciais] = useState(false); // Controla exibição de credenciais
-  const [sistemaProcessos, setSistemaProcessos] = useState('AxHub'); // Estado para aba Processos
+  const [sistemaProcessos, setSistemaProcessos] = useState('AxHub'); // mantido para compatibilidade
+  const [filtroLauncher, setFiltroLauncher] = useState('Todos');
+
+  // Redirecionar tabs movidas
+  useEffect(() => {
+    if (tab === 'processos') navigate('/central-processos?tab=axhub', { replace: true });
+    if (tab === 'fluxos')    navigate('/central-processos?tab=fluxos', { replace: true });
+    if (tab === 'chamados')  navigate('/central-atendimento?tab=helpdesk', { replace: true });
+    if (tab === 'sites')     navigate('/central-sites', { replace: true });
+  }, [tab]);
 
   // Busca dados consolidados
   useEffect(() => {
@@ -222,61 +296,127 @@ export default function OperationsHub() {
   // ── Render Tabs ─────────────────────────────────────────────────────
   function renderTabContent() {
     switch (tab) {
-      case 'dashboard':
-        return renderDashboard();
-      case 'mapa':
-        return renderMapa();
-      case 'sites':
-        return renderSites();
-      case 'processos':
-        return renderProcessos();
-      case 'fluxos':
-        return renderFluxos();
-      case 'relatorios':
-        return renderRelatorios();
-      default:
-        return null;
+      case 'dashboard':       return renderDashboard();
+      case 'chamados':        return null; // redirect → /central-atendimento?tab=helpdesk
+      case 'sites':           return null; // redirect → /central-sites
+      case 'performance':     return renderPerformance();
+      case 'sites':           return renderSites();
+      case 'qualidade':       return <div style={{padding:'0.5rem 0'}}><QualityDashboardPage /></div>;
+      case 'observabilidade': return <div style={{padding:'0.5rem 0'}}><IntelligenceDashboardPage /></div>;
+      case 'mapa':            return renderMapa();
+      case 'launcher':        return renderLauncher();
+      case 'relatorios':      return renderRelatorios();
+      default:                return null;
     }
   }
 
   // ──  Aba: Dashboard ────────────────────────────────────────────────
   function renderDashboard() {
+    const topSites  = sitesFiltrados.filter(s => s.healthScore >= 80).slice(0, 6);
+    const badSites  = sitesFiltrados.filter(s => s.healthScore < 60).slice(0, 6);
+    const allSorted = [...sitesFiltrados].sort((a, b) => b.healthScore - a.healthScore);
+
     return (
       <div className="ops-dashboard">
-        <div className="ops-kpis-grid">
-          <KPICard icon="🏢" label="Sites Totais" value={kpis.totalSites} sublabel={`${kpis.sitesAtivos} ativos`} color="#3b82f6" link="/analise" />
-          <KPICard icon="💚" label="Health Score Médio" value={`${kpis.avgScore}%`} color={scoreColor(kpis.avgScore)} link="/dashboard" />
-          <KPICard icon="🎫" label="Chamados Abertos" value={kpis.chamadosAbertos} sublabel={`${kpis.criticos} críticos`} color="#f59e0b" link="/helpdesk" />
-          <KPICard icon="📸" label="OCR Médio" value={`${kpis.avgOCR}%`} sublabel="AxHub" color="#10b981" link="/analise-imagens" />
-          <KPICard icon="🎯" label="SLA Compliance" value={kpis.slaCompliance !== null ? `${kpis.slaCompliance}%` : 'N/A'} color="#8b5cf6" link="/helpdesk" />
-          <KPICard icon="📊" label="Total Chamados" value={kpis.totalChamados} sublabel="Últimos 30 dias" color="#ec4899" link="/helpdesk" />
+
+        {/* ── Gauges KPI ── */}
+        <div className="ops-db-gauges-row">
+          <OpsKpiCard value={kpis.avgScore}        max={100}  color="#3b82f6"  label="Health Score Médio"  link="/dashboard" />
+          <OpsKpiCard value={kpis.avgOCR}          max={100}  color="#06b6d4"  label="OCR Médio (AxHub)"   link="/analise-imagens" />
+          <OpsKpiCard value={kpis.sitesAtivos}     max={kpis.totalSites} color="#22c55e" unit="" label="Sites Ativos" sublabel={`de ${kpis.totalSites} total`} link="/analise" />
+          <OpsKpiCard value={kpis.chamadosAbertos} max={Math.max(kpis.chamadosAbertos, 1)} color="#f59e0b" unit="" label="Chamados Abertos" sublabel={`${kpis.criticos} críticos`} link="/helpdesk" />
+          {kpis.slaCompliance !== null && (
+            <OpsKpiCard value={kpis.slaCompliance} max={100}  color="#8b5cf6"  label="SLA Compliance"      link="/helpdesk" />
+          )}
+          <OpsKpiCard value={kpis.totalChamados}   max={Math.max(kpis.totalChamados, 1)} color="#ec4899" unit="" label="Total Chamados" sublabel="Últimos 30 dias" link="/helpdesk" />
         </div>
 
-        <div className="ops-dashboard-sections">
-          <div className="ops-section">
-            <h3>🟢 Top Performers (Health &gt; 80%)</h3>
-            <div className="ops-sites-mini">
-              {sitesFiltrados.filter(s => s.healthScore >= 80).slice(0, 5).map(s => (
-                <div key={s.id} className="ops-site-mini">
-                  <span className="ops-site-name">{s.nome}</span>
-                  <span className="ops-site-score" style={{ color: scoreColor(s.healthScore) }}>{s.healthScore}%</span>
+        {/* ── Barra de stats ── */}
+        <div className="ops-db-stats-bar">
+          {[
+            { label: 'Sites Totais',        val: kpis.totalSites },
+            { label: 'Sites Ativos',         val: kpis.sitesAtivos },
+            { label: 'Health > 80%',         val: sitesComScore.filter(s => s.healthScore >= 80).length },
+            { label: 'Tickets Abertos',      val: kpis.chamadosAbertos },
+            { label: 'Críticos',             val: kpis.criticos },
+            { label: 'Equipamentos (AxHub)', val: AXHUB_SITES.reduce((a, s) => a + (s.equipamentos?.total || 0), 0) },
+          ].map(k => (
+            <div key={k.label} className="ops-db-stat">
+              <span className="ops-db-stat-num">{k.val}</span>
+              <span className="ops-db-stat-lbl">{k.label}</span>
+            </div>
+          ))}
+        </div>
+
+        {/* ── Seções lado a lado ── */}
+        <div className="ops-db-sections">
+
+          {/* Top Performers */}
+          <div className="ops-db-section">
+            <div className="ops-db-section-title">
+              <span className="ops-db-section-dot" style={{ background: '#22c55e' }} />
+              Top Performers — Health ≥ 80%
+            </div>
+            <div className="ops-db-site-list">
+              {topSites.length === 0
+                ? <p style={{ color: '#9ca3af', fontSize: '0.85rem' }}>Nenhum site nesta faixa.</p>
+                : topSites.map(s => (
+                  <div key={s.id} className="ops-db-site-row">
+                    <span className="ops-db-site-name">{s.nome}</span>
+                    <div className="ops-db-site-bar">
+                      <div style={{ height: '100%', width: `${s.healthScore}%`, background: scoreColor(s.healthScore), borderRadius: '3px', transition: 'width 0.4s' }} />
+                    </div>
+                    <span className="ops-db-site-score" style={{ color: scoreColor(s.healthScore) }}>{s.healthScore}%</span>
+                  </div>
+                ))
+              }
+            </div>
+          </div>
+
+          {/* Sites Críticos */}
+          <div className="ops-db-section">
+            <div className="ops-db-section-title">
+              <span className="ops-db-section-dot" style={{ background: '#ef4444' }} />
+              Sites Críticos — Health &lt; 60%
+            </div>
+            <div className="ops-db-site-list">
+              {badSites.length === 0
+                ? <p style={{ color: '#9ca3af', fontSize: '0.85rem' }}>Nenhum site crítico 🎉</p>
+                : badSites.map(s => (
+                  <div key={s.id} className="ops-db-site-row">
+                    <span className="ops-db-site-name">{s.nome}</span>
+                    <div className="ops-db-site-bar">
+                      <div style={{ height: '100%', width: `${s.healthScore}%`, background: scoreColor(s.healthScore), borderRadius: '3px', transition: 'width 0.4s' }} />
+                    </div>
+                    <span className="ops-db-site-score" style={{ color: scoreColor(s.healthScore) }}>{s.healthScore}%</span>
+                    <span className="ops-db-site-chamados">{s.chamados.abertos} tickets</span>
+                  </div>
+                ))
+              }
+            </div>
+          </div>
+
+          {/* Ranking Geral */}
+          <div className="ops-db-section ops-db-section--wide">
+            <div className="ops-db-section-title">
+              <span className="ops-db-section-dot" style={{ background: '#3b82f6' }} />
+              Ranking Geral de Sites
+            </div>
+            <div className="ops-db-site-list">
+              {allSorted.slice(0, 10).map((s, i) => (
+                <div key={s.id} className="ops-db-site-row">
+                  <span className="ops-db-site-rank">#{i + 1}</span>
+                  <span className="ops-db-site-name">{s.nome}</span>
+                  <span className="ops-db-site-sistema">{s.sistema}</span>
+                  <div className="ops-db-site-bar">
+                    <div style={{ height: '100%', width: `${s.healthScore}%`, background: scoreColor(s.healthScore), borderRadius: '3px', transition: 'width 0.4s' }} />
+                  </div>
+                  <span className="ops-db-site-score" style={{ color: scoreColor(s.healthScore) }}>{s.healthScore}%</span>
                 </div>
               ))}
             </div>
           </div>
 
-          <div className="ops-section">
-            <h3>🔴 Sites Críticos (Health &lt; 60%)</h3>
-            <div className="ops-sites-mini">
-              {sitesFiltrados.filter(s => s.healthScore < 60).map(s => (
-                <div key={s.id} className="ops-site-mini ops-site-critico">
-                  <span className="ops-site-name">{s.nome}</span>
-                  <span className="ops-site-score" style={{ color: scoreColor(s.healthScore) }}>{s.healthScore}%</span>
-                  <span className="ops-site-info">{s.chamados.abertos} chamados abertos</span>
-                </div>
-              ))}
-            </div>
-          </div>
         </div>
       </div>
     );
@@ -345,169 +485,13 @@ export default function OperationsHub() {
     );
   }
 
-  // ── Aba: Sites & Credenciais ───────────────────────────────────────
-  function renderSites() {
-    return (
-      <div className="ops-sites">
-        <div className="ops-sites-header">
-          <div className="ops-filters">
-            <select value={filtroSistema} onChange={e => setFiltroSistema(e.target.value)}>
-              <option>Todos</option>
-              <option>AxHub</option>
-              <option>AxCross</option>
-              <option>AxTon</option>
-            </select>
-            <select value={filtroEstado} onChange={e => setFiltroEstado(e.target.value)}>
-              <option>Todos</option>
-              {estados.map(e => <option key={e}>{e}</option>)}
-            </select>
-          </div>
-          <div className="ops-sites-actions">
-            <button className="ops-btn-secondary" onClick={() => { setShowCredenciais(true); setSelectedSite(null); }}>
-              🔐 Gerenciar Credenciais
-            </button>
-            <span className="ops-sites-count">{sitesFiltrados.length} sites</span>
-          </div>
-        </div>
-
-        <table className="ops-sites-table">
-          <thead>
-            <tr>
-              <th>Site</th>
-              <th>Sistema</th>
-              <th>Estado</th>
-              <th>Versão</th>
-              <th>OCR</th>
-              <th>Chamados</th>
-              <th>Health Score</th>
-              <th>Status</th>
-              <th>Ações</th>
-            </tr>
-          </thead>
-          <tbody>
-            {sitesFiltrados.map(s => (
-              <tr key={s.id} onClick={() => setSelectedSite(s)} className={selectedSite?.id === s.id ? 'selected' : ''}>
-                <td><strong>{s.nome}</strong></td>
-                <td><span className="ops-badge">{s.sistema}</span></td>
-                <td>{s.estado}</td>
-                <td>{s.versao || 'N/A'}</td>
-                <td>{s.ocr ? `${s.ocr}%` : '-'}</td>
-                <td>{s.chamados.abertos} {s.chamados.criticos > 0 && <span className="ops-badge-danger">{s.chamados.criticos} crít.</span>}</td>
-                <td>
-                  <span className="ops-health-score" style={{ color: scoreColor(s.healthScore) }}>
-                    {s.healthScore}%
-                  </span>
-                </td>
-                <td><span className={`ops-status-dot ${s.status}`}></span></td>
-                <td>
-                  <button 
-                    className="ops-btn-icon" 
-                    onClick={(e) => { e.stopPropagation(); setSelectedSite(s); setShowCredenciais(true); }}
-                    title="Ver credenciais"
-                  >
-                    🔐
-                  </button>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-
-        {selectedSite && !showCredenciais && (
-          <div className="ops-site-detail-panel">
-            <button className="ops-close-panel" onClick={() => setSelectedSite(null)}>✕</button>
-            <h3>{selectedSite.nome}</h3>
-            <div className="ops-detail-grid">
-              <div><strong>Sistema:</strong> {selectedSite.sistema}</div>
-              <div><strong>Estado:</strong> {selectedSite.estado}</div>
-              <div><strong>Versão:</strong> {selectedSite.versao || 'N/A'}</div>
-              <div><strong>OCR:</strong> {selectedSite.ocr ? `${selectedSite.ocr}%` : '-'}</div>
-              <div><strong>Chamados Abertos:</strong> {selectedSite.chamados.abertos}</div>
-              <div><strong>Chamados Críticos:</strong> {selectedSite.chamados.criticos}</div>
-              <div><strong>Health Score:</strong> <span style={{ color: scoreColor(selectedSite.healthScore) }}>{selectedSite.healthScore}%</span></div>
-            </div>
-            <button className="ops-btn-primary" onClick={() => setShowCredenciais(true)}>
-              🔐 Ver Credenciais
-            </button>
-          </div>
-        )}
-
-        {showCredenciais && (
-          <div className="ops-credenciais-panel">
-            <div className="ops-credenciais-header">
-              <h3>🔐 Gerenciador de Credenciais</h3>
-              <button className="ops-close-panel" onClick={() => { setShowCredenciais(false); setSelectedSite(null); }}>✕</button>
-            </div>
-            <div className="ops-credenciais-content">
-              <CredenciaisManager selectedSite={selectedSite} />
-            </div>
-          </div>
-        )}
-      </div>
-    );
-  }
-
-  // ── Aba: Processos ─────────────────────────────────────────────────
-  function renderProcessos() {
-    const processos = sistemaProcessos === 'AxHub' ? PROCESSOS_AXHUB : PROCESSOS_AXCROSS;
-    
-    return (
-      <div className="ops-processos">
-        <div className="ops-processos-header">
-          <h3>📋 Processos Operacionais</h3>
-          <div className="ops-sistema-toggle">
-            <button className={sistemaProcessos === 'AxHub' ? 'active' : ''} onClick={() => setSistemaProcessos('AxHub')}>AxHub</button>
-            <button className={sistemaProcessos === 'AxCross' ? 'active' : ''} onClick={() => setSistemaProcessos('AxCross')}>AxCross</button>
-          </div>
-        </div>
-
-        <div className="ops-processos-grid">
-          {processos.map((p, i) => (
-            <div key={i} className="ops-processo-card">
-              <div className="ops-processo-header">
-                <span className="ops-processo-icon">{p.icone}</span>
-                <strong>{p.modulo}</strong>
-              </div>
-              <ul className="ops-processo-itens">
-                {p.itens.map((item, j) => (
-                  <li key={j}>{item}</li>
-                ))}
-              </ul>
-            </div>
-          ))}
-        </div>
-      </div>
-    );
-  }
-
-  // ── Aba: Fluxos BPM ────────────────────────────────────────────────
-  function renderFluxos() {
-    return (
-      <div className="ops-fluxos">
-        <h3>🔄 Fluxos de Processos BPM</h3>
-        <p>Fluxos detalhados passo a passo dos principais processos operacionais</p>
-        <div className="ops-fluxos-placeholder">
-          <p>📊 6 Fluxos Detalhados</p>
-          <ul>
-            <li>Processo de Infrações (Início → Exportação)</li>
-            <li>Processo de Pesagem Veicular (Balança)</li>
-            <li>Monitoramento em Tempo Real</li>
-            <li>Processo de Medição (Performance)</li>
-            <li>Atendimento Helpdesk (Jitbit → Resposta)</li>
-            <li>Operação de Equipamentos</li>
-          </ul>
-        </div>
-      </div>
-    );
-  }
-
   // ── Aba: Relatórios ────────────────────────────────────────────────
   function renderRelatorios() {
     return (
       <div className="ops-relatorios">
         <h3>📈 Geração de Relatórios</h3>
         <div className="ops-relatorio-form">
-          <p>Selecione o tipo de relatório e os filtros para geração:</p>
+          <p>Selecione o tipo de Relatório e os filtros para geração:</p>
           <select>
             <option>Relatório de Sites (Consolidado)</option>
             <option>Relatório de Chamados (Por Período)</option>
@@ -515,6 +499,117 @@ export default function OperationsHub() {
             <option>Relatório de SLA (Compliance)</option>
           </select>
           <button className="ops-btn-primary">📥 Gerar Relatório</button>
+        </div>
+      </div>
+    );
+  }
+
+  // ── Aba: Performance ────────────────────────────────────────────────
+  function renderPerformance() {
+    const ranges = [
+      { label: '90-100% (Excelente)', min: 90, max: 100, color: '#22c55e' },
+      { label: '70-89% (Bom)',        min: 70, max:  89, color: '#84cc16' },
+      { label: '50-69% (Regular)',    min: 50, max:  69, color: '#f59e0b' },
+      { label: '30-49% (Ruim)',       min: 30, max:  49, color: '#f97316' },
+      { label: '0-29% (Crítico)',     min:  0, max:  29, color: '#ef4444' },
+    ];
+    const scoreDistrib = ranges.map(r => ({
+      ...r,
+      count: sitesComScore.filter(s => s.healthScore >= r.min && s.healthScore <= r.max).length,
+    }));
+    const ocrRanking = sitesComScore.filter(s => s.ocr && s.ocr > 0).sort((a, b) => b.ocr - a.ocr);
+
+    return (
+      <div className="ops-performance">
+        <div className="ops-section">
+          <h3>📊 Distribuição de Health Score</h3>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem', marginTop: '0.75rem' }}>
+            {scoreDistrib.map(r => (
+              <div key={r.label} style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+                <span style={{ width: '160px', fontSize: '0.85rem', color: '#4b5563', flexShrink: 0 }}>{r.label}</span>
+                <div style={{ flex: 1 }}>
+                  <MiniBar value={r.count} max={sitesComScore.length} color={r.color} />
+                </div>
+                <span style={{ width: '24px', fontWeight: 700, color: r.color }}>{r.count}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {ocrRanking.length > 0 && (
+          <div className="ops-section">
+            <h3>📷 Ranking OCR por Site</h3>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.4rem', marginTop: '0.5rem' }}>
+              {ocrRanking.map((s, i) => (
+                <div key={s.id} style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+                  <span style={{ width: '24px', color: '#9ca3af', fontSize: '0.85rem' }}>#{i + 1}</span>
+                  <span style={{ flex: 1, fontSize: '0.9rem' }}>{s.nome}</span>
+                  <div style={{ width: '120px' }}>
+                    <MiniBar value={s.ocr} max={100} color={s.ocr >= 90 ? '#22c55e' : s.ocr >= 70 ? '#f59e0b' : '#ef4444'} />
+                  </div>
+                  <span style={{ width: '44px', fontWeight: 700, color: s.ocr >= 90 ? '#22c55e' : s.ocr >= 70 ? '#f59e0b' : '#ef4444', textAlign: 'right' }}>{s.ocr}%</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        <div className="ops-section">
+          <h3>⚡ Métricas de Gestão</h3>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))', gap: '1rem', marginTop: '0.5rem' }}>
+            {[
+              { titulo: 'Versão Atual (≥v.1.2.0)', valor: `${sitesComScore.filter(s => s.versao && s.versao >= 'v.1.2.0').length} / ${sitesComScore.filter(s => s.versao).length}` },
+              { titulo: 'Sites Sem Chamados', valor: sitesComScore.filter(s => s.chamados.abertos === 0).length },
+              { titulo: 'Sites com Health > 80%', valor: sitesComScore.filter(s => s.healthScore >= 80).length },
+              { titulo: 'Equipamentos (AxHub)', valor: AXHUB_SITES.reduce((a, s) => a + (s.equipamentos?.total || 0), 0) },
+            ].map(m => (
+              <div key={m.titulo} style={{ background: '#f9fafb', border: '1px solid #e5e7eb', borderRadius: '8px', padding: '1rem' }}>
+                <div style={{ fontSize: '0.8rem', color: '#6b7280', marginBottom: '0.25rem' }}>{m.titulo}</div>
+                <div style={{ fontSize: '1.5rem', fontWeight: 700 }}>{m.valor}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  // ── Aba: Acesso Rápido (Launcher) ───────────────────────────────────
+  function renderLauncher() {
+    const lista = filtroLauncher === 'Todos' ? SERVICOS_LAUNCHER : SERVICOS_LAUNCHER.filter(s => s.cat === filtroLauncher);
+    return (
+      <div className="ops-launcher">
+        <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap', marginBottom: '1.5rem' }}>
+          {CATS_LAUNCHER.map(c => (
+            <button key={c}
+              onClick={() => setFiltroLauncher(c)}
+              style={{
+                padding: '5px 14px', borderRadius: '20px', border: '1px solid',
+                cursor: 'pointer', fontSize: '0.85rem', fontWeight: filtroLauncher === c ? 700 : 400,
+                background: filtroLauncher === c ? '#3b82f6' : '#fff',
+                color: filtroLauncher === c ? '#fff' : '#374151',
+                borderColor: filtroLauncher === c ? '#3b82f6' : '#d1d5db',
+              }}>{c}</button>
+          ))}
+        </div>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(160px, 1fr))', gap: '1rem' }}>
+          {lista.map((s, i) => (
+            <div key={i}
+              onClick={() => navigate(s.link)}
+              style={{ background: '#fff', border: '1px solid #e5e7eb', borderRadius: '12px', padding: '1rem', cursor: 'pointer',
+                display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.5rem', textAlign: 'center',
+                transition: 'box-shadow 0.15s', boxShadow: '0 1px 3px rgba(0,0,0,0.06)' }}
+              onMouseOver={e => e.currentTarget.style.boxShadow = '0 4px 12px rgba(0,0,0,0.12)'}
+              onMouseOut={e => e.currentTarget.style.boxShadow = '0 1px 3px rgba(0,0,0,0.06)'}
+            >
+              <div style={{ width: '44px', height: '44px', borderRadius: '10px', background: s.cor,
+                display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.4rem' }}>
+                {s.icon}
+              </div>
+              <div style={{ fontWeight: 600, fontSize: '0.85rem', color: '#111827' }}>{s.titulo}</div>
+              <div style={{ fontSize: '0.75rem', color: '#6b7280' }}>{s.desc}</div>
+            </div>
+          ))}
         </div>
       </div>
     );
@@ -535,18 +630,17 @@ export default function OperationsHub() {
         </div>
       </header>
 
-      <nav className="ops-tabs">
+      <div className="ops-tabs">
         {TABS.map(t => (
           <button
             key={t.id}
             className={`ops-tab ${tab === t.id ? 'active' : ''}`}
             onClick={() => setTab(t.id)}
           >
-            <span className="ops-tab-label">{t.label}</span>
-            <span className="ops-tab-desc">{t.desc}</span>
+            {t.label}
           </button>
         ))}
-      </nav>
+      </div>
 
       <main className="ops-content">
         {renderTabContent()}

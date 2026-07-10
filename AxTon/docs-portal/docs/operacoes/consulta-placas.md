@@ -1,14 +1,14 @@
 ---
 sidebar_position: 4
 title: Consulta de Placas
-description: Pesquisar passagens de veículos por placa
+description: Pesquisar passagens de Veículos por placa
 ---
 
 # Consulta de Placas
 
 ![Início da Pesagem](../img/Incio%20da%20pesagem.png)
 
-Permite pesquisar o histórico de passagens de um veículo específico nos postos de pesagem.
+Permite pesquisar o histórico de passagens de um Veículo específico nos postos de pesagem.
 
 ## Como acessar
 
@@ -18,7 +18,7 @@ Permite pesquisar o histórico de passagens de um veículo específico nos posto
 
 | Filtro | Descrição |
 |--------|-----------|
-| **Placa** | Placa do veículo (parcial ou completa) |
+| **Placa** | Placa do Veículo (parcial ou completa) |
 | **Período** | Data inicial e final |
 | **Posto** | Posto de pesagem específico |
 
@@ -28,11 +28,11 @@ Permite pesquisar o histórico de passagens de um veículo específico nos posto
 
 | Coluna | Descrição |
 |--------|-----------|
-| **Placa** | Placa do veículo |
+| **Placa** | Placa do Veículo |
 | **Data/Hora** | Momento da passagem |
 | **Posto** | Local da pesagem |
 | **Peso Bruto** | Peso total registrado |
-| **Classificação** | Tipo de veículo identificado |
+| **Classificação** | Tipo de Veículo identificado |
 | **Excesso** | Peso excedente, se houver |
 
 ### Passo a passo

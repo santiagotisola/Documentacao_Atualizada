@@ -6,7 +6,7 @@ description: Liberação de tickets para nova pesagem
 
 # Liberar Tickets para Pesagem
 
-Permite liberar tickets de pesagem para que veículos retidos realizem nova pesagem. Utilizado quando um ticket foi cancelado, expirado ou precisa ser reaberto por decisão administrativa.
+Permite liberar tickets de pesagem para que Veículos retidos realizem nova pesagem. Utilizado quando um ticket foi cancelado, expirado ou precisa ser reaberto por decisão administrativa.
 
 ![Liberar Tickets](../img/Balança%20-%20Liberar%20Tickets%20para%20Pesagem.png)
 
@@ -30,7 +30,7 @@ Permite liberar tickets de pesagem para que veículos retidos realizem nova pesa
 | Ticket expirado sem pesagem realizada | Liberar para nova tentativa |
 | Erro no registro do ticket | Liberar e criar novo ticket correto |
 | Veículo retido indevidamente | Liberar com motivo administrativo |
-| Defeito no equipamento durante a pesagem | Liberar para repetição em outro posto |
+| Defeito no Equipamento durante a pesagem | Liberar para repetição em outro posto |
 
 :::warning Atenção
 A liberação é registrada em log e requer justificativa obrigatória. Todas as liberações são auditáveis pela supervisão.

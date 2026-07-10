@@ -1,12 +1,12 @@
 ---
 sidebar_position: 3
 title: Exceções
-description: Gerenciamento de regras de exceção para infrações
+description: Gerenciamento de regras de exceção para Infrações
 ---
 
 # Exceções
 
-A tela de Exceções permite configurar regras que isentam determinados veículos ou situações do auto de infração. Exceções são aplicadas automaticamente durante o processamento.
+A tela de Exceções permite configurar regras que isentam determinados Veículos ou situações do auto de Infração Exceções são aplicadas automaticamente durante o processamento.
 
 ![Tela de Exceções](../img/triagem-excecoes.png)
 
@@ -18,10 +18,10 @@ A tela de Exceções permite configurar regras que isentam determinados veículo
 
 | Filtro | Descrição |
 |--------|-----------|
-| **Placas** | Inverte infrações para placas específicas (ex: veículos oficiais) |
+| **Placas** | Inverte Infrações para placas específicas (ex: Veículos oficiais) |
 | **Horários** | Exceção por dia da semana e faixa de horário |
 | **Faixas** | Exceção para faixas de trânsito específicas |
-| **Classificações** | Exceção por classificação do veículo |
+| **Classificações** | Exceção por classificação do Veículo |
 | **Enquadramentos** | Exceção por tipo de infração/enquadramento legal |
 | **Datas** | Exceção para períodos específicos (feríados, eventos) |
 
@@ -31,8 +31,8 @@ A tela de Exceções permite configurar regras que isentam determinados veículo
 |------|-----------|
 | **Permanentes** | Veículos de emergência (ambulância, polícia, bombeiros) |
 | **Temporárias** | Autoridades em visita, eventos especiais com prazo definido |
-| **Por equipamento** | Exceção válida apenas em determinado ponto de fiscalização |
-| **Por tipo de infração** | Ex: isento de velocidade mas não de sinal |
+| **Por Equipamento | Exceção válida apenas em determinado ponto de fiscalização |
+| **Por tipo de Infração | Ex: isento de velocidade mas não de sinal |
 
 ## Funcionalidades
 
@@ -43,7 +43,7 @@ A tela de Exceções permite configurar regras que isentam determinados veículo
 - Consultar histórico de aplicações da exceção
 
 :::warning
-Exceções ativas descartam infrações automaticamente durante a importação. Revise periodicamente as regras cadastradas para evitar cobertura indevida de infrações.
+Exceções ativas descartam Infrações automaticamente durante a importação. Revise periodicamente as regras cadastradas para evitar cobertura indevida de Infrações
 :::
 
 ## Termos Tecnicos
@@ -59,6 +59,6 @@ Exceções ativas descartam infrações automaticamente durante a importação. 
 
 | Tipo | Pagina | Descricao |
 |------|--------|-----------|
-| Etapa anterior | [Triagem](./triagem) | Processo de validacao inicial |
+| Etapa anterior | [Triagem](./triagem) | Processo de Use Validação (com acento) inicial |
 | Proxima etapa | [Auditoria](./auditoria) | Revisao pos-excecao |
 | Glossario | [Enquadramento](../glossario/enquadramento) | Classificacao legal |

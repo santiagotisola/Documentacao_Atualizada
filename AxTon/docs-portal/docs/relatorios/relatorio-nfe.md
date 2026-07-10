@@ -6,13 +6,13 @@ description: Notas fiscais eletrônicas capturadas pelo sistema
 
 # Relatório de Notas Fiscais
 
-![Relatório de Pesagem](../img/Relatorio%20de%20pesagem.png)
+Relatório de Pesagem](../img/Relatorio%20de%20pesagem.png)
 
-Lista as notas fiscais eletrônicas (NFe) vinculadas às passagens de veículos, com dados de origem, destino e chave de acesso.
+Lista as notas fiscais eletrônicas (NFe) vinculadas às passagens de Veículos com dados de origem, destino e chave de acesso.
 
 ## Como acessar
 
-**Menu lateral** → Relatórios → **Relatório de Notas Fiscais**
+**Menu lateral** → Relatórios → Relatório de Notas Fiscais**
 
 ## Dados do Relatório
 

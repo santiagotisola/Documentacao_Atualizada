@@ -1,59 +1,29 @@
 {
-  "geradoEm": "2026-06-09T19:01:30.964Z",
-  "dadosBase": "2026-06-09T19:01:05.138Z",
+  "geradoEm": "2026-07-07T19:17:19.596Z",
+  "dadosBase": "2026-07-06T19:38:34.251Z",
   "totalDispositivos": 72,
   "totalRegras": 26,
   "resumo": {
-    "conformes": 35,
-    "divergentes": 31,
-    "offline": 6,
+    "conformes": 0,
+    "divergentes": 67,
+    "offline": 5,
     "porSeveridade": {
-      "critico": 1,
-      "alto": 36,
-      "medio": 22,
+      "critico": 0,
+      "alto": 2,
+      "medio": 136,
       "baixo": 2
     }
   },
   "topDivergencias": [
     {
-      "id": "CLASSIFIER_QUEUE",
-      "titulo": "Classificador Queue",
-      "count": 23
-    },
-    {
-      "id": "CLASSIFIER_THREADS",
-      "titulo": "Classificador Threads",
-      "count": 6
-    },
-    {
-      "id": "OCR_PROCESSING_THREADS",
-      "titulo": "OCR Processing Threads",
-      "count": 5
-    },
-    {
-      "id": "SNAPSHOT_CROP_DISABLED",
-      "titulo": "Snapshot Crop Desabilitado",
-      "count": 4
-    },
-    {
       "id": "VIDEO_FRAMERATE",
       "titulo": "Vídeo Framerate",
-      "count": 4
-    },
-    {
-      "id": "OCR_PROCESSING_QUEUE",
-      "titulo": "OCR Processing Queue",
-      "count": 3
+      "count": 67
     },
     {
       "id": "VIDEO_QUALITY",
       "titulo": "Vídeo Qualidade JPEG",
-      "count": 2
-    },
-    {
-      "id": "OCR_VEHICLE_TYPE",
-      "titulo": "OCR Vehicle Type",
-      "count": 2
+      "count": 67
     },
     {
       "id": "SNMP_DISABLED",
@@ -61,9 +31,19 @@
       "count": 2
     },
     {
-      "id": "PROFILE_TRANSITION_UPPER_LEVEL",
-      "titulo": "Perfil Transição: Upper Level",
+      "id": "DATETIME_NTP_SERVER",
+      "titulo": "Servidor NTP",
       "count": 2
+    },
+    {
+      "id": "CLASSIFIER_QUEUE",
+      "titulo": "Classificador Queue",
+      "count": 1
+    },
+    {
+      "id": "CLASSIFIER_THREADS",
+      "titulo": "Classificador Threads",
+      "count": 1
     }
   ],
   "dispositivos": [
@@ -74,8 +54,31 @@
       "status": "online",
       "firmware": "v1.7.8",
       "totalRegras": 26,
-      "conformes": 26,
-      "divergencias": []
+      "conformes": 24,
+      "divergencias": [
+        {
+          "id": "VIDEO_FRAMERATE",
+          "titulo": "Vídeo Framerate",
+          "secao": "video",
+          "menu": "Vídeo > Streams",
+          "campo": "mjpeg.main.framerate",
+          "severidade": "medio",
+          "ok": false,
+          "atual": 12,
+          "esperado": 15
+        },
+        {
+          "id": "VIDEO_QUALITY",
+          "titulo": "Vídeo Qualidade JPEG",
+          "secao": "video",
+          "menu": "Vídeo > Streams",
+          "campo": "mjpeg.main.quality",
+          "severidade": "medio",
+          "ok": false,
+          "atual": 85,
+          "esperado": 90
+        }
+      ]
     },
     {
       "nome": "GOEC6O002 - Faixa 2",
@@ -84,8 +87,31 @@
       "status": "online",
       "firmware": "v1.7.8",
       "totalRegras": 26,
-      "conformes": 26,
-      "divergencias": []
+      "conformes": 24,
+      "divergencias": [
+        {
+          "id": "VIDEO_FRAMERATE",
+          "titulo": "Vídeo Framerate",
+          "secao": "video",
+          "menu": "Vídeo > Streams",
+          "campo": "mjpeg.main.framerate",
+          "severidade": "medio",
+          "ok": false,
+          "atual": 12,
+          "esperado": 15
+        },
+        {
+          "id": "VIDEO_QUALITY",
+          "titulo": "Vídeo Qualidade JPEG",
+          "secao": "video",
+          "menu": "Vídeo > Streams",
+          "campo": "mjpeg.main.quality",
+          "severidade": "medio",
+          "ok": false,
+          "atual": 85,
+          "esperado": 90
+        }
+      ]
     },
     {
       "nome": "GOEC6O003 - Faixa 1",
@@ -94,8 +120,31 @@
       "status": "online",
       "firmware": "v1.7.8",
       "totalRegras": 26,
-      "conformes": 26,
-      "divergencias": []
+      "conformes": 24,
+      "divergencias": [
+        {
+          "id": "VIDEO_FRAMERATE",
+          "titulo": "Vídeo Framerate",
+          "secao": "video",
+          "menu": "Vídeo > Streams",
+          "campo": "mjpeg.main.framerate",
+          "severidade": "medio",
+          "ok": false,
+          "atual": 12,
+          "esperado": 15
+        },
+        {
+          "id": "VIDEO_QUALITY",
+          "titulo": "Vídeo Qualidade JPEG",
+          "secao": "video",
+          "menu": "Vídeo > Streams",
+          "campo": "mjpeg.main.quality",
+          "severidade": "medio",
+          "ok": false,
+          "atual": 85,
+          "esperado": 90
+        }
+      ]
     },
     {
       "nome": "GOEC6O003 - Faixa 2",
@@ -104,18 +153,29 @@
       "status": "online",
       "firmware": "v1.7.8",
       "totalRegras": 26,
-      "conformes": 25,
+      "conformes": 24,
       "divergencias": [
         {
-          "id": "SNAPSHOT_CROP_DISABLED",
-          "titulo": "Snapshot Crop Desabilitado",
-          "secao": "misc",
-          "menu": "Equipamento > Diversos",
-          "campo": "snapshotCrop.enable",
+          "id": "VIDEO_FRAMERATE",
+          "titulo": "Vídeo Framerate",
+          "secao": "video",
+          "menu": "Vídeo > Streams",
+          "campo": "mjpeg.main.framerate",
           "severidade": "medio",
           "ok": false,
-          "atual": true,
-          "esperado": false
+          "atual": 12,
+          "esperado": 15
+        },
+        {
+          "id": "VIDEO_QUALITY",
+          "titulo": "Vídeo Qualidade JPEG",
+          "secao": "video",
+          "menu": "Vídeo > Streams",
+          "campo": "mjpeg.main.quality",
+          "severidade": "medio",
+          "ok": false,
+          "atual": 85,
+          "esperado": 90
         }
       ]
     },
@@ -126,138 +186,8 @@
       "status": "online",
       "firmware": "v1.7.8",
       "totalRegras": 26,
-      "conformes": 26,
-      "divergencias": []
-    },
-    {
-      "nome": "GOEC6O004 - Faixa 2",
-      "uuid": "abe3e1cd-9071-4dc9-8ce8-5c51d4417fce",
-      "ip": "186.211.161.242",
-      "status": "online",
-      "firmware": "v1.7.8",
-      "totalRegras": 26,
-      "conformes": 26,
-      "divergencias": []
-    },
-    {
-      "nome": "GOEC6O005 - Faixa 1",
-      "uuid": "0b6cdb29-2876-40fd-8e57-51572a2a1021",
-      "ip": "160.19.243.71",
-      "status": "online",
-      "firmware": "v1.7.8",
-      "totalRegras": 26,
-      "conformes": 26,
-      "divergencias": []
-    },
-    {
-      "nome": "GOEC6O005 - Faixa 2",
-      "uuid": "3df4eaee-9d2d-480d-b04c-faf75662dc70",
-      "ip": "160.19.243.71",
-      "status": "online",
-      "firmware": "v1.7.8",
-      "totalRegras": 26,
-      "conformes": 26,
-      "divergencias": []
-    },
-    {
-      "nome": "GOEC6O006 - Faixa 1",
-      "uuid": "29a63deb-dfe5-4765-a10a-57485f03f301",
-      "ip": "191.56.243.74",
-      "status": "online",
-      "firmware": "v1.7.8",
-      "totalRegras": 26,
-      "conformes": 26,
-      "divergencias": []
-    },
-    {
-      "nome": "GOEC6O006 - Faixa 2",
-      "uuid": "a8f7026c-21b1-4415-8978-51788088124d",
-      "ip": "191.56.243.74",
-      "status": "online",
-      "firmware": "v1.7.8",
-      "totalRegras": 26,
-      "conformes": 26,
-      "divergencias": []
-    },
-    {
-      "nome": "GOEC6O007 - Faixa 1",
-      "uuid": "2c1ab0be-d0a3-4742-98ed-a916cb12fa22",
-      "ip": "187.43.171.203",
-      "status": "online",
-      "firmware": "v1.7.8",
-      "totalRegras": 26,
-      "conformes": 26,
-      "divergencias": []
-    },
-    {
-      "nome": "GOEC6O007 - Faixa 2",
-      "uuid": "33e77a95-b079-4ce2-9d03-69d5f2c82293",
-      "ip": "187.43.171.203",
-      "status": "online",
-      "firmware": "v1.7.8",
-      "totalRegras": 26,
-      "conformes": 26,
-      "divergencias": []
-    },
-    {
-      "nome": "GOEC6O008 - Faixa 1",
-      "uuid": "5d6880f0-e8f2-4ff0-be25-00c3b31d6522",
-      "ip": "191.58.157.152",
-      "status": "online",
-      "firmware": "v1.7.8",
-      "totalRegras": 26,
-      "conformes": 20,
+      "conformes": 24,
       "divergencias": [
-        {
-          "id": "PROFILE_TRANSITION_UPPER_PROFILE",
-          "titulo": "Perfil Transição: Upper Profile (P&B)",
-          "secao": "profiles",
-          "menu": "Imagem > Perfis > Transições",
-          "campo": "transitions.upper.profile",
-          "severidade": "critico",
-          "ok": false,
-          "erros": [
-            {
-              "perfil": 1,
-              "atual": 23483,
-              "esperado": 0
-            }
-          ],
-          "esperado": 0
-        },
-        {
-          "id": "OCR_PROCESSING_QUEUE",
-          "titulo": "OCR Processing Queue",
-          "secao": "ocr",
-          "menu": "Equipamento > OCR",
-          "campo": "ocr.processingQueue",
-          "severidade": "medio",
-          "ok": false,
-          "atual": 2,
-          "esperado": 4
-        },
-        {
-          "id": "OCR_PROCESSING_THREADS",
-          "titulo": "OCR Processing Threads",
-          "secao": "ocr",
-          "menu": "Equipamento > OCR",
-          "campo": "ocr.processingThreads",
-          "severidade": "medio",
-          "ok": false,
-          "atual": 2,
-          "esperado": 4
-        },
-        {
-          "id": "SNAPSHOT_CROP_DISABLED",
-          "titulo": "Snapshot Crop Desabilitado",
-          "secao": "misc",
-          "menu": "Equipamento > Diversos",
-          "campo": "snapshotCrop.enable",
-          "severidade": "medio",
-          "ok": false,
-          "atual": true,
-          "esperado": false
-        },
         {
           "id": "VIDEO_FRAMERATE",
           "titulo": "Vídeo Framerate",
@@ -266,8 +196,8 @@
           "campo": "mjpeg.main.framerate",
           "severidade": "medio",
           "ok": false,
-          "atual": 1,
-          "esperado": 12
+          "atual": 12,
+          "esperado": 15
         },
         {
           "id": "VIDEO_QUALITY",
@@ -277,10 +207,247 @@
           "campo": "mjpeg.main.quality",
           "severidade": "medio",
           "ok": false,
-          "atual": 60,
-          "esperado": 85
+          "atual": 85,
+          "esperado": 90
         }
       ]
+    },
+    {
+      "nome": "GOEC6O004 - Faixa 2",
+      "uuid": "abe3e1cd-9071-4dc9-8ce8-5c51d4417fce",
+      "ip": "186.211.161.242",
+      "status": "online",
+      "firmware": "v1.7.8",
+      "totalRegras": 26,
+      "conformes": 24,
+      "divergencias": [
+        {
+          "id": "VIDEO_FRAMERATE",
+          "titulo": "Vídeo Framerate",
+          "secao": "video",
+          "menu": "Vídeo > Streams",
+          "campo": "mjpeg.main.framerate",
+          "severidade": "medio",
+          "ok": false,
+          "atual": 12,
+          "esperado": 15
+        },
+        {
+          "id": "VIDEO_QUALITY",
+          "titulo": "Vídeo Qualidade JPEG",
+          "secao": "video",
+          "menu": "Vídeo > Streams",
+          "campo": "mjpeg.main.quality",
+          "severidade": "medio",
+          "ok": false,
+          "atual": 85,
+          "esperado": 90
+        }
+      ]
+    },
+    {
+      "nome": "GOEC6O005 - Faixa 1",
+      "uuid": "0b6cdb29-2876-40fd-8e57-51572a2a1021",
+      "ip": "160.19.243.71",
+      "status": "online",
+      "firmware": "v1.7.8",
+      "totalRegras": 26,
+      "conformes": 24,
+      "divergencias": [
+        {
+          "id": "VIDEO_FRAMERATE",
+          "titulo": "Vídeo Framerate",
+          "secao": "video",
+          "menu": "Vídeo > Streams",
+          "campo": "mjpeg.main.framerate",
+          "severidade": "medio",
+          "ok": false,
+          "atual": 12,
+          "esperado": 15
+        },
+        {
+          "id": "VIDEO_QUALITY",
+          "titulo": "Vídeo Qualidade JPEG",
+          "secao": "video",
+          "menu": "Vídeo > Streams",
+          "campo": "mjpeg.main.quality",
+          "severidade": "medio",
+          "ok": false,
+          "atual": 85,
+          "esperado": 90
+        }
+      ]
+    },
+    {
+      "nome": "GOEC6O005 - Faixa 2",
+      "uuid": "3df4eaee-9d2d-480d-b04c-faf75662dc70",
+      "ip": "160.19.243.71",
+      "status": "online",
+      "firmware": "v1.7.8",
+      "totalRegras": 26,
+      "conformes": 24,
+      "divergencias": [
+        {
+          "id": "VIDEO_FRAMERATE",
+          "titulo": "Vídeo Framerate",
+          "secao": "video",
+          "menu": "Vídeo > Streams",
+          "campo": "mjpeg.main.framerate",
+          "severidade": "medio",
+          "ok": false,
+          "atual": 12,
+          "esperado": 15
+        },
+        {
+          "id": "VIDEO_QUALITY",
+          "titulo": "Vídeo Qualidade JPEG",
+          "secao": "video",
+          "menu": "Vídeo > Streams",
+          "campo": "mjpeg.main.quality",
+          "severidade": "medio",
+          "ok": false,
+          "atual": 85,
+          "esperado": 90
+        }
+      ]
+    },
+    {
+      "nome": "GOEC6O006 - Faixa 1",
+      "uuid": "29a63deb-dfe5-4765-a10a-57485f03f301",
+      "ip": "191.56.243.74",
+      "status": "online",
+      "firmware": "v1.7.8",
+      "totalRegras": 26,
+      "conformes": 24,
+      "divergencias": [
+        {
+          "id": "VIDEO_FRAMERATE",
+          "titulo": "Vídeo Framerate",
+          "secao": "video",
+          "menu": "Vídeo > Streams",
+          "campo": "mjpeg.main.framerate",
+          "severidade": "medio",
+          "ok": false,
+          "atual": 12,
+          "esperado": 15
+        },
+        {
+          "id": "VIDEO_QUALITY",
+          "titulo": "Vídeo Qualidade JPEG",
+          "secao": "video",
+          "menu": "Vídeo > Streams",
+          "campo": "mjpeg.main.quality",
+          "severidade": "medio",
+          "ok": false,
+          "atual": 85,
+          "esperado": 90
+        }
+      ]
+    },
+    {
+      "nome": "GOEC6O006 - Faixa 2",
+      "uuid": "a8f7026c-21b1-4415-8978-51788088124d",
+      "ip": "191.56.243.74",
+      "status": "online",
+      "firmware": "v1.7.8",
+      "totalRegras": 26,
+      "conformes": 24,
+      "divergencias": [
+        {
+          "id": "VIDEO_FRAMERATE",
+          "titulo": "Vídeo Framerate",
+          "secao": "video",
+          "menu": "Vídeo > Streams",
+          "campo": "mjpeg.main.framerate",
+          "severidade": "medio",
+          "ok": false,
+          "atual": 12,
+          "esperado": 15
+        },
+        {
+          "id": "VIDEO_QUALITY",
+          "titulo": "Vídeo Qualidade JPEG",
+          "secao": "video",
+          "menu": "Vídeo > Streams",
+          "campo": "mjpeg.main.quality",
+          "severidade": "medio",
+          "ok": false,
+          "atual": 85,
+          "esperado": 90
+        }
+      ]
+    },
+    {
+      "nome": "GOEC6O007 - Faixa 1",
+      "uuid": "2c1ab0be-d0a3-4742-98ed-a916cb12fa22",
+      "ip": "187.43.171.203",
+      "status": "online",
+      "firmware": "v1.7.8",
+      "totalRegras": 26,
+      "conformes": 24,
+      "divergencias": [
+        {
+          "id": "VIDEO_FRAMERATE",
+          "titulo": "Vídeo Framerate",
+          "secao": "video",
+          "menu": "Vídeo > Streams",
+          "campo": "mjpeg.main.framerate",
+          "severidade": "medio",
+          "ok": false,
+          "atual": 12,
+          "esperado": 15
+        },
+        {
+          "id": "VIDEO_QUALITY",
+          "titulo": "Vídeo Qualidade JPEG",
+          "secao": "video",
+          "menu": "Vídeo > Streams",
+          "campo": "mjpeg.main.quality",
+          "severidade": "medio",
+          "ok": false,
+          "atual": 85,
+          "esperado": 90
+        }
+      ]
+    },
+    {
+      "nome": "GOEC6O007 - Faixa 2",
+      "uuid": "33e77a95-b079-4ce2-9d03-69d5f2c82293",
+      "ip": "187.43.171.203",
+      "status": "online",
+      "firmware": "v1.7.8",
+      "totalRegras": 26,
+      "conformes": 24,
+      "divergencias": [
+        {
+          "id": "VIDEO_FRAMERATE",
+          "titulo": "Vídeo Framerate",
+          "secao": "video",
+          "menu": "Vídeo > Streams",
+          "campo": "mjpeg.main.framerate",
+          "severidade": "medio",
+          "ok": false,
+          "atual": 12,
+          "esperado": 15
+        },
+        {
+          "id": "VIDEO_QUALITY",
+          "titulo": "Vídeo Qualidade JPEG",
+          "secao": "video",
+          "menu": "Vídeo > Streams",
+          "campo": "mjpeg.main.quality",
+          "severidade": "medio",
+          "ok": false,
+          "atual": 85,
+          "esperado": 90
+        }
+      ]
+    },
+    {
+      "nome": "GOEC6O008 - Faixa 1",
+      "status": "offline",
+      "divergencias": [],
+      "extras": null
     },
     {
       "nome": "GOEC6O008 - Faixa 2",
@@ -289,8 +456,31 @@
       "status": "online",
       "firmware": "v1.7.8",
       "totalRegras": 26,
-      "conformes": 26,
-      "divergencias": []
+      "conformes": 24,
+      "divergencias": [
+        {
+          "id": "VIDEO_FRAMERATE",
+          "titulo": "Vídeo Framerate",
+          "secao": "video",
+          "menu": "Vídeo > Streams",
+          "campo": "mjpeg.main.framerate",
+          "severidade": "medio",
+          "ok": false,
+          "atual": 12,
+          "esperado": 15
+        },
+        {
+          "id": "VIDEO_QUALITY",
+          "titulo": "Vídeo Qualidade JPEG",
+          "secao": "video",
+          "menu": "Vídeo > Streams",
+          "campo": "mjpeg.main.quality",
+          "severidade": "medio",
+          "ok": false,
+          "atual": 85,
+          "esperado": 90
+        }
+      ]
     },
     {
       "nome": "GOEC6O009 - Faixa 1",
@@ -299,18 +489,29 @@
       "status": "online",
       "firmware": "v1.7.8",
       "totalRegras": 26,
-      "conformes": 24,
+      "conformes": 23,
       "divergencias": [
         {
-          "id": "OCR_VEHICLE_TYPE",
-          "titulo": "OCR Vehicle Type",
-          "secao": "ocr",
-          "menu": "Equipamento > OCR",
-          "campo": "ocr.vehicleType",
-          "severidade": "alto",
+          "id": "VIDEO_FRAMERATE",
+          "titulo": "Vídeo Framerate",
+          "secao": "video",
+          "menu": "Vídeo > Streams",
+          "campo": "mjpeg.main.framerate",
+          "severidade": "medio",
           "ok": false,
-          "atual": 1,
-          "esperado": 3
+          "atual": 12,
+          "esperado": 15
+        },
+        {
+          "id": "VIDEO_QUALITY",
+          "titulo": "Vídeo Qualidade JPEG",
+          "secao": "video",
+          "menu": "Vídeo > Streams",
+          "campo": "mjpeg.main.quality",
+          "severidade": "medio",
+          "ok": false,
+          "atual": 85,
+          "esperado": 90
         },
         {
           "id": "SNMP_DISABLED",
@@ -332,51 +533,29 @@
       "status": "online",
       "firmware": "v1.7.8",
       "totalRegras": 26,
-      "conformes": 22,
+      "conformes": 23,
       "divergencias": [
         {
-          "id": "PROFILE_TRANSITION_UPPER_LEVEL",
-          "titulo": "Perfil Transição: Upper Level",
-          "secao": "profiles",
-          "menu": "Imagem > Perfis > Transições",
-          "campo": "transitions.upper.level",
-          "severidade": "alto",
+          "id": "VIDEO_FRAMERATE",
+          "titulo": "Vídeo Framerate",
+          "secao": "video",
+          "menu": "Vídeo > Streams",
+          "campo": "mjpeg.main.framerate",
+          "severidade": "medio",
           "ok": false,
-          "erros": [
-            {
-              "perfil": 0,
-              "atual": 40,
-              "esperado": 35
-            },
-            {
-              "perfil": 1,
-              "atual": 40,
-              "esperado": 35
-            }
-          ],
-          "esperado": 35
+          "atual": 12,
+          "esperado": 15
         },
         {
-          "id": "OCR_MAX_PLATES",
-          "titulo": "OCR Max Plates",
-          "secao": "ocr",
-          "menu": "Equipamento > OCR",
-          "campo": "ocr.maxPlates",
-          "severidade": "alto",
+          "id": "VIDEO_QUALITY",
+          "titulo": "Vídeo Qualidade JPEG",
+          "secao": "video",
+          "menu": "Vídeo > Streams",
+          "campo": "mjpeg.main.quality",
+          "severidade": "medio",
           "ok": false,
-          "atual": 1,
-          "esperado": 2
-        },
-        {
-          "id": "OCR_VEHICLE_TYPE",
-          "titulo": "OCR Vehicle Type",
-          "secao": "ocr",
-          "menu": "Equipamento > OCR",
-          "campo": "ocr.vehicleType",
-          "severidade": "alto",
-          "ok": false,
-          "atual": 1,
-          "esperado": 3
+          "atual": 85,
+          "esperado": 90
         },
         {
           "id": "SNMP_DISABLED",
@@ -398,18 +577,29 @@
       "status": "online",
       "firmware": "v1.7.8",
       "totalRegras": 26,
-      "conformes": 25,
+      "conformes": 24,
       "divergencias": [
         {
-          "id": "OCR_PROCESSING_THREADS",
-          "titulo": "OCR Processing Threads",
-          "secao": "ocr",
-          "menu": "Equipamento > OCR",
-          "campo": "ocr.processingThreads",
+          "id": "VIDEO_FRAMERATE",
+          "titulo": "Vídeo Framerate",
+          "secao": "video",
+          "menu": "Vídeo > Streams",
+          "campo": "mjpeg.main.framerate",
           "severidade": "medio",
           "ok": false,
-          "atual": 2,
-          "esperado": 4
+          "atual": 12,
+          "esperado": 15
+        },
+        {
+          "id": "VIDEO_QUALITY",
+          "titulo": "Vídeo Qualidade JPEG",
+          "secao": "video",
+          "menu": "Vídeo > Streams",
+          "campo": "mjpeg.main.quality",
+          "severidade": "medio",
+          "ok": false,
+          "atual": 85,
+          "esperado": 90
         }
       ]
     },
@@ -420,18 +610,29 @@
       "status": "online",
       "firmware": "v1.7.8",
       "totalRegras": 26,
-      "conformes": 25,
+      "conformes": 24,
       "divergencias": [
         {
-          "id": "CLASSIFIER_THREADS",
-          "titulo": "Classificador Threads",
-          "secao": "classifier",
-          "menu": "Equipamento > Classificador",
-          "campo": "classifier.processingThreads",
-          "severidade": "alto",
+          "id": "VIDEO_FRAMERATE",
+          "titulo": "Vídeo Framerate",
+          "secao": "video",
+          "menu": "Vídeo > Streams",
+          "campo": "mjpeg.main.framerate",
+          "severidade": "medio",
           "ok": false,
-          "atual": 2,
-          "esperado": 1
+          "atual": 12,
+          "esperado": 15
+        },
+        {
+          "id": "VIDEO_QUALITY",
+          "titulo": "Vídeo Qualidade JPEG",
+          "secao": "video",
+          "menu": "Vídeo > Streams",
+          "campo": "mjpeg.main.quality",
+          "severidade": "medio",
+          "ok": false,
+          "atual": 85,
+          "esperado": 90
         }
       ]
     },
@@ -442,8 +643,31 @@
       "status": "online",
       "firmware": "v1.7.8",
       "totalRegras": 26,
-      "conformes": 26,
-      "divergencias": []
+      "conformes": 24,
+      "divergencias": [
+        {
+          "id": "VIDEO_FRAMERATE",
+          "titulo": "Vídeo Framerate",
+          "secao": "video",
+          "menu": "Vídeo > Streams",
+          "campo": "mjpeg.main.framerate",
+          "severidade": "medio",
+          "ok": false,
+          "atual": 12,
+          "esperado": 15
+        },
+        {
+          "id": "VIDEO_QUALITY",
+          "titulo": "Vídeo Qualidade JPEG",
+          "secao": "video",
+          "menu": "Vídeo > Streams",
+          "campo": "mjpeg.main.quality",
+          "severidade": "medio",
+          "ok": false,
+          "atual": 85,
+          "esperado": 90
+        }
+      ]
     },
     {
       "nome": "GOEC6O011 - Faixa 2",
@@ -452,63 +676,8 @@
       "status": "online",
       "firmware": "v1.7.8",
       "totalRegras": 26,
-      "conformes": 19,
+      "conformes": 23,
       "divergencias": [
-        {
-          "id": "OCR_PROCESSING_MODE",
-          "titulo": "OCR Processing Mode",
-          "secao": "ocr",
-          "menu": "Equipamento > OCR",
-          "campo": "ocr.processingMode",
-          "severidade": "medio",
-          "ok": false,
-          "atual": 2,
-          "esperado": 3
-        },
-        {
-          "id": "OCR_PROCESSING_QUEUE",
-          "titulo": "OCR Processing Queue",
-          "secao": "ocr",
-          "menu": "Equipamento > OCR",
-          "campo": "ocr.processingQueue",
-          "severidade": "medio",
-          "ok": false,
-          "atual": 2,
-          "esperado": 4
-        },
-        {
-          "id": "OCR_PROCESSING_THREADS",
-          "titulo": "OCR Processing Threads",
-          "secao": "ocr",
-          "menu": "Equipamento > OCR",
-          "campo": "ocr.processingThreads",
-          "severidade": "medio",
-          "ok": false,
-          "atual": 2,
-          "esperado": 4
-        },
-        {
-          "id": "CLASSIFIER_QUEUE",
-          "titulo": "Classificador Queue",
-          "secao": "classifier",
-          "menu": "Equipamento > Classificador",
-          "campo": "classifier.processingQueue",
-          "severidade": "alto",
-          "ok": false,
-          "atual": 2,
-          "esperado": 1
-        },
-        {
-          "id": "CLASSIFIER_THREADS",
-          "titulo": "Classificador Threads",
-          "secao": "classifier",
-          "menu": "Equipamento > Classificador",
-          "campo": "classifier.processingThreads",
-          "severidade": "alto",
-          "ok": false,
-          "atual": 2,
-          "esperado": 1
-        },
         {
           "id": "DATETIME_NTP_SERVER",
           "titulo": "Servidor NTP",
@@ -528,43 +697,27 @@
           "campo": "mjpeg.main.framerate",
           "severidade": "medio",
           "ok": false,
-          "atual": 1,
-          "esperado": 12
+          "atual": 12,
+          "esperado": 15
+        },
+        {
+          "id": "VIDEO_QUALITY",
+          "titulo": "Vídeo Qualidade JPEG",
+          "secao": "video",
+          "menu": "Vídeo > Streams",
+          "campo": "mjpeg.main.quality",
+          "severidade": "medio",
+          "ok": false,
+          "atual": 85,
+          "esperado": 90
         }
       ]
     },
     {
       "nome": "GOEC6O013 - Faixa 1",
-      "uuid": "7d9bf2eb-0f9a-4691-bffd-e003fc3781ed",
-      "ip": "187.43.160.194",
-      "status": "online",
-      "firmware": "v1.7.8",
-      "totalRegras": 26,
-      "conformes": 24,
-      "divergencias": [
-        {
-          "id": "CLASSIFIER_QUEUE",
-          "titulo": "Classificador Queue",
-          "secao": "classifier",
-          "menu": "Equipamento > Classificador",
-          "campo": "classifier.processingQueue",
-          "severidade": "alto",
-          "ok": false,
-          "atual": 4,
-          "esperado": 1
-        },
-        {
-          "id": "SNAPSHOT_CROP_DISABLED",
-          "titulo": "Snapshot Crop Desabilitado",
-          "secao": "misc",
-          "menu": "Equipamento > Diversos",
-          "campo": "snapshotCrop.enable",
-          "severidade": "medio",
-          "ok": false,
-          "atual": true,
-          "esperado": false
-        }
-      ]
+      "status": "offline",
+      "divergencias": [],
+      "extras": null
     },
     {
       "nome": "GOEC6O013 - Faixa 2",
@@ -576,55 +729,34 @@
       "conformes": 24,
       "divergencias": [
         {
-          "id": "PROFILE_TRANSITION_LOWER_LEVEL",
-          "titulo": "Perfil Transição: Lower Level",
-          "secao": "profiles",
-          "menu": "Imagem > Perfis > Transições",
-          "campo": "transitions.lower.level",
-          "severidade": "alto",
+          "id": "VIDEO_FRAMERATE",
+          "titulo": "Vídeo Framerate",
+          "secao": "video",
+          "menu": "Vídeo > Streams",
+          "campo": "mjpeg.main.framerate",
+          "severidade": "medio",
           "ok": false,
-          "erros": [
-            {
-              "perfil": 0,
-              "atual": 30,
-              "esperado": 10
-            }
-          ],
-          "esperado": 10
+          "atual": 12,
+          "esperado": 15
         },
         {
-          "id": "PROFILE_TRANSITION_UPPER_LEVEL",
-          "titulo": "Perfil Transição: Upper Level",
-          "secao": "profiles",
-          "menu": "Imagem > Perfis > Transições",
-          "campo": "transitions.upper.level",
-          "severidade": "alto",
+          "id": "VIDEO_QUALITY",
+          "titulo": "Vídeo Qualidade JPEG",
+          "secao": "video",
+          "menu": "Vídeo > Streams",
+          "campo": "mjpeg.main.quality",
+          "severidade": "medio",
           "ok": false,
-          "erros": [
-            {
-              "perfil": 0,
-              "atual": 30,
-              "esperado": 35
-            },
-            {
-              "perfil": 1,
-              "atual": 30,
-              "esperado": 35
-            }
-          ],
-          "esperado": 35
+          "atual": 85,
+          "esperado": 90
         }
       ]
     },
     {
       "nome": "GOEC6O018 - Faixa 1",
-      "uuid": "0e154d78-62b4-4e0f-867c-0d93b7c79c74",
-      "ip": "177.200.42.236",
-      "status": "online",
-      "firmware": "v1.7.8",
-      "totalRegras": 26,
-      "conformes": 26,
-      "divergencias": []
+      "status": "offline",
+      "divergencias": [],
+      "extras": null
     },
     {
       "nome": "GOEC6O018 - Faixa 2",
@@ -633,18 +765,29 @@
       "status": "online",
       "firmware": "v1.7.8",
       "totalRegras": 26,
-      "conformes": 25,
+      "conformes": 24,
       "divergencias": [
         {
-          "id": "CLASSIFIER_QUEUE",
-          "titulo": "Classificador Queue",
-          "secao": "classifier",
-          "menu": "Equipamento > Classificador",
-          "campo": "classifier.processingQueue",
-          "severidade": "alto",
+          "id": "VIDEO_FRAMERATE",
+          "titulo": "Vídeo Framerate",
+          "secao": "video",
+          "menu": "Vídeo > Streams",
+          "campo": "mjpeg.main.framerate",
+          "severidade": "medio",
           "ok": false,
-          "atual": 4,
-          "esperado": 1
+          "atual": 12,
+          "esperado": 15
+        },
+        {
+          "id": "VIDEO_QUALITY",
+          "titulo": "Vídeo Qualidade JPEG",
+          "secao": "video",
+          "menu": "Vídeo > Streams",
+          "campo": "mjpeg.main.quality",
+          "severidade": "medio",
+          "ok": false,
+          "atual": 85,
+          "esperado": 90
         }
       ]
     },
@@ -655,18 +798,29 @@
       "status": "online",
       "firmware": "v1.7.8",
       "totalRegras": 26,
-      "conformes": 25,
+      "conformes": 24,
       "divergencias": [
         {
-          "id": "CLASSIFIER_QUEUE",
-          "titulo": "Classificador Queue",
-          "secao": "classifier",
-          "menu": "Equipamento > Classificador",
-          "campo": "classifier.processingQueue",
-          "severidade": "alto",
+          "id": "VIDEO_FRAMERATE",
+          "titulo": "Vídeo Framerate",
+          "secao": "video",
+          "menu": "Vídeo > Streams",
+          "campo": "mjpeg.main.framerate",
+          "severidade": "medio",
           "ok": false,
-          "atual": 4,
-          "esperado": 1
+          "atual": 12,
+          "esperado": 15
+        },
+        {
+          "id": "VIDEO_QUALITY",
+          "titulo": "Vídeo Qualidade JPEG",
+          "secao": "video",
+          "menu": "Vídeo > Streams",
+          "campo": "mjpeg.main.quality",
+          "severidade": "medio",
+          "ok": false,
+          "atual": 85,
+          "esperado": 90
         }
       ]
     },
@@ -677,18 +831,29 @@
       "status": "online",
       "firmware": "v1.7.8",
       "totalRegras": 26,
-      "conformes": 25,
+      "conformes": 24,
       "divergencias": [
         {
-          "id": "CLASSIFIER_QUEUE",
-          "titulo": "Classificador Queue",
-          "secao": "classifier",
-          "menu": "Equipamento > Classificador",
-          "campo": "classifier.processingQueue",
-          "severidade": "alto",
+          "id": "VIDEO_FRAMERATE",
+          "titulo": "Vídeo Framerate",
+          "secao": "video",
+          "menu": "Vídeo > Streams",
+          "campo": "mjpeg.main.framerate",
+          "severidade": "medio",
           "ok": false,
-          "atual": 4,
-          "esperado": 1
+          "atual": 12,
+          "esperado": 15
+        },
+        {
+          "id": "VIDEO_QUALITY",
+          "titulo": "Vídeo Qualidade JPEG",
+          "secao": "video",
+          "menu": "Vídeo > Streams",
+          "campo": "mjpeg.main.quality",
+          "severidade": "medio",
+          "ok": false,
+          "atual": 85,
+          "esperado": 90
         }
       ]
     },
@@ -699,18 +864,29 @@
       "status": "online",
       "firmware": "v1.7.8",
       "totalRegras": 26,
-      "conformes": 25,
+      "conformes": 24,
       "divergencias": [
         {
-          "id": "CLASSIFIER_QUEUE",
-          "titulo": "Classificador Queue",
-          "secao": "classifier",
-          "menu": "Equipamento > Classificador",
-          "campo": "classifier.processingQueue",
-          "severidade": "alto",
+          "id": "VIDEO_FRAMERATE",
+          "titulo": "Vídeo Framerate",
+          "secao": "video",
+          "menu": "Vídeo > Streams",
+          "campo": "mjpeg.main.framerate",
+          "severidade": "medio",
           "ok": false,
-          "atual": 4,
-          "esperado": 1
+          "atual": 12,
+          "esperado": 15
+        },
+        {
+          "id": "VIDEO_QUALITY",
+          "titulo": "Vídeo Qualidade JPEG",
+          "secao": "video",
+          "menu": "Vídeo > Streams",
+          "campo": "mjpeg.main.quality",
+          "severidade": "medio",
+          "ok": false,
+          "atual": 85,
+          "esperado": 90
         }
       ]
     },
@@ -721,8 +897,31 @@
       "status": "online",
       "firmware": "v1.7.8",
       "totalRegras": 26,
-      "conformes": 26,
-      "divergencias": []
+      "conformes": 24,
+      "divergencias": [
+        {
+          "id": "VIDEO_FRAMERATE",
+          "titulo": "Vídeo Framerate",
+          "secao": "video",
+          "menu": "Vídeo > Streams",
+          "campo": "mjpeg.main.framerate",
+          "severidade": "medio",
+          "ok": false,
+          "atual": 12,
+          "esperado": 15
+        },
+        {
+          "id": "VIDEO_QUALITY",
+          "titulo": "Vídeo Qualidade JPEG",
+          "secao": "video",
+          "menu": "Vídeo > Streams",
+          "campo": "mjpeg.main.quality",
+          "severidade": "medio",
+          "ok": false,
+          "atual": 85,
+          "esperado": 90
+        }
+      ]
     },
     {
       "nome": "GOEC6O021 - Faixa 1",
@@ -731,8 +930,31 @@
       "status": "online",
       "firmware": "v1.7.8",
       "totalRegras": 26,
-      "conformes": 26,
-      "divergencias": []
+      "conformes": 24,
+      "divergencias": [
+        {
+          "id": "VIDEO_FRAMERATE",
+          "titulo": "Vídeo Framerate",
+          "secao": "video",
+          "menu": "Vídeo > Streams",
+          "campo": "mjpeg.main.framerate",
+          "severidade": "medio",
+          "ok": false,
+          "atual": 12,
+          "esperado": 15
+        },
+        {
+          "id": "VIDEO_QUALITY",
+          "titulo": "Vídeo Qualidade JPEG",
+          "secao": "video",
+          "menu": "Vídeo > Streams",
+          "campo": "mjpeg.main.quality",
+          "severidade": "medio",
+          "ok": false,
+          "atual": 85,
+          "esperado": 90
+        }
+      ]
     },
     {
       "nome": "GOEC6O022 - Faixa 1",
@@ -741,8 +963,31 @@
       "status": "online",
       "firmware": "v1.7.8",
       "totalRegras": 26,
-      "conformes": 26,
-      "divergencias": []
+      "conformes": 24,
+      "divergencias": [
+        {
+          "id": "VIDEO_FRAMERATE",
+          "titulo": "Vídeo Framerate",
+          "secao": "video",
+          "menu": "Vídeo > Streams",
+          "campo": "mjpeg.main.framerate",
+          "severidade": "medio",
+          "ok": false,
+          "atual": 12,
+          "esperado": 15
+        },
+        {
+          "id": "VIDEO_QUALITY",
+          "titulo": "Vídeo Qualidade JPEG",
+          "secao": "video",
+          "menu": "Vídeo > Streams",
+          "campo": "mjpeg.main.quality",
+          "severidade": "medio",
+          "ok": false,
+          "atual": 85,
+          "esperado": 90
+        }
+      ]
     },
     {
       "nome": "GOEC6O022 - Faixa 2",
@@ -751,14 +996,64 @@
       "status": "online",
       "firmware": "v1.7.8",
       "totalRegras": 26,
-      "conformes": 26,
-      "divergencias": []
+      "conformes": 24,
+      "divergencias": [
+        {
+          "id": "VIDEO_FRAMERATE",
+          "titulo": "Vídeo Framerate",
+          "secao": "video",
+          "menu": "Vídeo > Streams",
+          "campo": "mjpeg.main.framerate",
+          "severidade": "medio",
+          "ok": false,
+          "atual": 12,
+          "esperado": 15
+        },
+        {
+          "id": "VIDEO_QUALITY",
+          "titulo": "Vídeo Qualidade JPEG",
+          "secao": "video",
+          "menu": "Vídeo > Streams",
+          "campo": "mjpeg.main.quality",
+          "severidade": "medio",
+          "ok": false,
+          "atual": 85,
+          "esperado": 90
+        }
+      ]
     },
     {
       "nome": "GOEC6O023 - Faixa 1",
-      "status": "offline",
-      "divergencias": [],
-      "extras": null
+      "uuid": "64e60ba4-79b7-4447-b726-a3f032327907",
+      "ip": "177.25.236.198",
+      "status": "online",
+      "firmware": "v1.7.8",
+      "totalRegras": 26,
+      "conformes": 24,
+      "divergencias": [
+        {
+          "id": "VIDEO_FRAMERATE",
+          "titulo": "Vídeo Framerate",
+          "secao": "video",
+          "menu": "Vídeo > Streams",
+          "campo": "mjpeg.main.framerate",
+          "severidade": "medio",
+          "ok": false,
+          "atual": 12,
+          "esperado": 15
+        },
+        {
+          "id": "VIDEO_QUALITY",
+          "titulo": "Vídeo Qualidade JPEG",
+          "secao": "video",
+          "menu": "Vídeo > Streams",
+          "campo": "mjpeg.main.quality",
+          "severidade": "medio",
+          "ok": false,
+          "atual": 85,
+          "esperado": 90
+        }
+      ]
     },
     {
       "nome": "GOEC6O028 - Faixa 1",
@@ -767,63 +1062,8 @@
       "status": "online",
       "firmware": "v1.7.8",
       "totalRegras": 26,
-      "conformes": 18,
+      "conformes": 23,
       "divergencias": [
-        {
-          "id": "OCR_PROCESSING_MODE",
-          "titulo": "OCR Processing Mode",
-          "secao": "ocr",
-          "menu": "Equipamento > OCR",
-          "campo": "ocr.processingMode",
-          "severidade": "medio",
-          "ok": false,
-          "atual": 2,
-          "esperado": 3
-        },
-        {
-          "id": "OCR_PROCESSING_QUEUE",
-          "titulo": "OCR Processing Queue",
-          "secao": "ocr",
-          "menu": "Equipamento > OCR",
-          "campo": "ocr.processingQueue",
-          "severidade": "medio",
-          "ok": false,
-          "atual": 2,
-          "esperado": 4
-        },
-        {
-          "id": "OCR_PROCESSING_THREADS",
-          "titulo": "OCR Processing Threads",
-          "secao": "ocr",
-          "menu": "Equipamento > OCR",
-          "campo": "ocr.processingThreads",
-          "severidade": "medio",
-          "ok": false,
-          "atual": 2,
-          "esperado": 4
-        },
-        {
-          "id": "CLASSIFIER_QUEUE",
-          "titulo": "Classificador Queue",
-          "secao": "classifier",
-          "menu": "Equipamento > Classificador",
-          "campo": "classifier.processingQueue",
-          "severidade": "alto",
-          "ok": false,
-          "atual": 2,
-          "esperado": 1
-        },
-        {
-          "id": "CLASSIFIER_THREADS",
-          "titulo": "Classificador Threads",
-          "secao": "classifier",
-          "menu": "Equipamento > Classificador",
-          "campo": "classifier.processingThreads",
-          "severidade": "alto",
-          "ok": false,
-          "atual": 2,
-          "esperado": 1
-        },
         {
           "id": "DATETIME_NTP_SERVER",
           "titulo": "Servidor NTP",
@@ -843,8 +1083,8 @@
           "campo": "mjpeg.main.framerate",
           "severidade": "medio",
           "ok": false,
-          "atual": 1,
-          "esperado": 12
+          "atual": 12,
+          "esperado": 15
         },
         {
           "id": "VIDEO_QUALITY",
@@ -854,8 +1094,8 @@
           "campo": "mjpeg.main.quality",
           "severidade": "medio",
           "ok": false,
-          "atual": 10,
-          "esperado": 85
+          "atual": 85,
+          "esperado": 90
         }
       ]
     },
@@ -866,26 +1106,64 @@
       "status": "online",
       "firmware": "v1.7.8",
       "totalRegras": 26,
-      "conformes": 25,
+      "conformes": 24,
       "divergencias": [
         {
-          "id": "CLASSIFIER_QUEUE",
-          "titulo": "Classificador Queue",
-          "secao": "classifier",
-          "menu": "Equipamento > Classificador",
-          "campo": "classifier.processingQueue",
-          "severidade": "alto",
+          "id": "VIDEO_FRAMERATE",
+          "titulo": "Vídeo Framerate",
+          "secao": "video",
+          "menu": "Vídeo > Streams",
+          "campo": "mjpeg.main.framerate",
+          "severidade": "medio",
           "ok": false,
-          "atual": 4,
-          "esperado": 1
+          "atual": 12,
+          "esperado": 15
+        },
+        {
+          "id": "VIDEO_QUALITY",
+          "titulo": "Vídeo Qualidade JPEG",
+          "secao": "video",
+          "menu": "Vídeo > Streams",
+          "campo": "mjpeg.main.quality",
+          "severidade": "medio",
+          "ok": false,
+          "atual": 85,
+          "esperado": 90
         }
       ]
     },
     {
       "nome": "GOEC6O029 - Faixa 2",
-      "status": "offline",
-      "divergencias": [],
-      "extras": null
+      "uuid": "0462e9d3-b0ce-42aa-9cfb-1b24c1cb1bee",
+      "ip": "177.25.224.79",
+      "status": "online",
+      "firmware": "v1.7.8",
+      "totalRegras": 26,
+      "conformes": 24,
+      "divergencias": [
+        {
+          "id": "VIDEO_FRAMERATE",
+          "titulo": "Vídeo Framerate",
+          "secao": "video",
+          "menu": "Vídeo > Streams",
+          "campo": "mjpeg.main.framerate",
+          "severidade": "medio",
+          "ok": false,
+          "atual": 12,
+          "esperado": 15
+        },
+        {
+          "id": "VIDEO_QUALITY",
+          "titulo": "Vídeo Qualidade JPEG",
+          "secao": "video",
+          "menu": "Vídeo > Streams",
+          "campo": "mjpeg.main.quality",
+          "severidade": "medio",
+          "ok": false,
+          "atual": 85,
+          "esperado": 90
+        }
+      ]
     },
     {
       "nome": "GOEC6O033 - Faixa 1",
@@ -894,18 +1172,29 @@
       "status": "online",
       "firmware": "v1.7.8",
       "totalRegras": 26,
-      "conformes": 25,
+      "conformes": 24,
       "divergencias": [
         {
-          "id": "CLASSIFIER_QUEUE",
-          "titulo": "Classificador Queue",
-          "secao": "classifier",
-          "menu": "Equipamento > Classificador",
-          "campo": "classifier.processingQueue",
-          "severidade": "alto",
+          "id": "VIDEO_FRAMERATE",
+          "titulo": "Vídeo Framerate",
+          "secao": "video",
+          "menu": "Vídeo > Streams",
+          "campo": "mjpeg.main.framerate",
+          "severidade": "medio",
           "ok": false,
-          "atual": 4,
-          "esperado": 1
+          "atual": 12,
+          "esperado": 15
+        },
+        {
+          "id": "VIDEO_QUALITY",
+          "titulo": "Vídeo Qualidade JPEG",
+          "secao": "video",
+          "menu": "Vídeo > Streams",
+          "campo": "mjpeg.main.quality",
+          "severidade": "medio",
+          "ok": false,
+          "atual": 85,
+          "esperado": 90
         }
       ]
     },
@@ -916,8 +1205,31 @@
       "status": "online",
       "firmware": "v1.7.8",
       "totalRegras": 26,
-      "conformes": 26,
-      "divergencias": []
+      "conformes": 24,
+      "divergencias": [
+        {
+          "id": "VIDEO_FRAMERATE",
+          "titulo": "Vídeo Framerate",
+          "secao": "video",
+          "menu": "Vídeo > Streams",
+          "campo": "mjpeg.main.framerate",
+          "severidade": "medio",
+          "ok": false,
+          "atual": 12,
+          "esperado": 15
+        },
+        {
+          "id": "VIDEO_QUALITY",
+          "titulo": "Vídeo Qualidade JPEG",
+          "secao": "video",
+          "menu": "Vídeo > Streams",
+          "campo": "mjpeg.main.quality",
+          "severidade": "medio",
+          "ok": false,
+          "atual": 85,
+          "esperado": 90
+        }
+      ]
     },
     {
       "nome": "GOEC6O036 - Faixa 1",
@@ -926,8 +1238,31 @@
       "status": "online",
       "firmware": "v1.7.8",
       "totalRegras": 26,
-      "conformes": 26,
-      "divergencias": []
+      "conformes": 24,
+      "divergencias": [
+        {
+          "id": "VIDEO_FRAMERATE",
+          "titulo": "Vídeo Framerate",
+          "secao": "video",
+          "menu": "Vídeo > Streams",
+          "campo": "mjpeg.main.framerate",
+          "severidade": "medio",
+          "ok": false,
+          "atual": 12,
+          "esperado": 15
+        },
+        {
+          "id": "VIDEO_QUALITY",
+          "titulo": "Vídeo Qualidade JPEG",
+          "secao": "video",
+          "menu": "Vídeo > Streams",
+          "campo": "mjpeg.main.quality",
+          "severidade": "medio",
+          "ok": false,
+          "atual": 85,
+          "esperado": 90
+        }
+      ]
     },
     {
       "nome": "GOEC6O040 - Faixa 1",
@@ -936,18 +1271,29 @@
       "status": "online",
       "firmware": "v1.7.8",
       "totalRegras": 26,
-      "conformes": 25,
+      "conformes": 24,
       "divergencias": [
         {
-          "id": "SNAPSHOT_CROP_DISABLED",
-          "titulo": "Snapshot Crop Desabilitado",
-          "secao": "misc",
-          "menu": "Equipamento > Diversos",
-          "campo": "snapshotCrop.enable",
+          "id": "VIDEO_FRAMERATE",
+          "titulo": "Vídeo Framerate",
+          "secao": "video",
+          "menu": "Vídeo > Streams",
+          "campo": "mjpeg.main.framerate",
           "severidade": "medio",
           "ok": false,
-          "atual": true,
-          "esperado": false
+          "atual": 12,
+          "esperado": 15
+        },
+        {
+          "id": "VIDEO_QUALITY",
+          "titulo": "Vídeo Qualidade JPEG",
+          "secao": "video",
+          "menu": "Vídeo > Streams",
+          "campo": "mjpeg.main.quality",
+          "severidade": "medio",
+          "ok": false,
+          "atual": 85,
+          "esperado": 90
         }
       ]
     },
@@ -958,8 +1304,31 @@
       "status": "online",
       "firmware": "v1.7.8",
       "totalRegras": 26,
-      "conformes": 26,
-      "divergencias": []
+      "conformes": 24,
+      "divergencias": [
+        {
+          "id": "VIDEO_FRAMERATE",
+          "titulo": "Vídeo Framerate",
+          "secao": "video",
+          "menu": "Vídeo > Streams",
+          "campo": "mjpeg.main.framerate",
+          "severidade": "medio",
+          "ok": false,
+          "atual": 12,
+          "esperado": 15
+        },
+        {
+          "id": "VIDEO_QUALITY",
+          "titulo": "Vídeo Qualidade JPEG",
+          "secao": "video",
+          "menu": "Vídeo > Streams",
+          "campo": "mjpeg.main.quality",
+          "severidade": "medio",
+          "ok": false,
+          "atual": 85,
+          "esperado": 90
+        }
+      ]
     },
     {
       "nome": "GOEC6O041 - Faixa 1",
@@ -968,8 +1337,31 @@
       "status": "online",
       "firmware": "v1.7.8",
       "totalRegras": 26,
-      "conformes": 26,
-      "divergencias": []
+      "conformes": 24,
+      "divergencias": [
+        {
+          "id": "VIDEO_FRAMERATE",
+          "titulo": "Vídeo Framerate",
+          "secao": "video",
+          "menu": "Vídeo > Streams",
+          "campo": "mjpeg.main.framerate",
+          "severidade": "medio",
+          "ok": false,
+          "atual": 12,
+          "esperado": 15
+        },
+        {
+          "id": "VIDEO_QUALITY",
+          "titulo": "Vídeo Qualidade JPEG",
+          "secao": "video",
+          "menu": "Vídeo > Streams",
+          "campo": "mjpeg.main.quality",
+          "severidade": "medio",
+          "ok": false,
+          "atual": 85,
+          "esperado": 90
+        }
+      ]
     },
     {
       "nome": "GOEC6O041 - Faixa 2",
@@ -978,8 +1370,31 @@
       "status": "online",
       "firmware": "v1.7.8",
       "totalRegras": 26,
-      "conformes": 26,
-      "divergencias": []
+      "conformes": 24,
+      "divergencias": [
+        {
+          "id": "VIDEO_FRAMERATE",
+          "titulo": "Vídeo Framerate",
+          "secao": "video",
+          "menu": "Vídeo > Streams",
+          "campo": "mjpeg.main.framerate",
+          "severidade": "medio",
+          "ok": false,
+          "atual": 12,
+          "esperado": 15
+        },
+        {
+          "id": "VIDEO_QUALITY",
+          "titulo": "Vídeo Qualidade JPEG",
+          "secao": "video",
+          "menu": "Vídeo > Streams",
+          "campo": "mjpeg.main.quality",
+          "severidade": "medio",
+          "ok": false,
+          "atual": 85,
+          "esperado": 90
+        }
+      ]
     },
     {
       "nome": "GOEC6O043 - Faixa 1",
@@ -988,18 +1403,29 @@
       "status": "online",
       "firmware": "v1.7.8",
       "totalRegras": 26,
-      "conformes": 25,
+      "conformes": 24,
       "divergencias": [
         {
-          "id": "CLASSIFIER_QUEUE",
-          "titulo": "Classificador Queue",
-          "secao": "classifier",
-          "menu": "Equipamento > Classificador",
-          "campo": "classifier.processingQueue",
-          "severidade": "alto",
+          "id": "VIDEO_FRAMERATE",
+          "titulo": "Vídeo Framerate",
+          "secao": "video",
+          "menu": "Vídeo > Streams",
+          "campo": "mjpeg.main.framerate",
+          "severidade": "medio",
           "ok": false,
-          "atual": 4,
-          "esperado": 1
+          "atual": 12,
+          "esperado": 15
+        },
+        {
+          "id": "VIDEO_QUALITY",
+          "titulo": "Vídeo Qualidade JPEG",
+          "secao": "video",
+          "menu": "Vídeo > Streams",
+          "campo": "mjpeg.main.quality",
+          "severidade": "medio",
+          "ok": false,
+          "atual": 85,
+          "esperado": 90
         }
       ]
     },
@@ -1010,18 +1436,29 @@
       "status": "online",
       "firmware": "v1.7.8",
       "totalRegras": 26,
-      "conformes": 25,
+      "conformes": 24,
       "divergencias": [
         {
-          "id": "CLASSIFIER_QUEUE",
-          "titulo": "Classificador Queue",
-          "secao": "classifier",
-          "menu": "Equipamento > Classificador",
-          "campo": "classifier.processingQueue",
-          "severidade": "alto",
+          "id": "VIDEO_FRAMERATE",
+          "titulo": "Vídeo Framerate",
+          "secao": "video",
+          "menu": "Vídeo > Streams",
+          "campo": "mjpeg.main.framerate",
+          "severidade": "medio",
           "ok": false,
-          "atual": 4,
-          "esperado": 1
+          "atual": 12,
+          "esperado": 15
+        },
+        {
+          "id": "VIDEO_QUALITY",
+          "titulo": "Vídeo Qualidade JPEG",
+          "secao": "video",
+          "menu": "Vídeo > Streams",
+          "campo": "mjpeg.main.quality",
+          "severidade": "medio",
+          "ok": false,
+          "atual": 85,
+          "esperado": 90
         }
       ]
     },
@@ -1032,8 +1469,31 @@
       "status": "online",
       "firmware": "v1.7.8",
       "totalRegras": 26,
-      "conformes": 26,
-      "divergencias": []
+      "conformes": 24,
+      "divergencias": [
+        {
+          "id": "VIDEO_FRAMERATE",
+          "titulo": "Vídeo Framerate",
+          "secao": "video",
+          "menu": "Vídeo > Streams",
+          "campo": "mjpeg.main.framerate",
+          "severidade": "medio",
+          "ok": false,
+          "atual": 12,
+          "esperado": 15
+        },
+        {
+          "id": "VIDEO_QUALITY",
+          "titulo": "Vídeo Qualidade JPEG",
+          "secao": "video",
+          "menu": "Vídeo > Streams",
+          "campo": "mjpeg.main.quality",
+          "severidade": "medio",
+          "ok": false,
+          "atual": 85,
+          "esperado": 90
+        }
+      ]
     },
     {
       "nome": "GOEC6O045 - Faixa 2",
@@ -1042,8 +1502,31 @@
       "status": "online",
       "firmware": "v1.7.8",
       "totalRegras": 26,
-      "conformes": 26,
-      "divergencias": []
+      "conformes": 24,
+      "divergencias": [
+        {
+          "id": "VIDEO_FRAMERATE",
+          "titulo": "Vídeo Framerate",
+          "secao": "video",
+          "menu": "Vídeo > Streams",
+          "campo": "mjpeg.main.framerate",
+          "severidade": "medio",
+          "ok": false,
+          "atual": 12,
+          "esperado": 15
+        },
+        {
+          "id": "VIDEO_QUALITY",
+          "titulo": "Vídeo Qualidade JPEG",
+          "secao": "video",
+          "menu": "Vídeo > Streams",
+          "campo": "mjpeg.main.quality",
+          "severidade": "medio",
+          "ok": false,
+          "atual": 85,
+          "esperado": 90
+        }
+      ]
     },
     {
       "nome": "GOEC6O046 - Faixa 1",
@@ -1052,18 +1535,29 @@
       "status": "online",
       "firmware": "v1.7.8",
       "totalRegras": 26,
-      "conformes": 25,
+      "conformes": 24,
       "divergencias": [
         {
-          "id": "CLASSIFIER_QUEUE",
-          "titulo": "Classificador Queue",
-          "secao": "classifier",
-          "menu": "Equipamento > Classificador",
-          "campo": "classifier.processingQueue",
-          "severidade": "alto",
+          "id": "VIDEO_FRAMERATE",
+          "titulo": "Vídeo Framerate",
+          "secao": "video",
+          "menu": "Vídeo > Streams",
+          "campo": "mjpeg.main.framerate",
+          "severidade": "medio",
           "ok": false,
-          "atual": 4,
-          "esperado": 1
+          "atual": 12,
+          "esperado": 15
+        },
+        {
+          "id": "VIDEO_QUALITY",
+          "titulo": "Vídeo Qualidade JPEG",
+          "secao": "video",
+          "menu": "Vídeo > Streams",
+          "campo": "mjpeg.main.quality",
+          "severidade": "medio",
+          "ok": false,
+          "atual": 85,
+          "esperado": 90
         }
       ]
     },
@@ -1074,40 +1568,109 @@
       "status": "online",
       "firmware": "v1.7.8",
       "totalRegras": 26,
-      "conformes": 26,
-      "divergencias": []
+      "conformes": 24,
+      "divergencias": [
+        {
+          "id": "VIDEO_FRAMERATE",
+          "titulo": "Vídeo Framerate",
+          "secao": "video",
+          "menu": "Vídeo > Streams",
+          "campo": "mjpeg.main.framerate",
+          "severidade": "medio",
+          "ok": false,
+          "atual": 12,
+          "esperado": 15
+        },
+        {
+          "id": "VIDEO_QUALITY",
+          "titulo": "Vídeo Qualidade JPEG",
+          "secao": "video",
+          "menu": "Vídeo > Streams",
+          "campo": "mjpeg.main.quality",
+          "severidade": "medio",
+          "ok": false,
+          "atual": 85,
+          "esperado": 90
+        }
+      ]
     },
     {
       "nome": "GOEC6O048 - Faixa 1",
-      "uuid": "43d7e92f-482e-4822-bf76-ef2c5cc4dfd9",
-      "ip": "179.249.70.250",
-      "status": "online",
-      "firmware": "v1.7.8",
-      "totalRegras": 26,
-      "conformes": 26,
-      "divergencias": []
+      "status": "offline",
+      "divergencias": [],
+      "extras": null
     },
     {
       "nome": "GOEC6O048 - Faixa 2",
-      "uuid": "d23fe240-246f-4601-8987-d864ecb24d22",
-      "ip": "179.249.70.250",
-      "status": "online",
-      "firmware": "v1.7.8",
-      "totalRegras": 26,
-      "conformes": 26,
-      "divergencias": []
+      "status": "offline",
+      "divergencias": [],
+      "extras": null
     },
     {
       "nome": "GOEC6O049 - Faixa 1",
-      "status": "offline",
-      "divergencias": [],
-      "extras": null
+      "uuid": "ad0db63e-bb6e-4cb1-99eb-960f486cb692",
+      "ip": "191.58.159.123",
+      "status": "online",
+      "firmware": "v1.7.8",
+      "totalRegras": 26,
+      "conformes": 24,
+      "divergencias": [
+        {
+          "id": "VIDEO_FRAMERATE",
+          "titulo": "Vídeo Framerate",
+          "secao": "video",
+          "menu": "Vídeo > Streams",
+          "campo": "mjpeg.main.framerate",
+          "severidade": "medio",
+          "ok": false,
+          "atual": 12,
+          "esperado": 15
+        },
+        {
+          "id": "VIDEO_QUALITY",
+          "titulo": "Vídeo Qualidade JPEG",
+          "secao": "video",
+          "menu": "Vídeo > Streams",
+          "campo": "mjpeg.main.quality",
+          "severidade": "medio",
+          "ok": false,
+          "atual": 85,
+          "esperado": 90
+        }
+      ]
     },
     {
       "nome": "GOEC6O049 - Faixa 2",
-      "status": "offline",
-      "divergencias": [],
-      "extras": null
+      "uuid": "3a8b23c7-edf3-43d3-b9be-9211674777e3",
+      "ip": "191.58.159.123",
+      "status": "online",
+      "firmware": "v1.7.8",
+      "totalRegras": 26,
+      "conformes": 24,
+      "divergencias": [
+        {
+          "id": "VIDEO_FRAMERATE",
+          "titulo": "Vídeo Framerate",
+          "secao": "video",
+          "menu": "Vídeo > Streams",
+          "campo": "mjpeg.main.framerate",
+          "severidade": "medio",
+          "ok": false,
+          "atual": 12,
+          "esperado": 15
+        },
+        {
+          "id": "VIDEO_QUALITY",
+          "titulo": "Vídeo Qualidade JPEG",
+          "secao": "video",
+          "menu": "Vídeo > Streams",
+          "campo": "mjpeg.main.quality",
+          "severidade": "medio",
+          "ok": false,
+          "atual": 85,
+          "esperado": 90
+        }
+      ]
     },
     {
       "nome": "GOEC6O050 - Faixa 1",
@@ -1116,18 +1679,29 @@
       "status": "online",
       "firmware": "v1.7.8",
       "totalRegras": 26,
-      "conformes": 25,
+      "conformes": 24,
       "divergencias": [
         {
-          "id": "CLASSIFIER_QUEUE",
-          "titulo": "Classificador Queue",
-          "secao": "classifier",
-          "menu": "Equipamento > Classificador",
-          "campo": "classifier.processingQueue",
-          "severidade": "alto",
+          "id": "VIDEO_FRAMERATE",
+          "titulo": "Vídeo Framerate",
+          "secao": "video",
+          "menu": "Vídeo > Streams",
+          "campo": "mjpeg.main.framerate",
+          "severidade": "medio",
           "ok": false,
-          "atual": 4,
-          "esperado": 1
+          "atual": 12,
+          "esperado": 15
+        },
+        {
+          "id": "VIDEO_QUALITY",
+          "titulo": "Vídeo Qualidade JPEG",
+          "secao": "video",
+          "menu": "Vídeo > Streams",
+          "campo": "mjpeg.main.quality",
+          "severidade": "medio",
+          "ok": false,
+          "atual": 85,
+          "esperado": 90
         }
       ]
     },
@@ -1138,20 +1712,97 @@
       "status": "online",
       "firmware": "v1.7.8",
       "totalRegras": 26,
-      "conformes": 26,
-      "divergencias": []
+      "conformes": 24,
+      "divergencias": [
+        {
+          "id": "VIDEO_FRAMERATE",
+          "titulo": "Vídeo Framerate",
+          "secao": "video",
+          "menu": "Vídeo > Streams",
+          "campo": "mjpeg.main.framerate",
+          "severidade": "medio",
+          "ok": false,
+          "atual": 12,
+          "esperado": 15
+        },
+        {
+          "id": "VIDEO_QUALITY",
+          "titulo": "Vídeo Qualidade JPEG",
+          "secao": "video",
+          "menu": "Vídeo > Streams",
+          "campo": "mjpeg.main.quality",
+          "severidade": "medio",
+          "ok": false,
+          "atual": 85,
+          "esperado": 90
+        }
+      ]
     },
     {
       "nome": "GOEC6O051 - Faixa 1",
-      "status": "offline",
-      "divergencias": [],
-      "extras": null
+      "uuid": "b1936eeb-bdb5-41d4-9d59-8d5aca35f301",
+      "ip": "177.79.27.191",
+      "status": "online",
+      "firmware": "v1.7.8",
+      "totalRegras": 26,
+      "conformes": 24,
+      "divergencias": [
+        {
+          "id": "VIDEO_FRAMERATE",
+          "titulo": "Vídeo Framerate",
+          "secao": "video",
+          "menu": "Vídeo > Streams",
+          "campo": "mjpeg.main.framerate",
+          "severidade": "medio",
+          "ok": false,
+          "atual": 12,
+          "esperado": 15
+        },
+        {
+          "id": "VIDEO_QUALITY",
+          "titulo": "Vídeo Qualidade JPEG",
+          "secao": "video",
+          "menu": "Vídeo > Streams",
+          "campo": "mjpeg.main.quality",
+          "severidade": "medio",
+          "ok": false,
+          "atual": 85,
+          "esperado": 90
+        }
+      ]
     },
     {
       "nome": "GOEC6O051 - Faixa 2",
-      "status": "offline",
-      "divergencias": [],
-      "extras": null
+      "uuid": "13d8dad0-3b76-4394-ad2f-bcb2f6ca3d5c",
+      "ip": "177.79.27.191",
+      "status": "online",
+      "firmware": "v1.7.8",
+      "totalRegras": 26,
+      "conformes": 24,
+      "divergencias": [
+        {
+          "id": "VIDEO_FRAMERATE",
+          "titulo": "Vídeo Framerate",
+          "secao": "video",
+          "menu": "Vídeo > Streams",
+          "campo": "mjpeg.main.framerate",
+          "severidade": "medio",
+          "ok": false,
+          "atual": 12,
+          "esperado": 15
+        },
+        {
+          "id": "VIDEO_QUALITY",
+          "titulo": "Vídeo Qualidade JPEG",
+          "secao": "video",
+          "menu": "Vídeo > Streams",
+          "campo": "mjpeg.main.quality",
+          "severidade": "medio",
+          "ok": false,
+          "atual": 85,
+          "esperado": 90
+        }
+      ]
     },
     {
       "nome": "GOEC6O052 - Faixa 2",
@@ -1163,26 +1814,26 @@
       "conformes": 24,
       "divergencias": [
         {
-          "id": "CLASSIFIER_QUEUE",
-          "titulo": "Classificador Queue",
-          "secao": "classifier",
-          "menu": "Equipamento > Classificador",
-          "campo": "classifier.processingQueue",
-          "severidade": "alto",
+          "id": "VIDEO_FRAMERATE",
+          "titulo": "Vídeo Framerate",
+          "secao": "video",
+          "menu": "Vídeo > Streams",
+          "campo": "mjpeg.main.framerate",
+          "severidade": "medio",
           "ok": false,
-          "atual": 4,
-          "esperado": 1
+          "atual": 12,
+          "esperado": 15
         },
         {
-          "id": "CLASSIFIER_THREADS",
-          "titulo": "Classificador Threads",
-          "secao": "classifier",
-          "menu": "Equipamento > Classificador",
-          "campo": "classifier.processingThreads",
-          "severidade": "alto",
+          "id": "VIDEO_QUALITY",
+          "titulo": "Vídeo Qualidade JPEG",
+          "secao": "video",
+          "menu": "Vídeo > Streams",
+          "campo": "mjpeg.main.quality",
+          "severidade": "medio",
           "ok": false,
-          "atual": 4,
-          "esperado": 1
+          "atual": 85,
+          "esperado": 90
         }
       ]
     },
@@ -1196,6 +1847,402 @@
       "conformes": 24,
       "divergencias": [
         {
+          "id": "VIDEO_FRAMERATE",
+          "titulo": "Vídeo Framerate",
+          "secao": "video",
+          "menu": "Vídeo > Streams",
+          "campo": "mjpeg.main.framerate",
+          "severidade": "medio",
+          "ok": false,
+          "atual": 12,
+          "esperado": 15
+        },
+        {
+          "id": "VIDEO_QUALITY",
+          "titulo": "Vídeo Qualidade JPEG",
+          "secao": "video",
+          "menu": "Vídeo > Streams",
+          "campo": "mjpeg.main.quality",
+          "severidade": "medio",
+          "ok": false,
+          "atual": 85,
+          "esperado": 90
+        }
+      ]
+    },
+    {
+      "nome": "GOEC6O053 - Faixa 1",
+      "uuid": "b2071e67-3658-4a52-a543-13713f2c1e33",
+      "ip": "179.249.76.74",
+      "status": "online",
+      "firmware": "v1.7.8",
+      "totalRegras": 26,
+      "conformes": 24,
+      "divergencias": [
+        {
+          "id": "VIDEO_FRAMERATE",
+          "titulo": "Vídeo Framerate",
+          "secao": "video",
+          "menu": "Vídeo > Streams",
+          "campo": "mjpeg.main.framerate",
+          "severidade": "medio",
+          "ok": false,
+          "atual": 12,
+          "esperado": 15
+        },
+        {
+          "id": "VIDEO_QUALITY",
+          "titulo": "Vídeo Qualidade JPEG",
+          "secao": "video",
+          "menu": "Vídeo > Streams",
+          "campo": "mjpeg.main.quality",
+          "severidade": "medio",
+          "ok": false,
+          "atual": 85,
+          "esperado": 90
+        }
+      ]
+    },
+    {
+      "nome": "GOEC6O053 - Faixa 2",
+      "uuid": "3bb822e1-3f89-4a2e-aa79-c8a6041288d9",
+      "ip": "179.249.76.74",
+      "status": "online",
+      "firmware": "v1.7.8",
+      "totalRegras": 26,
+      "conformes": 24,
+      "divergencias": [
+        {
+          "id": "VIDEO_FRAMERATE",
+          "titulo": "Vídeo Framerate",
+          "secao": "video",
+          "menu": "Vídeo > Streams",
+          "campo": "mjpeg.main.framerate",
+          "severidade": "medio",
+          "ok": false,
+          "atual": 12,
+          "esperado": 15
+        },
+        {
+          "id": "VIDEO_QUALITY",
+          "titulo": "Vídeo Qualidade JPEG",
+          "secao": "video",
+          "menu": "Vídeo > Streams",
+          "campo": "mjpeg.main.quality",
+          "severidade": "medio",
+          "ok": false,
+          "atual": 85,
+          "esperado": 90
+        }
+      ]
+    },
+    {
+      "nome": "GOEC6O054 - Faixa 1",
+      "uuid": "8f419e79-5a4c-4af3-8a89-79304110c391",
+      "ip": "187.43.168.205",
+      "status": "online",
+      "firmware": "v1.7.8",
+      "totalRegras": 26,
+      "conformes": 24,
+      "divergencias": [
+        {
+          "id": "VIDEO_FRAMERATE",
+          "titulo": "Vídeo Framerate",
+          "secao": "video",
+          "menu": "Vídeo > Streams",
+          "campo": "mjpeg.main.framerate",
+          "severidade": "medio",
+          "ok": false,
+          "atual": 12,
+          "esperado": 15
+        },
+        {
+          "id": "VIDEO_QUALITY",
+          "titulo": "Vídeo Qualidade JPEG",
+          "secao": "video",
+          "menu": "Vídeo > Streams",
+          "campo": "mjpeg.main.quality",
+          "severidade": "medio",
+          "ok": false,
+          "atual": 85,
+          "esperado": 90
+        }
+      ]
+    },
+    {
+      "nome": "GOEC6O054 - Faixa 2",
+      "uuid": "06821a80-8d82-484e-908e-a9a55ba73b7b",
+      "ip": "187.43.168.205",
+      "status": "online",
+      "firmware": "v1.7.8",
+      "totalRegras": 26,
+      "conformes": 24,
+      "divergencias": [
+        {
+          "id": "VIDEO_FRAMERATE",
+          "titulo": "Vídeo Framerate",
+          "secao": "video",
+          "menu": "Vídeo > Streams",
+          "campo": "mjpeg.main.framerate",
+          "severidade": "medio",
+          "ok": false,
+          "atual": 12,
+          "esperado": 15
+        },
+        {
+          "id": "VIDEO_QUALITY",
+          "titulo": "Vídeo Qualidade JPEG",
+          "secao": "video",
+          "menu": "Vídeo > Streams",
+          "campo": "mjpeg.main.quality",
+          "severidade": "medio",
+          "ok": false,
+          "atual": 85,
+          "esperado": 90
+        }
+      ]
+    },
+    {
+      "nome": "GOEC6O055 - Faixa 1",
+      "uuid": "1d0b2132-a825-4823-ab8f-8ce4aa829138",
+      "ip": "191.37.226.77",
+      "status": "online",
+      "firmware": "v1.7.8",
+      "totalRegras": 26,
+      "conformes": 24,
+      "divergencias": [
+        {
+          "id": "VIDEO_FRAMERATE",
+          "titulo": "Vídeo Framerate",
+          "secao": "video",
+          "menu": "Vídeo > Streams",
+          "campo": "mjpeg.main.framerate",
+          "severidade": "medio",
+          "ok": false,
+          "atual": 12,
+          "esperado": 15
+        },
+        {
+          "id": "VIDEO_QUALITY",
+          "titulo": "Vídeo Qualidade JPEG",
+          "secao": "video",
+          "menu": "Vídeo > Streams",
+          "campo": "mjpeg.main.quality",
+          "severidade": "medio",
+          "ok": false,
+          "atual": 85,
+          "esperado": 90
+        }
+      ]
+    },
+    {
+      "nome": "GOEC6O055 - Faixa 2",
+      "uuid": "fe5f7cf3-a8dd-41e8-b975-72921dbddeac",
+      "ip": "191.37.226.77",
+      "status": "online",
+      "firmware": "v1.7.8",
+      "totalRegras": 26,
+      "conformes": 24,
+      "divergencias": [
+        {
+          "id": "VIDEO_FRAMERATE",
+          "titulo": "Vídeo Framerate",
+          "secao": "video",
+          "menu": "Vídeo > Streams",
+          "campo": "mjpeg.main.framerate",
+          "severidade": "medio",
+          "ok": false,
+          "atual": 12,
+          "esperado": 15
+        },
+        {
+          "id": "VIDEO_QUALITY",
+          "titulo": "Vídeo Qualidade JPEG",
+          "secao": "video",
+          "menu": "Vídeo > Streams",
+          "campo": "mjpeg.main.quality",
+          "severidade": "medio",
+          "ok": false,
+          "atual": 85,
+          "esperado": 90
+        }
+      ]
+    },
+    {
+      "nome": "GOEC6O056 - Faixa 1",
+      "uuid": "07b43518-06b0-4186-89b8-201132a845ac",
+      "ip": "170.81.93.157",
+      "status": "online",
+      "firmware": "v1.7.8",
+      "totalRegras": 26,
+      "conformes": 24,
+      "divergencias": [
+        {
+          "id": "VIDEO_FRAMERATE",
+          "titulo": "Vídeo Framerate",
+          "secao": "video",
+          "menu": "Vídeo > Streams",
+          "campo": "mjpeg.main.framerate",
+          "severidade": "medio",
+          "ok": false,
+          "atual": 12,
+          "esperado": 15
+        },
+        {
+          "id": "VIDEO_QUALITY",
+          "titulo": "Vídeo Qualidade JPEG",
+          "secao": "video",
+          "menu": "Vídeo > Streams",
+          "campo": "mjpeg.main.quality",
+          "severidade": "medio",
+          "ok": false,
+          "atual": 85,
+          "esperado": 90
+        }
+      ]
+    },
+    {
+      "nome": "GOEC6O056 - Faixa 2",
+      "uuid": "8dfa023b-1492-4d06-ad06-13aa51fe8fa2",
+      "ip": "170.81.93.157",
+      "status": "online",
+      "firmware": "v1.7.8",
+      "totalRegras": 26,
+      "conformes": 24,
+      "divergencias": [
+        {
+          "id": "VIDEO_FRAMERATE",
+          "titulo": "Vídeo Framerate",
+          "secao": "video",
+          "menu": "Vídeo > Streams",
+          "campo": "mjpeg.main.framerate",
+          "severidade": "medio",
+          "ok": false,
+          "atual": 12,
+          "esperado": 15
+        },
+        {
+          "id": "VIDEO_QUALITY",
+          "titulo": "Vídeo Qualidade JPEG",
+          "secao": "video",
+          "menu": "Vídeo > Streams",
+          "campo": "mjpeg.main.quality",
+          "severidade": "medio",
+          "ok": false,
+          "atual": 85,
+          "esperado": 90
+        }
+      ]
+    },
+    {
+      "nome": "GOEC6O057 - Faixa 1",
+      "uuid": "41d74d00-032e-4a4c-864e-ac86ea4d01aa",
+      "ip": "138.97.25.51",
+      "status": "online",
+      "firmware": "v1.7.8",
+      "totalRegras": 26,
+      "conformes": 24,
+      "divergencias": [
+        {
+          "id": "VIDEO_FRAMERATE",
+          "titulo": "Vídeo Framerate",
+          "secao": "video",
+          "menu": "Vídeo > Streams",
+          "campo": "mjpeg.main.framerate",
+          "severidade": "medio",
+          "ok": false,
+          "atual": 12,
+          "esperado": 15
+        },
+        {
+          "id": "VIDEO_QUALITY",
+          "titulo": "Vídeo Qualidade JPEG",
+          "secao": "video",
+          "menu": "Vídeo > Streams",
+          "campo": "mjpeg.main.quality",
+          "severidade": "medio",
+          "ok": false,
+          "atual": 85,
+          "esperado": 90
+        }
+      ]
+    },
+    {
+      "nome": "GOEC6O057 - Faixa 2",
+      "uuid": "78fd907c-0085-4d9b-963d-b4e8ee2ad47b",
+      "ip": "138.97.25.51",
+      "status": "online",
+      "firmware": "v1.7.8",
+      "totalRegras": 26,
+      "conformes": 24,
+      "divergencias": [
+        {
+          "id": "VIDEO_FRAMERATE",
+          "titulo": "Vídeo Framerate",
+          "secao": "video",
+          "menu": "Vídeo > Streams",
+          "campo": "mjpeg.main.framerate",
+          "severidade": "medio",
+          "ok": false,
+          "atual": 12,
+          "esperado": 15
+        },
+        {
+          "id": "VIDEO_QUALITY",
+          "titulo": "Vídeo Qualidade JPEG",
+          "secao": "video",
+          "menu": "Vídeo > Streams",
+          "campo": "mjpeg.main.quality",
+          "severidade": "medio",
+          "ok": false,
+          "atual": 85,
+          "esperado": 90
+        }
+      ]
+    },
+    {
+      "nome": "GOEC6O058 - Faixa 1",
+      "uuid": "b5a0f157-e8d4-478c-bf2b-91ebbfcf2a29",
+      "ip": "187.68.160.38",
+      "status": "online",
+      "firmware": "v1.7.8",
+      "totalRegras": 26,
+      "conformes": 24,
+      "divergencias": [
+        {
+          "id": "VIDEO_FRAMERATE",
+          "titulo": "Vídeo Framerate",
+          "secao": "video",
+          "menu": "Vídeo > Streams",
+          "campo": "mjpeg.main.framerate",
+          "severidade": "medio",
+          "ok": false,
+          "atual": 12,
+          "esperado": 15
+        },
+        {
+          "id": "VIDEO_QUALITY",
+          "titulo": "Vídeo Qualidade JPEG",
+          "secao": "video",
+          "menu": "Vídeo > Streams",
+          "campo": "mjpeg.main.quality",
+          "severidade": "medio",
+          "ok": false,
+          "atual": 85,
+          "esperado": 90
+        }
+      ]
+    },
+    {
+      "nome": "GOEC6O058 - Faixa 2",
+      "uuid": "6561d5fd-0aba-413b-a60a-a0d7e1b61b6d",
+      "ip": "187.68.160.38",
+      "status": "online",
+      "firmware": "v1.7.8",
+      "totalRegras": 26,
+      "conformes": 22,
+      "divergencias": [
+        {
           "id": "CLASSIFIER_QUEUE",
           "titulo": "Classificador Queue",
           "secao": "classifier",
@@ -1212,113 +2259,6 @@
           "secao": "classifier",
           "menu": "Equipamento > Classificador",
           "campo": "classifier.processingThreads",
-          "severidade": "alto",
-          "ok": false,
-          "atual": 4,
-          "esperado": 1
-        }
-      ]
-    },
-    {
-      "nome": "GOEC6O053 - Faixa 1",
-      "uuid": "b2071e67-3658-4a52-a543-13713f2c1e33",
-      "ip": "179.249.76.74",
-      "status": "online",
-      "firmware": "v1.7.8",
-      "totalRegras": 26,
-      "conformes": 26,
-      "divergencias": []
-    },
-    {
-      "nome": "GOEC6O053 - Faixa 2",
-      "uuid": "3bb822e1-3f89-4a2e-aa79-c8a6041288d9",
-      "ip": "179.249.76.74",
-      "status": "online",
-      "firmware": "v1.7.8",
-      "totalRegras": 26,
-      "conformes": 26,
-      "divergencias": []
-    },
-    {
-      "nome": "GOEC6O054 - Faixa 1",
-      "uuid": "8f419e79-5a4c-4af3-8a89-79304110c391",
-      "ip": "187.43.168.205",
-      "status": "online",
-      "firmware": "v1.7.8",
-      "totalRegras": 26,
-      "conformes": 25,
-      "divergencias": [
-        {
-          "id": "CLASSIFIER_QUEUE",
-          "titulo": "Classificador Queue",
-          "secao": "classifier",
-          "menu": "Equipamento > Classificador",
-          "campo": "classifier.processingQueue",
-          "severidade": "alto",
-          "ok": false,
-          "atual": 4,
-          "esperado": 1
-        }
-      ]
-    },
-    {
-      "nome": "GOEC6O054 - Faixa 2",
-      "uuid": "06821a80-8d82-484e-908e-a9a55ba73b7b",
-      "ip": "187.43.168.205",
-      "status": "online",
-      "firmware": "v1.7.8",
-      "totalRegras": 26,
-      "conformes": 25,
-      "divergencias": [
-        {
-          "id": "CLASSIFIER_QUEUE",
-          "titulo": "Classificador Queue",
-          "secao": "classifier",
-          "menu": "Equipamento > Classificador",
-          "campo": "classifier.processingQueue",
-          "severidade": "alto",
-          "ok": false,
-          "atual": 4,
-          "esperado": 1
-        }
-      ]
-    },
-    {
-      "nome": "GOEC6O055 - Faixa 1",
-      "uuid": "1d0b2132-a825-4823-ab8f-8ce4aa829138",
-      "ip": "191.37.226.77",
-      "status": "online",
-      "firmware": "v1.7.8",
-      "totalRegras": 26,
-      "conformes": 26,
-      "divergencias": []
-    },
-    {
-      "nome": "GOEC6O055 - Faixa 2",
-      "uuid": "fe5f7cf3-a8dd-41e8-b975-72921dbddeac",
-      "ip": "191.37.226.77",
-      "status": "online",
-      "firmware": "v1.7.8",
-      "totalRegras": 26,
-      "conformes": 23,
-      "divergencias": [
-        {
-          "id": "OCR_MAX_PLATES",
-          "titulo": "OCR Max Plates",
-          "secao": "ocr",
-          "menu": "Equipamento > OCR",
-          "campo": "ocr.maxPlates",
-          "severidade": "alto",
-          "ok": false,
-          "atual": 1,
-          "esperado": 2
-        },
-        {
-          "id": "CLASSIFIER_QUEUE",
-          "titulo": "Classificador Queue",
-          "secao": "classifier",
-          "menu": "Equipamento > Classificador",
-          "campo": "classifier.processingQueue",
           "severidade": "alto",
           "ok": false,
           "atual": 4,
@@ -1332,127 +2272,19 @@
           "campo": "mjpeg.main.framerate",
           "severidade": "medio",
           "ok": false,
-          "atual": 5,
-          "esperado": 12
-        }
-      ]
-    },
-    {
-      "nome": "GOEC6O056 - Faixa 1",
-      "uuid": "07b43518-06b0-4186-89b8-201132a845ac",
-      "ip": "170.81.93.157",
-      "status": "online",
-      "firmware": "v1.7.8",
-      "totalRegras": 26,
-      "conformes": 25,
-      "divergencias": [
-        {
-          "id": "CLASSIFIER_QUEUE",
-          "titulo": "Classificador Queue",
-          "secao": "classifier",
-          "menu": "Equipamento > Classificador",
-          "campo": "classifier.processingQueue",
-          "severidade": "alto",
-          "ok": false,
-          "atual": 4,
-          "esperado": 1
-        }
-      ]
-    },
-    {
-      "nome": "GOEC6O056 - Faixa 2",
-      "uuid": "8dfa023b-1492-4d06-ad06-13aa51fe8fa2",
-      "ip": "170.81.93.157",
-      "status": "online",
-      "firmware": "v1.7.8",
-      "totalRegras": 26,
-      "conformes": 25,
-      "divergencias": [
-        {
-          "id": "CLASSIFIER_QUEUE",
-          "titulo": "Classificador Queue",
-          "secao": "classifier",
-          "menu": "Equipamento > Classificador",
-          "campo": "classifier.processingQueue",
-          "severidade": "alto",
-          "ok": false,
-          "atual": 4,
-          "esperado": 1
-        }
-      ]
-    },
-    {
-      "nome": "GOEC6O057 - Faixa 1",
-      "uuid": "41d74d00-032e-4a4c-864e-ac86ea4d01aa",
-      "ip": "138.97.25.51",
-      "status": "online",
-      "firmware": "v1.7.8",
-      "totalRegras": 26,
-      "conformes": 25,
-      "divergencias": [
-        {
-          "id": "CLASSIFIER_QUEUE",
-          "titulo": "Classificador Queue",
-          "secao": "classifier",
-          "menu": "Equipamento > Classificador",
-          "campo": "classifier.processingQueue",
-          "severidade": "alto",
-          "ok": false,
-          "atual": 4,
-          "esperado": 1
-        }
-      ]
-    },
-    {
-      "nome": "GOEC6O057 - Faixa 2",
-      "uuid": "78fd907c-0085-4d9b-963d-b4e8ee2ad47b",
-      "ip": "138.97.25.51",
-      "status": "online",
-      "firmware": "v1.7.8",
-      "totalRegras": 26,
-      "conformes": 26,
-      "divergencias": []
-    },
-    {
-      "nome": "GOEC6O058 - Faixa 1",
-      "uuid": "b5a0f157-e8d4-478c-bf2b-91ebbfcf2a29",
-      "ip": "187.68.160.38",
-      "status": "online",
-      "firmware": "v1.7.8",
-      "totalRegras": 26,
-      "conformes": 26,
-      "divergencias": []
-    },
-    {
-      "nome": "GOEC6O058 - Faixa 2",
-      "uuid": "6561d5fd-0aba-413b-a60a-a0d7e1b61b6d",
-      "ip": "187.68.160.38",
-      "status": "online",
-      "firmware": "v1.7.8",
-      "totalRegras": 26,
-      "conformes": 24,
-      "divergencias": [
-        {
-          "id": "CLASSIFIER_QUEUE",
-          "titulo": "Classificador Queue",
-          "secao": "classifier",
-          "menu": "Equipamento > Classificador",
-          "campo": "classifier.processingQueue",
-          "severidade": "alto",
-          "ok": false,
-          "atual": 4,
-          "esperado": 1
+          "atual": 12,
+          "esperado": 15
         },
         {
-          "id": "CLASSIFIER_THREADS",
-          "titulo": "Classificador Threads",
-          "secao": "classifier",
-          "menu": "Equipamento > Classificador",
-          "campo": "classifier.processingThreads",
-          "severidade": "alto",
+          "id": "VIDEO_QUALITY",
+          "titulo": "Vídeo Qualidade JPEG",
+          "secao": "video",
+          "menu": "Vídeo > Streams",
+          "campo": "mjpeg.main.quality",
+          "severidade": "medio",
           "ok": false,
-          "atual": 4,
-          "esperado": 1
+          "atual": 85,
+          "esperado": 90
         }
       ]
     },
@@ -1463,8 +2295,31 @@
       "status": "online",
       "firmware": "v1.7.8",
       "totalRegras": 26,
-      "conformes": 26,
-      "divergencias": []
+      "conformes": 24,
+      "divergencias": [
+        {
+          "id": "VIDEO_FRAMERATE",
+          "titulo": "Vídeo Framerate",
+          "secao": "video",
+          "menu": "Vídeo > Streams",
+          "campo": "mjpeg.main.framerate",
+          "severidade": "medio",
+          "ok": false,
+          "atual": 12,
+          "esperado": 15
+        },
+        {
+          "id": "VIDEO_QUALITY",
+          "titulo": "Vídeo Qualidade JPEG",
+          "secao": "video",
+          "menu": "Vídeo > Streams",
+          "campo": "mjpeg.main.quality",
+          "severidade": "medio",
+          "ok": false,
+          "atual": 85,
+          "esperado": 90
+        }
+      ]
     },
     {
       "nome": "GOEC6O059 - Faixa 2",
@@ -1476,26 +2331,26 @@
       "conformes": 24,
       "divergencias": [
         {
-          "id": "OCR_PROCESSING_THREADS",
-          "titulo": "OCR Processing Threads",
-          "secao": "ocr",
-          "menu": "Equipamento > OCR",
-          "campo": "ocr.processingThreads",
+          "id": "VIDEO_FRAMERATE",
+          "titulo": "Vídeo Framerate",
+          "secao": "video",
+          "menu": "Vídeo > Streams",
+          "campo": "mjpeg.main.framerate",
           "severidade": "medio",
           "ok": false,
-          "atual": 1,
-          "esperado": 4
+          "atual": 12,
+          "esperado": 15
         },
         {
-          "id": "CLASSIFIER_QUEUE",
-          "titulo": "Classificador Queue",
-          "secao": "classifier",
-          "menu": "Equipamento > Classificador",
-          "campo": "classifier.processingQueue",
-          "severidade": "alto",
+          "id": "VIDEO_QUALITY",
+          "titulo": "Vídeo Qualidade JPEG",
+          "secao": "video",
+          "menu": "Vídeo > Streams",
+          "campo": "mjpeg.main.quality",
+          "severidade": "medio",
           "ok": false,
-          "atual": 4,
-          "esperado": 1
+          "atual": 85,
+          "esperado": 90
         }
       ]
     }

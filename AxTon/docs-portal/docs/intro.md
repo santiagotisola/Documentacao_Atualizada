@@ -8,7 +8,7 @@ title: Visão Geral
 
 ![Menu Principal do AxTon](./img/Menu%20principal%20-%20Axton.png)
 
-Bem-vindo ao manual do usuário do **AxTon**, o sistema de gestão de pesagem veicular da Axion Tecnologia.
+Bem-vindo ao manual do Usuário do **AxTon**, o sistema de gestão de pesagem veicular da Axion Tecnologia.
 
 **Versão do sistema:** v1.0.0  
 **Última atualização do manual:** Junho/2026  
@@ -18,7 +18,7 @@ Bem-vindo ao manual do usuário do **AxTon**, o sistema de gestão de pesagem ve
 
 ## O que é o AxTon?
 
-O AxTon é uma plataforma web destinada ao **controle e monitoramento de pesagem de veículos em rodovias**, integrando postos de pesagem, balanças HAENNI, classificação de veículos e geração automatizada de registros de infração por excesso de peso. O sistema opera em postos de pesagem nos estados do Piauí (PI), Goiás (GO), Ceará (CE) e Paraíba (PB).
+O AxTon é uma plataforma web destinada ao **controle e monitoramento de pesagem de Veículos em rodovias**, integrando postos de pesagem, balanças HAENNI, classificação de Veículos e geração automatizada de registros de Infração por excesso de peso. O sistema opera em postos de pesagem nos estados do Piauí (PI), Goiás (GO), Ceará (CE) e Paraíba (PB).
 
 ### Ciclo operacional completo
 
@@ -29,8 +29,8 @@ flowchart LR
     C --> D[Informa placa]
     D --> E[Balança HAENNI mede peso]
     E --> F{Excesso?}
-    F -->|Sim| G[Gera infração automaticamente]
-    F -->|Não| H[Libera veículo]
+    F -->|Sim| G[Gera Infração automaticamente]
+    F -->|Não| H[Libera Veículo
     G --> I[Exporta para órgão autuador]
 ```
 
@@ -41,11 +41,11 @@ flowchart LR
 | **Iniciar Pesagem** | Fluxo completo de pesagem veicular com balança HAENNI | Menu lateral |
 | **Tickets de Pesagens** | Registro de todas as pesagens (abertos e fechados) | Menu lateral |
 | **Operações** | Cadastro e controle de operações de fiscalização em campo | Menu lateral |
-| **Exportação** | Envio de infrações em lotes ao órgão autuador (XTraffic/AxHub) | Menu lateral |
-| **Relatório de Pesagem** | Consulta consolidada com exportação em PDF | Menu lateral |
-| **Cadastros** | Locais, classificações de veículos, sequenciais | Menu lateral → Cadastros |
+| **Exportação** | Envio de Infrações em lotes ao órgão autuador (XTraffic/AxHub) | Menu lateral |
+| Relatório de Pesagem** | Consulta consolidada com exportação em PDF | Menu lateral |
+| **Cadastros** | Locais, classificações de Veículos sequenciais | Menu lateral → Cadastros |
 | **Sistema** | Configurações de balança, câmera IP, tolerâncias, integração AxHub | Menu lateral → Sistema |
-| **Administração** | Usuários, perfis de acesso, permissões | Menu lateral |
+| **Administração** | Usuários perfis de acesso, permissões | Menu lateral |
 
 ### Inteligência do sistema
 
@@ -53,8 +53,8 @@ O AxTon automatiza os seguintes cálculos:
 
 1. **Cálculo de excesso de PBT** — Compara peso medido com PBT regulamentado + tolerância configurada
 2. **Cálculo de excesso por eixo** — Verifica cada grupo de eixos individualmente
-3. **Geração automática de infração** — Quando detecta excesso, cria o registro com enquadramento legal
-4. **Numeração sequencial** — Controla automaticamente os números de auto de infração
+3. **Geração automática de Infração — Quando detecta excesso, cria o registro com enquadramento legal
+4. **Numeração sequencial** — Controla automaticamente os números de auto de Infração
 5. **Integração com AxHub** — Exporta dados para o sistema central de fiscalização
 
 ---
@@ -75,11 +75,11 @@ Utilize o **menu lateral** para navegar entre os módulos do sistema. Cada seç�
 
 | Requisito | Detalhe |
 |-----------|---------|
-| **Credenciais** | Nome de usuário e senha fornecidos pelo administrador |
+| **Credenciais** | Nome de Usuário e senha fornecidos pelo administrador |
 | **Navegador** | Google Chrome, Mozilla Firefox ou Microsoft Edge (versão atualizada) |
 | **Rede** | Conexão com a rede local onde o servidor AxTon está instalado |
 | **Balança** | Equipamento HAENNI conectado e configurado (para operações de pesagem) |
-| **Câmera IP** | Configurada em Sistema → Câmera IP (para captura de imagens dos veículos) |
+| **Câmera IP** | Configurada em Sistema → Câmera IP (para captura de imagens dos Veículos |
 
 ---
 

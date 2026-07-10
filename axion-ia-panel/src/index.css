@@ -338,10 +338,10 @@ table tr:hover {
 }
 
 /* Cards e containers com fundo BRANCO e texto ESCURO */
-[class*="card"],
-[class*="box"],
-[class*="container"],
-[class*="panel"] {
+[class*="card"]:not(.svc-card-icon):not(.service-icon):not(.db-card):not(.db-hero):not(.db-gauge-wrap):not(.db-mini-section),
+[class*="box"]:not(.db-hero-bottom),
+[class*="container"]:not(.db-hero-inner),
+[class*="panel"]:not(.db-hero):not(.db-modules):not(.db-products) {
   background: var(--card-bg) !important;
   color: var(--text) !important;
   border-color: var(--card-border) !important;
@@ -373,8 +373,8 @@ a:hover {
   text-decoration: underline;
 }
 
-/* Badges e tags legíveis */
-.badge, .tag, [class*="badge"], [class*="tag"] {
+/* Badges e tags legíveis — excluir db-card-tag */
+.badge, .tag, [class*="badge"]:not(.db-card-tag), [class*="tag"]:not(.db-card-tag) {
   color: var(--text) !important;
   border: 1px solid var(--border) !important;
   font-weight: 600 !important;

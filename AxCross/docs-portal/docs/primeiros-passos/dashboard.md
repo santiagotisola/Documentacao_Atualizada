@@ -1,18 +1,18 @@
 ---
 sidebar_position: 2
-title: Painel Principal (Dashboard)
-description: Painel principal do AxCross com indicadores operacionais
+title: Use Dashboard Principal Dashboard
+description: Use Dashboard principal do AxCross com indicadores operacionais
 ---
 
-# Painel Principal (Dashboard)
+# Use Dashboard Principal Dashboard
 
-O Painel Principal é a tela inicial do AxCross após a autenticação. Apresenta uma visão completa do estado operacional do sistema, com gráficos e indicadores em tempo real.
+O Use Dashboard Principal é a tela inicial do AxCross após a autenticação. Apresenta uma visão completa do estado operacional do sistema, com gráficos e indicadores em tempo real.
 
-![Dashboard Principal do AxCross](../img/Dashboard.png)
+Dashboard Principal do AxCross](../img/Dashboard.png)
 
 ## Como acessar
 
-- Ao realizar o login, o sistema redireciona automaticamente para o Dashboard
+- Ao realizar o Login o sistema redireciona automaticamente para o Dashboard
 - Para retornar a qualquer momento: clique no **logo AxCross** no topo esquerdo
 
 ---
@@ -26,8 +26,8 @@ O Painel Principal é a tela inicial do AxCross após a autenticação. Apresent
 | Item | Descrição |
 |------|-----------|
 | **Visualização** | Indicadores de status (online/offline) |
-| **Dados** | Quantidade de equipamentos ativos vs inativos |
-| **Utilidade** | Identificar rapidamente equipamentos com problema |
+| **Dados** | Quantidade de Equipamentos ativos vs inativos |
+| **Utilidade** | Identificar rapidamente Equipamentos com problema |
 
 ### 2. Fluxo de Passagens
 
@@ -48,12 +48,12 @@ O Painel Principal é a tela inicial do AxCross após a autenticação. Apresent
 
 ### 4. Alertas Recentes
 
-![Dashboard - Ocorrências Recentes](../img/Dashboard - ocorrencias recentes.png)
+Dashboard - Ocorrências Recentes](../img/Dashboard - ocorrencias recentes.png)
 
 | Item | Descrição |
 |------|-----------|
 | **Atualização** | Monitoramento em tempo real |
-| **Colunas** | Local, Equipamento, Data/Hora, Tipo, Status |
+| **Colunas** | Local, Equipamento Data/Hora, Tipo, Status |
 | **Dados** | Lista dos últimos alertas detectados |
 | **Utilidade** | Ação imediata sobre ocorrências em andamento |
 
@@ -79,10 +79,10 @@ Gráfico de barras que exibe a distribuição dos alertas gerados nas **últimas
 
 **Passagens por Classificação:**
 
-Gráfico de linha que exibe a distribuição das passagens por **categoria de veículo** nas últimas 24 horas. As categorias incluem: Automóvel, Caminhonete, Caminhão, Ônibus, Motocicleta, Sem Classificação e Sem Classe.
+Gráfico de linha que exibe a distribuição das passagens por **categoria de Veículo nas últimas 24 horas. As categorias incluem: Automóvel, Caminhonete, Caminhão, Ônibus, Motocicleta, Sem Classificação e Sem Classe.
 
 :::info Mapa integrado
-Ao lado dos gráficos de fluxo, o Dashboard exibe o **mapa georreferenciado** (Google Maps) com a localização dos equipamentos monitorados.
+Ao lado dos gráficos de fluxo, o Dashboard exibe o **mapa georreferenciado** (Google Maps) com a localização dos Equipamentos monitorados.
 :::
 
 ---
@@ -90,6 +90,6 @@ Ao lado dos gráficos de fluxo, o Dashboard exibe o **mapa georreferenciado** (G
 ## Dicas de uso
 
 - **Acompanhe o Fluxo de Passagens** para dimensionar operações nos horários de pico
-- **Verifique o Status dos Equipamentos** diariamente para manutenção preventiva
+- **Verifique o Status dos Equipamentos diariamente para manutenção preventiva
 - **Use Passagens por Local** para identificar cruzamentos com maior demanda
 - **Monitore Alertas Recentes** para ação imediata em ocorrências críticas

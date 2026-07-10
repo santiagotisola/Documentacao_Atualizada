@@ -6,7 +6,7 @@ description: Gestão de perfis de acesso do sistema AxTon
 
 # Perfis de Acesso
 
-O módulo de perfis de acesso define os conjuntos de permissões que serão atribuídos aos usuários do sistema. Cada perfil agrupa as funcionalidades às quais os usuários vinculados a ele terão acesso.
+O módulo de perfis de acesso define os conjuntos de permissões que serão atribuídos aos Usuários do sistema. Cada perfil agrupa as funcionalidades às quais os Usuários vinculados a ele terão acesso.
 
 ## Como acessar
 
@@ -35,7 +35,7 @@ O módulo de perfis de acesso define os conjuntos de permissões que serão atri
 |------|-----------|
 | **+ Novo** | Cadastrar um novo perfil de acesso |
 | **Editar** | Alterar nome e permissões do perfil |
-| **Excluir** | Remover o perfil (não permitido se houver usuários vinculados) |
+| **Excluir** | Remover o perfil (não permitido se houver Usuários vinculados) |
 
 ## Cadastro
 
@@ -47,7 +47,7 @@ O módulo de perfis de acesso define os conjuntos de permissões que serão atri
 |-------|:-----------:|-----------|
 | **Código** | Sim | Código único de identificação do perfil |
 | **Descrição** | Sim | Nome descritivo do perfil (ex.: Administrador, Operador, Auditor) |
-| **Ativo** | Sim | Define se o perfil estará disponível para atribuição a usuários |
+| **Ativo** | Sim | Define se o perfil estará disponível para atribuição a Usuários |
 
 ### Passo a passo — Cadastrar perfil de acesso
 
@@ -58,9 +58,9 @@ O módulo de perfis de acesso define os conjuntos de permissões que serão atri
 5. Após salvar, acesse o módulo de **Permissões de Acesso** para configurar as permissões vinculadas ao perfil
 
 :::tip Boas práticas
-Crie perfis com nomes descritivos que reflitam o cargo ou função dos usuários que serão atribuídos a eles. Evite criar um perfil único com acesso total para todos os usuários, pois isso dificulta a rastreabilidade das operações realizadas no sistema.
+Crie perfis com nomes descritivos que reflitam o cargo ou função dos Usuários que serão atribuídos a eles. Evite criar um perfil único com acesso total para todos os Usuários pois isso dificulta a rastreabilidade das operações realizadas no sistema.
 :::
 
 :::warning Exclusão de perfis
-Um perfil de acesso somente poderá ser excluído se não houver usuários vinculados a ele. Para desabilitar um perfil sem excluí-lo, utilize o campo **Ativo**.
+Um perfil de acesso somente poderá ser excluído se não houver Usuários vinculados a ele. Para desabilitar um perfil sem excluí-lo, utilize o campo **Ativo**.
 :::

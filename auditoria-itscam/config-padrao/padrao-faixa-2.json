@@ -3,8 +3,8 @@
     "descricao": "Configuração padrão ITScam 450 — FAIXA 2",
     "modelo": "ITSCAM450",
     "firmware": "v1.7.8",
-    "criadoEm": "2026-06-08",
-    "nota": "Valores extraídos do dispositivo GOEC6O002-F2 (referência OK)"
+    "criadoEm": "2026-07-08",
+    "nota": "Valores validados ao vivo no dispositivo GOEC6O002-F2 em 2026-07-08 (referência OK)"
   },
   "varco": {
     "remoteAccess": {
@@ -54,7 +54,7 @@
       "enabled": true,
       "processingQueue": 1,
       "processingThreads": 1,
-      "minProbability": 20,
+      "minProbability": 100,
       "enableSpeed": false,
       "enableCharacteristics": false,
       "sceneType": 0,
@@ -96,8 +96,8 @@
     "mjpeg": {
       "main": {
         "enabled": true,
-        "framerate": 12,
-        "quality": 85,
+        "framerate": 15,
+        "quality": 90,
         "useTriggerFrames": true
       }
     },

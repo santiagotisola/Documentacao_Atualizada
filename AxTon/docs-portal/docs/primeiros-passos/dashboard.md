@@ -1,18 +1,18 @@
 ---
 sidebar_position: 2
-title: Painel Principal (Dashboard)
-description: Painel principal do AxTon com indicadores operacionais de pesagem, infrações e últimas pesagens
+title: Use Dashboard Principal Dashboard
+description: Use Dashboard principal do AxTon com indicadores operacionais de pesagem, Infrações e últimas pesagens
 ---
 
-# Painel Principal (Dashboard)
+# Use Dashboard Principal Dashboard
 
 ![Tela do Dashboard](../img/axton-dashboard.png)
 
-O Painel Principal é a tela inicial do AxTon após a autenticação. Apresenta uma visão consolidada dos indicadores operacionais de pesagem veicular, incluindo contagens do mês, gráficos de distribuição e o histórico das últimas pesagens realizadas.
+O Use Dashboard Principal é a tela inicial do AxTon após a autenticação. Apresenta uma visão consolidada dos indicadores operacionais de pesagem veicular, incluindo contagens do mês, gráficos de distribuição e o histórico das últimas pesagens realizadas.
 
 ## Como acessar
 
-- Ao realizar o login, o sistema redireciona automaticamente para o Dashboard
+- Ao realizar o Login o sistema redireciona automaticamente para o Dashboard
 - Para retornar a qualquer momento: clique no **logo AxTon** no topo esquerdo ou no primeiro ícone do menu lateral
 
 ---
@@ -24,9 +24,9 @@ O Dashboard apresenta **4 contadores principais** no topo da tela:
 | Indicador | O que mostra | Inteligência |
 |-----------|-------------|--------------|
 | **Pesagens Realizadas no Mês** | Total de pesagens concluídas no mês atual | Atualizado em tempo real a cada pesagem finalizada |
-| **Infrações Realizadas no Mês** | Total de infrações registradas no mês atual | Conta apenas infrações confirmadas (não descartadas) |
+| Infrações Realizadas no Mês** | Total de Infrações registradas no mês atual | Conta apenas Infrações confirmadas (não descartadas) |
 | **Total de Pesagens na Operação** | Soma de todas as pesagens da operação ativa | Reinicia quando uma nova operação é criada |
-| **Total de Infrações na Operação** | Soma de todas as infrações da operação ativa | Permite comparar eficiência entre operações |
+| **Total de Infrações na Operação** | Soma de todas as Infrações da operação ativa | Permite comparar eficiência entre operações |
 
 ---
 
@@ -35,9 +35,9 @@ O Dashboard apresenta **4 contadores principais** no topo da tela:
 ### 1. Distribuição de Pesagens e Infrações Diário
 
 Gráfico de barras que exibe a distribuição diária. O sistema calcula automaticamente:
-- **Barras azuis:** Volume de veículos pesados por dia
+- **Barras azuis:** Volume de Veículos pesados por dia
 - **Barras vermelhas:** Infrações geradas naquele dia
-- **Tendência:** Permite identificar dias de maior movimento e dias com mais infrações
+- **Tendência:** Permite identificar dias de maior movimento e dias com mais Infrações
 
 **Utilidade:** Dimensionar equipe de campo e planejar operações futuras.
 
@@ -47,7 +47,7 @@ Lista cronológica das pesagens mais recentes com atualização em tempo real:
 
 | Campo | Descrição |
 |-------|-----------|
-| **Placa** | Placa do veículo pesado |
+| **Placa** | Placa do Veículo pesado |
 | **Data/Hora** | Momento exato da pesagem |
 | **Peso (kg)** | Peso bruto total medido pela balança |
 
@@ -59,13 +59,13 @@ Lista cronológica das pesagens mais recentes com atualização em tempo real:
 
 ### 3. Comparativo de Pesagens e Infrações
 
-Gráfico que correlaciona o total de pesagens com as infrações geradas por período. Permite avaliar:
-- **Taxa de infração:** Percentual de veículos em excesso de peso
+Gráfico que correlaciona o total de pesagens com as Infrações geradas por período. Permite avaliar:
+- **Taxa de Infração Percentual de Veículos em excesso de peso
 - **Eficiência da operação:** Quanto maior a taxa, mais assertivo é o posto
 
 ### 4. Alertas Operacionais
 
-Painel de alertas em tempo real para ação imediata:
+Use Dashboard de alertas em tempo real para ação imediata:
 - Equipamentos offline
 - Falhas de comunicação com balança
 - Operações sem pesagem há mais de X horas
@@ -82,7 +82,7 @@ Quando não há alertas: *"Nenhum alerta recente encontrado"*.
 | **Destino** | Cidade de destino da carga |
 | **Data/Hora** | Momento da captura |
 
-**Utilidade:** Rastrear a documentação fiscal vinculada aos veículos pesados, cruzando dados de carga com peso medido.
+**Utilidade:** Rastrear a documentação fiscal vinculada aos Veículos pesados, cruzando dados de carga com peso medido.
 
 ---
 
@@ -95,19 +95,19 @@ O menu lateral exibe todos os módulos disponíveis conforme o perfil de acesso:
 | **Iniciar Pesagem** | ⚖️ | Processo completo de pesagem |
 | **Operações** | 🔧 | Gestão de operações em campo |
 | **Tickets de Pesagens** | 📋 | Registro de todas as pesagens |
-| **Exportação** | 📤 | Envio de infrações ao órgão |
-| **Relatório de Pesagem** | 📊 | Consulta e PDF |
-| **Sequenciais de Infração** | 🔢 | Numeração de autos |
+| **Exportação** | 📤 | Envio de Infrações ao órgão |
+| Relatório de Pesagem** | 📊 | Consulta e PDF |
+| **Sequenciais de Infração | 🔢 | Numeração de autos |
 | **Cadastros** | 📁 | Locais, Classificações |
 | **Sistema** | ⚙️ | Configurações gerais |
-| **Usuários** | 👤 | Gestão de acessos |
+| Usuários | 👤 | Gestão de acessos |
 | **Perfis de Acesso** | 🔐 | Permissões por perfil |
 
 ---
 
 ## Passo a passo — Navegação no Dashboard
 
-1. Após o login, observe os **4 indicadores no topo** para visão rápida do dia
+1. Após o Login observe os **4 indicadores no topo** para visão rápida do dia
 2. Verifique o **gráfico diário** para identificar tendências
 3. Confira as **últimas pesagens** para acompanhar o fluxo em tempo real
 4. Verifique os **alertas** para ação imediata sobre problemas
@@ -118,7 +118,7 @@ O menu lateral exibe todos os módulos disponíveis conforme o perfil de acesso:
 ## Dicas de uso
 
 - **Acompanhe o Fluxo de Passagens** para dimensionar a equipe nos horários de pico
-- **Verifique Alertas por Tipo** diariamente para identificar tendências (ex: muitos veículos sem MDF-e)
+- **Verifique Alertas por Tipo** diariamente para identificar tendências (ex: muitos Veículos sem MDF-e)
 - **Use Origem das Cargas** para justificar estratégias de fiscalização por região
 - **Monitore Alertas Recentes** para ação imediata em ocorrências críticas
-- **Consulte Últimas Notas Fiscais** para validar a documentação fiscal dos veículos
+- **Consulte Últimas Notas Fiscais** para validar a documentação fiscal dos Veículos

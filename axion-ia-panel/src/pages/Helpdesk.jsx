@@ -1,5 +1,6 @@
 ﻿import { useEffect, useState, useRef } from "react";
 import { api, apiFetch } from "../services/api";
+import { Badge } from "../components/common";
 import ChamadosSites from "./ChamadosSites";
 
 const FILTROS_INICIAL = {
@@ -899,7 +900,7 @@ export default function Helpdesk() {
                 <span style={{ fontWeight: 600 }}>{polling?.intervalo_minutos || "-"} min</span>
               </div>
               <div>
-                <div style={{ fontSize: "0.75rem", color: "var(--text-muted)", marginBottom: 3 }}>ULTIMA EXECUCAO</div>
+                <div style={{ fontSize: "0.75rem", color: "var(--text-muted)", marginBottom: 3 }}>última EXECUCAO</div>
                 <span style={{ fontSize: "0.8rem" }}>{polling?.ultima_execucao ? new Date(polling.ultima_execucao).toLocaleTimeString("pt-BR") : "-"}</span>
               </div>
               <div>
@@ -1041,7 +1042,7 @@ export default function Helpdesk() {
                       {t.Subject}
                     </td>
                     <td style={{ fontSize: "0.85rem" }}>{t.UserName || "-"}</td>
-                    <td><span className="badge badge-kb" style={{ whiteSpace: "nowrap" }}>{t.Category || "-"}</span></td>
+                    <td><Badge variant="info" size="sm">{t.Category || "-"}</Badge></td>
                     <td style={{ fontSize: "0.8rem", whiteSpace: "nowrap" }}>
                       {t.PriorityName ? (
                         <span style={{ padding: "2px 8px", borderRadius: 5, fontSize: "0.75rem", fontWeight: 600,
@@ -1102,15 +1103,15 @@ export default function Helpdesk() {
               {!acao.enviando && acao.tipo === "classificado" && acao.resultado && (
                 <div className="card">
                   <div style={{ display: "flex", gap: "0.75rem", marginBottom: "0.75rem", flexWrap: "wrap" }}>
-                    <span className="badge badge-kb">origem: {acao.resultado.origem}</span>
-                    {acao.resultado.score && <span className="badge badge-embedding">score: {(acao.resultado.score * 100).toFixed(1)}%</span>}
+                    <Badge variant="info" size="sm">origem: {acao.resultado.origem}</Badge>
+                    {acao.resultado.score && <Badge variant="secondary" size="sm">score: {(acao.resultado.score * 100).toFixed(1)}%</Badge>}
                   </div>
                   <div style={{ color: "var(--text-muted)", fontSize: "0.8rem", marginBottom: "0.5rem" }}>Sugestao da IA:</div>
                   <pre style={{ whiteSpace: "pre-wrap", fontFamily: "inherit", fontSize: "0.9rem", lineHeight: 1.6 }}>{acao.resultado.sugestaoResposta}</pre>
                 </div>
               )}
               {!acao.enviando && acao.tipo === "respondido" && <div className="alert alert-success">Resposta postada no Jitbit com sucesso!</div>}
-              {!acao.enviando && acao.tipo === "erro" && <div className="alert alert-error">Erro ao processar. Verifique se a API esta configurada corretamente.</div>}
+              {!acao.enviando && acao.tipo === "erro" && <div className="alert alert-error">Erro ao processar. Verifique se a API está configurada corretamente.</div>}
             </div>
           )}
 

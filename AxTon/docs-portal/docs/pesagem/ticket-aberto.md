@@ -8,7 +8,7 @@ description: Gerenciamento de tickets de pesagem no AxTon
 
 ![Tela de Tickets de Pesagens](../img/axton-tickets.png)
 
-Os Tickets de Pesagens registram todas as pesagens realizadas nas operações. Cada ticket contém os dados do veículo, peso medido, classificação e status da pesagem.
+Os Tickets de Pesagens registram todas as pesagens realizadas nas operações. Cada ticket contém os dados do Veículo peso medido, classificação e status da pesagem.
 
 ## Como acessar
 
@@ -21,10 +21,10 @@ Os Tickets de Pesagens registram todas as pesagens realizadas nas operações. C
 | Coluna | Descrição |
 |--------|-----------|
 | **Data** | Data e hora da pesagem |
-| **Placa** | Placa do veículo pesado |
+| **Placa** | Placa do Veículo pesado |
 | **PBT** | Peso Bruto Total regulamentado da classificação (em toneladas) |
 | **Eixos** | Configuração de eixos (dianteiros/traseiros) |
-| **Classe** | Classe do veículo (ex: 3S3, 3T6, 3C) |
+| **Classe** | Classe do Veículo (ex: 3S3, 3T6, 3C) |
 | **Status** | Finalizado ou Em andamento |
 | **Ações** | Visualizar |
 
@@ -53,8 +53,8 @@ Clique em **+ Nova Pesagem** para iniciar o processo de pesagem. Isso redirecion
 ### Passo a passo
 
 1. Clique em **+ Nova Pesagem**
-2. **Seleção do Tipo do Veículo:** busque pela classificação ou PBT e selecione o tipo
-3. **Informe a Placa** do veículo
+2. **Seleção do Tipo do Veículo busque pela classificação ou PBT e selecione o tipo
+3. **Informe a Placa** do Veículo
 4. Clique em **Continuar**
 5. O sistema conecta com a balança e registra o peso
 6. Confirme os dados e clique em **Finalizar**
@@ -65,8 +65,8 @@ Clique em **Visualizar** para ver os detalhes completos de um ticket:
 
 | Informação | Descrição |
 |-------------|-----------|
-| **Placa** | Placa do veículo |
-| **Classe** | Classificação do veículo |
+| **Placa** | Placa do Veículo |
+| **Classe** | Classificação do Veículo |
 | **PBT Regulamentado** | Peso máximo permitido (t) |
 | **PBT Medido** | Peso efetivamente medido (kg) |
 | **Eixos Medidos** | Peso individual por eixo |
@@ -80,7 +80,7 @@ Clique em **Visualizar** para ver os detalhes completos de um ticket:
 |---|---|
 | [**Iniciar Pesagem**](../pesagem/ticket-aberto) | Fluxo completo de pesagem |
 | [**Reclassificar**](../pesagem/reclassificar) | Corrigir a classificação de um ticket |
-| [**Exportação**](../infracoes/exportacao) | Enviar infrações ao órgão autuador |
+| [**Exportação**](../infracoes/exportacao) | Enviar Infrações ao órgão autuador |
 
 ---
 

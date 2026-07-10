@@ -1,16 +1,16 @@
 ﻿---
 sidebar_position: 11
 title: Sequenciais de Infrações
-description: Controle de sequenciais numéricos de infrações
+description: Controle de sequenciais numéricos de Infrações
 ---
 
 # Sequenciais de Infrações
 
-Permite configurar e monitorar os sequenciais numéricos utilizados na numeração de autos de infração.
+Permite configurar e monitorar os sequenciais numéricos utilizados na numeração de autos de Infração
 
 ## Como acessar
 
-**Menu lateral** → Configurações → **Sequenciais de Infrações**
+**Menu lateral** → Configurações → **Sequenciais de Infrações
 
 | Campo | Descrição |
 |-------|-----------|
@@ -21,7 +21,7 @@ Permite configurar e monitorar os sequenciais numéricos utilizados na numeraç�
 | **Status** | Ativo, Esgotado |
 
 :::note Sem screenshot
-Esta tela ainda não possui screenshot cadastrada. Será adicionada em breve.
+está tela ainda não possui screenshot cadastrada. Será adicionada em breve.
 :::
 
 ---

@@ -1,0 +1,75 @@
+/* ═══════════════════════════════════════════════════════════════════
+   StatCard - Componente de Estatísticas Unificado
+   ═══════════════════════════════════════════════════════════════════ */
+
+.stat-card {
+  background: #fff;
+  border: 1px solid #e8edf4;
+  border-top: 3px solid var(--stat-color, #6366f1);
+  border-radius: 10px;
+  padding: 1rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.2rem;
+  min-width: 100px;
+  text-align: center;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+  transition: box-shadow 0.15s;
+}
+.stat-card:hover { box-shadow: 0 4px 12px rgba(0,0,0,0.08); }
+
+.stat-card-value {
+  font-weight: 800;
+  font-size: 1.5rem;
+  color: var(--stat-color, #6366f1);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  line-height: 1.2;
+}
+
+.stat-card-icon {
+  flex-shrink: 0;
+}
+
+.stat-card-label {
+  font-size: 0.7rem;
+  color: #94a3b8;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: 500;
+  line-height: 1.3;
+}
+
+/* Variações de tamanho */
+.stat-card-sm .stat-card-value {
+  font-size: 1.2rem;
+}
+
+.stat-card-sm .stat-card-label {
+  font-size: 0.7rem;
+}
+
+.stat-card-md .stat-card-value {
+  font-size: 1.8rem;
+}
+
+.stat-card-md .stat-card-label {
+  font-size: 0.75rem;
+}
+
+.stat-card-lg .stat-card-value {
+  font-size: 2.4rem;
+}
+
+.stat-card-lg .stat-card-label {
+  font-size: 0.85rem;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .stat-card-sm .stat-card-value { font-size: 1rem; }
+  .stat-card-md .stat-card-value { font-size: 1.5rem; }
+  .stat-card-lg .stat-card-value { font-size: 2rem; }
+}

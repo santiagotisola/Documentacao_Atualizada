@@ -19,7 +19,7 @@ Permite cadastrar as formas de autuação utilizadas no processo de fiscalizaç�
 | **Ativo** | Status do registro |
 
 :::note Sem screenshot
-Esta tela ainda não possui screenshot cadastrada. Será adicionada em breve.
+está tela ainda não possui screenshot cadastrada. Será adicionada em breve.
 :::
 
 ---

@@ -8,9 +8,9 @@ description: Arquitetura de proteção de imagens originais e estratégia de bac
 
 ## Origem das imagens no sistema
 
-Cada imagem registrada no AxHub é **gerada diretamente no equipamento** instalado no ponto de fiscalização — câmeras OCR/LPR, radares ou sensores com captura fotográfica. No momento da passagem, o dispositivo produz o arquivo de imagem e o transmite ao servidor, onde é armazenado com carimbo de data/hora, identificador único e vínculo ao registro de passagem correspondente.
+Cada imagem registrada no AxHub é **gerada diretamente no Equipamento instalado no ponto de fiscalização — câmeras OCR/LPR, radares ou sensores com captura fotográfica. No momento da passagem, o dispositivo produz o arquivo de imagem e o transmite ao servidor, onde é armazenado com carimbo de data/hora, identificador único e vínculo ao registro de passagem correspondente.
 
-Essas imagens têm **valor probatório e legal**: comprovam a infração, identificam o veículo e sustentam autuações, processos administrativos e auditorias. Por isso, a **imagem original nunca pode ser alterada** após recebida pelo sistema.
+Essas imagens têm **valor probatório e legal**: comprovam a Infração identificam o Veículo e sustentam autuações, processos administrativos e auditorias. Por isso, a **imagem original nunca pode ser alterada** após recebida pelo sistema.
 
 ---
 
@@ -18,7 +18,7 @@ Essas imagens têm **valor probatório e legal**: comprovam a infração, identi
 
 ### O processo de obliteração (cópia de trabalho)
 
-Situações operacionais exigem edições nas imagens — por exemplo, **obliteração de dados sensíveis** (rostos de pedestres, placas não relacionadas à infração) para conformidade com a LGPD, ou inserção de marcações para uso em autuações exportadas.
+Situações operacionais exigem edições nas imagens — por exemplo, **obliteração de dados sensíveis** (rostos de pedestres, placas não relacionadas à Infração para conformidade com a LGPD, ou inserção de marcações para uso em autuações exportadas.
 
 O sistema adota o seguinte fluxo para garantir a **integridade da imagem original**:
 
@@ -43,14 +43,14 @@ Imagem original gerada (somente leitura)
 
 | Item | Imagem Original | Imagem Editada (cópia) |
 |------|:--------------:|:---------------------:|
-| Gerada pelo equipamento | ✅ | — |
+| Gerada pelo Equipamento | ✅ | — |
 | Pode ser alterada | ❌ Nunca | ✅ Processo controlado |
 | Armazenamento imutável | ✅ | ✅ Versionada |
 | Uso em autuações | ✅ Referência legal | ✅ Exportação/impressão |
 | Rastreabilidade de edição | — | ✅ Usuário e data registrados |
 
 :::danger Imagem original protegida
-A imagem gerada pelo equipamento é gravada com política **WORM (Write Once, Read Many)**. Nenhum usuário — nem administradores — pode sobrescrevê-la ou excluí-la durante o período de retenção configurado.
+A imagem gerada pelo Equipamento é gravada com política **WORM (Write Once, Read Many)**. Nenhum Usuário — nem administradores — pode sobrescrevê-la ou excluí-la durante o período de retenção configurado.
 :::
 
 ---
@@ -105,26 +105,26 @@ O sistema utiliza o **Azure Blob Storage** como camada principal de armazenament
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
-│                    Azure Blob Storage                       │
-│                                                             │
-│  ┌──────────────────┐      ┌──────────────────────────┐    │
-│  │  Container       │      │  Container               │    │
-│  │  imagens-orig    │      │  imagens-editadas        │    │
-│  │  (WORM/Imutável) │      │  (Versionado)            │    │
-│  │                  │      │                          │    │
-│  │  ● Blob v1 ──────┼──────►  ● Blob v1 (original)   │    │
-│  │    (somente      │      │  ● Blob v2 (obliterado)  │    │
-│  │     leitura)     │      │  ● Blob v3 (marcado)     │    │
-│  └──────────────────┘      └──────────────────────────┘    │
-│                                                             │
-│  ┌──────────────────────────────────────────────────────┐  │
-│  │  Lifecycle Management                                │  │
-│  │  Hot (0-30d) → Cool (30-180d) → Archive (180d+)      │  │
-│  └──────────────────────────────────────────────────────┘  │
-│                                                             │
-│  ┌──────────────────────────────────────────────────────┐  │
-│  │  Snapshots automáticos (antes de operações críticas) │  │
-│  └──────────────────────────────────────────────────────┘  │
+│ Azure Blob Storage │
+│ │
+│ ┌──────────────────┐ ┌──────────────────────────┐ │
+│ │ Container │ │ Container │ │
+│ │ imagens-orig │ │ imagens-editadas │ │
+│ │ (WORM/Imutável) │ │ (Versionado) │ │
+│ │ │ │ │ │
+│ │ ● Blob v1 ──────┼──────► ● Blob v1 (original) │ │
+│ │ (somente │ │ ● Blob v2 (obliterado) │ │
+│ │ leitura) │ │ ● Blob v3 (marcado) │ │
+│ └──────────────────┘ └──────────────────────────┘ │
+│ │
+│ ┌──────────────────────────────────────────────────────┐ │
+│ │ Lifecycle Management │ │
+│ │ Hot (0-30d) → Cool (30-180d) → Archive (180d+) │ │
+│ └──────────────────────────────────────────────────────┘ │
+│ │
+│ ┌──────────────────────────────────────────────────────┐ │
+│ │ Snapshots automáticos (antes de operações críticas) │ │
+│ └──────────────────────────────────────────────────────┘ │
 └─────────────────────────────────────────────────────────────┘
 ```
 
@@ -167,5 +167,5 @@ Para detalhes técnicos da plataforma, consulte a documentação oficial:
 :::
 
 :::tip Conformidade
-Esta arquitetura atende aos requisitos da **LGPD** (Lei 13.709/2018) para proteção de dados pessoais capturados pelas câmeras, garantindo controle de acesso, rastreabilidade e destruição segura ao fim do prazo de retenção.
+está arquitetura atende aos requisitos da **LGPD** (Lei 13.709/2018) para proteção de dados pessoais capturados pelas câmeras, garantindo controle de acesso, rastreabilidade e destruição segura ao fim do prazo de retenção.
 :::

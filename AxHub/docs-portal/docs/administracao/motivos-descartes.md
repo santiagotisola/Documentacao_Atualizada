@@ -1,12 +1,12 @@
 ﻿---
 sidebar_position: 9
 title: Motivos de Descarte
-description: Cadastro de motivos para descarte de infrações
+description: Cadastro de motivos para descarte de Infrações
 ---
 
 # Motivos de Descarte
 
-Permite cadastrar os motivos que justificam o descarte de infrações durante a triagem.
+Permite cadastrar os motivos que justificam o descarte de Infrações durante a triagem.
 
 ## Como acessar
 
@@ -19,7 +19,7 @@ Permite cadastrar os motivos que justificam o descarte de infrações durante a 
 | **Ativo** | Status do registro |
 
 :::note Sem screenshot
-Esta tela ainda não possui screenshot cadastrada. Será adicionada em breve.
+está tela ainda não possui screenshot cadastrada. Será adicionada em breve.
 :::
 
 ## Termos Tecnicos

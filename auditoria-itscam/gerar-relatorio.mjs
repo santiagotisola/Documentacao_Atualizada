@@ -1,223 +1,202 @@
-/**
- * Gera relatório de comparação a partir dos dados já coletados em _ALL_DEVICES.json
- * Uso: node auditoria-itscam/gerar-relatorio.mjs
- */
-import { readFileSync, writeFileSync, existsSync } from 'fs';
-import { join } from 'path';
+﻿// Gerador de Relatório de Erros — ITScam 450
+// Executar: node auditoria-itscam/gerar-relatorio.mjs
+// Saída:    auditoria-itscam/RELATORIO-ERROS.md
+import { readFileSync, writeFileSync } from "fs";
+import { fileURLToPath } from "url";
+import { dirname, join } from "path";
 
-const OUTPUT_DIR = './auditoria-itscam/resultados';
-const ALL_DEVICES_FILE = join(OUTPUT_DIR, '_ALL_DEVICES.json');
+const __dir = dirname(fileURLToPath(import.meta.url));
+const src   = join(__dir, "validacao-config.json");
+const dest  = join(__dir, "RELATORIO-ERROS.md");
 
-function deepDiff(ref, target, path) {
-  const diffs = [];
-  if (ref === null || target === null) {
-    if (ref !== target) diffs.push({ path, ref, target, tipo: 'valor_diferente' });
-    return diffs;
-  }
-  if (typeof ref !== typeof target) {
-    diffs.push({ path, ref, target, tipo: 'tipo_diferente' });
-    return diffs;
-  }
-  if (Array.isArray(ref)) {
-    if (!Array.isArray(target)) {
-      diffs.push({ path, tipo: 'tipo_diferente', ref: 'array', target: typeof target });
-      return diffs;
-    }
-    if (ref.length !== target.length) {
-      diffs.push({ path, tipo: 'tamanho_array', ref: ref.length, target: target.length });
-    }
-    const maxLen = Math.min(ref.length, target.length);
-    for (let i = 0; i < maxLen; i++) {
-      diffs.push(...deepDiff(ref[i], target[i], `${path}[${i}]`));
-    }
-    return diffs;
-  }
-  if (typeof ref === 'object') {
-    const allKeys = new Set([...Object.keys(ref), ...Object.keys(target)]);
-    for (const key of allKeys) {
-      if (['_timestamp', 'active', 'uptime', 'temperature', 'cpuUsage', 'memUsage', 'diskUsage'].includes(key)) continue;
-      if (!(key in ref)) {
-        diffs.push({ path: `${path}.${key}`, tipo: 'campo_extra', target: target[key] });
-      } else if (!(key in target)) {
-        diffs.push({ path: `${path}.${key}`, tipo: 'campo_ausente', ref: ref[key] });
-      } else {
-        diffs.push(...deepDiff(ref[key], target[key], `${path}.${key}`));
-      }
-    }
-    return diffs;
-  }
-  if (ref !== target) {
-    diffs.push({ path, ref, target, tipo: 'valor_diferente' });
-  }
-  return diffs;
+const data = JSON.parse(readFileSync(src, "utf8"));
+const { resumo, grupos, offline } = data;
+const geradoEm = new Date(data.geradoEm).toLocaleString("pt-BR", { timeZone: "America/Sao_Paulo" });
+
+// Mapa de IP por nome (de analise-dados.json)
+let ipMap = {};
+try {
+  const ad = JSON.parse(readFileSync(join(__dir, "analise-dados.json"), "utf8"));
+  (ad.devices || ad.dispositivos || []).forEach(d => { if (d.ip) ipMap[d.nome] = d.ip; });
+} catch (_) {}
+
+const SEV_ICON  = { alto: "🔴", medio: "🟡", baixo: "🟢" };
+const SEV_LABEL = { alto: "Alta", medio: "Média", baixo: "Baixa" };
+
+const INSTRUCOES = {
+  SNMP_OFF: {
+    problema: "SNMP está habilitado, mas o padrão exige que esteja desabilitado.",
+    correcao: [
+      "Acesse a interface web do equipamento: `http://<IP-do-equipamento>`",
+      "Navegue até **Sistema > SNMP**",
+      "Desmarque a opção **Habilitar SNMP**",
+      "Clique em **Salvar**",
+    ],
+    obs: "⚠️ Não é possível corrigir via API REST — necessário acesso manual à UI web.",
+  },
+  NTP_SERVER: {
+    problema: "Servidor NTP configurado incorretamente (`200.160.0.8`). Deve ser `time.google.com`.",
+    correcao: [
+      "Acesse a interface web do equipamento: `http://<IP-do-equipamento>`",
+      "Navegue até **Equipamento > Data e Hora**",
+      "No campo **Servidor NTP**, substitua `200.160.0.8` por `time.google.com`",
+      "Clique em **Salvar**",
+    ],
+    obs: "⚠️ O endpoint REST `/api/equipment/dateAndTime` retorna HTTP 500 para este campo — necessário acesso manual à UI web.",
+  },
+};
+
+const FALLBACK_INSTRUCAO = (menu) => ({
+  problema: "Valor fora do padrão definido no script de configuração.",
+  correcao: [
+    `Acesse a interface web do equipamento: \`http://<IP-do-equipamento>\``,
+    `Navegue até **${menu}**`,
+    "Ajuste o valor conforme indicado na coluna 'Esperado'",
+    "Clique em **Salvar**",
+  ],
+});
+
+function fmtValor(v) {
+  if (Array.isArray(v)) return v.join(", ");
+  if (typeof v === "boolean") return v ? "Sim (true)" : "Não (false)";
+  return String(v);
 }
 
-function generateComparisonReport(results) {
-  const report = {
-    metadata: {
-      dataColeta: new Date().toISOString(),
-      totalEquipamentos: results.length,
-      equipamentosComErro: results.filter(r => r._error).length,
-      equipamentosOk: results.filter(r => !r._error).length,
-    },
-    porMenu: {},
-    resumoPorEquipamento: {},
-  };
+function row(...cols) { return `| ${cols.join(" | ")} |`; }
 
-  const referencia = results.find(r => r._device?.name?.includes('GOEC6O058') && r._device?.name?.includes('Faixa 1'));
-  if (!referencia || referencia._error) {
-    report.metadata.aviso = 'Equipamento referência (GOEC6O058 Faixa 1) não disponível';
-    return report;
-  }
+const L = [];
 
-  report.metadata.referencia = referencia._device.name;
+L.push("# 📋 Relatório de Erros — Frota ITScam 450");
+L.push("");
+L.push(`> **Gerado em:** ${geradoEm}  `);
+L.push(`> **Script padrão:** \`config-padrao/padrao-faixa-{1,2}.json\`  `);
+L.push(`> **Regras validadas:** ${data.totalRegras}`);
+L.push("");
+L.push("---");
+L.push("");
 
-  for (const [menuKey, menuData] of Object.entries(referencia.menus || {})) {
-    report.porMenu[menuKey] = { endpoints: {}, divergenciasCount: 0 };
+// ── Resumo executivo ──────────────────────────────────────────────────────────
+L.push("## 📊 Resumo Executivo");
+L.push("");
+L.push(row("Indicador", "Valor", "Detalhes"));
+L.push(row("---", "---", "---"));
+L.push(row("Total de equipamentos", resumo.total, "Faixas 1 e 2 de cada ponto"));
+L.push(row("✅ Conformes", `**${resumo.conformes}**`, `${resumo.percentConformes}% do total`));
+L.push(row("⚠️ Com erros", `**${resumo.alterados}**`, `${grupos.length} grupo(s) de problemas`));
+L.push(row("📡 Offline", `**${resumo.offline}**`, "Sem comunicação — verificar fisicamente"));
+L.push("");
+const blocos = Math.round(resumo.percentConformes / 5);
+const barra  = "█".repeat(blocos) + "░".repeat(20 - blocos);
+L.push(`**Conformidade:** \`[${barra}] ${resumo.percentConformes}%\``);
+L.push("");
+L.push("---");
+L.push("");
 
-    for (const [endpoint, epData] of Object.entries(menuData)) {
-      const refConfig = epData.data;
-      const comparisons = [];
+// ── Seção de Erros ────────────────────────────────────────────────────────────
+if (grupos.length === 0) {
+  L.push("## ✅ Nenhum erro encontrado");
+  L.push("");
+  L.push("Todos os equipamentos online estão em conformidade com o script padrão.");
+} else {
+  L.push("## ❌ Erros a Corrigir");
+  L.push("");
+  L.push(`> **${resumo.alterados} equipamento(s)** com divergências em **${grupos.length} grupo(s)**:`);
+  L.push("");
+  grupos.forEach((g, i) => {
+    const titles = g.alteracoes.map(a => a.titulo).join(" + ");
+    const devs   = g.dispositivos.map(d => d.nome).join(", ");
+    L.push(`- [Grupo ${i + 1}: ${titles}](#grupo-${i + 1}) — ${devs}`);
+  });
+  L.push("");
+  L.push("---");
+  L.push("");
 
-      for (const result of results) {
-        if (result._error || result === referencia) continue;
-        const deviceMenuData = result.menus?.[menuKey]?.[endpoint]?.data;
-        if (!deviceMenuData) continue;
-
-        const diffs = deepDiff(refConfig, deviceMenuData, '');
-        if (diffs.length > 0) {
-          comparisons.push({ device: result._device.name, diferencas: diffs });
-
-          // Acumular por equipamento
-          if (!report.resumoPorEquipamento[result._device.name]) {
-            report.resumoPorEquipamento[result._device.name] = { totalDivergencias: 0, menus: {} };
-          }
-          if (!report.resumoPorEquipamento[result._device.name].menus[menuKey]) {
-            report.resumoPorEquipamento[result._device.name].menus[menuKey] = 0;
-          }
-          report.resumoPorEquipamento[result._device.name].totalDivergencias += diffs.length;
-          report.resumoPorEquipamento[result._device.name].menus[menuKey] += diffs.length;
-        }
-      }
-
-      report.porMenu[menuKey].endpoints[endpoint] = {
-        nome: epData.nome,
-        referencia: referencia._device.name,
-        equipamentosComDiferenca: comparisons.length,
-        detalhes: comparisons
-      };
-      report.porMenu[menuKey].divergenciasCount += comparisons.length;
-    }
-  }
-
-  return report;
+  grupos.forEach((g, idx) => {
+    L.push(`### Grupo ${idx + 1}`);
+    L.push("");
+    g.alteracoes.forEach(alt => {
+      const sev  = SEV_ICON[alt.severidade] || "⚪";
+      const inst = INSTRUCOES[alt.id] || FALLBACK_INSTRUCAO(alt.menu);
+      L.push(`#### ${sev} ${alt.titulo}`);
+      L.push("");
+      L.push("| Campo | Valor |");
+      L.push("|---|---|");
+      L.push(`| **Severidade** | ${SEV_LABEL[alt.severidade] || alt.severidade} |`);
+      L.push(`| **Localização na UI** | ${alt.menu} |`);
+      L.push(`| **Valor atual** | \`${fmtValor(alt.valorAtual)}\` |`);
+      L.push(`| **Valor esperado** | \`${fmtValor(alt.valorEsperado)}\` |`);
+      L.push("");
+      L.push(`**Problema:** ${inst.problema}`);
+      L.push("");
+      L.push("**Como corrigir:**");
+      inst.correcao.forEach((step, i) => L.push(`${i + 1}. ${step}`));
+      if (inst.obs) { L.push(""); L.push(inst.obs); }
+      L.push("");
+    });
+    L.push(`**Equipamentos afetados (${g.dispositivos.length}):**`);
+    L.push("");
+    L.push(row("Equipamento", "Faixa", "Score", "IP / Acesso Web"));
+    L.push(row("---", "---", "---", "---"));
+    g.dispositivos.forEach(d => {
+      const ip   = ipMap[d.nome] || d.ip || "—";
+      const link = ip !== "—" ? `[\`${ip}\`](http://${ip})` : "—";
+      L.push(row(d.nome, `F${d.faixa}`, `${d.score}%`, link));
+    });
+    L.push("");
+    L.push("---");
+    L.push("");
+  });
 }
 
-function generateMarkdownSummary(report) {
-  let md = `# Relatório de Divergências - Auditoria ITScam 450\n\n`;
-  md += `**Data:** ${report.metadata.dataColeta}\n`;
-  md += `**Referência:** ${report.metadata.referencia}\n`;
-  md += `**Total equipamentos:** ${report.metadata.totalEquipamentos}\n`;
-  md += `**Coletados com sucesso:** ${report.metadata.equipamentosOk}\n`;
-  md += `**Falhas de conexão:** ${report.metadata.equipamentosComErro}\n\n`;
-
-  md += `## Resumo por Menu\n\n`;
-  md += `| Menu | Divergências | Endpoints com diferença |\n`;
-  md += `|------|-------------|------------------------|\n`;
-
-  const menusSorted = Object.entries(report.porMenu).sort((a, b) => b[1].divergenciasCount - a[1].divergenciasCount);
-  for (const [menu, data] of menusSorted) {
-    const endpointsComDif = Object.values(data.endpoints).filter(e => e.equipamentosComDiferenca > 0).length;
-    md += `| ${menu} | ${data.divergenciasCount} | ${endpointsComDif} |\n`;
-  }
-
-  md += `\n## Top 20 Equipamentos com Mais Divergências\n\n`;
-  md += `| Equipamento | Total Divergências | Menus Afetados |\n`;
-  md += `|-------------|-------------------|----------------|\n`;
-
-  const eqSorted = Object.entries(report.resumoPorEquipamento)
-    .sort((a, b) => b[1].totalDivergencias - a[1].totalDivergencias)
-    .slice(0, 20);
-
-  for (const [name, data] of eqSorted) {
-    const menusAfetados = Object.keys(data.menus).length;
-    md += `| ${name} | ${data.totalDivergencias} | ${menusAfetados} |\n`;
-  }
-
-  md += `\n## Detalhamento por Menu\n\n`;
-
-  for (const [menu, data] of menusSorted) {
-    if (data.divergenciasCount === 0) continue;
-    md += `### ${menu}\n\n`;
-
-    for (const [ep, epData] of Object.entries(data.endpoints)) {
-      if (epData.equipamentosComDiferenca === 0) continue;
-      md += `#### ${epData.nome} (\`${ep}\`)\n`;
-      md += `Equipamentos divergentes: **${epData.equipamentosComDiferenca}**\n\n`;
-
-      // Agrupar divergências por campo (path)
-      const fieldCounts = {};
-      for (const comp of epData.detalhes) {
-        for (const diff of comp.diferencas) {
-          if (!fieldCounts[diff.path]) {
-            fieldCounts[diff.path] = { count: 0, tipo: diff.tipo, refValue: diff.ref, examples: [] };
-          }
-          fieldCounts[diff.path].count++;
-          if (fieldCounts[diff.path].examples.length < 3) {
-            fieldCounts[diff.path].examples.push({ device: comp.device, value: diff.target });
-          }
-        }
-      }
-
-      const sortedFields = Object.entries(fieldCounts).sort((a, b) => b[1].count - a[1].count);
-      if (sortedFields.length > 0) {
-        md += `| Campo | Tipo | Equip. Afetados | Valor Referência | Exemplos |\n`;
-        md += `|-------|------|-----------------|------------------|----------|\n`;
-        for (const [field, info] of sortedFields.slice(0, 15)) {
-          const examples = info.examples.map(e => `${e.device}: \`${JSON.stringify(e.value).substring(0, 40)}\``).join(', ');
-          md += `| \`${field}\` | ${info.tipo} | ${info.count} | \`${JSON.stringify(info.refValue).substring(0, 40)}\` | ${examples} |\n`;
-        }
-        if (sortedFields.length > 15) {
-          md += `| ... | ... | ... | ... | +${sortedFields.length - 15} campos |\n`;
-        }
-        md += `\n`;
-      }
-    }
-  }
-
-  // Lista de equipamentos com falha
-  md += `## Equipamentos com Falha de Conexão\n\n`;
-  const failures = JSON.parse(readFileSync(ALL_DEVICES_FILE, 'utf8')).filter(r => r._error);
-  for (const f of failures) {
-    md += `- **${f._device.name}** — Erro: ${f._error}\n`;
-  }
-
-  return md;
+// ── Seção Offline ─────────────────────────────────────────────────────────────
+L.push("## 📡 Equipamentos Offline");
+L.push("");
+if (offline.length === 0) {
+  L.push("> Nenhum equipamento offline no momento.");
+} else {
+  L.push(`> **${offline.length} equipamento(s)** sem comunicação. Não é possível validar ou corrigir remotamente.`);
+  L.push("");
+  L.push(row("Equipamento", "Endereço IP", "UUID (Varco Cloud)", "Ação recomendada"));
+  L.push(row("---", "---", "---", "---"));
+  offline.forEach(d => {
+    L.push(row(d.nome, d.ip || "—", `\`${d.uuid}\``, "🔧 Verificar fisicamente no local"));
+  });
+  L.push("");
+  L.push("### Passos para verificação física");
+  L.push("");
+  L.push("1. Deslocar equipe técnica ao ponto de instalação");
+  L.push("2. Verificar alimentação elétrica do equipamento");
+  L.push("3. Verificar cabo de rede / conexão 4G do roteador");
+  L.push("4. Verificar LED de status do equipamento:");
+  L.push("   - 🟢 Verde piscando = operacional");
+  L.push("   - 🔴 Vermelho = falha de hardware");
+  L.push("   - ⚫ Apagado = sem energia");
+  L.push("5. Reinicializar o equipamento se necessário");
+  L.push("6. Após restaurar a comunicação, re-executar a validação");
 }
 
-// ═══════════════════════════════════════════════════════════════
-// MAIN
-// ═══════════════════════════════════════════════════════════════
+L.push("");
+L.push("---");
+L.push("");
+L.push("## 🔄 Como re-executar este relatório");
+L.push("");
+L.push("```bash");
+L.push("# 1. Recoleta dados da frota (≈90s)");
+L.push("node auditoria-itscam/recoletar-dados.mjs");
+L.push("");
+L.push("# 2. Valida configurações e atualiza validacao-config.json");
+L.push("node auditoria-itscam/validar-config.mjs");
+L.push("");
+L.push("# 3. Gera este relatório");
+L.push("node auditoria-itscam/gerar-relatorio.mjs");
+L.push("```");
+L.push("");
+L.push("---");
+L.push("");
+L.push("*Relatório gerado automaticamente pelo sistema de auditoria ITScam — Axion Tecnologia*");
 
-console.log('📊 Carregando dados coletados...');
-const results = JSON.parse(readFileSync(ALL_DEVICES_FILE, 'utf8'));
-console.log(`   ${results.length} equipamentos carregados (${results.filter(r => !r._error).length} OK, ${results.filter(r => r._error).length} falhas)`);
-
-console.log('\n🔍 Gerando relatório de comparação...');
-const report = generateComparisonReport(results);
-
-writeFileSync(join(OUTPUT_DIR, '_RELATORIO_COMPARACAO.json'), JSON.stringify(report, null, 2));
-console.log('   ✅ _RELATORIO_COMPARACAO.json salvo');
-
-console.log('\n📝 Gerando relatório Markdown...');
-const markdown = generateMarkdownSummary(report);
-writeFileSync(join(OUTPUT_DIR, '_RELATORIO_DIVERGENCIAS.md'), markdown);
-console.log('   ✅ _RELATORIO_DIVERGENCIAS.md salvo');
-
-console.log('\n═══════════════════════════════════════════════════');
-console.log('  RELATÓRIO GERADO COM SUCESSO');
-console.log('═══════════════════════════════════════════════════');
-console.log(`  Total menus analisados: ${Object.keys(report.porMenu).length}`);
-console.log(`  Menus com divergências: ${Object.values(report.porMenu).filter(m => m.divergenciasCount > 0).length}`);
-console.log(`  Equipamentos com divergências: ${Object.keys(report.resumoPorEquipamento).length}`);
-console.log('═══════════════════════════════════════════════════\n');
+const md = L.join("\n");
+writeFileSync(dest, md, "utf8");
+console.log(`✅ Relatório salvo: auditoria-itscam/RELATORIO-ERROS.md`);
+console.log(`   Tamanho: ${(md.length / 1024).toFixed(1)}KB`);
+console.log(`   Erros: ${resumo.alterados} equipamento(s) | Offline: ${resumo.offline}`);

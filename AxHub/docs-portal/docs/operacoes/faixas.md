@@ -6,7 +6,7 @@ description: Configuração de faixas de fiscalização por operação
 
 # Faixas
 
-Permite configurar as faixas de monitoramento de cada operação. Cada faixa representa uma pista de rolamento monitorada por um equipamento de fiscalização.
+Permite configurar as faixas de monitoramento de cada operação. Cada faixa representa uma pista de rolamento monitorada por um Equipamento de fiscalização.
 
 ![Lista de Faixas](../img/Operações%20-%20Faixas.png)
 
@@ -22,7 +22,7 @@ Permite configurar as faixas de monitoramento de cada operação. Cada faixa rep
 |-------|-----------|
 | **Código** | Código identificador da faixa (ex: GYNTM015-1) |
 | **Operação** | Operação vinculada |
-| **Número da Faixa** | Número sequencial da faixa no equipamento |
+| **Número da Faixa** | Número sequencial da faixa no Equipamento |
 | **Sentido** | Sentido de tráfego monitorado (Norte/Sul, Leste/Oeste, etc.) |
 | **Logradouro** | Endereço/via onde a faixa está localizada |
 | **Bairro** | Bairro da localização |
@@ -32,22 +32,22 @@ Permite configurar as faixas de monitoramento de cada operação. Cada faixa rep
 
 ### Código do Município (IBGE)
 
-O campo **Código do Município** é essencial para a exportação de infrações. Ele deve corresponder ao código IBGE oficial do município onde a faixa opera.
+O campo **Código do Município** é essencial para a exportação de Infrações Ele deve corresponder ao código IBGE oficial do município onde a faixa opera.
 
 ![Correção do Código do Município na Faixa](../img/operacao%20-%20faixa%20-%20codigo%20do%20municipio%20%20correção%20na%20faixa%203.png)
 
 :::warning Importante
-O código do município na faixa **deve ser o mesmo** da UF da operação. Se a operação é em Goiânia/GO, todas as faixas devem ter o código IBGE de um município de GO. Um código de município divergente (ex: código de MA em operação de GO) gera **erro na exportação** de infrações.
+O código do município na faixa **deve ser o mesmo** da UF da operação. Se a operação é em Goiânia/GO, todas as faixas devem ter o código IBGE de um município de GO. Um código de município divergente (ex: código de MA em operação de GO) gera **erro na exportação** de Infrações
 :::
 
 ### Onde o Código do Município é utilizado
 
 | Módulo | Utilização |
 |--------|-----------|
-| **Exportação de Infrações** | Validação obrigatória: UF da faixa deve corresponder ao município |
-| **Relatórios** | Agrupamento e filtros por localidade |
+| **Exportação de Infrações | Validação obrigatória: UF da faixa deve corresponder ao município |
+| Relatórios | Agrupamento e filtros por localidade |
 | **Medições** | Cálculos de desempenho por equipamento/local |
-| **Triagem** | Dados de contexto da infração |
+| **Triagem** | Dados de contexto da Infração |
 
 ---
 

@@ -8,7 +8,7 @@ description: Cadastro e gerenciamento de postos de pesagem
 
 ![Tela Iniciar Pesagem](../img/inicar%20pesagem.png)
 
-Os Postos de Pesagem representam os locais físicos onde os veículos são pesados. Cada posto é vinculado a uma localidade e pode ter múltiplos equipamentos de pesagem.
+Os Postos de Pesagem representam os locais físicos onde os Veículos são pesados. Cada posto é vinculado a uma localidade e pode ter múltiplos Equipamentos de pesagem.
 
 ## Como acessar
 
@@ -57,5 +57,5 @@ A tela exibe todos os postos cadastrados no sistema.
 7. Clique em **Salvar**
 
 :::tip Dica
-Mantenha os nomes dos postos padronizados para facilitar a identificação nos relatórios.
+Mantenha os nomes dos postos padronizados para facilitar a identificação nos Relatórios
 :::

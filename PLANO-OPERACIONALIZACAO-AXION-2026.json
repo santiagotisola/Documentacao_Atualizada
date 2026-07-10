@@ -1,0 +1,283 @@
+{
+  "meta": {
+    "documento": "PLANO-OPERACIONALIZACAO-AXION-OPERATIONS-CENTER",
+    "versao": "1.0",
+    "gerado_em": "2026-07-04",
+    "baseado_em_schema": "AXION-ECOSYSTEM v2026.1",
+    "sistema_atual": "AxionIA Platform v4.0",
+    "percentual_schema_ja_implementado": 62,
+    "decisao_stack": "Manter Node.js (não migrar para .NET 8 agora)"
+  },
+
+  "alerta_critico": {
+    "discrepancia_stack": "Schema propõe .NET 8 + React. Backend atual é Node.js + Express.",
+    "decisao": "Tratar schema como modelo conceitual. Stack Node.js mantida.",
+    "revisao_em": "12 meses — avaliar .NET 8 híbrido"
+  },
+
+  "viabilidade_por_componente": {
+
+    "centers": {
+      "operationsCenter":  { "existe": true,  "maturidade_pct": 80, "esforco": "minimo",  "disruption": "zero",  "prioridade": "P1", "rota_atual": "/operations-hub" },
+      "helpDeskCenter":    { "existe": true,  "maturidade_pct": 90, "esforco": "minimo",  "disruption": "zero",  "prioridade": "P1", "rota_atual": "/helpdesk" },
+      "qualityCenter":     { "existe": true,  "maturidade_pct": 85, "esforco": "minimo",  "disruption": "zero",  "prioridade": "P1", "rota_atual": "/central-sites" },
+      "approvalCenter":    { "existe": true,  "maturidade_pct": 75, "esforco": "minimo",  "disruption": "zero",  "prioridade": "P1", "rotas_atuais": ["/confianca-revisao","/specs","/roadmap"] },
+      "integrationCenter": { "existe": true,  "maturidade_pct": 90, "esforco": "minimo",  "disruption": "zero",  "prioridade": "P1", "obs": "9 integrações ativas, sem view consolidada" },
+      "knowledgeCenter":   { "existe": true,  "maturidade_pct": 70, "esforco": "baixo",   "disruption": "baixa", "prioridade": "P1", "rotas_atuais": ["/kb","/treinamento","/fontes"] },
+      "missionCenter":     { "existe": false, "maturidade_pct": 30, "esforco": "medio",   "disruption": "baixa", "prioridade": "P2", "obs": "VARCO tem missões informais — formalizar" },
+      "learningCenter":    { "existe": false, "maturidade_pct": 40, "esforco": "alto",    "disruption": "baixa", "prioridade": "P3", "obs": "Logs existem mas sem ML real" },
+      "presentationCenter":{ "existe": false, "maturidade_pct": 35, "esforco": "medio",   "disruption": "baixa", "prioridade": "P2", "obs": "MD/HTML existe, PDF/DOCX/PPTX não" }
+    },
+
+    "engines": {
+      "missionEngine":     { "existe": false, "viabilidade": "ALTA",   "esforco_semanas": 3, "disruption": "baixa" },
+      "knowledgeEngine":   { "existe": false, "viabilidade": "ALTA",   "esforco_semanas": 4, "disruption": "baixa", "objetos_existentes": 12, "objetos_novos": 8 },
+      "learningEngine":    { "existe": false, "viabilidade": "MEDIA",  "esforco_semanas": 6, "disruption": "baixa", "obs": "patternRecognition/recommendations com GPT-4o já viável. ML real requer dados" },
+      "presentationEngine":{ "existe": false, "viabilidade": "ALTA",   "esforco_semanas": 3, "disruption": "baixa", "obs": "PDF/DOCX/PPTX viáveis. Video inviável no curto prazo" },
+      "approvalEngine":    { "existe": true,  "viabilidade": "TOTAL",  "esforco_semanas": 0, "disruption": "zero",  "obs": "Draft→Review→Approved→Published já implementado" }
+    },
+
+    "agents": {
+      "varcoAgent": {
+        "existe_parcial": true,
+        "maturidade_pct": 60,
+        "viabilidade": "ALTA",
+        "gap_principal": "Conexão remota com URL/login/password por site",
+        "capacidades_existentes": ["Inspect","Compare","Validate","Monitor","CaptureEvidence","CaptureScreenshots"],
+        "capacidades_novas": ["Navigate remoto","CaptureHtml","CaptureJson","GenerateKnowledge","Synchronize"],
+        "risco": "Credenciais no banco — obrigatório criptografia AES-256/bcrypt",
+        "esforco_semanas": 2
+      }
+    },
+
+    "infraestrutura": {
+      "knowledgeGraph": { "existe": false, "viabilidade": "MEDIA", "esforco_semanas": 4, "disruption": "media", "solucao": "MongoDB $graphLookup (não requer Neo4j)" },
+      "eventBus":       { "existe": false, "viabilidade": "MEDIA", "esforco_semanas": 2, "disruption": "media", "solucao": "Node.js EventEmitter nativo" },
+      "dotnet8_backend":{ "existe": false, "viabilidade": "BAIXA", "disruption": "CRITICA", "decisao": "CANCELAR — não migrar backend agora" }
+    }
+  },
+
+  "quick_wins_semana_1": [
+    { "dia": 1, "acao": "Criar client.model.js no MongoDB", "impacto": "Base do Knowledge Engine", "arquivo": "axion-ia-panel/api/src/models/client.model.js" },
+    { "dia": 1, "acao": "Criar mission.model.js no MongoDB", "impacto": "Base do Mission Engine", "arquivo": "axion-ia-panel/api/src/models/mission.model.js" },
+    { "dia": 2, "acao": "Criar endpoints POST/GET /missions", "impacto": "API de Missões operacional", "arquivo": "axion-ia-panel/api/src/routes/mission.routes.js" },
+    { "dia": 2, "acao": "Criar página /mission-center no painel", "impacto": "UI de Missões", "arquivo": "axion-ia-panel/src/pages/MissionCenter/index.jsx" },
+    { "dia": 3, "acao": "Adicionar varco.url/login/password ao client model", "impacto": "Habilita VARCO remoto", "seguranca": "Criptografia obrigatória" },
+    { "dia": 3, "acao": "Implementar Navigate + CaptureScreenshots remoto", "impacto": "VARCO pode auditar sites reais", "arquivo": "axion-ia-panel/api/src/agent/varco-remote.js" },
+    { "dia": 4, "acao": "Criar /asset-catalog no painel", "impacto": "Catálogo unificado de assets", "arquivo": "axion-ia-panel/src/pages/AssetCatalog/index.jsx" },
+    { "dia": 5, "acao": "Criar /integration-center no painel", "impacto": "Status consolidado das 9 integrações", "arquivo": "axion-ia-panel/src/pages/IntegrationCenter/index.jsx" }
+  ],
+
+  "modelos_mongodb_novos": {
+
+    "client": {
+      "arquivo": "axion-ia-panel/api/src/models/client.model.js",
+      "campos": {
+        "nome": "String required",
+        "codigo": "String unique (ex: ibametro, ipemce)",
+        "produto": "Enum[axhub, axton, axcross, multi]",
+        "versao": "String",
+        "url": "String",
+        "estado": "String",
+        "contatos": "[{ nome, email, telefone, cargo }]",
+        "credenciais": "{ login, senha_hash } — CRIPTOGRAFADO",
+        "varco": "{ url, login, senha_hash } — CRIPTOGRAFADO",
+        "status": "Enum[ativo, inativo, homologacao]",
+        "siteId": "String — referência ao sitesData.js"
+      }
+    },
+
+    "mission": {
+      "arquivo": "axion-ia-panel/api/src/models/mission.model.js",
+      "campos": {
+        "tipo": "Enum[Audit, Deployment, Migration, Training, Support, Validation, Comparison, Monitoring, Homologation, Investigation]",
+        "titulo": "String required",
+        "descricao": "String",
+        "clienteId": "ObjectId ref Client",
+        "produto": "Enum[axhub, axton, axcross]",
+        "responsavel": "String",
+        "inicio": "Date",
+        "fim": "Date",
+        "status": "Enum[planejada, em_execucao, concluida, cancelada]",
+        "evidencias": "[{ tipo, url, capturedAt, descricao }]",
+        "resultado": "{ sucesso: Boolean, observacoes: String, documentoGerado: ObjectId }",
+        "linkedTicketId": "Number (Jitbit)",
+        "linkedVarcoJobId": "ObjectId"
+      }
+    },
+
+    "knowledge_object": {
+      "arquivo": "axion-ia-panel/api/src/models/knowledge-object.model.js",
+      "campos": {
+        "tipo": "Enum[Manual, Video, Presentation, FAQ, KnowledgeArticle, Workflow, Checklist, Evidence, ReleaseNote, Training]",
+        "titulo": "String required",
+        "conteudo": "String",
+        "produto": "Enum[axhub, axton, axcross, multi]",
+        "clienteId": "ObjectId ref Client",
+        "missionId": "ObjectId ref Mission",
+        "relacionamentos": "[{ tipo: String, referenciaId: ObjectId }]",
+        "tags": "[String]",
+        "versao": "String",
+        "status": "Enum[rascunho, revisao, aprovado, publicado]"
+      }
+    },
+
+    "issue": {
+      "arquivo": "axion-ia-panel/api/src/models/issue.model.js",
+      "campos": {
+        "titulo": "String required",
+        "descricao": "String",
+        "produto": "Enum[axhub, axton, axcross]",
+        "clienteId": "ObjectId ref Client",
+        "severity": "Enum[critico, alto, medio, baixo]",
+        "status": "Enum[aberto, em_analise, resolvido, fechado]",
+        "linkedTicketId": "Number (Jitbit)",
+        "linkedKnowledgeIds": "[ObjectId ref KnowledgeObject]",
+        "evidencias": "[{ url, tipo, capturedAt }]",
+        "resolucao": "String"
+      }
+    }
+  },
+
+  "novos_endpoints_api": [
+    { "metodo": "POST", "rota": "/missions", "descricao": "Criar missão" },
+    { "metodo": "GET",  "rota": "/missions", "descricao": "Listar missões" },
+    { "metodo": "GET",  "rota": "/missions/:id", "descricao": "Detalhe missão" },
+    { "metodo": "PATCH","rota": "/missions/:id/status", "descricao": "Atualizar status" },
+    { "metodo": "POST", "rota": "/missions/:id/evidencias", "descricao": "Adicionar evidência" },
+    { "metodo": "POST", "rota": "/clients", "descricao": "Criar cliente" },
+    { "metodo": "GET",  "rota": "/clients", "descricao": "Listar clientes" },
+    { "metodo": "GET",  "rota": "/clients/:id", "descricao": "Detalhe cliente" },
+    { "metodo": "POST", "rota": "/knowledge-objects", "descricao": "Criar objeto de conhecimento" },
+    { "metodo": "GET",  "rota": "/knowledge-objects", "descricao": "Listar objetos" },
+    { "metodo": "POST", "rota": "/issues", "descricao": "Criar issue" },
+    { "metodo": "GET",  "rota": "/issues", "descricao": "Listar issues" },
+    { "metodo": "POST", "rota": "/presentation/gerar-pdf", "descricao": "Gerar PDF" },
+    { "metodo": "POST", "rota": "/presentation/gerar-docx", "descricao": "Gerar Word" },
+    { "metodo": "POST", "rota": "/presentation/gerar-pptx", "descricao": "Gerar PowerPoint" },
+    { "metodo": "POST", "rota": "/varco/remote/navigate", "descricao": "VARCO navega em site remoto" },
+    { "metodo": "POST", "rota": "/varco/remote/capture", "descricao": "VARCO captura screenshot remoto" },
+    { "metodo": "GET",  "rota": "/asset-catalog", "descricao": "Catálogo de assets" },
+    { "metodo": "GET",  "rota": "/knowledge-graph", "descricao": "Grafo de relacionamentos" }
+  ],
+
+  "novas_paginas_painel": [
+    { "rota": "/mission-center", "componente": "MissionCenter", "descricao": "Gestão de missões operacionais" },
+    { "rota": "/asset-catalog", "componente": "AssetCatalog", "descricao": "Catálogo de todos os assets do ecossistema" },
+    { "rota": "/integration-center", "componente": "IntegrationCenter", "descricao": "Status consolidado das 9 integrações" },
+    { "rota": "/knowledge-graph", "componente": "KnowledgeGraph", "descricao": "Grafo visual de relacionamentos" },
+    { "rota": "/presentation-center", "componente": "PresentationCenter", "descricao": "Geração de PDF/DOCX/PPTX" },
+    { "rota": "/learning-center", "componente": "LearningCenter", "descricao": "Patterns e recomendações de IA" }
+  ],
+
+  "dependencias_npm_novas": [
+    { "pacote": "pptxgenjs", "uso": "Geração de PowerPoint", "fase": 4 },
+    { "pacote": "docx", "uso": "Geração de Word/DOCX", "fase": 4 },
+    { "pacote": "puppeteer", "uso": "PDF + Screenshot remoto VARCO", "fase": 2, "obs": "Pode já estar instalado" }
+  ],
+
+  "event_bus_design": {
+    "implementacao": "Node.js EventEmitter nativo — zero dependências externas",
+    "arquivo": "axion-ia-panel/api/src/eventBus.js",
+    "publishers": {
+      "Validator": "bus.emit('cuti:test-completed', data)",
+      "Comparator": "bus.emit('comparator:comparison-done', data)",
+      "Mission": "bus.emit('mission:completed', data)",
+      "HelpDesk": "bus.emit('helpdesk:ticket-resolved', data)",
+      "OCR": "bus.emit('ocr:triagem-completed', data)",
+      "Varco": "bus.emit('varco:evidence-captured', data)"
+    },
+    "subscribers": {
+      "Knowledge": "bus.on('*', async (data) => knowledgeService.createFromEvent(data))",
+      "Presentation": "bus.on('mission:completed', generateReport)",
+      "Learning": "bus.on('helpdesk:ticket-resolved', recordPattern)",
+      "Dashboard": "bus.on('*', updateStats)",
+      "AI": "bus.on('helpdesk:ticket-resolved', updateKBFromResolution)"
+    }
+  },
+
+  "roadmap_fases": [
+    {
+      "fase": 1,
+      "nome": "Formalizar Centers + Modelos Base",
+      "semanas": "1-2",
+      "entregas": ["Labels dos Centers no painel", "client.model.js", "mission.model.js", "knowledge-object.model.js", "issue.model.js"],
+      "disruption": "Zero",
+      "valor_entregue": "Nomenclatura alinhada ao schema, modelos base prontos"
+    },
+    {
+      "fase": 2,
+      "nome": "Mission Engine + VARCO Remoto",
+      "semanas": "3-5",
+      "entregas": ["/mission-center UI", "API /missions", "VARCO Navigate remoto", "CaptureScreenshots/Html/Json remotos"],
+      "disruption": "Baixa",
+      "valor_entregue": "VARCO audita sites reais automaticamente. Missões rastreadas."
+    },
+    {
+      "fase": 3,
+      "nome": "Knowledge Engine + Asset Catalog",
+      "semanas": "6-9",
+      "entregas": ["/asset-catalog UI", "API /knowledge-objects", "API /clients", "API /issues", "Migração sitesData.js → MongoDB"],
+      "disruption": "Média — sitesData.js deprecated",
+      "valor_entregue": "Single Source of Truth. 20 objetos de conhecimento estruturados."
+    },
+    {
+      "fase": 4,
+      "nome": "Presentation Engine",
+      "semanas": "10-12",
+      "entregas": ["PDF via Puppeteer", "DOCX via docx-npm", "PPTX via pptxgenjs", "/presentation-center UI"],
+      "disruption": "Baixa",
+      "valor_entregue": "Geração automática de relatórios em qualquer formato"
+    },
+    {
+      "fase": 5,
+      "nome": "Event Bus Interno",
+      "semanas": "13-14",
+      "entregas": ["eventBus.js implementado", "Publishers em todos os engines", "Subscribers em Knowledge/Learning/Dashboard"],
+      "disruption": "Média — refatoração dos controllers",
+      "valor_entregue": "Desacoplamento. Ações propagam conhecimento automaticamente."
+    },
+    {
+      "fase": 6,
+      "nome": "Knowledge Graph",
+      "semanas": "15-18",
+      "entregas": ["/knowledge-graph UI (React Flow)", "MongoDB $graphLookup queries", "Relacionamentos Client→Module→Page→API→Equipment"],
+      "disruption": "Baixa",
+      "valor_entregue": "Visibilidade completa de dependências entre entidades"
+    },
+    {
+      "fase": 7,
+      "nome": "Learning Engine + AI Orchestration",
+      "semanas": "19+",
+      "entregas": ["Pattern Recognition com GPT-4o", "Recommendations Engine", "/learning-center UI", "AI Orchestration melhorada"],
+      "disruption": "Baixa",
+      "valor_entregue": "Sistema aprende com cada operação e recomenda próximas ações"
+    }
+  ],
+
+  "componentes_cancelados": [
+    { "componente": ".NET 8 backend migration", "motivo": "Disruption crítica, sem ROI claro", "revisao": "12 meses" },
+    { "componente": "Video generation engine", "motivo": "Complexidade extrema, baixo ROI imediato", "revisao": "Fase 8 futura" },
+    { "componente": "ML real (scikit-learn/Prophet)", "motivo": "Insuficiência de dados históricos", "revisao": "Após 6 meses de coleta" }
+  ],
+
+  "principios_operacionalidade": {
+    "zero_downtime": "Todas as fases adicionam, não removem. Backward compatible.",
+    "feature_flags": "Cada center/engine tem enabled=true/false no config",
+    "rollback": "Novos MongoDB collections não afetam collections existentes",
+    "seguranca": "Credenciais sempre criptografadas (bcrypt/AES-256), nunca em texto plano",
+    "incrementalidade": "62% já existe — construir sobre o que funciona, não reescrever"
+  },
+
+  "resumo_executivo": {
+    "schema_ja_implementado_pct": 62,
+    "centers_maduros": "6 de 9 (70%+ maturidade)",
+    "engines_completos": "1 de 5 (Approval Engine 100%)",
+    "maior_quick_win": "Client Model + Mission Engine (1-2 semanas, alto impacto)",
+    "principal_risco": "VARCO com credenciais — criptografia obrigatória",
+    "esforco_para_80_pct": "~3 meses",
+    "esforco_para_100_pct": "~6-8 meses (excluindo .NET 8 e Video)",
+    "componentes_cancelados": 3,
+    "proxima_acao": "Criar client.model.js e mission.model.js — Dia 1"
+  }
+}

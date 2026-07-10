@@ -1,12 +1,12 @@
 ---
 sidebar_position: 5
 title: Logs de Acesso
-description: Registro de acessos e ações dos usuários
+description: Registro de acessos e ações dos Usuários
 ---
 
 # Logs de Acesso
 
-Exibe o histórico completo de acessos ao sistema com detalhes de data, hora, usuário e ações realizadas. Utilizado para auditoria de segurança, investigação de incidentes e comprovação de conformidade.
+Exibe o histórico completo de acessos ao sistema com detalhes de data, hora, Usuário e ações realizadas. Utilizado para auditoria de segurança, investigação de incidentes e comprovação de conformidade.
 
 ![Logs de Acesso](../img/Controle%20de%20acessos%20-%20logs%20de%20acesso.png)
 
@@ -19,9 +19,9 @@ Exibe o histórico completo de acessos ao sistema com detalhes de data, hora, us
 | Filtro | Descrição |
 |--------|-----------|
 | **Período** | Faixa de datas e horas |
-| **Usuário** | Filtrar por usuário específico |
+| Usuário | Filtrar por Usuário específico |
 | **IP** | Filtrar por endereço de origem |
-| **Ação** | Tipo de operação (login, alteração, exclusão) |
+| **Ação** | Tipo de operação Login alteração, exclusão) |
 | **Módulo** | Seção do sistema acessada |
 
 ## Campos exibidos
@@ -29,32 +29,32 @@ Exibe o histórico completo de acessos ao sistema com detalhes de data, hora, us
 | Coluna | Descrição |
 |--------|-----------|
 | **Data/Hora** | Momento do acesso |
-| **Usuário** | Quem realizou o acesso |
+| Usuário | Quem realizou o acesso |
 | **IP** | Endereço IP de origem |
-| **Ação** | Tipo de operação (login, logout, criação, edição, exclusão) |
+| **Ação** | Tipo de operação Login Logout criação, edição, exclusão) |
 | **Módulo** | Seção do sistema acessada |
 | **Registro** | ID do registro afetado (quando aplicável) |
-| **Status** | Sucesso ou Falha (ex: tentativa de login inválido) |
+| **Status** | Sucesso ou Falha (ex: tentativa de Login inválido) |
 
 ## Tipos de Ações Registradas
 
 | Ação | Descrição |
 |------|-----------|
-| **Login** | Autenticação bem-sucedida |
-| **Login Falhou** | Tentativa de acesso com credenciais inválidas |
-| **Logout** | Encerramento de sessão |
+| Login | Autenticação bem-sucedida |
+| Login Falhou** | Tentativa de acesso com credenciais inválidas |
+| Logout | Encerramento de sessão |
 | **Criação** | Novo registro inserido |
 | **Edição** | Registro alterado |
 | **Exclusão** | Registro removido |
-| **Exportação** | Dados exportados pelo usuário |
+| **Exportação** | Dados exportados pelo Usuário |
 | **Aprovação** | Fluxo de aprovação executado |
 
 ## Exportação
 
-Exportável em **Excel** para uso em auditorias externas e relatórios de conformidade.
+Exportável em **Excel** para uso em auditorias externas e Relatórios de conformidade.
 
 :::tip Dica
-Monitore tentativas de **Login Falhou** repetidas do mesmo IP — pode indicar tentativa de acesso não autorizado. Use em conjunto com [Acessos por IP](./acessos-por-ip) para bloquear IPs suspeitos.
+Monitore tentativas de Login Falhou** repetidas do mesmo IP — pode indicar tentativa de acesso não autorizado. Use em conjunto com [Acessos por IP](./acessos-por-ip) para bloquear IPs suspeitos.
 :::
 
 ---
@@ -65,4 +65,4 @@ Monitore tentativas de **Login Falhou** repetidas do mesmo IP — pode indicar t
 |------|--------|-----------|
 | Relacionado | [Usuários](./usuarios) | Usuário que gerou o log |
 | Relacionado | [Acessos por IP](./acessos-por-ip) | Controle por endereço IP |
-| Relacionado | [Perfis de Acesso](./perfis-acesso) | Perfil do usuário no log |
+| Relacionado | [Perfis de Acesso](./perfis-acesso) | Perfil do Usuário no log |

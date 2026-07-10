@@ -20,7 +20,7 @@ Registra todas as autenticações realizadas no sistema, incluindo acessos bem-s
 
 | Coluna | Descrição |
 |--------|-----------|
-| **Usuário** | Login do usuário |
+| Usuário | Login do Usuário |
 | **Data/Hora** | Momento do acesso |
 | **IP** | Endereço IP de origem |
 | **Resultado** | Sucesso ou Falha |

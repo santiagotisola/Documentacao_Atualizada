@@ -1,812 +1,482 @@
 {
-  "geradoEm": "2026-06-19T16:54:43.993Z",
+  "geradoEm": "2026-07-08T16:26:31.099Z",
   "scriptPadrao": {
     "faixa1": "config-padrao/padrao-faixa-1.json",
     "faixa2": "config-padrao/padrao-faixa-2.json"
   },
-  "totalRegras": 26,
+  "totalRegras": 31,
   "resumo": {
     "total": 72,
-    "conformes": 55,
-    "alterados": 9,
+    "conformes": 0,
+    "alterados": 64,
     "offline": 8,
-    "grupos": 7,
-    "percentConformes": 76
+    "grupos": 2,
+    "percentConformes": 0
   },
-  "conformes": [
-    {
-      "nome": "GOEC6O002 - Faixa 1",
-      "faixa": 1,
-      "firmware": "v1.7.8",
-      "score": 100,
-      "ultimoAcesso": {
-        "usuario": "admin",
-        "isAdmin": true,
-        "dataLogin": "2026-06-19T16:53:10.119Z",
-        "tempoAtras": "1min atrás"
-      }
-    },
-    {
-      "nome": "GOEC6O002 - Faixa 2",
-      "faixa": 2,
-      "firmware": "v1.7.8",
-      "score": 100,
-      "ultimoAcesso": {
-        "usuario": "admin",
-        "isAdmin": true,
-        "dataLogin": "2026-06-19T16:53:10.137Z",
-        "tempoAtras": "1min atrás"
-      }
-    },
-    {
-      "nome": "GOEC6O004 - Faixa 1",
-      "faixa": 1,
-      "firmware": "v1.7.8",
-      "score": 100,
-      "ultimoAcesso": {
-        "usuario": "admin",
-        "isAdmin": true,
-        "dataLogin": "2026-06-19T16:53:10.145Z",
-        "tempoAtras": "1min atrás"
-      }
-    },
-    {
-      "nome": "GOEC6O004 - Faixa 2",
-      "faixa": 2,
-      "firmware": "v1.7.8",
-      "score": 100,
-      "ultimoAcesso": {
-        "usuario": "admin",
-        "isAdmin": true,
-        "dataLogin": "2026-06-19T16:53:14.751Z",
-        "tempoAtras": "1min atrás"
-      }
-    },
-    {
-      "nome": "GOEC6O005 - Faixa 1",
-      "faixa": 1,
-      "firmware": "v1.7.8",
-      "score": 100,
-      "ultimoAcesso": {
-        "usuario": "admin",
-        "isAdmin": true,
-        "dataLogin": "2026-06-19T16:53:14.721Z",
-        "tempoAtras": "1min atrás"
-      }
-    },
-    {
-      "nome": "GOEC6O005 - Faixa 2",
-      "faixa": 2,
-      "firmware": "v1.7.8",
-      "score": 100,
-      "ultimoAcesso": {
-        "usuario": "admin",
-        "isAdmin": true,
-        "dataLogin": "2026-06-19T16:53:14.772Z",
-        "tempoAtras": "1min atrás"
-      }
-    },
-    {
-      "nome": "GOEC6O006 - Faixa 1",
-      "faixa": 1,
-      "firmware": "v1.7.8",
-      "score": 100,
-      "ultimoAcesso": {
-        "usuario": "admin",
-        "isAdmin": true,
-        "dataLogin": "2026-06-19T16:53:14.881Z",
-        "tempoAtras": "1min atrás"
-      }
-    },
-    {
-      "nome": "GOEC6O006 - Faixa 2",
-      "faixa": 2,
-      "firmware": "v1.7.8",
-      "score": 100,
-      "ultimoAcesso": {
-        "usuario": "admin",
-        "isAdmin": true,
-        "dataLogin": "2026-06-19T16:53:14.861Z",
-        "tempoAtras": "1min atrás"
-      }
-    },
-    {
-      "nome": "GOEC6O007 - Faixa 1",
-      "faixa": 1,
-      "firmware": "v1.7.8",
-      "score": 100,
-      "ultimoAcesso": {
-        "usuario": "admin",
-        "isAdmin": true,
-        "dataLogin": "2026-06-19T16:53:19.875Z",
-        "tempoAtras": "1min atrás"
-      }
-    },
-    {
-      "nome": "GOEC6O007 - Faixa 2",
-      "faixa": 2,
-      "firmware": "v1.7.8",
-      "score": 100,
-      "ultimoAcesso": {
-        "usuario": "admin",
-        "isAdmin": true,
-        "dataLogin": "2026-06-19T16:53:19.918Z",
-        "tempoAtras": "1min atrás"
-      }
-    },
-    {
-      "nome": "GOEC6O008 - Faixa 2",
-      "faixa": 2,
-      "firmware": "v1.7.8",
-      "score": 100,
-      "ultimoAcesso": {
-        "usuario": "admin",
-        "isAdmin": true,
-        "dataLogin": "2026-06-19T16:53:19.933Z",
-        "tempoAtras": "1min atrás"
-      }
-    },
-    {
-      "nome": "GOEC6O010 - Faixa 1",
-      "faixa": 1,
-      "firmware": "v1.7.8",
-      "score": 100,
-      "ultimoAcesso": {
-        "usuario": "admin",
-        "isAdmin": true,
-        "dataLogin": "2026-06-19T16:53:25.086Z",
-        "tempoAtras": "1min atrás"
-      }
-    },
-    {
-      "nome": "GOEC6O010 - Faixa 2",
-      "faixa": 2,
-      "firmware": "v1.7.8",
-      "score": 100,
-      "ultimoAcesso": {
-        "usuario": "admin",
-        "isAdmin": true,
-        "dataLogin": "2026-06-19T16:53:25.107Z",
-        "tempoAtras": "1min atrás"
-      }
-    },
-    {
-      "nome": "GOEC6O011 - Faixa 1",
-      "faixa": 1,
-      "firmware": "v1.7.8",
-      "score": 100,
-      "ultimoAcesso": {
-        "usuario": "admin",
-        "isAdmin": true,
-        "dataLogin": "2026-06-19T16:53:25.128Z",
-        "tempoAtras": "1min atrás"
-      }
-    },
-    {
-      "nome": "GOEC6O013 - Faixa 1",
-      "faixa": 1,
-      "firmware": "v1.7.8",
-      "score": 100,
-      "ultimoAcesso": {
-        "usuario": "admin",
-        "isAdmin": true,
-        "dataLogin": "2026-06-19T16:53:30.682Z",
-        "tempoAtras": "1min atrás"
-      }
-    },
-    {
-      "nome": "GOEC6O018 - Faixa 2",
-      "faixa": 2,
-      "firmware": "v1.7.8",
-      "score": 100,
-      "ultimoAcesso": {
-        "usuario": "admin",
-        "isAdmin": true,
-        "dataLogin": "2026-06-19T16:53:30.586Z",
-        "tempoAtras": "1min atrás"
-      }
-    },
-    {
-      "nome": "GOEC6O020 - Faixa 1",
-      "faixa": 1,
-      "firmware": "v1.7.8",
-      "score": 100,
-      "ultimoAcesso": {
-        "usuario": "admin",
-        "isAdmin": true,
-        "dataLogin": "2026-06-19T16:53:35.606Z",
-        "tempoAtras": "1min atrás"
-      }
-    },
-    {
-      "nome": "GOEC6O020 - Faixa 2",
-      "faixa": 2,
-      "firmware": "v1.7.8",
-      "score": 100,
-      "ultimoAcesso": {
-        "usuario": "admin",
-        "isAdmin": true,
-        "dataLogin": "2026-06-19T16:53:35.652Z",
-        "tempoAtras": "1min atrás"
-      }
-    },
-    {
-      "nome": "GOEC6O021 - Faixa 1",
-      "faixa": 1,
-      "firmware": "v1.7.8",
-      "score": 100,
-      "ultimoAcesso": {
-        "usuario": "admin",
-        "isAdmin": true,
-        "dataLogin": "2026-06-19T16:53:35.670Z",
-        "tempoAtras": "1min atrás"
-      }
-    },
-    {
-      "nome": "GOEC6O022 - Faixa 1",
-      "faixa": 1,
-      "firmware": "v1.7.8",
-      "score": 100,
-      "ultimoAcesso": {
-        "usuario": "admin",
-        "isAdmin": true,
-        "dataLogin": "2026-06-19T16:53:35.676Z",
-        "tempoAtras": "1min atrás"
-      }
-    },
-    {
-      "nome": "GOEC6O022 - Faixa 2",
-      "faixa": 2,
-      "firmware": "v1.7.8",
-      "score": 100,
-      "ultimoAcesso": {
-        "usuario": "admin",
-        "isAdmin": true,
-        "dataLogin": "2026-06-19T16:53:55.581Z",
-        "tempoAtras": "0min atrás"
-      }
-    },
-    {
-      "nome": "GOEC6O023 - Faixa 1",
-      "faixa": 1,
-      "firmware": "v1.7.8",
-      "score": 100,
-      "ultimoAcesso": {
-        "usuario": "admin",
-        "isAdmin": true,
-        "dataLogin": "2026-06-19T16:53:55.685Z",
-        "tempoAtras": "0min atrás"
-      }
-    },
-    {
-      "nome": "GOEC6O029 - Faixa 1",
-      "faixa": 1,
-      "firmware": "v1.7.8",
-      "score": 100,
-      "ultimoAcesso": {
-        "usuario": "admin",
-        "isAdmin": true,
-        "dataLogin": "2026-06-19T16:53:55.768Z",
-        "tempoAtras": "0min atrás"
-      }
-    },
-    {
-      "nome": "GOEC6O029 - Faixa 2",
-      "faixa": 2,
-      "firmware": "v1.7.8",
-      "score": 100,
-      "ultimoAcesso": {
-        "usuario": "admin",
-        "isAdmin": true,
-        "dataLogin": "2026-06-19T16:53:55.774Z",
-        "tempoAtras": "0min atrás"
-      }
-    },
-    {
-      "nome": "GOEC6O033 - Faixa 1",
-      "faixa": 1,
-      "firmware": "v1.7.8",
-      "score": 100,
-      "ultimoAcesso": {
-        "usuario": "admin",
-        "isAdmin": true,
-        "dataLogin": "2026-06-19T16:54:01.248Z",
-        "tempoAtras": "0min atrás"
-      }
-    },
-    {
-      "nome": "GOEC6O033 - Faixa 2",
-      "faixa": 2,
-      "firmware": "v1.7.8",
-      "score": 100,
-      "ultimoAcesso": {
-        "usuario": "admin",
-        "isAdmin": true,
-        "dataLogin": "2026-06-19T16:54:01.248Z",
-        "tempoAtras": "0min atrás"
-      }
-    },
-    {
-      "nome": "GOEC6O036 - Faixa 1",
-      "faixa": 1,
-      "firmware": "v1.7.8",
-      "score": 100,
-      "ultimoAcesso": {
-        "usuario": "admin",
-        "isAdmin": true,
-        "dataLogin": "2026-06-19T16:54:01.934Z",
-        "tempoAtras": "0min atrás"
-      }
-    },
-    {
-      "nome": "GOEC6O040 - Faixa 2",
-      "faixa": 2,
-      "firmware": "v1.7.8",
-      "score": 100,
-      "ultimoAcesso": {
-        "usuario": "admin",
-        "isAdmin": true,
-        "dataLogin": "2026-06-19T16:54:01.627Z",
-        "tempoAtras": "0min atrás"
-      }
-    },
-    {
-      "nome": "GOEC6O041 - Faixa 1",
-      "faixa": 1,
-      "firmware": "v1.7.8",
-      "score": 100,
-      "ultimoAcesso": {
-        "usuario": "admin",
-        "isAdmin": true,
-        "dataLogin": "2026-06-19T16:54:06.845Z",
-        "tempoAtras": "0min atrás"
-      }
-    },
-    {
-      "nome": "GOEC6O041 - Faixa 2",
-      "faixa": 2,
-      "firmware": "v1.7.8",
-      "score": 100,
-      "ultimoAcesso": {
-        "usuario": "admin",
-        "isAdmin": true,
-        "dataLogin": "2026-06-19T16:54:06.822Z",
-        "tempoAtras": "0min atrás"
-      }
-    },
-    {
-      "nome": "GOEC6O043 - Faixa 1",
-      "faixa": 1,
-      "firmware": "v1.7.8",
-      "score": 100,
-      "ultimoAcesso": {
-        "usuario": "admin",
-        "isAdmin": true,
-        "dataLogin": "2026-06-19T16:54:06.503Z",
-        "tempoAtras": "0min atrás"
-      }
-    },
-    {
-      "nome": "GOEC6O043 - Faixa 2",
-      "faixa": 2,
-      "firmware": "v1.7.8",
-      "score": 100,
-      "ultimoAcesso": {
-        "usuario": "admin",
-        "isAdmin": true,
-        "dataLogin": "2026-06-19T16:54:06.596Z",
-        "tempoAtras": "0min atrás"
-      }
-    },
-    {
-      "nome": "GOEC6O045 - Faixa 1",
-      "faixa": 1,
-      "firmware": "v1.7.8",
-      "score": 100,
-      "ultimoAcesso": {
-        "usuario": "admin",
-        "isAdmin": true,
-        "dataLogin": "2026-06-19T16:54:06.555Z",
-        "tempoAtras": "0min atrás"
-      }
-    },
-    {
-      "nome": "GOEC6O045 - Faixa 2",
-      "faixa": 2,
-      "firmware": "v1.7.8",
-      "score": 100,
-      "ultimoAcesso": {
-        "usuario": "admin",
-        "isAdmin": true,
-        "dataLogin": "2026-06-19T16:54:12.856Z",
-        "tempoAtras": "0min atrás"
-      }
-    },
-    {
-      "nome": "GOEC6O046 - Faixa 1",
-      "faixa": 1,
-      "firmware": "v1.7.8",
-      "score": 100,
-      "ultimoAcesso": {
-        "usuario": "admin",
-        "isAdmin": true,
-        "dataLogin": "2026-06-19T16:54:12.761Z",
-        "tempoAtras": "0min atrás"
-      }
-    },
-    {
-      "nome": "GOEC6O046 - Faixa 2",
-      "faixa": 2,
-      "firmware": "v1.7.8",
-      "score": 100,
-      "ultimoAcesso": {
-        "usuario": "admin",
-        "isAdmin": true,
-        "dataLogin": "2026-06-19T16:54:12.749Z",
-        "tempoAtras": "0min atrás"
-      }
-    },
-    {
-      "nome": "GOEC6O048 - Faixa 1",
-      "faixa": 1,
-      "firmware": "v1.7.8",
-      "score": 100,
-      "ultimoAcesso": {
-        "usuario": "admin",
-        "isAdmin": true,
-        "dataLogin": "2026-06-19T16:54:13.097Z",
-        "tempoAtras": "0min atrás"
-      }
-    },
-    {
-      "nome": "GOEC6O048 - Faixa 2",
-      "faixa": 2,
-      "firmware": "v1.7.8",
-      "score": 100,
-      "ultimoAcesso": {
-        "usuario": "admin",
-        "isAdmin": true,
-        "dataLogin": "2026-06-19T16:54:13.126Z",
-        "tempoAtras": "0min atrás"
-      }
-    },
-    {
-      "nome": "GOEC6O049 - Faixa 1",
-      "faixa": 1,
-      "firmware": "v1.7.8",
-      "score": 100,
-      "ultimoAcesso": {
-        "usuario": "admin",
-        "isAdmin": true,
-        "dataLogin": "2026-06-19T16:54:19.760Z",
-        "tempoAtras": "0min atrás"
-      }
-    },
-    {
-      "nome": "GOEC6O049 - Faixa 2",
-      "faixa": 2,
-      "firmware": "v1.7.8",
-      "score": 100,
-      "ultimoAcesso": {
-        "usuario": "admin",
-        "isAdmin": true,
-        "dataLogin": "2026-06-19T16:54:19.740Z",
-        "tempoAtras": "0min atrás"
-      }
-    },
-    {
-      "nome": "GOEC6O050 - Faixa 1",
-      "faixa": 1,
-      "firmware": "v1.7.8",
-      "score": 100,
-      "ultimoAcesso": {
-        "usuario": "admin",
-        "isAdmin": true,
-        "dataLogin": "2026-06-19T16:54:19.670Z",
-        "tempoAtras": "0min atrás"
-      }
-    },
-    {
-      "nome": "GOEC6O050 - Faixa 2",
-      "faixa": 2,
-      "firmware": "v1.7.8",
-      "score": 100,
-      "ultimoAcesso": {
-        "usuario": "admin",
-        "isAdmin": true,
-        "dataLogin": "2026-06-19T16:54:19.697Z",
-        "tempoAtras": "0min atrás"
-      }
-    },
-    {
-      "nome": "GOEC6O052 - Faixa 2",
-      "faixa": 2,
-      "firmware": "v1.7.8",
-      "score": 100,
-      "ultimoAcesso": {
-        "usuario": "admin",
-        "isAdmin": true,
-        "dataLogin": "2026-06-19T16:54:26.311Z",
-        "tempoAtras": "0min atrás"
-      }
-    },
-    {
-      "nome": "GOEC6O052- Faixa 1",
-      "faixa": 1,
-      "firmware": "v1.7.8",
-      "score": 100,
-      "ultimoAcesso": {
-        "usuario": "admin",
-        "isAdmin": true,
-        "dataLogin": "2026-06-19T16:54:26.284Z",
-        "tempoAtras": "0min atrás"
-      }
-    },
-    {
-      "nome": "GOEC6O053 - Faixa 1",
-      "faixa": 1,
-      "firmware": "v1.7.8",
-      "score": 100,
-      "ultimoAcesso": {
-        "usuario": "admin",
-        "isAdmin": true,
-        "dataLogin": "2026-06-19T16:54:26.329Z",
-        "tempoAtras": "0min atrás"
-      }
-    },
-    {
-      "nome": "GOEC6O053 - Faixa 2",
-      "faixa": 2,
-      "firmware": "v1.7.8",
-      "score": 100,
-      "ultimoAcesso": {
-        "usuario": "admin",
-        "isAdmin": true,
-        "dataLogin": "2026-06-19T16:54:26.351Z",
-        "tempoAtras": "0min atrás"
-      }
-    },
-    {
-      "nome": "GOEC6O054 - Faixa 1",
-      "faixa": 1,
-      "firmware": "v1.7.8",
-      "score": 100,
-      "ultimoAcesso": {
-        "usuario": "admin",
-        "isAdmin": true,
-        "dataLogin": "2026-06-19T16:54:32.408Z",
-        "tempoAtras": "0min atrás"
-      }
-    },
-    {
-      "nome": "GOEC6O054 - Faixa 2",
-      "faixa": 2,
-      "firmware": "v1.7.8",
-      "score": 100,
-      "ultimoAcesso": {
-        "usuario": "admin",
-        "isAdmin": true,
-        "dataLogin": "2026-06-19T16:54:32.445Z",
-        "tempoAtras": "0min atrás"
-      }
-    },
-    {
-      "nome": "GOEC6O055 - Faixa 1",
-      "faixa": 1,
-      "firmware": "v1.7.8",
-      "score": 100,
-      "ultimoAcesso": {
-        "usuario": "admin",
-        "isAdmin": true,
-        "dataLogin": "2026-06-19T16:54:32.395Z",
-        "tempoAtras": "0min atrás"
-      }
-    },
-    {
-      "nome": "GOEC6O056 - Faixa 1",
-      "faixa": 1,
-      "firmware": "v1.7.8",
-      "score": 100,
-      "ultimoAcesso": {
-        "usuario": "admin",
-        "isAdmin": true,
-        "dataLogin": "2026-06-19T16:54:32.372Z",
-        "tempoAtras": "0min atrás"
-      }
-    },
-    {
-      "nome": "GOEC6O056 - Faixa 2",
-      "faixa": 2,
-      "firmware": "v1.7.8",
-      "score": 100,
-      "ultimoAcesso": {
-        "usuario": "admin",
-        "isAdmin": true,
-        "dataLogin": "2026-06-19T16:54:37.556Z",
-        "tempoAtras": "0min atrás"
-      }
-    },
-    {
-      "nome": "GOEC6O057 - Faixa 1",
-      "faixa": 1,
-      "firmware": "v1.7.8",
-      "score": 100,
-      "ultimoAcesso": {
-        "usuario": "admin",
-        "isAdmin": true,
-        "dataLogin": "2026-06-19T16:54:37.665Z",
-        "tempoAtras": "0min atrás"
-      }
-    },
-    {
-      "nome": "GOEC6O057 - Faixa 2",
-      "faixa": 2,
-      "firmware": "v1.7.8",
-      "score": 100,
-      "ultimoAcesso": {
-        "usuario": "admin",
-        "isAdmin": true,
-        "dataLogin": "2026-06-19T16:54:37.654Z",
-        "tempoAtras": "0min atrás"
-      }
-    },
-    {
-      "nome": "GOEC6O059 - Faixa 1",
-      "faixa": 1,
-      "firmware": "v1.7.8",
-      "score": 100,
-      "ultimoAcesso": {
-        "usuario": "admin",
-        "isAdmin": true,
-        "dataLogin": "2026-06-19T16:54:41.965Z",
-        "tempoAtras": "0min atrás"
-      }
-    },
-    {
-      "nome": "GOEC6O059 - Faixa 2",
-      "faixa": 2,
-      "firmware": "v1.7.8",
-      "score": 100,
-      "ultimoAcesso": {
-        "usuario": "admin",
-        "isAdmin": true,
-        "dataLogin": "2026-06-19T16:54:41.966Z",
-        "tempoAtras": "0min atrás"
-      }
-    }
-  ],
+  "conformes": [],
   "grupos": [
     {
       "grupo": 1,
-      "totalEquipamentos": 3,
+      "totalEquipamentos": 62,
       "alteracoes": [
         {
-          "id": "SNAPSHOT_CROP",
-          "titulo": "Snapshot Crop Desabilitado",
+          "id": "VIDEO_FPS",
+          "titulo": "Vídeo Framerate",
           "severidade": "medio",
-          "menu": "Equipamento > Diversos",
-          "valorAtual": true,
-          "valorEsperado": false
+          "menu": "Vídeo > Streams",
+          "valorAtual": 12,
+          "valorEsperado": 15
+        },
+        {
+          "id": "VIDEO_QUALITY",
+          "titulo": "Vídeo Qualidade",
+          "severidade": "medio",
+          "menu": "Vídeo > Streams",
+          "valorAtual": 85,
+          "valorEsperado": 90
         }
       ],
       "dispositivos": [
         {
+          "nome": "GOEC6O002 - Faixa 1",
+          "faixa": 1,
+          "firmware": "v1.7.8",
+          "score": 94,
+          "ultimoAcesso": null
+        },
+        {
+          "nome": "GOEC6O002 - Faixa 2",
+          "faixa": 2,
+          "firmware": "v1.7.8",
+          "score": 94,
+          "ultimoAcesso": null
+        },
+        {
+          "nome": "GOEC6O003 - Faixa 1",
+          "faixa": 1,
+          "firmware": "v1.7.8",
+          "score": 94,
+          "ultimoAcesso": null
+        },
+        {
+          "nome": "GOEC6O003 - Faixa 2",
+          "faixa": 2,
+          "firmware": "v1.7.8",
+          "score": 94,
+          "ultimoAcesso": null
+        },
+        {
+          "nome": "GOEC6O004 - Faixa 1",
+          "faixa": 1,
+          "firmware": "v1.7.8",
+          "score": 94,
+          "ultimoAcesso": null
+        },
+        {
+          "nome": "GOEC6O004 - Faixa 2",
+          "faixa": 2,
+          "firmware": "v1.7.8",
+          "score": 94,
+          "ultimoAcesso": null
+        },
+        {
+          "nome": "GOEC6O005 - Faixa 1",
+          "faixa": 1,
+          "firmware": "v1.7.8",
+          "score": 94,
+          "ultimoAcesso": null
+        },
+        {
+          "nome": "GOEC6O005 - Faixa 2",
+          "faixa": 2,
+          "firmware": "v1.7.8",
+          "score": 94,
+          "ultimoAcesso": null
+        },
+        {
+          "nome": "GOEC6O007 - Faixa 1",
+          "faixa": 1,
+          "firmware": "v1.7.8",
+          "score": 94,
+          "ultimoAcesso": null
+        },
+        {
+          "nome": "GOEC6O007 - Faixa 2",
+          "faixa": 2,
+          "firmware": "v1.7.8",
+          "score": 94,
+          "ultimoAcesso": null
+        },
+        {
+          "nome": "GOEC6O008 - Faixa 2",
+          "faixa": 2,
+          "firmware": "v1.7.8",
+          "score": 94,
+          "ultimoAcesso": null
+        },
+        {
+          "nome": "GOEC6O009 - Faixa 1",
+          "faixa": 1,
+          "firmware": "v1.7.8",
+          "score": 94,
+          "ultimoAcesso": null
+        },
+        {
+          "nome": "GOEC6O009 - Faixa 2",
+          "faixa": 2,
+          "firmware": "v1.7.8",
+          "score": 94,
+          "ultimoAcesso": null
+        },
+        {
+          "nome": "GOEC6O010 - Faixa 1",
+          "faixa": 1,
+          "firmware": "v1.7.8",
+          "score": 94,
+          "ultimoAcesso": null
+        },
+        {
+          "nome": "GOEC6O010 - Faixa 2",
+          "faixa": 2,
+          "firmware": "v1.7.8",
+          "score": 94,
+          "ultimoAcesso": null
+        },
+        {
+          "nome": "GOEC6O011 - Faixa 1",
+          "faixa": 1,
+          "firmware": "v1.7.8",
+          "score": 94,
+          "ultimoAcesso": null
+        },
+        {
+          "nome": "GOEC6O013 - Faixa 2",
+          "faixa": 2,
+          "firmware": "v1.7.8",
+          "score": 94,
+          "ultimoAcesso": null
+        },
+        {
+          "nome": "GOEC6O018 - Faixa 2",
+          "faixa": 2,
+          "firmware": "v1.7.8",
+          "score": 94,
+          "ultimoAcesso": null
+        },
+        {
+          "nome": "GOEC6O019 - Faixa 1",
+          "faixa": 1,
+          "firmware": "v1.7.8",
+          "score": 94,
+          "ultimoAcesso": null
+        },
+        {
+          "nome": "GOEC6O019 - Faixa 2",
+          "faixa": 2,
+          "firmware": "v1.7.8",
+          "score": 94,
+          "ultimoAcesso": null
+        },
+        {
+          "nome": "GOEC6O020 - Faixa 1",
+          "faixa": 1,
+          "firmware": "v1.7.8",
+          "score": 94,
+          "ultimoAcesso": null
+        },
+        {
+          "nome": "GOEC6O020 - Faixa 2",
+          "faixa": 2,
+          "firmware": "v1.7.8",
+          "score": 94,
+          "ultimoAcesso": null
+        },
+        {
+          "nome": "GOEC6O021 - Faixa 1",
+          "faixa": 1,
+          "firmware": "v1.7.8",
+          "score": 94,
+          "ultimoAcesso": null
+        },
+        {
+          "nome": "GOEC6O022 - Faixa 1",
+          "faixa": 1,
+          "firmware": "v1.7.8",
+          "score": 94,
+          "ultimoAcesso": null
+        },
+        {
+          "nome": "GOEC6O022 - Faixa 2",
+          "faixa": 2,
+          "firmware": "v1.7.8",
+          "score": 94,
+          "ultimoAcesso": null
+        },
+        {
+          "nome": "GOEC6O023 - Faixa 1",
+          "faixa": 1,
+          "firmware": "v1.7.8",
+          "score": 94,
+          "ultimoAcesso": null
+        },
+        {
+          "nome": "GOEC6O029 - Faixa 1",
+          "faixa": 1,
+          "firmware": "v1.7.8",
+          "score": 94,
+          "ultimoAcesso": null
+        },
+        {
+          "nome": "GOEC6O029 - Faixa 2",
+          "faixa": 2,
+          "firmware": "v1.7.8",
+          "score": 94,
+          "ultimoAcesso": null
+        },
+        {
+          "nome": "GOEC6O033 - Faixa 1",
+          "faixa": 1,
+          "firmware": "v1.7.8",
+          "score": 94,
+          "ultimoAcesso": null
+        },
+        {
+          "nome": "GOEC6O033 - Faixa 2",
+          "faixa": 2,
+          "firmware": "v1.7.8",
+          "score": 94,
+          "ultimoAcesso": null
+        },
+        {
+          "nome": "GOEC6O036 - Faixa 1",
+          "faixa": 1,
+          "firmware": "v1.7.8",
+          "score": 94,
+          "ultimoAcesso": null
+        },
+        {
           "nome": "GOEC6O040 - Faixa 1",
           "faixa": 1,
           "firmware": "v1.7.8",
-          "score": 96,
-          "ultimoAcesso": {
-            "usuario": "admin",
-            "isAdmin": true,
-            "dataLogin": "2026-06-19T16:54:01.613Z",
-            "tempoAtras": "0min atrás"
-          }
+          "score": 94,
+          "ultimoAcesso": null
+        },
+        {
+          "nome": "GOEC6O040 - Faixa 2",
+          "faixa": 2,
+          "firmware": "v1.7.8",
+          "score": 94,
+          "ultimoAcesso": null
+        },
+        {
+          "nome": "GOEC6O041 - Faixa 1",
+          "faixa": 1,
+          "firmware": "v1.7.8",
+          "score": 94,
+          "ultimoAcesso": null
+        },
+        {
+          "nome": "GOEC6O041 - Faixa 2",
+          "faixa": 2,
+          "firmware": "v1.7.8",
+          "score": 94,
+          "ultimoAcesso": null
+        },
+        {
+          "nome": "GOEC6O043 - Faixa 1",
+          "faixa": 1,
+          "firmware": "v1.7.8",
+          "score": 94,
+          "ultimoAcesso": null
+        },
+        {
+          "nome": "GOEC6O043 - Faixa 2",
+          "faixa": 2,
+          "firmware": "v1.7.8",
+          "score": 94,
+          "ultimoAcesso": null
+        },
+        {
+          "nome": "GOEC6O045 - Faixa 1",
+          "faixa": 1,
+          "firmware": "v1.7.8",
+          "score": 94,
+          "ultimoAcesso": null
+        },
+        {
+          "nome": "GOEC6O045 - Faixa 2",
+          "faixa": 2,
+          "firmware": "v1.7.8",
+          "score": 94,
+          "ultimoAcesso": null
+        },
+        {
+          "nome": "GOEC6O046 - Faixa 1",
+          "faixa": 1,
+          "firmware": "v1.7.8",
+          "score": 94,
+          "ultimoAcesso": null
+        },
+        {
+          "nome": "GOEC6O049 - Faixa 1",
+          "faixa": 1,
+          "firmware": "v1.7.8",
+          "score": 94,
+          "ultimoAcesso": null
+        },
+        {
+          "nome": "GOEC6O049 - Faixa 2",
+          "faixa": 2,
+          "firmware": "v1.7.8",
+          "score": 94,
+          "ultimoAcesso": null
+        },
+        {
+          "nome": "GOEC6O050 - Faixa 1",
+          "faixa": 1,
+          "firmware": "v1.7.8",
+          "score": 94,
+          "ultimoAcesso": null
+        },
+        {
+          "nome": "GOEC6O050 - Faixa 2",
+          "faixa": 2,
+          "firmware": "v1.7.8",
+          "score": 94,
+          "ultimoAcesso": null
         },
         {
           "nome": "GOEC6O051 - Faixa 1",
           "faixa": 1,
           "firmware": "v1.7.8",
-          "score": 96,
-          "ultimoAcesso": {
-            "usuario": "admin",
-            "isAdmin": true,
-            "dataLogin": "2026-06-19T16:54:20.347Z",
-            "tempoAtras": "0min atrás"
-          }
+          "score": 94,
+          "ultimoAcesso": null
         },
         {
           "nome": "GOEC6O051 - Faixa 2",
           "faixa": 2,
           "firmware": "v1.7.8",
-          "score": 96,
-          "ultimoAcesso": {
-            "usuario": "admin",
-            "isAdmin": true,
-            "dataLogin": "2026-06-19T16:54:26.341Z",
-            "tempoAtras": "0min atrás"
-          }
+          "score": 94,
+          "ultimoAcesso": null
+        },
+        {
+          "nome": "GOEC6O052 - Faixa 2",
+          "faixa": 2,
+          "firmware": "v1.7.8",
+          "score": 94,
+          "ultimoAcesso": null
+        },
+        {
+          "nome": "GOEC6O052- Faixa 1",
+          "faixa": 1,
+          "firmware": "v1.7.8",
+          "score": 94,
+          "ultimoAcesso": null
+        },
+        {
+          "nome": "GOEC6O053 - Faixa 1",
+          "faixa": 1,
+          "firmware": "v1.7.8",
+          "score": 94,
+          "ultimoAcesso": null
+        },
+        {
+          "nome": "GOEC6O053 - Faixa 2",
+          "faixa": 2,
+          "firmware": "v1.7.8",
+          "score": 94,
+          "ultimoAcesso": null
+        },
+        {
+          "nome": "GOEC6O054 - Faixa 1",
+          "faixa": 1,
+          "firmware": "v1.7.8",
+          "score": 94,
+          "ultimoAcesso": null
+        },
+        {
+          "nome": "GOEC6O054 - Faixa 2",
+          "faixa": 2,
+          "firmware": "v1.7.8",
+          "score": 94,
+          "ultimoAcesso": null
+        },
+        {
+          "nome": "GOEC6O055 - Faixa 1",
+          "faixa": 1,
+          "firmware": "v1.7.8",
+          "score": 94,
+          "ultimoAcesso": null
+        },
+        {
+          "nome": "GOEC6O055 - Faixa 2",
+          "faixa": 2,
+          "firmware": "v1.7.8",
+          "score": 94,
+          "ultimoAcesso": null
+        },
+        {
+          "nome": "GOEC6O056 - Faixa 1",
+          "faixa": 1,
+          "firmware": "v1.7.8",
+          "score": 94,
+          "ultimoAcesso": null
+        },
+        {
+          "nome": "GOEC6O056 - Faixa 2",
+          "faixa": 2,
+          "firmware": "v1.7.8",
+          "score": 94,
+          "ultimoAcesso": null
+        },
+        {
+          "nome": "GOEC6O057 - Faixa 1",
+          "faixa": 1,
+          "firmware": "v1.7.8",
+          "score": 94,
+          "ultimoAcesso": null
+        },
+        {
+          "nome": "GOEC6O057 - Faixa 2",
+          "faixa": 2,
+          "firmware": "v1.7.8",
+          "score": 94,
+          "ultimoAcesso": null
+        },
+        {
+          "nome": "GOEC6O058 - Faixa 1",
+          "faixa": 1,
+          "firmware": "v1.7.8",
+          "score": 94,
+          "ultimoAcesso": null
+        },
+        {
+          "nome": "GOEC6O058 - Faixa 2",
+          "faixa": 2,
+          "firmware": "v1.7.8",
+          "score": 94,
+          "ultimoAcesso": null
+        },
+        {
+          "nome": "GOEC6O059 - Faixa 1",
+          "faixa": 1,
+          "firmware": "v1.7.8",
+          "score": 94,
+          "ultimoAcesso": null
+        },
+        {
+          "nome": "GOEC6O059 - Faixa 2",
+          "faixa": 2,
+          "firmware": "v1.7.8",
+          "score": 94,
+          "ultimoAcesso": null
         }
       ]
     },
     {
       "grupo": 2,
-      "totalEquipamentos": 1,
+      "totalEquipamentos": 2,
       "alteracoes": [
-        {
-          "id": "SNMP_OFF",
-          "titulo": "SNMP Desabilitado",
-          "severidade": "baixo",
-          "menu": "Sistema > SNMP",
-          "valorAtual": true,
-          "valorEsperado": false
-        }
-      ],
-      "dispositivos": [
-        {
-          "nome": "GOEC6O009 - Faixa 1",
-          "faixa": 1,
-          "firmware": "v1.7.8",
-          "score": 96,
-          "ultimoAcesso": {
-            "usuario": "admin",
-            "isAdmin": true,
-            "dataLogin": "2026-06-19T16:53:20.246Z",
-            "tempoAtras": "1min atrás"
-          }
-        }
-      ]
-    },
-    {
-      "grupo": 3,
-      "totalEquipamentos": 1,
-      "alteracoes": [
-        {
-          "id": "PROFILE_UPPER_LEVEL",
-          "titulo": "Transição Upper Level",
-          "severidade": "alto",
-          "menu": "Imagem > Perfis > Transições",
-          "valorAtual": [
-            35,
-            40
-          ],
-          "valorEsperado": 35
-        },
-        {
-          "id": "SNMP_OFF",
-          "titulo": "SNMP Desabilitado",
-          "severidade": "baixo",
-          "menu": "Sistema > SNMP",
-          "valorAtual": true,
-          "valorEsperado": false
-        }
-      ],
-      "dispositivos": [
-        {
-          "nome": "GOEC6O009 - Faixa 2",
-          "faixa": 2,
-          "firmware": "v1.7.8",
-          "score": 92,
-          "ultimoAcesso": {
-            "usuario": "admin",
-            "isAdmin": true,
-            "dataLogin": "2026-06-19T16:53:25.482Z",
-            "tempoAtras": "1min atrás"
-          }
-        }
-      ]
-    },
-    {
-      "grupo": 4,
-      "totalEquipamentos": 1,
-      "alteracoes": [
-        {
-          "id": "OCR_PROC_MODE",
-          "titulo": "OCR Processing Mode",
-          "severidade": "medio",
-          "menu": "Equipamento > OCR",
-          "valorAtual": 2,
-          "valorEsperado": 3
-        },
         {
           "id": "NTP_SERVER",
           "titulo": "NTP Server",
@@ -824,8 +494,16 @@
           "titulo": "Vídeo Framerate",
           "severidade": "medio",
           "menu": "Vídeo > Streams",
-          "valorAtual": 1,
-          "valorEsperado": 12
+          "valorAtual": 12,
+          "valorEsperado": 15
+        },
+        {
+          "id": "VIDEO_QUALITY",
+          "titulo": "Vídeo Qualidade",
+          "severidade": "medio",
+          "menu": "Vídeo > Streams",
+          "valorAtual": 85,
+          "valorEsperado": 90
         }
       ],
       "dispositivos": [
@@ -833,142 +511,29 @@
           "nome": "GOEC6O011 - Faixa 2",
           "faixa": 2,
           "firmware": "v1.7.8",
-          "score": 88,
-          "ultimoAcesso": {
-            "usuario": "admin",
-            "isAdmin": true,
-            "dataLogin": "2026-06-19T16:53:25.092Z",
-            "tempoAtras": "1min atrás"
-          }
-        }
-      ]
-    },
-    {
-      "grupo": 5,
-      "totalEquipamentos": 1,
-      "alteracoes": [
-        {
-          "id": "PROFILE_UPPER_LEVEL",
-          "titulo": "Transição Upper Level",
-          "severidade": "alto",
-          "menu": "Imagem > Perfis > Transições",
-          "valorAtual": [
-            35,
-            30
-          ],
-          "valorEsperado": 35
-        }
-      ],
-      "dispositivos": [
-        {
-          "nome": "GOEC6O013 - Faixa 2",
-          "faixa": 2,
-          "firmware": "v1.7.8",
-          "score": 96,
-          "ultimoAcesso": {
-            "usuario": "admin",
-            "isAdmin": true,
-            "dataLogin": "2026-06-19T16:53:30.645Z",
-            "tempoAtras": "1min atrás"
-          }
-        }
-      ]
-    },
-    {
-      "grupo": 6,
-      "totalEquipamentos": 1,
-      "alteracoes": [
-        {
-          "id": "OCR_PROC_MODE",
-          "titulo": "OCR Processing Mode",
-          "severidade": "medio",
-          "menu": "Equipamento > OCR",
-          "valorAtual": 2,
-          "valorEsperado": 3
+          "score": 90,
+          "ultimoAcesso": null
         },
-        {
-          "id": "NTP_SERVER",
-          "titulo": "NTP Server",
-          "severidade": "medio",
-          "menu": "Equipamento > Data e Hora",
-          "valorAtual": [
-            "200.160.0.8"
-          ],
-          "valorEsperado": [
-            "time.google.com"
-          ]
-        },
-        {
-          "id": "VIDEO_FPS",
-          "titulo": "Vídeo Framerate",
-          "severidade": "medio",
-          "menu": "Vídeo > Streams",
-          "valorAtual": 1,
-          "valorEsperado": 12
-        },
-        {
-          "id": "VIDEO_QUALITY",
-          "titulo": "Vídeo Qualidade",
-          "severidade": "medio",
-          "menu": "Vídeo > Streams",
-          "valorAtual": 10,
-          "valorEsperado": 85
-        }
-      ],
-      "dispositivos": [
         {
           "nome": "GOEC6O028 - Faixa 1",
           "faixa": 1,
           "firmware": "v1.7.8",
-          "score": 85,
-          "ultimoAcesso": {
-            "usuario": "admin",
-            "isAdmin": true,
-            "dataLogin": "2026-06-19T16:53:55.710Z",
-            "tempoAtras": "0min atrás"
-          }
-        }
-      ]
-    },
-    {
-      "grupo": 7,
-      "totalEquipamentos": 1,
-      "alteracoes": [
-        {
-          "id": "VIDEO_FPS",
-          "titulo": "Vídeo Framerate",
-          "severidade": "medio",
-          "menu": "Vídeo > Streams",
-          "valorAtual": 5,
-          "valorEsperado": 12
-        }
-      ],
-      "dispositivos": [
-        {
-          "nome": "GOEC6O055 - Faixa 2",
-          "faixa": 2,
-          "firmware": "v1.7.8",
-          "score": 96,
-          "ultimoAcesso": {
-            "usuario": "admin",
-            "isAdmin": true,
-            "dataLogin": "2026-06-19T16:54:32.481Z",
-            "tempoAtras": "0min atrás"
-          }
+          "score": 90,
+          "ultimoAcesso": null
         }
       ]
     }
   ],
   "offline": [
     {
-      "nome": "GOEC6O003 - Faixa 1",
-      "uuid": "1792282c-bacb-4808-8ff6-e44404b72de5",
-      "ip": "177.25.226.58"
+      "nome": "GOEC6O006 - Faixa 1",
+      "uuid": "29a63deb-dfe5-4765-a10a-57485f03f301",
+      "ip": "191.56.243.74"
     },
     {
-      "nome": "GOEC6O003 - Faixa 2",
-      "uuid": "ea779324-56d4-4ea5-bfb6-63b4cf751621",
-      "ip": "177.25.226.58"
+      "nome": "GOEC6O006 - Faixa 2",
+      "uuid": "a8f7026c-21b1-4415-8978-51788088124d",
+      "ip": "191.56.243.74"
     },
     {
       "nome": "GOEC6O008 - Faixa 1",
@@ -976,29 +541,29 @@
       "ip": "191.58.157.152"
     },
     {
+      "nome": "GOEC6O013 - Faixa 1",
+      "uuid": "7d9bf2eb-0f9a-4691-bffd-e003fc3781ed",
+      "ip": "187.43.160.194"
+    },
+    {
       "nome": "GOEC6O018 - Faixa 1",
       "uuid": "0e154d78-62b4-4e0f-867c-0d93b7c79c74",
       "ip": "177.200.42.236"
     },
     {
-      "nome": "GOEC6O019 - Faixa 1",
-      "uuid": "6f6eddc7-f900-4d4f-8040-f7d1775d1d1d",
-      "ip": "45.70.146.16"
+      "nome": "GOEC6O046 - Faixa 2",
+      "uuid": "4d68163e-8462-4dce-adad-df3b0d7c76af",
+      "ip": "170.81.67.214"
     },
     {
-      "nome": "GOEC6O019 - Faixa 2",
-      "uuid": "b8925732-54cf-4f01-b4ec-c8bcb1b3bd2e",
-      "ip": "45.70.146.16"
+      "nome": "GOEC6O048 - Faixa 1",
+      "uuid": "43d7e92f-482e-4822-bf76-ef2c5cc4dfd9",
+      "ip": "179.249.70.250"
     },
     {
-      "nome": "GOEC6O058 - Faixa 1",
-      "uuid": "b5a0f157-e8d4-478c-bf2b-91ebbfcf2a29",
-      "ip": "187.68.160.38"
-    },
-    {
-      "nome": "GOEC6O058 - Faixa 2",
-      "uuid": "6561d5fd-0aba-413b-a60a-a0d7e1b61b6d",
-      "ip": "187.68.160.38"
+      "nome": "GOEC6O048 - Faixa 2",
+      "uuid": "d23fe240-246f-4601-8987-d864ecb24d22",
+      "ip": "179.249.70.250"
     }
   ]
 }

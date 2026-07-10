@@ -357,17 +357,184 @@ const CASOS = [
     parametro: "SNMP.enabled",
     descricao: "O SNMP é um protocolo de monitoramento de rede (usado para verificar status de equipamentos remotos). Nesta frota, NÃO é utilizado — toda comunicação é via VARCO/REST.",
     problema: "SNMP ativo sem necessidade consome CPU/memória e expõe a câmera a consultas não autorizadas (versões SNMPv1/v2c não têm criptografia). É uma porta de entrada desnecessária.",
-    correcao: "Acessar: Interface Web da câmera › menu 'Sistema' › 'Monitoramento' › seção 'SNMP' › desmarcar 'Habilitado'. Via API: PUT /api/system/monitoring/snmp com body { enabled: false }",
+    correcao: "Via API: POST /api/system/monitoring/snmp com body { enabled: false } (o ITScam usa POST para escrita neste endpoint).",
     menu: "Interface Web › Sistema › Monitoramento › seção 'SNMP' › checkbox 'Habilitado'",
     endpoint: "/api/system/monitoring/snmp",
-    method: "PUT",
+    method: "POST",
     detectar: async (headers, base) => {
       const r = await fetchJSON(`${base}/api/system/monitoring/snmp`, { headers });
       if (r?.enabled === true) return { atual: true, correto: false };
       return null;
     },
     aplicar: async (headers, base) => {
-      return fetchJSON(`${base}/api/system/monitoring/snmp`, { method: "PUT", headers, body: JSON.stringify({ enabled: false }) });
+      const current = await fetchJSON(`${base}/api/system/monitoring/snmp`, { headers });
+      const payload = { ...current, enabled: false };
+      return fetchJSON(`${base}/api/system/monitoring/snmp`, { method: "POST", headers, body: JSON.stringify(payload) });
+    },
+  },
+
+  // ─── OTIMIZAÇÕES DE QUALIDADE E DESEMPENHO (casos 15–19) ──────────────────
+
+  {
+    id: 15,
+    titulo: "Vídeo Framerate < 15 fps (otimização de captura)",
+    severidade: "medio",
+    parametro: "Video.framerate",
+    descricao: "O framerate padrão foi atualizado de 12 para 15 fps para melhorar a janela de captura de veículos em velocidades acima de 80 km/h.",
+    problema: "A 100 km/h o veículo percorre ~28 m/s. Com 12 fps há ≈1-2 frames na zona de captura. Com 15 fps → 2-3 frames, aumentando a probabilidade de ter ao menos 1 frame nítido com a placa legível.",
+    correcao: "Via API: PUT /api/video/streams/0 com body { framerate: 15 }. Menu: Interface Web › Vídeo › Streams › Stream 1 › campo 'Taxa de frames'.",
+    menu: "Interface Web › Vídeo › Streams › Stream 1 › campo 'Taxa de frames'",
+    endpoint: "/api/video/streams/0",
+    method: "PUT",
+    payload: { framerate: 15 },
+    detectar: async (headers, base) => {
+      const r = await fetchJSON(`${base}/api/video/streams`, { headers });
+      const stream = Array.isArray(r) ? r[0] : r;
+      if (stream?.framerate !== undefined && stream.framerate !== 15) return { atual: stream.framerate, correto: 15 };
+      return null;
+    },
+    aplicar: async (headers, base) => {
+      const r = await fetchJSON(`${base}/api/video/streams`, { headers });
+      const stream = Array.isArray(r) ? r[0] : r;
+      const id = stream?.id ?? 0;
+      return fetchJSON(`${base}/api/video/streams/${id}`, { method: "PUT", headers, body: JSON.stringify({ framerate: 15 }) });
+    },
+  },
+  {
+    id: 16,
+    titulo: "Vídeo Qualidade JPEG < 90% (otimização de legibilidade)",
+    severidade: "medio",
+    parametro: "Video.quality",
+    descricao: "O padrão de qualidade JPEG foi atualizado de 85 para 90 para reduzir artefatos de compressão nas bordas dos caracteres da placa.",
+    problema: "JPEG 85 já é aceitável, porém o algoritmo de compressão pode gerar bloco de 8×8 pixels visíveis em caracteres finos de placas Mercosul. JPEG 90 reduz esses artefatos com aumento de ~15% no tamanho do arquivo.",
+    correcao: "Via API: PUT /api/video/streams/0 com body { quality: 90 }. Menu: Interface Web › Vídeo › Streams › Stream 1 › campo 'Qualidade'.",
+    menu: "Interface Web › Vídeo › Streams › Stream 1 › campo 'Qualidade'",
+    endpoint: "/api/video/streams/0",
+    method: "PUT",
+    payload: { quality: 90 },
+    detectar: async (headers, base) => {
+      const r = await fetchJSON(`${base}/api/video/streams`, { headers });
+      const stream = Array.isArray(r) ? r[0] : r;
+      if (stream?.quality !== undefined && stream.quality !== 90) return { atual: stream.quality, correto: 90 };
+      return null;
+    },
+    aplicar: async (headers, base) => {
+      const r = await fetchJSON(`${base}/api/video/streams`, { headers });
+      const stream = Array.isArray(r) ? r[0] : r;
+      const id = stream?.id ?? 0;
+      return fetchJSON(`${base}/api/video/streams/${id}`, { method: "PUT", headers, body: JSON.stringify({ quality: 90 }) });
+    },
+  },
+  {
+    id: 17,
+    titulo: "OCR maxLowProbChars = 0 (descarta placas parcialmente visíveis)",
+    severidade: "medio",
+    parametro: "OCR.maxLowProbChars",
+    descricao: "O parâmetro maxLowProbChars define quantos caracteres com baixa confiança (< lowProbChar=45%) são tolerados antes de descartar a leitura.",
+    problema: "Com 0, qualquer placa que tenha sequer 1 caractere com confiança < 45% é descartada completamente — isso inclui placas válidas de veículos sujos, com lama na borda ou parcialmente ocluídas. Permitir 1 caractere reduz falsos negativos mantendo a precisão aceitável.",
+    correcao: "Via API: PUT /api/equipment/ocr com body { ocr: { maxLowProbChars: 1 } }. Menu: Interface Web › Equipamento › OCR › campo 'Max. chars baixa probabilidade'.",
+    menu: "Interface Web › Equipamento › OCR › campo 'Max. chars baixa probabilidade'",
+    endpoint: "/api/equipment/ocr",
+    method: "PUT",
+    payload: { ocr: { maxLowProbChars: 1 } },
+    detectar: async (headers, base) => {
+      const r = await fetchJSON(`${base}/api/equipment/ocr`, { headers });
+      if (r?.ocr?.maxLowProbChars !== undefined && r.ocr.maxLowProbChars !== 1) return { atual: r.ocr.maxLowProbChars, correto: 1 };
+      return null;
+    },
+    aplicar: async (headers, base) => {
+      return fetchJSON(`${base}/api/equipment/ocr`, { method: "PUT", headers, body: JSON.stringify({ ocr: { maxLowProbChars: 1 } }) });
+    },
+  },
+  {
+    id: 18,
+    titulo: "OCR não usa resultado do classificador (useClassifierResult=false)",
+    severidade: "medio",
+    parametro: "OCR.useClassifierResult",
+    descricao: "O parâmetro useClassifierResult permite que o motor OCR use a saída do classificador de veículos para refinar a detecção de placas.",
+    problema: "Com false, o OCR trabalha de forma independente do classificador — perderá o benefício do filtro por tipo de veículo ao selecionar regiões de interesse. Com true, o classificador pré-filtra a região esperada da placa de acordo com o tipo/posição do veículo detectado, melhorando a acurácia em cenas com múltiplos objetos.",
+    correcao: "Via API: PUT /api/equipment/ocr com body { ocr: { useClassifierResult: true } }. Menu: Interface Web › Equipamento › OCR › opção 'Usar resultado do classificador'.",
+    menu: "Interface Web › Equipamento › OCR › opção 'Usar resultado do classificador'",
+    endpoint: "/api/equipment/ocr",
+    method: "PUT",
+    payload: { ocr: { useClassifierResult: true } },
+    detectar: async (headers, base) => {
+      const r = await fetchJSON(`${base}/api/equipment/ocr`, { headers });
+      if (r?.ocr?.useClassifierResult !== undefined && r.ocr.useClassifierResult !== true) return { atual: r.ocr.useClassifierResult, correto: true };
+      return null;
+    },
+    aplicar: async (headers, base) => {
+      return fetchJSON(`${base}/api/equipment/ocr`, { method: "PUT", headers, body: JSON.stringify({ ocr: { useClassifierResult: true } }) });
+    },
+  },
+  {
+    id: 19,
+    titulo: "Classificador minProbability < 40% (detecções pouco confiáveis)",
+    severidade: "medio",
+    parametro: "Classifier.minProbability",
+    descricao: "O parâmetro minProbability define o limiar mínimo de confiança para que o classificador reporte uma detecção de veículo.",
+    problema: "Com 20%, o classificador reporta até sombras, reflexos e objetos estáticos como 'veículos' com baixíssima confiança. Isso gera acionamentos desnecessários do OCR, consome CPU e pode poluir os logs de passagem. Com 40%, apenas detecções com confiança moderada a alta são processadas, reduzindo falsos positivos do classificador em ~30-40%.",
+    correcao: "Via API: PUT /api/equipment/classifier com body { classifier: { minProbability: 40 } }. Menu: Interface Web › Equipamento › Classificador › campo 'Probabilidade mínima'.",
+    menu: "Interface Web › Equipamento › Classificador › campo 'Probabilidade mínima'",
+    endpoint: "/api/equipment/classifier",
+    method: "PUT",
+    payload: { classifier: { minProbability: 40 } },
+    detectar: async (headers, base) => {
+      const r = await fetchJSON(`${base}/api/equipment/classifier`, { headers });
+      if (r?.classifier?.minProbability !== undefined && r.classifier.minProbability !== 40) return { atual: r.classifier.minProbability, correto: 40 };
+      return null;
+    },
+    aplicar: async (headers, base) => {
+      return fetchJSON(`${base}/api/equipment/classifier`, { method: "PUT", headers, body: JSON.stringify({ classifier: { minProbability: 40 } }) });
+    },
+  },
+
+  // ─── REBOOT (Manual — endpoint somente leitura) ────────────────────────────
+
+  {
+    id: 20,
+    titulo: "Reboot Agendado Habilitado (fora do padrão)",
+    severidade: "baixo",
+    parametro: "Reboot.scheduled.enabled",
+    descricao: "O padrão da frota é reboot.scheduled.enabled = false. Dispositivos com reboot agendado ativo divergem do padrão.",
+    problema: "Reboot automático agendado pode interromper o monitoramento em horários de pico e causar perda de registros. O padrão define desabilitado.",
+    correcao: "Via API: POST /api/system/maintenance/automaticreboot com scheduled.enabled=false (o ITScam usa POST para escrita neste endpoint).",
+    menu: "Interface Web › Sistema › Manutenção › Reboot Automático › Agendado",
+    endpoint: "/api/system/maintenance/automaticreboot",
+    method: "POST",
+    payload: { scheduled: { enabled: false } },
+    detectar: async (headers, base) => {
+      const r = await fetchJSON(`${base}/api/system/maintenance/automaticreboot`, { headers });
+      if (r?.scheduled?.enabled === true) return { atual: true, correto: false, detalhe: `weekdays=[${r.scheduled.weekdays}] hour=${r.scheduled.hour}` };
+      return null;
+    },
+    aplicar: async (headers, base) => {
+      const current = await fetchJSON(`${base}/api/system/maintenance/automaticreboot`, { headers });
+      const payload = { ...current, scheduled: { ...current.scheduled, enabled: false } };
+      return fetchJSON(`${base}/api/system/maintenance/automaticreboot`, { method: "POST", headers, body: JSON.stringify(payload) });
+    },
+  },
+  {
+    id: 21,
+    titulo: "Reboot Periódico Habilitado (fora do padrão)",
+    severidade: "baixo",
+    parametro: "Reboot.periodic.enabled",
+    descricao: "O padrão da frota é reboot.periodic.enabled = false.",
+    problema: "Reboot periódico por uptime pode interromper captura durante horários de movimento.",
+    correcao: "Via API: POST /api/system/maintenance/automaticreboot com periodic.enabled=false (o ITScam usa POST para escrita neste endpoint).",
+    menu: "Interface Web › Sistema › Manutenção › Reboot Automático › Periódico",
+    endpoint: "/api/system/maintenance/automaticreboot",
+    method: "POST",
+    payload: { periodic: { enabled: false } },
+    detectar: async (headers, base) => {
+      const r = await fetchJSON(`${base}/api/system/maintenance/automaticreboot`, { headers });
+      if (r?.periodic?.enabled === true) return { atual: true, correto: false, detalhe: `hours=${r.periodic.hours}` };
+      return null;
+    },
+    aplicar: async (headers, base) => {
+      const current = await fetchJSON(`${base}/api/system/maintenance/automaticreboot`, { headers });
+      const payload = { ...current, periodic: { ...current.periodic, enabled: false } };
+      return fetchJSON(`${base}/api/system/maintenance/automaticreboot`, { method: "POST", headers, body: JSON.stringify(payload) });
     },
   },
 ];

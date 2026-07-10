@@ -341,8 +341,8 @@ export default function DuplicidadeInfracoes() {
                 <thead>
                   <tr style={{ background: C.codeBg }}>
                     <th rowSpan={2} style={{ padding: "10px 12px", textAlign: "left", color: C.textMuted, borderBottom: `2px solid ${C.border}`, borderRight: `2px solid ${C.border}`, width: "11%" }}>Campo</th>
-                    <th colSpan={3} style={{ padding: "8px 12px", textAlign: "center", color: C.success, borderBottom: `1px solid ${C.border}`, borderRight: `2px solid ${C.border}` }}>INFRAÇÃO 1 (Restante: 2) ✓</th>
-                    <th colSpan={3} style={{ padding: "8px 12px", textAlign: "center", color: C.danger, borderBottom: `1px solid ${C.border}` }}>INFRAÇÃO 2 (Restante: 1) ✗</th>
+                    <th colSpan={3} style={{ padding: "8px 12px", textAlign: "center", color: C.success, borderBottom: `1px solid ${C.border}`, borderRight: `2px solid ${C.border}` }}>Infração 1 (Restante: 2) ✓</th>
+                    <th colSpan={3} style={{ padding: "8px 12px", textAlign: "center", color: C.danger, borderBottom: `1px solid ${C.border}` }}>Infração 2 (Restante: 1) ✗</th>
                     <th rowSpan={2} style={{ padding: "8px", textAlign: "center", color: C.textMuted, borderBottom: `2px solid ${C.border}`, borderLeft: `2px solid ${C.border}`, width: "5%" }}>⚙️</th>
                   </tr>
                   <tr style={{ background: C.codeBg, borderBottom: `2px solid ${C.border}` }}>
@@ -384,7 +384,7 @@ export default function DuplicidadeInfracoes() {
               {/* Infração 1 — OK */}
               <div style={{ ...cardStyle, borderColor: "rgba(108,203,95,0.3)" }}>
                 <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 14 }}>
-                  <Badge type="success" large>✓ INFRAÇÃO 1</Badge>
+                  <Badge type="success" large>✓ Infração 1</Badge>
                   <span style={{ fontSize: 12, color: C.textMuted }}>Restante Lote: 2 — 3 fontes CONSISTENTES</span>
                   <span style={{ marginLeft: "auto", fontSize: 11, color: C.success, fontWeight: 600 }}>100% ÍNTEGRO</span>
                 </div>
@@ -398,7 +398,7 @@ export default function DuplicidadeInfracoes() {
               {/* Infração 2 — PROBLEMA */}
               <div style={{ ...cardStyle, borderColor: C.dangerBorder }}>
                 <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 14 }}>
-                  <Badge type="danger" large>✗ INFRAÇÃO 2</Badge>
+                  <Badge type="danger" large>✗ Infração 2</Badge>
                   <span style={{ fontSize: 12, color: C.textMuted }}>Restante Lote: 1 — Imagem ≠ API/AxHub</span>
                   <span style={{ marginLeft: "auto", fontSize: 11, color: C.danger, fontWeight: 600 }}>DADOS CORROMPIDOS</span>
                 </div>

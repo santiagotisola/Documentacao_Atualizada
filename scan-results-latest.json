@@ -1,0 +1,91 @@
+﻿{
+    "scan_id":  "LING-1782225879990",
+    "timestamp":  "2026-06-23T14:44:39.990Z",
+    "projects":  [
+                     {
+                         "name":  "axion-ia-panel",
+                         "path":  "C:\\Users\\Santiago\\Axiondocs\\Axion.Docs\\axion-ia-panel",
+                         "files":  [
+
+                                   ],
+                         "issues_count":  0,
+                         "score":  100
+                     },
+                     {
+                         "name":  "axion-ia-api",
+                         "path":  "C:\\Users\\Santiago\\Axiondocs\\Axion.Docs\\axion-ia-api",
+                         "files":  [
+                                       {
+                                           "path":  "logs\\historico.json",
+                                           "full_path":  "C:\\Users\\Santiago\\Axiondocs\\Axion.Docs\\axion-ia-api\\logs\\historico.json",
+                                           "issues_count":  1,
+                                           "issues":  [
+                                                          {
+                                                              "type":  "json_value",
+                                                              "severity":  "high",
+                                                              "original":  "esta",
+                                                              "suggestion":  "está",
+                                                              "message":  "Erro de ortografia: \"esta\" → \"está\"",
+                                                              "category":  "orthography",
+                                                              "text":  "meu Equipamento esta offline",
+                                                              "line":  0
+                                                          }
+                                                      ]
+                                       },
+                                       {
+                                           "path":  "logs\\nao-respondidas.json",
+                                           "full_path":  "C:\\Users\\Santiago\\Axiondocs\\Axion.Docs\\axion-ia-api\\logs\\nao-respondidas.json",
+                                           "issues_count":  1,
+                                           "issues":  [
+                                                          {
+                                                              "type":  "json_value",
+                                                              "severity":  "high",
+                                                              "original":  "esta",
+                                                              "suggestion":  "está",
+                                                              "message":  "Erro de ortografia: \"esta\" → \"está\"",
+                                                              "category":  "orthography",
+                                                              "text":  "gostaria de verificar o Equipamento T1017-2, analisar imagens esta gerando duas imagens",
+                                                              "line":  0
+                                                          }
+                                                      ]
+                                       },
+                                       {
+                                           "path":  "logs\\whatsapp-erros.json",
+                                           "full_path":  "C:\\Users\\Santiago\\Axiondocs\\Axion.Docs\\axion-ia-api\\logs\\whatsapp-erros.json",
+                                           "issues_count":  1,
+                                           "issues":  [
+                                                          {
+                                                              "type":  "json_value",
+                                                              "severity":  "high",
+                                                              "original":  "esta",
+                                                              "suggestion":  "está",
+                                                              "message":  "Erro de ortografia: \"esta\" → \"está\"",
+                                                              "category":  "orthography",
+                                                              "text":  "esta na promoção",
+                                                              "line":  0
+                                                          }
+                                                      ]
+                                       }
+                                   ],
+                         "issues_count":  3,
+                         "score":  99.99338099020386
+                     }
+                 ],
+    "summary":  {
+                    "total_files":  4746,
+                    "total_texts":  45324,
+                    "total_issues":  3,
+                    "by_severity":  {
+                                        "critical":  0,
+                                        "high":  3,
+                                        "medium":  0,
+                                        "low":  0
+                                    },
+                    "by_category":  {
+                                        "orthography":  3,
+                                        "grammar":  0,
+                                        "terminology":  0,
+                                        "style":  0
+                                    }
+                }
+}

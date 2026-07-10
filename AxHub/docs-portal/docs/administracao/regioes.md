@@ -20,7 +20,7 @@ Permite cadastrar e gerenciar as regiões geográficas utilizadas no agrupamento
 | **Ativo** | Status do registro |
 
 :::note Sem screenshot
-Esta tela ainda não possui screenshot cadastrada. Será adicionada em breve.
+está tela ainda não possui screenshot cadastrada. Será adicionada em breve.
 :::
 
 ---

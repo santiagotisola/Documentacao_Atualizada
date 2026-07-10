@@ -1,0 +1,226 @@
+version: '3.8'
+
+services:
+  # ═══════════════════════════════════════════════════════════════════
+  # MongoDB - Banco de dados principal (Logs, KB, Configs, Sessões)
+  # ═══════════════════════════════════════════════════════════════════
+  mongodb:
+    image: mongo:7.0
+    container_name: axion-mongodb
+    restart: unless-stopped
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: admin123
+      MONGO_INITDB_DATABASE: axion-ia
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb_data:/data/db
+      - mongodb_config:/data/configdb
+    networks:
+      - axion-network
+    healthcheck:
+      test: ["CMD", "mongosh", "--eval", "db.adminCommand('ping')"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # ═══════════════════════════════════════════════════════════════════
+  # SQL Server 2022 - Bancos AxHub, AxTon, AxCross
+  # ═══════════════════════════════════════════════════════════════════
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: axion-sqlserver
+    restart: unless-stopped
+    environment:
+      ACCEPT_EULA: "Y"
+      MSSQL_SA_PASSWORD: "Axion@SqlServer2024"
+      MSSQL_PID: "Developer"
+      MSSQL_AGENT_ENABLED: "true"
+    ports:
+      - "1433:1433"
+    volumes:
+      - sqlserver_data:/var/opt/mssql
+      - ./docker/sqlserver-init:/docker-entrypoint-initdb.d
+    networks:
+      - axion-network
+    healthcheck:
+      test: ["CMD", "/opt/mssql-tools/bin/sqlcmd", "-S", "localhost", "-U", "sa", "-P", "Axion@SqlServer2024", "-Q", "SELECT 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+
+  # ═══════════════════════════════════════════════════════════════════
+  # AxionIA API - Backend Node.js/Express
+  # ═══════════════════════════════════════════════════════════════════
+  api:
+    build:
+      context: ./axion-ia-panel/api
+      dockerfile: Dockerfile
+    container_name: axion-ia-api
+    restart: unless-stopped
+    environment:
+      NODE_ENV: production
+      PORT: 3100
+      API_TOKEN: "4ca85296b69704ff408e570501c2480af8457da858defbced704ba4ad20d8bf3"
+      CORS_ORIGIN: "http://localhost:3017,http://localhost:3001,http://localhost:3002,http://localhost:3003,http://localhost:3004,http://localhost:3014,http://localhost:3015"
+      
+      # OpenAI
+      OPENAI_API_KEY: "${OPENAI_API_KEY}"
+      
+      # MongoDB (usando serviço Docker)
+      MONGO_URI: "mongodb://admin:admin123@mongodb:27017/axion-ia?authSource=admin"
+      
+      # Jitbit Helpdesk
+      JITBIT_URL: "https://desk.axiontecnologia.com.br/helpdesk"
+      JITBIT_USER: "santiago@axiontecnologia.com.br"
+      JITBIT_PASS: "Axion#2026"
+      
+      # SQL Server (usando serviço Docker)
+      AXHUB_DB_HOST: sqlserver
+      AXHUB_DB_PORT: 1433
+      AXHUB_DB_NAME: AxHub
+      AXHUB_DB_USER: sa
+      AXHUB_DB_PASS: "Axion@SqlServer2024"
+      AXHUB_DB_ENCRYPT: "false"
+      
+      AXTON_DB_HOST: sqlserver
+      AXTON_DB_PORT: 1433
+      AXTON_DB_NAME: AxTon
+      AXTON_DB_USER: sa
+      AXTON_DB_PASS: "Axion@SqlServer2024"
+      AXTON_DB_ENCRYPT: "false"
+      
+      AXCROSS_DB_HOST: sqlserver
+      AXCROSS_DB_PORT: 1433
+      AXCROSS_DB_NAME: AxCross
+      AXCROSS_DB_USER: sa
+      AXCROSS_DB_PASS: "Axion@SqlServer2024"
+      AXCROSS_DB_ENCRYPT: "false"
+      
+      # Credenciais dos Sites
+      AXHUB_LOGIN_SUPORTE: "suporte@axiontecnologia.com.br"
+      AXHUB_SENHA_SUPORTE: "Axion#2023"
+      AXHUB_LOGIN_ADMIN: "Admin"
+      AXHUB_SENHA_ADMIN: "labor5383"
+      AXHUB_LOGIN_ADMIN_ALT: "admin"
+      AXHUB_SENHA_ADMIN_ALT: "Labor5383"
+      AXCROSS_LOGIN_SUPORTE: "suporte@axiontecnologia.com.br"
+      AXCROSS_SENHA_SUPORTE: "Axion#2026"
+      
+      # VARCO (opcional - descomentar quando tiver credenciais)
+      # VARCO_EMAIL: ""
+      # VARCO_PASSWORD: ""
+    ports:
+      - "3100:3100"
+    volumes:
+      - ./axion-ia-panel/api/logs:/app/logs
+      - ./axion-ia-panel/api/reports:/app/reports
+      - ./axion-ia-panel/api/screenshots:/app/screenshots
+      - ./axion-ia-panel/api/public:/app/public
+      - ./axion-ia-panel/api/whatsapp-auth:/app/whatsapp-auth
+    depends_on:
+      mongodb:
+        condition: service_healthy
+      sqlserver:
+        condition: service_healthy
+    networks:
+      - axion-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3100/api/portal/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # ═══════════════════════════════════════════════════════════════════
+  # AxionIA Panel - Frontend React/Vite
+  # ═══════════════════════════════════════════════════════════════════
+  panel:
+    build:
+      context: ./axion-ia-panel
+      dockerfile: Dockerfile
+    container_name: axion-ia-panel
+    restart: unless-stopped
+    environment:
+      VITE_API_URL: "http://localhost:3100"
+      VITE_API_TOKEN: "4ca85296b69704ff408e570501c2480af8457da858defbced704ba4ad20d8bf3"
+    ports:
+      - "3017:80"
+    depends_on:
+      - api
+    networks:
+      - axion-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:80"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # ═══════════════════════════════════════════════════════════════════
+  # AxHub.Docs - Portal de Documentação (opcional)
+  # ═══════════════════════════════════════════════════════════════════
+  axhub-docs:
+    build:
+      context: ./AxHub
+      dockerfile: Dockerfile
+    container_name: axhub-docs
+    restart: unless-stopped
+    ports:
+      - "3010:80"
+    networks:
+      - axion-network
+    profiles:
+      - docs
+
+  # ═══════════════════════════════════════════════════════════════════
+  # AxTon.Docs - Portal de Documentação (opcional)
+  # ═══════════════════════════════════════════════════════════════════
+  axton-docs:
+    build:
+      context: ./AxTon
+      dockerfile: Dockerfile
+    container_name: axton-docs
+    restart: unless-stopped
+    ports:
+      - "3011:80"
+    networks:
+      - axion-network
+    profiles:
+      - docs
+
+  # ═══════════════════════════════════════════════════════════════════
+  # AxCross.Docs - Portal de Documentação (opcional)
+  # ═══════════════════════════════════════════════════════════════════
+  axcross-docs:
+    build:
+      context: ./AxCross
+      dockerfile: Dockerfile
+    container_name: axcross-docs
+    restart: unless-stopped
+    ports:
+      - "3012:80"
+    networks:
+      - axion-network
+    profiles:
+      - docs
+
+# ═══════════════════════════════════════════════════════════════════
+# Redes
+# ═══════════════════════════════════════════════════════════════════
+networks:
+  axion-network:
+    driver: bridge
+    name: axion-network
+
+# ═══════════════════════════════════════════════════════════════════
+# Volumes persistentes
+# ═══════════════════════════════════════════════════════════════════
+volumes:
+  mongodb_data:
+    name: axion-mongodb-data
+  mongodb_config:
+    name: axion-mongodb-config
+  sqlserver_data:
+    name: axion-sqlserver-data
+
+

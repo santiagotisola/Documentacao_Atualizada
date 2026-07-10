@@ -6,11 +6,11 @@ description: Gestão de alertas e ocorrências no AxCross
 
 # Alertas
 
-Os alertas registram eventos detectados pelo sistema que requerem atenção, como detecção de veículos monitorados, equipamentos offline ou ocorrências de trânsito.
+Os alertas registram eventos detectados pelo sistema que requerem atenção, como detecção de Veículos monitorados, Equipamentos offline ou ocorrências de trânsito.
 
 ## Como acessar
 
-No **menu lateral**, clique em **Alertas** (disponível também no painel Dashboard).
+No **menu lateral**, clique em **Alertas** (disponível também no Use Dashboard Dashboard
 
 ![Lista de Alertas](../img/Alertas.png)
 
@@ -18,8 +18,8 @@ No **menu lateral**, clique em **Alertas** (disponível também no painel Dashbo
 
 | Tipo | Descrição |
 |------|-----------|
-| **Veículo Monitorado** | Placa cadastrada como monitorada foi detectada |
-| **Equipamento Offline** | Equipamento sem comunicação além do tempo limite |
+| Veículo Monitorado** | Placa cadastrada como monitorada foi detectada |
+| Equipamento Offline** | Equipamento sem comunicação além do tempo limite |
 | **Falha de Imagem** | Equipamento detectou passagem mas sem imagem |
 | **Ocorrência de Trânsito** | Evento registrado manualmente pela operação |
 
@@ -46,7 +46,7 @@ Configure os tipos de ocorrência disponíveis para categorizar os alertas manua
 
 1. Na tela de Alertas, clique em **Novo Alerta**
 2. Selecione o **Tipo de Ocorrência**
-3. Informe o **Local** e **Equipamento** relacionado
+3. Informe o **Local** e Equipamento relacionado
 4. Descreva a **Ocorrência**
 5. Clique em **Salvar**
 
@@ -54,8 +54,8 @@ Configure os tipos de ocorrência disponíveis para categorizar os alertas manua
 
 Para exportar e consultar ocorrências registradas:
 
-![Relatório de Ocorrências](../img/Relatório de Ocorrências.png)
+Relatório de Ocorrências](../img/Relatório de Ocorrências.png)
 
 :::tip Dica
-Acesse o relatório de ocorrências para consolidar as tratativas realizadas e gerar evidências de fiscalização.
+Acesse o Relatório de ocorrências para consolidar as tratativas realizadas e gerar evidências de fiscalização.
 :::

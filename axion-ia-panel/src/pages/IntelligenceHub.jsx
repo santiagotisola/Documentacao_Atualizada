@@ -3,6 +3,7 @@ import { AXHUB_SITES, AXCROSS_SITES, MODULOS, TIPOS_CONTRATO } from '../data/sit
 import { api } from '../services/api';
 import { KPICard, LoadingSpinner } from '../components/ui';
 import { Building2, TrendingUp, Ticket, AlertCircle, Camera, Target } from 'lucide-react';
+import QuickSelect from '../components/QuickSelect.jsx';
 import './IntelligenceHub.css';
 
 const AXTON_SITES = [
@@ -167,7 +168,7 @@ export default function IntelligenceHub() {
       <header className="ih-header">
         <div className="ih-header-text">
           <h1>🧠 Intelligence Hub</h1>
-          <p>Gerenciador unificado de dados, relatórios e performance</p>
+          <p>Gerenciador unificado de dados, Relatórios e performance</p>
         </div>
         <div className="ih-header-score">
           <div className="ih-score-circle" style={{ borderColor: scoreColor(kpis.avgScore) }}>
@@ -178,17 +179,19 @@ export default function IntelligenceHub() {
       </header>
 
       {/* Tabs */}
-      <nav className="ih-tabs">
-        {TABS.map(t => (
-          <button
-            key={t.id}
-            className={`ih-tab${tab === t.id ? ' active' : ''}`}
-            onClick={() => setTab(t.id)}
-          >
-            {t.label}
-          </button>
-        ))}
-      </nav>
+      <div style={{ padding: '12px 0 4px', display: 'flex', alignItems: 'center', gap: 8 }}>
+        <QuickSelect
+          options={TABS}
+          value={tab}
+          onChange={setTab}
+          color="#3b82f6"
+          label="Seção"
+          width={260}
+        />
+        {active => active?.desc && (
+          <span style={{ fontSize: 12, color: '#9ca3af' }}>{active.desc}</span>
+        )}
+      </div>
 
       {/* Conteúdo */}
       <div className="ih-content">
@@ -644,7 +647,7 @@ function RelatoriosTab({ sitesComScore, chamadosData, kpis }) {
     <div className="ih-relatorios">
       <div className="ih-section">
         <h3>📋 Geração de Relatórios</h3>
-        <p className="ih-section-desc">Gere relatórios consolidados combinando dados de sites, chamados e performance</p>
+        <p className="ih-section-desc">Gere Relatórios consolidados combinando dados de sites, chamados e performance</p>
         <div className="ih-rel-buttons">
           <button className="ih-rel-btn" onClick={() => gerarRelatorio('executivo')}>
             <span>📊</span>

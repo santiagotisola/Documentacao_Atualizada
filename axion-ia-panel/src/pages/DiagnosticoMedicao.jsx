@@ -136,7 +136,7 @@ const DiagnosticoMedicao = () => {
         <Activity className="header-icon" size={32} />
         <div>
           <h1>Diagnóstico de Medição</h1>
-          <p>Análise inteligente de equipamentos com valores zerados no relatório de medição</p>
+          <p>Análise inteligente de Equipamentos com valores zerados no Relatório de medição</p>
         </div>
       </div>
       
@@ -376,7 +376,7 @@ const DiagnosticoMedicao = () => {
               
               <div className="alerta alerta-info">
                 <AlertCircle size={16} />
-                <span>Você precisa cadastrar <strong>RECURSOS</strong> para cada faixa do equipamento no sistema AxHub.</span>
+                <span>Você precisa cadastrar <strong>RECURSOS</strong> para cada faixa do Equipamento no sistema AxHub.</span>
               </div>
               
               <div className="onde-cadastrar">
@@ -393,7 +393,7 @@ const DiagnosticoMedicao = () => {
                   <h4>✅ Cadastrar Recurso para Faixa 1:</h4>
                   <div className="campos-lista">
                     <div className="campo-item">
-                      <strong>Equipamento:</strong> Selecione {diagnostico.equipamento}
+                      <strong>Equipamento</strong> Selecione {diagnostico.equipamento}
                     </div>
                     <div className="campo-item">
                       <strong>Faixa:</strong> Selecione <strong>Faixa 1</strong>
@@ -431,7 +431,7 @@ const DiagnosticoMedicao = () => {
                   <h4>⚠️ Cadastrar Recurso para Faixa 2:</h4>
                   <div className="campos-lista">
                     <div className="campo-item">
-                      <strong>Equipamento:</strong> Selecione {diagnostico.equipamento}
+                      <strong>Equipamento</strong> Selecione {diagnostico.equipamento}
                     </div>
                     <div className="campo-item">
                       <strong>Faixa:</strong> Selecione <strong>Faixa 2</strong> ⚠️
@@ -464,7 +464,7 @@ const DiagnosticoMedicao = () => {
               
               <div className="alerta alerta-atencao">
                 <AlertCircle size={16} />
-                <span><strong>IMPORTANTE:</strong> Cadastre 1 recurso para CADA faixa. Se o equipamento tem 2 faixas, precisa de 2 recursos.</span>
+                <span><strong>IMPORTANTE:</strong> Cadastre 1 recurso para CADA faixa. Se o Equipamento tem 2 faixas, precisa de 2 recursos.</span>
               </div>
               
               <div className="validacao">
@@ -482,7 +482,7 @@ const DiagnosticoMedicao = () => {
                         <li>VALOR PREVISTO: R$ 15.000,00 (por faixa)</li>
                         <li>BDI: 25,00%</li>
                         <li>TOTAL: R$ 18.750,00 (por faixa)</li>
-                        <li><strong>TOTAL EQUIPAMENTO: R$ 37.500,00</strong></li>
+                        <li><strong>TOTAL Equipamento R$ 37.500,00</strong></li>
                       </ul>
                     </div>
                   </li>

@@ -1,14 +1,14 @@
 ﻿---
 sidebar_position: 4
 title: Reclassificação de Veículos
-description: Reclassificar veículos durante o processo de pesagem
+description: Reclassificar Veículos durante o processo de pesagem
 ---
 
 # Reclassificação de Veículos
 
 ![Selecionar Classificação](../img/Iniciar%20pesagem%20-%20selecionar%20por%20classificacao.png)
 
-Permite alterar a classificação de um veículo durante o processo de pesagem quando a classificação automática não corresponde ao veículo real.
+Permite alterar a classificação de um Veículo durante o processo de pesagem quando a classificação automática não corresponde ao Veículo real.
 
 ## Como acessar
 
@@ -16,8 +16,8 @@ Permite alterar a classificação de um veículo durante o processo de pesagem q
 
 ## Quando reclassificar
 
-- O veículo foi classificado incorretamente pelo sistema
-- Mudança de configuração de eixos
+- O Veículo foi classificado incorretamente pelo sistema
+- Mudança de Configuração de eixos
 - Veículo com reboque não detectado
 
 ### Campos da Reclassificação
@@ -26,7 +26,7 @@ Permite alterar a classificação de um veículo durante o processo de pesagem q
 |-------|:-----------:|-----------|
 | **Ticket** | Sim | Número do ticket de pesagem |
 | **Classificação Atual** | — | Classificação atribuída automaticamente |
-| **Nova Classificação** | Sim | Classificação correta do veículo |
+| **Nova Classificação** | Sim | Classificação correta do Veículo |
 | **Motivo** | Sim | Justificativa para a reclassificação |
 
 ### Passo a passo

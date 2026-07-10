@@ -120,7 +120,7 @@ export default function RelatorioFluxo() {
 
         {/* Equipamento */}
         <div>
-          <div style={{ fontSize: 11, color: "#94a3b8", marginBottom: 4 }}>EQUIPAMENTO</div>
+          <div style={{ fontSize: 11, color: "#94a3b8", marginBottom: 4 }}>Equipamento</div>
           <select value={equipamento} onChange={e => setEquipamento(e.target.value)}
             style={{ padding: "6px 10px", borderRadius: 6, border: "1px solid #334155", background: "#1e293b", color: "#e2e8f0", fontSize: 13, maxWidth: 220 }}>
             <option value="TODOS">TODOS</option>
@@ -274,7 +274,7 @@ export default function RelatorioFluxo() {
       {!dados && !carregando && (
         <div style={{ textAlign: "center", padding: 60, color: "#94a3b8" }}>
           <p style={{ fontSize: 36 }}>🗂️</p>
-          <p>Selecione o tipo, período e equipamento, depois clique em <strong>Consultar</strong>.</p>
+          <p>Selecione o tipo, período e Equipamento depois clique em <strong>Consultar</strong>.</p>
         </div>
       )}
 

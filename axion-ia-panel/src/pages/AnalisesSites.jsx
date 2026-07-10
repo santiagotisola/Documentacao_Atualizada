@@ -1,5 +1,7 @@
 import React, { useState, useMemo } from 'react';
 import { AXHUB_SITES, AXCROSS_SITES, MODULOS, TIPOS_CONTRATO, FEATURE_FLAGS } from '../data/sitesData';
+import { StatCard } from '../components/common';
+import QuickSelect from '../components/QuickSelect.jsx';
 import GuiaSites from './GuiaSites';
 import IntelligenceDashboard from './IntelligenceDashboard';
 import CredenciaisManager from '../components/CredenciaisManager';
@@ -21,7 +23,7 @@ function PainelMetodologia({ aberto, toggle }) {
         <div className="metodologia-conteudo">
           {/* Metodologia */}
           <div className="metodologia-secao">
-            <h3>🔬 Como esta análise foi feita</h3>
+            <h3>🔬 Como está Análise foi feita</h3>
             <p>
               Cada site <strong>AxHub</strong> e <strong>AxCross</strong> foi acessado individualmente via navegador automatizado.
               Os dados foram coletados diretamente das telas do sistema em produção, sem acesso ao banco de dados.
@@ -29,7 +31,7 @@ function PainelMetodologia({ aberto, toggle }) {
             </p>
             <ul>
               <li><strong>Período:</strong> Maio de 2026</li>
-              <li><strong>Método:</strong> Login no sistema → navegação por todas as telas → extração de contagens, versões e configurações visíveis</li>
+              <li><strong>Método:</strong> Login no sistema → navegação por todas as telas → extração de contagens, versões e Configurações visíveis</li>
               <li><strong>Cobertura AxHub:</strong> 14 de 15 sites acessados (ITPS inacessível por credenciais)</li>
               <li><strong>Cobertura AxCross:</strong> 8 de 9 sites acessados (SETRANS inacessível por timeout)</li>
             </ul>
@@ -41,19 +43,19 @@ function PainelMetodologia({ aberto, toggle }) {
             <div className="glossario-grid">
               <div className="glossario-item">
                 <strong>📊 Visão Geral</strong>
-                <p>Cards resumidos de cada site. Mostra nome, estado, tipo de contrato, versão, quantidade de menus, BI reports, equipamentos e OCR. Clique em um card para selecioná-lo para comparação ou detalhe.</p>
+                <p>Cards resumidos de cada site. Mostra nome, estado, tipo de contrato, versão, quantidade de menus, BI reports, Equipamentos e OCR. Clique em um card para selecioná-lo para comparação ou detalhe.</p>
               </div>
               <div className="glossario-item">
                 <strong>⚖️ Comparar</strong>
-                <p>Tabela lado a lado dos sites selecionados (ou todos os ativos). Compara Funcionalidades Ativas, relatórios BI disponíveis e métricas gerais. Ideal para identificar diferenças entre contratos.</p>
+                <p>Tabela lado a lado dos sites selecionados (ou todos os ativos). Compara Funcionalidades Ativas, Relatórios BI disponíveis e métricas gerais. Ideal para identificar diferenças entre contratos.</p>
               </div>
               <div className="glossario-item">
                 <strong>🔍 Detalhe Individual</strong>
-                <p>Ficha completa de um site específico com todas as informações coletadas: dados gerais, funcionalidades ativas, lista de relatórios BI, equipamentos, grupos operacionais e observações.</p>
+                <p>Ficha completa de um site específico com todas as informações coletadas: dados gerais, funcionalidades ativas, lista de Relatórios BI, Equipamentos grupos operacionais e observações.</p>
               </div>
               <div className="glossario-item">
                 <strong>🧩 Por Módulo</strong>
-                <p>Visualização centrada nos módulos do sistema (Infrações, Cronotacógrafo, Balança, MDF-e, etc.). Mostra quais sites têm cada módulo disponível.</p>
+                <p>Visualização centrada nos módulos do sistema Infrações Cronotacógrafo, Balança, MDF-e, etc.). Mostra quais sites têm cada módulo disponível.</p>
               </div>
             </div>
           </div>
@@ -88,29 +90,29 @@ function PainelMetodologia({ aberto, toggle }) {
                   <td><strong>Relatórios BI</strong></td>
                   <td>Dashboards Power BI integrados ao sistema, acessíveis em Relatórios → Relatórios BI</td>
                   <td>Navegação à tela <code>/relatorio/relatoriobi</code> e listagem dos links disponíveis</td>
-                  <td>Variam muito entre contratos. Alguns são exclusivos de um site (ex: "Infrações Arrecadadas por Equip." no SMTT)</td>
+                  <td>Variam muito entre contratos. Alguns são exclusivos de um site (ex: Infrações Arrecadadas por Equip." no SMTT)</td>
                 </tr>
                 <tr>
                   <td><strong>Equipamentos</strong></td>
                   <td>Dispositivos de fiscalização cadastrados (radares, câmeras OCR, balanças)</td>
-                  <td>Tela de Operações — contagem de linhas na tabela de equipamentos</td>
+                  <td>Tela de Operações — contagem de linhas na tabela de Equipamentos</td>
                   <td>Reflete o tamanho do parque instalado do contrato</td>
                 </tr>
                 <tr>
                   <td><strong>Grupos</strong></td>
-                  <td>Agrupamentos operacionais dos equipamentos (ex: FOCALLE, BLITZ, LOTE 01)</td>
+                  <td>Agrupamentos operacionais dos Equipamentos (ex: FOCALLE, BLITZ, LOTE 01)</td>
                   <td>Cabeçalhos de grupo na tela de Operações</td>
-                  <td>Indica como o órgão organiza seus equipamentos — por fabricante, lote licitatório ou tipo</td>
+                  <td>Indica como o órgão organiza seus Equipamentos — por fabricante, lote licitatório ou tipo</td>
                 </tr>
                 <tr>
                   <td><strong>Fabricantes</strong></td>
-                  <td>Fabricantes dos equipamentos de fiscalização (ex: FOCALLE, PERKONS, VIZENTEC)</td>
+                  <td>Fabricantes dos Equipamentos de fiscalização (ex: FOCALLE, PERKONS, VIZENTEC)</td>
                   <td>Coluna "Fabricante" na tela de Operações</td>
                   <td>Mostra a diversidade de fornecedores de hardware em cada contrato</td>
                 </tr>
                 <tr>
                   <td><strong>OCR %</strong></td>
-                  <td>Taxa de reconhecimento óptico de caracteres nas placas dos veículos</td>
+                  <td>Taxa de reconhecimento óptico de caracteres nas placas dos Veículos</td>
                   <td>Dashboard principal — widget de Triagem Mensal</td>
                   <td>Métrica de qualidade: indica a precisão na leitura automática de placas. Varia de ~50% a ~97%</td>
                 </tr>
@@ -122,7 +124,7 @@ function PainelMetodologia({ aberto, toggle }) {
                 </tr>
                 <tr>
                   <td><strong>Passagens/dia</strong></td>
-                  <td>Volume médio de passagens de veículos registradas por dia</td>
+                  <td>Volume médio de passagens de Veículos registradas por dia</td>
                   <td>Dashboard principal — widget de passagens diárias (quando disponível)</td>
                   <td>Indica o volume de tráfego monitorado pelo contrato</td>
                 </tr>
@@ -141,22 +143,22 @@ function PainelMetodologia({ aberto, toggle }) {
                 <tr>
                   <td><strong>Equipamentos</strong></td>
                   <td>Quantidade de pontos de monitoramento cadastrados</td>
-                  <td>Dashboard principal — card "Equipamentos"</td>
+                  <td>Dashboard principal — card Equipamentos</td>
                 </tr>
                 <tr>
                   <td><strong>Faixas</strong></td>
-                  <td>Total de faixas de rolamento monitoradas (cada equipamento pode cobrir múltiplas faixas)</td>
+                  <td>Total de faixas de rolamento monitoradas (cada Equipamento pode cobrir múltiplas faixas)</td>
                   <td>Dashboard principal — card "Faixas"</td>
                 </tr>
                 <tr>
                   <td><strong>Alertas</strong></td>
-                  <td>Alertas de cruzamento ativos (veículo monitorado detectado por câmera)</td>
+                  <td>Alertas de cruzamento ativos Veículo monitorado detectado por câmera)</td>
                   <td>Dashboard principal — card "Alertas"</td>
                 </tr>
                 <tr>
                   <td><strong>Veículos Monitorados</strong></td>
-                  <td>Placas cadastradas para monitoramento (veículos de interesse)</td>
-                  <td>Dashboard principal — card "Veículos Monitorados"</td>
+                  <td>Placas cadastradas para monitoramento Veículos de interesse)</td>
+                  <td>Dashboard principal — card Veículos Monitorados"</td>
                 </tr>
                 <tr>
                   <td><strong>Passagens/dia</strong></td>
@@ -178,7 +180,7 @@ function PainelMetodologia({ aberto, toggle }) {
             <div className="glossario-grid">
               <div className="glossario-item" style={{ borderLeft: '4px solid #3498db' }}>
                 <strong>Metrologia</strong>
-                <p>Contratos com Institutos de Pesos e Medidas (IPEM/IMETRO). Verificação metrológica de equipamentos de fiscalização. Inclui módulo Cronotacógrafo e padrão de BI com relatórios "Crono".</p>
+                <p>Contratos com Institutos de Pesos e Medidas (IPEM/IMETRO). Verificação metrológica de Equipamentos de fiscalização. Inclui módulo Cronotacógrafo e padrão de BI com Relatórios "Crono".</p>
               </div>
               <div className="glossario-item" style={{ borderLeft: '4px solid #e74c3c' }}>
                 <strong>Trânsito Municipal</strong>
@@ -186,15 +188,15 @@ function PainelMetodologia({ aberto, toggle }) {
               </div>
               <div className="glossario-item" style={{ borderLeft: '4px solid #e67e22' }}>
                 <strong>Trânsito Estadual</strong>
-                <p>Contratos com DETRANs estaduais. Fiscalização de velocidade em rodovias estaduais. Podem incluir pesagem veicular e múltiplos fabricantes de equipamentos.</p>
+                <p>Contratos com DETRANs estaduais. Fiscalização de velocidade em rodovias estaduais. Podem incluir pesagem veicular e múltiplos fabricantes de Equipamentos</p>
               </div>
               <div className="glossario-item" style={{ borderLeft: '4px solid #2ecc71' }}>
                 <strong>Rodovias</strong>
-                <p>Contratos com departamentos rodoviários (ex: DERSE). Foco em fiscalização rodoviária incluindo pesagem. Geralmente o maior parque de equipamentos.</p>
+                <p>Contratos com departamentos rodoviários (ex: DERSE). Foco em fiscalização rodoviária incluindo pesagem. Geralmente o maior parque de Equipamentos</p>
               </div>
               <div className="glossario-item" style={{ borderLeft: '4px solid #9b59b6' }}>
                 <strong>Fiscal</strong>
-                <p>Contratos com secretarias de fazenda/economia. Foco em monitoramento fiscal de cargas e veículos. Inclui módulos exclusivos como MDF-e (SEFAZPI) ou OCR avançado (ECONOMIA).</p>
+                <p>Contratos com secretarias de fazenda/economia. Foco em monitoramento fiscal de cargas e Veículos Inclui módulos exclusivos como MDF-e (SEFAZPI) ou OCR avançado (ECONOMIA).</p>
               </div>
             </div>
           </div>
@@ -209,7 +211,7 @@ function PainelMetodologia({ aberto, toggle }) {
               <tbody>
                 <tr>
                   <td><strong>Status Ativo/Inacessível</strong></td>
-                  <td>Ativo = login bem-sucedido e dados coletados. Inacessível = credenciais inválidas ou timeout de rede.</td>
+                  <td>Ativo = Login bem-sucedido e dados coletados. Inacessível = credenciais inválidas ou timeout de rede.</td>
                 </tr>
                 <tr>
                   <td><strong>Menu base (80)</strong></td>
@@ -324,34 +326,16 @@ function VistaSites({ sites, sistema, selecionados, toggleSelecionado }) {
           </div>
           {sistema === 'axhub' && site.status === 'ativo' && (
             <div className="site-card-stats">
-              <div className="stat-item">
-                <div className="stat-valor">{site.bi?.length || 0}</div>
-                <div className="stat-label">BI Reports</div>
-              </div>
-              <div className="stat-item">
-                <div className="stat-valor">{site.equipamentos?.total || '—'}</div>
-                <div className="stat-label">Equip.</div>
-              </div>
-              <div className="stat-item">
-                <div className="stat-valor">{site.ocr ? `${site.ocr}%` : '—'}</div>
-                <div className="stat-label">OCR</div>
-              </div>
+              <StatCard value={site.bi?.length || 0} label="BI Reports" size="small" />
+              <StatCard value={site.equipamentos?.total || '—'} label="Equip." size="small" />
+              <StatCard value={site.ocr ? `${site.ocr}%` : '—'} label="OCR" size="small" />
             </div>
           )}
           {sistema === 'axcross' && site.status === 'ativo' && (
             <div className="site-card-stats">
-              <div className="stat-item">
-                <div className="stat-valor">{site.equipamentos}</div>
-                <div className="stat-label">Equip.</div>
-              </div>
-              <div className="stat-item">
-                <div className="stat-valor">{site.faixas}</div>
-                <div className="stat-label">Faixas</div>
-              </div>
-              <div className="stat-item">
-                <div className="stat-valor">{site.passagensDia?.toLocaleString('pt-BR') || '—'}</div>
-                <div className="stat-label">Pass/dia</div>
-              </div>
+              <StatCard value={site.equipamentos} label="Equip." size="small" />
+              <StatCard value={site.faixas} label="Faixas" size="small" />
+              <StatCard value={site.passagensDia?.toLocaleString('pt-BR') || '—'} label="Pass/dia" size="small" />
             </div>
           )}
           {site.observacoes && (
@@ -643,7 +627,7 @@ function VistaDetalhe({ siteId, sistema }) {
         <div className="detalhe-secao">
           <h4>📊 Métricas</h4>
           <ul className="detalhe-lista">
-            <li><strong>Equipamentos:</strong> {site.equipamentos}</li>
+            <li><strong>Equipamentos</strong> {site.equipamentos}</li>
             <li><strong>Faixas:</strong> {site.faixas}</li>
             <li><strong>Alertas:</strong> {site.alertas}</li>
             <li><strong>Veículos Monitorados:</strong> {site.veiculos?.toLocaleString('pt-BR') || '0'}</li>
@@ -748,13 +732,13 @@ function VistaModulo({ moduloFiltro }) {
    ═══════════════════════════════════════════════════════════════════════ */
 
 const TABS = [
-  { id: 'intelligence', label: '🧠 Intelligence' },
-  { id: 'credenciais', label: '🔑 Credenciais' },
-  { id: 'visao-geral', label: '📊 Visão Geral' },
-  { id: 'comparar', label: '⚖️ Comparar' },
-  { id: 'detalhe', label: '🔍 Detalhe Individual' },
-  { id: 'modulos', label: '🧩 Por Módulo' },
-  { id: 'guia', label: '📋 Guia por Site' },
+  { id: 'intelligence', label: '🧠 Intelligence',      desc: 'Dashboard de conformidade e plano de ações' },
+  { id: 'visao-geral',  label: '📊 Visão Geral',        desc: 'Cards com todos os sites — clique para selecionar' },
+  { id: 'comparar',    label: '⚖️ Comparar',           desc: 'Tabela lado a lado dos sites selecionados' },
+  { id: 'detalhe',     label: '🔍 Detalhe Individual', desc: 'Ficha completa do site selecionado' },
+  { id: 'modulos',     label: '🧩 Por Módulo',         desc: 'Disponibilidade de módulos por contrato' },
+  { id: 'guia',        label: '📋 Guia por Site',      desc: 'Manual operacional de cada ambiente' },
+  { id: 'credenciais', label: '🔑 Credenciais',        desc: 'Logins e senhas dos ambientes' },
 ];
 
 function AnalisesSites() {
@@ -804,7 +788,7 @@ function AnalisesSites() {
 
         <PainelMetodologia aberto={metodologiaAberta} toggle={() => setMetodologiaAberta(v => !v)} />
 
-        {/* Tabs */}
+        {/* ── Abas de navegação principal ── */}
         <div className="analise-tabs">
           {TABS.map(t => (
             <button
@@ -817,50 +801,72 @@ function AnalisesSites() {
           ))}
         </div>
 
-        {/* Filtros */}
-        <div className="filtros-container">
-          <div className="filtro-grupo">
-            <label>Sistema</label>
-            <select value={sistema} onChange={e => { setSistema(e.target.value); setSelecionados([]); setTipoFiltro(''); }}>
-              <option value="axhub">AxHub (Fiscalização)</option>
-              <option value="axcross">AxCross (Cruzamento)</option>
-            </select>
+        {/* ── Barra de filtros ── */}
+        <div style={{ display: 'flex', alignItems: 'center', gap: 8, flexWrap: 'wrap', padding: '8px 0 4px' }}>
+
+          {/* Toggle Sistema — apenas 2 opções, toggle compacto */}
+          <div style={{ display: 'flex', borderRadius: 8, overflow: 'hidden', border: '1.5px solid #e5e7eb' }}>
+            {[{v:'axhub', icon:'🚦', label:'AxHub'}, {v:'axcross', icon:'📡', label:'AxCross'}].map(op => (
+              <button
+                key={op.v}
+                onClick={() => { setSistema(op.v); setSelecionados([]); setTipoFiltro(''); }}
+                style={{
+                  padding: '5px 12px', border: 'none', cursor: 'pointer', fontSize: 12, fontWeight: 600,
+                  background: sistema === op.v ? (op.v === 'axhub' ? '#ef4444' : '#10b981') : '#f9fafb',
+                  color: sistema === op.v ? '#fff' : '#6b7280',
+                  transition: 'all 0.15s',
+                }}
+              >
+                {op.icon} {op.label}
+              </button>
+            ))}
           </div>
 
-          <div className="filtro-grupo">
-            <label>Tipo Contrato</label>
-            <select value={tipoFiltro} onChange={e => setTipoFiltro(e.target.value)}>
-              <option value="">Todos</option>
-              {tipos.map(t => <option key={t} value={t}>{t}</option>)}
-            </select>
-          </div>
+          {/* Tipo Contrato */}
+          <QuickSelect
+            options={[{ id: '', label: 'Todos os Tipos' }, ...tipos.map(t => ({ id: t, label: t }))]}
+            value={tipoFiltro}
+            onChange={setTipoFiltro}
+            color="#f59e0b"
+            label="Tipo"
+            width={200}
+          />
 
-          <div className="filtro-grupo">
-            <label>Estado</label>
-            <select value={estadoFiltro} onChange={e => setEstadoFiltro(e.target.value)}>
-              <option value="">Todos</option>
-              {estados.map(e => <option key={e} value={e}>{e}</option>)}
-            </select>
-          </div>
+          {/* Estado */}
+          <QuickSelect
+            options={[{ id: '', label: 'Todos os Estados' }, ...estados.map(e => ({ id: e, label: e }))]}
+            value={estadoFiltro}
+            onChange={setEstadoFiltro}
+            color="#10b981"
+            label="Estado"
+            width={180}
+          />
 
-          <div className="filtro-grupo">
-            <label>Buscar</label>
+          {/* Busca livre */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: 6, background: '#f9fafb', border: '1.5px solid #e5e7eb', borderRadius: 8, padding: '5px 10px' }}>
+            <span style={{ fontSize: 12, color: '#9ca3af' }}>🔍</span>
             <input
               type="text"
-              placeholder="Nome, URL, órgão..."
+              placeholder="Buscar site..."
               value={busca}
               onChange={e => setBusca(e.target.value)}
+              style={{ border: 'none', outline: 'none', fontSize: 12, background: 'transparent', color: '#374151', width: 140 }}
             />
+            {busca && (
+              <button onClick={() => setBusca('')} style={{ border: 'none', background: 'none', cursor: 'pointer', color: '#9ca3af', fontSize: 13, padding: 0, lineHeight: 1 }}>×</button>
+            )}
           </div>
 
+          {/* Módulo (só na aba módulos) */}
           {tab === 'modulos' && (
-            <div className="filtro-grupo">
-              <label>Módulo</label>
-              <select value={moduloFiltro} onChange={e => setModuloFiltro(e.target.value)}>
-                <option value="">Todos os Módulos</option>
-                {MODULOS.map(m => <option key={m.id} value={m.id}>{m.icone} {m.nome}</option>)}
-              </select>
-            </div>
+            <QuickSelect
+              options={[{ id: '', label: 'Todos os Módulos' }, ...MODULOS.map(m => ({ id: m.id, label: `${m.icone} ${m.nome}` }))]}
+              value={moduloFiltro}
+              onChange={setModuloFiltro}
+              color="#8b5cf6"
+              label="Módulo"
+              width={220}
+            />
           )}
         </div>
 

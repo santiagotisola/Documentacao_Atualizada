@@ -1,29 +1,29 @@
 ---
 sidebar_position: 2
 title: Relatório de Passagens
-description: Relatório de passagens de veículos registradas
+description: Relatório de passagens de Veículos registradas
 ---
 
 # Relatório de Passagens
 
-Permite consultar e exportar o histórico detalhado de passagens de veículos registradas pelos equipamentos. Cada linha representa um evento de passagem com dados de placa, velocidade, imagem e status de leitura OCR.
+Permite consultar e exportar o histórico detalhado de passagens de Veículos registradas pelos Equipamentos Cada linha representa um evento de passagem com dados de placa, velocidade, imagem e status de leitura OCR.
 
-![Relatório de Passagens](../img/Relatorio%20-%20Relatorio%20de%20passagens.png)
+Relatório de Passagens](../img/Relatorio%20-%20Relatorio%20de%20passagens.png)
 
 ## Como acessar
 
-**Menu lateral** → Relatórios → **Relatório de Passagens**
+**Menu lateral** → Relatórios → Relatório de Passagens**
 
 ## Filtros disponíveis
 
 | Filtro | Descrição |
 |--------|-----------|
 | **Período** | Faixa de datas e horas |
-| **Equipamento** | Filtrar por equipamento |
+| Equipamento | Filtrar por Equipamento |
 | **Faixa** | Faixa de tráfego monitorada |
 | **Placa** | Buscar passagem de placa específica |
-| **Tipo de Veículo** | Filtrar por categoria de veículo |
-| **Com infração** | Exibir apenas passagens que geraram infração |
+| **Tipo de Veículo | Filtrar por categoria de Veículo |
+| **Com Infração | Exibir apenas passagens que geraram Infração |
 
 ## Campos exibidos
 
@@ -31,12 +31,12 @@ Permite consultar e exportar o histórico detalhado de passagens de veículos re
 |--------|-----------|
 | **Data/Hora** | Momento exato da passagem |
 | **Placa** | Placa lida pelo OCR |
-| **Equipamento** | Equipamento que registrou a passagem |
+| Equipamento | Equipamento que registrou a passagem |
 | **Faixa** | Faixa de tráfego |
 | **Velocidade Medida** | Velocidade capturada pelo radar |
 | **Velocidade Regulamentada** | Limite de velocidade no local |
 | **Confiança OCR (%)** | Percentual de confiança na leitura da placa |
-| **Infração** | Número do auto gerado (se houver) |
+| Infração | Número do auto gerado (se houver) |
 | **Imagem** | Miniatura da imagem (clique para ampliar) |
 
 ## Exportação
@@ -44,7 +44,7 @@ Permite consultar e exportar o histórico detalhado de passagens de veículos re
 Exportável em **Excel** com todos os campos ou apenas os selecionados.
 
 :::tip Dica
-Para localizar passagens de uma placa suspeita, use o filtro **Placa** em combinação com **Período** para histórico completo de passagens daquele veículo.
+Para localizar passagens de uma placa suspeita, use o filtro **Placa** em combinação com **Período** para histórico completo de passagens daquele Veículo
 :::
 
 ---

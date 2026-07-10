@@ -1,14 +1,14 @@
 ---
 sidebar_position: 4
 title: Gerar Medição
-description: Gerar relatório de medição contratual
+description: Gerar Relatório de medição contratual
 ---
 
 # Gerar Medição
 
-![Relatório de Pesagem](../img/Relatorio%20de%20pesagem.png)
+Relatório de Pesagem](../img/Relatorio%20de%20pesagem.png)
 
-Gera o relatório de medição mensal vinculado a um contrato, consolidando indicadores de performance e disponibilidade.
+Gera o Relatório de medição mensal vinculado a um contrato, consolidando indicadores de performance e disponibilidade.
 
 ## Como acessar
 
@@ -28,5 +28,5 @@ Gera o relatório de medição mensal vinculado a um contrato, consolidando indi
 2. Selecione o Contrato
 3. Informe o Período de referência
 4. Clique em **Gerar**
-5. Revise o relatório gerado
+5. Revise o Relatório gerado
 6. Exporte em PDF ou Excel

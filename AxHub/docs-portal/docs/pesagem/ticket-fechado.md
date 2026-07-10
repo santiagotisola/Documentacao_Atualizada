@@ -17,7 +17,7 @@ Exibe os tickets de pesagem que já foram finalizados.
 | Coluna | Descrição |
 |--------|-----------|
 | **Número** | Identificador do ticket |
-| **Placa** | Placa do veículo |
+| **Placa** | Placa do Veículo |
 | **Data/Hora** | Momento da pesagem |
 | **Peso Bruto** | Peso total registrado |
 | **Resultado** | Aprovado, excesso, liberado |
@@ -30,4 +30,4 @@ Exibe os tickets de pesagem que já foram finalizados.
 | Tipo | Pagina | Descricao |
 |------|--------|-----------|
 | Anterior | [Ticket Aberto](./ticket-aberto) | Tickets em andamento |
-| Acao | [Reclassificar](./reclassificar) | Reclassificar veiculo |
+| Acao | [Reclassificar](./reclassificar) | Reclassificar Use Veículo (com acento) |

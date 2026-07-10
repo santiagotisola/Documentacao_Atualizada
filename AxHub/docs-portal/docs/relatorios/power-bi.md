@@ -1,12 +1,12 @@
 ---
 sidebar_position: 9
 title: Relatórios Power BI
-description: Dashboards e relatórios analíticos via Power BI
+description: Dashboards e Relatórios analíticos via Power BI
 ---
 
 # Relatórios Power BI
 
-Acesso aos dashboards e relatórios analíticos integrados via Power BI.
+Acesso aos dashboards e Relatórios analíticos integrados via Power BI.
 
 ![Menu Power BI](../img/Relatórios%20BI%20-.menu.png)
 
@@ -43,4 +43,4 @@ Acesso aos dashboards e relatórios analíticos integrados via Power BI.
 
 | Tipo | Pagina | Descricao |
 |------|--------|-----------|
-| Relacionado | [Relatorios Power BI (Admin)](../administracao/relatorios-power-bi) | Configuracao |
+| Relacionado | Relatórios Power BI (Admin)](../administracao/relatorios-power-bi) | Configuracao |

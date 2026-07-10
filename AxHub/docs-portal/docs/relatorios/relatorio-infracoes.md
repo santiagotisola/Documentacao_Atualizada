@@ -1,42 +1,42 @@
 ---
 sidebar_position: 1
 title: Relatório de Infrações
-description: Relatório detalhado de infrações processadas
+description: Relatório detalhado de Infrações processadas
 ---
 
 # Relatório de Infrações
 
-Permite gerar relatórios detalhados das infrações processadas pelo sistema, com filtros por período, equipamento, tipo de infração e status. Utilizado para acompanhamento operacional, prestação de contas e auditoria interna.
+Permite gerar Relatórios detalhados das Infrações processadas pelo sistema, com filtros por período, Equipamento tipo de Infração e status. Utilizado para acompanhamento operacional, prestação de contas e auditoria interna.
 
-![Relatório de Infrações](../img/Relatorio%20-%20Relatorio%20de%20infrações.png)
+Relatório de Infrações](../img/Relatorio%20-%20Relatorio%20de%20infrações.png)
 
 ## Como acessar
 
-**Menu lateral** → Relatórios → **Relatório de Infrações**
+**Menu lateral** → Relatórios → Relatório de Infrações
 
 ## Filtros disponíveis
 
 | Filtro | Descrição |
 |--------|-----------|
 | **Período** | Faixa de datas |
-| **Equipamento** | Filtrar por equipamento |
-| **Enquadramento** | Tipo de infração |
+| Equipamento | Filtrar por Equipamento |
+| **Enquadramento** | Tipo de Infração |
 | **Status** | Processada, descartada, exportada |
 | **Operação** | Filtrar por operação vinculada |
-| **Operador** | Filtrar por usuário que realizou a triagem |
+| **Operador** | Filtrar por Usuário que realizou a triagem |
 
 ## Campos exibidos
 
 | Coluna | Descrição |
 |--------|-----------|
-| **Número Auto** | Identificador único da infração |
-| **Data/Hora** | Momento da infração |
-| **Placa** | Placa do veículo infrator |
-| **Equipamento** | Equipamento que registrou |
+| **Número Auto** | Identificador único da Infração |
+| **Data/Hora** | Momento da Infração |
+| **Placa** | Placa do Veículo infrator |
+| Equipamento | Equipamento que registrou |
 | **Velocidade Medida** | Velocidade capturada |
 | **Velocidade Considerada** | Velocidade após aplicação de tolerância |
 | **Enquadramento** | Código e descrição do enquadramento aplicado |
-| **Status** | Situação atual da infração |
+| **Status** | Situação atual da Infração |
 | **Operador** | Analista responsável pela triagem |
 | **Lote de Exportação** | Lote ao qual foi exportada (quando aplicável) |
 
@@ -60,4 +60,4 @@ Exportável em **Excel** e **PDF**. O formato PDF inclui imagens quando selecion
 |------|--------|-----------|
 | Relacionado | [Consulta de Infrações](../infracoes/consulta-infracoes) | Consulta detalhada |
 | Relacionado | [Exportação](../infracoes/exportacao) | Lotes exportados |
-| Relacionado | [Auditoria](../infracoes/auditoria) | Revisão de infrações |
+| Relacionado | [Auditoria](../infracoes/auditoria) | Revisão de Infrações |

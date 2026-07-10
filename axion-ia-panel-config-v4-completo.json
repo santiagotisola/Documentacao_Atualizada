@@ -1,0 +1,1106 @@
+{
+  "version": "4.0.0",
+  "exportDate": "2026-06-23T19:30:00.000Z",
+  "systemName": "Axion Tecnologia — Gerenciador v.4.0 (AxionIA Painel)",
+  "description": "Plataforma Autônoma de Engenharia de Qualidade, Observabilidade e Governança Inteligente",
+  
+  "evolution": {
+    "from": "Validador de Features Específicas",
+    "to": "Plataforma Corporativa de Qualidade Autônoma",
+    "majorChanges": [
+      "Adição de Validação Ortográfica Automatizada",
+      "Implementação do Modo Aprender Cenário",
+      "Comparação DE/PARA entre ambientes",
+      "11 Motores especializados",
+      "Validação multinível (8 camadas)",
+      "Process Mining e Self-Healing",
+      "Integração com frameworks (ITIL, COBIT, OWASP, ISO)"
+    ]
+  },
+  
+  "engines": {
+    "executionEngine": {
+      "enabled": true,
+      "description": "Orquestra a execução dos testes e fluxos automatizados",
+      "capabilities": [
+        "Executar testes individuais",
+        "Executar suítes de testes",
+        "Agendar execuções",
+        "Paralelização de testes",
+        "Retry automático"
+      ]
+    },
+    
+    "scenarioLearningEngine": {
+      "enabled": true,
+      "description": "Aprende fluxos executados pelos usuários e transforma em testes automatizados",
+      "modes": {
+        "recording": {
+          "enabled": true,
+          "captureActions": [
+            "clicks",
+            "typing",
+            "navigation",
+            "selections",
+            "uploads",
+            "downloads",
+            "formSubmissions",
+            "modalInteractions"
+          ],
+          "captureData": [
+            "urlsAccessed",
+            "menusNavigated",
+            "fieldsFilledValues",
+            "filtersApplied",
+            "buttonsClicked",
+            "filesExported",
+            "messagesDisplayed",
+            "responseTimes",
+            "screenshots",
+            "returnedData"
+          ]
+        },
+        "playback": {
+          "enabled": true,
+          "capabilities": [
+            "Reexecutar cenário gravado",
+            "Parametrizar dados de entrada",
+            "Executar em diferentes ambientes",
+            "Comparar resultados",
+            "Gerar evidências"
+          ]
+        }
+      },
+      
+      "scenarioLibrary": {
+        "categories": [
+          "Login e Autenticação",
+          "Cadastros",
+          "Consultas",
+          "Relatórios",
+          "Exportações",
+          "Dashboards",
+          "Integrações",
+          "Processos Completos"
+        ],
+        
+        "autoSuggestion": {
+          "enabled": true,
+          "minSimilarity": 0.85,
+          "actions": [
+            "Reutilizar cenário existente",
+            "Clonar e adaptar",
+            "Mesclar cenários",
+            "Atualizar cenário desatualizado"
+          ]
+        }
+      }
+    },
+    
+    "navigationEngine": {
+      "enabled": true,
+      "description": "Navega pelas aplicações simulando um usuário real",
+      "capabilities": [
+        "Login automático",
+        "Navegação por menus",
+        "Preenchimento de formulários",
+        "Seleção de dropdowns",
+        "Interação com modais",
+        "Navegação por tabs",
+        "Rolagem de páginas",
+        "Cliques contextuais",
+        "Atalhos de teclado"
+      ]
+    },
+    
+    "visualValidationEngine": {
+      "enabled": true,
+      "description": "Detecta alterações visuais, problemas de layout e consistência da interface",
+      "validations": [
+        "Regressão visual (pixel-by-pixel)",
+        "Componentes desalinhados",
+        "Elementos sobrepostos",
+        "Textos truncados",
+        "Cores inconsistentes",
+        "Fontes incorretas",
+        "Ícones ausentes",
+        "Responsividade",
+        "Acessibilidade (WCAG)",
+        "Contraste de cores"
+      ],
+      
+      "comparisonModes": {
+        "pixelByPixel": {
+          "enabled": true,
+          "tolerance": 0.02
+        },
+        "structuralSimilarity": {
+          "enabled": true,
+          "threshold": 0.95
+        },
+        "ocrComparison": {
+          "enabled": true,
+          "language": "por"
+        }
+      }
+    },
+    
+    "dataReconciliationEngine": {
+      "enabled": true,
+      "description": "Executa comparações DE/PARA entre ambientes, contratos e fontes de dados",
+      
+      "comparisonTypes": {
+        "environmentComparison": {
+          "enabled": true,
+          "pairs": [
+            {"from": "producao", "to": "homologacao"},
+            {"from": "producao", "to": "desenvolvimento"},
+            {"from": "homologacao", "to": "desenvolvimento"}
+          ]
+        },
+        
+        "contractComparison": {
+          "enabled": true,
+          "compareFields": [
+            "equipamentos",
+            "locais",
+            "usuarios",
+            "permissoes",
+            "configuracoes",
+            "operacoes"
+          ]
+        },
+        
+        "dataSourceComparison": {
+          "enabled": true,
+          "sources": [
+            "database",
+            "api",
+            "exportedFile",
+            "dashboard",
+            "report"
+          ]
+        }
+      },
+      
+      "reconciliationRules": {
+        "tolerance": {
+          "numeric": 0.01,
+          "date": "1 day",
+          "string": "case-insensitive"
+        },
+        
+        "fieldMapping": {
+          "enabled": true,
+          "mappings": [
+            {"source": "cod_equipamento", "target": "equipamento_id"},
+            {"source": "data_cadastro", "target": "created_at"},
+            {"source": "status_ativo", "target": "is_active"}
+          ]
+        },
+        
+        "businessKeys": {
+          "enabled": true,
+          "keys": {
+            "equipamento": ["codigo", "local_id"],
+            "operacao": ["numero", "contrato_id"],
+            "usuario": ["email"]
+          }
+        }
+      },
+      
+      "divergenceClassification": {
+        "critical": {
+          "description": "Divergências que impedem o funcionamento",
+          "examples": ["Equipamento ausente", "Permissão incorreta"]
+        },
+        "high": {
+          "description": "Divergências que afetam funcionalidades importantes",
+          "examples": ["Status inconsistente", "Data divergente"]
+        },
+        "medium": {
+          "description": "Divergências que afetam dados secundários",
+          "examples": ["Descrição diferente", "Ordem alterada"]
+        },
+        "low": {
+          "description": "Divergências aceitáveis ou dentro da tolerância",
+          "examples": ["Diferença de millisegundos", "Case de texto"]
+        }
+      }
+    },
+    
+    "integrationValidationEngine": {
+      "enabled": true,
+      "description": "Valida APIs, serviços, filas e demais integrações",
+      
+      "apiValidation": {
+        "protocols": ["REST", "SOAP", "GraphQL", "gRPC"],
+        "checks": [
+          "HTTP status codes",
+          "Response time",
+          "Payload structure",
+          "Contract compliance",
+          "Authentication (JWT, OAuth, API Key)",
+          "Rate limiting",
+          "Idempotency",
+          "Error handling"
+        ]
+      },
+      
+      "serviceValidation": {
+        "checks": [
+          "Service availability",
+          "Response time",
+          "Error rate",
+          "Throughput",
+          "Circuit breaker status",
+          "Retry policies"
+        ]
+      },
+      
+      "queueValidation": {
+        "systems": ["RabbitMQ", "Kafka", "SQS", "Azure Service Bus"],
+        "checks": [
+          "Message delivery",
+          "Message ordering",
+          "Dead letter queue",
+          "Throughput",
+          "Lag"
+        ]
+      }
+    },
+    
+    "businessRulesEngine": {
+      "enabled": true,
+      "description": "Avalia regras de negócio e consistência funcional",
+      
+      "ruleTypes": {
+        "mandatory": {
+          "description": "Campos obrigatórios condicionais",
+          "examples": [
+            "Se Status = Ativo, então Data Ativação é obrigatória",
+            "Se Tipo = Radar Fixo, então Latitude e Longitude são obrigatórias"
+          ]
+        },
+        
+        "validation": {
+          "description": "Validações de formato e conteúdo",
+          "examples": [
+            "CPF válido",
+            "CNPJ válido",
+            "Email válido",
+            "Data futura inválida",
+            "Velocidade dentro do limite"
+          ]
+        },
+        
+        "calculation": {
+          "description": "Cálculos e fórmulas",
+          "examples": [
+            "Total = Soma dos itens",
+            "Desconto = Valor × Percentual",
+            "Prazo = Data Fim - Data Início"
+          ]
+        },
+        
+        "dependency": {
+          "description": "Dependências entre campos",
+          "examples": [
+            "Local depende de Contrato",
+            "Faixa depende de Equipamento",
+            "Usuário depende de Perfil"
+          ]
+        }
+      }
+    },
+    
+    "reportValidationEngine": {
+      "enabled": true,
+      "description": "Verifica exportações, relatórios e dashboards",
+      
+      "reportChecks": {
+        "structure": [
+          "Cabeçalho presente",
+          "Colunas corretas",
+          "Ordenação aplicada",
+          "Filtros refletidos",
+          "Totalizadores corretos"
+        ],
+        
+        "content": [
+          "Dados consistentes com a tela",
+          "Quantidade de registros",
+          "Valores calculados",
+          "Formatação de datas",
+          "Formatação de números"
+        ],
+        
+        "quality": [
+          "Imagens legíveis",
+          "Layout profissional",
+          "Sem quebras de página incorretas",
+          "Margens adequadas",
+          "Fontes consistentes"
+        ]
+      },
+      
+      "dashboardChecks": {
+        "kpis": [
+          "Valores corretos",
+          "Cálculos precisos",
+          "Atualização em tempo real",
+          "Formatação adequada"
+        ],
+        
+        "charts": [
+          "Dados corretos",
+          "Escala apropriada",
+          "Legendas presentes",
+          "Cores consistentes",
+          "Responsividade"
+        ],
+        
+        "filters": [
+          "Funcionamento correto",
+          "Impacto nos dados",
+          "Persistência",
+          "Sincronização"
+        ]
+      }
+    },
+    
+    "evidenceEngine": {
+      "enabled": true,
+      "description": "Consolida capturas, logs e demais artefatos para auditoria e suporte",
+      
+      "evidenceTypes": {
+        "screenshots": {
+          "enabled": true,
+          "format": "PNG",
+          "quality": "high",
+          "captureOn": ["error", "success", "each-step"]
+        },
+        
+        "videos": {
+          "enabled": true,
+          "format": "MP4",
+          "fps": 30,
+          "captureFullTest": true
+        },
+        
+        "logs": {
+          "enabled": true,
+          "levels": ["error", "warn", "info", "debug"],
+          "sources": ["browser", "network", "application"]
+        },
+        
+        "networkTraffic": {
+          "enabled": true,
+          "captureRequests": true,
+          "captureResponses": true,
+          "captureHeaders": true,
+          "capturePayload": true
+        },
+        
+        "databaseQueries": {
+          "enabled": false,
+          "captureQueries": true,
+          "captureExecutionPlan": true,
+          "captureExecutionTime": true
+        }
+      },
+      
+      "storage": {
+        "local": {
+          "enabled": true,
+          "path": "./evidences",
+          "retention": "30 days"
+        },
+        
+        "cloud": {
+          "enabled": false,
+          "provider": "azure",
+          "container": "axion-evidences"
+        }
+      }
+    },
+    
+    "recommendationEngine": {
+      "enabled": true,
+      "description": "Gera diagnósticos, prioriza problemas e propõe ações corretivas",
+      
+      "classification": {
+        "severity": {
+          "critical": {
+            "score": "0-49",
+            "label": "Alto Risco",
+            "action": "Intervenção imediata recomendada",
+            "sla": "4 horas"
+          },
+          "high": {
+            "score": "50-69",
+            "label": "Crítico",
+            "action": "Elaborar plano de remediação",
+            "sla": "24 horas"
+          },
+          "medium": {
+            "score": "70-84",
+            "label": "Moderado",
+            "action": "Priorizar correções de médio impacto",
+            "sla": "1 semana"
+          },
+          "low": {
+            "score": "85-94",
+            "label": "Bom",
+            "action": "Pequenas melhorias recomendadas",
+            "sla": "1 mês"
+          },
+          "excellent": {
+            "score": "95-100",
+            "label": "Excelente",
+            "action": "Manter monitoramento contínuo",
+            "sla": "Contínuo"
+          }
+        }
+      },
+      
+      "recommendations": {
+        "automated": {
+          "enabled": true,
+          "types": [
+            "Código de correção sugerido",
+            "Query SQL otimizada",
+            "Configuração corrigida",
+            "Permissão ajustada"
+          ]
+        },
+        
+        "knowledgeBase": {
+          "enabled": true,
+          "linkPreviousOccurrences": true,
+          "suggestSolutions": true,
+          "showRelatedDocs": true
+        }
+      }
+    },
+    
+    "governanceEngine": {
+      "enabled": true,
+      "description": "Monitora versionamento, padronização, documentação e conformidade operacional",
+      
+      "compliance": {
+        "frameworks": {
+          "ITIL": {
+            "enabled": true,
+            "processes": [
+              "Gerenciamento de Mudanças",
+              "Gerenciamento de Incidentes",
+              "Gerenciamento de Problemas",
+              "Gerenciamento de Configuração",
+              "Melhoria Contínua"
+            ]
+          },
+          
+          "COBIT": {
+            "enabled": true,
+            "domains": [
+              "Governança",
+              "Gestão de Riscos",
+              "Controles",
+              "Alinhamento Estratégico"
+            ]
+          },
+          
+          "ISO_IEC_25010": {
+            "enabled": true,
+            "characteristics": [
+              "Funcionalidade",
+              "Desempenho",
+              "Compatibilidade",
+              "Usabilidade",
+              "Confiabilidade",
+              "Segurança",
+              "Manutenibilidade",
+              "Portabilidade"
+            ]
+          },
+          
+          "OWASP": {
+            "enabled": true,
+            "top10": [
+              "A01:2021 – Broken Access Control",
+              "A02:2021 – Cryptographic Failures",
+              "A03:2021 – Injection",
+              "A04:2021 – Insecure Design",
+              "A05:2021 – Security Misconfiguration",
+              "A06:2021 – Vulnerable and Outdated Components",
+              "A07:2021 – Identification and Authentication Failures",
+              "A08:2021 – Software and Data Integrity Failures",
+              "A09:2021 – Security Logging and Monitoring Failures",
+              "A10:2021 – Server-Side Request Forgery"
+            ]
+          }
+        }
+      },
+      
+      "versioning": {
+        "enabled": true,
+        "track": [
+          "Versão do sistema",
+          "Versão da documentação",
+          "Versão das APIs",
+          "Versão do banco de dados",
+          "Versão das dependências"
+        ]
+      }
+    },
+    
+    "processMiningEngine": {
+      "enabled": true,
+      "description": "Identifica gargalos e desvios operacionais através de análise de processos",
+      
+      "capabilities": [
+        "Process Discovery (descoberta automática de processos)",
+        "Conformance Checking (verificação de conformidade)",
+        "Performance Analysis (análise de performance)",
+        "Bottleneck Detection (detecção de gargalos)",
+        "Deviation Analysis (análise de desvios)",
+        "Variant Analysis (análise de variantes)"
+      ],
+      
+      "metrics": {
+        "processEfficiency": {
+          "throughputTime": true,
+          "cycleTime": true,
+          "waitingTime": true,
+          "processingTime": true
+        },
+        
+        "processQuality": {
+          "conformanceRate": true,
+          "errorRate": true,
+          "reworkRate": true,
+          "completionRate": true
+        }
+      }
+    },
+    
+    "selfHealingEngine": {
+      "enabled": true,
+      "description": "Sugere correções automáticas para cenários quebrados e problemas conhecidos",
+      
+      "autoFix": {
+        "enabled": true,
+        "capabilities": [
+          "Atualizar seletores DOM alterados",
+          "Ajustar timeouts inadequados",
+          "Corrigir credenciais expiradas",
+          "Atualizar URLs modificadas",
+          "Reexecutar passos falhados",
+          "Contornar elementos dinâmicos"
+        ]
+      },
+      
+      "learning": {
+        "enabled": true,
+        "learnFromFailures": true,
+        "suggestImprovements": true,
+        "adaptToChanges": true
+      }
+    },
+    
+    "spellingValidationEngine": {
+      "enabled": true,
+      "description": "Valida ortografia, gramática e terminologia em toda a interface",
+      
+      "dictionaries": {
+        "aurelio": {
+          "enabled": true,
+          "source": "local",
+          "path": "./dictionaries/aurelio.dic"
+        },
+        
+        "abnt": {
+          "enabled": true,
+          "rules": [
+            "NBR 6023 (Referências)",
+            "NBR 6024 (Numeração)",
+            "NBR 6027 (Sumário)",
+            "NBR 6028 (Resumo)",
+            "NBR 10520 (Citações)"
+          ]
+        },
+        
+        "vadeMecum2026": {
+          "enabled": true,
+          "categories": [
+            "Termos jurídicos",
+            "Nomenclaturas técnicas",
+            "Terminologia oficial"
+          ]
+        },
+        
+        "custom": {
+          "enabled": true,
+          "terms": [
+            "AxHub",
+            "AxCross",
+            "AxTon",
+            "Axion",
+            "Jitbit"
+          ]
+        }
+      },
+      
+      "validations": {
+        "spelling": {
+          "enabled": true,
+          "checkLabels": true,
+          "checkButtons": true,
+          "checkMessages": true,
+          "checkTooltips": true,
+          "checkPlaceholders": true
+        },
+        
+        "grammar": {
+          "enabled": true,
+          "rules": [
+            "Concordância verbal",
+            "Concordância nominal",
+            "Regência verbal",
+            "Regência nominal",
+            "Crase"
+          ]
+        },
+        
+        "terminology": {
+          "enabled": true,
+          "checkConsistency": true,
+          "checkStandardization": true,
+          "suggestAlternatives": true
+        },
+        
+        "style": {
+          "enabled": true,
+          "checkCapitalization": true,
+          "checkPunctuation": true,
+          "checkFormatting": true
+        }
+      },
+      
+      "reporting": {
+        "generateReport": true,
+        "includeContext": true,
+        "suggestCorrections": true,
+        "prioritize": true,
+        "groupByType": true,
+        "groupByScreen": true
+      }
+    }
+  },
+  
+  "validationLayers": {
+    "functional": {
+      "enabled": true,
+      "weight": 15,
+      "checks": [
+        "Fluxos de negócio",
+        "Regras de negócio",
+        "CRUD operations",
+        "Campos obrigatórios",
+        "Máscaras",
+        "Filtros",
+        "Ordenações",
+        "Relatórios",
+        "Exportações",
+        "Dashboards",
+        "Permissões",
+        "Perfis",
+        "Navegação",
+        "Sessão",
+        "Logout",
+        "Upload",
+        "Download"
+      ]
+    },
+    
+    "structural": {
+      "enabled": true,
+      "weight": 10,
+      "checks": [
+        "Estrutura de banco de dados",
+        "Índices",
+        "Integridade referencial",
+        "Foreign Keys",
+        "Triggers",
+        "Stored Procedures",
+        "Normalização",
+        "Tamanho das tabelas",
+        "Crescimento esperado",
+        "Performance de queries"
+      ]
+    },
+    
+    "api": {
+      "enabled": true,
+      "weight": 10,
+      "checks": [
+        "REST endpoints",
+        "SOAP services",
+        "GraphQL queries",
+        "gRPC services",
+        "HTTP status codes",
+        "Latência",
+        "Payload structure",
+        "Contract compliance",
+        "Autenticação",
+        "Rate limiting",
+        "Idempotência"
+      ]
+    },
+    
+    "visual": {
+      "enabled": true,
+      "weight": 10,
+      "checks": [
+        "Regressão visual (pixel-by-pixel)",
+        "OCR comparison",
+        "Layout quebrado",
+        "Botões ausentes",
+        "Fontes inconsistentes",
+        "Responsividade",
+        "Acessibilidade (WCAG)"
+      ]
+    },
+    
+    "performance": {
+      "enabled": true,
+      "weight": 10,
+      "checks": [
+        "Stress Test",
+        "Load Test",
+        "Spike Test",
+        "Volume Test",
+        "Soak Test",
+        "CPU usage",
+        "RAM usage",
+        "Disk I/O",
+        "Network usage",
+        "Response time",
+        "Percentil P95",
+        "Percentil P99"
+      ]
+    },
+    
+    "security": {
+      "enabled": true,
+      "weight": 20,
+      "checks": [
+        "SQL Injection",
+        "XSS (Cross-Site Scripting)",
+        "CSRF (Cross-Site Request Forgery)",
+        "SSRF",
+        "Path Traversal",
+        "IDOR",
+        "Broken Authentication",
+        "Session Fixation",
+        "Insecure Cookies",
+        "HTTP Headers Security",
+        "Weak Passwords",
+        "MFA implementation",
+        "Encryption",
+        "Data Exposure"
+      ]
+    },
+    
+    "integration": {
+      "enabled": true,
+      "weight": 10,
+      "checks": [
+        "Dependências entre sistemas",
+        "Fluxos de integração",
+        "Acoplamento",
+        "Tempo entre chamadas",
+        "Retry policies",
+        "Filas de mensagens",
+        "Consistência eventual",
+        "Circuit breakers"
+      ]
+    },
+    
+    "infrastructure": {
+      "enabled": true,
+      "weight": 10,
+      "checks": [
+        "Containers",
+        "Kubernetes",
+        "Docker",
+        "Load Balancers",
+        "Cache (Redis, Memcached)",
+        "CDN",
+        "Firewall",
+        "DNS",
+        "SSL/TLS",
+        "Certificados",
+        "Backups",
+        "Alta disponibilidade"
+      ]
+    },
+    
+    "spelling": {
+      "enabled": true,
+      "weight": 5,
+      "checks": [
+        "Ortografia (Aurélio)",
+        "Gramática (ABNT)",
+        "Terminologia (Vade Mecum)",
+        "Consistência textual",
+        "Padronização"
+      ]
+    }
+  },
+  
+  "evaluationModels": {
+    "individual": {
+      "description": "Avalia apenas um recurso isoladamente",
+      "example": "Cadastro de usuário",
+      "scoring": "0-100"
+    },
+    
+    "process": {
+      "description": "Avalia um fluxo completo de negócio",
+      "example": "Login → Cadastro → Pagamento → Nota Fiscal → Relatório",
+      "scoring": "0-100 (weighted)"
+    },
+    
+    "similarity": {
+      "description": "Compara dois ambientes ou contratos",
+      "pairs": [
+        "Produção vs Homologação",
+        "Cliente A vs Cliente B",
+        "Versão 1.0 vs Versão 2.0"
+      ],
+      "metrics": ["divergências", "similaridade %"]
+    },
+    
+    "composition": {
+      "description": "Avalia grupos de funcionalidades relacionadas",
+      "example": "Módulo Financeiro (Cadastro + Emissão + Baixa + Relatórios + Integração + API)",
+      "scoring": "0-100 (average)"
+    },
+    
+    "interdependency": {
+      "description": "Avalia componentes interdependentes através de grafo",
+      "example": "A → B → C → D",
+      "analysis": "Impacto em cascata de falhas"
+    }
+  },
+  
+  "coverageMetrics": {
+    "enabled": true,
+    "metrics": {
+      "functionalCoverage": {
+        "target": 90,
+        "current": 84,
+        "unit": "%"
+      },
+      
+      "visualCoverage": {
+        "target": 85,
+        "current": 79,
+        "unit": "%"
+      },
+      
+      "integrationCoverage": {
+        "target": 95,
+        "current": 92,
+        "unit": "%"
+      },
+      
+      "businessRulesCoverage": {
+        "target": 80,
+        "current": 75,
+        "unit": "%"
+      },
+      
+      "scenariosCatalog": {
+        "total": 152,
+        "automated": 128,
+        "coverageRate": 84,
+        "unit": "%"
+      }
+    }
+  },
+  
+  "helpdeskIntegration": {
+    "enabled": true,
+    "platform": "jitbit",
+    "apiUrl": "https://desk.axiontecnologia.com.br/helpdesk/api",
+    
+    "autoTicketCreation": {
+      "enabled": true,
+      "triggerOn": ["test-failure", "critical-error", "performance-degradation"],
+      "includeEvidence": true,
+      "attachScreenshots": true,
+      "attachLogs": true,
+      "attachScenario": true,
+      "suggestPriority": true
+    },
+    
+    "ticketEnrichment": {
+      "enabled": true,
+      "addContext": [
+        "Cenário executado",
+        "Passo onde ocorreu erro",
+        "Ambiente (produção/homologação)",
+        "Contrato",
+        "Usuário",
+        "Timestamp",
+        "Stack trace",
+        "Comparação DE/PARA (se aplicável)"
+      ]
+    }
+  },
+  
+  "reporting": {
+    "types": {
+      "executive": {
+        "enabled": true,
+        "frequency": "weekly",
+        "content": [
+          "Saúde geral dos sistemas",
+          "Taxa de sucesso dos testes",
+          "Falhas por projeto",
+          "Integrações indisponíveis",
+          "Divergências DE/PARA",
+          "Qualidade visual",
+          "Conformidade de versões",
+          "Cobertura de testes",
+          "Tendências"
+        ]
+      },
+      
+      "technical": {
+        "enabled": true,
+        "frequency": "daily",
+        "content": [
+          "Testes executados",
+          "Testes falhados (detalhes)",
+          "Performance metrics",
+          "Erros por categoria",
+          "Cenários quebrados",
+          "Recomendações de correção",
+          "Logs de execução"
+        ]
+      },
+      
+      "comparison": {
+        "enabled": true,
+        "onDemand": true,
+        "content": [
+          "Divergências encontradas",
+          "Campos comparados",
+          "Status de cada campo",
+          "Classificação de criticidade",
+          "Ações recomendadas"
+        ]
+      },
+      
+      "spelling": {
+        "enabled": true,
+        "onDemand": true,
+        "content": [
+          "Erros encontrados",
+          "Localização (tela/componente)",
+          "Tipo de erro (ortografia/gramática/terminologia)",
+          "Correção sugerida",
+          "Prioridade",
+          "Contexto"
+        ]
+      }
+    }
+  },
+  
+  "ui": {
+    "centralExecution": {
+      "enabled": true,
+      "description": "Centro Unificado de Execução de Análises (CUEA)",
+      
+      "selectors": {
+        "system": ["AxHub", "AxCross", "AxTon", "VARCO", "Multi360", "Outros"],
+        "environment": ["Produção", "Homologação", "Desenvolvimento"],
+        "contract": ["dynamic-list-from-api"],
+        "categories": [
+          "Navegação",
+          "Funcional",
+          "Visual",
+          "DE/PARA",
+          "Integrações",
+          "APIs",
+          "Banco de Dados",
+          "Dashboards",
+          "Relatórios",
+          "Performance",
+          "Segurança",
+          "Ortografia",
+          "Governança"
+        ]
+      },
+      
+      "actions": {
+        "execute": "Executar testes selecionados",
+        "saveProfile": "Salvar perfil de testes",
+        "compareEnvironments": "Comparar ambientes",
+        "learnScenario": "Modo Aprender (gravar ações)",
+        "viewResults": "Ver resultados consolidados"
+      }
+    }
+  },
+  
+  "features": {
+    "validacaoAutomatica": {
+      "enabled": true,
+      "description": "Executa testes automatizados multinível"
+    },
+    
+    "modoAprenderCenario": {
+      "enabled": true,
+      "description": "Grava ações do usuário e transforma em testes reutilizáveis"
+    },
+    
+    "comparacaoDEPARA": {
+      "enabled": true,
+      "description": "Compara ambientes, contratos e fontes de dados"
+    },
+    
+    "validacaoOrtografica": {
+      "enabled": true,
+      "description": "Valida ortografia, gramática e terminologia"
+    },
+    
+    "respostaHelpdesk": {
+      "enabled": true,
+      "description": "Gera e envia resposta técnica ao Jitbit"
+    },
+    
+    "atualizacaoDocumentacao": {
+      "enabled": true,
+      "description": "Atualiza documentação Docusaurus automaticamente"
+    },
+    
+    "processMining": {
+      "enabled": true,
+      "description": "Descobre e analisa processos automaticamente"
+    },
+    
+    "selfHealing": {
+      "enabled": true,
+      "description": "Auto-corrige cenários quebrados"
+    },
+    
+    "inteligenciaArtificial": {
+      "enabled": true,
+      "description": "Sugere melhorias e aprende com execuções"
+    }
+  }
+}

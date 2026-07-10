@@ -1,18 +1,18 @@
 ---
 sidebar_position: 6
 title: Marcas de Veículos
-description: Cadastro de marcas de veículos
+description: Cadastro de marcas de Veículos
 ---
 
 # Marcas de Veículos
 
-Permite cadastrar e gerenciar as marcas dos veículos.
+Permite cadastrar e gerenciar as marcas dos Veículos
 
 ![Lista de Marcas](../img/Veículos%20-%20marcas%20de%20veículos.png)
 
 ## Como acessar
 
-**Menu lateral** → Veículos → **Marcas de Veículos**
+**Menu lateral** → Veículos → **Marcas de Veículos
 
 ## Cadastro
 

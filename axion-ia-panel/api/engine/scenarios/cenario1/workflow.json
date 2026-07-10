@@ -1,0 +1,464 @@
+{
+  "workflowId": "WF-cenario1",
+  "name": "Cenário gravado em AxHub (production)",
+  "steps": [
+    {
+      "step": 1,
+      "action": "navigate",
+      "validation": {
+        "title": "Login - AXHub",
+        "url": "https://homologacao.axhub.axion.ws/Home/Login?ReturnUrl=https%3A%2F%2Fhomologacao.axhub.axion.ws%2Fnao-autorizado",
+        "visibleElements": 1
+      }
+    },
+    {
+      "step": 2,
+      "action": "click",
+      "selector": "#Username",
+      "validation": {
+        "title": "Login - AXHub",
+        "url": "https://homologacao.axhub.axion.ws/Home/Login?ReturnUrl=https%3A%2F%2Fhomologacao.axhub.axion.ws%2Fnao-autorizado",
+        "visibleElements": 1
+      }
+    },
+    {
+      "step": 3,
+      "action": "input",
+      "selector": "#Username",
+      "value": "Ad",
+      "validation": {
+        "title": "Login - AXHub",
+        "url": "https://homologacao.axhub.axion.ws/Home/Login?ReturnUrl=https%3A%2F%2Fhomologacao.axhub.axion.ws%2Fnao-autorizado",
+        "visibleElements": 1
+      }
+    },
+    {
+      "step": 4,
+      "action": "input",
+      "selector": "#Username",
+      "value": "Admi",
+      "validation": {
+        "title": "Login - AXHub",
+        "url": "https://homologacao.axhub.axion.ws/Home/Login?ReturnUrl=https%3A%2F%2Fhomologacao.axhub.axion.ws%2Fnao-autorizado",
+        "visibleElements": 1
+      }
+    },
+    {
+      "step": 5,
+      "action": "input",
+      "selector": "#Username",
+      "value": "Admin",
+      "validation": {
+        "title": "Login - AXHub",
+        "url": "https://homologacao.axhub.axion.ws/Home/Login?ReturnUrl=https%3A%2F%2Fhomologacao.axhub.axion.ws%2Fnao-autorizado",
+        "visibleElements": 1
+      }
+    },
+    {
+      "step": 6,
+      "action": "input",
+      "selector": "#Password",
+      "value": "{{PASSWORD}}",
+      "validation": {
+        "title": "Login - AXHub",
+        "url": "https://homologacao.axhub.axion.ws/Home/Login?ReturnUrl=https%3A%2F%2Fhomologacao.axhub.axion.ws%2Fnao-autorizado",
+        "visibleElements": 1
+      }
+    },
+    {
+      "step": 7,
+      "action": "input",
+      "selector": "#Password",
+      "value": "{{PASSWORD}}",
+      "validation": {
+        "title": "Login - AXHub",
+        "url": "https://homologacao.axhub.axion.ws/Home/Login?ReturnUrl=https%3A%2F%2Fhomologacao.axhub.axion.ws%2Fnao-autorizado",
+        "visibleElements": 1
+      }
+    },
+    {
+      "step": 8,
+      "action": "input",
+      "selector": "#Password",
+      "value": "{{PASSWORD}}",
+      "validation": {
+        "title": "Login - AXHub",
+        "url": "https://homologacao.axhub.axion.ws/Home/Login?ReturnUrl=https%3A%2F%2Fhomologacao.axhub.axion.ws%2Fnao-autorizado",
+        "visibleElements": 1
+      }
+    },
+    {
+      "step": 9,
+      "action": "input",
+      "selector": "#Password",
+      "value": "{{PASSWORD}}",
+      "validation": {
+        "title": "Login - AXHub",
+        "url": "https://homologacao.axhub.axion.ws/Home/Login?ReturnUrl=https%3A%2F%2Fhomologacao.axhub.axion.ws%2Fnao-autorizado",
+        "visibleElements": 1
+      }
+    },
+    {
+      "step": 10,
+      "action": "input",
+      "selector": "#Password",
+      "value": "{{PASSWORD}}",
+      "validation": {
+        "title": "Login - AXHub",
+        "url": "https://homologacao.axhub.axion.ws/Home/Login?ReturnUrl=https%3A%2F%2Fhomologacao.axhub.axion.ws%2Fnao-autorizado",
+        "visibleElements": 1
+      }
+    },
+    {
+      "step": 11,
+      "action": "input",
+      "selector": "#Password",
+      "value": "{{PASSWORD}}",
+      "validation": {
+        "title": "Login - AXHub",
+        "url": "https://homologacao.axhub.axion.ws/Home/Login?ReturnUrl=https%3A%2F%2Fhomologacao.axhub.axion.ws%2Fnao-autorizado",
+        "visibleElements": 1
+      }
+    },
+    {
+      "step": 12,
+      "action": "input",
+      "selector": "#Password",
+      "value": "{{PASSWORD}}",
+      "validation": {
+        "title": "Login - AXHub",
+        "url": "https://homologacao.axhub.axion.ws/Home/Login?ReturnUrl=https%3A%2F%2Fhomologacao.axhub.axion.ws%2Fnao-autorizado",
+        "visibleElements": 1
+      }
+    },
+    {
+      "step": 13,
+      "action": "navigate",
+      "validation": {
+        "title": "Acesso Negado - AXHub",
+        "url": "https://homologacao.axhub.axion.ws/nao-autorizado",
+        "visibleElements": 1
+      }
+    },
+    {
+      "step": 14,
+      "action": "navigate",
+      "validation": {
+        "title": "Bem vindo - AXHub",
+        "url": "https://homologacao.axhub.axion.ws/",
+        "visibleElements": 191
+      }
+    },
+    {
+      "step": 15,
+      "action": "click",
+      "selector": ".close",
+      "validation": {
+        "title": "Bem vindo - AXHub",
+        "url": "https://homologacao.axhub.axion.ws/",
+        "visibleElements": 204
+      }
+    },
+    {
+      "step": 16,
+      "action": "click",
+      "selector": ".title",
+      "validation": {
+        "title": "Bem vindo - AXHub",
+        "url": "https://homologacao.axhub.axion.ws/",
+        "visibleElements": 204
+      }
+    },
+    {
+      "step": 17,
+      "action": "navigate",
+      "validation": {
+        "title": "Triagem de Cronotacógrafo - AXHub",
+        "url": "https://homologacao.axhub.axion.ws/cronotacografo",
+        "visibleElements": 177
+      }
+    },
+    {
+      "step": 18,
+      "action": "click",
+      "selector": "#dataHoraInicio",
+      "validation": {
+        "title": "Triagem de Cronotacógrafo - AXHub",
+        "url": "https://homologacao.axhub.axion.ws/cronotacografo",
+        "visibleElements": 181
+      }
+    },
+    {
+      "step": 19,
+      "action": "click",
+      "selector": ".flatpickr-day",
+      "validation": {
+        "title": "Triagem de Cronotacógrafo - AXHub",
+        "url": "https://homologacao.axhub.axion.ws/cronotacografo",
+        "visibleElements": 181
+      }
+    },
+    {
+      "step": 20,
+      "action": "input",
+      "selector": "#dataHoraInicio",
+      "value": "09/06/2026 12:00",
+      "validation": {
+        "title": "Triagem de Cronotacógrafo - AXHub",
+        "url": "https://homologacao.axhub.axion.ws/cronotacografo",
+        "visibleElements": 181
+      }
+    },
+    {
+      "step": 21,
+      "action": "click",
+      "selector": ".card-title",
+      "validation": {
+        "title": "Triagem de Cronotacógrafo - AXHub",
+        "url": "https://homologacao.axhub.axion.ws/cronotacografo",
+        "visibleElements": 181
+      }
+    },
+    {
+      "step": 22,
+      "action": "click",
+      "selector": "#filtrar",
+      "validation": {
+        "title": "Triagem de Cronotacógrafo - AXHub",
+        "url": "https://homologacao.axhub.axion.ws/cronotacografo",
+        "visibleElements": 181
+      }
+    },
+    {
+      "step": 23,
+      "action": "click",
+      "selector": "#limpar",
+      "validation": {
+        "title": "Triagem de Cronotacógrafo - AXHub",
+        "url": "https://homologacao.axhub.axion.ws/cronotacografo",
+        "visibleElements": 181
+      }
+    },
+    {
+      "step": 24,
+      "action": "input",
+      "selector": "#dataHoraFim",
+      "value": "",
+      "validation": {
+        "title": "Triagem de Cronotacógrafo - AXHub",
+        "url": "https://homologacao.axhub.axion.ws/cronotacografo",
+        "visibleElements": 181
+      }
+    },
+    {
+      "step": 25,
+      "action": "click",
+      "selector": "#dataHoraInicio",
+      "validation": {
+        "title": "Triagem de Cronotacógrafo - AXHub",
+        "url": "https://homologacao.axhub.axion.ws/cronotacografo",
+        "visibleElements": 181
+      }
+    },
+    {
+      "step": 26,
+      "action": "click",
+      "selector": ".flatpickr-day",
+      "validation": {
+        "title": "Triagem de Cronotacógrafo - AXHub",
+        "url": "https://homologacao.axhub.axion.ws/cronotacografo",
+        "visibleElements": 181
+      }
+    },
+    {
+      "step": 27,
+      "action": "input",
+      "selector": "#dataHoraInicio",
+      "value": "02/06/2026 12:00",
+      "validation": {
+        "title": "Triagem de Cronotacógrafo - AXHub",
+        "url": "https://homologacao.axhub.axion.ws/cronotacografo",
+        "visibleElements": 181
+      }
+    },
+    {
+      "step": 28,
+      "action": "input",
+      "selector": "",
+      "value": "00",
+      "validation": {
+        "title": "Triagem de Cronotacógrafo - AXHub",
+        "url": "https://homologacao.axhub.axion.ws/cronotacografo",
+        "visibleElements": 181
+      }
+    },
+    {
+      "step": 29,
+      "action": "click",
+      "selector": ".flatpickr-day",
+      "validation": {
+        "title": "Triagem de Cronotacógrafo - AXHub",
+        "url": "https://homologacao.axhub.axion.ws/cronotacografo",
+        "visibleElements": 181
+      }
+    },
+    {
+      "step": 30,
+      "action": "input",
+      "selector": "#dataHoraInicio",
+      "value": "02/06/2026 00:00",
+      "validation": {
+        "title": "Triagem de Cronotacógrafo - AXHub",
+        "url": "https://homologacao.axhub.axion.ws/cronotacografo",
+        "visibleElements": 181
+      }
+    },
+    {
+      "step": 31,
+      "action": "click",
+      "selector": "#filtrar",
+      "validation": {
+        "title": "Triagem de Cronotacógrafo - AXHub",
+        "url": "https://homologacao.axhub.axion.ws/cronotacografo",
+        "visibleElements": 181
+      }
+    },
+    {
+      "step": 32,
+      "action": "click",
+      "selector": ".collapsed",
+      "validation": {
+        "title": "Triagem de Cronotacógrafo - AXHub",
+        "url": "https://homologacao.axhub.axion.ws/cronotacografo",
+        "visibleElements": 181
+      }
+    },
+    {
+      "step": 33,
+      "action": "click",
+      "selector": ".title",
+      "validation": {
+        "title": "Triagem de Cronotacógrafo - AXHub",
+        "url": "https://homologacao.axhub.axion.ws/cronotacografo",
+        "visibleElements": 181
+      }
+    },
+    {
+      "step": 34,
+      "action": "navigate",
+      "validation": {
+        "title": "Relatórios de Eventos dos Equipamentos - AXHub",
+        "url": "https://homologacao.axhub.axion.ws/relatorio/relatorioeventoequipamento",
+        "visibleElements": 175
+      }
+    },
+    {
+      "step": 35,
+      "action": "click",
+      "selector": "#buscar",
+      "validation": {
+        "title": "Relatórios de Eventos dos Equipamentos - AXHub",
+        "url": "https://homologacao.axhub.axion.ws/relatorio/relatorioeventoequipamento",
+        "visibleElements": 186
+      }
+    },
+    {
+      "step": 36,
+      "action": "click",
+      "selector": ".swal2-confirm",
+      "validation": {
+        "title": "Relatórios de Eventos dos Equipamentos - AXHub",
+        "url": "https://homologacao.axhub.axion.ws/relatorio/relatorioeventoequipamento",
+        "visibleElements": 185
+      }
+    },
+    {
+      "step": 37,
+      "action": "click",
+      "selector": ".k-link",
+      "validation": {
+        "title": "Relatórios de Eventos dos Equipamentos - AXHub",
+        "url": "https://homologacao.axhub.axion.ws/relatorio/relatorioeventoequipamento",
+        "visibleElements": 185
+      }
+    },
+    {
+      "step": 38,
+      "action": "click",
+      "selector": "#select2-grupo-container",
+      "validation": {
+        "title": "Relatórios de Eventos dos Equipamentos - AXHub",
+        "url": "https://homologacao.axhub.axion.ws/relatorio/relatorioeventoequipamento",
+        "visibleElements": 185
+      }
+    },
+    {
+      "step": 39,
+      "action": "click",
+      "selector": ".k-virtual-scrollable-wrap",
+      "validation": {
+        "title": "Relatórios de Eventos dos Equipamentos - AXHub",
+        "url": "https://homologacao.axhub.axion.ws/relatorio/relatorioeventoequipamento",
+        "visibleElements": 185
+      }
+    },
+    {
+      "step": 40,
+      "action": "click",
+      "selector": "#buscar",
+      "validation": {
+        "title": "Relatórios de Eventos dos Equipamentos - AXHub",
+        "url": "https://homologacao.axhub.axion.ws/relatorio/relatorioeventoequipamento",
+        "visibleElements": 185
+      }
+    },
+    {
+      "step": 41,
+      "action": "click",
+      "selector": ".title",
+      "validation": {
+        "title": "Relatórios de Eventos dos Equipamentos - AXHub",
+        "url": "https://homologacao.axhub.axion.ws/relatorio/relatorioeventoequipamento",
+        "visibleElements": 185
+      }
+    },
+    {
+      "step": 42,
+      "action": "navigate",
+      "validation": {
+        "title": "Faixas - AXHub",
+        "url": "https://homologacao.axhub.axion.ws/faixa",
+        "visibleElements": 175
+      }
+    },
+    {
+      "step": 43,
+      "action": "click",
+      "selector": ".k-table-td",
+      "validation": {
+        "title": "Faixas - AXHub",
+        "url": "https://homologacao.axhub.axion.ws/faixa",
+        "visibleElements": 344
+      }
+    },
+    {
+      "step": 44,
+      "action": "click",
+      "selector": ".title",
+      "validation": {
+        "title": "Faixas - AXHub",
+        "url": "https://homologacao.axhub.axion.ws/faixa",
+        "visibleElements": 344
+      }
+    },
+    {
+      "step": 45,
+      "action": "navigate",
+      "validation": {
+        "title": "Consulta de Cronotacógrafo - AXHub",
+        "url": "https://homologacao.axhub.axion.ws/consultacronotacografo",
+        "visibleElements": 184
+      }
+    }
+  ]
+}

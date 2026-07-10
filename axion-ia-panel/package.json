@@ -1,18 +1,26 @@
 {
   "name": "axion-ia-panel",
   "private": true,
-  "version": "1.0.0",
+  "version": "2.0.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "dev:api": "cd api && node --env-file=.env src/app.js",
+    "install:api": "cd api && npm install",
+    "install:engine": "cd engine && npm install",
+    "install:all": "npm install && npm run install:api && npm run install:engine"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",
     "@tanstack/react-query": "^5.100.9",
     "axios": "^1.7.9",
     "lucide-react": "^1.16.0",
+    "mongodb": "^7.3.0",
+    "mssql": "^12.6.0",
+    "pixelmatch": "^7.2.0",
+    "pngjs": "^7.0.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-hook-form": "^7.75.0",

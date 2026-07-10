@@ -6,13 +6,13 @@ description: Volume de tráfego por hora e dia
 
 # Fluxo Diário de Veículos
 
-![Relatório de Pesagem](../img/Relatorio%20de%20pesagem.png)
+Relatório de Pesagem](../img/Relatorio%20de%20pesagem.png)
 
-Gráfico e tabela com o fluxo horário de veículos nos postos de pesagem, útil para dimensionamento de equipes.
+Gráfico e tabela com o fluxo horário de Veículos nos postos de pesagem, útil para dimensionamento de equipes.
 
 ## Como acessar
 
-**Menu lateral** → Relatórios → **Fluxo Diário de Veículos**
+**Menu lateral** → Relatórios → **Fluxo Diário de Veículos
 
 ## Dados do Relatório
 
@@ -21,7 +21,7 @@ Gráfico e tabela com o fluxo horário de veículos nos postos de pesagem, útil
 | Coluna | Descrição |
 |--------|-----------|
 | **Hora** | Faixa horária |
-| **Total** | Quantidade de veículos |
+| **Total** | Quantidade de Veículos |
 | **Média** | Média do período |
 | **Pico** | Horário com maior volume |
 
