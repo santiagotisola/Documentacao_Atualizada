@@ -1,7 +1,7 @@
 {
   "total": 72,
   "inventario": 72,
-  "ultimaAtualizacao": "2026-07-08T16:26:30.992Z",
+  "ultimaAtualizacao": "2026-07-13T01:34:33.205Z",
   "devices": [
     {
       "nome": "GOEC6O002 - Faixa 1",
@@ -20,7 +20,7 @@
         },
         "profiles": [
           {
-            "active": true,
+            "active": false,
             "advanced": {
               "exposition": {
                 "updateFactor": 0.0990000069141388,
@@ -171,7 +171,7 @@
             }
           },
           {
-            "active": false,
+            "active": true,
             "advanced": {
               "exposition": {
                 "updateFactor": 0.0990000069141388,
@@ -591,7 +591,7 @@
             "time.google.com"
           ],
           "serveNtp": false,
-          "currentDateAndTime": "2026-07-08T16:25:09.000Z",
+          "currentDateAndTime": "2026-07-13T01:33:08.000Z",
           "timezoneOffset": "-0300"
         },
         "video": {
@@ -642,7 +642,7 @@
         },
         "profiles": [
           {
-            "active": true,
+            "active": false,
             "advanced": {
               "exposition": {
                 "updateFactor": 0.0990000069141388,
@@ -793,7 +793,7 @@
             }
           },
           {
-            "active": false,
+            "active": true,
             "advanced": {
               "exposition": {
                 "updateFactor": 0.0990000069141388,
@@ -1213,7 +1213,7 @@
             "time.google.com"
           ],
           "serveNtp": false,
-          "currentDateAndTime": "2026-07-08T16:25:09.000Z",
+          "currentDateAndTime": "2026-07-13T01:33:07.000Z",
           "timezoneOffset": "-0300"
         },
         "video": {
@@ -1264,7 +1264,7 @@
         },
         "profiles": [
           {
-            "active": true,
+            "active": false,
             "advanced": {
               "exposition": {
                 "updateFactor": 0.0990000069141388,
@@ -1415,7 +1415,7 @@
             }
           },
           {
-            "active": false,
+            "active": true,
             "advanced": {
               "exposition": {
                 "updateFactor": 0.0990000069141388,
@@ -1835,7 +1835,7 @@
             "time.google.com"
           ],
           "serveNtp": false,
-          "currentDateAndTime": "2026-07-08T16:25:09.000Z",
+          "currentDateAndTime": "2026-07-13T01:33:08.000Z",
           "timezoneOffset": "-0300"
         },
         "video": {
@@ -1886,7 +1886,7 @@
         },
         "profiles": [
           {
-            "active": true,
+            "active": false,
             "advanced": {
               "exposition": {
                 "updateFactor": 0.0990000069141388,
@@ -2037,7 +2037,7 @@
             }
           },
           {
-            "active": false,
+            "active": true,
             "advanced": {
               "exposition": {
                 "updateFactor": 0.0990000069141388,
@@ -2457,7 +2457,7 @@
             "time.google.com"
           ],
           "serveNtp": false,
-          "currentDateAndTime": "2026-07-08T16:25:09.000Z",
+          "currentDateAndTime": "2026-07-13T01:33:07.000Z",
           "timezoneOffset": "-0300"
         },
         "video": {
@@ -2508,7 +2508,7 @@
         },
         "profiles": [
           {
-            "active": true,
+            "active": false,
             "advanced": {
               "exposition": {
                 "updateFactor": 0.0990000069141388,
@@ -2659,7 +2659,7 @@
             }
           },
           {
-            "active": false,
+            "active": true,
             "advanced": {
               "exposition": {
                 "updateFactor": 0.0990000069141388,
@@ -3079,7 +3079,7 @@
             "time.google.com"
           ],
           "serveNtp": false,
-          "currentDateAndTime": "2026-07-08T16:25:08.000Z",
+          "currentDateAndTime": "2026-07-13T01:33:07.000Z",
           "timezoneOffset": "-0300"
         },
         "video": {
@@ -3130,7 +3130,7 @@
         },
         "profiles": [
           {
-            "active": true,
+            "active": false,
             "advanced": {
               "exposition": {
                 "updateFactor": 0.0990000069141388,
@@ -3281,7 +3281,7 @@
             }
           },
           {
-            "active": false,
+            "active": true,
             "advanced": {
               "exposition": {
                 "updateFactor": 0.0990000069141388,
@@ -3701,7 +3701,7 @@
             "time.google.com"
           ],
           "serveNtp": false,
-          "currentDateAndTime": "2026-07-08T16:25:13.000Z",
+          "currentDateAndTime": "2026-07-13T01:33:12.000Z",
           "timezoneOffset": "-0300"
         },
         "video": {
@@ -3752,7 +3752,7 @@
         },
         "profiles": [
           {
-            "active": true,
+            "active": false,
             "advanced": {
               "exposition": {
                 "updateFactor": 0.0990000069141388,
@@ -3903,7 +3903,7 @@
             }
           },
           {
-            "active": false,
+            "active": true,
             "advanced": {
               "exposition": {
                 "updateFactor": 0.0990000069141388,
@@ -4323,7 +4323,7 @@
             "time.google.com"
           ],
           "serveNtp": false,
-          "currentDateAndTime": "2026-07-08T16:25:12.000Z",
+          "currentDateAndTime": "2026-07-13T01:33:12.000Z",
           "timezoneOffset": "-0300"
         },
         "video": {
@@ -4374,7 +4374,7 @@
         },
         "profiles": [
           {
-            "active": true,
+            "active": false,
             "advanced": {
               "exposition": {
                 "updateFactor": 0.0990000069141388,
@@ -4525,7 +4525,7 @@
             }
           },
           {
-            "active": false,
+            "active": true,
             "advanced": {
               "exposition": {
                 "updateFactor": 0.0990000069141388,
@@ -4945,7 +4945,7 @@
             "time.google.com"
           ],
           "serveNtp": false,
-          "currentDateAndTime": "2026-07-08T16:25:12.000Z",
+          "currentDateAndTime": "2026-07-13T01:33:12.000Z",
           "timezoneOffset": "-0300"
         },
         "video": {
@@ -5010,7 +5010,7 @@
         },
         "profiles": [
           {
-            "active": true,
+            "active": false,
             "advanced": {
               "exposition": {
                 "updateFactor": 0.0990000069141388,
@@ -5161,7 +5161,7 @@
             }
           },
           {
-            "active": false,
+            "active": true,
             "advanced": {
               "exposition": {
                 "updateFactor": 0.0990000069141388,
@@ -5581,7 +5581,7 @@
             "time.google.com"
           ],
           "serveNtp": false,
-          "currentDateAndTime": "2026-07-08T16:25:17.000Z",
+          "currentDateAndTime": "2026-07-13T01:33:17.000Z",
           "timezoneOffset": "-0300"
         },
         "video": {
@@ -5632,7 +5632,7 @@
         },
         "profiles": [
           {
-            "active": true,
+            "active": false,
             "advanced": {
               "exposition": {
                 "updateFactor": 0.0990000069141388,
@@ -5783,7 +5783,7 @@
             }
           },
           {
-            "active": false,
+            "active": true,
             "advanced": {
               "exposition": {
                 "updateFactor": 0.0990000069141388,
@@ -6203,7 +6203,7 @@
             "time.google.com"
           ],
           "serveNtp": false,
-          "currentDateAndTime": "2026-07-08T16:25:17.000Z",
+          "currentDateAndTime": "2026-07-13T01:33:17.000Z",
           "timezoneOffset": "-0300"
         },
         "video": {
@@ -6261,7 +6261,7 @@
         },
         "profiles": [
           {
-            "active": true,
+            "active": false,
             "advanced": {
               "exposition": {
                 "updateFactor": 0.0990000069141388,
@@ -6412,7 +6412,7 @@
             }
           },
           {
-            "active": false,
+            "active": true,
             "advanced": {
               "exposition": {
                 "updateFactor": 0.0990000069141388,
@@ -6832,7 +6832,7 @@
             "time.google.com"
           ],
           "serveNtp": false,
-          "currentDateAndTime": "2026-07-08T16:25:31.000Z",
+          "currentDateAndTime": "2026-07-13T01:33:17.000Z",
           "timezoneOffset": "-0300"
         },
         "video": {
@@ -6883,7 +6883,7 @@
         },
         "profiles": [
           {
-            "active": true,
+            "active": false,
             "advanced": {
               "exposition": {
                 "updateFactor": 0.0990000069141388,
@@ -7056,7 +7056,7 @@
             }
           },
           {
-            "active": false,
+            "active": true,
             "advanced": {
               "exposition": {
                 "updateFactor": 0.0990000069141388,
@@ -7479,7 +7479,7 @@
             "time.google.com"
           ],
           "serveNtp": false,
-          "currentDateAndTime": "2026-07-08T16:25:18.000Z",
+          "currentDateAndTime": "2026-07-13T01:33:17.000Z",
           "timezoneOffset": "-0300"
         },
         "video": {
@@ -8104,7 +8104,7 @@
             "time.google.com"
           ],
           "serveNtp": false,
-          "currentDateAndTime": "2026-07-08T16:25:36.000Z",
+          "currentDateAndTime": "2026-07-13T01:33:25.000Z",
           "timezoneOffset": "-0300"
         },
         "video": {
@@ -8155,7 +8155,7 @@
         },
         "profiles": [
           {
-            "active": true,
+            "active": false,
             "advanced": {
               "exposition": {
                 "updateFactor": 0.0990000069141388,
@@ -8306,7 +8306,7 @@
             }
           },
           {
-            "active": false,
+            "active": true,
             "advanced": {
               "exposition": {
                 "updateFactor": 0.0990000069141388,
@@ -8726,7 +8726,7 @@
             "time.google.com"
           ],
           "serveNtp": false,
-          "currentDateAndTime": "2026-07-08T16:25:35.000Z",
+          "currentDateAndTime": "2026-07-13T01:33:26.000Z",
           "timezoneOffset": "-0300"
         },
         "video": {
@@ -8777,7 +8777,7 @@
         },
         "profiles": [
           {
-            "active": true,
+            "active": false,
             "advanced": {
               "exposition": {
                 "updateFactor": 0.0990000069141388,
@@ -8928,7 +8928,7 @@
             }
           },
           {
-            "active": false,
+            "active": true,
             "advanced": {
               "exposition": {
                 "updateFactor": 0.0990000069141388,
@@ -9348,7 +9348,7 @@
             "time.google.com"
           ],
           "serveNtp": false,
-          "currentDateAndTime": "2026-07-08T16:25:35.000Z",
+          "currentDateAndTime": "2026-07-13T01:33:27.000Z",
           "timezoneOffset": "-0300"
         },
         "video": {
@@ -9399,7 +9399,7 @@
         },
         "profiles": [
           {
-            "active": true,
+            "active": false,
             "advanced": {
               "exposition": {
                 "updateFactor": 0.0990000069141388,
@@ -9550,7 +9550,7 @@
             }
           },
           {
-            "active": false,
+            "active": true,
             "advanced": {
               "exposition": {
                 "updateFactor": 0.0990000069141388,
@@ -9970,7 +9970,7 @@
             "time.google.com"
           ],
           "serveNtp": false,
-          "currentDateAndTime": "2026-07-08T16:25:35.000Z",
+          "currentDateAndTime": "2026-07-13T01:33:25.000Z",
           "timezoneOffset": "-0300"
         },
         "video": {
@@ -10021,7 +10021,7 @@
         },
         "profiles": [
           {
-            "active": true,
+            "active": false,
             "advanced": {
               "exposition": {
                 "updateFactor": 0.0990000069141388,
@@ -10177,7 +10177,7 @@
             }
           },
           {
-            "active": false,
+            "active": true,
             "advanced": {
               "exposition": {
                 "updateFactor": 0.0990000069141388,
@@ -10597,7 +10597,7 @@
             "200.160.0.8"
           ],
           "serveNtp": false,
-          "currentDateAndTime": "2026-07-08T16:25:35.000Z",
+          "currentDateAndTime": "2026-07-13T01:33:24.000Z",
           "timezoneOffset": "-0300"
         },
         "video": {
@@ -10642,628 +10642,8 @@
       "nome": "GOEC6O013 - Faixa 2",
       "uuid": "36896650-1bca-4093-9631-667b73bdd93d",
       "ip": "187.43.160.194",
-      "raw": {
-        "varco": {
-          "remoteAccess": {
-            "varco": {
-              "enabled": true,
-              "edgeServer": "edge.varco.io",
-              "provisionKey": "yk-pzGzXLGmz6-iO3GhdR7hinksDN7aek-kjQ4WYl_c=",
-              "deviceName": "GOEC6O013 - FAIXA 2"
-            }
-          }
-        },
-        "profiles": [
-          {
-            "active": true,
-            "advanced": {
-              "exposition": {
-                "updateFactor": 0.0990000069141388,
-                "updateRate": 100
-              },
-              "iris": {
-                "updateRate": 1000
-              },
-              "whitebalance": {
-                "updateRate": 500
-              }
-            },
-            "color": {
-              "blacklevel": 0,
-              "brightness": 0,
-              "contrast": 0,
-              "gamma": 130,
-              "saturation": 0
-            },
-            "description": "",
-            "exposure": {
-              "gain": {
-                "automatic": true,
-                "fixedValue": 1,
-                "maxValue": 1000,
-                "minValue": 1
-              },
-              "highGainMode": false,
-              "iris": {
-                "automatic": true,
-                "fixedValue": 1000
-              },
-              "level": {
-                "roi": {
-                  "enabled": true,
-                  "x0": 235,
-                  "x1": 1150,
-                  "x2": 647,
-                  "x3": 1919,
-                  "y0": 598,
-                  "y1": 441,
-                  "y2": 1187,
-                  "y3": 968
-                },
-                "targetValue": 35
-              },
-              "shutter": {
-                "automatic": true,
-                "fixedValue": 99,
-                "maxValue": 1500,
-                "minValue": 48
-              }
-            },
-            "filter": {
-              "sharpnessLevel": 40,
-              "timedomainLevel": 0
-            },
-            "hdr": {
-              "enable": false
-            },
-            "id": 0,
-            "lens": {
-              "exchanger": true,
-              "focus": 1035,
-              "zfMirrorProfile0": true,
-              "zoom": 2350
-            },
-            "movFilter": {
-              "enabled": false,
-              "onlyCheck": false,
-              "roi": {
-                "enabled": true,
-                "x0": 0,
-                "x1": 798,
-                "x2": 1903,
-                "x3": 403,
-                "y0": 0,
-                "y1": 22,
-                "y2": 904,
-                "y3": 1195
-              },
-              "threshold": 5
-            },
-            "multipleExposures": {
-              "enabled": true,
-              "settings": [
-                {
-                  "flash": {
-                    "power": [
-                      {
-                        "out": 3,
-                        "percent": 28
-                      }
-                    ]
-                  },
-                  "gain": {
-                    "percentageOfCurrent": true,
-                    "value": 100
-                  },
-                  "shutter": {
-                    "percentageOfCurrent": true,
-                    "value": 100
-                  }
-                }
-              ]
-            },
-            "name": "Diurno",
-            "overlay": {
-              "enable": false,
-              "text": "SEQUENCIAL: {rid} DATA PASSAGEM: {day}/{month}/{year} HORA PASSAGEM: {hour}:{minute}:{second}:{msec} PLACA: {plates} CODIGO EQUIPAMENTO: [CODIGOEQUIPAMENTO] MODELO OCR: AX-OCR LOCAL: [LOCAL] NOME DA VIA: [VIA] SENTIDO: [SENTIDO] FAIXA: [NUMERO]"
-            },
-            "transitions": {
-              "lower": {
-                "endTime": "00:00:00",
-                "holdTime": 60000,
-                "level": 10,
-                "profile": 27839,
-                "startTime": "00:00:00"
-              },
-              "upper": {
-                "endTime": "00:00:00",
-                "holdTime": 60000,
-                "level": 35,
-                "profile": 0,
-                "startTime": "00:00:00"
-              }
-            },
-            "trigger": {
-              "enabled": true,
-              "event": "constant",
-              "minimumInterval": 100,
-              "port": 2,
-              "roi": {
-                "enabled": false,
-                "x0": 0,
-                "x1": 0,
-                "x2": 0,
-                "x3": 0,
-                "y0": 0,
-                "y1": 0,
-                "y2": 0,
-                "y3": 0
-              },
-              "threshold": 0
-            },
-            "whitebalance": {
-              "automatic": true,
-              "weights": {
-                "blue": 100,
-                "green": 100,
-                "red": 100
-              }
-            }
-          },
-          {
-            "active": false,
-            "advanced": {
-              "exposition": {
-                "updateFactor": 0.0990000069141388,
-                "updateRate": 100
-              },
-              "iris": {
-                "updateRate": 1000
-              },
-              "whitebalance": {
-                "updateRate": 500
-              }
-            },
-            "color": {
-              "blacklevel": 0,
-              "brightness": 0,
-              "contrast": 30,
-              "gamma": 12,
-              "saturation": -100
-            },
-            "description": "",
-            "exposure": {
-              "gain": {
-                "automatic": true,
-                "fixedValue": 2697,
-                "maxValue": 4000,
-                "minValue": 1
-              },
-              "highGainMode": false,
-              "iris": {
-                "automatic": false,
-                "fixedValue": 1000
-              },
-              "level": {
-                "roi": {
-                  "enabled": false,
-                  "x0": 10,
-                  "x1": 840,
-                  "x2": 403,
-                  "x3": 1900,
-                  "y0": 150,
-                  "y1": 28,
-                  "y2": 1179,
-                  "y3": 846
-                },
-                "targetValue": 35
-              },
-              "shutter": {
-                "automatic": true,
-                "fixedValue": 2000,
-                "maxValue": 800,
-                "minValue": 48
-              }
-            },
-            "filter": {
-              "sharpnessLevel": 0,
-              "timedomainLevel": 0
-            },
-            "hdr": {
-              "enable": false
-            },
-            "id": 27839,
-            "lens": {
-              "exchanger": false,
-              "focus": 1035,
-              "zfMirrorProfile0": true,
-              "zoom": 2350
-            },
-            "movFilter": {
-              "enabled": false,
-              "onlyCheck": false,
-              "roi": {
-                "enabled": false,
-                "x0": 0,
-                "x1": 1920,
-                "x2": 1920,
-                "x3": 0,
-                "y0": 0,
-                "y1": 0,
-                "y2": 1200,
-                "y3": 1200
-              },
-              "threshold": 5
-            },
-            "multipleExposures": {
-              "enabled": true,
-              "settings": [
-                {
-                  "flash": {
-                    "power": [
-                      {
-                        "out": 1,
-                        "percent": 82
-                      },
-                      {
-                        "out": 3,
-                        "percent": 82
-                      }
-                    ]
-                  },
-                  "gain": {
-                    "percentageOfCurrent": true,
-                    "value": 100
-                  },
-                  "shutter": {
-                    "percentageOfCurrent": true,
-                    "value": 45
-                  }
-                },
-                {
-                  "flash": {
-                    "power": [
-                      {
-                        "out": 1,
-                        "percent": 75
-                      },
-                      {
-                        "out": 3,
-                        "percent": 75
-                      }
-                    ]
-                  },
-                  "gain": {
-                    "percentageOfCurrent": false,
-                    "value": 6500
-                  },
-                  "shutter": {
-                    "percentageOfCurrent": false,
-                    "value": 21044
-                  }
-                }
-              ]
-            },
-            "name": "Noturno",
-            "overlay": {
-              "enable": false,
-              "text": "SEQUENCIAL: {rid} DATA PASSAGEM: {day}/{month}/{year} HORA PASSAGEM: {hour}:{minute}:{second}:{msec} PLACA: {plates} CODIGO EQUIPAMENTO: GOEC6O032 MODELO OCR: AX-OCR LOCAL: Planaltina-GO NOME DA VIA: GO 118 KM 6 SENTIDO: Planaltina-GO/Divisa-DF FAIXA: 01"
-            },
-            "transitions": {
-              "lower": {
-                "endTime": "00:00:00",
-                "holdTime": 60000,
-                "level": 10,
-                "profile": 27839,
-                "startTime": "00:00:00"
-              },
-              "upper": {
-                "endTime": "00:00:00",
-                "holdTime": 60000,
-                "level": 35,
-                "profile": 0,
-                "startTime": "00:00:00"
-              }
-            },
-            "trigger": {
-              "enabled": true,
-              "event": "constant",
-              "minimumInterval": 100,
-              "port": 2,
-              "roi": {
-                "enabled": false,
-                "x0": 0,
-                "x1": 0,
-                "x2": 0,
-                "x3": 0,
-                "y0": 0,
-                "y1": 0,
-                "y2": 0,
-                "y3": 0
-              },
-              "threshold": 0
-            },
-            "whitebalance": {
-              "automatic": false,
-              "weights": {
-                "blue": 100,
-                "green": 100,
-                "red": 100
-              }
-            }
-          }
-        ],
-        "ocr": {
-          "ocr": {
-            "avgCharHeight": 20,
-            "avgPlateAngle": 0,
-            "avgPlateSlant": 0,
-            "classifierExpansion": 10,
-            "countryCode": 76,
-            "enabled": true,
-            "licensed": true,
-            "lowProbChar": 45,
-            "maxCharHeight": 60,
-            "maxLowProbChars": 0,
-            "maxPlates": 2,
-            "minCharHeight": 9,
-            "minProbPerChar": 85,
-            "processingMode": 3,
-            "processingQueue": 4,
-            "processingThreads": 4,
-            "processingTimeout": 1000,
-            "roi": {
-              "enabled": true,
-              "x0": 309,
-              "x1": 1199,
-              "x2": 669,
-              "x3": 1881,
-              "y0": 588,
-              "y1": 532,
-              "y2": 1199,
-              "y3": 1030
-            },
-            "useClassifierResult": false,
-            "vehicleType": 3
-          }
-        },
-        "classifier": {
-          "classifier": {
-            "enableCharacteristics": false,
-            "enableSpeed": false,
-            "enabled": true,
-            "firstOnly": false,
-            "licensed": true,
-            "minProbability": 100,
-            "modelType": 0,
-            "processingQueue": 1,
-            "processingThreads": 1,
-            "sceneType": 0,
-            "speedCalibrationRegion1": {
-              "p0top1sz": 1,
-              "x0": 10,
-              "x1": 10,
-              "x2": 10,
-              "y0": 10,
-              "y1": 10,
-              "y2": 10
-            },
-            "speedCalibrationRegion2": {
-              "p0top1sz": 1,
-              "x0": 10,
-              "x1": 10,
-              "x2": 10,
-              "y0": 10,
-              "y1": 10,
-              "y2": 10
-            },
-            "triggerEnabled": false,
-            "triggerRegion0": {
-              "dir": "disabled",
-              "x0": 0,
-              "x1": 0,
-              "y0": 0,
-              "y1": 0
-            },
-            "triggerRegion1": {
-              "dir": "disabled",
-              "x0": 0,
-              "x1": 0,
-              "y0": 0,
-              "y1": 0
-            },
-            "triggerRegion2": {
-              "dir": "disabled",
-              "x0": 0,
-              "x1": 0,
-              "y0": 0,
-              "y1": 0
-            },
-            "triggerRegion3": {
-              "dir": "disabled",
-              "x0": 0,
-              "x1": 0,
-              "y0": 0,
-              "y1": 0
-            }
-          }
-        },
-        "misc": {
-          "cameraOrientation": false,
-          "irisHint": "dcIris",
-          "jpegQuality": 85,
-          "legacyTsyncGpio": -1,
-          "scenario1Crop": {
-            "x0": 278,
-            "x1": 1557,
-            "y0": 284,
-            "y1": 1003
-          },
-          "scenario1Overlay": "",
-          "scenario1OverlayTextSize": 24,
-          "scenario2Crop": {
-            "x0": 0,
-            "x1": 1919,
-            "y0": 0,
-            "y1": 1199
-          },
-          "scenario2Overlay": "",
-          "scenario2OverlayTextSize": 32,
-          "scenarioOverlayColor": "blackOverWhite",
-          "scenarioOverlayPos": "overlaidBottom",
-          "snapshotCrop": {
-            "enable": false,
-            "mode": "static",
-            "x0": 40,
-            "x1": 1403,
-            "y0": 280,
-            "y1": 1099
-          }
-        },
-        "ftp": {
-          "ftp": {
-            "address": "127.0.0.1",
-            "anonymous": false,
-            "enable": false,
-            "filename": "PTX_{year,digits:4:4:0}{month,digits:2:2:0}{day,digits:2:2:0}_{hour,digits:2:2:0}{minute,digits:2:2:0}{second,digits:2:2:0}_{msec,digits:3:3:0}_{plates,digits:7:7:0}_{framePos,digits:2:2:0}.jpg",
-            "local": {
-              "bufferSizeKb": 102400,
-              "ttl": 7200
-            },
-            "password": "",
-            "port": 21,
-            "protocol": "ftp",
-            "quality": 85,
-            "transfer": {
-              "pollInterval": 300,
-              "timeout": 60000
-            },
-            "username": ""
-          }
-        },
-        "ioPorts": [
-          {
-            "canFlash": true,
-            "canTrigger": false,
-            "earlyUs": 7,
-            "group": "out",
-            "identifier": "1",
-            "isInput": false,
-            "isOn": false,
-            "isReserved": true,
-            "port": 1,
-            "protection": "itslux",
-            "type": "flash"
-          },
-          {
-            "canFlash": false,
-            "canTrigger": true,
-            "earlyUs": 0,
-            "group": "in",
-            "identifier": "1",
-            "isInput": true,
-            "isOn": false,
-            "isReserved": false,
-            "port": 2,
-            "protection": "none",
-            "type": "general"
-          },
-          {
-            "canFlash": true,
-            "canTrigger": false,
-            "earlyUs": 7,
-            "group": "out",
-            "identifier": "2",
-            "isInput": false,
-            "isOn": false,
-            "isReserved": true,
-            "port": 3,
-            "protection": "itslux",
-            "type": "flash"
-          },
-          {
-            "canFlash": false,
-            "canTrigger": true,
-            "earlyUs": 0,
-            "group": "in",
-            "identifier": "2",
-            "isInput": true,
-            "isOn": false,
-            "isReserved": false,
-            "port": 4,
-            "protection": "none",
-            "type": "general"
-          }
-        ],
-        "snmp": {
-          "enabled": false,
-          "v2": {
-            "enabled": false,
-            "community": ""
-          },
-          "v3": {
-            "enabled": false,
-            "securityName": "",
-            "authenticationPassphrase": "",
-            "privacyPassphrase": ""
-          }
-        },
-        "reboot": {
-          "scheduled": {
-            "enabled": false,
-            "weekdays": [
-              0
-            ],
-            "hour": 0
-          },
-          "periodic": {
-            "enabled": false,
-            "hours": 24
-          }
-        },
-        "dateTime": {
-          "timezone": [
-            "America",
-            "Sao_Paulo"
-          ],
-          "useNTPServer": true,
-          "ntpServerAddress": [
-            "time.google.com"
-          ],
-          "serveNtp": false,
-          "currentDateAndTime": "2026-07-08T16:25:41.000Z",
-          "timezoneOffset": "-0300"
-        },
-        "video": {
-          "mjpeg": {
-            "available": true,
-            "main": {
-              "available": true,
-              "enabled": true,
-              "framerate": 12,
-              "quality": 85,
-              "useTriggerFrames": true
-            }
-          },
-          "rtsp": {
-            "available": true,
-            "enable": false,
-            "port": 554,
-            "rtpPort": 5004,
-            "rtcpPort": 5005,
-            "httpEnabled": false,
-            "httpPort": 8555,
-            "transport": "tcp",
-            "url": "/streaming/mjpeg",
-            "authentication": false,
-            "username": "",
-            "password": ""
-          }
-        },
-        "firmware": {
-          "version": "v1.7.8"
-        }
-      }
+      "raw": null,
+      "error": "AUTH_FAILED"
     },
     {
       "nome": "GOEC6O018 - Faixa 1",
@@ -11289,7 +10669,7 @@
         },
         "profiles": [
           {
-            "active": true,
+            "active": false,
             "advanced": {
               "exposition": {
                 "updateFactor": 0.0990000069141388,
@@ -11440,7 +10820,7 @@
             }
           },
           {
-            "active": false,
+            "active": true,
             "advanced": {
               "exposition": {
                 "updateFactor": 0.0990000069141388,
@@ -11860,7 +11240,7 @@
             "time.google.com"
           ],
           "serveNtp": false,
-          "currentDateAndTime": "2026-07-08T16:25:40.000Z",
+          "currentDateAndTime": "2026-07-13T01:33:30.000Z",
           "timezoneOffset": "-0300"
         },
         "video": {
@@ -11898,1245 +11278,15 @@
       "nome": "GOEC6O019 - Faixa 1",
       "uuid": "6f6eddc7-f900-4d4f-8040-f7d1775d1d1d",
       "ip": "45.70.146.16",
-      "raw": {
-        "varco": {
-          "remoteAccess": {
-            "varco": {
-              "enabled": true,
-              "edgeServer": "edge.varco.io",
-              "provisionKey": "yk-pzGzXLGmz6-iO3GhdR7hinksDN7aek-kjQ4WYl_c=",
-              "deviceName": "GOEC6O019 - FAIXA 1"
-            }
-          }
-        },
-        "profiles": [
-          {
-            "active": true,
-            "advanced": {
-              "exposition": {
-                "updateFactor": 0.0990000069141388,
-                "updateRate": 100
-              },
-              "iris": {
-                "updateRate": 1000
-              },
-              "whitebalance": {
-                "updateRate": 500
-              }
-            },
-            "color": {
-              "blacklevel": 0,
-              "brightness": 0,
-              "contrast": 0,
-              "gamma": 130,
-              "saturation": 0
-            },
-            "description": "",
-            "exposure": {
-              "gain": {
-                "automatic": true,
-                "fixedValue": 1,
-                "maxValue": 1500,
-                "minValue": 1
-              },
-              "highGainMode": false,
-              "iris": {
-                "automatic": true,
-                "fixedValue": 1000
-              },
-              "level": {
-                "roi": {
-                  "enabled": true,
-                  "x0": 168,
-                  "x1": 861,
-                  "x2": 509,
-                  "x3": 1919,
-                  "y0": 149,
-                  "y1": 80,
-                  "y2": 1165,
-                  "y3": 968
-                },
-                "targetValue": 38
-              },
-              "shutter": {
-                "automatic": true,
-                "fixedValue": 99,
-                "maxValue": 500,
-                "minValue": 48
-              }
-            },
-            "filter": {
-              "sharpnessLevel": 30,
-              "timedomainLevel": 0
-            },
-            "hdr": {
-              "enable": false
-            },
-            "id": 0,
-            "lens": {
-              "exchanger": true,
-              "focus": 1136,
-              "zfMirrorProfile0": true,
-              "zoom": 2056
-            },
-            "movFilter": {
-              "enabled": false,
-              "onlyCheck": false,
-              "roi": {
-                "enabled": true,
-                "x0": 0,
-                "x1": 798,
-                "x2": 1903,
-                "x3": 403,
-                "y0": 0,
-                "y1": 22,
-                "y2": 904,
-                "y3": 1195
-              },
-              "threshold": 5
-            },
-            "multipleExposures": {
-              "enabled": true,
-              "settings": [
-                {
-                  "flash": {
-                    "power": []
-                  },
-                  "gain": {
-                    "percentageOfCurrent": true,
-                    "value": 100
-                  },
-                  "shutter": {
-                    "percentageOfCurrent": true,
-                    "value": 100
-                  }
-                }
-              ]
-            },
-            "name": "Diurno",
-            "overlay": {
-              "enable": false,
-              "text": "SEQUENCIAL: {rid} DATA PASSAGEM: {day}/{month}/{year} HORA PASSAGEM: {hour}:{minute}:{second}:{msec} PLACA: {plates} CODIGO EQUIPAMENTO: GOEC6O009 MODELO OCR: AX-OCR LOCAL: Pontalina-GO NOME DA VIA: GO 215, Km 20 SENTIDO: Entroncamento GO319-GO/Pontalina-GO FAIXA: 01"
-            },
-            "transitions": {
-              "lower": {
-                "endTime": "00:00:00",
-                "holdTime": 60000,
-                "level": 10,
-                "profile": 27839,
-                "startTime": "00:00:00"
-              },
-              "upper": {
-                "endTime": "00:00:00",
-                "holdTime": 60000,
-                "level": 35,
-                "profile": 0,
-                "startTime": "00:00:00"
-              }
-            },
-            "trigger": {
-              "enabled": true,
-              "event": "constant",
-              "minimumInterval": 100,
-              "port": 2,
-              "roi": {
-                "enabled": false,
-                "x0": 0,
-                "x1": 0,
-                "x2": 0,
-                "x3": 0,
-                "y0": 0,
-                "y1": 0,
-                "y2": 0,
-                "y3": 0
-              },
-              "threshold": 0
-            },
-            "whitebalance": {
-              "automatic": true,
-              "weights": {
-                "blue": 100,
-                "green": 100,
-                "red": 100
-              }
-            }
-          },
-          {
-            "active": false,
-            "advanced": {
-              "exposition": {
-                "updateFactor": 0.0990000069141388,
-                "updateRate": 100
-              },
-              "iris": {
-                "updateRate": 1000
-              },
-              "whitebalance": {
-                "updateRate": 500
-              }
-            },
-            "color": {
-              "blacklevel": 0,
-              "brightness": 0,
-              "contrast": 30,
-              "gamma": 12,
-              "saturation": -100
-            },
-            "description": "",
-            "exposure": {
-              "gain": {
-                "automatic": true,
-                "fixedValue": 2697,
-                "maxValue": 4000,
-                "minValue": 1
-              },
-              "highGainMode": false,
-              "iris": {
-                "automatic": false,
-                "fixedValue": 1000
-              },
-              "level": {
-                "roi": {
-                  "enabled": false,
-                  "x0": 10,
-                  "x1": 840,
-                  "x2": 403,
-                  "x3": 1900,
-                  "y0": 150,
-                  "y1": 28,
-                  "y2": 1179,
-                  "y3": 846
-                },
-                "targetValue": 35
-              },
-              "shutter": {
-                "automatic": true,
-                "fixedValue": 2000,
-                "maxValue": 800,
-                "minValue": 48
-              }
-            },
-            "filter": {
-              "sharpnessLevel": 0,
-              "timedomainLevel": 0
-            },
-            "hdr": {
-              "enable": false
-            },
-            "id": 27839,
-            "lens": {
-              "exchanger": false,
-              "focus": 1136,
-              "zfMirrorProfile0": true,
-              "zoom": 2056
-            },
-            "movFilter": {
-              "enabled": false,
-              "onlyCheck": false,
-              "roi": {
-                "enabled": false,
-                "x0": 0,
-                "x1": 1920,
-                "x2": 1920,
-                "x3": 0,
-                "y0": 0,
-                "y1": 0,
-                "y2": 1200,
-                "y3": 1200
-              },
-              "threshold": 5
-            },
-            "multipleExposures": {
-              "enabled": true,
-              "settings": [
-                {
-                  "flash": {
-                    "power": [
-                      {
-                        "out": 1,
-                        "percent": 65
-                      },
-                      {
-                        "out": 3,
-                        "percent": 65
-                      }
-                    ]
-                  },
-                  "gain": {
-                    "percentageOfCurrent": true,
-                    "value": 100
-                  },
-                  "shutter": {
-                    "percentageOfCurrent": true,
-                    "value": 50
-                  }
-                },
-                {
-                  "flash": {
-                    "power": [
-                      {
-                        "out": 1,
-                        "percent": 20
-                      },
-                      {
-                        "out": 3,
-                        "percent": 20
-                      }
-                    ]
-                  },
-                  "gain": {
-                    "percentageOfCurrent": true,
-                    "value": 100
-                  },
-                  "shutter": {
-                    "percentageOfCurrent": true,
-                    "value": 50
-                  }
-                }
-              ]
-            },
-            "name": "Noturno",
-            "overlay": {
-              "enable": false,
-              "text": "SEQUENCIAL: {rid} DATA PASSAGEM: {day}/{month}/{year} HORA PASSAGEM: {hour}:{minute}:{second}:{msec} PLACA: {plates} CODIGO EQUIPAMENTO: GOEC6O009 MODELO OCR: AX-OCR LOCAL: Pontalina-GO NOME DA VIA: GO 215, Km 20 SENTIDO: Entroncamento GO319-GO/Pontalina-GO FAIXA: 01"
-            },
-            "transitions": {
-              "lower": {
-                "endTime": "00:00:00",
-                "holdTime": 60000,
-                "level": 10,
-                "profile": 27839,
-                "startTime": "00:00:00"
-              },
-              "upper": {
-                "endTime": "00:00:00",
-                "holdTime": 60000,
-                "level": 35,
-                "profile": 0,
-                "startTime": "00:00:00"
-              }
-            },
-            "trigger": {
-              "enabled": true,
-              "event": "constant",
-              "minimumInterval": 100,
-              "port": 2,
-              "roi": {
-                "enabled": false,
-                "x0": 0,
-                "x1": 0,
-                "x2": 0,
-                "x3": 0,
-                "y0": 0,
-                "y1": 0,
-                "y2": 0,
-                "y3": 0
-              },
-              "threshold": 0
-            },
-            "whitebalance": {
-              "automatic": false,
-              "weights": {
-                "blue": 100,
-                "green": 100,
-                "red": 100
-              }
-            }
-          }
-        ],
-        "ocr": {
-          "ocr": {
-            "avgCharHeight": 20,
-            "avgPlateAngle": 0,
-            "avgPlateSlant": 0,
-            "classifierExpansion": 10,
-            "countryCode": 76,
-            "enabled": true,
-            "licensed": true,
-            "lowProbChar": 45,
-            "maxCharHeight": 60,
-            "maxLowProbChars": 0,
-            "maxPlates": 2,
-            "minCharHeight": 9,
-            "minProbPerChar": 85,
-            "processingMode": 3,
-            "processingQueue": 4,
-            "processingThreads": 4,
-            "processingTimeout": 1000,
-            "roi": {
-              "enabled": true,
-              "x0": 93,
-              "x1": 713,
-              "x2": 1418,
-              "x3": 1559,
-              "y0": 1191,
-              "y1": 496,
-              "y2": 1186,
-              "y3": 572
-            },
-            "useClassifierResult": false,
-            "vehicleType": 3
-          }
-        },
-        "classifier": {
-          "classifier": {
-            "enableCharacteristics": false,
-            "enableSpeed": false,
-            "enabled": true,
-            "firstOnly": false,
-            "licensed": true,
-            "minProbability": 100,
-            "modelType": 0,
-            "processingQueue": 1,
-            "processingThreads": 1,
-            "sceneType": 0,
-            "speedCalibrationRegion1": {
-              "p0top1sz": 1,
-              "x0": 10,
-              "x1": 10,
-              "x2": 10,
-              "y0": 10,
-              "y1": 10,
-              "y2": 10
-            },
-            "speedCalibrationRegion2": {
-              "p0top1sz": 1,
-              "x0": 10,
-              "x1": 10,
-              "x2": 10,
-              "y0": 10,
-              "y1": 10,
-              "y2": 10
-            },
-            "triggerEnabled": false,
-            "triggerRegion0": {
-              "dir": "disabled",
-              "x0": 0,
-              "x1": 0,
-              "y0": 0,
-              "y1": 0
-            },
-            "triggerRegion1": {
-              "dir": "disabled",
-              "x0": 0,
-              "x1": 0,
-              "y0": 0,
-              "y1": 0
-            },
-            "triggerRegion2": {
-              "dir": "disabled",
-              "x0": 0,
-              "x1": 0,
-              "y0": 0,
-              "y1": 0
-            },
-            "triggerRegion3": {
-              "dir": "disabled",
-              "x0": 0,
-              "x1": 0,
-              "y0": 0,
-              "y1": 0
-            }
-          }
-        },
-        "misc": {
-          "cameraOrientation": false,
-          "irisHint": "dcIris",
-          "jpegQuality": 85,
-          "legacyTsyncGpio": -1,
-          "scenario1Crop": {
-            "x0": 398,
-            "x1": 1677,
-            "y0": 171,
-            "y1": 890
-          },
-          "scenario1Overlay": "",
-          "scenario1OverlayTextSize": 24,
-          "scenario2Crop": {
-            "x0": 0,
-            "x1": 1919,
-            "y0": 0,
-            "y1": 1199
-          },
-          "scenario2Overlay": "",
-          "scenario2OverlayTextSize": 32,
-          "scenarioOverlayColor": "blackOverWhite",
-          "scenarioOverlayPos": "overlaidBottom",
-          "snapshotCrop": {
-            "enable": false,
-            "mode": "static",
-            "x0": 8,
-            "x1": 1343,
-            "y0": 82,
-            "y1": 901
-          }
-        },
-        "ftp": {
-          "ftp": {
-            "address": "127.0.0.1",
-            "anonymous": false,
-            "enable": false,
-            "filename": "PTX_{year,digits:4:4:0}{month,digits:2:2:0}{day,digits:2:2:0}_{hour,digits:2:2:0}{minute,digits:2:2:0}{second,digits:2:2:0}_{msec,digits:3:3:0}_{plates,digits:7:7:0}_{framePos,digits:2:2:0}.jpg",
-            "local": {
-              "bufferSizeKb": 102400,
-              "ttl": 7200
-            },
-            "password": "",
-            "port": 21,
-            "protocol": "ftp",
-            "quality": 85,
-            "transfer": {
-              "pollInterval": 300,
-              "timeout": 60000
-            },
-            "username": ""
-          }
-        },
-        "ioPorts": [
-          {
-            "canFlash": true,
-            "canTrigger": false,
-            "earlyUs": 7,
-            "group": "out",
-            "identifier": "1",
-            "isInput": false,
-            "isOn": false,
-            "isReserved": true,
-            "port": 1,
-            "protection": "itslux",
-            "type": "flash"
-          },
-          {
-            "canFlash": false,
-            "canTrigger": true,
-            "earlyUs": 0,
-            "group": "in",
-            "identifier": "1",
-            "isInput": true,
-            "isOn": false,
-            "isReserved": false,
-            "port": 2,
-            "protection": "none",
-            "type": "general"
-          },
-          {
-            "canFlash": true,
-            "canTrigger": false,
-            "earlyUs": 7,
-            "group": "out",
-            "identifier": "2",
-            "isInput": false,
-            "isOn": false,
-            "isReserved": true,
-            "port": 3,
-            "protection": "itslux",
-            "type": "flash"
-          },
-          {
-            "canFlash": false,
-            "canTrigger": true,
-            "earlyUs": 0,
-            "group": "in",
-            "identifier": "2",
-            "isInput": true,
-            "isOn": false,
-            "isReserved": false,
-            "port": 4,
-            "protection": "none",
-            "type": "general"
-          }
-        ],
-        "snmp": {
-          "enabled": false,
-          "v2": {
-            "enabled": false,
-            "community": ""
-          },
-          "v3": {
-            "enabled": false,
-            "securityName": "",
-            "authenticationPassphrase": "",
-            "privacyPassphrase": ""
-          }
-        },
-        "reboot": {
-          "scheduled": {
-            "enabled": false,
-            "weekdays": [
-              0
-            ],
-            "hour": 0
-          },
-          "periodic": {
-            "enabled": false,
-            "hours": 24
-          }
-        },
-        "dateTime": {
-          "timezone": [
-            "America",
-            "Sao_Paulo"
-          ],
-          "useNTPServer": true,
-          "ntpServerAddress": [
-            "time.google.com"
-          ],
-          "serveNtp": false,
-          "currentDateAndTime": "2026-07-08T16:25:40.000Z",
-          "timezoneOffset": "-0300"
-        },
-        "video": {
-          "mjpeg": {
-            "available": true,
-            "main": {
-              "available": true,
-              "enabled": true,
-              "framerate": 12,
-              "quality": 85,
-              "useTriggerFrames": true
-            }
-          },
-          "rtsp": {
-            "available": true,
-            "enable": false,
-            "port": 554,
-            "rtpPort": 5004,
-            "rtcpPort": 5005,
-            "httpEnabled": false,
-            "httpPort": 8555,
-            "transport": "tcp",
-            "url": "/streaming/mjpeg",
-            "authentication": false,
-            "username": "",
-            "password": ""
-          }
-        },
-        "firmware": {
-          "version": "v1.7.8"
-        }
-      }
+      "raw": null,
+      "error": "AUTH_FAILED"
     },
     {
       "nome": "GOEC6O019 - Faixa 2",
       "uuid": "b8925732-54cf-4f01-b4ec-c8bcb1b3bd2e",
       "ip": "45.70.146.16",
-      "raw": {
-        "varco": {
-          "remoteAccess": {
-            "varco": {
-              "enabled": true,
-              "edgeServer": "edge.varco.io",
-              "provisionKey": "yk-pzGzXLGmz6-iO3GhdR7hinksDN7aek-kjQ4WYl_c=",
-              "deviceName": "GOEC6O019 - FAIXA 1"
-            }
-          }
-        },
-        "profiles": [
-          {
-            "active": true,
-            "advanced": {
-              "exposition": {
-                "updateFactor": 0.0990000069141388,
-                "updateRate": 100
-              },
-              "iris": {
-                "updateRate": 1000
-              },
-              "whitebalance": {
-                "updateRate": 500
-              }
-            },
-            "color": {
-              "blacklevel": 0,
-              "brightness": 0,
-              "contrast": 0,
-              "gamma": 130,
-              "saturation": 0
-            },
-            "description": "",
-            "exposure": {
-              "gain": {
-                "automatic": true,
-                "fixedValue": 1,
-                "maxValue": 1000,
-                "minValue": 1
-              },
-              "highGainMode": false,
-              "iris": {
-                "automatic": true,
-                "fixedValue": 1000
-              },
-              "level": {
-                "roi": {
-                  "enabled": true,
-                  "x0": 168,
-                  "x1": 861,
-                  "x2": 509,
-                  "x3": 1919,
-                  "y0": 149,
-                  "y1": 80,
-                  "y2": 1165,
-                  "y3": 968
-                },
-                "targetValue": 35
-              },
-              "shutter": {
-                "automatic": true,
-                "fixedValue": 99,
-                "maxValue": 1500,
-                "minValue": 48
-              }
-            },
-            "filter": {
-              "sharpnessLevel": 40,
-              "timedomainLevel": 0
-            },
-            "hdr": {
-              "enable": false
-            },
-            "id": 0,
-            "lens": {
-              "exchanger": true,
-              "focus": 1078,
-              "zfMirrorProfile0": true,
-              "zoom": 2221
-            },
-            "movFilter": {
-              "enabled": false,
-              "onlyCheck": false,
-              "roi": {
-                "enabled": true,
-                "x0": 0,
-                "x1": 798,
-                "x2": 1903,
-                "x3": 403,
-                "y0": 0,
-                "y1": 22,
-                "y2": 904,
-                "y3": 1195
-              },
-              "threshold": 5
-            },
-            "multipleExposures": {
-              "enabled": true,
-              "settings": [
-                {
-                  "flash": {
-                    "power": []
-                  },
-                  "gain": {
-                    "percentageOfCurrent": true,
-                    "value": 100
-                  },
-                  "shutter": {
-                    "percentageOfCurrent": true,
-                    "value": 100
-                  }
-                }
-              ]
-            },
-            "name": "Diurno",
-            "overlay": {
-              "enable": false,
-              "text": "SEQUENCIAL: {rid} DATA PASSAGEM: {day}/{month}/{year} HORA PASSAGEM: {hour}:{minute}:{second}:{msec} PLACA: {plates} CODIGO EQUIPAMENTO: [CODIGOEQUIPAMENTO] MODELO OCR: AX-OCR LOCAL: [LOCAL] NOME DA VIA: [VIA] SENTIDO: [SENTIDO] FAIXA: [NUMERO]"
-            },
-            "transitions": {
-              "lower": {
-                "endTime": "00:00:00",
-                "holdTime": 60000,
-                "level": 10,
-                "profile": 27839,
-                "startTime": "00:00:00"
-              },
-              "upper": {
-                "endTime": "00:00:00",
-                "holdTime": 60000,
-                "level": 35,
-                "profile": 0,
-                "startTime": "00:00:00"
-              }
-            },
-            "trigger": {
-              "enabled": true,
-              "event": "constant",
-              "minimumInterval": 100,
-              "port": 2,
-              "roi": {
-                "enabled": false,
-                "x0": 0,
-                "x1": 0,
-                "x2": 0,
-                "x3": 0,
-                "y0": 0,
-                "y1": 0,
-                "y2": 0,
-                "y3": 0
-              },
-              "threshold": 0
-            },
-            "whitebalance": {
-              "automatic": true,
-              "weights": {
-                "blue": 100,
-                "green": 100,
-                "red": 100
-              }
-            }
-          },
-          {
-            "active": false,
-            "advanced": {
-              "exposition": {
-                "updateFactor": 0.0990000069141388,
-                "updateRate": 100
-              },
-              "iris": {
-                "updateRate": 1000
-              },
-              "whitebalance": {
-                "updateRate": 500
-              }
-            },
-            "color": {
-              "blacklevel": 0,
-              "brightness": 0,
-              "contrast": 30,
-              "gamma": 12,
-              "saturation": -100
-            },
-            "description": "",
-            "exposure": {
-              "gain": {
-                "automatic": true,
-                "fixedValue": 2697,
-                "maxValue": 4000,
-                "minValue": 1
-              },
-              "highGainMode": false,
-              "iris": {
-                "automatic": false,
-                "fixedValue": 1000
-              },
-              "level": {
-                "roi": {
-                  "enabled": false,
-                  "x0": 10,
-                  "x1": 840,
-                  "x2": 403,
-                  "x3": 1900,
-                  "y0": 150,
-                  "y1": 28,
-                  "y2": 1179,
-                  "y3": 846
-                },
-                "targetValue": 35
-              },
-              "shutter": {
-                "automatic": true,
-                "fixedValue": 2000,
-                "maxValue": 800,
-                "minValue": 48
-              }
-            },
-            "filter": {
-              "sharpnessLevel": 0,
-              "timedomainLevel": 0
-            },
-            "hdr": {
-              "enable": false
-            },
-            "id": 27839,
-            "lens": {
-              "exchanger": false,
-              "focus": 1078,
-              "zfMirrorProfile0": true,
-              "zoom": 2221
-            },
-            "movFilter": {
-              "enabled": false,
-              "onlyCheck": false,
-              "roi": {
-                "enabled": false,
-                "x0": 0,
-                "x1": 1920,
-                "x2": 1920,
-                "x3": 0,
-                "y0": 0,
-                "y1": 0,
-                "y2": 1200,
-                "y3": 1200
-              },
-              "threshold": 5
-            },
-            "multipleExposures": {
-              "enabled": true,
-              "settings": [
-                {
-                  "flash": {
-                    "power": [
-                      {
-                        "out": 1,
-                        "percent": 100
-                      },
-                      {
-                        "out": 3,
-                        "percent": 100
-                      }
-                    ]
-                  },
-                  "gain": {
-                    "percentageOfCurrent": true,
-                    "value": 100
-                  },
-                  "shutter": {
-                    "percentageOfCurrent": true,
-                    "value": 100
-                  }
-                },
-                {
-                  "flash": {
-                    "power": [
-                      {
-                        "out": 1,
-                        "percent": 7
-                      },
-                      {
-                        "out": 3,
-                        "percent": 7
-                      }
-                    ]
-                  },
-                  "gain": {
-                    "percentageOfCurrent": true,
-                    "value": 100
-                  },
-                  "shutter": {
-                    "percentageOfCurrent": true,
-                    "value": 100
-                  }
-                }
-              ]
-            },
-            "name": "Noturno",
-            "overlay": {
-              "enable": false,
-              "text": "SEQUENCIAL: {rid} DATA PASSAGEM: {day}/{month}/{year} HORA PASSAGEM: {hour}:{minute}:{second}:{msec} PLACA: {plates} CODIGO EQUIPAMENTO: GOEC6O032 MODELO OCR: AX-OCR LOCAL: Planaltina-GO NOME DA VIA: GO 118 KM 6 SENTIDO: Planaltina-GO/Divisa-DF FAIXA: 01"
-            },
-            "transitions": {
-              "lower": {
-                "endTime": "00:00:00",
-                "holdTime": 60000,
-                "level": 10,
-                "profile": 27839,
-                "startTime": "00:00:00"
-              },
-              "upper": {
-                "endTime": "00:00:00",
-                "holdTime": 60000,
-                "level": 35,
-                "profile": 0,
-                "startTime": "00:00:00"
-              }
-            },
-            "trigger": {
-              "enabled": true,
-              "event": "constant",
-              "minimumInterval": 100,
-              "port": 2,
-              "roi": {
-                "enabled": false,
-                "x0": 0,
-                "x1": 0,
-                "x2": 0,
-                "x3": 0,
-                "y0": 0,
-                "y1": 0,
-                "y2": 0,
-                "y3": 0
-              },
-              "threshold": 0
-            },
-            "whitebalance": {
-              "automatic": false,
-              "weights": {
-                "blue": 100,
-                "green": 100,
-                "red": 100
-              }
-            }
-          }
-        ],
-        "ocr": {
-          "ocr": {
-            "avgCharHeight": 20,
-            "avgPlateAngle": 0,
-            "avgPlateSlant": 0,
-            "classifierExpansion": 10,
-            "countryCode": 76,
-            "enabled": true,
-            "licensed": true,
-            "lowProbChar": 45,
-            "maxCharHeight": 60,
-            "maxLowProbChars": 0,
-            "maxPlates": 2,
-            "minCharHeight": 9,
-            "minProbPerChar": 85,
-            "processingMode": 3,
-            "processingQueue": 4,
-            "processingThreads": 4,
-            "processingTimeout": 1000,
-            "roi": {
-              "enabled": true,
-              "x0": 271,
-              "x1": 982,
-              "x2": 738,
-              "x3": 1919,
-              "y0": 656,
-              "y1": 480,
-              "y2": 1199,
-              "y3": 1047
-            },
-            "useClassifierResult": false,
-            "vehicleType": 3
-          }
-        },
-        "classifier": {
-          "classifier": {
-            "enableCharacteristics": false,
-            "enableSpeed": false,
-            "enabled": true,
-            "firstOnly": false,
-            "licensed": true,
-            "minProbability": 100,
-            "modelType": 0,
-            "processingQueue": 1,
-            "processingThreads": 1,
-            "sceneType": 0,
-            "speedCalibrationRegion1": {
-              "p0top1sz": 1,
-              "x0": 10,
-              "x1": 10,
-              "x2": 10,
-              "y0": 10,
-              "y1": 10,
-              "y2": 10
-            },
-            "speedCalibrationRegion2": {
-              "p0top1sz": 1,
-              "x0": 10,
-              "x1": 10,
-              "x2": 10,
-              "y0": 10,
-              "y1": 10,
-              "y2": 10
-            },
-            "triggerEnabled": false,
-            "triggerRegion0": {
-              "dir": "disabled",
-              "x0": 0,
-              "x1": 0,
-              "y0": 0,
-              "y1": 0
-            },
-            "triggerRegion1": {
-              "dir": "disabled",
-              "x0": 0,
-              "x1": 0,
-              "y0": 0,
-              "y1": 0
-            },
-            "triggerRegion2": {
-              "dir": "disabled",
-              "x0": 0,
-              "x1": 0,
-              "y0": 0,
-              "y1": 0
-            },
-            "triggerRegion3": {
-              "dir": "disabled",
-              "x0": 0,
-              "x1": 0,
-              "y0": 0,
-              "y1": 0
-            }
-          }
-        },
-        "misc": {
-          "cameraOrientation": false,
-          "irisHint": "dcIris",
-          "jpegQuality": 85,
-          "legacyTsyncGpio": -1,
-          "scenario1Crop": {
-            "x0": 398,
-            "x1": 1677,
-            "y0": 171,
-            "y1": 890
-          },
-          "scenario1Overlay": "",
-          "scenario1OverlayTextSize": 24,
-          "scenario2Crop": {
-            "x0": 0,
-            "x1": 1919,
-            "y0": 0,
-            "y1": 1199
-          },
-          "scenario2Overlay": "",
-          "scenario2OverlayTextSize": 32,
-          "scenarioOverlayColor": "blackOverWhite",
-          "scenarioOverlayPos": "overlaidBottom",
-          "snapshotCrop": {
-            "enable": false,
-            "mode": "static",
-            "x0": 40,
-            "x1": 1403,
-            "y0": 280,
-            "y1": 1099
-          }
-        },
-        "ftp": {
-          "ftp": {
-            "address": "127.0.0.1",
-            "anonymous": false,
-            "enable": false,
-            "filename": "PTX_{year,digits:4:4:0}{month,digits:2:2:0}{day,digits:2:2:0}_{hour,digits:2:2:0}{minute,digits:2:2:0}{second,digits:2:2:0}_{msec,digits:3:3:0}_{plates,digits:7:7:0}_{framePos,digits:2:2:0}.jpg",
-            "local": {
-              "bufferSizeKb": 102400,
-              "ttl": 7200
-            },
-            "password": "",
-            "port": 21,
-            "protocol": "ftp",
-            "quality": 85,
-            "transfer": {
-              "pollInterval": 300,
-              "timeout": 60000
-            },
-            "username": ""
-          }
-        },
-        "ioPorts": [
-          {
-            "canFlash": true,
-            "canTrigger": false,
-            "earlyUs": 7,
-            "group": "out",
-            "identifier": "1",
-            "isInput": false,
-            "isOn": false,
-            "isReserved": true,
-            "port": 1,
-            "protection": "itslux",
-            "type": "flash"
-          },
-          {
-            "canFlash": false,
-            "canTrigger": true,
-            "earlyUs": 0,
-            "group": "in",
-            "identifier": "1",
-            "isInput": true,
-            "isOn": false,
-            "isReserved": false,
-            "port": 2,
-            "protection": "none",
-            "type": "general"
-          },
-          {
-            "canFlash": true,
-            "canTrigger": false,
-            "earlyUs": 7,
-            "group": "out",
-            "identifier": "2",
-            "isInput": false,
-            "isOn": false,
-            "isReserved": true,
-            "port": 3,
-            "protection": "itslux",
-            "type": "flash"
-          },
-          {
-            "canFlash": false,
-            "canTrigger": true,
-            "earlyUs": 0,
-            "group": "in",
-            "identifier": "2",
-            "isInput": true,
-            "isOn": false,
-            "isReserved": false,
-            "port": 4,
-            "protection": "none",
-            "type": "general"
-          }
-        ],
-        "snmp": {
-          "enabled": false,
-          "v2": {
-            "enabled": false,
-            "community": ""
-          },
-          "v3": {
-            "enabled": false,
-            "securityName": "",
-            "authenticationPassphrase": "",
-            "privacyPassphrase": ""
-          }
-        },
-        "reboot": {
-          "scheduled": {
-            "enabled": false,
-            "weekdays": [
-              0
-            ],
-            "hour": 0
-          },
-          "periodic": {
-            "enabled": false,
-            "hours": 24
-          }
-        },
-        "dateTime": {
-          "timezone": [
-            "America",
-            "Sao_Paulo"
-          ],
-          "useNTPServer": true,
-          "ntpServerAddress": [
-            "time.google.com"
-          ],
-          "serveNtp": false,
-          "currentDateAndTime": "2026-07-08T16:25:45.000Z",
-          "timezoneOffset": "-0300"
-        },
-        "video": {
-          "mjpeg": {
-            "available": true,
-            "main": {
-              "available": true,
-              "enabled": true,
-              "framerate": 12,
-              "quality": 85,
-              "useTriggerFrames": true
-            }
-          },
-          "rtsp": {
-            "available": true,
-            "enable": false,
-            "port": 554,
-            "rtpPort": 5004,
-            "rtcpPort": 5005,
-            "httpEnabled": false,
-            "httpPort": 8555,
-            "transport": "tcp",
-            "url": "/streaming/mjpeg",
-            "authentication": false,
-            "username": "",
-            "password": ""
-          }
-        },
-        "firmware": {
-          "version": "v1.7.8"
-        }
-      }
+      "raw": null,
+      "error": "AUTH_FAILED"
     },
     {
       "nome": "GOEC6O020 - Faixa 1",
@@ -13155,7 +11305,7 @@
         },
         "profiles": [
           {
-            "active": true,
+            "active": false,
             "advanced": {
               "exposition": {
                 "updateFactor": 0.0990000069141388,
@@ -13306,7 +11456,7 @@
             }
           },
           {
-            "active": false,
+            "active": true,
             "advanced": {
               "exposition": {
                 "updateFactor": 0.0990000069141388,
@@ -13726,7 +11876,7 @@
             "time.google.com"
           ],
           "serveNtp": false,
-          "currentDateAndTime": "2026-07-08T16:25:46.000Z",
+          "currentDateAndTime": "2026-07-13T01:33:37.000Z",
           "timezoneOffset": "-0300"
         },
         "video": {
@@ -13777,7 +11927,7 @@
         },
         "profiles": [
           {
-            "active": true,
+            "active": false,
             "advanced": {
               "exposition": {
                 "updateFactor": 0.0990000069141388,
@@ -13928,7 +12078,7 @@
             }
           },
           {
-            "active": false,
+            "active": true,
             "advanced": {
               "exposition": {
                 "updateFactor": 0.0990000069141388,
@@ -14348,7 +12498,7 @@
             "time.google.com"
           ],
           "serveNtp": false,
-          "currentDateAndTime": "2026-07-08T16:25:46.000Z",
+          "currentDateAndTime": "2026-07-13T01:33:37.000Z",
           "timezoneOffset": "-0300"
         },
         "video": {
@@ -14399,7 +12549,7 @@
         },
         "profiles": [
           {
-            "active": true,
+            "active": false,
             "advanced": {
               "exposition": {
                 "updateFactor": 0.0990000069141388,
@@ -14550,7 +12700,7 @@
             }
           },
           {
-            "active": false,
+            "active": true,
             "advanced": {
               "exposition": {
                 "updateFactor": 0.0990000069141388,
@@ -14970,7 +13120,7 @@
             "time.google.com"
           ],
           "serveNtp": false,
-          "currentDateAndTime": "2026-07-08T16:25:45.000Z",
+          "currentDateAndTime": "2026-07-13T01:33:36.000Z",
           "timezoneOffset": "-0300"
         },
         "video": {
@@ -15021,7 +13171,7 @@
         },
         "profiles": [
           {
-            "active": true,
+            "active": false,
             "advanced": {
               "exposition": {
                 "updateFactor": 0.0990000069141388,
@@ -15172,7 +13322,7 @@
             }
           },
           {
-            "active": false,
+            "active": true,
             "advanced": {
               "exposition": {
                 "updateFactor": 0.0990000069141388,
@@ -15592,7 +13742,7 @@
             "time.google.com"
           ],
           "serveNtp": false,
-          "currentDateAndTime": "2026-07-08T16:25:47.000Z",
+          "currentDateAndTime": "2026-07-13T01:33:35.000Z",
           "timezoneOffset": "-0300"
         },
         "video": {
@@ -15643,7 +13793,7 @@
         },
         "profiles": [
           {
-            "active": true,
+            "active": false,
             "advanced": {
               "exposition": {
                 "updateFactor": 0.0990000069141388,
@@ -15794,7 +13944,7 @@
             }
           },
           {
-            "active": false,
+            "active": true,
             "advanced": {
               "exposition": {
                 "updateFactor": 0.0990000069141388,
@@ -16214,7 +14364,7 @@
             "time.google.com"
           ],
           "serveNtp": false,
-          "currentDateAndTime": "2026-07-08T16:25:52.000Z",
+          "currentDateAndTime": "2026-07-13T01:33:42.000Z",
           "timezoneOffset": "-0300"
         },
         "video": {
@@ -16265,7 +14415,7 @@
         },
         "profiles": [
           {
-            "active": true,
+            "active": false,
             "advanced": {
               "exposition": {
                 "updateFactor": 0.0990000069141388,
@@ -16416,7 +14566,7 @@
             }
           },
           {
-            "active": false,
+            "active": true,
             "advanced": {
               "exposition": {
                 "updateFactor": 0.0990000069141388,
@@ -16836,7 +14986,7 @@
             "time.google.com"
           ],
           "serveNtp": false,
-          "currentDateAndTime": "2026-07-08T16:25:51.000Z",
+          "currentDateAndTime": "2026-07-13T01:33:42.000Z",
           "timezoneOffset": "-0300"
         },
         "video": {
@@ -16887,7 +15037,7 @@
         },
         "profiles": [
           {
-            "active": true,
+            "active": false,
             "advanced": {
               "exposition": {
                 "updateFactor": 0.0990000069141388,
@@ -17043,7 +15193,7 @@
             }
           },
           {
-            "active": false,
+            "active": true,
             "advanced": {
               "exposition": {
                 "updateFactor": 0.0990000069141388,
@@ -17463,7 +15613,7 @@
             "200.160.0.8"
           ],
           "serveNtp": false,
-          "currentDateAndTime": "2026-07-08T16:25:51.000Z",
+          "currentDateAndTime": "2026-07-13T01:33:42.000Z",
           "timezoneOffset": "-0300"
         },
         "video": {
@@ -17514,7 +15664,7 @@
         },
         "profiles": [
           {
-            "active": true,
+            "active": false,
             "advanced": {
               "exposition": {
                 "updateFactor": 0.0990000069141388,
@@ -17665,7 +15815,7 @@
             }
           },
           {
-            "active": false,
+            "active": true,
             "advanced": {
               "exposition": {
                 "updateFactor": 0.0990000069141388,
@@ -18085,7 +16235,7 @@
             "time.google.com"
           ],
           "serveNtp": false,
-          "currentDateAndTime": "2026-07-08T16:25:51.000Z",
+          "currentDateAndTime": "2026-07-13T01:33:43.000Z",
           "timezoneOffset": "-0300"
         },
         "video": {
@@ -18136,7 +16286,7 @@
         },
         "profiles": [
           {
-            "active": true,
+            "active": false,
             "advanced": {
               "exposition": {
                 "updateFactor": 0.0990000069141388,
@@ -18287,7 +16437,7 @@
             }
           },
           {
-            "active": false,
+            "active": true,
             "advanced": {
               "exposition": {
                 "updateFactor": 0.0990000069141388,
@@ -18707,7 +16857,7 @@
             "time.google.com"
           ],
           "serveNtp": false,
-          "currentDateAndTime": "2026-07-08T16:25:51.000Z",
+          "currentDateAndTime": "2026-07-13T01:33:42.000Z",
           "timezoneOffset": "-0300"
         },
         "video": {
@@ -18758,7 +16908,7 @@
         },
         "profiles": [
           {
-            "active": true,
+            "active": false,
             "advanced": {
               "exposition": {
                 "updateFactor": 0.0990000069141388,
@@ -18909,7 +17059,7 @@
             }
           },
           {
-            "active": false,
+            "active": true,
             "advanced": {
               "exposition": {
                 "updateFactor": 0.0990000069141388,
@@ -19329,7 +17479,7 @@
             "time.google.com"
           ],
           "serveNtp": false,
-          "currentDateAndTime": "2026-07-08T16:25:55.000Z",
+          "currentDateAndTime": "2026-07-13T01:33:47.000Z",
           "timezoneOffset": "-0300"
         },
         "video": {
@@ -19380,7 +17530,7 @@
         },
         "profiles": [
           {
-            "active": true,
+            "active": false,
             "advanced": {
               "exposition": {
                 "updateFactor": 0.0990000069141388,
@@ -19531,7 +17681,7 @@
             }
           },
           {
-            "active": false,
+            "active": true,
             "advanced": {
               "exposition": {
                 "updateFactor": 0.0990000069141388,
@@ -19951,7 +18101,7 @@
             "time.google.com"
           ],
           "serveNtp": false,
-          "currentDateAndTime": "2026-07-08T16:25:55.000Z",
+          "currentDateAndTime": "2026-07-13T01:33:46.000Z",
           "timezoneOffset": "-0300"
         },
         "video": {
@@ -20002,7 +18152,7 @@
         },
         "profiles": [
           {
-            "active": true,
+            "active": false,
             "advanced": {
               "exposition": {
                 "updateFactor": 0.0990000069141388,
@@ -20153,7 +18303,7 @@
             }
           },
           {
-            "active": false,
+            "active": true,
             "advanced": {
               "exposition": {
                 "updateFactor": 0.0990000069141388,
@@ -20573,7 +18723,7 @@
             "time.google.com"
           ],
           "serveNtp": false,
-          "currentDateAndTime": "2026-07-08T16:25:57.000Z",
+          "currentDateAndTime": "2026-07-13T01:33:49.000Z",
           "timezoneOffset": "-0300"
         },
         "video": {
@@ -20624,7 +18774,7 @@
         },
         "profiles": [
           {
-            "active": true,
+            "active": false,
             "advanced": {
               "exposition": {
                 "updateFactor": 0.0990000069141388,
@@ -20775,7 +18925,7 @@
             }
           },
           {
-            "active": false,
+            "active": true,
             "advanced": {
               "exposition": {
                 "updateFactor": 0.0990000069141388,
@@ -21195,7 +19345,7 @@
             "time.google.com"
           ],
           "serveNtp": false,
-          "currentDateAndTime": "2026-07-08T16:25:56.000Z",
+          "currentDateAndTime": "2026-07-13T01:33:48.000Z",
           "timezoneOffset": "-0300"
         },
         "video": {
@@ -21246,7 +19396,7 @@
         },
         "profiles": [
           {
-            "active": true,
+            "active": false,
             "advanced": {
               "exposition": {
                 "updateFactor": 0.0990000069141388,
@@ -21397,7 +19547,7 @@
             }
           },
           {
-            "active": false,
+            "active": true,
             "advanced": {
               "exposition": {
                 "updateFactor": 0.0990000069141388,
@@ -21817,7 +19967,7 @@
             "time.google.com"
           ],
           "serveNtp": false,
-          "currentDateAndTime": "2026-07-08T16:25:56.000Z",
+          "currentDateAndTime": "2026-07-13T01:33:48.000Z",
           "timezoneOffset": "-0300"
         },
         "video": {
@@ -21868,7 +20018,7 @@
         },
         "profiles": [
           {
-            "active": true,
+            "active": false,
             "advanced": {
               "exposition": {
                 "updateFactor": 0.0990000069141388,
@@ -22019,7 +20169,7 @@
             }
           },
           {
-            "active": false,
+            "active": true,
             "advanced": {
               "exposition": {
                 "updateFactor": 0.0990000069141388,
@@ -22439,7 +20589,7 @@
             "time.google.com"
           ],
           "serveNtp": false,
-          "currentDateAndTime": "2026-07-08T16:26:02.000Z",
+          "currentDateAndTime": "2026-07-13T01:33:57.000Z",
           "timezoneOffset": "-0300"
         },
         "video": {
@@ -22490,7 +20640,7 @@
         },
         "profiles": [
           {
-            "active": true,
+            "active": false,
             "advanced": {
               "exposition": {
                 "updateFactor": 0.0990000069141388,
@@ -22641,7 +20791,7 @@
             }
           },
           {
-            "active": false,
+            "active": true,
             "advanced": {
               "exposition": {
                 "updateFactor": 0.0990000069141388,
@@ -23061,7 +21211,7 @@
             "time.google.com"
           ],
           "serveNtp": false,
-          "currentDateAndTime": "2026-07-08T16:26:02.000Z",
+          "currentDateAndTime": "2026-07-13T01:33:57.000Z",
           "timezoneOffset": "-0300"
         },
         "video": {
@@ -23099,1245 +21249,15 @@
       "nome": "GOEC6O043 - Faixa 1",
       "uuid": "f29258aa-8c64-47c6-8912-54b3dffbc5dc",
       "ip": "186.237.219.7",
-      "raw": {
-        "varco": {
-          "remoteAccess": {
-            "varco": {
-              "enabled": true,
-              "edgeServer": "edge.varco.io",
-              "provisionKey": "yk-pzGzXLGmz6-iO3GhdR7hinksDN7aek-kjQ4WYl_c=",
-              "deviceName": "GOEC6O043 - FAIXA 1"
-            }
-          }
-        },
-        "profiles": [
-          {
-            "active": true,
-            "advanced": {
-              "exposition": {
-                "updateFactor": 0.0990000069141388,
-                "updateRate": 100
-              },
-              "iris": {
-                "updateRate": 1000
-              },
-              "whitebalance": {
-                "updateRate": 500
-              }
-            },
-            "color": {
-              "blacklevel": 0,
-              "brightness": 0,
-              "contrast": 0,
-              "gamma": 130,
-              "saturation": 0
-            },
-            "description": "",
-            "exposure": {
-              "gain": {
-                "automatic": true,
-                "fixedValue": 1,
-                "maxValue": 1500,
-                "minValue": 1
-              },
-              "highGainMode": false,
-              "iris": {
-                "automatic": true,
-                "fixedValue": 1000
-              },
-              "level": {
-                "roi": {
-                  "enabled": true,
-                  "x0": 168,
-                  "x1": 861,
-                  "x2": 509,
-                  "x3": 1919,
-                  "y0": 149,
-                  "y1": 80,
-                  "y2": 1165,
-                  "y3": 968
-                },
-                "targetValue": 38
-              },
-              "shutter": {
-                "automatic": true,
-                "fixedValue": 99,
-                "maxValue": 500,
-                "minValue": 48
-              }
-            },
-            "filter": {
-              "sharpnessLevel": 30,
-              "timedomainLevel": 0
-            },
-            "hdr": {
-              "enable": false
-            },
-            "id": 0,
-            "lens": {
-              "exchanger": true,
-              "focus": 1067,
-              "zfMirrorProfile0": true,
-              "zoom": 2174
-            },
-            "movFilter": {
-              "enabled": false,
-              "onlyCheck": false,
-              "roi": {
-                "enabled": true,
-                "x0": 0,
-                "x1": 798,
-                "x2": 1903,
-                "x3": 403,
-                "y0": 0,
-                "y1": 22,
-                "y2": 904,
-                "y3": 1195
-              },
-              "threshold": 5
-            },
-            "multipleExposures": {
-              "enabled": true,
-              "settings": [
-                {
-                  "flash": {
-                    "power": []
-                  },
-                  "gain": {
-                    "percentageOfCurrent": true,
-                    "value": 100
-                  },
-                  "shutter": {
-                    "percentageOfCurrent": true,
-                    "value": 100
-                  }
-                }
-              ]
-            },
-            "name": "Diurno",
-            "overlay": {
-              "enable": false,
-              "text": "SEQUENCIAL: {rid} DATA PASSAGEM: {day}/{month}/{year} HORA PASSAGEM: {hour}:{minute}:{second}:{msec} PLACA: {plates} CODIGO EQUIPAMENTO: GOEC6O009 MODELO OCR: AX-OCR LOCAL: Pontalina-GO NOME DA VIA: GO 215, Km 20 SENTIDO: Entroncamento GO319-GO/Pontalina-GO FAIXA: 01"
-            },
-            "transitions": {
-              "lower": {
-                "endTime": "00:00:00",
-                "holdTime": 60000,
-                "level": 10,
-                "profile": 27839,
-                "startTime": "00:00:00"
-              },
-              "upper": {
-                "endTime": "00:00:00",
-                "holdTime": 60000,
-                "level": 35,
-                "profile": 0,
-                "startTime": "00:00:00"
-              }
-            },
-            "trigger": {
-              "enabled": true,
-              "event": "constant",
-              "minimumInterval": 100,
-              "port": 2,
-              "roi": {
-                "enabled": false,
-                "x0": 0,
-                "x1": 0,
-                "x2": 0,
-                "x3": 0,
-                "y0": 0,
-                "y1": 0,
-                "y2": 0,
-                "y3": 0
-              },
-              "threshold": 0
-            },
-            "whitebalance": {
-              "automatic": true,
-              "weights": {
-                "blue": 100,
-                "green": 100,
-                "red": 100
-              }
-            }
-          },
-          {
-            "active": false,
-            "advanced": {
-              "exposition": {
-                "updateFactor": 0.0990000069141388,
-                "updateRate": 100
-              },
-              "iris": {
-                "updateRate": 1000
-              },
-              "whitebalance": {
-                "updateRate": 500
-              }
-            },
-            "color": {
-              "blacklevel": 0,
-              "brightness": 0,
-              "contrast": 30,
-              "gamma": 12,
-              "saturation": -100
-            },
-            "description": "",
-            "exposure": {
-              "gain": {
-                "automatic": true,
-                "fixedValue": 2697,
-                "maxValue": 4000,
-                "minValue": 1
-              },
-              "highGainMode": false,
-              "iris": {
-                "automatic": false,
-                "fixedValue": 1000
-              },
-              "level": {
-                "roi": {
-                  "enabled": false,
-                  "x0": 10,
-                  "x1": 840,
-                  "x2": 403,
-                  "x3": 1900,
-                  "y0": 150,
-                  "y1": 28,
-                  "y2": 1179,
-                  "y3": 846
-                },
-                "targetValue": 35
-              },
-              "shutter": {
-                "automatic": true,
-                "fixedValue": 2000,
-                "maxValue": 800,
-                "minValue": 48
-              }
-            },
-            "filter": {
-              "sharpnessLevel": 0,
-              "timedomainLevel": 0
-            },
-            "hdr": {
-              "enable": false
-            },
-            "id": 27839,
-            "lens": {
-              "exchanger": false,
-              "focus": 1067,
-              "zfMirrorProfile0": true,
-              "zoom": 2174
-            },
-            "movFilter": {
-              "enabled": false,
-              "onlyCheck": false,
-              "roi": {
-                "enabled": false,
-                "x0": 0,
-                "x1": 1920,
-                "x2": 1920,
-                "x3": 0,
-                "y0": 0,
-                "y1": 0,
-                "y2": 1200,
-                "y3": 1200
-              },
-              "threshold": 5
-            },
-            "multipleExposures": {
-              "enabled": true,
-              "settings": [
-                {
-                  "flash": {
-                    "power": [
-                      {
-                        "out": 1,
-                        "percent": 65
-                      },
-                      {
-                        "out": 3,
-                        "percent": 65
-                      }
-                    ]
-                  },
-                  "gain": {
-                    "percentageOfCurrent": true,
-                    "value": 100
-                  },
-                  "shutter": {
-                    "percentageOfCurrent": true,
-                    "value": 50
-                  }
-                },
-                {
-                  "flash": {
-                    "power": [
-                      {
-                        "out": 1,
-                        "percent": 20
-                      },
-                      {
-                        "out": 3,
-                        "percent": 20
-                      }
-                    ]
-                  },
-                  "gain": {
-                    "percentageOfCurrent": true,
-                    "value": 100
-                  },
-                  "shutter": {
-                    "percentageOfCurrent": true,
-                    "value": 50
-                  }
-                }
-              ]
-            },
-            "name": "Noturno",
-            "overlay": {
-              "enable": false,
-              "text": "SEQUENCIAL: {rid} DATA PASSAGEM: {day}/{month}/{year} HORA PASSAGEM: {hour}:{minute}:{second}:{msec} PLACA: {plates} CODIGO EQUIPAMENTO: GOEC6O009 MODELO OCR: AX-OCR LOCAL: Pontalina-GO NOME DA VIA: GO 215, Km 20 SENTIDO: Entroncamento GO319-GO/Pontalina-GO FAIXA: 01"
-            },
-            "transitions": {
-              "lower": {
-                "endTime": "00:00:00",
-                "holdTime": 60000,
-                "level": 10,
-                "profile": 27839,
-                "startTime": "00:00:00"
-              },
-              "upper": {
-                "endTime": "00:00:00",
-                "holdTime": 60000,
-                "level": 35,
-                "profile": 0,
-                "startTime": "00:00:00"
-              }
-            },
-            "trigger": {
-              "enabled": true,
-              "event": "constant",
-              "minimumInterval": 100,
-              "port": 2,
-              "roi": {
-                "enabled": false,
-                "x0": 0,
-                "x1": 0,
-                "x2": 0,
-                "x3": 0,
-                "y0": 0,
-                "y1": 0,
-                "y2": 0,
-                "y3": 0
-              },
-              "threshold": 0
-            },
-            "whitebalance": {
-              "automatic": false,
-              "weights": {
-                "blue": 100,
-                "green": 100,
-                "red": 100
-              }
-            }
-          }
-        ],
-        "ocr": {
-          "ocr": {
-            "avgCharHeight": 20,
-            "avgPlateAngle": 0,
-            "avgPlateSlant": 0,
-            "classifierExpansion": 10,
-            "countryCode": 76,
-            "enabled": true,
-            "licensed": true,
-            "lowProbChar": 45,
-            "maxCharHeight": 60,
-            "maxLowProbChars": 0,
-            "maxPlates": 2,
-            "minCharHeight": 9,
-            "minProbPerChar": 85,
-            "processingMode": 3,
-            "processingQueue": 4,
-            "processingThreads": 4,
-            "processingTimeout": 1000,
-            "roi": {
-              "enabled": true,
-              "x0": 257,
-              "x1": 1095,
-              "x2": 686,
-              "x3": 1878,
-              "y0": 556,
-              "y1": 349,
-              "y2": 1184,
-              "y3": 852
-            },
-            "useClassifierResult": false,
-            "vehicleType": 3
-          }
-        },
-        "classifier": {
-          "classifier": {
-            "enableCharacteristics": false,
-            "enableSpeed": false,
-            "enabled": true,
-            "firstOnly": false,
-            "licensed": true,
-            "minProbability": 100,
-            "modelType": 0,
-            "processingQueue": 1,
-            "processingThreads": 1,
-            "sceneType": 0,
-            "speedCalibrationRegion1": {
-              "p0top1sz": 1,
-              "x0": 10,
-              "x1": 10,
-              "x2": 10,
-              "y0": 10,
-              "y1": 10,
-              "y2": 10
-            },
-            "speedCalibrationRegion2": {
-              "p0top1sz": 1,
-              "x0": 10,
-              "x1": 10,
-              "x2": 10,
-              "y0": 10,
-              "y1": 10,
-              "y2": 10
-            },
-            "triggerEnabled": false,
-            "triggerRegion0": {
-              "dir": "disabled",
-              "x0": 0,
-              "x1": 0,
-              "y0": 0,
-              "y1": 0
-            },
-            "triggerRegion1": {
-              "dir": "disabled",
-              "x0": 0,
-              "x1": 0,
-              "y0": 0,
-              "y1": 0
-            },
-            "triggerRegion2": {
-              "dir": "disabled",
-              "x0": 0,
-              "x1": 0,
-              "y0": 0,
-              "y1": 0
-            },
-            "triggerRegion3": {
-              "dir": "disabled",
-              "x0": 0,
-              "x1": 0,
-              "y0": 0,
-              "y1": 0
-            }
-          }
-        },
-        "misc": {
-          "cameraOrientation": false,
-          "irisHint": "dcIris",
-          "jpegQuality": 85,
-          "legacyTsyncGpio": -1,
-          "scenario1Crop": {
-            "x0": 546,
-            "x1": 1825,
-            "y0": 427,
-            "y1": 1146
-          },
-          "scenario1Overlay": "",
-          "scenario1OverlayTextSize": 24,
-          "scenario2Crop": {
-            "x0": 0,
-            "x1": 1919,
-            "y0": 0,
-            "y1": 1199
-          },
-          "scenario2Overlay": "",
-          "scenario2OverlayTextSize": 32,
-          "scenarioOverlayColor": "blackOverWhite",
-          "scenarioOverlayPos": "overlaidBottom",
-          "snapshotCrop": {
-            "enable": false,
-            "mode": "static",
-            "x0": 8,
-            "x1": 1343,
-            "y0": 82,
-            "y1": 901
-          }
-        },
-        "ftp": {
-          "ftp": {
-            "address": "127.0.0.1",
-            "anonymous": false,
-            "enable": false,
-            "filename": "PTX_{year,digits:4:4:0}{month,digits:2:2:0}{day,digits:2:2:0}_{hour,digits:2:2:0}{minute,digits:2:2:0}{second,digits:2:2:0}_{msec,digits:3:3:0}_{plates,digits:7:7:0}_{framePos,digits:2:2:0}.jpg",
-            "local": {
-              "bufferSizeKb": 102400,
-              "ttl": 7200
-            },
-            "password": "",
-            "port": 21,
-            "protocol": "ftp",
-            "quality": 85,
-            "transfer": {
-              "pollInterval": 300,
-              "timeout": 60000
-            },
-            "username": ""
-          }
-        },
-        "ioPorts": [
-          {
-            "canFlash": true,
-            "canTrigger": false,
-            "earlyUs": 7,
-            "group": "out",
-            "identifier": "1",
-            "isInput": false,
-            "isOn": false,
-            "isReserved": true,
-            "port": 1,
-            "protection": "itslux",
-            "type": "flash"
-          },
-          {
-            "canFlash": false,
-            "canTrigger": true,
-            "earlyUs": 0,
-            "group": "in",
-            "identifier": "1",
-            "isInput": true,
-            "isOn": false,
-            "isReserved": false,
-            "port": 2,
-            "protection": "none",
-            "type": "general"
-          },
-          {
-            "canFlash": true,
-            "canTrigger": false,
-            "earlyUs": 7,
-            "group": "out",
-            "identifier": "2",
-            "isInput": false,
-            "isOn": false,
-            "isReserved": true,
-            "port": 3,
-            "protection": "itslux",
-            "type": "flash"
-          },
-          {
-            "canFlash": false,
-            "canTrigger": true,
-            "earlyUs": 0,
-            "group": "in",
-            "identifier": "2",
-            "isInput": true,
-            "isOn": false,
-            "isReserved": false,
-            "port": 4,
-            "protection": "none",
-            "type": "general"
-          }
-        ],
-        "snmp": {
-          "enabled": false,
-          "v2": {
-            "enabled": false,
-            "community": ""
-          },
-          "v3": {
-            "enabled": false,
-            "securityName": "",
-            "authenticationPassphrase": "",
-            "privacyPassphrase": ""
-          }
-        },
-        "reboot": {
-          "scheduled": {
-            "enabled": false,
-            "weekdays": [
-              0
-            ],
-            "hour": 0
-          },
-          "periodic": {
-            "enabled": false,
-            "hours": 24
-          }
-        },
-        "dateTime": {
-          "timezone": [
-            "America",
-            "Sao_Paulo"
-          ],
-          "useNTPServer": true,
-          "ntpServerAddress": [
-            "time.google.com"
-          ],
-          "serveNtp": false,
-          "currentDateAndTime": "2026-07-08T16:26:01.000Z",
-          "timezoneOffset": "-0300"
-        },
-        "video": {
-          "mjpeg": {
-            "available": true,
-            "main": {
-              "available": true,
-              "enabled": true,
-              "framerate": 12,
-              "quality": 85,
-              "useTriggerFrames": true
-            }
-          },
-          "rtsp": {
-            "available": true,
-            "enable": false,
-            "port": 554,
-            "rtpPort": 5004,
-            "rtcpPort": 5005,
-            "httpEnabled": false,
-            "httpPort": 8555,
-            "transport": "tcp",
-            "url": "/streaming/mjpeg",
-            "authentication": false,
-            "username": "",
-            "password": ""
-          }
-        },
-        "firmware": {
-          "version": "v1.7.8"
-        }
-      }
+      "raw": null,
+      "error": "AUTH_FAILED"
     },
     {
       "nome": "GOEC6O043 - Faixa 2",
       "uuid": "9e7e2c3c-bf75-40c4-b0ca-42b3950a0955",
       "ip": "186.237.219.7",
-      "raw": {
-        "varco": {
-          "remoteAccess": {
-            "varco": {
-              "enabled": true,
-              "edgeServer": "edge.varco.io",
-              "provisionKey": "yk-pzGzXLGmz6-iO3GhdR7hinksDN7aek-kjQ4WYl_c=",
-              "deviceName": "GOEC6O043 - FAIXA 2"
-            }
-          }
-        },
-        "profiles": [
-          {
-            "active": true,
-            "advanced": {
-              "exposition": {
-                "updateFactor": 0.0990000069141388,
-                "updateRate": 100
-              },
-              "iris": {
-                "updateRate": 1000
-              },
-              "whitebalance": {
-                "updateRate": 500
-              }
-            },
-            "color": {
-              "blacklevel": 0,
-              "brightness": 0,
-              "contrast": 0,
-              "gamma": 130,
-              "saturation": 0
-            },
-            "description": "",
-            "exposure": {
-              "gain": {
-                "automatic": true,
-                "fixedValue": 1,
-                "maxValue": 1000,
-                "minValue": 1
-              },
-              "highGainMode": false,
-              "iris": {
-                "automatic": true,
-                "fixedValue": 1000
-              },
-              "level": {
-                "roi": {
-                  "enabled": true,
-                  "x0": 168,
-                  "x1": 861,
-                  "x2": 509,
-                  "x3": 1919,
-                  "y0": 149,
-                  "y1": 80,
-                  "y2": 1165,
-                  "y3": 968
-                },
-                "targetValue": 35
-              },
-              "shutter": {
-                "automatic": true,
-                "fixedValue": 99,
-                "maxValue": 1500,
-                "minValue": 48
-              }
-            },
-            "filter": {
-              "sharpnessLevel": 40,
-              "timedomainLevel": 0
-            },
-            "hdr": {
-              "enable": false
-            },
-            "id": 0,
-            "lens": {
-              "exchanger": true,
-              "focus": 1049,
-              "zfMirrorProfile0": true,
-              "zoom": 2338
-            },
-            "movFilter": {
-              "enabled": false,
-              "onlyCheck": false,
-              "roi": {
-                "enabled": true,
-                "x0": 0,
-                "x1": 798,
-                "x2": 1903,
-                "x3": 403,
-                "y0": 0,
-                "y1": 22,
-                "y2": 904,
-                "y3": 1195
-              },
-              "threshold": 5
-            },
-            "multipleExposures": {
-              "enabled": true,
-              "settings": [
-                {
-                  "flash": {
-                    "power": []
-                  },
-                  "gain": {
-                    "percentageOfCurrent": true,
-                    "value": 100
-                  },
-                  "shutter": {
-                    "percentageOfCurrent": true,
-                    "value": 100
-                  }
-                }
-              ]
-            },
-            "name": "Diurno",
-            "overlay": {
-              "enable": false,
-              "text": "SEQUENCIAL: {rid} DATA PASSAGEM: {day}/{month}/{year} HORA PASSAGEM: {hour}:{minute}:{second}:{msec} PLACA: {plates} CODIGO EQUIPAMENTO: [CODIGOEQUIPAMENTO] MODELO OCR: AX-OCR LOCAL: [LOCAL] NOME DA VIA: [VIA] SENTIDO: [SENTIDO] FAIXA: [NUMERO]"
-            },
-            "transitions": {
-              "lower": {
-                "endTime": "00:00:00",
-                "holdTime": 60000,
-                "level": 10,
-                "profile": 27839,
-                "startTime": "00:00:00"
-              },
-              "upper": {
-                "endTime": "00:00:00",
-                "holdTime": 60000,
-                "level": 35,
-                "profile": 0,
-                "startTime": "00:00:00"
-              }
-            },
-            "trigger": {
-              "enabled": true,
-              "event": "constant",
-              "minimumInterval": 100,
-              "port": 2,
-              "roi": {
-                "enabled": false,
-                "x0": 0,
-                "x1": 0,
-                "x2": 0,
-                "x3": 0,
-                "y0": 0,
-                "y1": 0,
-                "y2": 0,
-                "y3": 0
-              },
-              "threshold": 0
-            },
-            "whitebalance": {
-              "automatic": true,
-              "weights": {
-                "blue": 100,
-                "green": 100,
-                "red": 100
-              }
-            }
-          },
-          {
-            "active": false,
-            "advanced": {
-              "exposition": {
-                "updateFactor": 0.0990000069141388,
-                "updateRate": 100
-              },
-              "iris": {
-                "updateRate": 1000
-              },
-              "whitebalance": {
-                "updateRate": 500
-              }
-            },
-            "color": {
-              "blacklevel": 0,
-              "brightness": 0,
-              "contrast": 30,
-              "gamma": 12,
-              "saturation": -100
-            },
-            "description": "",
-            "exposure": {
-              "gain": {
-                "automatic": true,
-                "fixedValue": 2697,
-                "maxValue": 4000,
-                "minValue": 1
-              },
-              "highGainMode": false,
-              "iris": {
-                "automatic": false,
-                "fixedValue": 1000
-              },
-              "level": {
-                "roi": {
-                  "enabled": false,
-                  "x0": 10,
-                  "x1": 840,
-                  "x2": 403,
-                  "x3": 1900,
-                  "y0": 150,
-                  "y1": 28,
-                  "y2": 1179,
-                  "y3": 846
-                },
-                "targetValue": 35
-              },
-              "shutter": {
-                "automatic": true,
-                "fixedValue": 2000,
-                "maxValue": 800,
-                "minValue": 48
-              }
-            },
-            "filter": {
-              "sharpnessLevel": 0,
-              "timedomainLevel": 0
-            },
-            "hdr": {
-              "enable": false
-            },
-            "id": 27839,
-            "lens": {
-              "exchanger": false,
-              "focus": 1049,
-              "zfMirrorProfile0": true,
-              "zoom": 2338
-            },
-            "movFilter": {
-              "enabled": false,
-              "onlyCheck": false,
-              "roi": {
-                "enabled": false,
-                "x0": 0,
-                "x1": 1920,
-                "x2": 1920,
-                "x3": 0,
-                "y0": 0,
-                "y1": 0,
-                "y2": 1200,
-                "y3": 1200
-              },
-              "threshold": 5
-            },
-            "multipleExposures": {
-              "enabled": true,
-              "settings": [
-                {
-                  "flash": {
-                    "power": [
-                      {
-                        "out": 1,
-                        "percent": 100
-                      },
-                      {
-                        "out": 3,
-                        "percent": 100
-                      }
-                    ]
-                  },
-                  "gain": {
-                    "percentageOfCurrent": true,
-                    "value": 100
-                  },
-                  "shutter": {
-                    "percentageOfCurrent": true,
-                    "value": 100
-                  }
-                },
-                {
-                  "flash": {
-                    "power": [
-                      {
-                        "out": 1,
-                        "percent": 7
-                      },
-                      {
-                        "out": 3,
-                        "percent": 7
-                      }
-                    ]
-                  },
-                  "gain": {
-                    "percentageOfCurrent": true,
-                    "value": 100
-                  },
-                  "shutter": {
-                    "percentageOfCurrent": true,
-                    "value": 100
-                  }
-                }
-              ]
-            },
-            "name": "Noturno",
-            "overlay": {
-              "enable": false,
-              "text": "SEQUENCIAL: {rid} DATA PASSAGEM: {day}/{month}/{year} HORA PASSAGEM: {hour}:{minute}:{second}:{msec} PLACA: {plates} CODIGO EQUIPAMENTO: GOEC6O032 MODELO OCR: AX-OCR LOCAL: Planaltina-GO NOME DA VIA: GO 118 KM 6 SENTIDO: Planaltina-GO/Divisa-DF FAIXA: 01"
-            },
-            "transitions": {
-              "lower": {
-                "endTime": "00:00:00",
-                "holdTime": 60000,
-                "level": 10,
-                "profile": 27839,
-                "startTime": "00:00:00"
-              },
-              "upper": {
-                "endTime": "00:00:00",
-                "holdTime": 60000,
-                "level": 35,
-                "profile": 0,
-                "startTime": "00:00:00"
-              }
-            },
-            "trigger": {
-              "enabled": true,
-              "event": "constant",
-              "minimumInterval": 100,
-              "port": 2,
-              "roi": {
-                "enabled": false,
-                "x0": 0,
-                "x1": 0,
-                "x2": 0,
-                "x3": 0,
-                "y0": 0,
-                "y1": 0,
-                "y2": 0,
-                "y3": 0
-              },
-              "threshold": 0
-            },
-            "whitebalance": {
-              "automatic": false,
-              "weights": {
-                "blue": 100,
-                "green": 100,
-                "red": 100
-              }
-            }
-          }
-        ],
-        "ocr": {
-          "ocr": {
-            "avgCharHeight": 20,
-            "avgPlateAngle": 0,
-            "avgPlateSlant": 0,
-            "classifierExpansion": 10,
-            "countryCode": 76,
-            "enabled": true,
-            "licensed": true,
-            "lowProbChar": 45,
-            "maxCharHeight": 60,
-            "maxLowProbChars": 0,
-            "maxPlates": 2,
-            "minCharHeight": 9,
-            "minProbPerChar": 85,
-            "processingMode": 3,
-            "processingQueue": 4,
-            "processingThreads": 4,
-            "processingTimeout": 1000,
-            "roi": {
-              "enabled": true,
-              "x0": 275,
-              "x1": 1123,
-              "x2": 558,
-              "x3": 1759,
-              "y0": 742,
-              "y1": 657,
-              "y2": 1199,
-              "y3": 1182
-            },
-            "useClassifierResult": false,
-            "vehicleType": 3
-          }
-        },
-        "classifier": {
-          "classifier": {
-            "enableCharacteristics": false,
-            "enableSpeed": false,
-            "enabled": true,
-            "firstOnly": false,
-            "licensed": true,
-            "minProbability": 100,
-            "modelType": 0,
-            "processingQueue": 1,
-            "processingThreads": 1,
-            "sceneType": 0,
-            "speedCalibrationRegion1": {
-              "p0top1sz": 1,
-              "x0": 10,
-              "x1": 10,
-              "x2": 10,
-              "y0": 10,
-              "y1": 10,
-              "y2": 10
-            },
-            "speedCalibrationRegion2": {
-              "p0top1sz": 1,
-              "x0": 10,
-              "x1": 10,
-              "x2": 10,
-              "y0": 10,
-              "y1": 10,
-              "y2": 10
-            },
-            "triggerEnabled": false,
-            "triggerRegion0": {
-              "dir": "disabled",
-              "x0": 0,
-              "x1": 0,
-              "y0": 0,
-              "y1": 0
-            },
-            "triggerRegion1": {
-              "dir": "disabled",
-              "x0": 0,
-              "x1": 0,
-              "y0": 0,
-              "y1": 0
-            },
-            "triggerRegion2": {
-              "dir": "disabled",
-              "x0": 0,
-              "x1": 0,
-              "y0": 0,
-              "y1": 0
-            },
-            "triggerRegion3": {
-              "dir": "disabled",
-              "x0": 0,
-              "x1": 0,
-              "y0": 0,
-              "y1": 0
-            }
-          }
-        },
-        "misc": {
-          "cameraOrientation": false,
-          "irisHint": "dcIris",
-          "jpegQuality": 85,
-          "legacyTsyncGpio": -1,
-          "scenario1Crop": {
-            "x0": 472,
-            "x1": 1751,
-            "y0": 459,
-            "y1": 1178
-          },
-          "scenario1Overlay": "",
-          "scenario1OverlayTextSize": 24,
-          "scenario2Crop": {
-            "x0": 0,
-            "x1": 1919,
-            "y0": 0,
-            "y1": 1199
-          },
-          "scenario2Overlay": "",
-          "scenario2OverlayTextSize": 32,
-          "scenarioOverlayColor": "blackOverWhite",
-          "scenarioOverlayPos": "overlaidBottom",
-          "snapshotCrop": {
-            "enable": false,
-            "mode": "static",
-            "x0": 40,
-            "x1": 1403,
-            "y0": 280,
-            "y1": 1099
-          }
-        },
-        "ftp": {
-          "ftp": {
-            "address": "127.0.0.1",
-            "anonymous": false,
-            "enable": false,
-            "filename": "PTX_{year,digits:4:4:0}{month,digits:2:2:0}{day,digits:2:2:0}_{hour,digits:2:2:0}{minute,digits:2:2:0}{second,digits:2:2:0}_{msec,digits:3:3:0}_{plates,digits:7:7:0}_{framePos,digits:2:2:0}.jpg",
-            "local": {
-              "bufferSizeKb": 102400,
-              "ttl": 7200
-            },
-            "password": "",
-            "port": 21,
-            "protocol": "ftp",
-            "quality": 85,
-            "transfer": {
-              "pollInterval": 300,
-              "timeout": 60000
-            },
-            "username": ""
-          }
-        },
-        "ioPorts": [
-          {
-            "canFlash": true,
-            "canTrigger": false,
-            "earlyUs": 7,
-            "group": "out",
-            "identifier": "1",
-            "isInput": false,
-            "isOn": false,
-            "isReserved": true,
-            "port": 1,
-            "protection": "itslux",
-            "type": "flash"
-          },
-          {
-            "canFlash": false,
-            "canTrigger": true,
-            "earlyUs": 0,
-            "group": "in",
-            "identifier": "1",
-            "isInput": true,
-            "isOn": false,
-            "isReserved": false,
-            "port": 2,
-            "protection": "none",
-            "type": "general"
-          },
-          {
-            "canFlash": true,
-            "canTrigger": false,
-            "earlyUs": 7,
-            "group": "out",
-            "identifier": "2",
-            "isInput": false,
-            "isOn": false,
-            "isReserved": true,
-            "port": 3,
-            "protection": "itslux",
-            "type": "flash"
-          },
-          {
-            "canFlash": false,
-            "canTrigger": true,
-            "earlyUs": 0,
-            "group": "in",
-            "identifier": "2",
-            "isInput": true,
-            "isOn": false,
-            "isReserved": false,
-            "port": 4,
-            "protection": "none",
-            "type": "general"
-          }
-        ],
-        "snmp": {
-          "enabled": false,
-          "v2": {
-            "enabled": false,
-            "community": ""
-          },
-          "v3": {
-            "enabled": false,
-            "securityName": "",
-            "authenticationPassphrase": "",
-            "privacyPassphrase": ""
-          }
-        },
-        "reboot": {
-          "scheduled": {
-            "enabled": false,
-            "weekdays": [
-              0
-            ],
-            "hour": 0
-          },
-          "periodic": {
-            "enabled": false,
-            "hours": 24
-          }
-        },
-        "dateTime": {
-          "timezone": [
-            "America",
-            "Sao_Paulo"
-          ],
-          "useNTPServer": true,
-          "ntpServerAddress": [
-            "time.google.com"
-          ],
-          "serveNtp": false,
-          "currentDateAndTime": "2026-07-08T16:26:01.000Z",
-          "timezoneOffset": "-0300"
-        },
-        "video": {
-          "mjpeg": {
-            "available": true,
-            "main": {
-              "available": true,
-              "enabled": true,
-              "framerate": 12,
-              "quality": 85,
-              "useTriggerFrames": true
-            }
-          },
-          "rtsp": {
-            "available": true,
-            "enable": false,
-            "port": 554,
-            "rtpPort": 5004,
-            "rtcpPort": 5005,
-            "httpEnabled": false,
-            "httpPort": 8555,
-            "transport": "tcp",
-            "url": "/streaming/mjpeg",
-            "authentication": false,
-            "username": "",
-            "password": ""
-          }
-        },
-        "firmware": {
-          "version": "v1.7.8"
-        }
-      }
+      "raw": null,
+      "error": "AUTH_FAILED"
     },
     {
       "nome": "GOEC6O045 - Faixa 1",
@@ -24356,7 +21276,7 @@
         },
         "profiles": [
           {
-            "active": true,
+            "active": false,
             "advanced": {
               "exposition": {
                 "updateFactor": 0.0990000069141388,
@@ -24507,7 +21427,7 @@
             }
           },
           {
-            "active": false,
+            "active": true,
             "advanced": {
               "exposition": {
                 "updateFactor": 0.0990000069141388,
@@ -24927,7 +21847,7 @@
             "time.google.com"
           ],
           "serveNtp": false,
-          "currentDateAndTime": "2026-07-08T16:26:01.000Z",
+          "currentDateAndTime": "2026-07-13T01:33:56.000Z",
           "timezoneOffset": "-0300"
         },
         "video": {
@@ -24978,7 +21898,7 @@
         },
         "profiles": [
           {
-            "active": true,
+            "active": false,
             "advanced": {
               "exposition": {
                 "updateFactor": 0.0990000069141388,
@@ -25129,7 +22049,7 @@
             }
           },
           {
-            "active": false,
+            "active": true,
             "advanced": {
               "exposition": {
                 "updateFactor": 0.0990000069141388,
@@ -25549,7 +22469,7 @@
             "time.google.com"
           ],
           "serveNtp": false,
-          "currentDateAndTime": "2026-07-08T16:26:07.000Z",
+          "currentDateAndTime": "2026-07-13T01:34:03.000Z",
           "timezoneOffset": "-0300"
         },
         "video": {
@@ -25600,7 +22520,7 @@
         },
         "profiles": [
           {
-            "active": true,
+            "active": false,
             "advanced": {
               "exposition": {
                 "updateFactor": 0.0990000069141388,
@@ -25751,7 +22671,7 @@
             }
           },
           {
-            "active": false,
+            "active": true,
             "advanced": {
               "exposition": {
                 "updateFactor": 0.0990000069141388,
@@ -26171,7 +23091,7 @@
             "time.google.com"
           ],
           "serveNtp": false,
-          "currentDateAndTime": "2026-07-08T16:26:06.000Z",
+          "currentDateAndTime": "2026-07-13T01:34:02.000Z",
           "timezoneOffset": "-0300"
         },
         "video": {
@@ -26216,15 +23136,1245 @@
       "nome": "GOEC6O048 - Faixa 1",
       "uuid": "43d7e92f-482e-4822-bf76-ef2c5cc4dfd9",
       "ip": "179.249.70.250",
-      "raw": null,
-      "error": "AUTH_FAILED"
+      "raw": {
+        "varco": {
+          "remoteAccess": {
+            "varco": {
+              "enabled": true,
+              "edgeServer": "edge.varco.io",
+              "provisionKey": "yk-pzGzXLGmz6-iO3GhdR7hinksDN7aek-kjQ4WYl_c=",
+              "deviceName": "GOEC6O048 - FAIXA 1"
+            }
+          }
+        },
+        "profiles": [
+          {
+            "active": false,
+            "advanced": {
+              "exposition": {
+                "updateFactor": 0.0990000069141388,
+                "updateRate": 100
+              },
+              "iris": {
+                "updateRate": 1000
+              },
+              "whitebalance": {
+                "updateRate": 500
+              }
+            },
+            "color": {
+              "blacklevel": 0,
+              "brightness": 0,
+              "contrast": 0,
+              "gamma": 130,
+              "saturation": 0
+            },
+            "description": "",
+            "exposure": {
+              "gain": {
+                "automatic": true,
+                "fixedValue": 1,
+                "maxValue": 1500,
+                "minValue": 1
+              },
+              "highGainMode": false,
+              "iris": {
+                "automatic": true,
+                "fixedValue": 1000
+              },
+              "level": {
+                "roi": {
+                  "enabled": true,
+                  "x0": 168,
+                  "x1": 861,
+                  "x2": 509,
+                  "x3": 1919,
+                  "y0": 149,
+                  "y1": 80,
+                  "y2": 1165,
+                  "y3": 968
+                },
+                "targetValue": 38
+              },
+              "shutter": {
+                "automatic": true,
+                "fixedValue": 99,
+                "maxValue": 500,
+                "minValue": 48
+              }
+            },
+            "filter": {
+              "sharpnessLevel": 30,
+              "timedomainLevel": 0
+            },
+            "hdr": {
+              "enable": false
+            },
+            "id": 0,
+            "lens": {
+              "exchanger": true,
+              "focus": 872,
+              "zfMirrorProfile0": true,
+              "zoom": 2761
+            },
+            "movFilter": {
+              "enabled": false,
+              "onlyCheck": false,
+              "roi": {
+                "enabled": true,
+                "x0": 0,
+                "x1": 798,
+                "x2": 1903,
+                "x3": 403,
+                "y0": 0,
+                "y1": 22,
+                "y2": 904,
+                "y3": 1195
+              },
+              "threshold": 5
+            },
+            "multipleExposures": {
+              "enabled": true,
+              "settings": [
+                {
+                  "flash": {
+                    "power": []
+                  },
+                  "gain": {
+                    "percentageOfCurrent": true,
+                    "value": 100
+                  },
+                  "shutter": {
+                    "percentageOfCurrent": true,
+                    "value": 100
+                  }
+                }
+              ]
+            },
+            "name": "Diurno",
+            "overlay": {
+              "enable": false,
+              "text": "SEQUENCIAL: {rid} DATA PASSAGEM: {day}/{month}/{year} HORA PASSAGEM: {hour}:{minute}:{second}:{msec} PLACA: {plates} CODIGO EQUIPAMENTO: GOEC6O009 MODELO OCR: AX-OCR LOCAL: Pontalina-GO NOME DA VIA: GO 215, Km 20 SENTIDO: Entroncamento GO319-GO/Pontalina-GO FAIXA: 01"
+            },
+            "transitions": {
+              "lower": {
+                "endTime": "00:00:00",
+                "holdTime": 60000,
+                "level": 10,
+                "profile": 27839,
+                "startTime": "00:00:00"
+              },
+              "upper": {
+                "endTime": "00:00:00",
+                "holdTime": 60000,
+                "level": 35,
+                "profile": 0,
+                "startTime": "00:00:00"
+              }
+            },
+            "trigger": {
+              "enabled": true,
+              "event": "constant",
+              "minimumInterval": 100,
+              "port": 2,
+              "roi": {
+                "enabled": false,
+                "x0": 0,
+                "x1": 0,
+                "x2": 0,
+                "x3": 0,
+                "y0": 0,
+                "y1": 0,
+                "y2": 0,
+                "y3": 0
+              },
+              "threshold": 0
+            },
+            "whitebalance": {
+              "automatic": true,
+              "weights": {
+                "blue": 100,
+                "green": 100,
+                "red": 100
+              }
+            }
+          },
+          {
+            "active": true,
+            "advanced": {
+              "exposition": {
+                "updateFactor": 0.0990000069141388,
+                "updateRate": 100
+              },
+              "iris": {
+                "updateRate": 1000
+              },
+              "whitebalance": {
+                "updateRate": 500
+              }
+            },
+            "color": {
+              "blacklevel": 0,
+              "brightness": 0,
+              "contrast": 30,
+              "gamma": 12,
+              "saturation": -100
+            },
+            "description": "",
+            "exposure": {
+              "gain": {
+                "automatic": true,
+                "fixedValue": 2697,
+                "maxValue": 4000,
+                "minValue": 1
+              },
+              "highGainMode": false,
+              "iris": {
+                "automatic": false,
+                "fixedValue": 1000
+              },
+              "level": {
+                "roi": {
+                  "enabled": false,
+                  "x0": 10,
+                  "x1": 840,
+                  "x2": 403,
+                  "x3": 1900,
+                  "y0": 150,
+                  "y1": 28,
+                  "y2": 1179,
+                  "y3": 846
+                },
+                "targetValue": 35
+              },
+              "shutter": {
+                "automatic": true,
+                "fixedValue": 2000,
+                "maxValue": 800,
+                "minValue": 48
+              }
+            },
+            "filter": {
+              "sharpnessLevel": 0,
+              "timedomainLevel": 0
+            },
+            "hdr": {
+              "enable": false
+            },
+            "id": 27839,
+            "lens": {
+              "exchanger": false,
+              "focus": 872,
+              "zfMirrorProfile0": true,
+              "zoom": 2761
+            },
+            "movFilter": {
+              "enabled": false,
+              "onlyCheck": false,
+              "roi": {
+                "enabled": false,
+                "x0": 0,
+                "x1": 1920,
+                "x2": 1920,
+                "x3": 0,
+                "y0": 0,
+                "y1": 0,
+                "y2": 1200,
+                "y3": 1200
+              },
+              "threshold": 5
+            },
+            "multipleExposures": {
+              "enabled": true,
+              "settings": [
+                {
+                  "flash": {
+                    "power": [
+                      {
+                        "out": 1,
+                        "percent": 65
+                      },
+                      {
+                        "out": 3,
+                        "percent": 65
+                      }
+                    ]
+                  },
+                  "gain": {
+                    "percentageOfCurrent": true,
+                    "value": 100
+                  },
+                  "shutter": {
+                    "percentageOfCurrent": true,
+                    "value": 50
+                  }
+                },
+                {
+                  "flash": {
+                    "power": [
+                      {
+                        "out": 1,
+                        "percent": 20
+                      },
+                      {
+                        "out": 3,
+                        "percent": 20
+                      }
+                    ]
+                  },
+                  "gain": {
+                    "percentageOfCurrent": true,
+                    "value": 100
+                  },
+                  "shutter": {
+                    "percentageOfCurrent": true,
+                    "value": 50
+                  }
+                }
+              ]
+            },
+            "name": "Noturno",
+            "overlay": {
+              "enable": false,
+              "text": "SEQUENCIAL: {rid} DATA PASSAGEM: {day}/{month}/{year} HORA PASSAGEM: {hour}:{minute}:{second}:{msec} PLACA: {plates} CODIGO EQUIPAMENTO: GOEC6O009 MODELO OCR: AX-OCR LOCAL: Pontalina-GO NOME DA VIA: GO 215, Km 20 SENTIDO: Entroncamento GO319-GO/Pontalina-GO FAIXA: 01"
+            },
+            "transitions": {
+              "lower": {
+                "endTime": "00:00:00",
+                "holdTime": 60000,
+                "level": 10,
+                "profile": 27839,
+                "startTime": "00:00:00"
+              },
+              "upper": {
+                "endTime": "00:00:00",
+                "holdTime": 60000,
+                "level": 35,
+                "profile": 0,
+                "startTime": "00:00:00"
+              }
+            },
+            "trigger": {
+              "enabled": true,
+              "event": "constant",
+              "minimumInterval": 100,
+              "port": 2,
+              "roi": {
+                "enabled": false,
+                "x0": 0,
+                "x1": 0,
+                "x2": 0,
+                "x3": 0,
+                "y0": 0,
+                "y1": 0,
+                "y2": 0,
+                "y3": 0
+              },
+              "threshold": 0
+            },
+            "whitebalance": {
+              "automatic": false,
+              "weights": {
+                "blue": 100,
+                "green": 100,
+                "red": 100
+              }
+            }
+          }
+        ],
+        "ocr": {
+          "ocr": {
+            "avgCharHeight": 20,
+            "avgPlateAngle": 0,
+            "avgPlateSlant": 0,
+            "classifierExpansion": 10,
+            "countryCode": 76,
+            "enabled": true,
+            "licensed": true,
+            "lowProbChar": 45,
+            "maxCharHeight": 60,
+            "maxLowProbChars": 0,
+            "maxPlates": 2,
+            "minCharHeight": 9,
+            "minProbPerChar": 85,
+            "processingMode": 3,
+            "processingQueue": 4,
+            "processingThreads": 4,
+            "processingTimeout": 1000,
+            "roi": {
+              "enabled": true,
+              "x0": 346,
+              "x1": 1184,
+              "x2": 528,
+              "x3": 1429,
+              "y0": 715,
+              "y1": 461,
+              "y2": 900,
+              "y3": 579
+            },
+            "useClassifierResult": false,
+            "vehicleType": 3
+          }
+        },
+        "classifier": {
+          "classifier": {
+            "enableCharacteristics": false,
+            "enableSpeed": false,
+            "enabled": true,
+            "firstOnly": false,
+            "licensed": true,
+            "minProbability": 20,
+            "modelType": 0,
+            "processingQueue": 1,
+            "processingThreads": 1,
+            "sceneType": 0,
+            "speedCalibrationRegion1": {
+              "p0top1sz": 1,
+              "x0": 10,
+              "x1": 10,
+              "x2": 10,
+              "y0": 10,
+              "y1": 10,
+              "y2": 10
+            },
+            "speedCalibrationRegion2": {
+              "p0top1sz": 1,
+              "x0": 10,
+              "x1": 10,
+              "x2": 10,
+              "y0": 10,
+              "y1": 10,
+              "y2": 10
+            },
+            "triggerEnabled": false,
+            "triggerRegion0": {
+              "dir": "disabled",
+              "x0": 0,
+              "x1": 0,
+              "y0": 0,
+              "y1": 0
+            },
+            "triggerRegion1": {
+              "dir": "disabled",
+              "x0": 0,
+              "x1": 0,
+              "y0": 0,
+              "y1": 0
+            },
+            "triggerRegion2": {
+              "dir": "disabled",
+              "x0": 0,
+              "x1": 0,
+              "y0": 0,
+              "y1": 0
+            },
+            "triggerRegion3": {
+              "dir": "disabled",
+              "x0": 0,
+              "x1": 0,
+              "y0": 0,
+              "y1": 0
+            }
+          }
+        },
+        "misc": {
+          "cameraOrientation": false,
+          "irisHint": "dcIris",
+          "jpegQuality": 85,
+          "legacyTsyncGpio": -1,
+          "scenario1Crop": {
+            "x0": 398,
+            "x1": 1677,
+            "y0": 171,
+            "y1": 890
+          },
+          "scenario1Overlay": "",
+          "scenario1OverlayTextSize": 24,
+          "scenario2Crop": {
+            "x0": 0,
+            "x1": 1919,
+            "y0": 0,
+            "y1": 1199
+          },
+          "scenario2Overlay": "",
+          "scenario2OverlayTextSize": 32,
+          "scenarioOverlayColor": "blackOverWhite",
+          "scenarioOverlayPos": "overlaidBottom",
+          "snapshotCrop": {
+            "enable": false,
+            "mode": "static",
+            "x0": 8,
+            "x1": 1343,
+            "y0": 82,
+            "y1": 901
+          }
+        },
+        "ftp": {
+          "ftp": {
+            "address": "127.0.0.1",
+            "anonymous": false,
+            "enable": false,
+            "filename": "PTX_{year,digits:4:4:0}{month,digits:2:2:0}{day,digits:2:2:0}_{hour,digits:2:2:0}{minute,digits:2:2:0}{second,digits:2:2:0}_{msec,digits:3:3:0}_{plates,digits:7:7:0}_{framePos,digits:2:2:0}.jpg",
+            "local": {
+              "bufferSizeKb": 102400,
+              "ttl": 7200
+            },
+            "password": "",
+            "port": 21,
+            "protocol": "ftp",
+            "quality": 85,
+            "transfer": {
+              "pollInterval": 300,
+              "timeout": 60000
+            },
+            "username": ""
+          }
+        },
+        "ioPorts": [
+          {
+            "canFlash": true,
+            "canTrigger": false,
+            "earlyUs": 7,
+            "group": "out",
+            "identifier": "1",
+            "isInput": false,
+            "isOn": false,
+            "isReserved": true,
+            "port": 1,
+            "protection": "itslux",
+            "type": "flash"
+          },
+          {
+            "canFlash": false,
+            "canTrigger": true,
+            "earlyUs": 0,
+            "group": "in",
+            "identifier": "1",
+            "isInput": true,
+            "isOn": false,
+            "isReserved": false,
+            "port": 2,
+            "protection": "none",
+            "type": "general"
+          },
+          {
+            "canFlash": true,
+            "canTrigger": false,
+            "earlyUs": 7,
+            "group": "out",
+            "identifier": "2",
+            "isInput": false,
+            "isOn": false,
+            "isReserved": true,
+            "port": 3,
+            "protection": "itslux",
+            "type": "flash"
+          },
+          {
+            "canFlash": false,
+            "canTrigger": true,
+            "earlyUs": 0,
+            "group": "in",
+            "identifier": "2",
+            "isInput": true,
+            "isOn": false,
+            "isReserved": false,
+            "port": 4,
+            "protection": "none",
+            "type": "general"
+          }
+        ],
+        "snmp": {
+          "enabled": false,
+          "v2": {
+            "enabled": false,
+            "community": ""
+          },
+          "v3": {
+            "enabled": false,
+            "securityName": "",
+            "authenticationPassphrase": "",
+            "privacyPassphrase": ""
+          }
+        },
+        "reboot": {
+          "scheduled": {
+            "enabled": false,
+            "weekdays": [
+              0
+            ],
+            "hour": 0
+          },
+          "periodic": {
+            "enabled": false,
+            "hours": 24
+          }
+        },
+        "dateTime": {
+          "timezone": [
+            "America",
+            "Sao_Paulo"
+          ],
+          "useNTPServer": true,
+          "ntpServerAddress": [
+            "time.google.com"
+          ],
+          "serveNtp": false,
+          "currentDateAndTime": "2026-07-13T01:34:04.000Z",
+          "timezoneOffset": "-0300"
+        },
+        "video": {
+          "mjpeg": {
+            "available": true,
+            "main": {
+              "available": true,
+              "enabled": true,
+              "framerate": 12,
+              "quality": 85,
+              "useTriggerFrames": true
+            }
+          },
+          "rtsp": {
+            "available": true,
+            "enable": false,
+            "port": 554,
+            "rtpPort": 5004,
+            "rtcpPort": 5005,
+            "httpEnabled": false,
+            "httpPort": 8555,
+            "transport": "tcp",
+            "url": "/streaming/mjpeg",
+            "authentication": false,
+            "username": "",
+            "password": ""
+          }
+        },
+        "firmware": {
+          "version": "v1.7.8"
+        }
+      }
     },
     {
       "nome": "GOEC6O048 - Faixa 2",
       "uuid": "d23fe240-246f-4601-8987-d864ecb24d22",
       "ip": "179.249.70.250",
-      "raw": null,
-      "error": "AUTH_FAILED"
+      "raw": {
+        "varco": {
+          "remoteAccess": {
+            "varco": {
+              "enabled": true,
+              "edgeServer": "edge.varco.io",
+              "provisionKey": "yk-pzGzXLGmz6-iO3GhdR7hinksDN7aek-kjQ4WYl_c=",
+              "deviceName": "GOEC6O048 - FAIXA 2"
+            }
+          }
+        },
+        "profiles": [
+          {
+            "active": false,
+            "advanced": {
+              "exposition": {
+                "updateFactor": 0.0990000069141388,
+                "updateRate": 100
+              },
+              "iris": {
+                "updateRate": 1000
+              },
+              "whitebalance": {
+                "updateRate": 500
+              }
+            },
+            "color": {
+              "blacklevel": 0,
+              "brightness": 0,
+              "contrast": 0,
+              "gamma": 130,
+              "saturation": 0
+            },
+            "description": "",
+            "exposure": {
+              "gain": {
+                "automatic": true,
+                "fixedValue": 1,
+                "maxValue": 1000,
+                "minValue": 1
+              },
+              "highGainMode": false,
+              "iris": {
+                "automatic": true,
+                "fixedValue": 1000
+              },
+              "level": {
+                "roi": {
+                  "enabled": true,
+                  "x0": 168,
+                  "x1": 861,
+                  "x2": 509,
+                  "x3": 1919,
+                  "y0": 149,
+                  "y1": 80,
+                  "y2": 1165,
+                  "y3": 968
+                },
+                "targetValue": 35
+              },
+              "shutter": {
+                "automatic": true,
+                "fixedValue": 99,
+                "maxValue": 1500,
+                "minValue": 48
+              }
+            },
+            "filter": {
+              "sharpnessLevel": 40,
+              "timedomainLevel": 0
+            },
+            "hdr": {
+              "enable": false
+            },
+            "id": 0,
+            "lens": {
+              "exchanger": true,
+              "focus": 808,
+              "zfMirrorProfile0": true,
+              "zoom": 2703
+            },
+            "movFilter": {
+              "enabled": false,
+              "onlyCheck": false,
+              "roi": {
+                "enabled": true,
+                "x0": 0,
+                "x1": 798,
+                "x2": 1903,
+                "x3": 403,
+                "y0": 0,
+                "y1": 22,
+                "y2": 904,
+                "y3": 1195
+              },
+              "threshold": 5
+            },
+            "multipleExposures": {
+              "enabled": true,
+              "settings": [
+                {
+                  "flash": {
+                    "power": []
+                  },
+                  "gain": {
+                    "percentageOfCurrent": true,
+                    "value": 100
+                  },
+                  "shutter": {
+                    "percentageOfCurrent": true,
+                    "value": 100
+                  }
+                }
+              ]
+            },
+            "name": "Diurno",
+            "overlay": {
+              "enable": false,
+              "text": "SEQUENCIAL: {rid} DATA PASSAGEM: {day}/{month}/{year} HORA PASSAGEM: {hour}:{minute}:{second}:{msec} PLACA: {plates} CODIGO EQUIPAMENTO: [CODIGOEQUIPAMENTO] MODELO OCR: AX-OCR LOCAL: [LOCAL] NOME DA VIA: [VIA] SENTIDO: [SENTIDO] FAIXA: [NUMERO]"
+            },
+            "transitions": {
+              "lower": {
+                "endTime": "00:00:00",
+                "holdTime": 60000,
+                "level": 10,
+                "profile": 27839,
+                "startTime": "00:00:00"
+              },
+              "upper": {
+                "endTime": "00:00:00",
+                "holdTime": 60000,
+                "level": 35,
+                "profile": 0,
+                "startTime": "00:00:00"
+              }
+            },
+            "trigger": {
+              "enabled": true,
+              "event": "constant",
+              "minimumInterval": 100,
+              "port": 2,
+              "roi": {
+                "enabled": false,
+                "x0": 0,
+                "x1": 0,
+                "x2": 0,
+                "x3": 0,
+                "y0": 0,
+                "y1": 0,
+                "y2": 0,
+                "y3": 0
+              },
+              "threshold": 0
+            },
+            "whitebalance": {
+              "automatic": true,
+              "weights": {
+                "blue": 100,
+                "green": 100,
+                "red": 100
+              }
+            }
+          },
+          {
+            "active": true,
+            "advanced": {
+              "exposition": {
+                "updateFactor": 0.0990000069141388,
+                "updateRate": 100
+              },
+              "iris": {
+                "updateRate": 1000
+              },
+              "whitebalance": {
+                "updateRate": 500
+              }
+            },
+            "color": {
+              "blacklevel": 0,
+              "brightness": 0,
+              "contrast": 30,
+              "gamma": 12,
+              "saturation": -100
+            },
+            "description": "",
+            "exposure": {
+              "gain": {
+                "automatic": true,
+                "fixedValue": 2697,
+                "maxValue": 4000,
+                "minValue": 1
+              },
+              "highGainMode": false,
+              "iris": {
+                "automatic": false,
+                "fixedValue": 1000
+              },
+              "level": {
+                "roi": {
+                  "enabled": false,
+                  "x0": 10,
+                  "x1": 840,
+                  "x2": 403,
+                  "x3": 1900,
+                  "y0": 150,
+                  "y1": 28,
+                  "y2": 1179,
+                  "y3": 846
+                },
+                "targetValue": 35
+              },
+              "shutter": {
+                "automatic": true,
+                "fixedValue": 2000,
+                "maxValue": 800,
+                "minValue": 48
+              }
+            },
+            "filter": {
+              "sharpnessLevel": 0,
+              "timedomainLevel": 0
+            },
+            "hdr": {
+              "enable": false
+            },
+            "id": 27839,
+            "lens": {
+              "exchanger": false,
+              "focus": 808,
+              "zfMirrorProfile0": true,
+              "zoom": 2703
+            },
+            "movFilter": {
+              "enabled": false,
+              "onlyCheck": false,
+              "roi": {
+                "enabled": false,
+                "x0": 0,
+                "x1": 1920,
+                "x2": 1920,
+                "x3": 0,
+                "y0": 0,
+                "y1": 0,
+                "y2": 1200,
+                "y3": 1200
+              },
+              "threshold": 5
+            },
+            "multipleExposures": {
+              "enabled": true,
+              "settings": [
+                {
+                  "flash": {
+                    "power": [
+                      {
+                        "out": 1,
+                        "percent": 100
+                      },
+                      {
+                        "out": 3,
+                        "percent": 100
+                      }
+                    ]
+                  },
+                  "gain": {
+                    "percentageOfCurrent": true,
+                    "value": 100
+                  },
+                  "shutter": {
+                    "percentageOfCurrent": true,
+                    "value": 100
+                  }
+                },
+                {
+                  "flash": {
+                    "power": [
+                      {
+                        "out": 1,
+                        "percent": 7
+                      },
+                      {
+                        "out": 3,
+                        "percent": 7
+                      }
+                    ]
+                  },
+                  "gain": {
+                    "percentageOfCurrent": true,
+                    "value": 100
+                  },
+                  "shutter": {
+                    "percentageOfCurrent": true,
+                    "value": 100
+                  }
+                }
+              ]
+            },
+            "name": "Noturno",
+            "overlay": {
+              "enable": false,
+              "text": "SEQUENCIAL: {rid} DATA PASSAGEM: {day}/{month}/{year} HORA PASSAGEM: {hour}:{minute}:{second}:{msec} PLACA: {plates} CODIGO EQUIPAMENTO: GOEC6O032 MODELO OCR: AX-OCR LOCAL: Planaltina-GO NOME DA VIA: GO 118 KM 6 SENTIDO: Planaltina-GO/Divisa-DF FAIXA: 01"
+            },
+            "transitions": {
+              "lower": {
+                "endTime": "00:00:00",
+                "holdTime": 60000,
+                "level": 10,
+                "profile": 27839,
+                "startTime": "00:00:00"
+              },
+              "upper": {
+                "endTime": "00:00:00",
+                "holdTime": 60000,
+                "level": 35,
+                "profile": 0,
+                "startTime": "00:00:00"
+              }
+            },
+            "trigger": {
+              "enabled": true,
+              "event": "constant",
+              "minimumInterval": 100,
+              "port": 2,
+              "roi": {
+                "enabled": false,
+                "x0": 0,
+                "x1": 0,
+                "x2": 0,
+                "x3": 0,
+                "y0": 0,
+                "y1": 0,
+                "y2": 0,
+                "y3": 0
+              },
+              "threshold": 0
+            },
+            "whitebalance": {
+              "automatic": false,
+              "weights": {
+                "blue": 100,
+                "green": 100,
+                "red": 100
+              }
+            }
+          }
+        ],
+        "ocr": {
+          "ocr": {
+            "avgCharHeight": 20,
+            "avgPlateAngle": 0,
+            "avgPlateSlant": 0,
+            "classifierExpansion": 10,
+            "countryCode": 76,
+            "enabled": true,
+            "licensed": true,
+            "lowProbChar": 45,
+            "maxCharHeight": 60,
+            "maxLowProbChars": 0,
+            "maxPlates": 2,
+            "minCharHeight": 9,
+            "minProbPerChar": 85,
+            "processingMode": 3,
+            "processingQueue": 4,
+            "processingThreads": 4,
+            "processingTimeout": 1000,
+            "roi": {
+              "enabled": true,
+              "x0": 434,
+              "x1": 1269,
+              "x2": 541,
+              "x3": 1457,
+              "y0": 559,
+              "y1": 291,
+              "y2": 676,
+              "y3": 400
+            },
+            "useClassifierResult": false,
+            "vehicleType": 3
+          }
+        },
+        "classifier": {
+          "classifier": {
+            "enableCharacteristics": false,
+            "enableSpeed": false,
+            "enabled": true,
+            "firstOnly": false,
+            "licensed": true,
+            "minProbability": 20,
+            "modelType": 0,
+            "processingQueue": 1,
+            "processingThreads": 1,
+            "sceneType": 0,
+            "speedCalibrationRegion1": {
+              "p0top1sz": 1,
+              "x0": 10,
+              "x1": 10,
+              "x2": 10,
+              "y0": 10,
+              "y1": 10,
+              "y2": 10
+            },
+            "speedCalibrationRegion2": {
+              "p0top1sz": 1,
+              "x0": 10,
+              "x1": 10,
+              "x2": 10,
+              "y0": 10,
+              "y1": 10,
+              "y2": 10
+            },
+            "triggerEnabled": false,
+            "triggerRegion0": {
+              "dir": "disabled",
+              "x0": 0,
+              "x1": 0,
+              "y0": 0,
+              "y1": 0
+            },
+            "triggerRegion1": {
+              "dir": "disabled",
+              "x0": 0,
+              "x1": 0,
+              "y0": 0,
+              "y1": 0
+            },
+            "triggerRegion2": {
+              "dir": "disabled",
+              "x0": 0,
+              "x1": 0,
+              "y0": 0,
+              "y1": 0
+            },
+            "triggerRegion3": {
+              "dir": "disabled",
+              "x0": 0,
+              "x1": 0,
+              "y0": 0,
+              "y1": 0
+            }
+          }
+        },
+        "misc": {
+          "cameraOrientation": false,
+          "irisHint": "dcIris",
+          "jpegQuality": 85,
+          "legacyTsyncGpio": -1,
+          "scenario1Crop": {
+            "x0": 398,
+            "x1": 1677,
+            "y0": 171,
+            "y1": 890
+          },
+          "scenario1Overlay": "",
+          "scenario1OverlayTextSize": 24,
+          "scenario2Crop": {
+            "x0": 0,
+            "x1": 1919,
+            "y0": 0,
+            "y1": 1199
+          },
+          "scenario2Overlay": "",
+          "scenario2OverlayTextSize": 32,
+          "scenarioOverlayColor": "blackOverWhite",
+          "scenarioOverlayPos": "overlaidBottom",
+          "snapshotCrop": {
+            "enable": false,
+            "mode": "static",
+            "x0": 40,
+            "x1": 1403,
+            "y0": 280,
+            "y1": 1099
+          }
+        },
+        "ftp": {
+          "ftp": {
+            "address": "127.0.0.1",
+            "anonymous": false,
+            "enable": false,
+            "filename": "PTX_{year,digits:4:4:0}{month,digits:2:2:0}{day,digits:2:2:0}_{hour,digits:2:2:0}{minute,digits:2:2:0}{second,digits:2:2:0}_{msec,digits:3:3:0}_{plates,digits:7:7:0}_{framePos,digits:2:2:0}.jpg",
+            "local": {
+              "bufferSizeKb": 102400,
+              "ttl": 7200
+            },
+            "password": "",
+            "port": 21,
+            "protocol": "ftp",
+            "quality": 85,
+            "transfer": {
+              "pollInterval": 300,
+              "timeout": 60000
+            },
+            "username": ""
+          }
+        },
+        "ioPorts": [
+          {
+            "canFlash": true,
+            "canTrigger": false,
+            "earlyUs": 7,
+            "group": "out",
+            "identifier": "1",
+            "isInput": false,
+            "isOn": false,
+            "isReserved": true,
+            "port": 1,
+            "protection": "itslux",
+            "type": "flash"
+          },
+          {
+            "canFlash": false,
+            "canTrigger": true,
+            "earlyUs": 0,
+            "group": "in",
+            "identifier": "1",
+            "isInput": true,
+            "isOn": false,
+            "isReserved": false,
+            "port": 2,
+            "protection": "none",
+            "type": "general"
+          },
+          {
+            "canFlash": true,
+            "canTrigger": false,
+            "earlyUs": 7,
+            "group": "out",
+            "identifier": "2",
+            "isInput": false,
+            "isOn": false,
+            "isReserved": true,
+            "port": 3,
+            "protection": "itslux",
+            "type": "flash"
+          },
+          {
+            "canFlash": false,
+            "canTrigger": true,
+            "earlyUs": 0,
+            "group": "in",
+            "identifier": "2",
+            "isInput": true,
+            "isOn": false,
+            "isReserved": false,
+            "port": 4,
+            "protection": "none",
+            "type": "general"
+          }
+        ],
+        "snmp": {
+          "enabled": false,
+          "v2": {
+            "enabled": false,
+            "community": ""
+          },
+          "v3": {
+            "enabled": false,
+            "securityName": "",
+            "authenticationPassphrase": "",
+            "privacyPassphrase": ""
+          }
+        },
+        "reboot": {
+          "scheduled": {
+            "enabled": false,
+            "weekdays": [
+              0
+            ],
+            "hour": 0
+          },
+          "periodic": {
+            "enabled": false,
+            "hours": 24
+          }
+        },
+        "dateTime": {
+          "timezone": [
+            "America",
+            "Sao_Paulo"
+          ],
+          "useNTPServer": true,
+          "ntpServerAddress": [
+            "time.google.com"
+          ],
+          "serveNtp": false,
+          "currentDateAndTime": "2026-07-13T01:34:02.000Z",
+          "timezoneOffset": "-0300"
+        },
+        "video": {
+          "mjpeg": {
+            "available": true,
+            "main": {
+              "available": true,
+              "enabled": true,
+              "framerate": 12,
+              "quality": 85,
+              "useTriggerFrames": true
+            }
+          },
+          "rtsp": {
+            "available": true,
+            "enable": false,
+            "port": 554,
+            "rtpPort": 5004,
+            "rtcpPort": 5005,
+            "httpEnabled": false,
+            "httpPort": 8555,
+            "transport": "tcp",
+            "url": "/streaming/mjpeg",
+            "authentication": false,
+            "username": "",
+            "password": ""
+          }
+        },
+        "firmware": {
+          "version": "v1.7.8"
+        }
+      }
     },
     {
       "nome": "GOEC6O049 - Faixa 1",
@@ -26243,7 +24393,7 @@
         },
         "profiles": [
           {
-            "active": true,
+            "active": false,
             "advanced": {
               "exposition": {
                 "updateFactor": 0.0990000069141388,
@@ -26394,7 +24544,7 @@
             }
           },
           {
-            "active": false,
+            "active": true,
             "advanced": {
               "exposition": {
                 "updateFactor": 0.0990000069141388,
@@ -26814,7 +24964,7 @@
             "time.google.com"
           ],
           "serveNtp": false,
-          "currentDateAndTime": "2026-07-08T16:26:11.000Z",
+          "currentDateAndTime": "2026-07-13T01:34:09.000Z",
           "timezoneOffset": "-0300"
         },
         "video": {
@@ -26865,7 +25015,7 @@
         },
         "profiles": [
           {
-            "active": true,
+            "active": false,
             "advanced": {
               "exposition": {
                 "updateFactor": 0.0990000069141388,
@@ -27016,7 +25166,7 @@
             }
           },
           {
-            "active": false,
+            "active": true,
             "advanced": {
               "exposition": {
                 "updateFactor": 0.0990000069141388,
@@ -27436,7 +25586,7 @@
             "time.google.com"
           ],
           "serveNtp": false,
-          "currentDateAndTime": "2026-07-08T16:26:11.000Z",
+          "currentDateAndTime": "2026-07-13T01:34:09.000Z",
           "timezoneOffset": "-0300"
         },
         "video": {
@@ -27487,7 +25637,7 @@
         },
         "profiles": [
           {
-            "active": true,
+            "active": false,
             "advanced": {
               "exposition": {
                 "updateFactor": 0.0990000069141388,
@@ -27638,7 +25788,7 @@
             }
           },
           {
-            "active": false,
+            "active": true,
             "advanced": {
               "exposition": {
                 "updateFactor": 0.0990000069141388,
@@ -28058,7 +26208,7 @@
             "time.google.com"
           ],
           "serveNtp": false,
-          "currentDateAndTime": "2026-07-08T16:26:10.000Z",
+          "currentDateAndTime": "2026-07-13T01:34:09.000Z",
           "timezoneOffset": "-0300"
         },
         "video": {
@@ -28109,7 +26259,7 @@
         },
         "profiles": [
           {
-            "active": true,
+            "active": false,
             "advanced": {
               "exposition": {
                 "updateFactor": 0.0990000069141388,
@@ -28260,7 +26410,7 @@
             }
           },
           {
-            "active": false,
+            "active": true,
             "advanced": {
               "exposition": {
                 "updateFactor": 0.0990000069141388,
@@ -28680,7 +26830,7 @@
             "time.google.com"
           ],
           "serveNtp": false,
-          "currentDateAndTime": "2026-07-08T16:26:10.000Z",
+          "currentDateAndTime": "2026-07-13T01:34:08.000Z",
           "timezoneOffset": "-0300"
         },
         "video": {
@@ -28731,7 +26881,7 @@
         },
         "profiles": [
           {
-            "active": true,
+            "active": false,
             "advanced": {
               "exposition": {
                 "updateFactor": 0.0990000069141388,
@@ -28882,7 +27032,7 @@
             }
           },
           {
-            "active": false,
+            "active": true,
             "advanced": {
               "exposition": {
                 "updateFactor": 0.0990000069141388,
@@ -29302,7 +27452,7 @@
             "time.google.com"
           ],
           "serveNtp": false,
-          "currentDateAndTime": "2026-07-08T16:26:11.000Z",
+          "currentDateAndTime": "2026-07-13T01:34:11.000Z",
           "timezoneOffset": "-0300"
         },
         "video": {
@@ -29353,7 +27503,7 @@
         },
         "profiles": [
           {
-            "active": true,
+            "active": false,
             "advanced": {
               "exposition": {
                 "updateFactor": 0.0990000069141388,
@@ -29504,7 +27654,7 @@
             }
           },
           {
-            "active": false,
+            "active": true,
             "advanced": {
               "exposition": {
                 "updateFactor": 0.0990000069141388,
@@ -29924,7 +28074,7 @@
             "time.google.com"
           ],
           "serveNtp": false,
-          "currentDateAndTime": "2026-07-08T16:26:16.000Z",
+          "currentDateAndTime": "2026-07-13T01:34:17.000Z",
           "timezoneOffset": "-0300"
         },
         "video": {
@@ -29975,7 +28125,7 @@
         },
         "profiles": [
           {
-            "active": true,
+            "active": false,
             "advanced": {
               "exposition": {
                 "updateFactor": 0.0990000069141388,
@@ -30126,7 +28276,7 @@
             }
           },
           {
-            "active": false,
+            "active": true,
             "advanced": {
               "exposition": {
                 "updateFactor": 0.0990000069141388,
@@ -30546,7 +28696,7 @@
             "time.google.com"
           ],
           "serveNtp": false,
-          "currentDateAndTime": "2026-07-08T16:26:16.000Z",
+          "currentDateAndTime": "2026-07-13T01:34:16.000Z",
           "timezoneOffset": "-0300"
         },
         "video": {
@@ -30597,7 +28747,7 @@
         },
         "profiles": [
           {
-            "active": true,
+            "active": false,
             "advanced": {
               "exposition": {
                 "updateFactor": 0.0990000069141388,
@@ -30748,7 +28898,7 @@
             }
           },
           {
-            "active": false,
+            "active": true,
             "advanced": {
               "exposition": {
                 "updateFactor": 0.0990000069141388,
@@ -31168,7 +29318,7 @@
             "time.google.com"
           ],
           "serveNtp": false,
-          "currentDateAndTime": "2026-07-08T16:26:16.000Z",
+          "currentDateAndTime": "2026-07-13T01:34:15.000Z",
           "timezoneOffset": "-0300"
         },
         "video": {
@@ -31219,7 +29369,7 @@
         },
         "profiles": [
           {
-            "active": true,
+            "active": false,
             "advanced": {
               "exposition": {
                 "updateFactor": 0.0990000069141388,
@@ -31370,7 +29520,7 @@
             }
           },
           {
-            "active": false,
+            "active": true,
             "advanced": {
               "exposition": {
                 "updateFactor": 0.0990000069141388,
@@ -31790,7 +29940,7 @@
             "time.google.com"
           ],
           "serveNtp": false,
-          "currentDateAndTime": "2026-07-08T16:26:16.000Z",
+          "currentDateAndTime": "2026-07-13T01:34:16.000Z",
           "timezoneOffset": "-0300"
         },
         "video": {
@@ -31841,7 +29991,7 @@
         },
         "profiles": [
           {
-            "active": true,
+            "active": false,
             "advanced": {
               "exposition": {
                 "updateFactor": 0.0990000069141388,
@@ -31992,7 +30142,7 @@
             }
           },
           {
-            "active": false,
+            "active": true,
             "advanced": {
               "exposition": {
                 "updateFactor": 0.0990000069141388,
@@ -32412,7 +30562,7 @@
             "time.google.com"
           ],
           "serveNtp": false,
-          "currentDateAndTime": "2026-07-08T16:26:16.000Z",
+          "currentDateAndTime": "2026-07-13T01:34:16.000Z",
           "timezoneOffset": "-0300"
         },
         "video": {
@@ -32463,7 +30613,7 @@
         },
         "profiles": [
           {
-            "active": true,
+            "active": false,
             "advanced": {
               "exposition": {
                 "updateFactor": 0.0990000069141388,
@@ -32641,7 +30791,7 @@
             }
           },
           {
-            "active": false,
+            "active": true,
             "advanced": {
               "exposition": {
                 "updateFactor": 0.0990000069141388,
@@ -33061,7 +31211,7 @@
             "time.google.com"
           ],
           "serveNtp": false,
-          "currentDateAndTime": "2026-07-08T16:26:21.000Z",
+          "currentDateAndTime": "2026-07-13T01:34:22.000Z",
           "timezoneOffset": "-0300"
         },
         "video": {
@@ -33112,7 +31262,7 @@
         },
         "profiles": [
           {
-            "active": true,
+            "active": false,
             "advanced": {
               "exposition": {
                 "updateFactor": 0.0990000069141388,
@@ -33263,7 +31413,7 @@
             }
           },
           {
-            "active": false,
+            "active": true,
             "advanced": {
               "exposition": {
                 "updateFactor": 0.0990000069141388,
@@ -33683,7 +31833,7 @@
             "time.google.com"
           ],
           "serveNtp": false,
-          "currentDateAndTime": "2026-07-08T16:26:21.000Z",
+          "currentDateAndTime": "2026-07-13T01:34:22.000Z",
           "timezoneOffset": "-0300"
         },
         "video": {
@@ -33734,7 +31884,7 @@
         },
         "profiles": [
           {
-            "active": true,
+            "active": false,
             "advanced": {
               "exposition": {
                 "updateFactor": 0.0990000069141388,
@@ -33885,7 +32035,7 @@
             }
           },
           {
-            "active": false,
+            "active": true,
             "advanced": {
               "exposition": {
                 "updateFactor": 0.0990000069141388,
@@ -34305,7 +32455,7 @@
             "time.google.com"
           ],
           "serveNtp": false,
-          "currentDateAndTime": "2026-07-08T16:26:20.000Z",
+          "currentDateAndTime": "2026-07-13T01:34:21.000Z",
           "timezoneOffset": "-0300"
         },
         "video": {
@@ -34356,7 +32506,7 @@
         },
         "profiles": [
           {
-            "active": true,
+            "active": false,
             "advanced": {
               "exposition": {
                 "updateFactor": 0.0990000069141388,
@@ -34507,7 +32657,7 @@
             }
           },
           {
-            "active": false,
+            "active": true,
             "advanced": {
               "exposition": {
                 "updateFactor": 0.0990000069141388,
@@ -34927,7 +33077,7 @@
             "time.google.com"
           ],
           "serveNtp": false,
-          "currentDateAndTime": "2026-07-08T16:26:20.000Z",
+          "currentDateAndTime": "2026-07-13T01:34:21.000Z",
           "timezoneOffset": "-0300"
         },
         "video": {
@@ -34978,7 +33128,7 @@
         },
         "profiles": [
           {
-            "active": true,
+            "active": false,
             "advanced": {
               "exposition": {
                 "updateFactor": 0.0990000069141388,
@@ -35129,7 +33279,7 @@
             }
           },
           {
-            "active": false,
+            "active": true,
             "advanced": {
               "exposition": {
                 "updateFactor": 0.0990000069141388,
@@ -35549,7 +33699,7 @@
             "time.google.com"
           ],
           "serveNtp": false,
-          "currentDateAndTime": "2026-07-08T16:26:20.000Z",
+          "currentDateAndTime": "2026-07-13T01:34:22.000Z",
           "timezoneOffset": "-0300"
         },
         "video": {
@@ -35600,7 +33750,7 @@
         },
         "profiles": [
           {
-            "active": true,
+            "active": false,
             "advanced": {
               "exposition": {
                 "updateFactor": 0.0990000069141388,
@@ -35751,7 +33901,7 @@
             }
           },
           {
-            "active": false,
+            "active": true,
             "advanced": {
               "exposition": {
                 "updateFactor": 0.0990000069141388,
@@ -36171,7 +34321,7 @@
             "time.google.com"
           ],
           "serveNtp": false,
-          "currentDateAndTime": "2026-07-08T16:26:25.000Z",
+          "currentDateAndTime": "2026-07-13T01:34:27.000Z",
           "timezoneOffset": "-0300"
         },
         "video": {
@@ -36222,7 +34372,7 @@
         },
         "profiles": [
           {
-            "active": true,
+            "active": false,
             "advanced": {
               "exposition": {
                 "updateFactor": 0.0990000069141388,
@@ -36373,7 +34523,7 @@
             }
           },
           {
-            "active": false,
+            "active": true,
             "advanced": {
               "exposition": {
                 "updateFactor": 0.0990000069141388,
@@ -36793,7 +34943,7 @@
             "time.google.com"
           ],
           "serveNtp": false,
-          "currentDateAndTime": "2026-07-08T16:26:26.000Z",
+          "currentDateAndTime": "2026-07-13T01:34:27.000Z",
           "timezoneOffset": "-0300"
         },
         "video": {
@@ -36844,7 +34994,7 @@
         },
         "profiles": [
           {
-            "active": true,
+            "active": false,
             "advanced": {
               "exposition": {
                 "updateFactor": 0.0990000069141388,
@@ -36995,7 +35145,7 @@
             }
           },
           {
-            "active": false,
+            "active": true,
             "advanced": {
               "exposition": {
                 "updateFactor": 0.0990000069141388,
@@ -37415,7 +35565,7 @@
             "time.google.com"
           ],
           "serveNtp": false,
-          "currentDateAndTime": "2026-07-08T16:26:26.000Z",
+          "currentDateAndTime": "2026-07-13T01:34:27.000Z",
           "timezoneOffset": "-0300"
         },
         "video": {
@@ -37466,7 +35616,7 @@
         },
         "profiles": [
           {
-            "active": true,
+            "active": false,
             "advanced": {
               "exposition": {
                 "updateFactor": 0.0990000069141388,
@@ -37617,7 +35767,7 @@
             }
           },
           {
-            "active": false,
+            "active": true,
             "advanced": {
               "exposition": {
                 "updateFactor": 0.0990000069141388,
@@ -38037,7 +36187,7 @@
             "time.google.com"
           ],
           "serveNtp": false,
-          "currentDateAndTime": "2026-07-08T16:26:26.000Z",
+          "currentDateAndTime": "2026-07-13T01:34:28.000Z",
           "timezoneOffset": "-0300"
         },
         "video": {
@@ -38088,7 +36238,7 @@
         },
         "profiles": [
           {
-            "active": true,
+            "active": false,
             "advanced": {
               "exposition": {
                 "updateFactor": 0.0990000069141388,
@@ -38239,7 +36389,7 @@
             }
           },
           {
-            "active": false,
+            "active": true,
             "advanced": {
               "exposition": {
                 "updateFactor": 0.0990000069141388,
@@ -38659,7 +36809,7 @@
             "time.google.com"
           ],
           "serveNtp": false,
-          "currentDateAndTime": "2026-07-08T16:26:26.000Z",
+          "currentDateAndTime": "2026-07-13T01:34:28.000Z",
           "timezoneOffset": "-0300"
         },
         "video": {
@@ -38710,7 +36860,7 @@
         },
         "profiles": [
           {
-            "active": true,
+            "active": false,
             "advanced": {
               "exposition": {
                 "updateFactor": 0.0990000069141388,
@@ -38861,7 +37011,7 @@
             }
           },
           {
-            "active": false,
+            "active": true,
             "advanced": {
               "exposition": {
                 "updateFactor": 0.0990000069141388,
@@ -39281,7 +37431,7 @@
             "time.google.com"
           ],
           "serveNtp": false,
-          "currentDateAndTime": "2026-07-08T16:26:30.000Z",
+          "currentDateAndTime": "2026-07-13T01:34:32.000Z",
           "timezoneOffset": "-0300"
         },
         "video": {
@@ -39332,7 +37482,7 @@
         },
         "profiles": [
           {
-            "active": true,
+            "active": false,
             "advanced": {
               "exposition": {
                 "updateFactor": 0.0990000069141388,
@@ -39483,7 +37633,7 @@
             }
           },
           {
-            "active": false,
+            "active": true,
             "advanced": {
               "exposition": {
                 "updateFactor": 0.0990000069141388,
@@ -39903,7 +38053,7 @@
             "time.google.com"
           ],
           "serveNtp": false,
-          "currentDateAndTime": "2026-07-08T16:26:30.000Z",
+          "currentDateAndTime": "2026-07-13T01:34:32.000Z",
           "timezoneOffset": "-0300"
         },
         "video": {

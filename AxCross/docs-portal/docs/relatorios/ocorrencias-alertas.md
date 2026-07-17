@@ -1,4 +1,4 @@
----
+﻿---
 sidebar_position: 5
 title: Ocorrências e Alertas
 description: Relatório de ocorrências e alertas no AxCross
@@ -12,7 +12,7 @@ Consolida todos os alertas e ocorrências registrados no sistema, com detalhes d
 
 No **menu lateral**, clique em Relatórios e selecione **Ocorrências e Alertas**.
 
-Relatório de Ocorrências](../img/Relatório de Ocorrências.png)
+![Relatório de Ocorrências](../img/Relatório de Ocorrências.png))
 
 ## Filtros
 
@@ -49,3 +49,4 @@ Relatório de Ocorrências](../img/Relatório de Ocorrências.png)
 :::tip Fiscalização e auditoria
 Este Relatório é a principal ferramenta para demonstrar as atividades operacionais realizadas, incluindo alertas gerados, quem atendeu e como foram resolvidos.
 :::
+

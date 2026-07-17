@@ -12,7 +12,7 @@
 import express from "express";
 import { statusConexao, resumoGeral, listarEquipamentos, listarOperacoes, statsInfracoes, heartbeatEquipamentos, listarTabelas, listarMonitoramentos, ultimasPassagens, statsTriagens } from "../axhub-controller.js";
 import { statusConexao as axtonStatus, resumoGeral as axtonResumo, listarTabelas as axtonTabelas, ultimasPesagens as axtonPesagens, ultimasInfracoes as axtonInfracoes, heartbeatEquipamentos as axtonHeartbeat } from "../axton-controller.js";
-import { statusConexao as axcrossStatus, resumoGeral as axcrossResumo, listarEquipamentos as axcrossEquipamentos, statsPassagens as axcrossPassagens, heartbeatEquipamentos as axcrossHeartbeat, listarTabelas as axcrossTabelas, listarLocais as axcrossLocais, listarOperacoes as axcrossOperacoes } from "../axcross-controller.js";
+import { statusConexao as axcrossStatus, resumoGeral as axcrossResumo, listarEquipamentos as axcrossEquipamentos, statsPassagens as axcrossPassagens, heartbeatEquipamentos as axcrossHeartbeat, listarTabelas as axcrossTabelas, listarLocais as axcrossLocais, listarOperacoes as axcrossOperacoes, diagnosticoClassificacao as axcrossDiagnosticoClassificacao, configurarConexao as axcrossConfigurar, obterConfig as axcrossConfig, investigarUrl as axcrossInvestigar, investigarPublicoEndpoint as axcrossInvestigarPublico, classificacaoStats as axcrossClassificacaoStats, compararEquipamentos as axcrossCompararEquipamentos, compararViaUrlEndpoint as axcrossCompararViaUrl, classificacaoTimeline as axcrossClassificacaoTimeline, ecosistema as axcrossEcosistema, frotaAnalise as axcrossFrotaAnalise, mapaDados as axcrossMapaDados } from "../axcross-controller.js";
 import { listarSistemas, listarEquipamentos as medicaoListarEquipamentos, gerarDiagnostico, analisarSistema } from "../medicao-controller.js";
 import { relatorioPassagens, relatorioImagens, listarEquipamentosRelatorio } from "../relatorio-controller.js";
 import { listarContratosHandler, listarTiposHandler, gerarRelatorioHandler, listarRelatoriosHandler, obterRelatorioHandler, removerRelatorioHandler } from "../relatorio-contrato-controller.js";
@@ -58,6 +58,18 @@ router.get("/axcross/operacoes", axcrossOperacoes);
 router.get("/axcross/passagens", axcrossPassagens);
 router.get("/axcross/heartbeat", axcrossHeartbeat);
 router.get("/axcross/tabelas", axcrossTabelas);
+router.get("/axcross/diagnostico-classificacao", axcrossDiagnosticoClassificacao);
+router.get("/axcross/config", axcrossConfig);
+router.post("/axcross/configurar", axcrossConfigurar);
+router.post("/axcross/investigar", axcrossInvestigar);
+router.post("/axcross/investigar-publico", axcrossInvestigarPublico);
+router.get("/axcross/classificacao-stats", axcrossClassificacaoStats);
+router.get("/axcross/classificacao-timeline", axcrossClassificacaoTimeline);
+router.get("/axcross/ecosistema", axcrossEcosistema);
+router.get("/axcross/frota-analise", axcrossFrotaAnalise);
+router.get("/axcross/mapa-dados", axcrossMapaDados);
+router.post("/axcross/comparar-equipamentos", axcrossCompararEquipamentos);
+router.post("/axcross/comparar-via-url", axcrossCompararViaUrl);
 
 // ═══════════════════════════════════════════════════════════════════
 // DIAGNÓSTICO DE MEDIÇÃO

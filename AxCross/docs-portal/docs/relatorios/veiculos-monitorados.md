@@ -1,4 +1,4 @@
----
+﻿---
 sidebar_position: 4
 title: Relatório de Veículos Monitorados
 description: Relatório de detecções de Veículos monitorados no AxCross
@@ -12,7 +12,7 @@ Consolida as detecções de Veículos cadastrados na lista de monitorados, exibi
 
 No **menu lateral**, clique em Relatórios e selecione Veículos Monitorados**.
 
-Relatório Veículos Monitorados](../img/Relatório Veículos Monitorados.png)
+![Relatório Veículos Monitorados](../img/Relatório Veículos Monitorados.png))
 
 ## Filtros
 
@@ -48,3 +48,4 @@ Relatório Veículos Monitorados](../img/Relatório Veículos Monitorados.png)
 :::tip Acompanhamento de alertas
 Use este Relatório em conjunto com a tela de **Alertas** para acompanhar o status das tratativas de cada detecção.
 :::
+

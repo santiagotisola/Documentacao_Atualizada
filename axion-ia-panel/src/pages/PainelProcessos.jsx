@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from "react";
+﻿import React, { useState, useMemo } from "react";
 import { AXHUB_SITES, AXCROSS_SITES } from "../data/sitesData";
 import "./PainelProcessos.css";
 
@@ -193,8 +193,8 @@ const SERVICOS_AUXILIARES = [
 const GRUPOS_ACESSO = [
   {
     grupo: "Grupo Axion (suporte)",
-    login: "suporte@axiontecnologia.com.br",
-    senha: "Axion#2023",
+    login: "Axion@2026",
+    senha: "Axion@2026",
     sites: [
       "homologacao.axhub.axion.ws", "goiania.axhub.axion.ws",
       "imepi.axhub.axion.ws", "ipemmt.axcross.axion.ws",
@@ -229,8 +229,8 @@ const GRUPOS_ACESSO = [
   },
   {
     grupo: "Grupo AxCross (Axion 2025)",
-    login: "suporte@axiontecnologia.com.br",
-    senha: "Axion#2025",
+    login: "Axion@2026",
+    senha: "Axion@2026",
     sites: [
       "setrans.axcross.axion.ws", "detranma.axcross.axion.ws",
       "goiania.axion.ws", "goiania.id.axion.ws",
@@ -595,3 +595,5 @@ export default function PainelProcessos() {
     </div>
   );
 }
+
+

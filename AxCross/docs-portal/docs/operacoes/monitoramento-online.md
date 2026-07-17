@@ -83,3 +83,89 @@ Os cards do Mapa de Equipamentos são atualizados automaticamente conforme novas
 :::tip Dica
 Use o botão **Filtrar** para exibir apenas as câmeras de um cruzamento específico quando houver muitos Equipamentos cadastrados.
 :::
+
+---
+
+## Mural de Câmeras
+
+O **Mural de Câmeras** é uma tela de monitoramento visual onde o operador monta uma grade personalizada com as câmeras dos Equipamentos desejados, acompanhando em tempo real as capturas de cada ponto monitorado.
+
+![](<../img/Mural de Cameras.png>)
+
+### Como acessar
+
+No **menu lateral**, clique em **Monitoramento** → **Mural de Câmeras**.  
+Ao abrir pela primeira vez, a tela exibe a mensagem **"Seu mural está vazio"** — clique no botão **+ Montar mural** para iniciar a configuração, ou selecione um layout salvo no painel de **Layouts**.
+
+---
+
+### Elementos da tela
+
+| Elemento | Descrição |
+|---|---|
+| **Grade de câmeras** | Área principal onde as câmeras são exibidas em mosaico. Cada célula mostra a imagem capturada em tempo real pelo Equipamento selecionado. |
+| **Botão de grade (ex.: 4×3)** | Define a divisão da tela em linhas e colunas. Veja a seção [Botão Auto (Layout de Grade)](#botão-auto-layout-de-grade). |
+| **Botão de layout (ex.: Avenidas)** | Exibe o nome do layout atual e abre o painel de gerenciamento de layouts. Veja a seção [Layouts](#layouts). |
+| **Botão Editar / Sair edição** | Alterna entre o modo de visualização e o modo de edição, onde é possível selecionar o Equipamento de cada célula da grade. |
+| **Toggle Alertas** | Ativa ou desativa os alertas visuais no mural. Veja a seção [Alertas no Mural](#alertas-no-mural). |
+
+---
+
+### Botão Auto (Layout de Grade)
+
+O botão de grade — exibido com a configuração atual, como **4×3**, **2×2** ou **Auto** — define a **divisão da tela** (também chamada de *grid layout*, *mosaico*, *matriz* ou *modo de exibição*).
+
+- **Auto**: O sistema ajusta automaticamente o número de células conforme a quantidade de câmeras adicionadas ao mural.
+- **Valores fixos** (ex.: 2×2, 3×3, 4×3, 4×4): O operador escolhe manualmente quantas linhas e colunas a grade deve ter, independentemente de quantas câmeras estão configuradas.
+
+:::tip Dica
+Use um layout fixo (ex.: **4×3**) quando quiser manter a visualização estável com um número predefinido de câmeras. Use **Auto** para murais dinâmicos que mudam conforme os Equipamentos adicionados.
+:::
+
+---
+
+### Layouts
+
+O botão de **Layouts** — exibido com o nome do layout ativo, como **"Avenidas"** — abre o painel de gerenciamento de layouts salvos.
+
+Um **layout** é uma configuração nomeada que armazena quais Equipamentos estão dispostos em cada célula da grade. Layouts podem representar:
+
+- Uma **região geográfica** (ex.: "Centro", "Setor Norte", "Zona Sul")
+- Uma **via ou corredor** (ex.: "Avenidas", "Perimetral")
+- Um **grupo de interesse** (ex.: "Saídas da cidade", "Terminais Rodoviários")
+
+#### Painel de Layouts
+
+Ao clicar no botão de layout, é exibido um painel lateral com as seguintes opções:
+
+| Elemento | Descrição |
+|---|---|
+| **Lista de layouts** | Exibe os layouts criados, com o nome, a quantidade de Equipamentos e a data da última edição. |
+| **Compartilhados com todos os operadores** | Indica que o layout está disponível para todos os usuários com acesso ao mural. |
+| **+ Novo** | Cria um novo layout em branco para configuração. |
+
+#### Como criar um layout
+
+1. Clique no botão de layout e selecione **+ Novo**.
+2. Dê um nome ao layout (ex.: "Avenidas", "Setor Leste").
+3. Clique em **Editar** para entrar no modo de edição da grade.
+4. Em cada célula, selecione o **Equipamento** desejado no menu suspenso.
+5. Clique em **Sair edição** para salvar e voltar ao modo de visualização.
+
+---
+
+### Alertas no Mural
+
+O toggle **Alertas** ativa o modo de monitoramento de alertas no mural. Quando habilitado, o sistema exibe um destaque visual na célula do Equipamento sempre que um veículo monitorado for detectado passando por aquele ponto.
+
+:::info Como funciona
+O mural compara as placas das passagens registradas em tempo real com os veículos cadastrados nas listas de alertas. Quando há correspondência, a câmera correspondente recebe um indicador visual de alerta.
+:::
+
+Para que os alertas funcionem no mural, é necessário que haja **alertas configurados** no sistema. Acesse:
+
+- 📖 [Configuração de Alertas](../operacoes/alertas) — manual de configuração
+
+:::tip Dica
+Combine o Mural de Câmeras com alertas configurados para veículos de interesse para criar uma central de monitoramento ativo — o operador visualiza as câmeras e recebe destaque imediato quando um veículo alvo é detectado.
+:::

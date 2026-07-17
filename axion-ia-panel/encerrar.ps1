@@ -16,7 +16,7 @@ Write-Host ""
 
 Write-Host "Encerrando jobs..." -ForegroundColor Yellow
 
-$jobs = Get-Job | Where-Object { $_.Name -like "Axion*" }
+$jobs = Get-Job | Where-Object { $_.Name -like "Axion*" -or $_.Name -like "Ax*Docs" }
 
 if ($jobs) {
     foreach ($job in $jobs) {
@@ -37,7 +37,7 @@ if ($jobs) {
 
 Write-Host "Liberando portas..." -ForegroundColor Yellow
 
-$portas = @(3017, 3100)
+$portas = @(3010, 3011, 3012, 3017, 3100)
 
 foreach ($porta in $portas) {
     $processos = Get-NetTCPConnection -LocalPort $porta -ErrorAction SilentlyContinue | 

@@ -13,11 +13,31 @@ const config = {
     encrypt:            process.env.AXCROSS_DB_ENCRYPT === "true",
     trustServerCertificate: true
   },
-  connectionTimeout: 10000,
-  requestTimeout:    15000
+  connectionTimeout: 3000,
+  requestTimeout:    5000
 };
 
 let pool = null;
+
+/** Atualiza a configuração do banco em runtime (sem reiniciar a API) */
+export async function reconfigurar({ host, port, database, user, password, encrypt = false }) {
+  if (pool) {
+    try { await pool.close(); } catch (_) {}
+    pool = null;
+  }
+  if (host)     config.server   = host;
+  if (port)     config.port     = parseInt(port);
+  if (database) config.database = database;
+  if (user)     config.user     = user;
+  if (password !== undefined) config.password = password;
+  config.options.encrypt = encrypt === true || encrypt === "true";
+  console.log(`🔧 [axcross-db] Configuração atualizada: ${config.server}:${config.port}/${config.database}`);
+}
+
+/** Retorna a configuração atual (sem senha) */
+export function getConfig() {
+  return { server: config.server, port: config.port, database: config.database, user: config.user };
+}
 
 export async function conectar() {
   if (pool && pool.connected) return pool;

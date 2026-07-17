@@ -1,4 +1,4 @@
----
+﻿---
 sidebar_position: 6
 title: PDF Gerados
 description: Consulta e download de Relatórios PDF gerados no AxCross
@@ -12,7 +12,7 @@ Lista todos os Relatórios em formato PDF que foram gerados no sistema, permitin
 
 No **menu lateral**, clique em Relatórios e selecione **PDF Gerados**.
 
-Relatórios Gerados](../img/Relatórios Gerados.png)
+![Relatórios Gerados](../img/Relatórios Gerados.png))
 
 ## Informações exibidas
 
@@ -48,3 +48,4 @@ Relatórios com grande volume de dados podem levar alguns minutos para serem ger
 :::info Retenção de arquivos
 PDFs gerados ficam disponíveis por um período limitado conforme a política de retenção configurada no sistema. Faça o download dos Relatórios importantes para armazenamento externo.
 :::
+

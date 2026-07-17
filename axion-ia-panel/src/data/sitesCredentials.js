@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Dados de credenciais de todos os sites AxHub e AxCross
  * Usado pelo CredenciaisManager para gerenciar senhas
  */
@@ -25,18 +25,18 @@ export const CREDENCIAIS_AXHUB = [
 ];
 
 export const CREDENCIAIS_AXCROSS = [
-  { id: 'axcross-derse', nome: 'DERSE', url: 'https://derse.axcross.axion.ws', estado: 'PI', tipo: 'Rodovias', login: 'suporte@axiontecnologia.com.br', senha: 'Axion#2026', sistema: 'AxCross' },
-  { id: 'axcross-detranpi', nome: 'DETRANPI', url: 'https://detranpi.axcross.axion.ws', estado: 'PI', tipo: 'Trânsito Estadual', login: 'suporte@axiontecnologia.com.br', senha: 'Axion#2026', sistema: 'AxCross' },
-  { id: 'axcross-detranma', nome: 'DETRANMA', url: 'https://detranma.axcross.axion.ws', estado: 'MA', tipo: 'Trânsito Estadual', login: 'suporte@axiontecnologia.com.br', senha: 'Axion#2026', sistema: 'AxCross' },
-  { id: 'axcross-imperatriz', nome: 'IMPERATRIZ', url: 'https://imperatriz.axcross.axion.ws', estado: 'MA', tipo: 'Trânsito Municipal', login: 'suporte@axiontecnologia.com.br', senha: 'Axion#2026', sistema: 'AxCross' },
-  { id: 'axcross-ipemce', nome: 'IPEMCE', url: 'https://ipemce.axcross.axion.ws', estado: 'CE', tipo: 'Metrologia', login: 'suporte@axiontecnologia.com.br', senha: 'Axion#2026', sistema: 'AxCross' },
-  { id: 'axcross-ipemmt', nome: 'IPEMMT', url: 'https://ipemmt.axcross.axion.ws', estado: 'MT', tipo: 'Metrologia', login: 'suporte@axiontecnologia.com.br', senha: 'Axion#2026', sistema: 'AxCross' },
-  { id: 'axcross-ipempe', nome: 'IPEMPE', url: 'https://ipempe.axcross.axion.ws', estado: 'PE', tipo: 'Metrologia', login: 'suporte@axiontecnologia.com.br', senha: 'Axion#2026', sistema: 'AxCross' },
-  { id: 'axcross-sefazpi', nome: 'SEFAZPI', url: 'https://sefazpi.axcross.axion.ws', estado: 'PI', tipo: 'Fiscal', login: 'suporte@axiontecnologia.com.br', senha: 'Axion#2026', sistema: 'AxCross' },
-  { id: 'axcross-goiania', nome: 'GOIÂNIA', url: 'https://goiania.axcross.axion.ws', estado: 'GO', tipo: 'Trânsito Municipal', login: 'suporte@axiontecnologia.com.br', senha: 'Axion#2026', sistema: 'AxCross' },
-  { id: 'axcross-economia', nome: 'ECONOMIA', url: 'https://economia.axcross.axion.ws', estado: 'GO', tipo: 'Fiscal', login: 'suporte@axiontecnologia.com.br', senha: 'Axion#2026', sistema: 'AxCross' },
-  { id: 'axcross-setrans', nome: 'SETRANS', url: 'https://setrans.axcross.axion.ws', estado: 'PI', tipo: 'Rodovias', login: 'suporte@axiontecnologia.com.br', senha: 'Axion#2026', sistema: 'AxCross' },
-  { id: 'axcross-homologacao', nome: 'HOMOLOGAÇÃO', url: 'https://homologacao.axcross.axion.ws', estado: '—', tipo: 'Homologação', login: 'suporte@axiontecnologia.com.br', senha: 'Axion#2026', sistema: 'AxCross' },
+  { id: 'axcross-derse', nome: 'DERSE', url: 'https://derse.axcross.axion.ws', estado: 'PI', tipo: 'Rodovias', login: 'suporte@axiontecnologia.com.br', senha: 'Axion@2026', sistema: 'AxCross' },
+  { id: 'axcross-detranpi', nome: 'DETRANPI', url: 'https://detranpi.axcross.axion.ws', estado: 'PI', tipo: 'Trânsito Estadual', login: 'suporte@axiontecnologia.com.br', senha: 'Axion@2026', sistema: 'AxCross' },
+  { id: 'axcross-detranma', nome: 'DETRANMA', url: 'https://detranma.axcross.axion.ws', estado: 'MA', tipo: 'Trânsito Estadual', login: 'suporte@axiontecnologia.com.br', senha: 'Axion@2026', sistema: 'AxCross' },
+  { id: 'axcross-imperatriz', nome: 'IMPERATRIZ', url: 'https://imperatriz.axcross.axion.ws', estado: 'MA', tipo: 'Trânsito Municipal', login: 'suporte@axiontecnologia.com.br', senha: 'Axion@2026', sistema: 'AxCross' },
+  { id: 'axcross-ipemce', nome: 'IPEMCE', url: 'https://ipemce.axcross.axion.ws', estado: 'CE', tipo: 'Metrologia', login: 'suporte@axiontecnologia.com.br', senha: 'Axion@2026', sistema: 'AxCross' },
+  { id: 'axcross-ipemmt', nome: 'IPEMMT', url: 'https://ipemmt.axcross.axion.ws', estado: 'MT', tipo: 'Metrologia', login: 'suporte@axiontecnologia.com.br', senha: 'Axion@2026', sistema: 'AxCross' },
+  { id: 'axcross-ipempe', nome: 'IPEMPE', url: 'https://ipempe.axcross.axion.ws', estado: 'PE', tipo: 'Metrologia', login: 'suporte@axiontecnologia.com.br', senha: 'Axion@2026', sistema: 'AxCross' },
+  { id: 'axcross-sefazpi', nome: 'SEFAZPI', url: 'https://sefazpi.axcross.axion.ws', estado: 'PI', tipo: 'Fiscal', login: 'suporte@axiontecnologia.com.br', senha: 'Axion@2026', sistema: 'AxCross' },
+  { id: 'axcross-goiania', nome: 'GOIÂNIA', url: 'https://goiania.axcross.axion.ws', estado: 'GO', tipo: 'Trânsito Municipal', login: 'suporte@axiontecnologia.com.br', senha: 'Axion@2026', sistema: 'AxCross' },
+  { id: 'axcross-economia', nome: 'ECONOMIA', url: 'https://economia.axcross.axion.ws', estado: 'GO', tipo: 'Fiscal', login: 'suporte@axiontecnologia.com.br', senha: 'Axion@2026', sistema: 'AxCross' },
+  { id: 'axcross-setrans', nome: 'SETRANS', url: 'https://setrans.axcross.axion.ws', estado: 'PI', tipo: 'Rodovias', login: 'suporte@axiontecnologia.com.br', senha: 'Axion@2026', sistema: 'AxCross' },
+  { id: 'axcross-homologacao', nome: 'HOMOLOGAÇÃO', url: 'https://homologacao.axcross.axion.ws', estado: '—', tipo: 'Homologação', login: 'suporte@axiontecnologia.com.br', senha: 'Axion@2026', sistema: 'AxCross' },
 ];
 
 export const PORTAIS_AUTH = [
@@ -53,3 +53,8 @@ export const STATUS_CREDENCIAL = {
   VALIDADA: 'Validada',
   ERRO: 'Erro',
 };
+
+
+
+
+

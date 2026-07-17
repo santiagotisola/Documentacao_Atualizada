@@ -19,7 +19,7 @@ Write-Host ""
 
 Write-Host "Limpando portas..." -ForegroundColor Yellow
 
-$portas = @(3017, 3100)
+$portas = @(3010, 3011, 3012, 3017, 3100)
 
 foreach ($porta in $portas) {
     $processos = Get-NetTCPConnection -LocalPort $porta -ErrorAction SilentlyContinue | 
@@ -65,6 +65,30 @@ $job2 = Start-Job -ScriptBlock {
 
 Write-Host "   [Job $($job2.Id)] API (Node.js) - Porta 3100" -ForegroundColor Green
 
+# Job 3: AxHub.Docs (Docusaurus) - Porta 3010
+$job3 = Start-Job -ScriptBlock {
+    Set-Location "c:\Users\Santiago\Axiondocs\Axion.Docs\AxHub\docs-portal"
+    $env:PATH = "c:\Users\Santiago\Axiondocs\Axion.Docs\AxHub\docs-portal\node_modules\.bin;" + $env:PATH
+    npx docusaurus start --port 3010 --host localhost
+} -Name "AxHubDocs"
+Write-Host "   [Job $($job3.Id)] AxHub.Docs (Docusaurus) - Porta 3010" -ForegroundColor Magenta
+
+# Job 4: AxTon.Docs (Docusaurus) - Porta 3011
+$job4 = Start-Job -ScriptBlock {
+    Set-Location "c:\Users\Santiago\Axiondocs\Axion.Docs\AxTon\docs-portal"
+    $env:PATH = "c:\Users\Santiago\Axiondocs\Axion.Docs\AxTon\docs-portal\node_modules\.bin;" + $env:PATH
+    npx docusaurus start --port 3011 --host localhost
+} -Name "AxTonDocs"
+Write-Host "   [Job $($job4.Id)] AxTon.Docs (Docusaurus) - Porta 3011" -ForegroundColor Magenta
+
+# Job 5: AxCross.Docs (Docusaurus) - Porta 3012
+$job5 = Start-Job -ScriptBlock {
+    Set-Location "c:\Users\Santiago\Axiondocs\Axion.Docs\AxCross\docs-portal"
+    $env:PATH = "c:\Users\Santiago\Axiondocs\Axion.Docs\AxCross\docs-portal\node_modules\.bin;" + $env:PATH
+    npx docusaurus start --port 3012 --host localhost
+} -Name "AxCrossDocs"
+Write-Host "   [Job $($job5.Id)] AxCross.Docs (Docusaurus) - Porta 3012" -ForegroundColor Magenta
+
 Write-Host ""
 Write-Host "========================================" -ForegroundColor Gray
 Write-Host ""
@@ -73,9 +97,9 @@ Write-Host ""
 # 3. AGUARDANDO INICIALIZACAO
 # ========================================================================
 
-Write-Host "Aguardando inicializacao (10s)..." -ForegroundColor Yellow
+Write-Host "Aguardando inicializacao (15s)..." -ForegroundColor Yellow
 
-Start-Sleep -Seconds 10
+Start-Sleep -Seconds 15
 
 # ========================================================================
 # 4. VERIFICANDO STATUS
@@ -99,6 +123,20 @@ if ($apiStatus) {
     Write-Host "   API:    http://localhost:3100  [ONLINE]" -ForegroundColor Green
 } else {
     Write-Host "   API:    http://localhost:3100  [OFFLINE]" -ForegroundColor Red
+}
+
+# Verificar Docs
+foreach ($docInfo in @(
+    @{port=3010; name="AxHub.Docs"; url="http://localhost:3010/AxHub.Docs"},
+    @{port=3011; name="AxTon.Docs"; url="http://localhost:3011/AxTon.Docs"},
+    @{port=3012; name="AxCross.Docs"; url="http://localhost:3012/AxCross.Docs"}
+)) {
+    $ok = Test-NetConnection -ComputerName localhost -Port $docInfo.port -WarningAction SilentlyContinue -InformationLevel Quiet
+    if ($ok) {
+        Write-Host "   $($docInfo.name): $($docInfo.url)  [ONLINE]" -ForegroundColor Magenta
+    } else {
+        Write-Host "   $($docInfo.name): $($docInfo.url)  [iniciando...]" -ForegroundColor Yellow
+    }
 }
 
 Write-Host ""

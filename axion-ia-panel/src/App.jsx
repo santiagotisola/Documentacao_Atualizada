@@ -11,7 +11,7 @@ import {
   Settings, ExternalLink, Menu, X,
   Camera, Construction, PieChart, Map, Shield, Activity, TestTube, Eye,
   Wrench, Scale, Navigation,
-  FileSearch, Layers, CheckCircle, ClipboardCheck, BookOpen, GitBranch, FileCode, Database, Target
+  FileSearch, Layers, CheckCircle, ClipboardCheck, BookOpen, GitBranch, FileCode, Database, Target, AlertTriangle
 } from "lucide-react";
 import Dashboard from "./pages/Dashboard.jsx";
 import Treinamento from "./pages/Treinamento.jsx";
@@ -32,6 +32,8 @@ import AnalisesSites from "./pages/AnalisesSites.jsx";
 import IntelligenceHub from "./pages/IntelligenceHub.jsx";
 import OperationsHub from "./pages/OperationsHub.jsx";
 import VarcoMonitor from "./pages/VarcoMonitor.jsx";
+import AxCrossManager from "./pages/AxCrossManager.jsx";
+import AxCrossClassificacaoDiag from "./pages/AxCrossClassificacaoDiag.jsx";
 import DuplicidadeInfracoes from "./pages/DuplicidadeInfracoes.jsx";
 import IntelligenceDashboard from "./pages/IntelligenceDashboard.jsx";
 import DiagnosticoMedicao from "./pages/DiagnosticoMedicao.jsx";
@@ -120,6 +122,8 @@ const PAGE_INFO = {
   "/logs": { title: "Logs do Sistema", subtitle: "Auditoria e rastreio de operações", Icon: ScrollText },
   "/config": { title: "Configurações", subtitle: "Configurações do sistema e conexões", Icon: Settings },
   "/varco": { title: "VARCO Monitor", subtitle: "Monitoramento da frota ITScam 450 — 72 dispositivos SETRANS-GO", Icon: Radio },
+  "/axcross-manager": { title: "AxCross Manager", subtitle: "Gerenciador unificado: Dashboard, Passagens, Equipamentos, Sites, Diagnóstico e Suporte", Icon: Navigation },
+  "/axcross-classificacao-diag": { title: "Diagnóstico Classificação AxCross", subtitle: "Analisa por que o campo CLASSIFICACAO não retorna dados no mapa de equipamentos", Icon: AlertTriangle },
   "/duplicidade": { title: "Auditoria de Duplicidades", subtitle: "Detecção e análise de infrações duplicadas no AxHub", Icon: Shield },
   "/diagnostico-medicao": { title: "Diagnóstico de Medição", subtitle: "Análise inteligente de equipamentos com valores zerados no relatório", Icon: Activity },
   "/ferramentas/consulta-infracoes": { title: "Consultar Infrações", subtitle: "Ferramenta de análise e suporte — Consulte infrações por CPF ou Placa (AxHub)", Icon: Search },
@@ -170,6 +174,7 @@ const MENU_SECTIONS = [
     items: [
       { to: "/central-ferramentas", icon: Wrench, label: "Central de Ferramentas" },
       { to: "/varco-monitor", icon: Camera, label: "VARCO Monitor" },
+      { to: "/axcross-manager", icon: Navigation, label: "AxCross Manager" },
     ]
   },
   {
@@ -395,6 +400,10 @@ function AppContent() {
           
           {/* VARCO Monitor - Painel completo de auditoria */}
           <Route path="/varco-monitor" element={<VarcoMonitor />} />
+          {/* AxCross Manager — Gerenciador Unificado */}
+          <Route path="/axcross-manager" element={<AxCrossManager />} />
+          {/* Redirect: rota antiga → Manager (tab diagnóstico) */}
+          <Route path="/axcross-classificacao-diag" element={<Navigate to="/axcross-manager?tab=diagnostico" replace />} />
           
           <Route path="/analise" element={<AnalisesSites />} />
           <Route path="/central-sites" element={<CentralSites />} />

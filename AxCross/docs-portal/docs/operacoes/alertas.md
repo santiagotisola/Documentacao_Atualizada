@@ -1,4 +1,4 @@
----
+﻿---
 sidebar_position: 3
 title: Alertas
 description: Gestão de alertas e ocorrências no AxCross
@@ -54,8 +54,9 @@ Configure os tipos de ocorrência disponíveis para categorizar os alertas manua
 
 Para exportar e consultar ocorrências registradas:
 
-Relatório de Ocorrências](../img/Relatório de Ocorrências.png)
+![Relatório de Ocorrências](../img/Relatório de Ocorrências.png))
 
 :::tip Dica
 Acesse o Relatório de ocorrências para consolidar as tratativas realizadas e gerar evidências de fiscalização.
 :::
+

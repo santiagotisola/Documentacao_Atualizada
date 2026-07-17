@@ -8,6 +8,8 @@ description: Como acessar o sistema AxCross
 
 A tela de Login é o ponto de entrada do AxCross. Nela são informadas as credenciais necessárias para acesso ao sistema.
 
+![Tela de Login do AxCross](../img/Login.png)
+
 ## Como acessar
 
 Abra o navegador e acesse o endereço do AxCross fornecido pela organização.

@@ -2,7 +2,6 @@ import type {SidebarsConfig} from '@docusaurus/plugin-content-docs';
 
 /**
  * Sidebar manual — espelha o menu do sistema AxCross
- * Estrutura inicial — ajustar conforme menus reais do sistema
  */
 const sidebars: SidebarsConfig = {
   manualSidebar: [
@@ -19,102 +18,51 @@ const sidebars: SidebarsConfig = {
       ],
     },
 
-    // ── Dashboards ──
+    // ── Dashboard ──
     {
       type: 'doc',
       id: 'primeiros-passos/dashboard',
-      label: '📊 Dashboards',
-    },
-
-    // ── Monitoramento Online ──
-    {
-      type: 'doc',
-      id: 'operacoes/monitoramento-online',
-      label: '📡 Monitoramento Online',
+      label: '📊 Dashboard',
     },
 
     // ── Veículos Monitorados ──
     {
-      type: 'category',
+      type: 'doc',
+      id: 'operacoes/veiculos-monitorados',
       label: '🚗 Veículos Monitorados',
-      collapsed: false,
-      items: [
-        'operacoes/veiculos-monitorados',
-        'operacoes/tipos-ocorrencias',
-        'operacoes/alertas',
-        'operacoes/vigencia-alertas',
-      ],
     },
 
-    // ── Operações ──
+    // ── Equipamentos ──
     {
       type: 'doc',
-      id: 'operacoes/cadastro-operacoes',
-      label: '🚦 Operações',
+      id: 'cadastros/equipamentos',
+      label: '📷 Equipamentos',
     },
 
-    // ── Sistema ──
+    // ── Monitoramento ──
     {
-      type: 'category',
-      label: '⚙️ Sistema',
-      collapsed: true,
-      items: [
-        'sistema/configuracoes',
-        'sistema/sincronizacao',
-      ],
-    },
-
-    // ── Cadastros (expansível) ──
-    {
-      type: 'category',
-      label: '📋 Cadastros',
-      collapsed: true,
-      items: [
-        'cadastros/locais',
-        'cadastros/equipamentos',
-        'cadastros/grupos-equipamentos',
-        'cadastros/faixas',
-      ],
+      type: 'doc',
+      id: 'operacoes/monitoramento-online',
+      label: '📡 Monitoramento',
     },
 
     // ── Relatórios ──
     {
-      type: 'category',
+      type: 'doc',
+      id: 'relatorios/relatorio-passagens',
       label: '📊 Relatórios',
-      collapsed: true,
-      items: [
-        'relatorios/relatorio-passagens',
-        'relatorios/mapeamento-rotas',
-        'relatorios/rastreamento-placas',
-        'relatorios/veiculos-monitorados',
-        'relatorios/ocorrencias-alertas',
-        'relatorios/pdf-gerados',
-      ],
     },
 
-    // ── Administração (expansível) ──
+    // ── Configurações ──
     {
-      type: 'category',
-      label: '🔒 Administração',
-      collapsed: true,
-      items: [
-        'administracao/usuarios',
-        'administracao/perfis-acesso',
-        'administracao/permissoes',
-        'administracao/logs-acesso',
-      ],
+      type: 'doc',
+      id: 'sistema/configuracoes',
+      label: '⚙️ Configurações',
     },
+
 
     // ── Referência Técnica ──
-    {
-      type: 'category',
-      label: '🗄️ Referência Técnica',
-      collapsed: true,
-      items: [
-        'referencia-tecnica/banco-de-dados',
-        'referencia-tecnica/classificacao-veiculos-integracao',
-      ],
-    },
+    
 
     // ── Glossário ──
     {
