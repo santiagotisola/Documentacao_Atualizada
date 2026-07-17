@@ -10,9 +10,10 @@ Consolida as detecções de Veículos cadastrados na lista de monitorados, exibi
 
 ## Como acessar
 
-No **menu lateral**, clique em Relatórios e selecione Veículos Monitorados**.
+No **menu lateral**, clique em **Relatórios** e selecione **Veículos Monitorados**.
 
-![Relatório Veículos Monitorados](../img/Relatório Veículos Monitorados.png))
+![Relatório Veículos Monitorados](../img/Relatório Veículos Monitorados.png)
+)
 
 ## Filtros
 
@@ -39,7 +40,7 @@ No **menu lateral**, clique em Relatórios e selecione Veículos Monitorados**.
 
 ## Passo a passo
 
-1. Acesse Relatórios → Veículos Monitorados** no menu lateral
+1. Acesse **Relatórios → Veículos Monitorados** no menu lateral
 2. Defina o **período** de consulta
 3. Opcionalmente, aplique filtros adicionais
 4. Clique em **Consultar**

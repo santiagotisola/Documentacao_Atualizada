@@ -10,7 +10,7 @@ Agrupamento lógico de Equipamentos para facilitar a gestão e o monitoramento d
 
 ## Como acessar
 
-No **menu lateral**, expanda **Cadastros** e clique em **Grupos de Equipamentos
+No **menu lateral**, expanda **Cadastros** e clique em **Grupos de Equipamentos**.
 
 ![Lista de Grupos de Equipamentos](../img/Grupo de Equipamentos.png)
 
@@ -27,7 +27,7 @@ No **menu lateral**, expanda **Cadastros** e clique em **Grupos de Equipamentos
 
 ![Novo Grupo de Equipamentos](../img/Grupo de Equipamentos - novo.png)
 
-1. Acesse **Cadastros → Grupos de Equipamentos no menu lateral
+1. Acesse **Cadastros → Grupos de Equipamentos** no menu lateral
 2. Clique em **Novo Grupo**
 3. Informe o **Nome** do grupo
 4. Opcionalmente, adicione uma **Descrição**

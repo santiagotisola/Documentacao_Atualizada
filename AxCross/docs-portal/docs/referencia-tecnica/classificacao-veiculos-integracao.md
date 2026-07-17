@@ -14,8 +14,8 @@ description: Referência técnica para integração e importação de dados de c
 
 O AxCross classifica automaticamente os Veículos detectados nos cruzamentos monitorados com base em seu porte (comprimento físico). A classificação permite:
 
-- Segmentar o **fluxo de Veículos por porte no cruzamento
-- Gerar Relatórios estatísticos** por tipo de Veículo
+- Segmentar o **fluxo de Veículos por porte** no cruzamento
+- **Gerar Relatórios estatísticos** por tipo de Veículo
 - Identificar **padrões de comportamento** por categoria (Pequeno, Médio, Grande)
 - Apoiar **integrações** com sistemas de gestão de tráfego
 

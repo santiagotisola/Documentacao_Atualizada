@@ -12,7 +12,8 @@ Lista todos os Relatórios em formato PDF que foram gerados no sistema, permitin
 
 No **menu lateral**, clique em Relatórios e selecione **PDF Gerados**.
 
-![Relatórios Gerados](../img/Relatórios Gerados.png))
+![Relatórios Gerados](../img/Relatórios Gerados.png)
+)
 
 ## Informações exibidas
 
@@ -36,7 +37,7 @@ No **menu lateral**, clique em Relatórios e selecione **PDF Gerados**.
 
 ## Passo a passo — Baixar um Relatório
 
-1. Acesse Relatórios → PDF Gerados** no menu lateral
+1. Acesse **Relatórios → PDF Gerados** no menu lateral
 2. Localize o Relatório na lista (use a pesquisa se necessário)
 3. Clique no ícone de **Download** na coluna Ação
 4. O arquivo será baixado para o seu computador

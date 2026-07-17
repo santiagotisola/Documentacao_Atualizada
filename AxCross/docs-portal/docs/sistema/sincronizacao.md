@@ -22,7 +22,7 @@ No **menu lateral**, clique em Configurações e selecione **Sincronização de 
 
 ## Passo a passo — Executar sincronização
 
-1. Acesse Configurações → Sincronização de dados** no menu lateral
+1. Acesse **Configurações → Sincronização de dados** no menu lateral
 2. Informe a **Data de Início** da sincronização
 3. Clique em **Sincronizar passagens com Elastic Search**
 4. Aguarde a conclusão do processo

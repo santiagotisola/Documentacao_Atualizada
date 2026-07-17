@@ -38,7 +38,7 @@ No **menu lateral**, clique em Relatórios e selecione **Rastreamento de Placas*
 
 ## Passo a passo
 
-1. Acesse Relatórios → Rastreamento de Placas** no menu lateral
+1. Acesse **Relatórios → Rastreamento de Placas** no menu lateral
 2. Informe a **Placa** do Veículo
 3. Defina o **período** de consulta
 4. Clique em **Consultar**

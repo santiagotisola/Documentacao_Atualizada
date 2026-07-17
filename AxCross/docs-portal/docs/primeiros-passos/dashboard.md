@@ -8,6 +8,8 @@ description: Visão geral do Dashboard do AxCross com indicadores operacionais e
 
 O **Dashboard** é a tela inicial do AxCross, exibida automaticamente após a autenticação. Apresenta uma visão consolidada da operação com indicadores em tempo real, gráfico de passagens, mapa georreferenciado e ocorrências recentes.
 
+![Dashboard Principal](<../img/Dashboard.png>)
+
 ## Como acessar
 
 Após o **Login**, o sistema redireciona automaticamente para o Dashboard. Para retornar: clique em **Dashboard** no menu lateral.
@@ -36,6 +38,8 @@ Clique em qualquer indicador do topo para ser direcionado ao cadastro correspond
 
 Exibe o total de passagens registradas no dia atual em **tempo real**, com gráfico de barras por hora do dia e variação percentual em relação ao dia anterior.
 
+![Passagens Hoje](<../img/Passagens hoje.png>)
+
 | Item | Descrição |
 |---|---|
 | **Total do dia** | Passagens acumuladas desde 00h00 até o momento atual |
@@ -55,6 +59,8 @@ Para consultar passagens de dias anteriores com filtros avançados: [📖 Relat�
 
 Exibido ao lado do gráfico de passagens, mostra a localização georreferenciada de todos os equipamentos via **Google Maps**.
 
+![Mapa de Equipamentos](<../img/Mapa de Equipamentos.png>)
+
 | Item | Descrição |
 |---|---|
 | **Marcadores** | Cada ponto no mapa representa um equipamento cadastrado com coordenadas geográficas |
@@ -70,6 +76,8 @@ Para acompanhar o mapa com todas as câmeras ativas em tempo real: [📖 Monitor
 ## Ocorrências por Tipo
 
 Gráfico de barras que exibe a distribuição das ocorrências por categoria, com filtros de período.
+
+![Ocorrências por Tipo](<../img/Dashboard - ocorrência do tipo.png>)
 
 | Item | Descrição |
 |---|---|
@@ -106,6 +114,8 @@ Alto volume de **Sem Classificação** indica que o classificador dos equipament
 ## Ocorrências Recentes
 
 Painel com as últimas ocorrências registradas em **tempo real**, com atualização automática.
+
+![Ocorrências Recentes](<../img/Dashboard - ocorrencias recentes.png>)
 
 | Coluna | Descrição |
 |---|---|

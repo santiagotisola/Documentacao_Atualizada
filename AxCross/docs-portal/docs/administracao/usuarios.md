@@ -27,8 +27,8 @@ No **menu lateral**, expanda **Administração** e clique em Usuários
 
 ## Passo a passo — Criar novo Usuário
 
-1. Acesse **Administração → Usuários no menu lateral
-2. Clique em **Novo Usuário
+1. Acesse **Administração → Usuários** no menu lateral
+2. Clique em **Novo Usuário**
 3. Preencha **Nome**, Login e **E-mail**
 4. Defina a **Senha** de acesso
 5. Selecione o **Perfil de Acesso**

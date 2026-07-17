@@ -12,7 +12,8 @@ Consolida todos os alertas e ocorrências registrados no sistema, com detalhes d
 
 No **menu lateral**, clique em Relatórios e selecione **Ocorrências e Alertas**.
 
-![Relatório de Ocorrências](../img/Relatório de Ocorrências.png))
+![Relatório de Ocorrências](../img/Relatório de Ocorrências.png)
+)
 
 ## Filtros
 
@@ -40,7 +41,7 @@ No **menu lateral**, clique em Relatórios e selecione **Ocorrências e Alertas*
 
 ## Passo a passo
 
-1. Acesse Relatórios → Ocorrências e Alertas** no menu lateral
+1. Acesse **Relatórios → Ocorrências e Alertas** no menu lateral
 2. Defina o **período** de consulta
 3. Opcionalmente, aplique filtros por tipo, status ou responsável
 4. Clique em **Consultar**

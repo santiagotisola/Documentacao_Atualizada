@@ -18,8 +18,8 @@ No **menu lateral**, clique em **Alertas** (disponível também no Use Dashboard
 
 | Tipo | Descrição |
 |------|-----------|
-| Veículo Monitorado** | Placa cadastrada como monitorada foi detectada |
-| Equipamento Offline** | Equipamento sem comunicação além do tempo limite |
+| **Veículo Monitorado** | Placa cadastrada como monitorada foi detectada |
+| **Equipamento Offline** | Equipamento sem comunicação além do tempo limite |
 | **Falha de Imagem** | Equipamento detectou passagem mas sem imagem |
 | **Ocorrência de Trânsito** | Evento registrado manualmente pela operação |
 
@@ -54,7 +54,8 @@ Configure os tipos de ocorrência disponíveis para categorizar os alertas manua
 
 Para exportar e consultar ocorrências registradas:
 
-![Relatório de Ocorrências](../img/Relatório de Ocorrências.png))
+![Relatório de Ocorrências](../img/Relatório de Ocorrências.png)
+)
 
 :::tip Dica
 Acesse o Relatório de ocorrências para consolidar as tratativas realizadas e gerar evidências de fiscalização.

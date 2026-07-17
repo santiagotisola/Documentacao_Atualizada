@@ -37,7 +37,7 @@ No **menu lateral**, clique em Relatórios e selecione **Mapeamento de Rotas**.
 
 ## Passo a passo
 
-1. Acesse Relatórios → Mapeamento de Rotas** no menu lateral
+1. Acesse **Relatórios → Mapeamento de Rotas** no menu lateral
 2. Informe a **Placa** do Veículo
 3. Defina o **período** de consulta
 4. Clique em **Consultar**

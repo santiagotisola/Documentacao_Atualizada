@@ -10,7 +10,7 @@ Define as categorias de ocorrência disponíveis para classificação de alertas
 
 ## Como acessar
 
-No **menu lateral**, clique em Veículos Monitorados** e selecione **Tipos de Ocorrências**.
+No **menu lateral**, clique em **Veículos Monitorados** e selecione **Tipos de Ocorrências**.
 
 ![Tipos de Ocorrências](../img/Tipo de Ocorrência.png)
 
@@ -31,7 +31,7 @@ No **menu lateral**, clique em Veículos Monitorados** e selecione **Tipos de Oc
 
 ## Passo a passo — Criar novo tipo de ocorrência
 
-1. Acesse Veículos Monitorados → Tipos de Ocorrências** no menu lateral
+1. Acesse **Veículos Monitorados → Tipos de Ocorrências** no menu lateral
 2. Clique em **Novo Tipo**
 3. Informe o **Nome** do tipo
 4. Opcionalmente, preencha a **Descrição**
@@ -42,11 +42,11 @@ No **menu lateral**, clique em Veículos Monitorados** e selecione **Tipos de Oc
 Os tipos de ocorrência são utilizados ao:
 
 - **Criar alertas manuais** — na tela de Alertas, selecione o tipo para categorizar o evento
-- **Gerar Relatórios — no Relatório de Ocorrências, filtre por tipo para Análise específica
+- **Gerar Relatórios** — no Relatório de Ocorrências, filtre por tipo para análise específica
 - **Configurar regras automáticas** — o tipo MANCHA01 é disparado automaticamente pelas Configurações do sistema
 
 :::info Configuração do MANCHA01
-O tempo máximo na mancha é configurado em Configurações do Sistema → MDF-e → Horas máximas na mancha**. O padrão é 4 horas.
+O tempo máximo na mancha é configurado em **Configurações do Sistema → MDF-e → Horas máximas na mancha**. O padrão é 4 horas.
 :::
 
 :::caution Tipos em uso

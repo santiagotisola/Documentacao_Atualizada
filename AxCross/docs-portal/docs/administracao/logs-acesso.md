@@ -59,5 +59,5 @@ Os logs de acesso não podem ser editados ou excluídos por nenhum Usuário gara
 :::
 
 :::caution Retenção
-Verifique a política de retenção de logs configurada em Configurações do Sistema** para saber o período disponível para consulta.
+Verifique a política de retenção de logs configurada em **Configurações do Sistema** para saber o período disponível para consulta.
 :::

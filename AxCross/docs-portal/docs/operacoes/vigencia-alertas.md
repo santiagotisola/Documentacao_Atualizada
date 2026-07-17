@@ -35,7 +35,7 @@ Disponível a partir da versão com as melhorias **AxCross — Vigência dos Ale
 
 O prazo de vigência é definido diretamente no **Tipo de Ocorrência**. Todos os Veículos vinculados a esse tipo herdam automaticamente o prazo.
 
-Para acessar: Veículos Monitorados → Tipos de Ocorrências**.
+Para acessar: **Veículos Monitorados → Tipos de Ocorrências**.
 
 ![Tipo de Ocorrência](../img/Tipo de Ocorrência.png)
 
@@ -51,7 +51,7 @@ Para acessar: Veículos Monitorados → Tipos de Ocorrências**.
 
 ### Como configurar o prazo
 
-1. No menu lateral, acesse Veículos Monitorados → Tipos de Ocorrências**
+1. No menu lateral, acesse **Veículos Monitorados → Tipos de Ocorrências**
 2. Clique no ícone de edição ✏️ do tipo desejado (ou clique em **+ NOVO** para criar)
 3. No campo **Prazo de Expiração (dias)**, informe a quantidade de dias (ex.: `30`)
 4. Clique em **Salvar**
@@ -99,7 +99,7 @@ A lista de Veículos Monitorados exibe colunas dedicadas ao controle de vigênci
 Quando o **Prazo de Expiração** de um Tipo de Ocorrência é alterado, o sistema atualiza automaticamente **todos os Veículos vinculados** àquele tipo — sem necessidade de editar cada Veículo individualmente.
 
 :::warning Atenção
-A atualização em bloco é **imediata e afeta todos os Veículos do tipo. Durante o salvamento, uma mensagem de carregamento confirma que o processo está em andamento.
+A atualização em bloco é **imediata** e afeta todos os Veículos do tipo. Durante o salvamento, uma mensagem de carregamento confirma que o processo está em andamento.
 :::
 
 ### Cenários de atualização em bloco
@@ -113,7 +113,7 @@ A atualização em bloco é **imediata e afeta todos os Veículos do tipo. Duran
 
 ### Como realizar a atualização em bloco
 
-1. Acesse Veículos Monitorados → Tipos de Ocorrências**
+1. Acesse **Veículos Monitorados → Tipos de Ocorrências**
 2. Edite o tipo desejado
 3. Altere o campo **Prazo de Expiração (dias)**
 4. Clique em **Salvar**

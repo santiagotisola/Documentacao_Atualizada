@@ -31,8 +31,8 @@ No **menu lateral**, expanda **Cadastros** e clique em Equipamentos
 
 ![Novo Equipamento](../img/Equipamentos.- novo.png)
 
-1. Acesse **Cadastros → Equipamentos no menu lateral
-2. Clique em **Novo Equipamento
+1. Acesse **Cadastros → Equipamentos** no menu lateral
+2. Clique em **Novo Equipamento**
 3. Preencha **Nome**, **Tipo**, **Modelo** e **Fabricante**
 4. Informe o **Número de Série**
 5. Selecione o **Local** (cruzamento) de instalação
