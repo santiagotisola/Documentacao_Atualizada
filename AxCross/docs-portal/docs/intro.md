@@ -1,4 +1,4 @@
----
+﻿---
 sidebar_position: 1
 slug: /
 title: Visão Geral
@@ -6,37 +6,48 @@ title: Visão Geral
 
 # AxCross — Manual do Usuário
 
-Bem-vindo ao manual do Usuário do **AxCross**, o sistema de gestão de cruzamentos da Axion Tecnologia.
+Bem-vindo ao manual do usuário do **AxCross**, plataforma de monitoramento e gestão de cruzamentos viários da **Axion Tecnologia**.
 
 ## O que é o AxCross?
 
-O AxCross é uma plataforma destinada ao **monitoramento e gestão de cruzamentos viários**, integrando Equipamentos de fiscalização, controle de operações e geração de Relatórios O sistema abrange as seguintes etapas:
+O AxCross integra câmeras, sensores e equipamentos de fiscalização instalados em cruzamentos e vias para capturar e processar passagens de veículos em tempo real. O sistema permite:
 
-- **Monitoramento online** — acompanhamento em tempo real dos Equipamentos e passagens
-- **Cadastro de locais** — registro dos cruzamentos e pontos monitorados
-- **Gestão de Equipamentos — controle de câmeras, detectores e sensores
-- **Cadastro de faixas** — Configuração das faixas monitoradas em cada local
-- **Gestão de operações** — controle de operações de fiscalização
-- **Gestão de Usuários — controle de acesso e permissões por perfil
-- **Relatórios — geração de Relatórios de passagens e ocorrências
+- **Identificar e rastrear** placas por OCR automático em todas as faixas monitoradas
+- **Monitorar veículos** cadastrados em listas de interesse com alertas automáticos
+- **Gerar relatórios** operacionais para fiscalização, auditoria e inteligência policial
+- **Visualizar** a operação em tempo real por mapa, mural de câmeras e dashboard
+- **Controlar o acesso** de operadores com perfis e permissões individualizados
+
+## Módulos do sistema
+
+| Módulo | Função principal |
+|---|---|
+| **Dashboard** | Indicadores operacionais em tempo real — passagens, alertas e ocorrências |
+| **Veículos Monitorados** | Cadastro de placas de interesse com alertas automáticos de detecção |
+| **Equipamentos** | Gestão de câmeras, sensores, grupos, áreas, locais, faixas e importação |
+| **Monitoramento** | Acompanhamento em tempo real — status de câmeras e Mural de Câmeras |
+| **Relatórios** | 10 relatórios operacionais com exportação em PDF, Excel e CSV |
+| **Configurações** | Parâmetros do sistema, usuários, perfis, permissões, logs e sincronização |
 
 ## Como utilizar este manual
 
-Utilize o **menu lateral** para navegar entre os módulos do sistema. Cada seção contém:
+Cada página do manual segue a mesma estrutura:
 
-- **Descrição da funcionalidade** — o que a tela realiza e quando deve ser utilizada
-- **Campos** — tabela descritiva de cada campo do formulário
+- **Descrição** — o que a tela faz e quando deve ser usada
+- **Como acessar** — caminho exato no menu do sistema
+- **Campos** — tabela com cada campo do formulário, se é obrigatório e o que representa
 - **Passo a passo** — sequência de ações para executar a operação
-- **Alertas e observações** — informações importantes sobre restrições ou cuidados necessários
+- **Dicas e avisos** — alertas importantes, boas práticas e atalhos operacionais
 
 ## Requisitos de acesso
 
-O acesso ao AxCross requer:
+| Requisito | Detalhe |
+|---|---|
+| **Credenciais** | Usuário e senha fornecidos pelo administrador do sistema |
+| **Navegador** | Google Chrome, Mozilla Firefox ou Microsoft Edge (versão atualizada) |
+| **Rede** | Conexão com a rede onde o AxCross está hospedado |
+| **Perfil** | O acesso a cada módulo depende das permissões do perfil do usuário |
 
-1. Credenciais de Usuário (nome de Usuário e senha) fornecidas pelo administrador do sistema
-2. Navegador atualizado (Google Chrome, Mozilla Firefox ou Microsoft Edge)
-3. Conexão com a rede onde o sistema está hospedado
-
-:::info Suporte
-Em caso de dúvidas ou problemas, entre em contato com o administrador do sistema da sua organização ou com o suporte da Axion Tecnologia.
+:::info Suporte técnico
+Em caso de dúvidas ou problemas, entre em contato com o administrador do sistema da sua organização ou com o suporte da **Axion Tecnologia**.
 :::
