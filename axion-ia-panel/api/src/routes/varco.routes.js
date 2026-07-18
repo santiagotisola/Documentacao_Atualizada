@@ -9,7 +9,7 @@
  */
 
 import express from "express";
-import { validarDispositivo, validarLote, analisarIncidente, heartbeatGeral, listarFrota, auditoriaStatus, auditoriaAprimorada, configPadrao, recoletaVarco, planoCorrecao, gerarPlano, aplicarCorrecao, itscamLer, itscamAplicar, itscamAplicarLote, relatorioErros, relatorioDownload } from "../varco-controller.js";
+import { validarDispositivo, validarLote, analisarIncidente, heartbeatGeral, listarFrota, auditoriaStatus, auditoriaAprimorada, configPadrao, recoletaVarco, planoCorrecao, gerarPlano, aplicarCorrecao, itscamLer, itscamAuditoriaCompleta, itscamAplicar, itscamAplicarLote, relatorioErros, relatorioDownload } from "../varco-controller.js";
 import { iniciarConexao, statusConexao, listarSessoes, detalhesSessao, encerrarSessao, enviarManual, enviarComBotoes, desconectar, restart } from "../whatsapp-controller.js";
 import { startValidation, discoverUI, discoverAPI, getReport, listValidations } from "../validation-manager-controller.js";
 import { startVisualValidation, getVisualValidationStatus, getVisualValidationReport, getScreenshot, listVisualValidations } from "../visual-validation-controller.js";
@@ -40,6 +40,7 @@ router.post("/varco/plano-correcao/aplicar", aplicarCorrecao);
 // ITSCAM — Proxy REST direto aos equipamentos via tunnel
 // ═══════════════════════════════════════════════════════════════════
 router.post("/varco/itscam/ler", itscamLer);
+router.post("/varco/itscam/auditoria-completa", itscamAuditoriaCompleta);
 router.post("/varco/itscam/aplicar", itscamAplicar);
 router.post("/varco/itscam/aplicar-lote", itscamAplicarLote);
 

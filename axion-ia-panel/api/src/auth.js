@@ -43,6 +43,7 @@ const ROTAS_PUBLICAS = [
   { method: "POST", path: "/varco/plano-correcao/gerar" },
   { method: "POST", path: "/varco/plano-correcao/aplicar" },
   { method: "POST", path: "/varco/itscam/ler" },
+  { method: "POST", path: "/varco/itscam/auditoria-completa" },
   { method: "POST", path: "/varco/itscam/aplicar" },
   { method: "POST", path: "/varco/itscam/aplicar-lote" },
   { method: "GET",  path: "/varco/relatorio" },

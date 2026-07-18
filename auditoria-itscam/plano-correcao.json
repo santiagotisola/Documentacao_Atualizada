@@ -1,377 +1,9 @@
 {
-  "geradoEm": "2026-07-07T19:03:49.238Z",
-  "modo": "plano",
+  "geradoEm": "2026-07-17T02:10:27.324Z",
+  "modo": "aplicar",
   "totalDispositivos": 64,
   "totalCasos": 21,
   "casos": [
-    {
-      "id": 1,
-      "titulo": "Vídeo Qualidade = 10 (imagens ilegíveis)",
-      "severidade": "critico",
-      "parametro": "Video.quality",
-      "descricao": "O parâmetro 'quality' controla a compressão JPEG da imagem capturada (escala de 1 a 100). Valor 10 significa compressão EXTREMA — a imagem vira um borrão pixelado.",
-      "problema": "Com quality=10, os caracteres da placa ficam ilegíveis para o motor OCR Jidosha. A taxa de leitura cai drasticamente e as evidências fotográficas enviadas ao AxHub são inutilizáveis para autuação.",
-      "correcao": "Acessar: Interface Web da câmera › menu 'Vídeo' › 'Streams' › selecionar Stream 1 › campo 'Qualidade' › alterar de 10 para 85. Via API: PUT /api/video/streams/0 com body { quality: 85 }",
-      "menu": "Interface Web › Vídeo › Streams › Stream 1 › campo 'Qualidade'",
-      "endpoint": "/api/video/streams/0",
-      "afetados": [],
-      "conformes": [
-        {
-          "nome": "GOEC6O007 - Faixa 2",
-          "faixa": 2
-        },
-        {
-          "nome": "GOEC6O036 - Faixa 1",
-          "faixa": 1
-        }
-      ],
-      "totalAfetados": 0
-    },
-    {
-      "id": 2,
-      "titulo": "Vídeo Framerate = 1-5 fps (OCR quase inoperante)",
-      "severidade": "critico",
-      "parametro": "Video.framerate",
-      "descricao": "O 'framerate' define quantos quadros por segundo a câmera gera para o motor de OCR. Com 1-5 fps, a câmera captura pouquíssimos frames — insuficiente para veículos em movimento.",
-      "problema": "Um veículo a 60km/h percorre ~17 metros por segundo. Com apenas 1 fps, existe no máximo 1 frame com o veículo na zona de captura. Se esse frame estiver borrado ou mal posicionado, a placa é perdida. Com 12 fps há 12 oportunidades de leitura.",
-      "correcao": "Acessar: Interface Web da câmera › menu 'Vídeo' › 'Streams' › selecionar Stream 1 › campo 'Taxa de frames (fps)' › alterar para 12. Via API: PUT /api/video/streams/0 com body { framerate: 12 }",
-      "menu": "Interface Web › Vídeo › Streams › Stream 1 › campo 'Taxa de frames'",
-      "endpoint": "/api/video/streams/0",
-      "afetados": [],
-      "conformes": [
-        {
-          "nome": "GOEC6O043 - Faixa 1",
-          "faixa": 1
-        },
-        {
-          "nome": "GOEC6O005 - Faixa 1",
-          "faixa": 1
-        }
-      ],
-      "totalAfetados": 0
-    },
-    {
-      "id": 3,
-      "titulo": "OCR Vehicle Type = 1 (só carros, perde motos/caminhões)",
-      "severidade": "critico",
-      "parametro": "OCR.vehicleType",
-      "descricao": "O campo 'vehicleType' filtra quais tipos de veículo o OCR tenta ler. Valor 1 = somente carros de passeio. Valor 3 = todos (carro + moto + caminhão + ônibus).",
-      "problema": "Com vehicleType=1, qualquer moto, caminhão ou ônibus que passar é IGNORADO pelo OCR — a placa nem é tentada. Isso causa perda total de leitura para esses tipos, gerando subnotificação grave.",
-      "correcao": "Acessar: Interface Web da câmera › menu 'Equipamento' › 'Reconhecimento' › aba 'Jidosha' › campo 'Tipo de Veículo' › selecionar 'Todos (3)'. Via API: PUT /api/equipment/ocr com body { ocr: { vehicleType: 3 } }",
-      "menu": "Interface Web › Equipamento › Reconhecimento › aba 'Jidosha' › campo 'Tipo de Veículo'",
-      "endpoint": "/api/equipment/ocr",
-      "afetados": [],
-      "conformes": [
-        {
-          "nome": "GOEC6O040 - Faixa 1",
-          "faixa": 1
-        },
-        {
-          "nome": "GOEC6O010 - Faixa 1",
-          "faixa": 1
-        }
-      ],
-      "totalAfetados": 0
-    },
-    {
-      "id": 4,
-      "titulo": "Transição Lower Level = 30 (P&B durante o dia)",
-      "severidade": "critico",
-      "parametro": "Diurno.lower.level",
-      "descricao": "O 'Lower Level' (Nível Inferior) é o sensor que decide quando a câmera ENTRA no modo Noturno (preto e branco / infravermelho). Funciona assim: a câmera mede a luminosidade ambiente de 0 a 100. Quando a luz cai ABAIXO do 'Lower Level', ela troca para modo Noturno.",
-      "problema": "Com lower.level=30, a câmera acha que está 'escuro' quando a luminosidade cai para 30 (uma nuvem passando ou sombra já é suficiente). Resultado: imagens ficam em preto e branco em pleno dia, prejudicando o OCR e a qualidade de evidências. Com lower.level=10, ela só troca para Noturno quando realmente está escurecendo (nível 10 é quase breu).",
-      "correcao": "Na interface web: menu lateral 'Imagem' → 'Transições' → na Agenda de Transições, clique no lápis (✏️) da linha 'Diurno (inferior)' → altere o campo 'Nível' de 30 para 10 → Salvar. O 'Nível < 10' na barra azul confirma que está correto. Via API: PUT /api/image/profiles/{id} com body { transitions: { lower: { level: 10 } } }",
-      "menu": "Interface Web › Imagem › Transições › Agenda de Transições › lápis (✏️) em 'Diurno (inferior)' › campo 'Nível' → 10",
-      "endpoint": "/api/image/profiles/{id}",
-      "afetados": [],
-      "conformes": [
-        {
-          "nome": "GOEC6O005 - Faixa 1",
-          "faixa": 1
-        },
-        {
-          "nome": "GOEC6O004 - Faixa 2",
-          "faixa": 2
-        }
-      ],
-      "totalAfetados": 0
-    },
-    {
-      "id": 5,
-      "titulo": "Transição Upper Level ≠ 35 (transição dia/noite errada)",
-      "severidade": "alto",
-      "parametro": "Diurno.upper.level / Noturno.upper.level",
-      "descricao": "O 'Upper Level' (Nível Superior) é o sensor que decide quando a câmera SAI do modo Noturno e VOLTA para o Diurno (colorido). Funciona ao contrário do Lower: quando a luminosidade SOBE ACIMA do 'Upper Level', a câmera troca para Diurno. Ou seja: Lower Level = 'quando escurece, vá para P&B', Upper Level = 'quando clarear, volte para colorido'.",
-      "problema": "Com upper.level=40 → demora demais para voltar ao colorido (fica P&B às 7h quando já está claro). Com upper.level=30 → volta ao colorido cedo demais (5h30 ainda sem luz suficiente, imagem escura). O padrão 35 é o equilíbrio testado para a latitude de Goiânia-GO.",
-      "correcao": "Na interface web: menu lateral 'Imagem' → 'Transições' → na Agenda de Transições, repare nas barras azuis que mostram 'para Diurno (35)' e 'para Noturno (35)'. Para corrigir: clique no lápis (✏️) nas linhas 'Diurno (superior)' e 'Noturno (superior)' → altere o campo 'Nível' para 35. Via API: PUT /api/image/profiles/{id} com body { transitions: { upper: { level: 35 } } }",
-      "menu": "Interface Web › Imagem › Transições › Agenda de Transições › lápis (✏️) em linhas '(superior)' › campo 'Nível' → 35",
-      "endpoint": "/api/image/profiles/{id}",
-      "afetados": [],
-      "conformes": [
-        {
-          "nome": "GOEC6O054 - Faixa 1",
-          "faixa": 1
-        },
-        {
-          "nome": "GOEC6O041 - Faixa 2",
-          "faixa": 2
-        }
-      ],
-      "totalAfetados": 0
-    },
-    {
-      "id": 6,
-      "titulo": "Transições startTime/endTime ≠ 00:00:00 (janela restrita)",
-      "severidade": "alto",
-      "parametro": "Transitions.startTime/endTime",
-      "descricao": "A câmera usa sensores de luz para alternar entre modo Diurno (colorido) e Noturno (infravermelho). Os campos startTime/endTime definem EM QUAL HORÁRIO ela tem permissão para fazer essa troca. Quando está '00:00:00 - 00:00:00' significa 'monitorar 24h' — pode trocar a qualquer momento. Quando está '06:00:00 - 18:00:00' significa que a troca SÓ pode ocorrer nesse intervalo.",
-      "problema": "Se a câmera está com janela restrita (ex: startTime=06:00, endTime=18:00), e anoitecer depois das 18h, ela NÃO vai trocar para modo Noturno — fica presa no modo Diurno e as imagens ficam completamente escuras/ilegíveis. O mesmo vale se amanhecer antes das 06h. O correto é 00:00:00 em todos os campos = transição liberada 24h, baseada apenas na luminosidade real.",
-      "correcao": "Na interface web da câmera: menu lateral 'Imagem' › clicar em 'Transições' › na 'Agenda de Transições' clicar no ícone de lápis (✏️) ao lado de cada uma das 4 linhas (Diurno superior, Diurno inferior, Noturno superior, Noturno inferior) › alterar os campos de horário para 00:00:00 - 00:00:00 › clicar Salvar. Via API: PUT /api/image/profiles/{id} com body { transitions: { lower: { startTime: '00:00:00', endTime: '00:00:00' }, upper: { startTime: '00:00:00', endTime: '00:00:00' } } }",
-      "menu": "Interface Web › Imagem › Transições › Agenda de Transições › ícone lápis (✏️) em cada linha › campos de horário → 00:00:00",
-      "endpoint": "/api/image/profiles/{id}",
-      "afetados": [],
-      "conformes": [
-        {
-          "nome": "GOEC6O040 - Faixa 2",
-          "faixa": 2
-        },
-        {
-          "nome": "GOEC6O054 - Faixa 1",
-          "faixa": 1
-        }
-      ],
-      "totalAfetados": 0
-    },
-    {
-      "id": 7,
-      "titulo": "OCR Processing Mode = triggered (depende do laço)",
-      "severidade": "alto",
-      "parametro": "OCR.processingMode",
-      "descricao": "O 'processingMode' define QUANDO o OCR tenta ler placas. Valor 2 (triggered) = só processa quando recebe sinal do laço indutivo no asfalto. Valor 3 (freeflow) = processa todos os frames continuamente.",
-      "problema": "No modo triggered, se o laço indutivo falhar (problema físico, curto, delay), o OCR simplesmente PARA — não lê nenhuma placa até o laço voltar. No freeflow, o OCR funciona independente do laço, muito mais robusto.",
-      "correcao": "Acessar: Interface Web da câmera › menu 'Equipamento' › 'Reconhecimento' › aba 'Jidosha' › campo 'Modo de processamento' › selecionar 'Freeflow (3)'. Via API: PUT /api/equipment/ocr com body { ocr: { processingMode: 3 } }",
-      "menu": "Interface Web › Equipamento › Reconhecimento › aba 'Jidosha' › campo 'Modo de processamento'",
-      "endpoint": "/api/equipment/ocr",
-      "afetados": [],
-      "conformes": [
-        {
-          "nome": "GOEC6O043 - Faixa 1",
-          "faixa": 1
-        },
-        {
-          "nome": "GOEC6O057 - Faixa 1",
-          "faixa": 1
-        }
-      ],
-      "totalAfetados": 0
-    },
-    {
-      "id": 8,
-      "titulo": "OCR Processing Threads = 1-2 (hit rate reduzido)",
-      "severidade": "alto",
-      "parametro": "OCR.processingThreads",
-      "descricao": "O 'processingThreads' define quantas threads do processador são dedicadas exclusivamente ao motor OCR Jidosha. Mais threads = mais frames processados em paralelo.",
-      "problema": "Com 1-2 threads, em horários de pico (7h-9h, 17h-19h) o OCR não dá conta de processar todos os frames a tempo — veículos passam sem ter a placa lida. Com 4 threads, a câmera tem capacidade de processar até 4 frames simultaneamente.",
-      "correcao": "Acessar: Interface Web da câmera › menu 'Equipamento' › 'Reconhecimento' › aba 'Jidosha' › campo 'Threads de processamento' › alterar para 4. Via API: PUT /api/equipment/ocr com body { ocr: { processingThreads: 4 } }",
-      "menu": "Interface Web › Equipamento › Reconhecimento › aba 'Jidosha' › campo 'Threads de processamento'",
-      "endpoint": "/api/equipment/ocr",
-      "afetados": [],
-      "conformes": [
-        {
-          "nome": "GOEC6O010 - Faixa 2",
-          "faixa": 2
-        },
-        {
-          "nome": "GOEC6O043 - Faixa 1",
-          "faixa": 1
-        }
-      ],
-      "totalAfetados": 0
-    },
-    {
-      "id": 9,
-      "titulo": "OCR Max Plates = 1 (perde 2º veículo)",
-      "severidade": "medio",
-      "parametro": "OCR.maxPlates",
-      "descricao": "O 'maxPlates' define quantas placas diferentes o OCR tenta detectar em um mesmo frame. Valor 1 = se aparecerem 2 veículos juntos, só 1 é lido.",
-      "problema": "Em situações de ultrapassagem, fila ou mudança de faixa, 2 veículos podem estar no campo de visão ao mesmo tempo. Com maxPlates=1, o segundo veículo é completamente ignorado — perda de leitura.",
-      "correcao": "Acessar: Interface Web da câmera › menu 'Equipamento' › 'Reconhecimento' › aba 'Jidosha' › campo 'Máx. placas por frame' › alterar para 2. Via API: PUT /api/equipment/ocr com body { ocr: { maxPlates: 2 } }",
-      "menu": "Interface Web › Equipamento › Reconhecimento › aba 'Jidosha' › campo 'Máx. placas por frame'",
-      "endpoint": "/api/equipment/ocr",
-      "afetados": [],
-      "conformes": [
-        {
-          "nome": "GOEC6O058 - Faixa 2",
-          "faixa": 2
-        },
-        {
-          "nome": "GOEC6O010 - Faixa 1",
-          "faixa": 1
-        }
-      ],
-      "totalAfetados": 0
-    },
-    {
-      "id": 10,
-      "titulo": "OCR Processing Queue = 2 (fila curta)",
-      "severidade": "medio",
-      "parametro": "OCR.processingQueue",
-      "descricao": "O 'processingQueue' é o buffer de frames esperando para ser processados pelo OCR. Funciona como uma fila: se o OCR está ocupado, os frames ficam na fila até serem processados.",
-      "problema": "Com fila=2, se o OCR estiver ocupado processando, apenas 2 frames ficam em espera — os demais são descartados. Com fila=4, há mais margem para picos de tráfego sem perder frames.",
-      "correcao": "Acessar: Interface Web da câmera › menu 'Equipamento' › 'Reconhecimento' › aba 'Jidosha' › campo 'Fila de processamento' › alterar para 4. Via API: PUT /api/equipment/ocr com body { ocr: { processingQueue: 4 } }",
-      "menu": "Interface Web › Equipamento › Reconhecimento › aba 'Jidosha' › campo 'Fila de processamento'",
-      "endpoint": "/api/equipment/ocr",
-      "afetados": [],
-      "conformes": [
-        {
-          "nome": "GOEC6O020 - Faixa 1",
-          "faixa": 1
-        },
-        {
-          "nome": "GOEC6O045 - Faixa 2",
-          "faixa": 2
-        }
-      ],
-      "totalAfetados": 0
-    },
-    {
-      "id": 11,
-      "titulo": "Classificador Queue = 4 (desperdício de memória)",
-      "severidade": "baixo",
-      "parametro": "Classificador.processingQueue",
-      "descricao": "O classificador identifica o TIPO do veículo (carro/moto/caminhão). Sua 'processingQueue' define quantos veículos ficam em fila esperando classificação. Cada slot consome memória RAM.",
-      "problema": "Estes equipamentos monitoram faixa única. Com fila=4, a câmera reserva memória para 4 classificações simultâneas que nunca acontecem (1 veículo por vez na faixa). Essa RAM desperdiçada pode atrasar o OCR.",
-      "correcao": "Acessar: Interface Web da câmera › menu 'Equipamento' › 'Reconhecimento' › aba 'Classifier' › campo 'Fila de processamento' › alterar para 1. Via API: PUT /api/equipment/classifier com body { classifier: { processingQueue: 1 } }",
-      "menu": "Interface Web › Equipamento › Reconhecimento › aba 'Classifier' › campo 'Fila de processamento'",
-      "endpoint": "/api/equipment/classifier",
-      "afetados": [],
-      "conformes": [
-        {
-          "nome": "GOEC6O002 - Faixa 2",
-          "faixa": 2
-        },
-        {
-          "nome": "GOEC6O003 - Faixa 2",
-          "faixa": 2
-        }
-      ],
-      "totalAfetados": 0
-    },
-    {
-      "id": 12,
-      "titulo": "Classificador Threads = 2-4 (desperdício de CPU)",
-      "severidade": "baixo",
-      "parametro": "Classificador.processingThreads",
-      "descricao": "O 'processingThreads' do classificador define quantos núcleos de CPU são dedicados para classificar veículos. Cada thread extra é CPU que NÃO está disponível para o OCR.",
-      "problema": "Em faixa única, passa 1 veículo por vez — 1 thread classifica perfeitamente. Com 2-4 threads no classificador, a CPU fica sobrecarregada desnecessariamente, tirando recursos do OCR (que é mais importante).",
-      "correcao": "Acessar: Interface Web da câmera › menu 'Equipamento' › 'Reconhecimento' › aba 'Classifier' › campo 'Threads de processamento' › alterar para 1. Via API: PUT /api/equipment/classifier com body { classifier: { processingThreads: 1 } }",
-      "menu": "Interface Web › Equipamento › Reconhecimento › aba 'Classifier' › campo 'Threads de processamento'",
-      "endpoint": "/api/equipment/classifier",
-      "afetados": [],
-      "conformes": [
-        {
-          "nome": "GOEC6O002 - Faixa 2",
-          "faixa": 2
-        },
-        {
-          "nome": "GOEC6O043 - Faixa 2",
-          "faixa": 2
-        }
-      ],
-      "totalAfetados": 0
-    },
-    {
-      "id": 13,
-      "titulo": "NTP Server divergente",
-      "severidade": "baixo",
-      "parametro": "NTP.server",
-      "descricao": "O servidor NTP sincroniza o relógio da câmera com a hora real. Se o relógio estiver errado, timestamps das infrações ficam incorretos e podem ser contestados judicialmente.",
-      "problema": "Alguns equipamentos usam '200.160.0.8' (NTP.br) ao invés de 'time.google.com'. Ambos funcionam, mas a padronização em time.google.com (CDN global, mais confiável) facilita diagnóstico quando há problema de horário.",
-      "correcao": "Acessar: Interface Web da câmera › menu 'Sistema' › 'Geral' › 'Data e Hora' › seção NTP › campo 'Servidor' › alterar para time.google.com. Via API: PUT /api/equipment/dateAndTime com body { ntp: { server: 'time.google.com' } }",
-      "menu": "Interface Web › Sistema › Geral › Data e Hora › seção NTP › campo 'Servidor'",
-      "endpoint": "/api/equipment/dateAndTime",
-      "afetados": [],
-      "conformes": [
-        {
-          "nome": "GOEC6O053 - Faixa 1",
-          "faixa": 1
-        },
-        {
-          "nome": "GOEC6O010 - Faixa 2",
-          "faixa": 2
-        }
-      ],
-      "totalAfetados": 0
-    },
-    {
-      "id": 14,
-      "titulo": "SNMP habilitado (superfície de ataque)",
-      "severidade": "baixo",
-      "parametro": "SNMP.enabled",
-      "descricao": "O SNMP é um protocolo de monitoramento de rede (usado para verificar status de equipamentos remotos). Nesta frota, NÃO é utilizado — toda comunicação é via VARCO/REST.",
-      "problema": "SNMP ativo sem necessidade consome CPU/memória e expõe a câmera a consultas não autorizadas (versões SNMPv1/v2c não têm criptografia). É uma porta de entrada desnecessária.",
-      "correcao": "Via API: POST /api/system/monitoring/snmp com body { enabled: false } (o ITScam usa POST para escrita neste endpoint).",
-      "menu": "Interface Web › Sistema › Monitoramento › seção 'SNMP' › checkbox 'Habilitado'",
-      "endpoint": "/api/system/monitoring/snmp",
-      "afetados": [],
-      "conformes": [
-        {
-          "nome": "GOEC6O049 - Faixa 1",
-          "faixa": 1
-        },
-        {
-          "nome": "GOEC6O021 - Faixa 1",
-          "faixa": 1
-        }
-      ],
-      "totalAfetados": 0
-    },
-    {
-      "id": 15,
-      "titulo": "Vídeo Framerate < 15 fps (otimização de captura)",
-      "severidade": "medio",
-      "parametro": "Video.framerate",
-      "descricao": "O framerate padrão foi atualizado de 12 para 15 fps para melhorar a janela de captura de veículos em velocidades acima de 80 km/h.",
-      "problema": "A 100 km/h o veículo percorre ~28 m/s. Com 12 fps há ≈1-2 frames na zona de captura. Com 15 fps → 2-3 frames, aumentando a probabilidade de ter ao menos 1 frame nítido com a placa legível.",
-      "correcao": "Via API: PUT /api/video/streams/0 com body { framerate: 15 }. Menu: Interface Web › Vídeo › Streams › Stream 1 › campo 'Taxa de frames'.",
-      "menu": "Interface Web › Vídeo › Streams › Stream 1 › campo 'Taxa de frames'",
-      "endpoint": "/api/video/streams/0",
-      "afetados": [],
-      "conformes": [
-        {
-          "nome": "GOEC6O050 - Faixa 2",
-          "faixa": 2
-        },
-        {
-          "nome": "GOEC6O053 - Faixa 2",
-          "faixa": 2
-        }
-      ],
-      "totalAfetados": 0
-    },
-    {
-      "id": 16,
-      "titulo": "Vídeo Qualidade JPEG < 90% (otimização de legibilidade)",
-      "severidade": "medio",
-      "parametro": "Video.quality",
-      "descricao": "O padrão de qualidade JPEG foi atualizado de 85 para 90 para reduzir artefatos de compressão nas bordas dos caracteres da placa.",
-      "problema": "JPEG 85 já é aceitável, porém o algoritmo de compressão pode gerar bloco de 8×8 pixels visíveis em caracteres finos de placas Mercosul. JPEG 90 reduz esses artefatos com aumento de ~15% no tamanho do arquivo.",
-      "correcao": "Via API: PUT /api/video/streams/0 com body { quality: 90 }. Menu: Interface Web › Vídeo › Streams › Stream 1 › campo 'Qualidade'.",
-      "menu": "Interface Web › Vídeo › Streams › Stream 1 › campo 'Qualidade'",
-      "endpoint": "/api/video/streams/0",
-      "afetados": [],
-      "conformes": [
-        {
-          "nome": "GOEC6O043 - Faixa 1",
-          "faixa": 1
-        },
-        {
-          "nome": "GOEC6O007 - Faixa 2",
-          "faixa": 2
-        }
-      ],
-      "totalAfetados": 0
-    },
     {
       "id": 17,
       "titulo": "OCR maxLowProbChars = 0 (descarta placas parcialmente visíveis)",
@@ -384,1398 +16,526 @@
       "endpoint": "/api/equipment/ocr",
       "afetados": [
         {
-          "nome": "GOEC6O002 - Faixa 2",
-          "uuid": "fb1a2de8-aa93-4515-8d09-baee3bec45b1",
-          "faixa": 2,
-          "atual": 0,
-          "correto": 1
-        },
-        {
-          "nome": "GOEC6O003 - Faixa 2",
-          "uuid": "ea779324-56d4-4ea5-bfb6-63b4cf751621",
-          "faixa": 2,
-          "atual": 0,
-          "correto": 1
-        },
-        {
-          "nome": "GOEC6O004 - Faixa 1",
-          "uuid": "fe1f2f2d-327c-4e87-b865-0b9d32cca00b",
-          "faixa": 1,
-          "atual": 0,
-          "correto": 1
-        },
-        {
-          "nome": "GOEC6O004 - Faixa 2",
-          "uuid": "abe3e1cd-9071-4dc9-8ce8-5c51d4417fce",
-          "faixa": 2,
-          "atual": 0,
-          "correto": 1
-        },
-        {
-          "nome": "GOEC6O005 - Faixa 1",
-          "uuid": "0b6cdb29-2876-40fd-8e57-51572a2a1021",
-          "faixa": 1,
-          "atual": 0,
-          "correto": 1
-        },
-        {
-          "nome": "GOEC6O005 - Faixa 2",
-          "uuid": "3df4eaee-9d2d-480d-b04c-faf75662dc70",
-          "faixa": 2,
-          "atual": 0,
-          "correto": 1
-        },
-        {
-          "nome": "GOEC6O007 - Faixa 1",
-          "uuid": "2c1ab0be-d0a3-4742-98ed-a916cb12fa22",
-          "faixa": 1,
-          "atual": 0,
-          "correto": 1
-        },
-        {
-          "nome": "GOEC6O007 - Faixa 2",
-          "uuid": "33e77a95-b079-4ce2-9d03-69d5f2c82293",
-          "faixa": 2,
-          "atual": 0,
-          "correto": 1
-        },
-        {
-          "nome": "GOEC6O008 - Faixa 2",
-          "uuid": "d741e55b-19d6-4b2d-9c55-3651c310e1b1",
-          "faixa": 2,
-          "atual": 0,
-          "correto": 1
-        },
-        {
-          "nome": "GOEC6O010 - Faixa 1",
-          "uuid": "abf8fedb-4f1b-471f-a6bd-4e00484d5737",
-          "faixa": 1,
-          "atual": 0,
-          "correto": 1
-        },
-        {
-          "nome": "GOEC6O010 - Faixa 2",
-          "uuid": "481dd19b-4968-4759-860b-35f9ec09c206",
-          "faixa": 2,
-          "atual": 0,
-          "correto": 1
-        },
-        {
-          "nome": "GOEC6O011 - Faixa 1",
-          "uuid": "259688db-e246-42df-b327-192de761ec5d",
-          "faixa": 1,
-          "atual": 0,
-          "correto": 1
-        },
-        {
-          "nome": "GOEC6O013 - Faixa 2",
-          "uuid": "36896650-1bca-4093-9631-667b73bdd93d",
-          "faixa": 2,
-          "atual": 0,
-          "correto": 1
-        },
-        {
-          "nome": "GOEC6O018 - Faixa 2",
-          "uuid": "def24641-a5f4-4673-973c-88cba3fbb571",
-          "faixa": 2,
-          "atual": 0,
-          "correto": 1
-        },
-        {
-          "nome": "GOEC6O019 - Faixa 1",
-          "uuid": "6f6eddc7-f900-4d4f-8040-f7d1775d1d1d",
-          "faixa": 1,
-          "atual": 0,
-          "correto": 1
-        },
-        {
-          "nome": "GOEC6O019 - Faixa 2",
-          "uuid": "b8925732-54cf-4f01-b4ec-c8bcb1b3bd2e",
-          "faixa": 2,
-          "atual": 0,
-          "correto": 1
-        },
-        {
-          "nome": "GOEC6O020 - Faixa 1",
-          "uuid": "b29feb12-0a55-4c12-aab9-771abea27059",
-          "faixa": 1,
-          "atual": 0,
-          "correto": 1
-        },
-        {
-          "nome": "GOEC6O020 - Faixa 2",
-          "uuid": "21484385-21b6-49ae-a2f7-bd33fd4bed6b",
-          "faixa": 2,
-          "atual": 0,
-          "correto": 1
-        },
-        {
-          "nome": "GOEC6O021 - Faixa 1",
-          "uuid": "f07c775c-96f6-420f-b5c8-0857e686dc35",
-          "faixa": 1,
-          "atual": 0,
-          "correto": 1
-        },
-        {
-          "nome": "GOEC6O023 - Faixa 1",
-          "uuid": "64e60ba4-79b7-4447-b726-a3f032327907",
-          "faixa": 1,
-          "atual": 0,
-          "correto": 1
-        },
-        {
-          "nome": "GOEC6O029 - Faixa 1",
-          "uuid": "d4c91424-ff2b-408a-930d-f12b595a6212",
-          "faixa": 1,
-          "atual": 0,
-          "correto": 1
-        },
-        {
-          "nome": "GOEC6O029 - Faixa 2",
-          "uuid": "0462e9d3-b0ce-42aa-9cfb-1b24c1cb1bee",
-          "faixa": 2,
-          "atual": 0,
-          "correto": 1
-        },
-        {
-          "nome": "GOEC6O036 - Faixa 1",
-          "uuid": "e433c575-ba3b-4d88-bd96-9ee28225b73f",
-          "faixa": 1,
-          "atual": 0,
-          "correto": 1
-        },
-        {
-          "nome": "GOEC6O040 - Faixa 1",
-          "uuid": "9b5328e3-104b-4afc-b3ce-8880066ca995",
-          "faixa": 1,
-          "atual": 0,
-          "correto": 1
-        },
-        {
-          "nome": "GOEC6O040 - Faixa 2",
-          "uuid": "416aff7e-4c34-4356-bbac-aa66d34ffead",
-          "faixa": 2,
-          "atual": 0,
-          "correto": 1
-        },
-        {
-          "nome": "GOEC6O041 - Faixa 1",
-          "uuid": "b2faa440-b39f-479b-a3bd-afbadfbfe194",
-          "faixa": 1,
-          "atual": 0,
-          "correto": 1
-        },
-        {
-          "nome": "GOEC6O041 - Faixa 2",
-          "uuid": "de950460-2405-4ec4-838d-4a8ef2b49720",
-          "faixa": 2,
-          "atual": 0,
-          "correto": 1
-        },
-        {
-          "nome": "GOEC6O043 - Faixa 1",
-          "uuid": "f29258aa-8c64-47c6-8912-54b3dffbc5dc",
-          "faixa": 1,
-          "atual": 0,
-          "correto": 1
-        },
-        {
-          "nome": "GOEC6O043 - Faixa 2",
-          "uuid": "9e7e2c3c-bf75-40c4-b0ca-42b3950a0955",
-          "faixa": 2,
-          "atual": 0,
-          "correto": 1
-        },
-        {
-          "nome": "GOEC6O045 - Faixa 1",
-          "uuid": "0ce96fed-4b52-4737-9e95-f6dd2c969d58",
-          "faixa": 1,
-          "atual": 0,
-          "correto": 1
-        },
-        {
-          "nome": "GOEC6O045 - Faixa 2",
-          "uuid": "66ee7d2d-f271-40c6-a1dd-91459d77d803",
-          "faixa": 2,
-          "atual": 0,
-          "correto": 1
-        },
-        {
-          "nome": "GOEC6O046 - Faixa 1",
-          "uuid": "1e26be92-70e4-468f-a582-4e015282a4fe",
-          "faixa": 1,
-          "atual": 0,
-          "correto": 1
-        },
-        {
-          "nome": "GOEC6O049 - Faixa 1",
-          "uuid": "ad0db63e-bb6e-4cb1-99eb-960f486cb692",
-          "faixa": 1,
-          "atual": 0,
-          "correto": 1
-        },
-        {
-          "nome": "GOEC6O049 - Faixa 2",
-          "uuid": "3a8b23c7-edf3-43d3-b9be-9211674777e3",
-          "faixa": 2,
-          "atual": 0,
-          "correto": 1
-        },
-        {
-          "nome": "GOEC6O050 - Faixa 1",
-          "uuid": "fc487783-cc4a-4d77-9bc4-5399ba479587",
-          "faixa": 1,
-          "atual": 0,
-          "correto": 1
-        },
-        {
-          "nome": "GOEC6O050 - Faixa 2",
-          "uuid": "f435e113-b74b-4721-b15c-066731fe0668",
-          "faixa": 2,
-          "atual": 0,
-          "correto": 1
-        },
-        {
-          "nome": "GOEC6O051 - Faixa 1",
-          "uuid": "b1936eeb-bdb5-41d4-9d59-8d5aca35f301",
-          "faixa": 1,
-          "atual": 0,
-          "correto": 1
-        },
-        {
-          "nome": "GOEC6O051 - Faixa 2",
-          "uuid": "13d8dad0-3b76-4394-ad2f-bcb2f6ca3d5c",
-          "faixa": 2,
-          "atual": 0,
-          "correto": 1
-        },
-        {
-          "nome": "GOEC6O052 - Faixa 2",
-          "uuid": "8244f568-59f3-4f27-932e-86cc2eb10fc3",
-          "faixa": 2,
-          "atual": 0,
-          "correto": 1
-        },
-        {
-          "nome": "GOEC6O052- Faixa 1",
-          "uuid": "49cbc26f-7a42-47d6-9d32-bc66f740e886",
-          "faixa": 1,
-          "atual": 0,
-          "correto": 1
-        },
-        {
-          "nome": "GOEC6O053 - Faixa 1",
-          "uuid": "b2071e67-3658-4a52-a543-13713f2c1e33",
-          "faixa": 1,
-          "atual": 0,
-          "correto": 1
-        },
-        {
-          "nome": "GOEC6O053 - Faixa 2",
-          "uuid": "3bb822e1-3f89-4a2e-aa79-c8a6041288d9",
-          "faixa": 2,
-          "atual": 0,
-          "correto": 1
-        },
-        {
-          "nome": "GOEC6O054 - Faixa 1",
-          "uuid": "8f419e79-5a4c-4af3-8a89-79304110c391",
-          "faixa": 1,
-          "atual": 0,
-          "correto": 1
-        },
-        {
-          "nome": "GOEC6O054 - Faixa 2",
-          "uuid": "06821a80-8d82-484e-908e-a9a55ba73b7b",
-          "faixa": 2,
-          "atual": 0,
-          "correto": 1
-        },
-        {
-          "nome": "GOEC6O055 - Faixa 1",
-          "uuid": "1d0b2132-a825-4823-ab8f-8ce4aa829138",
-          "faixa": 1,
-          "atual": 0,
-          "correto": 1
-        },
-        {
-          "nome": "GOEC6O055 - Faixa 2",
-          "uuid": "fe5f7cf3-a8dd-41e8-b975-72921dbddeac",
-          "faixa": 2,
-          "atual": 0,
-          "correto": 1
-        },
-        {
-          "nome": "GOEC6O056 - Faixa 1",
-          "uuid": "07b43518-06b0-4186-89b8-201132a845ac",
-          "faixa": 1,
-          "atual": 0,
-          "correto": 1
-        },
-        {
-          "nome": "GOEC6O056 - Faixa 2",
-          "uuid": "8dfa023b-1492-4d06-ad06-13aa51fe8fa2",
-          "faixa": 2,
-          "atual": 0,
-          "correto": 1
-        },
-        {
-          "nome": "GOEC6O057 - Faixa 1",
-          "uuid": "41d74d00-032e-4a4c-864e-ac86ea4d01aa",
-          "faixa": 1,
-          "atual": 0,
-          "correto": 1
-        },
-        {
-          "nome": "GOEC6O057 - Faixa 2",
-          "uuid": "78fd907c-0085-4d9b-963d-b4e8ee2ad47b",
-          "faixa": 2,
-          "atual": 0,
-          "correto": 1
-        },
-        {
-          "nome": "GOEC6O058 - Faixa 1",
-          "uuid": "b5a0f157-e8d4-478c-bf2b-91ebbfcf2a29",
-          "faixa": 1,
-          "atual": 0,
-          "correto": 1
-        },
-        {
-          "nome": "GOEC6O059 - Faixa 1",
-          "uuid": "97a97d01-3d12-4f16-94b0-831575825255",
-          "faixa": 1,
-          "atual": 0,
-          "correto": 1
-        },
-        {
-          "nome": "GOEC6O059 - Faixa 2",
-          "uuid": "cedcda0f-9104-498c-9f52-8f6e3ebfdcfb",
-          "faixa": 2,
-          "atual": 0,
-          "correto": 1
-        },
-        {
           "nome": "GOEC6O002 - Faixa 1",
           "uuid": "c5de0eb2-761e-427a-9efb-e85b7576203d",
           "faixa": 1,
           "atual": 0,
-          "correto": 1
+          "correto": 1,
+          "corrigido": true
         },
-        {
-          "nome": "GOEC6O058 - Faixa 2",
-          "uuid": "6561d5fd-0aba-413b-a60a-a0d7e1b61b6d",
-          "faixa": 2,
-          "atual": 0,
-          "correto": 1
-        },
-        {
-          "nome": "GOEC6O009 - Faixa 1",
-          "uuid": "c296d7bf-0d3b-4da1-bf1d-3e4fe998e4a1",
-          "faixa": 1,
-          "atual": 0,
-          "correto": 1
-        },
-        {
-          "nome": "GOEC6O009 - Faixa 2",
-          "uuid": "ef0e72ca-d3a5-4f4e-bbf6-40f3737bda3f",
-          "faixa": 2,
-          "atual": 0,
-          "correto": 1
-        },
-        {
-          "nome": "GOEC6O011 - Faixa 2",
-          "uuid": "d0595c80-9ea7-49af-b2a0-d305d688e567",
-          "faixa": 2,
-          "atual": 0,
-          "correto": 1
-        },
-        {
-          "nome": "GOEC6O028 - Faixa 1",
-          "uuid": "1f460cd7-f607-4c79-8a8e-50a8228850a4",
-          "faixa": 1,
-          "atual": 0,
-          "correto": 1
-        }
-      ],
-      "conformes": [],
-      "totalAfetados": 59
-    },
-    {
-      "id": 18,
-      "titulo": "OCR não usa resultado do classificador (useClassifierResult=false)",
-      "severidade": "medio",
-      "parametro": "OCR.useClassifierResult",
-      "descricao": "O parâmetro useClassifierResult permite que o motor OCR use a saída do classificador de veículos para refinar a detecção de placas.",
-      "problema": "Com false, o OCR trabalha de forma independente do classificador — perderá o benefício do filtro por tipo de veículo ao selecionar regiões de interesse. Com true, o classificador pré-filtra a região esperada da placa de acordo com o tipo/posição do veículo detectado, melhorando a acurácia em cenas com múltiplos objetos.",
-      "correcao": "Via API: PUT /api/equipment/ocr com body { ocr: { useClassifierResult: true } }. Menu: Interface Web › Equipamento › OCR › opção 'Usar resultado do classificador'.",
-      "menu": "Interface Web › Equipamento › OCR › opção 'Usar resultado do classificador'",
-      "endpoint": "/api/equipment/ocr",
-      "afetados": [
         {
           "nome": "GOEC6O002 - Faixa 2",
           "uuid": "fb1a2de8-aa93-4515-8d09-baee3bec45b1",
           "faixa": 2,
-          "atual": false,
-          "correto": true
-        },
-        {
-          "nome": "GOEC6O003 - Faixa 2",
-          "uuid": "ea779324-56d4-4ea5-bfb6-63b4cf751621",
-          "faixa": 2,
-          "atual": false,
-          "correto": true
-        },
-        {
-          "nome": "GOEC6O004 - Faixa 1",
-          "uuid": "fe1f2f2d-327c-4e87-b865-0b9d32cca00b",
-          "faixa": 1,
-          "atual": false,
-          "correto": true
-        },
-        {
-          "nome": "GOEC6O004 - Faixa 2",
-          "uuid": "abe3e1cd-9071-4dc9-8ce8-5c51d4417fce",
-          "faixa": 2,
-          "atual": false,
-          "correto": true
-        },
-        {
-          "nome": "GOEC6O005 - Faixa 1",
-          "uuid": "0b6cdb29-2876-40fd-8e57-51572a2a1021",
-          "faixa": 1,
-          "atual": false,
-          "correto": true
-        },
-        {
-          "nome": "GOEC6O005 - Faixa 2",
-          "uuid": "3df4eaee-9d2d-480d-b04c-faf75662dc70",
-          "faixa": 2,
-          "atual": false,
-          "correto": true
-        },
-        {
-          "nome": "GOEC6O007 - Faixa 1",
-          "uuid": "2c1ab0be-d0a3-4742-98ed-a916cb12fa22",
-          "faixa": 1,
-          "atual": false,
-          "correto": true
-        },
-        {
-          "nome": "GOEC6O007 - Faixa 2",
-          "uuid": "33e77a95-b079-4ce2-9d03-69d5f2c82293",
-          "faixa": 2,
-          "atual": false,
-          "correto": true
-        },
-        {
-          "nome": "GOEC6O008 - Faixa 2",
-          "uuid": "d741e55b-19d6-4b2d-9c55-3651c310e1b1",
-          "faixa": 2,
-          "atual": false,
-          "correto": true
-        },
-        {
-          "nome": "GOEC6O010 - Faixa 1",
-          "uuid": "abf8fedb-4f1b-471f-a6bd-4e00484d5737",
-          "faixa": 1,
-          "atual": false,
-          "correto": true
-        },
-        {
-          "nome": "GOEC6O010 - Faixa 2",
-          "uuid": "481dd19b-4968-4759-860b-35f9ec09c206",
-          "faixa": 2,
-          "atual": false,
-          "correto": true
-        },
-        {
-          "nome": "GOEC6O011 - Faixa 1",
-          "uuid": "259688db-e246-42df-b327-192de761ec5d",
-          "faixa": 1,
-          "atual": false,
-          "correto": true
-        },
-        {
-          "nome": "GOEC6O013 - Faixa 2",
-          "uuid": "36896650-1bca-4093-9631-667b73bdd93d",
-          "faixa": 2,
-          "atual": false,
-          "correto": true
-        },
-        {
-          "nome": "GOEC6O018 - Faixa 2",
-          "uuid": "def24641-a5f4-4673-973c-88cba3fbb571",
-          "faixa": 2,
-          "atual": false,
-          "correto": true
-        },
-        {
-          "nome": "GOEC6O019 - Faixa 1",
-          "uuid": "6f6eddc7-f900-4d4f-8040-f7d1775d1d1d",
-          "faixa": 1,
-          "atual": false,
-          "correto": true
-        },
-        {
-          "nome": "GOEC6O019 - Faixa 2",
-          "uuid": "b8925732-54cf-4f01-b4ec-c8bcb1b3bd2e",
-          "faixa": 2,
-          "atual": false,
-          "correto": true
-        },
-        {
-          "nome": "GOEC6O020 - Faixa 1",
-          "uuid": "b29feb12-0a55-4c12-aab9-771abea27059",
-          "faixa": 1,
-          "atual": false,
-          "correto": true
-        },
-        {
-          "nome": "GOEC6O020 - Faixa 2",
-          "uuid": "21484385-21b6-49ae-a2f7-bd33fd4bed6b",
-          "faixa": 2,
-          "atual": false,
-          "correto": true
-        },
-        {
-          "nome": "GOEC6O021 - Faixa 1",
-          "uuid": "f07c775c-96f6-420f-b5c8-0857e686dc35",
-          "faixa": 1,
-          "atual": false,
-          "correto": true
-        },
-        {
-          "nome": "GOEC6O022 - Faixa 1",
-          "uuid": "29c1d243-f44f-4a40-b62d-06c9cce958c9",
-          "faixa": 1,
-          "atual": false,
-          "correto": true
-        },
-        {
-          "nome": "GOEC6O022 - Faixa 2",
-          "uuid": "dfb678d9-4e51-45c5-b7a0-15a972fe354b",
-          "faixa": 2,
-          "atual": false,
-          "correto": true
-        },
-        {
-          "nome": "GOEC6O023 - Faixa 1",
-          "uuid": "64e60ba4-79b7-4447-b726-a3f032327907",
-          "faixa": 1,
-          "atual": false,
-          "correto": true
-        },
-        {
-          "nome": "GOEC6O029 - Faixa 1",
-          "uuid": "d4c91424-ff2b-408a-930d-f12b595a6212",
-          "faixa": 1,
-          "atual": false,
-          "correto": true
-        },
-        {
-          "nome": "GOEC6O029 - Faixa 2",
-          "uuid": "0462e9d3-b0ce-42aa-9cfb-1b24c1cb1bee",
-          "faixa": 2,
-          "atual": false,
-          "correto": true
-        },
-        {
-          "nome": "GOEC6O033 - Faixa 1",
-          "uuid": "5468c818-1b5d-4d0e-a7c1-57319784e3dc",
-          "faixa": 1,
-          "atual": false,
-          "correto": true
-        },
-        {
-          "nome": "GOEC6O033 - Faixa 2",
-          "uuid": "34ebe844-ba8e-49f4-bc6f-45d5724ee381",
-          "faixa": 2,
-          "atual": false,
-          "correto": true
-        },
-        {
-          "nome": "GOEC6O036 - Faixa 1",
-          "uuid": "e433c575-ba3b-4d88-bd96-9ee28225b73f",
-          "faixa": 1,
-          "atual": false,
-          "correto": true
-        },
-        {
-          "nome": "GOEC6O040 - Faixa 1",
-          "uuid": "9b5328e3-104b-4afc-b3ce-8880066ca995",
-          "faixa": 1,
-          "atual": false,
-          "correto": true
-        },
-        {
-          "nome": "GOEC6O040 - Faixa 2",
-          "uuid": "416aff7e-4c34-4356-bbac-aa66d34ffead",
-          "faixa": 2,
-          "atual": false,
-          "correto": true
-        },
-        {
-          "nome": "GOEC6O041 - Faixa 1",
-          "uuid": "b2faa440-b39f-479b-a3bd-afbadfbfe194",
-          "faixa": 1,
-          "atual": false,
-          "correto": true
-        },
-        {
-          "nome": "GOEC6O041 - Faixa 2",
-          "uuid": "de950460-2405-4ec4-838d-4a8ef2b49720",
-          "faixa": 2,
-          "atual": false,
-          "correto": true
-        },
-        {
-          "nome": "GOEC6O043 - Faixa 1",
-          "uuid": "f29258aa-8c64-47c6-8912-54b3dffbc5dc",
-          "faixa": 1,
-          "atual": false,
-          "correto": true
-        },
-        {
-          "nome": "GOEC6O043 - Faixa 2",
-          "uuid": "9e7e2c3c-bf75-40c4-b0ca-42b3950a0955",
-          "faixa": 2,
-          "atual": false,
-          "correto": true
-        },
-        {
-          "nome": "GOEC6O045 - Faixa 1",
-          "uuid": "0ce96fed-4b52-4737-9e95-f6dd2c969d58",
-          "faixa": 1,
-          "atual": false,
-          "correto": true
-        },
-        {
-          "nome": "GOEC6O045 - Faixa 2",
-          "uuid": "66ee7d2d-f271-40c6-a1dd-91459d77d803",
-          "faixa": 2,
-          "atual": false,
-          "correto": true
-        },
-        {
-          "nome": "GOEC6O046 - Faixa 1",
-          "uuid": "1e26be92-70e4-468f-a582-4e015282a4fe",
-          "faixa": 1,
-          "atual": false,
-          "correto": true
-        },
-        {
-          "nome": "GOEC6O049 - Faixa 1",
-          "uuid": "ad0db63e-bb6e-4cb1-99eb-960f486cb692",
-          "faixa": 1,
-          "atual": false,
-          "correto": true
-        },
-        {
-          "nome": "GOEC6O049 - Faixa 2",
-          "uuid": "3a8b23c7-edf3-43d3-b9be-9211674777e3",
-          "faixa": 2,
-          "atual": false,
-          "correto": true
-        },
-        {
-          "nome": "GOEC6O050 - Faixa 1",
-          "uuid": "fc487783-cc4a-4d77-9bc4-5399ba479587",
-          "faixa": 1,
-          "atual": false,
-          "correto": true
-        },
-        {
-          "nome": "GOEC6O050 - Faixa 2",
-          "uuid": "f435e113-b74b-4721-b15c-066731fe0668",
-          "faixa": 2,
-          "atual": false,
-          "correto": true
-        },
-        {
-          "nome": "GOEC6O051 - Faixa 1",
-          "uuid": "b1936eeb-bdb5-41d4-9d59-8d5aca35f301",
-          "faixa": 1,
-          "atual": false,
-          "correto": true
-        },
-        {
-          "nome": "GOEC6O051 - Faixa 2",
-          "uuid": "13d8dad0-3b76-4394-ad2f-bcb2f6ca3d5c",
-          "faixa": 2,
-          "atual": false,
-          "correto": true
-        },
-        {
-          "nome": "GOEC6O052 - Faixa 2",
-          "uuid": "8244f568-59f3-4f27-932e-86cc2eb10fc3",
-          "faixa": 2,
-          "atual": false,
-          "correto": true
-        },
-        {
-          "nome": "GOEC6O052- Faixa 1",
-          "uuid": "49cbc26f-7a42-47d6-9d32-bc66f740e886",
-          "faixa": 1,
-          "atual": false,
-          "correto": true
-        },
-        {
-          "nome": "GOEC6O053 - Faixa 1",
-          "uuid": "b2071e67-3658-4a52-a543-13713f2c1e33",
-          "faixa": 1,
-          "atual": false,
-          "correto": true
-        },
-        {
-          "nome": "GOEC6O053 - Faixa 2",
-          "uuid": "3bb822e1-3f89-4a2e-aa79-c8a6041288d9",
-          "faixa": 2,
-          "atual": false,
-          "correto": true
-        },
-        {
-          "nome": "GOEC6O054 - Faixa 1",
-          "uuid": "8f419e79-5a4c-4af3-8a89-79304110c391",
-          "faixa": 1,
-          "atual": false,
-          "correto": true
-        },
-        {
-          "nome": "GOEC6O054 - Faixa 2",
-          "uuid": "06821a80-8d82-484e-908e-a9a55ba73b7b",
-          "faixa": 2,
-          "atual": false,
-          "correto": true
-        },
-        {
-          "nome": "GOEC6O055 - Faixa 1",
-          "uuid": "1d0b2132-a825-4823-ab8f-8ce4aa829138",
-          "faixa": 1,
-          "atual": false,
-          "correto": true
-        },
-        {
-          "nome": "GOEC6O055 - Faixa 2",
-          "uuid": "fe5f7cf3-a8dd-41e8-b975-72921dbddeac",
-          "faixa": 2,
-          "atual": false,
-          "correto": true
-        },
-        {
-          "nome": "GOEC6O056 - Faixa 1",
-          "uuid": "07b43518-06b0-4186-89b8-201132a845ac",
-          "faixa": 1,
-          "atual": false,
-          "correto": true
-        },
-        {
-          "nome": "GOEC6O056 - Faixa 2",
-          "uuid": "8dfa023b-1492-4d06-ad06-13aa51fe8fa2",
-          "faixa": 2,
-          "atual": false,
-          "correto": true
-        },
-        {
-          "nome": "GOEC6O057 - Faixa 1",
-          "uuid": "41d74d00-032e-4a4c-864e-ac86ea4d01aa",
-          "faixa": 1,
-          "atual": false,
-          "correto": true
-        },
-        {
-          "nome": "GOEC6O057 - Faixa 2",
-          "uuid": "78fd907c-0085-4d9b-963d-b4e8ee2ad47b",
-          "faixa": 2,
-          "atual": false,
-          "correto": true
-        },
-        {
-          "nome": "GOEC6O058 - Faixa 1",
-          "uuid": "b5a0f157-e8d4-478c-bf2b-91ebbfcf2a29",
-          "faixa": 1,
-          "atual": false,
-          "correto": true
-        },
-        {
-          "nome": "GOEC6O059 - Faixa 1",
-          "uuid": "97a97d01-3d12-4f16-94b0-831575825255",
-          "faixa": 1,
-          "atual": false,
-          "correto": true
-        },
-        {
-          "nome": "GOEC6O059 - Faixa 2",
-          "uuid": "cedcda0f-9104-498c-9f52-8f6e3ebfdcfb",
-          "faixa": 2,
-          "atual": false,
-          "correto": true
-        },
-        {
-          "nome": "GOEC6O002 - Faixa 1",
-          "uuid": "c5de0eb2-761e-427a-9efb-e85b7576203d",
-          "faixa": 1,
-          "atual": false,
-          "correto": true
-        },
-        {
-          "nome": "GOEC6O058 - Faixa 2",
-          "uuid": "6561d5fd-0aba-413b-a60a-a0d7e1b61b6d",
-          "faixa": 2,
-          "atual": false,
-          "correto": true
-        },
-        {
-          "nome": "GOEC6O009 - Faixa 1",
-          "uuid": "c296d7bf-0d3b-4da1-bf1d-3e4fe998e4a1",
-          "faixa": 1,
-          "atual": false,
-          "correto": true
-        },
-        {
-          "nome": "GOEC6O009 - Faixa 2",
-          "uuid": "ef0e72ca-d3a5-4f4e-bbf6-40f3737bda3f",
-          "faixa": 2,
-          "atual": false,
-          "correto": true
-        },
-        {
-          "nome": "GOEC6O011 - Faixa 2",
-          "uuid": "d0595c80-9ea7-49af-b2a0-d305d688e567",
-          "faixa": 2,
-          "atual": false,
-          "correto": true
-        },
-        {
-          "nome": "GOEC6O028 - Faixa 1",
-          "uuid": "1f460cd7-f607-4c79-8a8e-50a8228850a4",
-          "faixa": 1,
-          "atual": false,
-          "correto": true
+          "atual": 0,
+          "correto": 1,
+          "corrigido": true
         },
         {
           "nome": "GOEC6O003 - Faixa 1",
           "uuid": "1792282c-bacb-4808-8ff6-e44404b72de5",
           "faixa": 1,
-          "atual": false,
-          "correto": true
-        }
-      ],
-      "conformes": [],
-      "totalAfetados": 64
-    },
-    {
-      "id": 19,
-      "titulo": "Classificador minProbability < 40% (detecções pouco confiáveis)",
-      "severidade": "medio",
-      "parametro": "Classifier.minProbability",
-      "descricao": "O parâmetro minProbability define o limiar mínimo de confiança para que o classificador reporte uma detecção de veículo.",
-      "problema": "Com 20%, o classificador reporta até sombras, reflexos e objetos estáticos como 'veículos' com baixíssima confiança. Isso gera acionamentos desnecessários do OCR, consome CPU e pode poluir os logs de passagem. Com 40%, apenas detecções com confiança moderada a alta são processadas, reduzindo falsos positivos do classificador em ~30-40%.",
-      "correcao": "Via API: PUT /api/equipment/classifier com body { classifier: { minProbability: 40 } }. Menu: Interface Web › Equipamento › Classificador › campo 'Probabilidade mínima'.",
-      "menu": "Interface Web › Equipamento › Classificador › campo 'Probabilidade mínima'",
-      "endpoint": "/api/equipment/classifier",
-      "afetados": [
-        {
-          "nome": "GOEC6O002 - Faixa 2",
-          "uuid": "fb1a2de8-aa93-4515-8d09-baee3bec45b1",
-          "faixa": 2,
-          "atual": 20,
-          "correto": 40
+          "atual": 0,
+          "correto": 1,
+          "corrigido": true
         },
         {
           "nome": "GOEC6O003 - Faixa 2",
           "uuid": "ea779324-56d4-4ea5-bfb6-63b4cf751621",
           "faixa": 2,
-          "atual": 20,
-          "correto": 40
+          "atual": 0,
+          "correto": 1,
+          "corrigido": true
         },
         {
           "nome": "GOEC6O004 - Faixa 1",
           "uuid": "fe1f2f2d-327c-4e87-b865-0b9d32cca00b",
           "faixa": 1,
-          "atual": 20,
-          "correto": 40
+          "atual": 0,
+          "correto": 1,
+          "corrigido": true
         },
         {
           "nome": "GOEC6O004 - Faixa 2",
           "uuid": "abe3e1cd-9071-4dc9-8ce8-5c51d4417fce",
           "faixa": 2,
-          "atual": 20,
-          "correto": 40
+          "atual": 0,
+          "correto": 1,
+          "corrigido": true
         },
         {
           "nome": "GOEC6O005 - Faixa 1",
           "uuid": "0b6cdb29-2876-40fd-8e57-51572a2a1021",
           "faixa": 1,
-          "atual": 20,
-          "correto": 40
+          "atual": 0,
+          "correto": 1,
+          "corrigido": true
         },
         {
           "nome": "GOEC6O005 - Faixa 2",
           "uuid": "3df4eaee-9d2d-480d-b04c-faf75662dc70",
           "faixa": 2,
-          "atual": 20,
-          "correto": 40
+          "atual": 0,
+          "correto": 1,
+          "corrigido": true
         },
         {
           "nome": "GOEC6O007 - Faixa 1",
           "uuid": "2c1ab0be-d0a3-4742-98ed-a916cb12fa22",
           "faixa": 1,
-          "atual": 20,
-          "correto": 40
+          "atual": 0,
+          "correto": 1,
+          "corrigido": true
         },
         {
           "nome": "GOEC6O007 - Faixa 2",
           "uuid": "33e77a95-b079-4ce2-9d03-69d5f2c82293",
           "faixa": 2,
-          "atual": 20,
-          "correto": 40
+          "atual": 0,
+          "correto": 1,
+          "corrigido": true
         },
         {
           "nome": "GOEC6O008 - Faixa 2",
           "uuid": "d741e55b-19d6-4b2d-9c55-3651c310e1b1",
           "faixa": 2,
-          "atual": 20,
-          "correto": 40
-        },
-        {
-          "nome": "GOEC6O010 - Faixa 1",
-          "uuid": "abf8fedb-4f1b-471f-a6bd-4e00484d5737",
-          "faixa": 1,
-          "atual": 20,
-          "correto": 40
-        },
-        {
-          "nome": "GOEC6O010 - Faixa 2",
-          "uuid": "481dd19b-4968-4759-860b-35f9ec09c206",
-          "faixa": 2,
-          "atual": 20,
-          "correto": 40
-        },
-        {
-          "nome": "GOEC6O011 - Faixa 1",
-          "uuid": "259688db-e246-42df-b327-192de761ec5d",
-          "faixa": 1,
-          "atual": 20,
-          "correto": 40
-        },
-        {
-          "nome": "GOEC6O013 - Faixa 2",
-          "uuid": "36896650-1bca-4093-9631-667b73bdd93d",
-          "faixa": 2,
-          "atual": 20,
-          "correto": 40
-        },
-        {
-          "nome": "GOEC6O018 - Faixa 2",
-          "uuid": "def24641-a5f4-4673-973c-88cba3fbb571",
-          "faixa": 2,
-          "atual": 20,
-          "correto": 40
-        },
-        {
-          "nome": "GOEC6O019 - Faixa 1",
-          "uuid": "6f6eddc7-f900-4d4f-8040-f7d1775d1d1d",
-          "faixa": 1,
-          "atual": 20,
-          "correto": 40
-        },
-        {
-          "nome": "GOEC6O019 - Faixa 2",
-          "uuid": "b8925732-54cf-4f01-b4ec-c8bcb1b3bd2e",
-          "faixa": 2,
-          "atual": 20,
-          "correto": 40
-        },
-        {
-          "nome": "GOEC6O020 - Faixa 1",
-          "uuid": "b29feb12-0a55-4c12-aab9-771abea27059",
-          "faixa": 1,
-          "atual": 20,
-          "correto": 40
-        },
-        {
-          "nome": "GOEC6O020 - Faixa 2",
-          "uuid": "21484385-21b6-49ae-a2f7-bd33fd4bed6b",
-          "faixa": 2,
-          "atual": 20,
-          "correto": 40
-        },
-        {
-          "nome": "GOEC6O021 - Faixa 1",
-          "uuid": "f07c775c-96f6-420f-b5c8-0857e686dc35",
-          "faixa": 1,
-          "atual": 20,
-          "correto": 40
-        },
-        {
-          "nome": "GOEC6O022 - Faixa 1",
-          "uuid": "29c1d243-f44f-4a40-b62d-06c9cce958c9",
-          "faixa": 1,
-          "atual": 20,
-          "correto": 40
-        },
-        {
-          "nome": "GOEC6O022 - Faixa 2",
-          "uuid": "dfb678d9-4e51-45c5-b7a0-15a972fe354b",
-          "faixa": 2,
-          "atual": 20,
-          "correto": 40
-        },
-        {
-          "nome": "GOEC6O023 - Faixa 1",
-          "uuid": "64e60ba4-79b7-4447-b726-a3f032327907",
-          "faixa": 1,
-          "atual": 20,
-          "correto": 40
-        },
-        {
-          "nome": "GOEC6O029 - Faixa 1",
-          "uuid": "d4c91424-ff2b-408a-930d-f12b595a6212",
-          "faixa": 1,
-          "atual": 20,
-          "correto": 40
-        },
-        {
-          "nome": "GOEC6O029 - Faixa 2",
-          "uuid": "0462e9d3-b0ce-42aa-9cfb-1b24c1cb1bee",
-          "faixa": 2,
-          "atual": 20,
-          "correto": 40
-        },
-        {
-          "nome": "GOEC6O033 - Faixa 1",
-          "uuid": "5468c818-1b5d-4d0e-a7c1-57319784e3dc",
-          "faixa": 1,
-          "atual": 20,
-          "correto": 40
-        },
-        {
-          "nome": "GOEC6O033 - Faixa 2",
-          "uuid": "34ebe844-ba8e-49f4-bc6f-45d5724ee381",
-          "faixa": 2,
-          "atual": 20,
-          "correto": 40
-        },
-        {
-          "nome": "GOEC6O036 - Faixa 1",
-          "uuid": "e433c575-ba3b-4d88-bd96-9ee28225b73f",
-          "faixa": 1,
-          "atual": 20,
-          "correto": 40
-        },
-        {
-          "nome": "GOEC6O040 - Faixa 1",
-          "uuid": "9b5328e3-104b-4afc-b3ce-8880066ca995",
-          "faixa": 1,
-          "atual": 20,
-          "correto": 40
-        },
-        {
-          "nome": "GOEC6O040 - Faixa 2",
-          "uuid": "416aff7e-4c34-4356-bbac-aa66d34ffead",
-          "faixa": 2,
-          "atual": 20,
-          "correto": 40
-        },
-        {
-          "nome": "GOEC6O041 - Faixa 1",
-          "uuid": "b2faa440-b39f-479b-a3bd-afbadfbfe194",
-          "faixa": 1,
-          "atual": 20,
-          "correto": 40
-        },
-        {
-          "nome": "GOEC6O041 - Faixa 2",
-          "uuid": "de950460-2405-4ec4-838d-4a8ef2b49720",
-          "faixa": 2,
-          "atual": 20,
-          "correto": 40
-        },
-        {
-          "nome": "GOEC6O043 - Faixa 1",
-          "uuid": "f29258aa-8c64-47c6-8912-54b3dffbc5dc",
-          "faixa": 1,
-          "atual": 20,
-          "correto": 40
-        },
-        {
-          "nome": "GOEC6O043 - Faixa 2",
-          "uuid": "9e7e2c3c-bf75-40c4-b0ca-42b3950a0955",
-          "faixa": 2,
-          "atual": 20,
-          "correto": 40
-        },
-        {
-          "nome": "GOEC6O045 - Faixa 1",
-          "uuid": "0ce96fed-4b52-4737-9e95-f6dd2c969d58",
-          "faixa": 1,
-          "atual": 20,
-          "correto": 40
-        },
-        {
-          "nome": "GOEC6O045 - Faixa 2",
-          "uuid": "66ee7d2d-f271-40c6-a1dd-91459d77d803",
-          "faixa": 2,
-          "atual": 20,
-          "correto": 40
-        },
-        {
-          "nome": "GOEC6O046 - Faixa 1",
-          "uuid": "1e26be92-70e4-468f-a582-4e015282a4fe",
-          "faixa": 1,
-          "atual": 20,
-          "correto": 40
-        },
-        {
-          "nome": "GOEC6O049 - Faixa 1",
-          "uuid": "ad0db63e-bb6e-4cb1-99eb-960f486cb692",
-          "faixa": 1,
-          "atual": 20,
-          "correto": 40
-        },
-        {
-          "nome": "GOEC6O049 - Faixa 2",
-          "uuid": "3a8b23c7-edf3-43d3-b9be-9211674777e3",
-          "faixa": 2,
-          "atual": 20,
-          "correto": 40
-        },
-        {
-          "nome": "GOEC6O050 - Faixa 1",
-          "uuid": "fc487783-cc4a-4d77-9bc4-5399ba479587",
-          "faixa": 1,
-          "atual": 20,
-          "correto": 40
-        },
-        {
-          "nome": "GOEC6O050 - Faixa 2",
-          "uuid": "f435e113-b74b-4721-b15c-066731fe0668",
-          "faixa": 2,
-          "atual": 20,
-          "correto": 40
-        },
-        {
-          "nome": "GOEC6O051 - Faixa 1",
-          "uuid": "b1936eeb-bdb5-41d4-9d59-8d5aca35f301",
-          "faixa": 1,
-          "atual": 20,
-          "correto": 40
-        },
-        {
-          "nome": "GOEC6O051 - Faixa 2",
-          "uuid": "13d8dad0-3b76-4394-ad2f-bcb2f6ca3d5c",
-          "faixa": 2,
-          "atual": 20,
-          "correto": 40
-        },
-        {
-          "nome": "GOEC6O052 - Faixa 2",
-          "uuid": "8244f568-59f3-4f27-932e-86cc2eb10fc3",
-          "faixa": 2,
-          "atual": 20,
-          "correto": 40
-        },
-        {
-          "nome": "GOEC6O052- Faixa 1",
-          "uuid": "49cbc26f-7a42-47d6-9d32-bc66f740e886",
-          "faixa": 1,
-          "atual": 20,
-          "correto": 40
-        },
-        {
-          "nome": "GOEC6O053 - Faixa 1",
-          "uuid": "b2071e67-3658-4a52-a543-13713f2c1e33",
-          "faixa": 1,
-          "atual": 20,
-          "correto": 40
-        },
-        {
-          "nome": "GOEC6O053 - Faixa 2",
-          "uuid": "3bb822e1-3f89-4a2e-aa79-c8a6041288d9",
-          "faixa": 2,
-          "atual": 20,
-          "correto": 40
-        },
-        {
-          "nome": "GOEC6O054 - Faixa 1",
-          "uuid": "8f419e79-5a4c-4af3-8a89-79304110c391",
-          "faixa": 1,
-          "atual": 20,
-          "correto": 40
-        },
-        {
-          "nome": "GOEC6O054 - Faixa 2",
-          "uuid": "06821a80-8d82-484e-908e-a9a55ba73b7b",
-          "faixa": 2,
-          "atual": 20,
-          "correto": 40
-        },
-        {
-          "nome": "GOEC6O055 - Faixa 1",
-          "uuid": "1d0b2132-a825-4823-ab8f-8ce4aa829138",
-          "faixa": 1,
-          "atual": 20,
-          "correto": 40
-        },
-        {
-          "nome": "GOEC6O055 - Faixa 2",
-          "uuid": "fe5f7cf3-a8dd-41e8-b975-72921dbddeac",
-          "faixa": 2,
-          "atual": 20,
-          "correto": 40
-        },
-        {
-          "nome": "GOEC6O056 - Faixa 1",
-          "uuid": "07b43518-06b0-4186-89b8-201132a845ac",
-          "faixa": 1,
-          "atual": 20,
-          "correto": 40
-        },
-        {
-          "nome": "GOEC6O056 - Faixa 2",
-          "uuid": "8dfa023b-1492-4d06-ad06-13aa51fe8fa2",
-          "faixa": 2,
-          "atual": 20,
-          "correto": 40
-        },
-        {
-          "nome": "GOEC6O057 - Faixa 1",
-          "uuid": "41d74d00-032e-4a4c-864e-ac86ea4d01aa",
-          "faixa": 1,
-          "atual": 20,
-          "correto": 40
-        },
-        {
-          "nome": "GOEC6O057 - Faixa 2",
-          "uuid": "78fd907c-0085-4d9b-963d-b4e8ee2ad47b",
-          "faixa": 2,
-          "atual": 20,
-          "correto": 40
-        },
-        {
-          "nome": "GOEC6O058 - Faixa 1",
-          "uuid": "b5a0f157-e8d4-478c-bf2b-91ebbfcf2a29",
-          "faixa": 1,
-          "atual": 20,
-          "correto": 40
-        },
-        {
-          "nome": "GOEC6O059 - Faixa 1",
-          "uuid": "97a97d01-3d12-4f16-94b0-831575825255",
-          "faixa": 1,
-          "atual": 20,
-          "correto": 40
-        },
-        {
-          "nome": "GOEC6O059 - Faixa 2",
-          "uuid": "cedcda0f-9104-498c-9f52-8f6e3ebfdcfb",
-          "faixa": 2,
-          "atual": 20,
-          "correto": 40
-        },
-        {
-          "nome": "GOEC6O002 - Faixa 1",
-          "uuid": "c5de0eb2-761e-427a-9efb-e85b7576203d",
-          "faixa": 1,
-          "atual": 20,
-          "correto": 40
-        },
-        {
-          "nome": "GOEC6O058 - Faixa 2",
-          "uuid": "6561d5fd-0aba-413b-a60a-a0d7e1b61b6d",
-          "faixa": 2,
-          "atual": 20,
-          "correto": 40
+          "atual": 0,
+          "correto": 1,
+          "corrigido": true
         },
         {
           "nome": "GOEC6O009 - Faixa 1",
           "uuid": "c296d7bf-0d3b-4da1-bf1d-3e4fe998e4a1",
           "faixa": 1,
-          "atual": 20,
-          "correto": 40
+          "atual": 0,
+          "correto": 1,
+          "corrigido": true
         },
         {
           "nome": "GOEC6O009 - Faixa 2",
           "uuid": "ef0e72ca-d3a5-4f4e-bbf6-40f3737bda3f",
           "faixa": 2,
-          "atual": 20,
-          "correto": 40
+          "atual": 0,
+          "correto": 1,
+          "corrigido": true
+        },
+        {
+          "nome": "GOEC6O010 - Faixa 1",
+          "uuid": "abf8fedb-4f1b-471f-a6bd-4e00484d5737",
+          "faixa": 1,
+          "atual": 0,
+          "correto": 1,
+          "corrigido": true
+        },
+        {
+          "nome": "GOEC6O010 - Faixa 2",
+          "uuid": "481dd19b-4968-4759-860b-35f9ec09c206",
+          "faixa": 2,
+          "atual": 0,
+          "correto": 1,
+          "corrigido": true
+        },
+        {
+          "nome": "GOEC6O011 - Faixa 1",
+          "uuid": "259688db-e246-42df-b327-192de761ec5d",
+          "faixa": 1,
+          "atual": 0,
+          "correto": 1,
+          "corrigido": true
+        },
+        {
+          "nome": "GOEC6O013 - Faixa 1",
+          "uuid": "7d9bf2eb-0f9a-4691-bffd-e003fc3781ed",
+          "faixa": 1,
+          "atual": 0,
+          "correto": 1,
+          "corrigido": true
+        },
+        {
+          "nome": "GOEC6O013 - Faixa 2",
+          "uuid": "36896650-1bca-4093-9631-667b73bdd93d",
+          "faixa": 2,
+          "atual": 0,
+          "correto": 1,
+          "corrigido": true
+        },
+        {
+          "nome": "GOEC6O018 - Faixa 2",
+          "uuid": "def24641-a5f4-4673-973c-88cba3fbb571",
+          "faixa": 2,
+          "atual": 0,
+          "correto": 1,
+          "corrigido": true
+        },
+        {
+          "nome": "GOEC6O020 - Faixa 1",
+          "uuid": "b29feb12-0a55-4c12-aab9-771abea27059",
+          "faixa": 1,
+          "atual": 0,
+          "correto": 1,
+          "corrigido": true
+        },
+        {
+          "nome": "GOEC6O020 - Faixa 2",
+          "uuid": "21484385-21b6-49ae-a2f7-bd33fd4bed6b",
+          "faixa": 2,
+          "atual": 0,
+          "correto": 1,
+          "corrigido": true
+        },
+        {
+          "nome": "GOEC6O021 - Faixa 1",
+          "uuid": "f07c775c-96f6-420f-b5c8-0857e686dc35",
+          "faixa": 1,
+          "atual": 0,
+          "correto": 1,
+          "corrigido": true
+        },
+        {
+          "nome": "GOEC6O022 - Faixa 1",
+          "uuid": "29c1d243-f44f-4a40-b62d-06c9cce958c9",
+          "faixa": 1,
+          "atual": 0,
+          "correto": 1,
+          "corrigido": true
+        },
+        {
+          "nome": "GOEC6O022 - Faixa 2",
+          "uuid": "dfb678d9-4e51-45c5-b7a0-15a972fe354b",
+          "faixa": 2,
+          "atual": 0,
+          "correto": 1,
+          "corrigido": true
+        },
+        {
+          "nome": "GOEC6O023 - Faixa 1",
+          "uuid": "64e60ba4-79b7-4447-b726-a3f032327907",
+          "faixa": 1,
+          "atual": 0,
+          "correto": 1,
+          "corrigido": true
+        },
+        {
+          "nome": "GOEC6O029 - Faixa 1",
+          "uuid": "d4c91424-ff2b-408a-930d-f12b595a6212",
+          "faixa": 1,
+          "atual": 0,
+          "correto": 1,
+          "corrigido": true
+        },
+        {
+          "nome": "GOEC6O029 - Faixa 2",
+          "uuid": "0462e9d3-b0ce-42aa-9cfb-1b24c1cb1bee",
+          "faixa": 2,
+          "atual": 0,
+          "correto": 1,
+          "corrigido": true
+        },
+        {
+          "nome": "GOEC6O033 - Faixa 1",
+          "uuid": "5468c818-1b5d-4d0e-a7c1-57319784e3dc",
+          "faixa": 1,
+          "atual": 0,
+          "correto": 1,
+          "corrigido": true
+        },
+        {
+          "nome": "GOEC6O033 - Faixa 2",
+          "uuid": "34ebe844-ba8e-49f4-bc6f-45d5724ee381",
+          "faixa": 2,
+          "atual": 0,
+          "correto": 1,
+          "corrigido": true
+        },
+        {
+          "nome": "GOEC6O036 - Faixa 1",
+          "uuid": "e433c575-ba3b-4d88-bd96-9ee28225b73f",
+          "faixa": 1,
+          "atual": 0,
+          "correto": 1,
+          "corrigido": true
+        },
+        {
+          "nome": "GOEC6O040 - Faixa 1",
+          "uuid": "9b5328e3-104b-4afc-b3ce-8880066ca995",
+          "faixa": 1,
+          "atual": 0,
+          "correto": 1,
+          "corrigido": true
+        },
+        {
+          "nome": "GOEC6O040 - Faixa 2",
+          "uuid": "416aff7e-4c34-4356-bbac-aa66d34ffead",
+          "faixa": 2,
+          "atual": 0,
+          "correto": 1,
+          "corrigido": true
+        },
+        {
+          "nome": "GOEC6O041 - Faixa 1",
+          "uuid": "b2faa440-b39f-479b-a3bd-afbadfbfe194",
+          "faixa": 1,
+          "atual": 0,
+          "correto": 1,
+          "corrigido": true
+        },
+        {
+          "nome": "GOEC6O041 - Faixa 2",
+          "uuid": "de950460-2405-4ec4-838d-4a8ef2b49720",
+          "faixa": 2,
+          "atual": 0,
+          "correto": 1,
+          "corrigido": true
+        },
+        {
+          "nome": "GOEC6O043 - Faixa 1",
+          "uuid": "f29258aa-8c64-47c6-8912-54b3dffbc5dc",
+          "faixa": 1,
+          "atual": 0,
+          "correto": 1,
+          "corrigido": true
+        },
+        {
+          "nome": "GOEC6O043 - Faixa 2",
+          "uuid": "9e7e2c3c-bf75-40c4-b0ca-42b3950a0955",
+          "faixa": 2,
+          "atual": 0,
+          "correto": 1,
+          "corrigido": true
+        },
+        {
+          "nome": "GOEC6O045 - Faixa 1",
+          "uuid": "0ce96fed-4b52-4737-9e95-f6dd2c969d58",
+          "faixa": 1,
+          "atual": 0,
+          "correto": 1,
+          "corrigido": true
+        },
+        {
+          "nome": "GOEC6O045 - Faixa 2",
+          "uuid": "66ee7d2d-f271-40c6-a1dd-91459d77d803",
+          "faixa": 2,
+          "atual": 0,
+          "correto": 1,
+          "corrigido": true
+        },
+        {
+          "nome": "GOEC6O046 - Faixa 1",
+          "uuid": "1e26be92-70e4-468f-a582-4e015282a4fe",
+          "faixa": 1,
+          "atual": 0,
+          "correto": 1,
+          "corrigido": true
+        },
+        {
+          "nome": "GOEC6O048 - Faixa 1",
+          "uuid": "43d7e92f-482e-4822-bf76-ef2c5cc4dfd9",
+          "faixa": 1,
+          "atual": 0,
+          "correto": 1,
+          "corrigido": true
+        },
+        {
+          "nome": "GOEC6O048 - Faixa 2",
+          "uuid": "d23fe240-246f-4601-8987-d864ecb24d22",
+          "faixa": 2,
+          "atual": 0,
+          "correto": 1,
+          "corrigido": true
+        },
+        {
+          "nome": "GOEC6O049 - Faixa 1",
+          "uuid": "ad0db63e-bb6e-4cb1-99eb-960f486cb692",
+          "faixa": 1,
+          "atual": 0,
+          "correto": 1,
+          "corrigido": true
+        },
+        {
+          "nome": "GOEC6O049 - Faixa 2",
+          "uuid": "3a8b23c7-edf3-43d3-b9be-9211674777e3",
+          "faixa": 2,
+          "atual": 0,
+          "correto": 1,
+          "corrigido": true
+        },
+        {
+          "nome": "GOEC6O050 - Faixa 1",
+          "uuid": "fc487783-cc4a-4d77-9bc4-5399ba479587",
+          "faixa": 1,
+          "atual": 0,
+          "correto": 1,
+          "corrigido": true
+        },
+        {
+          "nome": "GOEC6O050 - Faixa 2",
+          "uuid": "f435e113-b74b-4721-b15c-066731fe0668",
+          "faixa": 2,
+          "atual": 0,
+          "correto": 1,
+          "corrigido": true
+        },
+        {
+          "nome": "GOEC6O051 - Faixa 1",
+          "uuid": "b1936eeb-bdb5-41d4-9d59-8d5aca35f301",
+          "faixa": 1,
+          "atual": 0,
+          "correto": 1,
+          "corrigido": false,
+          "erro": "This operation was aborted"
+        },
+        {
+          "nome": "GOEC6O051 - Faixa 2",
+          "uuid": "13d8dad0-3b76-4394-ad2f-bcb2f6ca3d5c",
+          "faixa": 2,
+          "atual": 0,
+          "correto": 1,
+          "corrigido": true
+        },
+        {
+          "nome": "GOEC6O052 - Faixa 2",
+          "uuid": "8244f568-59f3-4f27-932e-86cc2eb10fc3",
+          "faixa": 2,
+          "atual": 0,
+          "correto": 1,
+          "corrigido": true
+        },
+        {
+          "nome": "GOEC6O053 - Faixa 1",
+          "uuid": "b2071e67-3658-4a52-a543-13713f2c1e33",
+          "faixa": 1,
+          "atual": 0,
+          "correto": 1,
+          "corrigido": true
+        },
+        {
+          "nome": "GOEC6O053 - Faixa 2",
+          "uuid": "3bb822e1-3f89-4a2e-aa79-c8a6041288d9",
+          "faixa": 2,
+          "atual": 0,
+          "correto": 1,
+          "corrigido": true
+        },
+        {
+          "nome": "GOEC6O054 - Faixa 1",
+          "uuid": "8f419e79-5a4c-4af3-8a89-79304110c391",
+          "faixa": 1,
+          "atual": 0,
+          "correto": 1,
+          "corrigido": true
+        },
+        {
+          "nome": "GOEC6O054 - Faixa 2",
+          "uuid": "06821a80-8d82-484e-908e-a9a55ba73b7b",
+          "faixa": 2,
+          "atual": 0,
+          "correto": 1,
+          "corrigido": true
+        },
+        {
+          "nome": "GOEC6O055 - Faixa 1",
+          "uuid": "1d0b2132-a825-4823-ab8f-8ce4aa829138",
+          "faixa": 1,
+          "atual": 0,
+          "correto": 1,
+          "corrigido": true
+        },
+        {
+          "nome": "GOEC6O055 - Faixa 2",
+          "uuid": "fe5f7cf3-a8dd-41e8-b975-72921dbddeac",
+          "faixa": 2,
+          "atual": 0,
+          "correto": 1,
+          "corrigido": true
+        },
+        {
+          "nome": "GOEC6O056 - Faixa 1",
+          "uuid": "07b43518-06b0-4186-89b8-201132a845ac",
+          "faixa": 1,
+          "atual": 0,
+          "correto": 1,
+          "corrigido": true
+        },
+        {
+          "nome": "GOEC6O056 - Faixa 2",
+          "uuid": "8dfa023b-1492-4d06-ad06-13aa51fe8fa2",
+          "faixa": 2,
+          "atual": 0,
+          "correto": 1,
+          "corrigido": true
+        },
+        {
+          "nome": "GOEC6O057 - Faixa 1",
+          "uuid": "41d74d00-032e-4a4c-864e-ac86ea4d01aa",
+          "faixa": 1,
+          "atual": 0,
+          "correto": 1,
+          "corrigido": true
+        },
+        {
+          "nome": "GOEC6O057 - Faixa 2",
+          "uuid": "78fd907c-0085-4d9b-963d-b4e8ee2ad47b",
+          "faixa": 2,
+          "atual": 0,
+          "correto": 1,
+          "corrigido": true
+        },
+        {
+          "nome": "GOEC6O058 - Faixa 1",
+          "uuid": "b5a0f157-e8d4-478c-bf2b-91ebbfcf2a29",
+          "faixa": 1,
+          "atual": 0,
+          "correto": 1,
+          "corrigido": true
+        },
+        {
+          "nome": "GOEC6O058 - Faixa 2",
+          "uuid": "6561d5fd-0aba-413b-a60a-a0d7e1b61b6d",
+          "faixa": 2,
+          "atual": 0,
+          "correto": 1,
+          "corrigido": true
+        },
+        {
+          "nome": "GOEC6O059 - Faixa 1",
+          "uuid": "97a97d01-3d12-4f16-94b0-831575825255",
+          "faixa": 1,
+          "atual": 0,
+          "correto": 1,
+          "corrigido": true
+        },
+        {
+          "nome": "GOEC6O059 - Faixa 2",
+          "uuid": "cedcda0f-9104-498c-9f52-8f6e3ebfdcfb",
+          "faixa": 2,
+          "atual": 0,
+          "correto": 1,
+          "corrigido": true
         },
         {
           "nome": "GOEC6O011 - Faixa 2",
           "uuid": "d0595c80-9ea7-49af-b2a0-d305d688e567",
           "faixa": 2,
-          "atual": 20,
-          "correto": 40
+          "atual": 0,
+          "correto": 1,
+          "corrigido": true
         },
         {
           "nome": "GOEC6O028 - Faixa 1",
           "uuid": "1f460cd7-f607-4c79-8a8e-50a8228850a4",
           "faixa": 1,
-          "atual": 20,
-          "correto": 40
-        },
-        {
-          "nome": "GOEC6O003 - Faixa 1",
-          "uuid": "1792282c-bacb-4808-8ff6-e44404b72de5",
-          "faixa": 1,
-          "atual": 20,
-          "correto": 40
+          "atual": 0,
+          "correto": 1,
+          "corrigido": true
         }
       ],
       "conformes": [],
       "totalAfetados": 64
-    },
-    {
-      "id": 20,
-      "titulo": "Reboot Agendado Habilitado (fora do padrão)",
-      "severidade": "baixo",
-      "parametro": "Reboot.scheduled.enabled",
-      "descricao": "O padrão da frota é reboot.scheduled.enabled = false. Dispositivos com reboot agendado ativo divergem do padrão.",
-      "problema": "Reboot automático agendado pode interromper o monitoramento em horários de pico e causar perda de registros. O padrão define desabilitado.",
-      "correcao": "Via API: POST /api/system/maintenance/automaticreboot com scheduled.enabled=false (o ITScam usa POST para escrita neste endpoint).",
-      "menu": "Interface Web › Sistema › Manutenção › Reboot Automático › Agendado",
-      "endpoint": "/api/system/maintenance/automaticreboot",
-      "afetados": [],
-      "conformes": [
-        {
-          "nome": "GOEC6O055 - Faixa 1",
-          "faixa": 1
-        },
-        {
-          "nome": "GOEC6O003 - Faixa 2",
-          "faixa": 2
-        }
-      ],
-      "totalAfetados": 0
-    },
-    {
-      "id": 21,
-      "titulo": "Reboot Periódico Habilitado (fora do padrão)",
-      "severidade": "baixo",
-      "parametro": "Reboot.periodic.enabled",
-      "descricao": "O padrão da frota é reboot.periodic.enabled = false.",
-      "problema": "Reboot periódico por uptime pode interromper captura durante horários de movimento.",
-      "correcao": "Via API: POST /api/system/maintenance/automaticreboot com periodic.enabled=false (o ITScam usa POST para escrita neste endpoint).",
-      "menu": "Interface Web › Sistema › Manutenção › Reboot Automático › Periódico",
-      "endpoint": "/api/system/maintenance/automaticreboot",
-      "afetados": [],
-      "conformes": [
-        {
-          "nome": "GOEC6O019 - Faixa 2",
-          "faixa": 2
-        },
-        {
-          "nome": "GOEC6O054 - Faixa 1",
-          "faixa": 1
-        }
-      ],
-      "totalAfetados": 0
     }
   ],
   "resumo": {
-    "totalErrosEncontrados": 187,
-    "casosComAfetados": 3,
+    "totalErrosEncontrados": 64,
+    "casosComAfetados": 1,
     "criticos": 0,
     "equipamentosUnicos": 64
   }

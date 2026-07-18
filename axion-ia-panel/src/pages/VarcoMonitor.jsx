@@ -339,6 +339,9 @@ export default function VarcoMonitor() {
         <QuickSelect
           options={[
             { id: "auditoria",  label: "Auditoria & Correções" },
+            { id: "diagnostico", label: "🔴 Diagnóstico Frota" },
+            { id: "depara",     label: "🔄 De-Para Equip." },
+            { id: "auditoria-itscam", label: "🔬 Auditoria Completa" },
             { id: "correcoes",  label: "Plano de Correção" },
             { id: "padrao",    label: "vs Padrão" },
             { id: "grupos",    label: "Grupos" },
@@ -356,7 +359,10 @@ export default function VarcoMonitor() {
       {loading && <div style={{ textAlign: "center", padding: "40px", color: C.textMuted }}>Carregando...</div>}
 
       {!loading && tab === "auditoria" && analysis && <AuditoriaTab analysis={analysis} />}
-      {!loading && tab === "correcoes" && <CorrecoesTab liveDevices={liveDevices} />}
+      {!loading && tab === "diagnostico" && <DiagnosticoFrotaTab liveDevices={liveDevices} auditDevices={auditDevices} />}
+      {!loading && tab === "depara" && <DeParaTab auditDevices={auditDevices} liveDevices={liveDevices} />}
+      {!loading && tab === "auditoria-itscam" && <AuditoriaCompletaTab liveDevices={liveDevices} />}
+      {!loading && tab === "correcoes" && <CorrecoesTab liveDevices={liveDevices} auditDevices={auditDevices} />}
       {!loading && tab === "padrao" && <PadraoTab />}
       {!loading && tab === "grupos" && analysis && <GruposTab groups={analysis.groups} expandedGroup={expandedGroup} setExpandedGroup={setExpandedGroup} />}
       {!loading && tab === "inventario" && analysis && <InventarioTab results={filteredResults} filter={filter} setFilter={setFilter} statusFilter={statusFilter} setStatusFilter={setStatusFilter} expandedDevice={expandedDevice} setExpandedDevice={setExpandedDevice} liveDevices={liveDevices} />}
@@ -1156,12 +1162,69 @@ function AuditoriaTab({ analysis }) {
 // ═══════════════════════════════════════════════════════════
 // CORREÇÕES TAB — Plano de Correção com análise e execução
 // ═══════════════════════════════════════════════════════════
-function CorrecoesTab({ liveDevices = [] }) {
+function CorrecoesTab({ liveDevices = [], auditDevices = [] }) {
   const uuidMap = useMemo(() => {
     const m = {};
     liveDevices.forEach(d => { if (d.name && d.uuid) m[d.name] = d.uuid; });
     return m;
   }, [liveDevices]);
+
+  // ── Plano de correção de overlay ─────────────────────────────────────────
+  const [corrigindoOverlay, setCorrigindoOverlay] = useState({});
+  const [resultadoOverlay, setResultadoOverlay] = useState({});
+
+  const equipOverlayErrado = useMemo(() => {
+    return auditDevices.filter(d => {
+      if (!d.raw?.profiles) return false;
+      return d.raw.profiles.some(p => {
+        const text = p.overlay?.text || p.transitions?.upper?.overlay?.text || "";
+        const match = text.match(/CODIGO EQUIPAMENTO:\s*(\S+)/i);
+        if (!match) return false;
+        const base = d.nome?.split(" - ")[0]?.trim() ?? "";
+        return match[1].toUpperCase() !== base.toUpperCase();
+      });
+    }).map(d => {
+      const base = d.nome?.split(" - ")[0]?.trim() ?? d.nome;
+      const profilesInfo = d.raw.profiles.map(p => {
+        const text = p.overlay?.text || p.transitions?.upper?.overlay?.text || "";
+        const match = text.match(/CODIGO EQUIPAMENTO:\s*(\S+)/i);
+        return { id: p.id, name: p.name ?? `ID-${p.id}`, codigoAtual: match ? match[1] : null, texto: text };
+      }).filter(p => p.codigoAtual && p.codigoAtual.toUpperCase() !== base.toUpperCase());
+      return { nome: d.nome, uuid: d.uuid, base, profilesInfo };
+    });
+  }, [auditDevices]);
+
+  async function corrigirOverlayEquipamento(equip) {
+    const uuid = equip.uuid || uuidMap[equip.nome];
+    if (!uuid) { setResultadoOverlay(prev => ({ ...prev, [equip.nome]: { ok: false, msg: "UUID não encontrado" } })); return; }
+    setCorrigindoOverlay(prev => ({ ...prev, [equip.nome]: true }));
+    try {
+      const token = await fetch(`https://${uuid}-80.tunnel.varco.cloud/api/auth`, {
+        method: "POST", headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ params: { username: "admin", password: "#econocr@" } })
+      }).then(r => r.json()).then(d => d.token);
+
+      for (const prof of equip.profilesInfo) {
+        const novoTexto = prof.texto.replace(/CODIGO EQUIPAMENTO:\s*\S+/i, `CODIGO EQUIPAMENTO: ${equip.base}`);
+        // ITSCAM não suporta PATCH — usa PUT no sub-endpoint /overlay
+        await fetch(`https://${uuid}-80.tunnel.varco.cloud/api/image/profiles/${prof.id}/overlay`, {
+          method: "PUT",
+          headers: { Authorization: `Bearer ${token}`, "Content-Type": "application/json" },
+          body: JSON.stringify({ enable: true, text: novoTexto })
+        });
+      }
+      setResultadoOverlay(prev => ({ ...prev, [equip.nome]: { ok: true, msg: `✅ ${equip.profilesInfo.length} perfil(s) corrigido(s) → ${equip.base}` } }));
+    } catch (e) {
+      setResultadoOverlay(prev => ({ ...prev, [equip.nome]: { ok: false, msg: `❌ ${e.message}` } }));
+    }
+    setCorrigindoOverlay(prev => ({ ...prev, [equip.nome]: false }));
+  }
+
+  async function corrigirTodosOverlay() {
+    for (const equip of equipOverlayErrado) {
+      if (!corrigindoOverlay[equip.nome]) await corrigirOverlayEquipamento(equip);
+    }
+  }
   const [plano, setPlano] = useState(null);
   const [loading, setLoading] = useState(false);
   const [gerando, setGerando] = useState(false);
@@ -1226,6 +1289,77 @@ function CorrecoesTab({ liveDevices = [] }) {
 
   return (
     <div>
+      {/* ── PLANO DE CORREÇÃO DE OVERLAY ────────────────────────────────── */}
+      {equipOverlayErrado.length > 0 && (
+        <div style={{ marginBottom: "20px", border: `1px solid rgba(167,139,250,0.3)`, borderRadius: "8px", overflow: "hidden" }}>
+          <div style={{ padding: "12px 16px", background: "rgba(167,139,250,0.08)", borderBottom: `1px solid rgba(167,139,250,0.2)`, display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+            <div>
+              <div style={{ fontSize: "13px", fontWeight: 700, color: "#a78bfa" }}>🔤 Plano de Correção — CODIGO EQUIPAMENTO no Overlay</div>
+              <div style={{ fontSize: "11px", color: C.textMuted, marginTop: "2px" }}>
+                {equipOverlayErrado.length} equipamento(s) com código incorreto no texto de sobreposição das imagens. Isso faz as passagens aparecerem no mapa de outro equipamento no AxHub.
+              </div>
+            </div>
+            <button onClick={corrigirTodosOverlay}
+              style={{ padding: "7px 14px", border: `1px solid #a78bfa`, borderRadius: "6px", background: "rgba(167,139,250,0.12)", color: "#a78bfa", cursor: "pointer", fontSize: "11px", fontWeight: 700, whiteSpace: "nowrap" }}>
+              ⚡ Corrigir Todos
+            </button>
+          </div>
+          <table style={{ width: "100%", borderCollapse: "collapse", fontSize: "12px" }}>
+            <thead>
+              <tr style={{ background: C.tableHeader }}>
+                <th style={{ padding: "8px 12px", textAlign: "left", color: C.textSecondary }}>Equipamento</th>
+                <th style={{ padding: "8px 12px", textAlign: "left", color: C.danger }}>Código Atual (errado)</th>
+                <th style={{ padding: "8px 12px", textAlign: "left", color: C.success }}>Código Correto</th>
+                <th style={{ padding: "8px 12px", textAlign: "left", color: C.textSecondary }}>Perfis afetados</th>
+                <th style={{ padding: "8px 12px", textAlign: "center", color: C.textSecondary }}>Ação</th>
+              </tr>
+            </thead>
+            <tbody>
+              {equipOverlayErrado.map((equip, i) => {
+                const res = resultadoOverlay[equip.nome];
+                const carregando = corrigindoOverlay[equip.nome];
+                return (
+                  <tr key={equip.nome} style={{ borderTop: `1px solid ${C.border}`, background: i % 2 === 0 ? "transparent" : C.surface }}>
+                    <td style={{ padding: "8px 12px", fontWeight: 600, color: C.text }}>
+                      <TunnelLink nome={equip.nome} uuid={equip.uuid} />
+                    </td>
+                    <td style={{ padding: "8px 12px" }}>
+                      {equip.profilesInfo.map(p => (
+                        <div key={p.id} style={{ fontSize: "11px" }}>
+                          <code style={{ color: C.danger, fontWeight: 700 }}>{p.codigoAtual}</code>
+                          <span style={{ color: C.textMuted, fontSize: "10px", marginLeft: "4px" }}>[{p.name}]</span>
+                        </div>
+                      ))}
+                    </td>
+                    <td style={{ padding: "8px 12px" }}>
+                      <code style={{ color: C.success, fontWeight: 700, fontSize: "12px" }}>{equip.base}</code>
+                    </td>
+                    <td style={{ padding: "8px 12px", color: C.textMuted, fontSize: "11px" }}>
+                      {equip.profilesInfo.map(p => p.name).join(", ")}
+                    </td>
+                    <td style={{ padding: "8px 12px", textAlign: "center" }}>
+                      {res ? (
+                        <span style={{ fontSize: "10px", color: res.ok ? C.success : C.danger }}>{res.msg}</span>
+                      ) : (
+                        <button onClick={() => corrigirOverlayEquipamento(equip)} disabled={carregando}
+                          style={{ padding: "4px 12px", border: `1px solid #a78bfa`, borderRadius: "4px", background: "rgba(167,139,250,0.1)", color: "#a78bfa", cursor: carregando ? "wait" : "pointer", fontSize: "11px", fontWeight: 600, opacity: carregando ? 0.6 : 1 }}>
+                          {carregando ? "⏳ Corrigindo..." : "🔧 Corrigir"}
+                        </button>
+                      )}
+                    </td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        </div>
+      )}
+      {equipOverlayErrado.length === 0 && auditDevices.length > 0 && (
+        <div style={{ marginBottom: "16px", padding: "12px 16px", background: C.successBg, border: `1px solid ${C.successBorder}`, borderRadius: "8px", fontSize: "12px", color: C.success }}>
+          ✅ Todos os equipamentos auditados têm o CODIGO EQUIPAMENTO correto no overlay.
+        </div>
+      )}
+
       {/* Header actions */}
       <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "16px" }}>
         <button onClick={gerarNovoPlano} disabled={gerando}
@@ -1913,6 +2047,1309 @@ function ComandosTab({ groups }) {
           </tbody>
         </table>
       </div>
+    </div>
+  );
+}
+
+// ═══════════════════════════════════════════════════════════════════════════════
+// DIAGNÓSTICO FROTA — Disponibilidade, Heartbeat & Equipamentos Problemáticos
+// ═══════════════════════════════════════════════════════════════════════════════
+function DiagnosticoFrotaTab({ liveDevices, auditDevices = [] }) {
+  const [searchEq, setSearchEq] = useState("");
+  const [availFilter, setAvailFilter] = useState("all"); // all | offline | intermitente | atencao | ok | overlay_errado
+
+  // ── Mapa de overlay por nome do equipamento ──────────────────────────────
+  const overlayMap = useMemo(() => {
+    const m = {};
+    auditDevices.forEach(d => {
+      if (!d.nome || !d.raw?.profiles) return;
+      const text = d.raw.profiles[0]?.overlay?.text || d.raw.profiles[0]?.transitions?.upper?.overlay?.text || "";
+      const match = text.match(/CODIGO EQUIPAMENTO:\s*(\S+)/i);
+      const codigo = match ? match[1] : null;
+      const base = d.nome.split(" - ")[0].trim();
+      const errado = codigo && codigo.toUpperCase() !== base.toUpperCase();
+      m[d.nome] = { codigo, errado, enable: d.raw.profiles[0]?.overlay?.enable ?? false };
+    });
+    return m;
+  }, [auditDevices]);
+
+  const overlayErrCount = useMemo(() =>
+    Object.values(overlayMap).filter(o => o.errado).length,
+  [overlayMap]);
+
+  function classifyAvail(avail, connected) {
+    if (!connected && avail === 0) return "offline";
+    if (avail < 60 || !connected) return "intermitente";
+    if (avail < 95) return "atencao";
+    return "ok";
+  }
+
+  function classifyLabel(avail, connected) {
+    const c = classifyAvail(avail, connected);
+    if (c === "offline") return { label: "OFFLINE", color: C.danger, bg: C.dangerBg };
+    if (c === "intermitente") return { label: "INTERMITENTE", color: "#f59e0b", bg: "#78350f22" };
+    if (c === "atencao") return { label: "ATENÇÃO", color: C.warning, bg: C.warningBg };
+    return { label: "OK", color: C.success, bg: C.successBg };
+  }
+
+  function getBase(name) { return name?.split(" - ")[0]?.split("-")[0]?.trim() ?? name; }
+
+  const stats = useMemo(() => {
+    if (!liveDevices.length) return null;
+    const total = liveDevices.length;
+    const offline = liveDevices.filter(d => !d.connected && d.availability === 0).length;
+    const intermitente = liveDevices.filter(d => d.availability > 0 && d.availability < 60).length;
+    const atencao = liveDevices.filter(d => d.availability >= 60 && d.availability < 95).length;
+    const ok = liveDevices.filter(d => d.connected && d.availability >= 95).length;
+    return { total, offline, intermitente, atencao, ok };
+  }, [liveDevices]);
+
+  const problematicos = useMemo(() => {
+    return liveDevices
+      .filter(d => {
+        const c = classifyAvail(d.availability, d.connected);
+        if (availFilter === "all") return c !== "ok";
+        if (availFilter === "ok") return c === "ok";
+        if (availFilter === "overlay_errado") return overlayMap[d.name]?.errado === true;
+        return c === availFilter;
+      })
+      .filter(d => !searchEq || d.name?.toLowerCase().includes(searchEq.toLowerCase()))
+      .sort((a, b) => a.availability - b.availability);
+  }, [liveDevices, availFilter, searchEq, overlayMap]);
+
+  const equipOk = useMemo(() => {
+    if (!searchEq || availFilter !== "all") return [];
+    return liveDevices.filter(d =>
+      classifyAvail(d.availability, d.connected) === "ok" &&
+      d.name?.toLowerCase().includes(searchEq.toLowerCase())
+    );
+  }, [liveDevices, searchEq, availFilter]);
+
+  function minutosAtras(lastSeen) {
+    if (!lastSeen) return null;
+    return Math.round((Date.now() - new Date(lastSeen).getTime()) / 60000);
+  }
+
+  function formatLastSeen(lastSeen) {
+    if (!lastSeen) return "–";
+    return new Date(lastSeen).toLocaleString("pt-BR", { day: "2-digit", month: "2-digit", year: "numeric", hour: "2-digit", minute: "2-digit" });
+  }
+
+  function diasOffline(lastSeen) {
+    if (!lastSeen) return null;
+    return ((Date.now() - new Date(lastSeen).getTime()) / (1000 * 60 * 60 * 24)).toFixed(1);
+  }
+
+  return (
+    <div>
+      {/* Header */}
+      <div style={{ marginBottom: "16px", background: "rgba(251,113,133,0.06)", border: `1px solid rgba(251,113,133,0.18)`, borderRadius: "8px", padding: "12px 16px" }}>
+        <div style={{ fontSize: "13px", fontWeight: 700, color: C.danger, marginBottom: "4px" }}>🔴 Diagnóstico de Disponibilidade da Frota</div>
+        <div style={{ fontSize: "11px", color: C.textMuted }}>
+          Análise em tempo real dos dados do VARCO Cloud. Identifica equipamentos offline, intermitentes e com baixa disponibilidade.<br />
+          <strong style={{ color: C.textSecondary }}>Nota:</strong> Disponibilidade VARCO ≠ envio de dados ao AxHub. Um equipamento pode estar conectado no VARCO mas não gerar infrações/mapas de teste.
+        </div>
+      </div>
+
+      {/* Estatísticas */}
+      {stats && (
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(120px, 1fr))", gap: "8px", marginBottom: "16px" }}>
+          <div style={{ background: C.cardBg, border: `1px solid ${C.border}`, borderRadius: "8px", padding: "10px 12px", textAlign: "center" }}>
+            <div style={{ fontSize: "22px", fontWeight: 700, color: C.text }}>{stats.total}</div>
+            <div style={{ fontSize: "10px", color: C.textMuted }}>TOTAL DISPOSITIVOS</div>
+          </div>
+          <div style={{ background: C.successBg, border: `1px solid ${C.success}`, borderRadius: "8px", padding: "10px 12px", textAlign: "center", cursor: "pointer" }} onClick={() => setAvailFilter("ok")}>
+            <div style={{ fontSize: "22px", fontWeight: 700, color: C.success }}>{stats.ok}</div>
+            <div style={{ fontSize: "10px", color: C.success }}>ONLINE OK (≥95%)</div>
+          </div>
+          <div style={{ background: "#78350f11", border: `1px solid #f59e0b`, borderRadius: "8px", padding: "10px 12px", textAlign: "center", cursor: "pointer" }} onClick={() => setAvailFilter("intermitente")}>
+            <div style={{ fontSize: "22px", fontWeight: 700, color: "#f59e0b" }}>{stats.intermitente}</div>
+            <div style={{ fontSize: "10px", color: "#f59e0b" }}>INTERMITENTE (&lt;60%)</div>
+          </div>
+          <div style={{ background: C.warningBg, border: `1px solid ${C.warning}`, borderRadius: "8px", padding: "10px 12px", textAlign: "center", cursor: "pointer" }} onClick={() => setAvailFilter("atencao")}>
+            <div style={{ fontSize: "22px", fontWeight: 700, color: C.warning }}>{stats.atencao}</div>
+            <div style={{ fontSize: "10px", color: C.warning }}>ATENÇÃO (60-95%)</div>
+          </div>
+          <div style={{ background: C.dangerBg, border: `1px solid ${C.danger}`, borderRadius: "8px", padding: "10px 12px", textAlign: "center", cursor: "pointer" }} onClick={() => setAvailFilter("offline")}>
+            <div style={{ fontSize: "22px", fontWeight: 700, color: C.danger }}>{stats.offline}</div>
+            <div style={{ fontSize: "10px", color: C.danger }}>OFFLINE TOTAL (0%)</div>
+          </div>
+          {overlayErrCount > 0 && (
+            <div style={{ background: "rgba(167,139,250,0.1)", border: `1px solid #a78bfa`, borderRadius: "8px", padding: "10px 12px", textAlign: "center", cursor: "pointer" }} onClick={() => setAvailFilter("overlay_errado")}>
+              <div style={{ fontSize: "22px", fontWeight: 700, color: "#a78bfa" }}>{overlayErrCount}</div>
+              <div style={{ fontSize: "10px", color: "#a78bfa" }}>OVERLAY ERRADO</div>
+            </div>
+          )}
+        </div>
+      )}
+
+      {/* Filtros */}
+      <div style={{ display: "flex", gap: "8px", marginBottom: "12px", flexWrap: "wrap", alignItems: "center" }}>
+        <input
+          value={searchEq}
+          onChange={e => setSearchEq(e.target.value)}
+          placeholder="Buscar equipamento (ex: GOEC6O059)..."
+          style={{ flex: 1, minWidth: "200px", padding: "6px 10px", border: `1px solid ${C.border}`, borderRadius: "6px", background: C.surface, color: C.text, fontSize: "12px" }}
+        />
+        {["all","offline","intermitente","atencao","ok","overlay_errado"].map(f => (
+          <button key={f} onClick={() => setAvailFilter(f)}
+            style={{ padding: "5px 12px", borderRadius: "5px", border: `1px solid ${availFilter === f ? (f === "overlay_errado" ? "#a78bfa" : C.accent) : C.border}`, background: availFilter === f ? (f === "overlay_errado" ? "rgba(167,139,250,0.1)" : C.accentBg) : C.surface, color: availFilter === f ? (f === "overlay_errado" ? "#a78bfa" : C.accent) : C.textMuted, fontSize: "11px", cursor: "pointer", fontWeight: availFilter === f ? 700 : 400 }}>
+            {f === "all" ? "Problemas" : f === "offline" ? "Offline" : f === "intermitente" ? "Intermitente" : f === "atencao" ? "Atenção" : f === "overlay_errado" ? `🔤 Overlay Errado${overlayErrCount > 0 ? ` (${overlayErrCount})` : ""}` : "OK"}
+          </button>
+        ))}
+      </div>
+
+      {/* Tabela de equipamentos */}
+      {!liveDevices.length ? (
+        <div style={{ padding: "20px", textAlign: "center", color: C.textMuted, fontSize: "12px" }}>
+          Nenhum dado de frota disponível. Clique em "Atualizar — Recoletar do VARCO" acima.
+        </div>
+      ) : (
+        <div style={{ border: `1px solid ${C.border}`, borderRadius: "8px", overflow: "hidden" }}>
+          <table style={{ width: "100%", borderCollapse: "collapse", fontSize: "12px" }}>
+            <thead>
+              <tr style={{ background: C.tableHeader }}>
+                <th style={{ padding: "8px 10px", textAlign: "left", color: C.textSecondary }}>Equipamento</th>
+                <th style={{ padding: "8px 10px", textAlign: "center", color: C.textSecondary }}>Status</th>
+                <th style={{ padding: "8px 10px", textAlign: "center", color: C.textSecondary }}>Disponib.</th>
+                <th style={{ padding: "8px 10px", textAlign: "left", color: C.textSecondary }}>Último Sinal</th>
+                <th style={{ padding: "8px 10px", textAlign: "left", color: C.textSecondary }}>IP</th>
+                <th style={{ padding: "8px 10px", textAlign: "center", color: "#a78bfa" }}>CODIGO Overlay</th>
+                <th style={{ padding: "8px 10px", textAlign: "center", color: C.textSecondary }}>Túnel</th>
+                <th style={{ padding: "8px 10px", textAlign: "center", color: C.textSecondary }}>Mapa Teste</th>
+              </tr>
+            </thead>
+            <tbody>
+              {problematicos.map((d, i) => {
+                const { label, color, bg } = classifyLabel(d.availability, d.connected);
+                const mins = minutosAtras(d.lastSeen);
+                const dias = d.availability === 0 ? diasOffline(d.lastSeen) : null;
+                return (
+                  <tr key={d.uuid || i} style={{ borderTop: `1px solid ${C.border}`, background: i % 2 === 0 ? "transparent" : C.surface }}>
+                    <td style={{ padding: "8px 10px", fontWeight: 600, color: C.text }}>
+                      <TunnelLink nome={d.name} uuid={d.uuid} />
+                      {d.name?.includes("GOEC6O059") && (
+                        <span style={{ marginLeft: "6px", fontSize: "10px", background: "rgba(251,113,133,0.15)", color: C.danger, padding: "1px 5px", borderRadius: "3px" }}>⚑ Foco</span>
+                      )}
+                    </td>
+                    <td style={{ padding: "8px 10px", textAlign: "center" }}>
+                      <span style={{ fontSize: "10px", fontWeight: 700, background: bg, color, padding: "2px 8px", borderRadius: "4px" }}>{label}</span>
+                    </td>
+                    <td style={{ padding: "8px 10px", textAlign: "center" }}>
+                      <span style={{ fontSize: "13px", fontWeight: 700, color: d.availability === 0 ? C.danger : d.availability < 60 ? "#f59e0b" : C.warning }}>
+                        {d.availability.toFixed(1)}%
+                      </span>
+                    </td>
+                    <td style={{ padding: "8px 10px", color: C.textMuted }}>
+                      <div>{formatLastSeen(d.lastSeen)}</div>
+                      {dias !== null && <div style={{ fontSize: "10px", color: C.danger }}>⏱ {dias} dias offline</div>}
+                      {mins !== null && dias === null && <div style={{ fontSize: "10px", color: "#f59e0b" }}>⏱ {mins}min atrás</div>}
+                    </td>
+                    <td style={{ padding: "8px 10px", color: C.textMuted, fontFamily: "monospace", fontSize: "11px" }}>{d.ip || "–"}</td>
+                    <td style={{ padding: "8px 10px", textAlign: "center" }}>
+                      {(() => {
+                        const ov = overlayMap[d.name];
+                        if (!ov || !ov.codigo) return <span style={{ color: C.textMuted, fontSize: "10px" }}>—</span>;
+                        const base = d.name?.split(" - ")[0]?.trim() ?? "";
+                        const ok = ov.codigo.toUpperCase() === base.toUpperCase();
+                        return (
+                          <span title={`Overlay: ${ov.codigo}`} style={{ fontSize: "10px", fontWeight: 700, padding: "2px 7px", borderRadius: "4px", background: ok ? C.successBg : "rgba(251,113,133,0.12)", color: ok ? C.success : C.danger, border: `1px solid ${ok ? C.successBorder : C.dangerBorder}` }}>
+                            {ok ? "✓" : "⚠"} {ov.codigo}
+                          </span>
+                        );
+                      })()}
+                    </td>
+                    <td style={{ padding: "8px 10px", textAlign: "center" }}>
+                      {d.uuid ? (
+                        <a href={`https://${d.uuid}-80.tunnel.varco.cloud`} target="_blank" rel="noopener noreferrer"
+                          style={{ fontSize: "10px", color: C.accent, textDecoration: "none", border: `1px solid ${C.accentBorder}`, padding: "2px 7px", borderRadius: "4px" }}>
+                          Abrir
+                        </a>
+                      ) : "–"}
+                    </td>
+                    <td style={{ padding: "8px 10px", textAlign: "center" }}>
+                      <a href="https://economia.axhub.axion.ws/relatorio/relatoriomapadeteste" target="_blank" rel="noopener noreferrer"
+                        style={{ fontSize: "10px", color: "#a78bfa", border: "1px solid #a78bfa44", padding: "2px 7px", borderRadius: "4px", textDecoration: "none" }}
+                        title="Ver Mapa de Teste no AxHub">
+                        AxHub
+                      </a>
+                    </td>
+                  </tr>
+                );
+              })}
+              {problematicos.length === 0 && (
+                <tr>
+                  <td colSpan={8} style={{ padding: "20px", textAlign: "center", color: C.success }}>
+                    ✅ Nenhum equipamento com problema encontrado para o filtro selecionado.
+                  </td>
+                </tr>
+              )}
+            </tbody>
+          </table>
+        </div>
+      )}
+
+      {/* Resultado da busca em equipamentos OK */}
+      {equipOk.length > 0 && (
+        <div style={{ marginTop: "16px" }}>
+          <div style={{ fontSize: "12px", fontWeight: 600, color: C.success, marginBottom: "8px" }}>✅ Encontrado nos equipamentos OK:</div>
+          <div style={{ border: `1px solid ${C.border}`, borderRadius: "8px", overflow: "hidden" }}>
+            <table style={{ width: "100%", borderCollapse: "collapse", fontSize: "12px" }}>
+              <thead>
+                <tr style={{ background: C.tableHeader }}>
+                  <th style={{ padding: "8px 10px", textAlign: "left", color: C.textSecondary }}>Equipamento</th>
+                  <th style={{ padding: "8px 10px", textAlign: "center", color: C.textSecondary }}>Disponib.</th>
+                  <th style={{ padding: "8px 10px", textAlign: "left", color: C.textSecondary }}>Último Sinal</th>
+                  <th style={{ padding: "8px 10px", textAlign: "left", color: C.textSecondary }}>IP</th>
+                  <th style={{ padding: "8px 10px", textAlign: "center", color: C.textSecondary }}>Túnel</th>
+                </tr>
+              </thead>
+              <tbody>
+                {equipOk.map((d, i) => (
+                  <tr key={d.uuid || i} style={{ borderTop: `1px solid ${C.border}` }}>
+                    <td style={{ padding: "8px 10px", fontWeight: 600, color: C.text }}><TunnelLink nome={d.name} uuid={d.uuid} /></td>
+                    <td style={{ padding: "8px 10px", textAlign: "center", color: C.success, fontWeight: 700 }}>{d.availability.toFixed(2)}%</td>
+                    <td style={{ padding: "8px 10px", color: C.textMuted }}>{formatLastSeen(d.lastSeen)}</td>
+                    <td style={{ padding: "8px 10px", color: C.textMuted, fontFamily: "monospace", fontSize: "11px" }}>{d.ip || "–"}</td>
+                    <td style={{ padding: "8px 10px", textAlign: "center" }}>
+                      {d.uuid ? (
+                        <a href={`https://${d.uuid}-80.tunnel.varco.cloud`} target="_blank" rel="noopener noreferrer"
+                          style={{ fontSize: "10px", color: C.accent, textDecoration: "none", border: `1px solid ${C.accentBorder}`, padding: "2px 7px", borderRadius: "4px" }}>
+                          Abrir
+                        </a>
+                      ) : "–"}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      )}
+
+      {/* Análise GOEC6O059 */}
+      <div style={{ marginTop: "20px", border: `1px solid rgba(251,113,133,0.3)`, borderRadius: "8px", padding: "14px", background: "rgba(251,113,133,0.04)" }}>
+        <div style={{ fontSize: "13px", fontWeight: 700, color: C.danger, marginBottom: "8px" }}>🔎 Análise: GOEC6O059 — "Hora Sim Hora Não"</div>
+        <div style={{ fontSize: "11px", color: C.textMuted, lineHeight: 1.7 }}>
+          <div>• <strong style={{ color: C.text }}>Conectividade VARCO:</strong> ✅ Conectado (disponibilidade ~99,99%) — túnel responde e heartbeat VARCO está OK.</div>
+          <div>• <strong style={{ color: C.text }}>Mapa de Teste AxHub:</strong> ⚠️ Poucos registros verdes — o equipamento está conectado mas <em>não gera imagens/capturas</em> regularmente para o AxHub.</div>
+          <div>• <strong style={{ color: C.text }}>Causa provável:</strong> Problema no Classificador, configuração de captura desabilitada, ou gatilho de disparo não ocorrendo na pista (loop detector / ausência de tráfego).</div>
+          <div>• <strong style={{ color: C.text }}>Ação recomendada:</strong> Verificar configurações de disparo no túnel ITSCAM (Classificador.enabled, loop detector, gatilho de captura) e comparar com equipamentos que geram dados normalmente.</div>
+          <div style={{ marginTop: "6px", display: "flex", gap: "8px", flexWrap: "wrap" }}>
+            <a href="https://97a97d01-3d12-4f16-94b0-831575825255-80.tunnel.varco.cloud" target="_blank" rel="noopener noreferrer"
+              style={{ fontSize: "11px", color: C.accent, border: `1px solid ${C.accentBorder}`, padding: "3px 10px", borderRadius: "4px", textDecoration: "none" }}>
+              🔗 Túnel Faixa 1
+            </a>
+            <a href="https://cedcda0f-9104-498c-9f52-8f6e3ebfdcfb-80.tunnel.varco.cloud" target="_blank" rel="noopener noreferrer"
+              style={{ fontSize: "11px", color: C.accent, border: `1px solid ${C.accentBorder}`, padding: "3px 10px", borderRadius: "4px", textDecoration: "none" }}>
+              🔗 Túnel Faixa 2
+            </a>
+            <a href="https://economia.axhub.axion.ws/relatorio/relatoriomapadeteste" target="_blank" rel="noopener noreferrer"
+              style={{ fontSize: "11px", color: "#a78bfa", border: "1px solid #a78bfa44", padding: "3px 10px", borderRadius: "4px", textDecoration: "none" }}>
+              📊 Mapa de Teste AxHub
+            </a>
+          </div>
+        </div>
+      </div>
+
+      {/* GOEC6O019 — Padrão Intermitente */}
+      <div style={{ marginTop: "12px", border: `1px solid rgba(245,158,11,0.3)`, borderRadius: "8px", padding: "14px", background: "rgba(245,158,11,0.04)" }}>
+        <div style={{ fontSize: "13px", fontWeight: 700, color: "#f59e0b", marginBottom: "8px" }}>⚡ Padrão Intermitente: GOEC6O019</div>
+        <div style={{ fontSize: "11px", color: C.textMuted, lineHeight: 1.7 }}>
+          <div>• <strong style={{ color: C.text }}>Disponibilidade VARCO:</strong> ~38–39% — conecta e desconecta com frequência.</div>
+          <div>• <strong style={{ color: C.text }}>Causa provável:</strong> Instabilidade na rede local (link de internet fraco/intermitente, quedas de energia, ou problema no roteador do local).</div>
+          <div>• <strong style={{ color: C.text }}>Impacto:</strong> Infrações podem ser perdidas durante os períodos offline. O Mapa de Teste mostrará lacunas nas horas de queda.</div>
+          <div>• <strong style={{ color: C.text }}>Ação recomendada:</strong> Verificar estabilidade da conexão de internet no local (IP: 45.70.146.73 / 45.70.146.83).</div>
+        </div>
+      </div>
+
+      {/* Nota sobre Mapa de Teste */}
+      <div style={{ marginTop: "16px", background: "rgba(167,139,250,0.06)", border: `1px solid rgba(167,139,250,0.2)`, borderRadius: "8px", padding: "12px 14px" }}>
+        <div style={{ fontSize: "12px", fontWeight: 700, color: "#a78bfa", marginBottom: "6px" }}>📊 Sobre o Mapa de Teste de Equipamentos</div>
+        <div style={{ fontSize: "11px", color: C.textMuted, lineHeight: 1.7 }}>
+          O Mapa de Teste (AxHub) mostra <em>1 registro de imagem por hora</em> como célula verde. Células vermelhas = sem imagem naquela hora.<br />
+          Um equipamento pode estar <strong>conectado no VARCO mas com mapa vermelho</strong> se:
+          <ul style={{ margin: "4px 0 0 16px", padding: 0 }}>
+            <li>Classificador desabilitado (<code>Classificador.enabled = false</code>)</li>
+            <li>Gatilho de captura desconfigurado (loop, radar, virtual)</li>
+            <li>Ausência de tráfego no local do equipamento</li>
+            <li>Configuração de envio ao servidor incorreta</li>
+            <li>Faixa cadastrada incorretamente no AxHub (nome divergente)</li>
+          </ul>
+          <div style={{ marginTop: "6px" }}>
+            <a href="https://economia.axhub.axion.ws/relatorio/relatoriomapadeteste" target="_blank" rel="noopener noreferrer"
+              style={{ color: "#a78bfa", fontSize: "11px" }}>
+              → Abrir Mapa de Teste AxHub
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// ═══════════════════════════════════════════════════════════════════════════════
+// DE-PARA — Comparação lado a lado de dois equipamentos
+// ═══════════════════════════════════════════════════════════════════════════════
+function flattenConfig(obj, prefix = "") {
+  const result = {};
+  if (!obj || typeof obj !== "object") return result;
+  for (const [key, val] of Object.entries(obj)) {
+    const k = prefix ? `${prefix}.${key}` : key;
+    if (val !== null && typeof val === "object" && !Array.isArray(val)) {
+      Object.assign(result, flattenConfig(val, k));
+    } else {
+      result[k] = val === null ? "null" : Array.isArray(val) ? JSON.stringify(val) : String(val);
+    }
+  }
+  return result;
+}
+
+// Chaves "interessantes" que impactam captura / envio de imagens
+const CHAVES_CRITICAS = [
+  "classifier.enabled", "classifier.licensed", "classifier.minProbability",
+  "classifier.sceneType", "classifier.firstOnly", "classifier.triggerEnabled",
+  "classifier.processingMode", "classifier.processingQueue",
+  "ocr.enabled", "ocr.licensed", "ocr.vehicleType", "ocr.processingMode",
+  "ocr.minProbPerChar", "ocr.maxLowProbChars", "ocr.maxPlates",
+  "ocr.roi.enabled", "ftp.enable", "ftp.address", "ftp.protocol",
+  "varco.remoteAccess.varco.enabled", "varco.remoteAccess.varco.deviceName",
+  "varco.remoteAccess.varco.edgeServer",
+  "misc.jpegQuality",
+];
+
+const SECOES_LABEL = {
+  classifier: "Classificador",
+  ocr: "OCR / Placa",
+  ftp: "FTP / Envio",
+  varco: "VARCO / Túnel",
+  misc: "Imagem / Crop",
+  profiles: "Perfis de Iluminação",
+  ioPorts: "Portas I/O",
+  video: "Vídeo",
+};
+
+function seção(key) {
+  const part = key.split(".")[0];
+  return SECOES_LABEL[part] || part;
+}
+
+function DeParaTab({ auditDevices, liveDevices }) {
+  const [eq1, setEq1] = useState("GOEC6O002 - Faixa 1");
+  const [eq2, setEq2] = useState("GOEC6O059 - Faixa 1");
+  const [filtroSecao, setFiltroSecao] = useState("all");
+  const [mostrarIguais, setMostrarIguais] = useState(false);
+  const [resultado, setResultado] = useState(null);
+  const [erroCmp, setErroCmp] = useState(null);
+
+  // ── Live indicators (fetched directly from ITSCAM tunnels) ──────────────
+  const [liveIndicators, setLiveIndicators] = useState({ eq1: null, eq2: null });
+  const [loadingLive, setLoadingLive] = useState(false);
+
+  const deviceNames = useMemo(() => {
+    const fromAudit = auditDevices.map(d => d.nome).filter(Boolean);
+    const fromLive = liveDevices.map(d => d.name).filter(Boolean);
+    return [...new Set([...fromAudit, ...fromLive])].sort();
+  }, [auditDevices, liveDevices]);
+
+  function getAuditRaw(nome) {
+    return auditDevices.find(d => d.nome === nome)?.raw ?? null;
+  }
+
+  function getLiveInfo(nome) {
+    const n = nome.toUpperCase();
+    return liveDevices.find(d => d.name?.toUpperCase() === n || d.name?.toUpperCase().replace(" - FAIXA ", " - Faixa ".toUpperCase()) === n) ?? null;
+  }
+
+  function extractOverlayText(raw) {
+    try {
+      for (const p of raw?.profiles || []) {
+        const t = p.transitions?.upper?.overlay?.text || p.transitions?.lower?.overlay?.text;
+        if (t) return t;
+      }
+    } catch { }
+    return null;
+  }
+
+  function extractCodigo(text) {
+    if (!text) return null;
+    const m = text.match(/CODIGO EQUIPAMENTO:\s*([^\s]+)/i);
+    return m ? m[1] : null;
+  }
+
+  // Buscar indicadores ao vivo via proxy da API (evita CORS)
+  async function itscamGet(uuid, endpoint) {
+    const res = await fetch(`${API_BASE}/api/varco/itscam/ler`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json", "X-Admin-Token": "4ca85296b69704ff408e570501c2480af8457da858defbced704ba4ad20d8bf3" },
+      body: JSON.stringify({ uuid, endpoint }),
+    });
+    if (!res.ok) return null;
+    const d = await res.json();
+    return d.ok ? d.data : null;
+  }
+
+  async function fetchLiveIndicators(nome, uuid) {
+    if (!uuid) return null;
+    try {
+      const [gen, eth, rc0, rs0, rc1, rs1, profs] = await Promise.all([
+        itscamGet(uuid, "/api/equipment/general"),
+        itscamGet(uuid, "/api/equipment/network/ethernet"),
+        itscamGet(uuid, "/api/equipment/servers/restapiclient/0/config"),
+        itscamGet(uuid, "/api/equipment/servers/restapiclient/0/status"),
+        itscamGet(uuid, "/api/equipment/servers/restapiclient/1/config"),
+        itscamGet(uuid, "/api/equipment/servers/restapiclient/1/status"),
+        itscamGet(uuid, "/api/image/profiles"),
+      ]);
+
+      const restBody0 = rc0?.body?.parts?.[0]?.data || "";
+      const faixa0 = restBody0.match(/"numeroFaixa":\s*(\d+)/)?.[1] ?? "?";
+      const camId0 = restBody0.match(/"codigoEquipamento":\s*"([^"]+)"/)?.[1] ?? "?";
+
+      return {
+        equipmentName: gen?.equipmentName,
+        ip: eth?.ethernet?.ipv4Primary?.address,
+        gateway: eth?.ethernet?.ipv4Primary?.gateway,
+        dns: eth?.ethernet?.ipv4Primary?.dns,
+        rest1: {
+          enabled: rc0?.enabled, url: rc0 ? `${rc0.url?.scheme}://${rc0.url?.host}${rc0.url?.path}` : null,
+          retries: rc0?.retries, timeout: rc0?.timeout,
+          persist: rc0?.persistency?.enabled, newestFirst: rc0?.persistency?.newestFirst,
+          code: rs0?.code, files: rs0?.fileCount, disk: rs0?.diskUsage, msg: rs0?.message,
+          cameraId: camId0, faixa: faixa0,
+        },
+        rest2: {
+          enabled: rc1?.enabled, url: rc1 ? `${rc1.url?.scheme}://${rc1.url?.host}${rc1.url?.path}` : null,
+          code: rs1?.code, files: rs1?.fileCount, msg: rs1?.message,
+        },
+        profiles: (profs || []).map(p => ({
+          id: p.id, name: p.name, active: p.active,
+          overlayEnable: p.overlay?.enable,
+          overlayText: p.overlay?.text,
+          overlayCode: p.overlay?.text?.match(/CODIGO EQUIPAMENTO:\s*(\S+)/i)?.[1] ?? null,
+        })),
+      };
+    } catch (e) { return { error: e.message }; }
+  }
+
+  async function carregarLive() {
+    setLoadingLive(true);
+    const live1 = getLiveInfo(eq1);
+    const live2 = getLiveInfo(eq2);
+    const [ind1, ind2] = await Promise.all([
+      fetchLiveIndicators(eq1, live1?.uuid),
+      fetchLiveIndicators(eq2, live2?.uuid),
+    ]);
+    setLiveIndicators({ eq1: ind1, eq2: ind2 });
+    setLoadingLive(false);
+  }
+
+  // Comparar automaticamente quando dados mudam ou seleção muda
+  useEffect(() => {
+    if (!auditDevices.length || eq1 === eq2) return;
+    const raw1 = getAuditRaw(eq1);
+    const raw2 = getAuditRaw(eq2);
+    if (!raw1 || !raw2) {
+      setResultado(null);
+      setErroCmp(!raw1
+        ? `Dados não disponíveis para "${eq1}". Execute "Recoletar do VARCO" primeiro.`
+        : `Dados não disponíveis para "${eq2}". Execute "Recoletar do VARCO" primeiro.`
+      );
+      return;
+    }
+    setErroCmp(null);
+    try {
+      const flat1 = flattenConfig(raw1);
+      const flat2 = flattenConfig(raw2);
+      const allKeys = [...new Set([...Object.keys(flat1), ...Object.keys(flat2)])].sort();
+      const rows = allKeys.map(k => {
+        const v1 = flat1[k] ?? "—";
+        const v2 = flat2[k] ?? "—";
+        const igual = v1 === v2;
+        const critica = CHAVES_CRITICAS.includes(k);
+        return { key: k, v1, v2, igual, critica, secao: seção(k) };
+      });
+      const diferencas = rows.filter(r => !r.igual);
+      const criticas = diferencas.filter(r => r.critica);
+      const overlayText1 = extractOverlayText(raw1);
+      const overlayText2 = extractOverlayText(raw2);
+      const live1 = getLiveInfo(eq1);
+      const live2 = getLiveInfo(eq2);
+      setResultado({ rows, diferencas, criticas, overlayText1, overlayText2, live1, live2, eq1, eq2, raw1, raw2 });
+    } catch (e) {
+      setErroCmp(e.message);
+    }
+    // Reset live indicators when selection changes
+    setLiveIndicators({ eq1: null, eq2: null });
+  }, [auditDevices, liveDevices, eq1, eq2]);
+
+  const secoes = useMemo(() => {
+    if (!resultado) return [];
+    return [...new Set(resultado.diferencas.map(r => r.secao))].sort();
+  }, [resultado]);
+
+  const rowsFiltrados = useMemo(() => {
+    if (!resultado) return [];
+    const base = mostrarIguais ? resultado.rows : resultado.diferencas;
+    if (filtroSecao === "all") return base;
+    return base.filter(r => r.secao === filtroSecao);
+  }, [resultado, mostrarIguais, filtroSecao]);
+
+  const eq1Base = eq1.split(" - ")[0].trim();
+  const eq2Base = eq2.split(" - ")[0].trim();
+  const codigo1 = resultado ? extractCodigo(resultado.overlayText1) : null;
+  const codigo2 = resultado ? extractCodigo(resultado.overlayText2) : null;
+  const overlayErro1 = codigo1 && codigo1.toUpperCase() !== eq1Base.toUpperCase();
+  const overlayErro2 = codigo2 && codigo2.toUpperCase() !== eq2Base.toUpperCase();
+
+  // Quadro de análise: parâmetros chave pré-definidos para exibir no resumo
+  const QUADRO_PARAMS = [
+    { label: "Classificador habilitado", key: "classifier.enabled", tipo: "critico" },
+    { label: "Classificador licenciado", key: "classifier.licensed", tipo: "critico" },
+    { label: "OCR habilitado", key: "ocr.enabled", tipo: "critico" },
+    { label: "Tipo de Veículo (vehicleType)", key: "ocr.vehicleType", tipo: "critico" },
+    { label: "Gatilho habilitado (triggerEnabled)", key: "classifier.triggerEnabled", tipo: "critico" },
+    { label: "FTP habilitado", key: "ftp.enable", tipo: "critico" },
+    { label: "FTP endereço", key: "ftp.address", tipo: "critico" },
+    { label: "VARCO habilitado", key: "varco.remoteAccess.varco.enabled", tipo: "critico" },
+    { label: "VARCO deviceName", key: "varco.remoteAccess.varco.deviceName", tipo: "critico" },
+    { label: "ROI OCR habilitada", key: "ocr.roi.enabled", tipo: "normal" },
+    { label: "Qualidade JPEG", key: "misc.jpegQuality", tipo: "normal" },
+    { label: "Intervalo mínimo captura", key: "video.minimumInterval", tipo: "normal" },
+    { label: "Nível foco", key: "video.focus", tipo: "instalacao" },
+    { label: "Zoom", key: "video.zoom", tipo: "instalacao" },
+  ];
+
+  function getFlat(raw) { return raw ? flattenConfig(raw) : {}; }
+
+  const flat1 = resultado ? getFlat(resultado.raw1) : {};
+  const flat2 = resultado ? getFlat(resultado.raw2) : {};
+
+  return (
+    <div>
+      {/* Header + Seletor */}
+      <div style={{ marginBottom: "14px", background: "rgba(96,205,255,0.06)", border: `1px solid rgba(96,205,255,0.18)`, borderRadius: "8px", padding: "14px 16px" }}>
+        <div style={{ fontSize: "13px", fontWeight: 700, color: C.accent, marginBottom: "10px" }}>🔄 De-Para — Comparação de Configurações</div>
+        <div style={{ display: "flex", gap: "12px", flexWrap: "wrap", alignItems: "flex-end" }}>
+          <div style={{ flex: 1, minWidth: "180px" }}>
+            <div style={{ fontSize: "11px", color: C.success, marginBottom: "4px", fontWeight: 600 }}>🟢 Equipamento A — Referência (funciona)</div>
+            <select value={eq1} onChange={e => setEq1(e.target.value)}
+              style={{ width: "100%", padding: "7px 10px", border: `2px solid ${C.success}`, borderRadius: "6px", background: C.surface, color: C.text, fontSize: "12px", fontWeight: 600 }}>
+              {deviceNames.map(n => <option key={n} value={n}>{n}</option>)}
+            </select>
+          </div>
+          <div style={{ fontSize: "18px", color: C.textMuted, alignSelf: "flex-end", paddingBottom: "8px" }}>⇄</div>
+          <div style={{ flex: 1, minWidth: "180px" }}>
+            <div style={{ fontSize: "11px", color: C.danger, marginBottom: "4px", fontWeight: 600 }}>🔴 Equipamento B — Com problema</div>
+            <select value={eq2} onChange={e => setEq2(e.target.value)}
+              style={{ width: "100%", padding: "7px 10px", border: `2px solid ${C.danger}`, borderRadius: "6px", background: C.surface, color: C.text, fontSize: "12px", fontWeight: 600 }}>
+              {deviceNames.map(n => <option key={n} value={n}>{n}</option>)}
+            </select>
+          </div>
+        </div>
+        <div style={{ fontSize: "10px", color: C.textMuted, marginTop: "8px", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+          <span>A comparação atualiza automaticamente ao mudar os selecionados. Dados vêm da última coleta do VARCO.</span>
+          <button onClick={carregarLive} disabled={loadingLive}
+            style={{ padding: "5px 12px", border: `1px solid ${C.accentBorder}`, borderRadius: "5px", background: C.accentBg, color: C.accent, fontSize: "11px", fontWeight: 700, cursor: loadingLive ? "wait" : "pointer", opacity: loadingLive ? 0.7 : 1, whiteSpace: "nowrap" }}>
+            {loadingLive ? "⏳ Buscando..." : "🔴 Buscar Indicadores ao Vivo"}
+          </button>
+        </div>
+      </div>
+
+      {/* ── PAINEL DE INDICADORES AO VIVO ─────────────────────────────────── */}
+      {(liveIndicators.eq1 || liveIndicators.eq2) && (
+        <div style={{ marginBottom: "16px", border: `1px solid ${C.border}`, borderRadius: "8px", overflow: "hidden" }}>
+          <div style={{ padding: "10px 14px", background: C.tableHeader, display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+            <div style={{ fontSize: "12px", fontWeight: 700, color: C.text }}>📡 Indicadores ao Vivo — Coletados Diretamente dos Equipamentos</div>
+            <div style={{ fontSize: "10px", color: C.textMuted }}>Fonte: API REST ITSCAM via túnel VARCO</div>
+          </div>
+          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "0" }}>
+            {[{ ind: liveIndicators.eq1, nome: eq1, label: "A", cor: C.success }, { ind: liveIndicators.eq2, nome: eq2, label: "B", cor: C.danger }].map(({ ind, nome, label, cor }) => (
+              <div key={label} style={{ padding: "12px 14px", borderRight: label === "A" ? `1px solid ${C.border}` : "none" }}>
+                <div style={{ fontSize: "11px", fontWeight: 700, color: cor, marginBottom: "10px" }}>[{label}] {nome}</div>
+                {!ind ? <div style={{ color: C.textMuted, fontSize: "11px" }}>—</div> :
+                 ind.error ? <div style={{ color: C.danger, fontSize: "11px" }}>❌ {ind.error}</div> : (
+                  <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
+                    {/* Geral */}
+                    <div style={{ background: C.surface, border: `1px solid ${C.border}`, borderRadius: "6px", padding: "8px 10px" }}>
+                      <div style={{ fontSize: "10px", fontWeight: 700, color: C.textSecondary, marginBottom: "5px" }}>⚙️ Geral</div>
+                      <div style={{ display: "grid", gridTemplateColumns: "auto 1fr", gap: "2px 8px", fontSize: "11px" }}>
+                        <span style={{ color: C.textMuted }}>equipmentName</span><code style={{ color: C.text }}>{ind.equipmentName || "—"}</code>
+                        <span style={{ color: C.textMuted }}>IP local</span><code style={{ color: C.text }}>{ind.ip || "—"}</code>
+                        <span style={{ color: C.textMuted }}>Gateway</span><code style={{ color: C.text }}>{ind.gateway || "—"}</code>
+                        <span style={{ color: C.textMuted }}>DNS</span><code style={{ color: C.text }}>{ind.dns || "—"}</code>
+                      </div>
+                    </div>
+                    {/* REST API Cliente 1 */}
+                    {ind.rest1 && (
+                      <div style={{ background: ind.rest1.code === 200 ? C.successBg : ind.rest1.code === 2 ? C.dangerBg : C.warningBg, border: `1px solid ${ind.rest1.code === 200 ? C.successBorder : ind.rest1.code === 2 ? C.dangerBorder : C.warningBorder}`, borderRadius: "6px", padding: "8px 10px" }}>
+                        <div style={{ display: "flex", justifyContent: "space-between", marginBottom: "5px" }}>
+                          <div style={{ fontSize: "10px", fontWeight: 700, color: C.textSecondary }}>📤 REST API Cliente 1 (AxHub)</div>
+                          <span style={{ fontSize: "10px", fontWeight: 700, padding: "1px 7px", borderRadius: "3px", background: ind.rest1.code === 200 ? C.successBg : C.dangerBg, color: ind.rest1.code === 200 ? C.success : C.danger, border: `1px solid ${ind.rest1.code === 200 ? C.successBorder : C.dangerBorder}` }}>
+                            {ind.rest1.code === 200 ? "✅ HTTP 200" : `❌ code ${ind.rest1.code}`}
+                          </span>
+                        </div>
+                        <div style={{ display: "grid", gridTemplateColumns: "auto 1fr", gap: "2px 8px", fontSize: "11px" }}>
+                          <span style={{ color: C.textMuted }}>Habilitado</span><code style={{ color: ind.rest1.enabled ? C.success : C.danger }}>{String(ind.rest1.enabled)}</code>
+                          <span style={{ color: C.textMuted }}>URL</span><code style={{ color: C.text, wordBreak: "break-all", fontSize: "10px" }}>{ind.rest1.url || "—"}</code>
+                          <span style={{ color: C.textMuted }}>cameraId template</span><code style={{ color: C.text }}>{ind.rest1.cameraId || "—"}</code>
+                          <span style={{ color: C.textMuted }}>numeroFaixa</span><code style={{ color: C.text }}>{ind.rest1.faixa || "—"}</code>
+                          <span style={{ color: C.textMuted }}>Retries / Timeout</span><code style={{ color: C.text }}>{ind.rest1.retries}x / {ind.rest1.timeout}ms</code>
+                          <span style={{ color: C.textMuted }}>Persistência</span><code style={{ color: C.text }}>{String(ind.rest1.persist)} (newestFirst: {String(ind.rest1.newestFirst)})</code>
+                          <span style={{ color: C.textMuted }}>Arquivos em fila</span>
+                          <code style={{ color: ind.rest1.files > 0 ? C.warning : C.success, fontWeight: 700 }}>{ind.rest1.files} arquivo(s) — {Math.round(ind.rest1.disk / 1024)}KB</code>
+                          {ind.rest1.msg && <><span style={{ color: C.danger }}>Erro</span><code style={{ color: C.danger, fontSize: "10px" }}>{ind.rest1.msg}</code></>}
+                        </div>
+                      </div>
+                    )}
+                    {/* REST API Cliente 2 */}
+                    {ind.rest2?.enabled && (
+                      <div style={{ background: C.surface, border: `1px solid ${C.border}`, borderRadius: "6px", padding: "8px 10px" }}>
+                        <div style={{ fontSize: "10px", fontWeight: 700, color: C.textSecondary, marginBottom: "5px" }}>📤 REST API Cliente 2</div>
+                        <div style={{ display: "grid", gridTemplateColumns: "auto 1fr", gap: "2px 8px", fontSize: "11px" }}>
+                          <span style={{ color: C.textMuted }}>URL</span><code style={{ color: C.text, fontSize: "10px", wordBreak: "break-all" }}>{ind.rest2.url}</code>
+                          <span style={{ color: C.textMuted }}>Status</span><code style={{ color: ind.rest2.code === 200 ? C.success : C.danger }}>code {ind.rest2.code} | {ind.rest2.files} arquivos</code>
+                          {ind.rest2.msg && <><span style={{ color: C.danger }}>Erro</span><code style={{ color: C.danger, fontSize: "10px" }}>{ind.rest2.msg}</code></>}
+                        </div>
+                      </div>
+                    )}
+                    {/* Perfis / Tarja */}
+                    {ind.profiles?.length > 0 && (
+                      <div style={{ background: C.surface, border: `1px solid ${C.border}`, borderRadius: "6px", padding: "8px 10px" }}>
+                        <div style={{ fontSize: "10px", fontWeight: 700, color: C.textSecondary, marginBottom: "5px" }}>🖼️ Perfis — Tarja (Overlay)</div>
+                        {ind.profiles.map(p => {
+                          const base = nome.split(" - ")[0].trim();
+                          const errado = p.overlayCode && p.overlayCode.toUpperCase() !== base.toUpperCase();
+                          return (
+                            <div key={p.id} style={{ marginBottom: "4px", paddingBottom: "4px", borderBottom: `1px solid ${C.border}` }}>
+                              <div style={{ display: "flex", gap: "6px", alignItems: "center", marginBottom: "3px" }}>
+                                <span style={{ fontSize: "10px", fontWeight: 700, color: C.text }}>{p.name}</span>
+                                {p.active && <span style={{ fontSize: "9px", background: C.successBg, color: C.success, padding: "1px 5px", borderRadius: "3px" }}>ATIVO</span>}
+                                <span style={{ fontSize: "9px", background: p.overlayEnable ? C.successBg : C.dangerBg, color: p.overlayEnable ? C.success : C.danger, padding: "1px 5px", borderRadius: "3px" }}>
+                                  Legenda: {p.overlayEnable ? "ON" : "OFF"}
+                                </span>
+                              </div>
+                              <div style={{ fontSize: "10px", display: "grid", gridTemplateColumns: "auto 1fr", gap: "2px 8px" }}>
+                                <span style={{ color: C.textMuted }}>CODIGO EQ.</span>
+                                <code style={{ color: errado ? C.danger : C.success, fontWeight: 700 }}>
+                                  {p.overlayCode || "—"} {errado ? `← deveria ser ${base}` : "✓"}
+                                </code>
+                                <span style={{ color: C.textMuted }}>Texto tarja</span>
+                                <span style={{ color: C.textMuted, fontSize: "9px", wordBreak: "break-all" }}>
+                                  {p.overlayText ? p.overlayText.substring(0, 100) + (p.overlayText.length > 100 ? "..." : "") : "—"}
+                                </span>
+                              </div>
+                            </div>
+                          );
+                        })}
+                      </div>
+                    )}
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {/* Filtro rápido: equipamentos com overlay errado */}
+      {(() => {
+        const errados = auditDevices.filter(d => {
+          if (!d.raw?.profiles) return false;
+          const text = d.raw.profiles[0]?.overlay?.text || "";
+          const match = text.match(/CODIGO EQUIPAMENTO:\s*(\S+)/i);
+          if (!match) return false;
+          const base = d.nome?.split(" - ")[0]?.trim() ?? "";
+          return match[1].toUpperCase() !== base.toUpperCase();
+        });
+        if (!errados.length) return null;
+        return (
+          <div style={{ marginBottom: "14px", background: "rgba(167,139,250,0.06)", border: `1px solid rgba(167,139,250,0.25)`, borderRadius: "8px", padding: "10px 14px" }}>
+            <div style={{ fontSize: "11px", fontWeight: 700, color: "#a78bfa", marginBottom: "8px" }}>
+              🔤 {errados.length} equipamento{errados.length > 1 ? "s" : ""} com CODIGO EQUIPAMENTO errado no overlay — clique para comparar:
+            </div>
+            <div style={{ display: "flex", gap: "6px", flexWrap: "wrap" }}>
+              {errados.map(d => {
+                const text = d.raw.profiles[0]?.overlay?.text || "";
+                const match = text.match(/CODIGO EQUIPAMENTO:\s*(\S+)/i);
+                const codigoAtual = match ? match[1] : "?";
+                const isSelected = eq2 === d.nome;
+                return (
+                  <button key={d.nome} onClick={() => setEq2(d.nome)}
+                    style={{ padding: "4px 10px", borderRadius: "4px", border: `1px solid ${isSelected ? C.danger : "rgba(167,139,250,0.4)"}`, background: isSelected ? C.dangerBg : "rgba(167,139,250,0.08)", color: isSelected ? C.danger : "#a78bfa", fontSize: "11px", cursor: "pointer", fontWeight: isSelected ? 700 : 400 }}
+                    title={`Overlay atual: ${codigoAtual}`}>
+                    {d.nome} <span style={{ opacity: 0.7 }}>(tem: {codigoAtual})</span>
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+        );
+      })()}
+
+      {erroCmp && (
+        <div style={{ padding: "10px 14px", background: C.dangerBg, border: `1px solid ${C.dangerBorder}`, borderRadius: "6px", color: C.danger, fontSize: "12px", marginBottom: "12px" }}>
+          ⚠️ {erroCmp}
+        </div>
+      )}
+
+      {!resultado && !erroCmp && (
+        <div style={{ padding: "24px", textAlign: "center", color: C.textMuted, fontSize: "12px", border: `1px dashed ${C.border}`, borderRadius: "8px" }}>
+          ⏳ Aguardando dados de auditoria... Execute "Recoletar do VARCO" se os dados não aparecerem.
+        </div>
+      )}
+
+      {resultado && (
+        <>
+          {/* Cards de status live */}
+          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "10px", marginBottom: "14px" }}>
+            {[
+              { live: resultado.live1, nome: eq1, label: "A", cor: C.success, bg: C.successBg },
+              { live: resultado.live2, nome: eq2, label: "B", cor: C.danger, bg: C.dangerBg }
+            ].map(({ live, nome, label, cor, bg }) => (
+              <div key={label} style={{ border: `1px solid ${live?.connected ? C.success : C.danger}`, borderRadius: "8px", padding: "10px 14px", background: live?.connected ? "rgba(110,231,183,0.06)" : "rgba(251,113,133,0.06)" }}>
+                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+                  <div style={{ fontSize: "12px", fontWeight: 700, color: cor }}>[{label}] {nome}</div>
+                  <span style={{ fontSize: "10px", fontWeight: 700, padding: "2px 8px", borderRadius: "4px", background: live?.connected ? C.successBg : C.dangerBg, color: live?.connected ? C.success : C.danger }}>
+                    {live?.connected ? "🟢 Online" : "🔴 Offline"}
+                  </span>
+                </div>
+                <div style={{ fontSize: "11px", color: C.textMuted, marginTop: "4px", display: "flex", gap: "12px", flexWrap: "wrap" }}>
+                  {live?.availability != null && <span>Disponib: <strong style={{ color: C.text }}>{live.availability.toFixed(1)}%</strong></span>}
+                  {live?.ip && <span>IP: <code style={{ fontSize: "10px" }}>{live.ip}</code></span>}
+                  {live?.uuid && (
+                    <a href={`https://${live.uuid}-80.tunnel.varco.cloud`} target="_blank" rel="noopener noreferrer"
+                      style={{ color: C.accent, fontSize: "10px", textDecoration: "none" }}>🔗 Abrir Túnel</a>
+                  )}
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* ═══ QUADRO DE ANÁLISE — Resumo dos parâmetros chave ═══ */}
+          <div style={{ marginBottom: "16px", border: `1px solid ${C.border}`, borderRadius: "8px", overflow: "hidden" }}>
+            <div style={{ padding: "10px 14px", background: C.tableHeader, display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+              <div style={{ fontSize: "12px", fontWeight: 700, color: C.text }}>📊 Quadro de Análise — Parâmetros Críticos</div>
+              <div style={{ display: "flex", gap: "8px", fontSize: "11px" }}>
+                <span style={{ color: C.success }}>✓ Igual</span>
+                <span style={{ color: C.warning }}>△ Diferente</span>
+                <span style={{ color: C.danger }}>✖ Crítico</span>
+              </div>
+            </div>
+            <table style={{ width: "100%", borderCollapse: "collapse", fontSize: "11px" }}>
+              <thead>
+                <tr style={{ background: C.surface, borderBottom: `1px solid ${C.border}` }}>
+                  <th style={{ padding: "7px 12px", textAlign: "left", color: C.textMuted, width: "28%", fontWeight: 600 }}>Parâmetro</th>
+                  <th style={{ padding: "7px 12px", textAlign: "left", color: C.success, width: "28%", fontWeight: 700 }}>🟢 [A] {eq1Base}</th>
+                  <th style={{ padding: "7px 12px", textAlign: "left", color: C.danger, width: "28%", fontWeight: 700 }}>🔴 [B] {eq2Base}</th>
+                  <th style={{ padding: "7px 12px", textAlign: "center", color: C.textMuted, width: "16%", fontWeight: 600 }}>Resultado</th>
+                </tr>
+              </thead>
+              <tbody>
+                {/* Linha de overlay / CODIGO EQUIPAMENTO */}
+                <tr style={{ borderTop: `1px solid ${C.border}`, background: overlayErro1 || overlayErro2 ? "rgba(251,113,133,0.08)" : "transparent" }}>
+                  <td style={{ padding: "7px 12px", color: C.danger, fontWeight: 600 }}>
+                    <span style={{ color: C.danger }}>⚑ </span>Texto Overlay (CODIGO EQ.)
+                    <div style={{ fontSize: "9px", color: C.textMuted }}>profiles[].transitions.overlay.text</div>
+                  </td>
+                  <td style={{ padding: "7px 12px" }}>
+                    <code style={{ fontSize: "10px", color: overlayErro1 ? C.danger : C.success, fontWeight: 700 }}>
+                      {codigo1 || "—"}
+                    </code>
+                    {overlayErro1 && <div style={{ fontSize: "9px", color: C.danger }}>← deveria ser {eq1Base}</div>}
+                  </td>
+                  <td style={{ padding: "7px 12px" }}>
+                    <code style={{ fontSize: "10px", color: overlayErro2 ? C.danger : C.success, fontWeight: 700 }}>
+                      {codigo2 || "—"}
+                    </code>
+                    {overlayErro2 && <div style={{ fontSize: "9px", color: C.danger }}>← deveria ser {eq2Base}</div>}
+                  </td>
+                  <td style={{ padding: "7px 12px", textAlign: "center" }}>
+                    {(overlayErro1 || overlayErro2)
+                      ? <span style={{ fontSize: "10px", background: C.dangerBg, color: C.danger, padding: "2px 7px", borderRadius: "4px", fontWeight: 700 }}>🚨 ERRO</span>
+                      : codigo1 === codigo2
+                        ? <span style={{ fontSize: "10px", color: C.success }}>✓ Igual</span>
+                        : <span style={{ fontSize: "10px", color: C.warning }}>△ Diff</span>
+                    }
+                  </td>
+                </tr>
+                {QUADRO_PARAMS.map(p => {
+                  const v1 = flat1[p.key] ?? "—";
+                  const v2 = flat2[p.key] ?? "—";
+                  const igual = v1 === v2;
+                  const ehInstalacao = p.tipo === "instalacao";
+                  const ehCritico = p.tipo === "critico" && !igual;
+                  const rowBg = ehCritico ? "rgba(251,113,133,0.06)" : ehInstalacao && !igual ? "rgba(245,158,11,0.04)" : "transparent";
+                  return (
+                    <tr key={p.key} style={{ borderTop: `1px solid ${C.border}`, background: rowBg }}>
+                      <td style={{ padding: "7px 12px", color: ehCritico ? C.danger : C.textMuted }}>
+                        {ehCritico && <span style={{ color: C.danger }}>⚑ </span>}
+                        <span style={{ color: ehCritico ? C.danger : C.textSecondary, fontWeight: ehCritico ? 600 : 400 }}>{p.label}</span>
+                        <div style={{ fontSize: "9px", color: C.textMuted, opacity: 0.7 }}>{p.key}</div>
+                      </td>
+                      <td style={{ padding: "7px 12px" }}>
+                        <code style={{ fontSize: "11px", color: igual ? C.textMuted : C.success }}>{v1}</code>
+                      </td>
+                      <td style={{ padding: "7px 12px" }}>
+                        <code style={{ fontSize: "11px", color: igual ? C.textMuted : ehCritico ? C.danger : C.warning, fontWeight: igual ? 400 : 700 }}>{v2}</code>
+                      </td>
+                      <td style={{ padding: "7px 12px", textAlign: "center" }}>
+                        {igual
+                          ? <span style={{ fontSize: "10px", color: C.success }}>✓ Igual</span>
+                          : ehInstalacao
+                            ? <span style={{ fontSize: "10px", color: C.textMuted }}>↕ Instalação</span>
+                            : ehCritico
+                              ? <span style={{ fontSize: "10px", background: C.dangerBg, color: C.danger, padding: "2px 6px", borderRadius: "4px", fontWeight: 700 }}>✖ CRÍTICO</span>
+                              : <span style={{ fontSize: "10px", background: C.warningBg, color: C.warning, padding: "2px 6px", borderRadius: "4px" }}>△ Diff</span>
+                        }
+                      </td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+            {/* Legenda */}
+            <div style={{ padding: "8px 12px", background: C.surface, borderTop: `1px solid ${C.border}`, fontSize: "10px", color: C.textMuted, display: "flex", gap: "16px", flexWrap: "wrap" }}>
+              <span>🚨 <strong style={{ color: C.danger }}>ERRO</strong> — dado incorreto, impacta o envio ao AxHub</span>
+              <span>✖ <strong style={{ color: C.danger }}>CRÍTICO</strong> — diferença em parâmetro de captura/classificação</span>
+              <span>△ <strong style={{ color: C.warning }}>Diff</strong> — diferente mas não necessariamente problemático</span>
+              <span>↕ <strong style={{ color: C.textMuted }}>Instalação</strong> — diferença esperada (ângulo, foco, zoom)</span>
+              <span>✓ <strong style={{ color: C.success }}>Igual</strong> — idêntico nos dois</span>
+            </div>
+          </div>
+
+          {/* Alerta de overlay texto completo */}
+          {(resultado.overlayText1 || resultado.overlayText2) && (
+            <div style={{ marginBottom: "14px", border: `1px solid ${overlayErro1 || overlayErro2 ? C.dangerBorder : C.border}`, borderRadius: "8px", padding: "12px 14px", background: overlayErro1 || overlayErro2 ? "rgba(251,113,133,0.04)" : C.surface }}>
+              <div style={{ fontSize: "11px", fontWeight: 700, color: overlayErro1 || overlayErro2 ? C.danger : C.textSecondary, marginBottom: "8px" }}>
+                {overlayErro1 || overlayErro2 ? "🚨 Texto de Overlay Incorreto — Equipamento Registrado Errado no AxHub" : "📝 Texto de Overlay das Imagens"}
+              </div>
+              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "10px" }}>
+                {[{ text: resultado.overlayText1, nome: eq1, erro: overlayErro1, codigo: codigo1, base: eq1Base },
+                  { text: resultado.overlayText2, nome: eq2, erro: overlayErro2, codigo: codigo2, base: eq2Base }].map(({ text, nome, erro, codigo, base }) => (
+                  <div key={nome} style={{ background: C.raised, border: `1px solid ${erro ? C.dangerBorder : C.border}`, borderRadius: "6px", padding: "8px" }}>
+                    <div style={{ fontSize: "10px", fontWeight: 600, color: erro ? C.danger : C.success, marginBottom: "4px" }}>
+                      {erro ? "❌" : "✓"} {nome}
+                      {erro && <span style={{ marginLeft: "6px", fontWeight: 400 }}>— código <code style={{ color: C.danger }}>{codigo}</code> deveria ser <code style={{ color: C.success }}>{base}</code></span>}
+                    </div>
+                    <div style={{ fontSize: "9px", color: C.textMuted, wordBreak: "break-all", lineHeight: 1.5 }}>
+                      {text?.substring(0, 200)}{text?.length > 200 ? "..." : ""}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {/* Contadores de resumo */}
+          <div style={{ display: "flex", gap: "8px", marginBottom: "12px", flexWrap: "wrap" }}>
+            <div style={{ background: C.dangerBg, border: `1px solid ${C.dangerBorder}`, borderRadius: "6px", padding: "7px 14px", fontSize: "13px", fontWeight: 700, color: C.danger }}>
+              {resultado.diferencas.length} diferenças totais
+            </div>
+            <div style={{ background: "rgba(251,113,133,0.1)", border: `1px solid rgba(251,113,133,0.3)`, borderRadius: "6px", padding: "7px 14px", fontSize: "13px", fontWeight: 700, color: "#fb7185" }}>
+              {resultado.criticas.length} parâmetros críticos
+            </div>
+            <div style={{ background: C.successBg, border: `1px solid ${C.successBorder}`, borderRadius: "6px", padding: "7px 14px", fontSize: "13px", fontWeight: 700, color: C.success }}>
+              {resultado.rows.length - resultado.diferencas.length} parâmetros iguais
+            </div>
+          </div>
+
+          {/* Filtros de seção */}
+          <div style={{ display: "flex", gap: "6px", marginBottom: "10px", flexWrap: "wrap", alignItems: "center" }}>
+            <span style={{ fontSize: "11px", color: C.textMuted }}>Seção:</span>
+            {["all", ...secoes].map(s => (
+              <button key={s} onClick={() => setFiltroSecao(s)}
+                style={{ padding: "4px 10px", borderRadius: "4px", border: `1px solid ${filtroSecao === s ? C.accent : C.border}`, background: filtroSecao === s ? C.accentBg : C.surface, color: filtroSecao === s ? C.accent : C.textMuted, fontSize: "11px", cursor: "pointer", fontWeight: filtroSecao === s ? 700 : 400 }}>
+                {s === "all" ? "Todas" : s}
+              </button>
+            ))}
+            <label style={{ marginLeft: "auto", fontSize: "11px", color: C.textMuted, display: "flex", alignItems: "center", gap: "5px", cursor: "pointer" }}>
+              <input type="checkbox" checked={mostrarIguais} onChange={e => setMostrarIguais(e.target.checked)} style={{ cursor: "pointer" }} />
+              Mostrar campos iguais
+            </label>
+          </div>
+
+          {/* Tabela completa de-para */}
+          <div style={{ border: `1px solid ${C.border}`, borderRadius: "8px", overflow: "auto", marginBottom: "16px" }}>
+            <table style={{ width: "100%", borderCollapse: "collapse", fontSize: "11px" }}>
+              <thead>
+                <tr style={{ background: C.tableHeader }}>
+                  <th style={{ padding: "8px 10px", textAlign: "left", color: C.textSecondary, width: "28%" }}>Parâmetro</th>
+                  <th style={{ padding: "8px 10px", textAlign: "left", color: C.success, width: "32%" }}>🟢 [A] {eq1}</th>
+                  <th style={{ padding: "8px 10px", textAlign: "left", color: C.danger, width: "32%" }}>🔴 [B] {eq2}</th>
+                  <th style={{ padding: "8px 10px", textAlign: "center", color: C.textSecondary, width: "8%" }}>Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                {rowsFiltrados.map((row, i) => {
+                  const rowBg = row.igual ? "transparent" : row.critica ? "rgba(251,113,133,0.06)" : "rgba(245,158,11,0.04)";
+                  return (
+                    <tr key={row.key} style={{ borderTop: `1px solid ${C.border}`, background: i % 2 === 0 ? rowBg : rowBg === "transparent" ? C.surface : rowBg }}>
+                      <td style={{ padding: "6px 10px", fontFamily: "monospace", fontSize: "10px", wordBreak: "break-all" }}>
+                        {row.critica && <span style={{ color: C.danger, marginRight: "3px" }}>⚑</span>}
+                        <strong style={{ color: row.critica ? C.danger : C.textSecondary }}>{row.key.split(".").pop()}</strong>
+                        <div style={{ fontSize: "9px", color: C.textMuted, opacity: 0.65 }}>{row.key}</div>
+                      </td>
+                      <td style={{ padding: "6px 10px", wordBreak: "break-all" }}>
+                        <span style={{ color: row.igual ? C.textMuted : C.success, fontFamily: "monospace" }}>{row.v1}</span>
+                      </td>
+                      <td style={{ padding: "6px 10px", wordBreak: "break-all" }}>
+                        <span style={{ color: row.igual ? C.textMuted : row.critica ? C.danger : C.warning, fontFamily: "monospace", fontWeight: row.igual ? 400 : 700 }}>{row.v2}</span>
+                      </td>
+                      <td style={{ padding: "6px 10px", textAlign: "center" }}>
+                        {row.igual
+                          ? <span style={{ color: C.success, fontSize: "11px" }}>✓</span>
+                          : row.critica
+                            ? <span style={{ fontSize: "10px", background: C.dangerBg, color: C.danger, padding: "1px 6px", borderRadius: "3px", fontWeight: 700 }}>CRÍTICO</span>
+                            : <span style={{ fontSize: "10px", background: C.warningBg, color: C.warning, padding: "1px 6px", borderRadius: "3px" }}>DIFF</span>
+                        }
+                      </td>
+                    </tr>
+                  );
+                })}
+                {rowsFiltrados.length === 0 && (
+                  <tr><td colSpan={4} style={{ padding: "20px", textAlign: "center", color: C.success }}>✅ Sem diferenças para o filtro selecionado.</td></tr>
+                )}
+              </tbody>
+            </table>
+          </div>
+
+          {/* Análise narrativa para o par 002 vs 059 */}
+          <div style={{ border: `1px solid rgba(167,139,250,0.3)`, borderRadius: "8px", padding: "14px", background: "rgba(167,139,250,0.04)" }}>
+            <div style={{ fontSize: "13px", fontWeight: 700, color: "#a78bfa", marginBottom: "10px" }}>
+              🔬 Por que <strong style={{ color: C.success }}>{eq1Base}</strong> envia dados e <strong style={{ color: C.danger }}>{eq2Base}</strong> não?
+            </div>
+            <div style={{ display: "grid", gap: "8px" }}>
+              <div style={{ padding: "8px 12px", background: C.successBg, border: `1px solid ${C.successBorder}`, borderRadius: "6px", fontSize: "11px" }}>
+                <strong style={{ color: C.success }}>✓ Idênticos — não causam o problema</strong>
+                <div style={{ color: C.textMuted, marginTop: "3px" }}>
+                  classifier.enabled, classifier.licensed, ocr.enabled, ocr.vehicleType, FTP, ioPorts, VARCO tunnel — <em>todos iguais nos dois equipamentos</em>.
+                </div>
+              </div>
+              <div style={{ padding: "8px 12px", background: C.warningBg, border: `1px solid ${C.warningBorder}`, borderRadius: "6px", fontSize: "11px" }}>
+                <strong style={{ color: C.warning }}>↕ Diferenças de instalação — normais</strong>
+                <div style={{ color: C.textMuted, marginTop: "3px" }}>
+                  ocr.roi (região da placa na imagem), scenario1Crop (recorte), focus e zoom — cada ponto físico tem calibração própria. <em>Não impactam o envio de dados.</em>
+                </div>
+              </div>
+              <div style={{ padding: "8px 12px", background: C.dangerBg, border: `1px solid ${C.dangerBorder}`, borderRadius: "6px", fontSize: "11px" }}>
+                <strong style={{ color: C.danger }}>🚨 Principal suspeito — CODIGO EQUIPAMENTO no overlay</strong>
+                <div style={{ color: C.textMuted, marginTop: "3px" }}>
+                  O campo <code>CODIGO EQUIPAMENTO</code> no texto overlay define para qual equipamento o AxHub registra cada passagem.
+                  Se estiver com código errado (ex: <code style={{ color: C.danger }}>GOEC6O009</code>), as imagens chegam ao AxHub mas ficam associadas
+                  ao equipamento errado — o mapa de <code>{eq2Base}</code> fica vazio e o de outro equipamento recebe as passagens indevidamente.
+                </div>
+              </div>
+              <div style={{ padding: "8px 12px", background: "rgba(96,205,255,0.06)", border: `1px solid rgba(96,205,255,0.2)`, borderRadius: "6px", fontSize: "11px" }}>
+                <strong style={{ color: C.accent }}>📋 Próximos passos recomendados</strong>
+                <ol style={{ margin: "6px 0 0 16px", padding: 0, color: C.textMuted, lineHeight: 1.8 }}>
+                  <li>Acessar o túnel de <code>{eq2Base}</code> → aba Perfis de Iluminação → texto overlay.</li>
+                  <li>Verificar se diz <code style={{ color: C.success }}>CODIGO EQUIPAMENTO: {eq2Base}</code>.</li>
+                  <li>Se incorreto, corrigir para o código correto e salvar.</li>
+                  <li>Verificar no AxHub Mapa de Teste se registros aparecem no equipamento correto após correção.</li>
+                </ol>
+                <div style={{ marginTop: "10px", display: "flex", gap: "8px", flexWrap: "wrap" }}>
+                  {resultado.live2?.uuid && (
+                    <a href={`https://${resultado.live2.uuid}-80.tunnel.varco.cloud`} target="_blank" rel="noopener noreferrer"
+                      style={{ fontSize: "11px", color: C.danger, border: `1px solid ${C.dangerBorder}`, padding: "4px 12px", borderRadius: "4px", textDecoration: "none", fontWeight: 600 }}>
+                      🔗 Abrir Túnel {eq2Base}
+                    </a>
+                  )}
+                  {resultado.live1?.uuid && (
+                    <a href={`https://${resultado.live1.uuid}-80.tunnel.varco.cloud`} target="_blank" rel="noopener noreferrer"
+                      style={{ fontSize: "11px", color: C.success, border: `1px solid ${C.successBorder}`, padding: "4px 12px", borderRadius: "4px", textDecoration: "none", fontWeight: 600 }}>
+                      🔗 Abrir Túnel {eq1Base} (ref.)
+                    </a>
+                  )}
+                  <a href="https://economia.axhub.axion.ws/relatorio/relatoriomapadeteste" target="_blank" rel="noopener noreferrer"
+                    style={{ fontSize: "11px", color: "#a78bfa", border: "1px solid #a78bfa44", padding: "4px 12px", borderRadius: "4px", textDecoration: "none", fontWeight: 600 }}>
+                    📊 Mapa de Teste AxHub
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </>
+      )}
+    </div>
+  );
+}
+
+// ═══════════════════════════════════════════════════════════════════════════════
+// AUDITORIA COMPLETA — Todos os parâmetros do ITSCAM organizados por menus
+// ═══════════════════════════════════════════════════════════════════════════════
+function flattenObj(obj, prefix = "") {
+  if (obj === null || obj === undefined) return { [prefix || "value"]: "null" };
+  if (typeof obj !== "object" || Array.isArray(obj)) return { [prefix || "value"]: JSON.stringify(obj) };
+  const result = {};
+  for (const [k, v] of Object.entries(obj)) {
+    const key = prefix ? `${prefix}.${k}` : k;
+    if (v !== null && typeof v === "object" && !Array.isArray(v)) {
+      Object.assign(result, flattenObj(v, key));
+    } else {
+      result[key] = v === null ? "null" : Array.isArray(v) ? JSON.stringify(v) : String(v);
+    }
+  }
+  return result;
+}
+
+function AuditoriaCompletaTab({ liveDevices }) {
+  const [eq1, setEq1] = useState("GOEC6O002 - Faixa 1");
+  const [eq2, setEq2] = useState("GOEC6O059 - Faixa 1");
+  const [data1, setData1] = useState(null);
+  const [data2, setData2] = useState(null);
+  const [loading1, setLoading1] = useState(false);
+  const [loading2, setLoading2] = useState(false);
+  const [expandedSec, setExpandedSec] = useState(new Set());
+  const [somenteDiff, setSomenteDiff] = useState(true);
+  const [aplicando, setAplicando] = useState({});
+  const [resultadoApl, setResultadoApl] = useState({});
+  const TOKEN = "4ca85296b69704ff408e570501c2480af8457da858defbced704ba4ad20d8bf3";
+
+  const deviceNames = useMemo(() => {
+    return [...new Set(liveDevices.map(d => d.name).filter(Boolean))].sort();
+  }, [liveDevices]);
+
+  function getUuid(nome) {
+    return liveDevices.find(d => d.name === nome)?.uuid ?? null;
+  }
+
+  async function buscarAuditoria(nome, setData, setLoading) {
+    const uuid = getUuid(nome);
+    if (!uuid) { alert(`UUID não encontrado para ${nome}`); return; }
+    setLoading(true);
+    try {
+      const res = await fetch(`${API_BASE}/api/varco/itscam/auditoria-completa`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json", "X-Admin-Token": TOKEN },
+        body: JSON.stringify({ uuid }),
+      });
+      const d = await res.json();
+      if (d.ok) setData(d);
+      else alert(`Erro: ${d.erro}`);
+    } catch (e) { alert(e.message); }
+    setLoading(false);
+  }
+
+  async function aplicarParametro(uuid2, endpoint, key, value) {
+    const k = `${uuid2}::${endpoint}::${key}`;
+    setAplicando(p => ({ ...p, [k]: true }));
+    try {
+      // Rebuild the minimal payload for this key path
+      const parts = key.split(".");
+      let payload = value === "true" ? true : value === "false" ? false : isNaN(value) ? value : Number(value);
+      for (let i = parts.length - 1; i >= 0; i--) {
+        payload = { [parts[i]]: payload };
+      }
+      const res = await fetch(`${API_BASE}/api/varco/itscam/aplicar`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json", "X-Admin-Token": TOKEN },
+        body: JSON.stringify({ uuid: uuid2, endpoint, payload, method: "PUT" }),
+      });
+      const d = await res.json();
+      setResultadoApl(p => ({ ...p, [k]: d.ok ? "✅" : `❌ ${d.erro}` }));
+    } catch (e) { setResultadoApl(p => ({ ...p, [k]: `❌ ${e.message}` })); }
+    setAplicando(p => ({ ...p, [k]: false }));
+  }
+
+  async function aplicarSecaoCompleta(uuid2, endpoint, flat1) {
+    // Reconstrói o objeto original a partir dos valores de eq1 e aplica via PUT
+    const k = `${uuid2}::${endpoint}::__secao`;
+    setAplicando(p => ({ ...p, [k]: true }));
+    try {
+      // Usar os dados já coletados de eq1 para a seção
+      const sec1 = data1?.resultados?.find(r => r.endpoint === endpoint);
+      if (!sec1?.data) { alert("Dados do equipamento A não disponíveis para esta seção"); return; }
+      const res = await fetch(`${API_BASE}/api/varco/itscam/aplicar`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json", "X-Admin-Token": TOKEN },
+        body: JSON.stringify({ uuid: uuid2, endpoint, payload: sec1.data, method: "PUT" }),
+      });
+      const d = await res.json();
+      setResultadoApl(p => ({ ...p, [k]: d.ok ? "✅ Seção aplicada" : `❌ ${d.erro}` }));
+      if (d.ok) await buscarAuditoria(eq2, setData2, setLoading2);
+    } catch (e) { setResultadoApl(p => ({ ...p, [k]: `❌ ${e.message}` })); }
+    setAplicando(p => ({ ...p, [k]: false }));
+  }
+
+  // Calcula diff por seção
+  const comparacao = useMemo(() => {
+    if (!data1 || !data2) return null;
+    const map1 = Object.fromEntries(data1.resultados.map(r => [r.endpoint, r]));
+    const map2 = Object.fromEntries(data2.resultados.map(r => [r.endpoint, r]));
+    const secoes = data1.resultados.map(r => {
+      const r2 = map2[r.endpoint];
+      if (!r.data && !r2?.data) return { ...r, flat1: {}, flat2: {}, diffs: [], total: 0 };
+      const flat1 = r.data ? flattenObj(r.data) : {};
+      const flat2 = r2?.data ? flattenObj(r2.data) : {};
+      const allKeys = [...new Set([...Object.keys(flat1), ...Object.keys(flat2)])].sort();
+      const diffs = allKeys.filter(k => flat1[k] !== flat2[k]).map(k => ({ key: k, v1: flat1[k] ?? "—", v2: flat2[k] ?? "—" }));
+      return { secao: r.secao, endpoint: r.endpoint, ok1: r.ok, ok2: r2?.ok, flat1, flat2, diffs, total: allKeys.length };
+    });
+    const totalDiffs = secoes.reduce((s, sec) => s + sec.diffs.length, 0);
+    return { secoes, totalDiffs };
+  }, [data1, data2]);
+
+  const uuid2 = getUuid(eq2);
+
+  return (
+    <div>
+      {/* Header */}
+      <div style={{ marginBottom: "14px", background: "rgba(167,139,250,0.06)", border: `1px solid rgba(167,139,250,0.25)`, borderRadius: "8px", padding: "14px 16px" }}>
+        <div style={{ fontSize: "13px", fontWeight: 700, color: "#a78bfa", marginBottom: "8px" }}>🔬 Auditoria Completa — Todos os Parâmetros do ITSCAM</div>
+        <div style={{ fontSize: "11px", color: C.textMuted }}>
+          Coleta todos os campos de configuração dos menus do túnel ITSCAM (Imagem, Vídeo, Equipamento, Sistema) e compara dois equipamentos. Permite corrigir parâmetros individuais, seções inteiras ou todas as diferenças de uma vez.
+        </div>
+      </div>
+
+      {/* Seletores */}
+      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "10px", marginBottom: "12px" }}>
+        {[{ label: "🟢 Equipamento A — Modelo/Referência", eq: eq1, setEq: setEq1, data: data1, loading: loading1, cor: C.success,
+            onBuscar: () => buscarAuditoria(eq1, setData1, setLoading1) },
+          { label: "🔴 Equipamento B — Corrigir para = A", eq: eq2, setEq: setEq2, data: data2, loading: loading2, cor: C.danger,
+            onBuscar: () => buscarAuditoria(eq2, setData2, setLoading2) }
+        ].map(({ label, eq, setEq, data, loading, cor, onBuscar }) => (
+          <div key={label} style={{ border: `1px solid ${cor}22`, borderRadius: "8px", padding: "10px 12px", background: `${cor}06` }}>
+            <div style={{ fontSize: "11px", fontWeight: 700, color: cor, marginBottom: "6px" }}>{label}</div>
+            <div style={{ display: "flex", gap: "6px" }}>
+              <select value={eq} onChange={e => setEq(e.target.value)}
+                style={{ flex: 1, padding: "6px 8px", border: `2px solid ${cor}`, borderRadius: "6px", background: C.surface, color: C.text, fontSize: "12px" }}>
+                {deviceNames.map(n => <option key={n} value={n}>{n}</option>)}
+              </select>
+              <button onClick={onBuscar} disabled={loading}
+                style={{ padding: "6px 12px", border: `1px solid ${cor}`, borderRadius: "6px", background: `${cor}15`, color: cor, fontSize: "11px", fontWeight: 700, cursor: loading ? "wait" : "pointer", whiteSpace: "nowrap" }}>
+                {loading ? "⏳..." : "📡 Buscar"}
+              </button>
+            </div>
+            {data && <div style={{ fontSize: "10px", color: C.textMuted, marginTop: "4px" }}>
+              {data.resultados.filter(r => r.ok).length}/{data.total} seções coletadas
+            </div>}
+          </div>
+        ))}
+      </div>
+
+      {/* Controles */}
+      {comparacao && (
+        <div style={{ display: "flex", gap: "8px", marginBottom: "12px", flexWrap: "wrap", alignItems: "center" }}>
+          <div style={{ background: C.dangerBg, border: `1px solid ${C.dangerBorder}`, borderRadius: "6px", padding: "6px 12px", fontSize: "13px", fontWeight: 700, color: C.danger }}>
+            {comparacao.totalDiffs} diferenças em {comparacao.secoes.filter(s => s.diffs.length > 0).length} seções
+          </div>
+          <label style={{ fontSize: "11px", color: C.textMuted, display: "flex", alignItems: "center", gap: "5px", cursor: "pointer" }}>
+            <input type="checkbox" checked={somenteDiff} onChange={e => setSomenteDiff(e.target.checked)} />
+            Mostrar apenas seções com diferença
+          </label>
+          <button onClick={() => setExpandedSec(new Set(comparacao.secoes.map(s => s.secao)))}
+            style={{ padding: "4px 10px", border: `1px solid ${C.border}`, borderRadius: "4px", background: C.surface, color: C.textMuted, fontSize: "11px", cursor: "pointer" }}>
+            Expandir tudo
+          </button>
+          <button onClick={() => setExpandedSec(new Set())}
+            style={{ padding: "4px 10px", border: `1px solid ${C.border}`, borderRadius: "4px", background: C.surface, color: C.textMuted, fontSize: "11px", cursor: "pointer" }}>
+            Recolher tudo
+          </button>
+        </div>
+      )}
+
+      {/* Seções */}
+      {!comparacao && (data1 || data2) && (
+        <div style={{ padding: "16px", textAlign: "center", color: C.textMuted, fontSize: "12px", border: `1px dashed ${C.border}`, borderRadius: "8px" }}>
+          Busque os dados dos dois equipamentos para ver a comparação.
+        </div>
+      )}
+      {!data1 && !data2 && (
+        <div style={{ padding: "24px", textAlign: "center", color: C.textMuted, fontSize: "12px", border: `1px dashed ${C.border}`, borderRadius: "8px" }}>
+          Selecione dois equipamentos e clique em <strong style={{ color: "#a78bfa" }}>📡 Buscar</strong> em cada um para iniciar a auditoria completa.
+        </div>
+      )}
+
+      {comparacao && (
+        <div style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
+          {comparacao.secoes
+            .filter(s => !somenteDiff || s.diffs.length > 0)
+            .map(s => {
+              const expanded = expandedSec.has(s.secao);
+              const kSec = `${uuid2}::${s.endpoint}::__secao`;
+              const hasDiff = s.diffs.length > 0;
+              return (
+                <div key={s.secao} style={{ border: `1px solid ${hasDiff ? C.dangerBorder : C.border}`, borderRadius: "8px", overflow: "hidden" }}>
+                  {/* Cabeçalho da seção */}
+                  <div
+                    onClick={() => setExpandedSec(prev => { const n = new Set(prev); n.has(s.secao) ? n.delete(s.secao) : n.add(s.secao); return n; })}
+                    style={{ padding: "8px 12px", background: hasDiff ? "rgba(251,113,133,0.06)" : C.surface, display: "flex", justifyContent: "space-between", alignItems: "center", cursor: "pointer", userSelect: "none" }}>
+                    <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+                      <span style={{ fontSize: "11px", fontWeight: 700, color: hasDiff ? C.danger : C.textSecondary }}>
+                        {expanded ? "▾" : "▸"} {s.secao}
+                      </span>
+                      {hasDiff && <span style={{ fontSize: "10px", background: C.dangerBg, color: C.danger, padding: "1px 6px", borderRadius: "3px", fontWeight: 700 }}>
+                        {s.diffs.length} dif.
+                      </span>}
+                      <span style={{ fontSize: "10px", color: C.textMuted }}>
+                        {!s.ok1 && "❌A "}{!s.ok2 && "❌B "}
+                        {s.total} campos | {s.endpoint}
+                      </span>
+                    </div>
+                    {hasDiff && uuid2 && (
+                      <button onClick={e => { e.stopPropagation(); aplicarSecaoCompleta(uuid2, s.endpoint, s.flat1); }}
+                        disabled={aplicando[kSec]}
+                        style={{ padding: "3px 10px", border: `1px solid #a78bfa`, borderRadius: "4px", background: "rgba(167,139,250,0.1)", color: "#a78bfa", fontSize: "10px", fontWeight: 700, cursor: "pointer" }}>
+                        {aplicando[kSec] ? "⏳ Aplicando..." : resultadoApl[kSec] || "⚡ Copiar A→B"}
+                      </button>
+                    )}
+                  </div>
+                  {/* Tabela de parâmetros */}
+                  {expanded && (
+                    <table style={{ width: "100%", borderCollapse: "collapse", fontSize: "11px" }}>
+                      <thead>
+                        <tr style={{ background: C.tableHeader }}>
+                          <th style={{ padding: "6px 10px", textAlign: "left", color: C.textSecondary, width: "30%" }}>Parâmetro</th>
+                          <th style={{ padding: "6px 10px", textAlign: "left", color: C.success, width: "28%" }}>🟢 [A] {eq1}</th>
+                          <th style={{ padding: "6px 10px", textAlign: "left", color: C.danger, width: "28%" }}>🔴 [B] {eq2}</th>
+                          <th style={{ padding: "6px 10px", textAlign: "center", color: C.textSecondary, width: "14%" }}>Ação</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {Object.entries({ ...s.flat1, ...s.flat2 }).reduce((acc, [k]) => { if (!acc.includes(k)) acc.push(k); return acc; }, []).sort().map((key, i) => {
+                          const v1 = s.flat1[key] ?? "—";
+                          const v2 = s.flat2[key] ?? "—";
+                          const diff = v1 !== v2;
+                          const kParam = `${uuid2}::${s.endpoint}::${key}`;
+                          if (!diff && somenteDiff) return null;
+                          return (
+                            <tr key={key} style={{ borderTop: `1px solid ${C.border}`, background: diff ? "rgba(251,113,133,0.04)" : i % 2 === 0 ? "transparent" : C.surface }}>
+                              <td style={{ padding: "5px 10px", fontFamily: "monospace", fontSize: "10px", color: diff ? C.danger : C.textMuted, wordBreak: "break-all" }}>
+                                {diff && "⚑ "}{key.split(".").pop()}
+                                <div style={{ fontSize: "9px", color: C.textMuted, opacity: 0.6 }}>{key}</div>
+                              </td>
+                              <td style={{ padding: "5px 10px", wordBreak: "break-all" }}>
+                                <span style={{ fontFamily: "monospace", color: diff ? C.success : C.textMuted, fontWeight: diff ? 600 : 400 }}>{v1}</span>
+                              </td>
+                              <td style={{ padding: "5px 10px", wordBreak: "break-all" }}>
+                                <span style={{ fontFamily: "monospace", color: diff ? C.danger : C.textMuted, fontWeight: diff ? 700 : 400 }}>{v2}</span>
+                              </td>
+                              <td style={{ padding: "5px 10px", textAlign: "center" }}>
+                                {diff && uuid2 ? (
+                                  <span style={{ fontSize: "10px" }}>
+                                    {resultadoApl[kParam] ? (
+                                      <span style={{ color: resultadoApl[kParam].startsWith("✅") ? C.success : C.danger }}>{resultadoApl[kParam]}</span>
+                                    ) : (
+                                      <button onClick={() => aplicarParametro(uuid2, s.endpoint, key, v1)} disabled={aplicando[kParam]}
+                                        style={{ padding: "2px 8px", border: `1px solid #a78bfa44`, borderRadius: "3px", background: "rgba(167,139,250,0.08)", color: "#a78bfa", fontSize: "10px", cursor: "pointer" }}>
+                                        {aplicando[kParam] ? "⏳" : "A→B"}
+                                      </button>
+                                    )}
+                                  </span>
+                                ) : <span style={{ color: C.success, fontSize: "10px" }}>✓</span>}
+                              </td>
+                            </tr>
+                          );
+                        })}
+                      </tbody>
+                    </table>
+                  )}
+                </div>
+              );
+            })}
+        </div>
+      )}
     </div>
   );
 }

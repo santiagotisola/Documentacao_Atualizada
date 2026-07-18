@@ -956,11 +956,11 @@ export async function itscamLer(req, res) {
   if (!_isAdminRequest(req)) return res.status(403).json({ erro: "Acesso negado" });
   try {
     const { uuid, endpoint } = req.body;
-    if (!uuid || !endpoint) return res.status(400).json({ erro: "uuid e endpoint sÃ£o obrigatÃ³rios" });
+    if (!uuid || !endpoint) return res.status(400).json({ erro: "uuid e endpoint são obrigatórios" });
 
     // Valida endpoint: apenas caminhos /api/...
     if (!/^\/api\/[a-zA-Z0-9/_-]+$/.test(endpoint)) {
-      return res.status(400).json({ erro: "endpoint invÃ¡lido" });
+      return res.status(400).json({ erro: "endpoint inválido" });
     }
 
     const baseUrl = `https://${uuid}-80.tunnel.varco.cloud`;
@@ -969,7 +969,74 @@ export async function itscamLer(req, res) {
     return res.json({ ok: true, uuid, endpoint, data });
   } catch (err) {
     console.error("[ITScam] Erro leitura:", err.message);
-    return res.status(502).json({ erro: "Falha na comunicaÃ§Ã£o com o equipamento", detalhe: err.message });
+    return res.status(502).json({ erro: "Falha na comunicação com o equipamento", detalhe: err.message });
+  }
+}
+
+// ─── POST /api/varco/itscam/auditoria-completa ──────────────────────────────
+/**
+ * Coleta TODOS os parâmetros de configuração de um equipamento ITSCAM
+ * Body: { uuid }
+ * Retorna dados organizados pelos mesmos menus do túnel ITSCAM
+ */
+const ITSCAM_SECOES = [
+  { secao: "Imagem / Perfis",         endpoint: "/api/image/profiles",                        method: "GET" },
+  { secao: "Imagem / Miscelânea",     endpoint: "/api/equipment/misc",                        method: "GET" },
+  { secao: "Vídeo / Streams",         endpoint: "/api/video/streams",                         method: "GET" },
+  { secao: "Equipamento / Geral",     endpoint: "/api/equipment/general",                     method: "GET" },
+  { secao: "Equipamento / Rede",      endpoint: "/api/equipment/network/ethernet",             method: "GET" },
+  { secao: "Equipamento / Rede GSM",  endpoint: "/api/equipment/network/gsm",                 method: "GET" },
+  { secao: "Equipamento / OCR",       endpoint: "/api/equipment/ocr",                         method: "GET" },
+  { secao: "Equipamento / Classificador", endpoint: "/api/equipment/classifier",              method: "GET" },
+  { secao: "Equipamento / Indicador Veículo", endpoint: "/api/equipment/vehicleIndicator",    method: "GET" },
+  { secao: "Equipamento / Portas I/O", endpoint: "/api/equipment/ioPorts",                    method: "GET" },
+  { secao: "Equipamento / Servidores / FTP", endpoint: "/api/equipment/servers/ftp",          method: "GET" },
+  { secao: "Equipamento / Servidores / ITSCAMPro", endpoint: "/api/equipment/servers/itscampro", method: "GET" },
+  { secao: "Equipamento / Servidores / Lince", endpoint: "/api/equipment/servers/lince",      method: "GET" },
+  { secao: "Equipamento / Servidores / Protocolos", endpoint: "/api/equipment/servers/protocols", method: "GET" },
+  { secao: "Equipamento / Servidores / REST API 1", endpoint: "/api/equipment/servers/restapiclient/0/config", method: "GET" },
+  { secao: "Equipamento / Servidores / REST API 1 Status", endpoint: "/api/equipment/servers/restapiclient/0/status", method: "GET" },
+  { secao: "Equipamento / Servidores / REST API 2", endpoint: "/api/equipment/servers/restapiclient/1/config", method: "GET" },
+  { secao: "Equipamento / Servidores / REST API 2 Status", endpoint: "/api/equipment/servers/restapiclient/1/status", method: "GET" },
+  { secao: "Equipamento / Data e Hora", endpoint: "/api/equipment/dateAndTime",               method: "GET" },
+  { secao: "Equipamento / Transicionador", endpoint: "/api/equipment/transitioner",           method: "GET" },
+  { secao: "Sistema / Acesso Remoto (VARCO)", endpoint: "/api/system/maintenance/remoteaccess", method: "GET" },
+  { secao: "Sistema / Reboot Automático", endpoint: "/api/system/maintenance/automaticreboot", method: "GET" },
+  { secao: "Sistema / SNMP",           endpoint: "/api/system/monitoring/snmp",               method: "GET" },
+  { secao: "Sistema / Firmware",       endpoint: "/api/system/firmware",                      method: "GET" },
+  { secao: "Sistema / Licenças",       endpoint: "/api/system/licenses",                      method: "GET" },
+];
+
+export async function itscamAuditoriaCompleta(req, res) {
+  if (!_isAdminRequest(req)) return res.status(403).json({ erro: "Acesso negado" });
+  try {
+    const { uuid } = req.body;
+    if (!uuid) return res.status(400).json({ erro: "uuid é obrigatório" });
+
+    const baseUrl = `https://${uuid}-80.tunnel.varco.cloud`;
+    const token = await autenticarItscam(baseUrl);
+
+    // Busca todas as seções em paralelo (com catch individual por seção)
+    const resultados = await Promise.all(
+      ITSCAM_SECOES.map(async (s) => {
+        try {
+          const r = await fetch(`${baseUrl}${s.endpoint}`, {
+            headers: { Authorization: `Bearer ${token}` },
+            signal: AbortSignal.timeout(15_000),
+          });
+          const data = r.ok ? await r.json() : null;
+          return { secao: s.secao, endpoint: s.endpoint, ok: r.ok, status: r.status, data };
+        } catch (e) {
+          return { secao: s.secao, endpoint: s.endpoint, ok: false, status: 0, data: null, erro: e.message };
+        }
+      })
+    );
+
+    console.log(`[ITScam] Auditoria completa ${uuid}: ${resultados.filter(r => r.ok).length}/${resultados.length} OK`);
+    return res.json({ ok: true, uuid, total: resultados.length, resultados });
+  } catch (err) {
+    console.error("[ITScam] Erro auditoria completa:", err.message);
+    return res.status(502).json({ erro: "Falha na autenticação com o equipamento", detalhe: err.message });
   }
 }
 

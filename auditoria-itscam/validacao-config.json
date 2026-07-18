@@ -1,5 +1,5 @@
 {
-  "geradoEm": "2026-07-13T01:34:33.286Z",
+  "geradoEm": "2026-07-18T17:10:40.869Z",
   "scriptPadrao": {
     "faixa1": "config-padrao/padrao-faixa-1.json",
     "faixa2": "config-padrao/padrao-faixa-2.json"
@@ -8,8 +8,8 @@
   "resumo": {
     "total": 72,
     "conformes": 0,
-    "alterados": 61,
-    "offline": 11,
+    "alterados": 60,
+    "offline": 12,
     "grupos": 3,
     "percentConformes": 0
   },
@@ -17,8 +17,48 @@
   "grupos": [
     {
       "grupo": 1,
-      "totalEquipamentos": 57,
+      "totalEquipamentos": 56,
       "alteracoes": [
+        {
+          "id": "OCR_MAX_PLATES",
+          "titulo": "OCR Max Plates",
+          "severidade": "alto",
+          "menu": "Equipamento > OCR",
+          "valorAtual": 1,
+          "valorEsperado": 2
+        },
+        {
+          "id": "OCR_PROC_THREADS",
+          "titulo": "OCR Processing Threads",
+          "severidade": "medio",
+          "menu": "Equipamento > OCR",
+          "valorAtual": 2,
+          "valorEsperado": 4
+        },
+        {
+          "id": "OCR_MAX_LOW_PROB",
+          "titulo": "OCR Max Low Prob Chars",
+          "severidade": "medio",
+          "menu": "Equipamento > OCR",
+          "valorAtual": 1,
+          "valorEsperado": 0
+        },
+        {
+          "id": "CLASS_QUEUE",
+          "titulo": "Classificador Queue",
+          "severidade": "alto",
+          "menu": "Equipamento > Classificador",
+          "valorAtual": 4,
+          "valorEsperado": 1
+        },
+        {
+          "id": "CLASS_MIN_PROB",
+          "titulo": "Classificador Probabilidade Mínima",
+          "severidade": "medio",
+          "menu": "Equipamento > Classificador",
+          "valorAtual": 86,
+          "valorEsperado": 100
+        },
         {
           "id": "VIDEO_FPS",
           "titulo": "Vídeo Framerate",
@@ -41,407 +81,440 @@
           "nome": "GOEC6O002 - Faixa 1",
           "faixa": 1,
           "firmware": "v1.7.8",
-          "score": 94,
-          "ultimoAcesso": null
-        },
-        {
-          "nome": "GOEC6O002 - Faixa 2",
-          "faixa": 2,
-          "firmware": "v1.7.8",
-          "score": 94,
+          "score": 77,
           "ultimoAcesso": null
         },
         {
           "nome": "GOEC6O003 - Faixa 1",
           "faixa": 1,
           "firmware": "v1.7.8",
-          "score": 94,
+          "score": 77,
           "ultimoAcesso": null
         },
         {
           "nome": "GOEC6O003 - Faixa 2",
           "faixa": 2,
           "firmware": "v1.7.8",
-          "score": 94,
+          "score": 77,
           "ultimoAcesso": null
         },
         {
           "nome": "GOEC6O004 - Faixa 1",
           "faixa": 1,
           "firmware": "v1.7.8",
-          "score": 94,
+          "score": 77,
           "ultimoAcesso": null
         },
         {
           "nome": "GOEC6O004 - Faixa 2",
           "faixa": 2,
           "firmware": "v1.7.8",
-          "score": 94,
+          "score": 77,
           "ultimoAcesso": null
         },
         {
           "nome": "GOEC6O005 - Faixa 1",
           "faixa": 1,
           "firmware": "v1.7.8",
-          "score": 94,
+          "score": 77,
           "ultimoAcesso": null
         },
         {
           "nome": "GOEC6O005 - Faixa 2",
           "faixa": 2,
           "firmware": "v1.7.8",
-          "score": 94,
+          "score": 77,
           "ultimoAcesso": null
         },
         {
           "nome": "GOEC6O007 - Faixa 1",
           "faixa": 1,
           "firmware": "v1.7.8",
-          "score": 94,
+          "score": 77,
           "ultimoAcesso": null
         },
         {
           "nome": "GOEC6O007 - Faixa 2",
           "faixa": 2,
           "firmware": "v1.7.8",
-          "score": 94,
+          "score": 77,
           "ultimoAcesso": null
         },
         {
           "nome": "GOEC6O008 - Faixa 2",
           "faixa": 2,
           "firmware": "v1.7.8",
-          "score": 94,
+          "score": 77,
           "ultimoAcesso": null
         },
         {
           "nome": "GOEC6O009 - Faixa 1",
           "faixa": 1,
           "firmware": "v1.7.8",
-          "score": 94,
+          "score": 77,
           "ultimoAcesso": null
         },
         {
           "nome": "GOEC6O009 - Faixa 2",
           "faixa": 2,
           "firmware": "v1.7.8",
-          "score": 94,
+          "score": 77,
           "ultimoAcesso": null
         },
         {
           "nome": "GOEC6O010 - Faixa 1",
           "faixa": 1,
           "firmware": "v1.7.8",
-          "score": 94,
+          "score": 77,
           "ultimoAcesso": null
         },
         {
           "nome": "GOEC6O010 - Faixa 2",
           "faixa": 2,
           "firmware": "v1.7.8",
-          "score": 94,
+          "score": 77,
           "ultimoAcesso": null
         },
         {
           "nome": "GOEC6O011 - Faixa 1",
           "faixa": 1,
           "firmware": "v1.7.8",
-          "score": 94,
+          "score": 77,
+          "ultimoAcesso": null
+        },
+        {
+          "nome": "GOEC6O013 - Faixa 1",
+          "faixa": 1,
+          "firmware": "v1.7.8",
+          "score": 77,
+          "ultimoAcesso": null
+        },
+        {
+          "nome": "GOEC6O013 - Faixa 2",
+          "faixa": 2,
+          "firmware": "v1.7.8",
+          "score": 77,
           "ultimoAcesso": null
         },
         {
           "nome": "GOEC6O018 - Faixa 2",
           "faixa": 2,
           "firmware": "v1.7.8",
-          "score": 94,
+          "score": 77,
           "ultimoAcesso": null
         },
         {
           "nome": "GOEC6O020 - Faixa 1",
           "faixa": 1,
           "firmware": "v1.7.8",
-          "score": 94,
+          "score": 77,
           "ultimoAcesso": null
         },
         {
           "nome": "GOEC6O020 - Faixa 2",
           "faixa": 2,
           "firmware": "v1.7.8",
-          "score": 94,
+          "score": 77,
           "ultimoAcesso": null
         },
         {
           "nome": "GOEC6O021 - Faixa 1",
           "faixa": 1,
           "firmware": "v1.7.8",
-          "score": 94,
+          "score": 77,
           "ultimoAcesso": null
         },
         {
           "nome": "GOEC6O022 - Faixa 1",
           "faixa": 1,
           "firmware": "v1.7.8",
-          "score": 94,
+          "score": 77,
           "ultimoAcesso": null
         },
         {
           "nome": "GOEC6O022 - Faixa 2",
           "faixa": 2,
           "firmware": "v1.7.8",
-          "score": 94,
+          "score": 77,
           "ultimoAcesso": null
         },
         {
           "nome": "GOEC6O023 - Faixa 1",
           "faixa": 1,
           "firmware": "v1.7.8",
-          "score": 94,
+          "score": 77,
           "ultimoAcesso": null
         },
         {
           "nome": "GOEC6O029 - Faixa 1",
           "faixa": 1,
           "firmware": "v1.7.8",
-          "score": 94,
+          "score": 77,
           "ultimoAcesso": null
         },
         {
           "nome": "GOEC6O029 - Faixa 2",
           "faixa": 2,
           "firmware": "v1.7.8",
-          "score": 94,
+          "score": 77,
           "ultimoAcesso": null
         },
         {
           "nome": "GOEC6O033 - Faixa 1",
           "faixa": 1,
           "firmware": "v1.7.8",
-          "score": 94,
+          "score": 77,
           "ultimoAcesso": null
         },
         {
           "nome": "GOEC6O033 - Faixa 2",
           "faixa": 2,
           "firmware": "v1.7.8",
-          "score": 94,
+          "score": 77,
           "ultimoAcesso": null
         },
         {
           "nome": "GOEC6O036 - Faixa 1",
           "faixa": 1,
           "firmware": "v1.7.8",
-          "score": 94,
+          "score": 77,
           "ultimoAcesso": null
         },
         {
           "nome": "GOEC6O040 - Faixa 1",
           "faixa": 1,
           "firmware": "v1.7.8",
-          "score": 94,
+          "score": 77,
           "ultimoAcesso": null
         },
         {
           "nome": "GOEC6O040 - Faixa 2",
           "faixa": 2,
           "firmware": "v1.7.8",
-          "score": 94,
+          "score": 77,
           "ultimoAcesso": null
         },
         {
           "nome": "GOEC6O041 - Faixa 1",
           "faixa": 1,
           "firmware": "v1.7.8",
-          "score": 94,
+          "score": 77,
           "ultimoAcesso": null
         },
         {
           "nome": "GOEC6O041 - Faixa 2",
           "faixa": 2,
           "firmware": "v1.7.8",
-          "score": 94,
+          "score": 77,
+          "ultimoAcesso": null
+        },
+        {
+          "nome": "GOEC6O043 - Faixa 1",
+          "faixa": 1,
+          "firmware": "v1.7.8",
+          "score": 77,
+          "ultimoAcesso": null
+        },
+        {
+          "nome": "GOEC6O043 - Faixa 2",
+          "faixa": 2,
+          "firmware": "v1.7.8",
+          "score": 77,
           "ultimoAcesso": null
         },
         {
           "nome": "GOEC6O045 - Faixa 1",
           "faixa": 1,
           "firmware": "v1.7.8",
-          "score": 94,
+          "score": 77,
           "ultimoAcesso": null
         },
         {
           "nome": "GOEC6O045 - Faixa 2",
           "faixa": 2,
           "firmware": "v1.7.8",
-          "score": 94,
+          "score": 77,
           "ultimoAcesso": null
         },
         {
-          "nome": "GOEC6O046 - Faixa 1",
+          "nome": "GOEC6O048 - Faixa 1",
           "faixa": 1,
           "firmware": "v1.7.8",
-          "score": 94,
+          "score": 77,
+          "ultimoAcesso": null
+        },
+        {
+          "nome": "GOEC6O048 - Faixa 2",
+          "faixa": 2,
+          "firmware": "v1.7.8",
+          "score": 77,
           "ultimoAcesso": null
         },
         {
           "nome": "GOEC6O049 - Faixa 1",
           "faixa": 1,
           "firmware": "v1.7.8",
-          "score": 94,
+          "score": 77,
           "ultimoAcesso": null
         },
         {
           "nome": "GOEC6O049 - Faixa 2",
           "faixa": 2,
           "firmware": "v1.7.8",
-          "score": 94,
+          "score": 77,
           "ultimoAcesso": null
         },
         {
           "nome": "GOEC6O050 - Faixa 1",
           "faixa": 1,
           "firmware": "v1.7.8",
-          "score": 94,
+          "score": 77,
           "ultimoAcesso": null
         },
         {
           "nome": "GOEC6O050 - Faixa 2",
           "faixa": 2,
           "firmware": "v1.7.8",
-          "score": 94,
-          "ultimoAcesso": null
-        },
-        {
-          "nome": "GOEC6O051 - Faixa 1",
-          "faixa": 1,
-          "firmware": "v1.7.8",
-          "score": 94,
-          "ultimoAcesso": null
-        },
-        {
-          "nome": "GOEC6O051 - Faixa 2",
-          "faixa": 2,
-          "firmware": "v1.7.8",
-          "score": 94,
+          "score": 77,
           "ultimoAcesso": null
         },
         {
           "nome": "GOEC6O052 - Faixa 2",
           "faixa": 2,
           "firmware": "v1.7.8",
-          "score": 94,
-          "ultimoAcesso": null
-        },
-        {
-          "nome": "GOEC6O052- Faixa 1",
-          "faixa": 1,
-          "firmware": "v1.7.8",
-          "score": 94,
-          "ultimoAcesso": null
-        },
-        {
-          "nome": "GOEC6O053 - Faixa 1",
-          "faixa": 1,
-          "firmware": "v1.7.8",
-          "score": 94,
-          "ultimoAcesso": null
-        },
-        {
-          "nome": "GOEC6O053 - Faixa 2",
-          "faixa": 2,
-          "firmware": "v1.7.8",
-          "score": 94,
+          "score": 77,
           "ultimoAcesso": null
         },
         {
           "nome": "GOEC6O054 - Faixa 1",
           "faixa": 1,
           "firmware": "v1.7.8",
-          "score": 94,
+          "score": 77,
           "ultimoAcesso": null
         },
         {
           "nome": "GOEC6O054 - Faixa 2",
           "faixa": 2,
           "firmware": "v1.7.8",
-          "score": 94,
+          "score": 77,
           "ultimoAcesso": null
         },
         {
           "nome": "GOEC6O055 - Faixa 1",
           "faixa": 1,
           "firmware": "v1.7.8",
-          "score": 94,
+          "score": 77,
           "ultimoAcesso": null
         },
         {
           "nome": "GOEC6O055 - Faixa 2",
           "faixa": 2,
           "firmware": "v1.7.8",
-          "score": 94,
+          "score": 77,
           "ultimoAcesso": null
         },
         {
           "nome": "GOEC6O056 - Faixa 1",
           "faixa": 1,
           "firmware": "v1.7.8",
-          "score": 94,
+          "score": 77,
           "ultimoAcesso": null
         },
         {
           "nome": "GOEC6O056 - Faixa 2",
           "faixa": 2,
           "firmware": "v1.7.8",
-          "score": 94,
+          "score": 77,
           "ultimoAcesso": null
         },
         {
           "nome": "GOEC6O057 - Faixa 1",
           "faixa": 1,
           "firmware": "v1.7.8",
-          "score": 94,
+          "score": 77,
           "ultimoAcesso": null
         },
         {
           "nome": "GOEC6O057 - Faixa 2",
           "faixa": 2,
           "firmware": "v1.7.8",
-          "score": 94,
+          "score": 77,
           "ultimoAcesso": null
         },
         {
           "nome": "GOEC6O058 - Faixa 1",
           "faixa": 1,
           "firmware": "v1.7.8",
-          "score": 94,
+          "score": 77,
           "ultimoAcesso": null
         },
         {
           "nome": "GOEC6O058 - Faixa 2",
           "faixa": 2,
           "firmware": "v1.7.8",
-          "score": 94,
+          "score": 77,
           "ultimoAcesso": null
         },
         {
           "nome": "GOEC6O059 - Faixa 1",
           "faixa": 1,
           "firmware": "v1.7.8",
-          "score": 94,
+          "score": 77,
           "ultimoAcesso": null
         },
         {
           "nome": "GOEC6O059 - Faixa 2",
           "faixa": 2,
           "firmware": "v1.7.8",
-          "score": 94,
+          "score": 77,
           "ultimoAcesso": null
         }
       ]
     },
     {
       "grupo": 2,
-      "totalEquipamentos": 2,
+      "totalEquipamentos": 3,
       "alteracoes": [
+        {
+          "id": "OCR_MAX_PLATES",
+          "titulo": "OCR Max Plates",
+          "severidade": "alto",
+          "menu": "Equipamento > OCR",
+          "valorAtual": 1,
+          "valorEsperado": 2
+        },
+        {
+          "id": "OCR_PROC_THREADS",
+          "titulo": "OCR Processing Threads",
+          "severidade": "medio",
+          "menu": "Equipamento > OCR",
+          "valorAtual": 2,
+          "valorEsperado": 4
+        },
+        {
+          "id": "OCR_MAX_LOW_PROB",
+          "titulo": "OCR Max Low Prob Chars",
+          "severidade": "medio",
+          "menu": "Equipamento > OCR",
+          "valorAtual": 1,
+          "valorEsperado": 0
+        },
+        {
+          "id": "CLASS_QUEUE",
+          "titulo": "Classificador Queue",
+          "severidade": "alto",
+          "menu": "Equipamento > Classificador",
+          "valorAtual": 4,
+          "valorEsperado": 1
+        },
+        {
+          "id": "CLASS_MIN_PROB",
+          "titulo": "Classificador Probabilidade Mínima",
+          "severidade": "medio",
+          "menu": "Equipamento > Classificador",
+          "valorAtual": 60,
+          "valorEsperado": 100
+        },
         {
           "id": "NTP_SERVER",
           "titulo": "NTP Server",
@@ -476,36 +549,90 @@
           "nome": "GOEC6O011 - Faixa 2",
           "faixa": 2,
           "firmware": "v1.7.8",
-          "score": 90,
+          "score": 74,
           "ultimoAcesso": null
         },
         {
           "nome": "GOEC6O028 - Faixa 1",
           "faixa": 1,
           "firmware": "v1.7.8",
-          "score": 90,
+          "score": 74,
+          "ultimoAcesso": null
+        },
+        {
+          "nome": "GOEC6O046 - Faixa 1",
+          "faixa": 1,
+          "firmware": "v1.7.8",
+          "score": 74,
           "ultimoAcesso": null
         }
       ]
     },
     {
       "grupo": 3,
-      "totalEquipamentos": 2,
+      "totalEquipamentos": 1,
       "alteracoes": [
+        {
+          "id": "OCR_MAX_PLATES",
+          "titulo": "OCR Max Plates",
+          "severidade": "alto",
+          "menu": "Equipamento > OCR",
+          "valorAtual": 1,
+          "valorEsperado": 2
+        },
+        {
+          "id": "OCR_PROC_QUEUE",
+          "titulo": "OCR Processing Queue",
+          "severidade": "medio",
+          "menu": "Equipamento > OCR",
+          "valorAtual": 2,
+          "valorEsperado": 4
+        },
+        {
+          "id": "OCR_PROC_THREADS",
+          "titulo": "OCR Processing Threads",
+          "severidade": "medio",
+          "menu": "Equipamento > OCR",
+          "valorAtual": 2,
+          "valorEsperado": 4
+        },
+        {
+          "id": "CLASS_QUEUE",
+          "titulo": "Classificador Queue",
+          "severidade": "alto",
+          "menu": "Equipamento > Classificador",
+          "valorAtual": 2,
+          "valorEsperado": 1
+        },
+        {
+          "id": "CLASS_THREADS",
+          "titulo": "Classificador Threads",
+          "severidade": "alto",
+          "menu": "Equipamento > Classificador",
+          "valorAtual": 2,
+          "valorEsperado": 1
+        },
         {
           "id": "CLASS_MIN_PROB",
           "titulo": "Classificador Probabilidade Mínima",
           "severidade": "medio",
           "menu": "Equipamento > Classificador",
-          "valorAtual": 20,
+          "valorAtual": 60,
           "valorEsperado": 100
+        },
+        {
+          "id": "SNAPSHOT_CROP",
+          "titulo": "Snapshot Crop Desabilitado",
+          "severidade": "medio",
+          "menu": "Equipamento > Diversos",
+          "valorEsperado": false
         },
         {
           "id": "VIDEO_FPS",
           "titulo": "Vídeo Framerate",
           "severidade": "medio",
           "menu": "Vídeo > Streams",
-          "valorAtual": 12,
+          "valorAtual": 1,
           "valorEsperado": 15
         },
         {
@@ -513,23 +640,16 @@
           "titulo": "Vídeo Qualidade",
           "severidade": "medio",
           "menu": "Vídeo > Streams",
-          "valorAtual": 85,
+          "valorAtual": 55,
           "valorEsperado": 90
         }
       ],
       "dispositivos": [
         {
-          "nome": "GOEC6O048 - Faixa 1",
-          "faixa": 1,
-          "firmware": "v1.7.8",
-          "score": 90,
-          "ultimoAcesso": null
-        },
-        {
-          "nome": "GOEC6O048 - Faixa 2",
+          "nome": "GOEC6O002 - Faixa 2",
           "faixa": 2,
-          "firmware": "v1.7.8",
-          "score": 90,
+          "firmware": "v1.7.9_rc3",
+          "score": 71,
           "ultimoAcesso": null
         }
       ]
@@ -552,16 +672,6 @@
       "ip": "191.58.157.152"
     },
     {
-      "nome": "GOEC6O013 - Faixa 1",
-      "uuid": "7d9bf2eb-0f9a-4691-bffd-e003fc3781ed",
-      "ip": "187.43.160.194"
-    },
-    {
-      "nome": "GOEC6O013 - Faixa 2",
-      "uuid": "36896650-1bca-4093-9631-667b73bdd93d",
-      "ip": "187.43.160.194"
-    },
-    {
       "nome": "GOEC6O018 - Faixa 1",
       "uuid": "0e154d78-62b4-4e0f-867c-0d93b7c79c74",
       "ip": "177.200.42.236"
@@ -577,19 +687,34 @@
       "ip": "45.70.146.16"
     },
     {
-      "nome": "GOEC6O043 - Faixa 1",
-      "uuid": "f29258aa-8c64-47c6-8912-54b3dffbc5dc",
-      "ip": "186.237.219.7"
-    },
-    {
-      "nome": "GOEC6O043 - Faixa 2",
-      "uuid": "9e7e2c3c-bf75-40c4-b0ca-42b3950a0955",
-      "ip": "186.237.219.7"
-    },
-    {
       "nome": "GOEC6O046 - Faixa 2",
       "uuid": "4d68163e-8462-4dce-adad-df3b0d7c76af",
       "ip": "170.81.67.214"
+    },
+    {
+      "nome": "GOEC6O051 - Faixa 1",
+      "uuid": "b1936eeb-bdb5-41d4-9d59-8d5aca35f301",
+      "ip": "177.79.27.191"
+    },
+    {
+      "nome": "GOEC6O051 - Faixa 2",
+      "uuid": "13d8dad0-3b76-4394-ad2f-bcb2f6ca3d5c",
+      "ip": "177.79.27.191"
+    },
+    {
+      "nome": "GOEC6O052- Faixa 1",
+      "uuid": "49cbc26f-7a42-47d6-9d32-bc66f740e886",
+      "ip": "187.68.165.85"
+    },
+    {
+      "nome": "GOEC6O053 - Faixa 1",
+      "uuid": "b2071e67-3658-4a52-a543-13713f2c1e33",
+      "ip": "179.249.76.74"
+    },
+    {
+      "nome": "GOEC6O053 - Faixa 2",
+      "uuid": "3bb822e1-3f89-4a2e-aa79-c8a6041288d9",
+      "ip": "179.249.76.74"
     }
   ]
 }
