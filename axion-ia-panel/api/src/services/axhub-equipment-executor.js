@@ -306,7 +306,7 @@ export async function executeEquipmentCycle(data, onProgress = () => {}) {
     await page.waitForSelector(SELECTORS.login.usuario, { timeout: 10000 });
 
     await fillInput(SELECTORS.login.usuario, 'suporte@axiontecnologia.com.br');
-    await fillInput(SELECTORS.login.senha, 'Axion#2023');
+    await fillInput(SELECTORS.login.senha, process.env.AXHUB_SENHA_SUPORTE || 'Axion@2026');
     await page.click(SELECTORS.login.btn);
 
     // Aguarda login (pode ter Cloudflare challenge)

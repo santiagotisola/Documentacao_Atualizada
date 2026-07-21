@@ -17,6 +17,7 @@ import { listarSistemas, listarEquipamentos as medicaoListarEquipamentos, gerarD
 import { relatorioPassagens, relatorioImagens, listarEquipamentosRelatorio } from "../relatorio-controller.js";
 import { listarContratosHandler, listarTiposHandler, gerarRelatorioHandler, listarRelatoriosHandler, obterRelatorioHandler, removerRelatorioHandler } from "../relatorio-contrato-controller.js";
 import { buscarLiveStats, buscarLiveStatsBatch } from "../sites-stats-controller.js";
+import { buscarVersoesSites, statusVersoesSites } from "../sites-versions-controller.js";
 
 const router = express.Router();
 
@@ -103,5 +104,7 @@ router.delete("/relatorio-contrato/:id", removerRelatorioHandler);
 
 router.get("/sites/live-stats", buscarLiveStats);
 router.post("/sites/live-stats-batch", buscarLiveStatsBatch);
+router.post("/sites/versions",        buscarVersoesSites);
+router.get("/sites/versions/status",  statusVersoesSites);
 
 export default router;

@@ -326,15 +326,20 @@ function ListaGeral({ todosSites, sitesComScore, filtros, setFiltros, navegarPar
                   <td>{site.estado || '—'}</td>
 
                   {/* URL */}
-                  <td>
+                  <td style={{ maxWidth: '200px', overflow: 'hidden' }}>
                     <a href={site.url} target="_blank" rel="noreferrer" onClick={(e) => e.stopPropagation()}
-                       style={{ color: 'var(--cs-primary)', textDecoration: 'none', fontSize: '0.8125rem' }}>
-                      {(site.url || '').replace('https://', '').substring(0, 28)}…
+                       style={{ color: 'var(--cs-primary)', textDecoration: 'none', fontSize: '0.75rem',
+                                display: 'block', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}
+                       title={site.url}>
+                      {(site.url || '').replace('https://', '')}
                     </a>
                   </td>
 
                   {/* Versão */}
-                  <td>{site.versao || '—'}</td>
+                  <td style={{ fontWeight: site.versao ? 600 : 400, color: site._versaoLive ? '#4f46e5' : 'inherit', whiteSpace: 'nowrap' }}>
+                    {site.versao || '—'}
+                    {site._versaoLive && <sup style={{ fontSize: '0.6rem', color: '#4f46e5', marginLeft: 2 }}>⚡</sup>}
+                  </td>
 
                   {/* Cadastro */}
                   <td style={{ textAlign: 'center' }}>

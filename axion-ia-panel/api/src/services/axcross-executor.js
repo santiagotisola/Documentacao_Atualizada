@@ -188,7 +188,7 @@ export async function executeAxCrossCycle(data, onProgress = () => {}) {
     try {
       await page.goto(LOGIN_URL, { waitUntil: 'networkidle2', timeout: 30000 });
       await fillInput(SELECTORS.login.email, process.env.AXCROSS_LOGIN || 'suporte@axiontecnologia.com.br');
-      await fillInput(SELECTORS.login.senha, process.env.AXCROSS_SENHA || 'Axion#2023');
+      await fillInput(SELECTORS.login.senha, process.env.AXCROSS_SENHA || 'Axion@2026');
       await page.click(SELECTORS.login.btn);
       await page.waitForNavigation({ waitUntil: 'networkidle2', timeout: 15000 });
       const ss = await captureScreenshot();

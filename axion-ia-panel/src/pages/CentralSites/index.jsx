@@ -65,6 +65,50 @@ function CentralSites() {
   const [isRefreshing, setIsRefreshing] = useState(false);
   const [lastUpdated, setLastUpdated] = useState(null);
 
+  // ─── Versões ao vivo capturadas de cada site ─────────────────────────────
+  const [liveVersions, setLiveVersions] = useState({}); // { siteId: 'v.1.2.5' }
+  const [isFetchingVersions, setIsFetchingVersions] = useState(false);
+  const [versionsProgress, setVersionsProgress] = useState({ ok: 0, total: 0 });
+
+  const buscarVersoes = useCallback(async () => {
+    setIsFetchingVersions(true);
+    setVersionsProgress({ ok: 0, total: 0 });
+    try {
+      // 1. Inicia o job no backend
+      const inicio = await api.post('/sites/versions');
+      if (inicio.data?.status === 'em_andamento') {
+        // Job já estava rodando — usa resultados parciais
+        const parcial = {};
+        (inicio.data.resultados || []).forEach(r => { if (r.versao) parcial[r.id] = r.versao; });
+        setLiveVersions(prev => ({ ...prev, ...parcial }));
+        setVersionsProgress(inicio.data.progresso || { ok: 0, total: 0 });
+      }
+
+      // 2. Polling a cada 3s até concluir
+      const poll = async () => {
+        try {
+          const status = await api.get('/sites/versions/status');
+          const { progresso, resultados, status: s } = status.data;
+          const mapa = {};
+          (resultados || []).forEach(r => { if (r.versao) mapa[r.id] = r.versao; });
+          setLiveVersions(prev => ({ ...prev, ...mapa }));
+          setVersionsProgress(progresso || { ok: 0, total: 0 });
+          if (s === 'em_andamento') {
+            setTimeout(poll, 3000);
+          } else {
+            setIsFetchingVersions(false);
+          }
+        } catch (_) {
+          setIsFetchingVersions(false);
+        }
+      };
+
+      setTimeout(poll, 3000);
+    } catch (_) {
+      setIsFetchingVersions(false);
+    }
+  }, []);
+
   // ─── Dados ao vivo de equipamentos (sobrepõem dados estáticos quando disponíveis) ──
   const [liveEquipData, setLiveEquipData] = useState({}); // { siteId: { total, online, ... } }
   const [isSyncingEquip, setIsSyncingEquip] = useState(false);
@@ -144,6 +188,7 @@ function CentralSites() {
   const handleRefresh = () => {
     setRefreshKey(k => k + 1);
     sincronizarEquipamentos();
+    buscarVersoes();
   };
 
   // ─── Estado compartilhado entre abas ──────────────────────────
@@ -169,14 +214,17 @@ function CentralSites() {
       const equipMesclado = equipLive
         ? { ...site.equipamentos, ...equipLive, _isLive: true }
         : site.equipamentos;
+      const versaoLive = liveVersions[site.id];
       return {
         ...site,
+        versao: versaoLive || site.versao,      // live sobrepõe estático
+        _versaoLive: !!versaoLive,
         equipamentos: equipMesclado,
         healthScore: calcHealthScore({ ...site, equipamentos: equipMesclado }, chamadosData),
         chamados: chamadosData?.ranking?.find(r => r.siteId === site.id) || { abertos: 0, total: 0, criticos: 0 },
       };
     });
-  }, [todosSites, chamadosData, liveEquipData]);
+  }, [todosSites, chamadosData, liveEquipData, liveVersions]);
 
   // ─── Estatísticas globais ─────────────────────────────────────
   const stats = useMemo(() => {
@@ -338,14 +386,20 @@ function CentralSites() {
             </div>
           )}
           <button
-            className={`cs-btn-refresh ${(isRefreshing || isSyncingEquip) ? 'cs-btn-refresh--spinning' : ''}`}
+            className={`cs-btn-refresh ${(isRefreshing || isSyncingEquip || isFetchingVersions) ? 'cs-btn-refresh--spinning' : ''}`}
             onClick={handleRefresh}
-            disabled={isRefreshing || isSyncingEquip}
+            disabled={isRefreshing || isSyncingEquip || isFetchingVersions}
             title={lastUpdated ? `Última atualização: ${lastUpdated.toLocaleTimeString('pt-BR')}` : 'Atualizar dados'}
           >
             <span className="cs-refresh-icon">↻</span>
             <span className="cs-refresh-label">
-              {isRefreshing ? 'Atualizando…' : isSyncingEquip ? 'Sincronizando…' : 'Atualizar'}
+              {isFetchingVersions
+                ? `Versões… ${versionsProgress.ok}/${versionsProgress.total || '?'}`
+                : isRefreshing ? 'Atualizando…'
+                : isSyncingEquip ? 'Sincronizando…'
+                : Object.keys(liveVersions).length > 0
+                  ? `✓ ${Object.keys(liveVersions).length} versões`
+                  : 'Atualizar'}
             </span>
           </button>
         </div>

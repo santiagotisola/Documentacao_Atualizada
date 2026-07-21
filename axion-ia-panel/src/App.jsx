@@ -91,7 +91,7 @@ const PAGE_INFO = {
   "/central-processos": { title: "Central de Processos", subtitle: "Ecossistema completo: Mapa Visual, Fluxos BPM, Processos AxHub/AxCross e Serviços", Icon: Activity },
   "/central-validacao": { title: "Central de Validação", subtitle: "Hub unificado de validação, revisão e controle de qualidade — 6 módulos integrados", Icon: CheckCircle },
   "/central-atendimento": { title: "Central de Atendimento", subtitle: "Hub unificado: Chat IA, WhatsApp, Helpdesk e Gestão por Site — Visão 360º do cliente", Icon: Headphones },
-  "/hub-analise": { title: "Hub de Análise", subtitle: "Central unificada de busca, diagnóstico e análise — Sistemas, Imagens, Logs e Health", Icon: Search },
+  "/hub-analise": { title: "AxHub Analisador", subtitle: "Análise unificada de sistemas — Diagnóstico de exportação, busca, imagens, logs e health", Icon: Search },
   "/central-qualidade": { title: "Central de Qualidade", subtitle: "Quality Engineering, Auditoria e Segurança — PIEQ Platform", Icon: Shield },
   "/cuti": { title: "CUTI - Central Unificada de Testes Inteligentes", subtitle: "AxionIA v4.0 — Interface CUEA (22 Engines) — Scenario Learning & Execution", Icon: TestTube },
   "/central-relatorios": { title: "Central de Relatórios", subtitle: "Relatórios operacionais, VARCO Monitor, Medição e SLA", Icon: BarChart3 },
@@ -180,7 +180,7 @@ const MENU_SECTIONS = [
   {
     group: "Busca & Análise",
     items: [
-      { to: "/hub-analise", icon: Search, label: "Hub de Análise" },
+      { to: "/hub-analise", icon: Search, label: "AxHub Analisador" },
     ]
   },
   {

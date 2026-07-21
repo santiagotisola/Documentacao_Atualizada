@@ -188,7 +188,7 @@ function Comparativo({ sitesSelecionados, limparSelecao }) {
       {sitesAxCross.length > 0 && (
         <>
           <h3 style={{ fontSize: '1.125rem', fontWeight: 600, marginBottom: '16px' }}>
-            Métricas — AxCross
+            Métricas Gerais — AxCross
           </h3>
           <div className="cs-tabela-container">
             <table className="cs-tabela">
@@ -203,6 +203,14 @@ function Comparativo({ sitesSelecionados, limparSelecao }) {
                 </tr>
               </thead>
               <tbody>
+                <tr>
+                  <td><strong>Versão</strong></td>
+                  {sitesAxCross.map(s => (
+                    <td key={s.id} style={{ fontWeight: 600, color: s.versao ? '#4f46e5' : '#9ca3af' }}>
+                      {s.versao || '—'}
+                    </td>
+                  ))}
+                </tr>
                 <tr>
                   <td><strong>Equipamentos</strong></td>
                   {sitesAxCross.map(s => <td key={s.id}><strong>{s.equipamentos || '—'}</strong></td>)}
