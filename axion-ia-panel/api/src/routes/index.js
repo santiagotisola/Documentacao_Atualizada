@@ -31,6 +31,7 @@ import portalRoutes from "./portal.routes.js";
 import qualityRoutes from "./quality.routes.js";
 import missionRoutes from "./mission.routes.js";
 import presentationRoutes from "./presentation.routes.js";
+import odooProxyRoutes from "./odoo-proxy.routes.js";
 
 const router = express.Router();
 
@@ -50,5 +51,6 @@ router.use(qualityRoutes);        // Quality Platform PIEQ
 router.use(missionRoutes);        // Mission Engine
 router.use(presentationRoutes);   // Presentation Engine (PDF/DOCX/PPTX)
 router.use("/portal", portalRoutes); // Portal do Cidadão
+router.use(odooProxyRoutes);         // Odoo Proxy (Discuss, Chat, Canais)
 
 export default router;

@@ -173,7 +173,13 @@
   position: sticky;
   top: var(--cs-header-height);
   z-index: 90;
-  scrollbar-width: thin;
+  overflow-x: auto; /* fallback universal */
+}
+
+@supports (scrollbar-width: thin) {
+  .cs-navegacao-abas {
+    scrollbar-width: thin;
+  }
 }
 
 .cs-navegacao-abas::-webkit-scrollbar {

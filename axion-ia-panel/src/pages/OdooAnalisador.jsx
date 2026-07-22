@@ -3787,18 +3787,21 @@ function TabDiscuss() {
   const [canalSel, setCanalSel] = useState(null);
   const [novaMensagem, setNovaMensagem] = useState("");
   const [carregando, setCarregando] = useState(false);
-  const [sessaoAtiva, setSessaoAtiva] = useState(null);
+  const [sessaoAtiva, setSessaoAtiva] = useState(null); // null=verificando
   const [enviando, setEnviando] = useState(false);
+  const [loginForm, setLoginForm] = useState({usuario:"santiagoti_sola@hotmail.com", senha:""});
+  const [loginErro, setLoginErro] = useState("");
   const msgEndRef = React.useRef(null);
 
-  // Verificar sessão e carregar dados
+  // Verificar sessão via proxy da API
   React.useEffect(() => {
     (async () => {
-      setCarregando(true);
-      const ativo = await verificarSessaoOdoo();
-      setSessaoAtiva(ativo);
-      if (ativo) await carregarTudo();
-      setCarregando(false);
+      try {
+        const res = await api.get("/odoo/status");
+        const ativo = res.data?.conectado === true;
+        setSessaoAtiva(ativo);
+        if (ativo) { setCarregando(true); await carregarTudo(); setCarregando(false); }
+      } catch { setSessaoAtiva(false); }
     })();
   }, []);
 
@@ -3806,46 +3809,48 @@ function TabDiscuss() {
     msgEndRef.current?.scrollIntoView({behavior:"smooth"});
   }, [mensagens]);
 
+  const fazerLogin = async () => {
+    setLoginErro("");
+    setCarregando(true);
+    try {
+      await api.post("/odoo/login", { usuario: loginForm.usuario, senha: loginForm.senha });
+      setSessaoAtiva(true);
+      await carregarTudo();
+    } catch (e) {
+      setLoginErro(e.response?.data?.erro || "Credenciais inválidas");
+    } finally { setCarregando(false); }
+  };
+
   const carregarTudo = async () => {
     await Promise.all([carregarCanais(), carregarNotificacoes()]);
   };
 
   const carregarCanais = async () => {
     try {
-      const res = await odooRpc("discuss.channel", "search_read",
-        [[["channel_member_ids.partner_id.user_ids", "!=", false]]],
-        { fields: ["id","name","channel_type","message_unread_counter","last_interest_dt","description"], limit: 20 }
-      );
-      setCanais(res || []);
-      // Selecionar OdooBot automaticamente
-      const bot = res?.find(c => c.name?.toLowerCase().includes("odoobot") || c.channel_type === "chat");
+      const res = await api.get("/odoo/canais");
+      const lista = res.data?.canais || [];
+      setCanais(lista);
+      const bot = lista.find(c => c.name?.toLowerCase().includes("odoobot") || c.channel_type === "chat");
       if (bot && !canalSel) { setCanalSel(bot); await carregarMensagens(bot.id); }
-    } catch (e) { console.warn("Erro ao carregar canais:", e.message); }
+    } catch (e) { console.warn("Canais:", e.message); }
   };
 
   const carregarMensagens = async (canalId) => {
     try {
-      const res = await odooRpc("mail.message", "search_read",
-        [[["res_id","=",canalId], ["model","=","discuss.channel"]]],
-        { fields: ["id","body","author_id","date","message_type"], limit: 30, order: "id asc" }
-      );
-      setMensagens(res || []);
-    } catch (e) { console.warn("Erro ao carregar mensagens:", e.message); }
+      const res = await api.get(`/odoo/mensagens/${canalId}`);
+      setMensagens(res.data?.mensagens || []);
+    } catch (e) { console.warn("Mensagens:", e.message); }
   };
 
   const carregarNotificacoes = async () => {
     try {
-      const res = await odooRpc("mail.notification", "search_read",
-        [[["notification_type","=","inbox"], ["is_read","=",false]]],
-        { fields: ["id","mail_message_id","notification_status","res_partner_id"], limit: 20 }
-      );
-      setNotificacoes(res || []);
-    } catch (e) { console.warn("Erro notificações:", e.message); }
+      const res = await api.get("/odoo/notificacoes");
+      setNotificacoes(res.data?.notificacoes || []);
+    } catch (e) { console.warn("Notificações:", e.message); }
   };
 
   const selecionarCanal = async (canal) => {
-    setCanalSel(canal);
-    setMensagens([]);
+    setCanalSel(canal); setMensagens([]);
     await carregarMensagens(canal.id);
   };
 
@@ -3855,33 +3860,21 @@ function TabDiscuss() {
     const texto = novaMensagem.trim();
     setNovaMensagem("");
     try {
-      await odooRpc("discuss.channel", "message_post",
-        [canalSel.id],
-        { body: texto, message_type: "comment", subtype_xmlid: "mail.mt_comment" }
-      );
+      await api.post(`/odoo/mensagens/${canalSel.id}`, { body: texto });
       await carregarMensagens(canalSel.id);
-    } catch (e) {
-      console.warn("Erro ao enviar:", e.message);
-    } finally {
-      setEnviando(false);
-    }
+    } catch (e) { console.warn("Envio:", e.message); }
+    finally { setEnviando(false); }
   };
 
   const stripHtml = (html) => html?.replace(/<[^>]+>/g,"")?.replace(/&amp;/g,"&")?.replace(/&lt;/g,"<")?.replace(/&gt;/g,">")?.replace(/&nbsp;/g," ").trim() || "";
-
   const formatarData = (d) => {
     if (!d) return "";
     const dt = new Date(d.replace(" ","T")+"Z");
     const hoje = new Date();
-    if (dt.toDateString() === hoje.toDateString()) return dt.toLocaleTimeString("pt-BR",{hour:"2-digit",minute:"2-digit"});
+    if (dt.toDateString()===hoje.toDateString()) return dt.toLocaleTimeString("pt-BR",{hour:"2-digit",minute:"2-digit"});
     return dt.toLocaleDateString("pt-BR",{day:"2-digit",month:"short"});
   };
-
-  const tipoIcon = (tipo) => {
-    if (tipo?.includes("general") || tipo === "channel") return "#";
-    if (tipo === "chat") return "💬";
-    return "💬";
-  };
+  const tipoIcon = (tipo) => tipo==="chat" ? "💬" : "#";
 
   if (!sessaoAtiva && sessaoAtiva !== null) {
     return (

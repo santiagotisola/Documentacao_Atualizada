@@ -298,9 +298,8 @@ export default function OperationsHub() {
     switch (tab) {
       case 'dashboard':       return renderDashboard();
       case 'chamados':        return null; // redirect → /central-atendimento?tab=helpdesk
-      case 'sites':           return null; // redirect → /central-sites
-      case 'performance':     return renderPerformance();
       case 'sites':           return renderSites();
+      case 'performance':     return renderPerformance();
       case 'qualidade':       return <div style={{padding:'0.5rem 0'}}><QualityDashboardPage /></div>;
       case 'observabilidade': return <div style={{padding:'0.5rem 0'}}><IntelligenceDashboardPage /></div>;
       case 'mapa':            return renderMapa();
