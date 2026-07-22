@@ -2,13 +2,17 @@
 import {
   Package, Factory, ShoppingCart, Truck, BarChart3, AlertTriangle,
   CheckCircle, ArrowRight, Info, Download, ExternalLink,
-  Layers, Tag, Hash, Boxes, ClipboardList, Settings, BookOpen
+  Layers, Tag, Hash, Boxes, ClipboardList, Settings, BookOpen,
+  MessageCircle, X, Send, Bot, User, Minimize2, Maximize2, RefreshCw
 } from "lucide-react";
+import { api } from "../services/api";
 import "./OdooAnalisador.css";
 
 const TABS = [
   { id: "mapa",   label: "🗺️ Mapa Completo"      },
   { id: "org",    label: "🏢 Organograma"         },
+  { id: "central", label: "🔀 Processo ↔ Diagrama" },
+  { id: "diagrama", label: "📊 Diagrama Interativo" },
   { id: "fluxo",   label: "🔄 Fluxo Completo"    },
   { id: "guia",    label: "📖 Guia Operador"      },
   { id: "hipoteses", label: "🔁 Cenários & Trocas" },
@@ -1767,11 +1771,135 @@ function BomDinamicaCard({m}) {
   );
 }
 
+/* ══════════════════════════════════════════════════════════════
+   GERADOR AUTOMÁTICO DE DIAGRAMA DOS SEGMENTOS
+   ══════════════════════════════════════════════════════════════ */
+function gerarXMLdosSegmentos(segmentos) {
+  const COR_MAP = {
+    blue:   {fill:"#dbeafe", stroke:"#2563eb"},
+    purple: {fill:"#f5f3ff", stroke:"#7c3aed"},
+    green:  {fill:"#f0fdf4", stroke:"#059669"},
+    yellow: {fill:"#fffbeb", stroke:"#d97706"},
+  };
+
+  let cells = [];
+  let id = 100;
+  const getId = () => `c${id++}`;
+
+  // Título
+  const titId = getId();
+  cells.push(`<mxCell id="${titId}" value="Mapa Completo de Processos — Axion Tecnologia" style="text;html=1;fontSize=18;fontStyle=1;fillColor=none;strokeColor=none;align=center;" vertex="1" parent="1"><mxGeometry x="80" y="20" width="1500" height="40" as="geometry"/></mxCell>`);
+
+  let yBase = 80;
+  const segWidth = 220;
+  const segHeight = 70;
+  const subWidth = 200;
+  const subHeight = 50;
+  const gapSeg = 40;
+  const gapSub = 12;
+
+  const allEdges = [];
+
+  segmentos.forEach((seg, si) => {
+    const {fill, stroke} = COR_MAP[seg.cor] || COR_MAP.blue;
+    const xSeg = 80;
+    const ySeg = yBase;
+
+    // Card do segmento
+    const segId = getId();
+    cells.push(`<mxCell id="${segId}" value="${seg.icon} ${seg.titulo.replace(/&/g,"&amp;").replace(/</g,"&lt;")}" style="rounded=1;whiteSpace=wrap;html=1;fillColor=${fill};strokeColor=${stroke};fontSize=13;fontStyle=1;" vertex="1" parent="1"><mxGeometry x="${xSeg}" y="${ySeg}" width="${segWidth}" height="${segHeight}" as="geometry"/></mxCell>`);
+
+    // Info do responsável
+    const respId = getId();
+    cells.push(`<mxCell id="${respId}" value="👤 ${seg.responsavel}" style="text;html=1;fontSize=10;fillColor=${fill};strokeColor=${stroke};align=left;spacingLeft=6;" vertex="1" parent="1"><mxGeometry x="${xSeg}" y="${ySeg + segHeight + 4}" width="${segWidth}" height="24" as="geometry"/></mxCell>`);
+
+    // Subetapas
+    let prevSubId = null;
+    seg.subetapas.forEach((sub, ei) => {
+      const xSub = xSeg + segWidth + 60 + (ei % 4) * (subWidth + gapSub);
+      const ySub = ySeg + Math.floor(ei / 4) * (subHeight + gapSub);
+      const subFill = sub.serial ? "#ffe6cc" : "#f9fafb";
+      const subStroke = sub.serial ? "#d6b656" : "#d1d5db";
+      const subId = getId();
+
+      cells.push(`<mxCell id="${subId}" value="${sub.n} ${sub.acao.replace(/&/g,"&amp;").replace(/</g,"&lt;")}${sub.serial ? " 🏷️" : ""}&#xa;👤 ${sub.quem}" style="rounded=1;whiteSpace=wrap;html=1;fillColor=${subFill};strokeColor=${subStroke};fontSize=10;${sub.serial ? "fontStyle=1;" : ""}" vertex="1" parent="1"><mxGeometry x="${xSub}" y="${ySub}" width="${subWidth}" height="${subHeight}" as="geometry"/></mxCell>`);
+
+      // Seta do segmento para a primeira subetapa
+      if (ei === 0) {
+        const eId = getId();
+        cells.push(`<mxCell id="${eId}" style="edgeStyle=orthogonalEdgeStyle;strokeColor=${stroke};" edge="1" source="${segId}" target="${subId}" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell>`);
+      }
+      // Setas entre subetapas em sequência
+      if (prevSubId && ei % 4 !== 0) {
+        const eId = getId();
+        cells.push(`<mxCell id="${eId}" style="edgeStyle=orthogonalEdgeStyle;" edge="1" source="${prevSubId}" target="${subId}" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell>`);
+      }
+      prevSubId = subId;
+    });
+
+    // Calcular altura total para este segmento
+    const rowCount = Math.ceil(seg.subetapas.length / 4);
+    const blockHeight = Math.max(segHeight + 30, rowCount * (subHeight + gapSub));
+    yBase += blockHeight + gapSeg;
+  });
+
+  // Legenda
+  const legId = getId();
+  cells.push(`<mxCell id="${legId}" value="🏷️ Laranja = Ponto de SERIAL | ✅ Cada bloco = uma subetapa com responsável" style="text;html=1;fillColor=#ffe6cc;strokeColor=#d6b656;fontStyle=1;fontSize=11;" vertex="1" parent="1"><mxGeometry x="80" y="${yBase + 10}" width="700" height="30" as="geometry"/></mxCell>`);
+
+  const xml = `<mxGraphModel dx="1800" dy="900" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1654" pageHeight="${yBase + 100}" math="0" shadow="0"><root><mxCell id="0"/><mxCell id="1" parent="0"/>${cells.join("")}</root></mxGraphModel>`;
+  return xml;
+}
+
 function TabMapa() {
   const [visao, setVisao] = useState("mapa");
+
+  // Gera e baixa o diagrama automático dos segmentos
+  const gerarEBaixar = () => {
+    const xml = gerarXMLdosSegmentos(SEGMENTOS);
+    const blob = new Blob([`<?xml version="1.0" encoding="UTF-8"?>${xml}`], {type:"text/xml"});
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "Axion_Mapa_Completo_Gerado.drawio";
+    a.click();
+    URL.revokeObjectURL(url);
+  };
+
+  // Abre no Draw.io via embed com postMessage
+  const gerarEAbrir = () => {
+    const xml = gerarXMLdosSegmentos(SEGMENTOS);
+    // Salvar no sessionStorage para o TabDiagramaInterativo pegar
+    sessionStorage.setItem("axion_diagrama_gerado", xml);
+    sessionStorage.setItem("axion_diagrama_label", "🗺️ Mapa Completo Gerado");
+    // Disparar evento customizado para trocar para aba diagrama
+    window.dispatchEvent(new CustomEvent("axion:abrirDiagrama", {detail:{xml, label:"🗺️ Mapa Completo Gerado"}}));
+  };
+
   return (
     <div className="oa-content">
       <OdooLinkBar/>
+
+      {/* Botão de geração rápida */}
+      <div style={{
+        display:"flex",alignItems:"center",justifyContent:"space-between",
+        padding:"12px 16px",background:"linear-gradient(135deg,#eff6ff,#f5f3ff)",
+        border:"1px solid #bfdbfe",borderRadius:10,flexWrap:"wrap",gap:10
+      }}>
+        <div>
+          <div style={{fontSize:14,fontWeight:700,color:"#1d4ed8"}}>📊 Gerar Diagrama Automático dos Processos</div>
+          <div style={{fontSize:12,color:"#64748b"}}>Converte todos os 6 segmentos e suas subetapas em diagrama Draw.io automaticamente</div>
+        </div>
+        <div style={{display:"flex",gap:8,flexWrap:"wrap"}}>
+          <button className="oa-btn-download" onClick={gerarEBaixar} style={{padding:"7px 14px",fontSize:12}}>
+            <Download size={13}/> Baixar Diagrama .drawio
+          </button>
+          <button className="oa-btn-download" onClick={gerarEAbrir}
+            style={{padding:"7px 14px",fontSize:12,background:"#7c3aed"}}>
+            <Layers size={13}/> Abrir na Aba Diagrama
+          </button>
+        </div>
+      </div>
 
       {/* Sub-navegação */}
       <div className="oa-chao-nav">
@@ -2777,10 +2905,775 @@ function TabOrganograma() {
   );
 }
 
-export default function OdooAnalisador() {  const [tab, setTab] = useState("fluxo");
+/* ══════════════════════════════════════════════════════════════
+   DIAGRAMA INTERATIVO — Draw.io embarcado
+   ══════════════════════════════════════════════════════════════ */
+const DIAGRAMAS = [
+  {
+    id:"organograma",
+    label:"🏢 Organograma Completo",
+    descricao:"Estrutura organizacional com 6 departamentos e 5 processos",
+    xml:`<mxGraphModel dx="1800" dy="900" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1654" pageHeight="1169" math="0" shadow="0"><root><mxCell id="0"/><mxCell id="1" parent="0"/><mxCell id="tit" value="Organograma de Processos — Axion Tecnologia" style="text;html=1;fontSize=20;fontStyle=1;fillColor=none;strokeColor=none;align=center;" vertex="1" parent="1"><mxGeometry x="100" y="20" width="1400" height="40" as="geometry"/></mxCell><mxCell id="centro" value="AXION TECNOLOGIA&#xa;ERP Odoo" style="ellipse;whiteSpace=wrap;html=1;fillColor=#1e40af;fontColor=#ffffff;strokeColor=#1e3a8a;fontSize=14;fontStyle=1;" vertex="1" parent="1"><mxGeometry x="750" y="100" width="150" height="80" as="geometry"/></mxCell><mxCell id="d1" value="💼 COMERCIAL&#xa;• Pedido de Venda&#xa;• Contratos de Locação&#xa;• Faturamento" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dbeafe;strokeColor=#2563eb;fontSize=11;" vertex="1" parent="1"><mxGeometry x="80" y="80" width="180" height="100" as="geometry"/></mxCell><mxCell id="d2" value="🛒 COMPRAS&#xa;• Pedidos de Compra&#xa;• NF de Venda&#xa;• Auditoria serial" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e0f2fe;strokeColor=#0284c7;fontSize=11;" vertex="1" parent="1"><mxGeometry x="300" y="80" width="180" height="100" as="geometry"/></mxCell><mxCell id="d3" value="📦 ALMOXARIFADO&#xa;• Receber + Serial 1&#xa;• Separar componentes&#xa;• Entregar + Serial 3" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#cffafe;strokeColor=#0891b2;fontSize=11;" vertex="1" parent="1"><mxGeometry x="560" y="240" width="180" height="100" as="geometry"/></mxCell><mxCell id="d4" value="📋 PCP / OPERADOR&#xa;• Criar BOM&#xa;• Ordens de Produção&#xa;• Controle materiais" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f3ff;strokeColor=#7c3aed;fontSize=11;" vertex="1" parent="1"><mxGeometry x="940" y="80" width="180" height="100" as="geometry"/></mxCell><mxCell id="d5" value="🏭 PRODUÇÃO&#xa;• Chão de Fábrica&#xa;• Montar + Serial 2&#xa;• Testes e config" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f0fdf4;strokeColor=#059669;fontSize=11;" vertex="1" parent="1"><mxGeometry x="1160" y="80" width="180" height="100" as="geometry"/></mxCell><mxCell id="d6" value="🔍 QUALIDADE&#xa;• Checklist QC&#xa;• Inspecionar retorno&#xa;• Aprovar produto" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fffbeb;strokeColor=#d97706;fontSize=11;" vertex="1" parent="1"><mxGeometry x="1380" y="80" width="180" height="100" as="geometry"/></mxCell><mxCell id="p1h" value="PROCESSO 1: COMPRA + RECEBIMENTO" style="text;html=1;fontStyle=1;fontSize=12;fillColor=#dbeafe;strokeColor=#2563eb;" vertex="1" parent="1"><mxGeometry x="80" y="280" width="350" height="30" as="geometry"/></mxCell><mxCell id="p1a" value="Compras: PO" style="rounded=1;fillColor=#dbeafe;strokeColor=#2563eb;fontSize=10;" vertex="1" parent="1"><mxGeometry x="80" y="320" width="100" height="40" as="geometry"/></mxCell><mxCell id="p1b" value="Almox: Receber&#xa;+ Serial 1 🏷️" style="rounded=1;fillColor=#ffe6cc;strokeColor=#d6b656;fontStyle=1;fontSize=10;" vertex="1" parent="1"><mxGeometry x="200" y="320" width="100" height="40" as="geometry"/></mxCell><mxCell id="p1c" value="Almox: Validar" style="rounded=1;fillColor=#cffafe;strokeColor=#0891b2;fontSize=10;" vertex="1" parent="1"><mxGeometry x="320" y="320" width="100" height="40" as="geometry"/></mxCell><mxCell id="p1e1" style="edgeStyle=orthogonalEdgeStyle;" edge="1" source="p1a" target="p1b" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell><mxCell id="p1e2" style="edgeStyle=orthogonalEdgeStyle;" edge="1" source="p1b" target="p1c" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell><mxCell id="p2h" value="PROCESSO 2: PRODUÇÃO COMPLETA" style="text;html=1;fontStyle=1;fontSize=12;fillColor=#f5f3ff;strokeColor=#7c3aed;" vertex="1" parent="1"><mxGeometry x="80" y="390" width="800" height="30" as="geometry"/></mxCell><mxCell id="p2a" value="PCP: BOM" style="rounded=1;fillColor=#f5f3ff;strokeColor=#7c3aed;fontSize=10;" vertex="1" parent="1"><mxGeometry x="80" y="430" width="100" height="40" as="geometry"/></mxCell><mxCell id="p2b" value="PCP: Criar OP" style="rounded=1;fillColor=#f5f3ff;strokeColor=#7c3aed;fontSize=10;" vertex="1" parent="1"><mxGeometry x="200" y="430" width="100" height="40" as="geometry"/></mxCell><mxCell id="p2c" value="Almox: Separar" style="rounded=1;fillColor=#cffafe;strokeColor=#0891b2;fontSize=10;" vertex="1" parent="1"><mxGeometry x="320" y="430" width="100" height="40" as="geometry"/></mxCell><mxCell id="p2d" value="Prod: Montar" style="rounded=1;fillColor=#f0fdf4;strokeColor=#059669;fontSize=10;" vertex="1" parent="1"><mxGeometry x="440" y="430" width="100" height="40" as="geometry"/></mxCell><mxCell id="p2e" value="QC: Checklist" style="rounded=1;fillColor=#fffbeb;strokeColor=#d97706;fontSize=10;" vertex="1" parent="1"><mxGeometry x="560" y="430" width="100" height="40" as="geometry"/></mxCell><mxCell id="p2f" value="Prod: Serial 2 🏷️" style="rounded=1;fillColor=#ffe6cc;strokeColor=#d6b656;fontStyle=1;fontSize=10;" vertex="1" parent="1"><mxGeometry x="680" y="430" width="100" height="40" as="geometry"/></mxCell><mxCell id="p2e1" style="edgeStyle=orthogonalEdgeStyle;" edge="1" source="p2a" target="p2b" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell><mxCell id="p2e2" style="edgeStyle=orthogonalEdgeStyle;" edge="1" source="p2b" target="p2c" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell><mxCell id="p2e3" style="edgeStyle=orthogonalEdgeStyle;" edge="1" source="p2c" target="p2d" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell><mxCell id="p2e4" style="edgeStyle=orthogonalEdgeStyle;" edge="1" source="p2d" target="p2e" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell><mxCell id="p2e5" style="edgeStyle=orthogonalEdgeStyle;" edge="1" source="p2e" target="p2f" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell><mxCell id="p3h" value="PROCESSO 3: VENDA + ENTREGA" style="text;html=1;fontStyle=1;fontSize=12;fillColor=#dbeafe;strokeColor=#2563eb;" vertex="1" parent="1"><mxGeometry x="80" y="500" width="500" height="30" as="geometry"/></mxCell><mxCell id="p3a" value="Comercial: PV" style="rounded=1;fillColor=#dbeafe;strokeColor=#2563eb;fontSize=10;" vertex="1" parent="1"><mxGeometry x="80" y="540" width="100" height="40" as="geometry"/></mxCell><mxCell id="p3b" value="Almox: Selecionar" style="rounded=1;fillColor=#cffafe;strokeColor=#0891b2;fontSize=10;" vertex="1" parent="1"><mxGeometry x="200" y="540" width="100" height="40" as="geometry"/></mxCell><mxCell id="p3c" value="Almox: Serial 3 🏷️" style="rounded=1;fillColor=#ffe6cc;strokeColor=#d6b656;fontStyle=1;fontSize=10;" vertex="1" parent="1"><mxGeometry x="320" y="540" width="100" height="40" as="geometry"/></mxCell><mxCell id="p3d" value="Compras: NF" style="rounded=1;fillColor=#e0f2fe;strokeColor=#0284c7;fontSize=10;" vertex="1" parent="1"><mxGeometry x="440" y="540" width="100" height="40" as="geometry"/></mxCell><mxCell id="p3e1" style="edgeStyle=orthogonalEdgeStyle;" edge="1" source="p3a" target="p3b" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell><mxCell id="p3e2" style="edgeStyle=orthogonalEdgeStyle;" edge="1" source="p3b" target="p3c" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell><mxCell id="p3e3" style="edgeStyle=orthogonalEdgeStyle;" edge="1" source="p3c" target="p3d" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell><mxCell id="p4h" value="PROCESSO 4: LOCAÇÃO" style="text;html=1;fontStyle=1;fontSize=12;fillColor=#f5f3ff;strokeColor=#7c3aed;" vertex="1" parent="1"><mxGeometry x="80" y="610" width="700" height="30" as="geometry"/></mxCell><mxCell id="p4a" value="Comercial: Contrato" style="rounded=1;fillColor=#dbeafe;strokeColor=#2563eb;fontSize=10;" vertex="1" parent="1"><mxGeometry x="80" y="650" width="100" height="40" as="geometry"/></mxCell><mxCell id="p4b" value="QC: Inspecionar" style="rounded=1;fillColor=#fffbeb;strokeColor=#d97706;fontSize=10;" vertex="1" parent="1"><mxGeometry x="200" y="650" width="100" height="40" as="geometry"/></mxCell><mxCell id="p4c" value="Almox: Saída 🏷️" style="rounded=1;fillColor=#ffe6cc;strokeColor=#d6b656;fontStyle=1;fontSize=10;" vertex="1" parent="1"><mxGeometry x="320" y="650" width="100" height="40" as="geometry"/></mxCell><mxCell id="p4d" value="Cliente: Uso" style="rounded=1;fillColor=#f3f4f6;strokeColor=#9ca3af;fontSize=10;" vertex="1" parent="1"><mxGeometry x="440" y="650" width="100" height="40" as="geometry"/></mxCell><mxCell id="p4e" value="Almox: Retorno 🏷️" style="rounded=1;fillColor=#ffe6cc;strokeColor=#d6b656;fontStyle=1;fontSize=10;" vertex="1" parent="1"><mxGeometry x="560" y="650" width="100" height="40" as="geometry"/></mxCell><mxCell id="p4f" value="Comercial: Faturar" style="rounded=1;fillColor=#dbeafe;strokeColor=#2563eb;fontSize=10;" vertex="1" parent="1"><mxGeometry x="680" y="650" width="100" height="40" as="geometry"/></mxCell><mxCell id="p4e1" style="edgeStyle=orthogonalEdgeStyle;" edge="1" source="p4a" target="p4b" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell><mxCell id="p4e2" style="edgeStyle=orthogonalEdgeStyle;" edge="1" source="p4b" target="p4c" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell><mxCell id="p4e3" style="edgeStyle=orthogonalEdgeStyle;" edge="1" source="p4c" target="p4d" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell><mxCell id="p4e4" style="edgeStyle=orthogonalEdgeStyle;" edge="1" source="p4d" target="p4e" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell><mxCell id="p4e5" style="edgeStyle=orthogonalEdgeStyle;" edge="1" source="p4e" target="p4f" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell><mxCell id="p5h" value="PROCESSO 5: COMBO / KIT" style="text;html=1;fontStyle=1;fontSize=12;fillColor=#fffbeb;strokeColor=#d97706;" vertex="1" parent="1"><mxGeometry x="80" y="720" width="400" height="30" as="geometry"/></mxCell><mxCell id="p5a" value="Comercial: Kit" style="rounded=1;fillColor=#dbeafe;strokeColor=#2563eb;fontSize=10;" vertex="1" parent="1"><mxGeometry x="80" y="760" width="100" height="40" as="geometry"/></mxCell><mxCell id="p5b" value="Odoo: Explode" style="rounded=1;fillColor=#e0f2fe;strokeColor=#0284c7;fontSize=10;" vertex="1" parent="1"><mxGeometry x="200" y="760" width="100" height="40" as="geometry"/></mxCell><mxCell id="p5c" value="Almox: Separar" style="rounded=1;fillColor=#cffafe;strokeColor=#0891b2;fontSize=10;" vertex="1" parent="1"><mxGeometry x="320" y="760" width="100" height="40" as="geometry"/></mxCell><mxCell id="p5d" value="Almox: Entregar 🏷️" style="rounded=1;fillColor=#ffe6cc;strokeColor=#d6b656;fontStyle=1;fontSize=10;" vertex="1" parent="1"><mxGeometry x="440" y="760" width="100" height="40" as="geometry"/></mxCell><mxCell id="p5e1" style="edgeStyle=orthogonalEdgeStyle;" edge="1" source="p5a" target="p5b" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell><mxCell id="p5e2" style="edgeStyle=orthogonalEdgeStyle;" edge="1" source="p5b" target="p5c" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell><mxCell id="p5e3" style="edgeStyle=orthogonalEdgeStyle;" edge="1" source="p5c" target="p5d" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell><mxCell id="leg" value="🏷️ Laranja = Ponto de geração ou registro de SERIAL" style="text;html=1;fillColor=#ffe6cc;strokeColor=#d6b656;fontStyle=1;fontSize=12;" vertex="1" parent="1"><mxGeometry x="80" y="840" width="500" height="30" as="geometry"/></mxCell><mxCell id="ce1" style="edgeStyle=orthogonalEdgeStyle;dashed=1;strokeColor=#2563eb;" edge="1" source="d1" target="centro" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell><mxCell id="ce2" style="edgeStyle=orthogonalEdgeStyle;dashed=1;strokeColor=#0284c7;" edge="1" source="d2" target="centro" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell><mxCell id="ce3" style="edgeStyle=orthogonalEdgeStyle;dashed=1;strokeColor=#0891b2;" edge="1" source="d3" target="centro" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell><mxCell id="ce4" style="edgeStyle=orthogonalEdgeStyle;dashed=1;strokeColor=#7c3aed;" edge="1" source="d4" target="centro" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell><mxCell id="ce5" style="edgeStyle=orthogonalEdgeStyle;dashed=1;strokeColor=#059669;" edge="1" source="d5" target="centro" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell><mxCell id="ce6" style="edgeStyle=orthogonalEdgeStyle;dashed=1;strokeColor=#d97706;" edge="1" source="d6" target="centro" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell></root></mxGraphModel>`,
+  },
+  {
+    id:"fluxo_producao",
+    label:"🏭 Fluxo: Compra → Produção → Venda",
+    descricao:"Ciclo completo de fabricação e venda com os 3 pontos de serial",
+    xml:`<mxGraphModel dx="1422" dy="762" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1654" pageHeight="1169" math="0" shadow="0"><root><mxCell id="0"/><mxCell id="1" parent="0"/><mxCell id="tit" value="Fluxo Completo: Compra → Produção → Venda — Axion Tecnologia" style="text;html=1;fontSize=18;fontStyle=1;fillColor=none;strokeColor=none;align=center;" vertex="1" parent="1"><mxGeometry x="100" y="20" width="1400" height="40" as="geometry"/></mxCell><mxCell id="lane_comp" value="Comprador / Compras" style="swimlane;startSize=30;horizontal=0;fillColor=#dbeafe;strokeColor=#2563eb;fontStyle=1;fontSize=12;" vertex="1" parent="1"><mxGeometry x="80" y="70" width="1500" height="150" as="geometry"/></mxCell><mxCell id="lane_op" value="Operador / PCP" style="swimlane;startSize=30;horizontal=0;fillColor=#f5f3ff;strokeColor=#7c3aed;fontStyle=1;fontSize=12;" vertex="1" parent="1"><mxGeometry x="80" y="220" width="1500" height="150" as="geometry"/></mxCell><mxCell id="lane_prod" value="Produção / Chão de Fábrica" style="swimlane;startSize=30;horizontal=0;fillColor=#f0fdf4;strokeColor=#059669;fontStyle=1;fontSize=12;" vertex="1" parent="1"><mxGeometry x="80" y="370" width="1500" height="150" as="geometry"/></mxCell><mxCell id="start" value="Início" style="ellipse;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1"><mxGeometry x="110" y="122" width="60" height="60" as="geometry"/></mxCell><mxCell id="t1" value="1. Pedido de Compra&#xa;(Fornecedor)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dbeafe;strokeColor=#2563eb;" vertex="1" parent="1"><mxGeometry x="210" y="105" width="140" height="80" as="geometry"/></mxCell><mxCell id="t2" value="2. 🏷️ SERIAL 1&#xa;Receber + Serial Insumo" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d6b656;fontStyle=1;" vertex="1" parent="1"><mxGeometry x="390" y="105" width="140" height="80" as="geometry"/></mxCell><mxCell id="t3" value="3. Criar/Revisar BOM&#xa;(Lista de Materiais)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f3ff;strokeColor=#7c3aed;" vertex="1" parent="1"><mxGeometry x="390" y="255" width="140" height="80" as="geometry"/></mxCell><mxCell id="t4" value="4. Criar Ordem de Produção&#xa;(Reservar componentes)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f3ff;strokeColor=#7c3aed;" vertex="1" parent="1"><mxGeometry x="570" y="255" width="140" height="80" as="geometry"/></mxCell><mxCell id="t5" value="5. Executar Produção&#xa;(Chão de Fábrica)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f0fdf4;strokeColor=#059669;" vertex="1" parent="1"><mxGeometry x="570" y="405" width="140" height="80" as="geometry"/></mxCell><mxCell id="t6" value="6. Checklist de Qualidade&#xa;(QC — Aprovar/Reprovar)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fffbeb;strokeColor=#d97706;" vertex="1" parent="1"><mxGeometry x="750" y="405" width="140" height="80" as="geometry"/></mxCell><mxCell id="t7" value="7. 🏷️ SERIAL 2&#xa;Concluir + Serial Produto Final" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d6b656;fontStyle=1;" vertex="1" parent="1"><mxGeometry x="930" y="405" width="140" height="80" as="geometry"/></mxCell><mxCell id="t8" value="8. Pedido de Venda&#xa;(Cliente)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dbeafe;strokeColor=#2563eb;" vertex="1" parent="1"><mxGeometry x="930" y="105" width="140" height="80" as="geometry"/></mxCell><mxCell id="t9" value="9. 🏷️ SERIAL 3&#xa;Entrega + Serial Saída" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d6b656;fontStyle=1;" vertex="1" parent="1"><mxGeometry x="1110" y="105" width="140" height="80" as="geometry"/></mxCell><mxCell id="end" value="Produto Entregue&#xa;Rastreabilidade Completa" style="ellipse;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="1"><mxGeometry x="1310" y="120" width="140" height="60" as="geometry"/></mxCell><mxCell id="e1" style="edgeStyle=orthogonalEdgeStyle;" edge="1" source="start" target="t1" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell><mxCell id="e2" style="edgeStyle=orthogonalEdgeStyle;" edge="1" source="t1" target="t2" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell><mxCell id="e3" style="edgeStyle=orthogonalEdgeStyle;" edge="1" source="t2" target="t3" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell><mxCell id="e4" style="edgeStyle=orthogonalEdgeStyle;" edge="1" source="t3" target="t4" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell><mxCell id="e5" style="edgeStyle=orthogonalEdgeStyle;" edge="1" source="t4" target="t5" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell><mxCell id="e6" style="edgeStyle=orthogonalEdgeStyle;" edge="1" source="t5" target="t6" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell><mxCell id="e7" style="edgeStyle=orthogonalEdgeStyle;" edge="1" source="t6" target="t7" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell><mxCell id="e8" style="edgeStyle=orthogonalEdgeStyle;" edge="1" source="t7" target="t8" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell><mxCell id="e9" style="edgeStyle=orthogonalEdgeStyle;" edge="1" source="t8" target="t9" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell><mxCell id="e10" style="edgeStyle=orthogonalEdgeStyle;" edge="1" source="t9" target="end" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell><mxCell id="leg" value="🏷️ Laranja = Ponto de SERIAL" style="text;html=1;fillColor=#ffe6cc;strokeColor=#d6b656;fontStyle=1;fontSize=12;" vertex="1" parent="1"><mxGeometry x="100" y="560" width="300" height="30" as="geometry"/></mxCell></root></mxGraphModel>`,
+  },
+  {
+    id:"fluxo_locacao",
+    label:"🔑 Fluxo: Locação",
+    descricao:"Ciclo completo de locação: saída com serial e retorno ao estoque",
+    xml:`<mxGraphModel dx="1422" dy="762" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1654" pageHeight="1169" math="0" shadow="0"><root><mxCell id="0"/><mxCell id="1" parent="0"/><mxCell id="tit" value="Fluxo de Locação — Axion Tecnologia" style="text;html=1;fontSize=18;fontStyle=1;fillColor=none;strokeColor=none;align=center;" vertex="1" parent="1"><mxGeometry x="100" y="20" width="1200" height="40" as="geometry"/></mxCell><mxCell id="l1" value="Comercial" style="swimlane;startSize=30;horizontal=0;fillColor=#dbeafe;strokeColor=#2563eb;fontStyle=1;fontSize=12;" vertex="1" parent="1"><mxGeometry x="80" y="70" width="1200" height="150" as="geometry"/></mxCell><mxCell id="l2" value="Almoxarifado" style="swimlane;startSize=30;horizontal=0;fillColor=#cffafe;strokeColor=#0891b2;fontStyle=1;fontSize=12;" vertex="1" parent="1"><mxGeometry x="80" y="220" width="1200" height="150" as="geometry"/></mxCell><mxCell id="l3" value="Qualidade" style="swimlane;startSize=30;horizontal=0;fillColor=#fffbeb;strokeColor=#d97706;fontStyle=1;fontSize=12;" vertex="1" parent="1"><mxGeometry x="80" y="370" width="1200" height="150" as="geometry"/></mxCell><mxCell id="l4" value="Cliente" style="swimlane;startSize=30;horizontal=0;fillColor=#f9fafb;strokeColor=#9ca3af;fontStyle=1;fontSize=12;" vertex="1" parent="1"><mxGeometry x="80" y="520" width="1200" height="150" as="geometry"/></mxCell><mxCell id="start" value="Início" style="ellipse;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1"><mxGeometry x="110" y="125" width="60" height="50" as="geometry"/></mxCell><mxCell id="ta1" value="Criar Contrato&#xa;de Locação&#xa;(datas + valor)" style="rounded=1;fillColor=#dbeafe;strokeColor=#2563eb;fontSize=11;" vertex="1" parent="1"><mxGeometry x="210" y="110" width="130" height="80" as="geometry"/></mxCell><mxCell id="ta2" value="Confirmar&#xa;disponibilidade&#xa;do equipamento" style="rounded=1;fillColor=#dbeafe;strokeColor=#2563eb;fontSize=11;" vertex="1" parent="1"><mxGeometry x="380" y="110" width="130" height="80" as="geometry"/></mxCell><mxCell id="tb1" value="Preparar&#xa;equipamento&#xa;para saída" style="rounded=1;fillColor=#cffafe;strokeColor=#0891b2;fontSize=11;" vertex="1" parent="1"><mxGeometry x="210" y="255" width="130" height="80" as="geometry"/></mxCell><mxCell id="tc1" value="Inspecionar&#xa;estado antes&#xa;da saída" style="rounded=1;fillColor=#fffbeb;strokeColor=#d97706;fontSize=11;" vertex="1" parent="1"><mxGeometry x="380" y="405" width="130" height="80" as="geometry"/></mxCell><mxCell id="tb2" value="🏷️ Registrar Serial&#xa;na Saída (Serial&#xa;vinculado ao contrato)" style="rounded=1;fillColor=#ffe6cc;strokeColor=#d6b656;fontStyle=1;fontSize=11;" vertex="1" parent="1"><mxGeometry x="560" y="255" width="140" height="80" as="geometry"/></mxCell><mxCell id="td1" value="Equipamento&#xa;em uso&#xa;(período contratado)" style="rounded=1;fillColor=#f9fafb;strokeColor=#9ca3af;fontSize=11;" vertex="1" parent="1"><mxGeometry x="750" y="555" width="130" height="80" as="geometry"/></mxCell><mxCell id="tb3" value="Receber&#xa;equipamento&#xa;de volta" style="rounded=1;fillColor=#cffafe;strokeColor=#0891b2;fontSize=11;" vertex="1" parent="1"><mxGeometry x="930" y="255" width="130" height="80" as="geometry"/></mxCell><mxCell id="tc2" value="Inspecionar&#xa;estado no&#xa;retorno" style="rounded=1;fillColor=#fffbeb;strokeColor=#d97706;fontSize=11;" vertex="1" parent="1"><mxGeometry x="930" y="405" width="130" height="80" as="geometry"/></mxCell><mxCell id="tb4" value="🏷️ Serial volta&#xa;ao estoque&#xa;(disponível)" style="rounded=1;fillColor=#ffe6cc;strokeColor=#d6b656;fontStyle=1;fontSize=11;" vertex="1" parent="1"><mxGeometry x="1100" y="255" width="130" height="80" as="geometry"/></mxCell><mxCell id="ta3" value="Faturar locação&#xa;+ eventuais danos" style="rounded=1;fillColor=#dbeafe;strokeColor=#2563eb;fontSize=11;" vertex="1" parent="1"><mxGeometry x="750" y="110" width="130" height="80" as="geometry"/></mxCell><mxCell id="end" value="Encerrado&#xa;Serial disponível" style="ellipse;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="1"><mxGeometry x="1100" y="125" width="120" height="50" as="geometry"/></mxCell><mxCell id="e1" style="edgeStyle=orthogonalEdgeStyle;" edge="1" source="start" target="ta1" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell><mxCell id="e2" style="edgeStyle=orthogonalEdgeStyle;" edge="1" source="ta1" target="ta2" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell><mxCell id="e3" style="edgeStyle=orthogonalEdgeStyle;" edge="1" source="ta2" target="tb1" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell><mxCell id="e4" style="edgeStyle=orthogonalEdgeStyle;" edge="1" source="tb1" target="tc1" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell><mxCell id="e5" style="edgeStyle=orthogonalEdgeStyle;" edge="1" source="tc1" target="tb2" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell><mxCell id="e6" style="edgeStyle=orthogonalEdgeStyle;" edge="1" source="tb2" target="td1" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell><mxCell id="e7" style="edgeStyle=orthogonalEdgeStyle;" edge="1" source="td1" target="tb3" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell><mxCell id="e8" style="edgeStyle=orthogonalEdgeStyle;" edge="1" source="tb3" target="tc2" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell><mxCell id="e9" style="edgeStyle=orthogonalEdgeStyle;" edge="1" source="tc2" target="tb4" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell><mxCell id="e10" style="edgeStyle=orthogonalEdgeStyle;" edge="1" source="tb4" target="ta3" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell><mxCell id="e11" style="edgeStyle=orthogonalEdgeStyle;" edge="1" source="ta3" target="end" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell></root></mxGraphModel>`,
+  },
+  {
+    id:"arvore_decisao",
+    label:"🧭 Árvore de Decisão",
+    descricao:"Guia visual para decidir qual processo usar",
+    xml:`<mxGraphModel dx="1422" dy="762" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1654" pageHeight="1169" math="0" shadow="0"><root><mxCell id="0"/><mxCell id="1" parent="0"/><mxCell id="tit" value="Árvore de Decisão — Qual processo usar?" style="text;html=1;fontSize=20;fontStyle=1;fillColor=none;strokeColor=none;align=center;" vertex="1" parent="1"><mxGeometry x="200" y="20" width="1200" height="40" as="geometry"/></mxCell><mxCell id="raiz" value="Qual é a necessidade?" style="rhombus;whiteSpace=wrap;html=1;fillColor=#1e40af;fontColor=#ffffff;strokeColor=#1e3a8a;fontSize=14;fontStyle=1;" vertex="1" parent="1"><mxGeometry x="600" y="80" width="200" height="80" as="geometry"/></mxCell><mxCell id="r1" value="✅ PEDIDO DE COMPRA&#xa;Compras → Pedidos&#xa;Serial gerado no recebimento" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dbeafe;strokeColor=#2563eb;fontSize=12;" vertex="1" parent="1"><mxGeometry x="80" y="260" width="180" height="100" as="geometry"/></mxCell><mxCell id="r2" value="🎁 COMBO / KIT&#xa;BOM tipo Kit&#xa;Sem serial de produto final" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fffbeb;strokeColor=#d97706;fontSize=12;" vertex="1" parent="1"><mxGeometry x="310" y="260" width="180" height="100" as="geometry"/></mxCell><mxCell id="r3" value="🏭 PRODUÇÃO&#xa;BOM Fabricar → OP → Chão&#xa;Serial 2: produto final" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f0fdf4;strokeColor=#059669;fontSize=12;" vertex="1" parent="1"><mxGeometry x="540" y="260" width="180" height="100" as="geometry"/></mxCell><mxCell id="r4" value="🔑 LOCAÇÃO&#xa;Módulo Rental&#xa;Serial sai e volta ao estoque" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f3ff;strokeColor=#7c3aed;fontSize=12;" vertex="1" parent="1"><mxGeometry x="770" y="260" width="180" height="100" as="geometry"/></mxCell><mxCell id="r5" value="💼 VENDA + ENTREGA&#xa;Vendas → Inventário&#xa;Serial 3: saída para cliente" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dbeafe;strokeColor=#2563eb;fontSize=12;" vertex="1" parent="1"><mxGeometry x="1000" y="260" width="180" height="100" as="geometry"/></mxCell><mxCell id="q1" value="Comprar insumos&#xa;do fornecedor?" style="text;html=1;fillColor=#f3f4f6;strokeColor=#9ca3af;fontSize=11;fontStyle=2;" vertex="1" parent="1"><mxGeometry x="80" y="210" width="180" height="40" as="geometry"/></mxCell><mxCell id="q2" value="Vender peças&#xa;separadas sem montar?" style="text;html=1;fillColor=#f3f4f6;strokeColor=#9ca3af;fontSize=11;fontStyle=2;" vertex="1" parent="1"><mxGeometry x="310" y="210" width="180" height="40" as="geometry"/></mxCell><mxCell id="q3" value="Fabricar equipamento&#xa;montado?" style="text;html=1;fillColor=#f3f4f6;strokeColor=#9ca3af;fontSize=11;fontStyle=2;" vertex="1" parent="1"><mxGeometry x="540" y="210" width="180" height="40" as="geometry"/></mxCell><mxCell id="q4" value="Enviar equipamento&#xa;com retorno?" style="text;html=1;fillColor=#f3f4f6;strokeColor=#9ca3af;fontSize=11;fontStyle=2;" vertex="1" parent="1"><mxGeometry x="770" y="210" width="180" height="40" as="geometry"/></mxCell><mxCell id="q5" value="Vender equipamento&#xa;produzido?" style="text;html=1;fillColor=#f3f4f6;strokeColor=#9ca3af;fontSize=11;fontStyle=2;" vertex="1" parent="1"><mxGeometry x="1000" y="210" width="180" height="40" as="geometry"/></mxCell><mxCell id="er1" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#2563eb;" edge="1" source="raiz" target="r1" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell><mxCell id="er2" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#d97706;" edge="1" source="raiz" target="r2" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell><mxCell id="er3" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#059669;" edge="1" source="raiz" target="r3" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell><mxCell id="er4" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#7c3aed;" edge="1" source="raiz" target="r4" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell><mxCell id="er5" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#2563eb;" edge="1" source="raiz" target="r5" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell><mxCell id="comp" value="Tabela comparativa" style="text;html=1;fontSize=14;fontStyle=1;" vertex="1" parent="1"><mxGeometry x="200" y="440" width="300" height="30" as="geometry"/></mxCell><mxCell id="tb" value="Processo | Usa Serial | Retorna? | Módulo Odoo&#xa;Compra | Serial 1 | Não | Compras&#xa;Produção | Serial 2 | Não | Fabricação&#xa;Kit/Combo | Por peça | Não | Vendas (BOM Kit)&#xa;Venda | Serial 3 | Não | Vendas + Inventário&#xa;Locação | Saída+Retorno | SIM | Rental" style="text;html=1;fontSize=11;fillColor=#f9fafb;strokeColor=#d1d5db;align=left;spacingLeft=10;" vertex="1" parent="1"><mxGeometry x="200" y="480" width="900" height="140" as="geometry"/></mxCell></root></mxGraphModel>`,
+  },
+];
+
+function TabDiagramaInterativo() {
+  const [diagramaAtivo, setDiagramaAtivo] = useState("organograma");
+  const [altura, setAltura] = useState(600);
+  const [carregando, setCarregando] = useState(true);
+  const iframeRef = React.useRef(null);
+
+  const diag = DIAGRAMAS.find(d => d.id === diagramaAtivo);
+
+  // Envia o XML ao iframe via postMessage após carregar
+  const enviarDiagrama = React.useCallback(() => {
+    if (!iframeRef.current || !diag) return;
+    const xml = `<?xml version="1.0" encoding="UTF-8"?>${diag.xml}`;
+    iframeRef.current.contentWindow?.postMessage(
+      JSON.stringify({ action: "load", xml }),
+      "https://embed.diagrams.net"
+    );
+    setCarregando(false);
+  }, [diag]);
+
+  // Ouvir mensagens de retorno do iframe
+  React.useEffect(() => {
+    const handler = (e) => {
+      if (e.origin !== "https://embed.diagrams.net") return;
+      try {
+        const msg = JSON.parse(e.data);
+        if (msg.event === "init") enviarDiagrama();
+        if (msg.event === "load") setCarregando(false);
+      } catch {}
+    };
+    window.addEventListener("message", handler);
+    return () => window.removeEventListener("message", handler);
+  }, [enviarDiagrama]);
+
+  // Recarregar ao trocar diagrama
+  React.useEffect(() => {
+    setCarregando(true);
+    if (iframeRef.current) {
+      iframeRef.current.src = `https://embed.diagrams.net/?embed=1&spin=1&modified=unsavedChanges&proto=json&ui=atlas`;
+    }
+  }, [diagramaAtivo]);
+
+  // Download do diagrama atual
+  const handleDownload = () => {
+    if (!diag) return;
+    const blob = new Blob([`<?xml version="1.0" encoding="UTF-8"?>${diag.xml}`], {type:"text/xml"});
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = `Axion_${diag.id}.drawio`;
+    a.click();
+    URL.revokeObjectURL(url);
+  };
+
+  // Abrir no Draw.io para edição completa
+  const handleEditar = () => {
+    if (!diag) return;
+    const blob = new Blob([`<?xml version="1.0" encoding="UTF-8"?>${diag.xml}`], {type:"text/xml"});
+    const url = URL.createObjectURL(blob);
+    // Abre Draw.io e depois abre o arquivo
+    window.open("https://app.diagrams.net/?splash=0", "_blank");
+    setTimeout(() => URL.revokeObjectURL(url), 1000);
+  };
+
+  return (
+    <div className="oa-content">
+      <div className="oa-info-box oa-info-blue">
+        <Info size={16}/>
+        <div>Visualize os diagramas <strong>interativamente</strong> nesta página. Selecione o fluxo, navegue com scroll, use zoom e clique nos elementos. Para editar com todas as ferramentas, use <strong>"Editar no Draw.io"</strong>.</div>
+      </div>
+
+      {/* Seletor de diagrama */}
+      <div className="oa-diag-menu">
+        {DIAGRAMAS.map(d => (
+          <button
+            key={d.id}
+            className={`oa-diag-btn ${diagramaAtivo === d.id ? "oa-diag-btn--ativo" : ""}`}
+            onClick={() => { setDiagramaAtivo(d.id); setCarregando(true); }}
+          >
+            {d.label}
+          </button>
+        ))}
+      </div>
+
+      {/* Info do diagrama ativo */}
+      {diag && (
+        <div style={{
+          display:"flex",alignItems:"center",gap:12,padding:"12px 16px",
+          background:"var(--surface)",border:"1px solid var(--border)",
+          borderRadius:10,boxShadow:"var(--card-shadow)",flexWrap:"wrap"
+        }}>
+          <div style={{flex:1,minWidth:200}}>
+            <div style={{fontSize:15,fontWeight:700,color:"var(--text)"}}>{diag.label}</div>
+            <div style={{fontSize:12,color:"var(--text-muted)"}}>{diag.descricao}</div>
+          </div>
+          <div style={{display:"flex",gap:8,flexWrap:"wrap"}}>
+            <button className="oa-btn-download" onClick={handleDownload}
+              style={{padding:"7px 14px",fontSize:12}}>
+              <Download size={13}/> Baixar .drawio
+            </button>
+            <a href="https://app.diagrams.net/?splash=0" target="_blank" rel="noreferrer"
+               className="oa-btn-download" style={{padding:"7px 14px",fontSize:12,background:"#7c3aed",textDecoration:"none"}}>
+              <ExternalLink size={13}/> Abrir Draw.io
+            </a>
+          </div>
+        </div>
+      )}
+
+      {/* Controle de altura */}
+      <div style={{display:"flex",alignItems:"center",gap:8,flexWrap:"wrap"}}>
+        <span style={{fontSize:12,color:"var(--text-muted)"}}>Tamanho da visualização:</span>
+        {[400,600,800,1000].map(h => (
+          <button key={h} onClick={() => setAltura(h)} style={{
+            padding:"4px 12px",borderRadius:6,fontSize:11,fontWeight:600,cursor:"pointer",
+            background: altura===h ? "var(--accent)" : "var(--surface-raised)",
+            color: altura===h ? "#fff" : "var(--text-muted)",
+            border: `1px solid ${altura===h ? "var(--accent)" : "var(--border)"}`,
+          }}>{h}px</button>
+        ))}
+      </div>
+
+      {/* Container do iframe Draw.io */}
+      <div className="oa-diag-container" style={{height: altura + 42}}>
+        <div className="oa-diag-topbar">
+          <span className="oa-diag-topbar-label">📊 {diag?.label}</span>
+          <span style={{fontSize:11,color:"var(--text-muted)"}}>
+            {carregando ? "⏳ Carregando diagrama..." : "✅ Diagrama carregado — navegue com scroll e zoom"}
+          </span>
+        </div>
+        <iframe
+          ref={iframeRef}
+          src={`https://embed.diagrams.net/?embed=1&spin=1&modified=unsavedChanges&proto=json&ui=atlas`}
+          width="100%"
+          height={altura}
+          style={{border:"none",display:"block"}}
+          title={diag?.label}
+          onLoad={enviarDiagrama}
+          allow="clipboard-read; clipboard-write"
+        />
+      </div>
+
+      {/* Instruções */}
+      <div className="oa-section" style={{marginTop:0}}>
+        <h3>💡 Como usar o diagrama</h3>
+        <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fit,minmax(180px,1fr))",gap:8}}>
+          {[
+            {i:"🖱️", t:"Navegar", d:"Clique e arraste para mover o diagrama"},
+            {i:"🔍", t:"Zoom", d:"Ctrl+Scroll ou botões + e - no canto"},
+            {i:"🎯", t:"Ajustar tela", d:"Ctrl+Shift+H para centralizar"},
+            {i:"💾", t:"Baixar", d:"Botão 'Baixar .drawio' para salvar e editar"},
+            {i:"✏️", t:"Editar", d:"'Abrir Draw.io' para edição completa"},
+            {i:"📐", t:"Trocar diagrama", d:"Clique nos botões do menu acima"},
+          ].map(item => (
+            <div key={item.i} style={{
+              padding:"10px 12px",background:"var(--surface-raised)",
+              border:"1px solid var(--border)",borderRadius:8
+            }}>
+              <div style={{fontSize:18,marginBottom:4}}>{item.i}</div>
+              <div style={{fontSize:12,fontWeight:700,color:"var(--text)"}}>{item.t}</div>
+              <div style={{fontSize:11,color:"var(--text-muted)",lineHeight:1.4}}>{item.d}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* ══════════════════════════════════════════════════════════════
+   CENTRAL PROCESSO ↔ DIAGRAMA (bidirecional)
+   ══════════════════════════════════════════════════════════════ */
+
+// Gera XML Draw.io de um único segmento com seus detalhes
+function gerarXMLSegmento(seg) {
+  const COR = {
+    blue:   {fill:"#dbeafe",stroke:"#2563eb"},
+    purple: {fill:"#f5f3ff",stroke:"#7c3aed"},
+    green:  {fill:"#f0fdf4",stroke:"#059669"},
+    yellow: {fill:"#fffbeb",stroke:"#d97706"},
+  };
+  const {fill,stroke} = COR[seg.cor]||COR.blue;
+  let c=[]; let id=10;
+  const I=()=>`n${id++}`;
+
+  // Header do processo
+  const hId=I();
+  c.push(`<mxCell id="${hId}" value="${seg.icon} ${seg.titulo}" style="rounded=1;whiteSpace=wrap;html=1;fillColor=${fill};strokeColor=${stroke};fontSize=14;fontStyle=1;" vertex="1" parent="1"><mxGeometry x="80" y="60" width="260" height="70" as="geometry"/></mxCell>`);
+
+  // Responsável
+  const rId=I();
+  c.push(`<mxCell id="${rId}" value="👤 ${seg.responsavel}&#xa;📱 ${seg.odooTela}" style="text;html=1;fontSize=10;fillColor=${fill};strokeColor=${stroke};align=left;spacingLeft=6;" vertex="1" parent="1"><mxGeometry x="80" y="136" width="260" height="36" as="geometry"/></mxCell>`);
+
+  // Subetapas em fluxo linear
+  let prevId=hId;
+  seg.subetapas.forEach((sub,i)=>{
+    const sFill=sub.serial?"#ffe6cc":"#f9fafb";
+    const sStroke=sub.serial?"#d6b656":"#d1d5db";
+    const x=80+(i%3)*280; const y=220+Math.floor(i/3)*100;
+    const sId=I();
+    c.push(`<mxCell id="${sId}" value="${sub.n} ${sub.acao.replace(/&/g,"&amp;")}${sub.serial?" 🏷️":""}&#xa;👤 ${sub.quem}&#xa;📱 ${sub.tela}" style="rounded=1;whiteSpace=wrap;html=1;fillColor=${sFill};strokeColor=${sStroke};fontSize=10;${sub.serial?"fontStyle=1;":""}" vertex="1" parent="1"><mxGeometry x="${x}" y="${y}" width="260" height="80" as="geometry"/></mxCell>`);
+    if(i===0){
+      const eId=I();
+      c.push(`<mxCell id="${eId}" style="edgeStyle=orthogonalEdgeStyle;strokeColor=${stroke};" edge="1" source="${hId}" target="${sId}" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell>`);
+    } else {
+      const eId=I();
+      c.push(`<mxCell id="${eId}" style="edgeStyle=orthogonalEdgeStyle;" edge="1" source="${prevId}" target="${sId}" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell>`);
+    }
+    prevId=sId;
+  });
+
+  // Alertas
+  seg.alertas.forEach((a,i)=>{
+    const aId=I();
+    c.push(`<mxCell id="${aId}" value="⚠️ ${a.replace(/&/g,"&amp;")}" style="text;html=1;fontSize=10;fillColor=#fffbeb;strokeColor=#d97706;align=left;spacingLeft=6;" vertex="1" parent="1"><mxGeometry x="80" y="${220+Math.ceil(seg.subetapas.length/3)*100+i*30+10}" width="500" height="26" as="geometry"/></mxCell>`);
+  });
+
+  const rows=Math.ceil(seg.subetapas.length/3);
+  const h=220+rows*100+seg.alertas.length*32+40;
+  return `<mxGraphModel dx="1200" dy="600" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="900" pageHeight="${h}" math="0" shadow="0"><root><mxCell id="0"/><mxCell id="1" parent="0"/>${c.join("")}</root></mxGraphModel>`;
+}
+
+// Gera XML com TODOS os segmentos encadeados
+function gerarXMLTodosSegmentos(segmentos) {
+  const COR={blue:{fill:"#dbeafe",stroke:"#2563eb"},purple:{fill:"#f5f3ff",stroke:"#7c3aed"},green:{fill:"#f0fdf4",stroke:"#059669"},yellow:{fill:"#fffbeb",stroke:"#d97706"}};
+  let c=[]; let id=10; const I=()=>`m${id++}`;
+  c.push(`<mxCell id="${I()}" value="Mapa Completo de Processos — Axion Tecnologia" style="text;html=1;fontSize=18;fontStyle=1;fillColor=none;strokeColor=none;align=center;" vertex="1" parent="1"><mxGeometry x="80" y="20" width="1600" height="40" as="geometry"/></mxCell>`);
+
+  let y=80; const segIds=[];
+  segmentos.forEach((seg,si)=>{
+    const {fill,stroke}=COR[seg.cor]||COR.blue;
+    const segId=I();
+    segIds.push(segId);
+    c.push(`<mxCell id="${segId}" value="${seg.icon} ${seg.titulo}&#xa;👤 ${seg.responsavel}" style="rounded=1;whiteSpace=wrap;html=1;fillColor=${fill};strokeColor=${stroke};fontSize=12;fontStyle=1;" vertex="1" parent="1"><mxGeometry x="80" y="${y}" width="200" height="70" as="geometry"/></mxCell>`);
+
+    let prevSub=null;
+    seg.subetapas.forEach((sub,ei)=>{
+      const sFill=sub.serial?"#ffe6cc":"#f9fafb";
+      const sStroke=sub.serial?"#d6b656":"#d1d5db";
+      const x=320+(ei%5)*210; const yy=y+(Math.floor(ei/5)*80);
+      const sId=I();
+      c.push(`<mxCell id="${sId}" value="${sub.n} ${sub.acao.replace(/&/g,"&amp;")}${sub.serial?" 🏷️":""}&#xa;${sub.quem}" style="rounded=1;whiteSpace=wrap;html=1;fillColor=${sFill};strokeColor=${sStroke};fontSize=9;${sub.serial?"fontStyle=1;":""}" vertex="1" parent="1"><mxGeometry x="${x}" y="${yy}" width="190" height="60" as="geometry"/></mxCell>`);
+      if(ei===0){const eId=I();c.push(`<mxCell id="${eId}" style="edgeStyle=orthogonalEdgeStyle;strokeColor=${stroke};" edge="1" source="${segId}" target="${sId}" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell>`);}
+      else if(prevSub){const eId=I();c.push(`<mxCell id="${eId}" style="edgeStyle=orthogonalEdgeStyle;" edge="1" source="${prevSub}" target="${sId}" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell>`);}
+      prevSub=sId;
+    });
+    const rows=Math.ceil(seg.subetapas.length/5);
+    y+=rows*80+40;
+  });
+
+  // Seta de encadeamento entre segmentos
+  for(let i=0;i<segIds.length-1;i++){
+    const eId=I();
+    c.push(`<mxCell id="${eId}" style="edgeStyle=orthogonalEdgeStyle;dashed=1;strokeColor=#9ca3af;" edge="1" source="${segIds[i]}" target="${segIds[i+1]}" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell>`);
+  }
+  c.push(`<mxCell id="${I()}" value="🏷️ Laranja = Ponto de SERIAL | Tracejado = Encadeamento entre processos" style="text;html=1;fillColor=#ffe6cc;strokeColor=#d6b656;fontStyle=1;fontSize=11;" vertex="1" parent="1"><mxGeometry x="80" y="${y+10}" width="700" height="30" as="geometry"/></mxCell>`);
+  return `<mxGraphModel dx="1800" dy="900" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1654" pageHeight="${y+60}" math="0" shadow="0"><root><mxCell id="0"/><mxCell id="1" parent="0"/>${c.join("")}</root></mxGraphModel>`;
+}
+
+function TabCentral({setTab}) {
+  const [segSel, setSegSel] = useState(SEGMENTOS[0]);
+  const [subSel, setSubSel] = useState(null);
+  const [modoTodos, setModoTodos] = useState(false);
+  const iframeRef = React.useRef(null);
+  const [iframePronto, setIframePronto] = useState(false);
+
+  const enviarDiagrama = React.useCallback((xml) => {
+    iframeRef.current?.contentWindow?.postMessage(
+      JSON.stringify({action:"load", xml}), "https://embed.diagrams.net"
+    );
+  }, []);
+
+  React.useEffect(() => {
+    const handler = (e) => {
+      if (e.origin !== "https://embed.diagrams.net") return;
+      try {
+        const msg = JSON.parse(e.data);
+        if (msg.event === "init") {
+          const xml = modoTodos ? gerarXMLTodosSegmentos(SEGMENTOS) : gerarXMLSegmento(segSel);
+          enviarDiagrama(xml);
+          setIframePronto(true);
+        }
+      } catch {}
+    };
+    window.addEventListener("message", handler);
+    return () => window.removeEventListener("message", handler);
+  }, [segSel, modoTodos, enviarDiagrama]);
+
+  const carregarDiagrama = (seg, todos) => {
+    setIframePronto(false);
+    setModoTodos(todos||false);
+    if(seg) setSegSel(seg);
+    if(iframeRef.current){
+      iframeRef.current.src = `https://embed.diagrams.net/?embed=1&spin=1&proto=json&ui=atlas`;
+    }
+  };
+
+  const baixar = () => {
+    const xml = modoTodos ? gerarXMLTodosSegmentos(SEGMENTOS) : gerarXMLSegmento(segSel);
+    const blob = new Blob([`<?xml version="1.0" encoding="UTF-8"?>${xml}`],{type:"text/xml"});
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href=url; a.download=`Axion_${modoTodos?"MapaCompleto":segSel.id}.drawio`; a.click();
+    URL.revokeObjectURL(url);
+  };
+
+  const COR={blue:"#2563eb",purple:"#7c3aed",green:"#059669",yellow:"#d97706"};
+
+  return (
+    <div className="oa-central">
+      {/* Header da central */}
+      <div className="oa-central-header">
+        <div>
+          <h2 className="oa-central-titulo">🔀 Central Processo ↔ Diagrama</h2>
+          <p className="oa-central-sub">Selecione um processo para ver o diagrama e o passo a passo integrados. Navegue nos dois sentidos.</p>
+        </div>
+        <div className="oa-central-actions">
+          <button className="oa-btn-download" onClick={baixar} style={{padding:"7px 14px",fontSize:12}}>
+            <Download size={13}/> Baixar .drawio
+          </button>
+          <a href="https://app.diagrams.net/?splash=0" target="_blank" rel="noreferrer"
+             className="oa-btn-download" style={{padding:"7px 14px",fontSize:12,background:"#7c3aed",textDecoration:"none"}}>
+            <ExternalLink size={13}/> Draw.io completo
+          </a>
+        </div>
+      </div>
+
+      {/* Seletor de processos */}
+      <div className="oa-central-selecao">
+        <button
+          className={`oa-central-seg-btn ${modoTodos ? "oa-central-seg-btn--ativo" : ""}`}
+          style={modoTodos ? {borderColor:"#1e40af",background:"#1e40af",color:"#fff"} : {}}
+          onClick={() => carregarDiagrama(null, true)}
+        >
+          🗺️ Todos os Processos
+        </button>
+        {SEGMENTOS.map(seg => (
+          <button key={seg.id}
+            className={`oa-central-seg-btn ${!modoTodos && segSel?.id===seg.id ? "oa-central-seg-btn--ativo" : ""}`}
+            style={!modoTodos && segSel?.id===seg.id ? {borderColor:COR[seg.cor],background:COR[seg.cor],color:"#fff"} : {borderColor:COR[seg.cor]}}
+            onClick={() => { setSubSel(null); carregarDiagrama(seg, false); }}
+          >
+            {seg.icon} {seg.titulo.split("(")[0].trim()}
+          </button>
+        ))}
+      </div>
+
+      {/* Layout principal: diagrama + detalhes */}
+      <div className="oa-central-layout">
+
+        {/* PAINEL ESQUERDO — Detalhes do processo */}
+        <div className="oa-central-painel">
+          <div className="oa-central-painel-header" style={{borderColor: modoTodos?"#1e40af":COR[segSel?.cor]||"#2563eb"}}>
+            <span style={{fontSize:22}}>{modoTodos?"🗺️":segSel?.icon}</span>
+            <div>
+              <div style={{fontSize:14,fontWeight:800,color:"var(--text)"}}>
+                {modoTodos ? "Todos os Processos" : segSel?.titulo}
+              </div>
+              <div style={{fontSize:11,color:"var(--text-muted)"}}>
+                {modoTodos ? `${SEGMENTOS.length} segmentos · ${SEGMENTOS.reduce((a,s)=>a+s.subetapas.length,0)} subetapas` : `👤 ${segSel?.responsavel}`}
+              </div>
+            </div>
+          </div>
+
+          {!modoTodos && segSel && (
+            <div className="oa-central-painel-body">
+              {/* Link Odoo */}
+              <a href={segSel.odooLink} target="_blank" rel="noreferrer"
+                 className="oa-etapa-link" style={{marginTop:0,marginBottom:12,display:"inline-flex"}}>
+                <ExternalLink size={11}/> {segSel.odooTela}
+              </a>
+
+              {/* Subetapas */}
+              <div style={{fontSize:12,fontWeight:700,color:"var(--text-muted)",marginBottom:8,textTransform:"uppercase",letterSpacing:"0.5px"}}>
+                Subetapas ({segSel.subetapas.length}):
+              </div>
+              {segSel.subetapas.map(sub => (
+                <div key={sub.n}
+                  className={`oa-central-sub ${subSel?.n===sub.n ? "oa-central-sub--sel" : ""}`}
+                  style={sub.serial ? {background:"#fffbeb",borderColor:"#fde68a"} : {}}
+                  onClick={() => setSubSel(subSel?.n===sub.n ? null : sub)}
+                >
+                  <div style={{display:"flex",alignItems:"center",gap:8,flexWrap:"wrap"}}>
+                    <span style={{
+                      minWidth:36,padding:"2px 6px",borderRadius:6,textAlign:"center",
+                      background:COR[segSel.cor],color:"#fff",fontSize:10,fontWeight:800
+                    }}>{sub.n}</span>
+                    <span style={{fontSize:12,fontWeight:600,color:"var(--text)",flex:1}}>{sub.acao}</span>
+                    {sub.serial && <span className="oa-serial-badge">🏷️</span>}
+                  </div>
+                  {subSel?.n===sub.n && (
+                    <div style={{marginTop:10,paddingTop:10,borderTop:"1px solid var(--border)"}}>
+                      <div style={{display:"flex",gap:8,flexWrap:"wrap",marginBottom:8}}>
+                        <span style={{fontSize:11,background:"var(--table-row-hover)",padding:"2px 8px",borderRadius:12}}>👤 {sub.quem}</span>
+                        <code style={{fontSize:11,color:"#7c3aed"}}>{sub.tela}</code>
+                      </div>
+                      {sub.dep.length > 0 && (
+                        <div style={{fontSize:11,color:"var(--accent)"}}>🔗 Depende de: {sub.dep.join(", ")}</div>
+                      )}
+                      {sub.serial && (
+                        <div className="oa-serial-note" style={{marginTop:6}}>
+                          <Hash size={12}/> Ponto de geração/registro de SERIAL
+                        </div>
+                      )}
+                    </div>
+                  )}
+                </div>
+              ))}
+
+              {/* Alertas */}
+              {segSel.alertas.length > 0 && (
+                <div style={{marginTop:12}}>
+                  <div style={{fontSize:12,fontWeight:700,color:"#b45309",marginBottom:6}}>⚠️ Alertas:</div>
+                  {segSel.alertas.map((a,i) => (
+                    <div key={i} style={{fontSize:11,color:"#92400e",padding:"5px 10px",background:"#fffbeb",borderRadius:6,marginBottom:4,border:"1px solid #fde68a"}}>
+                      {a}
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+          )}
+
+          {/* Modo todos: lista resumida */}
+          {modoTodos && (
+            <div className="oa-central-painel-body">
+              <div style={{fontSize:12,fontWeight:700,color:"var(--text-muted)",marginBottom:8}}>
+                Clique em um processo para focar:
+              </div>
+              {SEGMENTOS.map(seg => (
+                <div key={seg.id} className="oa-central-sub"
+                  style={{cursor:"pointer"}}
+                  onClick={() => { setSubSel(null); carregarDiagrama(seg, false); }}>
+                  <div style={{display:"flex",alignItems:"center",gap:8}}>
+                    <span style={{fontSize:18}}>{seg.icon}</span>
+                    <div>
+                      <div style={{fontSize:12,fontWeight:700,color:COR[seg.cor]}}>{seg.titulo}</div>
+                      <div style={{fontSize:11,color:"var(--text-muted)"}}>👤 {seg.responsavel} · {seg.subetapas.length} etapas</div>
+                    </div>
+                    <ArrowRight size={12} color="var(--border-hover)" style={{marginLeft:"auto"}}/>
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+
+        {/* PAINEL DIREITO — Diagrama */}
+        <div className="oa-central-diagrama">
+          <div className="oa-diag-topbar">
+            <span className="oa-diag-topbar-label">
+              {iframePronto ? "✅" : "⏳"} {modoTodos ? "🗺️ Todos os Processos" : `${segSel?.icon} ${segSel?.titulo}`}
+            </span>
+            <span style={{fontSize:11,color:"var(--text-muted)"}}>Zoom: Ctrl+Scroll · Mover: arrastar</span>
+          </div>
+          <iframe
+            ref={iframeRef}
+            src={`https://embed.diagrams.net/?embed=1&spin=1&proto=json&ui=atlas`}
+            width="100%"
+            height="560"
+            style={{border:"none",display:"block"}}
+            title="Diagrama do processo"
+            onLoad={() => {
+              const xml = modoTodos ? gerarXMLTodosSegmentos(SEGMENTOS) : gerarXMLSegmento(segSel);
+              enviarDiagrama(xml);
+              setTimeout(() => setIframePronto(true), 1500);
+            }}
+            allow="clipboard-read; clipboard-write"
+          />
+        </div>
+      </div>
+
+      {/* Guia de navegação rápida */}
+      <div style={{
+        marginTop:16,padding:"12px 16px",
+        background:"var(--surface)",border:"1px solid var(--border)",
+        borderRadius:10,display:"flex",gap:24,flexWrap:"wrap",alignItems:"center"
+      }}>
+        <span style={{fontSize:12,fontWeight:700,color:"var(--text-muted)"}}>💡 Navegação:</span>
+        {[
+          {i:"🎯",t:"Selecionar processo",d:"Botões acima para focar em um processo ou ver todos"},
+          {i:"📋",t:"Ver subetapas",d:"Clique em cada subetapa para ver responsável e tela do Odoo"},
+          {i:"📊",t:"Diagrama automático",d:"Gerado dos dados reais do sistema ao selecionar processo"},
+          {i:"💾",t:"Baixar e editar",d:"Botão Download para salvar o .drawio e editar no Draw.io"},
+        ].map(item => (
+          <div key={item.i} style={{display:"flex",alignItems:"center",gap:8}}>
+            <span style={{fontSize:16}}>{item.i}</span>
+            <div>
+              <div style={{fontSize:11,fontWeight:700,color:"var(--text)"}}>{item.t}</div>
+              <div style={{fontSize:10,color:"var(--text-muted)"}}>{item.d}</div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+/* ══════════════════════════════════════════════════════════════
+   ODOO AI CHAT — Sidekick integrado ao OdooAnalisador
+   ══════════════════════════════════════════════════════════════ */
+
+const ODOO_SYSTEM_CONTEXT = `Você é o Odoo AI, assistente integrado da Axion Tecnologia para o sistema Odoo ERP.
+Você tem conhecimento completo sobre:
+
+PROCESSOS DA AXION:
+1. ENTRADA DE MERCADORIA: Pedido de Compra → Recebimento → Serial 1 (insumo entra no estoque)
+2. SEPARAÇÃO: Almoxarifado separa componentes para produção, confere seriais
+3. PRODUÇÃO: BOM (Lista de Materiais) → Ordem de Produção → Chão de Fábrica → Serial 2 (produto final)
+4. COMBO/KIT: BOM tipo Kit → venda explode nas peças → entrega separada (sem fabricação)
+5. FINALIZAÇÃO/VENDA: Pedido de Venda → Entrega → Serial 3 (saída para cliente)
+6. LOCAÇÃO: Contrato Rental → Saída com serial → Uso → Retorno + inspeção → serial volta ao estoque
+
+PRODUTOS IMPORTADOS NO ODOO:
+- 83 produtos cadastrados (câmeras, iluminadores, Mini PCs, roteadores, painéis solares, cabos, etc.)
+- 45 categorias (Mercadorias / INSUMOS / REDE E TELECOM, CFTV, ELETRICA, ENERGIA SOLAR, etc.)
+- 108 locais de inventário (B&B, BS, CAMPO com sublocais DER-SE, ECONOMIA-GO, IME-PI, etc.)
+
+NÚMEROS DE SÉRIE (SERIAL):
+- Serial 1: gerado no RECEBIMENTO do insumo
+- Serial 2: gerado ao CONCLUIR a Ordem de Produção (produto acabado)
+- Serial 3: registrado na ENTREGA ao cliente
+- Rastreabilidade: Inventário → Rastreabilidade → buscar pelo serial
+
+BOM DINÂMICA (materiais que mudam):
+- Método 1: Nova versão da BOM (mudança permanente)
+- Método 2: Substituição na OP (mudança pontual, só nessa produção)
+- Método 3: Componente alternativo (dois materiais aceitos sempre)
+- Método 4: Variantes de produto
+
+DEPARTAMENTOS:
+- Comercial: vendas, locações, faturamento
+- Compras: POs, NFs, auditoria serial
+- Almoxarifado: receber serial 1, separar, entregar serial 3, retorno locação
+- PCP/Operador: criar BOM, Ordens de Produção, controle materiais
+- Produção: chão de fábrica, montar, serial 2, testes
+- Qualidade: checklist QC, inspeção retorno, aprovar produto
+
+ODOO: santiago-sola-neto.odoo.com
+Responda de forma direta, prática e em português. Para cada resposta, indique a tela do Odoo onde a ação deve ser feita.`;
+
+const SUGESTOES_RAPIDAS = [
+  "Como gero o serial de um produto?",
+  "Qual a diferença entre Kit e Produção?",
+  "Como trocar um componente na produção?",
+  "Como registrar um recebimento danificado?",
+  "O que é o Chão de Fábrica no Odoo?",
+  "Como funciona a locação no Odoo?",
+  "Como auditar um produto pelo serial?",
+  "Quando usar BOM tipo Kit vs Fabricar?",
+];
+
+function OdooAIChat({ tabAtiva }) {
+  const [aberto, setAberto] = useState(false);
+  const [minimizado, setMinimizado] = useState(false);
+  const [msgs, setMsgs] = useState([
+    {
+      role: "assistant",
+      text: "Olá! Sou o **Odoo AI** da Axion Tecnologia 🤖\n\nPosso ajudar com dúvidas sobre processos, seriais, produção, locação, BOM e qualquer tela do Odoo. Como posso ajudar?",
+      time: new Date().toLocaleTimeString("pt-BR", {hour:"2-digit",minute:"2-digit"})
+    }
+  ]);
+  const [input, setInput] = useState("");
+  const [carregando, setCarregando] = useState(false);
+  const msgEndRef = React.useRef(null);
+
+  React.useEffect(() => {
+    msgEndRef.current?.scrollIntoView({behavior:"smooth"});
+  }, [msgs]);
+
+  const enviarMensagem = async (texto) => {
+    const pergunta = texto || input.trim();
+    if (!pergunta || carregando) return;
+    setInput("");
+
+    const novaMsg = {
+      role: "user",
+      text: pergunta,
+      time: new Date().toLocaleTimeString("pt-BR", {hour:"2-digit",minute:"2-digit"})
+    };
+    setMsgs(prev => [...prev, novaMsg]);
+    setCarregando(true);
+
+    try {
+      const contextual = `[Usuário está na aba: ${tabAtiva}]\n\n${pergunta}`;
+      const res = await api.post("/chat", {
+        mensagem: contextual,
+        sistema: ODOO_SYSTEM_CONTEXT,
+        historico: msgs.slice(-6).map(m => ({role:m.role, content:m.text}))
+      });
+      const resposta = res.data?.resposta || res.data?.message || res.data?.content || "Resposta não disponível.";
+      setMsgs(prev => [...prev, {
+        role: "assistant",
+        text: resposta,
+        time: new Date().toLocaleTimeString("pt-BR", {hour:"2-digit",minute:"2-digit"})
+      }]);
+    } catch (err) {
+      // Fallback com respostas baseadas em contexto local
+      const respostaLocal = responderLocalmente(pergunta);
+      setMsgs(prev => [...prev, {
+        role: "assistant",
+        text: respostaLocal,
+        time: new Date().toLocaleTimeString("pt-BR", {hour:"2-digit",minute:"2-digit"}),
+        local: true
+      }]);
+    } finally {
+      setCarregando(false);
+    }
+  };
+
+  const responderLocalmente = (pergunta) => {
+    const p = pergunta.toLowerCase();
+    if ((p.includes("serial") && (p.includes("gerar") || p.includes("gero") || p.includes("criar") || p.includes("registrar"))) || p.includes("como") && p.includes("serial")) return "**Como gerar serial:**\n\n**Serial 1 (insumo):** Inventário → Recebimentos → Validar → informe o serial de cada unidade\n\n**Serial 2 (produto final):** Fabricação → OP → Marcar como Feito → informe o serial do produto acabado\n\n**Serial 3 (entrega):** Inventário → Entregas → selecione o serial específico → Validar";
+    if (p.includes("kit") || p.includes("combo")) return "**Kit vs Produção:**\n\n🎁 **Kit (BOM tipo Kit):** Vende um conjunto que é entregue em peças separadas. Sem fabricação, sem serial de produto final.\n\n🏭 **Produção (BOM tipo Fabricar):** Monta um produto físico com serial próprio. Passa pelo Chão de Fábrica.\n\n**Regra:** Cliente recebe peças separadas → Kit. Equipamento montado e testado → Produção.";
+    if (p.includes("chão") || p.includes("fabrica")) return "**Chão de Fábrica no Odoo:**\n\nAcesse em **Fabricação → Chão de Fábrica**\n\n- Interface tablet-friendly para operadores\n- Mostra Ordens de Trabalho pendentes\n- Registra seriais dos componentes consumidos\n- Executa checklist de qualidade (QC)\n- Ao concluir, gera o **Serial 2** do produto final";
+    if (p.includes("locação") || p.includes("locacao") || p.includes("rental")) return "**Locação no Odoo:**\n\nAcesse em **Vendas → Locações** (módulo Rental)\n\n1. Criar contrato com cliente, período e valor\n2. Saída: serial registrado na entrega\n3. Retorno: serial volta ao estoque\n4. Inspecionar estado e faturar\n\n**Diferença da venda:** Na locação o serial VOLTA ao estoque!";
+    if (p.includes("danificad") || p.includes("devolv")) return "**Mercadoria danificada no recebimento:**\n\n1. **NÃO valide** o recebimento completo\n2. Reduza a quantidade recebida (ex: 4 de 5)\n3. Valide apenas os itens bons com seus seriais\n4. Abra devolução: Compras → Pedido → Devolver\n5. Aguarde reposição do fornecedor";
+    if (p.includes("auditar") || p.includes("rastreab")) return "**Auditoria pelo Serial:**\n\nInventário → Rastreabilidade → busque o serial\n\nVerá o histórico completo:\n- Quando entrou (recebimento)\n- Qual fornecedor/NF\n- Se foi consumido em produção\n- Qual OP usou esse componente\n- Quando saiu e para qual cliente";
+    if (p.includes("bom") || p.includes("lista de materiais")) return "**BOM — Lista de Materiais:**\n\nFabricação → Listas de Materiais\n\n**Tipos:**\n- **Fabricar:** cria OP, produto montado, serial 2\n- **Kit:** não cria OP, entrega peças separadas\n- **Subcontratação:** montagem por terceiro\n\n**Mudar componente:** Altere a BOM criando nova versão, ou substitua diretamente na OP específica.";
+    return `Ótima pergunta sobre **"${pergunta}"**!\n\nPosso ajudar com: seriais, produção, BOM, Kit, locação, chão de fábrica, auditoria de estoque e processos do Odoo.\n\nTente perguntar algo mais específico ou verifique a aba **📖 Guia Operador** para instruções detalhadas passo a passo.`;
+  };
+
+  // Renderiza texto com markdown simples
+  const renderTexto = (text) => {
+    const partes = text.split(/(\*\*.*?\*\*)/g);
+    return partes.map((p, i) =>
+      p.startsWith("**") && p.endsWith("**")
+        ? <strong key={i}>{p.slice(2,-2)}</strong>
+        : p.split("\n").map((linha, j) => (
+            <React.Fragment key={`${i}-${j}`}>
+              {j > 0 && <br/>}
+              {linha}
+            </React.Fragment>
+          ))
+    );
+  };
+
+  if (!aberto) return (
+    <button className="oa-chat-fab" onClick={() => setAberto(true)} title="Odoo AI — Assistente">
+      <Bot size={22}/>
+      <span className="oa-chat-fab-label">Odoo AI</span>
+    </button>
+  );
+
+  return (
+    <div className={`oa-chat-panel ${minimizado ? "oa-chat-panel--mini" : ""}`}>
+      {/* Header */}
+      <div className="oa-chat-header">
+        <div className="oa-chat-header-left">
+          <div className="oa-chat-avatar">
+            <Bot size={16}/>
+          </div>
+          <div>
+            <div className="oa-chat-titulo">Odoo AI</div>
+            <div className="oa-chat-sub">Your Odoo sidekick for most day-to-day tasks.</div>
+          </div>
+        </div>
+        <div className="oa-chat-header-btns">
+          <button onClick={() => setMinimizado(!minimizado)} title={minimizado?"Expandir":"Minimizar"}>
+            {minimizado ? <Maximize2 size={14}/> : <Minimize2 size={14}/>}
+          </button>
+          <button onClick={() => setMsgs([{
+            role:"assistant",
+            text:"Chat reiniciado. Como posso ajudar?",
+            time: new Date().toLocaleTimeString("pt-BR",{hour:"2-digit",minute:"2-digit"})
+          }])} title="Limpar conversa"><RefreshCw size={14}/></button>
+          <button onClick={() => setAberto(false)} title="Fechar"><X size={14}/></button>
+        </div>
+      </div>
+
+      {!minimizado && (
+        <>
+          {/* Mensagens */}
+          <div className="oa-chat-msgs">
+            {msgs.map((msg, i) => (
+              <div key={i} className={`oa-chat-msg oa-chat-msg-${msg.role}`}>
+                <div className="oa-chat-msg-avatar">
+                  {msg.role === "assistant" ? <Bot size={13}/> : <User size={13}/>}
+                </div>
+                <div className="oa-chat-msg-bubble">
+                  <div className="oa-chat-msg-text">{renderTexto(msg.text)}</div>
+                  <div className="oa-chat-msg-time">
+                    {msg.time}
+                    {msg.local && <span style={{marginLeft:6,opacity:0.6,fontSize:9}}>• offline</span>}
+                  </div>
+                </div>
+              </div>
+            ))}
+            {carregando && (
+              <div className="oa-chat-msg oa-chat-msg-assistant">
+                <div className="oa-chat-msg-avatar"><Bot size={13}/></div>
+                <div className="oa-chat-msg-bubble">
+                  <div className="oa-chat-typing">
+                    <span/><span/><span/>
+                  </div>
+                </div>
+              </div>
+            )}
+            <div ref={msgEndRef}/>
+          </div>
+
+          {/* Sugestões rápidas */}
+          <div className="oa-chat-sugestoes">
+            {SUGESTOES_RAPIDAS.slice(0,4).map(s => (
+              <button key={s} className="oa-chat-sug-btn" onClick={() => enviarMensagem(s)}>
+                {s}
+              </button>
+            ))}
+          </div>
+
+          {/* Input */}
+          <div className="oa-chat-input-area">
+            <input
+              className="oa-chat-input"
+              placeholder="Mensagem Odoo AI..."
+              value={input}
+              onChange={e => setInput(e.target.value)}
+              onKeyDown={e => e.key === "Enter" && !e.shiftKey && enviarMensagem()}
+              disabled={carregando}
+            />
+            <button
+              className="oa-chat-send"
+              onClick={() => enviarMensagem()}
+              disabled={!input.trim() || carregando}
+            >
+              <Send size={14}/>
+            </button>
+          </div>
+        </>
+      )}
+    </div>
+  );
+}
+
+export default function OdooAnalisador() {
+  const [tab, setTab] = useState("fluxo");
   const tabContent = {
     mapa:      <TabMapa/>,
     org:       <TabOrganograma/>,
+    central:   <TabCentral setTab={setTab}/>,
+    diagrama:  <TabDiagramaInterativo/>,
     fluxo:     <TabFluxo/>,
     guia:      <TabGuia/>,
     hipoteses: <TabHipoteses/>,
@@ -2811,6 +3704,8 @@ export default function OdooAnalisador() {  const [tab, setTab] = useState("flux
         ))}
       </div>
       <div className="oa-body">{tabContent[tab]}</div>
+      {/* Chat Odoo AI — flutuante em todas as abas */}
+      <OdooAIChat tabAtiva={TABS.find(t=>t.id===tab)?.label || tab}/>
     </div>
   );
 }
