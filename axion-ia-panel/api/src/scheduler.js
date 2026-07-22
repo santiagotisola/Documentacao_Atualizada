@@ -205,7 +205,7 @@ export function iniciar(intervalo = null) {
   // Expressão cron: executar a cada N minutos
   const expr = `*/${intervaloMinutos} * * * *`;
 
-  taskCron = cron.schedule(expr, executarCiclo, { scheduled: true, timezone: "America/Sao_Paulo" });
+  taskCron = cron.schedule(expr, executarCiclo, { scheduled: true, timezone: "America/Sao_Paulo", suppressMissedWarning: true });
 
   estado.ativo = true;
   estado.iniciado_em = new Date().toISOString();
@@ -381,6 +381,7 @@ export function iniciarColetaPNCP() {
   taskColetaPNCP = cron.schedule(INTERVALO_COLETA, executarColetaPNCP, {
     scheduled: true,
     timezone: "America/Sao_Paulo",
+    suppressMissedWarning: true,
   });
 
   estadoColeta.agendada = true;

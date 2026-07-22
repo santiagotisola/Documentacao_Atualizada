@@ -209,9 +209,9 @@ export default function HomePage() {
             metric="PDF" metricLabel="exportação e relatórios"
             desc="Fluxo, SLA, planilha de horas e mais"
             to="/relatorio-fluxo" />
-          <ModuleCard icon={Map} title="Hub de Análise" color="#34d399"
-            metric="4" metricLabel="módulos integrados"
-            desc="Busca unificada, diagnóstico e logs"
+          <ModuleCard icon={Map} title="AxHub Analisador" color="#667eea"
+            metric="5" metricLabel="módulos unificados"
+            desc="Diagnóstico de exportação, placas, busca e logs"
             to="/hub-analise" />
         </div>
       </section>

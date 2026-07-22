@@ -1,0 +1,74 @@
+[
+  {
+    "id": "ibametro",
+    "url": "https://ibametro.axhub.axion.ws",
+    "versaoAtual": "v.1.2.3",
+    "versaoNova": null,
+    "credUsada": null,
+    "ms": 21344
+  },
+  {
+    "id": "imepi",
+    "url": "https://imepi.axhub.axion.ws",
+    "versaoAtual": "v.1.2.3",
+    "versaoNova": null,
+    "credUsada": null,
+    "ms": 20507
+  },
+  {
+    "id": "imeqpb",
+    "url": "https://imeqpb.axhub.axion.ws",
+    "versaoAtual": "v.1.2.3",
+    "versaoNova": null,
+    "credUsada": null,
+    "ms": 19234
+  },
+  {
+    "id": "imetropa",
+    "url": "https://imetropa.axhub.axion.ws",
+    "versaoAtual": "v.1.2.3",
+    "versaoNova": null,
+    "credUsada": null,
+    "ms": 20865
+  },
+  {
+    "id": "ipemce",
+    "url": "https://ipemce.axhub.axion.ws",
+    "versaoAtual": "v.1.2.1",
+    "versaoNova": null,
+    "credUsada": null,
+    "ms": 47646
+  },
+  {
+    "id": "smtt",
+    "url": "https://smtt.axhub.axion.ws",
+    "versaoAtual": "v.1.2.1",
+    "versaoNova": null,
+    "credUsada": null,
+    "ms": 24153
+  },
+  {
+    "id": "imperatriz",
+    "url": "https://imperatriz.axhub.axion.ws",
+    "versaoAtual": "v.1.2.0",
+    "versaoNova": null,
+    "credUsada": null,
+    "ms": 19456
+  },
+  {
+    "id": "goiania",
+    "url": "https://goiania.axhub.axion.ws",
+    "versaoAtual": "v.1.2.0",
+    "versaoNova": null,
+    "credUsada": null,
+    "ms": 208493
+  },
+  {
+    "id": "economia",
+    "url": "https://economia.axhub.axion.ws",
+    "versaoAtual": "v.1.1.1",
+    "versaoNova": "v.1.2.4",
+    "credUsada": "suporte@axiontecnologia.com.br",
+    "ms": 206402
+  }
+]

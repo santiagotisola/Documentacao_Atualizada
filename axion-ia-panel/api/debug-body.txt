@@ -1,0 +1,189 @@
+Dashboard
+Infrações
+Cronotacógrafo
+Operações
+Veículos
+Equipamentos
+Medição
+Relatórios
+Controle de Acesso
+Administração
+Bem vindo
+Administrador 
+Meta:
+0
+/
+0
+0%
+Triagem Mensal
+07/2026
+2.258
+TOTAL DE INFRAÇÕES
+1.286
+PROCESSADAS
+972
+DESCARTES
+0
+EM TRIAGEM
+Total de Infrações
+Total Descartes
+Total Processadas
+Em Triagem
+08/07
+16/07
+24/07
+Baixar SVG
+Baixar PNG
+Baixar CSV
+Mapa de Equipamentos
+Todos os grupos
+AXION
+BLITZ
+Mapa
+Satélite
+Dados cartográficos ©2026 Google
+Termos
+Informar erro no mapa
+ Grupos de Equipamentos
+AXION (4)
+BLITZ (2)
+● Online
+● Offline -1h
+● Offline +1h
+Painel Sinótico
+Grupos de Equipamentos
+AXION
+BLITZ
+Grupos de Equipamentos
+0
+TOTAL PENDENTES
+Hoje
+DEFASAGEM MÁXIMA
+378
+IMAGENS NA SEMANA
+Defasagem De Processamento
+Defasagem
+	
+Quantidade
+Imagens Capturadas na Semana
+Descrição
+	
+Quantidade
+
+Total	126
+Não Analisadas	0
+Analisadas	126
+Válidas	82
+Invalidas	44
+Status Equipamentos
+0/6
+ONLINE
+0/6
+OFFLINE -1H
+6/6
+OFFLINE +1H
+PE004C
+FIXO • AXION AXOCR • Belo Jardim-PE
+Faixa 2 — Belo Jardim/PE  ·  Faixa 1 — Belo Jardim/PE
+26/02 09:17
+via Heartbeat
+AXION
+PE011C
+FIXO • AXION AXOCR • Águas Belas-PE
+Faixa 1 — Águas Belas/PE  ·  Faixa 2 — Águas Belas/PE
+21/06 02:31
+via Heartbeat
+AXION
+PE012C
+FIXO • AXION AXOCR • São José do Egito-PE
+Faixa 2 — São José do Egito/PE  ·  Faixa 1 — São José do Egito/PE
+18/07 03:30
+via Heartbeat
+AXION
+PE005C
+FIXO • AXION AXOCR • Serra Talhada-PE
+Faixa 2 — Serra Talhada/PE  ·  Faixa 1 — Serra Talhada/PE
+18/07 04:11
+via Heartbeat
+AXION
+PE602C
+MÓVEL • AXION AXOCR • Carpina-PE
+Faixa 4 — Carpina/PE  ·  Faixa 6 — Palmares/PE  ·  Faixa 5 — Gravatá/PE  ·  Faixa 7 — Barreiros/PE  ·  Faixa 3 — Goiana/PE  ·  Faixa 1 — Recife/PE  ·  Faixa 2 — Viória de Santo Antão/PE
+20/07 15:34
+via Passagem
+BLITZ
+PE601C
+MÓVEL • AXION AXOCR • Gravatá-PE
+Faixa 5 — Gravatá/PE  ·  Faixa 7 — Barreiros/PE  ·  Faixa 1 — Recife/PE  ·  Faixa 6 — Palmares/PE  ·  Faixa 3 — Goiana/PE  ·  Faixa 2 — Viória de Santo Antão/PE  ·  Faixa 4 — Carpina/PE
+20/07 15:35
+via Passagem
+BLITZ
+6 de 6 equipamentos
+Últimos Eventos
+0
+FALHAS HOJE
+0
+CORREÇÕES HOJE
+0
+ÚLTIMA HORA
+Aferições Vencendo
+0
+VENCIDAS
+0
+30 DIAS
+0
+60 DIAS
+Top Motivos de Descarte
+Julho/2026
+972 descartes
+1
+090 INFRAÇÃO REINCIDENTE
+897
+2
+075 VEÍCULO ISENTO
+54
+3
+059 VEÍCULO FORA DE ENQUADRAMENTO
+16
+4
+021 PLACA ILEGÍVEL
+4
+5
+041 ERRO NA TARJA
+1
+Infrações por Hora × Dia
+19/07 - 25/07
+126 infrações
+Carregando...
+Sem dados
+Baixo
+Médio
+Alto
+00h
+03h
+06h
+09h
+12h
+15h
+18h
+21h
+Dom 19/07
+Seg 20/07
+Ter 21/07
+Qua 22/07
+Qui 23/07
+Sex 24/07
+Sáb 25/07
+
+Copyright © 2026 Axion. All rights reserved.
+
+AxHub v.1.2.5
+Axion Tecnologia
+Histórico de Versões
+×
+v1.2.5· 12 itens
+atual
+17/06/2026
+Novidades
+Recebimento de imagem da passagem por link (URL): quando a passagem chega com o endereço da imagem, o sistema baixa a imagem automaticamente (com autenticação quando necessário) e a anexa à infração.
+Passagens de cronotacógrafo recebidas por link passam a fazer a consulta automaticamente, e a infração nasce em Triagem para revisão humana. O st

@@ -78,7 +78,7 @@ export function iniciarTicketClosedPoller(cronExpr = "*/5 * * * *") {
     task.stop();
   }
 
-  task = cron.schedule(cronExpr, verificarTicketsFechados);
+  task = cron.schedule(cronExpr, verificarTicketsFechados, { suppressMissedWarning: true });
   console.log(`📋 [TicketPoller] Monitoramento de tickets fechados ativo (${cronExpr})`);
 }
 

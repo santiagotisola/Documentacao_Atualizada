@@ -22,12 +22,18 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 dotenv.config({ path: path.join(__dirname, "..", ".env") });
 
 // ─── Proteção contra crash por erros não tratados ─────────────────────────────
-process.on("uncaughtException", (err) => {
-  console.error("🔥 [uncaughtException]", err.message);
+process.on("uncaughtException", (err, origin) => {
+  console.error("🔥 [uncaughtException] origin:", origin);
+  console.error("🔥 [uncaughtException] message:", err.message);
+  console.error("🔥 [uncaughtException] stack:", err.stack);
   // Não encerrar o processo para manter a API online
 });
-process.on("unhandledRejection", (reason) => {
-  console.error("🔥 [unhandledRejection]", reason?.message || reason);
+process.on("unhandledRejection", (reason, promise) => {
+  console.error("🔥 [unhandledRejection] message:", reason?.message || reason);
+  console.error("🔥 [unhandledRejection] stack:", reason?.stack || "(no stack)");
+});
+process.on("exit", (code) => {
+  console.error(`⚠️  [process] Encerrando com código ${code}`);
 });
 
 const app = express();

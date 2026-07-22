@@ -58,6 +58,7 @@ import AnaliseEditalAvancada from "./pages/AnaliseEditalAvancada.jsx";
 import BuscaEditaisGov from "./pages/BuscaEditaisGov.jsx";
 import Conformidade from "./pages/Conformidade.jsx";
 import ConfidencaRevisao from "./pages/ConfidencaRevisao.jsx";
+import OdooAnalisador from "./pages/OdooAnalisador.jsx";
 import GuiaSites from "./pages/GuiaSites.jsx";
 import Roadmap from "./pages/Roadmap.jsx";
 import Specs from "./pages/Specs.jsx";
@@ -149,6 +150,7 @@ const PAGE_INFO = {
   "/roadmap": { title: "Roadmap de Produtos", subtitle: "Planejamento e gestão de features por produto", Icon: GitBranch },
   "/specs": { title: "Especificações Técnicas", subtitle: "Gestão de specs e documentação técnica de produtos", Icon: FileCode },
   "/implementation-planner": { title: "Planejador de Implementação", subtitle: "Gerenciador de tarefas e roadmap de desenvolvimento", Icon: Construction },
+  "/odoo-analisador": { title: "Odoo Analisador", subtitle: "Análise completa do fluxo Odoo — Produto, Produção, Seriais, BOM, Kits e Entrega", Icon: Database },
   "/mission-center": { title: "Mission Center", subtitle: "Operações formais do ecossistema Axion — Auditoria, Deploy, Validação e mais", Icon: Target },
   "/presentation-center": { title: "Presentation Center", subtitle: "Geração de documentos PDF, Word (DOCX) e PowerPoint (PPTX)", Icon: FileText },
 };
@@ -181,6 +183,7 @@ const MENU_SECTIONS = [
     group: "Busca & Análise",
     items: [
       { to: "/hub-analise", icon: Search, label: "AxHub Analisador" },
+      { to: "/odoo-analisador", icon: Database, label: "Odoo Analisador" },
     ]
   },
   {
@@ -419,6 +422,7 @@ function AppContent() {
           <Route path="/axhub-dashboard" element={<Navigate to="/config?tab=axhub-dashboard" replace />} />
           <Route path="/guia-sites" element={<GuiaSites />} />
           <Route path="/config" element={<Configuracoes />} />
+          <Route path="/odoo-analisador" element={<OdooAnalisador />} />
           <Route path="/mission-center" element={<MissionCenter />} />
           <Route path="/presentation-center" element={<PresentationCenter />} />
 
