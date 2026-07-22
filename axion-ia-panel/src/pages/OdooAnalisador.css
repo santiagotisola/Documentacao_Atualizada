@@ -524,6 +524,112 @@
 .oa-fm-titulo { font-size: 10px; font-weight: 700; color: var(--text); line-height: 1.3; }
 .oa-fm-quem   { font-size: 9px; color: var(--text-muted); margin-top: 2px; }
 
+/* ── Odoo Discuss ─────────────────────────────────────── */
+.oa-discuss-login {
+  display: flex; flex-direction: column; align-items: center; gap: 12px;
+  padding: 48px 24px; text-align: center;
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--radius-lg); box-shadow: var(--card-shadow);
+}
+.oa-discuss-login h3 { font-size: 16px; font-weight: 700; color: var(--text); margin: 0; }
+.oa-discuss-login p  { font-size: 13px; color: var(--text-muted); margin: 0; }
+
+.oa-discuss-header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 14px 18px; border-radius: var(--radius-lg);
+  background: linear-gradient(135deg, #1d4ed8, #7c3aed);
+  box-shadow: 0 4px 16px rgba(37,99,235,0.2); flex-wrap: wrap; gap: 10px;
+}
+
+.oa-discuss-tabs {
+  display: flex; align-items: center; gap: 0;
+  border-bottom: 2px solid var(--border);
+  background: var(--surface); border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+  padding: 0 12px;
+}
+.oa-discuss-tab {
+  padding: 10px 16px; border: none; background: transparent;
+  font-size: 13px; font-weight: 500; color: var(--text-muted);
+  cursor: pointer; border-bottom: 2px solid transparent;
+  margin-bottom: -2px; transition: all 0.15s;
+  display: flex; align-items: center; gap: 6px;
+}
+.oa-discuss-tab:hover { color: var(--text); }
+.oa-discuss-tab--ativo { color: var(--accent); border-bottom-color: var(--accent); font-weight: 700; }
+.oa-discuss-badge {
+  background: var(--accent); color: #fff;
+  font-size: 10px; font-weight: 700; padding: 1px 5px;
+  border-radius: 10px; min-width: 16px; text-align: center;
+}
+.oa-discuss-badge-red { background: #dc2626; }
+.oa-discuss-new-msg {
+  margin-left: auto; padding: 6px 12px; border-radius: 6px;
+  background: var(--accent); color: #fff; font-size: 12px; font-weight: 600;
+  text-decoration: none; transition: all 0.15s;
+}
+.oa-discuss-new-msg:hover { background: var(--accent-hover); color: #fff; }
+
+.oa-discuss-layout {
+  display: grid; grid-template-columns: 280px 1fr; gap: 0;
+  background: var(--surface); border: 1px solid var(--border);
+  border-top: none; border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+  overflow: hidden; min-height: 460px; box-shadow: var(--card-shadow);
+}
+@media (max-width: 768px) { .oa-discuss-layout { grid-template-columns: 1fr; } }
+
+.oa-discuss-lista {
+  border-right: 1px solid var(--border); overflow-y: auto;
+  background: var(--surface-raised); max-height: 460px;
+}
+.oa-discuss-item {
+  display: flex; align-items: center; gap: 10px;
+  padding: 10px 12px; cursor: pointer; transition: background 0.12s;
+  border-bottom: 1px solid var(--border);
+}
+.oa-discuss-item:hover { background: var(--table-row-hover); }
+.oa-discuss-item--ativo { background: var(--accent-subtle) !important; border-right: 3px solid var(--accent); }
+.oa-discuss-item-avatar {
+  width: 34px; height: 34px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 14px; font-weight: 700; flex-shrink: 0;
+}
+.oa-discuss-vazio {
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 8px; padding: 32px 16px; color: var(--text-muted); font-size: 13px;
+  text-align: center; flex: 1;
+}
+
+.oa-discuss-conversa {
+  display: flex; flex-direction: column; max-height: 460px;
+}
+.oa-discuss-conv-header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 10px 14px; border-bottom: 1px solid var(--border);
+  background: var(--surface); flex-shrink: 0;
+}
+.oa-discuss-msgs {
+  flex: 1; overflow-y: auto; padding: 12px; display: flex;
+  flex-direction: column; gap: 10px; background: #fafbfc;
+}
+.oa-discuss-msg {
+  display: flex; gap: 10px; align-items: flex-start;
+}
+.oa-discuss-msg-avatar {
+  width: 30px; height: 30px; border-radius: 50%; flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 13px; font-weight: 700;
+}
+.oa-discuss-input-area {
+  display: flex; gap: 8px; padding: 10px 12px; border-top: 1px solid var(--border);
+  background: var(--surface); flex-shrink: 0;
+}
+.oa-discuss-input {
+  flex: 1; padding: 8px 12px; border-radius: 20px;
+  border: 1px solid var(--border); font-size: 13px; outline: none;
+  background: var(--surface-raised);
+}
+.oa-discuss-input:focus { border-color: var(--accent); }
+
 /* ── Odoo AI Chat ─────────────────────────────────────── */
 
 /* FAB Button */

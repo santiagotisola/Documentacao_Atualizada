@@ -10,6 +10,7 @@ import "./OdooAnalisador.css";
 
 const TABS = [
   { id: "mapa",   label: "🗺️ Mapa Completo"      },
+  { id: "discuss", label: "💬 Mensagens Odoo"     },
   { id: "org",    label: "🏢 Organograma"         },
   { id: "central", label: "🔀 Processo ↔ Diagrama" },
   { id: "diagrama", label: "📊 Diagrama Interativo" },
@@ -3775,10 +3776,338 @@ function OdooAIChat({ tabAtiva }) {
     </div>
   );
 }
+/* ══════════════════════════════════════════════════════════════
+   ODOO DISCUSS — Integração de mensagens, canais e notificações
+   ══════════════════════════════════════════════════════════════ */
+function TabDiscuss() {
+  const [subAba, setSubAba] = useState("chats");
+  const [canais, setCanais] = useState([]);
+  const [mensagens, setMensagens] = useState([]);
+  const [notificacoes, setNotificacoes] = useState([]);
+  const [canalSel, setCanalSel] = useState(null);
+  const [novaMensagem, setNovaMensagem] = useState("");
+  const [carregando, setCarregando] = useState(false);
+  const [sessaoAtiva, setSessaoAtiva] = useState(null);
+  const [enviando, setEnviando] = useState(false);
+  const msgEndRef = React.useRef(null);
+
+  // Verificar sessão e carregar dados
+  React.useEffect(() => {
+    (async () => {
+      setCarregando(true);
+      const ativo = await verificarSessaoOdoo();
+      setSessaoAtiva(ativo);
+      if (ativo) await carregarTudo();
+      setCarregando(false);
+    })();
+  }, []);
+
+  React.useEffect(() => {
+    msgEndRef.current?.scrollIntoView({behavior:"smooth"});
+  }, [mensagens]);
+
+  const carregarTudo = async () => {
+    await Promise.all([carregarCanais(), carregarNotificacoes()]);
+  };
+
+  const carregarCanais = async () => {
+    try {
+      const res = await odooRpc("discuss.channel", "search_read",
+        [[["channel_member_ids.partner_id.user_ids", "!=", false]]],
+        { fields: ["id","name","channel_type","message_unread_counter","last_interest_dt","description"], limit: 20 }
+      );
+      setCanais(res || []);
+      // Selecionar OdooBot automaticamente
+      const bot = res?.find(c => c.name?.toLowerCase().includes("odoobot") || c.channel_type === "chat");
+      if (bot && !canalSel) { setCanalSel(bot); await carregarMensagens(bot.id); }
+    } catch (e) { console.warn("Erro ao carregar canais:", e.message); }
+  };
+
+  const carregarMensagens = async (canalId) => {
+    try {
+      const res = await odooRpc("mail.message", "search_read",
+        [[["res_id","=",canalId], ["model","=","discuss.channel"]]],
+        { fields: ["id","body","author_id","date","message_type"], limit: 30, order: "id asc" }
+      );
+      setMensagens(res || []);
+    } catch (e) { console.warn("Erro ao carregar mensagens:", e.message); }
+  };
+
+  const carregarNotificacoes = async () => {
+    try {
+      const res = await odooRpc("mail.notification", "search_read",
+        [[["notification_type","=","inbox"], ["is_read","=",false]]],
+        { fields: ["id","mail_message_id","notification_status","res_partner_id"], limit: 20 }
+      );
+      setNotificacoes(res || []);
+    } catch (e) { console.warn("Erro notificações:", e.message); }
+  };
+
+  const selecionarCanal = async (canal) => {
+    setCanalSel(canal);
+    setMensagens([]);
+    await carregarMensagens(canal.id);
+  };
+
+  const enviarMensagem = async () => {
+    if (!novaMensagem.trim() || !canalSel || enviando) return;
+    setEnviando(true);
+    const texto = novaMensagem.trim();
+    setNovaMensagem("");
+    try {
+      await odooRpc("discuss.channel", "message_post",
+        [canalSel.id],
+        { body: texto, message_type: "comment", subtype_xmlid: "mail.mt_comment" }
+      );
+      await carregarMensagens(canalSel.id);
+    } catch (e) {
+      console.warn("Erro ao enviar:", e.message);
+    } finally {
+      setEnviando(false);
+    }
+  };
+
+  const stripHtml = (html) => html?.replace(/<[^>]+>/g,"")?.replace(/&amp;/g,"&")?.replace(/&lt;/g,"<")?.replace(/&gt;/g,">")?.replace(/&nbsp;/g," ").trim() || "";
+
+  const formatarData = (d) => {
+    if (!d) return "";
+    const dt = new Date(d.replace(" ","T")+"Z");
+    const hoje = new Date();
+    if (dt.toDateString() === hoje.toDateString()) return dt.toLocaleTimeString("pt-BR",{hour:"2-digit",minute:"2-digit"});
+    return dt.toLocaleDateString("pt-BR",{day:"2-digit",month:"short"});
+  };
+
+  const tipoIcon = (tipo) => {
+    if (tipo?.includes("general") || tipo === "channel") return "#";
+    if (tipo === "chat") return "💬";
+    return "💬";
+  };
+
+  if (!sessaoAtiva && sessaoAtiva !== null) {
+    return (
+      <div className="oa-content">
+        <div className="oa-discuss-login">
+          <Bot size={48} color="#d97706"/>
+          <h3>Conecte ao Odoo para ver as mensagens</h3>
+          <p>Faça login no Odoo para carregar notificações, chats e canais diretamente aqui.</p>
+          <a href={`${ODOO_BASE}/odoo`} target="_blank" rel="noreferrer" className="oa-btn-download">
+            <ExternalLink size={14}/> Fazer login no Odoo
+          </a>
+          <button onClick={async () => { const a=await verificarSessaoOdoo(); setSessaoAtiva(a); if(a) { setCarregando(true); await carregarTudo(); setCarregando(false); }}}
+            style={{marginTop:8,padding:"8px 16px",borderRadius:8,border:"1px solid var(--border)",background:"var(--surface-raised)",cursor:"pointer",fontSize:13}}>
+            <RefreshCw size={13}/> Verificar conexão
+          </button>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="oa-content">
+      {/* Header */}
+      <div className="oa-discuss-header">
+        <div style={{display:"flex",alignItems:"center",gap:10}}>
+          <MessageCircle size={20} color="#fff"/>
+          <div>
+            <div style={{fontSize:15,fontWeight:800,color:"#fff"}}>Mensagens Odoo</div>
+            <div style={{fontSize:11,color:"rgba(255,255,255,0.8)"}}>
+              {sessaoAtiva === null ? "⏳ Carregando..." : sessaoAtiva ? `🟢 ${canais.length} canais · ${notificacoes.length} notificações` : "🔴 Sem sessão"}
+            </div>
+          </div>
+        </div>
+        <div style={{display:"flex",gap:8}}>
+          <button onClick={async () => { setCarregando(true); await carregarTudo(); setCarregando(false); }}
+            style={{background:"rgba(255,255,255,0.15)",border:"none",borderRadius:6,color:"#fff",cursor:"pointer",padding:"6px 10px",fontSize:12,display:"flex",alignItems:"center",gap:4}}>
+            <RefreshCw size={12}/> Atualizar
+          </button>
+          <a href={`${ODOO_BASE}/odoo/discuss`} target="_blank" rel="noreferrer"
+            style={{background:"rgba(255,255,255,0.15)",border:"none",borderRadius:6,color:"#fff",cursor:"pointer",padding:"6px 10px",fontSize:12,textDecoration:"none",display:"flex",alignItems:"center",gap:4}}>
+            <ExternalLink size={12}/> Abrir no Odoo
+          </a>
+        </div>
+      </div>
+
+      {/* Abas: Notificações | Chats | Canais */}
+      <div className="oa-discuss-tabs">
+        {[
+          {id:"notif",  label:"Notificações", count:notificacoes.length},
+          {id:"chats",  label:"Chats", count:canais.filter(c=>c.channel_type==="chat").length},
+          {id:"canais", label:"Canais", count:canais.filter(c=>c.channel_type!=="chat").length},
+          {id:"ia",     label:"IA", count:0},
+        ].map(t => (
+          <button key={t.id} className={`oa-discuss-tab ${subAba===t.id?"oa-discuss-tab--ativo":""}`}
+            onClick={()=>setSubAba(t.id)}>
+            {t.label}
+            {t.count > 0 && <span className="oa-discuss-badge">{t.count}</span>}
+          </button>
+        ))}
+        <a href="/odoo" className="oa-discuss-new-msg" target="_blank" rel="noreferrer">
+          New Message
+        </a>
+      </div>
+
+      {carregando && (
+        <div style={{padding:"24px",textAlign:"center",color:"var(--text-muted)"}}>
+          <div className="oa-chat-typing" style={{justifyContent:"center"}}><span/><span/><span/></div>
+          <div style={{fontSize:12,marginTop:8}}>Carregando dados do Odoo...</div>
+        </div>
+      )}
+
+      {!carregando && (
+        <div className="oa-discuss-layout">
+          {/* LISTA — esquerda */}
+          <div className="oa-discuss-lista">
+
+            {/* NOTIFICAÇÕES */}
+            {subAba === "notif" && (
+              <div>
+                {notificacoes.length === 0 ? (
+                  <div className="oa-discuss-vazio">✅ Nenhuma notificação não lida</div>
+                ) : (
+                  notificacoes.map(n => (
+                    <div key={n.id} className="oa-discuss-item">
+                      <div className="oa-discuss-item-avatar" style={{background:"#fef3c7",color:"#d97706"}}>🔔</div>
+                      <div style={{flex:1,minWidth:0}}>
+                        <div style={{fontSize:12,color:"var(--text)",lineHeight:1.4}}>
+                          {stripHtml(n.mail_message_id?.[1] || "Notificação")}
+                        </div>
+                        <div style={{fontSize:10,color:"var(--text-muted)",marginTop:2}}>{n.notification_status}</div>
+                      </div>
+                    </div>
+                  ))
+                )}
+              </div>
+            )}
+
+            {/* CHATS */}
+            {subAba === "chats" && (() => {
+              const chats = canais.filter(c => c.channel_type === "chat");
+              return chats.length === 0 ? (
+                <div className="oa-discuss-vazio">Nenhum chat direto</div>
+              ) : chats.map(c => (
+                <div key={c.id}
+                  className={`oa-discuss-item ${canalSel?.id===c.id?"oa-discuss-item--ativo":""}`}
+                  onClick={() => selecionarCanal(c)}>
+                  <div className="oa-discuss-item-avatar" style={{background:"#d1fae5",color:"#059669"}}>
+                    {c.name?.charAt(0)?.toUpperCase() || "?"}
+                  </div>
+                  <div style={{flex:1,minWidth:0}}>
+                    <div style={{fontSize:13,fontWeight:600,color:"var(--text)",overflow:"hidden",textOverflow:"ellipsis",whiteSpace:"nowrap"}}>{c.name}</div>
+                    <div style={{fontSize:11,color:"var(--text-muted)",overflow:"hidden",textOverflow:"ellipsis",whiteSpace:"nowrap"}}>
+                      {c.description || "Chat direto"}
+                    </div>
+                  </div>
+                  {c.message_unread_counter > 0 && (
+                    <span className="oa-discuss-badge oa-discuss-badge-red">{c.message_unread_counter}</span>
+                  )}
+                </div>
+              ));
+            })()}
+
+            {/* CANAIS */}
+            {subAba === "canais" && (() => {
+              const chs = canais.filter(c => c.channel_type !== "chat");
+              return chs.length === 0 ? (
+                <div className="oa-discuss-vazio">Nenhum canal</div>
+              ) : chs.map(c => (
+                <div key={c.id}
+                  className={`oa-discuss-item ${canalSel?.id===c.id?"oa-discuss-item--ativo":""}`}
+                  onClick={() => selecionarCanal(c)}>
+                  <div className="oa-discuss-item-avatar" style={{background:"#ede9fe",color:"#7c3aed",fontSize:16,fontWeight:800}}>
+                    {tipoIcon(c.channel_type)}
+                  </div>
+                  <div style={{flex:1,minWidth:0}}>
+                    <div style={{fontSize:13,fontWeight:600,color:"var(--text)"}}>{c.name}</div>
+                    <div style={{fontSize:11,color:"var(--text-muted)",overflow:"hidden",textOverflow:"ellipsis",whiteSpace:"nowrap"}}>
+                      {c.description || `Canal ${c.channel_type}`}
+                    </div>
+                  </div>
+                  {c.message_unread_counter > 0 && (
+                    <span className="oa-discuss-badge oa-discuss-badge-red">{c.message_unread_counter}</span>
+                  )}
+                </div>
+              ));
+            })()}
+
+            {/* IA */}
+            {subAba === "ia" && (
+              <div className="oa-discuss-vazio" style={{flexDirection:"column",gap:8}}>
+                <Bot size={32} color="#d97706"/>
+                <div style={{fontSize:13,color:"var(--text)"}}>Use o <strong>OdooBot</strong> para perguntas sobre o sistema</div>
+                <button onClick={() => { setSubAba("chats"); const bot=canais.find(c=>c.name?.toLowerCase().includes("odoobot")); if(bot) selecionarCanal(bot); }}
+                  className="oa-btn-download" style={{padding:"7px 14px",fontSize:12}}>
+                  💬 Abrir OdooBot
+                </button>
+              </div>
+            )}
+          </div>
+
+          {/* CONVERSA — direita */}
+          {canalSel ? (
+            <div className="oa-discuss-conversa">
+              <div className="oa-discuss-conv-header">
+                <span style={{fontSize:15,fontWeight:700}}>{tipoIcon(canalSel.channel_type)} {canalSel.name}</span>
+                <a href={`${ODOO_BASE}/odoo/discuss/channel/${canalSel.id}`} target="_blank" rel="noreferrer"
+                  style={{fontSize:11,color:"var(--accent)",display:"flex",alignItems:"center",gap:4}}>
+                  <ExternalLink size={11}/> Abrir no Odoo
+                </a>
+              </div>
+              <div className="oa-discuss-msgs">
+                {mensagens.length === 0 && (
+                  <div className="oa-discuss-vazio">Nenhuma mensagem ainda.<br/><small>This is the start of your conversation</small></div>
+                )}
+                {mensagens.map(msg => {
+                  const corpo = stripHtml(msg.body);
+                  if (!corpo) return null;
+                  return (
+                    <div key={msg.id} className="oa-discuss-msg">
+                      <div className="oa-discuss-msg-avatar" style={{background:"#fef3c7",color:"#d97706"}}>
+                        {msg.author_id?.[1]?.charAt(0)?.toUpperCase() || "?"}
+                      </div>
+                      <div style={{flex:1}}>
+                        <div style={{display:"flex",alignItems:"center",gap:8,marginBottom:3}}>
+                          <span style={{fontSize:12,fontWeight:700,color:"var(--text)"}}>{msg.author_id?.[1] || "?"}</span>
+                          <span style={{fontSize:10,color:"var(--text-muted)"}}>{formatarData(msg.date)}</span>
+                        </div>
+                        <div style={{fontSize:13,color:"var(--text-secondary)",lineHeight:1.5}}>{corpo}</div>
+                      </div>
+                    </div>
+                  );
+                })}
+                <div ref={msgEndRef}/>
+              </div>
+              <div className="oa-discuss-input-area">
+                <input
+                  className="oa-discuss-input"
+                  placeholder={`Mensagem para ${canalSel.name}...`}
+                  value={novaMensagem}
+                  onChange={e => setNovaMensagem(e.target.value)}
+                  onKeyDown={e => e.key==="Enter" && !e.shiftKey && enviarMensagem()}
+                  disabled={enviando}
+                />
+                <button className="oa-chat-send" onClick={enviarMensagem}
+                  disabled={!novaMensagem.trim() || enviando}>
+                  <Send size={14}/>
+                </button>
+              </div>
+            </div>
+          ) : (
+            <div className="oa-discuss-conversa oa-discuss-vazio">
+              <MessageCircle size={40} color="var(--border-hover)"/>
+              <div style={{fontSize:14,color:"var(--text-muted)"}}>Selecione um chat ou canal para ver as mensagens</div>
+            </div>
+          )}
+        </div>
+      )}
+    </div>
+  );
+}
+
 export default function OdooAnalisador() {
   const [tab, setTab] = useState("fluxo");
   const tabContent = {
     mapa:      <TabMapa/>,
+    discuss:   <TabDiscuss/>,
     org:       <TabOrganograma/>,
     central:   <TabCentral setTab={setTab}/>,
     diagrama:  <TabDiagramaInterativo/>,
