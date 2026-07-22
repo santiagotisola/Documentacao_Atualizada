@@ -538,6 +538,37 @@
 }
 .oa-chat-fab:hover { transform: translateY(-2px); box-shadow: 0 6px 24px rgba(245,158,11,0.5); }
 .oa-chat-fab-label { white-space: nowrap; }
+.oa-chat-fab-dot {
+  width: 8px; height: 8px; border-radius: 50%;
+  background: #22c55e; border: 2px solid #fff;
+  position: absolute; top: 6px; right: 6px;
+  animation: pulse-dot 2s infinite;
+}
+@keyframes pulse-dot {
+  0%,100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.7; transform: scale(1.3); }
+}
+
+/* Banner de status */
+.oa-chat-banner {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 7px 14px; background: #fef3c7;
+  border-bottom: 1px solid #fde68a; font-size: 11px; color: #92400e;
+  gap: 8px; flex-wrap: wrap;
+}
+.oa-chat-banner a {
+  font-weight: 700; color: #d97706; text-decoration: none; white-space: nowrap;
+}
+.oa-chat-banner a:hover { text-decoration: underline; }
+
+/* Badges de fonte */
+.oa-chat-fonte {
+  font-size: 9px; font-weight: 700; padding: 1px 6px;
+  border-radius: 10px; margin-left: 6px; vertical-align: middle;
+}
+.oa-chat-fonte-odoo  { background: #fef3c7; color: #d97706; border: 1px solid #fde68a; }
+.oa-chat-fonte-axion { background: #dbeafe; color: #2563eb; border: 1px solid #bfdbfe; }
+.oa-chat-fonte-local { background: #f3f4f6; color: #6b7280; border: 1px solid #e5e7eb; }
 
 /* Panel */
 .oa-chat-panel {

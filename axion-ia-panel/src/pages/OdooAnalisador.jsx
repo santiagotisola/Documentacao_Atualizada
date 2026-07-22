@@ -3435,44 +3435,97 @@ function TabCentral({setTab}) {
    ODOO AI CHAT — Sidekick integrado ao OdooAnalisador
    ══════════════════════════════════════════════════════════════ */
 
-const ODOO_SYSTEM_CONTEXT = `Você é o Odoo AI, assistente integrado da Axion Tecnologia para o sistema Odoo ERP.
-Você tem conhecimento completo sobre:
+/* ══════════════════════════════════════════════════════════════
+   ODOO AI CHAT — Integração nativa com Odoo AI
+   ══════════════════════════════════════════════════════════════ */
 
-PROCESSOS DA AXION:
-1. ENTRADA DE MERCADORIA: Pedido de Compra → Recebimento → Serial 1 (insumo entra no estoque)
-2. SEPARAÇÃO: Almoxarifado separa componentes para produção, confere seriais
-3. PRODUÇÃO: BOM (Lista de Materiais) → Ordem de Produção → Chão de Fábrica → Serial 2 (produto final)
-4. COMBO/KIT: BOM tipo Kit → venda explode nas peças → entrega separada (sem fabricação)
-5. FINALIZAÇÃO/VENDA: Pedido de Venda → Entrega → Serial 3 (saída para cliente)
-6. LOCAÇÃO: Contrato Rental → Saída com serial → Uso → Retorno + inspeção → serial volta ao estoque
+const ODOO_BASE = "https://santiago-sola-neto.odoo.com";
 
-PRODUTOS IMPORTADOS NO ODOO:
-- 83 produtos cadastrados (câmeras, iluminadores, Mini PCs, roteadores, painéis solares, cabos, etc.)
-- 45 categorias (Mercadorias / INSUMOS / REDE E TELECOM, CFTV, ELETRICA, ENERGIA SOLAR, etc.)
-- 108 locais de inventário (B&B, BS, CAMPO com sublocais DER-SE, ECONOMIA-GO, IME-PI, etc.)
+// ── Chamada RPC nativa do Odoo (usa sessão do browser) ───────────
+const odooRpc = async (model, method, args = [], kwargs = {}) => {
+  const res = await fetch(`${ODOO_BASE}/web/dataset/call_kw/${model}/${method}`, {
+    method: "POST",
+    credentials: "include",   // usa cookies de sessão do Odoo
+    headers: {
+      "Content-Type": "application/json",
+      "X-Requested-With": "XMLHttpRequest",
+    },
+    body: JSON.stringify({
+      jsonrpc: "2.0", method: "call", id: Date.now(),
+      params: { model, method, args, kwargs }
+    }),
+  });
+  if (!res.ok) throw new Error(`HTTP ${res.status}`);
+  const data = await res.json();
+  if (data.error) throw new Error(data.error.data?.message || data.error.message);
+  return data.result;
+};
 
-NÚMEROS DE SÉRIE (SERIAL):
-- Serial 1: gerado no RECEBIMENTO do insumo
-- Serial 2: gerado ao CONCLUIR a Ordem de Produção (produto acabado)
-- Serial 3: registrado na ENTREGA ao cliente
-- Rastreabilidade: Inventário → Rastreabilidade → buscar pelo serial
+// ── Verificar se sessão Odoo está ativa ──────────────────────────
+const verificarSessaoOdoo = async () => {
+  try {
+    const res = await fetch(`${ODOO_BASE}/web/session/get_session_info`, {
+      method: "POST", credentials: "include",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ jsonrpc:"2.0", method:"call", id:1, params:{} })
+    });
+    const data = await res.json();
+    return data.result?.uid > 0;
+  } catch { return false; }
+};
 
-BOM DINÂMICA (materiais que mudam):
-- Método 1: Nova versão da BOM (mudança permanente)
-- Método 2: Substituição na OP (mudança pontual, só nessa produção)
-- Método 3: Componente alternativo (dois materiais aceitos sempre)
-- Método 4: Variantes de produto
+// ── Enviar mensagem para o Odoo AI Bot ──────────────────────────
+const enviarParaOdooAI = async (pergunta, contexto) => {
+  // 1. Buscar o canal do OdooBot (bot de IA do Odoo)
+  let canais = await odooRpc("discuss.channel", "search_read",
+    [[["name", "ilike", "OdooBot"]]],
+    { fields: ["id","name","channel_member_ids"], limit: 1 }
+  );
 
-DEPARTAMENTOS:
-- Comercial: vendas, locações, faturamento
-- Compras: POs, NFs, auditoria serial
-- Almoxarifado: receber serial 1, separar, entregar serial 3, retorno locação
-- PCP/Operador: criar BOM, Ordens de Produção, controle materiais
-- Produção: chão de fábrica, montar, serial 2, testes
-- Qualidade: checklist QC, inspeção retorno, aprovar produto
+  let canalId;
+  if (canais.length > 0) {
+    canalId = canais[0].id;
+  } else {
+    // Criar canal com o OdooBot se não existir
+    canalId = await odooRpc("discuss.channel", "channel_get_or_create",
+      [[], { name: "OdooBot" }], {}
+    );
+  }
 
-ODOO: santiago-sola-neto.odoo.com
-Responda de forma direta, prática e em português. Para cada resposta, indique a tela do Odoo onde a ação deve ser feita.`;
+  // 2. Enviar mensagem com contexto do OdooAnalisador
+  const msgComContexto = `[Contexto: Axion Tecnologia - OdooAnalisador - Aba: ${contexto}]\n\n${pergunta}`;
+  await odooRpc("discuss.channel", "message_post",
+    [canalId],
+    { body: msgComContexto, message_type: "comment", subtype_xmlid: "mail.mt_comment" }
+  );
+
+  // 3. Aguardar resposta do bot (polling por 10s)
+  const inicio = Date.now();
+  let ultimoId = 0;
+  while (Date.now() - inicio < 10000) {
+    await new Promise(r => setTimeout(r, 1500));
+    const mensagens = await odooRpc("mail.message", "search_read",
+      [[
+        ["res_id","=",canalId], ["model","=","discuss.channel"],
+        ["author_id.name","ilike","OdooBot"],
+        ["id",">",ultimoId]
+      ]],
+      { fields: ["id","body","author_id","date"], limit: 5, order: "id desc" }
+    );
+    if (mensagens.length > 0) {
+      const texto = mensagens[0].body
+        .replace(/<[^>]+>/g, "")   // remove HTML tags
+        .replace(/&amp;/g, "&")
+        .replace(/&lt;/g, "<")
+        .replace(/&gt;/g, ">")
+        .replace(/&nbsp;/g, " ")
+        .trim();
+      return { texto, fonte: "odoo-native" };
+    }
+    ultimoId = Math.max(ultimoId, ...mensagens.map(m => m.id));
+  }
+  throw new Error("Timeout — sem resposta do Odoo AI");
+};
 
 const SUGESTOES_RAPIDAS = [
   "Como gero o serial de um produto?",
@@ -3488,16 +3541,34 @@ const SUGESTOES_RAPIDAS = [
 function OdooAIChat({ tabAtiva }) {
   const [aberto, setAberto] = useState(false);
   const [minimizado, setMinimizado] = useState(false);
+  const [sessaoOdoo, setSessaoOdoo] = useState(null); // null=verificando, true=ativo, false=offline
   const [msgs, setMsgs] = useState([
     {
       role: "assistant",
-      text: "Olá! Sou o **Odoo AI** da Axion Tecnologia 🤖\n\nPosso ajudar com dúvidas sobre processos, seriais, produção, locação, BOM e qualquer tela do Odoo. Como posso ajudar?",
+      text: "Olá! Sou o **Odoo AI** integrado.\n\nVerificando conexão com o Odoo...",
       time: new Date().toLocaleTimeString("pt-BR", {hour:"2-digit",minute:"2-digit"})
     }
   ]);
   const [input, setInput] = useState("");
   const [carregando, setCarregando] = useState(false);
   const msgEndRef = React.useRef(null);
+
+  // Verificar sessão Odoo ao abrir
+  React.useEffect(() => {
+    if (!aberto || sessaoOdoo !== null) return;
+    verificarSessaoOdoo().then(ativo => {
+      setSessaoOdoo(ativo);
+      const txt = ativo
+        ? `✅ **Conectado ao Odoo AI nativo!**\n\nEstou usando a **inteligência do próprio Odoo** da instância \`santiago-sola-neto.odoo.com\`.\n\nFaça sua pergunta sobre qualquer processo, produto, serial ou operação.`
+        : `⚠️ **Sessão Odoo não detectada.**\n\nPara usar o Odoo AI nativo:\n1. Acesse [Odoo](${ODOO_BASE}/odoo) e faça login\n2. Volte aqui e reabra o chat\n\nPor enquanto, responderei com base nos dados do Axion Analisador.`;
+      setMsgs([{
+        role: "assistant",
+        text: txt,
+        time: new Date().toLocaleTimeString("pt-BR", {hour:"2-digit",minute:"2-digit"}),
+        fonte: ativo ? "odoo-native" : "local"
+      }]);
+    });
+  }, [aberto]);
 
   React.useEffect(() => {
     msgEndRef.current?.scrollIntoView({behavior:"smooth"});
@@ -3507,105 +3578,153 @@ function OdooAIChat({ tabAtiva }) {
     const pergunta = texto || input.trim();
     if (!pergunta || carregando) return;
     setInput("");
-
-    const novaMsg = {
-      role: "user",
-      text: pergunta,
-      time: new Date().toLocaleTimeString("pt-BR", {hour:"2-digit",minute:"2-digit"})
-    };
-    setMsgs(prev => [...prev, novaMsg]);
+    const hora = new Date().toLocaleTimeString("pt-BR", {hour:"2-digit",minute:"2-digit"});
+    setMsgs(prev => [...prev, {role:"user", text:pergunta, time:hora}]);
     setCarregando(true);
 
     try {
-      const contextual = `[Usuário está na aba: ${tabAtiva}]\n\n${pergunta}`;
-      const res = await api.post("/chat", {
-        mensagem: contextual,
-        sistema: ODOO_SYSTEM_CONTEXT,
-        historico: msgs.slice(-6).map(m => ({role:m.role, content:m.text}))
-      });
-      const resposta = res.data?.resposta || res.data?.message || res.data?.content || "Resposta não disponível.";
+      // TENTATIVA 1: Odoo AI nativo
+      if (sessaoOdoo) {
+        try {
+          const { texto: resposta } = await enviarParaOdooAI(pergunta, tabAtiva);
+          setMsgs(prev => [...prev, {
+            role:"assistant", text:resposta,
+            time:new Date().toLocaleTimeString("pt-BR",{hour:"2-digit",minute:"2-digit"}),
+            fonte:"odoo-native"
+          }]);
+          return;
+        } catch (odooErr) {
+          console.warn("Odoo AI falhou:", odooErr.message);
+        }
+      }
+
+      // TENTATIVA 2: Axion API local
+      try {
+        const contextual = `[Aba: ${tabAtiva}]\n${pergunta}`;
+        const res = await api.post("/chat", {
+          mensagem: contextual,
+          sistema: `Você é assistente especializado em Odoo ERP para a Axion Tecnologia. Processos: Compra→Recebimento(Serial1)→BOM→Produção(Serial2)→Venda/Entrega(Serial3). Locação: serial sai e volta. Responda em português indicando a tela do Odoo.`,
+          historico: msgs.slice(-4).map(m => ({role:m.role, content:m.text}))
+        });
+        const resposta = res.data?.resposta || res.data?.message || res.data?.content;
+        if (resposta) {
+          setMsgs(prev => [...prev, {
+            role:"assistant", text:resposta,
+            time:new Date().toLocaleTimeString("pt-BR",{hour:"2-digit",minute:"2-digit"}),
+            fonte:"axion-api"
+          }]);
+          return;
+        }
+      } catch {}
+
+      // TENTATIVA 3: Resposta local offline
       setMsgs(prev => [...prev, {
-        role: "assistant",
-        text: resposta,
-        time: new Date().toLocaleTimeString("pt-BR", {hour:"2-digit",minute:"2-digit"})
-      }]);
-    } catch (err) {
-      // Fallback com respostas baseadas em contexto local
-      const respostaLocal = responderLocalmente(pergunta);
-      setMsgs(prev => [...prev, {
-        role: "assistant",
-        text: respostaLocal,
-        time: new Date().toLocaleTimeString("pt-BR", {hour:"2-digit",minute:"2-digit"}),
-        local: true
+        role:"assistant", text:responderLocalmente(pergunta),
+        time:new Date().toLocaleTimeString("pt-BR",{hour:"2-digit",minute:"2-digit"}),
+        fonte:"local"
       }]);
     } finally {
       setCarregando(false);
     }
   };
 
-  const responderLocalmente = (pergunta) => {
-    const p = pergunta.toLowerCase();
-    if ((p.includes("serial") && (p.includes("gerar") || p.includes("gero") || p.includes("criar") || p.includes("registrar"))) || p.includes("como") && p.includes("serial")) return "**Como gerar serial:**\n\n**Serial 1 (insumo):** Inventário → Recebimentos → Validar → informe o serial de cada unidade\n\n**Serial 2 (produto final):** Fabricação → OP → Marcar como Feito → informe o serial do produto acabado\n\n**Serial 3 (entrega):** Inventário → Entregas → selecione o serial específico → Validar";
-    if (p.includes("kit") || p.includes("combo")) return "**Kit vs Produção:**\n\n🎁 **Kit (BOM tipo Kit):** Vende um conjunto que é entregue em peças separadas. Sem fabricação, sem serial de produto final.\n\n🏭 **Produção (BOM tipo Fabricar):** Monta um produto físico com serial próprio. Passa pelo Chão de Fábrica.\n\n**Regra:** Cliente recebe peças separadas → Kit. Equipamento montado e testado → Produção.";
-    if (p.includes("chão") || p.includes("fabrica")) return "**Chão de Fábrica no Odoo:**\n\nAcesse em **Fabricação → Chão de Fábrica**\n\n- Interface tablet-friendly para operadores\n- Mostra Ordens de Trabalho pendentes\n- Registra seriais dos componentes consumidos\n- Executa checklist de qualidade (QC)\n- Ao concluir, gera o **Serial 2** do produto final";
-    if (p.includes("locação") || p.includes("locacao") || p.includes("rental")) return "**Locação no Odoo:**\n\nAcesse em **Vendas → Locações** (módulo Rental)\n\n1. Criar contrato com cliente, período e valor\n2. Saída: serial registrado na entrega\n3. Retorno: serial volta ao estoque\n4. Inspecionar estado e faturar\n\n**Diferença da venda:** Na locação o serial VOLTA ao estoque!";
-    if (p.includes("danificad") || p.includes("devolv")) return "**Mercadoria danificada no recebimento:**\n\n1. **NÃO valide** o recebimento completo\n2. Reduza a quantidade recebida (ex: 4 de 5)\n3. Valide apenas os itens bons com seus seriais\n4. Abra devolução: Compras → Pedido → Devolver\n5. Aguarde reposição do fornecedor";
-    if (p.includes("auditar") || p.includes("rastreab")) return "**Auditoria pelo Serial:**\n\nInventário → Rastreabilidade → busque o serial\n\nVerá o histórico completo:\n- Quando entrou (recebimento)\n- Qual fornecedor/NF\n- Se foi consumido em produção\n- Qual OP usou esse componente\n- Quando saiu e para qual cliente";
-    if (p.includes("bom") || p.includes("lista de materiais")) return "**BOM — Lista de Materiais:**\n\nFabricação → Listas de Materiais\n\n**Tipos:**\n- **Fabricar:** cria OP, produto montado, serial 2\n- **Kit:** não cria OP, entrega peças separadas\n- **Subcontratação:** montagem por terceiro\n\n**Mudar componente:** Altere a BOM criando nova versão, ou substitua diretamente na OP específica.";
-    return `Ótima pergunta sobre **"${pergunta}"**!\n\nPosso ajudar com: seriais, produção, BOM, Kit, locação, chão de fábrica, auditoria de estoque e processos do Odoo.\n\nTente perguntar algo mais específico ou verifique a aba **📖 Guia Operador** para instruções detalhadas passo a passo.`;
+  const responderLocalmente = (p) => {
+    const t = p.toLowerCase();
+    if (t.includes("serial") || t.includes("gero") || t.includes("gerar"))
+      return "**Seriais no Odoo:**\n\n🏷️ **Serial 1** → Inventário → Recebimentos → Validar → informe o serial de cada insumo\n\n🏷️ **Serial 2** → Fabricação → OP → Marcar como Feito → informe o serial do produto acabado\n\n🏷️ **Serial 3** → Inventário → Entregas → selecione o serial → Validar\n\n**Auditoria:** Inventário → Rastreabilidade → busque pelo serial";
+    if (t.includes("kit") || t.includes("combo"))
+      return "**Kit vs Produção:**\n\n🎁 **Kit (BOM tipo Kit):** Entrega peças separadas ao cliente. Sem fabricação, sem serial de produto final.\n\n🏭 **Produção (BOM Fabricar):** Monta equipamento físico com serial próprio + Chão de Fábrica.\n\n**Regra:** Cliente recebe peças? → Kit. Equipamento montado e testado? → Produção.";
+    if (t.includes("locaç") || t.includes("locac") || t.includes("rental") || t.includes("alugar"))
+      return "**Locação no Odoo:**\n\nVendas → Locações → Novo contrato\n\n**Ciclo serial:**\n1. Saída: serial registrado e vinculado ao contrato\n2. Uso pelo cliente durante o período\n3. Retorno: serial volta ao estoque (diferente da venda!)\n4. Inspecionar + faturar\n\n💡 **Diferença chave:** Na locação o serial RETORNA. Na venda, sai definitivamente.";
+    if (t.includes("danificad") || t.includes("devolv"))
+      return "**Mercadoria danificada:**\n\n❌ NÃO valide o recebimento\n1. Reduza a quantidade (valide só os bons com seus seriais)\n2. Compras → Pedido → Devolver (para o item danificado)\n3. Aguarde o fornecedor enviar reposição\n4. Faça novo recebimento com o serial da peça boa";
+    if (t.includes("chão") || t.includes("shop floor") || t.includes("fabrica"))
+      return "**Chão de Fábrica:**\n\nFabricação → Chão de Fábrica\n\n- Interface tablet para operadores físicos\n- Mostra Ordens de Trabalho pendentes por Centro\n- Registra seriais dos componentes consumidos\n- Executa checklist de qualidade (QC)\n- Ao concluir → gera **Serial 2** do produto final\n\n**Centros:** MONTAGEM → TESTES → EMBALAGEM";
+    if (t.includes("bom") || t.includes("lista de materiais"))
+      return "**BOM (Lista de Materiais):**\n\nFabricação → Listas de Materiais\n\n**Tipos:**\n• **Fabricar:** cria OP, produto montado, Serial 2\n• **Kit:** sem OP, entrega peças separadas\n• **Subcontratação:** montagem por terceiro\n\n**Mudar componente:** crie nova versão da BOM (permanente) OU substitua diretamente na OP (pontual)";
+    if (t.includes("auditar") || t.includes("rastreab"))
+      return "**Auditoria pelo Serial:**\n\nInventário → Rastreabilidade → busque o serial\n\nVerá:\n- Quando e onde entrou (Recebimento + fornecedor)\n- Se foi consumido em alguma OP\n- Qual produto final foi montado com ele\n- Quando e para qual cliente saiu\n\n**Rastreabilidade reversa:** cliente → serial → componentes usados";
+    return `**Odoo AI** — Sessão: ${sessaoOdoo ? "🟢 Conectada" : "🔴 Offline"}\n\nNão encontrei resposta específica para: **"${p}"**\n\nTente:\n• Verificar a aba **📖 Guia Operador** para instruções passo a passo\n• Abrir o [Odoo AI nativo](${ODOO_BASE}/odoo) para perguntas mais complexas\n• Fazer login no Odoo para ativar a integração completa`;
   };
 
-  // Renderiza texto com markdown simples
   const renderTexto = (text) => {
-    const partes = text.split(/(\*\*.*?\*\*)/g);
-    return partes.map((p, i) =>
+    return text.split(/(\*\*[^*]+\*\*)/g).map((p, i) =>
       p.startsWith("**") && p.endsWith("**")
         ? <strong key={i}>{p.slice(2,-2)}</strong>
         : p.split("\n").map((linha, j) => (
             <React.Fragment key={`${i}-${j}`}>
               {j > 0 && <br/>}
-              {linha}
+              {linha.includes("[Odoo](") ? (
+                <a href={ODOO_BASE+"/odoo"} target="_blank" rel="noreferrer"
+                   style={{color:"#d97706",fontWeight:600}}>Odoo</a>
+              ) : linha}
             </React.Fragment>
           ))
     );
+  };
+
+  const fonteBadge = (fonte) => {
+    if (fonte === "odoo-native") return <span className="oa-chat-fonte oa-chat-fonte-odoo">⚡ Odoo AI</span>;
+    if (fonte === "axion-api")  return <span className="oa-chat-fonte oa-chat-fonte-axion">🤖 Axion AI</span>;
+    if (fonte === "local")      return <span className="oa-chat-fonte oa-chat-fonte-local">💾 Offline</span>;
+    return null;
   };
 
   if (!aberto) return (
     <button className="oa-chat-fab" onClick={() => setAberto(true)} title="Odoo AI — Assistente">
       <Bot size={22}/>
       <span className="oa-chat-fab-label">Odoo AI</span>
+      {sessaoOdoo === true && <span className="oa-chat-fab-dot"/>}
     </button>
   );
 
   return (
     <div className={`oa-chat-panel ${minimizado ? "oa-chat-panel--mini" : ""}`}>
-      {/* Header */}
       <div className="oa-chat-header">
         <div className="oa-chat-header-left">
-          <div className="oa-chat-avatar">
-            <Bot size={16}/>
-          </div>
+          <div className="oa-chat-avatar"><Bot size={16}/></div>
           <div>
             <div className="oa-chat-titulo">Odoo AI</div>
-            <div className="oa-chat-sub">Your Odoo sidekick for most day-to-day tasks.</div>
+            <div className="oa-chat-sub">
+              {sessaoOdoo === null ? "⏳ Verificando..." :
+               sessaoOdoo ? "🟢 Conectado ao Odoo nativo" :
+               "🔴 Login no Odoo necessário"}
+            </div>
           </div>
         </div>
         <div className="oa-chat-header-btns">
-          <button onClick={() => setMinimizado(!minimizado)} title={minimizado?"Expandir":"Minimizar"}>
+          <button onClick={async () => {
+            setSessaoOdoo(null);
+            const ativo = await verificarSessaoOdoo();
+            setSessaoOdoo(ativo);
+          }} title="Reconectar ao Odoo"><RefreshCw size={14}/></button>
+          <button onClick={() => setMinimizado(!minimizado)} title="Minimizar">
             {minimizado ? <Maximize2 size={14}/> : <Minimize2 size={14}/>}
           </button>
-          <button onClick={() => setMsgs([{
-            role:"assistant",
-            text:"Chat reiniciado. Como posso ajudar?",
-            time: new Date().toLocaleTimeString("pt-BR",{hour:"2-digit",minute:"2-digit"})
-          }])} title="Limpar conversa"><RefreshCw size={14}/></button>
-          <button onClick={() => setAberto(false)} title="Fechar"><X size={14}/></button>
+          <button onClick={() => {
+            setMsgs([{
+              role:"assistant",
+              text:"Chat reiniciado. Como posso ajudar?",
+              time:new Date().toLocaleTimeString("pt-BR",{hour:"2-digit",minute:"2-digit"})
+            }]);
+          }} title="Limpar"><X size={12}/></button>
+          <button onClick={() => setAberto(false)} title="Fechar"><Minimize2 size={14}/></button>
         </div>
       </div>
 
       {!minimizado && (
         <>
-          {/* Mensagens */}
+          {/* Status banner */}
+          {sessaoOdoo === false && (
+            <div className="oa-chat-banner">
+              <span>Para usar o Odoo AI nativo:</span>
+              <a href={`${ODOO_BASE}/odoo`} target="_blank" rel="noreferrer"
+                 onClick={() => setTimeout(async () => { setSessaoOdoo(await verificarSessaoOdoo()); }, 3000)}>
+                Fazer login no Odoo ↗
+              </a>
+            </div>
+          )}
+
           <div className="oa-chat-msgs">
             {msgs.map((msg, i) => (
               <div key={i} className={`oa-chat-msg oa-chat-msg-${msg.role}`}>
@@ -3615,8 +3734,7 @@ function OdooAIChat({ tabAtiva }) {
                 <div className="oa-chat-msg-bubble">
                   <div className="oa-chat-msg-text">{renderTexto(msg.text)}</div>
                   <div className="oa-chat-msg-time">
-                    {msg.time}
-                    {msg.local && <span style={{marginLeft:6,opacity:0.6,fontSize:9}}>• offline</span>}
+                    {msg.time} {fonteBadge(msg.fonte)}
                   </div>
                 </div>
               </div>
@@ -3625,25 +3743,19 @@ function OdooAIChat({ tabAtiva }) {
               <div className="oa-chat-msg oa-chat-msg-assistant">
                 <div className="oa-chat-msg-avatar"><Bot size={13}/></div>
                 <div className="oa-chat-msg-bubble">
-                  <div className="oa-chat-typing">
-                    <span/><span/><span/>
-                  </div>
+                  <div className="oa-chat-typing"><span/><span/><span/></div>
                 </div>
               </div>
             )}
             <div ref={msgEndRef}/>
           </div>
 
-          {/* Sugestões rápidas */}
           <div className="oa-chat-sugestoes">
             {SUGESTOES_RAPIDAS.slice(0,4).map(s => (
-              <button key={s} className="oa-chat-sug-btn" onClick={() => enviarMensagem(s)}>
-                {s}
-              </button>
+              <button key={s} className="oa-chat-sug-btn" onClick={() => enviarMensagem(s)}>{s}</button>
             ))}
           </div>
 
-          {/* Input */}
           <div className="oa-chat-input-area">
             <input
               className="oa-chat-input"
@@ -3653,11 +3765,8 @@ function OdooAIChat({ tabAtiva }) {
               onKeyDown={e => e.key === "Enter" && !e.shiftKey && enviarMensagem()}
               disabled={carregando}
             />
-            <button
-              className="oa-chat-send"
-              onClick={() => enviarMensagem()}
-              disabled={!input.trim() || carregando}
-            >
+            <button className="oa-chat-send" onClick={() => enviarMensagem()}
+              disabled={!input.trim() || carregando}>
               <Send size={14}/>
             </button>
           </div>
@@ -3666,7 +3775,6 @@ function OdooAIChat({ tabAtiva }) {
     </div>
   );
 }
-
 export default function OdooAnalisador() {
   const [tab, setTab] = useState("fluxo");
   const tabContent = {
