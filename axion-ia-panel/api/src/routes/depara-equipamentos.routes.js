@@ -4,17 +4,14 @@
  */
 
 import express from "express";
-import { compararEquipamentos, compararMultiContratos, buscarAxHubDireto } from "../depara-equipamentos-controller.js";
+import { compararEquipamentos, compararMultiContratos, buscarAxHubDireto, compararComListaHub } from "../depara-equipamentos-controller.js";
 
 const router = express.Router();
 
-// POST /api/depara-equipamentos/comparar
-router.post("/depara-equipamentos/comparar", compararEquipamentos);
-
-// POST /api/depara-equipamentos/multi
-router.post("/depara-equipamentos/multi", compararMultiContratos);
-
-// POST /api/depara-equipamentos/axhub-direto — busca dados AxHub com cookie de sessão (sem Playwright)
-router.post("/depara-equipamentos/axhub-direto", buscarAxHubDireto);
+router.post("/depara-equipamentos/comparar",     compararEquipamentos);
+router.post("/depara-equipamentos/multi",         compararMultiContratos);
+router.post("/depara-equipamentos/axhub-direto",  buscarAxHubDireto);
+// Aceita lista pré-buscada do AxHub + busca AxCross automaticamente
+router.post("/depara-equipamentos/com-lista-hub", compararComListaHub);
 
 export default router;

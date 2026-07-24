@@ -390,19 +390,61 @@ export default function DeparaEquipamentos({ siteAtivo = null, sitesAtivos = [] 
     setResultados([]);
     setErroMsg('');
     try {
-      const contratos = selecionados.map(s => ({
-        nome: s.nome,
-        axhubUrl:    s.hub.url,   axhubLogin:   s.hub.login,   axhubSenha:   s.hub.senha,
-        axcrossUrl:  s.cross.url, axcrossLogin: s.cross.login, axcrossSenha: s.cross.senha,
-        ...(cookies[s.nome] ? { axhubCookie: cookies[s.nome] } : {}),
-      }));
-      const res  = await fetch(`${API}/multi`, { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({ contratos }) });
-      const text = await res.text();
-      if (!text) throw new Error(`API retornou resposta vazia (HTTP ${res.status}).`);
-      let data;
-      try { data = JSON.parse(text); } catch { throw new Error(`Resposta inválida: ${text.substring(0,100)}`); }
-      if (!res.ok) throw new Error(data?.erro || `Erro HTTP ${res.status}`);
-      setResultados(data.resultados || []);
+      const resultados = [];
+      for (const s of selecionados) {
+        // Tenta buscar dados do AxHub da sessão atual do browser (evita Turnstile)
+        let axhubEquipamentos = null;
+        try {
+          const hubResp = await fetch(`${s.hub.url}/operacao/datahandler`, {
+            credentials: 'include',
+            headers: { 'X-Requested-With': 'XMLHttpRequest' },
+            mode: 'cors',
+          });
+          if (hubResp.ok) {
+            const hubData = await hubResp.json();
+            axhubEquipamentos = (hubData.Data || []).map(e => ({
+              codigo:    e.Equipamento?.Descricao || '',
+              grupo:     e.GrupoEquipamento || '',
+              fabricante: e.FabricanteNome || '',
+            })).filter(e => e.codigo);
+          }
+        } catch { /* CORS ou não autenticado — fallback para Playwright */ }
+
+        let endpoint, body;
+        if (axhubEquipamentos && axhubEquipamentos.length > 0) {
+          // Usa lista pré-buscada (sem Playwright para AxHub)
+          endpoint = `${API}/com-lista-hub`;
+          body = {
+            nome: s.nome,
+            axhubUrl: s.hub.url,
+            axhubEquipamentos,
+            axcrossUrl:   s.cross.url, axcrossLogin: s.cross.login, axcrossSenha: s.cross.senha,
+          };
+        } else {
+          // Fallback: Playwright + cookie se disponível
+          endpoint = `${API}/multi`;
+          body = {
+            contratos: [{
+              nome: s.nome,
+              axhubUrl: s.hub.url, axhubLogin: s.hub.login, axhubSenha: s.hub.senha,
+              axcrossUrl: s.cross.url, axcrossLogin: s.cross.login, axcrossSenha: s.cross.senha,
+              ...(cookies[s.nome] ? { axhubCookie: cookies[s.nome] } : {}),
+            }],
+          };
+        }
+
+        const res  = await fetch(endpoint, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) });
+        const text = await res.text();
+        if (!text) throw new Error(`API retornou resposta vazia (HTTP ${res.status}).`);
+        let data;
+        try { data = JSON.parse(text); } catch { throw new Error(`Resposta inválida: ${text.substring(0, 100)}`); }
+        if (!res.ok) throw new Error(data?.erro || `Erro HTTP ${res.status}`);
+
+        // Normaliza resultado (multi retorna { resultados: [...] }, com-lista-hub retorna direto)
+        const resultado = endpoint.includes('/multi') ? (data.resultados?.[0] || data) : data;
+        resultados.push(resultado);
+      }
+      setResultados(resultados);
       setEtapa('concluido');
     } catch (err) {
       setErroMsg(err.message);

@@ -14,6 +14,9 @@
  */
 
 import { chromium } from "playwright";
+import path from "path";
+import os from "os";
+import { existsSync } from "fs";
 
 function log(msg) { console.log(`[DeparaEquip] ${msg}`); }
 function tratar(err, res, msg = "Erro no depara") {
@@ -21,33 +24,124 @@ function tratar(err, res, msg = "Erro no depara") {
   return res.status(500).json({ erro: msg, detalhe: err.message });
 }
 
+// ─── Perfil Chrome real do usuário ────────────────────────────────────────────
+function getChromePerfilDir() {
+  if (process.platform === "win32") {
+    // Usa LOCALAPPDATA se disponível (mais confiável no Windows)
+    const localApp = process.env.LOCALAPPDATA;
+    if (localApp) return path.join(localApp, "Google", "Chrome", "User Data");
+    const user = os.userInfo().username;
+    return `C:\\Users\\${user}\\AppData\\Local\\Google\\Chrome\\User Data`;
+  }
+  if (process.platform === "darwin") {
+    return path.join(os.homedir(), "Library", "Application Support", "Google", "Chrome");
+  }
+  return path.join(os.homedir(), ".config", "google-chrome");
+}
+
+// ─── Tenta buscar dados do AxHub usando o perfil Chrome real (com cookies) ────
+async function buscarAxHubComPerfilChrome(baseUrl) {
+  const perfilDir = getChromePerfilDir();
+  if (!existsSync(perfilDir)) {
+    log("Perfil Chrome não encontrado");
+    return null;
+  }
+
+  log(`Tentando perfil Chrome: ${perfilDir}`);
+  let ctx;
+  const launchOpts = {
+    headless: true,
+    channel: "chrome",
+    args: ["--no-sandbox", "--disable-setuid-sandbox", "--disable-blink-features=AutomationControlled"],
+    ignoreDefaultArgs: ["--enable-automation"],
+    ignoreHTTPSErrors: true,
+  };
+  try {
+    ctx = await chromium.launchPersistentContext(perfilDir, launchOpts);
+  } catch (e1) {
+    // Chrome pode estar aberto — usa tmpdir sem o SingletonLock
+    log(`Perfil bloqueado (${e1.message.substring(0, 60)}) — copiando perfil`);
+    try {
+      const { mkdtempSync, cpSync, rmSync } = await import("fs");
+      const tmpBase = path.join(os.tmpdir(), "axhub-profile-");
+      const tmpDir  = mkdtempSync(tmpBase);
+      cpSync(perfilDir, tmpDir, { recursive: true, filter: (s) => !s.includes("SingletonLock") && !s.includes("lockfile") });
+      ctx = await chromium.launchPersistentContext(tmpDir, { ...launchOpts, channel: undefined });
+    } catch (e2) {
+      log(`Cópia também falhou: ${e2.message}`);
+      return null;
+    }
+  }
+
+  try {
+    const page = await ctx.newPage();
+    page.setDefaultTimeout(20_000);
+
+    // Acessa /operacao — se já tem sessão, carrega direto
+    await page.goto(baseUrl.replace(/\/$/, "") + "/operacao", { waitUntil: "domcontentloaded", timeout: 20_000 });
+    await page.waitForTimeout(2_000);
+
+    const urlAtual = page.url();
+    if (urlAtual.includes("login") || urlAtual.includes("nao-autorizado")) {
+      log("Perfil Chrome: sessão expirada, não autenticado");
+      await ctx.close();
+      return null;
+    }
+
+    log(`Perfil Chrome: autenticado! URL: ${urlAtual}`);
+
+    // Busca via datahandler JSON
+    const resultado = await page.evaluate(async (base) => {
+      try {
+        const resp = await fetch(`${base}/operacao/datahandler`, {
+          credentials: "include",
+          headers: { "X-Requested-With": "XMLHttpRequest" },
+        });
+        if (!resp.ok) return { erro: `HTTP ${resp.status}` };
+        const data = await resp.json();
+        return { ok: true, data };
+      } catch (e) {
+        return { erro: e.message };
+      }
+    }, baseUrl.replace(/\/$/, ""));
+
+    await ctx.close();
+
+    if (!resultado.ok) {
+      log(`Perfil Chrome: datahandler erro: ${resultado.erro}`);
+      return null;
+    }
+
+    const raw = resultado.data?.Data || [];
+    const equips = raw.map(e => ({
+      codigo:      e.Equipamento?.Descricao || "",
+      grupo:       e.GrupoEquipamento || "",
+      fabricante:  e.FabricanteNome || "",
+      homologacao: e.Homologacao ? "Homologado" : "",
+      sistema:     "AxHub",
+    })).filter(e => e.codigo);
+
+    log(`Perfil Chrome: ${equips.length} equipamentos extraídos (total: ${resultado.data?.Total})`);
+    return equips;
+  } catch (e) {
+    log(`Perfil Chrome erro: ${e.message}`);
+    if (ctx) await ctx.close().catch(() => {});
+    return null;
+  }
+}
+
 async function abrirBrowser(headless = true) {
-  // headless:true para jobs em background (não têm display)
-  // headless:false só quando necessário (login com Turnstile)
   try {
     return await chromium.launch({
       channel: "chrome",
       headless,
-      args: [
-        "--no-sandbox",
-        "--disable-setuid-sandbox",
-        "--disable-blink-features=AutomationControlled",
-        "--disable-features=IsolateOrigins,site-per-process",
-        "--window-size=1280,800",
-      ],
-      ignoreDefaultArgs: ["--enable-automation", "--enable-blink-features=IdleDetection"],
+      args: ["--no-sandbox", "--disable-setuid-sandbox", "--disable-blink-features=AutomationControlled"],
+      ignoreDefaultArgs: ["--enable-automation"],
     });
   } catch {
     return chromium.launch({
       headless,
-      args: [
-        "--no-sandbox",
-        "--disable-setuid-sandbox",
-        "--disable-blink-features=AutomationControlled",
-        "--disable-dev-shm-usage",
-        "--window-size=1280,800",
-      ],
-      ignoreDefaultArgs: ["--enable-automation"],
+      args: ["--no-sandbox", "--disable-setuid-sandbox", "--disable-blink-features=AutomationControlled", "--disable-dev-shm-usage"],
     });
   }
 }
@@ -361,11 +455,12 @@ async function buscarEquipamentosAxCross(page, base) {
   });
 
   if (resultado.ok) {
-    const raw = resultado.data?.Data || resultado.data?.data || (Array.isArray(resultado.data) ? resultado.data : []);
+    const raw = resultado.data?.Data || resultado.data?.data || (Array.isArray(resultado.data) ? resultado.data : resultado.data?.Items || []);
     log(`AxCross datahandler (${resultado.ep}): ${raw.length} registros`);
     return raw.map(e => ({
-      codigo:     e.Equipamento?.Descricao || e.CodigoEquipamento || e.Codigo || e.Nome || "",
-      descricao:  e.Descricao || e.GrupoEquipamento || "",
+      // AxCross usa EquipmentCode (confirmado via inspeção ao vivo)
+      codigo:     e.EquipmentCode || e.Equipamento?.Descricao || e.CodigoEquipamento || e.Codigo || e.Nome || "",
+      descricao:  e.Local || e.Descricao || e.GrupoEquipamento || "",
       sistema:    "AxCross",
     })).filter(e => e.codigo);
   }
@@ -422,19 +517,28 @@ export async function compararEquipamentos(req, res) {
     // ── AxHub ──────────────────────────────────────────────────────────────────
     let equipsAxHub = [];
     try {
-      const ctxHub = await criarContexto(browser);
-      ctxHub._login = axhubLogin;
-      ctxHub._senha = axhubSenha;
-      const pageHub = await loginAxHub(ctxHub, baseHub);
-      const urlPosLogin = pageHub.url();
-      if (urlPosLogin.includes("login") || urlPosLogin.includes("nao-autorizado")) {
-        push("alerta", `AxHub: login pode ter falhado. URL: ${urlPosLogin}`);
+      // Tenta 1: perfil Chrome real do usuário (cookies já autenticados)
+      const hubComPerfil = await buscarAxHubComPerfilChrome(baseHub);
+      if (hubComPerfil && hubComPerfil.length > 0) {
+        equipsAxHub = hubComPerfil;
+        push("ok", `AxHub (perfil Chrome): ${equipsAxHub.length} equipamento(s)`);
       } else {
-        push("ok", `AxHub: login realizado. URL: ${urlPosLogin}`);
+        // Tenta 2: Playwright headless com login
+        push("info", `Perfil Chrome sem sessão — tentando Playwright`);
+        const ctxHub = await criarContexto(browser);
+        ctxHub._login = axhubLogin;
+        ctxHub._senha = axhubSenha;
+        const pageHub = await loginAxHub(ctxHub, baseHub);
+        const urlPosLogin = pageHub.url();
+        if (urlPosLogin.includes("login") || urlPosLogin.includes("nao-autorizado")) {
+          push("alerta", `AxHub: login pode ter falhado (Turnstile). URL: ${urlPosLogin}`);
+        } else {
+          push("ok", `AxHub: login OK. URL: ${urlPosLogin}`);
+        }
+        equipsAxHub = await buscarEquipamentosAxHub(pageHub, baseHub);
+        await ctxHub.close();
+        push("ok", `AxHub: ${equipsAxHub.length} equipamento(s) extraído(s)`);
       }
-      equipsAxHub = await buscarEquipamentosAxHub(pageHub, baseHub);
-      await ctxHub.close();
-      push("ok", `AxHub: ${equipsAxHub.length} equipamento(s) extraído(s)`);
     } catch (e) {
       push("erro", `AxHub: ${e.message}`);
     }
@@ -534,6 +638,66 @@ export async function buscarAxHubDireto(req, res) {
   }
 }
 
+// ─── ENDPOINT: Compara com lista pré-buscada do AxHub ────────────────────────
+/**
+ * POST /api/depara-equipamentos/com-lista-hub
+ * Body: { nome, axhubEquipamentos: [{codigo, grupo, fabricante}], axcrossUrl, axcrossLogin, axcrossSenha }
+ * Recebe lista de equipamentos do AxHub já buscada pelo frontend e compara com o AxCross.
+ * Solução para sites AxHub com Cloudflare Turnstile (IMETROPA, etc.).
+ */
+export async function compararComListaHub(req, res) {
+  let browser;
+  const passos = [];
+  const push   = (tipo, msg) => { passos.push({ tipo, msg, ts: new Date().toISOString() }); log(`[${tipo}] ${msg}`); };
+
+  try {
+    const { nome = "Contrato", axhubEquipamentos, axcrossUrl, axcrossLogin, axcrossSenha, axhubUrl = "" } = req.body;
+    if (!Array.isArray(axhubEquipamentos)) return res.status(400).json({ erro: "axhubEquipamentos[] é obrigatório" });
+    if (!axcrossUrl) return res.status(400).json({ erro: "axcrossUrl é obrigatório" });
+
+    const equipsAxHub = axhubEquipamentos.map(e => ({ ...e, sistema: "AxHub" }));
+    push("ok", `AxHub (lista pré-buscada): ${equipsAxHub.length} equipamento(s)`);
+
+    // Busca AxCross via Playwright
+    let equipsAxCross = [];
+    browser = await abrirBrowser(true);
+    try {
+      const ctxCross = await criarContexto(browser);
+      ctxCross._login = axcrossLogin;
+      ctxCross._senha = axcrossSenha;
+      const pageCross = await loginAxCross(ctxCross, axcrossUrl.replace(/\/$/, ""));
+      equipsAxCross   = await buscarEquipamentosAxCross(pageCross, axcrossUrl.replace(/\/$/, ""));
+      await ctxCross.close();
+      push("ok", `AxCross: ${equipsAxCross.length} equipamento(s)`);
+    } catch (e) {
+      push("erro", `AxCross: ${e.message}`);
+    } finally {
+      await browser.close().catch(() => {});
+    }
+
+    // Depara
+    const codsHub   = new Map(equipsAxHub.map(e    => [e.codigo.toLowerCase().trim(), e]));
+    const codsCross = new Map(equipsAxCross.map(e   => [e.codigo.toLowerCase().trim(), e]));
+    const apenasHub   = equipsAxHub.filter(e    => !codsCross.has(e.codigo.toLowerCase().trim()));
+    const apenasCross = equipsAxCross.filter(e   => !codsHub.has(e.codigo.toLowerCase().trim()));
+    const emAmbos     = equipsAxHub.filter(e    =>  codsCross.has(e.codigo.toLowerCase().trim()));
+
+    push("ok", `Depara: ${emAmbos.length} em ambos · ${apenasHub.length} só AxHub · ${apenasCross.length} só AxCross`);
+
+    return res.json({
+      ok: true, nome, axhubUrl, axcrossUrl,
+      totais: { axhub: equipsAxHub.length, axcross: equipsAxCross.length, emAmbos: emAmbos.length, apenasHub: apenasHub.length, apenasCross: apenasCross.length },
+      emAmbos:     emAmbos.map(e    => ({ codigo: e.codigo, descricao: e.grupo || e.fabricante || "" })),
+      apenasHub:   apenasHub.map(e  => ({ codigo: e.codigo, descricao: e.grupo || e.fabricante || "" })),
+      apenasCross: apenasCross.map(e => ({ codigo: e.codigo, descricao: e.descricao || "" })),
+      passos,
+    });
+  } catch (err) {
+    if (browser) await browser.close().catch(() => {});
+    return tratar(err, res, "Erro ao comparar com lista hub");
+  }
+}
+
 // ─── ENDPOINT: Multi-contratos ────────────────────────────────────────────────
 export async function compararMultiContratos(req, res) {
   try {
@@ -545,11 +709,18 @@ export async function compararMultiContratos(req, res) {
     for (const c of contratos) {
       log(`Multi: ${c.nome}`);
 
-      // Se o contrato tem cookie de sessão, usa busca direta sem Playwright
-      if (c.axhubCookie) {
-        log(`  → usando cookie de sessão para AxHub`);
-        try {
-          const hubData = await (async () => {
+      // Sempre tenta perfil Chrome primeiro (tem cookies do usuário logado)
+      // Fallback para cookie fornecido ou Playwright
+      const hubComPerfil = await buscarAxHubComPerfilChrome(c.axhubUrl.replace(/\/$/, ""));
+      const temDadosHub  = hubComPerfil && hubComPerfil.length > 0;
+
+      if (temDadosHub || c.axhubCookie) {
+        // Obtém dados do AxHub
+        let hubData = hubComPerfil || [];
+        
+        if (!hubData.length && c.axhubCookie) {
+          log(`  → usando cookie de sessão para AxHub`);
+          try {
             const base = c.axhubUrl.replace(/\/$/, "");
             const resp = await fetch(`${base}/operacao/datahandler`, {
               headers: {
@@ -559,17 +730,22 @@ export async function compararMultiContratos(req, res) {
                 "Referer": `${base}/operacao`,
               },
             });
-            if (!resp.ok) return [];
-            const data = await resp.json();
-            const raw  = data?.Data || [];
-            return raw.map(e => ({
-              codigo:    e.Equipamento?.Descricao || e.CodigoEquipamento || "",
-              grupo:     e.GrupoEquipamento || "",
-              fabricante: e.FabricanteNome || "",
-              sistema:   "AxHub",
-            })).filter(e => e.codigo);
-          })();
+            if (resp.ok) {
+              const data = await resp.json();
+              const raw  = data?.Data || [];
+              hubData = raw.map(e => ({
+                codigo:    e.Equipamento?.Descricao || e.CodigoEquipamento || "",
+                grupo:     e.GrupoEquipamento || "",
+                fabricante: e.FabricanteNome || "",
+                sistema:   "AxHub",
+              })).filter(e => e.codigo);
+            }
+          } catch (cookieErr) {
+            log(`  Erro no cookie: ${cookieErr.message}`);
+          }
+        }
 
+        try {
           // Busca AxCross normalmente via Playwright
           let equipsAxCross = [];
           let browser;

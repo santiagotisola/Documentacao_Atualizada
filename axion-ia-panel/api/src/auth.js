@@ -68,6 +68,7 @@ const ROTAS_PUBLICAS = [
   { method: "POST", path: "/depara-equipamentos/comparar" },
   { method: "POST", path: "/depara-equipamentos/multi" },
   { method: "POST", path: "/depara-equipamentos/axhub-direto" },
+  { method: "POST", path: "/depara-equipamentos/com-lista-hub" },
 ];
 
 function rotaPublica(req) {
