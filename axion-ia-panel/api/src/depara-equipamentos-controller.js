@@ -16,7 +16,7 @@
 import { chromium } from "playwright";
 import path from "path";
 import os from "os";
-import { existsSync } from "fs";
+import { existsSync, readFileSync, writeFileSync } from "fs";
 
 function log(msg) { console.log(`[DeparaEquip] ${msg}`); }
 function tratar(err, res, msg = "Erro no depara") {
@@ -602,8 +602,31 @@ export async function compararEquipamentos(req, res) {
   }
 }
 
-// ─── Store em memória para dados AxHub enviados via bookmarklet ───────────────
-const hubDataStore = new Map(); // key → { equipamentos, url, ts }
+// ─── Store PERSISTENTE em arquivo JSON ───────────────────────────────────────
+import { fileURLToPath } from "url";
+const __storeDir = path.dirname(fileURLToPath(import.meta.url));
+const STORE_FILE  = path.join(__storeDir, "..", "depara-hub-store.json");
+
+function carregarStore() {
+  try {
+    if (existsSync(STORE_FILE)) {
+      const data = JSON.parse(readFileSync(STORE_FILE, "utf8"));
+      const agora = Date.now();
+      Object.keys(data).forEach(k => { if (agora - data[k].ts > 86_400_000) delete data[k]; }); // expira 24h
+      return new Map(Object.entries(data));
+    }
+  } catch { /* inicia vazio se arquivo corrompido */ }
+  return new Map();
+}
+
+function salvarStore(store) {
+  try {
+    writeFileSync(STORE_FILE, JSON.stringify(Object.fromEntries(store.entries()), null, 2), "utf8");
+  } catch (e) { log(`Store save warning: ${e.message}`); }
+}
+
+const hubDataStore = carregarStore();
+log(`Store persistente carregado: ${hubDataStore.size} entrada(s)`);
 
 export function receberHubData(req, res) {
   try {
@@ -613,6 +636,7 @@ export function receberHubData(req, res) {
     }
     const storeKey = key || url.replace(/https?:\/\//, "").split("/")[0];
     hubDataStore.set(storeKey, { equipamentos, url, ts: Date.now() });
+    salvarStore(hubDataStore);
     log(`Dados AxHub recebidos: ${equipamentos.length} equipamentos (chave: ${storeKey})`);
     return res.json({ ok: true, total: equipamentos.length, key: storeKey });
   } catch (err) {
@@ -834,9 +858,44 @@ export async function compararMultiContratos(req, res) {
     for (const c of contratos) {
       log(`Multi: ${c.nome}`);
 
-      // Sempre tenta perfil Chrome primeiro (tem cookies do usuário logado)
-      // Fallback para cookie fornecido ou Playwright
-      const hubComPerfil = await buscarAxHubComPerfilChrome(c.axhubUrl.replace(/\/$/, ""));
+      // ─── Tenta 1: Store persistente (dados enviados pelo bookmarklet) ───────
+      const baseHub = c.axhubUrl.replace(/\/$/, "");
+      const hubKey  = baseHub.replace(/https?:\/\//, "").split("/")[0];
+      const storeEntry = hubDataStore.get(hubKey);
+      const hubDoStore = storeEntry?.equipamentos || [];
+
+      if (hubDoStore.length > 0) {
+        log(`  → usando store persistente para AxHub: ${hubDoStore.length} equipamentos`);
+        let equipsAxCross = [];
+        let browser;
+        try {
+          browser = await abrirBrowser(true);
+          const ctxCross = await criarContexto(browser);
+          ctxCross._login = c.axcrossLogin;
+          ctxCross._senha = c.axcrossSenha;
+          const pageCross = await loginAxCross(ctxCross, c.axcrossUrl.replace(/\/$/, ""));
+          equipsAxCross   = await buscarEquipamentosAxCross(pageCross, c.axcrossUrl.replace(/\/$/, ""));
+          await ctxCross.close();
+        } catch (e) { log(`  AxCross erro: ${e.message}`); }
+        finally { if (browser) await browser.close().catch(() => {}); }
+
+        const codsHub   = new Map(hubDoStore.map(e    => [e.codigo.toLowerCase().trim(), e]));
+        const codsCross = new Map(equipsAxCross.map(e => [e.codigo.toLowerCase().trim(), e]));
+        resultados.push({
+          ok: true, nome: c.nome, axhubUrl: c.axhubUrl, axcrossUrl: c.axcrossUrl,
+          totais: { axhub: hubDoStore.length, axcross: equipsAxCross.length, emAmbos: hubDoStore.filter(e => codsCross.has(e.codigo.toLowerCase().trim())).length, apenasHub: hubDoStore.filter(e => !codsCross.has(e.codigo.toLowerCase().trim())).length, apenasCross: equipsAxCross.filter(e => !codsHub.has(e.codigo.toLowerCase().trim())).length },
+          emAmbos:     hubDoStore.filter(e => codsCross.has(e.codigo.toLowerCase().trim())).map(e => ({ codigo: e.codigo, descricao: e.grupo || e.fabricante || "" })),
+          apenasHub:   hubDoStore.filter(e => !codsCross.has(e.codigo.toLowerCase().trim())).map(e => ({ codigo: e.codigo, descricao: e.grupo || e.fabricante || "" })),
+          apenasCross: equipsAxCross.filter(e => !codsHub.has(e.codigo.toLowerCase().trim())).map(e => ({ codigo: e.codigo, descricao: e.descricao || "" })),
+          passos: [
+            { tipo: "ok", msg: `AxHub (store): ${hubDoStore.length} equipamentos`, ts: new Date().toISOString() },
+            { tipo: equipsAxCross.length > 0 ? "ok" : "alerta", msg: `AxCross: ${equipsAxCross.length} equipamentos`, ts: new Date().toISOString() },
+          ],
+        });
+        continue;
+      }
+
+      // ─── Tenta 2: Perfil Chrome + cookie (para sites com Turnstile) ─────────
       const temDadosHub  = hubComPerfil && hubComPerfil.length > 0;
 
       if (temDadosHub || c.axhubCookie) {
