@@ -401,28 +401,26 @@ export default function DeparaEquipamentos({ siteAtivo = null, sitesAtivos = [] 
             const d = await stored.json();
             if (d.equipamentos?.length > 0) {
               axhubEquipamentos = d.equipamentos;
-              console.log(`✅ AxHub dados via bookmarklet: ${axhubEquipamentos.length}`);
             }
           }
         } catch { /* bookmarklet não usado */ }
 
         // Tenta 2: busca CORS da sessão atual do browser
+        // Usa parâmetros do Kendo Grid para buscar TODOS os itens (pageSize=100)
         if (!axhubEquipamentos) {
           try {
-            const hubResp = await fetch(`${s.hub.url}/operacao/datahandler`, {
-              credentials: 'include',
-              headers: { 'X-Requested-With': 'XMLHttpRequest' },
-              mode: 'cors',
-            });
+            const hubResp = await fetch(
+              `${s.hub.url}/operacao/datahandler?pageSize=100&page=1&skip=0&take=100`,
+              { credentials: 'include', headers: { 'X-Requested-With': 'XMLHttpRequest' }, mode: 'cors' }
+            );
             if (hubResp.ok) {
               const hubData = await hubResp.json();
-              axhubEquipamentos = (hubData.Data || []).map(e => ({
-                codigo:    e.Equipamento?.Descricao || '',
-                grupo:     e.GrupoEquipamento || '',
+              const equips = (hubData.Data || []).map(e => ({
+                codigo: e.Equipamento?.Descricao || '',
+                grupo: e.GrupoEquipamento || '',
                 fabricante: e.FabricanteNome || '',
               })).filter(e => e.codigo);
-              if (axhubEquipamentos.length) console.log(`✅ AxHub dados via CORS: ${axhubEquipamentos.length}`);
-              else axhubEquipamentos = null;
+              if (equips.length > 0) axhubEquipamentos = equips;
             }
           } catch { /* CORS bloqueado */ }
         }
@@ -584,7 +582,7 @@ export default function DeparaEquipamentos({ siteAtivo = null, sitesAtivos = [] 
                     + "var url='" + s.hub.url + "';"
                     + "var key='" + hubKey + "';"
                     + "var api='" + apiUrl + "';"
-                    + "fetch('/operacao/datahandler',{credentials:'include',headers:{'X-Requested-With':'XMLHttpRequest'}})"
+                    + "fetch('/operacao/datahandler?pageSize=100&page=1&skip=0&take=100',{credentials:'include',headers:{'X-Requested-With':'XMLHttpRequest'}})"
                     + ".then(function(r){return r.json();})"
                     + ".then(function(d){"
                     + "var eq=(d.Data||[]).map(function(e){return{codigo:(e.Equipamento&&e.Equipamento.Descricao)||'',grupo:e.GrupoEquipamento||'',fabricante:e.FabricanteNome||''};}).filter(function(e){return e.codigo;});"
