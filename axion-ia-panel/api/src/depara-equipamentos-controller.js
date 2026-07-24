@@ -596,7 +596,7 @@ export function receberHubData(req, res) {
     }
     const storeKey = key || url.replace(/https?:\/\//, "").split("/")[0];
     hubDataStore.set(storeKey, { equipamentos, url, ts: Date.now() });
-    log(`Dados AxHub recebidos via bookmarklet: ${equipamentos.length} equipamentos (chave: ${storeKey})`);
+    log(`Dados AxHub recebidos: ${equipamentos.length} equipamentos (chave: ${storeKey})`);
     return res.json({ ok: true, total: equipamentos.length, key: storeKey });
   } catch (err) {
     return tratar(err, res, "Erro ao receber dados do hub");
@@ -607,12 +607,24 @@ export function obterHubData(req, res) {
   const { key } = req.params;
   const entry = hubDataStore.get(key);
   if (!entry) return res.status(404).json({ erro: "Dados não encontrados. Use o bookmarklet na página do AxHub." });
-  // Limpa após uso (expira em 10min de qualquer forma)
-  if (Date.now() - entry.ts > 600_000) {
+  if (Date.now() - entry.ts > 3_600_000) { // expira em 1h
     hubDataStore.delete(key);
-    return res.status(410).json({ erro: "Dados expirados. Use o bookmarklet novamente." });
+    return res.status(410).json({ erro: "Dados expirados (> 1h). Use o bookmarklet novamente." });
   }
   return res.json({ ok: true, ...entry });
+}
+
+/**
+ * GET /api/depara-equipamentos/store-status
+ * Retorna status de todos os stores ativos (para o frontend exibir quais sites têm dados)
+ */
+export function statusStore(req, res) {
+  const status = [];
+  for (const [key, entry] of hubDataStore.entries()) {
+    const ageMin = Math.round((Date.now() - entry.ts) / 60000);
+    status.push({ key, url: entry.url, total: entry.equipamentos.length, idadeMin: ageMin });
+  }
+  return res.json({ total: status.length, sites: status });
 }
 
 // ─── ENDPOINT: Busca direta AxHub via cookie (sem Playwright/Turnstile) ──────

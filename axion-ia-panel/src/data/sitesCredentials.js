@@ -1,21 +1,21 @@
-﻿/**
+/**
  * Dados de credenciais de todos os sites AxHub e AxCross
  * Usado pelo CredenciaisManager para gerenciar senhas
  */
 
 export const CREDENCIAIS_AXHUB = [
-  { id: 'axhub-ibametro', nome: 'IBAMETRO', url: 'https://ibametro.axhub.axion.ws', estado: 'BA', tipo: 'Metrologia', login: 'admin', senha: 'Labor#5383', sistema: 'AxHub' },
-  { id: 'axhub-imepi', nome: 'IMEPI', url: 'https://imepi.axhub.axion.ws', estado: 'PI', tipo: 'Metrologia', login: 'admin', senha: 'Labor#5383', sistema: 'AxHub' },
+  { id: 'axhub-ibametro', nome: 'IBAMETRO', url: 'https://ibametro.axhub.axion.ws', estado: 'BA', tipo: 'Metrologia', login: 'Admin', senha: 'Labor#5383', sistema: 'AxHub' },
+  { id: 'axhub-imepi', nome: 'IMEPI', url: 'https://imepi.axhub.axion.ws', estado: 'PI', tipo: 'Metrologia', login: 'Admin', senha: 'Labor#5383', sistema: 'AxHub' },
   { id: 'axhub-imeqpb', nome: 'IMEQPB', url: 'https://imeqpb.axhub.axion.ws', estado: 'PB', tipo: 'Metrologia', login: 'Admin', senha: 'Labor#5383', sistema: 'AxHub' },
   { id: 'axhub-imetropa', nome: 'IMETROPA', url: 'https://imetropa.axhub.axion.ws', estado: 'PA', tipo: 'Metrologia', login: 'Admin', senha: 'Labor#5383', sistema: 'AxHub' },
   { id: 'axhub-ipemce', nome: 'IPEMCE', url: 'https://ipemce.axhub.axion.ws', estado: 'CE', tipo: 'Metrologia', login: 'Admin', senha: 'Labor#5383', sistema: 'AxHub' },
-  { id: 'axhub-ipempe', nome: 'IPEMPE', url: 'https://ipempe.axhub.axion.ws', estado: 'PE', tipo: 'Metrologia', login: 'admin', senha: 'Labor#5383', sistema: 'AxHub' },
+  { id: 'axhub-ipempe', nome: 'IPEMPE', url: 'https://ipempe.axhub.axion.ws', estado: 'PE', tipo: 'Metrologia', login: 'Admin', senha: 'Labor#5383', sistema: 'AxHub' },
   { id: 'axhub-derse', nome: 'DERSE', url: 'https://derse.axhub.axion.ws', estado: 'PI', tipo: 'Rodovias', login: 'Admin', senha: 'Labor#5383', sistema: 'AxHub' },
   { id: 'axhub-strans', nome: 'STRANS', url: 'https://strans.axhub.axion.ws', estado: 'PI', tipo: 'Trânsito Municipal', login: 'Admin', senha: 'Labor#5383', sistema: 'AxHub' },
   { id: 'axhub-detranma', nome: 'DETRANMA', url: 'https://detranma.axhub.axion.ws', estado: 'MA', tipo: 'Trânsito Estadual', login: 'Admin', senha: 'Labor#5383', sistema: 'AxHub' },
   { id: 'axhub-detranpi', nome: 'DETRANPI', url: 'https://detranpi.axhub.axion.ws', estado: 'PI', tipo: 'Trânsito Estadual', login: 'Admin', senha: 'Labor#5383', sistema: 'AxHub' },
   { id: 'axhub-goiania', nome: 'GOIÂNIA', url: 'https://goiania.axhub.axion.ws', estado: 'GO', tipo: 'Trânsito Municipal', login: 'suporte@axiontecnologia.com.br', senha: 'Labor#5383', sistema: 'AxHub' },
-  { id: 'axhub-ipemmt', nome: 'IPEMMT', url: 'https://ipemmt.axhub.axion.ws', estado: 'MT', tipo: 'Metrologia', login: 'admin', senha: 'Labor#5383', sistema: 'AxHub' },
+  { id: 'axhub-ipemmt', nome: 'IPEMMT', url: 'https://ipemmt.axhub.axion.ws', estado: 'MT', tipo: 'Metrologia', login: 'Admin', senha: 'Labor#5383', sistema: 'AxHub' },
   { id: 'axhub-itps', nome: 'ITPS', url: 'https://itps.axhub.axion.ws', estado: 'SE', tipo: 'Metrologia', login: 'Admin', senha: 'Labor#5383', sistema: 'AxHub' },
   { id: 'axhub-smtt', nome: 'SMTT', url: 'https://smtt.axhub.axion.ws', estado: 'AL', tipo: 'Trânsito Municipal', login: 'Admin', senha: 'Labor#5383', sistema: 'AxHub' },
   { id: 'axhub-economia', nome: 'ECONOMIA', url: 'https://economia.axhub.axion.ws', estado: 'GO', tipo: 'Fiscal', login: 'via OIDC (economia.axion.ws)', senha: 'Labor#5383', sistema: 'AxHub' },
