@@ -585,6 +585,36 @@ export async function compararEquipamentos(req, res) {
   }
 }
 
+// ─── Store em memória para dados AxHub enviados via bookmarklet ───────────────
+const hubDataStore = new Map(); // key → { equipamentos, url, ts }
+
+export function receberHubData(req, res) {
+  try {
+    const { url, equipamentos, key } = req.body;
+    if (!Array.isArray(equipamentos) || !url) {
+      return res.status(400).json({ erro: "url e equipamentos[] são obrigatórios" });
+    }
+    const storeKey = key || url.replace(/https?:\/\//, "").split("/")[0];
+    hubDataStore.set(storeKey, { equipamentos, url, ts: Date.now() });
+    log(`Dados AxHub recebidos via bookmarklet: ${equipamentos.length} equipamentos (chave: ${storeKey})`);
+    return res.json({ ok: true, total: equipamentos.length, key: storeKey });
+  } catch (err) {
+    return tratar(err, res, "Erro ao receber dados do hub");
+  }
+}
+
+export function obterHubData(req, res) {
+  const { key } = req.params;
+  const entry = hubDataStore.get(key);
+  if (!entry) return res.status(404).json({ erro: "Dados não encontrados. Use o bookmarklet na página do AxHub." });
+  // Limpa após uso (expira em 10min de qualquer forma)
+  if (Date.now() - entry.ts > 600_000) {
+    hubDataStore.delete(key);
+    return res.status(410).json({ erro: "Dados expirados. Use o bookmarklet novamente." });
+  }
+  return res.json({ ok: true, ...entry });
+}
+
 // ─── ENDPOINT: Busca direta AxHub via cookie (sem Playwright/Turnstile) ──────
 
 /**

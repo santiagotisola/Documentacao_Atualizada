@@ -392,23 +392,40 @@ export default function DeparaEquipamentos({ siteAtivo = null, sitesAtivos = [] 
     try {
       const resultados = [];
       for (const s of selecionados) {
-        // Tenta buscar dados do AxHub da sessão atual do browser (evita Turnstile)
+        // Tenta 1: dados do AxHub enviados pelo bookmarklet
         let axhubEquipamentos = null;
+        const hubKey = s.hub.url.replace(/https?:\/\//, '').split('/')[0];
         try {
-          const hubResp = await fetch(`${s.hub.url}/operacao/datahandler`, {
-            credentials: 'include',
-            headers: { 'X-Requested-With': 'XMLHttpRequest' },
-            mode: 'cors',
-          });
-          if (hubResp.ok) {
-            const hubData = await hubResp.json();
-            axhubEquipamentos = (hubData.Data || []).map(e => ({
-              codigo:    e.Equipamento?.Descricao || '',
-              grupo:     e.GrupoEquipamento || '',
-              fabricante: e.FabricanteNome || '',
-            })).filter(e => e.codigo);
+          const stored = await fetch(`/api/depara-equipamentos/hub-data/${hubKey}`);
+          if (stored.ok) {
+            const d = await stored.json();
+            if (d.equipamentos?.length > 0) {
+              axhubEquipamentos = d.equipamentos;
+              console.log(`✅ AxHub dados via bookmarklet: ${axhubEquipamentos.length}`);
+            }
           }
-        } catch { /* CORS ou não autenticado — fallback para Playwright */ }
+        } catch { /* bookmarklet não usado */ }
+
+        // Tenta 2: busca CORS da sessão atual do browser
+        if (!axhubEquipamentos) {
+          try {
+            const hubResp = await fetch(`${s.hub.url}/operacao/datahandler`, {
+              credentials: 'include',
+              headers: { 'X-Requested-With': 'XMLHttpRequest' },
+              mode: 'cors',
+            });
+            if (hubResp.ok) {
+              const hubData = await hubResp.json();
+              axhubEquipamentos = (hubData.Data || []).map(e => ({
+                codigo:    e.Equipamento?.Descricao || '',
+                grupo:     e.GrupoEquipamento || '',
+                fabricante: e.FabricanteNome || '',
+              })).filter(e => e.codigo);
+              if (axhubEquipamentos.length) console.log(`✅ AxHub dados via CORS: ${axhubEquipamentos.length}`);
+              else axhubEquipamentos = null;
+            }
+          } catch { /* CORS bloqueado */ }
+        }
 
         let endpoint, body;
         if (axhubEquipamentos && axhubEquipamentos.length > 0) {
@@ -525,7 +542,7 @@ export default function DeparaEquipamentos({ siteAtivo = null, sitesAtivos = [] 
         )}
       </div>
 
-      {/* Cookies de sessão AxHub (para sites com Cloudflare Turnstile) */}
+      {/* Bookmarklet + Cookie para AxHub com Turnstile */}
       {selecionados.length > 0 && (
         <div style={{ background:'white', borderRadius:'12px', border:'1.5px solid #e2e8f0', overflow:'hidden' }}>
           <div
@@ -534,52 +551,75 @@ export default function DeparaEquipamentos({ siteAtivo = null, sitesAtivos = [] 
           >
             <span style={{ fontSize:'0.9rem' }}>🔑</span>
             <div style={{ flex:1 }}>
-              <span style={{ fontWeight:700, fontSize:'0.85rem', color:'#374151' }}>Cookie de Sessão AxHub</span>
+              <span style={{ fontWeight:700, fontSize:'0.85rem', color:'#374151' }}>Dados do AxHub</span>
               <span style={{ fontSize:'0.75rem', color:'#9ca3af', marginLeft:'0.5rem' }}>
-                Necessário para sites com Cloudflare Turnstile (ex: IMETROPA)
+                Como fornecer os dados de equipamentos do AxHub (Cloudflare Turnstile)
               </span>
             </div>
-            <span style={{ fontSize:'0.72rem', color: Object.keys(cookies).some(k => cookies[k]) ? '#15803d' : '#9ca3af', fontWeight:600 }}>
-              {Object.keys(cookies).filter(k => cookies[k]).length > 0 ? `✅ ${Object.keys(cookies).filter(k => cookies[k]).length} cookie(s)` : 'Opcional'}
+            <span style={{ fontSize:'0.72rem', color:'#9ca3af', fontWeight:600 }}>
+              {Object.keys(cookies).filter(k => cookies[k]).length > 0 ? '✅ cookie' : 'Clique para ver opções'}
             </span>
             <span style={{ color:'#9ca3af', fontSize:'0.65rem' }}>{mostrarCookies ? '▲' : '▼'}</span>
           </div>
 
           {mostrarCookies && (
-            <div style={{ borderTop:'1px solid #f1f5f9', padding:'1rem 1.25rem' }}>
-              {/* Instruções */}
-              <div style={{ background:'#fffbeb', border:'1px solid #fde68a', borderRadius:'8px', padding:'0.75rem 1rem', marginBottom:'1rem', fontSize:'0.78rem', color:'#92400e' }}>
-                <strong>Como obter o cookie:</strong>
-                <ol style={{ margin:'0.375rem 0 0', paddingLeft:'1.25rem', lineHeight:1.7 }}>
-                  <li>Acesse o AxHub no seu navegador e faça login normalmente</li>
-                  <li>Pressione <strong>F12</strong> → aba <strong>Application</strong> → <strong>Cookies</strong></li>
-                  <li>Selecione o domínio do site (ex: <code>imetropa.axhub.axion.ws</code>)</li>
-                  <li>Copie o valor do cookie <strong>.AspNetCore.Session</strong></li>
-                  <li>Cole no campo abaixo no formato: <code>.AspNetCore.Session=SEU_VALOR_AQUI</code></li>
+            <div style={{ borderTop:'1px solid #f1f5f9', padding:'1rem 1.25rem', display:'flex', flexDirection:'column', gap:'1rem' }}>
+
+              {/* Opção 1 — Bookmarklet (recomendado) */}
+              <div style={{ background:'#f0fdf4', border:'1.5px solid #bbf7d0', borderRadius:'10px', padding:'1rem' }}>
+                <div style={{ fontWeight:700, fontSize:'0.85rem', color:'#15803d', marginBottom:'0.5rem' }}>
+                  ⭐ Opção 1 — Bookmarklet (recomendado, mais fácil)
+                </div>
+                <ol style={{ margin:'0 0 0.75rem', paddingLeft:'1.25rem', fontSize:'0.78rem', color:'#374151', lineHeight:1.8 }}>
+                  <li>Arraste o link abaixo para a <strong>barra de favoritos</strong> do seu navegador</li>
+                  <li>Acesse o site AxHub no navegador e faça login</li>
+                  <li>Clique no favorito <strong>"📤 Enviar AxHub"</strong></li>
+                  <li>Volte aqui e clique <strong>"Executar Depara"</strong></li>
                 </ol>
+                {selecionados.map(s => {
+                  const bookmarklet = `javascript:(function(){const url='${s.hub.url}';const key='${s.hub.url.replace(/https?:\\/\\//, '').split('/')[0]}';fetch('/operacao/datahandler',{credentials:'include',headers:{'X-Requested-With':'XMLHttpRequest'}}).then(r=>r.json()).then(d=>{const eq=(d.Data||[]).map(e=>({codigo:e.Equipamento?.Descricao||'',grupo:e.GrupoEquipamento||'',fabricante:e.FabricanteNome||''})).filter(e=>e.codigo);return fetch('http://localhost:3100/api/depara-equipamentos/receive-hub-data',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({url:url,key:key,equipamentos:eq})});}).then(r=>r.json()).then(r=>alert('✅ '+r.total+' equipamentos enviados para o Axion IA!')).catch(e=>alert('❌ Erro: '+e.message));})();`;
+                  return (
+                    <div key={s.nome} style={{ marginBottom:'0.5rem', display:'flex', gap:'0.625rem', alignItems:'center' }}>
+                      <span style={{ fontSize:'0.78rem', color:'#374151', flexShrink:0 }}>📌 {s.nome}</span>
+                      <a
+                        href={bookmarklet}
+                        onClick={e => { e.preventDefault(); alert('Arraste este link para a barra de favoritos. NÃO clique aqui diretamente.'); }}
+                        style={{ display:'inline-flex', alignItems:'center', gap:'0.375rem', padding:'0.35rem 0.875rem', borderRadius:'8px', background:'linear-gradient(135deg,#15803d,#16a34a)', color:'white', textDecoration:'none', fontSize:'0.78rem', fontWeight:700, cursor:'grab', userSelect:'none' }}
+                        draggable="true"
+                      >
+                        📤 Enviar AxHub ({s.nome})
+                      </a>
+                    </div>
+                  );
+                })}
               </div>
 
-              {/* Campo por contrato */}
-              {selecionados.map(s => (
-                <div key={s.nome} style={{ marginBottom:'0.75rem' }}>
-                  <label style={{ fontSize:'0.78rem', fontWeight:600, color:'#374151', display:'block', marginBottom:'0.3rem' }}>
-                    🔵 Cookie AxHub — <strong>{s.nome}</strong>{' '}
-                    <a href={`${s.hub.url}/Home/Login`} target="_blank" rel="noopener noreferrer" style={{ color:'#6366f1', fontSize:'0.72rem', fontWeight:400 }}>{s.hub.url} ↗</a>
-                  </label>
-                  <div style={{ display:'flex', gap:'0.5rem' }}>
-                    <input
-                      type="text"
-                      value={cookies[s.nome] || ''}
-                      onChange={e => setCookies(prev => ({ ...prev, [s.nome]: e.target.value }))}
-                      placeholder=".AspNetCore.Session=CfDJ8H..."
-                      style={{ flex:1, padding:'0.45rem 0.75rem', borderRadius:'8px', border:`1.5px solid ${cookies[s.nome] ? '#bbf7d0' : '#e2e8f0'}`, fontSize:'0.78rem', fontFamily:'monospace', outline:'none' }}
-                    />
-                    {cookies[s.nome] && (
-                      <button onClick={() => setCookies(prev => ({ ...prev, [s.nome]: '' }))} style={{ padding:'0.3rem 0.5rem', borderRadius:'6px', border:'1px solid #fecaca', background:'#fef2f2', color:'#dc2626', cursor:'pointer', fontSize:'0.72rem' }}>✕</button>
-                    )}
-                  </div>
+              {/* Opção 2 — Cookie manual */}
+              <div style={{ background:'#fffbeb', border:'1px solid #fde68a', borderRadius:'10px', padding:'1rem' }}>
+                <div style={{ fontWeight:700, fontSize:'0.82rem', color:'#92400e', marginBottom:'0.5rem' }}>
+                  🔑 Opção 2 — Cookie de sessão (manual)
                 </div>
-              ))}
+                <p style={{ margin:'0 0 0.625rem', fontSize:'0.75rem', color:'#78350f' }}>
+                  F12 → Application → Cookies → domínio AxHub → copie <code>.AspNetCore.Session</code> → cole abaixo
+                </p>
+                {selecionados.map(s => (
+                  <div key={s.nome} style={{ marginBottom:'0.625rem' }}>
+                    <label style={{ fontSize:'0.75rem', fontWeight:600, color:'#374151', display:'block', marginBottom:'0.25rem' }}>
+                      {s.nome} — <a href={`${s.hub.url}/Home/Login`} target="_blank" rel="noopener noreferrer" style={{ color:'#6366f1', fontSize:'0.72rem' }}>{s.hub.url} ↗</a>
+                    </label>
+                    <div style={{ display:'flex', gap:'0.5rem' }}>
+                      <input
+                        type="text"
+                        value={cookies[s.nome] || ''}
+                        onChange={e => setCookies(prev => ({ ...prev, [s.nome]: e.target.value }))}
+                        placeholder=".AspNetCore.Session=CfDJ8H..."
+                        style={{ flex:1, padding:'0.4rem 0.625rem', borderRadius:'7px', border:`1.5px solid ${cookies[s.nome] ? '#bbf7d0' : '#e2e8f0'}`, fontSize:'0.75rem', fontFamily:'monospace', outline:'none' }}
+                      />
+                      {cookies[s.nome] && <button onClick={() => setCookies(prev => ({ ...prev, [s.nome]: '' }))} style={{ padding:'0.25rem 0.4rem', borderRadius:'6px', border:'1px solid #fecaca', background:'#fef2f2', color:'#dc2626', cursor:'pointer', fontSize:'0.7rem' }}>✕</button>}
+                    </div>
+                  </div>
+                ))}
+              </div>
             </div>
           )}
         </div>

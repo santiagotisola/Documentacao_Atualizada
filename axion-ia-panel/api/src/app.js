@@ -56,6 +56,22 @@ app.use("/api", limiter);
 
 app.use(express.json({ limit: "5mb" }));
 
+// CORS — permite que páginas de qualquer origem enviem dados ao backend
+// (necessário para o bookmarklet do AxHub enviar dados de equipamentos)
+app.use((req, res, next) => {
+  const origin = req.headers.origin || "";
+  // Permite: localhost (painel), axhub.axion.ws, axcross.axion.ws
+  const permitida = origin.includes("localhost") || origin.includes("axion.ws") || origin === "";
+  if (permitida) {
+    res.setHeader("Access-Control-Allow-Origin", origin || "*");
+    res.setHeader("Access-Control-Allow-Methods", "GET,POST,PUT,DELETE,OPTIONS");
+    res.setHeader("Access-Control-Allow-Headers", "Content-Type,Authorization,X-API-Token,X-Requested-With");
+    res.setHeader("Access-Control-Allow-Credentials", "true");
+  }
+  if (req.method === "OPTIONS") return res.sendStatus(204);
+  next();
+});
+
 // CorrelationId — injeta x-request-id em toda requisição para rastreabilidade
 app.use((req, res, next) => {
   const id = req.headers["x-request-id"] || randomUUID();
