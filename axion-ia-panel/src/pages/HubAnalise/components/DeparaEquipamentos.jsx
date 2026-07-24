@@ -33,6 +33,157 @@ function Badge({ tipo, label }) {
   );
 }
 
+// ─── Painel de Captura — todos os sites com bookmarklets ─────────────────────
+function PainelCaptura({ pares }) {
+  const [expandido, setExpandido] = useState(false);
+  const [storeStatus, setStoreStatus] = useState({});
+  const API_BASE = 'http://localhost:3100/api/depara-equipamentos';
+
+  // Carrega status do store ao abrir
+  const carregarStatus = async () => {
+    try {
+      const r = await fetch(`/api/depara-equipamentos/store-status`);
+      if (r.ok) {
+        const d = await r.json();
+        const map = {};
+        (d.sites || []).forEach(s => { map[s.key] = s; });
+        setStoreStatus(map);
+      }
+    } catch {}
+  };
+
+  useEffect(() => {
+    if (expandido) carregarStatus();
+    const interval = expandido ? setInterval(carregarStatus, 10000) : null;
+    return () => { if (interval) clearInterval(interval); };
+  }, [expandido]);
+
+  const totalComDados = pares.filter(p => {
+    const k = p.hub.url.replace(/https?:\/\//, '').split('/')[0];
+    return storeStatus[k]?.total > 0;
+  }).length;
+
+  return (
+    <div style={{ background:'white', borderRadius:'12px', border:'1.5px solid #e2e8f0', overflow:'hidden' }}>
+      {/* Cabeçalho clicável */}
+      <div
+        style={{ padding:'0.875rem 1.25rem', cursor:'pointer', display:'flex', gap:'0.875rem', alignItems:'center' }}
+        onClick={() => { setExpandido(v => !v); }}
+      >
+        <span style={{ fontSize:'1.1rem' }}>📤</span>
+        <div style={{ flex:1 }}>
+          <div style={{ fontWeight:700, fontSize:'0.875rem', color:'#1a202c' }}>
+            Capturar dados AxHub — Todos os sites ({pares.length} contratos)
+          </div>
+          <div style={{ fontSize:'0.75rem', color:'#9ca3af', marginTop:'0.1rem' }}>
+            Use o bookmarklet em cada site AxHub no seu Chrome (Login: Admin / Labor#5383)
+          </div>
+        </div>
+        <div style={{ display:'flex', gap:'0.5rem', alignItems:'center', flexShrink:0 }}>
+          {totalComDados > 0 && (
+            <span style={{ background:'#f0fdf4', border:'1px solid #bbf7d0', color:'#15803d', borderRadius:'20px', padding:'0.15rem 0.5rem', fontSize:'0.72rem', fontWeight:700 }}>
+              ✅ {totalComDados}/{pares.length} com dados
+            </span>
+          )}
+          <span style={{ color:'#9ca3af', fontSize:'0.65rem' }}>{expandido ? '▲' : '▼'}</span>
+        </div>
+      </div>
+
+      {expandido && (
+        <div style={{ borderTop:'1px solid #f1f5f9', padding:'1rem 1.25rem' }}>
+          {/* Instruções */}
+          <div style={{ background:'#eff6ff', border:'1px solid #bfdbfe', borderRadius:'8px', padding:'0.75rem 1rem', marginBottom:'1rem', fontSize:'0.78rem', color:'#1d4ed8' }}>
+            <strong>Como usar:</strong>
+            <ol style={{ margin:'0.375rem 0 0', paddingLeft:'1.25rem', lineHeight:1.8 }}>
+              <li>Arraste o botão <strong>"📤 Enviar"</strong> de cada site para a barra de favoritos do Chrome</li>
+              <li>Acesse o site AxHub no Chrome → faça login com <code>Admin</code> / <code>Labor#5383</code></li>
+              <li>Clique no favorito que você arrastou → aparecerá <strong>"✅ N equipamentos enviados"</strong></li>
+              <li>Repita para cada site desejado, depois volte e execute o Depara</li>
+            </ol>
+          </div>
+
+          {/* Grid de sites */}
+          <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fill, minmax(280px, 1fr))', gap:'0.625rem' }}>
+            {pares.map(par => {
+              const key = par.hub.url.replace(/https?:\/\//, '').split('/')[0];
+              const store = storeStatus[key];
+              const temDados = store?.total > 0;
+              const bmCode = "(function(){"
+                + "var url='" + par.hub.url + "';"
+                + "var key='" + key + "';"
+                + "var api='http://localhost:3100/api/depara-equipamentos/receive-hub-data';"
+                + "fetch('/operacao/datahandler?pageSize=100&page=1&skip=0&take=100',{credentials:'include',headers:{'X-Requested-With':'XMLHttpRequest'}})"
+                + ".then(function(r){return r.json();})"
+                + ".then(function(d){"
+                + "var eq=(d.Data||[]).map(function(e){return{codigo:(e.Equipamento&&e.Equipamento.Descricao)||'',grupo:e.GrupoEquipamento||'',fabricante:e.FabricanteNome||''};}).filter(function(e){return e.codigo;});"
+                + "if(!eq.length){alert('Nenhum equipamento encontrado. Verifique se est\\u00e1 na p\\u00e1gina /operacao do AxHub.');return;}"
+                + "return fetch(api,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({url:url,key:key,equipamentos:eq})});"
+                + "})"
+                + ".then(function(r){if(r)return r.json();})"
+                + ".then(function(r){if(r)alert('\\u2705 '+r.total+' equipamentos de ' + url + ' enviados ao Axion IA!');})"
+                + ".catch(function(e){alert('\\u274C Erro: '+e.message);});"
+                + "})();";
+
+              return (
+                <div key={par.nome} style={{
+                  padding:'0.75rem', borderRadius:'10px',
+                  border:`1.5px solid ${temDados ? '#bbf7d0' : '#e2e8f0'}`,
+                  background: temDados ? '#f0fdf4' : '#f8fafc',
+                  display:'flex', flexDirection:'column', gap:'0.5rem',
+                }}>
+                  {/* Nome + Status */}
+                  <div style={{ display:'flex', gap:'0.5rem', alignItems:'center' }}>
+                    <span style={{ fontWeight:700, fontSize:'0.85rem', color:'#1a202c', flex:1 }}>{par.nome}</span>
+                    {temDados
+                      ? <span style={{ fontSize:'0.7rem', background:'#dcfce7', color:'#15803d', padding:'0.1rem 0.4rem', borderRadius:'20px', fontWeight:700 }}>✅ {store.total} itens</span>
+                      : <span style={{ fontSize:'0.7rem', background:'#fef3c7', color:'#92400e', padding:'0.1rem 0.4rem', borderRadius:'20px', fontWeight:600 }}>Sem dados</span>
+                    }
+                  </div>
+
+                  {/* URL */}
+                  <div style={{ fontSize:'0.7rem', color:'#6b7280', fontFamily:'monospace', overflow:'hidden', textOverflow:'ellipsis', whiteSpace:'nowrap' }}>
+                    {par.hub.url.replace('https://', '')}
+                  </div>
+
+                  {/* Ações */}
+                  <div style={{ display:'flex', gap:'0.375rem' }}>
+                    <a
+                      href={`${par.hub.url}/operacao`}
+                      target="_blank" rel="noopener noreferrer"
+                      style={{ flex:1, padding:'0.3rem 0.5rem', borderRadius:'7px', border:'1px solid #bfdbfe', background:'#eff6ff', color:'#1d4ed8', textDecoration:'none', fontSize:'0.72rem', fontWeight:600, textAlign:'center' }}
+                    >
+                      🔗 Abrir AxHub
+                    </a>
+                    <a
+                      href={'javascript:' + bmCode}
+                      onClick={e => { e.preventDefault(); alert('Arraste para a barra de favoritos do Chrome. Depois clique lá enquanto estiver na página do AxHub.'); }}
+                      draggable="true"
+                      title={`Arraste para favoritos e use em ${par.hub.url}/operacao`}
+                      style={{ padding:'0.3rem 0.625rem', borderRadius:'7px', border:'1px solid #bbf7d0', background:'linear-gradient(135deg,#15803d,#16a34a)', color:'white', textDecoration:'none', fontSize:'0.72rem', fontWeight:700, cursor:'grab', userSelect:'none', flexShrink:0 }}
+                    >
+                      📤 Enviar
+                    </a>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+
+          {/* Botão atualizar status */}
+          <div style={{ marginTop:'0.875rem', textAlign:'center' }}>
+            <button
+              onClick={carregarStatus}
+              style={{ padding:'0.35rem 1rem', borderRadius:'8px', border:'1px solid #e2e8f0', background:'white', color:'#374151', cursor:'pointer', fontSize:'0.78rem', fontWeight:600 }}
+            >
+              🔄 Atualizar status ({totalComDados}/{pares.length} capturados)
+            </button>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+
 // ─── Card resultado ───────────────────────────────────────────────────────────
 function CardResultado({ resultado }) {
   const [expandido, setExpandido] = useState(true);
@@ -521,48 +672,8 @@ export default function DeparaEquipamentos({ siteAtivo = null, sitesAtivos = [] 
         </div>
       </div>
 
-      {/* ── Painel de Captura em Lote ─────────────────────────────── */}
-      <div style={{ background:'white', borderRadius:'12px', border:'1.5px solid #e2e8f0', padding:'1rem 1.25rem' }}>
-        <div style={{ display:'flex', gap:'0.875rem', alignItems:'center', flexWrap:'wrap' }}>
-          <div style={{ flex:1 }}>
-            <div style={{ fontWeight:700, fontSize:'0.875rem', color:'#1a202c' }}>⚡ Captura em Lote — Todos os Sites</div>
-            <div style={{ fontSize:'0.75rem', color:'#9ca3af', marginTop:'0.15rem' }}>
-              Tenta login em todos os {pares.length} contratos AxHub e armazena os equipamentos para o depara.
-              Funciona melhor quando o Chrome já tem sessões ativas.
-            </div>
-          </div>
-          <button
-            onClick={capturarTodosOsSites}
-            disabled={capturandoTodos}
-            style={{ padding:'0.5rem 1.25rem', borderRadius:'10px', border:'none', cursor: capturandoTodos ? 'not-allowed' : 'pointer', background: capturandoTodos ? '#e2e8f0' : 'linear-gradient(135deg,#0284c7,#0891b2)', color: capturandoTodos ? '#9ca3af' : 'white', fontWeight:700, fontSize:'0.82rem', flexShrink:0 }}
-          >
-            {capturandoTodos ? `⏳ Capturando ${pares.length} sites...` : `🔄 Capturar Todos (${pares.length} sites)`}
-          </button>
-        </div>
-
-        {resultadoCaptura && (
-          <div style={{ marginTop:'0.875rem', borderTop:'1px solid #f1f5f9', paddingTop:'0.875rem' }}>
-            {resultadoCaptura.erro ? (
-              <div style={{ color:'#b91c1c', fontSize:'0.8rem' }}>❌ {resultadoCaptura.erro}</div>
-            ) : (
-              <>
-                <div style={{ display:'flex', gap:'1rem', flexWrap:'wrap', marginBottom:'0.625rem' }}>
-                  <span style={{ fontSize:'0.8rem', fontWeight:700, color:'#15803d' }}>✅ {resultadoCaptura.sucesso} sites capturados</span>
-                  {resultadoCaptura.falha > 0 && <span style={{ fontSize:'0.8rem', fontWeight:700, color:'#b91c1c' }}>❌ {resultadoCaptura.falha} falharam</span>}
-                  <span style={{ fontSize:'0.75rem', color:'#9ca3af' }}>— selecione os contratos e clique "Executar Depara"</span>
-                </div>
-                <div style={{ display:'flex', gap:'0.375rem', flexWrap:'wrap' }}>
-                  {resultadoCaptura.resultados?.map(r => (
-                    <span key={r.nome} style={{ display:'inline-flex', alignItems:'center', gap:'0.25rem', padding:'0.2rem 0.5rem', borderRadius:'20px', fontSize:'0.72rem', fontWeight:600, background: r.ok ? '#f0fdf4' : '#fef2f2', border:`1px solid ${r.ok ? '#bbf7d0' : '#fecaca'}`, color: r.ok ? '#15803d' : '#b91c1c' }}>
-                      {r.ok ? '✅' : '❌'} {r.nome} {r.ok ? `(${r.total})` : ''}
-                    </span>
-                  ))}
-                </div>
-              </>
-            )}
-          </div>
-        )}
-      </div>
+      {/* ── Painel de Captura de Dados AxHub ────────────────────────── */}
+      <PainelCaptura pares={pares} />
 
       {/* Seletor com botão de pesquisa */}
       <div style={{ background:'white', borderRadius:'12px', border:'1.5px solid #e2e8f0', padding:'1rem 1.25rem' }}>
