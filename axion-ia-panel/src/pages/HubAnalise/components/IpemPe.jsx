@@ -189,7 +189,7 @@ const TIPO_COR = {
 };
 
 // ─── COMPONENTE PRINCIPAL ────────────────────────────────────────────────
-export default function IpemPe() {
+export default function IpemPe({ siteAtivo = null, sitesAtivos = [] }) {
   const [secao, setSecao] = useState('inventario');
   const [equip, setEquip] = useState(null);
   const [filtroStatus, setFiltroStatus] = useState('todos');
@@ -304,6 +304,45 @@ export default function IpemPe() {
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+
+      {/* ── Banner de site global (quando não é IPEM-PE) ─────────── */}
+      {siteAtivo && siteAtivo.id !== 'axhub-ipempe' && (
+        <div style={{ background: '#fffbeb', border: '1.5px solid #fde68a', borderRadius: '12px', padding: '0.875rem 1.25rem', display: 'flex', gap: '0.75rem', alignItems: 'center' }}>
+          <span style={{ fontSize: '1.25rem' }}>ℹ️</span>
+          <div style={{ flex: 1 }}>
+            <div style={{ fontWeight: 700, fontSize: '0.875rem', color: '#92400e' }}>
+              Dados de câmeras configurados para o contrato IPEM-PE
+            </div>
+            <div style={{ fontSize: '0.78rem', color: '#78350f', marginTop: '0.2rem' }}>
+              O inventário exibido abaixo é do contrato <strong>IPEM-PE</strong>. Para analisar equipamentos de{' '}
+              <strong>{siteAtivo.nome}</strong>, acesse diretamente o sistema:
+            </div>
+          </div>
+          <a
+            href={`${siteAtivo.url}/equipamento`}
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{ padding: '0.4rem 0.875rem', borderRadius: '8px', background: '#f59e0b', color: 'white', textDecoration: 'none', fontWeight: 700, fontSize: '0.78rem', flexShrink: 0 }}
+          >
+            📷 Equipamentos {siteAtivo.nome} ↗
+          </a>
+        </div>
+      )}
+
+      {/* ── Comparação multi-site ─────────────────────────────────── */}
+      {sitesAtivos.length > 1 && (
+        <div style={{ background: '#f0f4ff', border: '1.5px solid #c7d2fe', borderRadius: '12px', padding: '0.875rem 1.25rem' }}>
+          <div style={{ fontWeight: 700, fontSize: '0.85rem', color: '#3730a3', marginBottom: '0.625rem' }}>⚡ Links rápidos — Equipamentos por site</div>
+          <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
+            {sitesAtivos.map(s => (
+              <a key={s.id} href={`${s.url}/equipamento`} target="_blank" rel="noopener noreferrer"
+                style={{ padding: '0.3rem 0.75rem', borderRadius: '8px', background: 'white', border: '1px solid #c7d2fe', color: '#4f46e5', textDecoration: 'none', fontSize: '0.78rem', fontWeight: 600 }}>
+                📷 {s.nome} ↗
+              </a>
+            ))}
+          </div>
+        </div>
+      )}
 
       {/* ── Header Stats ── */}
       <div style={{ background: 'white', borderRadius: '12px', border: '1px solid #e2e8f0', padding: '1.25rem 1.5rem' }}>

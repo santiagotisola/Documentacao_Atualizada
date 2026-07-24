@@ -60,6 +60,14 @@ const ROTAS_PUBLICAS = [
   { method: "GET",  path: "/visual-validation/report" },
   { method: "GET",  path: "/visual-validation/screenshot" },
   { method: "GET",  path: "/visual-validation/list" },
+  // Lote Exportação — automação via painel (usuário já autenticado no front)
+  { method: "POST", path: "/lote-exportacao/analisar" },
+  { method: "POST", path: "/lote-exportacao/corrigir" },
+  { method: "POST", path: "/lote-exportacao/detalhe" },
+  // Depara Equipamentos — automação via painel
+  { method: "POST", path: "/depara-equipamentos/comparar" },
+  { method: "POST", path: "/depara-equipamentos/multi" },
+  { method: "POST", path: "/depara-equipamentos/axhub-direto" },
 ];
 
 function rotaPublica(req) {

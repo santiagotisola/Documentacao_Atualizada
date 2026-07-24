@@ -32,6 +32,8 @@ import qualityRoutes from "./quality.routes.js";
 import missionRoutes from "./mission.routes.js";
 import presentationRoutes from "./presentation.routes.js";
 import odooProxyRoutes from "./odoo-proxy.routes.js";
+import loteExportacaoRoutes from "./lote-exportacao.routes.js";
+import deparaEquipamentosRoutes from "./depara-equipamentos.routes.js";
 
 const router = express.Router();
 
@@ -52,5 +54,7 @@ router.use(missionRoutes);        // Mission Engine
 router.use(presentationRoutes);   // Presentation Engine (PDF/DOCX/PPTX)
 router.use("/portal", portalRoutes); // Portal do Cidadão
 router.use(odooProxyRoutes);         // Odoo Proxy (Discuss, Chat, Canais)
+router.use(loteExportacaoRoutes);    // Correção de Lotes de Exportação AxHub
+router.use(deparaEquipamentosRoutes); // Depara de Equipamentos AxHub × AxCross
 
 export default router;
