@@ -405,10 +405,21 @@ async function loginAxCross(context, base) {
 
   log(`AxCross: login em ${urlAtual}`);
 
-  // AxCross usa e-mail + senha, botão habilitado
-  const emailInput = page.locator('input[type="email"], input[type="text"]').first();
+  // AxCross usa e-mail + senha — botão habilitado imediatamente
+  // Suporta /account/login E /login (versões diferentes)
+  const emailInput = page.locator([
+    'input[type="email"]',
+    'input[placeholder*="mail" i]',
+    'input[placeholder*="usu" i]',
+    'input[type="text"]',
+  ].join(', ')).first();
   const passInput  = page.locator('input[type="password"]').first();
-  const btnLogin   = page.locator('button:has-text("Entrar"), button[type="submit"]').first();
+  const btnLogin   = page.locator([
+    'button:has-text("Entrar")',
+    'button:has-text("Login")',
+    'button:has-text("Acessar")',
+    'button[type="submit"]',
+  ].join(', ')).first();
 
   if (await emailInput.count() > 0) await emailInput.fill(context._login || "");
   if (await passInput.count()  > 0) await passInput.fill(context._senha || "");
@@ -435,33 +446,39 @@ async function buscarEquipamentosAxCross(page, base) {
   await page.waitForSelector("table tbody tr, .k-grid-content tr", { timeout: 20_000 }).catch(() => {});
   await page.waitForTimeout(1_000);
 
-  // Tenta endpoint JSON
+  // Tenta endpoint JSON — múltiplos caminhos e campos possíveis
   const resultado = await page.evaluate(async () => {
     const endpoints = [
       "/equipments/equipment/equipment/datahandler",
       "/equipments/equipment/datahandler",
       "/equipment/datahandler",
+      "/equipments/datahandler",
+      "/api/equipment",
+      "/api/equipments",
     ];
     for (const ep of endpoints) {
       try {
         const r = await fetch(ep, { credentials: "include", headers: { "X-Requested-With": "XMLHttpRequest" } });
-        if (r.ok) {
-          const d = await r.json();
-          if (d?.Data || d?.data || Array.isArray(d)) return { ok: true, ep, data: d };
-        }
+        if (!r.ok) continue;
+        const d = await r.json();
+        const items = d?.Data || d?.data || (Array.isArray(d) ? d : d?.Items || d?.items || []);
+        if (items.length > 0) return { ok: true, ep, data: d, count: items.length };
       } catch { /* continua */ }
     }
     return { ok: false };
   });
 
   if (resultado.ok) {
-    const raw = resultado.data?.Data || resultado.data?.data || (Array.isArray(resultado.data) ? resultado.data : resultado.data?.Items || []);
+    const raw = resultado.data?.Data || resultado.data?.data ||
+      (Array.isArray(resultado.data) ? resultado.data : resultado.data?.Items || resultado.data?.items || []);
     log(`AxCross datahandler (${resultado.ep}): ${raw.length} registros`);
     return raw.map(e => ({
-      // AxCross usa EquipmentCode (confirmado via inspeção ao vivo)
-      codigo:     e.EquipmentCode || e.Equipamento?.Descricao || e.CodigoEquipamento || e.Codigo || e.Nome || "",
-      descricao:  e.Local || e.Descricao || e.GrupoEquipamento || "",
-      sistema:    "AxCross",
+      // Tenta múltiplos campos possíveis para compatibilidade entre versões AxCross
+      codigo:    e.EquipmentCode || e.Codigo || e.CodigoEquipamento || e.Code ||
+                 (e.Equipamento?.Descricao) || e.Nome || e.name || e.Name || "",
+      descricao: e.Local || e.Localizacao || e.Location || e.Descricao ||
+                 e.Description || e.GrupoEquipamento || "",
+      sistema:   "AxCross",
     })).filter(e => e.codigo);
   }
 

@@ -104,7 +104,7 @@ function PainelCaptura({ pares }) {
 
           {/* Grid de sites */}
           <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fill, minmax(280px, 1fr))', gap:'0.625rem' }}>
-            {pares.map(par => {
+            {pares.map((par, idx) => {
               const key = par.hub.url.replace(/https?:\/\//, '').split('/')[0];
               const store = storeStatus[key];
               const temDados = store?.total > 0;
@@ -558,11 +558,12 @@ export default function DeparaEquipamentos({ siteAtivo = null, sitesAtivos = [] 
 
         // Tenta 2: busca CORS da sessão atual do browser
         // Usa parâmetros do Kendo Grid para buscar TODOS os itens (pageSize=100)
+        // Nota: credentials:'omit' pois CORS com credentials requer Allow-Origin específico
         if (!axhubEquipamentos) {
           try {
             const hubResp = await fetch(
               `${s.hub.url}/operacao/datahandler?pageSize=100&page=1&skip=0&take=100`,
-              { credentials: 'include', headers: { 'X-Requested-With': 'XMLHttpRequest' }, mode: 'cors' }
+              { credentials: 'include', headers: { 'X-Requested-With': 'XMLHttpRequest' } }
             );
             if (hubResp.ok) {
               const hubData = await hubResp.json();
