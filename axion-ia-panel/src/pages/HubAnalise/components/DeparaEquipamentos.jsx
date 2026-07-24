@@ -577,13 +577,29 @@ export default function DeparaEquipamentos({ siteAtivo = null, sitesAtivos = [] 
                   <li>Volte aqui e clique <strong>"Executar Depara"</strong></li>
                 </ol>
                 {selecionados.map(s => {
-                  const bookmarklet = `javascript:(function(){const url='${s.hub.url}';const key='${s.hub.url.replace(/https?:\\/\\//, '').split('/')[0]}';fetch('/operacao/datahandler',{credentials:'include',headers:{'X-Requested-With':'XMLHttpRequest'}}).then(r=>r.json()).then(d=>{const eq=(d.Data||[]).map(e=>({codigo:e.Equipamento?.Descricao||'',grupo:e.GrupoEquipamento||'',fabricante:e.FabricanteNome||''})).filter(e=>e.codigo);return fetch('http://localhost:3100/api/depara-equipamentos/receive-hub-data',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({url:url,key:key,equipamentos:eq})});}).then(r=>r.json()).then(r=>alert('✅ '+r.total+' equipamentos enviados para o Axion IA!')).catch(e=>alert('❌ Erro: '+e.message));})();`;
+                  const hubKey = s.hub.url.replace(/https?:\/\//, '').split('/')[0];
+                  const apiUrl = 'http://localhost:3100/api/depara-equipamentos/receive-hub-data';
+                  // Bookmarklet como concatenação de strings (sem template literals que quebram JSX)
+                  const bmCode = "(function(){"
+                    + "var url='" + s.hub.url + "';"
+                    + "var key='" + hubKey + "';"
+                    + "var api='" + apiUrl + "';"
+                    + "fetch('/operacao/datahandler',{credentials:'include',headers:{'X-Requested-With':'XMLHttpRequest'}})"
+                    + ".then(function(r){return r.json();})"
+                    + ".then(function(d){"
+                    + "var eq=(d.Data||[]).map(function(e){return{codigo:(e.Equipamento&&e.Equipamento.Descricao)||'',grupo:e.GrupoEquipamento||'',fabricante:e.FabricanteNome||''};}).filter(function(e){return e.codigo;});"
+                    + "return fetch(api,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({url:url,key:key,equipamentos:eq})});"
+                    + "})"
+                    + ".then(function(r){return r.json();})"
+                    + ".then(function(r){alert('\\u2705 '+r.total+' equipamentos enviados para o Axion IA!');})"
+                    + ".catch(function(e){alert('\\u274C Erro: '+e.message);});"
+                    + "})();";
                   return (
                     <div key={s.nome} style={{ marginBottom:'0.5rem', display:'flex', gap:'0.625rem', alignItems:'center' }}>
                       <span style={{ fontSize:'0.78rem', color:'#374151', flexShrink:0 }}>📌 {s.nome}</span>
                       <a
-                        href={bookmarklet}
-                        onClick={e => { e.preventDefault(); alert('Arraste este link para a barra de favoritos. NÃO clique aqui diretamente.'); }}
+                        href={'javascript:' + bmCode}
+                        onClick={e => { e.preventDefault(); alert('Arraste este link para a barra de favoritos. NÃO clique diretamente aqui — funciona só na página do AxHub.'); }}
                         style={{ display:'inline-flex', alignItems:'center', gap:'0.375rem', padding:'0.35rem 0.875rem', borderRadius:'8px', background:'linear-gradient(135deg,#15803d,#16a34a)', color:'white', textDecoration:'none', fontSize:'0.78rem', fontWeight:700, cursor:'grab', userSelect:'none' }}
                         draggable="true"
                       >
