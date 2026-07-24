@@ -469,6 +469,34 @@ export default function DeparaEquipamentos({ siteAtivo = null, sitesAtivos = [] 
 
   const carregando = etapa === 'executando';
 
+  // ─── Captura em lote de todos os sites ──────────────────────────────────────
+  const [capturandoTodos, setCapturandoTodos] = useState(false);
+  const [resultadoCaptura, setResultadoCaptura] = useState(null);
+
+  const capturarTodosOsSites = async () => {
+    setCapturandoTodos(true);
+    setResultadoCaptura(null);
+    try {
+      const sites = pares.map(p => ({
+        nome:     p.nome,
+        axhubUrl: p.hub.url,
+        login:    p.hub.login,
+        senha:    p.hub.senha,
+      }));
+      const res  = await fetch(`${API}/capturar-todos`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ sites }),
+      });
+      const data = await res.json();
+      setResultadoCaptura(data);
+    } catch (err) {
+      setResultadoCaptura({ erro: err.message });
+    } finally {
+      setCapturandoTodos(false);
+    }
+  };
+
   // Totais do resumo
   const totalHub    = resultados.reduce((s, r) => s + (r.totais?.axhub    || 0), 0);
   const totalCross  = resultados.reduce((s, r) => s + (r.totais?.axcross  || 0), 0);
@@ -491,6 +519,49 @@ export default function DeparaEquipamentos({ siteAtivo = null, sitesAtivos = [] 
             </p>
           </div>
         </div>
+      </div>
+
+      {/* ── Painel de Captura em Lote ─────────────────────────────── */}
+      <div style={{ background:'white', borderRadius:'12px', border:'1.5px solid #e2e8f0', padding:'1rem 1.25rem' }}>
+        <div style={{ display:'flex', gap:'0.875rem', alignItems:'center', flexWrap:'wrap' }}>
+          <div style={{ flex:1 }}>
+            <div style={{ fontWeight:700, fontSize:'0.875rem', color:'#1a202c' }}>⚡ Captura em Lote — Todos os Sites</div>
+            <div style={{ fontSize:'0.75rem', color:'#9ca3af', marginTop:'0.15rem' }}>
+              Tenta login em todos os {pares.length} contratos AxHub e armazena os equipamentos para o depara.
+              Funciona melhor quando o Chrome já tem sessões ativas.
+            </div>
+          </div>
+          <button
+            onClick={capturarTodosOsSites}
+            disabled={capturandoTodos}
+            style={{ padding:'0.5rem 1.25rem', borderRadius:'10px', border:'none', cursor: capturandoTodos ? 'not-allowed' : 'pointer', background: capturandoTodos ? '#e2e8f0' : 'linear-gradient(135deg,#0284c7,#0891b2)', color: capturandoTodos ? '#9ca3af' : 'white', fontWeight:700, fontSize:'0.82rem', flexShrink:0 }}
+          >
+            {capturandoTodos ? `⏳ Capturando ${pares.length} sites...` : `🔄 Capturar Todos (${pares.length} sites)`}
+          </button>
+        </div>
+
+        {resultadoCaptura && (
+          <div style={{ marginTop:'0.875rem', borderTop:'1px solid #f1f5f9', paddingTop:'0.875rem' }}>
+            {resultadoCaptura.erro ? (
+              <div style={{ color:'#b91c1c', fontSize:'0.8rem' }}>❌ {resultadoCaptura.erro}</div>
+            ) : (
+              <>
+                <div style={{ display:'flex', gap:'1rem', flexWrap:'wrap', marginBottom:'0.625rem' }}>
+                  <span style={{ fontSize:'0.8rem', fontWeight:700, color:'#15803d' }}>✅ {resultadoCaptura.sucesso} sites capturados</span>
+                  {resultadoCaptura.falha > 0 && <span style={{ fontSize:'0.8rem', fontWeight:700, color:'#b91c1c' }}>❌ {resultadoCaptura.falha} falharam</span>}
+                  <span style={{ fontSize:'0.75rem', color:'#9ca3af' }}>— selecione os contratos e clique "Executar Depara"</span>
+                </div>
+                <div style={{ display:'flex', gap:'0.375rem', flexWrap:'wrap' }}>
+                  {resultadoCaptura.resultados?.map(r => (
+                    <span key={r.nome} style={{ display:'inline-flex', alignItems:'center', gap:'0.25rem', padding:'0.2rem 0.5rem', borderRadius:'20px', fontSize:'0.72rem', fontWeight:600, background: r.ok ? '#f0fdf4' : '#fef2f2', border:`1px solid ${r.ok ? '#bbf7d0' : '#fecaca'}`, color: r.ok ? '#15803d' : '#b91c1c' }}>
+                      {r.ok ? '✅' : '❌'} {r.nome} {r.ok ? `(${r.total})` : ''}
+                    </span>
+                  ))}
+                </div>
+              </>
+            )}
+          </div>
+        )}
       </div>
 
       {/* Seletor com botão de pesquisa */}

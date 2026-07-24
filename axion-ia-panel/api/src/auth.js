@@ -71,6 +71,7 @@ const ROTAS_PUBLICAS = [
   { method: "POST", path: "/depara-equipamentos/com-lista-hub" },
   { method: "POST", path: "/depara-equipamentos/receive-hub-data" },
   { method: "GET",  path: "/depara-equipamentos/hub-data" },
+  { method: "POST", path: "/depara-equipamentos/capturar-todos" },
 ];
 
 function rotaPublica(req) {

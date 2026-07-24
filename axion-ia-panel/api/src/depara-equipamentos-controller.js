@@ -668,6 +668,72 @@ export async function buscarAxHubDireto(req, res) {
   }
 }
 
+// ─── ENDPOINT: Captura equipamentos de TODOS os sites AxHub em lote ─────────
+/**
+ * POST /api/depara-equipamentos/capturar-todos
+ * Body: { sites: [{nome, axhubUrl, login, senha}] }
+ * Para cada site: tenta login + datahandler e armazena no hubDataStore.
+ * Retorna resumo de quais sites tiveram sucesso/falha.
+ */
+export async function capturarTodosAxHub(req, res) {
+  const { sites } = req.body;
+  if (!Array.isArray(sites) || !sites.length) {
+    return res.status(400).json({ erro: "sites[] é obrigatório" });
+  }
+
+  const resultados = [];
+  // Processa em série para não sobrecarregar
+  for (const site of sites) {
+    const base = site.axhubUrl.replace(/\/$/, "");
+    const key  = base.replace(/https?:\/\//, "").split("/")[0];
+    log(`Capturando: ${site.nome} (${base})`);
+
+    // 1. Tenta via perfil Chrome
+    const comPerfil = await buscarAxHubComPerfilChrome(base);
+    if (comPerfil && comPerfil.length > 0) {
+      hubDataStore.set(key, { equipamentos: comPerfil, url: base, ts: Date.now() });
+      resultados.push({ nome: site.nome, key, total: comPerfil.length, metodo: "perfil_chrome", ok: true });
+      log(`  OK via perfil Chrome: ${comPerfil.length} equipamentos`);
+      continue;
+    }
+
+    // 2. Tenta via Playwright headless
+    let browser;
+    try {
+      browser = await abrirBrowser(true);
+      const ctx  = await criarContexto(browser);
+      ctx._login = site.login;
+      ctx._senha = site.senha;
+      const page = await loginAxHub(ctx, base);
+      const urlAtual = page.url();
+
+      if (!urlAtual.includes("login") && !urlAtual.includes("nao-autorizado")) {
+        const equips = await buscarEquipamentosAxHub(page, base);
+        if (equips.length > 0) {
+          hubDataStore.set(key, { equipamentos: equips, url: base, ts: Date.now() });
+          resultados.push({ nome: site.nome, key, total: equips.length, metodo: "playwright", ok: true });
+          log(`  OK via Playwright: ${equips.length} equipamentos`);
+        } else {
+          resultados.push({ nome: site.nome, key, total: 0, metodo: "playwright", ok: false, erro: "Sem equipamentos" });
+        }
+      } else {
+        resultados.push({ nome: site.nome, key, total: 0, metodo: "playwright", ok: false, erro: "Login falhou (Turnstile?)" });
+        log(`  Falhou: login não realizado. URL: ${urlAtual}`);
+      }
+      await ctx.close();
+    } catch (e) {
+      resultados.push({ nome: site.nome, key, total: 0, ok: false, erro: e.message });
+      log(`  Erro: ${e.message}`);
+    } finally {
+      if (browser) await browser.close().catch(() => {});
+    }
+  }
+
+  const ok = resultados.filter(r => r.ok).length;
+  log(`Captura em lote: ${ok}/${sites.length} sites com sucesso`);
+  return res.json({ ok: true, total: sites.length, sucesso: ok, falha: sites.length - ok, resultados });
+}
+
 // ─── ENDPOINT: Compara com lista pré-buscada do AxHub ────────────────────────
 /**
  * POST /api/depara-equipamentos/com-lista-hub

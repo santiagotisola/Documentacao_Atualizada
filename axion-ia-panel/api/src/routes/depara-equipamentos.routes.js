@@ -4,16 +4,17 @@
  */
 
 import express from "express";
-import { compararEquipamentos, compararMultiContratos, buscarAxHubDireto, compararComListaHub, receberHubData, obterHubData } from "../depara-equipamentos-controller.js";
+import { compararEquipamentos, compararMultiContratos, buscarAxHubDireto, compararComListaHub, receberHubData, obterHubData, capturarTodosAxHub } from "../depara-equipamentos-controller.js";
 
 const router = express.Router();
 
-router.post("/depara-equipamentos/comparar",       compararEquipamentos);
-router.post("/depara-equipamentos/multi",           compararMultiContratos);
-router.post("/depara-equipamentos/axhub-direto",    buscarAxHubDireto);
-router.post("/depara-equipamentos/com-lista-hub",   compararComListaHub);
-// Recebe dados enviados pelo bookmarklet da página AxHub
+router.post("/depara-equipamentos/comparar",        compararEquipamentos);
+router.post("/depara-equipamentos/multi",            compararMultiContratos);
+router.post("/depara-equipamentos/axhub-direto",     buscarAxHubDireto);
+router.post("/depara-equipamentos/com-lista-hub",    compararComListaHub);
 router.post("/depara-equipamentos/receive-hub-data", receberHubData);
 router.get("/depara-equipamentos/hub-data/:key",     obterHubData);
+// Captura equipamentos de TODOS os sites AxHub (batch)
+router.post("/depara-equipamentos/capturar-todos",   capturarTodosAxHub);
 
 export default router;
