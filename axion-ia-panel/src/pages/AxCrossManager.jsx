@@ -3309,13 +3309,13 @@ function TabEcossistema() {
             </a>
             <button onClick={() => { const tab = document.createElement("a"); tab.href = `/axcross-manager?tab=timeline`; tab.click(); }}
               style={{ display: "inline-flex", alignItems: "center", gap: "5px", padding: "8px 14px",
-                background: C.brandBg, border: `1px solid ${C.brand}`, borderRadius: "6px",
+                background: C.brandBg, borderRadius: "6px",
                 color: C.brand, cursor: "pointer", fontSize: "12px", fontWeight: 600, border: "none" }}>
               📅 Ver Timeline Diária
             </button>
             <button onClick={() => { const tab = document.createElement("a"); tab.href = `/axcross-manager?tab=comparativo`; tab.click(); }}
               style={{ display: "inline-flex", alignItems: "center", gap: "5px", padding: "8px 14px",
-                background: C.brandBg, border: `1px solid ${C.brand}`, borderRadius: "6px",
+                background: C.brandBg, borderRadius: "6px",
                 color: C.brand, cursor: "pointer", fontSize: "12px", fontWeight: 600, border: "none" }}>
               📊 Comparativo Multi-Equipamento
             </button>

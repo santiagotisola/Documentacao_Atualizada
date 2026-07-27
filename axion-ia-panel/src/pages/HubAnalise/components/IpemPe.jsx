@@ -1,4 +1,5 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect, useMemo } from 'react';
+import { ALL_CREDENCIAIS } from '../../../data/sitesCredentials';
 
 // ─── DADOS ESTÁTICOS das planilhas (unificados) ───────────────────────────
 // Fonte 1: Planilha de Pontos | Fonte 2: Planilha de Faixas (Patrimônio)
@@ -190,6 +191,84 @@ const TIPO_COR = {
 
 // ─── COMPONENTE PRINCIPAL ────────────────────────────────────────────────
 export default function IpemPe({ siteAtivo = null, sitesAtivos = [] }) {
+  const SITE_IPEMPE = ALL_CREDENCIAIS.find(s => s.id === 'axhub-ipempe') || { id: 'axhub-ipempe', nome: 'IPEMPE', url: 'https://ipempe.axhub.axion.ws', sistema: 'AxHub', estado: 'PE', tipo: 'Metrologia' };
+
+  // Seletor de contrato/site
+  const [siteSel, setSiteSel]   = useState(() => siteAtivo || SITE_IPEMPE);
+  const [dropAberto, setDropAberto] = useState(false);
+  const [filtroSite, setFiltroSite] = useState('');
+  const dropRef = useRef(null);
+
+  // Sincroniza quando o siteAtivo global muda
+  useEffect(() => {
+    if (siteAtivo && siteAtivo.id !== siteSel?.id) setSiteSel(siteAtivo);
+  }, [siteAtivo?.id]);
+
+  useEffect(() => {
+    const close = (e) => { if (dropRef.current && !dropRef.current.contains(e.target)) setDropAberto(false); };
+    document.addEventListener('mousedown', close);
+    return () => document.removeEventListener('mousedown', close);
+  }, []);
+
+  const sitesAxHub = useMemo(() => ALL_CREDENCIAIS.filter(s => s.sistema === 'AxHub'), []);
+  const sitesFiltrados = useMemo(() =>
+    filtroSite.trim()
+      ? sitesAxHub.filter(s => s.nome.toLowerCase().includes(filtroSite.toLowerCase()) || s.url.toLowerCase().includes(filtroSite.toLowerCase()) || (s.estado||'').toLowerCase().includes(filtroSite.toLowerCase()))
+      : sitesAxHub,
+    [sitesAxHub, filtroSite]
+  );
+
+  const isIpemPe = !siteSel || siteSel.id === 'axhub-ipempe';
+
+  // ── Equipamentos do site selecionado (via API store) ──
+  const [equipAxHub, setEquipAxHub]     = useState([]);
+  const [loadingEquip, setLoadingEquip] = useState(false);
+  const [erroEquip, setErroEquip]       = useState(null);
+  const [equipTs, setEquipTs]           = useState(null);
+
+  // Busca os equipamentos do site selecionado no store da API
+  useEffect(() => {
+    if (!siteSel) return;
+    const key = siteSel.url.replace(/https?:\/\//, '').split('/')[0];
+    setEquipAxHub([]);
+    setErroEquip(null);
+    setLoadingEquip(true);
+    fetch(`/api/depara-equipamentos/hub-data/${key}`, { headers: { 'x-api-token': '4ca85296b69704ff408e570501c2480af8457da858defbced704ba4ad20d8bf3' } })
+      .then(r => r.json())
+      .then(d => {
+        if (d.ok && d.equipamentos?.length) {
+          setEquipAxHub(d.equipamentos);
+          setEquipTs(d.ts ? new Date(d.ts).toLocaleString('pt-BR') : null);
+        } else {
+          setErroEquip(d.erro || 'Sem dados. Use o bookmarklet abaixo para enviar os equipamentos.');
+        }
+      })
+      .catch(() => setErroEquip('Sem dados. Use o bookmarklet abaixo.'))
+      .finally(() => setLoadingEquip(false));
+  }, [siteSel?.id]);
+
+  // Gera o bookmarklet para o site selecionado
+  const bookmarkletUrl = siteSel ? (() => {
+    const url = siteSel.url;
+    const key = url.replace(/https?:\/\//, '').split('/')[0];
+    const api = 'http://localhost:3100/api/depara-equipamentos/receive-hub-data';
+    return "javascript:(function(){"
+      + "var url='" + url + "';"
+      + "var key='" + key + "';"
+      + "var api='" + api + "';"
+      + "fetch('/operacao/datahandler?pageSize=500&page=1&skip=0&take=500',{credentials:'include',headers:{'X-Requested-With':'XMLHttpRequest'}})"
+      + ".then(function(r){return r.json();})"
+      + ".then(function(d){"
+      + "var eq=(d.Data||[]).map(function(e){return{codigo:(e.Equipamento&&e.Equipamento.Descricao)||'',grupo:e.GrupoEquipamento||'',fabricante:e.FabricanteNome||'',modelo:e.ModeloNome||'',tipo:e.TipoNome||'',modoOperacao:e.ModoOperacaoNome||'',numeroSerie:e.NumeroSerie||''};}).filter(function(e){return e.codigo;});"
+      + "if(!eq.length){alert('Nenhum equipamento encontrado. Vá para /operacao no AxHub.');return;}"
+      + "return fetch(api,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({url:url,key:key,equipamentos:eq})});"
+      + "})"
+      + ".then(function(r){if(r)return r.json();})"
+      + ".then(function(r){if(r)alert('\\u2705 '+r.total+' equipamentos de '+url+' enviados!  Volte ao painel.');;})"
+      + ".catch(function(e){alert('\\u274C '+e.message);});"
+      + "})();";
+  })() : null;
+
   const [secao, setSecao] = useState('inventario');
   const [equip, setEquip] = useState(null);
   const [filtroStatus, setFiltroStatus] = useState('todos');
@@ -305,88 +384,97 @@ export default function IpemPe({ siteAtivo = null, sitesAtivos = [] }) {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
 
-      {/* ── Banner de site global (quando não é IPEM-PE) ─────────── */}
-      {siteAtivo && siteAtivo.id !== 'axhub-ipempe' && (
-        <div style={{ background: '#fffbeb', border: '1.5px solid #fde68a', borderRadius: '12px', padding: '0.875rem 1.25rem', display: 'flex', gap: '0.75rem', alignItems: 'center' }}>
-          <span style={{ fontSize: '1.25rem' }}>ℹ️</span>
-          <div style={{ flex: 1 }}>
-            <div style={{ fontWeight: 700, fontSize: '0.875rem', color: '#92400e' }}>
-              Dados de câmeras configurados para o contrato IPEM-PE
-            </div>
-            <div style={{ fontSize: '0.78rem', color: '#78350f', marginTop: '0.2rem' }}>
-              O inventário exibido abaixo é do contrato <strong>IPEM-PE</strong>. Para analisar equipamentos de{' '}
-              <strong>{siteAtivo.nome}</strong>, acesse diretamente o sistema:
+      {/* ── Se site NÃO é IPEM-PE: card de acesso rápido ─────────── */}
+      {!isIpemPe && (
+        <div style={{ background: 'white', borderRadius: '12px', border: '1.5px solid #0891b233', padding: '1.25rem 1.5rem' }}>
+          <div style={{ display: 'flex', gap: '1rem', alignItems: 'flex-start', flexWrap: 'wrap' }}>
+            <div style={{ width: '44px', height: '44px', borderRadius: '10px', background: 'linear-gradient(135deg, #0891b2, #0284c7)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.3rem', flexShrink: 0 }}>📷</div>
+            <div style={{ flex: 1, minWidth: 0 }}>
+              <div style={{ fontWeight: 800, fontSize: '1rem', color: '#1a202c' }}>{siteSel.nome} — Gestão de Equipamentos</div>
+              <div style={{ fontSize: '0.75rem', color: '#6b7280', marginTop: '0.2rem' }}>
+                {siteSel.tipo} · {siteSel.estado} · <a href={siteSel.url} target="_blank" rel="noopener noreferrer" style={{ color: '#0891b2' }}>{siteSel.url.replace('https://', '')} ↗</a>
+              </div>
+              <div style={{ marginTop: '0.875rem', display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
+                {[
+                  { label: '📋 Inventário', path: '/equipamento' },
+                  { label: '⚙️ Configurações', path: '/equipamento/configuracao' },
+                  { label: '📊 Relatório', path: '/relatorio' },
+                  { label: '🔍 Consulta Infração', path: '/consultainfracao' },
+                  { label: '📤 Exportação', path: '/loteexportacao' },
+                ].map(l => (
+                  <a key={l.path} href={`${siteSel.url}${l.path}`} target="_blank" rel="noopener noreferrer"
+                    style={{ padding: '0.35rem 0.75rem', borderRadius: '8px', border: '1px solid #a5f3fc', background: '#ecfeff', color: '#0891b2', textDecoration: 'none', fontSize: '0.78rem', fontWeight: 600, display: 'inline-flex', alignItems: 'center', gap: '0.3rem' }}>
+                    {l.label} ↗
+                  </a>
+                ))}
+              </div>
             </div>
           </div>
-          <a
-            href={`${siteAtivo.url}/equipamento`}
-            target="_blank"
-            rel="noopener noreferrer"
-            style={{ padding: '0.4rem 0.875rem', borderRadius: '8px', background: '#f59e0b', color: 'white', textDecoration: 'none', fontWeight: 700, fontSize: '0.78rem', flexShrink: 0 }}
-          >
-            📷 Equipamentos {siteAtivo.nome} ↗
-          </a>
+          <div style={{ marginTop: '1rem', padding: '0.75rem 1rem', background: '#f0fdf4', borderRadius: '8px', border: '1px solid #bbf7d0', fontSize: '0.78rem', color: '#15803d' }}>
+            ℹ️ O inventário detalhado abaixo é do contrato <strong>IPEM-PE</strong> (dados de referência). Para gerenciar equipamentos de <strong>{siteSel.nome}</strong>, use os links acima para acessar o sistema diretamente.
+          </div>
         </div>
       )}
 
-      {/* ── Comparação multi-site ─────────────────────────────────── */}
-      {sitesAtivos.length > 1 && (
-        <div style={{ background: '#f0f4ff', border: '1.5px solid #c7d2fe', borderRadius: '12px', padding: '0.875rem 1.25rem' }}>
-          <div style={{ fontWeight: 700, fontSize: '0.85rem', color: '#3730a3', marginBottom: '0.625rem' }}>⚡ Links rápidos — Equipamentos por site</div>
-          <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
-            {sitesAtivos.map(s => (
-              <a key={s.id} href={`${s.url}/equipamento`} target="_blank" rel="noopener noreferrer"
-                style={{ padding: '0.3rem 0.75rem', borderRadius: '8px', background: 'white', border: '1px solid #c7d2fe', color: '#4f46e5', textDecoration: 'none', fontSize: '0.78rem', fontWeight: 600 }}>
-                📷 {s.nome} ↗
+      {/* ── Header + Navegação unificados ─────────────────────────── */}
+      <div style={{ background: 'white', borderRadius: '12px', border: '1px solid #e2e8f0', overflow: 'hidden' }}>
+        {/* Linha superior: título + KPIs */}
+        <div style={{ padding: '0.875rem 1.25rem', display: 'flex', alignItems: 'center', gap: '0.75rem', flexWrap: 'wrap', borderBottom: '1px solid #f1f5f9' }}>
+          <div style={{ width: '34px', height: '34px', borderRadius: '8px', background: 'linear-gradient(135deg, #0891b2, #0284c7)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1rem', flexShrink: 0 }}>📷</div>
+          <div style={{ flex: 1, minWidth: 0 }}>
+            <div style={{ fontWeight: 800, fontSize: '0.95rem', color: '#1a202c', display: 'flex', alignItems: 'center', gap: '0.5rem', flexWrap: 'wrap' }}>
+              {siteSel ? siteSel.nome : 'IPEM-PE'} — Gestão de Equipamentos | Hikvision
+              {!isIpemPe && <span style={{ fontSize: '0.65rem', color: '#9ca3af', fontWeight: 400 }}>(dados IPEM-PE)</span>}
+            </div>
+            <div style={{ fontSize: '0.7rem', color: '#6b7280', marginTop: '0.1rem' }}>
+              Câmeras Hikvision ITS · {siteSel ? `${siteSel.tipo} · ${siteSel.estado}` : 'Contrato IPEM Pernambuco'} ·{' '}
+              <a href={siteSel?.url || 'https://ipempe.axhub.axion.ws'} target="_blank" rel="noreferrer" style={{ color: '#0891b2' }}>
+                {(siteSel?.url || 'https://ipempe.axhub.axion.ws').replace('https://', '')} ↗
               </a>
-            ))}
-          </div>
-        </div>
-      )}
-
-      {/* ── Header Stats ── */}
-      <div style={{ background: 'white', borderRadius: '12px', border: '1px solid #e2e8f0', padding: '1.25rem 1.5rem' }}>
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '1rem' }}>
-          <div>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '0.625rem' }}>
-              <div style={{ width: '36px', height: '36px', borderRadius: '8px', background: 'linear-gradient(135deg, #0891b2, #0284c7)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.1rem' }}>📷</div>
-              <div>
-                <div style={{ fontWeight: 800, fontSize: '1rem', color: '#1a202c' }}>IPEM-PE — Gestão de Equipamentos</div>
-                <div style={{ fontSize: '0.72rem', color: '#6b7280' }}>Câmeras Hikvision ITS · Contrato IPEM Pernambuco · <a href="https://ipempe.axhub.axion.ws" target="_blank" rel="noreferrer" style={{ color: '#0891b2' }}>ipempe.axhub.axion.ws ↗</a></div>
-              </div>
             </div>
           </div>
-          <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
+          {/* KPIs inline */}
+          <div style={{ display: 'flex', gap: '0.5rem', flexShrink: 0 }}>
             {[
-              { label: 'Equipamentos', value: totalEquip, cor: '#0891b2', bg: '#ecfeff' },
+              { label: 'Equip.', value: totalEquip, cor: '#0891b2', bg: '#ecfeff' },
               { label: 'Faixas', value: totalLanes, cor: '#7c3aed', bg: '#f5f3ff' },
-              { label: 'Anomalias', value: anomalias.length, cor: '#ef4444', bg: '#fef2f2' },
-              { label: 'Pendentes', value: EQUIPAMENTOS.filter(e => e.status === 'pendente').length, cor: '#6b7280', bg: '#f9fafb' },
+              { label: 'Anom.', value: anomalias.length, cor: '#ef4444', bg: '#fef2f2', onClick: () => setSecao('anomalias') },
+              { label: 'Pend.', value: EQUIPAMENTOS.filter(e => e.status === 'pendente').length, cor: '#6b7280', bg: '#f9fafb' },
             ].map(s => (
-              <div key={s.label} style={{ padding: '0.5rem 0.875rem', borderRadius: '8px', background: s.bg, border: `1px solid ${s.cor}33`, textAlign: 'center', minWidth: '80px' }}>
-                <div style={{ fontWeight: 800, fontSize: '1.25rem', color: s.cor, lineHeight: 1 }}>{s.value}</div>
-                <div style={{ fontSize: '0.68rem', color: '#6b7280', marginTop: '0.15rem' }}>{s.label}</div>
+              <div key={s.label} onClick={s.onClick} style={{ padding: '0.35rem 0.625rem', borderRadius: '8px', background: s.bg, border: `1px solid ${s.cor}33`, textAlign: 'center', minWidth: '52px', cursor: s.onClick ? 'pointer' : 'default' }}>
+                <div style={{ fontWeight: 800, fontSize: '1.05rem', color: s.cor, lineHeight: 1 }}>{s.value}</div>
+                <div style={{ fontSize: '0.62rem', color: '#6b7280', marginTop: '0.1rem' }}>{s.label}</div>
               </div>
             ))}
           </div>
         </div>
-      </div>
 
-      {/* ── Navegação ── */}
-      <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
-        {[
-          { id: 'inventario', label: '📋 Inventário Unificado' },
-          { id: 'config', label: '📷 Config Câmera' },
-          { id: 'depara', label: '🔁 De-Para' },
-          { id: 'axhub',     label: '🔗 AxHub Equipamentos' },
-          { id: 'api',       label: '⚡ API De-Para' },
-          { id: 'anomalias', label: `⚠️ Anomalias (${anomalias.length})` },
-          { id: 'guia', label: '🗺️ Guia de Validação' },
-        ].map(s => (
-          <button key={s.id} onClick={() => setSecao(s.id)} style={{ padding: '0.5rem 1rem', borderRadius: '8px', border: '1px solid', cursor: 'pointer', fontSize: '0.82rem', fontWeight: 600, borderColor: secao === s.id ? '#0891b2' : '#e2e8f0', background: secao === s.id ? '#0891b2' : 'white', color: secao === s.id ? 'white' : '#374151', transition: 'all 0.15s' }}>
-            {s.label}
-          </button>
-        ))}
+        {/* Linha de abas */}
+        <div style={{ display: 'flex', gap: '0.375rem', flexWrap: 'wrap', padding: '0.625rem 1rem', background: '#f8fafc', borderTop: '1px solid #f1f5f9' }}>
+          {[
+            { id: 'inventario', label: '📋 Inventário',  cor: '#0891b2' },
+            { id: 'config',     label: '📷 Config',      cor: '#0891b2' },
+            { id: 'depara',     label: '🔁 De-Para',     cor: '#0891b2' },
+            { id: 'axhub',      label: '🔗 AxHub',       cor: '#0891b2' },
+            { id: 'api',        label: '⚡ API',          cor: '#f59e0b' },
+            { id: 'anomalias',  label: `⚠️ Anomalias${anomalias.length ? ` (${anomalias.length})` : ''}`, cor: '#ef4444' },
+            { id: 'guia',       label: '🗺️ Guia',        cor: '#10b981' },
+          ].map(s => {
+            const ativo = secao === s.id;
+            return (
+              <button key={s.id} onClick={() => setSecao(s.id)} style={{
+                padding: '0.35rem 0.875rem', borderRadius: '8px', cursor: 'pointer',
+                border: `1.5px solid ${ativo ? s.cor : '#e2e8f0'}`,
+                background: ativo ? s.cor : 'white',
+                color: ativo ? 'white' : '#374151',
+                fontSize: '0.78rem', fontWeight: ativo ? 700 : 500,
+                whiteSpace: 'nowrap', transition: 'all 0.15s',
+              }}>
+                {s.label}
+              </button>
+            );
+          })}
+        </div>
       </div>
 
       {/* ══════════ INVENTÁRIO ══════════ */}
@@ -932,81 +1020,110 @@ export default function IpemPe({ siteAtivo = null, sitesAtivos = [] }) {
           {/* Cabeçalho + link */}
           <div style={{ background: 'white', borderRadius: '12px', border: '1px solid #e2e8f0', padding: '1.25rem 1.5rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '1rem' }}>
             <div>
-              <h3 style={{ margin: '0 0 0.25rem', fontSize: '0.95rem', color: '#1a202c' }}>🔗 Equipamentos no AxHub IPEM-PE</h3>
-              <p style={{ margin: 0, fontSize: '0.78rem', color: '#6b7280' }}>Tabela espelhando as colunas da tela <code>ipempe.axhub.axion.ws/equipamento</code></p>
+              <h3 style={{ margin: '0 0 0.25rem', fontSize: '0.95rem', color: '#1a202c' }}>🔗 Equipamentos no AxHub — {siteSel?.nome || 'IPEM-PE'}</h3>
+              <p style={{ margin: 0, fontSize: '0.78rem', color: '#6b7280' }}>
+                {equipTs ? `Dados capturados em: ${equipTs}` : `Tabela espelhando a tela `}
+                {!equipTs && <code>{(siteSel?.url || 'https://ipempe.axhub.axion.ws').replace('https://', '')}/equipamento</code>}
+              </p>
             </div>
-            <a href="https://ipempe.axhub.axion.ws/equipamento" target="_blank" rel="noreferrer" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.4rem', padding: '0.5rem 1rem', borderRadius: '8px', background: '#0891b2', color: 'white', fontWeight: 700, fontSize: '0.82rem', textDecoration: 'none' }}>
-              🌐 Abrir no AxHub IPEM-PE ↗
+            <a href={`${siteSel?.url || 'https://ipempe.axhub.axion.ws'}/equipamento`} target="_blank" rel="noreferrer"
+              style={{ display: 'inline-flex', alignItems: 'center', gap: '0.4rem', padding: '0.5rem 1rem', borderRadius: '8px', background: '#0891b2', color: 'white', fontWeight: 700, fontSize: '0.82rem', textDecoration: 'none' }}>
+              🌐 Abrir no AxHub {siteSel?.nome || 'IPEM-PE'} ↗
             </a>
           </div>
 
-          {/* Tabela AxHub */}
-          <div style={{ background: 'white', borderRadius: '12px', border: '1px solid #e2e8f0', overflow: 'hidden' }}>
-            <div style={{ overflowX: 'auto' }}>
-              <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '0.78rem' }}>
-                <thead>
-                  <tr style={{ background: '#0891b2' }}>
-                    {['Nº Série', 'Código', 'Fabricante', 'Modelo', 'Tipo', 'Modo Operação', 'Desabilitado', 'Limite Horas Importação', 'Grupo do Equipamento', 'Link AxHub'].map(h => (
-                      <th key={h} style={{ padding: '0.625rem 0.875rem', textAlign: 'left', fontWeight: 700, color: 'white', fontSize: '0.7rem', whiteSpace: 'nowrap', borderBottom: '2px solid #0284c7' }}>{h}</th>
-                    ))}
-                  </tr>
-                </thead>
-                <tbody>
-                  {EQUIPAMENTOS.flatMap(e => e.lanes.map((l, li) => {
-                    const nserie = config.afericao.numeroSerie && configEditando === e.codigo ? config.afericao.numeroSerie : `HIK-ITS-${e.codigo}-${l.faixa}`;
-                    const st = STATUS_COR[l.status];
-                    return (
-                      <tr key={l.codigo} style={{ borderBottom: '1px solid #f1f5f9', background: li % 2 === 0 ? 'white' : '#f8fafc' }}>
-                        <td style={{ padding: '0.5rem 0.875rem' }}>
-                          <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
-                            {l.patrimonio ? (
-                              <span style={{ fontFamily: 'monospace', fontSize: '0.75rem', color: '#374151' }}>{nserie}</span>
-                            ) : (
-                              <span style={{ fontFamily: 'monospace', fontSize: '0.75rem', color: '#ef4444' }}>⚠️ sem nº série</span>
-                            )}
-                          </div>
-                        </td>
-                        <td style={{ padding: '0.5rem 0.875rem', fontFamily: 'monospace', fontWeight: 700, color: '#1a202c', whiteSpace: 'nowrap' }}>{l.codigo}</td>
-                        <td style={{ padding: '0.5rem 0.875rem', color: '#374151' }}>Hikvision</td>
-                        <td style={{ padding: '0.5rem 0.875rem', color: '#374151', whiteSpace: 'nowrap' }}>ITS — V5.5.0</td>
-                        <td style={{ padding: '0.5rem 0.875rem' }}>
-                          <span style={{ fontSize: '0.7rem', padding: '0.15rem 0.4rem', borderRadius: '4px', background: '#eff6ff', color: '#1d4ed8', fontWeight: 600 }}>Cinemômetro</span>
-                        </td>
-                        <td style={{ padding: '0.5rem 0.875rem' }}>
-                          <span style={{ fontSize: '0.7rem', padding: '0.15rem 0.4rem', borderRadius: '4px', background: '#ecfeff', color: '#0891b2', fontWeight: 600 }}>Fiscal 4.0</span>
-                        </td>
-                        <td style={{ padding: '0.5rem 0.875rem', textAlign: 'center' }}>
-                          <span style={{ fontSize: '0.75rem', color: e.status === 'pendente' ? '#9ca3af' : '#10b981' }}>{e.status === 'pendente' ? '—' : 'Não'}</span>
-                        </td>
-                        <td style={{ padding: '0.5rem 0.875rem', textAlign: 'center', color: '#6b7280', fontSize: '0.75rem' }}>24h</td>
-                        <td style={{ padding: '0.5rem 0.875rem' }}>
-                          <span style={{ fontSize: '0.7rem', padding: '0.15rem 0.4rem', borderRadius: '4px', background: e.tipo === 'federal' ? '#eff6ff' : '#f5f3ff', color: e.tipo === 'federal' ? '#1d4ed8' : '#7c3aed', fontWeight: 600 }}>
-                            IPEM-PE {e.tipo === 'federal' ? '(BR)' : '(PE)'}
-                          </span>
-                        </td>
-                        <td style={{ padding: '0.5rem 0.875rem', whiteSpace: 'nowrap' }}>
-                          <div style={{ display: 'flex', gap: '0.3rem' }}>
-                            <a href="https://ipempe.axhub.axion.ws/equipamento" target="_blank" rel="noreferrer" style={{ padding: '0.2rem 0.5rem', borderRadius: '6px', background: '#ecfeff', color: '#0891b2', fontSize: '0.7rem', fontWeight: 600, textDecoration: 'none', border: '1px solid #a5f3fc' }}>
-                              ↗ AxHub
-                            </a>
-                            <span style={{ padding: '0.2rem 0.4rem', borderRadius: '6px', background: st.bg, color: st.cor, fontSize: '0.68rem', fontWeight: 700, border: `1px solid ${st.cor}33` }}>
-                              {st.label}
-                            </span>
-                          </div>
-                        </td>
-                      </tr>
-                    );
-                  }))}
-                </tbody>
-              </table>
+          {/* Estado: carregando */}
+          {loadingEquip && (
+            <div style={{ background: 'white', borderRadius: '12px', border: '1px solid #e2e8f0', padding: '2rem', textAlign: 'center', color: '#6b7280', fontSize: '0.85rem' }}>
+              ⏳ Buscando equipamentos de {siteSel?.nome}...
             </div>
-          </div>
+          )}
+
+          {/* Estado: sem dados — mostra bookmarklet */}
+          {!loadingEquip && erroEquip && (
+            <div style={{ background: 'white', borderRadius: '12px', border: '1.5px solid #fde68a', padding: '1.5rem' }}>
+              <div style={{ fontWeight: 700, fontSize: '0.9rem', color: '#92400e', marginBottom: '0.5rem' }}>📭 Sem dados para {siteSel?.nome}</div>
+              <div style={{ fontSize: '0.8rem', color: '#78350f', marginBottom: '1rem' }}>{erroEquip}</div>
+              <div style={{ background: '#f0fdf4', border: '1.5px solid #bbf7d0', borderRadius: '10px', padding: '1rem' }}>
+                <div style={{ fontWeight: 700, fontSize: '0.85rem', color: '#15803d', marginBottom: '0.5rem' }}>⭐ Como capturar os equipamentos</div>
+                <ol style={{ margin: '0 0 0.875rem', paddingLeft: '1.25rem', fontSize: '0.78rem', color: '#374151', lineHeight: 1.8 }}>
+                  <li>Arraste o botão abaixo para a <strong>barra de favoritos</strong> do navegador</li>
+                  <li>Acesse <a href={`${siteSel?.url}/operacao`} target="_blank" rel="noopener noreferrer" style={{ color: '#0891b2' }}>{siteSel?.url}/operacao</a> e faça login</li>
+                  <li>Clique no favorito <strong>"📤 Enviar {siteSel?.nome}"</strong></li>
+                  <li>Volte aqui — os dados aparecerão automaticamente</li>
+                </ol>
+                <a
+                  href={bookmarkletUrl}
+                  onClick={e => { e.preventDefault(); alert('Arraste este botão para a barra de favoritos. NÃO clique diretamente aqui.'); }}
+                  draggable="true"
+                  style={{ display: 'inline-flex', alignItems: 'center', gap: '0.4rem', padding: '0.5rem 1.125rem', borderRadius: '8px', background: 'linear-gradient(135deg, #15803d, #16a34a)', color: 'white', textDecoration: 'none', fontSize: '0.82rem', fontWeight: 700, cursor: 'grab', userSelect: 'none' }}
+                >
+                  📤 Enviar {siteSel?.nome}
+                </a>
+                <button
+                  onClick={() => {
+                    const key = siteSel.url.replace(/https?:\/\//, '').split('/')[0];
+                    setLoadingEquip(true);
+                    fetch(`/api/depara-equipamentos/hub-data/${key}`, { headers: { 'x-api-token': '4ca85296b69704ff408e570501c2480af8457da858defbced704ba4ad20d8bf3' } })
+                      .then(r => r.json()).then(d => { if (d.ok && d.equipamentos?.length) { setEquipAxHub(d.equipamentos); setEquipTs(d.ts ? new Date(d.ts).toLocaleString('pt-BR') : null); setErroEquip(null); } })
+                      .catch(() => {}).finally(() => setLoadingEquip(false));
+                  }}
+                  style={{ marginLeft: '0.75rem', padding: '0.45rem 1rem', borderRadius: '8px', border: '1.5px solid #e2e8f0', background: '#f8fafc', color: '#374151', fontSize: '0.78rem', fontWeight: 600, cursor: 'pointer' }}
+                >
+                  🔄 Verificar novamente
+                </button>
+              </div>
+            </div>
+          )}
+
+          {/* Tabela com dados reais */}
+          {!loadingEquip && equipAxHub.length > 0 && (
+            <div style={{ background: 'white', borderRadius: '12px', border: '1px solid #e2e8f0', overflow: 'hidden' }}>
+              <div style={{ overflowX: 'auto' }}>
+                <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '0.78rem' }}>
+                  <thead>
+                    <tr style={{ background: '#0891b2' }}>
+                      {['Código', 'Fabricante', 'Modelo', 'Tipo', 'Modo Operação', 'Grupo', 'Nº Série'].map(h => (
+                        <th key={h} style={{ padding: '0.625rem 0.875rem', textAlign: 'left', fontWeight: 700, color: 'white', fontSize: '0.7rem', whiteSpace: 'nowrap', borderBottom: '2px solid #0284c7' }}>{h}</th>
+                      ))}
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {equipAxHub.map((e, i) => (
+                      <tr key={i} style={{ borderBottom: '1px solid #f1f5f9', background: i % 2 === 0 ? 'white' : '#f8fafc' }}>
+                        <td style={{ padding: '0.5rem 0.875rem', fontFamily: 'monospace', fontWeight: 700, color: '#0891b2', whiteSpace: 'nowrap' }}>{e.codigo}</td>
+                        <td style={{ padding: '0.5rem 0.875rem', color: '#374151' }}>{e.fabricante || '—'}</td>
+                        <td style={{ padding: '0.5rem 0.875rem', color: '#374151', whiteSpace: 'nowrap' }}>{e.modelo || '—'}</td>
+                        <td style={{ padding: '0.5rem 0.875rem' }}>
+                          <span style={{ fontSize: '0.7rem', padding: '0.15rem 0.4rem', borderRadius: '4px', background: '#eff6ff', color: '#1d4ed8', fontWeight: 600 }}>{e.tipo || 'Cinemômetro'}</span>
+                        </td>
+                        <td style={{ padding: '0.5rem 0.875rem' }}>
+                          <span style={{ fontSize: '0.7rem', padding: '0.15rem 0.4rem', borderRadius: '4px', background: '#ecfeff', color: '#0891b2', fontWeight: 600 }}>{e.modoOperacao || 'Fiscal 4.0'}</span>
+                        </td>
+                        <td style={{ padding: '0.5rem 0.875rem', color: '#6b7280', fontSize: '0.75rem' }}>{e.grupo || '—'}</td>
+                        <td style={{ padding: '0.5rem 0.875rem', fontFamily: 'monospace', fontSize: '0.72rem', color: '#374151' }}>{e.numeroSerie || '—'}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+              <div style={{ padding: '0.75rem 1.25rem', borderTop: '1px solid #f1f5f9', display: 'flex', gap: '0.75rem', alignItems: 'center', background: '#f8fafc' }}>
+                <span style={{ fontSize: '0.75rem', color: '#6b7280' }}>{equipAxHub.length} equipamentos · {equipTs ? `capturados em ${equipTs}` : 'dados do store'}</span>
+                <a href={bookmarkletUrl} draggable="true" onClick={e => { e.preventDefault(); alert('Arraste para favoritos para atualizar os dados.'); }}
+                  style={{ marginLeft: 'auto', padding: '0.3rem 0.75rem', borderRadius: '7px', border: '1px solid #bbf7d0', background: '#f0fdf4', color: '#15803d', fontSize: '0.75rem', fontWeight: 600, textDecoration: 'none', cursor: 'grab' }}>
+                  🔄 Bookmarklet atualizar
+                </a>
+              </div>
+            </div>
+          )}
 
           {/* Aviso sobre colunas */}
-          <div style={{ background: '#eff6ff', borderRadius: '10px', border: '1px solid #bfdbfe', padding: '1rem 1.25rem', fontSize: '0.78rem', color: '#1e40af', lineHeight: 1.7 }}>
-            <strong>📌 Observação:</strong> Os campos <em>Nº Série</em> e <em>Código</em> devem corresponder exatamente ao cadastro em <a href="https://ipempe.axhub.axion.ws/equipamento" target="_blank" rel="noreferrer" style={{ color: '#0891b2' }}>ipempe.axhub.axion.ws/equipamento</a>.
-            O campo <strong>Código</strong> é a chave de integração usada na API (<code>codigoEquipamento</code>) — qualquer divergência causa falha no envio de passagens.
-          </div>
+          {!erroEquip && (
+            <div style={{ background: '#eff6ff', borderRadius: '10px', border: '1px solid #bfdbfe', padding: '1rem 1.25rem', fontSize: '0.78rem', color: '#1e40af', lineHeight: 1.7 }}>
+              <strong>📌 Observação:</strong> O campo <strong>Código</strong> é a chave de integração usada na API (<code>codigoEquipamento</code>) — qualquer divergência causa falha no envio de passagens.
+              Acesse diretamente: <a href={`${siteSel?.url || 'https://ipempe.axhub.axion.ws'}/equipamento`} target="_blank" rel="noreferrer" style={{ color: '#0891b2' }}>{(siteSel?.url || 'https://ipempe.axhub.axion.ws').replace('https://', '')}/equipamento ↗</a>
+            </div>
+          )}
         </div>
       )}
 

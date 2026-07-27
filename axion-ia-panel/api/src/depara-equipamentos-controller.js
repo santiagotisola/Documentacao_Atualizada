@@ -13,10 +13,13 @@
  *   Dados: Kendo Grid HTML (tabela) — até confirmar endpoint JSON
  */
 
-import { chromium } from "playwright";
+import { chromium as chromiumExtra } from "playwright-extra";
+import StealthPlugin from "puppeteer-extra-plugin-stealth";
 import path from "path";
 import os from "os";
 import { existsSync, readFileSync, writeFileSync } from "fs";
+import { exec, execSync } from "child_process";
+import { createDecipheriv } from "crypto";
 
 function log(msg) { console.log(`[DeparaEquip] ${msg}`); }
 function tratar(err, res, msg = "Erro no depara") {
@@ -24,124 +27,205 @@ function tratar(err, res, msg = "Erro no depara") {
   return res.status(500).json({ erro: msg, detalhe: err.message });
 }
 
-// ─── Perfil Chrome real do usuário ────────────────────────────────────────────
+// ─── Stealth: remove sinais de automação detectados pelo Cloudflare ───────────
+chromiumExtra.use(StealthPlugin());
+
+// Alias — usa sempre o stealth
+const chromium = chromiumExtra;
+
+// ─── Leitura direta de cookies do Chrome (sem Playwright, sem Turnstile) ──────
+// Funciona enquanto o usuário está logado no AxHub em seu Chrome.
+// Fluxo: Local State → DPAPI (PowerShell) → AES key → Cookies SQLite → AES-GCM decrypt
+
 function getChromePerfilDir() {
-  if (process.platform === "win32") {
-    // Usa LOCALAPPDATA se disponível (mais confiável no Windows)
-    const localApp = process.env.LOCALAPPDATA;
-    if (localApp) return path.join(localApp, "Google", "Chrome", "User Data");
-    const user = os.userInfo().username;
-    return `C:\\Users\\${user}\\AppData\\Local\\Google\\Chrome\\User Data`;
-  }
-  if (process.platform === "darwin") {
-    return path.join(os.homedir(), "Library", "Application Support", "Google", "Chrome");
-  }
-  return path.join(os.homedir(), ".config", "google-chrome");
+  const localApp = process.env.LOCALAPPDATA || path.join(os.homedir(), "AppData", "Local");
+  return path.join(localApp, "Google", "Chrome", "User Data");
 }
 
-// ─── Tenta buscar dados do AxHub usando o perfil Chrome real (com cookies) ────
-async function buscarAxHubComPerfilChrome(baseUrl) {
+async function lerCookiesBancoChrome() {
   const perfilDir = getChromePerfilDir();
-  if (!existsSync(perfilDir)) {
-    log("Perfil Chrome não encontrado");
+  const localStatePath  = path.join(perfilDir, "Local State");
+  const cookiesPaths    = [
+    path.join(perfilDir, "Default", "Network", "Cookies"),
+    path.join(perfilDir, "Default", "Cookies"),
+  ];
+
+  if (!existsSync(localStatePath)) { log("Chrome Local State não encontrado"); return null; }
+
+  // 1. Lê a chave AES criptografada com DPAPI
+  const localState = JSON.parse(readFileSync(localStatePath, "utf8"));
+  const encKeyB64  = localState?.os_crypt?.encrypted_key;
+  if (!encKeyB64) { log("Chrome encrypted_key não encontrado"); return null; }
+
+  const encKeyBuf  = Buffer.from(encKeyB64, "base64");
+  const encKeyData = encKeyBuf.slice(5); // remove prefixo "DPAPI"
+  const keyBytes   = [...encKeyData].join(",");
+
+  // 2. Descriptografa a chave AES via PowerShell (DPAPI — só funciona no mesmo usuário/máquina)
+  let aesKey;
+  try {
+    // Add-Type -AssemblyName System.Security é necessário no PowerShell 5.1
+    const psCmd = `Add-Type -AssemblyName System.Security;$d=[System.Security.Cryptography.ProtectedData]::Unprotect([byte[]]@(${keyBytes}),$null,[System.Security.Cryptography.DataProtectionScope]::CurrentUser);([BitConverter]::ToString($d)) -replace '-',''`;
+    const hex   = execSync(`powershell -NoProfile -Command "${psCmd}"`, { timeout: 15000 }).toString().trim();
+    aesKey = Buffer.from(hex, "hex");
+    log(`Chrome DPAPI: chave AES obtida (${aesKey.length} bytes)`);
+  } catch (e) {
+    log(`Chrome DPAPI erro: ${e.message.substring(0, 120)}`);
     return null;
   }
 
-  log(`Tentando perfil Chrome: ${perfilDir}`);
-  let ctx;
-  const launchOpts = {
-    headless: true,
-    channel: "chrome",
-    args: ["--no-sandbox", "--disable-setuid-sandbox", "--disable-blink-features=AutomationControlled"],
-    ignoreDefaultArgs: ["--enable-automation"],
-    ignoreHTTPSErrors: true,
-  };
+  // 3. Lê o arquivo SQLite de cookies
+  let dbBuffer;
+  const cookiesPath = cookiesPaths.find(existsSync);
+  if (!cookiesPath) { log("Chrome Cookies não encontrado"); return null; }
+
+  // Tenta 3a: readFileSync direto (Node.js usa FILE_SHARE_READ|WRITE|DELETE no Windows)
   try {
-    ctx = await chromium.launchPersistentContext(perfilDir, launchOpts);
+    dbBuffer = readFileSync(cookiesPath);
+    log(`Chrome Cookies lido diretamente: ${dbBuffer.length} bytes`);
   } catch (e1) {
-    // Chrome pode estar aberto — usa tmpdir sem o SingletonLock
-    log(`Perfil bloqueado (${e1.message.substring(0, 60)}) — copiando perfil`);
+    log(`Chrome Cookies readFileSync falhou: ${e1.message.substring(0, 80)} — tentando PowerShell`);
+    // Tenta 3b: PowerShell com FileStream (FileShare.ReadWrite)
     try {
-      const { mkdtempSync, cpSync, rmSync } = await import("fs");
-      const tmpBase = path.join(os.tmpdir(), "axhub-profile-");
-      const tmpDir  = mkdtempSync(tmpBase);
-      cpSync(perfilDir, tmpDir, { recursive: true, filter: (s) => !s.includes("SingletonLock") && !s.includes("lockfile") });
-      ctx = await chromium.launchPersistentContext(tmpDir, { ...launchOpts, channel: undefined });
+      const psRead = `Add-Type -AssemblyName System.Security;$s=[IO.FileStream]::new('${cookiesPath.replace(/\\/g, "\\\\")}', [IO.FileMode]::Open,[IO.FileAccess]::Read,[IO.FileShare]'ReadWrite,Delete');$b=New-Object byte[] $s.Length;$s.Read($b,0,$b.Length)|Out-Null;$s.Close();[Convert]::ToBase64String($b)`;
+      const b64 = execSync(`powershell -NoProfile -Command "${psRead}"`, { timeout: 15000, maxBuffer: 25 * 1024 * 1024 }).toString().trim();
+      if (!b64) throw new Error("Saída vazia do PowerShell");
+      dbBuffer = Buffer.from(b64, "base64");
+      log(`Chrome Cookies lido via PowerShell: ${dbBuffer.length} bytes`);
     } catch (e2) {
-      log(`Cópia também falhou: ${e2.message}`);
+      log(`Chrome Cookies PowerShell falhou: ${e2.message.substring(0, 80)}`);
       return null;
     }
   }
 
+  // 4. Abre o SQLite com sql.js e descriptografa cada cookie
   try {
-    const page = await ctx.newPage();
-    page.setDefaultTimeout(20_000);
+    const sqlJsPath = path.join(path.dirname(new URL(import.meta.url).pathname).slice(1).replace(/^\/([A-Za-z]:)/, "$1"), "..", "node_modules", "sql.js", "dist", "sql-wasm.js");
+    const initSqlJs = (await import(`file://${sqlJsPath.replace(/\\/g, "/")}`)  ).default;
+    const SQL       = await initSqlJs();
+    const db        = new SQL.Database(new Uint8Array(dbBuffer));
 
-    // Acessa /operacao — se já tem sessão, carrega direto
-    await page.goto(baseUrl.replace(/\/$/, "") + "/operacao", { waitUntil: "domcontentloaded", timeout: 20_000 });
-    await page.waitForTimeout(2_000);
+    const stmt = db.prepare(
+      "SELECT host_key, name, encrypted_value FROM cookies WHERE host_key LIKE '%axhub.axion.ws%'"
+    );
+    const rows = [];
+    while (stmt.step()) rows.push(stmt.getAsObject());
+    stmt.free();
+    db.close();
 
-    const urlAtual = page.url();
-    if (urlAtual.includes("login") || urlAtual.includes("nao-autorizado")) {
-      log("Perfil Chrome: sessão expirada, não autenticado");
-      await ctx.close();
-      return null;
-    }
-
-    log(`Perfil Chrome: autenticado! URL: ${urlAtual}`);
-
-    // Busca via datahandler JSON
-    const resultado = await page.evaluate(async (base) => {
+    // Descriptografa cada cookie (formato v10: 3 bytes prefixo + 12 bytes nonce + dados + 16 bytes tag)
+    const cookieMap = {}; // { host: { name: value } }
+    for (const row of rows) {
+      const enc = Buffer.from(row.encrypted_value);
+      if (enc.slice(0, 3).toString() !== "v10") continue;
       try {
-        const resp = await fetch(`${base}/operacao/datahandler`, {
-          credentials: "include",
-          headers: { "X-Requested-With": "XMLHttpRequest" },
-        });
-        if (!resp.ok) return { erro: `HTTP ${resp.status}` };
-        const data = await resp.json();
-        return { ok: true, data };
-      } catch (e) {
-        return { erro: e.message };
-      }
-    }, baseUrl.replace(/\/$/, ""));
+        const nonce  = enc.slice(3, 15);
+        const tag    = enc.slice(enc.length - 16);
+        const cipher = enc.slice(15, enc.length - 16);
+        const dec    = createDecipheriv("aes-256-gcm", aesKey, nonce);
+        dec.setAuthTag(tag);
+        const value  = Buffer.concat([dec.update(cipher), dec.final()]).toString();
+        const host   = row.host_key.replace(/^\./, "");
+        if (!cookieMap[host]) cookieMap[host] = {};
+        cookieMap[host][row.name] = value;
+      } catch {}
+    }
+    log(`Chrome cookies descriptografados para ${Object.keys(cookieMap).length} domínio(s) AxHub`);
+    return cookieMap;
+  } catch (e) {
+    log(`Chrome SQLite/decrypt erro: ${e.message}`);
+    return null;
+  }
+}
 
-    await ctx.close();
+// Cache em memória (validade 5 min) para não ler SQLite a cada depara
+let _cookieCache = null;
+let _cookieCacheTs = 0;
+async function getCookiesChrome() {
+  if (_cookieCache && Date.now() - _cookieCacheTs < 5 * 60 * 1000) return _cookieCache;
+  _cookieCache  = await lerCookiesBancoChrome();
+  _cookieCacheTs = Date.now();
+  return _cookieCache;
+}
 
-    if (!resultado.ok) {
-      log(`Perfil Chrome: datahandler erro: ${resultado.erro}`);
+// ─── Busca dados do AxHub usando cookies reais do Chrome ──────────────────────
+async function buscarAxHubComPerfilChrome(baseUrl) {
+  const base   = baseUrl.replace(/\/$/, "");
+  const domain = base.replace(/https?:\/\//, "");
+
+  const cookieMap = await getCookiesChrome();
+  if (!cookieMap) return null;
+
+  // Procura cookies para este domínio AxHub
+  const cookies = cookieMap[domain] || cookieMap[domain.replace(/^www\./, "")];
+  if (!cookies || !Object.keys(cookies).length) {
+    log(`Chrome cookies: nenhum cookie para ${domain}`);
+    return null;
+  }
+
+  const cookieStr = Object.entries(cookies).map(([k, v]) => `${k}=${v}`).join("; ");
+  log(`Chrome cookies: ${Object.keys(cookies).length} cookie(s) para ${domain}`);
+
+  // Faz requisição server-side com os cookies reais
+  try {
+    const resp = await fetch(`${base}/operacao/datahandler?pageSize=500&page=1&skip=0&take=500`, {
+      headers: {
+        "Cookie":            cookieStr,
+        "X-Requested-With": "XMLHttpRequest",
+        "Accept":            "application/json",
+        "User-Agent":        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36",
+        "Referer":           `${base}/operacao`,
+      },
+    });
+
+    if (!resp.ok) {
+      log(`Chrome cookies fetch: HTTP ${resp.status} para ${domain}`);
       return null;
     }
 
-    const raw = resultado.data?.Data || [];
+    const data  = await resp.json();
+    const raw   = data?.Data || [];
     const equips = raw.map(e => ({
-      codigo:      e.Equipamento?.Descricao || "",
-      grupo:       e.GrupoEquipamento || "",
-      fabricante:  e.FabricanteNome || "",
-      homologacao: e.Homologacao ? "Homologado" : "",
-      sistema:     "AxHub",
+      codigo:     e.Equipamento?.Descricao || e.CodigoEquipamento || "",
+      grupo:      e.GrupoEquipamento || "",
+      fabricante: e.FabricanteNome || "",
+      sistema:    "AxHub",
     })).filter(e => e.codigo);
 
-    log(`Perfil Chrome: ${equips.length} equipamentos extraídos (total: ${resultado.data?.Total})`);
-    return equips;
+    log(`Chrome cookies: ${equips.length} equipamentos de ${domain}`);
+    return equips.length > 0 ? equips : null;
   } catch (e) {
-    log(`Perfil Chrome erro: ${e.message}`);
-    if (ctx) await ctx.close().catch(() => {});
+    log(`Chrome cookies fetch erro: ${e.message}`);
     return null;
   }
 }
 
 async function abrirBrowser(headless = true) {
   try {
-    return await chromium.launch({
+    return await chromiumExtra.launch({
       channel: "chrome",
       headless,
-      args: ["--no-sandbox", "--disable-setuid-sandbox", "--disable-blink-features=AutomationControlled"],
+      args: [
+        "--no-sandbox",
+        "--disable-setuid-sandbox",
+        "--disable-blink-features=AutomationControlled",
+        "--ignore-certificate-errors",          // AxCross sites com SSL inválido
+        "--ignore-certificate-errors-spki-list",
+        "--allow-insecure-localhost",
+      ],
       ignoreDefaultArgs: ["--enable-automation"],
     });
   } catch {
-    return chromium.launch({
+    return chromiumExtra.launch({
       headless,
-      args: ["--no-sandbox", "--disable-setuid-sandbox", "--disable-blink-features=AutomationControlled", "--disable-dev-shm-usage"],
+      args: [
+        "--no-sandbox",
+        "--disable-setuid-sandbox",
+        "--disable-blink-features=AutomationControlled",
+        "--ignore-certificate-errors",
+        "--allow-insecure-localhost",
+        "--disable-dev-shm-usage",
+      ],
     });
   }
 }
@@ -406,24 +490,51 @@ async function loginAxCross(context, base) {
   log(`AxCross: login em ${urlAtual}`);
 
   // AxCross usa e-mail + senha — botão habilitado imediatamente
-  // Suporta /account/login E /login (versões diferentes)
+  // Suporta /account/login, /login (padrão) E Axion Reverse Proxy (id="username", id="password")
   const emailInput = page.locator([
+    'input#username',                    // Axion Reverse Proxy
     'input[type="email"]',
     'input[placeholder*="mail" i]',
     'input[placeholder*="usu" i]',
+    'input[placeholder*="user" i]',
     'input[type="text"]',
   ].join(', ')).first();
-  const passInput  = page.locator('input[type="password"]').first();
+  const passInput  = page.locator([
+    'input#password',                    // Axion Reverse Proxy
+    'input[type="password"]',
+  ].join(', ')).first();
   const btnLogin   = page.locator([
+    'button:has-text("Sign In")',         // Axion Reverse Proxy
     'button:has-text("Entrar")',
     'button:has-text("Login")',
     'button:has-text("Acessar")',
     'button[type="submit"]',
   ].join(', ')).first();
 
-  if (await emailInput.count() > 0) await emailInput.fill(context._login || "");
-  if (await passInput.count()  > 0) await passInput.fill(context._senha || "");
-  await page.waitForTimeout(300);
+  if (await emailInput.count() > 0) {
+    // Para React/Angular: dispara evento nativo de input para ativar o state do framework
+    await page.evaluate((val) => {
+      const el = document.querySelector('input#username, input[type="email"], input[type="text"]');
+      if (!el) return;
+      const setter = Object.getOwnPropertyDescriptor(window.HTMLInputElement.prototype, "value")?.set;
+      if (setter) setter.call(el, val);
+      el.dispatchEvent(new Event("input",   { bubbles: true }));
+      el.dispatchEvent(new Event("change",  { bubbles: true }));
+    }, context._login || "");
+    await emailInput.fill(context._login || "").catch(() => {});
+  }
+  if (await passInput.count() > 0) {
+    await page.evaluate((val) => {
+      const el = document.querySelector('input#password, input[type="password"]');
+      if (!el) return;
+      const setter = Object.getOwnPropertyDescriptor(window.HTMLInputElement.prototype, "value")?.set;
+      if (setter) setter.call(el, val);
+      el.dispatchEvent(new Event("input",  { bubbles: true }));
+      el.dispatchEvent(new Event("change", { bubbles: true }));
+    }, context._senha || "");
+    await passInput.fill(context._senha || "").catch(() => {});
+  }
+  await page.waitForTimeout(500);
 
   if (await btnLogin.count() > 0) {
     await btnLogin.click();
@@ -431,11 +542,23 @@ async function loginAxCross(context, base) {
     await page.keyboard.press("Enter");
   }
 
-  await page.waitForNavigation({ waitUntil: "domcontentloaded", timeout: 20_000 }).catch(() => {});
+  // Aguarda redirect pós-login — suporta SPAs (React/Angular) que usam router.navigate()
+  // não disparam waitForNavigation
+  await Promise.race([
+    page.waitForNavigation({ waitUntil: "domcontentloaded", timeout: 15_000 }).catch(() => {}),
+    page.waitForURL("**/equipment*", { timeout: 15_000 }).catch(() => {}),
+    new Promise(r => setTimeout(r, 5000)), // fallback: espera 5s
+  ]);
   await page.waitForTimeout(1_500);
 
-  if (!page.url().includes("/equipment")) {
+  const urlAposLogin = page.url();
+  log(`AxCross: URL após login: ${urlAposLogin}`);
+
+  if (!urlAposLogin.includes("/equipment")) {
+    log(`AxCross: login falhou ou redirecionou — tentando goto ${targetUrl}`);
     await page.goto(targetUrl, { waitUntil: "domcontentloaded", timeout: 20_000 }).catch(() => {});
+    await page.waitForTimeout(2000);
+    log(`AxCross: URL final: ${page.url()}`);
   }
 
   return page;
@@ -443,12 +566,39 @@ async function loginAxCross(context, base) {
 
 // ─── Busca equipamentos AxCross ────────────────────────────────────────────────
 async function buscarEquipamentosAxCross(page, base) {
-  await page.waitForSelector("table tbody tr, .k-grid-content tr", { timeout: 20_000 }).catch(() => {});
-  await page.waitForTimeout(1_000);
+  // Aguarda a grid carregar completamente
+  await page.waitForSelector("table tbody tr, .k-grid-content tr, .k-grid td", { timeout: 25_000 }).catch(() => {});
+  await page.waitForTimeout(2_000);
 
-  // Tenta endpoint JSON — múltiplos caminhos e campos possíveis
+  // Tenta endpoint JSON — múltiplos caminhos (Kendo Read, datahandler, REST)
   const resultado = await page.evaluate(async () => {
-    const endpoints = [
+    const headers = { "X-Requested-With": "XMLHttpRequest", "Content-Type": "application/x-www-form-urlencoded" };
+    const jsonHdr = { "X-Requested-With": "XMLHttpRequest", "Content-Type": "application/json" };
+
+    // Kendo Grid server-side Read endpoint (POST com pageSize grande)
+    const kendoEndpoints = [
+      "/equipments/equipment/equipment/Read",
+      "/equipments/equipment/Read",
+      "/equipments/Read",
+      "/equipment/Read",
+    ];
+    for (const ep of kendoEndpoints) {
+      try {
+        const r = await fetch(ep, {
+          method: "POST",
+          credentials: "include",
+          headers,
+          body: "sort=&group=&filter=&skip=0&take=500&page=1&pageSize=500",
+        });
+        if (!r.ok) continue;
+        const d = await r.json();
+        const items = d?.Data || d?.data || (Array.isArray(d) ? d : d?.Items || d?.items || []);
+        if (items.length > 0) return { ok: true, ep, data: d, count: items.length };
+      } catch { /* continua */ }
+    }
+
+    // Kendo datahandler (GET)
+    const getEndpoints = [
       "/equipments/equipment/equipment/datahandler",
       "/equipments/equipment/datahandler",
       "/equipment/datahandler",
@@ -456,7 +606,7 @@ async function buscarEquipamentosAxCross(page, base) {
       "/api/equipment",
       "/api/equipments",
     ];
-    for (const ep of endpoints) {
+    for (const ep of getEndpoints) {
       try {
         const r = await fetch(ep, { credentials: "include", headers: { "X-Requested-With": "XMLHttpRequest" } });
         if (!r.ok) continue;
@@ -473,38 +623,74 @@ async function buscarEquipamentosAxCross(page, base) {
       (Array.isArray(resultado.data) ? resultado.data : resultado.data?.Items || resultado.data?.items || []);
     log(`AxCross datahandler (${resultado.ep}): ${raw.length} registros`);
     return raw.map(e => ({
-      // Tenta múltiplos campos possíveis para compatibilidade entre versões AxCross
       codigo:    e.EquipmentCode || e.Codigo || e.CodigoEquipamento || e.Code ||
                  (e.Equipamento?.Descricao) || e.Nome || e.name || e.Name || "",
       descricao: e.Local || e.Localizacao || e.Location || e.Descricao ||
-                 e.Description || e.GrupoEquipamento || "",
+                 e.Description || e.GrupoEquipamento || e.Address || "",
       sistema:   "AxCross",
     })).filter(e => e.codigo);
   }
 
-  // Fallback HTML
+  // Fallback HTML — extrai da grid Kendo renderizada no browser
   log("AxCross: usando extração HTML");
   return await extrairEquipamentosHtmlCross(page);
 }
 
 async function extrairEquipamentosHtmlCross(page) {
+  // Antes de extrair, tenta mudar o pageSize para 500 para pegar tudo de uma vez
+  await page.evaluate(() => {
+    try {
+      const selects = document.querySelectorAll('.k-pager-sizes select, select.k-dropdown');
+      selects.forEach(s => {
+        // Tenta setar para o maior valor disponível
+        const opts = Array.from(s.options).map(o => parseInt(o.value)).filter(v => !isNaN(v)).sort((a,b) => b-a);
+        if (opts.length) s.value = String(opts[0]);
+        s.dispatchEvent(new Event('change', { bubbles: true }));
+      });
+    } catch {}
+  }).catch(() => {});
+  await page.waitForTimeout(1_500);
+
   const todos = [];
   let pagina = 1;
   while (pagina <= 30) {
-    await page.waitForTimeout(400);
-    const linhas = await page.evaluate(() =>
-      Array.from(document.querySelectorAll("table tbody tr, .k-grid-content tr")).map(r => {
+    await page.waitForTimeout(500);
+    const linhas = await page.evaluate(() => {
+      // Tenta detectar qual célula tem o código (padrão: CE001C, PE001C, etc.)
+      const codigoRegex = /^[A-Z]{2,4}\d{3,4}[A-Z]?$/;
+      const rows = Array.from(document.querySelectorAll("table tbody tr, .k-grid-content tr"));
+      return rows.map(r => {
         const cells = Array.from(r.querySelectorAll("td"));
-        const codigo = cells[0]?.innerText?.trim() || "";
-        return codigo ? { codigo, descricao: cells[1]?.innerText?.trim() || "", sistema: "AxCross" } : null;
-      }).filter(Boolean)
-    );
+        if (!cells.length) return null;
+        // Procura o código em qualquer uma das primeiras 3 células
+        let codigo = "";
+        let descricao = "";
+        for (let i = 0; i < Math.min(cells.length, 4); i++) {
+          const txt = cells[i]?.innerText?.trim().split('\n')[0].trim() || "";
+          if (codigoRegex.test(txt)) {
+            codigo = txt;
+            descricao = cells[i + 1]?.innerText?.trim().split('\n')[0].trim() || "";
+            break;
+          }
+        }
+        // Fallback: usa a primeira célula não vazia
+        if (!codigo) {
+          const txt = cells[0]?.innerText?.trim().split('\n')[0].trim() || "";
+          if (txt && txt.length >= 3 && txt.length <= 20 && !/^\d+$/.test(txt)) {
+            codigo = txt;
+            descricao = cells[1]?.innerText?.trim().split('\n')[0].trim() || "";
+          }
+        }
+        return codigo ? { codigo, descricao, sistema: "AxCross" } : null;
+      }).filter(Boolean);
+    });
     todos.push(...linhas);
+    log(`AxCross HTML página ${pagina}: ${linhas.length} linhas extraídas`);
 
     const next = page.locator(".k-pager-next:not(.k-state-disabled):not([disabled])").first();
     if (!await next.count() || await next.isDisabled().catch(() => true) || !linhas.length) break;
     await next.click();
-    await page.waitForTimeout(1_000);
+    await page.waitForTimeout(1_200);
     pagina++;
   }
   const vistos = new Set();
@@ -513,7 +699,6 @@ async function extrairEquipamentosHtmlCross(page) {
 
 // ─── ENDPOINT: Comparar ────────────────────────────────────────────────────────
 export async function compararEquipamentos(req, res) {
-  let browser;
   const passos = [];
   const push   = (tipo, msg) => { passos.push({ tipo, msg, ts: new Date().toISOString() }); log(`[${tipo}] ${msg}`); };
 
@@ -529,10 +714,9 @@ export async function compararEquipamentos(req, res) {
     push("info", `AxHub: ${baseHub}/operacao`);
     push("info", `AxCross: ${baseCross}/equipments/equipment/equipment`);
 
-    browser = await abrirBrowser(true); // headless:true para jobs em background
-
-    // ── AxHub ──────────────────────────────────────────────────────────────────
+    // ── AxHub — usa Chrome VISÍVEL (headless:false) para Turnstile auto-verificar ─
     let equipsAxHub = [];
+    let browserHub;
     try {
       // Tenta 1: perfil Chrome real do usuário (cookies já autenticados)
       const hubComPerfil = await buscarAxHubComPerfilChrome(baseHub);
@@ -540,9 +724,10 @@ export async function compararEquipamentos(req, res) {
         equipsAxHub = hubComPerfil;
         push("ok", `AxHub (perfil Chrome): ${equipsAxHub.length} equipamento(s)`);
       } else {
-        // Tenta 2: Playwright headless com login
-        push("info", `Perfil Chrome sem sessão — tentando Playwright`);
-        const ctxHub = await criarContexto(browser);
+        // Tenta 2: Chrome visível — Turnstile managed challenge auto-verifica
+        push("info", `Iniciando Chrome visível para AxHub (Turnstile)...`);
+        browserHub = await abrirBrowser(false); // headless:false obrigatório para Turnstile
+        const ctxHub = await criarContexto(browserHub);
         ctxHub._login = axhubLogin;
         ctxHub._senha = axhubSenha;
         const pageHub = await loginAxHub(ctxHub, baseHub);
@@ -558,12 +743,16 @@ export async function compararEquipamentos(req, res) {
       }
     } catch (e) {
       push("erro", `AxHub: ${e.message}`);
+    } finally {
+      if (browserHub) await browserHub.close().catch(() => {});
     }
 
-    // ── AxCross ────────────────────────────────────────────────────────────────
+    // ── AxCross — headless:true (sem Turnstile) ────────────────────────────────
     let equipsAxCross = [];
+    let browserCross;
     try {
-      const ctxCross = await criarContexto(browser);
+      browserCross = await abrirBrowser(true);
+      const ctxCross = await criarContexto(browserCross);
       ctxCross._login = axcrossLogin;
       ctxCross._senha = axcrossSenha;
       const pageCross = await loginAxCross(ctxCross, baseCross);
@@ -572,9 +761,9 @@ export async function compararEquipamentos(req, res) {
       push("ok", `AxCross: ${equipsAxCross.length} equipamento(s) extraído(s)`);
     } catch (e) {
       push("erro", `AxCross: ${e.message}`);
+    } finally {
+      if (browserCross) await browserCross.close().catch(() => {});
     }
-
-    await browser.close();
 
     // ── Depara ────────────────────────────────────────────────────────────────
     const codsHub   = new Map(equipsAxHub.map(e    => [e.codigo.toLowerCase().trim(), e]));
@@ -585,8 +774,12 @@ export async function compararEquipamentos(req, res) {
 
     push("ok", `Depara: ${emAmbos.length} em ambos · ${apenasHub.length} só AxHub · ${apenasCross.length} só AxCross`);
 
+    // Detecta falha silenciosa de AxHub (Turnstile bloqueou ou login falhou)
+    const axhubSemDados = equipsAxHub.length === 0;
+
     return res.json({
       ok: true, nome, axhubUrl: baseHub, axcrossUrl: baseCross,
+      axhub_sem_dados: axhubSemDados,
       totais: { axhub: equipsAxHub.length, axcross: equipsAxCross.length, emAmbos: emAmbos.length, apenasHub: apenasHub.length, apenasCross: apenasCross.length },
       emAmbos:     emAmbos.map(e    => ({ codigo: e.codigo, descricao: e.grupo || e.fabricante || "" })),
       apenasHub:   apenasHub.map(e  => ({ codigo: e.codigo, descricao: e.grupo || e.fabricante || "" })),
@@ -596,7 +789,6 @@ export async function compararEquipamentos(req, res) {
       passos,
     });
   } catch (err) {
-    if (browser) await browser.close().catch(() => {});
     passos.push({ tipo: "erro", msg: err.message, ts: new Date().toISOString() });
     return tratar(err, res, "Erro ao comparar equipamentos");
   }
@@ -612,7 +804,7 @@ function carregarStore() {
     if (existsSync(STORE_FILE)) {
       const data = JSON.parse(readFileSync(STORE_FILE, "utf8"));
       const agora = Date.now();
-      Object.keys(data).forEach(k => { if (agora - data[k].ts > 86_400_000) delete data[k]; }); // expira 24h
+      Object.keys(data).forEach(k => { if (agora - data[k].ts > 7 * 86_400_000) delete data[k]; }); // expira 7 dias
       return new Map(Object.entries(data));
     }
   } catch { /* inicia vazio se arquivo corrompido */ }
@@ -648,9 +840,9 @@ export function obterHubData(req, res) {
   const { key } = req.params;
   const entry = hubDataStore.get(key);
   if (!entry) return res.status(404).json({ erro: "Dados não encontrados. Use o bookmarklet na página do AxHub." });
-  if (Date.now() - entry.ts > 3_600_000) { // expira em 1h
+  if (Date.now() - entry.ts > 7 * 24 * 3_600_000) { // expira em 7 dias
     hubDataStore.delete(key);
-    return res.status(410).json({ erro: "Dados expirados (> 1h). Use o bookmarklet novamente." });
+    return res.status(410).json({ erro: "Dados expirados (> 7 dias). Use o bookmarklet novamente." });
   }
   return res.json({ ok: true, ...entry });
 }
@@ -895,7 +1087,8 @@ export async function compararMultiContratos(req, res) {
         continue;
       }
 
-      // ─── Tenta 2: Perfil Chrome + cookie (para sites com Turnstile) ─────────
+      // ─── Tenta 2: Perfil Chrome (cookies do usuário) ─────────────────────────
+      const hubComPerfil = await buscarAxHubComPerfilChrome(c.axhubUrl.replace(/\/$/, ""));
       const temDadosHub  = hubComPerfil && hubComPerfil.length > 0;
 
       if (temDadosHub || c.axhubCookie) {
@@ -982,5 +1175,231 @@ export async function compararMultiContratos(req, res) {
     return res.json({ ok: true, total: resultados.length, resultados });
   } catch (err) {
     return tratar(err, res, "Erro no multi-depara");
+  }
+}
+
+// ─── Abre URLs do AxHub no Chrome real do usuário (com sessão ativa) ──────────
+// A extensão Chrome envia os dados automaticamente ao detectar a página
+export function abrirAxHubNoChrome(req, res) {
+  try {
+    const { urls } = req.body;
+    if (!Array.isArray(urls) || !urls.length) {
+      return res.status(400).json({ erro: "urls[] é obrigatório" });
+    }
+    let abertas = 0;
+    for (const url of urls) {
+      const operacaoUrl = url.replace(/\/$/, "") + "/operacao";
+      if (process.platform === "win32") exec(`start "" "${operacaoUrl}"`);
+      else if (process.platform === "darwin") exec(`open "${operacaoUrl}"`);
+      else exec(`xdg-open "${operacaoUrl}"`);
+      abertas++;
+      log(`Abrindo no Chrome: ${operacaoUrl}`);
+    }
+    return res.json({ ok: true, abertas, mensagem: `${abertas} site(s) AxHub abertos no Chrome.` });
+  } catch (err) {
+    return tratar(err, res, "Erro ao abrir Chrome");
+  }
+}
+
+// ─── Captura AxHub via Chrome CDP (Remote Debugging Protocol) ────────────────
+// Relança o Chrome com --remote-debugging-port=9222, conecta via CDP,
+// navega para cada site AxHub (já autenticado), extrai dados e salva no store.
+export async function capturarViaChromeCDP(req, res) {
+  const { urls, contratos = [] } = req.body || {};
+  if (!Array.isArray(urls) || !urls.length) {
+    return res.status(400).json({ erro: "urls[] é obrigatório" });
+  }
+
+  // Mapa de credenciais: { "ibametro.axhub.axion.ws": {login, senha} }
+  const credMap = {};
+  for (const c of contratos) {
+    if (c.axhubUrl && c.axhubLogin) {
+      credMap[c.axhubUrl.replace(/https?:\/\//, "").replace(/\/$/, "")] = { login: c.axhubLogin, senha: c.axhubSenha };
+    }
+  }
+
+  const CDP_URL = "http://localhost:9222";
+  const resultados = [];
+  let browser;
+
+  try {
+    // ── Passo 1: verifica se CDP já está ativo ────────────────────────────
+    let cdpAtivo = false;
+    try {
+      const r = await fetch(`${CDP_URL}/json/version`, { signal: AbortSignal.timeout(2000) });
+      if (r.ok) cdpAtivo = true;
+    } catch {}
+
+    if (!cdpAtivo) {
+      // ── Passo 2: relança Chrome com CDP usando perfil temporário ─────────
+      log("Chrome CDP não ativo — iniciando Chrome com remote debugging...");
+
+      const chromePaths = [
+        `${process.env.PROGRAMFILES}\\Google\\Chrome\\Application\\chrome.exe`,
+        `${process.env["PROGRAMFILES(X86)"]}\\Google\\Chrome\\Application\\chrome.exe`,
+        `${process.env.LOCALAPPDATA}\\Google\\Chrome\\Application\\chrome.exe`,
+      ].filter(p => existsSync(p));
+
+      if (!chromePaths.length) {
+        return res.status(500).json({ erro: "Chrome não encontrado. Instale o Google Chrome." });
+      }
+
+      // Usa perfil temporário (evita conflito de lock com Chrome principal)
+      const tmpProfile = path.join(os.tmpdir(), "axhub-chrome-cdp");
+      
+      // Lança Chrome com perfil temp + CDP (NÃO mata o Chrome principal)
+      exec(`"${chromePaths[0]}" --remote-debugging-port=9222 --user-data-dir="${tmpProfile}" --no-first-run --no-default-browser-check about:blank`);
+
+      // Aguarda Chrome estar pronto (até 30s)
+      let pronto = false;
+      for (let i = 0; i < 30; i++) {
+        await new Promise(r => setTimeout(r, 1000));
+        try {
+          const r = await fetch(`${CDP_URL}/json/version`, { signal: AbortSignal.timeout(1500) });
+          if (r.ok) { pronto = true; log(`Chrome CDP pronto após ${i + 1}s`); break; }
+        } catch {}
+      }
+      if (!pronto) return res.status(500).json({ erro: "Chrome não respondeu ao CDP após 30s. Tente novamente." });
+
+      // Aguarda mais um pouco para sessões carregarem
+      await new Promise(r => setTimeout(r, 3000));
+    } else {
+      log("Chrome CDP já está ativo!");
+    }
+
+    // ── Passo 3: conecta ao Chrome existente via CDP ──────────────────────
+    // Usa chromium diretamente (sem stealth) — o browser já está rodando normalmente
+    const { chromium: chromiumRaw } = await import("playwright");
+    browser = await chromiumRaw.connectOverCDP(CDP_URL);
+    const contexts = browser.contexts();
+    const ctx = contexts.length > 0
+      ? contexts[0]
+      : await browser.newContext({ ignoreHTTPSErrors: true });
+
+    // ── Passo 4: para cada site AxHub: login + captura ────────────────────
+    for (const axhubUrl of urls) {
+      const base = axhubUrl.replace(/\/$/, "");
+      const key  = base.replace(/https?:\/\//, "");
+
+      try {
+        const page = await ctx.newPage();
+        page.setDefaultTimeout(30_000);
+
+        // Navega para /operacao — se já tem sessão, vai direto; senão redireciona para login
+        await page.goto(`${base}/operacao`, { waitUntil: "domcontentloaded", timeout: 15_000 });
+        await page.waitForTimeout(1000);
+
+        let urlAtual = page.url();
+        
+        // Se redirecionou para login, tenta fazer login (Chrome real → Turnstile deve passar)
+        if (urlAtual.includes("login") || urlAtual.includes("Login")) {
+          log(`CDP: ${key} — fazendo login via POST (Turnstile no Chrome real)`);
+
+          // Usa credenciais do request ou padrão Admin/Labor#5383
+          const cred = credMap[key] || { login: "Admin", senha: "Labor#5383" };
+          const login = cred.login;
+          const senha = cred.senha;
+          
+          // Aguarda Turnstile resolver automaticamente (até 30s no Chrome real)
+          let csrfToken = "";
+          let turnstileToken = "";
+          for (let t = 0; t < 50; t++) {
+            await page.waitForTimeout(600);
+            const tokens = await page.evaluate(() => ({
+              turnstile: document.querySelector('[name="cf-turnstile-response"]')?.value || "",
+              csrf:      document.querySelector('[name="__RequestVerificationToken"]')?.value || "",
+            }));
+            if (tokens.turnstile) {
+              turnstileToken = tokens.turnstile;
+              csrfToken = tokens.csrf;
+              log(`CDP: Turnstile resolvido em ${(t * 0.6).toFixed(1)}s`);
+              break;
+            }
+          }
+
+          if (!turnstileToken) {
+            log(`CDP: Turnstile não resolveu para ${key} — tentando POST sem token`);
+          }
+
+          // POST direto (mesmo método do loginAxHub — bypassa botão disabled)
+          const loginUrl = `${base}/Home/Login`;
+          const postResult = await page.evaluate(async ({ user, pass, turnstile, csrf, url }) => {
+            const body = new URLSearchParams({ Username: user, Password: pass, KeepConnected: "true" });
+            if (turnstile) { body.set("cf-turnstile-response", turnstile); body.set("TurnstileToken", turnstile); }
+            if (csrf) body.set("__RequestVerificationToken", csrf);
+            try {
+              const r = await fetch(url, { method: "POST", credentials: "include", headers: { "Content-Type": "application/x-www-form-urlencoded" }, body: body.toString(), redirect: "follow" });
+              return { status: r.status, url: r.url };
+            } catch (e) { return { error: e.message }; }
+          }, { user: login, pass: senha, turnstile: turnstileToken, csrf: csrfToken, url: loginUrl });
+
+          log(`CDP: POST login ${key}: status=${postResult.status} url=${postResult.url}`);
+          await page.goto(`${base}/operacao`, { waitUntil: "domcontentloaded", timeout: 15_000 });
+          await page.waitForTimeout(1000);
+          urlAtual = page.url();
+        }
+
+        if (urlAtual.includes("login") || urlAtual.includes("nao-autorizado")) {
+          log(`CDP: não autenticado em ${key} — URL: ${urlAtual}`);
+          await page.close();
+          resultados.push({ key, ok: false, erro: "Sessão expirada — faça login no AxHub no Chrome" });
+          continue;
+        }
+
+        log(`CDP: autenticado em ${key} — capturando dados`);
+
+        // Executa fetch no contexto da página (contorna CORS — está dentro do domínio)
+        const data = await page.evaluate(async (b) => {
+          try {
+            const r = await fetch(`${b}/operacao/datahandler?pageSize=500&page=1&skip=0&take=500`, {
+              credentials: "include",
+              headers: { "X-Requested-With": "XMLHttpRequest", "Accept": "application/json" },
+            });
+            return r.ok ? r.json() : null;
+          } catch { return null; }
+        }, base);
+
+        await page.close();
+
+        if (!data?.Data?.length) {
+          log(`CDP: sem dados para ${key}`);
+          resultados.push({ key, ok: false, erro: "Nenhum equipamento retornado" });
+          continue;
+        }
+
+        const equips = data.Data.map(e => ({
+          codigo:    e.Equipamento?.Descricao || e.CodigoEquipamento || "",
+          grupo:     e.GrupoEquipamento || "",
+          fabricante: e.FabricanteNome || "",
+        })).filter(e => e.codigo);
+
+        // Salva no store persistente
+        hubDataStore.set(key, { equipamentos: equips, url: axhubUrl, ts: Date.now() });
+        salvarStore(hubDataStore);
+
+        log(`CDP: ${equips.length} equipamentos de ${key} salvos no store`);
+        resultados.push({ key, ok: true, total: equips.length });
+
+      } catch (e) {
+        log(`CDP erro em ${key}: ${e.message}`);
+        resultados.push({ key, ok: false, erro: e.message });
+      }
+    }
+
+    // ── Passo 5: desconecta e fecha Chrome temporário ────────────────────
+    await browser.close(); // fecha o Chrome temporário (não é o Chrome principal)
+
+    const salvos = resultados.filter(r => r.ok).length;
+    return res.json({
+      ok: true,
+      salvos,
+      total: resultados.length,
+      mensagem: `${salvos}/${resultados.length} sites capturados via Chrome. ${salvos > 0 ? "Execute o Depara agora." : ""}`,
+      resultados,
+    });
+
+  } catch (err) {
+    if (browser) await browser.disconnect().catch(() => {});
+    return tratar(err, res, "Erro no captura CDP");
   }
 }

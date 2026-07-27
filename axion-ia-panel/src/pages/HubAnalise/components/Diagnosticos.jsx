@@ -5,6 +5,7 @@ import './DiagnosticoMedicao.css';
 
 const Diagnosticos = () => {
   const [sistemasAgrupados, setSistemasAgrupados] = useState({});
+  const [filtroSistema, setFiltroSistema] = useState('');
   const [sistemaAtual, setSistemaAtual] = useState(null);
   const [grupos, setGrupos] = useState([]);
   const [grupoSelecionado, setGrupoSelecionado] = useState('');
@@ -147,6 +148,18 @@ const Diagnosticos = () => {
             <span className="etapa-numero">1</span>
             <h2>Selecione o Sistema AxHub</h2>
           </div>
+
+          {/* Filtro de busca */}
+          {Object.keys(sistemasAgrupados).length > 0 && (
+            <div style={{ padding: '0 0 1rem 0' }}>
+              <input
+                value={filtroSistema}
+                onChange={e => setFiltroSistema(e.target.value)}
+                placeholder="🔍 Filtrar por nome, estado ou URL..."
+                style={{ width: '100%', padding: '0.5rem 0.875rem', borderRadius: '10px', border: '1.5px solid #e2e8f0', fontSize: '0.85rem', outline: 'none', background: '#f8fafc', boxSizing: 'border-box' }}
+              />
+            </div>
+          )}
           
           {Object.keys(sistemasAgrupados).length === 0 ? (
             <div className="loading-sistemas">
@@ -154,11 +167,20 @@ const Diagnosticos = () => {
               <p>Carregando sistemas...</p>
             </div>
           ) : (
-            Object.entries(sistemasAgrupados).map(([produto, sistemas]) => (
+            Object.entries(sistemasAgrupados).map(([produto, sistemas]) => {
+              const sistemasFiltrados = filtroSistema.trim()
+                ? sistemas.filter(s =>
+                    s.nome.toLowerCase().includes(filtroSistema.toLowerCase()) ||
+                    (s.estado || '').toLowerCase().includes(filtroSistema.toLowerCase()) ||
+                    (s.url || '').toLowerCase().includes(filtroSistema.toLowerCase())
+                  )
+                : sistemas;
+              if (!sistemasFiltrados.length) return null;
+              return (
               <div key={produto} className="grupo-sistemas">
-                <h3 className="grupo-titulo">{produto}</h3>
+                <h3 className="grupo-titulo">{produto} <span style={{ fontSize: '0.75rem', color: '#9ca3af', fontWeight: 400 }}>({sistemasFiltrados.length})</span></h3>
                 <div className="sistemas-grid">
-                  {sistemas.map(sistema => (
+                  {sistemasFiltrados.map(sistema => (
                     <button
                       key={sistema.id}
                       className="sistema-card"
@@ -173,7 +195,8 @@ const Diagnosticos = () => {
                   ))}
                 </div>
               </div>
-            ))
+              );
+            })
           )}
         </div>
       )}

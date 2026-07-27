@@ -10,7 +10,7 @@
  */
 
 import express from "express";
-import { statusConexao, resumoGeral, listarEquipamentos, listarOperacoes, statsInfracoes, heartbeatEquipamentos, listarTabelas, listarMonitoramentos, ultimasPassagens, statsTriagens } from "../axhub-controller.js";
+import { statusConexao, resumoGeral, listarEquipamentos, listarOperacoes, statsInfracoes, heartbeatEquipamentos, listarTabelas, listarMonitoramentos, ultimasPassagens, statsTriagens, mapaPassagens, deParaPassagens } from "../axhub-controller.js";
 import { statusConexao as axtonStatus, resumoGeral as axtonResumo, listarTabelas as axtonTabelas, ultimasPesagens as axtonPesagens, ultimasInfracoes as axtonInfracoes, heartbeatEquipamentos as axtonHeartbeat } from "../axton-controller.js";
 import { statusConexao as axcrossStatus, resumoGeral as axcrossResumo, listarEquipamentos as axcrossEquipamentos, statsPassagens as axcrossPassagens, heartbeatEquipamentos as axcrossHeartbeat, listarTabelas as axcrossTabelas, listarLocais as axcrossLocais, listarOperacoes as axcrossOperacoes, diagnosticoClassificacao as axcrossDiagnosticoClassificacao, configurarConexao as axcrossConfigurar, obterConfig as axcrossConfig, investigarUrl as axcrossInvestigar, investigarPublicoEndpoint as axcrossInvestigarPublico, classificacaoStats as axcrossClassificacaoStats, compararEquipamentos as axcrossCompararEquipamentos, compararViaUrlEndpoint as axcrossCompararViaUrl, classificacaoTimeline as axcrossClassificacaoTimeline, ecosistema as axcrossEcosistema, frotaAnalise as axcrossFrotaAnalise, mapaDados as axcrossMapaDados } from "../axcross-controller.js";
 import { listarSistemas, listarEquipamentos as medicaoListarEquipamentos, gerarDiagnostico, analisarSistema } from "../medicao-controller.js";
@@ -35,6 +35,8 @@ router.get("/axhub/monitoramentos", listarMonitoramentos);
 router.get("/axhub/passagens", ultimasPassagens);
 router.get("/axhub/triagens", statsTriagens);
 router.get("/axhub/tabelas", listarTabelas);
+router.get("/axhub/mapa-passagens", mapaPassagens);       // Heatmap dia×hora por equipamento
+router.get("/axhub/depara-passagens", deParaPassagens);   // De-Para entre dois equipamentos
 
 // ═══════════════════════════════════════════════════════════════════
 // AXTON

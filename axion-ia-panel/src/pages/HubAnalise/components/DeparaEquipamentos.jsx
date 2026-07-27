@@ -8,6 +8,33 @@ import { CREDENCIAIS_AXHUB, CREDENCIAIS_AXCROSS } from '../../../data/sitesCrede
 
 const API = '/api/depara-equipamentos';
 
+// ─── Captura hubdata da URL (enviado pelo bookmarklet via window.open) ────────
+function useCapturaHubData(onSucesso) {
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const hubdata = params.get('hubdata');
+    if (!hubdata) return;
+    try {
+      const decoded = JSON.parse(decodeURIComponent(escape(atob(hubdata))));
+      if (!decoded.key || !decoded.equipamentos?.length) return;
+      fetch(`${API}/receive-hub-data`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(decoded),
+      })
+        .then(r => r.json())
+        .then(r => {
+          onSucesso?.(`✅ ${r.total} equipamentos de ${decoded.url} salvos no store!`);
+          // Remove param da URL sem recarregar
+          const url = new URL(window.location);
+          url.searchParams.delete('hubdata');
+          window.history.replaceState({}, '', url.toString());
+        })
+        .catch(e => console.error('hubdata capture error', e));
+    } catch (e) { console.error('hubdata decode error', e); }
+  }, []);
+}
+
 // ─── Helpers ─────────────────────────────────────────────────────────────────
 
 function listarPares() {
@@ -189,11 +216,11 @@ function CardResultado({ resultado }) {
   const [expandido, setExpandido] = useState(true);
   const [aba, setAba] = useState('depara');
   const [busca, setBusca] = useState('');
-  const { nome, axhubUrl, axcrossUrl, totais, emAmbos, apenasHub, apenasCross, passos, erro } = resultado;
+  const { nome, axhubUrl, axcrossUrl, totais, emAmbos, apenasHub, apenasCross, passos, erro, axhub_sem_dados } = resultado;
   const filtrar = (lista) => !busca ? lista : lista.filter(e =>
     e.codigo?.toLowerCase().includes(busca.toLowerCase()) || e.descricao?.toLowerCase().includes(busca.toLowerCase())
   );
-  const corBorda = erro ? '#fecaca' : (apenasHub?.length || apenasCross?.length) ? '#fde68a' : '#bbf7d0';
+  const corBorda = erro ? '#fecaca' : axhub_sem_dados ? '#fde68a' : (apenasHub?.length || apenasCross?.length) ? '#fde68a' : '#bbf7d0';
 
   return (
     <div style={{ background:'white', borderRadius:'14px', border:`1.5px solid ${corBorda}`, overflow:'hidden' }}>
@@ -223,6 +250,19 @@ function CardResultado({ resultado }) {
 
       {expandido && !erro && totais && (
         <div style={{ borderTop:'1px solid #f1f5f9' }}>
+          {axhub_sem_dados && (
+            <div style={{ background:'#fffbeb', border:'none', borderBottom:'1px solid #fde68a', padding:'0.75rem 1.25rem', display:'flex', alignItems:'center', gap:'0.75rem' }}>
+              <span style={{ fontSize:'1.2rem' }}>⚠️</span>
+              <div style={{ flex:1 }}>
+                <div style={{ fontWeight:700, fontSize:'0.85rem', color:'#92400e' }}>AxHub sem dados — Turnstile bloqueou o login automático</div>
+                <div style={{ fontSize:'0.78rem', color:'#b45309', marginTop:'0.2rem' }}>
+                  Use o bookmarklet no <a href={axhubUrl} target="_blank" rel="noopener noreferrer" style={{ color:'#b45309', fontWeight:700 }}>site AxHub</a> para enviar os dados, depois execute o depara novamente.
+                  Os {totais.axcross} equipamentos do AxCross foram obtidos mas não há dados do AxHub para comparar.
+                </div>
+              </div>
+              {axhubUrl && <a href={`${axhubUrl}/operacao`} target="_blank" rel="noopener noreferrer" style={{ fontSize:'0.75rem', padding:'0.35rem 0.75rem', background:'#1d4ed8', color:'white', borderRadius:'8px', textDecoration:'none', flexShrink:0 }}>Abrir AxHub ↗</a>}
+            </div>
+          )}
           <div style={{ display:'flex', borderBottom:'1px solid #f1f5f9', background:'#f8fafc' }}>
             {[
               { id:'depara', label:'🔄 Depara',     count: (apenasHub?.length||0)+(apenasCross?.length||0) },
@@ -283,7 +323,14 @@ function CardResultado({ resultado }) {
                 : null;
               const sistNome = aba==='hub' ? 'AxHub' : aba==='cross' ? 'AxCross' : null;
 
-              if (!lista?.length) return <div style={{ padding:'1.5rem', textAlign:'center', color:'#9ca3af' }}>Nenhum equipamento</div>;
+              if (!lista?.length) {
+                const msg = aba === 'cross'
+                  ? `✅ Todos os ${totais?.axcross || 0} equipamentos do AxCross também estão no AxHub — nenhuma pendência neste sistema.`
+                  : aba === 'hub'
+                  ? `✅ Todos os ${totais?.axhub || 0} equipamentos do AxHub também estão no AxCross — nenhuma pendência neste sistema.`
+                  : '✅ Nenhum equipamento em comum (sem cruzamento).';
+                return <div style={{ padding:'1.5rem', textAlign:'center', color:'#15803d', background:'#f0fdf4', borderRadius:'8px', fontSize:'0.82rem', fontWeight:600 }}>{msg}</div>;
+              }
               return (
                 <div>
                   {linkUrl && (
@@ -508,12 +555,18 @@ export default function DeparaEquipamentos({ siteAtivo = null, sitesAtivos = [] 
   const pares = useMemo(() => listarPares(), []);
   const [selecionados, setSelecionados]     = useState([]);
   const [pesquisaAberta, setPesquisaAberta] = useState(false);
+  const [infoAberta, setInfoAberta]         = useState(false);
   const [etapa, setEtapa]                   = useState('idle');
   const [resultados, setResultados]         = useState([]);
   const [erroMsg, setErroMsg]               = useState('');
   const [cookies, setCookies]               = useState({}); // { nomePar: cookieStr }
   const [mostrarCookies, setMostrarCookies] = useState(false);
+  const [hubdataMsg, setHubdataMsg]         = useState('');
   const searchRef                           = useRef(null);
+  const infoRef                             = useRef(null);
+
+  // Captura dados enviados pelo bookmarklet via URL param ?hubdata=...
+  useCapturaHubData((msg) => setHubdataMsg(msg));
 
   // Auto-seleciona pelo contexto global
   useEffect(() => {
@@ -532,6 +585,19 @@ export default function DeparaEquipamentos({ siteAtivo = null, sitesAtivos = [] 
     return () => document.removeEventListener('mousedown', close);
   }, []);
 
+  useEffect(() => {
+    const close = (e) => { if (infoRef.current && !infoRef.current.contains(e.target)) setInfoAberta(false); };
+    document.addEventListener('mousedown', close);
+    return () => document.removeEventListener('mousedown', close);
+  }, []);
+
+  const PASSOS_DEPARA = [
+    { n:'1', t:'Pesquisar contrato',  d:'Abre o seletor com busca por nome, URL, estado. Aba Pares mostra contratos com AxHub + AxCross.' },
+    { n:'2', t:'Selecionar pares',    d:'Clique "+ Adicionar" nos pares. Nas abas individuais, selecione AxHub e depois AxCross.' },
+    { n:'3', t:'Executar Depara',     d:'O sistema acessa ambos os sistemas via automação e extrai a lista de equipamentos.' },
+    { n:'4', t:'Ver divergências',   d:'Equipamentos só no AxHub, só no AxCross e em ambos são exibidos lado a lado.' },
+  ];
+
   const adicionarPar = (par) => { setSelecionados(prev => [...prev, par]); };
   const removerPar   = (nome) => setSelecionados(prev => prev.filter(s => s.nome !== nome));
 
@@ -541,77 +607,75 @@ export default function DeparaEquipamentos({ siteAtivo = null, sitesAtivos = [] 
     setResultados([]);
     setErroMsg('');
     try {
+      // ── Processa depara em lotes de 3 (evita sobrecarga) ─────────────────
+      const LOTE = 3;
       const resultados = [];
-      for (const s of selecionados) {
-        // Tenta 1: dados do AxHub enviados pelo bookmarklet
-        let axhubEquipamentos = null;
-        const hubKey = s.hub.url.replace(/https?:\/\//, '').split('/')[0];
-        try {
-          const stored = await fetch(`/api/depara-equipamentos/hub-data/${hubKey}`);
-          if (stored.ok) {
-            const d = await stored.json();
-            if (d.equipamentos?.length > 0) {
-              axhubEquipamentos = d.equipamentos;
-            }
-          }
-        } catch { /* bookmarklet não usado */ }
+      for (let i = 0; i < selecionados.length; i += LOTE) {
+        const lote = selecionados.slice(i, i + LOTE);
+        const loteResultados = await Promise.all(lote.map(async (s) => {
+          const hubKey = s.hub.url.replace(/https?:\/\//, '').split('/')[0];
 
-        // Tenta 2: busca CORS da sessão atual do browser
-        // Usa parâmetros do Kendo Grid para buscar TODOS os itens (pageSize=100)
-        // Nota: credentials:'omit' pois CORS com credentials requer Allow-Origin específico
-        if (!axhubEquipamentos) {
+          // Busca AxHub do store
+          let axhubEquipamentos = null;
           try {
-            const hubResp = await fetch(
-              `${s.hub.url}/operacao/datahandler?pageSize=100&page=1&skip=0&take=100`,
-              { credentials: 'include', headers: { 'X-Requested-With': 'XMLHttpRequest' } }
-            );
-            if (hubResp.ok) {
-              const hubData = await hubResp.json();
-              const equips = (hubData.Data || []).map(e => ({
-                codigo: e.Equipamento?.Descricao || '',
-                grupo: e.GrupoEquipamento || '',
-                fabricante: e.FabricanteNome || '',
-              })).filter(e => e.codigo);
-              if (equips.length > 0) axhubEquipamentos = equips;
+            const stored = await fetch(`${API}/hub-data/${hubKey}`);
+            if (stored.ok) {
+              const d = await stored.json();
+              if (d.equipamentos?.length > 0) axhubEquipamentos = d.equipamentos;
             }
-          } catch { /* CORS bloqueado */ }
-        }
+          } catch { /* ignorar */ }
 
-        let endpoint, body;
-        if (axhubEquipamentos && axhubEquipamentos.length > 0) {
-          // Usa lista pré-buscada (sem Playwright para AxHub)
-          endpoint = `${API}/com-lista-hub`;
-          body = {
-            nome: s.nome,
-            axhubUrl: s.hub.url,
-            axhubEquipamentos,
-            axcrossUrl:   s.cross.url, axcrossLogin: s.cross.login, axcrossSenha: s.cross.senha,
-          };
-        } else {
-          // Fallback: Playwright + cookie se disponível
-          endpoint = `${API}/multi`;
-          body = {
-            contratos: [{
+          // Tenta CORS direto
+          if (!axhubEquipamentos) {
+            try {
+              const hubResp = await fetch(
+                `${s.hub.url}/operacao/datahandler?pageSize=500&page=1&skip=0&take=500`,
+                { credentials: 'include', headers: { 'X-Requested-With': 'XMLHttpRequest' } }
+              );
+              if (hubResp.ok) {
+                const hubData = await hubResp.json();
+                const equips = (hubData.Data || []).map(e => ({
+                  codigo: e.Equipamento?.Descricao || '',
+                  grupo: e.GrupoEquipamento || '',
+                  fabricante: e.FabricanteNome || '',
+                })).filter(e => e.codigo);
+                if (equips.length > 0) axhubEquipamentos = equips;
+              }
+            } catch { /* CORS bloqueado */ }
+          }
+
+          let endpoint, body;
+          if (axhubEquipamentos && axhubEquipamentos.length > 0) {
+            endpoint = `${API}/com-lista-hub`;
+            body = {
               nome: s.nome,
-              axhubUrl: s.hub.url, axhubLogin: s.hub.login, axhubSenha: s.hub.senha,
+              axhubUrl: s.hub.url,
+              axhubEquipamentos,
               axcrossUrl: s.cross.url, axcrossLogin: s.cross.login, axcrossSenha: s.cross.senha,
-              ...(cookies[s.nome] ? { axhubCookie: cookies[s.nome] } : {}),
-            }],
-          };
-        }
+            };
+          } else {
+            endpoint = `${API}/multi`;
+            body = {
+              contratos: [{
+                nome: s.nome,
+                axhubUrl: s.hub.url, axhubLogin: s.hub.login, axhubSenha: s.hub.senha,
+                axcrossUrl: s.cross.url, axcrossLogin: s.cross.login, axcrossSenha: s.cross.senha,
+              }],
+            };
+          }
 
-        const res  = await fetch(endpoint, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) });
-        const text = await res.text();
-        if (!text) throw new Error(`API retornou resposta vazia (HTTP ${res.status}).`);
-        let data;
-        try { data = JSON.parse(text); } catch { throw new Error(`Resposta inválida: ${text.substring(0, 100)}`); }
-        if (!res.ok) throw new Error(data?.erro || `Erro HTTP ${res.status}`);
-
-        // Normaliza resultado (multi retorna { resultados: [...] }, com-lista-hub retorna direto)
-        const resultado = endpoint.includes('/multi') ? (data.resultados?.[0] || data) : data;
-        resultados.push(resultado);
+          const res  = await fetch(endpoint, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) });
+          const text = await res.text();
+          if (!text) return { nome: s.nome, ok: false, erro: `API sem resposta (HTTP ${res.status})`, totais: { axhub:0, axcross:0, emAmbos:0, apenasHub:0, apenasCross:0 }, emAmbos:[], apenasHub:[], apenasCross:[], passos:[] };
+          let data;
+          try { data = JSON.parse(text); } catch { return { nome: s.nome, ok: false, erro: `Resposta inválida`, totais: { axhub:0, axcross:0, emAmbos:0, apenasHub:0, apenasCross:0 }, emAmbos:[], apenasHub:[], apenasCross:[], passos:[] }; }
+          if (!res.ok) return { nome: s.nome, ok: false, erro: data?.erro || `Erro HTTP ${res.status}`, totais: { axhub:0, axcross:0, emAmbos:0, apenasHub:0, apenasCross:0 }, emAmbos:[], apenasHub:[], apenasCross:[], passos:[] };
+          return endpoint.includes('/multi') ? (data.resultados?.[0] || data) : data;
+        }));
+        resultados.push(...loteResultados);
+        // Atualiza resultados parcialmente após cada lote
+        setResultados([...resultados]);
       }
-      setResultados(resultados);
       setEtapa('concluido');
     } catch (err) {
       setErroMsg(err.message);
@@ -658,6 +722,13 @@ export default function DeparaEquipamentos({ siteAtivo = null, sitesAtivos = [] 
 
   return (
     <div style={{ display:'flex', flexDirection:'column', gap:'1.25rem' }}>
+      {hubdataMsg && (
+        <div style={{ background:'#f0fdf4', border:'1.5px solid #86efac', borderRadius:'10px', padding:'0.75rem 1rem', display:'flex', alignItems:'center', gap:'0.75rem' }}>
+          <span style={{ fontSize:'1.2rem' }}>✅</span>
+          <span style={{ fontWeight:600, color:'#15803d', fontSize:'0.875rem' }}>{hubdataMsg}</span>
+          <button onClick={() => setHubdataMsg('')} style={{ marginLeft:'auto', background:'none', border:'none', cursor:'pointer', color:'#6b7280', fontSize:'1rem' }}>✕</button>
+        </div>
+      )}
 
       {/* Cabeçalho */}
       <div style={{ background:'linear-gradient(135deg,#1d4ed808,#7c3aed08)', border:'1.5px solid #c7d2fe', borderRadius:'12px', padding:'1.125rem 1.5rem' }}>
@@ -702,6 +773,32 @@ export default function DeparaEquipamentos({ siteAtivo = null, sitesAtivos = [] 
             <button onClick={() => setSelecionados([])} style={{ fontSize:'0.72rem', padding:'0.3rem 0.625rem', borderRadius:'6px', border:'1px solid #fecaca', background:'#fef2f2', cursor:'pointer', color:'#dc2626', fontWeight:700 }}>✕ Limpar</button>
           )}
 
+          {/* Botão Como funciona inline */}
+          <div ref={infoRef} style={{ position:'relative' }}>
+            <button
+              onClick={() => setInfoAberta(v => !v)}
+              style={{ padding:'0.4rem 0.7rem', borderRadius:'8px', border:`1.5px solid ${infoAberta ? '#667eea' : '#e2e8f0'}`, background: infoAberta ? '#f0f4ff' : '#f8fafc', color: infoAberta ? '#667eea' : '#6b7280', fontSize:'0.75rem', fontWeight:600, cursor:'pointer', display:'flex', alignItems:'center', gap:'0.35rem' }}
+            >
+              📖 Como funciona <span style={{ fontSize:'0.6rem', color:'#9ca3af', transform: infoAberta ? 'rotate(180deg)' : 'none', transition:'transform 0.2s' }}>▼</span>
+            </button>
+            {infoAberta && (
+              <div style={{ position:'absolute', top:'calc(100% + 6px)', left:0, zIndex:400, background:'white', borderRadius:'12px', border:'1px solid #e2e8f0', boxShadow:'0 16px 40px rgba(0,0,0,0.15)', overflow:'hidden', width:'340px' }}>
+                <div style={{ padding:'0.6rem 0.75rem', borderBottom:'1px solid #f1f5f9', background:'#f8fafc', fontWeight:700, fontSize:'0.82rem', color:'#374151' }}>📖 Como funciona o Depara</div>
+                <div style={{ padding:'0.75rem' }}>
+                  {PASSOS_DEPARA.map(p => (
+                    <div key={p.n} style={{ display:'flex', gap:'0.6rem', marginBottom:'0.6rem', alignItems:'flex-start' }}>
+                      <div style={{ width:'22px', height:'22px', borderRadius:'50%', background:'linear-gradient(135deg,#1d4ed8,#7c3aed)', color:'white', fontWeight:800, fontSize:'0.7rem', display:'flex', alignItems:'center', justifyContent:'center', flexShrink:0 }}>{p.n}</div>
+                      <div>
+                        <div style={{ fontWeight:700, fontSize:'0.78rem', color:'#1a202c' }}>{p.t}</div>
+                        <div style={{ fontSize:'0.72rem', color:'#6b7280', marginTop:'0.05rem' }}>{p.d}</div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+          </div>
+
           <span style={{ fontSize:'0.75rem', color:'#9ca3af', marginLeft:'auto' }}>
             {selecionados.length} par(es) · {pares.length} disponíveis com AxHub + AxCross
           </span>
@@ -723,8 +820,8 @@ export default function DeparaEquipamentos({ siteAtivo = null, sitesAtivos = [] 
         )}
       </div>
 
-      {/* Bookmarklet + Cookie para AxHub com Turnstile */}
-      {selecionados.length > 0 && (
+      {/* Seção manual removida — automação usa Chrome real com Turnstile gerenciado */}
+      {false && selecionados.length > 0 && (
         <div style={{ background:'white', borderRadius:'12px', border:'1.5px solid #e2e8f0', overflow:'hidden' }}>
           <div
             style={{ padding:'0.75rem 1.25rem', cursor:'pointer', display:'flex', gap:'0.5rem', alignItems:'center' }}
@@ -868,24 +965,6 @@ export default function DeparaEquipamentos({ siteAtivo = null, sitesAtivos = [] 
 
       {/* Resultados por contrato */}
       {resultados.map((r, i) => <CardResultado key={i} resultado={r} />)}
-
-      {/* Guia vazio */}
-      {etapa === 'idle' && !selecionados.length && (
-        <div style={{ background:'white', borderRadius:'12px', border:'1.5px solid #e2e8f0', padding:'1.5rem' }}>
-          <div style={{ fontWeight:700, fontSize:'0.9rem', color:'#1a202c', marginBottom:'1rem' }}>📖 Como funciona</div>
-          {[
-            { n:'1', t:'Clique em "🔍 Pesquisar contrato"', d:'Abre o seletor com busca por nome, URL, estado ou tipo. Aba Pares mostra contratos que têm AxHub + AxCross. Abas individuais permitem montar pares manualmente.' },
-            { n:'2', t:'Selecione um ou mais pares', d:'Na aba Pares, clique "+ Adicionar". Nas abas individuais, selecione primeiro o AxHub e depois o AxCross.' },
-            { n:'3', t:'Clique em "Executar Depara"', d:'O sistema acessa ambos os sistemas via automação e extrai a lista de equipamentos de cada um.' },
-            { n:'4', t:'Veja as divergências', d:'Equipamentos só no AxHub, só no AxCross e em ambos são mostrados lado a lado com filtro de busca.' },
-          ].map(p => (
-            <div key={p.n} style={{ display:'flex', gap:'0.875rem', marginBottom:'0.875rem' }}>
-              <div style={{ width:'28px', height:'28px', borderRadius:'50%', background:'linear-gradient(135deg,#1d4ed8,#7c3aed)', color:'white', fontWeight:800, fontSize:'0.78rem', display:'flex', alignItems:'center', justifyContent:'center', flexShrink:0 }}>{p.n}</div>
-              <div><div style={{ fontWeight:700, fontSize:'0.85rem', color:'#1a202c' }}>{p.t}</div><div style={{ fontSize:'0.78rem', color:'#6b7280', marginTop:'0.15rem' }}>{p.d}</div></div>
-            </div>
-          ))}
-        </div>
-      )}
     </div>
   );
 }

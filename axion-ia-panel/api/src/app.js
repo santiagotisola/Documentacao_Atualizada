@@ -60,13 +60,14 @@ app.use(express.json({ limit: "5mb" }));
 // (necessário para o bookmarklet do AxHub enviar dados de equipamentos)
 app.use((req, res, next) => {
   const origin = req.headers.origin || "";
-  // Permite: localhost (painel), axhub.axion.ws, axcross.axion.ws
-  const permitida = origin.includes("localhost") || origin.includes("axion.ws") || origin === "";
+  // Permite: localhost (painel), axhub.axion.ws, axcross.axion.ws, extensão Chrome
+  const permitida = origin.includes("localhost") || origin.includes("axion.ws") || origin.startsWith("chrome-extension://") || origin === "";
   if (permitida) {
     res.setHeader("Access-Control-Allow-Origin", origin || "*");
     res.setHeader("Access-Control-Allow-Methods", "GET,POST,PUT,DELETE,OPTIONS");
-    res.setHeader("Access-Control-Allow-Headers", "Content-Type,Authorization,X-API-Token,X-Requested-With");
+    res.setHeader("Access-Control-Allow-Headers", "Content-Type,Authorization,X-API-Token,x-api-token,X-Admin-Token,x-admin-token,X-Requested-With,Access-Control-Request-Private-Network");
     res.setHeader("Access-Control-Allow-Credentials", "true");
+    res.setHeader("Access-Control-Allow-Private-Network", "true"); // Chrome Private Network Access
   }
   if (req.method === "OPTIONS") return res.sendStatus(204);
   next();

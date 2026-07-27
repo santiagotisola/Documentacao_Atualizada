@@ -1,0 +1,17 @@
+{
+  "manifest_version": 3,
+  "name": "AxHub Data Sender — Axion IA",
+  "version": "1.0",
+  "description": "Envia equipamentos do AxHub automaticamente para o painel Axion IA",
+  "host_permissions": [
+    "*://*.axhub.axion.ws/*",
+    "http://localhost:3100/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": ["*://*.axhub.axion.ws/*"],
+      "js": ["content.js"],
+      "run_at": "document_idle"
+    }
+  ]
+}

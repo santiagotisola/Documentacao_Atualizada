@@ -1,5 +1,5 @@
 {
-  "geradoEm": "2026-07-18T17:10:40.869Z",
+  "geradoEm": "2026-07-23T20:18:54.053Z",
   "scriptPadrao": {
     "faixa1": "config-padrao/padrao-faixa-1.json",
     "faixa2": "config-padrao/padrao-faixa-2.json"
@@ -8,16 +8,16 @@
   "resumo": {
     "total": 72,
     "conformes": 0,
-    "alterados": 60,
-    "offline": 12,
-    "grupos": 3,
+    "alterados": 62,
+    "offline": 10,
+    "grupos": 4,
     "percentConformes": 0
   },
   "conformes": [],
   "grupos": [
     {
       "grupo": 1,
-      "totalEquipamentos": 56,
+      "totalEquipamentos": 55,
       "alteracoes": [
         {
           "id": "OCR_MAX_PLATES",
@@ -79,13 +79,6 @@
       "dispositivos": [
         {
           "nome": "GOEC6O002 - Faixa 1",
-          "faixa": 1,
-          "firmware": "v1.7.8",
-          "score": 77,
-          "ultimoAcesso": null
-        },
-        {
-          "nome": "GOEC6O003 - Faixa 1",
           "faixa": 1,
           "firmware": "v1.7.8",
           "score": 77,
@@ -246,20 +239,6 @@
           "ultimoAcesso": null
         },
         {
-          "nome": "GOEC6O029 - Faixa 1",
-          "faixa": 1,
-          "firmware": "v1.7.8",
-          "score": 77,
-          "ultimoAcesso": null
-        },
-        {
-          "nome": "GOEC6O029 - Faixa 2",
-          "faixa": 2,
-          "firmware": "v1.7.8",
-          "score": 77,
-          "ultimoAcesso": null
-        },
-        {
           "nome": "GOEC6O033 - Faixa 1",
           "faixa": 1,
           "firmware": "v1.7.8",
@@ -276,20 +255,6 @@
         {
           "nome": "GOEC6O036 - Faixa 1",
           "faixa": 1,
-          "firmware": "v1.7.8",
-          "score": 77,
-          "ultimoAcesso": null
-        },
-        {
-          "nome": "GOEC6O040 - Faixa 1",
-          "faixa": 1,
-          "firmware": "v1.7.8",
-          "score": 77,
-          "ultimoAcesso": null
-        },
-        {
-          "nome": "GOEC6O040 - Faixa 2",
-          "faixa": 2,
           "firmware": "v1.7.8",
           "score": 77,
           "ultimoAcesso": null
@@ -379,7 +344,35 @@
           "ultimoAcesso": null
         },
         {
+          "nome": "GOEC6O051 - Faixa 1",
+          "faixa": 1,
+          "firmware": "v1.7.8",
+          "score": 77,
+          "ultimoAcesso": null
+        },
+        {
+          "nome": "GOEC6O051 - Faixa 2",
+          "faixa": 2,
+          "firmware": "v1.7.8",
+          "score": 77,
+          "ultimoAcesso": null
+        },
+        {
           "nome": "GOEC6O052 - Faixa 2",
+          "faixa": 2,
+          "firmware": "v1.7.8",
+          "score": 77,
+          "ultimoAcesso": null
+        },
+        {
+          "nome": "GOEC6O053 - Faixa 1",
+          "faixa": 1,
+          "firmware": "v1.7.8",
+          "score": 77,
+          "ultimoAcesso": null
+        },
+        {
+          "nome": "GOEC6O053 - Faixa 2",
           "faixa": 2,
           "firmware": "v1.7.8",
           "score": 77,
@@ -570,6 +563,83 @@
     },
     {
       "grupo": 3,
+      "totalEquipamentos": 3,
+      "alteracoes": [
+        {
+          "id": "OCR_MAX_PLATES",
+          "titulo": "OCR Max Plates",
+          "severidade": "alto",
+          "menu": "Equipamento > OCR",
+          "valorAtual": 1,
+          "valorEsperado": 2
+        },
+        {
+          "id": "OCR_PROC_THREADS",
+          "titulo": "OCR Processing Threads",
+          "severidade": "medio",
+          "menu": "Equipamento > OCR",
+          "valorAtual": 2,
+          "valorEsperado": 4
+        },
+        {
+          "id": "CLASS_QUEUE",
+          "titulo": "Classificador Queue",
+          "severidade": "alto",
+          "menu": "Equipamento > Classificador",
+          "valorAtual": 4,
+          "valorEsperado": 1
+        },
+        {
+          "id": "CLASS_MIN_PROB",
+          "titulo": "Classificador Probabilidade Mínima",
+          "severidade": "medio",
+          "menu": "Equipamento > Classificador",
+          "valorAtual": 60,
+          "valorEsperado": 100
+        },
+        {
+          "id": "VIDEO_FPS",
+          "titulo": "Vídeo Framerate",
+          "severidade": "medio",
+          "menu": "Vídeo > Streams",
+          "valorAtual": 12,
+          "valorEsperado": 15
+        },
+        {
+          "id": "VIDEO_QUALITY",
+          "titulo": "Vídeo Qualidade",
+          "severidade": "medio",
+          "menu": "Vídeo > Streams",
+          "valorAtual": 85,
+          "valorEsperado": 90
+        }
+      ],
+      "dispositivos": [
+        {
+          "nome": "GOEC6O019 - Faixa 1",
+          "faixa": 1,
+          "firmware": "v1.7.8",
+          "score": 81,
+          "ultimoAcesso": null
+        },
+        {
+          "nome": "GOEC6O019 - Faixa 2",
+          "faixa": 2,
+          "firmware": "v1.7.8",
+          "score": 81,
+          "ultimoAcesso": null
+        },
+        {
+          "nome": "GOEC6O052- Faixa 1",
+          "faixa": 1,
+          "firmware": "v1.7.8",
+          "score": 81,
+          "ultimoAcesso": null
+        }
+      ]
+    },
+    {
+      "grupo": 4,
       "totalEquipamentos": 1,
       "alteracoes": [
         {
@@ -657,6 +727,11 @@
   ],
   "offline": [
     {
+      "nome": "GOEC6O003 - Faixa 1",
+      "uuid": "1792282c-bacb-4808-8ff6-e44404b72de5",
+      "ip": "177.25.226.58"
+    },
+    {
       "nome": "GOEC6O006 - Faixa 1",
       "uuid": "29a63deb-dfe5-4765-a10a-57485f03f301",
       "ip": "191.56.243.74"
@@ -677,44 +752,29 @@
       "ip": "177.200.42.236"
     },
     {
-      "nome": "GOEC6O019 - Faixa 1",
-      "uuid": "6f6eddc7-f900-4d4f-8040-f7d1775d1d1d",
-      "ip": "45.70.146.16"
+      "nome": "GOEC6O029 - Faixa 1",
+      "uuid": "d4c91424-ff2b-408a-930d-f12b595a6212",
+      "ip": "177.25.224.79"
     },
     {
-      "nome": "GOEC6O019 - Faixa 2",
-      "uuid": "b8925732-54cf-4f01-b4ec-c8bcb1b3bd2e",
-      "ip": "45.70.146.16"
+      "nome": "GOEC6O029 - Faixa 2",
+      "uuid": "0462e9d3-b0ce-42aa-9cfb-1b24c1cb1bee",
+      "ip": "177.25.224.79"
+    },
+    {
+      "nome": "GOEC6O040 - Faixa 1",
+      "uuid": "9b5328e3-104b-4afc-b3ce-8880066ca995",
+      "ip": "201.71.213.219"
+    },
+    {
+      "nome": "GOEC6O040 - Faixa 2",
+      "uuid": "416aff7e-4c34-4356-bbac-aa66d34ffead",
+      "ip": "201.71.213.219"
     },
     {
       "nome": "GOEC6O046 - Faixa 2",
       "uuid": "4d68163e-8462-4dce-adad-df3b0d7c76af",
       "ip": "170.81.67.214"
-    },
-    {
-      "nome": "GOEC6O051 - Faixa 1",
-      "uuid": "b1936eeb-bdb5-41d4-9d59-8d5aca35f301",
-      "ip": "177.79.27.191"
-    },
-    {
-      "nome": "GOEC6O051 - Faixa 2",
-      "uuid": "13d8dad0-3b76-4394-ad2f-bcb2f6ca3d5c",
-      "ip": "177.79.27.191"
-    },
-    {
-      "nome": "GOEC6O052- Faixa 1",
-      "uuid": "49cbc26f-7a42-47d6-9d32-bc66f740e886",
-      "ip": "187.68.165.85"
-    },
-    {
-      "nome": "GOEC6O053 - Faixa 1",
-      "uuid": "b2071e67-3658-4a52-a543-13713f2c1e33",
-      "ip": "179.249.76.74"
-    },
-    {
-      "nome": "GOEC6O053 - Faixa 2",
-      "uuid": "3bb822e1-3f89-4a2e-aa79-c8a6041288d9",
-      "ip": "179.249.76.74"
     }
   ]
 }

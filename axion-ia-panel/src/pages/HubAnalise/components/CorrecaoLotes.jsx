@@ -1,4 +1,4 @@
-import { useState, useMemo, useEffect } from 'react';
+import { useState, useMemo, useEffect, useRef } from 'react';
 import { ALL_CREDENCIAIS } from '../../../data/sitesCredentials';
 
 const API = '/api/lote-exportacao';
@@ -103,15 +103,16 @@ function CardLote({ resultado, baseUrl }) {
   );
 }
 
-// ─── Seletor de Site ──────────────────────────────────────────────────────────
+// ─── Seletor de Site (dropdown compacto, mesmo estilo do header) ─────────────
 function SeletorSite({ urlSelecionada, onSelecionar }) {
-  const [modo, setModo] = useState('tabela'); // 'tabela' | 'manual'
+  const [aberto, setAberto] = useState(false);
   const [filtro, setFiltro] = useState('');
+  const [modoManual, setModoManual] = useState(false);
+  const [infoAberto, setInfoAberto] = useState(false);
+  const ref = useRef(null);
+  const infoRef = useRef(null);
 
-  const sitesAxHub = useMemo(() =>
-    ALL_CREDENCIAIS.filter(s => s.sistema === 'AxHub'),
-    []
-  );
+  const sitesAxHub = useMemo(() => ALL_CREDENCIAIS.filter(s => s.sistema === 'AxHub'), []);
 
   const filtrados = useMemo(() =>
     sitesAxHub.filter(s =>
@@ -123,107 +124,142 @@ function SeletorSite({ urlSelecionada, onSelecionar }) {
     [sitesAxHub, filtro]
   );
 
+  const siteSelecionado = sitesAxHub.find(s => s.url === urlSelecionada);
+
+  // Fecha ao clicar fora
+  useEffect(() => {
+    const close = (e) => { if (ref.current && !ref.current.contains(e.target)) setAberto(false); };
+    document.addEventListener('mousedown', close);
+    return () => document.removeEventListener('mousedown', close);
+  }, []);
+
+  useEffect(() => {
+    const close = (e) => { if (infoRef.current && !infoRef.current.contains(e.target)) setInfoAberto(false); };
+    document.addEventListener('mousedown', close);
+    return () => document.removeEventListener('mousedown', close);
+  }, []);
+
+  const PASSOS_INFO = [
+    { n: '1', t: 'Selecionar o site',      d: 'Escolha o contrato AxHub na lista ou informe a URL manualmente.' },
+    { n: '2', t: 'Analisar lotes com erro', d: 'O sistema acessa /loteexportacao e lista todos os lotes com status "Erro".' },
+    { n: '3', t: 'Correção automática',     d: 'Abre o detalhe de cada lote, lê a mensagem de erro e identifica as infrações.' },
+    { n: '4', t: 'Consultar Dados',         d: 'Clica em "Consultar Dados" para buscar os dados do veículo no SERPRO.' },
+    { n: '5', t: 'Nova exportação',         d: 'Após a correção, gere uma nova exportação para o lote corrigido.' },
+  ];
+
   return (
-    <div style={{ background: 'white', borderRadius: '12px', border: '1.5px solid #e2e8f0', overflow: 'hidden' }}>
-      {/* Cabeçalho */}
-      <div style={{ padding: '0.875rem 1.25rem', borderBottom: '1px solid #f1f5f9', display: 'flex', gap: '0.75rem', alignItems: 'center' }}>
-        <span style={{ fontSize: '1rem' }}>🌐</span>
-        <div style={{ flex: 1 }}>
-          <div style={{ fontWeight: 700, fontSize: '0.875rem', color: '#1a202c' }}>Selecionar Contrato / Site</div>
-          <div style={{ fontSize: '0.72rem', color: '#9ca3af' }}>Escolha na tabela ou informe a URL manualmente</div>
-        </div>
-        <div style={{ display: 'flex', gap: '0.375rem' }}>
-          <button
-            onClick={() => setModo('tabela')}
-            style={{ padding: '0.3rem 0.75rem', borderRadius: '8px', border: `1.5px solid ${modo === 'tabela' ? '#667eea' : '#e2e8f0'}`, background: modo === 'tabela' ? '#eff0fe' : 'white', color: modo === 'tabela' ? '#667eea' : '#374151', fontSize: '0.75rem', fontWeight: 600, cursor: 'pointer' }}
-          >
-            📋 Tabela
-          </button>
-          <button
-            onClick={() => setModo('manual')}
-            style={{ padding: '0.3rem 0.75rem', borderRadius: '8px', border: `1.5px solid ${modo === 'manual' ? '#667eea' : '#e2e8f0'}`, background: modo === 'manual' ? '#eff0fe' : 'white', color: modo === 'manual' ? '#667eea' : '#374151', fontSize: '0.75rem', fontWeight: 600, cursor: 'pointer' }}
-          >
-            ✏️ Manual
-          </button>
-        </div>
+    <div style={{ display: 'flex', gap: '0.75rem', alignItems: 'center', flexWrap: 'wrap' }}>
+      {/* Botão dropdown */}
+      <div ref={ref} style={{ position: 'relative' }}>
+        <button
+          onClick={() => { setAberto(v => !v); setModoManual(false); }}
+          style={{
+            padding: '0.45rem 0.875rem', borderRadius: '10px', cursor: 'pointer',
+            border: `1.5px solid ${aberto || urlSelecionada ? '#667eea' : '#e2e8f0'}`,
+            background: aberto ? '#f0f4ff' : urlSelecionada ? '#667eea0d' : '#f8fafc',
+            display: 'flex', alignItems: 'center', gap: '0.5rem', minWidth: '200px',
+            transition: 'all 0.15s',
+          }}
+        >
+          <span>🌐</span>
+          <span style={{ flex: 1, fontSize: '0.82rem', color: urlSelecionada ? '#667eea' : '#374151', fontWeight: urlSelecionada ? 700 : 500, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+            {siteSelecionado ? siteSelecionado.nome : urlSelecionada || 'Selecionar site...'}
+          </span>
+          <span style={{ color: '#9ca3af', fontSize: '0.65rem', transform: aberto ? 'rotate(180deg)' : 'none', transition: 'transform 0.2s', flexShrink: 0 }}>▼</span>
+        </button>
+
+        {aberto && (
+          <div style={{
+            position: 'absolute', top: 'calc(100% + 6px)', left: 0, zIndex: 300,
+            background: 'white', borderRadius: '12px', border: '1px solid #e2e8f0',
+            boxShadow: '0 16px 40px rgba(0,0,0,0.15)', overflow: 'hidden', minWidth: '300px', maxWidth: '420px',
+          }}>
+            <div style={{ padding: '0.6rem', borderBottom: '1px solid #f1f5f9', background: '#f8fafc' }}>
+              <input
+                autoFocus value={filtro} onChange={e => setFiltro(e.target.value)}
+                placeholder="🔍 Filtrar por nome, URL ou estado..."
+                style={{ width: '100%', padding: '0.4rem 0.7rem', borderRadius: '8px', border: '1px solid #e2e8f0', fontSize: '0.82rem', outline: 'none', background: 'white', color: '#374151', boxSizing: 'border-box' }}
+              />
+            </div>
+            <div style={{ maxHeight: '280px', overflowY: 'auto' }}>
+              {filtrados.length === 0
+                ? <div style={{ padding: '1.5rem', textAlign: 'center', color: '#9ca3af', fontSize: '0.82rem' }}>Nenhum site encontrado</div>
+                : filtrados.map(s => {
+                    const ativo = urlSelecionada === s.url;
+                    return (
+                      <div key={s.id} onClick={() => { onSelecionar(s); setAberto(false); setFiltro(''); }} style={{
+                        padding: '0.55rem 0.75rem', cursor: 'pointer',
+                        display: 'flex', gap: '0.6rem', alignItems: 'center',
+                        background: ativo ? '#667eea14' : 'transparent',
+                        borderLeft: `3px solid ${ativo ? '#667eea' : 'transparent'}`,
+                        transition: 'all 0.1s',
+                      }}>
+                        <span style={{ fontSize: '0.9rem', flexShrink: 0 }}>🔵</span>
+                        <div style={{ flex: 1, minWidth: 0 }}>
+                          <div style={{ fontWeight: 600, fontSize: '0.82rem', color: '#1a202c' }}>{s.nome}</div>
+                          <div style={{ fontSize: '0.68rem', color: '#9ca3af', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{s.url} · {s.estado || '—'} · {s.tipo}</div>
+                        </div>
+                        <div style={{ width: '16px', height: '16px', borderRadius: '4px', flexShrink: 0, border: `2px solid ${ativo ? '#667eea' : '#d1d5db'}`, background: ativo ? '#667eea' : 'white', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                          {ativo && <span style={{ color: 'white', fontSize: '0.55rem', fontWeight: 900 }}>✓</span>}
+                        </div>
+                      </div>
+                    );
+                  })}
+            </div>
+          </div>
+        )}
       </div>
 
-      {/* Modo manual */}
-      {modo === 'manual' && (
-        <div style={{ padding: '1rem 1.25rem' }}>
-          <label style={{ fontSize: '0.78rem', fontWeight: 600, color: '#374151', display: 'block', marginBottom: '0.5rem' }}>
-            URL base do sistema AxHub (ex: https://goiania.axhub.axion.ws)
-          </label>
-          <input
-            type="url"
-            value={urlSelecionada || ''}
-            onChange={e => onSelecionar({ url: e.target.value, login: '', senha: '' })}
-            placeholder="https://..."
-            style={{ width: '100%', padding: '0.5rem 0.875rem', borderRadius: '8px', border: '1.5px solid #e2e8f0', fontSize: '0.85rem', outline: 'none', boxSizing: 'border-box' }}
-          />
-        </div>
+      {/* Botão URL Manual */}
+      <button
+        onClick={() => setModoManual(v => !v)}
+        style={{ padding: '0.4rem 0.7rem', borderRadius: '8px', border: `1.5px solid ${modoManual ? '#667eea' : '#e2e8f0'}`, background: modoManual ? '#f0f4ff' : '#f8fafc', color: modoManual ? '#667eea' : '#6b7280', fontSize: '0.75rem', fontWeight: 600, cursor: 'pointer' }}
+      >
+        ✏️ URL manual
+      </button>
+
+      {/* Botão Como Funciona inline */}
+      <div ref={infoRef} style={{ position: 'relative' }}>
+        <button
+          onClick={() => setInfoAberto(v => !v)}
+          style={{ padding: '0.4rem 0.7rem', borderRadius: '8px', border: `1.5px solid ${infoAberto ? '#667eea' : '#e2e8f0'}`, background: infoAberto ? '#f0f4ff' : '#f8fafc', color: infoAberto ? '#667eea' : '#6b7280', fontSize: '0.75rem', fontWeight: 600, cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '0.35rem' }}
+        >
+          📖 Como funciona <span style={{ fontSize: '0.6rem', color: '#9ca3af', transform: infoAberto ? 'rotate(180deg)' : 'none', transition: 'transform 0.2s' }}>▼</span>
+        </button>
+        {infoAberto && (
+          <div style={{ position: 'absolute', top: 'calc(100% + 6px)', left: 0, zIndex: 400, background: 'white', borderRadius: '12px', border: '1px solid #e2e8f0', boxShadow: '0 16px 40px rgba(0,0,0,0.15)', overflow: 'hidden', width: '340px' }}>
+            <div style={{ padding: '0.6rem 0.75rem', borderBottom: '1px solid #f1f5f9', background: '#f8fafc', fontWeight: 700, fontSize: '0.82rem', color: '#374151' }}>📖 Como funciona a correção</div>
+            <div style={{ padding: '0.75rem' }}>
+              {PASSOS_INFO.map(p => (
+                <div key={p.n} style={{ display: 'flex', gap: '0.6rem', marginBottom: '0.6rem', alignItems: 'flex-start' }}>
+                  <div style={{ width: '22px', height: '22px', borderRadius: '50%', background: 'linear-gradient(135deg, #667eea, #764ba2)', color: 'white', fontWeight: 800, fontSize: '0.7rem', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>{p.n}</div>
+                  <div>
+                    <div style={{ fontWeight: 700, fontSize: '0.78rem', color: '#1a202c' }}>{p.t}</div>
+                    <div style={{ fontSize: '0.72rem', color: '#6b7280', marginTop: '0.05rem' }}>{p.d}</div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+      </div>
+
+      {/* Input URL manual */}
+      {modoManual && (
+        <input
+          type="url"
+          value={urlSelecionada || ''}
+          onChange={e => onSelecionar({ url: e.target.value, login: '', senha: '' })}
+          placeholder="https://..."
+          style={{ padding: '0.4rem 0.75rem', borderRadius: '8px', border: '1.5px solid #e2e8f0', fontSize: '0.82rem', outline: 'none', minWidth: '280px' }}
+        />
       )}
 
-      {/* Modo tabela */}
-      {modo === 'tabela' && (
-        <div>
-          <div style={{ padding: '0.75rem 1.25rem', borderBottom: '1px solid #f1f5f9' }}>
-            <input
-              value={filtro}
-              onChange={e => setFiltro(e.target.value)}
-              placeholder="🔍 Filtrar por nome, URL ou estado..."
-              style={{ width: '100%', padding: '0.4rem 0.75rem', borderRadius: '8px', border: '1px solid #e2e8f0', fontSize: '0.82rem', outline: 'none', boxSizing: 'border-box', background: '#f8fafc' }}
-            />
-          </div>
-          <div style={{ maxHeight: '280px', overflowY: 'auto' }}>
-            <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '0.78rem' }}>
-              <thead>
-                <tr style={{ background: '#f8fafc', position: 'sticky', top: 0 }}>
-                  {['Nome', 'URL', 'Estado', 'Tipo', ''].map(h => (
-                    <th key={h} style={{ padding: '0.5rem 0.75rem', textAlign: 'left', fontWeight: 700, color: '#374151', borderBottom: '1px solid #e2e8f0' }}>{h}</th>
-                  ))}
-                </tr>
-              </thead>
-              <tbody>
-                {filtrados.map(s => {
-                  const selecionado = urlSelecionada === s.url;
-                  return (
-                    <tr
-                      key={s.id}
-                      onClick={() => onSelecionar(s)}
-                      style={{
-                        cursor: 'pointer',
-                        background: selecionado ? '#eff0fe' : 'transparent',
-                        borderLeft: selecionado ? '3px solid #667eea' : '3px solid transparent',
-                        transition: 'background 0.1s',
-                      }}
-                    >
-                      <td style={{ padding: '0.5rem 0.75rem', fontWeight: 600, color: '#1a202c' }}>{s.nome}</td>
-                      <td style={{ padding: '0.5rem 0.75rem', color: '#6366f1', fontFamily: 'monospace' }}>{s.url}</td>
-                      <td style={{ padding: '0.5rem 0.75rem', color: '#6b7280' }}>{s.estado || '—'}</td>
-                      <td style={{ padding: '0.5rem 0.75rem', color: '#6b7280' }}>{s.tipo}</td>
-                      <td style={{ padding: '0.5rem 0.75rem' }}>
-                        {selecionado && <span style={{ background: '#667eea', color: 'white', borderRadius: '4px', padding: '0.15rem 0.4rem', fontSize: '0.65rem', fontWeight: 700 }}>SELECIONADO</span>}
-                      </td>
-                    </tr>
-                  );
-                })}
-                {!filtrados.length && (
-                  <tr><td colSpan={5} style={{ padding: '1.5rem', textAlign: 'center', color: '#9ca3af' }}>Nenhum site encontrado</td></tr>
-                )}
-              </tbody>
-            </table>
-          </div>
-        </div>
-      )}
-
-      {/* Site selecionado */}
+      {/* Badge site selecionado */}
       {urlSelecionada && (
-        <div style={{ padding: '0.75rem 1.25rem', borderTop: '1px solid #f1f5f9', background: '#f0fdf4', display: 'flex', gap: '0.5rem', alignItems: 'center' }}>
-          <span style={{ fontSize: '0.9rem' }}>✅</span>
-          <span style={{ fontSize: '0.8rem', fontWeight: 600, color: '#15803d' }}>Selecionado:</span>
-          <a href={urlSelecionada} target="_blank" rel="noopener noreferrer" style={{ fontSize: '0.8rem', color: '#6366f1', fontFamily: 'monospace' }}>{urlSelecionada}</a>
-        </div>
+        <span style={{ display: 'inline-flex', alignItems: 'center', gap: '0.35rem', padding: '0.25rem 0.625rem', borderRadius: '20px', background: '#f0fdf4', border: '1px solid #86efac', fontSize: '0.75rem', color: '#15803d', fontWeight: 600 }}>
+          ✅ <a href={urlSelecionada} target="_blank" rel="noopener noreferrer" style={{ color: '#15803d', fontFamily: 'monospace', fontSize: '0.72rem' }}>{urlSelecionada}</a>
+        </span>
       )}
     </div>
   );
@@ -617,27 +653,7 @@ export default function CorrecaoLotes({ siteAtivo = null, sitesAtivos = [] }) {
         </div>
       )}
 
-      {/* ── Guia manual ────────────────────────────────────────────── */}
-      {etapa === 'idle' && !urlBase && (
-        <div style={{ background: 'white', borderRadius: '12px', border: '1.5px solid #e2e8f0', padding: '1.5rem' }}>
-          <div style={{ fontWeight: 700, fontSize: '0.9rem', color: '#1a202c', marginBottom: '1rem' }}>📖 Como funciona a correção automática</div>
-          {[
-            { n: '1', titulo: 'Selecionar o site', desc: 'Escolha o contrato AxHub na tabela acima ou informe a URL manualmente.' },
-            { n: '2', titulo: 'Analisar lotes com erro', desc: 'O sistema acessa /loteexportacao, faz login e lista todos os lotes com status "Erro".' },
-            { n: '3', titulo: 'Correção automática', desc: 'Para cada lote em erro: abre o detalhe, lê a mensagem de erro, identifica as infrações com problema.' },
-            { n: '4', titulo: 'Consultar Dados', desc: 'Para cada infração com problema, acessa o detalhamento e clica em "Consultar Dados" para buscar os dados do veículo no SERPRO.' },
-            { n: '5', titulo: 'Nova exportação', desc: 'Após a correção, volte ao sistema e gere uma nova exportação para o lote corrigido.' },
-          ].map(p => (
-            <div key={p.n} style={{ display: 'flex', gap: '0.875rem', marginBottom: '0.875rem', alignItems: 'flex-start' }}>
-              <div style={{ width: '28px', height: '28px', borderRadius: '50%', background: 'linear-gradient(135deg, #667eea, #764ba2)', color: 'white', fontWeight: 800, fontSize: '0.78rem', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>{p.n}</div>
-              <div>
-                <div style={{ fontWeight: 700, fontSize: '0.85rem', color: '#1a202c' }}>{p.titulo}</div>
-                <div style={{ fontSize: '0.78rem', color: '#6b7280', marginTop: '0.15rem' }}>{p.desc}</div>
-              </div>
-            </div>
-          ))}
-        </div>
-      )}
+
     </div>
   );
 }

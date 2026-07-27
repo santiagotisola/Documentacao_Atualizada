@@ -15,7 +15,9 @@ export default defineConfig({
       '/api': {
         target: 'http://localhost:3100',
         changeOrigin: true,
-        secure: false
+        secure: false,
+        timeout: 600000,       // 10 minutos (operações Playwright são lentas)
+        proxyTimeout: 600000,  // 10 minutos no lado do proxy
       }
     }
   }

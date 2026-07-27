@@ -1,28 +1,31 @@
-﻿import React, { useState } from "react";
+﻿import React, { useState, useCallback, useRef } from "react";
+import * as XLSX from "xlsx";
 import {
   Package, Factory, ShoppingCart, Truck, BarChart3, AlertTriangle,
   CheckCircle, ArrowRight, Info, Download, ExternalLink,
   Layers, Tag, Hash, Boxes, ClipboardList, Settings, BookOpen,
-  MessageCircle, X, Send, Bot, User, Minimize2, Maximize2, RefreshCw
+  MessageCircle, X, Send, Bot, User, Minimize2, Maximize2, RefreshCw,
+  Upload, FileSpreadsheet, Search, Trash2, Database, Eye
 } from "lucide-react";
 import { api } from "../services/api";
 import "./OdooAnalisador.css";
 
 const TABS = [
-  { id: "mapa",   label: "🗺️ Mapa Completo"      },
-  { id: "discuss", label: "💬 Mensagens Odoo"     },
-  { id: "org",    label: "🏢 Organograma"         },
-  { id: "central", label: "🔀 Processo ↔ Diagrama" },
-  { id: "diagrama", label: "📊 Diagrama Interativo" },
-  { id: "fluxo",   label: "🔄 Fluxo Completo"    },
-  { id: "guia",    label: "📖 Guia Operador"      },
-  { id: "hipoteses", label: "🔁 Cenários & Trocas" },
-  { id: "serial",  label: "🏷️ Números Seriais"    },
-  { id: "bom",     label: "📋 Listas, Kits e BOM" },
-  { id: "prod",    label: "🏭 Produção"            },
+  { id: "importar", label: "📥 Importar Dados"        },
+  { id: "mapa",   label: "🗺️ Mapa Completo"           },
+  { id: "discuss", label: "💬 Mensagens Odoo"         },
+  { id: "org",    label: "🏢 Organograma"             },
+  { id: "central", label: "🔀 Processo ↔ Diagrama"   },
+  { id: "diagrama", label: "📊 Diagrama Interativo"  },
+  { id: "fluxo",   label: "🔄 Fluxo Completo"        },
+  { id: "guia",    label: "📖 Guia Operador"          },
+  { id: "hipoteses", label: "🔁 Cenários & Trocas"   },
+  { id: "serial",  label: "🏷️ Números Seriais"       },
+  { id: "bom",     label: "📋 Listas, Kits e BOM"    },
+  { id: "prod",    label: "🏭 Produção"               },
   { id: "chao",    label: "🏗️ Chão de Fábrica & Combo" },
-  { id: "cenario", label: "⭐ Melhor Cenário"      },
-  { id: "bizagi",  label: "📐 Modelo Bizagi"       },
+  { id: "cenario", label: "⭐ Melhor Cenário"         },
+  { id: "bizagi",  label: "📐 Modelo Bizagi"          },
 ];
 
 const BASE_ODOO = "https://santiago-sola-neto.odoo.com";
@@ -4096,9 +4099,434 @@ function TabDiscuss() {
   );
 }
 
+// ═══════════════════════════════════════════════════════════════════
+// IMPORTAR DADOS — upload de xlsx exportados do Odoo
+// ═══════════════════════════════════════════════════════════════════
+const STORAGE_KEY = "odoo_importados";
+
+function detectarTipo(nomeArquivo, colunas) {
+  const n = nomeArquivo.toLowerCase();
+  if (n.includes("stock.lot") || n.includes("lote") || n.includes("série") || n.includes("serie")) return "lotes";
+  if (n.includes("stock.picking") || n.includes("transferir") || n.includes("picking")) return "transferencias";
+  if (n.includes("product.product") || n.includes("variante")) return "produtos";
+  if (n.includes("product.template") || n.includes("modelo")) return "modelosProduto";
+  if (n.includes("mrp") || n.includes("producao") || n.includes("produção") || n.includes("manufacturing")) return "ordemProducao";
+  if (n.includes("purchase") || n.includes("compra") || n.includes("pedido compra")) return "pedidosCompra";
+  // por colunas
+  const cols = colunas.map(c => String(c).toLowerCase());
+  if (cols.some(c => c.includes("número de série") || c.includes("lote") || c.includes("lot"))) return "lotes";
+  if (cols.some(c => c.includes("operação") || c.includes("origem") || c.includes("destino"))) return "transferencias";
+  if (cols.some(c => c.includes("referência interna") || c.includes("preço de venda"))) return "produtos";
+  return "geral";
+}
+
+const TIPO_CONFIG = {
+  lotes:         { label: "Lotes/Séries",          cor: "#8b5cf6", icon: "🏷️",  colunasPrincipais: ["Nome","Produto","Quantidade","Data de Vencimento","Número Interno/Externo"] },
+  transferencias:{ label: "Transferências",         cor: "#3b82f6", icon: "🔄",  colunasPrincipais: ["Referência","Contato","Data prevista","Produto","Quantidade Feita","Número de Série","Estado"] },
+  produtos:      { label: "Variantes de Produto",   cor: "#10b981", icon: "📦",  colunasPrincipais: ["Nome","Referência Interna","Preço de Venda","Quantidade em Mão"] },
+  modelosProduto:{ label: "Modelos de Produto",     cor: "#f59e0b", icon: "🗂️",  colunasPrincipais: ["Nome","Tipo","Referência Interna"] },
+  ordemProducao: { label: "Ordens de Produção",     cor: "#ef4444", icon: "🏭",  colunasPrincipais: ["Referência","Produto","Quantidade","Estado","Data Prevista"] },
+  pedidosCompra: { label: "Pedidos de Compra",      cor: "#06b6d4", icon: "🛒",  colunasPrincipais: ["Referência","Fornecedor","Data","Produto","Quantidade","Total"] },
+  geral:         { label: "Dados Gerais",           cor: "#6b7280", icon: "📋",  colunasPrincipais: [] },
+};
+
+function TabImportar() {
+  const [arquivos, setArquivos] = useState(() => {
+    try { return JSON.parse(localStorage.getItem(STORAGE_KEY) || "{}"); } catch { return {}; }
+  });
+  const [arqAtivo, setArqAtivo]     = useState(null);
+  const [busca, setBusca]           = useState("");
+  const [colFiltro, setColFiltro]   = useState("");
+  const [pagina, setPagina]         = useState(0);
+  const [dragging, setDragging]     = useState(false);
+  const [processando, setProcessando] = useState(false);
+  const [erro, setErro]             = useState(null);
+  const inputRef = useRef();
+  const LINHAS_PAG = 50;
+
+  const salvarStorage = (dados) => {
+    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(dados)); } catch {}
+  };
+
+  const processarArquivo = useCallback(async (file) => {
+    if (!file) return;
+    setProcessando(true); setErro(null);
+    try {
+      const buf = await file.arrayBuffer();
+      const wb  = XLSX.read(buf, { type: "array", cellDates: true, cellNF: true });
+      const sheetName = wb.SheetNames[0];
+      const ws  = wb.Sheets[sheetName];
+      const json = XLSX.utils.sheet_to_json(ws, { defval: "", raw: false });
+      if (!json.length) throw new Error("Arquivo vazio ou sem dados na primeira planilha.");
+      const colunas = Object.keys(json[0]);
+      const tipo   = detectarTipo(file.name, colunas);
+      const novoArq = {
+        nome: file.name,
+        tipo,
+        importadoEm: new Date().toLocaleString("pt-BR"),
+        colunas,
+        total: json.length,
+        dados: json,
+      };
+      const novos = { ...arquivos, [file.name]: novoArq };
+      setArquivos(novos);
+      salvarStorage(novos);
+      setArqAtivo(file.name);
+      setPagina(0); setBusca("");
+    } catch (e) {
+      setErro(`Erro ao processar "${file.name}": ${e.message}`);
+    }
+    setProcessando(false);
+  }, [arquivos]);
+
+  const onDrop = useCallback(e => {
+    e.preventDefault(); setDragging(false);
+    Array.from(e.dataTransfer.files).forEach(f => {
+      if (f.name.endsWith(".xlsx") || f.name.endsWith(".xls") || f.name.endsWith(".csv")) processarArquivo(f);
+    });
+  }, [processarArquivo]);
+
+  const removerArquivo = (nome) => {
+    const novos = { ...arquivos };
+    delete novos[nome];
+    setArquivos(novos);
+    salvarStorage(novos);
+    if (arqAtivo === nome) setArqAtivo(Object.keys(novos)[0] || null);
+  };
+
+  const arqInfo   = arqAtivo ? arquivos[arqAtivo] : null;
+  const tipoConf  = arqInfo ? TIPO_CONFIG[arqInfo.tipo] || TIPO_CONFIG.geral : null;
+  const dadosFilt = arqInfo ? arqInfo.dados.filter(row => {
+    if (!busca) return true;
+    return Object.values(row).some(v => String(v).toLowerCase().includes(busca.toLowerCase()));
+  }) : [];
+  const totalPags = Math.ceil(dadosFilt.length / LINHAS_PAG);
+  const dadosPag  = dadosFilt.slice(pagina * LINHAS_PAG, (pagina + 1) * LINHAS_PAG);
+  const colunasFiltradas = arqInfo ? (colFiltro ? arqInfo.colunas.filter(c => c.toLowerCase().includes(colFiltro.toLowerCase())) : arqInfo.colunas) : [];
+
+  // Estatísticas rápidas
+  const stats = arqInfo ? (() => {
+    const d = arqInfo.dados;
+    if (arqInfo.tipo === "lotes") {
+      const produtos = [...new Set(d.map(r => r["Produto"] || r["product_id"] || ""))].filter(Boolean);
+      const comSerial = d.filter(r => r["Nome"] || r["name"]).length;
+      return [
+        { label: "Total Registros", val: d.length, cor: "#8b5cf6" },
+        { label: "Produtos Distintos", val: produtos.length, cor: "#10b981" },
+        { label: "Com Número", val: comSerial, cor: "#3b82f6" },
+      ];
+    }
+    if (arqInfo.tipo === "transferencias") {
+      const refs = [...new Set(d.map(r => r["Referência"] || r["reference"] || ""))].filter(Boolean);
+      const estados = [...new Set(d.map(r => r["Estado"] || r["state"] || ""))].filter(Boolean);
+      return [
+        { label: "Total Linhas", val: d.length, cor: "#3b82f6" },
+        { label: "Transferências Únicas", val: refs.length, cor: "#10b981" },
+        { label: "Estados Distintos", val: estados.length, cor: "#f59e0b" },
+      ];
+    }
+    if (arqInfo.tipo === "produtos") {
+      return [
+        { label: "Total Produtos", val: d.length, cor: "#10b981" },
+        { label: "Com Ref. Interna", val: d.filter(r => r["Referência Interna"] || r["default_code"]).length, cor: "#3b82f6" },
+      ];
+    }
+    return [{ label: "Total Registros", val: d.length, cor: "#6b7280" }];
+  })() : [];
+
+  const corCelula = (col, val) => {
+    if (!val || val === "") return "#6b7280";
+    const c = col.toLowerCase();
+    if (c.includes("estado") || c.includes("state")) {
+      const v = String(val).toLowerCase();
+      if (v.includes("pronto") || v.includes("done") || v.includes("feito")) return "#10b981";
+      if (v.includes("cancel")) return "#ef4444";
+      if (v.includes("rascunho") || v.includes("draft")) return "#9ca3af";
+      return "#f59e0b";
+    }
+    return "inherit";
+  };
+
+  return (
+    <div className="oa-content">
+      {/* ── Zona de Upload ── */}
+      <div
+        onDragOver={e => { e.preventDefault(); setDragging(true); }}
+        onDragLeave={() => setDragging(false)}
+        onDrop={onDrop}
+        onClick={() => inputRef.current?.click()}
+        style={{
+          border: `2px dashed ${dragging ? "#8b5cf6" : "var(--border)"}`,
+          borderRadius: 12, padding: "28px 20px", textAlign: "center",
+          background: dragging ? "rgba(139,92,246,0.06)" : "var(--surface)",
+          cursor: "pointer", marginBottom: 16, transition: "all 0.15s",
+        }}
+      >
+        <input ref={inputRef} type="file" accept=".xlsx,.xls,.csv" multiple
+          style={{ display: "none" }}
+          onChange={e => Array.from(e.target.files).forEach(processarArquivo)} />
+        {processando
+          ? <div style={{ color: "var(--text-secondary)" }}><RefreshCw size={24} style={{ animation: "spin 1s linear infinite" }} /><p>Processando arquivo...</p></div>
+          : <>
+              <Upload size={32} color={dragging ? "#8b5cf6" : "var(--text-muted)"} />
+              <p style={{ margin: "8px 0 4px", fontWeight: 600, color: "var(--text-primary)", fontSize: 14 }}>
+                Arraste os arquivos .xlsx exportados do Odoo ou clique para selecionar
+              </p>
+              <p style={{ fontSize: 12, color: "var(--text-muted)", margin: 0 }}>
+                Suportado: Lotes/Séries · Transferências · Produtos · CSV
+              </p>
+            </>}
+      </div>
+
+      {erro && (
+        <div style={{ padding: "10px 14px", background: "rgba(239,68,68,0.08)", border: "1px solid rgba(239,68,68,0.3)", borderRadius: 7, color: "#ef4444", fontSize: 12, marginBottom: 12 }}>
+          ❌ {erro}
+        </div>
+      )}
+
+      {/* ── Arquivos importados (tabs) ── */}
+      {Object.keys(arquivos).length > 0 && (
+        <div style={{ display: "flex", gap: 6, flexWrap: "wrap", marginBottom: 12 }}>
+          {Object.entries(arquivos).map(([nome, arq]) => {
+            const cfg = TIPO_CONFIG[arq.tipo] || TIPO_CONFIG.geral;
+            const ativo = arqAtivo === nome;
+            return (
+              <div key={nome} style={{ display: "flex", alignItems: "center", gap: 0, border: `1.5px solid ${ativo ? cfg.cor : "var(--border)"}`, borderRadius: 7, overflow: "hidden", background: ativo ? `${cfg.cor}12` : "var(--surface)", cursor: "pointer" }}>
+                <button onClick={() => { setArqAtivo(nome); setPagina(0); setBusca(""); }}
+                  style={{ padding: "5px 12px", border: "none", background: "transparent", cursor: "pointer", fontSize: 12, fontWeight: ativo ? 700 : 400, color: ativo ? cfg.cor : "var(--text-secondary)", display: "flex", alignItems: "center", gap: 5 }}>
+                  <span>{cfg.icon}</span>
+                  <span style={{ maxWidth: 180, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }} title={nome}>{arq.nome.replace(/\.(xlsx|xls|csv)$/i, "")}</span>
+                  <span style={{ fontSize: 10, opacity: 0.7 }}>({arq.total})</span>
+                </button>
+                <button onClick={() => removerArquivo(nome)}
+                  style={{ padding: "5px 8px", border: "none", background: "transparent", cursor: "pointer", color: "#ef4444", fontSize: 13, lineHeight: 1 }}>×</button>
+              </div>
+            );
+          })}
+          <button onClick={() => { setArquivos({}); salvarStorage({}); setArqAtivo(null); }}
+            style={{ padding: "5px 10px", border: "1px solid rgba(239,68,68,0.35)", borderRadius: 7, background: "transparent", color: "#ef4444", cursor: "pointer", fontSize: 11 }}>
+            <Trash2 size={11} /> Limpar tudo
+          </button>
+        </div>
+      )}
+
+      {/* ── Detalhes do arquivo ativo ── */}
+      {arqInfo && tipoConf && (
+        <>
+          {/* Header do arquivo */}
+          <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 12, padding: "10px 14px", background: `${tipoConf.cor}0a`, border: `1px solid ${tipoConf.cor}35`, borderRadius: 9, flexWrap: "wrap" }}>
+            <div style={{ fontSize: 22 }}>{tipoConf.icon}</div>
+            <div style={{ flex: 1 }}>
+              <div style={{ fontWeight: 700, fontSize: 13, color: "var(--text-primary)" }}>{arqInfo.nome}</div>
+              <div style={{ fontSize: 11, color: "var(--text-muted)" }}>
+                {tipoConf.label} · {arqInfo.total} registros · {arqInfo.colunas.length} colunas · Importado em {arqInfo.importadoEm}
+              </div>
+            </div>
+            {/* Stats */}
+            {stats.map(s => (
+              <div key={s.label} style={{ textAlign: "center", padding: "4px 12px", background: `${s.cor}12`, border: `1px solid ${s.cor}30`, borderRadius: 6 }}>
+                <div style={{ fontSize: 20, fontWeight: 800, color: s.cor }}>{s.val}</div>
+                <div style={{ fontSize: 9, color: "var(--text-muted)", whiteSpace: "nowrap" }}>{s.label}</div>
+              </div>
+            ))}
+          </div>
+
+          {/* Controles */}
+          <div style={{ display: "flex", gap: 8, marginBottom: 10, flexWrap: "wrap", alignItems: "center" }}>
+            <div style={{ position: "relative", flex: "1 1 220px" }}>
+              <Search size={12} style={{ position: "absolute", left: 8, top: "50%", transform: "translateY(-50%)", color: "var(--text-muted)" }} />
+              <input value={busca} onChange={e => { setBusca(e.target.value); setPagina(0); }}
+                placeholder="Buscar em todos os campos..."
+                style={{ width: "100%", paddingLeft: 26, padding: "6px 6px 6px 26px", border: "1px solid var(--border)", borderRadius: 6, background: "var(--surface)", color: "var(--text-primary)", fontSize: 12, boxSizing: "border-box" }} />
+            </div>
+            <input value={colFiltro} onChange={e => setColFiltro(e.target.value)}
+              placeholder="Filtrar colunas..."
+              style={{ flex: "0 0 160px", padding: "6px 8px", border: "1px solid var(--border)", borderRadius: 6, background: "var(--surface)", color: "var(--text-primary)", fontSize: 12 }} />
+            <span style={{ fontSize: 11, color: "var(--text-muted)" }}>
+              {dadosFilt.length} registro(s) · pág {pagina + 1}/{Math.max(1, totalPags)}
+            </span>
+            <div style={{ marginLeft: "auto", display: "flex", gap: 4 }}>
+              <button disabled={pagina === 0} onClick={() => setPagina(p => p - 1)}
+                style={{ padding: "4px 10px", borderRadius: 5, border: "1px solid var(--border)", background: "var(--surface)", cursor: pagina === 0 ? "not-allowed" : "pointer", opacity: pagina === 0 ? 0.4 : 1, fontSize: 12 }}>‹ Ant</button>
+              <button disabled={pagina >= totalPags - 1} onClick={() => setPagina(p => p + 1)}
+                style={{ padding: "4px 10px", borderRadius: 5, border: "1px solid var(--border)", background: "var(--surface)", cursor: pagina >= totalPags - 1 ? "not-allowed" : "pointer", opacity: pagina >= totalPags - 1 ? 0.4 : 1, fontSize: 12 }}>Prox ›</button>
+            </div>
+          </div>
+
+          {/* Tabela */}
+          <div style={{ overflowX: "auto", border: "1px solid var(--border)", borderRadius: 8, maxHeight: "60vh", overflowY: "auto" }}>
+            <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 12 }}>
+              <thead style={{ position: "sticky", top: 0, zIndex: 2 }}>
+                <tr style={{ background: "var(--surface-raised)" }}>
+                  <th style={{ padding: "7px 8px", textAlign: "center", color: "var(--text-muted)", fontWeight: 600, borderBottom: "1px solid var(--border)", width: 36 }}>#</th>
+                  {colunasFiltradas.map(col => (
+                    <th key={col} style={{ padding: "7px 10px", textAlign: "left", color: "var(--text-muted)", fontWeight: 600, borderBottom: "1px solid var(--border)", whiteSpace: "nowrap", maxWidth: 200 }}
+                      title={col}>{col.length > 25 ? col.slice(0, 23) + "…" : col}</th>
+                  ))}
+                </tr>
+              </thead>
+              <tbody>
+                {dadosPag.length === 0 ? (
+                  <tr><td colSpan={colunasFiltradas.length + 1} style={{ padding: 24, textAlign: "center", color: "var(--text-muted)" }}>Nenhum registro encontrado</td></tr>
+                ) : dadosPag.map((row, i) => (
+                  <tr key={i} style={{ borderTop: "1px solid var(--border)", background: i % 2 === 0 ? "transparent" : "var(--surface-raised)" }}>
+                    <td style={{ padding: "5px 8px", textAlign: "center", color: "var(--text-muted)", fontSize: 10 }}>{pagina * LINHAS_PAG + i + 1}</td>
+                    {colunasFiltradas.map(col => {
+                      const v = row[col];
+                      const cor = corCelula(col, v);
+                      const isEmpty = v === "" || v == null;
+                      return (
+                        <td key={col} style={{ padding: "5px 10px", maxWidth: 220, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap", color: isEmpty ? "var(--text-muted)" : cor }}
+                          title={String(v || "")}>
+                          {isEmpty ? <span style={{ opacity: 0.3 }}>—</span> : String(v)}
+                        </td>
+                      );
+                    })}
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+
+          {/* Análise cruzada para lotes */}
+          {arqInfo.tipo === "lotes" && (() => {
+            const porProduto = {};
+            arqInfo.dados.forEach(r => {
+              const p = r["Produto"] || r["product_id"] || "Desconhecido";
+              if (!porProduto[p]) porProduto[p] = { total: 0, seriais: [] };
+              porProduto[p].total++;
+              const s = r["Nome"] || r["name"] || "";
+              if (s) porProduto[p].seriais.push(s);
+            });
+            const top = Object.entries(porProduto).sort((a, b) => b[1].total - a[1].total).slice(0, 10);
+            return (
+              <div style={{ marginTop: 14, padding: "12px 14px", background: "rgba(139,92,246,0.06)", border: "1px solid rgba(139,92,246,0.2)", borderRadius: 9 }}>
+                <div style={{ fontWeight: 700, fontSize: 12, color: "#8b5cf6", marginBottom: 8 }}>🏷️ Análise por Produto — Top {top.length} (de {Object.keys(porProduto).length} produtos)</div>
+                <div style={{ display: "flex", flexWrap: "wrap", gap: 6 }}>
+                  {top.map(([prod, info]) => (
+                    <div key={prod} style={{ padding: "5px 10px", background: "rgba(139,92,246,0.1)", border: "1px solid rgba(139,92,246,0.25)", borderRadius: 6, fontSize: 11 }}>
+                      <strong style={{ color: "#8b5cf6" }}>{info.total}</strong> × {prod.length > 40 ? prod.slice(0, 38) + "…" : prod}
+                    </div>
+                  ))}
+                </div>
+              </div>
+            );
+          })()}
+
+          {/* Análise cruzada para transferências */}
+          {arqInfo.tipo === "transferencias" && (() => {
+            const porEstado = {};
+            arqInfo.dados.forEach(r => {
+              const e = r["Estado"] || r["state"] || "—";
+              porEstado[e] = (porEstado[e] || 0) + 1;
+            });
+            const corEs = (e) => e.toLowerCase().includes("pronto") || e.toLowerCase().includes("done") ? "#10b981" : e.toLowerCase().includes("cancel") ? "#ef4444" : "#f59e0b";
+            return (
+              <div style={{ marginTop: 14, padding: "12px 14px", background: "rgba(59,130,246,0.06)", border: "1px solid rgba(59,130,246,0.2)", borderRadius: 9 }}>
+                <div style={{ fontWeight: 700, fontSize: 12, color: "#3b82f6", marginBottom: 8 }}>🔄 Distribuição por Estado</div>
+                <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
+                  {Object.entries(porEstado).map(([est, cnt]) => (
+                    <div key={est} style={{ padding: "5px 12px", background: `${corEs(est)}15`, border: `1px solid ${corEs(est)}40`, borderRadius: 6, fontSize: 11, color: corEs(est), fontWeight: 600 }}>
+                      {cnt} × {est}
+                    </div>
+                  ))}
+                </div>
+              </div>
+            );
+          })()}
+        </>
+      )}
+
+      {Object.keys(arquivos).length === 0 && !processando && (
+        <div>
+          {/* ─── Guia de exportação do Odoo ─── */}
+          <div style={{ marginBottom: 16, padding: "14px 16px", background: "rgba(16,185,129,0.06)", border: "1px solid rgba(16,185,129,0.2)", borderRadius: 10 }}>
+            <div style={{ fontWeight: 700, fontSize: 13, color: "#10b981", marginBottom: 10 }}>📋 Como exportar os dados do Odoo:</div>
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: 10 }}>
+              {[
+                { titulo: "🏷️ Lotes/Séries", caminho: "Inventário → Lotes/Números de Série", cor: "#8b5cf6", dica: "Exporta seriais de todos os produtos" },
+                { titulo: "🔄 Transferências", caminho: "Inventário → Transferências", cor: "#3b82f6", dica: "Exporta movimentos entre locais" },
+                { titulo: "📦 Variantes de Produto", caminho: "Inventário → Produtos → Variantes", cor: "#10b981", dica: "Exporta catálogo com referências" },
+              ].map(g => (
+                <div key={g.titulo} style={{ padding: "10px 12px", background: `${g.cor}0a`, border: `1px solid ${g.cor}25`, borderRadius: 8 }}>
+                  <div style={{ fontWeight: 700, fontSize: 12, color: g.cor, marginBottom: 4 }}>{g.titulo}</div>
+                  <div style={{ fontSize: 11, color: "var(--text-secondary)", marginBottom: 4 }}>📍 {g.caminho}</div>
+                  <div style={{ fontSize: 10, color: "var(--text-muted)" }}>💡 {g.dica}</div>
+                  <div style={{ fontSize: 10, color: "var(--text-muted)", marginTop: 4, fontStyle: "italic" }}>
+                    → ☰ Favoritos → Exportar → Selecionar campos → Exportar
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+          <div style={{ textAlign: "center", padding: "24px 20px", color: "var(--text-muted)", fontSize: 13 }}>
+            <Database size={36} style={{ opacity: 0.25, marginBottom: 10 }} />
+            <p style={{ margin: "0 0 6px" }}>Nenhum arquivo importado ainda.</p>
+            <p style={{ fontSize: 11, margin: 0 }}>Arraste os arquivos .xlsx do Odoo na área acima ou clique para selecionar.</p>
+          </div>
+        </div>
+      )}
+
+      {/* ─── Análise Cruzada entre arquivos ─── */}
+      {Object.keys(arquivos).length >= 2 && (() => {
+        const lotes = Object.values(arquivos).find(a => a.tipo === "lotes");
+        const picks = Object.values(arquivos).find(a => a.tipo === "transferencias");
+        const prods = Object.values(arquivos).find(a => a.tipo === "produtos");
+        if (!lotes && !picks) return null;
+
+        const serialsLotes = new Set((lotes?.dados || []).map(r => r["Nome"] || r["name"] || "").filter(Boolean));
+        const serialsPicks = new Set((picks?.dados || []).map(r => r["Número de Série"] || r["lot_id"] || "").filter(Boolean));
+        const serialsComum = [...serialsLotes].filter(s => serialsPicks.has(s));
+
+        const produtosLotes = [...new Set((lotes?.dados || []).map(r => r["Produto"] || r["product_id"] || "").filter(Boolean))];
+        const produtosPicks = [...new Set((picks?.dados || []).map(r => r["Produto"] || r["product_id"] || "").filter(Boolean))];
+
+        return (
+          <div style={{ marginTop: 16, padding: "14px 16px", background: "rgba(245,158,11,0.06)", border: "1px solid rgba(245,158,11,0.25)", borderRadius: 10 }}>
+            <div style={{ fontWeight: 700, fontSize: 13, color: "#f59e0b", marginBottom: 10 }}>🔗 Análise Cruzada — {Object.keys(arquivos).length} arquivos importados</div>
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(160px, 1fr))", gap: 10, marginBottom: 12 }}>
+              {[
+                lotes && { label: "🏷️ Lotes/Séries", val: lotes.total, sub: `${produtosLotes.length} produtos`, cor: "#8b5cf6" },
+                picks && { label: "🔄 Transferências", val: picks.total, sub: `${produtosPicks.length} produtos`, cor: "#3b82f6" },
+                prods && { label: "📦 Produtos", val: prods.total, cor: "#10b981" },
+                (lotes && picks) && { label: "🔀 Seriais em ambos", val: serialsComum.length, sub: `de ${serialsLotes.size} lotes`, cor: "#f59e0b" },
+              ].filter(Boolean).map(k => (
+                <div key={k.label} style={{ textAlign: "center", padding: "8px 10px", background: `${k.cor}10`, border: `1px solid ${k.cor}30`, borderRadius: 7 }}>
+                  <div style={{ fontSize: 22, fontWeight: 800, color: k.cor }}>{k.val}</div>
+                  <div style={{ fontSize: 10, color: "var(--text-muted)", fontWeight: 600 }}>{k.label}</div>
+                  {k.sub && <div style={{ fontSize: 9, color: "var(--text-muted)" }}>{k.sub}</div>}
+                </div>
+              ))}
+            </div>
+            {serialsComum.length > 0 && (
+              <div>
+                <div style={{ fontSize: 11, fontWeight: 700, color: "#f59e0b", marginBottom: 6 }}>
+                  ✅ {serialsComum.length} serial(is) presente(s) em Lotes E em Transferências:
+                </div>
+                <div style={{ display: "flex", flexWrap: "wrap", gap: 4, maxHeight: 80, overflowY: "auto" }}>
+                  {serialsComum.slice(0, 30).map(s => (
+                    <span key={s} style={{ background: "rgba(245,158,11,0.1)", border: "1px solid rgba(245,158,11,0.3)", borderRadius: 4, padding: "1px 7px", fontSize: 10, color: "#f59e0b", fontFamily: "monospace" }}>{s}</span>
+                  ))}
+                  {serialsComum.length > 30 && <span style={{ fontSize: 10, color: "var(--text-muted)" }}>+{serialsComum.length - 30} mais…</span>}
+                </div>
+              </div>
+            )}
+            {lotes && picks && serialsComum.length === 0 && (
+              <div style={{ fontSize: 11, color: "var(--text-muted)", fontStyle: "italic" }}>
+                ℹ️ Nenhum serial em comum encontrado entre Lotes e Transferências (campos de serial podem ter nomes diferentes).
+              </div>
+            )}
+          </div>
+        );
+      })()}
+    </div>
+  );
+}
+
 export default function OdooAnalisador() {
-  const [tab, setTab] = useState("fluxo");
+  const [tab, setTab] = useState("importar");
   const tabContent = {
+    importar:  <TabImportar/>,
     mapa:      <TabMapa/>,
     discuss:   <TabDiscuss/>,
     org:       <TabOrganograma/>,
