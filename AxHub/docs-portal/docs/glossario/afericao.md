@@ -1,18 +1,40 @@
 ﻿---
-title: "Afericao"
+title: "Aferição"
 sidebar_position: 3
-description: "Definicao tecnica de Afericao com base no CTB e INMETRO"
+description: "O que é aferição no AxHub — obrigatoriedade, prazo e consequências"
 ---
 
-# Afericao
+# Aferição
 
-## Definicao
+Procedimento técnico de **verificação metrológica** que atesta a conformidade de um instrumento de medição (radar, câmera OCR, balança) com os padrões do INMETRO.
 
-Procedimento tecnico de verificacao metrologica que atesta a conformidade de um instrumento de medicao (radar, balanca, etc.) com os padroes estabelecidos pelo INMETRO.
+**Base legal:** Resolução CONTRAN 798/2021 — Portaria INMETRO 544/2014
 
-## Base Legal
+## Obrigatoriedade
 
-Resolucao CONTRAN 798/2021 e Portaria INMETRO 544/2014. Todo Equipamento metrologico deve possuir certificado de afericao válido para que as infracoes registradas tenham validade juridica. O prazo de validade varia conforme o tipo de Equipamento (geralmente 12 meses).
+Todo equipamento metrológico deve possuir **certificado de aferição válido** para que as infrações tenham validade jurídica. Prazo padrão: **12 meses**.
+
+## Consequências da aferição vencida
+
+| Situação | Consequência |
+|----------|---------------|
+| Certificação válida | Infrações com plena validade legal |
+| Vencida (até 30 dias) | **Alerta** no Dashboard |
+| Vencida | **Infrações bloqueadas** — não podem ser exportadas |
+
+## Tipos de aferição
+
+| Tipo | Descrição |
+|------|-----------|
+| **Inicial** | Realizada na instalação |
+| **Periódica** | Recalibração anual obrigatória |
+| **Extraordinária** | Após manutenção ou acidente |
+
+## Relacionados
+
+- [Aferições](../operacoes/afericoes) — Registro de aferições no sistema
+- [Tipos de Aferições](../administracao/tipos-afericoes) — Configuração dos tipos
+
 
 ## Uso no Sistema AxHub
 

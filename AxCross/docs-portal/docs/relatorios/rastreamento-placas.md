@@ -1,23 +1,51 @@
 ---
 sidebar_position: 3
 title: Rastreamento de Placas
-description: Rastreamento de Veículos por placa no AxCross
+description: Rastreamento completo de veículos por placa no AxCross
 ---
 
 # Rastreamento de Placas
 
-Permite rastrear as passagens de um Veículo específico em todos os cruzamentos monitorados, exibindo o histórico completo de detecções com imagens capturadas.
+Permite **rastrear todas as passagens** de um veículo específico em todos os cruzamentos monitorados, exibindo o histórico completo com imagens e dados de cada detecção.
 
 ## Como acessar
 
-No **menu lateral**, clique em Relatórios e selecione **Rastreamento de Placas**.
+No **menu lateral**, clique em **Relatórios** e selecione **Rastreamento de Placas**.
 
-![Rastreamento de Veículos por Placa](../img/Rastreamento de Veículos por Placa.png)
+![Rastreamento de Veículos por Placa](<../img/Rastreamento de Veículos por Placa.png>)
 
 ## Filtros
 
 | Filtro | Obrigatório | Descrição |
 |--------|:-----------:|-----------|
+| **Placa** | Sim | Número da placa (Mercosul ou antigo) |
+| **Período** | Sim | Data início e data fim |
+| **Equipamento** | Não | Filtrar por câmera específica |
+| **Local** | Não | Filtrar por cruzamento |
+
+## Resultado
+
+| Coluna | Descrição |
+|--------|-----------|
+| **Data/Hora** | Momento da detecção |
+| **Local** | Cruzamento monitorado |
+| **Equipamento** | Câmera que registrou |
+| **Faixa** | Faixa da pista |
+| **Velocidade** | Se disponível |
+| **Imagem** | Foto da passagem |
+| **Alerta** | Indica se havia monitoramento ativo |
+
+## Passo a passo
+
+1. Acesse **Relatórios → Rastreamento de Placas**
+2. Informe a **Placa**
+3. Defina o **Período**
+4. Clique em **Consultar**
+5. Clique em qualquer passagem para ver a imagem
+
+:::tip Uso investigativo
+Use o rastreamento para reconstruir a rota de um veículo suspeito. Combine com o [Painel Analítico](./painel-analitico) para análise profunda.
+:::
 | **Placa** | Sim | Placa do Veículo (formato Mercosul ou antigo) |
 | **Data Início** | Sim | Data inicial do período |
 | **Data Fim** | Sim | Data final do período |

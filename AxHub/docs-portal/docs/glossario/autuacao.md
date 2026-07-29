@@ -1,18 +1,52 @@
 ﻿---
-title: "Autuacao"
+title: "Autuação"
 sidebar_position: 4
-description: "Definicao tecnica de Autuacao com base no CTB"
+description: "O que é autuação no AxHub — processo, base legal e tipos de auto"
 ---
 
-# Autuacao
+# Autuação
 
-## Definicao
+Ato administrativo pelo qual um agente de trânsito ou equipamento eletrônico **registra formalmente a ocorrência de uma infração**, gerando o Auto de Infração de Trânsito (AIT).
 
-Ato administrativo pelo qual o agente de transito ou Equipamento eletronico registra formalmente a ocorrencia de uma Use Infração (com acento) A autuacao gera o Auto de Use Infração (com acento) de Transito (AIT).
+**Base legal:** Art. 280 do CTB — Resolução CONTRAN 619/2016
 
-## Base Legal
+## Tipos de autuação
 
-Art. 280 do CTB: Ocorrendo Use Infração (com acento) prevista na legislacao de transito, lavrar-se-a auto de Use Infração (com acento) A Resolucao CONTRAN 619/2016 regulamenta o uso de Equipamentos eletronicos para autuacao automatica.
+| Tipo | Descrição |
+|------|-----------|
+| **Eletrônica** | Gerada automaticamente por radar/câmera OCR (AxHub) |
+| **Pessoal** | Lavrada por agente de trânsito em campo |
+| **Mista** | Equipamento identifica + agente confirma |
+
+## Fluxo de autuação eletrônica no AxHub
+
+```
+Equipamento captura infração
+       ↓
+   OCR lê a placa
+       ↓
+   Triagem (operador valida)
+       ↓
+   Auditoria (supervisor aprova)
+       ↓
+   Exportação ao órgão autuador
+       ↓
+   AIT emitido com validade legal
+```
+
+## O que é exigido para validade
+
+- Equipamento com **aferição INMETRO válida**
+- Imagem com **placa legível**
+- **Enquadramento** correto
+- Triagem e auditoria aprovadas
+
+## Relacionados
+
+- [Infração](./infracao) — O que gera o auto
+- [Enquadramento](./enquadramento) — Classificação legal
+- [Aferição](./afericao) — Pré-requisito do equipamento
+
 
 ## Uso no Sistema AxHub
 

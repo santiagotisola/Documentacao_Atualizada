@@ -1,23 +1,47 @@
 ---
 sidebar_position: 1
 title: "Passagem"
+description: "O que é uma passagem no AxCross — dados, fluxo e uso operacional"
 ---
 
 # Passagem
 
-Registro da detecção de um Veículo por um Equipamento de monitoramento em um cruzamento. Cada passagem contém dados como placa, data/hora, local, faixa e imagem capturada.
+Registro da **detecção de um veículo** por um equipamento de monitoramento em um cruzamento. Cada passagem é a unidade básica de dados do AxCross — a partir dela são gerados alertas, relatórios e análises.
 
 ## Dados de uma passagem
 
 | Campo | Descrição |
 |-------|-----------|
 | **Data/Hora** | Momento exato da detecção |
-| **Placa** | Placa lida pelo OCR do Equipamento |
+| **Placa** | Placa lida pelo OCR do equipamento |
 | **Local** | Cruzamento onde a detecção ocorreu |
 | **Faixa** | Faixa de pista monitorada |
-| Equipamento | Câmera ou sensor que registrou a passagem |
-| **Velocidade** | Velocidade do Veículo (quando disponível) |
-| **Imagem** | Fotografia da passagem capturada pelo Equipamento |
+| **Equipamento** | Câmera ou sensor que registrou |
+| **Velocidade** | Velocidade do veículo (quando disponível) |
+| **Imagem** | Fotografia capturada pelo equipamento |
+| **Alerta** | Se o veículo estava monitorado |
+
+## Ciclo de vida
+
+```
+Veículo passa → OCR lê placa → Passagem registrada
+                                    ↓
+                     Veículo monitorado? → Sim → Alerta gerado
+                                         → Não → Registrada sem alerta
+```
+
+## Onde consultar passagens
+
+- **Monitoramento Online**: tempo real
+- **Rastreamento por Placa**: histórico por placa
+- **Relatório de Passagens**: exportação com filtros
+- **Painel Analítico**: análise por veículo
+
+## Relacionados
+
+- [Equipamento](./equipamento) — Dispositivo que registra
+- [Alerta](../operacoes/alertas) — Gerado quando veículo monitorado passa
+
 
 ## Como as passagens são registradas
 

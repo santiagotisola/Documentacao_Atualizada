@@ -1,22 +1,46 @@
 ---
 sidebar_position: 3
 title: Tickets Fechados
-description: Consulta de tickets de pesagem finalizados
+description: Histórico de tickets de pesagem finalizados no AxTon
 ---
 
 # Tickets Fechados
 
 ![Layout do Ticket](../img/layout%20ticket%20Axton.png)
 
-Tickets fechados são registros de pesagem já finalizados. Permitem consulta histórica e geração de Relatórios
+Registros de pesagem **já finalizados**. Permitem consulta histórica, geração de relatórios e comprovação de fiscalizações realizadas.
 
 ## Como acessar
 
-**Menu lateral** → **Tickets de Pesagens** → Fechados
+**Menu lateral** → **Tickets de Pesagens** → **Fechados**
 
-## Listagem
+## Colunas
 
-### Colunas
+| Coluna | Descrição |
+|--------|-----------|
+| **Número** | Identificador do ticket |
+| **Placa** | Veículo pesado |
+| **Data** | Data da pesagem |
+| **Posto** | Local da pesagem |
+| **Peso aferido** | Peso registrado |
+| **Resultado** | Regular / Infrator |
+| **Status** | Liberado / Autuado |
+
+## Ações disponíveis
+
+| Ação | Descrição |
+|------|-----------|
+| **Visualizar** | Ver detalhes completos |
+| **Imprimir** | Gerar comprovante |
+| **Exportar** | Excel ou PDF |
+
+## Filtros
+
+- **Período**: data início e fim
+- **Posto**: filtrar por localidade
+- **Resultado**: regular ou infrator
+- **Placa**: busca direta
+
 
 | Coluna | Descrição |
 |--------|-----------|

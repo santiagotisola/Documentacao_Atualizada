@@ -1,23 +1,40 @@
 ---
 sidebar_position: 5
 title: Liberar Pesagem
-description: Liberação manual de Veículos no processo de pesagem
+description: Liberação manual de veículos retidos no processo de pesagem no AxTon
 ---
 
 # Liberar Pesagem
 
 ![Dados da Pesagem](../img/inicar%20pesagem%20-%20dados%20da%20pesagem.png)
 
-Permite liberar manualmente Veículos que estão retidos no processo de pesagem, seja por questões operacionais ou após regularização.
+Permite **liberar manualmente** veículos retidos no processo de pesagem, seja após regularização, decisão de autoridade ou erro no processo.
 
 ## Como acessar
 
 **Menu lateral** → **Tickets de Pesagens** → **Liberar**
 
-## Quando liberar
+## Quando liberar um veículo
 
-- Veículo aguardando liberação após pesagem
-- Liberação por autoridade competente
+| Situação | Descrição |
+|----------|----------|
+| **Excesso regularizado** | Veículo transferiu carga para outro veículo |
+| **Autoridade competente** | Decisão judicial ou administrativa |
+| **Erro de classificação** | Veículo classificado incorretamente |
+| **Isento** | Categoria isenta conforme legislação |
+
+## Passo a passo
+
+1. Localize o ticket na lista de **Tickets Abertos**
+2. Clique em **Liberar**
+3. Selecione o **Motivo da liberação**
+4. Opcionalmente informe uma **Observação**
+5. Clique em **Confirmar Liberação**
+
+:::caution Responsabilidade
+Toda liberação é registrada com o usuário responsável. Selecione o motivo correto para fins de auditoria.
+:::
+
 - Correção de registro incorreto
 
 ### Campos

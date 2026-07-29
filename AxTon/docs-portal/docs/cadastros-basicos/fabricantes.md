@@ -1,22 +1,48 @@
 ﻿---
 sidebar_position: 2
 title: Fabricantes
-description: Cadastro dos fabricantes de Equipamentos
+description: Cadastro dos fabricantes de equipamentos de pesagem no AxTon
 ---
 
 # Fabricantes
 
-Configuração de Sistema](../img/configuracao%20de%20sistema%20-%20dados.png)
-
-Cadastro dos fabricantes de Equipamentos Estes registros são fundamentais para o funcionamento do sistema de pesagem.
+Cadastro dos **fabricantes dos equipamentos** de pesagem. Obrigatório para vincular equipamentos a modelos e garantir rastreabilidade técnica.
 
 ## Como acessar
 
 **Menu lateral** → Cadastros Básicos → **Fabricantes**
 
-## Listagem
+## Campos
 
-### Colunas
+| Campo | Obrigatório | Descrição |
+|-------|:-----------:|-----------|
+| **Nome** | Sim | Nome do fabricante |
+| **CNPJ** | Não | CNPJ do fabricante |
+| **Contato** | Não | E-mail ou telefone de suporte |
+| **Status** | Sim | Ativo ou Inativo |
+
+## Passo a passo
+
+1. Acesse **Cadastros Básicos → Fabricantes**
+2. Clique em **+ Novo**
+3. Informe o **Nome** do fabricante
+4. Clique em **Salvar**
+
+## Hierarquia
+
+```
+Fabricante
+  └── Modelo de Equipamento
+        └── Equipamento cadastrado
+```
+
+## Navegação Relacionada
+
+| Tipo | Página | Descrição |
+|------|--------|-----------|
+| Relacionado | [Modelos](./modelos-equipamentos) | Modelos do fabricante |
+| Relacionado | [Equipamentos](./equipamentos) | Equipamentos cadastrados |
+
 
 | Coluna | Descrição |
 |--------|-----------|

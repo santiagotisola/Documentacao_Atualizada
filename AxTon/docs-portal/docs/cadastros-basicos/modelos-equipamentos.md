@@ -1,22 +1,41 @@
 ﻿---
 sidebar_position: 4
 title: Modelos de Equipamentos
-description: Modelos por fabricante
+description: Modelos de equipamentos de pesagem por fabricante no AxTon
 ---
 
 # Modelos de Equipamentos
 
-Configuração de Sistema](../img/configuracao%20de%20sistema%20-%20dados.png)
-
-Modelos por fabricante. Estes registros são fundamentais para o funcionamento do sistema de pesagem.
+Cadastro dos **modelos de equipamentos** por fabricante. Cada modelo define as características técnicas da balança ou sensor utilizado.
 
 ## Como acessar
 
-**Menu lateral** → Cadastros Básicos → **Modelos de Equipamentos
+**Menu lateral** → Cadastros Básicos → **Modelos de Equipamentos**
 
-## Listagem
+## Campos
 
-### Colunas
+| Campo | Obrigatório | Descrição |
+|-------|:-----------:|-----------|
+| **Nome** | Sim | Nome do modelo |
+| **Fabricante** | Sim | Fabricante vinculado |
+| **Tipo** | Sim | Balança estática, dinâmica ou semiestática |
+| **Capacidade (t)** | Não | Capacidade máxima de pesagem |
+| **Status** | Sim | Ativo ou Inativo |
+
+## Passo a passo
+
+1. Acesse **Cadastros Básicos → Modelos de Equipamentos**
+2. Clique em **+ Novo**
+3. Informe o **Nome** e selecione o **Fabricante**
+4. Defina o **Tipo** de equipamento
+5. Clique em **Salvar**
+
+## Hierarquia
+
+```
+Fabricante → Modelo → Equipamento cadastrado no posto
+```
+
 
 | Coluna | Descrição |
 |--------|-----------|

@@ -1,18 +1,39 @@
 ---
 sidebar_position: 8
 title: Municípios
-description: Cadastro de municípios
+description: Cadastro de municípios utilizados nas operações e infrações do AxHub
 ---
 
 # Municípios
 
-Permite cadastrar e gerenciar os municípios utilizados no sistema.
+Cadastro dos municípios utilizados no sistema para **classificação geográfica** das operações, faixas e infrações.
 
 ![Lista de Municípios](../img/Veículos%20-%20Municípios.png)
 
 ## Como acessar
 
 **Menu lateral** → Veículos → **Municípios**
+
+## Campos
+
+| Campo | Obrigatório | Descrição |
+|-------|:-----------:|-----------|
+| **Nome** | Sim | Nome do município |
+| **Código IBGE** | Sim | Código do IBGE (7 dígitos) |
+| **UF** | Sim | Unidade Federativa |
+| **Status** | Sim | Ativo ou Inativo |
+
+## Passo a passo
+
+1. Acesse **Veículos → Municípios**
+2. Clique em **+ Novo**
+3. Informe o **Nome**, **Código IBGE** e **UF**
+4. Clique em **Salvar**
+
+:::tip
+O código IBGE é obrigatório nos arquivos de exportação de infrações. Certifique-se de usar o código correto para o município do equipamento.
+:::
+
 
 ## Cadastro
 
