@@ -1,23 +1,42 @@
 ﻿---
 sidebar_position: 6
 title: PDF Gerados
-description: Consulta e download de Relatórios PDF gerados no AxCross
+description: Consulta e download de relatórios PDF gerados no AxCross
 ---
 
 # PDF Gerados
 
-Lista todos os Relatórios em formato PDF que foram gerados no sistema, permitindo download, visualização e reprocessamento.
+Lista todos os relatórios em formato **PDF já gerados** pelo sistema, permitindo download, visualização e reprocessamento sem precisar executar novamente os filtros.
 
 ## Como acessar
 
-No **menu lateral**, clique em Relatórios e selecione **PDF Gerados**.
+No **menu lateral**, clique em **Relatórios** e selecione **PDF Gerados**.
 
-![Relatórios Gerados](../img/Relatórios Gerados.png)
-)
+![Relatórios Gerados](<../img/Relatórios Gerados.png>)
 
 ## Informações exibidas
 
 | Campo | Descrição |
+|-------|-----------|
+| **Nome** | Tipo do relatório gerado |
+| **Data de geração** | Quando foi gerado |
+| **Período** | Período de dados do relatório |
+| **Usuário** | Quem gerou |
+| **Status** | Concluído / Processando / Erro |
+
+## Ações disponíveis
+
+| Ação | Descrição |
+|------|-----------|
+| **Download** | Baixar o PDF gerado |
+| **Visualizar** | Abrir no navegador |
+| **Reprocessar** | Regenerar o relatório |
+| **Excluir** | Remover da lista |
+
+:::tip
+Relatórios pesados (muitos registros) ficam na lista de PDF Gerados para download posterior, sem travar a tela.
+:::
+
 |-------|-----------|
 | **Nome do Arquivo** | Nome identificador do Relatório gerado |
 | **Tipo** | Tipo de Relatório (Passagens, Ocorrências, Veículos Monitorados, etc.) |

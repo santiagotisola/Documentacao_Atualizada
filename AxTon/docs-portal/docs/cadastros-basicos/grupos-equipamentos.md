@@ -1,22 +1,40 @@
 ﻿---
 sidebar_position: 5
 title: Grupos de Equipamentos
-description: Agrupamento lógico de Equipamentos
+description: Agrupamento lógico de equipamentos de pesagem no AxTon
 ---
 
 # Grupos de Equipamentos
 
-Configuração de Sistema](../img/configuracao%20de%20sistema%20-%20dados.png)
-
-Agrupamento lógico de Equipamentos Estes registros são fundamentais para o funcionamento do sistema de pesagem.
+Agrupamento lógico de equipamentos para **organização por contrato, região ou tipo de operação**. Facilita filtros em relatórios e medições contratuais.
 
 ## Como acessar
 
-**Menu lateral** → Cadastros Básicos → **Grupos de Equipamentos
+**Menu lateral** → Cadastros Básicos → **Grupos de Equipamentos**
 
-## Listagem
+## Campos
 
-### Colunas
+| Campo | Obrigatório | Descrição |
+|-------|:-----------:|-----------|
+| **Nome** | Sim | Nome do grupo |
+| **Descrição** | Não | Finalidade do agrupamento |
+| **Equipamentos** | Sim | Lista de equipamentos do grupo |
+| **Status** | Sim | Ativo ou Inativo |
+
+## Passo a passo
+
+1. Acesse **Cadastros Básicos → Grupos de Equipamentos**
+2. Clique em **+ Novo**
+3. Informe o **Nome** do grupo
+4. Vincule os **Equipamentos**
+5. Clique em **Salvar**
+
+## Uso dos grupos
+
+- **Relatórios**: filtrar dados por grupo de equipamentos
+- **Medições**: agrupar equipamentos de um mesmo contrato
+- **Monitoramento**: visualizar status por grupo
+
 
 | Coluna | Descrição |
 |--------|-----------|
