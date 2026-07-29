@@ -1,93 +1,95 @@
-# AXIONIA KNOWLEDGE PLATFORM
-## Master Documentation Index
+# AXIONIA KNOWLEDGE PLATFORM — Master Specification Index
+**Version:** 1.0 Enterprise | **Status:** Active | **Date:** 2026-07-29
 
-**Versão:** 1.0 Enterprise  
-**Data:** 2026-07-29  
-**Status:** Em evolução contínua
+## O que é esta documentação
+Este diretório contém a especificação completa da AKP em 80 documentos.
 
----
+## Índice por Domínio
 
-## Estrutura da Documentação
+### Fundação (00-07)
+| # | Arquivo | Conteúdo |
+|---|---------|---------|
+| 00 | README | Este índice |
+| 01 | VISAO-GERAL | Visão executiva e missão |
+| 02 | CONSTITUICAO | Lei fundamental da plataforma |
+| 03 | PRINCIPIOS | Os 10 princípios inegociáveis |
+| 04 | FILOSOFIA | Por que a AKP existe |
+| 05 | GOVERNANCA | Ciclo de vida e controle |
+| 06 | ARQUITETURA | Visão geral dos 80+ componentes |
+| 07 | DOMINIOS | Os 10 domínios de atuação |
 
-```
-/docs/master/          → Documentos fundacionais da plataforma
-/docs/specifications/  → Especificações técnicas detalhadas
-/docs/examples/        → Exemplos práticos de implementação
-/prompts/              → Prompts especializados por agente
-/templates/            → Templates de conteúdo (A, B, C)
-/rules/                → Regras e padrões da plataforma
-```
+### Infra Cognitiva (08-13)
+| # | Arquivo | Conteúdo |
+|---|---------|---------|
+| 08 | KNOWLEDGE-GRAPH | O grafo central de conhecimento |
+| 09 | DIGITAL-TWIN | O twin cognitivo de cada sistema |
+| 10 | CONTEXT-PROTOCOL | Protocolo de contexto entre agentes |
+| 11 | ORCHESTRATOR | O orquestrador central |
+| 12 | EVENT-BUS | Barramento de eventos assíncronos |
+| 13 | WORKFLOW | Motor de workflows |
 
----
+### Engines de Conteúdo (14-25)
+| # | Arquivo | Conteúdo |
+|---|---------|---------|
+| 14 | SOURCE-ENGINE | Coleta de todas as fontes |
+| 15 | DOCUMENTATION-ENGINE | Geração de documentação |
+| 16 | STORYBOARD-ENGINE | Planejamento de vídeos |
+| 17 | VIDEO-ENGINE | Produção de vídeos |
+| 18 | NARRATION-ENGINE | Narração corporativa |
+| 19 | TIMELINE-ENGINE | Linha do tempo de conteúdo |
+| 20 | RENDER-ENGINE | Renderização final |
+| 21 | PUBLISHING-ENGINE | Publicação automática |
+| 22 | TRAINING-ENGINE | Trilhas de treinamento |
+| 23 | QUIZ-ENGINE | Quizzes e certificação |
+| 24 | MICROLEARNING | Cápsulas 15s a 30min |
+| 25 | KNOWLEDGE-FEED | Feed de conhecimento |
 
-## Índice Master (50 documentos)
+### Engines de Análise (26-34)
+| # | Arquivo | Conteúdo |
+|---|---------|---------|
+| 26 | PLAYWRIGHT | Automação e captura |
+| 27 | OCR | Reconhecimento óptico |
+| 28 | SCREEN-ANALYZER | Análise de interfaces |
+| 29 | API-ENGINE | Análise de APIs |
+| 30 | DATABASE-ENGINE | Análise de bancos de dados |
+| 31 | CODE-ANALYZER | Análise de código-fonte |
+| 32 | RELATIONSHIP-ENGINE | Mapeamento de relacionamentos |
+| 33 | LEARNING-ENGINE | Aprendizado contínuo |
+| 34 | ANALYTICS | Métricas e inteligência |
 
-| # | Arquivo | Título | Status |
-|---|---------|--------|--------|
-| 00 | README.md | Índice e visão geral | ✅ |
-| 01 | 01-CONSTITUICAO.md | Constituição da Plataforma | ✅ |
-| 02 | 02-PRINCIPIOS.md | Os 10 Princípios Fundamentais | ✅ |
-| 03 | 03-ARQUITETURA.md | Arquitetura de Agentes | ✅ |
-| 04 | 04-GOVERNANCA.md | Governança e Ciclo de Vida | ✅ |
-| 05 | 05-KNOWLEDGE-ENGINE.md | Motor de Conhecimento | ✅ |
-| 06 | 06-RELATIONSHIP-ENGINE.md | Motor de Relacionamentos | ✅ |
-| 07 | 07-DOCUMENTATION-ENGINE.md | Motor de Documentação | ✅ |
-| 08 | 08-VIDEO-ENGINE.md | Motor de Vídeo | ✅ |
-| 09 | 09-STORYBOARD-ENGINE.md | Motor de Storyboard | ✅ |
-| 10 | 10-MICROLEARNING.md | Motor de Microlearning | ✅ |
-| 11 | 11-FAQ-ENGINE.md | Motor de FAQ | ✅ |
-| 12 | 12-QUIZ-ENGINE.md | Motor de Quiz e Certificação | ✅ |
-| 13 | 13-RELEASE-ENGINE.md | Motor de Releases | ✅ |
-| 14 | 14-VALIDATION-ENGINE.md | Motor de Validação | ✅ |
-| 15 | 15-PUBLISHING-ENGINE.md | Motor de Publicação | ✅ |
-| 16 | 16-ANALYTICS-ENGINE.md | Motor de Analytics | ✅ |
-| 17 | 17-LEARNING-ENGINE.md | Motor de Aprendizado | ✅ |
-| 18 | 18-AGENT-CONSTITUTION.md | Constituição dos Agentes | ✅ |
-| 19 | 19-APSL-LANGUAGE.md | Linguagem APSL | 🔄 |
-| 20 | 20-ACP-PROTOCOL.md | Protocolo ACP | 🔄 |
-| 21 | 21-CODING-STANDARDS.md | Padrões de Código | ✅ |
-| 22 | 22-UX-STANDARDS.md | Padrões de UX | ✅ |
-| 23 | 23-UI-STANDARDS.md | Padrões de UI | ✅ |
-| 24 | 24-SECURITY-STANDARDS.md | Padrões de Segurança | ✅ |
-| 25 | 25-DOCUMENTATION-STANDARDS.md | Padrões de Documentação | ✅ |
-| 26 | 26-VIDEO-STANDARDS.md | Padrões de Vídeo | ✅ |
-| 27 | 27-MICROLEARNING-STANDARDS.md | Padrões de Microlearning | ✅ |
-| 28 | 28-ENTERPRISE-ARCHITECTURE.md | Arquitetura Empresarial | 🔄 |
-| 29 | 29-PROMPT-COMPILER.md | Compilador de Prompts | 🔄 |
-| 30 | 30-AI-ORCHESTRATOR.md | AI Orchestrator | ✅ |
-| 31 | 31-CONTEXT-MANAGER.md | Gerenciador de Contexto | 🔄 |
-| 32 | 32-MEMORY-MANAGER.md | Gerenciador de Memória | 🔄 |
-| 33 | 33-KNOWLEDGE-GRAPH.md | Knowledge Graph | ✅ |
-| 34 | 34-DIGITAL-TWIN.md | Digital Twin Cognitivo | ✅ |
-| 35 | 35-EVENT-BUS.md | Barramento de Eventos | 🔄 |
-| 36 | 36-WORKFLOW-ENGINE.md | Motor de Workflows | 🔄 |
-| 37 | 37-ENTERPRISE-RULES.md | Regras Empresariais | ✅ |
-| 38 | 38-TEMPLATES.md | Sistema de Templates | ✅ |
-| 39 | 39-CONTENT-STANDARDS.md | Padrões de Conteúdo | ✅ |
-| 40 | 40-DEPLOYMENT.md | Deploy e Infraestrutura | 🔄 |
-| 41 | 41-MONITORING.md | Monitoramento | 🔄 |
-| 42 | 42-TESTING.md | Testes e QA | 🔄 |
-| 43 | 43-INTEGRATIONS.md | Integrações | ✅ |
-| 44 | 44-API-CATALOG.md | Catálogo de APIs | ✅ |
-| 45 | 45-DATA-MODELS.md | Modelos de Dados | ✅ |
-| 46 | 46-PERMISSIONS.md | Permissões e RBAC | ✅ |
-| 47 | 47-CHANGELOG.md | Histórico de Alterações | 🔄 |
-| 48 | 48-GLOSSARY.md | Glossário da Plataforma | ✅ |
-| 49 | 49-FAQ-PLATFORM.md | FAQ da Plataforma | ✅ |
-| 50 | 50-ROADMAP-2035.md | Roadmap até 2035 | 🔄 |
+### Linguagens e Protocolos (35-39)
+| # | Arquivo | Conteúdo |
+|---|---------|---------|
+| 35 | PROMPT-COMPILER | Compilador de prompts |
+| 36 | APSL | AKP Prompt Specification Language |
+| 37 | AVSL | AKP Video Specification Language |
+| 38 | ADSL | AKP Document Specification Language |
+| 39 | ACP | AKP Communication Protocol |
 
-**Legenda:** ✅ Disponível | 🔄 Em desenvolvimento | ⏳ Planejado
+### Agentes (40-46)
+| # | Arquivo | Conteúdo |
+|---|---------|---------|
+| 40 | CORE-AGENTS | Orchestrator + Project Manager |
+| 41 | KNOWLEDGE-AGENTS | Extractor + Relationship |
+| 42 | DOCUMENT-AGENTS | Documentation Agent |
+| 43 | VIDEO-AGENTS | Storyboard + Capture + Narrator + Renderer |
+| 44 | LEARNING-AGENTS | Microlearning + Quiz |
+| 45 | PUBLISHING-AGENTS | Publisher |
+| 46 | VALIDATION-AGENTS | Validator |
 
----
+### Segurança e Qualidade (47-50)
+| # | Arquivo | Conteúdo |
+|---|---------|---------|
+| 47 | SECURITY | Padrões de segurança |
+| 48 | LGPD | Conformidade LGPD |
+| 49 | PERFORMANCE | Otimização e performance |
+| 50 | CACHE | Estratégia de cache |
 
-## Como usar esta documentação
+### Infraestrutura (51-64)
+Redis, RabbitMQ, Docker, Kubernetes, Monorepo, VSCode, CLI, API, Web, React, .NET, PostgreSQL, Neo4j, MinIO
 
-1. Comece pelo **01-CONSTITUICAO.md** para entender a missão
-2. Leia os **10 Princípios** (02-PRINCIPIOS.md) — são inegociáveis
-3. Estude a **Arquitetura** (03-ARQUITETURA.md) dos 12+ agentes
-4. Escolha o Engine relevante para sua necessidade
-5. Consulte os **prompts/** para implementar cada agente
+### Padrões (65-68)
+Testes, Templates, Style Guide, Boas Práticas
 
----
-
-> *"A plataforma AKP não é uma única IA. É um ecossistema de agentes cognitivos especializados trabalhando em orquestra."*
+### Evolução (69-80)
+Roadmap, Versionamento, Plugins, Marketplace, Extensions, Portal Cliente, Admin, Enterprise, Deploy, Observability, Future, Conclusão

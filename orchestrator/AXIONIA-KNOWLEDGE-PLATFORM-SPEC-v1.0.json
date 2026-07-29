@@ -1,0 +1,381 @@
+{
+  "$schema": "akp-enterprise-spec-v1",
+  "documento": "AXIONIA-KNOWLEDGE-PLATFORM — Enterprise Specification",
+  "versao": "1.0",
+  "ano": 2026,
+  "status": "Architecture Definition",
+  "autor": "Axion Tecnologia",
+
+  "cap01_identidade": {
+    "titulo": "Identidade da Plataforma",
+    "missao": "Compreender, estruturar, relacionar e transformar qualquer fonte de informação em ativos digitais reutilizáveis. Nunca apenas responder perguntas.",
+    "objetivo_transformar_em": [
+      "Manual Técnico", "Manual Operacional", "Manual do Usuário",
+      "Vídeo", "Storyboard", "FAQ", "Quiz", "Fluxograma", "Diagrama",
+      "Base de Conhecimento", "Central de Ajuda", "Curso",
+      "Microlearning", "Você Sabia?", "Release Notes",
+      "Treinamentos", "Portal de Conhecimento"
+    ],
+    "missao_permanente": [
+      "Sempre aprender",
+      "Sempre documentar",
+      "Sempre relacionar",
+      "Sempre melhorar",
+      "Nunca perder conhecimento"
+    ],
+    "principios_operacionais": [
+      "compreender antes de responder",
+      "analisar antes de gerar",
+      "relacionar antes de publicar",
+      "validar antes de entregar",
+      "versionar antes de substituir"
+    ],
+    "atributos_todo_conhecimento": [
+      "origem", "contexto", "relacionamentos", "versionamento",
+      "rastreabilidade", "reutilização", "auditoria"
+    ]
+  },
+
+  "cap02_filosofia": {
+    "titulo": "Filosofia — 5 Pilares",
+    "pilares": [
+      {
+        "nome": "Conhecimento",
+        "principio": "Todo conteúdo deve ser compreendido. Nunca apenas copiado."
+      },
+      {
+        "nome": "Contexto",
+        "principio": "Nenhuma informação existe isoladamente. Tudo possui contexto."
+      },
+      {
+        "nome": "Relacionamentos",
+        "principio": "Toda informação possui dependências. Toda dependência deve ser registrada."
+      },
+      {
+        "nome": "Evolução",
+        "principio": "O conhecimento evolui continuamente. Toda alteração gera atualização."
+      },
+      {
+        "nome": "Reutilização",
+        "principio": "Nunca recriar informação existente. Sempre reutilizar conhecimento."
+      }
+    ]
+  },
+
+  "cap03_objetivos": {
+    "titulo": "Objetivos — O que a plataforma compreende",
+    "compreende": [
+      "Sistemas", "Módulos", "Menus", "Telas", "Campos",
+      "APIs", "Banco de Dados", "Fluxos", "Regras",
+      "Usuários", "Permissões", "Integrações",
+      "Processos", "Dashboards", "Relatórios"
+    ],
+    "converte_em": "Ativos digitais automaticamente"
+  },
+
+  "cap04_dominios": {
+    "titulo": "Domínios — 12 Domínios Especializados",
+    "dominios": [
+      { "nome": "Knowledge",     "responsabilidade": "Extração e estruturação de conhecimento" },
+      { "nome": "Documentation", "responsabilidade": "Geração de documentação corporativa" },
+      { "nome": "Video",         "responsabilidade": "Produção de vídeos e storyboards" },
+      { "nome": "Learning",      "responsabilidade": "Microlearning, quizzes, trilhas" },
+      { "nome": "Publishing",    "responsabilidade": "Publicação e distribuição" },
+      { "nome": "Analytics",     "responsabilidade": "Métricas e inteligência" },
+      { "nome": "Validation",    "responsabilidade": "Qualidade e conformidade" },
+      { "nome": "Automation",    "responsabilidade": "Automação via Playwright e OCR" },
+      { "nome": "Integration",   "responsabilidade": "Integrações com sistemas externos" },
+      { "nome": "AI",            "responsabilidade": "Modelos, prompts e agentes" },
+      { "nome": "Security",      "responsabilidade": "Segurança, LGPD, RBAC" },
+      { "nome": "Enterprise",    "responsabilidade": "Governança, ciclo de vida, multi-tenant" }
+    ]
+  },
+
+  "cap05_pipeline_operacional": {
+    "titulo": "Princípios Operacionais — Pipeline de 9 Etapas",
+    "regra": "Nenhuma etapa poderá ser ignorada.",
+    "etapas": [
+      { "ordem": 1, "nome": "Entrada",        "descricao": "Receber e classificar a fonte de informação" },
+      { "ordem": 2, "nome": "Extração",       "descricao": "Extrair entidades, conceitos e estrutura" },
+      { "ordem": 3, "nome": "Normalização",   "descricao": "Normalizar para o modelo interno AKP" },
+      { "ordem": 4, "nome": "Análise",        "descricao": "Analisar em 10 camadas simultâneas" },
+      { "ordem": 5, "nome": "Relacionamentos","descricao": "Mapear todos os relacionamentos com 22 tipos" },
+      { "ordem": 6, "nome": "Knowledge Graph","descricao": "Registrar no grafo central" },
+      { "ordem": 7, "nome": "Planejamento",   "descricao": "Planejar outputs necessários" },
+      { "ordem": 8, "nome": "Validação",      "descricao": "Validar qualidade e coerência" },
+      { "ordem": 9, "nome": "Publicação",     "descricao": "Publicar e distribuir os ativos" }
+    ]
+  },
+
+  "cap06_digital_twin": {
+    "titulo": "Digital Twin Cognitivo",
+    "definicao": "Réplica estruturada e inteligente de um sistema de software que conhece completamente o sistema e se atualiza automaticamente.",
+    "conhece": [
+      "Arquitetura", "Banco", "APIs", "Código", "Interfaces",
+      "Permissões", "Fluxos", "Integrações", "Usuários",
+      "Vídeos", "Documentação", "FAQs", "Quizzes", "Storyboards"
+    ],
+    "regra": "Toda atualização no sistema deverá refletir automaticamente no Digital Twin."
+  },
+
+  "cap07_knowledge_graph": {
+    "titulo": "Knowledge Graph",
+    "tecnologia": "Neo4j",
+    "entidades_no": [
+      "Projeto", "Sistema", "Módulo", "Tela", "Campo",
+      "API", "Banco", "Documento", "Vídeo", "Storyboard",
+      "FAQ", "Quiz", "Usuário", "Processo"
+    ],
+    "relacionamentos_arestas": [
+      "DEPENDS_ON", "USES", "CALLS", "READS", "WRITES",
+      "GENERATES", "BELONGS_TO", "DOCUMENTED_BY", "VIDEO_OF",
+      "CONFIGURES", "NEXT", "PREVIOUS", "VALIDATES", "FIXES",
+      "IMPORTS", "EXPORTS", "REQUIRES", "CAUSES",
+      "CAPTURED_BY", "EXPLAINED_BY", "FAQ_OF", "QUIZ_OF"
+    ]
+  },
+
+  "cap08_modelo_conhecimento": {
+    "titulo": "Modelo de Conhecimento — Schema Universal",
+    "descricao": "Todo objeto de conhecimento DEVE conter todos estes campos",
+    "schema": {
+      "id":            "string — AKP-{SISTEMA}-{TIPO}-{SEQUENCIAL}",
+      "name":          "string",
+      "type":          "enum: Projeto|Sistema|Módulo|Tela|Campo|API|...",
+      "description":   "string",
+      "category":      "string",
+      "system":        "AxHub | AxTon | AxCross | AxionIA",
+      "module":        "string",
+      "screen":        "string | null",
+      "version":       "string — semver",
+      "language":      "pt-BR",
+      "owner":         "string",
+      "author":        "string",
+      "createdAt":     "ISO 8601",
+      "updatedAt":     "ISO 8601",
+      "status":        "rascunho | publicado | arquivado | obsoleto",
+      "relationships": [{ "type": "string", "target_id": "string", "description": "string" }],
+      "assets":        ["array de URLs de arquivos relacionados"],
+      "metadata":      { "criticality": "string", "reliability": "number 0-100", "origin": "string" },
+      "history":       [{ "version": "string", "date": "string", "change": "string", "author": "string" }],
+      "knowledge":     { "semantic_answers": {}, "dependencies": [], "impacts": [], "risks": [] }
+    }
+  },
+
+  "cap09_fontes": {
+    "titulo": "Fontes de Conhecimento — 30+ Origens",
+    "regra": "Toda fonte deverá ser convertida para o modelo interno comum.",
+    "fontes_por_categoria": {
+      "documentos_office": ["PDF", "DOCX", "XLSX", "PPTX"],
+      "web_markup":        ["Markdown", "HTML", "URL"],
+      "api_specs":         ["Swagger", "OpenAPI", "GraphQL", "REST"],
+      "bancos_dados":      ["SQL Server", "PostgreSQL", "Oracle", "MongoDB"],
+      "codigo_frontend":   ["React", "Angular", "Vue"],
+      "codigo_backend":    [".NET", "Node.js", "Java", "Python"],
+      "automacao_midia":   ["OCR", "Playwright", "Imagens", "Áudios", "Vídeos"],
+      "dados_estruturados":["JSON", "XML", "CSV"],
+      "infra_devops":      ["Logs", "Git", "ZIP"]
+    },
+    "total": 30
+  },
+
+  "cap10_resultados": {
+    "titulo": "Resultados Esperados — 18 Outputs por Fonte",
+    "regra": "Para cada fonte analisada, gerar automaticamente todos os outputs abaixo.",
+    "outputs": [
+      { "id": "OUT-01", "nome": "Manual Técnico",          "template": "A", "publico": "developer" },
+      { "id": "OUT-02", "nome": "Manual Operacional",      "template": "A", "publico": "supervisor" },
+      { "id": "OUT-03", "nome": "Manual do Usuário",       "template": "A", "publico": "operator" },
+      { "id": "OUT-04", "nome": "Storyboard",              "template": "B-plan", "publico": "all" },
+      { "id": "OUT-05", "nome": "Roteiro Narrado",         "template": "B-narration", "publico": "all" },
+      { "id": "OUT-06", "nome": "Vídeo Completo",          "template": "B", "publico": "all" },
+      { "id": "OUT-07", "nome": "Microlearning",           "template": "C", "publico": "all" },
+      { "id": "OUT-08", "nome": "Você Sabia?",             "template": "C-15s", "publico": "all" },
+      { "id": "OUT-09", "nome": "FAQ",                     "template": "FAQ", "publico": "all" },
+      { "id": "OUT-10", "nome": "Quiz",                    "template": "QUIZ", "publico": "all" },
+      { "id": "OUT-11", "nome": "Fluxograma",              "template": "FLOW", "publico": "all" },
+      { "id": "OUT-12", "nome": "Diagrama",                "template": "DIAG", "publico": "developer" },
+      { "id": "OUT-13", "nome": "Base de Conhecimento",   "template": "KB", "publico": "all" },
+      { "id": "OUT-14", "nome": "Portal de Ajuda",        "template": "PORTAL", "publico": "operator" },
+      { "id": "OUT-15", "nome": "Glossário",               "template": "GLOSS", "publico": "all" },
+      { "id": "OUT-16", "nome": "Checklist",               "template": "CHECK", "publico": "operator" },
+      { "id": "OUT-17", "nome": "Release Notes",          "template": "RELEASE", "publico": "all" },
+      { "id": "OUT-18", "nome": "Analytics",               "template": "ANALYTICS", "publico": "manager" }
+    ]
+  },
+
+  "cap11_regras_gerais": {
+    "titulo": "Regras Gerais",
+    "nunca": [
+      "inventar informações",
+      "ocultar incertezas",
+      "duplicar conhecimento",
+      "perder contexto",
+      "quebrar relacionamentos",
+      "gerar documentação inconsistente",
+      "gerar vídeos sem validação",
+      "publicar conteúdo sem versionamento"
+    ],
+    "sempre": [
+      "solicitar mais dados quando necessário",
+      "validar coerência entre fontes",
+      "registrar histórico de alterações",
+      "reutilizar conhecimento existente",
+      "manter rastreabilidade completa",
+      "produzir saídas reutilizáveis",
+      "aprender continuamente com feedback",
+      "preservar a consistência do ecossistema de conhecimento"
+    ]
+  },
+
+  "cap12_ai_orchestrator": {
+    "titulo": "AI Orchestrator — Cérebro Operacional",
+    "principio": "Nenhum agente executa diretamente. Toda solicitação passa obrigatoriamente pelo Orchestrator.",
+    "responsabilidades": [
+      "Receber solicitações",
+      "Identificar objetivo",
+      "Descobrir contexto",
+      "Consultar Knowledge Graph",
+      "Selecionar agentes",
+      "Montar Pipeline",
+      "Executar Pipeline",
+      "Validar Resultado",
+      "Registrar Histórico",
+      "Publicar Resultado"
+    ],
+    "fluxo_completo": {
+      "entrada": "Usuário → API",
+      "processamento": [
+        "AI Orchestrator",
+        "Context Manager",
+        "Knowledge Graph",
+        "Prompt Compiler",
+        "Agent Router",
+        "Execution Engine",
+        "Validation Engine",
+        "Publishing Engine",
+        "Analytics"
+      ],
+      "saida": "Documentação | Vídeos | Storyboards | Treinamentos | FAQs | Quizzes | Portal | Microlearning | Knowledge Feed | Analytics"
+    },
+    "fontes_entrada": [
+      "Texto", "PDF", "Imagem", "URL", "Swagger", "Código",
+      "Banco", "Playwright", "OCR", "Vídeo", "Áudio",
+      "JSON", "ZIP", "Git"
+    ],
+    "saidas": [
+      "Documentação", "Vídeos", "Storyboards", "Treinamentos",
+      "FAQs", "Quizzes", "Portal", "Microlearning",
+      "Knowledge Feed", "Analytics"
+    ]
+  },
+
+  "templates_conteudo": {
+    "TEMPLATE_A": {
+      "nome": "Documento Corporativo",
+      "secoes": 16,
+      "lista": [
+        "Objetivo", "Escopo", "Pré-requisitos", "Configuração",
+        "Fluxo", "Execução", "Resultado Esperado", "Validações",
+        "Erros Possíveis", "Troubleshooting", "Boas Práticas",
+        "FAQ", "Relacionamentos", "Links", "Vídeos", "Próximos Passos"
+      ]
+    },
+    "TEMPLATE_B": {
+      "nome": "Vídeo e Storyboard",
+      "secoes_roteiro": 11,
+      "pipeline_cena": [
+        "Capítulo", "Cena", "Objetivo", "Narrativa", "Imagem",
+        "Zoom", "Cursor", "Callout", "Legenda", "Transição",
+        "Áudio", "Tempo", "Validação"
+      ],
+      "lista": [
+        "Introdução", "Objetivo", "Pré-requisitos", "Fluxo",
+        "Demonstração", "Resumo", "Boas Práticas", "Conclusão",
+        "Próximos Passos", "Relacionamentos", "Links Úteis"
+      ]
+    },
+    "TEMPLATE_C": {
+      "nome": "Microlearning 15-40 segundos",
+      "campos": 10,
+      "lista": [
+        "Título", "Tempo", "Imagem Principal", "Mensagem Curta (25 palavras)",
+        "Benefício", "Exemplo", "Convite para Saber Mais",
+        "Relacionamento com Manual", "Relacionamento com Treinamento",
+        "Relacionamento com FAQ"
+      ]
+    }
+  },
+
+  "agentes_cognitivos": {
+    "total_agentes": 12,
+    "grupos": {
+      "core":          ["AI Orchestrator (AKP-ORCH)", "Project Manager (AKP-PM)"],
+      "knowledge":     ["Knowledge Extractor (AKP-KE)", "Relationship Mapper (AKP-RM)"],
+      "engineering":   ["Screen Analyzer (AKP-SA)", "Capture Agent (AKP-CA)", "Database Agent (AKP-DB)", "API Agent (AKP-API)", "Code Agent (AKP-CODE)"],
+      "documentation": ["Documentation Agent (AKP-DOC)"],
+      "video":         ["Storyboard Agent (AKP-SB)", "Narrator Agent (AKP-NAR)", "Video Renderer (AKP-VR)"],
+      "learning":      ["Microlearning Agent (AKP-ML)"],
+      "validation":    ["Validator Agent (AKP-VAL)"]
+    }
+  },
+
+  "arquitetura_tecnica": {
+    "frontend":     "React 18 + Vite (PresentationCenter — 10 abas)",
+    "backend":      "Node.js + Express (axion-ia-panel/api)",
+    "ia":           "OpenAI GPT-4o + text-embedding-3-small",
+    "knowledge_graph": "Neo4j",
+    "documentos":   "MongoDB",
+    "cache":        "Redis",
+    "filas":        "RabbitMQ (Event Bus)",
+    "arquivos":     "MinIO (screenshots, vídeos, PDFs)",
+    "video_render": "FFmpeg + TTS Microsoft Maria PT-BR",
+    "automacao":    "Playwright",
+    "container":    "Docker + Kubernetes",
+    "cli":          "axionia.js (Node.js ESM)"
+  },
+
+  "estrutura_docs": {
+    "total_documentos": 81,
+    "diretorio": "orchestrator/docs/master/",
+    "arquivos_substantivos": [
+      "00-README.md", "01-VISAO-GERAL.md", "02-CONSTITUICAO.md",
+      "03-PRINCIPIOS.md", "04-FILOSOFIA.md", "05-GOVERNANCA.md",
+      "06-ARQUITETURA.md", "07-DOMINIOS.md", "08-KNOWLEDGE-GRAPH.md",
+      "09-DIGITAL-TWIN.md", "10-CONTEXT-PROTOCOL.md", "11-ORCHESTRATOR.md",
+      "12-EVENT-BUS.md", "14-SOURCE-ENGINE.md", "15-DOCUMENTATION-ENGINE.md",
+      "16-STORYBOARD-ENGINE.md", "17-VIDEO-ENGINE.md", "18-NARRATION-ENGINE.md",
+      "24-MICROLEARNING.md", "25-KNOWLEDGE-FEED.md", "26-PLAYWRIGHT.md",
+      "27-OCR.md", "28-SCREEN-ANALYZER.md", "29-API-ENGINE.md",
+      "30-DATABASE-ENGINE.md", "32-RELATIONSHIP-ENGINE.md", "33-LEARNING-ENGINE.md",
+      "35-PROMPT-COMPILER.md", "36-APSL.md", "37-AVSL.md", "38-ADSL.md",
+      "39-ACP.md", "40-CORE-AGENTS.md", "41-KNOWLEDGE-AGENTS.md",
+      "42-DOCUMENT-AGENTS.md", "43-VIDEO-AGENTS.md", "44-LEARNING-AGENTS.md",
+      "47-SECURITY.md", "48-LGPD.md", "57-CLI.md",
+      "66-TEMPLATES.md", "69-ROADMAP.md", "80-CONCLUSION.md"
+    ],
+    "prompts": [
+      "prompts/master-system.md",
+      "prompts/storyboard-agent.md",
+      "prompts/narrator-agent.md",
+      "prompts/capture-agent.md"
+    ],
+    "rules": [
+      "rules/narrativa-corporativa.json"
+    ]
+  },
+
+  "indicadores_implementacao": {
+    "data_referencia": "2026-07-29",
+    "cobertura_spec_pct": 55,
+    "arquivos_orchestrator": 20,
+    "tamanho_kb": 250,
+    "proximas_entregas": [
+      "Fase 1 (sem. 1-2): Schema AKP no MongoDB — Knowledge Objects com 18+ campos",
+      "Fase 2 (sem. 3-4): ✅ Microlearning + Feed ENTREGUE",
+      "Fase 3 (sem. 5-6): Grafo navegável interativo + Help Center /help",
+      "Fase 4 (sem. 7-8): Auto-sync automático + Analytics",
+      "Fase 5 (sem. 9-12): Digital Twin Cognitivo completo dos 3 produtos"
+    ]
+  }
+}
