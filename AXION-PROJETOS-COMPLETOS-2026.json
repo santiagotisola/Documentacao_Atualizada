@@ -1,0 +1,718 @@
+{
+  "$schema": "axion-projetos-master-v1",
+  "meta": {
+    "titulo": "Axion Tecnologia — Inventário Completo de Projetos",
+    "versao": "1.0.0",
+    "gerado_em": "2026-07-29",
+    "finalidade": "Análise de viabilidade, projetos futuros e inteligência estratégica de todo o ecossistema Axion",
+    "autor": "AxionIA Platform v4.0",
+    "repositorio": "Axion-Tecnologia/Documentacao_Atualizada"
+  },
+
+  "ecossistema": {
+    "missao": "Transformar dados de fiscalização pública em inteligência operacional, reduzindo o custo de atendimento, acelerando conformidade contratual e garantindo qualidade dos sistemas em campo — com IA como camada transversal.",
+    "posicionamento": "Única plataforma brasileira que une fiscalização eletrônica, pesagem veicular, monitoramento de placas e IA generativa em uma suíte integrada para órgãos públicos.",
+    "mercado_alvo": {
+      "tam_total_anual_brl": 2600000000,
+      "segmentos": [
+        { "nome": "Fiscalização Eletrônica", "tam_brl": 800000000 },
+        { "nome": "Pesagem Veicular", "tam_brl": 250000000 },
+        { "nome": "Rastreamento Veicular", "tam_brl": 1200000000 },
+        { "nome": "IA para Atendimento Gov", "tam_brl": 400000000 }
+      ],
+      "clientes_potenciais": {
+        "ipem_estaduais": 27,
+        "prefeituras_brasil": 5570,
+        "detrans": 27,
+        "concessionarias": 90,
+        "empresas_carga": 150000
+      }
+    }
+  },
+
+  "projetos_core": {
+
+    "AxHub": {
+      "id": "axhub",
+      "nome": "AxHub — Fiscalização Eletrônica de Trânsito",
+      "status": "producao",
+      "maturidade_pct": 92,
+      "stack": {
+        "backend": ".NET",
+        "banco_dados": "SQL Server",
+        "integracao_ia": "mssql via axion-ia-api (10 endpoints)"
+      },
+      "versoes": {
+        "mais_avancada": "v1.2.4",
+        "mais_comum": "v1.2.3",
+        "menus_max": 104,
+        "menus_min": 90
+      },
+      "clientes_ativos": 18,
+      "sites": [
+        "IBAMETRO", "IMEPI", "IMEQPB", "IMETROPA", "IPEMCE", "IPEMPE",
+        "DERSE", "STRANS", "DETRANMA", "DETRANPI", "GOIANIA", "IPEMMT",
+        "ITPS", "SMTT", "ECONOMIA", "IMPERATRIZ", "SETRANS", "HOMOLOGACAO"
+      ],
+      "modulos": [
+        "Dashboard (11 widgets em tempo real)",
+        "Triagem de Infrações (OCR, aprovação, descarte)",
+        "Auditoria de Infrações",
+        "Lote de Exportação (DETRAN, SENATRAN)",
+        "Exceções (por placa, faixa, horário, enquadramento, veículo, data)",
+        "Monitoramento Online",
+        "Operações e Faixas",
+        "Aferições INMETRO",
+        "Eventos de Equipamentos",
+        "Equipamentos (Fabricantes, Modelos, Grupos, Arcos)",
+        "Medições e Contratos",
+        "Índices de Performance",
+        "Interrupções de Operação",
+        "Cronotacógrafo (consulta e triagem)",
+        "Veículos (Marcas, Modelos, Categorias, Classificações, Espécies, Cores)",
+        "Controle de Acesso (Usuários, Perfis, Permissões 150+, IP, Horário)",
+        "Relatórios (14 tipos: passagens, infrações, discrepâncias, fluxo, BI)",
+        "Configurações (enquadramentos, tarjas, webhooks)"
+      ],
+      "permissoes_mapeadas": 150,
+      "endpoints_ia": 10,
+      "documentacao": {
+        "portal": "http://localhost:3010/AxHub.Docs",
+        "paginas": 35,
+        "pdf_gerado": "Manual-AxHub-v1.0.0.pdf"
+      },
+      "gaps_identificados": [
+        "Sem painel analítico consolidado multi-contrato",
+        "Relatórios Power BI dependem de configuração externa",
+        "Sem API REST pública documentada (OpenAPI)",
+        "Alertas de aferição somente no dashboard (sem push notification)",
+        "Sem bulk import de configurações entre sites"
+      ],
+      "oportunidades_futuras": [
+        "Dashboard multi-site com comparativo em tempo real",
+        "API pública para integrações de terceiros",
+        "Push notifications mobile para alertas críticos",
+        "IA para triagem automática (redução de trabalho manual)",
+        "Relatórios preditivos por sazonalidade"
+      ]
+    },
+
+    "AxTon": {
+      "id": "axton",
+      "nome": "AxTon — Pesagem Veicular Metrológica",
+      "status": "producao",
+      "maturidade_pct": 85,
+      "stack": {
+        "backend": ".NET",
+        "banco_dados_pesagens": "MongoDB",
+        "banco_dados_admin": "SQL Server"
+      },
+      "modulos": [
+        "Dashboard de pesagem",
+        "Pesagem veicular (balança)",
+        "Triagem de pesagem",
+        "Liberação de tickets",
+        "Reclassificação de pesagem",
+        "Postos de pesagem",
+        "Motivos de exceção",
+        "Configurações metrológicas (INMETRO)",
+        "Relatórios de pesagem e exportação",
+        "Cronotacógrafo integrado",
+        "Controle de acesso"
+      ],
+      "documentacao": {
+        "portal": "http://localhost:3011/AxTon.Docs",
+        "pdf_gerado": "Manual-AxTon-v1.0.0.pdf",
+        "videos_gerados": ["Apresentacao-AxTon-Narrada.mp4", "Apresentacao-Manual-AxTon.mp4"]
+      },
+      "diferenciais": [
+        "Único sistema com integração pesagem + fiscalização eletrônica na mesma suíte",
+        "Conformidade INMETRO nativa",
+        "MongoDB para alta volumetria de pesagens"
+      ],
+      "gaps_identificados": [
+        "Sem integração direta com AxHub para cruzamento placa × pesagem",
+        "Sem alertas automáticos de sobrepeso em tempo real",
+        "Relatórios de exportação limitados ao formato padrão"
+      ],
+      "oportunidades_futuras": [
+        "Integração AxTon → AxHub para gerar infração automaticamente ao detectar sobrepeso",
+        "Dashboard BI consolidado pesagem × passagens por rodovia",
+        "API para concessionárias de rodovia consultarem pesagens em tempo real",
+        "Mobile app para técnicos de campo"
+      ]
+    },
+
+    "AxCross": {
+      "id": "axcross",
+      "nome": "AxCross — Monitoramento e Cruzamento de Placas",
+      "status": "producao",
+      "maturidade_pct": 88,
+      "stack": {
+        "backend": ".NET",
+        "banco_dados": "SQL Server",
+        "grafo": "Neo4j (detecção de comboios)"
+      },
+      "modulos": [
+        "Monitoramento Online (tempo real + SignalR)",
+        "Mapa de Equipamentos (georreferenciado)",
+        "Mural de Câmeras (layouts personalizados)",
+        "Veículos Monitorados (cadastro + importação em massa)",
+        "Alertas (automáticos + manuais)",
+        "Tipos de Ocorrência (com prazo de vigência)",
+        "Vigência de Alertas (expiração automática)",
+        "Painel Analítico de Veículo (timeline, heatmap, rotas, passagens)",
+        "Rastreamento por Placa",
+        "Mapa de Bolhas por Irregularidade",
+        "Grafos de Comboio (Neo4j)",
+        "Relatórios (5 tipos: passagens, mapeamento rotas, ocorrências, veículos monitorados, gerados)",
+        "Áreas de Monitoramento",
+        "Grupos de Equipamentos",
+        "Classificações de Veículos",
+        "Controle de Acesso (22 módulos, 70+ permissões)"
+      ],
+      "permissoes_mapeadas": 70,
+      "perfis_operacionais_sugeridos": [
+        "Administrador",
+        "Operador de Monitoramento",
+        "Analista / Investigador",
+        "Técnico de Campo",
+        "Consulta"
+      ],
+      "documentacao": {
+        "portal": "http://localhost:3012/AxCross.Docs",
+        "paginas": 28,
+        "pdf_gerado": "Manual-AxCross-v1.0.0.pdf"
+      },
+      "diferenciais": [
+        "Detecção de comboios via Neo4j (único no mercado)",
+        "Vigência automática de alertas (expiração por tipo de ocorrência)",
+        "Painel analítico com 7 perspectivas por veículo"
+      ],
+      "gaps_identificados": [
+        "Grafos de comboio requerem Neo4j externo (custo e complexidade)",
+        "Sem integração com bases nacionais de veículos roubados (INFOSEG/SINESP)",
+        "Sem reconhecimento de placa por câmera IP direta (depende do AxHub)",
+        "Mural de câmeras sem suporte a streaming RTSP nativo"
+      ],
+      "oportunidades_futuras": [
+        "Integração com SINESP (bases nacionais de restrições veiculares)",
+        "OCR nativo para câmeras IP sem passar pelo AxHub",
+        "IA para identificação de comportamentos suspeitos (frequência, rotas)",
+        "Mobile app para agentes em campo com consulta de placa offline",
+        "API pública para integração com DETRAN estaduais"
+      ]
+    },
+
+    "AxionIA_Platform": {
+      "id": "axion-ia-platform",
+      "nome": "AxionIA Platform v4.0 — Inteligência Transversal",
+      "status": "producao",
+      "maturidade_pct": 78,
+      "stack": {
+        "frontend": "React 18 + Vite 6.4",
+        "backend": "Node.js + Express",
+        "ia": "OpenAI GPT-4o-mini + Embeddings text-embedding-3-small",
+        "banco_dados": "MongoDB",
+        "docs": "3x Docusaurus 3.9"
+      },
+      "componentes": {
+        "axion_ia_panel": {
+          "descricao": "Frontend React (painel administrativo central)",
+          "porta": 3017,
+          "paginas": 32,
+          "endpoints_api": 160,
+          "rotas_principais": [
+            "/", "/ intelligence-hub", "/central-sites", "/helpdesk",
+            "/confianca-revisao", "/central-atendimento", "/specs", "/roadmap",
+            "/editais", "/kb", "/treinamento", "/fontes", "/config", "/gerar-doc"
+          ]
+        },
+        "axion_ia_api": {
+          "descricao": "Backend Node.js (motor IA + integrações)",
+          "porta": 3100,
+          "endpoints": 160,
+          "integrações": [
+            "Jitbit Helpdesk (tickets, classificação, respostas, técnicos)",
+            "OpenAI GPT-4o-mini (respostas IA)",
+            "MongoDB (KB, sessões, histórico)",
+            "SQL Server AxHub (10 endpoints)",
+            "SQL Server AxTon (pesagens)",
+            "SQL Server AxCross (cruzamentos)",
+            "PNCP (editais governamentais)",
+            "VARCO IoT Platform (frota)",
+            "WhatsApp via Baileys (bot atendimento)"
+          ]
+        },
+        "axion_ia_engine": {
+          "descricao": "Motor de IA (classificador + embeddings + KB)",
+          "modelo_llm": "GPT-4o-mini",
+          "modelo_embeddings": "text-embedding-3-small",
+          "kb_entradas": 1000,
+          "precisao_classificador": "Alta (keywords instantânea + semântica)",
+          "threshold_confianca": "80% para resposta automática, abaixo envia para revisão humana"
+        }
+      },
+      "modulos_implementados": [
+        {
+          "nome": "Intelligence Hub",
+          "rota": "/",
+          "descricao": "Dashboard consolidado com health score, KPIs e alertas de todos os sistemas"
+        },
+        {
+          "nome": "Central de Sites (Quality Engine)",
+          "rota": "/central-sites",
+          "descricao": "Monitoramento de qualidade de 18 sites AxHub com 18 módulos de validação"
+        },
+        {
+          "nome": "Helpdesk IA",
+          "rota": "/helpdesk",
+          "descricao": "Integração Jitbit com classificação automática, SLA e métricas de atendimento"
+        },
+        {
+          "nome": "Central de Atendimento",
+          "rota": "/central-atendimento",
+          "descricao": "Hub unificado: Chat IA + WhatsApp Bot + Helpdesk + Gestão por Site"
+        },
+        {
+          "nome": "WhatsApp Bot",
+          "rota": "/central-atendimento?tab=whatsapp",
+          "descricao": "Bot Baileys com LGPD gate, abertura de chamados, consulta de tickets, módulo de compras, pesquisa de satisfação"
+        },
+        {
+          "nome": "Fila de Confiança / Revisão",
+          "rota": "/confianca-revisao",
+          "descricao": "Revisão humana de respostas IA com confiança abaixo do threshold"
+        },
+        {
+          "nome": "Knowledge Base",
+          "rota": "/kb",
+          "descricao": "Gerenciamento da base de conhecimento com busca semântica e reindexação"
+        },
+        {
+          "nome": "Análise de Editais (PNCP)",
+          "rota": "/editais",
+          "descricao": "Busca de editais no PNCP, análise de conformidade por requisito com IA, scoring, gaps"
+        },
+        {
+          "nome": "Roadmap & Specs",
+          "rota": "/roadmap + /specs",
+          "descricao": "Geração automática de roadmap a partir de gaps + PRDs automatizados"
+        },
+        {
+          "nome": "Gerador de Documentação",
+          "rota": "/gerar-doc",
+          "descricao": "Geração automática de docs de manuais, roteiros de vídeo e análises"
+        },
+        {
+          "nome": "Treinamento",
+          "rota": "/treinamento",
+          "descricao": "Treinamento e avaliação do modelo de IA"
+        }
+      ],
+      "gaps_identificados": [
+        "Busca vetorial em loop (O(n)) — sem índice vetorial real (ex: pgvector, Pinecone)",
+        "Sem histórico de sessão para contexto de conversa multi-turno",
+        "Sem roteamento inteligente de modelos (cheap vs premium)",
+        "Sem ML real (Learning Engine baseado em logs, não em treino adaptativo)",
+        "Sem autenticação JWT robusta nos endpoints da API",
+        "Sem rate limiting configurado",
+        "Sem monitoramento de produção (APM, traces, alertas)"
+      ]
+    }
+  },
+
+  "projetos_documentacao": {
+    "AxHub_Docs": {
+      "id": "axhub-docs",
+      "tipo": "docusaurus",
+      "porta": 3010,
+      "url": "http://localhost:3010/AxHub.Docs",
+      "paginas": 35,
+      "secoes": ["Primeiros Passos", "Infrações", "Operações", "Cronotacógrafo", "Balança/Pesagem", "Veículos", "Equipamentos", "Medições", "Relatórios", "Controle de Acesso", "Configurações", "Referência Técnica", "Glossário"],
+      "novidades_recentes": [
+        "permissoes.md: 150+ permissões mapeadas em 9 grupos operacionais",
+        "perfis-acesso.md: 7 perfis operacionais com tabelas completas",
+        "video-v02-dashboard.md: roteiro completo de vídeo V02 com 11 cenas",
+        "roteiros-videos.md: 25 roteiros de vídeo com narração",
+        "V02-Dashboard-AxHub.mp4: vídeo gerado (4min36s, narração PT-BR Maria)"
+      ]
+    },
+    "AxTon_Docs": {
+      "id": "axton-docs",
+      "tipo": "docusaurus",
+      "porta": 3011,
+      "url": "http://localhost:3011/AxTon.Docs",
+      "paginas": 22
+    },
+    "AxCross_Docs": {
+      "id": "axcross-docs",
+      "tipo": "docusaurus",
+      "porta": 3012,
+      "url": "http://localhost:3012/AxCross.Docs",
+      "paginas": 28,
+      "novidades_recentes": [
+        "permissoes.md: 22 módulos, 70+ permissões com descrição operacional",
+        "perfis-acesso.md: Administrador, Operador, Analista, Técnico, Consulta",
+        "usuarios.md: fluxo completo de criação de acesso",
+        "equipamentos.md: Faixas, Áreas, Grupos documentados",
+        "relatorios/painel-analitico.md: NOVO — 7 abas + exemplo investigativo",
+        "relatorios/mapa-bolhas.md: NOVO",
+        "relatorios/grafos-comboio.md: NOVO"
+      ]
+    }
+  },
+
+  "projetos_experimentais_futuros": {
+
+    "Portal_Cidadao": {
+      "id": "portal-cidadao",
+      "nome": "Portal do Cidadão",
+      "status": "mvp_parcial",
+      "maturidade_pct": 35,
+      "descricao": "Portal público para cidadãos consultarem infrações, solicitarem recursos e acompanharem processos sem intermediários",
+      "sprint_1_completo": true,
+      "stack_proposta": "React + Node.js + MongoDB",
+      "funcionalidades_planejadas": [
+        "Consulta de infrações por CPF/Placa",
+        "Recurso de infração online",
+        "Acompanhamento de processos",
+        "Emissão de boletos",
+        "Notificações por e-mail/SMS/WhatsApp"
+      ],
+      "viabilidade": "ALTA",
+      "esforco_estimado_semanas": 12,
+      "impacto_mercado": "Reduz 60-70% das demandas de atendimento presencial",
+      "modelo_negocio": "SaaS — licença mensal por prefeitura/órgão",
+      "dependencias": ["AxHub API", "Integração DETRAN estadual", "Gateway de pagamento"]
+    },
+
+    "PIEQ_Engine": {
+      "id": "axion-pieq",
+      "nome": "PIEQ — Pipeline de Inteligência para Editais e Qualidade",
+      "status": "especificado",
+      "maturidade_pct": 25,
+      "descricao": "Engine automatizada para monitoramento contínuo de editais PNCP, análise de conformidade e geração de propostas técnicas com IA",
+      "spec_disponivel": "AXION-PIEQ-SPECIFICATION.json",
+      "funcionalidades_planejadas": [
+        "Crawler automático de editais PNCP (diário)",
+        "Score de aderência por produto (AxHub, AxTon, AxCross)",
+        "Geração automática de proposta técnica em PDF",
+        "Alertas de novos editais por e-mail/WhatsApp",
+        "Dashboard de pipeline comercial",
+        "Histórico de editais ganhos/perdidos com aprendizado"
+      ],
+      "viabilidade": "ALTA",
+      "esforco_estimado_semanas": 8,
+      "impacto_comercial": "Acelera prospecção — identifica editais antes da concorrência"
+    },
+
+    "CUTI_V3": {
+      "id": "cuti-v3",
+      "nome": "CUTI v3 — Conformidade e Validação Inteligente",
+      "status": "parcialmente_implementado",
+      "maturidade_pct": 60,
+      "descricao": "Sistema de validação visual e funcional dos sistemas em produção — detecta automaticamente divergências entre o sistema e a documentação",
+      "capacidades_atuais": [
+        "Captura de screenshots automatizada",
+        "Comparação visual entre versões",
+        "Detecção de duplicidade de registros",
+        "Validação de pipeline OCR (scoring 0-100%)",
+        "Análise de confiança de imagens"
+      ],
+      "capacidades_planejadas": [
+        "Navegação remota em URLs de clientes",
+        "Captura de HTML e JSON de interfaces",
+        "Geração automática de knowledge a partir de telas",
+        "Sincronização de KB com documentação atualizada"
+      ],
+      "viabilidade": "ALTA",
+      "esforco_completar_semanas": 3
+    },
+
+    "Axion_Connect_CRM": {
+      "id": "axion-connect-crm",
+      "nome": "Axion Connect CRM",
+      "status": "planejado",
+      "maturidade_pct": 10,
+      "descricao": "CRM especializado para gestão do ciclo completo de contratos de fiscalização: proposta → contrato → implantação → operação → renovação",
+      "diferencial": "CRM com contexto de fiscalização eletrônica embutido (nenhum CRM genérico entende o ciclo de medição por equipamento)",
+      "funcionalidades_planejadas": [
+        "Pipeline de vendas por produto (AxHub, AxTon, AxCross)",
+        "Gestão de contratos e aditivos",
+        "Histórico de medições por cliente",
+        "SLA por cliente com alertas",
+        "Integração com Jitbit (chamados por cliente)",
+        "Dashboard de saúde do cliente (health score por site)"
+      ],
+      "viabilidade": "MEDIA",
+      "esforco_estimado_semanas": 20,
+      "modelo_negocio": "Uso interno Axion (não SaaS inicialmente)"
+    },
+
+    "Validation_Hub": {
+      "id": "validation-hub",
+      "nome": "Validation Hub — Central de Testes Inteligentes",
+      "status": "especificado",
+      "maturidade_pct": 20,
+      "descricao": "Plataforma de testes e validação contínua dos sistemas, com cenários gerados por IA e regressão automática",
+      "spec_disponivel": "PROPOSTA-VALIDATION-HUB.md",
+      "funcionalidades_planejadas": [
+        "Geração automática de casos de teste com IA",
+        "Execução automatizada via Playwright",
+        "Dashboard de cobertura de testes",
+        "Regressão visual (screenshot comparison)",
+        "Alertas de regressão por commit",
+        "Relatório de qualidade por sprint"
+      ],
+      "viabilidade": "ALTA",
+      "esforco_estimado_semanas": 10
+    },
+
+    "Axion_Operations_Center": {
+      "id": "axion-operations-center",
+      "nome": "Axion Operations Center (AOC)",
+      "status": "especificado",
+      "maturidade_pct": 62,
+      "descricao": "Centro de operações unificado — NOC (Network Operations Center) para gestão em tempo real de todos os contratos e equipamentos",
+      "plano_disponivel": "PLANO-OPERACIONALIZACAO-AXION-2026.json",
+      "centers_implementados": [
+        "Operations Center (80%)",
+        "HelpDesk Center (90%)",
+        "Quality Center (85%)",
+        "Approval Center (75%)",
+        "Integration Center (90%)",
+        "Knowledge Center (70%)"
+      ],
+      "centers_pendentes": [
+        "Mission Center (30%) — formalizar missões VARCO",
+        "Learning Center (40%) — ML real a partir de logs",
+        "Presentation Center (35%) — geração de PDF/DOCX/PPTX/vídeo"
+      ],
+      "viabilidade": "ALTA",
+      "esforco_completar_semanas": 8
+    },
+
+    "Linguistic_Engine": {
+      "id": "linguistic-engine",
+      "nome": "Linguistic Engine — Correção Ortográfica Especializada",
+      "status": "pesquisa",
+      "maturidade_pct": 15,
+      "descricao": "Engine de PLN para correção ortográfica e padronização de documentos técnicos de fiscalização eletrônica com vocabulário específico do domínio",
+      "analise_disponivel": "ANALISE-VIABILIDADE-LINGUISTIC-ENGINE.md",
+      "funcionalidades_planejadas": [
+        "Dicionário de termos técnicos (AxHub, AxTon, AxCross)",
+        "Correção ortográfica contextual (não quebra termos técnicos)",
+        "Padronização de documentos (estilo Axion)",
+        "Revisão automática de manuais antes de publicação",
+        "Detecção de inconsistências terminológicas"
+      ],
+      "viabilidade": "MEDIA",
+      "esforco_estimado_semanas": 6
+    },
+
+    "WhatsApp_Bot_Enterprise": {
+      "id": "whatsapp-enterprise",
+      "nome": "WhatsApp Bot Enterprise — Expansão Multi-Empresa",
+      "status": "base_implementada",
+      "maturidade_pct": 70,
+      "descricao": "Expansão do bot WhatsApp atual (Axion interna) para produto SaaS oferecido a clientes (prefeituras, órgãos de trânsito)",
+      "base_implementada": [
+        "Conexão via Baileys (sem custo por mensagem)",
+        "LGPD Gate automático",
+        "Abertura de chamados no Jitbit via WhatsApp",
+        "Consulta e resposta de tickets",
+        "Módulo de compras com aprovação",
+        "Pesquisa de satisfação automática",
+        "Fluxo multi-step com estados no MongoDB"
+      ],
+      "para_produto_saas": [
+        "Multi-tenant (cada cliente tem seu número WhatsApp)",
+        "Dashboard de métricas por cliente",
+        "Customização de fluxos sem código",
+        "Suporte a WhatsApp Cloud API (além do Baileys)",
+        "Relatórios de atendimento por canal"
+      ],
+      "viabilidade": "ALTA",
+      "esforco_semanas_saas": 10,
+      "modelo_negocio": "R$ 800-2.000/mês por número WhatsApp ativo",
+      "config_disponivel": ["whatsapp-business-intelligence.json", "whatsapp-conexao-config.json"]
+    },
+
+    "Video_Engine": {
+      "id": "video-engine",
+      "nome": "Video Engine — Geração Automática de Vídeos de Treinamento",
+      "status": "prototipo",
+      "maturidade_pct": 30,
+      "descricao": "Engine para geração automática de vídeos de treinamento a partir da documentação dos sistemas, com narração TTS em PT-BR",
+      "prototipo_gerado": {
+        "video": "V02-Dashboard-AxHub.mp4",
+        "duracao": "4min36s",
+        "resolucao": "1280x720 HD",
+        "voz": "Microsoft Maria PT-BR",
+        "frames": 15,
+        "legenda_sincronizada": true
+      },
+      "pipeline_atual": [
+        "Extração de texto do roteiro MD",
+        "TTS via System.Speech.Synthesis (PT-BR)",
+        "Capturas de tela via Playwright",
+        "Compilação com FFmpeg (frames + legendas + áudio)"
+      ],
+      "melhorias_planejadas": [
+        "Voz neural de qualidade (Azure TTS / Google TTS)",
+        "Animações e destaques automáticos nas telas",
+        "Geração de 25 vídeos mapeados no roteiros-videos.md",
+        "Upload automático para YouTube/Drive",
+        "QR code nos manuais PDF linkando para o vídeo"
+      ],
+      "viabilidade": "ALTA",
+      "esforco_semanas": 4
+    }
+  },
+
+  "integrações_ativas": [
+    {
+      "nome": "Jitbit Helpdesk",
+      "tipo": "REST API",
+      "funcoes": ["Criar tickets", "Listar tickets", "Responder tickets", "Classificar", "Buscar técnicos", "SLA compliance"],
+      "status": "producao"
+    },
+    {
+      "nome": "OpenAI GPT-4o-mini",
+      "tipo": "REST API",
+      "funcoes": ["Respostas IA", "Embeddings vetoriais", "Análise de conformidade", "Geração de specs/roadmap"],
+      "status": "producao"
+    },
+    {
+      "nome": "MongoDB",
+      "tipo": "banco_dados",
+      "funcoes": ["Knowledge Base", "Sessões WhatsApp", "Histórico de chat", "Logs de erro", "Pedidos de compra"],
+      "status": "producao"
+    },
+    {
+      "nome": "SQL Server — AxHub",
+      "tipo": "banco_dados",
+      "funcoes": ["Equipamentos", "Operações", "Faixas", "Aferições", "Heartbeat", "Passagens", "Medições"],
+      "endpoints_api": 10,
+      "status": "producao"
+    },
+    {
+      "nome": "SQL Server — AxTon",
+      "tipo": "banco_dados",
+      "funcoes": ["Pesagens", "Postos"],
+      "status": "producao"
+    },
+    {
+      "nome": "SQL Server — AxCross",
+      "tipo": "banco_dados",
+      "funcoes": ["Passagens", "Equipamentos", "Alertas"],
+      "status": "producao"
+    },
+    {
+      "nome": "PNCP (Portal Nacional de Contratações Públicas)",
+      "tipo": "REST API",
+      "funcoes": ["Busca de editais", "Download de documentos", "Análise de conformidade"],
+      "status": "producao"
+    },
+    {
+      "nome": "VARCO IoT Platform",
+      "tipo": "REST API",
+      "funcoes": ["Frota de veículos", "Dados de campo"],
+      "status": "producao"
+    },
+    {
+      "nome": "WhatsApp via Baileys",
+      "tipo": "websocket",
+      "funcoes": ["Recepção de mensagens", "Envio de mensagens", "Listas interativas", "Botões de ação", "Envio de imagens"],
+      "status": "producao"
+    }
+  ],
+
+  "analise_competitiva": {
+    "concorrentes_diretos": [
+      { "nome": "Perkons", "fraqueza_vs_axion": "Sem IA, sem integração pesagem, sem helpdesk IA" },
+      { "nome": "Gatsometer", "fraqueza_vs_axion": "Sem OCR nativo, sem IA, sistema legado europeu" },
+      { "nome": "Velsis", "fraqueza_vs_axion": "Sem IA generativa, interface desatualizada" },
+      { "nome": "Teletrans", "fraqueza_vs_axion": "Não foca em fiscalização, sem pesagem" },
+      { "nome": "Autoban", "fraqueza_vs_axion": "Não atende prefeituras, sem IA" }
+    ],
+    "diferenciais_exclusivos_axion": [
+      "IA Generativa (GPT-4) integrada ao atendimento — nenhum concorrente oferece",
+      "Suíte completa: fiscalização + pesagem + cruzamento de placas",
+      "Helpdesk IA com classificação automática e WhatsApp Bot",
+      "Conformidade automática com editais PNCP",
+      "Intelligence Hub unificado com health score por site"
+    ]
+  },
+
+  "roadmap_estrategico": {
+    "curto_prazo_3_meses": [
+      { "item": "Completar 25 vídeos de treinamento (Video Engine)", "impacto": "ALTO", "esforco": "BAIXO" },
+      { "item": "Publicar WhatsApp Bot para 2-3 clientes piloto", "impacto": "ALTO", "esforco": "MEDIO" },
+      { "item": "Completar Axion Operations Center (centers pendentes)", "impacto": "ALTO", "esforco": "MEDIO" },
+      { "item": "PIEQ Engine v1 — monitoramento automático PNCP", "impacto": "ALTO", "esforco": "MEDIO" },
+      { "item": "Indexação vetorial real (substituir loop O(n))", "impacto": "MEDIO", "esforco": "BAIXO" }
+    ],
+    "medio_prazo_6_meses": [
+      { "item": "Portal do Cidadão MVP completo", "impacto": "ALTO", "esforco": "ALTO" },
+      { "item": "WhatsApp Bot como produto SaaS (multi-tenant)", "impacto": "ALTO", "esforco": "MEDIO" },
+      { "item": "Integração AxTon → AxHub (infração automática por sobrepeso)", "impacto": "ALTO", "esforco": "MEDIO" },
+      { "item": "API REST pública AxHub + AxCross documentada", "impacto": "MEDIO", "esforco": "MEDIO" },
+      { "item": "Mobile app para operadores de campo", "impacto": "MEDIO", "esforco": "ALTO" }
+    ],
+    "longo_prazo_12_meses": [
+      { "item": "Integração SINESP/INFOSEG (bases nacionais)", "impacto": "MUITO ALTO", "esforco": "ALTO" },
+      { "item": "Axion Connect CRM completo", "impacto": "ALTO", "esforco": "ALTO" },
+      { "item": "OCR nativo no AxCross (sem depender do AxHub)", "impacto": "ALTO", "esforco": "ALTO" },
+      { "item": "Learning Engine com ML real adaptativo", "impacto": "ALTO", "esforco": "MUITO ALTO" },
+      { "item": "Expansão internacional (América Latina)", "impacto": "MUITO ALTO", "esforco": "MUITO ALTO" }
+    ]
+  },
+
+  "metricas_atuais": {
+    "sites_ativos_axhub": 18,
+    "paginas_documentacao_total": 85,
+    "endpoints_api_total": 160,
+    "modulos_kb_entradas": 1000,
+    "integrações_ativas": 9,
+    "videos_gerados": 2,
+    "permissoes_mapeadas_axhub": 150,
+    "permissoes_mapeadas_axcross": 70,
+    "arquivos_json_inteligencia": 8,
+    "commits_documentacao": "599df3c2 (branch: melhorias-documentacao)"
+  },
+
+  "riscos_e_mitigacoes": [
+    {
+      "risco": "Dependência de OpenAI para IA (custo e disponibilidade)",
+      "probabilidade": "MEDIA",
+      "impacto": "ALTO",
+      "mitigacao": "Implementar modelo local fallback (ex: Ollama + LLaMA 3) para queries simples"
+    },
+    {
+      "risco": "Baileys (WhatsApp não oficial) pode ser bloqueado pelo Meta",
+      "probabilidade": "MEDIA",
+      "impacto": "ALTO",
+      "mitigacao": "Migrar para WhatsApp Cloud API oficial quando escalar"
+    },
+    {
+      "risco": "Sem indexação vetorial real (performance degradada com crescimento da KB)",
+      "probabilidade": "ALTA",
+      "impacto": "MEDIO",
+      "mitigacao": "Implementar MongoDB Atlas Vector Search ou pgvector"
+    },
+    {
+      "risco": "Falta de autenticação JWT na API interna",
+      "probabilidade": "ALTA",
+      "impacto": "ALTO",
+      "mitigacao": "Implementar middleware JWT + rate limiting como P1"
+    },
+    {
+      "risco": "Concentração de receita em poucos clientes públicos",
+      "probabilidade": "MEDIA",
+      "impacto": "MUITO ALTO",
+      "mitigacao": "Diversificar com Portal Cidadão SaaS e WhatsApp Bot SaaS"
+    }
+  ]
+}
