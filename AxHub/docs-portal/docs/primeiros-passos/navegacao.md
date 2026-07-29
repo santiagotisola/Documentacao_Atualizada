@@ -1,18 +1,43 @@
 ﻿---
 sidebar_position: 3
-title: Navegacao
-description: Como navegar pelo sistema AxHub
+title: Navegação
+description: Como navegar pelo sistema AxHub — estrutura de menus e atalhos
 ---
 
-# Navegacao
+# Navegação
 
-Guia de orientacao sobre a estrutura de menus e a navegacao geral do sistema AxHub.
+Guia de orientação sobre a **estrutura de menus e navegação geral** do sistema AxHub.
+
+## Estrutura do menu lateral
+
+| Seção | Submódulos principais |
+|-------|----------------------|
+| **Dashboard** | Indicadores em tempo real |
+| **Infrações** | Triagem, Auditoria, Exportação, Exceções |
+| **Cronotacógrafo** | Consulta e Triagem |
+| **Balança** | Postos, Pesagem, Tickets |
+| **Operações** | Monitoramento, Faixas, Aferições, Eventos |
+| **Veículos** | Marcas, Modelos, Categorias, Cores |
+| **Equipamentos** | Equipamentos, Grupos, Fabricantes |
+| **Medição** | Contratos, Criação, Interrupções |
+| **Relatórios** | 14 tipos disponíveis |
+| **Controle de Acesso** | Usuários, Perfis, Permissões |
+| **Configurações** | Enquadramentos, Tarjas, Layouts, Webhooks |
+
+## Atalhos úteis
+
+- **Logo AxHub** no topo: volta ao Dashboard
+- **Breadcrumb**: mostra o caminho atual (ex.: Infrações → Triagem)
+- **F5**: atualiza a página atual
 
 ## Mapa Online
 
 ![Mapa Online](../img/mapa%20online.png)
 
-## Estrutura do menu lateral
+:::tip Dica de produtividade
+Use os atalhos nos ícones do Dashboard para acessar as funcionalidades mais usadas sem navegar pelo menu lateral.
+:::
+
 
 | Modulo | Descricao |
 |--------|-----------|

@@ -1,18 +1,38 @@
 ﻿---
-title: "Medicao de Desempenho"
+title: "Medição de Desempenho"
 sidebar_position: 7
-description: "Definicao tecnica de Medicao de Desempenho"
+description: "O que é medição de desempenho no AxHub — indicadores, metodologia e base legal"
 ---
 
-# Medicao de Desempenho
+# Medição de Desempenho
 
-## Definicao
+Processo de **mensuração da performance operacional** dos equipamentos de fiscalização, baseado em indicadores contratualmente definidos como disponibilidade, taxa OCR e produtividade.
 
-Processo de mensuracao da performance operacional dos Equipamentos de fiscalizacao, baseado em indicadores como disponibilidade, tempo de resposta e volume de registros validos.
+**Base legal:** Lei 11.079/2004 (PPPs) — definida em contratos de concessão
 
-## Base Legal
+## Indicadores principais
 
-Definida em contratos de concessao e PPPs com base na Lei 11.079/2004. Os indices de performance sao estabelecidos contratualmente entre o orgao publico e a empresa operadora.
+| Indicador | Fórmula | Meta comum |
+|-----------|---------|------------|
+| **Disponibilidade** | (horas ativas / horas contratuais) × 100 | ≥ 95% |
+| **Taxa OCR** | (placas lidas / total capturas) × 100 | ≥ 90% |
+| **Produtividade** | infrações geradas / horas ativas | Definida no contrato |
+
+## Ciclo mensal
+
+```
+1. Registrar interrupções
+2. Calcular disponibilidade
+3. Verificar índices de performance
+4. Gerar relatório de medição
+5. Finalizar e exportar PDF
+```
+
+## Relacionados
+
+- [Medições](../medicoes/criar-medicao) — Processo de geração
+- [Índices de Performance](../medicoes/indices-performance) — Configuração dos índices
+
 
 ## Uso no Sistema AxHub
 

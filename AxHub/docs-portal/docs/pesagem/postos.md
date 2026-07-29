@@ -1,18 +1,40 @@
 ---
 sidebar_position: 1
 title: Postos de Pesagem
-description: Cadastro e gestão dos postos de pesagem veicular
+description: Cadastro e gestão dos postos de pesagem veicular no AxHub
 ---
 
 # Postos de Pesagem
 
-Permite cadastrar e gerenciar os postos de pesagem veicular.
+Cadastro dos **pontos físicos de fiscalização de peso veicular**. Cada posto vincula os equipamentos de pesagem à localidade e ao contrato.
 
 ![Lista de Postos](../img/Balança%20-%20Postos.png)
 
 ## Como acessar
 
 **Menu lateral** → Balança → **Postos**
+
+## Campos
+
+| Campo | Obrigatório | Descrição |
+|-------|:-----------:|-----------|
+| **Nome** | Sim | Nome identificador do posto |
+| **Endereço** | Sim | Localização física |
+| **Rodovia** | Não | Rodovia onde está instalado |
+| **Km** | Não | Quilometro da rodovia |
+| **Sentido** | Não | Sentido do tráfego monitorado |
+| **Status** | Sim | Ativo ou Inativo |
+
+## Cadastro
+
+![Cadastro de Posto](../img/Balança%20-%20Postos%20-%20Cadastro1.png)
+
+1. Acesse **Balança → Postos**
+2. Clique em **+ Novo**
+3. Preencha os dados do posto
+4. Vincule os equipamentos
+5. Clique em **Salvar**
+
 
 ## Cadastro de posto
 
