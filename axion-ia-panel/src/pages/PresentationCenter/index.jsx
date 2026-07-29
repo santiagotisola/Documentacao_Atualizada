@@ -4,9 +4,164 @@ import {
   MessageSquare, BookOpen, GitBranch, Clock, Eye, Video,
   FileText, Presentation, Play, Download, Send,
   ChevronRight, CheckCircle, AlertCircle, Loader, Zap,
-  BookMarked, Layers, Search, ArrowRight, Code
+  BookMarked, Layers, Search, ArrowRight, Code,
+  RefreshCw, X, Sparkles, Terminal, FolderOpen
 } from "lucide-react";
 import "./PresentationCenter.css";
+
+// ─── Modal de Atualização Inteligente ─────────────────────────────────────────
+function UpdateModal({ impacto, onConfirm, onCancel, aplicando, resultados }) {
+  if (!impacto) return null;
+  return (
+    <div className="ps-modal-overlay">
+      <div className="ps-modal">
+        <div className="ps-modal-header">
+          <div className="ps-modal-title">
+            <Sparkles size={18} className="ps-modal-icon" />
+            <span>Atualização Detectada</span>
+          </div>
+          {!aplicando && <button className="ps-modal-close" onClick={onCancel}><X size={16}/></button>}
+        </div>
+
+        <div className="ps-modal-file">
+          <Terminal size={13}/> <code>{impacto.arquivo}</code>
+          <span className="ps-modal-ext">{impacto.extensao}</span>
+        </div>
+
+        <p className="ps-modal-sub">Atualize o treinamento. Os seguintes itens precisam ser regenerados:</p>
+
+        <div className="ps-modal-items">
+          {impacto.atualizacoes.map((a, i) => {
+            const res = resultados?.find(r => r.tipo === a.tipo);
+            return (
+              <div key={i} className={`ps-modal-item ${res ? "concluido" : ""}`}>
+                <span className="ps-modal-item-icon">{a.icone}</span>
+                <div className="ps-modal-item-body">
+                  <span className="ps-modal-item-qtd">{a.qtd}</span>
+                  <span className="ps-modal-item-tipo">{a.tipo}</span>
+                  <span className="ps-modal-item-desc">{a.descricao}</span>
+                </div>
+                {res ? (
+                  <CheckCircle size={14} className="ps-modal-check" />
+                ) : aplicando ? (
+                  <Loader size={14} className="spin ps-modal-spin" />
+                ) : null}
+              </div>
+            );
+          })}
+        </div>
+
+        {resultados?.length > 0 && (
+          <div className="ps-modal-cascade">
+            <strong>Cascata aplicada:</strong>
+            {resultados.map((r, i) => (
+              <span key={i} className="ps-modal-cascade-item">
+                {r.icone} {r.tipo} <CheckCircle size={10}/>
+              </span>
+            ))}
+          </div>
+        )}
+
+        <div className="ps-modal-footer">
+          <div className="ps-modal-tempo">⏱️ Tempo estimado: {impacto.tempo_estimado}</div>
+          {!aplicando && resultados?.length === 0 && (
+            <div className="ps-modal-btns">
+              <button className="ps-modal-nao" onClick={onCancel}>Não</button>
+              <button className="ps-modal-sim" onClick={onConfirm}>
+                <CheckCircle size={14}/> SIM — Atualizar
+              </button>
+            </div>
+          )}
+          {resultados?.length > 0 && !aplicando && (
+            <button className="ps-modal-sim ps-modal-ok" onClick={onCancel}>
+              <CheckCircle size={14}/> Concluído — Fechar
+            </button>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// ─── Modal de Geração de Projeto ──────────────────────────────────────────────
+function GenerateModal({ projeto, onClose, gerando, progresso }) {
+  if (!projeto) return null;
+  const agentes = [
+    { id:"source",     icon:"📥", label:"Source" },
+    { id:"document",   icon:"📄", label:"Document" },
+    { id:"relation",   icon:"🔗", label:"Relation" },
+    { id:"learning",   icon:"🧠", label:"Learning" },
+    { id:"capture",    icon:"📸", label:"Capture" },
+    { id:"storyboard", icon:"🎬", label:"Storyboard" },
+    { id:"narration",  icon:"🎙️", label:"Narration" },
+    { id:"validator",  icon:"✅", label:"Validator" },
+    { id:"renderer",   icon:"🖥️", label:"Renderer" },
+    { id:"publisher",  icon:"🚀", label:"Publisher" },
+  ];
+
+  return (
+    <div className="ps-modal-overlay">
+      <div className="ps-modal ps-modal-lg">
+        <div className="ps-modal-header">
+          <div className="ps-modal-title"><Zap size={18} className="ps-modal-icon"/><span>Gerar Projeto Completo</span></div>
+          {!gerando && <button className="ps-modal-close" onClick={onClose}><X size={16}/></button>}
+        </div>
+
+        <div className="ps-modal-cmd">
+          <Terminal size={13}/> <code>axionia presentation generate projeto.json</code>
+        </div>
+
+        <div className="ps-modal-scale">
+          {[["80","módulos"],["60","agentes IA"],["400","APIs"],["350","prompts"],["120","templates"]].map(([n,l],i)=>(
+            <div key={i} className="ps-scale-item"><span className="ps-scale-n">≈{n}</span><span className="ps-scale-l">{l}</span></div>
+          ))}
+        </div>
+
+        <div className="ps-gen-pipeline">
+          {agentes.map((ag, i) => {
+            const st = progresso[ag.id];
+            return (
+              <React.Fragment key={ag.id}>
+                <div className={`ps-gen-ag ${st||""}`}>
+                  <span>{ag.icon}</span>
+                  <span className="ps-gen-ag-l">{ag.label}</span>
+                  {st==="ok" && <CheckCircle size={9} className="ps-ag-ok"/>}
+                  {st==="rodando" && <Loader size={9} className="spin ps-ag-sp"/>}
+                </div>
+                {i < agentes.length-1 && <ArrowRight size={10} className="ps-arr"/>}
+              </React.Fragment>
+            );
+          })}
+        </div>
+
+        {projeto.estatisticas && (
+          <div className="ps-gen-stats">
+            {Object.entries(projeto.estatisticas).filter(([,v])=>v>0).map(([k,v],i)=>(
+              <div key={i} className="ps-gen-stat">
+                <span className="ps-gen-stat-n">{v}</span>
+                <span className="ps-gen-stat-l">{k.replace(/_/g," ")}</span>
+              </div>
+            ))}
+          </div>
+        )}
+
+        <div className="ps-modal-footer">
+          {!gerando && !projeto.estatisticas && (
+            <button className="ps-modal-sim" onClick={()=>{}}>
+              <Play size={14}/> Executar Pipeline
+            </button>
+          )}
+          {projeto.estatisticas && !gerando && (
+            <button className="ps-modal-sim ps-modal-ok" onClick={onClose}>
+              <CheckCircle size={14}/> Projeto Gerado — Fechar
+            </button>
+          )}
+          {gerando && <div className="ps-modal-gerando"><Loader size={14} className="spin"/> Executando {projeto.agenteAtual}...</div>}
+        </div>
+      </div>
+    </div>
+  );
+}
 
 const API = import.meta.env.VITE_API_URL || "http://localhost:3100/api";
 

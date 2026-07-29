@@ -1,0 +1,193 @@
+{
+  "$schema": "axionia-presentation-studio-v5",
+  "meta": {
+    "comando": "axionia presentation generate projeto.json",
+    "versao": "5.0.0",
+    "descricao": "Especificação master do AxionIA Presentation Studio Enterprise — define o sistema completo a ser gerado, atualizado e mantido automaticamente.",
+    "criado_em": "2026-07-29",
+    "engine": "AxionIA Platform v4.0"
+  },
+
+  "projeto": {
+    "id": "axhub-v5",
+    "nome": "AxHub",
+    "versao": "5",
+    "descricao": "Plataforma de Fiscalização Eletrônica de Trânsito",
+    "empresa": "Axion Tecnologia"
+  },
+
+  "escala": {
+    "modulos": 80,
+    "servicos": 250,
+    "componentes_react": 600,
+    "apis": 400,
+    "prompts_especializados": 350,
+    "templates": 120,
+    "agentes_ia": 60,
+    "renderizadores": 50,
+    "exportadores": 40,
+    "motores_internos": 25
+  },
+
+  "inputs": {
+    "dashboard": {
+      "ativo": true,
+      "url": "http://localhost:3017",
+      "playwright": true,
+      "descricao": "Captura ao vivo do dashboard principal"
+    },
+    "react": {
+      "ativo": true,
+      "caminho": "./axion-ia-panel/src",
+      "extensoes": [".jsx", ".tsx", ".js", ".ts"],
+      "descricao": "Parse de componentes React para mapear telas e fluxos"
+    },
+    "controllers": {
+      "ativo": true,
+      "caminho": "./axion-ia-panel/api/src",
+      "padrao": "*-controller.js",
+      "descricao": "Extração de endpoints e lógica de negócio"
+    },
+    "api": {
+      "ativo": true,
+      "caminho": "./axion-ia-panel/api/src/routes",
+      "swagger_auto": true,
+      "descricao": "Mapeamento de todas as rotas REST"
+    },
+    "sql": {
+      "ativo": true,
+      "caminho": "./",
+      "extensoes": [".sql"],
+      "descricao": "Scripts SQL para entender modelo de dados"
+    },
+    "permissoes": {
+      "ativo": true,
+      "fonte": "./AxHub/docs-portal/docs/controle-acesso/permissoes.md",
+      "descricao": "150+ permissões mapeadas para contexto de usuários"
+    },
+    "menus": {
+      "ativo": true,
+      "fonte": "./axion-ia-panel/src/App.jsx",
+      "descricao": "Mapa de navegação e estrutura de menus"
+    },
+    "relacionamentos": {
+      "ativo": true,
+      "fonte_grafo": "./AXION-PROJETOS-COMPLETOS-2026.json",
+      "descricao": "Árvore de dependências entre módulos e sistemas"
+    },
+    "imagens": {
+      "ativo": true,
+      "caminho": "./AxHub/docs-portal/docs/img",
+      "extensoes": [".png", ".jpg", ".gif"],
+      "descricao": "Screenshots existentes para reutilizar no novo conteúdo"
+    },
+    "videos_antigos": {
+      "ativo": true,
+      "caminho": "./",
+      "extensoes": [".mp4"],
+      "descricao": "Vídeos anteriores para análise de conteúdo e reutilização"
+    },
+    "manual": {
+      "ativo": true,
+      "caminho": "./AxHub/docs-portal/docs",
+      "extensoes": [".md"],
+      "descricao": "97 arquivos de documentação existente como base de conhecimento"
+    },
+    "swagger": {
+      "ativo": false,
+      "url": null,
+      "arquivo": "./openapi.json",
+      "descricao": "OpenAPI spec — gerado automaticamente a partir dos controllers"
+    },
+    "playwright": {
+      "ativo": true,
+      "url_base": "http://localhost:3017",
+      "credenciais": { "usuario": "admin", "senha": "admin" },
+      "descricao": "Captura automatizada de todas as telas do sistema"
+    },
+    "banco": {
+      "ativo": true,
+      "tipo": "sql_server",
+      "host": "localhost",
+      "banco": "AxHub",
+      "descricao": "Consulta direta ao banco para mapear tabelas e relacionamentos"
+    }
+  },
+
+  "outputs": {
+    "video":      { "ativo": true,  "formato": "mp4",  "resolucao": "1280x720", "voz": "Microsoft Maria PT-BR", "max_duracao_min": 8 },
+    "manual":     { "ativo": true,  "formato": "md",   "portal": "docusaurus",  "auto_commit": true },
+    "ppt":        { "ativo": true,  "formato": "pptx", "tema": "axion-dark",    "max_slides": 30 },
+    "quiz":       { "ativo": true,  "formato": "json", "min_questoes": 10,      "max_questoes": 30 },
+    "kb":         { "ativo": true,  "formato": "json", "indexar_mongodb": true, "min_entradas": 50 },
+    "graph":      { "ativo": true,  "formato": "json", "mermaid": true,         "ascii": true },
+    "flow":       { "ativo": true,  "formato": "json", "mermaid": true },
+    "timeline":   { "ativo": true,  "formato": "json", "fases_max": 10 },
+    "swagger":    { "ativo": true,  "formato": "json", "openapi_versao": "3.0.0" },
+    "screenshots":{ "ativo": true,  "ferramenta": "playwright", "delay_ms": 1000 }
+  },
+
+  "update_detection": {
+    "ativo": true,
+    "descricao": "Detecta mudanças em arquivos e propõe atualização automática da documentação",
+    "watch_paths": [
+      "./axion-ia-panel/src/pages",
+      "./axion-ia-panel/api/src",
+      "./AxHub/docs-portal/docs"
+    ],
+    "impacto_por_tipo": {
+      ".jsx": ["screenshots", "manual", "video", "ppt"],
+      ".js":  ["manual", "swagger", "kb"],
+      ".md":  ["kb", "quiz"],
+      ".sql": ["manual", "graph", "flow"],
+      ".png": ["manual", "ppt", "video"]
+    },
+    "confirmacao_obrigatoria": true,
+    "auto_apply_sem_confirmacao": false
+  },
+
+  "pipeline": {
+    "agentes": [
+      { "id": "source",     "nome": "Source Agent",     "ordem": 1, "descricao": "Coleta todos os inputs definidos no projeto.json" },
+      { "id": "document",   "nome": "Document Agent",   "ordem": 2, "descricao": "Analisa e estrutura o conhecimento coletado" },
+      { "id": "relation",   "nome": "Relationship Agent","ordem": 3, "descricao": "Mapeia dependências entre módulos, APIs e dados" },
+      { "id": "learning",   "nome": "Learning Agent",   "ordem": 4, "descricao": "Aprende o sistema completamente antes de gerar conteúdo" },
+      { "id": "capture",    "nome": "Capture Agent",    "ordem": 5, "descricao": "Captura screenshots via Playwright" },
+      { "id": "storyboard", "nome": "Storyboard Agent", "ordem": 6, "descricao": "Cria storyboards para cada vídeo" },
+      { "id": "narration",  "nome": "Narration Agent",  "ordem": 7, "descricao": "Gera narração TTS sincronizada" },
+      { "id": "validator",  "nome": "Validator Agent",  "ordem": 8, "descricao": "Valida todos os outputs antes de renderizar" },
+      { "id": "renderer",   "nome": "Renderer Agent",   "ordem": 9, "descricao": "Renderiza vídeo, PPTX, PDF e HTML" },
+      { "id": "publisher",  "nome": "Publisher Agent",  "ordem": 10,"descricao": "Publica e faz commit dos resultados" }
+    ],
+    "checkpoints": true,
+    "retry_por_agente": 3,
+    "paralelismo": { "storyboard_narration": true, "capture_relation": true }
+  },
+
+  "update_cascade": {
+    "descricao": "Quando um arquivo muda, esta cascata define a ordem de atualização",
+    "ordem": [
+      "1. screenshots  → recapturar telas afetadas",
+      "2. manual       → atualizar seções do Docusaurus",
+      "3. quiz         → regenerar questões do módulo",
+      "4. kb           → reindexar entradas afetadas",
+      "5. storyboard   → atualizar cenas do vídeo",
+      "6. narracao     → regerar áudio TTS das cenas",
+      "7. legenda      → sincronizar legendas ao novo áudio",
+      "8. video        → recompilar frames + áudio + legendas",
+      "9. ppt          → atualizar slides afetados",
+      "10. commit      → git add + commit + push automático"
+    ]
+  },
+
+  "configuracao_ia": {
+    "modelo_analise": "gpt-4o",
+    "modelo_conteudo": "gpt-4o",
+    "modelo_codigo":   "gpt-4o",
+    "temperatura": 0.2,
+    "max_tokens_por_chamada": 8000,
+    "max_chamadas_pipeline": 40,
+    "cache_respostas": true,
+    "cache_ttl_horas": 24
+  }
+}
