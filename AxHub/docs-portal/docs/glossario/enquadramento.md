@@ -1,18 +1,40 @@
 ﻿---
 title: "Enquadramento"
 sidebar_position: 1
-description: "Definicao tecnica de Enquadramento com base no CTB"
+description: "O que é enquadramento no AxHub — classificação legal das infrações de trânsito"
 ---
 
 # Enquadramento
 
-## Definicao
+Classificação legal atribuída a uma infração de trânsito. O enquadramento determina o **artigo, inciso, penalidade e pontuação** aplicáveis conforme a legislação vigente.
 
-Classificacao legal atribuida a uma Use Infração (com acento) de transito. O enquadramento determina o artigo, inciso e penalidade aplicaveis conforme a legislacao vigente.
+**Base legal:** Art. 161 e Anexo II do CTB — Resolução CONTRAN 619/2016
 
-## Base Legal
+## Estrutura do enquadramento
 
-Art. 161 e Anexo I do código de Transito Brasileiro (Lei 9.503/1997). Cada Use Infração (com acento) possui um código de enquadramento definido pelo CONTRAN atraves da Resolucao 619/2016.
+| Campo | Descrição | Exemplo |
+|-------|-----------|---------|
+| **Código** | Código único do enquadramento | 55412 |
+| **Descrição** | Descrição da infração | Exceder velocidade perm. em até 20% |
+| **Artigo CTB** | Artigo da lei violado | Art. 218, I |
+| **Gravidade** | Nível da infração | Leve / Média / Grave / Gravíssima |
+| **Pontos** | Pontuação na CNH | 3 / 4 / 5 / 7 |
+| **Valor R$** | Multa base | R$ 130,16 a R$ 880,41+ |
+
+## Escalas de gravidade
+
+| Gravidade | Pontos | Valor base |
+|-----------|--------|------------|
+| Leve | 3 | R$ 88,38 |
+| Média | 4 | R$ 130,16 |
+| Grave | 5 | R$ 195,23 |
+| Gravíssima | 7 | R$ 293,47 (1x) a R$ 880,41 (3x) |
+
+## Relacionados
+
+- [Enquadramentos](../administracao/enquadramentos) — Tabela completa do CTB
+- [Configurações de Enquadramento](../administracao/configuracoes-enquadramento) — Configuração por operação
+
 
 ## Uso no Sistema AxHub
 

@@ -1,23 +1,47 @@
 ---
 sidebar_position: 2
 title: Índices de Performance
-description: Indicadores de desempenho contratual
+description: Indicadores de desempenho contratual dos postos de pesagem no AxTon
 ---
 
 # Índices de Performance
 
-Relatório de Pesagem](../img/Relatorio%20de%20pesagem.png)
-
-Indicadores que medem o desempenho operacional conforme critérios contratuais: disponibilidade de Equipamentos tempo de resposta e produtividade.
+Indicadores que medem o desempenho operacional dos postos de pesagem conforme os critérios definidos em contrato. Base para cálculo de pagamentos e SLA.
 
 ## Como acessar
 
 **Menu lateral** → Medições → **Índices de Performance**
 
-## Indicadores
+## Índices principais
 
-| Índice | Descrição | Meta Típica |
-|--------|-----------|-------------|
+| Índice | Descrição | Fórmula |
+|--------|-----------|--------|
+| **Disponibilidade** | % do tempo que o equipamento ficou operacional | (horas ativas / horas contratuais) × 100 |
+| **Taxa OCR** | % de imagens com placa reconhecida | (reconhecidas / total) × 100 |
+| **Produtividade** | Veículos fiscalizados por hora | total veículos / horas ativas |
+| **Infrações exportadas** | % de infrações geradas que chegaram ao órgão | (exportadas / geradas) × 100 |
+
+## Metas contratuais típicas
+
+| Índice | Meta mínima |
+|--------|-------------|
+| Disponibilidade | ≥ 95% |
+| Taxa OCR | ≥ 90% |
+| Produtividade | Conforme contrato |
+| Infrações exportadas | ≥ 98% |
+
+## Como calcular
+
+1. Acesse **Medições → Índices de Performance**
+2. Selecione o **Contrato** e o **Período**
+3. O sistema calcula automaticamente cada índice
+4. Compare com as metas contratuais
+5. Inclua os resultados na [medição mensal](./criar-medicao)
+
+:::info Impacto no pagamento
+Em contratos por desempenho, a disponibilidade abaixo da meta resulta em desconto proporcional no valor mensal.
+:::
+
 | **Disponibilidade** | Tempo que o Equipamento ficou online | ≥ 95% |
 | **Tempo de Triagem** | Tempo médio para triar uma Infração | ≤ 20 min |
 | **Produtividade** | Infrações processadas por dia | Conforme contrato |

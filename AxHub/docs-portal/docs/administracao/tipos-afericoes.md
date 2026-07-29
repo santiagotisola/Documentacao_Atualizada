@@ -1,18 +1,37 @@
 ﻿---
 sidebar_position: 14
 title: Tipos de Aferições
-description: Cadastro de tipos de aferições metrológicas
+description: Cadastro de tipos de aferições metrológicas no AxHub
 ---
 
 # Tipos de Aferições
 
-Permite cadastrar os tipos de aferições metrológicas realizadas nos Equipamentos
+Define as **categorias de aferição metrológica** realizadas nos equipamentos de fiscalização, conforme exigêancia do INMETRO.
 
 ## Como acessar
 
 **Menu lateral** → Configurações → **Tipos de Aferições**
 
-| Campo | Descrição |
+## Campos
+
+| Campo | Obrigatório | Descrição |
+|-------|:-----------:|-----------|
+| **Nome** | Sim | Tipo da aferição (ex: "Aferição Inicial", "Aferição Periódica") |
+| **Descrição** | Não | Detalhamento do procedimento |
+| **Validade (dias)** | Sim | Prazo de validade em dias |
+
+## Tipos padrão
+
+| Tipo | Descrição | Validade Comum |
+|------|-----------|----------------|
+| **Aferição Inicial** | Realizada na instalação do equipamento | 365 dias |
+| **Aferição Periódica** | Recalibração anual obrigatória | 365 dias |
+| **Aferição Extraordinária** | Após manutenção ou acidente | 365 dias |
+
+:::caution INMETRO
+Equipamento com aferição vencida não pode gerar infrações legalmente válidas. O sistema bloqueia automaticamente.
+:::
+
 |-------|-----------|
 | **Código** | Código identificador |
 | **Descrição** | Tipo da aferição (ex: Inicial, Periódica, Eventual) |

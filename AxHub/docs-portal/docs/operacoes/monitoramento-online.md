@@ -1,18 +1,51 @@
 ---
 sidebar_position: 4
 title: Monitoramento Online
-description: Monitoramento em tempo real dos Equipamentos
+description: Acompanhamento em tempo real dos equipamentos e passagens no AxHub
 ---
 
 # Monitoramento Online
 
-Permite acompanhar em tempo real o status e funcionamento dos Equipamentos de fiscalização.
+Permite **acompanhar em tempo real** o status e funcionamento dos equipamentos de fiscalização, exibindo passagens e alertas assim que ocorrem.
 
 ![Monitoramento Online](../img/Operações%20-%20Monitoramento%20online.png)
 
 ## Como acessar
 
 **Menu lateral** → Operações → **Monitoramento Online**
+
+## Informações exibidas
+
+| Elemento | Descrição |
+|----------|-----------|
+| **Status do equipamento** | Online (verde) / Offline (vermelho) |
+| **Última passagem** | Data, hora, placa e imagem |
+| **Alertas ativos** | Infrações pendentes de triagem |
+| **Taxa OCR** | Percentual de leitura de placas |
+
+## Filtros disponíveis
+
+- **Equipamento**: filtrar por câmera específica
+- **Grupo de equipamentos**: filtrar por grupo
+- **Status**: online, offline ou todos
+
+## Usos operacionais
+
+- **Início do turno:** verificar se todos os equipamentos estão ativos
+- **Ocorrência em campo:** confirmar passagem de veículo suspeito
+- **Qualidade:** acompanhar taxa OCR em tempo real
+
+:::tip Dica
+Configure o filtro por grupo de equipamentos para focar no seu âmbito de responsabilidade.
+:::
+
+## Navegação Relacionada
+
+| Tipo | Página | Descrição |
+|------|--------|-----------|
+| Relacionado | [Eventos de Equipamentos](./eventos-equipamentos) | Histórico de falhas |
+| Relacionado | [Aferições](./afericoes) | Calibração dos equipamentos |
+
 
 ## Cadastro de monitoramento
 

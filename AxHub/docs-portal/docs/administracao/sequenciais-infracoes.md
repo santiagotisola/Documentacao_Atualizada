@@ -1,18 +1,36 @@
 ﻿---
 sidebar_position: 11
 title: Sequenciais de Infrações
-description: Controle de sequenciais numéricos de Infrações
+description: Controle da numeração sequencial de autos de infração no AxHub
 ---
 
 # Sequenciais de Infrações
 
-Permite configurar e monitorar os sequenciais numéricos utilizados na numeração de autos de Infração
+Configura e monitora os **sequenciais numéricos** utilizados na numeração dos autos de infração. A numeração correta é exigência legal do órgão autuador.
 
 ## Como acessar
 
-**Menu lateral** → Configurações → **Sequenciais de Infrações
+**Menu lateral** → Configurações → **Sequenciais de Infrações**
 
-| Campo | Descrição |
+## Campos
+
+| Campo | Obrigatório | Descrição |
+|-------|:-----------:|-----------|
+| **Órgão** | Sim | Órgão autuador |
+| **Série** | Sim | Série da numeração (ex.: AXH, MTC) |
+| **Próximo número** | Sim | Número a ser atribuído na próxima infração |
+| **Número máximo** | Não | Limite superior da série |
+
+## Boas práticas
+
+- Nunca reiniciar a numeração sem autorização do órgão autuador
+- Verificar o relatório de [Falhas de Sequenciais](../relatorios/relatorio-logs-envios) antes de cada lote de exportação
+- Manter registro de todas as séries utilizadas por período
+
+:::caution
+A alteração indevida do sequencial pode invalidar infrações e gerar rejeição pelo órgão autuador.
+:::
+
 |-------|-----------|
 | **Órgão** | Órgão autuador |
 | **Sequencial Atual** | Último número utilizado |

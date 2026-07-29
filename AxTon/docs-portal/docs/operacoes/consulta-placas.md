@@ -1,18 +1,44 @@
 ---
 sidebar_position: 4
 title: Consulta de Placas
-description: Pesquisar passagens de Veículos por placa
+description: Pesquisar passagens de veículos por placa nos postos de pesagem do AxTon
 ---
 
 # Consulta de Placas
 
-![Início da Pesagem](../img/Incio%20da%20pesagem.png)
-
-Permite pesquisar o histórico de passagens de um Veículo específico nos postos de pesagem.
+Permite pesquisar o **histórico completo de passagens** de um veículo específico nos postos de pesagem.
 
 ## Como acessar
 
 **Menu lateral** → Operações → **Consulta de Placas**
+
+## Filtros
+
+| Filtro | Obrigatório | Descrição |
+|--------|:-----------:|-----------|
+| **Placa** | Sim | Número da placa (Mercosul ou padrão antigo) |
+| **Período** | Sim | Data início e data fim |
+| **Posto** | Não | Filtrar por posto de pesagem específico |
+
+## Resultado
+
+| Coluna | Descrição |
+|--------|-----------|
+| **Data/Hora** | Momento da passagem |
+| **Posto** | Local de pesagem |
+| **Peso aferido** | Peso registrado |
+| **PBT máximo** | Limite para a categoria |
+| **Status** | Regular / Infrator |
+| **Infração** | Número da infração (se gerada) |
+
+## Passo a passo
+
+1. Acesse **Operações → Consulta de Placas**
+2. Informe a **Placa** do veículo
+3. Defina o **Período** de busca
+4. Clique em **Consultar**
+5. Clique em qualquer registro para ver detalhes
+
 
 ## Filtros de pesquisa
 

@@ -1,18 +1,46 @@
 ﻿---
-title: "Lote de Exportacao"
+title: "Lote de Exportação"
 sidebar_position: 6
-description: "Definicao tecnica de Lote de Exportacao"
+description: "O que é lote de exportação no AxHub — fluxo, status e base legal"
 ---
 
-# Lote de Exportacao
+# Lote de Exportação
 
-## Definicao
+Conjunto agrupado de **infrações processadas e validadas**, formatado e enviado ao órgão autuador (DETRAN, DER, Prefeitura) através de integração sistêmica.
 
-Conjunto agrupado de infracoes processadas e validadas, formatado para envio ao orgao autuador (DETRAN, DER, Prefeitura) atraves de integracao sistemica.
+**Base legal:** Resolução CONTRAN 619/2016
 
-## Base Legal
+## Ciclo de vida do lote
 
-Resolucao CONTRAN 619/2016, que define o formato e conteudo obrigatório dos registros de Use Infração (com acento) para integracao entre sistemas.
+```
+Criado → Processando → Enviado → Aceito
+                  ↓
+                Erro → Tentar novamente → Enviado
+```
+
+## Status possíveis
+
+| Status | Descrição |
+|--------|-----------|
+| **Criado** | Lote gerado, aguardando envio |
+| **Processando** | Envio em andamento |
+| **Enviado** | Transmitido com sucesso |
+| **Aceito** | Confirmado pelo órgão |
+| **Erro** | Falha no envio |
+| **Cancelado** | Cancelado antes do envio |
+
+## O que compõe um lote
+
+- Infrações aprovadas na auditoria
+- Dados do enquadramento (artigo CTB, pontos, valor)
+- Imagens das infrações
+- Informações do veículo e do equipamento
+
+## Relacionados
+
+- [Lote de Exportação](../infracoes/exportacao) — Gerenciamento de lotes
+- [Auditoria](../infracoes/auditoria) — Pré-requisito para exportar
+
 
 ## Uso no Sistema AxHub
 

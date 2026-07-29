@@ -1,18 +1,48 @@
 ---
 sidebar_position: 6
 title: Consulta de Placas
-description: Consulta de passagens de Veículos por placa
+description: Consulta de passagens de veículos por placa no AxHub
 ---
 
 # Consulta de Placas
 
-Permite consultar o histórico de passagens de Veículos por número de placa.
+Permite **consultar o histórico completo de passagens** de um veículo específico por número de placa em todos os equipamentos monitorados.
 
 ## Como acessar
 
-**Acesso direto**: `/consultaplacas`
+**Acesso direto**: menu lateral → Operações → **Consulta de Placas**
 
 :::info
+Pode ser acessado também diretamente via URL: `/consultaplacas`
+:::
+
+## Filtros disponíveis
+
+| Filtro | Obrigatório | Descrição |
+|--------|:-----------:|-----------|
+| **Placa** | Sim | Número da placa (formato Mercosul ou antigo) |
+| **Período** | Sim | Data início e fim |
+| **Equipamento** | Não | Filtrar por câmera específica |
+
+## Resultados
+
+| Coluna | Descrição |
+|--------|-----------|
+| **Data/Hora** | Momento da passagem |
+| **Equipamento** | Equipamento que capturou |
+| **Faixa** | Faixa da pista |
+| **Velocidade** | Velocidade registrada |
+| **Imagem** | Foto da passagem |
+| **Infração** | Se gerou infração |
+
+## Exportação
+
+Clique em **Excel** para exportar o histórico de passagens.
+
+:::tip
+Use esta função para confirmar passagens denunciadas por cidadãos ou verificar histórico de veículos suspeitos.
+:::
+
 A **Consulta de Placas** pode não aparecer no menu lateral dependendo das permissões do perfil de acesso. Nesse caso, acesse diretamente pela URL `/consultaplacas` ou verifique as permissões em [Controle de Acesso → Perfis](../controle-acesso/perfis-acesso).
 :::
 

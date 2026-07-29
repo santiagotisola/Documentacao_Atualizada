@@ -1,12 +1,49 @@
 ---
 sidebar_position: 2
 title: "PBT (Peso Bruto Total)"
+description: "O que é PBT no AxTon — cálculo, limites legais e enquadramento"
 ---
 
-# PBT (Peso Bruto Total)
+# PBT — Peso Bruto Total
 
-![Iniciar Pesagem](../img/inicar%20pesagem.png)
+Peso máximo permitido para circulação de um veículo, considerando sua classificação, número de eixos e tipo de carga. Veículos que ultrapassam o PBT estão sujeitos a autuação e retenção.
 
-Peso máximo permitido para circulação de um Veículo considerando sua classificação, número de eixos e tipo de carga. Veículos que ultrapassam o PBT estão sujeitos a autuação.
+**Base legal:** Art. 99 do CTB — Resolução CONTRAN 803/2021
 
-**Base legal:** Art. 99 do CTB, Resolução CONTRAN 803/2021
+## Fórmula
+
+```
+PBT = Tara (peso do veículo vazio) + Carga (peso da mercadoria)
+```
+
+## Limites por configuração de eixos (CONTRAN 803/2021)
+
+| Configuração | PBT Máximo |
+|--------------|------------|
+| 2 eixos | 16 toneladas |
+| 3 eixos | 23 toneladas |
+| 4 eixos | 29 toneladas |
+| 5 eixos (bitrem) | 41,5 toneladas |
+| 6 eixos (bitrem) | 45 toneladas |
+| 9 eixos (rodotrem) | 57 toneladas |
+
+## Tolerâncias
+
+| Tipo de equipamento | Tolerância |
+|---------------------|------------|
+| Balança estática INMETRO | 5% |
+| Balança dinâmica | 10% |
+
+## Como o AxTon verifica
+
+1. Veículo passa pela balança
+2. Sistema identifica categoria pelo OCR + dados do MDF-e
+3. Compara peso aferido com PBT máximo da categoria
+4. Excedeu o limite → gera infração automaticamente
+
+## Relacionados
+
+- [Pesagem](./pesagem) — Processo de verificação
+- [Infração](./infracao) — Gerada quando PBT é excedido
+- [MDF-e](./mdfe) — Documento que informa a carga transportada
+

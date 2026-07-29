@@ -1,18 +1,39 @@
 ﻿---
 sidebar_position: 10
 title: Regiões
-description: Cadastro de regiões geográficas
+description: Cadastro de regiões geográficas para agrupamento de operações no AxHub
 ---
 
 # Regiões
 
-Permite cadastrar e gerenciar as regiões geográficas utilizadas no agrupamento de operações.
+Cadastro das regiões geográficas utilizadas para **agrupar operações e equipamentos** por área, facilitando filtros em relatórios e distribuição de responsabilidades.
 
 ## Como acessar
 
 **Menu lateral** → Configurações → **Regiões**
 
-| Campo | Descrição |
+## Campos
+
+| Campo | Obrigatório | Descrição |
+|-------|:-----------:|-----------|
+| **Nome** | Sim | Identificação da região (ex: "Região Metropolitana") |
+| **Descrição** | Não | Detalhamento geográfico |
+| **Status** | Sim | Ativo ou Inativo |
+
+## Passo a passo — Cadastrar região
+
+1. Acesse **Configurações → Regiões**
+2. Clique em **+ Novo**
+3. Informe o **Nome** da região
+4. Opcionalmente adicione uma **Descrição**
+5. Clique em **Salvar**
+
+## Uso das regiões
+
+- **Filtro de relatórios:** Filtrar dados por área geográfica
+- **Agrupamento de equipamentos:** Organizar equipes por região
+- **Dashboard:** KPIs por região de operação
+
 |-------|-----------|
 | **Nome** | Nome da região |
 | **UF** | Estado vinculado |
