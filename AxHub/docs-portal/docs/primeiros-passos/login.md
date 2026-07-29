@@ -1,23 +1,49 @@
 ﻿---
 sidebar_position: 1
 title: Login
-description: Como acessar o sistema AxHub
+description: Como acessar o sistema AxHub com segurança
 ---
 
 # Login
 
-Tela de autenticacao do AxHub. Todos os Usuários precisam se autenticar com Login e senha.
+Tela de autenticação do AxHub. Todo operador deve se autenticar com login e senha antes de acessar qualquer funcionalidade do sistema.
 
 ## Tela de Login
 
 ![Tela de Login](../img/Login.png)
 
-## Acessando o sistema
+## Passo a passo — Acessar o sistema
 
-1. Abra o navegador e acesse o endereço do AxHub
-2. Informe seu Login
-3. Informe sua Senha
-4. Clique em Entrar
+1. Abra o navegador e acesse o endereço do AxHub fornecido pelo administrador
+2. Informe o **Login** (nome de usuário)
+3. Informe a **Senha** de acesso
+4. Clique em **Entrar**
+5. O sistema redireciona automaticamente para o **Dashboard**
+
+## Primeiro acesso
+
+No primeiro acesso, utilize as credenciais temporárias fornecidas pelo administrador.
+Alterc a senha imediatamente em **Controle de Acesso → Usuários**.
+
+:::warning Segurança
+Nunca compartilhe suas credenciais. Cada ação realizada no sistema fica registrada com o seu usuário no Log de Acesso.
+:::
+
+## Recuperação de senha
+
+Clique em **Esqueceu a Senha?** e informe seu e-mail cadastrado. O sistema enviará instruções de recuperação.
+
+## Conta bloqueada
+
+Após múltiplas tentativas incorretas, a conta pode ser bloqueada por segurança. Entre em contato com o administrador para reativação.
+
+## Navegação Relacionada
+
+| Tipo | Página | Descrição |
+|------|--------|-----------|
+| Próximo | [Dashboard](./dashboard) | Primeira tela após o login |
+| Relacionado | [Usuários](../controle-acesso/usuarios) | Gestão de contas |
+
 
 ## Recuperacao de senha
 
