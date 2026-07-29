@@ -1,0 +1,419 @@
+{
+  "volume": "VOL-01",
+  "titulo": "Foundation — Fundação da Plataforma",
+  "versao": "1.0",
+  "status": "Em desenvolvimento",
+  "paginas_estimadas": 400,
+  "capitulos": 10,
+
+  "CAP01_IDENTIDADE": {
+    "titulo": "Identidade e Missão",
+    "secoes": {
+      "1_1_missao": {
+        "titulo": "Missão da Plataforma",
+        "conteudo": "A AXIONIA KNOWLEDGE PLATFORM é o núcleo inteligente de engenharia de conhecimento corporativo da Axion Tecnologia. Sua missão não é responder perguntas — é compreender sistemas completos, estruturar conhecimento, relacionar informações e transformar qualquer fonte em ativos digitais reutilizáveis e continuamente atualizados.",
+        "missao_curta": "Transformar qualquer fonte de informação em ativos digitais inteligentes, reutilizáveis e continuamente sincronizados."
+      },
+      "1_2_o_que_nao_e": {
+        "titulo": "O que a AKP NÃO é",
+        "tabela": [
+          { "nao_e": "Um chatbot", "e": "Uma plataforma de engenharia de conhecimento" },
+          { "nao_e": "Uma única IA", "e": "Um ecossistema de 12+ agentes cognitivos especializados" },
+          { "nao_e": "Um gerador de texto", "e": "Um construtor de Digital Twins Cognitivos" },
+          { "nao_e": "Um sistema isolado", "e": "Uma camada transversal sobre todos os produtos Axion" },
+          { "nao_e": "Estático", "e": "Auto-evolutivo e sincronizado continuamente" },
+          { "nao_e": "Apenas documentação", "e": "Vídeos, treinamentos, KB, quizzes, microlearning e portais" }
+        ]
+      },
+      "1_3_produtos_servidos": {
+        "titulo": "Produtos Servidos",
+        "produtos": [
+          { "nome": "AxHub",    "descricao": "Fiscalização Eletrônica de Trânsito", "clientes": 18 },
+          { "nome": "AxTon",   "descricao": "Pesagem Veicular Metrológica", "clientes": null },
+          { "nome": "AxCross", "descricao": "Cruzamento e Monitoramento de Placas", "clientes": null },
+          { "nome": "AxionIA", "descricao": "Plataforma de IA interna", "clientes": null }
+        ]
+      },
+      "1_4_17_outputs": {
+        "titulo": "Os 17 Outputs Automáticos",
+        "lista": [
+          "Manual Técnico", "Manual Operacional", "Manual do Usuário",
+          "Vídeo", "Storyboard", "FAQ", "Quiz", "Fluxograma", "Diagrama",
+          "Base de Conhecimento", "Central de Ajuda", "Curso",
+          "Microlearning", "Você Sabia?", "Release Notes",
+          "Treinamentos", "Portal de Conhecimento"
+        ]
+      },
+      "1_5_missao_permanente": {
+        "titulo": "Missão Permanente",
+        "lista": [
+          "Sempre aprender",
+          "Sempre documentar",
+          "Sempre relacionar",
+          "Sempre melhorar",
+          "Nunca perder conhecimento"
+        ]
+      }
+    }
+  },
+
+  "CAP02_FILOSOFIA": {
+    "titulo": "Filosofia — Os 5 Pilares",
+    "secoes": {
+      "2_1_pilar_conhecimento": {
+        "nome": "Pilar 1 — Conhecimento",
+        "principio": "Todo conteúdo deve ser compreendido. Nunca apenas copiado.",
+        "implicacao": "A AKP aplica as 10 perguntas semânticas a cada informação recebida antes de produzir qualquer conteúdo."
+      },
+      "2_2_pilar_contexto": {
+        "nome": "Pilar 2 — Contexto",
+        "principio": "Nenhuma informação existe isoladamente. Tudo possui contexto.",
+        "implicacao": "Todo Knowledge Object é gerado com seu sistema, módulo, versão, owner e histórico."
+      },
+      "2_3_pilar_relacionamentos": {
+        "nome": "Pilar 3 — Relacionamentos",
+        "principio": "Toda informação possui dependências. Toda dependência deve ser registrada.",
+        "implicacao": "Mínimo de 3 relacionamentos por objeto. Objetos isolados são inválidos."
+      },
+      "2_4_pilar_evolucao": {
+        "nome": "Pilar 4 — Evolução",
+        "principio": "O conhecimento evolui continuamente. Toda alteração gera atualização.",
+        "implicacao": "Auto-sync detecta mudanças no código e propaga atualizações por toda a cadeia de conhecimento."
+      },
+      "2_5_pilar_reutilizacao": {
+        "nome": "Pilar 5 — Reutilização",
+        "principio": "Nunca recriar informação existente. Sempre reutilizar conhecimento.",
+        "implicacao": "Antes de gerar qualquer conteúdo, o sistema pesquisa Knowledge Graph, FAQ, Storyboards, Vídeos, Glossário, Templates, Exemplos e Releases."
+      }
+    }
+  },
+
+  "CAP03_PRINCIPIOS": {
+    "titulo": "Os 10 Princípios Fundamentais",
+    "principios": [
+      {
+        "numero": 1,
+        "nome": "KNOWLEDGE FIRST",
+        "lei": "Nunca gere resultado sem construir o modelo de conhecimento interno.",
+        "pipeline_obrigatorio": ["Entrada","Análise","Extração","Normalização","Relacionamentos","Knowledge Graph","Planejamento","Validação","Resultado"],
+        "regra": "Nenhuma etapa pode ser pulada."
+      },
+      {
+        "numero": 2,
+        "nome": "DIGITAL TWIN",
+        "lei": "Todo sistema analisado possui um Digital Twin Cognitivo.",
+        "conhece": ["Arquitetura","Banco","APIs","Regras","Menus","Campos","Usuários","Permissões","Fluxos","Documentação","Vídeos","FAQ","Quizzes","Integrações","Dependências","Código","Eventos","Logs","Versões"],
+        "regra": "Todo novo conhecimento atualiza o Digital Twin automaticamente."
+      },
+      {
+        "numero": 3,
+        "nome": "RELACIONAMENTO TOTAL",
+        "lei": "Nenhuma informação existe isoladamente.",
+        "cadeia_exemplo": "Tela → Campos → APIs → Banco → Relatórios → Dashboard",
+        "tipos_relacionamento": 22,
+        "minimo_por_objeto": 3,
+        "regra": "Objetos sem relacionamentos são rejeitados pelo Validator Agent."
+      },
+      {
+        "numero": 4,
+        "nome": "SEMÂNTICA",
+        "lei": "A IA nunca armazena apenas texto. Ela compreende.",
+        "10_perguntas": [
+          "O que é?","Para que serve?","Quem utiliza?","Quando utiliza?",
+          "Como funciona?","Quais dependências?","Quais impactos?",
+          "Quais riscos?","Quais integrações?","Quais resultados?"
+        ]
+      },
+      {
+        "numero": 5,
+        "nome": "ANÁLISE MULTICAMADAS",
+        "lei": "Toda análise ocorre simultaneamente em 10 camadas.",
+        "camadas": ["Funcional","Técnica","Visual","Banco de Dados","APIs","Segurança","Integrações","UX","Performance","Conhecimento"]
+      },
+      {
+        "numero": 6,
+        "nome": "NARRATIVA CORPORATIVA",
+        "lei": "Todo conteúdo usa linguagem profissional e explica o porquê.",
+        "vocabulario_proibido": ["clique aqui","aperte","vai aparecer","é simples","simplesmente"],
+        "vocabulario_preferido": ["O usuário deverá selecionar...","O sistema apresentará...","Recomenda-se..."],
+        "sempre_explicar": ["Objetivo","Motivação","Resultado Esperado","Boas Práticas","Erros Comuns","Consequências"]
+      },
+      {
+        "numero": 7,
+        "nome": "MICROLEARNING",
+        "lei": "Todo conhecimento é fragmentado automaticamente nos 9 níveis.",
+        "niveis": ["15s","30s","45s","60s","90s","5min","15min","30min","Curso Completo"]
+      },
+      {
+        "numero": 8,
+        "nome": "REUTILIZAÇÃO",
+        "lei": "SE existir conteúdo semelhante: ATUALIZAR. NUNCA duplicar.",
+        "pesquisar_antes": ["Knowledge Graph","FAQ","Storyboards","Vídeos","Glossário","Templates","Exemplos","Releases"]
+      },
+      {
+        "numero": 9,
+        "nome": "APRENDIZADO CONTÍNUO",
+        "lei": "Toda execução produz aprendizado.",
+        "registrar": ["Tempo","Modelo","Prompt","Tokens","Resultado","Qualidade","Falhas","Feedback","Relacionamentos","Versão"]
+      },
+      {
+        "numero": 10,
+        "nome": "MULTIMODALIDADE",
+        "lei": "Todas as origens produzem o mesmo modelo interno.",
+        "origens_validas": 19,
+        "campos_obrigatorios_todo_objeto": ["owner","data_criacao","ultima_atualizacao","versao","sistema","cliente","projeto","criticidade","confiabilidade","origem","responsavel_tecnico","status"],
+        "status_validos": ["rascunho","publicado","arquivado","obsoleto"]
+      }
+    ]
+  },
+
+  "CAP04_GOVERNANCA": {
+    "titulo": "Governança e Ciclo de Vida",
+    "secoes": {
+      "4_1_ciclo_status": {
+        "titulo": "Ciclo de Status dos Objetos",
+        "fluxo": "rascunho → em_revisao → publicado → arquivado → obsoleto",
+        "transicoes": [
+          { "de": "rascunho",    "para": "em_revisao", "quem": "Validator Agent (score ≥ 70)" },
+          { "de": "em_revisao",  "para": "publicado",  "quem": "Revisor humano ou Validator (score ≥ 85)" },
+          { "de": "publicado",   "para": "arquivado",  "quem": "Nova versão publicada" },
+          { "de": "qualquer",    "para": "obsoleto",   "quem": "Project Manager Agent" }
+        ]
+      },
+      "4_2_versionamento": {
+        "titulo": "Versionamento Semântico",
+        "regras": [
+          "MAJOR (1.0.0 → 2.0.0): Mudança estrutural no conteúdo ou schema",
+          "MINOR (1.0.0 → 1.1.0): Adição de seções, relacionamentos ou campos",
+          "PATCH (1.0.0 → 1.0.1): Correção de erros ou atualização menor"
+        ]
+      },
+      "4_3_rastreabilidade": {
+        "titulo": "Rastreabilidade Completa",
+        "schema_historico": {
+          "versao": "string",
+          "data": "ISO 8601",
+          "autor": "string — agente ou usuário",
+          "alteracao": "string — descrição da mudança",
+          "tokens_utilizados": "number",
+          "modelo_ia": "string",
+          "qualidade_antes": "number",
+          "qualidade_depois": "number"
+        }
+      },
+      "4_4_regras_governanca": {
+        "titulo": "Regras de Governança",
+        "lista": [
+          "Nenhum objeto vai a 'publicado' sem passar pelo Validator Agent",
+          "Todo objeto tem exatamente um 'owner' responsável",
+          "Objetos 'obsoletos' nunca são deletados — apenas marcados",
+          "Alterações em objetos 'publicados' criam nova versão, preservando a anterior",
+          "O Knowledge Graph mantém todas as versões de relacionamentos",
+          "Toda deleção é lógica — nunca física"
+        ]
+      }
+    }
+  },
+
+  "CAP05_CONSTITUICAO_AGENTES": {
+    "titulo": "Constituição dos Agentes",
+    "principio": "A AKP não é uma única IA. É um ecossistema de agentes cognitivos especializados.",
+    "leis_fundamentais": [
+      "Cada agente tem um domínio específico e claramente definido",
+      "Nenhum agente conhece todo o sistema",
+      "Nenhum agente executa funções de outro agente",
+      "Toda comunicação ocorre via AI Orchestrator através de eventos",
+      "Nenhum agente modifica diretamente outro agente",
+      "Toda saída é validada antes de ser aceita no Knowledge Graph",
+      "Todo conhecimento produzido é registrado no Knowledge Graph",
+      "Nenhuma informação pode ser perdida",
+      "Toda decisão possui rastreabilidade completa"
+    ],
+    "grupos_agentes": {
+      "core":          { "agentes": ["AI Orchestrator","Project Manager"], "quantidade": 2 },
+      "knowledge":     { "agentes": ["Knowledge Extractor","Relationship Mapper"], "quantidade": 2 },
+      "engineering":   { "agentes": ["Screen Analyzer","Capture Agent","Database Agent","API Agent","Code Agent"], "quantidade": 5 },
+      "documentation": { "agentes": ["Documentation Agent"], "quantidade": 1 },
+      "video":         { "agentes": ["Storyboard Agent","Narrator Agent","Video Renderer"], "quantidade": 3 },
+      "learning":      { "agentes": ["Microlearning Agent"], "quantidade": 1 },
+      "validation":    { "agentes": ["Validator Agent"], "quantidade": 1 }
+    },
+    "total_agentes": 15
+  },
+
+  "CAP06_DOMINIOS": {
+    "titulo": "Os 12 Domínios da Plataforma",
+    "dominios": [
+      { "id": "DOM-01", "nome": "Knowledge",     "responsabilidade": "Extração, estruturação e relacionamento de conhecimento" },
+      { "id": "DOM-02", "nome": "Documentation", "responsabilidade": "Geração de documentação corporativa em todos os formatos" },
+      { "id": "DOM-03", "nome": "Video",         "responsabilidade": "Produção de vídeos de treinamento e demonstração" },
+      { "id": "DOM-04", "nome": "Learning",      "responsabilidade": "Microlearning, quizzes, trilhas e certificações" },
+      { "id": "DOM-05", "nome": "Publishing",    "responsabilidade": "Publicação e distribuição de conteúdo" },
+      { "id": "DOM-06", "nome": "Analytics",     "responsabilidade": "Métricas de conhecimento, gaps e efetividade" },
+      { "id": "DOM-07", "nome": "Validation",    "responsabilidade": "Qualidade, coerência e conformidade" },
+      { "id": "DOM-08", "nome": "Automation",    "responsabilidade": "Playwright, OCR, auto-sync e captura" },
+      { "id": "DOM-09", "nome": "Integration",   "responsabilidade": "Integrações com sistemas externos" },
+      { "id": "DOM-10", "nome": "AI",            "responsabilidade": "Modelos, prompts, compilador e otimização" },
+      { "id": "DOM-11", "nome": "Security",      "responsabilidade": "Segurança, LGPD, RBAC e auditoria" },
+      { "id": "DOM-12", "nome": "Enterprise",    "responsabilidade": "Governança, multi-tenant, marketplace e extensões" }
+    ]
+  },
+
+  "CAP07_MODELO_MATURIDADE": {
+    "titulo": "Modelo de Maturidade AKP",
+    "niveis": [
+      {
+        "nivel": 1,
+        "nome": "Iniciante",
+        "descricao": "Documentação básica gerada manualmente",
+        "criterios": ["Manuais básicos existem","Sem versionamento","Sem relacionamentos"]
+      },
+      {
+        "nivel": 2,
+        "nome": "Definido",
+        "descricao": "Templates padronizados e processos definidos",
+        "criterios": ["Templates A/B/C em uso","Governança básica","FAQ gerado"]
+      },
+      {
+        "nivel": 3,
+        "nome": "Gerenciado",
+        "descricao": "Knowledge Graph ativo e versionamento completo",
+        "criterios": ["Knowledge Graph populado","Digital Twin parcial","Videos gerados"]
+      },
+      {
+        "nivel": 4,
+        "nome": "Otimizado",
+        "descricao": "Auto-sync ativo e microlearning completo",
+        "criterios": ["Auto-sync contínuo","9 níveis de microlearning","Analytics de gaps"]
+      },
+      {
+        "nivel": 5,
+        "nome": "Transformador",
+        "descricao": "Digital Twin completo e plataforma auto-evolutiva",
+        "criterios": ["Digital Twin 100%","Aprendizado contínuo com ML","Certificações com validade legal","Portal público de conhecimento"]
+      }
+    ],
+    "nivel_atual_axion": 3,
+    "nivel_alvo_2026": 4,
+    "nivel_alvo_2028": 5
+  },
+
+  "CAP08_GLOSSARIO": {
+    "titulo": "Glossário Fundamental da Plataforma",
+    "termos": [
+      { "termo": "AKP",              "definicao": "AXIONIA KNOWLEDGE PLATFORM — a plataforma completa" },
+      { "termo": "Knowledge Object", "definicao": "Unidade básica de conhecimento com 18+ campos obrigatórios" },
+      { "termo": "Digital Twin",     "definicao": "Réplica cognitiva completa de um sistema de software" },
+      { "termo": "Knowledge Graph",  "definicao": "Banco de dados em grafo (Neo4j) que armazena objetos e relacionamentos" },
+      { "termo": "APSL",             "definicao": "AKP Prompt Specification Language — linguagem para especificar prompts" },
+      { "termo": "AVSL",             "definicao": "AKP Video Specification Language — linguagem para especificar vídeos" },
+      { "termo": "ADSL",             "definicao": "AKP Document Specification Language — linguagem para especificar documentos" },
+      { "termo": "ACP",              "definicao": "AKP Communication Protocol — protocolo de eventos entre agentes" },
+      { "termo": "Template A",       "definicao": "Template de 16 seções para documentos corporativos" },
+      { "termo": "Template B",       "definicao": "Template de 11 seções para roteiros de vídeo" },
+      { "termo": "Template C",       "definicao": "Template de 10 campos para microlearning de 15-40 segundos" },
+      { "termo": "Microlearning",    "definicao": "Cápsula de conhecimento de 15s a 30min" },
+      { "termo": "Knowledge Feed",   "definicao": "Feed contínuo de cards de microlearning e novidades" },
+      { "termo": "Narrativa Corporativa", "definicao": "Padrão de linguagem profissional — nunca 'clique aqui'" },
+      { "termo": "Auto-sync",        "definicao": "Sincronização automática do conhecimento quando o código muda" },
+      { "termo": "Validator Agent",  "definicao": "Agente que aprova/rejeita todo conteúdo antes de publicar" },
+      { "termo": "Dead Letter",      "definicao": "Fila de mensagens/tarefas que falharam após máximo de retries" }
+    ]
+  },
+
+  "CAP09_HISTORICO": {
+    "titulo": "Histórico e Evolução da Especificação",
+    "versoes": [
+      {
+        "versao": "0.1",
+        "data": "2026-05-15",
+        "descricao": "Análise inicial do projeto WhatsApp e primeiras ideias de KB"
+      },
+      {
+        "versao": "0.5",
+        "data": "2026-06-21",
+        "descricao": "Análise mercadológica e estratégica — identificação da oportunidade AKP"
+      },
+      {
+        "versao": "0.8",
+        "data": "2026-07-03",
+        "descricao": "Espinha dorsal dos sistemas — mapeamento completo do ecossistema Axion"
+      },
+      {
+        "versao": "0.9",
+        "data": "2026-07-28",
+        "descricao": "Permissões AxCross e AxHub mapeadas — 150+ permissões documentadas"
+      },
+      {
+        "versao": "1.0-alpha",
+        "data": "2026-07-29",
+        "descricao": "AXIONIA KNOWLEDGE PLATFORM v1.0 — 10 princípios, 12 agentes, 3 templates, 80 docs master"
+      }
+    ]
+  },
+
+  "CAP10_ROADMAP": {
+    "titulo": "Roadmap Estratégico — 2026-2035",
+    "fases": [
+      {
+        "versao": "v1.0",
+        "ano": 2026,
+        "nome": "Fundação",
+        "entregues": [
+          "10 Agentes Cognitivos especializados",
+          "Knowledge Graph (Neo4j)",
+          "Templates A, B, C",
+          "Pipeline de vídeo (Storyboard → Renderer)",
+          "Microlearning 9 níveis",
+          "PresentationCenter 10 abas",
+          "81 documentos master",
+          "20 Volumes especificados"
+        ],
+        "meta": "Digital Twin Cognitivo completo dos 3 produtos"
+      },
+      {
+        "versao": "v2.0",
+        "ano": 2027,
+        "nome": "Escala",
+        "planejado": [
+          "Multi-tenant enterprise",
+          "Portal público de help center",
+          "Auto-sync contínuo (sem confirmação manual)",
+          "Analytics avançado de gaps",
+          "Certificações com validade legal"
+        ]
+      },
+      {
+        "versao": "v3.0",
+        "ano": 2028,
+        "nome": "Expansão",
+        "planejado": [
+          "50+ linguagens de programação suportadas",
+          "GitHub Actions integration (CI/CD de conhecimento)",
+          "API pública para parceiros",
+          "Marketplace de templates e agentes"
+        ]
+      },
+      {
+        "versao": "v4.0",
+        "ano": 2030,
+        "nome": "Inteligência",
+        "planejado": [
+          "Learning Engine com ML real adaptativo",
+          "Digital Twin preditivo",
+          "Especificações automáticas de novas features"
+        ]
+      },
+      {
+        "versao": "v5.0",
+        "ano": 2035,
+        "nome": "Ecossistema",
+        "planejado": [
+          "Plataforma aberta para qualquer empresa de software",
+          "AKP como padrão de mercado para documentação inteligente",
+          "Marketplace global de conhecimento corporativo"
+        ]
+      }
+    ]
+  }
+}

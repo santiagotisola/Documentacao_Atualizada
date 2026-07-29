@@ -1,0 +1,442 @@
+{
+  "$schema": "akp-volumes-master-index-v1",
+  "titulo": "AXIONIA KNOWLEDGE PLATFORM — Master Enterprise Specification",
+  "subtitulo": "Complete Reference Documentation — 20 Volumes",
+  "versao": "1.0 Enterprise",
+  "ano": 2026,
+  "autor": "Axion Tecnologia",
+  "paginas_estimadas": { "minimo": 7000, "maximo": 12000 },
+  "status": "Architecture Definition → In Progress",
+
+  "descricao": "A especificação completa da AXIONIA KNOWLEDGE PLATFORM, organizada em 20 volumes temáticos. Cada volume é independente e auto-suficiente, mas forma parte de um ecossistema coeso de conhecimento corporativo.",
+
+  "estrutura_volumes": [
+    {
+      "volume": "VOL-01",
+      "titulo": "Foundation — Fundação da Plataforma",
+      "subtitulo": "Constitution, Philosophy, Principles & Governance",
+      "paginas_estimadas": 400,
+      "status": "Em desenvolvimento",
+      "capitulos": [
+        "01 — Identidade e Missão",
+        "02 — Filosofia da Plataforma",
+        "03 — Os 10 Princípios Fundamentais",
+        "04 — Governança e Ciclo de Vida",
+        "05 — Constituição dos Agentes",
+        "06 — Domínios da Plataforma",
+        "07 — Modelo de Maturidade",
+        "08 — Glossário Fundamental",
+        "09 — Histórico e Versões",
+        "10 — Roadmap Estratégico"
+      ],
+      "temas_chave": ["Missão", "Princípios", "Governança", "Ciclo de vida", "Maturidade"]
+    },
+    {
+      "volume": "VOL-02",
+      "titulo": "Knowledge Architecture — Arquitetura de Conhecimento",
+      "subtitulo": "Knowledge Graph, Digital Twin & Semantic Model",
+      "paginas_estimadas": 600,
+      "status": "Em desenvolvimento",
+      "capitulos": [
+        "01 — Knowledge Graph (Neo4j)",
+        "02 — Digital Twin Cognitivo",
+        "03 — Modelo de Objeto de Conhecimento",
+        "04 — Ontologia AKP",
+        "05 — 22 Tipos de Relacionamento",
+        "06 — Semântica e Compreensão",
+        "07 — Versionamento de Conhecimento",
+        "08 — Busca Semântica",
+        "09 — Embeddings e Vetores",
+        "10 — Auditoria e Rastreabilidade"
+      ],
+      "temas_chave": ["Knowledge Graph", "Digital Twin", "Ontologia", "Semântica", "Neo4j"]
+    },
+    {
+      "volume": "VOL-03",
+      "titulo": "Agent Specifications — Especificação dos Agentes",
+      "subtitulo": "All 12+ Cognitive Agents — Complete Specification",
+      "paginas_estimadas": 800,
+      "status": "Em desenvolvimento",
+      "capitulos": [
+        "01 — AI Orchestrator",
+        "02 — Project Manager Agent",
+        "03 — Knowledge Extractor Agent",
+        "04 — Relationship Mapper Agent",
+        "05 — Screen Analyzer Agent",
+        "06 — Capture Agent (Playwright)",
+        "07 — Database Agent",
+        "08 — API Agent",
+        "09 — Code Agent",
+        "10 — Documentation Agent",
+        "11 — Storyboard Agent",
+        "12 — Narrator Agent",
+        "13 — Video Renderer Agent",
+        "14 — Microlearning Agent",
+        "15 — Validator Agent"
+      ],
+      "temas_chave": ["Agentes", "Pipelines", "Responsabilidades", "Schemas de entrada/saída"]
+    },
+    {
+      "volume": "VOL-04",
+      "titulo": "Knowledge & Source Engines",
+      "subtitulo": "Source Engine, Knowledge Engine, Relationship Engine",
+      "paginas_estimadas": 500,
+      "status": "Em desenvolvimento",
+      "capitulos": [
+        "01 — Source Engine (30+ fontes)",
+        "02 — Knowledge Extraction Pipeline",
+        "03 — Normalization Engine",
+        "04 — Relationship Engine",
+        "05 — OCR Engine",
+        "06 — Playwright Engine",
+        "07 — Code Analyzer",
+        "08 — Database Engine",
+        "09 — API Engine",
+        "10 — Screen Analyzer"
+      ],
+      "temas_chave": ["30+ fontes", "Extração", "Normalização", "OCR", "Playwright"]
+    },
+    {
+      "volume": "VOL-05",
+      "titulo": "Documentation Engine",
+      "subtitulo": "Technical, Operational and User Documentation Generation",
+      "paginas_estimadas": 600,
+      "status": "Em desenvolvimento",
+      "capitulos": [
+        "01 — Template A (16 seções)",
+        "02 — Manual Técnico",
+        "03 — Manual Operacional",
+        "04 — Manual do Usuário",
+        "05 — FAQ Engine",
+        "06 — Release Notes Engine",
+        "07 — Glossário Automático",
+        "08 — Fluxogramas (Mermaid/PlantUML)",
+        "09 — Checklist Generator",
+        "10 — Narrativa Corporativa — Regras"
+      ],
+      "temas_chave": ["Template A", "Manuais", "FAQ", "Narrativa corporativa"]
+    },
+    {
+      "volume": "VOL-06",
+      "titulo": "Video Engine — Motor de Vídeo",
+      "subtitulo": "Storyboard, Capture, Narration & Rendering Pipeline",
+      "paginas_estimadas": 700,
+      "status": "Em desenvolvimento",
+      "capitulos": [
+        "01 — Arquitetura do Video Engine",
+        "02 — Template B (11 seções de roteiro)",
+        "03 — Storyboard Engine",
+        "04 — Pipeline de Cena (13 campos)",
+        "05 — Capture Agent — Playwright",
+        "06 — Narrator Agent — Regras TTS",
+        "07 — Video Renderer — FFmpeg",
+        "08 — Callouts, Zoom e Cursor",
+        "09 — Legendas e SRT",
+        "10 — Validação e Qualidade"
+      ],
+      "temas_chave": ["Vídeo", "Storyboard", "TTS", "FFmpeg", "Playwright", "SRT"]
+    },
+    {
+      "volume": "VOL-07",
+      "titulo": "Learning Engine — Motor de Aprendizagem",
+      "subtitulo": "Microlearning, Quiz, Training & Certification",
+      "paginas_estimadas": 600,
+      "status": "Em desenvolvimento",
+      "capitulos": [
+        "01 — Template C (10 campos — 15-40s)",
+        "02 — Os 9 Níveis de Aprendizagem",
+        "03 — Tipos de Cápsula (9 tipos)",
+        "04 — Knowledge Feed",
+        "05 — Quiz Engine",
+        "06 — Trilhas de Treinamento por Perfil",
+        "07 — Certificação",
+        "08 — Learning Engine (Aprendizado Contínuo)",
+        "09 — Analytics de Aprendizagem",
+        "10 — Gamificação"
+      ],
+      "temas_chave": ["Microlearning", "Quiz", "Certificação", "Trilhas", "Gamificação"]
+    },
+    {
+      "volume": "VOL-08",
+      "titulo": "Publishing & Analytics Engines",
+      "subtitulo": "Publishing, Distribution & Knowledge Analytics",
+      "paginas_estimadas": 400,
+      "status": "Em desenvolvimento",
+      "capitulos": [
+        "01 — Publishing Engine",
+        "02 — Docusaurus Integration",
+        "03 — Knowledge Portal",
+        "04 — Git Auto-commit",
+        "05 — Analytics Engine",
+        "06 — Knowledge Score",
+        "07 — Gap Analysis",
+        "08 — Relatórios de Cobertura",
+        "09 — Knowledge Feed Distribution",
+        "10 — Notificações e Alertas"
+      ],
+      "temas_chave": ["Publicação", "Docusaurus", "Analytics", "Knowledge Score", "Gaps"]
+    },
+    {
+      "volume": "VOL-09",
+      "titulo": "Protocols & Languages",
+      "subtitulo": "APSL, AVSL, ADSL, ACP — AKP Languages",
+      "paginas_estimadas": 500,
+      "status": "Em desenvolvimento",
+      "capitulos": [
+        "01 — APSL (AKP Prompt Specification Language)",
+        "02 — AVSL (AKP Video Specification Language)",
+        "03 — ADSL (AKP Document Specification Language)",
+        "04 — ACP (AKP Communication Protocol)",
+        "05 — Prompt Compiler",
+        "06 — Context Manager",
+        "07 — Memory Manager",
+        "08 — Prompt Templates Library",
+        "09 — Compilação e Otimização",
+        "10 — Versioning de Prompts"
+      ],
+      "temas_chave": ["APSL", "AVSL", "ADSL", "ACP", "Compilador de Prompts"]
+    },
+    {
+      "volume": "VOL-10",
+      "titulo": "Orchestration & Workflows",
+      "subtitulo": "AI Orchestrator, Event Bus, Workflow Engine",
+      "paginas_estimadas": 500,
+      "status": "Em desenvolvimento",
+      "capitulos": [
+        "01 — AI Orchestrator Architecture",
+        "02 — Event Bus (RabbitMQ)",
+        "03 — Workflow Engine",
+        "04 — Agent Router",
+        "05 — Pipeline Execution Engine",
+        "06 — Retry & Dead Letter",
+        "07 — Correlation & Traceability",
+        "08 — Priority Queues",
+        "09 — Distributed Processing",
+        "10 — Monitoring & Observability"
+      ],
+      "temas_chave": ["Orquestração", "RabbitMQ", "Workflows", "Pipelines", "Rastreabilidade"]
+    },
+    {
+      "volume": "VOL-11",
+      "titulo": "Data Architecture",
+      "subtitulo": "Neo4j, MongoDB, PostgreSQL, Redis, MinIO",
+      "paginas_estimadas": 600,
+      "status": "Em desenvolvimento",
+      "capitulos": [
+        "01 — Knowledge Graph (Neo4j) — Schema Completo",
+        "02 — MongoDB — Collections e Indexes",
+        "03 — PostgreSQL — Schemas Relacionais",
+        "04 — Redis — Cache e Sessões",
+        "05 — MinIO — Armazenamento de Assets",
+        "06 — Estratégia de Cache",
+        "07 — Sharding e Escalabilidade",
+        "08 — Backup e Recovery",
+        "09 — Data Migration",
+        "10 — LGPD e Privacidade de Dados"
+      ],
+      "temas_chave": ["Neo4j", "MongoDB", "PostgreSQL", "Redis", "MinIO", "Cache"]
+    },
+    {
+      "volume": "VOL-12",
+      "titulo": "Infrastructure & DevOps",
+      "subtitulo": "Docker, Kubernetes, CI/CD, Monitoring",
+      "paginas_estimadas": 500,
+      "status": "Em desenvolvimento",
+      "capitulos": [
+        "01 — Docker — Containers e Compose",
+        "02 — Kubernetes — Deployment",
+        "03 — CI/CD Pipeline",
+        "04 — Monorepo Structure",
+        "05 — Environment Management",
+        "06 — Observability Stack",
+        "07 — Logging e Tracing",
+        "08 — Alerting e Dashboards",
+        "09 — Performance Tuning",
+        "10 — Disaster Recovery"
+      ],
+      "temas_chave": ["Docker", "Kubernetes", "CI/CD", "Observability", "DevOps"]
+    },
+    {
+      "volume": "VOL-13",
+      "titulo": "Security & Compliance",
+      "subtitulo": "Security, LGPD, RBAC, Audit",
+      "paginas_estimadas": 400,
+      "status": "Em desenvolvimento",
+      "capitulos": [
+        "01 — Security Architecture",
+        "02 — Authentication & Authorization",
+        "03 — RBAC — Permissões por Papel",
+        "04 — JWT e API Keys",
+        "05 — Rate Limiting",
+        "06 — LGPD Compliance",
+        "07 — Data Encryption",
+        "08 — Security Testing",
+        "09 — Audit Logs",
+        "10 — Incident Response"
+      ],
+      "temas_chave": ["Security", "LGPD", "RBAC", "JWT", "Audit", "Compliance"]
+    },
+    {
+      "volume": "VOL-14",
+      "titulo": "API Reference",
+      "subtitulo": "Complete API Documentation — All Endpoints",
+      "paginas_estimadas": 600,
+      "status": "Em desenvolvimento",
+      "capitulos": [
+        "01 — API Design Principles",
+        "02 — Authentication Endpoints",
+        "03 — Knowledge API",
+        "04 — Video API",
+        "05 — Documentation API",
+        "06 — Learning API",
+        "07 — Analytics API",
+        "08 — Publishing API",
+        "09 — Webhook Catalog",
+        "10 — OpenAPI Spec (Swagger)"
+      ],
+      "temas_chave": ["REST API", "OpenAPI", "Webhooks", "Autenticação", "Endpoints"]
+    },
+    {
+      "volume": "VOL-15",
+      "titulo": "Frontend & UX Standards",
+      "subtitulo": "React, UX Patterns, Style Guide, Accessibility",
+      "paginas_estimadas": 400,
+      "status": "Em desenvolvimento",
+      "capitulos": [
+        "01 — React Architecture",
+        "02 — Component Library",
+        "03 — Design System",
+        "04 — Color Palette & Typography",
+        "05 — Dark Theme Standards",
+        "06 — Accessibility (WCAG 2.1)",
+        "07 — PresentationCenter — 10 Abas",
+        "08 — Microlearning UI Patterns",
+        "09 — Responsive Design",
+        "10 — Performance Frontend"
+      ],
+      "temas_chave": ["React", "UX", "Design System", "Acessibilidade", "Dark Theme"]
+    },
+    {
+      "volume": "VOL-16",
+      "titulo": "Content Standards & Templates",
+      "subtitulo": "Templates A, B, C + Style Guide + Corporate Narrative",
+      "paginas_estimadas": 500,
+      "status": "Em desenvolvimento",
+      "capitulos": [
+        "01 — Template A — Documento (16 seções)",
+        "02 — Template B — Vídeo (11 seções + 13 campos/cena)",
+        "03 — Template C — Microlearning (10 campos)",
+        "04 — Narrativa Corporativa — Guia Completo",
+        "05 — Vocabulário Proibido e Preferido",
+        "06 — Níveis de Linguagem por Público",
+        "07 — Glossário da Plataforma",
+        "08 — Best Practices de Conteúdo",
+        "09 — Checklist de Qualidade",
+        "10 — Exemplos por Módulo"
+      ],
+      "temas_chave": ["Templates", "Narrativa", "Style Guide", "Qualidade", "Exemplos"]
+    },
+    {
+      "volume": "VOL-17",
+      "titulo": "Testing & Quality Assurance",
+      "subtitulo": "Unit, Integration, E2E, Visual Testing",
+      "paginas_estimadas": 400,
+      "status": "Em desenvolvimento",
+      "capitulos": [
+        "01 — Testing Strategy",
+        "02 — Unit Testing (Jest)",
+        "03 — Integration Testing",
+        "04 — E2E Testing (Playwright)",
+        "05 — Visual Regression Testing",
+        "06 — AI Output Quality Testing",
+        "07 — Content Quality Scoring",
+        "08 — Performance Testing",
+        "09 — Security Testing",
+        "10 — QA Checklists"
+      ],
+      "temas_chave": ["Jest", "Playwright", "E2E", "Visual Testing", "QA", "Scoring"]
+    },
+    {
+      "volume": "VOL-18",
+      "titulo": "Enterprise & Multi-tenant",
+      "subtitulo": "Enterprise Architecture, Multi-tenant, Marketplace",
+      "paginas_estimadas": 400,
+      "status": "Em desenvolvimento",
+      "capitulos": [
+        "01 — Enterprise Architecture",
+        "02 — Multi-tenant Design",
+        "03 — Client Portal",
+        "04 — Admin Panel",
+        "05 — Plugin System",
+        "06 — Marketplace",
+        "07 — Extensions Framework",
+        "08 — White Label",
+        "09 — SLA e Enterprise Support",
+        "10 — Billing e Licenciamento"
+      ],
+      "temas_chave": ["Enterprise", "Multi-tenant", "Marketplace", "Plugins", "White Label"]
+    },
+    {
+      "volume": "VOL-19",
+      "titulo": "Integration Catalog",
+      "subtitulo": "All Integrations — Jitbit, PNCP, WhatsApp, AxHub, AxTon, AxCross",
+      "paginas_estimadas": 400,
+      "status": "Em desenvolvimento",
+      "capitulos": [
+        "01 — Integration Architecture",
+        "02 — Jitbit Helpdesk",
+        "03 — WhatsApp (Baileys + Cloud API)",
+        "04 — PNCP (Editais Governamentais)",
+        "05 — AxHub SQL Server",
+        "06 — AxTon MongoDB",
+        "07 — AxCross SQL Server",
+        "08 — VARCO IoT Platform",
+        "09 — OpenAI GPT-4o",
+        "10 — GitHub & Git Automation"
+      ],
+      "temas_chave": ["Jitbit", "WhatsApp", "PNCP", "AxHub", "AxTon", "AxCross", "OpenAI"]
+    },
+    {
+      "volume": "VOL-20",
+      "titulo": "Roadmap & Future Vision",
+      "subtitulo": "2026-2035 — The Future of Corporate Knowledge",
+      "paginas_estimadas": 300,
+      "status": "Em desenvolvimento",
+      "capitulos": [
+        "01 — Visão 2026 (v1.0) — Fundação",
+        "02 — Visão 2027 (v2.0) — Escala",
+        "03 — Visão 2028 (v3.0) — Expansão",
+        "04 — Visão 2030 (v4.0) — Inteligência",
+        "05 — Visão 2035 (v5.0) — Ecossistema",
+        "06 — Emerging Technologies",
+        "07 — AI Evolution Strategy",
+        "08 — Market Expansion",
+        "09 — Open Source Strategy",
+        "10 — Final Manifesto"
+      ],
+      "temas_chave": ["Roadmap", "2035", "Futuro", "IA Evolution", "Manifesto"]
+    }
+  ],
+
+  "totais": {
+    "volumes": 20,
+    "capitulos_total": 200,
+    "paginas_minimas": 7000,
+    "paginas_maximas": 12000,
+    "paginas_por_volume_media": 500
+  },
+
+  "status_atual": {
+    "volumes_com_conteudo_inicial": ["VOL-01", "VOL-02", "VOL-03", "VOL-04", "VOL-05", "VOL-06", "VOL-07"],
+    "cobertura_pct": 35,
+    "arquivos_existentes": 101,
+    "kb_gerados": 288
+  },
+
+  "producao": {
+    "metodo": "axionia presentation generate — pipeline de 12 agentes",
+    "comando": "node orchestrator/axionia.js presentation generate projeto.json",
+    "tempo_estimado_geracao_completa": "8-12 horas com GPT-4o",
+    "custo_estimado_tokens": "~50M tokens input + ~20M tokens output"
+  }
+}
