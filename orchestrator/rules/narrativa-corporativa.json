@@ -1,0 +1,96 @@
+# REGRAS — NARRATIVA CORPORATIVA AKP v1.0
+
+## Princípio Base
+Todo conteúdo AKP utiliza linguagem profissional, clara e objetiva. A linguagem reflete a seriedade da plataforma e o respeito ao usuário.
+
+---
+
+## VOCABULÁRIO PROIBIDO
+
+| ❌ Nunca usar | ✅ Substituto correto |
+|--------------|----------------------|
+| clique aqui | O usuário deverá selecionar... |
+| aperte | O usuário deverá pressionar... |
+| vai aparecer | O sistema apresentará... |
+| é simples | O procedimento consiste em... |
+| simplesmente | — (remover, sem substituto) |
+| apenas faça | O usuário deverá executar... |
+| fácil | — (remover) |
+| você vai ver | O sistema exibirá... |
+| abre | O sistema abrirá... |
+| clica | O usuário deverá clicar em... |
+| coloca | O usuário deverá inserir... |
+| tira foto | O sistema realizará a captura... |
+
+---
+
+## ESTRUTURA DE FRASE PADRÃO
+
+### Para ações do usuário:
+```
+"O usuário deverá [VERBO NO INFINITIVO] [OBJETO]."
+```
+
+### Para respostas do sistema:
+```
+"O sistema [VERBO NO FUTURO DO INDICATIVO] [RESULTADO]."
+```
+
+### Para recomendações:
+```
+"Recomenda-se [AÇÃO] para [BENEFÍCIO/MOTIVO]."
+```
+
+### Para alertas:
+```
+"Atenção: ao [CONDIÇÃO], o sistema [COMPORTAMENTO]. Recomenda-se [AÇÃO PREVENTIVA]."
+```
+
+### Para resultados esperados:
+```
+"Após a execução, o sistema apresentará [ESTADO FINAL]."
+```
+
+---
+
+## ESTRUTURA DO DOCUMENTO (Template A — obrigatório)
+
+Todo documento DEVE conter, nesta ordem:
+
+1. **Objetivo** — Para que serve este documento
+2. **Escopo** — A quem se aplica
+3. **Pré-requisitos** — O que o usuário precisa ter/saber
+4. **Configuração** — Ajustes necessários
+5. **Fluxo** — Visão geral das etapas
+6. **Execução** — Passo a passo detalhado
+7. **Resultado Esperado** — Estado final correto
+8. **Validações** — Como confirmar sucesso
+9. **Erros Possíveis** — Tabela erro/causa/ação
+10. **Troubleshooting** — Problemas complexos
+11. **Boas Práticas** — Recomendações
+12. **FAQ** — Mínimo 3 perguntas
+13. **Relacionamentos** — Objetos AKP relacionados
+14. **Links** — Referências
+15. **Vídeos** — Vídeos relacionados
+16. **Próximos Passos** — O que fazer depois
+
+---
+
+## NÍVEIS DE LINGUAGEM POR PÚBLICO
+
+### Manual Técnico (Desenvolvedores)
+- Pode usar termos técnicos: API, endpoint, DTOs, schema
+- Pode referenciar código
+- Formal, preciso, conciso
+
+### Manual Administrativo (Supervisores/Gestores)
+- Sem código, mas pode mencionar configurações
+- Foco em regras de negócio e conformidade
+- Formal, orientado a processos
+
+### Manual do Usuário (Operadores/Leigos)
+- **Zero jargão técnico**
+- Passo a passo simples
+- Foco no resultado prático
+- Exemplos do dia a dia operacional
+- Screenshots referenciados em toda ação

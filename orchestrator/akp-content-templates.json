@@ -1,0 +1,527 @@
+{
+  "$schema": "akp-content-templates-v1",
+  "versao": "1.0.0",
+  "plataforma": "AXIONIA KNOWLEDGE PLATFORM",
+  "descricao": "Templates obrigatórios para toda produção de conteúdo AKP. Todo conteúdo deve seguir exatamente esta estrutura.",
+
+  "principios": {
+    "P01_KNOWLEDGE_FIRST": {
+      "nome": "Knowledge First",
+      "fluxo_obrigatorio": [
+        "1. Entrada",
+        "2. Análise",
+        "3. Extração",
+        "4. Normalização",
+        "5. Relacionamentos",
+        "6. Knowledge Graph",
+        "7. Planejamento",
+        "8. Validação",
+        "9. Resultado"
+      ],
+      "regra": "Nunca pule etapas. Nunca gere resultado sem construir o modelo interno."
+    },
+    "P02_DIGITAL_TWIN": {
+      "nome": "Digital Twin",
+      "conhece": [
+        "Arquitetura", "Banco", "APIs", "Regras", "Menus", "Campos",
+        "Usuários", "Permissões", "Fluxos", "Documentação", "Vídeos",
+        "FAQ", "Quizzes", "Integrações", "Dependências", "Código",
+        "Eventos", "Logs", "Versões"
+      ],
+      "regra": "Todo novo conhecimento atualiza o Digital Twin automaticamente."
+    },
+    "P03_RELACIONAMENTO_TOTAL": {
+      "nome": "Relacionamento Total",
+      "regra": "Nenhuma informação existe isolada. Todo objeto possui relacionamentos.",
+      "exemplo_cadeia": "Tela → Campos → APIs → Banco → Relatórios → Dashboard"
+    },
+    "P04_SEMANTICA": {
+      "nome": "Semântica",
+      "perguntas_obrigatorias": [
+        "O que é?", "Para que serve?", "Quem utiliza?", "Quando utiliza?",
+        "Como funciona?", "Quais dependências?", "Quais impactos?",
+        "Quais riscos?", "Quais integrações?", "Quais resultados?"
+      ],
+      "regra": "A IA nunca armazena apenas texto. Ela compreende."
+    },
+    "P05_ANALISE_MULTICAMADAS": {
+      "nome": "Análise Multicamadas",
+      "camadas": [
+        "Funcional", "Técnica", "Visual", "Banco de Dados",
+        "APIs", "Segurança", "Integrações", "UX",
+        "Performance", "Conhecimento"
+      ],
+      "regra": "Toda análise ocorre simultaneamente em todas as 10 camadas."
+    },
+    "P06_NARRATIVA_CORPORATIVA": {
+      "nome": "Narrativa Corporativa",
+      "evitar": ["clique aqui", "aperte", "vai aparecer"],
+      "preferir": ["O usuário deverá selecionar...", "O sistema apresentará...", "Recomenda-se..."],
+      "sempre_explicar": ["Objetivo", "Motivação", "Resultado Esperado", "Boas Práticas", "Erros Comuns", "Consequências"],
+      "regra": "Todo conteúdo usa linguagem profissional e explica o porquê."
+    },
+    "P07_MICROLEARNING": {
+      "nome": "Microlearning",
+      "niveis": [
+        { "duracao": "15s",      "tipo": "Cápsula Rápida" },
+        { "duracao": "30s",      "tipo": "Dica" },
+        { "duracao": "45s",      "tipo": "Conceito" },
+        { "duracao": "60s",      "tipo": "Procedimento Básico" },
+        { "duracao": "90s",      "tipo": "Fluxo Simples" },
+        { "duracao": "5min",     "tipo": "Módulo Básico" },
+        { "duracao": "15min",    "tipo": "Módulo Intermediário" },
+        { "duracao": "30min",    "tipo": "Módulo Avançado" },
+        { "duracao": "Completo", "tipo": "Curso Completo" }
+      ],
+      "regra": "Toda documentação gera automaticamente todos estes níveis."
+    },
+    "P08_REUTILIZACAO": {
+      "nome": "Reutilização",
+      "pesquisar_antes": [
+        "Knowledge Graph", "FAQ", "Storyboards", "Vídeos",
+        "Glossário", "Templates", "Exemplos", "Releases"
+      ],
+      "regra": "Se existir conteúdo semelhante: ATUALIZAR. Nunca duplicar."
+    },
+    "P09_APRENDIZADO_CONTINUO": {
+      "nome": "Aprendizado Contínuo",
+      "registrar_apos_tarefa": [
+        "Tempo", "Modelo utilizado", "Prompt", "Tokens",
+        "Resultado", "Qualidade", "Falhas", "Feedback",
+        "Relacionamentos", "Versão"
+      ],
+      "regra": "Toda execução produz aprendizado que alimenta a plataforma."
+    },
+    "P10_MULTIMODALIDADE": {
+      "nome": "Multimodalidade",
+      "origens": [
+        "Texto", "Imagem", "Áudio", "Vídeo", "OCR", "Banco", "Código",
+        "Swagger", "OpenAPI", "JSON", "XML", "CSV", "Excel", "PowerPoint",
+        "PDF", "Playwright", "URL", "GitHub", "Sistema em execução"
+      ],
+      "campos_obrigatorios_todo_objeto": [
+        "owner", "data_criacao", "ultima_atualizacao", "versao",
+        "sistema", "cliente", "projeto", "criticidade", "confiabilidade",
+        "origem", "responsavel_tecnico", "status"
+      ],
+      "status_validos": ["rascunho", "publicado", "arquivado", "obsoleto"],
+      "regra": "Todas as origens produzem exatamente o mesmo modelo interno. Todo conteúdo é auditável e versionado."
+    }
+  },
+
+  "templates": {
+
+    "TEMPLATE_A_DOCUMENTO": {
+      "id": "TPL-A",
+      "nome": "Documento — Manual, Tutorial, Procedimento",
+      "aplica_a": ["Manual Técnico", "Manual Operacional", "Manual do Usuário", "Tutorial", "Guia", "Procedimento", "Checklist"],
+      "linguagem": "Narrativa corporativa (Princípio #6)",
+      "secoes": [
+        {
+          "numero": 1,
+          "chave": "objetivo",
+          "titulo": "Objetivo",
+          "descricao": "O que esta documentação ensina e qual o resultado esperado ao concluir a leitura.",
+          "obrigatorio": true,
+          "perguntas_semanticas": ["O que é?", "Para que serve?"],
+          "exemplo": "Este procedimento orienta o operador a realizar a triagem de infrações no AxHub, garantindo que apenas registros válidos sigam para auditoria."
+        },
+        {
+          "numero": 2,
+          "chave": "escopo",
+          "titulo": "Escopo",
+          "descricao": "A quem se aplica, quais sistemas e versões são contemplados.",
+          "obrigatorio": true,
+          "exemplo": "Aplica-se aos perfis: Agente de Triagem e Auditor. Sistema: AxHub v1.2.3+"
+        },
+        {
+          "numero": 3,
+          "chave": "prerequisitos",
+          "titulo": "Pré-requisitos",
+          "descricao": "O que o usuário precisa ter ou saber antes de executar.",
+          "obrigatorio": true,
+          "formato": "lista numerada",
+          "exemplo": "1. Perfil Triador ativo | 2. Acesso ao módulo Infrações | 3. Conhecimento básico do Dashboard"
+        },
+        {
+          "numero": 4,
+          "chave": "configuracao",
+          "titulo": "Configuração",
+          "descricao": "Parâmetros, permissões e ajustes necessários antes de iniciar.",
+          "obrigatorio": false,
+          "exemplo": "Verificar permissão consultainfracao.index e consultainfracao.descartarinfracao ativas no perfil."
+        },
+        {
+          "numero": 5,
+          "chave": "fluxo",
+          "titulo": "Fluxo",
+          "descricao": "Diagrama ou sequência das etapas em alto nível.",
+          "obrigatorio": true,
+          "formato": "mermaid ou lista com setas",
+          "exemplo": "Equipamento captura → OCR lê placa → Triagem → Auditoria → Exportação"
+        },
+        {
+          "numero": 6,
+          "chave": "execucao",
+          "titulo": "Execução",
+          "descricao": "Passo a passo detalhado da operação.",
+          "obrigatorio": true,
+          "formato": "numerado com screenshots referenciados",
+          "linguagem_padrao": "O usuário deverá acessar... / O sistema apresentará... / Recomenda-se..."
+        },
+        {
+          "numero": 7,
+          "chave": "resultado_esperado",
+          "titulo": "Resultado Esperado",
+          "descricao": "Como o sistema deverá estar ao final da execução bem-sucedida.",
+          "obrigatorio": true,
+          "exemplo": "Infração aprovada constará na fila de auditoria com status 'Aguardando Auditoria'."
+        },
+        {
+          "numero": 8,
+          "chave": "validacoes",
+          "titulo": "Validações",
+          "descricao": "Como confirmar que a operação foi executada corretamente.",
+          "obrigatorio": true,
+          "formato": "checklist"
+        },
+        {
+          "numero": 9,
+          "chave": "erros_possiveis",
+          "titulo": "Erros Possíveis",
+          "descricao": "Erros que podem ocorrer, suas causas e ações imediatas.",
+          "obrigatorio": true,
+          "formato": "tabela: Erro | Causa | Ação"
+        },
+        {
+          "numero": 10,
+          "chave": "troubleshooting",
+          "titulo": "Troubleshooting",
+          "descricao": "Diagnóstico e resolução de problemas mais complexos.",
+          "obrigatorio": false
+        },
+        {
+          "numero": 11,
+          "chave": "boas_praticas",
+          "titulo": "Boas Práticas",
+          "descricao": "Recomendações para executar a operação com maior eficiência e qualidade.",
+          "obrigatorio": true,
+          "formato": "bullets com justificativa"
+        },
+        {
+          "numero": 12,
+          "chave": "faq",
+          "titulo": "FAQ",
+          "descricao": "Perguntas frequentes com respostas diretas.",
+          "obrigatorio": true,
+          "min_perguntas": 3
+        },
+        {
+          "numero": 13,
+          "chave": "relacionamentos",
+          "titulo": "Relacionamentos",
+          "descricao": "Outros objetos AKP relacionados a este documento.",
+          "obrigatorio": true,
+          "formato": "lista: tipo_relacao | objeto_id | descricao"
+        },
+        {
+          "numero": 14,
+          "chave": "links",
+          "titulo": "Links",
+          "descricao": "Referências externas e internas relevantes.",
+          "obrigatorio": false
+        },
+        {
+          "numero": 15,
+          "chave": "videos",
+          "titulo": "Vídeos",
+          "descricao": "Vídeos relacionados a este documento (gerados pelo Template B).",
+          "obrigatorio": false,
+          "formato": "lista: video_id | titulo | duracao | url"
+        },
+        {
+          "numero": 16,
+          "chave": "proximos_passos",
+          "titulo": "Próximos Passos",
+          "descricao": "O que o usuário deverá fazer após concluir este procedimento.",
+          "obrigatorio": true,
+          "formato": "lista numerada com links para documentos relacionados"
+        }
+      ],
+      "system_prompt": "Você é o AKP Document Agent. Gere documentação profissional seguindo EXATAMENTE o Template A (16 seções). Use narrativa corporativa: nunca 'clique aqui', sempre 'O usuário deverá selecionar'. Explique o PORQUÊ de cada passo. Todo conteúdo deve ter relacionamentos com outros objetos AKP. Responda APENAS em JSON válido."
+    },
+
+    "TEMPLATE_B_VIDEO": {
+      "id": "TPL-B",
+      "nome": "Vídeo — Roteiro e Storyboard",
+      "aplica_a": ["Vídeo Tutorial", "Vídeo Demonstração", "Vídeo Treinamento", "Vídeo Onboarding"],
+      "estrutura_cena": {
+        "numero": "number",
+        "timestamp_inicio": "string — ex: 00:00",
+        "timestamp_fim": "string",
+        "duracao_segundos": "number",
+        "titulo": "string — max 60 chars",
+        "narracao": "string — texto completo para voz (narrativa corporativa)",
+        "acao_tela": "string — o que mostrar/executar na tela",
+        "legenda": "string — texto exibido na tela",
+        "tipo_visual": "screencast | slide | animacao | zoom | highlight | transition",
+        "dica_edicao": "string | null"
+      },
+      "secoes_roteiro": [
+        {
+          "numero": 1,
+          "chave": "introducao",
+          "titulo": "Introdução",
+          "duracao_sugerida_s": 15,
+          "narracao_padrao": "Bem-vindo a [TÍTULO]. Neste vídeo, você aprenderá a [OBJETIVO] em [DURAÇÃO ESTIMADA].",
+          "visual": "Tela de abertura com logo Axion + título do vídeo"
+        },
+        {
+          "numero": 2,
+          "chave": "objetivo",
+          "titulo": "Objetivo",
+          "duracao_sugerida_s": 10,
+          "narracao_padrao": "Ao concluir este vídeo, você será capaz de [RESULTADO ESPERADO].",
+          "visual": "Slide ou tela com bullets do objetivo"
+        },
+        {
+          "numero": 3,
+          "chave": "prerequisitos",
+          "titulo": "Pré-requisitos",
+          "duracao_sugerida_s": 15,
+          "narracao_padrao": "Antes de iniciar, certifique-se de possuir [LISTA DE PRÉ-REQUISITOS].",
+          "visual": "Lista animada dos pré-requisitos"
+        },
+        {
+          "numero": 4,
+          "chave": "fluxo",
+          "titulo": "Fluxo",
+          "duracao_sugerida_s": 20,
+          "narracao_padrao": "O processo ocorre em [N] etapas principais: [LISTAR ETAPAS].",
+          "visual": "Diagrama de fluxo animado"
+        },
+        {
+          "numero": 5,
+          "chave": "demonstracao",
+          "titulo": "Demonstração",
+          "duracao_sugerida_s": -1,
+          "nota": "Duração variável — uma cena por passo do fluxo",
+          "narracao_padrao": "O usuário deverá [AÇÃO]. O sistema apresentará [RESULTADO].",
+          "visual": "Screencast do sistema com highlights"
+        },
+        {
+          "numero": 6,
+          "chave": "resumo",
+          "titulo": "Resumo",
+          "duracao_sugerida_s": 20,
+          "narracao_padrao": "Neste vídeo aprendemos a [RESUMO DAS ETAPAS].",
+          "visual": "Slide com checklist do que foi ensinado"
+        },
+        {
+          "numero": 7,
+          "chave": "boas_praticas",
+          "titulo": "Boas Práticas",
+          "duracao_sugerida_s": 20,
+          "narracao_padrao": "Recomenda-se sempre [BOA PRÁTICA]. Evite [ERRO COMUM].",
+          "visual": "Cards com dica e alerta"
+        },
+        {
+          "numero": 8,
+          "chave": "conclusao",
+          "titulo": "Conclusão",
+          "duracao_sugerida_s": 10,
+          "narracao_padrao": "Você aprendeu a [RESULTADO]. Pratique regularmente para consolidar o conhecimento.",
+          "visual": "Tela de conclusão com ícone de check"
+        },
+        {
+          "numero": 9,
+          "chave": "proximos_passos",
+          "titulo": "Próximos Passos",
+          "duracao_sugerida_s": 15,
+          "narracao_padrao": "No próximo vídeo: [PRÓXIMO TÓPICO]. Acesse também [LINK MANUAL].",
+          "visual": "Card do próximo vídeo + link para manual"
+        },
+        {
+          "numero": 10,
+          "chave": "relacionamentos",
+          "titulo": "Relacionamentos",
+          "descricao": "IDs de documentos, FAQs e treinamentos relacionados a este vídeo",
+          "obrigatorio": true,
+          "formato": "metadata apenas — não aparece no vídeo"
+        },
+        {
+          "numero": 11,
+          "chave": "links_uteis",
+          "titulo": "Links Úteis",
+          "duracao_sugerida_s": 10,
+          "narracao_padrao": "Para aprofundar: acesse o manual completo em [URL] e o quiz de treinamento em [URL].",
+          "visual": "QR Code + URL na tela"
+        }
+      ],
+      "system_prompt": "Você é o AKP Storyboard Agent. Crie roteiros de vídeo seguindo EXATAMENTE o Template B (11 seções). Use narrativa corporativa. Cada cena tem: numero, timestamp, titulo, narracao (voz), acao_tela, legenda, tipo_visual. A seção Demonstração tem uma cena por passo. Nunca gere roteiro sem compreender totalmente o módulo (Princípio #1). Responda APENAS em JSON válido."
+    },
+
+    "TEMPLATE_C_MICROLEARNING": {
+      "id": "TPL-C",
+      "nome": "Microlearning — Cápsula 15 a 40 segundos",
+      "aplica_a": ["Cápsula Rápida", "Você Sabia", "Dica Rápida", "Erro Comum", "Novidade", "Atalho", "Boas Práticas"],
+      "duracao_range": "15 a 40 segundos",
+      "regra_conteudo": "Uma única ideia por cápsula. Mensagem clara, direta e memorável.",
+      "campos": [
+        {
+          "numero": 1,
+          "chave": "titulo",
+          "titulo": "Título",
+          "descricao": "Título impactante que resume a cápsula em até 8 palavras.",
+          "obrigatorio": true,
+          "max_chars": 60,
+          "exemplo": "Equipamento offline? Verifique o heartbeat primeiro"
+        },
+        {
+          "numero": 2,
+          "chave": "tempo",
+          "titulo": "Tempo",
+          "descricao": "Duração exata em segundos (15, 20, 25, 30, 35 ou 40).",
+          "obrigatorio": true,
+          "valores_validos": [15, 20, 25, 30, 35, 40],
+          "calculo": "ceil(palavras_narracao / 2.5) = segundos estimados"
+        },
+        {
+          "numero": 3,
+          "chave": "imagem_principal",
+          "titulo": "Imagem Principal",
+          "descricao": "Descrição da imagem ou screenshot principal da cápsula.",
+          "obrigatorio": true,
+          "formato": "string descritivo para o designer/Playwright capturar",
+          "exemplo": "Screenshot do painel de Status de Equipamentos com um equipamento offline destacado em vermelho"
+        },
+        {
+          "numero": 4,
+          "chave": "mensagem_curta",
+          "titulo": "Mensagem Curta",
+          "descricao": "A mensagem principal — max 25 palavras. É a narracao do vídeo.",
+          "obrigatorio": true,
+          "max_palavras": 25,
+          "linguagem": "Narrativa corporativa — clara e direta",
+          "exemplo": "Quando um equipamento aparece offline no Dashboard, o primeiro passo é verificar o horário do último heartbeat antes de acionar o suporte técnico."
+        },
+        {
+          "numero": 5,
+          "chave": "beneficio",
+          "titulo": "Benefício",
+          "descricao": "O que o usuário ganha ao aplicar este conhecimento. Max 10 palavras.",
+          "obrigatorio": true,
+          "formato": "frase curta iniciando com verbo no infinitivo",
+          "exemplo": "Economizar tempo e evitar acionamentos desnecessários do suporte"
+        },
+        {
+          "numero": 6,
+          "chave": "exemplo",
+          "titulo": "Exemplo",
+          "descricao": "Exemplo concreto do contexto real de uso.",
+          "obrigatorio": true,
+          "formato": "situação específica do sistema em questão",
+          "exemplo": "Equipamento IPEMPE-CAM03 offline às 14h — heartbeat parou às 13h52. Causa: queda de energia. Solução: aguardar retorno automático."
+        },
+        {
+          "numero": 7,
+          "chave": "convite_saber_mais",
+          "titulo": "Convite para Saber Mais",
+          "descricao": "Call-to-action que direciona para conteúdo mais completo.",
+          "obrigatorio": true,
+          "max_chars": 80,
+          "exemplo": "Acesse o Manual de Equipamentos para o procedimento completo →"
+        },
+        {
+          "numero": 8,
+          "chave": "relacionamento_manual",
+          "titulo": "Relacionamento com o Manual",
+          "descricao": "ID do documento (Template A) que aprofunda este tema.",
+          "obrigatorio": true,
+          "tipo_relacionamento": "EXPLAINED_BY",
+          "formato": "{ doc_id: string, titulo: string, secao: string }"
+        },
+        {
+          "numero": 9,
+          "chave": "relacionamento_treinamento",
+          "titulo": "Relacionamento com o Treinamento",
+          "descricao": "ID do quiz ou trilha que testa este conhecimento.",
+          "obrigatorio": true,
+          "tipo_relacionamento": "QUIZ_OF",
+          "formato": "{ quiz_id: string, titulo: string, nivel: string }"
+        },
+        {
+          "numero": 10,
+          "chave": "relacionamento_faq",
+          "titulo": "Relacionamento com FAQ",
+          "descricao": "ID da entrada FAQ que responde à pergunta implícita nesta cápsula.",
+          "obrigatorio": true,
+          "tipo_relacionamento": "FAQ_OF",
+          "formato": "{ faq_id: string, pergunta: string }"
+        }
+      ],
+      "system_prompt": "Você é o AKP Microlearning Agent. Crie cápsulas de conhecimento seguindo EXATAMENTE o Template C (10 campos). Uma única ideia por cápsula. Máximo 25 palavras na mensagem. Use narrativa corporativa. Todo campo de relacionamento DEVE ser preenchido — cápsulas isoladas são inválidas (Princípio #3). Responda APENAS em JSON válido."
+    }
+  },
+
+  "schema_objeto_conhecimento": {
+    "versao": "1.0.0",
+    "campos_obrigatorios": {
+      "akp_id":              "string — ex: AKP-AH-TRL-001",
+      "nome":                "string",
+      "descricao":           "string",
+      "tipo":                "enum: Documento | Video | Microlearning | FAQ | Quiz | Tela | API | Modulo | ...",
+      "template_usado":      "TPL-A | TPL-B | TPL-C | null",
+      "categoria":           "string",
+      "tags":                ["array"],
+      "sistema":             "AxHub | AxTon | AxCross | AxionIA",
+      "modulo":              "string",
+      "owner":               "string — responsável pelo conteúdo",
+      "responsavel_tecnico": "string",
+      "cliente":             "string",
+      "projeto":             "string",
+      "versao_conteudo":     "string — ex: 1.0.0",
+      "data_criacao":        "ISO 8601",
+      "ultima_atualizacao":  "ISO 8601",
+      "status":              "rascunho | publicado | arquivado | obsoleto",
+      "criticidade":         "baixa | media | alta | critica",
+      "confiabilidade":      "number 0-100",
+      "origem":              "enum de origens (Princípio #10)",
+      "relacionamentos": [
+        {
+          "tipo":       "enum: DEPENDS_ON | USES | CALLS | VIDEO_OF | FAQ_OF | QUIZ_OF | ...",
+          "objeto_id":  "string — AKP ID do objeto relacionado",
+          "descricao":  "string"
+        }
+      ],
+      "historico": [
+        {
+          "versao":    "string",
+          "data":      "ISO 8601",
+          "autor":     "string",
+          "alteracao": "string"
+        }
+      ],
+      "metricas_geracao": {
+        "modelo":           "string — ex: gpt-4o",
+        "tokens_entrada":   "number",
+        "tokens_saida":     "number",
+        "tempo_ms":         "number",
+        "qualidade_score":  "number 0-100",
+        "prompt_origem":    "string"
+      }
+    }
+  },
+
+  "regras_geracao": [
+    "ANTES de gerar qualquer conteúdo: verificar se existe objeto semelhante no Knowledge Graph (Princípio #8)",
+    "SE existir: atualizar o existente. NUNCA criar duplicata.",
+    "Todo conteúdo DEVE ter pelo menos 3 relacionamentos preenchidos (Princípio #3)",
+    "Todo conteúdo DEVE seguir narrativa corporativa — sem 'clique aqui' (Princípio #6)",
+    "Todo microlearning DEVE ter relacionamentos com manual, treinamento e FAQ (Template C campos 8-10)",
+    "Todo vídeo DEVE ter seção Relacionamentos preenchida nos metadados (Template B seção 10)",
+    "Todo documento DEVE ter FAQ com mínimo 3 perguntas (Template A seção 12)",
+    "Toda execução registra métricas de geração no objeto (Princípio #9)",
+    "Todo objeto tem status inicial 'rascunho'. Só vai para 'publicado' após validação (Princípio #10)"
+  ]
+}
