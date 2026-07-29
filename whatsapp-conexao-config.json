@@ -1,0 +1,126 @@
+{
+  "$id": "axion-whatsapp-conexao",
+  "versao": "1.0.0",
+  "descricao": "Configuração da conexão WhatsApp via Baileys — Dashboard, status, sessões e como funciona",
+
+  "conexao": {
+    "lib": "@whiskeysockets/baileys",
+    "auth_path": "src/whatsapp-auth/",
+    "auth_descricao": "Credenciais persistidas em disco — preservar entre deploys para não precisar escanear QR novamente",
+    "browser_fingerprint": ["AxionIA", "Chrome", "1.0"],
+    "timeouts": {
+      "connectTimeoutMs": 60000,
+      "defaultQueryTimeoutMs": 30000
+    },
+    "status_possiveis": {
+      "desconectado": "Sem conexão ativa",
+      "conectando": "Iniciando socket Baileys",
+      "qr_pendente": "QR gerado — aguardando escaneamento",
+      "conectado": "Socket aberto e autenticado",
+      "erro_reconexao": "Limite de tentativas atingido — requer restart manual"
+    },
+    "reconexao": {
+      "estrategia": "backoff exponencial",
+      "max_tentativas": 10,
+      "delay_base_ms": 5000,
+      "delay_max_ms": 300000,
+      "formula": "min(5000 * 2^(tentativa-1), 300000)",
+      "apos_limite": "estado 'erro_reconexao' — chamar POST /api/whatsapp/reiniciar"
+    }
+  },
+
+  "qr_code": {
+    "exibicao_terminal": true,
+    "exibicao_painel": true,
+    "formato_painel": "base64 DataURL (image/png, 300x300px)",
+    "endpoint_painel": "GET /api/whatsapp/qr → { qr_base64: 'data:image/png;base64,...' }",
+    "instrucao_usuario": "Clique em Conectar WhatsApp e escaneie o QR code no terminal com o número de atendimento"
+  },
+
+  "endpoints": {
+    "iniciar":      "POST /api/whatsapp/iniciar — inicia conexão e gera QR",
+    "status":       "GET  /api/whatsapp/status  — retorna status atual + número conectado",
+    "qr":           "GET  /api/whatsapp/qr      — retorna QR em base64",
+    "reiniciar":    "POST /api/whatsapp/reiniciar",
+    "desconectar":  "POST /api/whatsapp/desconectar",
+    "sessoes":      "GET  /api/whatsapp/sessoes  — lista sessões ativas",
+    "enviar":       "POST /api/whatsapp/send     — Body: { telefone, mensagem }"
+  },
+
+  "dashboard_painel": {
+    "card_status_conexao": {
+      "campos_exibidos": ["status (Conectado / Desconectado)", "número conectado (+55 XX XXXXX-XXXX)"],
+      "indicador_visual": "✅ verde = conectado | ❌ vermelho = desconectado",
+      "mensagem_pronto": "✅ Pronto para receber mensagens e abrir chamados",
+      "acoes": ["Enviar Mensagem (manual)", "Desconectar"]
+    },
+    "card_sessoes_ativas": {
+      "total": "contagem de documentos { ativo: true } no MongoDB",
+      "sub_contadores": {
+        "Menu":            "estado = 'menu'",
+        "Abrindo Chamado": "estado IN ['aguardando_assunto','aguardando_sistema','aguardando_descricao','aguardando_categoria','aguardando_foto','confirmando_ticket']",
+        "Consultando":     "estado IN ['consultando_numero']",
+        "Respondendo":     "estado IN ['respondendo_numero','respondendo_mensagem']"
+      }
+    },
+    "abas": ["Dashboard", "Sessões (N)", "Enviar Mensagem"],
+    "botao_atualizar": "Polling manual — recarrega status e sessões via API"
+  },
+
+  "como_funciona": [
+    {
+      "passo": 1,
+      "icone": "1️⃣",
+      "titulo": "Conectar",
+      "descricao": "Clique em Conectar WhatsApp e escaneie o QR code no terminal com o número de atendimento."
+    },
+    {
+      "passo": 2,
+      "icone": "💬",
+      "titulo": "Cliente envia mensagem",
+      "descricao": "O cliente envia qualquer mensagem para o número. O bot responde automaticamente com o menu."
+    },
+    {
+      "passo": 3,
+      "icone": "🎫",
+      "titulo": "Abertura de chamado",
+      "descricao": "Cliente escolhe opção 1, informa assunto e descrição. A IA tria e cria o ticket no Jitbit."
+    },
+    {
+      "passo": 4,
+      "icone": "🔍",
+      "titulo": "Consulta e resposta",
+      "descricao": "Cliente pode consultar status do chamado ou enviar resposta diretamente pelo WhatsApp."
+    }
+  ],
+
+  "numero_conectado": {
+    "formato": "E.164 internacional — ex: +55 62 91092135",
+    "obtido_via": "sock.user.id.replace(/:.*@/, '@') após evento connection=open",
+    "exibido_no_painel": true
+  },
+
+  "session_model_minimo": {
+    "collection": "whatsapp_sessoes",
+    "campos_conexao": {
+      "telefone":       "String único — ex: 5562991092135",
+      "remoteJid":      "String — JID completo para envio (ex: 5562...@s.whatsapp.net)",
+      "ativo":          "Boolean",
+      "ultimaMensagem": "Date",
+      "estado":         "String — estado atual da conversa"
+    }
+  },
+
+  "variaveis_ambiente_necessarias": {
+    "MONGO_URI": "mongodb://localhost:27017/nome-do-banco",
+    "PORT":      "3100 (porta da API)"
+  },
+
+  "notas_implementacao": [
+    "whatsapp-auth/ deve ser preservado entre restarts — contém as credenciais da sessão Baileys",
+    "QR code expira em ~60s — se não escaneado, um novo QR é gerado automaticamente",
+    "Após conexão bem-sucedida, _reconnectAttempts é zerado",
+    "JIDs @lid (novos dispositivos Android) são tratados via msg.key.participant para obter número real",
+    "Mensagens enviadas pelo próprio número (fromMe=true) são ignoradas pelo handler de recepção"
+  ]
+}

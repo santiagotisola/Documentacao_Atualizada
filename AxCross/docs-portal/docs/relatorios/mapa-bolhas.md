@@ -1,0 +1,55 @@
+---
+sidebar_position: 6
+title: Mapa de Bolhas por Irregularidade
+description: Visualização geográfica da concentração de irregularidades por equipamento no AxCross
+---
+
+# Mapa de Bolhas por Irregularidade
+
+O **Mapa de Bolhas** é uma visualização georreferenciada que mostra a **concentração de irregularidades por ponto de captura**. Cada bolha representa um equipamento, e seu tamanho é proporcional ao volume de irregularidades detectadas naquele local no período selecionado.
+
+![Mapa de Bolhas](../img/Mapas de Bolhas.png)
+
+## Como acessar
+
+No **menu lateral**, clique em **Relatórios** e selecione **Mapa de Bolhas**.
+
+:::info Permissões necessárias
+`irregularitybubblemap.index` — acessar o mapa  
+`irregularitybubblemap.data` — carregar os dados de irregularidades para renderização
+:::
+
+---
+
+## Como interpretar
+
+| Elemento | Descrição |
+|----------|-----------|
+| **Bolha grande / cor intensa** | Alto volume de irregularidades naquele equipamento no período |
+| **Bolha pequena / cor suave** | Baixo volume de irregularidades |
+| **Ausência de bolha** | Nenhuma irregularidade detectada no equipamento |
+
+---
+
+## Filtros disponíveis
+
+| Filtro | Descrição |
+|--------|-----------|
+| **Data Início / Fim** | Define o período de análise |
+| **Tipo de Ocorrência** | Filtra por categoria específica de irregularidade |
+| **Área** | Restringe a visualização a uma área de monitoramento |
+
+---
+
+## Uso operacional
+
+O Mapa de Bolhas é ideal para:
+
+- **Identificar pontos críticos** na malha viária com maior concentração de infrações ou veículos suspeitos
+- **Priorizar a alocação de recursos** — direcionar patrulhamento para os cruzamentos com mais ocorrências
+- **Comparar períodos** — avaliar se ações operacionais reduziram as irregularidades em determinado ponto
+- **Apresentar resultados** em reuniões de gestão com visualização imediata da situação operacional
+
+:::tip Dica
+Combine o Mapa de Bolhas com o [Relatório de Ocorrências](ocorrencias-alertas.md) para detalhar quais irregularidades estão concentradas em cada ponto identificado no mapa.
+:::

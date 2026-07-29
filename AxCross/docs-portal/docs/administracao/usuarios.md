@@ -6,34 +6,100 @@ description: Cadastro e gestão de Usuários no AxCross
 
 # Usuários
 
-Cadastro e gestão dos Usuários que terão acesso ao sistema AxCross.
+Cadastro e gestão dos usuários que terão acesso ao sistema AxCross. Todo usuário deve ter um **Perfil de Acesso** atribuído, que define exatamente quais funcionalidades ele pode acessar.
 
 ## Como acessar
 
-No **menu lateral**, expanda **Administração** e clique em Usuários
+No **menu lateral**, expanda **Configurações** e clique em **Usuários**.
 
 ![Tela de Usuários](../img/Usuários.png)
+
+:::info Permissão necessária
+Para **visualizar**: `user.index`  
+Para **criar**: `user.create`  
+Para **editar**: `user.edit`  
+Para **excluir**: `user.delete`
+:::
+
+---
 
 ## Campos
 
 | Campo | Obrigatório | Descrição |
 |-------|:-----------:|-----------|
-| **Nome** | Sim | Nome completo do Usuário |
-| Login | Sim | Nome de Usuário para acesso ao sistema |
+| **Nome** | Sim | Nome completo do usuário |
+| **Login** | Sim | Nome de usuário para acesso ao sistema (não pode ser alterado após criado) |
 | **E-mail** | Sim | E-mail para recuperação de senha e notificações |
 | **Senha** | Sim | Senha de acesso (mínimo 6 caracteres) |
-| **Perfil de Acesso** | Sim | Perfil que define as permissões do Usuário |
+| **Perfil de Acesso** | Sim | Perfil que define as permissões do usuário — consulte [Perfis de Acesso](perfis-acesso.md) |
 | **Status** | Sim | Ativo ou Inativo |
 
-## Passo a passo — Criar novo Usuário
+---
 
-1. Acesse **Administração → Usuários** no menu lateral
+## Passo a passo — Criar novo usuário
+
+![Novo Usuário](../img/Novo Usuário.png)
+
+1. Acesse **Configurações → Usuários** no menu lateral
 2. Clique em **Novo Usuário**
-3. Preencha **Nome**, Login e **E-mail**
+3. Preencha **Nome**, **Login** e **E-mail**
 4. Defina a **Senha** de acesso
-5. Selecione o **Perfil de Acesso**
+5. Selecione o **Perfil de Acesso** correspondente à função do usuário
 6. Clique em **Salvar**
 
-:::warning Atenção
-Ao inativar um Usuário ele perde imediatamente o acesso ao sistema. A operação pode ser revertida reativando o cadastro.
+:::tip Criando o perfil antes do usuário
+Crie primeiro o [Perfil de Acesso](perfis-acesso.md) com as permissões corretas. Só então cadastre o usuário e vincule ao perfil.
 :::
+
+---
+
+## Passo a passo — Editar usuário
+
+1. Na lista de usuários, localize o usuário e clique no ícone de edição ✏️
+2. Altere os campos desejados (nome, e-mail, perfil ou status)
+3. Para **redefinir a senha**, informe a nova senha no campo correspondente
+4. Clique em **Salvar**
+
+---
+
+## Inativar usuário
+
+Ao inativar um usuário ele perde **imediatamente** o acesso ao sistema. A operação pode ser revertida reativando o cadastro a qualquer momento.
+
+**Quando usar:** colaborador que saiu da equipe, acesso temporário expirado ou suspeita de uso indevido da conta.
+
+:::warning Atenção
+Não exclua usuários que já realizaram operações no sistema. Prefira **inativar** para preservar o histórico de atividades no [Log de Acesso](logs-acesso.md).
+:::
+
+---
+
+## Fluxo completo de criação de acesso
+
+Para garantir que um novo operador tenha o acesso correto desde o primeiro login, siga esta ordem:
+
+```
+1. Definir a função do usuário (operador, analista, técnico...)
+         ↓
+2. Verificar se existe um Perfil de Acesso adequado
+   → Se não existe: criar em Configurações → Perfis de Acesso
+         ↓
+3. Configurar as Permissões do perfil
+   → Configurações → Permissões de Acesso
+         ↓
+4. Criar o Usuário e vincular ao perfil
+   → Configurações → Usuários → Novo Usuário
+         ↓
+5. Informar o login e senha ao usuário
+```
+
+---
+
+## Auditoria de acessos
+
+Todas as entradas e saídas do sistema são registradas automaticamente. Para auditar:
+
+- Acesse **Configurações → Logs de Acesso** (`logaccess.index`)
+- Filtre por usuário e período para verificar atividades
+
+Consulte [Logs de Acesso](logs-acesso.md) para detalhes.

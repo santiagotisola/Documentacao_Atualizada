@@ -1,6 +1,6 @@
 ---
 sidebar_position: 1
-title: "Guia Completo: Processo de Infração
+title: "Guia Completo: Processo de Infração"
 description: Passo a passo completo do fluxo de Infrações no AxHub — da captura à exportação
 ---
 

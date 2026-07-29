@@ -1,0 +1,523 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "axion-whatsapp-bot-config",
+  "meta": {
+    "versao": "1.0.0",
+    "projeto": "Axion Tecnologia — Bot WhatsApp Helpdesk",
+    "gerado_em": "2026-07-27",
+    "descricao": "Configuração completa de inteligência de negócio para o bot WhatsApp integrado ao Jitbit Helpdesk. Contém toda a máquina de estados, menus, fluxos, mensagens e lógica de negócio para replicar ou adaptar o sistema em outros projetos.",
+    "stack": {
+      "whatsapp_lib": "@whiskeysockets/baileys",
+      "backend": "Node.js / Express",
+      "database": "MongoDB (Mongoose)",
+      "helpdesk": "Jitbit",
+      "ia": "OpenAI GPT-4o (classificação + respostas automáticas)",
+      "frontend": "React / Vite"
+    }
+  },
+
+  "infraestrutura": {
+    "variaveis_ambiente": {
+      "obrigatorias": {
+        "PORT": { "padrao": 3100, "descricao": "Porta da API" },
+        "MONGO_URI": { "exemplo": "mongodb://localhost:27017/axion-ia", "descricao": "String de conexão MongoDB" },
+        "OPENAI_API_KEY": { "exemplo": "sk-proj-...", "descricao": "Chave OpenAI para IA classificadora e respostas" },
+        "JITBIT_URL": { "exemplo": "https://desk.empresa.com.br/helpdesk", "descricao": "URL base do Jitbit (incluir /helpdesk)" },
+        "JITBIT_USER": { "exemplo": "admin@empresa.com.br", "descricao": "Usuário administrador Jitbit" },
+        "JITBIT_PASS": { "exemplo": "Senha#123", "descricao": "Senha (use aspas duplas se contiver #)" }
+      },
+      "opcionais": {
+        "CORS_ORIGIN": { "padrao": "http://localhost:3001", "descricao": "Origem CORS permitida" },
+        "API_TOKEN": { "descricao": "Token de autenticação da API (deixe vazio para desativar)" },
+        "LGPD_POLITICA_URL": { "padrao": "http://localhost:3100/public/politica-privacidade.pdf", "descricao": "URL do PDF da Política de Privacidade" },
+        "APROVADOR_SUPERVISOR": { "exemplo": "5511999990001", "descricao": "WhatsApp do supervisor (pedidos < R$ 500)" },
+        "APROVADOR_GERENTE": { "exemplo": "5511999990002", "descricao": "WhatsApp do gerente (pedidos < R$ 5.000)" },
+        "APROVADOR_DIRETORIA": { "exemplo": "5511999990003", "descricao": "WhatsApp da diretoria (pedidos acima de R$ 5.000)" },
+        "APROVADOR_COMPRAS": { "exemplo": "5511999990004", "descricao": "Aprovador padrão quando não há matriz" },
+        "AXHUB_DB_HOST": { "descricao": "SQL Server AxHub — host" },
+        "AXHUB_DB_PORT": { "padrao": 1433 },
+        "AXHUB_DB_NAME": { "padrao": "AxHub" },
+        "AXTON_DB_HOST": { "descricao": "SQL Server AxTon — host" },
+        "AXCROSS_DB_HOST": { "descricao": "SQL Server AxCross — host" }
+      }
+    },
+    "banco_dados": {
+      "collections": {
+        "whatsapp_sessoes": "Estado conversacional de cada usuário",
+        "pedidos_compra": "Pedidos de compra/reposição criados pelo bot",
+        "clientes": "Cadastro de clientes/contratos",
+        "equipamentos": "Cadastro de equipamentos para substituição",
+        "historico_chat": "Histórico de mensagens e interações",
+        "erros_whatsapp": "Log de erros do bot"
+      }
+    },
+    "endpoints_api": {
+      "POST /api/whatsapp/iniciar": "Inicia conexão WhatsApp e exibe QR no terminal",
+      "GET /api/whatsapp/status": "Retorna status da conexão (desconectado|conectando|qr_pendente|conectado)",
+      "GET /api/whatsapp/qr": "Retorna QR code em base64 para exibição no painel",
+      "GET /api/whatsapp/sessoes": "Lista sessões ativas (100 mais recentes)",
+      "GET /api/whatsapp/sessao/:telefone": "Detalhe de uma sessão",
+      "DELETE /api/whatsapp/sessao/:telefone": "Encerra/reseta sessão",
+      "POST /api/whatsapp/send": "Envia mensagem manual. Body: { telefone, mensagem }",
+      "POST /api/whatsapp/send-buttons": "Envia mensagem com botões. Body: { telefone, mensagem, botoes, rodape }",
+      "POST /api/whatsapp/reiniciar": "Reinicia conexão WhatsApp",
+      "POST /api/whatsapp/desconectar": "Desconecta WhatsApp"
+    },
+    "auth_whatsapp": {
+      "metodo": "QR Code via Baileys",
+      "persistencia": "src/whatsapp-auth/ (arquivos locais — preservar entre deploys)",
+      "reconexao": {
+        "max_tentativas": 10,
+        "delay_base_ms": 5000,
+        "estrategia": "backoff exponencial (5s, 10s, 20s... até 5min)",
+        "apos_limite": "estado 'erro_reconexao' — requer POST /whatsapp/reiniciar manual"
+      }
+    }
+  },
+
+  "maquina_estados": {
+    "descricao": "Cada conversa WhatsApp percorre uma série de estados armazenados no MongoDB. O estado persiste entre mensagens.",
+    "estados": {
+      "inicio": "Estado inicial — antes do primeiro contato",
+      "aguardando_lgpd": "Aguardando aceite da Política de Privacidade (LGPD)",
+      "menu": "Menu principal exibido após aceite LGPD",
+      "aguardando_assunto": "Coletando assunto do chamado (etapa 1 abertura)",
+      "aguardando_sistema": "Coletando sistema/módulo afetado",
+      "aguardando_descricao": "Coletando descrição detalhada do problema",
+      "aguardando_categoria": "Selecionando categoria Jitbit",
+      "aguardando_foto": "Aguardando foto opcional de evidência",
+      "confirmando_ticket": "Exibindo resumo para confirmação antes de criar ticket",
+      "ticket_criado": "Ticket criado com sucesso no Jitbit",
+      "consultando_numero": "Aguardando número do chamado para consulta",
+      "respondendo_numero": "Aguardando número do chamado para enviar resposta",
+      "respondendo_mensagem": "Coletando texto da resposta ao chamado",
+      "aguardando_modulo_duvida": "Selecionando módulo para tirar dúvida",
+      "aguardando_duvida": "Coletando pergunta sobre o sistema",
+      "respondendo_duvida": "IA respondendo a dúvida",
+      "compras_titulo": "Fluxo compras — coletando título/resumo (etapa 1/7)",
+      "compras_motivo": "Fluxo compras — coletando motivo/justificativa (etapa 2/7)",
+      "compras_sistema": "Fluxo compras — selecionando sistema relacionado (etapa 3/7)",
+      "compras_cliente": "Fluxo compras — informando cliente/contrato (etapa 4/7)",
+      "compras_tipo": "Fluxo compras — tipo do pedido (compra/substituição/devolução) (etapa 5/7)",
+      "compras_substituicao": "Fluxo compras — equipamento a ser substituído",
+      "compras_devolucao": "Fluxo compras — informando equipamento para devolução",
+      "compras_motivo_nao_devolucao": "Fluxo compras — motivo de não devolver equipamento",
+      "compras_itens": "Fluxo compras — listando itens do pedido (etapa 6/7)",
+      "compras_destino": "Fluxo compras — endereço/destino de entrega",
+      "compras_prioridade": "Fluxo compras — prioridade do pedido",
+      "compras_aprovador": "Fluxo compras — selecionando aprovador manual",
+      "compras_confirmacao": "Fluxo compras — confirmação final antes de criar ticket",
+      "compras_consulta": "Fluxo compras — consultando status de pedido",
+      "compras_motivo_rejeicao": "Fluxo compras — aprovador informando motivo de rejeição",
+      "avaliacao_nota": "Pesquisa de satisfação — aguardando nota (1-5)",
+      "avaliacao_comentario": "Pesquisa de satisfação — aguardando comentário",
+      "atendente": "Transferido para atendimento humano",
+      "encerrado": "Atendimento encerrado — próxima mensagem reinicia ciclo com LGPD"
+    },
+    "transicoes_globais": {
+      "sair|encerrar|terminar|finalizar": "Qualquer estado → encerrado (reseta LGPD também)",
+      "APROVAR|REJEITAR|APROVADO|REJEITADO|REPROVAR": "Qualquer estado (fora fluxo compras) → tentativa de processar aprovação de pedido"
+    }
+  },
+
+  "lgpd": {
+    "obrigatorio": true,
+    "gatilho": "Primeira mensagem de qualquer usuário novo ou sessão encerrada",
+    "mensagem_template": "Olá{nome} 👋\n\nBem-vindo(a) ao Atendimento da *{empresa}*.\n\nAntes de continuar, informamos que este canal realiza coleta e tratamento de dados pessoais em conformidade com a *Lei Geral de Proteção de Dados (LGPD - Lei nº 13.709/2018)*.\n\n📄 Nossa Política de Privacidade está disponível em:\n{LGPD_POLITICA_URL}\n\nA transmissão de informações e documentos por este canal é realizada com o seu expresso consentimento, em conformidade com a LGPD.\n\n*Podemos continuar nossa conversa?*",
+    "botoes": [
+      { "id": "1", "texto": "✅ ACEITAR" },
+      { "id": "2", "texto": "❌ NÃO ACEITAR" }
+    ],
+    "aceito": "Avança para menu",
+    "nao_aceito": "Encerra atendimento com mensagem de despedida",
+    "persistencia": "Campo lgpdAceito no MongoDB (boolean) + lgpdAceitoEm (datetime)"
+  },
+
+  "menu_principal": {
+    "mensagem": "Olá! Sou o assistente da *{empresa}* 🤖\n\nComo posso ajudar?",
+    "tipo_envio": "Interactive List (lista de seleção)",
+    "botao_abrir_lista": "Ver opções",
+    "titulo": "Menu Principal",
+    "rodape": "{empresa}",
+    "secoes": [
+      {
+        "titulo": "Atendimento",
+        "opcoes": [
+          { "id": "1", "titulo": "Abrir novo chamado", "descricao": "Registrar um problema ou solicitação" },
+          { "id": "2", "titulo": "Consultar chamado", "descricao": "Ver status de um chamado existente" },
+          { "id": "3", "titulo": "Responder chamado", "descricao": "Enviar informação adicional" },
+          { "id": "4", "titulo": "Dúvidas do Sistema", "descricao": "Perguntar sobre funcionalidades" }
+        ]
+      },
+      {
+        "titulo": "Compras",
+        "opcoes": [
+          { "id": "5", "titulo": "Solicitar Compras", "descricao": "Abrir pedido de compra/reposição" },
+          { "id": "6", "titulo": "Consultar Pedido", "descricao": "Acompanhar pedido de compras" }
+        ]
+      },
+      {
+        "titulo": "Outros",
+        "opcoes": [
+          { "id": "0", "titulo": "Falar com atendente", "descricao": "Transferir para atendimento humano" }
+        ]
+      }
+    ],
+    "fallback_texto": "Para texto livre (quando Interactive List não suportado): exibir opções numeradas 1-6 e 0"
+  },
+
+  "fluxos": {
+    "1_abrir_chamado": {
+      "nome": "Abertura de Chamado",
+      "estados_percorridos": ["aguardando_assunto", "aguardando_sistema", "aguardando_descricao", "aguardando_categoria", "aguardando_foto", "confirmando_ticket", "ticket_criado"],
+      "etapas": [
+        {
+          "estado": "aguardando_assunto",
+          "pergunta": "📋 *Abrir Novo Chamado*\n\nEtapa 1/4 — Qual o *assunto* do chamado?\n_(Ex: 'Erro ao gerar relatório', 'Câmera offline')_",
+          "validacao": "mínimo 5 caracteres",
+          "campo_dados_parciais": "assunto"
+        },
+        {
+          "estado": "aguardando_sistema",
+          "pergunta": "Sistema/módulo afetado?",
+          "tipo_resposta": "lista_selecao",
+          "opcoes": ["AxHub", "AxTon", "AxCross", "Multi360", "SIGEF", "Speed", "Octopus", "Rede/Infra", "Contrato/Financeiro", "Outros", "Não se aplica"],
+          "campo_dados_parciais": "sistema"
+        },
+        {
+          "estado": "aguardando_descricao",
+          "pergunta": "Etapa 2/4 — Descreva o problema com mais detalhes:\n_(O que acontece? Quando ocorre? Há mensagem de erro?)_",
+          "validacao": "mínimo 10 caracteres",
+          "campo_dados_parciais": "descricao"
+        },
+        {
+          "estado": "aguardando_categoria",
+          "pergunta": "Etapa 3/4 — Selecione a categoria:",
+          "tipo_resposta": "lista_selecao",
+          "fonte": "buscarCategorias() via API Jitbit (cache 5min)",
+          "campo_dados_parciais": "categoriaId"
+        },
+        {
+          "estado": "aguardando_foto",
+          "pergunta": "Etapa 4/4 — Deseja anexar uma *foto ou screenshot* do problema?\n_(Envie a imagem agora ou digite *não* para pular)_",
+          "obrigatorio": false,
+          "aceita_midia": true,
+          "campo_dados_parciais": "foto (buffer temporário em memória — não persiste no MongoDB)"
+        },
+        {
+          "estado": "confirmando_ticket",
+          "pergunta": "✅ *Resumo do Chamado*\n\n📌 *Assunto:* {assunto}\n🖥️ *Sistema:* {sistema}\n📝 *Descrição:* {descricao}\n🗂️ *Categoria:* {categoria}\n\nConfirmar abertura?",
+          "botoes": [
+            { "id": "1", "texto": "✅ Confirmar" },
+            { "id": "2", "texto": "✏️ Editar" },
+            { "id": "3", "texto": "❌ Cancelar" }
+          ]
+        },
+        {
+          "estado": "ticket_criado",
+          "acao": "criarTicketUsuario() via API Jitbit + anexarArquivo() se há foto + atribuirTecnico() automático",
+          "mensagem_sucesso": "✅ *Chamado aberto com sucesso!*\n\n🎫 *Número:* #{ticketId}\n📋 *Assunto:* {assunto}\n\nVocê receberá atualizações aqui pelo WhatsApp.\nPara consultar ou responder, use as opções do menu.",
+          "pos_criacao": "salvar ultimoTicketId na sessão; agendar pesquisa de satisfação quando ticket for fechado"
+        }
+      ],
+      "whatsapp_flows_nativo": {
+        "ativado_quando": "WHATSAPP_PROVIDER=cloud_api",
+        "flow_id": "FLOW_TICKET_001",
+        "telas": ["SCREEN_TICKET_INFO"],
+        "campos_formulario": ["assunto (TextInput)", "descricao (TextArea)", "sistema (Dropdown)"]
+      }
+    },
+
+    "2_consultar_chamado": {
+      "nome": "Consultar Status de Chamado",
+      "estados_percorridos": ["consultando_numero"],
+      "etapas": [
+        {
+          "estado": "consultando_numero",
+          "pergunta": "🔍 *Consultar Chamado*\n\nDigite o *número* do chamado:\n_(Ex: 12345)_\n\nOu *último* para ver seu chamado mais recente.",
+          "campo_dados_parciais": "numeroChamado"
+        }
+      ],
+      "acao": "buscarTicket(id) + buscarComentarios(id) via Jitbit API",
+      "resposta_formato": "🎫 *Chamado #{id}*\n\n📋 *Assunto:* {assunto}\n🔄 *Status:* {status}\n👤 *Técnico:* {tecnico}\n📅 *Aberto em:* {data}\n\n💬 *Última atualização:*\n{ultimoComentario}"
+    },
+
+    "3_responder_chamado": {
+      "nome": "Responder / Adicionar Informação ao Chamado",
+      "estados_percorridos": ["respondendo_numero", "respondendo_mensagem"],
+      "etapas": [
+        {
+          "estado": "respondendo_numero",
+          "pergunta": "💬 *Responder Chamado*\n\nDigite o *número* do chamado:\nOu *último* para responder ao mais recente.",
+          "campo_dados_parciais": "numeroChamado"
+        },
+        {
+          "estado": "respondendo_mensagem",
+          "pergunta": "✏️ Digite sua *resposta/informação adicional* para o chamado #{id}:",
+          "campo_dados_parciais": "resposta",
+          "aceita_midia": true
+        }
+      ],
+      "acao": "responderTicket(id, mensagem) via Jitbit API"
+    },
+
+    "4_duvidas_sistema": {
+      "nome": "Dúvidas sobre o Sistema (IA)",
+      "estados_percorridos": ["aguardando_modulo_duvida", "aguardando_duvida", "respondendo_duvida"],
+      "etapas": [
+        {
+          "estado": "aguardando_modulo_duvida",
+          "pergunta": "🤔 *Dúvidas do Sistema*\n\nSobre qual módulo é sua dúvida?",
+          "tipo_resposta": "lista_selecao",
+          "opcoes": ["AxHub", "AxTon", "AxCross", "Geral"]
+        },
+        {
+          "estado": "aguardando_duvida",
+          "pergunta": "💬 Qual é a sua dúvida sobre *{modulo}*?\n_(Pode digitar livremente)_"
+        },
+        {
+          "estado": "respondendo_duvida",
+          "acao": "gerarRespostaWA(pergunta, modulo) via engine IA (OpenAI + Knowledge Base)",
+          "fallback": "Se confiança < threshold → transferir para atendente"
+        }
+      ]
+    },
+
+    "5_solicitar_compras": {
+      "nome": "Solicitação de Compras",
+      "codigo_prefixo": "PC-{ANO}-{SEQUENCIAL_6_DIGITOS}",
+      "estados_percorridos": ["compras_titulo", "compras_motivo", "compras_sistema", "compras_cliente", "compras_tipo", "compras_itens", "compras_destino", "compras_prioridade", "compras_confirmacao"],
+      "etapas": [
+        {
+          "etapa": "1/7",
+          "estado": "compras_titulo",
+          "pergunta": "🛒 *Solicitação de Compras*\n\n📝 *Etapa 1/7* — Qual o título/resumo da solicitação?\n_(ex: 'Troca OCR pista 02', 'Compra de switches para cliente X')_",
+          "campo": "titulo"
+        },
+        {
+          "etapa": "2/7",
+          "estado": "compras_motivo",
+          "pergunta": "📝 *Etapa 2/7* — Motivo/Justificativa:\n_(Ex: 'Equipamento com defeito', 'Expansão de contrato')_",
+          "campo": "motivo"
+        },
+        {
+          "etapa": "3/7",
+          "estado": "compras_sistema",
+          "pergunta": "📝 *Etapa 3/7* — Sistema relacionado:",
+          "tipo_resposta": "lista_selecao",
+          "opcoes": ["AxHub", "AxOCR", "AxRadar", "AxFlow", "AxCross", "AxTon", "Infraestrutura", "Outro"],
+          "campo": "sistema"
+        },
+        {
+          "etapa": "4/7",
+          "estado": "compras_cliente",
+          "pergunta": "📝 *Etapa 4/7* — Cliente/Contrato:\n_(Ex: 'DETRAN-GO', 'IMEPI-PI', 'Uso interno')_",
+          "campo": "cliente"
+        },
+        {
+          "etapa": "5/7",
+          "estado": "compras_tipo",
+          "pergunta": "📝 *Etapa 5/7* — Tipo do pedido:",
+          "tipo_resposta": "botoes",
+          "opcoes": [
+            { "id": "compra", "texto": "🛒 Nova Compra" },
+            { "id": "substituicao", "texto": "🔄 Substituição" },
+            { "id": "devolucao", "texto": "📦 Devolução" }
+          ],
+          "campo": "tipo",
+          "sub_fluxos": {
+            "substituicao": "→ compras_substituicao (qual equipamento substitui)",
+            "devolucao": "→ compras_devolucao (qual equipamento devolve)"
+          }
+        },
+        {
+          "etapa": "6/7",
+          "estado": "compras_itens",
+          "pergunta": "📝 *Etapa 6/7* — Liste os itens (um por linha):\n_Formato: quantidade - descrição\nEx:\n2 - HD SSD 1TB\n1 - Cabo HDMI 3m_",
+          "campo": "itens"
+        },
+        {
+          "etapa": "7/7",
+          "estado": "compras_destino",
+          "pergunta": "📝 *Etapa 7/7* — Destino/Endereço de entrega:\n_(ou 'escritório' para entrega no escritório)_",
+          "campo": "destino",
+          "proxima_etapa": "compras_prioridade"
+        },
+        {
+          "estado": "compras_prioridade",
+          "pergunta": "⚡ *Prioridade do pedido:*",
+          "tipo_resposta": "lista_selecao",
+          "opcoes": [
+            { "id": "baixa", "titulo": "🟢 Baixa", "descricao": "Sem urgência, compra normal" },
+            { "id": "normal", "titulo": "🟡 Normal", "descricao": "Necessidade padrão" },
+            { "id": "alta", "titulo": "🟠 Alta", "descricao": "Impacto em operação" },
+            { "id": "urgente", "titulo": "🔴 Urgente", "descricao": "Operação parada / cliente crítico" }
+          ],
+          "campo": "prioridade"
+        },
+        {
+          "estado": "compras_confirmacao",
+          "pergunta": "✅ *Resumo do Pedido*\n\n📌 *{codigo}*\n📋 *Título:* {titulo}\n🏢 *Cliente:* {cliente}\n🖥️ *Sistema:* {sistema}\n⚡ *Prioridade:* {prioridade}\n📦 *Tipo:* {tipo}\n\n📝 *Itens:*\n{itens}\n\n🚚 *Destino:* {destino}\n\nConfirmar envio para aprovação?",
+          "botoes": [
+            { "id": "1", "texto": "✅ Confirmar" },
+            { "id": "2", "texto": "❌ Cancelar" }
+          ],
+          "pos_confirmacao": "criarTicket Jitbit + enviar notificação ao aprovador da matriz"
+        }
+      ],
+      "whatsapp_flows_nativo": {
+        "ativado_quando": "WHATSAPP_PROVIDER=cloud_api",
+        "flow_id": "FLOW_COMPRAS_001",
+        "telas": ["SCREEN_COMPRA_DADOS", "SCREEN_COMPRA_ITENS"]
+      }
+    },
+
+    "6_consultar_pedido_compras": {
+      "nome": "Consultar Pedido de Compras",
+      "estados_percorridos": ["compras_consulta"],
+      "etapas": [
+        {
+          "estado": "compras_consulta",
+          "pergunta": "🔍 *Consultar Pedido de Compras*\n\nDigite o código do pedido (ex: PC-2026-000001)\nou *meus* para ver seus últimos pedidos:"
+        }
+      ]
+    },
+
+    "0_atendente_humano": {
+      "nome": "Transferência para Atendente Humano",
+      "estado": "atendente",
+      "mensagem": "👨‍💼 *Transferindo para atendente humano...*\n\nAguarde, um de nossos atendentes entrará em contato em breve.\n\nHorário de atendimento: {HORARIO_ATENDIMENTO}",
+      "nota": "Implementar notificação interna (Telegram, email, painel) para alertar equipe sobre transferência"
+    }
+  },
+
+  "fluxo_aprovacao_compras": {
+    "descricao": "Quando um pedido de compras é confirmado, o bot notifica o aprovador adequado via WhatsApp",
+    "matriz_aprovacao": [
+      { "limite_valor_ate": 500, "papel": "supervisor", "env_var": "APROVADOR_SUPERVISOR" },
+      { "limite_valor_ate": 5000, "papel": "gerente", "env_var": "APROVADOR_GERENTE" },
+      { "limite_valor_acima": 5000, "papel": "diretoria", "env_var": "APROVADOR_DIRETORIA" }
+    ],
+    "fallback": "APROVADOR_COMPRAS (aprovador padrão)",
+    "mensagem_para_aprovador": "🛒 *Novo Pedido de Compras*\n\n📋 *{codigo}* — {titulo}\n👤 *Solicitante:* {nome}\n🏢 *Cliente:* {cliente}\n⚡ *Prioridade:* {prioridade}\n\nDigite *APROVAR {codigo}* ou *REJEITAR {codigo}* para decidir.",
+    "keywords_aprovacao": {
+      "fortes": ["APROVAR", "REJEITAR", "APROVADO", "REJEITADO", "REPROVAR"],
+      "fracas": ["SIM", "NÃO", "NAO", "1", "2"],
+      "nota": "Keywords fortes funcionam em qualquer estado. Keywords fracas requerem vinculação ao pedido (campo _pedidoAprovacao na sessão)"
+    },
+    "apos_aprovacao": "Notifica solicitante + atualiza status do ticket Jitbit + persiste no MongoDB",
+    "apos_rejeicao": "Coleta motivo_rejeicao → notifica solicitante com motivo → fecha ticket"
+  },
+
+  "pesquisa_satisfacao": {
+    "gatilho": "Ticket Jitbit fechado + pesquisaEnviada=false na sessão",
+    "mecanismo": "Polling periódico de tickets fechados (scheduler/cron)",
+    "etapas": [
+      {
+        "estado": "avaliacao_nota",
+        "pergunta": "⭐ *Como foi o seu atendimento?*\n\nAtribuia uma nota de 1 a 5:\n1 = Péssimo | 5 = Excelente",
+        "validacao": "número entre 1 e 5"
+      },
+      {
+        "estado": "avaliacao_comentario",
+        "pergunta": "💬 Deixe um comentário (opcional):\n_(ou *pular* para finalizar)_"
+      }
+    ],
+    "pos_avaliacao": "salvar nota + comentário no MongoDB; marcar pesquisaEnviada=true; enviar agradecimento"
+  },
+
+  "integracao_jitbit": {
+    "funcoes_utilizadas": {
+      "criarTicketUsuario": "Cria ticket em nome do usuário WhatsApp (ou cria usuário automaticamente se não existe)",
+      "criarTicket": "Cria ticket diretamente (pedidos de compra)",
+      "buscarTicket": "Retorna dados do ticket por ID",
+      "buscarComentarios": "Retorna comentários/histórico do ticket",
+      "buscarCategorias": "Lista categorias disponíveis (cache 5min)",
+      "anexarArquivo": "Anexa imagem/foto ao ticket",
+      "atribuirTecnico": "Atribuição automática de técnico",
+      "listarUsuarios": "Lista usuários/técnicos (cache 5min)",
+      "responderTicket": "Adiciona comentário ao ticket"
+    },
+    "identificacao_usuario": "Número WhatsApp (ex: 5511999999999) mapeado para usuário Jitbit via email ou cadastro automático"
+  },
+
+  "integracao_ia": {
+    "engine": "OpenAI GPT-4o",
+    "funcoes": {
+      "gerarResposta": "Resposta geral para chat IA (Knowledge Base)",
+      "gerarRespostaWA": "Resposta otimizada para WhatsApp (mais curta, sem markdown pesado)",
+      "classificarMensagem": "Classifica intenção da mensagem para roteamento inteligente"
+    },
+    "uso_no_bot": [
+      "Opção 4 (Dúvidas do Sistema) — resposta automática com Knowledge Base",
+      "Classificação automática de mensagens livres para roteamento",
+      "Triagem de categoria do chamado"
+    ],
+    "fallback": "Se confiança < threshold → estado 'atendente'"
+  },
+
+  "envio_mensagens": {
+    "tipos_suportados": {
+      "texto_simples": "enviarMensagem(jid, texto)",
+      "lista_selecao_interativa": "enviarListaSelecao(jid, corpo, botaoTexto, secoes, opts) — preferencial em mobile",
+      "botoes_acao": "enviarMensagemComBotoes(jid, texto, botoes, rodape) — máx 3 botões",
+      "confirmacao": "enviarConfirmacao(jid, texto, btnConfirmar, btnCancelar)",
+      "imagem": "enviarImagem(jid, buffer, mimeType, legenda)",
+      "whatsapp_flows": "Formulários nativos multi-step (requer Cloud API)"
+    },
+    "fallback_automatico": "Se Interactive List falhar → enviar texto com opções numeradas",
+    "limitacoes_baileys": "Máx 3 botões por mensagem; listas suportam até 10 itens por seção"
+  },
+
+  "session_model": {
+    "collection": "whatsapp_sessoes",
+    "campos": {
+      "telefone": "String único — ex: 5511999999999",
+      "nome": "Nome do contato WhatsApp",
+      "estado": "Estado atual da máquina de estados (ver maquina_estados.estados)",
+      "dadosParciais": "Mixed — dados temporários do fluxo em andamento (assunto, descricao, etc.)",
+      "lgpdAceito": "Boolean — se aceitou política de privacidade",
+      "lgpdAceitoEm": "Date — quando aceitou",
+      "ultimoTicketId": "Number — ID do último ticket Jitbit criado",
+      "remoteJid": "String — JID completo WhatsApp para resposta (ex: 5511...@s.whatsapp.net)",
+      "pesquisaEnviada": "Boolean — se pesquisa de satisfação já foi enviada após fechamento do ticket",
+      "ultimaMensagem": "Date — timestamp da última mensagem",
+      "ativo": "Boolean — se sessão está ativa"
+    },
+    "indices_recomendados": ["telefone (unique)", "ativo", "ultimaMensagem"]
+  },
+
+  "adaptacao_outros_projetos": {
+    "passos_minimos": [
+      "1. Copiar axion-ia-panel/api/src/whatsapp*.js e services/whatsapp*.js",
+      "2. Copiar axion-ia-panel/api/src/models/whatsapp-sessao.model.js",
+      "3. Configurar .env com MONGO_URI, JITBIT_URL/USER/PASS, OPENAI_API_KEY",
+      "4. Substituir MENU_SECOES e MENU_OPCOES no whatsapp-flow.js com as opções do projeto",
+      "5. Adaptar MENSAGEM_LGPD com nome da empresa e URL da política",
+      "6. Adicionar rotas /api/whatsapp/* no servidor Express",
+      "7. Autenticar via QR code (primeira execução) e preservar whatsapp-auth/"
+    ],
+    "customizacoes_comuns": {
+      "empresa": "Substituir 'Axion Tecnologia' em todas as mensagens",
+      "sistemas": "Adaptar lista SISTEMAS_COMPRAS e opções de sistema no fluxo de chamados",
+      "categorias_jitbit": "Automático via buscarCategorias() — busca da instância Jitbit configurada",
+      "matriz_aprovacao": "Configurar env vars APROVADOR_SUPERVISOR / APROVADOR_GERENTE / APROVADOR_DIRETORIA",
+      "modulos_ia": "Adaptar Knowledge Base (engine/kb.json) para os produtos do novo projeto",
+      "horario_atendimento": "Adicionar variável HORARIO_ATENDIMENTO ao .env e mensagem de transferência",
+      "remover_compras": "Se não precisar do fluxo de compras, remover opções 5 e 6 do MENU_SECOES e estados compras_*",
+      "whatsapp_cloud_api": "Para usar Flows nativos, configurar WHATSAPP_PROVIDER=cloud_api e registrar flows no Meta Business Manager"
+    }
+  },
+
+  "reconexao_e_resiliencia": {
+    "estrategia_reconexao": "Backoff exponencial: 5s → 10s → 20s → 40s → ... → 5min (máx 10 tentativas)",
+    "cache": {
+      "categorias_jitbit": "5 minutos em memória",
+      "usuarios_jitbit": "5 minutos em memória"
+    },
+    "fotos_midia": "Buffer temporário em Map() em memória (não persistido no MongoDB — perdido em restart)",
+    "credentials_auth": "Persistidos em disco (whatsapp-auth/) — sobrevivem a restarts da API",
+    "poll_tracking": "Map em memória para rastrear enquetes (perdido em restart)",
+    "lid_handling": "JIDs do tipo @lid (novos dispositivos) são convertidos para @s.whatsapp.net via participant field"
+  }
+}

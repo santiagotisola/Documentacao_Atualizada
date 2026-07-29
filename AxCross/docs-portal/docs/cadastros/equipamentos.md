@@ -1,33 +1,45 @@
 ---
 sidebar_position: 2
 title: Equipamentos
-description: Cadastro de Equipamentos no AxCross
+description: Cadastro, gestão de faixas, grupos e áreas de Equipamentos no AxCross
 ---
 
 # Equipamentos
 
-Cadastro e gestão dos Equipamentos de fiscalização instalados nos cruzamentos monitorados.
+Cadastro e gestão dos equipamentos de fiscalização instalados nos cruzamentos monitorados. Cada equipamento pode ter múltiplas **faixas** de captura, ser organizado em **grupos** e vinculado a **áreas** de monitoramento.
 
 ## Como acessar
 
-No **menu lateral**, expanda **Cadastros** e clique em Equipamentos
+No **menu lateral**, expanda **Cadastros** e clique em **Equipamentos**.
 
 ![Lista de Equipamentos](../img/Equipamentos.png)
+
+:::info Permissões necessárias
+Para **visualizar**: `equipment.index`  
+Para **criar**: `equipment.create`  
+Para **editar**: `equipment.edit`  
+Para **excluir**: `equipment.delete`  
+Para **gerenciar faixas**: `equipment.lane` (criar) e `equipment.deletelane` (excluir)
+:::
+
+---
 
 ## Campos
 
 | Campo | Obrigatório | Descrição |
 |-------|:-----------:|-----------|
-| **Nome** | Sim | Nome identificador do Equipamento |
+| **Nome** | Sim | Nome identificador do equipamento |
 | **Tipo** | Sim | Câmera, Detector, Sensor, Radar |
-| **Modelo** | Sim | Modelo do Equipamento |
-| **Fabricante** | Sim | Fabricante do Equipamento |
-| **Número de Série** | Sim | Número de série do Equipamento |
+| **Modelo** | Sim | Modelo do equipamento |
+| **Fabricante** | Sim | Fabricante do equipamento |
+| **Número de Série** | Sim | Número de série para controle patrimonial |
 | **Local** | Sim | Cruzamento onde está instalado |
-| **IP** | Não | Endereço IP para comunicação |
-| **Status** | Sim | Online, Offline, Manutenção |
+| **IP** | Não | Endereço IP para comunicação e diagnóstico |
+| **Status** | Sim | Online, Offline ou Manutenção |
 
-## Passo a passo — Cadastrar novo Equipamento
+---
+
+## Passo a passo — Cadastrar novo equipamento
 
 ![Novo Equipamento](../img/Equipamentos.- novo.png)
 
@@ -36,18 +48,48 @@ No **menu lateral**, expanda **Cadastros** e clique em Equipamentos
 3. Preencha **Nome**, **Tipo**, **Modelo** e **Fabricante**
 4. Informe o **Número de Série**
 5. Selecione o **Local** (cruzamento) de instalação
-6. Opcionalmente, informe o **IP** do Equipamento
+6. Opcionalmente, informe o **IP** do equipamento
 7. Clique em **Salvar**
+8. Após salvar, adicione as **Faixas** de captura (ver seção abaixo)
 
 ![Editar Equipamento](../img/Equipamento - Editar.png)
 
 ![Botões de Ação - Equipamentos](../img/botoes Equipamentos.png)
 
 :::warning Atenção
-Equipamentos vinculados a operações ativas não podem ser desativados.
+Equipamentos vinculados a operações ativas não podem ser desativados sem encerrar a operação.
 :::
 
+---
+
+## Faixas de Captura
+
+Cada equipamento pode monitorar múltiplas faixas de pista simultaneamente. As faixas são utilizadas como filtro no Monitoramento Online, Relatórios e Rastreamento de Placas.
+
+### Campos da faixa
+
+| Campo | Obrigatório | Descrição |
+|-------|:-----------:|-----------|
+| **Número da Faixa** | Sim | Identificação numérica (ex.: Faixa 1, Faixa 2) |
+| **Descrição** | Não | Sentido ou denominação da faixa (ex.: Centro/Bairro) |
+| **Status** | Sim | Ativa ou Inativa |
+
+### Como adicionar uma faixa
+
+1. Na lista de equipamentos, clique no equipamento desejado
+2. Na seção **Faixas**, clique em **+ Nova Faixa**
+3. Informe o **Número** e opcionalmente a **Descrição**
+4. Clique em **Salvar**
+
+:::caution
+Apenas uma faixa pode estar ativa por vez em cada equipamento durante uma operação. Verifique os status antes de iniciar o monitoramento.
+:::
+
+---
+
 ## Importação em lote
+
+Para implantações com múltiplos equipamentos, utilize a importação em massa via arquivo.
 
 ![Importação de Equipamentos](../img/Importação de Equipamentos.png)
 
@@ -55,14 +97,18 @@ Equipamentos vinculados a operações ativas não podem ser desativados.
 
 1. Acesse **Cadastros → Equipamentos** no menu lateral
 2. Clique em **Importar**
-3. Selecione o arquivo CSV com os dados dos Equipamentos
+3. Selecione o arquivo CSV com os dados dos equipamentos
 4. Confirme a importação
+
+:::info Permissão necessária
+`equipmentimport.index` — acesso ao processo de importação de equipamentos.
+:::
 
 ---
 
 ## Grupos de Equipamentos
 
-Agrupamento lógico de Equipamentos para facilitar a gestão e o monitoramento de conjuntos relacionados (por exemplo, Equipamentos de uma mesma região ou tipo de fiscalização).
+Agrupamento lógico de equipamentos para facilitar a gestão e o monitoramento de conjuntos relacionados (por exemplo, equipamentos de uma mesma região ou tipo de fiscalização).
 
 ![Lista de Grupos de Equipamentos](../img/Grupo de Equipamentos.png)
 
@@ -72,12 +118,55 @@ Agrupamento lógico de Equipamentos para facilitar a gestão e o monitoramento d
 |---|:---:|---|
 | **Nome** | Sim | Nome identificador do grupo |
 | **Descrição** | Não | Descrição do propósito do grupo |
-| **Equipamentos** | Sim | Lista de Equipamentos vinculados ao grupo |
+| **Equipamentos** | Sim | Lista de equipamentos vinculados ao grupo |
 | **Status** | Sim | Ativo ou Inativo |
 
 ### Criar novo grupo
 
 ![Novo Grupo de Equipamentos](../img/Grupo de Equipamentos - novo.png)
+
+1. Na tela de **Grupos de Equipamentos**, clique em **Novo Grupo**
+2. Informe o **Nome** e opcionalmente a **Descrição**
+3. Adicione os **Equipamentos** ao grupo
+4. Clique em **Salvar**
+
+:::info Permissões necessárias
+Para **visualizar**: `equipmentgroup.index`  
+Para **criar**: `equipmentgroup.create`  
+Para **editar**: `equipmentgroup.edit`  
+Para **excluir grupo**: `equipmentgroup.delete`  
+Para **remover equipamento do grupo**: `equipmentgroup.deleteequipmentfromequipmentgroup`
+:::
+
+---
+
+## Áreas de Monitoramento
+
+As **Áreas** agrupam equipamentos por localização geográfica ou corredor viário, permitindo monitoramento segmentado por região.
+
+![Lista de Áreas](<../img/Áreas.png>)
+
+### Diferença entre Grupo e Área
+
+| Conceito | Finalidade |
+|----------|------------|
+| **Grupo de Equipamentos** | Agrupamento lógico para filtros e relatórios |
+| **Área** | Agrupamento geográfico para monitoramento de manchas e comboios |
+
+### Criar nova área
+
+1. Acesse **Cadastros → Áreas** no menu lateral
+2. Clique em **Nova Área**
+3. Informe o **Nome da Área**
+4. Adicione os equipamentos manualmente ou use **Adicionar Automaticamente**
+5. Defina a **Sequência** de exibição dos equipamentos
+6. Clique em **Salvar**
+
+:::info Permissões necessárias
+`area.index` — visualizar | `area.create` — criar | `area.edit` — editar  
+`area.delete` — excluir | `area.addequipmentstoareaautomatically` — adicionar automático  
+`area.clearareaequipments` — limpar todos os equipamentos | `area.reordersequence` — reordenar
+:::
 
 1. Acesse **Cadastros → Grupos de Equipamentos** no menu lateral
 2. Clique em **Novo Grupo**
