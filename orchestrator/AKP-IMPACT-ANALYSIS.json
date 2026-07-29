@@ -1,0 +1,212 @@
+{
+  "$schema": "akp-impact-analysis-v1",
+  "titulo": "AXIONIA KNOWLEDGE PLATFORM — Análise de Impacto",
+  "data": "2026-07-29",
+  "versao_atual": "Presentation Studio Enterprise v5",
+  "versao_alvo": "AKP — AxionIA Knowledge Platform v1.0",
+
+  "resumo_executivo": {
+    "status": "COMPATÍVEL COM EVOLUÇÃO",
+    "conclusao": "O sistema atual (Presentation Studio Enterprise) é o embrião correto da AKP. Nenhuma remoção é necessária. Todo o trabalho existente se encaixa como um subconjunto da plataforma AKP. A evolução é aditiva.",
+    "cobertura_atual_pct": 42,
+    "gap_pct": 58,
+    "esforco_estimado_semanas": 12,
+    "risco": "BAIXO — arquitetura já alinhada",
+    "principio": "UNIFICAR > SUBSTITUIR. ADICIONAR > REMOVER."
+  },
+
+  "mapeamento_existente_vs_akp": {
+
+    "JA_IMPLEMENTADO": [
+      {
+        "recurso_existente": "Pipeline 10 Agentes (Source → Publisher)",
+        "equivalente_akp": "Ciclo de Engenharia de Conhecimento",
+        "acao": "MANTER + ENRIQUECER",
+        "nota": "Renomear Source→Extractor, Learning→Understander para alinhar ao vocabulário AKP"
+      },
+      {
+        "recurso_existente": "Knowledge Base (KB) com embeddings",
+        "equivalente_akp": "Objetos de Conhecimento parciais",
+        "acao": "ENRIQUECER — adicionar campos obrigatórios AKP (ID, tipo, relacionamentos, histórico)",
+        "nota": "Schema atual tem titulo/pergunta/resposta. AKP exige 18+ campos por objeto"
+      },
+      {
+        "recurso_existente": "Aba Dependências (árvore + grafo Mermaid)",
+        "equivalente_akp": "Mapa de Relacionamentos (DEPENDS_ON, USES, CALLS)",
+        "acao": "ENRIQUECER — adicionar todos os 20 tipos de relacionamento AKP",
+        "nota": "Atual só tem árvore ASCII e Mermaid. AKP exige grafo navegável tipado"
+      },
+      {
+        "recurso_existente": "Vídeos com cenas e narração TTS",
+        "equivalente_akp": "Geração de Vídeos (Capítulos, Cenas, Narrativas)",
+        "acao": "ENRIQUECER — adicionar Microlearning (15s/30s/45s/60s/90s)",
+        "nota": "Atual gera apenas vídeos longos (3-8min). AKP exige também microconteúdos"
+      },
+      {
+        "recurso_existente": "Quiz com questões e certificação básica",
+        "equivalente_akp": "Treinamento (Quiz, Certificação, Objetivos, Resultados)",
+        "acao": "ENRIQUECER — adicionar trilhas, certificados e resultados esperados",
+        "nota": "Atual tem questões simples. AKP exige trilhas por perfil e certificação"
+      },
+      {
+        "recurso_existente": "Manual com capítulos e seções",
+        "equivalente_akp": "Manual Técnico + Operacional + Usuário",
+        "acao": "ENRIQUECER — dividir em 3 tipos de manual + Glossário + Troubleshooting",
+        "nota": "Atual gera um manual único. AKP exige 3 perspectivas distintas"
+      },
+      {
+        "recurso_existente": "Timeline de implementação",
+        "equivalente_akp": "Release Notes + Changelog + Roadmap",
+        "acao": "ENRIQUECER — adicionar versionamento por release",
+        "nota": "Atual é só fases de implantação. AKP rastreia evolução histórica"
+      },
+      {
+        "recurso_existente": "Modal de Update Detection (Dashboard.jsx → SIM)",
+        "equivalente_akp": "Auto-sync do Digital Twin",
+        "acao": "ENRIQUECER — tornar automático via watcher de arquivos",
+        "nota": "Atual é manual (usuário clica). AKP exige sincronização automática contínua"
+      },
+      {
+        "recurso_existente": "Chat com IA sobre o sistema",
+        "equivalente_akp": "Interface de Engenharia de Conhecimento",
+        "acao": "REPOSICIONAR — não é chatbot, é interface de consulta ao Knowledge Graph",
+        "nota": "Comportamento deve mudar: de 'responder perguntas' para 'revelar conhecimento estruturado'"
+      }
+    ],
+
+    "GAPS_A_IMPLEMENTAR": [
+      {
+        "recurso_akp": "Microlearning (15s/30s/45s/60s/90s)",
+        "descricao": "Cápsulas curtas de conhecimento: Você Sabia, Dica Rápida, Erro Comum, Novidade, Atalho",
+        "prioridade": "P1",
+        "esforco_semanas": 2,
+        "aba_sugerida": "Nova aba 'Micro' no PresentationCenter",
+        "usuario_leigo": "Botão 'Gerar Cápsulas' → seleciona duração → gera automaticamente"
+      },
+      {
+        "recurso_akp": "Schema de Objeto de Conhecimento (Knowledge Object)",
+        "descricao": "Cada item da KB passa a ter: ID único, tipo (38 tipos), relacionamentos tipados (20 tipos), histórico de versões, assets vinculados",
+        "prioridade": "P1",
+        "esforco_semanas": 1,
+        "acao": "Atualizar modelo MongoDB da KB",
+        "usuario_leigo": "Transparente para o usuário — só vê cards mais ricos na aba Knowledge"
+      },
+      {
+        "recurso_akp": "Grafo de Relacionamentos Navegável",
+        "descricao": "Visualização interativa dos 20 tipos de relacionamento entre objetos (DEPENDS_ON, VIDEO_OF, FAQ_OF, etc.)",
+        "prioridade": "P1",
+        "esforco_semanas": 2,
+        "aba_sugerida": "Enriquecer aba Dependências atual",
+        "usuario_leigo": "Clicar em um módulo → ver tudo que ele afeta e tudo que o afeta"
+      },
+      {
+        "recurso_akp": "Portal de Ajuda / Help Center",
+        "descricao": "Portal público com FAQ, tutoriais, glossário e busca inteligente",
+        "prioridade": "P2",
+        "esforco_semanas": 3,
+        "acao": "Nova rota /help no axion-ia-panel",
+        "usuario_leigo": "Usuário digita dúvida → sistema encontra resposta no Knowledge Graph"
+      },
+      {
+        "recurso_akp": "Knowledge Feed",
+        "descricao": "Feed contínuo de microaprendizagens, novidades e atualizações do sistema — como um 'LinkedIn do conhecimento interno'",
+        "prioridade": "P2",
+        "esforco_semanas": 2,
+        "acao": "Nova aba no PresentationCenter ou widget no IntelligenceHub",
+        "usuario_leigo": "Scroll de cards com dicas, novidades e alertas sobre o sistema"
+      },
+      {
+        "recurso_akp": "Analytics de Conhecimento",
+        "descricao": "Métricas de uso: quais documentos são mais consultados, quais gaps de conhecimento existem, quais módulos têm mais dúvidas",
+        "prioridade": "P2",
+        "esforco_semanas": 2,
+        "acao": "Adicionar ao IntelligenceHub existente",
+        "usuario_leigo": "Gráficos simples: 'Top 5 dúvidas sobre AxHub esta semana'"
+      },
+      {
+        "recurso_akp": "Digital Twin Cognitivo",
+        "descricao": "Réplica estruturada completa do software — cada tela, botão, campo, API e regra mapeados como objetos relacionados",
+        "prioridade": "P3",
+        "esforco_semanas": 8,
+        "acao": "Evoluir o pipeline atual para gerar e manter o twin completo",
+        "usuario_leigo": "Invisível para o usuário — é a 'inteligência de fundo' que alimenta tudo"
+      },
+      {
+        "recurso_akp": "Auto-sync Contínuo (Watch + Trigger)",
+        "descricao": "Watcher que monitora mudanças em código/docs e dispara atualização automática sem confirmação manual",
+        "prioridade": "P2",
+        "esforco_semanas": 2,
+        "acao": "Evoluir o Update Detection atual (que já pede confirmação) para modo automático",
+        "usuario_leigo": "Notificação: 'Sistema atualizado automaticamente — 3 docs, 1 vídeo regenerados'"
+      },
+      {
+        "recurso_akp": "Análise Multi-fonte (Playwright + OCR + Áudio + Video)",
+        "descricao": "Extração de conhecimento de imagens (OCR), vídeos existentes e áudio além de código e docs",
+        "prioridade": "P2",
+        "esforco_semanas": 3,
+        "acao": "Ampliar o Source Agent com novos coletores",
+        "usuario_leigo": "Upload de qualquer arquivo → sistema aprende e integra ao Knowledge Graph"
+      }
+    ]
+  },
+
+  "plano_implementacao": {
+    "fase_1_semanas_1_2": {
+      "nome": "Fundação AKP — Sem impacto visual para o usuário",
+      "itens": [
+        "Atualizar schema Knowledge Object no MongoDB (adicionar 18+ campos AKP)",
+        "Adicionar os 20 tipos de relacionamento ao grafo existente",
+        "Atualizar master-prompt.json com o AKP Master System Prompt unificado",
+        "Atualizar presentation-studio-controller.js para gerar objetos AKP-compliant"
+      ]
+    },
+    "fase_2_semanas_3_4": {
+      "nome": "Microlearning + Knowledge Feed",
+      "itens": [
+        "Nova aba 'Micro' no PresentationCenter (cápsulas 15s a 90s)",
+        "Knowledge Feed widget no IntelligenceHub",
+        "Tipos de microconteúdo: Você Sabia, Dica Rápida, Erro Comum, Novidade, Atalho",
+        "Geração automática a partir dos módulos já mapeados"
+      ]
+    },
+    "fase_3_semanas_5_6": {
+      "nome": "Grafo Navegável + Help Center",
+      "itens": [
+        "Enriquecer aba Dependências com grafo interativo tipado",
+        "Nova rota /help com busca inteligente no Knowledge Graph",
+        "FAQ automático gerado a partir das perguntas mais frequentes no chat"
+      ]
+    },
+    "fase_4_semanas_7_8": {
+      "nome": "Auto-sync + Analytics",
+      "itens": [
+        "Watcher automático de arquivos (sem necessidade de clicar SIM)",
+        "Analytics de conhecimento no IntelligenceHub",
+        "Notificações de atualização automática"
+      ]
+    },
+    "fase_5_semanas_9_12": {
+      "nome": "Digital Twin Cognitivo",
+      "itens": [
+        "Pipeline completo de geração do twin de cada produto (AxHub, AxTon, AxCross)",
+        "Sincronização automática a cada commit",
+        "Portal público de ajuda por produto"
+      ]
+    }
+  },
+
+  "impacto_usuario_leigo": {
+    "principio": "O usuário leigo NUNCA deve ver complexidade técnica. Cada funcionalidade AKP deve ter um equivalente simples.",
+    "traducoes": [
+      { "tecnico": "Knowledge Object Graph",        "leigo": "Mapa de como tudo se conecta" },
+      { "tecnico": "DEPENDS_ON relationship",       "leigo": "Este módulo precisa que aquele funcione" },
+      { "tecnico": "Microlearning 15-90s",          "leigo": "Dica rápida de 1 minuto" },
+      { "tecnico": "Digital Twin Cognitivo",        "leigo": "Cópia inteligente do sistema" },
+      { "tecnico": "Auto-sync trigger",             "leigo": "Atualização automática" },
+      { "tecnico": "Knowledge Feed",                "leigo": "Feed de dicas e novidades" },
+      { "tecnico": "Certification Path",           "leigo": "Trilha de treinamento" },
+      { "tecnico": "Source Agent extraction",      "leigo": "Carregar arquivo para o sistema aprender" },
+      { "tecnico": "Playwright capture",           "leigo": "Tirar foto automática das telas" }
+    ]
+  }
+}

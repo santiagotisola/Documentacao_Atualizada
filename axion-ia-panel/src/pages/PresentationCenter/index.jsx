@@ -168,6 +168,8 @@ const API = import.meta.env.VITE_API_URL || "http://localhost:3100/api";
 const TABS = [
   { id: "chat",         label: "Chat",          icon: "💬", cor: "#6366f1" },
   { id: "knowledge",   label: "Knowledge",     icon: "📚", cor: "#10b981" },
+  { id: "micro",       label: "Microlearning", icon: "⚡", cor: "#a855f7" },
+  { id: "feed",        label: "Feed",          icon: "📡", cor: "#ec4899" },
   { id: "dependencias",label: "Dependências",  icon: "🔗", cor: "#f59e0b" },
   { id: "timeline",    label: "Timeline",      icon: "⏱️", cor: "#3b82f6" },
   { id: "preview",     label: "Preview",       icon: "👁️", cor: "#8b5cf6" },
@@ -347,6 +349,69 @@ export default function PresentationCenter() {
                   <em className="ps-kb-q">{e.pergunta}</em>
                   <p className="ps-kb-a">{e.resposta}</p>
                   <div className="ps-tags">{(e.tags||[]).slice(0,4).map((t,j)=><span key={j}>{t}</span>)}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* ── MICROLEARNING ── */}
+        {aba==="micro"&&(
+          <div className="ps-panel">
+            <div className="ps-ph"><span>⚡</span>Microlearning — AKP
+              <span className="ps-cnt">{microDemo(projeto).length} cápsulas</span>
+              <span className="ps-akp-badge">AKP v1.0</span>
+            </div>
+            <div className="ps-micro-filters">
+              {["Todos","15s","30s","45s","60s","90s"].map((d,i)=>(
+                <button key={i} className="ps-micro-btn">{d}</button>
+              ))}
+              <div className="ps-micro-types">
+                {["💡 Você Sabia","🔧 Dica","⚠️ Erro Comum","✨ Novidade","⌨️ Atalho"].map((t,i)=>(
+                  <span key={i} className="ps-micro-type">{t}</span>
+                ))}
+              </div>
+            </div>
+            <div className="ps-micro-grid">
+              {microDemo(projeto).map((c,i)=>(
+                <div key={i} className={`ps-micro-card ps-micro-${c.tipo_classe}`}>
+                  <div className="ps-micro-top">
+                    <span className="ps-micro-dur">{c.duracao}s</span>
+                    <span className="ps-micro-tipo">{c.tipo_icone} {c.tipo}</span>
+                  </div>
+                  <h4>{c.titulo}</h4>
+                  <p>{c.conteudo}</p>
+                  {c.call_to_action&&<div className="ps-micro-cta">{c.call_to_action}</div>}
+                  <div className="ps-micro-tags">{(c.tags||[]).map((t,j)=><span key={j}>{t}</span>)}</div>
+                  <div className="ps-micro-actions">
+                    <button className="ps-sm-btn"><Play size={10}/>Narrar</button>
+                    <button className="ps-sm-btn"><Download size={10}/>Exportar</button>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* ── KNOWLEDGE FEED ── */}
+        {aba==="feed"&&(
+          <div className="ps-panel">
+            <div className="ps-ph"><span>📡</span>Knowledge Feed
+              <span className="ps-cnt">{feedDemo(projeto).length} cards</span>
+              <span className="ps-akp-badge">AKP v1.0</span>
+            </div>
+            <div className="ps-feed">
+              {feedDemo(projeto).map((c,i)=>(
+                <div key={i} className={`ps-feed-card ps-feed-${c.prioridade}`}>
+                  <div className="ps-feed-top">
+                    <span className="ps-feed-tipo">{c.icone} {c.tipo}</span>
+                    <span className="ps-feed-data">{c.data}</span>
+                    {c.prioridade==="alta"&&<span className="ps-feed-urgente">🔴 Urgente</span>}
+                  </div>
+                  <h4>{c.titulo}</h4>
+                  <p>{c.conteudo}</p>
+                  <div className="ps-feed-tags">{(c.tags||[]).map((t,j)=><span key={j}>{t}</span>)}</div>
+                  <button className="ps-sm-btn ps-feed-btn">Ver detalhes →</button>
                 </div>
               ))}
             </div>
@@ -559,6 +624,23 @@ export default function PresentationCenter() {
 }
 
 /* ── helpers ── */
+function microDemo(p){return[
+  {duracao:30,tipo:"Você Sabia",tipo_icone:"💡",tipo_classe:"sabia",titulo:`${p} monitora equipamentos em tempo real`,conteudo:`O ${p} verifica o status de cada câmera a cada 5 minutos. Se uma câmera parar de responder por 2 horas, ela aparece como OFFLINE no Dashboard.`,call_to_action:"Ver Dashboard →",tags:["dashboard","equipamentos"]},
+  {duracao:15,tipo:"Atalho",tipo_icone:"⌨️",tipo_classe:"atalho",titulo:"Triagem mais rápida",conteudo:`No ${p}, pressione Enter para aprovar uma infração e Delete para abrir o menu de descarte. Economiza até 40% do tempo de triagem.`,call_to_action:null,tags:["triagem","produtividade"]},
+  {duracao:45,tipo:"Erro Comum",tipo_icone:"⚠️",tipo_classe:"erro",titulo:"Lote de exportação travado",conteudo:`Se o lote ficar no status 'Processando' por mais de 10 minutos, algo travou. Use 'Tentar Novamente' primeiro. Se não resolver em 5 min, chame o administrador para 'Forçar Encerramento'.`,call_to_action:"Ver Lote de Exportação →",tags:["lote","erro","exportação"]},
+  {duracao:60,tipo:"Dica",tipo_icone:"🔧",tipo_classe:"dica",titulo:"Filtre antes de exportar",conteudo:`Antes de criar um lote de exportação no ${p}, filtre as infrações por período e revise a quantidade. Lotes muito grandes podem demorar mais de 1 hora para processar. O ideal é exportar em lotes de até 5.000 infrações.`,call_to_action:null,tags:["exportação","performance"]},
+  {duracao:90,tipo:"Novidade",tipo_icone:"✨",tipo_classe:"novidade",titulo:"Nova aba Microlearning disponível",conteudo:`A plataforma AxionIA agora gera cápsulas de conhecimento de 15 a 90 segundos sobre qualquer módulo do sistema. Clique em qualquer card para ouvir a narração ou exportar para treinamento. Disponível para AxHub, AxTon e AxCross.`,call_to_action:"Explorar Microlearning →",tags:["novidade","akp","treinamento"]},
+  {duracao:30,tipo:"Boas Práticas",tipo_icone:"⭐",tipo_classe:"pratica",titulo:"Sempre verifique a aferição INMETRO",conteudo:`Equipamentos com certificado INMETRO vencido não geram infrações válidas. Verifique a seção 'Alertas de Aferição' no Dashboard toda semana. O sistema avisa 30 dias antes do vencimento.`,call_to_action:"Ver Dashboard →",tags:["inmetro","aferição","qualidade"]},
+];}
+
+function feedDemo(p){return[
+  {icone:"🔴",tipo:"Alerta Crítico",titulo:`Equipamento offline há 6h — ${p}`,conteudo:`O equipamento PE005C está sem comunicação desde 08:30. Isso pode estar gerando falhas na captura de infrações naquela faixa. Verifique a conectividade ou chame o suporte técnico.`,tags:["equipamento","offline"],prioridade:"alta",data:"Hoje, 14:32"},
+  {icone:"✨",tipo:"Novidade",titulo:"AKP v1.0 — Microlearning disponível",conteudo:`A AXIONIA KNOWLEDGE PLATFORM agora gera cápsulas de conhecimento de 15 a 90 segundos. Acesse a aba Microlearning para explorar as cápsulas geradas automaticamente para o ${p}.`,tags:["akp","microlearning"],prioridade:"normal",data:"Hoje, 09:00"},
+  {icone:"💡",tipo:"Você Sabia",titulo:"O relatório de discrepâncias economiza 2h por semana",conteudo:`Analistas que usam o Relatório de Discrepâncias diariamente identificam e corrigem erros de OCR antes que eles se acumulem, economizando em média 2h de retrabalho semanal.`,tags:["relatório","produtividade"],prioridade:"baixa",data:"Ontem"},
+  {icone:"🎯",tipo:"Meta Atingida",titulo:`${p} atingiu 98% de uptime esta semana`,conteudo:`Todos os 18 sites do ${p} operaram com disponibilidade acima de 95% nos últimos 7 dias. Apenas 1 equipamento ficou offline por mais de 2h (manutenção programada em IPEMPE).`,tags:["uptime","qualidade"],prioridade:"normal",data:"Ontem"},
+  {icone:"📚",tipo:"Base de Conhecimento",titulo:"5 novas entradas KB geradas automaticamente",conteudo:`O sistema aprendeu 5 novas informações sobre o módulo de Exceções a partir das perguntas recentes no chat. As entradas já estão disponíveis na aba Knowledge.`,tags:["kb","akp"],prioridade:"baixa",data:"Há 2 dias"},
+];}
+
 function md(t){if(!t)return"";return t.replace(/\*\*(.+?)\*\*/g,"<strong>$1</strong>").replace(/\*(.+?)\*/g,"<em>$1</em>").replace(/`(.+?)`/g,"<code>$1</code>").replace(/\n/g,"<br/>");}
 function respostaDemo(q,p){const ql=q.toLowerCase();if(ql.includes("triagem"))return`A triagem no ${p} revisa cada infração: verifique imagem, placa e enquadramento, e Aprove ou Descarte com motivo.`;if(ql.includes("permissão")||ql.includes("perfil"))return`O ${p} possui 150+ permissões em 9 grupos: Administrador, Operador, Triador, Auditor e Consulta.`;if(ql.includes("dashboard"))return`O Dashboard exibe 6 painéis: Status Equipamentos, Triagem Mensal, Painel Sinótico, Mapa, Defasagem e Alertas INMETRO.`;return`O ${p} é um sistema de fiscalização eletrônica Axion com 18 sites ativos. Pergunte algo específico!`;}
 
