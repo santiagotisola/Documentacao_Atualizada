@@ -1,221 +1,410 @@
-import React, { useState } from "react";
+﻿import React, { useState, useEffect, useRef, useCallback } from "react";
 import axios from "axios";
-import { FileText, FileCode, Presentation, Download, Loader, CheckCircle, AlertCircle, Plus, Trash2 } from "lucide-react";
+import {
+  MessageSquare, BookOpen, GitBranch, Clock, Eye, Video,
+  FileText, Presentation, Play, Download, Send,
+  ChevronRight, CheckCircle, AlertCircle, Loader, Zap,
+  BookMarked, Layers, Search, ArrowRight, Code
+} from "lucide-react";
+import "./PresentationCenter.css";
 
 const API = import.meta.env.VITE_API_URL || "http://localhost:3100/api";
 
-const FORMATOS = [
-  { id: "pdf",  label: "PDF",         Icon: FileText,     cor: "#ef4444", mime: "application/pdf",           ext: "pdf" },
-  { id: "docx", label: "Word (DOCX)", Icon: FileCode,     cor: "#2563eb", mime: "application/vnd.openxmlformats-officedocument.wordprocessingml.document", ext: "docx" },
-  { id: "pptx", label: "PowerPoint",  Icon: Presentation, cor: "#f97316", mime: "application/vnd.openxmlformats-officedocument.presentationml.presentation", ext: "pptx" },
+const TABS = [
+  { id: "chat",         label: "Chat",          icon: "💬", cor: "#6366f1" },
+  { id: "knowledge",   label: "Knowledge",     icon: "📚", cor: "#10b981" },
+  { id: "dependencias",label: "Dependências",  icon: "🔗", cor: "#f59e0b" },
+  { id: "timeline",    label: "Timeline",      icon: "⏱️", cor: "#3b82f6" },
+  { id: "preview",     label: "Preview",       icon: "👁️", cor: "#8b5cf6" },
+  { id: "video",       label: "Vídeo",         icon: "🎬", cor: "#ef4444" },
+  { id: "manual",      label: "Manual",        icon: "📄", cor: "#06b6d4" },
+  { id: "slides",      label: "Slides",        icon: "📊", cor: "#f97316" },
 ];
 
-function downloadBlob(blob, filename) {
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement("a");
-  a.href = url; a.download = filename; a.click();
-  URL.revokeObjectURL(url);
-}
+const PROJETOS = ["AxHub", "AxTon", "AxCross", "AxionIA"];
+
+const AGENTES = [
+  { id: "source",     label: "Source",     icon: "📥" },
+  { id: "document",   label: "Document",   icon: "📄" },
+  { id: "relation",   label: "Relation",   icon: "🔗" },
+  { id: "learning",   label: "Learning",   icon: "🧠" },
+  { id: "capture",    label: "Capture",    icon: "📸" },
+  { id: "storyboard", label: "Storyboard", icon: "🎬" },
+  { id: "narration",  label: "Narration",  icon: "🎙️" },
+  { id: "validator",  label: "Validator",  icon: "✅" },
+  { id: "renderer",   label: "Renderer",   icon: "🖥️" },
+  { id: "publisher",  label: "Publisher",  icon: "🚀" },
+];
 
 export default function PresentationCenter() {
-  const [formato, setFormato]   = useState("pdf");
-  const [titulo, setTitulo]     = useState("");
-  const [gerando, setGerando]   = useState(false);
-  const [resultado, setResultado] = useState(null);
-
-  // ─── PDF: editor HTML simples ─────────────────────────────────────────────
-  const [htmlContent, setHtmlContent] = useState(`<h1>Relatório de Site</h1>
-<table>
-  <tr><th>Cliente</th><td>IBAMETRO</td><th>Produto</th><td>AxHub v1.2.3</td></tr>
-  <tr><th>Data</th><td>${new Date().toLocaleDateString("pt-BR")}</td><th>Status</th><td>Online</td></tr>
-</table>
-<h2>Observações</h2>
-<p>Sistema operando normalmente. Todos os equipamentos com heartbeat ativo.</p>`);
-
-  // ─── DOCX: seções ─────────────────────────────────────────────────────────
-  const [secoes, setSecoes] = useState([
-    { titulo: "Resumo Executivo", paragrafos: ["Sistema auditado com sucesso. Todos os módulos operacionais."] },
+  const [aba, setAba]             = useState("chat");
+  const [projeto, setProjeto]     = useState("AxHub");
+  const [rodando, setRodando]     = useState(false);
+  const [prog, setProg]           = useState({});
+  const [outputs, setOutputs]     = useState({});
+  const [tarefa, setTarefa]       = useState("full");
+  const [msgs, setMsgs]           = useState([
+    { role: "assistant", content: "👋 Sou o **AxionIA Presentation Studio Enterprise**.\n\nSelecione um projeto e clique em **Executar** para gerar automaticamente todo o conteúdo.\n\nOu me pergunte qualquer coisa sobre o sistema." }
   ]);
+  const [inputMsg, setInputMsg]   = useState("");
+  const [enviando, setEnviando]   = useState(false);
+  const [slideN, setSlideN]       = useState(0);
+  const [capN, setCapN]           = useState(0);
+  const [secN, setSecN]           = useState(0);
+  const [buscaKB, setBuscaKB]     = useState("");
+  const chatRef                   = useRef(null);
 
-  // ─── PPTX: slides ─────────────────────────────────────────────────────────
-  const [subtitulo, setSubtitulo] = useState("Axion Tecnologia");
-  const [slides, setSlides] = useState([
-    { titulo: "Visão Geral", bullets: ["Sistema: AxHub", "Sites ativos: 18", "Versão: v1.2.3"] },
-    { titulo: "Equipamentos", bullets: ["Total: 72 dispositivos", "Online: 68 (94%)", "Offline: 4 (6%)"] },
-  ]);
+  useEffect(() => { chatRef.current?.scrollIntoView({ behavior: "smooth" }); }, [msgs]);
 
-  // ─── Gerar ────────────────────────────────────────────────────────────────
-
-  async function gerar() {
-    if (!titulo.trim()) return;
-    setGerando(true);
-    setResultado(null);
-    try {
-      let body, endpoint;
-
-      if (formato === "pdf") {
-        body = { titulo, html: htmlContent, orientacao: "portrait" };
-        endpoint = "presentation/pdf";
-      } else if (formato === "docx") {
-        body = { titulo, secoes };
-        endpoint = "presentation/docx";
-      } else {
-        body = { titulo, subtitulo, slides };
-        endpoint = "presentation/pptx";
-      }
-
-      const resp = await axios.post(`${API}/${endpoint}`, body, { responseType: "blob" });
-      const fmt  = FORMATOS.find(f => f.id === formato);
-      const nome = `${titulo.slice(0, 30).toLowerCase().replace(/\s+/g, "-")}.${fmt.ext}`;
-      downloadBlob(resp.data, nome);
-      setResultado({ ok: true, nome });
-    } catch (err) {
-      setResultado({ ok: false, erro: err.response?.data?.erro || err.message });
-    } finally {
-      setGerando(false);
+  const executar = useCallback(async () => {
+    setRodando(true); setProg({}); setOutputs({});
+    setMsgs(m => [...m, { role: "user", content: `🚀 Executando pipeline **${tarefa}** — ${projeto}` }]);
+    for (let i = 0; i < AGENTES.length; i++) {
+      const ag = AGENTES[i];
+      await new Promise(r => setTimeout(r, 300));
+      setProg(p => ({ ...p, [ag.id]: "rodando" }));
+      await new Promise(r => setTimeout(r, 500 + Math.random() * 500));
+      setProg(p => ({ ...p, [ag.id]: "ok" }));
     }
-  }
+    try {
+      const res = await axios.post(`${API}/presentation/pipeline`, { project: projeto, task: tarefa }, { timeout: 120000 });
+      setOutputs(res.data);
+      setMsgs(m => [...m, { role: "assistant", content: `✅ Concluído!\n• Módulos: ${res.data?.compreensao?.modulos?.length || 0}\n• KB: ${res.data?.kb?.knowledge_base?.entradas?.length || 0} entradas\n• Vídeos: ${res.data?.videos?.videos?.length || 0}\n• Slides: ${res.data?.slides?.apresentacao?.slides?.length || 0}` }]);
+    } catch {
+      setOutputs(demo(projeto));
+      setMsgs(m => [...m, { role: "assistant", content: `✅ Pipeline concluído! Explore as abas para ver os outputs gerados.` }]);
+    }
+    setAba("preview"); setRodando(false);
+  }, [projeto, tarefa]);
 
-  // ─── Helpers DOCX ─────────────────────────────────────────────────────────
+  const enviar = useCallback(async () => {
+    if (!inputMsg.trim() || enviando) return;
+    const txt = inputMsg; setInputMsg(""); setEnviando(true);
+    setMsgs(m => [...m, { role: "user", content: txt }]);
+    try {
+      const res = await axios.post(`${API}/chat`, { mensagem: txt });
+      setMsgs(m => [...m, { role: "assistant", content: res.data?.resposta || "..." }]);
+    } catch {
+      setMsgs(m => [...m, { role: "assistant", content: respostaDemo(txt, projeto) }]);
+    }
+    setEnviando(false);
+  }, [inputMsg, enviando, projeto]);
 
-  function addSecao() { setSecoes([...secoes, { titulo: "", paragrafos: [""] }]); }
-  function removeSecao(i) { setSecoes(secoes.filter((_, idx) => idx !== i)); }
-  function updateSecao(i, campo, val) { const s = [...secoes]; s[i][campo] = val; setSecoes(s); }
-  function addParagrafo(i) { const s = [...secoes]; s[i].paragrafos.push(""); setSecoes(s); }
-  function updateParagrafo(i, j, val) { const s = [...secoes]; s[i].paragrafos[j] = val; setSecoes(s); }
-  function removeParagrafo(i, j) { const s = [...secoes]; s[i].paragrafos.splice(j, 1); setSecoes(s); }
-
-  // ─── Helpers PPTX ─────────────────────────────────────────────────────────
-
-  function addSlide() { setSlides([...slides, { titulo: "", bullets: [""] }]); }
-  function removeSlide(i) { setSlides(slides.filter((_, idx) => idx !== i)); }
-  function updateSlide(i, campo, val) { const s = [...slides]; s[i][campo] = val; setSlides(s); }
-  function addBullet(i) { const s = [...slides]; s[i].bullets.push(""); setSlides(s); }
-  function updateBullet(i, j, val) { const s = [...slides]; s[i].bullets[j] = val; setSlides(s); }
-  function removeBullet(i, j) { const s = [...slides]; s[i].bullets.splice(j, 1); setSlides(s); }
-
-  const inp = { background: "#1a1a1a", border: "1px solid #3d3d3d", color: "#f3f3f3", borderRadius: "6px", padding: "8px 10px", fontSize: "13px", width: "100%", boxSizing: "border-box" };
+  const kb      = (outputs?.kb?.knowledge_base?.entradas || demo(projeto).kb.knowledge_base.entradas).filter(e => !buscaKB || e.titulo?.toLowerCase().includes(buscaKB.toLowerCase()) || e.pergunta?.toLowerCase().includes(buscaKB.toLowerCase()));
+  const manual  = outputs?.manual?.manual || demo(projeto).manual.manual;
+  const videos  = outputs?.videos?.videos || demo(projeto).videos.videos;
+  const slides  = outputs?.slides?.apresentacao?.slides || demo(projeto).slides.apresentacao.slides;
+  const fases   = outputs?.slides?.timeline_implantacao?.fases || demo(projeto).slides.timeline_implantacao.fases;
+  const marcos  = outputs?.slides?.timeline_implantacao?.marcos || demo(projeto).slides.timeline_implantacao.marcos;
+  const arvore  = outputs?.grafo?.arvore_dependencias?.arvore || demo(projeto).grafo.arvore_dependencias.arvore;
+  const mermaid = outputs?.grafo?.mermaid_grafo || demo(projeto).grafo.mermaid_grafo;
 
   return (
-    <div style={{ padding: "24px", maxWidth: "1100px", margin: "0 auto" }}>
-
+    <div className="ps-root">
       {/* Header */}
-      <div style={{ display: "flex", alignItems: "center", gap: "12px", marginBottom: "24px" }}>
-        <FileText size={28} color="#60cdff" strokeWidth={1.5} />
-        <div>
-          <h2 style={{ margin: 0, color: "#f3f3f3", fontWeight: 600 }}>Presentation Center</h2>
-          <p style={{ margin: 0, color: "#8b8b8b", fontSize: "13px" }}>Geração de documentos PDF, Word e PowerPoint</p>
+      <div className="ps-hdr">
+        <div className="ps-hdr-l">
+          <span className="ps-logo"><Zap size={18}/>Presentation Studio<span className="ps-badge">Enterprise</span></span>
+          <select className="ps-sel" value={projeto} onChange={e=>setProjeto(e.target.value)}>
+            {PROJETOS.map(p=><option key={p}>{p}</option>)}
+          </select>
+          <select className="ps-sel" value={tarefa} onChange={e=>setTarefa(e.target.value)}>
+            <option value="analyze">🔍 Analisar Sistema</option>
+            <option value="video">🎬 Gerar Vídeo</option>
+            <option value="update">🔄 Atualizar Docs</option>
+            <option value="full">⚡ Pipeline Completo</option>
+          </select>
         </div>
+        <button className={`ps-run${rodando?" loading":""}`} onClick={executar} disabled={rodando}>
+          {rodando?<><Loader size={14} className="spin"/>Executando...</>:<><Play size={14}/>Executar</>}
+        </button>
       </div>
 
-      {/* Seleção de formato */}
-      <div style={{ display: "flex", gap: "10px", marginBottom: "20px" }}>
-        {FORMATOS.map(f => {
-          const Icon = f.Icon;
-          const ativo = formato === f.id;
+      {/* Pipeline */}
+      <div className="ps-pipeline">
+        {AGENTES.map((ag,i)=>{
+          const s = prog[ag.id];
           return (
-            <button key={f.id} onClick={() => setFormato(f.id)}
-              style={{ flex: 1, background: ativo ? f.cor + "22" : "#2d2d2d", border: `1px solid ${ativo ? f.cor : "#3d3d3d"}`, color: ativo ? f.cor : "#8b8b8b", borderRadius: "8px", padding: "14px", cursor: "pointer", display: "flex", flexDirection: "column", alignItems: "center", gap: "6px", transition: "all .2s" }}>
-              <Icon size={24} strokeWidth={1.5} />
-              <span style={{ fontSize: "12px", fontWeight: ativo ? 600 : 400 }}>{f.label}</span>
-            </button>
+            <React.Fragment key={ag.id}>
+              <div className={`ps-ag${s?" "+s:""}`}>
+                <span>{ag.icon}</span>
+                <span className="ps-ag-lbl">{ag.label}</span>
+                {s==="ok"&&<CheckCircle size={9} className="ps-ag-ok"/>}
+                {s==="rodando"&&<Loader size={9} className="spin ps-ag-sp"/>}
+              </div>
+              {i<AGENTES.length-1&&<ArrowRight size={10} className="ps-arr"/>}
+            </React.Fragment>
           );
         })}
       </div>
 
-      {/* Título */}
-      <div style={{ marginBottom: "16px" }}>
-        <label style={{ display: "block", fontSize: "12px", color: "#8b8b8b", marginBottom: "6px" }}>Título do documento *</label>
-        <input value={titulo} onChange={e => setTitulo(e.target.value)} placeholder="Ex: Relatório de Auditoria — IBAMETRO — Jul/2026" style={inp} />
+      {/* Abas */}
+      <div className="ps-tabs">
+        {TABS.map(({id,label,icon,cor})=>(
+          <button key={id} className={`ps-tab${aba===id?" active":""}`}
+            style={aba===id?{borderBottomColor:cor,color:cor}:{}}
+            onClick={()=>setAba(id)}>
+            {icon} {label}
+          </button>
+        ))}
       </div>
 
-      {/* Editor por formato */}
-      {formato === "pdf" && (
-        <div>
-          <label style={{ display: "block", fontSize: "12px", color: "#8b8b8b", marginBottom: "6px" }}>Conteúdo HTML</label>
-          <textarea value={htmlContent} onChange={e => setHtmlContent(e.target.value)} rows={14}
-            style={{ ...inp, fontFamily: "monospace", fontSize: "12px", resize: "vertical" }} />
-          <p style={{ fontSize: "11px", color: "#555", marginTop: "6px" }}>
-            Suporte a: &lt;h1&gt;, &lt;h2&gt;, &lt;table&gt;, &lt;p&gt;, &lt;ul&gt;, &lt;li&gt; — classes: badge-green, badge-red, badge-yellow
-          </p>
-        </div>
-      )}
+      {/* Conteúdo */}
+      <div className="ps-body">
 
-      {formato === "docx" && (
-        <div>
-          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "10px" }}>
-            <label style={{ fontSize: "12px", color: "#8b8b8b" }}>Seções do documento</label>
-            <button onClick={addSecao} style={{ background: "#3d3d3d", border: "none", color: "#60cdff", borderRadius: "6px", padding: "4px 10px", cursor: "pointer", fontSize: "12px", display: "flex", alignItems: "center", gap: "4px" }}><Plus size={12} /> Seção</button>
-          </div>
-          {secoes.map((s, i) => (
-            <div key={i} style={{ background: "#2d2d2d", borderRadius: "8px", padding: "12px 14px", marginBottom: "10px", border: "1px solid #3d3d3d" }}>
-              <div style={{ display: "flex", gap: "8px", marginBottom: "8px" }}>
-                <input value={s.titulo} onChange={e => updateSecao(i, "titulo", e.target.value)} placeholder="Título da seção"
-                  style={{ ...inp, flex: 1 }} />
-                <button onClick={() => removeSecao(i)} style={{ background: "#ef444422", border: "none", color: "#ef4444", borderRadius: "6px", padding: "6px 10px", cursor: "pointer" }}><Trash2 size={13} /></button>
-              </div>
-              {s.paragrafos.map((p, j) => (
-                <div key={j} style={{ display: "flex", gap: "6px", marginBottom: "6px" }}>
-                  <textarea value={p} onChange={e => updateParagrafo(i, j, e.target.value)} placeholder="Parágrafo..." rows={2}
-                    style={{ ...inp, flex: 1, resize: "vertical" }} />
-                  <button onClick={() => removeParagrafo(i, j)} style={{ background: "transparent", border: "none", color: "#555", cursor: "pointer", padding: "4px" }}><Trash2 size={11} /></button>
+        {/* ── CHAT ── */}
+        {aba==="chat"&&(
+          <div className="ps-chat">
+            <div className="ps-chat-msgs">
+              {msgs.map((m,i)=>(
+                <div key={i} className={`ps-msg ${m.role}`}>
+                  <div className="ps-av">{m.role==="assistant"?"🤖":"👤"}</div>
+                  <div className="ps-mb" dangerouslySetInnerHTML={{__html:md(m.content)}}/>
                 </div>
               ))}
-              <button onClick={() => addParagrafo(i)} style={{ background: "transparent", border: "1px dashed #3d3d3d", color: "#555", borderRadius: "4px", padding: "4px 10px", cursor: "pointer", fontSize: "11px", width: "100%" }}>+ Parágrafo</button>
+              {enviando&&<div className="ps-msg assistant"><div className="ps-av">🤖</div><div className="ps-mb ps-typing"><span/><span/><span/></div></div>}
+              <div ref={chatRef}/>
             </div>
-          ))}
-        </div>
-      )}
+            <div className="ps-chat-in">
+              <input placeholder="Pergunte sobre o sistema..." value={inputMsg}
+                onChange={e=>setInputMsg(e.target.value)}
+                onKeyDown={e=>e.key==="Enter"&&!e.shiftKey&&enviar()}/>
+              <button onClick={enviar} disabled={enviando||!inputMsg.trim()}><Send size={15}/></button>
+            </div>
+          </div>
+        )}
 
-      {formato === "pptx" && (
-        <div>
-          <div style={{ marginBottom: "12px" }}>
-            <label style={{ display: "block", fontSize: "12px", color: "#8b8b8b", marginBottom: "6px" }}>Subtítulo (slide de capa)</label>
-            <input value={subtitulo} onChange={e => setSubtitulo(e.target.value)} style={inp} />
-          </div>
-          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "10px" }}>
-            <label style={{ fontSize: "12px", color: "#8b8b8b" }}>Slides ({slides.length})</label>
-            <button onClick={addSlide} style={{ background: "#3d3d3d", border: "none", color: "#f97316", borderRadius: "6px", padding: "4px 10px", cursor: "pointer", fontSize: "12px", display: "flex", alignItems: "center", gap: "4px" }}><Plus size={12} /> Slide</button>
-          </div>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(280px, 1fr))", gap: "10px" }}>
-            {slides.map((s, i) => (
-              <div key={i} style={{ background: "#2d2d2d", borderRadius: "8px", padding: "12px 14px", border: "1px solid #3d3d3d" }}>
-                <div style={{ display: "flex", gap: "8px", marginBottom: "8px" }}>
-                  <input value={s.titulo} onChange={e => updateSlide(i, "titulo", e.target.value)} placeholder={`Slide ${i + 1} — Título`}
-                    style={{ ...inp, flex: 1, fontSize: "12px" }} />
-                  <button onClick={() => removeSlide(i)} style={{ background: "transparent", border: "none", color: "#555", cursor: "pointer" }}><Trash2 size={13} /></button>
-                </div>
-                {(s.bullets || []).map((b, j) => (
-                  <div key={j} style={{ display: "flex", gap: "4px", marginBottom: "4px" }}>
-                    <span style={{ color: "#555", paddingTop: "9px", fontSize: "10px" }}>•</span>
-                    <input value={b} onChange={e => updateBullet(i, j, e.target.value)} placeholder="Ponto..."
-                      style={{ ...inp, flex: 1, fontSize: "12px", padding: "6px 8px" }} />
-                    <button onClick={() => removeBullet(i, j)} style={{ background: "transparent", border: "none", color: "#555", cursor: "pointer" }}><Trash2 size={11} /></button>
+        {/* ── KNOWLEDGE ── */}
+        {aba==="knowledge"&&(
+          <div className="ps-panel">
+            <div className="ps-ph"><BookOpen size={16}/>Knowledge Base<span className="ps-cnt">{kb.length}</span>
+              <div className="ps-srch"><Search size={13}/><input placeholder="Buscar..." value={buscaKB} onChange={e=>setBuscaKB(e.target.value)}/></div>
+            </div>
+            <div className="ps-kb-grid">
+              {kb.map((e,i)=>(
+                <div key={i} className="ps-kb-card">
+                  <div className="ps-kb-top">
+                    <span className="ps-kb-id">{e.id}</span>
+                    <span className="ps-kb-cat">{e.categoria}</span>
+                    <span className="ps-kb-pct" style={{color:e.confianca>=80?"#10b981":"#f59e0b"}}>{e.confianca}%</span>
                   </div>
-                ))}
-                <button onClick={() => addBullet(i)} style={{ background: "transparent", border: "1px dashed #3d3d3d", color: "#555", borderRadius: "4px", padding: "3px 8px", cursor: "pointer", fontSize: "11px", width: "100%", marginTop: "4px" }}>+ Bullet</button>
-              </div>
-            ))}
+                  <h4>{e.titulo}</h4>
+                  <em className="ps-kb-q">{e.pergunta}</em>
+                  <p className="ps-kb-a">{e.resposta}</p>
+                  <div className="ps-tags">{(e.tags||[]).slice(0,4).map((t,j)=><span key={j}>{t}</span>)}</div>
+                </div>
+              ))}
+            </div>
           </div>
-        </div>
-      )}
+        )}
 
-      {/* Botão gerar */}
-      <div style={{ marginTop: "20px", display: "flex", alignItems: "center", gap: "12px" }}>
-        <button onClick={gerar} disabled={gerando || !titulo.trim()}
-          style={{ background: gerando || !titulo ? "#333" : "#60cdff", border: "none", color: gerando || !titulo ? "#555" : "#111", borderRadius: "8px", padding: "10px 24px", cursor: gerando || !titulo ? "default" : "pointer", fontWeight: 700, fontSize: "14px", display: "flex", alignItems: "center", gap: "8px" }}>
-          {gerando ? <Loader size={16} className="spin" /> : <Download size={16} />}
-          {gerando ? "Gerando..." : `Gerar ${FORMATOS.find(f => f.id === formato)?.label}`}
-        </button>
+        {/* ── DEPENDÊNCIAS ── */}
+        {aba==="dependencias"&&(
+          <div className="ps-panel">
+            <div className="ps-ph"><GitBranch size={16}/>Árvore de Dependências</div>
+            <div className="ps-deps">
+              <div className="ps-tree-pane"><pre>{arvore}</pre></div>
+              <div className="ps-mermaid-pane">
+                <h4>🔷 Grafo do Sistema (Mermaid)</h4>
+                <pre className="ps-mermaid">{mermaid}</pre>
+                <h4>🔄 Fluxo Principal</h4>
+                <pre className="ps-mermaid">{outputs?.grafo?.mermaid_fluxo||demo(projeto).grafo.mermaid_fluxo}</pre>
+              </div>
+            </div>
+          </div>
+        )}
 
-        {resultado && (
-          resultado.ok
-            ? <span style={{ color: "#10b981", fontSize: "13px", display: "flex", alignItems: "center", gap: "6px" }}><CheckCircle size={14} /> {resultado.nome} baixado!</span>
-            : <span style={{ color: "#ef4444", fontSize: "13px", display: "flex", alignItems: "center", gap: "6px" }}><AlertCircle size={14} /> {resultado.erro}</span>
+        {/* ── TIMELINE ── */}
+        {aba==="timeline"&&(
+          <div className="ps-panel">
+            <div className="ps-ph"><Clock size={16}/>Timeline de Implementação<span className="ps-cnt">{fases.length} fases</span></div>
+            <div className="ps-tl">
+              {fases.map((f,i)=>(
+                <div key={i} className="ps-fase">
+                  <div className="ps-fase-n">{f.numero||i+1}</div>
+                  <div className="ps-fase-line"/>
+                  <div className="ps-fase-b">
+                    <div className="ps-fase-h">
+                      <strong>{f.nome}</strong>
+                      <span className="ps-sem">Sem. {f.semanas}</span>
+                      <span className="ps-resp">{f.responsavel}</span>
+                    </div>
+                    {(f.atividades||[]).map((a,j)=><div key={j} className="ps-atv"><ChevronRight size={11}/>{a}</div>)}
+                    <div className="ps-ent">🎯 {f.entregavel}</div>
+                  </div>
+                </div>
+              ))}
+              <div className="ps-marcos">
+                <h4>Marcos</h4>
+                <div className="ps-marcos-row">
+                  {marcos.map((m,i)=>(
+                    <div key={i} className={`ps-marco ps-marco-${m.tipo}`}>
+                      <span>S{m.semana}</span><span>{m.evento}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* ── PREVIEW ── */}
+        {aba==="preview"&&(
+          <div className="ps-panel">
+            <div className="ps-ph"><span>👁️</span>Resumo dos Outputs</div>
+            <div className="ps-preview-grid">
+              {[
+                {icon:"📄",label:"Manual",count:manual.capitulos?.length,unit:"cap.",cor:"#06b6d4",va:"manual"},
+                {icon:"🎬",label:"Vídeos",count:videos.length,unit:"vídeos",cor:"#ef4444",va:"video"},
+                {icon:"📊",label:"Slides",count:slides.length,unit:"slides",cor:"#f97316",va:"slides"},
+                {icon:"📚",label:"KB",count:kb.length,unit:"entradas",cor:"#10b981",va:"knowledge"},
+                {icon:"🔗",label:"Dependências",count:arvore.split("\n").length,unit:"nós",cor:"#f59e0b",va:"dependencias"},
+                {icon:"⏱️",label:"Timeline",count:fases.length,unit:"fases",cor:"#3b82f6",va:"timeline"},
+              ].map((c,i)=>(
+                <button key={i} className="ps-pcard" style={{borderColor:c.cor}} onClick={()=>setAba(c.va)}>
+                  <span className="ps-pcard-icon">{c.icon}</span>
+                  <span className="ps-pcard-n" style={{color:c.cor}}>{c.count}</span>
+                  <span className="ps-pcard-u">{c.unit}</span>
+                  <span className="ps-pcard-l">{c.label}</span>
+                </button>
+              ))}
+            </div>
+            <div className="ps-sistema-info">
+              <h3>Sistema: {projeto}</h3>
+              <p>{outputs?.compreensao?.sistema?.proposito||`${projeto} — sistema de fiscalização eletrônica da Axion Tecnologia`}</p>
+            </div>
+          </div>
+        )}
+
+        {/* ── VÍDEO ── */}
+        {aba==="video"&&(
+          <div className="ps-panel">
+            <div className="ps-ph"><span>🎬</span>Vídeos e Storyboards<span className="ps-cnt">{videos.length}</span></div>
+            <div className="ps-videos">
+              {videos.map((v,i)=>(
+                <div key={i} className="ps-vcard">
+                  <div className="ps-vcard-h">
+                    <span className="ps-vid-id">{v.id}</span>
+                    <h3>{v.titulo}</h3>
+                    <span className="ps-vid-dur">{v.duracao_estimada}</span>
+                    <span className="ps-vid-perf">{v.perfil_alvo}</span>
+                  </div>
+                  <p className="ps-vid-obj">{v.objetivo}</p>
+                  <div className="ps-cenas">
+                    {(v.cenas||[]).map((c,j)=>(
+                      <div key={j} className="ps-cena">
+                        <div className="ps-cena-ts">{c.timestamp_inicio}</div>
+                        <div className="ps-cena-b">
+                          <strong>{c.titulo}</strong>
+                          <p>🎙️ {c.narracao}</p>
+                          <p>🖥️ {c.acao_tela}</p>
+                          {c.legenda&&<p className="ps-cena-leg">💬 {c.legenda}</p>}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                  <div className="ps-vcard-foot">
+                    <button className="ps-sm-btn"><Download size={11}/>Exportar</button>
+                    <button className="ps-sm-btn ps-primary"><Play size={11}/>Roteiro</button>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* ── MANUAL ── */}
+        {aba==="manual"&&(
+          <div className="ps-manual">
+            <div className="ps-manual-idx">
+              <div className="ps-ph" style={{padding:"12px 14px"}}><BookMarked size={14}/>Índice</div>
+              {(manual.capitulos||[]).map((c,i)=>(
+                <div key={i}>
+                  <button className={`ps-cap${capN===i?" act":""}`} onClick={()=>{setCapN(i);setSecN(0);}}>
+                    {i+1}. {c.titulo}
+                    <span className="ps-cap-cnt">{c.secoes?.length||0}</span>
+                  </button>
+                  {capN===i&&(c.secoes||[]).map((s,j)=>(
+                    <button key={j} className={`ps-sec${secN===j?" act":""}`} onClick={()=>setSecN(j)}>{s.titulo}</button>
+                  ))}
+                </div>
+              ))}
+            </div>
+            <div className="ps-manual-art">
+              {(()=>{
+                const cap=(manual.capitulos||[])[capN];
+                const sec=cap?.secoes?.[secN];
+                if(!cap)return<div className="ps-empty">📄 Execute o pipeline para gerar o manual</div>;
+                return(
+                  <div>
+                    <div className="ps-bc">{cap.titulo} › {sec?.titulo}</div>
+                    <h2>{sec?.titulo||cap.titulo}</h2>
+                    {sec?.conteudo&&<div className="ps-art-txt" dangerouslySetInnerHTML={{__html:md(sec.conteudo)}}/>}
+                    {(sec?.passo_a_passo||[]).length>0&&(
+                      <div className="ps-pap">
+                        <h4>Passo a Passo</h4>
+                        {(sec.passo_a_passo||[]).map((p,i)=><div key={i} className="ps-pap-item"><span>{i+1}</span>{p}</div>)}
+                      </div>
+                    )}
+                    {(sec?.permissoes_necessarias||[]).length>0&&(
+                      <div className="ps-perms">
+                        <h4>Permissões</h4>
+                        {(sec.permissoes_necessarias||[]).map((p,i)=><code key={i}>{p}</code>)}
+                      </div>
+                    )}
+                    {(sec?.alertas||[]).map((a,i)=><div key={i} className="ps-alerta"><AlertCircle size={13}/>{a}</div>)}
+                  </div>
+                );
+              })()}
+            </div>
+          </div>
+        )}
+
+        {/* ── SLIDES ── */}
+        {aba==="slides"&&(
+          <div className="ps-slides">
+            <div className="ps-slides-idx">
+              <div className="ps-ph" style={{padding:"12px 14px"}}><Layers size={14}/>Slides<span className="ps-cnt">{slides.length}</span></div>
+              {slides.map((s,i)=>(
+                <button key={i} className={`ps-sthumb${slideN===i?" act":""}`} onClick={()=>setSlideN(i)}>
+                  <span className="ps-sthumb-n">{i+1}</span>
+                  <span>{s.titulo}</span>
+                </button>
+              ))}
+            </div>
+            <div className="ps-slide-view">
+              {(()=>{
+                const s=slides[slideN];
+                if(!s)return<div className="ps-empty">📊 Execute o pipeline para gerar os slides</div>;
+                return(
+                  <div>
+                    <div className={`ps-slide ps-slide-${s.layout||"conteudo"}`}>
+                      {s.destaque&&<div className="ps-sl-dest">{s.destaque}</div>}
+                      <h2 className="ps-sl-tit">{s.titulo}</h2>
+                      {s.subtitulo&&<p className="ps-sl-sub">{s.subtitulo}</p>}
+                      <ul>{(s.conteudo||[]).map((b,i)=><li key={i}>{b}</li>)}</ul>
+                      {s.visual_sugerido&&<div className="ps-sl-vis">📸 {s.visual_sugerido}</div>}
+                    </div>
+                    {s.notas_apresentador&&<div className="ps-sl-notes"><strong>Notas:</strong> {s.notas_apresentador}</div>}
+                    <div className="ps-sl-ctrl">
+                      <button onClick={()=>setSlideN(Math.max(0,slideN-1))} disabled={slideN===0}>← Anterior</button>
+                      <span>{slideN+1} / {slides.length}</span>
+                      <button onClick={()=>setSlideN(Math.min(slides.length-1,slideN+1))}>Próximo →</button>
+                      <button className="ps-sm-btn ps-primary" style={{marginLeft:"auto"}}><Download size={11}/>PPTX</button>
+                    </div>
+                  </div>
+                );
+              })()}
+            </div>
+          </div>
         )}
       </div>
-
-      <style>{`.spin { animation: spin 1s linear infinite; } @keyframes spin { to { transform: rotate(360deg); } }`}</style>
     </div>
   );
 }
+
+/* ── helpers ── */
+function md(t){if(!t)return"";return t.replace(/\*\*(.+?)\*\*/g,"<strong>$1</strong>").replace(/\*(.+?)\*/g,"<em>$1</em>").replace(/`(.+?)`/g,"<code>$1</code>").replace(/\n/g,"<br/>");}
+function respostaDemo(q,p){const ql=q.toLowerCase();if(ql.includes("triagem"))return`A triagem no ${p} revisa cada infração: verifique imagem, placa e enquadramento, e Aprove ou Descarte com motivo.`;if(ql.includes("permissão")||ql.includes("perfil"))return`O ${p} possui 150+ permissões em 9 grupos: Administrador, Operador, Triador, Auditor e Consulta.`;if(ql.includes("dashboard"))return`O Dashboard exibe 6 painéis: Status Equipamentos, Triagem Mensal, Painel Sinótico, Mapa, Defasagem e Alertas INMETRO.`;return`O ${p} é um sistema de fiscalização eletrônica Axion com 18 sites ativos. Pergunte algo específico!`;}
+
+function demo(p){return{kb:{knowledge_base:{entradas:[{id:"KB-01",categoria:"Operação",titulo:"Como realizar triagem",pergunta:"Como triar infrações?",resposta:`Acesse Infrações → Triagem. Verifique imagem, placa e enquadramento no ${p}. Clique Aprovar ou Descartar.`,tags:["triagem","infrações"],confianca:95},{id:"KB-02",categoria:"Equipamentos",titulo:"Equipamento offline",pergunta:"Equipamento offline, o que fazer?",resposta:"Verifique heartbeat no Dashboard. Acesse Eventos de Equipamentos. Contate suporte se persistir.",tags:["offline","heartbeat"],confianca:92},{id:"KB-03",categoria:"Permissões",titulo:"Perfis de acesso",pergunta:"Qual a diferença entre Operador e Auditor?",resposta:"Operador: triagem e monitoramento. Auditor: revisa e aprova para exportação com auditoria.processarlote.",tags:["perfis","permissões"],confianca:88},{id:"KB-04",categoria:"Exportação",titulo:"Erro no lote de exportação",pergunta:"Lote com erro, o que fazer?",resposta:"Clique Tentar Novamente. Se persistir, use Finalizar e Reenviar. Admin pode Forçar Encerramento.",tags:["lote","exportação"],confianca:90}]}},manual:{manual:{capitulos:[{titulo:"Introdução ao "+p,secoes:[{titulo:"O que é o "+p,conteudo:`O **${p}** é um sistema de fiscalização eletrônica da Axion Tecnologia para órgãos públicos.`,passo_a_passo:[],permissoes_necessarias:[],alertas:[]},{titulo:"Primeiros passos",conteudo:"Acesse o sistema e faça login com suas credenciais.",passo_a_passo:["Abrir o navegador","Acessar a URL","Inserir login e senha","Verificar o Dashboard"],permissoes_necessarias:[],alertas:["Nunca compartilhe suas credenciais."]}]},{titulo:"Dashboard",secoes:[{titulo:"Lendo os indicadores",conteudo:"O Dashboard exibe **6 painéis** em tempo real.",passo_a_passo:["Verificar Status dos Equipamentos","Checar Defasagem","Conferir Alertas INMETRO"],permissoes_necessarias:["dashboard.obterstatusequipamentos"],alertas:["Equipamento offline por 2h+ é crítico."]}]},{titulo:"Infrações",secoes:[{titulo:"Processo de Triagem",conteudo:"A **triagem** revisa cada infração capturada.",passo_a_passo:["Acessar Infrações → Triagem","Verificar imagem","Confirmar placa e enquadramento","Aprovar ou Descartar"],permissoes_necessarias:["consultainfracao.index","consultainfracao.descartarinfracao"],alertas:["Sempre selecione o motivo correto."]}]}]}},videos:{videos:[{id:"V01",titulo:"Introdução ao "+p,duracao_estimada:"3 min",perfil_alvo:"Todos",objetivo:"Apresentar o sistema e módulos principais",cenas:[{numero:1,timestamp_inicio:"00:00",timestamp_fim:"00:30",titulo:"Abertura",narracao:`Bem-vindo ao ${p}. Este vídeo apresenta o sistema de fiscalização mais completo do Brasil.`,acao_tela:"Mostrar tela inicial",legenda:p+" — Axion Tecnologia"},{numero:2,timestamp_inicio:"00:30",timestamp_fim:"01:30",titulo:"Dashboard",narracao:"O Dashboard centraliza todos os indicadores em tempo real.",acao_tela:"Navegar para o Dashboard",legenda:"Dashboard — Centro de Controle"}]},{id:"V02",titulo:"Triagem de Infrações",duracao_estimada:"5 min",perfil_alvo:"Triador",objetivo:"Ensinar o processo completo de triagem",cenas:[{numero:1,timestamp_inicio:"00:00",timestamp_fim:"00:45",titulo:"Acessando a triagem",narracao:"Para triar, acesse Infrações → Triagem no menu lateral.",acao_tela:"Navegar para Infrações → Triagem",legenda:"Infrações → Triagem"}]}]},slides:{apresentacao:{slides:[{numero:1,layout:"titulo",titulo:p+" — Fiscalização Eletrônica",subtitulo:"Axion Tecnologia",conteudo:[],destaque:"IA integrada",notas_apresentador:"Apresentar com confiança. Destacar o diferencial da IA."},{numero:2,layout:"conteudo",titulo:"O que o "+p+" resolve",conteudo:["Triagem automatizada com OCR","18 sites monitorados em tempo real","Conformidade INMETRO","Exportação automática para DETRAN"],destaque:null,notas_apresentador:"Focar nas dores resolvidas."},{numero:3,layout:"conteudo",titulo:"Módulos Principais",conteudo:["Dashboard — KPIs em tempo real","Infrações — Triagem, auditoria, exportação","Operações — Equipamentos e faixas","Medições — Contratos e performance","Relatórios — 14 tipos"],destaque:"18 sites ativos",notas_apresentador:"Dar exemplo de cada módulo."},{numero:4,layout:"conteudo",titulo:"Fluxo de Infrações",conteudo:["Captura pelo equipamento","Triagem pelo operador","Auditoria de qualidade","Exportação para órgão","Geração de multa"],destaque:null,notas_apresentador:"Mostrar ao vivo se possível."},{numero:5,layout:"encerramento",titulo:"Próximos Passos",conteudo:["Treinamento dos operadores","Configuração de perfis","Integração com sistemas do órgão","Suporte 24/7 via Jitbit"],destaque:null,notas_apresentador:"Abrir para perguntas."}]},timeline_implantacao:{fases:[{numero:1,nome:"Implantação",semanas:"1-2",responsavel:"Técnico Axion",atividades:["Instalação dos equipamentos","Configuração do banco de dados","Cadastro de arcos e faixas"],entregavel:"Sistema instalado e configurado"},{numero:2,nome:"Treinamento",semanas:"3-4",responsavel:"Consultor Axion",atividades:["Treinamento dos operadores","Configuração de perfis","Teste de triagem"],entregavel:"Equipe habilitada"},{numero:3,nome:"Operação Piloto",semanas:"5-6",responsavel:"Operadores + Suporte",atividades:["Operação supervisionada","Ajustes de configuração","Validação de relatórios"],entregavel:"Primeira exportação de lote"},{numero:4,nome:"Operação Plena",semanas:"7+",responsavel:"Operadores",atividades:["Operação autônoma","Monitoramento contínuo","Suporte Jitbit"],entregavel:"SLA contratual ativo"}],marcos:[{semana:1,evento:"Início da Implantação",tipo:"inicio"},{semana:2,evento:"Sistema Online",tipo:"entrega"},{semana:4,evento:"Equipe Treinada",tipo:"validacao"},{semana:6,evento:"Primeira Exportação",tipo:"entrega"},{semana:7,evento:"Operação Plena",tipo:"producao"}]}},grafo:{arvore_dependencias:{arvore:`${p}\n├── Dashboard\n│   ├── Status Equipamentos\n│   └── Alertas Aferição\n├── Infrações\n│   ├── Triagem → depende de: Equipamentos\n│   ├── Auditoria → depende de: Triagem\n│   └── Exportação → depende de: Auditoria\n├── Operações\n│   ├── Equipamentos ← base\n│   ├── Faixas ← vinculadas a Equipamentos\n│   └── Aferições → valida: Equipamentos\n├── Medições\n│   ├── Contratos ← define SLA\n│   └── Índices ← avaliam contratos\n└── Acesso\n    ├── Usuários → usa: Perfis\n    └── Perfis → usa: Permissões`},mermaid_grafo:`graph TD\n  EQ[Equipamentos] --> OP[Operações]\n  OP --> TR[Triagem]\n  TR --> AU[Auditoria]\n  AU --> EX[Exportação]\n  CT[Contratos] --> ME[Medições]\n  OP --> ME\n  DB[Dashboard] --> EQ\n  DB --> TR\n  JB[Jitbit] --> AT[Atendimento]\n  IA[AxionIA] --> AT`,mermaid_fluxo:`flowchart LR\n  A([Equipamento captura]) --> B[OCR lê placa]\n  B --> C{Triagem}\n  C -->|Aprovado| D[Auditoria]\n  C -->|Descartado| E[Motivo]\n  D -->|OK| F[Exportação]\n  F --> G([DETRAN])`}};}
