@@ -50,6 +50,31 @@ Combine filtros **Infrator** + **Período** + **Posto** para gerar relatório fo
 - [Liberar Pesagem](./liberar-pesagem)
 - [Relatório de Passagens](../relatorios/relatorio-passagens)
 
+## Fluxo de uso do ticket fechado
+
+1. Operação de pesagem concluída e ticket encerrado automaticamente
+2. Ticket aparece em **Balança → Tickets Fechados**
+3. Filtrar por **Período** e/ou **Resultado** conforme necessidade
+4. Clicar em **Visualizar** para confirmar dados e imagens
+5. Exportar em CSV para incluir no boletim diário ou mensal
+
+## Tabela de referência — filtros e usos
+
+| Filtro | Valor | Uso |
+|--------|-------|-----|
+| **Resultado = Infrator** + período | Mensal | Conciliação de infrações geradas |
+| **Placa** específica | - | Verificar histórico de veículo |
+| **Posto** + período | Semanal | Relatório gerencial por localidade |
+| **Resultado = Regular** | - | Comprovante de regularidade |
+
+## Erros comuns
+
+| Problema | Causa | Solução |
+|----------|-------|----------|
+| Ticket não aparece na lista | Ticket ainda aberto | Verificar em Tickets Abertos |
+| Resultado incorreto no ticket | Classificação errada | Reclassificar em Tickets Abertos |
+| CSV exportado incompleto | Filtro muito restritivo | Ampliar o período de consulta |
+
 | Filtro | Descrição |
 |--------|-----------|
 | **Período** | Faixa de datas da pesagem |

@@ -41,6 +41,23 @@ Todo equipamento metrológico deve possuir **certificado de aferição válido**
 - [Aferições](../operacoes/afericoes) — Registro de aferições no sistema
 - [Tipos de Aferições](../administracao/tipos-afericoes) — Configuração dos tipos
 
+## Tabela de referência — prazos e obrigatoriedades
+
+| Tipo | Prazo de validade | Quando realizar | Base legal |
+|------|:-----------------:|-----------------|------------|
+| Aferição Inicial | 12 meses | Antes de operar | CONTRAN 798/2021 |
+| Aferição Periódica | 12 meses | Anualmente | CONTRAN 798/2021 |
+| Aferição Pós-Manutenção | Até próxima periódica | Após intervenção | CONTRAN 798/2021 |
+| Aferição Extraordinária | Variável | Por exigência do órgão | Contratual |
+
+## Erros comuns
+
+| Problema | Causa | Solução |
+|----------|-------|----------|
+| Infrações bloqueadas sem aviso | Aferição vencida | Registrar nova aferição |
+| Alerta de vencimento não aparece | Aferição não registrada | Cadastrar o certificado INMETRO |
+| Data de validade incorreta | Cadastro com data errada | Editar aferição e corrigir |
+
 :::warning
 Equipamentos com aferição vencida têm infrações **automaticamente invalidadas**. O sistema exibe alertas no Dashboard quando a data de vencimento se aproxima.
 :::

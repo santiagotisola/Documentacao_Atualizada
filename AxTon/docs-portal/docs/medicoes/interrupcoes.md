@@ -78,6 +78,23 @@ Registre toda interrupção logo que ocorrer. Interrupções não registradas se
 - [Contratos](./contratos)
 - [Eventos de Equipamentos](../operacoes/eventos-equipamentos)
 
+## Fluxo mensal de registro
+
+1. Monitorar status dos equipamentos diariamente via [Monitoramento Online](../operacoes/monitoramento-online)
+2. Registrar cada interrupção imediatamente após a ocorrência com **Data/Hora Início** precisa
+3. Ao encerrar a interrupção, registrar a **Data/Hora Fim**
+4. No fechamento mensal, revisar todas as interrupções do período antes de gerar a medição
+5. Gerar a medição — as interrupções são computadas automaticamente no índice de disponibilidade
+
+## Tabela de referência — prazos de registro
+
+| Tipo | Prazo máximo | Consequência do atraso |
+|------|:------------:|------------------------|
+| Falha de equipamento | 2h após detecção | Contabiliza como indisponibilidade total |
+| Manutenção preventiva | Antes de iniciar | Pode ser contestada como penalidade |
+| Evento externo | Até 24h | Sem isenção se não documentada |
+| Parada operacional | Mesma data | Conforme cláusula contratual |
+
 ## Boas práticas
 
 - Registre a interrupção imediatamente após o início do evento — interrupções não registradas são contabilizadas como indisponibilidade

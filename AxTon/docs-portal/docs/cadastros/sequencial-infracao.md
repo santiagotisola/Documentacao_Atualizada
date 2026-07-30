@@ -75,6 +75,30 @@ Quando o número atingir o limite, edite o sequêncial com um novo número inici
 | [**Sequênciais de Exportação**](../infracoes/exportacao) | Números dos lotes de exportação |
 | [**Configurações**](../sistema/configuracoes) | Tolerâncias e enquadramentos de Infração |
 
+## Fluxo de gestão de sequenciais
+
+1. Antes de iniciar as operações, configurar um sequencial para **cada tipo de infração**
+2. Durante as operações, o sistema atribui números automaticamente
+3. Monitorar o valor atual vs. o limite máximo mensalmente
+4. Ao atingir 80% do limite: criar nova série ou ampliar o **Prefixo (Até)**
+5. Comunicar ao órgão autuador antes de reiniciar a numeração
+
+## Tabela de referência — tipos de infração e sequenciais
+
+| Tipo de Infração | Quando ocorre | Sequencial obrigatório |
+|-----------------|---------------|:---------------------:|
+| Excesso de PBT | PBT medido > PBT regulamentado + tolerância | Sim |
+| Excesso de Eixo | Peso por eixo excede o limite | Sim |
+| Excesso de Eixo/PBT | Excesso simultâneo no eixo e no PBT | Sim |
+
+## Erros comuns
+
+| Problema | Causa | Solução |
+|----------|-------|----------|
+| Infração sem número atribuído | Sequencial não cadastrado para o tipo | Criar sequencial do tipo correspondente |
+| Número duplicado gerado | Sequencial editado manualmente | Nunca editar sem verificar histórico |
+| Lote rejeitado por sequencial | Série esgotada | Verificar e ampliar o limite superior |
+
 ### Ações disponíveis na listagem
 
 | Ação | Descrição |

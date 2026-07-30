@@ -69,6 +69,32 @@ As detecções de veículos monitorados geram alertas automáticos. O operador d
 Use este Relatório em conjunto com a tela de **Alertas** para acompanhar o status das tratativas de cada detecção.
 :::
 
+## Fluxo de atendimento
+
+1. Detecção automática do veículo monitorado pelo equipamento
+2. Alerta gerado na tela de **Alertas** e no **Monitoramento Online**
+3. Operador assume o alerta e registra observações
+4. Acionar equipe de campo ou autoridades conforme protocolo
+5. Encerrar o alerta com **Resolução** descrita
+6. Consultar este relatório para auditoria e prestação de contas
+
+## Tabela de referência — SLA de atendimento
+
+| Classificação | Prazo máximo | Canal de acionamento |
+|---------------|:------------:|----------------------|
+| Veículo roubado/furtado | Imediato | Central de operações |
+| Veículo com restrição judicial | 15 min | Coordenador de turno |
+| Veículo suspeito (categoria VIP) | 30 min | Operador responsável |
+| Monitoramento preventivo | Até 1h | Registro no sistema |
+
+## Erros comuns
+
+| Situação | Causa provável | Solução |
+|----------|---------------|----------|
+| Alerta não gerado para placa monitorada | Veículo com status Inativo | Reativar cadastro |
+| Detecção ausente no relatório | OCR com baixa confiança | Verificar imagem |
+| Período sem retorno | Veículo não circulou na área | Normal — ampliar período |
+
 ## Casos de uso
 
 - **Prestação de contas operacional**: demonstrar ao órgão contratante todas as detecções de veículos monitorados realizadas no período

@@ -56,6 +56,37 @@ Alterações em layouts de exportação ativos podem causar rejeição de lotes 
 - [Sequenciais de Infrações](./sequenciais-infracoes)
 - [Sequenciais de Lote](./sequenciais-lote-exportacao)
 
+## Exemplos de campos mapeados
+
+### Exportação DETRAN (CSV)
+
+| Campo no sistema | Coluna no arquivo | Obrigatório |
+|-----------------|:-----------------:|:-----------:|
+| Número Auto | `nro_auto` | Sim |
+| Placa | `placa_veiculo` | Sim |
+| Data/Hora | `data_infracao` | Sim |
+| Enquadramento | `cod_enquadramento` | Sim |
+| Velocidade medida | `vel_medida` | Sim |
+| Velocidade permitida | `vel_permitida` | Sim |
+| Forma de autuação | `forma_autuacao` | Sim |
+
+## Tabela de referência — formatos de arquivo
+
+| Formato | Separador padrão | Encoding | Uso típico |
+|---------|:----------------:|:--------:|------------|
+| CSV | `;` | UTF-8 | DETRAN estadual |
+| TXT posicional | N/A | ISO-8859-1 | SENATRAN |
+| XML | N/A | UTF-8 | Sistemas ERP |
+| JSON | N/A | UTF-8 | APIs modernas |
+
+## Erros comuns
+
+| Problema | Causa | Solução |
+|----------|-------|----------|
+| Lote rejeitado por campo inválido | Mapeamento incorreto | Conferir spec do órgão e reconfigurar |
+| Caracteres especiais corrompidos | Encoding errado | Ajustar para ISO-8859-1 se exigido |
+| Arquivo gerado vazio | Nenhuma infração no período | Verificar filtros da exportação |
+
 | **Importação veículos** | Carga de dados de veículos |
 | **Importação placas** | Lista de placas para equipamentos |
 

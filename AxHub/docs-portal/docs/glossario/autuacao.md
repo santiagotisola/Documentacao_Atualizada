@@ -78,6 +78,24 @@ Equipamento captura infração
 ## Relacionados
 
 - [Infração](./infracao) — O que gera o auto
+
+## Erros comuns no processo de autuação
+
+| Erro | Causa | Solução |
+|------|-------|----------|
+| AIT emitido após 30 dias | Atraso no processamento | Monitorar backlog de triagem diariamente |
+| Placa errada no auto | OCR incorreto não corrigido | Revisar placa na triagem antes de confirmar |
+| Enquadramento incorreto | Velocidade mál configurada | Verificar configuração de enquadramento |
+| Auto sem imagem obrigatória | Tipo de imagem não capturado | Verificar tipos de imagem obrigatórios |
+
+## Tabela de referência — prazos da autuação
+
+| Etapa | Prazo | Base legal | Consequência do descumprimento |
+|-------|:-----:|------------|---------------------------------|
+| Expedição do AIT | 30 dias | Art. 281 CTB | Auto inválido |
+| Notificação ao infrator | 30 dias | Art. 281 CTB | Prescrição |
+| Prazo para recurso | 30 dias | Art. 285 CTB | Direito de defesa |
+| Arquivamento | 5 anos | Lei 9.873/99 | Prescrição administrativa |
 - [Enquadramento](./enquadramento) — Classificação legal
 - [Aferição](./afericao) — Pré-requisito do equipamento
 

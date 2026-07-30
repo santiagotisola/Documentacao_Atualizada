@@ -52,6 +52,32 @@ Os motivos alimentam o **Dashboard gerencial** com:
 - [Reclassificar](./reclassificar)
 - [Processamento por Usuário](../relatorios/processamento-por-usuario)
 
+## Fluxo de uso dos motivos
+
+1. Veículo pesado e resultado gerado (regular ou infrator)
+2. Operador avalia a situação (descarga parcial, recurso, pagamento)
+3. Seleciona o **Motivo** correspondente na tela de liberação
+4. Sistema registra o motivo vinculado ao ticket
+5. Gestores consultam os motivos nos relatórios de produção
+
+## Tabela de referência — motivos e tipos
+
+| Motivo | Tipo | Quando usar |
+|--------|------|-------------|
+| Pesagem Aleatória | Pesagem | Fiscalização rotineira |
+| Su b  Suspeita de Excesso | Pesagem | Veículo com aspecto de sobrecarga |
+| Liberação por Pagamento | Liberação | Multa paga no local |
+| Liberação por Recurso | Liberação | Motorista apresentou defesa formal |
+| Liberação por Descarga | Liberação | Carga removida do veículo |
+
+## Erros comuns
+
+| Problema | Causa | Solução |
+|----------|-------|----------|
+| Motivo genérico aplicado sempre | Falta de orientação à equipe | Treinamento e revisão de tickets |
+| Motivo inativo no sistema | Cadastro desatualizado | Reativar ou criar novo motivo |
+| Tipo errado selecionado | Pesagem em vez de Liberação | Auditar tickets e corrigir |
+
 
 ## Motivos comuns
 

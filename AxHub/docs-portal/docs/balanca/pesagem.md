@@ -58,6 +58,24 @@ Tela para liberar em lote os tickets que chegaram do sistema de pesagem.
 ## Colunas Principais dos Tickets
 
 | Coluna | Descrição |
+
+## Erros comuns no módulo de balança
+
+| Problema | Causa provável | Solução |
+|----------|---------------|----------|
+| Ticket não aparece em Abertos | Operação não está ativa | Criar ou reativar a operação |
+| Pesagem não gera infração | Tolerância configurada muito alta | Verificar Configurações do Sistema | 
+| Ticket fechado com resultado errado | Classificação incorreta | Reclassificar antes de liberar |
+| Liberação sem motivo disponível | Motivo não cadastrado | Cadastrar motivo em Balança → Motivos |
+
+## Tabela de referência — status dos tickets
+
+| Status | Descrição | Passo seguinte |
+|--------|-----------|:--------------:|
+| **Em andamento** | Pesagem iniciada, aguardando conclusão | Análise e encerramento |
+| **Finalizado** | Pesagem concluída e registrada | Exportação ou consulta |
+| **Reclassificado** | Categoria corrigida pelo operador | Verificar resultado após reclassificação |
+| **Liberado** | Veículo liberado com motivo registrado | Registro encerrado |
 |--------|-----------|
 | **Data/Hora** | Momento da pesagem |
 | **Placa** | Placa do Veículo pesado |

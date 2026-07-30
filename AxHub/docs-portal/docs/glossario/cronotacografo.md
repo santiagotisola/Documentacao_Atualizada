@@ -58,7 +58,23 @@ Acesse **Operações → Aferições** para verificar os registros de equipament
 
 - Verifique o status do cronoatacógrafo na triagem sempre que o veículo for de carga pesada com PBT > 4.536 kg
 - Use o filtro **Tipo = Cronoatacógrafo irregular** no relatório de infrações para monitorar a frequência de irregularidades
-- Registre as infrações do Art. 162, II com o enquadramento correto para validade jurídica no DETRAN
+## Tabela de referência — limites de jornada
+
+| Situação | Limite | Base legal |
+|----------|:------:|------------|
+| Direção contínua | 4 horas | Res. CONTRAN 92/1999 |
+| Pausa obrigatória | 30 minutos | Res. CONTRAN 92/1999 |
+| Jornada diária normal | 8 horas | CLT + CONTRAN |
+| Jornada diária máxima | 10 horas | Com adicional |
+| Descanso interjornada | 11 horas | CLT |
+
+## Erros comuns na verificação
+
+| Problema | Causa | Solução |
+|----------|-------|----------|
+| Status sempre `NãoEncontrado` | Banco de certif. desatualizado | Acionar suporte técnico |
+| Falso positivo de irregularidade | Certif. renovado após consulta | Verificar data de atualização do banco |
+| Veículo não verificado | Tipo não obrigado a ter cronotácografo | Normal — status `N/A` |- Registre as infrações do Art. 162, II com o enquadramento correto para validade jurídica no DETRAN
 - Combine com a verificação de placa para confirmar se o mesmo veículo reincide na irregularidade
 
 ## Relacionado

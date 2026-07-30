@@ -78,6 +78,24 @@ Os logs de acesso não podem ser editados ou excluídos por nenhum Usuário gara
 Verifique a política de retenção de logs configurada em **Configurações do Sistema** para saber o período disponível para consulta.
 :::
 
+## Fluxo de auditoria
+
+1. Suspeita de acesso indevido → filtrar por **Usuário** suspeito no período relevante
+2. Identificar ações realizadas (criar, editar, excluir) e os módulos acessados
+3. Cruzar com dados do módulo afetado para avaliar impacto
+4. Exportar o log em Excel para anexar ao relatório de ocorrência
+5. Tomar ação: bloquear usuário, reverter alterações, notificar gestor
+
+## Tabela de referência — ações e impacto
+
+| Ação | Impacto | Atenção especial |
+|------|---------|------------------|
+| **Excluir** | Irversível | Alta — verificar se era intencional |
+| **Editar** | Altera dado existente | Média — comparar com estado anterior |
+| **Exportar** | Dado copiado externamente | Alta em dados sensíveis |
+| **Login fora do horário** | Possível acesso não autorizado | Alta — investigar imediatamente |
+| **Login com falha repetida** | Tentativa de acesso | Bloquear usuário se recorrente |
+
 ## Segurança
 
 - Monitore acessos em horários incomuns (madrugada, fins de semana) e confirme com o responsável da conta

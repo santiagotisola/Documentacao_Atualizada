@@ -43,6 +43,32 @@ Cadastro e gestão dos **contratos de prestação de serviço** vinculados às o
 - [Índices de Performance](./indices-performance)
 - [Recursos](./recursos)
 
+## Fluxo contratual
+
+1. Contrato assinado com o órgão contratante
+2. Cadastrar o contrato em **Medição → Contratos**
+3. Vincular os **Equipamentos** cobertos pelo contrato
+4. Definir as **Metas** de disponibilidade e OCR
+5. A cada mês: gerar a medição e revisar os índices apurados
+6. Encaminhar o Boletim de Medição ao contratante dentro do prazo
+
+## Tabela de referência — status de contratos
+
+| Status | Descrição | Ação |
+|--------|-----------|------|
+| **Ativo** | Contrato em vigência | Gerar medições mensais |
+| **Encerrado** | Prazo expirado | Não gerar novas medições |
+| **Suspenso** | Pausa temporária | Aguardar retomada |
+
+## Erros comuns
+
+| Problema | Causa | Solução |
+|----------|-------|----------|
+| Medição não calcula dados do contrato | Contrato encerrado ou suspenso | Verificar status do contrato |
+| Índice calculado incorreto | Equipamento não vinculado | Adicionar equipamento ao contrato |
+| Meta não aparece no boletim | Meta não cadastrada | Editar contrato e preencher metas |
+| Alerta de vencimento não aparece | Data fim não configurada | Verificar campo Vigência Fim |
+
 ## Alertas automáticos
 
 O sistema envia alertas quando:

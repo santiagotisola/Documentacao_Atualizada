@@ -46,6 +46,28 @@ Identifique os horários de pico para dimensionar equipes operacionais com mais 
 - **Comparação semanal**: detectar anomalias de fluxo por dia da semana
 - **Relatório ao contratante**: evidenciar volume operacional no período
 
+## Tabela de referência — horários de pico típicos
+
+| Período | Fluxo esperado | Observação |
+|---------|:--------------:|------------|
+| 06h – 09h | Alto | Saída de cargas das distribuidoras |
+| 09h – 12h | Médio | Tráfego regular |
+| 12h – 14h | Baixo | Almoço/pausa operacional |
+| 14h – 17h | Alto | Retorno de cargas |
+| 17h – 20h | Médio-alto | Tráfego misto |
+| 20h – 06h | Baixo | Tráfego noturno |
+
+## Perguntas frequentes
+
+**O relatório não exibe dados para um posto específico. Por quê?**  
+Verifique se o posto está com status **Ativo** e se houve pesagens no período. Postos inativos não geram dados no relatório.
+
+**É possível comparar dois dias no mesmo relatório?**  
+Não diretamente — exporte os dois períodos em Excel e compare nas planilhas lado a lado.
+
+**Queda brusca no fluxo indica falha de equipamento?**  
+Pode indicar. Confirme com o [Processamento de Imagens](./processamento-imagens) e, se necessário, abra um evento em [Eventos de Equipamentos](../operacoes/eventos-equipamentos).
+
 ## Relacionado
 
 - [Relatório de Infrações](./relatorio-infracoes)

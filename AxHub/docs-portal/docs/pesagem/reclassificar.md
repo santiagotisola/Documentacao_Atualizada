@@ -63,6 +63,23 @@ Ao reclassificar um Veículo o sistema recalcula o enquadramento da Infração U
 - [Tickets Fechados](./ticket-fechado)
 - [Tickets Abertos](./ticket-aberto)
 - [Motivos](./motivos)
+
+## Erros comuns
+
+| Situação | Causa provável | Solução |
+|----------|---------------|----------|
+| Reclassificação não cancela a infração | Nova classificação ainda excede o PBT | Verificar o limite da nova categoria |
+| Opção de reclassificar desativada | Ticket já exportado | Use somente em tickets abertos |
+| Motivo obrigatório não preenchido | Validação do sistema | Preencher o campo Motivo |
+| Infração exportada não pode ser alterada | Lote já transmitido | Contatar administrador para reabrir |
+
+## Tabela de referência — impacto por classificação
+
+| Classificação original | Nova classificação | Resultado possível |
+|------------------------|---------------------|-------------------|
+| Caminhão toco (16t) | Caminhão truck (23t) | Infração cancelada se < 23t |
+| Bi-truck (29t) | Bitrem (41,5t) | Infração cancelada se < 41,5t |
+| Classificação maior | Classificação menor | Infração mantida ou agravada |
 - [Postos de Pesagem](./postos)
 
 ## Boas práticas

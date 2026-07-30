@@ -58,6 +58,26 @@ Exceções mal configuradas podem isentar veículos que deveriam ser autuados. R
 - [Motivos de Descarte](../administracao/motivos-descartes)
 - [Infrações Descartadas](./infracoes-descartadas)
 
+## Fluxo de configuração de excessão
+
+1. Identificar a necessidade (veículo oficial, período de evento, faixa exclusiva)
+2. Reunir o embasamento legal (decreto, portaria, ato autorizador)
+3. Acessar **Infrações → Exceções** e clicar em **+ Nova**
+4. Selecionar o **Tipo de filtro** e configurar os critérios
+5. Definir a **Vigência** com data de início e fim
+6. Vincular ao **Motivo de descarte** correspondente
+7. Salvar e monitorar as infrações descartadas pela regra
+
+## Tabela de referência — tipos de exceção
+
+| Tipo | Exemplo prático | Observação |
+|------|----------------|------------|
+| **Placa** | Ambulância, viatura policial | Sempre com embasamento legal |
+| **Horário** | Isento entre 00h e 05h em feriados | Cuidado com períodos amplos |
+| **Faixa** | Corredor exclusivo de ônibus | Configurar apenas a faixa correta |
+| **Classificação** | Trator agrícola isento de velocidade | Verificar enquadramento aplicado |
+| **Data** | Período eleitoral, carnaval | Definir data fim obrigatória |
+
 - Configurar período de vigência da exceção
 - Ativar/desativar exceções sem excluí-las
 - Consultar histórico de aplicações da exceção

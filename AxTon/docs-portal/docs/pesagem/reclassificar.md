@@ -55,6 +55,22 @@ Reclassificar pode alterar o limite de PBT aplicável e, consequentemente, cance
 - [Classificações de Veículos](../veiculos/classificacoes-veiculos)
 - [Motivos](./motivos)
 
+## Erros comuns
+
+| Situação | Causa provável | Solução |
+|----------|---------------|----------|
+| Reclassificação não altera a infração | Nova classificação ainda excede o PBT | Verificar o limite da nova categoria |
+| Opção de reclassificar desativada | Ticket já exportado ou encerrado | Use somente em tickets em aberto |
+| Classificação incorreta repetida | OCR confundindo tipo de eixo | Ajustar parâmetros do sensor |
+
+## Tabela de referência — impacto no PBT
+
+| Classificação original | Nova classificação | Resultado possível |
+|------------------------|---------------------|-------------------|
+| Caminhão toco (2E/16t) | Caminhão truck (3E/23t) | Infração cancelada se < 23t |
+| Bi-truck (4E/29t) | Bitrem (5E/41,5t) | Infração cancelada se < 41,5t |
+| Classificação maior | Classificação menor | Infração mantida ou agravada |
+
 :::warning
 Reclassificar pode alterar o limite de PBT aplicável e, consequentemente, cancelar ou manter a infração. A operação é registrada em log de auditoria.
 :::

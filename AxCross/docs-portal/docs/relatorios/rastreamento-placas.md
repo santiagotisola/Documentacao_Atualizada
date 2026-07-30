@@ -87,6 +87,26 @@ Em condições adversas (chuva, sujeira, ângulo), a leitura da placa pode ser p
 - [Veículos Monitorados](./veiculos-monitorados)
 - [Mapeamento de Rotas](./mapeamento-rotas)
 
+## Fluxo de rastreamento
+
+1. Receber solicitação (operação policial, investigação administrativa ou pedido interno)
+2. Acessar **Relatórios → Rastreamento de Placas**
+3. Informar a **Placa** e o **Período** de interesse
+4. Consultar o histórico e confirmar passagens na imagem
+5. Combinar com o [Painel Analítico](./painel-analitico) para ver heatmap e linha do tempo
+6. Exportar em **Excel** e anexar ao relatório ou boletim de ocorrência
+
+## Tabela de referência — leituras OCR
+
+| Condição | Qualidade esperada | Ação |
+|----------|--------------------|------|
+| Luz natural boa | Alta (>90%) | Nenhuma |
+| Noite com iluminação | Média (70-90%) | Confirmar visualmente |
+| Chuva intensa | Baixa (<70%) | Verificar imagem original |
+| Placa Mercosul | Alta | Padrão suportado |
+| Placa antiga | Média | Aceita, mas confirmar |
+| Placa suja/danificada | Baixa | Usar imagem para confirmar |
+
 ## Casos de uso
 
 - **Investigação de incidentes**: reconstruir o percurso de um veículo suspeito antes e depois de um crime

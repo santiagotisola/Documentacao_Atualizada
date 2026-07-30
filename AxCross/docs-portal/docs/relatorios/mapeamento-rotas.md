@@ -48,6 +48,31 @@ O mapeamento de rotas é especialmente útil em operações de busca de veículo
 - Períodos acima de 30 dias podem ter desempenho reduzido
 - Placas com baixa qualidade OCR podem ter passagens ausentes no mapa
 
+## Exemplos de uso
+
+### Localização de veículo furtado
+
+1. Receber informação com placa e data/hora do furto
+2. Rastrear passagens a partir do momento do furto até 24h depois
+3. Identificar o último cruzamento onde o veículo foi visto
+4. Exportar relatório para a equipe de campo
+
+### Análise de rota suspeita
+
+1. Selecionar a placa do veículo e o período de 7 dias
+2. Observar repetição de rota nos mesmos horários
+3. Confirmar padrão de comportamento combinando com [Painel Analítico](../relatorios/painel-analitico)
+4. Registrar como ocorrência em [Veículos Monitorados](../operacoes/veiculos-monitorados)
+
+## Tabela de referência
+
+| Cenário | Período sugerido | Observação |
+|---------|:----------------:|------------|
+| Veículo furtado | 1 a 3 dias | A partir da data do furto |
+| Investigação criminal | 7 a 30 dias | Verificar desempenho |
+| Acompanhamento preventivo | Até 7 dias | Mais responsivo |
+| Análise histórica | >30 dias | Pode ser lento — exportar e filtrar |
+
 ## Relacionado
 
 - [Passagens](../glossario/passagem)

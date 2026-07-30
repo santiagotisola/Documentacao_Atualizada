@@ -41,6 +41,24 @@ Use o filtro **Status = Ausente** para identificar veículos de carga que circul
 - [MDF-e](../glossario/mdfe)
 - [Relatório de Discrepancias](./relatorio-discrepancias)
 
+## Fluxo de validação NF-e
+
+1. Veículo de carga passa pelo equipamento de pesagem
+2. OCR captura a placa e consulta o SEFAZ/MDF-e vinculado
+3. Sistema verifica se há NF-e válida associada à placa no momento da passagem
+4. Se ausente ou inválida → registro gerado com status **Ausente** ou **Cancelada**
+5. Operador acessa este relatório e filtra por **Status = Ausente**
+6. Exporta a lista e encaminha à Secretaria de Fazenda estadual
+
+## Tabela de referência — status de NF-e
+
+| Status | Significado | Ação recomendada |
+|--------|-------------|------------------|
+| **Válida** | NF-e ativa e dentro do prazo | Nenhuma |
+| **Vencida** | NF-e expirada no momento da passagem | Registrar irregularidade |
+| **Cancelada** | NF-e cancelada após emissão | Autuação por transporte irregular |
+| **Ausente** | Nenhuma NF-e encontrada para a placa | Reportar à SEFAZ |
+
 ## Base legal
 
 **Ajuste SINIEF 07/2005** — obrigatoriedade da NF-e para veículos de carga em trânsito. Fiscalização sancionada pela **Lei 8.137/90** (crimes contra a ordem tributária).

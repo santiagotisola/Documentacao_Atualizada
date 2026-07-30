@@ -54,6 +54,32 @@ Um enquadramento mal configurado resulta em infrações com artigo CTB incorreto
 - [Formas de Autuação](./formas-autuacao)
 - [Operações](../operacoes/cadastro-operacoes)
 
+## Exemplos de configuração
+
+**Operação de radar de velocidade em via de 60 km/h:**
+- Enquadramento: 55411 (excesso até 20%) — Velocidade máxima: 60 km/h
+- Enquadramento: 55412 (excesso 20-50%) — Velocidade máxima: 60 km/h
+- Enquadramento: 55413 (excesso > 50%) — Velocidade máxima: 60 km/h
+
+**Operação de radar em via de 80 km/h:**
+- Duplicar as configurações acima com Velocidade máxima: 80 km/h
+
+## Tabela de referência — enquadramentos de velocidade
+
+| Código | Descrição | Via 60 km/h gera | Via 80 km/h gera |
+|--------|-----------|:---------------:|:----------------:|
+| 55411 | Até 20% de excesso | 61-72 km/h | 81-96 km/h |
+| 55412 | 20% a 50% de excesso | 73-90 km/h | 97-120 km/h |
+| 55413 | Acima de 50% | > 90 km/h | > 120 km/h |
+
+## Erros comuns
+
+| Problema | Causa | Solução |
+|----------|-------|----------|
+| Enquadramento incorreto aplicado | Velocidade máxima errada na configuração | Corrigir o campo e rever infrações do período |
+| Infração sem enquadramento | Configuração ausente para a operação | Criar configuração para a operação |
+| Dois enquadramentos no mesmo limite | Configuração duplicada | Inativar a duplicata |
+
 |------|--------|
 | Relacionado | [Enquadramentos](./enquadramentos) |
 | Relacionado | [Operações](../operacoes/cadastro-operacoes) |

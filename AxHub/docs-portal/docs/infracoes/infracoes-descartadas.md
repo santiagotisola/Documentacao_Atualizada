@@ -59,6 +59,25 @@ Use este relatório regularmente para avaliar a qualidade de captura dos equipam
 - [Triagem](./triagem)
 - [Motivos de Descarte](../administracao/motivos-descartes)
 - [Processamento por Usuário](../relatorios/processamento-por-usuario)
+
+## Fluxo de revisão de descartadas
+
+1. Acessar **Infrações → Consulta** com filtro **Status = Descartada**
+2. Filtrar por **período** e **equipamento** para reduzir o volume
+3. Analisar os **Motivos de Descarte** mais frequentes
+4. Identificar se há padrão (equipamento específico, analista específico)
+5. Acionar ação corretiva: manutenção, calibração ou treinamento
+6. Registrar ações no sistema para comprovante ao contratante
+
+## Tabela de referência — motivos de descarte e atenção
+
+| Motivo | Taxa aceitável | Alerta se |
+|--------|:-------------:|----------|
+| Imagem ruim / OCR | < 10% | > 15%: verificar câmera |
+| Placa ilegível | < 8% | > 12%: calibrar equipamento |
+| Motivo genérico | < 5% | > 10%: rever treinamento |
+| Exceção automática | Conforme regras | Verificar regras de exceção |
+| Dupla contagem | 0% | Qualquer ocorrência — investigar |
 - Visualizar motivo do descarte e observações
 - Exportar Relatório de descartadas
 

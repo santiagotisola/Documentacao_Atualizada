@@ -53,6 +53,32 @@ Configure cada perfil com apenas as permissões estritamente necessárias. Evite
 - [Usuários](./usuarios)
 - [Logs de Acesso](./logs-acesso)
 
+## Exemplos de configuração por perfil
+
+| Perfil | Módulos | Criar/Editar | Excluir |
+|--------|---------|:------------:|:-------:|
+| **Operador de Pesagem** | Pesagem, Triagem | Sim | Não |
+| **Auditor** | Medições, Relatórios | Não | Não |
+| **Supervisor** | Todos exceto Configurações | Sim | Não |
+| **Administrador** | Todos | Sim | Sim |
+
+## Fluxo de configuração de permissões
+
+1. Criar ou selecionar o **Perfil de Acesso** em Controle de Acesso → Perfis
+2. Acessar **Controle de Acesso → Permissões de Acesso**
+3. Selecionar o perfil no filtro superior
+4. Marcar/desmarcar permissões por módulo (Visualizar, Criar, Editar, Excluir)
+5. Clicar em **Salvar**
+6. Testar acessando com um usuário do perfil para validar
+
+## Erros comuns
+
+| Situação | Causa | Solução |
+|----------|-------|----------|
+| Usuário não vê módulo | Falta permissão de Visualizar | Marcar `Visualizar` no módulo |
+| Não consegue salvar | Falta permissão de Criar/Editar | Marcar `Criar/Editar` no módulo |
+| Alteração não reflete | Cache de sessão ativo | Pedir logout e login ao usuário |
+
 
 ## Relacionado
 

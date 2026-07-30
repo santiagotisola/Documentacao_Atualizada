@@ -47,6 +47,31 @@ Webhooks com erro 4xx (cliente) não são reenviados automaticamente. Webhooks c
 - [Logs de Envios](../relatorios/relatorio-logs-envios)
 - [Integrações](../sistema/integracoes)
 
+## Exemplos de uso
+
+**Integração com sistema de BI:**  
+Configure um webhook para `lote.exportado` apontando para o endpoint do BI. A cada exportação, o BI recebe automaticamente os dados e atualiza os dashboards.
+
+**Alerta de equipamento offline:**  
+Configure um webhook para `equipamento.offline` apontando para um sistema de tickets de suporte (ex.: Jira, Zendesk). Uma ocorrência é aberta automaticamente quando o equipamento perde heartbeat.
+
+## Tabela de referência — eventos e payloads
+
+| Evento | Quando dispara | Dados enviados |
+|--------|:-------------:|----------------|
+| `infracao.criada` | Nova infração registrada | ID, placa, data, velocidade |
+| `infracao.auditada` | Infração aprovada | ID, auditor, data |
+| `lote.exportado` | Lote enviado ao órgão | ID lote, sequencial, quantidades |
+| `equipamento.offline` | Heartbeat perdido | ID equipamento, última comunicação |
+
+## Erros comuns
+
+| Problema | Causa | Solução |
+|----------|-------|----------|
+| Webhook não acionado | URL incorreta ou endpoint offline | Testar URL e verificar status do receptor |
+| Erro 4xx no receptor | Payload rejeitado pelo sistema externo | Verificar formato esperado pelo receptor |
+| Erro 5xx repetido | Receptor instável | Verificar disponibilidade do serviço externo |
+
 ## Navegação Relacionada
 
 | Tipo | Página |

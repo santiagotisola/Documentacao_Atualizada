@@ -78,6 +78,23 @@ Use o filtro **Retidos** para visualizar apenas os postos com maior número de v
 - Subsidiar estudos de infraestrutura viária
 - Apresentar dados para gestores em reuniões executivas
 
+## Tabela de referência — indicadores visuais
+
+| Cor no mapa | Volume de passagens | Ação sugerida |
+|:-----------:|:-------------------:|---------------|
+| 🔵 Azul | < 500/dia | Monitoramento regular |
+| 🟡 Amarelo | 500 – 2.000/dia | Reforçar equipe em horário de pico |
+| 🔴 Vermelho | > 2.000/dia | Avaliar segundo posto ou ampliação |
+| Marcador piscando | Equipamento com alerta ativo | Verificar status técnico |
+
+## Erros comuns
+
+| Problema | Causa provável | Solução |
+|----------|---------------|----------|
+| Posto sem marcador no mapa | Coordenadas não cadastradas | Atualizar cadastro do posto |
+| Mapa sem dados no período | Nenhuma pesagem no intervalo | Ampliar o período de consulta |
+| Cor incorreta para o volume | Cache desatualizado | Recarregar a página |
+
 ## Relacionado
 
 - [Fluxo Diário de Veículos](./fluxo-diario-veiculos)

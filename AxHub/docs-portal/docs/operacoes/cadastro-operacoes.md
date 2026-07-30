@@ -66,6 +66,24 @@ Uma operação ativa vincula todos os registros de passagem dos equipamentos sel
 - [Aferições](./afericoes)
 - [Enquadramentos](../administracao/enquadramentos)
 
+## Fluxo de uma operação
+
+1. **Pré-operação** — verificar aferíção dos equipamentos e enquadramentos configurados
+2. **Abertura** — criar a operação com nome, data início e equipamentos vinculados
+3. **Execução** — passagens registradas automaticamente pelos equipamentos vinculados
+4. **Triagem** — infrações geradas passam pela triagem dos analistas
+5. **Encerramento** — definir data fim ao concluir o período de fiscalização
+6. **Exportação** — infrações da operação exportadas em lote para o órgão autuador
+
+## Tabela de referência — tipos de operação
+
+| Tipo | Duração típica | Observação |
+|------|:---------------:|------------|
+| Fiscalização rotineira | 1 dia | Operação diária padrão |
+| Blitz especial | Horas | Vincular só os equipamentos do ponto |
+| Operação de evento | 1–7 dias | Preencher descrição com justificativa |
+| Operação continuada | Mensal | Encerrar no final do mês para medição |
+
 ## Boas práticas
 
 - Vincule os equipamentos corretos antes de iniciar a operação — passagens de equipamentos não vinculados não serão associadas ao contexto da fiscalização

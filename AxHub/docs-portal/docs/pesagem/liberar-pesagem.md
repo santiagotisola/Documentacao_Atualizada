@@ -59,6 +59,23 @@ Veículos retidos têm direitos legais:
 
 **Base:** Art. 231, §2º do CTB + Portaria DENATRAN 40/2014
 
+## Erros comuns
+
+| Situação | Causa | Solução |
+|----------|-------|----------|
+| Liberação sem motivo válido | Motivo genérico selecionado | Selecionar motivo específico |
+| Ticket não aparece para liberar | Número digitado incorretamente | Confirmar o número no Ticket Aberto |
+| Infração exportada não pode ser liberada | Lote já transmitido | Contatar administrador |
+
+## Tabela de referência — motivos de liberação
+
+| Situação | Motivo correto | Documentar |
+|----------|:-------------:|:----------:|
+| Descarga de carga realizada | Liberação por descarga | Foto da descarga |
+| Decisão judicial | Liberação administrativa | Cópia do documento |
+| Defeito no equipamento | Liberação por falha técnica | Registro do evento |
+| Veículo isento | Liberação por isenção legal | Embasamento legal |
+
 ## Relacionado
 
 - [Motivos](./motivos)

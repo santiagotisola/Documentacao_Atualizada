@@ -58,6 +58,23 @@ A cada registro de cronotacógrafo, o sistema verifica:
 - Verifique periodicamente o banco de certificados: certifique-se de que a atualização está em dia para evitar falsos negativos
 - Use os filtros de período e placa para auditar registros de uma operação específica rapidamente
 
+## Fluxo de consulta
+
+1. Veículo pesado passa pelo equipamento com leitor de cronotacógrafo
+2. Sistema captura a placa e consulta automaticamente o status do cronotácografo
+3. Resultado gravado: `Regular`, `Irregular`, `Vencido` ou `NãoEncontrado`
+4. Se `Irregular` ou `Vencido` → infração gerada automaticamente
+5. Se `NãoEncontrado` → encaminhado para triagem manual
+6. Acessar **Cronotacógrafo → Consulta** para acompanhar e revisar registros
+
+## Tabela de referência — erros de consulta
+
+| Situação | Causa provável | Solução |
+|----------|---------------|----------|
+| Status `NãoEncontrado` frequente | Banco de certificados desatualizado | Acionar equipe técnica para atualizar |
+| Infração gerada para veículo regular | Certif. vencido mas renovado recentemente | Verificar data de atualização do banco |
+| Status `Erro` na consulta | Falha de conectividade com WS externo | Verificar integração de rede |
+
 ## Relacionado
 
 - [Cronotacógrafo](../glossario/cronotacografo)

@@ -49,6 +49,31 @@ Sequenciais incorretos geram rejeição de lotes inteiros, exigindo reenvio. O i
 - [Sequenciais de Infrações](./sequenciais-infracoes)
 - [Falhas de Sequenciais](../relatorios/falhas-sequenciais)
 
+## Fluxo de gestão de lotes
+
+1. Antes de cada exportação, verificar o sequencial atual em Configurações → Sequenciais de Lote
+2. Gerar o lote — sistema atribui o próximo número automaticamente
+3. Transmitir ao órgão autuador e confirmar o protocolo de recebimento
+4. Guardar o protocolo por no mínimo 5 anos como comprovante legal
+5. Em caso de reenvio, usar o mesmo número de lote; NUNCA gerar novo número
+
+## Tabela de referência — numeração de lotes
+
+| Situação | Ação |
+|----------|------|
+| Primeiro lote da série | Iniciar com o número acordado com o órgão |
+| Lote rejeitado pelo órgão | Corrigir e reenviar com o **mesmo** número |
+| Série esgotada | Comunicar o órgão e iniciar nova série combinada |
+| Inconsistência detectada | Executar Falhas de Sequenciais antes de nova exportação |
+
+## Erros comuns
+
+| Problema | Causa | Solução |
+|----------|-------|----------|
+| Lote rejeitado por número duplicado | Dois lotes com o mesmo sequencial | Verificar registros anteriores antes de gerar |
+| Lote fora de ordem | Exportação manual com número errado | Usar sempre o próximo número automático |
+| Série sem configuração | Sequencial não cadastrado | Criar configuração para o órgão |
+
 - Verificar seqüencial antes de cada nova exportação
 
 ## Navegação Relacionada

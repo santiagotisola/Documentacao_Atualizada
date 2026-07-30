@@ -53,6 +53,32 @@ Crie o [Perfil de Acesso](./perfis-acesso) ANTES do usuário. Configure as [Perm
 - [Permissões](./permissoes)
 - [Logs de Acesso](./logs-acesso)
 
+## Fluxo de gestão de usuários
+
+1. Criar o **Perfil de Acesso** com as permissões corretas para a função
+2. Acessar **Controle de Acesso → Usuários** e criar o usuário
+3. Vincular o usuário ao perfil criado
+4. Comunicar as credenciais de forma segura ao colaborador
+5. Ao desligar o colaborador: **inativar** imediatamente o usuário (não excluir)
+
+## Tabela de referência — boas práticas de segurança
+
+| Situação | Ação correta |
+|----------|:-------------:|
+| Colaborador desligado | Inativar imediatamente |
+| Esquecimento de senha | Redefinir via admin |
+| Suspeita de acesso indevido | Alterar senha + verificar logs |
+| Mudança de função | Mudar o perfil de acesso |
+| Usuários sem acesso há 90+ dias | Inativar após confirmação |
+
+## Erros comuns
+
+| Problema | Causa | Solução |
+|----------|-------|----------|
+| Usuário não consegue fazer login | Conta inativa | Verificar e reativar |
+| Login já existe | Login duplicado | Usar nome de usuário único |
+| Permissões incorretas | Perfil errado vinculado | Alterar o perfil do usuário |
+
 :::warning Inativar vs. excluir
 Nunca exclua usuários com histórico no sistema. Prefira **inativar** para preservar a rastreabilidade das ações.
 :::

@@ -69,6 +69,34 @@ Relatórios com grande volume de dados podem levar alguns minutos para serem ger
 PDFs gerados ficam disponíveis por um período limitado conforme a política de retenção configurada no sistema. Faça o download dos Relatórios importantes para armazenamento externo.
 :::
 
+## Fluxo de geração de PDF
+
+1. Usuário acessa qualquer relatório com suporte a exportação PDF
+2. Aplica filtros e clica em **Exportar PDF**
+3. Sistema processa em background (especialmente relatórios com muitos registros)
+4. Arquivo fica disponível em **Relatórios → PDF Gerados** com status **Concluído**
+5. Usuário acessa a lista e faz o **Download**
+6. Para relatórios com erro, clica em **Reprocessar**
+
+## Tabela de referência — relatórios que geram PDF
+
+| Relatório | Inclui imagens | Tempo estimado |
+|-----------|:--------------:|:---------------:|
+| Passagens (até 500 reg.) | Sim | < 1 min |
+| Passagens (acima de 500) | Sim | 2 – 5 min |
+| Ocorrências e Alertas | Não | < 1 min |
+| Veículos Monitorados | Sim | 1 – 3 min |
+| Rastreamento de Placas | Sim | 1 – 2 min |
+
+## Erros comuns
+
+| Status | Causa provável | Solução |
+|--------|---------------|----------|
+| **Processando** longo tempo | Volume muito grande de registros | Aguardar ou reduzir o período |
+| **Erro** na geração | Falha de memória ou servidor | Clicar em **Reprocessar** |
+| PDF não disponível para download | Política de retenção expirou | Gerar novamente |
+| Imagens ausentes no PDF | Imagem original não indexada | Verificar sincronização |
+
 ## Relacionado
 
 - [Relatório de Passagens](./relatorio-passagens)

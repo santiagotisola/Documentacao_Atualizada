@@ -52,6 +52,32 @@ Imagens obrigatórias ausentes podem levar à **invalidação do auto** pelo ór
 - [Aferições](../operacoes/afericoes)
 - [Processamento de Imagens](../relatorios/processamento-imagens)
 
+## Fluxo de validação de imagens
+
+1. Equipamento captura a passagem e gera as imagens configuradas
+2. Sistema verifica se todas as imagens **Obrigatórias** foram recebidas
+3. Se alguma imagem obrigatória estiver ausente → infração marcada como incompleta
+4. Analista visualiza as imagens na **Triagem** e valida ou descarta
+5. Órgão autuador pode rejeitar autos sem imagens obrigatórias
+
+## Tabela de referência — tipos comuns e obrigatoriedade
+
+| Tipo | Obrigatória | Descrição | Onde exibida |
+|------|:-----------:|-----------|:------------:|
+| Frontal | Sim | Vista frontal do veículo | Triagem |
+| Traseira (placa) | Sim | Placa legível | Triagem e export. |
+| Lateral esquerda | Não | Perfil do veículo | Triagem |
+| Painel (instrumento) | Sim (radares) | Velocidade no display | Triagem e export. |
+| Panorâmica | Sim | Contexto da via | Export. |
+
+## Erros comuns
+
+| Problema | Causa provável | Solução |
+|----------|---------------|----------|
+| Infração com imagem faltante | Tipo obrigatório não capturado | Verificar configuração do equipamento |
+| Tipo criado mas não aparece | Tipo inativo | Reativar o tipo de imagem |
+| Quantidade incorreta de fotos | Quantidade configurada errada | Editar tipo e ajustar quantidade |
+
 
 ## Tipos comuns
 

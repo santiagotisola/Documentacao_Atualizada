@@ -54,6 +54,35 @@ Use esta função para confirmar passagens denunciadas por cidadãos ou verifica
 - [Passagens](../relatorios/relatorio-passagens)
 - [Triagem de Infrações](../infracoes/triagem)
 
+## Fluxo de consulta
+
+1. Receber solicitação ou identificar placa de interesse
+2. Acessar **Operações → Consulta de Placas**
+3. Informar a **Placa** e o **Período** de análise
+4. Verificar passagens e confirmar imagens
+5. Exportar em **Excel** para registro ou encaminhar à equipe competente
+
+## Exemplos de uso
+
+**Cidadão contesta auto de infração**
+1. Consultar a placa pelo número do auto
+2. Localizar a passagem pela data/hora do auto
+3. Confirmar velocidade e imagem
+4. Exportar como comprovante
+
+**Veículo suspeito denunciado**
+1. Consultar a placa no período denunciado
+2. Verificar todos os equipamentos que a detectaram
+3. Combinar com [Monitoramento Online](./monitoramento-online) para situação atual
+
+## Tabela de referência — interpretação dos resultados
+
+| Coluna | Como interpretar |
+|--------|------------------|
+| **Confiança OCR** | Abaixo de 80%: confirmar visualmente pela imagem |
+| **Velocidade** | Comparar com o limite da faixa para avaliar infração |
+| **Infração** | Se vazio: passagem regular; se preenchido: auto gerado |
+
 A **Consulta de Placas** pode não aparecer no menu lateral dependendo das permissões do perfil de acesso. Nesse caso, acesse diretamente pela URL `/consultaplacas` ou verifique as permissões em [Controle de Acesso → Perfis](../controle-acesso/perfis-acesso).
 :::
 

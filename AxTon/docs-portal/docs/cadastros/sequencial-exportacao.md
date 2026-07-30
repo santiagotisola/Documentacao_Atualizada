@@ -67,6 +67,23 @@ Configure um sequencial para **cada tipo de Infração A geração de lotes de e
 - [Exportação de Infrações](../infracoes/exportacao)
 - [Falhas Sequenciais](../relatorios/falhas-sequenciais)
 
+## Tabela de referência — configuração de sequencial
+
+| Campo | Valor recomendado | Observação |
+|-------|:-----------------:|------------|
+| Sequencial Inicial (nova série) | 1 | Combinar com o órgão autuador |
+| Sequencial Final | 99.999 | Padrão usual |
+| Tipo de Infração | Um por tipo | Excesso PBT, Eixo e Eixo/PBT |
+| Reinício ao esgotar | Não | Comunicar e criar nova série |
+
+## Erros comuns
+
+| Problema | Causa | Solução |
+|----------|-------|----------|
+| Lote não gerado para tipo de infração | Sequencial não cadastrado | Criar configuração para o tipo |
+| Sequencial fora de ordem no órgão | Dois lotes com mesmo número | Verificar e corrigir duplicata |
+| Série esgotada | Sequencial Final atingido | Ampliar ou criar nova série |
+
 ## Boas práticas
 
 - Configure um sequencial para **cada tipo de infração** antes de iniciar a exportação — a ausência bloqueia a geração de lotes

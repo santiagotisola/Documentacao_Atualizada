@@ -45,6 +45,30 @@ O Dashboard exibe alertas quando a aferição está próxima do vencimento (30 d
 | Glossario | [Aferição](../glossario/afericao) |
 | Relacionado | [Tipos de Aferições](../administracao/tipos-afericoes) |
 
+## Fluxo de controle de aferições
+
+1. **60 dias antes do vencimento**: Dashboard exibe alerta — acionar INMETRO com antecedência
+2. **Realização da aferição**: INMETRO emite certificado com número e data de validade
+3. **Registro no sistema**: acessar Operações → Aferições e cadastrar o certificado
+4. **Validação automática**: sistema libera o equipamento para gerar infrações válidas
+5. **Após vencimento**: equipamento bloqueado automaticamente — nenhuma infração válida é gerada
+
+## Tabela de referência — status de aferição
+
+| Status | Condição | Ação imediata |
+|--------|----------|---------------|
+| ✅ Válida | Dentro do prazo | Nenhuma |
+| ⚠️ Vencendo | 30 dias para vencer | Agendar INMETRO |
+| ❌ Vencida | Prazo expirado | Bloquear equipamento e agendar |
+
+## Erros comuns
+
+| Problema | Causa | Solução |
+|----------|-------|----------|
+| Equipamento bloqueado mesmo com aferição válida | Data de vencimento cadastrada incorretamente | Editar aferição e corrigir data |
+| Alerta de vencimento não aparece | Aferição não registrada no sistema | Cadastrar o certificado |
+| Certificado sem número | INMETRO não emitiu o documento correto | Solicitar novo certificado ao laboratório |
+
 
 ## Cadastro de Afericao
 

@@ -52,6 +52,31 @@ As formas de autuação são configuradas conforme exigência do órgão autuado
 - [Sequenciais de Infrações](./sequenciais-infracoes)
 - [Lote de Exportação](../glossario/lote-exportacao)
 
+## Exemplos de uso
+
+**AIT-E (Auto de Infração Eletrônico):**  
+Usado para infrações de vel. eletrônica e avanço de sinal. O código é exigido no campo `FormaAutuacao` do arquivo de exportação ao DENATRAN.
+
+**NOT-E (Notificação Eletrônica):**  
+Usado na fase de notificação anterior à lavratura do auto. Alguns órgãos exigem essa etapa antes do AIT.
+
+## Tabela de referência
+
+| Código | Descrição | Quando usar |
+|--------|-----------|-------------|
+| **AIT-E** | Auto de Infração Eletrônico | Infração confirmada na triagem |
+| **NOT-E** | Notificação Eletrônica | Fase de notificação prévia |
+| **AIT-M** | Auto Manual | Operações sem equipamento eletrônico |
+| **RES** | Resolução DENATRAN | Código específico por portaria |
+
+## Erros comuns
+
+| Situação | Causa | Solução |
+|----------|-------|----------|
+| Lote rejeitado por código inválido | Código não aceito pelo órgão | Confirmar código com o contratante |
+| Forma errada usada em infração | Configuração da operação incorreta | Revisar operação antes de exportar |
+| Duplicidade de códigos | Dois registros com mesmo código | Inativar o duplicado |
+
 3. Informe o **Código** e a **Descrição**
 4. Clique em **Salvar**
 

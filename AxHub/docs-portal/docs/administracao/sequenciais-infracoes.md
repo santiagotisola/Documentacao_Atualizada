@@ -37,6 +37,31 @@ Sequenciais duplicados geram rejeição do lote pelo órgão autuador. Não edit
 - [Falhas de Sequenciais](../relatorios/falhas-sequenciais)
 - [Lote de Exportação](../glossario/lote-exportacao)
 
+## Fluxo de gestão de sequenciais
+
+1. Antes de iniciar operações, cadastrar séries para cada **Órgão autuador** e **Série**
+2. O sistema atribui números automaticamente durante a triagem
+3. Verificar mensalmente o saldo da série (atual vs. máximo)
+4. Quando atingir 80% do limite: criar nova série ou ampliar o **Número máximo**
+5. Comunicar ao órgão autuador ao iniciar nova série
+
+## Tabela de referência — configuração de série
+
+| Campo | Valor típico | Observação |
+|-------|:------------:|------------|
+| Próximo número | 1 (nova série) | Definir apenas no início |
+| Número máximo | 99.999 | Padrão comum |
+| Séries por órgão | 1 a 3 | Depende do órgão autuador |
+| Reinício anual | Não recomendado | Manter numeração contínua |
+
+## Erros comuns
+
+| Problema | Causa | Solução |
+|----------|-------|----------|
+| Infração sem número atribuído | Série esgotada ou inativa | Criar nova série ou ampliar limite |
+| Sequencial duplicado | Edição manual incorreta | Verificar histórico antes de editar |
+| Lote rejeitado por sequencial | Série fora de ordem | Executar Falhas de Sequenciais antes |
+
 ## Impacto operacional
 
 Sequenciais incorretos podem causar:

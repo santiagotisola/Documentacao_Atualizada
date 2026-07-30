@@ -45,6 +45,23 @@ Equipamentos com aferição vencida não podem gerar infrações válidas legalm
 - [Aferição](../glossario/afericao)
 - [Falhas de Sequenciais](../relatorios/falhas-sequenciais)
 
+## Fluxo de aferição
+
+1. Equipamento instalado ou após manutenção — acionar INMETRO para **Aferição Inicial**
+2. Certificado emitido pelo INMETRO — cadastrar em **Operações → Aferições**
+3. Sistema monitora o vencimento automaticamente
+4. Próximo ao vencimento — sistema exibe alerta; acionar INMETRO com antecedência
+5. Após nova verificação — registrar **Aferição Periódica** com novo certificado
+
+## Tabela de referência — prazos e validades
+
+| Tipo | Quando usar | Validade comum | Base legal |
+|------|-------------|:--------------:|------------|
+| Aferição Inicial | Instalação ou substituição | 1 ano | Portaria INMETRO |
+| Aferição Periódica | Renovação anual | 1 ano | Portaria INMETRO |
+| Aferição Pós-Manutenção | Após intervenção técnica | Até próxima periódica | Portaria INMETRO |
+| Aferição Extraordinária | Exigência legal ou contratual | Variável | Contrato / órgão |
+
 :::
 
 |-------|-----------|

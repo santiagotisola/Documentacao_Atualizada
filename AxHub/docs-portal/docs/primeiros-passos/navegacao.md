@@ -43,6 +43,23 @@ O mapa online exibe em tempo real os equipamentos ativos e seus status operacion
 - Módulos ausentes no menu indicam permissões não concedidas ao perfil — solicite ao administrador se necessário
 - Em dispositivos com tela menor, recolha o menu lateral para maximizar a área de trabalho
 
+## Fluxo de trabalho típico do operador
+
+1. **Login** → Dashboard com status geral dos equipamentos
+2. Verificar **Status dos Equipamentos** — confirmar que todos estão online
+3. Acessar **Infrações → Triagem** para processar infrações pendentes
+4. Ao final do turno: acessar **Infrações → Consulta** para revisar o backlog
+5. Verificar relatórios gerenciais em **Relatórios → Processamento de Imagens**
+
+## Tabela de referência — módulos por perfil
+
+| Perfil | Módulos típicos | Acesso restrito |
+|--------|----------------|:--------------:|
+| **Operador** | Infrações, Cronotacógrafo, Balança | Configurações |
+| **Auditor** | Infrações, Relatórios | Cadastros |
+| **Gestor** | Todos + Medições | Sem restrição |
+| **Administrador** | Acesso completo | Sem restrição |
+
 ## Relacionado
 
 - [Login](./login)

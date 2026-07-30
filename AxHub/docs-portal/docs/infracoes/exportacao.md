@@ -55,7 +55,24 @@ Os layouts de arquivo são configurados em **Administração → Layouts Arquivo
 | [Enquadramento](../glossario/enquadramento) | Ver definicao no glossario |
 | [Lote de Exportacao](../glossario/lote-exportacao) | Ver definicao no glossario |
 | [Triagem](../glossario/triagem) | Ver definicao no glossario |
+## Erros comuns na exportação
 
+| Erro | Causa | Solução |
+|------|-------|----------|
+| Lote rejeitado por layout inválido | Formato do arquivo não aceito | Verificar configuração do layout |
+| Infração não incluída no lote | Status diferente de Auditada | Revisar o status das infrações |
+| Sequencial duplicado no lote | Número já utilizado | Executar Falhas de Sequenciais antes |
+| Placa fora do formato aceito | Placa Mercosul não configurada | Verificar layout de exportação |
+| AIT fora do prazo legal | Infração com > 30 dias sem exportar | Monitorar backlog de triagem diariamente |
+
+## Fluxo de exportação
+
+1. Garantir que infrações estão com status **Auditada**
+2. Verificar **Falhas de Sequenciais** (Relatórios → Falhas Sequenciais)
+3. Acessar **Infrações → Exportação** e configurar o lote
+4. Clicar em **Gerar Lote** e aguardar validação automática
+5. Enviar via SFTP/API ou fazer download para envio manual
+6. Confirmar recebimento e guardar protocolo por 5 anos
 ---
 
 :::info Dica

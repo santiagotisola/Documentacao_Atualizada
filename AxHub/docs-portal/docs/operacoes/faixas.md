@@ -51,3 +51,23 @@ O código do município na faixa **deve ser o mesmo** da UF da operação. Se a 
 - [Operações](./cadastro-operacoes) — Operação que contém as faixas
 - [Municípios](../veiculos/municipios) — Consulta de código IBGE por município
 - [Enquadramentos](../administracao/configuracoes-enquadramento) — Configuração por operação/faixa
+
+## Exemplos de cadastro de faixa
+
+| Campo | Exemplo | Observação |
+|-------|---------|------------|
+| Código | `GYNTM015-1` | Sigla da operação + número da faixa |
+| Operação | Goiânia TM-015 | Operação já cadastrada |
+| Número da Faixa | 1 | Primeira faixa do equipamento |
+| Sentido | Norte/Sul | Conforme instalação física |
+| Logradouro | Av. Anhanguera | Via oficial |
+| Código IBGE | 5208707 | Goiânia/GO |
+
+## Erros comuns
+
+| Problema | Causa | Solução |
+|----------|-------|----------|
+| Exportação falha por código IBGE | Código do município incorreto | Conferir com tabela IBGE e corrigir |
+| Infração sem enquadramento | Faixa não vinculada ao enquadramento | Configurar em Configurações de Enquadramento |
+| Sentido trocado no relatório | Sentido configurado errado | Editar faixa e corrigir sentido |
+| Faixa sem passagens | Equipamento desvinculado | Verificar cadastro do equipamento |

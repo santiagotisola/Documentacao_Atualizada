@@ -43,6 +43,30 @@ Após cadastrar regiões, vincule os equipamentos a elas em **Configurações �
 - [Relatórios](../relatorios/fluxo-diario-veiculos)
 - [Operações](../operacoes/cadastro-operacoes)
 
+## Fluxo de configuração de regiões
+
+1. Definir critérios de divisão (geográfico, contratual ou administrativo)
+2. Cadastrar as regiões em **Configurações → Regiões**
+3. Acessar **Configurações → Equipamentos** e vincular cada equipamento à sua região
+4. Verificar nos relatórios que o filtro por região funciona corretamente
+
+## Exemplos de critérios de região
+
+| Critério | Exemplo | Quando usar |
+|---------|---------|-------------|
+| Geográfico | Norte, Sul, Centro-Oeste | Distribuição territorial |
+| Contratual | Contrato SINFRA, Prefeitura | Separação por cliente |
+| Administrativo | Coordenadoria 01, 02 | Equipes distintas |
+| Viário | Rodovias, vias urbanas | Tipo de via |
+
+## Erros comuns
+
+| Situação | Causa | Solução |
+|----------|-------|----------|
+| Equipamento sem região | Não vinculado no cadastro | Editar equipamento e vincular região |
+| Filtro de região vazio nos relatórios | Nenhum equipamento vinculado | Verificar vínculos dos equipamentos |
+| Região duplicada | Dois cadastros com mesmo escopo | Inativar o duplicado |
+
 ## Casos de uso
 
 | Critério | Exemplo |

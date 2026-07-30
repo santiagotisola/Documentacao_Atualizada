@@ -63,6 +63,24 @@ A **medição de desempenho** é o principal instrumento de prestação de conta
 - [Medições](../medicoes/criar-medicao) — Processo de geração
 - [Índices de Performance](../medicoes/indices-performance) — Configuração dos índices
 
+## Erros comuns
+
+| Problema | Causa | Solução |
+|----------|-------|----------|
+| Disponibilidade calculada acima de 100% | Interrupções não registradas | Registrar todas as interrupções corretamente |
+| Taxa OCR abaixo da meta sem explicação | Equipamento com câmera suja ou descalibrada | Programar manutenção preventiva |
+| Boletim sem dados de um equipamento | Equipamento não vinculado ao contrato | Verificar vínculos no cadastro do contrato |
+| Meta não aparece no boletim | Índice não cadastrado | Configurar índice em Medições → Índices de Performance |
+
+## Tabela de referência — métricas de desempenho
+
+| Métrica | Fórmula | Meta mínima | Alerta |
+|--------|---------|:-----------:|:------:|
+| Disponibilidade | (horas ativas / contratuais) × 100 | ≥95% | <90% |
+| Taxa OCR | (placas lidas / capturas) × 100 | ≥90% | <85% |
+| Tempo de reparo | média de horas até corrigir falha | ≤4h | >8h |
+| Infracs exportadas | (exportadas / geradas) × 100 | ≥98% | <95% |
+
 
 ## Uso no Sistema AxHub
 

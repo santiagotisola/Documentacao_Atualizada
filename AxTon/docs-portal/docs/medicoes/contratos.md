@@ -63,6 +63,31 @@ Contrato com metas bem configuradas garante que o sistema calcule automaticament
 
 - [Grupos de Equipamentos](./grupos-equipamentos)
 - [Criar Medição](./criar-medicao)
+
+## Fluxo contratual
+
+1. Contrato assinado com o órgão contratante
+2. Cadastrar o contrato em **Medições → Contratos**
+3. Vincular os **Postos de pesagem** cobertos
+4. Definir as **Metas** de disponibilidade e OCR
+5. A cada mês: gerar a medição e conferir os índices calculados
+6. Encaminhar o Boletim de Medição ao contratante até o prazo
+
+## Tabela de referência — status de contratos
+
+| Status | Descrição | Ação |
+|--------|-----------|------|
+| **Ativo** | Contrato em vigência | Gerar medições mensais |
+| **Vencido** | Prazo expirado | Renovar ou encerrar |
+| **Suspenso** | Pausa temporária | Não gerar medições |
+
+## Erros comuns
+
+| Situação | Causa | Solução |
+|----------|-------|----------|
+| Medição não gera dados do contrato | Contrato vencido ou suspenso | Verificar e atualizar vigência |
+| Índice calculado incorreto | Posto não vinculado ao contrato | Adicionar posto nas configurações |
+| Meta não aparece no boletim | Meta não cadastrada | Editar contrato e preencher metas |
 - [Índices de Performance](./indices-performance)
 
 

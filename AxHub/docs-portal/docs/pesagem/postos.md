@@ -51,6 +51,30 @@ Após criar o posto, vincule os **Equipamentos** a ele em **Configurações → 
 - [Contratos](../medicoes/contratos)
 - [Tickets Fechados](./ticket-fechado)
 
+## Fluxo de ativação de posto
+
+1. Cadastrar o posto com nome oficial do contrato em **Balança → Postos**
+2. Acessar **Configurações → Equipamentos** e vincular cada equipamento ao posto
+3. Vincular o posto ao **Contrato** correspondente
+4. Registrar a **Aferição** dos equipamentos (obrigatório antes de operar)
+5. Criar a **Operação** vinculada ao posto para iniciar a fiscalização
+
+## Tabela de referência — status do posto
+
+| Status | Descrição | Impacto no SLA |
+|--------|-----------|:--------------:|
+| **Ativo** | Posto operacional | Contabilizado |
+| **Inativo** | Posto desativado | Exclui do cálculo |
+| **Em manutenção** | Parada programática | Conforme contrato |
+
+## Erros comuns
+
+| Problema | Causa | Solução |
+|----------|-------|----------|
+| Posto sem dados no relatório | Equipamentos não vinculados | Vincular equipamentos ao posto |
+| Disponibilidade calculada incorreta | Posto ativo sem operação | Verificar operáções vinculadas |
+| Posto não aparece no filtro | Status inativo | Reativar ou verificar permissões |
+
 
 ## Cadastro
 

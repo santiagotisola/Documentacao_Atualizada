@@ -78,6 +78,29 @@ A exclusão de um local somente será possível se não houver operações ou pe
 | Funcionalidade | Descrição |
 |---|---|
 | [**Operações**](../operacoes/cadastro-operacoes) | Vincular locais a operações de pesagem |
+
+## Boas práticas
+
+- Use códigos padronizados e legíveis (ex: `PI503B` = Piauí, Rod. 503, trecho B) para facilitar a identificação nos relatórios
+- Preencha o **Endereço** com o nome oficial da rodovia e o KM exato — é usado na documentação legal das infrações
+- Não exclua locais com pesagens históricas — inative-os para preservar a rastreabilidade
+- Mantenha o **Município** e a **UF** atualizados, pois impactam os arquivos de exportação ao SENATRAN
+
+## Tabela de referência — padrão de código de local
+
+| UF | Rodovia | Exemplo de código | Endereço sugerido |
+|----|---------|:-----------------:|-------------------|
+| PI | PI-247 | PI503B | PI 247, KM 115, Rod. Eng. Vasco Filho |
+| PI | PI-247 | PI504B | PI 247, Divisa PI/MA |
+| MA | BR-135 | MA501A | BR 135, KM 85, Sentido Sul |
+
+## Perguntas frequentes
+
+**Posso ter múltiplas operações no mesmo local?**  
+Sim. Cada operação tem seu próprio período de vigência. Múltiplas operações em horários diferentes compartilham o mesmo local.
+
+**O que acontece se excluir um local com pesagens?**  
+O sistema impede a exclusão. Inative o local em vez de excluir para preservar os históricos.
 | Configurações do Sistema**](../sistema/configuracoes) | Configurações gerais do AxTon |
 
 ### Colunas

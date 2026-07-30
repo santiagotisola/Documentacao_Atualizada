@@ -49,6 +49,23 @@ O monitoramento online atualiza automaticamente a cada 30 segundos. Não é nece
 - Configure alertas de equipe para acionar manutenção imediatamente quando um posto entrar em modo offline
 - Registre todas as ocorrências no sistema para garantir rastreabilidade perante o contratante
 
+## Tabela de referência — indicadores de status
+
+| Status | Cor | Significação | Ação |
+|--------|-----|--------------|------|
+| Operacional | 🟢 Verde | Balança respondendo normalmente | Nenhuma |
+| Alerta | 🟡 Amarelo | Fila de triagem acumulada | Reforçar equipe de triagem |
+| Offline | 🔴 Vermelho | Sem heartbeat do equipamento | Acionar manutenção |
+| Em manutenção | 🔵 Azul | Parada programática registrada | Acompanhar previsão de retorno |
+
+## Erros comuns
+
+| Problema | Causa provável | Solução |
+|----------|---------------|----------|
+| Posto sempre offline no monitor | IP de balança incorreto | Verificar cadastro do equipamento |
+| Fila acumulada sem novos tickets | Balança operando sem conexão | Verificar rede local do posto |
+| Dados não atualizam após 30s | Browser sem conexão com servidor | Recarregar a página |
+
 ## Relacionado
 
 - [Alertas](./alertas)

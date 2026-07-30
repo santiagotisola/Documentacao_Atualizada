@@ -59,6 +59,26 @@ No AxHub, a infração é gerada quando:
 3. Imagens obrigatórias são capturadas
 4. Aferição INMETRO do equipamento está válida
 
+## Erros comuns que invalidam uma infração
+
+| Problema | Consequência | Prevenção |
+|----------|-------------|----------|
+| Aferição vencida | Auto contestado e anulado | Monitorar vencimentos no Dashboard |
+| Placa ilegível | Recurso aceito | Revisar OCR na triagem |
+| Enquadramento incorreto | Anulação em julgamento | Verificar configuração de velocidade |
+| AIT emitido após 30 dias | Prescrição | Monitorar backlog de triagem |
+| Imagem obrigatória ausente | Recurso aceito | Configurar tipos de imagem corretos |
+
+## Tabela de referência — gravidade e penalidades
+
+| Gravidade | Pontos CNH | Valor base | Exemplos |
+|-----------|:----------:|:----------:|----------|
+| Leve | 3 | R$ 88,38 | Estacionar em local proibido |
+| Média | 4 | R$ 130,16 | Não usar cinto |
+| Grave | 5 | R$ 195,23 | Ultrapassar sinal vermelho |
+| Graviíssima (1x) | 7 | R$ 293,47 | Excesso de velocidade > 20% |
+| Graviíssima (3x) | 7 | R$ 880,41 | Reincidência grave |
+
 :::warning
 Infrações geradas por equipamentos com aferição vencida são automaticamente bloqueadas e não podem ser exportadas.
 :::- **Art. 280 do CTB** — Regula a lavratura do Auto de Infração de Trânsito (AIT)

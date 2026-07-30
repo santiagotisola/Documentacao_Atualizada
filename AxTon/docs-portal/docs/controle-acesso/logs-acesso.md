@@ -46,6 +46,25 @@ Filtre por **Status = Falha** e analise os IPs de origem. Múltiplas falhas do m
 - [Perfis de Acesso](./perfis-acesso)
 - [Acessos por IP](./acessos-por-ip)
 
+## Fluxo de auditoria de segurança
+
+1. Detectar comportamento suspeito (denúncia, anomalia ou incident)
+2. Filtrar logs por **Usuário** ou **IP** no período de interesse
+3. Identificar acessos com **Status = Falha** repetidos ou em horários atípicos
+4. Verificar ações realizadas pelo usuário (edições, exportações, exclusões)
+5. Exportar os logs em Excel para documentar o incidente
+6. Tomar ação: bloquear IP, revogar acesso, redefinir senha
+
+## Tabela de referência — alertas de segurança
+
+| Padrão identificado | Risco | Ação recomendada |
+|--------------------|:-----:|------------------|
+| 5+ falhas consecutivas do mesmo IP | Alto | Bloquear IP em Acessos por IP |
+| Login de madrugada não habitual | Médio | Confirmar com o usuário |
+| Export em massa de dados | Alto | Verificar autorização |
+| Acesso de IP fora da rede corporativa | Médio | Verificar uso de VPN |
+| Usuário inativo com acessos recentes | Alto | Revogar acesso imediatamente |
+
 ## Segurança
 
 - Revise os logs de acesso **semanalmente** para detectar padrões anormais de autenticação

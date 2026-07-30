@@ -63,6 +63,33 @@ Crie perfis com o mínimo de permissões necessárias (princípio do mínimo pri
 - [Usuários](./usuarios)
 - [Permissões](./configurar-permissoes)
 
+## Exemplos de perfis recomendados
+
+| Perfil | Módulos com acesso | Restrições |
+|--------|-------------------|-----------|
+| **Operador de Pesagem** | Pesagem, Tickets, Consulta de Placas | Sem acesso a Exportação e Configurações |
+| **Auditor** | Triagem, Auditoria, Relatórios | Somente leitura; sem cadastros |
+| **Supervisor** | Todos os módulos operacionais + Exportação | Sem Administração |
+| **Administrador** | Acesso total | Sem restrições |
+| **Porteiro** | Apenas Iniciar Pesagem | Sem triagem ou relatórios |
+
+## Fluxo de criação de perfil
+
+1. Identificar a função do grupo de usuários
+2. Acessar **Administração → Perfis de Acesso**
+3. Criar o perfil com nome descritivo
+4. Acessar **Permissões de Acesso** e configurar cada módulo
+5. Criar os usuários e vincular ao perfil
+6. Testar acessando com um usuário do perfil para validar as permissões
+
+## Erros comuns
+
+| Situação | Causa | Solução |
+|----------|-------|----------|
+| Usuário não vê módulo no menu | Perfil sem permissão `grid.view` | Habilitar permissão de visualização |
+| Não consegue salvar registro | Sem permissão `form.saveorupdate` | Habilitar permissão de criação/edição |
+| Perfil não pode ser excluído | Usuários vinculados ao perfil | Desvincular usuários primeiro |
+
 ### Campos
 
 | Campo | Obrigatório | Descrição |

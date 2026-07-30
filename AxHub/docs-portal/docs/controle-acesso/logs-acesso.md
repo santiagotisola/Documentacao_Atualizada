@@ -56,6 +56,24 @@ Filtre por **Status = Falha** para detectar tentativas de acesso não autorizado
 - [Perfis de Acesso](./perfis-acesso)
 - [Acessos por IP](./acessos-por-ip)
 
+## Fluxo de auditoria de segurança
+
+1. Suspeita de acesso indevido → filtrar por **Usuário** suspeito no período
+2. Identificar ações realizadas (criar, editar, excluir) e módulos acessados
+3. Cruzar com dados do módulo afetado para avaliar impacto
+4. Exportar log em Excel para documentar o incidente
+5. Tomar ação: bloquear, revogar acesso, redefinir senha, notificar gestor
+
+## Tabela de referência — padrões de alerta
+
+| Padrão | Risco | Ação |
+|--------|:-----:|------|
+| 5+ falhas consecutivas do mesmo IP | Alto | Bloquear IP |
+| Login de madrugada incomum | Médio | Confirmar com usuário |
+| Exportação em massa de dados | Alto | Verificar autorização |
+| Acesso de IP externo não usual | Médio | Verificar uso de VPN |
+| Usuário inativo com acessos | Alto | Revogar acesso imediatamente |
+
 ## Segurança
 
 - Revise os logs de acesso **semanalmente** para identificar padrões de autenticação anormais

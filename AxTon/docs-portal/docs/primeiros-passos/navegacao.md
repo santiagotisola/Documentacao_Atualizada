@@ -68,6 +68,36 @@ O menu exibe apenas os módulos que o perfil do usuário tem permissão de acess
 
 :::tip Dica de navegação
 Clique em uma categoria (Cadastros ou Administração) para expandir ou recolher os itens.
+
+## Fluxo de trabalho típico
+
+1. **Login** → Dashboard de status dos equipamentos
+2. **Iniciar Pesagem** → Selecionar posto e abrir operação
+3. Durante a operação → pesagens registradas automaticamente
+4. Encerrar turno → **Operações** → Fechar operação
+5. Revisar infrações → **Triagem** → validar/descartar
+6. Exportar lote → **Exportação** → enviar ao órgão autuador
+7. Relatórios → **Relatório de Infrações** → acompanhamento gerencial
+
+## Tabela de referência — perfis e acessos comuns
+
+| Perfil | Módulos habilitados | Restrições |
+|--------|--------------------|-----------|
+| **Operador** | Pesagem, Triagem, Relatórios básicos | Sem acesso a configurações |
+| **Supervisor** | Todos + Operações, Exportação | Sem acesso a Administração |
+| **Administrador** | Acesso total | Sem restrições |
+| **Auditor** | Relatórios somente leitura | Sem cadastros ou exportação |
+
+## Perguntas frequentes
+
+**Não encontro um módulo no menu. O que fazer?**  
+O menu exibe apenas módulos com permissão ativa no seu perfil. Solicite ao administrador a concessão da permissão necessária.
+
+**O sistema desconectou automaticamente. Por quê?**  
+O AxTon possui timeout de sessão por inatividade. Faça login novamente — os dados são preservados.
+
+**Como acessar o sistema de outro computador?**  
+Acesse pelo navegador o mesmo endereço IP do servidor AxTon na rede local. Não é necessário instalar software adicional.
 :::
 
 ## Relacionado

@@ -55,6 +55,24 @@ O Dashboard exibe o **Top Motivos de Descarte**. Use essa informação para iden
 - [Exceções](../infracoes/excecoes)
 - [Processamento por Usuário](../relatorios/processamento-por-usuario)
 
+## Fluxo de análise de descartes
+
+1. Acessar **Relatórios → Processamento por Usuário** após cada semana
+2. Identificar o **motivo mais usado** por equipamento e por analista
+3. Se "Imagem ilegível" > 10%: programar limpeza ou calibração do equipamento
+4. Se motivo genérico > 5%: revisar treinamento da equipe
+5. Documentar ações corretivas tomadas
+
+## Tabela de referência — taxas aceitáveis
+
+| Motivo | Taxa normal | Alerta | Ação recomendada |
+|--------|:-----------:|:------:|------------------|
+| Imagem ilegível | < 10% | > 15% | Manutenção de câmera |
+| Placa incorreta | < 8% | > 12% | Calibrar OCR |
+| Enquadramento incorreto | < 5% | > 8% | Revisar configuração de faixa |
+| Motivo genérico | < 5% | > 10% | Treinamento da equipe |
+| Exceção automática | Conforme regras | Qualquer aumento | Auditar regras de exceção |
+
 
 |-------|-----------|
 | **Código** | Código identificador |

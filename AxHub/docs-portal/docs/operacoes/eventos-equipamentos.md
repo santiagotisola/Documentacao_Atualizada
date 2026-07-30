@@ -56,6 +56,34 @@ Eventos de falha são contabilizados como **indisponibilidade** no cálculo das 
 - [Aferições](./afericoes)
 - [Relatório de Eventos](../relatorios/eventos-equipamentos)
 
+## Fluxo de registro de eventos
+
+1. Detectar a ocorrência (falha, manutenção, alerta)
+2. Acessar **Operações → Eventos de Equipamentos**
+3. Clicar em **+ Novo Evento**
+4. Selecionar o **Equipamento** afetado e o **Tipo de Evento**
+5. Informar a **Data/Hora de Início** e preencher a **Descrição** detalhada
+6. Após resolução, informar a **Data/Hora de Fim**
+7. O evento é calculado automaticamente na próxima medição
+
+## Tabela de referência — impacto por tipo de evento
+
+| Tipo | Conta como indisponibilidade? | Registrar Fim? |
+|------|:----------------------------:|:--------------:|
+| **Falha** | Sim | Obrigatório |
+| **Manutenção preventiva** | Não | Sim |
+| **Manutenção corretiva** | Sim | Obrigatório |
+| **Reinicialização** | Não (se < 5 min) | Sim |
+| **Calibração** | Não | Sim |
+
+## Erros comuns
+
+| Problema | Causa | Solução |
+|----------|-------|----------|
+| Evento sem data fim | Não registrado após resolução | Editar e informar data fim |
+| Disponibilidade calculada errada | Falha sem evento registrado | Cadastrar retroativamente com justificativa |
+| Tipo errado usado | Manutenção como Falha | Editar e corrigir o tipo |
+
 :::
 
 

@@ -64,6 +64,33 @@ Motivos detalhados facilitam a análise gerencial e a rastreabilidade de libera�
 - [Tickets Abertos](./ticket-aberto)
 - [Processamento por Usuário](../relatorios/processamento-por-usuario)
 
+## Fluxo de uso dos motivos
+
+1. Veículo autuado ou retido no posto
+2. Operador avalia a situação (descarga parcial, recurso, pagamento)
+3. Seleciona o **Motivo** correspondente na tela de pesagem
+4. Sistema registra o motivo vinculado ao ticket
+5. Gestores consultam os motivos nos relatórios gerenciais
+
+## Tabela de referência — motivos e tipos
+
+| Motivo | Tipo | Quando usar |
+|--------|------|-------------|
+| Liberação por pagamento | Liberação | Veículo pagou a multa no local |
+| Liberação por recurso | Liberação | Motorista apresentou defesa formal |
+| Liberação por descarga | Liberação | Parte da carga foi descarregada |
+| Reclassificação de categoria | Reclassificação | Categoria atribuída incorretamente |
+| Imagem inválida | Descarte | Foto sem qualidade para identificação |
+| Placa ilegível | Descarte | OCR não reconheceu a placa |
+
+## Erros comuns
+
+| Problema | Causa | Solução |
+|----------|-------|----------|
+| Motivo genérico aplicado sempre | Falta de orientação à equipe | Treinamento e revisão de descartadas |
+| Motivo inativo no sistema | Cadastro desatualizado | Reativar ou criar novo motivo |
+| Motivo errado para o tipo | Liberação usado como descarte | Auditar registros e corrigir |
+
 ## Boas práticas
 
 - Mantenha motivos específicos e descritivos — motivos genéricos dificultam a análise gerencial

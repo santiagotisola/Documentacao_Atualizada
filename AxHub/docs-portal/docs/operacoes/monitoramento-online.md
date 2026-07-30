@@ -63,6 +63,30 @@ Configure o filtro por grupo de equipamentos para focar no seu âmbito de respon
 ## Relacionado
 
 - [Eventos de Equipamentos](./eventos-equipamentos)
+
+## Tabela de referência — status dos equipamentos
+
+| Status | Cor | Significado | Ação |
+|--------|:---:|-------------|------|
+| **Online** | 🟢 Verde | Equipamento operacional | Nenhuma |
+| **Offline** | 🔴 Vermelho | Sem comunicação | Acionar manutenção |
+| **Manutenção** | 🟡 Amarelo | Parada programática | Acompanhar previsão |
+
+## Erros comuns
+
+| Problema | Causa provável | Solução |
+|----------|---------------|----------|
+| Equipamento sempre offline | IP incorreto no cadastro | Verificar cadastro do equipamento |
+| Passagens não aparecem em tempo real | Heartbeat desabilitado | Verificar configurações do grupo |
+| Taxa OCR não exibida | Permissão insuficiente | Solicitar permissão ao administrador |
+
+## Fluxo de uso no início do turno
+
+1. Acessar **Operações → Monitoramento Online**
+2. Verificar se todos os equipamentos do turno estão **Online** (verdes)
+3. Identificar e registrar equipamentos Offline em [Eventos](./eventos-equipamentos)
+4. Monitorar Taxa OCR — queda indica necessidade de manutenção
+5. Ao final do turno, verificar alertas ativos não triados
 - [Aferições](./afericoes)
 - [Dashboard](../primeiros-passos/dashboard)
 - [Consulta de Placas](./consulta-placas)
