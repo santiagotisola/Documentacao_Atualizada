@@ -38,6 +38,16 @@ Exibe o log completo de **passagens e infrações enviadas** para sistemas de in
 
 - **Diagnóstico de falhas** — identificar lotes não entregues
 - **Auditoria** — comprovar envios para órgãos externos
+
+:::tip
+Filtre por **Status = Erro** e reenvie manualmente os registros com falha. Erros repetidos no mesmo destino podem indicar problema de integração que requer suporte técnico.
+:::
+
+## Relacionado
+
+- [Webhooks](../administracao/webhooks)
+- [Lotes de Exportação](../glossario/lote-exportacao)
+
 - **Reprocessamento** — identificar registros para reenvio
 
 ## Exportação

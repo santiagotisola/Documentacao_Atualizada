@@ -38,6 +38,9 @@ Cadastro dos **tipos de veículos** fiscalizados nos postos de pesagem, utilizad
 - [Classificações de Veículos](./classificacoes-veiculos)
 - [PBT](../glossario/pbt)
 
+:::tip
+Os tipos de veículos devem ser atualizados sempre que o CONTRAN publicar novas resoluções alterando os limites de PBT. Verifique periodicamente a portaria INMETRO e o CONTRAN 803/2021.
+:::
 
 A tela exibe todos os registros cadastrados, com opção de pesquisa e filtro.
 

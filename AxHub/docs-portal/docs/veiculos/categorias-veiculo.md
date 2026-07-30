@@ -40,8 +40,15 @@ Classificação dos veículos por tipo para fins de **enquadramento nas infraç�
 4. Clique em **Salvar**
 
 :::info
-As categorias de veículos são usadas no enquadramento de infrações para determinar qual artigo do CTB se aplica.
+As categorias de veículos são usadas no enquadramento para determinar qual artigo do CTB se aplica. Categorias incorretas podem invalidar infrações no julgamento administrativo.
 :::
+
+## Relacionado
+
+- [Classificações de Veículos](./classificacoes-veiculos)
+- [Tipos de Veículos](./tipos-veiculos)
+- [Enquadramentos](../administracao/enquadramentos)
+
 | **Trator** | Veículo agrícola/industrial |
 
 ## Campos

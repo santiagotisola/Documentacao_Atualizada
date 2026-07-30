@@ -37,7 +37,18 @@ Dashboard de acompanhamento **em tempo real** do status dos equipamentos de pesa
 O monitoramento online atualiza automaticamente a cada 30 segundos. Não é necessário atualizar a página manualmente.
 :::
 
+## Gestão operacional
+
 - **Gestão de fila**: controlar o fluxo de veículos no posto
+- **Resposta rápida**: acionar equipe em caso de alerta crítico
+- **Documentação**: registrar ocorrências diretamente na operação
+
+## Relacionado
+
+- [Alertas](./alertas)
+- [Consulta de Placas](./consulta-placas)
+- [Fluxo Diário de Veículos](../relatorios/fluxo-diario-veiculos)
+
 - **Alerta de falha**: identificar balança offline imediatamente
 - **Produção**: acompanhar volume de pesagens por turno
 

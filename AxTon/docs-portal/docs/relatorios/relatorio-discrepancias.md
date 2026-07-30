@@ -40,6 +40,13 @@ Identifica **divergências** entre os dados registrados e os valores esperados: 
 :::warning
 Discrepancias entre peso declarado e aferido superior a 10% devem ser reportadas ao órgão fiscalizador conforme obrigação legal.
 :::
+
+## Relacionado
+
+- [NF-e](../glossario/nfe)
+- [MDF-e](../glossario/mdfe)
+- [Relatório de Notas Fiscais](./relatorio-nfe)
+
 | **Tolerância (%)** | Excluír discrepancias dentro da margem |
 
 ## Uso operacional

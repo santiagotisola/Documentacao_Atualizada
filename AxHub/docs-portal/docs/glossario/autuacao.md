@@ -40,6 +40,16 @@ Equipamento captura infração
 - [Enquadramentos](../administracao/enquadramentos)
 - [Lote de Exportação](./lote-exportacao)
 
+## Prazos legais
+
+| Etapa | Prazo máximo |
+|-------|:------------:|
+| Expedição do AIT | 30 dias após a infração |
+| Notificação ao infrator | 30 dias após AIT |
+| Prazo para recurso | 30 dias após notificação |
+
+**Base:** Art. 281 do CTB
+
    OCR lê a placa
        ↓
    Triagem (operador valida)

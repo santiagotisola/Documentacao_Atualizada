@@ -41,6 +41,16 @@ Atividade de fiscalização planejada e executada em um ou mais cruzamentos dura
 Encerre a operação após a atividade de campo para consolidar os dados e liberar os relatórios finais.
 :::
 
+## Boas práticas
+
+- Sempre vincule os equipamentos corretos antes de iniciar a operação
+- Encerre a operação no mesmo dia para evitar dados mistos com a operação seguinte
+- Registre o responsável para rastreabilidade em caso de auditoria
+
+:::info
+Operações encerradas aparecem nos relatórios de **Ocorrências e Alertas**, permitindo análise histórica das atividades de fiscalização.
+:::
+
 | **Local** | Cruzamento principal da operação |
 | **Data Início** | Data e hora de início |
 | **Data Fim** | Data e hora de encerramento previsto |

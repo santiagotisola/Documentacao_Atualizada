@@ -42,6 +42,9 @@ Um ticket só é **fechado** após a liberação explícita pelo operador. Veíc
 - [Reclassificar](./reclassificar)
 - [Tickets Fechados](./ticket-fechado)
 
+:::tip
+Para veículos em espera há mais de 4 horas, contate o supervisor antes de liberar. Retenções prolongadas podem gerar obrigações legais de alimentação e descanso para o motorista.
+:::
 | **Status** | Aguardando, Em análise, Recursão |
 
 ## Ações disponíveis

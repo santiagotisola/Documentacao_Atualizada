@@ -33,11 +33,21 @@ Subdivide as categorias de veículos em **classificações mais específicas** p
 :::info Hierarquia
 Categoria → Classificação → Veículo. A classificação é o nível mais específico, usada no enquadramento da infração.
 :::
+
 ## Exemplos de classificação
 
 | Categoria | Classificação |
 |-----------|----------------|
 | Moto | Motocicleta, Ciclomotor, Motoneta |
+| Caminhão | Toco, Truck, Bi-truck |
+| Passeio | Automóvel, Caminhoneta, Campanha |
+
+## Relacionado
+
+- [Tipos de Veículos](./tipos-veiculos)
+- [Categorias de Veículos](./categorias-veiculo)
+- [Enquadramento](../glossario/enquadramento)
+
 | Carro | Sedan, Hatch, SUV, Pickup |
 | Caminhão | Toco, Truck, Carreta |
 

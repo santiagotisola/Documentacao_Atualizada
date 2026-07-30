@@ -40,6 +40,14 @@ A tela exibe todos os postos cadastrados no sistema.
 :::tip
 Após criar o posto, cadastre os **Equipamentos** vinculados em Cadastros Básicos → Equipamentos.
 :::
+
+## Relacionado
+
+- [Equipamentos](../cadastros-basicos/equipamentos)
+- [Contratos](../medicoes/contratos)
+- [Grupos de Equipamentos](../cadastros-basicos/grupos-equipamentos)
+Após criar o posto, cadastre os **Equipamentos** vinculados em Cadastros Básicos → Equipamentos.
+:::
 | **Ações** | Editar, visualizar |
 
 ### Filtros disponíveis

@@ -37,7 +37,6 @@ Caso esquecer a senha, clique em **Esqueci minha senha** na tela de login e info
 Se o link não chegar em até 5 minutos, verifique a caixa de spam. Em caso de dúvidas, contate o administrador.
 :::
 
-## Recuperação de senha
 
 Clique em **Esqueceu a Senha?** e informe seu e-mail cadastrado. O sistema enviará instruções de recuperação.
 

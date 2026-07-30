@@ -34,10 +34,12 @@ Tabela de cores de veículos utilizada na identificação de veículos nas autua
 :::tip
 As cores são extraídas automaticamente do RENAVAM quando o OCR lê a placa. Mantenha a tabela atualizada para evitar dados em branco nas infrações exportadas.
 :::
-## Passo a passo — Cadastrar cor
 
-1. Acesse **Veículos → Cores** no menu lateral
-2. Clique em **+ Novo**
+## Relacionado
+
+- [Marcas de Veículos](./marcas-veiculos)
+- [Modelos de Veículos](./modelos-veiculos)
+
 3. Informe o **Nome** da cor
 4. Opcionalmente informe o **Código**
 5. Clique em **Salvar**
