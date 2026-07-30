@@ -119,6 +119,17 @@ A exclusão de um local somente será possível se não houver operações ou pe
 4. Verifique se o campo **Ativo** está marcado
 5. Clique em **Salvar**
 
-:::warning Atenção
+::: warning Atenção
 A exclusão de um local somente será possível se não houver registros de pesagem vinculados a ele. Para desativar temporariamente, utilize o campo **Ativo**.
 :::
+
+## Boas práticas
+
+- Use um padrão de código legível como `[UF][Rodovia][Letra]` (ex: PI503B) para facilitar identificação nas operações
+- Preencha o endereço completo com nome da rodovia e quilômetro — facilita auditorias e localização no campo
+- Nunca exclua locais com histórico; desative o registro para manter a rastreabilidade das pesagens
+
+## Relacionado
+
+- [Operações](../operacoes/cadastro-operacoes) — Vincular locais a operações de pesagem
+- [Configurações do Sistema](../sistema/configuracoes) — Parâmetros gerais do AxTon

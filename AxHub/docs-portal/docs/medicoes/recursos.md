@@ -38,6 +38,13 @@ Cadastro e gestão dos **recursos humanos e materiais** utilizados nas operaçõ
 Os recursos cadastrados são incluídos no **Boletim de Medição** como comprovação do fornecimento contratual.
 :::
 
+## Boas práticas
+
+- Cadastre recursos com os mesmos nomes usados no contrato para facilitar auditoria e conciliação
+- Informe a quantidade exata contratada — desvios impactam o cálculo do boletim de medição
+- Vincule cada recurso ao contrato correto; recursos sem contrato não aparecem no boletim
+- Mantenha o cadastro atualizado quando houver aditivos ou renovação contratual
+
 ## Relacionado
 
 - [Contratos](./contratos)

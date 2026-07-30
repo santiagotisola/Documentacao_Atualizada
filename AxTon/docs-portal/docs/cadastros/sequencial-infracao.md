@@ -121,3 +121,14 @@ O sequencial de Infração é utilizado na exportação de Infrações para o ó
 | Processo | Descrição |
 |---|---|
 | [**Exportação**](../infracoes/exportacao) | Envio de Infrações aprovadas em lotes para o órgão autuador |
+
+## Boas práticas
+
+- Configure um sequencial para **cada tipo de infração** (PBT, Eixo, Eixo/PBT) antes de iniciar a operação
+- Defina o número inicial de acordo com o contrato — alguns órgãos exigem faixas específicas de numeração
+- Nunca altere o **Número Atual** de um sequencial em produção sem alinhar com o órgão autuador
+
+## Relacionado
+
+- [Sequencial de Exportação](./sequencial-exportacao) — Numeração dos lotes de exportação
+- [Configurações do Sistema](../sistema/configuracoes) — Tolerâncias e enquadramentos de infração

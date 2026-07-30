@@ -69,8 +69,20 @@ Nunca compartilhe suas credenciais. Toda ação no sistema é registrada com o s
 
 ## Recuperação de senha
 
-Caso a senha tenha sido esquecida, clique no link **Esqueceu a Senha?** disponível na tela de Login O sistema enviará as instruções de recuperação para o endereço de e-mail cadastrado no perfil do Usuário
+Caso a senha tenha sido esquecida, clique no link **Esqueceu a Senha?** disponível na tela de Login. O sistema enviará as instruções de recuperação para o endereço de e-mail cadastrado no perfil do Usuário.
 
 :::warning Atenção
-Após múltiplas tentativas incorretas de Login a conta poderá ser temporariamente bloqueada por segurança. Nesse caso, entre em contato com o administrador do sistema.
+Após múltiplas tentativas incorretas de Login, a conta poderá ser temporariamente bloqueada por segurança. Nesse caso, entre em contato com o administrador do sistema.
 :::
+
+## Segurança
+
+- Nunca compartilhe suas credenciais de acesso com outros usuários
+- Altere sua senha imediatamente no primeiro acesso ao sistema
+- Reporte ao administrador qualquer acesso suspeito em seu nome no [Log de Acesso](../controle-acesso/logs-acesso)
+
+## Relacionado
+
+- [Navegação](./navegacao) — Estrutura do menu lateral e módulos disponíveis
+- [Dashboard](./dashboard) — Tela inicial com indicadores operacionais
+- [Controle de Acesso](../controle-acesso/configurar-permissoes) — Perfis e permissões de usuário

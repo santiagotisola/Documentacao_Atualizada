@@ -46,32 +46,7 @@ A liberação de tickets é uma ação registrada em log. Certifique-se de selec
 
 ## Relacionado
 
-- [Motivos](./motivos)
-- [Reclassificar](./reclassificar)
-- [Tickets Abertos](./ticket-aberto)
-|----------|------|
-| Ticket expirado sem pesagem realizada | Liberar para nova tentativa |
-| Erro no registro do ticket | Liberar e criar novo ticket correto |
-| Veículo retido indevidamente | Liberar com motivo administrativo |
-| Defeito no Equipamento durante a pesagem | Liberar para repetição em outro posto |
-
-## Relacionado
-
-- [Tickets Abertos](./ticket-aberto)
-- [Motivos](./motivos)
-- [Log de Acesso](../controle-acesso/logs-acesso)
-
-
-:::warning Atenção
-A liberação é registrada em log e requer justificativa obrigatória. Todas as liberações são auditáveis pela supervisão.
-:::
-
----
-
-## Navegação Relacionada
-
-| Tipo | Página | Descrição |
-|------|--------|-----------|
-| Relacionado | [Ticket Aberto](./ticket-aberto) | Ticket a liberar |
-| Relacionado | [Postos](./postos) | Posto de pesagem |
-| Relacionado | [Motivos](./motivos) | Motivos de liberação disponíveis |
+- [Motivos](./motivos) — Motivos de liberação disponíveis
+- [Reclassificar](./reclassificar) — Reclassificação de veículo retido
+- [Tickets Abertos](./ticket-aberto) — Consulta e gestão de tickets em aberto
+- [Log de Acesso](../controle-acesso/logs-acesso) — Auditoria de liberações registradas

@@ -53,6 +53,12 @@ Agrupar por região geográfica facilita o monitoramento e a filtragem de relat�
 Grupos bem nomeados agilizam a busca e filtragem em operações e relatórios. Crie um grupo por área geográfica ou por contrato.
 :::
 
+## Boas práticas
+
+- Crie grupos com critério consistente: geográfico (bairro, rodovia) ou operacional (contrato, tipo de fiscalização)
+- Mantenha os grupos atualizados após instalação ou desativação de equipamentos
+- Nomes descritivos facilitam a leitura nos relatórios e na triagem de alertas por equipes operacionais
+
 ## Passo a passo — Criar novo grupo
 
 ![Novo Grupo de Equipamentos](../img/Grupo de Equipamentos - novo.png)

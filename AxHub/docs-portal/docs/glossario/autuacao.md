@@ -34,6 +34,13 @@ Equipamento captura infração
    Envio ao órgão autuador
 ```
 
+## Boas práticas
+
+- Confirme o enquadramento automático antes de incluir a autuação no lote de exportação
+- Revise autuações com placa duvidosa — uma autuação inválida gera recurso e retrabalho
+- Documente ocorrências especiais (veículo em fuga, imagem degradada) nos campos de observação
+- Mantenha o prazo de 30 dias da infração à expedição do AIT para garantir validade jurídica
+
 ## Relacionado
 
 - [Triagem](./triagem)

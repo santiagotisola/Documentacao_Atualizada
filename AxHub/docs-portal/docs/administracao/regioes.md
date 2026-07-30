@@ -31,6 +31,12 @@ Cadastro das regiões geográficas utilizadas para **agrupar operações e equip
 Após cadastrar regiões, vincule os equipamentos a elas em **Configurações → Equipamentos**. Isso habilita o filtro de região nos relatórios.
 :::
 
+## Boas práticas
+
+- Defina regiões com critérios claros (geográfico, contratual ou administrativo) antes de cadastrar equipamentos
+- Evite regiões genéricas demais — quanto mais específica a região, mais úteis os filtros nos relatórios
+- Uma vez criada e vinculada a equipamentos, renomear uma região pode confundir históricos já gerados
+
 ## Relacionado
 
 - [Enquadramentos](./enquadramentos)

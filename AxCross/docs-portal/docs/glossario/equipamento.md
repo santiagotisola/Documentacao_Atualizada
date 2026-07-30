@@ -67,3 +67,8 @@ Veja o cadastro completo em [Equipamentos](../cadastros/equipamentos).
 4. Teste de comunicação (status: Online)
 5. Primeiro registro de passagem valida o funcionamento
 
+## Boas práticas
+
+- Realize a limpeza das lentes mensalmente para manter a taxa OCR acima de 90%
+- Registre toda manutenção no sistema imediatamente — equipamentos sem histórico de manutenção podem ser contestados em auditorias
+- Verifique a conectividade semanalmente; equipamentos offline prolongados geram lacunas no histórico de passagens

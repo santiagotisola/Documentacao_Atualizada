@@ -58,4 +58,10 @@ Classificações de veículos por **número de eixos e PBT** (Peso Bruto Total).
 :::tip
 Use a tabela do CONTRAN 803/2021 como referência para garantir que os limites cadastrados estejam atualizados.
 :::
+
+## Boas práticas
+
+- Mantenha as classificações alinhadas com a Resolução CONTRAN 803/2021 e solicite atualização ao suporte após alterações legais
+- Valide o PBT máximo de cada classificação com o contrato do cliente — alguns órgãos adotam limites mais restritivos
+- Não exclua classificações com registros históricos — inative o registro para preservar a consistência dos dados
 5. Clique em **Salvar**

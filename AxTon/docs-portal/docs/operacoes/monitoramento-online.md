@@ -43,6 +43,12 @@ O monitoramento online atualiza automaticamente a cada 30 segundos. Não é nece
 - **Resposta rápida**: acionar equipe em caso de alerta crítico
 - **Documentação**: registrar ocorrências diretamente na operação
 
+## Boas práticas
+
+- Mantenha o monitoramento aberto durante o período de operação para identificar falhas de conectividade em tempo real
+- Configure alertas de equipe para acionar manutenção imediatamente quando um posto entrar em modo offline
+- Registre todas as ocorrências no sistema para garantir rastreabilidade perante o contratante
+
 ## Relacionado
 
 - [Alertas](./alertas)

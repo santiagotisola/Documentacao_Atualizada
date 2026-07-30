@@ -30,6 +30,12 @@ Classificação legal atribuída a uma infração de trânsito. O enquadramento 
 | Grave | 5 | R$ 195,23 |
 | Gravíssima | 7 | R$ 293,47 (1x) a R$ 880,41 (3x) |
 
+## Base legal
+
+- **Art. 161 do CTB** — Define infração de trânsito e os princípios de gravidade e pontuação
+- **Anexo II do CTB** — Tabela completa de infrações, artigos e penalidades
+- **Resolução CONTRAN 619/2016** — Regula a fiscalização eletrônica e os enquadramentos aplicáveis
+
 ## Relacionados
 
 - [Enquadramentos](../administracao/enquadramentos) — Tabela completa do CTB

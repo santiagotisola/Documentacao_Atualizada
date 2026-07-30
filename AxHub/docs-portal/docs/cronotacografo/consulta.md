@@ -50,7 +50,13 @@ A cada registro de cronotacógrafo, o sistema verifica:
 | Regular | Não | Passagem liberada |
 | Irregular | Sim | Auto de infração Art.162,II CTB |
 | Vencido | Sim | Auto de infração Art.162,II CTB |
-| NãoEncontrado | Revisao manual | Triagem pelo operador |
+| NãoEncontrado | Revisão manual | Triagem pelo operador |
+
+## Boas práticas
+
+- Priorize registros com status **NãoEncontrado** na triagem — podem indicar veículos sem certificação ou placas divergentes
+- Verifique periodicamente o banco de certificados: certifique-se de que a atualização está em dia para evitar falsos negativos
+- Use os filtros de período e placa para auditar registros de uma operação específica rapidamente
 
 ## Relacionado
 

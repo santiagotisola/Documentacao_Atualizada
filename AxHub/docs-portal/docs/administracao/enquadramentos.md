@@ -42,6 +42,12 @@ Exibe a tabela completa de enquadramentos de Infrações de trânsito conforme o
 Os enquadramentos são pré-carregados conforme o CTB vigente. Para adicionar enquadramentos municipais específicos, entre em contato com o suporte técnico Axion.
 :::
 
+## Boas práticas
+
+- Sempre use o código de enquadramento exato do CTB ao configurar operações — erros geram invalidade jurídica nas infrações
+- Verifique periodicamente se há atualizações de valores de multa (reajuste anual do IPCA) e solicite atualização ao suporte
+- Utilize os filtros de gravidade para validar que os enquadramentos configurados correspondem ao tipo de fiscalização da operação
+
 ## Relacionado
 
 - [Enquadramento](../glossario/enquadramento) — Conceito e estrutura

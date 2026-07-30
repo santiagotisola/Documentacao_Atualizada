@@ -30,6 +30,12 @@ Todo equipamento metrológico deve possuir **certificado de aferição válido**
 | **Periódica** | Recalibração anual obrigatória |
 | **Extraordinária** | Após manutenção ou acidente |
 
+## Base legal
+
+- **Resolução CONTRAN 798/2021** — Requisitos para aprovação e uso de equipamentos de fiscalização eletrônica
+- **Portaria INMETRO 544/2014** — Regulamento técnico de instrumentos de pesagem e velocimetria
+- **Art. 291-A do CTB** — Validade das infrações dependente de equipamento regularmente aferido
+
 ## Relacionados
 
 - [Aferições](../operacoes/afericoes) — Registro de aferições no sistema

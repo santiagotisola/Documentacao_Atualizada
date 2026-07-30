@@ -40,28 +40,14 @@ O campo **Código do Município** é essencial para a exportação de Infraçõe
 O código do município na faixa **deve ser o mesmo** da UF da operação. Se a operação é em Goiânia/GO, todas as faixas devem ter o código IBGE de um município de GO. Um código de município divergente (ex: código de MA em operação de GO) gera **erro na exportação** de Infrações.
 :::
 
+## Boas práticas
+
+- Valide o código IBGE do município antes de salvar a faixa — é o campo que mais causa erros na exportação
+- Use códigos de faixa padronizados e consistentes com o contrato (ex: sigla da operação + número sequencial)
+- Ao alterar o sentido de uma faixa, verifique se os equipamentos associados refletem a mudança no campo
+
 ## Relacionado
 
-- [Operações](./cadastro-operacoes)
-- [Municípios](../veiculos/municipios)
-- [Enquadramentos](../administracao/configuracoes-enquadramento)
-
-:::
-
-### Onde o Código do Município é utilizado
-
-| Módulo | Utilização |
-|--------|-----------|
-| **Exportação de Infrações | Validação obrigatória: UF da faixa deve corresponder ao município |
-| Relatórios | Agrupamento e filtros por localidade |
-| **Medições** | Cálculos de desempenho por equipamento/local |
-| **Triagem** | Dados de contexto da Infração |
-
----
-
-## Navegacao Relacionada
-
-| Tipo | Pagina | Descricao |
-|------|--------|-----------|
-| Relacionado | [Cadastro de Operacoes](./cadastro-operacoes) | Operacao que contem as faixas |
-| Relacionado | [Equipamentos](../cadastros-basicos/equipamentos) | Equipamentos nas faixas |
+- [Operações](./cadastro-operacoes) — Operação que contém as faixas
+- [Municípios](../veiculos/municipios) — Consulta de código IBGE por município
+- [Enquadramentos](../administracao/configuracoes-enquadramento) — Configuração por operação/faixa

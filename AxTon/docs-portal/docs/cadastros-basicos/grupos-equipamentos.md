@@ -33,6 +33,12 @@ Agrupamento lógico de equipamentos para **organização por contrato, região o
 Organize grupos por **contrato** ou **região** para facilitar a geração de medições e relatórios segmentados por localidade.
 :::
 
+## Boas práticas
+
+- Crie um grupo por contrato ou por área geográfica — evite grupos genéricos com muitos equipamentos misturados
+- Nomeie os grupos de forma que o usuário identifique facilmente a localidade ou o contrato
+- Mantenha a lista de equipamentos do grupo atualizada após instalações ou desatividades
+
 ## Relacionado
 
 - [Equipamentos](./equipamentos)

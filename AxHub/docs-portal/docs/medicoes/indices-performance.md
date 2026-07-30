@@ -41,12 +41,12 @@ Permite configurar os índices de performance exigidos pelos contratos.
 2. Compara os dados apurados do período com as metas
 3. Gera o **Boletim de Medição** com status: ✅ Dentro da meta ou ❌ Abaixo da meta
 
-## Relacionado
+## Boas práticas
 
-- [Contratos](./contratos)
-- [Criar Medição](./criar-medicao)
-- [Interrupções](./interrupcoes)
-
+- Revise as metas sempre que houver aditivo contratual — índices desatualizados geram boletins incorretos
+- Defina a tolerância para não penalizar variações pontuais que não representam falha sistemática
+- Inclua **todos** os índices exigidos pelo contrato; índices ausentes não aparecem no boletim
+- Documente o método de apuração de cada métrica para facilitar discussões com o contratante
 
 :::tip
 Os índices configurados aqui são calculados automaticamente ao gerar uma nova medição. Manter as metas atualizadas de acordo com o contrato vigente evita distorções no boletim.
@@ -54,20 +54,9 @@ Os índices configurados aqui são calculados automaticamente ao gerar uma nova 
 
 ## Relacionado
 
+- [Contratos](./contratos)
 - [Criar Medição](./criar-medicao)
-- [Medições Finalizadas](./medicoes-finalizadas)
-
-
-:::tip
-Os índices configurados aqui são calculados automaticamente ao gerar uma nova medição. Manter metas atualizadas de acordo com o contrato vigente.
-:::
-
-:::tip
-Os índices configurados aqui são calculados automaticamente ao gerar uma nova medição.
-:::
-| Campo | Descrição |
-|-------|-----------|
-| **Contrato** | Contrato vinculado |
+- [Interrupções](./interrupcoes)
 | **Indicador** | Nome do indicador (ex: Disponibilidade, Uptime) |
 | **Meta (%)** | Percentual mínimo exigido |
 | **Fórmula** | Regra de cálculo do índice |

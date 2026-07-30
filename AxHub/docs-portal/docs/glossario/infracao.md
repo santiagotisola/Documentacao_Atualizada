@@ -45,32 +45,16 @@ Equipamento captura → Triagem → Auditoria → Lote → Exportação
 
 **Base:** Art. 281 do CTB
 
+## Base legal
+
+- **Art. 161 do CTB** — Define infração de trânsito como todo ato omissivo ou comissivo que contrariar preceito do CTB
+- **Art. 280 do CTB** — Regula a lavratura do Auto de Infração de Trânsito (AIT)
+- **Art. 281 do CTB** — Estabelece os prazos para expedição do AIT e notificação ao infrator
+- **Resolução CONTRAN 619/2016** — Define os procedimentos para fiscalização eletrônica
+
 ## Relacionado
 
-- [Triagem](./triagem)
-- [Autuação](./autuacao)
-- [Enquadramento](./enquadramento)
-
-| **Em triagem** | Aguardando validação |
-| **Em auditoria** | Validada, aguardando aprovação |
-| **Aprovada** | Pronta para exportação |
-| **Descartada** | Rejeitada na triagem/auditoria |
-| **Exportada** | Enviada ao órgão autuador |
-
-## Relacionados
-
 - [Triagem](./triagem) — Processo de validação
-- [Auditoria](../infracoes/auditoria) — Aprovação final
-- [Enquadramento](./enquadramento) — Classificação legal
-
-
-## Uso no Sistema AxHub
-
-O sistema AxHub captura automaticamente evidencias de infracoes atraves de Equipamentos metrologicos (radares, cameras OCR, balancas). Cada registro passa pelo fluxo: **Captura - Triagem - Auditoria - Exportacao**.
-
-## Paginas Relacionadas
-
-- [Triagem de Infracoes](../infracoes/triagem)
-- [Consulta de Infracoes](../infracoes/consulta-infracoes)
-- [Infracoes Descartadas](../infracoes/infracoes-descartadas)
-- [Enquadramento](./enquadramento)
+- [Autuação](./autuacao) — Registro formal do ato infracional
+- [Enquadramento](./enquadramento) — Classificação legal da infração
+- [Consulta de Infrações](../infracoes/consulta-infracoes) — Histórico de infrações no sistema

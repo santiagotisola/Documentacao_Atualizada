@@ -83,3 +83,9 @@ Clique em uma categoria (Cadastros ou Administração) para expandir ou recolher
 - Itens ausentes no menu indicam permissões não concedidas — solicite ao administrador se necessário
 - Use o breadcrumb no topo para entender em qual tela você está e navegar de volta sem perder o contexto
 - Em dispositivos com tela pequena, o menu pode ser recolhido automaticamente para melhor aproveitamento de espaço
+
+## Boas práticas
+
+- Use o breadcrumb sempre que precisar retornar a uma tela anterior — evita navegar pelo menu do zero
+- Se um item do menu estiver ausente, verifique com o administrador se as permissões do seu perfil estão corretas
+- Em telas de listagem, utilize os filtros antes de exportar dados para reduzir o volume do arquivo gerado

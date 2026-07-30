@@ -103,3 +103,15 @@ Todas as entradas e saídas do sistema são registradas automaticamente. Para au
 - Filtre por usuário e período para verificar atividades
 
 Consulte [Logs de Acesso](logs-acesso.md) para detalhes.
+
+## Segurança
+
+- Nunca compartilhe credenciais entre usuários — cada pessoa deve ter login próprio para garantir rastreabilidade
+- Inative imediatamente usuários que saíram da equipe ou que não acessam mais o sistema
+- Atribua o perfil com **menor privilégio necessário** para a função — não use perfil de administrador para operações rotineiras
+
+## Relacionado
+
+- [Perfis de Acesso](./perfis-acesso) — Criação e configuração de perfis com conjuntos de permissões
+- [Permissões de Acesso](./permissoes) — Controle granular por funcionalidade
+- [Logs de Acesso](./logs-acesso) — Histórico de acessos e ações por usuário

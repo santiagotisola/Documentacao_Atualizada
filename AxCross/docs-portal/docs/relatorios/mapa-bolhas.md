@@ -65,3 +65,9 @@ O Mapa de Bolhas é ideal para:
 :::tip Dica
 Combine o Mapa de Bolhas com o [Relatório de Ocorrências](ocorrencias-alertas.md) para detalhar quais irregularidades estão concentradas em cada ponto identificado no mapa.
 :::
+
+## Relacionado
+
+- [Ocorrências e Alertas](./ocorrencias-alertas) — Detalhamento das irregularidades por equipamento
+- [Mapeamento de Rotas](./mapeamento-rotas) — Visualização geográfica das rotas de veículos
+- [Painel Analítico](./painel-analitico) — Análise aprofundada por placa
