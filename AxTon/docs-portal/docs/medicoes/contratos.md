@@ -39,6 +39,26 @@ Registro dos contratos de prestação de serviço de pesagem, vinculando postos,
 | **Meta Disponibilidade** | Não | % mínimo de disponibilidade exigido |
 | **Meta OCR** | Não | % mínimo de aproveitamento OCR |
 
+## Passo a passo
+
+1. Acesse **Medições → Contratos**
+2. Clique em **+ Novo**
+3. Preencha o **Número**, **Contratante** e **Vigência**
+4. Selecione os **Postos** cobertos
+5. Defina as metas de **Disponibilidade** e **OCR**
+6. Clique em **Salvar**
+
+:::tip
+Contrato com metas bem configuradas garante que o sistema calcule automaticamente os índices ao gerar medições mensais.
+:::
+
+## Relacionado
+
+- [Grupos de Equipamentos](./grupos-equipamentos)
+- [Criar Medição](./criar-medicao)
+- [Índices de Performance](./indices-performance)
+
+
 | **Nº Contrato** | Número do contrato |
 | **Contratante** | Órgão contratante |
 | **Vigência** | Período de validade |

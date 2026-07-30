@@ -39,6 +39,14 @@ Fabricante → Modelo → Equipamento. Cadastre o fabricante antes de criar mode
 | HAENNI | Balanças portáteis e fixas |
 | Toledo | Balanças industriais |
 | RODOANEL | Sistemas WIM dinâmicos |
+| SCHENCK | Balanças de precisão |
+
+## Relacionado
+
+- [Modelos de Equipamentos](./modelos-equipamentos)
+- [Equipamentos](./equipamentos)
+- [Tipos de Equipamentos](./tipos-equipamentos)
+| RODOANEL | Sistemas WIM dinâmicos |
 | SCHENCK | Balanças de precisao |
 
 3. Informe o **Nome** do fabricante

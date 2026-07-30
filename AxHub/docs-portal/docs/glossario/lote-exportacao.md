@@ -33,11 +33,15 @@ Criado → Processando → Enviado → Aceito
 - [Lotes de Importação](../relatorios/lote-importacao)
 - [Sequenciais de Lote](../administracao/sequenciais-lote-exportacao)
 
-| **Processando** | Envio em andamento |
-| **Enviado** | Transmitido com sucesso |
-| **Aceito** | Confirmado pelo órgão |
-| **Erro** | Falha no envio |
-| **Cancelado** | Cancelado antes do envio |
+## Boas práticas
+
+- Gere lotes somente com infrações **auditadas e aprovadas**
+- Monitore o status do lote após envio — lotes com **Erro** devem ser reprocessados em até 24h
+- Guarde os recibos de confirmação do órgão (número de protocolo) para auditoria
+
+:::warning
+Lotes cancelados não podem ser reenvidos. Uma nova exportação precisará ser gerada com as infrações correspondentes.
+:::
 
 ## O que compõe um lote
 

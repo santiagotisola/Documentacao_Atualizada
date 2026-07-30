@@ -38,6 +38,22 @@ Alerta gerado → Assumir → Verificar → Resolver ou Gerar infração
 ```
 
 :::tip
+Configure notificações automáticas por e-mail para alertas críticos (excesso de peso e equipamento offline) para resposta mais rápida da equipe operacional.
+:::
+
+## SLA de atendimento recomendado
+
+| Tipo de alerta | Prazo de resolução |
+|----------------|:--------------------:|
+| Excesso de peso | Imediato (veículo retido) |
+| MDF-e / NF-e | Até 1 hora |
+| Equipamento offline | Até 4 horas |
+| Anomalia de peso | Até 24 horas |
+
+## Relacionado
+
+- [Consulta de Placas](./consulta-placas)
+- [Monitoramento Online](./monitoramento-online)
 Responda alertas de equipamento offline antes de qualquer outro. Um equipamento inativo não registra pesagens.
 :::
 

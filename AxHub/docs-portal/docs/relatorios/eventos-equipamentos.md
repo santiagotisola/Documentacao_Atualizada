@@ -39,6 +39,20 @@ Relatório de Eventos](../img/Relatorios%20-%20relatorio%20de%20eventos%20dos%20
 
 Exportável em **Excel** para inclusão em Relatórios de performance e planos de manutenção.
 
+## Tipos de evento
+
+| Tipo | Descrição | Impacto no SLA |
+|------|-----------|:--------------:|
+| **Falha** | Equipamento parou de funcionar | Sim |
+| **Manutenção** | Intervenção técnica programada | Não (se prevista) |
+| **Vandalismo** | Dano externo ao equipamento | Sim |
+| **Reinicialização** | Reinicialização automática ou manual | Depende da duração |
+| **Configuração** | Alteração de parâmetros | Não |
+
+:::tip
+Use este relatório mensalmente para subsidiar o **Boletim de Medição** e comprovar eventos que justificam interrupções contratuais.
+:::
+
 :::tip Dica
 Use em conjunto com o Relatório de Falhas Sequenciais](./falhas-sequenciais) para identificar Equipamentos com problemas recorrentes.
 :::

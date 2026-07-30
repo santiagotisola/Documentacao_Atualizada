@@ -38,6 +38,19 @@ O DENATRAN/SENATRAN exige numeração sequencial contínua nos lotes de exporta�
 
 1. Acesse **Relatórios → Falhas de Sequenciais**
 2. Selecione o **Período** a analisar
+3. Clique em **Verificar**
+4. O sistema lista as falhas encontradas
+5. Corrija cada falha antes de exportar o lote
+
+:::warning
+Não exporte um lote com falhas sequenciais identificadas. O órgão autuador pode rejeitar o lote inteiro, exigindo reenvio de todas as infrações.
+:::
+
+## Relacionado
+
+- [Sequenciais de Infrações](../administracao/sequenciais-infracoes)
+- [Relatório de Infrações](./relatorio-infracoes)
+
 3. Opcionalmente filtre por **Equipamento**
 4. Clique em **Consultar**
 5. Para cada falha encontrada, verifique a causa e corrija antes de exportar

@@ -44,6 +44,13 @@ Após o equipamento registrar uma passagem com peso acima do limite legal, o sis
 
 ## Boas práticas
 
+- Analisar as imagens antes de aprovar — a qualidade das imagens determina a validade da infração
+- Registrar sempre o motivo de descarte para análise gerencial
+- Não aprovar infrações com placa ilegível — o auto pode ser contestado
+
+:::warning
+Infrações aprovadas com erros de placa ou classificação podem ser invalidadas pelo órgão autuador, gerando retrabalho e riscos contratuais.
+:::
 - Sempre verificar a imagem antes de aprovar
 - Descartar com motivo detalhado para rastreabilidade
 - Manter a fila de triagem com menos de 24h de defasagem

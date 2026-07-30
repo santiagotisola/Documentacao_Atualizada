@@ -44,6 +44,13 @@ A liberação de tickets é uma ação registrada em log. Certifique-se de selec
 | Veículo retido indevidamente | Liberar com motivo administrativo |
 | Defeito no Equipamento durante a pesagem | Liberar para repetição em outro posto |
 
+## Relacionado
+
+- [Tickets Abertos](./ticket-aberto)
+- [Motivos](./motivos)
+- [Log de Acesso](../controle-acesso/logs-acesso)
+
+
 :::warning Atenção
 A liberação é registrada em log e requer justificativa obrigatória. Todas as liberações são auditáveis pela supervisão.
 :::

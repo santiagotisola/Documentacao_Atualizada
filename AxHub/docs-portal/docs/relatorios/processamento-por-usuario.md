@@ -38,6 +38,18 @@ Exibe a **produtividade de processamento por analista** em um período. Utilizad
 
 - Identificar analistas com baixa produtividade
 - Distribuir demandas de triagem equilibradamente
+- Detectar possíveis inconsistências na taxa de descarte
+
+:::tip
+Além da quantidade, analise a **Qualidade** — taxas de descarte muito altas ou muito baixas merecem atenção do supervisor.
+:::
+
+## Relacionado
+
+- [Triagem](../glossario/triagem)
+- [Motivos de Descarte](../administracao/motivos-descartes)
+- [Logs de Acesso](../controle-acesso/logs-acesso)
+
 - Detectar gargalos no processamento
 - Embasar feedback e treinamentos
 

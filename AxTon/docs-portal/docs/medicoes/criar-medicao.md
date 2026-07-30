@@ -42,7 +42,14 @@ A medição finalizada é **bloqueada para edição**. Para corrigi-la, é neces
 - Total de infrações geradas e exportadas
 - Disponibilidade por equipamento
 - Taxa OCR por equipamento
-- Interações de manutenção registradas
+- Interrupções de manutenção registradas
+
+## Relacionado
+
+- [Contratos](./contratos)
+- [Índices de Performance](./indices-performance)
+- [Interrupções](./interrupcoes)
+
 - Interrupções e seus impactos
 
 :::tip Antes de finalizar

@@ -31,16 +31,15 @@ Acesso aos dashboards e Relatórios analíticos integrados via Power BI.
 | Fluxo por Porte | ![](../img/Relatórios%20BI%20-.relatorio%20relatorio%20médio%20diário%20de%20fluxo%20por%20porte.png) |
 | Triagem por Usuário | ![](../img/Relatórios%20BI%20-.relatorio%20triagem%20por%20Usua.png) |
 
-## Termos Tecnicos
+## Termos Técnicos
 
-| Termo | Definicao |
+| Termo | Definição |
 |-------|-----------|
-| [Triagem](../glossario/triagem) | Ver definicao no glossario |
+| **Taxa OCR** | Percentual de placas lidas com sucesso |
+| **Disponibilidade** | % de tempo online dos equipamentos |
+| **Triagem** | Processo de validação das infrações |
 
----
-
-## Navegacao Relacionada
-
-| Tipo | Pagina | Descricao |
-|------|--------|-----------|
+:::info
+Os dados nos dashboards Power BI são atualizados conforme o agendamento configurado no Power BI Service. Contate o suporte para ajustar a freqüência de atualização.
+:::
 | Relacionado | Relatórios Power BI (Admin)](../administracao/relatorios-power-bi) | Configuracao |

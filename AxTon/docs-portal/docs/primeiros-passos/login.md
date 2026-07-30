@@ -38,6 +38,18 @@ Nunca compartilhe suas credenciais. Toda ação no sistema é registrada com o s
 
 ## Navegação Relacionada
 
+- [Navegação](./navegacao) — Como usar o menu lateral
+- [Perfis de Acesso](../controle-acesso/perfis-acesso) — Níveis de permissão
+
+## Problemas comuns
+
+| Problema | Solução |
+|----------|---------|
+| Senha incorreta | Tente novamente ou clique em **Esqueci minha senha** |
+| Usuário bloqueado | Contate o administrador do sistema |
+| Página não carrega | Verifique a conexão com a rede interna |
+| Acesso negado por IP | Solicite a inclusão do seu IP em Controle de Acesso → Acessos por IP |
+
 | Tipo | Página |
 |------|--------|
 | Próximo | [Navegação](./navegacao) |

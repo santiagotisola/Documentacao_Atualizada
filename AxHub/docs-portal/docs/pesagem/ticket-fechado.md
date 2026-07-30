@@ -40,9 +40,13 @@ Clique em **Exportar** para gerar um arquivo CSV com os tickets do período sele
 :::tip
 Use o filtro **Infrator** para visualizar somente os tickets que geraram infração e acompanhar o status de processamento da multa.
 :::
-| **Ações** | Visualizar / Imprimir |
 
-## Filtros
+## Relacionado
+
+- [Tickets Abertos](./ticket-aberto)
+- [Reclassificar](./reclassificar)
+- [Liberar Pesagem](./liberar-pesagem)
+
 
 - **Período**: data início e fim
 - **Placa**: busca direta
