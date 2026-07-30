@@ -28,6 +28,18 @@ A tela exibe todos os postos cadastrados no sistema.
 | **Nome** | Nome do posto de pesagem |
 | **Localidade** | Município/UF onde o posto está localizado |
 | **Status** | Ativo ou Inativo |
+
+## Passo a passo — Cadastrar posto
+
+1. Acesse **Cadastros Básicos → Postos de Pesagem**
+2. Clique em **+ Novo**
+3. Preencha o **Código**, **Nome** e **Localidade**
+4. Vincule os **Equipamentos** e o **Contrato**
+5. Clique em **Salvar**
+
+:::tip
+Após criar o posto, cadastre os **Equipamentos** vinculados em Cadastros Básicos → Equipamentos.
+:::
 | **Ações** | Editar, visualizar |
 
 ### Filtros disponíveis

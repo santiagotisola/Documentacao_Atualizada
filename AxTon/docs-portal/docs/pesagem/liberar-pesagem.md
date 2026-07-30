@@ -28,6 +28,12 @@ Permite **liberar manualmente** veículos retidos no processo de pesagem, seja a
 1. Localize o ticket na lista de **Tickets Abertos**
 2. Clique em **Liberar**
 3. Selecione o **Motivo da liberação**
+4. Preencha as **Observações** (opcional)
+5. Clique em **Confirmar liberação**
+
+:::warning
+A liberação é irreversível. Todas as liberações são registradas em log com o operador e o motivo informado.
+:::
 4. Opcionalmente informe uma **Observação**
 5. Clique em **Confirmar Liberação**
 

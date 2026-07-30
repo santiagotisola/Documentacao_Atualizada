@@ -30,6 +30,15 @@ Registros de pesagem **já finalizados**. Permitem consulta histórica, geraçã
 
 | Ação | Descrição |
 |------|-----------|
+| **Visualizar** | Exibe detalhes completos do ticket |
+| **Imprimir** | Gera o layout do ticket em PDF |
+| **Exportar** | Inclui no CSV do relatório |
+
+:::tip
+Use o filtro **Infrator** para revisar tickets com infração gerada e verificar o status de exportação ao órgão autuador.
+:::
+| Ação | Descrição |
+|------|-----------|
 | **Visualizar** | Ver detalhes completos |
 | **Imprimir** | Gerar comprovante |
 | **Exportar** | Excel ou PDF |

@@ -28,6 +28,18 @@ Identifica **divergências** entre os dados registrados e os valores esperados: 
 | **Período** | Data início e fim |
 | **Posto** | Local da pesagem |
 | **Tipo de discrepancia** | Filtrar por categoria |
+
+## Como usar
+
+1. Acesse **Relatórios → Relatório de Discrepancias**
+2. Selecione o **Período** e o **Posto**
+3. Escolha o **Tipo de Discrepancia** (opcional)
+4. Clique em **Gerar**
+5. Exporte em CSV para análise ou envio à fiscalização
+
+:::warning
+Discrepancias entre peso declarado e aferido superior a 10% devem ser reportadas ao órgão fiscalizador conforme obrigação legal.
+:::
 | **Tolerância (%)** | Excluír discrepancias dentro da margem |
 
 ## Uso operacional

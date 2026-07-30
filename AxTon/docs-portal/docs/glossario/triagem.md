@@ -28,6 +28,13 @@ Após o equipamento registrar uma passagem com peso acima do limite legal, o sis
 |------|-------------|
 | **Aprovar** | Infração válida — segue para auditoria |
 | **Descartar** | Erro técnico, imagem ilegível ou dados incorretos |
+
+## Relacionado
+
+- [Auditoria](../pesagem/auditoria)
+- [Motivos](../pesagem/motivos)
+- [Infração](./infracao)
+
 | **Reencaminhar** | Dúvida que exige revisão por nível superior |
 
 ## Relação com outros processos

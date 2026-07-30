@@ -28,6 +28,17 @@ Gráfico e tabela com o **volume horário de veículos** nos postos de pesagem. 
 | **Pico do dia** | Horário e volume máximo de passagens |
 | **Total do dia** | Somatório de todas as passagens |
 | **Média horária** | Média de veículos por hora no período |
+
+## Como usar
+
+1. Acesse **Relatórios → Fluxo Diário de Veículos**
+2. Selecione a **Data**
+3. Filtre por **Posto** ou **Categoria** (opcional)
+4. Clique em **Gerar**
+
+:::tip
+Identifique os horários de pico para dimensionar equipes operacionais com mais precisão.
+:::
 | **Tabela detalhada** | Passagens por hora com categoria e peso médio |
 
 ## Casos de uso

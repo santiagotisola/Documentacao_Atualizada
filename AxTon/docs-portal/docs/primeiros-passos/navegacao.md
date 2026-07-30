@@ -28,6 +28,18 @@ O menu lateral do AxTon é organizado com itens diretos e duas categorias expans
 |---|---|
 | **Iniciar Pesagem** | Postos e início do processo de pesagem |
 | **Operações** | Cadastro e gestão de operações de fiscalização |
+
+## Dicas de navegação
+
+| Atalho | Função |
+|--------|--------|
+| Clique no logo | Volta à página inicial |
+| Menú recolhível | Clique na seta para expandir/recolher categorias |
+| Busca | Utilize o campo de busca para localizar menus rapidamente |
+
+:::tip
+O menu exibe apenas os módulos que o perfil do usuário tem permissão de acessar. Se algum módulo estiver oculto, solicite ao administrador a concessão de permissão.
+:::
 | **Tickets de Pesagens** | Tickets em aberto e fechados |
 | **Exportação** | Exportação de Infrações para o órgão autuador |
 | **Sistema** | Configurações gerais, câmera IP e dados do órgão |

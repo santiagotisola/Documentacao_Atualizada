@@ -28,6 +28,15 @@ O AxTon disponibiliza dashboards analíticos avançados integrados com o **Micro
 ## Filtros disponíveis
 
 Cada dashboard do Power BI permite filtrar por:
+
+- Período (dia, mês, ano)
+- Posto de pesagem
+- Contrato
+- Equipamento específico
+
+:::info
+Os dashboards são gerados a partir dos dados do AxTon e atualizados conforme a configuração de refresh do Power BI Service. Para configurações avançadas, entre em contato com o suporte.
+:::
 - **Período** (data início / data fim)
 - **Equipamento** específico
 - **Grupo de Equipamentos**

@@ -28,6 +28,12 @@ Lista as **notas fiscais eletrônicas (NF-e)** vinculadas às passagens de veíc
 | **Chave** | 44 dígitos da NF-e |
 | **Emitente** | CNPJ do remetente |
 | **Destinatário** | CNPJ do destinatário |
+| **Valor total** | Valor declarado na nota |
+| **Status** | Válida / Vencida / Cancelada |
+
+:::tip
+Use o filtro **Status = Ausente** para identificar veículos de carga que circularam sem nota fiscal, possível irregularidade fiscal a ser reportada.
+:::
 | **Valor** | Valor total da nota |
 | **Peso declarado** | Peso informado na NF-e |
 | **Status** | Válida / Vencida / Cancelada |

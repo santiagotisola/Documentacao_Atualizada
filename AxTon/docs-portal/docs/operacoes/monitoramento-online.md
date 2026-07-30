@@ -29,6 +29,14 @@ Dashboard de acompanhamento **em tempo real** do status dos equipamentos de pesa
 
 ## Usos operacionais
 
+- Verificar se os postos estão ativos e respondendo
+- Identificar acumulo de veículos aguardando pesagem
+- Checar alertas de infrações não triadas
+
+:::tip
+O monitoramento online atualiza automaticamente a cada 30 segundos. Não é necessário atualizar a página manualmente.
+:::
+
 - **Gestão de fila**: controlar o fluxo de veículos no posto
 - **Alerta de falha**: identificar balança offline imediatamente
 - **Produção**: acompanhar volume de pesagens por turno

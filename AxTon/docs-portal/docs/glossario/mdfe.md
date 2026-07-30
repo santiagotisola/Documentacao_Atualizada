@@ -29,6 +29,12 @@ Documento eletrônico obrigatório que vincula as notas fiscais (NF-e) ao transp
 | **Validade** | Período de vigência do manifesto |
 | **NF-e vinculadas** | Notas fiscais incluídas no manifesto |
 
+## Relacionado
+
+- [NF-e](./nfe) — Nota Fiscal Eletrônica
+- [Relatório de Notas Fiscais](../relatorios/relatorio-nfe)
+
+
 ## Como o AxTon usa o MDF-e
 
 1. Equipamento captura placa do veículo

@@ -28,6 +28,11 @@ Permite pesquisar o **histórico completo de passagens** de um veículo específ
 | **Posto** | Local de pesagem |
 | **Peso aferido** | Peso registrado |
 | **PBT máximo** | Limite para a categoria |
+| **Resultado** | Regular ou Infrator |
+
+:::tip
+Use a consulta de placas para verificar histórico de um veículo antes de liberar ou autuar. É possível identificar padrões de reincidência.
+:::
 | **Status** | Regular / Infrator |
 | **Infração** | Número da infração (se gerada) |
 
