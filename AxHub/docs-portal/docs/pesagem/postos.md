@@ -37,7 +37,13 @@ Cadastro dos **pontos físicos de fiscalização de peso veicular**. Cada posto 
 :::tip
 Após criar o posto, vincule os **Equipamentos** a ele em **Configurações → Equipamentos**.
 :::
-| **Status** | Sim | Ativo ou Inativo |
+
+## Relacionado
+
+- [Equipamentos](../administracao/equipamentos)
+- [Contratos](../medicoes/contratos)
+- [Tickets Fechados](./ticket-fechado)
+
 
 ## Cadastro
 

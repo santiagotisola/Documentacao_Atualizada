@@ -43,6 +43,13 @@ Cadastro dos **tipos de veículos** utilizados para classificação nas operaç�
 Os tipos de veículos são usados em conjunto com **Espécies** e **Classificações** para determinar o enquadramento exato da infração.
 :::
 
+## Relacionado
+
+- [Espécies de Veículos](./especie-veiculo)
+- [Classificações de Veículos](./classificacoes-veiculos)
+- [Categorias de Veículos](./categorias-veiculo)
+
+
 ## Campos
 
 | Campo | Obrigatório | Descrição |

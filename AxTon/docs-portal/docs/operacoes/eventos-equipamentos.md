@@ -39,6 +39,16 @@ Registro automático dos **eventos operacionais** dos equipamentos de pesagem: i
 5. Defina a **Data/Hora** de início e fim
 6. Clique em **Salvar**
 
+:::tip
+Eventos registrados aqui alimentam o **Relatório de Eventos** e o cálculo de disponibilidade na medição contratual. Registre sempre com precisão de horário.
+:::
+
+## Relacionado
+
+- [Alertas](./alertas)
+- [Monitoramento Online](./monitoramento-online)
+- [Medições → Interrupções](../medicoes/interrupcoes)
+
 :::info Impacto nas medições
 Eventos de falha registrados aqui são considerados no cálculo da disponibilidade das [Medições](../medicoes/criar-medicao).
 :::

@@ -36,7 +36,14 @@ Relatório de Falhas](../img/Relatorios%20-%20relatorio%20de%20falhas%20sequenci
 
 ## O que são falhas sequenciais
 
-Uma **falha sequencial** ocorre quando o mesmo Equipamento apresenta o mesmo tipo de problema em registros consecutivos, sem nenhum registro bem-sucedido entre eles. O threshold (quantidade mínima) é configurado em [Sequenciais de Infrações](../administracao/sequenciais-infracoes).
+Uma **falha sequencial** ocorre quando o mesmo Equipamento apresenta o mesmo tipo de problema em registros consecutivos, sem nenhum registro bem-sucedido entre eles. O threshold (útico mínimo) é configurado em [Sequenciais de Infrações](../administracao/sequenciais-infracoes).
+
+## Relacionado
+
+- [Sequenciais de Infrações](../administracao/sequenciais-infracoes)
+- [Eventos de Equipamentos](./eventos-equipamentos)
+- [Aferições](../operacoes/afericoes)
+
 
 ## Exportação
 

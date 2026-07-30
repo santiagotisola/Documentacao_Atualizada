@@ -41,6 +41,22 @@ No **menu lateral**, expanda **Administração** e clique em **Logs de acesso**.
 
 | Filtro | Descrição |
 |--------|-----------|
+| **Período** | Data e hora do evento |
+| **Usuário** | Filtrar por conta específica |
+| **Ação** | Tipo de operação |
+| **Módulo** | Área do sistema |
+
+:::tip
+O log de acesso é essencial para investigação de incidentes de segurança ou revisões de auditoria. Exporte regularmente para arquivamento.
+:::
+
+## Relacionado
+
+- [Usuários](../usuarios)
+- [Perfis de Acesso](../perfis-acesso)
+
+| Filtro | Descrição |
+|--------|-----------|
 | Usuário | Filtrar por Usuário específico |
 | **Data Início / Data Fim** | Período de consulta |
 | **Ação** | Tipo de operação realizada |

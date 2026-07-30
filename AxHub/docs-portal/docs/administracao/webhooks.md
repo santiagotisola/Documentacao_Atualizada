@@ -38,6 +38,15 @@ Permite configurar **webhooks** para notificar sistemas externos sobre eventos d
 - Valide o segredo HMAC no sistema receptor
 - Configure retry com backoff exponencial no lado receptor
 
+:::info
+Webhooks com erro 4xx (cliente) não são reenviados automaticamente. Webhooks com erro 5xx (servidor) são reenviados até 3 vezes com intervalo de 60 segundos.
+:::
+
+## Relacionado
+
+- [Logs de Envios](../relatorios/relatorio-logs-envios)
+- [Integrações](../sistema/integracoes)
+
 ## Navegação Relacionada
 
 | Tipo | Página |

@@ -45,6 +45,19 @@ As marcas são vinculadas aos **Modelos de Veículos**, formando a hierarquia Ma
 | HONDA | Motos e passeio |
 | YAMAHA | Motos |
 
+## Relacionado
+
+- [Modelos de Veículos](./modelos-veiculos)
+- [Tipos de Veículos](./tipos-veiculos)
+- [Classificações de Veículos](./classificacoes-veiculos)
+
+|-------|----------|
+| FIAT | Passeio e leve |
+| VOLKSWAGEN | Passeio e comercial |
+| CHEVROLET | Passeio |
+| HONDA | Motos e passeio |
+| YAMAHA | Motos |
+
 :::
 
 ## Passo a passo

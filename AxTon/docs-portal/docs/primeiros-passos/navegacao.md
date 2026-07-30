@@ -40,6 +40,19 @@ O menu lateral do AxTon é organizado com itens diretos e duas categorias expans
 :::tip
 O menu exibe apenas os módulos que o perfil do usuário tem permissão de acessar. Se algum módulo estiver oculto, solicite ao administrador a concessão de permissão.
 :::
+
+## Estrutura geral do AxTon
+
+| Módulo | Função |
+|--------|--------|
+| **Cadastros Básicos** | Postos, equipamentos, tipos, modelos |
+| **Veículos** | Classificações, marcas, modelos |
+| **Pesagem** | Tickets, reclassificar, liberar |
+| **Operações** | Alertas, monitoramento, eventos |
+| **Medições** | Contratos, índices, criar medição |
+| **Relatórios** | Infrações, fluxo, OCR, Power BI |
+| **Controle de Acesso** | Perfis, usuários, permissões |
+
 | **Tickets de Pesagens** | Tickets em aberto e fechados |
 | **Exportação** | Exportação de Infrações para o órgão autuador |
 | **Sistema** | Configurações gerais, câmera IP e dados do órgão |

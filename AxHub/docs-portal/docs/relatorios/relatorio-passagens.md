@@ -39,6 +39,16 @@ Relatório de Passagens](../img/Relatorio%20-%20Relatorio%20de%20passagens.png)
 | Infração | Número do auto gerado (se houver) |
 | **Imagem** | Miniatura da imagem (clique para ampliar) |
 
+:::tip
+Use o filtro **Com Infração = Sim** para revisar apenas passagens que geraram auto. Combine com filtro por período para exportar dados para auditoria.
+:::
+
+## Relacionado
+
+- [Processamento por Usuário](./processamento-por-usuario)
+- [Lotes de Importação](./lote-importacao)
+
+
 ## Exportação
 
 Exportável em **Excel** com todos os campos ou apenas os selecionados.

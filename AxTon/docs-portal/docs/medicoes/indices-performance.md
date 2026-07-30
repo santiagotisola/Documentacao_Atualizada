@@ -40,6 +40,13 @@ Indicadores que medem o desempenho operacional dos postos de pesagem conforme os
 :::tip
 Os índices são calculados automaticamente quando uma nova medição é gerada. Manter as metas atualizadas de acordo com o contrato vigente evita distorções no boletim mensal.
 :::
+
+## Relacionado
+
+- [Contratos](./contratos)
+- [Criar Medição](./criar-medicao)
+- [Interrupções](./interrupcoes)
+
 2. Selecione o **Contrato** e o **Período**
 3. O sistema calcula automaticamente cada índice
 4. Compare com as metas contratuais

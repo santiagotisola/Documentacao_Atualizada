@@ -39,6 +39,18 @@ No **menu lateral**, clique em **Relatórios** e selecione **Mapa de Bolhas**.
 | **Tipo de Ocorrência** | Filtra por categoria específica de irregularidade |
 | **Área** | Restringe a visualização a uma área de monitoramento |
 
+## Como interpretar
+
+| Cenário | Interpretação |
+|---------|----------------|
+| Vários equipamentos com bolhas grandes | Concentração de irregularidades na região |
+| Um único equipamento com bolha grande | Possível alvo de atividade específica |
+| Nenhuma bolha no período | Operação regular na área |
+
+:::tip
+Use filtros de **Tipo de Ocorrência** para focar em categorias específicas (ex.: veículos roubados) e identificar rotas ou padrões de atividade.
+:::
+
 ---
 
 ## Uso operacional
