@@ -36,10 +36,20 @@ Gera o **relatório de medição mensal** vinculado a um contrato, consolidando 
 :::info
 A medição finalizada é **bloqueada para edição**. Para corrigi-la, é necessário reabrir com permissão de supervisor, o que gera log de auditoria.
 :::
+
 ## O que a medição consolida
 
-- Total de veículos fiscalizados
+- Total de veículos fiscalizados no período
+- Disponibilidade por equipamento (% uptime)
+- Taxa OCR por equipamento
 - Total de infrações geradas e exportadas
+- Interrupções e impacto na meta contratual
+
+## Relacionado
+
+- [Contratos](./contratos)
+- [Índices de Performance](./indices-performance)
+- [Interrupções](./interrupcoes)
 - Disponibilidade por equipamento
 - Taxa OCR por equipamento
 - Interrupções de manutenção registradas

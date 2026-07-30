@@ -40,6 +40,17 @@ Permite configurar quais endereços IP podem acessar o sistema, adicionando uma 
 | IPv6 | `2001:db8::1` |
 
 :::warning
+Quando a restrição está ativada, **somente os IPs cadastrados** conseguem acessar. Inclua o IP da sua rede antes de ativar para evitar bloqueio acidental.
+:::
+
+## Relacionado
+
+- [Usuários](./usuarios)
+- [Perfis de Acesso](./perfis-acesso)
+- [Logs de Acesso](./logs-acesso)
+
+
+:::warning
 Quando a restrição por IP está ativada, **somente os IPs cadastrados** conseguem acessar. Inclua o IP da sua rede antes de ativar para evitar bloqueio acidental.
 :::
 

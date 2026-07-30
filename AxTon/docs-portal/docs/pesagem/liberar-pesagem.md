@@ -34,6 +34,22 @@ Permite **liberar manualmente** veículos retidos no processo de pesagem, seja a
 :::warning
 A liberação é irreversível. Todas as liberações são registradas em log com o operador e o motivo informado.
 :::
+
+## Situações que requerem liberação
+
+| Situação | Motivo a usar |
+|----------|---------------|
+| Veículo transferiu carga | Liberação por descarga |
+| Decisão judicial | Liberação administrativa |
+| Erro de classificação | Reclassificar primeiro, depois liberar |
+| Veículo isento por lei | Liberação por isenção |
+
+## Relacionado
+
+- [Motivos](./motivos)
+- [Reclassificar](./reclassificar)
+- [Tickets Abertos](./ticket-aberto)
+
 4. Opcionalmente informe uma **Observação**
 5. Clique em **Confirmar Liberação**
 

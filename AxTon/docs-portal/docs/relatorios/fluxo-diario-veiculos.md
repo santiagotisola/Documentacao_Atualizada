@@ -37,8 +37,20 @@ Gráfico e tabela com o **volume horário de veículos** nos postos de pesagem. 
 4. Clique em **Gerar**
 
 :::tip
-Identifique os horários de pico para dimensionar equipes operacionais com mais precisão.
+Identifique os horários de pico para dimensionar equipes operacionais com mais precisão e justificar demandas ao contratante.
 :::
+
+## Casos de uso
+
+- **Planejamento operacional**: distribuir agentes nos horários críticos
+- **Comparação semanal**: detectar anomalias de fluxo por dia da semana
+- **Relatório ao contratante**: evidenciar volume operacional no período
+
+## Relacionado
+
+- [Relatório de Infrações](./relatorio-infracoes)
+- [Processamento de Imagens](./processamento-imagens)
+
 | **Tabela detalhada** | Passagens por hora com categoria e peso médio |
 
 ## Casos de uso

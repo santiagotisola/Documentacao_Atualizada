@@ -37,8 +37,15 @@ Registra **todas as autenticações** realizadas no sistema, incluindo acessos b
 - Auditar acessos em horários fora do expediente
 
 :::tip
-Filtre por **Status = Falha** e analise os IPs de origem. Múltiplas falhas do mesmo IP podem indicar ataque de força bruta.
+Filtre por **Status = Falha** e analise os IPs de origem. Múltiplas falhas do mesmo IP podem indicar ataque de força bruta — bloqueie o IP em Controle de Acesso → Acessos por IP.
 :::
+
+## Relacionado
+
+- [Usuários](./usuarios)
+- [Perfis de Acesso](./perfis-acesso)
+- [Acessos por IP](./acessos-por-ip)
+
 - Identificar contas comprometidas
 - Verificar horários de acesso suspeitos
 - Auditar ações de usuários críticos

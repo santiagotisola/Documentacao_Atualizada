@@ -35,6 +35,19 @@ Permite configurar os índices de performance exigidos pelos contratos.
 | Aproveitamento OCR | 90% |
 | Tempo de manutenção | ≤4h/mês |
 
+## Como os índices são calculados
+
+1. Ao gerar uma medição, o sistema acessa os índices cadastrados
+2. Compara os dados apurados do período com as metas
+3. Gera o **Boletim de Medição** com status: ✅ Dentro da meta ou ❌ Abaixo da meta
+
+## Relacionado
+
+- [Contratos](./contratos)
+- [Criar Medição](./criar-medicao)
+- [Interrupções](./interrupcoes)
+
+
 :::tip
 Os índices configurados aqui são calculados automaticamente ao gerar uma nova medição. Manter as metas atualizadas de acordo com o contrato vigente evita distorções no boletim.
 :::

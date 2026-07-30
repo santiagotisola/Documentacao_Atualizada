@@ -33,6 +33,18 @@ Permite pesquisar o **histórico completo de passagens** de um veículo específ
 :::tip
 Use a consulta de placas para verificar histórico de um veículo antes de liberar ou autuar. É possível identificar padrões de reincidência.
 :::
+
+## Casos de uso
+
+- **Antes de liberar**: verificar se o veículo tem histórico de excessos de peso
+- **Identificação de reincidentes**: veículos autuados 3+ vezes no mesmo mês
+- **Auditorias**: comprovar passagens em período específico
+
+## Relacionado
+
+- [Tickets Abertos](../pesagem/ticket-aberto)
+- [Relatório de Infrações](../relatorios/relatorio-infracoes)
+
 | **Status** | Regular / Infrator |
 | **Infração** | Número da infração (se gerada) |
 

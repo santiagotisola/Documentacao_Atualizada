@@ -33,6 +33,20 @@ Nunca compartilhe suas credenciais. Cada ação realizada no sistema fica regist
 
 Caso esquecer a senha, clique em **Esqueci minha senha** na tela de login e informe o e-mail cadastrado. Um link de redefinição será enviado.
 
+## Problemas comuns
+
+| Problema | Solução |
+|----------|---------|
+| Senha incorreta | Tente novamente ou solicite redefinição |
+| Usuário bloqueado | Contate o administrador do sistema |
+| Página não carrega | Verifique a conexão de rede |
+
+## Relacionado
+
+- [Usuários](../controle-acesso/usuarios)
+- [Perfis de Acesso](../controle-acesso/perfis-acesso)
+- [Logs de Acesso](../controle-acesso/logs-acesso)
+
 :::info
 Se o link não chegar em até 5 minutos, verifique a caixa de spam. Em caso de dúvidas, contate o administrador.
 :::
