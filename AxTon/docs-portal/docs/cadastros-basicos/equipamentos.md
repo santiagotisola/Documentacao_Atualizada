@@ -36,13 +36,13 @@ Cadastro dos **equipamentos de pesagem** instalados nos postos de fiscalização
 Após cadastrar o equipamento, registre a aferição inicial em **Operações → Aferições**. Sem aferição válida, as infrações não têm validade legal.
 :::
 
+## Relacionado
 
-### Colunas
+- [Tipos de Equipamentos](./tipos-equipamentos)
+- [Modelos de Equipamentos](./modelos-equipamentos)
+- [Fabricantes](./fabricantes)
+- [Postos de Pesagem](../pesagem/postos)
 
-| Coluna | Descrição |
-|--------|-----------|
-| **Código** | Identificador único |
-| **Nome** | Nome do Equipamentos |
 | **Ativo** | Status do registro |
 
 ### Passo a passo — Cadastrar

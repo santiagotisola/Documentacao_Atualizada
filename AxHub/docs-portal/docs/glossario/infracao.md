@@ -41,8 +41,6 @@ Equipamento captura → Triagem → Auditoria → Lote → Exportação
 - [Autuação](./autuacao)
 - [Enquadramento](./enquadramento)
 
-|--------|-----------|
-| **Capturada** | Gerada pelo equipamento |
 | **Em triagem** | Aguardando validação |
 | **Em auditoria** | Validada, aguardando aprovação |
 | **Aprovada** | Pronta para exportação |

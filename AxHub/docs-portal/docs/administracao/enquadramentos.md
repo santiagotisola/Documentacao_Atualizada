@@ -48,6 +48,16 @@ Os enquadramentos são pré-carregados conforme o CTB vigente. Para adicionar en
 - [Configurações de Enquadramento](./configuracoes-enquadramento)
 - [Formas de Autuação](./formas-autuacao)
 
+## Enquadramentos mais usados no AxHub
+
+| Código | Descrição | Gravidade |
+|--------|-----------|:---------:|
+| 55411 | Velocidade superior à máxima em até 20% | Grave |
+| 55412 | Velocidade superior à máxima entre 20% e 50% | Gravíssima |
+| 55413 | Velocidade superior à máxima acima de 50% | Gravíssima |
+| 60501 | Desrespeitar sinal vermelho | Gravíssima |
+| 55500 | Ultrapassar pela contramão | Gravíssima |
+
 :::
 
 :::info Dados na Tarja

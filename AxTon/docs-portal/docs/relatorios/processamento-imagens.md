@@ -43,6 +43,13 @@ Apresenta o **volume de imagens capturadas e processadas** pelo sistema, incluin
 :::tip
 Use este relatório semanalmente para identificar equipamentos com queda de OCR antes que impacte a medição contratual.
 :::
+
+## Relacionado
+
+- [Processamento por Usuário](./processamento-por-usuario)
+- [Índices de Performance](../medicoes/indices-performance)
+- [Fluxo Diário de Veículos](./fluxo-diario-veiculos)
+
 | Taxa | Situação | Ação |
 |------|----------|------|
 | > 95% | Excelente | Manter |

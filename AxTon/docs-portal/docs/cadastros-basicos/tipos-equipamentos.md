@@ -46,6 +46,15 @@ Tipo de Equipamento → Fabricante → Modelo → Equipamento no posto
 O tipo de equipamento determina as configurações de operação aplicáveis (velocidade, tolerância de pesagem etc.). Consulte o fabricante para o tipo correto.
 :::
 
+## Tipos e precisão
+
+| Tipo | Precisão | Interrompe tráfego? |
+|------|:--------:|:-------------------:|
+| Estática | ±2% | Sim |
+| Semiestática | ±5% | Sim (velocidade reduzida) |
+| Dinâmica (WIM) | ±10% | Não |
+| Sensor de eixo | N/A | Não |
+
 ## Relacionado
 
 - [Fabricantes](./fabricantes)

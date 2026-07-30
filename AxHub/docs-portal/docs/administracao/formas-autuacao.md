@@ -39,10 +39,12 @@ Define **como a autuação é lavrada** no sistema. A forma correta garante comp
 As formas de autuação são configuradas conforme exigência do órgão autuador. Usar o código correto garante que o lote exportado seja aceito.
 :::
 
-## Passo a passo
+## Relacionado
 
-1. Acesse **Configurações → Formas de Autuação**
-2. Clique em **+ Novo**
+- [Enquadramentos](./enquadramentos)
+- [Sequenciais de Infrações](./sequenciais-infracoes)
+- [Lote de Exportação](../glossario/lote-exportacao)
+
 3. Informe o **Código** e a **Descrição**
 4. Clique em **Salvar**
 

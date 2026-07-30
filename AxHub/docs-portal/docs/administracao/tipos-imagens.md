@@ -41,8 +41,13 @@ Define as **categorias de imagens** que os equipamentos devem capturar em cada i
 :::info
 Os tipos de imagens obrigatórios devem estar cadastrados antes de configurar os equipamentos. Equipamentos sem todos os tipos obrigatórios terão infrações incompletas.
 :::
-| **Obrigatória** | Sim | Se exigida para validação da infração |
-| **Ativo** | Sim | Status |
+
+## Relacionado
+
+- [Equipamentos](./equipamentos)
+- [Aferições](../operacoes/afericoes)
+- [Processamento de Imagens](../relatorios/processamento-imagens)
+
 
 ## Tipos comuns
 

@@ -34,14 +34,19 @@ Execute a sincronização quando:
 - Após manutenção no Elastic Search
 
 Não execute durante horário de pico de operações.
-::: no menu lateral
-2. Informe a **Data de Início** da sincronização
-3. Clique em **Sincronizar passagens com Elastic Search**
-4. Aguarde a conclusão do processo
+:::
 
 ## Quando utilizar
 
 A sincronização deve ser executada nas seguintes situações:
+
+- Passagens não aparecem nos relatórios após 10 minutos
+- Pesquisa de placa não retorna resultados esperados
+- Após restauração de banco de dados
+
+:::tip
+A sincronização processa dados em background. Monitore o progresso na tela e evite navegar em outras áreas até a conclusão.
+:::
 
 | Situação | Descrição |
 |----------|-----------|

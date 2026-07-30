@@ -43,6 +43,20 @@ A cada registro de cronotacógrafo, o sistema verifica:
 | **Status Processamento** | `Processado`, `Pendente`, `Descartado` |
 | Infração Gerada** | Número do auto (quando houver Infração |
 
+## Resultado por status
+
+| Status Cronotacógrafo | Gera infração? | Ação |
+|-----------------------|:--------------:|------|
+| Regular | Não | Passagem liberada |
+| Irregular | Sim | Auto de infração Art.162,II CTB |
+| Vencido | Sim | Auto de infração Art.162,II CTB |
+| NãoEncontrado | Revisao manual | Triagem pelo operador |
+
+## Relacionado
+
+- [Cronotacógrafo](../glossario/cronotacografo)
+- [Triagem](../infracoes/triagem)
+
 ## Status do Cronotacógrafo
 
 | Status | Significado |
