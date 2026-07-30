@@ -40,9 +40,9 @@ Um arco agrupa equipamentos instalados na mesma travessia (ex: radares das faixa
 
 ## Relacionado
 
-- [Equipamentos](../relatorios/eventos-equipamentos)
+- [Eventos de Equipamentos](../relatorios/eventos-equipamentos)
 - [Operações](../operacoes/cadastro-operacoes)
- (ex.: radares de faixas 1, 2 e 3 de uma mesma pista). Facilita o gerenciamento e a exportação conjunta dos dados.
+
 :::
 | Campo | Descrição |
 |-------|-----------|

@@ -38,8 +38,6 @@ O código IBGE de 7 dígitos é obrigatório nos arquivos de exportação de inf
 
 O sistema já vem com uma base pré-carregada dos municípios brasileiros com código IBGE. Adicione novas entradas apenas se a localidade não constar na lista ou se for necessária uma subdivisão personalizada.
 
-4. Clique em **Salvar**
-
 :::tip
 O código IBGE é obrigatório nos arquivos de exportação de infrações. Certifique-se de usar o código correto para o município do equipamento.
 :::

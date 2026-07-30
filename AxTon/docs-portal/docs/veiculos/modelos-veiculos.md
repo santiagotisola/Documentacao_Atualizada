@@ -37,16 +37,10 @@ A tela exibe todos os registros cadastrados, com opção de pesquisa e filtro.
 Verifique se o modelo já existe antes de criar. Duplicidades dificultam a classificação nos tickets de pesagem.
 :::
 
-| **Marca** | Marca do veículo |
-| **Status** | Ativo ou Inativo |
+## Relacionado
 
-## Campos de cadastro
-
-| Campo | Obrigatório | Descrição |
-|-------|:-----------:|-----------|
-| **Nome** | Sim | Nome do modelo |
-| **Marca** | Sim | Marca vinculada |
-| **Status** | Sim | Ativo ou Inativo |
+- [Marcas de Veículos](./marcas-veiculos)
+- [Classificações de Veículos](./classificacoes-veiculos)
 
 ## Passo a passo
 

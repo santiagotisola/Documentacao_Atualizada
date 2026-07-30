@@ -39,6 +39,12 @@ Exibe a **produtividade de cada operador** na triagem de infrações: infraçõe
 :::tip
 Use este relatório para avaliar a produtividade de operadores e identificar possíveis inconsistências na taxa de descarte. Alta taxa de descarte em um usuário específico pode indicar necessidade de treinamento.
 :::
+
+## Relacionado
+
+- [Logs de Acesso](../controle-acesso/logs-acesso)
+- [Triagem](../glossario/triagem)
+
 | **Média/Hora** | Produtividade por hora |
 | **Tempo Médio** | Segundos por análise |
 

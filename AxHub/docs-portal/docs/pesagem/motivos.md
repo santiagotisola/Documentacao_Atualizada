@@ -39,6 +39,13 @@ Cadastro dos **motivos utilizados nos processos de pesagem e liberação** de ve
 Configurar motivos detalhados facilita a análise gerencial e a identificação de padrões de retenção nos postos.
 :::
 
+## Relacionado
+
+- [Tickets Abertos](./ticket-aberto)
+- [Liberar Pesagem](./liberar-pesagem)
+- [Reclassificar](./reclassificar)
+
+
 ## Motivos comuns
 
 | Tipo | Exemplos |

@@ -47,5 +47,15 @@ Classificações de veículos por **número de eixos e PBT** (Peso Bruto Total).
 | Bitrem (6E) | 6 | 45 t |
 | Rodotrem (9E) | 9 | 57 t |
 
-4. Marque como Ativo
+## Passo a passo
+
+1. Acesse **Veículos → Classificações de Veículos**
+2. Clique em **+ Nova**
+3. Preencha o **Código**, **Descrição** e **Número de eixos**
+4. Informe o **PBT máximo**
+5. Clique em **Salvar**
+
+:::tip
+Use a tabela do CONTRAN 803/2021 como referência para garantir que os limites cadastrados estejam atualizados.
+:::
 5. Clique em **Salvar**

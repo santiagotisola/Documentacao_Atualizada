@@ -35,9 +35,13 @@ Exibe o **histórico das medições contratuais** que já foram calculadas e fin
 :::info
 Uma medição finalizada **não pode ser editada** sem ser reaberta. A reabertura exige permissão de supervisor e gera log de auditoria.
 :::
-| **Ações** | Visualizar / Exportar PDF |
 
-## O que pode fazer
+## Relacionado
+
+- [Criar Medição](./criar-medicao)
+- [Contratos](./contratos)
+- [Índices de Performance](./indices-performance)
+
 
 | Ação | Descrição |
 |------|-----------|

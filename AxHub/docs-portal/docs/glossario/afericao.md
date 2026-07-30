@@ -38,6 +38,19 @@ Todo equipamento metrológico deve possuir **certificado de aferição válido**
 :::warning
 Equipamentos com aferição vencida têm infrações **automaticamente invalidadas**. O sistema exibe alertas no Dashboard quando a data de vencimento se aproxima.
 :::
+
+## Passo a passo — Registrar aferição
+
+1. Acesse **Operações → Aferições**
+2. Clique em **+ Nova**
+3. Selecione o **Equipamento**
+4. Informe o **Tipo**, **Data** e **Validade**
+5. Anexe o **Certificado INMETRO**
+6. Clique em **Salvar**
+
+:::tip
+Cadastre a aferição assim que receber o certificado do laboratório. Não aguarde o vencimento para renovar.
+:::
 - [Tipos de Afericoes](../administracao/tipos-afericoes)
 - [Dashboard](../primeiros-passos/dashboard)
 - [Equipamentos](../cadastros-basicos/equipamentos)

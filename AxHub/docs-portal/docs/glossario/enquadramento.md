@@ -38,6 +38,3 @@ Classificação legal atribuída a uma infração de trânsito. O enquadramento 
 :::info
 Na **Triagem**, o operador valida ou altera o enquadramento sugerido automaticamente pelo sistema com base na velocidade/infração detectada.
 :::
-- [Configuracao de Enquadramentos](../administracao/configuracoes-enquadramento)
-- [Formas de Autuacao](../administracao/formas-autuacao)
-- [Enquadramentos](../administracao/enquadramentos)

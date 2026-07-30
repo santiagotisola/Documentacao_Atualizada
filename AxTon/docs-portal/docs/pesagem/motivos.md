@@ -38,8 +38,6 @@ Cadastro dos motivos padronizados utilizados nas operações de pesagem, como mo
 Motivos bem definidos facilitam a análise gerencial e a rastreabilidade das liberações nos postos de pesagem.
 :::
 
-| Liberação por recurso | Liberação |
-| Liberação por descarga | Liberação |
 | Reclassificação de categoria | Reclassificação |
 | Imagem inválida | Descarte |
 

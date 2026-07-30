@@ -37,7 +37,13 @@ O Código IBGE de 7 dígitos é obrigatório nos arquivos de exportação de inf
 - [Postos de Pesagem](../pesagem/postos)
 - [Relatório de Infrações](../relatorios/relatorio-infracoes)
 
+## Municípios mais comuns
 
+O sistema já vem com uma base pré-carregada dos municípios brasileiros com códigos IBGE. Adicione entradas personalizadas apenas para subdivisões não listadas.
+
+:::info
+A base de municípios é utilizada automaticamente na localização dos postos de pesagem nos boletins de medição e nos arquivos de exportação de infrações.
+:::
 
 A tela exibe todos os registros cadastrados, com opção de pesquisa e filtro.
 

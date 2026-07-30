@@ -33,11 +33,6 @@ Dispositivo instalado em um cruzamento para detecção e registro de Veículos P
 - [Grupos de Equipamentos](../cadastros/grupos-equipamentos)
 - [Alertas](../operacoes/alertas)
 
-
-| Tipo | Descrição |
-|------|-----------|
-| **Câmera OCR/LPR** | Câmera com leitura óptica de caracteres para identificação de placas |
-| **Radar** | Medição de velocidade dos Veículos |
 | **Sensor de Presença** | Detecção de passagem por laço indutivo ou infravermelho |
 
 ## Status

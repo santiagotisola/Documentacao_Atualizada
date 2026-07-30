@@ -37,7 +37,12 @@ Cadastro e gestão dos **recursos humanos e materiais** utilizados nas operaçõ
 :::info
 Os recursos cadastrados são incluídos no **Boletim de Medição** como comprovação do fornecimento contratual.
 :::
-| **Contrato** | Sim | Contrato de referência |
+
+## Relacionado
+
+- [Contratos](./contratos)
+- [Criar Medição](./criar-medicao)
+
 
 ## Tipos de recurso
 

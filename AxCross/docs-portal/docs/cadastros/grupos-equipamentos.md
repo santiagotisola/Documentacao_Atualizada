@@ -38,6 +38,8 @@ Agrupar por região geográfica facilita o monitoramento e a filtragem de relat�
 
 - [Equipamentos](../cadastros/equipamentos)
 - [Alertas](../operacoes/alertas)
+- [Cadastro de Operações](../operacoes/cadastro-operacoes)
+
 
 | Equipamentos | Sim | Lista de Equipamentos vinculados ao grupo |
 | **Status** | Sim | Ativo ou Inativo |

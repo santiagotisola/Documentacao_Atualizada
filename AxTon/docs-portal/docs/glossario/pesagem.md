@@ -42,6 +42,12 @@ Veículo chega ao posto
 | Semiestática | ≤5 km/h | Veículo em baixa velocidade |
 | Dinâmica | Até 80 km/h | Triagem, sem interrupção do fluxo |
 
+:::tip
+A balança dinâmica é usada para triagem rápida. Veículos que ultrapassam o limiar são direcionados para confirmação em balança estática.
+:::| Estática | 0 km/h | Alta precisão, veículo parado |
+| Semiestática | ≤5 km/h | Veículo em baixa velocidade |
+| Dinâmica | Até 80 km/h | Triagem, sem interrupção do fluxo |
+
    Verificação de excesso
       ↓
    Infração gerada (se excesso) OU liberado

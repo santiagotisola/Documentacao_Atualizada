@@ -43,6 +43,19 @@ Tipo de Equipamento → Fabricante → Modelo → Equipamento no posto
 4. Clique em **Salvar**
 
 :::tip
+O tipo de equipamento determina as configurações de operação aplicáveis (velocidade, tolerância de pesagem etc.). Consulte o fabricante para o tipo correto.
+:::
+
+## Relacionado
+
+- [Fabricantes](./fabricantes)
+- [Modelos de Equipamentos](./modelos-equipamentos)
+- [Equipamentos](./equipamentos)
+2. Clique em **+ Novo**
+3. Preencha o **Nome** e a **Descrição**
+4. Clique em **Salvar**
+
+:::tip
 O tipo de equipamento determina as configurações de operação aplicáveis (velocidade de passagem, tolerância de pesagem, etc.). Consulte o fabricante para o tipo correto.
 :::
 

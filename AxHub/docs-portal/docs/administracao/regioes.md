@@ -36,8 +36,6 @@ Após cadastrar regiões, vincule os equipamentos a elas em **Configurações �
 - [Enquadramentos](./enquadramentos)
 - [Relatórios](../relatorios/fluxo-diario-veiculos)
 
-5. Clique em **Salvar**
-
 ## Uso das regiões
 
 - **Filtro de relatórios:** Filtrar dados por área geográfica

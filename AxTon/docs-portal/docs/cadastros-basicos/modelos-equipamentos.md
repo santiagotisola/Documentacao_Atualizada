@@ -37,6 +37,7 @@ Fabricante → Modelo → Equipamento. Antes de cadastrar um modelo, o Fabricant
 
 - [Fabricantes](./fabricantes)
 - [Equipamentos](./equipamentos)
+- [Tipos de Equipamentos](./tipos-equipamentos)
 
 
 ## Passo a passo

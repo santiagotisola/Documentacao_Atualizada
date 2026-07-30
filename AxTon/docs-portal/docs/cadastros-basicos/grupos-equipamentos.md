@@ -38,16 +38,12 @@ Organize grupos por **contrato** ou **região** para facilitar a geração de me
 - [Equipamentos](./equipamentos)
 - [Contratos](../medicoes/contratos)
 
-
 ## Uso dos grupos
 
 - **Relatórios**: filtrar dados por grupo de equipamentos
 - **Medições**: agrupar equipamentos de um mesmo contrato
 - **Monitoramento**: visualizar status por grupo
 
-
-| Coluna | Descrição |
-|--------|-----------|
 | **Código** | Identificador único |
 | **Nome** | Nome do grupos de Equipamentos |
 | **Ativo** | Status do registro |

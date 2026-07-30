@@ -39,8 +39,15 @@ Exibe a tabela completa de enquadramentos de Infrações de trânsito conforme o
 | Gravíssima | 7 | R$ 293,47 + |
 
 :::info
-Os enquadramentos são pré-carregados conforme o CTB vigente. Para adicionar enquadramentos municipais, entre em contato com o suporte.
+Os enquadramentos são pré-carregados conforme o CTB vigente. Para adicionar enquadramentos municipais específicos, entre em contato com o suporte técnico Axion.
 :::
+
+## Relacionado
+
+- [Enquadramento](../glossario/enquadramento) — Conceito e estrutura
+- [Configurações de Enquadramento](./configuracoes-enquadramento)
+- [Formas de Autuação](./formas-autuacao)
+
 :::
 
 :::info Dados na Tarja

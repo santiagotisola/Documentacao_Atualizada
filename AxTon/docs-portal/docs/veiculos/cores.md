@@ -51,6 +51,19 @@ As cores são extraídas automaticamente do RENAVAM quando o sistema consulta a 
 | 14 | Verde |
 | 15 | Vermelha |
 
+| 04 | Branca |
+| 05 | Cinza |
+| 06 | Dourada |
+| 07 | Grená |
+| 08 | Laranja |
+| 09 | Marrom |
+| 10 | Prata |
+| 11 | Preta |
+| 12 | Rosa |
+| 13 | Roxa |
+| 14 | Verde |
+| 15 | Vermelha |
+
 ## Passo a passo
 
 1. Acesse **Veículos → Cores**

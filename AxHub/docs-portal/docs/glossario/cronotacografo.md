@@ -36,8 +36,10 @@ Instrumento eletrônico de controle do **tempo de direção, parada e velocidade
 
 **Art. 162, II do CTB:** Multa gravíssima (7 UFIRs) + suspensão do direito de dirigir
 
+## Verificação no AxHub
 
-## Paginas Relacionadas
+O AxHub consulta automaticamente o status do cronoatacógrafo durante a triagem das passagens. Quando a situação está **Irregular**, o sistema sugere o enquadramento do Art. 162, II do CTB ao operador.
 
-- [Triagem de Cronotacografo](../cronotacografo/triagem)
-- [Consulta de Cronotacografo](../cronotacografo/consulta)
+:::tip
+Acesse **Operações → Aferições** para verificar os registros de equipamentos com verificação de cronoatacógrafo pendente.
+:::
