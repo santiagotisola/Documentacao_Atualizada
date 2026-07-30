@@ -1,20 +1,50 @@
 ﻿---
 sidebar_position: 2
-title: Afericoes
-description: Controle de afericoes e certificados INMETRO
+title: Aferições
+description: Controle de aferições e certificados INMETRO dos equipamentos no AxHub
 ---
 
-# Afericoes
+# Aferições
 
-Controle das afericoes realizadas nos Equipamentos de fiscalizacao. As informações de aferição são essenciais para a validade legal das Infrações geradas.
+Controle das **aferições metrológicas** realizadas nos equipamentos de fiscalização. A aferição válida é requisito legal para que as infrações tenham valor jurídico.
 
 ## Como acessar
 
-Menu lateral - Operacoes - Afericoes
+**Menu lateral** → Operações → **Aferições**
 
-## Listagem
+![Lista de Aferições](../img/Operações%20-%20aferição.png)
 
-![Lista de Afericoes](../img/Operações%20-%20aferição.png)
+## Campos
+
+| Campo | Obrigatório | Descrição |
+|-------|:-----------:|-----------|
+| **Equipamento** | Sim | Equipamento aferição realizada |
+| **Tipo de Aferição** | Sim | Inicial, Periódica ou Extraordinária |
+| **Data de Emissão** | Sim | Data do certificado INMETRO |
+| **Data de Vencimento** | Sim | Data limite de validade |
+| **Nº Certificado** | Sim | Número do certificado INMETRO |
+| **Observações** | Não | Informações adicionais |
+
+## Passo a passo — Registrar aferição
+
+1. Acesse **Operações → Aferições**
+2. Clique em **+ Nova Aferição**
+3. Selecione o **Equipamento**
+4. Informe o **Tipo** e as datas
+5. Digite o **Nº do Certificado**
+6. Clique em **Salvar**
+
+:::warning Alerta de vencimento
+O Dashboard exibe alertas quando a aferição está próxima do vencimento (30 dias). Após o vencimento, o equipamento é bloqueado automaticamente.
+:::
+
+## Navegação Relacionada
+
+| Tipo | Página |
+|------|--------|
+| Glossario | [Aferição](../glossario/afericao) |
+| Relacionado | [Tipos de Aferições](../administracao/tipos-afericoes) |
+
 
 ## Cadastro de Afericao
 

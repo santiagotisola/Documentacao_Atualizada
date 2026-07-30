@@ -1,12 +1,12 @@
 ---
 sidebar_position: 1
 title: Contratos
-description: Cadastro e gestão de contratos de medição
+description: Cadastro e gestão de contratos de medição no AxHub
 ---
 
 # Contratos
 
-Permite cadastrar e gerenciar os contratos de medição vinculados às operações.
+Cadastro e gestão dos **contratos de prestação de serviço** vinculados às operações de fiscalização. Base para o cálculo mensal das medições e SLAs.
 
 ![Lista de Contratos](../img/Medição%20-%20contrato.png)
 
@@ -14,9 +14,37 @@ Permite cadastrar e gerenciar os contratos de medição vinculados às operaçõ
 
 **Menu lateral** → Medição → **Contratos**
 
-## Cadastro de contrato
+## Campos
+
+| Campo | Obrigatório | Descrição |
+|-------|:-----------:|-----------|
+| **Número** | Sim | Número do contrato |
+| **Contratante** | Sim | Órgão ou empresa contratante |
+| **Vigência Início** | Sim | Data de início |
+| **Vigência Fim** | Sim | Data de encerramento |
+| **Equipamentos** | Sim | Equipamentos cobertos |
+| **Metas** | Sim | Índices de performance contratados |
+| **Status** | Sim | Ativo, Encerrado ou Suspenso |
+
+## Cadastro
 
 ![Cadastro de Contrato](../img/Medição%20-%20contrato%20-%20cadastro.png)
+
+1. Acesse **Medição → Contratos**
+2. Clique em **+ Novo**
+3. Preencha todos os campos obrigatórios
+4. Vincule os equipamentos ao contrato
+5. Defina as metas de SLA
+6. Clique em **Salvar**
+
+## Navegação Relacionada
+
+| Tipo | Página |
+|------|--------|
+| Relacionado | [Medições](./criar-medicao) |
+| Relacionado | [Índices de Performance](./indices-performance) |
+| Relacionado | [Interrupções](./interrupcoes) |
+
 
 | Campo | Descrição |
 |-------|-----------|

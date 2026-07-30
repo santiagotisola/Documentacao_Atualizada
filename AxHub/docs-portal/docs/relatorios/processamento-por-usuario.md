@@ -1,38 +1,50 @@
 ---
 sidebar_position: 11
 title: Processamento por Usuário
-description: Relatório de processamento de imagens por Usuário
+description: Produtividade de triagem por analista no AxHub
 ---
 
 # Processamento por Usuário
 
-Exibe a produtividade de processamento de imagens por analista/usuário em um determinado período. Utilizado pela gestão para acompanhar o desempenho individual e distribuir a carga de trabalho de triagem.
+Exibe a **produtividade de processamento por analista** em um período. Utilizado pela gestão para acompanhar desempenho individual e distribuir carga de trabalho.
 
 ![Processamento por Usuário](../img/Relatorio%20-%20Relatorio%20de%20procesamento%20de%20imagens%20por%20usuário.png)
 
 ## Como acessar
 
-**Menu lateral** → Relatórios → **Processamento por Usuário
+**Menu lateral** → Relatórios → **Processamento por Usuário**
 
 ## Filtros disponíveis
 
 | Filtro | Descrição |
 |--------|-----------|
 | **Período** | Faixa de datas |
-| Usuário | Filtrar por analista específico |
+| **Usuário** | Filtrar por analista específico |
 | **Operação** | Filtrar por operação vinculada |
 | **Status** | Processadas, Descartadas ou Todas |
 
-## Campos exibidos
+## Colunas
 
 | Coluna | Descrição |
 |--------|-----------|
-| Usuário | Analista responsável |
-| **Processadas** | Quantidade de imagens triadas no período |
-| **Validadas** | Imagens confirmadas como Infração |
+| **Usuário** | Analista responsável |
+| **Processadas** | Quantidade triada no período |
+| **Validadas** | Imagens confirmadas como infração |
 | **Descartadas** | Imagens rejeitadas com motivo |
-| **Média/Hora** | Produtividade média por hora trabalhada |
-| **Tempo Médio** | Tempo médio por Análise (segundos) |
+| **Média/Hora** | Produtividade média por hora |
+| **Tempo Médio** | Tempo médio por análise (segundos) |
+
+## Uso gerencial
+
+- Identificar analistas com baixa produtividade
+- Distribuir demandas de triagem equilibradamente
+- Detectar gargalos no processamento
+- Embasar feedback e treinamentos
+
+## Exportação
+
+Disponível em **Excel** e **PDF**.
+
 | **Período** | Faixa de datas analisada |
 
 ## Exportação

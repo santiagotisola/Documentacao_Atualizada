@@ -1,20 +1,43 @@
 ---
 sidebar_position: 4
 title: Classificações de Veículos
-description: Cadastro de classificações de Veículos
+description: Classificações de veículos para enquadramento nas infrações do AxHub
 ---
 
 # Classificações de Veículos
 
-Permite cadastrar e gerenciar as classificações dos Veículos
+Subdivide as categorias de veículos em **classificações mais específicas** para fins de enquadramento preciso nas infrações.
 
 ![Lista de Classificações](../img/Veículos%20-%20Classificações%20dos%20Veiculos.png)
 
 ## Como acessar
 
-**Menu lateral** → Veículos → **Classificações de Veículos
+**Menu lateral** → Veículos → **Classificações de Veículos**
 
-## Cadastro
+## Campos
+
+| Campo | Obrigatório | Descrição |
+|-------|:-----------:|-----------|
+| **Código** | Sim | Código da classificação |
+| **Descrição** | Sim | Nome da classificação |
+| **Categoria** | Sim | Categoria pai |
+| **Status** | Sim | Ativo ou Inativo |
+
+## Exemplos de classificação
+
+| Categoria | Classificação |
+|-----------|----------------|
+| Moto | Motocicleta, Ciclomotor, Motoneta |
+| Carro | Sedan, Hatch, SUV, Pickup |
+| Caminhão | Toco, Truck, Carreta |
+
+## Passo a passo
+
+1. Acesse **Veículos → Classificações**
+2. Clique em **+ Novo**
+3. Informe o **Código**, **Descrição** e **Categoria**
+4. Clique em **Salvar**
+
 
 ![Cadastro de Classificação](../img/Veículos%20-%20Classificações%20dos%20Veiculos%20-%20cadastros.png)
 

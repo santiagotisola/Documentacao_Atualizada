@@ -1,20 +1,46 @@
 ﻿---
 sidebar_position: 5
 title: Alertas
-description: Gestão de alertas operacionais e notificações
+description: Gestão de alertas operacionais nos postos de pesagem do AxTon
 ---
 
 # Alertas
 
-![Operação — Editar](../img/operacoes%20acoes%20-%20editar.png)
-
-Gerenciamento dos alertas detectados pelo sistema, incluindo Veículos sem documentação fiscal (MDF-e), excesso de peso e irregularidades.
+Gerenciamento dos **alertas detectados automaticamente** pelo sistema: veículos sem documentação fiscal, excesso de peso e irregularidades operacionais.
 
 ## Como acessar
 
 **Menu lateral** → Operações → **Alertas**
 
-## Tipos de Alerta
+## Tipos de alerta
+
+| Tipo | Descrição | Gera infração? |
+|------|-----------|:--------------:|
+| **Excesso de peso** | Veículo ultrapassou o PBT | Sim |
+| **MDF-e ausente** | Veículo de carga sem manifesto | Sim |
+| **NF-e inválida** | Nota fiscal cancelada ou vencida | Sim |
+| **Equipamento offline** | Balança sem comunicação | Não |
+| **Anomalia de peso** | Peso muito acima/abaixo do padrão | Não |
+
+## Ações disponíveis
+
+| Ação | Descrição |
+|------|-----------|
+| **Visualizar** | Ver detalhes do alerta |
+| **Assumir** | Registrar responsável |
+| **Resolver** | Marcar como tratado |
+| **Descartar** | Ignorar com justificativa |
+
+## Fluxo recomendado
+
+```
+Alerta gerado → Assumir → Verificar → Resolver ou Gerar infração
+```
+
+:::tip
+Responda alertas de equipamento offline antes de qualquer outro. Um equipamento inativo não registra pesagens.
+:::
+
 
 | Tipo | Descrição |
 |------|-----------|

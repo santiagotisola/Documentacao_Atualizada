@@ -1,21 +1,51 @@
 ﻿---
 sidebar_position: 7
 title: Formas de Autuação
-description: Cadastro de formas de autuação
+description: Cadastro das formas de autuação utilizadas no processo de fiscalização do AxHub
 ---
 
 # Formas de Autuação
 
-Permite cadastrar as formas de autuação utilizadas no processo de fiscalização.
+Define **como a autuação é lavrada** no sistema. A forma correta garante compatibilidade com o sistema do órgão autuador na exportação das infrações.
 
 ## Como acessar
 
 **Menu lateral** → Configurações → **Formas de Autuação**
 
-| Campo | Descrição |
-|-------|-----------|
-| **Código** | Código identificador |
-| **Descrição** | Descrição da forma de autuação |
+## Campos
+
+| Campo | Obrigatório | Descrição |
+|-------|:-----------:|-----------|
+| **Código** | Sim | Código exigido pelo órgão autuador |
+| **Descrição** | Sim | Descrição da forma de autuação |
+| **Status** | Sim | Ativo ou Inativo |
+
+## Formas comuns
+
+| Código | Descrição |
+|--------|-----------|
+| **AIT-E** | Auto de Infração de Trânsito Eletrônico |
+| **NOT-E** | Notificação Eletrônica |
+| **AIT-M** | Auto de Infração de Trânsito Manual |
+
+## Passo a passo
+
+1. Acesse **Configurações → Formas de Autuação**
+2. Clique em **+ Novo**
+3. Informe o **Código** e a **Descrição**
+4. Clique em **Salvar**
+
+:::caution
+Verifique com o órgão autuador (DETRAN/DER/Prefeitura) quais códigos são aceitos no sistema destino antes de configurar.
+:::
+
+## Navegação Relacionada
+
+| Tipo | Página | Descrição |
+|------|--------|-----------|
+| Relacionado | [Enquadramentos](./enquadramentos) | Tabela CTB |
+| Relacionado | [Exportação](../infracoes/exportacao) | Lote de exportação |
+
 | **Ativo** | Status do registro |
 
 :::note Sem screenshot

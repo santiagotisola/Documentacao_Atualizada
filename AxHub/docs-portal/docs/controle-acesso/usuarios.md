@@ -1,22 +1,49 @@
 ---
 sidebar_position: 1
 title: Usuários
-description: Cadastro e gestão de Usuários do sistema
+description: Cadastro e gestão de usuários do sistema AxHub
 ---
 
 # Usuários
 
-Permite cadastrar e gerenciar os Usuários que terão acesso ao sistema AxHub.
+Cadastro e gestão dos **usuários** que terão acesso ao sistema AxHub. Cada usuário deve ter um **Perfil de Acesso** atribuído que define suas permissões.
 
 ![Lista de Usuários](../img/Controle%20de%20acessos%20-%20usuario.png)
 
 ## Como acessar
 
-**Menu lateral** → Controle de Acesso → Usuários
+**Menu lateral** → Controle de Acesso → **Usuários**
 
-## Cadastro de Usuário
+## Campos
+
+| Campo | Obrigatório | Descrição |
+|-------|:-----------:|-----------|
+| **Nome** | Sim | Nome completo |
+| **Login** | Sim | Nome de usuário para acesso |
+| **E-mail** | Sim | E-mail para recuperação de senha |
+| **Senha** | Sim | Senha inicial (mín. 6 caracteres) |
+| **Perfil de Acesso** | Sim | Define as permissões |
+| **Status** | Sim | Ativo ou Inativo |
+
+## Cadastro
 
 ![Cadastro de Usuário](../img/Controle%20de%20acessos%20-%20usuario%20-%20cadastro.png)
+
+1. Acesse **Controle de Acesso → Usuários**
+2. Clique em **+ Novo Usuário**
+3. Preencha **Nome**, **Login** e **E-mail**
+4. Defina a **Senha** inicial
+5. Selecione o **Perfil de Acesso**
+6. Clique em **Salvar**
+
+:::tip Fluxo correto
+Crie o [Perfil de Acesso](./perfis-acesso) ANTES do usuário. Configure as [Permissões](./permissoes) do perfil antes de vincular usuários.
+:::
+
+:::warning Inativar vs. excluir
+Nunca exclua usuários com histórico no sistema. Prefira **inativar** para preservar a rastreabilidade das ações.
+:::
+
 
 | Campo | Descrição |
 |-------|-----------|

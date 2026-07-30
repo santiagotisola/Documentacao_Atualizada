@@ -1,20 +1,37 @@
 ﻿---
 sidebar_position: 6
 title: Municípios
-description: Cadastro de municípios (código IBGE)
+description: Cadastro de municípios com código IBGE no AxTon
 ---
 
 # Municípios
 
-![Cadastrar Classificações — HAENNI](../img/cadastrar%20classificacoes%20-%20haenni.png)
-
-Cadastro de municípios (código IBGE). Estes dados são utilizados automaticamente nas operações de pesagem e triagem de Infrações
+Cadastro dos **municípios** com código IBGE, utilizados na localização dos postos de pesagem e nas infrações exportadas.
 
 ## Como acessar
 
 **Menu lateral** → Veículos → **Municípios**
 
-## Listagem
+## Campos
+
+| Campo | Obrigatório | Descrição |
+|-------|:-----------:|-----------|
+| **Nome** | Sim | Nome do município |
+| **Código IBGE** | Sim | Código de 7 dígitos |
+| **UF** | Sim | Estado |
+| **Status** | Sim | Ativo ou Inativo |
+
+## Passo a passo
+
+1. Acesse **Veículos → Municípios**
+2. Clique em **+ Novo**
+3. Informe o **Nome**, **Código IBGE** e **UF**
+4. Clique em **Salvar**
+
+:::tip
+O Código IBGE é obrigatório nos arquivos de exportação de infrações para o DENATRAN/SENATRAN. Use sempre o código oficial de 7 dígitos.
+:::
+
 
 A tela exibe todos os registros cadastrados, com opção de pesquisa e filtro.
 

@@ -1,12 +1,12 @@
 ---
 sidebar_position: 1
 title: Login
-description: Como acessar o sistema AxTon
+description: Como acessar o sistema AxTon com segurança
 ---
 
 # Login
 
-A tela de Login é o ponto de entrada do AxTon. Nela são informadas as credenciais necessárias para acesso ao sistema.
+A tela de **Login** é o ponto de entrada do AxTon. Informe suas credenciais para acessar o sistema de pesagem veicular.
 
 ![Tela de Login](../img/login.png)
 
@@ -15,6 +15,34 @@ A tela de Login é o ponto de entrada do AxTon. Nela são informadas as credenci
 Abra o navegador e acesse o endereço do AxTon fornecido pela organização.
 
 ## Campos
+
+| Campo | Obrigatório | Descrição |
+|-------|:-----------:|-----------|
+| **Usuário** | Sim | Login cadastrado pelo administrador |
+| **Senha** | Sim | Senha de acesso |
+
+## Passo a passo
+
+1. Acesse o endereço do AxTon no navegador
+2. Informe o **Usuário** e a **Senha**
+3. Clique em **Entrar**
+4. O sistema redireciona para o **Dashboard**
+
+## Primeiro acesso
+
+Utilize as credenciais temporárias fornecidas pelo administrador. Altere a senha imediatamente após o primeiro acesso.
+
+:::warning Segurança
+Nunca compartilhe suas credenciais. Toda ação no sistema é registrada com o seu usuário no Log de Acesso.
+:::
+
+## Navegação Relacionada
+
+| Tipo | Página |
+|------|--------|
+| Próximo | [Navegação](./navegacao) |
+| Relacionado | [Controle de Acesso](../controle-acesso/configurar-permissoes) |
+
 
 | Campo | Obrigatório | Descrição |
 |-------|:-----------:|-----------|

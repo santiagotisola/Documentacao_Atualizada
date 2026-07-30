@@ -1,20 +1,41 @@
 ﻿---
 sidebar_position: 3
 title: Permissões Detalhadas
-description: Configurar permissões granulares por módulo
+description: Configuração de permissões granulares por módulo no AxTon
 ---
 
 # Permissões Detalhadas
 
-![Permissões de Acesso](../img/Permissoes%20de%20acesso.png)
+Cada perfil de acesso pode ter **permissões específicas** por módulo: Visualizar, Criar, Editar e Excluir.
 
-Cada perfil de acesso pode ter permissões específicas para cada módulo do sistema: Visualizar, Criar, Editar e Excluir.
+![Permissões de Acesso](../img/Permissoes%20de%20acesso.png)
 
 ## Como acessar
 
 **Menu lateral** → Controle de Acesso → **Permissões de Acesso**
 
-## Configuração
+## Módulos com permissões configuráveis
+
+| Módulo | Visualizar | Criar | Editar | Excluir |
+|--------|:---------:|:-----:|:------:|:-------:|
+| Pesagem | ✔ | ✔ | ✔ | ✔ |
+| Infrações | ✔ | - | ✔ | ✔ |
+| Triagem | ✔ | - | ✔ | - |
+| Medições | ✔ | ✔ | ✔ | ✔ |
+| Relatórios | ✔ | - | - | - |
+| Configurações | ✔ | ✔ | ✔ | ✔ |
+
+## Passo a passo
+
+1. Acesse **Controle de Acesso → Permissões de Acesso**
+2. Selecione o **Perfil de Acesso**
+3. Marque ou desmarque as permissões por módulo
+4. Clique em **Salvar**
+
+:::warning
+Alterações de permissão entram em vigor imediatamente. Usuários com sessão ativa podem precisar fazer logout e login novamente.
+:::
+
 
 ### Matriz de Permissões
 

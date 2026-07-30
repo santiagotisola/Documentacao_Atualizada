@@ -1,20 +1,45 @@
 ---
 sidebar_position: 4
 title: Relatório de Discrepâncias
-description: Divergências entre pesagens e dados esperados
+description: Divergências entre pesagens e dados esperados no AxTon
 ---
 
-# Relatório de Discrepâncias
+# Relatório de Discrepancias
 
-Relatório de Pesagem](../img/Relatorio%20de%20pesagem.png)
-
-Identifica discrepâncias entre os dados registrados e os valores esperados, incluindo diferenças de peso e classificação.
+Identifica **divergências** entre os dados registrados e os valores esperados: diferenças de peso, classificação incorreta e inconsistências fiscais.
 
 ## Como acessar
 
-**Menu lateral** → Relatórios → Relatório de Discrepâncias**
+**Menu lateral** → Relatórios → **Relatório de Discrepancias**
 
-## Dados do Relatório
+## Tipos de discrepancia
+
+| Tipo | Descrição | Causa comum |
+|------|-----------|-------------|
+| **Peso divergente** | Peso aferido ð peso declarado na NF-e | Sub-declaração de carga |
+| **Classificação errada** | Categoria do veículo incorreta | OCR + classificação automática |
+| **MDF-e inconsistente** | Manifesto não cobre todos os eixos | Erro do emitente |
+| **PBT excedido na declaração** | Peso declarado > limite legal | Irregularidade intencional |
+
+## Filtros
+
+| Filtro | Descrição |
+|--------|-----------|
+| **Período** | Data início e fim |
+| **Posto** | Local da pesagem |
+| **Tipo de discrepancia** | Filtrar por categoria |
+| **Tolerância (%)** | Excluír discrepancias dentro da margem |
+
+## Uso operacional
+
+- Identificar veículos recorrentes com sub-declaração
+- Auditar qualidade das classificações automáticas
+- Embasar ações judiciais contra infratores recorrentes
+
+## Exportação
+
+Disponível em **Excel** e **PDF**.
+
 
 ### Colunas
 

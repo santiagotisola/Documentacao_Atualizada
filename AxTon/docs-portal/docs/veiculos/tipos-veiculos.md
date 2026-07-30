@@ -1,20 +1,38 @@
 ﻿---
 sidebar_position: 1
 title: Tipos de Veículos
-description: Cadastro dos tipos de Veículos fiscalizados
+description: Tipos de veículos fiscalizados nos postos de pesagem do AxTon
 ---
 
 # Tipos de Veículos
 
-![Classificação de Veículos](../img/Classificacao%20de%20Veiculos.png)
+Cadastro dos **tipos de veículos** fiscalizados nos postos de pesagem, utilizados para determinar o limite de PBT aplicável.
 
-Cadastro dos tipos de Veículos fiscalizados. Estes dados são utilizados automaticamente nas operações de pesagem e triagem de Infrações
+![Classificação de Veículos](../img/Classificacao%20de%20Veiculos.png)
 
 ## Como acessar
 
-**Menu lateral** → Veículos → **Tipos de Veículos
+**Menu lateral** → Veículos → **Tipos de Veículos**
 
-## Listagem
+## Tipos padrão (CONTRAN 803/2021)
+
+| Tipo | Eixos | PBT máximo |
+|------|:-----:|:-----------:|
+| Caminhão toco | 2 | 16 t |
+| Caminhão truck | 3 | 23 t |
+| Bi-truck | 4 | 29 t |
+| Bi-trem | 5-6 | 41,5 - 45 t |
+| Ro-do-trem | 9 | 57 t |
+
+## Campos
+
+| Campo | Obrigatório | Descrição |
+|-------|:-----------:|-----------|
+| **Nome** | Sim | Descrição do tipo |
+| **Número de eixos** | Sim | Quantidade de eixos |
+| **PBT máximo (t)** | Sim | Peso máximo permitido |
+| **Status** | Sim | Ativo ou Inativo |
+
 
 A tela exibe todos os registros cadastrados, com opção de pesquisa e filtro.
 

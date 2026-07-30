@@ -1,20 +1,47 @@
 ---
 sidebar_position: 5
 title: Eventos de Equipamentos
-description: Registro de eventos e ocorrências dos Equipamentos
+description: Registro e consulta de eventos operacionais dos equipamentos no AxHub
 ---
 
 # Eventos de Equipamentos
 
-Permite consultar e registrar eventos e ocorrências relacionados aos Equipamentos
+Permite **consultar e registrar eventos** relacionados aos equipamentos de fiscalização: falhas, manutenções, reativações e alertas operacionais.
 
 ![Lista de Eventos](../img/Operações%20-%20eventos%20de%20equipamentos.png)
 
 ## Como acessar
 
-**Menu lateral** → Operações → **Eventos de Equipamentos
+**Menu lateral** → Operações → **Eventos de Equipamentos**
 
-## Cadastro de evento
+## Tipos de evento
+
+| Tipo | Descrição | Origem |
+|------|-----------|--------|
+| **Falha** | Equipamento parou de funcionar | Automático |
+| **Reativação** | Retomada do funcionamento | Automático |
+| **Manutenção** | Intervenção técnica programada | Manual |
+| **Calibração** | Ajuste técnico no equipamento | Manual |
+| **Alerta** | Condição que exige atenção | Automático |
+
+## Campos do cadastro de evento
+
+| Campo | Obrigatório | Descrição |
+|-------|:-----------:|-----------|
+| **Equipamento** | Sim | Equipamento afetado |
+| **Tipo** | Sim | Tipo do evento |
+| **Data/Hora Início** | Sim | Quando ocorreu |
+| **Data/Hora Fim** | Não | Quando foi resolvido |
+| **Descrição** | Sim | Detalhamento da ocorrência |
+
+## Impacto nas medições
+
+Eventos de falha são contabilizados como **indisponibilidade** no cálculo das medições contratuais. Registre sempre com precisao.
+
+:::info Permissão
+`eventoequipamento.index` (visualizar) | `eventoequipamento.new` (registrar)
+:::
+
 
 ![Cadastro de Evento](../img/Operações%20-%20eventos%20de%20equipamentos%20-%20Cadastros.png)
 

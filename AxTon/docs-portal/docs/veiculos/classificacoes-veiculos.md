@@ -1,20 +1,40 @@
 ---
 sidebar_position: 5
 title: Classificações de Veículos
-description: Classificações de Veículos por eixo e PBT
+description: Classificações de veículos por eixo e PBT no AxTon
 ---
 
 # Classificações de Veículos
 
-![Classificação de Veículos — Cadastro](../img/classificacao-veiculos-cadastro.png)
+Classificações de veículos por **número de eixos e PBT** (Peso Bruto Total). Base para o cálculo de excesso de peso nas autuções.
 
-Classificações de Veículos por eixo e PBT. Estes dados são utilizados automaticamente nas operações de pesagem e triagem de Infrações
+![Classificação de Veículos](../img/classificacao-veiculos-cadastro.png)
 
 ## Como acessar
 
-**Menu lateral** → Veículos → **Classificações de Veículos
+**Menu lateral** → Veículos → **Classificações de Veículos**
 
-## Listagem
+## Campos
+
+| Campo | Obrigatório | Descrição |
+|-------|:-----------:|-----------|
+| **Código** | Sim | Código da classificação |
+| **Descrição** | Sim | Nome da configuração de eixos |
+| **Número de eixos** | Sim | Total de eixos do veículo |
+| **PBT máximo (t)** | Sim | Limite de peso para esta classificação |
+
+## Como é usada
+
+1. OCR captura placa → consulta tipo do veículo no RENAVAM
+2. Sistema identifica classificação (número de eixos)
+3. Compara peso aferido com PBT desta classificação
+4. Excedeu → gera infração automática
+
+## Relacionado
+
+- [PBT](../glossario/pbt) — Peso Bruto Total
+- [Tipos de Veículos](./tipos-veiculos) — Tipos compatíveis
+
 
 A tela exibe todos os registros cadastrados, com opção de pesquisa e filtro.
 

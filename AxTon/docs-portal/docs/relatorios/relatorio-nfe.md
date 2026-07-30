@@ -1,20 +1,49 @@
 ---
 sidebar_position: 5
 title: Relatório de Notas Fiscais
-description: Notas fiscais eletrônicas capturadas pelo sistema
+description: NF-e capturadas e vinculadas às passagens no AxTon
 ---
 
 # Relatório de Notas Fiscais
 
-Relatório de Pesagem](../img/Relatorio%20de%20pesagem.png)
-
-Lista as notas fiscais eletrônicas (NFe) vinculadas às passagens de Veículos com dados de origem, destino e chave de acesso.
+Lista as **notas fiscais eletrônicas (NF-e)** vinculadas às passagens de veículos, com dados de origem, destino, chave de acesso e status de validação.
 
 ## Como acessar
 
-**Menu lateral** → Relatórios → Relatório de Notas Fiscais**
+**Menu lateral** → Relatórios → **Relatório de Notas Fiscais**
 
-## Dados do Relatório
+## Filtros
+
+| Filtro | Descrição |
+|--------|-----------|
+| **Período** | Data início e fim |
+| **Chave NF-e** | Busca por chave específica |
+| **CNPJ Emitente** | Filtrar por empresa emissora |
+| **Status** | Válida, Vencida, Cancelada, Ausente |
+
+## Colunas
+
+| Coluna | Descrição |
+|--------|-----------|
+| **Chave** | 44 dígitos da NF-e |
+| **Emitente** | CNPJ do remetente |
+| **Destinatário** | CNPJ do destinatário |
+| **Valor** | Valor total da nota |
+| **Peso declarado** | Peso informado na NF-e |
+| **Status** | Válida / Vencida / Cancelada |
+| **Placa** | Veículo transportador |
+
+## Uso
+
+- Identificar NF-e canceladas em trânsito
+- Detectar sub-declaração de peso (comparar com pesagem real)
+- Subsidiar autuações por irregularidade fiscal
+
+## Relacionado
+
+- [NF-e](../glossario/nfe) — Definição e base legal
+- [MDF-e](../glossario/mdfe) — Manifesto vinculado
+
 
 ### Colunas
 

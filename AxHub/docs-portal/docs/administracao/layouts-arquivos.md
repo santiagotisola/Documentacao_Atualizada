@@ -1,21 +1,40 @@
 ﻿---
 sidebar_position: 8
 title: Layouts de Arquivos
-description: Configuração de layouts para importação e exportação
+description: Configuração dos layouts de importação e exportação de dados no AxHub
 ---
 
 # Layouts de Arquivos
 
-Permite configurar os layouts de arquivos utilizados para importação e exportação de dados.
+Define o **formato dos arquivos** utilizados para importação de dados e exportação de infrações para órgãos externos (DETRAN, SENATRAN, Prefeituras).
 
 ## Como acessar
 
 **Menu lateral** → Configurações → **Layouts de Arquivos**
 
-| Campo | Descrição |
-|-------|-----------|
-| **Nome** | Identificação do layout |
-| **Tipo** | Importação ou Exportação |
+## Campos
+
+| Campo | Obrigatório | Descrição |
+|-------|:-----------:|-----------|
+| **Nome** | Sim | Identificação do layout |
+| **Tipo** | Sim | Importação ou Exportação |
+| **Formato** | Sim | CSV, TXT, XML, JSON |
+| **Separador** | Cond. | Separador de campos (CSV) |
+| **Campos** | Sim | Mapeamento de colunas/campos |
+
+## Tipos de layout
+
+| Tipo | Descrição |
+|------|-----------|
+| **Exportação DETRAN** | Formato para envio ao DETRAN estadual |
+| **Exportação SENATRAN** | Formato federal para notificação |
+| **Importação veículos** | Carga de dados de veículos |
+| **Importação placas** | Lista de placas para equipamentos |
+
+:::caution
+O layout de exportação deve seguir rigorosamente as especificações do órgão autuador. Erros causam rejeição do lote.
+:::
+
 | **Formato** | CSV, TXT, XML |
 | **Delimitador** | Caractere separador de campos |
 | **Encoding** | Codificação do arquivo (UTF-8, ISO-8859-1) |

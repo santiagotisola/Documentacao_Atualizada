@@ -1,20 +1,40 @@
 ﻿---
 sidebar_position: 3
 title: Tipos de Equipamentos
-description: Categorias de Equipamentos de pesagem
+description: Categorias de equipamentos de pesagem no AxTon
 ---
 
 # Tipos de Equipamentos
 
-Configuração de Sistema](../img/configuracao%20de%20sistema%20-%20dados.png)
-
-Categorias de Equipamentos de pesagem. Estes registros são fundamentais para o funcionamento do sistema de pesagem.
+Categorias dos **equipamentos de pesagem** cadastrados no sistema. O tipo define o comportamento do equipamento no processo de fiscalização.
 
 ## Como acessar
 
-**Menu lateral** → Cadastros Básicos → **Tipos de Equipamentos
+**Menu lateral** → Cadastros Básicos → **Tipos de Equipamentos**
 
-## Listagem
+## Tipos comuns
+
+| Tipo | Descrição |
+|------|-----------|
+| **Balança Estática** | Pesagem com veículo parado |
+| **Balança Dinâmica** | Pesagem com veículo em movimento |
+| **Balança Semiestática** | Pesagem com velocidade reduzida |
+| **Sensor de Eixo** | Apenas conta e identifica eixos |
+
+## Campos
+
+| Campo | Obrigatório | Descrição |
+|-------|:-----------:|-----------|
+| **Nome** | Sim | Nome do tipo |
+| **Descrição** | Não | Detalhes técnicos |
+| **Status** | Sim | Ativo ou Inativo |
+
+## Hierarquia
+
+```
+Tipo de Equipamento → Fabricante → Modelo → Equipamento no posto
+```
+
 
 ### Colunas
 

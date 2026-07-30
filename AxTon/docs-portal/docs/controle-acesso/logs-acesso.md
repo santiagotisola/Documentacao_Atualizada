@@ -1,20 +1,46 @@
 ---
 sidebar_position: 1
 title: Logs de Acesso
-description: Histórico de acessos ao sistema
+description: Histórico de acessos e auditoria do sistema AxTon
 ---
 
 # Logs de Acesso
 
-![Configurar Usuário Acesso](../img/Configurarusuarioacesso.png)
-
-Registra todas as autenticações realizadas no sistema, incluindo acessos bem-sucedidos e tentativas falhas.
+Registra **todas as autenticações** realizadas no sistema, incluindo acessos bem-sucedidos e tentativas falhas. Ferramenta de segurança e auditoria.
 
 ## Como acessar
 
 **Menu lateral** → Controle de Acesso → **Logs de Acesso**
 
-## Listagem
+## Informações exibidas
+
+| Coluna | Descrição |
+|--------|-----------|
+| **Usuário** | Quem tentou acessar |
+| **Data/Hora** | Momento do acesso |
+| **IP** | Endereço de origem |
+| **Status** | Sucesso ou Falha |
+| **Motivo da falha** | Senha incorreta, usuário inativo, etc. |
+
+## Filtros
+
+| Filtro | Descrição |
+|--------|-----------|
+| **Período** | Data início e fim |
+| **Usuário** | Filtrar por conta |
+| **Status** | Sucesso ou Falha |
+
+## Uso na segurança
+
+- Detectar tentativas de acesso não autorizado
+- Identificar contas comprometidas
+- Verificar horários de acesso suspeitos
+- Auditar ações de usuários críticos
+
+:::tip
+Revisie os logs de acesso semanalmente. Mais de 5 falhas consecutivas do mesmo IP ou usuário indicam possível ataque.
+:::
+
 
 ### Colunas
 

@@ -1,20 +1,46 @@
 ---
 sidebar_position: 7
 title: Processamento por Usuário
-description: Produtividade por analista
+description: Produtividade de triagem por operador no AxTon
 ---
 
 # Processamento por Usuário
 
-![Tempo de Análise de Imagem](../img/tempo%20de%20analise%20de%20imagem.png)
-
-Exibe a produtividade de cada operador: Infrações triadas, aprovadas, descartadas e tempo médio por Análise
+Exibe a **produtividade de cada operador** na triagem de infrações: infrações triadas, aprovadas, descartadas e tempo médio por análise.
 
 ## Como acessar
 
-**Menu lateral** → Relatórios → **Processamento por Usuário
+**Menu lateral** → Relatórios → **Processamento por Usuário**
 
-## Dados do Relatório
+## Filtros
+
+| Filtro | Descrição |
+|--------|-----------|
+| **Período** | Data início e fim |
+| **Usuário** | Filtrar por operador |
+| **Posto** | Filtrar por localidade |
+
+## Colunas
+
+| Coluna | Descrição |
+|--------|-----------|
+| **Usuário** | Nome do operador |
+| **Triadas** | Infrações analisadas no período |
+| **Aprovadas** | Infrações confirmadas |
+| **Descartadas** | Infrações rejeitadas |
+| **Média/Hora** | Produtividade por hora |
+| **Tempo Médio** | Segundos por análise |
+
+## Uso gerencial
+
+- Monitorar equipe de triagem em tempo real
+- Identificar operadores com baixa produtividade
+- Distribuir carga de trabalho equilibradamente
+
+## Exportação
+
+Disponível em **Excel** e **PDF**.
+
 
 ### Colunas
 
