@@ -42,6 +42,13 @@ Define o **formato dos arquivos** utilizados para importação de dados e export
 :::warning
 Alterações em layouts de exportação ativos podem causar rejeição de lotes pelo órgão autuador. Testar antes em ambiente de homologação.
 :::
+
+## Relacionado
+
+- [Lotes de Exportação](../glossario/lote-exportacao)
+- [Sequenciais de Infrações](./sequenciais-infracoes)
+- [Sequenciais de Lote](./sequenciais-lote-exportacao)
+
 | **Importação veículos** | Carga de dados de veículos |
 | **Importação placas** | Lista de placas para equipamentos |
 

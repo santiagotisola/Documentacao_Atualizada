@@ -31,13 +31,13 @@ Define as **categorias de aferição metrológica** realizadas nos equipamentos 
 :::info
 Equipamentos com aferição vencida não podem gerar infrações válidas legalmente. O sistema exibe alerta quando a data de vencimento se aproxima.
 :::
-|------|-----------|----------------|
-| **Aferição Inicial** | Realizada na instalação do equipamento | 365 dias |
-| **Aferição Periódica** | Recalibração anual obrigatória | 365 dias |
-| **Aferição Extraordinária** | Após manutenção ou acidente | 365 dias |
 
-:::caution INMETRO
-Equipamento com aferição vencida não pode gerar infrações legalmente válidas. O sistema bloqueia automaticamente.
+## Relacionado
+
+- [Aferições](../operacoes/afericoes)
+- [Aferição](../glossario/afericao)
+- [Falhas de Sequenciais](../relatorios/falhas-sequenciais)
+
 :::
 
 |-------|-----------|

@@ -28,16 +28,15 @@ Configura e monitora os **sequenciais numéricos** utilizados na numeração dos
 - Comunique ao órgão autuador antes de iniciar uma nova série
 
 :::warning
-Sequenciais duplicados geram rejeicao do lote pelo órgão autuador. Não edite o campo **Próximo número** manualmente sem autorização.
+Sequenciais duplicados geram rejeição do lote pelo órgão autuador. Não edite o campo **Próximo número** manualmente sem autorização.
 :::
 
-- Nunca reiniciar a numeração sem autorização do órgão autuador
-- Verificar o relatório de [Falhas de Sequenciais](../relatorios/relatorio-logs-envios) antes de cada lote de exportação
-- Manter registro de todas as séries utilizadas por período
+## Relacionado
 
-:::caution
-A alteração indevida do sequencial pode invalidar infrações e gerar rejeição pelo órgão autuador.
-:::
+- [Sequenciais de Lote](./sequenciais-lote-exportacao)
+- [Falhas de Sequenciais](../relatorios/falhas-sequenciais)
+- [Lote de Exportação](../glossario/lote-exportacao)
+
 
 |-------|-----------|
 | **Órgão** | Órgão autuador |
