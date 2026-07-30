@@ -38,6 +38,20 @@ Relatório de Discrepâncias](../img/Relatorio%20-%20Relatorio%20de%20discrepanc
 | Coluna | Descrição |
 |--------|-----------|
 | **Data/Hora** | Momento do registro |
+| **Tipo** | Categoria da discrepancia |
+| **Equipamento** | Equipamento envolvido |
+| **Valor registrado** | Dado inconsistente capturado |
+| **Acao recomendada** | Sugestão do sistema |
+
+:::warning
+Discrepancias não tratadas comprometem a qualidade dos lotes exportados. Revise diariamente antes de gerar novos lotes.
+:::
+
+## Relacionado
+
+- [Falhas Sequenciais](./falhas-sequenciais)
+- [Processamento de Imagens](./processamento-imagens)
+
 | Equipamento | Equipamento que gerou a discrepância |
 | **Tipo** | Categoria da discrepância |
 | **Descrição** | Detalhamento do problema identificado |

@@ -39,6 +39,13 @@ Cadastro e gestão dos **contratos de prestação de serviço** vinculados às o
 
 ## Navegação Relacionada
 
+- [Criar Medição](./criar-medicao)
+- [Índices de Performance](./indices-performance)
+- [Recursos](./recursos)
+
+:::tip
+Configure as metas de SLA diretamente no contrato. O sistema calculará automaticamente a conformidade ao gerar as medições mensais.
+:::
 | Tipo | Página |
 |------|--------|
 | Relacionado | [Medições](./criar-medicao) |

@@ -42,6 +42,22 @@ Classificação dos veículos por **espécie** conforme o Registro Nacional de V
 :::info
 As espécies são pré-carregadas conforme a tabela do DENATRAN. Adicionar espécies novas apenas quando solicitado pelo órgão autuador.
 :::
+
+## Hierarquia de classificação
+
+```
+Espécie (DENATRAN)
+  └─ Tipo de Veículo
+       └─ Categoria
+            └─ Classificação
+```
+
+## Relacionado
+
+- [Tipos de Veículos](./tipos-veiculos)
+- [Categorias de Veículos](./categorias-veiculo)
+- [Classificações de Veículos](./classificacoes-veiculos)
+
 | **Moto** | Motocicleta, ciclomotor, motoneta |
 | **Trator** | Equipamento agrícola ou de obras |
 

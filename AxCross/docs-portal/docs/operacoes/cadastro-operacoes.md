@@ -36,8 +36,13 @@ No **menu lateral**, clique em **Operações**.
 :::tip
 Uma operação ativa vincula todas as passagens dos equipamentos selecionados ao contexto da fiscalização, facilitando a exportação e relatórios.
 :::
-| **Data Início** | Sim | Data e hora de início da operação |
-| **Data Fim** | Sim | Data e hora de término da operação |
+
+## Relacionado
+
+- [Alertas](./alertas)
+- [Passagens](../relatorios/passagens)
+- [Ocorrências e Alertas](../relatorios/ocorrencias-alertas)
+
 | **Status** | Sim | Ativa, Pausada ou Encerrada |
 | **Observações** | Não | Informações complementares |
 

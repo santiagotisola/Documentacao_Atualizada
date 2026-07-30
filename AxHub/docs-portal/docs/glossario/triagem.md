@@ -34,10 +34,6 @@ Processo de **análise preliminar** das infrações capturadas automaticamente, 
 - [Enquadramentos](../administracao/enquadramentos)
 - [Motivos de Descarte](../administracao/motivos-descartes)
 
-|---------|-------------|
-| **Aprovar** | Todos os dados estão corretos |
-| **Descartar** | Imagem ilegível, placa errada ou enquadramento incorreto |
-| **Corrigir placa** | OCR errou a leitura |
 
 ## Boas práticas
 

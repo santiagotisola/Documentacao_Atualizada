@@ -38,6 +38,11 @@ Guia de orientação sobre a **estrutura de menus e navegação geral** do siste
 Use os atalhos nos ícones do Dashboard para acessar as funcionalidades mais usadas sem navegar pelo menu lateral.
 :::
 
+## Relacionado
+
+- [Login](./login)
+- [Permissões](../controle-acesso/permissoes)
+
 
 | Modulo | Descricao |
 |--------|-----------|
