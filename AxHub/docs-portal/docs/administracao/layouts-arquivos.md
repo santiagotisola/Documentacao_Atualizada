@@ -28,6 +28,20 @@ Define o **formato dos arquivos** utilizados para importação de dados e export
 |------|-----------|
 | **Exportação DETRAN** | Formato para envio ao DETRAN estadual |
 | **Exportação SENATRAN** | Formato federal para notificação |
+| **Importação RENAVAM** | Dados do veículo da consulta RENAVAM |
+
+## Passo a passo
+
+1. Acesse **Configurações → Layouts de Arquivos**
+2. Clique em **+ Novo**
+3. Selecione o **Tipo** (Importação ou Exportação)
+4. Defina o **Formato** e o **Separador**
+5. Configure o **Mapeamento de campos**
+6. Clique em **Salvar**
+
+:::warning
+Alterações em layouts de exportação ativos podem causar rejeição de lotes pelo órgão autuador. Testar antes em ambiente de homologação.
+:::
 | **Importação veículos** | Carga de dados de veículos |
 | **Importação placas** | Lista de placas para equipamentos |
 

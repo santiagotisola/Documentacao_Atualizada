@@ -39,6 +39,12 @@ Após registrar as interrupções, o sistema as contabiliza no cálculo de dispo
 :::warning
 Interrupções não registradas **não são consideradas** no cálculo de disponibilidade. Registrar imediatamente após a ocorrência.
 :::
+| Falha de equipamento | Sim |
+| Evento externo (acidente, obra) | Conforme contrato |
+
+:::warning
+Interrupções não registradas **não são consideradas** no cálculo de disponibilidade. Registrar imediatamente após a ocorrência.
+:::
 
 ![Processar Interrupções](../img/Medição%20-%20interrupções%20-%20processar%20interrupções.png)
 

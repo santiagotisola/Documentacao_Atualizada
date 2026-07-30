@@ -29,6 +29,13 @@ Configura e monitora os **sequenciais dos lotes de exportação** de infrações
 
 ## Boas práticas
 
+- Registre no sistema o sequencial após cada envio manual
+- Não reutilize sequenciais de períodos anteriores
+- Comunique ao órgão autuador ao reiniciar a numeração
+
+:::warning
+Lotes com sequencial duplicado ou fora de ordem são rejeitados pelo órgão autuador. Manter o registro atualizado é obrigatório.
+:::
 - Nunca alterar o sequencial sem autorização do órgão autuador
 - Manter registro histórico de todos os lotes por órgão
 - Verificar seqüencial antes de cada nova exportação

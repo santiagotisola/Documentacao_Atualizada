@@ -28,6 +28,10 @@ O recurso de **Acessos por IP** permite restringir o acesso ao sistema apenas a 
 Para controle de acesso, utilize:
 1. **Perfis de Acesso** — configuração granular de permissões
 2. **Firewall de rede** — restrição no nível da infraestrutura
+
+:::info
+A restrição por IP é uma camada adicional de segurança. Recomendada para ambientes corporativos com IP fixo. Não utilize se os usuários acessam com IPs dinâmicos.
+:::
 3. **VPN** — acesso restrito à rede interna
 
 ## Contato

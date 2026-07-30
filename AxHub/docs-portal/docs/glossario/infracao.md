@@ -29,6 +29,19 @@ Equipamento captura → Triagem → Auditoria → Lote → Exportação
 
 | Status | Descrição |
 |--------|-----------|
+| **Capturada** | Registrada pelo equipamento |
+| **Triada** | Validada pelo operador |
+| **Auditada** | Aprovada pela supervisão |
+| **Exportada** | Enviada ao órgão autuador |
+| **Descartada** | Rejeitada na triagem |
+
+## Relacionado
+
+- [Triagem](./triagem)
+- [Autuação](./autuacao)
+- [Enquadramento](./enquadramento)
+
+|--------|-----------|
 | **Capturada** | Gerada pelo equipamento |
 | **Em triagem** | Aguardando validação |
 | **Em auditoria** | Validada, aguardando aprovação |

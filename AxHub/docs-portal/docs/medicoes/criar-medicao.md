@@ -34,6 +34,14 @@ Relatório de Medição](../img/Medição%20-%20nova%20medição%20-%20relatorio
 ## O que a medição calcula
 
 - Horas de disponibilidade por equipamento
+- Taxa de aproveitamento OCR
+- Total de passagens e infrações do período
+- Interrupções e impacto na meta
+
+:::info Boletim
+O **Boletim de Medição** pode ser enviado ao contratante como comprovação do cumprimento do SLA.
+:::
+- Horas de disponibilidade por equipamento
 - Índice de aproveitamento OCR
 - Total de passagens e infrações do período
 - Interrupções e impacto na meta

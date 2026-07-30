@@ -31,6 +31,11 @@ Cadastro dos **motivos que justificam o descarte** de infrações durante a tria
 | **Enquadramento incorreto** | Artigo CTB não aplicável à situação |
 
 :::tip Análise de qualidade
+O Dashboard exibe o **Top Motivos de Descarte**. Use essa informação para identificar problemas recorrentes nos equipamentos e treinar a equipe.
+:::
+| **Enquadramento incorreto** | Artigo CTB não aplicável à situação |
+
+:::tip Análise de qualidade
 O Dashboard exibe o **Top Motivos de Descarte**. Use essa informação para identificar problemas recorrentes nos equipamentos.
 :::
 

@@ -31,6 +31,17 @@ Define **como a autuação é lavrada** no sistema. A forma correta garante comp
 ## Passo a passo
 
 1. Acesse **Configurações → Formas de Autuação**
+2. Clique em **+ Nova**
+3. Preencha o **Código** e a **Descrição**
+4. Clique em **Salvar**
+
+:::info
+As formas de autuação são configuradas conforme exigência do órgão autuador. Usar o código correto garante que o lote exportado seja aceito.
+:::
+
+## Passo a passo
+
+1. Acesse **Configurações → Formas de Autuação**
 2. Clique em **+ Novo**
 3. Informe o **Código** e a **Descrição**
 4. Clique em **Salvar**

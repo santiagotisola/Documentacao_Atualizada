@@ -28,6 +28,14 @@ Apresenta o volume total de imagens processadas no sistema em um determinado per
 | Coluna | Descrição |
 |--------|-----------|
 | Equipamento | Nome e código do Equipamento |
+| **Imagens capturadas** | Total de imagens no período |
+| **Processadas** | Imagens analisadas com sucesso |
+| **Descartadas** | Imagens rejeitadas |
+| **Aproveitamento (%)** | Taxa de imagens úteis |
+
+:::tip
+Use este relatório para identificar equipamentos com baixo aproveitamento de imagens. Aproveitamento abaixo de 85% pode indicar necessidade de calibração ou limpeza.
+:::
 | **Total de Imagens** | Quantidade total de imagens recebidas |
 | **Processadas** | Imagens efetivamente analisadas |
 | **Descartadas** | Imagens rejeitadas por critério de qualidade |
