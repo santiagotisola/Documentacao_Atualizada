@@ -74,12 +74,36 @@ Disponível em **Excel** e **PDF**.
 Registros com status **Erro** podem ser reenviados manualmente. Verifique a disponibilidade do sistema de destino antes de reenviar.
 :::
 
----
+## Fluxo de auditoria de envios
 
-## Navegação Relacionada
+1. Acessar **Relatórios → Logs de Envios a Integração**
+2. Filtrar por **Status = Erro** para identificar falhas de comunicação
+3. Para cada erro: verificar a **Mensagem** de retorno do sistema externo
+4. Se o problema for no destino: aguardar estabilidade e usar **Reenviar**
+5. Se o problema for no payload: corrigir a configuração da integração
+6. Exportar o histórico periódicamente como evidência de conformidade
 
-| Tipo | Página | Descrição |
-|------|--------|-----------|
-| Relacionado | [Exportação](../infracoes/exportacao) | Lotes de Infração exportados |
-| Relacionado | [Webhooks](../administracao/webhooks) | Configuração de integrações |
-| Relacionado | [Lotes de Importação](./lote-importacao) | Dados recebidos |
+## Tabela de referência — códigos de status HTTP
+
+| Status HTTP | Significado | Ação |
+|:-----------:|-------------|------|
+| **200 / 201** | Envio aceito | Nenhuma |
+| **400** | Payload inválido | Corrigir configuração da integração |
+| **401 / 403** | Não autorizado | Verificar token/API key |
+| **404** | Endpoint não encontrado | Verificar URL configurada |
+| **5xx** | Erro no servidor destino | Aguardar estabilidade e reenviar |
+
+## Erros comuns
+
+| Problema | Causa | Solução |
+|----------|-------|----------|
+| Erro 401 persistente | Token expirado ou inválido | Atualizar token em Configurações → Webhooks |
+| Erro 400 repetido | Formato do payload incorreto | Revisar layout de exportação com o destino |
+| Envio pendente há mais de 1 hora | Sistema destino offline | Aguardar e acionar suporte do destino |
+| Registros duplicados no destino | Reenvio duplo | Verificar histórico antes de usar Reenviar |
+
+## Relacionado
+
+- [Webhooks](../administracao/webhooks)
+- [Exportação de Infrações](../infracoes/exportacao)
+- [Lotes de Importação](./lote-importacao)

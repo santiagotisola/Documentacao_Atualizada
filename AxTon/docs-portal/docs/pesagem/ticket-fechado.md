@@ -56,6 +56,34 @@ Use o filtro **Infrator** para revisar tickets com infração gerada e verificar
 | **Relatório gerencial** | Exporte os dados fechados para compor boletim diário ou mensal de produção |
 | **Conciliação contratual** | Validar volume de pesagens do posto no período de medição |
 
+## Fluxo de consulta de ticket fechado
+
+1. Acessar **Tickets de Pesagens → Fechados** no menu lateral
+2. Definir o **Período** de consulta
+3. Opcionalmente filtrar por **Placa**, **Posto** ou **Resultado** (Infrator)
+4. Clicar em **Pesquisar**
+5. Clicar sobre o ticket para ver detalhes completos com pesos por eixo
+6. Para exportar: clicar em **Excel** ou selecionar para compor relatório
+
+## Tabela de referência — campos do ticket
+
+| Campo | Descrição | Quando verificar |
+|-------|-----------|:-----------------:|
+| **Resultado** | Regular ou Infrator | Sempre |
+| **PBT Medido** | Peso bruto total aferido (kg) | Quando resultado = Infrator |
+| **Eixos Medidos** | Peso por eixo | Quando excesso é por eixo |
+| **Operação** | Operação vinculada | Para conciliação contratual |
+| **Status** | Liberado / Autuado / Aguardando | Para acompanhamento da autuação |
+
+## Erros comuns
+
+| Problema | Causa | Solução |
+|----------|-------|----------|
+| Ticket não aparece na consulta | Filtro de data fora do período | Ampliar o período de busca |
+| Peso exibido como zero | Falha na leitura da balança | Verificar log da pesagem e recalibrar |
+| Infrator sem infração gerada | Triagem pendente ou sequencial esgotado | Verificar sequenciais de infração |
+| Ticket sem imagem | Câmera IP não configurada | Configurar câmera em Sistema → Câmera IP |
+
 ## Relacionado
 
 - [Tickets Abertos](./ticket-aberto)

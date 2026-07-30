@@ -71,13 +71,26 @@ Use em conjunto com o Relatório de Falhas Sequenciais](./falhas-sequenciais) pa
 - Registre manutenções preventivas com **Tipo = Manutenção** e motivo detalhado para distingui-las de falhas não planejadas
 - Use em conjunto com [Falhas Sequenciais](./falhas-sequenciais) para identificar equipamentos com problemas recorrentes
 
----
+## Fluxo de uso mensal
 
-## Navegação Relacionada
+1. Acessar **Relatórios → Eventos dos Equipamentos** antes do fechamento da medição
+2. Filtrar por **Tipo = Falha** e o período da competência
+3. Somar as **Durações** para calcular as horas de indisponibilidade
+4. Comparar com as interrupções registradas em **Medição → Interrupções** para garantir consistência
+5. Exportar o relatório como comprovante para o Boletim de Medição
 
-| Tipo | Página | Descrição |
-|------|--------|-----------|
-| Relacionado | [Eventos (Operações)](../operacoes/eventos-equipamentos) | Dados operacionais em tempo real |
-| Relacionado | [Equipamentos](../cadastros-basicos/Equipamentos) | Cadastro do Equipamento |
-| Relacionado | [Falhas Sequenciais](./falhas-sequenciais) | Relatório de falhas recorrentes |
-| Relacionado | [Interrupções](../medicoes/interrupcoes) | Interrupções que afetam medição |
+## Erros comuns
+
+| Problema | Causa | Solução |
+|----------|-------|----------|
+| Eventos não aparecem no relatório | Não foram registrados em Operações → Eventos | Cadastrar retroativamente com justificativa |
+| Duração zerada | Evento sem data fim registrada | Editar o evento e preencher data fim |
+| Tipo de evento incorreto | Manutenção lançada como Falha | Editar e corrigir o tipo |
+| Evento não impacta SLA | Tipo não mapeado como falha | Revisar configuração do tipo de evento |
+
+## Relacionado
+
+- [Falhas Sequenciais](./falhas-sequenciais)
+- [Processamento de Imagens](./processamento-imagens)
+- [Afer ições](../operacoes/afericoes)
+- [Interrupções](../medicoes/interrupcoes)

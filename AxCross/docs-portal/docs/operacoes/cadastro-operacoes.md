@@ -75,6 +75,34 @@ Operações com registros de passagem vinculados não podem ser excluídas, apen
 - **Encerre** a operação assim que concluída — operações abertas continuam recebendo passagens e podem distorcer relatórios futuros
 - Use o campo **Responsável** para rastrear qual agente conduziu a fiscalização em cada ponto
 
+## Fluxo de criação de operação
+
+1. Confirmar que os **Equipamentos** a incluir estão ativos e com status Online
+2. Acessar **Operações** no menu lateral
+3. Clicar em **Nova Operação**
+4. Preencher **Nome**, **Local** e **Data Início**
+5. Vincular os **Equipamentos** participantes
+6. Clicar em **Salvar**
+7. Durante a fiscalização: monitorar via [Monitoramento Online](./monitoramento-online)
+8. Ao encerrar: clicar em **Encerrar** para fechar o período da operação
+
+## Tabela de referência — status de operações
+
+| Status | Descrição | Passagens registradas? |
+|--------|-----------|:----------------------:|
+| **Ativa** | Em andamento, recebendo dados | Sim |
+| **Pausada** | Suspensa temporariamente | Não |
+| **Encerrada** | Concluída, período fechado | Não |
+
+## Erros comuns
+
+| Problema | Causa | Solução |
+|----------|-------|----------|
+| Passagens não aparecem na operação | Equipamento não vinculado | Editar operação e adicionar o equipamento |
+| Operação não pode ser excluída | Há registros vinculados | Encerrar a operação em vez de excluir |
+| Dados distorcidos no relatório | Operação aberta além do prazo | Encerrar a operação na data correta |
+| Equipamento inativo na operação | Status offline durante a operação | Verificar conectividade do equipamento |
+
 ## Relacionado
 
 - [Alertas](./alertas)

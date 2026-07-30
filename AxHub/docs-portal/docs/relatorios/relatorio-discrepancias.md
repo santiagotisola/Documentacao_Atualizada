@@ -68,12 +68,35 @@ Discrepancias não tratadas comprometem a qualidade dos lotes exportados. Revise
 
 Exportável em **Excel** para acompanhamento de pendências técnicas e registro em planos de ação.
 
----
+## Fluxo de revisão de discrepancias
 
-## Navegação Relacionada
+1. Acessar **Relatórios → Relatório de Discrepancias** diariamente antes de gerar lotes
+2. Filtrar por **Status = Pendente** e o **período** do dia anterior
+3. Classificar por **Tipo** para priorizar: duplicados e data/hora inconsistente primeiro
+4. Para cada discrepancia: identificar a causa e tomar a ação corretiva
+5. Marcar como **Resolvida** após a correção
+6. Exportar o relatório como evidência de que o lote foi verificado antes do envio
 
-| Tipo | Página | Descrição |
-|------|--------|-----------|
-| Relacionado | [Auditoria](../infracoes/auditoria) | Revisão de Infrações |
-| Relacionado | [Triagem](../infracoes/triagem) | Origem das discrepâncias |
-| Relacionado | [Equipamentos](../cadastros-basicos/Equipamentos) | Cadastro do Equipamento |
+## Tabela de referência — tipos e ações
+
+| Tipo de Discrepancia | Causa provável | Ação |
+|---------------------|---------------|------|
+| **Velocidade fora do intervalo** | Radar descalibrado | Manutenção preventiva |
+| **Placa ilegível** | OCR sem confiança | Descartar ou reconsultar RENAVAM |
+| **Imagem ausente** | Falha no armazenamento | Verificar integridade do arquivo |
+| **Data/Hora inconsistente** | Relógio do equipamento desajustado | Sincronizar NTP do equipamento |
+| **Sequencial duplicado** | Reenvio duplicado do lote | Verificar configuração de seqüenciais |
+
+## Erros comuns
+
+| Problema | Causa | Solução |
+|----------|-------|----------|
+| Discrepancias não aparecem | Nenhuma no período ou filtro errado | Ampliar período e remover filtros |
+| Tipo não reconhecido | Configuração do layout | Revisar Administração → Layouts de Arquivos |
+| Discrepancia resolvida reaparece | Causa raiz não corrigida | Investigar o equipamento antes de fechar |
+
+## Relacionado
+
+- [Falhas Sequenciais](./falhas-sequenciais)
+- [Processamento de Imagens](./processamento-imagens)
+- [Auditoria](../infracoes/auditoria)

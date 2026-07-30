@@ -78,10 +78,17 @@ Use a consulta de placas para verificar histórico de um veículo antes de liber
 | **Classificação** | Tipo de Veículo identificado |
 | **Excesso** | Peso excedente, se houver |
 
-### Passo a passo
+## Erros comuns
 
-1. Na tela de **Operações**, acesse **Consulta de Placas**
-2. Informe a Placa (total ou parcial)
-3. Defina o Período desejado
-4. Clique em **Pesquisar**
-5. Clique sobre um registro para ver detalhes
+| Problema | Causa | Solução |
+|----------|-------|----------|
+| Placa não encontrada | Nenhuma passagem no período | Ampliar o período de busca |
+| Peso zerado na passagem | Falha na leitura da balança | Verificar log do equipamento |
+| Resultado incorreto | Classificação errada no momento da pesagem | Reclassificar o ticket em Balança → Reclassificar |
+| Muitos registros duplicados | Placa lida mais de uma vez no mesmo evento | Verificar configuração do equipamento |
+
+## Relacionado
+
+- [Tickets Abertos](../pesagem/ticket-aberto)
+- [Relatório de Infrações](../relatorios/relatorio-infracoes)
+- [Reclassificar](../pesagem/reclassificar)

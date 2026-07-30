@@ -68,10 +68,35 @@ Um mesmo fabricante pode possuir múltiplos modelos de Equipamento Cada modelo d
 
 ---
 
-## Navegacao Relacionada
+## Fluxo de cadastro de modelo
 
-| Tipo | Pagina | Descricao |
-|------|--------|-----------|
-| Relacionado | [Equipamentos](./equipamentos) | Equipamentos deste modelo |
-| Relacionado | [Fabricantes](./fabricantes) | Fabricante |
-| Relacionado | [Tipos](./tipos-equipamentos) | Tipo |
+1. Consultar a portaria INMETRO vigente no site do INMETRO (inmetro.gov.br)
+2. Cadastrar o modelo em **Equipamentos → Modelos de Equipamentos**
+3. Preencher **Marca**, **Modelo**, **Número da Portaria** e a referência completa
+4. Vincular ao **Fabricante** correspondente
+5. Clicar em **Salvar** e verificar se a portaria aparece corretamente nas tarjas dos equipamentos deste modelo
+
+## Tabela de referência — campos e impacto
+
+| Campo | Onde aparece | Impacto se incorreto |
+|-------|:------------:|----------------------|
+| **Número da Portaria** | Tarja da infração | Lavratura inválida — auto rejeitado pelo órgão |
+| **Portaria** (referência completa) | Tarja e exportação | Texto incompleto na tarja impressa |
+| **Fabricante** | Relatórios e API | Equipamentos não autenticam corretamente |
+| **Marca** | Tarja da infração | Campo "Marca/Modelo" em branco na tarja |
+
+## Erros comuns
+
+| Problema | Causa | Solução |
+|----------|-------|----------|
+| Portaria não aparece na tarja | Campo "Número da Portaria" em branco | Editar modelo e preencher o campo |
+| Modelo não listado ao cadastrar equipamento | Fabricante incorreto | Verificar e corrigir o fabricante vinculado |
+| Número de portaria desatualizado | Portaria renovada pelo INMETRO | Atualizar com número e referência da nova portaria |
+| Erro ao salvar modelo | Fabricante não cadastrado | Cadastrar o fabricante antes do modelo |
+
+## Relacionado
+
+- [Equipamentos](./equipamentos)
+- [Fabricantes](./fabricantes)
+- [Tipos de Equipamentos](./tipos-equipamentos)
+- [Tarjas](../administracao/tarjas)

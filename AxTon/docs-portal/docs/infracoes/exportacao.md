@@ -86,15 +86,37 @@ Gere lotes separados para cada **Tipo de Infração órgão autuador geralmente 
 Lotes com status **Error** devem ser analisados nos **Logs** antes de reenvio. Não exclua lotes antes de confirmar que foram recebidos pelo órgão.
 :::
 
+## Fluxo de exportação de infrações
+
+1. Verificar **Sequênciais de Exportação** (Cadastros → Sequênciais) para garantir que todos os tipos têm sequêncial ativo
+2. Acessar **Exportação** no menu lateral
+3. Clicar em **+ Novo**
+4. Selecionar o **Tipo de Exportação** (XTraffic ou AxHub) e o **Tipo de Infração**
+5. Definir o **Período** das infrações a incluir
+6. Clicar em **Salvar** e aguardar status **Ok**
+7. Transmitir o arquivo ao órgão autuador e guardar o protocolo
+
+## Tabela de referência — status dos lotes
+
+| Status | Significado | Ação |
+|--------|-------------|------|
+| **Ok** | Lote gerado com sucesso | Download e transmissão |
+| **Processando** | Geração em andamento | Aguardar |
+| **Error** | Falha no processamento | Verificar Logs antes de reenviar |
+
+## Erros comuns
+
+| Problema | Causa | Solução |
+|----------|-------|----------|
+| Lote com status Error | Sequêncial não configurado | Criar sequêncial para o tipo de infração |
+| Lote gerado sem infrações | Período sem infrações triadas | Verificar triagem pendente no período |
+| Código de município divergente | Faixa com código IBGE incorreto | Corrigir o código IBGE nas configurações de faixa |
+| Lote rejeitado pelo órgão | Formato XTraffic incorreto | Verificar versão do layout com o contratante |
+
 ## Veja também
 
 | Funcionalidade | Descrição |
 |---|---|
-| [**Sequênciais de Exportação**](../cadastros/sequencial-infracao) | Numeração dos lotes |
+| [**Sequênciais de Exportação**](../cadastros/sequencial-exportacao) | Numeração dos lotes |
+| [**Sequênciais de Infração**](../cadastros/sequencial-infracao) | Numeração dos autos |
 | [**Tickets de Pesagens**](../pesagem/ticket-aberto) | Infrações geradas na pesagem |
-
-:::warning Erros comuns
-- **Código do município divergente**: Verifique o cadastro de faixas
-- **Imagens ausentes**: Verifique o processamento de imagens
-- **Dados incompletos**: Retorne para triagem e complete os dados
-:::

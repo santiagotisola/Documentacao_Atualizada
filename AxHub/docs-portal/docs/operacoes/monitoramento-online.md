@@ -78,6 +78,14 @@ Configure o filtro por grupo de equipamentos para focar no seu âmbito de respon
 |----------|---------------|----------|
 | Equipamento sempre offline | IP incorreto no cadastro | Verificar cadastro do equipamento |
 | Passagens não aparecem em tempo real | Heartbeat desabilitado | Verificar configurações do grupo |
+| Mapa não exibe equipamentos | Lat/Long não configuradas | Preencher coordenadas no cadastro do equipamento |
+| Status desatualizado | Cache do browser | Pressionar F5 para atualizar |
+
+## Relacionado
+
+- [Eventos de Equipamentos](./eventos-equipamentos)
+- [Afe rições](./afericoes)
+- [Grupos de Equipamentos](../cadastros-basicos/grupos-equipamentos)
 | Taxa OCR não exibida | Permissão insuficiente | Solicitar permissão ao administrador |
 
 ## Fluxo de uso no início do turno

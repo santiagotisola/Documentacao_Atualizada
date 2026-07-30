@@ -51,18 +51,29 @@ Use este relatório semanalmente para identificar equipamentos com queda de OCR 
 - **Avaliação pós-intervenção** — compare o aproveitamento antes e depois de limpeza ou calibração
 - **Alerta de falha sistêmica** — múltiplos equipamentos com queda simultânea indicam problema de rede ou servidor
 
+## Fluxo de monitoramento de qualidade OCR
+
+1. Acessar **Relatórios → Processamento de Imagens** semanalmente
+2. Filtrar pelo **período** da última semana por equipamento
+3. Identificar equipamentos com **Taxa OCR < 85%**
+4. Comparar com a semana anterior para verificar tendência
+5. Taxa caindo: programar limpeza de lente ou visita técnica
+6. Exportar os dados para embasar chamado técnico com evidências objetivas
+
+## Erros comuns
+
+| Problema | Causa | Solução |
+|----------|-------|----------|
+| Relatório mostra zero imagens | Nenhuma pesagem no período | Ampliar o período de consulta |
+| Taxa OCR zerada em equipamento | Equipamento offline no período | Verificar status no Monitoramento Online |
+| Dados duplicados no relatório | Filtros conflitantes | Limpar filtros e refazer a consulta |
+| Taxa OCR abaixo de 70% persistente | Falha de hardware ou posicionamento da câmera | Acionar manutenção técnica |
+
 ## Relacionado
 
 - [Processamento por Usuário](./processamento-por-usuario)
 - [Índices de Performance](../medicoes/indices-performance)
 - [Fluxo Diário de Veículos](./fluxo-diario-veiculos)
-
-| Taxa | Situação | Ação |
-|------|----------|------|
-| > 95% | Excelente | Manter |
-| 85-95% | Aceitável | Monitorar |
-| 70-85% | Atenção | Verificar calibração |
-| < 70% | Crítico | Manutenção urgente |
 
 :::tip Dica
 Use este relatório mensalmente para embasar solicitações de manutenção em equipamentos com baixa taxa de reconhecimento.

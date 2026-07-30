@@ -64,6 +64,15 @@ Exporte o Relatório ao final de cada operação para manter o histórico de pes
 - **Compilação para medição contratual** — use o total de pesagens do período como dado de entrada para o boletim
 - **Comprovante de regularidade** — exporte pesagens com resultado **Regular** para comprovar o tratamento correto de um veículo
 
+## Erros comuns
+
+| Problema | Causa | Solução |
+|----------|-------|----------|
+| Relatório vazio | Nenhuma pesagem no período selecionado | Ampliar o período de consulta |
+| PBT Medido zerado | Falha na leitura da balança | Verificar log de pesagem e calibrar |
+| Peso "Regular" para veículo com excesso | Tolerância muito alta configurada | Revisar Configurações → Sistema → aba Infração |
+| Exportação PDF muito demorada | Grande volume de registros | Reduzir o período ou exportar por posto |
+
 ## Relacionado
 
 - [Relatório de Infrações](./relatorio-infracoes)

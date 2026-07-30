@@ -66,17 +66,25 @@ Sempre execute este relatório antes de gerar um novo lote de exportação. Falh
 - **Diagnóstico de falha técnica**: detectar falhas de comunicação entre balanca e servidor que causaram números duplicados
 - **Comprovação de integridade**: documentar a ausência de gaps para fins de auditoria contratual
 
-### Colunas
+## Erros comuns
 
-| Coluna | Descrição |
-|--------|-----------|
-| **Sequencial** | Número esperado |
-| **Status** | Presente ou Ausente |
-| **Data** | Data esperada |
-| **Observação** | Detalhes da falha |
+| Problema | Causa | Solução |
+|----------|-------|----------|
+| Lac una encontrada antes de exportar | Infração descartada sem motivo | Verificar descarte no período correspondente |
+| Número duplicado | Reenvio duplicado do lote | Auditar os registros com mesmo número |
+| Relatório vazio | Sequêncial não configurado | Criar sequêncial em Cadastros → Sequênciais |
+| Falha não some após reenvio | Causa raiz não corrigida | Investigar o ticket da infração antes de reenviar |
 
-### Filtros disponíveis
+## Tabela de referência — tipos de falha
 
-- Período (data inicial e final)
-- Posto de pesagem
-- Exportar para Excel/PDF
+| Tipo | Causa comum | Ação |
+|------|-------------|------|
+| **Lac una** | Infração descartada ou não triada | Verificar pipeline de triagem |
+| **Duplicidade** | Reenvio duplo do lote | Auditar o histórico de exportação |
+| **Fora de ordem** | Falha de sincronização | Verificar conectividade da balança |
+
+## Relacionado
+
+- [Sequênciais de Exportação](../cadastros/sequencial-exportacao)
+- [Sequênciais de Infração](../cadastros/sequencial-infracao)
+- [Exportação de Infrações](../infracoes/exportacao)

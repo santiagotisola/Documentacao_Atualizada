@@ -68,20 +68,35 @@ Filtre por **Status = Auditada** para obter a lista de infrações prontas para 
 
 Exportável em **Excel** e **PDF**. O formato PDF inclui imagens quando selecionado o campo correspondente.
 
-## Termos Técnicos
+## Fluxo de uso do relatório
 
-| Termo | Definição |
-|-------|-----------|
-| [Enquadramento](../glossario/enquadramento) | Ver definição no glossário |
-| [Triagem](../glossario/triagem) | Ver definição no glossário |
-| [Autuação](../glossario/autuacao) | Ver definição no glossário |
+1. Acessar **Relatórios → Infrações**
+2. Definir o **período** e filtrar por **Status = Auditada** para infrações prontas para exportar
+3. Revisar enquadramentos e imagens duvidosos antes de exportar
+4. Exportar em **Excel** para conciliação com o órgão autuador
+5. Exportar em **PDF** para inclusão em boletim de medição
 
----
+## Tabela de referência — status de infrações
 
-## Navegação Relacionada
+| Status | Descrição | Próxima etapa |
+|--------|-----------|:-------------:|
+| **Pendente** | Aguardando triagem | Triagem |
+| **Triada** | Aprovada na triagem | Auditoria |
+| **Auditada** | Aprovada na auditoria | Exportar |
+| **Descartada** | Rejeitada na triagem ou auditoria | Revisar motivo |
+| **Exportada** | Incluída em lote e enviada | Arquivo externo |
 
-| Tipo | Página | Descrição |
-|------|--------|-----------|
-| Relacionado | [Consulta de Infrações](../infracoes/consulta-infracoes) | Consulta detalhada |
-| Relacionado | [Exportação](../infracoes/exportacao) | Lotes exportados |
-| Relacionado | [Auditoria](../infracoes/auditoria) | Revisão de Infrações |
+## Erros comuns
+
+| Problema | Causa | Solução |
+|----------|-------|----------|
+| Infração não aparece no relatório | Filtro de status ou período incorreto | Ampliar período e verificar status |
+| Número do auto em branco | Sequêncial não configurado | Verificar Configurações → Sequênciais de Infrações |
+| Velocidade considerada diferente da medida | Tolerância aplicada | Verificar configuração de tolerancia na operação |
+| Exportação PDF sem imagens | Tipo de exportação sem imagens | Selecionar a opção "com imagens" |
+
+## Relacionado
+
+- [Triagem de Infrações](../infracoes/triagem)
+- [Lotes de Exportação](../glossario/lote-exportacao)
+- [Motivos de Descarte](../administracao/motivos-descartes)

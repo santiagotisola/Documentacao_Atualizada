@@ -60,19 +60,31 @@ A tela de Auditoria permite que auditores revisem as Infrações que foram valid
 As decisões de auditoria alimentam os Relatórios de qualidade e produtividade. Rejeições freqüentes do mesmo analista devem ser investigadas.
 :::
 
-## Termos Tecnicos
+## Tabela de referência — decisões de auditoria
 
-| Termo | Definicao |
-|-------|-----------|
-| [Triagem](../glossario/triagem) | Ver definicao no glossario |
+| Situação | Decisão | Justificativa |
+|----------|---------|---------------|
+| Imagem clara, placa legível, velocidade correta | Confirmar | Infração válida |
+| Imagem ambígua mas placa lida corretamente | Confirmar com observação | Registrar dúvida |
+| Placa incorretamente lida pelo OCR | Rejeitar | Devolver para triagem |
+| Infração descartada sem motivo claro | Rejeitar descarte | Reenviar para triagem |
+| Veículo isento autuado | Rejeitar | Verificar regras de exceção |
 
----
+## Erros comuns
 
-## Navegacao Relacionada
+| Problema | Causa | Solução |
+|----------|-------|----------|
+| Auditor não vê infrações para auditar | Perfil sem permissão `auditoria.index` | Configurar permissões do perfil |
+| Rejeição não altera o status | Status já exportado | Infrações exportadas não podem ser devolvidas |
+| Amostragem mostra zerado | Período sem infrações triadas | Ampliar o período de consulta |
+| Velocidade diferente do enquadramento | Configuração de enquadramento incorreta | Revisar Configurações de Enquadramento |
 
-| Tipo | Pagina | Descricao |
-|------|--------|-----------|
-| Etapa anterior | [Triagem](./triagem) | Use Validação (com acento) inicial das infracoes |
+## Relacionado
+
+- [Triagem](./triagem)
+- [Exportação](./exportacao)
+- [Consulta de Infrações](./consulta-infracoes)
+- [Processamento por Usuário](../relatorios/processamento-por-usuario)
 | Proxima etapa | [Exportacao](./exportacao) | Gerar lote para envio ao orgao |
 | Consulta | [Consulta de Infracoes](./consulta-infracoes) | Buscar infracoes |
 | Glossario | [Autuacao](../glossario/autuacao) | Ato administrativo de registro |

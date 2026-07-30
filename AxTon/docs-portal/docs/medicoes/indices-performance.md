@@ -64,3 +64,35 @@ Em contratos por desempenho, a disponibilidade abaixo da meta resulta em descont
 | **Tempo de Triagem** | Tempo médio para triar uma Infração | ≤ 20 min |
 | **Produtividade** | Infrações processadas por dia | Conforme contrato |
 | **Qualidade** | Taxa de aceitação dos lotes | ≥ 98% |
+
+## Fluxo de gestão de índices
+
+1. Consultar o contrato para identificar todas as metas de performance exigidas
+2. Acessar **Medições → Índices de Performance** e criar um índice para cada meta contratual
+3. Preencher **Nome**, **Métrica** e a **Meta (%)** exata prevista em contrato
+4. Mensalmente, gerar a medição — o sistema calculará cada índice automaticamente
+5. Revisar o Boletim: índices abaixo da meta indicam não-conformidade e podem gerar glosa
+
+## Tabela de referência — índices comuns
+
+| Índice | Meta típica | Base de cálculo |
+|--------|:-----------:|-----------------|
+| **Disponibilidade** | ≥ 95% | Horas ativas / horas contratuais |
+| **Taxa OCR** | ≥ 90% | Reconhecidas / total de pesagens |
+| **Infrações exportadas** | ≥ 98% | Exportadas / geradas |
+| **Produtividade** | Contratual | Veículos / horas ativas |
+
+## Erros comuns
+
+| Problema | Causa | Solução |
+|----------|-------|---------|
+| Índice não aparece no boletim | Índice não cadastrado | Criar o índice em Medições → Índices de Performance |
+| Meta incorreta no boletim | Aditivo contratual não atualizado | Editar o índice com a nova meta |
+| Disponibilidade calculada errada | Interrupção não registrada | Registrar interrupção retroativamente |
+| Boletim sem índices calculados | Contrato sem índices vinculados | Verificar vinculação dos índices ao contrato |
+
+## Relacionado
+
+- [Contratos](./contratos)
+- [Criar Medição](./criar-medicao)
+- [Interrupções](./interrupcoes)

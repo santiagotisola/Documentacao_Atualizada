@@ -52,20 +52,35 @@ Permite configurar os índices de performance exigidos pelos contratos.
 Os índices configurados aqui são calculados automaticamente ao gerar uma nova medição. Manter as metas atualizadas de acordo com o contrato vigente evita distorções no boletim.
 :::
 
+## Fluxo de gestão de índices
+
+1. Consultar o contrato para identificar todas as metas de performance exigidas
+2. Acessar **Medição → Índices de Performance** e criar um índice para cada meta contratual
+3. Preencher **Nome**, **Métrica** e a **Meta (%)** exata prevista em contrato
+4. Definir **Tolerância (%)** para evitar penalidades em variações pontuais
+5. Mensalmente, gerar a medição — o sistema calculará cada índice automaticamente
+6. Revisar o Boletim: índices abaixo da meta indicam não-conformidade e podem gerar glosa
+
+## Tabela de referência — índices comuns e fórmulas
+
+| Índice | Descrição | Meta típica | Fórmula básica |
+|--------|-----------|:-----------:|----------------|
+| **Disponibilidade** | % do tempo operacional do equipamento | ≥ 95% | (horas ativas / horas contratuais) × 100 |
+| **Aproveitamento OCR** | % de imagens com placa reconhecida | ≥ 90% | (reconhecidas / total) × 100 |
+| **Infrações exportadas** | % de infrações enviadas ao órgão | ≥ 98% | (exportadas / geradas) × 100 |
+| **Tempo de manutenção** | Horas de parada por falha | ≤ 4h/mês | Soma das interrupções corretivas |
+
+## Erros comuns
+
+| Problema | Causa | Solução |
+|----------|-------|----------|
+| Índice não aparece no boletim | Índice não cadastrado | Criar o índice em Medição → Índices de Performance |
+| Meta incorreta no boletim | Aditivo contratual não atualizado | Editar o índice com a nova meta |
+| Disponibilidade calculada errada | Interrupção não registrada | Registrar a interrupção retroativamente em Medição → Interrupções |
+| Boletim sem nenhum índice calculado | Contrato sem índices vinculados | Verificar a vinculação dos índices ao contrato |
+
 ## Relacionado
 
 - [Contratos](./contratos)
 - [Criar Medição](./criar-medicao)
 - [Interrupções](./interrupcoes)
-| **Indicador** | Nome do indicador (ex: Disponibilidade, Uptime) |
-| **Meta (%)** | Percentual mínimo exigido |
-| **Fórmula** | Regra de cálculo do índice |
-
----
-
-## Navegacao Relacionada
-
-| Tipo | Pagina | Descricao |
-|------|--------|-----------|
-| Relacionado | [Contratos](./contratos) | Contrato que define os indices |
-| Relacionado | [Criar Medicao](./criar-medicao) | Usar indices na medicao |

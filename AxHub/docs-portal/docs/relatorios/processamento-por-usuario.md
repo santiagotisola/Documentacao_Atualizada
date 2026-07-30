@@ -74,12 +74,38 @@ Exportável em **Excel** para inclusão em Relatórios de gestão operacional.
 Compare o **Tempo Médio** entre analistas para identificar Usuários que podem precisar de treinamento adicional no fluxo de triagem.
 :::
 
----
+## Fluxo de análise de produtividade
 
-## Navegação Relacionada
+1. Acessar **Relatórios → Processamento por Usuário** após cada turno ou semana
+2. Filtrar por **Usuário** e **Período** de interesse
+3. Comparar **Média/Hora** entre analistas do mesmo turno
+4. Verificar **Taxa de descarte** — valores acima de 15% merecem investigação
+5. Identificar analistas com **Tempo Médio** muito acima da média para treinamento
+6. Exportar em Excel para relatório gerencial mensal
 
-| Tipo | Página | Descrição |
-|------|--------|-----------|
-| Relacionado | [Processamento de Imagens](./processamento-imagens) | Visão agregada por Equipamento |
-| Relacionado | [Usuários](../controle-acesso/usuarios) | Cadastro de Usuários |
-| Relacionado | [Triagem](../infracoes/triagem) | Processo de triagem |
+## Tabela de referência — benchmarks de produtividade
+
+| Métrica | Referência normal | Alerta |
+|---------|:-----------------:|:------:|
+| Imagens/hora | 40 – 80 | < 20 ou > 120 |
+| Taxa de descarte | 5 – 15% | > 20% |
+| Tempo médio/imagem | 30 – 90 seg | > 120 seg |
+
+:::info
+Os benchmarks vão variar conforme o tipo de operação. Use a média histórica da sua equipe como referência primária.
+:::
+
+## Erros comuns
+
+| Problema | Causa | Solução |
+|----------|-------|----------|
+| Usuário com zero registros | Não realizou triagem no período | Verificar log de acesso |
+| Tempo médio muito alto | Treinamento insuficiente ou distrações | Avaliar fluxo de trabalho |
+| Taxa de descarte muito baixa | Possível aprovação sem critério | Revisar amostras auditadas pelo analista |
+| Dado ausente de usuário | Sessão compartilhada | Reforçar política de credenciais individuais |
+
+## Relacionado
+
+- [Triagem](../infracoes/triagem)
+- [Motivos de Descarte](../administracao/motivos-descartes)
+- [Logs de Acesso](../controle-acesso/logs-acesso)

@@ -64,12 +64,34 @@ Exportável em **Excel** com todos os campos ou apenas os selecionados.
 Para localizar passagens de uma placa suspeita, use o filtro **Placa** em combinação com **Período** para histórico completo de passagens daquele Veículo
 :::
 
----
+## Fluxo de consulta de passagens
 
-## Navegação Relacionada
+1. Acessar **Relatórios → Relatório de Passagens**
+2. Definir o **Período** e os filtros necessários (placa, equipamento, faixa)
+3. Clicar em **Buscar** para carregar os registros
+4. Para auditoria por placa: filtrar pela placa e verificar as imagens
+5. Exportar em **Excel** para cruzamento com dados do órgão autuador
 
-| Tipo | Página | Descrição |
-|------|--------|-----------|
-| Relacionado | [Consulta de Placas](../operacoes/consulta-placas) | Busca rápida por placa |
-| Relacionado | [Monitoramento Online](../operacoes/monitoramento-online) | Passagens em tempo real |
-| Relacionado | [Fluxo Diário de Veículos](./fluxo-diario-veiculos) | Resumo diário agregado |
+## Tabela de referência — campos e interpretação
+
+| Campo | Como interpretar |
+|-------|------------------|
+| **Confiança OCR (%)** | Abaixo de 80%: confirmar pela imagem antes de exportar |
+| **Velocidade Medida** | Comparar com o limite da faixa para verificar infração |
+| **Infração** | Se vazio: passagem regular; se preenchido: auto gerado |
+| **Imagem** | Clicar para ampliar e verificar placa e velocidade |
+
+## Erros comuns
+
+| Problema | Causa | Solução |
+|----------|-------|----------|
+| Passagem sem imagem | Falha na captura ou armazenamento | Verificar Relatório de Processamento de Imagens |
+| Placa em branco | OCR com confiança abaixo do limiar | Ajustar configuração de confiança mínima |
+| Velocidade zerada | Sensor de velocidade offline | Verificar equipamento e eventos |
+| Relatório lento com muitos registros | Volume muito alto | Aplicar filtros adicionais ou exportar direto |
+
+## Relacionado
+
+- [Processamento por Usuário](./processamento-por-usuario)
+- [Consulta de Placas](../operacoes/consulta-placas)
+- [Fluxo Diário de Veículos](./fluxo-diario-veiculos)

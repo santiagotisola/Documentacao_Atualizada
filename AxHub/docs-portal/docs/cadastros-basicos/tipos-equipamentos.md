@@ -70,17 +70,35 @@ Para adicionar uma nova forma de atuação, clique em **Nova Forma de Atuação*
 A Configuração das formas de atuação é essencial para que o sistema saiba quais enquadramentos legais (artigos do CTB) podem ser aplicados por cada tipo de Equipamento Sem está Configuração Equipamento não gerará Infrações automaticamente.
 :::
 
-## Termos Tecnicos
+## Fluxo de configuração de tipo de equipamento
 
-| Termo | Definicao |
-|-------|-----------|
-| [Enquadramento](../glossario/enquadramento) | Ver definicao no glossario |
+1. Criar o tipo em **Equipamentos → Tipos de Equipamentos**
+2. Informar o **Nome** e, opcionalmente, enviar um **ícone** representativo
+3. Clicar em **Nova Forma de Atuação** e selecionar os tipos de infração que este equipamento detecta
+4. Clicar em **Salvar**
+5. Ao cadastrar equipamentos, selecionar este tipo para que o sistema saiba quais enquadramentos aplicar
 
----
+## Tabela de referência — tipos padrão e infrações detectadas
 
-## Navegacao Relacionada
+| Tipo | Infrações detectadas | Uso típico |
+|------|---------------------|:-----------:|
+| **RADAR FIXO** | Excesso de velocidade | Via urbana e rodovia |
+| **RADAR MISTO** | Velocidade + avanço de sinal vermelho | Cruzamento |
+| **RADAR PORTÁTIL** | Excesso de velocidade | Operação móvel |
+| **LOMBADA ELETRÔNICA** | Excesso de velocidade | Área escolar/hospitalar |
+| **OCR** | Placa não autorizada / monitoramento | Monitoramento de fluxo |
 
-| Tipo | Pagina | Descricao |
-|------|--------|-----------|
-| Relacionado | [Equipamentos](./equipamentos) | Equipamentos deste tipo |
-| Relacionado | [Modelos](./modelos-equipamentos) | Modelos deste tipo |
+## Erros comuns
+
+| Problema | Causa | Solução |
+|----------|-------|----------|
+| Equipamento não gera infrações | Forma de atuação não configurada | Adicionar formas de atuação no tipo |
+| Tipo não aparece ao cadastrar equipamento | Tipo inativo | Reativar o tipo no cadastro |
+| Ícone não exibido no mapa | Arquivo de imagem inválido | Enviar nova imagem em formato PNG ou SVG |
+| Enquadramento errado gerado | Forma de atuação incorreta | Revisar os tipos de infração vinculados ao tipo |
+
+## Relacionado
+
+- [Equipamentos](./equipamentos)
+- [Modelos de Equipamentos](./modelos-equipamentos)
+- [Enquadramentos](../administracao/enquadramentos)

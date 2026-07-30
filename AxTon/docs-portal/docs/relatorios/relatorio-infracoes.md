@@ -61,21 +61,18 @@ Após exportar o CSV:
 - [Triagem](../glossario/triagem)
 - [Processamento por Usuário](./processamento-por-usuario)
 
-| **Excesso (t)** | Toneladas acima do limite |
-| **Excesso (%)** | Percentual de excesso |
-| **Enquadramento** | Artigo do CTB aplicado |
-| **Status** | Estado atual no fluxo |
-| **Ações** | Visualizar detalhes |
+## Erros comuns
 
-## Exportação
+| Problema | Causa | Solução |
+|----------|-------|----------|
+| Infração não aparece no relatório | Status ou período incorreto no filtro | Ampliar período e limpar filtros |
+| Número de infração em branco | Sequêncial não configurado | Criar sequêncial em Cadastros → Sequênciais de Infração |
+| Excesso zerado | Classificação com PBT incorreto | Revisar PBT da classificação do veículo |
+| CSV exportado vazio | Nenhuma infração com status Auditada | Verificar pipeline de auditoria no período |
 
-- **Excel**: dados tabulados para análise
-- **PDF**: relatório formatado para impressão
+## Relacionado
 
-## Navegação Relacionada
-
-| Tipo | Página | Descrição |
-|------|--------|-----------|
-| Relacionado | [Triagem](../infracoes/triagem) | Validação das infrações |
-| Relacionado | [Lote Exportação](../infracoes/exportacao) | Envio ao órgão |
-
+- [Infração](../glossario/infracao)
+- [Triagem](../glossario/triagem)
+- [Processamento de Imagens](./processamento-imagens)
+- [Exportação de Infrações](../infracoes/exportacao)

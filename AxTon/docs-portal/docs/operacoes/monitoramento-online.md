@@ -66,18 +66,37 @@ O monitoramento online atualiza automaticamente a cada 30 segundos. Não é nece
 | Fila acumulada sem novos tickets | Balança operando sem conexão | Verificar rede local do posto |
 | Dados não atualizam após 30s | Browser sem conexão com servidor | Recarregar a página |
 
+## Fluxo de monitoramento de turno
+
+1. No início do turno, acessar **Operações → Monitoramento Online**
+2. Verificar o **status de todos os postos** — todos devem estar Operacionais (🟢)
+3. Postos em **Offline**: acionar imediatamente a equipe técnica e registrar em **Eventos de Equipamentos**
+4. Acompanhar **Infrações pendentes** — acumulo indica que a triagem precisa de reforço
+5. Ao final do turno: registrar ocorrências e garantir que nenhum posto permaneceu offline sem registro
+
+## Tabela de referência — indicadores de status
+
+| Status | Cor | Significado | Ação imediata |
+|--------|:---:|-------------|:--------------:|
+| **Operacional** | 🟢 Verde | Balança respondendo normalmente | Nenhuma |
+| **Alerta** | 🟡 Amarelo | Fila de triagem acumulada | Reforçar equipe |
+| **Offline** | 🔴 Vermelho | Sem heartbeat do equipamento | Acionar manutenção |
+| **Em manutenção** | 🔵 Azul | Parada programática registrada | Acompanhar retorno |
+
+## Erros comuns
+
+| Problema | Causa provável | Solução |
+|----------|---------------|----------|
+| Posto sempre offline no monitor | IP da balança incorreto no cadastro | Verificar cadastro do equipamento |
+| Fila acumulada sem novos tickets | Balança operando sem conexão | Verificar rede local do posto |
+| Dados não atualizam após 30s | Conexão com servidor interrompida | Recarregar a página |
+| Posto aparece sem pesagens | Operação não ativa no posto | Criar operação em Operações → + Novo |
+
 ## Relacionado
 
 - [Alertas](./alertas)
 - [Consulta de Placas](./consulta-placas)
 - [Fluxo Diário de Veículos](../relatorios/fluxo-diario-veiculos)
-
-- **Alerta de falha**: identificar balança offline imediatamente
-- **Produção**: acompanhar volume de pesagens por turno
-
-:::tip Dica
-Manter o Monitoramento Online aberto durante o turno permite agir rapidamente em caso de falha de equipamento.
-:::
 
 
 ## Elementos da tela

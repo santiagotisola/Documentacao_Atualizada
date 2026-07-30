@@ -63,31 +63,17 @@ Eventos de falha registrados aqui são considerados no cálculo da disponibilida
 :::
 
 
-## Listagem
+## Erros comuns
 
-### Colunas
+| Problema | Causa | Solução |
+|----------|-------|---------|
+| Evento não impacta disponibilidade | Tipo não mapeado como falha | Revisar tipo do evento (usar "Falha") |
+| Duração zerada | Data fim não registrada | Editar o evento e adicionar data fim |
+| Evento não aparece nos relatórios | Período de filtro incorreto | Ampliar período e verificar equipamento |
+| Alerta sem evento vinculado | Falha automática não registrada | Registrar retroativamente com justificativa |
 
-| Coluna | Descrição |
-|--------|-----------|
-| **Data/Hora** | Momento do evento |
-| Equipamento | Equipamento que gerou o evento |
-| **Tipo** | Categoria do evento |
-| **Descrição** | Detalhes do evento |
-| **Severidade** | Info, Aviso, Erro, Crítico |
+## Relacionado
 
-### Filtros disponíveis
-
-- Período (data inicial e final)
-- Equipamento específico
-- Tipo de evento
-- Severidade
-
-### Tipos de evento comuns
-
-| Tipo | Descrição |
-|------|-----------|
-| **Inicialização** | Equipamento ligado/reiniciado |
-| **Falha de comunicação** | Perda de conexão |
-| **Manutenção** | Intervenção técnica registrada |
-| **Calibração** | Aferição realizada |
-| **Alerta de peso** | Threshold de peso atingido |
+- [Alertas](./alertas)
+- [Monitoramento Online](./monitoramento-online)
+- [Medições → Interrupções](../medicoes/interrupcoes)

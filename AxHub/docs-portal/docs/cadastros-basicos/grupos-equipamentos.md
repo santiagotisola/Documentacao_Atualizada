@@ -68,8 +68,37 @@ Escolha cores distintas para cada grupo, facilitando a identificação visual do
 
 ---
 
-## Navegacao Relacionada
+## Fluxo de configuração de grupo
 
-| Tipo | Pagina | Descricao |
-|------|--------|-----------|
-| Relacionado | [Equipamentos](./equipamentos) | Equipamentos do grupo |
+1. Criar o grupo em **Equipamentos → Grupos de Equipamentos**
+2. Definir o **Nome**, a **Cor** e as opções de monitoramento
+3. Clicar em **Salvar**
+4. Acessar cada **Equipamento** e vincular ao grupo no campo "Grupo de Equipamentos"
+5. Verificar no **Mapa do Dashboard** se os equipamentos aparecem com a cor correta
+
+## Tabela de referência — opções do grupo
+
+| Opção | Quando ativar | Impacto |
+|-------|:-------------:|----------|
+| **Desabilitar Monitoramento** | Grupo em teste ou manutenção | Equipamentos não aparecem no painel de status em tempo real |
+| **Desabilitar Limite Horas Importação** | Volume de importação muito alto | Remove o filtro de horas para importação de dados |
+| **Cor** | Sempre | Identificação visual no mapa do Dashboard |
+
+## Boas práticas
+
+- Escolha cores distintas para cada grupo — facilita a identificação no mapa quando há muitos grupos simultâneos
+- Use o campo **Nome** com o mesmo critério do contrato (ex.: Contrato SINFRA 2026) para facilitar a filtragem em relatórios
+- Ao desativar um equipamento, revise se ele precisa ser removido do grupo para não distorcer os indicadores
+
+## Erros comuns
+
+| Problema | Causa | Solução |
+|----------|-------|----------|
+| Equipamento não aparece no grupo | Não vinculado no cadastro do equipamento | Editar equipamento e selecionar o grupo correto |
+| Cor não exibida no mapa | Nenhuma cor selecionada | Editar grupo e definir uma cor |
+| Equipamentos do grupo não monitorados | Opção "Desabilitar Monitoramento" ativa | Desmarcar a opção no cadastro do grupo |
+
+## Relacionado
+
+- [Equipamentos](./equipamentos)
+- [Dashboard](../primeiros-passos/dashboard)

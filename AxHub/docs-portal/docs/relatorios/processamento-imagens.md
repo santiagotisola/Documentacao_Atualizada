@@ -62,10 +62,35 @@ O Relatório pode ser exportado em **Excel** ou **PDF** para Análise externa e 
 Use este Relatório para identificar Equipamentos com baixo aproveitamento de imagens — pode indicar problemas de iluminação, posicionamento ou falha técnica.
 :::
 
-## Navegação relacionada
+## Fluxo de monitoramento de qualidade
 
-| Tipo | Página | Descrição |
-|------|--------|-----------|
-| Relacionado | [Processamento por Usuário](./processamento-por-usuario) | Produtividade por analista |
-| Relacionado | [Eventos dos Equipamentos](./eventos-equipamentos) | Histórico de eventos |
-| Relacionado | [Monitoramento Online](../operacoes/monitoramento-online) | Status em tempo real |
+1. Acessar **Relatórios → Processamento de Imagens** semanalmente
+2. Filtrar por **período** e agrupar por **Equipamento**
+3. Identificar equipamentos com **Aproveitamento < 85%**
+4. Comparar com semanas anteriores para identificar tendência de queda
+5. Taxa em queda: programar manutenção preventiva (limpeza, calibração)
+6. Exportar em **Excel** para embasar chamado técnico com evidências
+
+## Tabela de referência — faixas de aproveitamento
+
+| Aproveitamento | Status | Ação recomendada |
+|:--------------:|:------:|------------------|
+| ≥ 95% | ✅ Excelente | Nenhuma |
+| 85 – 94% | ⚠️ Aceitável | Monitorar |
+| 70 – 84% | 🟠 Atenção | Verificar limpeza e posição |
+| < 70% | 🔴 Crítico | Solicitar manutenção urgente |
+
+## Erros comuns
+
+| Problema | Causa | Solução |
+|----------|-------|----------|
+| Relatório mostra zero registros | Nenhuma operação no período | Verificar operações ativas |
+| Aproveitamento 100% inesperado | Filtro muito restrito | Ampliar o período ou remover filtros |
+| Equipamento sem dados | Offline ou sem operação | Verificar status no Monitoramento Online |
+| Aproveitamento oscila muito | Condições climáticas ou iluminação | Avaliar período extendido de 30 dias |
+
+## Relacionado
+
+- [Processamento por Usuário](./processamento-por-usuario)
+- [Eventos de Equipamentos](./eventos-equipamentos)
+- [Afer ições](../operacoes/afericoes)

@@ -73,32 +73,16 @@ Pode indicar. Confirme com o [Processamento de Imagens](./processamento-imagens)
 - [Relatório de Infrações](./relatorio-infracoes)
 - [Processamento de Imagens](./processamento-imagens)
 
-| **Tabela detalhada** | Passagens por hora com categoria e peso médio |
+## Erros comuns
 
-## Casos de uso
+| Problema | Causa | Solução |
+|----------|-------|---------|
+| Relatório vazio para um posto | Sem pesagens no dia ou posto inativo | Verificar status do posto em Operações |
+| Volume muito baixo inesperado | Equipamento offline durante o dia | Verificar Eventos de Equipamentos |
+| Gráfico sem dados de pico | Período selecionado sem operação | Confirmar operação ativa no dia consultado |
 
-- **Dimensionamento de equipe:** Identificar horários de maior movimento para alocar mais fiscais
-- **Análise de padrões:** Detectar mudanças de rota após fiscalizações
-- **Planejamento operacional:** Definir horários de operações especiais
+## Relacionado
 
-## Exportação
-
-Clique em **Excel** para exportar os dados do fluxo diário para análise própria.
-
-
-## Dados do Relatório
-
-### Colunas
-
-| Coluna | Descrição |
-|--------|-----------|
-| **Hora** | Faixa horária |
-| **Total** | Quantidade de Veículos |
-| **Média** | Média do período |
-| **Pico** | Horário com maior volume |
-
-### Filtros disponíveis
-
-- Período (data inicial e final)
-- Posto de pesagem
-- Exportar para Excel/PDF
+- [Relatório de Infrações](./relatorio-infracoes)
+- [Processamento de Imagens](./processamento-imagens)
+- [Monitoramento Online](../operacoes/monitoramento-online)

@@ -67,18 +67,25 @@ Discrepancias entre peso declarado e aferido superior a 10% devem ser reportadas
 Disponível em **Excel** e **PDF**.
 
 
-### Colunas
+## Erros comuns
 
-| Coluna | Descrição |
-|--------|-----------|
-| **Ticket** | Número do ticket |
-| **Placa** | Veículo |
-| **Peso Esperado** | Valor de referência |
-| **Peso Real** | Peso registrado |
-| **Diferença** | Valor divergente |
+| Problema | Causa | Solução |
+|----------|-------|----------|
+| Relatório vazio | Nenhuma divergência no período | Ampliar o período ou remover filtros |
+| Peso esperado zerado | NF-e sem peso declarado | Verificar manifesto (MDF-e) no período |
+| Classificação sempre errada | OCR com confiança baixa | Calibrar câmera ou ajustar configuração OCR |
+| Discrepancia não aparece na exportação | Tipo não mapeado no layout | Revisar Configurações → Sistema |
 
-### Filtros disponíveis
+## Tabela de referência — limites de tolerância
 
-- Período (data inicial e final)
-- Posto de pesagem
-- Exportar para Excel/PDF
+| Tipo | Tolerância legal | Obrigação de report |
+|------|:---------------:|:-------------------:|
+| **Peso aferido vs. declarado** | 5% | Ac ima de 10%: reportar à SEFAZ |
+| **Classificação incorreta** | 0% | Qualquer ocorrência |
+| **MDF-e inconsistente** | 0% | Qualquer ocorrência |
+
+## Relacionado
+
+- [NF-e](../glossario/nfe)
+- [MDF-e](../glossario/mdfe)
+- [Relatório de Notas Fiscais](./relatorio-nfe)

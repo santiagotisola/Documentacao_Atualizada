@@ -73,37 +73,16 @@ Use este relatório para avaliar a produtividade de operadores e identificar pos
 - [Logs de Acesso](../controle-acesso/logs-acesso)
 
 
+## Erros comuns
+
+| Problema | Causa | Solução |
+|----------|-------|---------|
+| Usuário sem registros | Não realizou triagem no período | Verificar log de acesso do usuário |
+| Taxa de descarte muito alta | Treinamento insuficiente | Revisar sessões de capacitação |
+| Produtividade zerada | Sem operação no posto no período | Verificar operações vinculadas ao posto |
+
 ## Relacionado
 
-- [Logs de Acesso](../controle-acesso/logs-acesso)
 - [Triagem](../glossario/triagem)
-
-| **Média/Hora** | Produtividade por hora |
-| **Tempo Médio** | Segundos por análise |
-
-## Uso gerencial
-
-- Monitorar equipe de triagem em tempo real
-- Identificar operadores com baixa produtividade
-- Distribuir carga de trabalho equilibradamente
-
-## Exportação
-
-Disponível em **Excel** e **PDF**.
-
-
-### Colunas
-
-| Coluna | Descrição |
-|--------|-----------|
-| Usuário | Nome do operador |
-| **Processadas** | Infrações triadas |
-| **Aprovadas** | Quantidade aprovada |
-| **Descartadas** | Quantidade descartada |
-| **Tempo Médio** | Minutos por Infração |
-
-### Filtros disponíveis
-
-- Período (data inicial e final)
-- Posto de pesagem
-- Exportar para Excel/PDF
+- [Motivos de Descarte](../pesagem/motivos)
+- [Logs de Acesso](../controle-acesso/logs-acesso)

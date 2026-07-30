@@ -54,12 +54,33 @@ Uma **falha sequencial** ocorre quando o mesmo Equipamento apresenta o mesmo tip
 
 Exportável em **Excel** para uso em Relatórios técnicos e comprovantes de manutenção.
 
----
+## Fluxo de verificação pré-exportação
 
-## Navegação Relacionada
+1. Acessar **Relatórios → Falhas Sequenciais** antes de cada geração de lote
+2. Definir o **Período** do lote a ser exportado
+3. Clicar em **Verificar** e aguardar o processamento
+4. Se há falhas: identificar a causa (descarte não documentado, falha técnica)
+5. Corrigir as falhas antes de prosseguir com a exportação
+6. Reexecutar a verificação após as correções para confirmar integridade
 
-| Tipo | Página | Descrição |
-|------|--------|-----------|
-| Relacionado | [Sequenciais de Infrações](../administracao/sequenciais-infracoes) | Configuração do threshold |
-| Relacionado | [Eventos dos Equipamentos](./eventos-equipamentos) | Histórico completo de eventos |
-| Relacionado | [Interrupções](../medicoes/interrupcoes) | Impacto na medição contratual |
+## Tabela de referência — tipos de falha e ações
+
+| Tipo de Falha | Causa comum | Ação |
+|---------------|-------------|------|
+| **Lac una na sequência** | Infração descartada sem motivo | Verificar motivos de descarte no período |
+| **Número duplicado** | Reenvio duplicado de lote | Auditar os registros com o mesmo número |
+| **Salto inesperado** | Falha de comunicação do equipamento | Verificar eventos de equipamentos no período |
+
+## Erros comuns
+
+| Problema | Causa | Solução |
+|----------|-------|----------|
+| Relatório não encontra falhas | Sequênciais sem configuração | Configurar em Configurações → Sequênciais |
+| Lac unas persistentes após correção | Causa raiz não resolvida | Investigar a origem das infrações no período |
+| Lote rejeitado após exportação | Falha não corrigida | Não exportar sem verificar este relatório antes |
+
+## Relacionado
+
+- [Sequênciais de Infrações](../administracao/sequenciais-infracoes)
+- [Eventos dos Equipamentos](./eventos-equipamentos)
+- [Interrupções](../medicoes/interrupcoes)

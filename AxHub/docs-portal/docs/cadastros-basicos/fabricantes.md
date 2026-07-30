@@ -78,9 +78,35 @@ O token é utilizado pelo fabricante para autenticar as chamadas de API ao AxHub
 
 ---
 
-## Navegacao Relacionada
+## Fluxo de integração de fabricante
 
-| Tipo | Pagina | Descricao |
-|------|--------|-----------|
-| Relacionado | [Equipamentos](./equipamentos) | Equipamentos do fabricante |
-| Relacionado | [Modelos](./modelos-equipamentos) | Modelos do fabricante |
+1. Cadastrar o fabricante com **Nome** e **Slug** únicos em **Equipamentos → Fabricantes**
+2. Clicar em **Gerar Novo Token** para criar o token de API
+3. Comunicar o **Token** ao fabricante por canal seguro (nunca por e-mail simples)
+4. Fabricante configura o token no sistema de captura de imagens
+5. Verificar em **Operações → Monitoramento Online** se o equipamento começa a enviar dados
+6. Em caso de troca de token: regenerar, comunicar ao fabricante e confirmar retomada do envio
+
+## Tabela de referência — campos críticos
+
+| Campo | Impacto se incorreto | Exemplo correto |
+|-------|---------------------|:---------------:|
+| **Slug** | Equipamentos não autenticam | `axion`, `velsis` |
+| **Token** | API rejeitada com erro 401 | Gerado automaticamente |
+| **Imagem Criptografada** | Imagens não decodificadas | Conforme documentação do fabricante |
+| **Agrupador Sequencial** | Sequencial errado no lote | Código fornecido pelo órgão |
+
+## Erros comuns
+
+| Problema | Causa | Solução |
+|----------|-------|----------|
+| Equipamento não envia dados | Token inválido ou não configurado | Regenerar token e comunicar ao fabricante |
+| Imagens corrompidas | Flag "Imagem Criptografada" incorreta | Verificar documentação do fabricante |
+| Slug duplicado | Outro fabricante usa o mesmo identificador | Alterar para um slug único |
+| Token regenerado sem avisar | Troca não comunicada ao fabricante | Comunicar novo token imediatamente |
+
+## Relacionado
+
+- [Equipamentos](./equipamentos)
+- [Modelos de Equipamentos](./modelos-equipamentos)
+- [Tipos de Equipamentos](./tipos-equipamentos)

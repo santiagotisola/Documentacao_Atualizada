@@ -82,12 +82,35 @@ Lotes com status **Parcial** importaram apenas parte dos registros. Verifique os
 - Exporte o log de erros para análise técnica ou encaminhamento ao suporte
 - Monitore diariamente o volume importado para detectar falhas silenciosas (lotes com zero registros)
 
----
+## Fluxo de acompanhamento de importação
 
-## Navegação Relacionada
+1. Acessar **Relatórios → Lotes de Importação** no início do turno
+2. Verificar lotes com **Status = Erro** ou **Parcial** do dia anterior
+3. Para cada lote com falha: clicar em **Visualizar detalhes** e identificar os registros com erro
+4. Corrigir a causa da falha (configuração do equipamento, layout de arquivo, conectividade)
+5. Clicar em **Reimportar** para tentar novamente
+6. Confirmar que o status mudou para **Sucesso** antes de fechar
 
-| Tipo | Página | Descrição |
-|------|--------|-----------|
-| Relacionado | [Equipamentos](../cadastros-basicos/equipamentos) | Origem dos dados |
-| Relacionado | [Lote de Exportação](../glossario/lote-exportacao) | Glossário |
-| Relacionado | [Logs de Envios](./relatorio-logs-envios) | Envios para integração |
+## Tabela de referência — status de lotes
+
+| Status | Significado | Impacto | Ação |
+|--------|-------------|:-------:|------|
+| **Sucesso** | Todos os registros importados | Nenhum | Nenhuma |
+| **Parcial** | Parte dos registros com falha | Passagens perdidas | Verificar erros e reimportar |
+| **Erro** | Falha total na importação | Dados não disponíveis | Contatar suporte técnico |
+| **Processando** | Import em andamento | Aguardar | Aguardar e verificar novamente |
+
+## Erros comuns
+
+| Problema | Causa | Solução |
+|----------|-------|----------|
+| Lote com zero registros | Equipamento não enviou dados | Verificar conectividade do equipamento |
+| Status Parcial persistente | Layout de arquivo incorreto | Conferir configuração em Administração → Layouts |
+| Reimportar não resolve | Causa raiz não corrigida | Investigar o log detalhado antes de reimportar |
+| Lote duplicado | Importação dupla do mesmo arquivo | Verificar no histórico antes de reimportar |
+
+## Relacionado
+
+- [Logs de Envios](./relatorio-logs-envios)
+- [Relatório de Passagens](./relatorio-passagens)
+- [Falhas Sequenciais](./falhas-sequenciais)
