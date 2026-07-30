@@ -50,6 +50,15 @@ Configure notificações automáticas por e-mail para alertas críticos (excesso
 | Equipamento offline | Até 4 horas |
 | Anomalia de peso | Até 24 horas |
 
+## Quando usar
+
+| Tipo de alerta | Ação recomendada |
+|----------------|-------------------|
+| **Excesso de peso** | Reter o veículo e iniciar processo de autuação imediatamente |
+| **Equipamento offline** | Acionar equipe técnica; sem dados até restaurar a conexão |
+| **MDF-e / NF-e irregular** | Notificar o motorista e registrar ocorrência no ticket |
+| **Reincidência** | Verificar histórico de passagens e escalar para supervisor |
+
 ## Relacionado
 
 - [Consulta de Placas](./consulta-placas)

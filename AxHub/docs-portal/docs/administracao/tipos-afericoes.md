@@ -32,6 +32,13 @@ Define as **categorias de aferição metrológica** realizadas nos equipamentos 
 Equipamentos com aferição vencida não podem gerar infrações válidas legalmente. O sistema exibe alerta quando a data de vencimento se aproxima.
 :::
 
+## Boas práticas
+
+- Configure corretamente a **Validade (meses)** de cada tipo — o sistema usa esse prazo para alertar sobre vencimentos
+- Alinhe os tipos padrão (Inicial, Periódica, Pós-Manutenção) com as exigências da Portaria INMETRO vigente
+- Não exclua tipos já usados em aferições históricas — inative-os para preservar os registros
+- O tipo **Aferição Extraordinária** deve ser usado apenas após manutenções com troca de componentes metrológicos
+
 ## Relacionado
 
 - [Aferições](../operacoes/afericoes)

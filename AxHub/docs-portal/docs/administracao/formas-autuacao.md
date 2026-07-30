@@ -39,6 +39,13 @@ Define **como a autuação é lavrada** no sistema. A forma correta garante comp
 As formas de autuação são configuradas conforme exigência do órgão autuador. Usar o código correto garante que o lote exportado seja aceito.
 :::
 
+## Boas práticas
+
+- Confirme com o órgão autuador quais códigos são aceitos no sistema de destino antes de configurar
+- Nunca altere o código de uma forma de autuação já em uso — pode invalidar infrações exportadas
+- Cadastre apenas as formas exigidas pelo contrato vigente para reduzir o risco de seleção incorreta
+- Em caso de dúvida, consulte o layout de exportação fornecido pelo órgão autuador
+
 ## Relacionado
 
 - [Enquadramentos](./enquadramentos)

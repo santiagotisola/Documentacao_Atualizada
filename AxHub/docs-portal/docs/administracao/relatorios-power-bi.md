@@ -43,6 +43,13 @@ Permite configurar e acessar Relatórios do Power BI integrados ao AxHub.
 A URL de incorporação deve ser gerada no portal Power BI com modo de acesso público ou com token de serviço configurado.
 :::
 
+## Casos de uso
+
+- **Apresentação gerencial** — exiba KPIs consolidados ao contratante em reuniões de prestação de contas
+- **Monitoramento de tendências** — acompanhe a evolução mensal de OCR e disponibilidade para antecipar problemas
+- **Gestão de equipe** — analise a produtividade por usuário de triagem para embasar feedbacks e capacitações
+- **Planejamento de manutenção** — use a série histórica do OCR para programar intervenções antes do vencimento do contrato
+
 ## Relacionado
 
 - [Relatórios Power BI (AxHub)](./relatorios-power-bi)

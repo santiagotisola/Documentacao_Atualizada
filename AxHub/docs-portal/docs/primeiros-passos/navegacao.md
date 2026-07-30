@@ -36,6 +36,13 @@ Guia de orientação sobre a **estrutura de menus e navegação geral** do siste
 
 O mapa online exibe em tempo real os equipamentos ativos e seus status operacionais, permitindo monitoramento geográfico da operação.
 
+## Boas práticas
+
+- Use o **breadcrumb** no topo da tela para entender em qual módulo você está e navegar de volta sem perder contexto
+- Acesse os atalhos no Dashboard para funcionalidades mais usadas sem navegar pelo menu lateral
+- Módulos ausentes no menu indicam permissões não concedidas ao perfil — solicite ao administrador se necessário
+- Em dispositivos com tela menor, recolha o menu lateral para maximizar a área de trabalho
+
 ## Relacionado
 
 - [Login](./login)

@@ -53,6 +53,13 @@ A retenção do veículo é obrigatória quando o excesso impede continúar a vi
 | Até 10% | Infração gravíssima + retenção |
 | Acima de 10% | Infração gravíssima + recolhimento ao pátio |
 
+## Base legal
+
+- **Resolução CONTRAN nº 803/2021** — tabela de classificação de veículos e limites de PBT por número de eixos
+- **Art. 99 do CTB (Lei nº 9.503/1997)** — responsabilidade do condutor e transportador pelo excesso de peso
+- **Portaria DENATRAN nº 63/2009** — tolerâncias de pesagem e procedimentos de fiscalização em via
+- **Resolução CONTRAN nº 425/2013** — limites máximos de peso e dimensões para veículos de carga
+
 ## Relacionado
 
 - [Classificações de Veículos](../veiculos/classificacoes-veiculos)

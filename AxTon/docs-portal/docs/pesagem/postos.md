@@ -41,6 +41,13 @@ A tela exibe todos os postos cadastrados no sistema.
 Após criar o posto, cadastre os **Equipamentos** vinculados em Cadastros Básicos → Equipamentos.
 :::
 
+## Boas práticas
+
+- Cadastre o posto com o nome oficial do contrato para facilitar a filtragem nos relatórios e medições
+- Vincule os equipamentos ao posto imediatamente após o cadastro para que pesagens sejam associadas corretamente
+- Mantenha o posto com **Status Ativo** apenas enquanto estiver em operação; postos inativos devem ser inativados para não inflar os cálculos de disponibilidade
+- Use a vinculação com **Grupos de Equipamentos** para facilitar a geração de medições contratuais por localidade
+
 ## Relacionado
 
 - [Equipamentos](../cadastros-basicos/equipamentos)

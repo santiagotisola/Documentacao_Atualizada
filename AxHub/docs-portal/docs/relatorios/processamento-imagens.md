@@ -37,6 +37,13 @@ Apresenta o volume total de imagens processadas no sistema em um determinado per
 Use este relatório para identificar equipamentos com baixo aproveitamento de imagens. Aproveitamento abaixo de 85% pode indicar necessidade de calibração ou limpeza.
 :::
 
+## Casos de uso
+
+- **Manutenção preventiva** — identifique equipamentos com aproveitamento abaixo de 85% para programar limpeza ou calibração
+- **Avaliação de ajustes técnicos** — compare o aproveitamento antes e depois de intervenções para medir o impacto
+- **Relatórios de manutenção** — exporte os dados para embasar chamados técnicos e contratos de manutenção
+- **Detecção de falhas sistêmicas** — múltiplos equipamentos com queda simultânea indicam problema de rede ou servidor
+
 ## Relacionado
 
 - [Processamento por Usuário](./processamento-por-usuario)

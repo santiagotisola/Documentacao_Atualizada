@@ -48,6 +48,13 @@ Interrupções não registradas **não são consideradas** no cálculo de dispon
 | Manutenção preventiva | Antes de iniciar |
 | Evento externo | Até 24h |
 
+## Impacto contratual
+
+- Interrupções não registradas antes da geração da medição **não são computadas** no desconto de disponibilidade
+- Cada hora não registrada infla artificialmente o índice de disponibilidade, podendo mascarar inadimplemento contratual
+- Registre dentro do prazo máximo definido — interrupções fora do prazo podem ser contestadas pelo contratante
+- Use o Relatório de Eventos de Equipamentos para cruzar registros de falha com as interrupções cadastradas
+
 ## Relacionado
 
 - [Criar Medição](./criar-medicao)

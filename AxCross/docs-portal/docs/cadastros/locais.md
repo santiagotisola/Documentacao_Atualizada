@@ -39,6 +39,13 @@ No **menu lateral**, expanda **Cadastros** e clique em **Locais**.
 Sempre informe latitude e longitude para que o cruzamento apareça corretamente no **Mapa de Equipamentos** do Dashboard.
 :::
 
+## Boas práticas
+
+- Informe sempre **latitude e longitude** para que o cruzamento apareça corretamente no Mapa de Equipamentos do Dashboard
+- Use o nome oficial do cruzamento (ex.: Av. Brasil c/ Rua XV) para facilitar a busca em relatórios e alertas
+- Vincule os equipamentos ao local imediatamente após o cadastro — locais sem equipamento não capturam passagens
+- Mantenha locais inativos como **Inativos** em vez de excluir para preservar o histórico de passagens associadas
+
 ## Relacionado
 
 - [Faixas](./faixas)

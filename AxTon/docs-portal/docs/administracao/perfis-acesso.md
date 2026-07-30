@@ -51,6 +51,13 @@ O módulo de perfis de acesso define os conjuntos de permissões que serão atri
 Crie perfis com o mínimo de permissões necessárias (princípio do mínimo privilégio). Revise e ajuste periodicamente com base nas funções reais de cada grupo.
 :::
 
+## Segurança
+
+- Nunca crie um único perfil para funções muito diferentes — separe Operador, Auditor e Administrador em perfis distintos
+- Revise os perfis a cada alteração de escopo ou troca de colaboradores para evitar permissões obsoletas
+- Use os **Logs de Acesso** periodicamente para verificar se usuários estão acessando apenas as áreas esperadas
+- Desative perfis que não estão mais em uso em vez de excluí-los para preservar o histórico de atribuições
+
 ## Relacionado
 
 - [Usuários](./usuarios)

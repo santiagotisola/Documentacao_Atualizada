@@ -43,6 +43,13 @@ O Dashboard exibe o **Top Motivos de Descarte**. Use essa informação para iden
 | Enquadramento incorreto | Velocidade mal configurada | Revisar faixas |
 | Veículo isento | Regra de exceção ausente | Criar exceção |
 
+## Boas práticas
+
+- Crie motivos claros e específicos para cada tipo de descarte — termos genéricos dificultam a análise de causa-raiz
+- Revise os motivos mais usados periodicamente; alta frequência de "Imagem ilegível" indica problema técnico no equipamento
+- Documente o embasamento de cada motivo para facilitar auditorias e contestações do órgão autuador
+- Não exclua motivos com histórico de uso — inative-os para preservar a rastreabilidade das infrações descartadas
+
 ## Relacionado
 
 - [Exceções](../infracoes/excecoes)

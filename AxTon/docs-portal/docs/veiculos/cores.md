@@ -51,6 +51,13 @@ As cores são extraídas automaticamente do RENAVAM quando o sistema consulta a 
 | 14 | Verde |
 | 15 | Vermelha |
 
+## Boas práticas
+
+- Mantenha as 15 cores padrão DENATRAN cadastradas — lacunas resultam em campo vazio nos autos de infração exportados
+- Use a grafia oficial da tabela DENATRAN (ex.: Branca, Preta, Prata) para garantir compatibilidade com os arquivos de exportação
+- Não exclua cores vinculadas a pesagens ou infrações existentes — inative-as para preservar o histórico
+- A cor é extraída automaticamente do RENAVAM na consulta de placa; mantenha a tabela atualizada para evitar dados em branco
+
 ## Relacionado
 
 - [Marcas de Veículos](./marcas-veiculos)

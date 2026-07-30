@@ -44,6 +44,13 @@ Criada → Em elaboração → Finalizada
                          Reaberta → Revisada → Finalizada novamente
 ```
 
+## Impacto contratual
+
+- Uma medição finalizada representa o SLA entregue ao contratante no período — erros devem ser corrigidos no mês seguinte
+- O boletim gerado é o documento oficial de comprovação do cumprimento das metas de disponibilidade e OCR
+- Medições reabertas devem ser justificadas; a nova versão finalizada exige aprovação do gestor responsável
+- Mantenha o histórico de medições finalizadas para auditoria e prestação de contas ao contratante
+
 ## Relacionado
 
 - [Criar Medição](./criar-medicao)

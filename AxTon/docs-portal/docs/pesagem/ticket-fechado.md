@@ -47,6 +47,15 @@ Use o filtro **Infrator** para revisar tickets com infração gerada e verificar
 | **Posto** | Filtrar por localidade |
 | **Resultado** | Regular ou Infrator |
 
+## Quando usar
+
+| Situação | Quando consultar |
+|-----------|------------------|
+| **Auditoria de infrator** | Verificar se pesagem de um veículo gerou infração e se foi encerrada corretamente |
+| **Comprovante de regularidade** | Pesquisa de veículos que passaram sem infração para registro operacional |
+| **Relatório gerencial** | Exporte os dados fechados para compor boletim diário ou mensal de produção |
+| **Conciliação contratual** | Validar volume de pesagens do posto no período de medição |
+
 ## Relacionado
 
 - [Tickets Abertos](./ticket-aberto)

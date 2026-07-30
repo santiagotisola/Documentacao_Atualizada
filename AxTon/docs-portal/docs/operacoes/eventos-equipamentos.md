@@ -43,6 +43,15 @@ Registro automático dos **eventos operacionais** dos equipamentos de pesagem: i
 Eventos registrados aqui alimentam o **Relatório de Eventos** e o cálculo de disponibilidade na medição contratual. Registre sempre com precisão de horário.
 :::
 
+## Quando usar
+
+| Tipo de evento | Quando registrar |
+|----------------|------------------|
+| **Falha do equipamento** | Imediatamente ao detectar o problema; define o início da interrupção |
+| **Reinicio/reativação** | Assim que o equipamento retornar à operação normal |
+| **Manutenção preventiva** | Antes do início e após conclusão para calcular o tempo de parada |
+| **Calibração / Aferição** | Registre data e hora exatas — impacta o cálculo de disponibilidade contratual |
+
 ## Relacionado
 
 - [Alertas](./alertas)

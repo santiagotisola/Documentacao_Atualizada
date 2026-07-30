@@ -33,6 +33,13 @@ Cadastro dos **modelos de equipamentos** por fabricante. Cada modelo define as c
 Fabricante → Modelo → Equipamento. Antes de cadastrar um modelo, o Fabricante deve estar registrado em **Fabricantes de Equipamentos**.
 :::
 
+## Boas práticas
+
+- Antes de cadastrar um novo modelo, pesquise se já existe para o mesmo fabricante — duplicidades prejudicam a rastreabilidade
+- Informe o **Tipo de Equipamento** corretamente; um modelo mal classificado impede a configuração de parâmetros de pesagem
+- Não renomeie modelos já associados a equipamentos em operação — pode causar inconsistência nos registros históricos
+- Mantenha modelos descontinuados como **Inativos** para preservar o histórico sem prejudicar novos cadastros
+
 ## Relacionado
 
 - [Fabricantes](./fabricantes)

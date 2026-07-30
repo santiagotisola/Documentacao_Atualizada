@@ -38,6 +38,13 @@ Permite cadastrar e gerenciar os arcos de fiscalização vinculados às operaç�
 Um arco agrupa equipamentos instalados na mesma travessia (ex: radares das faixas 1, 2 e 3 de uma mesma pista), facilitando o gerenciamento e exportação conjunta.
 :::
 
+## Boas práticas
+
+- Agrupe no mesmo arco todos os equipamentos instalados na mesma estrutura física (ex.: câmeras das faixas 1, 2 e 3 de uma mesma pista)
+- Use nomenclatura padronizada (ex.: ARQ-001-ROD-SP330) para facilitar a identificação nos relatórios e lotes
+- Vincule os equipamentos corretos — um equipamento em arco errado gera inconsistência nos lotes de exportação
+- Mantenha arcos desativados como **Inativos** para preservar o histórico de infrações associadas
+
 ## Relacionado
 
 - [Eventos de Equipamentos](../relatorios/eventos-equipamentos)

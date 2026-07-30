@@ -38,6 +38,13 @@ Cadastro dos **pontos físicos de fiscalização de peso veicular**. Cada posto 
 Após criar o posto, vincule os **Equipamentos** a ele em **Configurações → Equipamentos**.
 :::
 
+## Boas práticas
+
+- Cadastre o posto com o nome oficial usado no contrato para facilitar a filtragem em relatórios e medições
+- Vincule os equipamentos imediatamente após o cadastro para que pesagens sejam associadas corretamente
+- Mantenha o status **Ativo** apenas enquanto o posto estiver operacional; postos inativos distorcem o índice de disponibilidade
+- Confirme a vinculação ao grupo de equipamentos correto para garantir segmentação por contrato nos relatórios
+
 ## Relacionado
 
 - [Equipamentos](../administracao/equipamentos)

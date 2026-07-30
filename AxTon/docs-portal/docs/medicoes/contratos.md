@@ -52,6 +52,13 @@ Registro dos contratos de prestação de serviço de pesagem, vinculando postos,
 Contrato com metas bem configuradas garante que o sistema calcule automaticamente os índices ao gerar medições mensais.
 :::
 
+## Impacto contratual
+
+- A **disponibilidade** é calculada automaticamente com base no tempo ativo dos equipamentos vinculados ao contrato
+- A **meta de OCR** define o nível mínimo de aproveitamento de imagens exigido pelo contratante
+- Postos ou equipamentos mal vinculados distorcem os índices calculados e podem causar disputãs contratuais
+- A vigência correta é fundamental: períodos incorretos geram medições fora do prazo do contrato
+
 ## Relacionado
 
 - [Grupos de Equipamentos](./grupos-equipamentos)

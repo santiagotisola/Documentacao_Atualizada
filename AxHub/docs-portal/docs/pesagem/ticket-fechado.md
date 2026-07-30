@@ -35,6 +35,15 @@ Clique em **Exportar** para gerar CSV com os tickets do período. Útil para:
 Combine filtros **Infrator** + **Período** + **Posto** para gerar relatório focado por localidade e período de pico.
 :::
 
+## Quando usar
+
+| Situação | Quando consultar |
+|----------|------------------|
+| **Auditoria de infrator** | Verificar se a pesagem gerou infração e foi encerrada corretamente |
+| **Comprovante de regularidade** | Pesquisar veículos que passaram sem infração para registro operacional |
+| **Relatório gerencial** | Exportar dados em CSV para compor boletim diário ou mensal de produção |
+| **Conciliação contratual** | Validar o volume de pesagens do posto no período de medição |
+
 ## Relacionado
 
 - [Tickets Abertos](./ticket-aberto)

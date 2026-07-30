@@ -44,6 +44,13 @@ Após cadastrar o equipamento, registre a aferição inicial em **Operações �
 | Em Manutenção | Intervenção técnica | Registrar evento |
 | Inativo | Fora de operação | Verificar antes de desativar |
 
+## Boas práticas
+
+- Sempre cadastre **Fabricante**, **Tipo** e **Modelo** antes de criar o equipamento — são dependências obrigatórias
+- Use uma codificação padronizada para identificar rapidamente o equipamento por posto e número de série
+- Mantenha o **Status** atualizado (Ativo / Em Manutenção / Inativo) para que o cálculo de disponibilidade contratual seja correto
+- Vincule o equipamento ao **Grupo** correto para facilitar a geração de medições e relatórios segmentados por contrato
+
 ## Relacionado
 
 - [Tipos de Equipamentos](./tipos-equipamentos)

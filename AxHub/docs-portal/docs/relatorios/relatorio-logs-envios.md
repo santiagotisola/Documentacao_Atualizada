@@ -43,6 +43,13 @@ Exibe o log completo de **passagens e infrações enviadas** para sistemas de in
 Filtre por **Status = Erro** e reenvie manualmente os registros com falha. Erros repetidos no mesmo destino podem indicar problema de integração que requer suporte técnico.
 :::
 
+## Casos de uso
+
+- **Confirmação de envio** — verifique se todos os registros foram entregues ao sistema integrador do órgão contratante
+- **Diagnóstico de falhas** — filtre por **Status = Erro** para identificar registros que precisam de reenvio manual
+- **Auditoria de integração** — exporte o histórico de comunicações para comprovação em prestação de contas
+- **Alerta de conectividade** — erros repetidos no mesmo destino indicam problema de integração que requer suporte técnico
+
 ## Relacionado
 
 - [Webhooks](../administracao/webhooks)

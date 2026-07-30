@@ -40,6 +40,13 @@ Alterações de permissão entram em vigor imediatamente. Usuários com sessão 
 
 Configure cada perfil com apenas as permissões estritamente necessárias. Evite conceder **Criar/Editar/Excluir** para módulos que o perfil apenas consulta.
 
+## Segurança
+
+- Aplique o princípio do **menor privilégio**: conceda apenas as permissões que o perfil usa no dia a dia
+- Separe perfis de **consulta** e perfis de **edição** — nunca combine as duas responsabilidades no mesmo usuário operacional
+- Revise as permissões a cada mudança de função do colaborador; permissões obsoletas são riscos de segurança
+- Utilize os **Logs de Acesso** periodicamente para verificar se usuários estão acessando áreas além do esperado
+
 ## Relacionado
 
 - [Perfis de Acesso](./perfis-acesso)

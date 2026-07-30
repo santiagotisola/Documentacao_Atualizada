@@ -44,6 +44,13 @@ Apresenta o **volume de imagens capturadas e processadas** pelo sistema, incluin
 Use este relatório semanalmente para identificar equipamentos com queda de OCR antes que impacte a medição contratual.
 :::
 
+## Casos de uso
+
+- **Monitoramento de qualidade** — identifique semanalmente equipamentos com OCR abaixo de 85% antes que impactem a medição contratual
+- **Solicitação de manutenção** — exporte os dados para embasar chamados técnicos com evidências de queda de desempenho
+- **Avaliação pós-intervenção** — compare o aproveitamento antes e depois de limpeza ou calibração
+- **Alerta de falha sistêmica** — múltiplos equipamentos com queda simultânea indicam problema de rede ou servidor
+
 ## Relacionado
 
 - [Processamento por Usuário](./processamento-por-usuario)

@@ -41,6 +41,13 @@ Um enquadramento mal configurado resulta em infrações com artigo CTB incorreto
 
 | Tipo | Página |
 
+## Boas práticas
+
+- Vincule cada enquadramento à operação correta — um enquadramento errado invalida os autos gerados
+- Revise as configurações sempre que a velocidade máxima de uma operação for alterada por decreto ou portaria
+- Consulte o CTB e as normativas do CONTRAN vigentes antes de adicionar ou alterar enquadramentos personalizados
+- Não exclua configurações já usadas em infrações exportadas; inative-as para preservar a rastreabilidade
+
 ## Relacionado
 
 - [Enquadramentos](./enquadramentos)

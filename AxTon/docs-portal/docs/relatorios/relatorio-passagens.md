@@ -57,6 +57,19 @@ Exporte o Relatório ao final de cada operação para manter o histórico de pes
 
 ---
 
+## Casos de uso
+
+- **Auditoria diária de produção** — exporte o PDF ao final de cada operação para manter o histórico de pesagens
+- **Verificação de veículo específico** — filtre por placa para confirmar se houve pesagem e qual foi o resultado
+- **Compilação para medição contratual** — use o total de pesagens do período como dado de entrada para o boletim
+- **Comprovante de regularidade** — exporte pesagens com resultado **Regular** para comprovar o tratamento correto de um veículo
+
+## Relacionado
+
+- [Relatório de Infrações](./relatorio-infracoes)
+- [Processamento por Usuário](./processamento-por-usuario)
+- [Tickets Fechados](../pesagem/ticket-fechado)
+
 ## Outros Relatórios
 
 | Relatório | Descrição |

@@ -41,6 +41,13 @@ Caso esquecer a senha, clique em **Esqueci minha senha** na tela de login e info
 | Usuário bloqueado | Contate o administrador do sistema |
 | Página não carrega | Verifique a conexão de rede |
 
+## Segurança
+
+- Use senhas fortes com mínimo de 8 caracteres, combinando letras, números e caracteres especiais
+- Nunca compartilhe suas credenciais — cada usuário deve ter login exclusivo para garantir rastreabilidade nos logs
+- Faça **logout** ao final de cada turno; acessos esquecidos abertos são riscos de segurança
+- Em caso de suspeita de acesso indevido, altere a senha imediatamente e notifique o administrador do sistema
+
 ## Relacionado
 
 - [Usuários](../controle-acesso/usuarios)

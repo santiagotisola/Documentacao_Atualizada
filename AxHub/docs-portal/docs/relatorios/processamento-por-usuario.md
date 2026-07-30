@@ -44,6 +44,13 @@ Exibe a **produtividade de processamento por analista** em um período. Utilizad
 Além da quantidade, analise a **Qualidade** — taxas de descarte muito altas ou muito baixas merecem atenção do supervisor.
 :::
 
+## Casos de uso
+
+- **Gestão de produtividade** — compare o volume processado por operador para identificar diferenças de desempenho entre turnos
+- **Treinamento direcionado** — operadores com alto índice de descarte ou baixo volume podem precisar de capacitação
+- **Evidências para gestão** — exporte os dados para inclusão em relatórios mensais de desempenho operacional
+- **Detecção de gargalos** — volumes muito baixos em um período podem indicar interrupção no fluxo de triagem
+
 ## Relacionado
 
 - [Triagem](../glossario/triagem)

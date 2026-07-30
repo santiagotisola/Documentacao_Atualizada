@@ -43,6 +43,13 @@ Visualização geográfica do fluxo de passagens de Veículos por Equipamento Os
 Utilize o botão **Exportar** para gerar uma imagem do mapa ou um CSV com os dados por equipamento.
 :::
 
+## Casos de uso
+
+- **Planejamento operacional** — identifique os pontos de maior fluxo para direcionar recursos de fiscalização
+- **Detecção de anomalias** — volumes incomuns em horários atípicos podem indicar desvios de rota ou eventos extraordinários
+- **Justificativa de expansão** — use dados georreferenciados para subsidiar propostas de instalação de novos equipamentos
+- **Apresentação ao contratante** — o mapa oferece uma visão visual de cobertura para reuniões de prestação de contas
+
 ## Relacionado
 
 - [Fluxo Diário de Veículos](./fluxo-diario-veiculos)

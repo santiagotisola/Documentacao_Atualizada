@@ -44,6 +44,15 @@ Veículos retidos por mais de 4 horas têm direito a **alimentação** fornecida
 Comunique ao supervisor imediatamente em caso de retenção por mais de 4 horas.
 :::
 
+## Quando usar
+
+| Situação | Ação recomendada |
+|----------|-------------------|
+| **Veículo retido por excesso** | Libere ou reclassifique antes de encerrar o ticket |
+| **Retenção > 4 horas** | Comunique o supervisor imediatamente; há obrigações legais de alimentação |
+| **Erro de classificação** | Reclassifique o veículo antes de liberar para evitar infração indevida |
+| **Documentação irregular** | Verifique MDF-e e NF-e antes de decidir liberar ou autuar |
+
 ## Relacionado
 
 - [Liberar Pesagem](./liberar-pesagem)

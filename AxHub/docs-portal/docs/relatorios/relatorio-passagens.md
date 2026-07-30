@@ -43,6 +43,13 @@ Relatório de Passagens](../img/Relatorio%20-%20Relatorio%20de%20passagens.png)
 Use o filtro **Com Infração = Sim** para revisar apenas passagens que geraram auto. Combine com filtro por período para exportar dados para auditoria.
 :::
 
+## Casos de uso
+
+- **Auditoria de placa suspeita** — filtre por placa + período para obter o histórico completo de passagens de um veículo
+- **Conferência com o órgão autuador** — exporte os dados em Excel para cruzamento com os registros do contratante
+- **Análise de aproveitamento** — combine com o Relatório de Processamento de Imagens para identificar equipamentos com baixa captura
+- **Acompanhamento de autuações** — use o filtro **Com Infração = Sim** para revisar apenas passagens que geraram auto
+
 ## Relacionado
 
 - [Processamento por Usuário](./processamento-por-usuario)

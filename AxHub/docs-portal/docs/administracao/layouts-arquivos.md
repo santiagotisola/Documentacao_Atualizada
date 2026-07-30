@@ -43,6 +43,13 @@ Define o **formato dos arquivos** utilizados para importação de dados e export
 Alterações em layouts de exportação ativos podem causar rejeição de lotes pelo órgão autuador. Testar antes em ambiente de homologação.
 :::
 
+## Boas práticas
+
+- Teste qualquer alteração em ambiente de homologação antes de ativar em produção — erros de formato causam rejeição do lote
+- Nunca altere um layout ativo sem alinhar com o órgão autuador; mudanças não comunicadas causam rejeição silenciosa
+- Documente a versão e a data de cada alteração no campo Descrição para facilitar suporte e auditoria
+- Mantenha cópia das especificações técnicas do órgão autuador arquivada como referência para cada layout
+
 ## Relacionado
 
 - [Lotes de Exportação](../glossario/lote-exportacao)

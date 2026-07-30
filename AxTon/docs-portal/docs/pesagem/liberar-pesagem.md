@@ -44,6 +44,15 @@ A liberação é irreversível. Todas as liberações são registradas em log co
 | Erro de classificação | Reclassificar primeiro, depois liberar |
 | Veículo isento por lei | Liberação por isenção |
 
+## Quando usar
+
+| Situação | Cuidado antes de liberar |
+|----------|---------------------------|
+| **Transferência de carga** | Confirme a descarga antes de liberar; registre no ticket |
+| **Decisão judicial** | Exija o documento formal antes de qualquer ação |
+| **Erro de classificação** | Reclassifique primeiro; nunca libere sem corrigir o tipo de eixo |
+| **Isenção legal** | Verifique o enquadramento legal com o supervisor antes de liberar |
+
 ## Relacionado
 
 - [Motivos](./motivos)

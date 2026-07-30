@@ -49,6 +49,13 @@ Arco (estrutura física)
   └── Faixa 2 → Equipamento OCR02 → Passagens registradas
 ```
 
+## Boas práticas
+
+- O código da faixa deve ser **exatamente igual** ao configurado no equipamento físico — qualquer divergência causa erro na geração de alertas
+- Informe corretamente o **Sentido** da faixa (ex.: Norte-Sul, Leste-Oeste) para relatórios de fluxo direcional
+- Vincule a faixa ao equipamento correto; faixas sem equipamento não registram passagens
+- Não exclua faixas com histórico de passagens — inative-as para preservar a rastreabilidade dos registros
+
 ## Relacionado
 
 - [Locais](./locais)

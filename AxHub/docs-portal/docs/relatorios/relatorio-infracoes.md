@@ -51,6 +51,13 @@ Relatório de Infrações](../img/Relatorio%20-%20Relatorio%20de%20infrações.p
 Filtre por **Status = Auditada** para obter a lista de infrações prontas para incluir no próximo lote de exportação.
 :::
 
+## Casos de uso
+
+- **Fechamento de lote** — exporte as infrações com status **Auditada** para compor o próximo lote de envio ao órgão autuador
+- **Auditoria pré-envio** — revise enquadramentos e imagens antes da exportação para evitar rejeições
+- **Análise de descartes** — identifique os principais motivos de descarte para ajustar a calibração dos equipamentos
+- **Acompanhamento do fluxo** — monitore o pipeline completo: triagem → auditoria → exportação por período
+
 ## Relacionado
 
 - [Triagem de Infrações](../infracoes/triagem)

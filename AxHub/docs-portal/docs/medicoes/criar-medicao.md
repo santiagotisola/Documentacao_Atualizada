@@ -42,6 +42,13 @@ Relatório de Medição](../img/Medição%20-%20nova%20medição%20-%20relatorio
 O Boletim gerado pode ser enviado ao contratante como comprovação do SLA contratual.
 :::
 
+## Impacto contratual
+
+- A medição consolida os índices do período: disponibilidade, OCR e volume de infrações geradas e exportadas
+- Interrupções não registradas antes da geração **não entram no cálculo** — revise-as antes de gerar
+- Após finalizar a medição, nenhuma alteração é permitida; erros devem ser corrigidos na medição do próximo período
+- Medições com dados errados podem gerar glosas no pagamento contratual
+
 ## Relacionado
 
 - [Contratos](./contratos)

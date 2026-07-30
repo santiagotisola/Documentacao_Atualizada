@@ -38,6 +38,13 @@ Exibe as **infrações de excesso de peso** registradas pelo AxTon, agrupadas po
 Exporte o relatório em CSV para preparar o lote de envio ao órgão autuador.
 :::
 
+## Casos de uso
+
+- **Fechamento de lote** — exporte infrações com status **Auditada** para compor o lote de envio ao órgão autuador
+- **Auditoria de excesso de peso** — filtre por excesso percentual para identificar reincidentes e planejar operações de fiscalização
+- **Acompanhamento do fluxo** — monitore o pipeline triagem → auditoria → exportação por posto e período
+- **Preparo de CSV** — exporte em Excel para montar o arquivo de envio ao órgão autuador com os campos exigidos
+
 ## Relacionado
 
 - [Infração](../glossario/infracao)

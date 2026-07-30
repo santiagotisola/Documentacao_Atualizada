@@ -47,6 +47,13 @@ Ou acesse diretamente: `/consultainfracao`
 Use este relatório regularmente para avaliar a qualidade de captura dos equipamentos. Alta taxa de descarte em um equipamento pode indicar necessidade de calibração ou limpeza.
 :::
 
+## Casos de uso
+
+- **Análise de qualidade** — identifique equipamentos com alta taxa de descarte para direcionar manutenção preventiva
+- **Auditoria de motivos** — verifique se os operadores estão usando os motivos corretos e não genéricos
+- **Conformidade de exceções** — confirme que descartes automáticos por exceção estão aplicando a regra correta
+- **Capacitação de equipe** — use os dados de descarte por operador para identificar necessidades de treinamento
+
 ## Relacionado
 
 - [Triagem](./triagem)

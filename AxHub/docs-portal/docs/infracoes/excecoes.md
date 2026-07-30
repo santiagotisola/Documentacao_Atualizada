@@ -43,6 +43,15 @@ A tela de Exceções permite configurar regras que isentam determinados Veículo
 Exceções mal configuradas podem isentar veículos que deveriam ser autuados. Revise periodicamente as regras ativas e documente cada exceção com o embasamento legal.
 :::
 
+## Quando usar
+
+| Situação | Cuidado ao configurar |
+|----------|------------------------|
+| **Veículo oficial com placa conhecida** | Exige embasamento legal documentado; registre o número do ato autorizador |
+| **Veículo isento por lei municipal** | Vincule a vigência da exceção ao prazo do decreto/portaria |
+| **Placa de teste / calibração** | Sempre com vigência temporária — nunca deixe a exceção sem data de término |
+| **Campanha temporária** | Configure a data de expiração e monitore ativamente o encerramento |
+
 ## Relacionado
 
 - [Enquadramentos](../administracao/enquadramentos)
