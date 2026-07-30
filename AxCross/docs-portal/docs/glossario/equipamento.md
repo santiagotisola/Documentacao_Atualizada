@@ -44,4 +44,14 @@ Dispositivo instalado em um cruzamento para detecção e registro de Veículos P
 :::warning
 Equipamentos **Offline** não registram passagens. Verifique a conectividade e contate o suporte técnico se o equipamento não retornar ao status Online.
 :::
+
 Veja o cadastro completo em [Equipamentos](../cadastros/equipamentos).
+
+## Ciclo de instalação
+
+1. Instalação física no cruzamento
+2. Cadastro em [Cadastros → Equipamentos](../cadastros/equipamentos)
+3. Vinculação a uma [Faixa](../cadastros/faixas)
+4. Teste de comunicação (status: Online)
+5. Primeiro registro de passagem valida o funcionamento
+

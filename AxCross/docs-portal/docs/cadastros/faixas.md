@@ -49,6 +49,13 @@ Arco (estrutura física)
   └── Faixa 2 → Equipamento OCR02 → Passagens registradas
 ```
 
+## Relacionado
+
+- [Locais](./locais)
+- [Equipamentos](./equipamentos)
+- [Passagens](../glossario/passagem)
+
+
 :::tip Dica
 O código da faixa deve ser exatamente igual ao configurado no equipamento físico. Qualquer divergência causa erros na geração de alertas.
 :::

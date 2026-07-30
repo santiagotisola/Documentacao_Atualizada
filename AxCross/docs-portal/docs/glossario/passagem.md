@@ -48,6 +48,13 @@ Veículo passa → OCR lê placa → Passagem registrada
 1. O Veículo passa pelo cruzamento monitorado
 2. O Equipamento detecta e fotografa o Veículo
 3. O sistema realiza leitura OCR da placa
+4. Consulta a lista de monitorados
+5. Se encontrado: gera **Alerta** automático
+6. Passagem salva no banco de dados
+
+:::tip
+A qualidade da leitura OCR depende diretamente da calibração e limpeza do equipamento. Acompanhe a taxa de reconhecimento no **Painel Analítico**.
+:::
 4. O registro é salvo no banco de dados
 5. O sistema verifica se a placa consta na lista de Veículos monitorados
 6. Se sim, um alerta é gerado automaticamente
