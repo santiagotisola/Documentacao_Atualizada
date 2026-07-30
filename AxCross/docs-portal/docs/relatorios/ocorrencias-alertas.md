@@ -38,6 +38,21 @@ No **menu lateral**, clique em Relatórios e selecione **Ocorrências e Alertas*
 :::tip Exportar
 Exporte o relatório em CSV para auditorias ou prestação de contas das operações ao órgão contratante.
 :::
+
+## SLA de atendimento recomendado
+
+| Tipo de Ocorrência | Prazo |
+|--------------------|:-----:|
+| Veículo roubado/furtado | Imediato |
+| Alerta monitorado | 30 min |
+| Ocorrência de baixa prioridade | Até 24h |
+
+## Relacionado
+
+- [Alertas](../operacoes/alertas)
+- [Veículos Monitorados](./veiculos-monitorados)
+- [Mapeamento de Rotas](./mapeamento-rotas)
+
 | Usuário | Não | Responsável pelo atendimento |
 | **Local** | Não | Cruzamento relacionado |
 

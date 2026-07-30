@@ -36,8 +36,13 @@ Apresenta o volume total de imagens processadas no sistema em um determinado per
 :::tip
 Use este relatório para identificar equipamentos com baixo aproveitamento de imagens. Aproveitamento abaixo de 85% pode indicar necessidade de calibração ou limpeza.
 :::
-| **Total de Imagens** | Quantidade total de imagens recebidas |
-| **Processadas** | Imagens efetivamente analisadas |
+
+## Relacionado
+
+- [Processamento por Usuário](./processamento-por-usuario)
+- [Eventos de Equipamentos](./eventos-equipamentos)
+- [Aferições](../operacoes/afericoes)
+
 | **Descartadas** | Imagens rejeitadas por critério de qualidade |
 | **Pendentes** | Imagens aguardando processamento |
 | **Aproveitamento (%)** | Percentual de imagens processadas com sucesso |

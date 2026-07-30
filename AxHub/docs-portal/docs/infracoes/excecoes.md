@@ -38,6 +38,17 @@ A tela de Exceções permite configurar regras que isentam determinados Veículo
 
 - Criar regras com múltiplos filtros combinados
 - Definir motivo de descarte automático para cada regra
+
+:::caution
+Exceções mal configuradas podem isentar veículos que deveriam ser autuados. Revise periodicamente as regras ativas e documente cada exceção com o embasamento legal.
+:::
+
+## Relacionado
+
+- [Enquadramentos](../administracao/enquadramentos)
+- [Motivos de Descarte](../administracao/motivos-descartes)
+- [Infrações Descartadas](./infracoes-descartadas)
+
 - Configurar período de vigência da exceção
 - Ativar/desativar exceções sem excluí-las
 - Consultar histórico de aplicações da exceção

@@ -37,7 +37,15 @@ O campo **Código do Município** é essencial para a exportação de Infraçõe
 ![Correção do Código do Município na Faixa](../img/operacao%20-%20faixa%20-%20codigo%20do%20municipio%20%20correção%20na%20faixa%203.png)
 
 :::warning Importante
-O código do município na faixa **deve ser o mesmo** da UF da operação. Se a operação é em Goiânia/GO, todas as faixas devem ter o código IBGE de um município de GO. Um código de município divergente (ex: código de MA em operação de GO) gera **erro na exportação** de Infrações
+O código do município na faixa **deve ser o mesmo** da UF da operação. Se a operação é em Goiânia/GO, todas as faixas devem ter o código IBGE de um município de GO. Um código de município divergente (ex: código de MA em operação de GO) gera **erro na exportação** de Infrações.
+:::
+
+## Relacionado
+
+- [Operações](./cadastro-operacoes)
+- [Municípios](../veiculos/municipios)
+- [Enquadramentos](../administracao/configuracoes-enquadramento)
+
 :::
 
 ### Onde o Código do Município é utilizado
