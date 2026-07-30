@@ -51,6 +51,19 @@ As cores são extraídas automaticamente do RENAVAM quando o sistema consulta a 
 | 14 | Verde |
 | 15 | Vermelha |
 
+## Relacionado
+
+- [Marcas de Veículos](./marcas-veiculos)
+- [Modelos de Veículos](./modelos-veiculos)
+- [Classificações de Veículos](./classificacoes-veiculos)
+| 09 | Marrom |
+| 10 | Prata |
+| 11 | Preta |
+| 12 | Rosa |
+| 13 | Roxa |
+| 14 | Verde |
+| 15 | Vermelha |
+
 | 04 | Branca |
 | 05 | Cinza |
 | 06 | Dourada |

@@ -40,10 +40,19 @@ Após registrar as interrupções, o sistema as contabiliza no cálculo de dispo
 Interrupções não registradas **não são consideradas** no cálculo de disponibilidade. Registrar imediatamente após a ocorrência.
 :::
 
+## Prazos para registro
+
+| Tipo | Prazo máximo |
+|------|:------------:|
+| Falha de equipamento | Até 2h após detecção |
+| Manutenção preventiva | Antes de iniciar |
+| Evento externo | Até 24h |
+
 ## Relacionado
 
 - [Criar Medição](./criar-medicao)
 - [Índices de Performance](./indices-performance)
+- [Eventos de Equipamentos](../relatorios/eventos-equipamentos)
 
 | Falha de equipamento | Sim |
 | Evento externo (acidente, obra) | Conforme contrato |

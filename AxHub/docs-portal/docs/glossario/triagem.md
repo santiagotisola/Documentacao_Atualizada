@@ -38,7 +38,19 @@ Processo de **análise preliminar** das infrações capturadas automaticamente, 
 ## Boas práticas
 
 - Manter defasagem de triagem abaixo de 24h
-- Descartar sempre com motivo específico (afeta o Dashboard)
+- Não aprovar infrações com placa ilegível — o auto pode ser contestado
+- Registrar o motivo de descarte para análise estatística
+- Escalar para auditoria dúvidas sobre enquadramento
+
+## Tempo médio por infração
+
+| Analista experiente | Analista em treinamento |
+|:-------------------:|:-----------------------:|
+| 15-30 segundos | 45-90 segundos |
+
+:::warning
+Infrações com mais de 30 dias sem triagem podem ter a validade legal comprometida. Monitore o backlog diariamente.
+:::- Descartar sempre com motivo específico (afeta o Dashboard)
 - Em dúvida sobre enquadramento, consultar o supervisor
 
 ## Relacionados

@@ -39,11 +39,18 @@ Cadastro dos **motivos utilizados nos processos de pesagem e liberação** de ve
 Configurar motivos detalhados facilita a análise gerencial e a identificação de padrões de retenção nos postos.
 :::
 
+## Impacto nos relatórios
+
+Os motivos são usados em:
+- **Relatório de Processamento por Usuário** — para segmentar por tipo de ação
+- **Dashboard gerencial** — top motivos de liberação e descarte
+- **Boletim de operação** — justificativas de liberação sem autuação
+
 ## Relacionado
 
-- [Tickets Abertos](./ticket-aberto)
 - [Liberar Pesagem](./liberar-pesagem)
 - [Reclassificar](./reclassificar)
+- [Processamento por Usuário](../relatorios/processamento-por-usuario)
 
 
 ## Motivos comuns

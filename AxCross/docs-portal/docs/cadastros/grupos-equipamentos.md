@@ -40,9 +40,18 @@ Agrupar por região geográfica facilita o monitoramento e a filtragem de relat�
 - [Alertas](../operacoes/alertas)
 - [Cadastro de Operações](../operacoes/cadastro-operacoes)
 
+## Exemplos de agrupamento
 
-| Equipamentos | Sim | Lista de Equipamentos vinculados ao grupo |
-| **Status** | Sim | Ativo ou Inativo |
+| Nome do grupo | Critério |
+|---------------|----------|
+| Centro | Equipamentos do centro da cidade |
+| Rodovia BR-040 | Equipamentos na BR-040 |
+| Zona Norte | Equipamentos da zona norte |
+| Blitz Noturna | Equipamentos ativos em operações noturnas |
+
+:::tip
+Grupos bem nomeados agilizam a busca e filtragem em operações e relatórios. Crie um grupo por área geográfica ou por contrato.
+:::
 
 ## Passo a passo — Criar novo grupo
 

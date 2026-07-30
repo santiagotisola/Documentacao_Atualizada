@@ -37,9 +37,17 @@ Use o filtro **Status = Ausente** para identificar veículos de carga que circul
 
 ## Relacionado
 
-- [NF-e](../glossario/nfe) — Glossaróio
+- [NF-e](../glossario/nfe) — Glossário
+- [MDF-e](../glossario/mdfe)
 - [Relatório de Discrepancias](./relatorio-discrepancias)
 
+## Base legal
+
+**Ajuste SINIEF 07/2005** — obrigatoriedade da NF-e para veículos de carga em trânsito. Fiscalização sancionada pela **Lei 8.137/90** (crimes contra a ordem tributária).
+
+:::tip Auditoria fiscal
+Exporte o relatório de NF-e ausente e compartilhe com a Secretaria de Fazenda estadual para notificação dos emitentes irregulares.
+:::
 | **Valor** | Valor total da nota |
 | **Peso declarado** | Peso informado na NF-e |
 | **Status** | Válida / Vencida / Cancelada |

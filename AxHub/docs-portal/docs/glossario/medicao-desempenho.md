@@ -38,6 +38,21 @@ Processo de **mensuração da performance operacional** dos equipamentos de fisc
 A **medição de desempenho** é o principal instrumento de prestação de contas nos contratos de concessão e PPPs. Realize mensalmente dentro do prazo contratual.
 :::
 
+## Indicadores comuns
+
+| Indicador | Fórmula simplificada | Meta típica |
+|-----------|---------------------|:----------:|
+| Disponibilidade | (horas ativas / horas contratuais) × 100 | ≥95% |
+| Taxa OCR | (placas lidas / capturas) × 100 | ≥90% |
+| Tempo de reparo | média de horas até corrigir falha | ≤4h |
+| Produção de infracs | infrações exportadas / mês | Conforme contrato |
+
+## Base legal
+
+- **Lei 11.079/2004** — Parceria Público-Privada
+- **Lei 8.987/95** — Concessões de serviço público
+- Contrato específico da operação
+
 3. Verificar índices de performance
 4. Gerar relatório de medição
 5. Finalizar e exportar PDF

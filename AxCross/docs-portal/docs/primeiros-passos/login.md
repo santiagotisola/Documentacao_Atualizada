@@ -42,6 +42,18 @@ Nunca compartilhe suas credenciais. Cada ação realizada fica registrada com o 
 | Problema | Solução |
 |----------|---------|
 | Senha incorreta | Tente novamente ou clique em **Esqueci minha senha** |
+| Usuário bloqueado | Contate o administrador |
+| Página não carrega | Verifique a conexão com a rede interna |
+
+## Relacionado
+
+- [Usuários](../administracao/usuarios)
+- [Perfis de Acesso](../administracao/perfis-acesso)
+- [Logs de Acesso](../administracao/logs-acesso)
+
+| Problema | Solução |
+|----------|---------|
+| Senha incorreta | Tente novamente ou clique em **Esqueci minha senha** |
 | Usuário bloqueado | Contate o administrador do sistema |
 | Página não carrega | Verifique a conexão com a rede interna |
 

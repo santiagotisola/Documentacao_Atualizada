@@ -40,6 +40,13 @@ As cores são extraídas automaticamente do RENAVAM quando o OCR lê a placa. Ma
 - [Marcas de Veículos](./marcas-veiculos)
 - [Modelos de Veículos](./modelos-veiculos)
 
+## Tabela DENATRAN de cores
+
+O sistema já inclui as 15 cores padrão do DENATRAN. Adicione apenas cores personalizadas exigidas pelo órgão autuador local.
+
+- [Marcas de Veículos](./marcas-veiculos)
+- [Modelos de Veículos](./modelos-veiculos)
+
 3. Informe o **Nome** da cor
 4. Opcionalmente informe o **Código**
 5. Clique em **Salvar**

@@ -37,7 +37,22 @@ Cada dashboard do Power BI permite filtrar por:
 :::info
 Os dashboards são gerados a partir dos dados do AxTon e atualizados conforme a configuração de refresh do Power BI Service. Para configurações avançadas, entre em contato com o suporte.
 :::
-- **Período** (data início / data fim)
+
+## Casos de uso dos dashboards
+
+| Dashboard | Quem usa | Frequência recomendada |
+|-----------|----------|:---------------------:|
+| Boletim de Medição | Gestor de contrato | Mensal |
+| Disponibilidade | Supervisor técnico | Semanal |
+| Infrações por Dia/Hora | Coordenador de operações | Diário |
+| Taxa OCR | Supervisor técnico | Semanal |
+
+## Relacionado
+
+- [Relatório de Infrações](./relatorio-infracoes)
+- [Processamento de Imagens](./processamento-imagens)
+- [Medições](../medicoes/criar-medicao)
+
 - **Equipamento** específico
 - **Grupo de Equipamentos**
 - **Contrato**
