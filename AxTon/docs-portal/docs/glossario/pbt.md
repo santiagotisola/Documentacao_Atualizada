@@ -29,6 +29,24 @@ PBT = Tara (peso do veículo vazio) + Carga (peso da mercadoria)
 
 ## Tolerâncias
 
+| Condição | Tolerância |
+|----------|:----------:|
+| Balança estática verificada | ±4% |
+| Balança dinâmica | ±6% |
+
+## Consequencias do excesso
+
+| Excesso | Penalidade |
+|---------|------------|
+| Até 10% | Infração grave + retenção até regularização |
+| Acima de 10% | Infração gravíssima + recolhimento ao pátio |
+
+## Relacionado
+
+- [Classificações de Veículos](../veiculos/classificacoes-veiculos)
+- [Pesagem](./pesagem)
+
+
 | Tipo de equipamento | Tolerância |
 |---------------------|------------|
 | Balança estática INMETRO | 5% |

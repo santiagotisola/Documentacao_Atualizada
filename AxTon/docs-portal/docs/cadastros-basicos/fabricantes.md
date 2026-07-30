@@ -25,6 +25,14 @@ Cadastro dos **fabricantes dos equipamentos** de pesagem. Obrigatório para vinc
 
 1. Acesse **Cadastros Básicos → Fabricantes**
 2. Clique em **+ Novo**
+3. Preencha o **Nome** e o **CNPJ** (se aplicável)
+4. Clique em **Salvar**
+
+:::info Hierarquia
+Fabricante → Modelo → Equipamento. Cadastre o fabricante antes de criar modelos.
+:::
+1. Acesse **Cadastros Básicos → Fabricantes**
+2. Clique em **+ Novo**
 3. Informe o **Nome** do fabricante
 4. Clique em **Salvar**
 

@@ -23,6 +23,21 @@ Pesagem detecta excesso
       ↓
    Exportação ao órgão autuador
       ↓
+   Auto de infração emitido
+```
+
+## Tipos de excesso
+
+| Tipo | Art. CTB | Gravidade |
+|------|:--------:|:---------:|
+| Excesso de PBT | 231, I | Gravíssima |
+| Excesso por eixo | 231, II | Gravíssima |
+
+## Relacionado
+
+- [PBT](./pbt)
+- [Reclassificar](../pesagem/reclassificar)
+
    Notificação ao infrator
 ```
 

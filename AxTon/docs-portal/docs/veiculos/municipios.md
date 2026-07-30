@@ -29,6 +29,9 @@ Cadastro dos **municípios** com código IBGE, utilizados na localização dos p
 4. Clique em **Salvar**
 
 :::tip
+O Código IBGE de 7 dígitos é obrigatório nos arquivos de exportação de infrações ao DENATRAN/SENATRAN. Consulte o portal do IBGE para o código correto.
+:::
+:::tip
 O Código IBGE é obrigatório nos arquivos de exportação de infrações para o DENATRAN/SENATRAN. Use sempre o código oficial de 7 dígitos.
 :::
 

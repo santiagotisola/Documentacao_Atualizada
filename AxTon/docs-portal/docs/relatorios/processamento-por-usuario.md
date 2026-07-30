@@ -28,6 +28,17 @@ Exibe a **produtividade de cada operador** na triagem de infrações: infraçõe
 | **Triadas** | Infrações analisadas no período |
 | **Aprovadas** | Infrações confirmadas |
 | **Descartadas** | Infrações rejeitadas |
+
+## Como usar
+
+1. Acesse **Relatórios → Processamento por Usuário**
+2. Selecione o **Período**, **Usuário** e **Posto** (opcional)
+3. Clique em **Gerar**
+4. Exporte em CSV para análise gerencial
+
+:::tip
+Use este relatório para avaliar a produtividade de operadores e identificar possíveis inconsistências na taxa de descarte.
+:::
 | **Média/Hora** | Produtividade por hora |
 | **Tempo Médio** | Segundos por análise |
 

@@ -26,6 +26,19 @@ Exibe as **infrações de excesso de peso** registradas pelo AxTon, agrupadas po
 
 | Coluna | Descrição |
 |--------|-----------|
+| **Nº Infração** | Identificador único |
+| **Data/Hora** | Momento da pesagem |
+| **Placa** | Placa do veículo infrator |
+| **Peso aferido** | Peso real registrado |
+| **Excesso (t)** | Quantidade acima do PBT |
+| **Status** | Triada / Auditada / Exportada |
+| **Posto** | Local da pesagem |
+
+:::tip
+Exporte o relatório em CSV para preparar o lote de envio ao órgão autuador.
+:::
+| Coluna | Descrição |
+|--------|-----------|
 | **ID** | Identificador único da infração |
 | **Placa** | Placa do veículo infrator |
 | **Data/Hora** | Momento da detecção |

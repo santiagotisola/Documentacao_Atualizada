@@ -23,6 +23,17 @@ Veículo chega ao posto
       ↓
    Classificação do veículo
       ↓
+   Comparação com PBT
+      ↓
+   Regular (liberação) ou Infrator (retenção)
+```
+
+## Relacionado
+
+- [PBT](./pbt) — Peso Bruto Total
+- [Infração](./infracao)
+- [Reclassificar](../pesagem/reclassificar)
+
    Verificação de excesso
       ↓
    Infração gerada (se excesso) OU liberado

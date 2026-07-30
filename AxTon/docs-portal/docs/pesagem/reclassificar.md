@@ -29,6 +29,19 @@ Permite alterar a classificação de um Veículo durante o processo de pesagem q
 | **Nova Classificação** | Sim | Classificação correta do Veículo |
 | **Motivo** | Sim | Justificativa para a reclassificação |
 
+## Passo a passo
+
+1. Acesse **Tickets de Pesagens → Reclassificar**
+2. Informe o **Ticket**
+3. Verifique a **Classificação Atual**
+4. Selecione a **Nova Classificação** correta
+5. Preencha o **Motivo**
+6. Clique em **Confirmar**
+
+:::warning
+Reclassificar pode alterar o limite de PBT aplicável. Se o excesso se mantiver na nova classificação, a infração é mantida. Se o peso ficar dentro do limite, a infração é cancelada.
+:::
+
 ### Passo a passo
 
 1. Na tela de **Tickets de Pesagens**, selecione o ticket e clique em **Reclassificar**

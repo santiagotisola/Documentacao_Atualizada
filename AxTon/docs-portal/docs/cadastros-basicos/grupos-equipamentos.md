@@ -29,6 +29,10 @@ Agrupamento lógico de equipamentos para **organização por contrato, região o
 4. Vincule os **Equipamentos**
 5. Clique em **Salvar**
 
+:::tip
+Organize grupos por **contrato** ou **região** para facilitar a geração de medições e relatórios segmentados.
+:::
+
 ## Uso dos grupos
 
 - **Relatórios**: filtrar dados por grupo de equipamentos

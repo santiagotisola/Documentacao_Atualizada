@@ -23,7 +23,15 @@ Documento fiscal digital obrigatório que acompanha o transporte de mercadorias.
 
 | Campo | Descrição |
 |-------|-----------|
-| **Chave de acesso** | 44 dígitos — identificador único |
+| **Chave NF-e** | 44 dígitos da nota fiscal |
+| **Emitente** | CNPJ e razão social do emitente |
+| **Destinatário** | CNPJ do destinatário |
+| **Valor total** | Valor declarado na nota |
+| **Peso declarado** | Peso informado na NF-e |
+
+:::info
+A comparação entre o **peso declarado na NF-e** e o **peso aferido na balança** pode indicar subdeclaração fiscal.
+:::| **Chave de acesso** | 44 dígitos — identificador único |
 | **Emitente** | CNPJ do remetente da mercadoria |
 | **Destinatário** | CNPJ do destinatário |
 | **Valor total** | Valor da nota fiscal |
