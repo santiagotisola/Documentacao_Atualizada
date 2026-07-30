@@ -42,4 +42,16 @@ Acesso aos dashboards e Relatórios analíticos integrados via Power BI.
 :::info
 Os dados nos dashboards Power BI são atualizados conforme o agendamento configurado no Power BI Service. Contate o suporte para ajustar a freqüência de atualização.
 :::
-| Relacionado | Relatórios Power BI (Admin)](../administracao/relatorios-power-bi) | Configuracao |
+
+## Relacionado
+
+- [Relatórios Power BI (Admin)](../administracao/relatorios-power-bi)
+- [Fluxo Diário de Veículos](./fluxo-diario-veiculos)
+- [Processamento por Usuário](./processamento-por-usuario)
+
+## Casos de uso
+
+- **Gestão de contrato**: acompanhar Boletim de Medição e índices de disponibilidade em tempo real
+- **Análise de qualidade OCR**: identificar equipamentos com baixa taxa de leitura de placas
+- **Relatório executivo**: apresentar indicadores operacionais ao contratante em formato visual
+- **Auditoria interna**: cruzar dados de triagem por usuário com volume de descarte por motivo

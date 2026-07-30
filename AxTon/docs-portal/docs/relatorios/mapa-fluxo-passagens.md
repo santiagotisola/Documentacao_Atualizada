@@ -78,3 +78,9 @@ Use o filtro **Retidos** para visualizar apenas os postos com maior número de v
 - Subsidiar estudos de infraestrutura viária
 - Apresentar dados para gestores em reuniões executivas
 
+## Relacionado
+
+- [Fluxo Diário de Veículos](./fluxo-diario-veiculos)
+- [Relatório de Infrações](./relatorio-infracoes)
+- [Relatório de Passagens](./relatorio-passagens)
+- [Power BI](./power-bi)

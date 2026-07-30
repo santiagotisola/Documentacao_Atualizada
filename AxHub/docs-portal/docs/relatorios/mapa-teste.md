@@ -53,3 +53,21 @@ Quando `TBOperacoes.Homologacao = 1`, todas as Infrações geradas são marcadas
 | `TBOperacoes` | `Homologacao` | Operação em modo de teste |
 | `TBInfracoes` | `Homologacao` | Infrações de teste isoladas das reais |
 | `TBFaixas` | `Latitude`, `Longitude` | Posição geográfica no mapa |
+
+## Relacionado
+
+- [Processamento de Imagens](./processamento-imagens)
+- [Falhas Sequenciais](./falhas-sequenciais)
+- [Aferições](../operacoes/afericoes)
+- [Equipamentos](../cadastros-basicos/equipamentos)
+
+## Quando usar
+
+- Durante a **homologação inicial** de equipamentos reciém-instalados para validar a qualidade de captura
+- Após **manutenção técnica** para confirmar que o equipamento voltou a operar dentro dos parâmetros
+- Para **calibrar o limiar OCR** identificando faixas com leitura inconsistente
+- Em **inspeções periódicas** de controle de qualidade antes de incluir o equipamento em nova operação
+
+:::tip
+Capturar dados de teste com a operação em modo `Homologacao = 1` garante que essas infrações nunca entrem no fluxo de exportação. Execute sempre os testes nessa configuração.
+:::

@@ -69,3 +69,17 @@ O menu exibe apenas os módulos que o perfil do usuário tem permissão de acess
 :::tip Dica de navegação
 Clique em uma categoria (Cadastros ou Administração) para expandir ou recolher os itens.
 :::
+
+## Relacionado
+
+- [Login](./login)
+- [Dashboard](./dashboard)
+- [Perfis de Acesso](../administracao/perfis-acesso)
+- [Permissões de Acesso](../administracao/permissoes)
+
+## Orientações de navegação
+
+- O menu exibe somente os módulos que o perfil do usuário tem permissão de acessar
+- Itens ausentes no menu indicam permissões não concedidas — solicite ao administrador se necessário
+- Use o breadcrumb no topo para entender em qual tela você está e navegar de volta sem perder o contexto
+- Em dispositivos com tela pequena, o menu pode ser recolhido automaticamente para melhor aproveitamento de espaço

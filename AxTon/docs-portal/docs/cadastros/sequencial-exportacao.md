@@ -61,6 +61,23 @@ O módulo de **Sequencial de Exportação** controla a numeração dos **lotes d
 Configure um sequencial para **cada tipo de Infração A geração de lotes de exportação exige que o sequencial correspondente esteja configurado.
 :::
 
+## Relacionado
+
+- [Sequencial de Infração](./sequencial-infracao)
+- [Exportação de Infrações](../infracoes/exportacao)
+- [Falhas Sequenciais](../relatorios/falhas-sequenciais)
+
+## Boas práticas
+
+- Configure um sequencial para **cada tipo de infração** antes de iniciar a exportação — a ausência bloqueia a geração de lotes
+- Não reutilize sequenciais de séries já encerradas — comunique ao órgão autuador antes de iniciar nova numeração
+- Monitore o **Sequencial Final** e amplie ou crie nova série antes de atingir o limite superior
+- Mantenha o registro do último sequencial utilizado para referência em caso de inconsistência
+
+:::warning
+Sequenciais com números duplicados ou fora de ordem causam rejeição dos lotes pelo órgão autuador. Edite o **Sequencial Inicial** somente após consultar o histórico de exportações.
+:::
+
 ## Veja também
 
 | Funcionalidade | Descrição |

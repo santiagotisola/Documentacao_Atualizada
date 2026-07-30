@@ -69,3 +69,16 @@ Relatórios com grande volume de dados podem levar alguns minutos para serem ger
 PDFs gerados ficam disponíveis por um período limitado conforme a política de retenção configurada no sistema. Faça o download dos Relatórios importantes para armazenamento externo.
 :::
 
+## Relacionado
+
+- [Relatório de Passagens](./relatorio-passagens)
+- [Ocorrências e Alertas](./ocorrencias-alertas)
+- [Veículos Monitorados](./veiculos-monitorados)
+
+## Boas práticas
+
+- Para relatórios com grande volume de dados, aguarde o status **Concluído** antes de baixar — PDFs em status **Processando** podem estar incompletos
+- Faça download dos relatórios críticos imediatamente após a geração para garantir que estejam disponíveis dentro do período de retenção
+- Use **Reprocessar** somente quando o status for **Erro** — verifique se os filtros originais ainda são válidos antes de regenerar
+- Nomeie e arquive os PDFs gerados com contexto (data, tipo, operador) para referência futura em auditorias
+

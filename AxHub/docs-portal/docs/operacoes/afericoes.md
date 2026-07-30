@@ -75,6 +75,20 @@ Para entender como esses dados são exibidos e como mantê-los atualizados, cons
 👉 Configuração de Dados da Tarja](../administracao/configuracao-dados-tarja#data-da-afericao)**
 :::
 
+## Relacionado
+
+- [Equipamentos](../cadastros-basicos/equipamentos)
+- [Tipos de Aferições](../administracao/tipos-afericoes)
+- [Aferição](../glossario/afericao)
+- [Configuração de Dados da Tarja](../administracao/configuracao-dados-tarja)
+
+## Boas práticas
+
+- Registre a aferição imediatamente ao receber o certificado INMETRO — não aguarde a proximidade do vencimento
+- Agende a renovação com pelo menos 30 dias de antecedência para evitar interrupções operacionais
+- Mantenha cópia digital do certificado no sistema vinculada ao registro para facilitar auditorias
+- Verifique o Dashboard diariamente para acompanhar alertas de aferições próximas do vencimento
+
 ## Navegacao relacionada
 
 | Tipo | Pagina | Descricao |

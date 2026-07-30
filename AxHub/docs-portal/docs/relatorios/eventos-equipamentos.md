@@ -57,6 +57,20 @@ Use este relatório mensalmente para subsidiar o **Boletim de Medição** e comp
 Use em conjunto com o Relatório de Falhas Sequenciais](./falhas-sequenciais) para identificar Equipamentos com problemas recorrentes.
 :::
 
+## Relacionado
+
+- [Falhas Sequenciais](./falhas-sequenciais)
+- [Processamento de Imagens](./processamento-imagens)
+- [Aferições](../operacoes/afericoes)
+- [Interrupções](../medicoes/interrupcoes)
+
+## Boas práticas
+
+- Exporte o relatório mensalmente para subsidiar o **Boletim de Medição** e comprovar eventos que impactam o SLA
+- Filtre por **Tipo = Falha** para calcular horas de indisponibilidade e o impacto contratual
+- Registre manutenções preventivas com **Tipo = Manutenção** e motivo detalhado para distingui-las de falhas não planejadas
+- Use em conjunto com [Falhas Sequenciais](./falhas-sequenciais) para identificar equipamentos com problemas recorrentes
+
 ---
 
 ## Navegação Relacionada

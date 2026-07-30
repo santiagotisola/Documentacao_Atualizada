@@ -70,6 +70,20 @@ Clique em qualquer linha para abrir os detalhes completos da Infração incluind
 | Use Infração (com acento) de Transito](../glossario/infracao) | Ver definicao no glossario |
 | [Triagem](../glossario/triagem) | Ver definicao no glossario |
 
+## Relacionado
+
+- [Triagem de Infrações](./triagem)
+- [Auditoria](./auditoria)
+- [Infrações Descartadas](./infracoes-descartadas)
+- [Lote de Exportação](../glossario/lote-exportacao)
+
+## Boas práticas
+
+- Use os filtros de **Período** e **Equipamento** em combinação para reduzir o volume de resultados e agilizar a análise
+- Filtre por **Status = Aguardando Triagem** para identificar o backlog pendente antes de começar o turno
+- Exporte para Excel apenas o período necessário — exportações muito grandes podem demorar
+- Use o filtro **Usuário** para auditar a produção de um analista específico
+
 ---
 
 ## Navegacao Relacionada

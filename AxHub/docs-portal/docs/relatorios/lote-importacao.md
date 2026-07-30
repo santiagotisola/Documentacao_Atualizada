@@ -68,6 +68,20 @@ Exporte o relatório do lote para identificar quais registros específicos falha
 Lotes com status **Parcial** importaram apenas parte dos registros. Verifique os erros antes de considerar a importação concluída.
 :::
 
+## Relacionado
+
+- [Logs de Envios a Integração](./relatorio-logs-envios)
+- [Relatório de Passagens](./relatorio-passagens)
+- [Lote de Exportação](../glossario/lote-exportacao)
+- [Falhas Sequenciais](./falhas-sequenciais)
+
+## Boas práticas
+
+- Priorize lotes com **Status = Erro** ou **Parcial** antes de processar novas importações
+- Use **Reimportar** somente após identificar a causa da falha — reimportações sem correção repetirão o erro
+- Exporte o log de erros para análise técnica ou encaminhamento ao suporte
+- Monitore diariamente o volume importado para detectar falhas silenciosas (lotes com zero registros)
+
 ---
 
 ## Navegação Relacionada

@@ -59,6 +59,20 @@ Uma operação ativa vincula todos os registros de passagem dos equipamentos sel
 | Velocidade Regulamentada | Condicional | Velocidade limite da via |
 | Observacao | não | Informacoes adicionais |
 
+## Relacionado
+
+- [Faixas](./faixas)
+- [Arcos](../administracao/arcos)
+- [Aferições](./afericoes)
+- [Enquadramentos](../administracao/enquadramentos)
+
+## Boas práticas
+
+- Vincule os equipamentos corretos antes de iniciar a operação — passagens de equipamentos não vinculados não serão associadas ao contexto da fiscalização
+- Encerre a operação no mesmo dia para não misturar dados de períodos distintos nos relatórios
+- Descreva o objetivo da operação no campo **Observação** para facilitar auditorias futuras
+- Verifique se os equipamentos possuem aferição válida antes de iniciar — aferição vencida invalida as infrações geradas
+
 ## Navegacao relacionada
 
 | Tipo | Pagina | Descricao |

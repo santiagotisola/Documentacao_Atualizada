@@ -48,6 +48,21 @@ Cadastro e gestão dos postos de pesagem. Acessado em **Menu lateral → Balanç
 
 Cadastro de motivos utilizados no encerramento dos tickets de pesagem. Acessado em **Menu lateral → Balança → Motivos**.
 
+## Relacionado
+
+- [Liberar Pesagem](../pesagem/liberar-pesagem)
+- [Tickets Abertos](../pesagem/ticket-aberto)
+- [Tickets Fechados](../pesagem/ticket-fechado)
+- [Reclassificar](../pesagem/reclassificar)
+- [Motivos](../pesagem/motivos)
+
+## Boas práticas
+
+- Libere tickets em lotes ao iniciar o turno para evitar acumular atraso na análise
+- Reclassifique antes de encerrar o ticket — corrigir após encerramento requer autorização do administrador
+- Registre sempre o motivo correto ao encerrar tickets para alimentar os relatórios gerenciais com dados confiáveis
+- Monitore tickets com status **Em andamento** há mais de 4 horas e escale para o supervisor
+
 ## Navegacao relacionada
 
 | Tipo | Pagina | Descricao |

@@ -62,3 +62,22 @@ A sincronização pode consumir recursos significativos do servidor. Recomenda-s
 :::caution Permissão necessária
 Apenas Usuários com perfil de **Administrador** têm acesso à função de sincronização.
 :::
+
+## Relacionado
+
+- [Configurações do Sistema](./configuracoes)
+- [Logs de Acesso](../administracao/logs-acesso)
+- [Relatório de Passagens](../relatorios/relatorio-passagens)
+
+## Quando usar
+
+| Situação | Descrição |
+|----------|-----------|
+| **Dados desatualizados** | Relatórios não refletem passagens após 10+ minutos |
+| **Após restauração de backup** | Reindexar dados importados do banco |
+| **Após falha de sincronização** | Reprocessar registros não indexados |
+| **Manutenção programada** | Como parte de rotinas periódicas do Elasticsearch |
+
+:::warning
+Execute a sincronização fora do horário de pico operacional. O processo consome recursos significativos do servidor e pode afetar o desempenho do monitoramento em tempo real.
+:::

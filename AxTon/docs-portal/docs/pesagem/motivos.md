@@ -56,3 +56,21 @@ Motivos detalhados facilitam a análise gerencial e a rastreabilidade de libera�
 4. Selecione o Tipo
 5. Marque como Ativo
 6. Clique em **Salvar**
+
+## Relacionado
+
+- [Liberar Pesagem](./liberar-pesagem)
+- [Reclassificar](./reclassificar)
+- [Tickets Abertos](./ticket-aberto)
+- [Processamento por Usuário](../relatorios/processamento-por-usuario)
+
+## Boas práticas
+
+- Mantenha motivos específicos e descritivos — motivos genéricos dificultam a análise gerencial
+- Crie motivos distintos para **liberação**, **reclassificação** e **descarte** para segmentar corretamente os relatórios
+- Inative motivos obsoletos em vez de excluí-los para preservar o histórico operacional
+- Revise periodicamente os motivos mais usados no Dashboard para identificar padrões de liberação indevida
+
+:::tip
+Motivos bem configurados alimentam os relatórios gerenciais e permitem identificar padrões como excessívas liberações por "erro de classificação" que podem indicar necessidade de treinamento da equipe.
+:::

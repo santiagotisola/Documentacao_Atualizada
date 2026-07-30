@@ -79,3 +79,21 @@ Se a placa consultada estiver cadastrada na lista de Veículos monitorados, um �
 :::info OCR e precisão de leitura
 Em condições adversas (chuva, sujeira, ângulo), a leitura da placa pode ser parcial. Utilize a imagem capturada para confirmação visual.
 :::
+
+## Relacionado
+
+- [Painel Analítico](./painel-analitico)
+- [Passagens](../relatorios/relatorio-passagens)
+- [Veículos Monitorados](./veiculos-monitorados)
+- [Mapeamento de Rotas](./mapeamento-rotas)
+
+## Casos de uso
+
+- **Investigação de incidentes**: reconstruir o percurso de um veículo suspeito antes e depois de um crime
+- **Verificação de ausência**: confirmar se um veículo circulou na área durante determinado período
+- **Suporte à juízo**: fornecer histórico de passagens como evidência em processos judiciais ou administrativos
+- **Auditoria de alertas**: verificar a frequência de passagens de veícúlos que geraram alertas recorrentes
+
+:::tip
+Combine o Rastreamento de Placas com o [Painel Analítico](./painel-analitico) para uma visão mais completa: use o rastreamento para o histórico de passagens e o painel para gráficos de frequência e heatmap de localização.
+:::

@@ -60,6 +60,24 @@ A triagem do cronotacógrafo usa o mesmo Id da passagem (`TBPassagensCronotacogr
 
 ---
 
+## Relacionado
+
+- [Cronotacógrafo](../glossario/cronotacografo)
+- [Consulta de Cronotacógrafo](./consulta)
+- [Triagem de Infrações](../infracoes/triagem)
+- [Enquadramentos](../administracao/enquadramentos)
+
+## Boas práticas
+
+- Verifique o status do certificado antes de confirmar a infração — certificado vencido invalida a autuação
+- Registre o motivo de descarte quando o status retornar `NaoEncontrado` para manter a rastreabilidade
+- Mantenha a fila de triagem com menos de 24h de defasagem para preservar a validade legal das autuações
+- Revise periodicamente veículos com status recorrente `Irregular` para identificar frotas com problemas sistêmicos
+
+:::tip
+Acesse **Cronotacógrafo → Consulta** para visualizar o histórico completo de verificações e identificar veículos com irregularidades recorrentes.
+:::
+
 ## Navegacao Relacionada
 
 | Tipo | Pagina | Descricao |

@@ -58,6 +58,20 @@ A reclassificação recalcula automaticamente os limites de peso aplicáveis ao 
 Ao reclassificar um Veículo o sistema recalcula o enquadramento da Infração Uma Infração já exportada **não** pode ser reclassificada sem autorização do administrador.
 :::
 
+## Relacionado
+
+- [Tickets Fechados](./ticket-fechado)
+- [Tickets Abertos](./ticket-aberto)
+- [Motivos](./motivos)
+- [Postos de Pesagem](./postos)
+
+## Boas práticas
+
+- Reclassifique **antes** de liberar o veículo — a liberação sem reclassificar mantém a classificação incorreta no histórico
+- Selecione sempre o motivo correto para que a gestão identifique padrões de classificação equivocada pelos operadores
+- Infrações já exportadas não podem ser reclassificadas sem autorização do administrador — verifique o status antes de agir
+- Registre na observação por que a classificação original estava incorreta para embasar revisões de processo
+
 ---
 
 ## Navegação Relacionada

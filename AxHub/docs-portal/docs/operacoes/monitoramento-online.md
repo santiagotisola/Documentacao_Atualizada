@@ -60,6 +60,20 @@ Configure o filtro por grupo de equipamentos para focar no seu âmbito de respon
 
 ---
 
+## Relacionado
+
+- [Eventos de Equipamentos](./eventos-equipamentos)
+- [Aferições](./afericoes)
+- [Dashboard](../primeiros-passos/dashboard)
+- [Consulta de Placas](./consulta-placas)
+
+## Boas práticas
+
+- Verifique o status de todos os equipamentos no início de cada turno antes de liberar a operação
+- Equipamentos com status **Offline** por mais de 15 minutos devem ser escalados para suporte técnico imediatamente
+- Use o filtro por grupo para focar no âmbito de responsabilidade e reduzir ruído visual
+- Monitore a taxa OCR em tempo real — quedas abaixo de 85% indicam necessidade de calibração ou limpeza
+
 ## Navegacao Relacionada
 
 | Tipo | Pagina | Descricao |

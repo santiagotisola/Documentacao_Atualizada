@@ -70,3 +70,17 @@ Registre toda interrupção logo que ocorrer. Interrupções não registradas se
 5. Defina o período (Início e Fim)
 6. Descreva a Justificativa
 7. Clique em **Salvar**
+
+## Relacionado
+
+- [Criar Medição](./criar-medicao)
+- [Índices de Performance](./indices-performance)
+- [Contratos](./contratos)
+- [Eventos de Equipamentos](../operacoes/eventos-equipamentos)
+
+## Boas práticas
+
+- Registre a interrupção **imediatamente** quando ocorrer — interrupções sem registro são contabilizadas como indisponibilidade penalizando o SLA
+- Classifique corretamente o tipo: manutenção preventiva programada geralmente não penaliza; corretiva sim
+- Descreva a causa e as ações tomadas com detalhes suficientes para embasar discussões contratuais
+- Registre a **Data/Hora Fim** assim que o equipamento voltar a operar para calcular a duração com precisão

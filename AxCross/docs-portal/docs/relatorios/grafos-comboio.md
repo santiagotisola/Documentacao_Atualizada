@@ -69,3 +69,21 @@ O módulo de Grafos de Comboio é utilizado principalmente por analistas de inte
 :::tip Combinação com Painel Analítico
 Após identificar um veículo relevante no grafo, utilize o [Painel Analítico](painel-analitico.md) para aprofundar a análise individual do veículo selecionado.
 :::
+
+## Relacionado
+
+- [Painel Analítico](./painel-analitico)
+- [Alertas](../operacoes/alertas)
+- [Veículos Monitorados](../operacoes/veiculos-monitorados)
+- [Configurações do Sistema](../sistema/configuracoes)
+
+## Casos de uso
+
+- **Investigação de redes criminosas**: identificar veículos que se deslocam sistematicamente com alvos de interesse
+- **Transporte de valores**: verificar se veículos de escolta acompanham consistentemente os mesmos caminhões
+- **Logística suspeita**: mapear frotas que operam em conjunto em rotas sensíveis
+- **Validação de hipóteses**: confirmar se veículos levantados em inquérito apresentam co-ocorrência mensurável
+
+:::warning Pré-requisito técnico
+Os Grafos de Comboio requerem **Neo4j ativo** e configurado. Sem o serviço rodando, os alertas **COMBOIO01** não são gerados e o grafo não exibe dados. Verifique em **Configurações do Sistema** se a detecção de comboio está habilitada.
+:::

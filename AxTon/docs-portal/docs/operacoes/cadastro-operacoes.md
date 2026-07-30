@@ -71,6 +71,20 @@ Para encerrar uma operação em andamento, clique em **Editar** e preencha a **D
 Somente operações com status **Em Andamento** permitem registrar novas pesagens. Verifique sempre se há uma operação ativa antes de iniciar uma pesagem.
 :::
 
+## Relacionado
+
+- [Iniciar Pesagem](../pesagem/ticket-aberto)
+- [Locais](../cadastros/locais)
+- [Monitoramento Online](../operacoes/monitoramento-online)
+- [Alertas](../operacoes/alertas)
+
+## Boas práticas
+
+- Verifique se há uma operação **Em Andamento** antes de iniciar qualquer pesagem — pesagens sem operação ativa não são vinculadas a um contexto fiscalário correto
+- Encerre a operação ao final do turno ou da atividade para não misturar dados de períodos diferentes
+- Registre o Usuário responsável corretamente para rastreabilidade das pesagens realizadas
+- Para operações de longo prazo, monitore o status em **Monitoramento Online** para identificar equipamentos com problema
+
 ## Veja também
 
 | Funcionalidade | Descrição |
