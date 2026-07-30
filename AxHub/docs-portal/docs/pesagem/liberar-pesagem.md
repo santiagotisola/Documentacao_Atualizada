@@ -44,6 +44,19 @@ A liberação de tickets é uma ação registrada em log. Certifique-se de selec
 | Defeito no equipamento | Liberação por falha técnica |
 | Reclassificação eliminou excesso | Liberar após reclassificar |
 
+## Impacto legal
+
+A liberação sem o motivo correto pode:
+- Comprometer a validade do processo de autuação
+- Gerar responsabilidade administrativa do operador
+- Ser questionada em recurso pelo infrator
+
+## Relacionado
+
+- [Motivos](./motivos)
+- [Reclassificar](./reclassificar)
+- [Tickets Abertos](./ticket-aberto)
+
 ## Relacionado
 
 - [Motivos](./motivos) — Motivos de liberação disponíveis

@@ -37,9 +37,16 @@ Sequenciais duplicados geram rejeição do lote pelo órgão autuador. Não edit
 - [Falhas de Sequenciais](../relatorios/falhas-sequenciais)
 - [Lote de Exportação](../glossario/lote-exportacao)
 
+## Impacto operacional
 
-|-------|-----------|
-| **Órgão** | Órgão autuador |
+Sequenciais incorretos podem causar:
+- Rejeição de lotes inteiros pelo órgão autuador
+- Risco de prescrição das infrações (prazo de 30 dias)
+- Necessidade de reprocessamento manual com prazo reduzido
+
+:::tip
+Verifique o relatório de **Falhas de Sequenciais** antes de cada geração de lote para evitar rejeições.
+:::
 | **Sequencial Atual** | Último número utilizado |
 | **Faixa Início** | Número inicial da faixa |
 | **Faixa Fim** | Número final da faixa |
