@@ -41,10 +41,10 @@ Configurar motivos detalhados facilita a análise gerencial e a identificação 
 
 ## Impacto nos relatórios
 
-Os motivos são usados em:
-- **Relatório de Processamento por Usuário** — para segmentar por tipo de ação
-- **Dashboard gerencial** — top motivos de liberação e descarte
-- **Boletim de operação** — justificativas de liberação sem autuação
+Os motivos alimentam o **Dashboard gerencial** com:
+- Top 5 motivos de liberação sem autuação
+- Taxa de liberação por posto
+- Evolução mensal por tipo
 
 ## Relacionado
 

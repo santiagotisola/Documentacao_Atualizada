@@ -38,6 +38,18 @@ Permite cadastrar e gerenciar os arcos de fiscalização vinculados às operaç�
 Um arco agrupa equipamentos instalados na mesma travessia (ex: radares das faixas 1, 2 e 3 de uma mesma pista), facilitando o gerenciamento e exportação conjunta.
 :::
 
+## Casos de uso
+
+- **Fiscalização de avanço de sinal**: arco com câmeras das 3 faixas da mesma intersecção
+- **Corredor de ônibus**: arco com todos os equipamentos do corredor
+- **Pólo industrial**: agrupamento por zona fiscal
+
+## Relacionado
+
+- [Operações](../operacoes/cadastro-operacoes)
+- [Faixas](../operacoes/faixas)
+- [Eventos de Equipamentos](../relatorios/eventos-equipamentos)
+
 ## Boas práticas
 
 - Agrupe no mesmo arco todos os equipamentos instalados na mesma estrutura física (ex.: câmeras das faixas 1, 2 e 3 de uma mesma pista)

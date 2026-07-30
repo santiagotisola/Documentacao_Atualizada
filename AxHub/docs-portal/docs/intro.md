@@ -33,6 +33,21 @@ O AxHub é uma plataforma completa para **gestão de Equipamentos de fiscalizaç
 Use o **menu lateral** para navegar entre os módulos. Cada seção contém:
 
 - **Como acessar** — caminho no menu do sistema
+- **Campos** — descrição de cada campo com obrigatoriedade
+- **Passo a passo** — procedimento detalhado
+- **Boas práticas** — orientações operacionais
+- **Relacionado** — links para módulos complementares
+
+## Suporte
+
+Em caso de dúvidas sobre o sistema:
+- **Portal de chamados**: suporte.axiontecnologia.com.br
+- **E-mail**: suporte@axiontecnologia.com.br
+- **Telefônica**: (62) 3000-0000 (dias úteis 8h-18h)
+
+:::info
+Este manual é atualizado automaticamente a cada versão do sistema. Consulte sempre a versão online para garantir informações atualizadas.
+:::
 - **Campos exibidos** — detalhamento de cada campo da tela
 - **Filtros disponíveis** — opções de pesquisa e filtragem
 - **Integrações** — tabelas e sistemas relacionados

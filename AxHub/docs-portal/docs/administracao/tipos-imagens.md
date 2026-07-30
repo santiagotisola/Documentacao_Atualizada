@@ -42,6 +42,10 @@ Define as **categorias de imagens** que os equipamentos devem capturar em cada i
 Os tipos de imagens obrigatórios devem estar cadastrados antes de configurar os equipamentos. Equipamentos sem todos os tipos obrigatórios terão infrações incompletas.
 :::
 
+## Impacto na validade das infrações
+
+Imagens obrigatórias ausentes podem levar à **invalidação do auto** pelo órgão julgador. Configure corretamente antes de iniciar operações.
+
 ## Relacionado
 
 - [Equipamentos](./equipamentos)
