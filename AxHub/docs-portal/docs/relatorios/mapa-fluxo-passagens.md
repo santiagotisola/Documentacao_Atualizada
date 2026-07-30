@@ -43,6 +43,13 @@ Visualização geográfica do fluxo de passagens de Veículos por Equipamento Os
 Utilize o botão **Exportar** para gerar uma imagem do mapa ou um CSV com os dados por equipamento.
 :::
 
+## Relacionado
+
+- [Fluxo Diário de Veículos](./fluxo-diario-veiculos)
+- [Eventos de Equipamentos](./eventos-equipamentos)
+- [Aferições](../operacoes/afericoes)
+
+
 ## Funcionalidades do Mapa
 
 | Recurso | Descrição |

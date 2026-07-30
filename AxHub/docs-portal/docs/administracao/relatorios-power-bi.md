@@ -42,6 +42,13 @@ Permite configurar e acessar Relatórios do Power BI integrados ao AxHub.
 :::info
 A URL de incorporação deve ser gerada no portal Power BI com modo de acesso público ou com token de serviço configurado.
 :::
+
+## Relacionado
+
+- [Relatórios Power BI (AxHub)](./relatorios-power-bi)
+- [Fluxo Diário de Veículos](../relatorios/fluxo-diario-veiculos)
+- [Processamento por Usuário](../relatorios/processamento-por-usuario)
+
 | **Processamento** | Análise do processamento de imagens |
 | **Índice do OCR** | Performance do reconhecimento de placas |
 | **Fluxo por Porte** | Médio diário de fluxo por porte de Veículo |

@@ -43,8 +43,15 @@ Cadastro e gestão dos **contratos de prestação de serviço** vinculados às o
 - [Índices de Performance](./indices-performance)
 - [Recursos](./recursos)
 
+## Alertas automáticos
+
+O sistema envia alertas quando:
+- A vigência do contrato está próxima do vencimento (30 dias antes)
+- A meta de disponibilidade ou OCR está abaixo do estabelecido
+- Nenhuma medição foi gerada no mês corrente
+
 :::tip
-Configure as metas de SLA diretamente no contrato. O sistema calculará automaticamente a conformidade ao gerar as medições mensais.
+Manteng ao contrato sempre atualizado com as metas vigentes. Metas desatualizadas geram boletins com dados incorretos de conformidade.
 :::
 | Tipo | Página |
 |------|--------|

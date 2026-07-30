@@ -35,11 +35,14 @@ Após o equipamento registrar uma passagem com peso acima do limite legal, o sis
 - [Motivos](../pesagem/motivos)
 - [Infração](./infracao)
 
-| **Reencaminhar** | Dúvida que exige revisão por nível superior |
-
 ## Relação com outros processos
 
 - **Antes da triagem:** Pesagem → Captura automática de infração
+- **Após a triagem:** Auditoria → Exportação ao órgão autuador
+
+:::warning
+Infrações aprovadas com erros de placa ou classificação podem ser invalidadas pelo órgão autuador. Revise com atenção antes de confirmar.
+:::
 - **Após a triagem:** Auditoria → Exportação para DENATRAN/SENATRAN
 
 ## Boas práticas
