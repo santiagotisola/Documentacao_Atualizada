@@ -47,6 +47,22 @@ Classificações de veículos por **número de eixos e PBT** (Peso Bruto Total).
 | Bitrem (6E) | 6 | 45 t |
 | Rodotrem (9E) | 9 | 57 t |
 
+## Erros comuns
+
+| Erro | Causa | Solução |
+|------|-------|----------|
+| Classificação errada atribuida | OCR não detectou eixos | Reclassificar manualmente |
+| PBT errado | Classificação desatualizada | Verificar CONTRAN 803/2021 |
+
+| Classificação | Eixos | PBT máximo |
+|----------------|:-----:|:-----------:|
+| Caminhão simples (2E) | 2 | 16 t |
+| Caminhão truck (3E) | 3 | 23 t |
+| Bi-truck (4E) | 4 | 29 t |
+| Bitrem (5E) | 5 | 41,5 t |
+| Bitrem (6E) | 6 | 45 t |
+| Rodotrem (9E) | 9 | 57 t |
+
 ## Passo a passo
 
 1. Acesse **Veículos → Classificações de Veículos**

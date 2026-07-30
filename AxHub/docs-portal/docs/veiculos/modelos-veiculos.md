@@ -38,6 +38,21 @@ Use a barra de busca para localizar um modelo existente antes de cadastrar um no
 - [Marcas de Veículos](./marcas-veiculos)
 - [Classificações de Veículos](./classificacoes-veiculos)
 
+## Modelos comuns por segmento
+
+| Marca | Modelos comuns |
+|-------|----------------|
+| FIAT | Uno, Strada, Toro |
+| VOLKSWAGEN | Gol, Amarok, Delivery |
+| FORD | Ka, Ranger, Cargo |
+
+## Erros comuns
+
+| Erro | Causa | Solução |
+|------|-------|----------|
+| Modelo duplicado | Cadastrado 2x | Inativar duplicata |
+| Modelo sem marca | Criação sem vínculo | Selecionar marca corretamente |
+
 ## Relacionado
 
 - [Marcas de Veículos](./marcas-veiculos)

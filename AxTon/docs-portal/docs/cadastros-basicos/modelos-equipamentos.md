@@ -40,6 +40,14 @@ Fabricante → Modelo → Equipamento. Antes de cadastrar um modelo, o Fabricant
 - Não renomeie modelos já associados a equipamentos em operação — pode causar inconsistência nos registros históricos
 - Mantenha modelos descontinuados como **Inativos** para preservar o histórico sem prejudicar novos cadastros
 
+## Modelos por fabricante
+
+| Fabricante | Modelos |
+|------------|---------|
+| HAENNI | WL103, WL105, WL110 |
+| Toledo do Brasil | ICS465, ICS685 |
+| RODOANEL | WIM200, WIM400 |
+
 ## Relacionado
 
 - [Fabricantes](./fabricantes)

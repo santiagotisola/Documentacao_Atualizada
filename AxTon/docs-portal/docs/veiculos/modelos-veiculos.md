@@ -42,9 +42,16 @@ Verifique se o modelo já existe antes de criar. Duplicidades dificultam a class
 | Marca | Modelos comuns |
 |-------|----------------|
 | MERCEDES-BENZ | Actros, Atego, Axor |
-| SCANIA | R-Series, G-Series |
+| SCANIA | R-Series, G-Series, P-Series |
 | VOLVO | FH, FM, FMX |
 | IVECO | Daily, Eurocargo, Stralis |
+
+## Erros comuns
+
+| Erro | Causa | Solução |
+|------|-------|----------|
+| Modelo duplicado | Cadastrado 2x | Inativar duplicata |
+| Modelo sem marca | Criação sem vínculo | Corrigir no cadastro |
 
 ## Relacionado
 

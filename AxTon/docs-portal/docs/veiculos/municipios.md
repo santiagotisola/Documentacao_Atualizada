@@ -41,6 +41,12 @@ O Código IBGE de 7 dígitos é obrigatório nos arquivos de exportação de inf
 
 O sistema já vem com uma base pré-carregada dos municípios brasileiros com códigos IBGE. Adicione entradas personalizadas apenas para subdivisões não listadas.
 
+## Impacto na exportação
+
+:::warning
+Código IBGE incorreto causa rejeição do lote de exportação. Sempre use o código de 7 dígitos oficial. Verifique no portal do IBGE antes de cadastrar.
+:::
+
 :::info
 A base de municípios é utilizada automaticamente na localização dos postos de pesagem nos boletins de medição e nos arquivos de exportação de infrações.
 :::

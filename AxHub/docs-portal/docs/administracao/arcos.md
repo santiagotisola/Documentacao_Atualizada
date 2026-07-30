@@ -40,15 +40,21 @@ Um arco agrupa equipamentos instalados na mesma travessia (ex: radares das faixa
 
 ## Casos de uso
 
-- **Fiscalização de avanço de sinal**: arco com câmeras das 3 faixas da mesma intersecção
-- **Corredor de ônibus**: arco com todos os equipamentos do corredor
-- **Pólo industrial**: agrupamento por zona fiscal
+- **Fiscalização de avanço de sinal**: agrupamento de 3 faixas na mesma intersecção
+- **Corredor de ônibus**: todos os pontos do corredor como um arco
+- **Polo industrial**: agrupamento por zona fiscal
+
+## Erros comuns
+
+| Erro | Causa | Solução |
+|------|-------|----------|
+| Equipamento em 2 arcos | Dois arcos criados para mesma faixa | Verificar e remover duplicata |
+| Arco sem equipamento | Equipamentos não vinculados | Vincular antes de usar |
 
 ## Relacionado
 
 - [Operações](../operacoes/cadastro-operacoes)
 - [Faixas](../operacoes/faixas)
-- [Eventos de Equipamentos](../relatorios/eventos-equipamentos)
 
 ## Boas práticas
 

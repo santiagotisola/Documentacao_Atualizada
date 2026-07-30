@@ -40,7 +40,19 @@ Exibe a **produtividade de cada operador** na triagem de infrações: infraçõe
 Alta taxa de descarte em um usuário pode indicar necessidade de treinamento. Baixa taxa pode indicar aprovação inadequada sem critério.
 :::
 
-## Metas de produtividade
+## Interpretação das métricas
+
+| Métrica | Normal | Alerta |
+|---------|:------:|:------:|
+| Taxa de descarte | 5-15% | >20% ou <2% |
+| Infrações/hora | 80-120 | <40 ou >150 |
+| Tempo médio | 15-45s | >60s |
+
+## Relacionado
+
+- [Triagem](../glossario/triagem)
+- [Motivos de Descarte](../pesagem/motivos)
+- [Logs de Acesso](../controle-acesso/logs-acesso)
 
 | Perfil | Meta mín/hora |
 |--------|:-------------:|

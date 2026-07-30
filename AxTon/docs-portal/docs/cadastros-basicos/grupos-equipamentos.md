@@ -39,7 +39,18 @@ Organize grupos por **contrato** ou **região** para facilitar a geração de me
 - Nomeie os grupos de forma que o usuário identifique facilmente a localidade ou o contrato
 - Mantenha a lista de equipamentos do grupo atualizada após instalações ou desativações
 
-## Impacto nos relatórios
+## Impacto nas medições
+
+Grupos bem definidos permitem:
+- Gerar medições contratuais por agrupamento
+- Filtrar o Fluxo Diário por grupo
+- Comparar OCR entre regiões diferentes
+
+## Relacionado
+
+- [Equipamentos](./equipamentos)
+- [Contratos](../medicoes/contratos)
+- [Medições](../medicoes/criar-medicao)
 
 Grupos bem definidos permitem:
 - Gerar medições contratuais por agrupamento
