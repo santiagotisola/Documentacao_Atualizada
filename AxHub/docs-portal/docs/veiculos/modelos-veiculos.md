@@ -30,8 +30,14 @@ Cadastro dos **modelos de veículos vinculados às marcas**. O modelo correto ga
 4. Clique em **Salvar**
 
 :::tip
-Use a barra de busca para localizar um modelo existente antes de cadastrar um novo. Evita duplicidades na base de classificacão.
+Use a barra de busca para localizar um modelo existente antes de cadastrar um novo. Evita duplicidades na base de classificação.
 :::
+
+## Relacionado
+
+- [Marcas de Veículos](./marcas-veiculos)
+- [Tipos de Veículos](./tipos-veiculos)
+
 
 1. Acesse **Veículos → Modelos de Veículos**
 2. Clique em **+ Novo**

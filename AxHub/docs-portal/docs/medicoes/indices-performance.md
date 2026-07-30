@@ -36,6 +36,16 @@ Permite configurar os índices de performance exigidos pelos contratos.
 | Tempo de manutenção | ≤4h/mês |
 
 :::tip
+Os índices configurados aqui são calculados automaticamente ao gerar uma nova medição. Manter as metas atualizadas de acordo com o contrato vigente evita distorções no boletim.
+:::
+
+## Relacionado
+
+- [Criar Medição](./criar-medicao)
+- [Medições Finalizadas](./medicoes-finalizadas)
+
+
+:::tip
 Os índices configurados aqui são calculados automaticamente ao gerar uma nova medição. Manter metas atualizadas de acordo com o contrato vigente.
 :::
 
