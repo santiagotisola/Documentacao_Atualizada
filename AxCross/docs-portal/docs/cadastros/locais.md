@@ -39,6 +39,13 @@ No **menu lateral**, expanda **Cadastros** e clique em **Locais**.
 Sempre informe latitude e longitude para que o cruzamento apareça corretamente no **Mapa de Equipamentos** do Dashboard.
 :::
 
+## Relacionado
+
+- [Faixas](./faixas)
+- [Equipamentos](./equipamentos)
+- [Grupos de Equipamentos](./grupos-equipamentos)
+
+
 ## Hierárquia de cadastros
 
 ```

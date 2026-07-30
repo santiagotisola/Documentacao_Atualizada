@@ -34,8 +34,16 @@ Documento eletrônico obrigatório que vincula as notas fiscais (NF-e) ao transp
 - [NF-e](./nfe) — Nota Fiscal Eletrônica
 - [Relatório de Notas Fiscais](../relatorios/relatorio-nfe)
 
-:::info
-Veículos com MDF-e vencido ou ausente não podem continuar o transporte até a regularização. O AxTon gera alerta automático para o operador ao detectar a irregularidade.
+## Penalidades por infração
+
+| Situação | Penalidade |
+|----------|------------|
+| MDF-e ausente | Multa de 550 UFIRs (Art. 12, Lei 8.137/90) |
+| MDF-e encerrado antes do destino | Retenção da carga |
+| Dados divergentes do MDF-e | Apreensão da mercadoria |
+
+:::info Base legal
+**Ajuste SINIEF 21/2010** — institui o MDF-e. Fiscalização pelo SEFAZ estadual em rodovias.
 :::
 
 

@@ -38,8 +38,12 @@ Indicadores que medem o desempenho operacional dos postos de pesagem conforme os
 4. Clique em **Salvar**
 
 :::tip
-Os índices são calculados automaticamente quando uma nova medição é gerada. Manter as metas atualizadas de acordo com o contrato vigente evita distorções no boletim mensal.
+Os índices são calculados automaticamente ao gerar cada medição. Mantenha-os atualizados conforme o contrato vigente.
 :::
+
+## Impacto no Boletim
+
+Cada índice abaixo da meta gera uma **entrada de não conformidade** no Boletim de Medição, que pode acionar cláusulas de penalidade contratual.
 
 ## Relacionado
 

@@ -36,6 +36,14 @@ Exibe os **tickets de pesagem em andamento** que ainda não foram finalizados. U
 Um ticket só é **fechado** após a liberação explícita pelo operador. Veículos retidos por excesso de carga permanecem como ticket aberto até a regularização.
 :::
 
+## Tempo máximo de retenção
+
+Veículos retidos por mais de 4 horas têm direito a **alimentação** fornecida pelo órgão. Após 24 horas, o motorista pode exigir remoção para pátio.
+
+:::warning
+Comunique ao supervisor imediatamente em caso de retenção por mais de 4 horas.
+:::
+
 ## Relacionado
 
 - [Liberar Pesagem](./liberar-pesagem)

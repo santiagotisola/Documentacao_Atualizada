@@ -37,6 +37,15 @@ A tela exibe todos os registros cadastrados, com opção de pesquisa e filtro.
 Verifique se o modelo já existe antes de criar. Duplicidades dificultam a classificação nos tickets de pesagem.
 :::
 
+## Modelos mais comuns por marca
+
+| Marca | Modelos comuns |
+|-------|----------------|
+| MERCEDES-BENZ | Actros, Atego, Axor |
+| SCANIA | R-Series, G-Series |
+| VOLVO | FH, FM, FMX |
+| IVECO | Daily, Eurocargo, Stralis |
+
 ## Relacionado
 
 - [Marcas de Veículos](./marcas-veiculos)

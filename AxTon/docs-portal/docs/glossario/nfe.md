@@ -36,6 +36,21 @@ A comparação entre o **peso declarado na NF-e** e o **peso aferido na balança
 ## Relacionado
 
 - [MDF-e](./mdfe) — Manifesto de Documentos Fiscais
+- [Relatório de NF-e](../relatorios/relatorio-nfe)
+- [Discrepancias](../relatorios/relatorio-discrepancias)
+
+## Campos capturados automaticamente
+
+| Campo | Fonte |
+|-------|-------|
+| Chave NF-e (44 dígitos) | OCR + SEFAZ |
+| CNPJ do emitente | SEFAZ |
+| Valor total | SEFAZ |
+| Peso declarado | SEFAZ |
+
+:::tip Auditoria fiscal
+Compare o **peso declarado na NF-e** com o **peso aferido** no AxTon. Diferenças acima de 10% devem ser reportadas à Secretaria da Fazenda.
+:::
 - [Relatório de Notas Fiscais](../relatorios/relatorio-nfe)
 
 | **Emitente** | CNPJ do remetente da mercadoria |

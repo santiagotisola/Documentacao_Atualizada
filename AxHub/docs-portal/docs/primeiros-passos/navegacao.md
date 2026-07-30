@@ -34,7 +34,13 @@ Guia de orientação sobre a **estrutura de menus e navegação geral** do siste
 
 ![Mapa Online](../img/mapa%20online.png)
 
-:::tip Dica de produtividade
+O mapa online exibe em tempo real os equipamentos ativos e seus status operacionais, permitindo monitoramento geográfico da operação.
+
+## Relacionado
+
+- [Login](./login)
+- [Permissões](../controle-acesso/permissoes)
+- [Dashboard](../relatorios/power-bi)
 Use os atalhos nos ícones do Dashboard para acessar as funcionalidades mais usadas sem navegar pelo menu lateral.
 :::
 

@@ -36,12 +36,19 @@ Cadastro dos **equipamentos de pesagem** instalados nos postos de fiscalização
 Após cadastrar o equipamento, registre a aferição inicial em **Operações → Aferições**. Sem aferição válida, as infrações não têm validade legal.
 :::
 
+## Manutencao e status
+
+| Status | Significado | Ação |
+|--------|-------------|------|
+| Ativo | Operacional | Monitorar |
+| Em Manutenção | Intervenção técnica | Registrar evento |
+| Inativo | Fora de operação | Verificar antes de desativar |
+
 ## Relacionado
 
 - [Tipos de Equipamentos](./tipos-equipamentos)
 - [Modelos de Equipamentos](./modelos-equipamentos)
 - [Fabricantes](./fabricantes)
-- [Postos de Pesagem](../pesagem/postos)
 
 | **Ativo** | Status do registro |
 

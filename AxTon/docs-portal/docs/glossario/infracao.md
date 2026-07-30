@@ -33,6 +33,13 @@ Pesagem detecta excesso
 | Excesso de PBT | 231, I | Gravíssima |
 | Excesso por eixo | 231, II | Gravíssima |
 
+## Penalidade
+
+| Excesso | Sanção |
+|---------|----------|
+| Até 5% | Multa + retenção |
+| Acima de 5% | Multa + retenção + remoção ao pátio |
+
 ## Relacionado
 
 - [PBT](./pbt)

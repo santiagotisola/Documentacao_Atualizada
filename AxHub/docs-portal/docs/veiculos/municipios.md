@@ -34,7 +34,14 @@ Cadastro dos municípios utilizados no sistema para **classificação geográfic
 O código IBGE de 7 dígitos é obrigatório nos arquivos de exportação de infrações ao DENATRAN/SENATRAN.
 :::
 
-## Municípios mais comuns
+## Base de municípios
+
+O sistema já inclui todos os municípios brasileiros com códigos IBGE. Adicione entradas personalizadas apenas para subdivisões não listadas ou localidades estrangeiras.
+
+## Relacionado
+
+- [Faixas](../operacoes/faixas)
+- [Tipos de Veículos](./tipos-veiculos)
 
 O sistema já vem com uma base pré-carregada dos municípios brasileiros com código IBGE. Adicione novas entradas apenas se a localidade não constar na lista ou se for necessária uma subdivisão personalizada.
 
