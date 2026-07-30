@@ -29,6 +29,22 @@ Abra o navegador e acesse o endereço do AxCross fornecido pela sua organizaçã
 4. Clique em **ENTRAR**
 5. O sistema redireciona automaticamente para o **Dashboard**
 
+## Primeiro acesso
+
+No primeiro acesso, utilize as credenciais temporárias fornecidas pelo administrador. Altere a senha imediatamente após o login.
+
+:::warning Segurança
+Nunca compartilhe suas credenciais. Cada ação realizada fica registrada com o seu usuário no log de auditoria.
+:::
+
+## Problemas comuns
+
+| Problema | Solução |
+|----------|---------|
+| Senha incorreta | Tente novamente ou clique em **Esqueci minha senha** |
+| Usuário bloqueado | Contate o administrador do sistema |
+| Página não carrega | Verifique a conexão com a rede interna |
+
 ## Recuperação de senha
 
 Clique em **Esqueceu a Senha?** na tela de login. O sistema enviará instruções de recuperação para o e-mail cadastrado no perfil do usuário.

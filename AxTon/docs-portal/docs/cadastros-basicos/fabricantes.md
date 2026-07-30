@@ -31,8 +31,16 @@ Cadastro dos **fabricantes dos equipamentos** de pesagem. Obrigatório para vinc
 :::info Hierarquia
 Fabricante → Modelo → Equipamento. Cadastre o fabricante antes de criar modelos.
 :::
-1. Acesse **Cadastros Básicos → Fabricantes**
-2. Clique em **+ Novo**
+
+## Fabricantes homologados comuns
+
+| Fabricante | Tipo de equipamento |
+|------------|---------------------|
+| HAENNI | Balanças portáteis e fixas |
+| Toledo | Balanças industriais |
+| RODOANEL | Sistemas WIM dinâmicos |
+| SCHENCK | Balanças de precisao |
+
 3. Informe o **Nome** do fabricante
 4. Clique em **Salvar**
 

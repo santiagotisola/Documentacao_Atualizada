@@ -39,6 +39,10 @@ Permite configurar quais endereços IP podem acessar o sistema, adicionando uma 
 | Faixa CIDR | `192.168.1.0/24` |
 | IPv6 | `2001:db8::1` |
 
+:::warning
+Quando a restrição por IP está ativada, **somente os IPs cadastrados** conseguem acessar. Inclua o IP da sua rede antes de ativar para evitar bloqueio acidental.
+:::
+
 :::warning Restrição ativa
 Quando a restrição por IP está ativada, **somente os IPs cadastrados** conseguem acessar o sistema. Certifique-se de incluir o IP da sua rede antes de ativar.
 :::

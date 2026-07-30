@@ -35,6 +35,18 @@ Tabela de marcas de veículos utilizada na identificação nos registros de infr
 As marcas são vinculadas aos **Modelos de Veículos**, formando a hierarquia Marca → Modelo usada nas infrações.
 :::
 
+## Marcas comuns em infrações de trânsito
+
+| Marca | Segmento |
+|-------|----------|
+| FIAT | Passeio e leve |
+| VOLKSWAGEN | Passeio e comercial |
+| CHEVROLET | Passeio |
+| HONDA | Motos e passeio |
+| YAMAHA | Motos |
+
+:::
+
 ## Passo a passo
 
 1. Acesse **Veículos → Marcas de Veículos**

@@ -33,6 +33,11 @@ Cadastro dos **tipos de veículos** fiscalizados nos postos de pesagem, utilizad
 | **PBT máximo (t)** | Sim | Peso máximo permitido |
 | **Status** | Sim | Ativo ou Inativo |
 
+## Relacionado
+
+- [Classificações de Veículos](./classificacoes-veiculos)
+- [PBT](../glossario/pbt)
+
 
 A tela exibe todos os registros cadastrados, com opção de pesquisa e filtro.
 

@@ -31,7 +31,13 @@ Documento fiscal digital obrigatório que acompanha o transporte de mercadorias.
 
 :::info
 A comparação entre o **peso declarado na NF-e** e o **peso aferido na balança** pode indicar subdeclaração fiscal.
-:::| **Chave de acesso** | 44 dígitos — identificador único |
+:::
+
+## Relacionado
+
+- [MDF-e](./mdfe) — Manifesto de Documentos Fiscais
+- [Relatório de Notas Fiscais](../relatorios/relatorio-nfe)
+ **Chave de acesso** | 44 dígitos — identificador único |
 | **Emitente** | CNPJ do remetente da mercadoria |
 | **Destinatário** | CNPJ do destinatário |
 | **Valor total** | Valor da nota fiscal |

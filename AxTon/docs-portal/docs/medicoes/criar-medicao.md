@@ -33,6 +33,9 @@ Gera o **relatório de medição mensal** vinculado a um contrato, consolidando 
 8. Clique em **Finalizar Medição** para bloquear alterações
 9. Exporte em **PDF** para envio ao contratante
 
+:::info
+A medição finalizada é **bloqueada para edição**. Para corrigi-la, é necessário reabrir com permissão de supervisor, o que gera log de auditoria.
+:::
 ## O que a medição consolida
 
 - Total de veículos fiscalizados

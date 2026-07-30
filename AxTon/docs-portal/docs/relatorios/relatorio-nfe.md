@@ -34,6 +34,12 @@ Lista as **notas fiscais eletrônicas (NF-e)** vinculadas às passagens de veíc
 :::tip
 Use o filtro **Status = Ausente** para identificar veículos de carga que circularam sem nota fiscal, possível irregularidade fiscal a ser reportada.
 :::
+
+## Relacionado
+
+- [NF-e](../glossario/nfe) — Glossaróio
+- [Relatório de Discrepancias](./relatorio-discrepancias)
+
 | **Valor** | Valor total da nota |
 | **Peso declarado** | Peso informado na NF-e |
 | **Status** | Válida / Vencida / Cancelada |

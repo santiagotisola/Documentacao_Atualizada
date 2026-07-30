@@ -35,6 +35,20 @@ Mapa interativo exibindo o **volume de passagens por localidade geográfica**, p
 2. Selecione o **Período**
 3. Filtre por **Posto** (opcional)
 4. Clique em **Gerar Mapa**
+5. Clique em qualquer marcador para ver o volume detalhado
+
+## Indicadores visuais
+
+| Cor | Significado |
+|-----|-------------|
+| 🔵 Azul | Volume baixo |
+| 🟡 Amarelo | Volume médio |
+| 🔴 Vermelho | Volume alto |
+
+:::tip
+Use o filtro **Retidos** para identificar postos com maior número de veículos retidos por excesso de peso.
+:::3. Filtre por **Posto** (opcional)
+4. Clique em **Gerar Mapa**
 5. Clique em qualquer marcador para ver o volume detalhado do posto
 
 ## Indicadores visuais

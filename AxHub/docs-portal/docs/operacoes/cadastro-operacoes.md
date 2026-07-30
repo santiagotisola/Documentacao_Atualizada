@@ -35,6 +35,14 @@ Menu lateral - Operacoes - Cadastro de Operacoes
 
 1. Acesse **Operações → Cadastro de Operações**
 2. Clique em **+ Nova Operação**
+3. Preencha o **Nome**, **Data Início** e selecione os **Equipamentos**
+4. Clique em **Salvar**
+
+:::tip
+Uma operação ativa vincula todos os registros de passagem dos equipamentos selecionados ao contexto da fiscalização, facilitando a exportação e a auditoria.
+:::
+1. Acesse **Operações → Cadastro de Operações**
+2. Clique em **+ Nova Operação**
 3. Preencha os campos obrigatórios
 4. Vincule os **Equipamentos** participantes
 5. Clique em **Salvar**

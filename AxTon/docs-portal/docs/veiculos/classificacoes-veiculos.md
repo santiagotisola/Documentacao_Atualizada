@@ -33,8 +33,7 @@ Classificações de veículos por **número de eixos e PBT** (Peso Bruto Total).
 ## Relacionado
 
 - [PBT](../glossario/pbt) — Peso Bruto Total
-- [Tipos de Veículos](./tipos-veiculos) — Tipos compatíveis
-
+- [Tipos de Veículos](./tipos-veiculos) — Tipos compatíveis- [Infração](../glossario/infracao)
 
 A tela exibe todos os registros cadastrados, com opção de pesquisa e filtro.
 

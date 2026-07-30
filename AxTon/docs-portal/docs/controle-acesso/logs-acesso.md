@@ -33,6 +33,12 @@ Registra **todas as autenticações** realizadas no sistema, incluindo acessos b
 ## Uso na segurança
 
 - Detectar tentativas de acesso não autorizado
+- Verificar o que um usuário fez antes de um incidente
+- Auditar acessos em horários fora do expediente
+
+:::tip
+Filtre por **Status = Falha** e analise os IPs de origem. Múltiplas falhas do mesmo IP podem indicar ataque de força bruta.
+:::
 - Identificar contas comprometidas
 - Verificar horários de acesso suspeitos
 - Auditar ações de usuários críticos

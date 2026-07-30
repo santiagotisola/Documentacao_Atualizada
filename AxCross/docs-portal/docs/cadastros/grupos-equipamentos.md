@@ -33,6 +33,12 @@ No **menu lateral**, expanda **Cadastros** e clique em **Grupos de Equipamentos*
 :::tip
 Agrupar por região geográfica facilita o monitoramento e a filtragem de relatórios. Ex.: "Centro", "Sul", "Rodovia SP-310".
 :::
+
+## Relacionado
+
+- [Equipamentos](../cadastros/equipamentos)
+- [Alertas](../operacoes/alertas)
+
 | Equipamentos | Sim | Lista de Equipamentos vinculados ao grupo |
 | **Status** | Sim | Ativo ou Inativo |
 

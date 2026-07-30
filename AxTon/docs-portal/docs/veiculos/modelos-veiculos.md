@@ -33,6 +33,10 @@ A tela exibe todos os registros cadastrados, com opção de pesquisa e filtro.
 3. Preencha o **Nome** e selecione a **Marca**
 4. Clique em **Salvar**
 
+:::tip
+Verifique se o modelo já existe antes de criar. Duplicidades dificultam a classificação nos tickets de pesagem.
+:::
+
 | **Marca** | Marca do veículo |
 | **Status** | Ativo ou Inativo |
 

@@ -33,8 +33,14 @@ Cada perfil de acesso pode ter **permissões específicas** por módulo: Visuali
 4. Clique em **Salvar**
 
 :::warning
-Alterações de permissão entram em vigor imediatamente. Usuários com sessão ativa podem precisar fazer logout e login novamente.
+Alterações de permissão entram em vigor imediatamente. Usuários com sessão ativa podem precisar fazer logout e login novamente para ver as mudanças.
 :::
+
+## Relacionado
+
+- [Perfis de Acesso](./perfis-acesso)
+- [Usuários](./usuarios)
+
 
 
 ### Matriz de Permissões

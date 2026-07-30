@@ -30,8 +30,14 @@ Agrupamento lógico de equipamentos para **organização por contrato, região o
 5. Clique em **Salvar**
 
 :::tip
-Organize grupos por **contrato** ou **região** para facilitar a geração de medições e relatórios segmentados.
+Organize grupos por **contrato** ou **região** para facilitar a geração de medições e relatórios segmentados por localidade.
 :::
+
+## Relacionado
+
+- [Equipamentos](./equipamentos)
+- [Contratos](../medicoes/contratos)
+
 
 ## Uso dos grupos
 

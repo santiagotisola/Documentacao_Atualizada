@@ -34,6 +34,15 @@ Apresenta o **volume de imagens capturadas e processadas** pelo sistema, incluin
 
 ## Interpretação da Taxa OCR
 
+| Taxa | Status | Ação recomendada |
+|------|--------|------------------|
+| ≥90% | ✅ Normal | Monitorar |
+| 80-89% | ⚠️ Atenção | Verificar limpeza das câmeras |
+| <80% | ❌ Crítico | Solicitar manutenção técnica |
+
+:::tip
+Use este relatório semanalmente para identificar equipamentos com queda de OCR antes que impacte a medição contratual.
+:::
 | Taxa | Situação | Ação |
 |------|----------|------|
 | > 95% | Excelente | Manter |

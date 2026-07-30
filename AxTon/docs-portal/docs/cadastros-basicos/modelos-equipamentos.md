@@ -32,7 +32,12 @@ Cadastro dos **modelos de equipamentos** por fabricante. Cada modelo define as c
 :::info Hierarquia
 Fabricante → Modelo → Equipamento. Antes de cadastrar um modelo, o Fabricante deve estar registrado em **Fabricantes de Equipamentos**.
 :::
-| **Status** | Sim | Ativo ou Inativo |
+
+## Relacionado
+
+- [Fabricantes](./fabricantes)
+- [Equipamentos](./equipamentos)
+
 
 ## Passo a passo
 

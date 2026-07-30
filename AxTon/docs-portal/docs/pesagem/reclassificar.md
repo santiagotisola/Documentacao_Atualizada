@@ -39,7 +39,7 @@ Permite alterar a classificação de um Veículo durante o processo de pesagem q
 6. Clique em **Confirmar**
 
 :::warning
-Reclassificar pode alterar o limite de PBT aplicável. Se o excesso se mantiver na nova classificação, a infração é mantida. Se o peso ficar dentro do limite, a infração é cancelada.
+Reclassificar pode alterar o limite de PBT aplicável e, consequentemente, cancelar ou manter a infração. A operação é registrada em log de auditoria.
 :::
 
 ### Passo a passo

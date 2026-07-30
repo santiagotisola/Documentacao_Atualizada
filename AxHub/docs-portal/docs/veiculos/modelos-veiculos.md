@@ -36,6 +36,11 @@ Use a barra de busca para localizar um modelo existente antes de cadastrar um no
 ## Relacionado
 
 - [Marcas de Veículos](./marcas-veiculos)
+- [Classificações de Veículos](./classificacoes-veiculos)
+
+## Relacionado
+
+- [Marcas de Veículos](./marcas-veiculos)
 - [Tipos de Veículos](./tipos-veiculos)
 
 

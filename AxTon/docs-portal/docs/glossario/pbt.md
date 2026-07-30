@@ -34,6 +34,19 @@ PBT = Tara (peso do veículo vazio) + Carga (peso da mercadoria)
 | Balança estática verificada | ±4% |
 | Balança dinâmica | ±6% |
 
+## Consequencias do excesso de PBT
+
+| Excesso | Penalidade |
+|---------|------------|
+| Até 10% | Infração gravíssima + retenção |
+| Acima de 10% | Infração gravíssima + recolhimento ao pátio |
+
+## Relacionado
+
+- [Classificações de Veículos](../veiculos/classificacoes-veiculos)
+- [Infração](./infracao)
+
+
 ## Consequencias do excesso
 
 | Excesso | Penalidade |

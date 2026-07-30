@@ -29,6 +29,18 @@ Atividade de fiscalização planejada e executada em um ou mais cruzamentos dura
 - [Cadastro de Operações](../operacoes/cadastro-operacoes)
 - [Passagens](./passagem)
 
+## Ciclo de vida de uma operação
+
+| Status | Descrição |
+|--------|-----------|
+| **Ativa** | Em andamento — equipamentos monitorando |
+| **Pausada** | Temporariamente interrompida |
+| **Encerrada** | Finalizada — dados consolidados |
+
+:::tip
+Encerre a operação após a atividade de campo para consolidar os dados e liberar os relatórios finais.
+:::
+
 | **Local** | Cruzamento principal da operação |
 | **Data Início** | Data e hora de início |
 | **Data Fim** | Data e hora de encerramento previsto |

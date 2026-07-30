@@ -34,6 +34,10 @@ Processo de **mensuração da performance operacional** dos equipamentos de fisc
 - [Interrupções](../medicoes/interrupcoes)
 - [Índices de Performance](../medicoes/indices-performance)
 
+:::info
+A **medição de desempenho** é o principal instrumento de prestação de contas nos contratos de concessão e PPPs. Realize mensalmente dentro do prazo contratual.
+:::
+
 3. Verificar índices de performance
 4. Gerar relatório de medição
 5. Finalizar e exportar PDF

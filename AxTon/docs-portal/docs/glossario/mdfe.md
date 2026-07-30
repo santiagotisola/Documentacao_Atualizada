@@ -34,6 +34,10 @@ Documento eletrônico obrigatório que vincula as notas fiscais (NF-e) ao transp
 - [NF-e](./nfe) — Nota Fiscal Eletrônica
 - [Relatório de Notas Fiscais](../relatorios/relatorio-nfe)
 
+:::info
+Veículos com MDF-e vencido ou ausente não podem continuar o transporte até a regularização. O AxTon gera alerta automático para o operador ao detectar a irregularidade.
+:::
+
 
 ## Como o AxTon usa o MDF-e
 

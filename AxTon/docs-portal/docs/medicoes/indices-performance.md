@@ -33,6 +33,13 @@ Indicadores que medem o desempenho operacional dos postos de pesagem conforme os
 ## Como calcular
 
 1. Acesse **Medições → Índices de Performance**
+2. Clique em **+ Novo** para criar um índice
+3. Preencha os campos e defina a **Meta**
+4. Clique em **Salvar**
+
+:::tip
+Os índices são calculados automaticamente quando uma nova medição é gerada. Manter as metas atualizadas de acordo com o contrato vigente evita distorções no boletim mensal.
+:::
 2. Selecione o **Contrato** e o **Período**
 3. O sistema calcula automaticamente cada índice
 4. Compare com as metas contratuais

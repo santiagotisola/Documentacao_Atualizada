@@ -37,6 +37,7 @@ Pesagem detecta excesso
 
 - [PBT](./pbt)
 - [Reclassificar](../pesagem/reclassificar)
+- [Triagem](./triagem)
 
    Notificação ao infrator
 ```

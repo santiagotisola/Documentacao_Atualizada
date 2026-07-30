@@ -35,6 +35,13 @@ Exibe os **tickets de pesagem em andamento** que ainda não foram finalizados. U
 :::info
 Um ticket só é **fechado** após a liberação explícita pelo operador. Veículos retidos por excesso de carga permanecem como ticket aberto até a regularização.
 :::
+
+## Relacionado
+
+- [Liberar Pesagem](./liberar-pesagem)
+- [Reclassificar](./reclassificar)
+- [Tickets Fechados](./ticket-fechado)
+
 | **Status** | Aguardando, Em análise, Recursão |
 
 ## Ações disponíveis

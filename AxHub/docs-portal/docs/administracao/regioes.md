@@ -30,9 +30,12 @@ Cadastro das regiões geográficas utilizadas para **agrupar operações e equip
 :::tip
 Após cadastrar regiões, vincule os equipamentos a elas em **Configurações → Equipamentos**. Isso habilita o filtro de região nos relatórios.
 :::
-2. Clique em **+ Novo**
-3. Informe o **Nome** da região
-4. Opcionalmente adicione uma **Descrição**
+
+## Relacionado
+
+- [Enquadramentos](./enquadramentos)
+- [Relatórios](../relatorios/fluxo-diario-veiculos)
+
 5. Clique em **Salvar**
 
 ## Uso das regiões
