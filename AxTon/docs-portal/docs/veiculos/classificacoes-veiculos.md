@@ -36,7 +36,16 @@ Classificações de veículos por **número de eixos e PBT** (Peso Bruto Total).
 - [Tipos de Veículos](./tipos-veiculos)
 - [Infração](../glossario/infracao)
 
-2. Clique em **+ Novo**
-3. Preencha o Código e a Descrição
+## Classificaoes comuns (CONTRAN 803/2021)
+
+| Classificação | Eixos | PBT máximo |
+|----------------|:-----:|:-----------:|
+| Caminhão simples (2E) | 2 | 16 t |
+| Caminhão truck (3E) | 3 | 23 t |
+| Bi-truck (4E) | 4 | 29 t |
+| Bitrem (5E) | 5 | 41,5 t |
+| Bitrem (6E) | 6 | 45 t |
+| Rodotrem (9E) | 9 | 57 t |
+
 4. Marque como Ativo
 5. Clique em **Salvar**

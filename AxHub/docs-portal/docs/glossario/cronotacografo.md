@@ -37,8 +37,6 @@ Instrumento eletrônico de controle do **tempo de direção, parada e velocidade
 **Art. 162, II do CTB:** Multa gravíssima (7 UFIRs) + suspensão do direito de dirigir
 
 
-O modulo **Cronotacografo** do AxHub permite a triagem e consulta de registros capturados pelos Equipamentos de fiscalizacao.
-
 ## Paginas Relacionadas
 
 - [Triagem de Cronotacografo](../cronotacografo/triagem)
