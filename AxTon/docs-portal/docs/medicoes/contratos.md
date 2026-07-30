@@ -20,6 +20,25 @@ Registro dos contratos de prestação de serviço de pesagem, vinculando postos,
 
 | Coluna | Descrição |
 |--------|-----------|
+| **Número** | Número do contrato |
+| **Contratante** | Órgão ou empresa contratante |
+| **Vigência Início** | Data de início |
+| **Vigência Fim** | Data de encerramento |
+| **Postos** | Postos de pesagem cobertos |
+| **Status** | Ativo, Vencido, Suspenso |
+
+## Campos de cadastro
+
+| Campo | Obrigatório | Descrição |
+|-------|:-----------:|-----------|
+| **Número** | Sim | Número do contrato |
+| **Contratante** | Sim | Nome da organização contratante |
+| **Vigência Início** | Sim | Data de início da vigência |
+| **Vigência Fim** | Sim | Data de encerramento |
+| **Postos** | Sim | Postos cobertos pelo contrato |
+| **Meta Disponibilidade** | Não | % mínimo de disponibilidade exigido |
+| **Meta OCR** | Não | % mínimo de aproveitamento OCR |
+
 | **Nº Contrato** | Número do contrato |
 | **Contratante** | Órgão contratante |
 | **Vigência** | Período de validade |

@@ -21,8 +21,26 @@ Exibe a tabela completa de enquadramentos de Infrações de trânsito conforme o
 | **Pontos** | Pontuação atribuída |
 | **Valor (R$)** | Valor da multa |
 
-:::note Sem screenshot
-está tela ainda não possui screenshot cadastrada. Será adicionada em breve.
+## Filtros
+
+| Filtro | Descrição |
+|--------|-----------|
+| **Gravidade** | Filtrar por nível de gravidade |
+| **Código** | Busca por código CTB específico |
+| **Texto** | Busca parcial na descrição |
+
+## Gravidades CTB
+
+| Gravidade | Pontos | Faixa de Valor |
+|-----------|:------:|----------------|
+| Leve | 3 | R$ 88,38 |
+| Média | 4 | R$ 130,16 |
+| Grave | 5 | R$ 195,23 |
+| Gravíssima | 7 | R$ 293,47 + |
+
+:::info
+Os enquadramentos são pré-carregados conforme o CTB vigente. Para adicionar enquadramentos municipais, entre em contato com o suporte.
+:::
 :::
 
 :::info Dados na Tarja

@@ -23,6 +23,16 @@ Cadastro de **cores de veículos** utilizadas nas operações de pesagem e triag
 ## Passo a passo
 
 1. Acesse **Veículos → Cores**
+2. Clique em **+ Nova**
+3. Informe o **Nome** e o **Código DENATRAN** (se aplicável)
+4. Clique em **Salvar**
+
+:::info
+As cores cadastradas são utilizadas na identificação do veículo nos tickets de pesagem e nos documentos de infração.
+:::
+## Passo a passo
+
+1. Acesse **Veículos → Cores**
 2. Clique em **+ Novo**
 3. Informe o **Nome** da cor
 4. Clique em **Salvar**

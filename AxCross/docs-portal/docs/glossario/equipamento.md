@@ -23,6 +23,19 @@ Dispositivo instalado em um cruzamento para detecção e registro de Veículos P
 
 | Tipo | Descrição |
 |------|-----------|
+| **Câmera OCR/LPR** | Leitura ótica de placas |
+| **Detector de laço** | Detecta presença do veículo no pavímento |
+| **Sensor de presença** | Alternativa ao laço indutivo |
+| **Radar de velocidade** | Mede e registra a velocidade do veículo |
+
+## Relacionado
+
+- [Grupos de Equipamentos](../cadastros/grupos-equipamentos)
+- [Alertas](../operacoes/alertas)
+
+
+| Tipo | Descrição |
+|------|-----------|
 | **Câmera OCR/LPR** | Câmera com leitura óptica de caracteres para identificação de placas |
 | **Radar** | Medição de velocidade dos Veículos |
 | **Sensor de Presença** | Detecção de passagem por laço indutivo ou infravermelho |

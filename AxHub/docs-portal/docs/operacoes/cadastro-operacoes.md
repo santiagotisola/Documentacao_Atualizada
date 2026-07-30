@@ -22,7 +22,26 @@ Menu lateral - Operacoes - Cadastro de Operacoes
 
 ## Campos
 
-| Campo | obrigatório | Descricao |
+| Campo | Obrigatório | Descrição |
+|-------|:-----------:|-----------|
+| **Nome** | Sim | Nome da operação |
+| **Data Início** | Sim | Data/hora de início |
+| **Data Fim** | Não | Data/hora de encerramento |
+| **Equipamentos** | Sim | Equipamentos participantes |
+| **Responsável** | Sim | Agente responsável |
+| **Descrição** | Não | Detalhes da operação |
+
+## Passo a passo
+
+1. Acesse **Operações → Cadastro de Operações**
+2. Clique em **+ Nova Operação**
+3. Preencha os campos obrigatórios
+4. Vincule os **Equipamentos** participantes
+5. Clique em **Salvar**
+
+:::tip
+Uma operação ativa vincula todos os registros de passagem dos equipamentos selecionados ao contexto da fiscalização, facilitando a exportação e auditoria.
+:::
 |-------|-------------|-----------|
 | Equipamento | Sim | Equipamento vinculado a operacao |
 | Arco | Sim | Arco onde a operacao ocorre |

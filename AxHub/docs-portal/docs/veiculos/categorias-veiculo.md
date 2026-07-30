@@ -23,6 +23,25 @@ Classificação dos veículos por tipo para fins de **enquadramento nas infraç�
 | **Caminhão** | Veículo de carga pesada |
 | **Ônibus** | Transporte coletivo |
 | **Van/Microvan** | Transporte de passageiros |
+
+## Campos
+
+| Campo | Obrigatório | Descrição |
+|-------|:-----------:|-----------|
+| **Nome** | Sim | Nome da categoria |
+| **Código CTB** | Não | Código do CTB |
+| **Status** | Sim | Ativo ou Inativo |
+
+## Passo a passo
+
+1. Acesse **Veículos → Categorias de Veículos**
+2. Clique em **+ Nova**
+3. Preencha o **Nome** e o **Código CTB** (se aplicável)
+4. Clique em **Salvar**
+
+:::info
+As categorias de veículos são usadas no enquadramento de infrações para determinar qual artigo do CTB se aplica.
+:::
 | **Trator** | Veículo agrícola/industrial |
 
 ## Campos

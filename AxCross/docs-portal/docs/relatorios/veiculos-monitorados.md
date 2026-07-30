@@ -23,6 +23,20 @@ No **menu lateral**, clique em **Relatórios** e selecione **Veículos Monitorad
 | **Data Fim** | Sim | Data final do período |
 | **Placa** | Não | Filtrar por placa específica |
 | **Classificação** | Não | Filtrar por classificação do Veículo (ex.: Roubado, VIP) |
+
+## Colunas
+
+| Coluna | Descrição |
+|--------|-----------|
+| **Data/Hora** | Momento da detecção |
+| **Placa** | Placa identificada |
+| **Equipamento** | Câmera que registrou |
+| **Classificação** | Categoria de monitoramento |
+| **Imagem** | Foto da passagem |
+
+:::warning
+As detecções de veículos monitorados geram alertas automáticos. O operador deve verificar e tratar cada alerta dentro do prazo definido pela operação.
+:::
 | **Local** | Não | Filtrar por cruzamento específico |
 | **Status do Alerta** | Não | Aberto, Em atendimento, Resolvido |
 

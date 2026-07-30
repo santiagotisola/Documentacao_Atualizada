@@ -28,6 +28,19 @@ Relatório de Medição](../img/Medição%20-%20nova%20medição%20-%20relatorio
 
 1. Selecione o contrato e período
 2. O sistema calcula automaticamente os índices
+3. Revise disponibilidade, OCR e interrupções
+4. Exporte o **Boletim de Medição** em PDF ou Excel
+
+## O que a medição calcula
+
+- Horas de disponibilidade por equipamento
+- Índice de aproveitamento OCR
+- Total de passagens e infrações do período
+- Interrupções e impacto na meta
+
+:::info Boletim
+O **Boletim de Medição** gerado pode ser enviado ao contratante como comprovação do cumprimento do SLA.
+:::
 3. Revise os valores e interrupções
 4. Finalize a medição para aprovação
 

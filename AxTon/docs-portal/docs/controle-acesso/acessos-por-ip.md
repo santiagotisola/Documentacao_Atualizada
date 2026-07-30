@@ -20,7 +20,20 @@ Permite configurar quais endereços IP podem acessar o sistema, adicionando uma 
 
 | Campo | Obrigatório | Descrição |
 |-------|:-----------:|-----------|
-| **Endereço IP** | Sim | IP autorizado (ex: 192.168.1.100) |
+| **Endereço IP** | Sim | IPv4 ou IPv6 liberado |
+| **Descrição** | Não | Local ou propósito |
+| **Status** | Sim | Ativo ou Inativo |
+
+## Passo a passo
+
+1. Acesse **Controle de Acesso → Acessos por IP**
+2. Clique em **+ Novo**
+3. Informe o **Endereço IP** e opcionalmente uma **Descrição**
+4. Clique em **Salvar**
+
+:::warning Restrição ativa
+Quando a restrição por IP está ativada, **somente os IPs cadastrados** conseguem acessar o sistema. Certifique-se de incluir o IP da sua rede antes de ativar.
+:::| **Endereço IP** | Sim | IP autorizado (ex: 192.168.1.100) |
 | **Descrição** | Não | Identificação do local/rede |
 | **Ativo** | Sim | Status da restrição |
 

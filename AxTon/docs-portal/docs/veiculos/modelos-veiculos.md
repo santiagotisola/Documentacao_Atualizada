@@ -22,6 +22,28 @@ A tela exibe todos os registros cadastrados, com opção de pesquisa e filtro.
 
 | Coluna | Descrição |
 |--------|-----------|
+| **Nome** | Nome do modelo |
+| **Marca** | Marca do veículo |
+| **Status** | Ativo ou Inativo |
+
+## Campos de cadastro
+
+| Campo | Obrigatório | Descrição |
+|-------|:-----------:|-----------|
+| **Nome** | Sim | Nome do modelo |
+| **Marca** | Sim | Marca vinculada |
+| **Status** | Sim | Ativo ou Inativo |
+
+## Passo a passo
+
+1. Acesse **Veículos → Modelos de Veículos**
+2. Clique em **+ Novo**
+3. Preencha o **Nome** e selecione a **Marca**
+4. Clique em **Salvar**
+
+
+| Coluna | Descrição |
+|--------|-----------|
 | **Código** | Identificador único |
 | **Descrição** | Nome/descrição do registro |
 | **Ativo** | Status (Ativo/Inativo) |

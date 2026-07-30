@@ -23,6 +23,20 @@ Cadastro e gestão dos **recursos humanos e materiais** utilizados nas operaçõ
 | **Nome** | Sim | Identificação do recurso |
 | **Tipo** | Sim | Humano ou Material |
 | **Quantidade** | Sim | Quantidade contratada |
+| **Unidade** | Sim | Horas, unidades, mês |
+| **Contrato** | Sim | Contrato a que pertence |
+
+## Passo a passo
+
+1. Acesse **Medição → Recursos**
+2. Clique em **+ Novo**
+3. Preencha o **Nome**, **Tipo**, **Quantidade** e **Unidade**
+4. Vincule ao **Contrato**
+5. Clique em **Salvar**
+
+:::info
+Os recursos cadastrados são incluídos no **Boletim de Medição** como comprovação do fornecimento contratual.
+:::
 | **Contrato** | Sim | Contrato de referência |
 
 ## Tipos de recurso

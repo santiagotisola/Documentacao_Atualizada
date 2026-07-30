@@ -24,6 +24,21 @@ Cadastro dos **motivos utilizados nos processos de pesagem e liberação** de ve
 | **Tipo** | Sim | Pesagem ou Liberação |
 | **Status** | Sim | Ativo ou Inativo |
 
+## Motivos de pesagem (exemplos)
+
+| Motivo | Tipo |
+|--------|------|
+| Pesagem Aleatória | Pesagem |
+| Suspeita de Excesso | Pesagem |
+| Triagem Dinâmica | Pesagem |
+| Liberação por Pagamento | Liberação |
+| Liberação por Recurso | Liberação |
+| Liberação por Descarga | Liberação |
+
+:::tip
+Configurar motivos detalhados facilita a análise gerencial e a identificação de padrões de retenção nos postos.
+:::
+
 ## Motivos comuns
 
 | Tipo | Exemplos |

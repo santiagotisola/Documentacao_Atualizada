@@ -24,6 +24,26 @@ Permite reclassificar Veículos que foram pesados com classificação incorreta.
 | **Motivo** | Justificativa da reclassificação (obrigatório) |
 | **Operador** | Usuário responsável pela correção |
 
+## Passo a passo
+
+1. Acesse **Balança → Reclassificar**
+2. Informe o **Ticket** da pesagem original
+3. Verifique a **Classificação Atual**
+4. Selecione a **Nova Classificação** correta
+5. Preencha o **Motivo** da reclassificação
+6. Clique em **Confirmar**
+
+## Impactos da reclassificação
+
+- O **peso aferido** permanece inalterado
+- O **limite de PBT** passa a considerar a nova categoria
+- Se o excesso se mantiver, a infração é mantida com nova classificação
+- Se o peso estiver dentro do limite com a nova categoria, a infração é cancelada
+
+:::warning Auditoria
+Todas as reclassificações são registradas em log com o operador responsável e a justificativa. Reclassificações sem motivo coerente podem ser revistas pela supervisão.
+:::
+
 ## Impacto da reclassificação
 
 A reclassificação recalcula automaticamente os limites de peso aplicáveis ao Veículo

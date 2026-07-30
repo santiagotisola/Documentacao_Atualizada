@@ -20,6 +20,22 @@ No **menu lateral**, clique em **Operações**.
 |-------|:-----------:|-----------|
 | **Nome** | Sim | Nome identificador da operação |
 | **Local** | Sim | Cruzamento onde a operação será realizada |
+| **Data Início** | Sim | Data/hora de início |
+| **Data Fim** | Não | Data/hora de encerramento |
+| **Equipamentos** | Sim | Câmeras participantes |
+| **Responsável** | Não | Agente responsável |
+
+## Passo a passo
+
+1. Acesse **Operações**
+2. Clique em **+ Nova Operação**
+3. Preencha o **Nome**, **Local** e **Data Início**
+4. Adicione os **Equipamentos** participantes
+5. Clique em **Salvar**
+
+:::tip
+Uma operação ativa vincula todas as passagens dos equipamentos selecionados ao contexto da fiscalização, facilitando a exportação e relatórios.
+:::
 | **Data Início** | Sim | Data e hora de início da operação |
 | **Data Fim** | Sim | Data e hora de término da operação |
 | **Status** | Sim | Ativa, Pausada ou Encerrada |

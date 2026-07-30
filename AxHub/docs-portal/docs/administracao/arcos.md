@@ -17,7 +17,26 @@ Permite cadastrar e gerenciar os arcos de fiscalização vinculados às operaç�
 ## Cadastro de arco
 
 ![Cadastro de Arco](../img/Configurações%20-%20Arco%20-%20cadastro.png)
+## Campos
 
+| Campo | Obrigatório | Descrição |
+|-------|:-----------:|-----------|
+| **Nome** | Sim | Identificação do arco |
+| **Localidade** | Sim | Local de instalação |
+| **Equipamentos** | Sim | Equipamentos vinculados ao arco |
+| **Status** | Sim | Ativo ou Inativo |
+
+## Passo a passo
+
+1. Acesse **Configurações → Arcos**
+2. Clique em **+ Novo**
+3. Preencha o **Nome** e a **Localidade**
+4. Vincule os **Equipamentos** do arco
+5. Clique em **Salvar**
+
+:::info O que é um Arco?
+Um arco agrupa equipamentos fisicamente instalados na mesma travessia (ex.: radares de faixas 1, 2 e 3 de uma mesma pista). Facilita o gerenciamento e a exportação conjunta dos dados.
+:::
 | Campo | Descrição |
 |-------|-----------|
 | **Nome** | Identificação do arco |

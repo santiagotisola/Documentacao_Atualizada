@@ -23,6 +23,23 @@ Exibe os tickets de pesagem **já finalizados** — histórico completo de todas
 | **Data/Hora** | Momento da pesagem |
 | **Posto** | Local de pesagem |
 | **Resultado** | Regular / Infrator |
+
+## Filtros
+
+| Filtro | Descrição |
+|--------|-----------|
+| **Período** | Faixa de datas da pesagem |
+| **Placa** | Busca por placa parcial ou completa |
+| **Posto** | Posto específico |
+| **Resultado** | Regular ou Infrator |
+
+## Exportar dados
+
+Clique em **Exportar** para gerar um arquivo CSV com os tickets do período selecionado, útil para auditorias e relatórios gerenciais.
+
+:::tip
+Use o filtro **Infrator** para visualizar somente os tickets que geraram infração e acompanhar o status de processamento da multa.
+:::
 | **Ações** | Visualizar / Imprimir |
 
 ## Filtros

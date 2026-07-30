@@ -20,7 +20,23 @@ Cadastro dos motivos padronizados utilizados nas operações de pesagem, como mo
 
 | Coluna | Descrição |
 |--------|-----------|
-| **Código** | Identificador do motivo |
+| **Nome** | Motivo configurado |
+| **Tipo** | Liberação, Reclassificação ou Descarte |
+| **Status** | Ativo ou Inativo |
+
+## Motivos comuns
+
+| Motivo | Tipo |
+|--------|------|
+| Liberação por pagamento | Liberação |
+| Liberação por recurso | Liberação |
+| Liberação por descarga | Liberação |
+| Reclassificação de categoria | Reclassificação |
+| Imagem inválida | Descarte |
+
+:::tip
+Motivos detalhados facilitam a análise gerencial e a rastreabilidade de liberações nos postos de pesagem.
+:::| **Código** | Identificador do motivo |
 | **Descrição** | Texto descritivo do motivo |
 | **Tipo** | Liberação, Reclassificação ou Descarte |
 | **Ativo** | Status do motivo |

@@ -28,6 +28,18 @@ Permite registrar interrupções no funcionamento dos Equipamentos que impactam 
 
 ## Processar interrupções
 
+Após registrar as interrupções, o sistema as contabiliza no cálculo de disponibilidade da próxima medição gerada.
+
+| Tipo | Desconta da meta? |
+|------|:-----------------:|
+| Manutenção preventiva programada | Não |
+| Falha de equipamento | Sim |
+| Evento externo (acidente, obra) | Conforme contrato |
+
+:::warning
+Interrupções não registradas **não são consideradas** no cálculo de disponibilidade. Registrar imediatamente após a ocorrência.
+:::
+
 ![Processar Interrupções](../img/Medição%20-%20interrupções%20-%20processar%20interrupções.png)
 
 Processa as interrupções registradas para abatimento na medição contratual.

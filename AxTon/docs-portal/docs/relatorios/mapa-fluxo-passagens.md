@@ -21,6 +21,23 @@ Mapa interativo exibindo o **volume de passagens por localidade geográfica**, p
 | **Marcadores** | Postos de pesagem com dados do período |
 | **Linhas de rota** | Rotas mais utilizadas por veículos pesados |
 
+## Filtros
+
+| Filtro | Descrição |
+|--------|-----------|
+| **Período** | Faixa de datas |
+| **Posto** | Posto específico |
+| **Tipo** | Passagens, Infrações ou Retidos |
+
+## Como usar
+
+1. Acesse **Relatórios → Mapa de Fluxo de Passagens**
+2. Selecione o **Período**
+3. Filtre por **Posto** (opcional)
+4. Clique em **Gerar Mapa**
+5. Clique em qualquer marcador para ver o volume detalhado do posto
+
+
 ## Filtros disponíveis
 
 | Filtro | Descrição |

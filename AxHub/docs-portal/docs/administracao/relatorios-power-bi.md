@@ -22,7 +22,26 @@ Permite configurar e acessar Relatórios do Power BI integrados ao AxHub.
 | **Dados Descartes** | Análise de descartes de radares CEV |
 | **Boletim de Medição** | Resumo de medição contratual |
 | **Disponibilidade** | Índice de disponibilidade dos Equipamentos |
-| Infração - Dia x Hora** | Distribuição de Infrações por dia e hora |
+| **Infração - Dia x Hora** | Distribuição de Infrações por dia e hora |
+| **Mapa de Calor** | Concentração geográfica de Infrações |
+
+## Como acessar um relatório
+
+1. Acesse **Configurações → Relatórios Power BI**
+2. Selecione o relatório desejado na lista
+3. O painel é exibido incorporado na tela
+4. Utilize os filtros nativos do Power BI (slicers) para ajustar a visualização
+
+## Adicionar novo relatório
+
+1. Clique em **+ Novo**
+2. Informe o **Nome** e a **URL de incorporação** do Power BI
+3. Selecione os **Grupos de Acesso** que poderão visualizar
+4. Clique em **Salvar**
+
+:::info
+A URL de incorporação deve ser gerada no portal Power BI com modo de acesso público ou com token de serviço configurado.
+:::
 | **Processamento** | Análise do processamento de imagens |
 | **Índice do OCR** | Performance do reconhecimento de placas |
 | **Fluxo por Porte** | Médio diário de fluxo por porte de Veículo |

@@ -18,6 +18,29 @@ Define as **categorias de imagens** que os equipamentos devem capturar em cada i
 |-------|:-----------:|-----------|
 | **Código** | Sim | Código identificador |
 | **Descrição** | Sim | Tipo da imagem |
+| **Obrigatória** | Sim | Se a imagem é exigida para a infração |
+| **Ordem** | Não | Ordem de exibição |
+
+## Tipos comuns
+
+| Tipo | Obrigatória | Descrição |
+|------|:-----------:|-----------|
+| Frontal | Sim | Vista frontal do veículo |
+| Traseira | Sim | Vista traseira com placa |
+| Lateral esquerda | Não | Perfil do veículo |
+| Painel | Não | Instrumento de aferíção |
+
+## Passo a passo
+
+1. Acesse **Configurações → Tipos de Imagens**
+2. Clique em **+ Novo**
+3. Preencha o **Código** e a **Descrição**
+4. Marque se a imagem é **Obrigatória**
+5. Clique em **Salvar**
+
+:::info
+Os tipos de imagens obrigatórios devem estar cadastrados antes de configurar os equipamentos. Equipamentos sem todos os tipos obrigatórios terão infrações incompletas.
+:::
 | **Obrigatória** | Sim | Se exigida para validação da infração |
 | **Ativo** | Sim | Status |
 

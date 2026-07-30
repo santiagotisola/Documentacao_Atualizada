@@ -23,6 +23,24 @@ No **menu lateral**, clique em Relatórios e selecione **Mapeamento de Rotas**.
 | **Placa** | Sim | Placa do Veículo a rastrear |
 | **Data Início** | Sim | Data inicial do período de consulta |
 | **Data Fim** | Sim | Data final do período de consulta |
+
+## O que o relatório exibe
+
+- Mapa com o percurso do veículo pelos cruzamentos monitorados
+- Linha do tempo das detecções com data/hora e local
+- Imagens das passagens registradas
+
+## Passo a passo
+
+1. Acesse **Relatórios → Mapeamento de Rotas**
+2. Informe a **Placa** do veículo
+3. Defina o **Período** (Data Início e Fim)
+4. Clique em **Consultar**
+5. O mapa exibirá o percurso com marcadores por cruzamento
+
+:::tip Investigações
+O mapeamento de rotas é especialmente útil em operações de busca de veículos furtados/roubados, permitindo traçar o último percurso conhecido.
+:::
 | Equipamento | Não | Filtrar por câmera específica |
 
 ## Informações exibidas no mapa

@@ -23,6 +23,18 @@ Exibe os **tickets de pesagem em andamento** que ainda não foram finalizados. U
 | **Data/Hora** | Momento da pesagem |
 | **Posto** | Posto de pesagem |
 | **Peso aferido** | Peso registrado na balança |
+
+## Ações disponíveis
+
+| Ação | Descrição |
+|------|-----------|
+| **Liberar** | Libera o veículo após verificação |
+| **Reclassificar** | Corrige a categoria do veículo |
+| **Ver detalhes** | Exibe imagens e dados completos |
+
+:::info
+Um ticket só é **fechado** após a liberação explícita pelo operador. Veículos retidos por excesso de carga permanecem como ticket aberto até a regularização.
+:::
 | **Status** | Aguardando, Em análise, Recursão |
 
 ## Ações disponíveis

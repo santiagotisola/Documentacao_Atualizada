@@ -24,6 +24,28 @@ Exibe os lotes de dados importados para o sistema, permitindo acompanhar o statu
 
 ## Campos exibidos
 
+| Campo | Descrição |
+|-------|-----------|
+| **ID do Lote** | Identificador único da importação |
+| **Data/Hora** | Quando a importação foi realizada |
+| **Equipamento** | Origem dos dados |
+| **Registros** | Total de registros no lote |
+| **Sucesso** | Quantidade processada com sucesso |
+| **Erros** | Quantidade com falha |
+| **Status** | Sucesso / Erro / Parcial |
+
+## Como interpretar erros
+
+| Status | Significado | Ação |
+|--------|-------------|------|
+| **Sucesso** | Todos registros importados | Nenhuma |
+| **Parcial** | Parte importada, parte com falha | Verificar registros com erro |
+| **Erro** | Falha total na importação | Contatar suporte técnico |
+
+:::tip
+Exporte o relatório do lote para identificar quais registros específicos falharam e o motivo do erro.
+:::
+
 | Coluna | Descrição |
 |--------|-----------|
 | **Número do Lote** | Identificador do lote |

@@ -23,6 +23,26 @@ Visualização geográfica do fluxo de passagens de Veículos por Equipamento Os
 | Equipamento | Exibir Equipamento específico |
 | **Tipo de Dado** | Passagens, Infrações ou Aproveitamento OCR |
 
+## Como usar
+
+1. Selecione o **Período** desejado
+2. Filtre por **Região** ou **Equipamento** (opcional)
+3. Selecione o **Tipo de Dado** (Passagens, Infrações ou OCR)
+4. O mapa exibirá os pontos com círculos proporcionais ao volume
+5. Clique em qualquer equipamento para ver os dados detalhados
+
+## Indicadores visuais
+
+| Cor | Significado |
+|-----|-------------|
+| 🟢 Verde | Volume normal |
+| 🟡 Amarelo | Volume elevado |
+| 🔴 Vermelho | Volume crítico ou equipamento com alerta |
+
+:::tip Exportar
+Utilize o botão **Exportar** para gerar uma imagem do mapa ou um CSV com os dados por equipamento.
+:::
+
 ## Funcionalidades do Mapa
 
 | Recurso | Descrição |

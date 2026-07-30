@@ -26,6 +26,15 @@ Cadastro dos **modelos de veículos vinculados às marcas**. O modelo correto ga
 
 1. Acesse **Veículos → Modelos de Veículos**
 2. Clique em **+ Novo**
+3. Preencha o **Nome** e selecione a **Marca**
+4. Clique em **Salvar**
+
+:::tip
+Use a barra de busca para localizar um modelo existente antes de cadastrar um novo. Evita duplicidades na base de classificacão.
+:::
+
+1. Acesse **Veículos → Modelos de Veículos**
+2. Clique em **+ Novo**
 3. Informe o **Nome** e selecione a **Marca**
 4. Clique em **Salvar**
 

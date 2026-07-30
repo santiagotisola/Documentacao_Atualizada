@@ -22,7 +22,19 @@ No **menu lateral**, clique em Configurações e selecione **Sincronização de 
 
 ## Passo a passo — Executar sincronização
 
-1. Acesse **Configurações → Sincronização de dados** no menu lateral
+1. Acesse **Configurações → Sincronização de dados**
+2. Informe a **Data de Início** da sincronização
+3. Clique em **Iniciar Sincronização**
+4. Aguarde a conclusão — o sistema exibirá o progresso
+
+:::warning Quando sincronizar?
+Execute a sincronização quando:
+- Relatórios exibirem dados desatualizados
+- Após restauração de backup
+- Após manutenção no Elastic Search
+
+Não execute durante horário de pico de operações.
+::: no menu lateral
 2. Informe a **Data de Início** da sincronização
 3. Clique em **Sincronizar passagens com Elastic Search**
 4. Aguarde a conclusão do processo

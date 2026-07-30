@@ -23,6 +23,21 @@ No **menu lateral**, clique em Relatórios e selecione **Ocorrências e Alertas*
 | **Data Fim** | Sim | Data final do período |
 | **Tipo de Ocorrência** | Não | Filtrar por categoria (ex.: Placa Monitorada, MANCHA01) |
 | **Status** | Não | Aberto, Em atendimento, Resolvido, Descartado |
+
+## Colunas
+
+| Coluna | Descrição |
+|--------|-----------|
+| **Data/Hora** | Momento da ocorrência |
+| **Tipo** | Categoria do alerta |
+| **Placa** | Veículo envolvido |
+| **Operador** | Responsável pelo atendimento |
+| **Status** | Estado atual da tratativa |
+| **Resolução** | Descrição da ação tomada |
+
+:::tip Exportar
+Exporte o relatório em CSV para auditorias ou prestação de contas das operações ao órgão contratante.
+:::
 | Usuário | Não | Responsável pelo atendimento |
 | **Local** | Não | Cruzamento relacionado |
 

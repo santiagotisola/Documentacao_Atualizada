@@ -23,6 +23,16 @@ Cadastro de **marcas e fabricantes** de veículos utilizados na identificação 
 ## Passo a passo
 
 1. Acesse **Veículos → Marcas de Veículos**
+2. Clique em **+ Nova**
+3. Informe o **Nome** e o **Código DENATRAN** (se aplicável)
+4. Clique em **Salvar**
+
+:::info
+As marcas são vinculadas aos **Modelos de Veículos**, formando a hierarquia Marca → Modelo → Classificação usada nos tickets de pesagem.
+:::
+## Passo a passo
+
+1. Acesse **Veículos → Marcas de Veículos**
 2. Clique em **+ Novo**
 3. Informe o **Nome** da marca
 4. Clique em **Salvar**

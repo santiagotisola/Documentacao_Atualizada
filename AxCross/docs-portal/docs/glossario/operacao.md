@@ -20,6 +20,15 @@ Atividade de fiscalização planejada e executada em um ou mais cruzamentos dura
 | Campo | Descrição |
 |-------|-----------|
 | **Nome** | Identificador da operação (ex.: "Blitz Centro - Mai/2026") |
+| **Período** | Início e fim da operação |
+| **Equipamentos** | Câmeras e sensores participantes |
+| **Responsável** | Agente ou equipe responsável |
+
+## Relacionado
+
+- [Cadastro de Operações](../operacoes/cadastro-operacoes)
+- [Passagens](./passagem)
+
 | **Local** | Cruzamento principal da operação |
 | **Data Início** | Data e hora de início |
 | **Data Fim** | Data e hora de encerramento previsto |

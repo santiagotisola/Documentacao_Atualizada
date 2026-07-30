@@ -20,6 +20,19 @@ No **menu lateral**, expanda **Cadastros** e clique em **Grupos de Equipamentos*
 |-------|:-----------:|-----------|
 | **Nome** | Sim | Nome identificador do grupo |
 | **Descrição** | Não | Descrição do propósito do grupo |
+| **Equipamentos** | Não | Equipamentos vinculados ao grupo |
+
+## Passo a passo
+
+1. Acesse **Cadastros → Grupos de Equipamentos**
+2. Clique em **+ Novo**
+3. Informe o **Nome** e opcionalmente uma **Descrição**
+4. Vincule os **Equipamentos** desejados
+5. Clique em **Salvar**
+
+:::tip
+Agrupar por região geográfica facilita o monitoramento e a filtragem de relatórios. Ex.: "Centro", "Sul", "Rodovia SP-310".
+:::
 | Equipamentos | Sim | Lista de Equipamentos vinculados ao grupo |
 | **Status** | Sim | Ativo ou Inativo |
 

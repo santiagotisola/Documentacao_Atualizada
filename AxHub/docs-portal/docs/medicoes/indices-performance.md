@@ -17,7 +17,27 @@ Permite configurar os índices de performance exigidos pelos contratos.
 ## Cadastro
 
 ![Cadastro de Índice](../img/Medição%20-%20indice%20de%20performance%20-%20cadastro.png)
+## Campos
 
+| Campo | Obrigatório | Descrição |
+|-------|:-----------:|-----------|
+| **Nome** | Sim | Nome do índice |
+| **Métrica** | Sim | O que será medido (ex.: disponibilidade) |
+| **Meta (%)** | Sim | Valor mínimo exigido pelo contrato |
+| **Tolerância (%)** | Não | Margem aceita antes da penalidade |
+| **Penalidade** | Não | Descrição da penalidade contratual |
+
+## Índices comuns
+
+| Índice | Meta típica |
+|--------|:-----------:|
+| Disponibilidade | 95% |
+| Aproveitamento OCR | 90% |
+| Tempo de manutenção | ≤4h/mês |
+
+:::tip
+Os índices configurados aqui são calculados automaticamente ao gerar uma nova medição.
+:::
 | Campo | Descrição |
 |-------|-----------|
 | **Contrato** | Contrato vinculado |

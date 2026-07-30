@@ -20,6 +20,18 @@ Cadastro dos **modelos de equipamentos** por fabricante. Cada modelo define as c
 | **Fabricante** | Sim | Fabricante vinculado |
 | **Tipo** | Sim | Balança estática, dinâmica ou semiestática |
 | **Capacidade (t)** | Não | Capacidade máxima de pesagem |
+
+## Passo a passo
+
+1. Acesse **Cadastros Básicos → Modelos de Equipamentos**
+2. Clique em **+ Novo**
+3. Preencha o **Nome**, selecione o **Fabricante** e o **Tipo**
+4. Informe a **Capacidade** (opcional)
+5. Clique em **Salvar**
+
+:::info Hierarquia
+Fabricante → Modelo → Equipamento. Antes de cadastrar um modelo, o Fabricante deve estar registrado em **Fabricantes de Equipamentos**.
+:::
 | **Status** | Sim | Ativo ou Inativo |
 
 ## Passo a passo
