@@ -37,12 +37,6 @@ O Código IBGE de 7 dígitos é obrigatório nos arquivos de exportação de inf
 - [Postos de Pesagem](../pesagem/postos)
 - [Relatório de Infrações](../relatorios/relatorio-infracoes)
 
-:::tip
-O Código IBGE de 7 dígitos é obrigatório nos arquivos de exportação de infrações ao DENATRAN/SENATRAN. Consulte o portal do IBGE para o código correto.
-:::
-:::tip
-O Código IBGE é obrigatório nos arquivos de exportação de infrações para o DENATRAN/SENATRAN. Use sempre o código oficial de 7 dígitos.
-:::
 
 
 A tela exibe todos os registros cadastrados, com opção de pesquisa e filtro.

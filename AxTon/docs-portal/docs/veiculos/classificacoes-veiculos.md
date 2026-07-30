@@ -33,21 +33,9 @@ Classificações de veículos por **número de eixos e PBT** (Peso Bruto Total).
 ## Relacionado
 
 - [PBT](../glossario/pbt) — Peso Bruto Total
-- [Tipos de Veículos](./tipos-veiculos) — Tipos compatíveis- [Infração](../glossario/infracao)
+- [Tipos de Veículos](./tipos-veiculos)
+- [Infração](../glossario/infracao)
 
-A tela exibe todos os registros cadastrados, com opção de pesquisa e filtro.
-
-### Colunas
-
-| Coluna | Descrição |
-|--------|-----------|
-| **Código** | Identificador único |
-| **Descrição** | Nome/descrição do registro |
-| **Ativo** | Status (Ativo/Inativo) |
-
-### Passo a passo — Cadastrar
-
-1. No menu lateral, clique em **Classificações**
 2. Clique em **+ Novo**
 3. Preencha o Código e a Descrição
 4. Marque como Ativo

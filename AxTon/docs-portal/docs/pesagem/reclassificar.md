@@ -42,6 +42,15 @@ Permite alterar a classificação de um Veículo durante o processo de pesagem q
 Reclassificar pode alterar o limite de PBT aplicável e, consequentemente, cancelar ou manter a infração. A operação é registrada em log de auditoria.
 :::
 
+## Relacionado
+
+- [PBT](../glossario/pbt)
+- [Classificações de Veículos](../veiculos/classificacoes-veiculos)
+
+:::warning
+Reclassificar pode alterar o limite de PBT aplicável e, consequentemente, cancelar ou manter a infração. A operação é registrada em log de auditoria.
+:::
+
 ### Passo a passo
 
 1. Na tela de **Tickets de Pesagens**, selecione o ticket e clique em **Reclassificar**

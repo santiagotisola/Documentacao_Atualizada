@@ -37,7 +37,7 @@ Cadastro dos motivos padronizados utilizados nas operações de pesagem, como mo
 :::tip
 Motivos bem definidos facilitam a análise gerencial e a rastreabilidade das liberações nos postos de pesagem.
 :::
-| Liberação por pagamento | Liberação |
+
 | Liberação por recurso | Liberação |
 | Liberação por descarga | Liberação |
 | Reclassificação de categoria | Reclassificação |

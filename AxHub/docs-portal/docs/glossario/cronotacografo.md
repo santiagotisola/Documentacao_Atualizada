@@ -32,22 +32,10 @@ Instrumento eletrônico de controle do **tempo de direção, parada e velocidade
 - [Enquadramentos](../administracao/enquadramentos) — Códigos CTB aplicáveis
 - [Tipos de Veículos](../veiculos/tipos-veiculos)
 
-| Válido | Cronoatacógrafo dentro da validade | Passagem liberada |
-| Vencido | Certificação expirada | Gera alerta/infração |
-| Ausente | Veículo obrigado sem o dispositivo | Gera infração |
-| Sem dados | Consulta falhou | Registro para revisão |
-
 ## Penalidade por ausência
 
 **Art. 162, II do CTB:** Multa gravíssima (7 UFIRs) + suspensão do direito de dirigir
 
-## Relacionados
-
-- [Triagem](./triagem) — Revisão das passagens com cronoatacógrafo
-- [Consulta de Cronoatacógrafo](../cronotacografo/consulta) — Consulta direta
-
-
-## Uso no Sistema AxHub
 
 O modulo **Cronotacografo** do AxHub permite a triagem e consulta de registros capturados pelos Equipamentos de fiscalizacao.
 

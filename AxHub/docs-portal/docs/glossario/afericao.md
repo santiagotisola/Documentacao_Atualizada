@@ -35,14 +35,9 @@ Todo equipamento metrológico deve possuir **certificado de aferição válido**
 - [Aferições](../operacoes/afericoes) — Registro de aferições no sistema
 - [Tipos de Aferições](../administracao/tipos-afericoes) — Configuração dos tipos
 
-
-## Uso no Sistema AxHub
-
-No modulo **Operacoes - Afericoes**, o sistema controla os certificados de afericao de cada Equipamento O Dashboard exibe alertas automaticos quando uma afericao está proxima do vencimento. Infracoes capturadas por Equipamentos com afericao vencida sao automaticamente invalidadas.
-
-## Paginas Relacionadas
-
-- [Afericoes (Operacoes)](../operacoes/afericoes)
+:::warning
+Equipamentos com aferição vencida têm infrações **automaticamente invalidadas**. O sistema exibe alertas no Dashboard quando a data de vencimento se aproxima.
+:::
 - [Tipos de Afericoes](../administracao/tipos-afericoes)
 - [Dashboard](../primeiros-passos/dashboard)
 - [Equipamentos](../cadastros-basicos/equipamentos)

@@ -30,7 +30,17 @@ Cadastro de **marcas e fabricantes** de veículos utilizados na identificação 
 :::info
 As marcas são vinculadas aos **Modelos de Veículos**, formando a hierarquia Marca → Modelo → Classificação usada nos tickets de pesagem.
 :::
+
 ## Marcas comuns no transporte de carga
+
+| Marca | Segmento |
+|-------|----------|
+| MERCEDES-BENZ | Caminhões e ônibus |
+| SCANIA | Caminhões pesados |
+| VOLVO | Caminhões e ônibus |
+| IVECO | Caminhões leves e médios |
+| DAF | Caminhões pesados |
+
 
 | Marca | Segmento |
 |-------|----------|

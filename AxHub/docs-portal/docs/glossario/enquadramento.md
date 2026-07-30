@@ -35,14 +35,9 @@ Classificação legal atribuída a uma infração de trânsito. O enquadramento 
 - [Enquadramentos](../administracao/enquadramentos) — Tabela completa do CTB
 - [Configurações de Enquadramento](../administracao/configuracoes-enquadramento) — Configuração por operação
 
-
-## Uso no Sistema AxHub
-
-Na **Triagem**, o operador válida ou altera o enquadramento sugerido automaticamente pelo sistema. Na **Configuracao de Enquadramentos**, o administrador define quais enquadramentos estao ativos para cada tipo de Equipamento
-
-## Paginas Relacionadas
-
-- [Triagem de Infracoes](../infracoes/triagem)
+:::info
+Na **Triagem**, o operador valida ou altera o enquadramento sugerido automaticamente pelo sistema com base na velocidade/infração detectada.
+:::
 - [Configuracao de Enquadramentos](../administracao/configuracoes-enquadramento)
 - [Formas de Autuacao](../administracao/formas-autuacao)
 - [Enquadramentos](../administracao/enquadramentos)
