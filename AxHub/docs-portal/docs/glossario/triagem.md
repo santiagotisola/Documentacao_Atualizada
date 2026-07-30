@@ -48,9 +48,28 @@ Processo de **análise preliminar** das infrações capturadas automaticamente, 
 |:-------------------:|:-----------------------:|
 | 15-30 segundos | 45-90 segundos |
 
-:::warning
-Infrações com mais de 30 dias sem triagem podem ter a validade legal comprometida. Monitore o backlog diariamente.
-:::- Descartar sempre com motivo específico (afeta o Dashboard)
+## Fluxo da triagem
+
+```
+Infração capturada pelo equipamento
+    ↓
+Entra na fila de triagem
+    ↓
+Analista analisa imagem + dados
+    ↓
+    ├─ Confirmar → Aguarda auditoria
+    ├─ Descartar (com motivo) → Arquivada
+    └─ Editar placa → Confirmar → Aguarda auditoria
+```
+
+## Erros comuns
+
+| Erro | Impacto | Prevenção |
+|------|---------|----------|
+| Aprovar com placa errada | Auto inválido | Verificar OCR antes de confirmar |
+| Descartar sem motivo | Perde rastreabilidade | Sempre selecionar motivo |
+| Aprovar sem imagens | Rejeição pelo órgão | Verificar tipos de imagem obrigatórios |
+- Descartar sempre com motivo específico (afeta o Dashboard)
 - Em dúvida sobre enquadramento, consultar o supervisor
 
 ## Relacionados

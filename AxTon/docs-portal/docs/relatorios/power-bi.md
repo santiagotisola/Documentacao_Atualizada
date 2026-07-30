@@ -47,7 +47,19 @@ Os dashboards são gerados a partir dos dados do AxTon e atualizados conforme a 
 | Infrações por Dia/Hora | Coordenador de operações | Diário |
 | Taxa OCR | Supervisor técnico | Semanal |
 
+## Erros comuns
+
+| Erro | Causa | Solução |
+|------|-------|----------|
+| Dashboard em branco | URL incorreta ou permissão | Verificar URL e grupo de acesso |
+| Dados desatualizados | Refresh desconfigurado | Ajustar agendamento no Power BI Service |
+| Não aparece no menu | Perfil sem permissão | Adicionar grupo de acesso |
+
 ## Relacionado
+
+- [Relatório de Infrações](./relatorio-infracoes)
+- [Processamento de Imagens](./processamento-imagens)
+- [Medições](../medicoes/criar-medicao)
 
 - [Relatório de Infrações](./relatorio-infracoes)
 - [Processamento de Imagens](./processamento-imagens)

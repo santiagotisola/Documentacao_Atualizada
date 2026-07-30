@@ -42,9 +42,30 @@ Criado → Processando → Enviado → Aceito
 :::warning
 Lotes rejeitados pelo órgão não são reprocessados automaticamente. É necessário corrigir o problema e gerar novo lote.
 :::
-- Gere lotes somente com infrações **auditadas e aprovadas**
-- Monitore o status do lote após envio — lotes com **Erro** devem ser reprocessados em até 24h
-- Guarde os recibos de confirmação do órgão (número de protocolo) para auditoria
+
+## Fluxo de exportação
+
+```
+Infrações auditadas
+    ↓
+Verificar Falhas de Sequenciais
+    ↓
+Gerar Lote de Exportação
+    ↓
+Transmitir ao órgão (DETRAN/DER)
+    ↓
+Aguardar confirmação (status Aceito)
+    ↓
+Arquivar protocolo por 5 anos
+```
+
+## Erros comuns
+
+| Erro | Causa | Solução |
+|------|-------|----------|
+| Lote rejeitado | Sequencial duplicado | Usar Relatório de Falhas |
+| Status Erro | Falha de conexão | Reenviar após 24h |
+| Infração ausente | Status não era Auditada | Revisar pipeline de triagem |
 
 :::warning
 Lotes cancelados não podem ser reenvidos. Uma nova exportação precisará ser gerada com as infrações correspondentes.
