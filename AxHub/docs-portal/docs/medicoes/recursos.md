@@ -49,6 +49,17 @@ Os recursos cadastrados são incluídos no **Boletim de Medição** como comprov
 
 - [Contratos](./contratos)
 - [Criar Medição](./criar-medicao)
+- [Medições Finalizadas](./medicoes-finalizadas)
+
+## Tipos de recurso
+
+| Tipo | Exemplos |
+|------|----------|
+| **Humano** | Agente de trânsito, técnico de campo, supervisor |
+| **Equipamento** | Câmera, radar, sensor, servidor |
+| **Veículo** | Viatura de apoio operacional |
+| **Serviço** | Manutenção preventiva, conectividade |
+- [Criar Medição](./criar-medicao)
 
 
 ## Tipos de recurso

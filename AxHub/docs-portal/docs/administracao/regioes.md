@@ -39,9 +39,21 @@ Após cadastrar regiões, vincule os equipamentos a elas em **Configurações �
 
 ## Relacionado
 
-- [Enquadramentos](./enquadramentos)
+- [Equipamentos](./equipamentos)
 - [Relatórios](../relatorios/fluxo-diario-veiculos)
+- [Operações](../operacoes/cadastro-operacoes)
 
+## Casos de uso
+
+| Critério | Exemplo |
+|----------|---------|
+| Geográfico | Norte, Sul, Centro, Zona Industrial |
+| Contratual | Contrato A (SINFRA), Contrato B (Prefeitura) |
+| Administrativo | Coordenadoria 01, Coordenadoria 02 |
+
+:::tip
+Comece definindo as regiões antes de vincular equipamentos. Alterar regiões posteriormente requer revinculação manual de todos os equipamentos.
+:::
 ## Uso das regiões
 
 - **Filtro de relatórios:** Filtrar dados por área geográfica

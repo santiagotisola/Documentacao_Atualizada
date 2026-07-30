@@ -37,7 +37,20 @@ Organize grupos por **contrato** ou **região** para facilitar a geração de me
 
 - Crie um grupo por contrato ou por área geográfica — evite grupos genéricos com muitos equipamentos misturados
 - Nomeie os grupos de forma que o usuário identifique facilmente a localidade ou o contrato
-- Mantenha a lista de equipamentos do grupo atualizada após instalações ou desatividades
+- Mantenha a lista de equipamentos do grupo atualizada após instalações ou desativações
+
+## Impacto nos relatórios
+
+Grupos bem definidos permitem:
+- Gerar medições contratuais por agrupamento
+- Filtrar o Fluxo Diário de Veículos por grupo
+- Comparar desempenho OCR entre regiões diferentes
+
+## Relacionado
+
+- [Equipamentos](./equipamentos)
+- [Contratos](../medicoes/contratos)
+- [Medições](../medicoes/criar-medicao)
 
 ## Relacionado
 

@@ -52,3 +52,17 @@ Na **Triagem**, o operador valida ou altera o enquadramento sugerido automaticam
 | 55411 | Velocidade superior à máxima em até 20% | Grave |
 | 55412 | Velocidade superior à máxima entre 20% e 50% | Gravíssima |
 | 55413 | Velocidade superior à máxima acima de 50% | Gravíssima |
+| 60501 | Desrespeitar sinal vermelho | Gravíssima |
+| 55500 | Ultrapassar pela contramão | Gravíssima |
+
+## Como o AxHub aplica o enquadramento
+
+O sistema sugere automaticamente o enquadramento com base na **velocidade medida** x **velocidade regulamentada da faixa**. O operador pode aceitar, alterar ou questionar a sugestão durante a triagem.
+
+:::tip
+Configure corretamente a velocidade regulamentada em cada faixa para que o sistema sugira os enquadramentos corretos automaticamente.
+:::
+|--------|-----------|:---------:|
+| 55411 | Velocidade superior à máxima em até 20% | Grave |
+| 55412 | Velocidade superior à máxima entre 20% e 50% | Gravíssima |
+| 55413 | Velocidade superior à máxima acima de 50% | Gravíssima |

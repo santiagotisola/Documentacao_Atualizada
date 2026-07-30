@@ -48,7 +48,20 @@ Equipamento captura → Triagem → Auditoria → Lote → Exportação
 ## Base legal
 
 - **Art. 161 do CTB** — Define infração de trânsito como todo ato omissivo ou comissivo que contrariar preceito do CTB
-- **Art. 280 do CTB** — Regula a lavratura do Auto de Infração de Trânsito (AIT)
+- **Art. 256 do CTB** — Penalidades aplicáveis
+- **Resolução CONTRAN 619/2016** — Fiscalização eletrônica e validade do AIT
+
+## Como a infração eletrônica é gerada
+
+No AxHub, a infração é gerada quando:
+1. Equipamento detecta velocidade acima do limite + tolerância
+2. OCR lê a placa corretamente
+3. Imagens obrigatórias são capturadas
+4. Aferição INMETRO do equipamento está válida
+
+:::warning
+Infrações geradas por equipamentos com aferição vencida são automaticamente bloqueadas e não podem ser exportadas.
+:::- **Art. 280 do CTB** — Regula a lavratura do Auto de Infração de Trânsito (AIT)
 - **Art. 281 do CTB** — Estabelece os prazos para expedição do AIT e notificação ao infrator
 - **Resolução CONTRAN 619/2016** — Define os procedimentos para fiscalização eletrônica
 

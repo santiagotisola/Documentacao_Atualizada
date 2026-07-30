@@ -49,6 +49,16 @@ Exporte o relatório em CSV para preparar o lote de envio ao órgão autuador.
 
 - [Infração](../glossario/infracao)
 - [Triagem](../glossario/triagem)
+- [Processamento de Imagens](./processamento-imagens)
+
+## Fluxo pós-exportação
+
+Após exportar o CSV:
+1. Verificar **Falhas de Sequenciais** antes do envio
+2. Gerar lote de exportação
+3. Transmitir ao DENATRAN/SENATRAN
+4. Confirmar recebimento e guardar protocolo por no mínimo 5 anos
+- [Triagem](../glossario/triagem)
 - [Processamento por Usuário](./processamento-por-usuario)
 
 | **Excesso (t)** | Toneladas acima do limite |

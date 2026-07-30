@@ -54,8 +54,15 @@ Equipamentos com aferição vencida têm infrações **automaticamente invalidad
 5. Anexe o **Certificado INMETRO**
 6. Clique em **Salvar**
 
+## Quanto custa um equipamento com aferição vencida
+
+Um equipamento com aferição vencida não gera infrações válidas. Cada dia de operação com aferição vencida representa:
+- Perda de toda a produção de infrações (não podem ser exportadas)
+- Risco de descumprimento do SLA contratual
+- Possível penalidade por indisponibilidade efetiva
+
 :::tip
-Cadastre a aferição assim que receber o certificado do laboratório. Não aguarde o vencimento para renovar.
+Programe as aferições com **30 dias de antecedncia** em relação ao vencimento para evitar interrupções operacionais.
 :::
 - [Tipos de Afericoes](../administracao/tipos-afericoes)
 - [Dashboard](../primeiros-passos/dashboard)

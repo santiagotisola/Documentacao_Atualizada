@@ -51,6 +51,14 @@ A liberação sem o motivo correto pode:
 - Gerar responsabilidade administrativa do operador
 - Ser questionada em recurso pelo infrator
 
+## Prazo de retenção
+
+Veículos retidos têm direitos legais:
+- **4 horas**: direito à alimentação
+- **24 horas**: direito a remoção para pátio credenciado
+
+**Base:** Art. 231, §2º do CTB + Portaria DENATRAN 40/2014
+
 ## Relacionado
 
 - [Motivos](./motivos)
