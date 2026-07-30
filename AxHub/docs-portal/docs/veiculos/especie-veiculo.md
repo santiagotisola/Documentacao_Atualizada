@@ -23,6 +23,25 @@ Classificação dos veículos por **espécie** conforme o Registro Nacional de V
 | **Caminhão-trator** | Cavalo mecânico sem carroceria |
 | **Ônibus** | Transporte público com mais de 8 assentos |
 | **Microonibus** | De 9 a 15 passageiros |
+
+## Campos
+
+| Campo | Obrigatório | Descrição |
+|-------|:-----------:|-----------|
+| **Código DENATRAN** | Sim | Código oficial |
+| **Descrição** | Sim | Nome da espécie |
+| **Status** | Sim | Ativo ou Inativo |
+
+## Passo a passo
+
+1. Acesse **Veículos → Espécies de Veículos**
+2. Clique em **+ Nova**
+3. Preencha o **Código** e a **Descrição**
+4. Clique em **Salvar**
+
+:::info
+As espécies são pré-carregadas conforme a tabela do DENATRAN. Adicionar espécies novas apenas quando solicitado pelo órgão autuador.
+:::
 | **Moto** | Motocicleta, ciclomotor, motoneta |
 | **Trator** | Equipamento agrícola ou de obras |
 

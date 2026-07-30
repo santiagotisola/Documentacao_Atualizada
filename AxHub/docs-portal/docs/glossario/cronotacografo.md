@@ -23,6 +23,15 @@ Instrumento eletrônico de controle do **tempo de direção, parada e velocidade
 
 | Status | Descrição | Ação |
 |--------|-----------|------|
+| **Regular** | Cronoat - presente e válido | Nenhuma |
+| **Irregular** | Ausente, violado ou adulterado | Gera infração |
+| **N/A** | Veículo não obrigado | Nenhuma |
+
+## Relacionado
+
+- [Enquadramentos](../administracao/enquadramentos) — Códigos CTB aplicáveis
+- [Tipos de Veículos](../veiculos/tipos-veiculos)
+
 | Válido | Cronoatacógrafo dentro da validade | Passagem liberada |
 | Vencido | Certificação expirada | Gera alerta/infração |
 | Ausente | Veículo obrigado sem o dispositivo | Gera infração |

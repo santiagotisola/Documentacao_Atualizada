@@ -25,6 +25,23 @@ Equipamento captura infração
        ↓
    OCR lê a placa
        ↓
+   Triagem pelo operador
+       ↓
+   Enquadramento confirmado
+       ↓
+   Inclusão no lote de exportação
+       ↓
+   Envio ao órgão autuador
+```
+
+## Relacionado
+
+- [Triagem](./triagem)
+- [Enquadramentos](../administracao/enquadramentos)
+- [Lote de Exportação](./lote-exportacao)
+
+   OCR lê a placa
+       ↓
    Triagem (operador valida)
        ↓
    Auditoria (supervisor aprova)

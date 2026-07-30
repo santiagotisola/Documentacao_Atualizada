@@ -23,6 +23,17 @@ Processo de **mensuração da performance operacional** dos equipamentos de fisc
 ```
 1. Registrar interrupções
 2. Calcular disponibilidade
+3. Apurar taxa OCR
+4. Gerar Boletim de Medição
+5. Enviar ao contratante
+```
+
+## Relacionado
+
+- [Criar Medição](../medicoes/criar-medicao)
+- [Interrupções](../medicoes/interrupcoes)
+- [Índices de Performance](../medicoes/indices-performance)
+
 3. Verificar índices de performance
 4. Gerar relatório de medição
 5. Finalizar e exportar PDF

@@ -24,6 +24,16 @@ Tabela de cores de veículos utilizada na identificação de veículos nas autua
 | **Código** | Não | Código padrão do órgão autuador |
 | **Status** | Sim | Ativo ou Inativo |
 
+## Passo a passo
+
+1. Acesse **Veículos → Cores**
+2. Clique em **+ Nova**
+3. Preencha o **Nome** e o **Código** (se exigido pelo órgão autuador)
+4. Clique em **Salvar**
+
+:::tip
+As cores são extraídas automaticamente do RENAVAM quando o OCR lê a placa. Mantenha a tabela atualizada para evitar dados em branco nas infrações exportadas.
+:::
 ## Passo a passo — Cadastrar cor
 
 1. Acesse **Veículos → Cores** no menu lateral

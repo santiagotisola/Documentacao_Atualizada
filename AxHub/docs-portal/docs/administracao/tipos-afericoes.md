@@ -23,6 +23,14 @@ Define as **categorias de aferição metrológica** realizadas nos equipamentos 
 ## Tipos padrão
 
 | Tipo | Descrição | Validade Comum |
+|------|-----------|:--------------:|
+| Aferição Inicial | Primeira verificação antes do uso | 1 ano |
+| Aferição Periódica | Renovação anual obrigatória | 1 ano |
+| Aferição Pós-Manutenção | Após intervenção técnica | Até próxima periódica |
+
+:::info
+Equipamentos com aferição vencida não podem gerar infrações válidas legalmente. O sistema exibe alerta quando a data de vencimento se aproxima.
+:::
 |------|-----------|----------------|
 | **Aferição Inicial** | Realizada na instalação do equipamento | 365 dias |
 | **Aferição Periódica** | Recalibração anual obrigatória | 365 dias |

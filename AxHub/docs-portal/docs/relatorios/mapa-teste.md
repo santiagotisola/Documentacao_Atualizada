@@ -22,7 +22,21 @@ O mapa de teste exibe os resultados dos registros com `Homologacao = 1` em `TBIn
 
 | Campo usado | Origem | Descrição |
 |------------|--------|-----------|
-| **Placa Veículo | `TBPassagens.PlacaVeiculo` | Placa lida no teste |
+| **Placa Veículo** | `TBPassagens.PlacaVeiculo` | Placa lida no teste |
+| **Data/Hora** | `TBPassagens.DataHora` | Momento da captura |
+| **Resultado** | `TBInfracoes.Homologacao` | 1 = teste |
+| **Faixa** | `TBPassagens.Faixa` | Faixa do equipamento |
+
+## Como usar
+
+1. Acesse **Relatórios → Mapa de Teste**
+2. Selecione o **Período** e o **Equipamento**
+3. O relatório exibe os acertos e erros de captura em formato de grade
+4. Identifique faixas com baixo aproveitamento OCR
+
+:::warning
+Os registros exibidos neste mapa **não são infrações reais** — são capturas de teste. Não incluir no lote de exportação.
+:::
 | **Erro OCR** | `TBInfracoes.ErroOcr` | Indica se houve falha na leitura |
 | **Velocidade Medida** | `TBPassagens.VelocidadeMedida` | Velocidade no momento |
 | **Data Hora Passagem** | `TBPassagens.DataHoraPassagem` | Momento da passagem de teste |

@@ -23,6 +23,16 @@ Subdivide as categorias de veículos em **classificações mais específicas** p
 | **Categoria** | Sim | Categoria pai |
 | **Status** | Sim | Ativo ou Inativo |
 
+## Passo a passo
+
+1. Acesse **Veículos → Classificações de Veículos**
+2. Clique em **+ Nova**
+3. Preencha o **Código**, **Descrição** e selecione a **Categoria** pai
+4. Clique em **Salvar**
+
+:::info Hierarquia
+Categoria → Classificação → Veículo. A classificação é o nível mais específico, usada no enquadramento da infração.
+:::
 ## Exemplos de classificação
 
 | Categoria | Classificação |

@@ -23,6 +23,16 @@ Criado → Processando → Enviado → Aceito
 | Status | Descrição |
 |--------|-----------|
 | **Criado** | Lote gerado, aguardando envio |
+| **Processando** | Sendo formatado e validado |
+| **Enviado** | Transmitido ao órgão autuador |
+| **Aceito** | Confirmado pelo órgão |
+| **Erro** | Falha no envio — precisa reprocessar |
+
+## Relacionado
+
+- [Lotes de Importação](../relatorios/lote-importacao)
+- [Sequenciais de Lote](../administracao/sequenciais-lote-exportacao)
+
 | **Processando** | Envio em andamento |
 | **Enviado** | Transmitido com sucesso |
 | **Aceito** | Confirmado pelo órgão |

@@ -23,6 +23,20 @@ Cadastro dos **pontos físicos de fiscalização de peso veicular**. Cada posto 
 | **Rodovia** | Não | Rodovia onde está instalado |
 | **Km** | Não | Quilometro da rodovia |
 | **Sentido** | Não | Sentido do tráfego monitorado |
+| **Contrato** | Sim | Contrato vinculado |
+| **Status** | Sim | Ativo, Inativo ou Em manutenção |
+
+## Passo a passo
+
+1. Acesse **Balança → Postos**
+2. Clique em **+ Novo**
+3. Preencha o **Nome**, **Endereço** e selecione o **Contrato**
+4. Informe **Rodovia**, **Km** e **Sentido** (se aplicável)
+5. Clique em **Salvar**
+
+:::tip
+Após criar o posto, vincule os **Equipamentos** a ele em **Configurações → Equipamentos**.
+:::
 | **Status** | Sim | Ativo ou Inativo |
 
 ## Cadastro

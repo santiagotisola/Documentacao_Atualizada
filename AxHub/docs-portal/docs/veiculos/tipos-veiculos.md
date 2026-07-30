@@ -28,6 +28,25 @@ Cadastro dos **tipos de veículos** utilizados para classificação nas operaç�
 
 | Campo | Obrigatório | Descrição |
 |-------|:-----------:|-----------|
+| **Código** | Sim | Código identificador |
+| **Nome** | Sim | Nome do tipo |
+| **Status** | Sim | Ativo ou Inativo |
+
+## Passo a passo
+
+1. Acesse **Veículos → Tipos de Veículos**
+2. Clique em **+ Novo**
+3. Preencha o **Código** e o **Nome**
+4. Clique em **Salvar**
+
+:::tip
+Os tipos de veículos são usados em conjunto com **Espécies** e **Classificações** para determinar o enquadramento exato da infração.
+:::
+
+## Campos
+
+| Campo | Obrigatório | Descrição |
+|-------|:-----------:|-----------|
 | **Nome** | Sim | Nome do tipo |
 | **Código DENATRAN** | Não | Código oficial |
 | **Status** | Sim | Ativo ou Inativo |

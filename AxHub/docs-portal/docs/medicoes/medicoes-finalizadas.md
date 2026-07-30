@@ -23,6 +23,18 @@ Exibe o **histórico das medições contratuais** que já foram calculadas e fin
 | **Disponibilidade** | Índice de disponibilidade apurado |
 | **Taxa OCR** | Taxa de reconhecimento do período |
 | **Status** | Finalizada / Em revisão |
+
+## Ações disponíveis
+
+| Ação | Descrição |
+|------|-----------|
+| **Visualizar** | Exibe o Boletim de Medição completo |
+| **Exportar** | Gera PDF ou Excel do boletim |
+| **Reabrir** | Disponibiliza para revisão (requer permissão) |
+
+:::info
+Uma medição finalizada **não pode ser editada** sem ser reaberta. A reabertura exige permissão de supervisor e gera log de auditoria.
+:::
 | **Ações** | Visualizar / Exportar PDF |
 
 ## O que pode fazer

@@ -31,6 +31,11 @@ Cadastro dos municípios utilizados no sistema para **classificação geográfic
 4. Clique em **Salvar**
 
 :::tip
+O código IBGE de 7 dígitos é obrigatório nos arquivos de exportação de infrações ao DENATRAN/SENATRAN.
+:::
+4. Clique em **Salvar**
+
+:::tip
 O código IBGE é obrigatório nos arquivos de exportação de infrações. Certifique-se de usar o código correto para o município do equipamento.
 :::
 

@@ -23,6 +23,14 @@ Configura e monitora os **sequenciais numéricos** utilizados na numeração dos
 
 ## Boas práticas
 
+- Nunca reutilize sequenciais de uma série já encerrada
+- Configure o **Número máximo** para evitar estouro automático da série
+- Comunique ao órgão autuador antes de iniciar uma nova série
+
+:::warning
+Sequenciais duplicados geram rejeicao do lote pelo órgão autuador. Não edite o campo **Próximo número** manualmente sem autorização.
+:::
+
 - Nunca reiniciar a numeração sem autorização do órgão autuador
 - Verificar o relatório de [Falhas de Sequenciais](../relatorios/relatorio-logs-envios) antes de cada lote de exportação
 - Manter registro de todas as séries utilizadas por período

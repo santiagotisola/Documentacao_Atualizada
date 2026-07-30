@@ -27,6 +27,17 @@ Tabela de marcas de veículos utilizada na identificação nos registros de infr
 ## Passo a passo
 
 1. Acesse **Veículos → Marcas de Veículos**
+2. Clique em **+ Nova**
+3. Preencha o **Nome** e o **Código** (se aplicável)
+4. Clique em **Salvar**
+
+:::tip
+As marcas são vinculadas aos **Modelos de Veículos**, formando a hierarquia Marca → Modelo usada nas infrações.
+:::
+
+## Passo a passo
+
+1. Acesse **Veículos → Marcas de Veículos**
 2. Clique em **+ Novo**
 3. Informe o **Nome** da marca
 4. Clique em **Salvar**

@@ -23,6 +23,13 @@ Cadastro das regiões geográficas utilizadas para **agrupar operações e equip
 ## Passo a passo — Cadastrar região
 
 1. Acesse **Configurações → Regiões**
+2. Clique em **+ Nova**
+3. Preencha o **Nome** e, opcionalmente, a **Descrição**
+4. Clique em **Salvar**
+
+:::tip
+Após cadastrar regiões, vincule os equipamentos a elas em **Configurações → Equipamentos**. Isso habilita o filtro de região nos relatórios.
+:::
 2. Clique em **+ Novo**
 3. Informe o **Nome** da região
 4. Opcionalmente adicione uma **Descrição**

@@ -23,6 +23,18 @@ Permite liberar tickets de pesagem para que Veículos retidos realizem nova pesa
 | **Observação** | Detalhes adicionais da liberação |
 | **Operador** | Usuário responsável pela liberação |
 
+## Passo a passo
+
+1. Acesse **Balança → Liberar Tickets para Pesagem**
+2. Informe o **Número do Ticket**
+3. Selecione o **Motivo**
+4. Preencha as **Observações** (opcional)
+5. Clique em **Liberar**
+
+:::warning
+A liberação de tickets é uma ação registrada em log. Certifique-se de selecionar o motivo correto — liberações sem justificativa coerente podem ser auditadas pelo órgão contratante.
+:::
+
 ## Quando utilizar
 
 | Situação | Ação |
