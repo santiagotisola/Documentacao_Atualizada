@@ -32,14 +32,13 @@ Para controle de acesso, utilize:
 :::info
 A restrição por IP é uma camada adicional de segurança. Recomendada para ambientes corporativos com IP fixo. Não utilize se os usuários acessam com IPs dinâmicos.
 :::
-3. **VPN** — acesso restrito à rede interna
 
-## Contato
+## Relacionado
 
-Para habilitar este recurso: contato@axiontecnologia.com.br
+- [Usuários](./usuarios)
+- [Perfis de Acesso](./perfis-acesso)
+- [Logs de Acesso](./logs-acesso)
 
-
-Quando disponível, este módulo permite configurar restrições de acesso ao sistema com base no endereço IP do Usuário definindo regras de permissão ou bloqueio por IP.
 
 ## Como acessar
 

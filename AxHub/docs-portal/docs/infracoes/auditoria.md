@@ -40,6 +40,19 @@ A tela de Auditoria permite que auditores revisem as Infrações que foram valid
    - ✅ **Confirma** — Infração correta, segue para exportação
    - ❌ **Rejeita** — devolve para triagem com observação
    - 📝 **Adiciona observações** — registra comentários sem alterar o status
+
+## Boas práticas
+
+- Auditar com amostragem mínima de 10% por equipamento por turno
+- Rejeitar infrações com imagens ambíguas mesmo que a placa seja legível
+- Documentar o motivo de rejeição para retroalimentação dos analistas
+
+## Relacionado
+
+- [Triagem](../glossario/triagem)
+- [Infrações Descartadas](./infracoes-descartadas)
+- [Processamento por Usuário](../relatorios/processamento-por-usuario)
+
 3. O contador de tempo controla a produtividade (configurado em Configurações do Sistema → aba Triagem**)
 4. O status é atualizado automaticamente após cada decisão
 
