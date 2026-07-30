@@ -62,7 +62,12 @@ As marcas são vinculadas aos **Modelos de Veículos**, formando a hierarquia Ma
 3. Informe o **Nome** da marca
 4. Clique em **Salvar**
 
-## Hierarquia
+## Boas práticas
+
+- Use a grafia oficial do fabricante (ex.: MERCEDES-BENZ, SCANIA, VOLVO) para garantir compatibilidade com o RENAVAM e os arquivos SENATRAN
+- Antes de criar, pesquise se a marca já existe com nome alternativo — duplicidades prejudicam a classificação nos tickets de pesagem
+- O **Código DENATRAN** pode ser exigido em alguns layouts de exportação; confirme com o órgão autuador
+- Mantenha marcas descontinuadas como **Inativas** para preservar o histórico de autos emitidos
 
 ```
 Marca de Veículo → Modelo → Veículo identificado na pesagem

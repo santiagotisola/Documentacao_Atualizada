@@ -84,3 +84,10 @@ Os tipos de veículos são usados em conjunto com **Espécies** e **Classificaç
 |------|--------|-----------|
 | Relacionado | [Classificacoes](./classificacoes-veiculos) | Classificacoes |
 | Relacionado | [Especies](./especie-veiculo) | Especies |
+
+## Boas práticas
+
+- Utilize os tipos padrão DENATRAN pré-cadastrados; adicione tipos personalizados somente se expressamente exigido pelo órgão autuador
+- Mantenha a consistência com as **Espécies** e **Classificações** vinculadas — um tipo sem classificação correspondente impede o enquadramento correto
+- Não exclua tipos associados a infrações históricas; inative-os para preservar a rastreabilidade
+- Ao atualizar um tipo, revise os enquadramentos que dependem dele para evitar inconsistências nos lotes futuros

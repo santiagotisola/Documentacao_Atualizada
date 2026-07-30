@@ -87,3 +87,10 @@ Espécie (DENATRAN)
 | Tipo | Pagina | Descricao |
 |------|--------|-----------|
 | Relacionado | [Tipos de Veiculos](./tipos-veiculos) | Tipos vinculados |
+
+## Boas práticas
+
+- Utilize os códigos DENATRAN oficiais para garantir compatibilidade nos arquivos de exportação ao SENATRAN
+- Não crie espécies personalizadas sem alinhamento com o órgão autuador — dados divergentes invalidam autos
+- Revise a tabela sempre que o DENATRAN publicar novas normativas de classificação veicular
+- Mantenha espécies obsoletas como **Inativas** em vez de excluí-las para preservar o histórico de infrações

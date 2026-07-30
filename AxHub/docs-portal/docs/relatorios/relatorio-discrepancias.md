@@ -52,7 +52,13 @@ Discrepancias não tratadas comprometem a qualidade dos lotes exportados. Revise
 - [Falhas Sequenciais](./falhas-sequenciais)
 - [Processamento de Imagens](./processamento-imagens)
 
-| Equipamento | Equipamento que gerou a discrepância |
+## Casos de uso
+
+- **Controle de qualidade diário**: revisar discrepâncias antes de gerar novos lotes de exportação, evitando infrações inválidas
+- **Auditoria técnica**: apresentar ao gestor do contrato a lista de registros pendentes de resolução e as ações tomadas
+- **Diagnóstico de equipamentos**: identificar equipamentos com alta taxa de discrepâncias como indicativo de necessidade de calibração ou manutenção
+- **Prevenção de contestações**: resolver discrepâncias de OCR antes da exportação para reduzir recursos administrativos no órgão autuador
+ a discrepância |
 | **Tipo** | Categoria da discrepância |
 | **Descrição** | Detalhamento do problema identificado |
 | **Auto de Infração | Número do auto relacionado (quando aplicável) |

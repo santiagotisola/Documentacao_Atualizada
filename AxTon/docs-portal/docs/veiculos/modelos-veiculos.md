@@ -69,5 +69,11 @@ Verifique se o modelo já existe antes de criar. Duplicidades dificultam a class
 1. Acesse Veículos → **Modelos de Veículos
 2. Clique em **+ Novo**
 3. Preencha o Código e a Descrição
-4. Marque como Ativo
 5. Clique em **Salvar**
+
+## Boas práticas
+
+- Pesquise o modelo existente antes de criar — duplicidades geram ambiguidade na classificação dos tickets de pesagem
+- Vincule o modelo à **Marca** correta; modelos sem marca ficam inacessíveis nos filtros de relatório
+- Para veículos de carga pesada, use a nomenclatura oficial do fabricante (ex.: Actros, Stralis, FH) para compatibilidade com o RENAVAM
+- Não exclua modelos já vinculados a infrações — inative-os para preservar o histórico das operações

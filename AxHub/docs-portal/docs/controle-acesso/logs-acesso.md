@@ -56,6 +56,13 @@ Filtre por **Status = Falha** para detectar tentativas de acesso não autorizado
 - [Perfis de Acesso](./perfis-acesso)
 - [Acessos por IP](./acessos-por-ip)
 
+## Segurança
+
+- Revise os logs de acesso **semanalmente** para identificar padrões de autenticação anormais
+- Filtre por **Status = Falha** e analise os IPs de origem — múltiplas falhas do mesmo IP podem indicar ataque de força bruta
+- Acessos em horários incomuns (madrugada, fins de semana) devem ser confirmados com o responsável da conta
+- Exporte o log mensalmente para um repositório externo como parte do plano de auditoria de segurança
+
 | Login | Autenticação bem-sucedida |
 | Login Falhou** | Tentativa de acesso com credenciais inválidas |
 | Logout | Encerramento de sessão |

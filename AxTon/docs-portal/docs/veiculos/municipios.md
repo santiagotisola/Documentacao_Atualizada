@@ -62,3 +62,15 @@ A tela exibe todos os registros cadastrados, com opção de pesquisa e filtro.
 3. Preencha o Código e a Descrição
 4. Marque como Ativo
 5. Clique em **Salvar**
+## Boas práticas
+
+- Utilize o código IBGE de **7 dígitos** — o código com 6 dígitos causa rejeição nos arquivos SENATRAN
+- A base pré-carregada cobre todos os municípios brasileiros; adicione entradas apenas para localidades não reconhecidas pelo IBGE
+- O município do posto de pesagem é inserido automaticamente no boletim de medição — garanta que esteja cadastrado corretamente antes de gerar a primeira medição
+- Consulte ibge.gov.br/cidades para confirmar o código oficial antes de cadastrar
+
+## Relacionado
+
+- [Postos de Pesagem](../pesagem/postos)
+- [Contratos](../medicoes/contratos)
+- [Relatório de Infrações](../relatorios/relatorio-infracoes)

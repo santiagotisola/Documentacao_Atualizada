@@ -60,6 +60,14 @@ O tipo de equipamento determina as configurações de operação aplicáveis (ve
 - [Fabricantes](./fabricantes)
 - [Modelos de Equipamentos](./modelos-equipamentos)
 - [Equipamentos](./equipamentos)
+
+## Boas práticas
+
+- Use tipos padronizados (Estática, Semiestática, Dinâmica) para garantir que o sistema aplique a tolerância metrológica correta em cada pesagem
+- Não altere o tipo de um equipamento já em operação — pode causar recalculo incorreto das infrações históricas
+- Documente a descrição do tipo com informações técnicas (norma INMETRO, velocidade máxima) para referência da equipe de campo
+- Mantenha tipos obsoletos como **Inativos** em vez de excluir para preservar o vínculo com equipamentos históricos
+
 2. Clique em **+ Novo**
 3. Preencha o **Nome** e a **Descrição**
 4. Clique em **Salvar**

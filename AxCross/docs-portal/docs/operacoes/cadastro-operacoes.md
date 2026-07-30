@@ -67,3 +67,17 @@ Uma operação ativa vincula todas as passagens dos equipamentos selecionados ao
 :::warning Atenção
 Operações com registros de passagem vinculados não podem ser excluídas, apenas encerradas.
 :::
+
+## Boas práticas
+
+- Defina um **Nome** descritivo que identifique o local e o objetivo da operação (ex.: *Fiscalização Av. Paulista — Jul/2026*)
+- Vincule somente os equipamentos ativos no período da operação para evitar registros de passagem em equipamentos inativos
+- **Encerre** a operação assim que concluída — operações abertas continuam recebendo passagens e podem distorcer relatórios futuros
+- Use o campo **Responsável** para rastrear qual agente conduziu a fiscalização em cada ponto
+
+## Relacionado
+
+- [Alertas](./alertas)
+- [Veículos Monitorados](./veiculos-monitorados)
+- [Relatório de Passagens](../relatorios/relatorio-passagens)
+- [Ocorrências e Alertas](../relatorios/ocorrencias-alertas)

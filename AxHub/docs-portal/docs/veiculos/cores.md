@@ -76,3 +76,10 @@ Verifique com o órgão autuador (DETRAN/DENATRAN) quais códigos de cor são ac
 | Tipo | Pagina | Descricao |
 |------|--------|-----------|
 | Relacionado | [Consulta de Infracoes](../infracoes/consulta-infracoes) | Filtro por cor |
+
+## Boas práticas
+
+- Mantenha todas as 15 cores padrão DENATRAN cadastradas — lacunas na tabela resultam em campo vazio nos autos exportados
+- Confirme com o órgão autuador quais códigos de cor são aceitos no layout de exportação antes de cadastrar cores adicionais
+- A cor é extraída automaticamente do RENAVAM na consulta de placa; mantenha a tabela atualizada para evitar inconsistências
+- Não exclua cores vinculadas a infrações existentes — inative-as para preservar a integridade do histórico

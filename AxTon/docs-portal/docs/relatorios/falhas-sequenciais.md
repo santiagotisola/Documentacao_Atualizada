@@ -59,8 +59,12 @@ Não exporte um lote com falhas sequenciais identificadas. O órgão autuador po
 Sempre execute este relatório antes de gerar um novo lote de exportação. Falhas não corrigidas causam rejeição pelo órgão autuador.
 :::
 
+## Casos de uso
 
-## Dados do Relatório
+- **Pré-exportação**: executar antes de gerar cada novo lote para garantir a integridade sequencial exigida pelo DENATRAN/SENATRAN
+- **Auditoria interna**: identificar descarte não documentado de infrações que causam lacunas na sequência
+- **Diagnóstico de falha técnica**: detectar falhas de comunicação entre balanca e servidor que causaram números duplicados
+- **Comprovação de integridade**: documentar a ausência de gaps para fins de auditoria contratual
 
 ### Colunas
 

@@ -69,3 +69,10 @@ As detecções de veículos monitorados geram alertas automáticos. O operador d
 Use este Relatório em conjunto com a tela de **Alertas** para acompanhar o status das tratativas de cada detecção.
 :::
 
+## Casos de uso
+
+- **Prestação de contas operacional**: demonstrar ao órgão contratante todas as detecções de veículos monitorados realizadas no período
+- **Auditoria de alertas**: verificar se todos os alertas gerados foram devidamente tratados e registrados
+- **Análise de padrões**: identificar veículos com alta frequência de detecção para priorizar investigações
+- **Comprovação de monitoramento**: documentar que um veículo específico foi ou não detectado durante determinado período
+

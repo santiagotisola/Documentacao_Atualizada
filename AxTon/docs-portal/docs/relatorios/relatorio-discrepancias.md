@@ -55,6 +55,13 @@ Discrepancias entre peso declarado e aferido superior a 10% devem ser reportadas
 - Auditar qualidade das classificações automáticas
 - Embasar ações judiciais contra infratores recorrentes
 
+## Casos de uso
+
+- **Fiscalização fiscal**: cruzar peso aferido com peso declarado na NF-e para identificar sub-declaração de carga
+- **Auditoria técnica**: verificar classificações automáticas incorretas que geraram erros nos enquadramentos de infração
+- **Relatório para contratante**: demonstrar volume de discrepancies identificadas e tratadas no período
+- **Prevenção de rejeicao**: resolver inconsistências antes da exportação para evitar rejeicao de lotes pelo SENATRAN
+
 ## Exportação
 
 Disponível em **Excel** e **PDF**.

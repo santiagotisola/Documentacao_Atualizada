@@ -49,6 +49,12 @@ Quando a restrição está ativada, **somente os IPs cadastrados** conseguem ace
 - [Perfis de Acesso](./perfis-acesso)
 - [Logs de Acesso](./logs-acesso)
 
+## Segurança
+
+- Sempre adicione o IP da sua rede **antes** de ativar a restrição para evitar bloqueio acidental do administrador
+- Utilize faixas CIDR (`192.168.1.0/24`) para redes corporativas em vez de cadastrar IPs individuais de cada estação
+- Revise a lista de IPs periodicamente e remova entradas obsoletas (equipamentos descontinuados, VPNs antigas)
+- Combine a restrição por IP com **Perfis de Acesso** bem configurados para uma defesa em camadas
 
 :::warning
 Quando a restrição por IP está ativada, **somente os IPs cadastrados** conseguem acessar. Inclua o IP da sua rede antes de ativar para evitar bloqueio acidental.

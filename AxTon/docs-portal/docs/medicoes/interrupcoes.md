@@ -80,6 +80,13 @@ Registre toda interrupção logo que ocorrer. Interrupções não registradas se
 
 ## Boas práticas
 
+- Registre a interrupção imediatamente após o início do evento — interrupções não registradas são contabilizadas como indisponibilidade
+- Para manutenções programadas, abra o registro com antecedência e classifique como **Preventiva** para que o sistema aplique o tratamento contratual correto
+- Descreva a causa e as ações tomadas na justificativa — essa informação compõe o boletim de medição enviado ao contratante
+- Interrupções de **Forca maior** devem ser documentadas com evidências (laudo técnico, BO, fotos) para isentar a penalidade contratual
+
+## Boas práticas
+
 - Registre a interrupção **imediatamente** quando ocorrer — interrupções sem registro são contabilizadas como indisponibilidade penalizando o SLA
 - Classifique corretamente o tipo: manutenção preventiva programada geralmente não penaliza; corretiva sim
 - Descreva a causa e as ações tomadas com detalhes suficientes para embasar discussões contratuais

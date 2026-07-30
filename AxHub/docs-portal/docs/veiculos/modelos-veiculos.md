@@ -76,3 +76,10 @@ Marca (ex.: FIAT)
 | Tipo | Pagina | Descricao |
 |------|--------|-----------|
 | Relacionado | [Marcas de Veiculos](./marcas-veiculos) | Marca do modelo |
+
+## Boas práticas
+
+- Antes de cadastrar, pesquise se o modelo já existe vinculado à marca — duplicidades geram ambiguidade na identificação
+- Vincule sempre o modelo à **Marca** correta do fabricante; um modelo sem marca impede a correta classificação do veículo
+- Modelos já associados a infrações exportadas não devem ser renomeados — pode causar inconsistência nos registros históricos
+- Para veículos de fabricantes internacionais pouco comuns, use a descrição oficial do RENAVAM para manter padronização

@@ -78,3 +78,16 @@ O mapeamento de rotas é especialmente útil em operações de busca de veículo
 :::tip Dica
 Combine o Mapeamento de Rotas com o **Rastreamento de Placas** para uma Análise completa dos deslocamentos.
 :::
+
+## Casos de uso
+
+- **Investigação de incídentes**: reconstruir o último percurso de um veículo furtado/roubado para identificar o trajeto após o crime
+- **Comprovação de presença**: confirmar que um veículo passou por determinado cruzamento em uma hora específica
+- **Análise de padrões de rota**: identificar trajetos habituais de veículos suspeitos para previsão operacional
+- **Suporte jurídico**: fornecer evidência de localização de veículo para processos judiciais ou administrativos
+
+## Relacionado
+
+- [Rastreamento de Placas](./rastreamento-placas)
+- [Veículos Monitorados](./veiculos-monitorados)
+- [Painel Analítico](./painel-analitico)

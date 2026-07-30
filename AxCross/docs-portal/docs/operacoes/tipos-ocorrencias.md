@@ -90,3 +90,17 @@ Consulte [Vigência dos Alertas](vigencia-alertas.md) para o detalhamento comple
 :::caution Tipos em uso
 Tipos de ocorrência vinculados a alertas ou veículos existentes **não podem ser excluídos**. Inative-os para impedir novos usos sem perder o histórico.
 :::
+
+## Boas práticas
+
+- Defina um **Código** descritivo e único (ex.: `ROUBADO`, `SUSPEITO`) para facilitar a identificação nos relatórios e filtros
+- Configure o **Prazo de Expiração** para ocorrências temporárias (mandados, buscas) e deixe vazio para monitoramentos permanentes
+- Escolha cores distintas para cada tipo — cores semelhantes dificultam a identificação visual dos alertas no painel
+- Ative **Alerta Sonoro** somente para tipos de alta prioridade para evitar fadiga operacional por excesso de alertas
+
+## Relacionado
+
+- [Alertas](./alertas)
+- [Veículos Monitorados](./veiculos-monitorados)
+- [Vigência dos Alertas](./vigencia-alertas)
+- [Ocorrências e Alertas](../relatorios/ocorrencias-alertas)

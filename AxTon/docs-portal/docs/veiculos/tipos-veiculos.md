@@ -71,3 +71,10 @@ A tela exibe todos os registros cadastrados, com opção de pesquisa e filtro.
 | [**Cores**](../veiculos/cores) | Cadastro de cores de Veículos |
 | [**Classificações de Veículos**](../veiculos/classificacoes-veiculos) | Classificações por eixo e PBT |
 | [**Municípios**](../veiculos/municipios) | Cadastro de municípios (código IBGE) |
+
+## Boas práticas
+
+- Atualize os tipos de veículos sempre que o CONTRAN publicar novas resoluções com alterações nos limites de PBT
+- Não altere o **PBT máximo** de tipos já utilizados em infrações exportadas — pode gerar inconsistência retroativa nos boletins de medição
+- Mantenha a correspondência entre número de eixos e PBT conforme a tabela CONTRAN 803/2021
+- Utilize a nomenclatura oficial (ex.: Caminhão Toco, Bitrem, Rodotrem) para compatibilidade com o SENATRAN

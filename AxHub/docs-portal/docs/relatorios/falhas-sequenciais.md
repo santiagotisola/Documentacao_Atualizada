@@ -44,8 +44,13 @@ Uma **falha sequencial** ocorre quando o mesmo Equipamento apresenta o mesmo tip
 - [Eventos de Equipamentos](./eventos-equipamentos)
 - [Aferições](../operacoes/afericoes)
 
+## Casos de uso
 
-## Exportação
+- **Manutenção preventiva**: identificar equipamentos com falhas recorrentes para agendar inspeção técnica antes da próxima ocorrência
+- **Comprovação de SLA**: apresentar ao contratante os períodos de indisponibilidade com tipologia detalhada para clculo do desconto contratual
+- **Auditoria de qualidade**: detectar equipamentos com baixo aproveitamento de imagens causado por falhas técnicas recorrentes
+- **Priorização de recursos**: direcionar equipe de campo para os pontos com maior frequência de falhas sequenciais
+
 
 Exportável em **Excel** para uso em Relatórios técnicos e comprovantes de manutenção.
 

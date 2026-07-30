@@ -80,3 +80,10 @@ As categorias de veículos são usadas no enquadramento para determinar qual art
 | Tipo | Pagina | Descricao |
 |------|--------|-----------|
 | Relacionado | [Classificacoes](./classificacoes-veiculos) | Classificacoes vinculadas |
+
+## Boas práticas
+
+- Utilize as categorias padrão do CTB para garantir enquadramentos válidos nos autos de infração
+- Não altere o **Código CTB** de categorias já vinculadas a infrações exportadas — pode invalidar registros no órgão autuador
+- Mantenha categorias descontinuadas como **Inativas** para preservar rastreabilidade histórica
+- Revise o cadastro sempre que o CONTRAN publicar atualizações no Anexo II do CTB

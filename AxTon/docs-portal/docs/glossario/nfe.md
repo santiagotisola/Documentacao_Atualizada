@@ -54,3 +54,11 @@ A comparação entre o **peso declarado na NF-e** e o **peso aferido na balança
 - [MDF-e](./mdfe) — Manifesto que agrupa as NF-e
 - [Pesagem](./pesagem) — Verificação do peso declarado vs aferido
 
+## Base legal
+
+| Dispositivo | Conteúdo |
+|-------------|----------|
+| **Ajuste SINIEF 07/2005** | Instituição da NF-e no Brasil |
+| **Lei 8.137/90** | Crimes contra a ordem tributária — sub-declaração fiscal |
+| **Código Fiscal de Operações (CFOP)** | Classificação das operações fiscais na nota |
+| **Portaria CAT 162/2008 (SP)** | Obrigatoriedade da NF-e no transporte interestadual |

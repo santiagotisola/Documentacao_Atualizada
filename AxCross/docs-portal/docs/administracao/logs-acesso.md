@@ -77,3 +77,10 @@ Os logs de acesso não podem ser editados ou excluídos por nenhum Usuário gara
 :::caution Retenção
 Verifique a política de retenção de logs configurada em **Configurações do Sistema** para saber o período disponível para consulta.
 :::
+
+## Segurança
+
+- Monitore acessos em horários incomuns (madrugada, fins de semana) e confirme com o responsável da conta
+- Filtre por **Status = Falha** para identificar tentativas de acesso não autorizado — padrões repetidos do mesmo IP indicam ataque
+- Os logs são imutáveis — nenhum usuário pode editá-los, garantindo a integridade da trilha de auditoria
+- Exporte e arquive os logs mensalmente como parte do plano de conformidade e auditoria de segurança

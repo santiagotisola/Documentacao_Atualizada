@@ -52,3 +52,11 @@ Veículos com MDF-e vencido ou ausente não podem continuar o transporte até a 
 - [PBT](./pbt) — Peso verificado junto ao MDF-e
 - [Triagem](./triagem) — Processo de validação
 
+## Base legal
+
+| Dispositivo | Conteúdo |
+|-------------|----------|
+| **Ajuste SINIEF 21/2010** | Instituíção do MDF-e no Brasil |
+| **NT 2013/005** | Especificações técnicas do MDF-e |
+| **Art. 237-A, CTB** | Vedado o transporte de mercadorias sem documentação fiscal |
+| **Convênio ICMS 58/2013** | Obrigatoriedade do MDF-e no transporte interestadual |

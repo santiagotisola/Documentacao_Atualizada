@@ -45,6 +45,14 @@ Fabricante → Modelo → Equipamento. Cadastre o fabricante antes de criar mode
 - [Modelos de Equipamentos](./modelos-equipamentos)
 - [Tipos de Equipamentos](./tipos-equipamentos)
 - [Equipamentos](./equipamentos)
+
+## Boas práticas
+
+- Cadastre o fabricante antes de criar modelos e equipamentos — a hierarquia Fabricante → Modelo → Equipamento é obrigatória
+- Informe o **CNPJ** e o **Contato** de suporte para agilizar chamados técnicos em campo
+- Não exclua fabricantes com equipamentos vinculados; inative-os para preservar o histórico de operações e certificações
+- Utilize a nomenclatura oficial do fabricante para compatibilidade com laudos INMETRO e contratos de manutenção
+
 | RODOANEL | Sistemas WIM dinâmicos |
 | SCHENCK | Balanças de precisao |
 

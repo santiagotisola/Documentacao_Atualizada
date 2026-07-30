@@ -88,3 +88,10 @@ As marcas são vinculadas aos **Modelos de Veículos**, formando a hierarquia Ma
 | Tipo | Pagina | Descricao |
 |------|--------|-----------|
 | Relacionado | [Modelos de Veiculos](./modelos-veiculos) | Modelos da marca |
+
+## Boas práticas
+
+- Use a grafia oficial do fabricante (ex.: MERCEDES-BENZ, VOLKSWAGEN) para compatibilidade com o arquivo DENATRAN
+- Pesquise a marca existente antes de criar — duplicidades (ex.: VW e VOLKSWAGEN) prejudicam a identificação nos relatórios
+- Mantenha marcas descontinuadas como **Inativas** em vez de excluí-las, preservando o histórico de infrações
+- O **Código DENATRAN** é exigido em alguns layouts de exportação; confirme com o órgão autuador se é obrigatório no contrato

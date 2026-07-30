@@ -58,6 +58,14 @@ Quando `TBOperacoes.Homologacao = 1`, todas as Infrações geradas são marcadas
 
 - [Processamento de Imagens](./processamento-imagens)
 - [Falhas Sequenciais](./falhas-sequenciais)
+
+## Casos de uso
+
+- **Homologação de equipamentos**: validar a qualidade de captura antes de ativar a operação definitiva
+- **Calibração de OCR**: identificar faixas com baixo aproveitamento de leitura de placa para ajuste técnico
+- **Aceitação contratual**: documentar os resultados dos testes como comprovante de conformidade antes da entrada em operação
+- **Diagnóstico de posicionamento**: detectar ângulos ou alturas de câmera inadequadas que prejudicam a leitura durante os testes
+
 - [Aferições](../operacoes/afericoes)
 - [Equipamentos](../cadastros-basicos/equipamentos)
 

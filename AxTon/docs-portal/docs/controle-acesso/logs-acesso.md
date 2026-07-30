@@ -46,7 +46,12 @@ Filtre por **Status = Falha** e analise os IPs de origem. Múltiplas falhas do m
 - [Perfis de Acesso](./perfis-acesso)
 - [Acessos por IP](./acessos-por-ip)
 
-- Identificar contas comprometidas
+## Segurança
+
+- Revise os logs de acesso **semanalmente** para detectar padrões anormais de autenticação
+- Mais de 5 falhas consecutivas do mesmo IP ou usuário podem indicar ataque de força bruta — bloqueie o IP em **Acessos por IP**
+- Acessos em horários incomuns (madrugada, fins de semana) devem ser verificados junto ao responsável da conta
+- Contas com múltiplas falhas de login devem ser suspensas até confirmação de uso legítimo
 - Verificar horários de acesso suspeitos
 - Auditar ações de usuários críticos
 

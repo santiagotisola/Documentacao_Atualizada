@@ -70,3 +70,11 @@ Pesagem detecta excesso
 - [Pesagem](./pesagem) — Processo de origem
 - [PBT](./pbt) — Peso Bruto Total
 
+## Base legal
+
+| Dispositivo | Contéudo |
+|-------------|----------|
+| **Art. 161, CTB** | Infração de trânsito: inobservância de qualquer preceito do CTB |
+| **Art. 231, V, CTB** | Exceder o peso máximo permitido — gravíssima |
+| **Resolução CONTRAN 803/2021** | Limites de PBT por configuração de eixos |
+| **Art. 281, CTB** | Prazo de 30 dias para expedir o AIT após a infração |

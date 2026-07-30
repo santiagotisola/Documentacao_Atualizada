@@ -81,3 +81,16 @@ Exporte o relatório em CSV para auditorias ou prestação de contas das operaç
 Este Relatório é a principal ferramenta para demonstrar as atividades operacionais realizadas, incluindo alertas gerados, quem atendeu e como foram resolvidos.
 :::
 
+## Casos de uso
+
+- **Prestação de contas ao contratante**: comprovar o volume e a qualidade do atendimento de alertas no período
+- **Gestão de SLA**: verificar se os prazos de atendimento por tipo de ocorrência foram cumpridos
+- **Auditoria de processo**: identificar alertas abertos sem atendimento ou resolvidos sem descrição da ação tomada
+- **Análise de recorrência**: detectar placas ou locais com alta frequência de alertas para escalonamento operacional
+
+## Relacionado
+
+- [Alertas](../operacoes/alertas)
+- [Veículos Monitorados](./veiculos-monitorados)
+- [Mapeamento de Rotas](./mapeamento-rotas)
+- [Painel Analítico](./painel-analitico)

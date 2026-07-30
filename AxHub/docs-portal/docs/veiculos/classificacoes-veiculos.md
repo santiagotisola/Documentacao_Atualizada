@@ -76,3 +76,10 @@ Categoria → Classificação → Veículo. A classificação é o nível mais e
 |------|--------|-----------|
 | Relacionado | [Categorias](./categorias-veiculo) | Categorias vinculadas |
 | Relacionado | [Tipos de Veiculos](./tipos-veiculos) | Tipos |
+
+## Boas práticas
+
+- Mantenha a hierarquia Categoria → Classificação coerente com a tabela DENATRAN para evitar enquadramentos inválidos
+- Antes de criar uma nova classificação, pesquise se já existe com nome diferente — duplicidades prejudicam os relatórios
+- Classificações vinculadas a infrações exportadas não devem ser renomeadas ou excluídas
+- Revise periodicamente as classificações à luz das resoluções CONTRAN para garantir conformidade legal

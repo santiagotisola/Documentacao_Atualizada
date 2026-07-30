@@ -54,3 +54,15 @@ Acesse **Operações → Aferições** para verificar os registros de equipament
 
 **Base:** Resolução CONTRAN 92/1999 + Conselho Nacional de Política de Saúde no Trabalho
 
+## Boas práticas
+
+- Verifique o status do cronoatacógrafo na triagem sempre que o veículo for de carga pesada com PBT > 4.536 kg
+- Use o filtro **Tipo = Cronoatacógrafo irregular** no relatório de infrações para monitorar a frequência de irregularidades
+- Registre as infrações do Art. 162, II com o enquadramento correto para validade jurídica no DETRAN
+- Combine com a verificação de placa para confirmar se o mesmo veículo reincide na irregularidade
+
+## Relacionado
+
+- [Enquadramentos](../administracao/enquadramentos) — Códigos CTB aplicáveis
+- [Tipos de Veículos](../veiculos/tipos-veiculos) — Quais veículos são obrigados
+- [Aferição](./afericao) — Validade do equipamento que registra a infração
