@@ -35,7 +35,8 @@ Permite cadastrar e gerenciar os arcos de fiscalização vinculados às operaç�
 5. Clique em **Salvar**
 
 :::info O que é um Arco?
-Um arco agrupa equipamentos fisicamente instalados na mesma travessia (ex.: radares de faixas 1, 2 e 3 de uma mesma pista). Facilita o gerenciamento e a exportação conjunta dos dados.
+Um arco agrupa equipamentos instalados na mesma travessia (ex: radares das faixas 1, 2 e 3 de uma mesma pista), facilitando o gerenciamento e exportação conjunta de dados.
+::: (ex.: radares de faixas 1, 2 e 3 de uma mesma pista). Facilita o gerenciamento e a exportação conjunta dos dados.
 :::
 | Campo | Descrição |
 |-------|-----------|

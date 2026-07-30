@@ -35,6 +35,16 @@ Categorias dos **equipamentos de pesagem** cadastrados no sistema. O tipo define
 Tipo de Equipamento → Fabricante → Modelo → Equipamento no posto
 ```
 
+## Passo a passo
+
+1. Acesse **Cadastros Básicos → Tipos de Equipamentos**
+2. Clique em **+ Novo**
+3. Preencha o **Nome** e a **Descrição**
+4. Clique em **Salvar**
+
+:::tip
+O tipo de equipamento determina as configurações de operação aplicáveis (velocidade de passagem, tolerância de pesagem, etc.). Consulte o fabricante para o tipo correto.
+:::
 
 ### Colunas
 

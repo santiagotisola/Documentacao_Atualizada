@@ -31,7 +31,17 @@ Permite configurar quais endereços IP podem acessar o sistema, adicionando uma 
 3. Informe o **Endereço IP** e opcionalmente uma **Descrição**
 4. Clique em **Salvar**
 
+## Formatos aceitos
+
+| Formato | Exemplo |
+|---------|----------|
+| IP fixo | `192.168.1.100` |
+| Faixa CIDR | `192.168.1.0/24` |
+| IPv6 | `2001:db8::1` |
+
 :::warning Restrição ativa
+Quando a restrição por IP está ativada, **somente os IPs cadastrados** conseguem acessar o sistema. Certifique-se de incluir o IP da sua rede antes de ativar.
+:::
 Quando a restrição por IP está ativada, **somente os IPs cadastrados** conseguem acessar o sistema. Certifique-se de incluir o IP da sua rede antes de ativar.
 :::| **Endereço IP** | Sim | IP autorizado (ex: 192.168.1.100) |
 | **Descrição** | Não | Identificação do local/rede |

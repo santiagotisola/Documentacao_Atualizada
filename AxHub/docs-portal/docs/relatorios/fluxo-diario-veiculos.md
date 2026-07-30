@@ -33,6 +33,18 @@ Exibe o volume diário de Veículos registrados por cada Equipamento em forma de
 | **Total Passagens** | Quantidade total de Veículos registrados no dia |
 | **Leituras OCR** | Placas lidas com sucesso pelo OCR |
 | **Aproveitamento (%)** | Percentual de leitura de placas |
+
+## Como usar
+
+1. Acesse **Relatórios → Fluxo Diário de Veículos**
+2. Selecione o **Período**
+3. Filtre por **Equipamento** ou **Região** (opcional)
+4. Clique em **Gerar**
+5. Exporte em CSV para análise no Excel
+
+:::tip
+Use este relatório para monitorar quedas abruptas no fluxo — que podem indicar falha de equipamento — ou picos que demandam reforço operacional.
+:::
 | Infrações | Quantidade de Infrações geradas no dia |
 
 ## Exportação

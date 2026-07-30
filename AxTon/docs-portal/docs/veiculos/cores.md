@@ -28,8 +28,29 @@ Cadastro de **cores de veículos** utilizadas nas operações de pesagem e triag
 4. Clique em **Salvar**
 
 :::info
-As cores cadastradas são utilizadas na identificação do veículo nos tickets de pesagem e nos documentos de infração.
+As cores são extraídas automaticamente do RENAVAM quando o sistema consulta a placa. Mantenha a tabela atualizada com todas as cores da tabela DENATRAN para evitar campos vazios nos autos de infração.
 :::
+
+## Cores padrão DENATRAN
+
+| Código | Cor |
+|:------:|-----|
+| 01 | Amarela |
+| 02 | Azul |
+| 03 | Bege |
+| 04 | Branca |
+| 05 | Cinza |
+| 06 | Dourada |
+| 07 | Grená |
+| 08 | Laranja |
+| 09 | Marrom |
+| 10 | Prata |
+| 11 | Preta |
+| 12 | Rosa |
+| 13 | Roxa |
+| 14 | Verde |
+| 15 | Vermelha |
+
 ## Passo a passo
 
 1. Acesse **Veículos → Cores**
