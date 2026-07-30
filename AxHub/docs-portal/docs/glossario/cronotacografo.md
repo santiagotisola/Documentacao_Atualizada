@@ -43,3 +43,14 @@ O AxHub consulta automaticamente o status do cronoatacógrafo durante a triagem 
 :::tip
 Acesse **Operações → Aferições** para verificar os registros de equipamentos com verificação de cronoatacógrafo pendente.
 :::
+
+## Tempo de direção máximo
+
+| Situação | Limite |
+|----------|:------:|
+| Direção contínua | 4 horas |
+| Pausa obrigatória | 30 minutos |
+| Jornada diária total | 8 horas (podendo chegar a 10 com adicional) |
+
+**Base:** Resolução CONTRAN 92/1999 + Conselho Nacional de Política de Saúde no Trabalho
+

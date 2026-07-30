@@ -38,3 +38,11 @@ Classificação legal atribuída a uma infração de trânsito. O enquadramento 
 :::info
 Na **Triagem**, o operador valida ou altera o enquadramento sugerido automaticamente pelo sistema com base na velocidade/infração detectada.
 :::
+
+## Enquadramentos mais comuns no AxHub
+
+| Código | Descrição | Gravidade |
+|--------|-----------|:---------:|
+| 55411 | Velocidade superior à máxima em até 20% | Grave |
+| 55412 | Velocidade superior à máxima entre 20% e 50% | Gravíssima |
+| 55413 | Velocidade superior à máxima acima de 50% | Gravíssima |

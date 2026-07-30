@@ -43,6 +43,9 @@ Um arco agrupa equipamentos instalados na mesma travessia (ex: radares das faixa
 - [Eventos de Equipamentos](../relatorios/eventos-equipamentos)
 - [Operações](../operacoes/cadastro-operacoes)
 
+:::info
+Arcos permitem exportar dados de múltiplas faixas/equipamentos de uma mesma localidade em um único lote, mantendo consistência na numeração e registro.
+:::
 :::
 | Campo | Descrição |
 |-------|-----------|

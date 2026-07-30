@@ -44,6 +44,9 @@ Organize grupos por **contrato** ou **região** para facilitar a geração de me
 - **Medições**: agrupar equipamentos de um mesmo contrato
 - **Monitoramento**: visualizar status por grupo
 
+:::info
+Grupos bem definidos reduzem o tempo de criação de medições contratuais e facilitam a análise de desempenho por região ou contratante.
+:::
 | **Código** | Identificador único |
 | **Nome** | Nome do grupos de Equipamentos |
 | **Ativo** | Status do registro |

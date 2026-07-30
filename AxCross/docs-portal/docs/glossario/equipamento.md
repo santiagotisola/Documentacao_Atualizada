@@ -33,8 +33,6 @@ Dispositivo instalado em um cruzamento para detecção e registro de Veículos P
 - [Grupos de Equipamentos](../cadastros/grupos-equipamentos)
 - [Alertas](../operacoes/alertas)
 
-| **Sensor de Presença** | Detecção de passagem por laço indutivo ou infravermelho |
-
 ## Status
 
 | Status | Significado |
@@ -43,4 +41,7 @@ Dispositivo instalado em um cruzamento para detecção e registro de Veículos P
 | **Offline** | Sem comunicação — requer verificação |
 | **Manutenção** | Temporariamente fora de operação por manutenção programada |
 
+:::warning
+Equipamentos **Offline** não registram passagens. Verifique a conectividade e contate o suporte técnico se o equipamento não retornar ao status Online.
+:::
 Veja o cadastro completo em [Equipamentos](../cadastros/equipamentos).

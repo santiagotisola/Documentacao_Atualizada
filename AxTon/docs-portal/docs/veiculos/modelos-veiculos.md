@@ -42,7 +42,15 @@ Verifique se o modelo já existe antes de criar. Duplicidades dificultam a class
 - [Marcas de Veículos](./marcas-veiculos)
 - [Classificações de Veículos](./classificacoes-veiculos)
 
-## Passo a passo
+## Modelos comuns de veículos de carga
+
+| Marca | Modelo |
+|-------|--------|
+| MERCEDES-BENZ | Actros, Atego, Axor |
+| SCANIA | R-Series, G-Series, P-Series |
+| VOLVO | FH, FM, FMX |
+| IVECO | Daily, Eurocargo, Stralis |
+
 
 1. Acesse **Veículos → Modelos de Veículos**
 2. Clique em **+ Novo**
