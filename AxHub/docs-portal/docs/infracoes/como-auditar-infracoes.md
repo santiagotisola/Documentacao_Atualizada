@@ -65,8 +65,6 @@ Infrações confirmadas na auditoria não podem ser alteradas posteriormente sem
 - [Processamento por Usuário](../relatorios/processamento-por-usuario) — Métricas por analista
 
 
-# Como Auditar Infracoes - Guia Analitico
-
 :::caution Gerado em modo offline
 Este documento foi criado com o **template local** (sem IA generativa).
 Revise e complete as se��es marcadas com ?? antes de publicar.
