@@ -35,6 +35,16 @@ Equipamento captura → Triagem → Auditoria → Lote → Exportação
 | **Exportada** | Enviada ao órgão autuador |
 | **Descartada** | Rejeitada na triagem |
 
+## Prazos legais
+
+| Etapa | Prazo |
+|-------|:-----:|
+| Expedir o AIT | Até 30 dias após a infração |
+| Notificar o infrator | Até 30 dias após expedição |
+| Prazo para recurso | 30 dias após notificação |
+
+**Base:** Art. 281 do CTB
+
 ## Relacionado
 
 - [Triagem](./triagem)

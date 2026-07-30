@@ -37,7 +37,18 @@ A liberação de tickets é uma ação registrada em log. Certifique-se de selec
 
 ## Quando utilizar
 
-| Situação | Ação |
+| Situação | Motivo a usar |
+|----------|---------------|
+| Veículo transferiu carga para outro | Liberação por descarga |
+| Decisão judicial ou administrativa | Liberação administrativa |
+| Defeito no equipamento | Liberação por falha técnica |
+| Reclassificação eliminou excesso | Liberar após reclassificar |
+
+## Relacionado
+
+- [Motivos](./motivos)
+- [Reclassificar](./reclassificar)
+- [Tickets Abertos](./ticket-aberto)
 |----------|------|
 | Ticket expirado sem pesagem realizada | Liberar para nova tentativa |
 | Erro no registro do ticket | Liberar e criar novo ticket correto |

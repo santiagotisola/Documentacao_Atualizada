@@ -39,6 +39,21 @@ Relatório de Medição](../img/Medição%20-%20nova%20medição%20-%20relatorio
 - Interrupções e impacto na meta
 
 :::info Boletim
+O Boletim gerado pode ser enviado ao contratante como comprovação do SLA contratual.
+:::
+
+## Relacionado
+
+- [Contratos](./contratos)
+- [Medições Finalizadas](./medicoes-finalizadas)
+- [Interrupções](./interrupcoes)
+
+- Horas de disponibilidade por equipamento
+- Taxa de aproveitamento OCR
+- Total de passagens e infrações do período
+- Interrupções e impacto na meta
+
+:::info Boletim
 O **Boletim de Medição** pode ser enviado ao contratante como comprovação do cumprimento do SLA contratual.
 :::
 

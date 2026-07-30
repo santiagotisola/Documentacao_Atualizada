@@ -34,18 +34,17 @@ Fabricante → Modelo → Equipamento. Cadastre o fabricante antes de criar mode
 
 ## Fabricantes homologados comuns
 
-| Fabricante | Tipo de equipamento |
-|------------|---------------------|
-| HAENNI | Balanças portáteis e fixas |
-| Toledo | Balanças industriais |
-| RODOANEL | Sistemas WIM dinâmicos |
-| SCHENCK | Balanças de precisão |
+| Fabricante | Tipo | Site |
+|------------|------|------|
+| HAENNI | Balanças portáteis | haenni.com |
+| Toledo do Brasil | Balanças industriais | toledodobrasil.com.br |
+| ID Logistics (RODOANEL) | WIM dinâmico | - |
 
 ## Relacionado
 
 - [Modelos de Equipamentos](./modelos-equipamentos)
-- [Equipamentos](./equipamentos)
 - [Tipos de Equipamentos](./tipos-equipamentos)
+- [Equipamentos](./equipamentos)
 | RODOANEL | Sistemas WIM dinâmicos |
 | SCHENCK | Balanças de precisao |
 

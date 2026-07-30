@@ -34,13 +34,14 @@ Configura e monitora os **sequenciais dos lotes de exportação** de infrações
 - Comunique ao órgão autuador ao reiniciar a numeração
 
 :::warning
-Lotes com sequencial duplicado ou fora de ordem são rejeitados pelo órgão autuador. Manter o registro atualizado é obrigatório.
+Lotes com sequencial duplicado ou fora de ordem são rejeitados automaticamente. Nunca altere o campo manualmente sem autorização explícita do órgão.
 :::
 
 ## Relacionado
 
 - [Sequenciais de Infrações](./sequenciais-infracoes)
 - [Falhas de Sequenciais](../relatorios/falhas-sequenciais)
+- [Lote de Exportação](../glossario/lote-exportacao)
 
 - Verificar seqüencial antes de cada nova exportação
 

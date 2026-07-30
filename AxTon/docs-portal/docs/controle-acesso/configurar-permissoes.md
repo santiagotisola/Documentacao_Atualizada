@@ -36,6 +36,10 @@ Cada perfil de acesso pode ter **permissões específicas** por módulo: Visuali
 Alterações de permissão entram em vigor imediatamente. Usuários com sessão ativa podem precisar fazer logout e login novamente para ver as mudanças.
 :::
 
+## Princípio do mínimo privilégio
+
+Configure cada perfil com apenas as permissões **estritamente necessárias** para a função. Evite conceder Criar/Editar/Excluir para módulos que o perfil apenas consulta.
+
 ## Relacionado
 
 - [Perfis de Acesso](./perfis-acesso)

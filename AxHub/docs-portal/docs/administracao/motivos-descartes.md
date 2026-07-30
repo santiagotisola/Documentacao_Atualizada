@@ -33,11 +33,21 @@ Cadastro dos **motivos que justificam o descarte** de infrações durante a tria
 :::tip Análise de qualidade
 O Dashboard exibe o **Top Motivos de Descarte**. Use essa informação para identificar problemas recorrentes nos equipamentos e treinar a equipe.
 :::
-| **Enquadramento incorreto** | Artigo CTB não aplicável à situação |
 
-:::tip Análise de qualidade
-O Dashboard exibe o **Top Motivos de Descarte**. Use essa informação para identificar problemas recorrentes nos equipamentos.
-:::
+## Análise de padrões
+
+| Motivo dominante | Possível causa | Ação |
+|------------------|----------------|------|
+| Imagem ilegível | Câmera suja ou desalinhada | Manutenção preventiva |
+| Placa incorreta | OCR descalibrado | Recalibração |
+| Enquadramento incorreto | Velocidade mal configurada | Revisar faixas |
+| Veículo isento | Regra de exceção ausente | Criar exceção |
+
+## Relacionado
+
+- [Exceções](../infracoes/excecoes)
+- [Processamento por Usuário](../relatorios/processamento-por-usuario)
+
 
 |-------|-----------|
 | **Código** | Código identificador |

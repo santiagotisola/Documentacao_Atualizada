@@ -38,10 +38,19 @@ Registros de pesagem **já finalizados**. Permitem consulta histórica, geraçã
 Use o filtro **Infrator** para revisar tickets com infração gerada e verificar o status de exportação ao órgão autuador.
 :::
 
+## Filtros disponíveis
+
+| Filtro | Descrição |
+|--------|-----------|
+| **Período** | Faixa de datas |
+| **Placa** | Busca parcial ou completa |
+| **Posto** | Filtrar por localidade |
+| **Resultado** | Regular ou Infrator |
+
 ## Relacionado
 
 - [Tickets Abertos](./ticket-aberto)
-- [Reclassificar](./reclassificar)
+- [Liberar Pesagem](./liberar-pesagem)
 - [Relatório de Infrações](../relatorios/relatorio-infracoes)
 
 ## Filtros

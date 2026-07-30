@@ -34,6 +34,18 @@ PBT = Tara (peso do veículo vazio) + Carga (peso da mercadoria)
 | Balança estática verificada | ±4% |
 | Balança dinâmica | ±6% |
 
+## Penalidade por excesso
+
+| Faixa de excesso | Sancão |
+|------------------|---------|
+| Até 5% | Multa (gravíssima) + retenção até regularizar |
+| 5-10% | Multa (gravíssima) + retenção obrigatória |
+| Acima de 10% | Multa + remoção ao pátio credenciado |
+
+:::warning
+A retenção do veículo é obrigatória quando o excesso impede continúar a viagem com segurança. O veículo só é liberado após descarga suficiente.
+:::
+
 ## Consequencias do excesso de PBT
 
 | Excesso | Penalidade |

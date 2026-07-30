@@ -35,6 +35,13 @@ Criado → Processando → Enviado → Aceito
 
 ## Boas práticas
 
+- Verificar o relatório de **Falhas de Sequenciais** antes de gerar o lote
+- Exportar apenas infrações com status **Auditada** ou superior
+- Manter cópia dos recibos de confirmação do órgão por 5 anos
+
+:::warning
+Lotes rejeitados pelo órgão não são reprocessados automaticamente. É necessário corrigir o problema e gerar novo lote.
+:::
 - Gere lotes somente com infrações **auditadas e aprovadas**
 - Monitore o status do lote após envio — lotes com **Erro** devem ser reprocessados em até 24h
 - Guarde os recibos de confirmação do órgão (número de protocolo) para auditoria

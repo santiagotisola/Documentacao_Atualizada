@@ -33,13 +33,19 @@ As marcas são vinculadas aos **Modelos de Veículos**, formando a hierarquia Ma
 
 ## Marcas comuns no transporte de carga
 
-| Marca | Segmento |
-|-------|----------|
-| MERCEDES-BENZ | Caminhões e ônibus |
-| SCANIA | Caminhões pesados |
-| VOLVO | Caminhões e ônibus |
-| IVECO | Caminhões leves e médios |
-| DAF | Caminhões pesados |
+| Marca | Segmento | Origem |
+|-------|----------|--------|
+| MERCEDES-BENZ | Caminhões e ônibus | Alemã |
+| SCANIA | Caminhões pesados | Sueca |
+| VOLVO | Caminhões e ônibus | Sueca |
+| IVECO | Caminhões leves e médios | Italiana |
+| DAF | Caminhões pesados | Holandesa |
+
+## Relacionado
+
+- [Modelos de Veículos](./modelos-veiculos)
+- [Classificações de Veículos](./classificacoes-veiculos)
+- [Tipos de Veículos](./tipos-veiculos)
 
 
 | Marca | Segmento |

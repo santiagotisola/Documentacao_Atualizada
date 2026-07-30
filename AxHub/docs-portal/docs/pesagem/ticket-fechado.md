@@ -24,7 +24,22 @@ Exibe os tickets de pesagem **já finalizados** — histórico completo de todas
 | **Posto** | Local de pesagem |
 | **Resultado** | Regular / Infrator |
 
-## Filtros
+## Exportação de tickets
+
+Clique em **Exportar** para gerar CSV com os tickets do período. Útil para:
+- Auditorias internas
+- Relatórios ao contratante
+- Comprovação de fiscalização
+
+:::tip
+Combine filtros **Infrator** + **Período** + **Posto** para gerar relatório focado por localidade e período de pico.
+:::
+
+## Relacionado
+
+- [Tickets Abertos](./ticket-aberto)
+- [Liberar Pesagem](./liberar-pesagem)
+- [Relatório de Passagens](../relatorios/relatorio-passagens)
 
 | Filtro | Descrição |
 |--------|-----------|

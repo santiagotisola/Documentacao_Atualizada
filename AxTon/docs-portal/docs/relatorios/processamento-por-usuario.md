@@ -40,6 +40,21 @@ Exibe a **produtividade de cada operador** na triagem de infrações: infraçõe
 Use este relatório para avaliar a produtividade de operadores e identificar possíveis inconsistências na taxa de descarte. Alta taxa de descarte em um usuário específico pode indicar necessidade de treinamento.
 :::
 
+## Metas de produtividade
+
+| Perfil | Meta mín. infrações/hora |
+|--------|:------------------------:|
+| Analista sênior | 120 |
+| Analista pleno | 80 |
+| Em treinamento | 40 |
+
+## Relacionado
+
+- [Triagem](../glossario/triagem)
+- [Motivos de Descarte](../pesagem/motivos)
+- [Logs de Acesso](../controle-acesso/logs-acesso)
+
+
 ## Relacionado
 
 - [Logs de Acesso](../controle-acesso/logs-acesso)

@@ -36,7 +36,20 @@ Exibe o **histórico das medições contratuais** que já foram calculadas e fin
 Uma medição finalizada **não pode ser editada** sem ser reaberta. A reabertura exige permissão de supervisor e gera log de auditoria.
 :::
 
-## Ciclo de vida de uma medição
+## Ciclo de vida da medição
+
+```
+Criada → Em elaboração → Finalizada
+                            ↓ (se preciso)
+                         Reaberta → Revisada → Finalizada novamente
+```
+
+## Relacionado
+
+- [Criar Medição](./criar-medicao)
+- [Contratos](./contratos)
+- [Índices de Performance](./indices-performance)
+
 
 ```
 Criada → Em elaboração → Finalizada → (Reaberta → Revisada → Finalizada)

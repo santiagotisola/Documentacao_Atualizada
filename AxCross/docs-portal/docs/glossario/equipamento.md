@@ -33,6 +33,18 @@ Dispositivo instalado em um cruzamento para detecção e registro de Veículos P
 - [Grupos de Equipamentos](../cadastros/grupos-equipamentos)
 - [Alertas](../operacoes/alertas)
 
+## Manutencao preventiva
+
+| Atividade | Frequência recomendada |
+|-----------|:---------------------:|
+| Limpeza das lentes | Mensal |
+| Verificação de conectividade | Semanal |
+| Atualização de firmware | Conforme fabricante |
+| Calibração OCR | Semestral |
+
+:::tip
+Equipamentos com taxa OCR abaixo de 85% precisam de intervenção técnica imediata para não comprometer os registros operacionais.
+:::
 ## Status
 
 | Status | Significado |
