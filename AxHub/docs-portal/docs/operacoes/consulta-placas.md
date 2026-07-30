@@ -43,6 +43,17 @@ Clique em **Excel** para exportar o histórico de passagens.
 Use esta função para confirmar passagens denunciadas por cidadãos ou verificar histórico de veículos suspeitos.
 :::
 
+## Casos de uso
+
+- **Verificação antes de liberar**: confirmar se o veículo tem histórico de irregularidades
+- **Acompanhamento de auditoria**: verificar todas as passagens em período específico
+- **Suporte ao cidadão**: esclarecer dúvidas sobre registros de infração
+
+## Relacionado
+
+- [Passagens](../relatorios/relatorio-passagens)
+- [Triagem de Infrações](../infracoes/triagem)
+
 A **Consulta de Placas** pode não aparecer no menu lateral dependendo das permissões do perfil de acesso. Nesse caso, acesse diretamente pela URL `/consultaplacas` ou verifique as permissões em [Controle de Acesso → Perfis](../controle-acesso/perfis-acesso).
 :::
 

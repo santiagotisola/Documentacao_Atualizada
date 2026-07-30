@@ -40,7 +40,18 @@ Veículo chega ao posto
 |------|:----------:|-----|
 | Estática | 0 km/h | Alta precisão, veículo parado |
 | Semiestática | ≤5 km/h | Veículo em baixa velocidade |
-| Dinâmica | Até 80 km/h | Triagem, sem interrupção do fluxo |
+| Dinâmica (WIM) | Até 80 km/h | Triagem sem parar tráfego |
+
+:::tip
+A balança dinâmica é usada para triagem rápida. Veículos que ultrapassam o limiar são direcionados para confirmação em balança estática ou semiestática.
+:::
+
+## Base legal
+
+- **Resolucao CONTRAN 803/2021** — limites de PBT por categoria
+- **Lei 9.503/97 (CTB)** — Art. 231 — penalidades por excesso de peso
+- **Portaria INMETRO** — requisitos metrológicos das balanças
+
 
 :::tip
 A balança dinâmica é usada para triagem rápida. Veículos que ultrapassam o limiar são direcionados para confirmação em balança estática.

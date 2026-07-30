@@ -41,6 +41,20 @@ No **menu lateral**, clique em Relatórios e selecione **Mapeamento de Rotas**.
 :::tip Investigações
 O mapeamento de rotas é especialmente útil em operações de busca de veículos furtados/roubados, permitindo traçar o último percurso conhecido.
 :::
+
+## Limitações
+
+- O mapeamento mostra apenas cruzamentos cobertos por equipamentos AxCross
+- Períodos acima de 30 dias podem ter desempenho reduzido
+- Placas com baixa qualidade OCR podem ter passagens ausentes no mapa
+
+## Relacionado
+
+- [Passagens](../glossario/passagem)
+- [Veículos Monitorados](./veiculos-monitorados)
+- [Painel Analítico](../painel/painel-analitico)
+
+:::
 | Equipamento | Não | Filtrar por câmera específica |
 
 ## Informações exibidas no mapa

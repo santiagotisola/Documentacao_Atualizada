@@ -40,6 +40,19 @@ Cadastro e gestão dos **usuários** que terão acesso ao sistema AxHub. Cada us
 Crie o [Perfil de Acesso](./perfis-acesso) ANTES do usuário. Configure as [Permissões](./permissoes) do perfil antes de vincular usuários.
 :::
 
+## Boas práticas de segurança
+
+- Um usuário por pessoa — nunca compartilhe contas
+- Desativar imediatamente ao desligar um colaborador
+- Redefinir senha após longo período de ausência
+- Vincular ao perfil com mínimo de permissões necessárias
+
+## Relacionado
+
+- [Perfis de Acesso](./perfis-acesso)
+- [Permissões](./permissoes)
+- [Logs de Acesso](./logs-acesso)
+
 :::warning Inativar vs. excluir
 Nunca exclua usuários com histórico no sistema. Prefira **inativar** para preservar a rastreabilidade das ações.
 :::

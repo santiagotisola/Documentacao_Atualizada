@@ -42,6 +42,22 @@ Eventos de falha são contabilizados como **indisponibilidade** no cálculo das 
 `eventoequipamento.index` (visualizar) | `eventoequipamento.new` (registrar)
 :::
 
+## Tipos de evento
+
+| Tipo | Descrição | Conta como indisponibilidade? |
+|------|-----------|:----------------------------:|
+| **Falha** | Equipamento parou de funcionar | Sim |
+| **Manutenção preventiva** | Intervenção programada | Não |
+| **Manutenção corretiva** | Reparo após falha | Sim |
+| **Reinicialização** | Restart automático | Não (se < 5 min) |
+
+## Relacionado
+
+- [Aferições](./afericoes)
+- [Relatório de Eventos](../relatorios/eventos-equipamentos)
+
+:::
+
 
 ![Cadastro de Evento](../img/Operações%20-%20eventos%20de%20equipamentos%20-%20Cadastros.png)
 

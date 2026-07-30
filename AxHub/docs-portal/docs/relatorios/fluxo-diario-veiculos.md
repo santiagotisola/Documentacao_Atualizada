@@ -52,7 +52,20 @@ Use este relatório para monitorar quedas abruptas no fluxo — que podem indica
 Disponível em **Excel** para Análise em planilhas externas ou inclusão em Relatórios contratuais.
 
 :::tip Dica
-Combine com o [Mapa de Fluxo de Passagens](./mapa-fluxo-passagens) para visualizar espacialmente os dados tabulares deste Relatório
+Combine com o [Mapa de Fluxo de Passagens](./mapa-fluxo-passagens) para visualizar espacialmente os dados tabulares deste Relatório.
+:::
+
+## Casos de uso gerencial
+
+- **Dimensionamento de equipe**: aumentar agentes nos horários de pico
+- **Comparação dia a dia**: detectar anomalias de fluxo
+- **Justificativa de SLA**: comprovar volume operacional ao contratante
+
+## Relacionado
+
+- [Mapa de Fluxo de Passagens](./mapa-fluxo-passagens)
+- [Processamento de Imagens](./processamento-imagens)
+- [Processamento por Usuário](./processamento-por-usuario)
 :::
 
 ---
