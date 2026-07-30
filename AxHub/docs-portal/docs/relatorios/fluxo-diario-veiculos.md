@@ -55,6 +55,16 @@ Disponível em **Excel** para Análise em planilhas externas ou inclusão em Rel
 Combine com o [Mapa de Fluxo de Passagens](./mapa-fluxo-passagens) para visualizar espacialmente os dados tabulares deste Relatório.
 :::
 
+## Interpretação do aproveitamento OCR
+
+| Aproveitamento | Status | Ação |
+|----------------|:------:|------|
+| ≥95% | Excelente | Nenhuma |
+| 90-94% | Normal | Monitorar |
+| 85-89% | Atenção | Verificar limpeza da câmera |
+| <85% | Crítico | Solicitar manutenção técnica |
+:::
+
 ## Casos de uso gerencial
 
 - **Dimensionamento de equipe**: aumentar agentes nos horários de pico

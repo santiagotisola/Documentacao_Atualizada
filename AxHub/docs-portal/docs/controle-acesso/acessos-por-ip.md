@@ -45,8 +45,17 @@ A restrição por IP é uma camada adicional de segurança. Recomendada para amb
 - Operação em rede fechada (intranet)
 - Após detectar tentativas de acesso externo suspeitas
 
-## Relacionado
+## Fluxo de configuração
 
+1. Levantar todos os IPs fixos dos usuários autorizados
+2. Cadastrar cada IP em **Controle de Acesso → Acessos por IP**
+3. Ativar a restrição
+4. Testar acesso a partir de cada IP cadastrado
+5. Verificar Logs de Acesso para confirmar funcionamento
+
+:::warning
+Se ativar a restrição sem cadastrar seu próprio IP, você será bloqueado imediatamente.
+:::
 - [Usuários](./usuarios)
 - [Perfis de Acesso](./perfis-acesso)
 - [Logs de Acesso](./logs-acesso)

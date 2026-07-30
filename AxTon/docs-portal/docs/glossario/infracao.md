@@ -40,7 +40,29 @@ Pesagem detecta excesso
 | Até 5% | Multa + retenção |
 | Acima de 5% | Multa + retenção + remoção ao pátio |
 
-## Relacionado
+## Fluxo da infração
+
+```
+Pesagem detecta excesso
+    ↓
+Infração gerada automaticamente
+    ↓
+Triagem (validação humana)
+    ↓
+Auditoria (supervisor)
+    ↓
+Exportação ao órgão autuador
+    ↓
+Auto de Infração emitido ao infrator
+```
+
+## Erros comuns
+
+| Erro | Impacto | Prevenção |
+|------|---------|----------|
+| Veículo reclassificado incorretamente | Infração inválida | Verificar número de eixos e PBT |
+| Aferição vencida | Infração bloqueada | Renovar certificação INMETRO antes do vencimento |
+| Excesso calculado com tolerância errada | Auto incorreto | Conferir configuração da balança |
 
 - [PBT](./pbt)
 - [Reclassificar](../pesagem/reclassificar)

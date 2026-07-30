@@ -40,6 +40,14 @@ Fabricante → Modelo → Equipamento. Cadastre o fabricante antes de criar mode
 | Toledo do Brasil | Balanças industriais | toledodobrasil.com.br |
 | ID Logistics (RODOANEL) | WIM dinâmico | - |
 
+## Erros comuns
+
+| Erro | Causa | Solução |
+|------|-------|----------|
+| Modelo não aparece | Fabricante inativo | Reativar fabricante |
+| Duplicidade | Mesma empresa cadastrada 2x | Inativar duplicata |
+| Equipamento sem fabricante | Vínculo perdido | Redelacionar no cadastro de equipamento |
+
 ## Relacionado
 
 - [Modelos de Equipamentos](./modelos-equipamentos)

@@ -40,7 +40,13 @@ Agrupar por região geográfica facilita o monitoramento e a filtragem de relat�
 - [Alertas](../operacoes/alertas)
 - [Cadastro de Operações](../operacoes/cadastro-operacoes)
 
-## Exemplos de agrupamento
+## Erros comuns
+
+| Erro | Causa | Solução |
+|------|-------|----------|
+| Grupo vazio | Equipamentos não vinculados | Vincular após criar o grupo |
+| Filtro de relatório não mostra grupo | Nome com acento/espaço | Verificar nome e vincular novamente |
+| Equipamento em 2 grupos | Sem problema | Permitido para agrupamentos diferentes |
 
 | Nome do grupo | Critério |
 |---------------|----------|

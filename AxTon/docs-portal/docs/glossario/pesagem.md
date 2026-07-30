@@ -40,7 +40,26 @@ Veículo chega ao posto
 |------|:----------:|-----|
 | Estática | 0 km/h | Alta precisão, veículo parado |
 | Semiestática | ≤5 km/h | Veículo em baixa velocidade |
-| Dinâmica (WIM) | Até 80 km/h | Triagem sem parar tráfego |
+| Dinâmica (WIM) | Até 80 km/h | Triagem rápida sem parar o tráfego |
+
+## Fluxo de pesagem
+
+```
+Veículo chega ao posto
+    ↓
+Classificação automática (número de eixos)
+    ↓
+Pesagem na balança
+    ↓
+Comparação com PBT da classificação
+    ↓
+    ├─ Dentro do limite → Ticket Fechado (Regular)
+    └─ Excedeu o limite → Infração gerada
+```
+
+:::tip
+A balança dinâmica é usada para triagem rápida. Veículos que ultrapassam o limiar são direcionados para confirmação em balança estática.
+:::
 
 :::tip
 A balança dinâmica é usada para triagem rápida. Veículos que ultrapassam o limiar são direcionados para confirmação em balança estática ou semiestática.

@@ -41,6 +41,27 @@ Cada página do manual segue a mesma estrutura:
 
 ## Requisitos de acesso
 
+- Credenciais fornecidas pelo administrador do sistema
+- Navegador moderno (Chrome, Edge ou Firefox)
+- Conexão com a rede interna da organização
+
+## Primeiros passos
+
+1. Acesse a URL do sistema fornecida pela sua organização
+2. Faça login com as credenciais recebidas
+3. No primeiro acesso, altere a senha imediatamente
+4. Explore o menu lateral para conhecer os módulos disponíveis
+5. Consulte a documentação de cada módulo pelo menu lateral esquerdo
+
+## Suporte
+
+Em caso de dúvidas sobre o sistema, entre em contato:
+- **Portal de chamados**: suporte.axiontecnologia.com.br
+- **E-mail**: suporte@axiontecnologia.com.br
+
+:::info
+Este manual é atualizado a cada nova versão do sistema. Consulte sempre a versão online para informações atualizadas.
+:::
 | Requisito | Detalhe |
 |---|---|
 | **Credenciais** | Usuário e senha fornecidos pelo administrador do sistema |

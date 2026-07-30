@@ -43,6 +43,15 @@ Classificação dos veículos por tipo para fins de **enquadramento nas infraç�
 As categorias de veículos são usadas no enquadramento para determinar qual artigo do CTB se aplica. Categorias incorretas podem invalidar infrações no julgamento administrativo.
 :::
 
+## Impacto no enquadramento
+
+| Categoria | Artigos CTB com uso freqüente |
+|-----------|-------------------------------|
+| Moto | 174 (velocidade), 170 (sinal) |
+| Caminhão | 231 (excesso peso), 218 (velocidade) |
+| Ônibus | 218, 170 |
+| Passeio | 218, 165 (célulaório), 170 |
+
 ## Relacionado
 
 - [Classificações de Veículos](./classificacoes-veiculos)

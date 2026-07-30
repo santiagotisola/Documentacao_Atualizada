@@ -42,6 +42,19 @@ Documento eletrônico obrigatório que vincula as notas fiscais (NF-e) ao transp
 | MDF-e encerrado antes do destino | Retenção da carga |
 | Dados divergentes do MDF-e | Apreensão da mercadoria |
 
+## Fluxo de verificação no AxTon
+
+```
+Veículo chega ao posto
+    ↓
+OCR lê placa
+    ↓
+Consulta SEFAZ pelo CNPJ do veículo
+    ↓
+    ├─ MDF-e válido → Passagem regular
+    └─ MDF-e ausente/vencido → Alerta + possível retenção
+```
+
 :::info Base legal
 **Ajuste SINIEF 21/2010** — institui o MDF-e. Fiscalização pelo SEFAZ estadual em rodovias.
 :::

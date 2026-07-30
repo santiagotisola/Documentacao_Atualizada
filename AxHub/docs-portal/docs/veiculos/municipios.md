@@ -38,6 +38,16 @@ O código IBGE de 7 dígitos é obrigatório nos arquivos de exportação de inf
 
 O sistema já inclui todos os municípios brasileiros com códigos IBGE. Adicione entradas personalizadas apenas para subdivisões não listadas ou localidades estrangeiras.
 
+## Impacto na exportação
+
+O código IBGE do município aparece obrigatoriamente nos campos:
+- **Arquivo de notificação DENATRAN** — identifica o local da infração
+- **Lote de exportação** — requerido pelo órgão autuador
+- **Boletim de medição** — localização dos postos
+
+:::warning
+Código IBGE incorreto causa rejeição do lote pelo órgão. Sempre verifique no site oficial do IBGE antes de cadastrar.
+:::
 ## Relacionado
 
 - [Faixas](../operacoes/faixas)

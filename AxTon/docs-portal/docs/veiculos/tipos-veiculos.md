@@ -38,8 +38,18 @@ Cadastro dos **tipos de veículos** fiscalizados nos postos de pesagem, utilizad
 - [Classificações de Veículos](./classificacoes-veiculos)
 - [PBT](../glossario/pbt)
 
+## Tipos mais comuns na pesagem veicular
+
+| Tipo | Eixos típicos | Situação mais comum |
+|------|:------------:|---------------------|
+| Caminhão simples (toco) | 2 | Carga leve/média |
+| Caminhão truck | 3 | Carga média/pesada |
+| Bi-truck | 4 | Carga pesada regional |
+| Bitrem | 5-6 | Grãos, combustível |
+| Rodotrem | 9 | Longas distâncias, carga pesada |
+
 :::tip
-Os tipos de veículos devem ser atualizados sempre que o CONTRAN publicar novas resoluções alterando os limites de PBT. Verifique periodicamente a portaria INMETRO e o CONTRAN 803/2021.
+Os tipos de veículos devem ser atualizados sempre que o CONTRAN publicar novas resoluções alterando os limites de PBT.
 :::
 
 A tela exibe todos os registros cadastrados, com opção de pesquisa e filtro.

@@ -42,6 +42,22 @@ Veículo passa → OCR lê placa → Passagem registrada
 - [Equipamento](./equipamento) — Dispositivo que registra
 - [Alerta](../operacoes/alertas) — Gerado quando veículo monitorado passa
 
+## Qualidade das passagens
+
+| Indicador | Meta | Abaixo indica |
+|-----------|:----:|---------------|
+| Taxa OCR | ≥90% | Câmera suja ou desalinhada |
+| Passagens sem imagem | 0% | Falha de armazenamento |
+| Falsos positivos | <2% | OCR mal calibrado |
+
+## Erros comuns
+
+| Erro | Causa | Solução |
+|------|-------|----------|
+| Passagem sem alerta | Veículo não estava na lista | Verificar cadastro de monitorados |
+| Placa ilegível | Câmera suja | Manutenção preventiva |
+| Duplicidade de registro | Sensor disparando duas vezes | Ajustar sensibilidade do sensor |
+
 
 ## Como as passagens são registradas
 

@@ -38,6 +38,22 @@ Após o equipamento registrar uma passagem com peso acima do limite legal, o sis
 ## Relação com outros processos
 
 - **Antes da triagem:** Pesagem → Captura automática de infração
+- **Após a triagem:** Auditoria → Exportação ao órgão
+
+## Erros comuns
+
+| Erro | Impacto | Prevenção |
+|------|---------|----------|
+| Aprovar com placa errada | Auto inválido | Verificar OCR antes de confirmar |
+| Descartar sem motivo | Perde rastreabilidade | Sempre selecionar motivo |
+| Aprovar sem imagem obrigatória | Rejeição pelo órgão | Verificar tipos de imagem |
+| Backlog acima de 24h | Risco de prescrição | Redistribuir analistas |
+
+## Relacionado
+
+- [Auditoria](../pesagem/auditoria)
+- [Motivos](../pesagem/motivos)
+- [Infração](./infracao)
 - **Após a triagem:** Auditoria → Exportação ao órgão autuador
 
 :::warning
