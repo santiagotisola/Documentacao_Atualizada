@@ -41,6 +41,21 @@ O módulo de perfis de acesso define os conjuntos de permissões que serão atri
 
 ![Tela de Perfis de Acesso — Cadastro](../img/perfil-acesso-cadastro.png)
 
+1. Acesse **Controle de Acesso → Perfis de Acesso**
+2. Clique em **+ Novo**
+3. Informe o **Nome** do perfil
+4. Configure as **Permissões** por módulo
+5. Clique em **Salvar**
+
+:::tip
+Crie perfis com o mínimo de permissões necessárias (princípio do mínimo privilégio). Revise e ajuste periodicamente com base nas funções reais de cada grupo.
+:::
+
+## Relacionado
+
+- [Usuários](./usuarios)
+- [Permissões](./configurar-permissoes)
+
 ### Campos
 
 | Campo | Obrigatório | Descrição |

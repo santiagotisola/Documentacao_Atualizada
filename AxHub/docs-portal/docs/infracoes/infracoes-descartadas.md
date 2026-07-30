@@ -40,6 +40,18 @@ Ou acesse diretamente: `/consultainfracao`
 ## Funcionalidades
 
 - Consultar Infrações descartadas por analista, Equipamento e período
+- Verificar o motivo de descarte por analista
+- Identificar padrões de qualidade por equipamento
+
+:::tip
+Use este relatório regularmente para avaliar a qualidade de captura dos equipamentos. Alta taxa de descarte em um equipamento pode indicar necessidade de calibração ou limpeza.
+:::
+
+## Relacionado
+
+- [Triagem](./triagem)
+- [Motivos de Descarte](../administracao/motivos-descartes)
+- [Processamento por Usuário](../relatorios/processamento-por-usuario)
 - Visualizar motivo do descarte e observações
 - Exportar Relatório de descartadas
 

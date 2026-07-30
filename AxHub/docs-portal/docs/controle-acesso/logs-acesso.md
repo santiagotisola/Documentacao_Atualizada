@@ -40,6 +40,22 @@ Exibe o histórico completo de acessos ao sistema com detalhes de data, hora, Us
 
 | Ação | Descrição |
 |------|-----------|
+| **Login/Logout** | Entrada e saída do sistema |
+| **Criar** | Inclusão de novo registro |
+| **Editar** | Alteração de dado existente |
+| **Excluir** | Remoção de registro |
+| **Exportar** | Geração de relatório ou exportação |
+
+:::tip
+Filtre por **Status = Falha** para detectar tentativas de acesso não autorizado. Múltiplas falhas do mesmo IP podem indicar ataque de força bruta.
+:::
+
+## Relacionado
+
+- [Usuários](./usuarios)
+- [Perfis de Acesso](./perfis-acesso)
+- [Acessos por IP](./acessos-por-ip)
+
 | Login | Autenticação bem-sucedida |
 | Login Falhou** | Tentativa de acesso com credenciais inválidas |
 | Logout | Encerramento de sessão |

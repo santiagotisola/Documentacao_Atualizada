@@ -40,6 +40,23 @@ Relatório de Infrações](../img/Relatorio%20-%20Relatorio%20de%20infrações.p
 | **Operador** | Analista responsável pela triagem |
 | **Lote de Exportação** | Lote ao qual foi exportada (quando aplicável) |
 
+## Como usar
+
+1. Acesse **Relatórios → Infrações**
+2. Defina o **Período** e os filtros desejados
+3. Clique em **Buscar**
+4. Exporte em **Excel** para envio ou arquivoção
+
+:::tip
+Filtre por **Status = Auditada** para obter a lista de infrações prontas para incluir no próximo lote de exportação.
+:::
+
+## Relacionado
+
+- [Triagem de Infrações](../infracoes/triagem)
+- [Lotes de Exportação](../glossario/lote-exportacao)
+- [Motivos de Descarte](../administracao/motivos-descartes)
+
 ## Exportação
 
 Exportável em **Excel** e **PDF**. O formato PDF inclui imagens quando selecionado o campo correspondente.

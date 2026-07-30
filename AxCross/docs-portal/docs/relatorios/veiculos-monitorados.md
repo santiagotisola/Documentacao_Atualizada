@@ -37,8 +37,13 @@ No **menu lateral**, clique em **Relatórios** e selecione **Veículos Monitorad
 :::warning
 As detecções de veículos monitorados geram alertas automáticos. O operador deve verificar e tratar cada alerta dentro do prazo definido pela operação.
 :::
-| **Local** | Não | Filtrar por cruzamento específico |
-| **Status do Alerta** | Não | Aberto, Em atendimento, Resolvido |
+
+## Relacionado
+
+- [Alertas](../operacoes/alertas)
+- [Mapeamento de Rotas](./mapeamento-rotas)
+- [Ocorrências e Alertas](./ocorrencias-alertas)
+
 
 ## Colunas do resultado
 

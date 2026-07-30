@@ -40,6 +40,13 @@ Um enquadramento mal configurado resulta em infrações com artigo CTB incorreto
 ## Navegação Relacionada
 
 | Tipo | Página |
+
+## Relacionado
+
+- [Enquadramentos](./enquadramentos)
+- [Formas de Autuação](./formas-autuacao)
+- [Operações](../operacoes/cadastro-operacoes)
+
 |------|--------|
 | Relacionado | [Enquadramentos](./enquadramentos) |
 | Relacionado | [Operações](../operacoes/cadastro-operacoes) |
