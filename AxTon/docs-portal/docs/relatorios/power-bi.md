@@ -96,3 +96,14 @@ Acesso ao Power BI requer permissão específica configurada no perfil. Solicite
 Use o Dashboard de **Disponibilidade** para acompanhar o SLA contratual e o **Boletim de Medição** para embasar pagamentos mensais de contratos.
 :::
 
+## Perguntas frequentes
+
+**Com que frequência os dashboards Power BI são atualizados?**
+Depende do agendamento configurado no Power BI Service. Por padrão pode ser diário ou sob demanda. Entre em contato com o suporte para ajustar a frequência de atualização.
+
+**O dashboard aparece em branco mesmo tendo dados no sistema. O que verificar?**
+Verifique se a URL de incorporação está correta e se o usuário possui acesso ao relatório no Power BI Service. O token de incorporação também pode ter expirado — acione o suporte para regenerá-lo.
+
+**Posso exportar os dashboards em PDF ou Excel?**
+Sim. Use os controles nativos do Power BI incorporado para exportar. A disponibilidade do botão de exportação depende das permissões configuradas no Power BI Service pelo administrador.
+

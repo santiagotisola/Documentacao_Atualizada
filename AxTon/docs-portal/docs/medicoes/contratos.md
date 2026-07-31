@@ -116,3 +116,14 @@ Contrato com metas bem configuradas garante que o sistema calcule automaticament
 | [**Índices de Performance**](../medicoes/indices-performance) | Indicadores de desempenho contratual |
 | [**Interrupções**](../medicoes/interrupcoes) | Registro de interrupções operacionais |
 | [**Gerar Medição**](../medicoes/criar-medicao) | Gerar Relatório de medição contratual |
+
+## Perguntas frequentes
+
+**O que acontece com as medições se o contrato for inativado?**
+Medições geradas no período de vigência são preservadas no histórico. Após inativar o contrato, não será mais possível gerar novas medições vinculadas a ele.
+
+**Posso vincular o mesmo posto a múCtiplos contratos ao mesmo tempo?**
+Não recomendado. Um posto deve estar associado a apenas um contrato ativo por vez para evitar conflito nos cálculos de disponibilidade e volume de pesagens.
+
+**As metas de disponibilidade e OCR podem ser alteradas após o contrato ser criado?**
+Sim. Edite o contrato e atualize as metas. No entanto, medições já geradas não são recalculadas retroativamente — a alteração vale apenas para as próximas medições.

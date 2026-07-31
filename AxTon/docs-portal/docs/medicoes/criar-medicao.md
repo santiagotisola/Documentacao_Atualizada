@@ -92,3 +92,14 @@ Verifique se todas as [Interrupções](./interrupcoes) do período foram registr
 4. Clique em **Gerar**
 5. Revise o Relatório gerado
 6. Exporte em PDF ou Excel
+
+## Perguntas frequentes
+
+**Posso gerar a medição antes de registrar todas as interrupções do período?**
+Não recomendado. Interrupções não registradas antes da geração não entram no cálculo de disponibilidade, distorcendo os índices. Revise todas as interrupções antes de gerar.
+
+**O que acontece se eu perceber um erro após finalizar a medição?**
+A medição finalizada é bloqueada para edição. Para correção, é necessário reabrir com permissão de supervisor, o que gera log de auditoria. Erros devem ser corrigidos antes da finalização.
+
+**Como enviar o boletim de medição ao contratante?**
+Após gerar e revisar a medição, clique em **Exportar PDF** para obter o documento formatado. Envie pelo canal definido em contrato (e-mail, sistema do órgão ou portal de prestação de contas).

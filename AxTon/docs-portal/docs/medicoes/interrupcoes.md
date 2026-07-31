@@ -108,3 +108,14 @@ Registre toda interrupção logo que ocorrer. Interrupções não registradas se
 - Classifique corretamente o tipo: manutenção preventiva programada geralmente não penaliza; corretiva sim
 - Descreva a causa e as ações tomadas com detalhes suficientes para embasar discussões contratuais
 - Registre a **Data/Hora Fim** assim que o equipamento voltar a operar para calcular a duração com precisão
+
+## Perguntas frequentes
+
+**O que acontece com a disponibilidade se eu não registrar uma interrupção?**
+A interrupção será contabilizada como indisponibilidade não planejada no boletim de medição, penalizando o SLA mesmo que a causa fosse justificável. Registre sempre, mesmo retroativamente, com a justificativa correta.
+
+**Posso registrar uma interrupção retroativamente?**
+Sim. Informe as datas e horários corretos do início e fim da ocorrência. O sistema usará essas datas para o cálculo, não a data do cadastro.
+
+**Qual a diferença entre interrupção Preventiva e Corretiva para o SLA contratual?**
+Interrupções Preventivas (manutenções programadas e comunicadas) geralmente não penalizam a disponibilidade contratual. Corretivas (falhas não planejadas) impactam negativamente o índice de disponibilidade.

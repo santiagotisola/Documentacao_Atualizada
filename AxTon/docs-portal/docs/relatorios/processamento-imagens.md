@@ -93,3 +93,14 @@ Use este relatório mensalmente para embasar solicitações de manutenção em e
 - Período (data inicial e final)
 - Posto de pesagem
 - Exportar para Excel/PDF
+
+## Perguntas frequentes
+
+**Taxa OCR abaixo de 80% em um equipamento exige manutenção imediata?**
+Sim. Taxa abaixo de 80% é considerada crítica e deve acionar solicitação de manutenção técnica com urgência. Antes, verifique se há sujeira na lente da câmera, pois limpeza simples pode recuperar o desempenho rapidamente.
+
+**Com que frequência devo consultar este relatório?**
+Semanalmente para monitoramento preventivo. Quedas abruptas de OCR entre uma semana e outra indicam falha nascente no equipamento antes que ele pare completamente.
+
+**O relatório diferencia imagens de teste das imagens operacionais?**
+Depende da configuração do sistema. Verifique o parâmetro **Imagem de Teste** em **Sistema → Configurações** para entender se essas imagens são incluídas ou excluídas dos cálculos.

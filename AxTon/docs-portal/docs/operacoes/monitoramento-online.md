@@ -119,3 +119,14 @@ O monitoramento online atualiza automaticamente a cada 30 segundos. Não é nece
 :::tip Dica
 Mantenha está tela aberta durante as operações para detecção rápida de falhas de comunicação.
 :::
+
+## Perguntas frequentes
+
+**Por que um posto aparece offline mesmo com a balança funcionando no campo?**
+O heartbeat pode estar desabilitado ou com timeout muito curto. Verifique a URL do servidor da balança em **Sistema → HAENNI** e confirme que o endereço de rede está acessível pelo servidor AxTon.
+
+**O monitoramento online atualiza automaticamente? Com que frequência?**
+Sim. A tela atualiza automaticamente a cada 30 segundos sem necessidade de recarregar a página manualmente.
+
+**Como registrar uma interrupção diretamente do monitoramento?**
+Ao identificar um posto offline, acesse **Medições → Interrupções** e registre o evento com data/hora de início. Isso garante que o período de indisponibilidade seja contabilizado corretamente no boletim de medição.

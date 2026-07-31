@@ -101,3 +101,14 @@ Use o filtro **Retidos** para visualizar apenas os postos com maior número de v
 - [Relatório de Infrações](./relatorio-infracoes)
 - [Relatório de Passagens](./relatorio-passagens)
 - [Power BI](./power-bi)
+
+## Perguntas frequentes
+
+**Por que um posto não aparece no mapa mesmo com pesagens registradas?**
+O posto precisa ter coordenadas geográficas (latitude e longitude) preenchidas no cadastro. Acesse **Cadastros → Locais** e verifique se as coordenadas estão informadas corretamente.
+
+**Qual a diferença entre usar o filtro Passagens, Infrações ou Retidos no mapa?**
+Passagens exibe o volume total de veículos pesados. Infrações exibe apenas os registros com excesso detectado. Retidos mostra os veículos que ficaram parados no posto aguardando resolução.
+
+**Posso exportar o mapa como imagem para apresentações ao contratante?**
+Sim. Use o botão **Exportar** disponível na tela para salvar uma imagem do mapa ou um CSV com os dados por posto, ideal para relatórios de prestação de contas.

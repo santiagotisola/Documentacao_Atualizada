@@ -102,3 +102,14 @@ Use este Relatório em conjunto com a tela de **Alertas** para acompanhar o stat
 - **Análise de padrões**: identificar veículos com alta frequência de detecção para priorizar investigações
 - **Comprovação de monitoramento**: documentar que um veículo específico foi ou não detectado durante determinado período
 
+## Perguntas frequentes
+
+**Por que um veículo monitorado passou pelo equipamento mas não aparece no relatório?**
+Verifique se o cadastro do veículo está com status Ativo e se a placa está corretamente formatada. Também pode ser que o OCR não reconheceu a placa com confiança suficiente — verifique a imagem da passagem.
+
+**O relatório exibe apenas detecções com alerta gerado ou todas as passagens?**
+Apenas as passagens que geraram ocorrência por corresponder a um veículo monitorado ativo. Passagens normais de outros veículos aparecem no Relatório de Passagens.
+
+**Como exportar o relatório para comprovação ao órgão contratante?**
+Use os botões **Excel** ou **PDF** na tela do relatório após aplicar os filtros do período desejado. O arquivo gerado contém todas as detecções com dados de local, data/hora e placa.
+

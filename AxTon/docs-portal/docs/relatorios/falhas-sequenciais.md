@@ -88,3 +88,14 @@ Sempre execute este relatório antes de gerar um novo lote de exportação. Falh
 - [Sequênciais de Exportação](../cadastros/sequencial-exportacao)
 - [Sequênciais de Infração](../cadastros/sequencial-infracao)
 - [Exportação de Infrações](../infracoes/exportacao)
+
+## Perguntas frequentes
+
+**O que causa lacunas na numeração sequencial das infrações?**
+As principais causas são: infração descartada sem motivo registrado, falha de comunicação entre a balança e o servidor, ou reenvio duplicado de lotes. Investigue os tickets do período correspondente à lacuna para identificar a origem.
+
+**Devo verificar este relatório antes de cada exportação de lote?**
+Sim. Lacunas ou duplicidades não corrigidas podem causar rejeição do lote inteiro pelo DENATRAN/SENATRAN. Execute o relatório e corrija todas as falhas antes de gerar um novo lote.
+
+**Como resolver uma duplicidade identificada no relatório?**
+Identifique os tickets com mesmo número sequencial, verifique qual registro é o correto e cancele ou corrija o duplicado. Se o lote já foi enviado, entre em contato com o órgão autuador para orientação sobre o procedimento de correção.

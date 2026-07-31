@@ -89,3 +89,14 @@ Disponível em **Excel** e **PDF**.
 - [NF-e](../glossario/nfe)
 - [MDF-e](../glossario/mdfe)
 - [Relatório de Notas Fiscais](./relatorio-nfe)
+
+## Perguntas frequentes
+
+**Qual percentual de discrepância entre peso declarado e aferido deve ser reportado à SEFAZ?**
+Discrepâncias acima de 10% entre o peso aferido e o declarado na NF-e devem ser reportadas ao órgão fiscalizador, conforme obrigação legal. O relatório destaca automaticamente essas ocorrências.
+
+**Por que o relatório retorna vazio mesmo havendo pesagens no período?**
+Verifique os filtros aplicados. Se o tipo de discrepância estiver selecionado de forma muito restritiva, nenhum resultado será exibido. Remova filtros e amplie o período para confirmar se há dados disponíveis.
+
+**A discrepância de classificação gera infração automática?**
+Não diretamente. O relatório identifica a inconsistência, mas a geração de infração depende de triagem e validação pelo operador com base nos dados de eixo, PBT e documentação fiscal.

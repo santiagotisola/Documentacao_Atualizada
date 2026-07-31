@@ -105,3 +105,14 @@ Use este relatório para avaliar a produtividade de operadores e identificar pos
 - [Triagem](../glossario/triagem)
 - [Motivos de Descarte](../pesagem/motivos)
 - [Logs de Acesso](../controle-acesso/logs-acesso)
+
+## Perguntas frequentes
+
+**O que significa taxa de descarte muito alta em um operador específico?**
+Taxa acima de 20% pode indicar treinamento insuficiente ou critério inadequado na triagem. Revise as sessões de capacitação e analise uma amostra das infrações descartadas por esse operador.
+
+**Como identificar se um operador não realizou triagem no período?**
+Se o usuário não aparecer no relatório, filtre os Logs de Acesso para verificar se ele sequer fez login durante o período. Ausência de registro indica que não acessou o sistema.
+
+**A produtividade de triagem impacta diretamente o pagamento contratual?**
+Depende do contrato. Em contratos com SLA de triagem (prazo máximo para processar infrações), queda de produtividade pode gerar atraso no lote de exportação e consequentemente penalidade por não conformidade.

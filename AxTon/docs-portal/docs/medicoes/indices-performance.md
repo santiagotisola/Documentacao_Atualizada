@@ -96,3 +96,14 @@ Em contratos por desempenho, a disponibilidade abaixo da meta resulta em descont
 - [Contratos](./contratos)
 - [Criar Medição](./criar-medicao)
 - [Interrupções](./interrupcoes)
+
+## Perguntas frequentes
+
+**O que acontece quando um índice fica abaixo da meta contratual?**
+O boletim de medição registra a não conformidade, que pode acionar cláusulas de penalidade ou glosa no pagamento mensal conforme previsto no contrato. Avalie as causas com o contratante o mais rápido possível.
+
+**Os índices de performance são calculados automaticamente?**
+Sim. Ao gerar uma medição, o sistema calcula automaticamente cada índice com base nos dados operacionais do período — interrupções registradas, pesagens realizadas e taxa OCR registrada pelos equipamentos.
+
+**Posso ter índices diferentes para postos distintos dentro do mesmo contrato?**
+Sim. Cada índice pode ser configurado com metas específicas por posto ou por grupo de equipamentos, permitindo análise granular do desempenho contratual.
