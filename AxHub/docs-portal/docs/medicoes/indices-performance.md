@@ -104,3 +104,18 @@ Sim. Configure um índice específico para cada equipamento ou grupo, vinculando
 | **[Criar Medição](./criar-medicao)** | Ao gerar uma medição, o sistema calcula automaticamente os índices cadastrados para o contrato no período |
 | **[Medições — Interrupções](./interrupcoes)** | As interrupções impactam diretamente o índice de disponibilidade; interrupções não registradas inflam artificialmente o resultado |
 | **[Processamento de Imagens](../relatorios/processamento-imagens)** | O índice de aproveitamento OCR é alimentado pelos dados do relatório de processamento de imagens do período |
+
+## Ciclo mensal
+
+Os índices são cadastrados uma vez e calculados automaticamente a cada medição:
+
+| Etapa | Ação |
+|-------|------|
+| **Antes de iniciar** | Cadastrar todos os índices exigidos pelo contrato |
+| **Após aditivo** | Atualizar as metas conforme nova cláusula |
+| **Após gerar medição** | Revisar boletim — índices abaixo da meta geram não-conformidade |
+| **Após não-conformidade** | Documentar causa e ações corretivas para apresentar ao contratante |
+
+:::tip
+Verifique mensalmente se os índices configurados correspondem ao contrato vigente — aditivos não aplicados geram boletins com dados incorretos.
+:::

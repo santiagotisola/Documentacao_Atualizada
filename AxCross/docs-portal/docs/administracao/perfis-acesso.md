@@ -169,3 +169,21 @@ Não há limite de perfis. Recomenda-se criar perfis específicos por função o
 | **Configurações → Permissões** | As permissões granulares são configuradas por perfil nesta tela |
 | **Logs de Acesso** | Acessos e ações dos usuários são registrados com o perfil correspondente |
 | **Login** | O menu exibido após autenticar é gerado conforme as permissões do perfil do usuário |
+
+## Exemplo prático
+
+**Criando um perfil de Operador de Monitoramento para novo colaborador de plantão:**
+
+1. Acessar **Configurações → Perfis de acesso** e clicar em **Novo Perfil**
+2. Nomear como `Operador de Plantão` com descrição clara da função
+3. Salvar e acessar **Configurações → Permissões de acesso**
+4. Selecionar o novo perfil e habilitar apenas:
+   - `monitoring.index`, `monitoring.monitoringonline`, `monitoring.equipmentmap`
+   - `alertsummary.index`
+   - `alert.index`, `alert.create`
+5. Acessar **Configurações → Usuários**, criar o usuário e vincular ao perfil
+6. Testar login com o novo usuário e verificar se os módulos corretos estão disponíveis
+
+:::tip Princípio do mínimo privilégio
+Habilite apenas as permissões essenciais para a função. Um operador de plantão não precisa acessar Configurações ou Cadastros.
+:::

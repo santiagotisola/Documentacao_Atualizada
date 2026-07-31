@@ -140,3 +140,25 @@ Alterando o status para **Inativo**. O histórico de tickets é preservado; apen
 
 **O posto precisa estar cadastrado antes ou depois do equipamento?**
 O posto deve ser cadastrado primeiro. Em seguida, vincule os equipamentos ao posto no cadastro de cada equipamento.
+
+## Exemplo prático
+
+**Ativando um novo posto de pesagem para operar:**
+
+1. Acessar **Balança → Postos** e clicar em **+ Novo**
+2. Preencher:
+
+| Campo | Exemplo |
+|-------|---------|
+| **Nome** | Posto PI-247 Leste, KM 115 |
+| **Endereço** | PI 247, KM 115, Rod. Eng. Vasco Filho, Uruçuí - PI |
+| **Rodovia** | PI-247 |
+| **Contrato** | Contrato SINFRA-2026 |
+
+3. Salvar e vincular os equipamentos em **Configurações → Equipamentos**
+4. Registrar a **aferição** dos equipamentos em **Operações → Aferições**
+5. Criar a operação em **Operações** e confirmar a entrada dos primeiros tickets
+
+:::warning
+Nenum ticket será gerado sem a aferição válida. Registre sempre o certificado INMETRO antes de ativar o posto.
+:::

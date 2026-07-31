@@ -129,3 +129,28 @@ Sim, mas tenha cuidado: o código aparece nas tarjas das infrações. Alteraçõ
 | **[Operações](../operacoes/cadastro-operacoes)** | O equipamento é a fonte das passagens e infrações da operação; deve estar cadastrado antes de vincular à operação |
 | **[Aferíções](../operacoes/afericoes)** | O sistema monitora o vencimento do certif. INMETRO com base nas aferíções registradas para o equipamento |
 | **[Monitoramento Online](../operacoes/monitoramento-online)** | Exibe em tempo real o status de conexão, passagens e alertas de cada equipamento cadastrado |
+
+## Exemplo prático
+
+**Cadastrando um radar fixo recém-instalado:**
+
+Antes de cadastrar, verifique que Fabricante, Tipo, Modelo e Grupo já existem:
+
+1. Acessar **Equipamentos → Equipamentos** e clicar em **+ Novo**
+2. Preencher:
+
+| Campo | Exemplo |
+|-------|---------|
+| **Nº Série** | AX2026-0042 |
+| **Código** | CAM-SP310-45A |
+| **Certificado INMETRO** | INMETRO/DIMEL 2026-04521 |
+| **Modelo** | VSIS-OCR PRO |
+| **Tipo** | RADAR FIXO |
+| **Grupo** | Contrato SINFRA 2026 |
+
+3. Salvar e verificar em **Monitoramento Online** se o equipamento aparece online
+4. Registrar a **Aferição** em **Operações → Aferições** antes de incluir na operação
+
+:::tip
+Verifique as tarjas de infração após os primeiros registros para confirmar que Código, Série e Portaria estão corretos.
+:::

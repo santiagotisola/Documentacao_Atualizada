@@ -122,3 +122,13 @@ Geralmente problemas técnicos: câmera suja, ângulo errado, OCR descalibrado o
 | **[Motivos de Descarte](../administracao/motivos-descartes)** | Os motivos de descarte exibidos nesta tela são configurados no módulo de Administração |
 | **[Exceções](./excecoes)** | Infrações descartadas automaticamente por regras de exceção também aparecem aqui com o motivo configurado na regra |
 | **[Processamento de Imagens](../relatorios/processamento-imagens)** | Cruzar este relatório com o de Processamento de Imagens ajuda a identificar equipamentos com alta taxa de descarte por qualidade |
+
+## Quando usar este relatório
+
+| Situação | Frequência |
+|----------|------------|
+| **Revisão de qualidade de captura** | Semanalmente, por equipamento |
+| **Suspeita de descarte indevido** | Imediata — filtrar por analista e período |
+| **Preparação do boletim ao contratante** | Mensal — exportar para compor relatório |
+| **Equipamento com baixo aproveitamento** | Quando OCR cair abaixo de 85% |
+| **Após alteração de regras de exceção** | Para confirmar que os descartes automáticos são corretos |

@@ -122,3 +122,19 @@ Sim. Marque **Desabilitar Monitoramento** no cadastro do tipo. Todos os equipame
 
 **É possível usar um ícone personalizado para o tipo?**
 Sim. Faça upload de uma imagem PNG ou SVG no campo **Selecione ícone** no cadastro do tipo. O ícone será exibido no mapa do Dashboard para todos os equipamentos desse tipo.
+
+## Exemplo prático
+
+**Configurando um novo tipo de radar misto antes de cadastrar equipamentos:**
+
+1. Acessar **Equipamentos → Tipos de Equipamentos** e clicar em **+ Novo**
+2. Preencher **Nome**: `RADAR MISTO`
+3. Clicar em **Nova Forma de Atuação** e adicionar:
+   - Tipo Infração: Excesso de Velocidade → Forma: Fixo
+   - Tipo Infração: Avanço de Sinal → Forma: Fixo
+4. Fazer upload do ícone representativo
+5. Salvar e confirmar que o tipo aparece no cadastro de equipamentos
+
+:::warning
+Sem as Formas de Atuação configuradas, o equipamento não gera infrações automaticamente. Sempre vincule os tipos de infração ao criar um novo tipo de equipamento.
+:::

@@ -136,3 +136,17 @@ Sim. Edite o contrato e atualize as metas. No entanto, medições já geradas n�
 | **Medições → Interrupções** | Interrupções registradas nos postos do contrato impactam o índice de disponibilidade |
 | **Medições → Índices de Performance** | Exibe os indicadores contratuais calculados (OCR, disponibilidade, volume) por contrato |
 | **Operações** | As operações realizadas nos postos vinculados ao contrato alimentam os cálculos do boletim |
+
+## Ciclo mensal
+
+| Etapa | Quando | Ação |
+|-------|--------|------|
+| **Verificar vigência** | Dia 1 do mês | Confirmar status Ativo e metas corretas |
+| **Registrar interrupções** | Durante o mês | Lançar em [Interrupções](./interrupcoes) imediatamente |
+| **Gerar medição** | Até dia 5 do mês seguinte | Acessar [Criar Medição](./criar-medicao) |
+| **Revisar índices** | Após geração | Comparar disponibilidade e OCR com metas |
+| **Finalizar e enviar** | Conforme contrato | Exportar boletim PDF e enviar ao contratante |
+
+:::warning
+Verifique o prazo contratual de entrega do Boletim de Medição — em geral entre 5 e 10 dias após o encerramento do mês.
+:::

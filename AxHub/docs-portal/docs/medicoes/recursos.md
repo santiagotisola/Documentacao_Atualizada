@@ -133,3 +133,18 @@ Recursos humanos são pessoas (agentes, técnicos) e são medidos em horas/mês.
 |------|--------|-----------|
 | Relacionado | [Contratos](./contratos) | Contrato vinculado |
 | Relacionado | [Equipamentos](../cadastros-basicos/equipamentos) | Equipamentos como recurso |
+
+## Ciclo mensal
+
+Os recursos são cadastrados **uma vez por contrato** e reaproveitados em todas as medições mensais. Revise o cadastro somente quando:
+
+| Situação | Ação |
+|----------|------|
+| **Aditivo contratual** | Atualizar quantidades e tipos de recursos |
+| **Renovação do contrato** | Criar novo cadastro vinculado ao novo número |
+| **Troca de equipamento** | Atualizar o recurso material correspondente |
+| **Substituição de pessoa** | Atualizar o nome do recurso humano |
+
+:::tip
+Mantenha os nomes dos recursos idênticos ao texto do contrato — facilita a conferência pelo fiscal do contratante na hora da aprovação do boletim.
+:::

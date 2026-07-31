@@ -133,3 +133,24 @@ Sim. O sistema é acessível via navegador em tablets e smartphones. Otimize usa
 | Relacionado | [Eventos de Equipamentos](./eventos-equipamentos) | histórico de eventos |
 | Relacionado | [Dashboard](../primeiros-passos/dashboard) | Visao geral do sistema |
 | Relacionado | [Consulta de Placas](./consulta-placas) | Buscar veiculos |
+
+## Exemplo prático
+
+**Verificando o status dos equipamentos no início do turno:**
+
+1. Acessar **Operações → Monitoramento Online**
+2. Selecionar o **Grupo de Equipamentos** do turno no filtro
+3. Verificar a lista de status:
+
+| Equipamento | Status | Ação |
+|-------------|:------:|------|
+| CAM-SP-001 | 🟢 Online | Nenhuma |
+| CAM-SP-002 | 🔴 Offline | Registrar evento + acionar suporte |
+| CAM-SP-003 | 🟡 Manutenção | Confirmar previsão de retorno |
+
+4. Para cada equipamento **Offline** há mais de 15 min: registrar em [Eventos de Equipamentos](./eventos-equipamentos)
+5. Monitorar Taxa OCR — queda abaixo de 85% indica necessidade de calibração
+
+:::tip Dica de turno
+Use o filtro por grupo de equipamentos para focar no seu âmbito de responsabilidade e reduzir o ruído visual de equipamentos de outras regiões.
+:::

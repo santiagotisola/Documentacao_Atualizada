@@ -129,3 +129,20 @@ O sistema impede a exclusão de operações que já possuem registros de passage
 | **Relatório de Passagens** | Passagens são filtradas por operação e período para geração de relatórios |
 | **Relatórios → Ocorrências e Alertas** | Ocorrências geradas durante a operação aparecem neste relatório |
 - [Ocorrências e Alertas](../relatorios/ocorrencias-alertas)
+
+## Exemplo prático
+
+**Criando uma operação mensal de monitoramento de cruzamento:**
+
+| Parâmetro | Exemplo |
+|-----------|---------|
+| **Nome** | Fiscalização Av. Paulista — Jul/2026 |
+| **Local** | Cruzamento Av. Paulista c/ Rua Augusta |
+| **Data Início** | 01/07/2026 00:00 |
+| **Data Fim** | 31/07/2026 23:59 |
+| **Equipamentos** | CAM-P-001, CAM-P-002 |
+
+Após salvar:
+1. Confirme em [Monitoramento Online](./monitoramento-online) que os equipamentos estão recebendo passagens
+2. Ao encerrar: clique em **Encerrar** para delimitar o período corretamente
+3. Consulte [Relatório de Passagens](../relatorios/relatorio-passagens) para análise dos dados gerados

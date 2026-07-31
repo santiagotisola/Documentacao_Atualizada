@@ -142,3 +142,13 @@ Isso indica que o sequencial de infração pode estar esgotado ou não configura
 | **Relatório de Passagens** | Consolida os dados de todos os tickets fechados por período e posto |
 | **Relatório de Infrações** | Lista as infrações geradas nos tickets com resultado Infrator |
 | **Exportação de Infrações** | As infrações dos tickets fechados são exportadas ao órgão autuador via lote |
+
+## Quando usar este relatório
+
+| Situação | Frequência |
+|----------|------------|
+| **Comprovante de fiscalização** | Após cada turno de operação |
+| **Boletim diário de produção** | Filtrar por Posto + Período e exportar |
+| **Conciliação contratual** | Validar volume de pesagens no período de medição |
+| **Verificar histórico de veículo** | Buscar por placa para consultar passagens anteriores |
+| **Auditoria de operação** | Verificar tickets com resultado Infrator e status de exportação |

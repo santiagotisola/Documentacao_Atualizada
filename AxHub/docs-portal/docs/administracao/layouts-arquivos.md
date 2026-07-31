@@ -155,3 +155,21 @@ Compare o layout configurado com a especificação técnica do órgão autuador.
 **Preciso de um layout diferente para cada órgão?**
 Sim. Cada órgão (DETRAN estadual, SENATRAN) pode ter formato específico. Configure um layout separado para cada destino de exportação.
 | **Relatórios** | O formato de exportação segue os layouts configurados para cada órgão |
+
+## Exemplo prático
+
+**Configurando layout de exportação CSV para um DETRAN estadual:**
+
+1. Solicitar ao órgão autuador a **especificação técnica do layout** em PDF
+2. Acessar **Configurações → Layouts de Arquivos** e clicar em **+ Novo**
+3. Preencher:
+   - **Nome**: `DETRAN-CE-2026`
+   - **Tipo**: Exportação
+   - **Formato**: CSV com separador `;`
+4. Mapear cada campo conforme a especificação do órgão
+5. Testar em homologação antes de ativar em produção
+6. Após confirmação: ativar o layout e usá-lo na próxima exportação
+
+:::tip
+Solicite ao órgão um arquivo de exemplo aceito para validar seu layout antes do envio real.
+:::

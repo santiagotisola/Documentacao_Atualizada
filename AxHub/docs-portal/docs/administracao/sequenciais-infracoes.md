@@ -129,3 +129,21 @@ Mensalmente. Quando o saldo atingir 80% do número máximo, planeje a criação 
 | **[Falhas Sequenciais](../relatorios/falhas-sequenciais)** | O relatório de Falhas Sequenciais usa a configuração dos sequenciais para verificar lacunas e duplicidades na numeração |
 | **[Exportação de Infrações](../infracoes/exportacao)** | O número sequencial da infração é um campo obrigatório nos layouts de exportação; séries com lacunas podem causar rejeição |
 | **[Sequenciais de Lote](./sequenciais-lote-exportacao)** | Os sequenciais de infração e de lote são configurações independentes; ambos precisam estar corretos para a exportação ser válida |
+## Exemplo prático
+
+**Configurando séries de sequenciais antes de iniciar operações:**
+
+1. Acessar **Configurações → Sequenciais de Infrações** e clicar em **+ Novo**
+2. Criar uma série para cada órgão autuador:
+
+| Órgão | Série | Próximo número | Número máximo |
+|-------|-------|:--------------:|:-------------:|
+| DETRAN Estadual | AXH | 1 | 99.999 |
+| Prefeitura | PRF | 1 | 9.999 |
+
+3. Confirmar os números iniciais com o órgão antes de salvar
+4. Verificar o **Relatório de Falhas de Sequenciais** após as primeiras 100 infrações
+
+:::warning
+Nunca edite o campo **Próximo número** manualmente sem verificar o histórico — pode gerar duplicidade e rejeição do lote.
+:::

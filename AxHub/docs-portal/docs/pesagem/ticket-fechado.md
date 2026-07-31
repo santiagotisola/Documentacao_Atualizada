@@ -143,3 +143,13 @@ Use os tickets fechados para gerar evidências de fiscalização e comprovação
 |------|--------|-----------|
 | Anterior | [Ticket Aberto](./ticket-aberto) | Tickets em andamento |
 | Acao | [Reclassificar](./reclassificar) | Reclassificar Use Veículo (com acento) |
+
+## Quando usar este relatório
+
+| Situação | Frequência |
+|----------|------------|
+| **Auditoria de operador** | Ao suspeitar de liberações indevidas |
+| **Comprovante de fiscalização** | Para auditorias do contratante |
+| **Boletim diário/mensal de produção** | Filtrar por Posto + Período e exportar CSV |
+| **Conciliação contratual** | Validar volume de pesagens no período de medição |
+| **Verificar histórico de veículo** | Buscar por placa para consultar passagens anteriores |

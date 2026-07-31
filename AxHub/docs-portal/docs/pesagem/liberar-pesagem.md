@@ -108,3 +108,25 @@ Não use um motivo genérico. Solicite ao administrador que cadastre o motivo es
 | **Motivos de Liberação** | A lista de motivos disponíveis é configurada em **Balança → Motivos** e determina as opções exibidas na tela |
 | **Reclassificar** | Frequentemente precede a liberação — ao reclassificar o veículo, o excesso cessa e a liberação se torna possível |
 | **Logs de Acesso** | Cada liberação realizada é registrada automaticamente com usuário, horário e motivo para fins de auditoria |
+
+## Fluxo decisório
+
+```
+Veículo retido no posto por excesso de peso
+        │
+        ▼
+Qual é a situação do veículo?
+   ├── Classificação incorreta → Reclassificar primeiro
+              │
+              ▼
+          Excesso ainda existe após reclassificação?
+            ├── SIM → Manter infração e liberar com motivo correto
+            └── NÃO → Liberar (motivo: descarga ou reclassificação)
+   ├── Excesso confirmado + multa paga → Liberar (pagamento)
+   ├── Excesso confirmado + carga descarregada → Liberar (descarga)
+   └── Excesso confirmado + recurso formal → Liberar (recurso)
+```
+
+:::warning
+Sempre selecione o motivo específico correto — motivos genéricos comprometem os relatórios gerenciais e podem ser questionados em auditoria.
+:::

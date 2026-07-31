@@ -140,3 +140,25 @@ Para entender como esses dados são exibidos e como mantê-los atualizados, cons
 | Relacionado | [Equipamentos](../cadastros-basicos/equipamentos) | Equipamento aferido |
 | Relacionado | [Cadastro de Operacoes](./cadastro-operacoes) | Operacoes vinculadas |
 | Guia | Configuração de Dados da Tarja](../administracao/configuracao-dados-tarja) | Como os dados aparecem na tarja |
+
+## Exemplo prático
+
+**Registrando o certificado de aferição periódica após vistoria INMETRO:**
+
+1. Receber o certificado físico do INMETRO com número, datas de emissão e vencimento
+2. Acessar **Operações → Aferições** e clicar em **+ Nova Aferição**
+3. Preencher:
+
+| Campo | Exemplo |
+|-------|---------|
+| **Equipamento** | CAM-SP310-45A |
+| **Tipo de Aferição** | Aferição Periódica |
+| **Nº Certificado** | INMETRO/DIMEL 2026-04521 |
+| **Data de Emissão** | 15/01/2026 |
+| **Data de Vencimento** | 14/01/2027 |
+
+4. Salvar e confirmar que o alerta de vencimento desapareceu do Dashboard
+
+:::tip
+Digitalize e arquive o certificado físico imediatamente após o cadastro — será exigido em auditorias do contratante.
+:::

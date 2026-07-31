@@ -123,3 +123,13 @@ Não. Alterações de enquadramento só são possíveis durante a triagem. Esta 
 | **[Infrações — Auditoria](./auditoria)** | O auditor usa esta tela para localizar e revisar infrações antes de aprovação final |
 | **[Relatório de Infrações](../relatorios/relatorio-infracoes)** | O relatório de infrações oferece visão agregada; a consulta detalha um registro individual |
 | **[Exportação de Infrações](./exportacao)** | Infrações com status **Auditada** localizadas aqui estão aptas para exportação ao órgão autuador |
+
+## Quando usar este relatório
+
+| Situação | Quando consultar |
+|----------|------------------|
+| **Verificar backlog de triagem** | Filtrar por Status = Aguardando Triagem antes de cada turno |
+| **Confirmar infração específica** | Buscar pelo número do auto ou placa do veículo |
+| **Auditoria de analista** | Filtrar por Usuário e período para revisar produção |
+| **Verificar status antes de exportar** | Confirmar infrações com status Auditada |
+| **Responder contestação de cidadão** | Localizar a passagem e exportar imagens como comprovação |

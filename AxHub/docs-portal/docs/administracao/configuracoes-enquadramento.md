@@ -137,3 +137,22 @@ Não. Alterações valem apenas para novas infrações. Para corrigir enquadrame
 
 **O que acontece se a velocidade máxima estiver errada na configuração?**
 As infrações geradas com a configuração incorreta podem ter o artigo CTB errado, resultando em possível anulação. Corrija imediatamente e revise as infrações do período.
+
+## Exemplo prático
+
+**Configurando enquadramentos de velocidade para uma via de 60 km/h:**
+
+1. Acessar **Configurações → Configurações de Enquadramento** e clicar em **+ Novo**
+2. Criar uma configuração para cada nível de excesso:
+
+| Enquadramento | Código CTB | Velocidade Máxima | Quando aplica |
+|---------------|:----------:|:-----------------:|---------------|
+| Excesso até 20% | 55411 | 60 km/h | 61 a 72 km/h |
+| Excesso 20-50% | 55412 | 60 km/h | 73 a 90 km/h |
+| Excesso acima 50% | 55413 | 60 km/h | > 90 km/h |
+
+3. Vincular cada configuração à **Operação** correspondente
+4. Testar com passagem de homologação antes de iniciar a operação real
+
+:::warning
+Confirme os códigos CTB com o \u00f3rgão autuador antes de configurar. Um enquadramento incorreto pode invalidar os autos gerados.

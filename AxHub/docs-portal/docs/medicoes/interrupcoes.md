@@ -111,3 +111,16 @@ Registre imediatamente após o equipamento voltar à operação. O prazo máximo
 | **Contratos** | As interrupções são contabilizadas no cálculo de disponibilidade exigido contratualmente |
 | **Índices de Performance** | A disponibilidade calculada nos índices considera diretamente as interrupções cadastradas |
 | **Criar Medição** | A medição gerada desconta automaticamente as interrupções do período de apuração |
+
+## Ciclo mensal
+
+| Quando | Ação |
+|--------|------|
+| **Ao detectar falha** | Registrar imediatamente com Data/Hora Início exata |
+| **Ao normalizar** | Preencher Data/Hora Fim no registro |
+| **Antes de gerar medição** | Revisar todas as interrupções do período |
+| **Após geração** | Confirmar que o índice de disponibilidade reflete as paradas registradas |
+
+:::warning
+Interrupções registradas **após** a geração da medição não são computadas automaticamente. Registre sempre em tempo real.
+:::

@@ -169,3 +169,25 @@ A exclusão de um local somente será possível se não houver registros de pesa
 
 - [Operações](../operacoes/cadastro-operacoes) — Vincular locais a operações de pesagem
 - [Configurações do Sistema](../sistema/configuracoes) — Parâmetros gerais do AxTon
+
+## Exemplo prático
+
+**Cadastrando um posto de pesagem em rodovia estadual:**
+
+1. Acessar **Locais** no menu lateral e clicar em **+ Novo**
+2. Preencher:
+
+| Campo | Exemplo |
+|-------|---------|
+| **Código** | `PI503B` |
+| **Descrição** | Posto PI-247, KM 115, Rod. Eng. Vasco Filho |
+| **Endereço** | PI 247, KM 115, Sentido Leste, Uruçuí - PI |
+| **Município** | Uruçuí |
+| **UF** | PI |
+
+3. Salvar e informar as coordenadas geográficas (lat/lon) para exibição no mapa
+4. Vincular o local à operação em **Operações → Cadastro de Operações**
+
+:::tip
+Use o padrão `[UF][Rodovia][Letra]` para os códigos — facilita a identificação nos relatórios e no campo.
+:::

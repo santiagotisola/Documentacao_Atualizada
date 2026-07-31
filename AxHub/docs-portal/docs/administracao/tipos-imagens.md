@@ -150,3 +150,19 @@ A Frontal mostra o veículo inteiro para contextualizar a infração. O Zoom Pla
 | Frontal | Não | 4 | Confirmação do veículo pela frente |
 
 Configure os tipos obrigatórios antes de iniciar operações. Sem eles, as infrações ficarão marcadas como incompletas e serão bloqueadas na exportação ao órgão autuador.
+
+## Exemplo prático
+
+**Configurando tipos de imagem para um radar de velocidade VARCO:**
+
+1. Acesse **Configurações → Tipos de Imagens** e clique em **+ Novo**
+2. Crie os seguintes tipos nesta ordem:
+
+| Tipo | Obrigatória | Ordem | Variável VARCO |
+|------|:-----------:|:-----:|----------------|
+| Panorâmica | Sim | 1 | `{{image}}` |
+| Zoom Placa | Sim | 2 | `{{imageList}}[1]` |
+| Painel Velocidade | Sim | 3 | `{{imageList}}[2]` |
+| Frontal | Não | 4 | `{{imageList}}[3]` |
+
+3. Salve cada tipo e teste com uma passagem de homologação antes de iniciar a operação

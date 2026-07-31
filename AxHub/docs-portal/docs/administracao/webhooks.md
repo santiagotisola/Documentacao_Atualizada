@@ -156,3 +156,20 @@ Não obrigatório, mas altamente recomendado. Sem o HMAC, o sistema receptor nã
 | **[Exportação de Infrações](../infracoes/exportacao)** | Webhooks podem ser acionados após cada exportação para notificar sistemas externos |
 | **[Logs de Envios](../relatorios/relatorio-logs-envios)** | Falhas nos webhooks são registradas nos logs de envios para diagnóstico |
 | **[Monitoramento Online](../operacoes/monitoramento-online)** | Eventos de equipamentos podem disparar webhooks configurados para notificações em tempo real |
+
+## Exemplo prático
+
+**Integrando o AxHub com um painel BI ao exportar lotes:**
+
+1. Acessar **Configurações → Webhooks** e clicar em **+ Novo**
+2. Preencher:
+   - **URL**: `https://painel.empresa.com.br/api/axhub/events`
+   - **Evento**: `lote.exportado`
+   - **Segredo**: gerar token HMAC seguro
+3. Clicar em **Salvar** e testar com `webhook.site` antes de apontar para produção
+4. No sistema BI: configurar endpoint para receber POST com validação HMAC
+5. Após confirmar o recebimento: ativar o webhook em **Status = Ativo**
+
+:::tip
+Sempre valide o campo **Segredo** HMAC no sistema receptor — garante que apenas o AxHub pode disparar notificações no endpoint configurado.
+:::

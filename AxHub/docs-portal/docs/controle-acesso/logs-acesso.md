@@ -135,3 +135,16 @@ Sim. Além de login/logout, o log registra criação, edição, exclusão e expo
 | **[Acessos por IP](./acessos-por-ip)** | IPs com múltiplas falhas de login identificadas nos logs devem ser bloqueados nas regras de Acessos por IP |
 | **[Perfis de Acesso](./perfis-acesso)** | O perfil do usuário determina quais ações ele pode realizar; logs de ações não autorizadas indicam problema de configuração de perfil |
 | **[Processamento por Usuário](../relatorios/processamento-por-usuario)** | Os logs de acesso cruzados com o relatório de processamento confirmam a presença e produtividade do analista no turno |
+
+## Perfis recomendados
+
+| Perfil | Permissão necessária | Caso de uso |
+|--------|---------------------|-------------|
+| **Administrador** | `logacesso.index` + todos os filtros | Auditoria completa do sistema |
+| **Gestor de segurança** | `logacesso.index` + filtro IP/falhas | Monitorar tentativas de acesso não autorizado |
+| **Supervisor de operações** | `logacesso.index` + filtro por usuário | Auditar produção da equipe |
+| **Auditor externo** | `logacesso.index` somente leitura | Auditoria de conformidade |
+
+:::tip Revisão semanal recomendada
+Revise semanalmente os logs com filtro **Status = Falha** e horários incomuns — detecta acessos suspeitos antes que causem dano.
+:::

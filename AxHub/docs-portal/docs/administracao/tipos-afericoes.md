@@ -121,3 +121,18 @@ O sistema exibe alertas de vencimento, mas o bloqueio automático depende da con
 
 **Posso alterar a validade de um tipo de aferição já em uso?**
 Sim. A alteração afeta apenas novos registros; aferições já cadastradas mantêm a data de vencimento original calculada.
+
+## Exemplo prático
+
+**Configurando os tipos de aferição antes de iniciar uma operação:**
+
+| Situação | Tipo a usar | Ação |
+|----------|------------|------|
+| Equipamento recém instalado | Aferição Inicial | Registrar certificado INMETRO em Operações → Aferições |
+| Renovação anual | Aferição Periódica | Renovar 60 dias antes do vencimento |
+| Após troca de sensor | Aferição Pós-Manutenção | Emitir novo certificado antes de reativar |
+| Exigência do órgão | Aferição Extraordinária | Realizar conforme prazo determinado |
+
+:::tip
+Configure os 4 tipos padrão (Inicial, Periódica, Pós-Manutenção, Extraordinária) antes de cadastrar os primeiros equipamentos — serão necessários desde o primeiro registro de aferição.
+:::

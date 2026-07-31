@@ -119,3 +119,25 @@ Motivos bem configurados alimentam os relatórios gerenciais e permitem identifi
 | **Liberar Pesagem** | O motivo selecionado ao liberar o veículo é registrado no ticket para rastreabilidade |
 | **Reclassificar** | A reclassificação exige um motivo justificando a alteração de categoria do veículo |
 | **Relatórios Gerenciais** | Os motivos alimentam os relatórios de produtividade e padrões operacionais do posto |
+
+## Fluxo decisório
+
+```
+Pesagem concluída — resultado definido
+        │
+        ▼
+Veículo dentro do PBT + tolerância?
+   ├── SIM → Encerrar ticket como Regular
+   └── NÃO (excesso detectado)
+              │
+              ▼
+        Motorista fará o quê?
+          ├── Pagar multa → Liberação por Pagamento
+          ├── Descarregar excesso → Liberação por Descarga
+          ├── Apresentar defesa → Liberação por Recurso
+          └── Categoria incorreta → Reclassificação de categoria
+```
+
+:::tip
+Use motivos específicos para cada situação — permite ao gestor analisar padrões e identificar necessidade de treinamento da equipe.
+:::

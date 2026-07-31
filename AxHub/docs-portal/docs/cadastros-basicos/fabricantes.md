@@ -130,3 +130,21 @@ Não. O slug deve ser único. Slugs duplicados causam conflito na autenticação
 **As imagens criptografadas do fabricante não aparecem no sistema. O que verificar?**
 Confira se a opção “Imagem Criptografada” está marcada corretamente no cadastro do fabricante, conforme a documentação técnica do dispositivo.
 | **Relatórios** | Permite filtrar relatórios por fabricante para análise de desempenho por marca |
+
+## Exemplo prático
+
+**Integrando um novo fabricante VARCO ao AxHub:**
+
+1. Acessar **Equipamentos → Fabricantes** e clicar em **+ Novo**
+2. Preencher:
+   - **Nome**: `VARCO Tecnologia`
+   - **Slug**: `varco`
+   - **Imagem Criptografada**: desmarcar (VARCO não criptografa por padrão)
+3. Salvar e clicar em **Gerar Novo Token**
+4. Copiar o token e enviá-lo ao fabricante por canal seguro
+5. Aguardar a configuração do equipamento pelo fabricante
+6. Confirmar em **Monitoramento Online** o envio das primeiras passagens
+
+:::warning
+O token é exibido apenas uma vez após a geração. Salve-o imediatamente e compartilhe com o fabricante por canal seguro.
+:::

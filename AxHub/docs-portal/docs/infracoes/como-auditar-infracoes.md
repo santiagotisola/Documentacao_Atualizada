@@ -90,6 +90,25 @@ Sim, desde que a infração não tenha sido exportada. Rejeite-a com justificati
 
 **Quais infrações devem ser rejeitadas obrigatoriamente?**
 Imagem ilegível, placa não confirmada, enquadramento incorreto ou ausência de imagens obrigatórias.
+
+## Fluxo decisório
+
+```
+Infração aprovada na triagem → entra na fila de auditoria
+        │
+        ▼
+Auditor verifica: placa, velocidade, imagem, enquadramento
+        │
+        ▼
+Todos os critérios atendem aos requisitos legais?
+   ├── SIM → CONFIRMAR → segue para exportação
+   ├── NÃO → REJEITAR com observação → volta para triagem
+   └── DÚCIDA → OBSERVAR e escalar para supervisor
+```
+
+:::tip Taxa de amostragem
+Para volumes altos, audite no mínimo **10% das infrações** por equipamento por turno. Documente o motivo de rejeição para retroalimentação da equipe.
+:::
 Este documento foi criado com o **template local** (sem IA generativa).
 Revise e complete as se��es marcadas com ?? antes de publicar.
 :::

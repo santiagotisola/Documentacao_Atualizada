@@ -126,3 +126,18 @@ O administrador pode editar o cadastro do usuário e definir uma nova senha temp
 | **[Permissões](./permissoes)** | As permissões individuais do usuário podem complementar ou restringir o que o perfil permite |
 | **[Logs de Acesso](./logs-acesso)** | Todas as ações do usuário são registradas nos logs de acesso para auditoria e rastreabilidade |
 | **[Acessos por IP](./acessos-por-ip)** | Regras de restrição de IP podem ser configuradas por usuário ou grupo para aumentar a segurança de acesso |
+
+## Perfis recomendados
+
+| Perfil | Acesso sugerido | Quando usar |
+|--------|----------------|-------------|
+| **Administrador** | Total — todos os módulos | Gestor responsável pelo sistema |
+| **Triador** | Infrações (triagem) + Relatórios básicos | Analista de triagem diária |
+| **Auditor** | Infrações (auditoria) + Consultas | Responsável pela revisão final |
+| **Operador de Campo** | Operações + Monitoramento | Técnico de equipamentos |
+| **Gestor** | Relatórios + Medições + Dashboard | Fiscal do contrato |
+| **Leitura** | Apenas visualização | Auditor externo ou fiscal do órgão |
+
+:::tip Princípio do mínimo privilégio
+Configure cada usuário com apenas as permissões necessárias para sua função — reduz o risco de alterações indevidas.
+:::

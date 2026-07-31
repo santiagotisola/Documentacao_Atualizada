@@ -122,3 +122,16 @@ Um administrador com acesso direto ao servidor ou via IP autorizado deve remover
 | **Perfis de Acesso** | Complementa a segurança por perfil: o acesso por IP é uma segunda camada de controle além das permissões funcionais |
 | **Logs de Acesso** | Tentativas de acesso bloqueadas por IP são registradas nos logs, permitindo identificar ataques externos |
 | **Configurações do Sistema** | A ativação do módulo de Acessos por IP é controlada nas Configurações globais do AxHub |
+
+## Perfis recomendados
+
+| Perfil | Recomendado para IP fixo? | Justificativa |
+|--------|:------------------------:|---------------|
+| **Administrador** | Sim | Alto privilégio exige acesso controlado |
+| **Auditor externo** | Sim | Acesso temporário de IP corporativo definido |
+| **Operador de campo** | Não | Pode usar redes móveis com IP dinâmico |
+| **Triador** | Opcional | Se acessar sempre da mesma estação de trabalho |
+
+:::caution
+Não ative restrição por IP para usuários que acessam de redes residenciais ou móveis — causará bloqueios recorrentes.
+:::

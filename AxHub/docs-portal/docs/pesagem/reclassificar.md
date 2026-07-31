@@ -118,3 +118,26 @@ Não há prazo fixo no sistema, mas recomenda-se reclassificar **antes** de libe
 | **[Tipos de Veículos](../veiculos/tipos-veiculos)** | A reclassificação seleciona uma nova categoria de veículo; as categorias disponíveis são definidas no cadastro de tipos de veículos |
 | **[Infrações — Consulta](../infracoes/consulta-infracoes)** | Após reclassificação, a infração gerada (ou cancelada) reflete a nova categoria e pode ser verificada na consulta de infrações |
 | Relacionado | [Postos](./postos) | Posto de pesagem de origem |
+
+## Fluxo decisório
+
+```
+Resultado da pesagem = Excesso detectado
+        │
+        ▼
+Classificação automática está correta?
+   ├── SIM → Manter classificação e prosseguir
+   └── NÃO (ex: eixo extra não detectado)
+              │
+              ▼
+        Acessar Balança → Reclassificar
+              │
+              ▼
+        Com a nova categoria, o peso excede o PBT?
+          ├── SIM → Infração mantida com nova classificação
+          └── NÃO → Infração cancelada automaticamente
+```
+
+:::warning
+Reclassifique **antes** de liberar o veículo. Após o encerramento do ticket, somente o administrador pode reabrir.
+:::

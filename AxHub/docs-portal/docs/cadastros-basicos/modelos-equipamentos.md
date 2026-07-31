@@ -120,3 +120,25 @@ Não recomendado. Cada modelo deve estar vinculado ao fabricante correto. Modelo
 
 **O que fazer quando o INMETRO renova a portaria de um modelo?**
 Atualize os campos Portaria e Número da Portaria no cadastro do modelo. A partir da atualização, as novas infrações passarão a exibir a portaria vigente na tarja.
+
+## Exemplo prático
+
+**Cadastrando um novo modelo de radar com portaria INMETRO:**
+
+1. Consultar a portaria vigente no site inmetro.gov.br
+2. Acessar **Equipamentos → Modelos de Equipamentos** e clicar em **+ Novo**
+3. Preencher:
+
+| Campo | Exemplo |
+|-------|---------|
+| **Marca** | VELSIS |
+| **Modelo** | VSIS-OCR PRO |
+| **Número da Portaria** | 245/2022 |
+| **Portaria** | PORTARIA INMETRO/DIMEL Nº 245/2022 |
+| **Fabricante** | VELSIS Sistemas |
+
+4. Salvar e verificar nas tarjas de infrações se a portaria aparece corretamente
+
+:::tip
+Solicite ao fabricante o número exato da portaria INMETRO antes de cadastrar — portaria incorreta invalida os autos gerados.
+:::

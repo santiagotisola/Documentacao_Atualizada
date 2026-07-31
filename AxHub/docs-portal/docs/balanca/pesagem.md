@@ -124,3 +124,23 @@ Sim. Tickets com PBT dentro do limite são encerrados como Regulares. Somente ex
 | **[Tickets Abertos](../pesagem/ticket-aberto)** | Cada ciclo de pesagem gera um ticket aberto que aguarda liberação pelo operador |
 | **[Tickets Fechados](../pesagem/ticket-fechado)** | Após a liberação, o ticket migra para o histórico de tickets fechados |
 | **[Infrações — Triagem](../infracoes/triagem)** | Excesso de peso detectado pela balança gera infração que segue o fluxo normal de triagem e exportação |
+
+## Fluxo decisório
+
+```
+Veículo detectado na balança dinâmica
+        │
+        ▼
+Peso está acima do PBT + tolerância?
+   ├── NÃO → Ticket encerrado como Regular
+   └── SIM → Infração gerada → Ticket Aberto
+              │
+              ▼
+        Balança estática confirma o excesso?
+          ├── SIM → Liberar pesagem (com motivo) + Gerar Auto
+          └── NÃO → Reclassificar ou Descartar ticket
+```
+
+:::tip Checklist de início de turno
+Verifique: aferição válida, posto ativo, motivos cadastrados e tickets do turno anterior encerrados.
+:::

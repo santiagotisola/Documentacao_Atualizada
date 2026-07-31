@@ -121,3 +121,22 @@ Sequenciais com números duplicados ou fora de ordem causam rejeição dos lotes
 | **Falhas Sequenciais** | Relatório que monitora lacunas e duplicidades nos números de lote |
 | **Sequencial de Infração** | Complementar — enquanto este numera os lotes, o outro numera os autos individuais |
 | **Relatório de Infrações** | Permite rastrear quais infrações estão em cada lote exportado |
+
+## Exemplo prático
+
+**Configurando sequenciais antes de iniciar as operações:**
+
+1. Acessar **Sequenciais de Exportação** no menu lateral
+2. Criar um sequencial para **cada tipo de infração**:
+
+| Tipo de Infração | Sequencial Inicial | Até |
+|-----------------|:-----------------:|-----|
+| Excesso de PBT | 1 | 99.999 |
+| Excesso de Eixo | 1 | 99.999 |
+| Excesso de Eixo/PBT | 1 | 99.999 |
+
+3. Confirmar com o órgão autuador se há exigência de faixas específicas antes de salvar
+
+:::warning
+A ausência de qualquer sequencial bloqueia a exportação do tipo correspondente. Configure os 3 antes de iniciar.
+:::

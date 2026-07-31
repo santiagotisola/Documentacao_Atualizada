@@ -139,3 +139,25 @@ Sim. A inativação impede o uso em novos tickets, mas não afeta tickets que j�
 
 **Preciso criar motivos separados para pesagem e liberação?**
 Sim. O campo **Tipo** separa os motivos em categorias (Pesagem e Liberação). Manter a separação correta garante relatórios gerenciais precisos.
+
+## Fluxo decisório
+
+```
+Pesagem concluída — resultado definido
+        │
+        ▼
+Veículo dentro do limite de PBT?
+   ├── SIM → Encerrar ticket como Regular
+   └── NÃO (excesso detectado)
+              │
+              ▼
+        Motorista fará o quê?
+          ├── Pagar multa no local → Liberar pesagem (motivo: Pagamento)
+          ├── Descarregar excesso → Liberar pesagem (motivo: Descarga parcial)
+          ├── Apresentar defesa → Liberar pesagem (motivo: Recurso)
+          └── Reclassificar veículo → Reclassificar e recalcular PBT
+```
+
+:::tip
+Configurar motivos específicos para cada situação permite ao gestor analisar padrões de liberação e identificar a necessidade de treinamento da equipe.
+:::

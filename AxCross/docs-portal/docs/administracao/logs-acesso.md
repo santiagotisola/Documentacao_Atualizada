@@ -130,3 +130,16 @@ Filtre por **Status = Falha** e identifique o IP recorrente. Se o padrão indica
 | **Login** | Cada login e logout gera uma entrada no log com IP e resultado |
 | **Configurações → Perfis de Acesso** | Logs com muitos acessos negados podem indicar permissão insuficiente no perfil |
 | **Relatórios** | Exportações de relatórios geram entradas do tipo **Exportar** para rastreabilidade |
+
+## Perfis recomendados
+
+| Perfil | Permissão necessária | Caso de uso |
+|--------|---------------------|-------------|
+| **Administrador** | `logaccess.index` + todos os filtros | Auditoria completa do sistema |
+| **Gestor de segurança** | `logaccess.index` + filtro por falhas | Monitorar tentativas de acesso não autorizado |
+| **Supervisor** | `logaccess.index` + filtro por usuário | Auditar produção da equipe |
+| **Auditor externo** | `logaccess.index` somente leitura | Auditoria de conformidade |
+
+:::tip Revisão semanal
+Revise semanalmente os logs com filtro **Status = Falha** e horários incomuns — detecta acessos suspeitos antes que causem dano.
+:::

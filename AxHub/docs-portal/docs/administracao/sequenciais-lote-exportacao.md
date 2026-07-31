@@ -138,3 +138,22 @@ Não é recomendável. O órgão autuador pode recusar lotes com número já usa
 | **[Falhas Sequenciais](../relatorios/falhas-sequenciais)** | Verifique o relatório de Falhas Sequenciais antes de exportar para garantir que não há lacunas na numeração de lotes |
 | **[Sequenciais de Infrações](./sequenciais-infracoes)** | Os sequenciais de lote e de infrações são configurações separadas, mas ambos devem estar corretos para a exportação ser aceita |
 | **[Lote de Exportação](../glossario/lote-exportacao)** | O glossario explica o conceito de lote e sua importância legal na transmissão de infrações ao órgão autuador |
+
+## Exemplo prático
+
+**Configurando sequenciais de lote antes de iniciar as exportações:**
+
+1. Acessar **Configurações → Sequenciais de Lote de Exportação** e clicar em **+ Novo**
+2. Criar um sequencial para cada órgão destinatário:
+
+| Órgão | Sequencial Inicial | Até |
+|-------|:-----------------:|-----|
+| DETRAN Estadual | 1 | 99.999 |
+| SENATRAN | 1 | 99.999 |
+
+3. Antes de exportar: verificar o **Relatório de Falhas de Sequenciais**
+4. Após exportar: guardar o protocolo de recebimento por no mínimo 5 anos
+
+:::warning
+Nunca edite o número do próximo lote manualmente. Se o órgão rejeitar, reenvie com o **mesmo** número, não gere novo.
+:::

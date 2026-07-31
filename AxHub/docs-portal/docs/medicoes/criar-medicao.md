@@ -130,3 +130,17 @@ Interrupções não registradas antes da geração não entram no cálculo. Regi
 | **[Interrupções](./interrupcoes)** | Todas as interrupções do período precisam estar registradas antes de gerar a medição para que o cálculo de disponibilidade seja correto |
 | **[Índices de Performance](./indices-performance)** | Os índices vinculados ao contrato são calculados automaticamente durante a geração e exibidos no boletim |
 | **[Medições Finalizadas](./medicoes-finalizadas)** | Após a finalização, a medição fica disponível no histórico de Medições Finalizadas para consulta e exportação |
+
+## Ciclo mensal
+
+| Dia | Atividade |
+|-----|----------|
+| **1-5 do mês** | Registrar interrupções pendentes do mês anterior |
+| **5-10 do mês** | Gerar a medição em **Medição → Nova Medição** |
+| **10 do mês** | Revisar índices: disponibilidade, OCR e volume de infrações |
+| **Até prazo contratual** | Exportar Boletim PDF e enviar ao contratante |
+| **Após envio** | Arquivar cópia do boletim por no mínimo 5 anos |
+
+:::warning
+Interrupções não registradas **antes** da geração da medição não entram no cálculo. Registre em tempo real.
+:::

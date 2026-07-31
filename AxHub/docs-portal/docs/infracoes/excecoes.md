@@ -130,3 +130,22 @@ Acesse **Infrações → Consulta** com filtro **Status = Descartada** e filtre 
 | **[Motivos de Descarte](../administracao/motivos-descartes)** | O motivo de descarte aplicado pelas exceções é configurado no módulo de Motivos de Descarte da Administração |
 | **[Infrações Descartadas](./infracoes-descartadas)** | Infrações descartadas por exceção ficam acessíveis nesta tela para consulta e auditoria |
 | **[Enquadramentos](../administracao/enquadramentos)** | Exceções por classificação de veículo dependem dos enquadramentos configurados para o equipamento |
+
+## Fluxo decisório
+
+```
+Veículo registrado na importação
+        │
+        ▼
+Existe regra de exceção ativa para este veículo?
+   ├── NÃO → Infração entra na fila de triagem
+   └── SIM → Regra está dentro da vigência?
+                  ├── NÃO → Infração entra na fila de triagem
+                  └── SIM → Infração descartada automaticamente
+                             (motivo configurado na regra)
+```
+
+**Antes de criar uma exceção, confirme:**
+1. Existe embasamento legal documentado (decreto, portaria, ato)?  
+2. Qual a data de vencimento da autorização?  
+3. O motivo de descarte está configurado em [Motivos de Descarte](../administracao/motivos-descartes)?

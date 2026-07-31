@@ -116,3 +116,18 @@ Sim. Cada índice pode ser configurado com metas específicas por posto ou por g
 | **Criar Medição** | O boletim gerado inclui os índices calculados para validação pelo contratante |
 | **Interrupções** | Impactam diretamente o índice de disponibilidade, que é monitorado aqui |
 | **Processamento de Imagens** | A taxa OCR registrada pelos equipamentos alimenta o índice de reconhecimento do contrato |
+
+## Ciclo mensal
+
+Os índices são cadastrados uma vez e calculados automaticamente a cada medição:
+
+| Etapa | Ação |
+|-------|------|
+| **Antes de iniciar** | Cadastrar todos os índices exigidos pelo contrato |
+| **Após aditivo contratual** | Atualizar metas conforme nova cláusula |
+| **Após gerar medição** | Revisar boletim — índices abaixo da meta indicam não-conformidade |
+| **Após não-conformidade** | Documentar causa e ações corretivas para apresentar ao contratante |
+
+:::tip
+Verifique mensalmente se os índices correspondem ao contrato vigente — aditivos não aplicados geram boletins incorretos.
+:::

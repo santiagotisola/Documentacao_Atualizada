@@ -136,3 +136,16 @@ Interrupções Preventivas (manutenções programadas e comunicadas) geralmente 
 | **Medições → Criar Medição** | As interrupções registradas impactam diretamente o índice de disponibilidade do boletim |
 | **Operações → Eventos de Equipamentos** | Eventos técnicos devem ser espelhados aqui como interrupções quando impactam o SLA |
 | **Monitoramento Online** | Falhas detectadas no monitoramento são o gatilho para abertura das interrupções |
+
+## Ciclo mensal
+
+| Quando | Ação |
+|--------|------|
+| **Ao detectar falha** | Registrar imediatamente com Data/Hora Início exata |
+| **Ao normalizar** | Preencher Data/Hora Fim no registro |
+| **Antes de gerar medição** | Revisar todas as interrupções do período |
+| **Após geração** | Confirmar que disponibilidade reflete as paradas registradas |
+
+:::warning
+Interrupções registradas **após** a geração da medição não são computadas. Registre sempre em tempo real.
+:::

@@ -125,3 +125,17 @@ A medição foi reaberta por um supervisor e está aguardando nova finalização
 | **[Contratos](./contratos)** | Cada medição finalizada está vinculada a um contrato e comprova o cumprimento do SLA do período |
 | **[Índices de Performance](./indices-performance)** | Os índices calculados na medição são exibidos no boletim exportado e determinam a conformidade contratual |
 | **[Medições — Interrupções](./interrupcoes)** | As interrupções registradas no período são consideradas no cálculo de disponibilidade exibido na medição finalizada |
+
+## Ciclo mensal
+
+| Momento | Ação na tela de Medições Finalizadas |
+|---------|--------------------------------------|
+| **Início do mês** | Verificar que a medição do mês anterior foi finalizada |
+| **Após geração** | Exportar o boletim em PDF e encaminhar ao contratante |
+| **Em caso de contestação** | Solicitar reabertura ao supervisor para correção |
+| **Após correção** | Finalizar novamente e enviar versão revisada |
+| **Auditoria** | Exportar histórico completo de medições do período |
+
+:::tip
+Exporte e arquive o boletim PDF de cada medição finalizada imediatamente após o envio — guarde por no mínimo 5 anos como comprovante de conformidade contratual.
+:::

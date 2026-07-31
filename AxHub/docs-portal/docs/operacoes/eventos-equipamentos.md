@@ -126,3 +126,25 @@ Sim. Informe as datas corretas de início e fim. O sistema calculará o impacto 
 
 **Um evento sem data de fim impacta a disponibilidade indefinidamente?**
 Sim. Eventos de falha sem data de fim são tratados como em andamento. Sempre informe a data de fim após a resolução para fechar corretamente o cálculo de indisponibilidade.
+
+## Exemplo prático
+
+**Registrando uma falha de equipamento com impacto no SLA:**
+
+1. Detectar que o equipamento CAM-001 parou de comunicar às 14h30
+2. Acessar **Operações → Eventos de Equipamentos** e clicar em **+ Novo Evento**
+3. Preencher:
+
+| Campo | Valor |
+|-------|-------|
+| **Equipamento** | CAM-001 |
+| **Tipo** | Falha |
+| **Data/Hora Início** | 15/07/2026 14:30 |
+| **Descrição** | Perda de heartbeat — possivel queda de energia |
+
+4. Após restauração às 16h45: preencher **Data/Hora Fim = 15/07/2026 16:45**
+5. Registrar a interrupção correspondente em **Medição → Interrupções** para impactar o SLA
+
+:::warning
+Sempre registre a **Data/Hora Fim** após a resolução. Eventos sem fim são tratados como em andamento e inflam a indisponibilidade.
+:::

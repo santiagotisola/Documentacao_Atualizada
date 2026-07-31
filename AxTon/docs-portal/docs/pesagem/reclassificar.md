@@ -107,3 +107,26 @@ A reclassificação só está disponível para tickets em aberto (não exportado
 | **Cadastros → Classificação de Veículos** | As classificações disponíveis para seleção na reclassificação são mantidas aqui |
 | **Relatório de Infrações** | Após reclassificar, verifique se a infração foi atualizada corretamente no relatório |
 | **Exportação de Infrações** | Tickets reclassificados não podem ser alterados se já foram exportados |
+
+## Fluxo decisório
+
+```
+Resultado da pesagem = excesso detectado
+        │
+        ▼
+Classificação automática do veículo está correta?
+   ├── SIM → Manter e liberar o ticket
+   └── NÃO (ex: reboque não detectado pelo sensor)
+              │
+              ▼
+        Acessar Tickets de Pesagens → Reclassificar
+              │
+              ▼
+        Com a nova categoria, o peso excede o PBT?
+          ├── SIM → Infração mantida com nova classificação
+          └── NÃO → Infração cancelada automaticamente
+```
+
+:::warning
+Reclassifique **antes** de exportar o ticket. Após exportado, somente via procedimento administrativo com o órgão autuador.
+:::

@@ -136,3 +136,18 @@ O dado bruto da consulta não tem valor probatório isolado. O documento oficial
 | **Monitoramento Online** | Complementa a consulta histórica: enquanto o Monitoramento exibe passagens em tempo real, este módulo exibe o histórico acumulado |
 | **Relatório de Passagens** | Alternativa com mais filtros e exportação avançada para análises de volume em múltiplas placas |
 | **Consulta de Infrações** | Após identificar as passagens de uma placa, use a Consulta de Infrações para verificar quais geraram auto de infração |
+
+## Exemplo prático
+
+**Cidadão contesta auto de infração e afirma que a foto está errada:**
+
+1. Solicitar o número do auto e a placa ao cidadão
+2. Acessar **Operações → Consulta de Placas** com a placa informada
+3. Definir o período: 1 dia antes e 1 dia depois da data da infração
+4. Localizar a passagem pelo horário e confirmar a imagem capturada
+5. Se a imagem confirmar a irregularidade: orientar recurso formal no órgão autuador
+6. Se houver divergência de placa ou data: encaminhar ao auditor para reavaliação
+
+:::tip Dica operacional
+Combine a consulta histórica com o [Monitoramento Online](./monitoramento-online) para verificar se o veículo ainda circula na área — útil em casos de veículos suspeitos denunciados.
+:::

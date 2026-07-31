@@ -134,3 +134,22 @@ Provavelmente o código cadastrado não corresponde ao esperado pelo sistema do 
 | **Layouts de Arquivos** | O campo da forma de autuação é mapeado no layout de exportação configurado em **Administração → Layouts** |
 | **Triagem** | O operador seleciona ou confirma a forma de autuação ao validar a infração antes de incluí-la no lote |
 | **Sequenciais de Infrações** | A numeração sequencial dos autos é controlada por forma de autuação, garantindo unicidade por tipo |
+
+## Exemplo prático
+
+**Configurando formas de autuação para um contrato com DETRAN estadual:**
+
+1. Acesse **Configurações → Formas de Autuação** e clique em **+ Nova**
+2. Cadastre as formas exigidas pelo contrato:
+
+| Código | Descrição | Quando usar |
+|--------|-----------|-------------|
+| `AIT-E` | Auto de Infração Eletrônico | Infração confirmada na triagem |
+| `NOT-E` | Notificação Eletrônica | Fase de notificação prévia (se exigida) |
+
+3. Confirmar códigos com o layout de exportação fornecido pelo órgão autuador
+4. Testar em ambiente de homologação antes de ativar em produção
+
+:::warning
+Nunca altere o código de uma forma já usada em infrações exportadas — invalida a rastreabilidade dos autos.
+:::

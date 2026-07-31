@@ -108,3 +108,16 @@ Sim. O lote pode conter apenas as infrações com status Auditada até o momento
 | **[Layouts de Arquivos](../administracao/layouts-arquivos)** | O layout configurado determina o formato do arquivo exportado; órgãos diferentes exigem layouts diferentes |
 | **[Sequenciais de Lote](../administracao/sequenciais-lote-exportacao)** | O número sequencial do lote é gerado automaticamente conforme a configuração; duplicidade de sequencial causa rejeição |
 | **[Falhas Sequenciais](../relatorios/falhas-sequenciais)** | Verifique este relatório antes de exportar para identificar lacunas sequenciais que podem causar rejeição do lote |
+
+## Quando usar este relatório
+
+| Situação | Frequência recomendada |
+|----------|------------------------|
+| **Envio regular ao órgão autuador** | Diária ou conforme SLA contratual |
+| **Após auditoria de infrações** | Imediatamente ao atingir o lote mínimo exigido |
+| **Antes do vencimento de prazo** | Infrações próximas de 30 dias devem ser priorizadas |
+| **Reinício após falha técnica** | Assim que a pendência técnica for resolvida |
+
+:::warning Prazo de prescrição
+Infrações não exportadas em até 30 dias corridos da data de captura podem perder validade legal. Monitore o backlog diariamente para evitar prescrição.
+:::

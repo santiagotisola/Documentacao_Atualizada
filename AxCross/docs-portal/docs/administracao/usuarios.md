@@ -144,3 +144,17 @@ Não. Cada usuário possui apenas um perfil de acesso vinculado. Se precisar de 
 | **Configurações → Permissões** | As permissões do perfil determinam o que o usuário pode visualizar e fazer |
 | **Logs de Acesso** | Registra cada acesso e ação realizada pelo usuário para auditoria |
 | **Login** | O login cadastrado aqui é usado para autenticação na tela de Login |
+
+## Perfis recomendados
+
+| Perfil | Acesso sugerido | Função |
+|--------|----------------|--------|
+| **Administrador** | Total | Gestor do sistema e da equipe |
+| **Operador de Monitoramento** | Monitoramento Online + Alertas | Acompanhamento em tempo real no plantão |
+| **Analista / Investigador** | Painel Analítico + Relatórios | Análise histórica de veículos |
+| **Técnico de Campo** | Cadastros + Status equipamentos | Instalação e manutenção |
+| **Auditor externo** | Somente visualização | Auditoria de conformidade |
+
+:::tip Princípio do mínimo privilégio
+Atribua sempre o perfil com menor nível de acesso suficiente para a função. Consulte [Perfis de Acesso](perfis-acesso.md) para configurar as permissões de cada perfil.
+:::

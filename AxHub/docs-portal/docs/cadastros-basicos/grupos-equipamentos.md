@@ -122,3 +122,20 @@ Sim. Edite cada equipamento individualmente e altere o campo Grupo. Não há fun
 | **Dashboard** | O mapa exibe equipamentos agrupados por cor conforme o grupo cadastrado |
 | **Monitoramento Online** | Permite filtrar o status de equipamentos por grupo |
 | **Relatórios** | Dados de passagens e infrações podem ser filtrados por grupo para análise por projeto ou contrato |
+
+## Exemplo prático
+
+**Criando um grupo para organizar equipamentos de um novo contrato:**
+
+1. Acessar **Equipamentos → Grupos de Equipamentos** e clicar em **+ Novo**
+2. Preencher:
+   - **Nome**: `Contrato SINFRA 2026 — Piauí`
+   - **Cor**: Azul escénico (para diferenciar no mapa)
+3. Salvar o grupo
+4. Acessar cada equipamento do contrato em **Equipamentos → Equipamentos**
+5. Editar e selecionar o grupo recém-criado no campo **Grupo**
+6. Verificar no **Mapa do Dashboard** se os equipamentos aparecem com a cor correta
+
+:::tip
+Use uma cor distinta para cada contrato — facilita a identificação visual no mapa quando há múltiplos projetos simultâneos.
+:::

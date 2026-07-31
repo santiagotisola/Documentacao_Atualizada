@@ -125,3 +125,17 @@ Apli-que os filtros de placa e período, acesse a aba **Passagens** e exporte os
 | **Relatório de Passagens** | O painel aprofunda a análise de uma placa específica além do que o relatório oferece |
 | **Rastreamento de Placas** | Complementa o painel com visualização do trajeto georreferenciado |
 | **Grafos de Combôio** | Algoritmo de detecção de convôi usa dados das passagens analisadas no painel |
+
+## Quando usar este relatório
+
+| Situação | Frequência |
+|----------|------------|
+| **Investigação de veículo suspeito** | Imediata — placa e período da ocorrência |
+| **Reconstruir rota após incidente** | Após identificação da placa envolvida |
+| **Verificar padrão de deslocamento** | Quando o veículo é alvo de investigação |
+| **Compor laudo de boletim de ocorrência** | Para documentar passagens com imagem e horário |
+| **Identificar veículos em fuga** | Combinando Linha do Tempo + Rotas |
+
+:::tip Uso investigativo
+Combine as abas **Linha do Tempo** + **Rotas** para reconstruir completamente o deslocamento de um veículo em janelas de até 30 dias.
+:::

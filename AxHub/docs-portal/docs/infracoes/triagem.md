@@ -125,3 +125,24 @@ Sim. Use a ação **Reabrir** na tela de Triagem. A infração volta ao status P
 
 **O sistema valida automaticamente se a placa está correta na triagem?**
 O OCR faz a leitura automática, mas a confirmação visual é obrigatória pelo analista. Use a imagem de zoom de placa para confirmar.
+
+## Fluxo decisório
+
+```
+Infração capturada
+        │
+        ▼
+Imagem com qualidade suficiente?
+   ├── NÃO → Descartar (motivo: imagem ruim)
+   └── SIM → Placa legível e correta?
+                  ├── NÃO → Descartar (motivo: placa ilegível)
+                  └── SIM → Velocidade acima do limite legal?
+                                ├── NÃO → Descartar
+                                └── SIM → Enquadramento correto?
+                                              ├── NÃO → Corrigir e depois validar
+                                              └── SIM → VALIDAR → segue para Auditoria
+```
+
+:::warning Responsabilidade legal
+Cada infração validada pode gerar uma multa real ao condutor. Revise todos os critérios antes de validar.
+:::

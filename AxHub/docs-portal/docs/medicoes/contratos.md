@@ -126,3 +126,17 @@ O boletim de medição incluirá dados do equipamento incorreto. Corrija o vínc
 
 **Posso ter equipamentos em mais de um contrato simultaneamente?**
 Sim, desde que os períodos de vigência sejam diferentes. Equipamentos ativos em dois contratos simultâneos podem gerar duplicidade no boletim.
+
+## Ciclo mensal
+
+| Etapa | Quando | Ação |
+|-------|--------|------|
+| **1. Verificar vigência** | Dia 1 do mês | Confirmar status Ativo e metas corretas |
+| **2. Registrar interrupções** | Durante o mês | Lançar toda interrupção em [Interrupções](./interrupcoes) |
+| **3. Gerar medição** | Até dia 5 do mês seguinte | Criar em [Criar Medição](./criar-medicao) |
+| **4. Revisar índices** | Após geração | Comparar disponibilidade e OCR com as metas |
+| **5. Finalizar e enviar** | Conforme contrato | Exportar boletim PDF e enviar ao contratante |
+
+:::warning Prazo contratual
+Verifique no contrato o prazo máximo para entrega do Boletim — em geral entre 5 e 10 dias após o encerramento do mês.
+:::

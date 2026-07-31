@@ -126,3 +126,26 @@ Use a opção **Reclassificar** antes de liberar. A reclassificação recalcula 
 | **[Reclassificar](./reclassificar)** | A reclassificação é acionada a partir dos tickets abertos quando a categoria do veículo está incorreta |
 | **[Postos de Pesagem](./postos)** | O ticket está vinculado ao posto onde a pesagem ocorreu; o filtro por posto é essencial para equipes que gerenciam múltiplas localidades |
 | **[Motivos de Pesagem](./motivos)** | O motivo de liberação selecionado ao encerrar o ticket aberto determina o resultado registrado no ticket fechado |
+
+## Fluxo decisório
+
+```
+Veículo retido no posto com excesso detectado
+        │
+        ▼
+A classificação do veículo está correta?
+   ├── NÃO → Reclassificar primeiro
+              │
+              ▼
+          Ainda há excesso após reclassificar?
+            ├── NÃO → Liberar (sem infração)
+            └── SIM → Liberar com infração (motivo correto)
+   └── SIM → Qual a situação?
+              ├── Pagou multa → Liberar (pagamento)
+              ├── Descarregou carga → Liberar (descarga)
+              └── Recurso formal → Liberar (recurso)
+```
+
+:::warning Retenção > 4 horas
+Comunique o supervisor imediatamente. Após 4h o motorista tem direito à alimentação e após 24h pode exigir remoção para pátio credenciado.
+:::

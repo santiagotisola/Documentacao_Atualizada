@@ -176,3 +176,23 @@ O sequencial de Infração é utilizado na exportação de Infrações para o ó
 
 - [Sequencial de Exportação](./sequencial-exportacao) — Numeração dos lotes de exportação
 - [Configurações do Sistema](../sistema/configuracoes) — Tolerâncias e enquadramentos de infração
+
+## Exemplo prático
+
+**Configurando sequenciais de infração para nova operação:**
+
+1. Acessar **Sequenciais de Infração** no menu lateral
+2. Criar um sequencial por tipo:
+
+| Tipo | Número Inicial | Até | Prefixo |
+|------|:--------------:|-----|:-------:|
+| Excesso de PBT | 1 | 99.999 | PBT |
+| Excesso de Eixo | 1 | 99.999 | EX |
+| Excesso Eixo/PBT | 1 | 99.999 | EP |
+
+3. Confirmar os números iniciais com o órgão autuador
+4. Verificar após as primeiras infrações se a numeração está correta no boletim
+
+:::tip
+Monitore mensalmente o valor atual vs. o limite máximo — crie nova série antes de esgotar para não bloquear a numeração.
+:::

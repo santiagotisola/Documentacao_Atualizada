@@ -199,6 +199,22 @@ Todos os Veículos vinculados terão a data de expiração removida (`sem prazo`
 **O sino mostra Veículos desabilitados?**
 Não. O sino de vigência exibe apenas Veículos **habilitados** que estejam expirando nas próximas 24 horas ou já expirados.
 
+## Exemplo prático
+
+**Configurando vigência de 30 dias para veículos roubados:**
+
+1. Acesse **Veículos Monitorados → Tipos de Ocorrências**
+2. Crie ou edite o tipo **Roubado** com **Prazo de Expiração = 30 dias**
+3. Ao cadastrar o veículo, o sistema calcula automaticamente a data limite
+4. O sino de vigência 🔔 passará a alertar 24h antes do vencimento
+5. Para renovar: editar o veículo e atualizar a **Data de Expiração** manualmente
+
+| Situação | Data de Expiração | Gera Alerta? |
+|----------|--------------------|--------------|
+| Dentro da vigência + Habilitado | Futura | Sim |
+| Expirado + Habilitado | Passada | Não |
+| Qualquer + Desabilitado | Qualquer | Não |
+
 ## Erros comuns
 
 | Erro | Causa | Solução |
