@@ -98,6 +98,17 @@ Escolha cores distintas para cada grupo, facilitando a identificação visual do
 | Cor não exibida no mapa | Nenhuma cor selecionada | Editar grupo e definir uma cor |
 | Equipamentos do grupo não monitorados | Opção "Desabilitar Monitoramento" ativa | Desmarcar a opção no cadastro do grupo |
 
+## Perguntas frequentes
+
+**Como vincular um equipamento a um grupo?**
+Acesse o cadastro do equipamento (Equipamentos → Equipamentos), edite o registro e selecione o grupo no campo correspondente. A tabela dentro do cadastro do grupo é apenas de leitura.
+
+**O que acontece ao desabilitar o monitoramento de um grupo?**
+Os equipamentos do grupo param de aparecer no painel de status em tempo real. Infrações e passagens continuam sendo registradas normalmente.
+
+**Posso mover todos os equipamentos de um grupo para outro?**
+Sim. Edite cada equipamento individualmente e altere o campo Grupo. Não há função de transferência em massa.
+
 ## Relacionado
 
 - [Equipamentos](./equipamentos)

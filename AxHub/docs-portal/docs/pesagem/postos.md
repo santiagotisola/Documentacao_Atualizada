@@ -118,3 +118,14 @@ Após criar o posto, vincule os **Equipamentos** a ele em **Configurações → 
 | **Operações** | Equipamentos vinculados ao posto são usados nas operações de fiscalização |
 | **Medições** | O boletim de medição agrupa os indicadores de disponibilidade e volume por posto |
 | **Relatórios** | Relatórios de passagens e infrações permitem filtrar por posto para visão localizada |
+
+## Perguntas frequentes
+
+**O posto precisa estar vinculado a um contrato para registrar pesagens?**
+Sim. Sem vínculo a um contrato, as pesagens do posto não são contabilizadas no boletim de medição.
+
+**Como inativar um posto sem perder o histórico de pesagens?**
+Alterando o status para **Inativo**. O histórico de tickets é preservado; apenas novas pesagens deixam de ser associadas ao posto.
+
+**O posto precisa estar cadastrado antes ou depois do equipamento?**
+O posto deve ser cadastrado primeiro. Em seguida, vincule os equipamentos ao posto no cadastro de cada equipamento.

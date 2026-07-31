@@ -99,3 +99,14 @@ Os tipos de veículos são usados em conjunto com **Espécies** e **Classificaç
 - Mantenha a consistência com as **Espécies** e **Classificações** vinculadas — um tipo sem classificação correspondente impede o enquadramento correto
 - Não exclua tipos associados a infrações históricas; inative-os para preservar a rastreabilidade
 - Ao atualizar um tipo, revise os enquadramentos que dependem dele para evitar inconsistências nos lotes futuros
+
+## Perguntas frequentes
+
+**Qual a diferença entre Tipo de Veículo e Espécie?**
+Espécie é a classificação oficial do DENATRAN (do CRV). Tipo é a categorização operacional usada internamente no sistema para filtros e enquadramentos.
+
+**Um tipo inativo ainda aparece nos relatórios históricos?**
+Sim. Inativar um tipo apenas impede seu uso em novos cadastros; os registros históricos que o utilizaram são preservados.
+
+**Preciso cadastrar tipos personalizados ou os padrão DENATRAN são suficientes?**
+Os tipos padrão pré-cadastrados cobrem a maioria dos casos. Crie tipos personalizados somente se o órgão autuador exigir categorias específicas não contempladas na tabela padrão.

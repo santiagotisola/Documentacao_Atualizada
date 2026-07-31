@@ -109,3 +109,14 @@ Os benchmarks vão variar conforme o tipo de operação. Use a média histórica
 - [Triagem](../infracoes/triagem)
 - [Motivos de Descarte](../administracao/motivos-descartes)
 - [Logs de Acesso](../controle-acesso/logs-acesso)
+
+## Perguntas frequentes
+
+**Taxa de descarte muito baixa de um analista deve preocupar?**
+Sim. Taxa abaixo de 5% pode indicar que o analista está aprovando imagens sem critério suficiente. O supervisor deve revisar uma amostra das triagens desse analista.
+
+**Como saber se um analista processou menos porque estava em férias ou afastamento?**
+Cruce com os Logs de Acesso para verificar os dias em que o usuário acessou o sistema. Dias sem acesso justificam produção zero.
+
+**Qual o método correto para comparar produtividade entre analistas?**
+Use a métrica **Média/Hora** em vez do total absoluto. Analistas com turnos diferentes têm totais distintos, mas a média por hora é comparável.

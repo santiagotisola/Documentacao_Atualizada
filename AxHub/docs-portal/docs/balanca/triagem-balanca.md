@@ -83,3 +83,14 @@ Cadastro de motivos utilizados no encerramento dos tickets de pesagem. Acessado 
 | **Relatório de Passagens** | Tickets fechados alimentam o relatório de passagens com os dados da pesagem |
 | **Medições** | O volume de pesagens por posto é contabilizado nos boletins de medição do contrato |
 | **Infrações** | Tickets com excesso de peso geram infrações que seguem o fluxo normal de triagem e exportação |
+
+## Perguntas frequentes
+
+**O operador de balança precisa acessar o módulo de Infrações separadamente?**
+Sim. Tickets com excesso de peso geram infrações que passam pelo fluxo normal de triagem no módulo Infrações. O operador de balança e o triador de infrações podem ser funcionários diferentes.
+
+**É possível liberar um ticket de pesagem sem selecionar um motivo?**
+Não. O campo Motivo é obrigatório na tela de liberação. Se não houver motivos cadastrados, o sistema bloqueará a operação. Cadastre os motivos em Balança → Motivos.
+
+**Quanto tempo leva para um ticket de excesso de peso virar uma infração exportada?**
+Depende do fluxo da equipe. Após o encerramento do ticket, a infração aguarda triagem, auditoria e inclusão no próximo lote de exportação.

@@ -119,6 +119,17 @@ A alteração do PBT de uma classificação impacta diretamente o cálculo de In
 O valor do peso máximo deve estar em conformidade com a legislação vigente para cada categoria de Veículo Consulte a regulamentação do órgão responsável antes de cadastrar ou alterar esses valores.
 :::
 
+## Perguntas frequentes
+
+**Posso alterar o PBT de uma classificação já em uso?**
+Sim, mas a alteração impacta imediatamente o cálculo de infrações futuras. Consulte a legislação vigente e comunique a equipe antes de modificar o PBT regulamentado.
+
+**Qual a diferença entre Excesso de PBT e Excesso de Eixo?**
+Excesso de PBT ocorre quando o peso total do veículo supera o limite da classificação. Excesso de Eixo ocorre quando o peso em um ou mais eixos supera o limite por eixo, independentemente do PBT total.
+
+**Uma classificação inativa pode ser usada em pesagens?**
+Não. Classificações inativas não aparecem nas opções de classificação durante a pesagem. Reative a classificação se ela ainda for utilizada.
+
 :::tip Hierarquia de cadastros
 As classificações de Veículos devem ser cadastradas antes do registro de operações de pesagem, pois são utilizadas na identificação do tipo de Veículo fiscalizado.
 :::

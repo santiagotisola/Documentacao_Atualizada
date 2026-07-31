@@ -98,6 +98,17 @@ Uma operação ativa vincula todos os registros de passagem dos equipamentos sel
 | Relacionado | [Arcos](../administracao/arcos) | Pontos de fiscalizacao |
 | Relacionado | [Afericoes](./afericoes) | Controle de afericoes |
 
+## Perguntas frequentes
+
+**Posso vincular o mesmo equipamento a duas operações simultâneas?**
+Não é recomendado. Operações simultâneas no mesmo equipamento podem gerar conflito nos dados de passagem. Encerre a operação anterior antes de criar uma nova.
+
+**O que acontece com passagens registradas antes do início oficial da operação?**
+Passagens fora do período da operação não são associadas a ela. Certifique-se de que a data de início está correta no momento do cadastro.
+
+**A operação precisa ser encerrada para exportar as infrações?**
+Não obrigatoriamente. É possível exportar infrações de operações em andamento, mas encerrar a operação delimita claramente o período e facilita a rastreabilidade.
+
 ## Checklist pré-operação
 
 - [ ] Verificar aferição INMETRO válida de todos os equipamentos da operação

@@ -98,6 +98,17 @@ Crie perfis com o mínimo de permissões necessárias (princípio do mínimo pri
 | **Descrição** | Sim | Nome descritivo do perfil (ex.: Administrador, Operador, Auditor) |
 | **Ativo** | Sim | Define se o perfil estará disponível para atribuição a Usuários |
 
+## Perguntas frequentes
+
+**Posso usar o mesmo perfil para funções muito diferentes?**
+Não é recomendado. Crie perfis separados para Operação, Auditoria e Administração. Perfis genéricos com múltiplas funções dificultam a rastreabilidade e aumentam o risco de acessos indevidos.
+
+**O que acontece quando excluo um perfil com usuários vinculados?**
+O sistema bloqueia a exclusão. Desvincule todos os usuários do perfil antes de removê-lo. Prefira inativar perfis obsoletos em vez de excluir.
+
+**Com que frequência devo revisar os perfis e permissões?**
+Revise sempre que houver troca de colaboradores, mudanças de escopo ou atualizações do sistema. Permissões obsoletas são um risco de segurança.
+
 ### Passo a passo — Cadastrar perfil de acesso
 
 1. Na listagem, clique em **+ Novo**

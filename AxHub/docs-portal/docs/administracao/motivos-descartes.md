@@ -106,3 +106,14 @@ está tela ainda não possui screenshot cadastrada. Será adicionada em breve.
 | **Infrações Descartadas** | Exibe as infrações rejeitadas agrupadas por motivo, permitindo análise de padrões |
 | **Processamento por Usuário** | Cruza motivos de descarte com o analista responsável para avaliar consistência na triagem |
 | **Dashboard** | Exibe o ranking dos Top Motivos de Descarte como indicador de qualidade operacional |
+
+## Perguntas frequentes
+
+**Posso excluir um motivo que não é mais utilizado?**
+Não recomendado. Inative-o para preservar o histórico de infrações descartadas com esse motivo.
+
+**A alta taxa de descarte por ‘Imagem ilegível’ indica problema no equipamento?**
+Sim. Taxa acima de 10% desse motivo geralmente indica câmera suja, desalinhada ou com defeito. Agende manutenção preventiva.
+
+**Posso personalizar motivos além dos padrão?**
+Sim. Crie motivos específicos para o contexto da operação, desde que sejam claros e documentados para facilitar auditorias.

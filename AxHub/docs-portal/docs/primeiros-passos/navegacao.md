@@ -93,3 +93,14 @@ Use os atalhos nos ícones do Dashboard para acessar as funcionalidades mais usa
 |------|--------|-----------|
 | Anterior | [Dashboard](./dashboard) | Tela principal |
 | Relacionado | [Login](./login) | Acesso ao sistema |
+
+## Perguntas frequentes
+
+**Um módulo não aparece no menu lateral. O que verificar?**
+Módulos ausentes indicam que o perfil de acesso do usuário não tem permissão para aquele módulo. Solicite ao administrador a revisão das permissões em **Controle de Acesso → Permissões**.
+
+**Como voltar ao Dashboard sem navegar pelo menu?**
+Clique no logo do AxHub no topo da página. Esta ação sempre retorna ao Dashboard independente de onde você estiver no sistema.
+
+**O menu lateral desapareceu. O que fazer?**
+O menu pode estar recolhido. Clique no ícone de hamburguer (três linhas) no canto superior esquerdo para expá-lo. Em telas menores, ele recolhe automaticamente.

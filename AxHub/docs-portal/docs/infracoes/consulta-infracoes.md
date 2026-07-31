@@ -95,3 +95,14 @@ Clique em qualquer linha para abrir os detalhes completos da Infração incluind
 | Fluxo | [Exportacao](./exportacao) | Etapa de envio |
 | Fluxo | [Infracoes Descartadas](./infracoes-descartadas) | Registros descartados |
 | Glossario | [Infracao](../glossario/infracao) | Definicao tecnica |
+
+## Perguntas frequentes
+
+**Como localizar rapidamente uma infração pelo número do auto?**
+Use o filtro **Número Auto** ou **Placa** com o período aproximado. O campo de busca aceita número parcial.
+
+**Infração com status ‘Aguardando Triagem’ por mais de 24h. O que verificar?**
+Verifique se há analistas disponíveis e se o equipamento está enviando dados corretamente. Um grande acumulado pode indicar gargalo no fluxo de triagem.
+
+**Posso alterar o enquadramento de uma infração diretamente nesta tela?**
+Não. Alterações de enquadramento só são possíveis durante a triagem. Esta tela é apenas de consulta e visualização.

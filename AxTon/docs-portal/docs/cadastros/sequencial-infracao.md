@@ -108,6 +108,17 @@ Quando o número atingir o limite, edite o sequêncial com um novo número inici
 | **Editar** | Alterar os dados de um sequencial existente (ícone lápis) |
 | **Excluir** | Remover um sequencial do sistema (ícone X) |
 
+## Perguntas frequentes
+
+**O número do sequencial de infração é o mesmo número do auto?**
+Sim. O sequencial define a numeração do auto de infração. Configure os números de início alinhados com o órgão autuador para evitar duplicidades na base.
+
+**O que acontece quando o sequencial é esgotado?**
+Novas infrações do tipo correspondente não receberão numeração e ficarão bloqueadas. Monitore o valor atual mensalmente e amplie o limite antes do esgotamento.
+
+**Posso editar o sequencial inicial manualmente?**
+Não recomendado. Editar manualmente sem verificar o histórico pode gerar números duplicados. Qualquer alteração deve ser comunicada ao órgão autuador.
+
 ## Cadastro
 
 ![Tela de Sequencial de Infração — Dados](../img/sequencial-infracao-dados.png)

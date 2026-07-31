@@ -118,4 +118,15 @@ O token é utilizado pelo fabricante para autenticar as chamadas de API ao AxHub
 | **Modelos de Equipamentos** | Cada modelo é vinculado a um fabricante; sem esse vínculo o modelo não aparece no cadastro de equipamentos |
 | **Equipamentos** | O fabricante é exibido na listagem e usado como filtro de busca |
 | **API de Captura** | O token do fabricante autentica o envio de passagens e imagens via API |
+
+## Perguntas frequentes
+
+**O que acontece se o token do fabricante for regenerado sem aviso?**
+O equipamento para de enviar dados imediatamente, pois o token anterior é invalidado. Comunique o novo token ao fabricante por canal seguro antes de regenerar.
+
+**Posso ter vários fabricantes com o mesmo slug?**
+Não. O slug deve ser único. Slugs duplicados causam conflito na autenticação da API e im pedem o envio de dados.
+
+**As imagens criptografadas do fabricante não aparecem no sistema. O que verificar?**
+Confira se a opção “Imagem Criptografada” está marcada corretamente no cadastro do fabricante, conforme a documentação técnica do dispositivo.
 | **Relatórios** | Permite filtrar relatórios por fabricante para análise de desempenho por marca |

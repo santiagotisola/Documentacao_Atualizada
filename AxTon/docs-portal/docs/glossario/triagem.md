@@ -78,6 +78,17 @@ Infrações aprovadas com erros de placa ou classificação podem ser invalidada
 Para realizar triagem: `triagem.index` e `triagem.auditar`
 :::
 
+## Perguntas frequentes
+
+**Qual o prazo máximo para concluir a triagem de uma infração de pesagem?**
+O prazo deve ser controlado pela equipe gestora. Infrações com mais de 24h sem triagem aumentam o risco de prescrição legal. Monitore o backlog diariamente.
+
+**O que acontece quando uma infração é descartada sem motivo correto?**
+A rastreabilidade fica comprometida. O supervisor não consegue identificar a causa-raiz dos descartes, dificultando a melhoria do processo. Sempre selecione o motivo correto.
+
+**Um analista pode reabrir uma infração já descartada por outro?**
+Depende das permissões configuradas no perfil. Normalmente apenas supervisores ou auditores têm permissão para reabrir registros descartados.
+
 ## Glossário relacionado
 
 - [Pesagem](./pesagem) — Processo anterior à triagem

@@ -107,3 +107,14 @@ Registros com status **Erro** podem ser reenviados manualmente. Verifique a disp
 - [Webhooks](../administracao/webhooks)
 - [Exportação de Infrações](../infracoes/exportacao)
 - [Lotes de Importação](./lote-importacao)
+
+## Perguntas frequentes
+
+**Posso reenviar um registro que já foi recebido com sucesso pelo destino?**
+Não recomendado. Verificar o histórico antes de usar **Reenviar** — registros duplicados no destino podem causar dupla multa ou rejeição do lote completo.
+
+**Erro 401 persiste mesmo após atualizar o token. O que verificar?**
+Verifique se o token foi salvo corretamente em Configurações → Webhooks e se o sistema destino já aplicou a atualização. Alguns sistemas cacheêm tokens por até 15 minutos.
+
+**Os logs de envios são retidos por quanto tempo?**
+A retenção depende da política de armazenamento do servidor. Exporte mensalmente para arquivo externo como evidência de conformidade com o órgão contratante.

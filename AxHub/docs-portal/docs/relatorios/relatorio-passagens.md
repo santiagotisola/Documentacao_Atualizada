@@ -95,3 +95,14 @@ Para localizar passagens de uma placa suspeita, use o filtro **Placa** em combin
 - [Processamento por Usuário](./processamento-por-usuario)
 - [Consulta de Placas](../operacoes/consulta-placas)
 - [Fluxo Diário de Veículos](./fluxo-diario-veiculos)
+
+## Perguntas frequentes
+
+**Qual a diferença entre o Relatório de Passagens e a Consulta de Placas?**
+A Consulta de Placas busca passagens de uma placa específica em todos os equipamentos. O Relatório de Passagens mostra todas as passagens de um período com filtros mútiplos e exportação em massa.
+
+**Passagem com confiança OCR abaixo de 80% gerou uma infração. É válida?**
+A validade depende da verificação visual. Se a placa for legível na imagem, a infração pode ser mantida. Caso contrário, descarte na triagem.
+
+**O relatório inclui passagens de todos os equipamentos ou apenas os vinculados à operação?**
+Por padrão inclui todos. Use o filtro **Equipamento** ou **Operação** para restringir ao escopo desejado.

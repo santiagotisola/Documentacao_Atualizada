@@ -101,3 +101,14 @@ Antes de cadastrar um Equipamento certifique-se de que o **Fabricante**, **Model
 | Relacionado | [Modelos de Equipamentos](./modelos-equipamentos) | Modelo |
 | Relacionado | [Grupos de Equipamentos](./grupos-equipamentos) | Agrupamento |
 | Glossario | [Afericao](../glossario/afericao) | Certificado de afericao |
+
+## Perguntas frequentes
+
+**O que precisa estar cadastrado antes de registrar um equipamento?**
+Fabricante, Tipo de Equipamento, Modelo de Equipamento e Grupo de Equipamentos devem estar cadastrados previamente. Tente salvar sem eles resultará em erro de validação.
+
+**Equipamento com certificado INMETRO vencido continua gerando infrações?**
+O sistema exibe alertas, mas o bloqueio automático depende da configuração. Mantenha as datas atualizadas e renove o certificado antes do vencimento.
+
+**O código do equipamento pode ser alterado após cadastro?**
+Sim, mas tenha cuidado: o código aparece nas tarjas das infrações. Alterações afetam apenas novos registros; os históricos mantêm o código anterior.

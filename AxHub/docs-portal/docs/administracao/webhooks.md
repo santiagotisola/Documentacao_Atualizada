@@ -94,3 +94,14 @@ Webhooks permitem integrar o AxHub com sistemas de terceiros como ERPs, DETRAN e
 |------|--------|-----------|
 | Relacionado | [Use 'Use 'Use 'Use 'Use 'Use 'Use 'Use 'Use 'Use 'Use 'Use 'Use 'Use 'Use 'Use 'Use 'Use 'Use 'Use 'Use 'Use 'Use 'Use 'Configuração'uração'uração'uração'uração'uração'uração'uração'uração'uração'uração'uração'uração'uração'uração'uração'uração'uração'uração'uração'uração'uração'uração'uração'uracoes do Sistema](./configuracoes-sistema) | Config geral |
 | Relacionado | [Exportacao](../infracoes/exportacao) | Webhook de exportacao |
+
+## Perguntas frequentes
+
+**O que acontece quando o endpoint do webhook retorna erro 5xx?**
+O sistema tenta reenviar automaticamente até 3 vezes com intervalo de 60 segundos. Após isso, o evento é descartado. Monitore os Logs de Envios para identificar falhas recorrentes.
+
+**Posso testar um webhook antes de ativar em produção?**
+Sim. Configure o webhook apontando para uma URL de teste (ex.: webhook.site) e gere um evento manualmente para validar o payload recebido.
+
+**O segredo HMAC é obrigatório?**
+Não obrigatório, mas altamente recomendado. Sem o HMAC, o sistema receptor não consegue verificar a autenticidade das notificações recebidas.

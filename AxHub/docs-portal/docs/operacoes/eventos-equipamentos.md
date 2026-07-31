@@ -115,3 +115,14 @@ Eventos de falha são contabilizados como **indisponibilidade** no cálculo das 
 | **Interrupções** | Cada evento de falha deve ter uma interrupção correspondente registrada em Medição |
 | **Monitoramento Online** | O status em tempo real é atualizado conforme os eventos registrados |
 | **Relatório de Eventos** | Exibe o histórico consolidado de todos os eventos por equipamento e período |
+
+## Perguntas frequentes
+
+**Eventos registrados automaticamente diferem dos manuais em algo?**
+Sim. Eventos automáticos (falha, reativação) são gerados pelo monitoramento de heartbeat. Eventos manuais (manutenção, calibração) precisam ser registrados pelo operador e exigem descritos detalhados.
+
+**Posso registrar um evento retroativamente?**
+Sim. Informe as datas corretas de início e fim. O sistema calculará o impacto na disponibilidade com base nas datas informadas.
+
+**Um evento sem data de fim impacta a disponibilidade indefinidamente?**
+Sim. Eventos de falha sem data de fim são tratados como em andamento. Sempre informe a data de fim após a resolução para fechar corretamente o cálculo de indisponibilidade.

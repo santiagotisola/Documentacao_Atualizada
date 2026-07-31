@@ -87,3 +87,14 @@ Capturar dados de teste com a operação em modo `Homologacao = 1` garante que e
 | Mapa de teste vazio | Operação não configurada com `Homologacao = 1` | Verificar o campo Homologação na operação do equipamento |
 | Registros de teste aparecem na lista de infrações reais | Operação com `Homologacao = 0` durante o teste | Recriar os testes com a operação em modo de homologação |
 | Faixa sem resultado no mapa | Equipamento sem capturas no período de teste | Verificar cabeamento, posição da câmera e operação ativa |
+
+## Perguntas frequentes
+
+**Registros de teste podem ser exportados acidentalmente para o órgão autuador?**
+Não. Registros com flag `Homologacao = 1` são isolados do fluxo de exportação. Apenas opções na operação incorretamente configurada com `Homologacao = 0` durante o teste podem causar isso.
+
+**Quantas capturas de teste são necessárias para validar um equipamento?**
+O mínimo recomendado é de 100 capturas válidas por faixa para avaliar a taxa de aproveitamento OCR com confiabilidade estatística.
+
+**O Mapa de Teste serve para validar todos os equipamentos ou apenas novos?**
+Pode ser usado para ambos: validação de novos equipamentos na homologação e revalidação após intervenções técnicas como limpeza, calibração ou troca de componentes.

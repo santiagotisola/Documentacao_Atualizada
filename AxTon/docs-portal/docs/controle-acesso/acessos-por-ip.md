@@ -88,3 +88,14 @@ Quando a restrição por IP está ativada, **somente os IPs cadastrados** conseg
 :::warning Atenção
 Se ativar a restrição por IP com uma lista vazia, ninguém conseguirá acessar o sistema. Sempre adicione pelo menos um IP antes de ativar.
 :::
+
+## Perguntas frequentes
+
+**Como desbloqueio um usuário que foi bloqueado por IP?**
+Um administrador com acesso direto ao servidor ou via IP autorizado deve adicionar o novo IP à lista ou desativar temporariamente a restrição para reconfigurar.
+
+**Posso usar faixas CIDR para autorizar uma rede inteira?**
+Sim. Use o formato CIDR como `192.168.1.0/24` para autorizar todos os IPs de uma sub-rede corporativa sem cadastrar cada endereço individualmente.
+
+**A restrição por IP funciona junto com autenticacao por senha?**
+Sim. A restrição por IP é uma camada adicional: o usuário precisa estar no IP autorizado E ter credenciais válidas para acessar o sistema.

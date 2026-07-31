@@ -88,3 +88,14 @@ Em caso de erros na exportação de lotes, utilize o assistente **AxionIA** (bot
 | Configuracao | [Sequenciais de Lote](../administracao/sequenciais-lote-exportacao) | Numeracao |
 | Glossario | [Lote de Exportacao](../glossario/lote-exportacao) | Definicao tecnica |
 | Glossario | [Autuacao](../glossario/autuacao) | Ato de autuacao |
+
+## Perguntas frequentes
+
+**O que fazer quando o lote é rejeitado pelo órgão autuador?**
+Identifique o erro na mensagem de rejeição do órgão. As causas mais comuns são: layout incorreto, campo obrigatório vazio ou infração fora do prazo legal. Corrija e gere um novo lote.
+
+**Infrações com mais de 30 dias ainda podem ser exportadas?**
+Depende da legislação do órgão autuador. O prazo de prescrição varia entre órgãos. Monitore o backlog diariamente para evitar infrações vencidas.
+
+**Posso exportar infrações parcialmente (parte auditada)?**
+Sim. O lote pode conter apenas as infrações com status Auditada até o momento da exportação. As demais permanecem em fila para o próximo lote.

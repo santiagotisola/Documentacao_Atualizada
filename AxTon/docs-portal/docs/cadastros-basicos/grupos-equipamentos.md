@@ -98,3 +98,14 @@ Grupos bem definidos reduzem o tempo de criação de medições contratuais e fa
 :::tip Dependência
 Este cadastro é utilizado como referência em outros módulos do sistema.
 :::
+
+## Perguntas frequentes
+
+**Um equipamento pode estar em mais de um grupo?**
+Sim. O sistema permite que um equipamento pertença a múltiplos grupos para diferentes finalidades (por contrato e por região, por exemplo).
+
+**Grupos afetam o cálculo das medições contratuais?**
+Sim. As medições podem ser geradas e filtradas por grupo. Mantenha os grupos atualizados com os equipamentos corretos para garantir boletins precisos.
+
+**O que acontece quando inativo um grupo que tem equipamentos vinculados?**
+Os equipamentos permanecem cadastrados e operacionais. O grupo inativo apenas deixa de aparecer nos filtros de relatórios e medições.

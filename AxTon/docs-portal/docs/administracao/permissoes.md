@@ -81,3 +81,14 @@ Para operadores de cancela/portaria, configure o perfil **Porteiro** com acesso 
 - **Pesagem**: start-weighing e ticket-actions
 - **Tickets**: grid.view
 :::
+
+## Perguntas frequentes
+
+**As alterações de permissão entram em vigor imediatamente?**
+Sim. As mudanças têm efeito imediato para todos os usuários do perfil. Usuários com sessão ativa podem precisar fazer logout e login novamente para que as novas permissões sejam aplicadas.
+
+**Como permitir que um operador inicie pesagens mas não altere cadastros?**
+Configure o perfil com `pesagem: start-weighing` e `tickets: grid.view`. Remova as permissões `form.saveorupdate` dos módulos de cadastro para restringir a criação e edição.
+
+**Preciso testar as permissões após configurar um perfil?**
+Sim. Crie um usuário de teste vinculado ao perfil e acesse o sistema para validar quais funcionalidades aparecem e quais estão bloqueadas.

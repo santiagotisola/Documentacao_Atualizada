@@ -95,3 +95,14 @@ Após múltiplas tentativas incorretas, a conta pode ser bloqueada por seguranç
 | Tipo | Pagina | Descricao |
 |------|--------|-----------|
 | próximo | [Dashboard](./dashboard) | Tela principal após Login |
+
+## Perguntas frequentes
+
+**O que fazer quando a conta está bloqueada após várias tentativas de login?**
+Aguarde 30 minutos para desbloqueio automático ou contate o administrador do sistema para desbloquear manualmente em **Controle de Acesso → Usuários**.
+
+**O link de recuperação de senha não chegou no e-mail. O que fazer?**
+Verifique a caixa de spam. Se não chegar em 5 minutos, confirme com o administrador se o e-mail cadastrado está correto. O administrador pode redefinir a senha diretamente.
+
+**Posso acessar o AxHub por dispositivo móvel?**
+Sim. O sistema é acessível por navegador em smartphones e tablets, mas é otimizado para desktops. Algumas funcionalidades podem ter layout reduzido em telas menores.

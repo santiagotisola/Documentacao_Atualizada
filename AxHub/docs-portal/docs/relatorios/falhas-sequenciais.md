@@ -84,3 +84,14 @@ Exportável em **Excel** para uso em Relatórios técnicos e comprovantes de man
 - [Sequênciais de Infrações](../administracao/sequenciais-infracoes)
 - [Eventos dos Equipamentos](./eventos-equipamentos)
 - [Interrupções](../medicoes/interrupcoes)
+
+## Perguntas frequentes
+
+**Qual a diferença entre falhas sequenciais e eventos de equipamentos?**
+O Relatório de Falhas Sequenciais identifica padrões de repetição na numeração de infrações. O Relatório de Eventos de Equipamentos registra interrupções físicas do hardware. São complementares.
+
+**Devo verificar este relatório antes de exportar um lote?**
+Sim. Lacunas sequenciais não resolvidas podem causar rejeição do lote pelo órgão autuador. Verifique e corrija antes de exportar.
+
+**Como interpretar um salto inesperado na sequência?**
+Saltos geralmente indicam infrações descartadas sem motivo documentado ou falha de comunicação do equipamento. Investigue os eventos do período para identificar a causa.

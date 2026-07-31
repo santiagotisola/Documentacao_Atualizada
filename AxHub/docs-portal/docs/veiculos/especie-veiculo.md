@@ -102,3 +102,14 @@ Espécie (DENATRAN)
 - Não crie espécies personalizadas sem alinhamento com o órgão autuador — dados divergentes invalidam autos
 - Revise a tabela sempre que o DENATRAN publicar novas normativas de classificação veicular
 - Mantenha espécies obsoletas como **Inativas** em vez de excluí-las para preservar o histórico de infrações
+
+## Perguntas frequentes
+
+**Qual a diferença entre Espécie e Tipo de Veículo?**
+Espécie é a classificação DENATRAN do CRV (ex.: Automóvel, Caminhão-trator). Tipo é uma categorização interna do sistema para fins operacionais. Ambos compõem a hierarquia de identificação do veículo.
+
+**Quando o campo espécie aparece em branco na infração?**
+Ocorre quando a consulta RENAVAM falhou ou retornou dado inconsistente. Corrija manualmente durante a triagem antes da exportação.
+
+**Preciso criar novas espécies ou as do DENATRAN são suficientes?**
+As espécies pré-carregadas cobrem toda a tabela DENATRAN. Crie entradas adicionais somente se expressamente solicitado pelo órgão autuador.

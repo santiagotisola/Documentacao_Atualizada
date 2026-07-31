@@ -94,3 +94,14 @@ Use este Relatório para identificar Equipamentos com baixo aproveitamento de im
 - [Processamento por Usuário](./processamento-por-usuario)
 - [Eventos de Equipamentos](./eventos-equipamentos)
 - [Afer ições](../operacoes/afericoes)
+
+## Perguntas frequentes
+
+**Aproveitamento de imagens abaixo de 70% indica problema sério?**
+Sim. Taxa abaixo de 70% é crítica e exige intervenção urgente: limpeza da câmera, recalibração do OCR ou inspeção técnica pelo fabricante.
+
+**Com que frequência devo consultar este relatório?**
+Semanalmente para acompanhamento preventivo. Aumento súbito na taxa de descarte pode indicar falha nascente no equipamento antes que ele pare completamente.
+
+**O relatório de processamento conta imagens de teste?**
+Depende da configuração em **Configurações do Sistema → Aba Medição**. Verifique o parâmetro **Imagem de Teste** para entender se elas entram no cálculo.

@@ -117,3 +117,14 @@ Os motivos alimentam o **Dashboard gerencial** com:
 | **Reclassificar** | Cada reclassificação exige o preenchimento de um motivo para registro no log de auditoria |
 | **Tickets Fechados** | O motivo usado fica registrado no histórico do ticket para consulta e exportação |
 | **Dashboard** | Os motivos mais usados são exibidos no ranking gerencial para análise de padrões |
+
+## Perguntas frequentes
+
+**O que fazer quando o operador seleciona sempre o mesmo motivo genérico?**
+Revise o treinamento da equipe e verifique se os motivos disponíveis são específicos o suficiente. Motivos genéricos comprometem a análise gerencial.
+
+**Posso inativar um motivo que ainda está vinculado a tickets abertos?**
+Sim. A inativação impede o uso em novos tickets, mas não afeta tickets que já usam o motivo. O histórico é preservado.
+
+**Preciso criar motivos separados para pesagem e liberação?**
+Sim. O campo **Tipo** separa os motivos em categorias (Pesagem e Liberação). Manter a separação correta garante relatórios gerenciais precisos.

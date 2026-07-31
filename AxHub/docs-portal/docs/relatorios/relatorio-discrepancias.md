@@ -100,3 +100,14 @@ Exportável em **Excel** para acompanhamento de pendências técnicas e registro
 - [Falhas Sequenciais](./falhas-sequenciais)
 - [Processamento de Imagens](./processamento-imagens)
 - [Auditoria](../infracoes/auditoria)
+
+## Perguntas frequentes
+
+**Devo resolver todas as discrepâncias antes de exportar um lote?**
+Sim. Discrepâncias não resolvidas, especialmente sequenciais duplicados e dados inconsistentes, podem causar rejeição do lote pelo órgão autuador.
+
+**Discrepâncias de OCR sempre exigem descarte da infração?**
+Não necessariamente. Se a placa puder ser identificada visualmente na imagem, é possível corrigir a leitura manualmente na triagem antes de descartar.
+
+**Com que frequência devo consultar este relatório?**
+Diariamente, antes de gerar novos lotes de exportação. Acumulação de discrepâncias não tratadas pode comprometer o volume contratual.

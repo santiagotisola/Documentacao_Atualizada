@@ -94,3 +94,14 @@ Use em conjunto com o Relatório de Falhas Sequenciais](./falhas-sequenciais) pa
 - [Processamento de Imagens](./processamento-imagens)
 - [Afer ições](../operacoes/afericoes)
 - [Interrupções](../medicoes/interrupcoes)
+
+## Perguntas frequentes
+
+**Eventos automáticos e manuais são exibidos juntos no relatório?**
+Sim. O relatório exibe todos os eventos independentemente da origem. Use o filtro **Tipo de Evento** para separar eventos automáticos (falha, reativação) dos manuais (manutenção, calibração).
+
+**Como usar este relatório no fechamento da medição contratual?**
+Filtre por **Tipo = Falha** e some as Durações para calcular as horas de indisponibilidade. Compare com as interrupções registradas em Medição → Interrupções para garantir consistência.
+
+**Um evento com duração zero aparece no SLA?**
+Não. Eventos com duração zero (sem data de fim registrada) são tratados como em andamento e impactam a disponibilidade até que a data de fim seja informada.

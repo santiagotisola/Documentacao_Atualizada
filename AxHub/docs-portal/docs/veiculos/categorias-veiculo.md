@@ -104,3 +104,14 @@ As categorias de veículos são usadas no enquadramento para determinar qual art
 - Não altere o **Código CTB** de categorias já vinculadas a infrações exportadas — pode invalidar registros no órgão autuador
 - Mantenha categorias descontinuadas como **Inativas** para preservar rastreabilidade histórica
 - Revise o cadastro sempre que o CONTRAN publicar atualizações no Anexo II do CTB
+
+## Perguntas frequentes
+
+**Posso alterar o Código CTB de uma categoria já usada em infrações exportadas?**
+Não. Alterar o código após a exportação pode invalidar registros no órgão autuador. Inative a categoria existente e crie uma nova com o código correto.
+
+**O que fazer quando uma infração é enquadrada com artigo errado por causa da categoria do veículo?**
+Corrigir a categoria no cadastro do veículo, reconsiderar o enquadramento e reprocessar a infração antes da exportação.
+
+**Preciso criar categorias novas ou as padrão CTB são suficientes?**
+As categorias padrão do CTB cobrem a maioria dos enquadramentos. Crie categorias adicionais apenas se o órgão autuador exigir subdivisões não previstas no CTB.

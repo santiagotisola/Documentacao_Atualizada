@@ -91,3 +91,14 @@ está tela ainda não possui screenshot cadastrada. Será adicionada em breve.
 | **Equipamentos** | O sistema monitora o vencimento com base no tipo e na data do último registro de aferição do equipamento |
 | **Tarjas** | A data de aferição e o certificado exibidos na tarja vêm do último registro de aferição vinculado ao tipo correto |
 | **Monitoramento Online** | Exibe alerta de aferição vencida quando o prazo do tipo cadastrado é ultrapassado |
+
+## Perguntas frequentes
+
+**Quantos tipos de aferição devo cadastrar?**
+Ao menos três: Inicial, Periódica e Pós-Manutenção. Acrescente outros somente se exigido pela Portaria INMETRO ou contrato.
+
+**O sistema bloqueia infrações automaticamente quando a aferição vence?**
+O sistema exibe alertas de vencimento, mas o bloqueio automático depende da configuração. Consulte o suporte para habilitar o bloqueio preventivo.
+
+**Posso alterar a validade de um tipo de aferição já em uso?**
+Sim. A alteração afeta apenas novos registros; aferições já cadastradas mantêm a data de vencimento original calculada.

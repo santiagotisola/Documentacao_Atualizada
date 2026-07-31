@@ -98,3 +98,14 @@ Use os filtros de **posto** e **período** para localizar tickets específicos r
 - [ ] Selecionar o motivo correto de liberação antes de encerrar
 - [ ] Comunicar supervisor em tickets com retenção superior a 24 horas
 | Acao | [Liberar Pesagem](./liberar-pesagem) | Liberar ticket |
+
+## Perguntas frequentes
+
+**Por quanto tempo um ticket pode permanecer em aberto?**
+Não há limite técnico, mas após 4 horas de retenção surgem obrigações legais de alimentação ao motorista. Comunique o supervisor imediatamente em retenções prolongadas.
+
+**O ticket é fechado automaticamente quando o veículo sai do posto?**
+Não. O ticket precisa ser encerrado manualmente pelo operador por meio da ação **Liberar Pesagem**.
+
+**O que fazer quando o ticket mostra classificação incorreta?**
+Use a opção **Reclassificar** antes de liberar. A reclassificação recalcula o limite de PBT e pode cancelar ou manter a infração.

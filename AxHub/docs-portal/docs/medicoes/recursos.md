@@ -98,6 +98,17 @@ Os recursos cadastrados são incluídos no **Boletim de Medição** como comprov
 
 Os recursos são vinculados às medições mensais para comprovar a alocação contratada e embasar o pagamento.
 
+## Perguntas frequentes
+
+**O que acontece se um recurso não for vinculado ao contrato?**
+Ele não aparecerá no Boletim de Medição, e a comprovação do fornecimento ficará incompleta. Vincule todos os recursos ao contrato correto.
+
+**Preciso atualizar os recursos a cada mês?**
+Não. Os recursos são cadastrados uma vez por contrato e reutilizados nas medições mensais. Atualize somente quando houver aditivo contratual.
+
+**Qual a diferença entre recursos humanos e materiais?**
+Recursos humanos são pessoas (agentes, técnicos) e são medidos em horas/mês. Recursos materiais são equipamentos e veículos, medidos em unidades ou eventos.
+
 
 | Campo | Descrição |
 |-------|-----------|

@@ -99,6 +99,17 @@ Auto de Infração emitido ao infrator
 - [Pesagem](./pesagem) — Processo de origem
 - [PBT](./pbt) — Peso Bruto Total
 
+## Perguntas frequentes
+
+**Qual o prazo para triar uma infração de excesso de peso após a pesagem?**
+O prazo máximo para lavrar o auto é definido pelo CTB e pelo órgão autuador. Monitore o backlog diariamente para evitar prescrição de infrações não triadas.
+
+**Infração com veicu classificado incorretamente pode ser cancelada?**
+Sim. Reclassifique o veículo antes de exportar. Se o novo PBT enquadrar o peso dentro do limite, a infração é cancelada automaticamente.
+
+**Uma infração já exportada pode ser cancelada?**
+Não diretamente pelo sistema. Após exportação, o cancelamento deve ser solicitado formalmente ao órgão autuador.
+
 ## Base legal
 
 | Dispositivo | Contéudo |

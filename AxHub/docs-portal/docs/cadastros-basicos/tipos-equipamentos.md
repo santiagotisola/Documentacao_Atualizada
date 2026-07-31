@@ -111,3 +111,14 @@ A Configuração das formas de atuação é essencial para que o sistema saiba q
 | **Operações** | O sistema valida se a forma de atuação da operação é compatível com o tipo do equipamento |
 | **Dashboard/Mapa** | O ícone configurado no tipo é exibido no mapa para cada equipamento |
 | **Monitoramento Online** | Permite filtrar equipamentos por tipo para monitorar radares fixos, móveis ou OCR separadamente |
+
+## Perguntas frequentes
+
+**Por que um equipamento não gera infrações mesmo estando online?**
+Verifique se o tipo do equipamento tem **Formas de Atuação** configuradas. Sem esse vínculo, o sistema não sabe quais enquadramentos aplicar.
+
+**Posso desabilitar o monitoramento só para um tipo específico?**
+Sim. Marque **Desabilitar Monitoramento** no cadastro do tipo. Todos os equipamentos desse tipo pararão de aparecer no painel de status em tempo real.
+
+**É possível usar um ícone personalizado para o tipo?**
+Sim. Faça upload de uma imagem PNG ou SVG no campo **Selecione ícone** no cadastro do tipo. O ícone será exibido no mapa do Dashboard para todos os equipamentos desse tipo.

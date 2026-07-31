@@ -99,6 +99,17 @@ Revisie os logs de acesso semanalmente. Mais de 5 falhas consecutivas do mesmo I
 Múltiplas tentativas falhas consecutivas podem indicar tentativa de acesso indevido. Monitore regularmente.
 :::
 
+## Perguntas frequentes
+
+**Por quanto tempo os logs de acesso são retidos?**
+Depende da política de retenção configurada no servidor. Exporte mensalmente para armazenamento externo como evidência de conformidade.
+
+**Como detectar tentativa de acesso não autorizado pelos logs?**
+Filtre por **Resultado = Falha** e observe múltiplas tentativas do mesmo IP em curto intervalo. Combine com **Acessos por IP** para bloquear o endereço suspeito.
+
+**Logs de acesso mostram o que o usuário fez dentro do sistema?**
+Os logs registram autenticações (login/logout). Para rastreabilidade de operações dentro do sistema, consulte os registros de auditoria nos módulos específicos.
+
 ---
 
 ## Controle de Acesso

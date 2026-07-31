@@ -84,3 +84,14 @@ Acesse **Cronotacógrafo → Consulta** para visualizar o histórico completo de
 |------|--------|-----------|
 | próximo | [Consulta](./consulta) | Consultar registros processados |
 | Glossario | [Cronotacografo](../glossario/cronotacografo) | Definicao tecnica e base legal |
+
+## Perguntas frequentes
+
+**Qual o prazo para triar uma infração de cronotacógrafo?**
+O prazo segue o mesmo parâmetro das infrações convencionais configurado em **Configurações do Sistema**. Infrações próximas do prazo legal de prescrição devem ser priorizadas.
+
+**O que fazer quando o status retorna `NaoEncontrado` na triagem?**
+Enquadre a infração para revisão manual. O status pode indicar placa divergente, certif. não cadastrado no banco externo ou conexão intermitente com o WS.
+
+**Infrações de cronotacógrafo irregular seguem o mesmo fluxo de exportação?**
+Sim. Após triagem e auditoria, seguem para o lote de exportação padrão como qualquer outra infração.

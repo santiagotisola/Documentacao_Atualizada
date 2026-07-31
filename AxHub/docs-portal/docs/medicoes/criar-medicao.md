@@ -102,3 +102,14 @@ O **Boletim de Medição** gerado pode ser enviado ao contratante como comprova�
 - [ ] Confirmar as metas de SLA definidas no contrato estão atualizadas
 - [ ] Revisar o período selecionado (mês/ano corretos)
 - [ ] Exportar o boletim em PDF após finalizar para envio ao contratante
+
+## Perguntas frequentes
+
+**Com que frequência devo gerar a medição?**
+A medição deve ser gerada mensalmente, ao final de cada mês de referência, após registrar todas as interrupções e validar os dados do período.
+
+**Posso corrigir uma medição já finalizada?**
+Não. Após finalizada, a medição é bloqueada. Erros devem ser documentados e corrigidos na medição do próximo período ou via ajuste manual pelo suporte técnico.
+
+**Por que o índice de disponibilidade saiu maior do que o esperado?**
+Interrupções não registradas antes da geração não entram no cálculo. Registre todas as paradas antes de gerar a medição.

@@ -79,6 +79,17 @@ Consulta SEFAZ pelo CNPJ do veículo
 - [PBT](./pbt) — Peso verificado junto ao MDF-e
 - [Triagem](./triagem) — Processo de validação
 
+## Perguntas frequentes
+
+**O que fazer quando o AxTon gera alerta de MDF-e ausente mas o motorista exibe o documento?**
+O sistema consulta o SEFAZ em tempo real. Se o manifesto foi emitido recentemente, pode haver um delay de sincronização. Aguarde alguns minutos e reconcepte a consulta ou valide manualmente o documento físico.
+
+**Qual a diferença entre MDF-e vencido e MDF-e encerrado?**
+MDF-e vencido é aquele que passou da data de validade. MDF-e encerrado é aquele que foi finalizado na plataforma SEFAZ antes de o veículo chegar ao destino declarado — ambos geram alerta.
+
+**Todos os veículos de carga devem portar MDF-e?**
+Não. A obrigatoriedade depende do tipo de carga e do percurso (interestadual vs. municipal). Consulte a legislação estadual vigente para confirmar a obrigatoriedade para cada tipo de operação.
+
 ## Base legal
 
 | Dispositivo | Conteúdo |

@@ -113,3 +113,14 @@ A balança dinâmica é usada para triagem rápida. Veículos que ultrapassam o 
 - [PBT](./pbt) — Peso Bruto Total
 - [Infração](./infracao) — Resultado de excesso
 
+## Perguntas frequentes
+
+**Qual a diferença entre balança estática e dinâmica?**
+A balança estática exige que o veículo pare completamente e oferece maior precisão. A dinâmica (WIM) mede em movimento com velocidade reduzida, sendo usada para triagem rápida antes da confirmação estática.
+
+**A tolerância de 5% ou 10% é aplicada automaticamente pelo sistema?**
+Sim. O AxTon aplica a tolerância configurada nas **Configurações do Sistema** antes de gerar a infração. O excesso é calculado sobre o peso aferido menos a tolerância.
+
+**Pesagem realizada com aferição vencida gera infração válida?**
+Não. Infrações geradas com balança sem aferição válida do INMETRO podem ser contestadas juridicamente. Mantenha o certificado sempre dentro do prazo.
+

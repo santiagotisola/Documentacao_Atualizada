@@ -88,6 +88,17 @@ Configure um sequencial para **cada tipo de Infração A geração de lotes de e
 
 - Configure um sequencial para **cada tipo de infração** antes de iniciar a exportação — a ausência bloqueia a geração de lotes
 - Não reutilize sequenciais de séries já encerradas — comunique ao órgão autuador antes de iniciar nova numeração
+
+## Perguntas frequentes
+
+**Qual a diferença entre Sequencial de Infração e Sequencial de Exportação?**
+O Sequencial de Infração numera cada auto individual. O Sequencial de Exportação numera os lotes (arquivos) enviados ao órgão. Ambos precisam estar configurados para exportar corretamente.
+
+**O que acontece quando o sequencial de exportação é esgotado?**
+A geração de lotes é bloqueada para o tipo de infração correspondente. Crie uma nova série ou amplie o **Sequencial Final** antes do esgotamento.
+
+**Preciso de um sequencial separado para cada tipo de infração?**
+Sim. Configure um sequencial para Excesso de PBT, outro para Excesso de Eixo e outro para Excesso de Eixo/PBT. A ausência de qualquer um bloqueia a exportação do tipo correspondente.
 - Monitore o **Sequencial Final** e amplie ou crie nova série antes de atingir o limite superior
 - Mantenha o registro do último sequencial utilizado para referência em caso de inconsistência
 

@@ -99,3 +99,14 @@ Categoria → Classificação → Veículo. A classificação é o nível mais e
 - Antes de criar uma nova classificação, pesquise se já existe com nome diferente — duplicidades prejudicam os relatórios
 - Classificações vinculadas a infrações exportadas não devem ser renomeadas ou excluídas
 - Revise periodicamente as classificações à luz das resoluções CONTRAN para garantir conformidade legal
+
+## Perguntas frequentes
+
+**Posso renomear uma classificação vinculada a infrações já exportadas?**
+Não. Renomear pode causar inconsistência nos registros históricos. Inative a classificação atual e crie uma nova com o nome correto.
+
+**Como evitar classificações duplicadas no sistema?**
+Use a barra de busca antes de criar uma nova entrada. Caso encontre duplicatas, inative-as e reclassifique os veículos vinculados.
+
+**O que significa a hierarquia Categoria → Classificação?**
+A classificação é o nível mais específico dentro de uma categoria. Por exemplo: Categoria "Caminhão" → Classificação "Truck". Enquadramentos usam a classificação para determinar o artigo CTB correto.

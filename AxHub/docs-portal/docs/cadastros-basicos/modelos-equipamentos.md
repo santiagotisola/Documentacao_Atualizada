@@ -109,3 +109,14 @@ Um mesmo fabricante pode possuir múltiplos modelos de Equipamento Cada modelo d
 | **Tarjas** | A portaria e a marca/modelo exibidos na tarja vêm diretamente deste cadastro |
 | **Fabricantes** | O modelo precisa estar vinculado a um fabricante para aparecer como opção no cadastro |
 | **Auditoria** | O modelo aparece nos registros para rastreabilidade do hardware usado em cada infração |
+
+## Perguntas frequentes
+
+**A portaria no modelo e a portaria na tarja estão diferentes. Qual prevalece?**
+A tarja usa a portaria cadastrada no Modelo de Equipamento. Se a tarja está incorreta, corrija o campo **Portaria** no cadastro do modelo; a correção vale para novas infrações.
+
+**Posso cadastrar o mesmo modelo para fabricantes diferentes?**
+Não recomendado. Cada modelo deve estar vinculado ao fabricante correto. Modelos iguais de fabricantes diferentes devem ter cadastros distintos.
+
+**O que fazer quando o INMETRO renova a portaria de um modelo?**
+Atualize os campos Portaria e Número da Portaria no cadastro do modelo. A partir da atualização, as novas infrações passarão a exibir a portaria vigente na tarja.

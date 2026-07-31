@@ -87,3 +87,14 @@ O mapa usa a posição geográfica configurada no cadastro de cada Equipamento V
 | Equipamento não aparece no mapa | Coordenadas geográficas não cadastradas | Verificar o cadastro do equipamento e preencher latitude/longitude |
 | Mapa carrega sem pontos | Nenhuma passagem no período selecionado | Ampliar o período de consulta |
 | Dados incorretos ao clicar no equipamento | Cache desatualizado do navegador | Limpar o cache e recarregar a página |
+
+## Perguntas frequentes
+
+**Por que um equipamento não aparece no mapa?**
+O equipamento precisa ter coordenadas geográficas (latitude e longitude) cadastradas. Verifique o cadastro do equipamento e preencha as coordenadas.
+
+**Qual a diferença entre usar Passagens ou Infrações no Tipo de Dado?**
+Passagens exibe o volume total de veículos detectados. Infrações exibe apenas os registros que geraram auto. Use Infrações para análise de fiscalização e Passagens para análise de tráfego.
+
+**Posso exportar o mapa como imagem para apresentações?**
+Sim. Clique em **Exportar** para salvar uma imagem do mapa ou um CSV com os dados por equipamento.

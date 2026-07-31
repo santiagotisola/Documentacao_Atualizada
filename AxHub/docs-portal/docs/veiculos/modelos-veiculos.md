@@ -100,3 +100,14 @@ Marca (ex.: FIAT)
 - Vincule sempre o modelo à **Marca** correta do fabricante; um modelo sem marca impede a correta classificação do veículo
 - Modelos já associados a infrações exportadas não devem ser renomeados — pode causar inconsistência nos registros históricos
 - Para veículos de fabricantes internacionais pouco comuns, use a descrição oficial do RENAVAM para manter padronização
+
+## Perguntas frequentes
+
+**Posso cadastrar o mesmo modelo para marcas diferentes?**
+Sim, desde que sejam vinculados à marca correta de cada um. Evite criar modelos genéricos sem vínculo de marca.
+
+**O que fazer quando o modelo não aparece na consulta RENAVAM?**
+Cadastre o modelo manualmente com a descrição do CRV do veículo, associando-o à marca correspondente.
+
+**Posso renomear um modelo já vinculado a infrações exportadas?**
+Não recomendado. Crie um novo modelo com o nome correto e inative o antigo para preservar a integridade dos registros históricos.

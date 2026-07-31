@@ -103,3 +103,14 @@ As marcas são vinculadas aos **Modelos de Veículos**, formando a hierarquia Ma
 | Marca duplicada na lista | Cadastrada com grafias diferentes (ex.: VW e VOLKSWAGEN) | Inativar a duplicata e padronizar pelo nome oficial |
 | Marca não aparece nas infrações | Status inativo | Reativar o cadastro |
 | Campo marca vazio no auto exportado | Consulta RENAVAM falhou | Verificar a integração RENAVAM e preencher manualmente |
+
+## Perguntas frequentes
+
+**A marca do veículo é preenchida automaticamente?**
+Sim, quando a consulta RENAVAM retorna a marca cadastrada no CRV. Se a marca não estiver na tabela do sistema, o campo ficará em branco.
+
+**Encontrei marcas duplicadas com grafias diferentes. O que fazer?**
+Inative a grafia não oficial e padronize pela grafia do fabricante (ex.: VOLKSWAGEN em vez de VW). Reassocie os modelos à marca mantida.
+
+**O Código DENATRAN da marca é obrigatório?**
+Depende do layout de exportação exigido pelo órgão autuador. Confirme no contrato ou com o suporte técnico antes de deixar o campo em branco.

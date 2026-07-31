@@ -106,3 +106,14 @@ Permite revisar, validar ou descartar Infrações pendentes antes da exportaçã
 | Glossario | [Enquadramento](../glossario/enquadramento) | Definicao tecnica CTB |
 | Glossario | [Infracao](../glossario/Use Infração (com acento)) | O que constitui uma Use Infração (com acento) |
 | Glossario | [Triagem](../glossario/triagem) | Definicao do processo |
+
+## Perguntas frequentes
+
+**Qual o prazo máximo para triagem de uma infração?**
+Depende do contrato e das configurações em **Configurações do Sistema → Aba Triagem** (campo Prazo para Triagem, padrão: 20 dias). Infrações não triadas dentro do prazo podem prescrever legalmente.
+
+**Posso reabrir uma infração já descartada?**
+Sim. Use a ação **Reabrir** na tela de Triagem. A infração volta ao status Pendente para nova análise.
+
+**O sistema valida automaticamente se a placa está correta na triagem?**
+O OCR faz a leitura automática, mas a confirmação visual é obrigatória pelo analista. Use a imagem de zoom de placa para confirmar.

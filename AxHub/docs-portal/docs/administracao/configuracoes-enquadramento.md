@@ -118,3 +118,14 @@ Um enquadramento mal configurado resulta em infrações com artigo CTB incorreto
 | **Exportação** | O código de enquadramento é campo obrigatório no arquivo enviado ao órgão autuador |
 | **Glossário — Enquadramento** | Explica o conceito legal por trás das configurações |
 | Glossario | [Enquadramento](../glossario/enquadramento) | Definicao CTB |
+
+## Perguntas frequentes
+
+**Posso usar o mesmo enquadramento em várias operações?**
+Sim. O mesmo artigo CTB pode ser configurado para diferentes operações, cada uma com sua própria velocidade máxima.
+
+**A configuração de enquadramento afeta infrações já geradas?**
+Não. Alterações valem apenas para novas infrações. Para corrigir enquadramentos anteriores, acione o suporte técnico.
+
+**O que acontece se a velocidade máxima estiver errada na configuração?**
+As infrações geradas com a configuração incorreta podem ter o artigo CTB errado, resultando em possível anulação. Corrija imediatamente e revise as infrações do período.

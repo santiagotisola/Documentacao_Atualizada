@@ -91,3 +91,14 @@ Verifique com o órgão autuador (DETRAN/DENATRAN) quais códigos de cor são ac
 | Campo cor em branco no auto exportado | Cor não cadastrada ou consulta RENAVAM falhou | Verificar a tabela de cores e preencher manualmente |
 | Cor duplicada com código diferente | Cadastro inconsistente com a tabela DENATRAN | Inativar duplicatas e manter apenas a cor com código oficial |
 | Código de cor rejeitado na exportação | Código não reconhecido pelo órgão autuador | Confirmar os códigos aceitos no layout do órgão |
+
+## Perguntas frequentes
+
+**O sistema preenche a cor do veículo automaticamente?**
+Sim, quando a consulta RENAVAM retorna a cor cadastrada no CRV. Se a cor não estiver na tabela do sistema, o campo ficará em branco e precisará de preenchimento manual.
+
+**Devo cadastrar as 15 cores DENATRAN manualmente?**
+Não. O sistema já inclui as cores padrão pré-carregadas. Adicione apenas cores personalizadas exigidas pelo órgão autuador local.
+
+**Posso excluir uma cor que não é mais utilizada?**
+Não exclua — inative a cor. Cores vinculadas a infrações históricas precisam ser preservadas para manter a integridade dos registros.

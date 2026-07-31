@@ -63,3 +63,14 @@ Os dados nos dashboards Power BI são atualizados conforme o agendamento configu
 | Dashboard em branco | URL incorreta ou sem permissão de acesso | Verificar a URL e adicionar o usuário ao grupo de acesso no Power BI |
 | Dados desatualizados | Agendamento de refresh não configurado | Ajustar o agendamento no Power BI Service |
 | Relatório não aparece no menu | Perfil sem permissão para o módulo Power BI | Adicionar o perfil ao grupo de acesso |
+
+## Perguntas frequentes
+
+**Com que frequência os dados dos dashboards Power BI são atualizados?**
+Depende do agendamento configurado no Power BI Service. Por padrão pode ser diário ou sob demanda. Contate o suporte para ajustar a frequência.
+
+**Posso exportar um relatório Power BI em PDF ou Excel?**
+Sim. Use os controles nativos do Power BI incorporado para exportar. A disponibilidade depende das permissões configuradas no Power BI Service.
+
+**O dashboard aparece em branco mesmo com dados no sistema. O que verificar?**
+Verifique se a URL de incorporação está correta e se o usuário tem acesso ao relatório no Power BI Service. O token de incorporação pode ter expirado.

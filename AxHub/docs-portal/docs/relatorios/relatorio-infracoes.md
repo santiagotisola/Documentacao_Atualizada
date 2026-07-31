@@ -100,3 +100,14 @@ Exportável em **Excel** e **PDF**. O formato PDF inclui imagens quando selecion
 - [Triagem de Infrações](../infracoes/triagem)
 - [Lotes de Exportação](../glossario/lote-exportacao)
 - [Motivos de Descarte](../administracao/motivos-descartes)
+
+## Perguntas frequentes
+
+**Qual a diferença entre o Relatório de Infrações e a Consulta de Infrações?**
+A Consulta de Infrações é voltada para busca individual e detalhamento de uma infração específica. O Relatório de Infrações é focado em exportação em massa e análise de volumes.
+
+**Como exportar apenas infrações prontas para o órgão?**
+Filtre por **Status = Auditada** e o período desejado. As infrações resultantes estão prontas para incluir no próximo lote de exportação.
+
+**O relatório mostra velocidade medida diferente do enquadramento. Por quê?**
+O enquadramento usa a **Velocidade Considerada**, que aplica a tolerância métrica exigida pelo INMETRO. A velocidade medida é o valor bruto do radar.

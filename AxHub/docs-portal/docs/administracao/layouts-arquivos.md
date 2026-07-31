@@ -118,4 +118,15 @@ está tela ainda não possui screenshot cadastrada. Será adicionada em breve.
 | **Exportação de Infrações** | Cada lote usa um layout para formatar o arquivo enviado ao órgão autuador |
 | **Lotes de Importação** | Layouts de importação definem como os dados dos equipamentos são lidos pelo sistema |
 | **Webhooks** | Layouts JSON são usados em integrações via API com sistemas externos |
+
+## Perguntas frequentes
+
+**Posso alterar um layout de exportação já em uso?**
+Sim, mas teste em homologação primeiro. Alterações em layouts ativos sem validação podem causar rejeição de lotes pelo órgão autuador.
+
+**O lote foi rejeitado por campo inválido. Como identificar o problema?**
+Compare o layout configurado com a especificação técnica do órgão autuador. Verifique encoding, separador e mapeamento de campos.
+
+**Preciso de um layout diferente para cada órgão?**
+Sim. Cada órgão (DETRAN estadual, SENATRAN) pode ter formato específico. Configure um layout separado para cada destino de exportação.
 | **Relatórios** | O formato de exportação segue os layouts configurados para cada órgão |

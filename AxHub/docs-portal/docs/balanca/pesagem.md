@@ -104,3 +104,14 @@ Tela para liberar em lote os tickets que chegaram do sistema de pesagem.
 - [ ] Confirmar que os motivos de liberação estão cadastrados e ativos
 - [ ] Verificar se há tickets abertos de turno anterior pendentes de encerramento
 - [ ] Confirmar perfil de acesso do operador (liberação e reclassificação habilitados)
+
+## Perguntas frequentes
+
+**O sistema de balança integra automaticamente com o AxHub ou requer configuração manual?**
+A integração é automática quando o equipamento de pesagem está devidamente cadastrado e vinculado ao posto. Infrações de excesso de peso são geradas sem intervenção manual.
+
+**O que acontece quando um ticket aberto não é encerrado no fim do turno?**
+O ticket permanece em aberto até encerramento manual. Tickets acumulados de turnos anteriores devem ser revisados e encerrados com o motivo correto antes de iniciar novo turno.
+
+**Pesagens com peso dentro do limite sempre resultam em ticket regular?**
+Sim. Tickets com PBT dentro do limite são encerrados como Regulares. Somente excessos de peso geram infrações.

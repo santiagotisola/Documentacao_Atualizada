@@ -98,3 +98,14 @@ Arcos permitem exportar dados de múltiplas faixas/equipamentos de uma mesma loc
 | **Lote de Exportação** | Infrações agrupadas por arco são exportadas em conjunto com numeração sequencial consistente |
 | **Relatório de Passagens** | Permite filtrar dados por arco, exibindo o volume total de passagens da travessia |
 | **Monitoramento Online** | Exibe o status de todos os equipamentos de um arco em um único painel |
+
+## Perguntas frequentes
+
+**Um equipamento pode pertencer a dois arcos ao mesmo tempo?**
+Não. Cada equipamento deve estar vinculado a apenas um arco. Verifique e corrija duplicatas no cadastro para evitar inconsistências nos lotes de exportação.
+
+**O arco precisa ser cadastrado antes da operação?**
+Sim. O arco agrupa os equipamentos e deve estar configurado antes de vincular faixas à operação.
+
+**Inativar um arco afeta infrações já geradas?**
+Não. Infrações anteriores à inativação são preservadas no histórico; apenas novos registros são bloqueados.

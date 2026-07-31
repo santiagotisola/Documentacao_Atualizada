@@ -98,3 +98,14 @@ As decisões de auditoria alimentam os Relatórios de qualidade e produtividade.
 | **Processamento por Usuário** | O relatório registra as decisões de cada auditor para avaliação de produtividade e consistência |
 | **Dashboard** | Exibe o número de infrações aguardando auditoria como indicador de backlog operacional |
 | Glossario | [Infracao](../glossario/infracao) | Definicao tecnica |
+
+## Perguntas frequentes
+
+**Qual o percentual mínimo de infrações que deve ser auditado?**
+Recomenda-se no mínimo 10% por equipamento por turno. Contratos com cláusula de qualidade podem exigir percentuais maiores — consulte o contrato vigente.
+
+**Uma infração já exportada pode ser revertida pelo auditor?**
+Não. Infrações com status Exportada são imutáveis. Somente infrações com status Triada ou Auditada podem ser revertidas pelo auditor.
+
+**O que fazer quando o auditor identifica um padrão de aprovação incorreto por um analista?**
+Rejeite as infrações incorretas e documente com observação. Use o Relatório de Processamento por Usuário para quantificar o problema e embasar o feedback ao analista.

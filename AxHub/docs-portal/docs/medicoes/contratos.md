@@ -115,3 +115,14 @@ Manteng ao contrato sempre atualizado com as metas vigentes. Metas desatualizada
 | **Índices de Performance** | Os índices são vinculados ao contrato e usados para calcular conformidade no boletim |
 | **Recursos** | Cada recurso humano e material é vinculado a um contrato para comprovação de fornecimento |
 | **Interrupções** | As interrupções registradas são contabilizadas na medição do contrato vigente |
+
+## Perguntas frequentes
+
+**Um contrato encerrado pode ser reaberto para gerar uma medição retroativa?**
+Não diretamente. Altere o status para Ativo temporariamente, gere a medição e reverta. Documente o procedimento para fins de auditoria.
+
+**O que acontece se eu vincular um equipamento errado ao contrato?**
+O boletim de medição incluirá dados do equipamento incorreto. Corrija o vínculo antes de gerar a próxima medição.
+
+**Posso ter equipamentos em mais de um contrato simultaneamente?**
+Sim, desde que os períodos de vigência sejam diferentes. Equipamentos ativos em dois contratos simultâneos podem gerar duplicidade no boletim.

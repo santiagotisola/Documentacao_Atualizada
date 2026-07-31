@@ -114,3 +114,14 @@ está tela ainda não possui screenshot cadastrada. Será adicionada em breve.
 | **Triagem** | O analista visualiza as imagens na ordem de exibição definida neste cadastro |
 | **Exportação** | Infrações sem os tipos obrigatórios são bloqueadas na exportação ao órgão |
 | **Processamento de Imagens** | O relatório usa os tipos cadastrados para agrupar métricas de aproveitamento |
+
+## Perguntas frequentes
+
+**O que acontece se uma imagem obrigatória não for capturada?**
+A infração é marcada como incompleta e pode ser descartada na triagem ou bloqueada na exportação.
+
+**Posso adicionar um tipo de imagem após a operação já estar em andamento?**
+Sim. Novos tipos são aplicados a infrações futuras. Registros anteriores não serão afetados.
+
+**Qual a diferença entre imagem Frontal e Zoom Placa?**
+A Frontal mostra o veículo inteiro para contextualizar a infração. O Zoom Placa é um recorte ampliado da placa traseira, essencial para a leitura do OCR e validação.

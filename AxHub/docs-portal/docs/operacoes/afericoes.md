@@ -98,6 +98,17 @@ Mantenha o controle de vencimentos atualizado e agende renovações com 60 dias 
 | **Dashboard** | Alertas de aferição vencida ou próxima do vencimento são exibidos no painel inicial |
 | **Exportação** | Infrações de equipamentos com aferição vencida são bloqueadas e não entram no lote |
 
+## Perguntas frequentes
+
+**O equipamento é bloqueado automaticamente quando a aferição vence?**
+Sim, após o vencimento o sistema bloqueia a geração de infrações válidas e o Dashboard exibe alerta. Renovar o certificado e cadastrar a nova aferição libera o equipamento.
+
+**Com quanto de antecedência devo renovar a aferição?**
+Recomenda-se acionar o INMETRO com pelo menos 60 dias de antecedência, pois o agendamento pode levar semanas. O Dashboard alerta a partir de 30 dias do vencimento.
+
+**Posso registrar uma aferição retroativamente?**
+Sim. Informe a data de emissão e vencimento corretas conforme o certificado do INMETRO. O sistema usará as datas do certificado, não a data do cadastro.
+
 :::info Dados na Tarja
 As informações de aferição aparecem nas **tarjas das Infrações
 - **Data de Aferição** (Data Emissão)

@@ -78,6 +78,17 @@ A cada registro de cronotacógrafo, o sistema verifica:
 ## Relacionado
 
 - [Cronotacógrafo](../glossario/cronotacografo)
+
+## Perguntas frequentes
+
+**O que fazer quando um veículo aparece como ‘NãoEncontrado’ no sistema?**
+Encaminhe para triagem manual. Pode indicar placa divergente, certif. não cadastrado no banco externo ou falha de conectividade. Priorize esses registros antes do fim do turno.
+
+**A consulta ao banco de certificados ocorre em tempo real?**
+Sim. A cada passagem registrada o sistema consulta automaticamente o WS externo. Verifique a integração de rede se ocorrerem muitos erros de status.
+
+**Infrações geradas por cronotacógrafo irregular seguem o mesmo fluxo de triagem e exportação?**
+Sim. Seguem o fluxo padrão: triagem → auditoria → lote de exportação, como qualquer outra infração do sistema.
 - [Triagem](../infracoes/triagem)
 
 ## Status do Cronotacógrafo

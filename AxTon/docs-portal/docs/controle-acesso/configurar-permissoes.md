@@ -79,6 +79,17 @@ Configure cada perfil com apenas as permissões estritamente necessárias. Evite
 | Não consegue salvar | Falta permissão de Criar/Editar | Marcar `Criar/Editar` no módulo |
 | Alteração não reflete | Cache de sessão ativo | Pedir logout e login ao usuário |
 
+## Perguntas frequentes
+
+**As permissões são aplicadas imediatamente após salvar?**
+Sim. As alterações têm efeito imediato. Usuários com sessão ativa podem precisar fazer logout e login para que as novas permissões sejam carregadas.
+
+**Posso dar permissão de Excluir sem dar permissão de Criar?**
+Sim. As permissões são independentes por ação. Configurações incomuns como essa devem ser revisadas periodicamente para garantir coerência com a função do usuário.
+
+**Como verificar se as permissões de um perfil estão corretas?**
+Crie um usuário de teste vinculado ao perfil e acesse o sistema para validar quais funcionalidades ficam visíveis e quais estão bloqueadas.
+
 
 ## Relacionado
 

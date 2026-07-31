@@ -103,3 +103,14 @@ As senhas devem ser informadas diretamente ao Usuário de forma segura. O sistem
 :::tip Desativação de Usuários
 Para revogar o acesso de um Usuário sem excluir seu histórico de operações, desmarque o campo **Ativo** no cadastro. O Usuário não conseguirá realizar Login mas seus registros serão preservados.
 :::
+
+## Perguntas frequentes
+
+**Posso ter dois usuários com o mesmo login?**
+Não. O campo Login deve ser único no sistema. Use um padrão como email ou código funcional para garantir unicidade.
+
+**Como redefinir a senha de um usuário que esqueceu?**
+O administrador pode editar o cadastro do usuário e definir uma nova senha temporária. Oriente o usuário a alterá-la no primeiro acesso por segurança.
+
+**Devo excluir o usuário de um colaborador desligado ou apenas inativá-lo?**
+Inative em vez de excluir. A exclusão apaga o histórico de operações do usuário, que pode ser necessário em auditorias futuras.

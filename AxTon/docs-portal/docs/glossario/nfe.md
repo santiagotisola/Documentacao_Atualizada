@@ -84,3 +84,14 @@ Compare o **peso declarado na NF-e** com o **peso aferido** no AxTon. Diferença
 | **Lei 8.137/90** | Crimes contra a ordem tributária — sub-declaração fiscal |
 | **Código Fiscal de Operações (CFOP)** | Classificação das operações fiscais na nota |
 | **Portaria CAT 162/2008 (SP)** | Obrigatoriedade da NF-e no transporte interestadual |
+
+## Perguntas frequentes
+
+**O que fazer quando o peso declarado na NF-e diverge muito do peso aferido?**
+Diferenças acima de 10% devem ser reportadas à Secretaria da Fazenda como indício de subdeclaração de carga. Documente a pesagem e a NF-e para embasar a ocorrência.
+
+**Todos os veículos de carga verificados pelo AxTon precisam apresentar NF-e?**
+Não. A obrigatoriedade depende da operação e do tipo de mercadoria. Consulte o CFOP e a legislação estadual vigente para confirmar a exigência.
+
+**O alerta de NF-e ausente gera automaticamente uma infração?**
+Depende da configuração das regras de enquadramento. O alerta pode ficar apenas na fila de triagem para validação manual antes de gerar um auto.

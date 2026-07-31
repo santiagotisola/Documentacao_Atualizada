@@ -93,3 +93,14 @@ O código IBGE é obrigatório nos arquivos de exportação de infrações. Cert
 - Consulte o portal IBGE (ibge.gov.br/cidades) para confirmar o código oficial antes de cadastrar
 - Não duplique municípios — use a busca antes de criar; duplicidades causam inconsistência nos relatórios regionais
 - A base pré-carregada do sistema cobre todos os municípios brasileiros; adicione entradas personalizadas apenas para localidades não reconhecidas pelo IBGE
+
+## Perguntas frequentes
+
+**O lote foi rejeitado por código IBGE inválido. Como corrigir?**
+Verifique o código no portal oficial do IBGE (ibge.gov.br/cidades) e corrija no cadastro do município. O código deve ter 7 dígitos incluindo o dígito verificador.
+
+**Preciso cadastrar municípios manualmente ou o sistema já tem todos?**
+O sistema inclui todos os municípios brasileiros com código IBGE. Cadastre manualmente apenas subdivisões ou localidades não reconhecidas pelo IBGE.
+
+**A faixa não encontra o município no cadastro. O que fazer?**
+Verifique se o município está ativo e se o nome está grafado corretamente. Se necessário, use o código IBGE para localizar o registro.

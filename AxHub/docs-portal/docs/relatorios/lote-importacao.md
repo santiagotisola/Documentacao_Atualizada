@@ -98,6 +98,17 @@ Lotes com status **Parcial** importaram apenas parte dos registros. Verifique os
 | **Sucesso** | Todos os registros importados | Nenhum | Nenhuma |
 | **Parcial** | Parte dos registros com falha | Passagens perdidas | Verificar erros e reimportar |
 | **Erro** | Falha total na importação | Dados não disponíveis | Contatar suporte técnico |
+
+## Perguntas frequentes
+
+**O que fazer quando um lote tem status Parcial?**
+Clique em **Visualizar detalhes** para identificar quais registros falharam e o motivo. Corrija a causa e clique em **Reimportar** para processar novamente os registros com falha.
+
+**Posso reimportar um lote sem corrigir a causa do erro?**
+Não recomendado. Reimportar sem correção replicará o mesmo erro. Identifique e resolva a causa antes de tentar novamente.
+
+**Lotes com status Erro afetam as infrações do período?**
+Sim. Registros não importados não geram infrações nem aparecem no relatório de passagens. Resolva rapidamente para não comprometer o volume contratual.
 | **Processando** | Import em andamento | Aguardar | Aguardar e verificar novamente |
 
 ## Erros comuns
