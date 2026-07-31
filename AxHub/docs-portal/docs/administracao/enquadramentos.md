@@ -124,3 +124,24 @@ As infrações geradas serão enquadradas no artigo CTB incorreto, o que pode ca
 | Lote rejeitado por código CTB inválido | Confirmar código com o órgão e atualizar o enquadramento | Lote reprocessado e aceito pelo DENATRAN/SENATRAN |
 | Valor de multa desatualizado | IPCA reajustou os valores, solicitar atualização | Valores atualizados pelo suporte Axion |
 | Enquadramento municipal não encontrado | Art. CTB municipal não está na base padrão | Solicitar inclusão ao suporte com o texto legal |
+
+## Ciclo de manutenção dos enquadramentos
+
+```
+Publicação de nova resolução CTB/CONTRAN
+    ↓
+Verificar alterações nos artigos afetados
+    ↓
+Atualizar Enquadramentos no AxHub
+    ↓
+Atualizar Configurações de Enquadramento por operação
+    ↓
+Testar em ambiente de homologação
+    ↓
+Aplicar em produção antes da próxima operação
+```
+
+:::caution
+Nunca altere enquadramentos com infrações pendentes no mesmo artigo. Aguarde o fechamento do lote atual antes de atualizar.
+:::
+

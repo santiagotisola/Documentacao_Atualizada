@@ -124,3 +124,34 @@ Registre imediatamente após o equipamento voltar à operação. O prazo máximo
 :::warning
 Interrupções registradas **após** a geração da medição não são computadas automaticamente. Registre sempre em tempo real.
 :::
+
+## Exemplo prático
+
+**Cenário**: Queda de energia no posto entre 14h30 e 16h45 causou indisponibilidade de 2h15min no equipamento.
+
+**Registro da interrupção**:
+
+| Campo | Valor |
+|-------|-------|
+| Equipamento | OCR-01 — Posto Norte |
+| Tipo | Falha de equipamento |
+| Data/Hora Início | 31/07/2026 14:30 |
+| Data/Hora Fim | 31/07/2026 16:45 |
+| Motivo | Queda de energia externa — relatada pela concessionária |
+
+**Resultado**: A disponibilidade do dia cai de 100% para 90,6% (21,75h de 24h). O Boletim de Medição reflete corretamente a parada. Como foi evento externo, não há penalidade contratual.
+
+## Ciclo mensal de interrupções
+
+```
+Início do mês → Monitorar equipamentos diariamente
+    ↓
+Detectou falha? → Registrar imediatamente (tipo + horário)
+    ↓
+Equipamento voltou? → Preencher Data/Hora Fim
+    ↓
+Fim do mês → Revisar todas as interrupções antes de gerar medição
+    ↓
+Gerar Medição → Verificar índice de disponibilidade
+```
+

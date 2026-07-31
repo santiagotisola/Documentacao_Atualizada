@@ -120,3 +120,23 @@ Compatibilidade depende do modelo. Consulte o suporte para homologação de novo
 
 **Quanto tempo os dados de passagem ficam armazenados?**
 Conforme configuração do servidor. O padrão é 12 meses antes da expurgão automática.
+
+## Como começar
+
+1. **Login** — acesse com as credenciais fornecidas pelo administrador
+2. **Configure o local** — cadastre os cruzamentos em Cadastros → Locais
+3. **Cadastre faixas** — crie as faixas de monitoramento por cruzamento
+4. **Vincule equipamentos** — associe as câmeras VARCO às faixas
+5. **Cadastre veículos monitorados** — importe as placas de interesse
+6. **Inicie uma operação** — defina período e equipamentos
+7. **Monitore em tempo real** — acompanhe alertas e passagens ao vivo
+
+## Perfis recomendados por função
+
+| Função | Perfil recomendado | Acesso principal |
+|---------|:-----------------:|------------------|
+| Operador de campo | Operador | Monitoramento Online + Alertas |
+| Analista | Analítico | Relatórios + Consultas |
+| Coordenador | Supervisor | Operações + Veículos Monitorados |
+| Administrador | Admin | Todos os módulos |
+

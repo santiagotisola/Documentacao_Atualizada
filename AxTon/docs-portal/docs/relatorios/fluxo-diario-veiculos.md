@@ -110,3 +110,15 @@ Pode indicar. Confirme com o [Processamento de Imagens](./processamento-imagens)
 7. Exporte o relatório em Excel para documentar a causa da queda ao contratante
 
 **Resultado**: O supervisor demonstra ao contratante que a queda de volume não foi operacional, mas causada por falha elétrica externa documentada. O incidente é registrado e não é descontado no Boletim de Medição.
+
+## Tabela de referência rápida — padrões de fluxo
+
+| Período do dia | Fluxo esperado | Desvio que indica alerta |
+|----------------|:--------------:|:------------------------:|
+| 06h-08h (pico manhã) | Alto | Queda > 40% vs média histórica |
+| 08h-12h (operacional) | Médio-alto | Queda > 30% |
+| 12h-14h (almoço) | Baixo | Normal |
+| 14h-17h (pico tarde) | Alto | Queda > 40% |
+| 17h-20h (fim expediente) | Médio | Queda > 25% |
+| 20h-06h (noturno) | Baixo | Elevação suspeita |
+
