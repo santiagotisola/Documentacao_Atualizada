@@ -51,6 +51,17 @@ Use este relatório para monitorar quedas abruptas no fluxo — que podem indica
 
 Disponível em **Excel** para Análise em planilhas externas ou inclusão em Relatórios contratuais.
 
+## Perguntas frequentes
+
+**Por que alguns dias não têm dados?**
+O equipamento pode ter estado Offline no período. Verifique o Relatório de Eventos de Equipamentos.
+
+**O aproveitamento baixou sem manutenção. O que fazer?**
+Verifique limpeza da câmera OCR. Aproveitamento abaixo de 85% requer intervenção técnica imediata.
+
+**Posso comparar dois equipamentos no mesmo relatório?**
+Sim, retire o filtro de equipamento e o relatório exibirá todos os equipamentos no período.
+
 :::tip Dica
 Combine com o [Mapa de Fluxo de Passagens](./mapa-fluxo-passagens) para visualizar espacialmente os dados tabulares deste Relatório.
 :::

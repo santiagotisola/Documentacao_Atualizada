@@ -54,6 +54,14 @@ Fabricante → Modelo → Equipamento. Cadastre o fabricante antes de criar mode
 - [Tipos de Equipamentos](./tipos-equipamentos)
 - [Equipamentos](./equipamentos)
 
+## Perguntas frequentes
+
+**Posso excluir um fabricante que não uso mais?**
+Não. Inative o fabricante para preservar o histórico. Exclusão de fabricantes vinculados a equipamentos é bloqueada.
+
+**O que acontece com os modelos se o fabricante for inativado?**
+Os modelos permanecem no histórico mas não podem ser selecionados em novos equipamentos.
+
 ## Boas práticas
 
 - Cadastre o fabricante antes de criar modelos e equipamentos — a hierarquia Fabricante → Modelo → Equipamento é obrigatória

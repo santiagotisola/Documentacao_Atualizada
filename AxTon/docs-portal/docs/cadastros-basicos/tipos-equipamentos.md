@@ -55,7 +55,13 @@ O tipo de equipamento determina as configurações de operação aplicáveis (ve
 | Dinâmica (WIM) | ±10% | Não |
 | Sensor de eixo | N/A | Não |
 
-## Relacionado
+## Perguntas frequentes
+
+**Qual tipo usar para fiscalização sem parar o tráfego?**
+Balança Dinâmica (WIM). Veículos com excesso são direcionados para confirmação em balança estática.
+
+**O tipo pode ser alterado após cadastro?**
+Sim, mas somente se nenhum equipamento ativo estiver vinculado. Veículos em operação devem ser desvinculados antes.
 
 - [Fabricantes](./fabricantes)
 - [Modelos de Equipamentos](./modelos-equipamentos)

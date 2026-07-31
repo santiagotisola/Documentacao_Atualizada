@@ -63,6 +63,18 @@ Configure notificações automáticas por e-mail para alertas críticos (excesso
 
 - [Consulta de Placas](./consulta-placas)
 - [Monitoramento Online](./monitoramento-online)
+- [Relatório de Infrações](../relatorios/relatorio-infracoes)
+
+## Perguntas frequentes
+
+**O alerta foi gerado mas o veículo já saiu. O que fazer?**
+Registre a ocorrência com status Descartado e justificativa. Informe ao supervisor.
+
+**Um alerta de MDF-e pode ser falso positivo?**
+Sim. A consulta SEFAZ pode ter delay. Aguarde 5 minutos e reprocesse antes de autuar.
+
+**Como configurar notificações automáticas?**
+Acesse Configurações → Notificações e cadastre e-mails por tipo de alerta.
 Responda alertas de equipamento offline antes de qualquer outro. Um equipamento inativo não registra pesagens.
 :::
 
