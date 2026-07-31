@@ -103,3 +103,11 @@ Não. Interrupções devem ser registradas antes da geração da medição. Apó
 
 **Qual o prazo máximo para registrar uma interrupção?**
 Registre imediatamente após o equipamento voltar à operação. O prazo máximo depende do contrato, mas o recomendado é até 24 horas após a normalização.
+
+## Integração com outros módulos
+
+| Módulo | Como se relaciona |
+|--------|------------------|
+| **Contratos** | As interrupções são contabilizadas no cálculo de disponibilidade exigido contratualmente |
+| **Índices de Performance** | A disponibilidade calculada nos índices considera diretamente as interrupções cadastradas |
+| **Criar Medição** | A medição gerada desconta automaticamente as interrupções do período de apuração |

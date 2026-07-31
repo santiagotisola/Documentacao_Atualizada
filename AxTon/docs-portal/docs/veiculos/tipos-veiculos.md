@@ -107,3 +107,11 @@ Não. Alterar o PBT máximo retroativamente gera inconsistências nos boletins d
 
 **O que fazer quando um veículo com configuração de eixos incomum não corresponde a nenhum tipo cadastrado?**
 Cadastre um novo tipo em **Veículos → Tipos de Veículos → + Novo** com o número de eixos e PBT máximo correspondente, seguindo a tabela CONTRAN 803/2021. Em caso de dúvida sobre o enquadramento legal, consulte o órgão contratante antes de criar o registro.
+
+## Integração com outros módulos
+
+| Módulo | Como se relaciona |
+|--------|------------------|
+| **Classificações de Veículos** | Os tipos estão diretamente vinculados às classificações de eixo e PBT para cálculo de excesso |
+| **Pesagem** | O tipo de veículo determina o limite de PBT aplicado no cálculo de excesso de peso |
+| **Infrações** | O tipo de veículo compõe o enquadramento das infrações por excesso de peso geradas no posto |

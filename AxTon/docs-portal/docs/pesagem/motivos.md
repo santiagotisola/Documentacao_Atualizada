@@ -112,3 +112,10 @@ O tipo define em qual métrica o registro será contabilizado. Motivos do tipo *
 :::tip
 Motivos bem configurados alimentam os relatórios gerenciais e permitem identificar padrões como excessívas liberações por "erro de classificação" que podem indicar necessidade de treinamento da equipe.
 :::
+## Integração com outros módulos
+
+| Módulo | Como se relaciona |
+|--------|------------------|
+| **Liberar Pesagem** | O motivo selecionado ao liberar o veículo é registrado no ticket para rastreabilidade |
+| **Reclassificar** | A reclassificação exige um motivo justificando a alteração de categoria do veículo |
+| **Relatórios Gerenciais** | Os motivos alimentam os relatórios de produtividade e padrões operacionais do posto |

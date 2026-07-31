@@ -136,3 +136,11 @@ O relatório exportado em CSV contém os metadados (data, local, placa, velocida
 
 **Qual o limite de período recomendado para uma consulta de rastreamento de placa?**
 Períodos de até 30 dias oferecem bom desempenho. Para análises mais longas, divida a consulta em faixas mensais e combine os resultados. Períodos muito amplos podem resultar em lentidão na renderização dos resultados.
+
+## Integração com outros módulos
+
+| Módulo | Como se relaciona |
+|--------|------------------|
+| **Painel Analítico** | Complementa o rastreamento com heatmap e análise estatística de frequência de passagens |
+| **Veículos Monitorados** | Placas cadastradas na lista de monitorados exibem ícones de alerta durante o rastreamento |
+| **Passagens** | O histórico completo de passagens é a fonte de dados para todas as consultas de rastreamento |

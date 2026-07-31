@@ -108,3 +108,11 @@ Responda alertas de equipamento offline antes de qualquer outro. Um equipamento 
 :::info Dashboard
 Os alertas recentes também são exibidos no Use Dashboard Principal Dashboard para ação imediata.
 :::
+
+## Integração com outros módulos
+
+| Módulo | Como se relaciona |
+|--------|------------------|
+| **Monitoramento Online** | Os alertas gerados são exibidos em tempo real no painel de monitoramento do posto |
+| **Consulta de Placas** | A consulta de placas identifica veículos com histórico de alertas anteriores |
+| **Relatório de Infrações** | Alertas de excesso de peso resultam em infrações registradas e rastreadas nos relatórios |

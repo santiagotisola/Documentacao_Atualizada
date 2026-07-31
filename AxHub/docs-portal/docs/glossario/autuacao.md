@@ -121,3 +121,11 @@ A autuação é o registro formal da infração (AIT). A notificação é o docu
 É o código que identifica o tipo de auto gerado (AIT-E, NOT-E, etc.). Esse código é exigido pelo sistema do órgão autuador no arquivo de exportação e deve ser configurado em **Administração → Formas de Autuação**.
 - [Exportacao](../infracoes/exportacao)
 - [Infracao](./infracao)
+
+## Integração com outros módulos
+
+| Módulo | Como se relaciona |
+|--------|------------------|
+| **Triagem** | A triagem valida as infrações que resultam no auto de infração formal |
+| **Enquadramento** | Define o artigo CTB, penalidade e pontuação atribuídos a cada auto |
+| **Exportação** | O auto gerado é incluído no lote enviado ao órgão autuador |

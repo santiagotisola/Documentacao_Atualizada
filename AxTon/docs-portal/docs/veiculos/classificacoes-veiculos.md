@@ -103,3 +103,11 @@ Após o OCR capturar a placa, o sistema consulta o RENAVAM para identificar o n�
 
 **Quando devo criar uma nova classificação ao invés de editar uma existente?**
 Crie uma nova classificação quando o CONTRAN publicar resolução alterando os limites de PBT ou quando o órgão contratante exigir limites mais restritivos que os legais. Nunca edite classificações já vinculadas a infrações exportadas — crie uma nova e inative a anterior.
+
+## Integração com outros módulos
+
+| Módulo | Como se relaciona |
+|--------|------------------|
+| **Tipos de Veículos** | Cada classificação está vinculada a um tipo de veículo que define a categoria pesada |
+| **Pesagem** | A classificação determina o PBT máximo comparado com o peso aferido na balança |
+| **Infrações** | O excesso de PBT gera infração automática com enquadramento baseado na classificação identificada |

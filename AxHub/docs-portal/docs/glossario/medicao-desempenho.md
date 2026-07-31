@@ -103,3 +103,11 @@ Dependendo do contrato, pode haver glosa no pagamento mensal. Documente as causa
 
 **A medição considera equipamentos que ficaram offline por causa do contratante?**
 Depende da classificação da interrupção. Interrupções causadas por terceiros (fornecedoras de energia, contratante) geralmente não descontam da disponibilidade se registradas corretamente com o tipo adequado.
+
+## Integração com outros módulos
+
+| Módulo | Como se relaciona |
+|--------|------------------|
+| **Contratos** | A medição de desempenho está sempre vinculada a um contrato de concessão com metas definidas |
+| **Índices de Performance** | Os índices configurados por contrato são calculados e compõem o boletim de medição |
+| **Interrupções** | Cada interrupção registrada impacta diretamente os indicadores de disponibilidade do boletim |

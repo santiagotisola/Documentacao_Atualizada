@@ -95,3 +95,11 @@ Somente laboratórios credenciados pelo INMETRO. A empresa operadora não pode f
 
 **O que acontece com as infrações geradas durante um período com aferição vencida?**
 Elas são bloqueadas automaticamente e não podem ser exportadas. Mesmo que a aferição seja renovada, as infrações do período vencido não são revalidadas.
+
+## Integração com outros módulos
+
+| Módulo | Como se relaciona |
+|--------|------------------|
+| **Equipamentos** | Cada equipamento cadastrado precisa ter aferição válida para que suas infrações tenham valor legal |
+| **Infrações** | Infrações são bloqueadas automaticamente quando a aferição do equipamento está vencida |
+| **Dashboard** | Exibe alertas de vencimento próximo das aferições para ação preventiva |

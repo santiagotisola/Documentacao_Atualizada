@@ -117,3 +117,11 @@ O sistema não pré-carrega a tabela de cores automaticamente. Você deve cadast
 3. Preencha o Código e a Descrição
 4. Marque como Ativo
 5. Clique em **Salvar**
+
+## Integração com outros módulos
+
+| Módulo | Como se relaciona |
+|--------|------------------|
+| **Triagem** | A cor do veículo é consultada durante a triagem para compor as informações do auto |
+| **Exportação de Infrações** | A cor é campo obrigatório no arquivo enviado ao SENATRAN; lacunas causam rejeicao |
+| **Marcas de Veículos** | Complementa a identificação do veículo junto com marca e modelo nos registros de pesagem |

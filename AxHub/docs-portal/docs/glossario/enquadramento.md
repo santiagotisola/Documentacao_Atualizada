@@ -89,3 +89,11 @@ Não. Infrações já enviadas ao órgão autuador não podem ser alteradas no s
 
 **Qual a diferença entre gravidade e pontuação na CNH?**
 Gravidade define o valor da multa (Leve, Média, Grave, Gravíssima). Pontuação é a quantidade de pontos debitados na CNH. Ambos são definidos em conjunto pelo CTB para cada enquadramento.
+
+## Integração com outros módulos
+
+| Módulo | Como se relaciona |
+|--------|------------------|
+| **Faixas** | A velocidade regulamentada de cada faixa é a base para o enquadramento automático sugerido pelo sistema |
+| **Infrações** | Cada infração recebe um enquadramento que determina multa, pontuação e artigo CTB aplicável |
+| **Configurações de Enquadramento** | Define as regras de enquadramento por operação e faixa de velocidade |

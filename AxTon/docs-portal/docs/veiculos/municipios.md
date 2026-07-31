@@ -99,3 +99,11 @@ O sistema vem com uma base pré-carregada com todos os municípios brasileiros e
 
 **O que acontece se o posto de pesagem não tiver município cadastrado?**
 O boletim de medição gerado ficará sem a informação de localidade, e os arquivos de exportação podem ser rejeitados pelo SENATRAN. Edite o cadastro do posto e vincule o município correto antes de gerar medições ou exportar infrações.
+
+## Integração com outros módulos
+
+| Módulo | Como se relaciona |
+|--------|------------------|
+| **Postos de Pesagem** | O município identifica a localização geográfica do posto nos boletins de medição |
+| **Relatório de Infrações** | O município é exibido nos relatórios como localidade das ocorrências de infração |
+| **Exportação de Infrações** | O código IBGE do município é campo obrigatório nos arquivos enviados ao SENATRAN |

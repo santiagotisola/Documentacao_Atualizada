@@ -100,3 +100,11 @@ Verifique os filtros aplicados. Se o tipo de discrepância estiver selecionado d
 
 **A discrepância de classificação gera infração automática?**
 Não diretamente. O relatório identifica a inconsistência, mas a geração de infração depende de triagem e validação pelo operador com base nos dados de eixo, PBT e documentação fiscal.
+
+## Integração com outros módulos
+
+| Módulo | Como se relaciona |
+|--------|------------------|
+| **NF-e** | A nota fiscal é comparada com o peso aferido para detectar sub-declarações de carga |
+| **MDF-e** | Inconsistências no manifesto eletrônico são identificadas e listadas pelo relatório |
+| **Exportação de Infrações** | Discrepâncias devem ser resolvidas antes de cada exportação para evitar rejeição pelo SENATRAN |
