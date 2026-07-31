@@ -82,3 +82,11 @@ Sim. Uma faixa pode ser reutilizada em operações distintas, mas apenas uma ope
 
 **O sentido da faixa impacta na exportação?**
 Sim. O sentido é exigido em alguns layouts de exportação e aparece no relatório de passagens. Configure corretamente conforme a instalação física do equipamento.
+
+## Integração com outros módulos
+
+| Módulo | Como se relaciona |
+|--------|------------------|
+| **[Operações](./cadastro-operacoes)** | A faixa pertence a uma operação — sem operação ativa não há fiscalização eletrônica nas faixas cadastradas |
+| **[Municípios](../veiculos/municipios)** | O código IBGE do município da faixa é obrigatório na geração de lotes de exportação ao DENATRAN |
+| **[Exportação de Infrações](../infracoes/exportacao)** | O código IBGE incorreto na faixa causa rejeição direta do lote de exportação pelo órgão autuador |

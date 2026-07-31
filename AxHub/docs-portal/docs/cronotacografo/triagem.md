@@ -95,3 +95,11 @@ Enquadre a infração para revisão manual. O status pode indicar placa divergen
 
 **Infrações de cronotacógrafo irregular seguem o mesmo fluxo de exportação?**
 Sim. Após triagem e auditoria, seguem para o lote de exportação padrão como qualquer outra infração.
+
+## Integração com outros módulos
+
+| Módulo | Como se relaciona |
+|--------|------------------|
+| **[Consulta de Cronotacógrafo](./consulta)** | Exibe o histórico completo de verificações e resultados processados pela triagem de cronotacógrafo |
+| **[Cronotacógrafo (Glossário)](../glossario/cronotacografo)** | Definição legal e técnica do dispositivo cujos registros são analisados nesta triagem |
+| **[Triagem de Infrações](../infracoes/triagem)** | Fluxo paralelo de triagem — compartilham conceitos, status e integração com o lote de exportação |

@@ -74,3 +74,11 @@ Sim. Use os controles nativos do Power BI incorporado para exportar. A disponibi
 
 **O dashboard aparece em branco mesmo com dados no sistema. O que verificar?**
 Verifique se a URL de incorporação está correta e se o usuário tem acesso ao relatório no Power BI Service. O token de incorporação pode ter expirado.
+
+## Integração com outros módulos
+
+| Módulo | Como se relaciona |
+|--------|------------------|
+| **[Medições](../medicoes/contratos)** | Os dados de Boletim de Medição e disponibilidade alimentam diretamente os dashboards analíticos |
+| **[Processamento de Imagens](./processamento-imagens)** | A taxa OCR por equipamento é exibida nos dashboards de desempenho e qualidade |
+| **[Relatório de Infrações](./relatorio-infracoes)** | Volume e distribuição de infrações compõem os gráficos analíticos do Power BI |

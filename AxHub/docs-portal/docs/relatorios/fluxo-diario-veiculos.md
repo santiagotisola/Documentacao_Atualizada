@@ -98,3 +98,11 @@ Combine com o [Mapa de Fluxo de Passagens](./mapa-fluxo-passagens) para visualiz
 | Relacionado | [Monitoramento Online](../operacoes/monitoramento-online) | Status em tempo real |
 | Relacionado | [Mapa Fluxo Passagens](./mapa-fluxo-passagens) | Visualização em mapa |
 | Relacionado | Relatório de Passagens](./relatorio-passagens) | Detalhamento por passagem |
+
+## Integração com outros módulos
+
+| Módulo | Como se relaciona |
+|--------|------------------|
+| **[Mapa de Fluxo de Passagens](./mapa-fluxo-passagens)** | Complemento visual georreferenciado dos mesmos dados tabulares apresentados neste relatório |
+| **[Processamento de Imagens](./processamento-imagens)** | Fornece a taxa OCR por equipamento e dia que compõe o Aproveitamento (%) exibido |
+| **[Operações / Faixas](../operacoes/faixas)** | As faixas e equipamentos da operação ativa são a fonte primária do fluxo diário de passagens |

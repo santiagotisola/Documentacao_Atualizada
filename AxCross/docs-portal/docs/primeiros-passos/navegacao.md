@@ -83,3 +83,11 @@ O **Monitoramento Online** exibe o status das câmeras com filtros por alerta, e
 
 **Como retornar ao Dashboard sem clicar no botão Voltar do navegador?**
 Clique em **Dashboard** no menu lateral ou use o **breadcrumb** no topo da página. O breadcrumb mostra o caminho de navegação atual e permite retornar a qualquer nível anterior com um clique.
+
+## Integração com outros módulos
+
+| Módulo | Como se relaciona |
+|--------|------------------|
+| **[Dashboard](./dashboard)** | Tela inicial exibida após o login — o menu lateral sempre oferece retorno a ele |
+| **[Perfis de Acesso](../administracao/perfis-acesso)** | Define quais módulos ficam visíveis no menu lateral para cada tipo de usuário |
+| **[Permissões de Acesso](../administracao/permissoes)** | Controla o acesso granular às funcionalidades acessíveis pelo menu lateral |

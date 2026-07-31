@@ -92,3 +92,11 @@ As causas mais comuns são: lentes sujas (necessário limpeza), desalinhamento d
 
 **É obrigatório vincular o equipamento a uma faixa imediatamente após o cadastro?**
 Sim. Sem a vinculação com uma faixa, o equipamento não captura passagens mesmo estando Online. Após cadastrar o equipamento, acesse **Cadastros → Equipamentos**, selecione o equipamento e adicione as faixas necessárias.
+
+## Integração com outros módulos
+
+| Módulo | Como se relaciona |
+|--------|------------------|
+| **[Cadastros → Equipamentos](../cadastros/equipamentos)** | Local de registro físico, gestão de faixas e monitoramento de status de cada equipamento |
+| **[Monitoramento Online](../operacoes/monitoramento-online)** | Exibe o status de comunicação de cada equipamento em tempo real com filtros por câmera e faixa |
+| **[Dashboard](../primeiros-passos/dashboard)** | Indicador de equipamentos ativos e mapa georreferenciado com a localização e status de cada câmera |
