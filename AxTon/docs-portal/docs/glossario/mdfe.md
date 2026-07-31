@@ -42,7 +42,13 @@ Documento eletrônico obrigatório que vincula as notas fiscais (NF-e) ao transp
 | MDF-e encerrado antes do destino | Retenção da carga |
 | Dados divergentes do MDF-e | Apreensão da mercadoria |
 
-## Fluxo de verificação no AxTon
+## Erros comuns no AxTon
+
+| Erro | Causa | Solução |
+|------|-------|----------|
+| Alerta MDF-e sem infração | Configuração de alerta sem auto | Verificar regras de enquadramento |
+| MDF-e válido mas alerta gerado | Consulta SEFAZ com delay | Aguardar sincronização e verificar novamente |
+| Veículo sem MDF-e isento | Carga não obriga MDF-e | Verificar tabela de obrigatoriedades |
 
 ```
 Veículo chega ao posto

@@ -40,7 +40,23 @@ Processo de **análise preliminar** das infrações capturadas automaticamente, 
 - Manter defasagem de triagem abaixo de 24h
 - Não aprovar infrações com placa ilegível — o auto pode ser contestado
 - Registrar o motivo de descarte para análise estatística
-- Escalar para auditoria dúvidas sobre enquadramento
+
+## Produtividade recomendada
+
+| Analista | Infrações/hora |
+|----------|:--------------:|
+| Sênior | 120 |
+| Pleno | 80 |
+| Trainee | 40 |
+
+## Erros comuns
+
+| Erro | Impacto | Prevenção |
+|------|---------|----------|
+| Aprovar com placa errada | Auto inválido | Verificar OCR |
+| Descartar sem motivo | Sem rastreabilidade | Sempre selecionar motivo |
+| Backlog alto | Prescrição das infrações | Redistribuir analistas |
+
 
 ## Tempo médio por infração
 

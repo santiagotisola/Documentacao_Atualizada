@@ -48,8 +48,14 @@ Em caso de dúvidas sobre o sistema:
 :::info
 Este manual é atualizado automaticamente a cada versão do sistema. Consulte sempre a versão online para garantir informações atualizadas.
 :::
-- **Campos exibidos** — detalhamento de cada campo da tela
-- **Filtros disponíveis** — opções de pesquisa e filtragem
+
+## Portais de documentação
+
+| Portal | Produto | URL |
+|--------|---------|-----|
+| AxHub.Docs | Fiscalização eletrônica | /AxHub.Docs |
+| AxTon.Docs | Pesagem veicular | /AxTon.Docs |
+| AxCross.Docs | Monitoramento de cruzamentos | /AxCross.Docs |
 - **Integrações** — tabelas e sistemas relacionados
 
 :::tip Dica

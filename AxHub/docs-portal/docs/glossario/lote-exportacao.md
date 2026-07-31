@@ -43,7 +43,13 @@ Criado → Processando → Enviado → Aceito
 Lotes rejeitados pelo órgão não são reprocessados automaticamente. É necessário corrigir o problema e gerar novo lote.
 :::
 
-## Fluxo de exportação
+## Erros comuns
+
+| Erro | Causa | Solução |
+|------|-------|----------|
+| Lote rejeitado | Sequencial duplicado | Usar Relatório de Falhas |
+| Status Erro | Falha de conexão | Reenviar após 24h |
+| Infração ausente | Status não era Auditada | Revisar pipeline de triagem |
 
 ```
 Infrações auditadas

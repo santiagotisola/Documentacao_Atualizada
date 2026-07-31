@@ -40,7 +40,15 @@ Categoria → Classificação → Veículo. A classificação é o nível mais e
 |-----------|----------------|
 | Moto | Motocicleta, Ciclomotor, Motoneta |
 | Caminhão | Toco, Truck, Bi-truck |
-| Passeio | Automóvel, Caminhoneta, Campanha |
+| Passeio | Automóvel, Caminhoneta, Camponã |
+
+## Erros comuns
+
+| Erro | Causa | Solução |
+|------|-------|----------|
+| Enquadramento errado | Classificação incorreta | Verificar CTB e corrigir |
+| Classificação sem categoria | Vínculo ausente | Associar categoria pai |
+| Veículo com classificação obsoleta | Resolução desatualizada | Atualizar conforme CTB vigente |
 
 ## Relacionado
 

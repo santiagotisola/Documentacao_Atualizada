@@ -40,14 +40,24 @@ Os dashboards são gerados a partir dos dados do AxTon e atualizados conforme a 
 
 ## Casos de uso dos dashboards
 
-| Dashboard | Quem usa | Frequência recomendada |
-|-----------|----------|:---------------------:|
+| Dashboard | Quem usa | Frequência |
+|-----------|----------|:----------:|
 | Boletim de Medição | Gestor de contrato | Mensal |
 | Disponibilidade | Supervisor técnico | Semanal |
-| Infrações por Dia/Hora | Coordenador de operações | Diário |
-| Taxa OCR | Supervisor técnico | Semanal |
+| Infrações por Dia/Hora | Coordenador | Diário |
 
 ## Erros comuns
+
+| Erro | Causa | Solução |
+|------|-------|----------|
+| Dashboard em branco | URL incorreta | Verificar URL de incorporação |
+| Dados desatualizados | Refresh desconfigurado | Ajustar no Power BI Service |
+| Não aparece no menu | Sem permissão | Adicionar grupo de acesso |
+
+## Relacionado
+
+- [Relatório de Infrações](./relatorio-infracoes)
+- [Processamento de Imagens](./processamento-imagens)
 
 | Erro | Causa | Solução |
 |------|-------|----------|
