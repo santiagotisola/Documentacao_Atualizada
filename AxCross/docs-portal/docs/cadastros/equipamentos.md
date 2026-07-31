@@ -348,3 +348,21 @@ Configuração das faixas de monitoramento em cada cruzamento. Cada faixa repres
 :::info Dependência
 Para cadastrar uma faixa, é necessário que o **Local** e o **Equipamento** já estejam cadastrados no sistema.
 :::
+
+## Integração VARCO
+
+Os equipamentos de câmera **VARCO** se comunicam com o AxCross enviando dados de passagem via HTTP. As principais variáveis enviadas pelo VARCO:
+
+| Variável VARCO | Mapeamento no AxCross |
+|----------------|----------------------|
+| `{{cameraId}}` | Nome do Equipamento |
+| `{{equipmentId}}` | MAC Address (campo IP) |
+| `{{lane}}` | Faixa de captura |
+| `{{plate}}` | Placa detectada |
+| `{{image}}` | Imagem base64 da passagem |
+| `{{vehicleType}}` | Tipo do veículo |
+| `{{vehicleBrand}}` | Marca do veículo |
+| `{{vehicleColor}}` | Cor do veículo |
+| `{{latitude}}` + `{{longitude}}` | Posição do equipamento |
+
+→ Veja a [referência completa das variáveis VARCO](../referencia-tecnica/integracao-varco)

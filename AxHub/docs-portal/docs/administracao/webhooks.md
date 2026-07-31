@@ -45,7 +45,25 @@ Webhooks com erro 4xx (cliente) não são reenviados automaticamente. Webhooks c
 ## Relacionado
 
 - [Logs de Envios](../relatorios/relatorio-logs-envios)
-- [Integrações](../sistema/integracoes)
+- [Integrações VARCO](../referencia-tecnica/integracao-varco) — Variáveis disponíveis nos payloads de câmeras OCR/LPR
+- [Banco de Dados](../referencia-tecnica/banco-de-dados)
+
+## Integração com VARCO
+
+Os equipamentos de câmera **VARCO** podem enviar dados diretamente ao AxHub via HTTP webhook. As variáveis do template VARCO são mapeadas automaticamente nos campos do AxHub.
+
+**Variáveis VARCO disponíveis nos payloads:**
+
+| Variável VARCO | Uso no webhook AxHub |
+|----------------|---------------------|
+| `{{plate}}` | Placa da passagem/infração |
+| `{{cameraId}}` | Identificação do equipamento |
+| `{{image}}` | Imagem base64 da captura |
+| `{{plateProbability}}` | Confiança da leitura OCR |
+| `{{vehicleType}}` | Tipo do veículo |
+| `{{utcYear}}..{{utcSeconds}}` | Timestamp UTC da detecção |
+
+→ Veja a [referência completa das variáveis VARCO](../referencia-tecnica/integracao-varco)
 
 ## Exemplos de uso
 

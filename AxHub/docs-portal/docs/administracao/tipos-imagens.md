@@ -51,6 +51,18 @@ Imagens obrigatórias ausentes podem levar à **invalidação do auto** pelo ór
 - [Equipamentos](./equipamentos)
 - [Aferições](../operacoes/afericoes)
 - [Processamento de Imagens](../relatorios/processamento-imagens)
+- [Integração VARCO](../referencia-tecnica/integracao-varco) — Variáveis `{{image}}`, `{{imageList}}`, `{{imageRaw}}`
+
+## Variáveis VARCO de imagem
+
+Os equipamentos VARCO enviam imagens usando as seguintes variáveis no template:
+
+| Variável VARCO | Tipo | Quando usar |
+|----------------|------|-------------|
+| `{{image}}` | Base64 | Imagem principal da passagem |
+| `{{imageList}}` | JSON Array | Múltiplas exposições |
+| `{{imageRaw}}` | Raw bytes | Quando o campo contém apenas `{{imageRaw}}` |
+| `{{imageRawList}}` | Raw bytes list | Formulários multipart com múltiplas imagens |
 
 ## Fluxo de validação de imagens
 
