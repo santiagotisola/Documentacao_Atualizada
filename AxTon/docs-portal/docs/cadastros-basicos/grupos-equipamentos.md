@@ -118,3 +118,21 @@ Os equipamentos permanecem cadastrados e operacionais. O grupo inativo apenas de
 | **Medições → Contratos** | Contratos podem ser filtrados por grupo para cálculos de disponibilidade segmentados |
 | **Medições → Índices de Performance** | Índices podem ser configurados por grupo para análise granular do desempenho |
 | **Operações → Monitoramento Online** | O monitoramento pode ser filtrado por grupo para visualizar apenas equipamentos relevantes |
+
+## Exemplo prático
+
+**Cenário**: Um contrato engloba 4 postos de pesagem em estados diferentes (PI e MA). O gestor precisa gerar boletins mensais separados por estado para compor a medição contratual por localidade.
+
+| Grupo | Equipamentos | Estado |
+|-------|-------------|--------|
+| Postos PI | EQ-PI503B-01, EQ-PI503B-02 | Piauí |
+| Postos MA | EQ-MA201-01, EQ-MA201-02 | Maranhão |
+
+**Passo a passo**:
+1. Acesse **Cadastros Básicos → Grupos de Equipamentos** e clique em **+ Novo**
+2. Crie o grupo `Postos PI` e vincule os equipamentos do Piauí
+3. Clique em **Salvar**
+4. Crie o grupo `Postos MA` e vincule os equipamentos do Maranhão
+5. Ao gerar a medição mensal, filtre por grupo para obter boletins separados por estado
+
+**Resultado**: O boletim de medição gerado para `Postos PI` conta apenas com os dados dos equipamentos piauienses. Os índices de OCR e disponibilidade são calculados independentemente por estado, facilitando a prestação de contas ao contratante.

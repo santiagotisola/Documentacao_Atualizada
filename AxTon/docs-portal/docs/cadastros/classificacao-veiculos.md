@@ -148,5 +148,26 @@ As classificações de Veículos devem ser cadastradas antes do registro de oper
 |--------|--------------------------------------------------|
 | **Pesagem → Iniciar Pesagem** | O operador seleciona a classificação para definir o PBT regulamentado do veículo pesado |
 | **Relatório de Infrações** | A classificação do veículo aparece em cada registro de infração para rastreabilidade |
+
+## Exemplo prático
+
+**Cenário**: O fiscal identifica que um caminhão bitren com configuração 3S3 (3 eixos dianteiros / 3 traseiros, PBT 41,5 t) está sendo enquadrado como 2S2 (PBT 33 t), gerando infrações indevidas para veículos dentro do limite legal.
+
+| Configuração | Valor esperado |
+|-------------|----------------|
+| Classe | 3S3 |
+| Denominação | Caminhão Trator + Semi Reboque 3S3 |
+| Eixos | 3/3 |
+| PBT regulamentado | 41,5 t |
+| Base legal | CONTRAN 803/2021 |
+
+**Passo a passo**:
+1. Acesse **Classificações** e pesquise por `3S3`
+2. Se ausente, clique em **+ Novo** e preencha os campos acima
+3. Se existir com PBT incorreto, clique em **Editar** e corrija o peso máximo para `41.5`
+4. Confirme com a equipe técnica e clique em **Salvar**
+5. As próximas pesagens de veículos 3S3 passarão a usar o limite correto de 41,5 t
+
+**Resultado**: Veículos com classificação 3S3 não geram infrações indevidas. A taxa de infração do posto estabiliza no índice real de excesso de peso, melhorando a credibilidade dos boletins de medição contratual.
 | **Relatório de Passagens** | O tipo do veículo classificado é exibido nos registros de passagem |
 | **Glossário → PBT** | O PBT regulamentado configurado em cada classificação é o valor-base para cálculo de excesso |

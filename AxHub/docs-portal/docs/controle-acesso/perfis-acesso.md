@@ -175,3 +175,24 @@ Não existe função de duplicação nativa. Crie um novo perfil e adicione manu
 
 **O que acontece com os usuários quando um perfil é alterado?**
 A alteração é imediata. Todos os usuários vinculados ao perfil passam a ter as novas permissões na próxima ação no sistema (sem necessidade de relogin).
+
+## Exemplo prático
+
+**Cenário**: Um órgão de trânsito implantando o AxHub precisa configurar 4 perfis distintos para equipes diferentes: triadores do turno diurno, auditores, gestor de medição e operador de exportação.
+
+| Perfil | Responsável | Permissões críticas |
+|--------|------------|----------------------|
+| Triador Diurno | Analistas de imagem | Triagem + Dashboard |
+| Auditor | Supervisor de qualidade | Auditoria + Infrações Desc. |
+| Gestor Medição | Coordenador de contrato | Contrato + Medição + Índices |
+| Op. Exportação | Técnico de TI | Lote Exportação |
+
+**Passo a passo**:
+1. Acesse **Controle de Acesso → Perfis de Acesso** e clique em **+ Novo**
+2. Crie o perfil `Triador Diurno` com descrição `Analista de imagens — triagem de infrações`
+3. Clique em **Salvar**
+4. Acesse **Controle de Acesso → Permissões** e configure as permissões para este perfil
+5. Repita para os outros 3 perfis
+6. Ao criar usuários, vincule cada um ao perfil correspondente à sua função
+
+**Resultado**: Cada equipe acessa apenas os módulos necessários. O triador não exporta lotes; o auditor não altera configurações; o gestor não faz triagem. Rastreabilidade garantida por perfil nos Logs de Acesso.

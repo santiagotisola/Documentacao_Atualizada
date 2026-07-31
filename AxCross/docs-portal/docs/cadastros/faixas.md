@@ -111,3 +111,21 @@ Sim, mas dados históricos permanecem com o sentido original. Passagens futuras 
 | **Relatório de Passagens** | Passagens são registradas por faixa, permitindo filtrar o volume de tráfego por direção e sentido |
 | **Monitoramento Online** | O monitoramento em tempo real exibe passagens separadas por faixa para identificação precisa do fluxo |
 
+## Exemplo prático
+
+**Cenário**: No cruzamento da Av. Brasil x Rua XV em Campinas, dois equipamentos foram instalados: um monitorando o sentido Norte (entrada da cidade) e outro o sentido Sul (saída). Cada equipamento precisa de uma faixa configurada para capturar passagens no sentido correto.
+
+| Faixa | Equipamento | Sentido | Velocidade máx. |
+|-------|-------------|---------|------------------|
+| 1 | OCR-CPS-001 | Norte | 60 km/h |
+| 2 | OCR-CPS-002 | Sul | 60 km/h |
+
+**Passo a passo**:
+1. Confirme que o local `Av. Brasil x Rua XV` e os equipamentos `OCR-CPS-001` e `OCR-CPS-002` estão cadastrados
+2. Acesse **Cadastros → Faixas** e clique em **Nova Faixa**
+3. Selecione o local `Av. Brasil x Rua XV`, número `1`, sentido `Norte`, equipamento `OCR-CPS-001`, velocidade `60`
+4. Clique em **Salvar**
+5. Repita para a Faixa 2 (sentido Sul, equipamento OCR-CPS-002)
+
+**Resultado**: O sistema registra passagens separadas por sentido. O Relatório de Passagens permite filtrar por faixa para analisar o fluxo de entrada e saída da cidade separadamente. Alertas de excesso de velocidade são gerados automaticamente para veículos acima de 60 km/h.
+

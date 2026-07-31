@@ -115,3 +115,25 @@ O sistema possui controle de acesso por IP. Seu endereço de rede não está aut
 | **Controle de Acesso → Perfis de Acesso** | O perfil vinculado ao usuário determina os módulos disponíveis após o login |
 | **Controle de Acesso → Acessos por IP** | Restringe de quais endereços IP o login pode ser realizado |
 | **Logs de Acesso** | Registra cada tentativa de login (sucesso e falha) para auditoria |
+
+## Exemplo prático
+
+**Cenário**: Um operador que foi promovido a supervisor precisa acessar o sistema para o primeiro turno no posto PI503B. Ele recebeu as credenciais temporárias do administrador e precisa fazer o login e alterar a senha.
+
+| Configuração | Valor |
+|-------------|-------|
+| Usuário | `supervisor.pi503b` |
+| Senha temporária | Fornecida pelo admin |
+| Perfil | Supervisor de Turno |
+
+**Passo a passo**:
+1. Abra o navegador e acesse o endereço do AxTon (ex.: `http://192.168.10.1`)
+2. Informe o **Usuário**: `supervisor.pi503b`
+3. Informe a **Senha** temporária recebida
+4. Clique em **Entrar**
+5. O sistema exibe a tela de alteração de senha no primeiro acesso
+6. Defina uma nova senha segura (mínimo 8 caracteres, com letras e números)
+7. Confirme a nova senha e salve
+8. O sistema redireciona para o **Dashboard** com os indicadores do posto PI503B
+
+**Resultado**: O supervisor acessa o sistema com o perfil correto e visualiza apenas os módulos habilitados (Pesagem, Operações, Exportação, Relatórios). A troca de senha garante que somente ele conhece as credenciais de acesso.

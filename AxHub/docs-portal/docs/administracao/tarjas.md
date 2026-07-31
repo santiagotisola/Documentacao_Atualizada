@@ -171,3 +171,33 @@ Sim. Configure templates distintos no cadastro de cada equipamento para personal
 
 **A tarja é aplicada automaticamente ou precisa de ação manual?**
 Automaticamente durante o processamento. O analista visualiza a imagem já com a tarja aplicada na triagem, sem necessidade de intervenção manual.
+
+## Exemplo prático
+
+**Cenário**: O órgão autuador do Piauí exige que todas as imagens de infrações por excesso de velocidade exibam na tarja: código do equipamento, endereço, data/hora da infração, código e descrição do enquadramento CTB e dados da aferição INMETRO.
+
+**Template de tarja a configurar**:
+```
+Cód. Equipamento : {CodigoEquipamento}
+Endereço        : {CodigoLocalOperacaoEquipamento}
+Faixa           : {NumeroFaixa} Sentido : {SentidoFaixa}
+Data/Hora       : {DataPassagemInfracao}
+―――――――――――――――――――――――――――――――――――――――――――
+Aferição       : {DataAfericaoInmetro} (Venc.: {DataVencimentoAfericao})
+Certificado     : {CertificadoEquipamento}
+Portaria        : {PortariaEquipamento}
+―――――――――――――――――――――――――――――――――――――――――――
+Infração       : {CodigoEnquadramento}
+Descrição      : {DescricaoEnquadramento}
+```
+
+**Passo a passo**:
+1. Acesse **Configurações → Tarjas** e clique em **+ Novo**
+2. Informe o Nome: `Tarja Padrão Velocidade PI`
+3. Selecione o Tipo: `Informação`
+4. Cole o template acima no campo **Template**
+5. Configure a Posição conforme o layout do órgão (ex: parte inferior da imagem)
+6. Marque como **Ativo** e clique em **Salvar**
+7. Vincule a tarja ao enquadramento de velocidade em **Configurações → Enquadramentos**
+
+**Resultado**: Todas as infrações de velocidade geradas a partir de agora exibirão a tarja preenchida com os dados reais do equipamento e da operação, conforme o layout exigido pelo órgão autuador.

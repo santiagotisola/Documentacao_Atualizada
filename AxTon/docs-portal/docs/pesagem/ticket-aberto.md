@@ -117,3 +117,26 @@ Sim. Enquanto o ticket estiver com status **Em Andamento**, ele pode ser cancela
 | **Reclassificar** | Permite corrigir a classificação de um ticket após a pesagem |
 | **Tickets Fechados** | Destino dos tickets após finalização — mantém o histórico completo |
 | **Operações** | O ticket é vinculado à operação ativa no momento da pesagem |
+
+## Exemplo prático
+
+**Cenário**: Um caminhão Bitrem (5 eixos) entra no posto PI503B. O operador inicia o processo de pesagem e registra o veículo com peso medido de 48.200 kg. O PBT regulamentado para Bitrem 5E é 41.500 kg (+5% = 43.575 kg), gerando infração automática por excesso.
+
+| Configuração | Valor |
+|-------------|-------|
+| Classificação | Bitrem (5 eixos) — 3T3 |
+| PBT regulamentado | 41.500 kg |
+| Tolerância (5%) | 43.575 kg |
+| PBT medido | 48.200 kg |
+| Excesso | 4.625 kg |
+
+**Passo a passo**:
+1. Clique em **+ Nova Pesagem** na tela de Tickets
+2. Selecione a classificação **Bitrem 5 eixos (3T3)**
+3. Informe a placa do veículo
+4. Clique em **Continuar** — a balança HAENNI registra o peso automaticamente
+5. Confirme os dados exibidos (peso por eixo e PBT total)
+6. Clique em **Finalizar** — o sistema gera a infração de excesso de PBT
+7. O ticket passa para **Finalizado** e a infração fica pendente de triagem
+
+**Resultado**: O auto de infração é criado com o excesso de 4.625 kg e encaminhado à triagem. O veículo é retido até regularização ou decisão administrativa.

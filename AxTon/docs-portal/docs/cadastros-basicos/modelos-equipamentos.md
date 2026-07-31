@@ -120,3 +120,23 @@ Não é recomendado. Renomear pode causar inconsistência nos relatórios histó
 | **Cadastros Básicos → Fabricantes** | O modelo é vinculado ao fabricante que o produz |
 | **Cadastros Básicos → Tipos de Equipamentos** | Define a categoria do modelo (rádar, balança, câmera etc.) |
 | **Operações → Monitoramento Online** | O modelo do equipamento aparece no painel de monitoramento para identificação |
+## Exemplo prático
+
+**Cenário**: Um novo lote de balanças HAENNI WL105 chegou ao contrato BR-163/MT. O modelo ainda não está cadastrado, impedindo a criação dos equipamentos físicos.
+
+| Configuração | Valor |
+|-------------|-------|
+| Fabricante | HAENNI Instruments AG |
+| Nome do modelo | WL105 |
+| Tipo | Balança Semidinâmica |
+| Capacidade | 60 t |
+| Status | Ativo |
+
+**Passo a passo**:
+1. Confirme que o fabricante `HAENNI Instruments AG` está cadastrado
+2. Acesse **Cadastros Básicos → Modelos de Equipamentos** e clique em **+ Novo**
+3. Preencha: Nome `WL105`, Fabricante `HAENNI`, Tipo `Balança Semidinâmica`, Capacidade `60`
+4. Clique em **Salvar**
+5. Acesse **Cadastros Básicos → Equipamentos** e crie os 4 equipamentos vinculando-os ao modelo WL105
+
+**Resultado**: Os 4 novos equipamentos HAENNI WL105 são cadastrados com sucesso e aparecem no Monitoramento Online. As aferições INMETRO podem ser registradas com rastreabilidade completa por modelo e fabricante.

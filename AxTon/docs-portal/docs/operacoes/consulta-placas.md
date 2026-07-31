@@ -120,3 +120,13 @@ Sim. A consulta aceita ambos os formatos. Se o OCR leu a placa no formato Mercos
 | **Relatório de Passagens** | Para análises mais amplas por placa e período, use o relatório com filtros avançados |
 | **Relatório de Infrações** | Cruza dados da consulta com infrações geradas para identificar reincidência |
 | **Processamento de Imagens** | A qualidade do OCR impacta diretamente a precisão das placas armazenadas e consultadas |
+
+## Tabela de referência rápida
+
+| Situação | Ação recomendada | Resultado esperado |
+|----------|:----------------:|-------------------|
+| Nenhum resultado para a placa pesquisada | Ampliar período e verificar taxa OCR do posto | Identificar se houve falha de leitura ou ausência real |
+| Placa com múltiplos registros de excesso | Exportar lista para relatório de reincidentes | Dados embasam autuações agravadas e escalonamento ao órgão |
+| Peso zerado em passagem recente | Acionar manutenção da balança | Leitura corrigida; pesagens suspeitas auditadas |
+| Passagem sem resultado (campo vazio) | Verificar se o ticket foi fechado corretamente | Ticket auditado e reclassificado se necessário |
+| Placa no formato antigo não encontrada | Buscar equivalente Mercosul via RENAVAM | Registro localizado e histórico unificado |

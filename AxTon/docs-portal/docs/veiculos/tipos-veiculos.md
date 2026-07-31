@@ -115,3 +115,23 @@ Cadastre um novo tipo em **Veículos → Tipos de Veículos → + Novo** com o n
 | **Classificações de Veículos** | Os tipos estão diretamente vinculados às classificações de eixo e PBT para cálculo de excesso |
 | **Pesagem** | O tipo de veículo determina o limite de PBT aplicado no cálculo de excesso de peso |
 | **Infrações** | O tipo de veículo compõe o enquadramento das infrações por excesso de peso geradas no posto |
+
+## Exemplo prático
+
+**Cenário**: Em um posto na BR-163 (MT), o operador registra uma pesagem de um caminhão com configuração de **9 eixos (Rodotrem)** pesando **62.000 kg**. O sistema deveria verificar o limite de 57.000 kg (+5% de tolerância = 59.850 kg), mas está enquadrando como Bitrem 6E (limite 45.000 kg), gerando infração indevida.
+
+| Configuração | Valor |
+|-------------|-------|
+| Tipo a criar | Rodotrem (9 Eixos) |
+| Número de eixos | 9 |
+| PBT máximo | 57.000 kg |
+| Base legal | Resolução CONTRAN 803/2021 |
+
+**Passo a passo**:
+1. Acesse **Veículos → Tipos de Veículos** e verifique se **Rodotrem 9E** está cadastrado
+2. Se ausente, clique em **+ Novo** e preencha: Nome `Rodotrem (9 Eixos)`, Eixos `9`, PBT `57000`
+3. Vincule ao grupo de **Classificações de Veículos** correspondente
+4. Clique em **Salvar**
+5. Revise as pesagens anteriores incorretamente enquadradas
+
+**Resultado**: Veículos Rodotrem passam a ser comparados ao limite correto de 57 t. A taxa de infração do posto reduz para o índice esperado e as medições contratuais refletem os dados corretos.

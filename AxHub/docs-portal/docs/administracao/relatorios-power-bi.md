@@ -103,3 +103,12 @@ Verifique se o usuário está vinculado ao grupo de acesso correto no cadastro d
 | **Controle de Acesso — Perfis** | O acesso a cada relatório Power BI é controlado por grupo de acesso, alinhado aos perfis do sistema |
 | **Medições** | O Boletim de Medição e os índices de disponibilidade estão disponíveis como painéis Power BI para prestação de contas |
 | **Relatórios Operacionais** | Complementa os relatórios nativos com análises históricas e visuais avançados (mapa de calor, tendências mensais) |
+
+## Tabela de referência rápida
+
+| Situação | Ação recomendada | Resultado esperado |
+|----------|:----------------:|-------------------|
+| Dashboard Power BI em branco para usuário | Verificar grupo de acesso do relatório | Usuário adicionado ao grupo e dashboard visível |
+| Dados desatualizados no painel | Ajustar agendamento de refresh no Power BI Service | Dados atualizados conforme frequência configurada |
+| Relatório não aparece no menu | Relatório não cadastrado ou sem grupo | Cadastrar relatório e vincular grupo de acesso |
+| Credenciais inválidas no Power BI | Application Id ou Secret incorretos | Revisar credenciais na aba Integrações do Sistema |

@@ -132,3 +132,25 @@ Inative em vez de excluir. A exclusão apaga o histórico de operações do usu�
 | **Permissões de Acesso** | As permissões do perfil determinam o que o usuário pode fazer no sistema |
 | **Logs de Acesso** | Registra os acessos de cada usuário para auditoria e segurança |
 | **Acessos por IP** | Define de quais IPs o usuário pode realizar login |
+
+## Exemplo prático
+
+**Cenário**: O supervisor do posto BR-316 precisa cadastrar dois novos operadores para o turno noturno. Cada operador deve ter acesso apenas ao módulo de Pesagem e Relatórios, sem permissão para configurações ou exportação.
+
+| Configuração | Valor |
+|-------------|-------|
+| Perfil a vincular | Operador Pesagem |
+| Usuário 1 | `op.noturno01` / `Santiago@123` |
+| Usuário 2 | `op.noturno02` / `Operador@456` |
+| Campo Ativo | Sim |
+
+**Passo a passo**:
+1. Acesse **Administração → Usuários** e clique em **+ Novo**
+2. Preencha: Nome `Operador Noturno 01`, Usuário `op.noturno01`, E-mail do operador
+3. Defina uma senha segura e confirme
+4. Selecione o **Perfil de Acesso**: `Operador Pesagem`
+5. Marque o campo **Ativo** e clique em **Salvar**
+6. Repita para o Operador Noturno 02
+7. Informe as credenciais pessoalmente a cada operador
+
+**Resultado**: Os dois operadores conseguem fazer login e acessar apenas Pesagem e Relatórios. Módulos de configuração, exportação e administração ficam ocultos no menu por não fazerem parte do perfil vinculado.

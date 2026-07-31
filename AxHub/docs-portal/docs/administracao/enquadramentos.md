@@ -115,3 +115,12 @@ As infrações geradas serão enquadradas no artigo CTB incorreto, o que pode ca
 | **Configurações de Enquadramento** | Define qual artigo usa em cada operação |
 | **Triagem** | Sugestão automática baseada neste cadastro |
 | **Lote de Exportação** | Código CTB aparece no arquivo exportado |
+
+## Tabela de referência rápida
+
+| Situação | Ação recomendada | Resultado esperado |
+|----------|:----------------:|-------------------|
+| Enquadramento incorreto sugerido na triagem | Verificar a operação e o tipo de equip. vinculado | Artigo CTB correto sugerido automaticamente |
+| Lote rejeitado por código CTB inválido | Confirmar código com o órgão e atualizar o enquadramento | Lote reprocessado e aceito pelo DENATRAN/SENATRAN |
+| Valor de multa desatualizado | IPCA reajustou os valores, solicitar atualização | Valores atualizados pelo suporte Axion |
+| Enquadramento municipal não encontrado | Art. CTB municipal não está na base padrão | Solicitar inclusão ao suporte com o texto legal |

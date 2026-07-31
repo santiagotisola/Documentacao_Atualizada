@@ -132,3 +132,25 @@ O sistema permite abertura de múltiplas operações, mas é uma prática que de
 | **Medições** | Operações são a base dos contratos de medição — período e local definem o escopo do boletim |
 | **Monitoramento Online** | Exibe o status em tempo real das operações e equipamentos ativos |
 | **Relatório de Passagens** | Pesagens registradas na operação aparecem nos relatórios filtrados por local e período |
+
+## Exemplo prático
+
+**Cenário**: Uma equipe de fiscalização inicia um turno de 6h no Posto PI503B (BR-316/PI, km 115). O supervisor precisa abrir uma operação para que as pesagens do turno sejam corretamente vinculadas ao contexto contratual.
+
+| Configuração | Valor |
+|-------------|-------|
+| Local | PI503B — BR-316 KM 115 |
+| Data Início | 27/06/2026 06:00 |
+| Data Fim | 27/06/2026 12:00 |
+| Usuário responsável | Operador Fiscal |
+
+**Passo a passo**:
+1. Acesse **Operações** e clique em **+ Novo**
+2. Selecione o local **PI503B** na lista
+3. Preencha **Data Início**: `27/06/2026 06:00`
+4. Deixe **Data Fim** em branco (encerramento ao final do turno)
+5. Selecione o usuário responsável e clique em **Salvar**
+6. Acesse **Iniciar Pesagem** — o posto PI503B agora está habilitado para registro
+7. Ao encerrar o turno: editar a operação e preencher **Data Fim**: `27/06/2026 12:00`
+
+**Resultado**: Todas as pesagens do turno ficam vinculadas à operação PI503B do dia 27/06. O boletim de medição deste período reflete corretamente as 6 horas de operação e o volume de veículos pesados no posto.

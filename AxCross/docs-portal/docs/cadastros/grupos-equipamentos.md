@@ -107,3 +107,22 @@ Nos relatórios que oferecem o filtro **Grupo de Equipamentos**, selecione o gru
 | **Monitoramento Online** | Permite filtrar o painel de monitoramento por grupo, exibindo apenas os equipamentos do conjunto selecionado |
 | **Alertas** | Regras de alerta e notificação podem ser configuradas por grupo, segmentando a gestão operacional por área |
 | **Relatórios** | Todos os relatórios com filtro de equipamento suportam filtro por grupo para análise por região ou contrato |
+
+## Exemplo prático
+
+**Cenário**: A Secretaria de Segurança Pública de Goiânia tem 12 equipamentos distribuídos por 3 regiões: Centro, Setor Oeste e Marginal Botafogo. O gestor precisa filtrar alertas e relatórios por região para otimizar o trabalho das equipes.
+
+| Grupo | Equipamentos | Região |
+|-------|-------------|--------|
+| Centro GO | EQ-GO-001, EQ-GO-002, EQ-GO-003 | Centro histórico |
+| Setor Oeste | EQ-GO-010, EQ-GO-011 | Zona Oeste |
+| Marginal Botafogo | EQ-GO-020, EQ-GO-021, EQ-GO-022 | Anel viário |
+
+**Passo a passo**:
+1. Acesse **Cadastros → Grupos de Equipamentos** e clique em **Novo Grupo**
+2. Crie `Centro GO` e vincule os 3 equipamentos do centro
+3. Clique em **Salvar**; repita para `Setor Oeste` e `Marginal Botafogo`
+4. No **Monitoramento Online**, filtre por grupo para ver apenas equipamentos da região desejada
+5. Nos relatórios, selecione o grupo para obter dados segmentados por região
+
+**Resultado**: Cada equipe visualiza apenas os equipamentos de sua área. Alertas e relatórios são gerados segmentados por região, reduzindo o tempo de análise e melhorando o tempo de resposta a ocorrências.

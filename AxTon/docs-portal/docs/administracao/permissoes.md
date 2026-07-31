@@ -109,3 +109,28 @@ Sim. Crie um usuário de teste vinculado ao perfil e acesse o sistema para valid
 | **Usuários** | As permissões do perfil vinculado ao usuário determinam o que ele pode fazer no sistema |
 | **Logs de Acesso** | Tentativas de acesso a funcionalidades sem permissão podem ser registradas como alertas de segurança |
 | **Login** | O menu exibido após o login reflete as permissões de visualização (`grid.view`) do perfil do usuário |
+
+## Exemplo prático
+
+**Cenário**: Um novo operador entra na equipe e precisa apenas realizar pesagens e visualizar tickets fechados. O administrador precisa configurar as permissões corretas para o perfil `Operador Pesagem`.
+
+| Módulo | Permissões a habilitar |
+|--------|------------------------|
+| Pesagem | `start-weighing`, `ticket-actions` |
+| Tickets | `grid.view` |
+| Relatório | `grid.view`, `export.pdf` |
+| Configurações | *(nenhuma)* |
+| Exportação | *(nenhuma)* |
+| Usuários | *(nenhuma)* |
+
+**Passo a passo**:
+1. Acesse **Administração → Permissões de Acesso**
+2. Selecione o perfil `Operador Pesagem`
+3. Em **Pesagem**: habilite `start-weighing` e `ticket-actions`
+4. Em **Tickets**: habilite `grid.view`
+5. Em **Relatório**: habilite `grid.view` e `export.pdf`
+6. Deixe todos os demais módulos sem permissão
+7. Clique em **Salvar**
+8. Faça login com o usuário do perfil para validar
+
+**Resultado**: O operador vê apenas Pesagem, Tickets e Relatórios no menu. Não consegue acessar Configurações nem exportar lotes. A rastreabilidade está garantida: qualquer ação do operador é registrada com seu usuário.

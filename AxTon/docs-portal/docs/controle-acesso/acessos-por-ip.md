@@ -108,3 +108,23 @@ Sim. A restrição por IP é uma camada adicional: o usuário precisa estar no I
 | **Login** | O sistema valida o IP do dispositivo antes de permitir a autenticação |
 | **Logs de Acesso** | Tentativas bloqueadas por IP são registradas como falhas de acesso para auditoria |
 | **Perfis de Acesso** | Combine restrição por IP com perfis bem configurados para segurança em camadas |
+
+## Exemplo prático
+
+**Cenário**: A empresa contratante exige que o AxTon seja acessado apenas a partir da rede local do posto de pesagem e do escritório central, impedindo logins remotos não autorizados.
+
+| Configuração | Valor |
+|-------------|-------|
+| IP do posto BR-050 (Uberlândia) | `192.168.10.0/24` |
+| IP do escritório central (Belo Horizonte) | `200.201.50.15` |
+| IP da VPN corporativa | `10.0.0.0/8` |
+| Status da restrição | Ativo |
+
+**Passo a passo**:
+1. Cadastre o IP da rede do posto usando CIDR: `192.168.10.0/24`
+2. Cadastre o IP fixo do escritório: `200.201.50.15`
+3. Se houver VPN, cadastre a faixa VPN: `10.0.0.0/8`
+4. Confirme que o IP atual do administrador está na lista
+5. Ative a restrição
+
+**Resultado**: Somente dispositivos nos IPs autorizados conseguem realizar login. Tentativas de acesso de redes externas são bloqueadas e registradas nos Logs de Acesso para auditoria.

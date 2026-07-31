@@ -118,6 +118,26 @@ Os tipos padrão pré-cadastrados cobrem a maioria dos casos. Crie tipos persona
 | **[Espécies de Veículos](./especie-veiculo)** | Espécie e Tipo compõem a hierarquia de identificação do veículo; ambos são usados no enquadramento |
 | **[Classificações de Veículos](./classificacoes-veiculos)** | Cada classificação deve ser vinculada a um Tipo de Veículo válido para funcionar corretamente nos enquadramentos |
 | **[Enquadramentos](../administracao/enquadramentos)** | O Tipo de Veículo influencia o artigo CTB sugerido automaticamente no enquadramento da infração |
+
+## Exemplo prático
+
+**Cenário**: O órgão autuador começa a fiscalizar **patinetes elétricos** (ciclo motorizado) e exige que infrações desse tipo de veículo sejam enquadradas com tipo específico no auto. O tipo não existe no sistema e precisa ser criado.
+
+| Configuração | Valor |
+|-------------|-------|
+| Nome | Ciclo Motorizado |
+| Código DENATRAN | 11 |
+| Status | Ativo |
+
+**Passo a passo**:
+1. Confirme o código correto com o órgão autuador (tabela DENATRAN)
+2. Acesse **Veículos → Tipos de Veículos** e clique em **+ Novo**
+3. Preencha: **Nome** `Ciclo Motorizado`, **Código DENATRAN** `11`
+4. Clique em **Salvar**
+5. Acesse **Veículos → Classificações de Veículos** e crie a classificação vinculada ao novo tipo
+6. Atualize os **Enquadramentos** para incluir o artigo CTB aplicado a ciclos motorizados
+
+**Resultado**: Infrações de patinetes elétricos passam a ser enquadradas com o tipo correto. O auto exportado identifica o veículo como `Ciclo Motorizado` conforme exigido pelo órgão, eliminando rejeicoes por tipo de veículo inválido.
 | **[Infrações — Triagem](../infracoes/triagem)** | Durante a triagem, o tipo do veículo é verificado para garantir que o enquadramento seja compatível com a categoria |
 
 ## Exemplo prático

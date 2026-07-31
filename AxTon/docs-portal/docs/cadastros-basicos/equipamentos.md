@@ -109,3 +109,26 @@ Nunca. O número de série é um identificador permanente do equipamento físico
 | **Operações → Monitoramento Online** | Exibe o status em tempo real de cada equipamento cadastrado |
 | **Operações → Eventos de Equipamentos** | Eventos de falha são vinculados ao equipamento específico |
 | **Medições → Índices de Performance** | A taxa OCR e disponibilidade são calculadas por equipamento |
+
+## Exemplo prático
+
+**Cenário**: Dois equipamentos de pesagem serão instalados no Posto PI503B: uma balança HAENNI estática e um sensor de eixo complementar. Ambos precisam ser cadastrados para que as pesagens e os índices de performance sejam calculados corretamente.
+
+| Configuração | Balança Principal | Sensor de Eixo |
+|-------------|-----------------|----------------|
+| Código | EQ-PI503B-01 | EQ-PI503B-02 |
+| Tipo | Estática | Dinâmica |
+| Fabricante | HAENNI | HAENNI |
+| Número de Série | HN-2026-0341 | HN-2026-0342 |
+| Posto | PI503B | PI503B |
+| Status | Ativo | Ativo |
+
+**Passo a passo**:
+1. Acesse **Cadastros Básicos → Equipamentos** e clique em **+ Novo**
+2. Preencha: Código `EQ-PI503B-01`, Tipo `Estática`, Fabricante `HAENNI`, Número de Série `HN-2026-0341`
+3. Vincule ao Posto `PI503B` e marque Status `Ativo`
+4. Clique em **Salvar**
+5. Repita para o sensor de eixo com o código `EQ-PI503B-02`
+6. Registre a aferição inicial em **Operações → Aferições** para cada equipamento
+
+**Resultado**: Os dois equipamentos aparecem no **Monitoramento Online** como Ativos. A taxa OCR e a disponibilidade são calculadas individualmente por equipamento no boletim de medição contratual.

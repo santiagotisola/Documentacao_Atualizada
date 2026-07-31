@@ -133,3 +133,23 @@ Um perfil de acesso somente poderá ser excluído se não houver Usuários vincu
 | **Permissões de Acesso** | As permissões configuradas por módulo são associadas ao perfil e aplicadas a todos os usuários vinculados |
 | **Logs de Acesso** | Os acessos registrados incluem o perfil do usuário, facilitando auditorias por grupo |
 | **Login** | O perfil define quais módulos aparecem no menu após a autenticação |
+
+## Exemplo prático
+
+**Cenário**: Uma empresa vencedora de contrato de pesagem veicular precisa configurar perfis distintos para 3 funções: operadores de pesagem, supervisores e auditores do órgão contratante.
+
+| Perfil | Módulos com acesso | Restrição |
+|--------|-------------------|-----------|
+| Operador Pesagem | Pesagem, Tickets, Consulta de Placas | Sem Exportação ou Configurações |
+| Supervisor de Turno | Pesagem + Operações + Exportação | Sem Administração |
+| Auditor Externo | Relatórios somente leitura | Sem cadastros ou exportação |
+
+**Passo a passo**:
+1. Acesse **Administração → Perfis de Acesso** e clique em **+ Novo**
+2. Crie o perfil `Operador Pesagem` com acesso a Pesagem e Tickets
+3. Crie o perfil `Supervisor de Turno` adicionando Operações e Exportação
+4. Crie o perfil `Auditor Externo` com apenas `grid.view` nos módulos de relatório
+5. Vincule cada usuário ao perfil correspondente
+6. Teste acessando com usuários de cada perfil para validar as restrições
+
+**Resultado**: Cada grupo acessa apenas o que é necessário. O auditor externo não consegue alterar dados; o operador não exporta lotes. Rastreabilidade garantida por perfil nos Logs de Acesso.

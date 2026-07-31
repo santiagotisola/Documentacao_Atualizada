@@ -130,3 +130,25 @@ Crie um usuário de teste vinculado ao perfil e acesse o sistema para validar qu
 | **Usuários** | As permissões do perfil vinculado ao usuário determinam o que ele pode ver e fazer no sistema |
 | **Logs de Acesso** | Acessos negados por falta de permissão são registrados e rastreavies nos logs |
 | **Login** | O menu exibido após o login é gerado dinamicamente com base nas permissões de visualização do perfil |
+
+## Exemplo prático
+
+**Cenário**: Um auditor externo do órgão contratante precisa acessar relatórios e medições do AxTon para fins de fiscalização, mas sem conseguir editar ou excluir dados.
+
+| Módulo | Visualizar | Criar | Editar | Excluir |
+|--------|:----------:|:-----:|:------:|:-------:|
+| Pesagem | ✔ | ✘ | ✘ | ✘ |
+| Medições | ✔ | ✘ | ✘ | ✘ |
+| Relatórios | ✔ | ✘ | ✘ | ✘ |
+| Infrações | ✔ | ✘ | ✘ | ✘ |
+| Configurações | ✘ | ✘ | ✘ | ✘ |
+
+**Passo a passo**:
+1. Crie o perfil `Auditor Externo` em **Controle de Acesso → Perfis**
+2. Acesse **Controle de Acesso → Permissões de Acesso**
+3. Selecione o perfil `Auditor Externo`
+4. Marque apenas `Visualizar` para Pesagem, Medições, Relatórios e Infrações
+5. Deixe Configurações e Administração sem nenhuma permissão
+6. Clique em **Salvar** e valide com login de teste
+
+**Resultado**: O auditor acessa todos os dados que precisa para fiscalização sem risco de alteração. O menu exibe apenas os módulos autorizados e qualquer tentativa de edição é bloqueada pelo sistema.

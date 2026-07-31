@@ -115,3 +115,23 @@ Fabricante
 :::tip Dependência
 Este cadastro é utilizado como referência em outros módulos do sistema.
 :::
+
+## Exemplo prático
+
+**Cenário**: Um novo contrato inclui equipámentos HAENNI WL103 e WL105. O fabricante ainda não está cadastrado no sistema, impedindo a criação dos modelos e equipamentos necessários para iniciar as pesagens.
+
+| Configuração | Valor |
+|-------------|-------|
+| Nome | HAENNI Instruments AG |
+| CNPJ | N/A (fabricante suíço) |
+| Contato de suporte | support@haenni.com |
+| Status | Ativo |
+
+**Passo a passo**:
+1. Acesse **Cadastros Básicos → Fabricantes** e clique em **+ Novo**
+2. Preencha: Nome `HAENNI Instruments AG`, Contato `support@haenni.com`
+3. Clique em **Salvar**
+4. Acesse **Cadastros Básicos → Modelos de Equipamentos** e crie os modelos `WL103` e `WL105` vinculados a HAENNI
+5. Acesse **Cadastros Básicos → Equipamentos** e cadastre os equipamentos físicos vinculando ao modelo correspondente
+
+**Resultado**: A hierarquia HAENNI → WL103 → Equipamento está completa. Os equipamentos aparecem no Monitoramento Online e as aferições INMETRO podem ser registradas com rastreabilidade completa por fabricante.

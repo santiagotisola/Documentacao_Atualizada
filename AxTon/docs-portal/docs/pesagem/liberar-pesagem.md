@@ -117,3 +117,23 @@ A infração permanece ativa para triagem. A liberação só libera o veículo, 
 | **Controle de Acesso → Permissões** | Define quais perfis podem executar a liberação administrativa |
 | **Relatório de Infrações** | A infração gerada antes da liberação ainda aparece no relatório para triagem |
 
+## Exemplo prático
+
+**Cenário**: Um caminhão tanque com excesso de PBT de 3.200 kg está retido no Posto PI503B. O motorista apresenta uma ordem judicial autorizando o transporte emergencial até o destino. O supervisor precisa liberar o veículo sem cancelar a infração.
+
+| Configuração | Valor |
+|-------------|-------|
+| Motivo da liberação | Liberação administrativa (decisão judicial) |
+| Responsável | Supervisor de Turno |
+| Observação | Número do processo judicial e nome do juiz |
+| Infração | Permanece ativa para triagem posterior |
+
+**Passo a passo**:
+1. Acesse **Tickets de Pesagens** e localize o ticket do caminhão retido
+2. Clique em **Liberar**
+3. Selecione o motivo: `Liberação administrativa`
+4. Preencha o campo Observação com o número e data da decisão judicial
+5. Clique em **Confirmar Liberação**
+
+**Resultado**: O veículo é liberado imediatamente. A infração de excesso permanece no sistema e será tratada na triagem com o registro da decisão judicial como justificativa. A liberação fica registrada em log com data, hora e responsável para fins de auditoria.
+

@@ -99,3 +99,13 @@ Clique em **Dashboard** no menu lateral ou use o **breadcrumb** no topo da pági
 | **[Dashboard](./dashboard)** | Tela inicial exibida após o login — o menu lateral sempre oferece retorno a ele |
 | **[Perfis de Acesso](../administracao/perfis-acesso)** | Define quais módulos ficam visíveis no menu lateral para cada tipo de usuário |
 | **[Permissões de Acesso](../administracao/permissoes)** | Controla o acesso granular às funcionalidades acessíveis pelo menu lateral |
+
+## Tabela de referência rápida
+
+| Situação | Ação recomendada | Resultado esperado |
+|----------|:----------------:|-------------------|
+| Módulo não aparece no menu | Verificar permissões do perfil com o administrador | Módulo habilitado e visível no menu lateral |
+| Sessão expirou durante o uso | Fazer login novamente | Sessão restaurada; dados preservados |
+| Alertas no sino sem origem clara | Verificar Vigência de Alertas e tipos de ocorrência ativos | Alertas de vigência identificados e tratados |
+| Usuário não encontra o relatório | Expandir o submenú **Relatórios** no menu lateral | Relatório localizado na lista dos 10 disponíveis |
+| Breadcrumb não exibe o caminho correto | Navegação feita pelo botão Voltar do navegador | Usar o menu lateral para navegar sem perder o breadcrumb |

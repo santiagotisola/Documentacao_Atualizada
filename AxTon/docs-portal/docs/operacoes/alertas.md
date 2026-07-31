@@ -131,3 +131,13 @@ Acesse o detalhe do alerta, use a opção **Desconsiderar** com justificativa. A
 ## Integração com outros módulos
 | **Consulta de Placas** | A consulta de placas identifica veículos com histórico de alertas anteriores |
 | **Relatório de Infrações** | Alertas de excesso de peso resultam em infrações registradas e rastreadas nos relatórios |
+
+## Tabela de referência rápida
+
+| Situação | Ação recomendada | Resultado esperado |
+|----------|:----------------:|-------------------|
+| Alerta de excesso de peso com veículo retido | Assumir imediatamente e iniciar autuação | Auto de infração gerado e veículo liberado após regularização |
+| Alerta de MDF-e ausente em veículo de carga | Aguardar 5 min e reprocessar; se persistir, notificar motorista | Ocorrência registrada e encaminhada à SEFAZ |
+| Alerta de equipamento offline | Acionar equipe técnica imediatamente | Equipamento restaurado; pesagens retroativas verificadas |
+| Alerta de anomalia de peso (valor muito discrepante) | Verificar leitura da balança e recalibrar se necessário | Pesagem refeita com valor correto |
+| Múltiplos alertas simultâneos de excesso | Priorizar veículos retidos; tratar por ordem de chegada | Todos autuados dentro do turno operacional |

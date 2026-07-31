@@ -135,3 +135,13 @@ O alerta MANCHA01 é baseado em tempo de permanência na área monitorada, não 
 | **Relatórios → Ocorrências e Alertas** | Consolida o histórico de alertas gerados para exportação e prestação de contas |
 | **Monitoramento Online** | Alertas ativos aparecem em tempo real no painel de monitoramento |
 
+## Tabela de referência rápida
+
+| Situação | Ação recomendada | Resultado esperado |
+|----------|:----------------:|-------------------|
+| Alerta de veículo furtado/roubado detectado | Assumir imediatamente + acionar viatura | Ocorrência registrada com descrição da ação; alerta resolvido |
+| Alerta MANCHA01 (tempo na área excedido) | Verificar imagem + consultar rastreamento de placas | Comportamento suspeito confirmado ou descartado com justificativa |
+| Alerta COMBOIO01 gerado pelo Neo4j | Analisar Grafos de Comboio para confirmar padrão | Grupo de veículos monitorado ou ocorrência encerrada |
+| Alerta de equipamento offline | Acionar equipe técnica imediatamente | Equipamento restaurado; passagens do período verificadas |
+| Falso positivo frequente (OCR errado) | Verificar alinhamento da câmera + limpar lente | Taxa de reconhecimento melhora; alertas inválidos reduzem |
+

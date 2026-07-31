@@ -105,3 +105,27 @@ Eventos de equipamentos são o registro operacional do que aconteceu (falha téc
 | **Monitoramento Online** | Exibe alertas em tempo real que originam os eventos de equipamentos |
 | **Alertas** | Alertas configurados disparam notificações que podem ser convertidos em eventos |
 | **Relatórios → Falhas Sequenciais** | Consolida eventos de falha por equipamento para análise de padrões e manutenção preventiva |
+
+## Exemplo prático
+
+**Cenário**: A balança HAENNI do Posto PI503B parou de comunicar com o AxTon às 08h42. A equipe técnica chegou ao posto às 10h15 e restaurou a comunicação às 11h00. O operador precisa registrar o evento de falha para que o período de indisponibilidade seja computado na medição contratual.
+
+| Configuração | Valor |
+|-------------|-------|
+| Equipamento | HAENNI WL103 — PI503B |
+| Tipo de evento | Falha |
+| Descrição | Perda de comunicação entre balança e servidor |
+| Data/Hora Início | 27/06/2026 08:42 |
+| Data/Hora Fim | 27/06/2026 11:00 |
+| Duração | 2h18min |
+
+**Passo a passo**:
+1. Acesse **Operações → Eventos de Equipamentos** e clique em **+ Novo Evento**
+2. Selecione o equipamento **HAENNI WL103 — PI503B**
+3. Selecione o tipo **Falha**
+4. Preencha a descrição: `Perda de comunicação entre balança e servidor AxTon — causa: reinicialização do switch de rede`
+5. Informe Data/Hora Início `27/06/2026 08:42` e Fim `27/06/2026 11:00`
+6. Clique em **Salvar**
+7. Acesse **Medições → Interrupções** e registre o mesmo período como interrupção corretiva
+
+**Resultado**: As 2h18min de indisponibilidade são computadas no índice de disponibilidade do próximo boletim de medição. A equipe técnica tem evidência documentada do incidente para relatórios de manutenção.

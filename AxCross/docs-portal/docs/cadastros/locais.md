@@ -118,3 +118,27 @@ Sim. Um local pode ter vários equipamentos instalados (ex.: câmeras em diferen
 
 **Como inativo um local que não está mais em operação sem perder o histórico?**
 Edite o cadastro do local e altere o **Status** para **Inativo**. O histórico de passagens, alertas e infrações vinculados ao local é preservado integralmente e continua acessível nos relatórios. Não exclua o local para não perder esse histórico.
+
+## Exemplo prático
+
+**Cenário**: A prefeitura de Campinas instala monitoramento no cruzamento da Av. Brasil com a Rua XV. O ponto de monitoramento precisa estar cadastrado como local antes de vincular os equipamentos e ativar a captura de passagens.
+
+| Configuração | Valor |
+|-------------|-------|
+| Nome | Av. Brasil x Rua XV de Novembro |
+| Endereço | Av. Brasil, 1200 — Centro, Campinas/SP |
+| Latitude | -22.9064 |
+| Longitude | -47.0615 |
+| Município | Campinas |
+| UF | SP |
+| Status | Ativo |
+
+**Passo a passo**:
+1. Acesse **Cadastros → Locais** e clique em **Novo Local**
+2. Preencha o nome oficial do cruzamento e o endereço completo
+3. Informe as coordenadas obtidas pelo Google Maps (clique com botão direito no ponto e copie as coordenadas)
+4. Selecione o Município e a UF
+5. Clique em **Salvar**
+6. Acesse **Cadastros → Equipamentos** e vincule a câmera ao local recém-criado
+
+**Resultado**: O cruzamento aparece no mapa do Dashboard com marcador. Passagens detectadas pelos equipamentos vinculados aparecem nos relatórios associadas ao local correto.

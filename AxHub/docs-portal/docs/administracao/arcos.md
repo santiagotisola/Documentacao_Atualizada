@@ -99,6 +99,26 @@ Arcos permitem exportar dados de múltiplas faixas/equipamentos de uma mesma loc
 | **Relatório de Passagens** | Permite filtrar dados por arco, exibindo o volume total de passagens da travessia |
 | **Monitoramento Online** | Exibe o status de todos os equipamentos de um arco em um único painel |
 
+## Exemplo prático
+
+**Cenário**: Um radar de velocidade na Av. Paulista (SP) é composto por 3 câmeras (uma por faixa). Todas precisam ser agrupadas no mesmo arco para que as infrações sejam numeradas sequencialmente e exportadas em conjunto ao órgão autuador.
+
+| Configuração | Valor |
+|-------------|-------|
+| Nome do arco | ARC-SP-PAULISTA-001 |
+| Localidade | Av. Paulista x R. Augusta, São Paulo/SP |
+| Equipamentos | CAM-FAIXA1, CAM-FAIXA2, CAM-FAIXA3 |
+| Status | Ativo |
+
+**Passo a passo**:
+1. Confirme que os 3 equipamentos estão cadastrados em **Equipamentos**
+2. Acesse **Configurações → Arcos** e clique em **+ Novo**
+3. Preencha: Nome `ARC-SP-PAULISTA-001`, Localidade `Av. Paulista x R. Augusta`
+4. Vincule os equipamentos CAM-FAIXA1, CAM-FAIXA2 e CAM-FAIXA3
+5. Clique em **Salvar**
+
+**Resultado**: As 3 câmeras aparecem no arco como um conjunto. Infrações de qualquer faixa são numeradas sequencialmente e exportadas em um único lote, garantindo consistência no arquivo enviado ao órgão autuador.
+
 ## Erros comuns
 
 | Erro | Causa | Solução |

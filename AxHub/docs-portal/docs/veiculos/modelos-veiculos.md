@@ -118,5 +118,24 @@ Não recomendado. Crie um novo modelo com o nome correto e inative o antigo para
 |--------|------------------|
 | **[Marcas de Veículos](./marcas-veiculos)** | Todo modelo deve estar vinculado a uma marca; sem a marca correta o modelo não é listado corretamente nas infrações |
 | **[Consulta de Placas](../operacoes/consulta-placas)** | O modelo do veículo é preenchido automaticamente quando a consulta RENAVAM retorna o registro do CRV |
+
+## Exemplo prático
+
+**Cenário**: Durante a triagem de infrações, o operador percebe que varios autos de um caminhão da marca SINOTRUK (HOWO) exibem o campo **Modelo** em branco. O modelo `HOWO` não está cadastrado no sistema, mas a consulta RENAVAM retorna esse dado.
+
+| Configuração | Valor |
+|-------------|-------|
+| Marca | SINOTRUK |
+| Modelo a cadastrar | HOWO |
+| Status | Ativo |
+
+**Passo a passo**:
+1. Confirme que a marca `SINOTRUK` está cadastrada em **Veículos → Marcas de Veículos**
+2. Acesse **Veículos → Modelos de Veículos** e clique em **+ Novo**
+3. Preencha: **Marca** `SINOTRUK`, **Código** (opcional), **Descrição** `HOWO`
+4. Clique em **Salvar**
+5. Retorne à triagem e atualize os autos com o modelo recém-cadastrado
+
+**Resultado**: As próximas infrações de caminhões SINOTRUK HOWO exibirão o modelo correto via consulta RENAVAM. Os autos exportados ao órgão autuador terão a identificação completa do veículo, reduzindo rejeicoes por dados incompletos.
 | **[Infrações — Consulta](../infracoes/consulta-infracoes)** | O modelo do veículo aparece nos detalhes da infração e pode ser corrigido manualmente durante a triagem |
 | **[Exportação de Infrações](../infracoes/exportacao)** | O modelo e a marca compõem o campo de identificação do veículo nos arquivos exportados ao órgão autuador |

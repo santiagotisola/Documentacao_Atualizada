@@ -130,3 +130,22 @@ Sim. Infrações já geradas por equipamentos da região perderão a referência
 | **Operações** | As operações herdam a região do equipamento a elas associado, permitindo agrupar resultados por área |
 | **Relatórios** | Todos os relatórios de passagens, infrações e discrepâncias oferecem filtro por região cadastrada |
 | **Dashboard** | KPIs de disponibilidade e OCR são exibidos agrupados por região, facilitando gestão territorial |
+## Exemplo prático
+
+**Cenário**: O órgão autuador de um estado tem 24 equipamentos distribuídos em 4 mesorregiões. A gestão precisa acompanhar os índices de OCR e disponibilidade separados por região para a prestação de contas mensal.
+
+| Região | Equipamentos | Municípios-sede |
+|--------|-------------|------------------|
+| Região Leste | EQ-001 a EQ-006 | São Luís, Timon |
+| Região Oeste | EQ-007 a EQ-012 | Pinheiro, Periá |
+| Região Norte | EQ-013 a EQ-018 | São José de Ribamar |
+| Região Sul | EQ-019 a EQ-024 | Imperatriz, Acâilândia |
+
+**Passo a passo**:
+1. Acesse **Configurações → Regiões** e clique em **+ Nova**
+2. Crie as 4 regiões: `Região Leste`, `Região Oeste`, `Região Norte`, `Região Sul`
+3. Para cada região, acesse os equipamentos correspondentes e vincule a região correta
+4. No Dashboard, use o filtro de região para visualizar os KPIs segmentados
+5. Nos relatórios mensais, exporte separado por região para a prestação de contas
+
+**Resultado**: O gestor visualiza disponibilidade e OCR separados por região. Regiões abaixo da meta (ex.: OCR < 85%) são identificadas rapidamente, direcionando ações de manutenção preventiva.

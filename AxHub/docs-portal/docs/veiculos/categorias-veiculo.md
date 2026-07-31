@@ -124,3 +124,22 @@ As categorias padrão do CTB cobrem a maioria dos enquadramentos. Crie categoria
 | **[Enquadramentos](../administracao/enquadramentos)** | O artigo CTB do enquadramento é determinado com base na categoria do veículo registrada na passagem |
 | **[Infrações — Triagem](../infracoes/triagem)** | A categoria do veículo é verificada na triagem; enquadramento incorreto por categoria errada deve ser corrigido antes da exportação |
 | **[Exportação de Infrações](../infracoes/exportacao)** | A categoria integra os dados do auto exportado ao órgão autuador conforme o layout exigido |
+
+## Exemplo prático
+
+**Cenário**: Um órgão autuador exige que infrações de motocicletas sejam categorizadas como `Moto` (código CTB `04`) separado de `Automóvel` (código `01`). A categoria padrão `Motocicleta` não está cadastrada com o código correto exigido pelo layout.
+
+| Configuração | Valor |
+|-------------|-------|
+| Nome | Motocicleta |
+| Código CTB | 04 |
+| Status | Ativo |
+
+**Passo a passo**:
+1. Acesse **Veículos → Categorias de Veículos** e pesquise por `Motocicleta`
+2. Se existir com código incorreto, clique em **Editar** e corrija o **Código CTB** para `04`
+3. Se não existir, clique em **+ Nova** e preencha: Nome `Motocicleta`, Código CTB `04`
+4. Clique em **Salvar**
+5. Verifique os enquadramentos vinculados a esta categoria e ajuste se necessário
+
+**Resultado**: Infrações de motocicletas passam a ser exportadas com o código `04` no arquivo ao órgão, eliminando rejeicoes por código de categoria inválido. A triagem também reflete a categoria correta no auto de infração.

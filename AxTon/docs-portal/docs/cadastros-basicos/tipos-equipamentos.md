@@ -113,3 +113,21 @@ O tipo de equipamento determina as configurações de operação aplicáveis (ve
 :::tip Dependência
 Este cadastro é utilizado como referência em outros módulos do sistema.
 :::
+
+## Exemplo prático
+
+**Cenário**: Um contrato inclui tanto balanças estáticas HAENNI WL103 (para fiscalização com veículo parado) quanto um sistema WIM dinâmico RODOANEL WIM200 (para triagem sem parar o tráfego). Ambos os tipos precisam estar cadastrados antes de vincular os equipamentos.
+
+| Tipo | Descrição | Precisão | Interrompe tráfego? |
+|------|-----------|:--------:|:-------------------:|
+| Balança Estática | Pesagem com veículo parado | ±2% | Sim |
+| Balança Dinâmica (WIM) | Pesagem em movimento | ±10% | Não |
+
+**Passo a passo**:
+1. Acesse **Cadastros Básicos → Tipos de Equipamentos** e clique em **+ Novo**
+2. Cadastre `Balança Estática` com descrição `Pesagem com veículo parado — INMETRO portaria 236/94`
+3. Cadastre `Balança Dinâmica (WIM)` com descrição `Pesagem em movimento — triagem sem interrupção de tráfego`
+4. Clique em **Salvar** para cada tipo
+5. Acesse **Cadastros Básicos → Modelos de Equipamentos** e vincule cada modelo ao tipo correto
+
+**Resultado**: O sistema aplica a tolerância metrológica correta para cada equipamento. A balança estática usa ±2% e o WIM usa ±10% nos cálculos de excesso, garantindo que as infrações emitidas tenham validade legal adequada ao tipo de equipamento.

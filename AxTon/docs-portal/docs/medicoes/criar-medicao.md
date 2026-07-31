@@ -112,3 +112,27 @@ Após gerar e revisar a medição, clique em **Exportar PDF** para obter o docum
 | **Interrupções** | Interrupções registradas no período são automaticamente consideradas no cálculo de disponibilidade |
 | **Índices de Performance** | Exibe os resultados da medição gerada para acompanhamento contratual |
 | **Operações** | Volume de pesagens realizadas nas operações do período alimenta os cálculos do boletim |
+
+## Exemplo prático
+
+**Cenário**: O supervisor do contrato PI503B precisa gerar o boletim de medição de junho/2026 para enviar ao órgão contratante até o 5º dia útil de julho. O contrato exige disponibilidade mínima de 90% e OCR mínimo de 85%.
+
+| Configuração | Valor |
+|-------------|-------|
+| Contrato | PI503B — DETRAN/PI |
+| Competência | Junho/2026 |
+| Período Início | 01/06/2026 |
+| Período Fim | 30/06/2026 |
+
+**Passo a passo**:
+1. Revise **Medições → Interrupções** para garantir que todas as paradas do mês estão registradas
+2. Acesse **Medições → Gerar Medição**
+3. Selecione o contrato `PI503B — DETRAN/PI`
+4. Informe a competência `06/2026` e o período `01/06/2026 – 30/06/2026`
+5. Clique em **Gerar** e aguarde o processamento
+6. Revise os indicadores: disponibilidade, OCR, total de pesagens e infrações
+7. Confira que as metas contratuais foram atingidas
+8. Clique em **Finalizar Medição** para bloquear alterações
+9. Exporte o PDF e envie ao contratante
+
+**Resultado**: O boletim de junho exibe disponibilidade de 92,3% e OCR de 87,5%, ambas acima das metas contratuais. O documento PDF é gerado e enviado ao DETRAN/PI dentro do prazo, evitando glosas no pagamento mensal.

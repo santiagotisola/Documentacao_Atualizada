@@ -115,3 +115,24 @@ Acesse **Cadastros Básicos → Equipamentos**, edite o equipamento desejado e s
 | **Cadastros Básicos → Equipamentos** | Equipamentos são vinculados ao posto de operação |
 | **Medições → Contratos** | Os postos vinculados ao contrato definem o escopo do boletim de medição |
 | **Relatório de Passagens** | O filtro por posto usa os registros aqui cadastrados |
+
+## Exemplo prático
+
+**Cenário**: Uma nova operação será iniciada na BR-316 (PI). O contrato exige dois postos distintos: um na entrada (km 115, sentido Teresina) e outro na saída (km 247, divisão PI/MA).
+
+| Configuração | Valor |
+|-------------|-------|
+| Posto 1 — Código | PI503B |
+| Posto 1 — Nome | BR-316 KM 115 (Sentido Teresina) |
+| Posto 2 — Código | PI504B |
+| Posto 2 — Nome | PI 247 Divisão PI/MA |
+| Localidade | Barras/PI e Timon/MA |
+
+**Passo a passo**:
+1. Acesse **Cadastros Básicos → Postos de Pesagem** e clique em **+ Novo**
+2. Cadastre o Posto PI503B com nome, localidade e endereço
+3. Clique em **Salvar** e repita para PI504B
+4. Acesse **Cadastros Básicos → Equipamentos** e vincule as balanças de cada posto
+5. No módulo **Operações**, crie uma operação para cada posto
+
+**Resultado**: As pesagens registradas em cada posto aparecem nos relatórios segmentados por localidade. O boletim de medição do contrato exibe os dados de disponibilidade e OCR separados por posto.
