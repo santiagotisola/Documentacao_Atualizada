@@ -97,3 +97,14 @@ A retenção do veículo é obrigatória quando o excesso impede continúar a vi
 - [Infração](./infracao) — Gerada quando PBT é excedido
 - [MDF-e](./mdfe) — Documento que informa a carga transportada
 
+## Perguntas frequentes
+
+**O PBT inclui o peso da cabine do motorista?**
+Sim. PBT = tara total do veículo (incluindo motorista e combustível) + peso da carga.
+
+**Qual a diferença entre PBT e PBTC?**
+PBTC (Peso Bruto Total Combinado) é para conjuntos veiculares (cavalo + semi reboque). O PBT se refere ao veículo isolado.
+
+**Veículo de emergência é isento?**
+Não. Somente veículos com autorização especial de excesso de peso (AEP) emitida pelo órgão competente.
+

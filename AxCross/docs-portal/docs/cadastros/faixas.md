@@ -82,3 +82,15 @@ O código da faixa deve ser exatamente igual ao configurado no equipamento físi
 :::info Dependência
 Para cadastrar uma faixa, é necessário que o local e o Equipamento já estejam cadastrados.
 :::
+
+## Perguntas frequentes
+
+**Posso ter uma faixa sem equipamento vinculado?**
+Sim, mas sem equipamento a faixa não captura passagens. Vincule o equipamento antes de ativar a faixa.
+
+**O que acontece se a velocidade máxima não for informada?**
+O sistema não calcula alertas de excesso de velocidade para essa faixa.
+
+**Posso mudar o sentido de uma faixa ativa?**
+Sim, mas dados históricos permanecem com o sentido original. Passagens futuras são registradas com o novo sentido.
+

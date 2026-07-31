@@ -88,3 +88,15 @@ Toda liberação é registrada com o usuário responsável. Selecione o motivo c
 :::caution Importante
 Toda liberação gera registro de auditoria com data, hora e responsável.
 :::
+
+## Perguntas frequentes
+
+**A liberação pode ser revertida?**
+Não. Uma vez liberado, o ticket é fechado. Qualquer reversão requer criação de novo ticket.
+
+**Quem pode autorizar uma liberação administrativa?**
+Somente perfis com permissão de Liberar Pesagem. Verifique em Controle de Acesso → Permissões.
+
+**O que acontece com a infração após liberação?**
+A infração permanece ativa para triagem. A liberação só libera o veículo, não cancela o auto.
+

@@ -80,3 +80,14 @@ Para cadastrar um Equipamento é necessário ter previamente cadastrado: Fabrica
 | [**Tipos de Equipamentos**](../cadastros-basicos/tipos-Equipamentos) | Categorias de Equipamentos de pesagem |
 | [**Modelos de Equipamentos**](../cadastros-basicos/modelos-equipamentos) | Modelos por fabricante |
 | [**Grupos de Equipamentos**](../cadastros-basicos/grupos-Equipamentos) | Agrupamento lógico de Equipamentos |
+
+## Perguntas frequentes
+
+**Posso ter dois equipamentos no mesmo posto?**
+Sim. Um posto pode ter múltiplos equipamentos (ex: balança estática + sensor de eixo).
+
+**O que acontece se eu desativar um equipamento com pesagens pendentes?**
+As pesagens registradas são preservadas. Novas pesagens não serão associadas ao equipamento inativo.
+
+**Com que frequência preciso atualizar o número de série?**
+Nunca. O número de série é um identificador permanente do equipamento físico.
