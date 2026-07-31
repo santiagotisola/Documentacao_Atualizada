@@ -89,3 +89,14 @@ Apenas Usuários com perfil de **Administrador** têm acesso à função de sinc
 :::warning
 Execute a sincronização fora do horário de pico operacional. O processo consome recursos significativos do servidor e pode afetar o desempenho do monitoramento em tempo real.
 :::
+
+## Perguntas frequentes
+
+**Quando devo executar a sincronização de passagens?**
+Execute quando passagens não aparecerem nos relatórios após 10 minutos, após restauração de backup ou após manutenção no Elasticsearch. Não execute durante horário de pico, pois o processo consome recursos significativos do servidor.
+
+**O que fazer quando a sincronização demora muito e não conclui?**
+Divida a sincronização em faixas de data menores (ex.: sincronizar semana a semana) para reduzir o volume processado por vez. Se o problema persistir, verifique o status do Elasticsearch e contate o suporte técnico para investigação do serviço.
+
+**Qual o impacto de não sincronizar após uma restauração de backup?**
+Os relatórios continuarão usando o índice antigo do Elasticsearch, que pode não refletir os dados restaurados. Passagens e alertas do período afetado podem não aparecer ou aparecer incorretamente. A sincronização é essencial após qualquer restauração.

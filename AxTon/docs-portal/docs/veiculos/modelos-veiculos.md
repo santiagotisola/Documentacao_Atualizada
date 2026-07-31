@@ -98,3 +98,14 @@ Verifique se o modelo já existe antes de criar. Duplicidades dificultam a class
 - Vincule o modelo à **Marca** correta; modelos sem marca ficam inacessíveis nos filtros de relatório
 - Para veículos de carga pesada, use a nomenclatura oficial do fabricante (ex.: Actros, Stralis, FH) para compatibilidade com o RENAVAM
 - Não exclua modelos já vinculados a infrações — inative-os para preservar o histórico das operações
+
+## Perguntas frequentes
+
+**O que fazer quando um modelo não está cadastrado e aparece durante a triagem de uma pesagem?**
+Cadastre o modelo acessando **Veículos → Modelos de Veículos → + Novo**, vinculando-o à marca correta. Em seguida, retorne à triagem e atualize o registro com o modelo recém-cadastrado.
+
+**Posso excluir modelos que já foram vinculados a infrações exportadas?**
+Não. Excluir um modelo com infrações associadas compromete o histórico. Inative o registro — ele deixa de aparecer nas seleções ativas mas permanece nos registros históricos.
+
+**É necessário cadastrar todos os modelos manualmente ou o sistema importa de alguma base?**
+O cadastro é manual. Os dados de modelo são retornados pela consulta RENAVAM durante a pesagem, mas precisam estar pré-cadastrados no sistema para serem associados corretamente ao ticket. Cadastre os modelos mais comuns na implantação inicial.

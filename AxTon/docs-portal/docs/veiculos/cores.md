@@ -99,6 +99,17 @@ Mantanha as cores sincronizadas com a tabela padrão do DENATRAN para evitar rej
 | **Descrição** | Nome/descrição do registro |
 | **Ativo** | Status (Ativo/Inativo) |
 
+## Perguntas frequentes
+
+**Por que o campo cor aparece em branco nos autos de infração exportados?**
+Isso ocorre quando a cor retornada pela consulta do RENAVAM não está cadastrada na tabela do sistema. Certifique-se de que as 15 cores padrão DENATRAN estão cadastradas com os códigos e grafias oficiais.
+
+**Posso excluir cores que não estão mais sendo utilizadas?**
+Não exclua cores vinculadas a pesagens ou infrações existentes. Inative o registro para removê-lo da seleção ativa sem comprometer o histórico de autos já emitidos.
+
+**Preciso cadastrar manualmente todas as cores ou o sistema já traz uma base pré-carregada?**
+O sistema não pré-carrega a tabela de cores automaticamente. Você deve cadastrar as 15 cores padrão da tabela DENATRAN na implantação. Use exatamente as grafias e códigos oficiais para garantir compatibilidade com os arquivos de exportação ao SENATRAN.
+
 ### Passo a passo — Cadastrar
 
 1. Acesse Veículos → **Cores**

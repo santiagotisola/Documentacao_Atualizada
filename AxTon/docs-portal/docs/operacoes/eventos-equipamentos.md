@@ -85,3 +85,14 @@ Eventos de falha registrados aqui são considerados no cálculo da disponibilida
 - [Alertas](./alertas)
 - [Monitoramento Online](./monitoramento-online)
 - [Medições → Interrupções](../medicoes/interrupcoes)
+
+## Perguntas frequentes
+
+**Por que um evento de falha registrado não impactou o cálculo de disponibilidade na medição?**
+O evento precisa estar classificado com o tipo correto ("Falha") e ter a **Data/Hora Fim** preenchida. Eventos sem data de encerramento ou com tipo incorreto não são computados no cálculo de disponibilidade. Verifique e corrija o registro antes de gerar a medição.
+
+**Como registrar retroativamente uma falha que não foi documentada no momento da ocorrência?**
+Acesse **Operações → Eventos de Equipamentos → + Novo Evento**, selecione o equipamento, preencha o tipo, a descrição da causa e defina manualmente as datas de início e fim do ocorrido. O sistema aceita datas retroativas, mas garanta que a justificativa seja detalhada para fins de auditoria contratual.
+
+**Qual a diferença entre registrar um Evento de Falha e uma Interrupção em Medições?**
+Eventos de equipamentos são o registro operacional do que aconteceu (falha técnica, manutenção, reinicialização). Interrupções são o registro formal para cálculo de SLA contratual. Toda falha que impacta a disponibilidade deve ser registrada nos dois lugares: aqui como evento técnico e em **Medições → Interrupções** como impacto contratual.

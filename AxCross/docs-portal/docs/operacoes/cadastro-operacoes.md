@@ -108,4 +108,15 @@ Operações com registros de passagem vinculados não podem ser excluídas, apen
 - [Alertas](./alertas)
 - [Veículos Monitorados](./veiculos-monitorados)
 - [Relatório de Passagens](../relatorios/relatorio-passagens)
+
+## Perguntas frequentes
+
+**O que acontece com as passagens registradas quando encerro uma operação?**
+As passagens ficam permanentemente vinculadas à operação encerrada e contínuam acessíveis nos relatórios com o período correto. Após o encerramento, nenhuma nova passagem é adicionada à operação, mesmo que os equipamentos continuem capturando.
+
+**Posso ter múltiplas operações ativas simultaneamente no mesmo local?**
+Sim, mas é uma prática que deve ser evitada. Operações sobrepostas no mesmo cruzamento podem gerar ambiguidade nos relatórios e dificultar a análise por período. Encerre a operação anterior antes de iniciar uma nova para o mesmo local.
+
+**Por que não consigo excluir uma operação que criei por engano?**
+O sistema impede a exclusão de operações que já possuem registros de passagem vinculados. Nesse caso, encerre a operação informando a data correta de fim. Para operações sem nenhum registro, a exclusão é permitida.
 - [Ocorrências e Alertas](../relatorios/ocorrencias-alertas)

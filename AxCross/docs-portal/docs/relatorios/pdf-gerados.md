@@ -78,6 +78,17 @@ PDFs gerados ficam disponíveis por um período limitado conforme a política de
 5. Usuário acessa a lista e faz o **Download**
 6. Para relatórios com erro, clica em **Reprocessar**
 
+## Perguntas frequentes
+
+**Por que um relatório gerado aparece com status "Erro" na lista?**
+Isso geralmente indica falha no processamento em background, como timeout por excesso de dados ou problema temporário de sistema. Clique em **Reprocessar** para tentar novamente. Se persistir, reduza o período do relatório para diminuir o volume de dados processados.
+
+**Por quanto tempo os PDFs gerados ficam disponíveis na lista para download?**
+O período de retenção é configurado pela equipe técnica de acordo com a política de cada implantação. Faça o download e armazene externamente os relatórios que precisam de retenção por mais tempo (ex.: relatórios mensais de prestação de contas).
+
+**Por que o relatório aparece com status "Processando" há muito tempo?**
+Relatórios com grande volume de dados podem demorar vários minutos. Se o status não mudar após 15 minutos, contate o suporte técnico, pois pode ter ocorrido um problema no serviço de processamento em background.
+
 ## Tabela de referência — relatórios que geram PDF
 
 | Relatório | Inclui imagens | Tempo estimado |

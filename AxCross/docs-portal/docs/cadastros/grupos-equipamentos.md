@@ -87,3 +87,14 @@ Grupos bem nomeados agilizam a busca e filtragem em operações e relatórios. C
 :::tip Dica
 Grupos de Equipamentos facilitam o monitoramento simultâneo de vários pontos de fiscalização, permitindo visualizar o status de todos os Equipamentos de um conjunto de uma só vez.
 :::
+
+## Perguntas frequentes
+
+**Para que serve criar grupos de equipamentos no AxCross?**
+Grupos permitem filtrar o monitoramento, alertas e relatórios por conjunto lógico de equipamentos (ex.: uma região geográfica ou um contrato específico). Isso facilita o acompanhamento operacional quando há muitos equipamentos instalados em diferentes locais.
+
+**Um equipamento pode pertencer a mais de um grupo simultaneamente?**
+Sim. O sistema permite vincular o mesmo equipamento a múltiplos grupos sem conflito. Isso é útil quando o equipamento precisa ser monitorado por diferentes critérios (ex.: por região geográfica e por tipo de fiscalização).
+
+**Como usar grupos para filtrar relatórios no AxCross?**
+Nos relatórios que oferecem o filtro **Grupo de Equipamentos**, selecione o grupo desejado para restringir os dados ao conjunto de equipamentos correspondente. Certifique-se de que todos os equipamentos relevantes estão vinculados ao grupo antes de gerar o relatório.

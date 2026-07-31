@@ -89,3 +89,14 @@ Clique em **Visualizar** para ver os detalhes completos de um ticket:
 | Funcionalidade | Descrição |
 |---|---|
 | [**Tickets Fechados**](../pesagem/ticket-fechado) | Consulta de tickets de pesagem já finalizados |
+
+## Perguntas frequentes
+
+**O que fazer quando a balança não está conectada e o ticket fica em andamento indefinidamente?**
+Verifique a conexão de rede entre o computador e a balança HAENNI, confirme a URL configurada em **Sistema → HAENNI** e verifique se o número de balanças ativas exibido no menu lateral está acima de 0. Após restabelecer a conexão, inicie um novo ticket.
+
+**Por que a classificação selecionada na Etapa 1 é tão importante para o resultado da pesagem?**
+A classificação define o PBT máximo permitido para o veículo. Uma classificação errada pode gerar infração indevida (classificação com PBT menor que o real) ou não gerar infração quando deveria (classificação com PBT maior). Caso perceba o erro após finalizar, use a função **Reclassificar**.
+
+**É possível cancelar um ticket que já foi iniciado mas não finalizado?**
+Sim. Enquanto o ticket estiver com status **Em Andamento**, ele pode ser cancelado pelo operador. Tickets cancelados não geram infração e ficam registrados no histórico de **Tickets Fechados** com status correspondente.

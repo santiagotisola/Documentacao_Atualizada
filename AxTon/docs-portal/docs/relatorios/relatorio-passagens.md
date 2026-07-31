@@ -92,3 +92,14 @@ Exporte o Relatório ao final de cada operação para manter o histórico de pes
 | [**Power BI**](../relatorios/power-bi) | Dashboards avançados de Análise |
 | [**Mapa de Fluxo de Passagens**](../relatorios/mapa-fluxo-passagens) | Visualização geográfica do fluxo |
 | [**Falhas Sequenciais**](../relatorios/falhas-sequenciais) | Análise de falhas na numeração sequencial |
+
+## Perguntas frequentes
+
+**Como verificar o histórico de pesagem de um veículo específico pelo número da placa?**
+Este relatório não possui filtro por placa. Para consultar o histórico de um veículo específico, use a funcionalidade **Operações → Consulta de Placas**, que permite buscar todas as passagens de uma placa em qualquer período.
+
+**O que fazer quando o PBT Medido aparece zerado no relatório?**
+PBT Medido zerado indica falha na leitura da balança durante aquela pesagem. Acesse o ticket correspondente em **Pesagem → Tickets Fechados**, verifique o log do evento e registre uma ocorrência em **Operações → Eventos de Equipamentos** para rastreabilidade e cálculo de disponibilidade.
+
+**É possível exportar o relatório de pesagem em Excel além do PDF?**
+A exportação disponível neste relatório é em **PDF**. Para obter os dados em formato tabular (Excel/CSV), use o **Relatório de Infrações** ou o **Processamento de Imagens**, que oferecem exportação em CSV para análise avançada.

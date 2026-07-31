@@ -98,6 +98,17 @@ Exporte o relatório de NF-e ausente e compartilhe com a Secretaria de Fazenda e
 | **Chave NFe** | Identificador único da nota |
 | **Placa** | Veículo associado |
 | **Origem** | UF/cidade de origem |
+
+## Perguntas frequentes
+
+**Por que o status de uma NF-e aparece como "Ausente" mesmo que o veículo tenha nota fiscal?**
+Isso ocorre quando a NF-e não foi encontrada pelo sistema no momento da passagem via consulta SEFAZ/MDF-e. Pode ser que a nota foi emitida após a passagem ou que a integração SEFAZ estava com falha. Verifique os logs de integração e, se o problema for recorrente, acione o suporte técnico.
+
+**Como identificar rapidamente veículos que transitaram com NF-e cancelada ou vencida?**
+Filtre o relatório com **Status = Cancelada** ou **Status = Vencida** no período desejado. Exporte em CSV para encaminhar à Secretaria de Fazenda estadual para notificação dos emitentes irregulares, conforme obrigação legal.
+
+**Existe obrigação legal de reportar NF-e ausentes detectadas pelo AxTon à SEFAZ?**
+Sim. O transporte de cargas sem NF-e é irregularidade prevista no **Ajuste SINIEF 07/2005** e sancionada pela **Lei 8.137/90**. O operador deve exportar o relatório de NF-e ausentes periodicamente e encaminhar à Secretaria de Fazenda estadual para os procedimentos cabíveis.
 | **Destino** | UF/cidade de destino |
 | **Data/Hora** | Registro da passagem |
 

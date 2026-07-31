@@ -96,3 +96,14 @@ A tela exibe todos os registros cadastrados, com opção de pesquisa e filtro.
 | PBT máximo incorreto gerando infrações indevidas | Valor desatualizado em relação à CONTRAN 803/2021 | Atualizar o PBT conforme a resolução vigente |
 | Tipo de veículo não aparece na pesagem | Tipo inativo no cadastro | Reativar o tipo ou cadastrar conforme a classificação correta |
 | Inconsistência retroativa nos boletins | PBT alterado após infrações exportadas | Não alterar PBT de tipos já utilizados — criar nova classificação |
+
+## Perguntas frequentes
+
+**Quando devo atualizar os tipos de veículos cadastrados no sistema?**
+Sempre que o CONTRAN publicar novas resoluções alterando os limites de PBT ou o número de eixos por categoria. Acompanhe as publicações do SENATRAN e acione o suporte técnico para orientar a atualização sem comprometer infrações já exportadas.
+
+**Posso alterar o PBT máximo de um tipo de veículo que já foi utilizado em infrações exportadas?**
+Não. Alterar o PBT máximo retroativamente gera inconsistências nos boletins de medição e nas infrações já enviadas ao órgão autuador. Crie um novo tipo com o PBT atualizado e inative o anterior.
+
+**O que fazer quando um veículo com configuração de eixos incomum não corresponde a nenhum tipo cadastrado?**
+Cadastre um novo tipo em **Veículos → Tipos de Veículos → + Novo** com o número de eixos e PBT máximo correspondente, seguindo a tabela CONTRAN 803/2021. Em caso de dúvida sobre o enquadramento legal, consulte o órgão contratante antes de criar o registro.

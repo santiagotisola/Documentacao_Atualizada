@@ -107,3 +107,14 @@ Acesse **Relatórios → Ocorrências** no menu lateral. Consulte [Relatório de
 Use o Relatório de Ocorrências para consolidar tratativas realizadas durante operações de fiscalização e gerar evidências documentadas.
 :::
 
+## Perguntas frequentes
+
+**Qual a diferença entre um alerta automático e uma ocorrência manual no AxCross?**
+Alertas automáticos são gerados pelo sistema quando detecta eventos configurados (veículo monitorado, tempo na mancha, equipamento offline). Ocorrências manuais são registradas pelo operador para documentar eventos identificados em campo que o sistema não detectou automaticamente.
+
+**Como tratar corretamente um alerta de veículo monitorado detectado pelo sistema?**
+Siga o fluxo: **Visualizar** o alerta para verificar a imagem e confirmar a placa, **Assumir** para registrar sua responsabilidade, tome a ação necessária (comunicar à equipe de campo, acionar viatura, registrar BO) e por fim **Resolver** com descrição da ação realizada.
+
+**Por que um alerta de MANCHA01 é gerado para veículos que não estão em situação irregular?**
+O alerta MANCHA01 é baseado em tempo de permanência na área monitorada, não em irregularidade do veículo. Qualquer veículo que permaneça além do tempo máximo configurado dispara o alerta. Revise o tempo limite configurado nas **Vigencias de Alertas** se o número de falsos positivos estiver alto.
+

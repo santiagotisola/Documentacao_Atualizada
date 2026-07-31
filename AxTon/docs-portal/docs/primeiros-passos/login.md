@@ -86,3 +86,14 @@ Após múltiplas tentativas incorretas de Login, a conta poderá ser temporariam
 - [Navegação](./navegacao) — Estrutura do menu lateral e módulos disponíveis
 - [Dashboard](./dashboard) — Tela inicial com indicadores operacionais
 - [Controle de Acesso](../controle-acesso/configurar-permissoes) — Perfis e permissões de usuário
+
+## Perguntas frequentes
+
+**O que fazer quando minha conta é bloqueada após múltiplas tentativas de login?**
+Entre em contato com o administrador do sistema, que pode desbloquear a conta em **Controle de Acesso → Usuários**. Para evitar novos bloqueios, nunca tente adivinhar a senha — use sempre o link **Esqueceu a Senha?** para recuperá-la.
+
+**Como recuperar o acesso quando não sei mais minha senha?**
+Clique em **Esqueceu a Senha?** na tela de login. O sistema envia as instruções de recuperação para o e-mail cadastrado no seu perfil. Se não tiver acesso ao e-mail, solicite ao administrador que redefina sua senha manualmente.
+
+**Por que recebo a mensagem "Acesso negado por IP" mesmo com as credenciais corretas?**
+O sistema possui controle de acesso por IP. Seu endereço de rede não está autorizado. Solicite ao administrador que inclua seu IP na lista permitida em **Controle de Acesso → Acessos por IP**.

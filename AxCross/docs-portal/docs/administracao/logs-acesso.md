@@ -102,3 +102,14 @@ Verifique a política de retenção de logs configurada em **Configurações do 
 - Filtre por **Status = Falha** para identificar tentativas de acesso não autorizado — padrões repetidos do mesmo IP indicam ataque
 - Os logs são imutáveis — nenhum usuário pode editá-los, garantindo a integridade da trilha de auditoria
 - Exporte e arquive os logs mensalmente como parte do plano de conformidade e auditoria de segurança
+
+## Perguntas frequentes
+
+**Como verificar se um usuário específico excluiu algum registro no sistema?**
+Filtre os logs por **Usuário** e defina o período relevante. No resultado, filtre pelo tipo de **Ação = Excluir** e identifique o **Módulo** afetado. Para verificar o impacto, acesse o módulo correspondente e compare com o estado atual dos registros.
+
+**Por quanto tempo os logs de acesso ficam disponíveis para consulta?**
+O período de retenção depende da configuração definida em **Configurações do Sistema**. Verifique essa configuração com o administrador. Para fins de auditoria de segurança, recomenda-se exportar e arquivar os logs mensalmente.
+
+**O que fazer quando identifico tentativas repetidas de login falho vindas de um mesmo IP no log?**
+Filtre por **Status = Falha** e identifique o IP recorrente. Se o padrão indicar ataque de força bruta, bloqueie o IP em **Controle de Acesso → Acessos por IP** e notifique o gestor de segurança. Se o usuário em questão for legítimo, ele pode ter esquecido a senha — acione a recuperação.

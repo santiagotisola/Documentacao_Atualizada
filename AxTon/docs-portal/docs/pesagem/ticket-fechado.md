@@ -122,3 +122,14 @@ Use o filtro **Infrator** para revisar tickets com infração gerada e verificar
 3. Opcionalmente, filtre por placa ou posto
 4. Clique em **Pesquisar**
 5. Clique sobre o ticket para ver os detalhes
+
+## Perguntas frequentes
+
+**Como verificar se um veículo que passou pelo posto gerou infração e qual foi o excesso de peso?**
+Localize o ticket do veículo usando o filtro **Placa** combinado com o período da passagem. Nos detalhes do ticket, o campo **Resultado** indica se foi Regular ou Infrator, e o campo **Excesso** exibe o peso acima do PBT permitido.
+
+**Posso imprimir o comprovante de pesagem de um ticket fechado?**
+Sim. Clique em **Visualizar** para abrir o ticket e, em seguida, clique em **Imprimir** para gerar o PDF do comprovante. Esse documento pode ser entregue ao motorista como comprovante de regularidade ou de autuação.
+
+**Por que um ticket fechado com resultado Infrator não tem infração gerada no Relatório de Infrações?**
+Isso indica que o sequencial de infração pode estar esgotado ou não configurado. Acesse **Cadastros → Sequenciais de Infração** e verifique se há numereiros disponíveis e um sequencial ativo.

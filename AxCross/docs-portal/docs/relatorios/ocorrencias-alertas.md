@@ -102,3 +102,14 @@ Este Relatório é a principal ferramenta para demonstrar as atividades operacio
 | Ocorrência não aparece no relatório | Filtro de status excluindo o tipo buscado | Limpar filtros e ampliar o período |
 | Alertas sem responsável | Alerta gerado mas não assumido pelo operador | Verificar SLA e reatribuir o alerta |
 | Exportação incompleta | Limite de registros por exportação atingido | Dividir em períodos menores ou ajustar o limite nas Configurações |
+
+## Perguntas frequentes
+
+**Como exportar o relatório de ocorrências para apresentar ao contratante?**
+Apli-que os filtros de período desejado e clique em **Excel** para gerar o arquivo. O CSV exportado contém todas as colunas visíveis, incluindo responsabilidades, status e descrição das tratativas, servindo como comprovante das ações operacionais realizadas.
+
+**Por que um alerta aparece no relatório sem responsabilidade atribuída?**
+Isso indica que o alerta foi gerado automaticamente mas nenhum operador clicou em **Assumir** antes de resolvê-lo. Estabeleça como procedimento padrão que todo alerta deve ser assumido antes do tratamento para garantir rastreabilidade de SLA.
+
+**Como encontrar ocorrências de uma placa específica no relatório?**
+O relatório não possui filtro direto por placa na tela principal. Para análise de uma placa específica, use o **Painel Analítico** (aba Alertas) ou exporte o relatório em Excel e aplique filtro pela coluna Placa.

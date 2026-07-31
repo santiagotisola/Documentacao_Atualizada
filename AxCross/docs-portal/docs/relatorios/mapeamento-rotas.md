@@ -79,6 +79,17 @@ O mapeamento de rotas é especialmente útil em operações de busca de veículo
 - [Veículos Monitorados](./veiculos-monitorados)
 - [Painel Analítico](../painel/painel-analitico)
 
+## Perguntas frequentes
+
+**Por que algumas passagens do veículo não aparecem no mapeamento de rotas?**
+Passagens não aparecem quando o OCR não conseguiu ler a placa corretamente naquele cruzamento. A qualidade do mapeamento depende diretamente da taxa OCR dos equipamentos. Use o **Painel Analítico** para ver todas as passagens registradas, incluindo as com baixa confiança de leitura.
+
+**Qual o período máximo recomendado para o mapeamento de rotas sem comprometer o desempenho?**
+Períodos de até 7 dias têm melhor desempenho. Para análises históricas acima de 30 dias, considere exportar os dados e analisá-los externamente, pois a renderização do mapa pode ser lenta com grande volume de passagens.
+
+**O Mapeamento de Rotas mostra somente cruzamentos cobertos pelo AxCross?**
+Sim. O relatório exibe apenas os pontos onde o veículo foi detectado por equipamentos cadastrados no AxCross. Deslocamentos em vias sem cobertura de câmeras não aparecem no percurso, gerando lacunas na rota reconstruída.
+
 :::
 | Equipamento | Não | Filtrar por câmera específica |
 

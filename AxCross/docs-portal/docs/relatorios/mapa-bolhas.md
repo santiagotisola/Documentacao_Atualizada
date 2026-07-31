@@ -78,4 +78,15 @@ Combine o Mapa de Bolhas com o [Relatório de Ocorrências](ocorrencias-alertas.
 |------|-------|----------|
 | Mapa sem bolhas | Nenhuma irregularidade no período | Ampliar o período ou verificar o tipo de ocorrência selecionado |
 | Equipamento não aparece no mapa | Coordenadas não cadastradas | Verificar latitude/longitude no cadastro do equipamento |
+
+## Perguntas frequentes
+
+**Como identificar quais irregularidades estão concentradas em um ponto específico do Mapa de Bolhas?**
+Clique na bolha do equipamento para expandir os detalhes, ou use o filtro **Tipo de Ocorrência** para restringir o mapa a uma categoria específica (ex.: veículos roubados). Em seguida, acesse o **Relatório de Ocorrências** com o mesmo filtro de equipamento para ver o detalhamento.
+
+**Por que um equipamento cadastrado não aparece no Mapa de Bolhas?**
+O equipamento não terá bolha se não houver irregularidades no período selecionado, ou se as coordenadas geográficas não estiverem cadastradas. Verifique a latitude e longitude no cadastro do equipamento em **Cadastros → Locais**.
+
+**Qual a diferença entre o Mapa de Bolhas e o Mapa de Equipamentos do Dashboard?**
+O **Mapa de Equipamentos** no Dashboard mostra a localização de todos os equipamentos ativos com status de conexão. O **Mapa de Bolhas** mostra a concentração de **irregularidades** por equipamento em um período, sendo uma ferramenta analítica de priorização operacional.
 | Permissão negada ao acessar | Usuário sem `irregularitybubblemap.index` | Solicitar ao administrador a concessão da permissão |

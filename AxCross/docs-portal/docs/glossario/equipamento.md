@@ -81,3 +81,14 @@ Veja o cadastro completo em [Equipamentos](../cadastros/equipamentos).
 - Realize a limpeza das lentes mensalmente para manter a taxa OCR acima de 90%
 - Registre toda manutenção no sistema imediatamente — equipamentos sem histórico de manutenção podem ser contestados em auditorias
 - Verifique a conectividade semanalmente; equipamentos offline prolongados geram lacunas no histórico de passagens
+
+## Perguntas frequentes
+
+**O que significa um equipamento com status Offline no AxCross?**
+Status Offline indica que o equipamento perdeu comunicação com o sistema. Nenhuma passagem é registrada enquanto o equipamento estiver nesse estado. Verifique a conexão de rede, a alimentação elétrica e acione a equipe técnica se não retornar ao status Online após verificação.
+
+**Por que a taxa OCR de um equipamento caiu repentinamente?**
+As causas mais comuns são: lentes sujas (necessário limpeza), desalinhamento da câmera (ventos ou vibração), condições climáticas adversas (chuva intensa) ou falha no firmware de OCR. Verifique a imagem capturada para diagnosticar a causa antes de acionar manutenção técnica.
+
+**É obrigatório vincular o equipamento a uma faixa imediatamente após o cadastro?**
+Sim. Sem a vinculação com uma faixa, o equipamento não captura passagens mesmo estando Online. Após cadastrar o equipamento, acesse **Cadastros → Equipamentos**, selecione o equipamento e adicione as faixas necessárias.

@@ -104,3 +104,14 @@ Tipos de ocorrência vinculados a alertas ou veículos existentes **não podem s
 - [Veículos Monitorados](./veiculos-monitorados)
 - [Vigência dos Alertas](./vigencia-alertas)
 - [Ocorrências e Alertas](../relatorios/ocorrencias-alertas)
+
+## Perguntas frequentes
+
+**Posso excluir um tipo de ocorrência que não é mais utilizado?**
+Não, se o tipo já tiver alertas ou veículos vinculados. Inative o tipo para impedir novos usos sem perder o histórico de alertas já gerados com essa categorização.
+
+**O que acontece com os veículos monitorados existentes quando altero o prazo de expiração de um tipo?**
+O sistema recalcula automaticamente a data de expiração de todos os veículos vinculados ao tipo alterado. Não é necessário editar os veículos individualmente — a atualização é em bloco e imediata.
+
+**Por que não devo ativar alerta sonoro para todos os tipos de ocorrência?**
+Muitos alertas sonoros simultanâneos causam fadiga operacional, fazendo com que operadores passem a ignorar os alertas. Ative o som somente para tipos de alta prioridade (ex.: veículo roubado ou com mandado de prisão) para garantir que a equipe reaja de forma imediata e assertiva.

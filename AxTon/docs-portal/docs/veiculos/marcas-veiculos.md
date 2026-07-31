@@ -97,3 +97,14 @@ Marca de Veículo → Modelo → Veículo identificado na pesagem
 | Marca duplicada (ex.: SCANIA e Scania) | Grafias diferentes no cadastro | Inativar a duplicata e padronizar em maiúsculas |
 | Marca não aparece no ticket de pesagem | Marca com status inativo | Reativar o cadastro |
 | Campo fabricante vazio no auto exportado | Consulta RENAVAM sem retorno para a placa | Verificar a integração RENAVAM e preencher manualmente |
+
+## Perguntas frequentes
+
+**Como faço para corrigir marcas duplicadas cadastradas com grafias diferentes (ex.: SCANIA e Scania)?**
+Identifique qual das grafias está em conformidade com a tabela DENATRAN (geralmente em maiúsculas), inative a duplicata e, se necessário, transfira os modelos vinculados para a versão correta antes de inativar.
+
+**O código DENATRAN da marca é obrigatório nos arquivos de exportação?**
+Depende do layout exigido pelo órgão autuador. Alguns formatos de exportação, como o XTraffic, exigem o código do fabricante. Confirme com o órgão antes de gerar o primeiro lote para evitar rejeições.
+
+**O que acontece quando a marca do veículo não é retornada na consulta do RENAVAM?**
+O campo fabricante fica em branco no ticket de pesagem. O operador deve preencher manualmente durante a triagem. Se o problema for recorrente para uma placa específica, acione o suporte técnico para verificar a integração RENAVAM.

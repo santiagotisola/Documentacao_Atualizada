@@ -103,3 +103,14 @@ Somente operações com status **Em Andamento** permitem registrar novas pesagen
 | [**Eventos de Equipamentos**](../operacoes/eventos-Equipamentos) | Registro de eventos operacionais dos Equipamentos |
 | [**Consulta de Placas**](../operacoes/consulta-placas) | Pesquisar passagens de Veículos por placa |
 | [**Alertas**](../operacoes/alertas) | Gestão de alertas operacionais e notificações |
+
+## Perguntas frequentes
+
+**O que acontece se uma pesagem for registrada sem uma operação ativa no posto?**
+O sistema exige uma operação ativa para registrar pesagens. Sem operação em andamento, o ticket não será vinculado a nenhum contexto fiscalizário, o que compromete relatórios e medições contratuais. Sempre verifique se há operação **Em Andamento** antes de iniciar qualquer pesagem.
+
+**Como encerrar uma operação que foi deixada em andamento por engano após o turno?**
+Acesse **Operações**, localize a operação aberta, clique em **Editar** e preencha a **Data de Fim** com o horário correto de encerramento. O status será atualizado automaticamente para **Concluldido**.
+
+**Posso ter múltiplas operações em andamento simultaneamente para o mesmo posto?**
+O sistema permite abertura de múltiplas operações, mas é uma prática que deve ser evitada. Operações sobrepostas dificultam a rastreabilidade das pesagens e podem distorcer os índices de medição contratual. Encerre sempre a operação anterior antes de abrir uma nova.

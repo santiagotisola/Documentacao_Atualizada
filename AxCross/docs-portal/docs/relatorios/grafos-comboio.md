@@ -95,3 +95,14 @@ Os Grafos de Comboio requerem **Neo4j ativo** e configurado. Sem o serviço roda
 | Grafo vazio | Neo4j offline ou detecção de comboio desabilitada | Verificar status do Neo4j e habilitar em Configurações do Sistema |
 | COMBOIO01 não gerado | Ciclo de 6 horas ainda não executado | Aguardar o próximo ciclo ou contatar suporte |
 | Permissão negada | Usuário sem `monitoringgraph.index` | Solicitar ao administrador a concessão da permissão |
+
+## Perguntas frequentes
+
+**O que fazer quando o grafo de comboio aparece vazio mesmo com passagens registradas?**
+Verifique se o **Neo4j está ativo** e se a opção **Habilitar Detecção de Comboio** está ativada em **Configurações do Sistema**. O ciclo de identificação é executado a cada 6 horas, então aguarde o próximo ciclo após a configuração.
+
+**Quantas vezes dois veículos precisam ser detectados juntos para aparecerem conectados no grafo?**
+O limiar de co-ocorrência depende da configuração do Neo4j e dos parâmetros definidos em **Configurações do Sistema → MDF-e**. Contacte o suporte técnico para ajustar a sensibilidade da detecção conforme as necessidades da operação.
+
+**O grafo de comboio pode ser usado como prova em investigações criminais?**
+O grafo evidencia padrões de co-ocorrência de veículos, mas não substitui di-ligências investigativas formais. Exporte os dados e as passagens individuais (com imagens) via **Painel Analítico** para compor a documentação com base em registros rastreados pelo sistema.

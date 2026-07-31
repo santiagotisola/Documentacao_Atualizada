@@ -98,5 +98,16 @@ Use a consulta de placas para verificar histórico de um veículo antes de liber
 ## Relacionado
 
 - [Tickets Abertos](../pesagem/ticket-aberto)
+
+## Perguntas frequentes
+
+**Como identificar veículos com histórico recorrente de excesso de peso em um posto?**
+Use o filtro de **Placa** combinado com um período amplo (ex.: últimos 3 meses) e verifique o campo **Resultado = Infrator**. Registros repetidos indicam reinciência. Para análise mais aprofundada, utilize o **Relatório de Infrações** com filtro por placa.
+
+**Por que uma placa que passou pelo posto não aparece na consulta?**
+As causas mais comuns são: o OCR não conseguiu ler a placa corretamente (verifique a taxa OCR do posto no **Processamento de Imagens**), o período de busca está muito restrito ou o posto selecionado não é o correto. Amplie o período e verifique o posto.
+
+**É possível consultar placas no formato Mercosul e no formato antigo simultaneamente?**
+Sim. A consulta aceita ambos os formatos. Se o OCR leu a placa no formato Mercosul (ex.: ABC1D23), busque com esse formato. Se houve erro de leitura, tente buscar pelas letras fixas com coringa ou amplie o período para localizar o registro.
 - [Relatório de Infrações](../relatorios/relatorio-infracoes)
 - [Reclassificar](../pesagem/reclassificar)

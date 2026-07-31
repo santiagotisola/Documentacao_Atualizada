@@ -72,3 +72,14 @@ Ao clicar em **Relatórios**, os 10 tipos disponíveis são listados:
 :::tip Dica
 Use o **breadcrumb** no topo da página para identificar rapidamente em qual módulo você está e navegar para níveis anteriores sem usar o botão Voltar do navegador.
 :::
+
+## Perguntas frequentes
+
+**Por que alguns itens do menu lateral não aparecem para mim?**
+Os módulos visíveis no menu são determinados pelo perfil de acesso vinculado ao seu usuário. Apenas as funcionalidades liberadas nas Permissões de Acesso do seu perfil aparecem na navegação. Solicite ao administrador a adição das permissões necessárias.
+
+**Qual a diferença entre Monitoramento Online e Mural de Câmeras?**
+O **Monitoramento Online** exibe o status das câmeras com filtros por alerta, equipamento e faixa para análise operacional. O **Mural de Câmeras** mostra uma grade visual com os últimos frames capturados, ideal para acompanhamento visual contínuo durante o turno.
+
+**Como retornar ao Dashboard sem clicar no botão Voltar do navegador?**
+Clique em **Dashboard** no menu lateral ou use o **breadcrumb** no topo da página. O breadcrumb mostra o caminho de navegação atual e permite retornar a qualquer nível anterior com um clique.

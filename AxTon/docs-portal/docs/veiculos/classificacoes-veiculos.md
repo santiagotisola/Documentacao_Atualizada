@@ -92,3 +92,14 @@ Limites definidos pela **Resolução CONTRAN 803/2021**. Consulte a portaria SEN
 - Valide o PBT máximo de cada classificação com o contrato do cliente — alguns órgãos adotam limites mais restritivos
 - Não exclua classificações com registros históricos — inative o registro para preservar a consistência dos dados
 5. Clique em **Salvar**
+
+## Perguntas frequentes
+
+**O que acontece se eu alterar o PBT máximo de uma classificação que já está em uso?**
+As infrações geradas antes da alteração mantêm o PBT original registrado no momento da autuação. Contudo, novos registros passam a usar o valor atualizado, podendo gerar inconsistências retroativas em relatórios e boletins de medição. Somente altere com autorização da fiscalização.
+
+**Como a classificação de veículos influencia diretamente no cálculo das infrações?**
+Após o OCR capturar a placa, o sistema consulta o RENAVAM para identificar o número de eixos e busca a classificação correspondente. O peso aferido é comparado ao PBT máximo da classificação — se exceder, a infração é gerada automaticamente com o enquadramento correto.
+
+**Quando devo criar uma nova classificação ao invés de editar uma existente?**
+Crie uma nova classificação quando o CONTRAN publicar resolução alterando os limites de PBT ou quando o órgão contratante exigir limites mais restritivos que os legais. Nunca edite classificações já vinculadas a infrações exportadas — crie uma nova e inative a anterior.

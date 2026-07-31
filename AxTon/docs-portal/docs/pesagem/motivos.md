@@ -98,6 +98,17 @@ Motivos detalhados facilitam a análise gerencial e a rastreabilidade de libera�
 - Inative motivos obsoletos em vez de excluí-los para preservar o histórico operacional
 - Revise periodicamente os motivos mais usados no Dashboard para identificar padrões de liberação indevida
 
+## Perguntas frequentes
+
+**Por que é importante usar motivos específicos ao invés de um motivo genérico como "Outros"?**
+Motivos genéricos inviabilizam a análise gerencial dos padrões de liberação e descarte. Com motivos bem definidos, o gestor consegue identificar se muitos veículos estão sendo liberados por descarga (indica sobrecarga frequente) ou por recurso (indica contestabilidade das autenções).
+
+**Posso excluir um motivo que não é mais utilizado?**
+Não exclua motivos vinculados a tickets existentes. Inative o motivo — ele sairá das seleções ativas mas permanecerá nos registros históricos, garantindo a rastreabilidade das operações passadas.
+
+**Como o tipo do motivo (Liberação, Reclassificação ou Descarte) impacta os relatórios?**
+O tipo define em qual métrica o registro será contabilizado. Motivos do tipo **Liberação** aparecem nos relatórios de liberações; **Descarte** nos de infrações descartadas; e **Reclassificação** nos de correções de categoria. Usar o tipo errado distorce as estatísticas operacionais.
+
 :::tip
 Motivos bem configurados alimentam os relatórios gerenciais e permitem identificar padrões como excessívas liberações por "erro de classificação" que podem indicar necessidade de treinamento da equipe.
 :::

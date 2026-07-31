@@ -97,3 +97,14 @@ Lista completa de todas as detecções com:
 3. Acessar aba **Linha do Tempo** para ver cada ponto de captura em ordem
 4. Acessar aba **Rotas** para visualizar o percurso no mapa
 5. Exportar as **Passagens** para laudo ou boletim de ocorrência
+
+## Perguntas frequentes
+
+**Por que a aba Rotas mostra o percurso com lacunas entre cruzamentos?**
+Lacunas indicam que o veículo passou por trechos sem cobertura de equipamentos AxCross. O sistema conecta apenas os pontos onde o veículo foi efetivamente detectado. Para minimizar lacunas, verifique se todos os cruzamentos relevantes têm equipamentos ativos.
+
+**É possível consultar o painel analítico sem informar uma data inicial e final?**
+Não. A placa e o período são filtros obrigatórios. Defina um período específico de acordo com a janela investigativa. Para períodos muito longos (>30 dias), as abas com maior volume de dados podem ter desempenho reduzido.
+
+**Como usar o Painel Analítico para laudo de boletim de ocorrência?**
+Apli-que os filtros de placa e período, acesse a aba **Passagens** e exporte os dados. Cada passagem inclui data/hora, local, equipamento e imagem — informações suficientes para compor evidência documental. Combine com as imagens da aba Passagens para enriquecer o laudo.

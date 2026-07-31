@@ -91,3 +91,14 @@ Local (cruzamento)
 :::tip Dica
 Com as coordenadas geográficas preenchidas, o local será exibido no mapa do monitoramento online.
 :::
+
+## Perguntas frequentes
+
+**O que acontece se eu não informar as coordenadas geográficas de um local?**
+O cruzamento não aparecerá no mapa do Dashboard nem nos relatórios visuais. As passagens e alertas gerados pelo local ainda serão registrados normalmente, mas sem posicionamento no mapa. Preencha a latitude e longitude pelo Google Maps para corrigir.
+
+**Posso vincular múltiplos equipamentos ao mesmo local?**
+Sim. Um local pode ter vários equipamentos instalados (ex.: câmeras em diferentes direções do mesmo cruzamento). Cada equipamento deve ser cadastrado individualmente e vinculado ao local correspondente.
+
+**Como inativo um local que não está mais em operação sem perder o histórico?**
+Edite o cadastro do local e altere o **Status** para **Inativo**. O histórico de passagens, alertas e infrações vinculados ao local é preservado integralmente e continua acessível nos relatórios. Não exclua o local para não perder esse histórico.

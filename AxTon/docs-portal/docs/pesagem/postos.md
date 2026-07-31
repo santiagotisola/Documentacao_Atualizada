@@ -95,3 +95,14 @@ Após criar o posto, cadastre os **Equipamentos** vinculados em Cadastros Básic
 :::tip Dica
 Mantenha os nomes dos postos padronizados para facilitar a identificação nos Relatórios
 :::
+
+## Perguntas frequentes
+
+**Posso cadastrar um posto sem vinculá-lo a um contrato imediatamente?**
+Sim, mas o posto sem contrato não terá seus índices de disponibilidade e OCR calculados nas medições. Vincule o contrato logo após o cadastro para que as medições contratuais sejam geradas corretamente desde o início da operação.
+
+**O que acontece com os dados do posto se eu inativá-lo?**
+Inativar o posto remove-o das seleções ativas, mas preserva todo o histórico de pesagens e infrações vinculadas. Os dados continuam acessíveis nos relatórios para consulta e auditoria.
+
+**Como vinculo equipamentos a um posto já cadastrado?**
+Acesse **Cadastros Básicos → Equipamentos**, edite o equipamento desejado e selecione o posto no campo correspondente. Você também pode fazer essa vinculação durante o cadastro do equipamento.

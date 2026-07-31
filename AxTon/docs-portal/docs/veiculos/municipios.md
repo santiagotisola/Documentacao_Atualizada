@@ -88,3 +88,14 @@ A tela exibe todos os registros cadastrados, com opção de pesquisa e filtro.
 - [Postos de Pesagem](../pesagem/postos)
 - [Contratos](../medicoes/contratos)
 - [Relatório de Infrações](../relatorios/relatorio-infracoes)
+
+## Perguntas frequentes
+
+**Por que o lote de exportação foi rejeitado por código IBGE inválido?**
+Provavelmente o município foi cadastrado com o código de 6 dígitos ao invés do código oficial de 7 dígitos exigido pelo SENATRAN. Verifique o código correto em ibge.gov.br/cidades e atualize o cadastro antes de reenviar o lote.
+
+**Preciso cadastrar manualmente todos os municípios do Brasil ou o sistema já tem uma base pré-carregada?**
+O sistema vem com uma base pré-carregada com todos os municípios brasileiros e seus códigos IBGE. Adicione entradas personalizadas apenas para subdivisões ou localidades específicas que não constem na base padrão.
+
+**O que acontece se o posto de pesagem não tiver município cadastrado?**
+O boletim de medição gerado ficará sem a informação de localidade, e os arquivos de exportação podem ser rejeitados pelo SENATRAN. Edite o cadastro do posto e vincule o município correto antes de gerar medições ou exportar infrações.

@@ -84,3 +84,14 @@ Após múltiplas tentativas incorretas de login, a conta poderá ser temporariam
 :::info Primeiro acesso
 No primeiro acesso, utilize as credenciais fornecidas pelo administrador e altere a senha imediatamente em **Configurações → Usuários**. Escolha uma senha forte com letras, números e símbolos.
 :::
+
+## Perguntas frequentes
+
+**O que fazer quando a conta fica bloqueada após múltiplas tentativas de login incorretas?**
+Entre em contato com o administrador do sistema. Ele pode desbloquear o usuário em **Configurações → Usuários** editando o perfil. Para evitar novos bloqueios, use sempre o link **Esqueceu a Senha?** ao invés de tentar várias combinações.
+
+**Como recuperar o acesso quando não lembro a senha e o link de recuperação expirou?**
+Solicite ao administrador que redefina sua senha manualmente em **Configurações → Usuários → Editar**. O administrador informa a senha temporária e você a altera no primeiro acesso.
+
+**Por que o sistema AxCross usa o Identity Server (IS) para autenticação?**
+O Identity Server centraliza a autenticação de forma segura, permitindo Single Sign-On (SSO) entre sistemas Axion. Isso garante que as credenciais sejam validadas com um único ponto de controle, facilitando a gestão de segurança e auditoria de acessos.

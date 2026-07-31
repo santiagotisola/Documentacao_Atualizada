@@ -138,6 +138,17 @@ Para **excluir grupo**: `equipmentgroup.delete`
 Para **remover equipamento do grupo**: `equipmentgroup.deleteequipmentfromequipmentgroup`
 :::
 
+## Perguntas frequentes
+
+**O que fazer quando um equipamento cadastrado não aparece nas passagens do monitoramento?**
+Verifique se o equipamento está com **Status = Online** e se tem faixas ativas vinculadas. Equipamentos sem faixas configuradas não capturam passagens. Acesse o cadastro do equipamento, adicione a faixa e verifique a conexão de rede.
+
+**Posso ter múltiplas faixas ativas simultaneamente em um mesmo equipamento?**
+Sim, um equipamento pode monitorar várias faixas de pista ao mesmo tempo. Cada faixa é configurada de forma independente e pode ser filtrada individualmente nos relatórios e no monitoramento.
+
+**Como usar a importação em lote para cadastrar muitos equipamentos de uma vez?**
+Acesse **Cadastros → Equipamentos → Importar** e selecione o arquivo CSV com os dados dos equipamentos. O sistema exige a permissão `equipmentimport.index`. Após a importação, verifique cada equipamento para adicionar as faixas manualmente, pois elas não são importadas no arquivo CSV.
+
 ---
 
 ## Áreas de Monitoramento

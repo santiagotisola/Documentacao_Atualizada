@@ -87,3 +87,14 @@ Reclassificar pode alterar o limite de PBT aplicável e, consequentemente, cance
 :::warning Atenção
 A reclassificação altera o PBT (Peso Bruto Total) permitido, podendo impactar o cálculo de excesso de peso.
 :::
+
+## Perguntas frequentes
+
+**A reclassificação cancela automaticamente a infração, ou preciso fazer algo adicional?**
+Se após a reclassificação o peso medido estiver dentro do PBT da nova categoria, a infração é cancelada automaticamente. Se ainda houver excesso, a infração é mantida com a nova classificação. Não é necessária nenhuma ação adicional.
+
+**Posso reclassificar um ticket que já foi exportado ao órgão autuador?**
+Não. Tickets com status **Exportado** não podem ser reclassificados. Qualquer correção em infrações já exportadas deve ser tratada diretamente com o órgão autuador por meio de procedimento administrativo.
+
+**Por que a opção de reclassificar está desativada para alguns tickets?**
+A reclassificação só está disponível para tickets em aberto (não exportados). Tickets já encerrados, exportados ou com status final não podem ser alterados para garantir a integridade do processo de autuação.

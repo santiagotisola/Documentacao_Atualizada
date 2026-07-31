@@ -83,3 +83,14 @@ As passagens podem ser consultadas nos seguintes módulos:
 - **Rastreamento de Placas** — histórico de um Veículo específico
 - **Monitoramento Online** — visualização em tempo real
 - **Mapeamento de Rotas** — trajetória no mapa
+
+## Perguntas frequentes
+
+**O que é uma passagem com alerta no AxCross?**
+Uma passagem gera alerta automaticamente quando a placa detectada pelo OCR está cadastrada na lista de **Veículos Monitorados**. O tipo de alerta gerado e sua prioridade dependem da categoria de ocorrência vinculada ao veículo.
+
+**Por que uma passagem pode aparecer sem imagem no sistema?**
+Passagens sem imagem indicam que houve falha de armazenamento no momento da captura (disco cheio, falha de rede entre câmera e servidor, ou equipamento com problema temporário). Verifique o status do equipamento e o espaço em disco no servidor para evitar recorrência.
+
+**A qualidade de leitura OCR da placa impacta a geração de alertas?**
+Sim. Se o OCR não conseguir ler a placa corretamente, a passagem é registrada sem a placa real, e nenhum alerta é gerado mesmo que o veículo estivesse monitorado. Por isso, manter a taxa OCR acima de 90% é essencial para a eficácia operacional do sistema.

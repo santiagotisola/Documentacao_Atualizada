@@ -125,3 +125,14 @@ Combine o Rastreamento de Placas com o [Painel Analítico](./painel-analitico) p
 | Placa não encontrada | Período muito curto ou placa sem passagem no sistema | Ampliar o período de consulta ou verificar a grafia da placa |
 | Imagem ausente na passagem | Falha de armazenamento ou câmera offline na ocasião | Verificar o status do equipamento no histórico de eventos |
 | OCR incorreto em passagens noturnas | Qualidade de leitura reduzida em condições adversas | Confirmar visualmente pela imagem capturada |
+
+## Perguntas frequentes
+
+**Por que a busca por placa retorna registros de uma placa diferente da pesquisada?**
+O OCR pode ter lido placas parecidas de forma incorreta. Ao encontrar passagens suspeitas, clique na passagem e verifique a imagem capturada para confirmar se a placa exibida corresponde ao veículo fotografado. Passagens com leitura incorreta devem ser desconsideradas da análise.
+
+**Posso exportar as imagens das passagens junto com os dados do rastreamento?**
+O relatório exportado em CSV contém os metadados (data, local, placa, velocidade), mas não as imagens. Para obter as imagens, acesse cada passagem individualmente e faça o download ou capture a tela para documentação.
+
+**Qual o limite de período recomendado para uma consulta de rastreamento de placa?**
+Períodos de até 30 dias oferecem bom desempenho. Para análises mais longas, divida a consulta em faixas mensais e combine os resultados. Períodos muito amplos podem resultar em lentidão na renderização dos resultados.

@@ -88,3 +88,14 @@ Após exportar o CSV:
 - [Triagem](../glossario/triagem)
 - [Processamento de Imagens](./processamento-imagens)
 - [Exportação de Infrações](../infracoes/exportacao)
+
+## Perguntas frequentes
+
+**Como localizar uma infração específica de um veículo e verificar se já foi exportada?**
+Use o filtro **Placa** combinado com o **Período** da ocorrência e selecione o status **Exportada**. Se a infração aparecer com esse status, ela já foi incluída em um lote e enviada ao órgão autuador.
+
+**O que fazer quando uma infração aparece no relatório com excesso zerado?**
+Isso indica que a classificação do veículo tem PBT incorreto ou que a leitura da balança falhou. Acesse o ticket de pesagem correspondente, verifique a classificação e reclassifique se necessário antes de exportar o lote.
+
+**Como exportar apenas as infrações prontas para envio ao órgão autuador?**
+Filtre o relatório pelo status **Auditada** e pelo período desejado. Exporte em CSV e use esse arquivo como base para gerar o lote em **Exportação de Infrações → + Novo**. Antes de exportar, execute o relatório de **Falhas de Sequenciais** para garantir a integridade numérica.

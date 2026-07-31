@@ -115,3 +115,14 @@ Consulte [Logs de Acesso](logs-acesso.md) para detalhes.
 - [Perfis de Acesso](./perfis-acesso) — Criação e configuração de perfis com conjuntos de permissões
 - [Permissões de Acesso](./permissoes) — Controle granular por funcionalidade
 - [Logs de Acesso](./logs-acesso) — Histórico de acessos e ações por usuário
+
+## Perguntas frequentes
+
+**Por que é recomendado inativar um usuário ao invés de excluí-lo quando ele sai da equipe?**
+Excluir um usuário que já realizou operações remove a rastreabilidade do Log de Acesso. Inativando, o histórico de ações é preservado e o usuário perde imediatamente o acesso ao sistema sem comprometer a auditoria.
+
+**Como redefinir a senha de um usuário que não consegue acessar o sistema?**
+Acesse **Configurações → Usuários**, localize o usuário, clique em **Editar** e preencha o campo **Senha** com a nova senha temporária. Informe ao usuário e oriente-o a alterar no primeiro acesso.
+
+**Um usuário pode ter mais de um perfil de acesso atribuído simultaneamente?**
+Não. Cada usuário possui apenas um perfil de acesso vinculado. Se precisar de permissões de múltiplos perfis, crie um novo perfil personalizado que agrupe todas as permissões necessárias.
