@@ -46,9 +46,19 @@ Caso esquecer a senha, clique em **Esqueci minha senha** na tela de login e info
 - Use senhas fortes com mínimo de 8 caracteres, combinando letras, números e caracteres especiais
 - Nunca compartilhe suas credenciais — cada usuário deve ter login exclusivo para garantir rastreabilidade nos logs
 - Faça **logout** ao final de cada turno; acessos esquecidos abertos são riscos de segurança
-- Em caso de suspeita de acesso indevido, altere a senha imediatamente e notifique o administrador do sistema
+
+## Erros comuns
+
+| Erro | Causa | Solução |
+|------|-------|----------|
+| Login inválido após redefinição | Cache antigo | Limpar cache ou aba anônima |
+| Conta bloqueada | Múltiplas falhas | Aguardar 30 min ou contatar admin |
+| Link de redefinição expirado | Prazo ultrapassado | Solicitar novo link |
 
 ## Relacionado
+
+- [Usuários](../controle-acesso/usuarios)
+- [Logs de Acesso](../controle-acesso/logs-acesso)
 
 - [Usuários](../controle-acesso/usuarios)
 - [Perfis de Acesso](../controle-acesso/perfis-acesso)

@@ -58,6 +58,12 @@ Após criar o posto, cadastre os **Equipamentos** vinculados em Cadastros Básic
 
 | Erro | Causa | Solução |
 |------|-------|---------|
+| Pesagens não ap. no posto | Contrato não vinculado | Associar contrato |
+| Posto inativo cont. dados | Equipamentos ainda ativos | Inativar equipamentos |
+| Relatório sem dados do posto | Filtro incorreto | Verificar seleção de posto |
+
+| Erro | Causa | Solução |
+|------|-------|---------|
 | Pesagens não ap. no posto | Contrato não vinculado | Associar contrato ao posto |
 | Posto inativo cont. dados | Equipamentos ativos | Inativar todos os equipamentos |
 

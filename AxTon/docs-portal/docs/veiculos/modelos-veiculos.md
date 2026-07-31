@@ -46,19 +46,22 @@ Verifique se o modelo já existe antes de criar. Duplicidades dificultam a class
 | VOLVO | FH, FM, FMX |
 | IVECO | Daily, Eurocargo, Stralis |
 
+## Quando atualizar
+
+- Ao identificar um modelo não cadastrado durante a triagem
+- Após laçamento de nova linha por fabricante já cadastrado
+
 ## Erros comuns
 
 | Erro | Causa | Solução |
 |------|-------|----------|
 | Modelo duplicado | Cadastrado 2x | Inativar duplicata |
-| Modelo sem marca | Criação sem vínculo | Corrigir no cadastro |
-| Ticket sem modelo | Identificação falhou | Verificar base e OCR |
+| Ticket sem modelo | Identificação falhou | Verificar OCR e base |
 
 ## Relacionado
 
 - [Marcas de Veículos](./marcas-veiculos)
 - [Classificações de Veículos](./classificacoes-veiculos)
-- [Tipos de Veículos](./tipos-veiculos)
 
 ## Modelos comuns de veículos de carga
 
