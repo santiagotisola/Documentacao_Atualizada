@@ -92,3 +92,14 @@ Fabricante → Modelo → Equipamento cadastrado no posto
 :::tip Dependência
 Modelos dependem de Fabricante e Tipo previamente cadastrados.
 :::
+
+## Perguntas frequentes
+
+**Preciso cadastrar todos os modelos antes de iniciar as operações?**
+Sim. Cada equipamento precisa estar vinculado a um modelo existente. Cadastre os modelos mais comuns dos fabricantes utilizados durante a implantação para evitar bloqueios na criação dos equipamentos.
+
+**O que fazer quando um modelo não está cadastrado e é identificado durante uma pesagem?**
+Cadastre o modelo em **Cadastros Básicos → Modelos de Equipamentos → + Novo**, vinculando-o ao fabricante e tipo corretos. Em seguida, edite o equipamento correspondente para associá-lo ao novo modelo.
+
+**Posso renomear um modelo já vinculado a equipamentos em operação?**
+Não é recomendado. Renomear pode causar inconsistência nos relatórios históricos. Inative o modelo atual, crie um novo com o nome correto e redirecione os equipamentos para o novo cadastro.

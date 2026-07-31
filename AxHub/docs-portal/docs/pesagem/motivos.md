@@ -120,6 +120,17 @@ Os motivos alimentam o **Dashboard gerencial** com:
 
 ## Perguntas frequentes
 
+**A liberação de um ticket fica bloqueada se não houver motivos cadastrados?**
+Sim. O campo Motivo é obrigatório na tela de liberação. Se nenhum motivo estiver ativo, o operador não conseguirá encerrar o ticket. Cadastre ao menos um motivo de cada tipo (Pesagem e Liberação) antes de iniciar as operações.
+
+**Posso excluir um motivo que não é mais utilizado?**
+Não exclua motivos vinculados a tickets existentes. Inative o motivo para que ele não apareça mais nas seleções, mas os registros históricos que usaram esse motivo serão preservados para auditoria.
+
+**Como identificar quais motivos estão sendo usados com mais frequência?**
+Acesse o **Dashboard** e consulte o ranking de motivos de liberação e descarte. Motivos genéricos com alta frequência indicam necessidade de treinamento da equipe ou criação de motivos mais específicos.
+
+## Perguntas frequentes
+
 **O que fazer quando o operador seleciona sempre o mesmo motivo genérico?**
 Revise o treinamento da equipe e verifique se os motivos disponíveis são específicos o suficiente. Motivos genéricos comprometem a análise gerencial.
 

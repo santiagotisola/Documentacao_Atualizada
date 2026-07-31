@@ -121,6 +121,17 @@ Após criar o posto, vincule os **Equipamentos** a ele em **Configurações → 
 
 ## Perguntas frequentes
 
+**Posso ter um equipamento vinculado a dois postos ao mesmo tempo?**
+Não. Cada equipamento deve estar vinculado a um único posto. Se precisar redistribuir equipamentos, edite o cadastro de cada um e altere o posto de referência.
+
+**O que acontece com os tickets registrados se eu inativar um posto?**
+Tickets já gerados são preservados no histórico e continuam acessíveis nos relatórios. Apenas novos tickets deixam de ser criados para o posto inativo. Não exclua postos com histórico operacional.
+
+**Como vincular equipamentos a um posto que já foi criado?**
+Acesse **Configurações → Equipamentos**, edite cada equipamento que deve pertencer ao posto e selecione o posto correto no campo correspondente. A vinculação não é feita no cadastro do posto, mas sim no cadastro de cada equipamento.
+
+## Perguntas frequentes
+
 **O posto precisa estar vinculado a um contrato para registrar pesagens?**
 Sim. Sem vínculo a um contrato, as pesagens do posto não são contabilizadas no boletim de medição.
 

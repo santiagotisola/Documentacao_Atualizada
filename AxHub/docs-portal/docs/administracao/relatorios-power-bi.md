@@ -75,3 +75,14 @@ A URL de incorporação deve ser gerada no portal Power BI com modo de acesso p�
 |------|--------|-----------|
 | Relacionado | [Power BI (Relatorios)](../Relatórios/power-bi) | Visualizar Relatórios |
 | Relacionado | [Use 'Use 'Use 'Use 'Use 'Use 'Use 'Use 'Use 'Use 'Use 'Use 'Use 'Use 'Use 'Use 'Use 'Use 'Use 'Use 'Use 'Use 'Use 'Use 'Configuração'uração'uração'uração'uração'uração'uração'uração'uração'uração'uração'uração'uração'uração'uração'uração'uração'uração'uração'uração'uração'uração'uração'uração'uracoes do Sistema](./configuracoes-sistema) | Config geral |
+
+## Perguntas frequentes
+
+**Como adicionar um novo relatório Power BI ao menu do sistema?**
+Acesse **Configurações → Relatórios Power BI**, clique em **+ Novo**, informe o **Nome** e a **URL de incorporação** gerada no portal Power BI, selecione os grupos de acesso e clique em **Salvar**. O relatório aparecerá automaticamente na lista.
+
+**Os relatórios Power BI mostram dados em tempo real ou são atualizados periodicamente?**
+Os dados são atualizados conforme o agendamento configurado no Power BI Service — por padrão, pode ser diário ou sob demanda. Para ajustar a frequência de atualização, entre em contato com o suporte técnico Axion.
+
+**Por que um relatório Power BI aparece em branco para alguns usuários?**
+Verifique se o usuário está vinculado ao grupo de acesso correto no cadastro do relatório. Sem permissão, o painel é exibido em branco ou com mensagem de acesso negado. Adicione o perfil do usuário ao grupo de acesso correspondente.
