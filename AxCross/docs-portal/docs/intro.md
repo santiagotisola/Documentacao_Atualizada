@@ -91,3 +91,14 @@ Em caso de dúvidas ou problemas, entre em contato com o administrador do sistem
 | Câmera Offline | Falha de conexão | Verificar rede e equipamento |
 | Passagens não aparecem | Sincronização atrasada | Executar Sincronização de Passagens |
 | Relatório vazio | Faixa sem equipamento | Vincular equipamento à faixa |
+
+## Perguntas frequentes
+
+**Quantos equipamentos posso monitorar?**
+Não há limite no sistema. O desempenho depende da infraestrutura do servidor.
+
+**O AxCross funciona com qualquer câmera OCR?**
+Compatibilidade depende do modelo. Consulte o suporte para homologação de novos modelos.
+
+**Quanto tempo os dados de passagem ficam armazenados?**
+Conforme configuração do servidor. O padrão é 12 meses antes da expurgão automática.

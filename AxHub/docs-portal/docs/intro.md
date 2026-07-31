@@ -95,3 +95,14 @@ Em cada tela do AxHub, você encontrará um link de ajuda que o direcionará dir
 | Infração não exportada | Aferição vencida | Renovar certificação INMETRO |
 | Lote rejeitado | Sequencial duplicado | Usar Relatório de Falhas de Sequenciais |
 | Dashboard sem dados | Período sem operação | Verificar operações ativas |
+
+## Perguntas frequentes
+
+**O AxHub funciona em dispositivos móveis?**
+Sim, a interface é responsiva e funciona em tablets e smartphones modernos.
+
+**Com que frequência devo gerar a medição contratual?**
+Mensalmente, dentro do prazo definido em contrato. Recomendado até o 5º dia útil do mês seguinte.
+
+**O que fazer se um equipamento aparecer Offline no Dashboard?**
+Verifique a conexão de rede do equipamento e abra um chamado em Operações → Eventos de Equipamentos.

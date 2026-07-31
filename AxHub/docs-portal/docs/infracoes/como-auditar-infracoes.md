@@ -64,8 +64,32 @@ Infrações confirmadas na auditoria não podem ser alteradas posteriormente sem
 - [Infrações Descartadas](./infracoes-descartadas) — Histórico de descartes
 - [Processamento por Usuário](../relatorios/processamento-por-usuario) — Métricas por analista
 
+## Erros comuns
 
-:::caution Gerado em modo offline
+| Erro | Causa | Solução |
+|------|-------|---------|
+| Infração não encontrada na auditoria | Status diferente de Triada | Verificar filtros de status |
+| Não consigo confirmar | Sem permissão de auditoria | Solicitar ao administrador |
+| Imagens não carregam | Conexão lenta | Recarregar ou usar conexão melhor |
+
+## Integração com outros módulos
+
+| Módulo | Relação |
+|--------|---------|
+| **Triagem** | Etapa anterior — envia para auditoria |
+| **Lote de Exportação** | Recebe infrações auditadas |
+| **Processamento por Usuário** | Métricas de auditores |
+
+## Perguntas frequentes
+
+**Com que frequência devo auditar?**
+Recomendado 100% das infrações antes da exportação. Para volumes altos, use amostragem mínima de 10%.
+
+**Posso reverter uma confirmação errada?**
+Sim, desde que a infração não tenha sido exportada. Rejeite-a com justificativa.
+
+**Quais infrações devem ser rejeitadas obrigatoriamente?**
+Imagem ilegível, placa não confirmada, enquadramento incorreto ou ausência de imagens obrigatórias.
 Este documento foi criado com o **template local** (sem IA generativa).
 Revise e complete as se��es marcadas com ?? antes de publicar.
 :::

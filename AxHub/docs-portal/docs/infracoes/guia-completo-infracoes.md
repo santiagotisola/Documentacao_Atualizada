@@ -280,8 +280,36 @@ Se alguma Infração não passou nas Validações o sistema mostra o erro detalh
 
 A qualquer momento, você pode consultar todas as Infrações no sistema, independente do status.
 
-**Menu lateral** → Infrações → **Consulta de Infrações
+**Menu lateral** → Infrações → **Consulta de Infrações**
 
+## Erros comuns
+
+| Erro | Causa | Solução |
+|------|-------|---------|
+| Infração rejeitada pelo órgão | Placa incorreta ou enquadramento errado | Corrigir na triagem e reexportar |
+| Lote não aceito | Sequencial duplicado | Verificar Falhas de Sequenciais |
+| Imagem inválida | Resolução insuficiente | Calibrar equipamento |
+| Prazo expirado | 30 dias após a infração | Infração prescrita — não pode ser exportada |
+
+## Integração com outros módulos
+
+| Módulo | Relação |
+|--------|---------|
+| **Triagem** | Valida as infrações capturadas |
+| **Auditoria** | Revisa e aprova antes da exportação |
+| **Lote de Exportação** | Envia ao órgão autuador |
+| **Relatório de Infrações** | Acompanhamento e estatísticas |
+
+## Perguntas frequentes
+
+**Qual o prazo legal para exportar uma infração?**
+30 dias a partir da data da infração (Art. 281 do CTB).
+
+**Posso cancelar uma infração já exportada?**
+Não diretamente no AxHub. Entre em contato com o órgão autuador.
+
+**O sistema gera infrações automaticamente ou precisa de aprovação humana?**
+O equipamento captura automaticamente. A triagem humana é obrigatória antes da exportação.
 Filtros disponíveis:
 - **Período** | Equipamento | **Placa** | **Status** | **Operação** | Usuário
 

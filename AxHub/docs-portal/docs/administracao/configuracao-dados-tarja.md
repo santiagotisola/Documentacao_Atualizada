@@ -498,6 +498,30 @@ As alterações afetam apenas **NOVAS Infrações Infrações já geradas perman
 - Alterar retroativamente pode invalidar a Infração legalmente
 - Pode ser considerado adulteração de documento
 
+## Erros comuns
+
+| Erro | Causa | Solução |
+|------|-------|---------|
+| Campo vazio na tarja | Fonte de dados não configurada | Mapear campo em Config. de Tarja |
+| Dados desatualizados na tarja | Cache de infração | Reprocessar ou aguardar nova infração |
+| Tarja com texto corrompido | Encoding incorreto | Revisar configuração de charset |
+
+## Integração com outros módulos
+
+| Módulo | Relação |
+|--------|---------|
+| **Infrações** | A tarja é gerada no momento da infração |
+| **Exportação** | Tarja impressa aparece no AIT exportado |
+| **Triagem** | Operador visualiza a tarja ao validar |
+
+## Perguntas frequentes
+
+**Quantas tarjas posso configurar?**
+Sem limite definido. Cada tipo de infração pode ter sua própria tarja.
+
+**A tarja aparece automaticamente no AIT impresso?**
+Sim, desde que o campo esteja mapeado na configuração de exportação.
+
 **Quando pode:**
 - Correção de erro evidente (ex: endereço errado)
 - Autorização formal do gestor

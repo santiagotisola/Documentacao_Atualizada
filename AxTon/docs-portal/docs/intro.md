@@ -108,3 +108,14 @@ Em caso de dúvidas ou problemas, entre em contato com o suporte da Axion Tecnol
 | Ticket não fechado | Veículo aguardando liberação | Liberar em Pesagem → Tickets |
 | Medição com OCR incorreto | Dados desatualizados | Sincronizar dados |
 | Exportação rejeitada | Sequencial duplicado | Verificar Falhas de Sequenciais |
+
+## Perguntas frequentes
+
+**Com que frequência devo gerar a medição?**
+Mensalmente, até o 5º dia útil do mês seguinte.
+
+**O que é o PBT e por que é importante?**
+Peso Bruto Total — limite legal de peso do veículo. Exceder o PBT gera infração automática.
+
+**Posso ter vários equipamentos no mesmo posto?**
+Sim. Um posto pode ter balança estática, dinâmica e sensor de eixo simultaneamente.
