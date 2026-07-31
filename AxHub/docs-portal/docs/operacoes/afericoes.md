@@ -89,6 +89,15 @@ Infrações geradas com aferição vencida podem ser juridicamente questionávei
 Mantenha o controle de vencimentos atualizado e agende renovações com 60 dias de antecedência.
 :::
 
+## Integração com outros módulos
+
+| Módulo | Como usa este cadastro |
+|--------|----------------------|
+| **Equipamentos** | O sistema monitora o vencimento da aferição por equipamento e exibe alertas quando o prazo se aproxima |
+| **Tarjas** | A data de aferição e o número do certificado exibidos na tarja vêm do último registro de aferição ativo |
+| **Dashboard** | Alertas de aferição vencida ou próxima do vencimento são exibidos no painel inicial |
+| **Exportação** | Infrações de equipamentos com aferição vencida são bloqueadas e não entram no lote |
+
 :::info Dados na Tarja
 As informações de aferição aparecem nas **tarjas das Infrações
 - **Data de Aferição** (Data Emissão)

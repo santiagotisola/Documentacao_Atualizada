@@ -102,3 +102,14 @@ Se ativar a restrição sem cadastrar seu próprio IP, você será bloqueado ime
 | Relacionado | [Usuarios](./Usuários) | Gerenciamento de Usuários do sistema |
 | Relacionado | [Logs de Acesso](./logs-acesso) | Verificar registros de acesso |
 | Relacionado | [Perfis de Acesso](./perfis-acesso) | Controle de permissoes por perfil |
+
+## Perguntas frequentes
+
+**O que acontece se eu ativar a restrição sem cadastrar meu próprio IP?**
+Você será bloqueado imediatamente. Antes de ativar a restrição, certifique-se de que seu IP fixo está na lista de IPs autorizados.
+
+**Usuários com IP dinâmico podem usar este recurso?**
+Não é recomendado. IPs dinâmicos mudam a cada conexão e causariam bloqueios frequentes. Use restrição por IP apenas em ambientes corporativos com IPs fixos.
+
+**Como desbloquear um usuário que foi bloqueado por IP?**
+Um administrador com acesso direto ao servidor ou via IP autorizado deve remover o IP bloqueado da lista ou desativar temporariamente a restrição para reconfiguração.

@@ -95,3 +95,14 @@ Infrações descartadas por **exceção automática** também aparecem com statu
 | Origem | [Triagem](./triagem) | Infrações descartadas durante a triagem |
 | Relacionado | [Exceções](./excecoes) | Regras de descarte automático |
 | Configuracao | [Motivos de Descarte](../administracao/motivos-descartes) | Lista de motivos disponíveis |
+
+## Perguntas frequentes
+
+**É possível reverter uma infração descartada?**
+Sim, até a etapa de auditoria. Acesse **Infrações → Infrações Descartadas**, localize a infração e solicite a reversão ao auditor responsavél. Infrações descartadas após a exportação não podem ser recuperadas.
+
+**O que significa motivo genérico e por que é problema?**
+Motivo genérico (ex.: “Outros”) não permite rastrear a causa real do descarte. Isso prejudica a análise de qualidade, impede melhorias nos equipamentos e pode ser questinado em auditoria contratual.
+
+**Alta taxa de descarte em um equipamento indica o que?**
+Geralmente problemas técnicos: câmera suja, ângulo errado, OCR descalibrado ou iluminação insuficiente. Use o relatório de **Processamento de Imagens** para cruzar a taxa de descarte com o aproveitamento OCR.

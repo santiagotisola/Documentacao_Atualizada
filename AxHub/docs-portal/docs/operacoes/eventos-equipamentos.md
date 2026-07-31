@@ -106,3 +106,12 @@ Eventos de falha são contabilizados como **indisponibilidade** no cálculo das 
 | Relacionado | [Monitoramento Online](./monitoramento-online) | Acompanhamento tempo real |
 | Relacionado | [Equipamentos](../cadastros-basicos/Equipamentos) | Cadastro de Equipamentos |
 | Relatório | [Rel. Eventos Equipamentos](../relatorios/eventos-equipamentos) | Relatório detalhado |
+
+## Integração com outros módulos
+
+| Módulo | Como usa este cadastro |
+|--------|----------------------|
+| **Medições** | Eventos de falha são contabilizados como indisponibilidade no boletim de medição do contrato |
+| **Interrupções** | Cada evento de falha deve ter uma interrupção correspondente registrada em Medição |
+| **Monitoramento Online** | O status em tempo real é atualizado conforme os eventos registrados |
+| **Relatório de Eventos** | Exibe o histórico consolidado de todos os eventos por equipamento e período |

@@ -108,3 +108,14 @@ A **Consulta de Placas** pode não aparecer no menu lateral dependendo das permi
 |------|--------|-----------|
 | Relacionado | [Consulta de Infracoes](../infracoes/consulta-infracoes) | Infracoes do Use Veículo (com acento) |
 | Relacionado | [Monitoramento Online](./monitoramento-online) | Passagens em tempo real |
+
+## Perguntas frequentes
+
+**A consulta de placas mostra passagens de todos os equipamentos?**
+Sim, se você não filtrar por equipamento específico. O resultado agrupa passagens de todos os pontos de monitoramento do sistema no período selecionado.
+
+**Por que uma passagem não aparece na consulta?**
+As causas mais comuns são: placa lida incorretamente pelo OCR, equipamento offline no período, ou placa digitada com formato diferente (Mercosul x antigo). Tente variantes da placa.
+
+**A consulta de placas pode ser usada como prova em recurso de infração?**
+O dado bruto da consulta não tem valor probatório isolado. O documento oficial é o **Auto de Infração** gerado no fluxo completo com imagem, enquadramento e tarja.

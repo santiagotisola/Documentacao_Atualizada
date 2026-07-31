@@ -106,3 +106,14 @@ está tela ainda não possui screenshot cadastrada. Será adicionada em breve.
 | Relacionado | [Enquadramentos](./enquadramentos) | Enquadramentos vinculados |
 | Relacionado | [Exportacao](../infracoes/exportacao) | Exportacao com forma |
 | Glossario | [Autuacao](../glossario/autuacao) | Definicao CTB |
+
+## Perguntas frequentes
+
+**Posso alterar o código de uma forma de autuação já usada em infrações exportadas?**
+Não. Alterar o código invalida a rastreabilidade das infrações já enviadas ao órgão. Inative a forma antiga e crie uma nova com o código correto.
+
+**Quantas formas de autuação posso ter ativas ao mesmo tempo?**
+O sistema não impõe limite, mas recomenda-se cadastrar apenas as formas exigidas pelo contrato vigente para reduzir o risco de seleção incorreta durante a triagem.
+
+**Por que meu lote foi rejeitado com erro de forma de autuação?**
+Provavelmente o código cadastrado não corresponde ao esperado pelo sistema do órgão autuador. Confirme os códigos aceitos no layout de exportação fornecido pelo contratante.

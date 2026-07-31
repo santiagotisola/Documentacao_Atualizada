@@ -89,3 +89,12 @@ Arcos permitem exportar dados de múltiplas faixas/equipamentos de uma mesma loc
 |------|--------|-----------|
 | Relacionado | [Equipamentos](../cadastros-basicos/equipamentos) | Equipamentos no arco |
 | Relacionado | [Operacoes](../operacoes/cadastro-operacoes) | Operacao vinculada |
+
+## Integração com outros módulos
+
+| Módulo | Como usa este cadastro |
+|--------|----------------------|
+| **Operações** | Cada operação pode ser vinculada a um arco para agrupar equipamentos da mesma estrutura física |
+| **Lote de Exportação** | Infrações agrupadas por arco são exportadas em conjunto com numeração sequencial consistente |
+| **Relatório de Passagens** | Permite filtrar dados por arco, exibindo o volume total de passagens da travessia |
+| **Monitoramento Online** | Exibe o status de todos os equipamentos de um arco em um único painel |

@@ -92,3 +92,14 @@ Processa as interrupções registradas para abatimento na medição contratual.
 |------|--------|-----------|
 | Relacionado | [Contratos](./contratos) | Contrato afetado |
 | Relacionado | [Criar Medicao](./criar-medicao) | Impacto na medicao |
+
+## Perguntas frequentes
+
+**Interrupções de manutenção preventiva descontam da disponibilidade?**
+Depende do contrato. Manutenções preventivas programadas geralmente não descontam; interrupções corretivas (falha) sim. Verifique as cláusulas contratuais e cadastre o tipo correto.
+
+**Posso registrar uma interrupção retroativamente após a medição ser gerada?**
+Não. Interrupções devem ser registradas antes da geração da medição. Após finalizar, é necessário reabrir a medição com autorização do supervisor para incluir interrupções esquecidas.
+
+**Qual o prazo máximo para registrar uma interrupção?**
+Registre imediatamente após o equipamento voltar à operação. O prazo máximo depende do contrato, mas o recomendado é até 24 horas após a normalização.

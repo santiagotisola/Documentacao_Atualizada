@@ -108,3 +108,12 @@ Os motivos alimentam o **Dashboard gerencial** com:
 |------|--------|-----------|
 | Relacionado | [Reclassificar](./reclassificar) | Usar motivo na reclassificacao |
 | Relacionado | [Postos](./postos) | Postos de pesagem |
+
+## Integração com outros módulos
+
+| Módulo | Como usa este cadastro |
+|--------|----------------------|
+| **Liberar Pesagem** | O operador seleciona um motivo de liberação ao encerrar um ticket; sem motivos ativos, a liberação é bloqueada |
+| **Reclassificar** | Cada reclassificação exige o preenchimento de um motivo para registro no log de auditoria |
+| **Tickets Fechados** | O motivo usado fica registrado no histórico do ticket para consulta e exportação |
+| **Dashboard** | Os motivos mais usados são exibidos no ranking gerencial para análise de padrões |

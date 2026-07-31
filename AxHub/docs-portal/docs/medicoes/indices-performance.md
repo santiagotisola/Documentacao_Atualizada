@@ -84,3 +84,14 @@ Os índices configurados aqui são calculados automaticamente ao gerar uma nova 
 - [Contratos](./contratos)
 - [Criar Medição](./criar-medicao)
 - [Interrupções](./interrupcoes)
+
+## Perguntas frequentes
+
+**Preciso cadastrar um índice para cada mês ou ele é reutilizado?**
+O mesmo índice é aplicado em todas as medições do contrato. Caso a meta mude por aditivo, edite o índice — o novo valor será usado na próxima medição gerada.
+
+**O que acontece quando um índice fica abaixo da meta?**
+O boletim de medição marca o índice com status ❌. Dependendo do contrato, pode haver glosa no pagamento mensal. Documente a causa e as ações corretivas para apresentar ao contratante.
+
+**Posso ter índices diferentes por equipamento dentro do mesmo contrato?**
+Sim. Configure um índice específico para cada equipamento ou grupo, vinculando ao mesmo contrato com metas distintas conforme as cláusulas contratuais.

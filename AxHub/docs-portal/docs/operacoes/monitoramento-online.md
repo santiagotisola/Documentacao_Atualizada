@@ -88,6 +88,17 @@ Configure o filtro por grupo de equipamentos para focar no seu âmbito de respon
 - [Grupos de Equipamentos](../cadastros-basicos/grupos-equipamentos)
 | Taxa OCR não exibida | Permissão insuficiente | Solicitar permissão ao administrador |
 
+## Perguntas frequentes
+
+**Por que um equipamento aparece offline mesmo com a rede funcionando?**
+O heartbeat pode estar desabilitado no grupo de equipamentos, ou o intervalo de timeout pode estar muito curto. Verifique **Configurações → Grupos de Equipamentos** e o campo **Timeout Heartbeat** em Configurações do Sistema.
+
+**O monitoramento online consome muita banda de rede?**
+Sim. O painel atualiza em tempo real e pode impactar redes com baixa largura de banda. Use filtros por grupo para reduzir o volume de dados carregados.
+
+**Posso usar o monitoramento online em dispositivos móveis?**
+Sim. O sistema é acessível via navegador em tablets e smartphones. Otimize usando o filtro por grupo para carregar apenas os equipamentos relevantes ao turno.
+
 ## Fluxo de uso no início do turno
 
 1. Acessar **Operações → Monitoramento Online**

@@ -108,6 +108,14 @@ Os recursos são vinculados às medições mensais para comprovar a alocação c
 
 ---
 
+## Integração com outros módulos
+
+| Módulo | Como usa este cadastro |
+|--------|----------------------|
+| **Contratos** | Cada recurso é vinculado a um contrato; sem esse vínculo o recurso não aparece no boletim de medição |
+| **Medições** | Os recursos cadastrados são inclusos automaticamente no Boletim como comprovação do fornecimento contratual |
+| **Relatórios** | Permite filtrar medições por tipo de recurso para análise de alocação e custo operacional |
+
 ## Navegacao Relacionada
 
 | Tipo | Pagina | Descricao |

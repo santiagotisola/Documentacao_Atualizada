@@ -108,4 +108,13 @@ Um enquadramento mal configurado resulta em infrações com artigo CTB incorreto
 |------|--------|-----------|
 | Relacionado | [Enquadramentos](./enquadramentos) | Lista de enquadramentos |
 | Relacionado | [Triagem](../infracoes/triagem) | Uso na triagem |
+
+## Integração com outros módulos
+
+| Módulo | Como usa este cadastro |
+|--------|----------------------|
+| **Operações** | Cada operação usa as configurações de enquadramento para definir quais artigos CTB serão aplicados às passagens capturadas |
+| **Triagem** | O enquadramento configurado é exibido automaticamente na tela de triagem para validação pelo analista |
+| **Exportação** | O código de enquadramento é campo obrigatório no arquivo enviado ao órgão autuador |
+| **Glossário — Enquadramento** | Explica o conceito legal por trás das configurações |
 | Glossario | [Enquadramento](../glossario/enquadramento) | Definicao CTB |

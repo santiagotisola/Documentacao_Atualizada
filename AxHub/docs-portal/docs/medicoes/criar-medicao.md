@@ -93,3 +93,12 @@ O **Boletim de Medição** gerado pode ser enviado ao contratante como comprova�
 | Relacionado | [Contratos](./contratos) | Contrato vinculado |
 | Relacionado | [Medicoes Finalizadas](./medicoes-finalizadas) | histórico |
 | Glossario | [Medicao de Desempenho](../glossario/medicao-desempenho) | Definicao tecnica |
+
+## Checklist pré-geração de medição
+
+- [ ] Confirmar que todas as **interrupções** do período foram registradas
+- [ ] Verificar se os **equipamentos** do contrato estavam ativos no período
+- [ ] Validar que nenhum ticket de pesagem relevante está com status **Aberto**
+- [ ] Confirmar as metas de SLA definidas no contrato estão atualizadas
+- [ ] Revisar o período selecionado (mês/ano corretos)
+- [ ] Exportar o boletim em PDF após finalizar para envio ao contratante

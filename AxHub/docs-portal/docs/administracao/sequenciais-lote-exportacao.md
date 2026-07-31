@@ -98,3 +98,14 @@ está tela ainda não possui screenshot cadastrada. Será adicionada em breve.
 |------|--------|-----------|
 | Relacionado | [Exportacao](../infracoes/exportacao) | Controle de lote |
 | Glossario | [Lote de Exportacao](../glossario/lote-exportacao) | Definicao |
+
+## Perguntas frequentes
+
+**O que fazer quando o órgão rejeita um lote por sequencial duplicado?**
+Não gere um novo número. Corrija o conteúdo do lote, reenvie com o **mesmo** número de lote e confirme o protocolo de recebimento.
+
+**Com que frequência devo verificar os sequenciais de lote?**
+Antes de cada exportação. Execute o relatório de **Falhas de Sequenciais** para garantir que não há lacunas na numeração antes de gerar o próximo lote.
+
+**Posso reiniciar a numeração de lote a cada ano?**
+Não é recomendável. O órgão autuador pode recusar lotes com número já usado na série histórica. Mantenha a numeração contínua e combine qualquer reinicialização com o contratante.

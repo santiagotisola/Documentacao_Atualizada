@@ -102,3 +102,14 @@ Exceções ativas descartam Infrações automaticamente durante a importação. 
 | Etapa anterior | [Triagem](./triagem) | Processo de Use Validação (com acento) inicial |
 | Proxima etapa | [Auditoria](./auditoria) | Revisao pos-excecao |
 | Glossario | [Enquadramento](../glossario/enquadramento) | Classificacao legal |
+
+## Perguntas frequentes
+
+**Que tipo de veículo pode ser configurado como exceção?**
+Qualquer veículo com embasamento legal: viaturas de emergência, veículos oficiais por ato administrativo, ou placas em testes de homologação. Nunca configure exceções sem documento formal de autorização.
+
+**Exceções são permanentes ou têm prazo?**
+Pode ser dos dois tipos. Recomenda-se sempre definir uma **Data Fim** mesmo para exceções de veículos oficiais, vinculada à vigência do ato autorizador. Exceções sem prazo são risco de cobertura indevida.
+
+**Como auditar quais infrações foram descartadas por exceção?**
+Acesse **Infrações → Consulta** com filtro **Status = Descartada** e filtre pelo **Motivo de Descarte** configurado na regra de exceção. Exporte para Excel para análise detalhada.

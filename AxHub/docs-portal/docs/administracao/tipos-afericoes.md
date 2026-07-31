@@ -82,3 +82,12 @@ está tela ainda não possui screenshot cadastrada. Será adicionada em breve.
 |------|--------|-----------|
 | Relacionado | [Afericoes (Operacoes)](../operacoes/afericoes) | Uso operacional |
 | Glossario | [Afericao](../glossario/afericao) | Definicao tecnica |
+
+## Integração com outros módulos
+
+| Módulo | Como usa este cadastro |
+|--------|----------------------|
+| **Aferições (Operações)** | Cada registro de aferição exige a seleção de um tipo cadastrado aqui; sem tipos ativos, não é possível registrar novas aferições |
+| **Equipamentos** | O sistema monitora o vencimento com base no tipo e na data do último registro de aferição do equipamento |
+| **Tarjas** | A data de aferição e o certificado exibidos na tarja vêm do último registro de aferição vinculado ao tipo correto |
+| **Monitoramento Online** | Exibe alerta de aferição vencida quando o prazo do tipo cadastrado é ultrapassado |

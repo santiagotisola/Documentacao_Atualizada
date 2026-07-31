@@ -97,3 +97,12 @@ está tela ainda não possui screenshot cadastrada. Será adicionada em breve.
 |------|--------|-----------|
 | Relacionado | [Triagem](../infracoes/triagem) | Uso na triagem |
 | Relacionado | [Infracoes Descartadas](../infracoes/infracoes-descartadas) | Resultado |
+
+## Integração com outros módulos
+
+| Módulo | Como usa este cadastro |
+|--------|----------------------|
+| **Triagem** | O analista seleciona um motivo de descarte ao rejeitar uma infração; sem motivos cadastrados, a triagem fica bloqueada |
+| **Infrações Descartadas** | Exibe as infrações rejeitadas agrupadas por motivo, permitindo análise de padrões |
+| **Processamento por Usuário** | Cruza motivos de descarte com o analista responsável para avaliar consistência na triagem |
+| **Dashboard** | Exibe o ranking dos Top Motivos de Descarte como indicador de qualidade operacional |

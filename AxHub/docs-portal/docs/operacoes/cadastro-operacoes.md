@@ -97,3 +97,12 @@ Uma operação ativa vincula todos os registros de passagem dos equipamentos sel
 |------|--------|-----------|
 | Relacionado | [Arcos](../administracao/arcos) | Pontos de fiscalizacao |
 | Relacionado | [Afericoes](./afericoes) | Controle de afericoes |
+
+## Checklist pré-operação
+
+- [ ] Verificar aferição INMETRO válida de todos os equipamentos da operação
+- [ ] Confirmar que os enquadramentos estão configurados para a velocidade da via
+- [ ] Validar que as faixas têm código IBGE correto
+- [ ] Confirmar que os equipamentos estão **Online** no monitoramento
+- [ ] Definir data de início e encerramento corretas
+- [ ] Verificar se o contrato vinculado está com status **Ativo**

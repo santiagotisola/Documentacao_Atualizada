@@ -102,3 +102,12 @@ A Configuração das formas de atuação é essencial para que o sistema saiba q
 - [Equipamentos](./equipamentos)
 - [Modelos de Equipamentos](./modelos-equipamentos)
 - [Enquadramentos](../administracao/enquadramentos)
+
+## Integração com outros módulos
+
+| Módulo | Como usa este cadastro |
+|--------|----------------------|
+| **Equipamentos** | O tipo é campo obrigatório; define quais enquadramentos podem ser aplicados pelo equipamento |
+| **Operações** | O sistema valida se a forma de atuação da operação é compatível com o tipo do equipamento |
+| **Dashboard/Mapa** | O ícone configurado no tipo é exibido no mapa para cada equipamento |
+| **Monitoramento Online** | Permite filtrar equipamentos por tipo para monitorar radares fixos, móveis ou OCR separadamente |

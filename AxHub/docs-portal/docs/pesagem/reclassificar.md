@@ -89,6 +89,17 @@ Ao reclassificar um Veículo o sistema recalcula o enquadramento da Infração U
 - Infrações já exportadas não podem ser reclassificadas sem autorização do administrador — verifique o status antes de agir
 - Registre na observação por que a classificação original estava incorreta para embasar revisões de processo
 
+## Perguntas frequentes
+
+**Posso reclassificar um ticket já exportado?**
+Não. Tickets já incluídos em lote exportado não podem ser reclassificados sem autorização do administrador. Verifique sempre o status antes de agir.
+
+**A reclassificação altera o peso aferido?**
+Não. O peso registrado na balança é imutável. A reclassificação apenas altera a categoria do veículo e recalcula o limite de PBT aplicável, podendo cancelar ou manter a infração.
+
+**Qual o prazo máximo para reclassificar um ticket aberto?**
+Não há prazo fixo no sistema, mas recomenda-se reclassificar **antes** de liberar o veículo para evitar inconsistência entre o ticket e a infração gerada.
+
 ---
 
 ## Navegação Relacionada

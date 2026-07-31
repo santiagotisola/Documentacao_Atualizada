@@ -107,3 +107,14 @@ Monitore tentativas de Login Falhou** repetidas do mesmo IP — pode indicar ten
 | Relacionado | [Usuários](./usuarios) | Usuário que gerou o log |
 | Relacionado | [Acessos por IP](./acessos-por-ip) | Controle por endereço IP |
 | Relacionado | [Perfis de Acesso](./perfis-acesso) | Perfil do Usuário no log |
+
+## Perguntas frequentes
+
+**Por quanto tempo os logs de acesso são retidos?**
+Os logs são retidos conforme a política de retenção configurada no servidor. Recomenda-se exportar mensalmente para armazenamento externo como evidência de conformidade.
+
+**Como detectar tentativas de acesso não autorizado?**
+Filtre por **Status = Falha** e observe múltiplas tentativas do mesmo IP em curto intervalo. Combine com [Acessos por IP](./acessos-por-ip) para bloquear IPs suspeitos.
+
+**O log registra o que o usuário fez dentro do sistema?**
+Sim. Além de login/logout, o log registra criação, edição, exclusão e exportação por módulo, com o ID do registro afetado para rastreabilidade completa.

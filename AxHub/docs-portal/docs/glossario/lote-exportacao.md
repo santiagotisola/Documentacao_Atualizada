@@ -89,6 +89,17 @@ Lotes cancelados não podem ser reenvidos. Uma nova exportação precisará ser 
 - [Lote de Exportação](../infracoes/exportacao) — Gerenciamento de lotes
 - [Auditoria](../infracoes/auditoria) — Pré-requisito para exportar
 
+## Perguntas frequentes
+
+**Quantas infrações podem compor um lote?**
+Não há limite técnico no sistema. Porém, alguns órgãos autuadores imposts limites por lote (geralmente entre 500 e 5.000 autos). Verifique a especificação do órgão no layout de exportação.
+
+**O que acontece se o órgão rejeitar o lote?**
+O lote volta ao status **Erro**. Corrija o problema identificado na mensagem de retorno do órgão e reenvie com o **mesmo** número de lote. Nunca gere um novo número para um lote já transmitido.
+
+**Por quanto tempo devo guardar os recibos de envio de lote?**
+O mínimo recomendado é 5 anos, conforme a Lei 9.873/99 (prazo de prescrição administrativa). Exporte e arquive o protocolo de cada lote aceito como comprovação legal.
+
 
 ## Uso no Sistema AxHub
 

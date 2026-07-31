@@ -90,6 +90,17 @@ Clique em **Exportar** para gerar um arquivo CSV com os tickets do período sele
 Use o filtro **Infrator** para visualizar somente os tickets que geraram infração e acompanhar o status de processamento da multa.
 :::
 
+## Perguntas frequentes
+
+**Posso editar um ticket fechado?**
+Não. Tickets fechados são imutáveis para garantir a integridade do histórico. Se houver erro de classificação, o ticket precisa ser reaberto pelo administrador.
+
+**Por quanto tempo os tickets fechados ficam disponíveis?**
+Os tickets permanecem no sistema conforme a política de retenção configurada. Exporte regularmente para arquivo externo como evidência de fiscalização.
+
+**Como gerar um relatório de tickets por posto e período?**
+Use os filtros **Posto** + **Período** + **Resultado** e clique em **Exportar** para gerar o CSV. Esse arquivo é a base para o boletim diário ou mensal de produção.
+
 ## Relacionado
 
 - [Tickets Abertos](./ticket-aberto)

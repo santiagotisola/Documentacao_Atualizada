@@ -91,3 +91,14 @@ Infrações geradas por equipamentos com aferição vencida são automaticamente
 - [Autuação](./autuacao) — Registro formal do ato infracional
 - [Enquadramento](./enquadramento) — Classificação legal da infração
 - [Consulta de Infrações](../infracoes/consulta-infracoes) — Histórico de infrações no sistema
+
+## Perguntas frequentes
+
+**O que invalida uma infração eletrônica?**
+As principais causas são: aferição vencida, placa ilegível, enquadramento incorreto, AIT emitido após 30 dias e imagem obrigatória ausente. Cada um desses problemas dá embasamento para recurso aceito pelo órgão julgador.
+
+**Qual a diferença entre infração e notificação de infração?**
+A infração é o fato (ato infracional registrado). A notificação é o documento enviado ao proprietário do veículo comunicando que sua placa foi autuada. No AxHub, o sistema gera a infração; o órgão autuador emite a notificação.
+
+**Infrações descartadas na triagem impactam as métricas do contrato?**
+Sim. A taxa de descarte é monitorada no Dashboard e nos relatórios de processamento. Alta taxa de descarte pode indicar problemas nos equipamentos ou impactar métricas de aproveitamento do contrato.

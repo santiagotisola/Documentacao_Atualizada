@@ -105,3 +105,14 @@ Medições finalizadas não podem ser editadas. Para correções, entre em conta
 |------|--------|-----------|
 | Relacionado | [Criar Medicao](./criar-medicao) | Nova medicao |
 | Relacionado | [Contratos](./contratos) | Contrato medido |
+
+## Perguntas frequentes
+
+**Posso reabrir uma medição finalizada?**
+Sim, mas apenas com permissão de supervisor. A reabertura gera log de auditoria. Após as correções, a medição precisa ser finalizada novamente.
+
+**O boletim exportado é o documento oficial para o contratante?**
+Sim. O PDF gerado pela opção **Exportar** é o Boletim de Medição oficial para comprovar o SLA do período. Guarde uma cópia por no mínimo 5 anos.
+
+**O que significa o status “Em Revisão”?**
+A medição foi reaberta por um supervisor e está aguardando nova finalização. Nenhum dado deste período deve ser considerado definitivo até que retorne ao status **Finalizada**.

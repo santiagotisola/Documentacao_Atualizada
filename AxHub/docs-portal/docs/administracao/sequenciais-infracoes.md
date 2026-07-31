@@ -89,3 +89,14 @@ está tela ainda não possui screenshot cadastrada. Será adicionada em breve.
 |------|--------|-----------|
 | Relacionado | [Triagem](../infracoes/triagem) | Sequencial atribuido |
 | Relacionado | [Consulta de Infracoes](../infracoes/consulta-infracoes) | Buscar por sequencial |
+
+## Perguntas frequentes
+
+**O sistema pode atribuir sequenciais duplicados automaticamente?**
+Não, se a configuração estiver correta. Sequenciais duplicados ocorrem quando o campo **Próximo número** é editado manualmente de forma incorreta. Nunca edite esse campo sem autorização e sem verificar o histórico.
+
+**O que fazer quando a série de sequenciais se esgota?**
+Crie uma nova série com número inicial combinado com o órgão autuador. Comunique formalmente ao órgão antes de iniciar a nova numeração para evitar rejeições.
+
+**Com que frequência devo verificar o saldo da série?**
+Mensalmente. Quando o saldo atingir 80% do número máximo, planeje a criação da próxima série com antecedência mínima de 30 dias.

@@ -95,3 +95,12 @@ Tela para liberar em lote os tickets que chegaram do sistema de pesagem.
 | Relacionado | [Reclassificar](../pesagem/reclassificar) | Sub-tela: reclassificacao |
 | Relacionado | [Posto Pesagem](../pesagem/postos) | Sub-tela: postos cadastrados |
 | Relacionado | [Motivos](../pesagem/motivos) | Sub-tela: motivos de encerramento |
+
+## Checklist pré-operação
+
+- [ ] Verificar aferição INMETRO da balança dentro do prazo de validade
+- [ ] Confirmar que o posto de pesagem está com status **Ativo** no sistema
+- [ ] Validar que os equipamentos do posto estão **Online** no monitoramento
+- [ ] Confirmar que os motivos de liberação estão cadastrados e ativos
+- [ ] Verificar se há tickets abertos de turno anterior pendentes de encerramento
+- [ ] Confirmar perfil de acesso do operador (liberação e reclassificação habilitados)

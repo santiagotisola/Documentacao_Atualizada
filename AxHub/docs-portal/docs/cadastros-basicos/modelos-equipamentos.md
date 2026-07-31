@@ -100,3 +100,12 @@ Um mesmo fabricante pode possuir múltiplos modelos de Equipamento Cada modelo d
 - [Fabricantes](./fabricantes)
 - [Tipos de Equipamentos](./tipos-equipamentos)
 - [Tarjas](../administracao/tarjas)
+
+## Integração com outros módulos
+
+| Módulo | Como usa este cadastro |
+|--------|----------------------|
+| **Equipamentos** | O modelo é campo obrigatório; define a portaria INMETRO exibida na tarja da infração |
+| **Tarjas** | A portaria e a marca/modelo exibidos na tarja vêm diretamente deste cadastro |
+| **Fabricantes** | O modelo precisa estar vinculado a um fabricante para aparecer como opção no cadastro |
+| **Auditoria** | O modelo aparece nos registros para rastreabilidade do hardware usado em cada infração |

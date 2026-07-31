@@ -92,3 +92,14 @@ O modulo **Medicao** controla contratos, indices de performance, recursos alocad
 - [Indices de Performance](../medicoes/indices-performance)
 - [Interrupcoes](../medicoes/interrupcoes)
 - [Criar Medicao](../medicoes/criar-medicao)
+
+## Perguntas frequentes
+
+**Com que frequência devo gerar a medição de desempenho?**
+Mensalmente, conforme exigência contratual. Gere dentro dos primeiros 5 dias úteis do mês seguinte para envio ao contratante dentro do prazo.
+
+**O que acontece se a disponibilidade ficar abaixo da meta?**
+Dependendo do contrato, pode haver glosa no pagamento mensal. Documente as causas (eventos registrados) e as ações corretivas tomadas para apresentar ao contratante.
+
+**A medição considera equipamentos que ficaram offline por causa do contratante?**
+Depende da classificação da interrupção. Interrupções causadas por terceiros (fornecedoras de energia, contratante) geralmente não descontam da disponibilidade se registradas corretamente com o tipo adequado.

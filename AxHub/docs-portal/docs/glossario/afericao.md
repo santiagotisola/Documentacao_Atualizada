@@ -84,3 +84,14 @@ Programe as aferições com **30 dias de antecedncia** em relação ao venciment
 - [Tipos de Afericoes](../administracao/tipos-afericoes)
 - [Dashboard](../primeiros-passos/dashboard)
 - [Equipamentos](../cadastros-basicos/equipamentos)
+
+## Perguntas frequentes
+
+**Quantas aferições um equipamento precisa ter por ano?**
+No mínimo uma por ano (**Aferição Periódica** obrigatória). Manutenções que afetam componentes metrológicos exigem **Aferição Pós-Manutenção** adicional.
+
+**Quem realiza a aferição dos equipamentos?**
+Somente laboratórios credenciados pelo INMETRO. A empresa operadora não pode fazer a aferição — ela apenas agenda com o laboratório e registra o certificado no sistema.
+
+**O que acontece com as infrações geradas durante um período com aferição vencida?**
+Elas são bloqueadas automaticamente e não podem ser exportadas. Mesmo que a aferição seja renovada, as infrações do período vencido não são revalidadas.

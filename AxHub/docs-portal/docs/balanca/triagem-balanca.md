@@ -74,3 +74,12 @@ Cadastro de motivos utilizados no encerramento dos tickets de pesagem. Acessado 
 | Relacionado | [Reclassificar](../pesagem/reclassificar) | Alterar classificacao de ticket |
 | Relacionado | [Posto Pesagem](../pesagem/postos) | Cadastro de postos |
 | Relacionado | [Motivos](../pesagem/motivos) | Motivos de encerramento |
+
+## Integração com outros módulos
+
+| Módulo | Como usa este cadastro |
+|--------|----------------------|
+| **Operações** | Cada ticket de pesagem está vinculado a uma operação ativa; sem operação, tickets não são gerados |
+| **Relatório de Passagens** | Tickets fechados alimentam o relatório de passagens com os dados da pesagem |
+| **Medições** | O volume de pesagens por posto é contabilizado nos boletins de medição do contrato |
+| **Infrações** | Tickets com excesso de peso geram infrações que seguem o fluxo normal de triagem e exportação |

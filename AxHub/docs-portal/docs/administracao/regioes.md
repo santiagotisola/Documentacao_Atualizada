@@ -102,3 +102,14 @@ está tela ainda não possui screenshot cadastrada. Será adicionada em breve.
 |------|--------|-----------|
 | Relacionado | [Operacoes](../operacoes/cadastro-operacoes) | Regiao da operacao |
 | Relacionado | [Equipamentos](../cadastros-basicos/equipamentos) | Equipamentos na regiao |
+
+## Perguntas frequentes
+
+**Posso vincular um equipamento a mais de uma região?**
+Não. Cada equipamento é vinculado a uma única região. Se precisar reorganizar, edite o cadastro do equipamento e altere a região.
+
+**O que acontece se eu renomear uma região já vinculada a equipamentos?**
+Os relatórios históricos passam a exibir o novo nome, o que pode causar confusão ao comparar dados de períodos diferentes. Prefira criar uma nova região e migrar os equipamentos gradualmente.
+
+**Excluir uma região afeta as infrações existentes?**
+Sim. Infrações já geradas por equipamentos da região perderão a referência geográfica nos relatórios. Inative a região em vez de excluí-la.

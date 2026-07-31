@@ -102,3 +102,12 @@ Escolha cores distintas para cada grupo, facilitando a identificação visual do
 
 - [Equipamentos](./equipamentos)
 - [Dashboard](../primeiros-passos/dashboard)
+
+## Integração com outros módulos
+
+| Módulo | Como usa este cadastro |
+|--------|----------------------|
+| **Equipamentos** | Cada equipamento é vinculado a um grupo; o grupo define a cor no mapa e as opções de monitoramento |
+| **Dashboard** | O mapa exibe equipamentos agrupados por cor conforme o grupo cadastrado |
+| **Monitoramento Online** | Permite filtrar o status de equipamentos por grupo |
+| **Relatórios** | Dados de passagens e infrações podem ser filtrados por grupo para análise por projeto ou contrato |

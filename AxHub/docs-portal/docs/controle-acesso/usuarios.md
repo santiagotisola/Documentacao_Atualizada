@@ -106,3 +106,14 @@ Recomenda-se revisar periodicamente os Usuários cadastrados e desativar contas 
 | Relacionado | [Permissoes](./permissoes) | Permissoes atribuidas |
 | Relacionado | [Logs de Acesso](./logs-acesso) | histórico do Usuário |
 | Relacionado | [Acessos por IP](./acessos-por-ip) | Restricoes de IP |
+
+## Perguntas frequentes
+
+**O que fazer quando um colaborador é desligado?**
+Inative o usuário imediatamente em **Controle de Acesso → Usuários**. Não exclua — a exclusão apaga o histórico de ações do usuário que pode ser necessário em auditorias.
+
+**Posso ter dois usuários com o mesmo login?**
+Não. O campo **Login** deve ser único no sistema. Use o e-mail como padrão de login para facilitar a gestão e evitar duplicidades.
+
+**Como redefinir a senha de um usuário?**
+O administrador pode editar o cadastro do usuário e definir uma nova senha temporária. Oriente o usuário a alterá-la no primeiro acesso.

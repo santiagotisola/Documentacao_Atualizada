@@ -88,6 +88,17 @@ Analista analisa imagem + dados
 - Descartar sempre com motivo específico (afeta o Dashboard)
 - Em dúvida sobre enquadramento, consultar o supervisor
 
+## Perguntas frequentes
+
+**Qual o prazo máximo para triar uma infração?**
+O sistema possui um prazo configurável (padrão: 20 dias) em **Configurações do Sistema → Aba Triagem**. Infrações não triadas após 30 dias da captura estão sujeitas à prescrição legal (Art. 281 CTB).
+
+**O que fazer quando há acumulo (backlog) de infrações para triar?**
+Redistribua as demandas entre analistas, priorize infrações mais antigas e monitore diariamente o painel de **Processamento por Usuário** para garantir que o backlog diminua antes do prazo legal.
+
+**Posso reverter uma infração descartada na triagem?**
+Sim, mas somente até a etapa de auditoria. Infrações descartadas podem ser recuperadas por um auditor ou supervisor acessando **Infrações → Infrações Descartadas** e revertendo o descarte.
+
 ## Relacionados
 
 - [Triagem de Infrações](../infracoes/triagem) — Tela de triagem

@@ -105,3 +105,12 @@ está tela ainda não possui screenshot cadastrada. Será adicionada em breve.
 |------|--------|-----------|
 | Relacionado | [Triagem](../infracoes/triagem) | Tipos de imagem na triagem |
 | Relacionado | [Equipamentos](../cadastros-basicos/Equipamentos) | Imagens por Equipamento |
+
+## Integração com outros módulos
+
+| Módulo | Como usa este cadastro |
+|--------|----------------------|
+| **Equipamentos** | Cada equipamento precisa capturar os tipos de imagem definidos como obrigatórios aqui |
+| **Triagem** | O analista visualiza as imagens na ordem de exibição definida neste cadastro |
+| **Exportação** | Infrações sem os tipos obrigatórios são bloqueadas na exportação ao órgão |
+| **Processamento de Imagens** | O relatório usa os tipos cadastrados para agrupar métricas de aproveitamento |

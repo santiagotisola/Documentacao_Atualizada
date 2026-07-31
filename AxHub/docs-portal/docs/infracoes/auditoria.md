@@ -88,4 +88,13 @@ As decisões de auditoria alimentam os Relatórios de qualidade e produtividade.
 | Proxima etapa | [Exportacao](./exportacao) | Gerar lote para envio ao orgao |
 | Consulta | [Consulta de Infracoes](./consulta-infracoes) | Buscar infracoes |
 | Glossario | [Autuacao](../glossario/autuacao) | Ato administrativo de registro |
+
+## Integração com outros módulos
+
+| Módulo | Como usa este cadastro |
+|--------|----------------------|
+| **Triagem** | A auditoria é a etapa seguinte à triagem; infrações triadas aguardam na fila de auditoria para revisão |
+| **Exportação** | Somente infrações com status **Auditada** são incluídas no lote de exportação |
+| **Processamento por Usuário** | O relatório registra as decisões de cada auditor para avaliação de produtividade e consistência |
+| **Dashboard** | Exibe o número de infrações aguardando auditoria como indicador de backlog operacional |
 | Glossario | [Infracao](../glossario/infracao) | Definicao tecnica |

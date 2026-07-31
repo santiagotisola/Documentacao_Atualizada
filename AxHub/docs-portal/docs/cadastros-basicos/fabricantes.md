@@ -110,3 +110,12 @@ O token é utilizado pelo fabricante para autenticar as chamadas de API ao AxHub
 - [Equipamentos](./equipamentos)
 - [Modelos de Equipamentos](./modelos-equipamentos)
 - [Tipos de Equipamentos](./tipos-equipamentos)
+
+## Integração com outros módulos
+
+| Módulo | Como usa este cadastro |
+|--------|----------------------|
+| **Modelos de Equipamentos** | Cada modelo é vinculado a um fabricante; sem esse vínculo o modelo não aparece no cadastro de equipamentos |
+| **Equipamentos** | O fabricante é exibido na listagem e usado como filtro de busca |
+| **API de Captura** | O token do fabricante autentica o envio de passagens e imagens via API |
+| **Relatórios** | Permite filtrar relatórios por fabricante para análise de desempenho por marca |

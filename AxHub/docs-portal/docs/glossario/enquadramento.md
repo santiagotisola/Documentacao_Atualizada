@@ -78,3 +78,14 @@ Configure corretamente a velocidade regulamentada em cada faixa para que o siste
 | 55411 | Velocidade superior à máxima em até 20% | Grave |
 | 55412 | Velocidade superior à máxima entre 20% e 50% | Gravíssima |
 | 55413 | Velocidade superior à máxima acima de 50% | Gravíssima |
+
+## Perguntas frequentes
+
+**Por que o sistema sugeriu um enquadramento diferente do esperado?**
+Provavelmente a velocidade regulamentada da faixa está configurada incorretamente. Verifique em **Administração → Configurações de Enquadramento** se o limite da via está correto.
+
+**Posso alterar o enquadramento de uma infração já exportada?**
+Não. Infrações já enviadas ao órgão autuador não podem ser alteradas no sistema. Em caso de erro, contate o órgão para cancelamento administrativo.
+
+**Qual a diferença entre gravidade e pontuação na CNH?**
+Gravidade define o valor da multa (Leve, Média, Grave, Gravíssima). Pontuação é a quantidade de pontos debitados na CNH. Ambos são definidos em conjunto pelo CTB para cada enquadramento.

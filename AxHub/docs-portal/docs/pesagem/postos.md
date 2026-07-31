@@ -109,3 +109,12 @@ Após criar o posto, vincule os **Equipamentos** a ele em **Configurações → 
 | Fluxo | [Ticket Aberto](./ticket-aberto) | Tickets em andamento |
 | Fluxo | [Ticket Fechado](./ticket-fechado) | Tickets finalizados |
 | Configuracao | [Motivos](./motivos) | Motivos de reclassificacao |
+
+## Integração com outros módulos
+
+| Módulo | Como usa este cadastro |
+|--------|----------------------|
+| **Tickets de Pesagem** | Cada ticket registra o posto onde a pesagem foi realizada para rastreabilidade e filtragem |
+| **Operações** | Equipamentos vinculados ao posto são usados nas operações de fiscalização |
+| **Medições** | O boletim de medição agrupa os indicadores de disponibilidade e volume por posto |
+| **Relatórios** | Relatórios de passagens e infrações permitem filtrar por posto para visão localizada |

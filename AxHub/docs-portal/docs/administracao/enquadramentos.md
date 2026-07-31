@@ -88,3 +88,14 @@ Para entender como esses dados são exibidos, consulte:
 | Relacionado | [Formas de Autuacao](./formas-autuacao) | Forma de lavrar |
 | Glossario | [Enquadramento](../glossario/enquadramento) | Definicao CTB |
 | Glossario | [Autuacao](../glossario/autuacao) | Ato de autuacao |
+
+## Perguntas frequentes
+
+**Preciso cadastrar todos os artigos do CTB?**
+Não. O sistema já vem com os enquadramentos pré-carregados conforme o CTB vigente. Apenas enquadramentos municipais específicos precisam ser adicionados — e sempre via suporte técnico Axion.
+
+**Os valores de multa são atualizados automaticamente?**
+Não. Os valores precisam ser atualizados manualmente após o reajuste anual pelo IPCA. Entre em contato com o suporte para solicitar a atualização.
+
+**O que acontece se eu configurar um enquadramento errado em uma operação?**
+As infrações geradas serão enquadradas no artigo CTB incorreto, o que pode causar anulação judicial dos autos. Revise as infrações do período e reconfigure o enquadramento antes de gerar novos lotes.

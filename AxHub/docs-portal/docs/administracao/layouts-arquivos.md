@@ -110,3 +110,12 @@ está tela ainda não possui screenshot cadastrada. Será adicionada em breve.
 |------|--------|-----------|
 | Relacionado | [Exportacao](../infracoes/exportacao) | Exportacao usa o layout |
 | Glossario | [Lote de Exportacao](../glossario/lote-exportacao) | Definicao |
+
+## Integração com outros módulos
+
+| Módulo | Como usa este cadastro |
+|--------|----------------------|
+| **Exportação de Infrações** | Cada lote usa um layout para formatar o arquivo enviado ao órgão autuador |
+| **Lotes de Importação** | Layouts de importação definem como os dados dos equipamentos são lidos pelo sistema |
+| **Webhooks** | Layouts JSON são usados em integrações via API com sistemas externos |
+| **Relatórios** | O formato de exportação segue os layouts configurados para cada órgão |

@@ -106,3 +106,12 @@ Manteng ao contrato sempre atualizado com as metas vigentes. Metas desatualizada
 | Relacionado | [Criar Medicao](./criar-medicao) | Gerar medicao |
 | Relacionado | [Interrupcoes](./interrupcoes) | Registrar interrupcoes |
 | Glossario | [Medicao de Desempenho](../glossario/medicao-desempenho) | Definicao tecnica |
+
+## Integração com outros módulos
+
+| Módulo | Como usa este cadastro |
+|--------|----------------------|
+| **Medições** | Cada medição mensal precisa de um contrato ativo como referência para calcular os índices de performance |
+| **Índices de Performance** | Os índices são vinculados ao contrato e usados para calcular conformidade no boletim |
+| **Recursos** | Cada recurso humano e material é vinculado a um contrato para comprovação de fornecimento |
+| **Interrupções** | As interrupções registradas são contabilizadas na medição do contrato vigente |

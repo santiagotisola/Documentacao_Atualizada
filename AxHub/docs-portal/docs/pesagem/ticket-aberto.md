@@ -88,4 +88,13 @@ Use os filtros de **posto** e **período** para localizar tickets específicos r
 |------|--------|-----------|
 | Anterior | [Postos](./postos) | Postos de pesagem |
 | próximo | [Ticket Fechado](./ticket-fechado) | Tickets finalizados |
+
+## Checklist de gestão de tickets abertos
+
+- [ ] Verificar tickets com mais de **4 horas** abertos (obrigação legal de alimentação)
+- [ ] Confirmar a classificação do veículo antes de encerrar o ticket
+- [ ] Reclassificar quando houver dúvida sobre a categoria antes de liberar
+- [ ] Verificar MDF-e e NF-e para veículos com carga
+- [ ] Selecionar o motivo correto de liberação antes de encerrar
+- [ ] Comunicar supervisor em tickets com retenção superior a 24 horas
 | Acao | [Liberar Pesagem](./liberar-pesagem) | Liberar ticket |

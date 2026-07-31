@@ -108,5 +108,16 @@ No AxHub, a autuacao ocorre ao final do fluxo de triagem, quando o operador conf
 
 - [Formas de Autuacao](../administracao/formas-autuacao)
 - [Triagem de Infracoes](../infracoes/triagem)
+
+## Perguntas frequentes
+
+**Qual a diferença entre autuação eletrônica e notificação?**
+A autuação é o registro formal da infração (AIT). A notificação é o documento enviado ao infrator comunicando a multa. Um precede o outro: primeiro o AIT é lavrado, depois a notificação é expedida.
+
+**Qual o prazo máximo entre a infração e a expedição do AIT?**
+30 dias, conforme o Art. 281 do CTB. Infrações não exportadas dentro desse prazo prescrevem e não têm validade legal. Monitore o backlog de triagem diariamente.
+
+**O que significa “forma de autuação” no AxHub?**
+É o código que identifica o tipo de auto gerado (AIT-E, NOT-E, etc.). Esse código é exigido pelo sistema do órgão autuador no arquivo de exportação e deve ser configurado em **Administração → Formas de Autuação**.
 - [Exportacao](../infracoes/exportacao)
 - [Infracao](./infracao)

@@ -88,3 +88,14 @@ Veículos retidos têm direitos legais:
 - [Reclassificar](./reclassificar) — Reclassificação de veículo retido
 - [Tickets Abertos](./ticket-aberto) — Consulta e gestão de tickets em aberto
 - [Log de Acesso](../controle-acesso/logs-acesso) — Auditoria de liberações registradas
+
+## Perguntas frequentes
+
+**A liberação cancela a infração de excesso de peso?**
+Não necessariamente. A liberação permite que o veículo saia do posto, mas a infração de excesso segue o fluxo normal de exportação ao órgão autuador.
+
+**Qualquer operador pode liberar um ticket?**
+Somente operadores com permissão de liberação habilitada no perfil de acesso. Verifique com o administrador se a permissão `liberarpesagem` está ativa para o seu perfil.
+
+**O que fazer se o motivo correto não está disponível na lista?**
+Não use um motivo genérico. Solicite ao administrador que cadastre o motivo específico em **Balança → Motivos** antes de realizar a liberação.

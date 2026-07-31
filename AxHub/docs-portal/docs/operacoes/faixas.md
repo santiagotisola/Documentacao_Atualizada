@@ -71,3 +71,14 @@ O código do município na faixa **deve ser o mesmo** da UF da operação. Se a 
 | Infração sem enquadramento | Faixa não vinculada ao enquadramento | Configurar em Configurações de Enquadramento |
 | Sentido trocado no relatório | Sentido configurado errado | Editar faixa e corrigir sentido |
 | Faixa sem passagens | Equipamento desvinculado | Verificar cadastro do equipamento |
+
+## Perguntas frequentes
+
+**Por que meu lote foi rejeitado com erro de código IBGE?**
+O código IBGE na faixa deve ter 7 dígitos e corresponder ao município correto da operação. Consulte ibge.gov.br/cidades para confirmar o código antes de corrigir.
+
+**Posso ter a mesma faixa em duas operações diferentes?**
+Sim. Uma faixa pode ser reutilizada em operações distintas, mas apenas uma operação pode estar ativa por vez para o mesmo equipamento/faixa para evitar conflito de dados.
+
+**O sentido da faixa impacta na exportação?**
+Sim. O sentido é exigido em alguns layouts de exportação e aparece no relatório de passagens. Configure corretamente conforme a instalação física do equipamento.
