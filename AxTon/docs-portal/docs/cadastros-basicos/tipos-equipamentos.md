@@ -55,6 +55,15 @@ O tipo de equipamento determina as configurações de operação aplicáveis (ve
 | Dinâmica (WIM) | ±10% | Não |
 | Sensor de eixo | N/A | Não |
 
+## Integração com outros módulos
+
+| Módulo | Como usa o Tipo de Equipamento |
+|--------|--------------------------------|
+| **Equipamentos** | O tipo é atributo obrigatório no cadastro |
+| **Aferições** | O tipo define o protocolo de aferição INMETRO |
+| **Medições** | Classifica a disponibilidade por categoria |
+| **Relatórios** | Filtra dados por tipo de equipamento |
+
 ## Perguntas frequentes
 
 **Qual tipo usar para fiscalização sem parar o tráfego?**

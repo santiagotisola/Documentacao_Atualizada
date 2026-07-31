@@ -62,6 +62,14 @@ Não. Inative o fabricante para preservar o histórico. Exclusão de fabricantes
 **O que acontece com os modelos se o fabricante for inativado?**
 Os modelos permanecem no histórico mas não podem ser selecionados em novos equipamentos.
 
+## Integração com outros módulos
+
+| Módulo | Relação |
+|--------|----------|
+| **Modelos de Equipamentos** | Fabricante é atributo obrigatório do modelo |
+| **Equipamentos** | Herdado via Fabricante → Modelo → Equipamento |
+| **Aferições** | Rastreabilidade técnica por fabricante |
+
 ## Boas práticas
 
 - Cadastre o fabricante antes de criar modelos e equipamentos — a hierarquia Fabricante → Modelo → Equipamento é obrigatória

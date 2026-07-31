@@ -59,6 +59,16 @@ Em caso de dúvidas sobre o sistema, entre em contato:
 - **Portal de chamados**: suporte.axiontecnologia.com.br
 - **E-mail**: suporte@axiontecnologia.com.br
 
+## Integração dos módulos
+
+```
+Equipamentos (cadastro) → Faixas → Passagens registradas
+    ↓
+Veículos monitorados? → Sim → Alerta gerado
+    ↓
+Ocorrência tratada → Relatório de Ocorrências
+```
+
 :::info
 Este manual é atualizado a cada nova versão do sistema. Consulte sempre a versão online para informações atualizadas.
 :::

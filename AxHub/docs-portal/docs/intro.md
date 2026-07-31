@@ -56,6 +56,22 @@ Este manual é atualizado automaticamente a cada versão do sistema. Consulte se
 | AxHub.Docs | Fiscalização eletrônica | /AxHub.Docs |
 | AxTon.Docs | Pesagem veicular | /AxTon.Docs |
 | AxCross.Docs | Monitoramento de cruzamentos | /AxCross.Docs |
+
+## Integração entre módulos
+
+Os módulos do AxHub trabalham de forma integrada:
+
+```
+Equipamentos (cadastro) → Operações (fiscalização)
+    ↓
+Passagens → Infrações geradas
+    ↓
+Triagem (validação) → Auditoria → Exportação
+    ↓
+Órgão autuador (DETRAN/DER)
+    ↓
+Medição contratual
+```
 - **Integrações** — tabelas e sistemas relacionados
 
 :::tip Dica

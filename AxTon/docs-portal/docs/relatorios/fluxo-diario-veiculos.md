@@ -57,6 +57,14 @@ Identifique os horários de pico para dimensionar equipes operacionais com mais 
 | 17h – 20h | Médio-alto | Tráfego misto |
 | 20h – 06h | Baixo | Tráfego noturno |
 
+## Integração com outros módulos
+
+| Módulo | Relação |
+|--------|----------|
+| **Medições** | Evidencia o volume para o Boletim contratual |
+| **Monitoramento Online** | Dados em tempo real vs histórico deste relatório |
+| **Mapa de Fluxo** | Versão geográfica do mesmo dado |
+
 ## Perguntas frequentes
 
 **O relatório não exibe dados para um posto específico. Por quê?**  

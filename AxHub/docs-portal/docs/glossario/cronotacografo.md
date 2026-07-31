@@ -74,8 +74,16 @@ Acesse **Operações → Aferições** para verificar os registros de equipament
 |----------|-------|----------|
 | Status sempre `NãoEncontrado` | Banco de certif. desatualizado | Acionar suporte técnico |
 | Falso positivo de irregularidade | Certif. renovado após consulta | Verificar data de atualização do banco |
-| Veículo não verificado | Tipo não obrigado a ter cronotácografo | Normal — status `N/A` |- Registre as infrações do Art. 162, II com o enquadramento correto para validade jurídica no DETRAN
-- Combine com a verificação de placa para confirmar se o mesmo veículo reincide na irregularidade
+| Veículo não verificado | Tipo não obrigado a ter cronoatacógrafo | Normal — status `N/A` |
+
+## Integração com outros módulos
+
+| Módulo | Como usa o cronoatacógrafo |
+|--------|---------------------------|
+| **Triagem** | Apresenta status para o analista validar a infração |
+| **Enquadramentos** | Define o código CTB (Art. 162, II) a ser aplicado |
+| **Relatório de Infrações** | Filtra e exibe infrações de cronoatacógrafo |
+| **Exportação** | Inclui o tipo de infração no lote ao órgão |
 
 ## Relacionado
 
