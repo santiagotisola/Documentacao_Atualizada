@@ -143,3 +143,12 @@ Para configurar qual tarja usar:
 | Relacionado | [Enquadramentos](./enquadramentos) | Código e descrição |
 | Relacionado | [Triagem](../infracoes/triagem) | Tarja aplicada na imagem |
 | Relacionado | [Exportacao](../infracoes/exportacao) | Imagem exportada com tarja |
+
+## Integração com outros módulos
+
+| Módulo | Como se relaciona |
+|--------|------------------|
+| **[Enquadramentos](./enquadramentos)** | Cada enquadramento pode ter uma tarja padrão associada; o código e descrição do enquadramento são exibidos na tarja via variáveis |
+| **[Equipamentos](../cadastros-basicos/equipamentos)** | O template de tarja pode ser configurado individualmente por equipamento para personalização por ponto de fiscalização |
+| **[Infrações — Triagem](../infracoes/triagem)** | A tarja é aplicada na imagem da infração durante o processamento; o analista visualiza a imagem com a tarja na triagem |
+| **[Exportação de Infrações](../infracoes/exportacao)** | As imagens com tarja são exportadas junto com o lote de infrações ao órgão autuador |

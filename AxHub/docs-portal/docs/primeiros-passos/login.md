@@ -106,3 +106,12 @@ Verifique a caixa de spam. Se não chegar em 5 minutos, confirme com o administr
 
 **Posso acessar o AxHub por dispositivo móvel?**
 Sim. O sistema é acessível por navegador em smartphones e tablets, mas é otimizado para desktops. Algumas funcionalidades podem ter layout reduzido em telas menores.
+
+## Integração com outros módulos
+
+| Módulo | Como se relaciona |
+|--------|------------------|
+| **[Usuários](../controle-acesso/usuarios)** | O administrador gerencia as credenciais, perfis e status das contas de acesso neste módulo |
+| **[Perfis de Acesso](../controle-acesso/perfis-acesso)** | O perfil vinculado ao usuário define quais menus e funcionalidades ficam disponíveis após o login |
+| **[Logs de Acesso](../controle-acesso/logs-acesso)** | Cada login e logout é registrado nos logs de acesso para auditoria de segurança |
+| **[Acessos por IP](../controle-acesso/acessos-por-ip)** | Restrições de IP configuradas neste módulo bloqueiam tentativas de login de redes não autorizadas |

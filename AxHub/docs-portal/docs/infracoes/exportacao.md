@@ -99,3 +99,12 @@ Depende da legislação do órgão autuador. O prazo de prescrição varia entre
 
 **Posso exportar infrações parcialmente (parte auditada)?**
 Sim. O lote pode conter apenas as infrações com status Auditada até o momento da exportação. As demais permanecem em fila para o próximo lote.
+
+## Integração com outros módulos
+
+| Módulo | Como se relaciona |
+|--------|------------------|
+| **[Infrações — Auditoria](./auditoria)** | Apenas infrações com status **Auditada** podem ser incluídas em um lote de exportação |
+| **[Layouts de Arquivos](../administracao/layouts-arquivos)** | O layout configurado determina o formato do arquivo exportado; órgãos diferentes exigem layouts diferentes |
+| **[Sequenciais de Lote](../administracao/sequenciais-lote-exportacao)** | O número sequencial do lote é gerado automaticamente conforme a configuração; duplicidade de sequencial causa rejeição |
+| **[Falhas Sequenciais](../relatorios/falhas-sequenciais)** | Verifique este relatório antes de exportar para identificar lacunas sequenciais que podem causar rejeição do lote |

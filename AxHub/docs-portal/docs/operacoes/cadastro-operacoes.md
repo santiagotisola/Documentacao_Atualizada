@@ -117,3 +117,12 @@ Não obrigatoriamente. É possível exportar infrações de operações em andam
 - [ ] Confirmar que os equipamentos estão **Online** no monitoramento
 - [ ] Definir data de início e encerramento corretas
 - [ ] Verificar se o contrato vinculado está com status **Ativo**
+
+## Integração com outros módulos
+
+| Módulo | Como se relaciona |
+|--------|------------------|
+| **[Equipamentos](../cadastros-basicos/equipamentos)** | Os equipamentos vinculados à operação são a fonte das passagens e infrações; equipamentos sem aferíção válida invalidam os registros |
+| **[Enquadramentos](../administracao/enquadramentos)** | Os enquadramentos configurados para a operação determinam quais passagens geram infração e qual artigo CTB é aplicado |
+| **[Medições — Contratos](../medicoes/contratos)** | A operação é vinculada a um contrato para cálculo de SLA e geração do boletim de medição |
+| **[Infrações — Exportação](../infracoes/exportacao)** | As infrações da operação são exportadas em lotes ao órgão autuador; a operação é o filtro principal na seleção para exportação |

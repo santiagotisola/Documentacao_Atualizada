@@ -522,3 +522,12 @@ Para forçar atualização imediata:
 | Relacionado | [Grupos de Equipamentos](../cadastros-basicos/grupos-equipamentos) | Configurar grupos e cores |
 | Glossario | [Afericao](../glossario/afericao) | Certificado de afericao INMETRO |
 | Tecnico | [Banco de Dados](../referencia-tecnica/banco-de-dados) | Referencia tecnica das tabelas SQL |
+
+## Integração com outros módulos
+
+| Módulo | Como se relaciona |
+|--------|------------------|
+| **[Monitoramento Online](../operacoes/monitoramento-online)** | O Dashboard centraliza o status dos equipamentos; o Monitoramento Online detalha cada equipamento individualmente em tempo real |
+| **[Infrações — Triagem](../infracoes/triagem)** | O indicador de infrações pendentes reflete diretamente o volume aguardando triagem; a equipe usa o Dashboard para priorizar o trabalho |
+| **[Aferíções](../operacoes/afericoes)** | O painel de Alertas de Aferíção exibe certificados INMETRO vencendo ou vencidos; equipamentos vencidos não geram infrações válidas |
+| **[Grupos de Equipamentos](../cadastros-basicos/grupos-equipamentos)** | Grupos de equipamentos definem as cores e filtros do painel sinótico e do mapa no Dashboard |

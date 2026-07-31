@@ -117,3 +117,12 @@ Não. O campo **Login** deve ser único no sistema. Use o e-mail como padrão de
 
 **Como redefinir a senha de um usuário?**
 O administrador pode editar o cadastro do usuário e definir uma nova senha temporária. Oriente o usuário a alterá-la no primeiro acesso.
+
+## Integração com outros módulos
+
+| Módulo | Como se relaciona |
+|--------|------------------|
+| **[Perfis de Acesso](./perfis-acesso)** | O perfil vinculado ao usuário define quais módulos e funcionalidades ele pode acessar no sistema |
+| **[Permissões](./permissoes)** | As permissões individuais do usuário podem complementar ou restringir o que o perfil permite |
+| **[Logs de Acesso](./logs-acesso)** | Todas as ações do usuário são registradas nos logs de acesso para auditoria e rastreabilidade |
+| **[Acessos por IP](./acessos-por-ip)** | Regras de restrição de IP podem ser configuradas por usuário ou grupo para aumentar a segurança de acesso |

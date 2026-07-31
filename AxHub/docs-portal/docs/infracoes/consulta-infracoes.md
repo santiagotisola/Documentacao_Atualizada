@@ -106,3 +106,12 @@ Verifique se há analistas disponíveis e se o equipamento está enviando dados 
 
 **Posso alterar o enquadramento de uma infração diretamente nesta tela?**
 Não. Alterações de enquadramento só são possíveis durante a triagem. Esta tela é apenas de consulta e visualização.
+
+## Integração com outros módulos
+
+| Módulo | Como se relaciona |
+|--------|------------------|
+| **[Infrações — Triagem](./triagem)** | A consulta de infrações é o ponto de acesso ao detalhe de cada infração; alterações de enquadramento só são possíveis na triagem |
+| **[Infrações — Auditoria](./auditoria)** | O auditor usa esta tela para localizar e revisar infrações antes de aprovação final |
+| **[Relatório de Infrações](../relatorios/relatorio-infracoes)** | O relatório de infrações oferece visão agregada; a consulta detalha um registro individual |
+| **[Exportação de Infrações](./exportacao)** | Infrações com status **Auditada** localizadas aqui estão aptas para exportação ao órgão autuador |

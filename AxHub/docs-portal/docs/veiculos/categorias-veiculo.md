@@ -115,3 +115,12 @@ Corrigir a categoria no cadastro do veículo, reconsiderar o enquadramento e rep
 
 **Preciso criar categorias novas ou as padrão CTB são suficientes?**
 As categorias padrão do CTB cobrem a maioria dos enquadramentos. Crie categorias adicionais apenas se o órgão autuador exigir subdivisões não previstas no CTB.
+
+## Integração com outros módulos
+
+| Módulo | Como se relaciona |
+|--------|------------------|
+| **[Classificações de Veículos](./classificacoes-veiculos)** | A categoria é a unidade pai da classificação; a hierarquia Categoria → Classificação é essencial para o enquadramento correto |
+| **[Enquadramentos](../administracao/enquadramentos)** | O artigo CTB do enquadramento é determinado com base na categoria do veículo registrada na passagem |
+| **[Infrações — Triagem](../infracoes/triagem)** | A categoria do veículo é verificada na triagem; enquadramento incorreto por categoria errada deve ser corrigido antes da exportação |
+| **[Exportação de Infrações](../infracoes/exportacao)** | A categoria integra os dados do auto exportado ao órgão autuador conforme o layout exigido |

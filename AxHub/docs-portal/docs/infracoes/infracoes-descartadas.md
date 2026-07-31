@@ -106,3 +106,11 @@ Motivo genérico (ex.: “Outros”) não permite rastrear a causa real do desca
 
 **Alta taxa de descarte em um equipamento indica o que?**
 Geralmente problemas técnicos: câmera suja, ângulo errado, OCR descalibrado ou iluminação insuficiente. Use o relatório de **Processamento de Imagens** para cruzar a taxa de descarte com o aproveitamento OCR.
+## Integração com outros módulos
+
+| Módulo | Como se relaciona |
+|--------|------------------|
+| **[Infrações — Triagem](./triagem)** | As infrações descartadas são originadas da ação de descarte na triagem; esta tela permite revisar e reverter os descartes |
+| **[Motivos de Descarte](../administracao/motivos-descartes)** | Os motivos de descarte exibidos nesta tela são configurados no módulo de Administração |
+| **[Exceções](./excecoes)** | Infrações descartadas automaticamente por regras de exceção também aparecem aqui com o motivo configurado na regra |
+| **[Processamento de Imagens](../relatorios/processamento-imagens)** | Cruzar este relatório com o de Processamento de Imagens ajuda a identificar equipamentos com alta taxa de descarte por qualidade |

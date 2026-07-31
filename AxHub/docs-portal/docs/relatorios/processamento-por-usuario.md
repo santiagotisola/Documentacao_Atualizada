@@ -120,3 +120,12 @@ Cruce com os Logs de Acesso para verificar os dias em que o usuário acessou o s
 
 **Qual o método correto para comparar produtividade entre analistas?**
 Use a métrica **Média/Hora** em vez do total absoluto. Analistas com turnos diferentes têm totais distintos, mas a média por hora é comparável.
+
+## Integração com outros módulos
+
+| Módulo | Como se relaciona |
+|--------|------------------|
+| **[Infrações — Triagem](../infracoes/triagem)** | O volume processado por usuário é gerado a partir das ações de triagem; cada aprovação ou descarte é contabilizado aqui |
+| **[Logs de Acesso](../controle-acesso/logs-acesso)** | Os logs de acesso cruzados com este relatório permitem confirmar se um usuário com produção zero realmente não acessou o sistema |
+| **[Motivos de Descarte](../administracao/motivos-descartes)** | A taxa de descarte por analista reflete os motivos de descarte utilizados; motivos inconsistentes indicam necessidade de treinamento |
+| **[Medições — Índices de Performance](../medicoes/indices-performance)** | A produtividade da equipe de triagem impacta diretamente os índices de performance do contrato |

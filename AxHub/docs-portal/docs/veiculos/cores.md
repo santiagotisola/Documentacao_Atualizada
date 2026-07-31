@@ -102,3 +102,12 @@ Não. O sistema já inclui as cores padrão pré-carregadas. Adicione apenas cor
 
 **Posso excluir uma cor que não é mais utilizada?**
 Não exclua — inative a cor. Cores vinculadas a infrações históricas precisam ser preservadas para manter a integridade dos registros.
+
+## Integração com outros módulos
+
+| Módulo | Como se relaciona |
+|--------|------------------|
+| **[Consulta de Placas](../operacoes/consulta-placas)** | A cor do veículo é preenchida automaticamente via consulta RENAVAM — o cadastro de cores deve estar completo para evitar campos em branco |
+| **[Infrações — Triagem](../infracoes/triagem)** | A cor consta nos dados do auto e pode ser corrigida manualmente durante a triagem caso a consulta RENAVAM falhe |
+| **[Exportação de Infrações](../infracoes/exportacao)** | Alguns layouts de exportação exigem o código de cor padronizado pelo DENATRAN — confirme o requisito do órgão autuador |
+| **[Infrações — Consulta](../infracoes/consulta-infracoes)** | A cor pode ser usada como filtro na busca de infrações para localizar registros de um veículo específico |

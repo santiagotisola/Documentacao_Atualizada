@@ -116,3 +116,12 @@ Sim. O PDF gerado pela opção **Exportar** é o Boletim de Medição oficial pa
 
 **O que significa o status “Em Revisão”?**
 A medição foi reaberta por um supervisor e está aguardando nova finalização. Nenhum dado deste período deve ser considerado definitivo até que retorne ao status **Finalizada**.
+
+## Integração com outros módulos
+
+| Módulo | Como se relaciona |
+|--------|------------------|
+| **[Criar Medição](./criar-medicao)** | As medições finalizadas são geradas a partir do fluxo de criação; esta tela exibe o histórico de todas as medições concluídas |
+| **[Contratos](./contratos)** | Cada medição finalizada está vinculada a um contrato e comprova o cumprimento do SLA do período |
+| **[Índices de Performance](./indices-performance)** | Os índices calculados na medição são exibidos no boletim exportado e determinam a conformidade contratual |
+| **[Medições — Interrupções](./interrupcoes)** | As interrupções registradas no período são consideradas no cálculo de disponibilidade exibido na medição finalizada |

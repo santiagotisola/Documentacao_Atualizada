@@ -520,3 +520,12 @@ Acesso mínimo para visualização sem alterações.
 | Relacionado | [Usuários](./usuarios) | Usuários afetados pelas permissões |
 | Relacionado | [Logs de Acesso](./logs-acesso) | Auditoria de ações realizadas |
 | Relacionado | [Acessos Por IP](./acessos-por-ip) | Restrição de acesso por IP |
+
+## Integração com outros módulos
+
+| Módulo | Como se relaciona |
+|--------|------------------|
+| **[Perfis de Acesso](./perfis-acesso)** | Os perfis agrupam permissões; este módulo detalha cada permissão individual que compõe um perfil |
+| **[Usuários](./usuarios)** | As permissões são atribuídas aos usuários via perfil; alterações de permissão afetam imediatamente todos os usuários do perfil |
+| **[Logs de Acesso](./logs-acesso)** | Ações realizadas com cada permissão ficam registradas nos logs de acesso para auditoria |
+| **[Fabricantes](../cadastros-basicos/fabricantes)** | A permissão `fabricante.generatetoken` controla quem pode gerar tokens de integração para os fabricantes de equipamentos |

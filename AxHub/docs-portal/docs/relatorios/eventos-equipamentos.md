@@ -105,3 +105,12 @@ Filtre por **Tipo = Falha** e some as Durações para calcular as horas de indis
 
 **Um evento com duração zero aparece no SLA?**
 Não. Eventos com duração zero (sem data de fim registrada) são tratados como em andamento e impactam a disponibilidade até que a data de fim seja informada.
+
+## Integração com outros módulos
+
+| Módulo | Como se relaciona |
+|--------|------------------|
+| **[Falhas Sequenciais](./falhas-sequenciais)** | Eventos de falha do equipamento no período correlacionam-se com lacunas sequenciais no relatório de falhas |
+| **[Medições — Interrupções](../medicoes/interrupcoes)** | As interrupções registradas neste relatório devem ser consistent com o módulo de interrupções da medição |
+| **[Aferíções](../operacoes/afericoes)** | Manutenções registradas como eventos devem ser seguidas de aferíção para revalidação metrólogica |
+| **[Processamento de Imagens](./processamento-imagens)** | Queda no aproveitamento de imagens no mesmo período do evento indica impacto do equipamento na qualidade dos registros |

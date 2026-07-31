@@ -111,3 +111,12 @@ Filtre por **Status = Auditada** e o período desejado. As infrações resultant
 
 **O relatório mostra velocidade medida diferente do enquadramento. Por quê?**
 O enquadramento usa a **Velocidade Considerada**, que aplica a tolerância métrica exigida pelo INMETRO. A velocidade medida é o valor bruto do radar.
+
+## Integração com outros módulos
+
+| Módulo | Como se relaciona |
+|--------|------------------|
+| **[Infrações — Auditoria](../infracoes/auditoria)** | Apenas infrações com status **Auditada** são exportadas; este relatório permite verificar o volume próximo de expedição |
+| **[Exportação de Infrações](../infracoes/exportacao)** | O relatório é a base de conferência antes de gerar o lote de exportação ao órgão autuador |
+| **[Enquadramentos](../administracao/enquadramentos)** | O enquadramento exibido foi aplicado automática ou manualmente durante a triagem — erros de enquadramento aparecem aqui |
+| **[Medições — Contratos](../medicoes/contratos)** | O volume de infrações no período é utilizado no cálculo de indicadores de desempenho do contrato |

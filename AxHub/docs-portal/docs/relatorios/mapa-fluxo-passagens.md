@@ -98,3 +98,12 @@ Passagens exibe o volume total de veículos detectados. Infrações exibe apenas
 
 **Posso exportar o mapa como imagem para apresentações?**
 Sim. Clique em **Exportar** para salvar uma imagem do mapa ou um CSV com os dados por equipamento.
+
+## Integração com outros módulos
+
+| Módulo | Como se relaciona |
+|--------|------------------|
+| **[Fluxo Diário de Veículos](./fluxo-diario-veiculos)** | O mapa exibe uma visão geográfica do fluxo; o Fluxo Diário complementa com a série temporal detalhada |
+| **[Equipamentos](../cadastros-basicos/equipamentos)** | Os equipamentos precisam ter coordenadas geográficas cadastradas para aparecer no mapa |
+| **[Monitoramento Online](../operacoes/monitoramento-online)** | O monitoramento online exibe o status em tempo real dos equipamentos visíveis no mapa |
+| **[Operações](../operacoes/cadastro-operacoes)** | O filtro por operação permite visualizar apenas os equipamentos associados a uma operação específica no mapa |

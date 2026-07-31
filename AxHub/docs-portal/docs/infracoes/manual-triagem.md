@@ -367,3 +367,12 @@ Após validar uma Infração ela segue automaticamente para:
 | [Exportação](./exportacao) | Como as Infrações são enviadas ao órgão |
 | [Motivos de Descarte](../administracao/motivos-descartes) | Configurar os motivos disponíveis |
 | [Guia Completo do Processo](./guia-completo-infracoes) | Visão geral de todas as etapas |
+
+## Integração com outros módulos
+
+| Módulo | Como se relaciona |
+|--------|------------------|
+| **[Infrações — Auditoria](./auditoria)** | A triagem é a etapa anterior à auditoria; infrações validadas aqui seguem automaticamente para revisão do auditor |
+| **[Enquadramentos](../administracao/enquadramentos)** | O analista consulta os enquadramentos durante a triagem para confirmar se o artigo CTB aplicado está correto |
+| **[Motivos de Descarte](../administracao/motivos-descartes)** | Os motivos de descarte disponíveis são gerenciados pelo administrador; o analista deve selecionar o motivo correto em cada descarte |
+| **[Processamento por Usuário](../relatorios/processamento-por-usuario)** | O desempenho do analista na triagem é mensurado neste relatório e usado para gestão da equipe |

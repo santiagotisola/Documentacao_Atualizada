@@ -101,6 +101,15 @@ Os tickets permanecem no sistema conforme a política de retenção configurada.
 **Como gerar um relatório de tickets por posto e período?**
 Use os filtros **Posto** + **Período** + **Resultado** e clique em **Exportar** para gerar o CSV. Esse arquivo é a base para o boletim diário ou mensal de produção.
 
+## Integração com outros módulos
+
+| Módulo | Como se relaciona |
+|--------|------------------|
+| **[Tickets Abertos](./ticket-aberto)** | Tickets abertos tornam-se fechados após a liberação; o histórico completo é consultado aqui |
+| **[Postos de Pesagem](./postos)** | O ticket fechado é sempre vinculado ao posto onde a pesagem foi realizada; use o filtro de posto para relatórios por localidade |
+| **[Infrações — Consulta](../infracoes/consulta-infracoes)** | Tickets classificados como **Infrator** geram um auto de infração rastreado no módulo de infrações |
+| **[Reclassificar](./reclassificar)** | Tickets fechados com classificação incorreta precisam de reprocessamento; a reclassificação só é possível antes do fechamento |
+
 ## Relacionado
 
 - [Tickets Abertos](./ticket-aberto)

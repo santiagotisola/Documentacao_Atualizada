@@ -113,3 +113,12 @@ Pode ser dos dois tipos. Recomenda-se sempre definir uma **Data Fim** mesmo para
 
 **Como auditar quais infrações foram descartadas por exceção?**
 Acesse **Infrações → Consulta** com filtro **Status = Descartada** e filtre pelo **Motivo de Descarte** configurado na regra de exceção. Exporte para Excel para análise detalhada.
+
+## Integração com outros módulos
+
+| Módulo | Como se relaciona |
+|--------|------------------|
+| **[Infrações — Triagem](./triagem)** | As regras de exceção são aplicadas durante a importação, antes da triagem; infrações isentas nunca chegam à fila do analista |
+| **[Motivos de Descarte](../administracao/motivos-descartes)** | O motivo de descarte aplicado pelas exceções é configurado no módulo de Motivos de Descarte da Administração |
+| **[Infrações Descartadas](./infracoes-descartadas)** | Infrações descartadas por exceção ficam acessíveis nesta tela para consulta e auditoria |
+| **[Enquadramentos](../administracao/enquadramentos)** | Exceções por classificação de veículo dependem dos enquadramentos configurados para o equipamento |

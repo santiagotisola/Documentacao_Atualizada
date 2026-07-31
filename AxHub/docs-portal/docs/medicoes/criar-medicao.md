@@ -113,3 +113,12 @@ Não. Após finalizada, a medição é bloqueada. Erros devem ser documentados e
 
 **Por que o índice de disponibilidade saiu maior do que o esperado?**
 Interrupções não registradas antes da geração não entram no cálculo. Registre todas as paradas antes de gerar a medição.
+
+## Integração com outros módulos
+
+| Módulo | Como se relaciona |
+|--------|------------------|
+| **[Contratos](./contratos)** | A medição é gerada a partir de um contrato ativo; os equipamentos e metas do contrato determinam o conteúdo do boletim |
+| **[Interrupções](./interrupcoes)** | Todas as interrupções do período precisam estar registradas antes de gerar a medição para que o cálculo de disponibilidade seja correto |
+| **[Índices de Performance](./indices-performance)** | Os índices vinculados ao contrato são calculados automaticamente durante a geração e exibidos no boletim |
+| **[Medições Finalizadas](./medicoes-finalizadas)** | Após a finalização, a medição fica disponível no histórico de Medições Finalizadas para consulta e exportação |

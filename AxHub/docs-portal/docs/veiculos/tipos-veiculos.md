@@ -110,3 +110,12 @@ Sim. Inativar um tipo apenas impede seu uso em novos cadastros; os registros his
 
 **Preciso cadastrar tipos personalizados ou os padrão DENATRAN são suficientes?**
 Os tipos padrão pré-cadastrados cobrem a maioria dos casos. Crie tipos personalizados somente se o órgão autuador exigir categorias específicas não contempladas na tabela padrão.
+
+## Integração com outros módulos
+
+| Módulo | Como se relaciona |
+|--------|------------------|
+| **[Espécies de Veículos](./especie-veiculo)** | Espécie e Tipo compõem a hierarquia de identificação do veículo; ambos são usados no enquadramento |
+| **[Classificações de Veículos](./classificacoes-veiculos)** | Cada classificação deve ser vinculada a um Tipo de Veículo válido para funcionar corretamente nos enquadramentos |
+| **[Enquadramentos](../administracao/enquadramentos)** | O Tipo de Veículo influencia o artigo CTB sugerido automaticamente no enquadramento da infração |
+| **[Infrações — Triagem](../infracoes/triagem)** | Durante a triagem, o tipo do veículo é verificado para garantir que o enquadramento seja compatível com a categoria |

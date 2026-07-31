@@ -111,3 +111,11 @@ Não necessariamente. Se a placa puder ser identificada visualmente na imagem, �
 
 **Com que frequência devo consultar este relatório?**
 Diariamente, antes de gerar novos lotes de exportação. Acumulação de discrepâncias não tratadas pode comprometer o volume contratual.
+## Integração com outros módulos
+
+| Módulo | Como se relaciona |
+|--------|------------------|
+| **[Falhas Sequenciais](./falhas-sequenciais)** | Discrepancias de sequencial duplicado estão diretamente ligadas a falhas sequenciais; os dois relatórios devem ser revisados em conjunto |
+| **[Processamento de Imagens](./processamento-imagens)** | Discrepancias de imagem ausente são investigadas no Processamento de Imagens para identificar a causa raiz |
+| **[Infrações — Triagem](../infracoes/triagem)** | Passagens com placa ilegível identificadas aqui devem ser tratadas na triagem antes da exportação |
+| **[Equipamentos](../cadastros-basicos/equipamentos)** | Discrepancias recorrentes de velocidade ou data/hora apontam para problemas de manutenção no equipamento |

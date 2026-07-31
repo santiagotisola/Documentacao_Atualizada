@@ -105,3 +105,12 @@ Semanalmente para acompanhamento preventivo. Aumento súbito na taxa de descarte
 
 **O relatório de processamento conta imagens de teste?**
 Depende da configuração em **Configurações do Sistema → Aba Medição**. Verifique o parâmetro **Imagem de Teste** para entender se elas entram no cálculo.
+
+## Integração com outros módulos
+
+| Módulo | Como se relaciona |
+|--------|------------------|
+| **[Eventos de Equipamentos](./eventos-equipamentos)** | Queda abrupta no aproveitamento de imagens pode estar correlacionada a um evento de falha registrado no equipamento |
+| **[Monitoramento Online](../operacoes/monitoramento-online)** | Equipamentos com aproveitamento crítico aparecem também no monitoramento online para ação imediata da equipe |
+| **[Aferíções](../operacoes/afericoes)** | Baixo aproveitamento pode indicar necessidade de aferíção ou recalibração do equipamento |
+| **[Configurações do Sistema](../administracao/configuracoes-sistema)** | O limiar mínimo de confiança OCR e os parâmetros de imagem de teste são configurados nas Configurações do Sistema |

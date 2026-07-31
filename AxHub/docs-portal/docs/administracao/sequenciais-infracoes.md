@@ -100,3 +100,12 @@ Crie uma nova série com número inicial combinado com o órgão autuador. Comun
 
 **Com que frequência devo verificar o saldo da série?**
 Mensalmente. Quando o saldo atingir 80% do número máximo, planeje a criação da próxima série com antecedência mínima de 30 dias.
+
+## Integração com outros módulos
+
+| Módulo | Como se relaciona |
+|--------|------------------|
+| **[Infrações — Triagem](../infracoes/triagem)** | O sequencial é atribuído a cada infração durante a triagem; uma série esgotada ou inativa impede a numeração de novas infrações |
+| **[Falhas Sequenciais](../relatorios/falhas-sequenciais)** | O relatório de Falhas Sequenciais usa a configuração dos sequenciais para verificar lacunas e duplicidades na numeração |
+| **[Exportação de Infrações](../infracoes/exportacao)** | O número sequencial da infração é um campo obrigatório nos layouts de exportação; séries com lacunas podem causar rejeição |
+| **[Sequenciais de Lote](./sequenciais-lote-exportacao)** | Os sequenciais de infração e de lote são configurações independentes; ambos precisam estar corretos para a exportação ser válida |

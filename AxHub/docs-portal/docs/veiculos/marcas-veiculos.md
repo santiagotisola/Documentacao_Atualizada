@@ -114,3 +114,12 @@ Inative a grafia não oficial e padronize pela grafia do fabricante (ex.: VOLKSW
 
 **O Código DENATRAN da marca é obrigatório?**
 Depende do layout de exportação exigido pelo órgão autuador. Confirme no contrato ou com o suporte técnico antes de deixar o campo em branco.
+
+## Integração com outros módulos
+
+| Módulo | Como se relaciona |
+|--------|------------------|
+| **[Modelos de Veículos](./modelos-veiculos)** | Cada modelo deve ser vinculado a uma marca; a hierarquia Marca → Modelo garante a identificação completa do veículo |
+| **[Consulta de Placas](../operacoes/consulta-placas)** | A marca é populada automaticamente via consulta RENAVAM; o cadastro deve estar atualizado para evitar campos em branco |
+| **[Infrações — Triagem](../infracoes/triagem)** | A marca do veículo compõe os dados do auto e pode ser corrigida manualmente durante a triagem |
+| **[Exportação de Infrações](../infracoes/exportacao)** | O Código DENATRAN da marca é exigido em alguns layouts de exportação — confirme o requisito do órgão autuador |

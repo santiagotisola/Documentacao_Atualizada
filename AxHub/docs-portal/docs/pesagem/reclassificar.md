@@ -108,4 +108,13 @@ Não há prazo fixo no sistema, mas recomenda-se reclassificar **antes** de libe
 |------|--------|-----------|
 | Relacionado | [Ticket Fechado](./ticket-fechado) | Ticket a reclassificar |
 | Relacionado | [Motivos](./motivos) | Motivos disponíveis |
+
+## Integração com outros módulos
+
+| Módulo | Como se relaciona |
+|--------|------------------|
+| **[Tickets Fechados](./ticket-fechado)** | A reclassificação deve ser realizada antes do fechamento do ticket; tickets já fechados exigem autorização do administrador |
+| **[Motivos de Pesagem](./motivos)** | O motivo de reclassificação é obrigatório e fica registrado no histórico do ticket para fins de auditoria |
+| **[Tipos de Veículos](../veiculos/tipos-veiculos)** | A reclassificação seleciona uma nova categoria de veículo; as categorias disponíveis são definidas no cadastro de tipos de veículos |
+| **[Infrações — Consulta](../infracoes/consulta-infracoes)** | Após reclassificação, a infração gerada (ou cancelada) reflete a nova categoria e pode ser verificada na consulta de infrações |
 | Relacionado | [Postos](./postos) | Posto de pesagem de origem |

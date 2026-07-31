@@ -104,3 +104,12 @@ Clique no logo do AxHub no topo da página. Esta ação sempre retorna ao Dashbo
 
 **O menu lateral desapareceu. O que fazer?**
 O menu pode estar recolhido. Clique no ícone de hamburguer (três linhas) no canto superior esquerdo para expá-lo. Em telas menores, ele recolhe automaticamente.
+
+## Integração com outros módulos
+
+| Módulo | Como se relaciona |
+|--------|------------------|
+| **[Login](./login)** | O login define o usuário ativo; o perfil do usuário determina quais itens aparecem no menu lateral |
+| **[Perfis de Acesso](../controle-acesso/perfis-acesso)** | As permissões do perfil controlam diretamente a visibilidade de cada módulo no menu de navegação |
+| **[Dashboard](./dashboard)** | O Dashboard é a tela inicial após o login e o ponto de partida para navegar para todos os módulos |
+| **[Controle de Acesso — Permissões](../controle-acesso/permissoes)** | Módulos ausentes no menu indicam falta de permissão; o administrador configura o acesso neste módulo |

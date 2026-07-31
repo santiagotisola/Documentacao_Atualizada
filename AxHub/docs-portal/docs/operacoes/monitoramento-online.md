@@ -99,6 +99,15 @@ Sim. O painel atualiza em tempo real e pode impactar redes com baixa largura de 
 **Posso usar o monitoramento online em dispositivos móveis?**
 Sim. O sistema é acessível via navegador em tablets e smartphones. Otimize usando o filtro por grupo para carregar apenas os equipamentos relevantes ao turno.
 
+## Integração com outros módulos
+
+| Módulo | Como se relaciona |
+|--------|------------------|
+| **[Eventos de Equipamentos](./eventos-equipamentos)** | Equipamentos offline identificados aqui devem ter um evento registrado no módulo de Eventos para rastreabilidade do SLA |
+| **[Grupos de Equipamentos](../cadastros-basicos/grupos-equipamentos)** | Os grupos definem os filtros disponíveis no Monitoramento Online; equipamentos sem grupo não aparecem nos filtros |
+| **[Aferíções](./afericoes)** | Queda na Taxa OCR visualizada no monitoramento pode indicar necessidade de aferíção ou manutenção do equipamento |
+| **[Dashboard](../primeiros-passos/dashboard)** | O Dashboard exibe um resumo do status dos equipamentos; o Monitoramento Online detalha cada um individualmente com dados em tempo real |
+
 ## Fluxo de uso no início do turno
 
 1. Acessar **Operações → Monitoramento Online**

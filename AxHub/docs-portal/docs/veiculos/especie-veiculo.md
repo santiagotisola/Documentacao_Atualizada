@@ -113,3 +113,12 @@ Ocorre quando a consulta RENAVAM falhou ou retornou dado inconsistente. Corrija 
 
 **Preciso criar novas espécies ou as do DENATRAN são suficientes?**
 As espécies pré-carregadas cobrem toda a tabela DENATRAN. Crie entradas adicionais somente se expressamente solicitado pelo órgão autuador.
+
+## Integração com outros módulos
+
+| Módulo | Como se relaciona |
+|--------|------------------|
+| **[Tipos de Veículos](./tipos-veiculos)** | Espécie e Tipo formam a hierarquia de classificação veicular; ambos são consultados no enquadramento da infração |
+| **[Enquadramentos](../administracao/enquadramentos)** | A espécie do veículo influencia o artigo CTB aplicável — espécie incorreta pode gerar enquadramento inválido |
+| **[Consulta de Placas](../operacoes/consulta-placas)** | A espécie é retornada automaticamente pela consulta RENAVAM e associada à passagem registrada |
+| **[Infrações — Triagem](../infracoes/triagem)** | O operador pode corrigir a espécie manualmente na triagem quando o valor retornado pelo RENAVAM está inconsistente |

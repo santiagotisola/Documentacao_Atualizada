@@ -109,3 +109,12 @@ Não. O ticket precisa ser encerrado manualmente pelo operador por meio da açã
 
 **O que fazer quando o ticket mostra classificação incorreta?**
 Use a opção **Reclassificar** antes de liberar. A reclassificação recalcula o limite de PBT e pode cancelar ou manter a infração.
+
+## Integração com outros módulos
+
+| Módulo | Como se relaciona |
+|--------|------------------|
+| **[Liberar Pesagem](./liberar-pesagem)** | A liberação encerra o ticket aberto e o move para a lista de tickets fechados |
+| **[Reclassificar](./reclassificar)** | A reclassificação é acionada a partir dos tickets abertos quando a categoria do veículo está incorreta |
+| **[Postos de Pesagem](./postos)** | O ticket está vinculado ao posto onde a pesagem ocorreu; o filtro por posto é essencial para equipes que gerenciam múltiplas localidades |
+| **[Motivos de Pesagem](./motivos)** | O motivo de liberação selecionado ao encerrar o ticket aberto determina o resultado registrado no ticket fechado |

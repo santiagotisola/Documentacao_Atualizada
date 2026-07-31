@@ -95,3 +95,12 @@ O boletim de medição marca o índice com status ❌. Dependendo do contrato, p
 
 **Posso ter índices diferentes por equipamento dentro do mesmo contrato?**
 Sim. Configure um índice específico para cada equipamento ou grupo, vinculando ao mesmo contrato com metas distintas conforme as cláusulas contratuais.
+
+## Integração com outros módulos
+
+| Módulo | Como se relaciona |
+|--------|------------------|
+| **[Contratos](./contratos)** | Os índices são vinculados a um contrato; as metas definidas aqui são usadas em todas as medições do contrato |
+| **[Criar Medição](./criar-medicao)** | Ao gerar uma medição, o sistema calcula automaticamente os índices cadastrados para o contrato no período |
+| **[Medições — Interrupções](./interrupcoes)** | As interrupções impactam diretamente o índice de disponibilidade; interrupções não registradas inflam artificialmente o resultado |
+| **[Processamento de Imagens](../relatorios/processamento-imagens)** | O índice de aproveitamento OCR é alimentado pelos dados do relatório de processamento de imagens do período |

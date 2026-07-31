@@ -109,6 +109,15 @@ Não recomendado. Reimportar sem correção replicará o mesmo erro. Identifique
 
 **Lotes com status Erro afetam as infrações do período?**
 Sim. Registros não importados não geram infrações nem aparecem no relatório de passagens. Resolva rapidamente para não comprometer o volume contratual.
+
+## Integração com outros módulos
+
+| Módulo | Como se relaciona |
+|--------|------------------|
+| **[Relatório de Passagens](./relatorio-passagens)** | Registros importados com sucesso aparecem no Relatório de Passagens; lotes com falha não geram passagens |
+| **[Falhas Sequenciais](./falhas-sequenciais)** | Lotes parcialmente importados podem gerar lacunas sequenciais detectáveis no Relatório de Falhas Sequenciais |
+| **[Layouts de Arquivos](../administracao/layouts-arquivos)** | O layout de arquivo configurado define o formato esperado do lote; incompatibilidades causam erros de importação |
+| **[Equipamentos](../cadastros-basicos/equipamentos)** | Cada lote está associado a um equipamento; problemas de conectividade do equipamento resultam em lotes com zero registros |
 | **Processando** | Import em andamento | Aguardar | Aguardar e verificar novamente |
 
 ## Erros comuns

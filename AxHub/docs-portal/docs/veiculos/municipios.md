@@ -104,3 +104,12 @@ O sistema inclui todos os municípios brasileiros com código IBGE. Cadastre man
 
 **A faixa não encontra o município no cadastro. O que fazer?**
 Verifique se o município está ativo e se o nome está grafado corretamente. Se necessário, use o código IBGE para localizar o registro.
+
+## Integração com outros módulos
+
+| Módulo | Como se relaciona |
+|--------|------------------|
+| **[Faixas](../operacoes/faixas)** | Cada faixa deve ser vinculada a um município para que as infrações geradas tragam a localização geográfica correta |
+| **[Regiões](../administracao/regioes)** | As regiões agrupam municípios para filtros de relatórios e controle de operações por área geográfica |
+| **[Infrações — Consulta](../infracoes/consulta-infracoes)** | O município é um dos filtros disponíveis na busca de infrações e nos relatórios exportados |
+| **[Exportação de Infrações](../infracoes/exportacao)** | O código IBGE do município é obrigatório em diversos layouts de exportação ao SENATRAN/DETRAN |

@@ -118,3 +118,12 @@ Filtre por **Status = Falha** e observe múltiplas tentativas do mesmo IP em cur
 
 **O log registra o que o usuário fez dentro do sistema?**
 Sim. Além de login/logout, o log registra criação, edição, exclusão e exportação por módulo, com o ID do registro afetado para rastreabilidade completa.
+
+## Integração com outros módulos
+
+| Módulo | Como se relaciona |
+|--------|------------------|
+| **[Usuários](./usuarios)** | Os logs de acesso são vinculados a cada usuário; ao investigar uma ação, localize o usuário no cadastro para contexto adicional |
+| **[Acessos por IP](./acessos-por-ip)** | IPs com múltiplas falhas de login identificadas nos logs devem ser bloqueados nas regras de Acessos por IP |
+| **[Perfis de Acesso](./perfis-acesso)** | O perfil do usuário determina quais ações ele pode realizar; logs de ações não autorizadas indicam problema de configuração de perfil |
+| **[Processamento por Usuário](../relatorios/processamento-por-usuario)** | Os logs de acesso cruzados com o relatório de processamento confirmam a presença e produtividade do analista no turno |

@@ -110,3 +110,11 @@ Use a barra de busca antes de criar uma nova entrada. Caso encontre duplicatas, 
 
 **O que significa a hierarquia Categoria → Classificação?**
 A classificação é o nível mais específico dentro de uma categoria. Por exemplo: Categoria "Caminhão" → Classificação "Truck". Enquadramentos usam a classificação para determinar o artigo CTB correto.
+## Integração com outros módulos
+
+| Módulo | Como se relaciona |
+|--------|------------------|
+| **[Categorias de Veículos](./categorias-veiculo)** | Cada classificação deve ser vinculada a uma categoria pai; sem esse vínculo o enquadramento não funciona corretamente |
+| **[Tipos de Veículos](./tipos-veiculos)** | A classificação também está associada ao tipo de veículo para compor a hierarquia completa de identificação |
+| **[Enquadramentos](../administracao/enquadramentos)** | O enquadramento usa a classificação do veículo para determinar o artigo CTB aplicável à infração |
+| **[Infrações — Triagem](../infracoes/triagem)** | O operador pode corrigir a classificação do veículo durante a triagem quando a consulta RENAVAM retorna dado impreciso |

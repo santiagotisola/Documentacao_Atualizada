@@ -95,3 +95,12 @@ Sim. Lacunas sequenciais não resolvidas podem causar rejeição do lote pelo ó
 
 **Como interpretar um salto inesperado na sequência?**
 Saltos geralmente indicam infrações descartadas sem motivo documentado ou falha de comunicação do equipamento. Investigue os eventos do período para identificar a causa.
+
+## Integração com outros módulos
+
+| Módulo | Como se relaciona |
+|--------|------------------|
+| **[Sequenciais de Infrações](../administracao/sequenciais-infracoes)** | A configuração dos sequenciais define o intervalo esperado; sem configuração correta este relatório não funciona |
+| **[Eventos de Equipamentos](./eventos-equipamentos)** | Saltos na sequência por falha de equipamento aparecem correlacionados nos eventos daquele período |
+| **[Relatório de Discrepancias](./relatorio-discrepancias)** | Sequenciais duplicados identificados aqui também aparecem como discrepancias e devem ser tratados em conjunto |
+| **[Exportação de Infrações](../infracoes/exportacao)** | Lacunas não resolvidas podem causar rejeição do lote de exportação pelo órgão autuador |

@@ -109,3 +109,12 @@ Antes de cada exportação. Execute o relatório de **Falhas de Sequenciais** pa
 
 **Posso reiniciar a numeração de lote a cada ano?**
 Não é recomendável. O órgão autuador pode recusar lotes com número já usado na série histórica. Mantenha a numeração contínua e combine qualquer reinicialização com o contratante.
+
+## Integração com outros módulos
+
+| Módulo | Como se relaciona |
+|--------|------------------|
+| **[Exportação de Infrações](../infracoes/exportacao)** | O sequencial do lote é atribuído automaticamente ao gerar um novo lote de exportação |
+| **[Falhas Sequenciais](../relatorios/falhas-sequenciais)** | Verifique o relatório de Falhas Sequenciais antes de exportar para garantir que não há lacunas na numeração de lotes |
+| **[Sequenciais de Infrações](./sequenciais-infracoes)** | Os sequenciais de lote e de infrações são configurações separadas, mas ambos devem estar corretos para a exportação ser aceita |
+| **[Lote de Exportação](../glossario/lote-exportacao)** | O glossario explica o conceito de lote e sua importância legal na transmissão de infrações ao órgão autuador |

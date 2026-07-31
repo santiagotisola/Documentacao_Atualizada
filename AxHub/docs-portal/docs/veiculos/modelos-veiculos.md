@@ -111,3 +111,12 @@ Cadastre o modelo manualmente com a descrição do CRV do veículo, associando-o
 
 **Posso renomear um modelo já vinculado a infrações exportadas?**
 Não recomendado. Crie um novo modelo com o nome correto e inative o antigo para preservar a integridade dos registros históricos.
+
+## Integração com outros módulos
+
+| Módulo | Como se relaciona |
+|--------|------------------|
+| **[Marcas de Veículos](./marcas-veiculos)** | Todo modelo deve estar vinculado a uma marca; sem a marca correta o modelo não é listado corretamente nas infrações |
+| **[Consulta de Placas](../operacoes/consulta-placas)** | O modelo do veículo é preenchido automaticamente quando a consulta RENAVAM retorna o registro do CRV |
+| **[Infrações — Consulta](../infracoes/consulta-infracoes)** | O modelo do veículo aparece nos detalhes da infração e pode ser corrigido manualmente durante a triagem |
+| **[Exportação de Infrações](../infracoes/exportacao)** | O modelo e a marca compõem o campo de identificação do veículo nos arquivos exportados ao órgão autuador |

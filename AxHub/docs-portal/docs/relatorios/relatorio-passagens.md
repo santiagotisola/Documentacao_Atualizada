@@ -106,3 +106,12 @@ A validade depende da verificação visual. Se a placa for legível na imagem, a
 
 **O relatório inclui passagens de todos os equipamentos ou apenas os vinculados à operação?**
 Por padrão inclui todos. Use o filtro **Equipamento** ou **Operação** para restringir ao escopo desejado.
+
+## Integração com outros módulos
+
+| Módulo | Como se relaciona |
+|--------|------------------|
+| **[Infrações — Consulta](../infracoes/consulta-infracoes)** | Passagens que geraram infração podem ser detalhadas a partir deste relatório clicando no número do auto |
+| **[Consulta de Placas](../operacoes/consulta-placas)** | A Consulta de Placas complementa este relatório ao buscar todo o histórico de uma placa específica em todos os equipamentos |
+| **[Processamento de Imagens](./processamento-imagens)** | Passagens sem imagem aparecem neste relatório; o Processamento de Imagens auxilia na investigação da causa |
+| **[Equipamentos](../cadastros-basicos/equipamentos)** | Os equipamentos cadastrados são a fonte de dados do relatório; equipamentos inativos não geram registros novos |

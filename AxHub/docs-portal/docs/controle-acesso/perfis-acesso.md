@@ -147,3 +147,12 @@ Inative o perfil para bloquear o acesso de todos os usuários vinculados sem per
 | Relacionado | [Usuários](./usuarios) | Usuários com este perfil |
 | Relacionado | [Permissões de Acesso](./permissoes) | Configuração detalhada das permissões |
 | Relacionado | [Logs de Acesso](./logs-acesso) | Auditoria de ações dos usuários |
+
+## Integração com outros módulos
+
+| Módulo | Como se relaciona |
+|--------|------------------|
+| **[Usuários](./usuarios)** | Cada usuário é vinculado a um perfil de acesso; o perfil determina o nível de acesso ao sistema |
+| **[Permissões](./permissoes)** | O perfil agrupa permissões; a configuração granular de cada permissão é gerenciada no módulo de Permissões |
+| **[Logs de Acesso](./logs-acesso)** | Os logs registram as ações de todos os usuários de cada perfil, permitindo auditoria por grupo |
+| **[Acessos por IP](./acessos-por-ip)** | Restrições de IP podem ser combinadas com perfis específicos para aumentar a segurança de acessos sensíveis |

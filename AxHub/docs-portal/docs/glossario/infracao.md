@@ -102,3 +102,12 @@ A infração é o fato (ato infracional registrado). A notificação é o docume
 
 **Infrações descartadas na triagem impactam as métricas do contrato?**
 Sim. A taxa de descarte é monitorada no Dashboard e nos relatórios de processamento. Alta taxa de descarte pode indicar problemas nos equipamentos ou impactar métricas de aproveitamento do contrato.
+
+## Integração com outros módulos
+
+| Módulo | Como se relaciona |
+|--------|------------------|
+| **[Infrações — Triagem](../infracoes/triagem)** | A triagem é o processo de validação de cada infração registrada; sem triagem a infração não avança para exportação |
+| **[Enquadramento](./enquadramento)** | O enquadramento define o artigo CTB aplicável a cada tipo de infração; é a base legal da infração gerada |
+| **[Autuação](./autuacao)** | A autuação é o ato formal que formaliza a infração; o AxHub gera infrações que são exportadas ao órgão autuador para autuação |
+| **[Exportação de Infrações](../infracoes/exportacao)** | Infrações validadas e auditadas são exportadas em lotes ao órgão autuador para emissão do Auto de Infração de Trânsito |
