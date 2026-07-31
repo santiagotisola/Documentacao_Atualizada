@@ -94,3 +94,11 @@ Este Relatório é a principal ferramenta para demonstrar as atividades operacio
 - [Veículos Monitorados](./veiculos-monitorados)
 - [Mapeamento de Rotas](./mapeamento-rotas)
 - [Painel Analítico](./painel-analitico)
+
+## Erros comuns
+
+| Erro | Causa | Solução |
+|------|-------|----------|
+| Ocorrência não aparece no relatório | Filtro de status excluindo o tipo buscado | Limpar filtros e ampliar o período |
+| Alertas sem responsável | Alerta gerado mas não assumido pelo operador | Verificar SLA e reatribuir o alerta |
+| Exportação incompleta | Limite de registros por exportação atingido | Dividir em períodos menores ou ajustar o limite nas Configurações |

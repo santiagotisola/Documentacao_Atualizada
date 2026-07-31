@@ -71,3 +71,11 @@ Combine o Mapa de Bolhas com o [Relatório de Ocorrências](ocorrencias-alertas.
 - [Ocorrências e Alertas](./ocorrencias-alertas) — Detalhamento das irregularidades por equipamento
 - [Mapeamento de Rotas](./mapeamento-rotas) — Visualização geográfica das rotas de veículos
 - [Painel Analítico](./painel-analitico) — Análise aprofundada por placa
+
+## Erros comuns
+
+| Erro | Causa | Solução |
+|------|-------|----------|
+| Mapa sem bolhas | Nenhuma irregularidade no período | Ampliar o período ou verificar o tipo de ocorrência selecionado |
+| Equipamento não aparece no mapa | Coordenadas não cadastradas | Verificar latitude/longitude no cadastro do equipamento |
+| Permissão negada ao acessar | Usuário sem `irregularitybubblemap.index` | Solicitar ao administrador a concessão da permissão |

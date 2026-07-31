@@ -117,3 +117,11 @@ Em condições adversas (chuva, sujeira, ângulo), a leitura da placa pode ser p
 :::tip
 Combine o Rastreamento de Placas com o [Painel Analítico](./painel-analitico) para uma visão mais completa: use o rastreamento para o histórico de passagens e o painel para gráficos de frequência e heatmap de localização.
 :::
+
+## Erros comuns
+
+| Erro | Causa | Solução |
+|------|-------|----------|
+| Placa não encontrada | Período muito curto ou placa sem passagem no sistema | Ampliar o período de consulta ou verificar a grafia da placa |
+| Imagem ausente na passagem | Falha de armazenamento ou câmera offline na ocasião | Verificar o status do equipamento no histórico de eventos |
+| OCR incorreto em passagens noturnas | Qualidade de leitura reduzida em condições adversas | Confirmar visualmente pela imagem capturada |

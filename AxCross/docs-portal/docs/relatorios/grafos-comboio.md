@@ -87,3 +87,11 @@ Após identificar um veículo relevante no grafo, utilize o [Painel Analítico](
 :::warning Pré-requisito técnico
 Os Grafos de Comboio requerem **Neo4j ativo** e configurado. Sem o serviço rodando, os alertas **COMBOIO01** não são gerados e o grafo não exibe dados. Verifique em **Configurações do Sistema** se a detecção de comboio está habilitada.
 :::
+
+## Erros comuns
+
+| Erro | Causa | Solução |
+|------|-------|----------|
+| Grafo vazio | Neo4j offline ou detecção de comboio desabilitada | Verificar status do Neo4j e habilitar em Configurações do Sistema |
+| COMBOIO01 não gerado | Ciclo de 6 horas ainda não executado | Aguardar o próximo ciclo ou contatar suporte |
+| Permissão negada | Usuário sem `monitoringgraph.index` | Solicitar ao administrador a concessão da permissão |

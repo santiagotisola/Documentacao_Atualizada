@@ -79,3 +79,11 @@ O mapa usa a posição geográfica configurada no cadastro de cada Equipamento V
 | Relacionado | [Fluxo Diário de Veículos](./fluxo-diario-veiculos) | Dados tabulares detalhados |
 | Relacionado | [Monitoramento Online](../operacoes/monitoramento-online) | Status em tempo real |
 | Relacionado | [Equipamentos](../cadastros-basicos/Equipamentos) | Cadastro de Equipamentos |
+
+## Erros comuns
+
+| Erro | Causa | Solução |
+|------|-------|----------|
+| Equipamento não aparece no mapa | Coordenadas geográficas não cadastradas | Verificar o cadastro do equipamento e preencher latitude/longitude |
+| Mapa carrega sem pontos | Nenhuma passagem no período selecionado | Ampliar o período de consulta |
+| Dados incorretos ao clicar no equipamento | Cache desatualizado do navegador | Limpar o cache e recarregar a página |

@@ -116,3 +116,11 @@ Combine o Mapeamento de Rotas com o **Rastreamento de Placas** para uma Análise
 - [Rastreamento de Placas](./rastreamento-placas)
 - [Veículos Monitorados](./veiculos-monitorados)
 - [Painel Analítico](./painel-analitico)
+
+## Erros comuns
+
+| Erro | Causa | Solução |
+|------|-------|----------|
+| Mapa sem marcadores | Placa sem passagens no período selecionado | Ampliar o período ou verificar a grafia da placa |
+| Rota desconectínua (pontos isolados) | Equipamentos com lacunas de cobertura geográfica | Compreensivo — a rede de câmeras não cobre 100% das vias |
+| Período acima de 30 dias com lentidão | Volume alto de registros | Dividir a consulta em intervalos menores de até 15 dias |

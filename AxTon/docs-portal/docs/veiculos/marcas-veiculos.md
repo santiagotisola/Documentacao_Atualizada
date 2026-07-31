@@ -89,3 +89,11 @@ Marca de Veículo → Modelo → Veículo identificado na pesagem
 3. Preencha o Código e a Descrição
 4. Marque como Ativo
 5. Clique em **Salvar**
+
+## Erros comuns
+
+| Erro | Causa | Solução |
+|------|-------|----------|
+| Marca duplicada (ex.: SCANIA e Scania) | Grafias diferentes no cadastro | Inativar a duplicata e padronizar em maiúsculas |
+| Marca não aparece no ticket de pesagem | Marca com status inativo | Reativar o cadastro |
+| Campo fabricante vazio no auto exportado | Consulta RENAVAM sem retorno para a placa | Verificar a integração RENAVAM e preencher manualmente |

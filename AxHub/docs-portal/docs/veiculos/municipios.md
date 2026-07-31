@@ -59,6 +59,14 @@ O sistema já vem com uma base pré-carregada dos municípios brasileiros com c�
 O código IBGE é obrigatório nos arquivos de exportação de infrações. Certifique-se de usar o código correto para o município do equipamento.
 :::
 
+## Erros comuns
+
+| Erro | Causa | Solução |
+|------|-------|----------|
+| Lote rejeitado por código IBGE inválido | Código com 6 dígitos ao invés de 7 | Verificar e corrigir pelo portal oficial do IBGE |
+| Município não encontrado na busca | Nome cadastrado diferente do oficial | Padronizar o nome conforme o portal do IBGE |
+| Infração sem município | Faixa sem município vinculado | Verificar o cadastro da faixa e vincular o município correto |
+
 
 ## Cadastro
 

@@ -79,3 +79,11 @@ Quando `TBOperacoes.Homologacao = 1`, todas as Infrações geradas são marcadas
 :::tip
 Capturar dados de teste com a operação em modo `Homologacao = 1` garante que essas infrações nunca entrem no fluxo de exportação. Execute sempre os testes nessa configuração.
 :::
+
+## Erros comuns
+
+| Erro | Causa | Solução |
+|------|-------|----------|
+| Mapa de teste vazio | Operação não configurada com `Homologacao = 1` | Verificar o campo Homologação na operação do equipamento |
+| Registros de teste aparecem na lista de infrações reais | Operação com `Homologacao = 0` durante o teste | Recriar os testes com a operação em modo de homologação |
+| Faixa sem resultado no mapa | Equipamento sem capturas no período de teste | Verificar cabeamento, posição da câmera e operação ativa |

@@ -88,3 +88,11 @@ A tela exibe todos os registros cadastrados, com opção de pesquisa e filtro.
 - Não altere o **PBT máximo** de tipos já utilizados em infrações exportadas — pode gerar inconsistência retroativa nos boletins de medição
 - Mantenha a correspondência entre número de eixos e PBT conforme a tabela CONTRAN 803/2021
 - Utilize a nomenclatura oficial (ex.: Caminhão Toco, Bitrem, Rodotrem) para compatibilidade com o SENATRAN
+
+## Erros comuns
+
+| Erro | Causa | Solução |
+|------|-------|----------|
+| PBT máximo incorreto gerando infrações indevidas | Valor desatualizado em relação à CONTRAN 803/2021 | Atualizar o PBT conforme a resolução vigente |
+| Tipo de veículo não aparece na pesagem | Tipo inativo no cadastro | Reativar o tipo ou cadastrar conforme a classificação correta |
+| Inconsistência retroativa nos boletins | PBT alterado após infrações exportadas | Não alterar PBT de tipos já utilizados — criar nova classificação |

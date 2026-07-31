@@ -58,6 +58,14 @@ Os tipos de veículos são usados em conjunto com **Espécies** e **Classificaç
 | **Código DENATRAN** | Não | Código oficial |
 | **Status** | Sim | Ativo ou Inativo |
 
+## Erros comuns
+
+| Erro | Causa | Solução |
+|------|-------|----------|
+| Tipo duplicado na lista | Cadastrado mais de uma vez com nomes similares | Inativar o duplicado e manter apenas um ativo |
+| Tipo não aparece no enquadramento | Tipo inativo ou sem vínculo com categoria | Verificar status e hierarquia Tipo → Categoria |
+| Código DENATRAN em branco | Não informado no cadastro | Preencher com o código da tabela oficial do DENATRAN |
+
 ## Passo a passo
 
 1. Acesse **Veículos → Tipos de Veículos**

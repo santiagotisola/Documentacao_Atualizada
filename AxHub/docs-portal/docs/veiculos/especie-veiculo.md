@@ -58,6 +58,14 @@ Espécie (DENATRAN)
 - [Categorias de Veículos](./categorias-veiculo)
 - [Classificações de Veículos](./classificacoes-veiculos)
 
+## Erros comuns
+
+| Erro | Causa | Solução |
+|------|-------|----------|
+| Espécie incorreta no auto | OCR classificou errado ou RENAVAM retornou dado inconsistente | Corrigir manualmente na triagem |
+| Espécie não existe na lista | Código DENATRAN não cadastrado | Cadastrar conforme a tabela oficial do DENATRAN |
+| Infração enquadrada com artigo errado | Espécie errada resultou em artigo CTB incorreto | Reconsiderar o enquadramento após corrigir a espécie |
+
 | **Moto** | Motocicleta, ciclomotor, motoneta |
 | **Trator** | Equipamento agrícola ou de obras |
 

@@ -55,3 +55,11 @@ Os dados nos dashboards Power BI são atualizados conforme o agendamento configu
 - **Análise de qualidade OCR**: identificar equipamentos com baixa taxa de leitura de placas
 - **Relatório executivo**: apresentar indicadores operacionais ao contratante em formato visual
 - **Auditoria interna**: cruzar dados de triagem por usuário com volume de descarte por motivo
+
+## Erros comuns
+
+| Erro | Causa | Solução |
+|------|-------|----------|
+| Dashboard em branco | URL incorreta ou sem permissão de acesso | Verificar a URL e adicionar o usuário ao grupo de acesso no Power BI |
+| Dados desatualizados | Agendamento de refresh não configurado | Ajustar o agendamento no Power BI Service |
+| Relatório não aparece no menu | Perfil sem permissão para o módulo Power BI | Adicionar o perfil ao grupo de acesso |

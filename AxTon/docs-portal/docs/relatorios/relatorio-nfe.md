@@ -68,6 +68,14 @@ Exporte o relatório de NF-e ausente e compartilhe com a Secretaria de Fazenda e
 :::
 | **Valor** | Valor total da nota |
 | **Peso declarado** | Peso informado na NF-e |
+
+## Erros comuns
+
+| Erro | Causa | Solução |
+|------|-------|----------|
+| Relatório sem NF-e | Veículos sem consulta SEFAZ configurada | Verificar integração SEFAZ/MDF-e nas Configurações do Sistema |
+| Status sempre "Ausente" | Integração SEFAZ inativa | Contatar suporte técnico para revisar a integração |
+| NF-e com peso declarado zerado | NF-e emitida sem campo de peso | Orientar o emitente a corrigir o manifesto |
 | **Status** | Válida / Vencida / Cancelada |
 | **Placa** | Veículo transportador |
 

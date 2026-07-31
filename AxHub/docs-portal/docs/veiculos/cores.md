@@ -83,3 +83,11 @@ Verifique com o órgão autuador (DETRAN/DENATRAN) quais códigos de cor são ac
 - Confirme com o órgão autuador quais códigos de cor são aceitos no layout de exportação antes de cadastrar cores adicionais
 - A cor é extraída automaticamente do RENAVAM na consulta de placa; mantenha a tabela atualizada para evitar inconsistências
 - Não exclua cores vinculadas a infrações existentes — inative-as para preservar a integridade do histórico
+
+## Erros comuns
+
+| Erro | Causa | Solução |
+|------|-------|----------|
+| Campo cor em branco no auto exportado | Cor não cadastrada ou consulta RENAVAM falhou | Verificar a tabela de cores e preencher manualmente |
+| Cor duplicada com código diferente | Cadastro inconsistente com a tabela DENATRAN | Inativar duplicatas e manter apenas a cor com código oficial |
+| Código de cor rejeitado na exportação | Código não reconhecido pelo órgão autuador | Confirmar os códigos aceitos no layout do órgão |

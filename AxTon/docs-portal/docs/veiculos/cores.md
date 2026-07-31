@@ -71,18 +71,13 @@ As cores são extraídas automaticamente do RENAVAM quando o sistema consulta a 
 | 14 | Verde |
 | 15 | Vermelha |
 
-| 04 | Branca |
-| 05 | Cinza |
-| 06 | Dourada |
-| 07 | Grená |
-| 08 | Laranja |
-| 09 | Marrom |
-| 10 | Prata |
-| 11 | Preta |
-| 12 | Rosa |
-| 13 | Roxa |
-| 14 | Verde |
-| 15 | Vermelha |
+## Erros comuns
+
+| Erro | Causa | Solução |
+|------|-------|----------|
+| Campo cor em branco no auto exportado | Cor não cadastrada ou consulta RENAVAM falhou | Completar a tabela com as 15 cores padrão DENATRAN |
+| Código de cor rejeitado na exportação SENATRAN | Código fora da tabela oficial | Verificar os códigos aceitos no layout do órgão |
+| Cor duplicada com nome alternativo | Cadastro manual inconsistente | Inativar duplicatas e manter apenas as 15 cores padrão |
 
 ## Passo a passo
 

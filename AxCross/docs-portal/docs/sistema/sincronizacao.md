@@ -69,6 +69,14 @@ Apenas Usuários com perfil de **Administrador** têm acesso à função de sinc
 - [Logs de Acesso](../administracao/logs-acesso)
 - [Relatório de Passagens](../relatorios/relatorio-passagens)
 
+## Erros comuns
+
+| Erro | Causa | Solução |
+|------|-------|----------|
+| Sincronização não conclui | Volume muito alto de registros ou servidor sobrecarregado | Executar em horário de baixo tráfego e parcelando por data |
+| Passagens não aparecem após sincronização | Elastic Search offline ou sem índice | Verificar o status do Elastic Search e contatar o suporte |
+| Erro de permissão ao iniciar | Usuário sem perfil de Administrador | Solicitar ao administrador do sistema acesso ao módulo |
+
 ## Quando usar
 
 | Situação | Descrição |

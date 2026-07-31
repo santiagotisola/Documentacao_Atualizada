@@ -58,6 +58,14 @@ As categorias de veículos são usadas no enquadramento para determinar qual art
 - [Tipos de Veículos](./tipos-veiculos)
 - [Enquadramentos](../administracao/enquadramentos)
 
+## Erros comuns
+
+| Erro | Causa | Solução |
+|------|-------|----------|
+| Artigo CTB incorreto na infração | Categoria errada atribuída ao veículo | Revisar a categoria e reconsiderar o enquadramento |
+| Categoria não aparece no filtro de triagem | Categoria inativa | Reativar o cadastro da categoria |
+| Veículo sem categoria | Classificação não vinculada a nenhuma categoria | Verificar a hierarquia Tipo → Categoria → Classificação |
+
 | **Trator** | Veículo agrícola/industrial |
 
 ## Campos

@@ -73,6 +73,14 @@ A tela exibe todos os registros cadastrados, com opção de pesquisa e filtro.
 - Utilize o código IBGE de **7 dígitos** — o código com 6 dígitos causa rejeição nos arquivos SENATRAN
 - A base pré-carregada cobre todos os municípios brasileiros; adicione entradas apenas para localidades não reconhecidas pelo IBGE
 - O município do posto de pesagem é inserido automaticamente no boletim de medição — garanta que esteja cadastrado corretamente antes de gerar a primeira medição
+
+## Erros comuns
+
+| Erro | Causa | Solução |
+|------|-------|----------|
+| Lote rejeitado por código IBGE inválido | Código com 6 dígitos ao invés de 7 | Verificar e corrigir pelo portal oficial do IBGE |
+| Município não encontrado na busca | Nome cadastrado diferente do oficial | Padronizar conforme o portal do IBGE |
+| Boletim de medição sem município | Posto de pesagem sem município vinculado | Verificar o cadastro do posto e vincular o município correto |
 - Consulte ibge.gov.br/cidades para confirmar o código oficial antes de cadastrar
 
 ## Relacionado

@@ -95,3 +95,11 @@ As marcas são vinculadas aos **Modelos de Veículos**, formando a hierarquia Ma
 - Pesquise a marca existente antes de criar — duplicidades (ex.: VW e VOLKSWAGEN) prejudicam a identificação nos relatórios
 - Mantenha marcas descontinuadas como **Inativas** em vez de excluí-las, preservando o histórico de infrações
 - O **Código DENATRAN** é exigido em alguns layouts de exportação; confirme com o órgão autuador se é obrigatório no contrato
+
+## Erros comuns
+
+| Erro | Causa | Solução |
+|------|-------|---------|
+| Marca duplicada na lista | Cadastrada com grafias diferentes (ex.: VW e VOLKSWAGEN) | Inativar a duplicata e padronizar pelo nome oficial |
+| Marca não aparece nas infrações | Status inativo | Reativar o cadastro |
+| Campo marca vazio no auto exportado | Consulta RENAVAM falhou | Verificar a integração RENAVAM e preencher manualmente |

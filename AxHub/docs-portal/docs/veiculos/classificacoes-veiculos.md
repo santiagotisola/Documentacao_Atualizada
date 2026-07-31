@@ -58,6 +58,14 @@ Categoria → Classificação → Veículo. A classificação é o nível mais e
 3. Informe o **Código**, **Descrição** e **Categoria**
 4. Clique em **Salvar**
 
+## Erros comuns
+
+| Erro | Causa | Solução |
+|------|-------|----------|
+| Classificação sem categoria pai | Criada sem selecionar a categoria | Editar e vincular a categoria correta |
+| Enquadramento errado por classificação | Veículo enquadrado na classificação equivocada | Revisar no cadastro do veículo e reconsiderar a infração |
+| Classificação duplicada | Criada mais de uma vez com nomes similares | Inativar a duplicata e reclassificar os veículos vinculados |
+
 
 ![Cadastro de Classificação](../img/Veículos%20-%20Classificações%20dos%20Veiculos%20-%20cadastros.png)
 
