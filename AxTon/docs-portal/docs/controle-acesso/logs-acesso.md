@@ -99,6 +99,20 @@ Revisie os logs de acesso semanalmente. Mais de 5 falhas consecutivas do mesmo I
 Múltiplas tentativas falhas consecutivas podem indicar tentativa de acesso indevido. Monitore regularmente.
 :::
 
+## Exemplo prático
+
+**Cenário:** Suspeita de acesso indevido após desligamento de funcionário.
+
+1. Acesse **Controle de Acesso → Logs de Acesso**
+2. Filtre por **Usuário** (login do ex-funcionário) com período iniciando na data do desligamento
+3. Se houver registros com **Status = Sucesso**, o usuário ainda tinha acesso ativo
+4. Inative imediatamente o usuário em **Usuários** e redefina senhas compartilhadas
+5. Exporte o log filtrado em Excel para documentar o incidente e encaminhe ao gestor responsável
+
+:::warning Ação imediata
+Ao desligar um colaborador, inative o usuário no mesmo dia. Acesso após o desligamento configura violação de segurança e pode gerar responsabilidade jurídica.
+:::
+
 ## Perguntas frequentes
 
 **Por quanto tempo os logs de acesso são retidos?**

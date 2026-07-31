@@ -99,6 +99,20 @@ Sim. Seguem o fluxo padrão: triagem → auditoria → lote de exportação, com
 | Muitos erros de conectividade | Falha na integração de rede com o WS externo | Verificar configurações de rede e firewall para o endpoint do WS |
 | Status `Irregular` mesmo com jornada normal | Data de atualização do banco desatualizada | Contatar suporte técnico para atualizar o banco de certificados |
 
+## Exemplo prático
+
+**Cenário:** Fiscalização na BR-116 detecta veículo com cronotacógrafo com certificado vencido há 45 dias.
+
+1. O equipamento registra a passagem e envia a placa ao AxHub
+2. O sistema consulta automaticamente o banco externo de certificados INMETRO
+3. Resultado retornado: `Vencido` — auto de infração gerado automaticamente (Art. 162, II CTB)
+4. O registro aparece em **Cronotacógrafo → Consulta** com status `Vencido` e o número do auto preenchido
+5. O analista confirma o resultado na triagem e o auto segue para o lote de exportação
+
+:::tip Prioridade na triagem
+Registros com status `NãoEncontrado` devem ser triados manualmente com prioridade. Geralmente indicam placa divergente no banco externo ou certificado emitido recentemente que ainda não foi sincronizado.
+:::
+
 ## Integração com outros módulos
 
 | Módulo | Como se relaciona |

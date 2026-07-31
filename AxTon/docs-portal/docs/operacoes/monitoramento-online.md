@@ -98,6 +98,17 @@ O monitoramento online atualiza automaticamente a cada 30 segundos. Não é nece
 - [Consulta de Placas](./consulta-placas)
 - [Fluxo Diário de Veículos](../relatorios/fluxo-diario-veiculos)
 
+## Exemplo prático
+
+**Cenário:** Início de turno — verificação do status dos postos de pesagem.
+
+1. Acesse **Operações → Monitoramento Online** ao iniciar o turno
+2. Verifique se todos os postos estão com status **Operacional** (🟢 verde)
+3. Posto PI503B aparece como **Offline** (🔴) — acione imediatamente a equipe técnica de campo
+4. Registre a interrupção em **Medições → Interrupções** com a hora exata de início
+5. Acompanhe a fila de **Infrações pendentes** — acúmulo acima de 20 tickets indica necessidade de reforço na triagem
+6. Ao restabelecer o posto, confirme o status **Operacional** antes de liberar novas pesagens
+
 
 ## Elementos da tela
 
