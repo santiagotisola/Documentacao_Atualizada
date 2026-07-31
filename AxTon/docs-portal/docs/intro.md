@@ -119,3 +119,22 @@ Peso Bruto Total — limite legal de peso do veículo. Exceder o PBT gera infra�
 
 **Posso ter vários equipamentos no mesmo posto?**
 Sim. Um posto pode ter balança estática, dinâmica e sensor de eixo simultaneamente.
+
+## Como começar
+
+Se é o seu primeiro acesso ao AxTon, siga este roteiro:
+
+1. **Faça o login** — acesse a URL do sistema e entre com as credenciais fornecidas pelo administrador
+2. **Configure o Sistema** — acesse **Sistema → Configurações** e verifique os parâmetros de tolerância e integração com a balança HAENNI
+3. **Cadastre o posto de pesagem** — em **Iniciar Pesagem → Postos**, registre o local e vincule os equipamentos
+4. **Crie a operação** — em **Operações → Cadastro de Operações**, abra a operação do turno
+5. **Realize a primeira pesagem** — clique em **Iniciar Pesagem**, selecione a classificação do veículo e siga as 4 etapas
+
+:::tip Perfis recomendados por função
+| Função | Módulos essenciais |
+|--------|-------------------|
+| **Operador de balança** | Iniciar Pesagem, Tickets de Pesagens |
+| **Supervisor de posto** | Operações, Tickets, Alertas |
+| **Gestor de contrato** | Medições, Exportação, Relatórios |
+| **Administrador** | Sistema, Administração, todos os módulos |
+:::

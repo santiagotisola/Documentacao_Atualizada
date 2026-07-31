@@ -109,3 +109,21 @@ Não. Infrações com status Exportada são imutáveis. Somente infrações com 
 
 **O que fazer quando o auditor identifica um padrão de aprovação incorreto por um analista?**
 Rejeite as infrações incorretas e documente com observação. Use o Relatório de Processamento por Usuário para quantificar o problema e embasar o feedback ao analista.
+
+## Exemplo prático
+
+**Auditoria com amostragem de 25% após turno de triagem:**
+
+Cenário: 400 infrações foram triadas e validadas pelo analista Joana no turno da manhã.
+
+1. Acesse **Infrações → Auditoria**
+2. Filtre por **Analista responsável: Joana** e defina **Amostragem: 25%**
+3. O sistema sorteia aleatoriamente 100 infrações para revisão
+4. Revise cada uma: confirme as válidas, rejeite as incorretas com observação
+5. Infrações rejeitadas retornam para a fila de triagem com sua justificativa
+
+Resultado: Das 100 auditadas, 3 foram rejeitadas por placa lida incorretamente. O analista recebe feedback e as infrações retornam à triagem para correção.
+
+:::tip Boas práticas
+Documente sempre o motivo da rejeição. Isso retroalimenta o treinamento dos analistas e reduz retrabalho nas próximas triagens.
+:::

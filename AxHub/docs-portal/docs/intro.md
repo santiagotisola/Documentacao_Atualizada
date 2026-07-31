@@ -106,3 +106,24 @@ Mensalmente, dentro do prazo definido em contrato. Recomendado até o 5º dia ú
 
 **O que fazer se um equipamento aparecer Offline no Dashboard?**
 Verifique a conexão de rede do equipamento e abra um chamado em Operações → Eventos de Equipamentos.
+
+## Como começar
+
+Se é o seu primeiro acesso ao AxHub, siga este roteiro:
+
+1. **Faça o login** — acesse a URL do sistema e entre com as credenciais fornecidas pelo administrador
+2. **Explore o Dashboard** — verifique o status dos equipamentos e os indicadores de triagem mensal
+3. **Configure os cadastros básicos** — em **Equipamentos**, cadastre fabricantes, tipos, modelos e grupos
+4. **Crie as operações** — em **Operações → Cadastro de Operações**, registre a primeira operação com seus equipamentos
+5. **Realize a triagem** — em **Infrações → Triagem**, revise as primeiras passagens capturadas
+6. **Exporte o primeiro lote** — em **Infrações → Exportação**, gere o lote para o órgão autuador
+
+:::tip Perfis recomendados por função
+| Função | Módulos essenciais |
+|--------|-------------------|
+| **Analista de triagem** | Infrações → Triagem, Consulta de Infrações |
+| **Auditor** | Infrações → Auditoria, Consulta |
+| **Operador técnico** | Operações, Aferições, Monitoramento Online |
+| **Gestor de contrato** | Medições, Relatórios, Power BI |
+| **Administrador** | Acesso total incluindo Configurações do Sistema |
+:::

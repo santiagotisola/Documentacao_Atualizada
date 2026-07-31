@@ -53,6 +53,24 @@ Cada página do manual segue a mesma estrutura:
 4. Explore o menu lateral para conhecer os módulos disponíveis
 5. Consulte a documentação de cada módulo pelo menu lateral esquerdo
 
+## Como começar
+
+Se é o seu primeiro acesso ao AxCross, siga este roteiro:
+
+1. **Faça o login** — acesse a URL do sistema e entre com as credenciais fornecidas pelo administrador
+2. **Explore o Dashboard** — veja os indicadores em tempo real de passagens, alertas e equipamentos ativos
+3. **Configure veículos monitorados** — cadastre placas de interesse em **Veículos Monitorados → Cadastro**
+4. **Verifique os equipamentos** — confirme que todos os cruzamentos estão com câmeras online
+5. **Gere seu primeiro relatório** — acesse **Relatórios → Rastreamento de Placas** para consultar passagens de uma placa
+
+:::tip Perfis recomendados por função
+| Função | Módulos essenciais |
+|--------|-------------------|
+| **Operador** | Monitoramento Online, Veículos Monitorados, Relatórios |
+| **Supervisor** | Todos os módulos operacionais + Alertas |
+| **Administrador** | Acesso total incluindo Configurações e Permissões |
+:::
+
 ## Suporte
 
 Em caso de dúvidas sobre o sistema, entre em contato:
