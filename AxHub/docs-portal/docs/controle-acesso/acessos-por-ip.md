@@ -113,3 +113,12 @@ Não é recomendado. IPs dinâmicos mudam a cada conexão e causariam bloqueios 
 
 **Como desbloquear um usuário que foi bloqueado por IP?**
 Um administrador com acesso direto ao servidor ou via IP autorizado deve remover o IP bloqueado da lista ou desativar temporariamente a restrição para reconfiguração.
+
+## Integração com outros módulos
+
+| Módulo | Como usa este cadastro/relatório |
+|--------|----------------------------------|
+| **Usuários** | As restrições de IP são aplicadas por usuário — cada conta pode ter um conjunto de IPs autorizados |
+| **Perfis de Acesso** | Complementa a segurança por perfil: o acesso por IP é uma segunda camada de controle além das permissões funcionais |
+| **Logs de Acesso** | Tentativas de acesso bloqueadas por IP são registradas nos logs, permitindo identificar ataques externos |
+| **Configurações do Sistema** | A ativação do módulo de Acessos por IP é controlada nas Configurações globais do AxHub |

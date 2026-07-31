@@ -99,6 +99,15 @@ Redistribua as demandas entre analistas, priorize infrações mais antigas e mon
 **Posso reverter uma infração descartada na triagem?**
 Sim, mas somente até a etapa de auditoria. Infrações descartadas podem ser recuperadas por um auditor ou supervisor acessando **Infrações → Infrações Descartadas** e revertendo o descarte.
 
+## Integração com outros módulos
+
+| Módulo | Como usa este cadastro/relatório |
+|--------|----------------------------------|
+| **Auditoria** | Processo imediatamente posterior à triagem — infrações aprovadas pelo triador seguem para revisão do auditor |
+| **Motivos de Descarte** | Configura as opções de motivo exibidas ao descartar; manter motivos precisos garante rastreabilidade estatística |
+| **Processamento por Usuário** | Relatório que mede a produtividade individual de triagem (infrações/hora, taxa de descarte) por analista |
+| **Configurações do Sistema** | Define o prazo máximo para triar antes da prescrição legal e os parâmetros de backlog exibidos no Dashboard |
+
 ## Relacionados
 
 - [Triagem de Infrações](../infracoes/triagem) — Tela de triagem

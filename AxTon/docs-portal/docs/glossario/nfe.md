@@ -95,3 +95,12 @@ Não. A obrigatoriedade depende da operação e do tipo de mercadoria. Consulte 
 
 **O alerta de NF-e ausente gera automaticamente uma infração?**
 Depende da configuração das regras de enquadramento. O alerta pode ficar apenas na fila de triagem para validação manual antes de gerar um auto.
+
+## Integração com outros módulos
+
+| Módulo | Como usa este cadastro/relatório |
+|--------|----------------------------------|
+| **MDF-e** | As NF-es são vinculadas ao MDF-e que acompanha o transporte; ausência de uma impacta a validação do outro |
+| **Pesagem** | O peso declarado na NF-e é automaticamente comparado ao peso aferido na balança para detectar subdeclaração |
+| **Triagem** | Alertas de NF-e ausente ou inválida são exibidos na fila de triagem para que o operador valide antes de exportar |
+| **Relatório de Notas Fiscais** | Exibe o histórico de NF-es consultadas, com status e informações do documento fiscal de cada pesagem |

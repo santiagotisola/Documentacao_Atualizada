@@ -95,3 +95,12 @@ Depende das permissões configuradas no perfil. Normalmente apenas supervisores 
 - [Infração](./infracao) — Objeto gerado pela pesagem
 - [MDF-e](./mdfe) — Documento fiscal vinculado
 
+## Integração com outros módulos
+
+| Módulo | Como usa este cadastro/relatório |
+|--------|----------------------------------|
+| **Pesagem** | Processo anterior à triagem: a pesagem gera a infração que entra na fila de triagem |
+| **Auditoria** | Processo posterior: infrações aprovadas na triagem seguem para revisão do auditor antes da exportação |
+| **Motivos de Descarte** | Os motivos disponíveis na triagem são configurados em **Pesagem → Motivos**, garantindo rastreabilidade das rejeições |
+| **Exportação** | Somente infrações com status **Aprovado** na triagem podem ser incluídas em lote e exportadas ao órgão autuador |
+

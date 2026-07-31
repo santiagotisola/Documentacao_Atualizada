@@ -100,3 +100,12 @@ Divida a sincronização em faixas de data menores (ex.: sincronizar semana a se
 
 **Qual o impacto de não sincronizar após uma restauração de backup?**
 Os relatórios continuarão usando o índice antigo do Elasticsearch, que pode não refletir os dados restaurados. Passagens e alertas do período afetado podem não aparecer ou aparecer incorretamente. A sincronização é essencial após qualquer restauração.
+
+## Integração com outros módulos
+
+| Módulo | Como usa este cadastro/relatório |
+|--------|----------------------------------|
+| **Relatório de Passagens** | Depende do Elastic Search indexado — passagens não sincronizadas não aparecem nos resultados de busca |
+| **Monitoramento Online** | Passagens exibidas em tempo real são indexadas automaticamente; a sincronização manual recupera registros históricos perdidos |
+| **Rastreamento de Placas** | Consultas por placa dependem do índice atualizado — sincronizar garante que todo o histórico esteja disponível |
+| **Logs de Acesso** | Toda execução de sincronização é registrada no log de acesso com o usuário e horário de início |

@@ -108,3 +108,12 @@ PBTC (Peso Bruto Total Combinado) é para conjuntos veiculares (cavalo + semi re
 **Veículo de emergência é isento?**
 Não. Somente veículos com autorização especial de excesso de peso (AEP) emitida pelo órgão competente.
 
+## Integração com outros módulos
+
+| Módulo | Como usa este cadastro/relatório |
+|--------|----------------------------------|
+| **Classificações de Veículos** | Cada classificação define o PBT máximo permitido para aquela configuração de eixos |
+| **Pesagem** | O peso aferido na balança é comparado ao PBT da classificação para determinar se há excesso |
+| **Infração** | O excesso de PBT é o fato gerador da infração automática de excesso de peso |
+| **MDF-e** | O manifesto declara o peso da carga transportada, usado em confronto com o PBT aferido |
+

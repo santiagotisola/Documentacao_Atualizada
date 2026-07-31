@@ -94,3 +94,12 @@ O sistema não calcula alertas de excesso de velocidade para essa faixa.
 **Posso mudar o sentido de uma faixa ativa?**
 Sim, mas dados históricos permanecem com o sentido original. Passagens futuras são registradas com o novo sentido.
 
+## Integração com outros módulos
+
+| Módulo | Como usa este cadastro/relatório |
+|--------|----------------------------------|
+| **Equipamentos** | Cada faixa deve ser vinculada a um equipamento — sem esse vínculo a faixa não captura passagens |
+| **Locais** | A faixa pertence a um local (cruzamento) e só pode ser criada após o local estar cadastrado |
+| **Relatório de Passagens** | Passagens são registradas por faixa, permitindo filtrar o volume de tráfego por direção e sentido |
+| **Monitoramento Online** | O monitoramento em tempo real exibe passagens separadas por faixa para identificação precisa do fluxo |
+

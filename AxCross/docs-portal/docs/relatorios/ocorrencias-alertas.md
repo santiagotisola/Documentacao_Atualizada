@@ -113,3 +113,12 @@ Isso indica que o alerta foi gerado automaticamente mas nenhum operador clicou e
 
 **Como encontrar ocorrências de uma placa específica no relatório?**
 O relatório não possui filtro direto por placa na tela principal. Para análise de uma placa específica, use o **Painel Analítico** (aba Alertas) ou exporte o relatório em Excel e aplique filtro pela coluna Placa.
+
+## Integração com outros módulos
+
+| Módulo | Como usa este cadastro/relatório |
+|--------|----------------------------------|
+| **Alertas** | As ocorrências exibidas neste relatório são originadas nos alertas gerados automaticamente na tela de Alertas |
+| **Veículos Monitorados** | Passagens de veículos monitorados geram alertas que aparecem consolidados neste relatório |
+| **Painel Analítico** | Complementa a análise: use o Painel para investigar individualmente cada placa identificada nas ocorrências |
+| **Mapeamento de Rotas** | Após identificar uma placa recorrente nas ocorrências, use o Mapeamento para visualizar o percurso do veículo |

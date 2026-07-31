@@ -117,3 +117,12 @@ O sistema não impõe limite, mas recomenda-se cadastrar apenas as formas exigid
 
 **Por que meu lote foi rejeitado com erro de forma de autuação?**
 Provavelmente o código cadastrado não corresponde ao esperado pelo sistema do órgão autuador. Confirme os códigos aceitos no layout de exportação fornecido pelo contratante.
+
+## Integração com outros módulos
+
+| Módulo | Como usa este cadastro/relatório |
+|--------|----------------------------------|
+| **Exportação de Infrações** | O código da forma de autuação é incluído em cada registro do lote exportado ao órgão autuador |
+| **Layouts de Arquivos** | O campo da forma de autuação é mapeado no layout de exportação configurado em **Administração → Layouts** |
+| **Triagem** | O operador seleciona ou confirma a forma de autuação ao validar a infração antes de incluí-la no lote |
+| **Sequenciais de Infrações** | A numeração sequencial dos autos é controlada por forma de autuação, garantindo unicidade por tipo |

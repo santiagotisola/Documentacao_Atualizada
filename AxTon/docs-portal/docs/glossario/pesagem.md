@@ -124,3 +124,12 @@ Sim. O AxTon aplica a tolerância configurada nas **Configurações do Sistema**
 **Pesagem realizada com aferição vencida gera infração válida?**
 Não. Infrações geradas com balança sem aferição válida do INMETRO podem ser contestadas juridicamente. Mantenha o certificado sempre dentro do prazo.
 
+## Integração com outros módulos
+
+| Módulo | Como usa este cadastro/relatório |
+|--------|----------------------------------|
+| **PBT** | O peso aferido na balança é comparado ao PBT máximo da classificação do veículo para decidir se há excesso |
+| **Classificações de Veículos** | O sistema identifica a classificação (eixos) do veículo para determinar qual limite de PBT aplicar |
+| **Triagem** | Após a pesagem detectar excesso, a infração gerada entra na fila de triagem para validação |
+| **Sistema → Configurações** | Tipo de balança, tolerâncias e parâmetros de pesagem são definidos nas Configurações do Sistema |
+

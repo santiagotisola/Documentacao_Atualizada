@@ -99,3 +99,12 @@ Somente operadores com permissão de liberação habilitada no perfil de acesso.
 
 **O que fazer se o motivo correto não está disponível na lista?**
 Não use um motivo genérico. Solicite ao administrador que cadastre o motivo específico em **Balança → Motivos** antes de realizar a liberação.
+
+## Integração com outros módulos
+
+| Módulo | Como usa este cadastro/relatório |
+|--------|----------------------------------|
+| **Tickets Abertos** | Ponto de entrada: o ticket a ser liberado é consultado antes de executar a liberação |
+| **Motivos de Liberação** | A lista de motivos disponíveis é configurada em **Balança → Motivos** e determina as opções exibidas na tela |
+| **Reclassificar** | Frequentemente precede a liberação — ao reclassificar o veículo, o excesso cessa e a liberação se torna possível |
+| **Logs de Acesso** | Cada liberação realizada é registrada automaticamente com usuário, horário e motivo para fins de auditoria |

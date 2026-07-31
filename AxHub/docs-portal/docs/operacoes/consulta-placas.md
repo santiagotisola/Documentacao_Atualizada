@@ -119,3 +119,12 @@ As causas mais comuns são: placa lida incorretamente pelo OCR, equipamento offl
 
 **A consulta de placas pode ser usada como prova em recurso de infração?**
 O dado bruto da consulta não tem valor probatório isolado. O documento oficial é o **Auto de Infração** gerado no fluxo completo com imagem, enquadramento e tarja.
+
+## Integração com outros módulos
+
+| Módulo | Como usa este cadastro/relatório |
+|--------|----------------------------------|
+| **Triagem de Infrações** | Permite confirmar passagens específicas antes de validar ou contestar uma infração ainda em triagem |
+| **Monitoramento Online** | Complementa a consulta histórica: enquanto o Monitoramento exibe passagens em tempo real, este módulo exibe o histórico acumulado |
+| **Relatório de Passagens** | Alternativa com mais filtros e exportação avançada para análises de volume em múltiplas placas |
+| **Consulta de Infrações** | Após identificar as passagens de uma placa, use a Consulta de Infrações para verificar quais geraram auto de infração |

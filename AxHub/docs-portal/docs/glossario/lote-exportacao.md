@@ -110,3 +110,12 @@ No modulo **Infracoes - Exportacao**, o sistema agrupa as infracoes auditadas em
 - [Exportacao](../infracoes/exportacao)
 - [Layouts de Arquivos](../administracao/layouts-arquivos)
 - [Sequenciais de Lote](../administracao/sequenciais-lote-exportacao)
+
+## Integração com outros módulos
+
+| Módulo | Como usa este cadastro/relatório |
+|--------|----------------------------------|
+| **Exportação de Infrações** | O lote é gerado neste módulo agrupando infrações auditadas e transmitindo ao órgão autuador |
+| **Auditoria** | Apenas infrações com status **Auditada** podem integrar um lote — a auditoria é pré-requisito para exportar |
+| **Layouts de Arquivos** | O formato e os campos do lote são definidos pelo layout configurado em **Administração → Layouts** |
+| **Sequenciais de Lote** | Controla a numeração sequencial dos lotes exportados, garantindo unicidade e rastreabilidade junto ao órgão |

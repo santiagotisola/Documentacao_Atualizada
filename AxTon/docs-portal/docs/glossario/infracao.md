@@ -118,3 +118,12 @@ Não diretamente pelo sistema. Após exportação, o cancelamento deve ser solic
 | **Art. 231, V, CTB** | Exceder o peso máximo permitido — gravíssima |
 | **Resolução CONTRAN 803/2021** | Limites de PBT por configuração de eixos |
 | **Art. 281, CTB** | Prazo de 30 dias para expedir o AIT após a infração |
+
+## Integração com outros módulos
+
+| Módulo | Como usa este cadastro/relatório |
+|--------|----------------------------------|
+| **Pesagem** | A pesagem com excesso de PBT é o processo que gera a infração automaticamente no sistema |
+| **PBT** | O limite de PBT da classificação do veículo define o limiar de excesso que aciona a infração |
+| **Triagem** | Infrações precisam ser validadas pelo operador na triagem antes de prosseguir para exportação |
+| **Relatório de Infrações** | Exibe o histórico consolidado de infrações por posto, período, placa e status de exportação |

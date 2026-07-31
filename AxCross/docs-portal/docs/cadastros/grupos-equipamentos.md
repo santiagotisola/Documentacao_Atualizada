@@ -98,3 +98,12 @@ Sim. O sistema permite vincular o mesmo equipamento a múltiplos grupos sem conf
 
 **Como usar grupos para filtrar relatórios no AxCross?**
 Nos relatórios que oferecem o filtro **Grupo de Equipamentos**, selecione o grupo desejado para restringir os dados ao conjunto de equipamentos correspondente. Certifique-se de que todos os equipamentos relevantes estão vinculados ao grupo antes de gerar o relatório.
+
+## Integração com outros módulos
+
+| Módulo | Como usa este cadastro/relatório |
+|--------|----------------------------------|
+| **Equipamentos** | Os grupos são formados por equipamentos cadastrados — um equipamento pode pertencer a múltiplos grupos sem conflito |
+| **Monitoramento Online** | Permite filtrar o painel de monitoramento por grupo, exibindo apenas os equipamentos do conjunto selecionado |
+| **Alertas** | Regras de alerta e notificação podem ser configuradas por grupo, segmentando a gestão operacional por área |
+| **Relatórios** | Todos os relatórios com filtro de equipamento suportam filtro por grupo para análise por região ou contrato |

@@ -98,3 +98,12 @@ Não. A obrigatoriedade depende do tipo de carga e do percurso (interestadual vs
 | **NT 2013/005** | Especificações técnicas do MDF-e |
 | **Art. 237-A, CTB** | Vedado o transporte de mercadorias sem documentação fiscal |
 | **Convênio ICMS 58/2013** | Obrigatoriedade do MDF-e no transporte interestadual |
+
+## Integração com outros módulos
+
+| Módulo | Como usa este cadastro/relatório |
+|--------|----------------------------------|
+| **Pesagem** | O MDF-e é consultado automaticamente na chegada do veículo ao posto para verificar a conformidade fiscal |
+| **NF-e** | As notas fiscais estão vinculadas ao MDF-e; a ausência do manifesto indica que as NF-es não foram devidamente acobertadas |
+| **Triagem** | Alertas de MDF-e ausente ou vencido aparecem na fila de triagem para validação do operador |
+| **Relatório de Discrepâncias** | Compara o peso declarado no MDF-e com o peso aferido na balança para identificar subdeclaração fiscal |

@@ -113,3 +113,12 @@ Os relatórios históricos passam a exibir o novo nome, o que pode causar confus
 
 **Excluir uma região afeta as infrações existentes?**
 Sim. Infrações já geradas por equipamentos da região perderão a referência geográfica nos relatórios. Inative a região em vez de excluí-la.
+
+## Integração com outros módulos
+
+| Módulo | Como usa este cadastro/relatório |
+|--------|----------------------------------|
+| **Equipamentos** | Cada equipamento é vinculado a uma região — sem esse vínculo o filtro por região nos relatórios fica em branco |
+| **Operações** | As operações herdam a região do equipamento a elas associado, permitindo agrupar resultados por área |
+| **Relatórios** | Todos os relatórios de passagens, infrações e discrepâncias oferecem filtro por região cadastrada |
+| **Dashboard** | KPIs de disponibilidade e OCR são exibidos agrupados por região, facilitando gestão territorial |

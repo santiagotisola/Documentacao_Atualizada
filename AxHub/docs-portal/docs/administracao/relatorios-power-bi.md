@@ -86,3 +86,12 @@ Os dados são atualizados conforme o agendamento configurado no Power BI Service
 
 **Por que um relatório Power BI aparece em branco para alguns usuários?**
 Verifique se o usuário está vinculado ao grupo de acesso correto no cadastro do relatório. Sem permissão, o painel é exibido em branco ou com mensagem de acesso negado. Adicione o perfil do usuário ao grupo de acesso correspondente.
+
+## Integração com outros módulos
+
+| Módulo | Como usa este cadastro/relatório |
+|--------|----------------------------------|
+| **Configurações do Sistema** | As credenciais de autenticação Power BI (Application Id, Secret, Scope) são configuradas na aba **Integrações** das Configurações do Sistema |
+| **Controle de Acesso — Perfis** | O acesso a cada relatório Power BI é controlado por grupo de acesso, alinhado aos perfis do sistema |
+| **Medições** | O Boletim de Medição e os índices de disponibilidade estão disponíveis como painéis Power BI para prestação de contas |
+| **Relatórios Operacionais** | Complementa os relatórios nativos com análises históricas e visuais avançados (mapa de calor, tendências mensais) |
