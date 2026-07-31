@@ -48,6 +48,14 @@ Agrupar por região geográfica facilita o monitoramento e a filtragem de relat�
 | Filtro de relatório não mostra grupo | Nome com acento/espaço | Verificar nome e vincular novamente |
 | Equipamento em 2 grupos | Sem problema | Permitido para agrupamentos diferentes |
 
+## Exemplos de agrupamento
+
+| Nome do grupo | Critério |
+|---------------|----------|
+| Centro | Equipamentos do centro da cidade |
+| Rodovia BR-040 | Equipamentos na BR-040 |
+| Zona Norte | Equipamentos da zona norte |
+
 | Nome do grupo | Critério |
 |---------------|----------|
 | Centro | Equipamentos do centro da cidade |

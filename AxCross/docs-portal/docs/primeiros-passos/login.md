@@ -48,11 +48,20 @@ Nunca compartilhe suas credenciais. Cada ação realizada fica registrada com o 
 ## Segurança
 
 - Use senhas fortes com mínimo de 8 caracteres, combinando letras, números e caracteres especiais
-- Nunca compartilhe suas credenciais — cada usuário deve ter login exclusivo para garantir rastreabilidade nos logs
-- Faça **logout** ao final de cada turno; sessões esquecidas abertas são riscos de segurança
-- Em caso de suspeita de acesso indevido, altere a senha imediatamente e notifique o administrador
+
+## Erros comuns
+
+| Erro | Causa | Solução |
+|------|-------|----------|
+| Login inválido após redefinição | Cache antigo | Limpar cache ou usar aba anônima |
+| Conta bloqueada | Múltiplas falhas | Aguardar 30 min ou contatar admin |
+| Link de redefinição expirado | Prazo ultrapassado | Solicitar novo link |
 
 ## Relacionado
+
+- [Usuários](../administracao/usuarios)
+- [Perfis de Acesso](../administracao/perfis-acesso)
+- [Logs de Acesso](../administracao/logs-acesso)
 
 - [Usuários](../administracao/usuarios)
 - [Perfis de Acesso](../administracao/perfis-acesso)

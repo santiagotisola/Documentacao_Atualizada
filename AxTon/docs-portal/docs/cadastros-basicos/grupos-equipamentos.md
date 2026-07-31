@@ -46,13 +46,20 @@ Grupos bem definidos permitem:
 - Filtrar o Fluxo Diário por grupo
 - Comparar OCR entre regiões diferentes
 
+## Erros comuns
+
+| Erro | Causa | Solução |
+|------|-------|----------|
+| Grupo vazio | Equipamentos não vinculados | Vincular após criar o grupo |
+| Medição não filtra por grupo | Grupo não associado | Verificar configuração |
+| Equipamento em dois grupos | Sem problema | Permitido para diferentes fins |
+
 ## Relacionado
 
 - [Equipamentos](./equipamentos)
 - [Contratos](../medicoes/contratos)
 - [Medições](../medicoes/criar-medicao)
 
-Grupos bem definidos permitem:
 - Gerar medições contratuais por agrupamento
 - Filtrar o Fluxo Diário de Veículos por grupo
 - Comparar desempenho OCR entre regiões diferentes

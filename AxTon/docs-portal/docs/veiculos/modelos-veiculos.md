@@ -52,11 +52,13 @@ Verifique se o modelo já existe antes de criar. Duplicidades dificultam a class
 |------|-------|----------|
 | Modelo duplicado | Cadastrado 2x | Inativar duplicata |
 | Modelo sem marca | Criação sem vínculo | Corrigir no cadastro |
+| Ticket sem modelo | Identificação falhou | Verificar base e OCR |
 
 ## Relacionado
 
 - [Marcas de Veículos](./marcas-veiculos)
 - [Classificações de Veículos](./classificacoes-veiculos)
+- [Tipos de Veículos](./tipos-veiculos)
 
 ## Modelos comuns de veículos de carga
 

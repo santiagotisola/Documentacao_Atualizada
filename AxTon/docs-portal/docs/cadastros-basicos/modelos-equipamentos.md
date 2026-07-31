@@ -48,6 +48,14 @@ Fabricante → Modelo → Equipamento. Antes de cadastrar um modelo, o Fabricant
 | Toledo do Brasil | ICS465, ICS685 |
 | RODOANEL | WIM200, WIM400 |
 
+## Erros comuns
+
+| Erro | Causa | Solução |
+|------|-------|---------|
+| Modelo não aparece | Fabricante inativo | Reativar fabricante |
+| Modelo com tipo errado | Classificação incorreta | Corrigir o campo Tipo |
+| Equipamento sem modelo | Vínculo ausente | Redelacionar no equipamento |
+
 ## Relacionado
 
 - [Fabricantes](./fabricantes)

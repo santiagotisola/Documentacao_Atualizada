@@ -48,13 +48,15 @@ Um arco agrupa equipamentos instalados na mesma travessia (ex: radares das faixa
 
 | Erro | Causa | Solução |
 |------|-------|----------|
-| Equipamento em 2 arcos | Dois arcos criados para mesma faixa | Verificar e remover duplicata |
-| Arco sem equipamento | Equipamentos não vinculados | Vincular antes de usar |
+| Equipamento em 2 arcos | Dois arcos criados para mesma faixa | Remover duplicata |
+| Arco sem equipamento | Vínculo não criado | Vincular antes de usar |
+| Exportação sem arco | Equipamento não vinculado | Vincular ao arco correto |
 
 ## Relacionado
 
 - [Operações](../operacoes/cadastro-operacoes)
 - [Faixas](../operacoes/faixas)
+- [Eventos de Equipamentos](../relatorios/eventos-equipamentos)
 
 ## Boas práticas
 

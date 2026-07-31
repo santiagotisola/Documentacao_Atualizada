@@ -52,6 +52,14 @@ Eventos registrados aqui alimentam o **Relatório de Eventos** e o cálculo de d
 | **Manutenção preventiva** | Antes do início e após conclusão para calcular o tempo de parada |
 | **Calibração / Aferição** | Registre data e hora exatas — impacta o cálculo de disponibilidade contratual |
 
+## Erros comuns
+
+| Erro | Causa | Solução |
+|------|-------|---------|
+| Evento sem data fim | Esquecimento | Corrigir antes da medição |
+| Tipo errado | Preventiva x corretiva | Corrigir o tipo |
+| Evento não aparece na medição | Cadastrado após geração | Reabrir medição |
+
 ## Relacionado
 
 - [Alertas](./alertas)

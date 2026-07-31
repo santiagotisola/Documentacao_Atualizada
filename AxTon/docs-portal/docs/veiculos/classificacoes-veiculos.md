@@ -51,8 +51,15 @@ Classificações de veículos por **número de eixos e PBT** (Peso Bruto Total).
 
 | Erro | Causa | Solução |
 |------|-------|----------|
-| Classificação errada atribuida | OCR não detectou eixos | Reclassificar manualmente |
-| PBT errado | Classificação desatualizada | Verificar CONTRAN 803/2021 |
+| PBT errado calculado | Classificação desatualizada | Atualizar conforme CONTRAN 803/2021 |
+| Veículo classif. errado | OCR não identificou eixos | Reclassificar manualmente |
+| Classificação sem categoria | Vínculo ausente | Associar categoria pai |
+
+## Relacionado
+
+- [PBT](../glossario/pbt) — Peso Bruto Total
+- [Tipos de Veículos](./tipos-veiculos)
+- [Infração](../glossario/infracao)
 
 | Classificação | Eixos | PBT máximo |
 |----------------|:-----:|:-----------:|

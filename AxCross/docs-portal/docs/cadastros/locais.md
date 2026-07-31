@@ -46,6 +46,14 @@ Sempre informe latitude e longitude para que o cruzamento apareça corretamente 
 - Vincule os equipamentos ao local imediatamente após o cadastro — locais sem equipamento não capturam passagens
 - Mantenha locais inativos como **Inativos** em vez de excluir para preservar o histórico de passagens associadas
 
+## Erros comuns
+
+| Erro | Causa | Solução |
+|------|-------|---------|
+| Local não aparece no mapa | Sem coordenadas | Informar lat/lon |
+| Faixa não aparece no local | Faixa não vinculada | Criar faixa e vincular |
+| Passagens no local errado | Equipamento vinculado errado | Verificar vínculo faixa-equip. |
+
 ## Relacionado
 
 - [Faixas](./faixas)

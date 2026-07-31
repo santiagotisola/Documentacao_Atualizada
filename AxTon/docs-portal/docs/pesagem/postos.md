@@ -53,11 +53,14 @@ Após criar o posto, cadastre os **Equipamentos** vinculados em Cadastros Básic
 - [Equipamentos](../cadastros-basicos/equipamentos)
 - [Contratos](../medicoes/contratos)
 - [Grupos de Equipamentos](../cadastros-basicos/grupos-equipamentos)
-Após criar o posto, cadastre os **Equipamentos** vinculados em Cadastros Básicos → Equipamentos.
-:::
-| **Ações** | Editar, visualizar |
 
-### Filtros disponíveis
+## Erros comuns
+
+| Erro | Causa | Solução |
+|------|-------|---------|
+| Pesagens não ap. no posto | Contrato não vinculado | Associar contrato ao posto |
+| Posto inativo cont. dados | Equipamentos ativos | Inativar todos os equipamentos |
+
 
 - Pesquisa por nome ou código
 - Filtro por status (Ativo/Inativo)

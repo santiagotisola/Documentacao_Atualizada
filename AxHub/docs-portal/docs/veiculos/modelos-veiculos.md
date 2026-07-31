@@ -52,10 +52,12 @@ Use a barra de busca para localizar um modelo existente antes de cadastrar um no
 |------|-------|----------|
 | Modelo duplicado | Cadastrado 2x | Inativar duplicata |
 | Modelo sem marca | Criação sem vínculo | Selecionar marca corretamente |
+| Modelo desatualizado | Versão antiga no banco | Inativar e cadastrar versão atual |
 
 ## Relacionado
 
 - [Marcas de Veículos](./marcas-veiculos)
+- [Classificações de Veículos](./classificacoes-veiculos)
 - [Tipos de Veículos](./tipos-veiculos)
 
 

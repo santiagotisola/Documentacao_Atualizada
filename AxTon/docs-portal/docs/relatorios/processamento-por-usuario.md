@@ -48,6 +48,13 @@ Alta taxa de descarte em um usuário pode indicar necessidade de treinamento. Ba
 | Infrações/hora | 80-120 | <40 ou >150 |
 | Tempo médio | 15-45s | >60s |
 
+## Erros comuns
+
+| Erro | Causa | Solução |
+|------|-------|----------|
+| Usuário não aparece | Sem registros no período | Ampliar o período |
+| Métricas zeradas | Triagem não registrada | Verificar configuração de posto |
+
 ## Relacionado
 
 - [Triagem](../glossario/triagem)
