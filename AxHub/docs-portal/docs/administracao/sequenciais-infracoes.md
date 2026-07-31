@@ -90,6 +90,14 @@ está tela ainda não possui screenshot cadastrada. Será adicionada em breve.
 | Relacionado | [Triagem](../infracoes/triagem) | Sequencial atribuido |
 | Relacionado | [Consulta de Infracoes](../infracoes/consulta-infracoes) | Buscar por sequencial |
 
+## Erros comuns
+
+| Erro | Causa | Solução |
+|------|-------|----------|
+| Sequencial duplicado atribuído | Campo "Próximo número" editado manualmente de forma incorreta | Nunca editar manualmente; investigar e corrigir com suporte técnico |
+| Série esgotada bloqueando triagem | Número máximo atingido sem nova série criada | Criar nova série com numeração acordada com o órgão autuador |
+| Infração sem número sequencial | Série inativa no momento da triagem | Ativar uma série válida antes de retomar a triagem |
+
 ## Perguntas frequentes
 
 **O sistema pode atribuir sequenciais duplicados automaticamente?**

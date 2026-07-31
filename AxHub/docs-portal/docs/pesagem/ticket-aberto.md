@@ -99,6 +99,14 @@ Use os filtros de **posto** e **período** para localizar tickets específicos r
 - [ ] Comunicar supervisor em tickets com retenção superior a 24 horas
 | Acao | [Liberar Pesagem](./liberar-pesagem) | Liberar ticket |
 
+## Erros comuns
+
+| Erro | Causa | Solução |
+|------|-------|----------|
+| Ticket não aparece na lista | Posto diferente do filtro selecionado | Verificar o filtro de posto e ajustar para o local correto |
+| Classificação incorreta no ticket | Tipo de veículo não reconhecido pelo sistema | Usar **Reclassificar** antes de liberar o ticket |
+| Ticket em aberto há mais de 4h | Atraso no atendimento ou esquecimento | Comunicar supervisor; verificar obrigações legais de alimentação ao motorista |
+
 ## Perguntas frequentes
 
 **Por quanto tempo um ticket pode permanecer em aberto?**

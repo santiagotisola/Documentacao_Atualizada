@@ -75,11 +75,15 @@ Cadastro de motivos utilizados no encerramento dos tickets de pesagem. Acessado 
 | Relacionado | [Posto Pesagem](../pesagem/postos) | Cadastro de postos |
 | Relacionado | [Motivos](../pesagem/motivos) | Motivos de encerramento |
 
-## Integração com outros módulos
+## Erros comuns
 
-| Módulo | Como usa este cadastro |
-|--------|----------------------|
-| **Operações** | Cada ticket de pesagem está vinculado a uma operação ativa; sem operação, tickets não são gerados |
+| Erro | Causa | Solução |
+|------|-------|----------|
+| Ticket sem classificação de veículo | Tipo de veículo não reconhecido automaticamente | Usar **Reclassificar** antes de liberar o ticket |
+| Excesso de peso sem infração gerada | Operação de balança não vinculada | Verificar vínculo da operação e posto no cadastro |
+| Ticket não aparece na triagem | Filtro de posto incorreto | Ajustar filtro para o posto correspondente ao turno |
+
+## Integração com outros módulos; sem operação, tickets não são gerados |
 | **Relatório de Passagens** | Tickets fechados alimentam o relatório de passagens com os dados da pesagem |
 | **Medições** | O volume de pesagens por posto é contabilizado nos boletins de medição do contrato |
 | **Infrações** | Tickets com excesso de peso geram infrações que seguem o fluxo normal de triagem e exportação |

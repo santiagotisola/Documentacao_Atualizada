@@ -531,3 +531,22 @@ Para forçar atualização imediata:
 | **[Infrações — Triagem](../infracoes/triagem)** | O indicador de infrações pendentes reflete diretamente o volume aguardando triagem; a equipe usa o Dashboard para priorizar o trabalho |
 | **[Aferíções](../operacoes/afericoes)** | O painel de Alertas de Aferíção exibe certificados INMETRO vencendo ou vencidos; equipamentos vencidos não geram infrações válidas |
 | **[Grupos de Equipamentos](../cadastros-basicos/grupos-equipamentos)** | Grupos de equipamentos definem as cores e filtros do painel sinótico e do mapa no Dashboard |
+
+## Erros comuns
+
+| Erro | Causa | Solução |
+|------|-------|----------|
+| KPIs do Dashboard zerados | Nenhum equipamento online ou dados do dia ainda não processados | Verificar status dos equipamentos no Monitoramento Online |
+| Mapa sem equipamentos | Coordenadas geográficas não cadastradas | Editar o cadastro do equipamento e informar latitude/longitude |
+| Alerta de aferíção não exibido | Tipo de aferíção sem prazo configurado | Configurar prazo de validade no tipo de aferíção |
+
+## Perguntas frequentes
+
+**Os KPIs do Dashboard são atualizados em tempo real?**
+Sim. Os indicadores de status de equipamentos e alertas são atualizados em tempo real. Os KPIs de infrações e passagens são agregados diários.
+
+**Como personalizar quais equipamentos aparecem no mapa do Dashboard?**
+Use os filtros de Grupo de Equipamentos para exibir apenas os grupos relevantes. Configure os grupos em **Cadastros Básicos → Grupos de Equipamentos**.
+
+**O painel sinótico não exibe as cores corretas dos equipamentos. O que verificar?**
+As cores são definidas pelos Grupos de Equipamentos. Verifique a configuração de cor em **Cadastros Básicos → Grupos de Equipamentos** e confirme que os equipamentos estão vinculados ao grupo correto.

@@ -105,6 +105,14 @@ Tipos de ocorrência vinculados a alertas ou veículos existentes **não podem s
 - [Vigência dos Alertas](./vigencia-alertas)
 - [Ocorrências e Alertas](../relatorios/ocorrencias-alertas)
 
+## Erros comuns
+
+| Erro | Causa | Solução |
+|------|-------|----------|
+| Tipo de ocorrência não aparece ao criar alerta | Tipo inativo | Ativar o tipo no cadastro de Tipos de Ocorrências |
+| Alerta sonoro não disparado | Permissão de áudio bloqueada no navegador | Habilitar permissão de som para o domínio |
+| Expiração de alerta incorreta | Prazo de expiração não configurado no tipo | Definir o prazo de expiração no cadastro do tipo |
+
 ## Perguntas frequentes
 
 **Posso excluir um tipo de ocorrência que não é mais utilizado?**

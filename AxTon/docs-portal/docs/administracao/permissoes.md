@@ -82,6 +82,14 @@ Para operadores de cancela/portaria, configure o perfil **Porteiro** com acesso 
 - **Tickets**: grid.view
 :::
 
+## Erros comuns
+
+| Erro | Causa | Solução |
+|------|-------|---------|
+| Usuário não acessa módulo | Permissão de visualização não atribuída | Adicionar a permissão `{modulo}.view` ao perfil |
+| Permissão atribuída mas módulo não aparece | Cache de sessão desatualizado | Fazer logout e login novamente |
+| Acesso concedido indevidamente | Permissões copiadas de perfil errado | Revisar e revogar permissões desnecessárias |
+
 ## Perguntas frequentes
 
 **As alterações de permissão entram em vigor imediatamente?**

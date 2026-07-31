@@ -529,3 +529,22 @@ Acesso mínimo para visualização sem alterações.
 | **[Usuários](./usuarios)** | As permissões são atribuídas aos usuários via perfil; alterações de permissão afetam imediatamente todos os usuários do perfil |
 | **[Logs de Acesso](./logs-acesso)** | Ações realizadas com cada permissão ficam registradas nos logs de acesso para auditoria |
 | **[Fabricantes](../cadastros-basicos/fabricantes)** | A permissão `fabricante.generatetoken` controla quem pode gerar tokens de integração para os fabricantes de equipamentos |
+
+## Erros comuns
+
+| Erro | Causa | Solução |
+|------|-------|----------|
+| Usuário não acessa o módulo esperado | Permissão `{modulo}.view` não atribuída | Adicionar a permissão correta ao perfil no Controle de Acesso |
+| Perfil com muitas permissões por engano | Permissões copiadas de perfil errado | Revisar e revogar permissões desnecessarias |
+| Permissão atribuída mas módulo não aparece | Cache de sessão desatualizado | Fazer logout e login novamente |
+
+## Perguntas frequentes
+
+**Posso criar permissões personalizadas além das disponíveis no sistema?**
+Não. As permissões são definidas pela aplicação e não podem ser customizadas. Solicite ao suporte Axion caso precise de acesso a funcionalidade não listada.
+
+**Como saber quais permissões um usuário tem atualmente?**
+Acesse **Controle de Acesso → Perfis de Acesso**, localize o perfil do usuário e visualize a lista de permissões do perfil. Cada usuário herda as permissões do perfil ao qual está vinculado.
+
+**Existe uma permissão para exportar dados do sistema?**
+Sim. Cada módulo possui sua própria permissão de exportação (ex.: `infraction.export`). Verifique a lista completa de permissões e atribua somente as necessárias ao perfil.

@@ -99,6 +99,14 @@ Arcos permitem exportar dados de múltiplas faixas/equipamentos de uma mesma loc
 | **Relatório de Passagens** | Permite filtrar dados por arco, exibindo o volume total de passagens da travessia |
 | **Monitoramento Online** | Exibe o status de todos os equipamentos de um arco em um único painel |
 
+## Erros comuns
+
+| Erro | Causa | Solução |
+|------|-------|----------|
+| Equipamento aparece em dois arcos | Vínculo duplicado no cadastro | Remover o vínculo incorreto em um dos arcos |
+| Arco não aparece nos relatórios | Operação não vinculada ao arco | Vincular a operação ao arco nas configurações |
+| Faixa sem associação ao arco | Equipamento não cadastrado no arco | Incluir o equipamento no arco correto |
+
 ## Perguntas frequentes
 
 **Um equipamento pode pertencer a dois arcos ao mesmo tempo?**

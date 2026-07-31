@@ -93,6 +93,14 @@ Fabricante → Modelo → Equipamento cadastrado no posto
 Modelos dependem de Fabricante e Tipo previamente cadastrados.
 :::
 
+## Erros comuns
+
+| Erro | Causa | Solução |
+|------|-------|----------|
+| Modelo não aparece para vincular ao equipamento | Modelo inativo ou fabricante diferente | Verificar se o modelo está ativo e vinculado ao fabricante correto |
+| Não é possível salvar o equipamento | Modelo não cadastrado previamente | Cadastrar o modelo antes de criar o equipamento |
+| Portaria INMETRO desatualizada no modelo | Certif. renovado sem atualizar o cadastro | Editar o modelo e atualizar a portaria INMETRO |
+
 ## Perguntas frequentes
 
 **Preciso cadastrar todos os modelos antes de iniciar as operações?**

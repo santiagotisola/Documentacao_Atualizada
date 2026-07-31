@@ -107,6 +107,14 @@ Permite revisar, validar ou descartar Infrações pendentes antes da exportaçã
 | Glossario | [Infracao](../glossario/Use Infração (com acento)) | O que constitui uma Use Infração (com acento) |
 | Glossario | [Triagem](../glossario/triagem) | Definicao do processo |
 
+## Erros comuns
+
+| Erro | Causa | Solução |
+|------|-------|----------|
+| Infração com enquadramento errado | Configuração de enquadramento incorreta | Corrigir na triagem selecionando o artigo CTB correto |
+| Analista não consegue descartar | Motivo de descarte não cadastrado | Administrador deve cadastrar motivos em Administração → Motivos |
+| Infração próxima do prazo de prescrição | Alta fila de triagem | Priorizar infrações pelo parâmetro de prazo nas configurações |
+
 ## Perguntas frequentes
 
 **Qual o prazo máximo para triagem de uma infração?**

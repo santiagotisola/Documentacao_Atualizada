@@ -107,6 +107,14 @@ está tela ainda não possui screenshot cadastrada. Será adicionada em breve.
 | **Processamento por Usuário** | Cruza motivos de descarte com o analista responsável para avaliar consistência na triagem |
 | **Dashboard** | Exibe o ranking dos Top Motivos de Descarte como indicador de qualidade operacional |
 
+## Erros comuns
+
+| Erro | Causa | Solução |
+|------|-------|----------|
+| Triagem bloqueada sem motivos de descarte | Nenhum motivo ativo cadastrado | Cadastrar ao menos um motivo de descarte ativo |
+| Alta taxa de descarte por motivo genérico | Motivos pouco descritivos na lista | Criar motivos específicos e desativar genéricos |
+| Motivo não aparece para o analista | Motivo inativo | Ativar o motivo nas configurações de Administração |
+
 ## Perguntas frequentes
 
 **Posso excluir um motivo que não é mais utilizado?**

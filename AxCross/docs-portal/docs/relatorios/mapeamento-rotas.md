@@ -135,3 +135,11 @@ Combine o Mapeamento de Rotas com o **Rastreamento de Placas** para uma Análise
 | Mapa sem marcadores | Placa sem passagens no período selecionado | Ampliar o período ou verificar a grafia da placa |
 | Rota desconectínua (pontos isolados) | Equipamentos com lacunas de cobertura geográfica | Compreensivo — a rede de câmeras não cobre 100% das vias |
 | Período acima de 30 dias com lentidão | Volume alto de registros | Dividir a consulta em intervalos menores de até 15 dias |
+
+## Integração com outros módulos
+
+| Módulo | Como se relaciona |
+|--------|------------------|
+| **[Rastreamento de Placas](./rastreamento-placas)** | Complementa com histórico de passagens da placa; o mapeamento visualiza espacialmente a trajetória |
+| **[Relatório de Passagens](./relatorio-passagens)** | Fornece os dados de passagens usados para traçar a rota no mapa |
+| **[Monitoramento Online](../operacoes/monitoramento-online)** | O mapeamento é histórico; o monitoramento online exibe passagens em tempo real |

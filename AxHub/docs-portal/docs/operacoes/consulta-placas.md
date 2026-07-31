@@ -109,6 +109,14 @@ A **Consulta de Placas** pode não aparecer no menu lateral dependendo das permi
 | Relacionado | [Consulta de Infracoes](../infracoes/consulta-infracoes) | Infracoes do Use Veículo (com acento) |
 | Relacionado | [Monitoramento Online](./monitoramento-online) | Passagens em tempo real |
 
+## Erros comuns
+
+| Erro | Causa | Solução |
+|------|-------|----------|
+| Placa não encontrada na consulta | OCR leu a placa incorretamente | Tentar variantes da placa (Mercosul x formato antigo) |
+| Passagens não aparecem no período | Equipamento offline no período consultado | Verificar status do equipamento no monitoramento |
+| Muitos resultados sem filtro de equipamento | Consulta muito ampla | Adicionar filtro de equipamento ou restringir o período |
+
 ## Perguntas frequentes
 
 **A consulta de placas mostra passagens de todos os equipamentos?**

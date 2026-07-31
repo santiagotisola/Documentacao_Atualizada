@@ -91,6 +91,22 @@ Sim. A cada passagem registrada o sistema consulta automaticamente o WS externo.
 Sim. Seguem o fluxo padrão: triagem → auditoria → lote de exportação, como qualquer outra infração do sistema.
 - [Triagem](../infracoes/triagem)
 
+## Erros comuns
+
+| Erro | Causa | Solução |
+|------|-------|----------|
+| Veículo sempre com status `NãoEncontrado` | Placa divergente ou banco desatualizado | Verificar placa com a documentação do veículo e acionar suporte |
+| Muitos erros de conectividade | Falha na integração de rede com o WS externo | Verificar configurações de rede e firewall para o endpoint do WS |
+| Status `Irregular` mesmo com jornada normal | Data de atualização do banco desatualizada | Contatar suporte técnico para atualizar o banco de certificados |
+
+## Integração com outros módulos
+
+| Módulo | Como se relaciona |
+|--------|------------------|
+| **[Triagem de Cronotacógrafo](./triagem)** | Esta tela exibe o histórico processado pela triagem; as alterações são feitas na tela de triagem |
+| **[Infrações — Consulta](../infracoes/consulta-infracoes)** | Infrações de cronotacógrafo geradas aparecem também na consulta geral de infrações |
+| **[Glossarío — Cronotacógrafo](../glossario/cronotacografo)** | Define os conceitos técnicos e legais do dispositivo verificado nesta tela |
+
 ## Status do Cronotacógrafo
 
 | Status | Significado |

@@ -118,3 +118,11 @@ Verifique se o token foi salvo corretamente em Configurações → Webhooks e se
 
 **Os logs de envios são retidos por quanto tempo?**
 A retenção depende da política de armazenamento do servidor. Exporte mensalmente para arquivo externo como evidência de conformidade com o órgão contratante.
+
+## Integração com outros módulos
+
+| Módulo | Como se relaciona |
+|--------|------------------|
+| **[Exportação de Infrações](../infracoes/exportacao)** | Cada exportação gera registros de envio que ficam disponíveis neste relatório para rastreabilidade |
+| **[Webhooks](../administracao/webhooks)** | Falhas em webhooks são registradas nos logs de envios para diagnóstico de conectividade |
+| **[Configurações do Sistema](../administracao/configuracoes-sistema)** | As URLs e credenciais dos destinos de exportação são configuradas nas Configurações do Sistema |

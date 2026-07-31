@@ -115,3 +115,12 @@ O ticket permanece em aberto até encerramento manual. Tickets acumulados de tur
 
 **Pesagens com peso dentro do limite sempre resultam em ticket regular?**
 Sim. Tickets com PBT dentro do limite são encerrados como Regulares. Somente excessos de peso geram infrações.
+
+## Integração com outros módulos
+
+| Módulo | Como se relaciona |
+|--------|------------------|
+| **[Postos de Pesagem](../pesagem/postos)** | O módulo de balança opera em conjunto com os postos de pesagem cadastrados |
+| **[Tickets Abertos](../pesagem/ticket-aberto)** | Cada ciclo de pesagem gera um ticket aberto que aguarda liberação pelo operador |
+| **[Tickets Fechados](../pesagem/ticket-fechado)** | Após a liberação, o ticket migra para o histórico de tickets fechados |
+| **[Infrações — Triagem](../infracoes/triagem)** | Excesso de peso detectado pela balança gera infração que segue o fluxo normal de triagem e exportação |

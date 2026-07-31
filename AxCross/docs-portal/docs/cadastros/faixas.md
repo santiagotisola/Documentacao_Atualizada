@@ -83,6 +83,14 @@ O código da faixa deve ser exatamente igual ao configurado no equipamento físi
 Para cadastrar uma faixa, é necessário que o local e o Equipamento já estejam cadastrados.
 :::
 
+## Erros comuns
+
+| Erro | Causa | Solução |
+|------|-------|----------|
+| Faixa não captura passagens | Sem equipamento vinculado ou equipamento offline | Verificar o vínculo do equipamento e o status de conexão |
+| Alerta de velocidade não gerado | Velocidade máxima não preenchida na faixa | Editar a faixa e informar a velocidade máxima permitida |
+| Faixa não aparece nos relatórios | Local ou equipamento não cadastrado | Verificar dependências antes de criar a faixa |
+
 ## Perguntas frequentes
 
 **Posso ter uma faixa sem equipamento vinculado?**

@@ -105,3 +105,12 @@ Sim. Configure o webhook apontando para uma URL de teste (ex.: webhook.site) e g
 
 **O segredo HMAC é obrigatório?**
 Não obrigatório, mas altamente recomendado. Sem o HMAC, o sistema receptor não consegue verificar a autenticidade das notificações recebidas.
+
+## Integração com outros módulos
+
+| Módulo | Como se relaciona |
+|--------|------------------|
+| **[Configurações do Sistema](./configuracoes-sistema)** | As credenciais e URLs base dos webhooks são configuradas nas Configurações do Sistema |
+| **[Exportação de Infrações](../infracoes/exportacao)** | Webhooks podem ser acionados após cada exportação para notificar sistemas externos |
+| **[Logs de Envios](../relatorios/relatorio-logs-envios)** | Falhas nos webhooks são registradas nos logs de envios para diagnóstico |
+| **[Monitoramento Online](../operacoes/monitoramento-online)** | Eventos de equipamentos podem disparar webhooks configurados para notificações em tempo real |

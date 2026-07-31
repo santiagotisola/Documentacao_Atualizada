@@ -103,6 +103,14 @@ Exceções ativas descartam Infrações automaticamente durante a importação. 
 | Proxima etapa | [Auditoria](./auditoria) | Revisao pos-excecao |
 | Glossario | [Enquadramento](../glossario/enquadramento) | Classificacao legal |
 
+## Erros comuns
+
+| Erro | Causa | Solução |
+|------|-------|----------|
+| Veículo isento continua gerando infrações | Regra de exceção inativa ou vencida | Verificar **Data Fim** e status da regra de exceção |
+| Infração descartada por exceção indevidamente | Placa com formato diferente (Mercosul/antigo) | Cadastrar ambos os formatos da placa na regra |
+| Regra não aplica na triagem | Exceção configurada após a importação das infrações | Regras só se aplicam a infrações importadas após a criação da regra |
+
 ## Perguntas frequentes
 
 **Que tipo de veículo pode ser configurado como exceção?**

@@ -109,10 +109,25 @@ Responda alertas de equipamento offline antes de qualquer outro. Um equipamento 
 Os alertas recentes também são exibidos no Use Dashboard Principal Dashboard para ação imediata.
 :::
 
-## Integração com outros módulos
+## Erros comuns
 
-| Módulo | Como se relaciona |
-|--------|------------------|
-| **Monitoramento Online** | Os alertas gerados são exibidos em tempo real no painel de monitoramento do posto |
+| Erro | Causa | Solução |
+|------|-------|----------|
+| Alerta não exibido no monitoramento | Veículo não cadastrado na lista de monitorados | Verificar a lista de Veículos Monitorados e cadastrar a placa |
+| Alerta gerado para veículo não monitorado | Regra de alerta muito ampla | Revisar as configurações de alerta e restringir os critérios |
+| Alerta sem notificação sonora | Permissão de áudio bloqueada no navegador | Habilitar som nas configurações do navegador para o domínio |
+
+## Perguntas frequentes
+
+**Existe limite de alertas que o sistema pode gerar simultaneamente?**
+Não há limite técnico, mas é recomendável configurar apenas alertas relevantes para a operação para evitar sobrecarga visual no monitoramento.
+
+**Os alertas são registrados mesmo quando o operador não está online?**
+Sim. Todos os alertas gerados ficam no histórico mesmo sem operação ativa, pois o sistema continua monitorando em segundo plano.
+
+**Como resolver um alerta gerado incorretamente?**
+Acesse o detalhe do alerta, use a opção **Desconsiderar** com justificativa. Alertas desconsiderados permanecem no histórico mas são marcados como não relevantes.
+
+## Integração com outros módulos
 | **Consulta de Placas** | A consulta de placas identifica veículos com histórico de alertas anteriores |
 | **Relatório de Infrações** | Alertas de excesso de peso resultam em infrações registradas e rastreadas nos relatórios |

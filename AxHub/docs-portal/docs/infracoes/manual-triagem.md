@@ -376,3 +376,22 @@ Após validar uma Infração ela segue automaticamente para:
 | **[Enquadramentos](../administracao/enquadramentos)** | O analista consulta os enquadramentos durante a triagem para confirmar se o artigo CTB aplicado está correto |
 | **[Motivos de Descarte](../administracao/motivos-descartes)** | Os motivos de descarte disponíveis são gerenciados pelo administrador; o analista deve selecionar o motivo correto em cada descarte |
 | **[Processamento por Usuário](../relatorios/processamento-por-usuario)** | O desempenho do analista na triagem é mensurado neste relatório e usado para gestão da equipe |
+
+## Erros comuns
+
+| Erro | Causa | Solução |
+|------|-------|----------|
+| Analista não consegue acessar a triagem | Permissão de triagem não concedida ao perfil | Administrador deve revisar as permissões em Controle de Acesso |
+| Infração não exibe imagem ampliada | Arquivo de imagem ausente ou corrompido | Verificar o armazenamento do servidor e acionar suporte técnico |
+| Enquadramento incorreto sugerido | OCR leu a velocidade incorretamente | Corrigir manualmente na triagem e revisar configuração do equipamento |
+
+## Perguntas frequentes
+
+**Quantas imagens devo verificar por infração na triagem manual?**
+Verifique ao menos a imagem frontal (placa), a imagem de velocidade e a imagem panorâmica. Confirme que a placa lida pelo OCR corresponde à placa visível na imagem.
+
+**Posso alterar o enquadramento durante a triagem?**
+Sim. Use o campo **Enquadramento** na tela de triagem para selecionar o artigo CTB correto antes de validar.
+
+**O que fazer quando a placa lida pelo OCR está incorreta?**
+Edite a placa manualmente na tela de triagem, documente a correção e valide com a imagem original antes de salvar.

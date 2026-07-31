@@ -109,6 +109,14 @@ Registre toda interrupção logo que ocorrer. Interrupções não registradas se
 - Descreva a causa e as ações tomadas com detalhes suficientes para embasar discussões contratuais
 - Registre a **Data/Hora Fim** assim que o equipamento voltar a operar para calcular a duração com precisão
 
+## Erros comuns
+
+| Erro | Causa | Solução |
+|------|-------|----------|
+| Interrupção não impacta a disponibilidade | Data/Hora Fim não registrada | Preencher o campo de encerramento assim que o equipamento voltar |
+| Tipo de interrupção incorreto afeta SLA | Corretiva cadastrada como Preventiva | Corrigir o tipo e justificar a alteração para a auditoria contratual |
+| Interrupção não aparece no boletim | Registrada após a geração da medição | Registrar retroativamente antes de gerar a medição |
+
 ## Perguntas frequentes
 
 **O que acontece com a disponibilidade se eu não registrar uma interrupção?**

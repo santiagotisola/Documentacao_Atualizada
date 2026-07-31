@@ -97,6 +97,14 @@ A retenção do veículo é obrigatória quando o excesso impede continúar a vi
 - [Infração](./infracao) — Gerada quando PBT é excedido
 - [MDF-e](./mdfe) — Documento que informa a carga transportada
 
+## Erros comuns
+
+| Erro | Causa | Solução |
+|------|-------|----------|
+| Infração gerada para veículo dentro do limite | Classificação incorreta selecionada na pesagem | Usar a função Reclassificar para corrigir |
+| PBT máximo incorreto para a classificação | Valor desatualizado no cadastro | Revisar a legislação vigente e atualizar o PBT no cadastro de Classificações |
+| Veículo com AEP não reconhecido | Autorização não cadastrada no sistema | Cadastrar a exceção ou AEP antes de realizar a pesagem |
+
 ## Perguntas frequentes
 
 **O PBT inclui o peso da cabine do motorista?**

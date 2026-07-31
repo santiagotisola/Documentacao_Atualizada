@@ -73,6 +73,14 @@ Ao clicar em **Relatórios**, os 10 tipos disponíveis são listados:
 Use o **breadcrumb** no topo da página para identificar rapidamente em qual módulo você está e navegar para níveis anteriores sem usar o botão Voltar do navegador.
 :::
 
+## Erros comuns
+
+| Erro | Causa | Solução |
+|------|-------|---------|
+| Módulo não aparece no menu lateral | Perfil sem permissão para o módulo | Solicitar ao administrador a revisão das permissões |
+| Menu lateral recolhido automaticamente | Tela menor que 1024px | Expandir a janela do navegador ou usar o ícone hamburguer |
+| Erro ao navegar para uma página | Sessão expirada | Fazer login novamente e retornar ao módulo desejado |
+
 ## Perguntas frequentes
 
 **Por que alguns itens do menu lateral não aparecem para mim?**

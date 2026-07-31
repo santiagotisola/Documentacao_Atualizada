@@ -51,6 +51,14 @@ Use este relatório para monitorar quedas abruptas no fluxo — que podem indica
 
 Disponível em **Excel** para Análise em planilhas externas ou inclusão em Relatórios contratuais.
 
+## Erros comuns
+
+| Erro | Causa | Solução |
+|------|-------|----------|
+| Dias sem dados no relatório | Equipamento offline no período | Verificar Relatório de Eventos de Equipamentos |
+| Aproveitamento OCR abaixo de 85% | Câmera suja, desalinhada ou com defeito | Acionar manutenção técnica imediata |
+| Dados de apenas um equipamento exibidos | Filtro de equipamento aplicado | Remover o filtro para exibir todos os equipamentos |
+
 ## Perguntas frequentes
 
 **Por que alguns dias não têm dados?**

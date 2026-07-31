@@ -119,6 +119,14 @@ Um enquadramento mal configurado resulta em infrações com artigo CTB incorreto
 | **Glossário — Enquadramento** | Explica o conceito legal por trás das configurações |
 | Glossario | [Enquadramento](../glossario/enquadramento) | Definicao CTB |
 
+## Erros comuns
+
+| Erro | Causa | Solução |
+|------|-------|----------|
+| Artigo CTB incorreto na infração | Enquadramento com código errado | Corrigir o código CTB no cadastro e revisar infrações do período |
+| Enquadramento não aplica à operação | Operação sem enquadramento vinculado | Vincular o enquadramento à operação nas configurações |
+| Velocidade máxima errada na infração | Campo velocidade incorreto no cadastro | Verificar e corrigir o valor de velocidade máxima |
+
 ## Perguntas frequentes
 
 **Posso usar o mesmo enquadramento em várias operações?**

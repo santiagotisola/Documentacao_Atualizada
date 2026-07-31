@@ -96,6 +96,14 @@ Infrações descartadas por **exceção automática** também aparecem com statu
 | Relacionado | [Exceções](./excecoes) | Regras de descarte automático |
 | Configuracao | [Motivos de Descarte](../administracao/motivos-descartes) | Lista de motivos disponíveis |
 
+## Erros comuns
+
+| Erro | Causa | Solução |
+|------|-------|----------|
+| Infração descartada incorretamente | Analista selecionou motivo errado | Reverter o descarte e retriar com o motivo correto |
+| Não é possível reverter o descarte | Infração já exportada | Descarte exportado é definitivo; documentar a ocorrência |
+| Alta taxa de descarte em um equipamento | Câmera suja, desalinhada ou com defeito | Verificar logs do equipamento e acionar manutenção preventiva |
+
 ## Perguntas frequentes
 
 **É possível reverter uma infração descartada?**

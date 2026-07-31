@@ -91,7 +91,13 @@ está tela ainda não possui screenshot cadastrada. Será adicionada em breve.
 | **Equipamentos** | O sistema monitora o vencimento com base no tipo e na data do último registro de aferição do equipamento |
 | **Tarjas** | A data de aferição e o certificado exibidos na tarja vêm do último registro de aferição vinculado ao tipo correto |
 | **Monitoramento Online** | Exibe alerta de aferição vencida quando o prazo do tipo cadastrado é ultrapassado |
+## Erros comuns
 
+| Erro | Causa | Solução |
+|------|-------|----------|
+| Aferíção não aparece para registro | Tipo de aferíção inativo | Ativar o tipo de aferíção nas configurações |
+| Alerta de vencimento não gerado | Prazo de validade não configurado no tipo | Definir a validade em dias no cadastro do tipo |
+| Equipamento com certif. vencido gera infrações | Tipo incorreto selecionado no último registro | Corrigir o tipo de aferíção no registro e atualizar a data |
 ## Perguntas frequentes
 
 **Quantos tipos de aferição devo cadastrar?**

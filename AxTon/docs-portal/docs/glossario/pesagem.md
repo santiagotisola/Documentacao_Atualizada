@@ -113,6 +113,14 @@ A balança dinâmica é usada para triagem rápida. Veículos que ultrapassam o 
 - [PBT](./pbt) — Peso Bruto Total
 - [Infração](./infracao) — Resultado de excesso
 
+## Erros comuns
+
+| Erro | Causa | Solução |
+|------|-------|----------|
+| Infração gerada com peso abaixo do limite | Tolerância não configurada corretamente | Revisar o parâmetro de tolerância nas Configurações do Sistema |
+| Balança não conecta ao sistema | URL ou porta da balança HAENNI incorreta | Verificar as configurações na aba **HAENNI** do Sistema |
+| Peso registrado incorretamente | Balança com certif. vencido | Verificar a data de aferíção e acionar renovação do certificado |
+
 ## Perguntas frequentes
 
 **Qual a diferença entre balança estática e dinâmica?**

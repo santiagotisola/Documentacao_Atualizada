@@ -94,3 +94,11 @@ Passagens sem imagem indicam que houve falha de armazenamento no momento da capt
 
 **A qualidade de leitura OCR da placa impacta a geração de alertas?**
 Sim. Se o OCR não conseguir ler a placa corretamente, a passagem é registrada sem a placa real, e nenhum alerta é gerado mesmo que o veículo estivesse monitorado. Por isso, manter a taxa OCR acima de 90% é essencial para a eficácia operacional do sistema.
+
+## Integração com outros módulos
+
+| Módulo | Como se relaciona |
+|--------|------------------|
+| **[Relatório de Passagens](../relatorios/relatorio-passagens)** | Exibe o histórico de todas as passagens registradas no período |
+| **[Monitoramento Online](../operacoes/monitoramento-online)** | Exibe as passagens em tempo real à medida que são capturadas pelos equipamentos |
+| **[Alertas](../operacoes/alertas)** | Passagens de veículos monitorados disparam alertas automaticamente ao serem registradas |

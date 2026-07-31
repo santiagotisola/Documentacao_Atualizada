@@ -85,6 +85,14 @@ Acesse **Cronotacógrafo → Consulta** para visualizar o histórico completo de
 | próximo | [Consulta](./consulta) | Consultar registros processados |
 | Glossario | [Cronotacografo](../glossario/cronotacografo) | Definicao tecnica e base legal |
 
+## Erros comuns
+
+| Erro | Causa | Solução |
+|------|-------|----------|
+| Status `NãoEncontrado` recorrente | Placa divergente ou banco de certif. desatualizado | Encaminhar para triagem manual e acionar suporte técnico |
+| Infração vence antes da triagem | Alta fila sem priorização | Revisar o parâmetro de prazo de triagem nas Configurações do Sistema |
+| Certif. válido mas status mostra Irregular | Data de atualização do banco defasada | Verificar data de atualização do banco de certif. com suporte |
+
 ## Perguntas frequentes
 
 **Qual o prazo para triar uma infração de cronotacógrafo?**

@@ -119,6 +119,14 @@ A alteração do PBT de uma classificação impacta diretamente o cálculo de In
 O valor do peso máximo deve estar em conformidade com a legislação vigente para cada categoria de Veículo Consulte a regulamentação do órgão responsável antes de cadastrar ou alterar esses valores.
 :::
 
+## Erros comuns
+
+| Erro | Causa | Solução |
+|------|-------|----------|
+| Infração gerada com PBT incorreto | Classificação errada selecionada na pesagem | Usar Reclassificar antes de liberar o ticket |
+| Classificação não aparece nas opções | Classificação inativa | Ativar a classificação no cadastro |
+| PBT máximo desatualizado | Legislação alterada sem atualizar o cadastro | Revisar os valores com base na regulamentação vigente |
+
 ## Perguntas frequentes
 
 **Posso alterar o PBT de uma classificação já em uso?**

@@ -198,3 +198,31 @@ Essa arquitetura permite adicionar novas Configurações sem alteração de sche
 | Relacionado | Relatórios Power BI](./relatorios-power-bi) | Configuracao de dashboards |
 | Relacionado | [Enquadramentos](./enquadramentos) | códigos de Use Infração (com acento) cadastrados |
 | Referência | [Consulta Automática de Veículos](../referencia-tecnica/consulta-automatica-veiculos) | Diagnóstico SERPRO |
+
+## Erros comuns
+
+| Erro | Causa | Solução |
+|------|-------|---------|
+| Consulta SERPRO retorna vazio | Consumer Key/Secret não configurados ou expirados | Revisar credenciais na **Aba Integrações** das Configurações do Sistema |
+| Relatório Power BI em branco | Application Id ou Secret incorretos | Verificar credenciais Power BI na aba correspondente |
+| Importação de dados recusada | Limite de horas de importação ultrapassado | Ajustar os campos **Limite de Horas** na **Aba Importação** |
+
+## Perguntas frequentes
+
+**Devo reiniciar o sistema após alterar as configurações?**
+Não é necessário reiniciar. A maioria das configurações é aplicada imediatamente. Exceção: alterações de certificado digital podem exigir reinicialização do serviço — consulte o suporte técnico.
+
+**O que acontece se os campos de integração SERPRO estiverem em branco?**
+A consulta automática de proprietário de veículo via SERPRO fica inativa. Os dados de proprietário não serão atualizados nas infrações enquanto as credenciais não forem configuradas.
+
+**Como testar se a integração com o Inmetro está funcionando?**
+Acesse a tela de Aferições, gere uma verificação manual e observe o retorno. Se retornar erro de autenticação, revise o **Client Id** e **Client Secret Inmetro** na Aba Integrações.
+
+## Integração com outros módulos
+
+| Módulo | Como se relaciona |
+|--------|------------------|
+| **[Webhooks](./webhooks)** | As URLs de destino dos webhooks são configuradas em conjunto com as integrações do sistema |
+| **[Relatórios Power BI](./relatorios-power-bi)** | As credenciais de autenticação Power BI são configuradas na aba **Power BI** das Configurações do Sistema |
+| **[Exportação de Infrações](../infracoes/exportacao)** | O tipo de integração para exportação e os limites de lote são definidos nas configurações |
+| **[Consulta Automática de Veículos](../referencia-tecnica/consulta-automatica-veiculos)** | As credenciais SERPRO necessárias para a consulta automática são configuradas na Aba Integrações |

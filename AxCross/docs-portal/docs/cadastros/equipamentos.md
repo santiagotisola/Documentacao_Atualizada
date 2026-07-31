@@ -138,6 +138,14 @@ Para **excluir grupo**: `equipmentgroup.delete`
 Para **remover equipamento do grupo**: `equipmentgroup.deleteequipmentfromequipmentgroup`
 :::
 
+## Erros comuns
+
+| Erro | Causa | Solução |
+|------|-------|---------|
+| Equipamento não captura passagens | Sem faixas ativas ou equipamento offline | Verificar faixas no cadastro e status de conexão de rede |
+| Coordenadas incorretas no mapa | Latitude/Longitude trocadas | Verificar e corrigir as coordenadas geográficas no cadastro |
+| Importação em lote falha | Formato do CSV incorreto ou campos obrigatórios ausentes | Verificar o modelo de CSV e preencher todos os campos obrigatórios |
+
 ## Perguntas frequentes
 
 **O que fazer quando um equipamento cadastrado não aparece nas passagens do monitoramento?**

@@ -107,6 +107,14 @@ Acesse **Relatórios → Ocorrências** no menu lateral. Consulte [Relatório de
 Use o Relatório de Ocorrências para consolidar tratativas realizadas durante operações de fiscalização e gerar evidências documentadas.
 :::
 
+## Erros comuns
+
+| Erro | Causa | Solução |
+|------|-------|----------|
+| Alerta não gerado para veículo monitorado | Placa não cadastrada em Veículos Monitorados | Verificar a lista de Veículos Monitorados e incluir a placa |
+| Alerta gerado incorretamente (falso positivo) | OCR leu a placa incorretamente | Verificar a qualidade das imagens e alinhar a câmera |
+| Notificação sonora não funciona | Permissão de áudio bloqueada no navegador | Habilitar som nas configurações do navegador para o domínio |
+
 ## Perguntas frequentes
 
 **Qual a diferença entre um alerta automático e uma ocorrência manual no AxCross?**

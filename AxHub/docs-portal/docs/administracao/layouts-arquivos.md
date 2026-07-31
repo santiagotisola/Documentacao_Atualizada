@@ -119,6 +119,14 @@ está tela ainda não possui screenshot cadastrada. Será adicionada em breve.
 | **Lotes de Importação** | Layouts de importação definem como os dados dos equipamentos são lidos pelo sistema |
 | **Webhooks** | Layouts JSON são usados em integrações via API com sistemas externos |
 
+## Erros comuns
+
+| Erro | Causa | Solução |
+|------|-------|----------|
+| Lote rejeitado por campo inválido | Mapeamento de campo incorreto no layout | Comparar layout com especificação técnica do órgão autuador |
+| Encoding incorreto no arquivo exportado | Layout com encoding diferente do esperado | Ajustar o encoding no cadastro do layout (ex.: UTF-8 vs ISO-8859-1) |
+| Separador errado nos campos | Delimitador não configurado corretamente | Corrigir o separador no layout conforme especificação do órgão |
+
 ## Perguntas frequentes
 
 **Posso alterar um layout de exportação já em uso?**

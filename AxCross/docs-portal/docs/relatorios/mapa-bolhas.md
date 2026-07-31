@@ -90,3 +90,11 @@ O equipamento não terá bolha se não houver irregularidades no período seleci
 **Qual a diferença entre o Mapa de Bolhas e o Mapa de Equipamentos do Dashboard?**
 O **Mapa de Equipamentos** no Dashboard mostra a localização de todos os equipamentos ativos com status de conexão. O **Mapa de Bolhas** mostra a concentração de **irregularidades** por equipamento em um período, sendo uma ferramenta analítica de priorização operacional.
 | Permissão negada ao acessar | Usuário sem `irregularitybubblemap.index` | Solicitar ao administrador a concessão da permissão |
+
+## Integração com outros módulos
+
+| Módulo | Como se relaciona |
+|--------|------------------|
+| **[Tipos de Ocorrências](../operacoes/tipos-ocorrencias)** | Os tipos de ocorrência são os filtros disponíveis no Mapa de Bolhas |
+| **[Relatório de Ocorrências](./ocorrencias-alertas)** | O mapa fornece visão espacial; o relatório detalha cada ocorrência individualmente |
+| **[Cadastros — Equipamentos](../cadastros/equipamentos)** | As coordenadas geográficas dos equipamentos são essenciais para exibir as bolhas no mapa |

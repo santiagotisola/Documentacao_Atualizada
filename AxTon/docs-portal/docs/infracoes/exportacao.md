@@ -129,3 +129,14 @@ Lotes com status **Error** devem ser analisados nos **Logs** antes de reenvio. N
 | **Cadastros → Sequencial de Infração** | Define a numeração dos autos incluídos no lote |
 | **Falhas Sequenciais** | Execute antes de exportar para verificar integridade da numeração |
 | **Relatório de Infrações** | Confirme o status **Auditada** de todas as infrações antes de gerar o lote |
+
+## Perguntas frequentes
+
+**Como verificar se todas as infrações estão prontas para exportar?**
+Acesse **Relatórios → Relatório de Infrações** e filtre por status **Auditada**. Todas as infrações com esse status podem ser incluídas no próximo lote de exportação.
+
+**O lote exportado pode ser reenviado em caso de erro de transmissão?**
+Sim. Acesse o histórico de lotes e reenvie o lote com o mesmo número sequencial. Não gere um novo lote com número diferente para o mesmo conteúdo.
+
+**O que acontece com as infrações após a exportação?**
+O status das infrações é atualizado para **Exportada**. Elas ficam acessíveis para consulta mas não podem ser alteradas.

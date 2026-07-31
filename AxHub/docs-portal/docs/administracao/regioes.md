@@ -103,6 +103,14 @@ está tela ainda não possui screenshot cadastrada. Será adicionada em breve.
 | Relacionado | [Operacoes](../operacoes/cadastro-operacoes) | Regiao da operacao |
 | Relacionado | [Equipamentos](../cadastros-basicos/equipamentos) | Equipamentos na regiao |
 
+## Erros comuns
+
+| Erro | Causa | Solução |
+|------|-------|----------|
+| Filtro por região retorna vazio | Equipamento não vinculado a nenhuma região | Editar o cadastro do equipamento e vincular à região correta |
+| Dados históricos com nome incorreto | Região renomeada após os registros | Considerar criar nova região para não afetar histórico |
+| Dashboard sem KPIs por região | Equipamentos sem região associada | Revisar e vincular todos os equipamentos a suas regiões |
+
 ## Perguntas frequentes
 
 **Posso vincular um equipamento a mais de uma região?**

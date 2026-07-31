@@ -90,6 +90,14 @@ Clique em **Visualizar** para ver os detalhes completos de um ticket:
 |---|---|
 | [**Tickets Fechados**](../pesagem/ticket-fechado) | Consulta de tickets de pesagem já finalizados |
 
+## Erros comuns
+
+| Erro | Causa | Solução |
+|------|-------|----------|
+| Balança não conecta ao ticket | URL ou porta da balança HAENNI incorreta | Verificar as configurações na aba **HAENNI** do Sistema |
+| Classificação incorreta no ticket | Tipo de veículo identificado erroneamente | Usar **Reclassificar** antes de finalizar o ticket |
+| Ticket em aberto sem finalização | Operador esqueceu de encerrar | Verificar tickets em andamento e finalizar com o motivo correto |
+
 ## Perguntas frequentes
 
 **O que fazer quando a balança não está conectada e o ticket fica em andamento indefinidamente?**

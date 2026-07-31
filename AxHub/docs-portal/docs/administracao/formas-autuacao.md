@@ -107,6 +107,14 @@ está tela ainda não possui screenshot cadastrada. Será adicionada em breve.
 | Relacionado | [Exportacao](../infracoes/exportacao) | Exportacao com forma |
 | Glossario | [Autuacao](../glossario/autuacao) | Definicao CTB |
 
+## Erros comuns
+
+| Erro | Causa | Solução |
+|------|-------|----------|
+| Lote rejeitado por código de forma inválido | Código não corresponde ao esperado pelo órgão | Confirmar códigos aceitos no layout de exportação e corrigir |
+| Infração sem forma de autuação associada | Forma inativa ou não configurada | Verificar se a forma está ativa e vinculada à operação |
+| Duplicidade de autos por forma igual | Configuração de sequencial incorreta | Revisar sequenciais por forma de autuação nas Configurações |
+
 ## Perguntas frequentes
 
 **Posso alterar o código de uma forma de autuação já usada em infrações exportadas?**

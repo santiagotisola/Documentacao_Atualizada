@@ -112,3 +112,20 @@ O sistema exibe alertas, mas o bloqueio automático depende da configuração. M
 
 **O código do equipamento pode ser alterado após cadastro?**
 Sim, mas tenha cuidado: o código aparece nas tarjas das infrações. Alterações afetam apenas novos registros; os históricos mantêm o código anterior.
+
+## Erros comuns
+
+| Erro | Causa | Solução |
+|------|-------|----------|
+| Equipamento não gera passagens | Sem faixas ativas vinculadas ou equipamento offline | Verificar faixas no cadastro e status de conexão |
+| Alerta de aferíção vencida incorreto | Data de aferíção não atualizada após manutenção | Registrar nova aferíção com a data correta |
+| Não é possível salvar o equipamento | Fabricante, tipo ou modelo não cadastrado previamente | Cadastrar as dependências antes de criar o equipamento |
+
+## Integração com outros módulos
+
+| Módulo | Como se relaciona |
+|--------|------------------|
+| **[Grupos de Equipamentos](./grupos-equipamentos)** | Cada equipamento deve ser vinculado a um grupo para aparecer nos filtros e no Dashboard |
+| **[Operações](../operacoes/cadastro-operacoes)** | O equipamento é a fonte das passagens e infrações da operação; deve estar cadastrado antes de vincular à operação |
+| **[Aferíções](../operacoes/afericoes)** | O sistema monitora o vencimento do certif. INMETRO com base nas aferíções registradas para o equipamento |
+| **[Monitoramento Online](../operacoes/monitoramento-online)** | Exibe em tempo real o status de conexão, passagens e alertas de cada equipamento cadastrado |

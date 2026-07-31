@@ -98,6 +98,14 @@ Uma operação ativa vincula todos os registros de passagem dos equipamentos sel
 | Relacionado | [Arcos](../administracao/arcos) | Pontos de fiscalizacao |
 | Relacionado | [Afericoes](./afericoes) | Controle de afericoes |
 
+## Erros comuns
+
+| Erro | Causa | Solução |
+|------|-------|----------|
+| Operação não gera infrações | Enquadramento não configurado para a operação | Vincular o enquadramento correto à operação |
+| Equipamento não aparece na operação | Faixa não vinculada ao equipamento | Verificar o cadastro de faixas e vínculo com equipamentos |
+| SLA incorreto no boletim de medição | Contrato não vinculado à operação | Associar o contrato ativo à operação nas configurações |
+
 ## Perguntas frequentes
 
 **Posso vincular o mesmo equipamento a duas operações simultâneas?**

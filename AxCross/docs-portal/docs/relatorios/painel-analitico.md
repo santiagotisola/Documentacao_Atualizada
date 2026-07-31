@@ -98,6 +98,14 @@ Lista completa de todas as detecções com:
 4. Acessar aba **Rotas** para visualizar o percurso no mapa
 5. Exportar as **Passagens** para laudo ou boletim de ocorrência
 
+## Erros comuns
+
+| Erro | Causa | Solução |
+|------|-------|----------|
+| Painel sem resultados para a placa | Placa sem passagens no período ou OCR não leu corretamente | Tentar variantes da placa e ampliar o período |
+| Lentidão ao carregar aba de Passagens | Volume muito alto de registros no período | Reduzir o período de consulta para no máximo 30 dias |
+| Imagem de passagem não carrega | Arquivo de imagem ausente ou corrompido | Verificar armazenamento do servidor e acionar suporte técnico |
+
 ## Perguntas frequentes
 
 **Por que a aba Rotas mostra o percurso com lacunas entre cruzamentos?**

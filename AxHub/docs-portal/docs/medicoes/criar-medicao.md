@@ -103,6 +103,14 @@ O **Boletim de Medição** gerado pode ser enviado ao contratante como comprova�
 - [ ] Revisar o período selecionado (mês/ano corretos)
 - [ ] Exportar o boletim em PDF após finalizar para envio ao contratante
 
+## Erros comuns
+
+| Erro | Causa | Solução |
+|------|-------|----------|
+| Índice de disponibilidade incorreto | Interrupções não registradas antes da geração | Registrar todas as paradas antes de gerar a medição |
+| Não é possível gerar medição | Contrato inativo ou sem equipamentos vinculados | Verificar status do contrato e vínculos de equipamentos |
+| Boletim gerado com dados incompletos | Período de referência incorreto | Conferir datas de início e fim da medição antes de gerar |
+
 ## Perguntas frequentes
 
 **Com que frequência devo gerar a medição?**

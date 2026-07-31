@@ -85,7 +85,16 @@ Acesse **Operações → Aferições** para verificar os registros de equipament
 | **Relatório de Infrações** | Filtra e exibe infrações de cronoatacógrafo |
 | **Exportação** | Inclui o tipo de infração no lote ao órgão |
 
-## Relacionado
+## Perguntas frequentes
+
+**Todo veículo de carga é obrigado a ter cronotacógrafo?**
+Não. A obrigatoriedade depende do tipo, peso e finalidade do veículo conforme o Código Brasileiro de Trânsito. Verifique no cadastro de Tipos de Veículos quais categorias estão sujeitas à verificação.
+
+**O status `NaoEncontrado` significa que o veículo é irregular?**
+Não necessariamente. Pode indicar que a placa não está cadastrada no banco de certif., que houve falha de conectividade ou que o tipo de veículo não exige o dispositivo. Encaminhe para triagem manual.
+
+**Qual a diferença entre status `Vencido` e `Irregular` no cronotacógrafo?**
+**Vencido** indica que o certificado de calibração do dispositivo expirou. **Irregular** indica que o dispositivo está operando, mas registrou violação de jornada ou período de descanso.
 
 - [Enquadramentos](../administracao/enquadramentos) — Códigos CTB aplicáveis
 - [Tipos de Veículos](../veiculos/tipos-veiculos) — Quais veículos são obrigados

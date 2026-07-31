@@ -152,3 +152,22 @@ Para configurar qual tarja usar:
 | **[Equipamentos](../cadastros-basicos/equipamentos)** | O template de tarja pode ser configurado individualmente por equipamento para personalização por ponto de fiscalização |
 | **[Infrações — Triagem](../infracoes/triagem)** | A tarja é aplicada na imagem da infração durante o processamento; o analista visualiza a imagem com a tarja na triagem |
 | **[Exportação de Infrações](../infracoes/exportacao)** | As imagens com tarja são exportadas junto com o lote de infrações ao órgão autuador |
+
+## Erros comuns
+
+| Erro | Causa | Solução |
+|------|-------|----------|
+| Tarja não aparece na imagem da infração | Template de tarja não configurado para o equipamento | Verificar o campo **Template de Tarja** no cadastro do equipamento |
+| Dados incorretos na tarja | Variável de campo mal mapeada | Revisar as variáveis do template nas configurações de tarja |
+| Tarja com fonte ilegível | Tamanho de fonte muito pequeno ou cor sem contraste | Ajustar tamanho e cor no editor de template |
+
+## Perguntas frequentes
+
+**É obrigatório usar tarja em todas as infrações?**
+Depende do layout exigido pelo órgão autuador. A maioria dos contratos exige a tarja padrão INMETRO. Confirme o requisito no contrato e no layout de exportação.
+
+**Posso ter tarjas diferentes por tipo de equipamento?**
+Sim. Configure templates distintos no cadastro de cada equipamento para personalizar a tarja por ponto de fiscalização ou tipo de infração.
+
+**A tarja é aplicada automaticamente ou precisa de ação manual?**
+Automaticamente durante o processamento. O analista visualiza a imagem já com a tarja aplicada na triagem, sem necessidade de intervenção manual.

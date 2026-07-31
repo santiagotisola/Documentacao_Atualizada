@@ -152,11 +152,15 @@ A exclusão de um local somente será possível se não houver registros de pesa
 - Preencha o endereço completo com nome da rodovia e quilômetro — facilita auditorias e localização no campo
 - Nunca exclua locais com histórico; desative o registro para manter a rastreabilidade das pesagens
 
-## Integração com outros módulos
+## Erros comuns
 
-| Módulo | Como se relaciona com Locais |
-|--------|------------------------------|
-| **Operações** | O local é selecionado ao criar uma operação — vincula as pesagens ao posto correto |
+| Erro | Causa | Solução |
+|------|-------|----------|
+| Posto não aparece no mapa de fluxo | Coordenadas (lat/lon) não preenchidas | Editar o local e informar as coordenadas geográficas |
+| Filtro de posto sem resultados | Local inativo ou código digitado incorretamente | Verificar status do local e o código no cadastro |
+| Pesagens não vinculadas ao local | Operação criada sem selecionar o local | Revisar e corrigir o vínculo do local na operação |
+
+## Integração com outros módulos — vincula as pesagens ao posto correto |
 | **Medições → Contratos** | Os postos vinculados ao contrato são cadastrados aqui — devem ter coordenadas geográficas |
 | **Mapa de Fluxo de Passagens** | Exige coordenadas (lat/lon) cadastradas no local para exibir no mapa |
 | **Relatório de Passagens** | O filtro por posto usa os locais cadastrados para segmentar os dados |

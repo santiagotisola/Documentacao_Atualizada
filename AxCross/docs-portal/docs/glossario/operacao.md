@@ -95,3 +95,19 @@ As passagens ficam permanentemente vinculadas à operação encerrada e continua
 
 **Posso retomar uma operação que foi encerrada por engano?**
 Sim, enquanto a operação estiver com status **Pausada** ela pode ser retomada. Operações com status **Encerrada** dependem de permissão administrativa para reaber-tura. Consulte o administrador do sistema.
+
+## Erros comuns
+
+| Erro | Causa | Solução |
+|------|-------|----------|
+| Passagens não vinculadas à operação | Operação não criada ou inativa | Verificar se há uma operação ativa com os equipamentos corretos |
+| Operação encerrada indevidamente | Ação equivocada pelo usuário | Contatar o administrador para reativação |
+| Equipamento não aparece na operação | Sem faixas ativas vinculadas | Verificar e configurar as faixas do equipamento |
+
+## Integração com outros módulos
+
+| Módulo | Como se relaciona |
+|--------|------------------|
+| **[Cadastro de Operações](../operacoes/cadastro-operacoes)** | As operações são gerenciadas neste módulo; este glossarío explica o conceito |
+| **[Equipamentos](../cadastros/equipamentos)** | Os equipamentos são vinculados à operação para capturar passagens |
+| **[Relatório de Passagens](../relatorios/relatorio-passagens)** | As passagens são registradas sempre no contexto de uma operação ativa |

@@ -76,6 +76,14 @@ A URL de incorporação deve ser gerada no portal Power BI com modo de acesso p�
 | Relacionado | [Power BI (Relatorios)](../Relatórios/power-bi) | Visualizar Relatórios |
 | Relacionado | [Use 'Use 'Use 'Use 'Use 'Use 'Use 'Use 'Use 'Use 'Use 'Use 'Use 'Use 'Use 'Use 'Use 'Use 'Use 'Use 'Use 'Use 'Use 'Use 'Configuração'uração'uração'uração'uração'uração'uração'uração'uração'uração'uração'uração'uração'uração'uração'uração'uração'uração'uração'uração'uração'uração'uração'uração'uracoes do Sistema](./configuracoes-sistema) | Config geral |
 
+## Erros comuns
+
+| Erro | Causa | Solução |
+|------|-------|----------|
+| Relatório Power BI em branco | Usuário sem permissão no grupo de acesso | Verificar e adicionar o perfil do usuário ao grupo de acesso do relatório |
+| Credenciais inválidas no Power BI | Application Id, Secret ou Scope incorretos | Revisar as credenciais na aba **Integrações** das Configurações do Sistema |
+| Relatório não aparece no menu | Relatório não cadastrado ou sem grupo de acesso | Cadastrar o relatório e vincular ao grupo de acesso correto |
+
 ## Perguntas frequentes
 
 **Como adicionar um novo relatório Power BI ao menu do sistema?**

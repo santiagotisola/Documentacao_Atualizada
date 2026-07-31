@@ -96,6 +96,14 @@ Clique em qualquer linha para abrir os detalhes completos da Infração incluind
 | Fluxo | [Infracoes Descartadas](./infracoes-descartadas) | Registros descartados |
 | Glossario | [Infracao](../glossario/infracao) | Definicao tecnica |
 
+## Erros comuns
+
+| Erro | Causa | Solução |
+|------|-------|----------|
+| Consulta retorna zero resultados | Filtro de data muito restrito ou status incorreto | Ampliar o período e verificar o status selecionado |
+| Infração não encontrada por número de auto | Auto gerado em série diferente | Usar o filtro de placa ou data da passagem |
+| Imagem não carrega no detalhe | Arquivo de imagem ausente ou corrompido | Verificar armazenamento e acionar suporte técnico |
+
 ## Perguntas frequentes
 
 **Como localizar rapidamente uma infração pelo número do auto?**

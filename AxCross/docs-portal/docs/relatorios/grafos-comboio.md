@@ -105,4 +105,12 @@ Verifique se o **Neo4j está ativo** e se a opção **Habilitar Detecção de Co
 O limiar de co-ocorrência depende da configuração do Neo4j e dos parâmetros definidos em **Configurações do Sistema → MDF-e**. Contacte o suporte técnico para ajustar a sensibilidade da detecção conforme as necessidades da operação.
 
 **O grafo de comboio pode ser usado como prova em investigações criminais?**
-O grafo evidencia padrões de co-ocorrência de veículos, mas não substitui di-ligências investigativas formais. Exporte os dados e as passagens individuais (com imagens) via **Painel Analítico** para compor a documentação com base em registros rastreados pelo sistema.
+O grafo evidencia padrões de co-ocorrência de veículos, mas não substitui dili-gências investigativas formais. Exporte os dados e as passagens individuais (com imagens) via **Painel Analítico** para compor a documentação com base em registros rastreados pelo sistema.
+
+## Integração com outros módulos
+
+| Módulo | Como se relaciona |
+|--------|------------------|
+| **[Configurações do Sistema](../sistema/configuracoes)** | A detecção de comboios e os parâmetros do Neo4j são ativados e configurados no Sistema |
+| **[Relatório de Passagens](./relatorio-passagens)** | Passagens individuais dos veículos do grafo podem ser consultadas aqui com imagens |
+| **[Painel Analítico](./painel-analitico)** | Permite exportar os dados dos veículos identificados no grafo para relatórios gerenciais |

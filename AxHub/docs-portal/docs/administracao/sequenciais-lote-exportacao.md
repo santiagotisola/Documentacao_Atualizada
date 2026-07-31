@@ -99,6 +99,14 @@ está tela ainda não possui screenshot cadastrada. Será adicionada em breve.
 | Relacionado | [Exportacao](../infracoes/exportacao) | Controle de lote |
 | Glossario | [Lote de Exportacao](../glossario/lote-exportacao) | Definicao |
 
+## Erros comuns
+
+| Erro | Causa | Solução |
+|------|-------|----------|
+| Número de lote duplicado | Campo "Próximo número" editado incorretamente | Nunca editar esse campo manualmente; usar a sequência automática |
+| Lacuna na numeração de lotes | Lote cancelado ou erro de sistema | Verificar relatório de Falhas Sequenciais e registrar justificativa |
+| Órgão rejeita lote por sequencial | Série esgotada ou reiniciada incorretamente | Criar nova série conforme acordado com o órgão autuador |
+
 ## Perguntas frequentes
 
 **O que fazer quando o órgão rejeita um lote por sequencial duplicado?**

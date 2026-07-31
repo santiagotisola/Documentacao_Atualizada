@@ -95,3 +95,12 @@ Solicite ao administrador que redefina sua senha manualmente em **Configuraçõe
 
 **Por que o sistema AxCross usa o Identity Server (IS) para autenticação?**
 O Identity Server centraliza a autenticação de forma segura, permitindo Single Sign-On (SSO) entre sistemas Axion. Isso garante que as credenciais sejam validadas com um único ponto de controle, facilitando a gestão de segurança e auditoria de acessos.
+
+## Integração com outros módulos
+
+| Módulo | Como se relaciona |
+|--------|------------------|
+| **[Navegação](./navegacao)** | Após o login bem-sucedido, o usuário é redirecionado para a navegação principal do sistema |
+| **[Dashboard](./dashboard)** | O Dashboard é a tela inicial exibida após o login |
+| **[Perfis de Acesso](../administracao/perfis-acesso)** | O perfil do usuário logado define quais módulos e funcionalidades estão disponíveis |
+| **[Logs de Acesso](../administracao/logs-acesso)** | Cada acesso é registrado nos logs de acesso para auditoria de segurança |

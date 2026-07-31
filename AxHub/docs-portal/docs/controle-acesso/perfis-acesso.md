@@ -156,3 +156,22 @@ Inative o perfil para bloquear o acesso de todos os usuários vinculados sem per
 | **[Permissões](./permissoes)** | O perfil agrupa permissões; a configuração granular de cada permissão é gerenciada no módulo de Permissões |
 | **[Logs de Acesso](./logs-acesso)** | Os logs registram as ações de todos os usuários de cada perfil, permitindo auditoria por grupo |
 | **[Acessos por IP](./acessos-por-ip)** | Restrições de IP podem ser combinadas com perfis específicos para aumentar a segurança de acessos sensíveis |
+
+## Erros comuns
+
+| Erro | Causa | Solução |
+|------|-------|----------|
+| Usuário não consegue acessar módulo | Perfil sem a permissão necessária | Revisar as permissões do perfil em **Controle de Acesso → Permissões** |
+| Perfil não aparece na lista de usuários | Perfil inativo | Ativar o perfil no cadastro de Perfis de Acesso |
+| Acesso concedido indevidamente | Perfil com permissões muito amplas | Revisar e restringir as permissões do perfil |
+
+## Perguntas frequentes
+
+**Posso ter um usuário com dois perfis de acesso?**
+Não. Cada usuário é vinculado a um único perfil. Crie perfis específicos para combinar as permissões necessárias.
+
+**Como duplicar um perfil existente para criar um similar?**
+Não existe função de duplicação nativa. Crie um novo perfil e adicione manualmente as permissões desejadas.
+
+**O que acontece com os usuários quando um perfil é alterado?**
+A alteração é imediata. Todos os usuários vinculados ao perfil passam a ter as novas permissões na próxima ação no sistema (sem necessidade de relogin).

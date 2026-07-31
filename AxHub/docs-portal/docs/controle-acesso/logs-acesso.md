@@ -108,6 +108,14 @@ Monitore tentativas de Login Falhou** repetidas do mesmo IP — pode indicar ten
 | Relacionado | [Acessos por IP](./acessos-por-ip) | Controle por endereço IP |
 | Relacionado | [Perfis de Acesso](./perfis-acesso) | Perfil do Usuário no log |
 
+## Erros comuns
+
+| Erro | Causa | Solução |
+|------|-------|----------|
+| Log não registra ações esperadas | Usuário sem permissão para o módulo monitorado | Verificar o perfil de acesso e as permissões atribuídas |
+| Múltiplas falhas de login do mesmo IP | Tentativa de acesso não autorizado | Bloquear o IP em **Acessos por IP** e notificar o administrador |
+| Log vazio para período | Período sem atividade ou filtro muito restrito | Ampliar o período de busca e verificar se o usuário operou no sistema |
+
 ## Perguntas frequentes
 
 **Por quanto tempo os logs de acesso são retidos?**

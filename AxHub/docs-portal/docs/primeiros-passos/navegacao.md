@@ -94,6 +94,14 @@ Use os atalhos nos ícones do Dashboard para acessar as funcionalidades mais usa
 | Anterior | [Dashboard](./dashboard) | Tela principal |
 | Relacionado | [Login](./login) | Acesso ao sistema |
 
+## Erros comuns
+
+| Erro | Causa | Solução |
+|------|-------|----------|
+| Módulo não aparece no menu | Perfil sem permissão para o módulo | Solicitar ao administrador revisão das permissões |
+| Menu lateral recolhido automaticamente | Tela menor que 1024px | Expandir a janela do navegador ou usar o ícone hamburguer |
+| Breadcrumb com caminho incorreto | Navegação por URL direta sem passar pelo menu | Usar sempre o menu lateral para navegar entre módulos |
+
 ## Perguntas frequentes
 
 **Um módulo não aparece no menu lateral. O que verificar?**

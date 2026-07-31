@@ -92,6 +92,22 @@ Local (cruzamento)
 Com as coordenadas geográficas preenchidas, o local será exibido no mapa do monitoramento online.
 :::
 
+## Erros comuns
+
+| Erro | Causa | Solução |
+|------|-------|----------|
+| Local não aparece no mapa do Dashboard | Coordenadas geográficas não preenchidas | Editar o local e informar latitude/longitude pelo Google Maps |
+| Filtro por local sem resultados | Local inativo ou código incorreto | Verificar status do local e o código no cadastro |
+| Equipamentos não vinculados ao local | Equipamento cadastrado com local diferente | Editar o equipamento e corrigir o local de instalação |
+
+## Integração com outros módulos
+
+| Módulo | Como se relaciona |
+|--------|------------------|
+| **[Equipamentos](./equipamentos)** | Cada equipamento é instalado em um local; o local deve estar cadastrado antes do equipamento |
+| **[Faixas](./faixas)** | As faixas pertencem a um local e herdam suas informações de localização |
+| **[Monitoramento Online](../operacoes/monitoramento-online)** | O status em tempo real dos equipamentos é exibido por local no mapa de monitoramento |
+
 ## Perguntas frequentes
 
 **O que acontece se eu não informar as coordenadas geográficas de um local?**
