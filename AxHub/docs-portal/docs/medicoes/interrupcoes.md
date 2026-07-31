@@ -40,7 +40,19 @@ Após registrar as interrupções, o sistema as contabiliza no cálculo de dispo
 Interrupções não registradas **não são consideradas** no cálculo de disponibilidade. Registrar imediatamente após a ocorrência.
 :::
 
-## Prazos para registro
+## Erros comuns
+
+| Erro | Causa | Solução |
+|------|-------|----------|
+| Interrupção sem data/hora fim | Esquecimento | Corrigir antes de gerar medição |
+| Tipo errado atribuido | Preventiva x corretiva confundidas | Revisar e corrigir o tipo |
+| Interrupção não aparece na medição | Cadastro após geração | Reabrir medição e recalcular |
+
+## Relacionado
+
+- [Criar Medição](./criar-medicao)
+- [Índices de Performance](./indices-performance)
+- [Eventos de Equipamentos](../relatorios/eventos-equipamentos)
 
 | Tipo | Prazo máximo |
 |------|:------------:|

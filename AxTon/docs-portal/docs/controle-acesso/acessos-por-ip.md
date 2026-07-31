@@ -43,6 +43,14 @@ Permite configurar quais endereços IP podem acessar o sistema, adicionando uma 
 Quando a restrição está ativada, **somente os IPs cadastrados** conseguem acessar. Inclua o IP da sua rede antes de ativar para evitar bloqueio acidental.
 :::
 
+## Erros comuns
+
+| Erro | Causa | Solução |
+|------|-------|----------|
+| Usuário bloqueado | IP dinâmico mudou | Desativar restrição, atualizar IP |
+| Acesso negado para todos | Nenhum IP cadastrado ao ativar | Desativar, cadastrar IPs, reativar |
+| IP externo bloqueado | Configurado corretamente | Verificar se o bloqueio é intencional |
+
 ## Relacionado
 
 - [Usuários](./usuarios)

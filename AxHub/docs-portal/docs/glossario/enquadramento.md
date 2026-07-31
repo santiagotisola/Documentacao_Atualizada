@@ -38,8 +38,20 @@ Classificação legal atribuída a uma infração de trânsito. O enquadramento 
 
 ## Relacionados
 
-- [Enquadramentos](../administracao/enquadramentos) — Tabela completa do CTB
-- [Configurações de Enquadramento](../administracao/configuracoes-enquadramento) — Configuração por operação
+- [Enquadramentos](../administracao/enquadramentos)
+- [Configurações de Enquadramento](../administracao/configuracoes-enquadramento)
+
+## Erros comuns
+
+| Erro | Causa | Solução |
+|------|-------|----------|
+| Enquadramento errado | Velocidade da faixa mal configurada | Revisar configuração de faixas |
+| Enquadramento não aparece | Equipamento sem configuração | Associar equip. a uma operação |
+| Auto rejeitado pelo órgão | Código CTB desatualizado | Atualizar tabela de enquadramentos |
+
+:::tip
+Configure corretamente a velocidade regulamentada em cada faixa para que o sistema sugira enquadramentos corretos automaticamente durante a triagem.
+:::
 
 :::info
 Na **Triagem**, o operador valida ou altera o enquadramento sugerido automaticamente pelo sistema com base na velocidade/infração detectada.

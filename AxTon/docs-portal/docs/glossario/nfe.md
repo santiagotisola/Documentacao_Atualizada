@@ -39,7 +39,14 @@ A comparação entre o **peso declarado na NF-e** e o **peso aferido na balança
 - [Relatório de NF-e](../relatorios/relatorio-nfe)
 - [Discrepancias](../relatorios/relatorio-discrepancias)
 
-## Campos capturados automaticamente
+## Erros comuns
+
+| Erro | Causa | Solução |
+|------|-------|----------|
+| NF-e ausente | Veículo saiu sem emitir | Notificar SEFAZ |
+| NF-e vencida | Prazo de validade expirado | Regularizar com emitente |
+| Dados divergentes | Peso declarado ≠ aferido | Apurar subdeclaração fiscal |
+| Chave NF-e inválida | Erro de digitação | Solicitar chave correta ao emitente |
 
 | Campo | Fonte |
 |-------|-------|

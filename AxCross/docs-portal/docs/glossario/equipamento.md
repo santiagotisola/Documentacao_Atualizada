@@ -42,6 +42,15 @@ Dispositivo instalado em um cruzamento para detecção e registro de Veículos P
 | Atualização de firmware | Conforme fabricante |
 | Calibração OCR | Semestral |
 
+## Erros comuns
+
+| Erro | Causa | Solução |
+|------|-------|----------|
+| Equipamento Offline | Falha de rede | Verificar conexão e reiniciar |
+| Taxa OCR baixa | Câmera suja | Limpar lentes |
+| Passagens duplicadas | Sensor muito sensível | Ajustar sensibilidade |
+| Sem imagem | Armazenamento cheio | Limpar disco ou aumentar espaço |
+
 :::tip
 Equipamentos com taxa OCR abaixo de 85% precisam de intervenção técnica imediata para não comprometer os registros operacionais.
 :::

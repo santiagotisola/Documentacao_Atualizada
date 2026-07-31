@@ -52,6 +52,14 @@ A medição finalizada é **bloqueada para edição**. Para corrigi-la, é neces
 - Após finalizar a medição, nenhuma alteração é permitida; erros devem ser corrigidos na medição do próximo período
 - Medições incompletas ou geradas com dados errados podem gerar glosas no pagamento contratual
 
+## Erros comuns
+
+| Erro | Causa | Solução |
+|------|-------|---------|
+| Disponibilidade zerada | Interrupções não registradas | Registrar antes de gerar |
+| OCR incorreto | Dados desatualizados | Sincronizar e regenerar |
+| Meta não calculada | Índice não configurado | Criar em Medições → Índices |
+
 ## Relacionado
 
 - [Contratos](./contratos)
