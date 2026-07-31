@@ -36,7 +36,21 @@ Exibe o **histórico das medições contratuais** que já foram calculadas e fin
 Uma medição finalizada **não pode ser editada** sem ser reaberta. A reabertura exige permissão de supervisor e gera log de auditoria.
 :::
 
+## Erros comuns
+
+| Erro | Causa | Solução |
+|------|-------|----------|
+| Não consigo reabrir | Permissão insuficiente | Solicitar ao supervisor |
+| Boletim incorreto | Interrupção não registrada | Corrigir após reabrir |
+| Medição não aparece na lista | Status diferente | Verificar filtros de status |
+
 ## Ciclo de vida da medição
+
+```
+Criada → Em elaboração → Finalizada
+                           ↓ (se necessário)
+                        Reaberta → Revisada → Finalizada
+```
 
 ```
 Criada → Em elaboração → Finalizada

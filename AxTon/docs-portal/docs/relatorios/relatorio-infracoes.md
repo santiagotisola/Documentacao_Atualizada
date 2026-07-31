@@ -38,7 +38,19 @@ Exibe as **infrações de excesso de peso** registradas pelo AxTon, agrupadas po
 Exporte o relatório em CSV para preparar o lote de envio ao órgão autuador.
 :::
 
-## Casos de uso
+## Interpretação dos status
+
+| Status | Significado | Próxima etapa |
+|--------|-------------|---------------|
+| Triada | Validada pelo operador | Auditoria |
+| Auditada | Aprovada pelo supervisor | Exportação |
+| Exportada | Enviada ao órgão | Concluído |
+| Descartada | Rejeitada | Sem ação |
+
+## Relacionado
+
+- [Triagem](../glossario/triagem)
+- [Processamento de Imagens](./processamento-imagens)
 
 - **Fechamento de lote** — exporte infrações com status **Auditada** para compor o lote de envio ao órgão autuador
 - **Auditoria de excesso de peso** — filtre por excesso percentual para identificar reincidentes e planejar operações de fiscalização

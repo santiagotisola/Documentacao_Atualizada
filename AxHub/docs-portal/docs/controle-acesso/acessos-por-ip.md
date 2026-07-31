@@ -35,11 +35,29 @@ A restrição por IP é uma camada adicional de segurança. Recomendada para amb
 
 ## Segurança
 
-- Use listas de IPs fixos corporativos — nunca adicione IPs dinâmicos de redes residenciais ou móveis na whitelist
-- Revise periodicamente os IPs autorizados e remova entradas obsoletas de colaboradores desligados
-- Combine a restrição por IP com **perfis de acesso** restritivos para dupla camada de proteção
+- Use listas de IPs fixos corporativos — nunca adicione IPs dinâmicos de redes residenciais
+- Revise os IPs autorizados ao desligar colaboradores
+- Combine a restrição por IP com perfis de acesso restritivos para dupla camada
 
-## Quando ativar
+## Fluxo de configuração
+
+1. Levantar todos os IPs fixos dos usuários
+2. Cadastrar cada IP em **Controle de Acesso → Acessos por IP**
+3. Ativar a restrição
+4. Testar acesso de cada IP
+5. Monitorar Logs de Acesso
+
+## Erros comuns
+
+| Erro | Causa | Solução |
+|------|-------|----------|
+| Usuário bloqueado | IP dinâmico mudou | Desativar, atualizar IP, reativar |
+| Acesso negado para todos | Nenhum IP ao ativar | Desativar, cadastrar IPs, reativar |
+
+## Relacionado
+
+- [Usuários](./usuarios)
+- [Logs de Acesso](./logs-acesso)
 
 - Ambiente corporativo com IP fixo definido
 - Operação em rede fechada (intranet)

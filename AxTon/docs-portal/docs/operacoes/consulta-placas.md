@@ -40,9 +40,17 @@ Use a consulta de placas para verificar histórico de um veículo antes de liber
 - **Identificação de reincidentes**: veículos autuados 3+ vezes no mesmo mês
 - **Auditorias**: comprovar passagens em período específico
 
+## Erros comuns
+
+| Erro | Causa | Solução |
+|------|-------|----------|
+| Nenhum resultado | Período muito restrito | Ampliar o período |
+| Passagens faltando | OCR não leu a placa | Verificar taxa OCR do posto |
+| Velocidade não exibida | Equipamento sem radar | Normal para câmeras OCR puras |
+
 ## Relacionado
 
-- [Tickets Abertos](../pesagem/ticket-aberto)
+- [Tickets Abertos](./ticket-aberto)
 - [Relatório de Infrações](../relatorios/relatorio-infracoes)
 
 | **Status** | Regular / Infrator |
