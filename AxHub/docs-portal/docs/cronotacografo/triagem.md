@@ -78,6 +78,24 @@ A triagem do cronotacógrafo usa o mesmo Id da passagem (`TBPassagensCronotacogr
 Acesse **Cronotacógrafo → Consulta** para visualizar o histórico completo de verificações e identificar veículos com irregularidades recorrentes.
 :::
 
+## Fluxo decisório
+
+```
+Passagem de veículo pesado registrada
+        ↓
+Sistema consulta banco de certificados
+        ↓
+    Status da consulta?
+    ├─ Regular → Nenhuma ação (sem infração)
+    ├─ Irregular → Infração Art. 162, II CTB gerada automaticamente
+    ├─ Vencido → Infração Art. 162, II CTB gerada automaticamente
+    └─ NãoEncontrado → Encaminhado para triagem manual
+                        ↓
+                Analista verifica documentação física
+                ├─ Certificado válido → Descartar com motivo
+                └─ Sem certificado/irregular → Confirmar infração
+```
+
 ## Navegacao Relacionada
 
 | Tipo | Pagina | Descricao |

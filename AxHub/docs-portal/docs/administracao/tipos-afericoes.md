@@ -98,6 +98,19 @@ está tela ainda não possui screenshot cadastrada. Será adicionada em breve.
 | Aferíção não aparece para registro | Tipo de aferíção inativo | Ativar o tipo de aferíção nas configurações |
 | Alerta de vencimento não gerado | Prazo de validade não configurado no tipo | Definir a validade em dias no cadastro do tipo |
 | Equipamento com certif. vencido gera infrações | Tipo incorreto selecionado no último registro | Corrigir o tipo de aferíção no registro e atualizar a data |
+
+## Configuração típica
+
+**Tipos de aferição obrigatórios (configuração inicial do sistema):**
+
+| Tipo | Validade (dias) | Quando usar |
+|------|:--------------:|-------------|
+| Aferição Inicial | 365 | Instalação do equipamento ou substituição de componente |
+| Aferição Periódica | 365 | Renovação anual obrigatória pelo INMETRO |
+| Aferição Pós-Manutenção | 365 | Após qualquer intervenção técnica no equipamento |
+| Aferição Extraordinária | 180 | Por exigência do órgão contratante ou incidente |
+
+Configure esses quatro tipos antes de iniciar os registros de aferição. Sem eles, não é possível cadastrar certificados em **Operações → Aferições**.
 ## Perguntas frequentes
 
 **Quantos tipos de aferição devo cadastrar?**

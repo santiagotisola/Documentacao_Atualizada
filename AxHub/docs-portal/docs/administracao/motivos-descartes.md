@@ -98,6 +98,16 @@ está tela ainda não possui screenshot cadastrada. Será adicionada em breve.
 | Relacionado | [Triagem](../infracoes/triagem) | Uso na triagem |
 | Relacionado | [Infracoes Descartadas](../infracoes/infracoes-descartadas) | Resultado |
 
+## Exemplo prático
+
+**Cenário**: O supervisor percebe que 23% das infrações de um equipamento específico foram descartadas com o motivo "Imagem ilegível" em determinado mês. A taxa histórica normal para esse equipamento é 8%.
+
+**Investigação**: Acesse **Relatórios → Processamento por Usuário**, filtre pelo equipamento e o período em questão. O Dashboard mostra que o aumento coincidiu com uma semana de chuvas intensas na região.
+
+**Ação**: Programar limpeza da câmera e verificação do ângulo de instalação. Após a manutenção, a taxa volta a 8%.
+
+**Lição**: Monitore semanalmente o **Top 3 de Motivos de Descarte** no Dashboard. Qualquer aumento acima de 50% da taxa histórica de um motivo merece investigação imediata — geralmente indica problema técnico no equipamento ou desvio operacional na equipe.
+
 ## Integração com outros módulos
 
 | Módulo | Como usa este cadastro |

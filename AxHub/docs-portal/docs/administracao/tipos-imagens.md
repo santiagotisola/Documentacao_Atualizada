@@ -137,3 +137,16 @@ Sim. Novos tipos são aplicados a infrações futuras. Registros anteriores não
 
 **Qual a diferença entre imagem Frontal e Zoom Placa?**
 A Frontal mostra o veículo inteiro para contextualizar a infração. O Zoom Placa é um recorte ampliado da placa traseira, essencial para a leitura do OCR e validação.
+
+## Configuração típica
+
+**Tipos de imagem padrão para radares de velocidade:**
+
+| Tipo | Obrigatória | Ordem | Finalidade |
+|------|:-----------:|:-----:|------------|
+| Panorâmica | Sim | 1 | Visão geral da via e do veículo em contexto |
+| Zoom Placa | Sim | 2 | Placa traseira legível — base do auto |
+| Painel (velocímetro) | Sim | 3 | Velocidade medida no display do equipamento |
+| Frontal | Não | 4 | Confirmação do veículo pela frente |
+
+Configure os tipos obrigatórios antes de iniciar operações. Sem eles, as infrações ficarão marcadas como incompletas e serão bloqueadas na exportação ao órgão autuador.

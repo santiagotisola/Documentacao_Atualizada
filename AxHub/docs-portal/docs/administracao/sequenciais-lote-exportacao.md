@@ -99,6 +99,18 @@ está tela ainda não possui screenshot cadastrada. Será adicionada em breve.
 | Relacionado | [Exportacao](../infracoes/exportacao) | Controle de lote |
 | Glossario | [Lote de Exportacao](../glossario/lote-exportacao) | Definicao |
 
+## Configuração típica
+
+**Sequenciais de lote por órgão destinatário (configuração inicial):**
+
+| Órgão | Sequencial Inicial | Sequencial Final | Observação |
+|-------|:-----------------:|:----------------:|------------|
+| DETRAN Estadual | 1 | 99.999 | Alinhar com o setor de fiscalização |
+| SENATRAN | 1 | 99.999 | Para exportações federais |
+| Prefeitura Municipal | 1 | 9.999 | Quando o contrato é municipal |
+
+Configure um sequencial para cada órgão destinatário antes de iniciar as exportações. O sistema atribui os números automaticamente na ordem crescente.
+
 ## Erros comuns
 
 | Erro | Causa | Solução |

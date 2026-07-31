@@ -98,6 +98,23 @@ O layout de exportação deve seguir rigorosamente as especificações do órgã
 | **Delimitador** | Caractere separador de campos |
 | **Encoding** | Codificação do arquivo (UTF-8, ISO-8859-1) |
 
+## Configuração típica
+
+**Layout de exportação DETRAN estadual (CSV — configuração mais comum):**
+
+| Campo no sistema | Coluna no arquivo | Obrigatório | Tipo |
+|-----------------|:-----------------:|:-----------:|------|
+| Número Auto | `nro_auto` | Sim | Texto |
+| Placa | `placa_veiculo` | Sim | Texto |
+| Data/Hora | `data_infracao` | Sim | Datetime |
+| Código CTB | `cod_enquadramento` | Sim | Número |
+| Velocidade medida | `vel_medida` | Sim | Número |
+| Velocidade permitida | `vel_permitida` | Sim | Número |
+| Forma de autuação | `forma_autuacao` | Sim | Texto |
+| Código IBGE do município | `cod_ibge` | Sim | Número (7 dígitos) |
+
+Solicite o documento de especificação técnica do layout ao órgão autuador antes de configurar. Teste sempre em ambiente de homologação antes de ativar em produção.
+
 :::note Sem screenshot
 está tela ainda não possui screenshot cadastrada. Será adicionada em breve.
 :::

@@ -79,6 +79,19 @@ Clique em uma categoria (Cadastros ou Administração) para expandir ou recolher
 6. Exportar lote → **Exportação** → enviar ao órgão autuador
 7. Relatórios → **Relatório de Infrações** → acompanhamento gerencial
 
+## Tabela de referência rápida
+
+| Situação | Onde ir no menu |
+|----------|-----------------|
+| Iniciar a pesagem de um veículo | **Iniciar Pesagem** |
+| Ver tickets em aberto | **Tickets de Pesagens** |
+| Exportar infrações ao órgão | **Exportação** |
+| Configurar balança e câmera IP | **Sistema** |
+| Adicionar ou editar usuários | **Administração → Usuários** |
+| Verificar acessos recentes | **Controle de Acesso → Logs de Acesso** |
+| Ver relatório de pesagens | **Relatório de Pesagem** |
+| Criar nova operação de campo | **Operações** |
+
 ## Tabela de referência — perfis e acessos comuns
 
 | Perfil | Módulos habilitados | Restrições |

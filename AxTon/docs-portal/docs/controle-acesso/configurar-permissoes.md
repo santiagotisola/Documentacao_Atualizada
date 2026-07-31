@@ -109,6 +109,20 @@ Crie um usuário de teste vinculado ao perfil e acesse o sistema para validar qu
 | Cadastros | ☐ | ☐ | ☐ | ☐ |
 | Administração | ☐ | ☐ | ☐ | ☐ |
 
+## Configuração típica
+
+**Perfis recomendados para operação de pesagem veicular:**
+
+| Perfil | Pesagem | Triagem | Medições | Relatórios | Configurações |
+|--------|:-------:|:-------:|:--------:|:----------:|:-------------:|
+| **Porteiro** | Criar/Editar | — | — | Visualizar | — |
+| **Operador** | Criar/Editar | Criar/Editar | Visualizar | Visualizar | — |
+| **Auditor** | Visualizar | Visualizar | Visualizar | Visualizar | — |
+| **Supervisor** | Todos | Todos | Criar/Editar | Todos | Visualizar |
+| **Administrador** | Todos | Todos | Todos | Todos | Todos |
+
+Configure sempre pelo mínimo: conceda apenas o que a função do perfil exige no dia a dia. Revise as permissões sempre que houver mudança de escopo ou troca de colaborador.
+
 ### Passo a passo
 
 1. No menu lateral, abra **Administração** e clique em **Permissões de acesso**

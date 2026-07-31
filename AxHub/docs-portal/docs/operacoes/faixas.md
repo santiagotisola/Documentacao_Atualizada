@@ -90,3 +90,23 @@ Sim. O sentido é exigido em alguns layouts de exportação e aparece no relató
 | **[Operações](./cadastro-operacoes)** | A faixa pertence a uma operação — sem operação ativa não há fiscalização eletrônica nas faixas cadastradas |
 | **[Municípios](../veiculos/municipios)** | O código IBGE do município da faixa é obrigatório na geração de lotes de exportação ao DENATRAN |
 | **[Exportação de Infrações](../infracoes/exportacao)** | O código IBGE incorreto na faixa causa rejeição direta do lote de exportação pelo órgão autuador |
+
+## Exemplo prático
+
+**Cenário**: Uma operação de radar fixo é instalada na Av. Paulista, sentido Norte/Sul, em São Paulo/SP. O sistema possui 2 faixas: faixa 1 (sentido Norte) e faixa 2 (sentido Sul).
+
+**Configuração das faixas**:
+
+| Campo | Faixa 1 | Faixa 2 |
+|-------|---------|---------|
+| Código | `SPTM001-1` | `SPTM001-2` |
+| Operação | SP-TM-001 | SP-TM-001 |
+| Número da Faixa | 1 | 2 |
+| Sentido | Norte | Sul |
+| Logradouro | Av. Paulista | Av. Paulista |
+| Município | São Paulo | São Paulo |
+| Código IBGE | 3550308 | 3550308 |
+
+:::warning
+O Código IBGE deve ser sempre de 7 dígitos. Para São Paulo/SP: **3550308**. Consulte [ibge.gov.br/cidades](https://ibge.gov.br/cidades) para confirmar o código do município antes de salvar.
+:::

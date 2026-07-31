@@ -98,6 +98,30 @@ Configure um webhook para `equipamento.offline` apontando para um sistema de tic
 
 | **Método** | POST, PUT |
 | **Headers** | Cabeçalhos customizados (autenticação, etc.) |
+
+## Configuração típica
+
+**Webhook para notificação de lote exportado (integração com BI):**
+
+| Campo | Valor de exemplo |
+|-------|:----------------:|
+| URL | `https://painel.empresa.com.br/api/axhub/events` |
+| Evento | `lote.exportado` |
+| Segredo | `axhub-secret-2026` |
+| Status | Ativo |
+
+**Webhook para alerta de equipamento offline (abertura de ticket):**
+
+| Campo | Valor de exemplo |
+|-------|:----------------:|
+| URL | `https://suporte.empresa.com.br/api/tickets/create` |
+| Evento | `equipamento.offline` |
+| Segredo | `support-token-xyz` |
+| Status | Ativo |
+
+:::tip Dica de segurança
+Sempre configure o campo **Segredo** e valide a assinatura HMAC no sistema receptor. Isso garante que apenas o AxHub possa disparar notificações no endpoint configurado.
+:::
 | **Ativo** | Status do webhook |
 
 :::info Integrações

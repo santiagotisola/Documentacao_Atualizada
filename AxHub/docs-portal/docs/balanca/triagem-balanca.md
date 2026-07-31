@@ -98,3 +98,24 @@ Não. O campo Motivo é obrigatório na tela de liberação. Se não houver moti
 
 **Quanto tempo leva para um ticket de excesso de peso virar uma infração exportada?**
 Depende do fluxo da equipe. Após o encerramento do ticket, a infração aguarda triagem, auditoria e inclusão no próximo lote de exportação.
+
+## Fluxo decisório
+
+```
+Ticket de pesagem recebido
+        ↓
+Verificar peso vs. PBT regulamentado
+        ↓
+    Dentro do limite?
+    ├─ Sim → Liberar veículo (Ticket Fechado — Regular)
+    └─ Não → Iniciar análise de excesso
+              ↓
+        Classificação está correta?
+        ├─ Não → Reclassificar (Reclassificar)
+        │         ↓ Novo PBT dentro do limite? → Liberar
+        └─ Sim → Excesso confirmado
+                  ↓
+            Veículo pode resolver sem infração?
+            ├─ Sim (descarga/recurso) → Liberar Pesagem com motivo
+            └─ Não → Infração gerada → Triagem → Auditoria → Exportação
+```

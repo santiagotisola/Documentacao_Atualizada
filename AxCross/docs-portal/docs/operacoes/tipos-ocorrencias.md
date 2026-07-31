@@ -118,6 +118,19 @@ Tipos de ocorrência vinculados a alertas ou veículos existentes **não podem s
 **Posso excluir um tipo de ocorrência que não é mais utilizado?**
 Não, se o tipo já tiver alertas ou veículos vinculados. Inative o tipo para impedir novos usos sem perder o histórico de alertas já gerados com essa categorização.
 
+## Exemplo prático
+
+**Cenário**: Uma delegacia solicita ao operador do AxCross o monitoramento de veículos suspeitos de envolvimento em crimes. São necessários dois tipos de ocorrência: um para suspeitos com prisão vigente (monitoramento temporário de 30 dias) e outro para veículos permanentemente na lista de interesse policial.
+
+**Configuração**:
+
+| Tipo | Código | Cor | Alerta Sonoro | Prazo (dias) |
+|------|--------|-----|:-------------:|:------------:|
+| Suspeito — Mandado Ativo | `MANDADO` | 🔴 Vermelho | Sim | 30 |
+| Veículo de Interesse Permanente | `INTERESSE` | 🟡 Amarelo | Não | Vazio |
+
+O tipo `MANDADO` expira automaticamente após 30 dias. O tipo `INTERESSE` não expira e deve ser desativado manualmente quando o monitoramento for encerrado.
+
 **O que acontece com os veículos monitorados existentes quando altero o prazo de expiração de um tipo?**
 O sistema recalcula automaticamente a data de expiração de todos os veículos vinculados ao tipo alterado. Não é necessário editar os veículos individualmente — a atualização é em bloco e imediata.
 

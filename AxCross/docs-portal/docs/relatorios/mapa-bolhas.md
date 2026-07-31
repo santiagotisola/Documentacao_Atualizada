@@ -98,3 +98,13 @@ O **Mapa de Equipamentos** no Dashboard mostra a localização de todos os equip
 | **[Tipos de Ocorrências](../operacoes/tipos-ocorrencias)** | Os tipos de ocorrência são os filtros disponíveis no Mapa de Bolhas |
 | **[Relatório de Ocorrências](./ocorrencias-alertas)** | O mapa fornece visão espacial; o relatório detalha cada ocorrência individualmente |
 | **[Cadastros — Equipamentos](../cadastros/equipamentos)** | As coordenadas geográficas dos equipamentos são essenciais para exibir as bolhas no mapa |
+
+## Tabela de referência rápida
+
+| Situação no mapa | Interpretação | Ação recomendada |
+|------------------|--------------|-----------------|
+| Bolha muito grande em ponto isolado | Alta concentração de irregularidades naquele cruzamento | Intensificar patrulhamento na área |
+| Todas as bolhas pequenas | Operação regular — baixo volume de irregularidades | Monitorar normalmente |
+| Equipamento sem bolha no mapa | Nenhuma irregularidade no período OU coordenadas ausentes | Verificar cadastro do equipamento |
+| Muitas bolhas grandes na mesma região | Rota de alto risco | Operação especial e análise de comboio |
+| Mapa vazio no período | Nenhuma irregularidade detectada | Verificar se equipamentos estão online |

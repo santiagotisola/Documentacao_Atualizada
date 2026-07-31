@@ -98,6 +98,18 @@ está tela ainda não possui screenshot cadastrada. Será adicionada em breve.
 | Série esgotada bloqueando triagem | Número máximo atingido sem nova série criada | Criar nova série com numeração acordada com o órgão autuador |
 | Infração sem número sequencial | Série inativa no momento da triagem | Ativar uma série válida antes de retomar a triagem |
 
+## Configuração típica
+
+**Séries de numeração de infrações por órgão (configuração inicial):**
+
+| Órgão | Série | Próximo número | Número máximo | Ação ao esgotar |
+|-------|-------|:--------------:|:-------------:|-----------------|
+| DETRAN Estadual | AXH | 1 | 99.999 | Criar série AXH-B |
+| SENATRAN | SEN | 1 | 99.999 | Criar série SEN-B |
+| Prefeitura | PRF | 1 | 9.999 | Criar série PRF-B |
+
+Configure uma série por órgão autuador antes de iniciar as operações de triagem. Combine o número inicial com o setor de fiscalização do órgão para evitar sobreposições.
+
 ## Perguntas frequentes
 
 **O sistema pode atribuir sequenciais duplicados automaticamente?**

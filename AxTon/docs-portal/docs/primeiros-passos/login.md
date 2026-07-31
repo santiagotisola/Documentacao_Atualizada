@@ -98,6 +98,18 @@ Clique em **Esqueceu a Senha?** na tela de login. O sistema envia as instruçõe
 **Por que recebo a mensagem "Acesso negado por IP" mesmo com as credenciais corretas?**
 O sistema possui controle de acesso por IP. Seu endereço de rede não está autorizado. Solicite ao administrador que inclua seu IP na lista permitida em **Controle de Acesso → Acessos por IP**.
 
+## Exemplo prático
+
+**Cenário**: Um novo operador começa no turno da manhã e tenta acessar o AxTon pela primeira vez. As credenciais foram comunicadas pelo administrador, mas o operador recebe a mensagem "Usuário ou senha inválidos".
+
+**Passos para resolver**:
+1. Verificar se o **Nome de Usuário** está correto (sem espaços extras)
+2. Confirmar se a **Senha** foi digitada corretamente (maiúsculas/minúsculas)
+3. Clicar em **Esqueceu a Senha?** para receber a redefinição por e-mail
+4. Se o erro persistir, contatar o administrador para verificar se a conta está **Ativa**
+
+**Prevenção**: Oriente novos operadores a alterar a senha temporária imediatamente após o primeiro acesso bem-sucedido.
+
 ## Erros comuns
 
 | Erro | Causa | Solução |
