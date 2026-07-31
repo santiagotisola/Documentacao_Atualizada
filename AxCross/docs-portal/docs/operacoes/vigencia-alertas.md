@@ -198,3 +198,20 @@ Todos os Veículos vinculados terão a data de expiração removida (`sem prazo`
 
 **O sino mostra Veículos desabilitados?**
 Não. O sino de vigência exibe apenas Veículos **habilitados** que estejam expirando nas próximas 24 horas ou já expirados.
+
+## Erros comuns
+
+| Erro | Causa | Solução |
+|------|-------|----------|
+| Veículo expirado ainda gera alerta | Cache desatualizado | Recarregar o sistema |
+| Data de expiração não calculada | Tipo sem prazo configurado | Adicionar prazo ao tipo |
+| Sino não aparece | Nenhum veículo expirando | Normal — só exibe quando há |
+
+## Integração com outros módulos
+
+| Módulo | Relação |
+|--------|----------|
+| **Veículos Monitorados** | Controla a validade dos monitoramentos |
+| **Tipos de Ocorrência** | Define o prazo padrão por categoria |
+| **Alertas** | Suspende alertas após expiração |
+

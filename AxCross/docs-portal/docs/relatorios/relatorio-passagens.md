@@ -400,3 +400,30 @@ Identifica veículos que percorrem trajetos semelhantes em conjunto (comboio), d
 :::info Neo4j
 O módulo de Grafos de Comboio requer conexão ativa com o banco de dados Neo4j. O indicador **"Neo4j conectado"** (verde) na tela confirma que a integração está funcionando.
 :::
+
+## Erros comuns
+
+| Erro | Causa | Solução |
+|------|-------|----------|
+| Relatório sem dados | Período sem passagens | Verificar equipamentos ativos |
+| Exportação falhou | Dados muito volumosos | Reduzir período |
+| Filtro não funciona | Cache desatualizado | Recarregar a página |
+
+## Perguntas frequentes
+
+**Posso exportar todos os relatórios de uma vez?**
+Não. Cada relatório é exportado individualmente com seus filtros.
+
+**Qual o período máximo para consulta?**
+Não há limite definido, mas períodos longos podem demorar para carregar.
+
+**Os relatórios em PDF são gerados automaticamente?**
+Sim, o módulo de PDFs Gerados armazena os arquivos exportados.
+
+## Integração com outros módulos
+
+| Módulo | Relação |
+|--------|----------|
+| **Monitoramento Online** | Dados em tempo real vs histórico |
+| **Veículos Monitorados** | Filtra passagens por veículos alvo |
+| **Mapeamento de Rotas** | Visualiza geograficamente os dados |

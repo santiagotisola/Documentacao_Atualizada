@@ -320,3 +320,30 @@ Após a importação, o sistema exibe um histórico com o resultado do processam
 :::info Formato do arquivo
 O arquivo CSV deve conter **uma placa por linha**, no formato Mercosul (ABC1D23) ou padrão antigo (ABC-1234). A classificação padrão será atribuída automaticamente e poderá ser editada individualmente após a importação.
 :::
+
+## Erros comuns
+
+| Erro | Causa | Solução |
+|------|-------|----------|
+| Placa não gera alerta | Veículo desabilitado | Habilitar na lista |
+| Importação com erros | Formato CSV incorreto | Usar 1 placa por linha |
+| Vigncia expirada | Prazo de alerta vencido | Renovar em Vigência dos Alertas |
+
+## Integração com outros módulos
+
+| Módulo | Relação |
+|--------|----------|
+| **Monitoramento Online** | Alerta em tempo real |
+| **Vigência dos Alertas** | Controla validade dos monitoramentos |
+| **Ocorrências e Alertas** | Relatório de detecções |
+
+## Perguntas frequentes
+
+**Posso importar em lote?**
+Sim, via arquivo CSV com uma placa por linha.
+
+**O alerta é gerado para todos os cruzamentos?**
+Sim, qualquer equipamento do AxCross que detectar a placa gera o alerta.
+
+**Qual o limite de placas monitoradas?**
+Não há limite definido no sistema.

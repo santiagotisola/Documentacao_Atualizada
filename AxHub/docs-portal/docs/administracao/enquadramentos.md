@@ -99,3 +99,19 @@ Não. Os valores precisam ser atualizados manualmente após o reajuste anual pel
 
 **O que acontece se eu configurar um enquadramento errado em uma operação?**
 As infrações geradas serão enquadradas no artigo CTB incorreto, o que pode causar anulação judicial dos autos. Revise as infrações do período e reconfigure o enquadramento antes de gerar novos lotes.
+
+## Erros comuns
+
+| Erro | Causa | Solução |
+|------|-------|----------|
+| Enquadramento não aparece na triagem | Equip. sem operação configurada | Vincular equip. a uma operação |
+| Velocidade incorreta aplicada | Meta de velocidade errada | Revisar Configurações de Enquadramento |
+| Lote rejeitado pelo órgão | Artigo CTB desatualizado | Atualizar enquadramento e reexportar |
+
+## Integração com outros módulos
+
+| Módulo | Relação |
+|--------|----------|
+| **Configurações de Enquadramento** | Define qual artigo usa em cada operação |
+| **Triagem** | Sugestão automática baseada neste cadastro |
+| **Lote de Exportação** | Código CTB aparece no arquivo exportado |

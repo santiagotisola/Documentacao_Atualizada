@@ -82,3 +82,12 @@ Este manual é atualizado a cada nova versão do sistema. Consulte sempre a vers
 :::info Suporte técnico
 Em caso de dúvidas ou problemas, entre em contato com o administrador do sistema da sua organização ou com o suporte da **Axion Tecnologia**.
 :::
+
+## Erros comuns no AxCross
+
+| Erro | Causa | Solução |
+|------|-------|----------|
+| Alerta não gerado | Veículo não cadastrado | Cadastrar em Veículos Monitorados |
+| Câmera Offline | Falha de conexão | Verificar rede e equipamento |
+| Passagens não aparecem | Sincronização atrasada | Executar Sincronização de Passagens |
+| Relatório vazio | Faixa sem equipamento | Vincular equipamento à faixa |

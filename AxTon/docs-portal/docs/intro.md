@@ -99,3 +99,12 @@ Em caso de dúvidas ou problemas, entre em contato com o suporte da Axion Tecnol
 - **Helpdesk:** [desk.axiontecnologia.com.br](https://desk.axiontecnologia.com.br)
 - **WhatsApp:** Canal de atendimento 24/7
 :::
+
+## Erros comuns no AxTon
+
+| Erro | Causa | Solução |
+|------|-------|----------|
+| Infração não gerada | Aferição INMETRO vencida | Renovar certificação |
+| Ticket não fechado | Veículo aguardando liberação | Liberar em Pesagem → Tickets |
+| Medição com OCR incorreto | Dados desatualizados | Sincronizar dados |
+| Exportação rejeitada | Sequencial duplicado | Verificar Falhas de Sequenciais |

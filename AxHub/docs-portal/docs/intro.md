@@ -86,3 +86,12 @@ Em cada tela do AxHub, você encontrará um link de ajuda que o direcionará dir
 | Use Infração (com acento) de Transito](./glossario/infracao) | Ver definicao no glossario |
 | [Medicao de Desempenho](./glossario/medicao-desempenho) | Ver definicao no glossario |
 | [Triagem](./glossario/triagem) | Ver definicao no glossario |
+
+## Erros comuns no AxHub
+
+| Erro | Causa | Solução |
+|------|-------|----------|
+| Login sem acesso ao módulo | Permissão não concedida | Verificar Perfil de Acesso |
+| Infração não exportada | Aferição vencida | Renovar certificação INMETRO |
+| Lote rejeitado | Sequencial duplicado | Usar Relatório de Falhas de Sequenciais |
+| Dashboard sem dados | Período sem operação | Verificar operações ativas |

@@ -169,3 +169,31 @@ Para que os alertas funcionem no mural, é necessário que haja **alertas config
 :::tip Dica
 Combine o Mural de Câmeras com alertas configurados para veículos de interesse para criar uma central de monitoramento ativo — o operador visualiza as câmeras e recebe destaque imediato quando um veículo alvo é detectado.
 :::
+
+## Erros comuns
+
+| Erro | Causa | Solução |
+|------|-------|----------|
+| Câmera aparece Offline | Falha de conexão | Verificar rede e equipamento |
+| Alerta sem imagem | Equipamento sem câmera | Verificar configuração do equip. |
+| Mural não atualiza | Browser desatualizado | Recarregar a página |
+
+## Integração com outros módulos
+
+| Módulo | Relação |
+|--------|----------|
+| **Alertas** | Exibidos em tempo real no monitoramento |
+| **Veículos Monitorados** | Destaque visual quando detectado |
+| **Relatórios** | Dados do monitoramento alimentam relatórios |
+
+## Perguntas frequentes
+
+**Com que frequência o mapa atualiza?**
+A cada 30 segundos automaticamente.
+
+**Posso filtrar por múltiplos equipamentos?**
+Sim, o filtro aceita seleção múltipla.
+
+**O que é o Mural de Câmeras?**
+Galeria com os últimos frames capturados por cada câmera em tempo real.
+
