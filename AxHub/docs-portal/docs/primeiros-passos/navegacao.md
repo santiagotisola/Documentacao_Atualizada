@@ -121,3 +121,18 @@ O menu pode estar recolhido. Clique no ícone de hamburguer (três linhas) no ca
 | **[Perfis de Acesso](../controle-acesso/perfis-acesso)** | As permissões do perfil controlam diretamente a visibilidade de cada módulo no menu de navegação |
 | **[Dashboard](./dashboard)** | O Dashboard é a tela inicial após o login e o ponto de partida para navegar para todos os módulos |
 | **[Controle de Acesso — Permissões](../controle-acesso/permissoes)** | Módulos ausentes no menu indicam falta de permissão; o administrador configura o acesso neste módulo |
+
+## Exemplo prático
+
+**Cenário**: Um analista reciém-contratado reporta que não vê o módulo **Medição** no menu lateral, que é essencial para o trabalho dele.
+
+**Passo a passo**:
+
+1. O administrador acessa **Controle de Acesso → Perfis de Acesso**
+2. Localiza o perfil do novo analista (ex.: "Operador Padrão")
+3. Clica em **Editar** e verifica as permissões: o módulo **Medição** não está marcado
+4. Habilita as permissões de **Medição → Contratos** e **Medição → Criar Medição**
+5. Clica em **Salvar**
+6. O analista faz logout e login novamente — o módulo Medição passa a aparecer no menu lateral
+
+**Resultado**: O analista acessa o módulo sem necessidade de criar um novo usuário. O ajuste de perfil resolve para todos os usuários vinculados ao mesmo perfil simultaneamente.

@@ -107,3 +107,18 @@ O boletim de medição gerado ficará sem a informação de localidade, e os arq
 | **Postos de Pesagem** | O município identifica a localização geográfica do posto nos boletins de medição |
 | **Relatório de Infrações** | O município é exibido nos relatórios como localidade das ocorrências de infração |
 | **Exportação de Infrações** | O código IBGE do município é campo obrigatório nos arquivos enviados ao SENATRAN |
+
+## Exemplo prático
+
+**Cenário**: O primeiro lote de infrações do posto de pesagem de **Araguari/MG** é rejeitado pelo SENATRAN com a mensagem "Código de município inválido". A investigação revela que o município foi cadastrado com o código de 6 dígitos (`314430`) em vez do código oficial de 7 dígitos.
+
+**Configuração**:
+
+1. Consulte o portal IBGE (ibge.gov.br/cidades) e localize Araguari/MG: código correto é **3103504**
+2. Acesse **Veículos → Municípios** e localize o registro de Araguari/MG
+3. Edite o **Código IBGE** de `314430` para `3103504`
+4. Confirme a **UF**: `MG`
+5. Clique em **Salvar**
+6. Reenvie o lote de infrações ao SENATRAN
+
+**Resultado**: O lote é aceito com o código IBGE correto de 7 dígitos. Configure uma checklist de implantação para validar os códigos de todos os municípios antes de gerar o primeiro lote.

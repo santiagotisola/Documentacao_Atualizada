@@ -98,3 +98,13 @@ O mínimo recomendado é de 100 capturas válidas por faixa para avaliar a taxa 
 
 **O Mapa de Teste serve para validar todos os equipamentos ou apenas novos?**
 Pode ser usado para ambos: validação de novos equipamentos na homologação e revalidação após intervenções técnicas como limpeza, calibração ou troca de componentes.
+
+## Tabela de referência rápida
+
+| Situação | Configuração recomendada | Observação |
+|----------|:------------------------:|------------|
+| Instalação inicial de equipamento | Operação com `Homologacao = 1` | Garante isolação total das infrações reais |
+| Revalidação após manutenção | 100+ capturas por faixa antes de liberar | Referência mínima estatisticamente válida |
+| OCR abaixo de 85% | Verificar posicionamento e limpeza da câmera | Recalibrar antes de nova rodada de testes |
+| Faixa sem resultados no mapa | Verificar cabeamento e operação ativa | Equipamento pode estar sem passagens de teste |
+| Aceitação contratual do equipamento | Exportar o mapa como comprovante | Documentar taxa OCR ≥ 90% por faixa |

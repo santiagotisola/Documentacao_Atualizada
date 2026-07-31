@@ -111,3 +111,17 @@ Não exclua — inative a cor. Cores vinculadas a infrações históricas precis
 | **[Infrações — Triagem](../infracoes/triagem)** | A cor consta nos dados do auto e pode ser corrigida manualmente durante a triagem caso a consulta RENAVAM falhe |
 | **[Exportação de Infrações](../infracoes/exportacao)** | Alguns layouts de exportação exigem o código de cor padronizado pelo DENATRAN — confirme o requisito do órgão autuador |
 | **[Infrações — Consulta](../infracoes/consulta-infracoes)** | A cor pode ser usada como filtro na busca de infrações para localizar registros de um veículo específico |
+
+## Exemplo prático
+
+**Cenário**: O órgão autuador rejeita o lote porque o campo **cor do veículo** está em branco em 12% das infrações. A análise identifica que a cor "VINHO" não está cadastrada na tabela.
+
+**Configuração**:
+
+1. Acesse **Veículos → Cores**
+2. Clique em **+ Nova**
+3. Preencha **Nome**: `VINHO` e **Código**: `10` (código DENATRAN para vinho/bordô)
+4. Clique em **Salvar**
+5. Reprocesse as infrações pendentes em **Infrações → Triagem**, filtrando por "cor em branco"
+
+**Resultado**: As 12% de infrações com cor em branco passam a exibir "VINHO" automaticamente após o reprocessamento, e o lote seguinte é aceito pelo órgão sem rejeição.

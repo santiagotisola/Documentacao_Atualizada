@@ -108,4 +108,18 @@ Os relatórios continuarão usando o índice antigo do Elasticsearch, que pode n
 | **Relatório de Passagens** | Depende do Elastic Search indexado — passagens não sincronizadas não aparecem nos resultados de busca |
 | **Monitoramento Online** | Passagens exibidas em tempo real são indexadas automaticamente; a sincronização manual recupera registros históricos perdidos |
 | **Rastreamento de Placas** | Consultas por placa dependem do índice atualizado — sincronizar garante que todo o histórico esteja disponível |
+
+## Exemplo prático
+
+**Cenário**: Após a restauração de backup em um servidor que ficou offline por 6 horas, os operadores percebem que o **Rastreamento de Placas** não retorna passagens do período da falha. O índice do Elasticsearch ficou desatualizado.
+
+**Passo a passo**:
+
+1. Acesse **Configurações → Sincronização de dados** (perfil Administrador)
+2. Informe a **Data de Início**: data de início da janela afetada pela falha
+3. Clique em **Iniciar Sincronização**
+4. Aguarde a progressão — não navegue para outras áreas durante o processo
+5. Após conclusão, acesse **Relatórios → Rastreamento de Placas** e verifique se as passagens do período aparecem
+
+**Resultado**: O Elasticsearch é reindexado com os dados restaurados. Passagens que não apareciam voltam a ser acessíveis em todos os relatórios e consultas de placa. O processo levou 12 minutos para reindexar 6 horas de dados.
 | **Logs de Acesso** | Toda execução de sincronização é registrada no log de acesso com o usuário e horário de início |

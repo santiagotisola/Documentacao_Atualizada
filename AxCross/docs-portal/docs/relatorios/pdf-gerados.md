@@ -128,5 +128,15 @@ Relatórios com grande volume de dados podem demorar vários minutos. Se o statu
 | **Relatório de Passagens** | Os PDFs de passagens gerados ficam listados aqui para redownload |
 | **Ocorrências e Alertas** | PDFs de ocorrências gerados também aparecem na fila |
 | **Veículos Monitorados** | Relatórios de veículos monitorados com imagens ficam disponíveis aqui |
+
+## Tabela de referência rápida
+
+| Situação | Configuração recomendada | Observação |
+|----------|:------------------------:|------------|
+| Relatório pesado (>500 reg.) | Gerar via botão Exportar PDF e aguardar em PDF Gerados | Não aguardar na mesma tela |
+| Relatório urgente para entrega | Reduzir o período para acelerar a geração | Períodos de 1-7 dias são mais rápidos |
+| Status "Erro" persistente | Clicar em Reprocessar após verificar filtros | Reduzir período se o erro persistir |
+| PDF expirado (fora do período de retenção) | Gerar novamente com os mesmos filtros | Arquivar PDFs críticos localmente |
+| Relatório mensal para prestação de contas | Exportar até o 5º dia do mês seguinte | Evitar geração tardia após expiração |
 | **Rastreamento de Placas** | PDFs de rastreamento ficam acessíveis para download posterior |
 

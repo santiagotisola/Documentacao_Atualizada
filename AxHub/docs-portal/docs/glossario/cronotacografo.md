@@ -98,4 +98,12 @@ Não necessariamente. Pode indicar que a placa não está cadastrada no banco de
 
 - [Enquadramentos](../administracao/enquadramentos) — Códigos CTB aplicáveis
 - [Tipos de Veículos](../veiculos/tipos-veiculos) — Quais veículos são obrigados
+
+## Contexto operacional
+
+A verificação do **cronoatacógrafo** no AxHub é uma camada de fiscalização automática que complementa a autu ação por velocidade. Na triagem, o operador recebe uma indicação do status do dispositivo para cada veículo de carga: **Regular**, **Irregular** ou **N/A**. Quando irregular, o sistema já sugere o enquadramento pelo Art. 162, II do CTB automaticamente.
+
+Para o supervisor, acompanhar o volume de infrações de cronoatacógrafo por período é um indicador valioso da efetividade do sistema: alta freqüência de irregularidades em um trecho específico pode indicar padrão de comportamento dos transportadores que justifica operações de fiscalização ativa.
+
+Para o gestor, garantir que o banco de certif icados do cronoatacógrafo esteja atualizado é responsabilidade do suporte técnico da Axion. Verific ações retornando status **NãoEncontrado** de forma recorrente para veículos obrigados indicam desatualização do banco e devem ser reportados imediatamente para correção.
 - [Aferição](./afericao) — Validade do equipamento que registra a infração

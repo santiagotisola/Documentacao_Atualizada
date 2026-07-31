@@ -118,3 +118,19 @@ O cadastro é manual. Os dados de modelo são retornados pela consulta RENAVAM d
 | **Pesagem → Iniciar Pesagem** | O modelo é identificado via consulta RENAVAM durante a pesagem e associado ao ticket |
 | **Relatório de Passagens** | O modelo do veículo aparece nos registros do relatório para identificação |
 | **Exportação de Infrações** | Alguns layouts de exportação exigem o modelo do veículo no arquivo enviado ao órgão autuador |
+
+## Exemplo prático
+
+**Cenário**: Durante a triagem, o operador percebe que todos os caminhões da marca **VOLVO** estão sem modelo no ticket. A consulta RENAVAM retorna "FH" mas o modelo não está cadastrado no sistema.
+
+**Configuração**:
+
+1. Acesse **Veículos → Modelos de Veículos** e clique em **+ Novo**
+2. Cadastre os modelos VOLVO mais comuns no porto:
+   - `FH` — vinculado à marca VOLVO
+   - `FM` — vinculado à marca VOLVO
+   - `FMX` — vinculado à marca VOLVO
+3. Clique em **Salvar** para cada modelo
+4. Retorne à triagem e atualize os tickets pendentes com o modelo correto
+
+**Resultado**: Nas próximas pesagens de caminhões VOLVO, o modelo é associado automaticamente via RENAVAM. O relatório de passagens passa a exibir a identificação completa do veículo (Marca + Modelo), melhorando a rastreabilidade.

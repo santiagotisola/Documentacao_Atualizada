@@ -122,3 +122,19 @@ Use os botões **Excel** ou **PDF** na tela do relatório após aplicar os filtr
 | **Relatório de Passagens** | Para verificar passagens de um veículo monitorado além das ocorrências |
 | **PDFs Gerados** | Os PDFs gerados por este relatório ficam listados aqui para redownload |
 
+## Exemplo prático
+
+**Cenário**: O órgão contratante solicita um relatório mensal com todas as detecções de veículos roubados/furtados realizadas pelo sistema no mês de junho para comprovar a efetividade do monitoramento.
+
+**Passo a passo**:
+
+1. Acesse **Relatórios → Veículos Monitorados**
+2. Defina o **período**: 01/06 a 30/06
+3. Filtre **Classificação** = "Veículo Roubado/Furtado"
+4. Clique em **Consultar**
+5. Verifique as detecções listadas e confirme que os status de alerta estão como "Resolvido"
+6. Clique em **PDF** para gerar o relatório com imagens de cada detecção
+7. Aguarde o PDF em **Relatórios → PDFs Gerados** e faça o download
+
+**Resultado**: O relatório documenta 8 detecções de veículos furtados no mês, com imagens, local e horário de cada ocorrência. O documento é entregue ao contratante como comprovante das atividades e dois dos veículos detidos geraram registros nos portais de segurança pública.
+

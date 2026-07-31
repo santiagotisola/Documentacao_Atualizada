@@ -111,3 +111,11 @@ Sim, enquanto a operação estiver com status **Pausada** ela pode ser retomada.
 | **[Cadastro de Operações](../operacoes/cadastro-operacoes)** | As operações são gerenciadas neste módulo; este glossarío explica o conceito |
 | **[Equipamentos](../cadastros/equipamentos)** | Os equipamentos são vinculados à operação para capturar passagens |
 | **[Relatório de Passagens](../relatorios/relatorio-passagens)** | As passagens são registradas sempre no contexto de uma operação ativa |
+
+## Contexto operacional
+
+A **operação** no AxCross é o contexto fiscalizatório que organiza o trabalho de campo. Do ponto de vista do operador, iniciar uma operação significa ativar os equipamentos corretos para um período específico — sem esse passo, as passagens registradas não terão contexto fiscalizatório e não aparecerão nos relatórios de ocorrências.
+
+O supervisor usa o status das operações para garantir cobertura contínua: uma operação **Pausada** significa que nenhum alerta está sendo gerado naquele período, mesmo que o equipamento esteja online. O encerramento correto ao final de cada turno é fundamental para consolidar os dados e liberar os relatórios de ocorrências para o gestor.
+
+Para o gestor, cada operação encerrada gera um conjunto de dados rastreavéis: quantos alertas foram gerados, quais veiculos foram flagrados e qual foi a taxa de acionamento da equipe de campo. Essa rastreabilidade é essencial tanto para avaliação da efetividade operacional quanto para defesa em contestações administrativas.

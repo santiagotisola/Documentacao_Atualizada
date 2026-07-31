@@ -108,3 +108,19 @@ Filtre o relatório pelo status **Auditada** e pelo período desejado. Exporte e
 | **Pesagem → Reclassificar** | Infrações com excesso zerado devem ser reclassificadas antes de exportar |
 | **Processamento de Imagens** | Taxa OCR baixa gera mais infrações com placa não identificada, visíveis neste relatório |
 | **Falhas Sequenciais** | Verificar integridade da numeração antes de gerar o lote de exportação |
+
+## Exemplo prático
+
+**Cenário**: O supervisor precisa gerar o lote mensal de infrações para envio ao órgão autuador. Antes de exportar, ele verifica o pipeline de infrações com status **Auditada**.
+
+**Passo a passo**:
+
+1. Acesse **Relatórios → Relatório de Infrações**
+2. Filtre por **Período** = mês anterior, **Status = Auditada**
+3. Verifique o total de infrações aptas para exportação
+4. Revise rapidamente infrações com **Excesso = 0** — podem indicar classificação incorreta
+5. Corrija as infrações com excesso zerado reclassificando o veículo
+6. Execute **Relatórios → Falhas de Sequenciais** para confirmar integridade numérica
+7. Exporte em **CSV** e gere o lote em **Exportação de Infrações**
+
+**Resultado**: 187 infrações auditadas exportadas com sucesso. 3 infrações com excesso zerado foram identificadas e corrigidas antes do envio, evitando rejeição parcial do lote pelo SENATRAN.

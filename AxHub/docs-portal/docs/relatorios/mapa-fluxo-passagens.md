@@ -99,6 +99,22 @@ Passagens exibe o volume total de veículos detectados. Infrações exibe apenas
 **Posso exportar o mapa como imagem para apresentações?**
 Sim. Clique em **Exportar** para salvar uma imagem do mapa ou um CSV com os dados por equipamento.
 
+## Exemplo prático
+
+**Cenário**: A equipe de planejamento precisa decidir onde instalar um novo radar de velocidade. O Mapa de Fluxo é usado para identificar os cruzamentos com maior volume de infrações.
+
+**Passo a passo**:
+
+1. Acesse **Relatórios → Mapa de Fluxo de Passagens**
+2. Defina o **Período** = últimos 90 dias
+3. Selecione **Tipo de Dado = Infrações** para visualizar a concentração de autos
+4. Observe os pontos **vermelhos** no mapa — indicam os equipamentos com maior volume de infrações
+5. Clique no ponto mais crítico: exibe resumo com número de passagens, infrações e aproveitamento OCR
+6. Compare com o filtro **Tipo = Aproveitamento OCR** para avaliar se a taxa de leitura é boa naquele ponto
+7. Exporte o CSV e use os dados para justificar a proposta de novo equipamento ao contratante
+
+**Resultado**: O mapa evidencia que o cruzamento da Av. Brasil com a Rua XV concentra 38% das infrações do período com OCR de 93%. A proposta de instalação é aprovada com base nos dados.
+
 ## Integração com outros módulos
 
 | Módulo | Como se relaciona |

@@ -125,3 +125,18 @@ Depende do contrato. Em contratos com SLA de triagem (prazo máximo para process
 | **Relatório de Infrações** | As infrações processadas por cada usuário aparecem consolidadas neste relatório |
 | **Logs de Acesso** | Cruza a atividade de triagem com os logs de login para confirmar presença do operador |
 | **Medições → Contratos** | Em contratos com SLA de triagem, a produtividade deste relatório é monitorada para cumprimento |
+
+## Exemplo prático
+
+**Cenário**: O supervisor percebe que um operador junior tem taxa de descarte de apenas 1,5% — muito abaixo da referencia de 5-15%. Antes de dar feedback positivo, investiga se as aprovacões estão corretas.
+
+**Passo a passo**:
+
+1. Acesse **Relatórios → Processamento por Usuário**
+2. Filtre por **Usuário** = operador em questão e **Período** = última semana
+3. Confirme: 45 infrações triadas, apenas 1 descartada — taxa 2,2%
+4. Acesse **Operações → Triagem** e filtre pelas infrações aprovadas pelo operador no mesmo período
+5. Revise uma amostra aleatória de 10 infrações: 3 têm placa ilegível e foram aprovadas incorretamente
+6. Reverte as 3 infrações incorretas e agenda treinamento sobre critérios de descarte
+
+**Resultado**: As 3 infrações incorretas são corrigidas antes do lote de exportação. O operador recebe treinamento especifico em critérios de qualidade de imagem, elevando sua taxa de descarte para 8% na semana seguinte.

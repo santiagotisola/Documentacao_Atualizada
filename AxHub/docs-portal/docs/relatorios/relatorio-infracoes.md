@@ -120,3 +120,18 @@ O enquadramento usa a **Velocidade Considerada**, que aplica a tolerância métr
 | **[Exportação de Infrações](../infracoes/exportacao)** | O relatório é a base de conferência antes de gerar o lote de exportação ao órgão autuador |
 | **[Enquadramentos](../administracao/enquadramentos)** | O enquadramento exibido foi aplicado automática ou manualmente durante a triagem — erros de enquadramento aparecem aqui |
 | **[Medições — Contratos](../medicoes/contratos)** | O volume de infrações no período é utilizado no cálculo de indicadores de desempenho do contrato |
+
+## Exemplo prático
+
+**Cenário**: O auditor interno precisa verificar se houve infrações enquadradas incorretamente no mês anterior antes de assinar o Boletim de Medição.
+
+**Passo a passo**:
+
+1. Acesse **Relatórios → Infrações**
+2. Filtre por **Período** = mês anterior, **Status = Auditada**
+3. Revise a coluna **Enquadramento** buscando artigos incomuns ou improvaveis para a operação
+4. Para infrações suspeitas: clique na imagem e verifique se velocidade e enquadramento estão coerentes
+5. Filtre por **Status = Descartada** e analise os principais motivos de descarte
+6. Exporte em **PDF (com imagens)** para compor o relatório de auditoria
+
+**Resultado**: A auditoria confirma 99,2% de enquadramentos corretos. 12 infrações descartadas por placa ilegivel são documentadas no relatório. O Boletim é assinado com confíente de qualidade operacional.

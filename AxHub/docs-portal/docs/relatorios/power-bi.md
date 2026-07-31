@@ -82,3 +82,19 @@ Verifique se a URL de incorporação está correta e se o usuário tem acesso ao
 | **[Medições](../medicoes/contratos)** | Os dados de Boletim de Medição e disponibilidade alimentam diretamente os dashboards analíticos |
 | **[Processamento de Imagens](./processamento-imagens)** | A taxa OCR por equipamento é exibida nos dashboards de desempenho e qualidade |
 | **[Relatório de Infrações](./relatorio-infracoes)** | Volume e distribuição de infrações compõem os gráficos analíticos do Power BI |
+
+## Exemplo prático
+
+**Cenário**: O gestor do contrato precisa apresentar ao órgão fiscalizador o Índice de Disponibilidade mensal para validação do pagamento do Boletim de Medição. O Power BI é usado para gerar a evidência visual.
+
+**Passo a passo**:
+
+1. Acesse **Relatórios → Power BI** no menu lateral
+2. Clique em **Disponibilidade** para abrir o dashboard de uptime por equipamento
+3. Filtre por **Período** = mês anterior e **Equipamento** = todos do contrato
+4. Verifique quais equipamentos ficaram abaixo de 95% de disponibilidade
+5. Para cada queda, cruce com **Infração — Dia x Hora** para confirmar se houve impacto nas infrações
+6. Exporte o dashboard de Disponibilidade em **PDF** pelo botão nativo do Power BI
+7. Anexe o PDF ao processo de faturamento mensal
+
+**Resultado**: O dashboard evidencia 98,2% de disponibilidade média no mês, com duas quedas documentadas por eventos de manutenção preventiva. O Boletim de Medição é aprovado sem contestações.

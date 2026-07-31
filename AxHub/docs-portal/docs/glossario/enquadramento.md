@@ -97,3 +97,11 @@ Gravidade define o valor da multa (Leve, Média, Grave, Gravíssima). Pontuaçã
 | **Faixas** | A velocidade regulamentada de cada faixa é a base para o enquadramento automático sugerido pelo sistema |
 | **Infrações** | Cada infração recebe um enquadramento que determina multa, pontuação e artigo CTB aplicável |
 | **Configurações de Enquadramento** | Define as regras de enquadramento por operação e faixa de velocidade |
+
+## Contexto operacional
+
+O **enquadramento** é a decisão legal que transforma uma passagem em uma infração válida. Na prática, o sistema sugere automaticamente o enquadramento com base na velocidade medida vs. limite da faixa — mas o operador tem responsabilidade de validar essa sugestão na triagem. Um enquadramento incorreto é a causa mais comum de recursos aceitos no juízo administrativo.
+
+Para o supervisor, a análise periódica dos enquadramentos mais freqüentes nas infrações permite identificar configurações incorretas: se um grande volume de infrações está sendo enquadrado como **Leve** em uma rodovia de alta velocidade, provavelmente o limite da faixa está mal configurado.
+
+Para o gestor, manter a tabela de enquadramentos atualizada conforme as resoluções CONTRAN é obrigação legal. Enquadramentos desatualizados invalidam autos e geram recurs os em massa que prejudicam a receita contratual e a credibilidade do sistema junto ao órgão autuador.

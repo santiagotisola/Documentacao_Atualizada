@@ -111,3 +111,20 @@ Crie uma nova classificação quando o CONTRAN publicar resolução alterando os
 | **Tipos de Veículos** | Cada classificação está vinculada a um tipo de veículo que define a categoria pesada |
 | **Pesagem** | A classificação determina o PBT máximo comparado com o peso aferido na balança |
 | **Infrações** | O excesso de PBT gera infração automática com enquadramento baseado na classificação identificada |
+
+## Exemplo prático
+
+**Cenário**: O fiscal identifica que caminhões com configuração de **9 eixos (Rodotrem)** estão sendo autuados com o limite de **45 t** (Bitrem 6E) em vez de **57 t**, gerando infrações indevidas em veículos dentro do limite legal.
+
+**Configuração**:
+
+1. Acesse **Veículos → Classificações de Veículos** e verifique se **Rodotrem 9E** está cadastrado
+2. Se ausente, clique em **+ Nova** e preencha:
+   - **Código**: `9E`
+   - **Descrição**: `Rodotrem (9 Eixos)`
+   - **Número de eixos**: `9`
+   - **PBT máximo**: `57000` (kg)
+3. Confirme com o órgão fiscalizador se a tolerância aplicável é 5% (CONTRAN 803/2021)
+4. Clique em **Salvar**
+
+**Resultado**: Veículos com 9 eixos passam a ser comparados ao limite correto de 57 t. As pesagens anteriores com enquadramento incorreto devem ser revisadas na triagem.

@@ -100,3 +100,11 @@ Sim. Sem a vinculação com uma faixa, o equipamento não captura passagens mesm
 | **[Cadastros → Equipamentos](../cadastros/equipamentos)** | Local de registro físico, gestão de faixas e monitoramento de status de cada equipamento |
 | **[Monitoramento Online](../operacoes/monitoramento-online)** | Exibe o status de comunicação de cada equipamento em tempo real com filtros por câmera e faixa |
 | **[Dashboard](../primeiros-passos/dashboard)** | Indicador de equipamentos ativos e mapa georreferenciado com a localização e status de cada câmera |
+
+## Contexto operacional
+
+O **equipamento** é o elo físico entre o trâfego real e os dados do AxCross. Do ponto de vista do operador, cada equipamento é uma fonte de passagens: quando está **Online**, gera registros contínuos; quando cai para **Offline**, cria lacunas no histórico que não podem ser recuperadas.
+
+O supervisor acompanha o status dos equipamentos no **Dashboard** (indicador de ativos) e no **Monitoramento Online** (status por câmera). Equipamentos com taxa OCR abaixo de 85% merecem atenção imediata: lentes sujas, desalinhamento por vento ou problemas de firmware são as causas mais comuns, todas resolúveis com manutenção preventiva.
+
+Para o gestor, o desempenho dos equipamentos impacta diretamente os indicadores contratuais de disponibilidade. Registrar toda manutenção corretamente no sistema é essencial para auditorias e para justificar lacunas no histórico de passagens durante revisões contratuais.

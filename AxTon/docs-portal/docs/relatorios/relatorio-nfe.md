@@ -126,3 +126,20 @@ Sim. O transporte de cargas sem NF-e é irregularidade prevista no **Ajuste SINI
 - Período (data inicial e final)
 - Posto de pesagem
 - Exportar para Excel/PDF
+
+## Exemplo prático
+
+**Cenário**: A Secretaria de Fazenda solicita um relatório de veículos de carga que transitaram pelo posto de pesagem sem nota fiscal válida durante o mês de junho.
+
+**Passo a passo**:
+
+1. Acesse **Relatórios → Relatório de Notas Fiscais**
+2. Defina o **Período**: 01/06 a 30/06
+3. Selecione o **Posto** correspondente
+4. Filtre **Status = Ausente**
+5. Clique em **Gerar** — o sistema lista todos os veículos sem NF-e válida
+6. Exporte em **Excel**
+7. Adicione uma coluna com a observação de obrigação legal (Ajuste SINIEF 07/2005)
+8. Encaminhe o relatório à SEFAZ estadual para notificação dos emitentes
+
+**Resultado**: 47 veículos identificados com NF-e ausente em junho. O relatório entregue à SEFAZ gerou 12 notificações de penalidade por transporte irregular, reduzindo reincidência nos meses seguintes.

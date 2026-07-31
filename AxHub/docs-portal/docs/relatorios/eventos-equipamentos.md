@@ -114,3 +114,18 @@ Não. Eventos com duração zero (sem data de fim registrada) são tratados como
 | **[Medições — Interrupções](../medicoes/interrupcoes)** | As interrupções registradas neste relatório devem ser consistent com o módulo de interrupções da medição |
 | **[Aferíções](../operacoes/afericoes)** | Manutenções registradas como eventos devem ser seguidas de aferíção para revalidação metrólogica |
 | **[Processamento de Imagens](./processamento-imagens)** | Queda no aproveitamento de imagens no mesmo período do evento indica impacto do equipamento na qualidade dos registros |
+
+## Exemplo prático
+
+**Cenário**: No fechamento do Boletim de Medição de junho, o gestor precisa calcular as horas de indisponibilidade do equipamento da Rua XV para dedução contratual e preparar a defesa das interrupções por manutenção preventiva.
+
+**Passo a passo**:
+
+1. Acesse **Relatórios → Eventos dos Equipamentos**
+2. Filtre por **Período** = junho, **Equipamento** = Rua XV, **Tipo = Falha**
+3. Some as **Durações** das falhas: 4h + 2h + 1,5h = **7,5 horas** de indisponibilidade por falha
+4. Mude o filtro para **Tipo = Manutenção**: identifica 3 eventos preventivos registrados
+5. Exporte em **Excel** e separe falhas de manutenções: falhas impactam SLA, manutenções pré-aprovadas não
+6. Compare com os registros em **Medição → Interrupções** para garantir consistência
+
+**Resultado**: 7,5 horas de falha são calculadas para desconto. As 3 manutenções preventivas (4 horas no total) não são descontadas pois foram pré-autorizadas pelo contratante.

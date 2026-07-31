@@ -122,3 +122,19 @@ O relatório não possui filtro direto por placa na tela principal. Para anális
 | **Veículos Monitorados** | Passagens de veículos monitorados geram alertas que aparecem consolidados neste relatório |
 | **Painel Analítico** | Complementa a análise: use o Painel para investigar individualmente cada placa identificada nas ocorrências |
 | **Mapeamento de Rotas** | Após identificar uma placa recorrente nas ocorrências, use o Mapeamento para visualizar o percurso do veículo |
+
+## Exemplo prático
+
+**Cenário**: O gestor precisa apresentar ao contratante o relatório mensal de efetividade do sistema: quantos alertas foram gerados, quantos foram atendidos dentro do SLA e quais ficaram sem responsabilidade atribuída.
+
+**Passo a passo**:
+
+1. Acesse **Relatórios → Ocorrências e Alertas**
+2. Defina o **período** = mês anterior completo
+3. Deixe os demais filtros em branco para incluir todos os tipos
+4. Clique em **Consultar** e verifique o total gerado
+5. Filtre por **Status = Aberto** para identificar alertas sem tratativa (SLA em risco)
+6. Exporte em **Excel** e calcule a taxa de atendimento: `(resolvidos / total) × 100`
+7. Identifique operadores com mais alertas resolvidos — e os sem atendimento registrado
+
+**Resultado**: O relatório documenta 342 alertas no mês, 95,6% resolvidos dentro do SLA. Os 15 alertas abertos são priorizados na reunião semanal, e o Excel é entregue ao contratante como comprovante das atividades.

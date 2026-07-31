@@ -123,3 +123,17 @@ Depende do layout de exportação exigido pelo órgão autuador. Confirme no con
 | **[Consulta de Placas](../operacoes/consulta-placas)** | A marca é populada automaticamente via consulta RENAVAM; o cadastro deve estar atualizado para evitar campos em branco |
 | **[Infrações — Triagem](../infracoes/triagem)** | A marca do veículo compõe os dados do auto e pode ser corrigida manualmente durante a triagem |
 | **[Exportação de Infrações](../infracoes/exportacao)** | O Código DENATRAN da marca é exigido em alguns layouts de exportação — confirme o requisito do órgão autuador |
+
+## Exemplo prático
+
+**Cenário**: Durante a triagem, o operador percebe que infrações de veículos da marca **BYD** aparecem com o campo marca vazio — a montadora não estava cadastrada no sistema.
+
+**Configuração**:
+
+1. Acesse **Veículos → Marcas de Veículos**
+2. Clique em **+ Nova**
+3. Preencha **Nome**: `BYD` e **Código DENATRAN**: `075` (código atribuído pelo DENATRAN)
+4. Clique em **Salvar**
+5. Acesse **Veículos → Modelos de Veículos** e cadastre os modelos BYD (Han, Dolphin, Seal) vinculados à nova marca
+
+**Resultado**: A partir do próximo registro de placa BYD, o sistema popula a marca automaticamente via consulta RENAVAM. Infrações anteriores são corrigidas manualmente na triagem.

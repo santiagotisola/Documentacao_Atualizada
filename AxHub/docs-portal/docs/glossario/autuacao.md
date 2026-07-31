@@ -99,6 +99,14 @@ Equipamento captura infração
 - [Enquadramento](./enquadramento) — Classificação legal
 - [Aferição](./afericao) — Pré-requisito do equipamento
 
+## Contexto operacional
+
+A **autuação** eletrônica no AxHub é um processo distribuído entre três atores. O **operador** valida a imagem e confirma o enquadramento na triagem. O **auditor** revisa a consistência jurídica antes da exportação. O **órgão autuador** emite formalmente o Auto de Infração de Trânsito (AIT) e envia a notificação ao proprietário do veículo.
+
+Do ponto de vista do operador, cada autuação representa uma responsabilidade: uma infração confirmada incorretamente pode gerar um auto inválido que será contestado e anulado, revertendo o trabalho e impactando métricas de qualidade. A máxima do triador é simples: **em caso de dúvida, descartar com motivo**.
+
+Para o gestor, a taxa de autuações aceitas pelo órgão é o índice de qualidade mais importante do sistema. Alta taxa de rejeição pelo órgão indica problema sistêmico (enquadramento errado, placa ilegível recorrente, aferição vencida) que exige intervenção imediata na configuração ou nos equipamentos.
+
 
 ## Uso no Sistema AxHub
 

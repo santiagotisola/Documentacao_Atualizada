@@ -111,3 +111,11 @@ Sim. A taxa de descarte é monitorada no Dashboard e nos relatórios de processa
 | **[Enquadramento](./enquadramento)** | O enquadramento define o artigo CTB aplicável a cada tipo de infração; é a base legal da infração gerada |
 | **[Autuação](./autuacao)** | A autuação é o ato formal que formaliza a infração; o AxHub gera infrações que são exportadas ao órgão autuador para autuação |
 | **[Exportação de Infrações](../infracoes/exportacao)** | Infrações validadas e auditadas são exportadas em lotes ao órgão autuador para emissão do Auto de Infração de Trânsito |
+
+## Contexto operacional
+
+No dia a dia do operador, a **infração** é o ponto central de todas as atividades do AxHub. Cada imagem capturada pelo equipamento é uma infração em potencial que precisa ser analisada na triagem: a placa é legível? O enquadramento está correto? A imagem é suf iciente para embasar o auto? Essas decisões, feitas em 15-30 segundos cada uma, determinam a qualidade do lote exportado ao órgão.
+
+Para o supervisor, acompanhar o pipeline de infrações — **Pendente → Triada → Auditada → Exportada** — é a tarefa mais crítica: backlog alto na triagem significa risco de prescrição (Art. 281 CTB); alta taxa de descarte pode indicar problema no equipamento; baixa taxa pode indicar aprovação sem critério.
+
+Para o gestor, cada infração exportada é uma unidade de receita para o contrato e de conformidade legal. A rastreabilidade completa de cada auto — desde a captura até o aceite do órgão — é a prova de qualidade que embasa pagamentos e defende o contrato em auditorias.

@@ -119,3 +119,11 @@ No modulo **Infracoes - Exportacao**, o sistema agrupa as infracoes auditadas em
 | **Auditoria** | Apenas infrações com status **Auditada** podem integrar um lote — a auditoria é pré-requisito para exportar |
 | **Layouts de Arquivos** | O formato e os campos do lote são definidos pelo layout configurado em **Administração → Layouts** |
 | **Sequenciais de Lote** | Controla a numeração sequencial dos lotes exportados, garantindo unicidade e rastreabilidade junto ao órgão |
+
+## Contexto operacional
+
+O **lote de exportação** é o produto final do fluxo de infrações do AxHub. Do ponto de vista do operador, um lote só pode ser gerado após a confirmação de que todas as infrações estão com status **Auditada** e que não há lacunas sequenciais — dois pré-requisitos que o operador deve verificar sistematicamente antes de clicar em **Gerar Lote**.
+
+Para o supervisor, o acompanhamento do status de cada lote em **Infrações → Exportação** é a atividade mais crítica do fechamento de período: lotes em status **Erro** exigem diagnóstico imediato da mensagem de retorno do órgão e correção antes do reenvio. Lotes rejeitados e não corrigidos dentro do prazo contratual podem gerar desconto no Boletim de Medição.
+
+Para o gestor, o histórico de lotes exportados e aceitos é a principal evidência de conformidade legal e contratual. Manter os protocolos de aceite arquivados por no mínimo 5 anos é obrigação legal (Lei 9.873/99) e pré-requisito para auditorias do SENATRAN e controlação interna.

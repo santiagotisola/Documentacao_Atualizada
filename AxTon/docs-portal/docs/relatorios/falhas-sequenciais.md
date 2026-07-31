@@ -98,6 +98,22 @@ As principais causas são: infração descartada sem motivo registrado, falha de
 Sim. Lacunas ou duplicidades não corrigidas podem causar rejeição do lote inteiro pelo DENATRAN/SENATRAN. Execute o relatório e corrija todas as falhas antes de gerar um novo lote.
 
 **Como resolver uma duplicidade identificada no relatório?**
+
+## Exemplo prático
+
+**Cenário**: Antes de gerar o lote mensal, o supervisor executa o relatório de Falhas de Sequenciais e encontra **2 lacunas** (números 1045 e 1046 pulados) e **1 duplicidade** (número 1089 em dois registros distintos).
+
+**Passo a passo**:
+
+1. Acesse **Relatórios → Falhas de Sequenciais**, filtre pelo período do lote
+2. Para a **lac una** (1045-1046): verifique se houve descarte não documentado no período — acesse a triagem e filtre por data/descarte
+3. Se confirmado descarte legítimo: documente a justificativa e comunique ao órgão autuador se exigido
+4. Para a **duplicidade** (1089): acesse ambos os registros com o mesmo número e identifique qual é o legítimo
+5. Cancele o registro duplicado na triagem e ajuste o sequencial
+6. Volte ao relatório e confirme que não há mais falhas
+7. Exporte o lote somente após a confirmação
+
+**Resultado**: As 3 falhas são resolvidas antes da exportação. O lote é enviado ao SENATRAN com numeração sequencial íntegra e é aceito sem rejeição.
 Identifique os tickets com mesmo número sequencial, verifique qual registro é o correto e cancele ou corrija o duplicado. Se o lote já foi enviado, entre em contato com o órgão autuador para orientação sobre o procedimento de correção.
 
 ## Integração com outros módulos

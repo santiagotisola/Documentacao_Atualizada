@@ -113,3 +113,17 @@ Verifique se o município está ativo e se o nome está grafado corretamente. Se
 | **[Regiões](../administracao/regioes)** | As regiões agrupam municípios para filtros de relatórios e controle de operações por área geográfica |
 | **[Infrações — Consulta](../infracoes/consulta-infracoes)** | O município é um dos filtros disponíveis na busca de infrações e nos relatórios exportados |
 | **[Exportação de Infrações](../infracoes/exportacao)** | O código IBGE do município é obrigatório em diversos layouts de exportação ao SENATRAN/DETRAN |
+
+## Exemplo prático
+
+**Cenário**: Um novo equipamento é instalado na cidade de **Itabirito/MG**. Ao tentar vincular a faixa ao município, o operador não encontra "Itabirito" na lista (o sistema exibia "Itabirito" com o código IBGE errado de 6 dígitos).
+
+**Configuração**:
+
+1. Acesse o portal IBGE (ibge.gov.br/cidades) e confirme: código correto de Itabirito/MG é **3132107** (7 dígitos)
+2. Acesse **Veículos → Municípios** e localize o registro com código incorreto
+3. Edite o registro: corrija **Código IBGE** para `3132107` e **UF** para `MG`
+4. Clique em **Salvar**
+5. Vincule a faixa ao município corrigido
+
+**Resultado**: As infrações geradas nessa faixa passam a conter o código IBGE correto no arquivo de exportação, eliminando a rejeição pelo DETRAN-MG.

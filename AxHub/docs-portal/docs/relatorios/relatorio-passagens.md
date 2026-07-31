@@ -115,3 +115,19 @@ Por padrão inclui todos. Use o filtro **Equipamento** ou **Operação** para re
 | **[Consulta de Placas](../operacoes/consulta-placas)** | A Consulta de Placas complementa este relatório ao buscar todo o histórico de uma placa específica em todos os equipamentos |
 | **[Processamento de Imagens](./processamento-imagens)** | Passagens sem imagem aparecem neste relatório; o Processamento de Imagens auxilia na investigação da causa |
 | **[Equipamentos](../cadastros-basicos/equipamentos)** | Os equipamentos cadastrados são a fonte de dados do relatório; equipamentos inativos não geram registros novos |
+
+## Exemplo prático
+
+**Cenário**: Um motorista contesta uma infração alegando que não estava no local indicado. O operador usa o Relatório de Passagens para verificar o histórico completo da placa naquele dia.
+
+**Passo a passo**:
+
+1. Acesse **Relatórios → Relatório de Passagens**
+2. Informe a **Placa** do veículo contestante
+3. Defina o **Período** = dia e horário da infração (±2 horas)
+4. Filtre por **Equipamento** = radar do local
+5. Clique em **Buscar** — o sistema lista todas as passagens da placa no período
+6. Clique na imagem da passagem para ampliar e verificar a placa visualmente
+7. Exporte em **Excel** e gere também o **PDF com imagens** para o processo de defesa
+
+**Resultado**: O relatório confirma a passagem da placa às 14h32 com velocidade de 97 km/h (limite 60) e imagem nítida. A contestação é indeferida com base nas evidências documentadas no sistema.

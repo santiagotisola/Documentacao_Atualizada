@@ -104,3 +104,11 @@ Depende da configuração das regras de enquadramento. O alerta pode ficar apena
 | **Pesagem** | O peso declarado na NF-e é automaticamente comparado ao peso aferido na balança para detectar subdeclaração |
 | **Triagem** | Alertas de NF-e ausente ou inválida são exibidos na fila de triagem para que o operador valide antes de exportar |
 | **Relatório de Notas Fiscais** | Exibe o histórico de NF-es consultadas, com status e informações do documento fiscal de cada pesagem |
+
+## Contexto operacional
+
+A **NF-e** representa a dimensão fiscal da pesagem veicular. Para o operador, o status da NF-e aparece na triagem como informação complementar: quando a nota está **Ausente** ou **Cancelada**, o operador deve analisar se isso configura infração documental além do excesso de peso físico.
+
+Para o supervisor, a comparação sistêmática entre peso declarado na NF-e e peso aferido na balança é uma ferramenta poderosa de detecção de fraude fiscal: divergencias acima de 10% indicam sub-declaração de carga e devem ser reportadas à SEFAZ estadual, gerando cooperação fiscal com impacto além do contrato de pesagem.
+
+Para o gestor, manter a integração com a SEFAZ funcionando corretamente é um diferencial competitivo e legal do AxTon. A efetividade das autuações fiscais depende da qualidade das consultas em tempo real ao banco de dados da SEFAZ — falhas de conectividade resultam em NF-es marcadas como **Ausentes** mesmo quando existem, gerando alertas falsos que sobrecarregam a triagem.

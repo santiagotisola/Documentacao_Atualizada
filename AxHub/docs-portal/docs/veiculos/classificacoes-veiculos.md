@@ -118,3 +118,17 @@ A classificação é o nível mais específico dentro de uma categoria. Por exem
 | **[Tipos de Veículos](./tipos-veiculos)** | A classificação também está associada ao tipo de veículo para compor a hierarquia completa de identificação |
 | **[Enquadramentos](../administracao/enquadramentos)** | O enquadramento usa a classificação do veículo para determinar o artigo CTB aplicável à infração |
 | **[Infrações — Triagem](../infracoes/triagem)** | O operador pode corrigir a classificação do veículo durante a triagem quando a consulta RENAVAM retorna dado impreciso |
+
+## Exemplo prático
+
+**Cenário**: A operação detecta que veículos do tipo **Truck** (6 eixos) estão sendo classificados como **Toco** (2 eixos) na triagem, o que impacta o artigo CTB e o valor da multa.
+
+**Configuração**:
+
+1. Acesse **Veículos → Classificações de Veículos**
+2. Confirme que **Truck** existe como classificação filha da categoria **Caminhão** com o código correto
+3. Na triagem, filtre por **Classificação = Toco** e **Data** do período suspeito
+4. Para cada infração incorreta, edite o campo **Classificação** de `Toco` para `Truck`
+5. O sistema recalcula o enquadramento e atualiza o valor da autuação automaticamente
+
+**Resultado**: As infrações corrigidas refletem o artigo CTB adequado para veículos de grande porte, e o lote de exportação passa na validação do órgão autuador.

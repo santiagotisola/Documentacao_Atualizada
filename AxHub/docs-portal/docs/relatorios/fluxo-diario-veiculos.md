@@ -114,3 +114,19 @@ Combine com o [Mapa de Fluxo de Passagens](./mapa-fluxo-passagens) para visualiz
 | **[Mapa de Fluxo de Passagens](./mapa-fluxo-passagens)** | Complemento visual georreferenciado dos mesmos dados tabulares apresentados neste relatório |
 | **[Processamento de Imagens](./processamento-imagens)** | Fornece a taxa OCR por equipamento e dia que compõe o Aproveitamento (%) exibido |
 | **[Operações / Faixas](../operacoes/faixas)** | As faixas e equipamentos da operação ativa são a fonte primária do fluxo diário de passagens |
+
+## Exemplo prático
+
+**Cenário**: O supervisor percebe que a segunda-feira da semana passada teve apenas 120 passagens no equipamento da Av. Brasil — bem abaixo da média de 850/dia. Precisa identificar se foi falha de equipamento ou baixo fluxo real.
+
+**Passo a passo**:
+
+1. Acesse **Relatórios → Fluxo Diário de Veículos**
+2. Selecione o **Período** = semana em questão
+3. Filtre por **Equipamento** = Av. Brasil
+4. Compare os dias: segunda com 120 vs. terça com 870 passagens
+5. Verifique a coluna **Aproveitamento (%)**: segunda mostra 12% vs. >90% nos outros dias
+6. Acesse **Relatórios → Eventos dos Equipamentos** para confirmar: registro de falha de energia das 08h às 17h na segunda
+7. Exporte em **Excel** e anexe ao Boletim de Medição como justificativa da indisponibilidade
+
+**Resultado**: A queda é atribuída à falha de energia documentada, não a falha operacional. O contratante aceita a justificativa e não aplica desconto no contrato.

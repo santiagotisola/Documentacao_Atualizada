@@ -104,3 +104,11 @@ Depende das permissões configuradas no perfil. Normalmente apenas supervisores 
 | **Motivos de Descarte** | Os motivos disponíveis na triagem são configurados em **Pesagem → Motivos**, garantindo rastreabilidade das rejeições |
 | **Exportação** | Somente infrações com status **Aprovado** na triagem podem ser incluídas em lote e exportadas ao órgão autuador |
 
+## Contexto operacional
+
+A **triagem no AxTon** tem uma responsabilidade adicional em relação ao AxHub: além de validar imagem e placa, o agente deve verificar se a **classificação do veículo** está correta. Um caminhão classificado com eixos a menos tem um PBT máximo mais baixo, o que pode gerar infração para um veículo que estaria dentro do limite legal com a classificação correta.
+
+Para o supervisor, o backlog de triagem em pesagem tem um impacto diferente do AxHub: enquanto em radares a prescrição de uma infração levanta questões legais, em pesagem uma infração não triada rapidamente pode resultar na liberação do veículo infrator sem autuação enquanto o agente ainda analisa, comprometendo a efetividade da fiscalização em campo.
+
+Para o gestor, a taxa de aprovacão vs. descarte na triagem de pesagem é um indicador de qualidade do OCR e da balança: alta taxa de descarte por "classificação incorreta" indica que o sistema automático de identificação de eixos precisa de calibração ou que os dados do RENAVAM estão desatualizados para aquelas placas.
+

@@ -126,3 +126,19 @@ A retenção depende da política de armazenamento do servidor. Exporte mensalme
 | **[Exportação de Infrações](../infracoes/exportacao)** | Cada exportação gera registros de envio que ficam disponíveis neste relatório para rastreabilidade |
 | **[Webhooks](../administracao/webhooks)** | Falhas em webhooks são registradas nos logs de envios para diagnóstico de conectividade |
 | **[Configurações do Sistema](../administracao/configuracoes-sistema)** | As URLs e credenciais dos destinos de exportação são configuradas nas Configurações do Sistema |
+
+## Exemplo prático
+
+**Cenário**: O operador percebe que 34 infrações exportadas há 2 dias aparecem com **Status = Erro (401)** no log. O sistema destino é o integrador do órgão autuador, que requer autenticação via API key.
+
+**Passo a passo**:
+
+1. Acesse **Relatórios → Logs de Envios a Integração**
+2. Filtre por **Status = Erro** e **Período** = últimos 3 dias
+3. Clique em **Ver detalhes** de um dos registros: a mensagem confirma `401 Unauthorized`
+4. Acesse **Administração → Webhooks** e atualize a **API Key** do destino com o novo token fornecido pelo órgão
+5. Salve e retorne ao log de envios
+6. Filtre os 34 registros com erro e clique em **Reenviar** para cada um (ou use a seleção múltipla se disponível)
+7. Confirme que o status mudou para **Sucesso**
+
+**Resultado**: As 34 infrações são entregues com sucesso após a atualização do token. O log documenta a data e hora do reenvio para auditoria de conformidade.

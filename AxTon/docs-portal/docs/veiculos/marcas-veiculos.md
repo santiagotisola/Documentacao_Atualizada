@@ -117,3 +117,16 @@ O campo fabricante fica em branco no ticket de pesagem. O operador deve preenche
 | **Pesagem → Iniciar Pesagem** | A marca é identificada via consulta RENAVAM no momento da pesagem |
 | **Relatório de Passagens** | A marca do veículo aparece nos registros para identificação |
 | **Exportação de Infrações** | Layouts de exportação podem exigir o código DENATRAN da marca no arquivo do lote |
+
+## Exemplo prático
+
+**Cenário**: Um posto de pesagem começa a receber caminhões da marca **SINOTRUK** (fabricante chinesa) que não está cadastrada. O ticket fica sem identificação de fabricante, prejudicando o relatório de passagens e o auto de infração.
+
+**Configuração**:
+
+1. Acesse **Veículos → Marcas de Veículos** e clique em **+ Nova**
+2. Preencha **Nome**: `SINOTRUK` e **Código DENATRAN**: `080` (confirme com o órgão autuador)
+3. Clique em **Salvar**
+4. Acesse **Veículos → Modelos de Veículos** e cadastre os modelos da marca (ex.: HOWO, T7H, T5G) vinculados à SINOTRUK
+
+**Resultado**: Na próxima pesagem de um caminhão SINOTRUK, a consulta RENAVAM popula a marca e o modelo automaticamente. O ticket e o auto exportado passam a ter a identificação completa do fabricante.

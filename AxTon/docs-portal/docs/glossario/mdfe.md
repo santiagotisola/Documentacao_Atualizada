@@ -99,6 +99,14 @@ Não. A obrigatoriedade depende do tipo de carga e do percurso (interestadual vs
 | **Art. 237-A, CTB** | Vedado o transporte de mercadorias sem documentação fiscal |
 | **Convênio ICMS 58/2013** | Obrigatoriedade do MDF-e no transporte interestadual |
 
+## Contexto operacional
+
+O **MDF-e** é a camada de controle fiscal que completa a verificação de pesagem no AxTon. Para o operador, o status do MDF-e aparece junto com os dados do veículo na triagem: **Ausente** significa que o transporte está sem manifesto válido, o que pode configurar infração fiscal independente do peso aferido.
+
+Para o supervisor, a configuração dos alertas de MDF-e no AxCross é uma decisão estratégica: o tempo limite de ausência de MDF-e que aciona o alerta **MANCHA01** deve ser calibrado para detectar irregularidades sem gerar excess o de falsos positivos por atrasos de sincronização do SEFAZ. Uma configuração muito agressiva sobrecarrega a triagem; muito permissiva deixa pass ar irregularidades.
+
+Para o gestor, o volume de alertas de MDF-e ausente é um indicador do nível de conformidade fiscal da rota fiscalizada. Alto volume indica que a rota tem problema estrutural de aderência à legislação fiscal, o que pode justificar operações de fiscalização ativa coordenadas com a SEFAZ estadual.
+
 ## Integração com outros módulos
 
 | Módulo | Como usa este cadastro/relatório |

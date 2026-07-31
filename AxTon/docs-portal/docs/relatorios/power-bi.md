@@ -116,3 +116,19 @@ Sim. Use os controles nativos do Power BI incorporado para exportar. A disponibi
 | **Relatório de Passagens** | Dados de pesagem e infrações alimentam os paineis gerenciais do Power BI |
 | **Índices de Performance** | Os índices contratuais são exibidos nos dashboards de SLA e disponibilidade |
 
+## Exemplo prático
+
+**Cenário**: O gestor de contrato precisa preparar a apresentação mensal para o contratante mostrando o desempenho do posto de pesagem. Ele usa o Power BI para gerar os indicadores de forma visual e consolidada.
+
+**Passo a passo**:
+
+1. Acesse **Relatórios → Power BI** no menu lateral
+2. Clique em **Boletim de Medição** para ver o desempenho mensal por equipamento
+3. Filtre por **Período** = mês anterior e **Posto** = contrato em questão
+4. Verifique o Índice de Disponibilidade: se estiver abaixo de 95%, prepare a justificativa (eventos de manutenção documentados)
+5. Acesse **Infração — Dia x Hora** para identificar os horários de pico e validade
+6. Use **Exportar** para gerar o PDF consolidado
+7. Apresente ao contratante com os gráficos visuais do Power BI
+
+**Resultado**: A apresentação com os dashboards do Power BI redu importou o tempo de preparação do relatório mensal de 4 horas para 30 minutos, e o contratante aprovou o boletim sem contestações.
+

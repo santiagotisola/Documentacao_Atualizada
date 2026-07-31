@@ -122,3 +122,17 @@ As espécies pré-carregadas cobrem toda a tabela DENATRAN. Crie entradas adicio
 | **[Enquadramentos](../administracao/enquadramentos)** | A espécie do veículo influencia o artigo CTB aplicável — espécie incorreta pode gerar enquadramento inválido |
 | **[Consulta de Placas](../operacoes/consulta-placas)** | A espécie é retornada automaticamente pela consulta RENAVAM e associada à passagem registrada |
 | **[Infrações — Triagem](../infracoes/triagem)** | O operador pode corrigir a espécie manualmente na triagem quando o valor retornado pelo RENAVAM está inconsistente |
+
+## Exemplo prático
+
+**Cenário**: Um radar registra um **caminhão-trator** (cavalo mecânico) mas a consulta RENAVAM retorna a espécie como "Automóvel", gerando enquadramento incorreto no artigo CTB.
+
+**Configuração**:
+
+1. Na triagem da infração, o operador identifica a inconsistência visualmente na imagem
+2. Clica em **Editar** no campo **Espécie do Veículo**
+3. Altera de `Automóvel` para `Caminhão-trator`
+4. O sistema recalcula automaticamente o enquadramento para o artigo CTB correto
+5. O operador confirma e envia a infração para aprovação
+
+**Resultado**: A infração é enquadrada corretamente. O relatório de inconsistências RENAVAM registra o caso para análise da integração com o órgão de trânsito.

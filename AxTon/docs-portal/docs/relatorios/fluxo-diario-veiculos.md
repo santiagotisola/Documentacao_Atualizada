@@ -94,3 +94,19 @@ Pode indicar. Confirme com o [Processamento de Imagens](./processamento-imagens)
 - [Relatório de Infrações](./relatorio-infracoes)
 - [Processamento de Imagens](./processamento-imagens)
 - [Monitoramento Online](../operacoes/monitoramento-online)
+
+## Exemplo prático
+
+**Cenário**: O supervisor percebe que uma segunda-feira específica teve volume de passagens 40% abaixo da média semanal. Antes de reportar ao contratante, usa o Fluxo Diário para investigar.
+
+**Passo a passo**:
+
+1. Acesse **Relatórios → Fluxo Diário de Veículos**
+2. Selecione a **Data** da segunda-feira em questão
+3. Filtre pelo **Posto** com volume anormal
+4. Observe o gráfico por hora: o volume cai a zero entre 08h e 14h
+5. Acesse **Operações → Eventos de Equipamentos** e confirma que o equipamento ficou **Offline** no mesmo período
+6. Registre o evento com causa (falha de energia no local) e hora de retorno
+7. Exporte o relatório em Excel para documentar a causa da queda ao contratante
+
+**Resultado**: O supervisor demonstra ao contratante que a queda de volume não foi operacional, mas causada por falha elétrica externa documentada. O incidente é registrado e não é descontado no Boletim de Medição.

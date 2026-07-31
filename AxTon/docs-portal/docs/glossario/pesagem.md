@@ -118,6 +118,14 @@ A balança dinâmica é usada para triagem rápida. Veículos que ultrapassam o 
 | Erro | Causa | Solução |
 |------|-------|----------|
 | Infração gerada com peso abaixo do limite | Tolerância não configurada corretamente | Revisar o parâmetro de tolerância nas Configurações do Sistema |
+
+## Contexto operacional
+
+A **pesagem** é o processo físico que dá origem a todo o fluxo de fiscalização do AxTon. Do ponto de vista do operador, cada ticket de pesagem representa um veículo que passou pela balança e cujo peso foi comparado ao limite legal: veículos dentro do limite são liberados imediatamente; veículos com excesso entram na fila de triagem aguardando validação.
+
+Para o supervisor, a qualidade das pesagens depende diretamente da aferição da balança e da calibração das tolerâncias. Tolerâncias muito baixas geram infrações indevidas para veículos dentro do limite legal; tolerâncias muito altas permitem que veículos com excesso real circulem sem autuação, comprometendo tanto a segurança viária quanto a efetividade contratual.
+
+Para o gestor, o volume diário de pesagens é o principal indicador de produtividade do posto. O relatório de **Fluxo Diário de Veículos** permite comparar o volume por dia da semana e identificar períodos de pico para dimensionamento de equipe. Quedas bruscas no volume indicam falha de equipamento e devem ser investigadas imediatamente para não comprometer o SLA contratual.
 | Balança não conecta ao sistema | URL ou porta da balança HAENNI incorreta | Verificar as configurações na aba **HAENNI** do Sistema |
 | Peso registrado incorretamente | Balança com certif. vencido | Verificar a data de aferíção e acionar renovação do certificado |
 

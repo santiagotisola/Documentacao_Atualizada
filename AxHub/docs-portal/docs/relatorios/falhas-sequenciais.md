@@ -104,3 +104,20 @@ Saltos geralmente indicam infrações descartadas sem motivo documentado ou falh
 | **[Eventos de Equipamentos](./eventos-equipamentos)** | Saltos na sequência por falha de equipamento aparecem correlacionados nos eventos daquele período |
 | **[Relatório de Discrepancias](./relatorio-discrepancias)** | Sequenciais duplicados identificados aqui também aparecem como discrepancias e devem ser tratados em conjunto |
 | **[Exportação de Infrações](../infracoes/exportacao)** | Lacunas não resolvidas podem causar rejeição do lote de exportação pelo órgão autuador |
+
+## Exemplo prático
+
+**Cenário**: O operador tenta exportar o lote de segunda-feira mas recebe rejeicao do órgão por "numeração sequencial inválida". O relatório de Falhas Sequenciais é usado para diagnosticar o problema.
+
+**Passo a passo**:
+
+1. Acesse **Relatórios → Falhas Sequenciais**
+2. Defina o **Período** = segunda-feira em questão
+3. Configure **Quantidade mínima = 1** para mostrar qualquer falha
+4. Clique em **Verificar** — o sistema exibe 2 lac unas: números 1201 e 1202 faltando
+5. Acesse **Infrações → Triagem** e filtre pelo horário do gap: descarte não documentado
+6. Documente a justificativa do descarte retroativamente
+7. Volte ao relatório e confirme que as lacunas foram resolvidas
+8. Gere novamente o lote de exportação
+
+**Resultado**: O lote corrigido é aceito pelo órgão autuador. O incidente motiva a equipe a executar o relatório de falhas ANTES de toda exportação.

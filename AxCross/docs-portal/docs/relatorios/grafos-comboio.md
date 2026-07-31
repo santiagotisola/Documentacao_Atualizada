@@ -114,3 +114,19 @@ O grafo evidencia padrões de co-ocorrência de veículos, mas não substitui di
 | **[Configurações do Sistema](../sistema/configuracoes)** | A detecção de comboios e os parâmetros do Neo4j são ativados e configurados no Sistema |
 | **[Relatório de Passagens](./relatorio-passagens)** | Passagens individuais dos veículos do grafo podem ser consultadas aqui com imagens |
 | **[Painel Analítico](./painel-analitico)** | Permite exportar os dados dos veículos identificados no grafo para relatórios gerenciais |
+
+## Exemplo prático
+
+**Cenário**: O analista de inteligência recebe uma solicitação de investigação sobre possível comboio de veículos suspeitos em uma rota sensível. O sistema já gerou alertas **COMBOIO01** nas últimas 48 horas.
+
+**Passo a passo**:
+
+1. Acesse **Relatórios → Grafos de Comboio**
+2. Ajuste o **Período** para as últimas 72 horas
+3. Localize o nó do veículo alvo no grafo (ex.: placa ABC1D23)
+4. Clique no nó para expandir as conexões — veículos com arestas espessas foram detectados juntos muitas vezes
+5. Identifique placas com alta conectividade ao alvo (3+ co-ocorrências)
+6. Para cada placa relevante, acesse o **Painel Analítico** para ver heatmap de localizações e linha do tempo
+7. Exporte os dados do grafo para compor o relatório de inteligência
+
+**Resultado**: O grafo identifica 4 veículos que se deslocaram consistentemente com o alvo em 7 pontos distintos. O relatório exportado embasou a solicitação de medidas investigativas formais.

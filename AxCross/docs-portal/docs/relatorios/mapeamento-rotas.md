@@ -128,6 +128,22 @@ Combine o Mapeamento de Rotas com o **Rastreamento de Placas** para uma Análise
 - [Veículos Monitorados](./veiculos-monitorados)
 - [Painel Analítico](./painel-analitico)
 
+## Exemplo prático
+
+**Cenário**: Uma motocicleta suspeita (placa XYZ-9W87) foi vista na região de um furto às 15h45. A polícia solicita o último percurso conhecido do veículo nas 3 horas seguintes ao crime.
+
+**Passo a passo**:
+
+1. Acesse **Relatórios → Mapeamento de Rotas**
+2. Informe a **Placa**: `XYZ9W87`
+3. Defina o **período**: 15h30 a 18h30 da data do furto
+4. Clique em **Consultar** — o mapa exibe 5 pontos de detecção
+5. Observe a sequência: saída do local do furto → 2 cruzamentos em sentido norte → última detecção às 16h12 na Av. Central
+6. Combine com o **Rastreamento de Placas** para ver as imagens de cada passagem
+7. Exporte o relatório e as imagens para o boletim de ocorrência
+
+**Resultado**: A rota reconstruida orienta a equipe de campo para a área norte, onde o veículo foi localizado 40 minutos após a consulta. As imagens exportadas serviram como evidência no processo criminal.
+
 ## Erros comuns
 
 | Erro | Causa | Solução |

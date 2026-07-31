@@ -144,3 +144,19 @@ Períodos de até 30 dias oferecem bom desempenho. Para análises mais longas, d
 | **Painel Analítico** | Complementa o rastreamento com heatmap e análise estatística de frequência de passagens |
 | **Veículos Monitorados** | Placas cadastradas na lista de monitorados exibem ícones de alerta durante o rastreamento |
 | **Passagens** | O histórico completo de passagens é a fonte de dados para todas as consultas de rastreamento |
+
+## Exemplo prático
+
+**Cenário**: A polícia solicita ao operador do AxCross o histórico de passagens do veículo de placa **ABC1D23** nas últimas 72 horas após um crime ocorrido na região.
+
+**Passo a passo**:
+
+1. Acesse **Relatórios → Rastreamento de Placas**
+2. Informe a **Placa**: `ABC1D23`
+3. Defina o **Período**: últimos 3 dias
+4. Clique em **Consultar**
+5. Verifique cada passagem clicando na imagem para confirmar visualmente a leitura do OCR
+6. Para passagens com boa qualidade de imagem: clique em **Exportar Excel** para salvar o histórico
+7. Combine com o **Painel Analítico** para ver o heatmap de localizações
+
+**Resultado**: O relatório exibe 7 passagens confirmadas em 4 cruzamentos distintos, com imagens e horários precisos. O arquivo Excel é anexado ao boletim de ocorrência como evidência eletrônica.

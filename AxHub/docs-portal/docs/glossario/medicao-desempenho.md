@@ -98,6 +98,14 @@ O modulo **Medicao** controla contratos, indices de performance, recursos alocad
 **Com que frequência devo gerar a medição de desempenho?**
 Mensalmente, conforme exigência contratual. Gere dentro dos primeiros 5 dias úteis do mês seguinte para envio ao contratante dentro do prazo.
 
+## Contexto operacional
+
+A **medição de desempenho** é o processo que transforma dados operacionais em comprovação contratual. Do ponto de vista do operador, manter os eventos de equipamento registrados corretamente é a contribuição direta para uma boa medição: cada interrupção não registrada pode ser erroneamente contabilizada como indisponibilidade não justificada.
+
+Para o supervisor, o fechamento mensal envolve cruzar os dados de disponibilidade (com as interrupções registradas), taxa OCR (relatório de processamento de imagens) e volume de infrações exportadas. Inconsistências entre esses dados apontam para registros incompletos que precisam ser corrigidos antes da entrega do Boletim de Medição.
+
+Para o gestor, o Boletim de Medição aprovado pelo contratante é o documento que embasa o pagamento mensal. Uma medição contestada pelo contratante é muito mais trabalhosa de defender do que uma medição bem documentada desde o início — portanto, manter o hábito de registrar interrupções e manutenções em tempo real é a melhor prática para um fechamento tranquilo.
+
 **O que acontece se a disponibilidade ficar abaixo da meta?**
 Dependendo do contrato, pode haver glosa no pagamento mensal. Documente as causas (eventos registrados) e as ações corretivas tomadas para apresentar ao contratante.
 

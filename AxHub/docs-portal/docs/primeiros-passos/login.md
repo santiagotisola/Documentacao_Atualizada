@@ -115,3 +115,18 @@ Sim. O sistema é acessível por navegador em smartphones e tablets, mas é otim
 | **[Perfis de Acesso](../controle-acesso/perfis-acesso)** | O perfil vinculado ao usuário define quais menus e funcionalidades ficam disponíveis após o login |
 | **[Logs de Acesso](../controle-acesso/logs-acesso)** | Cada login e logout é registrado nos logs de acesso para auditoria de segurança |
 | **[Acessos por IP](../controle-acesso/acessos-por-ip)** | Restrições de IP configuradas neste módulo bloqueiam tentativas de login de redes não autorizadas |
+
+## Exemplo prático
+
+**Cenário**: Um operador que estava de férias retorna ao trabalho mas não consegue fazer login — a conta foi bloqueada após 5 tentativas com a senha antiga.
+
+**Passo a passo para o administrador**:
+
+1. Acesse **Controle de Acesso → Usuários** no menu lateral
+2. Localize o usuário bloqueado pelo nome ou login
+3. Clique em **Editar** e verifique o status da conta: **Bloqueado**
+4. Altere o status para **Ativo** e redefina a **Senha** temporariamente
+5. Informe a senha temporária ao operador por canal seguro (não por e-mail)
+6. Oriente o operador a alterar a senha no primeiro acesso
+
+**Resultado**: O operador recupera acesso em menos de 5 minutos. O incidente é registrado automaticamente em **Controle de Acesso → Logs de Acesso** para auditoria de segurança, documentando a data e o responsável pelo desbloqueio.

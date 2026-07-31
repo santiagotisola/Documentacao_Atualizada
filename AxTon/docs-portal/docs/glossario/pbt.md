@@ -125,3 +125,11 @@ Não. Somente veículos com autorização especial de excesso de peso (AEP) emit
 | **Infração** | O excesso de PBT é o fato gerador da infração automática de excesso de peso |
 | **MDF-e** | O manifesto declara o peso da carga transportada, usado em confronto com o PBT aferido |
 
+## Contexto operacional
+
+O **PBT** é o conceito central de toda a operação de pesagem veicular no AxTon. Do ponto de vista do operador, o PBT é o valor contra o qual o peso aferido na balança é comparado em cada pesagem: se o peso medido superar o PBT máximo da classificação do veículo (após aplicação da tolerância legal), uma infração é gerada automaticamente.
+
+Para o supervisor, a configuração correta do PBT em cada classificação de veículo é crítica: um valor de PBT incorreto significa que veículos dentro do limite podem ser autuados indevidamente (gerando recursos e retrabalho) ou que veículos infratores passam sem autuação (comprometendo a efetividade da fiscalização).
+
+Para o gestor, a atualização dos limites de PBT após cada publicação de resolução CONTRAN é obrigação legal. A equipe técnica deve revisar sistematicamente a tabela de classificações sempre que o CONTRAN emitir novas portarias de peso, evitando que infratons baseadas em PBT desatualizado sejam contestadas e anuladas no juízo administrativo.
+

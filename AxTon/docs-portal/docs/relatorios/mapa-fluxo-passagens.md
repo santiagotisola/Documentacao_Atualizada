@@ -121,3 +121,19 @@ Sim. Use o botão **Exportar** disponível na tela para salvar uma imagem do map
 | **Operações** | As operações ativas nos postos geram os dados de volume exibidos no mapa |
 | **Relatório de Passagens** | Complementa o mapa com dados tabulares detalhados por posto e período |
 | **Fluxo Diário de Veículos** | Analisa a distribuição temporal do fluxo capturado no mapa por posto |
+
+## Exemplo prático
+
+**Cenário**: O gestor precisa justificar ao contratante a instalação de um segundo posto de pesagem na BR-050 entre Uberlândia e Araguari. O Mapa de Fluxo é usado como evidência visual.
+
+**Passo a passo**:
+
+1. Acesse **Relatórios → Mapa de Fluxo de Passagens**
+2. Defina o **Período** = últimos 90 dias
+3. Selecione o filtro **Tipo = Infrações** para destacar volumes de excesso
+4. O mapa exibe marcadores em **vermelho** nos postos com maior concentração
+5. Clique no marcador do posto BR-050 para ver o volume detalhado: 3.200 passagens/dia
+6. Use **Exportar** para salvar a imagem do mapa e o CSV com dados por posto
+7. Apresente ao contratante: o volume justifica a ampliação
+
+**Resultado**: A apresentação visual com o mapa em vermelho para a BR-050 embasou a decisão do contratante de instalar o segundo posto, comprovando o ROI do investimento com dados concretos.

@@ -119,3 +119,16 @@ Os tipos padrão pré-cadastrados cobrem a maioria dos casos. Crie tipos persona
 | **[Classificações de Veículos](./classificacoes-veiculos)** | Cada classificação deve ser vinculada a um Tipo de Veículo válido para funcionar corretamente nos enquadramentos |
 | **[Enquadramentos](../administracao/enquadramentos)** | O Tipo de Veículo influencia o artigo CTB sugerido automaticamente no enquadramento da infração |
 | **[Infrações — Triagem](../infracoes/triagem)** | Durante a triagem, o tipo do veículo é verificado para garantir que o enquadramento seja compatível com a categoria |
+
+## Exemplo prático
+
+**Cenário**: O gestor da operação percebe que motocicletas estão sendo enquadradas em artigos de velocidade para automóveis — o **Tipo** estava incorretamente configurado, misturando "Moto" com "Passeio".
+
+**Configuração**:
+
+1. Acesse **Veículos → Tipos de Veículos** e localize o tipo **Moto**
+2. Confirme que o **Código DENATRAN** está em `2` (código oficial para motocicletas/ciclomotores)
+3. Acesse **Enquadramentos** e verifique que os artigos para velocidade em moto estão vinculados ao tipo correto
+4. Corrija os vínculos e reprocesse as infrações afetadas via **Infrações → Triagem** (filtro: tipo = Moto, data do período)
+
+**Resultado**: As infrações de moto passam a usar os limites de velocidade e artigos CTB específicos para motocicletas, eliminando enquadramentos indevidos.

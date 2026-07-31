@@ -113,3 +113,19 @@ Depende da configuração do sistema. Verifique o parâmetro **Imagem de Teste**
 | **Medições → Índices de Performance** | A taxa OCR calculada aqui é o índice monitorado no contrato de medição |
 | **Operações → Eventos de Equipamentos** | Quedas de OCR devem gerar eventos de equipamento para rastreabilidade e manutenção |
 | **Relatório de Infrações** | Imagens não reconhecidas resultam em infrações sem placa — visíveis como filtro no relatório |
+
+## Exemplo prático
+
+**Cenário**: O contrato prevê índice mínimo de **OCR de 90%** para pagamento integral do boletim mensal. O supervisor percebe que dois equipamentos estão abaixo desse índice há 2 semanas.
+
+**Passo a passo**:
+
+1. Acesse **Relatórios → Processamento de Imagens**
+2. Filtre por **Período** = últimas 2 semanas e agrupe por **Equipamento**
+3. Identifique os 2 equipamentos com **Taxa OCR** = 76% e 71%
+4. Compare com as semanas anteriores: ambos estavam acima de 90% até 3 semanas atrás
+5. Exporte os dados em Excel para embasar o chamado técnico
+6. Abra ocorrência em **Operações → Eventos de Equipamentos** documentando o início da queda
+7. A equipe técnica realiza limpeza e calibração — OCR sobe para 94% na semana seguinte
+
+**Resultado**: A intervenção documentada evita o desconto contratual por desempenho abaixo do SLA. O relatório exportado comprova o problema e a correção ao contratante.

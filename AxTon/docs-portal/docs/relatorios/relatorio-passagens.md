@@ -112,3 +112,18 @@ A exportação disponível neste relatório é em **PDF**. Para obter os dados e
 | **Operações** | Os dados são filtrados pela operação e local selecionados |
 | **Medições → Criar Medição** | O volume de pesagens do período é dado de entrada para o boletim contratual |
 | **Relatório de Infrações** | Cruza pesagens com infrações para análise de conformidade do período |
+
+## Exemplo prático
+
+**Cenário**: O fiscal quer verificar se um caminhão especifico (placa MNO-3R45) que passou pelo posto de pesagem na semana passada foi autuado ou passou como regular.
+
+**Passo a passo**:
+
+1. No menu lateral, clique em **Relatório de Pesagem**
+2. Defina **Data Inicial** = dia da suspeita e **Data Final** = mesmo dia
+3. Clique em **Pesquisar**
+4. Localize a placa MNO-3R45 na lista de resultados
+5. Verifique a coluna **Resultado**: se "Infração", o veículo foi autuado; se "Regular", estava dentro do limite
+6. Se necessário, exporte o **PDF** para comprovante oficial com todos os dados da pesagem
+
+**Resultado**: O relatório mostra que o veículo pesou 38.500 kg (limite de 35.000 kg) e foi autuado corretamente. O PDF exportado é anexado ao processo administrativo como evidência da pesagem.

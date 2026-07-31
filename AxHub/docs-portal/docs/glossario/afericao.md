@@ -103,3 +103,11 @@ Elas são bloqueadas automaticamente e não podem ser exportadas. Mesmo que a af
 | **Equipamentos** | Cada equipamento cadastrado precisa ter aferição válida para que suas infrações tenham valor legal |
 | **Infrações** | Infrações são bloqueadas automaticamente quando a aferição do equipamento está vencida |
 | **Dashboard** | Exibe alertas de vencimento próximo das aferições para ação preventiva |
+
+## Contexto operacional
+
+A **aferição** é o certificado de idoneidade do equipamento. Sem ela válida, nenhuma infração gerada tem valor jurídico — o sistema bloqueia automaticamente a exportação assim que a data de validade expira.
+
+Para o operador, a aferição é transpar ente no dia a dia: ele recebe alertas no Dashboard quando o vencimento se aproxima (30 dias antes) e deve comunicar ao gestor para agendamento. Durante o período de aferição, o equipamento fica temporariamente fora de operação e esse tempo deve ser registrado como interrupção no módulo de Medição.
+
+Para o gestor, o planejamento das aferições anuais com **30 dias de antecipacão** é obrigação estratégica: o agendamento tardio com laboratórios credenciados INMETRO pode resultar em operação com aferição vencida, gerando perda de toda a produção de infrações do período e possível penalidade contratual por indisponibilidade efetiva.

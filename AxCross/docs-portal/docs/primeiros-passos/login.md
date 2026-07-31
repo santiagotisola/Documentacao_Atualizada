@@ -104,3 +104,17 @@ O Identity Server centraliza a autenticação de forma segura, permitindo Single
 | **[Dashboard](./dashboard)** | O Dashboard é a tela inicial exibida após o login |
 | **[Perfis de Acesso](../administracao/perfis-acesso)** | O perfil do usuário logado define quais módulos e funcionalidades estão disponíveis |
 | **[Logs de Acesso](../administracao/logs-acesso)** | Cada acesso é registrado nos logs de acesso para auditoria de segurança |
+
+## Exemplo prático
+
+**Cenário**: Um operador tenta acessar o AxCross mas recebe a mensagem "Usuário ou senha inválidos" após três tentativas. A conta é bloqueada automaticamente por segurança.
+
+**Passo a passo para o administrador desbloquear**:
+
+1. O administrador acessa **Configurações → Usuários** no menu lateral
+2. Localiza o usuário bloqueado pelo nome ou login
+3. Clica em **Editar** e redefine a **Senha** com uma senha temporária forte (ex.: `Axion@2026!`)
+4. Informa a senha temporária ao operador por canal seguro (mensagem pessoal ou telefone)
+5. O operador acessa com a senha temporária e o sistema solicita alteração imediata
+
+**Resultado**: O operador recupera acesso imediatamente sem interromper a operação. O acesso bem-sucedido é registrado automaticamente em **Configurações → Logs de Acesso** para auditoria.

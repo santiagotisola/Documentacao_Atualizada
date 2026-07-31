@@ -108,3 +108,18 @@ Não diretamente. O relatório identifica a inconsistência, mas a geração de 
 | **NF-e** | A nota fiscal é comparada com o peso aferido para detectar sub-declarações de carga |
 | **MDF-e** | Inconsistências no manifesto eletrônico são identificadas e listadas pelo relatório |
 | **Exportação de Infrações** | Discrepâncias devem ser resolvidas antes de cada exportação para evitar rejeição pelo SENATRAN |
+
+## Exemplo prático
+
+**Cenário**: O fiscal percebe que 23 registros da semana apresentam **peso declarado na NF-e de 28 t** mas o peso aferido é de **35 t** — diferença de 25%, bem acima dos 10% que obrigam reporte à SEFAZ.
+
+**Configuração**:
+
+1. Acesse **Relatórios → Relatório de Discrepâncias**
+2. Filtre por **Período** = semana atual, **Tipo** = "Peso divergente"
+3. Exporte em **Excel** para análise detalhada
+4. Identifique placas recorrentes — veículos que aparecem 3+ vezes são candidatos à fiscalização ativa
+5. Para cada ocorrência acima de 10%: registre a ocorrência na plataforma do órgão fiscalizador conforme exigência legal
+6. Na triagem, revise se as infrações de excesso de PBT foram geradas corretamente para esses veículos
+
+**Resultado**: O relatório documenta 23 casos de sub-declaração, permitindo ao fiscal encaminhar o relatório à SEFAZ e ao SENATRAN. A fiscalização ativa reduz a reincidência e aumenta a conformidade no posto.

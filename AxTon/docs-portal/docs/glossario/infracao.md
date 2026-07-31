@@ -127,3 +127,11 @@ Não diretamente pelo sistema. Após exportação, o cancelamento deve ser solic
 | **PBT** | O limite de PBT da classificação do veículo define o limiar de excesso que aciona a infração |
 | **Triagem** | Infrações precisam ser validadas pelo operador na triagem antes de prosseguir para exportação |
 | **Relatório de Infrações** | Exibe o histórico consolidado de infrações por posto, período, placa e status de exportação |
+
+## Contexto operacional
+
+A **infração de excesso de peso** no AxTon é mais complexa que a infração de velocidade: ela envolve não apenas a leitura da placa mas também a classificação do veículo, o peso medido em cada eixo e o confronto com os limites do CONTRAN. Do ponto de vista do operador, validar uma infração de pesagem exige verificar a coerência entre o tipo de veículo na imagem, a classificação selecionada e o peso aferido.
+
+Para o supervisor, o controle de qualidade das infrações de pesagem envolve também a verificação dos dados de NF-e e MDF-e: uma infração por excesso de peso com NF-e que declara peso dentro do limite é um sinal de sub-declaração fiscal que deve ser encaminhado à SEFAZ além do auto de trânsito.
+
+Para o gestor, a validade legal de cada infração de pesagem depende da aferição INMETRO da balança e da configuração correta das tolerâncias. Infrações geradas em equipamentos com aferição vencida ou tolerâncias incorretas são vulneráveis a recursos e cancelações en masse pelo órgão autuador.

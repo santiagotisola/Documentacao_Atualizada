@@ -102,3 +102,11 @@ Sim. Se o OCR não conseguir ler a placa corretamente, a passagem é registrada 
 | **[Relatório de Passagens](../relatorios/relatorio-passagens)** | Exibe o histórico de todas as passagens registradas no período |
 | **[Monitoramento Online](../operacoes/monitoramento-online)** | Exibe as passagens em tempo real à medida que são capturadas pelos equipamentos |
 | **[Alertas](../operacoes/alertas)** | Passagens de veículos monitorados disparam alertas automaticamente ao serem registradas |
+
+## Contexto operacional
+
+No dia a dia de um operador do AxCross, a **passagem** é a unidade de trabalho fundamental. A cada veículo que cruza o equipamento, um registro é gerado com placa, hora, imagem e local. O operador acompanha essas passagens em tempo real no **Monitoramento Online** — quando uma placa de interesse aparece, o sistema dispara um alerta imediatamente, permitindo acionamento da equipe de campo em segundos.
+
+Para o supervisor, as passagens acumuladas formam a base dos relatórios de produtividade: volume de passagens por turno, taxa OCR por equipamento e concentração por horário. Uma queda súbita no volume de passagens em um cruzamento normalmente indica falha no equipamento — não ausência de veículos — e exige intervenção técnica imediata.
+
+Para o gestor, o conjunto histórico de passagens alimenta análises estratégicas: rotas mais monitoradas, horários de maior movimento e eficácia dos alertas de veículos monitorados. Essas informações embasam decisões de posicionamento de equipamentos e prioridades de fiscalização.

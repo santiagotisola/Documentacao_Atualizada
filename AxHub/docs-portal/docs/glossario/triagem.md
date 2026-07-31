@@ -125,3 +125,11 @@ Acessivel em **Infracoes - Triagem**. E a etapa central do fluxo operacional. O 
 - [Auditoria](../infracoes/auditoria)
 - [Motivos de Descarte](../administracao/motivos-descartes)
 - [Enquadramento](./enquadramento)
+
+## Contexto operacional
+
+A **triagem** é o momento em que a qualidade de cada infração é determinada antes do envio ao órgão autuador. Do ponto de vista do operador, cada infração representa uma decisão: confirmar (encaminhar para auditoria), editar (corrigir placa ou enquadramento) ou descartar (rejeitar com motivo documentado). A qualidade dessas decisões impacta diretamente a taxa de aceite do lote pelo órgão.
+
+Para o supervisor, o painel de **Processamento por Usuário** mostra a produtividade e a taxa de descarte de cada analista. Taxas fora da faixa esperada (5-15% de descarte) são sinais de alerta: muito alta indica treinamento insuficiente; muito baixa indica possível aprovação sem critério adequado.
+
+Para o gestor, o acumulo de backlog de triagem é um risco contratual direto: infrações capturadas há mais de 30 dias sem triar estão sujeitas à prescrição pelo Art. 281 do CTB. Manter o backlog abaixo de 24 horas é a regra operacional mais crítica do fluxo de infrações.

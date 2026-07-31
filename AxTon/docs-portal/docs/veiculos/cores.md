@@ -125,3 +125,18 @@ O sistema não pré-carrega a tabela de cores automaticamente. Você deve cadast
 | **Triagem** | A cor do veículo é consultada durante a triagem para compor as informações do auto |
 | **Exportação de Infrações** | A cor é campo obrigatório no arquivo enviado ao SENATRAN; lacunas causam rejeicao |
 | **Marcas de Veículos** | Complementa a identificação do veículo junto com marca e modelo nos registros de pesagem |
+
+## Exemplo prático
+
+**Cenário**: Na implantação do AxTon em um posto de pesagem, o técnico percebe que os autos exportados têm o campo **cor** em branco para a maioria dos caminhões. A investigação revela que nenhuma das 15 cores padrão DENATRAN havia sido cadastrada.
+
+**Configuração**:
+
+1. Acesse **Veículos → Cores** e clique em **+ Nova**
+2. Cadastre cada uma das 15 cores com os códigos oficiais DENATRAN:
+   - `01 – Amarela`, `02 – Azul`, `03 – Bege`, `04 – Branca`, `05 – Cinza`
+   - `06 – Dourada`, `07 – Grená`, `08 – Laranja`, `09 – Marrom`, `10 – Prata`
+   - `11 – Preta`, `12 – Rosa`, `13 – Roxa`, `14 – Verde`, `15 – Vermelha`
+3. Salve cada registro e confirme que todas estão com **Status = Ativo**
+
+**Resultado**: Os próximos tickets de pesagem passam a exibir a cor correta via consulta RENAVAM, eliminando o campo em branco nos autos exportados ao SENATRAN.
