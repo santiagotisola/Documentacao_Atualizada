@@ -113,3 +113,20 @@ O período de retenção depende da configuração definida em **Configurações
 
 **O que fazer quando identifico tentativas repetidas de login falho vindas de um mesmo IP no log?**
 Filtre por **Status = Falha** e identifique o IP recorrente. Se o padrão indicar ataque de força bruta, bloqueie o IP em **Controle de Acesso → Acessos por IP** e notifique o gestor de segurança. Se o usuário em questão for legítimo, ele pode ter esquecido a senha — acione a recuperação.
+
+## Erros comuns
+
+| Situação | Causa | Solução |
+|----------|-------|----------|
+| Logs não aparecem para o período | Filtro de data incorreto | Ajuste o período de consulta |
+| Usuário não aparece nos logs | Nunca fez login no período | Amplie o período ou verifique o login correto |
+| Não consigo exportar | Sem permissão de exportação | Solicite ao administrador a permissão de Exportar no perfil |
+
+## Integração com outros módulos
+
+| Módulo | Como se relaciona com Logs de Acesso |
+|--------|--------------------------------------|
+| **Configurações → Usuários** | Cada usuário tem seus acessos registrados individualmente |
+| **Login** | Cada login e logout gera uma entrada no log com IP e resultado |
+| **Configurações → Perfis de Acesso** | Logs com muitos acessos negados podem indicar permissão insuficiente no perfil |
+| **Relatórios** | Exportações de relatórios geram entradas do tipo **Exportar** para rastreabilidade |

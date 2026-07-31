@@ -116,3 +116,12 @@ Se o usuário não aparecer no relatório, filtre os Logs de Acesso para verific
 
 **A produtividade de triagem impacta diretamente o pagamento contratual?**
 Depende do contrato. Em contratos com SLA de triagem (prazo máximo para processar infrações), queda de produtividade pode gerar atraso no lote de exportação e consequentemente penalidade por não conformidade.
+
+## Integração com outros módulos
+
+| Módulo | Como se relaciona com Processamento por Usuário |
+|--------|--------------------------------------------------|
+| **Controle de Acesso → Usuários** | Os usuários listados no relatório são os operadores de triagem cadastrados no sistema |
+| **Relatório de Infrações** | As infrações processadas por cada usuário aparecem consolidadas neste relatório |
+| **Logs de Acesso** | Cruza a atividade de triagem com os logs de login para confirmar presença do operador |
+| **Medições → Contratos** | Em contratos com SLA de triagem, a produtividade deste relatório é monitorada para cumprimento |

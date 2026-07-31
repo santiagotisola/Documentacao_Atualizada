@@ -111,3 +111,12 @@ As causas mais comuns são: o OCR não conseguiu ler a placa corretamente (verif
 Sim. A consulta aceita ambos os formatos. Se o OCR leu a placa no formato Mercosul (ex.: ABC1D23), busque com esse formato. Se houve erro de leitura, tente buscar pelas letras fixas com coringa ou amplie o período para localizar o registro.
 - [Relatório de Infrações](../relatorios/relatorio-infracoes)
 - [Reclassificar](../pesagem/reclassificar)
+
+## Integração com outros módulos
+
+| Módulo | Como se relaciona com Consulta de Placas |
+|--------|------------------------------------------|
+| **Pesagem → Tickets** | Os tickets de pesagem são a origem dos registros exibidos na consulta de placas |
+| **Relatório de Passagens** | Para análises mais amplas por placa e período, use o relatório com filtros avançados |
+| **Relatório de Infrações** | Cruza dados da consulta com infrações geradas para identificar reincidência |
+| **Processamento de Imagens** | A qualidade do OCR impacta diretamente a precisão das placas armazenadas e consultadas |

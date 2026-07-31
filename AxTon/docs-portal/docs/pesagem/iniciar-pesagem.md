@@ -168,3 +168,31 @@ Excesso: 53.000 − 50.925 = 2.075 kg
 | Configurações — HAENNI**](../sistema/configuracoes) | Configurar a balança |
 | Configurações — Infração**](../sistema/configuracoes) | Definir tolerâncias e enquadramentos |
 | [**Configurações**](../sistema/configuracoes) | Ajustar tolerâncias e parâmetros |
+## Erros comuns
+
+| Situação | Causa | Solução |
+|----------|-------|----------|
+| "Nenhum Equipamento localizado" | Balança offline ou URL incorreta | Verifique a conexão e a URL em **Sistema → HAENNI** |
+| Classificação selecionada incorretamente | Identificação visual errônea | Use **Reclassificar** após finalizar o ticket |
+| Infração gerada indevidamente | PBT calculado com classificação errada | Reclassifique o ticket e verifique a tolerância em **Sistema → Configurações** |
+| Operação não encontrada | Nenhuma operação **Em Andamento** no local | Crie ou reactive a operação em **Operações → + Novo** |
+
+## Perguntas frequentes
+
+**O que fazer quando a balança não está conectada e o ticket fica em andamento indefinidamente?**
+Verifique a conexão de rede entre o computador e a balança HAENNI, confirme a URL configurada em **Sistema → HAENNI** e verifique se o número de balanças ativas exibido no menu lateral está acima de 0. Após restabelecer a conexão, inicie um novo ticket.
+
+**Por que a classificação selecionada na Etapa 1 é tão importante para o resultado da pesagem?**
+A classificação define o PBT máximo permitido para o veículo. Uma classificação errada pode gerar infração indevida ou não gerar infração quando deveria. Caso perceba o erro após finalizar, use a função **Reclassificar**.
+
+**É possível cancelar um ticket que já foi iniciado mas não finalizado?**
+Sim. Enquanto o ticket estiver com status **Em Andamento**, ele pode ser cancelado pelo operador. Tickets cancelados não geram infração e ficam registrados no histórico de **Tickets Fechados**.
+
+## Integração com outros módulos
+
+| Módulo | Como se relaciona com Iniciar Pesagem |
+|--------|---------------------------------------|
+| **Operações** | Exige operação **Em Andamento** para vincular o ticket ao contexto operacional correto |
+| **Sistema → Configurações** | Define tolerâncias de PBT e eixos que determinam quando uma infração é gerada |
+| **Cadastros → Classificação de Veículos** | As classificações e PBTs regulamentados usados no cálculo são mantidos aqui |
+| **Tickets de Pesagens** | Todos os tickets gerados ficam registrados para consulta e auditoria |

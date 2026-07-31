@@ -120,3 +120,12 @@ Lotes com status **Error** devem ser analisados nos **Logs** antes de reenvio. N
 | [**Sequênciais de Exportação**](../cadastros/sequencial-exportacao) | Numeração dos lotes |
 | [**Sequênciais de Infração**](../cadastros/sequencial-infracao) | Numeração dos autos |
 | [**Tickets de Pesagens**](../pesagem/ticket-aberto) | Infrações geradas na pesagem |
+
+## Integração com outros módulos
+
+| Módulo | Como se relaciona com Exportação de Infrações |
+|--------|---------------------------------------------------|
+| **Cadastros → Sequencial de Exportação** | Define a numeração dos lotes gerados — obrigatório antes de exportar |
+| **Cadastros → Sequencial de Infração** | Define a numeração dos autos incluídos no lote |
+| **Falhas Sequenciais** | Execute antes de exportar para verificar integridade da numeração |
+| **Relatório de Infrações** | Confirme o status **Auditada** de todas as infrações antes de gerar o lote |

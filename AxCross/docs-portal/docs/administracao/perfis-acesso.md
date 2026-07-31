@@ -141,3 +141,31 @@ Perfis vinculados a usuários ativos **não podem ser excluídos**. Inative o pe
 :::tip Importar permissões de outro perfil
 Use a permissão `accesspermission.importaccesspermissions` para copiar as configurações de permissões de um perfil existente para um novo, agilizando a configuração de perfis similares.
 :::
+
+## Erros comuns
+
+| Situação | Causa | Solução |
+|----------|-------|----------|
+| Perfil não pode ser excluído | Usuários vinculados ao perfil | Inative o perfil em vez de excluir |
+| Usuário não vê módulo após vinculação | Permissões do perfil não configuradas | Configure as permissões em **Configurações → Permissões** |
+| Perfil ativo não aparece para seleção | Cache do navegador | Recarregue a página (`F5`) |
+
+## Perguntas frequentes
+
+**Como copiar as permissões de um perfil existente para um novo?**
+Use a permissão `accesspermission.importaccesspermissions` disponível em **Permissões de Acesso**. Isso copia toda a configuração do perfil origem para o novo perfil, que pode ser ajustado conforme necessidade.
+
+**Com que frequência devo revisar os perfis de acesso?**
+Revise sempre que houver troca de colaboradores, mudanças de função ou atualizações do sistema. Perfis obsoletos com permissões excessivas são riscos de segurança.
+
+**Quantos perfis posso criar no sistema?**
+Não há limite de perfis. Recomenda-se criar perfis específicos por função operacional em vez de um único perfil genérico para facilitar a rastreabilidade.
+
+## Integração com outros módulos
+
+| Módulo | Como se relaciona com Perfis de Acesso |
+|--------|----------------------------------------|
+| **Configurações → Usuários** | Cada usuário deve ter um perfil vinculado — sem perfil, as permissões ficam indefinidas |
+| **Configurações → Permissões** | As permissões granulares são configuradas por perfil nesta tela |
+| **Logs de Acesso** | Acessos e ações dos usuários são registrados com o perfil correspondente |
+| **Login** | O menu exibido após autenticar é gerado conforme as permissões do perfil do usuário |

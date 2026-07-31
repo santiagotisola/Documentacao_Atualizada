@@ -133,3 +133,12 @@ Não. Classificações inativas não aparecem nas opções de classificação du
 :::tip Hierarquia de cadastros
 As classificações de Veículos devem ser cadastradas antes do registro de operações de pesagem, pois são utilizadas na identificação do tipo de Veículo fiscalizado.
 :::
+
+## Integração com outros módulos
+
+| Módulo | Como se relaciona com Classificação de Veículos |
+|--------|--------------------------------------------------|
+| **Pesagem → Iniciar Pesagem** | O operador seleciona a classificação para definir o PBT regulamentado do veículo pesado |
+| **Relatório de Infrações** | A classificação do veículo aparece em cada registro de infração para rastreabilidade |
+| **Relatório de Passagens** | O tipo do veículo classificado é exibido nos registros de passagem |
+| **Glossário → PBT** | O PBT regulamentado configurado em cada classificação é o valor-base para cálculo de excesso |

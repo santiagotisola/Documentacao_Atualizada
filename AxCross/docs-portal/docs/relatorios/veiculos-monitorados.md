@@ -113,3 +113,12 @@ Apenas as passagens que geraram ocorrência por corresponder a um veículo monit
 **Como exportar o relatório para comprovação ao órgão contratante?**
 Use os botões **Excel** ou **PDF** na tela do relatório após aplicar os filtros do período desejado. O arquivo gerado contém todas as detecções com dados de local, data/hora e placa.
 
+## Integração com outros módulos
+
+| Módulo | Como se relaciona com Relatório de Veículos Monitorados |
+|--------|----------------------------------------------------------|
+| **Operações → Veículos Monitorados** | Os veículos com alertas ativos são a fonte dos dados deste relatório |
+| **Relatórios → Ocorrências e Alertas** | Complementa este relatório com o histórico de alertas tratados |
+| **Relatório de Passagens** | Para verificar passagens de um veículo monitorado além das ocorrências |
+| **PDFs Gerados** | Os PDFs gerados por este relatório ficam listados aqui para redownload |
+

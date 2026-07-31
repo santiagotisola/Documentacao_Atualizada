@@ -108,3 +108,12 @@ Não. A placa e o período são filtros obrigatórios. Defina um período espec�
 
 **Como usar o Painel Analítico para laudo de boletim de ocorrência?**
 Apli-que os filtros de placa e período, acesse a aba **Passagens** e exporte os dados. Cada passagem inclui data/hora, local, equipamento e imagem — informações suficientes para compor evidência documental. Combine com as imagens da aba Passagens para enriquecer o laudo.
+
+## Integração com outros módulos
+
+| Módulo | Como se relaciona com Painel Analítico |
+|--------|----------------------------------------|
+| **Operações → Veículos Monitorados** | Alertas gerados são exibidos na aba de alertas do painel para análise investigativa |
+| **Relatório de Passagens** | O painel aprofunda a análise de uma placa específica além do que o relatório oferece |
+| **Rastreamento de Placas** | Complementa o painel com visualização do trajeto georreferenciado |
+| **Grafos de Combôio** | Algoritmo de detecção de convôi usa dados das passagens analisadas no painel |

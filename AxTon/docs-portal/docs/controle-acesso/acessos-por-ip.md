@@ -99,3 +99,12 @@ Sim. Use o formato CIDR como `192.168.1.0/24` para autorizar todos os IPs de uma
 
 **A restrição por IP funciona junto com autenticacao por senha?**
 Sim. A restrição por IP é uma camada adicional: o usuário precisa estar no IP autorizado E ter credenciais válidas para acessar o sistema.
+
+## Integração com outros módulos
+
+| Módulo | Como se relaciona com Acessos por IP |
+|--------|--------------------------------------|
+| **Usuários** | A restrição por IP complementa as credenciais dos usuários — o login só funciona se o IP também estiver autorizado |
+| **Login** | O sistema valida o IP do dispositivo antes de permitir a autenticação |
+| **Logs de Acesso** | Tentativas bloqueadas por IP são registradas como falhas de acesso para auditoria |
+| **Perfis de Acesso** | Combine restrição por IP com perfis bem configurados para segurança em camadas |

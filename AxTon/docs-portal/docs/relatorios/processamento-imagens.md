@@ -104,3 +104,12 @@ Semanalmente para monitoramento preventivo. Quedas abruptas de OCR entre uma sem
 
 **O relatório diferencia imagens de teste das imagens operacionais?**
 Depende da configuração do sistema. Verifique o parâmetro **Imagem de Teste** em **Sistema → Configurações** para entender se essas imagens são incluídas ou excluídas dos cálculos.
+
+## Integração com outros módulos
+
+| Módulo | Como se relaciona com Processamento de Imagens |
+|--------|--------------------------------------------------|
+| **Sistema → Configurações** | Parâmetros OCR e configuração de câmeras impactam diretamente a taxa de reconhecimento |
+| **Medições → Índices de Performance** | A taxa OCR calculada aqui é o índice monitorado no contrato de medição |
+| **Operações → Eventos de Equipamentos** | Quedas de OCR devem gerar eventos de equipamento para rastreabilidade e manutenção |
+| **Relatório de Infrações** | Imagens não reconhecidas resultam em infrações sem placa — visíveis como filtro no relatório |

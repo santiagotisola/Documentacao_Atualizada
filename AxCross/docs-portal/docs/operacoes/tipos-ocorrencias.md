@@ -115,3 +115,11 @@ O sistema recalcula automaticamente a data de expiração de todos os veículos 
 
 **Por que não devo ativar alerta sonoro para todos os tipos de ocorrência?**
 Muitos alertas sonoros simultanâneos causam fadiga operacional, fazendo com que operadores passem a ignorar os alertas. Ative o som somente para tipos de alta prioridade (ex.: veículo roubado ou com mandado de prisão) para garantir que a equipe reaja de forma imediata e assertiva.
+## Integração com outros módulos
+
+| Módulo | Como se relaciona com Tipos de Ocorrências |
+|--------|---------------------------------------------|
+| **Operações → Alertas** | Os alertas são configurados por tipo de ocorrência — tipos inativos bloqueiam novos alertas |
+| **Operações → Veículos Monitorados** | O tipo de ocorrência define a categoria de alerta gerado quando um veículo é detectado |
+| **Relatórios → Ocorrências e Alertas** | O filtro por tipo de ocorrência usa as categorias cadastradas aqui |
+| **Configurações do Sistema** | Alertas MANCHA01 e COMBOIO01 são tipos de ocorrência gerados automaticamente pelas configurações MDF-e |

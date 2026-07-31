@@ -130,3 +130,12 @@ Sim. A tela atualiza automaticamente a cada 30 segundos sem necessidade de recar
 
 **Como registrar uma interrupção diretamente do monitoramento?**
 Ao identificar um posto offline, acesse **Medições → Interrupções** e registre o evento com data/hora de início. Isso garante que o período de indisponibilidade seja contabilizado corretamente no boletim de medição.
+
+## Integração com outros módulos
+
+| Módulo | Como se relaciona com Monitoramento Online |
+|--------|--------------------------------------------|
+| **Operações** | Exibe o status dos equipamentos da operação ativa em tempo real |
+| **Medições → Interrupções** | Falhas identificadas aqui devem ser registradas como interrupções para impacto no SLA contratual |
+| **Eventos de Equipamentos** | Permite registrar o evento técnico correspondente à falha identificada no monitoramento |
+| **Alertas** | Alertas configurados são exibidos no monitoramento quando os limiares são atingidos |

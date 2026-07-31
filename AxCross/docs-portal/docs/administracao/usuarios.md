@@ -126,3 +126,21 @@ Acesse **Configurações → Usuários**, localize o usuário, clique em **Edita
 
 **Um usuário pode ter mais de um perfil de acesso atribuído simultaneamente?**
 Não. Cada usuário possui apenas um perfil de acesso vinculado. Se precisar de permissões de múltiplos perfis, crie um novo perfil personalizado que agrupe todas as permissões necessárias.
+
+## Erros comuns
+
+| Situação | Causa | Solução |
+|----------|-------|----------|
+| Usuário não consegue acessar | Campo **Status** inativo | Edite o cadastro e marque como **Ativo** |
+| Login duplicado | Nome de usuário já existe | Use identificador único (e-mail ou código funcional) |
+| Usuário não vê módulos esperados | Perfil sem permissão de visualização | Revise as permissões do perfil em **Configurações → Permissões** |
+| Não é possível excluir usuário | Usuário tem registros vinculados | Inative em vez de excluir para preservar o histórico |
+
+## Integração com outros módulos
+
+| Módulo | Como se relaciona com Usuários |
+|--------|--------------------------------|
+| **Configurações → Perfis de Acesso** | Cada usuário deve ter um perfil vinculado que define suas permissões |
+| **Configurações → Permissões** | As permissões do perfil determinam o que o usuário pode visualizar e fazer |
+| **Logs de Acesso** | Registra cada acesso e ação realizada pelo usuário para auditoria |
+| **Login** | O login cadastrado aqui é usado para autenticação na tela de Login |

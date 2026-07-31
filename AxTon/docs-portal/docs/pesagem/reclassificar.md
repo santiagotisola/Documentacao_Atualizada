@@ -98,3 +98,12 @@ Não. Tickets com status **Exportado** não podem ser reclassificados. Qualquer 
 
 **Por que a opção de reclassificar está desativada para alguns tickets?**
 A reclassificação só está disponível para tickets em aberto (não exportados). Tickets já encerrados, exportados ou com status final não podem ser alterados para garantir a integridade do processo de autuação.
+
+## Integração com outros módulos
+
+| Módulo | Como se relaciona com Reclassificar |
+|--------|-------------------------------------|
+| **Pesagem → Iniciar Pesagem** | Erros de classificação cometidos durante a pesagem são corrigidos aqui |
+| **Cadastros → Classificação de Veículos** | As classificações disponíveis para seleção na reclassificação são mantidas aqui |
+| **Relatório de Infrações** | Após reclassificar, verifique se a infração foi atualizada corretamente no relatório |
+| **Exportação de Infrações** | Tickets reclassificados não podem ser alterados se já foram exportados |

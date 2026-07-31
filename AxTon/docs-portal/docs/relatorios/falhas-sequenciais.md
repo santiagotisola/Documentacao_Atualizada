@@ -99,3 +99,12 @@ Sim. Lacunas ou duplicidades não corrigidas podem causar rejeição do lote int
 
 **Como resolver uma duplicidade identificada no relatório?**
 Identifique os tickets com mesmo número sequencial, verifique qual registro é o correto e cancele ou corrija o duplicado. Se o lote já foi enviado, entre em contato com o órgão autuador para orientação sobre o procedimento de correção.
+
+## Integração com outros módulos
+
+| Módulo | Como se relaciona com Falhas Sequenciais |
+|--------|------------------------------------------|
+| **Cadastros → Sequenciais de Infração** | Define as faixas numéricas cujas lacunas são detectadas por este relatório |
+| **Exportação de Infrações** | Deve ser executado antes de cada exportação para garantir integridade numérica do lote |
+| **Relatório de Infrações** | Permite rastrear os tickets correspondentes às lacunas identificadas |
+| **Pesagem → Tickets Fechados** | Tickets cancelados ou descartados geram as lacunas que aparecem neste relatório |

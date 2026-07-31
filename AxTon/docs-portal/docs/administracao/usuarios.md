@@ -114,3 +114,21 @@ O administrador pode editar o cadastro do usuário e definir uma nova senha temp
 
 **Devo excluir o usuário de um colaborador desligado ou apenas inativá-lo?**
 Inative em vez de excluir. A exclusão apaga o histórico de operações do usuário, que pode ser necessário em auditorias futuras.
+
+## Erros comuns
+
+| Situação | Causa | Solução |
+|----------|-------|----------|
+| "Login já cadastrado" ao criar usuário | Login duplicado no sistema | Use um identificador único, como e-mail ou código funcional |
+| Usuário não consegue acessar após cadastro | Campo **Ativo** não marcado | Edite o cadastro e marque o campo **Ativo** |
+| Usuário não vê módulos esperados | Perfil de Acesso incorreto ou sem permissão | Verifique o perfil vinculado em **Perfis de Acesso** |
+| Não é possível excluir usuário | Usuário possui registros vinculados no sistema | Inative o usuário em vez de excluir para preservar o histórico |
+
+## Integração com outros módulos
+
+| Módulo | Como se relaciona com Usuários |
+|--------|--------------------------------|
+| **Perfis de Acesso** | Cada usuário deve ter um perfil vinculado que define suas permissões |
+| **Permissões de Acesso** | As permissões do perfil determinam o que o usuário pode fazer no sistema |
+| **Logs de Acesso** | Registra os acessos de cada usuário para auditoria e segurança |
+| **Acessos por IP** | Define de quais IPs o usuário pode realizar login |

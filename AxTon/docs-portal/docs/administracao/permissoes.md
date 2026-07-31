@@ -92,3 +92,12 @@ Configure o perfil com `pesagem: start-weighing` e `tickets: grid.view`. Remova 
 
 **Preciso testar as permissões após configurar um perfil?**
 Sim. Crie um usuário de teste vinculado ao perfil e acesse o sistema para validar quais funcionalidades aparecem e quais estão bloqueadas.
+
+## Integração com outros módulos
+
+| Módulo | Como se relaciona com Permissões |
+|--------|----------------------------------|
+| **Perfis de Acesso** | As permissões são configuradas por perfil — cada perfil tem sua própria matriz de permissões |
+| **Usuários** | As permissões do perfil vinculado ao usuário determinam o que ele pode fazer no sistema |
+| **Logs de Acesso** | Tentativas de acesso a funcionalidades sem permissão podem ser registradas como alertas de segurança |
+| **Login** | O menu exibido após o login reflete as permissões de visualização (`grid.view`) do perfil do usuário |

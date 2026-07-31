@@ -119,3 +119,12 @@ Sim. Informe as datas e horários corretos do início e fim da ocorrência. O si
 
 **Qual a diferença entre interrupção Preventiva e Corretiva para o SLA contratual?**
 Interrupções Preventivas (manutenções programadas e comunicadas) geralmente não penalizam a disponibilidade contratual. Corretivas (falhas não planejadas) impactam negativamente o índice de disponibilidade.
+
+## Integração com outros módulos
+
+| Módulo | Como se relaciona com Interrupções |
+|--------|-------------------------------------|
+| **Medições → Contratos** | O contrato define as metas de disponibilidade contra as quais as interrupções são calculadas |
+| **Medições → Criar Medição** | As interrupções registradas impactam diretamente o índice de disponibilidade do boletim |
+| **Operações → Eventos de Equipamentos** | Eventos técnicos devem ser espelhados aqui como interrupções quando impactam o SLA |
+| **Monitoramento Online** | Falhas detectadas no monitoramento são o gatilho para abertura das interrupções |

@@ -122,3 +122,31 @@ Após alterar qualquer Configuração clique em **Salvar** no topo da tela para 
 | [**Câmera IP**](../sistema/camera-ip) | Configuração da câmera de captura |
 | [**Sequênciais de Infração**](../cadastros/sequencial-infracao) | Numeração dos autos |
 | [**Sequênciais de Exportação**](../infracoes/exportacao) | Numeração dos lotes |
+## Erros comuns
+
+| Situação | Causa | Solução |
+|----------|-------|----------|
+| Balança não detectada | URL HAENNI incorreta ou balança offline | Verifique a URL em **Aba HAENNI** e a conexão de rede |
+| Infração não gerada após pesagem | Tolerância muito alta ou enquadramento não configurado | Revise **Aba Infração** — tolerância e códigos de enquadramento |
+| Câmera não conecta | IP incorreto ou codec incompatível | Consulte a documentação de **Câmera IP** |
+| Integração AxHub falha | URL ou API Key incorreta | Verifique os campos **Url AxHub** e **Chave de Api** na Aba Gerais |
+
+## Perguntas frequentes
+
+**O que acontece quando a validade da aferição da balança expira?**
+O sistema bloqueia o início de novas pesagens. Atualize a data de validade na **Aba HAENNI** após obter o certificado de aferição atualizado junto ao órgão metrológico.
+
+**Como alterar a tolerância de peso sem impactar lotes já exportados?**
+A alteração da tolerância tem efeito apenas em pesagens futuras. Lotes já gerados e exportados não são afetados. Comunique ao órgão autuador antes de alterar os parâmetros de tolerância.
+
+**Preciso reiniciar o sistema após salvar configurações?**
+Não. As configurações são aplicadas imediatamente após clicar em **Salvar**. Para alterações na câmera IP, aguarde alguns segundos para o serviço reiniciar antes de testar a conexão.
+
+## Integração com outros módulos
+
+| Módulo | Como se relaciona com Configurações do Sistema |
+|--------|--------------------------------------------------|
+| **Pesagem → Iniciar Pesagem** | Parâmetros de tolerância e enquadramento definem quando uma infração é gerada |
+| **Câmera IP** | Configuração complementar da câmera de captura usada nas pesagens |
+| **Exportação de Infrações** | O tipo de exportação (XTraffic ou AxHub) define o formato do arquivo gerado |
+| **Medições → Contratos** | As configurações do órgão (código, nome) aparecem nos boletins de medição gerados |

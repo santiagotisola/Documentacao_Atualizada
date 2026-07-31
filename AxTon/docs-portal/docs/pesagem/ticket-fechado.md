@@ -133,3 +133,12 @@ Sim. Clique em **Visualizar** para abrir o ticket e, em seguida, clique em **Imp
 
 **Por que um ticket fechado com resultado Infrator não tem infração gerada no Relatório de Infrações?**
 Isso indica que o sequencial de infração pode estar esgotado ou não configurado. Acesse **Cadastros → Sequenciais de Infração** e verifique se há numereiros disponíveis e um sequencial ativo.
+
+## Integração com outros módulos
+
+| Módulo | Como se relaciona com Tickets Fechados |
+|--------|----------------------------------------|
+| **Pesagem → Iniciar Pesagem** | O ticket fechado é o resultado final do processo de pesagem iniciado aqui |
+| **Relatório de Passagens** | Consolida os dados de todos os tickets fechados por período e posto |
+| **Relatório de Infrações** | Lista as infrações geradas nos tickets com resultado Infrator |
+| **Exportação de Infrações** | As infrações dos tickets fechados são exportadas ao órgão autuador via lote |

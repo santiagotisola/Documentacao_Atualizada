@@ -121,3 +121,12 @@ Crie um usuário de teste vinculado ao perfil e acesse o sistema para validar qu
 - **Supervisores**: Todas as permissões em Infrações + Relatórios
 - **Administradores**: Acesso total
 :::
+
+## Integração com outros módulos
+
+| Módulo | Como se relaciona com Permissões |
+|--------|----------------------------------|
+| **Perfis de Acesso** | As permissões são configuradas por perfil — cada perfil tem sua própria matriz de controle de acesso |
+| **Usuários** | As permissões do perfil vinculado ao usuário determinam o que ele pode ver e fazer no sistema |
+| **Logs de Acesso** | Acessos negados por falta de permissão são registrados e rastreavies nos logs |
+| **Login** | O menu exibido após o login é gerado dinamicamente com base nas permissões de visualização do perfil |

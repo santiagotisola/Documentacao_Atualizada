@@ -99,3 +99,12 @@ Isso indica que a classificação do veículo tem PBT incorreto ou que a leitura
 
 **Como exportar apenas as infrações prontas para envio ao órgão autuador?**
 Filtre o relatório pelo status **Auditada** e pelo período desejado. Exporte em CSV e use esse arquivo como base para gerar o lote em **Exportação de Infrações → + Novo**. Antes de exportar, execute o relatório de **Falhas de Sequenciais** para garantir a integridade numérica.
+
+## Integração com outros módulos
+
+| Módulo | Como se relaciona com Relatório de Infrações |
+|--------|--------------------------------------------------|
+| **Exportação de Infrações** | As infrações auditadas neste relatório são enviadas ao órgão autuador via exportação |
+| **Pesagem → Reclassificar** | Infrações com excesso zerado devem ser reclassificadas antes de exportar |
+| **Processamento de Imagens** | Taxa OCR baixa gera mais infrações com placa não identificada, visíveis neste relatório |
+| **Falhas Sequenciais** | Verificar integridade da numeração antes de gerar o lote de exportação |

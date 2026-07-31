@@ -91,3 +91,21 @@ As pesagens registradas são preservadas. Novas pesagens não serão associadas 
 
 **Com que frequência preciso atualizar o número de série?**
 Nunca. O número de série é um identificador permanente do equipamento físico.
+
+## Erros comuns
+
+| Situação | Causa | Solução |
+|----------|-------|----------|
+| Equipamento não aparece no monitoramento | Status inativo ou sem comunicação | Reative e verifique a conexão de rede do equipamento |
+| Modelo não listado no cadastro | Modelo não cadastrado | Cadastre em **Cadastros Básicos → Modelos de Equipamentos** antes |
+| Posto não listado | Posto inativo ou não cadastrado | Crie o posto em **Pesagem → Postos** |
+| Duplicidade de número de série | Erro de cadastro | Verifique e corrija o número de série — deve ser único |
+
+## Integração com outros módulos
+
+| Módulo | Como se relaciona com Equipamentos |
+|--------|------------------------------------|
+| **Pesagem → Postos** | O equipamento é vinculado ao posto de operação onde está instalado |
+| **Operações → Monitoramento Online** | Exibe o status em tempo real de cada equipamento cadastrado |
+| **Operações → Eventos de Equipamentos** | Eventos de falha são vinculados ao equipamento específico |
+| **Medições → Índices de Performance** | A taxa OCR e disponibilidade são calculadas por equipamento |

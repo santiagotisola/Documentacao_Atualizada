@@ -112,3 +112,12 @@ Sequenciais com números duplicados ou fora de ordem causam rejeição dos lotes
 |---|---|
 | [**Exportação de Infrações**](../infracoes/exportacao) | Gerar e enviar lotes de Infrações |
 | [**Sequencial de Infração**](../cadastros/sequencial-infracao) | Numeração dos autos individuais |
+
+## Integração com outros módulos
+
+| Módulo | Como se relaciona com Sequencial de Exportação |
+|--------|--------------------------------------------------|
+| **Exportação de Infrações** | O sequencial numera cada lote gerado — sem ele, a exportação fica bloqueada |
+| **Falhas Sequenciais** | Relatório que monitora lacunas e duplicidades nos números de lote |
+| **Sequencial de Infração** | Complementar — enquanto este numera os lotes, o outro numera os autos individuais |
+| **Relatório de Infrações** | Permite rastrear quais infrações estão em cada lote exportado |

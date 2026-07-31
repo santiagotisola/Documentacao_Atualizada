@@ -106,3 +106,12 @@ Inativar o posto remove-o das seleções ativas, mas preserva todo o histórico 
 
 **Como vinculo equipamentos a um posto já cadastrado?**
 Acesse **Cadastros Básicos → Equipamentos**, edite o equipamento desejado e selecione o posto no campo correspondente. Você também pode fazer essa vinculação durante o cadastro do equipamento.
+
+## Integração com outros módulos
+
+| Módulo | Como se relaciona com Postos |
+|--------|------------------------------|
+| **Operações** | Cada operação é vinculada a um posto — sem posto cadastrado, a operação não pode ser criada |
+| **Cadastros Básicos → Equipamentos** | Equipamentos são vinculados ao posto de operação |
+| **Medições → Contratos** | Os postos vinculados ao contrato definem o escopo do boletim de medição |
+| **Relatório de Passagens** | O filtro por posto usa os registros aqui cadastrados |

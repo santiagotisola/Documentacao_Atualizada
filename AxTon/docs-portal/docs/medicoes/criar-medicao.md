@@ -103,3 +103,12 @@ A medição finalizada é bloqueada para edição. Para correção, é necessár
 
 **Como enviar o boletim de medição ao contratante?**
 Após gerar e revisar a medição, clique em **Exportar PDF** para obter o documento formatado. Envie pelo canal definido em contrato (e-mail, sistema do órgão ou portal de prestação de contas).
+
+## Integração com outros módulos
+
+| Módulo | Como se relaciona com Criar Medição |
+|--------|--------------------------------------|
+| **Contratos** | Selecione o contrato ao criar a medição — define postos, período e metas do boletim |
+| **Interrupções** | Interrupções registradas no período são automaticamente consideradas no cálculo de disponibilidade |
+| **Índices de Performance** | Exibe os resultados da medição gerada para acompanhamento contratual |
+| **Operações** | Volume de pesagens realizadas nas operações do período alimenta os cálculos do boletim |

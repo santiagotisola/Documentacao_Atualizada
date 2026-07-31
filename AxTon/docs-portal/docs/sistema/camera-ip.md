@@ -93,3 +93,32 @@ Para confirmar que o stream RTSP funciona, teste no VLC Media Player: **Mídia �
 | **554** | RTSP | Stream de vídeo em tempo real |
 | **8000** | SDK | Porta de integração SDK (alguns modelos) |
 | **443** | HTTPS | Acesso web seguro (quando habilitado) |
+
+## Erros comuns
+
+| Situação | Causa | Solução |
+|----------|-------|----------|
+| "Any suitable track is not found" | Câmera transmitindo em H.265 | Altere o codec para H.264 nas configurações da câmera |
+| "Falha ao conectar" | IP incorreto ou câmera desligada | Verifique o IP no navegador e a alimentação PoE |
+| Imagem congelada | Instabilidade de rede | Verifique o cabo de rede e a qualidade da conexão |
+| ONVIF não acessível | Protocolo ONVIF desativado | Habilite em Setup → Network → Protocol → ONVIF |
+
+## Perguntas frequentes
+
+**Como verificar se a câmera está acessível antes de configurar no AxTon?**
+Abra o Chrome e acesse `http://[IP-da-camera]`. Se a interface web carregar, a câmera está acessível. Se não carregar, há problema de rede ou IP incorreto.
+
+**Qual resolução devo usar para capturar placas com qualidade?**
+Recomendamos no mínimo **1280×720** para leitura OCR. Para melhores resultados em alta velocidade, use **1920×1080** com côdec H.264 e frame rate de 25fps.
+
+**As configurações da câmera precisam ser refeitas após reiniciar o sistema?**
+Não. As configurações são salvas no banco de dados do AxTon. Apenas o serviço de streaming precisa ser verificado após reinicializações de hardware.
+
+## Integração com outros módulos
+
+| Módulo | Como se relaciona com Câmera IP |
+|--------|----------------------------------|
+| **Configurações do Sistema** | A configuração da câmera é parte das configurações gerais acessíveis em **Sistema** |
+| **Pesagem → Iniciar Pesagem** | A câmera captura a imagem do veículo durante o processo de pesagem |
+| **Processamento de Imagens** | A taxa OCR depende diretamente da qualidade da imagem capturada pela câmera |
+| **Medições → Índices de Performance** | A taxa OCR calculada a partir das imagens da câmera é monitorada como índice contratual |

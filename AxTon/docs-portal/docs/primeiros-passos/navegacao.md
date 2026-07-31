@@ -118,4 +118,22 @@ Acesse pelo navegador o mesmo endereço IP do servidor AxTon na rede local. Não
 
 - Use o breadcrumb sempre que precisar retornar a uma tela anterior — evita navegar pelo menu do zero
 - Se um item do menu estiver ausente, verifique com o administrador se as permissões do seu perfil estão corretas
+
+## Erros comuns
+
+| Situação | Causa | Solução |
+|----------|-------|----------|
+| Módulo ausente no menu | Perfil sem permissão para o módulo | Solicite ao administrador a concessão da permissão necessária |
+| Sessão encerrada automaticamente | Timeout de inatividade | Faça login novamente — os dados são preservados |
+| Menu não expande uma categoria | Erro de JavaScript ou cache | Recarregue a página (`F5`) ou limpe o cache do navegador |
+| Tela em branco ao clicar em módulo | Permissão de visualização não concedida | Verifique com o administrador as permissões do perfil |
+
+## Integração com outros módulos
+
+| Módulo | Como se relaciona com a Navegação |
+|--------|-----------------------------------|
+| **Login** | O perfil autenticado determina quais itens aparecem no menu |
+| **Perfis de Acesso** | Define quais módulos ficam visíveis no menu para cada perfil |
+| **Permissões de Acesso** | Controla granularmente o acesso a funcionalidades dentro de cada módulo |
+| **Dashboard** | Tela inicial exibida após o login, acessível pelo logo do AxTon |
 - Em telas de listagem, utilize os filtros antes de exportar dados para reduzir o volume do arquivo gerado

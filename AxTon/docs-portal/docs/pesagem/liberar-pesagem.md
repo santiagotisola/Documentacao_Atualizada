@@ -100,3 +100,20 @@ Somente perfis com permissão de Liberar Pesagem. Verifique em Controle de Acess
 **O que acontece com a infração após liberação?**
 A infração permanece ativa para triagem. A liberação só libera o veículo, não cancela o auto.
 
+## Erros comuns
+
+| Situação | Causa | Solução |
+|----------|-------|----------|
+| Botão Liberar desativado | Perfil sem permissão de Liberar Pesagem | Verifique em **Controle de Acesso → Permissões** |
+| Motivo de liberação não aparece na lista | Motivo inativo ou não cadastrado | Cadastre em **Pesagem → Motivos** |
+| Ticket não localizac na tela | Ticket já fechado ou período incorreto | Busque em **Tickets Fechados** com filtro por período |
+
+## Integração com outros módulos
+
+| Módulo | Como se relaciona com Liberar Pesagem |
+|--------|---------------------------------------|
+| **Pesagem → Motivos** | Os motivos de liberação são cadastrados aqui e selecionados no momento da liberação |
+| **Pesagem → Tickets Abertos** | A liberação é realizada a partir dos tickets em aberto desta tela |
+| **Controle de Acesso → Permissões** | Define quais perfis podem executar a liberação administrativa |
+| **Relatório de Infrações** | A infração gerada antes da liberação ainda aparece no relatório para triagem |
+

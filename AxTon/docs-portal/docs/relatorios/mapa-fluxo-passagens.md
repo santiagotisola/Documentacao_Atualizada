@@ -112,3 +112,12 @@ Passagens exibe o volume total de veículos pesados. Infrações exibe apenas os
 
 **Posso exportar o mapa como imagem para apresentações ao contratante?**
 Sim. Use o botão **Exportar** disponível na tela para salvar uma imagem do mapa ou um CSV com os dados por posto, ideal para relatórios de prestação de contas.
+
+## Integração com outros módulos
+
+| Módulo | Como se relaciona com Mapa de Fluxo |
+|--------|-------------------------------------|
+| **Cadastros → Locais** | Os postos precisam ter coordenadas geográficas cadastradas para aparecer no mapa |
+| **Operações** | As operações ativas nos postos geram os dados de volume exibidos no mapa |
+| **Relatório de Passagens** | Complementa o mapa com dados tabulares detalhados por posto e período |
+| **Fluxo Diário de Veículos** | Analisa a distribuição temporal do fluxo capturado no mapa por posto |

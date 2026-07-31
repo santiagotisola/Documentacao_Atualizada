@@ -127,3 +127,12 @@ Não recomendado. Um posto deve estar associado a apenas um contrato ativo por v
 
 **As metas de disponibilidade e OCR podem ser alteradas após o contrato ser criado?**
 Sim. Edite o contrato e atualize as metas. No entanto, medições já geradas não são recalculadas retroativamente — a alteração vale apenas para as próximas medições.
+
+## Integração com outros módulos
+
+| Módulo | Como se relaciona com Contratos |
+|--------|----------------------------------|
+| **Medições → Criar Medição** | O contrato é selecionado ao gerar o boletim — define o período, os postos e as metas avaliadas |
+| **Medições → Interrupções** | Interrupções registradas nos postos do contrato impactam o índice de disponibilidade |
+| **Medições → Índices de Performance** | Exibe os indicadores contratuais calculados (OCR, disponibilidade, volume) por contrato |
+| **Operações** | As operações realizadas nos postos vinculados ao contrato alimentam os cálculos do boletim |

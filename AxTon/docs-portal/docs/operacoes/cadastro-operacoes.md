@@ -114,3 +114,21 @@ Acesse **Operações**, localize a operação aberta, clique em **Editar** e pre
 
 **Posso ter múltiplas operações em andamento simultaneamente para o mesmo posto?**
 O sistema permite abertura de múltiplas operações, mas é uma prática que deve ser evitada. Operações sobrepostas dificultam a rastreabilidade das pesagens e podem distorcer os índices de medição contratual. Encerre sempre a operação anterior antes de abrir uma nova.
+
+## Erros comuns
+
+| Situação | Causa | Solução |
+|----------|-------|----------|
+| Pesagem não vinculada à operação | Operação não estava **Em Andamento** | Verifique o status e reinicie a operação antes de registrar pesagens |
+| Operação não pode ser encerrada | Há tickets em aberto vinculados | Feche ou descarte os tickets em aberto antes de encerrar |
+| Local não aparece na listagem | Local inativo ou não cadastrado | Verifique em **Cadastros → Locais** se o local está ativo |
+| Data de fim anterior à de início | Erro de preenchimento | Corrija as datas — o sistema não aceita períodos inválidos |
+
+## Integração com outros módulos
+
+| Módulo | Como se relaciona com Operações |
+|--------|----------------------------------|
+| **Pesagem → Iniciar Pesagem** | Exige operação **Em Andamento** para vincular tickets de pesagem ao contexto fiscalizatório correto |
+| **Medições** | Operações são a base dos contratos de medição — período e local definem o escopo do boletim |
+| **Monitoramento Online** | Exibe o status em tempo real das operações e equipamentos ativos |
+| **Relatório de Passagens** | Pesagens registradas na operação aparecem nos relatórios filtrados por local e período |

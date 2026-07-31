@@ -124,3 +124,12 @@ Crie perfis com nomes descritivos que reflitam o cargo ou função dos Usuários
 :::warning Exclusão de perfis
 Um perfil de acesso somente poderá ser excluído se não houver Usuários vinculados a ele. Para desabilitar um perfil sem excluí-lo, utilize o campo **Ativo**.
 :::
+
+## Integração com outros módulos
+
+| Módulo | Como se relaciona com Perfis de Acesso |
+|--------|----------------------------------------|
+| **Usuários** | Cada usuário deve ter um perfil vinculado — sem perfil, o acesso não funciona corretamente |
+| **Permissões de Acesso** | As permissões configuradas por módulo são associadas ao perfil e aplicadas a todos os usuários vinculados |
+| **Logs de Acesso** | Os acessos registrados incluem o perfil do usuário, facilitando auditorias por grupo |
+| **Login** | O perfil define quais módulos aparecem no menu após a autenticação |

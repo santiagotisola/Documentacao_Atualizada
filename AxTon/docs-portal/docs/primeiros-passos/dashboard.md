@@ -122,3 +122,32 @@ O menu lateral exibe todos os módulos disponíveis conforme o perfil de acesso:
 - **Use Origem das Cargas** para justificar estratégias de fiscalização por região
 - **Monitore Alertas Recentes** para ação imediata em ocorrências críticas
 - **Consulte Últimas Notas Fiscais** para validar a documentação fiscal dos Veículos
+
+## Erros comuns
+
+| Erro | Causa | Solução |
+|------|-------|----------|
+| Indicadores zerados ao abrir | Operação não iniciada no turno atual | Acesse **Operações** e inicie ou selecione a operação do dia |
+| Gráfico não atualiza | Cache do navegador ou conexão instável | Recarregue a página (`F5`) ou limpe o cache |
+| Alertas não aparecem | Equipamentos offline ou sem comunicação | Verifique em **Operações → Monitoramento Online** o status dos equipamentos |
+| Últimas pesagens não listam | Nenhuma pesagem registrada no turno | Confirme em **Tickets de Pesagens** se há registros no período |
+
+## Perguntas frequentes
+
+**Por que os indicadores do Dashboard mostram valores diferentes do Relatório de Pesagens?**
+O Dashboard exibe dados do mês corrente e da operação ativa. O Relatório de Pesagens permite filtrar por qualquer período. Use o relatório para análises históricas e o Dashboard para visão em tempo real.
+
+**Como saber se um alerta no Dashboard requer ação imediata?**
+Alertas em vermelho indicam falhas críticas (equipamento offline, sem comunicação). Alertas em amarelo são avisos (baixo volume, atraso na sincronização). Acesse **Operações → Monitoramento Online** para detalhes e ações.
+
+**O Dashboard mostra pesagens de outras operações além da atual?**
+Os contadores de "Operação" acumulam pesagens da operação ativa. Para ver pesagens de operações anteriores, acesse **Relatórios → Relatório de Passagens** com filtro por data.
+
+## Integração com outros módulos
+
+| Módulo | Como se relaciona com o Dashboard |
+|--------|-----------------------------------|
+| **Operações** | Define a operação ativa — o Dashboard exibe contadores e alertas da operação em andamento |
+| **Tickets de Pesagens** | Alimenta a lista de últimas pesagens exibida no Dashboard em tempo real |
+| **Relatório de Passagens** | Para análises detalhadas além do período mensal exibido no Dashboard |
+| **Monitoramento Online** | Origem dos alertas operacionais exibidos no painel de alertas do Dashboard |

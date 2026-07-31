@@ -103,3 +103,12 @@ Cadastre o modelo em **Cadastros Básicos → Modelos de Equipamentos → + Novo
 
 **Posso renomear um modelo já vinculado a equipamentos em operação?**
 Não é recomendado. Renomear pode causar inconsistência nos relatórios históricos. Inative o modelo atual, crie um novo com o nome correto e redirecione os equipamentos para o novo cadastro.
+
+## Integração com outros módulos
+
+| Módulo | Como se relaciona com Modelos de Equipamentos |
+|--------|------------------------------------------------|
+| **Cadastros Básicos → Equipamentos** | Cada equipamento deve ser vinculado a um modelo — sem modelo, o cadastro é bloqueado |
+| **Cadastros Básicos → Fabricantes** | O modelo é vinculado ao fabricante que o produz |
+| **Cadastros Básicos → Tipos de Equipamentos** | Define a categoria do modelo (rádar, balança, câmera etc.) |
+| **Operações → Monitoramento Online** | O modelo do equipamento aparece no painel de monitoramento para identificação |

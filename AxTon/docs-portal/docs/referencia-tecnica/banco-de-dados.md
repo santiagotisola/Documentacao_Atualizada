@@ -327,3 +327,32 @@ export default function InfracoesAxTon() {
   );
 }
 ```
+
+## Erros comuns
+
+| Situação | Causa | Solução |
+|----------|-------|----------|
+| API retorna 500 | MongoDB offline ou URI incorreta | Verifique a string de conexão no `config.json` do servidor |
+| Collection vazia | Banco de dados zerado ou ambiente incorreto | Confirme o nome do banco em `use AxTon` |
+| Heartbeat não atualiza | Balança offline ou HAENNI desconectado | Verifique a URL em **Sistema → Configurações → Aba HAENNI** |
+| Exportação com Error | Sequencial incorreto na collection | Verifique `SequentialInfraction.CurrentNumber` via MongoDB Compass |
+
+## Perguntas frequentes
+
+**Como verificar a versão do banco de dados do AxTon?**
+Esta informação está disponível via `GET /api/axton/status`, que retorna o nome do banco e a latência da conexão.
+
+**Como acessar os dados diretamente para auditoria interna?**
+Use o **MongoDB Compass** com a string de conexão do servidor para navegar nas collections `Weighing` e `ExportBatch`. Nunca faça alterações manuais sem orientar o suporte técnico.
+
+**A API do AxTon exposta na porta 3100 é segura para acesso externo?**
+Não. A API foi projetada para consumo interno (painel de gestão na mesma rede). Para exposição externa, é necessário configurar proxy reverso com autenticação e HTTPS.
+
+## Integração com outros módulos
+
+| Módulo | Como se relaciona com a Referência Técnica |
+|--------|----------------------------------------------|
+| **Sistema → Configurações** | Os valores salvos nas configurações são armazenados na collection `Configuration` |
+| **Pesagem → Iniciar Pesagem** | Cada pesagem cria um documento na collection `Weighing` com os dados completos |
+| **Exportação de Infrações** | Os lotes gerados são persistidos na collection `ExportBatch` com status e URL do arquivo |
+| **Medições → Contratos** | Dados de volume de pesagem calculados a partir das collections `Weighing` e `Operation` |

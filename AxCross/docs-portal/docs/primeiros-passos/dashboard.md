@@ -134,3 +134,32 @@ Para consultar o histórico completo com filtros: [📖 Relatório de Ocorrênci
 ## Novidades do AxCross
 
 Painel exibido ao final do Dashboard listando as versões lançadas com as melhorias e correções de cada release. Útil para acompanhar evoluções do sistema e novos recursos disponíveis.
+
+## Erros comuns
+
+| Situação | Causa | Solução |
+|----------|-------|----------|
+| Indicadores zerados | Equipamentos, faixas ou veículos monitorados não cadastrados | Acesse os respectivos cadastros e verifique os status |
+| Mapa não exibe equipamentos | Coordenadas geográficas não cadastradas | Edite cada equipamento e preencha **Latitude** e **Longitude** |
+| Ocorrências não aparecem | Alertas não configurados ou veículos monitorados sem regras | Verifique em **Veículos Monitorados → Alertas** as regras ativas |
+| Alto volume de "Sem Classificação" | Parâmetro de confiabilidade muito alto | Verifique as configurações de classificação de cada equipamento |
+
+## Perguntas frequentes
+
+**Por que os indicadores do topo mostram valores diferentes do que vejo nos relatórios?**
+Os indicadores do Dashboard refletem o estado atual dos cadastros (equipamentos ativos, veículos monitorados). Os relatórios mostram dados históricos. Use o Relatório de Passagens para consultas com filtros de período.
+
+**Como fazer o mapa de equipamentos exibir todos os postos corretamente?**
+Acesse **Cadastros → Equipamentos**, edite cada equipamento e preencha os campos **Latitude** e **Longitude** com as coordenadas do local de instalação. Sem coordenadas, o equipamento não aparece no mapa.
+
+**Com que frequência o Dashboard atualiza os dados?**
+O Dashboard atualiza automaticamente a cada 30 segundos sem necessidade de recarregar a página. Para dados em tempo real mais próximos, use o **Monitoramento Online**.
+
+## Integração com outros módulos
+
+| Módulo | Como se relaciona com o Dashboard |
+|--------|-----------------------------------|
+| **Cadastros → Equipamentos** | Os indicadores de **Equipamentos Ativos** e **Faixas Monitoradas** são alimentados por estes cadastros |
+| **Operações → Veículos Monitorados** | Os indicadores de **Veículos Monitorados** e **Ocorrências (24h)** refletem os dados desta tela |
+| **Monitoramento Online** | Acesso rápido ao mapa ao vivo com todas as câmeras ativas |
+| **Relatórios** | Para análises detalhadas além dos dados em tempo real exibidos no Dashboard |

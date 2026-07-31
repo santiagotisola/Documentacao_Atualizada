@@ -118,3 +118,21 @@ Os logs registram autenticações (login/logout). Para rastreabilidade de opera�
 |---|---|
 | [**Restrição por IP**](../controle-acesso/acessos-por-ip) | Configurar restrição de acesso por endereço IP |
 | [**Permissões Detalhadas**](../controle-acesso/configurar-permissoes) | Configurar permissões granulares por módulo |
+
+## Erros comuns
+
+| Situação | Causa | Solução |
+|----------|-------|----------|
+| Logs não aparecem no período esperado | Filtro de data incorreto | Verifique as datas de início e fim no filtro |
+| Acessos de usuário não aparecem | Usuário nunca acessou no período | Amplie o período de busca ou verifique o login correto |
+| Não consigo exportar os logs | Sem permissão de exportação | Solicite ao administrador a permissão `export.pdf` no perfil |
+| Log mostra muitas falhas seguidas | Possível ataque de força bruta | Bloqueie o IP em **Controle de Acesso → Acessos por IP** |
+
+## Integração com outros módulos
+
+| Módulo | Como se relaciona com Logs de Acesso |
+|--------|--------------------------------------|
+| **Usuários** | Cada log registra o usuário que tentou acessar, facilitando a rastreabilidade de incidentes |
+| **Acessos por IP** | IPs bloqueados geram entradas no log como falhas de acesso |
+| **Perfis de Acesso** | Logs com muitas falhas podem indicar perfil sem permissão adequada ou credenciais indevidas |
+| **Dashboard** | Anomalias nos logs (muitas falhas) devem ser monitoradas periodicamente pela administração |

@@ -96,3 +96,12 @@ Acesse **Operações → Eventos de Equipamentos → + Novo Evento**, selecione 
 
 **Qual a diferença entre registrar um Evento de Falha e uma Interrupção em Medições?**
 Eventos de equipamentos são o registro operacional do que aconteceu (falha técnica, manutenção, reinicialização). Interrupções são o registro formal para cálculo de SLA contratual. Toda falha que impacta a disponibilidade deve ser registrada nos dois lugares: aqui como evento técnico e em **Medições → Interrupções** como impacto contratual.
+
+## Integração com outros módulos
+
+| Módulo | Como se relaciona com Eventos de Equipamentos |
+|--------|-----------------------------------------------|
+| **Medições → Interrupções** | Eventos de falha devem ser registrados também como interrupções para impactar o cálculo de disponibilidade contratual |
+| **Monitoramento Online** | Exibe alertas em tempo real que originam os eventos de equipamentos |
+| **Alertas** | Alertas configurados disparam notificações que podem ser convertidos em eventos |
+| **Relatórios → Falhas Sequenciais** | Consolida eventos de falha por equipamento para análise de padrões e manutenção preventiva |

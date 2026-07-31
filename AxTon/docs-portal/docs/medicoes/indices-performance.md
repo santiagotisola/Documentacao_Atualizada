@@ -107,3 +107,12 @@ Sim. Ao gerar uma medição, o sistema calcula automaticamente cada índice com 
 
 **Posso ter índices diferentes para postos distintos dentro do mesmo contrato?**
 Sim. Cada índice pode ser configurado com metas específicas por posto ou por grupo de equipamentos, permitindo análise granular do desempenho contratual.
+
+## Integração com outros módulos
+
+| Módulo | Como se relaciona com Índices de Performance |
+|--------|-----------------------------------------------|
+| **Contratos** | Os índices são vinculados ao contrato — metas e tolerâncias são definidas nele |
+| **Criar Medição** | O boletim gerado inclui os índices calculados para validação pelo contratante |
+| **Interrupções** | Impactam diretamente o índice de disponibilidade, que é monitorado aqui |
+| **Processamento de Imagens** | A taxa OCR registrada pelos equipamentos alimenta o índice de reconhecimento do contrato |

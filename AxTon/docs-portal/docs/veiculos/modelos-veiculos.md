@@ -109,3 +109,12 @@ Não. Excluir um modelo com infrações associadas compromete o histórico. Inat
 
 **É necessário cadastrar todos os modelos manualmente ou o sistema importa de alguma base?**
 O cadastro é manual. Os dados de modelo são retornados pela consulta RENAVAM durante a pesagem, mas precisam estar pré-cadastrados no sistema para serem associados corretamente ao ticket. Cadastre os modelos mais comuns na implantação inicial.
+
+## Integração com outros módulos
+
+| Módulo | Como se relaciona com Modelos de Veículos |
+|--------|--------------------------------------------|
+| **Veículos → Marcas** | Cada modelo deve ser vinculado a uma marca — sem marca, o modelo fica inacessível nos filtros |
+| **Pesagem → Iniciar Pesagem** | O modelo é identificado via consulta RENAVAM durante a pesagem e associado ao ticket |
+| **Relatório de Passagens** | O modelo do veículo aparece nos registros do relatório para identificação |
+| **Exportação de Infrações** | Alguns layouts de exportação exigem o modelo do veículo no arquivo enviado ao órgão autuador |

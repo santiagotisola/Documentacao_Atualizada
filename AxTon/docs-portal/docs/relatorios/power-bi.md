@@ -107,3 +107,12 @@ Verifique se a URL de incorporação está correta e se o usuário possui acesso
 **Posso exportar os dashboards em PDF ou Excel?**
 Sim. Use os controles nativos do Power BI incorporado para exportar. A disponibilidade do botão de exportação depende das permissões configuradas no Power BI Service pelo administrador.
 
+## Integração com outros módulos
+
+| Módulo | Como se relaciona com Power BI |
+|--------|--------------------------------|
+| **Medições → Criar Medição** | O boletim mensal gerado alimenta os dashboards de desempenho contratual no Power BI |
+| **Administração → Relatórios Power BI** | Onde as URLs de incorporação dos dashboards são cadastradas e gerenciadas |
+| **Relatório de Passagens** | Dados de pesagem e infrações alimentam os paineis gerenciais do Power BI |
+| **Índices de Performance** | Os índices contratuais são exibidos nos dashboards de SLA e disponibilidade |
+

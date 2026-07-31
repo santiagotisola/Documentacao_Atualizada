@@ -97,3 +97,21 @@ Clique em **Esqueceu a Senha?** na tela de login. O sistema envia as instruçõe
 
 **Por que recebo a mensagem "Acesso negado por IP" mesmo com as credenciais corretas?**
 O sistema possui controle de acesso por IP. Seu endereço de rede não está autorizado. Solicite ao administrador que inclua seu IP na lista permitida em **Controle de Acesso → Acessos por IP**.
+
+## Erros comuns
+
+| Erro | Causa | Solução |
+|------|-------|----------|
+| "Usuário ou senha inválidos" | Credenciais incorretas ou Caps Lock ativo | Verifique o teclado e tente novamente; use **Esqueceu a Senha?** se necessário |
+| Conta bloqueada após tentativas | Política de segurança de tentativas máximas | Solicite ao administrador o desbloqueio em **Usuários** |
+| Página de login não carrega | Problema de rede ou servidor offline | Verifique conectividade com a rede interna e contate o suporte |
+| "Acesso negado por IP" | IP do dispositivo não cadastrado | Solicite inclusão do IP em **Controle de Acesso → Acessos por IP** |
+
+## Integração com outros módulos
+
+| Módulo | Como se relaciona com o Login |
+|--------|-------------------------------|
+| **Controle de Acesso → Usuários** | Cadastro de credenciais e definição de perfil de cada usuário |
+| **Controle de Acesso → Perfis de Acesso** | O perfil vinculado ao usuário determina os módulos disponíveis após o login |
+| **Controle de Acesso → Acessos por IP** | Restringe de quais endereços IP o login pode ser realizado |
+| **Logs de Acesso** | Registra cada tentativa de login (sucesso e falha) para auditoria |

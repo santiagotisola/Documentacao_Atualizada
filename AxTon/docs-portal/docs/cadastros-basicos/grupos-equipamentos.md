@@ -109,3 +109,12 @@ Sim. As medições podem ser geradas e filtradas por grupo. Mantenha os grupos a
 
 **O que acontece quando inativo um grupo que tem equipamentos vinculados?**
 Os equipamentos permanecem cadastrados e operacionais. O grupo inativo apenas deixa de aparecer nos filtros de relatórios e medições.
+
+## Integração com outros módulos
+
+| Módulo | Como se relaciona com Grupos de Equipamentos |
+|--------|----------------------------------------------|
+| **Cadastros Básicos → Equipamentos** | Os equipamentos são vinculados aos grupos aqui cadastrados |
+| **Medições → Contratos** | Contratos podem ser filtrados por grupo para cálculos de disponibilidade segmentados |
+| **Medições → Índices de Performance** | Índices podem ser configurados por grupo para análise granular do desempenho |
+| **Operações → Monitoramento Online** | O monitoramento pode ser filtrado por grupo para visualizar apenas equipamentos relevantes |

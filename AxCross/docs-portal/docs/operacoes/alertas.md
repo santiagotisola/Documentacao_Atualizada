@@ -118,3 +118,12 @@ Siga o fluxo: **Visualizar** o alerta para verificar a imagem e confirmar a plac
 **Por que um alerta de MANCHA01 é gerado para veículos que não estão em situação irregular?**
 O alerta MANCHA01 é baseado em tempo de permanência na área monitorada, não em irregularidade do veículo. Qualquer veículo que permaneça além do tempo máximo configurado dispara o alerta. Revise o tempo limite configurado nas **Vigencias de Alertas** se o número de falsos positivos estiver alto.
 
+## Integração com outros módulos
+
+| Módulo | Como se relaciona com Alertas |
+|--------|-------------------------------|
+| **Operações → Veículos Monitorados** | A lista de veículos monitorados é a base dos alertas — quando detectado, gera ocorrência |
+| **Operações → Vigência de Alertas** | Define períodos de validade dos alertas por tipo e placa |
+| **Relatórios → Ocorrências e Alertas** | Consolida o histórico de alertas gerados para exportação e prestação de contas |
+| **Monitoramento Online** | Alertas ativos aparecem em tempo real no painel de monitoramento |
+

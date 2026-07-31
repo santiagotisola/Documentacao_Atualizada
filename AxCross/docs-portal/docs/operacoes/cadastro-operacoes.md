@@ -119,4 +119,13 @@ Sim, mas é uma prática que deve ser evitada. Operações sobrepostas no mesmo 
 
 **Por que não consigo excluir uma operação que criei por engano?**
 O sistema impede a exclusão de operações que já possuem registros de passagem vinculados. Nesse caso, encerre a operação informando a data correta de fim. Para operações sem nenhum registro, a exclusão é permitida.
+
+## Integração com outros módulos
+
+| Módulo | Como se relaciona com Operações |
+|--------|----------------------------------|
+| **Cadastros → Locais** | O local de monitoramento é vinculado à operação criada |
+| **Operações → Monitoramento Online** | Exibe o status das operações ativas e as passagens em tempo real |
+| **Relatório de Passagens** | Passagens são filtradas por operação e período para geração de relatórios |
+| **Relatórios → Ocorrências e Alertas** | Ocorrências geradas durante a operação aparecem neste relatório |
 - [Ocorrências e Alertas](../relatorios/ocorrencias-alertas)

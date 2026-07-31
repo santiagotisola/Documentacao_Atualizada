@@ -109,6 +109,15 @@ Filtre o relatório com **Status = Cancelada** ou **Status = Vencida** no perío
 
 **Existe obrigação legal de reportar NF-e ausentes detectadas pelo AxTon à SEFAZ?**
 Sim. O transporte de cargas sem NF-e é irregularidade prevista no **Ajuste SINIEF 07/2005** e sancionada pela **Lei 8.137/90**. O operador deve exportar o relatório de NF-e ausentes periodicamente e encaminhar à Secretaria de Fazenda estadual para os procedimentos cabíveis.
+
+## Integração com outros módulos
+
+| Módulo | Como se relaciona com Relatório de NF-e |
+|--------|------------------------------------------|
+| **Pesagem → Tickets Fechados** | Cada pesagem registra a NF-e capturada no momento — o relatório consolida essas informações |
+| **Relatório de Passagens** | Cruza dados de pesagem com documentação fiscal para análise de regularidade |
+| **Relatório de Infrações** | Veículos com NF-e ausente ou cancelada podem gerar infração documental |
+| **Glossário → NF-e** | Base legal e definição do documento fiscal eletrônico capturado pelo sistema |
 | **Destino** | UF/cidade de destino |
 | **Data/Hora** | Registro da passagem |
 

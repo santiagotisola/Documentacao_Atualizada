@@ -248,3 +248,32 @@ Reindexação dos registros de passagens no mecanismo de busca **Elasticsearch**
 :::warning Impacto no desempenho
 A sincronização pode consumir recursos significativos do servidor. Recomenda-se executar em horários de baixo tráfego, preferencialmente fora do horário operacional.
 :::
+
+## Erros comuns
+
+| Situação | Causa | Solução |
+|----------|-------|----------|
+| Usuário sem acesso após cadastro | Campo **Status** como Inativo | Edite o usuário e marque como **Ativo** |
+| Perfil não pode ser excluído | Perfil vinculado a usuários | Inative o perfil em vez de excluir |
+| Alertas MANCHA01/COMBOIO01 não gerados | Configurações desabilitadas | Habilite em **Sistema → Configurações MDF-e** |
+| Sincronização demora muito | Grande volume de dados | Divida em faixas de data menores |
+
+## Perguntas frequentes
+
+**Como restringir o acesso de um perfil a apenas relatórios?**
+Acesse **Configurações → Permissões**, selecione o perfil e habilite apenas a permissão **Visualizar** nos módulos de Relatórios. Remova permissões de criar, editar e excluir em todos os outros módulos.
+
+**Quando devo executar a sincronização de passagens?**
+Execute quando os relatórios não refletirem passagens recentes, após restauração de backup ou após manutenção no Elasticsearch. Evite executar no horário de pico operacional.
+
+**Posso ter múltiplos administradores no sistema?**
+Sim. Não há limite de usuários com perfil de Administrador. Recomenda-se, no entanto, limitar a no máximo dois administradores ativos por questão de segurança e rastreabilidade.
+
+## Integração com outros módulos
+
+| Módulo | Como se relaciona com Configurações |
+|--------|---------------------------------------|
+| **Login** | O usuário e perfil cadastrados aqui definem o acesso e as permissões após autenticação |
+| **Relatórios** | A sincronização de passagens garante que os relatórios reflitam dados atualizados do Elasticsearch |
+| **Operações → Veículos Monitorados** | Os alertas MANCHA01 e COMBOIO01 dependem das configurações MDF-e habilitadas aqui |
+| **Monitoramento Online** | O comportamento do monitoramento é afetado pelos parâmetros de tempo e alertas configurados |

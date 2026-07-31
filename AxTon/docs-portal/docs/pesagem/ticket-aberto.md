@@ -100,3 +100,12 @@ A classificação define o PBT máximo permitido para o veículo. Uma classifica
 
 **É possível cancelar um ticket que já foi iniciado mas não finalizado?**
 Sim. Enquanto o ticket estiver com status **Em Andamento**, ele pode ser cancelado pelo operador. Tickets cancelados não geram infração e ficam registrados no histórico de **Tickets Fechados** com status correspondente.
+
+## Integração com outros módulos
+
+| Módulo | Como se relaciona com Tickets Abertos |
+|--------|---------------------------------------|
+| **Iniciar Pesagem** | Cria o ticket em andamento que é listado aqui até a finalização |
+| **Reclassificar** | Permite corrigir a classificação de um ticket após a pesagem |
+| **Tickets Fechados** | Destino dos tickets após finalização — mantém o histórico completo |
+| **Operações** | O ticket é vinculado à operação ativa no momento da pesagem |

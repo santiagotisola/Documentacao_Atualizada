@@ -103,3 +103,12 @@ PBT Medido zerado indica falha na leitura da balança durante aquela pesagem. Ac
 
 **É possível exportar o relatório de pesagem em Excel além do PDF?**
 A exportação disponível neste relatório é em **PDF**. Para obter os dados em formato tabular (Excel/CSV), use o **Relatório de Infrações** ou o **Processamento de Imagens**, que oferecem exportação em CSV para análise avançada.
+
+## Integração com outros módulos
+
+| Módulo | Como se relaciona com Relatório de Passagens |
+|--------|-----------------------------------------------|
+| **Pesagem → Tickets Fechados** | Fonte dos dados de pesagem exibidos no relatório |
+| **Operações** | Os dados são filtrados pela operação e local selecionados |
+| **Medições → Criar Medição** | O volume de pesagens do período é dado de entrada para o boletim contratual |
+| **Relatório de Infrações** | Cruza pesagens com infrações para análise de conformidade do período |

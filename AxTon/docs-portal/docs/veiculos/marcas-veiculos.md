@@ -108,3 +108,12 @@ Depende do layout exigido pelo órgão autuador. Alguns formatos de exportação
 
 **O que acontece quando a marca do veículo não é retornada na consulta do RENAVAM?**
 O campo fabricante fica em branco no ticket de pesagem. O operador deve preencher manualmente durante a triagem. Se o problema for recorrente para uma placa específica, acione o suporte técnico para verificar a integração RENAVAM.
+
+## Integração com outros módulos
+
+| Módulo | Como se relaciona com Marcas de Veículos |
+|--------|-------------------------------------------|
+| **Veículos → Modelos** | Cada modelo de veículo deve ser vinculado a uma marca — marcas inativas bloqueiam os modelos associados |
+| **Pesagem → Iniciar Pesagem** | A marca é identificada via consulta RENAVAM no momento da pesagem |
+| **Relatório de Passagens** | A marca do veículo aparece nos registros para identificação |
+| **Exportação de Infrações** | Layouts de exportação podem exigir o código DENATRAN da marca no arquivo do lote |

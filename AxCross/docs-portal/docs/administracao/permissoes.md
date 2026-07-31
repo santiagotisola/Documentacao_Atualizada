@@ -436,3 +436,32 @@ Usuário com acesso mínimo para visualizar dados sem risco de alterações.
 | Monitoramento | `monitoring.index`, `monitoring.monitoringonline` |
 | Rastreamento | `platetracking.index` |
 | Painel Analítico | `vehicleanalytics.index`, `vehicleanalytics.summary` |
+
+## Erros comuns
+
+| Situação | Causa | Solução |
+|----------|-------|----------|
+| Usuário não vê módulo | Falta permissão `*.index` | Habilite a permissão de visualização para o módulo |
+| Não consegue criar registro | Falta permissão `*.create` | Habilite a permissão de criar no perfil |
+| Alteração não reflete imediatamente | Cache de sessão | Solicite ao usuário fazer logout e login novamente |
+| Não consigo salvar permissões | Sem permissão `accesspermission.edit` | Solicite ao administrador que configure as permissões |
+
+## Perguntas frequentes
+
+**Como garantir que um operador possa monitorar mas não alterar cadastros?**
+Configure o perfil com as permissões `*.index` e `monitoring.*` para visualização, mas sem `*.create`, `*.edit` ou `*.delete` nos módulos de cadastro.
+
+**As alterações de permissão entram em vigor imediatamente?**
+Sim. A alteração é aplicada imediatamente, mas o usuário com sessão ativa pode precisar fazer logout e login novamente para que as novas permissões sejam carregadas na interface.
+
+**Posso criar um perfil com acesso a relatórios mas sem acesso ao monitoramento online?**
+Sim. Configure as permissões `reports.*` sem incluir `monitoring.*`. O módulo de Monitoramento não aparecerá no menu para esse perfil.
+
+## Integração com outros módulos
+
+| Módulo | Como se relaciona com Permissões |
+|--------|----------------------------------|
+| **Perfis de Acesso** | As permissões são configuradas por perfil — cada perfil tem sua própria matriz de acesso |
+| **Usuários** | As permissões do perfil vinculado ao usuário determinam o que ele vê e pode fazer |
+| **Logs de Acesso** | Tentativas de acesso a funcionalidades sem permissão são registradas para auditoria |
+| **Login** | O menu exibido após autenticar é gerado dinamicamente conforme as permissões de visualização do perfil |

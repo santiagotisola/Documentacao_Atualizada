@@ -121,3 +121,12 @@ Relatórios com grande volume de dados podem demorar vários minutos. Se o statu
 - Use **Reprocessar** somente quando o status for **Erro** — verifique se os filtros originais ainda são válidos antes de regenerar
 - Nomeie e arquive os PDFs gerados com contexto (data, tipo, operador) para referência futura em auditorias
 
+## Integração com outros módulos
+
+| Módulo | Como se relaciona com PDFs Gerados |
+|--------|------------------------------------|
+| **Relatório de Passagens** | Os PDFs de passagens gerados ficam listados aqui para redownload |
+| **Ocorrências e Alertas** | PDFs de ocorrências gerados também aparecem na fila |
+| **Veículos Monitorados** | Relatórios de veículos monitorados com imagens ficam disponíveis aqui |
+| **Rastreamento de Placas** | PDFs de rastreamento ficam acessíveis para download posterior |
+

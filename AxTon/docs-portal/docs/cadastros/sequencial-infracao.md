@@ -138,6 +138,15 @@ Não recomendado. Editar manualmente sem verificar o histórico pode gerar núme
 
 1. Na listagem, clique em **+ Novo**
 2. Informe o **Código** e a **Descrição** do sequencial
+
+## Integração com outros módulos
+
+| Módulo | Como se relaciona com Sequencial de Infração |
+|--------|------------------------------------------------|
+| **Pesagem → Iniciar Pesagem** | A infração gerada recebe automaticamente o próximo número do sequencial ativo |
+| **Exportação de Infrações** | O número do sequencial é incluído no arquivo do lote enviado ao órgão autuador |
+| **Falhas Sequenciais** | Monitora lacunas e duplicidades nos números de auto gerados |
+| **Sequencial de Exportação** | Complementar — enquanto este numera os autos, o outro numera os lotes |
 3. Defina o **Número Inicial** a partir do qual a contagem começará
 4. Informe o **Prefixo**, se aplicável
 5. Confirme que o campo **Ativo** está marcado
