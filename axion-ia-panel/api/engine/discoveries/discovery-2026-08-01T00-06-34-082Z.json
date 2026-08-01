@@ -1,0 +1,402 @@
+{
+  "metadata": {
+    "baseURL": "http://localhost:3017",
+    "discoveredAt": "2026-08-01T00:06:34.081Z",
+    "totalPages": 0,
+    "totalMenus": 0,
+    "totalForms": 0,
+    "totalTables": 0,
+    "totalAPIs": 32
+  },
+  "pages": [],
+  "menus": [],
+  "forms": [],
+  "tables": [],
+  "apis": [
+    {
+      "url": "http://localhost:3100/api/analise",
+      "method": "GET",
+      "headers": {
+        "x-api-token": "4ca85296b69704ff408e570501c2480af8457da858defbced704ba4ad20d8bf3",
+        "referer": "http://localhost:3017/",
+        "accept-language": "pt-BR,pt;q=0.9",
+        "accept": "application/json, text/plain, */*",
+        "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/150.0.0.0 Safari/537.36"
+      },
+      "timestamp": "2026-08-01T00:05:56.712Z"
+    },
+    {
+      "url": "http://localhost:3100/api/logs?limit=8",
+      "method": "GET",
+      "headers": {
+        "x-api-token": "4ca85296b69704ff408e570501c2480af8457da858defbced704ba4ad20d8bf3",
+        "referer": "http://localhost:3017/",
+        "accept-language": "pt-BR,pt;q=0.9",
+        "accept": "application/json, text/plain, */*",
+        "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/150.0.0.0 Safari/537.36"
+      },
+      "timestamp": "2026-08-01T00:05:56.712Z"
+    },
+    {
+      "url": "http://localhost:3100/api/analise",
+      "method": "GET",
+      "headers": {
+        "x-api-token": "4ca85296b69704ff408e570501c2480af8457da858defbced704ba4ad20d8bf3",
+        "referer": "http://localhost:3017/",
+        "accept-language": "pt-BR,pt;q=0.9",
+        "accept": "application/json, text/plain, */*",
+        "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/150.0.0.0 Safari/537.36"
+      },
+      "timestamp": "2026-08-01T00:05:56.714Z"
+    },
+    {
+      "url": "http://localhost:3100/api/helpdesk/sites-overview",
+      "method": "GET",
+      "headers": {
+        "x-api-token": "4ca85296b69704ff408e570501c2480af8457da858defbced704ba4ad20d8bf3",
+        "referer": "http://localhost:3017/",
+        "accept-language": "pt-BR,pt;q=0.9",
+        "accept": "application/json, text/plain, */*",
+        "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/150.0.0.0 Safari/537.36"
+      },
+      "timestamp": "2026-08-01T00:05:56.715Z"
+    },
+    {
+      "url": "http://localhost:3100/api/analise",
+      "method": "GET",
+      "headers": {
+        "x-api-token": "4ca85296b69704ff408e570501c2480af8457da858defbced704ba4ad20d8bf3",
+        "referer": "http://localhost:3017/",
+        "accept-language": "pt-BR,pt;q=0.9",
+        "accept": "application/json, text/plain, */*",
+        "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/150.0.0.0 Safari/537.36"
+      },
+      "timestamp": "2026-08-01T00:05:56.715Z"
+    },
+    {
+      "url": "http://localhost:3100/api/logs?limit=8",
+      "method": "GET",
+      "headers": {
+        "x-api-token": "4ca85296b69704ff408e570501c2480af8457da858defbced704ba4ad20d8bf3",
+        "referer": "http://localhost:3017/",
+        "accept-language": "pt-BR,pt;q=0.9",
+        "accept": "application/json, text/plain, */*",
+        "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/150.0.0.0 Safari/537.36"
+      },
+      "timestamp": "2026-08-01T00:05:56.716Z"
+    },
+    {
+      "url": "http://localhost:3100/api/analise",
+      "method": "GET",
+      "headers": {
+        "x-api-token": "4ca85296b69704ff408e570501c2480af8457da858defbced704ba4ad20d8bf3",
+        "referer": "http://localhost:3017/",
+        "accept-language": "pt-BR,pt;q=0.9",
+        "accept": "application/json, text/plain, */*",
+        "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/150.0.0.0 Safari/537.36"
+      },
+      "timestamp": "2026-08-01T00:05:56.721Z"
+    },
+    {
+      "url": "http://localhost:3100/api/helpdesk/sites-overview",
+      "method": "GET",
+      "headers": {
+        "x-api-token": "4ca85296b69704ff408e570501c2480af8457da858defbced704ba4ad20d8bf3",
+        "referer": "http://localhost:3017/",
+        "accept-language": "pt-BR,pt;q=0.9",
+        "accept": "application/json, text/plain, */*",
+        "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/150.0.0.0 Safari/537.36"
+      },
+      "timestamp": "2026-08-01T00:05:56.754Z"
+    },
+    {
+      "url": "http://localhost:3100/api/analise",
+      "method": "GET",
+      "headers": {
+        "x-api-token": "4ca85296b69704ff408e570501c2480af8457da858defbced704ba4ad20d8bf3",
+        "referer": "http://localhost:3017/",
+        "accept-language": "pt-BR,pt;q=0.9",
+        "accept": "application/json, text/plain, */*",
+        "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/150.0.0.0 Safari/537.36"
+      },
+      "timestamp": "2026-08-01T00:05:58.953Z"
+    },
+    {
+      "url": "http://localhost:3100/api/logs?limit=8",
+      "method": "GET",
+      "headers": {
+        "x-api-token": "4ca85296b69704ff408e570501c2480af8457da858defbced704ba4ad20d8bf3",
+        "referer": "http://localhost:3017/",
+        "accept-language": "pt-BR,pt;q=0.9",
+        "accept": "application/json, text/plain, */*",
+        "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/150.0.0.0 Safari/537.36"
+      },
+      "timestamp": "2026-08-01T00:05:58.954Z"
+    },
+    {
+      "url": "http://localhost:3100/api/analise",
+      "method": "GET",
+      "headers": {
+        "x-api-token": "4ca85296b69704ff408e570501c2480af8457da858defbced704ba4ad20d8bf3",
+        "referer": "http://localhost:3017/",
+        "accept-language": "pt-BR,pt;q=0.9",
+        "accept": "application/json, text/plain, */*",
+        "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/150.0.0.0 Safari/537.36"
+      },
+      "timestamp": "2026-08-01T00:05:58.954Z"
+    },
+    {
+      "url": "http://localhost:3100/api/helpdesk/sites-overview",
+      "method": "GET",
+      "headers": {
+        "x-api-token": "4ca85296b69704ff408e570501c2480af8457da858defbced704ba4ad20d8bf3",
+        "referer": "http://localhost:3017/",
+        "accept-language": "pt-BR,pt;q=0.9",
+        "accept": "application/json, text/plain, */*",
+        "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/150.0.0.0 Safari/537.36"
+      },
+      "timestamp": "2026-08-01T00:05:58.954Z"
+    },
+    {
+      "url": "http://localhost:3100/api/analise",
+      "method": "GET",
+      "headers": {
+        "x-api-token": "4ca85296b69704ff408e570501c2480af8457da858defbced704ba4ad20d8bf3",
+        "referer": "http://localhost:3017/",
+        "accept-language": "pt-BR,pt;q=0.9",
+        "accept": "application/json, text/plain, */*",
+        "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/150.0.0.0 Safari/537.36"
+      },
+      "timestamp": "2026-08-01T00:05:58.956Z"
+    },
+    {
+      "url": "http://localhost:3100/api/logs?limit=8",
+      "method": "GET",
+      "headers": {
+        "x-api-token": "4ca85296b69704ff408e570501c2480af8457da858defbced704ba4ad20d8bf3",
+        "referer": "http://localhost:3017/",
+        "accept-language": "pt-BR,pt;q=0.9",
+        "accept": "application/json, text/plain, */*",
+        "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/150.0.0.0 Safari/537.36"
+      },
+      "timestamp": "2026-08-01T00:05:58.962Z"
+    },
+    {
+      "url": "http://localhost:3100/api/analise",
+      "method": "GET",
+      "headers": {
+        "x-api-token": "4ca85296b69704ff408e570501c2480af8457da858defbced704ba4ad20d8bf3",
+        "referer": "http://localhost:3017/",
+        "accept-language": "pt-BR,pt;q=0.9",
+        "accept": "application/json, text/plain, */*",
+        "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/150.0.0.0 Safari/537.36"
+      },
+      "timestamp": "2026-08-01T00:05:58.972Z"
+    },
+    {
+      "url": "http://localhost:3100/api/helpdesk/sites-overview",
+      "method": "GET",
+      "headers": {
+        "x-api-token": "4ca85296b69704ff408e570501c2480af8457da858defbced704ba4ad20d8bf3",
+        "referer": "http://localhost:3017/",
+        "accept-language": "pt-BR,pt;q=0.9",
+        "accept": "application/json, text/plain, */*",
+        "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/150.0.0.0 Safari/537.36"
+      },
+      "timestamp": "2026-08-01T00:05:58.975Z"
+    },
+    {
+      "url": "http://localhost:3100/api/analise",
+      "method": "GET",
+      "headers": {
+        "x-api-token": "4ca85296b69704ff408e570501c2480af8457da858defbced704ba4ad20d8bf3",
+        "referer": "http://localhost:3017/",
+        "accept-language": "pt-BR,pt;q=0.9",
+        "accept": "application/json, text/plain, */*",
+        "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/150.0.0.0 Safari/537.36"
+      },
+      "timestamp": "2026-08-01T00:06:16.037Z"
+    },
+    {
+      "url": "http://localhost:3100/api/logs?limit=8",
+      "method": "GET",
+      "headers": {
+        "x-api-token": "4ca85296b69704ff408e570501c2480af8457da858defbced704ba4ad20d8bf3",
+        "referer": "http://localhost:3017/",
+        "accept-language": "pt-BR,pt;q=0.9",
+        "accept": "application/json, text/plain, */*",
+        "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/150.0.0.0 Safari/537.36"
+      },
+      "timestamp": "2026-08-01T00:06:16.037Z"
+    },
+    {
+      "url": "http://localhost:3100/api/analise",
+      "method": "GET",
+      "headers": {
+        "x-api-token": "4ca85296b69704ff408e570501c2480af8457da858defbced704ba4ad20d8bf3",
+        "referer": "http://localhost:3017/",
+        "accept-language": "pt-BR,pt;q=0.9",
+        "accept": "application/json, text/plain, */*",
+        "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/150.0.0.0 Safari/537.36"
+      },
+      "timestamp": "2026-08-01T00:06:16.038Z"
+    },
+    {
+      "url": "http://localhost:3100/api/helpdesk/sites-overview",
+      "method": "GET",
+      "headers": {
+        "x-api-token": "4ca85296b69704ff408e570501c2480af8457da858defbced704ba4ad20d8bf3",
+        "referer": "http://localhost:3017/",
+        "accept-language": "pt-BR,pt;q=0.9",
+        "accept": "application/json, text/plain, */*",
+        "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/150.0.0.0 Safari/537.36"
+      },
+      "timestamp": "2026-08-01T00:06:16.038Z"
+    },
+    {
+      "url": "http://localhost:3100/api/analise",
+      "method": "GET",
+      "headers": {
+        "x-api-token": "4ca85296b69704ff408e570501c2480af8457da858defbced704ba4ad20d8bf3",
+        "referer": "http://localhost:3017/",
+        "accept-language": "pt-BR,pt;q=0.9",
+        "accept": "application/json, text/plain, */*",
+        "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/150.0.0.0 Safari/537.36"
+      },
+      "timestamp": "2026-08-01T00:06:16.039Z"
+    },
+    {
+      "url": "http://localhost:3100/api/logs?limit=8",
+      "method": "GET",
+      "headers": {
+        "x-api-token": "4ca85296b69704ff408e570501c2480af8457da858defbced704ba4ad20d8bf3",
+        "referer": "http://localhost:3017/",
+        "accept-language": "pt-BR,pt;q=0.9",
+        "accept": "application/json, text/plain, */*",
+        "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/150.0.0.0 Safari/537.36"
+      },
+      "timestamp": "2026-08-01T00:06:16.039Z"
+    },
+    {
+      "url": "http://localhost:3100/api/analise",
+      "method": "GET",
+      "headers": {
+        "x-api-token": "4ca85296b69704ff408e570501c2480af8457da858defbced704ba4ad20d8bf3",
+        "referer": "http://localhost:3017/",
+        "accept-language": "pt-BR,pt;q=0.9",
+        "accept": "application/json, text/plain, */*",
+        "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/150.0.0.0 Safari/537.36"
+      },
+      "timestamp": "2026-08-01T00:06:16.039Z"
+    },
+    {
+      "url": "http://localhost:3100/api/helpdesk/sites-overview",
+      "method": "GET",
+      "headers": {
+        "x-api-token": "4ca85296b69704ff408e570501c2480af8457da858defbced704ba4ad20d8bf3",
+        "referer": "http://localhost:3017/",
+        "accept-language": "pt-BR,pt;q=0.9",
+        "accept": "application/json, text/plain, */*",
+        "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/150.0.0.0 Safari/537.36"
+      },
+      "timestamp": "2026-08-01T00:06:16.039Z"
+    },
+    {
+      "url": "http://localhost:3100/api/analise",
+      "method": "GET",
+      "headers": {
+        "x-api-token": "4ca85296b69704ff408e570501c2480af8457da858defbced704ba4ad20d8bf3",
+        "referer": "http://localhost:3017/",
+        "accept-language": "pt-BR,pt;q=0.9",
+        "accept": "application/json, text/plain, */*",
+        "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/150.0.0.0 Safari/537.36"
+      },
+      "timestamp": "2026-08-01T00:06:32.414Z"
+    },
+    {
+      "url": "http://localhost:3100/api/logs?limit=8",
+      "method": "GET",
+      "headers": {
+        "x-api-token": "4ca85296b69704ff408e570501c2480af8457da858defbced704ba4ad20d8bf3",
+        "referer": "http://localhost:3017/",
+        "accept-language": "pt-BR,pt;q=0.9",
+        "accept": "application/json, text/plain, */*",
+        "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/150.0.0.0 Safari/537.36"
+      },
+      "timestamp": "2026-08-01T00:06:32.414Z"
+    },
+    {
+      "url": "http://localhost:3100/api/analise",
+      "method": "GET",
+      "headers": {
+        "x-api-token": "4ca85296b69704ff408e570501c2480af8457da858defbced704ba4ad20d8bf3",
+        "referer": "http://localhost:3017/",
+        "accept-language": "pt-BR,pt;q=0.9",
+        "accept": "application/json, text/plain, */*",
+        "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/150.0.0.0 Safari/537.36"
+      },
+      "timestamp": "2026-08-01T00:06:32.414Z"
+    },
+    {
+      "url": "http://localhost:3100/api/helpdesk/sites-overview",
+      "method": "GET",
+      "headers": {
+        "x-api-token": "4ca85296b69704ff408e570501c2480af8457da858defbced704ba4ad20d8bf3",
+        "referer": "http://localhost:3017/",
+        "accept-language": "pt-BR,pt;q=0.9",
+        "accept": "application/json, text/plain, */*",
+        "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/150.0.0.0 Safari/537.36"
+      },
+      "timestamp": "2026-08-01T00:06:32.415Z"
+    },
+    {
+      "url": "http://localhost:3100/api/analise",
+      "method": "GET",
+      "headers": {
+        "x-api-token": "4ca85296b69704ff408e570501c2480af8457da858defbced704ba4ad20d8bf3",
+        "referer": "http://localhost:3017/",
+        "accept-language": "pt-BR,pt;q=0.9",
+        "accept": "application/json, text/plain, */*",
+        "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/150.0.0.0 Safari/537.36"
+      },
+      "timestamp": "2026-08-01T00:06:32.415Z"
+    },
+    {
+      "url": "http://localhost:3100/api/logs?limit=8",
+      "method": "GET",
+      "headers": {
+        "x-api-token": "4ca85296b69704ff408e570501c2480af8457da858defbced704ba4ad20d8bf3",
+        "referer": "http://localhost:3017/",
+        "accept-language": "pt-BR,pt;q=0.9",
+        "accept": "application/json, text/plain, */*",
+        "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/150.0.0.0 Safari/537.36"
+      },
+      "timestamp": "2026-08-01T00:06:32.415Z"
+    },
+    {
+      "url": "http://localhost:3100/api/analise",
+      "method": "GET",
+      "headers": {
+        "x-api-token": "4ca85296b69704ff408e570501c2480af8457da858defbced704ba4ad20d8bf3",
+        "referer": "http://localhost:3017/",
+        "accept-language": "pt-BR,pt;q=0.9",
+        "accept": "application/json, text/plain, */*",
+        "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/150.0.0.0 Safari/537.36"
+      },
+      "timestamp": "2026-08-01T00:06:32.415Z"
+    },
+    {
+      "url": "http://localhost:3100/api/helpdesk/sites-overview",
+      "method": "GET",
+      "headers": {
+        "x-api-token": "4ca85296b69704ff408e570501c2480af8457da858defbced704ba4ad20d8bf3",
+        "referer": "http://localhost:3017/",
+        "accept-language": "pt-BR,pt;q=0.9",
+        "accept": "application/json, text/plain, */*",
+        "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/150.0.0.0 Safari/537.36"
+      },
+      "timestamp": "2026-08-01T00:06:32.416Z"
+    }
+  ],
+  "navigation": {}
+}

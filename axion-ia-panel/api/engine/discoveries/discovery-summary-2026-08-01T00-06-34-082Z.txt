@@ -1,0 +1,21 @@
+🔍 DISCOVERY ENGINE - Resumo da Descoberta
+============================================================
+
+🌐 URL Base: http://localhost:3017
+📅 Data: 31/07/2026, 21:06:34
+
+📊 ESTATÍSTICAS:
+   Páginas descobertas: 0
+   Menus descobertos: 0
+   Formulários descobertos: 0
+   Tabelas descobertas: 0
+   APIs descobertas: 32
+
+📄 PÁGINAS:
+
+📝 FORMULÁRIOS:
+
+🔌 APIs:
+   1. http://localhost:3100/api/analise
+   2. http://localhost:3100/api/logs?limit=8
+   3. http://localhost:3100/api/helpdesk/sites-overview

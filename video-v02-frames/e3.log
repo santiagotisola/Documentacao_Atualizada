@@ -1,0 +1,47 @@
+ffmpeg version 8.1.1-full_build-www.gyan.dev Copyright (c) 2000-2026 the FFmpeg developers
+  built with gcc 15.2.0 (Rev13, Built by MSYS2 project)
+  configuration: --enable-gpl --enable-version3 --enable-static --disable-w32threads --disable-autodetect --enable-cairo --enable-fontconfig --enable-iconv --enable-gnutls --enable-lcms2 --enable-libxml2 --enable-gmp --enable-bzlib --enable-lzma --enable-libsnappy --enable-zlib --enable-librist --enable-libsrt --enable-libssh --enable-libzmq --enable-avisynth --enable-libbluray --enable-libcaca --enable-libdvdnav --enable-libdvdread --enable-sdl2 --enable-libaribb24 --enable-libaribcaption --enable-libdav1d --enable-libdavs2 --enable-libopenjpeg --enable-libquirc --enable-libuavs3d --enable-libxevd --enable-libzvbi --enable-liboapv --enable-libqrencode --enable-librav1e --enable-libsvtav1 --enable-libvvenc --enable-libwebp --enable-libx264 --enable-libx265 --enable-libxavs2 --enable-libxeve --enable-libxvid --enable-libaom --enable-libjxl --enable-libsvtjpegxs --enable-libvpx --enable-mediafoundation --enable-libass --enable-frei0r --enable-libfreetype --enable-libfribidi --enable-libharfbuzz --enable-liblensfun --enable-libvidstab --enable-libvmaf --enable-libzimg --enable-amf --enable-cuda-llvm --enable-cuvid --enable-dxva2 --enable-d3d11va --enable-d3d12va --enable-ffnvcodec --enable-libvpl --enable-nvdec --enable-nvenc --enable-vaapi --enable-libshaderc --enable-vulkan --enable-libplacebo --enable-opencl --enable-libcdio --enable-openal --enable-libgme --enable-libmodplug --enable-libopenmpt --enable-libopencore-amrwb --enable-libmp3lame --enable-libshine --enable-libtheora --enable-libtwolame --enable-libvo-amrwbenc --enable-libcodec2 --enable-libilbc --enable-libgsm --enable-liblc3 --enable-libopencore-amrnb --enable-libopus --enable-libspeex --enable-libvorbis --enable-ladspa --enable-libbs2b --enable-libflite --enable-libmysofa --enable-librubberband --enable-libsoxr --enable-chromaprint --enable-whisper
+  libavutil      60. 26.101 / 60. 26.101
+  libavcodec     62. 28.101 / 62. 28.101
+  libavformat    62. 12.101 / 62. 12.101
+  libavdevice    62.  3.101 / 62.  3.101
+  libavfilter    11. 14.101 / 11. 14.101
+  libswscale      9.  5.101 /  9.  5.101
+  libswresample   6.  3.101 /  6.  3.101
+Input #0, mov,mp4,m4a,3gp,3g2,mj2, from 'C:\Users\Santiago\Axiondocs\Axion.Docs\video-v02-frames\base_narrado.mp4':
+  Metadata:
+    major_brand     : isom
+    minor_version   : 512
+    compatible_brands: isomiso2avc1mp41
+    encoder         : Lavf62.12.101
+  Duration: 00:05:16.04, start: 0.000000, bitrate: 38 kb/s
+  Stream #0:0[0x1](und): Video: h264 (High) (avc1 / 0x31637661), yuv420p(progressive), 1280x720, 35 kb/s, 25 fps, 25 tbr, 12800 tbn (default)
+    Metadata:
+      handler_name    : VideoHandler
+      encoder         : Lavc62.28.101 libx264
+[aist#1:0/pcm_s16le @ 00000208f982ed80] Guessed Channel Layout: mono
+Input #1, wav, from 'C:\Users\Santiago\Axiondocs\Axion.Docs\video-v02-frames\audio_final.wav':
+  Metadata:
+    encoder         : Lavf62.12.101
+  Duration: 00:04:36.32, bitrate: 352 kb/s
+  Stream #1:0: Audio: pcm_s16le ([1][0][0][0] / 0x0001), 22050 Hz, mono, s16, 352 kb/s
+Stream mapping:
+  Stream #0:0 -> #0:0 (copy)
+  Stream #1:0 -> #0:1 (pcm_s16le (native) -> aac (native))
+Press [q] to stop, [?] for help
+Output #0, mp4, to 'C:\Users\Santiago\Axiondocs\Axion.Docs\V02-Dashboard-AxHub.mp4':
+  Metadata:
+    major_brand     : isom
+    minor_version   : 512
+    compatible_brands: isomiso2avc1mp41
+    encoder         : Lavf62.12.101
+  Stream #0:0(und): Video: h264 (High) (avc1 / 0x31637661), yuv420p(progressive), 1280x720, q=2-31, 35 kb/s, 25 fps, 25 tbr, 12800 tbn (default)
+    Metadata:
+      handler_name    : VideoHandler
+      encoder         : Lavc62.28.101 libx264
+  Stream #0:1: Audio: aac (LC) (mp4a / 0x6134706D), 22050 Hz, mono, fltp, 96 kb/s
+    Metadata:
+      encoder         : Lavc62.28.101 aac
+frame= 1222 fps=0.0 q=-1.0 size=     512KiB time=00:00:48.90 bitrate=  85.8kbits/s speed=95.4x elapsed=0:00:00.51    frame= 2168 fps=2110 q=-1.0 size=    1024KiB time=00:01:26.84 bitrate=  96.6kbits/s speed=84.5x elapsed=0:00:01.02    frame= 3323 fps=2147 q=-1.0 size=    1792KiB time=00:02:13.00 bitrate= 110.4kbits/s speed=85.9x elapsed=0:00:01.54    frame= 4476 fps=2169 q=-1.0 size=    2304KiB time=00:02:59.16 bitrate= 105.3kbits/s speed=86.8x elapsed=0:00:02.06    frame= 5646 fps=2187 q=-1.0 size=    2816KiB time=00:03:45.97 bitrate= 102.1kbits/s speed=87.6x elapsed=0:00:02.58    [out#0/mp4 @ 00000208f77cdf80] video:1222KiB audio:2506KiB subtitle:0KiB other streams:0KiB global headers:0KiB muxing overhead: 4.677031%
+frame= 6904 fps=2245 q=-1.0 Lsize=    3902KiB time=00:04:36.31 bitrate= 115.7kbits/s speed=89.9x elapsed=0:00:03.07    
+[aac @ 00000208f982ce00] Qavg: 64324.305
