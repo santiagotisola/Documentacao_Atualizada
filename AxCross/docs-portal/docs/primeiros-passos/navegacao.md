@@ -1,0 +1,111 @@
+---
+sidebar_position: 3
+title: Navegação
+description: Estrutura da interface e navegação no sistema AxCross
+---
+
+# Navegação
+
+O AxCross possui uma interface organizada em **menu lateral fixo**, acessível em todas as telas do sistema. Os módulos disponíveis variam conforme o perfil de acesso do usuário autenticado.
+
+## Estrutura da interface
+
+| Elemento | Localização | Descrição |
+|---|---|---|
+| **Menu lateral** | Coluna esquerda | Acesso a todos os módulos do sistema |
+| **Área de conteúdo** | Região central | Telas de cada módulo selecionado |
+| **Barra superior** | Topo direito | Nome do usuário autenticado, sino de notificações e menu do perfil |
+| **Sino de notificações** 🔔 | Barra superior | Alertas de vigência — veículos próximos de expirar ou já expirados |
+| **Breadcrumb** | Abaixo da barra | Caminho de navegação atual (ex.: Dashboard → Configurações) |
+| **Rodapé** | Parte inferior | Versão do sistema e link de suporte |
+
+## Menu principal
+
+O menu lateral segue a ordem dos módulos operacionais do sistema:
+
+| # | Item do menu | Caminho | Descrição |
+|---|---|---|---|
+| 1 | **Dashboard** | `/` | Indicadores, passagens, mapa e ocorrências em tempo real |
+| 2 | **Veículos Monitorados** | `/occurrences/monitoredvehicle` | Placas de interesse, alertas, tipos de ocorrências e importação |
+| 3 | **Equipamentos** | `/equipments/equipment` | Câmeras, grupos, áreas, locais, faixas e importação |
+| 4 | **Monitoramento** | `/monitoringonline/monitoring` | Monitoramento Online e Mural de Câmeras |
+| 5 | **Relatórios** | `/reports/reports` | 10 relatórios operacionais com exportação |
+| 6 | **Configurações** | `/settings/systemsettings` | Sistema, usuários, perfis, permissões, logs e sincronização |
+
+## Submenu de Monitoramento
+
+Ao clicar em **Monitoramento**, dois subitens ficam disponíveis:
+
+| Subitem | Descrição |
+|---|---|
+| **Monitoramento Online** | Status em tempo real de cada câmera com filtros por alerta, equipamento e faixa |
+| **Mural de Câmeras** | Grade visual personalizável com feeds ao vivo das câmeras selecionadas |
+
+## Submenu de Relatórios
+
+Ao clicar em **Relatórios**, os 10 tipos disponíveis são listados:
+
+| Relatório | Descrição resumida |
+|---|---|
+| Passagens | Histórico completo com filtros e exportação |
+| Mapeamento de Rotas | Rota de um veículo no mapa por período |
+| Rastreamento de Placas | Todas as detecções de uma placa |
+| Painel Analítico | Gráficos de desempenho por placa/período |
+| Veículos Monitorados | Detecções de veículos cadastrados |
+| Ocorrências | Ocorrências por placa, equipamento e tipo |
+| Alertas | Alertas filtrados por área, tipo e placa |
+| Mapa de Bolhas | Concentração geográfica de irregularidades |
+| Gerados | PDFs disponíveis para download |
+| Grafos de Comboio | Veículos em deslocamento conjunto |
+
+## Submenu de Configurações
+
+| Subitem | Descrição |
+|---|---|
+| **Sistema** | Parâmetros operacionais, MDF-e, comboio e alertas recorrentes |
+| **Usuários** | Cadastro e gestão de usuários |
+| **Perfis de Acesso** | Criação de perfis com conjuntos de permissões |
+| **Permissões** | Controle granular por funcionalidade |
+| **Logs de Acesso** | Auditoria de ações por usuário |
+| **Sincronização de Passagens** | Reindexação no Elasticsearch |
+
+:::tip Dica
+Use o **breadcrumb** no topo da página para identificar rapidamente em qual módulo você está e navegar para níveis anteriores sem usar o botão Voltar do navegador.
+:::
+
+## Erros comuns
+
+| Erro | Causa | Solução |
+|------|-------|---------|
+| Módulo não aparece no menu lateral | Perfil sem permissão para o módulo | Solicitar ao administrador a revisão das permissões |
+| Menu lateral recolhido automaticamente | Tela menor que 1024px | Expandir a janela do navegador ou usar o ícone hamburguer |
+| Erro ao navegar para uma página | Sessão expirada | Fazer login novamente e retornar ao módulo desejado |
+
+## Perguntas frequentes
+
+**Por que alguns itens do menu lateral não aparecem para mim?**
+Os módulos visíveis no menu são determinados pelo perfil de acesso vinculado ao seu usuário. Apenas as funcionalidades liberadas nas Permissões de Acesso do seu perfil aparecem na navegação. Solicite ao administrador a adição das permissões necessárias.
+
+**Qual a diferença entre Monitoramento Online e Mural de Câmeras?**
+O **Monitoramento Online** exibe o status das câmeras com filtros por alerta, equipamento e faixa para análise operacional. O **Mural de Câmeras** mostra uma grade visual com os últimos frames capturados, ideal para acompanhamento visual contínuo durante o turno.
+
+**Como retornar ao Dashboard sem clicar no botão Voltar do navegador?**
+Clique em **Dashboard** no menu lateral ou use o **breadcrumb** no topo da página. O breadcrumb mostra o caminho de navegação atual e permite retornar a qualquer nível anterior com um clique.
+
+## Integração com outros módulos
+
+| Módulo | Como se relaciona |
+|--------|------------------|
+| **[Dashboard](./dashboard)** | Tela inicial exibida após o login — o menu lateral sempre oferece retorno a ele |
+| **[Perfis de Acesso](../administracao/perfis-acesso)** | Define quais módulos ficam visíveis no menu lateral para cada tipo de usuário |
+| **[Permissões de Acesso](../administracao/permissoes)** | Controla o acesso granular às funcionalidades acessíveis pelo menu lateral |
+
+## Tabela de referência rápida
+
+| Situação | Ação recomendada | Resultado esperado |
+|----------|:----------------:|-------------------|
+| Módulo não aparece no menu | Verificar permissões do perfil com o administrador | Módulo habilitado e visível no menu lateral |
+| Sessão expirou durante o uso | Fazer login novamente | Sessão restaurada; dados preservados |
+| Alertas no sino sem origem clara | Verificar Vigência de Alertas e tipos de ocorrência ativos | Alertas de vigência identificados e tratados |
+| Usuário não encontra o relatório | Expandir o submenú **Relatórios** no menu lateral | Relatório localizado na lista dos 10 disponíveis |
+| Breadcrumb não exibe o caminho correto | Navegação feita pelo botão Voltar do navegador | Usar o menu lateral para navegar sem perder o breadcrumb |

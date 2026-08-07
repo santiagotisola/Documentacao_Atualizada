@@ -1,0 +1,35 @@
+name: axion-manuals
+
+services:
+  axcross-docs:
+    build:
+      context: ./AxCross/docs-portal
+      dockerfile: ../Dockerfile
+    container_name: axcross-docs
+    ports:
+      - "8081:80"
+    restart: unless-stopped
+    labels:
+      - "maintainer=gemeosgyn@gmail.com"
+
+  axhub-docs:
+    build:
+      context: ./AxHub/docs-portal
+      dockerfile: ../Dockerfile
+    container_name: axhub-docs
+    ports:
+      - "8082:80"
+    restart: unless-stopped
+    labels:
+      - "maintainer=gemeosgyn@gmail.com"
+
+  axton-docs:
+    build:
+      context: ./AxTon/docs-portal
+      dockerfile: ../Dockerfile
+    container_name: axton-docs
+    ports:
+      - "8083:80"
+    restart: unless-stopped
+    labels:
+      - "maintainer=gemeosgyn@gmail.com"

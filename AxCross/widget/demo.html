@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AxionIA — Demo AxCross</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Segoe UI', system-ui, sans-serif; background: #fdf2e9; min-height: 100vh; display: flex; align-items: center; justify-content: center; }
+    .demo-card {
+      background: #fff; border-radius: 16px; padding: 48px; max-width: 600px; text-align: center;
+      box-shadow: 0 8px 32px rgba(230,126,34,0.12);
+    }
+    .demo-card h1 { font-size: 28px; color: #3c2415; margin-bottom: 8px; }
+    .demo-card h1 span { color: #e67e22; }
+    .demo-card p { font-size: 15px; color: #5a6c7d; line-height: 1.6; margin-bottom: 24px; }
+    .demo-card .badge { display: inline-block; background: #fdf2e9; color: #d35400; padding: 4px 12px; border-radius: 12px; font-size: 12px; font-weight: 600; margin-bottom: 16px; }
+    .instructions { text-align: left; background: #f8f9fb; border-radius: 12px; padding: 20px; margin-top: 16px; }
+    .instructions h3 { font-size: 14px; color: #3c2415; margin-bottom: 12px; }
+    .instructions code { background: #fdf2e9; padding: 2px 6px; border-radius: 4px; font-size: 13px; color: #d35400; }
+    .instructions pre { background: #3c2415; color: #fae5cd; padding: 12px 16px; border-radius: 8px; font-size: 12px; overflow-x: auto; margin-top: 8px; }
+    .arrow { font-size: 32px; color: #e67e22; margin-top: 24px; animation: bounce 2s infinite; }
+    @keyframes bounce { 0%,100% { transform: translateY(0); } 50% { transform: translateY(8px); } }
+  </style>
+</head>
+<body>
+  <div class="demo-card">
+    <div class="badge">v5.0 — Motor Inteligente</div>
+    <h1><span>AxionIA</span> — AxCross</h1>
+    <p>Assistente inteligente de monitoramento de cruzamentos.<br>Clique no botão <strong>AxionIA</strong> no canto inferior direito para testar.</p>
+    <div class="instructions">
+      <h3>Sugestões de teste:</h3>
+      <p>
+        • <code>Monitoramento online</code><br>
+        • <code>Cadastrar equipamento</code><br>
+        • <code>Equipamento offline</code><br>
+        • <code>Cadastrar operação</code><br>
+        • <code>Relatório de passagens</code><br>
+        • <code>Criar usuário</code>
+      </p>
+      <h3 style="margin-top:16px">Integração:</h3>
+      <pre>&lt;script src="/AxCross.Docs/widget/axcross-suporte.js"&gt;&lt;/script&gt;</pre>
+    </div>
+    <div class="arrow">↓</div>
+  </div>
+
+  <script src="axcross-suporte.js"></script>
+</body>
+</html>

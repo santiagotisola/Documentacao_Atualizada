@@ -1,0 +1,137 @@
+﻿---
+sidebar_position: 2
+title: Fabricantes
+description: Cadastro dos fabricantes de equipamentos de pesagem no AxTon
+---
+
+# Fabricantes
+
+Cadastro dos **fabricantes dos equipamentos** de pesagem. Obrigatório para vincular equipamentos a modelos e garantir rastreabilidade técnica.
+
+## Como acessar
+
+**Menu lateral** → Cadastros Básicos → **Fabricantes**
+
+## Campos
+
+| Campo | Obrigatório | Descrição |
+|-------|:-----------:|-----------|
+| **Nome** | Sim | Nome do fabricante |
+| **CNPJ** | Não | CNPJ do fabricante |
+| **Contato** | Não | E-mail ou telefone de suporte |
+| **Status** | Sim | Ativo ou Inativo |
+
+## Passo a passo
+
+1. Acesse **Cadastros Básicos → Fabricantes**
+2. Clique em **+ Novo**
+3. Preencha o **Nome** e o **CNPJ** (se aplicável)
+4. Clique em **Salvar**
+
+:::info Hierarquia
+Fabricante → Modelo → Equipamento. Cadastre o fabricante antes de criar modelos.
+:::
+
+## Fabricantes homologados comuns
+
+| Fabricante | Tipo | Site |
+|------------|------|------|
+| HAENNI | Balanças portáteis | haenni.com |
+| Toledo do Brasil | Balanças industriais | toledodobrasil.com.br |
+| ID Logistics (RODOANEL) | WIM dinâmico | - |
+
+## Erros comuns
+
+| Erro | Causa | Solução |
+|------|-------|----------|
+| Modelo não aparece | Fabricante inativo | Reativar fabricante |
+| Duplicidade | Mesma empresa cadastrada 2x | Inativar duplicata |
+| Equipamento sem fabricante | Vínculo perdido | Redelacionar no cadastro de equipamento |
+
+## Relacionado
+
+- [Modelos de Equipamentos](./modelos-equipamentos)
+- [Tipos de Equipamentos](./tipos-equipamentos)
+- [Equipamentos](./equipamentos)
+
+## Perguntas frequentes
+
+**Posso excluir um fabricante que não uso mais?**
+Não. Inative o fabricante para preservar o histórico. Exclusão de fabricantes vinculados a equipamentos é bloqueada.
+
+**O que acontece com os modelos se o fabricante for inativado?**
+Os modelos permanecem no histórico mas não podem ser selecionados em novos equipamentos.
+
+## Integração com outros módulos
+
+| Módulo | Relação |
+|--------|----------|
+| **Modelos de Equipamentos** | Fabricante é atributo obrigatório do modelo |
+| **Equipamentos** | Herdado via Fabricante → Modelo → Equipamento |
+| **Aferições** | Rastreabilidade técnica por fabricante |
+
+## Boas práticas
+
+- Cadastre o fabricante antes de criar modelos e equipamentos — a hierarquia Fabricante → Modelo → Equipamento é obrigatória
+- Informe o **CNPJ** e o **Contato** de suporte para agilizar chamados técnicos em campo
+- Não exclua fabricantes com equipamentos vinculados; inative-os para preservar o histórico de operações e certificações
+- Utilize a nomenclatura oficial do fabricante para compatibilidade com laudos INMETRO e contratos de manutenção
+
+| RODOANEL | Sistemas WIM dinâmicos |
+| SCHENCK | Balanças de precisao |
+
+3. Informe o **Nome** do fabricante
+4. Clique em **Salvar**
+
+## Hierarquia
+
+```
+Fabricante
+  └── Modelo de Equipamento
+        └── Equipamento cadastrado
+```
+
+## Navegação Relacionada
+
+| Tipo | Página | Descrição |
+|------|--------|-----------|
+| Relacionado | [Modelos](./modelos-equipamentos) | Modelos do fabricante |
+| Relacionado | [Equipamentos](./equipamentos) | Equipamentos cadastrados |
+
+
+| Coluna | Descrição |
+|--------|-----------|
+| **Código** | Identificador único |
+| **Nome** | Nome do fabricantes |
+| **Ativo** | Status do registro |
+
+### Passo a passo — Cadastrar
+
+1. Acesse **Cadastros Básicos** → **Fabricantes**
+2. Clique em **+ Novo**
+3. Preencha os campos obrigatórios
+4. Clique em **Salvar**
+
+:::tip Dependência
+Este cadastro é utilizado como referência em outros módulos do sistema.
+:::
+
+## Exemplo prático
+
+**Cenário**: Um novo contrato inclui equipámentos HAENNI WL103 e WL105. O fabricante ainda não está cadastrado no sistema, impedindo a criação dos modelos e equipamentos necessários para iniciar as pesagens.
+
+| Configuração | Valor |
+|-------------|-------|
+| Nome | HAENNI Instruments AG |
+| CNPJ | N/A (fabricante suíço) |
+| Contato de suporte | support@haenni.com |
+| Status | Ativo |
+
+**Passo a passo**:
+1. Acesse **Cadastros Básicos → Fabricantes** e clique em **+ Novo**
+2. Preencha: Nome `HAENNI Instruments AG`, Contato `support@haenni.com`
+3. Clique em **Salvar**
+4. Acesse **Cadastros Básicos → Modelos de Equipamentos** e crie os modelos `WL103` e `WL105` vinculados a HAENNI
+5. Acesse **Cadastros Básicos → Equipamentos** e cadastre os equipamentos físicos vinculando ao modelo correspondente
+
+**Resultado**: A hierarquia HAENNI → WL103 → Equipamento está completa. Os equipamentos aparecem no Monitoramento Online e as aferições INMETRO podem ser registradas com rastreabilidade completa por fabricante.

@@ -1,0 +1,15 @@
+# Global docs portal artifacts
+**/docs-portal/node_modules/
+**/docs-portal/build/
+**/docs-portal/.docusaurus/
+**/docs-portal/.cache-loader/
+
+# Common
+.DS_Store
+Thumbs.db
+
+# Local editor settings
+.vscode/
+
+# One-off migration/audit artifacts
+_migracao_nested_*/

@@ -1,0 +1,175 @@
+﻿---
+sidebar_position: 8
+title: Layouts de Arquivos
+description: Configuração dos layouts de importação e exportação de dados no AxHub
+---
+
+# Layouts de Arquivos
+
+Define o **formato dos arquivos** utilizados para importação de dados e exportação de infrações para órgãos externos (DETRAN, SENATRAN, Prefeituras).
+
+## Como acessar
+
+**Menu lateral** → Configurações → **Layouts de Arquivos**
+
+## Campos
+
+| Campo | Obrigatório | Descrição |
+|-------|:-----------:|-----------|
+| **Nome** | Sim | Identificação do layout |
+| **Tipo** | Sim | Importação ou Exportação |
+| **Formato** | Sim | CSV, TXT, XML, JSON |
+| **Separador** | Cond. | Separador de campos (CSV) |
+| **Campos** | Sim | Mapeamento de colunas/campos |
+
+## Tipos de layout
+
+| Tipo | Descrição |
+|------|-----------|
+| **Exportação DETRAN** | Formato para envio ao DETRAN estadual |
+| **Exportação SENATRAN** | Formato federal para notificação |
+| **Importação RENAVAM** | Dados do veículo da consulta RENAVAM |
+
+## Passo a passo
+
+1. Acesse **Configurações → Layouts de Arquivos**
+2. Clique em **+ Novo**
+3. Selecione o **Tipo** (Importação ou Exportação)
+4. Defina o **Formato** e o **Separador**
+5. Configure o **Mapeamento de campos**
+6. Clique em **Salvar**
+
+:::warning
+Alterações em layouts de exportação ativos podem causar rejeição de lotes pelo órgão autuador. Testar antes em ambiente de homologação.
+:::
+
+## Boas práticas
+
+- Teste qualquer alteração em ambiente de homologação antes de ativar em produção — erros de formato causam rejeição do lote
+- Nunca altere um layout ativo sem alinhar com o órgão autuador; mudanças não comunicadas causam rejeição silenciosa
+- Documente a versão e a data de cada alteração no campo Descrição para facilitar suporte e auditoria
+- Mantenha cópia das especificações técnicas do órgão autuador arquivada como referência para cada layout
+
+## Relacionado
+
+- [Lotes de Exportação](../glossario/lote-exportacao)
+- [Sequenciais de Infrações](./sequenciais-infracoes)
+- [Sequenciais de Lote](./sequenciais-lote-exportacao)
+
+## Exemplos de campos mapeados
+
+### Exportação DETRAN (CSV)
+
+| Campo no sistema | Coluna no arquivo | Obrigatório |
+|-----------------|:-----------------:|:-----------:|
+| Número Auto | `nro_auto` | Sim |
+| Placa | `placa_veiculo` | Sim |
+| Data/Hora | `data_infracao` | Sim |
+| Enquadramento | `cod_enquadramento` | Sim |
+| Velocidade medida | `vel_medida` | Sim |
+| Velocidade permitida | `vel_permitida` | Sim |
+| Forma de autuação | `forma_autuacao` | Sim |
+
+## Tabela de referência — formatos de arquivo
+
+| Formato | Separador padrão | Encoding | Uso típico |
+|---------|:----------------:|:--------:|------------|
+| CSV | `;` | UTF-8 | DETRAN estadual |
+| TXT posicional | N/A | ISO-8859-1 | SENATRAN |
+| XML | N/A | UTF-8 | Sistemas ERP |
+| JSON | N/A | UTF-8 | APIs modernas |
+
+## Erros comuns
+
+| Problema | Causa | Solução |
+|----------|-------|----------|
+| Lote rejeitado por campo inválido | Mapeamento incorreto | Conferir spec do órgão e reconfigurar |
+| Caracteres especiais corrompidos | Encoding errado | Ajustar para ISO-8859-1 se exigido |
+| Arquivo gerado vazio | Nenhuma infração no período | Verificar filtros da exportação |
+
+| **Importação veículos** | Carga de dados de veículos |
+| **Importação placas** | Lista de placas para equipamentos |
+
+:::caution
+O layout de exportação deve seguir rigorosamente as especificações do órgão autuador. Erros causam rejeição do lote.
+:::
+
+| **Formato** | CSV, TXT, XML |
+| **Delimitador** | Caractere separador de campos |
+| **Encoding** | Codificação do arquivo (UTF-8, ISO-8859-1) |
+
+## Configuração típica
+
+**Layout de exportação DETRAN estadual (CSV — configuração mais comum):**
+
+| Campo no sistema | Coluna no arquivo | Obrigatório | Tipo |
+|-----------------|:-----------------:|:-----------:|------|
+| Número Auto | `nro_auto` | Sim | Texto |
+| Placa | `placa_veiculo` | Sim | Texto |
+| Data/Hora | `data_infracao` | Sim | Datetime |
+| Código CTB | `cod_enquadramento` | Sim | Número |
+| Velocidade medida | `vel_medida` | Sim | Número |
+| Velocidade permitida | `vel_permitida` | Sim | Número |
+| Forma de autuação | `forma_autuacao` | Sim | Texto |
+| Código IBGE do município | `cod_ibge` | Sim | Número (7 dígitos) |
+
+Solicite o documento de especificação técnica do layout ao órgão autuador antes de configurar. Teste sempre em ambiente de homologação antes de ativar em produção.
+
+:::note Sem screenshot
+está tela ainda não possui screenshot cadastrada. Será adicionada em breve.
+:::
+
+---
+
+## Navegacao Relacionada
+
+| Tipo | Pagina | Descricao |
+|------|--------|-----------|
+| Relacionado | [Exportacao](../infracoes/exportacao) | Exportacao usa o layout |
+| Glossario | [Lote de Exportacao](../glossario/lote-exportacao) | Definicao |
+
+## Integração com outros módulos
+
+| Módulo | Como usa este cadastro |
+|--------|----------------------|
+| **Exportação de Infrações** | Cada lote usa um layout para formatar o arquivo enviado ao órgão autuador |
+| **Lotes de Importação** | Layouts de importação definem como os dados dos equipamentos são lidos pelo sistema |
+| **Webhooks** | Layouts JSON são usados em integrações via API com sistemas externos |
+
+## Erros comuns
+
+| Erro | Causa | Solução |
+|------|-------|----------|
+| Lote rejeitado por campo inválido | Mapeamento de campo incorreto no layout | Comparar layout com especificação técnica do órgão autuador |
+| Encoding incorreto no arquivo exportado | Layout com encoding diferente do esperado | Ajustar o encoding no cadastro do layout (ex.: UTF-8 vs ISO-8859-1) |
+| Separador errado nos campos | Delimitador não configurado corretamente | Corrigir o separador no layout conforme especificação do órgão |
+
+## Perguntas frequentes
+
+**Posso alterar um layout de exportação já em uso?**
+Sim, mas teste em homologação primeiro. Alterações em layouts ativos sem validação podem causar rejeição de lotes pelo órgão autuador.
+
+**O lote foi rejeitado por campo inválido. Como identificar o problema?**
+Compare o layout configurado com a especificação técnica do órgão autuador. Verifique encoding, separador e mapeamento de campos.
+
+**Preciso de um layout diferente para cada órgão?**
+Sim. Cada órgão (DETRAN estadual, SENATRAN) pode ter formato específico. Configure um layout separado para cada destino de exportação.
+| **Relatórios** | O formato de exportação segue os layouts configurados para cada órgão |
+
+## Exemplo prático
+
+**Configurando layout de exportação CSV para um DETRAN estadual:**
+
+1. Solicitar ao órgão autuador a **especificação técnica do layout** em PDF
+2. Acessar **Configurações → Layouts de Arquivos** e clicar em **+ Novo**
+3. Preencher:
+   - **Nome**: `DETRAN-CE-2026`
+   - **Tipo**: Exportação
+   - **Formato**: CSV com separador `;`
+4. Mapear cada campo conforme a especificação do órgão
+5. Testar em homologação antes de ativar em produção
+6. Após confirmação: ativar o layout e usá-lo na próxima exportação
+
+:::tip
+Solicite ao órgão um arquivo de exemplo aceito para validar seu layout antes do envio real.
+:::

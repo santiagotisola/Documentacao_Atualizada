@@ -1,0 +1,168 @@
+﻿---
+sidebar_position: 15
+title: Tipos de Imagens
+description: Cadastro dos tipos de imagens capturadas pelos equipamentos no AxHub
+---
+
+# Tipos de Imagens
+
+Define as **categorias de imagens** que os equipamentos devem capturar em cada infração. Configura quais imagens são obrigatórias para validação da autuação.
+
+## Como acessar
+
+**Menu lateral** → Configurações → **Tipos de Imagens**
+
+## Campos
+
+| Campo | Obrigatório | Descrição |
+|-------|:-----------:|-----------|
+| **Código** | Sim | Código identificador |
+| **Descrição** | Sim | Tipo da imagem |
+| **Obrigatória** | Sim | Se a imagem é exigida para a infração |
+| **Ordem** | Não | Ordem de exibição |
+
+## Tipos comuns
+
+| Tipo | Obrigatória | Descrição |
+|------|:-----------:|-----------|
+| Frontal | Sim | Vista frontal do veículo |
+| Traseira | Sim | Vista traseira com placa |
+| Lateral esquerda | Não | Perfil do veículo |
+| Painel | Não | Instrumento de aferíção |
+
+## Passo a passo
+
+1. Acesse **Configurações → Tipos de Imagens**
+2. Clique em **+ Novo**
+3. Preencha o **Código** e a **Descrição**
+4. Marque se a imagem é **Obrigatória**
+5. Clique em **Salvar**
+
+:::info
+Os tipos de imagens obrigatórios devem estar cadastrados antes de configurar os equipamentos. Equipamentos sem todos os tipos obrigatórios terão infrações incompletas.
+:::
+
+## Impacto na validade das infrações
+
+Imagens obrigatórias ausentes podem levar à **invalidação do auto** pelo órgão julgador. Configure corretamente antes de iniciar operações.
+
+## Relacionado
+
+- [Equipamentos](./equipamentos)
+- [Aferições](../operacoes/afericoes)
+- [Processamento de Imagens](../relatorios/processamento-imagens)
+- [Integração VARCO](../referencia-tecnica/integracao-varco) — Variáveis `{{image}}`, `{{imageList}}`, `{{imageRaw}}`
+
+## Variáveis VARCO de imagem
+
+Os equipamentos VARCO enviam imagens usando as seguintes variáveis no template:
+
+| Variável VARCO | Tipo | Quando usar |
+|----------------|------|-------------|
+| `{{image}}` | Base64 | Imagem principal da passagem |
+| `{{imageList}}` | JSON Array | Múltiplas exposições |
+| `{{imageRaw}}` | Raw bytes | Quando o campo contém apenas `{{imageRaw}}` |
+| `{{imageRawList}}` | Raw bytes list | Formulários multipart com múltiplas imagens |
+
+## Fluxo de validação de imagens
+
+1. Equipamento captura a passagem e gera as imagens configuradas
+2. Sistema verifica se todas as imagens **Obrigatórias** foram recebidas
+3. Se alguma imagem obrigatória estiver ausente → infração marcada como incompleta
+4. Analista visualiza as imagens na **Triagem** e valida ou descarta
+5. Órgão autuador pode rejeitar autos sem imagens obrigatórias
+
+## Tabela de referência — tipos comuns e obrigatoriedade
+
+| Tipo | Obrigatória | Descrição | Onde exibida |
+|------|:-----------:|-----------|:------------:|
+| Frontal | Sim | Vista frontal do veículo | Triagem |
+| Traseira (placa) | Sim | Placa legível | Triagem e export. |
+| Lateral esquerda | Não | Perfil do veículo | Triagem |
+| Painel (instrumento) | Sim (radares) | Velocidade no display | Triagem e export. |
+| Panorâmica | Sim | Contexto da via | Export. |
+
+## Erros comuns
+
+| Problema | Causa provável | Solução |
+|----------|---------------|----------|
+| Infração com imagem faltante | Tipo obrigatório não capturado | Verificar configuração do equipamento |
+| Tipo criado mas não aparece | Tipo inativo | Reativar o tipo de imagem |
+| Quantidade incorreta de fotos | Quantidade configurada errada | Editar tipo e ajustar quantidade |
+
+
+## Tipos comuns
+
+| Tipo | Descrição | Obrigatória? |
+|------|-----------|--------------|
+| **Panorâmica** | Visão geral da via | Sim |
+| **Zoom Placa** | Destaque da placa traseira | Sim |
+| **Contexto** | Imagem com sinal/equipamento visível | Sim |
+| **Perfil** | Lateral do veículo | Não |
+
+:::caution
+Infrações sem as imagens obrigatórias são automaticamente descartadas na triagem.
+:::
+
+
+:::note Sem screenshot
+está tela ainda não possui screenshot cadastrada. Será adicionada em breve.
+:::
+
+---
+
+## Navegacao Relacionada
+
+| Tipo | Pagina | Descricao |
+|------|--------|-----------|
+| Relacionado | [Triagem](../infracoes/triagem) | Tipos de imagem na triagem |
+| Relacionado | [Equipamentos](../cadastros-basicos/Equipamentos) | Imagens por Equipamento |
+
+## Integração com outros módulos
+
+| Módulo | Como usa este cadastro |
+|--------|----------------------|
+| **Equipamentos** | Cada equipamento precisa capturar os tipos de imagem definidos como obrigatórios aqui |
+| **Triagem** | O analista visualiza as imagens na ordem de exibição definida neste cadastro |
+| **Exportação** | Infrações sem os tipos obrigatórios são bloqueadas na exportação ao órgão |
+| **Processamento de Imagens** | O relatório usa os tipos cadastrados para agrupar métricas de aproveitamento |
+
+## Perguntas frequentes
+
+**O que acontece se uma imagem obrigatória não for capturada?**
+A infração é marcada como incompleta e pode ser descartada na triagem ou bloqueada na exportação.
+
+**Posso adicionar um tipo de imagem após a operação já estar em andamento?**
+Sim. Novos tipos são aplicados a infrações futuras. Registros anteriores não serão afetados.
+
+**Qual a diferença entre imagem Frontal e Zoom Placa?**
+A Frontal mostra o veículo inteiro para contextualizar a infração. O Zoom Placa é um recorte ampliado da placa traseira, essencial para a leitura do OCR e validação.
+
+## Configuração típica
+
+**Tipos de imagem padrão para radares de velocidade:**
+
+| Tipo | Obrigatória | Ordem | Finalidade |
+|------|:-----------:|:-----:|------------|
+| Panorâmica | Sim | 1 | Visão geral da via e do veículo em contexto |
+| Zoom Placa | Sim | 2 | Placa traseira legível — base do auto |
+| Painel (velocímetro) | Sim | 3 | Velocidade medida no display do equipamento |
+| Frontal | Não | 4 | Confirmação do veículo pela frente |
+
+Configure os tipos obrigatórios antes de iniciar operações. Sem eles, as infrações ficarão marcadas como incompletas e serão bloqueadas na exportação ao órgão autuador.
+
+## Exemplo prático
+
+**Configurando tipos de imagem para um radar de velocidade VARCO:**
+
+1. Acesse **Configurações → Tipos de Imagens** e clique em **+ Novo**
+2. Crie os seguintes tipos nesta ordem:
+
+| Tipo | Obrigatória | Ordem | Variável VARCO |
+|------|:-----------:|:-----:|----------------|
+| Panorâmica | Sim | 1 | `{{image}}` |
+| Zoom Placa | Sim | 2 | `{{imageList}}[1]` |
+| Painel Velocidade | Sim | 3 | `{{imageList}}[2]` |
+| Frontal | Não | 4 | `{{imageList}}[3]` |
+
+3. Salve cada tipo e teste com uma passagem de homologação antes de iniciar a operação

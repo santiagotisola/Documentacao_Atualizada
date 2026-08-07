@@ -1,0 +1,3278 @@
+{
+  "version": "3.0.0",
+  "updated": "2026-03-29",
+  "system": "AxHub",
+  "entries": [
+    {
+      "id": "Login-acesso",
+      "module": "Acesso",
+      "title": "Login no Sistema",
+      "keywords": [
+        "Login",
+        "senha",
+        "acesso",
+        "entrar",
+        "autenticação",
+        "primeiro acesso"
+      ],
+      "path": "Menu lateral → Tela de Login",
+      "content": "Para acessar o AxHub, abra o navegador e acesse o endereço do sistema. Informe seu Login e Senha, depois clique em Entrar.",
+      "steps": [
+        "Abra o navegador e acesse o endereço do AxHub",
+        "Informe seu Login",
+        "Informe sua Senha",
+        "Clique em Entrar"
+      ],
+      "docUrl": "primeiros-passos/Login",
+      "related": [
+        "recuperar-senha",
+        "acesso-bloqueado",
+        "Dashboard"
+      ],
+      "dbTables": [
+        "TBHorariosAcessos"
+      ]
+    },
+    {
+      "id": "recuperar-senha",
+      "module": "Acesso",
+      "title": "Recuperação de Senha",
+      "keywords": [
+        "esqueci",
+        "senha",
+        "recuperar",
+        "redefinir",
+        "email",
+        "não consigo entrar"
+      ],
+      "path": "Tela de Login → Esqueci minha senha",
+      "content": "Na tela de Login clique em 'Esqueci minha senha', informe o e-mail cadastrado e siga o link de redefinição enviado por e-mail.",
+      "steps": [
+        "Na tela de Login clique em 'Esqueci minha senha'",
+        "Informe o e-mail cadastrado no sistema",
+        "Acesse sua caixa de entrada",
+        "Clique no link de redefinição",
+        "Defina uma nova senha e confirme"
+      ],
+      "docUrl": "primeiros-passos/Login",
+      "related": [
+        "Login-acesso",
+        "acesso-bloqueado"
+      ]
+    },
+    {
+      "id": "acesso-bloqueado",
+      "module": "Acesso",
+      "title": "Acesso Bloqueado",
+      "keywords": [
+        "bloqueado",
+        "não consigo acessar",
+        "acesso negado",
+        "sem permissão",
+        "IP bloqueado"
+      ],
+      "path": "Controle de Acesso → Usuários / Acessos por IP",
+      "content": "Se não consegue acessar, verifique: (1) se o Usuário está marcado como Ativo, (2) se tem perfil de acesso atribuído, (3) se há restrições de IP configuradas. Contate o administrador do sistema.",
+      "steps": [
+        "Verificar se o Usuário está Ativo (Controle de Acesso → Usuários",
+        "Verificar se tem Perfil de Acesso atribuído",
+        "Verificar restrições de IP (Controle de Acesso → Acessos por IP)",
+        "Se persistir, contatar o administrador do sistema"
+      ],
+      "docUrl": "controle-acesso/usuarios",
+      "related": [
+        "Login-acesso",
+        "restricao-ip",
+        "perfis-acesso"
+      ],
+      "dbTables": [
+        "TBAcessosBloqueadosPeriodo",
+        "TBAcessoPorIps"
+      ]
+    },
+    {
+      "id": "Dashboard",
+      "module": "Acesso",
+      "title": "Dashboard - Use Dashboard Principal",
+      "keywords": [
+        "Dashboard",
+        "Use Dashboard",
+        "indicadores",
+        "mapa",
+        "alertas",
+        "tela inicial"
+      ],
+      "path": "Exibido automaticamente após Login",
+      "content": "O Dashboard é a tela inicial após o Login Exibe indicadores (passagens hoje, Infrações pendentes, Equipamentos offline, certificados vencendo), mapa de Equipamentos alertas de aferição e triagem mensal.",
+      "steps": [],
+      "docUrl": "primeiros-passos/Dashboard",
+      "related": [
+        "Login-acesso",
+        "navegacao-sistema",
+        "monitoramento-online"
+      ]
+    },
+    {
+      "id": "criar-usuario",
+      "module": "Controle de Acesso",
+      "title": "Criar Novo Usuário",
+      "keywords": [
+        "criar",
+        "novo",
+        "Usuário",
+        "cadastrar",
+        "registro",
+        "conta"
+      ],
+      "path": "Controle de Acesso → Usuários",
+      "content": "Para criar um novo Usuário primeiro crie um Perfil de Acesso, depois configure as Permissões e então cadastre o Usuário vinculando ao perfil.",
+      "steps": [
+        "Acesse Controle de Acesso → Perfis de Acesso → + Novo",
+        "Informe Nome do Perfil e Descrição → Salvar",
+        "Acesse Controle de Acesso → Permissões de Acesso",
+        "Selecione o perfil e marque as permissões (Visualizar, Criar, Editar, Excluir) por módulo",
+        "Acesse Controle de Acesso → Usuários → + Novo",
+        "Preencha Nome, Login E-mail, selecione o Perfil de Acesso",
+        "Marque como Ativo e defina uma senha temporária",
+        "Clique em Salvar"
+      ],
+      "docUrl": "controle-acesso/usuarios",
+      "related": [
+        "perfis-acesso",
+        "permissoes",
+        "logs-acesso"
+      ]
+    },
+    {
+      "id": "permissoes",
+      "module": "Controle de Acesso",
+      "title": "Configurar Permissões",
+      "keywords": [
+        "permissão",
+        "perfil",
+        "acesso",
+        "visualizar",
+        "criar",
+        "editar",
+        "excluir",
+        "restringir"
+      ],
+      "path": "Controle de Acesso → Permissões de Acesso",
+      "content": "As permissões são configuradas por perfil e por módulo. Para cada módulo, pode marcar: Visualizar, Criar, Editar e Excluir. Para consulta apenas, marque só Visualizar.",
+      "steps": [
+        "Acesse Controle de Acesso → Permissões de Acesso",
+        "Selecione o perfil que deseja configurar",
+        "Para cada módulo, marque as permissões desejadas",
+        "Clique em Salvar"
+      ],
+      "docUrl": "controle-acesso/permissoes",
+      "related": [
+        "perfis-acesso",
+        "criar-usuario"
+      ]
+    },
+    {
+      "id": "triagem-infracoes",
+      "module": "Infrações",
+      "title": "Triagem de Infrações",
+      "keywords": [
+        "triagem",
+        "Infração",
+        "válidar",
+        "descartar",
+        "pendente",
+        "analisar",
+        "processar"
+      ],
+      "path": "Menu lateral → Infrações → Triagem",
+      "content": "A triagem permite revisar, válidar ou descartar Infrações pendentes. Use os filtros de Período, Status, Tipo de Infração e Operação para localizar registros. Ações: Validar (confirma para exportação), Descartar (rejeita com motivo obrigatório), Reabrir (reabre descartada).",
+      "steps": [
+        "Acesse Infrações → Triagem",
+        "Use os filtros para localizar Infrações",
+        "Análise a Infração (imagens, dados do Veículo",
+        "Clique em Validar para confirmar ou Descartar com motivo"
+      ],
+      "docUrl": "infracoes/triagem",
+      "related": [
+        "triagem-passo-a-passo",
+        "infracao-nao-aparece",
+        "motivos-descarte",
+        "auditoria"
+      ],
+      "dbTables": [
+        "TBInfracoes",
+        "TBImagens"
+      ]
+    },
+    {
+      "id": "infracao-nao-aparece",
+      "module": "Infrações",
+      "title": "Infração Não Aparece na Triagem",
+      "keywords": [
+        "não aparece",
+        "Infração sumiu",
+        "triagem vazia",
+        "sem Infração",
+        "não encontro"
+      ],
+      "path": "Infrações → Triagem",
+      "content": "Se uma Infração não aparece na triagem, verifique: (1) os filtros de período e status estão corretos, (2) a operação está ativa, (3) o Equipamento está cadastrado e com aferição INMETRO válida.",
+      "steps": [
+        "Verificar filtros de período (data início/fim)",
+        "Verificar filtro de status (deve estár em 'Aguardando Triagem')",
+        "Verificar se a operação vinculada está ativa",
+        "Verificar se o Equipamento tem aferição INMETRO válida"
+      ],
+      "docUrl": "infracoes/triagem",
+      "related": [
+        "triagem-infracoes",
+        "cadastro-operacoes",
+        "Equipamento-offline"
+      ],
+      "dbTables": [
+        "TBInfracoes"
+      ]
+    },
+    {
+      "id": "reabrir-infracao",
+      "module": "Infrações",
+      "title": "Reabrir Infração Descartada por Engano",
+      "keywords": [
+        "reabrir",
+        "descartei",
+        "engano",
+        "erro",
+        "desfazer descarte",
+        "recuperar Infração"
+      ],
+      "path": "Infrações → Triagem",
+      "content": "Para reabrir uma Infração descartada por engano, vá em Infrações → Triagem, filtre por Status=Descartada, selecione a Infração e clique em Reabrir.",
+      "steps": [
+        "Acesse Infrações → Triagem",
+        "No filtro de Status, selecione 'Descartada'",
+        "Localize a Infração desejada",
+        "Clique em Reabrir"
+      ],
+      "docUrl": "infracoes/infracoes-descartadas",
+      "related": [
+        "infracoes-descartadas",
+        "motivos-descarte",
+        "triagem-infracoes"
+      ],
+      "dbTables": [
+        "TBInfracoes"
+      ]
+    },
+    {
+      "id": "auditoria",
+      "module": "Infrações",
+      "title": "Auditoria de Infrações",
+      "keywords": [
+        "auditoria",
+        "auditar",
+        "revisar",
+        "qualidade",
+        "confirmar",
+        "rejeitar"
+      ],
+      "path": "Menu lateral → Infrações → Auditoria",
+      "content": "A auditoria permite revisar Infrações válidadas ou descartadas na triagem. Filtros: data, Equipamento tipo de Infração analista, amostragem (%). Ações: Confirmar (segue para exportação), Rejeitar (devolve para triagem), Adicionar observações.",
+      "steps": [
+        "Acesse Infrações → Auditoria",
+        "Configure filtros (período, analista, amostragem %)",
+        "Use Análise (com acento) cada Infração apresentada",
+        "Confirme, Rejeite ou adicione observações"
+      ],
+      "docUrl": "infracoes/auditoria",
+      "related": [
+        "triagem-infracoes",
+        "consulta-infracoes",
+        "exportar-infracoes"
+      ],
+      "dbTables": [
+        "TBInfracoes"
+      ]
+    },
+    {
+      "id": "consulta-infracoes",
+      "module": "Infrações",
+      "title": "Consultar Infrações",
+      "keywords": [
+        "consultar",
+        "buscar",
+        "pesquisar",
+        "Infração",
+        "status",
+        "histórico"
+      ],
+      "path": "Menu lateral → Infrações → Consulta",
+      "content": "Pesquise Infrações por período, Equipamento placa, status, operação ou Usuário Status possíveis: Aguardando Triagem → Em Triagem → Válida → Auditoria → Exportada (ou Descartada). Resultados podem ser exportados para Excel.",
+      "steps": [
+        "Acesse Infrações → Consulta",
+        "Preencha os filtros desejados",
+        "Clique em Pesquisar",
+        "Clique em uma linha para ver detalhes completos"
+      ],
+      "docUrl": "infracoes/consulta-infracoes",
+      "related": [
+        "auditoria",
+        "triagem-infracoes",
+        "relatorio-infracoes"
+      ],
+      "dbTables": [
+        "TBInfracoes"
+      ]
+    },
+    {
+      "id": "exportar-infracoes",
+      "module": "Infrações",
+      "title": "Exportar Infrações para Órgão Autuador",
+      "keywords": [
+        "exportar",
+        "lote",
+        "DETRAN",
+        "DER",
+        "RENAINF",
+        "enviar",
+        "órgão",
+        "arquivo"
+      ],
+      "path": "Menu lateral → Infrações → Exportação",
+      "content": "Envie Infrações válidadas para órgãos autuadores (DETRAN, DER, PRF). Formatos: RENAINF, XML, TXT, CSV. O sistema válida automaticamente: placa, imagens, dados completos, enquadramento, assinaturas, sem duplicatas.",
+      "steps": [
+        "Acesse Infrações → Exportação",
+        "Selecione o Órgão destino",
+        "Configure o Período e Layout do arquivo",
+        "Clique em Gerar Lote (sistema válida tudo automaticamente)",
+        "Clique em Enviar Lote (SFTP/API) ou faça download para envio manual"
+      ],
+      "docUrl": "infracoes/exportacao",
+      "related": [
+        "exportacao-lotes",
+        "erro-exportacao-lote-geral",
+        "config-layout"
+      ],
+      "dbTables": [
+        "TBInfracoes"
+      ]
+    },
+    {
+      "id": "excecoes",
+      "module": "Infrações",
+      "title": "Exceções de Infrações",
+      "keywords": [
+        "exceção",
+        "isentar",
+        "Veículo oficial",
+        "ambulância",
+        "polícia",
+        "regra"
+      ],
+      "path": "Menu lateral → Infrações → Exceções",
+      "content": "Configure regras que isentam Veículos ou situações. Filtros: Placas, Horários, Faixas, Classificações, Enquadramentos, Datas. Tipos: Permanentes (emergência), Temporárias (prazo definido), Por Equipamento Por tipo de Infração ATENÇÃO: Exceções ativas descartam Infrações automaticamente.",
+      "steps": [
+        "Acesse Infrações → Exceções",
+        "Clique em Nova Exceção",
+        "Configure os filtros (placas, horários, etc.)",
+        "Defina o tipo (permanente/temporária) e período",
+        "Salvar"
+      ],
+      "docUrl": "infracoes/excecoes",
+      "related": [
+        "triagem-infracoes",
+        "cadastro-faixas",
+        "config-enquadramento"
+      ],
+      "dbTables": [
+        "TBExcecoes",
+        "TBExcecaoDatas",
+        "TBExcecoesPlacas",
+        "TBExcecoesHorarios",
+        "TBExcecoesFaixas",
+        "TBExcecoesEnquadramentos",
+        "TBExcecoesClassificacoesVeiculos"
+      ]
+    },
+    {
+      "id": "infracoes-descartadas",
+      "module": "Infrações",
+      "title": "Consultar Infrações Descartadas",
+      "keywords": [
+        "descartada",
+        "motivo descarte",
+        "por que descartou",
+        "excluída"
+      ],
+      "path": "Menu lateral → Infrações → Infrações Descartadas",
+      "content": "Consulte Infrações descartadas na triagem manual ou automática (exceções). Filtros: Motivo, Analista, Período, Equipamento Pode exportar Relatório para Excel.",
+      "steps": [],
+      "docUrl": "infracoes/infracoes-descartadas",
+      "related": [
+        "reabrir-infracao",
+        "motivos-descarte",
+        "triagem-infracoes"
+      ],
+      "dbTables": [
+        "TBInfracoes"
+      ]
+    },
+    {
+      "id": "cadastro-operacoes",
+      "module": "Operações",
+      "title": "Cadastrar Operação de Fiscalização",
+      "keywords": [
+        "operação",
+        "fiscalização",
+        "cadastrar operação",
+        "arco",
+        "enquadramento",
+        "velocidade"
+      ],
+      "path": "Menu lateral → Operações → Cadastro de Operações",
+      "content": "Uma operação é o registro formal de uma ação de fiscalização. Campos obrigatórios: Equipamento Arco, Data Início/Fim, Enquadramentos, Velocidade Regulamentada (condicional).",
+      "steps": [
+        "Acesse Operações → Cadastro de Operações",
+        "Clique em + Novo",
+        "Selecione o Equipamento e Arco",
+        "Informe Data Início e Fim",
+        "Vincule os Enquadramentos legais",
+        "Informe a Velocidade Regulamentada (se aplicável)",
+        "Clique em Salvar"
+      ],
+      "docUrl": "operacoes/cadastro-operacoes",
+      "related": [
+        "cadastro-faixas",
+        "afericoes",
+        "checklist-operacao-blitz"
+      ],
+      "dbTables": [
+        "TBDocumentosOperacoes"
+      ]
+    },
+    {
+      "id": "afericoes",
+      "module": "Operações",
+      "title": "Controle de Aferições INMETRO",
+      "keywords": [
+        "aferição",
+        "INMETRO",
+        "certificado",
+        "vencimento",
+        "calibração",
+        "metrologia"
+      ],
+      "path": "Menu lateral → Operações → Aferições",
+      "content": "Controle das aferições/certificados INMETRO dos Equipamentos Campos: Equipamento Nº Certificado, Data Emissão, Data Vencimento, Status (Válido/Vencendo/Vencido). IMPORTANTE: Equipamento com aferição vencida não gera Infrações válidas.",
+      "steps": [
+        "Acesse Operações → Aferições",
+        "Localize o Equipamento",
+        "Verifique o status do certificado",
+        "Para atualizar: edite e informe novo número/data"
+      ],
+      "docUrl": "operacoes/afericoes",
+      "related": [
+        "certificado-vencendo",
+        "cadastro-operacoes",
+        "cadastrar-Equipamento",
+        "lacre-rompido-descarte"
+      ],
+      "dbTables": [
+        "TBAfericoes",
+        "TBFaixasAfericoes",
+        "TBDocumentosAfericoes"
+      ]
+    },
+    {
+      "id": "lacre-rompido-descarte",
+      "module": "Operações",
+      "title": "Lacre Rompido — Descarte de Infrações (Motivo 003)",
+      "keywords": [
+        "lacre rompido",
+        "lacre",
+        "descarte",
+        "motivo 003",
+        "DataLacreRompido",
+        "Infrações descartadas",
+        "velocidade descartada",
+        "lacre violado",
+        "aferição rompida"
+      ],
+      "path": "Menu lateral → Operações → Aferições → Status Lacre",
+      "content": "Ao marcar Status Lacre como 'Lacre Rompido', o sistema descarta TODAS as Infrações de velocidade da vigência inteira. ATENÇÃO: O campo 'Data Lacre Rompido' é obrigatório na tela mas NÃO é usado pela triagem (feature incompleta). Infrações não-velocidade (avanço sinal, faixa) NÃO são afetadas. Conforme Portaria INMETRO 492/2021, o correto seria descartar apenas a partir da data do rompimento.",
+      "steps": [
+        "O campo DataLacreRompido NÃO é consumido pela triagem",
+        "Infrações de velocidade são descartadas para TODA a vigência",
+        "Infrações de avanço de sinal/faixa NÃO são afetadas pelo lacre",
+        "WORKAROUND: Criar nova aferição eventual (Lacrada) com DataAfericao = data do rompimento",
+        "Para reabrir Infrações descartadas: Triagem → filtrar Descartadas → Reabrir"
+      ],
+      "docUrl": "operacoes/afericoes",
+      "related": [
+        "afericoes",
+        "triagem-infracoes"
+      ],
+      "dbTables": [
+        "TBAfericoes",
+        "TBFaixasAfericoes",
+        "TBInfracoes",
+        "TBMotivosDescartes"
+      ],
+      "regulamentacao": "Portaria INMETRO 492/2021 — medições com lacre íntegro são válidas. Correção pendente no backlog."
+    },
+    {
+      "id": "monitoramento-online",
+      "module": "Operações",
+      "title": "Monitoramento Online de Equipamentos",
+      "keywords": [
+        "monitoramento",
+        "online",
+        "offline",
+        "status",
+        "tempo real",
+        "comunicação"
+      ],
+      "path": "Menu lateral → Operações → Monitoramento Online",
+      "content": "Acompanhe em tempo real o status dos Equipamentos Colunas: Equipamento Status (Online/Offline/Manutenção), Última Comunicação, Passagens do dia.",
+      "steps": [],
+      "docUrl": "operacoes/monitoramento-online",
+      "related": [
+        "Equipamento-offline",
+        "sincronismo-Equipamento-blitz",
+        "eventos-Equipamentos"
+      ],
+      "dbTables": [
+        "TBHeartbeatEquipamentos",
+        "TBEquipamentos"
+      ]
+    },
+    {
+      "id": "Equipamento-offline",
+      "module": "Operações",
+      "title": "Equipamento Offline",
+      "keywords": [
+        "offline",
+        "sem comunicação",
+        "Equipamento parou",
+        "não está funcionando",
+        "falha",
+        "não sobe imagem",
+        "não sincroniza",
+        "anydesk",
+        "minipc",
+        "tablet",
+        "blitz",
+        "parado",
+        "travou"
+      ],
+      "path": "Menu lateral → Operações → Monitoramento Online",
+      "content": "Quando um Equipamento aparece offline no Monitoramento Online, significa que ele não está se comunicando com o servidor. Existem dois cenários principais: (1) Equipamentos fixos (MiniPC) — podem estár com problema de rede, queda de energia ou o serviço de envio travou. É necessário acessar via AnyDesk para reiniciar o serviço. Se o Equipamento ficou capturando passagens enquanto estáva offline, ao reconectar ele começará a enviar tudo automaticamente, podendo levar algum tempo dependendo do volume acumulado. (2) Equipamentos móveis (Tablets de blitz) — trabalham offline durante a operação e sincronizam quando retornam à base com internet. Se o tablet não envia há vários dias, verificar: se está ligado, se tem internet, se a faixa está configurada corretamente e se o serviço de sincronismo está funcionando. Em ambos os casos, o acesso via AnyDesk é essencial para diagnóstico remoto.",
+      "steps": [
+        "Acesse Operações → Monitoramento Online e verifique a última comunicação do Equipamento",
+        "Se o Equipamento é um MiniPC fixo: tente acessar via AnyDesk usando ID/Alias cadastrado",
+        "Ao acessar, verifique se o serviço de envio de passagens está rodando — se travou, reinicie-o",
+        "Se não conseguir acessar via AnyDesk, solicite ao operador em campo que verifique rede e energia",
+        "Para tablets de blitz: verificar se o tablet tem internet e se está sincronizando as passagens",
+        "Verificar no sistema quantas passagens pendentes existem — o envio pode demorar se há muitos dias acumulados",
+        "Consulte o Relatório de Mapa de Fluxo de Passagens para verificar quais dias tiveram registro",
+        "Registre o evento em Operações → Eventos de Equipamentos para manter histórico"
+      ],
+      "docUrl": "operacoes/monitoramento-online",
+      "related": [
+        "monitoramento-online",
+        "sincronismo-Equipamento-blitz",
+        "acesso-remoto-anydesk"
+      ],
+      "dbTables": [
+        "TBHeartbeatEquipamentos",
+        "TBEquipamentos"
+      ]
+    },
+    {
+      "id": "consulta-placas",
+      "module": "Operações",
+      "title": "Consultar Passagens por Placa",
+      "keywords": [
+        "placa",
+        "passagem",
+        "Veículo",
+        "consultar placa",
+        "histórico Veículo"
+      ],
+      "path": "Menu lateral → Operações → Consulta de Placas",
+      "content": "Consulte o histórico de passagens de Veículos por placa. Filtros: Placa, Período, Equipamento Resultado: Data/Hora, Equipamento Faixa, Velocidade, Imagem.",
+      "steps": [
+        "Acesse Operações → Consulta de Placas",
+        "Informe a placa do Veículo",
+        "Configure o período de busca",
+        "Clique em Pesquisar"
+      ],
+      "docUrl": "operacoes/consulta-placas",
+      "related": [
+        "relatorio-passagens",
+        "triagem-infracoes"
+      ],
+      "dbTables": [
+        "TBImagemPassagens"
+      ]
+    },
+    {
+      "id": "cadastrar-Equipamento",
+      "module": "Equipamentos",
+      "title": "Cadastrar Equipamento",
+      "keywords": [
+        "Equipamento",
+        "cadastrar",
+        "radar",
+        "câmera",
+        "OCR",
+        "lombada",
+        "novo Equipamento"
+      ],
+      "path": "Menu lateral → Equipamentos → Equipamentos",
+      "content": "Antes de cadastrar, siga a hierarquia: Fabricantes → Tipos → Modelos → Grupos → Equipamentos Campos obrigatórios: Nº Série, Código, Certificado INMETRO, Modelo, Tipo, Grupo.",
+      "steps": [
+        "Verifique se Fabricante, Tipo, Modelo e Grupo já estão cadastrados",
+        "Se não, cadastre na ordem: Fabricantes → Tipos → Modelos → Grupos",
+        "Acesse Equipamentos → Equipamentos → + Novo",
+        "Preencha Nº Série e Código",
+        "Informe o Número do Certificado INMETRO e datas",
+        "Selecione Modelo, Tipo e Grupo",
+        "Escolha o Tipo de Operação (Fixo ou Móvel)",
+        "Clique em Salvar"
+      ],
+      "docUrl": "cadastros-basicos/Equipamentos",
+      "related": [
+        "tipos-Equipamentos",
+        "grupos-Equipamentos",
+        "token-fabricante"
+      ],
+      "dbTables": [
+        "TBEquipamentos"
+      ]
+    },
+    {
+      "id": "certificado-vencendo",
+      "module": "Equipamentos",
+      "title": "Certificado INMETRO Vencendo",
+      "keywords": [
+        "certificado vencendo",
+        "INMETRO vencido",
+        "aferição vencida",
+        "alerta certificado"
+      ],
+      "path": "Dashboard (alertas) / Equipamentos → Editar",
+      "content": "O Dashboard mostra alertas de certificados próximos do vencimento. Para atualizar: acesse Equipamentos → editar o Equipamento → campo 'Vencimento Certificado INMETRO'. Equipamento com aferição vencida NÃO gera Infrações válidas.",
+      "steps": [
+        "Verifique os alertas no Dashboard",
+        "Acesse Equipamentos → Equipamentos",
+        "Localize e edite o Equipamento",
+        "Atualize o Número e Data do Certificado INMETRO",
+        "Salvar"
+      ],
+      "docUrl": "operacoes/afericoes",
+      "related": [
+        "afericoes",
+        "cadastrar-Equipamento"
+      ],
+      "dbTables": [
+        "TBAfericoes",
+        "TBEquipamentos"
+      ]
+    },
+    {
+      "id": "token-fabricante",
+      "module": "Equipamentos",
+      "title": "Token de API do Fabricante",
+      "keywords": [
+        "token",
+        "API",
+        "fabricante",
+        "integração",
+        "envio dados",
+        "autenticação"
+      ],
+      "path": "Menu lateral → Equipamentos → Fabricantes",
+      "content": "O token de API é usado pelo fabricante para enviar dados ao AxHub. Ao clicar em 'Gerar Novo Token', o anterior é INVALIDADO. Comunique o novo token ao fabricante. Sem token válido, o fabricante não consegue enviar passagens/imagens.",
+      "steps": [
+        "Acesse Equipamentos → Fabricantes",
+        "Edite o fabricante desejado",
+        "Clique em 'Gerar Novo Token'",
+        "Copie e envie o novo token ao fabricante",
+        "ATENÇÃO: o token anterior para de funcionar imediatamente"
+      ],
+      "docUrl": "cadastros-basicos/fabricantes",
+      "related": [
+        "cadastrar-Equipamento",
+        "tipos-Equipamentos"
+      ],
+      "dbTables": [
+        "TBFabricantes"
+      ]
+    },
+    {
+      "id": "ticket-pesagem",
+      "module": "Balança",
+      "title": "Ticket de Pesagem Preso/Aberto",
+      "keywords": [
+        "ticket",
+        "pesagem",
+        "aberto",
+        "preso",
+        "liberar",
+        "balança",
+        "peso"
+      ],
+      "path": "Menu lateral → Balança → Tickets Abertos",
+      "content": "Se um ticket de pesagem está preso, acesse Balança → Tickets Abertos, verifique o status e use 'Liberar Pesagem' se necessário.",
+      "steps": [
+        "Acesse Balança → Tickets Abertos",
+        "Localize o ticket pelo número ou placa",
+        "Verifique o status",
+        "Se necessário, use Balança → Liberar Pesagem"
+      ],
+      "docUrl": "pesagem/ticket-fechado",
+      "related": [
+        "tickets-abertos-pesagem",
+        "liberar-tickets-pesagem",
+        "postos-pesagem"
+      ],
+      "dbTables": [
+        "TBDadosPesagens",
+        "TBImagemPesagens"
+      ]
+    },
+    {
+      "id": "reclassificar-veiculo",
+      "module": "Balança",
+      "title": "Reclassificar Veículo na Pesagem",
+      "keywords": [
+        "reclassificar",
+        "classificação",
+        "porte",
+        "categoria Veículo",
+        "pesagem"
+      ],
+      "path": "Menu lateral → Balança → Reclassificar",
+      "content": "Para alterar a classificação de um Veículo em ticket de pesagem, acesse Balança → Reclassificar, selecione o ticket e altere a classificação.",
+      "steps": [
+        "Acesse Balança → Reclassificar",
+        "Localize o ticket",
+        "Altere a classificação do Veículo",
+        "Salvar"
+      ],
+      "docUrl": "pesagem/reclassificar",
+      "related": [
+        "ticket-pesagem",
+        "tipos-veiculos",
+        "classificacoes-veiculos"
+      ],
+      "dbTables": [
+        "TBDadosPesagens",
+        "TBClassificacoesVeiculos"
+      ]
+    },
+    {
+      "id": "cronotacografo",
+      "module": "Cronotacógrafo",
+      "title": "Triagem de Cronotacógrafo",
+      "keywords": [
+        "cronotacógrafo",
+        "jornada",
+        "motorista",
+        "Veículo pesado",
+        "excesso jornada"
+      ],
+      "path": "Menu lateral → Cronotacógrafo → Triagem",
+      "content": "Revise Infrações de excesso de jornada detectadas em cronotacógrafos de Veículos pesados. Inclui consulta ao sistema externo de registros. Status do cronotacógrafo: Regular, Irregular, Vencido, Não Encontrado.",
+      "steps": [
+        "Acesse Cronotacógrafo → Triagem",
+        "Análise a Infração apresentada",
+        "Verifique o status da consulta ao cronotacógrafo",
+        "Valide ou descarte conforme resultado"
+      ],
+      "docUrl": "cronotacografo/triagem",
+      "related": [
+        "consulta-cronotacografo"
+      ],
+      "dbTables": [
+        "TBDadosCronotacografos",
+        "TBHistoricoTriagensCronotacografos"
+      ]
+    },
+    {
+      "id": "gerar-medicao",
+      "module": "Medição",
+      "title": "Gerar Nova Medição Contratual",
+      "keywords": [
+        "medição",
+        "contrato",
+        "gerar",
+        "índice",
+        "performance",
+        "boletim"
+      ],
+      "path": "Menu lateral → Medição → Nova Medição",
+      "content": "Selecione contrato e período, o sistema calcula os índices automaticamente. Revise valores e interrupções antes de finalizar.",
+      "steps": [
+        "Acesse Medição → Nova Medição",
+        "Selecione o Contrato",
+        "Defina o Período (mês/ano de referência)",
+        "Sistema calcula índices automaticamente",
+        "Revise valores e interrupções registradas",
+        "Finalize a medição para aprovação"
+      ],
+      "docUrl": "medicoes/criar-medicao",
+      "related": [
+        "contratos-medicao",
+        "interrupcao-medicao",
+        "indices-performance"
+      ],
+      "dbTables": [
+        "TBContratos",
+        "TBContratosFaixas"
+      ]
+    },
+    {
+      "id": "interrupcao-medicao",
+      "module": "Medição",
+      "title": "Registrar Interrupção na Medição",
+      "keywords": [
+        "interrupção",
+        "parada",
+        "medição",
+        "desconto",
+        "abatimento"
+      ],
+      "path": "Menu lateral → Medição → Interrupções",
+      "content": "Registre interrupções que impactam a medição contratual. Campos: Equipamento Data/Hora Início/Fim, Motivo, Justificativa. Após registro, clique em 'Processar Interrupções' para abatimento automático.",
+      "steps": [
+        "Acesse Medição → Interrupções",
+        "Clique em + Nova",
+        "Selecione o Equipamento afetado",
+        "Informe Data/Hora de Início e Fim",
+        "Preencha Motivo e Justificativa",
+        "Salvar",
+        "Clicar em 'Processar Interrupções'"
+      ],
+      "docUrl": "medicoes/interrupcoes",
+      "related": [
+        "gerar-medicao",
+        "contratos-medicao"
+      ],
+      "dbTables": [
+        "TBContratos"
+      ]
+    },
+    {
+      "id": "relatorio-nao-carrega",
+      "module": "Relatórios",
+      "title": "Relatório Não Carrega / Demora",
+      "keywords": [
+        "Relatório",
+        "demora",
+        "não carrega",
+        "lento",
+        "travou",
+        "timeout"
+      ],
+      "path": "Menu lateral → Relatórios",
+      "content": "Relatórios com período muito grande demoram mais para processar. Reduza o período nos filtros. Verifique também se o perfil do Usuário tem permissão 'Visualizar' no módulo Relatórios",
+      "steps": [
+        "Reduza o período nos filtros (ex: 1 mês em vez de 1 ano)",
+        "Verifique se tem permissão no módulo Relatórios",
+        "Se persistir, tente novamente em horário de menor uso"
+      ],
+      "docUrl": "relatorios/relatorio-infracoes",
+      "related": [
+        "relatorio-infracoes",
+        "relatorio-passagens",
+        "power-bi"
+      ]
+    },
+    {
+      "id": "power-bi",
+      "module": "Relatórios",
+      "title": "Relatórios Power BI",
+      "keywords": [
+        "Power BI",
+        "Dashboard",
+        "BI",
+        "analytics",
+        "não atualiza"
+      ],
+      "path": "Menu lateral → Relatórios → Power BI",
+      "content": "Dashboards Power BI disponíveis: Comparativo de Placas, Descartes Radares, Boletim de Medição, Disponibilidade, Infração (dia x hora), Processamento, Índice OCR, Fluxo por Porte, Triagem por Usuário Se não atualiza, verificar Administração → Relatórios Power BI e webhooks.",
+      "steps": [],
+      "docUrl": "relatorios/power-bi",
+      "related": [
+        "relatorio-infracoes",
+        "relatorio-passagens"
+      ]
+    },
+    {
+      "id": "config-layout",
+      "module": "Administração",
+      "title": "Configurar Layout de Exportação",
+      "keywords": [
+        "layout",
+        "arquivo",
+        "exportação",
+        "formato",
+        "RENAINF",
+        "delimitador",
+        "campo"
+      ],
+      "path": "Menu lateral → Administração → Layouts de Arquivos",
+      "content": "Configure os campos e delimitadores dos arquivos de exportação por órgão autuador. Cada órgão pode ter layout diferente (RENAINF, XML, TXT, CSV).",
+      "steps": [
+        "Acesse Administração → Layouts de Arquivos",
+        "Selecione ou crie um layout para o órgão",
+        "Configure campos e delimitadores",
+        "Salvar"
+      ],
+      "docUrl": "administracao/layouts-arquivos",
+      "related": [
+        "exportar-infracoes",
+        "config-enquadramento"
+      ],
+      "dbTables": [
+        "TBCamposLayoutArquivos"
+      ]
+    },
+    {
+      "id": "config-enquadramento",
+      "module": "Administração",
+      "title": "Configurar Enquadramentos",
+      "keywords": [
+        "enquadramento",
+        "artigo",
+        "CTB",
+        "Infração",
+        "código",
+        "tipo Infração"
+      ],
+      "path": "Menu lateral → Administração → Configurações de Enquadramento",
+      "content": "Gerencie os enquadramentos legais (artigos do CTB) usados nas Infrações Cada enquadramento define tipo, pontos na CNH e valor da multa.",
+      "steps": [
+        "Acesse Administração → Configurações de Enquadramento",
+        "Adicione ou edite o enquadramento",
+        "Configure código, tipo de Infração e valores",
+        "Salvar"
+      ],
+      "docUrl": "administracao/configuracoes-enquadramento",
+      "related": [
+        "formas-autuacao",
+        "excecoes",
+        "config-layout"
+      ],
+      "dbTables": [
+        "TBEnquadramentos"
+      ]
+    },
+    {
+      "id": "webhooks",
+      "module": "Administração",
+      "title": "Configurar Webhooks",
+      "keywords": [
+        "webhook",
+        "integração",
+        "API",
+        "notificação",
+        "sistema externo"
+      ],
+      "path": "Menu lateral → Administração → Webhooks",
+      "content": "Webhooks notificam sistemas externos sobre eventos do AxHub. Campos: URL do endpoint, Evento que dispara, Método (POST/PUT), Headers de autenticação, Ativo/Inativo.",
+      "steps": [
+        "Acesse Administração → Webhooks",
+        "Clique em + Novo",
+        "Informe a URL do endpoint externo",
+        "Selecione o Evento que dispara o webhook",
+        "Configure Método e Headers",
+        "Ative e Salve"
+      ],
+      "docUrl": "administracao/webhooks",
+      "related": [
+        "config-sistema"
+      ]
+    },
+    {
+      "id": "arcos",
+      "module": "Administração",
+      "title": "Cadastrar Arcos de Fiscalização",
+      "keywords": [
+        "arco",
+        "ponto",
+        "local",
+        "fiscalização",
+        "localização"
+      ],
+      "path": "Menu lateral → Administração → Arcos",
+      "content": "Arcos são os pontos de fiscalização onde os Equipamentos operam. Campos: Nome, Localização, Equipamentos vinculados, Status (Ativo/Inativo).",
+      "steps": [
+        "Acesse Administração → Arcos",
+        "Clique em + Novo",
+        "Informe Nome e Localização",
+        "Vincule Equipamentos",
+        "Salvar"
+      ],
+      "docUrl": "administracao/arcos",
+      "related": [
+        "cadastro-operacoes",
+        "regioes"
+      ],
+      "dbTables": [
+        "TBArcos",
+        "TBArcoNos"
+      ]
+    },
+    {
+      "id": "cadastro-codigo-municipio-faixa",
+      "module": "Operações",
+      "title": "Código do Município na Faixa",
+      "keywords": [
+        "código",
+        "município",
+        "IBGE",
+        "faixa",
+        "cadastro",
+        "UF",
+        "onde cadastrar",
+        "campo",
+        "configurar",
+        "alterar município"
+      ],
+      "path": "Menu lateral → Operações → Faixas → Editar Faixa",
+      "content": "O Código do Município é cadastrado na tela de Faixas (Operações → Faixas). Cada faixa de fiscalização possui o campo 'Código do Município' que deve conter o código IBGE do município onde o Equipamento opera. Esse código é obrigatório e válidado na exportação de Infrações Exemplo: Goiânia/GO = 5208707, Teresina/PI = 2211001. Se o código estiver errado, a exportação de Infrações retorna erro 422.",
+      "steps": [
+        "Acesse Operações → Faixas no menu lateral",
+        "Localize a faixa pelo código do Equipamento (ex: GYNTM015)",
+        "Clique no botão Editar (ícone de lápis) na faixa desejada",
+        "Localize o campo Código do Município",
+        "Informe o código IBGE correto do município (consulte em Veículos → Municípios)",
+        "Confira se a UF corresponde ao estádo da operação",
+        "Salve a faixa"
+      ],
+      "docUrl": "operacoes/faixas",
+      "related": [
+        "cadastro-municipios",
+        "dependencias-codigo-municipio",
+        "cadastro-faixas"
+      ],
+      "dbTables": [
+        "TBFaixas"
+      ]
+    },
+    {
+      "id": "cadastro-municipios",
+      "module": "Veículos",
+      "title": "Cadastro de Municípios",
+      "keywords": [
+        "município",
+        "IBGE",
+        "cadastro",
+        "UF",
+        "estádo",
+        "cidade",
+        "Veículos",
+        "tabela municípios"
+      ],
+      "path": "Menu lateral → Veículos → Municípios",
+      "content": "A tabela de Municípios é a base centralizada dos códigos IBGE no sistema. Ela lista todos os municípios disponíveis com Código IBGE, Nome, UF e Status. Quando for cadastrar ou corrigir o código de município em uma faixa, consulte está tabela para obter o código correto. Se o município não existir na tabela, cadastre-o primeiro aqui.",
+      "steps": [
+        "Acesse Veículos → Municípios no menu lateral",
+        "Use a busca para localizar o município pelo nome",
+        "O código IBGE aparece na primeira coluna",
+        "Para cadastrar um novo município: clique em + Novo",
+        "Preencha: Código IBGE, Nome, UF e marque como Ativo",
+        "Salve o cadastro"
+      ],
+      "docUrl": "veiculos/municipios",
+      "related": [
+        "cadastro-codigo-municipio-faixa",
+        "dependencias-codigo-municipio"
+      ],
+      "dbTables": [
+        "TBFaixas"
+      ]
+    },
+    {
+      "id": "dependencias-codigo-municipio",
+      "module": "Operações",
+      "title": "Onde o Código do Município é utilizado",
+      "keywords": [
+        "dependência",
+        "município",
+        "onde usa",
+        "impacto",
+        "exportação",
+        "faixa",
+        "Relatório",
+        "medição",
+        "triagem"
+      ],
+      "path": "Operações → Faixas | Infrações → Exportação | Relatórios | Medições",
+      "content": "O Código do Município configurado na Faixa impacta diversos módulos do AxHub. A cadeia de dependência é: Veículos → Municípios (tabela base) → Operações → Faixas (onde o código é atribuído) → Infrações → Exportação (onde é válidado contra a UF). Também é usado em Relatórios (agrupamento por localidade), Medições (desempenho por local) e Triagem (dados de contexto). Se o código estiver incorreto, o principal impacto é na Exportação, que retorna erro 422.",
+      "steps": [
+        "Veículos → Municípios: tabela base com todos os códigos IBGE",
+        "Operações → Faixas: onde o código é configurado por Equipamento/faixa",
+        "Infrações → Exportação: válida se a UF do município bate com a operação",
+        "Relatórios usa o município para filtros e agrupamentos",
+        "Medições: vincula desempenho ao local do Equipamento",
+        "Triagem: exibe dados de localização da Infração"
+      ],
+      "docUrl": "operacoes/faixas",
+      "related": [
+        "cadastro-codigo-municipio-faixa",
+        "cadastro-municipios",
+        "cadastro-faixas"
+      ],
+      "dbTables": [
+        "TBFaixas"
+      ]
+    },
+    {
+      "id": "cadastro-faixas",
+      "module": "Operações",
+      "title": "Cadastro de Faixas de Fiscalização",
+      "keywords": [
+        "faixa",
+        "cadastro",
+        "operação",
+        "Equipamento",
+        "sentido",
+        "logradouro",
+        "pista"
+      ],
+      "path": "Menu lateral → Operações → Faixas",
+      "content": "Faixas representam as pistas de rolamento monitoradas por Equipamentos de fiscalização. Cada faixa é vinculada a uma operação e possui: Código, Número da Faixa, Sentido (Norte/Sul, Leste/Oeste), Logradouro, Bairro, Município, UF e Código do Município (IBGE). A faixa herda o contexto geográfico que é usado em toda a cadeia: triagem, auditoria e exportação de Infrações",
+      "steps": [
+        "Acesse Operações → Faixas no menu lateral",
+        "Clique em + Novo para criar ou no ícone de lápis para editar",
+        "Informe o Código do Equipamento e o Número da Faixa",
+        "Selecione o Sentido de tráfego",
+        "Preencha Logradouro, Bairro, Município e UF",
+        "Informe o Código do Município (IBGE) correto",
+        "Salve a faixa"
+      ],
+      "docUrl": "operacoes/faixas",
+      "related": [
+        "conceito-faixa",
+        "config-faixa-tablet",
+        "config-faixa-minipc",
+        "adicionar-faixa-operacao"
+      ],
+      "dbTables": [
+        "TBFaixas"
+      ]
+    },
+    {
+      "id": "erro-exportacao-uf-municipio",
+      "module": "Infrações",
+      "title": "Exportação X UF Município",
+      "keywords": [
+        "erro",
+        "exportação",
+        "lote",
+        "UF",
+        "município",
+        "CriarInfracaoUsingPOST",
+        "código 422",
+        "faixa",
+        "código município errado",
+        "GO",
+        "MA"
+      ],
+      "path": "Menu lateral → Infrações → Exportação → Lote com Erro",
+      "content": "Erro 'A UF do município de cometimento GO não é a mesma do código do município informado (MA), código 422' ocorre quando a faixa do Equipamento está cadastrada com o código IBGE de município incorreto. É necessário identificar qual faixa gerou o erro, acessar Operação → Faixa, corrigir o código do município e reprocessar o lote. Veja o passo a passo completo com imagens na documentação: Infrações → Exportação → Resolução de Erros.",
+      "steps": [
+        "Acesse Infrações → Exportação e localize o lote com erro (ex: 200509, 200510, 200511)",
+        "Abra o lote e leia a mensagem de erro — ela informa a Infração e a placa do Veículo",
+        "Filtre pela placa informada no erro (ex: NGB4Z15) para localizar a Infração",
+        "Clique no ID da Infração para abrir o detalhamento e identifique o campo Faixa/Sentido (ex: GYNTM015-3)",
+        "Acesse Operação → Faixa e pesquise pelo código do Equipamento (ex: GYNTM015)",
+        "Edite a faixa e corrija o campo Código do Município para o código IBGE correto (Goiânia = 5208707)",
+        "Salve e reprocesse o lote — todas as Infrações desse Equipamento são corrigidas automaticamente"
+      ],
+      "docUrl": "infracoes/exportacao",
+      "related": [
+        "exportar-infracoes",
+        "cadastro-municipios",
+        "cadastro-codigo-municipio-faixa"
+      ],
+      "dbTables": [
+        "TBInfracoes"
+      ]
+    },
+    {
+      "id": "erro-exportacao-imagens-obrigatorias",
+      "module": "Infrações",
+      "title": "Erro Exportação: Imagens Obrigatórias Ausentes (código 422)",
+      "keywords": [
+        "erro",
+        "exportação",
+        "lote",
+        "imagens",
+        "IMAGEM-ZOOM",
+        "PANORAMICA1",
+        "PANORAMICA2",
+        "EncerrarLoteUsingPUT",
+        "código 422",
+        "obrigatórias"
+      ],
+      "path": "Menu lateral → Infrações → Exportação → Lote com Erro",
+      "content": "Erro 'As Imagens IMAGEM-ZOOM, PANORAMICA1 e PANORAMICA2 são obrigatórias para o registro do Veículo ocorre quando a Infração não possui todas as imagens exigidas pelo órgão autuador. O sistema válida que cada registro tenha pelo menos: IMAGEM-ZOOM (close da placa), PANORAMICA1 (visão ampla) e PANORAMICA2 (contexto). O Veículo e número da Infração são informados no erro.",
+      "steps": [
+        "Acesse Infrações → Exportação e localize o lote com erro",
+        "Abra o lote e identifique o Veículo/Infração mencionados na mensagem de erro",
+        "Acesse a Infração pelo ID e verifique quais imagens estão ausentes",
+        "Se a imagem existe mas não foi vinculada, associe-a à Infração",
+        "Se a imagem não existe (falha no Equipamento verifique se há imagens disponíveis no Equipamento/operação",
+        "Caso não haja imagem disponível, a Infração deve ser descartada por falta de comprovação",
+        "Após corrigir, reprocesse o lote de exportação"
+      ],
+      "docUrl": "infracoes/exportacao",
+      "related": [
+        "exportar-infracoes",
+        "tipos-imagens",
+        "processamento-imagens"
+      ],
+      "dbTables": [
+        "TBInfracoes",
+        "TBImagens"
+      ]
+    },
+    {
+      "id": "erro-exportacao-lote-geral",
+      "module": "Infrações",
+      "title": "Erros Comuns em Lotes de Exportação",
+      "keywords": [
+        "erro",
+        "lote",
+        "exportação",
+        "EncerrarLoteUsingPUT",
+        "CriarInfracaoUsingPOST",
+        "código 422",
+        "avançar sinal",
+        "faixa exclusiva",
+        "reprocessar"
+      ],
+      "path": "Menu lateral → Infrações → Exportação",
+      "content": "Lotes de exportação podem apresentar erros ao enviar para o órgão autuador. Os erros mais comuns são: (1) Código do município divergente na faixa — corrigir em Operação → Faixa, (2) Imagens obrigatórias ausentes — verificar imagens da Infração (3) Dados incompletos — válidar placa, enquadramento e assinaturas. Cada erro informa o Veículo e Infração afetados. Após corrigir a causa, reprocesse o lote.",
+      "steps": [
+        "Acesse Infrações → Exportação e filtre por Status = Erro",
+        "Abra o lote para ver a mensagem detalhada de erro",
+        "Identifique o tipo de erro: UF divergente, imagens ausentes, dados incompletos",
+        "Para erro de UF/município: corrija a faixa em Operação → Faixa",
+        "Para erro de imagens: verifique a Infração e vincule ou descarte",
+        "Para dados incompletos: valide o cadastro do Veículo e enquadramento",
+        "Reprocesse o lote após as correções"
+      ],
+      "docUrl": "infracoes/exportacao",
+      "related": [
+        "exportar-infracoes",
+        "erro-exportacao-uf-municipio",
+        "erro-exportacao-imagens-obrigatorias"
+      ],
+      "dbTables": [
+        "TBInfracoes"
+      ]
+    },
+    {
+      "id": "tarja-imagem-duplicada",
+      "module": "Administração",
+      "title": "Tarja das Imagens em Duplicidade",
+      "keywords": [
+        "tarja",
+        "duplicada",
+        "duplicidade",
+        "fonte",
+        "imagem",
+        "rodapé",
+        "concatenar",
+        "posição tarja",
+        "overlay",
+        "carimbo",
+        "template",
+        "Equipamento",
+        "operação"
+      ],
+      "path": "Menu lateral → Administração → Tarjas / Operações → editar Operação",
+      "content": "Quando a imagem de uma Infração aparece com duas tarjas sobrepostas — frequentemente com fontes ou tamanhos diferentes — o problema está na Configuração da posição da tarja. No AxHub existem dois níveis de tarja: (1) a Tarja do Sistema, configurada em Administração → Tarjas, que define o layout padrão com campos como Data, Hora, Código do Equipamento etc., e (2) a Tarja do Equipamento que vem gravada pelo próprio Equipamento de campo. Se no cadastro da operação campo 'Tarja Padrão' estiver definido como 'Selecione a Tarja' (sem seleção), o sistema usará a tarja padrão embutida no Equipamento Quando a opção 'Posição Tarja' está configurada como 'Concatenar no Rodapé', o sistema une as duas tarjas — a do Equipamento e a do sistema — gerando a duplicidade visual. Para corrigir, você pode: (a) selecionar explicitamente a tarja desejada no cadastro da operação, substituindo a do Equipamento ou (b) alterar a 'Posição Tarja' para não concatenar, ou (c) ajustar o template da tarja em Administração → Tarjas para que o layout fique correto.",
+      "steps": [
+        "Identifique qual operação e Equipamento apresentam a tarja duplicada (ex: SE812C-1)",
+        "Acesse Administração → Tarjas para verificar o template da tarja do sistema — confira o nome, posição da tarja, largura, altura e campos usados no template",
+        "Se a 'Posição Tarja' estiver como 'Concatenar no Rodapé', o sistema juntará a tarja do Equipamento com a do sistema — essa é a causa mais comum da duplicidade",
+        "Altere 'Posição Tarja' para a posição desejada ou crie uma nova tarja sem concatenação",
+        "Acesse Operações → selecione a operação do Equipamento afetado → clique em Editar",
+        "No campo 'Tarja Padrão', selecione a tarja correta em vez de deixar como 'Selecione a Tarja'",
+        "Ao selecionar uma tarja na operação, o sistema usará apenas essa tarja, ignorando a do Equipamento",
+        "Salve a operação e reprocesse uma Infração para confirmar que a duplicidade foi resolvida"
+      ],
+      "docUrl": "administracao/tarjas",
+      "related": [
+        "processamento-imagens",
+        "tipos-imagens",
+        "triagem-infracoes"
+      ],
+      "dbTables": [
+        "TBImagens",
+        "TBImagemPassagens"
+      ]
+    },
+    {
+      "id": "faixa-errada-tablet-blitz",
+      "module": "Operações",
+      "title": "Faixa Errada no Tablet de Blitz",
+      "keywords": [
+        "faixa errada",
+        "tablet",
+        "faixa 12",
+        "blitz",
+        "passagem não sobe",
+        "imagem não chega",
+        "Configuração faixa",
+        "número da faixa",
+        "Equipamento tablet",
+        "Configuração Equipamento"
+      ],
+      "path": "No tablet: Configurações → Configuração do Equipamento / No AxHub: Operações → editar Operação → Faixas",
+      "content": "Um problema recorrente em operações de blitz com tablets é a Configuração incorreta do número da faixa no Equipamento O número da faixa cadastrado no tablet DEVE ser exatamente igual ao número da faixa cadastrada no AxHub para aquela operação. Caso contrário, as passagens capturadas não serão importadas para o sistema. Exemplo real: o operador configurou a faixa como '12' no tablet, pensando que significava 'faixa 1 e faixa 2', mas o sistema interpretou literalmente como 'faixa 12' — que não existe no cadastro da operação. As passagens ficaram presas no tablet e não subiram. Para corrigir: (1) verificar no AxHub quais faixas estão cadastradas na operação, (2) no tablet, acessar Configurações → Configuração do Equipamento e alterar o Nº da Faixa para o número correto. IMPORTANTE: passagens já capturadas com a faixa errada NÃO serão enviadas automaticamente ao corrigir — cada uma precisaria ser editada manualmente, o que pode ser inviável para grandes volumes. A partir da correção, as novas passagens serão enviadas normalmente.",
+      "steps": [
+        "No AxHub, acesse Operações → selecione a operação do Equipamento afetado",
+        "Na seção 'Faixas', verifique quais faixas existem e seus números (ex: Faixa 1 = SIMÕES FILHO/SALVADOR, Faixa 2 = FEIRA DE SANTANA/SALVADOR)",
+        "No tablet, acesse o sistema de monitoramento → Configurações → Configuração do Equipamento",
+        "Verifique o campo 'Nº da Faixa' — se estiver com um número inexistente (ex: 12), esse é o problema",
+        "Altere para o número correto da faixa conforme o endereço onde o Equipamento está operando",
+        "Clique em Salvar no tablet",
+        "A partir desse momento, as novas passagens serão enviadas com a faixa correta",
+        "Passagens anteriores com faixa errada: decidir com o gestor se serão corrigidas manualmente ou descartadas",
+        "Se o endereço de operação não corresponde a nenhuma faixa existente, o gestor do contrato deve cadastrar uma nova faixa no AxHub"
+      ],
+      "docUrl": "operacoes/faixas",
+      "related": [
+        "config-faixa-tablet",
+        "passagens-faixa-errada",
+        "sincronismo-Equipamento-blitz"
+      ]
+    },
+    {
+      "id": "sincronismo-Equipamento-blitz",
+      "module": "Operações",
+      "title": "Sincronismo de Equipamentos de Blitz",
+      "keywords": [
+        "sincronismo",
+        "sincronizar",
+        "blitz",
+        "offline",
+        "passagem não sobe",
+        "imagem não chega",
+        "cco",
+        "base",
+        "envio parado",
+        "serviço travou",
+        "pendente",
+        "minipc",
+        "tablet",
+        "internet"
+      ],
+      "path": "Operações → Monitoramento Online / AnyDesk para acesso remoto",
+      "content": "Equipamentos de blitz (MiniPCs e Tablets) normalmente trabalham offline durante a operação em campo e sincronizam as passagens quando retornam à base com acesso à internet. Quando as imagens e passagens não chegam ao sistema (CCO), os possíveis problemas são: (1) Equipamento sem internet — verificar se o modem/wifi está funcionando; (2) Serviço de envio travou — o serviço que envia as passagens do Equipamento para o servidor pode travar, especialmente quando o Equipamento é desligado abruptamente e religado. Nesse caso, é necessário acessar via AnyDesk e executar um comando para reiniciar o serviço; (3) Faixa configurada errada — se a faixa no tablet não corresponde a nenhuma faixa cadastrada no AxHub, as passagens não serão importadas; (4) Volume acumulado — se o Equipamento ficou muitos dias sem sincronizar, o envio pode levar horas. Exemplo: o Equipamento BA602C ficou offline do dia 10 ao 27 e ao reconectar enviou mais de 2.600 passagens por dia, levando várias horas para concluir. É recomendável deixar o Equipamento ligado e conectado até finalizar todo o envio.",
+      "steps": [
+        "Verifique no Monitoramento Online qual a última comunicação do Equipamento",
+        "Tente acessar o Equipamento via AnyDesk com o ID/Alias cadastrado",
+        "Se conseguir acessar: verifique se o serviço de envio de passagens está rodando",
+        "Se o serviço travou, reinicie-o — as passagens pendentes começarão a ser enviadas automaticamente",
+        "Verifique o volume de passagens pendentes — se há muitos dias acumulados, o envio pode demorar horas",
+        "Para tablets: verifique se a faixa configurada no Equipamento está correta Configurações → Configuração do Equipamento",
+        "Se o Equipamento não tem internet, solicite ao operador que o conecte à rede na base",
+        "Acompanhe o envio pelo Relatório de Mapa de Fluxo de Passagens para confirmar que os dias pendentes estão sendo preenchidos",
+        "Deixe o Equipamento ligado e conectado até que todas as passagens pendentes sejam enviadas"
+      ],
+      "docUrl": "operacoes/monitoramento-online",
+      "related": [
+        "Equipamento-offline",
+        "monitoramento-online",
+        "acesso-remoto-anydesk"
+      ]
+    },
+    {
+      "id": "checklist-operacao-blitz",
+      "module": "Operações",
+      "title": "Checklist Operacional de Blitz",
+      "keywords": [
+        "checklist",
+        "blitz",
+        "verificação",
+        "antes de operar",
+        "operador",
+        "campo",
+        "faixa correta",
+        "endereço",
+        "tablet",
+        "Configuração"
+      ],
+      "path": "No AxHub: Operações → Faixas / No tablet: Configurações → Configuração do Equipamento",
+      "content": "Antes de iniciar uma operação de blitz, o operador de campo deve seguir um checklist de verificação para evitar problemas de sincronismo e perda de dados. Os erros mais comuns acontecem quando: (1) o número da faixa no tablet não corresponde à faixa cadastrada no AxHub para aquele endereço; (2) o Equipamento não é sincronizado ao retornar à base; (3) o operador não sabe quais faixas estão disponíveis para a operação. IMPORTANTE: quem cadastra e gerencia as faixas no AxHub é o gestor do contrato. O suporte Axion NÃO altera faixas — apenas orienta. Se o endereço de operação não corresponde a nenhuma faixa existente, o gestor deve cadastrar uma nova faixa antes de enviar a equipe a campo. O operador recebe do gestor qual número de faixa usar em cada endereço.",
+      "steps": [
+        "ANTES DA OPERAÇÃO: Pergunte ao gestor qual a faixa correta para o endereço da blitz",
+        "Verifique no AxHub (Operações → editar Operação → Faixas) quais faixas existem e seus endereços",
+        "Se o endereço da blitz não tem faixa cadastrada, solicite ao gestor que crie uma nova faixa",
+        "No tablet, acesse Configurações → Configuração do Equipamento e confira se o 'Nº da Faixa' está correto para o endereço",
+        "Confirme que o Equipamento está carregado e funcionando antes de ir a campo",
+        "DURANTE A OPERAÇÃO: O tablet irá capturar e armazenar as passagens localmente (modo offline)",
+        "AO RETORNAR À BASE: Conecte o tablet à internet (WiFi ou rede) para sincronizar as passagens",
+        "Aguarde a sincronização completa — em dias com alto volume pode levar alguns minutos",
+        "Verifique no AxHub Relatório de Mapa de Fluxo de Passagens) se as passagens do dia apareceram",
+        "Se não aparecerem: verifique a faixa no tablet e se há internet disponível"
+      ],
+      "docUrl": "operacoes/cadastro-operacoes",
+      "related": [
+        "cadastro-operacoes",
+        "operador-campo-orientacao",
+        "verificar-dias-operacao-Equipamento"
+      ]
+    },
+    {
+      "id": "verificar-dias-operacao-Equipamento",
+      "module": "Relatórios",
+      "title": "Verificar Dias de Operação do Equipamento",
+      "keywords": [
+        "Relatório",
+        "mapa de fluxo",
+        "fluxo de passagens",
+        "dias sem operação",
+        "Equipamento parado",
+        "verificar funcionamento",
+        "último dia",
+        "passagens por dia",
+        "fluxo diário"
+      ],
+      "path": "Menu lateral → Relatórios → Mapa de Fluxo de Passagens / Relatório de Fluxo Diário de Veículos",
+      "content": "Para verificar em quais dias um Equipamento operou e em quais ficou parado, utilize dois Relatórios do AxHub: (1) Mapa de Fluxo de Passagens — mostra uma tabela hora-a-hora de todas as passagens do mês, por Equipamento e faixa. As células em vermelho indicam ausência de registro Equipamento parado); células com números indicam passagens naquele horário. É o Relatório mais visual para identificar lacunas. (2) Relatório de Fluxo Diário de Veículos — mostra dia a dia o total de fluxo e Infrações por faixa. Dias com valor zero indicam que o Equipamento não operou. Ambos os Relatórios permitem filtrar por mês/período, grupo de Equipamentos e Equipamento específico. Use esses Relatórios para responder a perguntas como: 'qual foi o último dia que o Equipamento operou?', 'quantos dias o Equipamento ficou parado?', 'está chegando imagem no sistema?'.",
+      "steps": [
+        "Acesse Relatórios → Mapa de Fluxo de Passagens",
+        "Selecione o mês/período desejado e o Equipamento específico",
+        "Clique em 'Emitir Relatório — a tabela mostrará passagens por hora de cada dia",
+        "Identifique os dias com células vermelhas (sem passagens) — esses são os dias em que o Equipamento não operou ou não sincronizou",
+        "Para mais detalhes, acesse Relatórios → Fluxo Diário de Veículos",
+        "Selecione o Equipamento e faixa — o Relatório mostrará fluxo e Infrações dia a dia",
+        "Dias com fluxo zero: o Equipamento não operou, estava offline sem sincronismo, ou a faixa estava errada",
+        "Se o Equipamento operou mas o Relatório mostra zero: verificar se as passagens estão pendentes de sincronismo Equipamento offline) ou se a faixa no tablet estava incorreta"
+      ],
+      "docUrl": "operacoes/cadastro-operacoes",
+      "related": [
+        "cadastro-operacoes",
+        "checklist-operacao-blitz",
+        "afericoes"
+      ]
+    },
+    {
+      "id": "conceito-faixa",
+      "module": "Operações",
+      "title": "O que é uma Faixa no AxHub",
+      "keywords": [
+        "faixa",
+        "o que é faixa",
+        "conceito faixa",
+        "para que serve faixa",
+        "significado faixa",
+        "endereço",
+        "sentido",
+        "local fiscalização"
+      ],
+      "path": "Menu lateral → Operações → editar Operação → seção Faixas",
+      "content": "No AxHub, uma Faixa representa um local físico de fiscalização vinculado a um Equipamento Cada faixa possui: Código (ex: BA604C-1), Número da Faixa (1, 2, 3...), Sentido (ex: SIMÕES FILHO/SALVADOR), Endereço completo, Velocidade permitida, Código do Município (IBGE) e UF. A faixa é o elo entre o Equipamento de campo e o sistema — toda passagem capturada é associada a uma faixa. Se a faixa estiver errada ou não existir no cadastro, a passagem não será importada corretamente. Cada operação pode ter múltiplas faixas, representando diferentes endereços onde o Equipamento opera.",
+      "steps": [
+        "Acesse Operações → selecione a operação desejada",
+        "Na seção 'Faixas' você verá todas as faixas cadastradas para aquele Equipamento",
+        "Cada faixa tem: Código, Número, Sentido, Endereço, Velocidade",
+        "O número da faixa é o que deve ser configurado no Equipamento de campo",
+        "Se o Equipamento muda de local, mude o número da faixa no Equipamento para corresponder ao novo endereço"
+      ],
+      "docUrl": "operacoes/faixas",
+      "related": [
+        "cadastro-faixas",
+        "config-faixa-tablet",
+        "adicionar-faixa-operacao"
+      ],
+      "dbTables": [
+        "TBFaixas"
+      ]
+    },
+    {
+      "id": "config-faixa-tablet",
+      "module": "Equipamentos",
+      "title": "Configurar Faixa no Tablet",
+      "keywords": [
+        "configurar faixa",
+        "tablet",
+        "número da faixa",
+        "Configuração Equipamento",
+        "mudar faixa",
+        "alterar faixa tablet",
+        "campo",
+        "blitz tablet",
+        "como definir faixa"
+      ],
+      "path": "No tablet: Sistema Axion → Configurações → Configuração do Equipamento",
+      "content": "Para configurar ou alterar a faixa em um tablet de blitz, acesse o sistema Axion instalado no tablet → toque em Configurações → Configuração do Equipamento Nessa tela você verá dois campos: Equipamento (código fixo, ex: BA604C) e 'Nº da Faixa' (editável). O 'Nº da Faixa' deve ser EXATAMENTE igual ao número da faixa cadastrada no AxHub para o endereço onde o Equipamento vai operar. Exemplo: se no AxHub a faixa 1 é 'SIMÕES FILHO/SALVADOR' e a faixa 2 é 'FEIRA DE SANTANA/SALVADOR', e o operador vai operar em Feira de Santana, ele deve configurar '2' no tablet. NUNCA digite combinações como '12' pensando que é 'faixa 1 e 2' — o sistema interpreta literalmente como faixa número 12. Após alterar, clique em 'Salvar'. As novas capturas usarão a faixa correta a partir desse momento.",
+      "steps": [
+        "No tablet, abra o sistema Axion de monitoramento",
+        "Toque em Configurações no menu lateral",
+        "Toque em Configuração do Equipamento",
+        "Verifique o campo Equipamento — deve mostrar o código correto (ex: BA604C)",
+        "No campo 'Nº da Faixa', digite o número da faixa conforme o endereço de operação",
+        "Consulte o gestor ou o AxHub para saber qual número corresponde ao endereço",
+        "Clique em 'Salvar'",
+        "A partir de agora as capturas serão registradas na faixa correta"
+      ],
+      "docUrl": "operacoes/faixas",
+      "related": [
+        "config-faixa-minipc",
+        "conceito-faixa",
+        "faixa-errada-tablet-blitz"
+      ],
+      "dbTables": [
+        "TBFaixas"
+      ]
+    },
+    {
+      "id": "config-faixa-minipc",
+      "module": "Equipamentos",
+      "title": "Faixa em Equipamento Fixo (MiniPC/OCR)",
+      "keywords": [
+        "minipc",
+        "ocr",
+        "Equipamento fixo",
+        "faixa fixa",
+        "Configuração faixa fixo",
+        "câmera fixa",
+        "ponto fixo",
+        "estático"
+      ],
+      "path": "Menu lateral → Operações → editar Operação → seção Faixas",
+      "content": "Para Equipamentos fixos (MiniPC com câmera OCR), a faixa é configurada diretamente no cadastro da operação dentro do AxHub e normalmente não muda, pois o Equipamento fica em um ponto fixo. Ao cadastrar a operação, o administrador adiciona as faixas com os endereços exatos do local de instalação. O Equipamento fixo já vem pré-configurado de fábrica com o código do Equipamento e faixa padrão. Diferente dos tablets de blitz, Equipamentos fixos não precisam de alteração de faixa no campo — a Configuração é feita uma única vez no momento da instalação. Se for necessário alterar (por exemplo, mudança de endereço do ponto), o acesso é feito via AnyDesk ou diretamente no Equipamento Para Equipamentos OCR, a faixa define também o sentido de captura (ex: NORTE-SUL) e a velocidade regulamentada.",
+      "steps": [
+        "No AxHub, acesse Operações → selecione a operação do Equipamento fixo",
+        "Na seção 'Faixas', verifique se o endereço, sentido e velocidade estão corretos",
+        "Para adicionar uma faixa: clique em 'Adicionar Faixa' e preencha os dados",
+        "Para editar: clique no ícone de edição da faixa desejada",
+        "Preencha: Código, Número, Sentido, Endereço, Bairro, Município, Cód. Município (IBGE), UF, Velocidade",
+        "Salve a operação",
+        "A Configuração no Equipamento fixo é feita uma vez na instalação — não muda em campo"
+      ],
+      "docUrl": "operacoes/faixas",
+      "related": [
+        "config-faixa-tablet",
+        "conceito-faixa",
+        "cadastro-faixas"
+      ],
+      "dbTables": [
+        "TBFaixas"
+      ]
+    },
+    {
+      "id": "adicionar-faixa-operacao",
+      "module": "Operações",
+      "title": "Adicionar Nova Faixa a uma Operação",
+      "keywords": [
+        "adicionar faixa",
+        "criar faixa",
+        "nova faixa",
+        "cadastrar faixa",
+        "novo endereço",
+        "novo local",
+        "ampliar operação",
+        "faixa 3",
+        "gestor contrato"
+      ],
+      "path": "Menu lateral → Operações → editar Operação → botão 'Adicionar Faixa'",
+      "content": "Quando a equipe de campo precisa operar em um endereço que não tem faixa cadastrada, o gestor do contrato deve criar uma nova faixa no AxHub antes de enviar a equipe. Exemplo: o Equipamento BA604C tinha faixas 1 (Simões Filho/Salvador) e 2 (Feira de Santana/Salvador). Se a equipe precisa operar em Salvador/Feira de Santana, o gestor cria a faixa 3 com esse endereço. Após criar no AxHub, o operador de campo configura o tablet com o número '3'. IMPORTANTE: somente o gestor do contrato pode criar, editar ou remover faixas — o suporte Axion NÃO altera faixas, apenas orienta. O Código da faixa segue o padrão: CÓDIGO_EQUIPAMENTO-NÚMERO (ex: BA604C-3).",
+      "steps": [
+        "Acesse Operações → selecione a operação do Equipamento",
+        "Clique no botão 'Adicionar Faixa' na parte inferior da seção Faixas",
+        "Preencha o Número da Faixa (sequencial: se já existe 1 e 2, use 3)",
+        "Preencha o Sentido (ex: SALVADOR/FEIRA DE SANTANA)",
+        "Preencha o Endereço completo: logradouro, número, bairro, município, UF",
+        "Preencha o Código do Município (IBGE) — consulte em Veículos → Municípios",
+        "Defina a Velocidade regulamentada, se aplicável",
+        "Salve a operação",
+        "Informe ao operador de campo o número da nova faixa para configurar no tablet"
+      ],
+      "docUrl": "operacoes/faixas",
+      "related": [
+        "cadastro-faixas",
+        "cadastro-operacoes",
+        "conceito-faixa"
+      ],
+      "dbTables": [
+        "TBFaixas",
+        "TBDocumentoOperacoesRecursosFaixas"
+      ]
+    },
+    {
+      "id": "tipos-Equipamento-blitz",
+      "module": "Equipamentos",
+      "title": "Tipos de Equipamentos MiniPC vs Tablet",
+      "keywords": [
+        "tipo Equipamento",
+        "minipc",
+        "tablet",
+        "diferença",
+        "blitz",
+        "fixo",
+        "móvel",
+        "ocr",
+        "câmera",
+        "anydesk",
+        "zero tier"
+      ],
+      "path": "Informação de referência",
+      "content": "No AxHub existem dois tipos principais de Equipamentos (1) MiniPC — computador compacto com câmera OCR, usado em pontos fixos. Fica conectado à internet via cabo ou modem e envia passagens automaticamente. Acesso remoto via AnyDesk usando IP Zero Tier. Exemplo: BA601C (AnyDesk: 1914407146, IP: 172.27.4.1). (2) Tablet — dispositivo móvel usado em operações de blitz. Opera offline durante a fiscalização e sincroniza ao retornar à base. A Configuração da faixa é feita pelo operador no próprio tablet Configurações → Configuração do Equipamento Exemplo: BA604C (AnyDesk: 1062093213). A principal diferença operacional: MiniPCs têm faixa fixa e enviam em tempo real; Tablets precisam de Configuração manual da faixa antes de cada operação e sincronizam posteriormente.",
+      "steps": [
+        "MiniPC: verificar status em Operações → Monitoramento Online",
+        "MiniPC: acesso remoto via AnyDesk → IP Zero Tier na porta 80",
+        "MiniPC: faixa configurada na instalação, raramente muda",
+        "Tablet: configurar faixa antes de cada operação Configurações → Configuração do Equipamento",
+        "Tablet: sincronizar ao voltar à base conectando à internet",
+        "Tablet: verificar volume pendente no Mapa de Fluxo de Passagens",
+        "Ambos: verificar se a faixa no Equipamento corresponde à faixa no AxHub"
+      ],
+      "docUrl": "cadastros-basicos/tipos-Equipamentos",
+      "related": [
+        "tipos-Equipamentos",
+        "config-faixa-tablet",
+        "config-faixa-minipc"
+      ],
+      "dbTables": [
+        "TBEquipamentos"
+      ]
+    },
+    {
+      "id": "passagens-faixa-errada",
+      "module": "Operações",
+      "title": "Passagens Capturadas com Faixa Errada",
+      "keywords": [
+        "passagem errada",
+        "faixa errada",
+        "passagem não sobe",
+        "passagem presa",
+        "corrigir passagem",
+        "volume grande",
+        "perda dados",
+        "faixa inexistente"
+      ],
+      "path": "Menu lateral → Operações → Passagens / Infrações → Triagem",
+      "content": "Quando um Equipamento (especialmente tablet) captura passagens com um número de faixa que não existe no cadastro da operação (ex: faixa 12 quando só existem 1, 2 e 3), essas passagens ficam 'presas' — não são importadas para o sistema. Ao corrigir a faixa no Equipamento apenas as NOVAS capturas serão enviadas corretamente. As passagens já capturadas com faixa errada precisam ser corrigidas manualmente, uma a uma, o que pode ser inviável para grandes volumes (ex: 3.766 passagens em um dia). Nesses casos, o gestor deve decidir: (a) corrigir manualmente as passagens importantes, (b) descartar o volume e manter somente as novas capturas corretas. Para evitar esse problema: SEMPRE verificar a faixa no Equipamento antes de iniciar a operação.",
+      "steps": [
+        "Identifique quantas passagens foram capturadas com faixa errada",
+        "Verifique no tablet: Passagens → coluna 'Faixa' para ver o número incorreto",
+        "Decida com o gestor: corrigir manualmente ou descartar",
+        "Se corrigir: cada passagem precisa ser editada individualmente — viável apenas para volumes pequenos",
+        "Se descartar: apenas corrija a faixa no Equipamento para capturar corretamente daqui em diante",
+        "Prevenção: verificar a faixa ANTES de cada operação usando o checklist de blitz"
+      ],
+      "docUrl": "operacoes/faixas",
+      "related": [
+        "faixa-errada-tablet-blitz",
+        "config-faixa-tablet",
+        "conceito-faixa"
+      ],
+      "dbTables": [
+        "TBImagemPassagens"
+      ]
+    },
+    {
+      "id": "operador-campo-orientacao",
+      "module": "Operações",
+      "title": "Orientação para Operador de Campo",
+      "keywords": [
+        "operador",
+        "campo",
+        "orientação",
+        "treinamento",
+        "como operar",
+        "equipe campo",
+        "wellington",
+        "anderson",
+        "gestor",
+        "responsável"
+      ],
+      "path": "Procedimento operacional",
+      "content": "O operador de campo é responsável por: (1) Configurar a faixa correta no tablet antes de cada operação — perguntando ao gestor qual faixa usar para o endereço da blitz. (2) Nunca inventar números de faixa (ex: '12' pensando que é 'faixa 1 e 2'). (3) Ao retornar à base, conectar o tablet à internet e aguardar a sincronização completa. (4) Se mudar de endereço durante a operação, alterar a faixa no tablet antes de continuar capturando. O gestor do contrato é quem: cadastra e altera faixas no AxHub, informa ao operador qual faixa usar em cada endereço, e decide sobre passagens com faixa errada. O suporte Axion: orienta sobre Configuração reinicia serviços travados via AnyDesk, e válida se os dados estão chegando ao sistema.",
+      "steps": [
+        "ANTES: Pergunte ao gestor qual faixa (número) usar para o endereço da operação",
+        "ANTES: No tablet → Configurações → Configuração do Equipamento → confirme o Nº da Faixa",
+        "ANTES: Se o endereço não tem faixa cadastrada, avise o gestor para criar no AxHub",
+        "DURANTE: Se mudar de endereço, altere a faixa no tablet antes de continuar",
+        "DURANTE: Não se preocupe com 'offline' — o tablet armazena localmente",
+        "APÓS: Conecte à internet na base e aguarde sincronizar completamente",
+        "APÓS: Não desligue o tablet antes do sincronismo terminar",
+        "EM CASO DE DÚVIDA: Contate o gestor do contrato ou o suporte Axion"
+      ],
+      "docUrl": "operacoes/cadastro-operacoes",
+      "related": [
+        "checklist-operacao-blitz",
+        "config-faixa-tablet",
+        "tipos-Equipamento-blitz"
+      ]
+    },
+    {
+      "id": "acesso-remoto-anydesk",
+      "module": "Equipamentos",
+      "title": "Acesso Remoto via AnyDesk",
+      "keywords": [
+        "anydesk",
+        "acesso remoto",
+        "zero tier",
+        "ip",
+        "conexão",
+        "reiniciar serviço",
+        "travou",
+        "não conecta",
+        "internet lenta"
+      ],
+      "path": "AnyDesk → conectar usando ID ou Alias do Equipamento",
+      "content": "O AnyDesk é a ferramenta utilizada para acesso remoto aos Equipamentos AxHub. Para MiniPCs, o acesso é feito via IP Zero Tier (rede privada) na porta 80. Para tablets, o acesso é direto pelo ID do AnyDesk, mas depende do tablet estar conectado à internet. Quando o AnyDesk mostra 'offline', significa que o Equipamento não tem internet ou está desligado — nesses casos, é necessário pedir ao operador em campo que verifique energia e rede. O acesso remoto é essencial para: reiniciar o serviço de envio de passagens quando trava, verificar a Configuração de faixa, diagnosticar problemas de sincronismo e conferir o status do Equipamento Se a internet estiver muito lenta, o AnyDesk pode travar ou demorar — considere pedir ao operador que envie screenshots por WhatsApp para diagnóstico alternativo.",
+      "steps": [
+        "Abra o AnyDesk e digite o ID ou Alias do Equipamento",
+        "Para MiniPC: use o IP Zero Tier (ex: 172.27.4.1) na porta 80",
+        "Para Tablet: use o ID numérico do AnyDesk (ex: 1062093213)",
+        "Se conectar: verifique o serviço de envio, a faixa configurada e a internet",
+        "Se o serviço de passagens travou: reinicie-o via linha de comando",
+        "Se não conectar (offline): peça ao operador que verifique se o Equipamento está ligado e tem internet",
+        "Alternativa se AnyDesk não funciona: peça ao operador fotos/screenshots via WhatsApp para diagnóstico visual"
+      ],
+      "docUrl": null,
+      "related": [
+        "Equipamento-offline",
+        "sincronismo-Equipamento-blitz"
+      ]
+    },
+    {
+      "id": "navegacao-sistema",
+      "module": "Acesso",
+      "title": "Navegação no Sistema AxHub",
+      "keywords": [
+        "menu",
+        "navegação",
+        "módulos",
+        "onde fica",
+        "estrutura",
+        "menu lateral",
+        "tela inicial"
+      ],
+      "path": "Menu lateral (barra esquerda do sistema)",
+      "content": "O AxHub é organizado em módulos acessíveis pelo menu lateral esquerdo. Os principais módulos são: Infrações (triagem, auditoria, exportação, consulta), Operações (cadastro, aferições, monitoramento, faixas, eventos), Cadastros Básicos Equipamentos tipos, modelos, fabricantes, grupos), Veículos (tipos, marcas, modelos, cores, municípios, classificações), Balança (pesagem, tickets, reclassificação), Cronotacógrafo (triagem e consulta), Medição (contratos, índices, interrupções), Relatórios (fluxo, passagens, Infrações processamento, Power BI), Administração Configurações enquadramentos, tarjas, layouts, webhooks, arcos) e Controle de Acesso Usuários permissões, perfis, logs). Cada módulo expande em submenus ao clicar.",
+      "steps": [
+        "O menu lateral esquerdo mostra todos os módulos do sistema",
+        "Clique no ícone do módulo desejado para expandir os submenus",
+        "Use a Dashboard (tela inicial) para visão geral de indicadores e alertas",
+        "A barra superior mostra o nome do Usuário logado e opções de Configuração"
+      ],
+      "docUrl": "primeiros-passos/navegacao",
+      "related": [
+        "Dashboard",
+        "Login-acesso"
+      ]
+    },
+    {
+      "id": "config-sistema",
+      "module": "Administração",
+      "title": "Configurações do Sistema",
+      "keywords": [
+        "Configurações",
+        "sistema",
+        "parâmetros",
+        "prazo triagem",
+        "tempo Análise",
+        "meta diária",
+        "ajustes gerais"
+      ],
+      "path": "Menu lateral → Administração → Configurações do Sistema",
+      "content": "As Configurações do Sistema definem parâmetros globais do AxHub: Prazo para Triagem (define o limite de dias para o operador analisar as Infrações Tempo de Análise de Imagem (tempo mínimo esperado por imagem na triagem), Motivo de Descarte padrão, Exigências de Dados obrigatórios e Meta diária de processamento. Essas Configurações afetam o fluxo de trabalho de todos os operadores e devem ser ajustadas pelo administrador do sistema.",
+      "steps": [
+        "Acesse Administração → Configurações do Sistema",
+        "Ajuste o 'Prazo para Triagem' conforme a necessidade do contrato",
+        "Configure o 'Tempo de Análise de Imagem' mínimo por Infração",
+        "Defina a meta diária de processamento por operador",
+        "Clique em Salvar para aplicar as alterações"
+      ],
+      "docUrl": "administracao/configuracoes-sistema",
+      "related": [
+        "webhooks",
+        "config-layout"
+      ],
+      "dbTables": [
+        "TBConfiguracoes"
+      ]
+    },
+    {
+      "id": "formas-autuacao",
+      "module": "Administração",
+      "title": "Formas de Autuação",
+      "keywords": [
+        "forma autuação",
+        "autuação",
+        "tipo autuação",
+        "cadastro autuação"
+      ],
+      "path": "Menu lateral → Administração → Formas de Autuação",
+      "content": "As Formas de Autuação definem como a Infração foi registrada (automática, manual, etc.). São cadastradas em Administração → Formas de Autuação com Código, Descrição e status Ativo. São usadas no processo de exportação de Infrações para o órgão autuador.",
+      "steps": [
+        "Acesse Administração → Formas de Autuação",
+        "Clique em 'Novo' para adicionar uma forma de autuação",
+        "Preencha Código e Descrição",
+        "Clique em Salvar"
+      ],
+      "docUrl": "administracao/formas-autuacao",
+      "related": [
+        "config-enquadramento",
+        "sequenciais-infracoes"
+      ],
+      "dbTables": [
+        "TBFormaAtuacao"
+      ]
+    },
+    {
+      "id": "motivos-descarte",
+      "module": "Administração",
+      "title": "Motivos de Descarte",
+      "keywords": [
+        "motivo descarte",
+        "descarte",
+        "por que descartar",
+        "imagem ilegível",
+        "placa não identificada",
+        "justificativa descarte"
+      ],
+      "path": "Menu lateral → Administração → Motivos de Descarte",
+      "content": "Os Motivos de Descarte são as justificativas utilizadas quando uma Infração é descartada durante a triagem. Exemplos comuns: 'Imagem ilegível', 'Placa não identificada', Veículo de emergência', Equipamento em teste'. São cadastrados em Administração → Motivos de Descarte. Ao descartar uma Infração na triagem, o operador deve selecionar um destes motivos, garantindo rastreabilidade do descarte.",
+      "steps": [
+        "Acesse Administração → Motivos de Descarte",
+        "Clique em 'Novo' para adicionar um motivo",
+        "Preencha Código e Descrição (ex: 'Placa não identificada')",
+        "Marque como Ativo e salve",
+        "Na triagem, o operador seleciona o motivo ao descartar uma Infração"
+      ],
+      "docUrl": "administracao/motivos-descartes",
+      "related": [
+        "infracoes-descartadas",
+        "triagem-infracoes",
+        "reabrir-infracao"
+      ],
+      "dbTables": [
+        "TBInfracoes"
+      ]
+    },
+    {
+      "id": "sequenciais-infracoes",
+      "module": "Administração",
+      "title": "Sequenciais de Infrações",
+      "keywords": [
+        "sequencial",
+        "numeração",
+        "auto Infração",
+        "número AIT",
+        "faixa sequencial",
+        "esgotado"
+      ],
+      "path": "Menu lateral → Administração → Sequenciais de Infrações",
+      "content": "Os Sequenciais de Infrações controlam a numeração dos autos de Infração (AIT). Cada órgão autuador recebe uma faixa sequencial (início/fim) que define o intervalo de números disponíveis. Quando o sequencial se aproxima do fim, o status muda para 'Esgotado' e é necessário solicitar nova faixa ao órgão. Monitore regularmente para evitar interrupção na exportação de Infrações",
+      "steps": [
+        "Acesse Administração → Sequenciais de Infrações",
+        "Verifique o 'Sequencial Atual' e a 'Faixa Fim' para identificar quantos números restam",
+        "Se o status estiver 'Esgotado', solicite nova faixa ao órgão autuador",
+        "Para cadastrar novo sequencial: clique em 'Novo', preencha Órgão, Faixa Início e Faixa Fim",
+        "Salve e o sistema usará automaticamente na próxima exportação"
+      ],
+      "docUrl": "administracao/sequenciais-infracoes",
+      "related": [
+        "exportar-infracoes",
+        "formas-autuacao"
+      ],
+      "dbTables": [
+        "TBInfracoes"
+      ]
+    },
+    {
+      "id": "tipos-imagens",
+      "module": "Administração",
+      "title": "Tipos de Imagens",
+      "keywords": [
+        "tipo imagem",
+        "panorâmica",
+        "zoom placa",
+        "contexto",
+        "imagem obrigatória",
+        "imagem Infração"
+      ],
+      "path": "Menu lateral → Administração → Tipos de Imagens",
+      "content": "Os Tipos de Imagens definem as categorias de imagem capturadas pelos Equipamentos Panorâmica (visão geral do local), Zoom Placa (ampliação da placa), Contexto (imagem complementar). Cada tipo pode ser marcado como 'Obrigatória' — se obrigatória, a Infração não será exportada sem essa imagem. Erros de exportação com código 422 (imagens ausentes) geralmente indicam que faltam imagens de tipos marcados como obrigatórios.",
+      "steps": [
+        "Acesse Administração → Tipos de Imagens",
+        "Verifique quais tipos estão marcados como 'Obrigatória'",
+        "Para adicionar: clique em 'Novo', preencha Código e Descrição",
+        "Marque 'Obrigatória' se a imagem deve existir para exportação",
+        "Tipos obrigatórios: se faltarem, a exportação gerará erro 422"
+      ],
+      "docUrl": "administracao/tipos-imagens",
+      "related": [
+        "processamento-imagens",
+        "tarja-imagem-duplicada",
+        "erro-exportacao-imagens-obrigatorias"
+      ],
+      "dbTables": [
+        "TBImagens"
+      ]
+    },
+    {
+      "id": "cadastro-Equipamentos-basico",
+      "module": "Cadastros Básicos",
+      "title": "Cadastro de Equipamentos",
+      "keywords": [
+        "Equipamento",
+        "cadastrar Equipamento",
+        "radar",
+        "câmera",
+        "número série",
+        "fabricante",
+        "modelo",
+        "fixo",
+        "móvel",
+        "modo operação"
+      ],
+      "path": "Menu lateral → Cadastros Básicos → Equipamentos",
+      "content": "O cadastro de Equipamentos é o registro central de todos os dispositivos de fiscalização gerenciados pelo AxHub. Cada Equipamento possui: Número de Série, Código (identificador único como BA601C), Fabricante, Modelo, Tipo (Radar Fixo, OCR, Portátil etc.), Modo de Operação (Fixo ou Móvel) e Grupo de Equipamentos O cadastro é essencial pois vincula o Equipamento às operações, faixas e Infrações Sem cadastro correto, as passagens não são recebidas pelo sistema.",
+      "steps": [
+        "Acesse Cadastros Básicos → Equipamentos",
+        "Clique em 'Novo' para cadastrar um Equipamento",
+        "Preencha: Nº Série, Código, Fabricante, Modelo e Tipo",
+        "Selecione o Modo de Operação: Fixo (ponto fixo) ou Móvel (blitz)",
+        "Vincule a um Grupo de Equipamentos para organização",
+        "Salve o cadastro",
+        "Após cadastrar, vincule a uma Operação em Operações → Cadastro de Operações"
+      ],
+      "docUrl": "cadastros-basicos/Equipamentos",
+      "related": [
+        "cadastrar-Equipamento",
+        "tipos-Equipamentos",
+        "grupos-Equipamentos"
+      ],
+      "dbTables": [
+        "TBEquipamentos"
+      ]
+    },
+    {
+      "id": "tipos-Equipamentos",
+      "module": "Cadastros Básicos",
+      "title": "Tipos de Equipamentos",
+      "keywords": [
+        "tipo Equipamento",
+        "lombada eletrônica",
+        "ocr",
+        "radar fixo",
+        "radar misto",
+        "radar portátil",
+        "categoria Equipamento"
+      ],
+      "path": "Menu lateral → Cadastros Básicos → Tipos de Equipamentos",
+      "content": "Os Tipos de Equipamentos classificam as categorias de dispositivos suportados pelo AxHub: LOMBADA ELETRÔNICA (controle de velocidade com sensores no solo), OCR (reconhecimento óptico de caracteres para leitura de placas), RADAR FIXO (medição de velocidade em ponto fixo), RADAR MISTO (velocidade + avanço de sinal), RADAR PORTÁTIL Equipamento móvel de blitz). O tipo define quais funcionalidades são aplicáveis ao Equipamento",
+      "steps": [
+        "Acesse Cadastros Básicos → Tipos de Equipamentos",
+        "Visualize os tipos disponíveis ou clique em 'Novo' para adicionar",
+        "Preencha Código e Descrição do tipo",
+        "O tipo é selecionado ao cadastrar um Equipamento em Cadastros Básicos → Equipamentos"
+      ],
+      "docUrl": "cadastros-basicos/tipos-Equipamentos",
+      "related": [
+        "grupos-Equipamentos",
+        "cadastrar-Equipamento",
+        "cadastro-Equipamentos-basico"
+      ],
+      "dbTables": [
+        "TBEquipamentos"
+      ]
+    },
+    {
+      "id": "grupos-Equipamentos",
+      "module": "Cadastros Básicos",
+      "title": "Grupos de Equipamentos",
+      "keywords": [
+        "grupo Equipamento",
+        "organizar Equipamentos",
+        "projeto",
+        "cliente",
+        "região",
+        "cor Dashboard"
+      ],
+      "path": "Menu lateral → Cadastros Básicos → Grupos de Equipamentos",
+      "content": "Grupos de Equipamentos permitem organizar logicamente os Equipamentos por projeto, cliente ou região. Cada grupo pode ter uma cor identificadora que aparece no Dashboard Configurações Nome, Cor, Desabilitar Monitoramento, Desabilitar Limite Horas Importação. Útil para separar Equipamentos de contratos diferentes.",
+      "steps": [
+        "Acesse Cadastros Básicos → Grupos de Equipamentos",
+        "Clique em 'Novo' para criar um grupo",
+        "Preencha Nome e selecione uma Cor identificadora",
+        "Configure opções: monitoramento e limites de importação",
+        "Ao cadastrar Equipamentos vincule ao grupo correspondente"
+      ],
+      "docUrl": "cadastros-basicos/grupos-Equipamentos",
+      "related": [
+        "tipos-Equipamentos",
+        "cadastrar-Equipamento"
+      ],
+      "dbTables": [
+        "TBGrupoEquipamentos"
+      ]
+    },
+    {
+      "id": "perfis-acesso",
+      "module": "Controle de Acesso",
+      "title": "Perfis de Acesso",
+      "keywords": [
+        "perfil",
+        "grupo permissões",
+        "papel",
+        "role",
+        "nível acesso",
+        "administrador",
+        "operador",
+        "auditor"
+      ],
+      "path": "Menu lateral → Controle de Acesso → Perfis de Acesso",
+      "content": "Perfis de Acesso agrupam conjuntos de permissões atribuíveis a Usuários Exemplos: 'Administrador' (acesso total), 'Operador de Triagem' (apenas triagem e consulta), 'Auditor' (auditoria e Relatórios 'Gestor' (operações e Relatórios Ao criar um Usuário basta atribuir o perfil adequado. Alterações no perfil afetam todos os Usuários vinculados.",
+      "steps": [
+        "Acesse Controle de Acesso → Perfis de Acesso",
+        "Clique em 'Novo' para criar um perfil",
+        "Defina o Nome e Descrição (ex: 'Operador Triagem')",
+        "Marque as permissões desejadas por módulo e funcionalidade",
+        "Salve o perfil",
+        "Ao criar/editar um Usuário selecione este perfil"
+      ],
+      "docUrl": "controle-acesso/perfis-acesso",
+      "related": [
+        "permissoes",
+        "criar-usuario",
+        "logs-acesso"
+      ]
+    },
+    {
+      "id": "logs-acesso",
+      "module": "Controle de Acesso",
+      "title": "Logs de Acesso ao Sistema",
+      "keywords": [
+        "log",
+        "histórico acesso",
+        "auditoria acesso",
+        "quem acessou",
+        "registro Login",
+        "ação Usuário"
+      ],
+      "path": "Menu lateral → Controle de Acesso → Logs de Acesso",
+      "content": "Os Logs de Acesso registram todas as ações dos Usuários no sistema: logins, logouts, alterações em cadastros, triagens realizadas, exportações efetuadas. Cada registro mostra Data/Hora, Usuário IP de origem, Ação realizada e Módulo afetado. Use para investigar alterações, verificar acessos e auditar ações no sistema.",
+      "steps": [
+        "Acesse Controle de Acesso → Logs de Acesso",
+        "Filtre por período, Usuário ou tipo de ação",
+        "Consulte o histórico de atividades do Usuário",
+        "Use para investigar alterações ou acessos suspeitos"
+      ],
+      "docUrl": "controle-acesso/logs-acesso",
+      "related": [
+        "criar-usuario",
+        "restricao-ip"
+      ],
+      "dbTables": [
+        "TBHorariosAcessos"
+      ]
+    },
+    {
+      "id": "restricao-ip",
+      "module": "Controle de Acesso",
+      "title": "Restrição de Acesso por IP",
+      "keywords": [
+        "ip",
+        "restrição",
+        "bloquear ip",
+        "liberar ip",
+        "segurança",
+        "acesso restrito"
+      ],
+      "path": "Menu lateral → Controle de Acesso → Acessos por IP",
+      "content": "A funcionalidade de Acessos por IP permite restringir o acesso ao sistema baseado no endereço IP. Crie regras de 'Permitir' (whitelist) ou 'Bloquear' (blacklist) para IPs específicos. Útil para garantir acesso apenas da rede corporativa ou bloquear IPs suspeitos.",
+      "steps": [
+        "Acesse Controle de Acesso → Acessos por IP",
+        "Clique em 'Novo' para adicionar uma regra",
+        "Informe o Endereço IP e selecione o Tipo: Permitir ou Bloquear",
+        "Opcionalmente vincule a um Usuário específico",
+        "Salve — a regra entra em vigor imediatamente"
+      ],
+      "docUrl": "controle-acesso/acessos-por-ip",
+      "related": [
+        "acesso-bloqueado",
+        "logs-acesso"
+      ],
+      "dbTables": [
+        "TBAcessoPorIps"
+      ]
+    },
+    {
+      "id": "consulta-cronotacografo",
+      "module": "Cronotacógrafo",
+      "title": "Consultar Registros de Cronotacógrafo",
+      "keywords": [
+        "cronotacógrafo",
+        "consulta",
+        "histórico",
+        "jornada motorista",
+        "velocidade",
+        "registro"
+      ],
+      "path": "Menu lateral → Cronotacógrafo → Consulta",
+      "content": "A consulta de cronotacógrafo permite verificar o histórico de registros processados. Filtre por período, placa, Equipamento e status. Os resultados mostram: Data/Hora, Veículo Velocidade registrada e Resultado da Análise",
+      "steps": [
+        "Acesse Cronotacógrafo → Consulta",
+        "Defina os filtros: Período, Placa e/ou Equipamento",
+        "Clique em Pesquisar",
+        "Use Análise (com acento) os resultados: Data/Hora, Velocidade, Resultado"
+      ],
+      "docUrl": "cronotacografo/consulta",
+      "related": [
+        "cronotacografo"
+      ],
+      "dbTables": [
+        "TBDadosCronotacografos"
+      ]
+    },
+    {
+      "id": "eventos-Equipamentos",
+      "module": "Operações",
+      "title": "Eventos de Equipamentos",
+      "keywords": [
+        "evento",
+        "ocorrência",
+        "falha Equipamento",
+        "manutenção",
+        "vandalismo",
+        "registro evento",
+        "histórico Equipamento"
+      ],
+      "path": "Menu lateral → Operações → Eventos de Equipamentos",
+      "content": "A tela de Eventos permite registrar e consultar ocorrências dos Equipamentos falhas, manutenções, vandalismo, troca de componentes, interrupções. Cada evento registra: Equipamento Tipo (Falha, Manutenção etc.), Data/Hora, Descrição e Responsável. Essencial para manter histórico e justificar períodos sem operação nas medições.",
+      "steps": [
+        "Acesse Operações → Eventos de Equipamentos",
+        "Filtre por Equipamento e/ou período",
+        "Para registrar: clique em 'Novo'",
+        "Selecione Equipamento Tipo de Evento, Data/Hora",
+        "Preencha Descrição detalhada e Responsável",
+        "Salve — o registro fica vinculado ao Equipamento"
+      ],
+      "docUrl": "operacoes/eventos-Equipamentos",
+      "related": [
+        "monitoramento-online",
+        "Equipamento-offline"
+      ],
+      "dbTables": [
+        "TBEventosEquipamentos"
+      ]
+    },
+    {
+      "id": "contratos-medicao",
+      "module": "Medição",
+      "title": "Contratos de Medição",
+      "keywords": [
+        "contrato",
+        "medição",
+        "órgão",
+        "vigência",
+        "cadastro contrato",
+        "vincular Equipamento"
+      ],
+      "path": "Menu lateral → Medição → Contratos",
+      "content": "Os Contratos vinculam operações de fiscalização aos termos contratuais com o órgão autuador. Cada contrato possui: Número, Órgão contratante, Vigência (Início/Fim), Equipamentos vinculados e Status (Ativo, Encerrado, Suspenso). São a base para gerar medições de desempenho e calcular índices de performance.",
+      "steps": [
+        "Acesse Medição → Contratos",
+        "Clique em 'Novo' para cadastrar um contrato",
+        "Preencha: Número, Órgão, Data de Início e Fim",
+        "Vincule os Equipamentos do contrato",
+        "Defina os índices de performance exigidos",
+        "Salve o contrato"
+      ],
+      "docUrl": "medicoes/contratos",
+      "related": [
+        "gerar-medicao",
+        "indices-performance"
+      ],
+      "dbTables": [
+        "TBContratos",
+        "TBContratosFaixas",
+        "TBAjustesContratuais"
+      ]
+    },
+    {
+      "id": "indices-performance",
+      "module": "Medição",
+      "title": "Índices de Performance",
+      "keywords": [
+        "índice",
+        "performance",
+        "disponibilidade",
+        "uptime",
+        "meta",
+        "indicador",
+        "KPI"
+      ],
+      "path": "Menu lateral → Medição → Índices de Performance",
+      "content": "Os Índices de Performance definem metas contratuais: Disponibilidade (percentual de tempo operacional), Uptime (tempo efetivo de operação). Cada índice possui: Contrato vinculado, Indicador, Meta (%) e Fórmula. O AxHub calcula automaticamente com base nos dados operacionais dos Equipamentos",
+      "steps": [
+        "Acesse Medição → Índices de Performance",
+        "Selecione o contrato para ver os índices",
+        "Para adicionar: clique em 'Novo', selecione Contrato e Indicador",
+        "Configure a Meta percentual",
+        "O sistema calcula automaticamente"
+      ],
+      "docUrl": "medicoes/indices-performance",
+      "related": [
+        "contratos-medicao",
+        "gerar-medicao"
+      ],
+      "dbTables": [
+        "TBIndicesPerformances"
+      ]
+    },
+    {
+      "id": "postos-pesagem",
+      "module": "Balança",
+      "title": "Postos de Pesagem",
+      "keywords": [
+        "posto",
+        "pesagem",
+        "balança",
+        "localização",
+        "estática",
+        "dinâmica"
+      ],
+      "path": "Menu lateral → Balança → Postos",
+      "content": "Postos de Pesagem são os locais físicos onde Veículos são pesados. Cada posto possui: Nome, Localização, Tipo de Balança (Estática ou Dinâmica) e Status. O cadastro é pré-requisito para registrar tickets de pesagem.",
+      "steps": [
+        "Acesse Balança → Postos",
+        "Clique em 'Novo' para cadastrar um posto",
+        "Preencha Nome, Localização e Tipo de Balança",
+        "Marque como Ativo e salve"
+      ],
+      "docUrl": "pesagem/postos",
+      "related": [
+        "ticket-pesagem",
+        "liberar-tickets-pesagem"
+      ],
+      "dbTables": [
+        "TBDadosPesagens"
+      ]
+    },
+    {
+      "id": "liberar-tickets-pesagem",
+      "module": "Balança",
+      "title": "Liberar Tickets para Pesagem",
+      "keywords": [
+        "liberar",
+        "ticket",
+        "repesagem",
+        "nova pesagem"
+      ],
+      "path": "Menu lateral → Balança → Liberar Tickets",
+      "content": "Permite autorizar nova pesagem quando: pesagem anterior teve problema técnico, Veículo precisa ser repesado após descarga parcial, ou houve contestação do resultado.",
+      "steps": [
+        "Acesse Balança → Liberar Tickets",
+        "Informe o Número do Ticket a ser liberado",
+        "Selecione o Motivo da liberação",
+        "Confirme — Veículo poderá ser pesado novamente"
+      ],
+      "docUrl": "pesagem/liberar-pesagem",
+      "related": [
+        "tickets-abertos-pesagem",
+        "ticket-pesagem"
+      ],
+      "dbTables": [
+        "TBDadosPesagens"
+      ]
+    },
+    {
+      "id": "tickets-abertos-pesagem",
+      "module": "Balança",
+      "title": "Tickets de Pesagem Abertos",
+      "keywords": [
+        "ticket aberto",
+        "pesagem pendente",
+        "aguardando",
+        "Veículo na balança"
+      ],
+      "path": "Menu lateral → Balança → Tickets Abertos",
+      "content": "Exibe tickets de pesagem não finalizados. Cada ticket mostra: Número, Placa, Data/Hora, Peso Bruto e Status. Tickets abertos há muito tempo podem indicar problemas no processo de pesagem.",
+      "steps": [
+        "Acesse Balança → Tickets Abertos",
+        "Visualize tickets pendentes",
+        "Clique em um ticket para ver detalhes e finalizar",
+        "Se preso: verifique balança e conexão do sistema"
+      ],
+      "docUrl": "pesagem/ticket-aberto",
+      "related": [
+        "ticket-pesagem",
+        "liberar-tickets-pesagem"
+      ],
+      "dbTables": [
+        "TBDadosPesagens"
+      ]
+    },
+    {
+      "id": "relatorio-infracoes",
+      "module": "Relatórios",
+      "title": "Relatório de Infrações",
+      "keywords": [
+        "Relatório Infrações",
+        "Infrações processadas",
+        "exportadas",
+        "descartadas",
+        "por período",
+        "por Equipamento"
+      ],
+      "path": "Menu lateral → Relatórios → Relatório de Infrações",
+      "content": "Gera Relatórios detalhados das Infrações processadas. Filtre por: Período, Equipamento Enquadramento e Status (Processada, Descartada, Exportada). Útil para acompanhar produção diária, volume de descartes e Análise por tipo de enquadramento.",
+      "steps": [
+        "Acesse Relatórios → Relatório de Infrações",
+        "Defina o período desejado",
+        "Selecione Equipamento e/ou status",
+        "Clique em 'Emitir Relatório"
+      ],
+      "docUrl": "relatorios/relatorio-infracoes",
+      "related": [
+        "consulta-infracoes",
+        "exportar-infracoes",
+        "power-bi"
+      ],
+      "dbTables": [
+        "TBInfracoes"
+      ]
+    },
+    {
+      "id": "relatorio-passagens",
+      "module": "Relatórios",
+      "title": "Relatório de Passagens",
+      "keywords": [
+        "Relatório passagens",
+        "passagens Veículos",
+        "volume passagens",
+        "por faixa",
+        "por placa"
+      ],
+      "path": "Menu lateral → Relatórios → Relatório de Passagens",
+      "content": "Visualiza todas as passagens de Veículos registradas. Filtre por: Período, Equipamento Faixa e Placa. Diferente do Relatório de Infrações este inclui TODAS as passagens — com ou sem Infração",
+      "steps": [
+        "Acesse Relatórios → Relatório de Passagens",
+        "Defina Período e Equipamento",
+        "Opcionalmente filtre por Faixa ou Placa",
+        "Clique em 'Emitir Relatório"
+      ],
+      "docUrl": "relatorios/relatorio-passagens",
+      "related": [
+        "consulta-placas",
+        "relatorio-infracoes"
+      ],
+      "dbTables": [
+        "TBImagemPassagens"
+      ]
+    },
+    {
+      "id": "processamento-imagens",
+      "module": "Relatórios",
+      "title": "Relatório de Processamento de Imagens",
+      "keywords": [
+        "processamento",
+        "imagens processadas",
+        "produtividade",
+        "por Usuário",
+        "meta diária"
+      ],
+      "path": "Menu lateral → Relatórios → Processamento de Imagens",
+      "content": "Apresenta o volume de imagens processadas, podendo detalhar por Usuário Mede a produtividade da equipe de triagem: quantas Infrações cada operador analisou, tempo médio e volume diário. Essencial para gestores avaliarem performance da equipe.",
+      "steps": [
+        "Acesse Relatórios → Processamento de Imagens",
+        "Selecione o período",
+        "Use 'Por Usuário para detalhamento individual",
+        "Compare com a meta diária das Configurações do sistema"
+      ],
+      "docUrl": "relatorios/processamento-imagens",
+      "related": [
+        "tipos-imagens",
+        "tarja-imagem-duplicada"
+      ],
+      "dbTables": [
+        "TBImagens",
+        "TBHistoricoImagens"
+      ]
+    },
+    {
+      "id": "tipos-veiculos",
+      "module": "Veículos",
+      "title": "Cadastro de Tipos de Veículos",
+      "keywords": [
+        "tipo Veículo",
+        "automóvel",
+        "caminhão",
+        "motocicleta",
+        "ônibus"
+      ],
+      "path": "Menu lateral → Veículos → Tipos de Veículos",
+      "content": "Categorizam Veículos no sistema: Automóvel, Caminhão, Motocicleta, Ônibus, Reboque. Utilizados na triagem para classificar o Veículo infrator e na pesagem para limites de peso. Cadastro: Código, Descrição, Ativo.",
+      "steps": [
+        "Acesse Veículos → Tipos de Veículos",
+        "Visualize ou clique em 'Novo' para adicionar",
+        "Preencha Código e Descrição",
+        "Marque como Ativo e salve"
+      ],
+      "docUrl": "veiculos/tipos-veiculos",
+      "related": [
+        "classificacoes-veiculos",
+        "reclassificar-veiculo"
+      ],
+      "dbTables": [
+        "TBCategoriaVeiculos"
+      ]
+    },
+    {
+      "id": "classificacoes-veiculos",
+      "module": "Veículos",
+      "title": "Classificações e Espécies de Veículos",
+      "keywords": [
+        "classificação",
+        "espécie",
+        "categoria",
+        "particular",
+        "oficial",
+        "aluguel",
+        "passageiro",
+        "carga"
+      ],
+      "path": "Menu lateral → Veículos → Classificações / Espécies / Categorias",
+      "content": "O AxHub possui três níveis de classificação: (1) Classificações — porte e uso (leve, pesado), (2) Espécies — finalidade (passageiro, carga, misto), (3) Categorias — tipo de registro (particular, oficial, aluguel, diplomático). Usados na triagem e pesagem para preencher dados do Veículo",
+      "steps": [
+        "Acesse Veículos → Classificações, Espécies ou Categorias",
+        "Cada cadastro: Código, Descrição, Ativo",
+        "Para adicionar: clique em 'Novo', preencha e salve",
+        "São usados automaticamente na triagem e pesagem"
+      ],
+      "docUrl": "veiculos/classificacoes-veiculos",
+      "related": [
+        "tipos-veiculos",
+        "reclassificar-veiculo"
+      ],
+      "dbTables": [
+        "TBClassificacoesVeiculos"
+      ]
+    },
+    {
+      "id": "triagem-passo-a-passo",
+      "module": "Infrações",
+      "title": "Como Fazer Triagem Passo a Passo",
+      "keywords": [
+        "triagem",
+        "passo a passo",
+        "como triar",
+        "processar Infração",
+        "analisar imagem",
+        "aprovar",
+        "descartar",
+        "avaliar depois"
+      ],
+      "path": "Menu lateral → Infrações → Triagem",
+      "content": "A triagem é a Análise humana das Infrações capturadas. O operador visualiza as imagens e decide: Processar (aprovar), Descartar (rejeitar com motivo) ou Avaliar Depois (pular). O Use Dashboard esquerdo mostra imagens e dados da passagem, o direito mostra campos para preenchimento: Placa, Marca/Modelo, Tipo, Cor, Município, Velocidade Medida e Considerada.",
+      "steps": [
+        "Acesse Infrações → Triagem",
+        "O sistema exibe a próxima Infração pendente",
+        "Análise as imagens: placa legível e Infração válida?",
+        "Preencha dados do Veículo Placa, Marca, Modelo, Tipo, Cor",
+        "Verifique Velocidade Medida e Considerada",
+        "Infração válida: clique em 'Processar' (botão verde)",
+        "Rejeitar: selecione Motivo de Descarte e clique em 'Descartar'",
+        "Precisa mais tempo: clique em 'Avaliar Depois'"
+      ],
+      "docUrl": "infracoes/triagem",
+      "related": [
+        "triagem-infracoes",
+        "infracao-nao-aparece",
+        "motivos-descarte"
+      ],
+      "dbTables": [
+        "TBInfracoes",
+        "TBImagens"
+      ]
+    },
+    {
+      "id": "exportacao-lotes",
+      "module": "Infrações",
+      "title": "Como Exportar Lotes de Infrações",
+      "keywords": [
+        "exportar",
+        "lote",
+        "enviar",
+        "órgão autuador",
+        "DETRAN",
+        "DER",
+        "gerar lote",
+        "status exportação"
+      ],
+      "path": "Menu lateral → Infrações → Exportação",
+      "content": "A exportação envia Infrações processadas ao órgão autuador (DETRAN, DER). Lotes têm status: Pendente, Enviado, Aceito ou Erro. Erros comuns: código do município divergente, imagens ausentes, dados incompletos. Corrija a causa e reprocesse o lote.",
+      "steps": [
+        "Acesse Infrações → Exportação",
+        "Filtre por período e status",
+        "Verifique o status de cada lote",
+        "Se Erro: abra para ver a mensagem detalhada",
+        "Corrija a causa e reprocesse o lote",
+        "Acompanhe até status 'Aceito'"
+      ],
+      "docUrl": "infracoes/exportacao",
+      "related": [
+        "exportar-infracoes",
+        "erro-exportacao-uf-municipio",
+        "erro-exportacao-imagens-obrigatorias"
+      ],
+      "dbTables": [
+        "TBInfracoes"
+      ]
+    },
+    {
+      "id": "regioes",
+      "module": "Administração",
+      "title": "Cadastro de Regiões",
+      "keywords": [
+        "região",
+        "regional",
+        "área",
+        "zona",
+        "geográfica"
+      ],
+      "path": "Menu lateral → Administração → Regiões",
+      "content": "As Regiões organizam geograficamente as operações. Úteis para agrupar Equipamentos por área e facilitar gestão por localidade.",
+      "steps": [
+        "Acesse Administração → Regiões",
+        "Clique em 'Novo' para adicionar",
+        "Preencha o Nome da região",
+        "Salve e vincule às operações"
+      ],
+      "docUrl": "administracao/regioes",
+      "related": [
+        "arcos",
+        "cadastro-operacoes"
+      ]
+    },
+    {
+      "id": "motivos-descarte-catalogo",
+      "module": "Infrações",
+      "title": "Catálogo de Motivos de Descarte",
+      "keywords": [
+        "motivo descarte",
+        "catálogo descarte",
+        "por que descartou",
+        "razão descarte",
+        "tipos descarte",
+        "lista motivos",
+        "descarte automático",
+        "descarte manual"
+      ],
+      "path": "Menu lateral → Administração → Motivos de Descarte",
+      "content": "O catálogo de motivos de descarte define todas as razões possíveis para descartar uma Infração na triagem. Motivos podem ser de tipo 'Descarte' ou 'Não-Descarte' e são usados tanto em descartes manuais (triagem) quanto automáticos (exceções).",
+      "steps": [
+        "Acesse Administração → Motivos de Descarte",
+        "Consulte a lista de motivos cadastrados (código + descrição)",
+        "Para criar novo motivo: clique 'Novo' → preencha Código, Descrição e Tipo",
+        "Motivos podem ser habilitados/desabilitados sem excluir",
+        "Vincule motivos aos tipos de Infração em 'Tipo Infração por Motivo'"
+      ],
+      "docUrl": "administracao/motivos-descarte",
+      "related": [
+        "triagem-infracoes",
+        "infracoes-descartadas",
+        "excecoes"
+      ],
+      "dbTables": [
+        "TBMotivosDescartes",
+        "TBMotivoDescarteTipoInfracoes"
+      ]
+    },
+    {
+      "id": "historico-triagem",
+      "module": "Infrações",
+      "title": "Histórico de Triagem de Infrações",
+      "keywords": [
+        "histórico triagem",
+        "quem triou",
+        "quem descartou",
+        "reabertura Infração",
+        "audit trail",
+        "rastrear triagem",
+        "log triagem",
+        "alteração placa triagem"
+      ],
+      "path": "Menu lateral → Infrações → Consulta → Detalhes da Infração → Histórico",
+      "content": "Cada Infração mantém um histórico completo de todas as ações de triagem: quem validou, quem descartou, reaberturas, alterações de placa e mudanças de status. Útil para auditorias e rastrear responsabilidades.",
+      "steps": [
+        "Acesse Infrações → Consulta e localize a Infração",
+        "Clique na Infração para abrir detalhes",
+        "Verifique a seção de Histórico de Triagem",
+        "Cada registro mostra: Usuário Data/Hora, Status Anterior → Novo Status",
+        "Reaberturas e alterações de placa também aparecem no histórico"
+      ],
+      "docUrl": "infracoes/consulta",
+      "related": [
+        "triagem-infracoes",
+        "reabrir-infracao",
+        "auditoria"
+      ],
+      "dbTables": [
+        "TBHistoricoTriagens",
+        "TBTriagens"
+      ]
+    },
+    {
+      "id": "analise-triagem-produtividade",
+      "module": "Infrações",
+      "title": "Produtividade e Métricas de Triagem",
+      "keywords": [
+        "produtividade triagem",
+        "métricas triagem",
+        "descarte mais comum",
+        "top motivos descarte",
+        "Análise triagem",
+        "descarte automático percentual",
+        "tempo triagem"
+      ],
+      "path": "Menu lateral → Relatórios → Processamento por Usuário / Infrações → Consulta",
+      "content": "As métricas de triagem mostram a produtividade dos analistas, os motivos de descarte mais comuns e a proporção entre descartes manuais e automáticos. Os dados vêm de TBTriagens (DescarteAutomatico, InicioTriagem) e TBMotivosDescartes.",
+      "steps": [
+        "Para produtividade por analista: Relatórios → Processamento por Usuário",
+        "Para motivos mais comuns: Infrações → Infrações Descartadas → filtrar período",
+        "Para ver descartes automáticos: verificar campo DescarteAutomatico na consulta",
+        "Para tempo de Análise verificar Configurações → aba Triagem"
+      ],
+      "docUrl": "infracoes/triagem",
+      "related": [
+        "triagem-passo-a-passo",
+        "motivos-descarte-catalogo",
+        "infracoes-descartadas"
+      ],
+      "dbTables": [
+        "TBTriagens",
+        "TBMotivosDescartes",
+        "TBHistoricoTriagens"
+      ]
+    },
+    {
+      "id": "erro-lote-exportacao",
+      "module": "Infrações",
+      "title": "Erros em Lote de Exportação",
+      "keywords": [
+        "erro lote",
+        "lote com erro",
+        "exportação falhou",
+        "status exportação",
+        "reprocessar lote",
+        "lote pendente",
+        "mensagem erro exportação",
+        "lote não enviou"
+      ],
+      "path": "Menu lateral → Infrações → Exportação",
+      "content": "Quando um lote de exportação falha, o sistema registra a mensagem de erro e o status. Causas comuns: dados incompletos (UF/município), imagens obrigatórias ausentes, enquadramento inválido ou falha de comunicação com o órgão. Verifique o campo Mensagem no lote.",
+      "steps": [
+        "Acesse Infrações → Exportação",
+        "Filtre por StatusExportação = 'Erro' ou 'Pendente'",
+        "Clique no lote para ver a Mensagem de erro detalhada",
+        "Corrija os dados apontados (geralmente falta de campo obrigatório)",
+        "Reprocesse o lote clicando em 'Gerar novamente'"
+      ],
+      "docUrl": "infracoes/exportacao",
+      "related": [
+        "exportar-infracoes",
+        "erro-exportacao-uf-municipio",
+        "erro-exportacao-imagens-obrigatorias",
+        "erro-exportacao-lote-geral"
+      ],
+      "dbTables": [
+        "TBLoteExportacoes",
+        "TBInfracoes"
+      ]
+    },
+    {
+      "id": "erro-importacao-lote",
+      "module": "Infrações",
+      "title": "Erros na Importação de Passagens",
+      "keywords": [
+        "erro importação",
+        "importação falhou",
+        "lote importação erro",
+        "passagem não importou",
+        "arquivo entrada erro",
+        "código erro importação",
+        "fabricante erro envio"
+      ],
+      "path": "Menu lateral → Relatórios → Lote de Importação",
+      "content": "Erros de importação ocorrem quando o arquivo enviado pelo fabricante contém dados inválidos. O sistema registra cada erro com código e descrição. Verifique em Relatórios → Lote de Importação. Causas comuns: formato de arquivo errado, Equipamento não cadastrado, faixa inexistente.",
+      "steps": [
+        "Acesse Relatórios → Lote de Importação",
+        "Filtre por StatusImportação = 'Erro'",
+        "Verifique CodigoErro e Descrição do erro",
+        "Corrija o arquivo ou cadastro do Equipamento correspondente",
+        "O fabricante pode reenviar o arquivo corrigido via API"
+      ],
+      "docUrl": "relatorios/lote-importacao",
+      "related": [
+        "token-fabricante",
+        "cadastrar-Equipamento",
+        "infracao-nao-aparece"
+      ],
+      "dbTables": [
+        "TBLoteImportacoes",
+        "TBLoteImportacaoErros"
+      ]
+    },
+    {
+      "id": "ticket-pesagem-ciclo",
+      "module": "Balança",
+      "title": "Ciclo Completo do Ticket de Pesagem",
+      "keywords": [
+        "ticket pesagem completo",
+        "ciclo pesagem",
+        "ticket aberto fechado",
+        "pesagem sequencial",
+        "aferição balança",
+        "eixo pesagem",
+        "ticket preso aberto",
+        "descarte ticket"
+      ],
+      "path": "Menu lateral → Balança → Tickets Abertos / Tickets Fechados",
+      "content": "O ticket de pesagem segue: Abertura (passagem detectada) → Pesagem Veículo na balança) → Classificação (eixos/peso) → Fechamento. Tickets que não fecham ficam 'presos' e devem ser liberados manualmente. Cada ticket tem sequencial, aferição, eixos e motivo de abertura/fechamento.",
+      "steps": [
+        "Consulte tickets abertos em Balança → Tickets Abertos",
+        "Verifique se o Veículo já foi pesado (DataHoraFechamento preenchida?)",
+        "Para tickets presos: Balança → Liberar Pesagem",
+        "Para descarte: informe o motivo de descarte do ticket",
+        "Tickets fechados ficam em Balança → Tickets Fechados para consulta"
+      ],
+      "docUrl": "balanca/tickets-abertos",
+      "related": [
+        "ticket-pesagem",
+        "reclassificar-veiculo",
+        "postos-pesagem"
+      ],
+      "dbTables": [
+        "TBTicketPesagens",
+        "TBEixoPesagens",
+        "TBGrupoEixoPesagens",
+        "TBDadosPesagens"
+      ]
+    },
+    {
+      "id": "operacao-status-heartbeat",
+      "module": "Operações",
+      "title": "Status de Operação e Último Heartbeat",
+      "keywords": [
+        "operação ativa",
+        "operação parada",
+        "último heartbeat operação",
+        "sem passagens",
+        "sem Infrações",
+        "operação sem dados",
+        "data última passagem",
+        "data última Infração"
+      ],
+      "path": "Menu lateral → Operações → Cadastro de Operações",
+      "content": "Cada operação registra a DataHoraUltimaPassagem e DataHoraUltimaInfracao. Se UltimoHeartbeat estiver muito antigo (>24h), o Equipamento pode estar offline. Verificar em Monitoramento Online se há comunicação.",
+      "steps": [
+        "Acesse Operações → Cadastro de Operações",
+        "Verifique a coluna 'Último Heartbeat' da operação",
+        "Se estiver há mais de 24h sem heartbeat, o Equipamento pode estar offline",
+        "Confira a DataHoraUltimaPassagem — se zerada, não há passagens chegando",
+        "Verifique em Monitoramento Online o status em tempo real"
+      ],
+      "docUrl": "operacoes/cadastro-operacoes",
+      "related": [
+        "Equipamento-offline",
+        "monitoramento-online",
+        "cadastro-operacoes"
+      ],
+      "dbTables": [
+        "TBOperacoes",
+        "TBHeartbeatEquipamentos"
+      ]
+    },
+    {
+      "id": "interrupcoes-operacao",
+      "module": "Operações",
+      "title": "Interrupções de Operação",
+      "keywords": [
+        "interrupção",
+        "operação parada",
+        "horas paradas",
+        "Equipamento parou",
+        "justificativa parada",
+        "interrupção automática",
+        "horas sem operação"
+      ],
+      "path": "Menu lateral → Medição → Interrupções",
+      "content": "Interrupções registram períodos em que o Equipamento ficou parado durante uma operação. Podem ser automáticas (detectadas pelo sistema quando heartbeat para) ou manuais (registradas pelo operador). Impactam diretamente a medição contratual.",
+      "steps": [
+        "Acesse Medição → Interrupções",
+        "Filtre por Operação, Equipamento e Período",
+        "Verifique se a interrupção foi Automática ou manual",
+        "Para registrar manualmente: clique 'Novo' → preencha Equipamento Data/Hora Início/Fim, Motivo",
+        "Clique 'Processar Interrupções' para que sejam descontadas na medição"
+      ],
+      "docUrl": "medicoes/interrupcoes",
+      "related": [
+        "interrupcao-medicao",
+        "gerar-medicao",
+        "Equipamento-offline"
+      ],
+      "dbTables": [
+        "TBOperacoesInterrupcoes",
+        "TBOperacoes",
+        "TBEquipamentos"
+      ]
+    },
+    {
+      "id": "discrepancias-passagens",
+      "module": "Relatórios",
+      "title": "Relatório de Discrepâncias",
+      "keywords": [
+        "discrepância",
+        "anomalia",
+        "passagem vs Infração",
+        "percentual discrepância",
+        "media passagem inconsistente",
+        "volume anormal",
+        "Relatório discrepância"
+      ],
+      "path": "Menu lateral → Relatórios → Relatório de Discrepâncias",
+      "content": "O Relatório de discrepâncias compara volumes de passagens e Infrações por faixa/hora, identificando anomalias. Se o percentual de discrepância for muito alto, pode indicar problema no Equipamento erro de Configuração ou falha na importação.",
+      "steps": [
+        "Acesse Relatórios → Relatório de Discrepâncias",
+        "Filtre por Período, Equipamento ou Faixa",
+        "Use Análise (com acento) os percentuais: PercentualDiscrepanciaPassagem e PercentualDiscrepanciaInfracao",
+        "Valores muito altos (>50%) indicam possível problema no Equipamento",
+        "Compare com Monitoramento Online para confirmar se o Equipamento está operando normalmente"
+      ],
+      "docUrl": "relatorios/discrepancias",
+      "related": [
+        "monitoramento-online",
+        "Equipamento-offline",
+        "relatorio-passagens"
+      ],
+      "dbTables": [
+        "TBDiscrepancias",
+        "TBPassagens",
+        "TBInfracoes"
+      ]
+    },
+    {
+      "id": "volume-quantitativos",
+      "module": "Relatórios",
+      "title": "Quantitativos de Passagens e Infrações",
+      "keywords": [
+        "quantitativo",
+        "volume passagens",
+        "volume Infrações",
+        "contagem hora",
+        "fluxo hora",
+        "média passagens",
+        "índice OCR",
+        "placas não lidas",
+        "sequencial passagens"
+      ],
+      "path": "Menu lateral → Relatórios → Fluxo Diário de Veículos / Relatório de Passagens",
+      "content": "Os quantitativos registram por hora: total de passagens, Infrações testes, média de passagens/Infrações, sequenciais e índice OCR (placas lidas vs não lidas). Uma queda brusca no volume pode indicar Equipamento offline ou falha na importação.",
+      "steps": [
+        "Acesse Relatórios → Fluxo Diário de Veículos para ver volume por hora",
+        "Relatórios → Relatório de Passagens para detalhes por faixa",
+        "Compare volumes entre dias — queda brusca indica problema",
+        "Verifique índice OCR (PlacasLidas / Total) — abaixo de 80% pode indicar problema na câmera",
+        "Use Dashboard para visão rápida dos indicadores do dia"
+      ],
+      "docUrl": "relatorios/passagens",
+      "related": [
+        "relatorio-passagens",
+        "monitoramento-online",
+        "discrepancias-passagens"
+      ],
+      "dbTables": [
+        "TBQuantitativos",
+        "TBPassagens"
+      ]
+    },
+    {
+      "id": "logs-acesso-sistema",
+      "module": "Controle de Acesso",
+      "title": "Logs de Acesso ao Sistema",
+      "keywords": [
+        "log acesso",
+        "quem acessou",
+        "auditoria acesso",
+        "IP acesso",
+        "URL acessada",
+        "rastrear Usuário",
+        "sessão Usuário"
+      ],
+      "path": "Menu lateral → Controle de Acesso → Logs de Acesso",
+      "content": "Os logs registram todas as ações dos Usuários no sistema: Data/Hora, Usuário IP público e local, URL acessada, método HTTP e body da requisição. Útil para auditoria de segurança e investigar ações suspeitas.",
+      "steps": [
+        "Acesse Controle de Acesso → Logs de Acesso",
+        "Filtre por Usuário Período ou IP",
+        "Verifique a coluna URL para identificar qual tela foi acessada",
+        "O IP público ajuda a identificar de onde o acesso foi feito",
+        "UserAgent mostra qual navegador/dispositivo foi utilizado"
+      ],
+      "docUrl": "controle-acesso/logs",
+      "related": [
+        "logs-acesso",
+        "restricao-ip",
+        "perfis-acesso"
+      ],
+      "dbTables": [
+        "TBLogsAcessos",
+        "TBUsuarios",
+        "TBUserSessions"
+      ]
+    },
+    {
+      "id": "placas-repetidas-anomalia",
+      "module": "Operações",
+      "title": "Placas Repetidas e Anomalias OCR",
+      "keywords": [
+        "placa repetida",
+        "placa duplicada",
+        "OCR errado",
+        "mesma placa muitas vezes",
+        "anomalia placa",
+        "leitura incorreta",
+        "placa clonada"
+      ],
+      "path": "Menu lateral → Operações → Consulta de Placas",
+      "content": "O sistema detecta placas que aparecem com frequência anormal (muitas passagens em curto período). Pode indicar erro de OCR (câmera lendo placa errada repetidamente) ou Veículo com placa clonada. Consulte em Operações → Consulta de Placas filtrando por período e verifique as imagens.",
+      "steps": [
+        "Acesse Operações → Consulta de Placas",
+        "Filtre por placa suspeita e período curto",
+        "Verifique as imagens de cada passagem — se não correspondem ao Veículo é erro de OCR",
+        "Se imagens mostram Veículos diferentes com mesma placa, pode ser clonagem",
+        "Para erro de OCR: o analista corrige na triagem ao editar a placa"
+      ],
+      "docUrl": "operacoes/consulta-placas",
+      "related": [
+        "consulta-placas",
+        "triagem-infracoes",
+        "placa-nao-reconhecida"
+      ],
+      "dbTables": [
+        "TBPlacasRepetidas",
+        "TBPassagens"
+      ]
+    },
+    {
+      "id": "medicao-faixas-performance",
+      "module": "Medição",
+      "title": "Performance por Faixa na Medição",
+      "keywords": [
+        "performance faixa",
+        "índice operação",
+        "horas operação faixa",
+        "valor faixa medição",
+        "multa imagem inválida",
+        "IP faixa",
+        "contagem Veículos faixa",
+        "BDI medição"
+      ],
+      "path": "Menu lateral → Medição → Medições Finalizadas → Detalhes",
+      "content": "A medição detalha por faixa: total de Infrações (válidas/inválidas), horas previstas vs operadas, horas paralisadas, índice de performance (IP), índice OCR, contagem de Veículos e valores financeiros (BDI, descontos). Permite auditar a performance contratual de cada Equipamento",
+      "steps": [
+        "Acesse Medição → Medições Finalizadas",
+        "Selecione a medição para ver detalhes por faixa",
+        "Análise o IP (Índice de Performance) — meta contratual geralmente >95%",
+        "Verifique HorasParalisadas e se foram justificadas",
+        "Compare ValorPrevistoPorFaixa vs ValorTotalPorFaixa para identificar descontos"
+      ],
+      "docUrl": "medicoes/medicoes",
+      "related": [
+        "gerar-medicao",
+        "interrupcoes-operacao",
+        "contratos-medicao",
+        "indices-performance"
+      ],
+      "dbTables": [
+        "TBMedicaoFaixas",
+        "TBMedicoes",
+        "TBMedicaoEquipamentos"
+      ]
+    },
+    {
+      "id": "posto-funcionamento",
+      "module": "Balança",
+      "title": "Funcionamento dos Postos de Pesagem",
+      "keywords": [
+        "posto aberto",
+        "posto fechado",
+        "abertura posto",
+        "fechamento posto",
+        "motivo fechamento posto",
+        "horário funcionamento posto",
+        "posto pesagem status"
+      ],
+      "path": "Menu lateral → Balança → Postos",
+      "content": "Os postos de pesagem têm controle de abertura e fechamento. Cada abertura registra o Usuário responsável e cada fechamento exige motivo. Um posto sem fechamento registrado pode indicar problema operacional.",
+      "steps": [
+        "Acesse Balança → Postos para ver todos os postos cadastrados",
+        "Verifique o status: se DataHoraFechamento está vazia, o posto está aberto",
+        "Para ver histórico de funcionamento: consulte aberturas/fechamentos por período",
+        "Postos fechados sem motivo devem ser investigados com o operador de campo",
+        "Novos postos são vinculados a Equipamentos e operações na criação"
+      ],
+      "docUrl": "balanca/postos",
+      "related": [
+        "postos-pesagem",
+        "ticket-pesagem-ciclo",
+        "liberar-tickets-pesagem"
+      ],
+      "dbTables": [
+        "TBPostoFuncionamentos",
+        "TBPostos",
+        "TBPostoOperacoes"
+      ]
+    },
+    {
+      "id": "falhas-sequenciais",
+      "module": "Relatórios",
+      "title": "Falhas Sequenciais de Infrações",
+      "keywords": [
+        "falha sequencial",
+        "sequencial faltando",
+        "numeração Infração quebrada",
+        "sequencial pulou",
+        "gap sequencial",
+        "Relatório falhas sequenciais"
+      ],
+      "path": "Menu lateral → Relatórios → Falhas Sequenciais",
+      "content": "O Relatório de falhas sequenciais detecta gaps na numeração dos autos de Infração Cada Infração recebe um sequencial único, e falhas indicam registros perdidos ou importação incompleta. Importante para auditoria e controle legal.",
+      "steps": [
+        "Acesse Relatórios → Falhas Sequenciais",
+        "Filtre por Período, Faixa ou Operação",
+        "O sistema mostra: DataFalha, Descrição da falha, Total de falhas por faixa",
+        "Investigue falhas cruzando com Lotes de Importação do mesmo período",
+        "Falhas recorrentes na mesma faixa podem indicar problema no Equipamento"
+      ],
+      "docUrl": "relatorios/falhas-sequenciais",
+      "related": [
+        "sequenciais-infracoes",
+        "erro-importacao-lote",
+        "relatorio-infracoes"
+      ],
+      "dbTables": [
+        "TBSequencialInfracoesFalhas",
+        "TBSequencialInfracoes"
+      ]
+    },
+    {
+      "id": "guia-completo-infracoes",
+      "module": "Infrações",
+      "title": "Guia Completo — Processo de Infração",
+      "keywords": [
+        "processo Infração",
+        "fluxo Infração",
+        "como funciona Infração",
+        "passo a passo Infração",
+        "etapas Infração",
+        "captura triagem auditoria exportação",
+        "ciclo Infração",
+        "guia Infração",
+        "manual Infração",
+        "Infração completo",
+        "como triar",
+        "como auditar",
+        "como exportar",
+        "fluxo completo"
+      ],
+      "path": "Menu lateral → Infrações",
+      "content": "O processo de Infração no AxHub segue 5 etapas obrigatórias: (1) CAPTURA — o Equipamento registra imagem, placa, velocidade e data/hora. (2) IMPORTAÇÃO — dados entram no AxHub automaticamente em lotes; exceções configuradas descartam Infrações automaticamente nesta fase. (3) TRIAGEM — o analista humano revisa cada Infração verificando: placa legível, Veículo correto, velocidade coerente, enquadramento correto e qualidade da imagem. Decide: Validar (segue para auditoria), Descartar (com motivo obrigatório) ou Reabrir (recuperar descartada por engano). (4) AUDITORIA — um segundo profissional (auditor) confere o trabalho do analista. Pode Confirmar (segue para exportação), Rejeitar (volta para triagem com observação) ou adicionar observações. Usa filtros avançados e amostragem percentual. (5) EXPORTAÇÃO — o sistema gera o arquivo nos formatos RENAINF/XML/TXT/CSV com 7 válidações automáticas (placa, imagens, dados, enquadramento, assinaturas, duplicatas, prazo legal) e envia ao órgão autuador (DETRAN, DER, PRF, Prefeitura) via SFTP, API ou download manual. Status possíveis: Aguardando Triagem → Em Triagem → Válida → Auditada → Exportada (ou Descartada em qualquer fase).",
+      "steps": [
+        "CAPTURA: O Equipamento de fiscalização detecta e registra a Infração automaticamente (imagem + placa + velocidade + data/hora + local)",
+        "IMPORTAÇÃO: Os dados são enviados ao AxHub em lotes de importação. Exceções automáticas (placas especiais, horários, faixas) descartam Infrações nesta fase",
+        "TRIAGEM: Acesse Menu → Infrações → Triagem. Use filtros (Período, Status, Tipo, Operação) para encontrar Infrações pendentes",
+        "TRIAGEM - Análise Para cada Infração verifique: placa legível?, Veículo correto?, velocidade coerente?, enquadramento correto?, imagem boa qualidade?",
+        "TRIAGEM - DECISÃO: Validar (tudo OK, segue para auditoria) ou Descartar (algo errado, informar motivo obrigatório). Pode Reabrir descartada por engano",
+        "AUDITORIA: Acesse Menu → Infrações → Auditoria. Configure filtros (data, Equipamento tipo, analista, amostragem %)",
+        "AUDITORIA - DECISÃO: Confirmar (correto, segue para exportação), Rejeitar (errado, volta para triagem com observação) ou Adicionar observações",
+        "EXPORTAÇÃO: Acesse Menu → Infrações → Exportação. Configure: Órgão destino, Período, Layout (RENAINF/XML/TXT/CSV)",
+        "EXPORTAÇÃO - GERAR LOTE: Clique em Gerar Lote. O sistema válida automaticamente 7 critérios e gera arquivo com assinatura digital",
+        "EXPORTAÇÃO - ENVIAR: Envie via SFTP (automático), API (integração) ou Download (manual)",
+        "CONSULTA: A qualquer momento, consulte todas as Infrações em Menu → Infrações → Consulta de Infrações"
+      ],
+      "docUrl": "infracoes/guia-completo-infracoes",
+      "related": [
+        "triagem-infracoes",
+        "auditoria",
+        "exportar-infracoes",
+        "excecoes",
+        "consulta-infracoes",
+        "infracoes-descartadas",
+        "infracao-nao-aparece",
+        "reabrir-infracao"
+      ],
+      "dbTables": [
+        "TBInfracoes",
+        "TBHistoricoTriagens",
+        "TBMotivosDescartes",
+        "TBLoteExportacoes",
+        "TBExcecoes",
+        "TBEnquadramentos",
+        "TBInfracoesEnquadramentos"
+      ]
+    },
+    {
+      "id": "bloqueio-automatico-operacao",
+      "module": "Operações",
+      "title": "Bloqueio Automático de Operação por Validação de Data",
+      "keywords": [
+        "bloqueio",
+        "bloqueio automatico",
+        "operação bloqueada",
+        "10 falhas",
+        "falhas consecutivas",
+        "desbloqueio",
+        "bloqueia novamente",
+        "data antes",
+        "antes do início",
+        "válidação data",
+        "fabricante",
+        "retry",
+        "reenvio"
+      ],
+      "path": "Menu lateral → Operações → Cadastro de Operações → aba Bloqueio",
+      "content": "Bloqueio automático ocorre após 10 falhas consecutivas de válidação de passagens. Causa principal: fabricante envia passagens com DataHoraPassagem ANTERIOR à DataInicial da operação. O sistema válida DataHoraPassagem >= Operação.DataInicial. Exemplo real: Equipamento THE128M (STRANS/Teresina) com passagens de 26/04/2026 e operação iniciando em 27/04/2026. CRÍTICO: desbloquear manualmente NÃO resolve — fabricante reenvia os mesmos dados em ~2 minutos e rebloqueia automaticamente. Fabricantes FOCALLE e VIZENTEC fazem retry indefinido (30+ dias), sem backoff exponencial.",
+      "steps": [
+        "NÃO desbloquear manualmente sem resolver a causa — vai rebloquear em minutos",
+        "Identificar: qual a data da passagem rejeitada (campo 'Último erro' na aba Bloqueio)",
+        "Comparar com DataInicial da operação do Equipamento",
+        "OPÇÃO A (imediata): Se o Equipamento já operava antes da data cadastrada, ajustar DataInicial da operação para abranger as passagens",
+        "OPÇÃO B (fabricante): Contatar fabricante para limpar buffer de retry com dados antigos. Vizentec: +55 62 99636-0699",
+        "OPÇÃO C (aguardar): Em alguns casos raros, o fabricante pode esgotar as retentativas sozinho — mas pode levar semanas",
+        "ATENÇÃO JURÍDICA: Infrações só são válidas se a Portaria do órgão autuador cobre o período da data alterada",
+        "Após resolver, monitorar por 10+ minutos — se não rebloquear, está resolvido",
+        "Registrar ação em Operações → Eventos de Equipamentos"
+      ],
+      "docUrl": "operacoes/cadastro-operacoes",
+      "related": [
+        "Equipamento-offline",
+        "sincronismo-Equipamento-blitz"
+      ],
+      "dbTables": [
+        "TBOperacoes",
+        "TBEquipamentos",
+        "TBPassagens",
+        "TBFabricantes"
+      ]
+    },
+    {
+      "id": "fabricantes-api-retry",
+      "module": "Equipamentos",
+      "title": "Fabricantes — Comportamento de API e Retry de Dados",
+      "keywords": [
+        "fabricante",
+        "FOCALLE",
+        "VIZENTEC",
+        "API",
+        "token",
+        "retry",
+        "reenvio",
+        "buffer",
+        "dados antigos",
+        "limite",
+        "rate limit",
+        "passagem rejeitada",
+        "fila"
+      ],
+      "path": "Menu lateral → Equipamentos → Fabricantes",
+      "content": "Fabricantes de Equipamentos (FOCALLE, VIZENTEC, Perkons, Lasertech) transmitem dados ao AxHub via API REST autenticada por Token (campo Token em Fabricantes). Comportamento observado nos fabricantes FOCALLE e VIZENTEC: retry automático INDEFINIDO (dados de 30+ dias continuam sendo reenviados), intervalo entre tentativas ~2 minutos, sem backoff exponencial, NÃO desistem sozinhos. O fabricante só para de reenviar quando: (1) AxHub aceita o dado, (2) intervenção manual no servidor do fabricante, ou (3) Equipamento é desativado. Volume referência: Equipamento BA602C enviou 2.600+ passagens/dia ao reconectar após 17 dias offline. Nenhum fabricante publica documentação técnica de API ou limites publicamente — informações obtidas por comportamento observado.",
+      "steps": [
+        "Para problemas de reenvio persistente: contatar equipe técnica do fabricante diretamente",
+        "Vizentec WhatsApp técnico: +55 62 99636-0699",
+        "Solicitar ao fabricante: limpeza do buffer de retry para Equipamento específico",
+        "Perguntar: quantas passagens pendentes estão no buffer?",
+        "Perguntar: é possível configurar data mínima de envio no Equipamento",
+        "CUIDADO com 'Gerar Novo Token': inválida token anterior IMEDIATAMENTE — fabricante perde acesso",
+        "Só gerar novo token se: comunicar fabricante ANTES, ou se precisa bloquear transmissões em emergência"
+      ],
+      "docUrl": "cadastros-basicos/fabricantes",
+      "related": [
+        "bloqueio-automatico-operacao",
+        "Equipamento-offline"
+      ],
+      "dbTables": [
+        "TBFabricantes",
+        "TBEquipamentos",
+        "TBModeloEquipamentos",
+        "TBPassagens"
+      ]
+    }
+  ],
+  "glossary": [
+    {
+      "term": "Aferição",
+      "definition": "Procedimento técnico de verificação metrológica que atesta conformidade de instrumento de medição com padrões do INMETRO. Validade geralmente 12 meses. Infrações com aferição vencida são inválidadas.",
+      "legal": "Resolução CONTRAN 798/2021, Portaria INMETRO 544/2014"
+    },
+    {
+      "term": "Autuação",
+      "definition": "Ato administrativo formal de lavratura do auto de Infração de trânsito. Inclui identificação do Veículo local, data/hora, enquadramento e assinatura.",
+      "legal": "Art. 280 do CTB"
+    },
+    {
+      "term": "Cronotacógrafo",
+      "definition": "Dispositivo obrigatório em Veículos de carga e transporte coletivo que registra velocidade, tempo de condução e descanso do motorista.",
+      "legal": "Art. 105 do CTB, Resolução CONTRAN 92/1999"
+    },
+    {
+      "term": "Enquadramento",
+      "definition": "Classificação legal de uma Infração conforme artigos do CTB. Define tipo (leve, média, grave, gravíssima), pontos na CNH e valor da multa.",
+      "legal": "Código de Trânsito Brasileiro"
+    },
+    {
+      "term": "Infração de Trânsito",
+      "definition": "Desobediência a qualquer preceito da legislação de trânsito. No AxHub: Detecção → Triagem → Auditoria → Exportação.",
+      "legal": "Art. 161 do CTB"
+    },
+    {
+      "term": "Lote de Exportação",
+      "definition": "Conjunto de Infrações válidadas agrupadas para envio ao órgão autuador. Inclui arquivo de dados, imagens e hash de assinatura digital.",
+      "legal": ""
+    },
+    {
+      "term": "Triagem",
+      "definition": "Processo de Análise humana das Infrações detectadas automaticamente. O triador válida ou descarta cada Infração",
+      "legal": ""
+    },
+    {
+      "term": "Bloqueio Automático",
+      "definition": "Mecanismo de proteção que bloqueia a operação de um Equipamento após 10 falhas consecutivas de Validação de passagens. Causa comum: fabricante reenviando dados com data anterior ao início da operação. Desbloqueio manual não resolve se a causa raiz não for tratada.",
+      "legal": ""
+    },
+    {
+      "term": "Retry de Fabricante",
+      "definition": "Comportamento dos fabricantes FOCALLE e VIZENTEC de reenviar automaticamente passagens rejeitadas pelo AxHub. Retry é indefinido (30+ dias), com intervalo de ~2 minutos, sem backoff exponencial. Só para com intervenção manual no servidor do fabricante.",
+      "legal": ""
+    },
+    {
+      "term": "Token de Fabricante",
+      "definition": "Chave de autenticação gerada pelo AxHub para cada fabricante (campo Token em TBFabricantes). Usado pelo fabricante para enviar passagens e imagens via API. Gerar Novo Token inválida o anterior imediatamente, bloqueando todas as transmissões do fabricante.",
+      "legal": ""
+    }
+  ],
+  "dataSourceLinks": {
+    "documentation": "/AxHub.Docs/",
+    "database": "AxHub/Database/AxHub.sql",
+    "widget": "AxHub/widget/axhub-suporte.js",
+    "searchBase": "AxHub/base-pesquisa-suporte.md"
+  }
+}

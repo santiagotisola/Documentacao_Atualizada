@@ -1,0 +1,157 @@
+---
+sidebar_position: 4
+title: Interrupções
+description: Registro e processamento de interrupções contratuais
+---
+
+# Interrupções
+
+Permite registrar interrupções no funcionamento dos Equipamentos que impactam a medição contratual.
+
+![Lista de Interrupções](../img/Medição%20-%20interrupções.png)
+
+## Como acessar
+
+**Menu lateral** → Medição → **Interrupções**
+
+## Cadastro de interrupção
+
+![Cadastro de Interrupção](../img/Medição%20-%20interrupções.-%20cadastro.png)
+
+| Campo | Descrição |
+|-------|-----------|
+| Equipamento | Equipamento afetado |
+| **Data/Hora Início** | Início da interrupção |
+| **Data/Hora Fim** | Fim da interrupção |
+| **Motivo** | Causa da interrupção |
+| **Justificativa** | Detalhamento |
+
+## Processar interrupções
+
+Após registrar as interrupções, o sistema as contabiliza no cálculo de disponibilidade da próxima medição gerada.
+
+| Tipo | Desconta da meta? |
+|------|:-----------------:|
+| Manutenção preventiva programada | Não |
+| Falha de equipamento | Sim |
+| Evento externo (acidente, obra) | Conforme contrato |
+
+:::warning
+Interrupções não registradas **não são consideradas** no cálculo de disponibilidade. Registrar imediatamente após a ocorrência.
+:::
+
+## Erros comuns
+
+| Erro | Causa | Solução |
+|------|-------|----------|
+| Interrupção sem data/hora fim | Esquecimento | Corrigir antes de gerar medição |
+| Tipo errado atribuido | Preventiva x corretiva confundidas | Revisar e corrigir o tipo |
+| Interrupção não aparece na medição | Cadastro após geração | Reabrir medição e recalcular |
+
+## Relacionado
+
+- [Criar Medição](./criar-medicao)
+- [Índices de Performance](./indices-performance)
+- [Eventos de Equipamentos](../relatorios/eventos-equipamentos)
+
+| Tipo | Prazo máximo |
+|------|:------------:|
+| Falha de equipamento | Até 2h após detecção |
+| Manutenção preventiva | Antes de iniciar |
+| Evento externo | Até 24h |
+
+## Impacto contratual
+
+- Interrupções não registradas antes da geração da medição **não são computadas** no desconto de disponibilidade
+- Cada hora não registrada infla artificialmente o índice de disponibilidade, podendo mascarar inadimplemento contratual
+- Registre dentro do prazo máximo definido — interrupções fora do prazo podem ser contestadas pelo contratante
+- Use o Relatório de Eventos de Equipamentos para cruzar registros de falha com as interrupções cadastradas
+
+## Relacionado
+
+- [Criar Medição](./criar-medicao)
+- [Índices de Performance](./indices-performance)
+- [Eventos de Equipamentos](../relatorios/eventos-equipamentos)
+
+| Falha de equipamento | Sim |
+| Evento externo (acidente, obra) | Conforme contrato |
+
+:::warning
+Interrupções não registradas **não são consideradas** no cálculo de disponibilidade. Registrar imediatamente após a ocorrência.
+:::
+
+![Processar Interrupções](../img/Medição%20-%20interrupções%20-%20processar%20interrupções.png)
+
+Processa as interrupções registradas para abatimento na medição contratual.
+
+---
+
+## Navegacao Relacionada
+
+| Tipo | Pagina | Descricao |
+|------|--------|-----------|
+| Relacionado | [Contratos](./contratos) | Contrato afetado |
+| Relacionado | [Criar Medicao](./criar-medicao) | Impacto na medicao |
+
+## Perguntas frequentes
+
+**Interrupções de manutenção preventiva descontam da disponibilidade?**
+Depende do contrato. Manutenções preventivas programadas geralmente não descontam; interrupções corretivas (falha) sim. Verifique as cláusulas contratuais e cadastre o tipo correto.
+
+**Posso registrar uma interrupção retroativamente após a medição ser gerada?**
+Não. Interrupções devem ser registradas antes da geração da medição. Após finalizar, é necessário reabrir a medição com autorização do supervisor para incluir interrupções esquecidas.
+
+**Qual o prazo máximo para registrar uma interrupção?**
+Registre imediatamente após o equipamento voltar à operação. O prazo máximo depende do contrato, mas o recomendado é até 24 horas após a normalização.
+
+## Integração com outros módulos
+
+| Módulo | Como se relaciona |
+|--------|------------------|
+| **Contratos** | As interrupções são contabilizadas no cálculo de disponibilidade exigido contratualmente |
+| **Índices de Performance** | A disponibilidade calculada nos índices considera diretamente as interrupções cadastradas |
+| **Criar Medição** | A medição gerada desconta automaticamente as interrupções do período de apuração |
+
+## Ciclo mensal
+
+| Quando | Ação |
+|--------|------|
+| **Ao detectar falha** | Registrar imediatamente com Data/Hora Início exata |
+| **Ao normalizar** | Preencher Data/Hora Fim no registro |
+| **Antes de gerar medição** | Revisar todas as interrupções do período |
+| **Após geração** | Confirmar que o índice de disponibilidade reflete as paradas registradas |
+
+:::warning
+Interrupções registradas **após** a geração da medição não são computadas automaticamente. Registre sempre em tempo real.
+:::
+
+## Exemplo prático
+
+**Cenário**: Queda de energia no posto entre 14h30 e 16h45 causou indisponibilidade de 2h15min no equipamento.
+
+**Registro da interrupção**:
+
+| Campo | Valor |
+|-------|-------|
+| Equipamento | OCR-01 — Posto Norte |
+| Tipo | Falha de equipamento |
+| Data/Hora Início | 31/07/2026 14:30 |
+| Data/Hora Fim | 31/07/2026 16:45 |
+| Motivo | Queda de energia externa — relatada pela concessionária |
+
+**Resultado**: A disponibilidade do dia cai de 100% para 90,6% (21,75h de 24h). O Boletim de Medição reflete corretamente a parada. Como foi evento externo, não há penalidade contratual.
+
+## Ciclo mensal de interrupções
+
+```
+Início do mês → Monitorar equipamentos diariamente
+    ↓
+Detectou falha? → Registrar imediatamente (tipo + horário)
+    ↓
+Equipamento voltou? → Preencher Data/Hora Fim
+    ↓
+Fim do mês → Revisar todas as interrupções antes de gerar medição
+    ↓
+Gerar Medição → Verificar índice de disponibilidade
+```
+

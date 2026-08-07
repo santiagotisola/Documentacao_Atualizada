@@ -1,0 +1,109 @@
+﻿---
+title: "Cronoatacógrafo"
+sidebar_position: 5
+description: "O que é cronoatacógrafo no AxHub — obrigatoriedade, verificação e penalidades"
+---
+
+# Cronoatacógrafo
+
+Instrumento eletrônico de controle do **tempo de direção, parada e velocidade**. O AxHub verifica automaticamente a situação do cronoatacógrafo nos veículos que passam pelos equipamentos monitorados.
+
+**Base legal:** Art. 105, II do CTB — Resolução CONTRAN 92/1999
+
+## Obrigatoriedade
+
+| Veículo | Obrigatório? |
+|---------|:-----------:|
+| Veículos de carga com PBT > 4.536 kg | Sim |
+| Transporte coletivo de passageiros | Sim |
+| Condução escolar | Sim |
+| Veículos de passeio | Não |
+
+## Status verificado pelo AxHub
+
+| Status | Descrição | Ação |
+|--------|-----------|------|
+| **Regular** | Cronoat - presente e válido | Nenhuma |
+| **Irregular** | Ausente, violado ou adulterado | Gera infração |
+| **N/A** | Veículo não obrigado | Nenhuma |
+
+## Relacionado
+
+- [Enquadramentos](../administracao/enquadramentos) — Códigos CTB aplicáveis
+- [Tipos de Veículos](../veiculos/tipos-veiculos)
+
+## Penalidade por ausência
+
+**Art. 162, II do CTB:** Multa gravíssima (7 UFIRs) + suspensão do direito de dirigir
+
+## Verificação no AxHub
+
+O AxHub consulta automaticamente o status do cronoatacógrafo durante a triagem das passagens. Quando a situação está **Irregular**, o sistema sugere o enquadramento do Art. 162, II do CTB ao operador.
+
+:::tip
+Acesse **Operações → Aferições** para verificar os registros de equipamentos com verificação de cronoatacógrafo pendente.
+:::
+
+## Tempo de direção máximo
+
+| Situação | Limite |
+|----------|:------:|
+| Direção contínua | 4 horas |
+| Pausa obrigatória | 30 minutos |
+| Jornada diária total | 8 horas (podendo chegar a 10 com adicional) |
+
+**Base:** Resolução CONTRAN 92/1999 + Conselho Nacional de Política de Saúde no Trabalho
+
+## Boas práticas
+
+- Verifique o status do cronoatacógrafo na triagem sempre que o veículo for de carga pesada com PBT > 4.536 kg
+- Use o filtro **Tipo = Cronoatacógrafo irregular** no relatório de infrações para monitorar a frequência de irregularidades
+## Tabela de referência — limites de jornada
+
+| Situação | Limite | Base legal |
+|----------|:------:|------------|
+| Direção contínua | 4 horas | Res. CONTRAN 92/1999 |
+| Pausa obrigatória | 30 minutos | Res. CONTRAN 92/1999 |
+| Jornada diária normal | 8 horas | CLT + CONTRAN |
+| Jornada diária máxima | 10 horas | Com adicional |
+| Descanso interjornada | 11 horas | CLT |
+
+## Erros comuns na verificação
+
+| Problema | Causa | Solução |
+|----------|-------|----------|
+| Status sempre `NãoEncontrado` | Banco de certif. desatualizado | Acionar suporte técnico |
+| Falso positivo de irregularidade | Certif. renovado após consulta | Verificar data de atualização do banco |
+| Veículo não verificado | Tipo não obrigado a ter cronoatacógrafo | Normal — status `N/A` |
+
+## Integração com outros módulos
+
+| Módulo | Como usa o cronoatacógrafo |
+|--------|---------------------------|
+| **Triagem** | Apresenta status para o analista validar a infração |
+| **Enquadramentos** | Define o código CTB (Art. 162, II) a ser aplicado |
+| **Relatório de Infrações** | Filtra e exibe infrações de cronoatacógrafo |
+| **Exportação** | Inclui o tipo de infração no lote ao órgão |
+
+## Perguntas frequentes
+
+**Todo veículo de carga é obrigado a ter cronotacógrafo?**
+Não. A obrigatoriedade depende do tipo, peso e finalidade do veículo conforme o Código Brasileiro de Trânsito. Verifique no cadastro de Tipos de Veículos quais categorias estão sujeitas à verificação.
+
+**O status `NaoEncontrado` significa que o veículo é irregular?**
+Não necessariamente. Pode indicar que a placa não está cadastrada no banco de certif., que houve falha de conectividade ou que o tipo de veículo não exige o dispositivo. Encaminhe para triagem manual.
+
+**Qual a diferença entre status `Vencido` e `Irregular` no cronotacógrafo?**
+**Vencido** indica que o certificado de calibração do dispositivo expirou. **Irregular** indica que o dispositivo está operando, mas registrou violação de jornada ou período de descanso.
+
+- [Enquadramentos](../administracao/enquadramentos) — Códigos CTB aplicáveis
+- [Tipos de Veículos](../veiculos/tipos-veiculos) — Quais veículos são obrigados
+
+## Contexto operacional
+
+A verificação do **cronoatacógrafo** no AxHub é uma camada de fiscalização automática que complementa a autu ação por velocidade. Na triagem, o operador recebe uma indicação do status do dispositivo para cada veículo de carga: **Regular**, **Irregular** ou **N/A**. Quando irregular, o sistema já sugere o enquadramento pelo Art. 162, II do CTB automaticamente.
+
+Para o supervisor, acompanhar o volume de infrações de cronoatacógrafo por período é um indicador valioso da efetividade do sistema: alta freqüência de irregularidades em um trecho específico pode indicar padrão de comportamento dos transportadores que justifica operações de fiscalização ativa.
+
+Para o gestor, garantir que o banco de certif icados do cronoatacógrafo esteja atualizado é responsabilidade do suporte técnico da Axion. Verific ações retornando status **NãoEncontrado** de forma recorrente para veículos obrigados indicam desatualização do banco e devem ser reportados imediatamente para correção.
+- [Aferição](./afericao) — Validade do equipamento que registra a infração

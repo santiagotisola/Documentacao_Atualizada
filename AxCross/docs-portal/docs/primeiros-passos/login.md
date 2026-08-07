@@ -1,0 +1,120 @@
+﻿---
+sidebar_position: 1
+title: Login
+description: Como acessar o sistema AxCross
+---
+
+# Login
+
+A tela de **Login** é o ponto de entrada do AxCross. Informe suas credenciais para acessar o sistema.
+
+![Tela de Login do AxCross](<../img/Login.png>)
+
+## Como acessar
+
+Abra o navegador e acesse o endereço do AxCross fornecido pela sua organização. O sistema utiliza o **Identity Server (IS)** para autenticação segura.
+
+## Campos
+
+| Campo | Obrigatório | Descrição |
+|---|:---:|---|
+| **Usuário** | Sim | Nome de usuário cadastrado no sistema |
+| **Senha** | Sim | Senha de acesso (respeitando maiúsculas e minúsculas) |
+
+## Passo a passo
+
+1. Acesse o endereço do AxCross no navegador
+2. Informe o **Usuário** no campo correspondente
+3. Informe a **Senha** de acesso
+4. Clique em **ENTRAR**
+5. O sistema redireciona automaticamente para o **Dashboard**
+
+## Primeiro acesso
+
+No primeiro acesso, utilize as credenciais temporárias fornecidas pelo administrador. Altere a senha imediatamente após o login.
+
+:::warning Segurança
+Nunca compartilhe suas credenciais. Cada ação realizada fica registrada com o seu usuário no log de auditoria.
+:::
+
+## Problemas comuns
+
+| Problema | Solução |
+|----------|---------|
+| Senha incorreta | Tente novamente ou clique em **Esqueci minha senha** |
+| Usuário bloqueado | Contate o administrador |
+| Página não carrega | Verifique a conexão com a rede interna |
+
+## Segurança
+
+- Use senhas fortes com mínimo de 8 caracteres, combinando letras, números e caracteres especiais
+
+## Erros comuns
+
+| Erro | Causa | Solução |
+|------|-------|----------|
+| Login inválido após redefinição | Cache antigo | Limpar cache ou usar aba anônima |
+| Conta bloqueada | Múltiplas falhas | Aguardar 30 min ou contatar admin |
+| Link de redefinição expirado | Prazo ultrapassado | Solicitar novo link |
+
+## Relacionado
+
+- [Usuários](../administracao/usuarios)
+- [Perfis de Acesso](../administracao/perfis-acesso)
+- [Logs de Acesso](../administracao/logs-acesso)
+
+- [Usuários](../administracao/usuarios)
+- [Perfis de Acesso](../administracao/perfis-acesso)
+- [Logs de Acesso](../administracao/logs-acesso)
+
+| Problema | Solução |
+|----------|---------|
+| Senha incorreta | Tente novamente ou clique em **Esqueci minha senha** |
+| Usuário bloqueado | Contate o administrador do sistema |
+| Página não carrega | Verifique a conexão com a rede interna |
+
+## Recuperação de senha
+
+Clique em **Esqueceu a Senha?** na tela de login. O sistema enviará instruções de recuperação para o e-mail cadastrado no perfil do usuário.
+
+:::warning Conta bloq
+Após múltiplas tentativas incorretas de login, a conta poderá ser temporariamente bloq por segurança. Nesse caso, entre em contato com o administrador do sistema.
+:::
+
+:::info Primeiro acesso
+No primeiro acesso, utilize as credenciais fornecidas pelo administrador e altere a senha imediatamente em **Configurações → Usuários**. Escolha uma senha forte com letras, números e símbolos.
+:::
+
+## Perguntas frequentes
+
+**O que fazer quando a conta fica bloqueada após múltiplas tentativas de login incorretas?**
+Entre em contato com o administrador do sistema. Ele pode desbloquear o usuário em **Configurações → Usuários** editando o perfil. Para evitar novos bloqueios, use sempre o link **Esqueceu a Senha?** ao invés de tentar várias combinações.
+
+**Como recuperar o acesso quando não lembro a senha e o link de recuperação expirou?**
+Solicite ao administrador que redefina sua senha manualmente em **Configurações → Usuários → Editar**. O administrador informa a senha temporária e você a altera no primeiro acesso.
+
+**Por que o sistema AxCross usa o Identity Server (IS) para autenticação?**
+O Identity Server centraliza a autenticação de forma segura, permitindo Single Sign-On (SSO) entre sistemas Axion. Isso garante que as credenciais sejam validadas com um único ponto de controle, facilitando a gestão de segurança e auditoria de acessos.
+
+## Integração com outros módulos
+
+| Módulo | Como se relaciona |
+|--------|------------------|
+| **[Navegação](./navegacao)** | Após o login bem-sucedido, o usuário é redirecionado para a navegação principal do sistema |
+| **[Dashboard](./dashboard)** | O Dashboard é a tela inicial exibida após o login |
+| **[Perfis de Acesso](../administracao/perfis-acesso)** | O perfil do usuário logado define quais módulos e funcionalidades estão disponíveis |
+| **[Logs de Acesso](../administracao/logs-acesso)** | Cada acesso é registrado nos logs de acesso para auditoria de segurança |
+
+## Exemplo prático
+
+**Cenário**: Um operador tenta acessar o AxCross mas recebe a mensagem "Usuário ou senha inválidos" após três tentativas. A conta é bloqueada automaticamente por segurança.
+
+**Passo a passo para o administrador desbloquear**:
+
+1. O administrador acessa **Configurações → Usuários** no menu lateral
+2. Localiza o usuário bloqueado pelo nome ou login
+3. Clica em **Editar** e redefine a **Senha** com uma senha temporária forte (ex.: `Axion@2026!`)
+4. Informa a senha temporária ao operador por canal seguro (mensagem pessoal ou telefone)
+5. O operador acessa com a senha temporária e o sistema solicita alteração imediata
+
+**Resultado**: O operador recupera acesso imediatamente sem interromper a operação. O acesso bem-sucedido é registrado automaticamente em **Configurações → Logs de Acesso** para auditoria.

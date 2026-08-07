@@ -1,0 +1,391 @@
+{
+  "meta": {
+    "titulo": "Plano de Implementação — Relatório de Fluxo Diário por Equipamento/Faixa",
+    "sistema": "AxHub",
+    "versao": "1.0.0",
+    "data": "2026-04-03",
+    "autor": "AxionIA",
+    "descricao": "Material completo para o desenvolvedor implementar a funcionalidade de Relatório de Fluxo Diário (Passagens e Imagens) por Equipamento/Faixa no sistema principal AxHub, incluindo queries SQL, endpoints de API, contrato de resposta e orientações de integração ao frontend existente."
+  },
+
+  "resumo_funcional": {
+    "objetivo": "Exibir uma matriz de passagens ou imagens agrupadas por Equipamento+Faixa (linhas) × Dia do mês (colunas), com mapa de calor por intensidade relativa.",
+    "tipo_A": "Passagens — contagem de registros em TBPassagens por faixa e dia",
+    "tipo_B": "Imagens — contagem de imagens em TBImagensPassagensConjugadas por faixa e dia",
+    "filtros_suportados": ["mes (1-12)", "ano (YYYY)", "equipamento (Codigo ou 'TODOS')"],
+    "formato_resultado": "Matriz esparsa: cada linha tem o par EquipFaixa e um objeto dias:{dia:total}",
+    "exemplo_chave": "F-DIP-D0496 FX1"
+  },
+
+  "tabelas_envolvidas": {
+    "TBPassagens": {
+      "uso": "Fonte principal para contagem de passagens",
+      "colunas_usadas": ["DataHoraPassagem", "Equipamento_id", "Faixa_id"],
+      "join": "JOIN TBEquipamentos ON Equipamento_id = Id | JOIN TBFaixas ON Faixa_id = Id"
+    },
+    "TBPassagensConjugadas": {
+      "uso": "Fonte para contagem de imagens (passagens que geram imagem)",
+      "colunas_usadas": ["DataHoraPassagem", "Equipamento_id", "Faixa_id"],
+      "join": "LEFT JOIN TBImagensPassagensConjugadas ON PassagemConjugada_id = Id"
+    },
+    "TBImagensPassagensConjugadas": {
+      "uso": "Contagem de imagens capturadas por passagem conjugada",
+      "colunas_usadas": ["Id", "PassagemConjugada_id"]
+    },
+    "TBEquipamentos": {
+      "uso": "Obter o Codigo legível do equipamento",
+      "colunas_usadas": ["Id", "Codigo"]
+    },
+    "TBFaixas": {
+      "uso": "Obter o NumeroFaixa para composição da chave",
+      "colunas_usadas": ["Id", "NumeroFaixa"]
+    }
+  },
+
+  "sql": {
+    "passagens": {
+      "descricao": "Retorna a contagem de passagens agrupada por Equipamento+Faixa e por dia do mês.",
+      "parametros": {
+        "@mes": "INT — mês de referência (1 a 12)",
+        "@ano": "INT — ano de referência (ex: 2025)",
+        "@equipamento": "NVARCHAR — Codigo do equipamento (opcional, omitir filtro se TODOS)"
+      },
+      "query_todos_equipamentos": "SELECT e.Codigo + ' FX' + f.NumeroFaixa AS EquipFaixa, DAY(p.DataHoraPassagem) AS Dia, COUNT(*) AS Total FROM TBPassagens p JOIN TBEquipamentos e ON p.Equipamento_id = e.Id JOIN TBFaixas f ON p.Faixa_id = f.Id WHERE MONTH(p.DataHoraPassagem) = @mes AND YEAR(p.DataHoraPassagem) = @ano GROUP BY e.Codigo, f.NumeroFaixa, DAY(p.DataHoraPassagem) ORDER BY e.Codigo, f.NumeroFaixa, DAY(p.DataHoraPassagem)",
+      "query_equipamento_especifico": "SELECT e.Codigo + ' FX' + f.NumeroFaixa AS EquipFaixa, DAY(p.DataHoraPassagem) AS Dia, COUNT(*) AS Total FROM TBPassagens p JOIN TBEquipamentos e ON p.Equipamento_id = e.Id JOIN TBFaixas f ON p.Faixa_id = f.Id WHERE MONTH(p.DataHoraPassagem) = @mes AND YEAR(p.DataHoraPassagem) = @ano AND e.Codigo = @equipamento GROUP BY e.Codigo, f.NumeroFaixa, DAY(p.DataHoraPassagem) ORDER BY e.Codigo, f.NumeroFaixa, DAY(p.DataHoraPassagem)",
+      "query_formatada_todos": [
+        "SELECT",
+        "  e.Codigo + ' FX' + f.NumeroFaixa   AS EquipFaixa,",
+        "  DAY(p.DataHoraPassagem)             AS Dia,",
+        "  COUNT(*)                            AS Total",
+        "FROM TBPassagens p",
+        "JOIN TBEquipamentos e ON p.Equipamento_id = e.Id",
+        "JOIN TBFaixas f       ON p.Faixa_id = f.Id",
+        "WHERE MONTH(p.DataHoraPassagem) = @mes",
+        "  AND YEAR(p.DataHoraPassagem)  = @ano",
+        "GROUP BY e.Codigo, f.NumeroFaixa, DAY(p.DataHoraPassagem)",
+        "ORDER BY e.Codigo, f.NumeroFaixa, DAY(p.DataHoraPassagem)"
+      ],
+      "query_formatada_filtro": [
+        "SELECT",
+        "  e.Codigo + ' FX' + f.NumeroFaixa   AS EquipFaixa,",
+        "  DAY(p.DataHoraPassagem)             AS Dia,",
+        "  COUNT(*)                            AS Total",
+        "FROM TBPassagens p",
+        "JOIN TBEquipamentos e ON p.Equipamento_id = e.Id",
+        "JOIN TBFaixas f       ON p.Faixa_id = f.Id",
+        "WHERE MONTH(p.DataHoraPassagem) = @mes",
+        "  AND YEAR(p.DataHoraPassagem)  = @ano",
+        "  AND e.Codigo = @equipamento",
+        "GROUP BY e.Codigo, f.NumeroFaixa, DAY(p.DataHoraPassagem)",
+        "ORDER BY e.Codigo, f.NumeroFaixa, DAY(p.DataHoraPassagem)"
+      ]
+    },
+
+    "imagens": {
+      "descricao": "Retorna a contagem de imagens capturadas agrupada por Equipamento+Faixa e por dia do mês. Usa LEFT JOIN para incluir faixas sem imagem (Total = 0).",
+      "parametros": {
+        "@mes": "INT — mês de referência (1 a 12)",
+        "@ano": "INT — ano de referência (ex: 2025)",
+        "@equipamento": "NVARCHAR — Codigo do equipamento (opcional)"
+      },
+      "query_formatada_todos": [
+        "SELECT",
+        "  e.Codigo + ' FX' + f.NumeroFaixa    AS EquipFaixa,",
+        "  DAY(pc.DataHoraPassagem)             AS Dia,",
+        "  COUNT(ipc.Id)                        AS Total",
+        "FROM TBPassagensConjugadas pc",
+        "JOIN TBEquipamentos e                  ON pc.Equipamento_id = e.Id",
+        "JOIN TBFaixas f                        ON pc.Faixa_id = f.Id",
+        "LEFT JOIN TBImagensPassagensConjugadas ipc ON ipc.PassagemConjugada_id = pc.Id",
+        "WHERE MONTH(pc.DataHoraPassagem) = @mes",
+        "  AND YEAR(pc.DataHoraPassagem)  = @ano",
+        "GROUP BY e.Codigo, f.NumeroFaixa, DAY(pc.DataHoraPassagem)",
+        "ORDER BY e.Codigo, f.NumeroFaixa, DAY(pc.DataHoraPassagem)"
+      ],
+      "query_formatada_filtro": [
+        "SELECT",
+        "  e.Codigo + ' FX' + f.NumeroFaixa    AS EquipFaixa,",
+        "  DAY(pc.DataHoraPassagem)             AS Dia,",
+        "  COUNT(ipc.Id)                        AS Total",
+        "FROM TBPassagensConjugadas pc",
+        "JOIN TBEquipamentos e                  ON pc.Equipamento_id = e.Id",
+        "JOIN TBFaixas f                        ON pc.Faixa_id = f.Id",
+        "LEFT JOIN TBImagensPassagensConjugadas ipc ON ipc.PassagemConjugada_id = pc.Id",
+        "WHERE MONTH(pc.DataHoraPassagem) = @mes",
+        "  AND YEAR(pc.DataHoraPassagem)  = @ano",
+        "  AND e.Codigo = @equipamento",
+        "GROUP BY e.Codigo, f.NumeroFaixa, DAY(pc.DataHoraPassagem)",
+        "ORDER BY e.Codigo, f.NumeroFaixa, DAY(pc.DataHoraPassagem)"
+      ]
+    },
+
+    "listar_equipamentos": {
+      "descricao": "Retorna a lista de equipamentos ativos para popular o filtro da tela.",
+      "query": "SELECT DISTINCT Codigo FROM TBEquipamentos WHERE Codigo IS NOT NULL ORDER BY Codigo",
+      "query_formatada": [
+        "SELECT DISTINCT Codigo",
+        "FROM TBEquipamentos",
+        "WHERE Codigo IS NOT NULL",
+        "ORDER BY Codigo"
+      ]
+    },
+
+    "indices_recomendados": {
+      "descricao": "Índices sugeridos para melhorar a performance das queries de agrupamento mensal.",
+      "indices": [
+        {
+          "tabela": "TBPassagens",
+          "colunas": ["Equipamento_id", "Faixa_id", "DataHoraPassagem"],
+          "sql": "CREATE NONCLUSTERED INDEX IX_Passagens_EquipFaixaData ON TBPassagens (Equipamento_id, Faixa_id, DataHoraPassagem) INCLUDE (Id)"
+        },
+        {
+          "tabela": "TBPassagensConjugadas",
+          "colunas": ["Equipamento_id", "Faixa_id", "DataHoraPassagem"],
+          "sql": "CREATE NONCLUSTERED INDEX IX_PassagensConj_EquipFaixaData ON TBPassagensConjugadas (Equipamento_id, Faixa_id, DataHoraPassagem) INCLUDE (Id)"
+        },
+        {
+          "tabela": "TBImagensPassagensConjugadas",
+          "colunas": ["PassagemConjugada_id"],
+          "sql": "CREATE NONCLUSTERED INDEX IX_ImagensPassConj_PassagemId ON TBImagensPassagensConjugadas (PassagemConjugada_id) INCLUDE (Id)"
+        }
+      ]
+    }
+  },
+
+  "api_endpoints": {
+    "base_url": "/api",
+    "endpoints": [
+      {
+        "rota": "GET /api/relatorio/passagens",
+        "descricao": "Retorna a matriz de passagens por equipamento/faixa e dia",
+        "parametros_query": {
+          "mes": "obrigatorio — INT 1-12",
+          "ano": "obrigatorio — INT ex: 2025",
+          "equipamento": "opcional — string Codigo ou 'TODOS' (default: TODOS)"
+        },
+        "exemplo_url": "/api/relatorio/passagens?mes=8&ano=2025&equipamento=TODOS",
+        "resposta_200": {
+          "tipo": "passagens",
+          "mes": 8,
+          "ano": 2025,
+          "totalDias": 31,
+          "totalLinhas": 19,
+          "linhas": [
+            {
+              "equipFaixa": "F-DIP-D0496 FX1",
+              "dias": { "1": 9243, "2": 7814, "3": 5309 },
+              "total": 95538
+            }
+          ],
+          "equipamentos": ["F-DIP-D0496", "F-DIP-D0497"]
+        },
+        "resposta_400": { "erro": "Parâmetros obrigatórios: mes, ano" },
+        "resposta_500": { "erro": "Erro ao gerar relatório de passagens", "detalhe": "mensagem do banco" }
+      },
+      {
+        "rota": "GET /api/relatorio/imagens",
+        "descricao": "Retorna a matriz de imagens capturadas por equipamento/faixa e dia",
+        "parametros_query": {
+          "mes": "obrigatorio — INT 1-12",
+          "ano": "obrigatorio — INT ex: 2025",
+          "equipamento": "opcional — string Codigo ou 'TODOS' (default: TODOS)"
+        },
+        "exemplo_url": "/api/relatorio/imagens?mes=8&ano=2025&equipamento=F-DIP-D0496",
+        "resposta_200_estrutura": "Mesma estrutura do endpoint /passagens com tipo='imagens'"
+      },
+      {
+        "rota": "GET /api/relatorio/equipamentos",
+        "descricao": "Lista equipamentos disponíveis para o filtro da tela",
+        "parametros_query": {},
+        "exemplo_url": "/api/relatorio/equipamentos",
+        "resposta_200": {
+          "equipamentos": ["F-DIP-D0496", "F-DIP-D0497", "F-DIP-D0671"]
+        }
+      }
+    ]
+  },
+
+  "backend_nodejs": {
+    "arquivo": "src/relatorio-controller.js",
+    "framework": "Express.js / Node.js ESM",
+    "dependencias": ["mssql"],
+    "instrucoes": [
+      "1. Criar o arquivo relatorio-controller.js no diretório src/",
+      "2. Importar a função 'conectar' do serviço de banco de dados AxHub (mssql pool)",
+      "3. Implementar as três funções exportadas: relatorioPassagens, relatorioImagens, listarEquipamentosRelatorio",
+      "4. Registrar as rotas no arquivo routes.js conforme seção 'rotas_para_registrar'"
+    ],
+    "rotas_para_registrar": {
+      "arquivo": "src/routes.js",
+      "import_linha": "import { relatorioPassagens, relatorioImagens, listarEquipamentosRelatorio } from './relatorio-controller.js';",
+      "rotas": [
+        "router.get('/relatorio/passagens', relatorioPassagens);",
+        "router.get('/relatorio/imagens', relatorioImagens);",
+        "router.get('/relatorio/equipamentos', listarEquipamentosRelatorio);"
+      ]
+    },
+    "codigo_controller": {
+      "funcao_helper_montarMatriz": [
+        "function montarMatriz(registros) {",
+        "  const linhas = {};",
+        "  for (const row of registros) {",
+        "    const chave = row.EquipFaixa;",
+        "    if (!linhas[chave]) linhas[chave] = { equipFaixa: chave, dias: {}, total: 0 };",
+        "    linhas[chave].dias[row.Dia] = row.Total;",
+        "    linhas[chave].total += Number(row.Total);",
+        "  }",
+        "  return Object.values(linhas).sort((a, b) => a.equipFaixa.localeCompare(b.equipFaixa));",
+        "}"
+      ],
+      "logica_filtro_equipamento": [
+        "// Aplicar filtro condicional apenas se não for TODOS",
+        "const filtroEquip = equipamento !== 'TODOS' ? 'AND e.Codigo = @equipamento' : '';",
+        "const request = pool.request().input('mes', mesInt).input('ano', anoInt);",
+        "if (equipamento !== 'TODOS') request.input('equipamento', equipamento);"
+      ]
+    }
+  },
+
+  "frontend_react": {
+    "arquivo_componente": "src/components/RelatorioFluxoTabela.jsx",
+    "arquivo_pagina_mdx": "docs/relatorios/fluxo-diario-equipamento-faixa.mdx",
+    "framework": "React + Docusaurus MDX",
+    "instrucoes_integracao_sistema_principal": [
+      "1. Copiar o componente RelatorioFluxoTabela.jsx para o diretório de componentes do AxHub frontend",
+      "2. Ajustar a constante API para apontar para a URL base da API do sistema (ex: process.env.REACT_APP_API_URL)",
+      "3. Garantir que a rota da nova tela esteja registrada no sistema de rotas principal",
+      "4. Adicionar o item de menu 'Relatório de Fluxo' na seção de Relatórios da navegação lateral",
+      "5. Se o sistema usa autenticação via header, adicionar o token nos fetch() do componente"
+    ],
+    "ajuste_url_api": {
+      "atual": "const API = 'http://localhost:3100/api';",
+      "producao": "const API = process.env.REACT_APP_API_URL || '/api';"
+    },
+    "ajuste_autenticacao": {
+      "descricao": "Se o sistema usa JWT, adicionar o header Authorization nos fetch",
+      "exemplo": "fetch(API + endpoint, { headers: { 'Authorization': 'Bearer ' + token } })"
+    },
+    "estrutura_dados_esperada_api": {
+      "linhas": "Array de objetos { equipFaixa: string, dias: { [dia: number]: number }, total: number }",
+      "equipamentos": "Array de strings com os codigos dos equipamentos",
+      "totalLinhas": "number — total de pares Equip+Faixa retornados",
+      "mes": "number — mês consultado",
+      "ano": "number — ano consultado"
+    }
+  },
+
+  "integracao_sistema_axhub_dotnet": {
+    "descricao": "Orientações para o desenvolvedor implementar os endpoints diretamente no sistema AxHub (.NET/MVC), caso não use a API Node intermediária.",
+    "controller_sugerido": "RelatorioController.cs",
+    "action_passagens": {
+      "rota": "GET /api/relatorio/passagens",
+      "parametros": ["int mes", "int ano", "string equipamento = 'TODOS'"],
+      "retorno": "JsonResult com a mesma estrutura definida em api_endpoints.endpoints[0].resposta_200",
+      "query_sql": "Ver seção sql.passagens.query_formatada_todos / query_formatada_filtro",
+      "observacao": "Usar SqlParameter para @mes, @ano, @equipamento. Nunca interpolar strings SQL diretamente (prevenção SQL Injection)."
+    },
+    "action_imagens": {
+      "rota": "GET /api/relatorio/imagens",
+      "parametros": ["int mes", "int ano", "string equipamento = 'TODOS'"],
+      "retorno": "JsonResult com estrutura equivalente ao endpoint de passagens",
+      "query_sql": "Ver seção sql.imagens.query_formatada_todos / query_formatada_filtro"
+    },
+    "action_equipamentos": {
+      "rota": "GET /api/relatorio/equipamentos",
+      "retorno": "JsonResult { equipamentos: string[] }",
+      "query_sql": "SELECT DISTINCT Codigo FROM TBEquipamentos WHERE Codigo IS NOT NULL ORDER BY Codigo"
+    },
+    "transformacao_resultado_para_matriz": {
+      "descricao": "O resultado flat da query precisa ser transformado em matriz esparsa antes de retornar ao frontend.",
+      "algoritmo": [
+        "1. Iterar sobre cada linha do resultado (EquipFaixa, Dia, Total)",
+        "2. Agrupar por EquipFaixa em um Dictionary<string, Dictionary<int, int>>",
+        "3. Para cada EquipFaixa, criar objeto: { equipFaixa, dias: {dia: total}, total_geral }",
+        "4. Retornar lista ordenada por equipFaixa"
+      ],
+      "pseudocodigo_csharp": [
+        "var linhas = new Dictionary<string, RelatorioFluxoLinha>();",
+        "foreach (var row in resultado) {",
+        "  if (!linhas.ContainsKey(row.EquipFaixa))",
+        "    linhas[row.EquipFaixa] = new RelatorioFluxoLinha { EquipFaixa = row.EquipFaixa };",
+        "  linhas[row.EquipFaixa].Dias[row.Dia] = row.Total;",
+        "  linhas[row.EquipFaixa].Total += row.Total;",
+        "}",
+        "return linhas.Values.OrderBy(l => l.EquipFaixa).ToList();"
+      ]
+    }
+  },
+
+  "modelo_classes_csharp": {
+    "RelatorioFluxoLinha": {
+      "campos": {
+        "EquipFaixa": "string",
+        "Dias": "Dictionary<int, int>",
+        "Total": "int"
+      }
+    },
+    "RelatorioFluxoResponse": {
+      "campos": {
+        "Tipo": "string (passagens|imagens)",
+        "Mes": "int",
+        "Ano": "int",
+        "TotalDias": "int",
+        "TotalLinhas": "int",
+        "Linhas": "List<RelatorioFluxoLinha>",
+        "Equipamentos": "List<string>"
+      }
+    }
+  },
+
+  "seguranca": {
+    "sql_injection": "Usar SEMPRE parâmetros tipados (@mes, @ano, @equipamento). Nunca concatenar valores do usuário na query.",
+    "validacao_parametros": [
+      "mes: deve ser inteiro entre 1 e 12",
+      "ano: deve ser inteiro entre 2000 e ano_atual + 1",
+      "equipamento: validar contra a lista de equipamentos cadastrados se possível"
+    ],
+    "autorizacao": "O endpoint deve exigir autenticação. Sugestão: middleware/filtro de autenticação existente no sistema.",
+    "cors": "Liberar a origem do frontend nos headers CORS do servidor"
+  },
+
+  "performance": {
+    "indices": "Ver seção sql.indices_recomendados",
+    "cache_equipamentos": "A lista de equipamentos muda raramente. Considerar cache de 5 minutos no servidor.",
+    "paginacao": "Para consultas com muitos equipamentos (> 200 linhas), considerar paginação ou scroll virtual no frontend.",
+    "timeout": "Definir timeout de 15 segundos na query. Para meses com alto volume, a query pode demorar 2-5s sem índice."
+  },
+
+  "testes_sql": {
+    "descricao": "Queries de teste para executar diretamente no SQL Server Management Studio e validar os resultados antes de integrar.",
+    "teste_passagens_agosto_2025": {
+      "query": "DECLARE @mes INT = 8; DECLARE @ano INT = 2025; SELECT e.Codigo + ' FX' + f.NumeroFaixa AS EquipFaixa, DAY(p.DataHoraPassagem) AS Dia, COUNT(*) AS Total FROM TBPassagens p JOIN TBEquipamentos e ON p.Equipamento_id = e.Id JOIN TBFaixas f ON p.Faixa_id = f.Id WHERE MONTH(p.DataHoraPassagem) = @mes AND YEAR(p.DataHoraPassagem) = @ano GROUP BY e.Codigo, f.NumeroFaixa, DAY(p.DataHoraPassagem) ORDER BY e.Codigo, f.NumeroFaixa, DAY(p.DataHoraPassagem);",
+      "resultado_esperado": "Linhas com EquipFaixa no formato 'F-DIP-D0496 FX1', Dia de 1-31, Total inteiro positivo"
+    },
+    "teste_imagens_agosto_2025": {
+      "query": "DECLARE @mes INT = 8; DECLARE @ano INT = 2025; SELECT e.Codigo + ' FX' + f.NumeroFaixa AS EquipFaixa, DAY(pc.DataHoraPassagem) AS Dia, COUNT(ipc.Id) AS Total FROM TBPassagensConjugadas pc JOIN TBEquipamentos e ON pc.Equipamento_id = e.Id JOIN TBFaixas f ON pc.Faixa_id = f.Id LEFT JOIN TBImagensPassagensConjugadas ipc ON ipc.PassagemConjugada_id = pc.Id WHERE MONTH(pc.DataHoraPassagem) = @mes AND YEAR(pc.DataHoraPassagem) = @ano GROUP BY e.Codigo, f.NumeroFaixa, DAY(pc.DataHoraPassagem) ORDER BY e.Codigo, f.NumeroFaixa, DAY(pc.DataHoraPassagem);",
+      "resultado_esperado": "Estrutura igual ao teste de passagens, Total pode ser 0 (LEFT JOIN inclui dias sem imagem)"
+    },
+    "teste_equipamentos": {
+      "query": "SELECT DISTINCT Codigo FROM TBEquipamentos WHERE Codigo IS NOT NULL ORDER BY Codigo;",
+      "resultado_esperado": "Lista de strings no formato F-DIP-XXXXX"
+    }
+  },
+
+  "checklist_implementacao": [
+    { "id": 1, "etapa": "Banco de Dados", "item": "Executar queries de teste no SSMS e validar retorno com dados reais" },
+    { "id": 2, "etapa": "Banco de Dados", "item": "Criar índices recomendados (ver sql.indices_recomendados)" },
+    { "id": 3, "etapa": "Backend", "item": "Implementar RelatorioController com os 3 endpoints" },
+    { "id": 4, "etapa": "Backend", "item": "Registrar as rotas no roteador principal da aplicação" },
+    { "id": 5, "etapa": "Backend", "item": "Aplicar middleware de autenticação nos endpoints" },
+    { "id": 6, "etapa": "Backend", "item": "Testar endpoints via Postman ou curl com parâmetros válidos e inválidos" },
+    { "id": 7, "etapa": "Frontend", "item": "Copiar componente RelatorioFluxoTabela.jsx para o projeto frontend" },
+    { "id": 8, "etapa": "Frontend", "item": "Ajustar constante API para URL correta do ambiente" },
+    { "id": 9, "etapa": "Frontend", "item": "Adicionar autenticação nos fetch() se necessário" },
+    { "id": 10, "etapa": "Frontend", "item": "Registrar rota /relatorio/fluxo no sistema de rotas" },
+    { "id": 11, "etapa": "Frontend", "item": "Adicionar item 'Relatório de Fluxo' no menu de Relatórios" },
+    { "id": 12, "etapa": "Validação", "item": "Comparar totais do relatório gerado com consultas manuais no banco" },
+    { "id": 13, "etapa": "Validação", "item": "Testar filtro por equipamento específico" },
+    { "id": 14, "etapa": "Validação", "item": "Testar exportação CSV e abertura no Excel" },
+    { "id": 15, "etapa": "Validação", "item": "Testar com mês sem dados (resultado deve retornar totalLinhas=0)" }
+  ]
+}

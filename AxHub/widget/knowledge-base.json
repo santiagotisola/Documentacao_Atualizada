@@ -1,0 +1,2571 @@
+{
+  "version": "4.0.0",
+  "updated": "2026-04-27",
+  "system": "AxHub",
+  "description": "Base de conhecimento do assistente AxionIA para o sistema AxHub — gestão de equipamentos de fiscalização",
+  "totalEntries": 91,
+  "entries": [
+    {
+      "id": "administracao-arcos",
+      "title": "Arcos",
+      "module": "Administração",
+      "keywords": [
+        "arcos",
+        "cadastro",
+        "fiscaliza",
+        "acessar",
+        "arco",
+        "navegacao",
+        "configuracao",
+        "administracao",
+        "sistema",
+        "admin"
+      ],
+      "content": "Cadastro de arcos de fiscalização",
+      "steps": [],
+      "path": "Arcos",
+      "docUrl": "administracao/arcos",
+      "related": [
+        "cadastros-basicos-equipamentos",
+        "operacoes-cadastro-operacoes"
+      ],
+      "dbTables": []
+    },
+    {
+      "id": "administracao-configuracoes-enquadramento",
+      "title": "Configurações de Enquadramento",
+      "module": "Administração",
+      "keywords": [
+        "configurações de enquadramento",
+        "configuracoes de enquadramento",
+        "configura",
+        "enquadramento",
+        "enquadramentos",
+        "infra",
+        "acessar",
+        "cadastro",
+        "configuracao",
+        "administracao",
+        "sistema",
+        "admin"
+      ],
+      "content": "Configuração de enquadramentos de infrações",
+      "steps": [],
+      "path": "Configurações de Enquadramento",
+      "docUrl": "administracao/configuracoes-enquadramento",
+      "related": [
+        "enquadramentos",
+        "infracoes-triagem",
+        "glossario-enquadramento"
+      ],
+      "dbTables": []
+    },
+    {
+      "id": "administracao-configuracoes-sistema",
+      "title": "Configurações do Sistema",
+      "module": "Administração",
+      "keywords": [
+        "configurações do sistema",
+        "configuracoes do sistema",
+        "configura",
+        "sistema",
+        "gerais",
+        "axhub",
+        "acessar",
+        "funcionalidades",
+        "configuracao",
+        "administracao",
+        "admin"
+      ],
+      "content": "Configurações gerais do AxHub",
+      "steps": [],
+      "path": "Configurações",
+      "docUrl": "administracao/configuracoes-sistema",
+      "related": [
+        "webhooks",
+        "relatorios-power-bi"
+      ],
+      "dbTables": []
+    },
+    {
+      "id": "administracao-enquadramentos",
+      "title": "Enquadramentos",
+      "module": "Administração",
+      "keywords": [
+        "enquadramentos",
+        "tabela",
+        "infra",
+        "trânsito",
+        "acessar",
+        "termos",
+        "configuracao",
+        "administracao",
+        "sistema",
+        "admin"
+      ],
+      "content": "Tabela de enquadramentos de infrações de trânsito",
+      "steps": [],
+      "path": "Enquadramentos",
+      "docUrl": "administracao/enquadramentos",
+      "related": [
+        "configuracoes-enquadramento",
+        "formas-autuacao",
+        "glossario-enquadramento",
+        "glossario-autuacao"
+      ],
+      "dbTables": []
+    },
+    {
+      "id": "administracao-formas-autuacao",
+      "title": "Formas de Autuação",
+      "module": "Administração",
+      "keywords": [
+        "formas de autuação",
+        "formas de autuacao",
+        "formas",
+        "autua",
+        "cadastro",
+        "acessar",
+        "navegacao",
+        "relacionada",
+        "configuracao",
+        "administracao",
+        "sistema",
+        "admin"
+      ],
+      "content": "Cadastro de formas de autuação",
+      "steps": [],
+      "path": "Formas de Autuação",
+      "docUrl": "administracao/formas-autuacao",
+      "related": [
+        "enquadramentos",
+        "infracoes-exportacao",
+        "glossario-autuacao"
+      ],
+      "dbTables": []
+    },
+    {
+      "id": "administracao-layouts-arquivos",
+      "title": "Layouts de Arquivos",
+      "module": "Administração",
+      "keywords": [
+        "layouts de arquivos",
+        "layouts",
+        "arquivos",
+        "configura",
+        "importa",
+        "exporta",
+        "acessar",
+        "configuracao",
+        "administracao",
+        "sistema",
+        "admin"
+      ],
+      "content": "Configuração de layouts para importação e exportação",
+      "steps": [],
+      "path": "Layouts de Arquivos",
+      "docUrl": "administracao/layouts-arquivos",
+      "related": [
+        "infracoes-exportacao",
+        "glossario-lote-exportacao"
+      ],
+      "dbTables": []
+    },
+    {
+      "id": "administracao-motivos-descartes",
+      "title": "Motivos de Descarte",
+      "module": "Administração",
+      "keywords": [
+        "motivos de descarte",
+        "motivos",
+        "descarte",
+        "cadastro",
+        "infra",
+        "acessar",
+        "termos",
+        "configuracao",
+        "administracao",
+        "sistema",
+        "admin"
+      ],
+      "content": "Cadastro de motivos para descarte de infrações",
+      "steps": [],
+      "path": "Motivos de Descarte",
+      "docUrl": "administracao/motivos-descartes",
+      "related": [
+        "infracoes-triagem",
+        "infracoes-infracoes-descartadas"
+      ],
+      "dbTables": []
+    },
+    {
+      "id": "administracao-regioes",
+      "title": "Regiões",
+      "module": "Administração",
+      "keywords": [
+        "regiões",
+        "cadastro",
+        "geográficas",
+        "acessar",
+        "navegacao",
+        "relacionada",
+        "configuracao",
+        "administracao",
+        "sistema",
+        "admin"
+      ],
+      "content": "Cadastro de regiões geográficas",
+      "steps": [],
+      "path": "Regiões",
+      "docUrl": "administracao/regioes",
+      "related": [
+        "operacoes-cadastro-operacoes",
+        "cadastros-basicos-equipamentos"
+      ],
+      "dbTables": []
+    },
+    {
+      "id": "administracao-relatorios-power-bi",
+      "title": "Relatórios Power BI",
+      "module": "Administração",
+      "keywords": [
+        "relatórios power bi",
+        "relatorios power bi",
+        "relatórios",
+        "power",
+        "configura",
+        "integrados",
+        "acessar",
+        "disponíveis",
+        "configuracao",
+        "administracao",
+        "sistema",
+        "admin"
+      ],
+      "content": "Configuração de relatórios Power BI integrados",
+      "steps": [],
+      "path": "Relatórios Power BI",
+      "docUrl": "administracao/relatorios-power-bi",
+      "related": [
+        "relatorios-power-bi",
+        "configuracoes-sistema"
+      ],
+      "dbTables": []
+    },
+    {
+      "id": "administracao-sequenciais-infracoes",
+      "title": "Sequenciais de Infrações",
+      "module": "Administração",
+      "keywords": [
+        "sequenciais de infrações",
+        "sequenciais de infracoes",
+        "sequenciais",
+        "infra",
+        "controle",
+        "numéricos",
+        "acessar",
+        "navegacao",
+        "configuracao",
+        "administracao",
+        "sistema",
+        "admin"
+      ],
+      "content": "Controle de sequenciais numéricos de infrações",
+      "steps": [],
+      "path": "Sequenciais de Infrações",
+      "docUrl": "administracao/sequenciais-infracoes",
+      "related": [
+        "infracoes-triagem",
+        "infracoes-consulta-infracoes"
+      ],
+      "dbTables": []
+    },
+    {
+      "id": "administracao-sequenciais-lote-exportacao",
+      "title": "Sequenciais de Lote de Exportação",
+      "module": "Administração",
+      "keywords": [
+        "sequenciais de lote de exportação",
+        "sequenciais de lote de exportacao",
+        "sequenciais",
+        "lote",
+        "exporta",
+        "controle",
+        "lotes",
+        "exportados",
+        "configuracao",
+        "administracao",
+        "sistema",
+        "admin"
+      ],
+      "content": "Controle de sequenciais de lotes exportados",
+      "steps": [],
+      "path": "Sequenciais de Lote de Exportação",
+      "docUrl": "administracao/sequenciais-lote-exportacao",
+      "related": [
+        "infracoes-exportacao",
+        "glossario-lote-exportacao"
+      ],
+      "dbTables": []
+    },
+    {
+      "id": "administracao-tarjas",
+      "title": "Tarjas",
+      "module": "Administração",
+      "keywords": [
+        "tarjas",
+        "configura",
+        "imagens",
+        "infra",
+        "acessar",
+        "navegacao",
+        "configuracao",
+        "administracao",
+        "sistema",
+        "admin"
+      ],
+      "content": "Configuração de tarjas para imagens de infrações",
+      "steps": [],
+      "path": "Tarjas",
+      "docUrl": "administracao/tarjas",
+      "related": [
+        "infracoes-triagem",
+        "infracoes-exportacao"
+      ],
+      "dbTables": []
+    },
+    {
+      "id": "administracao-tipos-afericoes",
+      "title": "Tipos de Aferições",
+      "module": "Administração",
+      "keywords": [
+        "tipos de aferições",
+        "tipos de afericoes",
+        "tipos",
+        "aferi",
+        "cadastro",
+        "metrológicas",
+        "acessar",
+        "navegacao",
+        "configuracao",
+        "administracao",
+        "sistema",
+        "admin"
+      ],
+      "content": "Cadastro de tipos de aferições metrológicas",
+      "steps": [],
+      "path": "Tipos de Aferições",
+      "docUrl": "administracao/tipos-afericoes",
+      "related": [
+        "operacoes-afericoes",
+        "glossario-afericao"
+      ],
+      "dbTables": []
+    },
+    {
+      "id": "administracao-tipos-imagens",
+      "title": "Tipos de Imagens",
+      "module": "Administração",
+      "keywords": [
+        "tipos de imagens",
+        "tipos",
+        "imagens",
+        "cadastro",
+        "capturadas",
+        "acessar",
+        "navegacao",
+        "configuracao",
+        "administracao",
+        "sistema",
+        "admin"
+      ],
+      "content": "Cadastro de tipos de imagens capturadas",
+      "steps": [],
+      "path": "Tipos de Imagens",
+      "docUrl": "administracao/tipos-imagens",
+      "related": [
+        "infracoes-triagem",
+        "cadastros-basicos-equipamentos"
+      ],
+      "dbTables": []
+    },
+    {
+      "id": "administracao-webhooks",
+      "title": "Webhooks",
+      "module": "Administração",
+      "keywords": [
+        "webhooks",
+        "configura",
+        "integra",
+        "externas",
+        "acessar",
+        "navegacao",
+        "configuracao",
+        "administracao",
+        "sistema",
+        "admin"
+      ],
+      "content": "Configuração de webhooks para integrações externas",
+      "steps": [],
+      "path": "Webhooks",
+      "docUrl": "administracao/webhooks",
+      "related": [
+        "configuracoes-sistema",
+        "infracoes-exportacao"
+      ],
+      "dbTables": []
+    },
+    {
+      "id": "balanca-pesagem",
+      "title": "Pesagem",
+      "module": "Balança",
+      "keywords": [
+        "pesagem",
+        "sidebar_position",
+        "title",
+        "acessar",
+        "tickets",
+        "abertos",
+        "balanca",
+        "peso",
+        "medicao",
+        "sensor"
+      ],
+      "content": "--- sidebar_position: 1 title: Pesagem",
+      "steps": [],
+      "path": "Pesagem",
+      "docUrl": "balanca/pesagem",
+      "related": [
+        "triagem-balanca"
+      ],
+      "dbTables": []
+    },
+    {
+      "id": "balanca-triagem-balanca",
+      "title": "Triagem de Balanca",
+      "module": "Balança",
+      "keywords": [
+        "triagem de balanca",
+        "triagem",
+        "balanca",
+        "sidebar_position",
+        "title",
+        "acessar",
+        "reclassificar",
+        "peso",
+        "medicao",
+        "sensor"
+      ],
+      "content": "--- sidebar_position: 2 title: Triagem de Balanca",
+      "steps": [],
+      "path": "Triagem",
+      "docUrl": "balanca/triagem-balanca",
+      "related": [
+        "pesagem"
+      ],
+      "dbTables": []
+    },
+    {
+      "id": "cadastros-basicos-equipamentos",
+      "title": "Equipamentos",
+      "module": "Cadastros Básicos",
+      "keywords": [
+        "equipamentos",
+        "cadastro",
+        "gestão",
+        "trânsito",
+        "acessar",
+        "listagem",
+        "registrar",
+        "criar",
+        "novo"
+      ],
+      "content": "Cadastro e gestão dos equipamentos de trânsito",
+      "steps": [
+        "Na listagem, clique em **+ Novo**",
+        "Preencha o **Nº Série** e o **Código** do equipamento",
+        "Informe o **Número Certificado Inmetro** e as datas de emissão/vencimento",
+        "Selecione o **Modelo**, **Tipo** e **Grupo** nos campos dropdown",
+        "Escolha o **Tipo da Operação** (Fixo ou Móvel)",
+        "Clique em **Salvar**",
+        "Fabricantes",
+        "Tipos de Equipamentos",
+        "Modelos de Equipamentos",
+        "Grupos de Equipamentos"
+      ],
+      "path": "Equipamentos",
+      "docUrl": "cadastros-basicos/equipamentos",
+      "related": [
+        "fabricantes",
+        "tipos-equipamentos",
+        "modelos-equipamentos",
+        "grupos-equipamentos",
+        "glossario-afericao"
+      ],
+      "dbTables": []
+    },
+    {
+      "id": "cadastros-basicos-fabricantes",
+      "title": "Fabricantes",
+      "module": "Cadastros Básicos",
+      "keywords": [
+        "fabricantes",
+        "cadastro",
+        "equipamentos",
+        "trânsito",
+        "acessar",
+        "listagem",
+        "registrar",
+        "criar",
+        "novo"
+      ],
+      "content": "Cadastro de fabricantes de equipamentos de trânsito",
+      "steps": [
+        "Na listagem, clique em **+ Novo**",
+        "Preencha o **Nome** do fabricante",
+        "Preencha o **Slug** (identificador único, sem espaços ou caracteres especiais)",
+        "Preencha os demais campos conforme necessário",
+        "Clique em **Salvar**",
+        "Após salvar, clique em **Gerar Novo Token** para criar o token de API"
+      ],
+      "path": "Fabricantes",
+      "docUrl": "cadastros-basicos/fabricantes",
+      "related": [
+        "equipamentos",
+        "modelos-equipamentos"
+      ],
+      "dbTables": []
+    },
+    {
+      "id": "cadastros-basicos-grupos-equipamentos",
+      "title": "Grupos de Equipamentos",
+      "module": "Cadastros Básicos",
+      "keywords": [
+        "grupos de equipamentos",
+        "grupos",
+        "equipamentos",
+        "agrupamento",
+        "lógico",
+        "organiza",
+        "monitoramento",
+        "cadastro",
+        "registrar",
+        "criar",
+        "novo"
+      ],
+      "content": "Agrupamento lógico de equipamentos para organização e monitoramento",
+      "steps": [
+        "Na listagem, clique em **+ Novo**",
+        "Informe o **Nome do Grupo de Equipamentos**",
+        "Selecione uma **Cor** para identificação visual no mapa",
+        "Configure as opções de **monitoramento** e **limite de horas** conforme necessário",
+        "Clique em **Salvar**"
+      ],
+      "path": "Grupos de Equipamentos",
+      "docUrl": "cadastros-basicos/grupos-equipamentos",
+      "related": [
+        "equipamentos"
+      ],
+      "dbTables": []
+    },
+    {
+      "id": "cadastros-basicos-modelos-equipamentos",
+      "title": "Modelos de Equipamentos",
+      "module": "Cadastros Básicos",
+      "keywords": [
+        "modelos de equipamentos",
+        "modelos",
+        "equipamentos",
+        "cadastro",
+        "portarias",
+        "inmetro",
+        "acessar",
+        "registrar",
+        "criar",
+        "novo"
+      ],
+      "content": "Cadastro dos modelos de equipamentos e portarias INMETRO",
+      "steps": [
+        "Na listagem, clique em **+ Novo**",
+        "Informe a **Marca** e o **Modelo** do equipamento",
+        "Preencha o **Número da Portaria** e a **Portaria** completa do INMETRO",
+        "Selecione o **Fabricante** no campo dropdown",
+        "Clique em **Salvar**"
+      ],
+      "path": "Modelos de Equipamentos",
+      "docUrl": "cadastros-basicos/modelos-equipamentos",
+      "related": [
+        "equipamentos",
+        "fabricantes",
+        "tipos-equipamentos"
+      ],
+      "dbTables": []
+    },
+    {
+      "id": "cadastros-basicos-tipos-equipamentos",
+      "title": "Tipos de Equipamentos",
+      "module": "Cadastros Básicos",
+      "keywords": [
+        "tipos de equipamentos",
+        "tipos",
+        "equipamentos",
+        "cadastro",
+        "trânsito",
+        "acessar",
+        "listagem",
+        "registrar",
+        "criar",
+        "novo"
+      ],
+      "content": "Cadastro dos tipos de equipamentos de trânsito",
+      "steps": [
+        "Na listagem, clique em **+ Novo**",
+        "Informe o **Nome** do tipo",
+        "Opcionalmente, envie um **ícone** para representação visual",
+        "Clique em **Nova Forma de Atuação** para vincular os tipos de infração que este equipamento detecta",
+        "Clique em **Salvar**"
+      ],
+      "path": "Tipos de Equipamentos",
+      "docUrl": "cadastros-basicos/tipos-equipamentos",
+      "related": [
+        "equipamentos",
+        "modelos-equipamentos"
+      ],
+      "dbTables": []
+    },
+    {
+      "id": "controle-acesso-acessos-por-ip",
+      "title": "Acessos por IP",
+      "module": "Controle de Acesso",
+      "keywords": [
+        "acessos por ip",
+        "acessos",
+        "restri",
+        "acesso",
+        "endere",
+        "acessar",
+        "navegacao",
+        "usuario",
+        "permissao",
+        "perfil"
+      ],
+      "content": "Restrição de acesso por endereço IP",
+      "steps": [],
+      "path": "%20acessos%20por%20ip.png)",
+      "docUrl": "controle-acesso/acessos-por-ip",
+      "related": [
+        "usuarios",
+        "logs-acesso"
+      ],
+      "dbTables": []
+    },
+    {
+      "id": "controle-acesso-logs-acesso",
+      "title": "Logs de Acesso",
+      "module": "Controle de Acesso",
+      "keywords": [
+        "logs de acesso",
+        "logs",
+        "acesso",
+        "registro",
+        "acessos",
+        "usuários",
+        "acessar",
+        "usuario",
+        "permissao",
+        "perfil"
+      ],
+      "content": "Registro de acessos e ações dos usuários",
+      "steps": [],
+      "path": "%20logs%20de%20acesso.png)",
+      "docUrl": "controle-acesso/logs-acesso",
+      "related": [
+        "usuarios",
+        "acessos-por-ip"
+      ],
+      "dbTables": []
+    },
+    {
+      "id": "controle-acesso-perfis-acesso",
+      "title": "Perfis de Acesso",
+      "module": "Controle de Acesso",
+      "keywords": [
+        "perfis de acesso",
+        "perfis",
+        "acesso",
+        "configura",
+        "sistema",
+        "acessar",
+        "cadastro",
+        "usuario",
+        "permissao",
+        "perfil"
+      ],
+      "content": "Configuração de perfis de acesso ao sistema",
+      "steps": [],
+      "path": "%20Perfil%20de%20acesso.png)",
+      "docUrl": "controle-acesso/perfis-acesso",
+      "related": [
+        "usuarios",
+        "permissoes"
+      ],
+      "dbTables": []
+    },
+    {
+      "id": "controle-acesso-permissoes",
+      "title": "Permissões de Acesso",
+      "module": "Controle de Acesso",
+      "keywords": [
+        "permissões de acesso",
+        "permissões",
+        "acesso",
+        "configura",
+        "granular",
+        "perfil",
+        "acessar",
+        "usuario",
+        "permissao"
+      ],
+      "content": "Configuração granular de permissões por perfil",
+      "steps": [],
+      "path": "%20permissao%20de%20acesso.png)",
+      "docUrl": "controle-acesso/permissoes",
+      "related": [
+        "perfis-acesso",
+        "usuarios"
+      ],
+      "dbTables": []
+    },
+    {
+      "id": "controle-acesso-usuarios",
+      "title": "Usuários",
+      "module": "Controle de Acesso",
+      "keywords": [
+        "usuários",
+        "usuarios",
+        "cadastro",
+        "gestão",
+        "sistema",
+        "acessar",
+        "usuário",
+        "usuario",
+        "permissao",
+        "perfil",
+        "acesso"
+      ],
+      "content": "Cadastro e gestão de usuários do sistema",
+      "steps": [],
+      "path": "%20usuario.png)",
+      "docUrl": "controle-acesso/usuarios",
+      "related": [
+        "perfis-acesso",
+        "permissoes",
+        "logs-acesso",
+        "acessos-por-ip"
+      ],
+      "dbTables": []
+    },
+    {
+      "id": "cronotacografo-consulta",
+      "title": "Consulta",
+      "module": "Cronotacógrafo",
+      "keywords": [
+        "consulta",
+        "registros",
+        "cronotacógrafo",
+        "acessar",
+        "navegacao",
+        "relacionada"
+      ],
+      "content": "Consulta de registros de cronotacógrafo",
+      "steps": [],
+      "path": "Consulta",
+      "docUrl": "cronotacografo/consulta",
+      "related": [
+        "triagem",
+        "glossario-cronotacografo"
+      ],
+      "dbTables": []
+    },
+    {
+      "id": "cronotacografo-triagem",
+      "title": "Triagem",
+      "module": "Cronotacógrafo",
+      "keywords": [
+        "triagem",
+        "infra",
+        "cronotacógrafo",
+        "acessar",
+        "fluxo",
+        "dados"
+      ],
+      "content": "Triagem de infrações de cronotacógrafo",
+      "steps": [],
+      "path": "Triagem",
+      "docUrl": "cronotacografo/triagem",
+      "related": [
+        "consulta",
+        "glossario-cronotacografo"
+      ],
+      "dbTables": []
+    },
+    {
+      "id": "glossario-afericao",
+      "title": "Afericao",
+      "module": "Glossário",
+      "keywords": [
+        "afericao",
+        "title",
+        "sidebar_position",
+        "definicao",
+        "base",
+        "legal",
+        "glossario",
+        "termo",
+        "conceito"
+      ],
+      "content": "--- title: \"Afericao\" sidebar_position: 3",
+      "steps": [],
+      "path": "Menu lateral → Glossário → Afericao",
+      "docUrl": "glossario/afericao",
+      "related": [],
+      "dbTables": []
+    },
+    {
+      "id": "glossario-autuacao",
+      "title": "Autuacao",
+      "module": "Glossário",
+      "keywords": [
+        "autuacao",
+        "title",
+        "sidebar_position",
+        "definicao",
+        "base",
+        "legal",
+        "glossario",
+        "termo",
+        "conceito"
+      ],
+      "content": "--- title: \"Autuacao\" sidebar_position: 4",
+      "steps": [],
+      "path": "Menu lateral → Glossário → Autuacao",
+      "docUrl": "glossario/autuacao",
+      "related": [],
+      "dbTables": []
+    },
+    {
+      "id": "glossario-cronotacografo",
+      "title": "Cronotacografo",
+      "module": "Glossário",
+      "keywords": [
+        "cronotacografo",
+        "title",
+        "sidebar_position",
+        "definicao",
+        "base",
+        "legal",
+        "glossario",
+        "termo",
+        "conceito"
+      ],
+      "content": "--- title: \"Cronotacografo\" sidebar_position: 5",
+      "steps": [],
+      "path": "Menu lateral → Glossário → Cronotacografo",
+      "docUrl": "glossario/cronotacografo",
+      "related": [],
+      "dbTables": []
+    },
+    {
+      "id": "glossario-enquadramento",
+      "title": "Enquadramento",
+      "module": "Glossário",
+      "keywords": [
+        "enquadramento",
+        "title",
+        "sidebar_position",
+        "definicao",
+        "base",
+        "legal",
+        "glossario",
+        "termo",
+        "conceito"
+      ],
+      "content": "--- title: \"Enquadramento\" sidebar_position: 1",
+      "steps": [],
+      "path": "Menu lateral → Glossário → Enquadramento",
+      "docUrl": "glossario/enquadramento",
+      "related": [],
+      "dbTables": []
+    },
+    {
+      "id": "glossario-infracao",
+      "title": "Infracao de Transito",
+      "module": "Glossário",
+      "keywords": [
+        "infracao de transito",
+        "infracao",
+        "transito",
+        "title",
+        "sidebar_position",
+        "definicao",
+        "base",
+        "glossario",
+        "termo",
+        "conceito"
+      ],
+      "content": "--- title: \"Infracao de Transito\" sidebar_position: 2",
+      "steps": [],
+      "path": "Menu lateral → Glossário → Infracao de Transito",
+      "docUrl": "glossario/infracao",
+      "related": [],
+      "dbTables": []
+    },
+    {
+      "id": "glossario-lote-exportacao",
+      "title": "Lote de Exportacao",
+      "module": "Glossário",
+      "keywords": [
+        "lote de exportacao",
+        "lote",
+        "exportacao",
+        "title",
+        "sidebar_position",
+        "definicao",
+        "base",
+        "glossario",
+        "termo",
+        "conceito"
+      ],
+      "content": "--- title: \"Lote de Exportacao\" sidebar_position: 6",
+      "steps": [],
+      "path": "Menu lateral → Glossário → Lote de Exportacao",
+      "docUrl": "glossario/lote-exportacao",
+      "related": [],
+      "dbTables": []
+    },
+    {
+      "id": "glossario-medicao-desempenho",
+      "title": "Medicao de Desempenho",
+      "module": "Glossário",
+      "keywords": [
+        "medicao de desempenho",
+        "medicao",
+        "desempenho",
+        "title",
+        "sidebar_position",
+        "definicao",
+        "base",
+        "glossario",
+        "termo",
+        "conceito"
+      ],
+      "content": "--- title: \"Medicao de Desempenho\" sidebar_position: 7",
+      "steps": [],
+      "path": "Menu lateral → Glossário → Medicao de Desempenho",
+      "docUrl": "glossario/medicao-desempenho",
+      "related": [],
+      "dbTables": []
+    },
+    {
+      "id": "glossario-triagem",
+      "title": "Triagem",
+      "module": "Glossário",
+      "keywords": [
+        "triagem",
+        "title",
+        "sidebar_position",
+        "definicao",
+        "base",
+        "legal",
+        "glossario",
+        "termo",
+        "conceito"
+      ],
+      "content": "--- title: \"Triagem\" sidebar_position: 8",
+      "steps": [],
+      "path": "Menu lateral → Glossário → Triagem",
+      "docUrl": "glossario/triagem",
+      "related": [],
+      "dbTables": []
+    },
+    {
+      "id": "infracoes-auditoria",
+      "title": "Auditoria",
+      "module": "Infrações",
+      "keywords": [
+        "auditoria",
+        "infra",
+        "validadas",
+        "descartadas",
+        "triagem",
+        "acessar",
+        "infracao",
+        "multa",
+        "auto",
+        "autuacao"
+      ],
+      "content": "Auditoria de infrações validadas e descartadas na triagem",
+      "steps": [
+        "O sistema apresenta a infração com todas as imagens e dados da triagem",
+        "O auditor analisa e decide:",
+        "O contador de tempo controla a produtividade (configurado em **Configurações do Sistema → aba Triagem**)",
+        "O status é atualizado automaticamente após cada decisão"
+      ],
+      "path": "Auditoria",
+      "docUrl": "infracoes/auditoria",
+      "related": [
+        "triagem",
+        "exportacao",
+        "consulta-infracoes",
+        "glossario-autuacao",
+        "glossario-infracao"
+      ],
+      "dbTables": []
+    },
+    {
+      "id": "infracoes-como-auditar-infracoes",
+      "title": "Como Auditar Infracoes",
+      "module": "Infrações",
+      "keywords": [
+        "como auditar infracoes",
+        "auditar",
+        "infracoes",
+        "guia",
+        "analitico",
+        "axhub",
+        "acessar",
+        "infracao",
+        "multa",
+        "auto",
+        "autuacao"
+      ],
+      "content": "Guia Analitico - Como Auditar Infracoes no AxHub",
+      "steps": [],
+      "path": "Menu lateral → Infrações → Como Auditar Infracoes",
+      "docUrl": "infracoes/como-auditar-infracoes",
+      "related": [],
+      "dbTables": []
+    },
+    {
+      "id": "infracoes-consulta-infracoes",
+      "title": "Consulta de Infrações",
+      "module": "Infrações",
+      "keywords": [
+        "consulta de infrações",
+        "consulta de infracoes",
+        "consulta",
+        "infra",
+        "consultar",
+        "processadas",
+        "sistema",
+        "acessar",
+        "infracao",
+        "multa",
+        "auto",
+        "autuacao"
+      ],
+      "content": "Consultar infrações processadas no sistema",
+      "steps": [],
+      "path": "Consulta",
+      "docUrl": "infracoes/consulta-infracoes",
+      "related": [
+        "triagem",
+        "auditoria",
+        "exportacao",
+        "infracoes-descartadas",
+        "glossario-infracao"
+      ],
+      "dbTables": []
+    },
+    {
+      "id": "infracoes-excecoes",
+      "title": "Exceções",
+      "module": "Infrações",
+      "keywords": [
+        "exceções",
+        "excecoes",
+        "exce",
+        "gerenciamento",
+        "regras",
+        "infra",
+        "acessar",
+        "tipos",
+        "infracao",
+        "multa",
+        "auto",
+        "autuacao"
+      ],
+      "content": "Gerenciamento de regras de exceção para infrações",
+      "steps": [],
+      "path": "Exceções",
+      "docUrl": "infracoes/excecoes",
+      "related": [
+        "triagem",
+        "auditoria",
+        "glossario-enquadramento"
+      ],
+      "dbTables": []
+    },
+    {
+      "id": "infracoes-exportacao",
+      "title": "Exportação",
+      "module": "Infrações",
+      "keywords": [
+        "exportação",
+        "exportacao",
+        "exporta",
+        "infra",
+        "validadas",
+        "órgãos",
+        "autuadores",
+        "acessar",
+        "infracao",
+        "multa",
+        "auto",
+        "autuacao"
+      ],
+      "content": "Exportação de infrações validadas para órgãos autuadores",
+      "steps": [
+        "Acesse **Infrações → Exportação**",
+        "Configure o lote:",
+        "Clique em **Gerar lote** — o sistema valida os dados, gera o arquivo e cria o hash de assinatura digital",
+        "Clique em **Enviar lote** via SFTP/API ou faça o download para envio manual"
+      ],
+      "path": "Exportação",
+      "docUrl": "infracoes/exportacao",
+      "related": [
+        "auditoria",
+        "administracao-layouts-arquivos",
+        "administracao-sequenciais-lote-exportacao",
+        "glossario-lote-exportacao",
+        "glossario-autuacao"
+      ],
+      "dbTables": []
+    },
+    {
+      "id": "infracoes-guia-completo-infracoes",
+      "title": "Guia Completo: Processo de Infração",
+      "module": "Infrações",
+      "keywords": [
+        "guia completo: processo de infração",
+        "guia completo: processo de infracao",
+        "guia",
+        "completo",
+        "processo",
+        "infra",
+        "passo",
+        "fluxo",
+        "infracao",
+        "multa",
+        "auto",
+        "autuacao"
+      ],
+      "content": "Passo a passo completo do fluxo de infrações no AxHub — da captura à exportação",
+      "steps": [
+        "✅ Verifica se a placa é válida e legível",
+        "✅ Confere se as imagens estão em qualidade adequada",
+        "✅ Valida dados de local e equipamento",
+        "✅ Confirma o enquadramento legal correto",
+        "✅ Verifica assinaturas digitais de triagem e auditoria",
+        "✅ Checa se não há infrações duplicadas no lote",
+        "✅ Confirma que o prazo legal não foi ultrapassado"
+      ],
+      "path": "Triagem",
+      "docUrl": "infracoes/guia-completo-infracoes",
+      "related": [],
+      "dbTables": []
+    },
+    {
+      "id": "infracoes-infracoes-descartadas",
+      "title": "Infrações Descartadas",
+      "module": "Infrações",
+      "keywords": [
+        "infrações descartadas",
+        "infracoes descartadas",
+        "infra",
+        "descartadas",
+        "consulta",
+        "revisão",
+        "processamento",
+        "acessar",
+        "infracao",
+        "multa",
+        "auto",
+        "autuacao"
+      ],
+      "content": "Consulta e revisão de infrações descartadas no processamento",
+      "steps": [],
+      "path": "Infrações Descartadas",
+      "docUrl": "infracoes/infracoes-descartadas",
+      "related": [
+        "triagem",
+        "administracao-motivos-descartes",
+        "glossario-infracao"
+      ],
+      "dbTables": []
+    },
+    {
+      "id": "infracoes-manual-triagem",
+      "title": "Manual de Triagem",
+      "module": "Infrações",
+      "keywords": [
+        "manual de triagem",
+        "manual",
+        "triagem",
+        "completo",
+        "visual",
+        "analistas",
+        "realizarem",
+        "infracao",
+        "multa",
+        "auto",
+        "autuacao"
+      ],
+      "content": "Manual completo e visual para analistas realizarem triagem de infrações no AxHub — passo a passo ilustrado com imagens de cada etapa",
+      "steps": [
+        "Compare com a placa registrada no sistema",
+        "Se a discrepância for de apenas 1 caractere e o restante bate, **valide** e registre observação",
+        "Se a placa não pode ser confirmada com segurança, **descarte** com motivo \"Placa ilegível\"",
+        "Verifique duplo: a operação e os limites configurados para aquela faixa",
+        "Se a operação e os dados estiverem corretos no sistema, **valide** normalmente",
+        "Se houver suspeita de erro de equipamento, **descarte** com motivo \"Velocidade incoerente\" e **reporte ao supervisor**",
+        "Verifique se há placa de exceção cadastrada para este veículo",
+        "**Não descarte manualmente** — acione o supervisor para cadastrar a exceção corretamente",
+        "Enquanto aguarda, **valide temporariamente** para não perder o registro",
+        "Identifique qual veículo ativou o sensor (geralmente o mais próximo do equipamento)"
+      ],
+      "path": "principal.png)",
+      "docUrl": "infracoes/manual-triagem",
+      "related": [],
+      "dbTables": []
+    },
+    {
+      "id": "infracoes-triagem",
+      "title": "Triagem",
+      "module": "Infrações",
+      "keywords": [
+        "triagem",
+        "revisão",
+        "valida",
+        "infra",
+        "acessar",
+        "tela",
+        "infracao",
+        "multa",
+        "auto",
+        "autuacao"
+      ],
+      "content": "Revisão e validação de infrações",
+      "steps": [],
+      "path": "Triagem",
+      "docUrl": "infracoes/triagem",
+      "related": [
+        "excecoes",
+        "auditoria",
+        "administracao-motivos-descartes",
+        "administracao-configuracoes-enquadramento",
+        "administracao-enquadramentos"
+      ],
+      "dbTables": []
+    },
+    {
+      "id": "medicoes-contratos",
+      "title": "Contratos",
+      "module": "Medições",
+      "keywords": [
+        "contratos",
+        "cadastro",
+        "gestão",
+        "medi",
+        "acessar",
+        "contrato",
+        "medicao",
+        "aferição",
+        "sensor",
+        "calibrar"
+      ],
+      "content": "Cadastro e gestão de contratos de medição",
+      "steps": [],
+      "path": "Contratos",
+      "docUrl": "medicoes/contratos",
+      "related": [
+        "indices-performance",
+        "recursos",
+        "criar-medicao",
+        "interrupcoes",
+        "glossario-medicao-desempenho"
+      ],
+      "dbTables": []
+    },
+    {
+      "id": "medicoes-criar-medicao",
+      "title": "Criar Medição",
+      "module": "Medições",
+      "keywords": [
+        "criar medição",
+        "criar medicao",
+        "criar",
+        "medi",
+        "cria",
+        "nova",
+        "contratual",
+        "acessar",
+        "medicao",
+        "aferição",
+        "sensor",
+        "calibrar"
+      ],
+      "content": "Criação de nova medição contratual",
+      "steps": [
+        "Selecione o contrato e período",
+        "O sistema calcula automaticamente os índices",
+        "Revise os valores e interrupções",
+        "Finalize a medição para aprovação"
+      ],
+      "path": "Nova Medição",
+      "docUrl": "medicoes/criar-medicao",
+      "related": [
+        "contratos",
+        "medicoes-finalizadas",
+        "glossario-medicao-desempenho"
+      ],
+      "dbTables": []
+    },
+    {
+      "id": "medicoes-indices-performance",
+      "title": "Índices de Performance",
+      "module": "Medições",
+      "keywords": [
+        "índices de performance",
+        "indices de performance",
+        "índices",
+        "performance",
+        "configura",
+        "contratual",
+        "acessar",
+        "cadastro",
+        "medicao",
+        "aferição",
+        "sensor",
+        "calibrar"
+      ],
+      "content": "Configuração de índices de performance contratual",
+      "steps": [],
+      "path": "Índices de Performance",
+      "docUrl": "medicoes/indices-performance",
+      "related": [
+        "contratos",
+        "criar-medicao"
+      ],
+      "dbTables": []
+    },
+    {
+      "id": "medicoes-interrupcoes",
+      "title": "Interrupções",
+      "module": "Medições",
+      "keywords": [
+        "interrupções",
+        "interrupcoes",
+        "interrup",
+        "registro",
+        "processamento",
+        "contratuais",
+        "acessar",
+        "cadastro",
+        "medicao",
+        "aferição",
+        "sensor",
+        "calibrar"
+      ],
+      "content": "Registro e processamento de interrupções contratuais",
+      "steps": [],
+      "path": "Interrupções",
+      "docUrl": "medicoes/interrupcoes",
+      "related": [
+        "contratos",
+        "criar-medicao"
+      ],
+      "dbTables": []
+    },
+    {
+      "id": "medicoes-medicoes-finalizadas",
+      "title": "Medições Finalizadas",
+      "module": "Medições",
+      "keywords": [
+        "medições finalizadas",
+        "medicoes finalizadas",
+        "medi",
+        "finalizadas",
+        "consulta",
+        "contratuais",
+        "acessar",
+        "navegacao",
+        "medicao",
+        "aferição",
+        "sensor",
+        "calibrar"
+      ],
+      "content": "Consulta de medições contratuais já finalizadas",
+      "steps": [],
+      "path": "Medições Finalizadas",
+      "docUrl": "medicoes/medicoes-finalizadas",
+      "related": [
+        "criar-medicao",
+        "contratos"
+      ],
+      "dbTables": []
+    },
+    {
+      "id": "medicoes-recursos",
+      "title": "Recursos",
+      "module": "Medições",
+      "keywords": [
+        "recursos",
+        "gestão",
+        "vinculados",
+        "medi",
+        "acessar",
+        "cadastro",
+        "medicao",
+        "aferição",
+        "sensor",
+        "calibrar"
+      ],
+      "content": "Gestão de recursos vinculados a medições",
+      "steps": [],
+      "path": "Recursos",
+      "docUrl": "medicoes/recursos",
+      "related": [
+        "contratos",
+        "cadastros-basicos-equipamentos"
+      ],
+      "dbTables": []
+    },
+    {
+      "id": "operacoes-afericoes",
+      "title": "Afericoes",
+      "module": "Operações",
+      "keywords": [
+        "afericoes",
+        "sidebar_position",
+        "title",
+        "acessar",
+        "listagem",
+        "cadastro",
+        "operacao",
+        "equipamento",
+        "faixa",
+        "radar"
+      ],
+      "content": "--- sidebar_position: 2 title: Afericoes",
+      "steps": [],
+      "path": "Afericoes",
+      "docUrl": "operacoes/afericoes",
+      "related": [
+        "cadastros-basicos-equipamentos",
+        "cadastro-operacoes"
+      ],
+      "dbTables": []
+    },
+    {
+      "id": "operacoes-cadastro-operacoes",
+      "title": "Cadastro de Operacoes",
+      "module": "Operações",
+      "keywords": [
+        "cadastro de operacoes",
+        "cadastro",
+        "operacoes",
+        "sidebar_position",
+        "title",
+        "acessar",
+        "listagem",
+        "operacao",
+        "equipamento",
+        "faixa",
+        "radar"
+      ],
+      "content": "--- sidebar_position: 1 title: Cadastro de Operacoes",
+      "steps": [],
+      "path": "Cadastro de Operacoes",
+      "docUrl": "operacoes/cadastro-operacoes",
+      "related": [
+        "administracao-arcos",
+        "afericoes"
+      ],
+      "dbTables": []
+    },
+    {
+      "id": "operacoes-consulta-placas",
+      "title": "Consulta de Placas",
+      "module": "Operações",
+      "keywords": [
+        "consulta de placas",
+        "consulta",
+        "placas",
+        "passagens",
+        "veículos",
+        "placa",
+        "acessar",
+        "operacao",
+        "equipamento",
+        "faixa",
+        "radar"
+      ],
+      "content": "Consulta de passagens de veículos por placa",
+      "steps": [],
+      "path": "Consulta de Placas",
+      "docUrl": "operacoes/consulta-placas",
+      "related": [
+        "infracoes-consulta-infracoes",
+        "monitoramento-online"
+      ],
+      "dbTables": []
+    },
+    {
+      "id": "operacoes-eventos-equipamentos",
+      "title": "Eventos de Equipamentos",
+      "module": "Operações",
+      "keywords": [
+        "eventos de equipamentos",
+        "eventos",
+        "equipamentos",
+        "registro",
+        "ocorrências",
+        "acessar",
+        "cadastro",
+        "operacao",
+        "equipamento",
+        "faixa",
+        "radar"
+      ],
+      "content": "Registro de eventos e ocorrências dos equipamentos",
+      "steps": [],
+      "path": "Eventos de Equipamentos",
+      "docUrl": "operacoes/eventos-equipamentos",
+      "related": [
+        "monitoramento-online",
+        "cadastros-basicos-equipamentos",
+        "relatorios-eventos-equipamentos"
+      ],
+      "dbTables": []
+    },
+    {
+      "id": "operacoes-faixas",
+      "title": "Faixas",
+      "module": "Operações",
+      "keywords": [
+        "faixas",
+        "configura",
+        "fiscaliza",
+        "opera",
+        "acessar",
+        "cadastro",
+        "operacao",
+        "equipamento",
+        "faixa",
+        "radar"
+      ],
+      "content": "Configuração de faixas de fiscalização por operação",
+      "steps": [],
+      "path": "Faixas",
+      "docUrl": "operacoes/faixas",
+      "related": [
+        "cadastro-operacoes",
+        "cadastros-basicos-equipamentos"
+      ],
+      "dbTables": []
+    },
+    {
+      "id": "operacoes-monitoramento-online",
+      "title": "Monitoramento Online",
+      "module": "Operações",
+      "keywords": [
+        "monitoramento online",
+        "monitoramento",
+        "online",
+        "tempo",
+        "real",
+        "equipamentos",
+        "acessar",
+        "operacao",
+        "equipamento",
+        "faixa",
+        "radar"
+      ],
+      "content": "Monitoramento em tempo real dos equipamentos",
+      "steps": [],
+      "path": "Monitoramento Online",
+      "docUrl": "operacoes/monitoramento-online",
+      "related": [
+        "eventos-equipamentos",
+        "primeiros-passos-dashboard",
+        "consulta-placas"
+      ],
+      "dbTables": []
+    },
+    {
+      "id": "pesagem-liberar-pesagem",
+      "title": "Liberar Tickets para Pesagem",
+      "module": "Pesagem",
+      "keywords": [
+        "liberar tickets para pesagem",
+        "liberar",
+        "tickets",
+        "pesagem",
+        "libera",
+        "nova",
+        "acessar",
+        "peso",
+        "veiculo",
+        "balanca"
+      ],
+      "content": "Liberação de tickets para nova pesagem",
+      "steps": [],
+      "path": "Liberar Tickets para Pesagem",
+      "docUrl": "pesagem/liberar-pesagem",
+      "related": [
+        "ticket-aberto",
+        "postos"
+      ],
+      "dbTables": []
+    },
+    {
+      "id": "pesagem-motivos",
+      "title": "Motivos",
+      "module": "Pesagem",
+      "keywords": [
+        "motivos",
+        "cadastro",
+        "pesagem",
+        "libera",
+        "acessar",
+        "motivo",
+        "peso",
+        "veiculo",
+        "balanca"
+      ],
+      "content": "Cadastro de motivos para pesagem e liberação",
+      "steps": [],
+      "path": "Motivos",
+      "docUrl": "pesagem/motivos",
+      "related": [
+        "reclassificar",
+        "postos"
+      ],
+      "dbTables": []
+    },
+    {
+      "id": "pesagem-postos",
+      "title": "Postos de Pesagem",
+      "module": "Pesagem",
+      "keywords": [
+        "postos de pesagem",
+        "postos",
+        "pesagem",
+        "cadastro",
+        "gestão",
+        "veicular",
+        "acessar",
+        "peso",
+        "veiculo",
+        "balanca"
+      ],
+      "content": "Cadastro e gestão dos postos de pesagem veicular",
+      "steps": [],
+      "path": "Postos",
+      "docUrl": "pesagem/postos",
+      "related": [
+        "ticket-aberto",
+        "ticket-fechado",
+        "motivos"
+      ],
+      "dbTables": []
+    },
+    {
+      "id": "pesagem-reclassificar",
+      "title": "Reclassificar",
+      "module": "Pesagem",
+      "keywords": [
+        "reclassificar",
+        "reclassifica",
+        "veículos",
+        "pesados",
+        "acessar",
+        "navegacao",
+        "pesagem",
+        "peso",
+        "veiculo",
+        "balanca"
+      ],
+      "content": "Reclassificação de veículos pesados",
+      "steps": [],
+      "path": "Reclassificar",
+      "docUrl": "pesagem/reclassificar",
+      "related": [
+        "ticket-fechado",
+        "motivos"
+      ],
+      "dbTables": []
+    },
+    {
+      "id": "pesagem-ticket-aberto",
+      "title": "Tickets Abertos",
+      "module": "Pesagem",
+      "keywords": [
+        "tickets abertos",
+        "tickets",
+        "abertos",
+        "consulta",
+        "pesagem",
+        "aberto",
+        "acessar",
+        "peso",
+        "veiculo",
+        "balanca"
+      ],
+      "content": "Consulta de tickets de pesagem em aberto",
+      "steps": [],
+      "path": "Tickets Abertos",
+      "docUrl": "pesagem/ticket-aberto",
+      "related": [
+        "postos",
+        "ticket-fechado",
+        "liberar-pesagem"
+      ],
+      "dbTables": []
+    },
+    {
+      "id": "pesagem-ticket-fechado",
+      "title": "Tickets Fechados",
+      "module": "Pesagem",
+      "keywords": [
+        "tickets fechados",
+        "tickets",
+        "fechados",
+        "consulta",
+        "pesagem",
+        "finalizados",
+        "acessar",
+        "peso",
+        "veiculo",
+        "balanca"
+      ],
+      "content": "Consulta de tickets de pesagem finalizados",
+      "steps": [],
+      "path": "Tickets Fechados",
+      "docUrl": "pesagem/ticket-fechado",
+      "related": [
+        "ticket-aberto",
+        "reclassificar"
+      ],
+      "dbTables": []
+    },
+    {
+      "id": "primeiros-passos-dashboard",
+      "title": "Dashboard",
+      "module": "Primeiros Passos",
+      "keywords": [
+        "dashboard",
+        "sidebar_position",
+        "title",
+        "acessar",
+        "visao",
+        "geral",
+        "login",
+        "acesso",
+        "senha",
+        "entrar"
+      ],
+      "content": "--- sidebar_position: 2 title: Dashboard",
+      "steps": [],
+      "path": "Menu lateral → Primeiros Passos → Dashboard",
+      "docUrl": "primeiros-passos/dashboard",
+      "related": [
+        "login",
+        "navegacao"
+      ],
+      "dbTables": []
+    },
+    {
+      "id": "primeiros-passos-login",
+      "title": "Login",
+      "module": "Primeiros Passos",
+      "keywords": [
+        "login",
+        "sidebar_position",
+        "title",
+        "tela",
+        "acessando",
+        "sistema",
+        "acesso",
+        "senha",
+        "entrar"
+      ],
+      "content": "--- sidebar_position: 1 title: Login",
+      "steps": [
+        "Abra o navegador e acesse o endereco do AxHub",
+        "Informe seu Login",
+        "Informe sua Senha",
+        "Clique em Entrar",
+        "Na tela de login clique em Esqueci minha senha",
+        "Informe o e-mail cadastrado",
+        "Acesse sua caixa de entrada e clique no link de redefinicao",
+        "Defina uma nova senha e confirme"
+      ],
+      "path": "Menu lateral → Primeiros Passos → Login",
+      "docUrl": "primeiros-passos/login",
+      "related": [
+        "dashboard"
+      ],
+      "dbTables": []
+    },
+    {
+      "id": "primeiros-passos-navegacao",
+      "title": "Navegacao",
+      "module": "Primeiros Passos",
+      "keywords": [
+        "navegacao",
+        "sidebar_position",
+        "title",
+        "mapa",
+        "online",
+        "estrutura",
+        "login",
+        "acesso",
+        "senha",
+        "entrar"
+      ],
+      "content": "--- sidebar_position: 3 title: Navegacao",
+      "steps": [],
+      "path": "menu lateral",
+      "docUrl": "primeiros-passos/navegacao",
+      "related": [
+        "dashboard",
+        "login"
+      ],
+      "dbTables": []
+    },
+    {
+      "id": "referencia-tecnica-banco-de-dados",
+      "title": "Banco de Dados",
+      "module": "Referência Técnica",
+      "keywords": [
+        "banco de dados",
+        "banco",
+        "dados",
+        "referência",
+        "técnica",
+        "principais",
+        "tabelas",
+        "api",
+        "integracao",
+        "tecnico",
+        "referencia"
+      ],
+      "content": "Referência técnica das principais tabelas SQL Server do AxHub",
+      "steps": [],
+      "path": "Menu lateral → Referência Técnica → Banco de Dados",
+      "docUrl": "referencia-tecnica/banco-de-dados",
+      "related": [],
+      "dbTables": []
+    },
+    {
+      "id": "referencia-tecnica-classificacao-veiculos-integracao",
+      "title": "Classificação de Veículos — Integração",
+      "module": "Referência Técnica",
+      "keywords": [
+        "classificação de veículos — integração",
+        "classificacao de veiculos — integracao",
+        "classifica",
+        "veículos",
+        "integra",
+        "referência",
+        "técnica",
+        "completa",
+        "api",
+        "integracao",
+        "tecnico",
+        "referencia"
+      ],
+      "content": "Referência técnica completa para integração e importação de dados de classificação de veículos no AxHub e AxCross",
+      "steps": [],
+      "path": "Classificações de Veículos",
+      "docUrl": "referencia-tecnica/classificacao-veiculos-integracao",
+      "related": [],
+      "dbTables": []
+    },
+    {
+      "id": "referencia-tecnica-consulta-automatica-veiculos",
+      "title": "Consulta Automática de Dados de Veículos",
+      "module": "Referência Técnica",
+      "keywords": [
+        "consulta automática de dados de veículos",
+        "consulta automatica de dados de veiculos",
+        "consulta",
+        "automática",
+        "dados",
+        "veículos",
+        "guia",
+        "completo",
+        "api",
+        "integracao",
+        "tecnico",
+        "referencia"
+      ],
+      "content": "Guia completo de integração — como o AxHub consulta e popula dados de veículos automaticamente via Web Service",
+      "steps": [],
+      "path": "Menu lateral → Referência Técnica → Consulta Automática de Dados de Veículos",
+      "docUrl": "referencia-tecnica/consulta-automatica-veiculos",
+      "related": [],
+      "dbTables": []
+    },
+    {
+      "id": "relatorios-eventos-equipamentos",
+      "title": "Relatório de Eventos dos Equipamentos",
+      "module": "Relatórios",
+      "keywords": [
+        "relatório de eventos dos equipamentos",
+        "relatorio de eventos dos equipamentos",
+        "relatório",
+        "eventos",
+        "equipamentos",
+        "ocorrências",
+        "acessar",
+        "navegacao",
+        "relatorio",
+        "exportar",
+        "consulta",
+        "dados"
+      ],
+      "content": "Relatório de eventos e ocorrências dos equipamentos",
+      "steps": [],
+      "path": "Eventos dos Equipamentos",
+      "docUrl": "relatorios/eventos-equipamentos",
+      "related": [
+        "operacoes-eventos-equipamentos",
+        "cadastros-basicos-equipamentos"
+      ],
+      "dbTables": []
+    },
+    {
+      "id": "relatorios-falhas-sequenciais",
+      "title": "Relatório de Falhas Sequenciais",
+      "module": "Relatórios",
+      "keywords": [
+        "relatório de falhas sequenciais",
+        "relatorio de falhas sequenciais",
+        "relatório",
+        "falhas",
+        "sequenciais",
+        "equipamentos",
+        "acessar",
+        "navegacao",
+        "relatorio",
+        "exportar",
+        "consulta",
+        "dados"
+      ],
+      "content": "Relatório de falhas sequenciais nos equipamentos",
+      "steps": [],
+      "path": "Falhas Sequenciais",
+      "docUrl": "relatorios/falhas-sequenciais",
+      "related": [
+        "administracao-sequenciais-infracoes"
+      ],
+      "dbTables": []
+    },
+    {
+      "id": "relatorios-fluxo-diario-veiculos",
+      "title": "Fluxo Diário de Veículos",
+      "module": "Relatórios",
+      "keywords": [
+        "fluxo diário de veículos",
+        "fluxo diario de veiculos",
+        "fluxo",
+        "diário",
+        "veículos",
+        "relatório",
+        "equipamento",
+        "acessar",
+        "relatorio",
+        "exportar",
+        "consulta",
+        "dados"
+      ],
+      "content": "Relatório de fluxo diário de veículos por equipamento",
+      "steps": [],
+      "path": "Fluxo Diário de Veículos",
+      "docUrl": "relatorios/fluxo-diario-veiculos",
+      "related": [
+        "operacoes-monitoramento-online",
+        "mapa-fluxo-passagens"
+      ],
+      "dbTables": []
+    },
+    {
+      "id": "relatorios-lote-importacao",
+      "title": "Lotes de Importação",
+      "module": "Relatórios",
+      "keywords": [
+        "lotes de importação",
+        "lotes de importacao",
+        "lotes",
+        "importa",
+        "consulta",
+        "dados",
+        "acessar",
+        "navegacao",
+        "relatorio",
+        "exportar"
+      ],
+      "content": "Consulta de lotes de importação de dados",
+      "steps": [],
+      "path": "Lotes de Importação",
+      "docUrl": "relatorios/lote-importacao",
+      "related": [
+        "cadastros-basicos-equipamentos"
+      ],
+      "dbTables": []
+    },
+    {
+      "id": "relatorios-mapa-fluxo-passagens",
+      "title": "Mapa de Fluxo de Passagens",
+      "module": "Relatórios",
+      "keywords": [
+        "mapa de fluxo de passagens",
+        "mapa",
+        "fluxo",
+        "passagens",
+        "visual",
+        "equipamento",
+        "acessar",
+        "relatorio",
+        "exportar",
+        "consulta",
+        "dados"
+      ],
+      "content": "Mapa visual do fluxo de passagens por equipamento",
+      "steps": [],
+      "path": "Mapa de Fluxo de Passagens",
+      "docUrl": "relatorios/mapa-fluxo-passagens",
+      "related": [
+        "fluxo-diario-veiculos",
+        "operacoes-monitoramento-online"
+      ],
+      "dbTables": []
+    },
+    {
+      "id": "relatorios-mapa-teste",
+      "title": "Mapa de Teste",
+      "module": "Relatórios",
+      "keywords": [
+        "mapa de teste",
+        "mapa",
+        "teste",
+        "relatório",
+        "testes",
+        "captura",
+        "equipamentos",
+        "relatorio",
+        "exportar",
+        "consulta",
+        "dados"
+      ],
+      "content": "Relatório de testes de captura dos equipamentos",
+      "steps": [],
+      "path": "Mapa de Teste",
+      "docUrl": "relatorios/mapa-teste",
+      "related": [],
+      "dbTables": []
+    },
+    {
+      "id": "relatorios-power-bi",
+      "title": "Relatórios Power BI",
+      "module": "Relatórios",
+      "keywords": [
+        "relatórios power bi",
+        "relatorios power bi",
+        "relatórios",
+        "power",
+        "dashboards",
+        "analíticos",
+        "acessar",
+        "disponíveis",
+        "relatorio",
+        "exportar",
+        "consulta",
+        "dados"
+      ],
+      "content": "Dashboards e relatórios analíticos via Power BI",
+      "steps": [],
+      "path": "Power BI",
+      "docUrl": "relatorios/power-bi",
+      "related": [
+        "administracao-relatorios-power-bi"
+      ],
+      "dbTables": []
+    },
+    {
+      "id": "relatorios-processamento-imagens",
+      "title": "Relatorio de Processamento de Imagens",
+      "module": "Relatórios",
+      "keywords": [
+        "relatorio de processamento de imagens",
+        "relatorio",
+        "processamento",
+        "imagens",
+        "sidebar_position",
+        "title",
+        "acessar",
+        "exportar",
+        "consulta",
+        "dados"
+      ],
+      "content": "--- sidebar_position: 8 title: Processamento de Imagens",
+      "steps": [],
+      "path": "Processamento de Imagens",
+      "docUrl": "relatorios/processamento-imagens",
+      "related": [
+        "processamento-por-usuario"
+      ],
+      "dbTables": []
+    },
+    {
+      "id": "relatorios-processamento-por-usuario",
+      "title": "Processamento por Usuário",
+      "module": "Relatórios",
+      "keywords": [
+        "processamento por usuário",
+        "processamento por usuario",
+        "processamento",
+        "usuário",
+        "relatório",
+        "imagens",
+        "acessar",
+        "navegacao",
+        "relatorio",
+        "exportar",
+        "consulta",
+        "dados"
+      ],
+      "content": "Relatório de processamento de imagens por usuário",
+      "steps": [],
+      "path": "Processamento por Usuário",
+      "docUrl": "relatorios/processamento-por-usuario",
+      "related": [
+        "controle-acesso-usuarios",
+        "infracoes-triagem"
+      ],
+      "dbTables": []
+    },
+    {
+      "id": "relatorios-relatorio-discrepancias",
+      "title": "Relatório de Discrepâncias",
+      "module": "Relatórios",
+      "keywords": [
+        "relatório de discrepâncias",
+        "relatorio de discrepancias",
+        "relatório",
+        "discrepâncias",
+        "identificadas",
+        "processamento",
+        "acessar",
+        "navegacao",
+        "relatorio",
+        "exportar",
+        "consulta",
+        "dados"
+      ],
+      "content": "Relatório de discrepâncias identificadas no processamento",
+      "steps": [],
+      "path": "Relatório de Discrepâncias",
+      "docUrl": "relatorios/relatorio-discrepancias",
+      "related": [
+        "infracoes-auditoria",
+        "infracoes-triagem"
+      ],
+      "dbTables": []
+    },
+    {
+      "id": "relatorios-relatorio-infracoes",
+      "title": "Relatório de Infrações",
+      "module": "Relatórios",
+      "keywords": [
+        "relatório de infrações",
+        "relatorio de infracoes",
+        "relatório",
+        "infra",
+        "detalhado",
+        "processadas",
+        "acessar",
+        "termos",
+        "relatorio",
+        "exportar",
+        "consulta",
+        "dados"
+      ],
+      "content": "Relatório detalhado de infrações processadas",
+      "steps": [],
+      "path": "Relatório de Infrações",
+      "docUrl": "relatorios/relatorio-infracoes",
+      "related": [
+        "infracoes-consulta-infracoes",
+        "infracoes-exportacao"
+      ],
+      "dbTables": []
+    },
+    {
+      "id": "relatorios-relatorio-logs-envios",
+      "title": "Logs de Envios a Integração",
+      "module": "Relatórios",
+      "keywords": [
+        "logs de envios a integração",
+        "logs de envios a integracao",
+        "logs",
+        "envios",
+        "integra",
+        "relatório",
+        "passagens",
+        "enviadas",
+        "relatorio",
+        "exportar",
+        "consulta",
+        "dados"
+      ],
+      "content": "Relatório de logs de passagens enviadas para integração",
+      "steps": [],
+      "path": "Logs de Envios a Integração",
+      "docUrl": "relatorios/relatorio-logs-envios",
+      "related": [
+        "infracoes-exportacao",
+        "administracao-webhooks"
+      ],
+      "dbTables": []
+    },
+    {
+      "id": "relatorios-relatorio-passagens",
+      "title": "Relatório de Passagens",
+      "module": "Relatórios",
+      "keywords": [
+        "relatório de passagens",
+        "relatorio de passagens",
+        "relatório",
+        "passagens",
+        "veículos",
+        "registradas",
+        "acessar",
+        "navegacao",
+        "relatorio",
+        "exportar",
+        "consulta",
+        "dados"
+      ],
+      "content": "Relatório de passagens de veículos registradas",
+      "steps": [],
+      "path": "Relatório de Passagens",
+      "docUrl": "relatorios/relatorio-passagens",
+      "related": [
+        "operacoes-consulta-placas",
+        "operacoes-monitoramento-online"
+      ],
+      "dbTables": []
+    },
+    {
+      "id": "veiculos-categorias-veiculo",
+      "title": "Categorias de Veículos",
+      "module": "Veículos",
+      "keywords": [
+        "categorias de veículos",
+        "categorias de veiculos",
+        "categorias",
+        "veículos",
+        "cadastro",
+        "acessar",
+        "navegacao",
+        "relacionada",
+        "veiculo",
+        "carro",
+        "caminhao",
+        "placa"
+      ],
+      "content": "Cadastro de categorias de veículos",
+      "steps": [],
+      "path": "Categorias de Veículos",
+      "docUrl": "veiculos/categorias-veiculo",
+      "related": [
+        "classificacoes-veiculos"
+      ],
+      "dbTables": []
+    },
+    {
+      "id": "veiculos-classificacoes-veiculos",
+      "title": "Classificações de Veículos",
+      "module": "Veículos",
+      "keywords": [
+        "classificações de veículos",
+        "classificacoes de veiculos",
+        "classifica",
+        "veículos",
+        "cadastro",
+        "acessar",
+        "navegacao",
+        "relacionada",
+        "veiculo",
+        "carro",
+        "caminhao",
+        "placa"
+      ],
+      "content": "Cadastro de classificações de veículos",
+      "steps": [],
+      "path": "Classificações de Veículos",
+      "docUrl": "veiculos/classificacoes-veiculos",
+      "related": [
+        "categorias-veiculo",
+        "tipos-veiculos"
+      ],
+      "dbTables": []
+    },
+    {
+      "id": "veiculos-cores",
+      "title": "Cores",
+      "module": "Veículos",
+      "keywords": [
+        "cores",
+        "cadastro",
+        "veículos",
+        "acessar",
+        "navegacao",
+        "relacionada",
+        "veiculo",
+        "carro",
+        "caminhao",
+        "placa"
+      ],
+      "content": "Cadastro de cores de veículos",
+      "steps": [],
+      "path": "Cores",
+      "docUrl": "veiculos/cores",
+      "related": [
+        "infracoes-consulta-infracoes"
+      ],
+      "dbTables": []
+    },
+    {
+      "id": "veiculos-especie-veiculo",
+      "title": "Espécies de Veículos",
+      "module": "Veículos",
+      "keywords": [
+        "espécies de veículos",
+        "especies de veiculos",
+        "espécies",
+        "veículos",
+        "cadastro",
+        "acessar",
+        "navegacao",
+        "relacionada",
+        "veiculo",
+        "carro",
+        "caminhao",
+        "placa"
+      ],
+      "content": "Cadastro de espécies de veículos",
+      "steps": [],
+      "path": "Espécies de Veículos",
+      "docUrl": "veiculos/especie-veiculo",
+      "related": [
+        "tipos-veiculos"
+      ],
+      "dbTables": []
+    },
+    {
+      "id": "veiculos-marcas-veiculos",
+      "title": "Marcas de Veículos",
+      "module": "Veículos",
+      "keywords": [
+        "marcas de veículos",
+        "marcas de veiculos",
+        "marcas",
+        "veículos",
+        "cadastro",
+        "acessar",
+        "navegacao",
+        "relacionada",
+        "veiculo",
+        "carro",
+        "caminhao",
+        "placa"
+      ],
+      "content": "Cadastro de marcas de veículos",
+      "steps": [],
+      "path": "Marcas de Veículos",
+      "docUrl": "veiculos/marcas-veiculos",
+      "related": [
+        "modelos-veiculos"
+      ],
+      "dbTables": []
+    },
+    {
+      "id": "veiculos-modelos-veiculos",
+      "title": "Modelos de Veículos",
+      "module": "Veículos",
+      "keywords": [
+        "modelos de veículos",
+        "modelos de veiculos",
+        "modelos",
+        "veículos",
+        "cadastro",
+        "marca",
+        "acessar",
+        "navegacao",
+        "veiculo",
+        "carro",
+        "caminhao",
+        "placa"
+      ],
+      "content": "Cadastro de modelos de veículos por marca",
+      "steps": [],
+      "path": "Modelos de Veículos",
+      "docUrl": "veiculos/modelos-veiculos",
+      "related": [
+        "marcas-veiculos"
+      ],
+      "dbTables": []
+    },
+    {
+      "id": "veiculos-municipios",
+      "title": "Municípios",
+      "module": "Veículos",
+      "keywords": [
+        "municípios",
+        "municipios",
+        "cadastro",
+        "acessar",
+        "navegacao",
+        "relacionada",
+        "veiculo",
+        "carro",
+        "caminhao",
+        "placa"
+      ],
+      "content": "Cadastro de municípios",
+      "steps": [],
+      "path": "Municípios",
+      "docUrl": "veiculos/municipios",
+      "related": [
+        "administracao-regioes"
+      ],
+      "dbTables": []
+    },
+    {
+      "id": "veiculos-tipos-veiculos",
+      "title": "Tipos de Veículos",
+      "module": "Veículos",
+      "keywords": [
+        "tipos de veículos",
+        "tipos de veiculos",
+        "tipos",
+        "veículos",
+        "cadastro",
+        "acessar",
+        "navegacao",
+        "relacionada",
+        "veiculo",
+        "carro",
+        "caminhao",
+        "placa"
+      ],
+      "content": "Cadastro de tipos de veículos",
+      "steps": [],
+      "path": "Tipos de Veículos",
+      "docUrl": "veiculos/tipos-veiculos",
+      "related": [
+        "classificacoes-veiculos",
+        "especie-veiculo"
+      ],
+      "dbTables": []
+    },
+    {
+      "id": "operacoes-bloqueio-automatico",
+      "title": "Bloqueio Automático de Operação",
+      "module": "Operações",
+      "keywords": [
+        "bloqueio",
+        "bloqueio automatico",
+        "operação bloqueada",
+        "10 falhas",
+        "falhas consecutivas",
+        "desbloqueio não resolve",
+        "bloqueia novamente",
+        "data antes da operação",
+        "antes do início",
+        "validação data",
+        "fabricante reenviando"
+      ],
+      "content": "Bloqueio automático ocorre após 10 falhas consecutivas de validação. Causa mais comum: fabricante envia passagens com data ANTERIOR ao início da operação (DataHoraPassagem < Operação.DataInicial). DESBLOQUEAR MANUALMENTE NÃO RESOLVE — fabricante reenvia em ~2 minutos e rebloqueia. Soluções: (1) Ajustar DataInicial da operação se equipamento já operava antes da data cadastrada. (2) Contatar fabricante (FOCALLE/VIZENTEC) para limpar buffer de retry. (3) Desenvolvimento: sistema deveria DESCARTAR passagens anteriores ao invés de BLOQUEAR. ATENÇÃO JURÍDICA: infrações só são válidas se Portaria do órgão cobre o período.",
+      "steps": [
+        "NÃO desbloquear manualmente — vai rebloquear em minutos",
+        "Verificar qual a data da passagem rejeitada vs DataInicial da operação",
+        "Se equipamento operava antes da data cadastrada: ajustar DataInicial em Operações → editar a operação",
+        "Se dados são de antes da instalação oficial: contatar fabricante para limpar buffer de retry",
+        "Vizentec WhatsApp técnico: +55 62 99636-0699",
+        "Monitorar após ação — se não bloquear em 10 minutos, resolvido",
+        "Registrar evento em Operações → Eventos de Equipamentos"
+      ],
+      "path": "Operações → Bloqueio",
+      "docUrl": "operacoes/cadastro-operacoes",
+      "related": [
+        "operacoes-cadastro-operacoes",
+        "equipamento-offline",
+        "cadastros-basicos-fabricantes"
+      ],
+      "dbTables": [
+        "TBOperacoes",
+        "TBEquipamentos",
+        "TBPassagens",
+        "TBFabricantes"
+      ]
+    },
+    {
+      "id": "fabricantes-limites-dados",
+      "title": "Fabricantes — Limites de Dados e Retry",
+      "module": "Equipamentos",
+      "keywords": [
+        "fabricante",
+        "FOCALLE",
+        "VIZENTEC",
+        "limite dados",
+        "rate limit",
+        "retry",
+        "buffer",
+        "reenvio",
+        "API fabricante",
+        "token",
+        "passagem rejeitada",
+        "fila envio",
+        "dados antigos"
+      ],
+      "content": "Fabricantes (FOCALLE e VIZENTEC) transmitem passagens via API REST com token. Comportamento: retry automático e INDEFINIDO (30+ dias reenviando), intervalo ~2 min, sem backoff, NÃO desistem sozinhos. Fabricante só para quando AxHub aceita ou intervenção manual no servidor do fabricante. Equipamentos offline acumulam dados localmente e enviam TUDO ao reconectar (pode levar horas). Token: TBFabricantes → Gerar Novo Token invalida anterior imediatamente.",
+      "steps": [
+        "Para problemas de reenvio: contatar equipe técnica do fabricante diretamente",
+        "Vizentec WhatsApp: +55 62 99636-0699",
+        "Solicitar: limpeza do buffer de retry para o equipamento específico",
+        "Perguntar: quantas passagens pendentes no buffer?",
+        "Perguntar: é possível configurar data mínima de envio?",
+        "NUNCA gerar novo token sem comunicar o fabricante — bloqueia todas as transmissões",
+        "Se precisa bloquear fabricante emergencialmente: Gerar Novo Token sem comunicar"
+      ],
+      "path": "Equipamentos → Fabricantes",
+      "docUrl": "cadastros-basicos/fabricantes",
+      "related": [
+        "operacoes-bloqueio-automatico",
+        "equipamento-offline",
+        "cadastros-basicos-equipamentos"
+      ],
+      "dbTables": [
+        "TBFabricantes",
+        "TBEquipamentos",
+        "TBModeloEquipamentos"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+# Ignorar node_modules
+node_modules/
+
+# Ignorar cache
+.cache/
+.docusaurus/
+
+# Ignorar build (será criado no container)
+build/
+
+# Ignorar logs
+*.log
+
+# Ignorar arquivos do sistema
+.DS_Store
+Thumbs.db
+
+# Ignorar IDEs
+.vscode/
+.idea/
