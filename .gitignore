@@ -4,6 +4,9 @@
 **/docs-portal/.docusaurus/
 **/docs-portal/.cache-loader/
 
+# Pre-built static sites (build artifacts — Docker builds from source)
+AxCross/AxCross.Docs/
+
 # Common
 .DS_Store
 Thumbs.db
