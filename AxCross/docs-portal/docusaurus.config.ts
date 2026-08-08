@@ -55,10 +55,6 @@ const config: Config = {
           sidebarPath: './sidebars.ts',
           routeBasePath: '/docs',
           showLastUpdateTime: true,
-          tableOfContents: {
-            minHeadingLevel: 2,
-            maxHeadingLevel: 3,
-          },
         },
         blog: false,
         theme: {
@@ -70,6 +66,10 @@ const config: Config = {
 
   themeConfig: {
     image: 'img/axcross-social-card.jpg',
+    tableOfContents: {
+      minHeadingLevel: 2,
+      maxHeadingLevel: 3,
+    },
     colorMode: {
       defaultMode: 'light',
       respectPrefersColorScheme: true,
