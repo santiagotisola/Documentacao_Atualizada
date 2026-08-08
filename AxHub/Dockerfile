@@ -11,7 +11,7 @@ WORKDIR /app
 COPY package*.json ./
 
 # Instalar dependências (--legacy-peer-deps por plugin de busca que ainda não declara suporte a React 19)
-RUN npm ci --legacy-peer-deps
+RUN npm install --legacy-peer-deps
 
 # Copiar código-fonte
 COPY . .
