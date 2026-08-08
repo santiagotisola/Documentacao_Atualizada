@@ -9,7 +9,7 @@ description: Referência das variáveis VARCO para integração com câmeras OCR
 O **VARCO** é o sistema OCR/LPR das câmeras de monitoramento instaladas nos cruzamentos do AxCross. Cada passagem detectada gera um evento com variáveis dinâmicas que o AxCross processa para registrar a passagem, verificar veículos monitorados e gerar alertas.
 
 :::info
-Para a referência completa de todas as variáveis, consulte [AxHub — Integração VARCO](../../AxHub/referencia-tecnica/integracao-varco).
+Para a referência completa de todas as variáveis, consulte a documentação do AxHub — Integração VARCO.
 :::
 
 ---

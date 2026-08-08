@@ -78,7 +78,7 @@ O mapa usa a posição geográfica configurada no cadastro de cada Equipamento V
 |------|--------|-----------|
 | Relacionado | [Fluxo Diário de Veículos](./fluxo-diario-veiculos) | Dados tabulares detalhados |
 | Relacionado | [Monitoramento Online](../operacoes/monitoramento-online) | Status em tempo real |
-| Relacionado | [Equipamentos](../cadastros-basicos/Equipamentos) | Cadastro de Equipamentos |
+| Relacionado | [Equipamentos](../cadastros-basicos/equipamentos) | Cadastro de Equipamentos |
 
 ## Erros comuns
 

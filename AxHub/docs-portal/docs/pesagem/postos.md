@@ -47,7 +47,7 @@ Após criar o posto, vincule os **Equipamentos** a ele em **Configurações → 
 
 ## Relacionado
 
-- [Equipamentos](../administracao/equipamentos)
+- [Equipamentos](../cadastros-basicos/equipamentos)
 - [Contratos](../medicoes/contratos)
 - [Tickets Fechados](./ticket-fechado)
 

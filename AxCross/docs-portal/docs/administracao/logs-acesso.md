@@ -52,8 +52,8 @@ O log de acesso é essencial para investigação de incidentes de segurança ou 
 
 ## Relacionado
 
-- [Usuários](../usuarios)
-- [Perfis de Acesso](../perfis-acesso)
+- [Usuários](./usuarios)
+- [Perfis de Acesso](./perfis-acesso)
 
 | Filtro | Descrição |
 |--------|-----------|

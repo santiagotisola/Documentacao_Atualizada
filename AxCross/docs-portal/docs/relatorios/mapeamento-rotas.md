@@ -77,7 +77,7 @@ O mapeamento de rotas é especialmente útil em operações de busca de veículo
 
 - [Passagens](../glossario/passagem)
 - [Veículos Monitorados](./veiculos-monitorados)
-- [Painel Analítico](../painel/painel-analitico)
+- [Painel Analítico](./painel-analitico)
 
 ## Perguntas frequentes
 

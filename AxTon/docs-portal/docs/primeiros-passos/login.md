@@ -39,7 +39,7 @@ Nunca compartilhe suas credenciais. Toda ação no sistema é registrada com o s
 ## Navegação Relacionada
 
 - [Navegação](./navegacao) — Como usar o menu lateral
-- [Perfis de Acesso](../controle-acesso/perfis-acesso) — Níveis de permissão
+- [Perfis de Acesso](../administracao/perfis-acesso) — Níveis de permissão
 
 ## Problemas comuns
 

@@ -94,7 +94,7 @@ Configure um webhook para `equipamento.offline` apontando para um sistema de tic
 
 | Tipo | Página |
 |------|--------|
-| Referencia | [Manual de Integração](../referencia-tecnica/webhooks) |
+| Referencia | Manual de Integração via Webhooks |
 
 | **Método** | POST, PUT |
 | **Headers** | Cabeçalhos customizados (autenticação, etc.) |

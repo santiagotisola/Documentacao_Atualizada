@@ -49,8 +49,8 @@ Configure cada perfil com apenas as permissões estritamente necessárias. Evite
 
 ## Relacionado
 
-- [Perfis de Acesso](./perfis-acesso)
-- [Usuários](./usuarios)
+- [Perfis de Acesso](../administracao/perfis-acesso)
+- [Usuários](../administracao/usuarios)
 - [Logs de Acesso](./logs-acesso)
 
 ## Exemplos de configuração por perfil
@@ -93,8 +93,8 @@ Crie um usuário de teste vinculado ao perfil e acesse o sistema para validar qu
 
 ## Relacionado
 
-- [Perfis de Acesso](./perfis-acesso)
-- [Usuários](./usuarios)
+- [Perfis de Acesso](../administracao/perfis-acesso)
+- [Usuários](../administracao/usuarios)
 
 
 

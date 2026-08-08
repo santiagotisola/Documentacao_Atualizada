@@ -626,7 +626,7 @@ Após alterar informações, validar:
 |------|--------|-----------|
 | Configuração | [Tarjas](./tarjas) | Configuração básica de tarjas |
 | Cadastro | [Modelos de Equipamentos](../cadastros-basicos/modelos-equipamentos) | Como cadastrar modelos e portarias |
-| Cadastro | [Equipamentos](../cadastros-basicos/Equipamentos) | Cadastro de Equipamentos |
+| Cadastro | [Equipamentos](../cadastros-basicos/equipamentos) | Cadastro de Equipamentos |
 | Configuração | [Enquadramentos](./enquadramentos) | Cadastro de enquadramentos CTB |
 | Operação | [Triagem](../infracoes/triagem) | Onde a tarja é visualizada |
 | Operação | [Exportação](../infracoes/exportacao) | Imagem exportada com tarja |

@@ -42,8 +42,8 @@ Filtre por **Status = Falha** e analise os IPs de origem. Múltiplas falhas do m
 
 ## Relacionado
 
-- [Usuários](./usuarios)
-- [Perfis de Acesso](./perfis-acesso)
+- [Usuários](../administracao/usuarios)
+- [Perfis de Acesso](../administracao/perfis-acesso)
 - [Acessos por IP](./acessos-por-ip)
 
 ## Fluxo de auditoria de segurança

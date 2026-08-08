@@ -22,7 +22,7 @@ O AxHub é uma plataforma completa para **gestão de Equipamentos de fiscalizaç
 | 4 | [Balança](./pesagem/postos) | Pesagem e controle de excesso de peso |
 | 5 | [Operações](./operacoes/cadastro-operacoes) | Configuração e gestão de operações |
 | 6 | [Veículos](./veiculos/tipos-veiculos) | Cadastro e consulta de Veículos |
-| 7 | [Equipamentos](./cadastros-basicos/Equipamentos) | Gestão de Equipamentos de fiscalização |
+| 7 | [Equipamentos](./cadastros-basicos/equipamentos) | Gestão de Equipamentos de fiscalização |
 | 8 | [Medição](./medicoes/contratos) | Medições contratuais e índices de performance |
 | 9 | [Relatórios](./relatorios/relatorio-infracoes) | Dashboards e Relatórios operacionais |
 | 10 | [Controle de Acesso](./controle-acesso/usuarios) | Gestão de Usuários e permissões |

@@ -48,7 +48,7 @@ Imagens obrigatórias ausentes podem levar à **invalidação do auto** pelo ór
 
 ## Relacionado
 
-- [Equipamentos](./equipamentos)
+- [Equipamentos](../cadastros-basicos/equipamentos)
 - [Aferições](../operacoes/afericoes)
 - [Processamento de Imagens](../relatorios/processamento-imagens)
 - [Integração VARCO](../referencia-tecnica/integracao-varco) — Variáveis `{{image}}`, `{{imageList}}`, `{{imageRaw}}`
@@ -116,7 +116,7 @@ está tela ainda não possui screenshot cadastrada. Será adicionada em breve.
 | Tipo | Pagina | Descricao |
 |------|--------|-----------|
 | Relacionado | [Triagem](../infracoes/triagem) | Tipos de imagem na triagem |
-| Relacionado | [Equipamentos](../cadastros-basicos/Equipamentos) | Imagens por Equipamento |
+| Relacionado | [Equipamentos](../cadastros-basicos/equipamentos) | Imagens por Equipamento |
 
 ## Integração com outros módulos
 

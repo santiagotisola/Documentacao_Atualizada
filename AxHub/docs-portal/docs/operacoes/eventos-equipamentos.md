@@ -104,7 +104,7 @@ Eventos de falha são contabilizados como **indisponibilidade** no cálculo das 
 | Tipo | Pagina | Descricao |
 |------|--------|-----------|
 | Relacionado | [Monitoramento Online](./monitoramento-online) | Acompanhamento tempo real |
-| Relacionado | [Equipamentos](../cadastros-basicos/Equipamentos) | Cadastro de Equipamentos |
+| Relacionado | [Equipamentos](../cadastros-basicos/equipamentos) | Cadastro de Equipamentos |
 | Relatório | [Rel. Eventos Equipamentos](../relatorios/eventos-equipamentos) | Relatório detalhado |
 
 ## Integração com outros módulos

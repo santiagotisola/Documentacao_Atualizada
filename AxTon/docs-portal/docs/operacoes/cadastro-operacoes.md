@@ -100,7 +100,7 @@ Somente operações com status **Em Andamento** permitem registrar novas pesagen
 | Funcionalidade | Descrição |
 |---|---|
 | [**Monitoramento Online**](../operacoes/monitoramento-online) | Acompanhamento em tempo real dos Equipamentos e operações |
-| [**Eventos de Equipamentos**](../operacoes/eventos-Equipamentos) | Registro de eventos operacionais dos Equipamentos |
+| [**Eventos de Equipamentos**](./eventos-equipamentos) | Registro de eventos operacionais dos Equipamentos |
 | [**Consulta de Placas**](../operacoes/consulta-placas) | Pesquisar passagens de Veículos por placa |
 | [**Alertas**](../operacoes/alertas) | Gestão de alertas operacionais e notificações |
 

@@ -39,7 +39,7 @@ Após cadastrar regiões, vincule os equipamentos a elas em **Configurações �
 
 ## Relacionado
 
-- [Equipamentos](./equipamentos)
+- [Equipamentos](../cadastros-basicos/equipamentos)
 - [Relatórios](../relatorios/fluxo-diario-veiculos)
 - [Operações](../operacoes/cadastro-operacoes)
 

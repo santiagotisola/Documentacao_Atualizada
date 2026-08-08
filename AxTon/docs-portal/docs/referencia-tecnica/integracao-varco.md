@@ -9,7 +9,7 @@ description: Referência das variáveis VARCO disponíveis para integração com
 O **VARCO** é o sistema OCR/LPR das câmeras integradas ao AxTon. Ao registrar uma passagem no posto de pesagem, o equipamento VARCO envia os dados de placa, imagem e veículo ao AxTon via template com variáveis dinâmicas.
 
 :::info
-Este documento detalha as variáveis VARCO utilizadas na integração com o AxTon. Para a documentação completa, consulte o [AxHub — Integração VARCO](../../AxHub/docs-portal/docs/referencia-tecnica/integracao-varco.md).
+Este documento detalha as variáveis VARCO utilizadas na integração com o AxTon. Para a documentação completa, consulte a documentação do AxHub — Integração VARCO.
 :::
 
 ---

@@ -99,7 +99,7 @@ Se ativar a restrição sem cadastrar seu próprio IP, você será bloqueado ime
 
 | Tipo | Pagina | Descricao |
 |------|--------|-----------|
-| Relacionado | [Usuarios](./Usuários) | Gerenciamento de Usuários do sistema |
+| Relacionado | [Usuarios](./usuarios) | Gerenciamento de Usuários do sistema |
 | Relacionado | [Logs de Acesso](./logs-acesso) | Verificar registros de acesso |
 | Relacionado | [Perfis de Acesso](./perfis-acesso) | Controle de permissoes por perfil |
 

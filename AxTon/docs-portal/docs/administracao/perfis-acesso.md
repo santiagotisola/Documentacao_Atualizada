@@ -61,7 +61,7 @@ Crie perfis com o mínimo de permissões necessárias (princípio do mínimo pri
 ## Relacionado
 
 - [Usuários](./usuarios)
-- [Permissões](./configurar-permissoes)
+- [Permissões](../controle-acesso/configurar-permissoes)
 
 ## Exemplos de perfis recomendados
 

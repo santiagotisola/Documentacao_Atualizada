@@ -10,12 +10,12 @@ const modulos = [
   { icone: '⏱️', titulo: 'Cronotacógrafo', desc: 'Triagem e consulta de dados de jornada', link: '/docs/cronotacografo/triagem', cor: '#f1c40f' },
   { icone: '⚖️', titulo: 'Balança / Pesagem', desc: 'Tickets, liberação e reclassificação', link: '/docs/pesagem/postos', cor: '#1abc9c' },
   { icone: '📡', titulo: 'Operações', desc: 'Monitoramento online, faixas e aferições', link: '/docs/operacoes/cadastro-operacoes', cor: '#e67e22' },
-  { icone: '🚗', titulo: 'Veículos', desc: 'Classificações, marcas, modelos e placas', link: '/docs/veiculos/consulta', cor: '#3498db' },
+  { icone: '🚗', titulo: 'Veículos', desc: 'Classificações, marcas, modelos e placas', link: '/docs/veiculos/tipos-veiculos', cor: '#3498db' },
   { icone: '🔧', titulo: 'Equipamentos', desc: 'Cadastro, grupos, tipos e fabricantes', link: '/docs/cadastros-basicos/fabricantes', cor: '#9b59b6' },
-  { icone: '🔬', titulo: 'Medição', desc: 'Nova medição e medições finalizadas', link: '/docs/medicoes/equipamentos', cor: '#f39c12' },
+  { icone: '🔬', titulo: 'Medição', desc: 'Nova medição e medições finalizadas', link: '/docs/medicoes/contratos', cor: '#f39c12' },
   { icone: '📋', titulo: 'Relatórios', desc: 'Infrações, passagens, fluxo, BI e logs', link: '/docs/relatorios/relatorio-passagens', cor: '#8e44ad' },
-  { icone: '🔐', titulo: 'Controle de Acesso', desc: 'Usuários, perfis, permissões e logs', link: '/docs/administracao/usuarios', cor: '#2c3e50' },
-  { icone: '⚙️', titulo: 'Configurações', desc: 'Enquadramentos, tarjas, webhooks e BI', link: '/docs/administracao/configuracoes', cor: '#7f8c8d' },
+  { icone: '🔐', titulo: 'Controle de Acesso', desc: 'Usuários, perfis, permissões e logs', link: '/docs/controle-acesso/usuarios', cor: '#2c3e50' },
+  { icone: '⚙️', titulo: 'Configurações', desc: 'Enquadramentos, tarjas, webhooks e BI', link: '/docs/administracao/configuracoes-sistema', cor: '#7f8c8d' },
 ];
 
 function ServiceCard({ icone, titulo, desc, link, cor }) {

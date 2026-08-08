@@ -61,7 +61,7 @@ Contrato com metas bem configuradas garante que o sistema calcule automaticament
 
 ## Relacionado
 
-- [Grupos de Equipamentos](./grupos-equipamentos)
+- [Grupos de Equipamentos](../cadastros-basicos/grupos-equipamentos)
 - [Criar Medição](./criar-medicao)
 
 ## Fluxo contratual

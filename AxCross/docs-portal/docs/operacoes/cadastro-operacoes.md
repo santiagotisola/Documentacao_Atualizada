@@ -40,7 +40,7 @@ Uma operação ativa vincula todas as passagens dos equipamentos selecionados ao
 ## Relacionado
 
 - [Alertas](./alertas)
-- [Passagens](../relatorios/passagens)
+- [Passagens](../relatorios/relatorio-passagens)
 - [Ocorrências e Alertas](../relatorios/ocorrencias-alertas)
 
 | **Status** | Sim | Ativa, Pausada ou Encerrada |

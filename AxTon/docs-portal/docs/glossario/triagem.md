@@ -31,7 +31,7 @@ Após o equipamento registrar uma passagem com peso acima do limite legal, o sis
 
 ## Relacionado
 
-- [Auditoria](../pesagem/auditoria)
+- Auditoria
 - [Motivos](../pesagem/motivos)
 - [Infração](./infracao)
 
@@ -51,7 +51,7 @@ Após o equipamento registrar uma passagem com peso acima do limite legal, o sis
 
 ## Relacionado
 
-- [Auditoria](../pesagem/auditoria)
+- Auditoria
 - [Motivos](../pesagem/motivos)
 - [Infração](./infracao)
 - **Após a triagem:** Auditoria → Exportação ao órgão autuador

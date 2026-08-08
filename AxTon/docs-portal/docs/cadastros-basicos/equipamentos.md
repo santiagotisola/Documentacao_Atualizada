@@ -77,9 +77,9 @@ Para cadastrar um Equipamento é necessário ter previamente cadastrado: Fabrica
 | Cadastro | Descrição |
 |---|---|
 | [**Fabricantes**](../cadastros-basicos/fabricantes) | Cadastro dos fabricantes de Equipamentos |
-| [**Tipos de Equipamentos**](../cadastros-basicos/tipos-Equipamentos) | Categorias de Equipamentos de pesagem |
+| [**Tipos de Equipamentos**](./tipos-equipamentos) | Categorias de Equipamentos de pesagem |
 | [**Modelos de Equipamentos**](../cadastros-basicos/modelos-equipamentos) | Modelos por fabricante |
-| [**Grupos de Equipamentos**](../cadastros-basicos/grupos-Equipamentos) | Agrupamento lógico de Equipamentos |
+| [**Grupos de Equipamentos**](./grupos-equipamentos) | Agrupamento lógico de Equipamentos |
 
 ## Perguntas frequentes
 

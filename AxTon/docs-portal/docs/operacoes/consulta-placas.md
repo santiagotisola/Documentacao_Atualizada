@@ -50,7 +50,7 @@ Use a consulta de placas para verificar histórico de um veículo antes de liber
 
 ## Relacionado
 
-- [Tickets Abertos](./ticket-aberto)
+- [Tickets Abertos](../pesagem/ticket-aberto)
 - [Relatório de Infrações](../relatorios/relatorio-infracoes)
 
 | **Status** | Regular / Infrator |

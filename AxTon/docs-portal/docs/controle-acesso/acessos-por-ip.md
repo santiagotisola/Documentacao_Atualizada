@@ -53,8 +53,8 @@ Quando a restrição está ativada, **somente os IPs cadastrados** conseguem ace
 
 ## Relacionado
 
-- [Usuários](./usuarios)
-- [Perfis de Acesso](./perfis-acesso)
+- [Usuários](../administracao/usuarios)
+- [Perfis de Acesso](../administracao/perfis-acesso)
 - [Logs de Acesso](./logs-acesso)
 
 ## Segurança

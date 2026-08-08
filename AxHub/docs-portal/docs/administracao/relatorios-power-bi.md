@@ -73,7 +73,7 @@ A URL de incorporação deve ser gerada no portal Power BI com modo de acesso p�
 
 | Tipo | Pagina | Descricao |
 |------|--------|-----------|
-| Relacionado | [Power BI (Relatorios)](../Relatórios/power-bi) | Visualizar Relatórios |
+| Relacionado | [Power BI (Relatorios)](../relatorios/power-bi) | Visualizar Relatórios |
 | Relacionado | [Use 'Use 'Use 'Use 'Use 'Use 'Use 'Use 'Use 'Use 'Use 'Use 'Use 'Use 'Use 'Use 'Use 'Use 'Use 'Use 'Use 'Use 'Use 'Use 'Configuração'uração'uração'uração'uração'uração'uração'uração'uração'uração'uração'uração'uração'uração'uração'uração'uração'uração'uração'uração'uração'uração'uração'uração'uracoes do Sistema](./configuracoes-sistema) | Config geral |
 
 ## Erros comuns

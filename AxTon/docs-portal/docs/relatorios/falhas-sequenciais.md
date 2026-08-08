@@ -48,7 +48,7 @@ Não exporte um lote com falhas sequenciais identificadas. O órgão autuador po
 
 ## Relacionado
 
-- [Sequenciais de Infrações](../administracao/sequenciais-infracoes)
+- Sequenciais de Infrações
 - [Relatório de Infrações](./relatorio-infracoes)
 
 3. Opcionalmente filtre por **Equipamento**
