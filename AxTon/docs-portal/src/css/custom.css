@@ -144,9 +144,21 @@ table td, table th { border-color: var(--win11-border); }
 }
 .pagination-nav__link:hover { box-shadow: var(--win11-shadow); border-color: var(--ifm-color-primary); }
 
-img[alt*="Tela"] {
-  border: 1px solid #d5dbdb;
-  border-radius: 6px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  margin: 1rem 0;
+/* ===== Article max-width — optimal prose readability ===== */
+.theme-doc-markdown {
+  max-width: 860px;
+}
+
+/* ===== Images — all markdown screenshots get consistent treatment ===== */
+.markdown img {
+  border: 1px solid var(--win11-border);
+  border-radius: 8px;
+  box-shadow: var(--win11-shadow);
+  margin: 1.25rem 0;
+  max-width: 100%;
+  display: block;
+}
+[data-theme='dark'] .markdown img {
+  border-color: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.4);
 }

@@ -38,6 +38,18 @@ const config: Config = {
     },
   ],
 
+  plugins: [
+    [
+      require.resolve('@easyops-cn/docusaurus-search-local'),
+      {
+        hashed: true,
+        language: ['pt'],
+        highlightSearchTermsOnTargetPage: true,
+        explicitSearchResultPath: true,
+      },
+    ],
+  ],
+
   presets: [
     [
       'classic',
@@ -45,6 +57,11 @@ const config: Config = {
         docs: {
           sidebarPath: './sidebars.ts',
           routeBasePath: '/docs',
+          showLastUpdateTime: true,
+          tableOfContents: {
+            minHeadingLevel: 2,
+            maxHeadingLevel: 3,
+          },
         },
         blog: false,
         theme: {
